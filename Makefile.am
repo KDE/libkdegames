@@ -1,8 +1,6 @@
 
-AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(top_srcdir)/libkdegames && pwd))\""
-
 lib_LTLIBRARIES = libkdegames.la
-libkdegames_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -no-undefined -version-info 1:1
+libkdegames_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -no-undefined -version-info 3:0:2
 libkdegames_la_LIBADD  = kgame/libkgame.la kgame/dialogs/libkgamedialogs.la \
 		$(LIB_KSYCOCA)
 
