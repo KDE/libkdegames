@@ -248,10 +248,11 @@ public:
 		changeMaxClients = 0;
 		changeAdmin= 0;
 		removeClient= 0;
-
-		game = 0;
+		noAdmin = 0;
 
 		noMaster = 0;
+
+		game = 0;
 	}
 
 	QHBoxLayout* senderLayout;
