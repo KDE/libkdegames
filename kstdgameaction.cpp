@@ -261,8 +261,10 @@ KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
                                                   KActionCollection *parent, const char *name )
 {
-    return new KAction(i18n("Roll"), "roll",
-                       0, recvr, slot, parent,
+//hmm perhaps we need a KStdGameAccel one day? currently this entry is hard
+//coded...
+    return new KAction(i18n("Roll Dice"), "roll",
+                       Qt::CTRL+Qt::Key_R, recvr, slot, parent,
                        name ? name : stdName(Roll));
 }
 
