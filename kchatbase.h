@@ -63,7 +63,7 @@ public:
 	/**
 	 * Destruct a KChatBaseText object.
 	 **/
-	~KChatBaseText();
+	virtual ~KChatBaseText();
 
 	/**
 	 * Set the name part of a message. A message is usually shown like
@@ -195,7 +195,7 @@ public:
 	 *
 	 * Also calls @ref saveConfig
 	 **/
-	~KChatBase();
+	virtual ~KChatBase();
 
 	enum SendingIds {
 		SendToAll = 0
