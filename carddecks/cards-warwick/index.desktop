@@ -1,5 +1,14 @@
 [KDE Backdeck]
 Name=Blue Balloon
+Name[cs]=Modrý balón
+Name[da]=Blå Ballon
+Name[hu]=kék léggömb
+Name[is]=Blá blaðra
+Name[ko]=파란 풍선
+Name[lv]=Zils Balons
+Name[ro]=Balon albastru
+Name[sv]=Blå ballong
+Name[tr]=Mavi Balon
 Preview=11.png
 PySol=false
-Info=Card set supplied by Warwick Allison
+Comment=Card set supplied by Warwick Allison
