@@ -204,7 +204,8 @@ KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,
 {
 //hmm perhaps we need a KStdGameAccel one day? currently this entry is hard
 //coded...
-    return new KAction(i18n("Show Highscores"), Qt::CTRL+Qt::Key_H, recvr, slot, parent,
+    return new KAction(i18n("Show Highscores"), "highscore",
+                       Qt::CTRL+Qt::Key_H, recvr, slot, parent,
                        name ? name : stdName(Highscores));
 }
 
@@ -277,7 +278,7 @@ KAction *KStdGameAction::carddecks(const QObject *recvr, const char *slot,
                                                   KActionCollection *parent, const char *name )
 {
 //AB: maybe we need an icon?
-    return new KAction(i18n("Configure &Carddecks..."), 
+    return new KAction(i18n("Configure &Carddecks..."),
                        0, recvr, slot, parent,
                        name ? name : stdName(Carddecks));
 }
