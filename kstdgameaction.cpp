@@ -57,7 +57,7 @@ struct KStdGameActionInfo
 
 const KStdGameActionInfo g_rgActionInfo[] = {
 // "game" menu
-    { KStdGameAction::New, KStdAccel::New, 0, "game_new", I18N_NOOP("&New"), 0, "filenew" },
+    { KStdGameAction::New, KStdAccel::New, 0, "game_new", I18N_NOOP2("new game", "&New"), 0, "filenew" },
     { KStdGameAction::Load, KStdAccel::Open, 0, "game_load", I18N_NOOP("&Load..."), 0, "fileopen" },
     { KStdGameAction::LoadRecent, KStdAccel::AccelNone, 0, "game_load_recent", I18N_NOOP("Load &Recent"), 0, 0 },
     { KStdGameAction::Restart, KStdAccel::Reload, 0, "game_restart", I18N_NOOP("Restart &Game"), 0, "reload" },
