@@ -34,11 +34,13 @@ namespace KGrid2D
 {
     /**
      * This type represents coordinates on a bidimensionnal grid.
+     * @since 3.2
      */
     typedef QPair<int, int> Coord;
 
     /**
      * This type represents a list of @ref Coord.
+     * @since 3.2
      */
     typedef QValueList<Coord> CoordList;
 };
@@ -55,6 +57,7 @@ operator -(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
 
 /**
  * @return the maximum of both coordinates.
+ * @since 3.2
  */
 inline KGrid2D::Coord
 maximum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
@@ -62,6 +65,7 @@ maximum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
 }
 /**
  * @return the minimum of both coordinates.
+ * @since 3.2
  */
 inline KGrid2D::Coord
 minimum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
@@ -85,6 +89,8 @@ namespace KGrid2D
 /**
  * This template class represents a generic bidimensionnal grid. Each node
  * contains an element of the template type.
+ *
+ * @since 3.2
  */
 template <class Type>
 class Generic
@@ -222,6 +228,8 @@ namespace KGrid2D
 /**
  * This class contains static methods to manipulate coordinates for a
  * square bidimensionnal grid.
+ *
+ * @since 3.2
  */
 class SquareBase
 {
@@ -296,6 +304,8 @@ class SquareBase
 /**
  * This template is a @ref Generic implementation for a square bidimensionnal
  * grid (@ref SquareBase).
+ *
+ * @since 3.2
  */
 template <class Type>
 class Square : public Generic<Type>, public SquareBase
@@ -355,6 +365,8 @@ class Square : public Generic<Type>, public SquareBase
  *     (1,0)   (1,1)   (1,2)
  * (2,0)   (2,1)   (2,2)
  * </pre>
+ *
+ * @since 3.2
  */
 class HexagonalBase
 {
@@ -431,6 +443,8 @@ class HexagonalBase
  *     (1,0)   (1,1)   (1,2)
  * (2,0)   (2,1)   (2,2)
  * </pre>
+ *
+ * @ since 3.2
  */
 template <class Type>
 class Hexagonal : public Generic<Type>, public HexagonalBase

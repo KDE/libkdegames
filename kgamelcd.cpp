@@ -1,6 +1,6 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001-02 Nicolas Hadacek (hadacek@kde.org)
+    Copyright (C) 2001,2002,2003 Nicolas Hadacek (hadacek@kde.org)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -43,6 +43,9 @@ KGameLCD::KGameLCD(uint nbDigits, QWidget *parent, const char *name)
 
     displayInt(0);
 }
+
+KGameLCD::~KGameLCD()
+{}
 
 void KGameLCD::setDefaultBackgroundColor(const QColor &color)
 {
@@ -114,6 +117,9 @@ KGameLCDClock::KGameLCDClock(QWidget *parent, const char *name)
     connect(_timerClock, SIGNAL(timeout()), SLOT(timeoutClock()));
 }
 
+KGameLCDClock::~KGameLCDClock()
+{}
+
 void KGameLCDClock::timeoutClock()
 {
     // waiting an hour does not restart timer
@@ -179,7 +185,8 @@ void KGameLCDClock::setTime(const QString &s)
 
 
 //-----------------------------------------------------------------------------
-KGameLCDList::KGameLCDList(const QString &title, QWidget *parent, const char *name)
+KGameLCDList::KGameLCDList(const QString &title, QWidget *parent,
+                           const char *name)
     : QWidget(parent, name)
 {
     init(title);
@@ -191,6 +198,9 @@ KGameLCDList::KGameLCDList(QWidget *parent, const char *name)
     init(QString::null);
 }
 
+KGameLCDList::~KGameLCDList()
+{}
+
 void KGameLCDList::init(const QString &title)
 {
     QVBoxLayout *top = new QVBoxLayout(this, 5);
@@ -200,11 +210,15 @@ void KGameLCDList::init(const QString &title)
     top->addWidget(_title, AlignCenter);
 }
 
-uint KGameLCDList::append(QLCDNumber *lcd)
+void KGameLCDList::append(QLCDNumber *lcd)
 {
-    uint n = _lcds.size();
-    _lcds.resize(n+1);
-    _lcds.insert(n, lcd);
+    _lcds.push_back(lcd);
     static_cast<QVBoxLayout *>(layout())->addWidget(lcd);
-    return n;
+}
+
+void KGameLCDList::clear()
+{
+    for (uint i=0; i<_lcds.size(); i++)
+        delete _lcds[i];
+    _lcds.clear();
 }

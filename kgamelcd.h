@@ -1,6 +1,6 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001-02 Nicolas Hadacek (hadacek@kde.org)
+    Copyright (C) 2001,2002,2003 Nicolas Hadacek (hadacek@kde.org)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -21,7 +21,7 @@
 #define __KGAMELCD_H
 
 #include <qlcdnumber.h>
-#include <qptrvector.h>
+#include <qvaluevector.h>
 
 
 class QLabel;
@@ -36,12 +36,16 @@ class QTimer;
  * <li> Its foreground and background colors can easily be modified. </li>
  * <li> It can be highlighted for a short time. </li>
  * </ul>
+ *
+ * @since 3.2
  */
 class KGameLCD : public QLCDNumber
 {
- Q_OBJECT
- public:
+    Q_OBJECT
+public:
     KGameLCD(uint nbDigits, QWidget *parent = 0, const char *name = 0);
+
+    ~KGameLCD();
 
     /**
      * Set the default background color.
@@ -80,7 +84,7 @@ class KGameLCD : public QLCDNumber
      */
     void setColor(const QColor &color);
 
- public slots:
+public slots:
     /**
      * Highlight the LCD with the @ref QColorGourp::HighlightedText color
      * for a small time (@ref setHighlightTime).
@@ -89,13 +93,17 @@ class KGameLCD : public QLCDNumber
 
     /**
      * Display the given integer with the (optionnal) leading string.
+     *
+     * Note: we cannot use display(int) since QLCDNumber::display is
+     * not virtual... And you cannot use QLCDNumber::intValue() to retrieve
+     * the given value.
      */
     void displayInt(int value);
 
- private slots:
+private slots:
     void timeout() { highlight(false); }
 
- private:
+private:
     QColor   _fgColor, _hlColor;
     QString  _lead;
     uint     _htime;
@@ -112,12 +120,16 @@ class KGameLCD : public QLCDNumber
 /**
  * This class is a digital clock widget. It has a maximum duration of
  * 3599 seconds (one hour) and it gets updated every second.
+ *
+ * @since 3.2
  */
 class KGameLCDClock : public KGameLCD
 {
- Q_OBJECT
- public:
+    Q_OBJECT
+public:
     KGameLCDClock(QWidget *parent = 0, const char *name = 0);
+
+    ~KGameLCDClock();
 
     /**
      * @return the total number of seconds elapsed.
@@ -139,7 +151,7 @@ class KGameLCDClock : public KGameLCD
      */
     void setTime(const QString &s);
 
- public slots:
+public slots:
     /**
      * Stop the clock and reset it to zero.
      */
@@ -155,10 +167,10 @@ class KGameLCDClock : public KGameLCD
      */
 	virtual void start();
 
- protected slots:
+protected slots:
     virtual void timeoutClock();
 
- private:
+private:
     QTimer *_timerClock;
 	uint    _sec, _min;
 
@@ -172,11 +184,13 @@ class KGameLCDClock : public KGameLCD
 /**
  * This widget holds a list of @ref QLCDNumber arranged in a vertical layout.
  * It also shows a label at the top of the list.
+ *
+ * @since 3.2
  */
 class KGameLCDList : public QWidget
 {
- Q_OBJECT
- public:
+    Q_OBJECT
+public:
     /**
      * Constructor.
      *
@@ -186,10 +200,18 @@ class KGameLCDList : public QWidget
                  QWidget *parent = 0, const char *name = 0);
     KGameLCDList(QWidget *parent = 0, const char *name = 0);
 
+    ~KGameLCDList();
+
     /**
      * Append a @ref QLCDNumber at the bottom of the list.
+     * The @ref QLCDNumber should have the @ref KGameLCDList as parent.
      */
-    uint append(QLCDNumber *lcd);
+    void append(QLCDNumber *lcd);
+
+    /**
+     * Delete all @ref QLCDNumber and clear the list.
+     */
+    void clear();
 
     /**
      * @return the title label.
@@ -201,9 +223,14 @@ class KGameLCDList : public QWidget
      */
     QLCDNumber *lcd(uint i) const { return _lcds[i]; }
 
- private:
-    QLabel                 *_title;
-    QPtrVector<QLCDNumber>  _lcds;
+    /**
+     * @return the number of @ref QLCDNumber in the list.
+     */
+    uint size() const { return _lcds.size(); }
+
+private:
+    QLabel *_title;
+    QValueVector<QLCDNumber *> _lcds;
 
     class KGameLCDListPrivate;
     KGameLCDListPrivate *d;
