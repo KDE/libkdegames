@@ -378,7 +378,7 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
 	emit signalRequestValue(prop, value);
  }
 		   
- if (value == QString::null) {
+ if (value.isNull()) {
 	value = i18n("Unknown");
  }
  return value;

@@ -486,13 +486,13 @@ void KGameDebugDialog::slotMessageUpdate(int msgid, Q_UINT32 receiver, Q_UINT32 
 	return;
  }
  QString msgidText = KGameMessage::messageId2Text(msgid);
- if (msgidText == QString::null) {
+ if (msgidText.isNull()) {
 	if (msgid > KGameMessage::IdUser) {
 		emit signalRequestIdName(msgid-KGameMessage::IdUser, true, msgidText);
 	} else {
 		emit signalRequestIdName(msgid, false, msgidText);
 	}
-	if (msgidText == QString::null) {
+	if (msgidText.isNull()) {
 		msgidText = i18n("Unknown");
 	}
  }

@@ -151,7 +151,7 @@ const QString& KHighscore::highscoreGroup() const
 
 QString KHighscore::group() const
 {
- if (highscoreGroup() == QString::null) {
+ if (highscoreGroup().isNull()) {
 	return GROUP;
  } else {
 	return QString("%1_%2").arg(GROUP).arg(highscoreGroup());
