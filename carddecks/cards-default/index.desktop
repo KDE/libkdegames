@@ -1,4 +1,22 @@
 [KDE Backdeck]
 Name=Standard
+Name[cs]=Standardní
+Name[eo]=Normala
+Name[es]=Estándar
+Name[fi]=Normaali
+Name[he]=יטרדנטס
+Name[is]=Staðlað
+Name[ja]=標準
+Name[ko]=표준
+Name[lv]=Standarta
+Name[nl]=Standaard
+Name[pt]=Normal
+Name[pt_BR]=Padrão
+Name[ru]=Стандарт
+Name[sr]=Standardne
+Name[tr]=Standart
+Name[uk]=Типові
+Name[zh_CN.GB2312]=标准
+Name[zh_TW.Big5]=標準
 Preview=11.png
 PySol=false
