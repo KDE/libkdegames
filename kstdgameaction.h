@@ -26,6 +26,7 @@
 #define KSTDGAMEACTION_H
 
 class KAction;
+class KToggleAction;
 class QObject;
 
 /**
@@ -105,7 +106,7 @@ public:
     /**
      * Pause the game
      **/
-    static KAction *pause(const QObject *recvr = 0, const char *slot = 0,
+    static KToggleAction *pause(const QObject *recvr = 0, const char *slot = 0,
                            QObject *parent = 0, const char *name = 0L );
     
     /**
