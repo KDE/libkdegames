@@ -306,7 +306,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->randomDeck->setChecked(false);
     connect(d->randomDeck, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomDeckToggled(bool)));
-    d->randomDeck->setText(i18n("Random Backside"));
+    d->randomDeck->setText(i18n("Random backside"));
     l->addWidget(d->randomDeck, 0, AlignTop|AlignHCenter);
 
     d->globalDeck = new QCheckBox(plainPage());
@@ -356,7 +356,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->randomCardDir->setChecked(false);
     connect(d->randomCardDir, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomCardDirToggled(bool)));
-    d->randomCardDir->setText(i18n("Random Frontside"));
+    d->randomCardDir->setText(i18n("Random frontside"));
     l->addWidget(d->randomCardDir, 0, AlignTop|AlignHCenter);
 
     d->globalCardDir = new QCheckBox(plainPage());

@@ -61,9 +61,9 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  QGrid* g = new QGrid(2, this);
  vb->addWidget(g);
  g->setSpacing(KDialog::spacingHint());
- (void)new QLabel(i18n("Port to connect to"), g);
+ (void)new QLabel(i18n("Port to connect to:"), g);
  d->mPort = new KIntNumInput(g);
- (void)new QLabel(i18n("Host to connect to"), g);
+ (void)new QLabel(i18n("Host to connect to:"), g);
  d->mHost = new QLineEdit(g); 
 
  QPushButton *button=new QPushButton(i18n("&Start Network"), this);
