@@ -86,12 +86,12 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
   
  d->mProperties.registerHandler(KGameMessage::IdGameProperty,this);
  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, dataHandler());
- d->mMaxPlayer.setValue(-1);  // Infinite
+ d->mMaxPlayer.changeValue(-1);  // Infinite
  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, dataHandler());
- d->mMinPlayer.setValue(0);   // Always ok     
+ d->mMinPlayer.changeValue(0);   // Always ok     
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, dataHandler());
- d->mGameStatus.setValue(End);
- d->mUniquePlayerNumber=0;
+ d->mGameStatus = End;
+ d->mUniquePlayerNumber = 0;
  d->mCookie=cookie;
  d->mRandom = new KRandomSequence;
  d->mRandom->setSeed(0);
@@ -396,10 +396,11 @@ bool KGame::systemActivatePlayer(KPlayer* player)
 }
 
 // -------------------- Properties ---------------------------
-int KGame::cookie() 
+int KGame::cookie() const
 {
  return d->mCookie;
 }
+
 void KGame::setGameId(int id)
 {
  kdError (11001) << "KGame::setGameID " << id << ": Is broken at the moment!" << endl;
@@ -423,22 +424,23 @@ void KGame::setGameId(int id)
 }
 
 void KGame::setMaxPlayers(uint maxnumber)
-{ d->mMaxPlayer.setValue(maxnumber); }
+{ if (isAdmin()) { d->mMaxPlayer.changeValue(maxnumber); } }
 
 void KGame::setMinPlayers(uint minnumber)
-{ d->mMinPlayer.setValue(minnumber); }
+{ if (isAdmin()) { d->mMinPlayer.changeValue(minnumber); } }
 
 uint KGame::minPlayers() const
-{ return d->mMinPlayer.value(); }
+{ return d->mMinPlayer.localValue(); }
 
 int KGame::maxPlayers() const
-{ return d->mMaxPlayer.value(); }
+{ return d->mMaxPlayer.localValue(); }
 
 uint KGame::playerCount() const
 { return d->mPlayerList.count(); }
 
 int KGame::gameStatus() const
 { return d->mGameStatus.value(); }
+//{ return d->mGameStatus.localValue(); }
 
 bool KGame::isRunning() const
 { return d->mGameStatus.value() == Run; }
@@ -573,7 +575,10 @@ void KGame::setGameStatus(int status)
    kdDebug(11001) << "KGame::gameStatus: not enough players, pausing game\n" << endl;
    status=Pause;
  }
- d->mGameStatus.setValue(status);
+ //FIXME: setValue() has been replaced by "=" aka "send()". This might have
+ //broken it.
+ d->mGameStatus = status;
+// d->mGameStatus.changeValue(status);
 }
 
 void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 /*clientID*/)
@@ -1002,11 +1007,11 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 bool KGame::addProperty(KGamePropertyBase* data)
 { return d->mProperties.addProperty(data); }
 
-void KGame::sendPlayerProperty(QDataStream& s, int playerId)
-{ sendSystemMessage(s, KGameMessage::IdPlayerProperty, KGameMessage::calcMessageId(0,playerId)); }
+bool KGame::sendPlayerProperty(QDataStream& s, int playerId)
+{ return sendSystemMessage(s, KGameMessage::IdPlayerProperty, KGameMessage::calcMessageId(0,playerId)); }
 
-void KGame::sendProperty(QDataStream& s)
-{ sendSystemMessage(s, KGameMessage::IdGameProperty); }
+bool KGame::sendProperty(QDataStream& s)
+{ return sendSystemMessage(s, KGameMessage::IdGameProperty); }
 
 void KGame::emitSignal(KGamePropertyBase *me)
 { emit signalPropertyChanged(me,this); }

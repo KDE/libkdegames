@@ -101,7 +101,7 @@ public:
        *
        * @param a async=true turn based=false
        */
-      void setAsyncInput(bool a) {mAsyncInput.setValue(a);}
+      void setAsyncInput(bool a) {mAsyncInput = a;}
       /**
        * Query whether this player does asynchronous 
        * input
@@ -167,7 +167,7 @@ public:
        *
        * @param i the user defined player id
        */
-      void setUserId(int i) {mUserId.setValue(i);}
+      void setUserId(int i) {mUserId = i;}
 
       /**
        * returns whether this player can be replaced by a network
@@ -321,7 +321,7 @@ public:
       /**
        * Called by KGameProperty only! Internal function!
        **/
-      void sendProperty(QDataStream& s);
+      bool sendProperty(QDataStream& s);
       /**
        * Called by KGameProperty only! Internal function!
        **/

@@ -23,8 +23,8 @@
 
 #include <qdatastream.h>
 #include <qintdict.h>
+
 #include <kdebug.h>
-#include "kgamemessage.h"
 
 class KGame;
 class KPlayer;
@@ -49,24 +49,25 @@ public:
 		IdMaxPlayer=6,
 		IdMinPlayer=7,
 		IdUserId=8,
-    IdCommand, // Reserved for internal use
+		IdCommand, // Reserved for internal use
 		IdUser=256
 	};
-  /**
-   * Commands for advanced properties (Q_INT8)
-   */
-  enum PropertyCommandIds 
-  {
-    // Array
-    CmdAt=1,
-    CmdResize=2,
-    CmdFill=3,
-    CmdSort=4,
-    // List (could be the same id's actually
-    CmdInsert=5,
-    CmdRemove=6,
-    CmdClear=7
-  };
+
+	/**
+	 * Commands for advanced properties (Q_INT8)
+	 **/
+	enum PropertyCommandIds 
+	{
+		// Array
+		CmdAt=1,
+		CmdResize=2,
+		CmdFill=3,
+		CmdSort=4,
+		// List (could be the same id's actually
+		CmdInsert=5,
+		CmdRemove=6,
+		CmdClear=7
+	};
 
 	/**
 	 * Constructs a KGamePropertyBase object and calls @ref registerData.
@@ -107,7 +108,7 @@ public:
 
 	/**
 	 * Sets this property to try to optimize signal and network handling
-   * by not sending it out when the property value is not changed.
+	 * by not sending it out when the property value is not changed.
 	 **/
 	void setOptimized(bool p)	{ mFlags.bits.optimize=p&1; }
 	/**
@@ -136,10 +137,10 @@ public:
 	virtual void load(QDataStream& s) = 0;
 	virtual void save(QDataStream& s) = 0;
 
-  /** 
-   * send a command to advanced properties like arrays
-   */
-  virtual void command(QDataStream & ,int ) {};
+	/** 
+	 * send a command to advanced properties like arrays
+	 **/
+	virtual void command(QDataStream & ,int ) {};
 
 	/**
 	 * @return The id of this property
@@ -156,7 +157,7 @@ public:
 	 * player, although (currently) nothing prevents you from doing so. But
 	 * you will get strange results!
 	 * @param owner The owner of this data. This player will send the data
-	 * using @ref KPlayer::sendProperty whenever you call @ref setValue
+	 * using @ref KPropertyHandler::sendProperty whenever you call @ref send
 	 *
 	 **/
 	void registerData(int id, KGamePropertyHandlerBase* owner);
@@ -170,10 +171,18 @@ protected:
 	//The problem now is that there is one more function call and could one
 	//day be bad for performance
 	/**
-	 * Send the data to the owner of this property. Uses @ref save() to read
-	 * the data
+	 * Forward the data to the owner of this property which then sends it
+	 * over network. @ref save is used to store the data into a stream so
+	 * you have to make sure that function is working properly if you
+	 * implement your own property!
 	 **/
-	void send();
+	bool sendProperty();
+	
+	/**
+	 * @return TRUE if the message could be sent successfully, otherwise
+	 * FALSE
+	 **/
+	bool sendProperty(const QByteArray& b);
 	
 	/**
 	 * Causes the parent object to emit a signal on value change
@@ -209,7 +218,7 @@ private:
 
 /**
  * The class KGameProperty can store any form of data and will transmit it via
- * network whenver you call @ref setValue. This makes network transparent games
+ * network whenver you call @ref send. This makes network transparent games
  * very easy. You first have to register the data to a @ref KPlayer using @ref
  * KGamePropertyBase::registerData (which is called by the constructor)
  *
@@ -226,7 +235,7 @@ private:
  * {
  * Q_INT16 type = card.type;
  * Q_INT16 suite = card.suite;
- * s << type;//note: here is type first
+ * s << type;
  * s << suite;
  * return s;
  * }
@@ -236,8 +245,8 @@ private:
  * Q_INT16 suite;
  * s >> type;
  * s >> suite;
- * card.suite = (int)suite;
  * card.type = (int)type;
+ * card.suite = (int)suite;
  * return s;
  * }
  *
@@ -270,42 +279,149 @@ public:
 	 * @param parent The parent of the object. Must be a KGame which manages
 	 * the changes made to this object, i.e. which will send the new data
 	 **/
-	KGameProperty(int id, KGamePropertyHandlerBase* owner) : KGamePropertyBase(id, owner) {}
+	KGameProperty(int id, KGamePropertyHandlerBase* owner) : KGamePropertyBase(id, owner) { init(); }
 
 	/**
 	 * This constructor does nothing. You have to call @ref
 	 * KGamePropertyBase::registerData
 	 * yourself before using the KGameProperty object.
 	 **/
-	KGameProperty() : KGamePropertyBase() {}
+	KGameProperty() : KGamePropertyBase() { init(); }
 
 	virtual ~KGameProperty() {}
 
 
 	/**
-	 * Sets the value of this object.
-	 * Uses @ref KPlayer::sendProperty to send it to all clients
-	 * @param v The value to assign to this object
-	 * @param sendValue Specifies whether you want the value to be sent over
-	 * network (defaul) or not. Use this e.g. if you send a message to all
-	 * clients which sets the values of the properties on receiving. 
+	 * This is the central function for changing the value of a
+	 * KGameProperty. You can usually call myProperty = myValue; but
+	 * sometimes you might want to call this function directly.
+	 *
+	 * Note that the value DOES NOT change when you call this function. This
+	 * function saves the value into a @ref QDataStream and calls @ref
+	 * sendProperty where it gets forwarded to the owner and finally the
+	 * value is sent over network. The @ref KMessageServer now send the
+	 * value to ALL clients - even the one who called this function. As soon
+	 * as the value from the message server is received @ref load is called
+	 * and _then_ the value of the KGameProperty has been set.
+	 *
+	 * This way ensures that a KGameProperty has _always_ the same value on
+	 * _every_ client in the network. Note that this means you can NOT do
+	 * something like
+	 * <pre>
+	 * myProperty = 1;
+	 * doSomething(myProperty);
+	 * </pre>
+	 * as myProperty has not yet been set when doSomething is being called.
+	 * You are informed about a value change by a singal from the parent of
+	 * the property which can be deactivated by @ref setEmittingSignal because of
+	 * performance (you probably don't have to deactivate it - except you
+	 * want to write a real-time game like command&conquer with a lot of
+	 * acitvity). See @ref emitSignal
+	 *
+	 * Sometimes you want to go the "dirty" way and have a property set
+	 * imediately even if that means your local client differs from all
+	 * others. You can do this by using @ref setLocal or @ref changeValue.
+	 * Please try to avoid these functions - this will save you a lot of
+	 * trouble one day.
+	 * @see setLocal changeValue value localValue emitSignal
+	 * setEmittingSignal load
+	 * 
+	 * @param sendOnly If FALSE and the value couldn't be sent by any reason
+	 * (e.g. because no owner has been set who can send the value) then the
+	 * local value is set using @ref setLocal. If TRUE then the value is
+	 * sent only and nothing is done if sending is not possible
 	 **/
-	void setValue(type v, bool sendValue = true)
-	// i am not able to put this to kgameproperty.cpp - why?
+	void send(type v, bool sendOnly = false)
 	{
-		//kdDebug(11001) << "+++KGameProperty::setValue(" << id() << ") = " << v << endl;
-		if (!isOptimized() || mData!=v)
-    {
-			if (isReadOnly()) return;
-			mData = v;
-			if (isEmittingSignal())
-      {
-				//AB: cannot be done here!!
-				//the remote clients won't receive this signal!
-//				emitSignal();
+		if (!isOptimized() || mData!=v) {
+			if (isReadOnly()) {
+				return;
 			}
-			if (sendValue) { send(); }
+			QByteArray b;
+			QDataStream stream(b, IO_WriteOnly);
+			stream << v;
+			if (!sendProperty(b) && !sendOnly) {
+				setLocal(v);
+			}
 		} 
+	}
+
+	/**
+	 * This function is a workaround for a big problem of KProperty: if you
+	 * do e.g.
+	 * <pre>
+	 * myProperty = 1;
+	 * doSomething(myProperty);
+	 * </pre>
+	 * then this will fail. The myProperty = 1 part calls @ref send which
+	 * sends the value over network. But it doesn't actually set the value
+	 * of the property - this is done as soon as the @ref KMessageServer
+	 * sends this message to this client. So doSomething(myProperty) still
+	 * contains the old value (i.e. NOT 1).
+	 *
+	 * To solve this problem you can call setLocal(). This function creates
+	 * a duplicated version of the property which is ONLY locally available.
+	 * The value is NOT sent over network. 
+	 *
+	 * As soon as a value over network is received the local duplication is
+	 * deleted again. Note that this behaviour might be disturbing or even
+	 * confusing!
+	 *
+	 * If you want to set the value locally AND send it over network you
+	 * want to call @ref changeValue!
+	 *
+	 * @see send changeValue value localValue
+	 **/
+	void setLocal(type v) 
+	{
+		kdDebug() << "setLocal" << endl;
+		if (!mLocalData) {
+		kdDebug() << "setLocal: create" << endl;
+			mLocalData = new type;
+		kdDebug() << "setLocal: created" << endl;
+		}
+		if (!isOptimized() || *mLocalData != v) {
+			if (isReadOnly()) {
+				return;
+			}
+		kdDebug() << "setLocal: set" << endl;
+			*mLocalData = v;
+		kdDebug() << "setLocal: set done" << endl;
+		}
+	}
+
+	/**
+	 * Sometime you have to call the network value (i.e. the value that is
+	 * set by @ref send) on your own, so without sending it. You can do this
+	 * with initData but note that you should _only_ do this when the @ref
+	 * KMessageServer is not available. This is usually the case in the
+	 * constructor only
+	 *
+	 * Do not call this if there is another possibility! You should only
+	 * call this to set the initial value!
+	 *
+	 * Better use @ref setLocal if possible
+	 **/
+	void initData(type v)
+	{
+		mData = v;
+	}
+
+	/**
+	 * This function does both, change the local value and change the
+	 * network value. The local value is created/changed first, then the
+	 * value is sent over network.
+	 *
+	 * This function is a convenience function and just calls @ref setLocal
+	 * followed by @ref send
+	 *
+	 * @see send setLocal value localValue
+	 **/
+	void changeValue(type v)
+	{
+		kdDebug() << "changeValue()" << endl;
+		setLocal(v);
+		send(v);
 	}
 
 	/**
@@ -323,38 +439,52 @@ public:
 	const type& value() const	{ return mData; }
 
 	/**
-	 * Reads from a stream and assigns the read value to this object. Does
-	 * not use @ref setValue
+	 * @return The local value (see @ref setLocal) if it is existing,
+	 * otherwise the same as @ref value.
+	 **/
+	const type& localValue() const { return (mLocalData ? *mLocalData : mData); }
+
+	/**
+	 * Reads from a stream and assigns the read value to this object. This
+	 * also deletes an existing local value (see @ref setLocal and @ref
+	 * localValue).
+	 *
+	 * This function is called automatically when a new value is received
+	 * over network (i.e. it has been sent using @ref send on this or any
+	 * other client) or when a game is loaded (and maybe on some other
+	 * events).
 	 * @param s The stream to read from
 	 **/
 	virtual void load(QDataStream& s)
 	{
-	// Hmm, is this really necessary?
-//		type oldValue=mData;
+		if (mLocalData) {
+			delete mLocalData;
+			mLocalData = 0;
+		}
 		s >> mData;
 		if (isEmittingSignal()) {
-			emitSignal();//TODO: removed as we set
-//		it indirect now. must be emitted elsewhere!!!
+			emitSignal();
 		}
-
-//		does not work for non-default types, when the operator "!=" is not
-//		implemented:
-//		if (oldValue!=mData && isEmittingSignal()) emitSignal();
 	}
 
-
 	/**
-	 * Well, look at this code:
+	 * This calls @ref send to send the value over network. Note that the
+	 * returned value is NOT the same as the assigned value!! E.g.
 	 * <pre>
-	 * 	KGameProperty<int> integerData(0, owner);
-	 * 	integerData = 100;
-	 * 	kdDebug(11001) << integerData.value() << endl;
+	 * int a, b = 10;
+	 * myProperty = b;
+	 * a = myProperty.value();
 	 * </pre>
-	 * What do you think will be the output?
+	 * Here a and b would differ (except if myProperty.value() has been 10
+	 * before)!
+	 *
+	 * The value is actually set as soon as it is received form the @ref
+	 * KMessageServer which forwards it to ALL clients in the network.
+	 * @return @ref value - note that the returned value is NOT t!
 	 **/
 	const type& operator=(const type& t) 
 	{ 
-		setValue(t); 
+		send(t); 
 		return mData;
 	}
 
@@ -366,11 +496,19 @@ public:
 	 * 	kdDebug(11001) << integerData << endl;
 	 * </pre>
 	 * If you don't see it: you don't have to use integerData.value()
+	 * @return See @ref value
 	 **/
 	operator type() const { return value(); }
 
 private:
+	void init()
+	{
+		mLocalData = 0;
+	}
+		
+private:
 	type mData;
+	type* mLocalData;
 };
 
 
@@ -443,7 +581,7 @@ public:
 	 * datastream. This call is simply forwarded to
 	 * the parent object
 	 **/ 
-	virtual void sendProperty(QDataStream &s) = 0;
+	virtual bool sendProperty(QDataStream &s) = 0;
 
 	/**
 	 * called by a property to emit a signal 
@@ -515,11 +653,14 @@ public:
 	 * called by a property to send itself into the
 	 * datastream. This call is simply forwarded to
 	 * the parent object
+	 * @return TRUE if the message could be sent otherwise FALSE
 	 **/ 
-	void sendProperty(QDataStream &s)
+	bool sendProperty(QDataStream &s)
 	{
 		if (mOwner) {
-			mOwner->sendProperty(s);
+			return mOwner->sendProperty(s);
+		} else {
+			return false;
 		}
 	}
 	

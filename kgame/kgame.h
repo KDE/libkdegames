@@ -169,7 +169,8 @@ public:
 
     /**
      * Set the maximal number of players. After this is
-     * reached no more players can be added
+     * reached no more players can be added. You must be ADMIN to call this (see
+     * @ref isAdmin)! 
      * @param maxnumber maximal number of players
      */
     void setMaxPlayers(uint maxnumber);
@@ -182,7 +183,8 @@ public:
     
     /**
      * Set the minimal number of players. A game can not be started
-     * with less player resp. is paused when already running
+     * with less player resp. is paused when already running. You must be ADMIN
+     * to call this (see @ref isAdmin)!
      * @param minnumber minimal number of players
      */
     void setMinPlayers(uint minnumber);
@@ -261,7 +263,7 @@ public:
      * and prevent connnection of different programs/versions.
      * Global cookies might be listed on http://games.kde.org/cookies.html
      */
-    int cookie();
+    int cookie() const;
 
     /**
      * returns the game status, ie running,pause,ended,...
@@ -284,7 +286,7 @@ public:
     /**
      * Called by @ref KGameProperty only! Internal function!
      **/
-    void sendProperty(QDataStream& s);
+    bool sendProperty(QDataStream& s);
 
     /**
       * Called by @ref KGameProperty only! Internal function!
@@ -294,7 +296,7 @@ public:
     /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
-    void sendPlayerProperty(QDataStream& s, int playerId);
+    bool sendPlayerProperty(QDataStream& s, int playerId);
     
     KGamePropertyBase* findProperty(int id) const;
 

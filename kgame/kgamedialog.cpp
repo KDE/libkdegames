@@ -184,11 +184,11 @@ KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 { delete d; } 
 
 void KGameDialogGeneralConfig::setMaxPlayers(int m)
-{ d->mMaxPlayers->setValue(m); }
+{ d->mMaxPlayers = m; }
 void KGameDialogGeneralConfig::setPlayerName(const QString& name)
 { d->mName->setText(name); }
 void KGameDialogGeneralConfig::setMinPlayers(int m)
-{ d->mMinPlayers->setValue(m); }
+{ d->mMinPlayers = m; }
 int KGameDialogGeneralConfig::minPlayers() const
 { return d->mMinPlayers->value(); }
 int KGameDialogGeneralConfig::maxPlayers() const
@@ -234,9 +234,13 @@ void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
 	p->setName(playerName());
  }
  if (g) {
+ return;
 	if (g->isAdmin()) {
+kdDebug(11001) << "setmax player" << endl;
 		g->setMaxPlayers(maxPlayers());
+kdDebug(11001) << "setmin player" << endl;
 		g->setMinPlayers(minPlayers());
+kdDebug(11001) << "setmin player done" << endl;
 	}
  }
 }
@@ -580,6 +584,8 @@ void KGameDialog::submitToKGame()
  }
 
  for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
+ kdDebug(11001) << "submit to kgame " << i << endl;
 	d->mConfigWidgets.at(i)->submitToKGame(d->mGame, d->mOwner);
+ kdDebug(11001) << "done: submit to kgame " << i << endl;
  }
 }

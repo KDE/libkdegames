@@ -18,20 +18,7 @@
               mabye use the QT tic-tac-toe example?) would be very great (this
               could be stuff of a tutorial instead of KGame documentation)
               MH: Even better idea
-- 11.04.2001: I made a major design change so many things are broken now (e.g.
-              clients which send a message will receive it from the server as
-              well - so they have to care about this on receiving and no more on
-              sending).
-              Things I declare as broken (more or less) currently:
-              - KGameProcessIO (writeBuffers() must be rewritten)
-              all K*Process* classes must be tested extremely, 
-              especially KGameClientProcess which is untested!
-              KGameChat adds the local player twice on the master to the player
-              list
-              - Message format in messages.txt - much has changed... the hidden
-              headers are now *always* in the message (size + magic cookie)
-              - KPlayerData: is emitSignal still working?
-              - KGameDialog cannot configure KMessageServer :-(
+- 11.04.2001: KGameDialog cannot configure KMessageServer :-(
 - 16.04.2001: removePlayer() has been redesigned for KGameComServer but still
               has to be tested. I don't have any way to do this currently, as
               kgame mostly removes players on destruct
@@ -51,3 +38,7 @@
 - 21.06.2001: KPlayerPropertyArray does not yet support at() and operator[]
               assignments. Need to check whether the method from QBitArray
               can be applied
+- 11.07.2001: there is KGame::cookie() and KGameNetwork::cookie() - one is
+              probably obsolete
+- 11.07.2001: go through the entire API documentation and change/delete what is
+              obsolete.

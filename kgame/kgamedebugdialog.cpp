@@ -244,7 +244,8 @@ void KGameDebugDialog::updateGameData()
  d->mGameRunning->setText(1, d->mGame->isRunning() ? i18n("True") : i18n("False"));
  d->mGameMaxPlayers->setText(1, QString::number(d->mGame->maxPlayers()));
  d->mGameMinPlayers->setText(1, QString::number(d->mGame->minPlayers()));
-//TODO: ios, properties
+ d->mGamePlayerCount->setText(1, QString::number(d->mGame->playerCount()));
+//TODO ios
 //TODO properties?
 }
 
@@ -276,7 +277,7 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
  d->mPlayerActive->setText(1, p->isActive() ? i18n("True") : i18n("False"));
  d->mPlayerRtti->setText(1, QString::number(p->rtti()));
  d->mPlayerNetworkPriority->setText(1, QString::number(p->networkPriority()));
-//TODO: ios, properties
+//TODO ios
 //TODO properties?
 }
 
@@ -302,7 +303,6 @@ void KGameDebugDialog::setKGame(const KGame* g)
 	}
 
 	updateGameData();
- 
  }
 }
 

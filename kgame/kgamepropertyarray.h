@@ -102,32 +102,33 @@ public:
   }
   KGamePropertyArray<type>& assign( const KGamePropertyArray<type>& a )
   {
+// note: send() has been replaced by sendProperty so it might be broken now!
     QArray<type>::assign(a);
-    send();
+    sendProperty();
     return *this;
   }
   KGamePropertyArray<type>& assign( const type *a, uint n )
   {
     QArray<type>::assign(a,n);
-    send();
+    sendProperty();
     return *this;
   }
   KGamePropertyArray<type>& duplicate( const KGamePropertyArray<type>& a )
   {
     QArray<type>::duplicate(a);
-    send();
+    sendProperty();
     return *this;
   }
   KGamePropertyArray<type>& duplicate( const type *a, uint n )
   {
     QArray<type>::duplicate(a,n);
-    send();
+    sendProperty();
     return *this;
   }
   KGamePropertyArray<type>& setRawData( const type *a, uint n )
   {
     QArray<type>::setRawData(a,n);
-    send();
+    sendProperty();
     return *this;
   }
   void sort()

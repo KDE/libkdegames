@@ -66,19 +66,34 @@ void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner)
  }
 }
 
-void KGamePropertyBase::send()
+bool KGamePropertyBase::sendProperty()//obsolete
 {
  QByteArray b;
  QDataStream s(b, IO_WriteOnly);
  KGameMessage::createPropertyHeader(s,id());
  save(s);
  if (mOwner) {
-	mOwner->sendProperty(s);
+	return mOwner->sendProperty(s);
  } else {
-   kdError(11001) << "KGamePropertyBase::send(): Cannot send because there is no receiver defined" << endl;
+	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
+	return false;
  }
-
 }
+
+bool KGamePropertyBase::sendProperty(const QByteArray& data)
+{
+ QByteArray b;
+ QDataStream s(b, IO_WriteOnly);
+ KGameMessage::createPropertyHeader(s,id());
+ s.writeRawBytes(data.data(), data.size());
+ if (mOwner) {
+	return mOwner->sendProperty(s);
+ } else {
+	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
+	return false;
+ }
+}
+
 void KGamePropertyBase::emitSignal()
 {
  //kdDebug(11001) << "KGamePropertyBase::emitSignal() mOwnerP="<< mOwner << " id=" << id()   << endl;
@@ -175,12 +190,12 @@ bool KGamePropertyHandlerBase::load(QDataStream &stream)
  uint count,i;
  stream >> count;
  kdDebug(11001) << "KGamePropertyHandler::load " << count << " KGameProperty objects " << endl;
- for (i=0;i<count;i++) {
-	processMessage(stream,id());
+ for (i = 0; i < count; i++) {
+	processMessage(stream, id());
  }
  Q_INT16 cookie;
  stream >> cookie;
- if (cookie==KPLAYERHANDLER_LOAD_COOKIE) {
+ if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
 	//kdDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
  } else {
 	kdError(11001) << "KGamePropertyHandler loading error. probably format error"<<endl;
@@ -196,7 +211,7 @@ bool KGamePropertyHandlerBase::save(QDataStream &stream)
  while (it.current()) {
 	KGamePropertyBase *base=it.current();
 	if (base) {
-		KGameMessage::createPropertyHeader(stream,base->id());
+		KGameMessage::createPropertyHeader(stream, base->id());
 		base->save(stream);
 	}
 	++it;

@@ -27,6 +27,7 @@
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgameproperty.h"
+#include "kgamemessage.h"
 
 #include "kgamechat.h"
 

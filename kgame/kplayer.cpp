@@ -57,6 +57,7 @@ public:
 
 KPlayer::KPlayer() : QObject(0,0)
 {
+// note that NO KGame object exists here! so we cannot use KGameProperty::send!
    kdDebug(11001) << "CREATE(KPlayer=" << this <<") sizeof(this)="<<sizeof(KPlayer) << endl;
    kdDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup)<<endl;
    d = new KPlayerPrivate;
@@ -71,18 +72,18 @@ KPlayer::KPlayer() : QObject(0,0)
    // international conenctions are possible
 
    d->mGroup.registerData(KGamePropertyBase::IdGroup, dataHandler());
-   d->mGroup = i18n("default");
+   d->mGroup.initData(i18n("default"));
    d->mName.registerData(KGamePropertyBase::IdName, dataHandler());
-   d->mName = i18n("default");
+   d->mName.initData(i18n("default"));
 
    mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, dataHandler());
-   mAsyncInput.setValue(false);
+   mAsyncInput.initData(false);
    mMyTurn.registerData(KGamePropertyBase::IdTurn, dataHandler());
-   mMyTurn.setValue(false);
+   mMyTurn.initData(false);
    mMyTurn.setEmittingSignal(true);
    mMyTurn.setOptimized(false);
    mUserId.registerData(KGamePropertyBase::IdUserId, dataHandler());
-   mUserId.setValue(0);
+   mUserId.initData(0);
 }
 
 KPlayer::~KPlayer()
@@ -157,16 +158,16 @@ void KPlayer::setId(int newid)
 
 
 void KPlayer::setGroup(const QString& group)
-{ d->mGroup.setValue(group); }
+{ d->mGroup = group; }
 
 const QString& KPlayer::group() const
-{ return d->mGroup.value(); }
+{ return d->mGroup.localValue(); }
 
 void KPlayer::setName(const QString& name)
-{ d->mName.setValue(name); }
+{ d->mName = name; }
 
 const QString& KPlayer::name() const
-{ return d->mName.value(); }
+{ return d->mName.localValue(); }
 
 int KPlayer::id() const
 { return d->mId; }
@@ -264,7 +265,7 @@ bool KPlayer::setTurn(bool b,bool exclusive)
   }
 
   // Return if nothing changed
-  mMyTurn.setValue(b);
+  mMyTurn = b;
 
   return true;
 }
@@ -340,10 +341,10 @@ bool KPlayer::addProperty(KGamePropertyBase* data)
   return d->mProperties.addProperty(data);
 }
 
-void KPlayer::sendProperty(QDataStream& s)
+bool KPlayer::sendProperty(QDataStream& s)
 {
-  if (!game()) return ;
-  game()->sendPlayerProperty(s, id());
+  if (!game()) return false;
+  return game()->sendPlayerProperty(s, id());
 }
 
 void KPlayer::emitSignal(KGamePropertyBase *me)
