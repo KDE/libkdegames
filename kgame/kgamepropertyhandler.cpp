@@ -295,7 +295,7 @@ void KGamePropertyHandler::unlockDirectEmit()
     KGamePropertyBase *prop;
     while(prop=d->mSignalQueue.dequeue())
     {
-      kdDebug(11001) << "emmiting signal for " << prop->id() << endl;
+      // kdDebug(11001) << "emmiting signal for " << prop->id() << endl;
       emit signalPropertyChanged(prop);
     }
   }

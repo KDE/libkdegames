@@ -214,7 +214,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
   for ( player=playerList()->first(); player != 0; player=playerList()->next() )
   {
     player->dataHandler()->lockDirectEmit();
-    kdDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
+    // kdDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
   }
 
   // Properties
@@ -247,7 +247,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
   for ( player=playerList()->first(); player != 0; player=playerList()->next() )
   {
     player->dataHandler()->unlockDirectEmit();
-    kdDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
+    // kdDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
   }
 
   emit signalLoad(stream);
