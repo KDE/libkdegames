@@ -276,7 +276,7 @@ public:
      * 
      * For documentation see @ref signalPlayerInput.
      **/
-    virtual bool playerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
+    virtual bool systemPlayerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
 
     /**
     * This virtual function is called if the KGame needs to create a new player.
@@ -463,10 +463,6 @@ protected slots:
      */
     virtual void prepareNext();
 
-    /**
-     * Prepare the call of the signaleGameOver after a QTimer event to allow QT Event processing
-     */
-    virtual void prepareGameOver();
 
     /**
      * Calls @ref negotiateNetworkGame
@@ -490,26 +486,6 @@ protected slots:
     void slotServerDisconnected();
 
 signals:
-    /**
-     * A player input occured. This is the most important function
-     * as the given message will contain the current move made by
-     * the given player.
-     * Example:
-     * <pre>
-     * void MyClass::slotPlayerInput(QDataStream &msg,KPlayer *player)
-     * {
-     *   Q_INT32 move;
-     *   msg >>  move;
-     *   kdDebug() << "  Player " << player->id() << " moved to " << move <<
-     *   endl;
-     * }
-     * </pre>
-     *
-     * @param msg the move message
-     * @param player the player who did the move
-     */
-    void signalPlayerInput(QDataStream &msg,KPlayer *player);
-    
     /**
      * The game will be loaded from the given stream. Load from here
      * the data which is NOT a game or player property.
@@ -621,6 +597,49 @@ signals:
 
 
 protected:
+    /**
+     * A player input occured. This is the most important function
+     * as the given message will contain the current move made by
+     * the given player.
+     * Note that you HAVE to overwrite this function. Otherwise your
+     * game makes no sense at all.
+     * Generally you have to return TRUE in this function. Only then
+     * the game sequence is proceeded by calling @ref playerInputFinished
+     * which in turn will check for game over or the next player
+     * However, if you have a delqayed move, because you e.g. move a
+     * card or a piece you want to return FALSE to pause the game sequence
+     * and then manually call @ref playerInputFinished to resume it.
+     * Example:
+     * <pre>
+     * void MyClass::playerInput(QDataStream &msg,KPlayer *player)
+     * {
+     *   Q_INT32 move;
+     *   msg >>  move;
+     *   kdDebug() << "  Player " << player->id() << " moved to " << move <<
+     *   endl;
+     * }
+     * </pre>
+     *
+     * @param msg the move message
+     * @param player the player who did the move
+     * @return true - input ready, false: input manual
+     */
+    virtual bool playerInput(QDataStream &msg,KPlayer *player)=0;
+    
+
+    /**
+    * Called after the player input is processed by the game. Here the
+    * checks for game over and nextPlayer (in the case of turn base games)
+    * are processed. 
+    * Call this manually if you have a delayed move, i.e. your playerInput
+    * function returns FALSE. If it returns true you need not do anything
+    * here.
+    *
+    * @return the current player
+    *
+    **/
+    KPlayer *playerInputFinished();
+
 
     /**
     * This virtual function can be overwritten for your own player managment.

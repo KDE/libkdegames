@@ -672,7 +672,7 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
  return true;
 }
 
-bool KGame::playerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
+bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
 {
  if (!player) 
  {
@@ -685,35 +685,44 @@ bool KGame::playerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
    return false;
  }
  kdDebug(11001) << "KGame: Got playerInput from messageServer... sender: " << sender << endl;
- kdDebug(11001) << " ... emmitting signal" << endl;
- emit signalPlayerInput(msg,player); 
-  
  d->mCurrentPlayer=player;
+ if (playerInput(msg,player))
+ {
+   playerInputFinished();
+ }
+ else
+ {
+   if (!player->asyncInput()) 
+   {
+     player->setTurn(false); // in turn based games we have to switch of input now
+   }
+ }
+ return true;
+}
+
+  
+KPlayer * KGame::playerInputFinished()
+{
  // Check for game over and if not allow the next player to move
+ KPlayer *player=d->mCurrentPlayer;
  d->mGameOver=checkGameOver(player);
  if (d->mGameOver!=0) 
  {
    player->setTurn(false);
-   QTimer::singleShot(0,this,SLOT(prepareGameOver()));
+   emit signalGameOver(d->mGameOver,d->mCurrentPlayer,this);
  }
  else if (!player->asyncInput()) 
  {
    player->setTurn(false); // in turn based games we have to switch of input now
    QTimer::singleShot(0,this,SLOT(prepareNext()));
  }
-
- return true;
+ return player;
 }
 
 // Per default we do not do anything
 int KGame::checkGameOver(KPlayer *)
 {
  return 0;
-}
-
-void KGame::prepareGameOver()
-{
-   emit signalGameOver(d->mGameOver,d->mCurrentPlayer,this);
 }
 
 void KGame::prepareNext()

@@ -166,7 +166,7 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
   else
   {
     kdDebug(11001) << "direct playerInput" << endl;
-    return game()->playerInput(msg,this,sender);
+    return game()->systemPlayerInput(msg,this,sender);
   }
 }
 

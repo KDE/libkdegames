@@ -15,8 +15,19 @@
              everywhere in KGame... hope nothing else is affecterd by this
              problem (signalPrepareMove was fixed already by me)
 18.09.2001:  bool* for Key/Mouseevents and IOAdded in kgameio.h too
-18.09.2001:  Question: Should the signal signalPlayerInput(QDataStream &,KPlayer *))
-             be made a virtual function? Means: is this ever needed outside
-             the derived KGame class?
 19.09.2001:  Kgame:nextPlayer retunrs the KPlayer *nextplayer instead of bool              
 19.09.2001:  gameOver() renamed to checkGameOver() !!!!!
+18.09.2001:  Question: Should the signal signalPlayerInput(QDataStream &,KPlayer *))
+             be made a virtual function? 
+             MH: This is done now. As this is a central function your programs will
+             not run anymore. Fix: rename your slot which is connected to the above
+             signal to playerInput() and return TRUE in it. This will make it 100%
+             compatible to the old version. I think this chagne is necessary especially
+             as a signal is of no use here as you cannot read twice from the same stream.
+             Therefore ther can only be one function processing the input. If you really
+             need a signal, you can of course simly emit it in the overwritten playerInput
+             function
+
+
+
+
