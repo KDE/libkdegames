@@ -203,6 +203,20 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
   stream >> newseed;
   d->mRandom->setSeed(newseed);
 
+  // Switch off the direct emitting of signals while
+  // loading properties. This can cause inconsistencies
+  // otherwise if a property emits and this emit accesses
+  // a property not yet loaded
+  // Note we habe to have this external locking to prevent the games unlocking
+  // to access the players
+  dataHandler()->lockDirectEmit();
+  KPlayer *player;
+  for ( player=playerList()->first(); player != 0; player=playerList()->next() )
+  {
+    player->dataHandler()->lockDirectEmit();
+    kdDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
+  }
+
   // Properties
   dataHandler()->load(stream);
 
@@ -223,6 +237,17 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
     kdDebug(11001) << "   Game loaded propertly"<<endl;
   } else {
     kdError(11001) << "   Game loading error. probably format error"<<endl;
+  }
+
+  // Switch back on the direct emitting of signals and emit the
+  // queued signals.
+  // Note we habe to have this external locking to prevent the games unlocking
+  // to access the players
+  dataHandler()->unlockDirectEmit();
+  for ( player=playerList()->first(); player != 0; player=playerList()->next() )
+  {
+    player->dataHandler()->unlockDirectEmit();
+    kdDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
   }
 
   emit signalLoad(stream);

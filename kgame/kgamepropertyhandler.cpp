@@ -48,7 +48,7 @@ public:
 	int mId;
 	KGamePropertyBase::PropertyPolicy mDefaultPolicy;
 	bool mDefaultUserspace;
-  QTimer mTimer;
+  int mIndirectEmit;
   QPtrQueue<KGamePropertyBase> mSignalQueue;
 };
 
@@ -77,7 +77,7 @@ void KGamePropertyHandler::init()
  d->mUniqueId=KGamePropertyBase::IdAutomatic;
  d->mDefaultPolicy=KGamePropertyBase::PolicyLocal;
  d->mDefaultUserspace=true;
- connect( &d->mTimer, SIGNAL(timeout()), this, SLOT(mTimerDone()) );
+ d->mIndirectEmit=0;
 }
 
 
@@ -188,6 +188,8 @@ QString KGamePropertyHandler::propertyName(int id) const
 
 bool KGamePropertyHandler::load(QDataStream &stream)
 {
+ // Prevent direct emmiting until all is loaded
+ lockDirectEmit();
  uint count,i;
  stream >> count;
  kdDebug(11001) << k_funcinfo << ": " << count << " KGameProperty objects " << endl;
@@ -201,6 +203,8 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  } else {
 	kdError(11001) << "KGamePropertyHandler loading error. probably format error"<<endl;
  }
+ // Allow direct emmiting (if no other lock still holds)
+ unlockDirectEmit();
  return true;
 }
 
@@ -277,28 +281,43 @@ void KGamePropertyHandler::flush()
 /* Fire all property signal changed which are collected in
  * the queque
  **/
-void KGamePropertyHandler::mTimerDone()
+void KGamePropertyHandler::lockDirectEmit()
 {
-  KGamePropertyBase *prop;
-  while(prop=d->mSignalQueue.dequeue())
+  d->mIndirectEmit++;
+}
+
+void KGamePropertyHandler::unlockDirectEmit()
+{
+  // If the flag is <=0 we emit the queued signals
+  d->mIndirectEmit--;
+  if (d->mIndirectEmit<=0)
   {
-    // kdDebug(11001) << "emmiting signal for " << prop->id() << endl;
-    emit signalPropertyChanged(prop);
+    KGamePropertyBase *prop;
+    while(prop=d->mSignalQueue.dequeue())
+    {
+      kdDebug(11001) << "emmiting signal for " << prop->id() << endl;
+      emit signalPropertyChanged(prop);
+    }
   }
 }
 
 void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
 {
- // We cannot emit the signals directly as it can happend that
+ // If the indirect flag is set (load and network transmit)
+ // we cannot emit the signals directly as it can happend that
  // a sigal causes an access to a property which is e.g. not
  // yet loaded or received
- // was 24.01.02: emit signalPropertyChanged(prop);
 
- // Queque the signal
- d->mSignalQueue.enqueue(prop);
-
- // Start the timer single shot only if it is not running
- if (!d->mTimer.isActive()) d->mTimer.start(0,TRUE);
+ if (d->mIndirectEmit>0)
+ {
+  // Queque the signal
+  d->mSignalQueue.enqueue(prop);
+ }
+ else
+ {
+  // directly emit
+  emit signalPropertyChanged(prop);
+ }
 }
 
 bool KGamePropertyHandler::sendProperty(QDataStream &s)
