@@ -752,7 +752,11 @@ protected:
     **/
     virtual void newPlayersJoin(KGamePlayerList *oldplayer,
 				KGamePlayerList *newplayer,
-				QValueList<int> &inactivate) {};
+				QValueList<int> &inactivate) {
+		Q_UNUSED( oldplayer );
+		Q_UNUSED( newplayer );
+		Q_UNUSED( inactivate );
+	};
 
     /**
     * Save the player list to a stream. Used for network game and load/save.
