@@ -59,10 +59,15 @@ public:
    */
   enum PropertyCommandIds 
   {
+    // Array
     CmdAt=1,
     CmdResize=2,
     CmdFill=3,
-    CmdSort=4
+    CmdSort=4,
+    // List (could be the same id's actually
+    CmdInsert=5,
+    CmdRemove=6,
+    CmdClear=7
   };
 
 	/**
