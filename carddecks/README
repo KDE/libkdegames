@@ -1,4 +1,4 @@
-This directory contains all carddecks fro KDE cardgames.
+This directory contains all carddecks for KDE cardgames.
 
 The backsides of the cards are stored as PNG images in
 the directory decks as deck0.png, deck1.png, ...
