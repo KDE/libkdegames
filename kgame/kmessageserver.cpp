@@ -497,7 +497,7 @@ void KMessageServer::processOneMessage ()
 
 void KMessageServer::Debug()
 {
-   kdDebug(11001) << "------------------- KNETWORKGAME -------------------------" << endl;
+   kdDebug(11001) << "------------------ KMESSAGESERVER -----------------------" << endl;
    kdDebug(11001) << "MaxClients :   " << maxClients() << endl;
    kdDebug(11001) << "NoOfClients :  " << clientCount() << endl;
    kdDebug(11001) << "---------------------------------------------------" << endl;
