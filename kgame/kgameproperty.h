@@ -61,7 +61,8 @@ public:
   {
     CmdAt=1,
     CmdResize=2,
-    CmdFill=3
+    CmdFill=3,
+    CmdSort=4
   };
 
 	/**

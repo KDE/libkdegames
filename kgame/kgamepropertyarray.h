@@ -35,7 +35,7 @@ class KGamePropertyArray : public QArray<type>, public KGamePropertyBase
 public:
   KGamePropertyArray() :QArray<type>(), KGamePropertyBase()
   {
-    kdDebug() << "KGamePropertyArray init" << endl;
+    //kdDebug() << "KGamePropertyArray init" << endl;
   }
   KGamePropertyArray( int size )
   {
@@ -43,7 +43,6 @@ public:
   }
   KGamePropertyArray( const KGamePropertyArray<type> &a ) : QArray<type>(a)
   {
-    kdDebug() << "KGamePropertyArray copy constructor"<<id() << endl;
     send();
   }
   bool  resize( uint size )
@@ -56,7 +55,6 @@ public:
       s << size ;
       if (mOwner)  mOwner->sendProperty(s);
       bool a=QArray<type>::resize(size);
-      kdDebug() << "nach resize size="<< QArray<type>::size() << endl;
       return a;
     }
     else return true;
@@ -71,9 +69,17 @@ public:
     s << data;
     if (mOwner)  mOwner->sendProperty(s);
     QArray<type>::at(i)=data;
-    kdDebug() << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
+    //kdDebug() << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
-  type at( uint i ) const { return QArray<type>::at(i); }
+
+  type at( uint i ) const
+  {
+    return QArray<type>::at(i);
+  }
+  type operator[]( int i ) const
+  {
+    return QArray<type>::at(i);
+  }
 
   KGamePropertyArray<type> &operator=(const KGamePropertyArray<type> &a)
   {
@@ -84,11 +90,16 @@ public:
   {
     return resize(pos);
   }
-  bool  fill( const type &d, int size = -1 )
+  bool  fill( const type &data, int size = -1 )
   {
     bool r;
-    r=QArray<type>::fill(d,size);
-    send();
+    r=QArray<type>::fill(data,size);
+    QByteArray b;
+    QDataStream s(b, IO_WriteOnly);
+    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
+    s << data;
+    s << size ;
+    if (mOwner)  mOwner->sendProperty(s);
     return r;
   }
   KGamePropertyArray<type>& assign( const KGamePropertyArray<type>& a )
@@ -120,6 +131,14 @@ public:
     QArray<type>::setRawData(a,n);
     send();
     return *this;
+  }
+  void sort()
+  {
+    QArray<type>::sort();
+    QByteArray b;
+    QDataStream s(b, IO_WriteOnly);
+    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
+    if (mOwner)  mOwner->sendProperty(s);
   }
 
 	void load(QDataStream& s)
@@ -156,6 +175,22 @@ public:
         s >> size;
         kdDebug() << "CmdResize:id="<<id()<<" oldsize="<<QArray<type>::size()<<" newsize="<<size <<endl; 
         if (QArray<type>::size()!=size) resize(size);
+        break;
+      }
+      case CmdFill:
+      {
+        int size;
+        type data;
+        s >> data >> size;
+        kdDebug() << "CmdFill:id="<<id()<<"size="<<size <<endl; 
+        QArray<type>::fill(data,size);
+        if (isEmittingSignal()) emitSignal();
+        break;
+      }
+      case CmdSort:
+      {
+        kdDebug() << "CmdSort:id="<<id()<<endl; 
+        QArray<type>::sort();
         break;
       }
       default: 
