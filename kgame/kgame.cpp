@@ -358,7 +358,7 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
   KPlayer *newplayer=findPlayer(id);
   if (!newplayer)
   {
-    kdDebug(11001) << k_funcinfo << ":   Player "<< id << "not found...asking user to create one " << endl;
+    kdDebug(11001) << k_funcinfo << "Player "<< id << " not found...asking user to create one " << endl;
     newplayer=createPlayer(rtti,iovalue,isvirtual);
     //emit signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
   }
@@ -425,6 +425,19 @@ void KGame::addPlayer(KPlayer* newplayer)
    return;
  }
 
+ if (newplayer->id() == 0)
+ {
+   d->mUniquePlayerNumber++;
+   newplayer->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber, gameId()));
+   kdDebug(11001) << k_funcinfo << "NEW!!! player " << newplayer << " now has id " << newplayer->id() << endl;
+ }
+ else
+ {
+   // this could happen in games which use their own ID management by certain
+   // reasons. that is NOT recommended
+   kdDebug(11001) << k_funcinfo << "player " << newplayer << " already has an id: " << newplayer->id() << endl;
+ }
+
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
  // We distinguis here what policy we have
@@ -453,9 +466,7 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
  }
  if (newplayer->id() == 0)
  {
-   d->mUniquePlayerNumber++;
-   newplayer->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber,gameId()));
-   kdDebug(11001) << k_funcinfo << ": NEW!!! player " << newplayer << " now has id " << newplayer->id() << endl;
+   kdWarning(11001) << k_funcinfo << "player " << newplayer << " has no ID" << endl;
  }
 
  if (findPlayer(newplayer->id()))
@@ -520,17 +531,18 @@ bool KGame::removePlayer(KPlayer * player, Q_UINT32 receiver)
 
 void KGame::systemRemovePlayer(KPlayer* player,bool deleteit)
 {
+ kdDebug(11001) << k_funcinfo << endl;
  if (!player)
  {
    kdWarning(11001) << "cannot remove NULL player" << endl;
    return;
  }
- if (!systemRemove(player,deleteit)) 
+ if (!systemRemove(player,deleteit))
  {
    kdWarning(11001) << "player " << player << "(" << player->id() << ") Could not be found!" << endl;
  }
 
- if (gameStatus()==(int)Run && playerCount()<minPlayers()) 
+ if (gameStatus()==(int)Run && playerCount()<minPlayers())
  {
    kdWarning(11001) << k_funcinfo ": not enough players, PAUSING game\n" << endl;
    setGameStatus(Pause);
@@ -934,7 +946,10 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
           kdDebug(11001) << "dequeue previously added player" << endl;
           newplayer = d->mAddPlayerList.dequeue();
        }
-       else newplayer=loadPlayer(stream,true);
+       else
+       {
+         newplayer=loadPlayer(stream,true);
+       }
        systemAddPlayer(newplayer);// the final, local, adding
        //systemAddPlayer(stream);
      }
@@ -953,6 +968,10 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
        {
          systemRemovePlayer(p,true);
        }
+     }
+     else
+     {
+       kdWarning(11001) << k_funcinfo << "Cannot find player " << id << endl;
      }
    }
    break;
