@@ -197,18 +197,24 @@ void KMessageServer::addClient (KMessageIO* client)
   d->mClientList.append (client);
 
   // tell it its ID
-  QDataStream stream (msg, IO_WriteOnly);
-  stream << Q_UINT32 (ANS_CLIENT_ID) << client->id();
+  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (ANS_CLIENT_ID) << client->id();
   client->send (msg);
 
+  // Give it the complete list of client IDs
+  QDataStream (msg, IO_WriteOnly)  << Q_UINT32 (ANS_CLIENT_LIST) << clientIDs();
+  client->send (msg);
+
+
   if (clientCount() == 1)
+  {
     // if it is the first client, it becomes the admin
     setAdmin (client->id());
+  }
   else
   {
     // otherwise tell it who is the admin
     QDataStream (msg, IO_WriteOnly) << Q_UINT32 (ANS_ADMIN_ID) << adminID();
-    sendMessage (client->id(), msg);
+    client->send (msg);
   }
 
   emit clientConnected (client);
@@ -277,12 +283,8 @@ int KMessageServer::clientCount() const
 QValueList <Q_UINT32> KMessageServer::clientIDs () const
 {
   QValueList <Q_UINT32> list;
-  QListIterator <KMessageIO> iter (d->mClientList);
-  while (*iter)
-  {
+  for (QListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
     list.append ((*iter)->id());
-    ++iter;
-  }
   return list;
 }
 
@@ -317,6 +319,8 @@ void KMessageServer::setAdmin (Q_UINT32 adminID)
     kdWarning (11001) << "Trying to set a new admin that doesn't exist!" << endl;
     return;
   }
+
+  d->mAdminID = adminID;
 
   QByteArray msg;
   QDataStream (msg, IO_WriteOnly) << Q_UINT32 (ANS_ADMIN_ID) << adminID;
@@ -461,10 +465,7 @@ void KMessageServer::processOneMessage ()
 
     case REQ_CLIENT_LIST:
       {
-        QValueList <Q_UINT32> client_list;
-        for (QListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
-          client_list.append ((*iter)->id());
-        out_stream << Q_UINT32 (ANS_CLIENT_LIST) << client_list;
+        out_stream << Q_UINT32 (ANS_CLIENT_LIST) << clientIDs();
         sendMessage (clientID, out_msg);
       }
       break;
