@@ -88,7 +88,7 @@ KMessageSocket::~KMessageSocket ()
   delete mSocket;
 }
 
-bool KMessageSocket::isConnected ()
+bool KMessageSocket::isConnected () const
 {
   return mSocket->state() == QSocket::Connection;
 }
@@ -192,7 +192,7 @@ KMessageDirect::~KMessageDirect ()
   }
 }
 
-bool KMessageDirect::isConnected ()
+bool KMessageDirect::isConnected () const
 {
   return mPartner != 0;
 }
@@ -245,7 +245,7 @@ KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(par
   mReceiveCount=0;
   mReceiveBuffer.resize(1024);
 }
-bool KMessageProcess::isConnected()
+bool KMessageProcess::isConnected() const
 {
   kdDebug(11001) << "@@@KMessageProcess::Is conencted" << endl;
   if (!mProcess) return false;
@@ -393,7 +393,7 @@ KMessageFilePipe::~KMessageFilePipe()
 {
 }
 
-bool KMessageFilePipe::isConnected ()
+bool KMessageFilePipe::isConnected () const
 {
   return (mReadFile!=0)&&(mWriteFile!=0);
 }

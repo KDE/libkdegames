@@ -68,13 +68,18 @@ public:
   ~KMessageIO ();
 
   /**
+   * @return Whether this KMessageIO is a network IO or not.
+   **/
+  virtual bool isNetwork () const = 0;
+
+  /**
     This method returns the status of the object, whether it is already
     (or still) connected to another KMessageIO object or not.
 
     This is a pure virtual method, so it has to be implemented in a subclass
     of KMessageIO.
   */
-  virtual bool isConnected () = 0;
+  virtual bool isConnected () const = 0;
 
   /**
     Sets the ID number of this object. This number can for example be used to
@@ -194,9 +199,14 @@ public:
   ~KMessageSocket ();
 
   /**
+    @return TRUE as this is a network IO.
+  */
+  bool isNetwork() const { return true; }
+  
+  /**
     Returns true if the socket is in state /e connected.
   */
-  bool isConnected ();
+  bool isConnected () const;
 
   /**
     Overwritten slot method from KMessageIO.
@@ -258,6 +268,11 @@ public:
   ~KMessageDirect ();
 
   /**
+    @return FALSE as this is no network IO.
+  */
+  bool isNetwork() const { return false; }
+  
+  /**
     Returns true, if the object is connected to another instance.
 
     If you use the first constructor, the object is unconnected unless another
@@ -265,7 +280,7 @@ public:
 
     The connection can only be closed by deleting one of the objects.
   */
-  bool isConnected ();
+  bool isConnected () const;
 
   /**
     Overwritten slot method from KMessageIO.
@@ -286,9 +301,15 @@ class KMessageProcess : public KMessageIO
   public:
     KMessageProcess(QObject *parent, QString file);
     ~KMessageProcess();
-    bool isConnected();
+    bool isConnected() const;
     void send (const QByteArray &msg);
     void writeToProcess();
+    
+    /**
+      @return FALSE as this is no network IO.
+    */
+    bool isNetwork() const { return false; }
+  
     
   public slots:
   void  slotReceivedStdout(KProcess *proc, char *buffer, int buflen);
@@ -312,9 +333,15 @@ class KMessageFilePipe : public KMessageIO
   public:
     KMessageFilePipe(QObject *parent,QFile *readFile,QFile *writeFile);
     ~KMessageFilePipe();
-    bool isConnected();
+    bool isConnected() const;
     void send (const QByteArray &msg);
     void exec();
+
+    /**
+      @return FALSE as this is no network IO.
+    */
+    bool isNetwork() const { return false; }
+  
 
   private:
     QFile *mReadFile;

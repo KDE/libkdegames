@@ -83,6 +83,8 @@ KGameNetwork::~KGameNetwork()
 }
 
 // ----------------------------- status methods
+bool KGameNetwork::isNetwork() const
+{ return isOfferingConnections() || d->mMessageClient->isNetwork();}
 Q_UINT32 KGameNetwork::gameId() const
 { return d->mMessageClient->id(); }
 

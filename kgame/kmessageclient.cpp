@@ -113,9 +113,14 @@ const QValueList <Q_UINT32> &KMessageClient::clientList() const
   return d->clientList;
 }
 
-bool KMessageClient::isConnected ()
+bool KMessageClient::isConnected () const
 {
   return d->connection && d->connection->isConnected();
+}
+
+bool KMessageClient::isNetwork () const
+{
+  return isConnected() ? d->connection->isNetwork() : false;
 }
 
 // --------------------- Sending messages

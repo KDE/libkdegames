@@ -62,6 +62,12 @@ public:
     virtual void Debug();
 
     /**
+     * @return TRUE if this is a network game - i.e. you are either MASTER or
+     * connected to a remote MASTER.
+     **/
+    bool isNetwork() const;
+    
+    /**
      * Is this the game MASTER (i.e. has started the @ref KMessageServer). A
      * game has always exactly one MASTER. This is either a KGame object (i.e. a
      * Client) or an own MessageServer-process. A KGame object that has the

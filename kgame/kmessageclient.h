@@ -149,7 +149,13 @@ public:
     a socket connection hasn't been established, and it will also return false after
     a socket connection is broken.)
   */
-  bool isConnected ();
+  bool isConnected () const;
+  
+  /**
+    @return TRUE if @ref isConnected is true AND this is no local (like
+    @ref KMessageDirect) connection.
+  */
+  bool isNetwork () const; 
 
   /**
     Sends a message to the @ref KMessageServer. If we are not yet connected to one, nothing
