@@ -473,7 +473,7 @@ void KGameDebugDialog::removePlayer(QListBoxItem* i)
 	return;
  }
  disconnect(p, 0, this, 0);
- if (i->selected()) {
+ if (i->isSelected()) {
 	clearPlayerData();
  }
  delete i;
