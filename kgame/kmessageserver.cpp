@@ -80,6 +80,7 @@ public:
   QPtrList <KMessageIO> mClientList;
   QPtrQueue <MessageBuffer> mMessageQueue;
   QTimer mTimer;
+  bool mIsRecursive;
 };
 
 
@@ -89,6 +90,7 @@ KMessageServer::KMessageServer (Q_UINT16 cookie,QObject* parent)
   : QObject(parent, 0)
 {
   d = new KMessageServerPrivate;
+  d->mIsRecursive=false;
   d->mCookie=cookie;
   connect (&(d->mTimer), SIGNAL (timeout()),
            this, SLOT (processOneMessage()));
@@ -124,6 +126,7 @@ bool KMessageServer::initNetwork (Q_UINT16 port)
   }
 
   d->mServerSocket = new KMessageServerSocket (port);
+  d->mIsRecursive = false;
 
   if (!d->mServerSocket || !d->mServerSocket->ok())
   {
@@ -384,6 +387,11 @@ void KMessageServer::processOneMessage ()
     d->mTimer.stop();
     return;
   }
+  if (d->mIsRecursive)
+  {
+    return;
+  }
+  d->mIsRecursive = true;
 
   MessageBuffer *msg_buf = d->mMessageQueue.head();
 
@@ -493,6 +501,7 @@ void KMessageServer::processOneMessage ()
   d->mMessageQueue.remove();
   if (d->mMessageQueue.isEmpty())
     d->mTimer.stop();
+  d->mIsRecursive = false;
 }
 
 void KMessageServer::Debug()
