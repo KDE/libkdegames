@@ -20,7 +20,9 @@
  *   The user of this program shall have the choice which license to use   *
  *                                                                         *
  ***************************************************************************/
+
 #include <qbuffer.h>
+#include <qmap.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -32,7 +34,6 @@
 #include "kgamechat.h"
 
 //FIXME:
-#define SEND_TO_GROUP_ID 1
 #define FIRST_ID 2 // first id, that is free of use, aka not defined above
 
 class KGameChatPrivate
@@ -42,12 +43,18 @@ public:
 	{
 		mFromPlayer = 0;
 		mGame = 0;
+		mToMyGroup = -1;
 	}
 	
 	KGame* mGame;
-	QIntDict<KPlayer> mIndex2Player;
 	KPlayer* mFromPlayer;
 	int mMessageId;
+
+
+	QIntDict<KPlayer> mIndex2Player;
+
+	QMap<int, int> mSendId2PlayerId;
+	int mToMyGroup; // just as the above - but for the group, not for players
 };
 
 KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent) : KChatBase(parent)
@@ -73,7 +80,7 @@ void KGameChat::init(KGame* g, int msgId)
  d = new KGameChatPrivate;
  d->mMessageId = msgId;
 
- setGame(g);
+ setKGame(g);
 }
 
 void KGameChat::addMessage(int fromId, const QString& text)
@@ -100,69 +107,104 @@ void KGameChat::returnPressed(const QString& text)
 	return;
  }
 
- int fromPlayer = (d->mFromPlayer ? d->mFromPlayer->id() : -1);
- kdDebug(11001) << "from: " << fromPlayer << endl;
- kdDebug(11001) << "from: " << d->mFromPlayer->name() << endl;
+ kdDebug(11001) << "from: " << d->mFromPlayer->id() << "==" << d->mFromPlayer->name() << endl;
 
- //TODO:
- int index = sendingEntry();
- int toPlayer = 0;
- QString toGroup;
- if (d->mFromPlayer && index == 1) {
-	toGroup = d->mFromPlayer->group();
- } else if (index >= FIRST_ID) {
-//	toPlayer = d->mPlayers.at(index - FIRST_ID)->id();
+ int id = sendingEntry();
+
+ if (isToGroupMessage(id)) {
+	// note: there is currently no support for other groups than the players
+	// group! It might be useful to send to other groups, too
+	QString group = d->mFromPlayer->group(); 
+	kdDebug() << "send to group " << group << endl;
+	int sender = KGameMessage::calcMessageId(d->mGame->gameId(), d->mFromPlayer->id());
+	d->mGame->sendGroupMessage(text, messageId(), sender, group);
+
+	//TODO
+	//AB: this message is never received!! we need to connect to
+	//KPlayer::networkData!!!
+	//TODO
+	
+ } else {
+	int toPlayer = 0;
+	if (!isSendToAllMessage(id) && isToPlayerMessage(id)) {
+		toPlayer = playerId(id);
+		if (toPlayer == -1) {
+			kdError(11001) << "KGameChat: don't know that player "
+					<< "- internal ERROR" << endl;
+		}
+	} 
+	int receiver = KGameMessage::calcMessageId(0, toPlayer);
+	int sender = KGameMessage::calcMessageId(d->mGame->gameId(), d->mFromPlayer->id());
+	d->mGame->sendMessage(text, messageId(), receiver, sender);
+ }
+}
+
+int KGameChat::messageId() const
+{ return d->mMessageId; }
+
+bool KGameChat::isSendToAllMessage(int id) const
+{ return (id == KChatBase::SendToAll); }
+
+bool KGameChat::isToGroupMessage(int id) const
+{ return (id == d->mToMyGroup); }
+
+bool KGameChat::isToPlayerMessage(int id) const
+{
+kdDebug() << id << endl;
+kdDebug() << d->mSendId2PlayerId.contains(id) << endl;
+return d->mSendId2PlayerId.contains(id); }
+
+QString KGameChat::sendToPlayerEntry(const QString& name) const
+{ return i18n("Send to %1").arg(name); }
+
+int KGameChat::playerId(int id) const
+{
+ if (!isToPlayerMessage(id)) {
+	return -1;
  }
 
-// sendMessage(fromPlayer, text, toPlayer, toGroup);//TODO
- sendMessage(fromPlayer, text, 0, toGroup);//TODO
+ return d->mSendId2PlayerId[id];
+}
+
+int KGameChat::sendingId(int playerId) const
+{
+ QMap<int, int>::Iterator it;
+ for (it = d->mSendId2PlayerId.begin(); it != d->mSendId2PlayerId.end(); ++it) {
+	if (it.data() == playerId) {
+		return it.key();
+	}
+ }
+ return -1;
 }
 
 const QString& KGameChat::fromName() const
 { return d->mFromPlayer ? d->mFromPlayer->name() : QString::null; }
 
+bool KGameChat::hasPlayer(int id) const
+{
+ return (sendingId(id) != -1);
+}
+
 void KGameChat::setFromPlayer(KPlayer* p)
 {
-//TODO
  if (d->mFromPlayer) {
-//	mCombo->changeItem(p->group(), SEND_TO_GROUP_ID);
+	changeSendingEntry(p->group(), d->mToMyGroup);
  } else {
-//	mCombo->insertItem(i18n("Send to my group (\"%1\")").arg(p->group()), SEND_TO_GROUP_ID);
+	if (d->mToMyGroup != -1) {
+		kdWarning(11001) << "send to my group exists already - removing" << endl;
+		removeSendingEntry(d->mToMyGroup);
+	}
+	d->mToMyGroup = nextId();
+	addSendingEntry(i18n("Send to my group (\"%1\")").arg(p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
 }
 
 
-// obsolete - will be removed *very* soon
-void KGameChat::updatePlayers()
-{
-kdError(11001) << "KGameChat::updatePlayers() is not working and shouldn't be called" << endl;
- QIntDictIterator<KPlayer> it(d->mIndex2Player);
- while (it.current()) {
-	slotRemovePlayer(it.current());
-	++it;
- }
- d->mIndex2Player.clear();
- 
-//FIXME
-// Problem: one KGame can contain several KPlayers :-(
-// But: do we want *every* of those players (including computer players) in the
-// combo box? 
-// If not: Check which player is created/resides on which KGame (via
-// KPlayer::game()) and add only one of every KGame Object. Problem: which one
-// (if more than one) ? 
-//FIXME(end)
- KGame::KGamePlayerList l = *d->mGame->playerList();
- for (KPlayer* p = l.first(); p; p = l.next()) {
-	slotAddPlayer(p);
- }
-
-}
-
-void KGameChat::setGame(KGame* g)
+void KGameChat::setKGame(KGame* g)
 {
  if (d->mGame) {
-	disconnect(g, 0, this, 0);
+	slotUnsetKGame();
  }
  d->mGame = g;
  connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)), 
@@ -171,88 +213,69 @@ void KGameChat::setGame(KGame* g)
 		this, SLOT(slotRemovePlayer(KPlayer*)));
  connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, int, int)),
 		this, SLOT(slotReceiveMessage(int, const QByteArray&, int, int)));
+ connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
  QList<KPlayer> playerList = *d->mGame->playerList();
- for (int i = 0; i < playerList.count(); i++) {
+ for (int unsigned i = 0; i < playerList.count(); i++) {
 	slotAddPlayer(playerList.at(i));
  }
 }
 
+void KGameChat::slotUnsetKGame()
+{
+//TODO: test this method!
+
+ if (!d->mGame) {
+	return;
+ }
+ disconnect(d->mGame, 0, this, 0);
+ removeSendingEntry(d->mToMyGroup);
+ QMap<int, int>::Iterator it;
+ for (it = d->mSendId2PlayerId.begin(); it != d->mSendId2PlayerId.end(); ++it) {
+	removeSendingEntry(it.data());
+ }
+}
+
 void KGameChat::slotAddPlayer(KPlayer* p)
-{ // no one will prevent you from adding one player twice!! check before calling this!
- p->disconnect(this);
- addSendingEntry(comboBoxItem(p->name()), SEND_TO_GROUP_ID);
-// mIndex2Player.insert(mCombo->count() - 1, p);
+{
+ if (hasPlayer(p->id())) {
+	kdWarning(11001) << "KGameChat: player was added before" << endl;
+	return;
+ }
+
+ int sendingId = nextId();
+ addSendingEntry(comboBoxItem(p->name()), sendingId);
+ d->mSendId2PlayerId.insert(sendingId, p->id());
  connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*))); 
- // where to put the id ?? TODO
+
+ //TODO: remove the player when the he is removed from game!!!
+
 }
 
 void KGameChat::slotRemovePlayer(KPlayer* p)
 {
- int index = -1;
- QIntDictIterator<KPlayer> it(d->mIndex2Player);
- while (it.current() && index == -1) {
-	if (it.current() == p) {
-		index = it.currentKey();
-	}
-	++it;
- }
- if (index < 0) {
+ if (!hasPlayer(p->id())) {
+	kdDebug(11001) << "KGameChat: cannot remove non-existent player" << endl;
 	return;
  }
 
- this->disconnect(p);// uff - or is it p->disconnect(this);?
-/*
- removeSendingEntry(findId(index));//FIXME
- mCombo->removeItem(index);
- mIndex2Player.remove(index);
- it.toFirst();
- while (it.current()) {
-	if (it.currentKey() > index) {
-		mIndex2Player.insert(it.currentKey() - 1, mIndex2Player[it.currentKey()]);
-		mIndex2Player.remove(it.currentKey());
-	}
-	++it;
- }*/
+ int id = sendingId(p->id());
+ removeSendingEntry(id);
+ p->disconnect(this);
+ d->mSendId2PlayerId.remove(id);
 }
 
 void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
  if (prop->id() == KGamePropertyBase::IdName) {
-	kdDebug(11001) << "new Name" << endl;
-	int index = -1;
-	QIntDictIterator<KPlayer> it(d->mIndex2Player);
-	while (it.current() && index == -1) {
-		if (it.current() == player) {
-			index = it.currentKey();
-		}
-		++it;
-	}
-	if (index < 0) {
-		return;
-	}
-	
+//	kdDebug(11001) << "new Name" << endl;
+	changeSendingEntry(player->name(), sendingId(player->id()));
 /*
 	mCombo->changeItem(comboBoxItem(player->name()), index);
  */
  } else if (prop->id() == KGamePropertyBase::IdGroup) {
  //TODO
- }
-}
-
-void KGameChat::sendMessage(int fromPlayer, const QString& text, int toPlayer, const QString& toGroup)
-{
-//TODO: toPlayer
- if (toPlayer > 0) {
-	kdDebug(11001) << "must be implemented" << endl;
- } //else if (toGroup.length() > 0) {}
-
- if (toGroup.length() > 0) {
- //TODO
-	d->mGame->sendGroupMessage(text, messageId(), fromPlayer, toGroup);
- } else {
-	d->mGame->sendMessage(text, messageId(), 0, fromPlayer);
  }
 }
 
@@ -275,8 +298,5 @@ void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, int rece
 
  addMessage(sender, text);
 }
-
-int KGameChat::messageId() const
-{ return d->mMessageId; }
 
 #include "kgamechat.moc"

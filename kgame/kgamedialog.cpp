@@ -398,7 +398,6 @@ void KGameDialog::addChatWidget(int chatMsgId)
  }
  QHGroupBox* b = new QHGroupBox(i18n("Chat"), d->mGamePage);
  d->mChat = new KGameChat(d->mGame, chatMsgId, b);
- d->mChat->setGame(d->mGame);
 }
 
 void KGameDialog::addConnectionList()

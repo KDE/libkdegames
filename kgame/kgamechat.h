@@ -55,26 +55,36 @@ public:
 
 	~KGameChat();
 
+	enum SendingIds {
+		SendToGroup = 1
+	};
+
 	/**
 	 * TODO: doku
 	 * @param player The player of this widget
 	 **/
 	void setFromPlayer(KPlayer* player);
 
-	void setGame(KGame* g);
-
 	/**
-	 * @return The name that will be shown for messages from this widget. Either the
-	 * string that was set by @ref setFromName or the name of the player
-	 * that was set by @ref setFromPlayer
+	 * Set the @ref KGame object for this chat widget. All messages will be
+	 * sent through this object. You don't have to implement any send
+	 * functions, just call this function, call @ref setFromPlayer and be
+	 * done :-)
+	 * @param g The @ref KGame object the messages will be sent through
 	 **/
-	virtual const QString& fromName() const;
+	void setKGame(KGame* g);
 
 	/**
 	 * @return The id of the messages produced by KGameChat. The id will be
 	 * used in @ref KGame as parameter msgid in the method @ref KGame::sendMessage
 	 **/
 	int messageId() const;
+
+	/**
+	 * reimplemented from @ref KChatBase
+	 * @return @ref KPlayer::name() for the player set by @ref setFromPlayer
+	 **/
+	virtual const QString& fromName() const;
 
 
 public slots:
@@ -85,30 +95,86 @@ public slots:
 
 protected:
 	/**
-	 * The user entered a message which has to be sent. Replace this for
-	 * non-KGame use (not yet working)
-	 *
-	 * @param text The message to be sent
-	 * @param toPlayer The id of tha player this message is for (see @ref
-	 * addPlayer()) or -1 for broadcast
-	 * @param toGroup The group this message is for or QString::null for
-	 * broadcast
-	 * @param fromPlayer the id of the local player - see @ref
-	 * setFromPlayer. -1 if none has been set
+	 * @param id The ID of the sending entry, as returned by @ref
+	 * KChatBase::sendingEntry
+	 * @return True if the entry "send to all" was selected, otherwise false
 	 **/
-	virtual void sendMessage(int fromPlayer, const QString& text, int toPlayer, const QString& toGroup);
+	bool isSendToAllMessage(int id) const;
+
+	/**
+	 * Used to indicate whether a message shall be sent to a group of
+	 * players. Note that this was not yet implemented when this doc was
+	 * written so this description might be wrong. (FIXME)
+	 * @param id The ID of the sending entry, as returned by @ref
+	 * KChatBase::sendingEntry
+	 * @return True if the message is meant to be sent to a group (see @ref
+	 * KPlayer::group), e.g. if "send to my group" was selected.
+	 **/
+	bool isToGroupMessage(int id) const;
+	
+
+	/**
+	 * Used to indicate whether the message shall be sent to a single player
+	 * only. Note that you can also call @ref isSendToAllMessage and @ref
+	 * isToGroupMessage - if both return false it must be a player message.
+	 * This behaviour might be changed later - so don't depend on it.
+	 *
+	 * See also @ref toPlayerId
+	 * @param id The ID of the sending entry, as returned by @ref
+	 * KChatBase::sendingEntry
+	 * @return True if the message shall be sent to a special player,
+	 * otherwise false.
+	 **/
+	bool isToPlayerMessage(int id) const;
+
+	/**
+	 * @param id The ID of the sending entry, as returned by @ref
+	 * KChatBase::sendingEntry
+	 * @return The ID of the player (see @ref KPlayer::id) the sending entry
+	 * belongs to. Note that the parameter id is an id as returned by ref
+	 * KChatBase::sendingEntry and the id this method returns is a @ref
+	 * KPlayer ID! If @ref isToPlayerMessage returns false this method
+	 * returns -1
+	 **/
+	int playerId(int id) const;
+
+	/**
+	 * @param playerId The ID of the @ref KPlayer object
+	 * @return The ID of the sending entry (see @ref KChatBase) or -1 if
+	 * the player id was not found.
+	 **/
+	int sendingId(int playerId) const;
+
+	/**
+	 * @return True if the player with this ID was added before (see @ref
+	 * slotAddPlayer)
+	 **/
+	bool hasPlayer(int id) const;
+
+	/**
+	 * @param name The name of the added player
+	 * @return A string that will be added as sending entry in @ref
+	 * KChatBase. By default this is "send to name" where name is the name
+	 * that you specify. See also @ref KChatBase::addSendingEntry
+	 **/
+	virtual QString sendToPlayerEntry(const QString& name) const;
+
 
 protected slots:
+	/**
+	 * Unsets a @ref KGame object that has been set using @ref setKGame
+	 * before. You don't have to call this - this is usually done
+	 * automatically.
+	 **/
+	void slotUnsetKGame();
+
+
 	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
 	void slotAddPlayer(KPlayer*);
 	void slotRemovePlayer(KPlayer*);
 
 protected:
 	virtual void returnPressed(const QString&);
-	/**
-	 * obsolete
-	 **/
-	void updatePlayers();
 
 private:
 	void init(KGame* g, int msgid);

@@ -135,7 +135,7 @@ public:
   /** 
    * send a command to advanced properties like arrays
    */
-  virtual void command(QDataStream & s,int cmd) {};
+  virtual void command(QDataStream & ,int ) {};
 
 	/**
 	 * @return The id of this property

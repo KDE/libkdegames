@@ -908,6 +908,8 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
 
 bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const QString& group)
 {
+// AB: group must not be i18n'ed!! we should better use an id for group and use
+// a groupName() for the name // FIXME
  KPlayer *player;
  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
    if (player && player->group()==group) {
