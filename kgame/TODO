@@ -38,6 +38,11 @@
 - 25.05.2001: connect to the signal KGameNetwork::connectionBroken and start a
               local non-network game
 - 25.05.2001: rewrite KGame::slotClientDisconnected
+- 03.06.2001: can KGameNetwork::sendSystemMessage made protected (maybe using
+              friends)? sendSystenMessage AND sendMessage is very confusing to
+              the user... same applies to e.g. sendProperty which is internal
+- 03.06.2001: can we translate the group of a KPlayer? Probably not as there are
+              no international connections possible then... maybe a group id?
 
  ********************************************************************
   

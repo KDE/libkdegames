@@ -121,35 +121,40 @@ public:
      **/
     bool stopServerConnection();
 
+    //AB: is this now internal only? Can we make it protected (maybe with
+    //friends)? sendSystemMessage AND sendMessage is very confusing to the
+    //user.
     /**
-     * Sends an integer command  over the network. This is used to synchronise
-     * function calls between the clients
+     * Sends a network message msg with a given msg id msgid to all clients.
+     * Use this to communicate with KGame (e.g. to add a player ot to configure
+     * the game - usually not necessary). 
      *
-     * @param msgid to identify the data
-     * @param data the integer data
-     * @param client=0 if given then send only to a given client
+     * For your own messages use @ref sendMessage instead! This is mostly
+     * internal!
      *
-     * @return error status
+     * @param buffer the message which will be send. See messages.txt for contents
+     * @param msgid an id for this message. See @ref
+     * KGameMessage::GameMessageIds
+     * @param receiver the @ref KGame / @ref KPlayer this message is for. See
+     * @ref KGameMessage::calcMessageId to create this parameter
+     * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
+     * you). See @ref KGameMessage::calcMessageId to create this parameter. You
+     * probably want to leave this 0, then KGameNetwork will create the correct
+     * value for you. You might want to use this if you send a message from a
+     * specific player.
+     * @return true if worked
+     */
+    bool sendSystemMessage(const QByteArray& buffer, int msgid, int receiver=0, int sender=0);
+
+    /**
+     * This is an overloaded member function, provided for convenience.
      **/
     bool sendSystemMessage(int data, int msgid, int receiver=0,int sender=0);
 
     /**
-     * Sends a network message msg with a given msg id msgid to either all clients
-     * or a given client or all clients but a given client.
-     * Use this to communicate with KGame (e.g. to add a player ot to cunfigure
-     * the game - usually not necessary). For your own messages use @ref
-     * sendMessage instead!
-     *
-     * @param msg the message which will be send. See messages.txt for contents
-     * @param msgid an id for this message
-     * @param receiver 0:broadcast, lower 9 bits=0 then to game<<10, otherwise to player
-     * @param sender same as receiver
-     * @param playerid send from or to this player id ... has to be improved
-     * @return true if worked
-     */
+     * This is an overloaded member function, provided for convenience.
+     **/
     bool sendSystemMessage(const QDataStream &msg, int msgid, int receiver=0, int sender=0);
-
-    bool sendSystemMessage(const QByteArray& a, int msgid, int receiver=0, int sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
@@ -158,49 +163,69 @@ public:
 
     /**
      * sends a network message with an error text
+     * @param error The error code
+     * @param text The error message
+     * @param receiver the @ref KGame / @ref KPlayer this message is for. See
+     * @ref KGameMessage::calcMessageId to create this parameter
+     * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
+     * you). See @ref KGameMessage::calcMessageId to create this parameter. You
+     * probably want to leave this 0, then KGameNetwork will create the correct
+     * value for you. You might want to use this if you send a message from a
+     * specific player.
      **/
     void sendError(int error, const QString& text,int receiver=0,int sender=0);
 
-
     /**
      * Are we still offer offering server connections - only for game MASTER
-     *
      * @return true/false
      **/
     bool isOfferingConnections() const;
 
-
     /**
      * Application cookie. this idendifies the game application. It
      * help to distinguish between e.g. KPoker and KWin4
-     *
      * @return the application cookie
      **/
     int cookie() const;
 
-
     /**
-     * Sends a network message msg with a given msg id msgid to either all clients
-     * or a given client or all clients but a given client. You want to use this
-     * to send a message to the clients.
+     * Send a network message msg with a given message ID msgid to all clients.
+     * You want to use this to send a message to the clients.
+     *
+     * Note that a message is always sent to ALL clients! This is necessary so
+     * that all clients always have the same data and can easily be changed from
+     * network to non-network without restarting the game. If you want a
+     * specific @ref KGame / @ref KPlayer to react to the message use the
+     * receiver and sender parameters. See @ref KGameMessage::calsMessageId
      *
      * SendMessage differs from @ref sendSystemMessage only by the msgid parameter.
      * @ref sendSystemMessage is thought as a KGame only mehtod while
      * sendMessage is for public use. The msgid paramter will be
-     * +=KGameMessages::IdUser and in @ref KGame::signalNetworkData msgid will
-     * be -= KGameMessages::IdUser again, so that one can easily distinguish
+     * +=KGameMessage::IdUser and in @ref KGame::signalNetworkData msgid will
+     * be -= KGameMessage::IdUser again, so that one can easily distinguish
      * between system and user messages.
      *
      * Use @ref sendSystemMessage to comunicate with KGame (e.g. by adding a
-     * player) and sendMessage for your own user message
+     * player) and sendMessage for your own user message.
      *
      * Note: a player should send messages through a @ref KGameIO!
      *
-     * @param msg the message which will be send. See messages.txt for contents
-     * @param msgid an id for this message
-     * @param receiver broadcast to all clients if 0 otherwise just send to one client
-     * @param sender The sender of the message
+     * @param buffer the message which will be send. See messages.txt for contents
+     * @param msgid an id for this message. See @ref
+     * KGameMessage::GameMessageIds
+     * @param receiver the @ref KGame / @ref KPlayer this message is for. See
+     * @ref KGameMessage::calcMessageId to create this parameter
+     * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
+     * you). See @ref KGameMessage::calcMessageId to create this parameter. You
+     * probably want to leave this 0, then KGameNetwork will create the correct
+     * value for you. You might want to use this if you send a message from a
+     * specific player.
      * @return true if worked
+     **/
+    bool sendMessage(const QByteArray& buffer, int msgid, int receiver=0, int sender=0);
+
+    /**
+     * This is an overloaded member function, provided for convenience.
      **/
     bool sendMessage(const QDataStream &msg, int msgid, int receiver=0, int sender=0);
 
@@ -217,13 +242,17 @@ public:
     /**
      * Register a KGameIO devices as message listener. This means this
      * device will get all messages to this game client forwarded
-     *
-     * @param The client
+     * @param l The client
+     * @return TRUE if the listener was successfully added to the list,
+     * otherwise FALSE
      */
     bool registerListener(KGameIO *l);
 
     /**
-     * Unregister a KGameIO device as messager listner.
+     * Unregister a @ref KGameIO device as messager listner.
+     * @param l The @ref KGameIO object to be unregistered
+     * @return TRUE if the listener was successfully removed from the list,
+     * otherwise FALSE
      */
     bool unregisterListener(KGameIO *l);
 

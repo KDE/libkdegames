@@ -45,10 +45,8 @@
 #include "kplayer.h"
 #include "kgamemessage.h"
 
-#define READ_BUFFER_SIZE   1024   // and automatically multiples
 
-
-
+//#define READ_BUFFER_SIZE   1024   // and automatically multiples
 
 class KGameProcessIOPrivate
 {

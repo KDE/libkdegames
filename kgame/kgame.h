@@ -29,9 +29,10 @@
 #include <qstring.h>
 #include <qlist.h>
 #include <qintdict.h>
-#include <krandomsequence.h>
 
 #include "kgamenetwork.h"
+
+class KRandomSequence;
 
 class KPlayer;
 class KGamePropertyBase;
@@ -79,7 +80,6 @@ public:
      */
     virtual void Debug();
 
-
     /**
      * Game status: kind of unused at the moment
      */
@@ -100,7 +100,6 @@ public:
 
     /**
      * Returns a list of all inactive players 
-     *
      * @return the list of players
      */
     KGamePlayerList *inactivePlayerList() {return &mInactivePlayerList;}
@@ -111,8 +110,14 @@ public:
     const KGamePlayerList *inactivePlayerList() const {return &mInactivePlayerList;}
     
     /**
+     * Returns a pointer to the game's @ref KRandomSequence. This sequence is
+     * identical for all network players!
+     * @return @ref KRandomSequence pointer
+     */
+    KRandomSequence *random() {return mRandom;}
+
+    /**
      * Is the game running
-     *
      * @return true/false
      */
     bool isRunning() const;
@@ -120,12 +125,10 @@ public:
     // Player handling
     /**
      * Returns the player object for a given player id
-     *
      * @param id Player id
      * @return player object
      */
     KPlayer *findPlayer(int id) const;
-
 
     /**
      * Note that @ref KPlayer::save must be implemented properly, as well as
@@ -170,36 +173,31 @@ public:
     /**
      * Set the maximal number of players. After this is
      * reached no more players can be added
-     *
      * @param maxnumber maximal number of players
-     * @param transmit command over network
      */
     void setMaxPlayers(uint maxnumber);
+    
     /**
      * What is the maximal number of players?
-     *
      * @return maximal number of players
      */
     int maxPlayers() const;
+    
     /**
      * Set the minimal number of players. A game can not be started
-     * withless player resp. is paused when already running
-     *
+     * with less player resp. is paused when already running
      * @param minnumber minimal number of players
-     * @param transmit command over network
      */
     void setMinPlayers(uint minnumber);
 
     /**
      * What is the minimal number of players?
-     *
      * @return minimal number of players
      */
     uint minPlayers() const;
 
     /**
      * Returns how many players are plugged into the game
-     *
      * @return number of players
      */
     uint playerCount() const;
@@ -237,6 +235,7 @@ public:
      * @return true?
      */
     virtual bool load(QDataStream &stream);
+    
     /**
      * Save a game to a file OR to network. Otherwise the same as 
      * the load function
@@ -266,13 +265,14 @@ public:
      * Global cookies might be listed on http://games.kde.org/cookies.html
      */
     int cookie();
-    //
+
     /**
      * returns the game status, ie running,pause,ended,...
      *
      * @return game status
      */
     int gameStatus() const;
+    
     /**
      * sets the game status
      *
@@ -281,17 +281,19 @@ public:
      */
     virtual void setGameStatus(int status);
 
-    //AB: docu: see KPlayer
+    //AB: docu: see @ref KPlayer
     bool addProperty(KGamePropertyBase* data);
 
     /**
-     * Caled by KGameProperty only! Internal function!
+     * Called by @ref KGameProperty only! Internal function!
      **/
     void sendProperty(QDataStream& s);
+
     /**
-      * Called by KGameProperty only! Internal function!
+      * Called by @ref KGameProperty only! Internal function!
      **/
     void emitSignal(KGamePropertyBase *me);
+
     /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
@@ -300,26 +302,19 @@ public:
     KGamePropertyBase* findProperty(int id) const;
 
     /**
-     * Returns a pointer to the game's KRandomSequence. This sequence is
-     * identical for all network players!
+     * See @ref KGameNetwork::sendMessage
      *
-     * @return KRandomSequence pointer
-     */
-    KRandomSequence *random() {return &mRandom;}
-
-
-    /**
-     * Sends a network message msg with a given msg id msgid to all players of
-     * a given group
-     *
+     * Send a network message msg with a given message ID msgid to all players of
+     * a given group (see @ref KPlayer::group)
      * @param msg the message which will be send. See messages.txt for contents
      * @param msgid an id for this message
      * @param group the group of the receivers
      * @return true if worked
      */
-    bool sendGroupMessage(QDataStream &msg, int msgid, int sender, const QString& group);
+    bool sendGroupMessage(const QByteArray& msg, int msgid, int sender, const QString& group);
+    bool sendGroupMessage(const QDataStream &msg, int msgid, int sender, const QString& group);
+    bool sendGroupMessage(int msg, int msgid, int sender, const QString& group);
     bool sendGroupMessage(const QString& msg, int msgid, int sender, const QString& group);
-
 
     /**
      * This will either forward an incoming message to a specified player 
@@ -378,10 +373,7 @@ signals:
      * @param player the player who did the move
      */
     void signalPlayerInput(QDataStream &msg,KPlayer *player);
-    /**
-     * unused
-     */
-    void signalMessage(QDataStream &msg);
+    
     /**
      * the game will be loaded from the given stream. We better
      * fill our data.
@@ -389,6 +381,7 @@ signals:
      * @param stream the load stream
      */
     void signalLoad(QDataStream &stream);
+    
     /**
      * the game will be saved to the given stream. We better
      * put our data.
@@ -411,17 +404,18 @@ signals:
      * the best possible method to do this is unclear...
      */
     void signalMessageUpdate(int msgid,int receiver,int sender);
+    
     /**
      * a player left the game because of a broken connection!
      *
      * @param player the player who left the game
      */
     void signalPlayerLeftGame(KPlayer *player);
+    
     /**
      * a player joined the game
      *
      * @param player the player who joined the game
-     *
      */
     void signalPlayerJoinedGame(KPlayer *player);
 
@@ -440,9 +434,8 @@ signals:
     /**
     * This signal is emmited if a player property changes its value and
     * the property is set to notify this change
-    *
     */
-    void signalPropertyChanged(KGamePropertyBase *property,KGame *me);
+    void signalPropertyChanged(KGamePropertyBase *property, KGame *me);
 
     /**
      * Is emitted after a call to gameOver() returns a nonm zero
@@ -450,11 +443,9 @@ signals:
      *
      * @param status the return code of gameOver()
      * @param current the player who did the last move
-     * @param a pointer to the KGame object
+     * @param me a pointer to the KGame object
      */
-    void signalGameOver(int status,KPlayer *current,KGame *me);
-
-
+    void signalGameOver(int status,KPlayer *current, KGame *me);
 
 protected:
     /**
@@ -604,8 +595,9 @@ private:
      **/
     void savePlayer(QDataStream& stream,KPlayer* player, int receiver=0);
     
+    
 private:
-    KRandomSequence mRandom;
+    KRandomSequence* mRandom;
 
     KGamePlayerList mPlayerList;
     KGamePlayerList mInactivePlayerList;

@@ -234,6 +234,9 @@ bool KGameNetwork::sendMessage(const QString &msg, int msgid, int receiver, int 
 bool KGameNetwork::sendMessage(const QDataStream &msg, int msgid, int receiver, int sender)
 { return sendSystemMessage(msg, msgid+KGameMessage::IdUser, receiver, sender); }
 
+bool KGameNetwork::sendMessage(const QByteArray &msg, int msgid, int receiver, int sender)
+{ return sendSystemMessage(msg, msgid+KGameMessage::IdUser, receiver, sender); }
+
 void KGameNetwork::sendError(int error,const QString& text,int receiver,int sender)
 {
  QByteArray buffer;

@@ -28,12 +28,13 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include <kdebug.h>
-#include <klocale.h>
-
 #include <qbuffer.h>
 #include <qtimer.h>
 #include <qqueue.h>
+
+#include <klocale.h>
+#include <krandomsequence.h>
+#include <kdebug.h>
 
 #include "kgameproperty.h"
 #include "kplayer.h"
@@ -89,7 +90,8 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d->mGameStatus.setValue(End);
  d->mUniquePlayerNumber=0;
  d->mCookie=cookie;
- mRandom.setSeed(0);
+ mRandom = new KRandomSequence;
+ mRandom->setSeed(0);
 
  connect(this, SIGNAL(signalClientConnected(Q_UINT32)),
  	this, SLOT(slotClientConnected(Q_UINT32)));
@@ -109,6 +111,7 @@ KGame::~KGame()
  kdDebug(11001) << "DESTRUCT(KGame=" << this <<")" << endl;
  Debug();
  reset();
+ delete mRandom;
  delete d;
  kdDebug(11001) << "DESTRUCT(KGame=" << this <<") done" << endl;
 }
@@ -660,13 +663,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      int newseed;
      stream >> newseed;
      kdDebug(11001) << "CLIENT: setting random seed to " << newseed << endl;
-     mRandom.setSeed(newseed);
-   }
-   break;
-   case KGameMessage::IdMessage: // A user defined message arrived
-   {
-     kdDebug(11001) << "KGame::slotNetworkTransmision:: Got IdMessage -> emmiting signal "  << endl;
-     emit signalMessage(stream);
+     mRandom->setSeed(newseed);
    }
    break;
    default:
@@ -791,9 +788,9 @@ void KGame::setupGame(int sender)
 
 void KGame::syncRandom()
 {
- int newseed=(int)mRandom.getLong(65535);
+ int newseed=(int)mRandom->getLong(65535);
  sendSystemMessage(newseed,KGameMessage::IdSyncRandom); // Broadcast
- mRandom.setSeed(newseed);
+ mRandom->setSeed(newseed);
 }
 
 void KGame::Debug()
@@ -868,16 +865,19 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  sendSystemMessage(streamGS, KGameMessage::IdSetupGame, receiver);
 }
 
-bool KGame::sendGroupMessage(QDataStream &msg, int msgid, int sender, const QString& group)
+bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const QString& group)
 {
  KPlayer *player;
  for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
    if (player && player->group()==group) {
-     sendSystemMessage(msg,msgid,KGameMessage::calcMessageId(0,player->id()), sender);
+     sendMessage(msg,msgid,KGameMessage::calcMessageId(0,player->id()), sender);
    }
  }
  return true;
 }
+
+bool KGame::sendGroupMessage(const QDataStream &msg, int msgid, int sender, const QString& group)
+{ return sendGroupMessage(((QBuffer*)msg.device())->buffer(), msgid, sender, group); }
 
 bool KGame::sendGroupMessage(const QString& msg, int msgid, int sender, const QString& group)
 {
@@ -963,14 +963,11 @@ bool KGame::addProperty(KGamePropertyBase* data)
 { return d->mProperties.addProperty(data); }
 
 void KGame::sendPlayerProperty(QDataStream& s, int playerId)
-{
- sendSystemMessage(s, KGameMessage::IdPlayerProperty, KGameMessage::calcMessageId(0,playerId));
-}
+{ sendSystemMessage(s, KGameMessage::IdPlayerProperty, KGameMessage::calcMessageId(0,playerId)); }
+
 void KGame::sendProperty(QDataStream& s)
-{
-//  kdDebug(11001) << "KGame::sendProperty " << endl;
- sendSystemMessage(s, KGameMessage::IdGameProperty);
-}
+{ sendSystemMessage(s, KGameMessage::IdGameProperty); }
+
 void KGame::emitSignal(KGamePropertyBase *me)
 { emit signalPropertyChanged(me,this); }
 
