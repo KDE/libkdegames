@@ -1,0 +1,69 @@
+#! /bin/sh
+
+cd $1
+
+convert -format png -geometry "72x96" 01c.gif 1.png
+convert -format png -geometry "72x96" 01s.gif 2.png
+convert -format png -geometry "72x96" 01h.gif 3.png
+convert -format png -geometry "72x96" 01d.gif 4.png
+
+convert -format png -geometry "72x96" 13c.gif 5.png
+convert -format png -geometry "72x96" 13s.gif 6.png
+convert -format png -geometry "72x96" 13h.gif 7.png
+convert -format png -geometry "72x96" 13d.gif 8.png
+
+convert -format png -geometry "72x96" 12c.gif 9.png
+convert -format png -geometry "72x96" 12s.gif 10.png
+convert -format png -geometry "72x96" 12h.gif 11.png
+convert -format png -geometry "72x96" 12d.gif 12.png
+
+convert -format png -geometry "72x96" 11c.gif 13.png
+convert -format png -geometry "72x96" 11s.gif 14.png
+convert -format png -geometry "72x96" 11h.gif 15.png
+convert -format png -geometry "72x96" 11d.gif 16.png
+
+convert -format png -geometry "72x96" 10c.gif 17.png
+convert -format png -geometry "72x96" 10s.gif 18.png
+convert -format png -geometry "72x96" 10h.gif 19.png
+convert -format png -geometry "72x96" 10d.gif 20.png
+
+convert -format png -geometry "72x96" 09c.gif 21.png
+convert -format png -geometry "72x96" 09s.gif 22.png
+convert -format png -geometry "72x96" 09h.gif 23.png
+convert -format png -geometry "72x96" 09d.gif 24.png
+
+convert -format png -geometry "72x96" 08c.gif 25.png
+convert -format png -geometry "72x96" 08s.gif 26.png
+convert -format png -geometry "72x96" 08h.gif 27.png
+convert -format png -geometry "72x96" 08d.gif 28.png
+
+convert -format png -geometry "72x96" 07c.gif 29.png
+convert -format png -geometry "72x96" 07s.gif 30.png
+convert -format png -geometry "72x96" 07h.gif 31.png
+convert -format png -geometry "72x96" 07d.gif 32.png
+
+convert -format png -geometry "72x96" 06c.gif 33.png
+convert -format png -geometry "72x96" 06s.gif 34.png
+convert -format png -geometry "72x96" 06h.gif 35.png
+convert -format png -geometry "72x96" 06d.gif 36.png
+
+convert -format png -geometry "72x96" 05c.gif 37.png
+convert -format png -geometry "72x96" 05s.gif 38.png
+convert -format png -geometry "72x96" 05h.gif 39.png
+convert -format png -geometry "72x96" 05d.gif 40.png
+
+convert -format png -geometry "72x96" 04c.gif 41.png
+convert -format png -geometry "72x96" 04s.gif 42.png
+convert -format png -geometry "72x96" 04h.gif 43.png
+convert -format png -geometry "72x96" 04d.gif 44.png
+
+convert -format png -geometry "72x96" 03c.gif 45.png
+convert -format png -geometry "72x96" 03s.gif 46.png
+convert -format png -geometry "72x96" 03h.gif 47.png
+convert -format png -geometry "72x96" 03d.gif 48.png
+
+convert -format png -geometry "72x96" 02c.gif 49.png
+convert -format png -geometry "72x96" 02s.gif 50.png
+convert -format png -geometry "72x96" 02h.gif 51.png
+convert -format png -geometry "72x96" 02d.gif 52.png
+
