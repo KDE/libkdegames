@@ -20,6 +20,7 @@
 #include <kstdgameaction.h>
 #include <klocale.h>
 #include <kaction.h>
+#include <kstdaccel.h>
 
 KStdGameAction::KStdGameAction()
 {
