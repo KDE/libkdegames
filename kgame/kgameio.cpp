@@ -259,6 +259,14 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
   }
 }
 
+KGameMouseIO::~KGameMouseIO()
+{
+ if (parent()) 
+ {
+   parent()->removeEventFilter(this);
+ }
+}
+
 int KGameMouseIO::rtti() const { return MouseIO; }
 
 void KGameMouseIO::setMouseTracking(bool b)
@@ -308,6 +316,14 @@ KGameKeyIO::KGameKeyIO(QWidget *parent)
     kdDebug(11001) << "Key Event filter installed" << endl;
     parent->installEventFilter(this);
   }
+}
+
+KGameKeyIO::~KGameKeyIO()
+{
+ if (parent()) 
+ {
+   parent()->removeEventFilter(this);
+ }
 }
 
 int KGameKeyIO::rtti() const { return KeyIO; }
