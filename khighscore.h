@@ -32,7 +32,7 @@ class KHighscorePrivate;
  * This is the KDE class for saving and reading highscore tables. It offers the
  * possibility for system-wide highscore tables (configure with e.g.
  * --enable-highscore=/var/games) and a theoretically unlimited number of
- * entries. 
+ * entries.
  *
  * You can specify different "keys" for an entry - just like the @ref KConfig
  * keys. But it will be prefixed with the number of the entry. For example you
@@ -53,7 +53,7 @@ class KHighscorePrivate;
  * table->setHighscoreGroup("Easy");
  * // write the highscores for level "easy" to the table
  * writeEasyHighscores(table);
- * 
+ *
  * table->setHighscore("Player_1");
  * // write player specific highscores to the table
  * writePlayerHighscores(table);
@@ -66,7 +66,7 @@ class KHighscorePrivate;
  * table->setGroup(group);
  * writeHighscore(table, player, level);
  * </pre>
- * 
+ *
  * Also note that yout MUST NOT mark the key or the group for translation! I.e. don't use
  * i18n() for the keys or groups! Here is the code to read the above written entry:
  * <pre>
@@ -75,7 +75,7 @@ class KHighscorePrivate;
  * Easy, what?
  * @short Class for managing highscore tables
  * @author Andreas Beckermann <b_mann@gmx.de>
- **/ 
+ **/
 class KHighscore : public QObject
 {
 	Q_OBJECT
@@ -93,10 +93,17 @@ public:
 	void writeEntry(int entry, const QString& key, const QString& value);
 
 	/**
-	 * This is an overloaded member function, provided for convinience.
+	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
 	void writeEntry(int entry, const QString& key, int value);
+
+    /**
+	 * This is an overloaded member function, provided for convenience.
+	 * It differs from the above function only in what argument(s) it accepts.
+     * See @ref KConfigBase documentation for allowed QVariant::Type.
+	 **/
+	void writeEntry(int entry, const QString& key, const QVariant &value);
 
 	/**
 	 * Reads an entry from the highscore table.
@@ -123,6 +130,15 @@ public:
 	 * pair doesn't exist
 	 **/
 	int readNumEntry(int entry, const QString& key, int pDefault = -1) const;
+
+    /**
+     * Read a QVariant entry.
+     * See @ref KConfigBase documentation for allowed QVariant::Type.
+     *
+     * @return the value of this entry+key pair or pDefault if the entry+key
+     * pair doesn't exist or
+     */
+    QVariant readPropertyEntry(int entry, const QString &key, const QVariant &pDefault) const;
 
 	/**
 	 * @return True if the highscore table conatins the entry/key pair,
@@ -151,7 +167,7 @@ public:
 
 	/**
 	 * Writes a list of entries to the highscore table.
-	 * 
+	 *
 	 * The first entry is prefixed with "1". Using this method is a short
 	 * way of calling writeEntry(i, key, list[i]) from i = 1 to
 	 * list.count()
@@ -176,7 +192,7 @@ public:
 	/**
 	 * Set the new highscore group. The group is being prefixed with
 	 * "KHighscore_" in the table.
-	 * @param groupname The new groupname. E.g. use "easy" for the easy 
+	 * @param groupname The new groupname. E.g. use "easy" for the easy
 	 * level of your game. If you use QString::null (the default) the
 	 * default group is used.
 	 **/
@@ -195,7 +211,7 @@ protected:
 	 * prefix the value from @ref highscoreGroup() with "KHighscore_"
 	 **/
 	QString group() const;
-		
+
 	/**
 	 * @return A pointer to the @ref KConfig object to be used. This is
 	 * either kapp->config() (default) or a @ref KSimpleConfig object (if

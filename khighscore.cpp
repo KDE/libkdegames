@@ -35,7 +35,7 @@ public:
 	{
 		mConfig = 0;
 	}
-	
+
 	KConfig* mConfig;
 	QString group;
 };
@@ -57,7 +57,7 @@ KHighscore::~KHighscore()
 }
 
 KConfig* KHighscore::config() const
-{ 
+{
  #ifdef HIGHSCORE_DIRECTORY
 	if (!d->mConfig) {
 		//AB: is fromLatin1 correct? Better fromLocal8Bit? don't know...
@@ -72,51 +72,55 @@ KConfig* KHighscore::config() const
  #endif
 }
 
-void KHighscore::writeEntry(int entry, const QString& key, const QString& value)
+void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)
 {
  // save the group in case that we are on kapp->config()
- QString origGroup = config()->group();
+ KConfigGroupSaver cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- config()->setGroup(group());
- config()->writeEntry(confKey, value);
- config()->setGroup(origGroup);
+ cg.config()->writeEntry(confKey, value);
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, int value)
-{ writeEntry(entry, key, QString::number(value)); }
+{
+ // save the group in case that we are on kapp->config()
+ KConfigGroupSaver cg(config(), group());
+ QString confKey = QString("%1_%2").arg(entry).arg(key);
+ cg.config()->writeEntry(confKey, value);
+}
+
+void KHighscore::writeEntry(int entry, const QString& key, const QString &value)
+{
+ KConfigGroupSaver cg(config(), group());
+ QString confKey = QString("%1_%2").arg(entry).arg(key);
+ cg.config()->writeEntry(confKey, value);
+}
+
+QVariant KHighscore::readPropertyEntry(int entry, const QString& key, const QVariant& pDefault) const
+{
+ KConfigGroupSaver cg(config(), group());
+ QString confKey = QString("%1_%2").arg(entry).arg(key);
+ return cg.config()->readPropertyEntry(confKey, pDefault);
+}
 
 QString KHighscore::readEntry(int entry, const QString& key, const QString& pDefault) const
 {
- // save the group in case that we are on kapp->config()
- QString origGroup = config()->group();
- config()->setGroup(group());
- QString value;
- if (hasEntry(entry, key)) {
-	QString confKey = QString("%1_%2").arg(entry).arg(key);
-	value = config()->readEntry(confKey);
- } else {
-	value = pDefault;
- }
- config()->setGroup(origGroup);
- return value;
+ KConfigGroupSaver cg(config(), group());
+ QString confKey = QString("%1_%2").arg(entry).arg(key);
+ return cg.config()->readEntry(confKey, pDefault);
 }
 
 int KHighscore::readNumEntry(int entry, const QString& key, int pDefault) const
 {
- QString v = readEntry(entry, key, QString::number(pDefault));
- bool ok;
- int value = v.toInt(&ok);
- return ok ? value : pDefault;
+ KConfigGroupSaver cg(config(), group());
+ QString confKey = QString("%1_%2").arg(entry).arg(key);
+ return cg.config()->readNumEntry(confKey, pDefault);
 }
 
 bool KHighscore::hasEntry(int entry, const QString& key) const
 {
- QString origGroup = config()->group();
+ KConfigGroupSaver cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- config()->setGroup(group());
- bool value = config()->hasKey(confKey);
- config()->setGroup(origGroup);
- return value;
+ return cg.config()->hasKey(confKey);
 }
 
 QStringList KHighscore::readList(const QString& key, int lastEntry) const
