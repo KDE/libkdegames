@@ -41,8 +41,8 @@
 #include <kdebug.h>
 #include <ksimpleconfig.h>
 #include <qpixmap.h>
+#include <assert.h>
 
-#define KCARD_DECKPATH QString::fromLatin1("carddecks/decks/")
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
 #define KCARD_DEFAULTCARD QString::fromLatin1("11.png")
 #define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards1/")
@@ -82,7 +82,7 @@ int KCardDialog::getCardDeck(QString &mDeck, QString &mCarddir, QWidget *mParent
 QString KCardDialog::getDefaultDeck()
 {
     KCardDialog::init();
-    return locate("data", KCARD_DECKPATH+KCARD_DEFAULTDECK);
+    return locate("cards", QString::fromLatin1("decks/") + KCARD_DEFAULTDECK);
 }
 
 QString KCardDialog::getDefaultCardDir()
@@ -122,10 +122,6 @@ bool KCardDialog::isRandomCardDir() const
   if (randomCardDir) return randomCardDir->isChecked();
   else return false;
 }
-
-// protected
-QString KCardDialog::cardPath() const { return cCardpath; }
-void KCardDialog::setCardPath(const QString& path) { cCardpath=path; }
 
 void KCardDialog::setupDialog()
 {
@@ -230,17 +226,13 @@ void KCardDialog::setupDialog()
   // Insert card icons
   if (! (flags() & NoCards))
   {
-      file=KCARD_DEFAULTCARDDIR+KCARD_DEFAULTCARD;
-      path=KGlobal::dirs()->findResourceDir("cards",file) + KCARD_DEFAULTCARDDIR;
-
-      setCardPath(path);
-      insertCardIcons(cardPath());
+      insertCardIcons();
       cardIconView->arrangeItemsInGrid();
 
     // Set default icons if given
     if (!cardDir().isNull())
     {
-        file=cardDir()+KCARD_DEFAULTCARD;
+        file = cardDir() + KCARD_DEFAULTCARD;
         QPixmap pixmap(file);
         pixmap = pixmap.xForm(m);
         cardLabel->setPixmap(pixmap);
@@ -249,33 +241,37 @@ void KCardDialog::setupDialog()
 
 }
 
-void KCardDialog::insertCardIcons(const QString& path)
+void KCardDialog::insertCardIcons()
 {
-    QDir dir;
-    QString label;
-    unsigned int i;
+    QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop", false, true);
+    kdDebug() << "insert " << list.count() << endl;
+    if (list.isEmpty())
+        return;
+
     // We shrink the icons a little
     QWMatrix m;
     m.scale(0.8,0.8);
 
-    dir.cd(path);
-    dir.setSorting(QDir::Name);
-    dir.setNameFilter("card*");
-
-    for (i=0;i<dir.count();i++)
+    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
-        label = dir[i]+ QString::fromLatin1("/") + KCARD_DEFAULTCARD;
+        KSimpleConfig cfg(*it);
 
-        QPixmap pixmap(path+label);
+        cfg.setGroup(QString::fromLatin1("KDE Backdeck"));
+        QString path = (*it).left((*it).findRev('/') + 1);
+        assert(path[path.length() - 1] == '/');
+        QPixmap pixmap(path + cfg.readEntry("Preview", "12c.png"));
+
         if (pixmap.isNull())
             continue;
-        pixmap=pixmap.xForm(m);
 
-        QIconViewItem *item= new QIconViewItem(cardIconView,dir[i],pixmap);
+        QIconViewItem *item= new QIconViewItem(cardIconView, cfg.readEntry("Name", i18n("unnamed")), pixmap);
+
         item->setDragEnabled(false);
         item->setDropEnabled(false);
         item->setRenameEnabled(false);
         item->setSelectable(true);
+
+        cardMap[item] = path;
     }
 }
 
@@ -341,11 +337,8 @@ void KCardDialog::slotCardClicked(QIconViewItem *item)
     if (item && item->pixmap())
     {
         cardLabel->setPixmap(* (item->pixmap()));
-        setCardDir(cardPath()+item->text());
-        if (cardDir().length()>0 && cardDir().right(1)!=QString::fromLatin1("/"))
-        {
-            setCardDir(cardDir() + QString::fromLatin1("/"));
-        }
+        QString path = cardMap[item];
+        setCardDir(path);
     }
 }
 

@@ -25,8 +25,6 @@ class QIconViewItem;
 class QLabel;
 class KIconView;
 
-
-
 /**
  * The KCardDialog provides a dialog for interactive carddeck selection.
  * It gives cardgames an easy to use interface to select front and
@@ -163,7 +161,7 @@ public:
     static QString getRandomDeck();
 
    /**
-    * Returns a random directory of cards in @ref cardPath()
+    * Returns a random directory of cards
     * @return A random card dir
     **/
     static QString getRandomCardDir();
@@ -238,9 +236,7 @@ public:
     static void init();
 
 protected:
-    QString cardPath() const;
-    void setCardPath(const QString& path);
-    void insertCardIcons(const QString& path);
+    void insertCardIcons();
     void insertDeckIcons();
 
     static QString getDeckName(const QString& desktop);
@@ -259,11 +255,11 @@ private:
     QCheckBox* randomDeck;
     QCheckBox* randomCardDir;
     QMap<QIconViewItem*, QString> deckMap;
+    QMap<QIconViewItem*, QString> cardMap;
 
-   // set/query variables
-   QString cDeck, cCardDir;
-   CardFlags cFlags;
-   QString cDeckpath,cCardpath;
+    // set/query variables
+    CardFlags cFlags;
+    QString cDeck, cCardDir;
 };
 
 #endif
