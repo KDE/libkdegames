@@ -279,6 +279,10 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 
 int KChatBase::sendingEntry() const
 {
+ if (!d->mCombo) {
+	kdWarning(11001) << "Cannot retrieve index from NULL combo box" << endl;
+	return -1;
+ }
  int index = d->mCombo->currentItem();
  if (d->mIndex2Id.at(index) == d->mIndex2Id.end()) {
 	kdWarning(11000) << "could not find the selected sending entry!" << endl;
