@@ -1,4 +1,9 @@
 [KDE Backdeck]
 Name=Konqi
+Name[cs]=Konqui
+Name[eo]=Konĉja
+Name[it]=Konqui
+Name[ko]=콩키
+Name[lv]=Konkvi
 Preview=11.png
 PySol=false
