@@ -1,6 +1,5 @@
 [KDE Backdeck]
 Name=Spaced
-Name[af]=GESPASIEER
 Name[az]=Boşluqlu
 Name[cs]=Vesmír
 Name[de]=Mit Abstand
@@ -14,9 +13,11 @@ Name[nl]=Ruimtelijk
 Name[no]=Rom-duell
 Name[pl]=Przestrzenny
 Name[pt]=Espacial
+Name[ru]=Один дома
 Name[sl]=Vesoljski dvoboj
 Name[sv]=Spejsad
 Name[tr]=Boşluklu
 Name[uk]=Космічний
+Name[xh]=Inikwe isithuba
 Preview=11.png
 PySol=yes

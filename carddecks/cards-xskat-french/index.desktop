@@ -1,6 +1,5 @@
 [KDE Backdeck]
 Name=French
-Name[af]=FRANSE
 Name[az]=Fransızca
 Name[bg]=Френски
 Name[br]=Galleg
@@ -37,15 +36,16 @@ Name[oc]=Franchimand
 Name[pl]=Francuski
 Name[pt_BR]=Francês
 Name[pt]=Francês
-Name[ru]=Французский
+Name[ru]=Французские
 Name[sk]=Francúzsky
 Name[sl]=francosko
 Name[sr]=Francuski
 Name[sv]=Franska
 Name[ta]=À¢¦Ãýî 
+Name[th]=ฝรั่งเศส
 Name[tr]=Fransızca
 Name[uk]=Французька
+Name[xh]=isiFrentshi
 Name[zh_CN.GB2312]=法语
-Name[zh_TW.Big5]=法語
 Preview=11.png
 PySol=yes

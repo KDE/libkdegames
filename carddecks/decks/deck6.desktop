@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Beach
-Name[af]=STRAND
 Name[az]=Çimərlik
 Name[bg]=Плаж
 Name[cs]=Pláž
@@ -16,6 +15,7 @@ Name[hu]=tengerpart
 Name[is]=Strönd
 Name[it]=Spiaggia
 Name[ko]=바닷가
+Name[lt]=Paplūdimys
 Name[lv]=Pludmale
 Name[mt]=Ramla
 Name[nl]=Strand
@@ -32,5 +32,5 @@ Name[ta]=¸¼ü¸¨Ã
 Name[tr]=Sahil
 Name[uk]=Пляж
 Name[vi]=Bãi biển 
+Name[xh]=Ulwandle
 Name[zh_CN.GB2312]=海滩
-Name[zh_TW.Big5]=沙灘

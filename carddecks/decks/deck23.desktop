@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Oasis
-Name[af]=OASE
 Name[az]=Oazis
 Name[bg]=Оазис
 Name[cs]=Oáza
@@ -13,6 +12,7 @@ Name[hu]=oázis
 Name[is]=Vin
 Name[it]=Oasi
 Name[ko]=오아시스
+Name[lt]=Oazė
 Name[lv]=Oāze
 Name[mt]=Oażi
 Name[nl]=Oase
@@ -29,5 +29,5 @@ Name[ta]=À¡¨ÄÅÉî§º¡¨Ä
 Name[tr]=Vaha
 Name[uk]=Оазис
 Name[vi]=Ốc đảo 
+Name[xh]=Indawo etyebileyo entlango enamanzi nemithi
 Name[zh_CN.GB2312]=绿洲
-Name[zh_TW.Big5]=綠州

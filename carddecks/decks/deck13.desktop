@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Copy
-Name[af]=KOPIE
 Name[az]=Köçür
 Name[bg]=Копия
 Name[cs]=Kopie
@@ -25,11 +24,11 @@ Name[no_NY]=Kopi
 Name[pl]=Kopia
 Name[pt_BR]=Cópia
 Name[pt]=Cópia
-Name[ru]=Копия
+Name[ru]=Отпечаток
 Name[sl]=Prepis
 Name[sv]=Kopia
 Name[ta]=À¢Ã¾¢
 Name[tr]=Kopyala
 Name[uk]=Копія
+Name[xh]=Khuphela
 Name[zh_CN.GB2312]=复制品
-Name[zh_TW.Big5]=複製

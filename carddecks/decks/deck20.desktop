@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Flowers
-Name[af]=BLOMME
 Name[az]=Çiçəklər
 Name[bg]=Цветя
 Name[cs]=Květiny
@@ -17,6 +16,7 @@ Name[is]=Blóm
 Name[it]=Fiori
 Name[ja]=花
 Name[ko]=꽃
+Name[lt]=Gėlės
 Name[lv]=Puķes
 Name[mt]=Fjuri
 Name[nl]=Bloemen
@@ -33,5 +33,5 @@ Name[ta]=âì¸û
 Name[tr]=Çiçekler
 Name[uk]=Квіти
 Name[vi]=Hoa 
+Name[xh]=Iintyatyambo
 Name[zh_CN.GB2312]=鲜花
-Name[zh_TW.Big5]=花

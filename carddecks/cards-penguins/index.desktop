@@ -1,6 +1,5 @@
 [KDE Backdeck]
 Name=Penguins
-Name[af]=PIKKEWYNE
 Name[az]=Pinqvinlər
 Name[bg]=Пингвини
 Name[cs]=Tučňáci
@@ -22,7 +21,7 @@ Name[nl]=Pinguins
 Name[no]=Pingviner
 Name[no_NY]=Pingvinar
 Name[pl]=Pingwiny
-Name[pt_BR]=Pinguins
+Name[pt_BR]=Pingüins
 Name[pt]=Pinguins
 Name[ru]=Пингвины
 Name[sk]=Tučniaci
@@ -32,7 +31,7 @@ Name[ta]=¦ÀýÌÂ¢ý¸û
 Name[tr]=Penguenler
 Name[uk]=Пінгвіни
 Name[vi]=Chim cánh cụt 
+Name[xh]=Iintaka zolwandle ezingakwaziyo ukubhabha
 Name[zh_CN.GB2312]=企鹅
-Name[zh_TW.Big5]=企鵝
 Preview=11.png
 PySol=yes

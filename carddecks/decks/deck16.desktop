@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Grandma
-Name[af]=OUMA
 Name[az]=Nənə
 Name[bg]=Баба
 Name[cs]=Babička
@@ -22,11 +21,12 @@ Name[no]=Bestemor
 Name[no_NY]=Bestemor
 Name[pl]=Babcia
 Name[pt]=Avó
-Name[ru]=Бабушка
+Name[ru]=Бабуля
 Name[sk]=Stará mama
 Name[sl]=Babica
 Name[sv]=Farmor
 Name[ta]=À¡ðÊ
 Name[tr]=Büyük anne
 Name[uk]=Бабуся
+Name[xh]=Umakhulu
 Name[zh_CN.GB2312]=祖母

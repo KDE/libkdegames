@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Road
-Name[af]=PAD
 Name[az]=Yol
 Name[bg]=Път
 Name[cs]=Cesta
@@ -16,6 +15,7 @@ Name[hu]=országút
 Name[is]=Vegur
 Name[it]=Strada
 Name[ko]=길
+Name[lt]=Kelias
 Name[lv]=Ceļš
 Name[mt]=Triq
 Name[nl]=Weg
@@ -32,5 +32,5 @@ Name[ta]=À¡¨¾
 Name[tr]=Yol
 Name[uk]=Дорога
 Name[vi]=Con đường 
+Name[xh]=Indlela
 Name[zh_CN.GB2312]=路
-Name[zh_TW.Big5]=道路

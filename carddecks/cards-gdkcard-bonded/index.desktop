@@ -1,6 +1,5 @@
 [KDE Backdeck]
 Name=Bonded
-Name[af]=GEHEG
 Name[az]=Bağlı
 Name[bg]=Завързан
 Name[cs]=Lepenka
@@ -18,5 +17,6 @@ Name[ru]=Переплетения
 Name[ta]=´ð¼ôÀð¼
 Name[tr]=Bağlı
 Name[uk]=Бони
+Name[xh]=Idityanisiwe
 Preview=11.png
 PySol=yes
