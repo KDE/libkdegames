@@ -44,7 +44,7 @@
 class KGameDialogConfigPrivate
 {
 public:
-	KGameDialogConfigPrivate() 
+	KGameDialogConfigPrivate()
 	{
 		mOwner = 0;
 		mGame = 0;
@@ -69,7 +69,7 @@ KGameDialogConfig::~KGameDialogConfig()
 }
 
 void KGameDialogConfig::setKGame(KGame* g)
-{ 
+{
  d->mGame = g;
 }
 
@@ -94,7 +94,7 @@ KPlayer* KGameDialogConfig::owner() const
 class KGameDialogNetworkConfigPrivate
 {
 public:
-	KGameDialogNetworkConfigPrivate() 
+	KGameDialogNetworkConfigPrivate()
 	{
 		mInitConnection = 0;
 		mNetworkLabel = 0;
@@ -116,7 +116,7 @@ public:
 };
 
 
-KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent) 
+KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 		: KGameDialogConfig(parent)
 {
 // kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
@@ -128,7 +128,7 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
  d->mNetworkLabel = new QLabel(this);
  hb->addWidget(d->mNetworkLabel);
- 
+
  d->mDisconnectButton=new QPushButton(i18n("Disconnect"),this);
  connect(d->mDisconnectButton, SIGNAL(clicked()), this, SLOT(slotExitConnection()));
  hb->addWidget(d->mDisconnectButton);
@@ -164,9 +164,9 @@ void KGameDialogNetworkConfig::slotInitConnection()
  kdDebug(11001) << k_funcinfo << endl;
  bool connected = false;
  bool master = true;
- unsigned short int port = port = d->mConnect->port();
- QString host = host = d->mConnect->host();
- 
+ unsigned short int port = d->mConnect->port();
+ QString host = d->mConnect->host();
+
  if (host.isNull()) {
 	master = true;
 	if (game()) {
@@ -179,7 +179,7 @@ void KGameDialogNetworkConfig::slotInitConnection()
 	}
   // We need to learn about failed connections
   if (game()) {
-     connect(game(), SIGNAL(signalConnectionBroken()), 
+     connect(game(), SIGNAL(signalConnectionBroken()),
       this, SLOT(slotConnectionBroken()));
   }
  }
@@ -243,12 +243,12 @@ void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsign
 class KGameDialogGeneralConfigPrivate
 {
 public:
-	KGameDialogGeneralConfigPrivate() 
+	KGameDialogGeneralConfigPrivate()
 	{
 		mTopLayout = 0;
 		mName = 0;
 	}
-	
+
 	QLineEdit* mName;
 
 	QVBoxLayout* mTopLayout;
@@ -276,11 +276,11 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 {
  kdDebug(11001) << k_funcinfo << endl;
- delete d; 
+ delete d;
 }
 
 void KGameDialogGeneralConfig::setPlayerName(const QString& name)
-{ 
+{
  if (d->mName) {
 	d->mName->setText(name);
  }
@@ -288,10 +288,10 @@ void KGameDialogGeneralConfig::setPlayerName(const QString& name)
 
 QString KGameDialogGeneralConfig::playerName() const
 {
- return d->mName ? d->mName->text() : QString::null; 
+ return d->mName ? d->mName->text() : QString::null;
 }
 
-void KGameDialogGeneralConfig::setOwner(KPlayer* p) 
+void KGameDialogGeneralConfig::setOwner(KPlayer* p)
 {
  if (owner()) {
 	owner()->disconnect(this);
@@ -302,13 +302,13 @@ void KGameDialogGeneralConfig::setOwner(KPlayer* p)
 	// maybe call hide()
 	return;
  }
- connect(owner(), SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
+ connect(owner(), SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
  setPlayerName(p->name());
  //TODO: connect signalPropertyChanged and check for playername changes!
 }
 
-void KGameDialogGeneralConfig::setKGame(KGame* g) 
+void KGameDialogGeneralConfig::setKGame(KGame* g)
 {
  KGameDialogConfig::setKGame(g);
  if (!g) {
@@ -353,11 +353,11 @@ void KGameDialogGeneralConfig::slotPropertyChanged(KGamePropertyBase* prop, KPla
 class KGameDialogMsgServerConfigPrivate
 {
 public:
-	KGameDialogMsgServerConfigPrivate() 
+	KGameDialogMsgServerConfigPrivate()
 	{
 		senderLayout = 0;
 		localLayout = 0;
-	
+
 		changeMaxClients = 0;
 		changeAdmin= 0;
 		removeClient= 0;
@@ -381,7 +381,7 @@ public:
 // TODO: change ADMIN ID, remove CLIENTS, change MAXCLIENTS
 // we do everything here with QPushButtons as we want to wait a moment before
 // continuing - the message must be sent over network first
-KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent) 
+KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent)
 		: KGameDialogConfig(parent)
 {
  d = new KGameDialogMsgServerConfigPrivate;
@@ -540,7 +540,7 @@ public:
 	KGameChat* mChat;
 };
 
-KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent) 
+KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
 		: KGameDialogConfig(parent)
 {
  d = new KGameDialogChatConfigPrivate;
@@ -567,7 +567,7 @@ void KGameDialogChatConfig::setKGame(KGame* g)
  }
 }
 
-void KGameDialogChatConfig::setOwner(KPlayer* p) 
+void KGameDialogChatConfig::setOwner(KPlayer* p)
 {
  KGameDialogConfig::setOwner(p);
  if (!owner()) {
@@ -595,7 +595,7 @@ public:
 KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
 		: KGameDialogConfig(parent)
 {
- //TODO: prevent player to ban himself 
+ //TODO: prevent player to ban himself
  d = new KGameDialogConnectionConfigPrivate;
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
  topLayout->setAutoAdd(true);
@@ -664,7 +664,7 @@ QListBoxItem* KGameDialogConnectionConfig::item(KPlayer* p) const
  return 0;
 }
 
-void KGameDialogConnectionConfig::slotClearPlayers() 
+void KGameDialogConnectionConfig::slotClearPlayers()
 {
  QPtrDictIterator<KPlayer> it(d->mItem2Player);
  while (it.current()) {
@@ -697,9 +697,9 @@ void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
  d->mItem2Player.insert(t, p);
  d->mPlayerBox->insertItem(t);
 
- connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
+ connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
- 
+
 }
 
 void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
@@ -707,7 +707,7 @@ void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
  // disconnect first
  this->disconnect(p);
  if (!item(p)) {
-	kdError(11001) << k_funcinfo << ": cannot find " << p->id() 
+	kdError(11001) << k_funcinfo << ": cannot find " << p->id()
 			<< " in list" << endl;
 	return;
  }
@@ -735,7 +735,7 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
 	kdDebug(11001) << "you cannot kick the ADMIN" << endl;
 	return;
  }
-		       
+
  if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?").arg(
 		p->name())) == KMessageBox::Yes) {
 	kdDebug(11001) << "will remove player " << p << endl;
