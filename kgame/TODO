@@ -38,13 +38,6 @@
 - 25.05.2001: connect to the signal KGameNetwork::connectionBroken and start a
               local non-network game
 - 25.05.2001: rewrite KGame::slotClientDisconnected
-- 26.06.2001: HUGE KMessage bug: KMessageDirect calls the receive() method of
-              the communication parrtner directly while KMessageSocket first
-              queues the messages and sens it when it gets the event loop. This 
-              means that KMessageDirect messages are received imediately and
-              KMessageSocket messages later. This will change the behaviour of
-              the library on MASTER side (KMessageDirect) compared to the
-              clients. I thought Burkhard already fixed this...
 
  ********************************************************************
   

@@ -167,6 +167,8 @@ class KMessageServerPrivate;
 
         QByteArray << EVNT_CLIENT_DISCONNECTED << clientID;
         Q_UINT32 clientID;   // the ID of the client that lost the connection
+        Q_UINT8 broken;      // 1 if the network connection was closed, 0 if it was disconnected
+                             // on purpose
 
 
   @short A server for message sending and broadcasting, using TCP/IP connections.
@@ -256,10 +258,14 @@ public slots:
      * Removes the KMessageIO object from the client list and deletes it.
      * This destroys the connection, if it already was up.
      * Does NOT emit connectionLost.
-     * @param purpose Whether the client is removed on purpose or not. 
+     * Sends an info message to the other clients, that contains the ID of
+     * the removed client and the value of the parameter broken.
+     *
+     * @param io the object to delete and to remove from the client list
+     * @param broken true if the client has lost connection
      * Mostly used internally. You will probably not need this.
      **/
-    void removeClient (KMessageIO *, bool purpose = true);
+    void removeClient (KMessageIO *io, bool broken);
 
     /**
       Deletes all connections to the clients.

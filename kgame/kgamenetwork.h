@@ -248,41 +248,34 @@ signals:
     void signalNetworkVersionError(Q_UINT32 clientID);
 
     /**
-     * The connection to the @ref KMessageServer is broken
+     * Our connection to the @ref KMessageServer has broken.
      * See @ref KMessageClient::connectionBroken
      **/
     void signalConnectionBroken();
 
     /**
      * This signal is emitted whenever the @ref KMessageServer sends us a message that a
-     * new client connected.
-     * @ref KGame uses this to call
-     * KGame::negotiateNetworkGame for the newly connected client if we are
-     * admin (see @ref isAdmin)
+     * new client connected. @ref KGame uses this to call KGame::negotiateNetworkGame
+     * for the newly connected client if we are admin (see @ref isAdmin)
      *
      * See @ref KMessageClient::eventClientConnected
+     *
      * @param clientID the ID of the newly connected client
      **/
     void signalClientConnected(Q_UINT32 clientID);
 
     /**
-     * This signal is emitted whenever the @ref KMessageServer sends us a message that a
-     * client has lost the connection to the server. Note that this is emitted 
-     * even if the client disconnected on purpose!
+     * This signal is emitted whenever the @ref KMessageServer sends us a message
+     * that a connection to a client was detached. The second parameter can be used
+     * to distinguish between network errors or removing on purpose.
      *
      * See @ref KMessageClient::eventClientDisconnected
-     * @prarm clientID the client that has disconnected
-     */
-    void signalClientDisconnected(Q_UINT32 clientID);
-
-    /**
-     * The connection to a client has been lost by accident. Note that this is
-     * not emitted if the client is removed on purpose!
      *
-     * See @ref KMessageClient::eventClientConnectionBroken
-     * @param clientID the ID of the client
-     **/
-    void signalConnectionLost(Q_UINT32 clientID);
+     * @param clientID the client that has disconnected
+     * @param broken true if the connection was lost because of a network error, false
+     *        if the connection was closed by the message server admin.
+     */
+    void signalClientDisconnected(Q_UINT32 clientID, bool broken);
 
 protected slots:
     /**

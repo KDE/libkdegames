@@ -280,16 +280,9 @@ signals:
     connection to one of the clients (This could be because of a bad internet connection
     or because the client disconnected on purpose).
     @param clientID The ID of the client that has disconnected
+    @param broken true if it was disconnected because of a network error
   */
-  void eventClientDisconnected (Q_UINT32 clientID);
-
-  /**
-   * This signal is emitted when the server has lost the connection to a client
-   * by accident. This is an extension to @ref eventClientDisconnected and is
-   * emitted _before_ that signal.
-   * @param clientID the ID of the client that has lost the connection
-   **/
-  void eventClientConnectionBroken (Q_UINT32 clientID);
+  void eventClientDisconnected (Q_UINT32 clientID, bool broken);
 
   /**
     This signal is emitted on every message that came from the server. You can connect to this

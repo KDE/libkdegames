@@ -214,7 +214,7 @@ void KMessageServer::addClient (KMessageIO* client)
   emit clientConnected (client);
 }
 
-void KMessageServer::removeClient (KMessageIO* client, bool purpose)
+void KMessageServer::removeClient (KMessageIO* client, bool broken)
 {
   Q_UINT32 clientID = client->id();
   if (!d->mClientList.removeRef (client))
@@ -225,7 +225,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool purpose)
 
   // tell everyone about the removed client
   QByteArray msg;
-  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (EVNT_CLIENT_DISCONNECTED) << client->id() << (Q_INT8)purpose;
+  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (EVNT_CLIENT_DISCONNECTED) << client->id() << (Q_INT8)broken;
   broadcastMessage (msg);
 
   // If it was the admin, select a new admin.
@@ -255,7 +255,7 @@ void KMessageServer::removeBrokenClient ()
   KMessageIO *client = (KMessageIO *) sender();
 
   emit connectionLost (client);
-  removeClient (client, false);
+  removeClient (client, true);
 }
 
 
@@ -440,7 +440,7 @@ void KMessageServer::processOneMessage ()
         {
           KMessageIO *client = findClient (*iter);
           if (client)
-            removeClient (client);
+            removeClient (client, false);
           else
             kdWarning (11001) << "KMessageServer::processReceivedMessage: removing non-existing clientID" << endl;
         }
