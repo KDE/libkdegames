@@ -49,3 +49,5 @@
             enables us to easily add any number of property handler to a game
             just by connecting it to existing send slots and call
             processMessage() in slotNetworkData()
+03.11.2001  KPlayer::signalNetworkData now emits msgid-KGameMessage::IdUser just
+            like KGame::signalNetworkData does

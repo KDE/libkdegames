@@ -371,17 +371,16 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
   {
     case KGameMessage::IdPlayerInput:
       {
-        kdDebug(11001) << "KPlayer::networkTransmission: Got player move KPlayer (virtual) forwards it to the game object" << endl;
+        kdDebug(11001) << "KPlayer::networkTransmission: Got player move "
+	        << "KPlayer (virtual) forwards it to the game object" << endl;
         forwardInput(stream,false);
       }
     break;
     default:
-    // FIXME ab: is this correct
-          emit signalNetworkData(msgid,((QBuffer*)stream.device())->readAll(),sender,this);
-    // or this?  -> KGame::networkTransmission uses msgid - IdUser but it wasn't
-    // used here...
-//         emit signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),sender,this);
-          kdDebug(11001) << "KPlayer::ReceiveNetworkTransmision: User data msgid " << msgid << endl;
+        emit signalNetworkData(msgid - KGameMessage::IdUser,
+	        ((QBuffer*)stream.device())->readAll(),sender,this);
+        kdDebug(11001) << "KPlayer::ReceiveNetworkTransmision: "
+	        << "User data msgid " << msgid << endl;
     break;
   }
 
