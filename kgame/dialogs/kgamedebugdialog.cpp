@@ -20,13 +20,14 @@
 
 #include <qlayout.h>
 #include <qstring.h>
+#include <qintdict.h>
+#include <qlabel.h>
+
 #include <klistview.h>
 #include <klistbox.h>
-
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qintdict.h>
 #include <typeinfo>
 
 #include "kgame.h"
@@ -126,22 +127,22 @@ KGameDebugDialog::~KGameDebugDialog()
 void KGameDebugDialog::initGamePage()
 {
  d->mGamePage = addPage(i18n("Debug KGame"));
- QVBoxLayout* layout = new QVBoxLayout(d->mGamePage, marginHint(), spacingHint());
- QHBoxLayout* l = new QHBoxLayout(layout);
+ QVBoxLayout* topLayout = new QVBoxLayout(d->mGamePage, marginHint(), spacingHint());
+ QHBoxLayout* layout = new QHBoxLayout(topLayout);
 
  KListView* v = new KListView(d->mGamePage);
  v->addColumn(i18n("Data"));
  v->addColumn(i18n("Value"));
- l->addWidget(v);
+ layout->addWidget(v);
 
  d->mGameProperties = new KListView(d->mGamePage);
  d->mGameProperties->addColumn(i18n("Property"));
  d->mGameProperties->addColumn(i18n("Value"));
- l->addWidget(d->mGameProperties);
+ layout->addWidget(d->mGameProperties);
  
  QPushButton* b = new QPushButton(i18n("Update"), d->mGamePage);
  connect(b, SIGNAL(pressed()), this, SLOT(updateGameData()));
- layout->addWidget(v);
+ topLayout->addWidget(b);
 
 // game data
  d->mGameAddress = new QListViewItem(v, i18n("KGame Pointer"));
@@ -164,10 +165,19 @@ void KGameDebugDialog::initPlayerPage()
  QHBoxLayout* layout = new QHBoxLayout(topLayout);
 
  //TODO: connect to the KGame signals for joined/removed players!!!
+ QVBoxLayout* listLayout = new QVBoxLayout(layout);
+ QLabel* listLabel = new QLabel(i18n("Available Players"), d->mPlayerPage);
+ listLayout->addWidget(listLabel);
  d->mPlayerList = new KListBox(d->mPlayerPage);
  connect(d->mPlayerList, SIGNAL(executed(QListBoxItem*)), this, SLOT(updatePlayerData(QListBoxItem*)));
- layout->addWidget(d->mPlayerList);
+ listLayout->addWidget(d->mPlayerList);
+ d->mPlayerList->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
 
+ KListView* v = new KListView(d->mPlayerPage);
+ layout->addWidget(v);
+ v->addColumn(i18n("Data"));
+ v->addColumn(i18n("Value"));
+ 
  d->mPlayerProperties = new KListView(d->mPlayerPage);
  d->mPlayerProperties->addColumn(i18n("Property"));
  d->mPlayerProperties->addColumn(i18n("Value"));
@@ -177,11 +187,6 @@ void KGameDebugDialog::initPlayerPage()
  connect(b, SIGNAL(pressed()), this, SLOT(updatePlayerList()));
  topLayout->addWidget(b);
 
- KListView* v = new KListView(d->mPlayerPage);
- layout->addWidget(v);
- v->addColumn(i18n("Property"));
- v->addColumn(i18n("Value"));
- 
  d->mPlayerAddress = new QListViewItem(v, i18n("Player Pointer"));
  d->mPlayerId = new QListViewItem(v, i18n("Player ID"));
  d->mPlayerName = new QListViewItem(v, i18n("Player Name"));
@@ -256,7 +261,10 @@ void KGameDebugDialog::updateGameData()
  if (!d->mGame) {
 	d->mGameAddress->setText(1, i18n("NULL pointer"));
 	return;
- }
+}
+
+ clearGameData();
+
  QString buf;
  buf.sprintf("%p", d->mGame);
  d->mGameAddress->setText(1, buf);
@@ -271,26 +279,19 @@ void KGameDebugDialog::updateGameData()
  d->mGameMinPlayers->setText(1, QString::number(d->mGame->minPlayers()));
  d->mGamePlayerCount->setText(1, QString::number(d->mGame->playerCount()));
 
-// Properties
-// KGamePropertyHandler* b = d->mGame->dataHandler();
-
 //TODO ios
-//TODO properties?
- KGamePropertyHandler *handler=((KGame *)(d->mGame))->dataHandler();
 
- QIntDictIterator<KGamePropertyBase> it((handler->dict()));
- while (it.current())
- {
-	KGamePropertyBase *base=it.current();
-	if (base)
-  {
-    int id=base->id();
-    QString name=handler->propertyName(id);
-    kdDebug() << "updateGameData: checking for all game properties: found property name " << name << endl;
-	}
+ KGamePropertyHandler* handler = d->mGame->dataHandler();
+ QIntDictIterator<KGamePropertyBase> it(handler->dict());
+ while (it.current()) {
+//	KGamePropertyBase* prop = it.current();
+	QString name = handler->propertyName(it.current()->id());
+	(void) new QListViewItem(d->mGameProperties,
+			propertyName(it.current(), handler),
+			propertyValue(it.current(), handler));
+	kdDebug() << "updateGameData: checking for all game properties: found property name " << name << endl;
 	++it;
  }
-
 }
 
 void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
@@ -323,14 +324,15 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
  d->mPlayerActive->setText(1, p->isActive() ? i18n("True") : i18n("False"));
  d->mPlayerRtti->setText(1, QString::number(p->rtti()));
  d->mPlayerNetworkPriority->setText(1, QString::number(p->networkPriority()));
+
 //TODO ios
 
 // Properties
  KGamePropertyHandler * handler = p->dataHandler();
  QIntDictIterator<KGamePropertyBase> it((handler->dict()));
  while (it.current()) {
-	QListViewItem* prop = new QListViewItem(d->mPlayerProperties,
-			i18n(propertyName(it.current(),handler)),
+	(void)new QListViewItem(d->mPlayerProperties,
+			propertyName(it.current(),handler),
 			propertyValue(it.current(),handler));
 	++it;
  }
@@ -403,31 +405,7 @@ QString KGameDebugDialog::propertyName(KGamePropertyBase* prop, KGamePropertyHan
 	return i18n("NULL pointer");
  }
 
- // MH
- int id=prop->id();
- return handler->propertyName(id);
-
- switch (prop->id()) {
-	case KGamePropertyBase::IdGroup:
-		return i18n("Group");
-	case KGamePropertyBase::IdName:
-		return i18n("Name");
-	case KGamePropertyBase::IdAsyncInput:
-		return i18n("AsyncInput");
-	case KGamePropertyBase::IdTurn:
-		return i18n("Turn");
-	case KGamePropertyBase::IdUserId:
-		return i18n("User Id");
-	case KGamePropertyBase::IdGameStatus:
-		return i18n("Game Status");
-	case KGamePropertyBase::IdMaxPlayer:
-		return i18n("Max Players");
-	case KGamePropertyBase::IdMinPlayer:
-		return i18n("Min Players");
-	default:
-		return i18n("User Property");//FIXME should display a name, too
- }
-
+ return handler->propertyName(prop->id());
 }
 
 QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHandler *handler) 
@@ -436,61 +414,32 @@ QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHa
 	return i18n("NULL pointer");
  }
  
- int id=prop->id();
- QString name=handler->propertyName(id);
+ int id = prop->id();
+ QString name = handler->propertyName(id);
  QString value;
 
- if (*(prop->typeinfo())== typeid(int))
- {
-   kdDebug()  << "INTEGER variable name="<<name<<" id="<<id<<" found "<<endl;
-   value=QString("%1").arg( ((KGamePropertyInt *)prop)->value());
- }
- else if (*(prop->typeinfo())== typeid(QString))
- {
-   kdDebug()  << "QString variable name="<<name<<" id="<<id<<" found "<<endl;
-   value=QString("%1").arg( ((KGamePropertyQString *)prop)->value());
- }
- else if (*(prop->typeinfo())== typeid(Q_INT8))
- {
-   kdDebug()  << "Q_INT8 variable name="<<name<<" id="<<id<<" found "<<endl;
-   if (((KGamePropertyBool *)prop)->value() ) value=QString("true");
-   else value=QString("false");
- }
- else if (*(prop->typeinfo())== typeid(unsigned int))
- {
-   kdDebug()  << "unsigned int variable name="<<name<<" id="<<id<<" found "<<endl;
-   value=QString("%1").arg( ((KGamePropertyUInt *)prop)->value());
- }
- else
- {
-   kdDebug()  << "UNKOWN variable name="<<name<<" id="<<id<<" found "<<endl;
-   kdDebug()  << "type=" << prop->typeinfo()->name() << " int=" << typeid(int).name() << " QString="<<typeid(QString).name() << endl;
-   kdDebug()  << " bool=" << typeid(bool).name() << " Q_INT8="<<typeid(Q_INT8).name() << endl;
+ if (*(prop->typeinfo()) == typeid(int)) {
+	kdDebug()  << "INTEGER variable name=" << name << " id=" << id << " found " << endl;
+	value = QString::number(((KGamePropertyInt*)prop)->value());
+ } else if (*(prop->typeinfo()) == typeid(QString)) {
+	kdDebug()  << "QString variable name=" << name << " id=" << id << " found " << endl;
+	value = ((KGamePropertyQString*)prop)->value();
+ } else if (*(prop->typeinfo()) == typeid(Q_INT8)) {
+	kdDebug()  << "Q_INT8 variable name=" << name << " id=" << id << " found " << endl;
+	value = ((KGamePropertyBool*)prop)->value() ? i18n("True") : i18n("False"); 
+/*	if (((KGamePropertyBool *)prop)->value() ) {
+		value = i18n("true");
+	} else {
+		value = i18n("false");
+	}*/
+ } else if (*(prop->typeinfo()) == typeid(unsigned int)) {
+	kdDebug()  << "unsigned int variable name=" << name << " id=" << id << " found " << endl;
+	value = QString::number(((KGamePropertyUInt *)prop)->value());
+ } else {
+	kdDebug()  << "USER variable name=" << name << " id=" << id << " found " << endl;
+	emit signalRequestValue(prop, value);
  }
 
- if (!value.isNull()) return value;
-
-
- switch (prop->id()) {
-	case KGamePropertyBase::IdGroup:
-		value = *(KGameProperty<QString>*)prop;
-	case KGamePropertyBase::IdName:
-		value = *(KGameProperty<QString>*)prop;
-	case KGamePropertyBase::IdAsyncInput:
-		value = (*(KGamePropertyBool*)prop) ? i18n("True") : i18n("False");
-	case KGamePropertyBase::IdTurn:
-		value = (*(KGamePropertyBool*)prop) ? i18n("True") : i18n("False");
-	case KGamePropertyBase::IdUserId:
-		value = QString::number(*(KGamePropertyBool*)prop);
-	case KGamePropertyBase::IdGameStatus:
-		value = QString::number(*(KGamePropertyBool*)prop);
-	case KGamePropertyBase::IdMaxPlayer:
-		value = QString::number(*(KGamePropertyBool*)prop);
-	case KGamePropertyBase::IdMinPlayer:
-		value = QString::number(*(KGamePropertyBool*)prop);
-	default:
-		emit signalRequestValue(prop, value);
- }
  if (value == QString::null) {
 	value = i18n("Unknown");
  }
