@@ -194,7 +194,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  
  uint i;
  stream >> i;
- setPolicy((GamePolicy)i);
+// setPolicy((GamePolicy)i);
 
  stream >> d->mUniquePlayerNumber;
 

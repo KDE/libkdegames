@@ -31,5 +31,5 @@
 --------------------- KGAME_ALPHA_1 --------------------- 
 06.10.2001  adding KGameNetwork::signalAdminStatusChanged - needed for
             KGameDialog
-
+06.10.2001  KGame::loadGame() doesn't call setPolicy() anymore!
 
