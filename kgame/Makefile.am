@@ -15,7 +15,7 @@ libkgame_la_SOURCES = $(KMESSAGE) $(KGAME)
 
 include_HEADERS = $(KMESSAGE_H) $(KGAME_H)
 
-INCLUDES = $(all_includes) -I$(top_srcdir)/libkdegames
+INCLUDES = -I$(top_srcdir)/libkdegames $(all_includes)
 METASOURCES = AUTO
 
 SUBDIRS = . dialogs
