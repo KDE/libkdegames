@@ -59,12 +59,12 @@ class KGameDialogPrivate;
  * You will usually create an instance of KGameDialog or any derived class and
  * call setDefaultXYZ methods. Example (maybe
  * obsoleted parameters - docu is currently changing very fast):
- * <pre>
+ * \code
  * 	KGameDialog dlg(kgame, i18n("New Game"), localPlayer, this, true,
  * 	ID_CHAT);
  * 	dlg.setDefaultNetworkInfo(port, host); // AB: obsolete!
  * 	dlg.exec();
- * </pre>
+ * \endcode
  * This will create a default modal dialog with the title "New Game". You don't
  * have to do more than this. 
  *
