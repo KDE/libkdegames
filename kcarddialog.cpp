@@ -93,7 +93,7 @@ public:
     QCheckBox* randomCardDir;
     QCheckBox* globalDeck;
     QCheckBox* globalCardDir;
-    
+
     QSlider* scaleSlider;
     QPixmap cPreviewPix;
     QLabel* cPreview;
@@ -110,7 +110,7 @@ public:
 };
 
 int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent,
-                             CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir, 
+                             CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir,
 			     double* pScale, KConfig* pConf)
 {
     KCardDialog dlg(pParent, "dlg", pFlags);
@@ -140,12 +140,12 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
         {
             *pRandomCardDir = dlg.isRandomCardDir();
         }
-	if (pScale) 
+	if (pScale)
 	{
             *pScale = dlg.cardScale();
 	}
 
-        if (dlg.isGlobalDeck()) 
+        if (dlg.isGlobalDeck())
 	{
 	    kdDebug(11000) << "use global deck" << endl;
 	    bool random;
@@ -158,7 +158,7 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
 	        kdDebug(11000) << "use random deck" << endl;
 	    }
 	}
-        if (dlg.isGlobalCardDir()) 
+        if (dlg.isGlobalCardDir())
 	{
 	    kdDebug(11000) << "use global carddir" << endl;
 	    bool random;
@@ -458,7 +458,7 @@ void KCardDialog::insertCardIcons()
         return;
 
     // We shrink the icons a little
-    // 
+    //
     QWMatrix m;
     m.scale(0.8,0.8);
 
@@ -542,6 +542,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
     if (item && item->pixmap())
     {
         d->deckLabel->setPixmap(* (item->pixmap()));
+        QToolTip::remove( d->deckLabel );
         QToolTip::add(d->deckLabel,d->helpMap[d->deckMap[item]]);
         setDeck(d->deckMap[item]);
     }
@@ -552,6 +553,7 @@ void KCardDialog::slotCardClicked(QIconViewItem *item)
     {
         d->cardLabel->setPixmap(* (item->pixmap()));
         QString path = d->cardMap[item];
+        QToolTip::remove( d->deckLabel );
         QToolTip::add(d->cardLabel,d->helpMap[path]);
         setCardDir(path);
     }
@@ -698,7 +700,7 @@ void KCardDialog::slotCardResized(int s)
 
  s *= -1;
  s += (SLIDER_MIN + SLIDER_MAX);
- 
+
  QWMatrix m;
  double scale = (double)1000/s;
  m.scale(scale, scale);
@@ -753,7 +755,7 @@ void KCardDialog::slotSetGlobalCardDir()
 {
  KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), false);
  conf->setGroup(CONF_GLOBAL_GROUP);
- 
+
  conf->writePathEntry(CONF_GLOBAL_CARDDIR, cardDir());
  conf->writeEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
 
@@ -764,7 +766,7 @@ void KCardDialog::getGlobalDeck(QString& deck, bool& random)
 {
  KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), true);
  conf->setGroup(CONF_GLOBAL_GROUP);
- 
+
  if (!conf->hasKey(CONF_GLOBAL_DECK) || conf->readBoolEntry(CONF_GLOBAL_RANDOMDECK, false)) {
 	deck = getRandomDeck();
 	random = true;
@@ -780,7 +782,7 @@ void KCardDialog::getGlobalCardDir(QString& dir, bool& random)
 {
  KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), true);
  conf->setGroup(CONF_GLOBAL_GROUP);
- 
+
  if (!conf->hasKey(CONF_GLOBAL_CARDDIR) || conf->readBoolEntry(CONF_GLOBAL_RANDOMCARDDIR, false)) {
 	dir = getRandomCardDir();
 	random = true;
