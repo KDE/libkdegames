@@ -159,6 +159,11 @@ void KMessageSocket::initSocket ()
   isRecursive = false;
 }
 
+Q_UINT16 KMessageSocket::peerPort () const
+{
+  return mSocket->peerPort();
+}
+
 // ----------------------KMessageDirect -----------------------
 
 KMessageDirect::KMessageDirect (KMessageDirect *partner, QObject *parent, 

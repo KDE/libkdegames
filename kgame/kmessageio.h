@@ -77,7 +77,7 @@ public:
    * @return Whether this KMessageIO is a network IO or not.
    **/
   //virtual bool isNetwork () const = 0;
-  virtual bool isNetwork () const 
+  virtual bool isNetwork () const
   {
    kdError(11001) << "Calling PURE virtual isNetwork...BAD" << endl;
    return false;
@@ -91,7 +91,7 @@ public:
     of KMessageIO.
   */
   //virtual bool isConnected () const = 0;
-  virtual bool isConnected () const 
+  virtual bool isConnected () const
   {
    kdError(11001) << "Calling PURE virtual isConencted...BAD" << endl;
    return false;
@@ -111,6 +111,12 @@ public:
     Queries the ID of this object.
   */
   Q_UINT32 id ();
+
+  /**
+    @since 3.2
+    @return 0 in the default implementation. Reimplemented in @ref KMessageSocket.
+  */
+  virtual Q_UINT16 peerPort () const { return 0; }
 
 
 signals:
@@ -219,12 +225,17 @@ public:
   */
   virtual int rtti() const {return 1;}
 
+  /**
+    @since 3.2
+    @return The port that this object is connected to. See @ref QSocket::peerPort
+  */
+  virtual Q_UINT16 peerPort () const;
 
   /**
     @return TRUE as this is a network IO.
   */
   bool isNetwork() const { return true; }
-  
+
   /**
     Returns true if the socket is in state /e connected.
   */
@@ -299,7 +310,7 @@ public:
     @return FALSE as this is no network IO.
   */
   bool isNetwork() const { return false; }
-  
+
   /**
     Returns true, if the object is connected to another instance.
 
@@ -332,7 +343,7 @@ class KMessageProcess : public KMessageIO
     bool isConnected() const;
     void send (const QByteArray &msg);
     void writeToProcess();
-    
+
     /**
       @return FALSE as this is no network IO.
     */
@@ -343,8 +354,8 @@ class KMessageProcess : public KMessageIO
   */
   virtual int rtti() const {return 3;}
 
-  
-    
+
+
   public slots:
   void  slotReceivedStdout(KProcess *proc, char *buffer, int buflen);
   void  slotReceivedStderr(KProcess *proc, char *buffer, int buflen);
@@ -381,7 +392,7 @@ class KMessageFilePipe : public KMessageIO
   */
   virtual int rtti() const {return 4;}
 
-  
+
 
   private:
     QFile *mReadFile;

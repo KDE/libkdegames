@@ -155,12 +155,19 @@ public:
     a socket connection is broken.)
   */
   bool isConnected () const;
-  
+
   /**
     @return TRUE if @ref isConnected is true AND this is no local (like
     @ref KMessageDirect) connection.
   */
-  bool isNetwork () const; 
+  bool isNetwork () const;
+
+  /**
+    @since 3.2
+    @return 0 if @ref is FALSE, otherwise the port number this client is
+    connected to. See also @ref KMessageIO::peerPort and QSocket::peerPort.
+  */
+  Q_UINT16 peerPort () const;
 
   /**
     Sends a message to the @ref KMessageServer. If we are not yet connected to one, nothing

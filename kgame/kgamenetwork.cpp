@@ -207,6 +207,18 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
  return true;
 }
 
+Q_UINT16 KGameNetwork::port() const
+{
+ if (isNetwork()) {
+   if (isOfferingConnections()) {
+     return d->mMessageServer->serverPort();
+   } else {
+     return d->mMessageClient->peerPort();
+   }
+ }
+ return 0;
+}
+
 bool KGameNetwork::stopServerConnection()
 {
  // We still are the Master, we just don't accept further connections!

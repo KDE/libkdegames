@@ -121,6 +121,14 @@ public:
     bool connectToServer(const QString& host, Q_UINT16 port);
 
     /**
+     * @since 3.2
+     * @return The port we are listening to if @ref offerConnections was called
+     * or the port we are connected to if @ref connectToServer was called.
+     * Otherwise 0.
+     **/
+    Q_UINT16 port() const;
+
+    /**
      * Stops offering server connections - only for game MASTER
      * @return true
      **/

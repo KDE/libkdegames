@@ -70,7 +70,6 @@ void KMessageClient::setServer (const QString &host, Q_UINT16 port)
 
 void KMessageClient::setServer (KMessageServer *server)
 {
- 
   KMessageDirect *serverIO = new KMessageDirect ();
   setServer (new KMessageDirect (serverIO));
   server->addClient (serverIO);
@@ -124,6 +123,11 @@ bool KMessageClient::isConnected () const
 bool KMessageClient::isNetwork () const
 {
   return isConnected() ? d->connection->isNetwork() : false;
+}
+
+Q_UINT16 KMessageClient::peerPort () const
+{
+ return d->connection ? d->connection->peerPort() : 0;
 }
 
 // --------------------- Sending messages
@@ -313,7 +317,7 @@ void KMessageClient::removeBrokenConnection ()
 {
   kdDebug (11001) << k_funcinfo << ": timer single shot for removeBrokenConnection"<<this << endl;
   // MH We cannot directly delete the socket. otherwise QSocket crashes
-	QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
+  QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
   return;
 }
 
