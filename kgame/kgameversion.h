@@ -46,6 +46,9 @@
 // KGameSequence class was added in KDE 3.2
 #define KGAME_HAVE_KGAMESEQUENCE 1
 
+// KGame::addPlayer() needs to assign an ID to new players, otherwise network is
+// broken. this is done in KDE 3.2.
+#define KGAME_HAVE_FIXED_ADDPLAYER_ID 1
 
 #endif
 
