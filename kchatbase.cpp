@@ -170,6 +170,15 @@ void KChatBase::changeSendingEntry(const QString& text, int id)
  d->mCombo->changeItem(text, index);
 }
 
+void KChatBase::setSendingEntry(int id)
+{
+ if (!d->mCombo) {
+	kdWarning(11000) << "KChatBase: Cannot set an entry in the combo box" << endl;
+	return;
+ }
+ d->mCombo->setCurrentItem(findIndex(id));
+}
+ 
 int KChatBase::findIndex(int id) const
 {
  return d->mIndex2Id.findIndex(id);

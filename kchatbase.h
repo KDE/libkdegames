@@ -120,6 +120,12 @@ public:
 	void changeSendingEntry(const QString& text, int id);
 
 	/**
+	 * This selects a combo box entry.
+	 * @param id The ID of the item to be selected
+	 **/
+	void setSendingEntry(int id);
+
+	/**
 	 * Removes the entry with the ID id from the combo box. Note that id is
 	 * _not_ the index of the entry! See also @ref addSendingEntry
 	 * @param id The unique id of the entry
