@@ -339,7 +339,7 @@ void KChatBase::addItem(const QListBoxItem* text)
  d->mBox->insertItem(text); 
  int index = d->mBox->count() -1;
  d->mBox->setBottomItem(index);//FIXME: don't scroll to bottom if user scrolled down manually
- if (d->mBox->count() > maxItems()) {
+ if (maxItems() >= 0 && d->mBox->count() > (unsigned int)maxItems()) {
 	d->mBox->removeItem(0);
  }
 }
@@ -515,7 +515,7 @@ void KChatBase::setMaxItems(int maxItems)
  if (maxItems == 0) {
 	clear();
  } else if (maxItems > 0) {
-	while (d->mBox->count() > maxItems) {
+	while (d->mBox->count() > (unsigned int)maxItems) {
 		d->mBox->removeItem(0);
 	}
  }
