@@ -189,6 +189,12 @@ bool KGameChat::hasPlayer(int id) const
 
 void KGameChat::setFromPlayer(KPlayer* p)
 {
+ if (!p) {
+	kdError(11001) << "KGameChat::setFromPlayer(): NULL player" << endl;
+	removeSendingEntry(d->mToMyGroup);
+	d->mFromPlayer = 0;
+	return;
+ }
  if (d->mFromPlayer) {
 	changeSendingEntry(p->group(), d->mToMyGroup);
  } else {
@@ -200,6 +206,7 @@ void KGameChat::setFromPlayer(KPlayer* p)
 	addSendingEntry(i18n("Send to my group (\"%1\")").arg(p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
+ kdDebug(11001) << "KGameChat::setFromPlayer() player=" << p << endl;
 }
 
 
@@ -208,6 +215,7 @@ void KGameChat::setKGame(KGame* g)
  if (d->mGame) {
 	slotUnsetKGame();
  }
+ kdDebug(11001) << "KGameChat::setKGame() game=" << g << endl;
  d->mGame = g;
 
  if (d->mGame) {
@@ -243,8 +251,12 @@ void KGameChat::slotUnsetKGame()
 
 void KGameChat::slotAddPlayer(KPlayer* p)
 {
+ if (!p) {
+	kdError(11001) << "KGameChat::slotAddPlayer(): cannot add NULL player" << endl;
+	return;
+ }
  if (hasPlayer(p->id())) {
-	kdWarning(11001) << "KGameChat: player was added before" << endl;
+	kdError(11001) << "KGameChat: player was added before" << endl;
 	return;
  }
 
@@ -260,8 +272,12 @@ void KGameChat::slotAddPlayer(KPlayer* p)
 
 void KGameChat::slotRemovePlayer(KPlayer* p)
 {
+ if (!p) {
+	kdError(11001) << "KGameChat::slotRemovePlayer(): NULL player" << endl;
+	return;
+ }
  if (!hasPlayer(p->id())) {
-	kdDebug(11001) << "KGameChat: cannot remove non-existent player" << endl;
+	kdError(11001) << "KGameChat: cannot remove non-existent player" << endl;
 	return;
  }
 
@@ -291,14 +307,7 @@ void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32
 	return;
  }
 
-// TODO: the data from KGameMessages::createHeader() remain in the buffer!!!!!!!
-// how to duplicate it now? we could just call extractHeader() but that is ugly
-
-// QByteArray buffer;
-// buffer.duplicate(((QBuffer*)msg.device())->buffer());
-// QDataStream stream(buffer, IO_ReadOnly);
  QString text;
-// stream >> text;
  msg >> text;
 
  addMessage(sender, text);
