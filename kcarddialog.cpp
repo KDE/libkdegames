@@ -308,7 +308,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     l->addWidget(d->randomDeck, 0, AlignTop|AlignHCenter);
 
     d->globalDeck = new QCheckBox(plainPage());
-    d->globalDeck->setChecked(true);
+    d->globalDeck->setChecked(false);
     d->globalDeck->setText(i18n("Use Global Backside"));
     l->addWidget(d->globalDeck, 0, AlignTop|AlignHCenter);
 
@@ -358,7 +358,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     l->addWidget(d->randomCardDir, 0, AlignTop|AlignHCenter);
 
     d->globalCardDir = new QCheckBox(plainPage());
-    d->globalCardDir->setChecked(true);
+    d->globalCardDir->setChecked(false);
     d->globalCardDir->setText(i18n("Use Global Frontside"));
     l->addWidget(d->globalCardDir, 0, AlignTop|AlignHCenter);
 
@@ -657,7 +657,7 @@ void KCardDialog::loadConfig(KConfig* conf)
 	d->randomDeck->setChecked(random);
 	slotRandomDeckToggled(random);
 
-	if (!conf->hasKey(CONF_USEGLOBALDECK) || conf->readBoolEntry(CONF_USEGLOBALDECK)) {
+	if (conf->hasKey(CONF_USEGLOBALDECK) && conf->readBoolEntry(CONF_USEGLOBALDECK)) {
 		d->globalDeck->setChecked(true);
 	} else {
 		d->globalDeck->setChecked(false);
@@ -672,7 +672,7 @@ void KCardDialog::loadConfig(KConfig* conf)
 	d->randomCardDir->setChecked(random);
 	slotRandomCardDirToggled(random);
 
-	if (!conf->hasKey(CONF_USEGLOBALCARDDIR) || conf->readBoolEntry(CONF_USEGLOBALCARDDIR)) {
+	if (conf->hasKey(CONF_USEGLOBALCARDDIR) && conf->readBoolEntry(CONF_USEGLOBALCARDDIR)) {
 		d->globalCardDir->setChecked(true);
 	} else {
 		d->globalCardDir->setChecked(false);
