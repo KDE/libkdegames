@@ -81,7 +81,7 @@ public:
 // ------------------- GAME CLASS --------------------------
 KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
 {
- kdDebug(11001) << k_funcinfo << " - " << this << ",sizeof(this)=" << sizeof(KGame) << endl;
+ kdDebug(11001) << k_funcinfo << " - " << this << ", sizeof(KGame)=" << sizeof(KGame) << endl;
  d = new KGamePrivate;
 
  d->mProperties = new KGamePropertyHandler(this);
@@ -701,7 +701,7 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
   
 KPlayer * KGame::playerInputFinished(KPlayer *player)
 {
- kdDebug(11001) << k_funcinfo<<"player inpot finished for "<<player->id()<<endl;
+ kdDebug(11001) << k_funcinfo<<"player input finished for "<<player->id()<<endl;
  // Check for game over and if not allow the next player to move
  d->mCurrentPlayer=player;
  int gameOver=checkGameOver(player);
