@@ -181,7 +181,7 @@ void KGamePropertyBase::emitSignal()
  if (mOwner ) {
 	mOwner->emitSignal(this);
  } else {
-	kdError(11001) << "KGamePropertyBase::emitSignal(): Cannot emitSignal because there is no receiver defined" << endl;
+	kdError(11001) << "KGamePropertyBase::emitSignal():id="<<id()<<" Cannot emitSignal because there is no handler set" << endl;
  }
 }
 
