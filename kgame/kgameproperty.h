@@ -505,7 +505,11 @@ public:
 	 * @return The local value (see @ref setLocal) if it is existing,
 	 * otherwise the same as @ref value.
 	 **/
-	const type& value() const	{ return (mLocalData ? *mLocalData : mData); }
+	const type& value() const
+  {
+    if (mLocalData) return *mLocalData;
+    else return mData;
+  }
 
 	/**
 	 * You usually don't want to call this but rather @ref value
