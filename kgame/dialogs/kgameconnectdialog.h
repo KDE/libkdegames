@@ -69,6 +69,7 @@ protected slots:
 
 signals:
 	void signalNetworkSetup();
+  void signalServerTypeChanged(int);
 
 private:
 	KGameConnectWidgetPrivate* d;

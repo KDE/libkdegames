@@ -689,6 +689,7 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
  }
  else
  {
+   kdDebug(11001) << k_funcinfo<<": switching off player input"<<endl;
    if (!player->asyncInput()) 
    {
      player->setTurn(false); // in turn based games we have to switch off input now
@@ -700,6 +701,7 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
   
 KPlayer * KGame::playerInputFinished(KPlayer *player)
 {
+ kdDebug(11001) << k_funcinfo<<"player inpot finished for "<<player->id()<<endl;
  // Check for game over and if not allow the next player to move
  d->mCurrentPlayer=player;
  int gameOver=checkGameOver(player);
@@ -730,6 +732,7 @@ void KGame::prepareNext()
 
 KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
 {
+ kdDebug(11001) << "=================== NEXT PLAYER =========================="<<endl;
  unsigned int minId,nextId,lastId;
  KPlayer *nextplayer, *minplayer;
  if (last) 
@@ -740,6 +743,9 @@ KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
  {
    lastId = 0;
  }
+
+ kdDebug(11001) << "nextPlayer: lastId="<<lastId<<endl;
+ 
  // remove when this has been checked
  minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...
  nextId = minId;
@@ -773,7 +779,7 @@ KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
    nextplayer=minplayer;
  }
 
- kdDebug(11001) << k_funcinfo << " ##### lastId=" << lastId << " excluseive=" << exclusive << "  minId=" << minId << " bextid=" << nextId << " count=" <<d->mPlayerList.count()  << endl;
+ kdDebug(11001) << k_funcinfo << " ##### lastId=" << lastId << " exclusive=" << exclusive << "  minId=" << minId << " nextid=" << nextId << " count=" <<d->mPlayerList.count()  << endl;
  if (nextplayer) 
  {
    nextplayer->setTurn(true,exclusive);

@@ -114,6 +114,7 @@ void KGameConnectWidget::slotTypeChanged(int t)
  } else if (t == 1) {
 	d->mHost->setEnabled(true);
  }
+ emit signalServerTypeChanged(t);
 }
 
 class KGameConnectDialogPrivate

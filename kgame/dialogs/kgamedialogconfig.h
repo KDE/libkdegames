@@ -125,7 +125,6 @@ public:
 	 **/
 	bool admin() const;
 
-
 protected:
 
 private:
@@ -239,6 +238,16 @@ public:
 	 **/
 	void setDefaultNetworkInfo(const QString& host, unsigned short int port,bool server=true);
 
+signals:
+  /**
+  * This signal is emmited if the user changes the server type (client/server)
+  * in the network configuration dialog. 
+  *
+  * @param t - type type (0/1) of the connection
+  **/
+  void signalServerTypeChanged(int);
+
+
 protected:
 	void setConnected(bool connected, bool master = false);
 
@@ -246,6 +255,7 @@ protected slots:
 	void slotInitConnection();
 	void slotExitConnection();
 	void slotConnectionBroken();
+
 
 private:
 	KGameDialogNetworkConfigPrivate* d;

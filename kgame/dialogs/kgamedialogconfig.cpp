@@ -138,6 +138,8 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
  d->mConnect = new KGameConnectWidget(d->mInitConnection);
  connect(d->mConnect, SIGNAL(signalNetworkSetup()), this, SLOT(slotInitConnection()));
+ connect(d->mConnect, SIGNAL(signalServerTypeChanged(int)),
+         this, SIGNAL(signalServerTypeChanged(int)));
 
  // Needs to be AFTER the creation of the dialogs
  setConnected(false);
