@@ -4,7 +4,7 @@ DECKDIRS = cards-aisleriot cards-dondorf-whist-b cards-gdkcard-bonded cards-hard
 deckdir = $(kde_datadir)/carddecks
 
 uninstall-local:
-			rm -rf $(deckdir)
+	rm -rf $(DESTDIR)$(deckdir)
 
 install-data-local:
 	@$(mkinstalldirs) $(DESTDIR)$(deckdir)
