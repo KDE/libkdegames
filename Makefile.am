@@ -20,5 +20,5 @@ METASOURCES = AUTO
 SUBDIRS = carddecks
 
 messages:
-#	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
+	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
 
