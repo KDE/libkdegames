@@ -27,7 +27,7 @@
 
 int KGameMessage::calcMessageId(int gameid,int playerid)
 {
-  return playerid?(playerid&0x3ff): ((gameid&0xff)<<10);
+  return playerid?playerid: (gameid<<10);
 }
 int KGameMessage::calcPlayerId(int msgid)
 {
