@@ -277,7 +277,7 @@ void MultiplayerScores::show(QWidget *parent)
 
     QVBox *vbox = new QVBox(dialog.plainPage());
     hbox->addWidget(vbox);
-    if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played!"), vbox);
+    if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played."), vbox);
     else {
         (void)new QLabel(i18n("Scores for last game:"), vbox);
         (void)new LastMultipleScoresList(ordered, vbox);
