@@ -122,7 +122,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
  }
  if (d->mIndex2Id.findIndex(id) != -1) {
 	kdError(11000) << "KChatBase: Cannot add more than one entry with the same ID! " << endl;
-	kdError(11000) << "KChatBase: Text="<<text<<endl;
+	kdError(11000) << "KChatBase: Text=" << text << endl;
 	return false;
  }
  d->mCombo->insertItem(text, index);
@@ -140,7 +140,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 int KChatBase::sendingEntry() const
 {
  int index = d->mCombo->currentItem();
- if (!d->mIndex2Id.contains(index)) {
+ if (d->mIndex2Id.at(index) == d->mIndex2Id.end()) {
 	kdWarning(11000) << "could not find the selected sending entry!" << endl;
 	return -1;
  }
