@@ -286,6 +286,8 @@ bool KPlayer::setTurn(bool b,bool exclusive)
   mMyTurn.setValue(b);
 
   // notify KGameIO's from the turn (computer player)
+  //AB: this is probably a bug. The IOs should be notified when the property
+  //mMyTurn is *received*!
   QListIterator<KGameIO> it(mInputList);
   while (it.current()) 
   {
@@ -304,6 +306,7 @@ bool KPlayer:: load(QDataStream &stream)
   setNetworkPriority(priority);
 
   // Load Player Data
+  //FIXME: maybe set all properties setEmitSignal(false) before?
   d->mProperties.load(stream);
 
   Q_INT16 cookie;
@@ -376,11 +379,10 @@ bool KPlayer::addProperty(KGamePropertyBase* data)
   return d->mProperties.addProperty(data);
 }
 
-void KPlayer::sendProperty(QDataStream& s, bool isPublic)
+void KPlayer::sendProperty(QDataStream& s)
 {
-  // if (isPublic) // TODO
   if (!game()) return ;
-  game()->sendPlayerProperty(s, id(), isPublic);
+  game()->sendPlayerProperty(s, id());
 }
 
 void KPlayer::emitSignal(KGamePropertyBase *me)

@@ -268,7 +268,9 @@ public:
 			}
 			mData = v;
 			if (isEmittingSignal()) {
-				emitSignal();
+				//AB: cannot be done here!!
+				//the remote clients won't receive this signal!
+//				emitSignal();
 			}
 			if (sendValue) {
 				send();
@@ -300,8 +302,10 @@ public:
 	// Hmm, is this really necessary?
 //		type oldValue=mData;
 		s >> mData;
-//		if (isEmittingSignal()) emitSignal();//TODO: removed as we set
+		if (isEmittingSignal()) {
+			emitSignal();//TODO: removed as we set
 //		it indirect now. must be emitted elsewhere!!!
+		}
 
 //		does not work for non-default types, when the operator "!=" is not
 //		implemented:

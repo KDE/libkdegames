@@ -105,16 +105,17 @@ void KGameChat::returnPressed(const QString& text)
  kdDebug(11001) << "from: " << d->mFromPlayer->name() << endl;
 
  //TODO:
- int index = 0;//mCombo->currentItem();
+ int index = sendingEntry();
  int toPlayer = 0;
  QString toGroup;
  if (d->mFromPlayer && index == 1) {
 	toGroup = d->mFromPlayer->group();
  } else if (index >= FIRST_ID) {
-//	toPlayer = mPlayers.at(index - FIRST_ID)->id();
+//	toPlayer = d->mPlayers.at(index - FIRST_ID)->id();
  }
 
- sendMessage(fromPlayer, text, toPlayer, toGroup);
+// sendMessage(fromPlayer, text, toPlayer, toGroup);//TODO
+ sendMessage(fromPlayer, text, 0, toGroup);//TODO
 }
 
 const QString& KGameChat::fromName() const

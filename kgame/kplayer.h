@@ -323,7 +323,7 @@ public:
       /**
        * Called by KGameProperty only! Internal function!
        **/
-      void sendProperty(QDataStream& s, bool isPublic = true);
+      void sendProperty(QDataStream& s);
       /**
        * Called by KGameProperty only! Internal function!
        **/

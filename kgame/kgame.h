@@ -287,7 +287,7 @@ public:
     /**
      * Caled by KGameProperty only! Internal function!
      **/
-    void sendProperty(QDataStream& s, bool isPublic = true);
+    void sendProperty(QDataStream& s);
     /**
       * Called by KGameProperty only! Internal function!
      **/
@@ -295,7 +295,7 @@ public:
     /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
-    void sendPlayerProperty(QDataStream& s, int playerId, bool isPublic = true);
+    void sendPlayerProperty(QDataStream& s, int playerId);
     
     KGamePropertyBase* findProperty(int id) const;
 
