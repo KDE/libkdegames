@@ -179,14 +179,28 @@ public:
     /**
       MessageIDs for messages from a client to the message server.
     */
-    enum {REQ_BROADCAST = 1, REQ_FORWARD, REQ_CLIENT_ID, REQ_ADMIN_ID, REQ_ADMIN_CHANGE,
-          REQ_REMOVE_CLIENT, REQ_MAX_NUM_CLIENTS, REQ_CLIENT_LIST};
+    enum { 
+            REQ_BROADCAST = 1, 
+            REQ_FORWARD,
+            REQ_CLIENT_ID,
+            REQ_ADMIN_ID,
+            REQ_ADMIN_CHANGE,
+            REQ_REMOVE_CLIENT,
+            REQ_MAX_NUM_CLIENTS,
+            REQ_CLIENT_LIST};
 
     /**
      * MessageIDs for messages from the message server to a client.
      **/
-    enum {MSG_BROADCAST = 101, MSG_FORWARD, ANS_CLIENT_ID, ANS_ADMIN_ID, ANS_CLIENT_LIST,
-          EVNT_CLIENT_CONNECTED, EVNT_CLIENT_DISCONNECTED};
+    enum {
+            MSG_BROADCAST = 101, 
+            MSG_FORWARD, 
+            ANS_CLIENT_ID, 
+            ANS_ADMIN_ID, 
+            ANS_CLIENT_LIST,
+            EVNT_CLIENT_CONNECTED, 
+            EVNT_CLIENT_DISCONNECTED
+    };
 
     /**
      * Create a KGameNetwork object
