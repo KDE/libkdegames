@@ -56,6 +56,8 @@ KGameProgress::KGameProgress(int minValue, int maxValue, int value,
 
 KGameProgress::~KGameProgress()
 {
+	if (bar_pixmap)
+		delete bar_pixmap;
 }
 
 void KGameProgress::advance(int offset)
