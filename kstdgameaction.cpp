@@ -106,7 +106,7 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
     case Roll:
         return "move_roll";
     case EndTurn:
-        return "move_endturn";
+        return "move_end_turn";
     case Carddecks:
         return "options_configure_carddecks";
     default:
