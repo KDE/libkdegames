@@ -127,12 +127,12 @@ void KGameDialogNetworkConfig::slotInitConnection()
 	if (host.isNull()) {
 		master = true;
 		if (d->mGame) {
-			d->mGame->offerConnections(port);
+			connected = d->mGame->offerConnections(port);
 		}
 	} else {
 		master = false;
 		if (d->mGame) {
-			d->mGame->connectToServer(host, port);
+			connected = d->mGame->connectToServer(host, port);
 		}
 	}
  }

@@ -133,9 +133,10 @@ bool KGameNetwork::offerConnections(Q_UINT16 port)
 
  if (!d->mMessageServer->initNetwork (port)) {
    kdError (11001) << "KGameNetwork::offerConnections: Unable to bind to port " << port << "!" << endl;
-   delete d->mMessageServer;
-   d->mMessageServer = 0;
-   d->mMessageClient->setServer((KMessageServer*)0);
+   // no need to delete - we just cannot listen to the port
+//   delete d->mMessageServer;
+//   d->mMessageServer = 0;
+//   d->mMessageClient->setServer((KMessageServer*)0);
    return false;
  }
  return true;
@@ -165,6 +166,14 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
  }
 
  d->mMessageClient->setServer (host, port);
+
+ if (!d->mMessageClient->isConnected()) {
+	kdError(11001) << "cannot connect to " << host << ":" << port << endl;
+	// now we have problems!!
+	// TODO re-add players, ...
+	setMaster();
+	return false;
+ }
 
  // FIXME: We say that we already have connected, but this isn't so yet!
  // If the connection cannot be established, it will look as being disconnected

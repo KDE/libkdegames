@@ -20,7 +20,10 @@
 /*
     $Id$
 */
+
 #include "kgamemessage.h"
+
+#include <klocale.h>
 
 #define MESSAGE_VERSION 1
 
@@ -94,4 +97,52 @@ void KGameMessage::extractPropertyCommand(QDataStream &msg,int &pid,int &cmd)
 int KGameMessage::version()
 {
   return MESSAGE_VERSION;
+}
+
+QString KGameMessage::messageId2Text(int msgid)
+{
+// this should contain all KGameMessage::GameMessageIds
+// feel free to add missing ones, to remove obsolete one and even feel free to
+// let it be ;-)
+  switch (msgid) {
+	case KGameMessage::IdSetupGame:
+		return i18n("Setup Game");
+	case KGameMessage::IdSetupGameContinue:
+		return i18n("Setup Game Continue");
+	case KGameMessage::IdGameLoad:
+		return i18n("Load Game");
+	case KGameMessage::IdGameReactivatePlayer:
+		return i18n("Reactivate Player");
+	case KGameMessage::IdSyncRandom:
+		return i18n("Synchronize Random");
+	case KGameMessage::IdDisconnect:
+		return i18n("Disconnect");
+	case KGameMessage::IdPlayerProperty:
+		return i18n("Player Property");
+	case KGameMessage::IdGameProperty:
+		return i18n("Game Property");
+	case KGameMessage::IdAddPlayer:
+		return i18n("Add Player");
+	case KGameMessage::IdRemovePlayer:
+		return i18n("Remove Player");
+	case KGameMessage::IdActivatePlayer:
+		return i18n("Activate Player");
+	case KGameMessage::IdInactivatePlayer:
+		return i18n("Inactivate Player");
+	case KGameMessage::IdTurn:
+		return i18n("Id Turn");
+	case KGameMessage::IdError:
+		return i18n("Error Message");
+	case KGameMessage::IdPlayerInput:
+		return i18n("Player Input");
+	case KGameMessage::IdIOAdded:
+		return i18n("An IO was added");
+	case KGameMessage::IdProcessQuery:
+		return i18n("Process Query");
+	case KGameMessage::IdPlayerId:
+		return i18n("Player ID");
+	case KGameMessage::IdUser: // IdUser must be unknown for use, too!
+	default:
+		return QString::null;
+  }
 }

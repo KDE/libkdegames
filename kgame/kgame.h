@@ -303,6 +303,10 @@ public:
      * the (in the stream) specified player). If both is not possible (i.e. the
      * message is user specified data) the signal @ref signalNetworkData is
      * emitted.
+     *
+     * This emits @ref signalMessageUpdate <em>before</em> doing anything with
+     * the message. You can use this signal when you want to be notified about
+     * an update/change.
      * @param msgid Specifies the kind of the message. See messages.txt for
      * further information
      * @param stream The message that is being sent
@@ -310,7 +314,7 @@ public:
      * @param sender
      * @param clientID the client from which we received the transmission - hardly used
      **/
-    virtual void networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID);
+    virtual void networkTransmission(QDataStream &stream, int msgid, int receiver, int sender, Q_UINT32 clientID);
 
     KGamePropertyHandler* dataHandler() const;
 

@@ -583,6 +583,10 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
  // message targets a playerobject. If we find it we forward the message to the
  // player. Otherwise we proceed here and hope the best that the user processes
  // the message
+
+ // *first* notice the game that something has changed - so no return prevents
+ // this
+ emit signalMessageUpdate((int)msgid,receiver,sender);
  if (KGameMessage::isPlayer(receiver))
  {
    kdDebug(11001) << "message id " << msgid << " seems to be for a player" << endl;
@@ -591,7 +595,6 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
    if (p && p->isActive()) {
      kdDebug(11001) << "forwarding message to player " << receiver << endl;
      p->networkTransmission(stream,msgid,sender);
-     emit signalMessageUpdate(msgid,receiver,sender); // hmmmm...but how else do we notice that somehting happended?
      return;
    }
    if (p) {
@@ -729,8 +732,6 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
    break;
  }
 
- // notice the game that something has changed
- emit signalMessageUpdate((int)msgid,receiver,sender);
 }
 
 // called by the IdSetupGameContinue Message - MASTER SIDE

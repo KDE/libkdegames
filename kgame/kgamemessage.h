@@ -112,7 +112,20 @@ class KGameMessage
      */
     static int version();
 
+    /**
+     * This function takes a @ref GameMessageIds as argument and returns a
+     * suitable string for it. This string can't be used to identify a message
+     * (as it is i18n'ed) but it can make debugging more easy. See also @ref
+     * KGameDebugDialog.
+     * @return Either a i18n'ed string (the name of the id) or QString::null if
+     * the msgid is unknown
+     **/
+    static QString messageId2Text(int msgid);
 
+
+  /**
+   * Message Ids used inside @ref KGame.
+   **/
 // please document every new id with a short comment
   enum GameMessageIds {
 // game init, game load, disconnect, ...

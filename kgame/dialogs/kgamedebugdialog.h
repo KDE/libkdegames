@@ -59,44 +59,36 @@ public slots:
 	/**
 	 * Update the data of the @ref KGame object
 	 **/
-	void updateGameData();
+	void slotUpdateGameData();
 
 	/**
 	 * Update the properties of the currently selected player
 	 **/
-	void updatePlayerData();
+	void slotUpdatePlayerData();
 
 	/**
 	 * Updates the list of players and calls @ref clearPlayerData. Note that
 	 * after this call NO player is selected anymore.
 	 **/
-	void updatePlayerList();
+	void slotUpdatePlayerList();
+
+	void slotClearMessages();
 
 signals:
 	/**
-	 * As it is not possible to find out which type a @ref KGameProperty has
-	 * you have to provide its value first. This signal is emitted when the
-	 * value for the property prop is requested - it is not emitted for
-	 * default types (like @ref KPlayer::name or @ref KPlayer::group). You
-	 * probably want to connect a slot to this signal which tests for the
-	 * @ref KGamePropertyBase::id and sets the value according to this id.
-	 * Example:
-	 * <pre>
-	 * switch (prop->id()) {
-	 * 	case myPropertyId1:
-	 * 		value = (KGameProperty<QString>*)->value();
-	 * 		break;
-	 * 	case myPropertyId2:
-	 * 		value = QString::number((KGamePropertyInt*)prop->value());
-	 * 		break;
-	 * 	default:
-	 * 		value = i18n("Unknown");
-	 * 		break;
-	 * }
-	 * @param prop The @ref KGameProperty the value is requested for
-	 * @param value The value of this property. You have to set this.
+	 * This signal is emitted when the "debug messages" page couldn't find
+	 * the name of a message id. This is usually the case for user-defined
+	 * messages. KGameDebugDialog asks you to give the msgid a name.
+	 * @param messageid The ID of the message. As given to @ref
+	 * KGame::sendMessage
+	 * @param userid User defined msgIds are internally increased by
+	 * @ref KGameMessage::IdUser. You don't have to care about this but if
+	 * this signal is emitted with userid=false (shouldn't happen) then the
+	 * name of an internal message as defined in @ref
+	 * KGameMessage::GameMessageIds couldn't be found.
+	 * @param name The name of the msgid. You have to fill this!
 	 **/
-	void signalRequestValue(KGamePropertyBase* prop, QString& value);
+	void signalRequestIdName(int messageid, bool userid, QString& name);
 
 protected:
 	void clearPages();
@@ -112,14 +104,6 @@ protected:
 	 **/
 	void clearGameData();
 
-protected slots:
-	/**
-	 * Update the data of the player specified in item
-	 * @param item The @ref QListBoxItem of the player to be updated. Note
-	 * that the text of this item MUST be the ID of the player
-	 **/
-	void updatePlayerData(QListBoxItem* item);
-
 	/**
 	 * Add a new player to the player list
 	 **/
@@ -130,9 +114,31 @@ protected slots:
 	 **/
 	void removePlayer(QListBoxItem* item);
 
+	/**
+	 * @return Whether messages with this msgid shall be displayed or not
+	 **/
+	bool showId(int msgid);
+
+protected slots:
+	/**
+	 * Update the data of the player specified in item
+	 * @param item The @ref QListBoxItem of the player to be updated. Note
+	 * that the text of this item MUST be the ID of the player
+	 **/
+	void slotUpdatePlayerData(QListBoxItem* item);
+
+	void slotShowId();
+	void slotHideId();
+
+	/**
+	 * A message has been received - see @ref KGame::signalMessageUpdate
+	 **/
+	void slotMessageUpdate(int msgid, int receiver, int sender);
+
 private:
 	void initGamePage();
 	void initPlayerPage();
+	void initMessagePage();
 
 private:
 	KGameDebugDialogPrivate* d;
