@@ -66,7 +66,7 @@ public:
     : mMaxClients (-1), mGameId (1), mUniqueClientNumber (1), mAdminID (0), mServerSocket (0)
   {
     mClientList.setAutoDelete (true);
-    mClientList.setAutoDelete (true);
+    mMessageQueue.setAutoDelete (true);
   }
 
   int mMaxClients;
