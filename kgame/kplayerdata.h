@@ -269,12 +269,15 @@ public:
 	 * Sets the value of this object.
 	 * Uses @ref KPlayer::sendProperty to send it to all clients
 	 * @param v The value to assign to this object
+	 * @param sendValue Specifies whether you want the value to be sent over
+	 * network (defaul) or not. Use this e.g. if you send a message to all
+	 * clients which sets the values of the properties on receiving. 
 	 **/
-	void setValue(type v)
+	void setValue(type v, bool sendValue = true)
 	// i am not able to put this to kplayerdata.cpp - why?
 	{
 		//kdDebug(11001) << "+++KPlayerData::setValue(" << id() << ") = " << v << endl;
-//		if (mData!=v) { // not possible as "!=" is not always implemented
+		if (mData!=v) { // not possible as "!=" is not always implemented
 			if (isLocked()) {
 				return;
 			}
@@ -282,8 +285,10 @@ public:
 			if (isEmittingSignal()) {
 				emitSignal();
 			}
-			send();
-//		} 
+			if (sendValue) {
+				send();
+			}
+		} 
 	}
 
 	/**
