@@ -56,7 +56,7 @@ class KGameProcess:  public QObject
      * Instead you react on the signals which are emitted after a
      * message is received and perform the calculations there!
      * Example:
-     * <pre>
+     * \code
      *  int main(int argc ,char * argv[])
      *  {
      *    KGameProcess proc;
@@ -68,7 +68,7 @@ class KGameProcess:  public QObject
      *                    this,SLOT(slotTurn(QDataStream & ,bool )));
      *    return proc.exec(argc,argv);
      *  }
-     *  </pre>
+     *  \endcode
      */
     KGameProcess();
     /**
@@ -133,9 +133,9 @@ class KGameProcess:  public QObject
     /**
      * Returns a pointer to a KRandomSequence. You can generate
      * random numbers via e.g.
-     * <pre>
+     * \code
      *   random()->getLong(100);
-     * </pre>
+     * \endcode
      * 
      * @return KRandomSequence pointer
      */
@@ -210,7 +210,7 @@ class KGameProcess:  public QObject
       *     proc.sendSystemMessage(out,id,0);
       *   }
       * }
-      * \code
+      * \endcode
       *
       * @param stream The datastream which contains user data
       * @param turn True or false whether the turn is activated or deactivated
