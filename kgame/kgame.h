@@ -350,7 +350,14 @@ protected slots:
      * the players from that client.
      * @param client The client the connection has been lost to
      **/
-    void slotClientDisconnected(Q_UINT32 clientId);
+    void slotClientDisconnected(Q_UINT32 clientId,bool broken);
+
+    /**
+     * This slot is called whenever the connection to the server is lost (ie the
+     * signal @ref KGameNetwork::signalConnectionBroken is emitted) and will
+     * switch to local game mode
+     **/
+    void slotServerDisconnected();
 
 signals:
     /**

@@ -75,7 +75,7 @@ public slots:
 	 *
 	 * See @ref KGameNetwork::signalConnectionLost
 	 **/
-	void slotClientConnectionLost(Q_UINT32 clientID);
+	void slotClientConnectionLost(Q_UINT32 clientID,bool broken);
 	
 	/**
 	 * Unsets a @ref KGame which has been set using @ref setKGame before.

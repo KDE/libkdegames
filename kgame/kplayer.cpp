@@ -128,10 +128,10 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
   if (!isActive()) return false;
   if (!game()) return false;
 
-  kdDebug(11001) << "KPlayer::forwardInput to game playerInput(sender="<<sender<<")" << endl;
+  kdDebug() << "KPlayer::forwardInput to game playerInput(sender="<<sender<<")" << endl;
   if (!asyncInput() && !myTurn())
   {
-    kdDebug(11001) << "KPlayer::forwardInput rejected cause it is not our turn" << endl;
+    kdDebug() << "KPlayer::forwardInput rejected cause it is not our turn" << endl;
     return false;
   }
 
