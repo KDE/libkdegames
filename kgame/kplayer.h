@@ -92,7 +92,7 @@ public:
        */
       KPlayer(KGame* game);
 
-      ~KPlayer();
+      virtual ~KPlayer();
 
       /**
       * The idendification of the player. Overwrite this in

@@ -32,4 +32,4 @@
               01/09/09: FIXED! (AB) TODO: check if this behavior also appears in
 	      KGamePropertyList and KGamePropertyArray. Althogh this should not
 	      be the case
-
+- 23.09.2001: does the virtual destructor make sense for KGamePropertyBase?

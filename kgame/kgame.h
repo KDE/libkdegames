@@ -103,7 +103,7 @@ public:
     /**
     * Destructs the game
     */
-    ~KGame();
+    virtual ~KGame();
 
     /**
      * Gives debug output of the game status
