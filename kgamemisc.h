@@ -19,7 +19,7 @@
 /*
     $Id$
 */
-#ifndef __KGAMEMSIC_H__
+#ifndef __KGAMEMISC_H__
 #define __KGAMEMISC_H__
 
 #include <qstring.h>
