@@ -639,7 +639,7 @@ protected:
     * @return the current player
     *
     **/
-    KPlayer *playerInputFinished();
+    KPlayer *playerInputFinished(KPlayer *player);
 
 
     /**

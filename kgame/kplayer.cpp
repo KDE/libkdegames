@@ -85,6 +85,8 @@ void KPlayer::init()
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
 
+   mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
+   mUserId.setLocal(0);
    d->mGroup.registerData(KGamePropertyBase::IdGroup, this, i18n("Group"));
    d->mGroup.setLocal(i18n("default"));
    d->mName.registerData(KGamePropertyBase::IdName, this, i18n("Name"));
@@ -96,8 +98,6 @@ void KPlayer::init()
    mMyTurn.setLocal(false);
    mMyTurn.setEmittingSignal(true);
    mMyTurn.setOptimized(false);
-   mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
-   mUserId.setLocal(0);
 }
 
 KPlayer::~KPlayer()

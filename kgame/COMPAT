@@ -27,7 +27,8 @@
              Therefore ther can only be one function processing the input. If you really
              need a signal, you can of course simly emit it in the overwritten playerInput
              function
-
+20.09.2001  playerInputFinished(void->KPlayer *)
+--------------------- KGAME_ALPHA_1 --------------------- 
 
 
 

@@ -53,12 +53,10 @@ public:
     KGamePrivate()
     {
         mUniquePlayerNumber = 0;
-        mCurrentPlayer = 0 ;
-        mGameOver = 0;
+        mCurrentPlayer = 0 ; // use this only for the singleShot otherwise load problems
         mPolicy=KGame::PolicyLocal;
     }
 
-    int mGameOver;
     int mUniquePlayerNumber;
     KPlayer *mCurrentPlayer;
     QPtrQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
@@ -685,10 +683,9 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
    return false;
  }
  kdDebug(11001) << "KGame: Got playerInput from messageServer... sender: " << sender << endl;
- d->mCurrentPlayer=player;
  if (playerInput(msg,player))
  {
-   playerInputFinished();
+   playerInputFinished(player);
  }
  else
  {
@@ -701,16 +698,16 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
 }
 
   
-KPlayer * KGame::playerInputFinished()
+KPlayer * KGame::playerInputFinished(KPlayer *player)
 {
  // Check for game over and if not allow the next player to move
- KPlayer *player=d->mCurrentPlayer;
- d->mGameOver=checkGameOver(player);
- if (d->mGameOver!=0) 
+ d->mCurrentPlayer=player;
+ int gameOver=checkGameOver(player);
+ if (gameOver!=0) 
  {
-   player->setTurn(false);
+   if (player) player->setTurn(false);
    setGameStatus(End);
-   emit signalGameOver(d->mGameOver,d->mCurrentPlayer,this);
+   emit signalGameOver(gameOver,player,this);
  }
  else if (!player->asyncInput()) 
  {

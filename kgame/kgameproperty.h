@@ -43,10 +43,10 @@ public:
 	enum PropertyDataIds  { // these belong to KPlayer/KGame!
 		//KPlayer
 		IdGroup=1,
-		IdName=2,
+		IdUserId=2,
 		IdAsyncInput=3,
 		IdTurn=4,
-		IdUserId=5,
+		IdName=5,
 
 		//KGame
 		IdGameStatus=6,
