@@ -90,6 +90,7 @@ KMessageServer::KMessageServer (Q_UINT16 cookie,QObject* parent)
   : QObject(parent, 0)
 {
   d = new KMessageServerPrivate;
+  d->mIsRecursive=false;
   d->mCookie=cookie;
   connect (&(d->mTimer), SIGNAL (timeout()),
            this, SLOT (processOneMessage()));
