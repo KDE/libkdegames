@@ -2,12 +2,8 @@ dnl AB: checking for a system-wide highscore table. If "no" then the default
 dnl (currently just kapp->config()) is used. See KHighscore for details
 AC_DEFUN(AC_CHECK_HIGHSCORES,
 [
-  AC_ARG_ENABLE(highscore,[  --enable-highscore-dir=DIR  system-wide highscore table [default=no]],[
-    if test $enableval != "no";
-    then
-      AC_DEFINE_UNQUOTED(HIGHSCORE_DIRECTORY, "$enableval", [The system-wide highscore directory - if any])
-    fi
-    ],[])
+  AC_ARG_ENABLE(highscore-dir, [  --enable-highscore-dir=DIR  system-wide highscore table [default=no]],[
+      AC_DEFINE_UNQUOTED(HIGHSCORE_DIRECTORY, "$enableval", [The system-wide highscore directory - if any])],[])
 ])
 AC_CHECK_HIGHSCORES
 

@@ -151,6 +151,8 @@ public:
 	 **/
 	bool hasTable() const;
 
+	void sync();
+
 protected:
 	/**
 	 * @return A pointer to the @ref KConfig object to be used. This is

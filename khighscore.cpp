@@ -27,6 +27,8 @@
 #include <kapp.h>
 #include <kdebug.h>
 #include <ksimpleconfig.h>
+#include <kglobal.h>
+#include <kglobal.h>
 
 #include "khighscore.h"
 #include "config.h" // HIGHSCORE_DIRECTORY is defined here (or not)
@@ -53,7 +55,7 @@ KHighscore::KHighscore(QObject* parent) : QObject(parent)
 KHighscore::~KHighscore()
 {
 // not necessary, as KConfig destructor should handle this
- config()->sync();
+ sync();
  if (d->mConfig) {
 	delete d->mConfig;
  }
@@ -68,7 +70,6 @@ KConfig* KHighscore::config() const
 		//AB: is instanceName() correct? MUST be the same for all
 		//processes of the game!
 		QString file=QString::fromLatin1("%1/%2").arg(HIGHSCORE_DIRECTORY).arg(KGlobal::instance()->instanceName());
-		
 		d->mConfig = new KSimpleConfig(file);
 	}
 	return d->mConfig;
@@ -149,4 +150,5 @@ void KHighscore::writeList(const QString& key, const QStringList& list)
 bool KHighscore::hasTable() const
 { return config()->hasGroup(GROUP); }
 
-
+void KHighscore::sync()
+{ config()->sync(); }
