@@ -275,6 +275,9 @@ bool KGame::save(QString filename,bool saveplayers)
 }
 
 bool KGame::save(QDataStream &stream,bool saveplayers)
+{ return savegame(stream, false,saveplayers); }
+
+bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
 {
   // Save Game Data
 
@@ -1168,7 +1171,8 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   // Save the game over the network
   QByteArray bufferS;
   QDataStream streamS(bufferS,IO_WriteOnly);
-  save(streamS);
+  // Save game over netowrk and save players
+  savegame(streamS,true,true);
   sendSystemMessage(streamS,KGameMessage::IdGameLoad,sender);
  
 
@@ -1244,6 +1248,7 @@ void KGame::slotClientConnected(Q_UINT32 clientID)
 
 void KGame::slotServerDisconnected() // Client side
 {
+  kdDebug(11001) << "======= SERVER DISCONNECT ======="<<endl;
   kdDebug(11001) << "+++ (CLIENT)++++++++" << k_funcinfo << ": our GameID="<<gameId() << endl;
 
   int oldgamestatus=gameStatus();
@@ -1251,6 +1256,7 @@ void KGame::slotServerDisconnected() // Client side
   KPlayer *player;
   KGamePlayerList removeList;
   kdDebug(11001) << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
+  kdDebug(11001) << "Inactive Playerlist of client=" << d->mInactivePlayerList.count() << " count" << endl;
   for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
   {
     // TODO: CHECK: id=0, could not connect to server in the first place??

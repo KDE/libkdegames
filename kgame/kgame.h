@@ -846,6 +846,17 @@ protected:
      */
     virtual bool loadgame(QDataStream &stream, bool network,bool reset);
 
+    /**
+     * Save a game, to file OR network. Internal. 
+     *
+     * @param stream a data stream where you can stream the game from
+     * @param is it a call from the network or from a file (unused but informative)
+     * @param saveplayers - shall the players be saved too (should be TRUE)
+     *
+     * @return true?
+     */
+    virtual bool savegame(QDataStream &stream, bool network,bool saveplayers);
+
 private:
     //AB: this is to hide the "receiver" parameter from the user. It shouldn't be
     //used if possible (except for init).
