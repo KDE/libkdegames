@@ -33,3 +33,5 @@
 	      KGamePropertyList and KGamePropertyArray. Althogh this should not
 	      be the case
 - 23.09.2001: does the virtual destructor make sense for KGamePropertyBase?
+- 29.09.2001: GGZ integration. I (Andi) already volunteered for this - it's just
+              here so that I don't forget it
