@@ -1,6 +1,4 @@
 
-AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
-
 noinst_LTLIBRARIES = libkgame.la
 
 # compile-order doesn't matter here but maybe we will split these section soon

@@ -1,10 +1,9 @@
 
-AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
+AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(top_srcdir)/libkdegames && pwd))\""
 
 lib_LTLIBRARIES = libkdegames.la
 libkdegames_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -no-undefined -version-info 1:1
-libkdegames_la_LIBADD  = $(top_builddir)/libkdegames/kgame/libkgame.la \
-		$(top_builddir)/libkdegames/kgame/dialogs/libkgamedialogs.la \
+libkdegames_la_LIBADD  = kgame/libkgame.la kgame/dialogs/libkgamedialogs.la \
 		$(LIB_KSYCOCA)
 
 libkdegames_la_SOURCES = kcarddialog.cpp kstdgameaction.cpp \
