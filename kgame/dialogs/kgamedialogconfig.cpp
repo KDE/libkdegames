@@ -484,7 +484,7 @@ void KGameDialogMsgServerConfig::setAdmin(bool a)
 	connect(d->changeMaxClients, SIGNAL(pressed()), this, SLOT(slotChangeMaxClients()));
 	d->changeAdmin = new QPushButton(i18n("Change Admin"), this);
 	connect(d->changeAdmin, SIGNAL(pressed()), this, SLOT(slotChangeAdmin()));
-	d->removeClient = new QPushButton(i18n("Remove a Client With All Players"), this);
+	d->removeClient = new QPushButton(i18n("Remove Client With All Players"), this);
 	connect(d->removeClient, SIGNAL(pressed()), this, SLOT(slotRemoveClient()));
 	d->senderLayout->addWidget(d->changeMaxClients);
 	d->senderLayout->addWidget(d->changeAdmin);
