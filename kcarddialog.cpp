@@ -322,7 +322,7 @@ void KCardDialog::insertCardIcons()
         item->setSelectable(true);
 
         d->cardMap[item] = path;
-        d->helpMap[path] = cfg.readEntry("Info",name);
+        d->helpMap[path] = cfg.readEntry("Comment",name);
     }
 }
 
@@ -356,7 +356,7 @@ void KCardDialog::insertDeckIcons()
         item->setRenameEnabled(false);
 
         d->deckMap[item] = getDeckName(*it);
-        d->helpMap[d->deckMap[item]] = cfg.readEntry("Info",name);
+        d->helpMap[d->deckMap[item]] = cfg.readEntry("Comment",name);
     }
 }
 
