@@ -137,6 +137,16 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
  return true;
 }
 
+int KChatBase::sendingEntry() const
+{
+ int index = d->mCombo->currentItem();
+ if (!d->mIndex2Id.contains(index)) {
+	kdWarning(11000) << "could not find the selected sending entry!" << endl;
+	return -1;
+ }
+ return d->mIndex2Id[index];
+}
+
 void KChatBase::removeSendingEntry(int id)
 {
  if (!d->mCombo) {

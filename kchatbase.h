@@ -80,6 +80,12 @@ public:
 	 * @param id The unique id of the entry
 	 **/
 	void removeSendingEntry(int id);
+
+	/**
+	 * @return The _unique ID_ of the sending entry that has been selected.
+	 * See also @ref addSendingEntry
+	 **/
+	int sendingEntry() const;
 	
 	/**
 	 * Inserts a new entry in the combo box.
