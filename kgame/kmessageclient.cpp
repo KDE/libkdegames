@@ -273,6 +273,7 @@ void KMessageClient::removeBrokenConnection ()
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
+  kdDebug (11001) << "KMessageClient::removeBrokenConnection: Deleting the connection object DONE" << endl;
 }
 
 #include "kmessageclient.moc"
