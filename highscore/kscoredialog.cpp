@@ -80,8 +80,8 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
    d->header[Name] = i18n("Name");
    d->key[Name] = "Name";
    
-   d->header[Level] = i18n("Date");
-   d->key[Level] = "Date";
+   d->header[Date] = i18n("Date");
+   d->key[Date] = "Date";
    
    d->header[Level] = i18n("Level");
    d->key[Level] = "Level";
