@@ -99,7 +99,7 @@ bool KGamePropertyBase::sendProperty()
  KGameMessage::createPropertyHeader(s, id());
  save(s);
  if (mOwner) {
-	mOwner->sendProperty(s);
+	return mOwner->sendProperty(s);
  } else {
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
@@ -114,7 +114,7 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
  KGameMessage::createPropertyHeader(s, id());
  s.writeRawBytes(data.data(), data.size());
  if (mOwner) {
-	mOwner->sendProperty(s);
+	return mOwner->sendProperty(s);
  } else {
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;

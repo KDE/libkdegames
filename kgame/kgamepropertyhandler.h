@@ -161,7 +161,7 @@ public:
 	 * datastream. This call is simply forwarded to
 	 * the parent object
 	 **/ 
-	void sendProperty(QDataStream &s);
+	bool sendProperty(QDataStream &s);
 
 	void sendLocked(bool l);
 
@@ -268,8 +268,10 @@ signals:
 	/**
 	 * This signal is emitted when a property needs to be sent. Only the
 	 * parent has to react to this.
+	 * @param sent set this to true if the property was sent successfully -
+	 * otherwise don't touch
 	 **/
-	void signalSendMessage(QDataStream &);
+	void signalSendMessage(QDataStream &, bool& sent);
 
 	/**
 	 * If you call @ref propertyValue with a non-standard @ref KGameProperty

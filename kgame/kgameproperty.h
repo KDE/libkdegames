@@ -641,6 +641,12 @@ public:
 	 * performance (you probably don't have to deactivate it - except you
 	 * want to write a real-time game like Command&Conquer with a lot of
 	 * acitvity). See @ref emitSignal
+	 *
+	 * Note that if there is no @ref KMessageServer accessible - before
+	 * the property has been registered to the @ref KGamePropertyHandler (as
+	 * it is the case e.g. before a @ref KPlayer has been plugged into the
+	 * @ref KGame object) the property is *not* sent but set *locally* (see
+	 * @ref setLocal)!
 	 * 
 	 * @param v The new value of the property
 	 * @return whether the property could be sent successfully
@@ -657,7 +663,11 @@ public:
 		QByteArray b;
 		QDataStream stream(b, IO_WriteOnly);
 		stream << v;
-		return sendProperty(b);
+		if (!sendProperty(b)) {
+			setLocal(v);
+			return false;
+		}
+		return true;
 	}
 
 	/**
