@@ -16,8 +16,6 @@
               mabye use the QT tic-tac-toe example?) would be very great (this
               could be stuff of a tutorial instead of KGame documentation)
               MH: Even better idea
-- 25.05.2001: connect to the signal KGameNetwork::connectionBroken and start a
-              local non-network game
 - 03.06.2001: can KGameNetwork::sendSystemMessage made protected (maybe using
               friends)? sendSystenMessage AND sendMessage is very confusing to
               the user... same applies to e.g. sendProperty which is internal
@@ -31,14 +29,8 @@
 - 21.06.2001: KPlayerPropertyArray does not yet support at() and operator[]
               assignments. Need to check whether the method from QBitArray
               can be applied
-- 11.07.2001: go through the entire API documentation and change/delete what is
-              obsolete.
 - 15.08.2001: KGamePropertyList doesn't honor Policies - only Clean is
               possible current
-- 02.04.2001: KGameNetwork:disconnect() not implemented
-- 02.04.2001: connect to non existing server crashes
-- 02.04.2001: disconnect from network does not properly restore local game, neither for
-              server nor for the clients
 - 02.04.2001: VERY DANGEROUS: property1=property2 does NOT assign the values, e.g. int
               but assignes the whole property, i.e. you have then two properties with
               the same id and everything is wrong
