@@ -133,7 +133,7 @@ public:
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
 //      r=QMemArray<type>::fill(data,size);//FIXME: return value!
-      command(s, CmdFille, true);
+      command(s, CmdFill, true);
     }
     return r;
   }
