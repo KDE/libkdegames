@@ -65,7 +65,7 @@ public:
 
 	/**
 	 * The owner player of the dialog has been changed. The default
-	 * changes the pointer for @ref owner so don't forget to call the
+	 * changes the pointer for owner so don't forget to call the
 	 * default implementation if you overwrite this!
 	 *
 	 * You can use this e.g. to change a line edit widget containing the 
@@ -78,11 +78,11 @@ public:
 
 	/**
 	 * The KGame object of the dialog has been changed. The default
-	 * implementation changes the pointer for @ref game so don't forget to
+	 * implementation changes the pointer for game so don't forget to
 	 * call the default implementation if you overwrite this!
 	 *
 	 * You can use this e.g. to re-read the min/max player settings.
-	 * @param p The new owner player of the dialog
+	 * @param g The KGame object
 	 **/
 	virtual void setKGame(KGame* g);
 
@@ -95,7 +95,7 @@ public:
 	 * configured by the player. Mainly the KGame configuration can be done
 	 * by the admin only.
 	 *
-	 * By default this does nothing. Changes the value for @ref admin so 
+	 * By default this does nothing. Changes the value for admin so 
 	 * don't forget to call the default implementation in derived classes!
 	 * @param admin Whether the KGame object of this dialog can be
 	 * configured
@@ -103,15 +103,15 @@ public:
 	virtual void setAdmin(bool admin);
 
 	/**
-	 * A pointer to the @ref KGame object that has been set by @ref setKGame.
+	 * A pointer to the     KGame object that has been set by @ref setKGame.
 	 *
 	 * Note that NULL is allowed!
-	 * @return The @ref KGame object assigned to this dialog
+	 * @return The KGame object assigned to this dialog
 	 **/
 	KGame* game() const;
 
 	/**
-	 * A pointer to the @ref KPlayer object that has been set by @ref
+	 * A pointer to the KPlayer object that has been set by @ref
 	 * setOwner.
 	 *
 	 * Note that NULL is allowed!
@@ -120,7 +120,7 @@ public:
 	KPlayer* owner() const;
 
 	/**
-	 * @return True if the @ref owner is ADMIN otherwise FALSE. See also
+	 * @return True if the owner is ADMIN otherwise FALSE. See also
 	 * @ref setAdmin
 	 **/
 	bool admin() const;
@@ -269,11 +269,11 @@ public:
 	KGameDialogMsgServerConfig(QWidget* parent = 0);
 	virtual ~KGameDialogMsgServerConfig();
 
-	virtual void submitToKGame(KGame*, KPlayer*) {}
+	virtual void submitToKGame(KGame* g, KPlayer* p) {}
 
 	void setHasMsgServer(bool);
 
-	virtual void setKGame(KGame*);
+	virtual void setKGame(KGame* g);
 	virtual void setAdmin(bool);
 
 protected slots:
@@ -302,10 +302,10 @@ public:
 	KGameDialogChatConfig(int chatMsgId, QWidget* parent = 0);
 	virtual ~KGameDialogChatConfig();
 
-	virtual void setKGame(KGame*);
-	virtual void setOwner(KPlayer*);
+	virtual void setKGame(KGame* g);
+	virtual void setOwner(KPlayer* p);
 
-	virtual void submitToKGame(KGame*, KPlayer*) { }
+	virtual void submitToKGame(KGame* g, KPlayer* p) { }
 
 private:
 	KGameDialogChatConfigPrivate* d;

@@ -32,27 +32,29 @@ class KRawConfig;
 class KHighscorePrivate;
 
 /**
+ * @short Class for managing highscore tables
+ *
  * This is the KDE class for saving and reading highscore tables. It offers the
  * possibility for system-wide highscore tables (configure with e.g.
  * --enable-highscore-dir=/var/games) and a theoretically unlimited number of
  * entries.
  *
- * You can specify different "keys" for an entry - just like the @ref KConfig
+ * You can specify different "keys" for an entry - just like the KConfig
  * keys. But it will be prefixed with the number of the entry. For example you
  * will probably use something like this to save the name of the player on the
  * top of the list (ie the winner):
- * <pre>
+ * \code
  * highscore->writeEntry(1, "name", myPlayer->name());
- * </pre>
+ * \endcode
  * Note that it doesn't really matter if you use "0" or "1" as the first entry
  * of the list as long as your program always uses the same for the first
  * entry. I recommend to use "1", as several convenience methods use this.
  *
- * You can also specify different groups using @ref setHighscoreGroup. Just
- * like the keys mentioned above the groups behave like groups in @ref KConfig
+ * You can also specify different groups using setHighscoreGroup. Just
+ * like the keys mentioned above the groups behave like groups in KConfig
  * but are prefixed with "KHighscore_". The default group is just "KHighscore".
  * You might use this e.g. to create different highscore tables like
- * <pre>
+ * \code
  * table->setHighscoreGroup("Easy");
  * // write the highscores for level "easy" to the table
  * writeEasyHighscores(table);
@@ -60,24 +62,23 @@ class KHighscorePrivate;
  * table->setHighscore("Player_1");
  * // write player specific highscores to the table
  * writePlayerHighscores(table);
- * </pre>
+ * \endcode
  * As you can see above you can also use this to write the highscores of a
  * single player, so the "best times" of a player. To write highscores for a
  * specific player in a specific level you will have to use a more complex way:
- * <pre>
+ * \code
  * QString group = QString("%1_%2").arg(player).arg(level);
  * table->setGroup(group);
  * writeHighscore(table, player, level);
- * </pre>
+ * \endcode
  *
  * Also note that you MUST NOT mark the key or the group for translation! I.e.
  * don't use i18n() for the keys or groups! Here is the code to read the above
  * written entry:
- * <pre>
+ * \code
  * QString firstName = highscore->readEntry(0, "name");
- * </pre>
+ * \endcode
  * Easy, what?
- * @short Class for managing highscore tables
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KHighscore : public QObject
@@ -90,19 +91,22 @@ public:
          */
 	KHighscore(QObject* parent = 0);
 
-        /** @since 3.2
+        /**
          * Constructor.
          *
          * @param forceLocal if true, the local highscore file is used even
          * when the configuration has been set to use a system-wide file. This
          * is convenient for converting highscores from legacy applications.
+	 * @param parent parent widget for this widget
+	 * @since 3.2
          */
         KHighscore(bool forceLocal, QObject *parent);
 
-        /** @since 3.2
+        /**
          * Read the current state of the highscore file. Remember that when
          * it's not locked for writing, this file can change at any time.
          * (This method is only useful for a system-wide highscore file).
+	 * @since 3.2
          */
         void readCurrentConfig();
 
@@ -123,7 +127,7 @@ public:
          * return true if the local file is used).
          * You should perform writing without GUI interaction to avoid
          * blocking and don't forget to unlock the file as soon as possible
-         * with @ref writeAndUnlock().
+         * with writeAndUnlock().
          *
          * If the config file cannot be locked,
          * the method waits for 1 second and, if it failed again, displays
@@ -135,16 +139,18 @@ public:
          */
         bool lockForWriting(QWidget *widget = 0);
 
-        /** @since 3.2
+        /**
          * Effectively write and unlock the system-wide highscore file
          * (@see lockForWriting).
          * If using a local highscore file, it will sync the config.
+	 * @since 3.2
          */
         void writeAndUnlock();
 
-        /** @since 3.2
+        /**
          * @return true if the highscore file is locked or if a local
          * file is used.
+	 *  @since 3.2
          */
         bool isLocked() const;
 
@@ -157,7 +163,7 @@ public:
 	/**
 	 * @param entry The number of the entry / the placing of the player
 	 * @param key A key for this entry. E.g. "name" for the name of the
-	 * player. Nearly the same as the usual keys in @ref KConfig - but they
+	 * player. Nearly the same as the usual keys in KConfig - but they
 	 * are prefixed with the entry number
 	 * @param value The value of this entry
 	 **/
@@ -169,10 +175,10 @@ public:
 	 **/
 	void writeEntry(int entry, const QString& key, int value);
 
-    /**
+	/**
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
-     * See @ref KConfigBase documentation for allowed QVariant::Type.
+	 * See KConfigBase documentation for allowed QVariant::Type.
 	 **/
 	void writeEntry(int entry, const QString& key, const QVariant &value);
 
@@ -180,7 +186,7 @@ public:
 	 * Reads an entry from the highscore table.
 	 * @param entry The number of the entry / the placing to be read
 	 * @param key The key of the entry. E.g. "name" for the name of the
-	 * player. Nearly the same as the usual keys in @ref KConfig - but they
+	 * player. Nearly the same as the usual keys in KConfig - but they
 	 * are prefixed with the entry number
 	 * @param pDefault This will be used as default value if the key+pair
 	 * entry can't be found.
@@ -193,7 +199,7 @@ public:
 	 * Read a numeric value.
 	 * @param entry The number of the entry / the placing to be read
 	 * @param key The key of the entry. E.g. "name" for the name of the
-	 * player. Nearly the same as the usual keys in @ref KConfig - but they
+	 * player. Nearly the same as the usual keys in KConfig - but they
 	 * are prefixed with the entry number
 	 * @param pDefault This will be used as default value if the key+pair
 	 * entry can't be found.
@@ -204,7 +210,7 @@ public:
 
     /**
      * Read a QVariant entry.
-     * See @ref KConfigBase documentation for allowed QVariant::Type.
+     * See KConfigBase documentation for allowed QVariant::Type.
      *
      * @return the value of this entry+key pair or pDefault if the entry+key
      * pair doesn't exist or
@@ -223,11 +229,11 @@ public:
 	 * function aborts reading even if after the missing entry is an
 	 * existing one. The first entry of the list is the first placing, the
 	 * last on is the last placing.
-	 * @return A list of the entries of this key. You could also calls
-	 * @readEntry(i, key) where i is from 1 to 20. Note that this function
+	 * @return A list of the entries of this key. You could also call
+	 * readEntry(i, key) where i is from 1 to 20. Note that this function
 	 * depends on "1" as the first entry!
 	 * @param key The key of the entry. E.g. "name" for the name of the
-	 * player. Nearly the same as the usual keys in @ref KConfig - but they
+	 * player. Nearly the same as the usual keys in KConfig - but they
 	 * are prefixed with the entry number
 	 * @param lastEntry the last entry which will be includes into the list.
 	 * 1 will include a list with maximal 1 entry - 20 a list with maximal
@@ -243,7 +249,7 @@ public:
 	 * way of calling writeEntry(i, key, list[i]) from i = 1 to
 	 * list.count()
 	 * @param key A key for the entry. E.g. "name" for the name of the
-	 * player. Nearly the same as the usual keys in @ref KConfig - but they
+	 * player. Nearly the same as the usual keys in KConfig - but they
 	 * are prefixed with the entry number
 	 * @param list The list of values
 	 **/
@@ -274,21 +280,21 @@ public:
 
 	/**
 	 * @return The currently used group. This doesn't contain the prefix
-	 * ("KHighscore_") but the same as @ref setHighscoreGroup uses. The
+	 * ("KHighscore_") but the same as setHighscoreGroup uses. The
          * default is QString::null
 	 **/
 	const QString& highscoreGroup() const;
 
 protected:
 	/**
-	 * @return A groupname to be used in @ref KConfig. Used internally to
-	 * prefix the value from @ref highscoreGroup() with "KHighscore_"
+	 * @return A groupname to be used in KConfig. Used internally to
+	 * prefix the value from highscoreGroup() with "KHighscore_"
 	 **/
 	QString group() const;
 
 	/**
-	 * @return A pointer to the @ref KConfig object to be used. This is
-	 * either kapp->config() (default) or a @ref KSimpleConfig object for
+	 * @return A pointer to the KConfig object to be used. This is
+	 * either kapp->config() (default) or a KSimpleConfig object for
          * a system-wide highscore file.
 	 **/
 	KConfig* config() const;

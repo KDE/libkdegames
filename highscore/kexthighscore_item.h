@@ -64,8 +64,8 @@ class Item
      *      Double) </li>
      * <li> @p NegativeNotDefined : negative values are replaced by "--" (only
      *      for Int and Double) </li>
-     * <li> @p DefaultNotDefined : deafult value is replaced by "--" </lit>
-     * <li> @p Anonymous : replace the special value @ref ItemBase::ANONYMOUS
+     * <li> @p DefaultNotDefined : default value is replaced by "--" </li>
+     * <li> @p Anonymous : replace the special value ItemBase::ANONYMOUS
      *      by i18n("anonymous") (only for String) </li>
      * </ul>
      */
@@ -133,6 +133,7 @@ class Item
      * unchanged). Most of the time you don't need to reimplement this method.
      *
      * @param i the element index ("rank" for score / "id" for player)
+     * @param value the value to convert
      */
     virtual QVariant read(uint i, const QVariant &value) const;
 
@@ -141,6 +142,7 @@ class Item
      * method for special formatting (different from the standard ones).
      *
      * @param i the element index ("rank" for score / "id" for player)
+     * @param value the value to convert
      */
     virtual QString pretty(uint i, const QVariant &value) const;
 
@@ -167,7 +169,7 @@ enum ScoreType { Won = 0, Lost = -1 };
 
 /**
  * This class contains data for a score. You should not inherit from
- * this class but reimplement the methods in @ref Highscores.
+ * this class but reimplement the methods in Highscores.
  */
 class Score
 {
@@ -187,13 +189,13 @@ class Score
     void setType(ScoreType type) { _type = type; }
 
     /**
-     * @return the data associated with the named @ref Item.
+     * @return the data associated with the named Item.
      */
     const QVariant &data(const QString &name) const;
 
     /**
-     * Set the data associated with the named @ref Item. Note that the
-     * value should have the type of the default value of the @ref
+     * Set the data associated with the named Item. Note that the
+     * value should have the type of the default value of the
      * Item.
      */
     void setData(const QString &name, const QVariant &value);
@@ -214,7 +216,7 @@ class Score
 
     /**
      * @return true if this is the worst possible score (ie the default
-     * argument of @ref ScoreItem).
+     * argument of ScoreItem).
      */
     bool isTheWorst() const;
 

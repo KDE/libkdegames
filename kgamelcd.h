@@ -86,8 +86,8 @@ public:
 
 public slots:
     /**
-     * Highlight the LCD with the @ref QColorGourp::HighlightedText color
-     * for a small time (@ref setHighlightTime).
+     * Highlight the LCD with the QColorGourp::HighlightedText color
+     * for a small time (setHighlightTime).
      */
     void highlight();
 
@@ -195,6 +195,8 @@ public:
      * Constructor.
      *
      * @param title is the content of the top label.
+     * @param parent passed to the QWidget constructor
+     * @param name passed to the QWidget constructor
      */
     KGameLCDList(const QString &title,
                  QWidget *parent = 0, const char *name = 0);
@@ -203,8 +205,8 @@ public:
     ~KGameLCDList();
 
     /**
-     * Append a @ref QLCDNumber at the bottom of the list.
-     * The @ref QLCDNumber should have the @ref KGameLCDList as parent.
+     * Append a QLCDNumber at the bottom of the list.
+     * The QLCDNumber should have the KGameLCDList as parent.
      */
     void append(QLCDNumber *lcd);
 
@@ -219,12 +221,12 @@ public:
     QLabel *title() const { return _title; }
 
     /**
-     * @return the @ref QLCDNumber at index @param i.
+     * @return the QLCDNumber at index @param i
      */
     QLCDNumber *lcd(uint i) const { return _lcds[i]; }
 
     /**
-     * @return the number of @ref QLCDNumber in the list.
+     * @return the number of QLCDNumber in the list.
      */
     uint size() const { return _lcds.size(); }
 

@@ -37,9 +37,10 @@ class KChat : public KChatBase
 	Q_OBJECT
 public:
 	/**
+	 * @param parent The parent widget for this widget.
 	 * @param twoPlayerGame If true the combo box where the player can
 	 * choose to send to a single player or to all players will not be added
-	 * as you will hardly need it in 2-player games...
+	 * as you will hardly need it in 2-player games.
 	 **/
 	KChat(QWidget* parent, bool twoPlayerGame = false);
 
@@ -54,8 +55,8 @@ public:
 
 	/**
 	 * This sets the name that will be shown on all chat widgets if this
-	 * widget sends a message. See @ref signalSendMessage
-	 * @ref The name of the player owning this widget
+	 * widget sends a message. See signalSendMessage
+	 * @param name The name of the player owning this widget
 	 **/
 	void setFromNickname(const QString& name);
 
@@ -106,7 +107,8 @@ public:
 	const QString& player(int id) const;
 
 	/**
-	 * @return The ID that belongs to the local player. See @setFromNickname
+	 * @return The ID that belongs to the local player. 
+	 * @see setFromNickname
 	 **/
 	int fromId() const;
 	
@@ -118,7 +120,7 @@ signals:
 	 * The message is added automatically using @ref KChatBase::addMessage if @ref
 	 * autoAddMessages is enabled.
 	 * @param id The id of the player who sends the message - see
-	 * @ref setFromNickname and @ref player
+	 * setFromNickname and player
 	 * @param msg The message itself
 	 **/
 	void signalSendMessage(int id, const QString& msg);

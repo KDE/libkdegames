@@ -30,13 +30,15 @@ class KConfig;
 class KCardDialogPrivate;
 
 /**
+ * @short A carddeck selection dialog for card games.
+ *
  * The KCardDialog provides a dialog for interactive carddeck selection.
  * It gives cardgames an easy to use interface to select front and
  * back of the card sets. As card sets the KDE default cardsets are
  * offered as well as used specified ones.
  *
  * In most cases, the simplest
- * use of this class is the static method @ref KCardDialog::getCardDeck,
+ * use of this class is the static method KCardDialog::getCardDeck,
  * which pops up the dialog, allows the user to select a carddeck, and
  * returns when the dialog is closed. Only if you really need some specific
  * behaviour or if you overwrite the dialog you need all the other access
@@ -44,35 +46,35 @@ class KCardDialogPrivate;
  *
  * Example:
  *
- * <pre>
+ * \code
  *      QString deck,card;
  *      int result = KCardDialog::getCardDeck(deck,card );
  *      if ( result == KCardDialog::Accepted )
  *            ...
- * </pre>
+ * \endcode
  *
  * Here you can see a card dialog in action
- * @image kcarddialog.png KCarddialog
+ * @image html "kcarddialog.png" KCarddialog
  *
- * @ref KCardDialog::getCardDeck takes a lot of different parameters which are
+ * KCardDialog::getCardDeck takes a lot of different parameters which are
  * probably very useful. You can e.g. use the parameters randomDeck and
  * randomCardDir to give the end-user the ability to choose a random
  * deck/carddir. You have to save the value of those parameters in your config
  * file - that's why the parameters are needed. 
  *
- * You can also provide a @ref KConfig pointer (usually kapp->config()). This
+ * You can also provide a KConfig pointer (usually kapp->config()). This
  * pointer is used to store information about the dialog in an own group
  * ("KCardDailog"). 
  * So you can just ignore the randomCardDir and randomDeck
- * values and call @ref KCardDialog::getConfigCardDeck instead. The only reson
+ * values and call KCardDialog::getConfigCardDeck instead. The only reson
  * for this function is to read a previously written configuration and give you
  * the information about it. This way you don't have to save any configuration
- * on your own - @ref KCardDialog does this for you.
+ * on your own - KCardDialog does this for you.
  *
- * Another Parameter for @ref KCardDialog::getCardDeck is scale. This pointer
+ * Another Parameter for KCardDialog::getCardDeck is scale. This pointer
  * to a double variable contains the scaling factor the user has chosen in the
  * dialog (the scale box won't be shown if you don't provide this parameter).
- * You might want to check out @ref QPixmap::xFrom which gives you access to
+ * You might want to check out QPixmap::xFrom which gives you access to
  * scaling. You can e.g. use
  * <pre>
  * QWMatrix m;
@@ -81,7 +83,6 @@ class KCardDialogPrivate;
  * </pre>
  * to scale your pixmap.
  *
- * @short A carddeck selection dialog for card games.
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
@@ -138,18 +139,18 @@ public:
    *        foregrounds on startup.
    *        See @ref getRandomCardDir()
    *
-   * @param size If non-zero a box is shown which provides the possibility to
+   * @param scale If non-zero a box is shown which provides the possibility to
    *        change the size of the cards. The desired scaling factor is returned to the
    *        game in this variable.
    *
-   * @param conf If non-zero @ref KCardDialog reads the initial settings for 
+   * @param conf If non-zero KCardDialog reads the initial settings for 
    *        this dialog from the applications config file and stores them there
-   *        when the dialog is closed. You can just use @ref getConfigCardDeck
+   *        when the dialog is closed. You can just use getConfigCardDeck
    *        to get the deck/carddir the user selected before. Note that the 
    *        parameters randomDeck and randomCardDir overwrite the initial settings from the
    *        config file.
    *
-   * @return @ref #QDialog::result().
+   * @return QDialog::result().
    */
    static int getCardDeck(QString &deck,QString &carddir, QWidget *parent=0,
                           CardFlags flags=Both, bool* randomDeck=0,
@@ -208,7 +209,7 @@ public:
     static QString getCardPath(const QString &carddir, int index);
 
    /**
-    * Returns a random deck in @ref deckPath()
+    * Returns a random deck in deckPath()
     * @return A random deck
     **/
     static QString getRandomDeck();
@@ -263,7 +264,7 @@ public:
    /**
    * Creates the default widgets in the dialog. Must be called after
    * all flags are set. This is only needed if you do NOT use the
-   * @ref #getCardDeck static function which provides all calls for you.
+   * getCardDeck static function which provides all calls for you.
    */
    void setupDialog(bool showResizeBox = false);
 
@@ -301,8 +302,8 @@ public:
    void loadConfig(KConfig* conf);
 
    /**
-    * Saves the @ref KCardDialog config into a config file. This should be the
-    * applications config file - @ref KCardDialog creates an own group
+    * Saves the KCardDialog config into a config file. This should be the
+    * applications config file - KCardDialog creates an own group
     * ("KCardDialog"). These settings are used by @ref loadConfig and @ref
     * getConfigCardDeck.
     **/

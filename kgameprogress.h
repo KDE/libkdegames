@@ -28,25 +28,22 @@
 #include <qrangecontrol.h>
 
 /**
- * A stylized progress bar.
+ * @short A progress indicator widget.
  *
- * KGameProgress is derived from @ref QFrame and @ref QRangeControl, so
+ * KGameProgress is derived from QFrame and QRangeControl, so
  * you can use all the methods from those classes. The only difference
- * is that @ref setValue() is now made a slot, so you can connect
+ * is that setValue() is now made a slot, so you can connect
  * stuff to it.
- *
- * @sect Details
  *
  * None of the constructors take line step and page step as arguments,
  * so by default they're set to 1 and 10 respectively.
  *
- * The Blocked style ignores the @ref textEnabled() setting and displays
+ * The Blocked style ignores the textEnabled() setting and displays
  * no text, since it looks truly ugly (and for other reasons). Signal
- * @ref percentageChanged() is emitted whenever the value changes so you
+ * percentageChanged() is emitted whenever the value changes so you
  * can set up a different widget to display the current percentage complete
  * and connect the signal to it.
  *
- * @short A progress indicator widget.
  * @author Martynas Kunigelis
  * @version $Id$
  */
@@ -163,17 +160,14 @@ public:
   bool textEnabled() const;
 
   /**
-   * @reimplemented
    */
   virtual QSize sizeHint() const;
 
   /**
-   * @reimplemented
    */
   virtual QSize minimumSizeHint() const;
 
   /**
-   * @reimplemented
    */
   virtual QSizePolicy sizePolicy() const;
 
@@ -207,7 +201,7 @@ public slots:
    *
    * This method is
    * provided for convenience and is equivalent with
-   * @ref setValue(value()+prog).
+   * setValue(value()+prog).
    */
   void advance(int prog);
 
@@ -219,23 +213,18 @@ signals:
 
 protected:
   /**
-   * @reimplemented
    */
   void valueChange();
   /**
-   * @reimplemented
    */
   void rangeChange();
   /**
-   * @reimplemented
    */
   void styleChange( QStyle& );
   /**
-   * @reimplemented
    */
   void paletteChange( const QPalette & );
   /**
-   * @reimplemented
    */
   void drawContents( QPainter * );
 

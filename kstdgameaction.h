@@ -33,12 +33,12 @@ class KSelectAction;
 /**
  * @see KStdAction
  *
- * This class is an extension to the usual @ref KStdAction class which provides
+ * This class is an extension to the usual KStdAction class which provides
  * easy access to often used KDE actions
  *
  * Games often use different menu entries than other programs, e.g. games use
  * the menu "game" instead of "file". This class provides the entries which
- * differ from the usual @ref KStdAction entries.
+ * differ from the usual KStdAction entries.
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
@@ -71,13 +71,13 @@ public:
     ~KStdGameAction();
 
     /**
-	 * Creates an action corresponding to the
-	 * @ref KStdAction::StdAction enum.
+     * Creates an action corresponding to the
+     * KStdAction::StdAction enum.
      * @since 3.2
-	 */
-	static KAction* create( StdGameAction id, const char *name,
-		const QObject *recvr, const char *slot,
-		KActionCollection* parent );
+     */
+    static KAction* create( StdGameAction id, const char *name,
+			    const QObject *recvr, const char *slot,
+			    KActionCollection* parent );
 
     /**
      * @since 3.2
@@ -90,7 +90,7 @@ public:
 
     /**
      * Retrieve the action corresponding to the
-     * @ref KStdGameAction::StdGameAction enum.
+     * KStdGameAction::StdGameAction enum.
      * @deprecated
      */
     static KAction *action(StdGameAction act_enum, const QObject *recvr = 0,
@@ -98,10 +98,10 @@ public:
                            const char *name = 0L );
 
     /**
-	 * This will return the internal name of a given standard action.
+     * This will return the internal name of a given standard action.
      * @since 3.2
-	 */
-	static const char* name( StdGameAction id );
+     */
+    static const char* name( StdGameAction id );
 
     /**
      * This will return the internal name of a given standard action.

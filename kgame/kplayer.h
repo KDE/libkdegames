@@ -35,34 +35,35 @@ class KGamePropertyHandler;
 class KPlayerPrivate;
 
 /**
+ * @short Base class for a game player
+ *
  * The KPlayer class is the central player object. It holds
  * information about the player and is responsible for any
  * input the player does. For this arbitrary many KGameIO
  * modules can be plugged into it. Main features are:
  * - Handling of IO devices
- * - load/save (mostly handled by @ref KGamePropertyHandler)
+ * - load/save (mostly handled by KGamePropertyHandler)
  * - Turn handling (turn based, asynchronous)
  *
- * A KPlayer depends on a @ref KGame object. Call @ref KGame::addPlayer to plug
- * a KPlayer into a @ref KGame object. Note that you cannot do much with a
- * KPlayer object before it has been plugged into a @ref KGame. This is because
- * most properties of KPlayer are @ref KGameProperty which need to send messages
- * through a @ref KGame object to be changed. 
+ * A KPlayer depends on a KGame object. Call KGame::addPlayer() to plug
+ * a KPlayer into a KGame object. Note that you cannot do much with a
+ * KPlayer object before it has been plugged into a KGame. This is because
+ * most properties of KPlayer are KGameProperty which need to send messages
+ * through a KGame object to be changed. 
  *
  * A KGameIO represents the input methods of a player and you should make all
  * player inputs through it. So call something like playerInput->move(4);
- * instead which should call @ref KGameIO::sendInput to actually move. This way
- * you gain a *very* big advantage: you can exchange a @ref KGameIO whenever you
+ * instead which should call KGameIO::sendInput() to actually move. This way
+ * you gain a *very* big advantage: you can exchange a KGameIO whenever you
  * want! You can e.g. remove the KGameIO of a local (human) player and just
  * replace it by a computerIO on the fly! So from that point on all playerInputs
  * are done by the computerIO instead of the human player. You also can replace
  * all network players by computer players when the network connection is broken
  * or a player wants to quit. 
- * So remember: use @ref KGameIO whenever possible! A KPlayer should just
- * contain all data of the player (@ref KGameIO must not!) and several common
+ * So remember: use KGameIO whenever possible! A KPlayer should just
+ * contain all data of the player (KGameIO must not!) and several common
  * functions which are shared by all of your KGameIOs.
  *
- * @short Base class for a game player
  */
 class KPlayer : public QObject
 {
@@ -81,7 +82,7 @@ public:
       /**
        * Create a new player object. It will be automatically
        * deleted if the game it belongs to is deleted. This constructor
-       * automatically adds the player to the game using @ref KGame::addPlayer
+       * automatically adds the player to the game using KGame::addPlayer()
        */
       KPlayer(KGame* game);
 
@@ -294,8 +295,8 @@ public:
        * The remove IO(s) is/are deleted by default. If
        * you do not want this set the parameter deleteit to false
        *
-       * @param the device to be removed or 0 for all devices
-       * @param true (default) to delete the device otherwisse just remove it
+       * @param input the device to be removed or 0 for all devices
+       * @param deleteit true (default) to delete the device otherwisse just remove it
        * @return true on ok
        */
       bool removeGameIO(KGameIO *input=0,bool deleteit=true);
@@ -304,7 +305,7 @@ public:
        * Finds the KGameIO devies with the given rtti code.
        * E.g. find the mouse or network device
        *
-       * @param the rtti code to be searched for
+       * @param rtti the rtti code to be searched for
        * @return the KGameIO device
        */
       KGameIO *findRttiIO(int rtti) const;
@@ -322,14 +323,14 @@ public:
       /**
        * Forwards input to the game object..internal use only
        *
-       * This method is used by @ref KGameIO::sendInput. Use that function
+       * This method is used by KGameIO::sendInput(). Use that function
        * instead to send player inputs!
        *
-       * This function forwards a player input (see @ref KGameIO classes) to the
-       * game object, see @ref KGame, either to @ref KGame::sendPlayerInput (if
-       * transmit=true, ie the message has just been created) or to @ref
-       * KGame::playerInput (if player=false, ie the message *was* sent through
-       * @ref KGame::sendPlayerInput).
+       * This function forwards a player input (see KGameIO classes) to the
+       * game object, see KGame, either to KGame::sendPlayerInput() (if
+       * transmit=true, ie the message has just been created) or to
+       * KGame::playerInput() (if player=false, ie the message *was* sent through
+       * KGame::sendPlayerInput).
        */
       virtual bool forwardInput(QDataStream &msg,bool transmit=true, Q_UINT32 sender=0);
 
@@ -352,7 +353,7 @@ public:
        * to setTurn(false) and only this player can move
        *
        * @param b true/false
-       * @param exlusive true (default)/ false
+       * @param exclusive true (default)/ false
        * @return should be void
        */
       bool setTurn(bool b,bool exclusive=true);
@@ -360,10 +361,10 @@ public:
 
       // load/save
      /**
-      * Load a saved player, from file OR network. By default all @ref 
-      * KGameProperty objects in the @ref dataHandler of this player are loaded
-      * and saved when using load or @ref save. If you need to save/load more
-      * you have to replace this function (and @ref save). You will probably
+      * Load a saved player, from file OR network. By default all 
+      * KGameProperty objects in the dataHandler of this player are loaded
+      * and saved when using load or save. If you need to save/load more
+      * you have to replace this function (and save). You will probably
       * still want to call the default implementation additionally!
       * 
       * @param stream a data stream where you can stream the player from
@@ -373,7 +374,7 @@ public:
       virtual bool load(QDataStream &stream);
 
      /**
-      * Save a player to a file OR to network. See also @ref load
+      * Save a player to a file OR to network. See also load
       *
       * @param stream a data stream to load the player from
       *

@@ -46,7 +46,7 @@ class KProcess;
  *  to be controlled by the computer or vice versa.
  *
  *  To achieve this you have to make all of your player inputs through a
- *  KGameIO. You will usually call @ref KGameIO::sendInput to do so. 
+ *  KGameIO. You will usually call KGameIO::sendInput to do so. 
  *  }
  *  @author Martin Heni <martin@heni-online.de>
  */
@@ -119,7 +119,7 @@ public:
      * This emits @ref signalPrepareTurn and sends the turn if the send
      * parameter is set to true.
      *
-     * @param turn is true/false
+     * @param b turn is true/false
      */
     virtual void notifyTurn(bool b);
 
@@ -180,7 +180,7 @@ public:
     /**
      * Create a keyboard input devices. All keyboards
      * inputs of the given widgets are passed through a signal
-     * handler @ref #signalKeyEvent and can be used to generate
+     * handler signalKeyEvent and can be used to generate
      * a valid move for the player.
      * Note the widget you pass to the constructor must be
      * the main window of your application, e.g. view->parentWidget()
@@ -188,12 +188,12 @@ public:
      * that this might be a different widget comapred to the one you
      * use for mouse inputs!
      * Example:
-     * <pre>
+     * \code
      * KGameKeyIO *input;
      *  input=new KGameKeyIO(myWidget);
      *  connect(input,SIGNAL(signalKeyEvent(KGameIO *,QDataStream &,QKeyEvent *,bool *)),
      *          this,SLOT(slotKeyInput(KGameIO *,QDataStream &,QKeyEvent *,bool *)));
-     * </pre>
+     * \endcode
      *
      * @param parent The parents widget whose keyboard events * should be grabbed
      */
@@ -217,19 +217,19 @@ signals:
        * is totally up to you as it will not be evaluated but forwared
        * to the player's/game's  input move function
        * Example:
-       * <pre>
+       * \code
        * KPlayer *player=input->player(); // Get the player
        * Q_INT32 key=e->key();
        * stream << key;
        * eatevent=true;
-       * </pre>
+       * \endcode
        *
        * @param io the IO device we belong to
        * @param stream the stream where we write our move into
        * @param m The QKeyEvent we can evaluate
        * @param eatevent set this to true if we processed the event
        */
-      void signalKeyEvent(KGameIO *,QDataStream &stream,QKeyEvent *m,bool *eatevent);
+      void signalKeyEvent(KGameIO *io,QDataStream &stream,QKeyEvent *m,bool *eatevent);
 
 protected:
        /**
@@ -251,16 +251,16 @@ public:
     /**
      * Creates a mouse IO device. It captures all mouse
      * event of the given widget and forwards them to the
-     * signal handler @ref #signalMouseEvent.
+     * signal handler signalMouseEvent.
      * Example:
-     * <pre>
+     * \code
      * KGameMouseIO *input;
      * input=new KGameMouseIO(mView);
      * connect(input,SIGNAL(signalMouseEvent(KGameIO *,QDataStream &,QMouseEvent *,bool *)),
      *        this,SLOT(slotMouseInput(KGameIO *,QDataStream &,QMouseEvent *,bool *)));
-     * </pre>
+     * \endcode
      *
-     * @param The widget whose events should be captured
+     * @param parent The widget whose events should be captured
      * @param trackmouse enables mouse tracking (gives mouse move events)
      */
     KGameMouseIO(QWidget *parent,bool trackmouse=false);
@@ -285,21 +285,21 @@ signals:
        * on every mouse event. If appropriate it can generate a
        * move for the player the device belongs to. If this is done
        * and the event is eaten eatevent needs to be set to true.
-       * See alsp the analogous @ref #signalKeyEvent
+       * @see signalKeyEvent
        * Example:
-       * <pre>
+       * \code
        * KPlayer *player=input->player(); // Get the player
        * Q_INT32 button=e->button();
        * stream << button;
        * eatevent=true;
-       * </pre>
+       * \endcode
        *
        * @param io the IO device we belong to
        * @param stream the stream where we write our move into
        * @param m The QMouseEvent we can evaluate
        * @param eatevent set this to true if we processed the event
        */
-      void signalMouseEvent(KGameIO *,QDataStream &stream,QMouseEvent *m,bool *eatevent);
+      void signalMouseEvent(KGameIO *io,QDataStream &stream,QMouseEvent *m,bool *eatevent);
 
 protected:
       /**
@@ -441,12 +441,12 @@ signals:
   * You can use this to communicated with the process and
   * e.g. send initialisation information to the process.
   *
-  * @param the KGameIO object itself
-  * @param the stream into which themove will be written
-  * @param the player itself
-  * @param set this to false if no move should be generated
+  * @param game the KGameIO object itself
+  * @param stream the stream into which the move will be written
+  * @param p the player itself
+  * @param send set this to false if no move should be generated
   */
-  void signalIOAdded(KGameIO *,QDataStream &,KPlayer *p,bool *);
+  void signalIOAdded(KGameIO *game,QDataStream &stream,KPlayer *p,bool *send);
 
 
 protected:
@@ -486,30 +486,30 @@ public:
     int rtti() const;
 
     /**
-     * The number of @ref advance calls unitl the player (or rather: the IO)
+     * The number of advance calls until the player (or rather: the IO)
      * does something (default: 1). 
      **/
     void setReactionPeriod(int advanceCalls);
     int reactionPeriod() const;
 
     /**
-     * Start a @ref QTimer which calls @ref advance every ms milli seconds.
+     * Start a QTimer which calls advance every @p ms milli seconds.
      **/
     void setAdvancePeriod(int ms);
 
     void stopAdvancePeriod();
 
     /**
-     * Ignore calls number of @ref advance calls. if calls is -1 then all 
-     * following advance calls are ignored until @ref unpause is called.
+     * Ignore calls number of advance calls. if calls is -1 then all 
+     * following advance calls are ignored until unpause is called.
      *
      * This simply prevents the internal advance counter to be increased.
      *
      * You may want to use this to emulate a "thinking" computer player. Note
-     * that this means if you increase the advance period (see @ref
+     * that this means if you increase the advance period (see 
      * setAdvancePeriod), i.e. if you change the speed of your game, your
      * computer player thinks "faster".
-     * @ref calls Number of @ref advance calls to be ignored
+     * @param calls Number of advance calls to be ignored
      **/
     void pause(int calls = -1);
 
@@ -521,18 +521,18 @@ public:
     
 public slots:
     /**
-     * Works kind of similar to @ref QCanvas::advance. Increase the internal
-     * advance counter. If @reactionPeriod is reached the counter is set back to
+     * Works kind of similar to QCanvas::advance. Increase the internal
+     * advance counter. If @p reactionPeriod is reached the counter is set back to
      * 0 and @ref signalReaction is emitted. This is when the player is meant 
      * to do something (move its units or so).
      *
-     * This is very useful if you use @ref QCanvas as you can use this in your
-     * @ref QCanvas::advance call. The advantage is that if you change the speed
-     * of the game (i.e. change @ref QCanvas::setAdvancePeriod) the computer
+     * This is very useful if you use QCanvas as you can use this in your
+     * QCanvas::advance call. The advantage is that if you change the speed
+     * of the game (i.e. change QCanvas::setAdvancePeriod) the computer
      * player gets slower as well.
      *
-     * If you don't use @ref QCanvas you can use @ref setAdvancePeriod to get
-     * the same result. Alternatively you can just use a @ref QTimer.
+     * If you don't use QCanvas you can use setAdvancePeriod to get
+     * the same result. Alternatively you can just use a QTimer.
      * 
      **/
     virtual void advance();
@@ -546,7 +546,7 @@ signals:
 
 protected:
     /**
-     * Default implementation simply emits @ref signalReaction
+     * Default implementation simply emits signalReaction
      **/
     virtual void reaction();
 

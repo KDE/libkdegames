@@ -34,38 +34,39 @@ class KPlayer;
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
 /**
+ * @short A collection class for KGameProperty objects
+ *
  * The KGamePropertyHandler class is some kind of a collection class for
- * KGameProperty. You usually don't have to create one yourself, as both @ref
- * KPlayer and @ref KGame provide a handler. In most cases you do not even have
- * to care about the KGamePropertHandler. @ref KGame and @ref KPlayer implement
+ * KGameProperty. You usually don't have to create one yourself, as both
+ * KPlayer and KGame provide a handler. In most cases you do not even have
+ * to care about the KGamePropertHandler. KGame and KPlayer implement
  * all features of KGamePropertyHandler so you will rather use it there.
  *
- * You have to use the KGamePropertyHandler as parent for all @ref KGameProperty
- * objects but you can also use @ref KPlayer or @ref KGame as parent - then @ref
- * KPlayer::dataHandler or @ref KGame::dataHandler will be used. 
+ * You have to use the KGamePropertyHandler as parent for all KGameProperty
+ * objects but you can also use KPlayer or KGame as parent - then
+ * KPlayer::dataHandler or KGame::dataHandler will be used. 
  *
- * Every KGamePropertyHandler must have - just like every @ref KGameProperty -
- * a unique ID. This ID is provided either in the constructor or in @ref
+ * Every KGamePropertyHandler must have - just like every KGameProperty -
+ * a unique ID. This ID is provided either in the constructor or in
  * registerHandler. The ID is used to assign an incoming message (e.g. a changed
  * property) to the correct handler. Inside the handler the property ID is used
  * to change the correct property. 
  *
- * The constructor or @ref registerHandler takes 3 addittional arguments: a
- * receiver and two slots. The first slot is connected to @ref
- * signalSendMessage, the second to @ref signalPropertyChanged. You must provide
+ * The constructor or registerHandler takes 3 addittional arguments: a
+ * receiver and two slots. The first slot is connected to
+ * signalSendMessage, the second to signalPropertyChanged. You must provide
  * these in order to use the KGamePropertyHandler. 
  *
- * The most important function of KGamePropertyHandler is @ref processMessage
+ * The most important function of KGamePropertyHandler is processMessage
  * which assigns an incoming value to the correct property. 
  *
- * A KGamePropertyHandler is also used - indirectly using @ref emitSignal - to
+ * A KGamePropertyHandler is also used - indirectly using emitSignal - to
  * emit a signal when the value of a property changes. This is done this way
- * because a @ref KGameProperty does not inherit @ref QObject because of memory
- * advantages. Many games can have dozens or even hundreds of @ref KGameProperty
- * objects so every additional variable in @ref KGameProperty would be
+ * because a KGameProperty does not inherit QObject because of memory
+ * advantages. Many games can have dozens or even hundreds of KGameProperty
+ * objects so every additional variable in KGameProperty would be
  * multiplied. 
  *
- * @short A collection class for @ref KGameProperty objects
  **/
 class KGamePropertyHandler : public QObject
 {
@@ -75,7 +76,7 @@ public:
 	/**
 	 * Construct an unregistered KGamePropertyHandler
 	 *
-	 * You have to call @ref registerHandler before you can use this
+	 * You have to call registerHandler before you can use this
 	 * handler!
 	 **/
 	KGamePropertyHandler(QObject* parent = 0);
@@ -83,7 +84,7 @@ public:
 	/**
 	 * Construct a registered handler. 
 	 *
-	 * See also @ref registerHandler
+	 * @see registerHandler
 	 **/
 	KGamePropertyHandler(int id, const QObject* receiver, const char* sendf, const char* emitf, QObject* parent = 0);
 	~KGamePropertyHandler();
@@ -94,12 +95,10 @@ public:
 	 * Otherwise you need not call this.
 	 *
 	 * @param id The id of the message to listen for
-	 * @param owner the parent object
 	 * @param receiver The object that will receive the signals of
 	 * KGamePropertyHandler
-	 * @param send A slot that is being connected to @ref signalSendMessage
-	 * @param emit A slot that is being connected to @ref
-	 * signalPropertyChanged
+	 * @param send A slot that is being connected to signalSendMessage
+	 * @param emit A slot that is being connected to signalPropertyChanged
 	 **/
 	void registerHandler(int id, const QObject *receiver, const char * send, const char *emit); 
 
@@ -109,9 +108,9 @@ public:
 	 * agrees with the id of the handler, the message is extracted 
 	 * and processed. Otherwise false is returned.
 	 * Example:
-	 * <pre>
+	 * \code
 	 *   if (mProperties.processMessage(stream,msgid,sender==gameId())) return ;
-	 * </pre>
+	 * \endcode
 	 * 
 	 * @param stream The data stream containing the message
 	 * @param id the message id of the message
@@ -126,11 +125,10 @@ public:
 	int id() const;
 	
 	/**
-	 * Adds a @ref KGameProperty property to the handler
+	 * Adds a KGameProperty property to the handler
 	 * @param data the property
 	 * @param name A description of the property, which will be returned by
-	 * @ref propertyName. This is used for debugging, e.g. in @ref
-	 * KGameDebugDialog
+	 * propertyName. This is used for debugging, e.g. in KGameDebugDialog
 	 * @return true on success
 	 **/
 	bool addProperty(KGamePropertyBase *data, QString name=0);
@@ -144,7 +142,7 @@ public:
 
 	/**
 	 * returns a unique property ID starting called usually with a base of
-	 * @ref KGamePropertyBase::IdAutomatic. This is used internally by
+	 * KGamePropertyBase::IdAutomatic. This is used internally by
 	 * the property base to assign automtic id's. Not much need to
 	 * call this yourself.
 	 **/
@@ -192,23 +190,23 @@ public:
 	QString propertyName(int id) const;
 
 	/**
-	 * @param id The ID of the property. See @ref KGamePropertyBase::id
-	 * @return The @ref KGameProperty this ID is assigned to
+	 * @param id The ID of the property. See KGamePropertyBase::id
+	 * @return The KGameProperty this ID is assigned to
 	 **/
 	KGamePropertyBase *find(int id);
 
 	/**
 	 * Clear the KGamePropertyHandler. Note that the properties are
-	 * <em>not</em> deleted so if you created your @ref KGameProperty
+	 * <em>not</em> deleted so if you created your KGameProperty
 	 * objects dynamically like
-	 * <pre>
+	 * \code
 	 * KGamePropertyInt* myProperty = new KGamePropertyInt(id, dataHandler());
-	 * </pre>
+	 * \endcode
 	 * you also have to delete it:
-	 * <pre>
+	 * \code
 	 * dataHandler()->clear();
 	 * delete myProperty;
-	 * </pre>
+	 * \endcode
 	 **/
 	void clear();
 
@@ -219,18 +217,18 @@ public:
 	void setId(int id);//AB: TODO: make this protected in KGamePropertyHandler!!
 
 	/**
-	 * Calls @ref KGamePropertyBase::setReadOnly(false) for all properties of this
-	 * player. See also @ref lockProperties
+	 * Calls KGamePropertyBase::setReadOnly(false) for all properties of this
+	 * player. See also lockProperties
 	 **/
 	void unlockProperties();
 
 	/**
 	 * Set the policy for all kgame variables which are currently registerd in
-	 * the KGame proeprty handler. See @ref KGamePropertyBase::setPolicy
+	 * the KGame proeprty handler. See KGamePropertyBase::setPolicy
 	 *
 	 * @param p is the new policy for all properties of this handler
-	 * @param is userspace=true (default) only user properties are changed.
-	 * Otherwise also the system properties
+	 * @param userspace if userspace is true (default) only user properties are changed.
+	 * Otherwise the system properties are also changed.
 	 **/
 	void setPolicy(KGamePropertyBase::PropertyPolicy p, bool userspace=true);
 
@@ -248,7 +246,7 @@ public:
 
 	/**
 	 * Removes the lock from the emitting of property signals. Corresponds to
-	 * the @ref lockIndirectEmits
+	 * the lockIndirectEmits
 	 **/
 	void unlockDirectEmit();
   
@@ -259,13 +257,13 @@ public:
 	KGamePropertyBase::PropertyPolicy policy();
 
 	/**
-	 * Calls @ref KGamePropertyBase::setReadOnly(true) for all properties of this
+	 * Calls KGamePropertyBase::setReadOnly(true) for all properties of this
 	 * handler
 	 *
 	 * Use with care! This will even lock the core properties, like name,
 	 * group and myTurn!!
 	 *
-	 * See also @ref unlockProperties
+	 * @see unlockProperties
 	 **/
 	void lockProperties();
 
@@ -281,16 +279,16 @@ public:
 	QIntDict<KGamePropertyBase> &dict() const;
 
 	/**
-	 * In several situations you just want to have a @ref QString of a @ref
-	 * KGameProperty object. This is e.g. the case in the @ref
+	 * In several situations you just want to have a QString of a
+	 * KGameProperty object. This is the case in the 
 	 * KGameDebugDialog where the value of all properties is displayed. This
-	 * function will provide you with such a @ref QString for all the types
-	 * used inside of all @ref KGame classes. If you have a non-standard
+	 * function will provide you with such a QString for all the types
+	 * used inside of all KGame classes. If you have a non-standard
 	 * property (probably a self defined class or something like this) you
-	 * also need to connect to @ref signalRequestValue to make this function
+	 * also need to connect to signalRequestValue to make this function
 	 * useful.
-	 * @ref property Return the value of this @ref KGameProperty 
-	 * @return The value of a @ref KGameProperty
+	 * @param property Return the value of this KGameProperty 
+	 * @return The value of a KGameProperty
 	 **/
 	QString propertyValue(KGamePropertyBase* property);
 
@@ -303,11 +301,11 @@ public:
 
 signals:
 	/**
-	 * This is emitted by a property. @ref KGamePropertyBase::emitSignal
-	 * calls @ref emitSignal which emits this signal. 
+	 * This is emitted by a property. KGamePropertyBase::emitSignal
+	 * calls emitSignal which emits this signal. 
 	 *
 	 * This signal is emitted whenever the property is changed. Note that
-	 * you can switch off this behaviour using @ref
+	 * you can switch off this behaviour using 
 	 * KGamePropertyBase::setEmittingSignal in favor of performance. Note
 	 * that you won't experience any performance loss using signals unless
 	 * you use dozens or hundreds of properties which change very often.
@@ -317,19 +315,19 @@ signals:
 	/**
 	 * This signal is emitted when a property needs to be sent. Only the
 	 * parent has to react to this.
+	 * @param msgid The id of the handler
 	 * @param sent set this to true if the property was sent successfully -
 	 * otherwise don't touch
-	 * @param msgid The @ref id of the handler
 	 **/
 	void signalSendMessage(int msgid, QDataStream &, bool* sent); // AB shall we change bool* into bool& again?
 
 	/**
-	 * If you call @ref propertyValue with a non-standard @ref KGameProperty
+	 * If you call propertyValue with a non-standard KGameProperty
 	 * it is possible that the value cannot automatically be converted into a
-	 * @ref QString. Then this signal is emitted and asks you to provide the
+	 * QString. Then this signal is emitted and asks you to provide the
 	 * correct value. You probably want to use something like this to achieve
 	 * this:
-	 * <pre>
+	 * \code
 	 * #include <typeinfo>
 	 * void slotRequestValue(KGamePropertyBase* p, QString& value)
 	 * {
@@ -337,10 +335,10 @@ signals:
 	 * 		value = QString(((KGameProperty<MyType>*)p)->value());
 	 * 	}
 	 * }
-	 * </pre>
+	 * \endcode
 	 *
-	 * @ref property The @ref KGamePropertyBase the value is requested for
-	 * @ref value The value of this property. You have to set this.
+	 * @param property The KGamePropertyBase the value is requested for
+	 * @param value The value of this property. You have to set this.
 	 **/
 	void signalRequestValue(KGamePropertyBase* property, QString& value);
 

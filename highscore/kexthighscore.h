@@ -105,7 +105,7 @@ Score firstScore();
  * <li> the time and date of the highscore (automatically set) </li>
  * </ul>
  * You can replace the score item (for e.g. displaying it differently) with
- * @ref setScoreItem or add an item with @ref addScoreItem.
+ * setScoreItem or add an item with addScoreItem.
  *
  * The players list contains :
  * <ul>
@@ -119,18 +119,18 @@ Score firstScore();
  *      configuration dialog) </li>
  * </ul>
  * You can replace the best score and the mean score item
- * by calling @ref setPlayerItem.
+ * by calling setPlayerItem.
  *
- * To submit a new score at game end, just construct a @ref Score, set the
- * score data and then call @ref submitScore.
- * <pre>
+ * To submit a new score at game end, just construct a Score, set the
+ * score data and then call submitScore().
+ * \code
  *     KExtHighscore::Score score(KExtHighscore::Won);
  *     score.setScore(myScore);
  *     KExtHighscore::submitScore(score, widget);
- * </pre>
- * You only need to set the score value with @ref Score::setScore
+ * \endcode
+ * You only need to set the score value with Score::setScore()
  * and the value of the items that you have optionnally added
- * with @ref Score::setData ; player name and date are set automatically.
+ * with Score::setData() ; player name and date are set automatically.
  */
 class Manager
 {
@@ -187,7 +187,7 @@ class Manager
                     ShowForHighestScore };
     /**
      * Set how the highscores dialog is shown at game end.
-     * By default, the mode is @ref ShowAtHigherScore.
+     * By default, the mode is ShowAtHigherScore.
      *
      * Note: should be called at construction time.
      */
@@ -285,12 +285,12 @@ class Manager
      * This method should be called from @ref convertLegacy. It is used
      * to submit an old highscore (it will not be send over the network).
      * For each score do something like:
-     * <pre>
+     * \code
      * Score score(Won);
      * score.setScore(oldScore);
      * score.setData("name", name);
      * submitLegacyScore(score);
-     * </pre>
+     * \endcode
      * Note that here you can set the player "name" and the highscore "date"
      * if they are known.
      */
@@ -301,6 +301,7 @@ class Manager
      * highscores server. You can reimplement this method to add an entry
      * with @ref addToQueryURL. By default this method does nothing.
      *
+     * @param url the URL to query
      * @param score the score to be submitted.
      */
     virtual void additionalQueryItems(KURL &url, const Score &score) const
@@ -309,6 +310,7 @@ class Manager
     /**
      * Add an entry to the url to be submitted (@see additionalQueryItems).
      *
+     * @param url the URL to query
      * @param item the item name
      * @param content the item content
      */

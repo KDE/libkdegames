@@ -61,7 +61,7 @@ public:
 	/**
 	 * @overload
 	 * This constructs a widget that is not usable. You must call at least
-	 * @ref setGame, @ref setFromPlayer and @ref setMessageId manually.
+	 * setGame, setFromPlayer and setMessageId manually.
 	 * @since 3.2
 	 **/
 	KGameChat(QWidget* parent);
@@ -73,7 +73,7 @@ public:
 	};
 
 	/**
-	 * This sets the @ref fromPlayer to @p player. The fromPlayer is the
+	 * This sets the fromPlayer to @p player. The fromPlayer is the
 	 * player that will appear as "from" when you send messages through this
 	 * widget.
 	 * @param player The player of this widget
@@ -118,8 +118,8 @@ public:
 
 
 public slots:
-	virtual void addMessage(const QString& fromName, const QString& message) { KChatBase::addMessage(fromName, message);}
-	virtual void addMessage(int fromId, const QString& message);
+	virtual void addMessage(const QString& fromName, const QString& text) { KChatBase::addMessage(fromName, text);}
+	virtual void addMessage(int fromId, const QString& text);
 
 	void slotReceiveMessage(int, const QByteArray&, Q_UINT32 receiver, Q_UINT32 sender);
 
@@ -149,8 +149,8 @@ protected:
 	 * isToGroupMessage - if both return false it must be a player message.
 	 * This behaviour might be changed later - so don't depend on it.
 	 *
-	 * See also @ref toPlayerId
-	 * @param id The ID of the sending entry, as returned by @ref
+	 * See also toPlayerId
+	 * @param id The ID of the sending entry, as returned by 
 	 * KChatBase::sendingEntry
 	 * @return True if the message shall be sent to a special player,
 	 * otherwise false.
@@ -158,25 +158,25 @@ protected:
 	bool isToPlayerMessage(int id) const;
 
 	/**
-	 * @param id The ID of the sending entry, as returned by @ref
+	 * @param id The ID of the sending entry, as returned by
 	 * KChatBase::sendingEntry
-	 * @return The ID of the player (see @ref KPlayer::id) the sending entry
+	 * @return The ID of the player (see KPlayer::id) the sending entry
 	 * belongs to. Note that the parameter id is an id as returned by ref
-	 * KChatBase::sendingEntry and the id this method returns is a @ref
-	 * KPlayer ID! If @ref isToPlayerMessage returns false this method
+	 * KChatBase::sendingEntry and the id this method returns is a 
+	 * KPlayer ID. If isToPlayerMessage returns false this method
 	 * returns -1
 	 **/
 	int playerId(int id) const;
 
 	/**
-	 * @param playerId The ID of the @ref KPlayer object
-	 * @return The ID of the sending entry (see @ref KChatBase) or -1 if
+	 * @param playerId The ID of the KPlayer object
+	 * @return The ID of the sending entry (see KChatBase) or -1 if
 	 * the player id was not found.
 	 **/
 	int sendingId(int playerId) const;
 
 	/**
-	 * @return True if the player with this ID was added before (see @ref
+	 * @return True if the player with this ID was added before (see 
 	 * slotAddPlayer)
 	 **/
 	bool hasPlayer(int id) const;
@@ -185,14 +185,14 @@ protected:
 	 * @param name The name of the added player
 	 * @return A string that will be added as sending entry in @ref
 	 * KChatBase. By default this is "send to name" where name is the name
-	 * that you specify. See also @ref KChatBase::addSendingEntry
+	 * that you specify. See also KChatBase::addSendingEntry
 	 **/
 	virtual QString sendToPlayerEntry(const QString& name) const;
 
 
 protected slots:
 	/**
-	 * Unsets a @ref KGame object that has been set using @ref setKGame
+	 * Unsets a KGame object that has been set using setKGame
 	 * before. You don't have to call this - this is usually done
 	 * automatically.
 	 **/
@@ -204,14 +204,14 @@ protected slots:
 	void slotRemovePlayer(KPlayer*);
 
 	/**
-	 * Called when @ref KPlayer::signalNetworkData is emitted. The message
-	 * gets forwarded to @ref slotReceiveMessage if @p me equals @ref
+	 * Called when KPlayer::signalNetworkData is emitted. The message
+	 * gets forwarded to slotReceiveMessage if @p me equals
 	 * fromPlayer.
 	 **/
 	void slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer* me);
 
 protected:
-	virtual void returnPressed(const QString&);
+	virtual void returnPressed(const QString& text);
 
 private:
 	void init(KGame* g, int msgid);

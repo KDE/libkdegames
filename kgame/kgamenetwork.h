@@ -66,28 +66,28 @@ public:
     bool isNetwork() const;
 
     /**
-     * Is this the game MASTER (i.e. has started the @ref KMessageServer). A
+     * Is this the game MASTER (i.e. has started theKMessageServer). A
      * game has always exactly one MASTER. This is either a KGame object (i.e. a
      * Client) or an own MessageServer-process. A KGame object that has the
      * MASTER status is always admin.
      *
      * You probably don't want to use this. It is a mostly internal method which
-     * will probably become protected. Better use @ref isAdmin
+     * will probably become protected. Better use isAdmin
      *
-     * See also @ref isAdmin
-     * @return Whether this client has started the @ref KMessageServer
+     * @see isAdmin
+     * @return Whether this client has started the KMessageServer
      **/
     bool isMaster() const;
 
     /**
      * The admin of a game is the one who initializes newly connected clients
-     * using @ref negotiateNetworkGame and is allowed to configure the game.
-     * E.g. only the admin is allowed to use @ref KGame::setMaxPlayers.
+     * using  negotiateNetworkGame and is allowed to configure the game.
+     * E.g. only the admin is allowed to use KGame::setMaxPlayers.
      *
      * If one KGame object in the game is MASTER then this client is the admin
-     * as well. @ref isMaster and isAdmin differ only if the @ref KMessageServer
+     * as well. isMaster and isAdmin differ only if the KMessageServer
      * is running in an own process.
-     * @ref Whether this client (KGame object) is the admin
+     * @return Whether this client (KGame object) is the admin
      **/
     bool isAdmin() const;
 
@@ -99,13 +99,13 @@ public:
     Q_UINT32 gameId() const;
 
     /**
-     * Inits a network game as network MASTER. Note that if the @ref
-     * KMessageServer is not yet started it will be started here (see @ref
+     * Inits a network game as network MASTER. Note that if the
+     * KMessageServer is not yet started it will be started here (see 
      * setMaster). Any existing connection will be disconnected.
      *
      * If you already offer connections the port is changed.
      *
-     * @param The port on which the service is offered
+     * @param port The port on which the service is offered
      * @return true if it worked
      **/
     bool offerConnections (Q_UINT16 port);
@@ -122,16 +122,16 @@ public:
 
     /**
      * @since 3.2
-     * @return The port we are listening to if @ref offerConnections was called
-     * or the port we are connected to if @ref connectToServer was called.
+     * @return The port we are listening to if offerConnections was called
+     * or the port we are connected to if connectToServer was called.
      * Otherwise 0.
      **/
     Q_UINT16 port() const;
 
     /**
      * @since 3.2
-     * @return The name of the host that we are currently connected to if @ref
-     * isNetwork is TURE and we are not the MASTER, i.e. if @ref connectToServer
+     * @return The name of the host that we are currently connected to is
+     * isNetwork is TRUE and we are not the MASTER, i.e. if connectToServer
      * was called. Otherwise this will return "localhost".
      **/
     QString hostName() const;
@@ -143,13 +143,13 @@ public:
     bool stopServerConnection();
 
     /**
-     * Changes the maximal connection number of the @ref KMessageServer to max.
+     * Changes the maximal connection number of the KMessageServer to max.
      * -1 Means infinite connections are possible. Note that existing
      * connections are not affected, so even if you set this to 0 in a running
-     * game no client is being disconnected. You can call this onyl if you are
+     * game no client is being disconnected. You can call this only if you are
      * the ADMIN!
      *
-     * See also @ref KMessageServer::setMaxClients
+     * @see KMessageServer::setMaxClients
      * @param max The maximal number of connections possible.
      **/
     void setMaxClients(int max);
@@ -162,14 +162,14 @@ public:
      * Use this to communicate with KGame (e.g. to add a player ot to configure
      * the game - usually not necessary). 
      *
-     * For your own messages use @ref sendMessage instead! This is mostly
+     * For your own messages use  sendMessage instead! This is mostly
      * internal!
      *
      * @param buffer the message which will be send. See messages.txt for contents
-     * @param msgid an id for this message. See @ref
+     * @param msgid an id for this message. See
      * KGameMessage::GameMessageIds
-     * @param receiver the @ref KGame / @ref KPlayer this message is for.
-     * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
+     * @param receiver the KGame / KPlayer this message is for.
+     * @param sender The KGame / KPlayer this message is from (i.e.
      * you). You
      * probably want to leave this 0, then KGameNetwork will create the correct
      * value for you. You might want to use this if you send a message from a
@@ -197,10 +197,10 @@ public:
     /**
      * Sends a network message
      * @param error The error code
-     * @param message The error message - use @ref KGameError
-     * @param receiver the @ref KGame / @ref KPlayer this message is for. 0 For
+     * @param message The error message - use KGameError
+     * @param receiver the KGame / KPlayer this message is for. 0 For
      * all
-     * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
+     * @param sender The KGame / KPlayer this message is from (i.e.
      * you). You probably want to leave this 0, then KGameNetwork will create 
      * the correct value for you. You might want to use this if you send a 
      * message from a specific player.
@@ -227,26 +227,25 @@ public:
      * Note that a message is always sent to ALL clients! This is necessary so
      * that all clients always have the same data and can easily be changed from
      * network to non-network without restarting the game. If you want a
-     * specific @ref KGame / @ref KPlayer to react to the message use the
-     * receiver and sender parameters. See @ref KGameMessage::calsMessageId
+     * specific KGame / KPlayer to react to the message use the
+     * receiver and sender parameters. See KGameMessage::calsMessageId
      *
-     * SendMessage differs from @ref sendSystemMessage only by the msgid parameter.
-     * @ref sendSystemMessage is thought as a KGame only mehtod while
+     * SendMessage differs from sendSystemMessage only by the msgid parameter.
+     * sendSystemMessage is thought as a KGame only mehtod while
      * sendMessage is for public use. The msgid parameter will be
-     * +=KGameMessage::IdUser and in @ref KGame::signalNetworkData msgid will
+     * +=KGameMessage::IdUser and in KGame::signalNetworkData msgid will
      * be -= KGameMessage::IdUser again, so that one can easily distinguish
      * between system and user messages.
      *
-     * Use @ref sendSystemMessage to comunicate with KGame (e.g. by adding a
+     * Use sendSystemMessage to comunicate with KGame (e.g. by adding a
      * player) and sendMessage for your own user message.
      *
-     * Note: a player should send messages through a @ref KGameIO!
+     * Note: a player should send messages through a KGameIO!
      *
      * @param buffer the message which will be send. See messages.txt for contents
-     * @param msgid an id for this message. See @ref
-     * KGameMessage::GameMessageIds
-     * @param receiver the @ref KGame / @ref KPlayer this message is for.
-     * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
+     * @param msgid an id for this message. See KGameMessage::GameMessageIds
+     * @param receiver the KGame / KPlayer this message is for.
+     * @param sender The KGame / KPlayer this message is from (i.e.
      * you). You
      * probably want to leave this 0, then KGameNetwork will create the correct
      * value for you. You might want to use this if you send a message from a
@@ -273,8 +272,8 @@ public:
 
 
     /**
-     * Called by @ref ReceiveNetworkTransmission(). Will be overwritten by
-     * @ref KGame and handle the incoming message.
+     * Called by ReceiveNetworkTransmission(). Will be overwritten by
+     * KGame and handle the incoming message.
      **/
     virtual void networkTransmission(QDataStream&, int, Q_UINT32, Q_UINT32, Q_UINT32 clientID) = 0;
 
@@ -288,19 +287,19 @@ public:
     /**
      * If you are the ADMIN of the game you can give the ADMIN status away to
      * another client. Use this e.g. if you want to quit the game or if you want
-     * another client to administrate the game (note that @ref disconnect calls
+     * another client to administrate the game (note that disconnect calls
      * this automatically).
      * @param clientID the ID of the new ADMIN (note: this is the _client_ID
-     * which has nothing to do with the player IDs. See @ref KMessageServer)
+     * which has nothing to do with the player IDs. See KMessageServer)
      **/
     void electAdmin(Q_UINT32 clientID);
 
     /**
      * Don't use this unless you really know what youre doing! You might
      * experience some strange behaviour if you send your messages directly
-     * through the @ref KMessageClient!
+     * through the KMessageClient!
      *
-     * @return a pointer to the @ref KMessageClient used internally to send the
+     * @return a pointer to the KMessageClient used internally to send the
      * messages. You should rather use one of the send functions!
      **/
     KMessageClient* messageClient() const;
@@ -309,22 +308,22 @@ public:
      * Don't use this unless you really know what you are doing! You might
      * experience some strange behaviour if you use the message server directly!
      *
-     * @return a pointer to the message server if this is the MASTER @ref KGame
-     * object. Note that it might be possible that no @ref KGame object contains
-     * the @ref KMessageServer at all! It might even run stand alone!
+     * @return a pointer to the message server if this is the MASTER KGame
+     * object. Note that it might be possible that no KGame object contains
+     * the KMessageServer at all! It might even run stand alone!
      **/
     KMessageServer* messageServer() const;
 
     /**
      * You should call this before doing thigs like, e.g. qApp->processEvents().
-     * Don't forget to call @ref unlock once you are done!
+     * Don't forget to call unlock once you are done!
      * 
-     * See @ref KMessageClient::lock
+     * @see KMessageClient::lock
      **/
     virtual void lock();
 
     /**
-     * See @ref KMessageClient::unlock
+     * @see KMessageClient::unlock
      **/
     virtual void unlock();
 
@@ -337,28 +336,28 @@ signals:
     void signalNetworkErrorMessage(int error, QString text);
 
     /**
-     * Our connection to the @ref KMessageServer has broken.
-     * See @ref KMessageClient::connectionBroken
+     * Our connection to the KMessageServer has broken.
+     * See KMessageClient::connectionBroken
      **/
     void signalConnectionBroken();
 
     /**
-     * This signal is emitted whenever the @ref KMessageServer sends us a message that a
-     * new client connected. @ref KGame uses this to call KGame::negotiateNetworkGame
-     * for the newly connected client if we are admin (see @ref isAdmin)
+     * This signal is emitted whenever the KMessageServer sends us a message that a
+     * new client connected. KGame uses this to call KGame::negotiateNetworkGame
+     * for the newly connected client if we are admin (see isAdmin)
      *
-     * See @ref KMessageClient::eventClientConnected
+     * @see KMessageClient::eventClientConnected
      *
      * @param clientID the ID of the newly connected client
      **/
     void signalClientConnected(Q_UINT32 clientID);
 
     /**
-     * This signal is emitted whenever the @ref KMessageServer sends us a message
+     * This signal is emitted whenever the KMessageServer sends us a message
      * that a connection to a client was detached. The second parameter can be used
      * to distinguish between network errors or removing on purpose.
      *
-     * See @ref KMessageClient::eventClientDisconnected
+     * @see KMessageClient::eventClientDisconnected
      *
      * @param clientID the client that has disconnected
      * @param broken true if the connection was lost because of a network error, false
@@ -367,8 +366,8 @@ signals:
     void signalClientDisconnected(Q_UINT32 clientID, bool broken);
 
     /**
-     * This client gets or loses the admin status. See @ref
-     * KMessageClient::adminStatusChanged
+     * This client gets or loses the admin status.
+     * @see KMessageClient::adminStatusChanged
      * @param isAdmin True if this client gets the ADMIN status otherwise FALSE
      **/
     void signalAdminStatusChanged(bool isAdmin);
@@ -376,7 +375,7 @@ signals:
 protected:
     /**
      * @internal
-     * Start a @ref KMessageServer object and use it as the MASTER of the game.
+     * Start a KMessageServer object and use it as the MASTER of the game.
      * Note that you must not call this if there is already another master
      * running!
      **/
@@ -384,10 +383,10 @@ protected:
 
 protected slots:
     /**
-     * Called by @ref KMessageClient::broadcastReceived() and will check if the
+     * Called by KMessageClient::broadcastReceived() and will check if the
      * message format is valid. If it is not, it will generate an error (see
-     * @ref signalNetworkVersionError and @ref signalNetworkErorrMessage).
-     * If it is valid, the pure virtual method @ref networkTransmission() is called.
+     * signalNetworkVersionError and signalNetworkErorrMessage).
+     * If it is valid, the pure virtual method networkTransmission() is called.
      * (This one is overwritten in KGame.)
      **/
     void receiveNetworkTransmission(const QByteArray& a, Q_UINT32 clientID);

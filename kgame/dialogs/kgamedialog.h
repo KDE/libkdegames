@@ -50,7 +50,7 @@ class KGameDialogPrivate;
  * TODO: rewrite entire documentation. Nearly nothing is valid anymore.
  * The main configuration dialog for KGame. Here all players meat each other,
  * every player can see how many players connected (and their names) and the
- * ADMIN can even "kick" players out. You can talk to each other (using @ref
+ * ADMIN can even "kick" players out. You can talk to each other (using 
  * KGameChat and the ADMIN can define the maxPlayers/minPlayers as well as the
  * number of computer players.
  *
@@ -88,12 +88,12 @@ public:
 	};
 
 	/**
-	 * Create an empty KGameDialog. You can add widgets using @ref
+	 * Create an empty KGameDialog. You can add widgets using
 	 * addConfigPage.
-	 * @param g The @ref KGame object of this game
-	 * @param owner The @ref KPlayer object who is responsible for this
+	 * @param g The KGame object of this game
+	 * @param owner The KPlayer object who is responsible for this
 	 * dialog, aka "the local player"
-	 * @param title The title of the dialog - see @ref KDialog::setCaption
+	 * @param title The title of the dialog - see KDialog::setCaption
 	 * @param parent The parent of the dialog
 	 * @param modal Whether the dialog is modal or not
 	 **/
@@ -104,29 +104,29 @@ public:
 	 * Create a KGameDialog with the standard configuration widgets. This
 	 * creates the following widgets:
 	 * <ul>
-	 * <li>@ref KGameDialogGeneralConfig
-	 * <li>@ref KGameDialogNetworkConfig
-	 * <li>@ref KGameDialogMsgServerConfig
-	 * <li>@ref KGameDialogChatConfig
-	 * <li>@ref KGameDialogConnectionConfig
+	 * <li> KGameDialogGeneralConfig
+	 * <li> KGameDialogNetworkConfig
+	 * <li> KGameDialogMsgServerConfig
+	 * <li> KGameDialogChatConfig
+	 * <li> KGameDialogConnectionConfig
 	 * </ul>
 	 * If you want to use your own implementations (or none) of the widgets
-	 * above you should subclass KGameDialog. Use @ref addGameConfig, @ref
-	 * addNetworkConfig, @ref addMsgConfig, @ref addChatWidget and @ref
+	 * above you should subclass KGameDialog. Use addGameConfig, 
+	 * addNetworkConfig, addMsgConfig, addChatWidget and 
 	 * addConnectionList in this case.
 	 *
 	 * If you want to add further configuration widget you can simply use
-	 * @ref addConfigPage
-	 * @param g The @ref KGame object of this game
-	 * @param owner The @ref KPlayer object who is responsible for this
+	 * addConfigPage
+	 * @param g The KGame object of this game
+	 * @param owner The KPlayer object who is responsible for this
 	 * dialog, aka "the local player"
-	 * @param title The title of the dialog - see @ref KDialog::setCaption
+	 * @param title The title of the dialog - see KDialog::setCaption
 	 * @param parent The parent of the dialog
 	 * @param modal Whether the dialog is modal or not
-	 * @param initConfigs whether the default @ref KGameDialogConfig widgets
-	 * shall be created using @ref initDefaultDialog. Use false if you want
-	 * to use custom widgets!
-	 * @param chatMsgId The ID of Chat messages. See @ref KGameChat. Unused
+	 * @param initConfigs whether the default KGameDialogConfig widgets
+	 * shall be created using initDefaultDialog. Use false if you want
+	 * to use custom widgets.
+	 * @param chatMsgId The ID of Chat messages. See KGameChat. Unused
 	 * if initConfigs = false
 	 **/
 	KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
@@ -138,37 +138,37 @@ public:
 
 	/**
 	 * Change the owner of the dialog. This will be used as the fromPlayer in
-	 * @ref KGameChat and will receive the entered player name.
+	 * KGameChat and will receive the entered player name.
 	 * @param owner The owner of the dialog. It must already be added to the
-	 * @ref KGame object!
+	 * KGame object!
 	 *
-	 * Calls the @ref KGameDialogConfig::setOwner implementation of all
-	 * widgets that have been added by @ref addConfigWidget
+	 * Calls the KGameDialogConfig::setOwner implementation of all
+	 * widgets that have been added by addConfigWidget
 	 * @param owner The new owner player of this dialog must already be
-	 * added to the @ref KGame object. Can even be NULL (then no player
+	 * added to the KGame object. Can even be NULL (then no player
 	 * configuration is made)
 	 **/
 	void setOwner(KPlayer* owner);
 
 	/**
-	 * Change the @ref KGame object this dialog is used for.
+	 * Change the KGame object this dialog is used for.
 	 *
-	 * Calls the @ref KGameDialogConfig::setKGame implementation of all
-	 * widgets that have been added by @ref addConfigWidget
-	 * @param g The new @ref KGame object
+	 * Calls the KGameDialogConfig::setKGame implementation of all
+	 * widgets that have been added by addConfigWidget
+	 * @param g The new KGame object
 	 **/
 	void setKGame(KGame* g);
 
 	/**
-	 * This will submit all configuration data to the @ref KGame object.
-	 * Automatically called by @ref slotApply and @ref slotOk
-	 * Tere is no need to replace this unless you
+	 * This will submit all configuration data to the KGame object.
+	 * Automatically called by slotApply and slotOk
+	 * There is no need to replace this unless you
 	 * want to add widgets which are not derived from those classes
 	 **/
 	virtual void submitToKGame();
 
 	/**
-	 * Adds a @ref KGameChat to the dialog. If no parent is specified the
+	 * Adds a KGameChat to the dialog. If no parent is specified the
 	 * game page will be used.
 	 * @param chat The chat widget
 	 * @param parent The parent of the chat widget. This MUST be an
@@ -178,15 +178,15 @@ public:
 	void addChatWidget(KGameDialogChatConfig* chat, QVBox* parent = 0);
 
 	/**
-	 * Add a connection list to the dialog. The list consists of a @ref
-	 * KLisBox containing all players in the current game (see @ref
+	 * Add a connection list to the dialog. The list consists of a
+	 * KLisBox containing all players in the current game (see
 	 * KGame::playerList). The admin can "ban" players, ie kick them out of
 	 * the game.
 	 *
 	 * This is another not-really-config-config-widget. It just displays the
 	 * connections and lets you ban players.
-	 * @param c The @ref KGameDialogConnectionConfig object
-	 * @param parent The parent of the widget. If 0 the @ref networkConfig
+	 * @param c The KGameDialogConnectionConfig object
+	 * @param parent The parent of the widget. If 0 the networkConfig
 	 * page is used.
 	 **/
 	void addConnectionList(KGameDialogConnectionConfig* c, QVBox* parent = 0);
@@ -195,8 +195,8 @@ public:
 	 * Add a new page to the dialog. The page will contain you new config
 	 * widget and will have your provided title.
 	 *
-	 * The widget will be reparented to this dialog. This also calls @ref
-	 * KGameDialogConfig::setKGame and @ref KGameDialogConfig::setOwner.
+	 * The widget will be reparented to this dialog. This also calls
+	 * KGameDialogConfig::setKGame and KGameDialogConfig::setOwner.
 	 * @param widget The new config widget
 	 * @param title The title of the newly added page.
 	 * @return The newly added page which contains your config widget.
@@ -204,39 +204,39 @@ public:
 	QVBox* addConfigPage(KGameDialogConfig* widget, const QString& title);
 
 	/**
-	 * @return The @ref QVBox of the given key, The key is from @ref ConfigOptions
+	 * @return The QVBox of the given key, The key is from ConfigOptions
 	 * Note that not all are supported yet
 	 **/
 	QVBox *configPage(ConfigOptions which);
 
 	/**
 	 * @return The default netowrk config. Note that this always returns 0 if
-	 * you did not specify @ref NetworkConfig in the constructor!
+	 * you did not specify NetworkConfig in the constructor!
 	 **/
 	KGameDialogNetworkConfig* networkConfig() const;
 
 	/**
 	 * @return The default game config. Note that this always returns 0 if
-	 * you did not specify @ref GameConfig in the constructor!
+	 * you did not specify GameConfig in the constructor!
 	 **/
 	KGameDialogGeneralConfig* gameConfig() const;
 
 	/**
-	 * Add a config widget to the specified parent. Usually you call @ref
+	 * Add a config widget to the specified parent. Usually you call
 	 * addConfigPage for one widget and addConfigWidget for another to add
-	 * it to the same page. Just use the returned page of @ref
+	 * it to the same page. Just use the returned page of
 	 * addConfigPage.
 	 **/
 	void addConfigWidget(KGameDialogConfig* widget, QWidget* parent);
 
 	/**
 	 * Used to add the main network config widget in a new page. Use this to
-	 * make @ref networkConfig return something useful.
+	 * make networkConfig return something useful.
 	 **/
 	void addNetworkConfig(KGameDialogNetworkConfig* netConf);
 
 	/**
-	 * Add the main game config widget in a new page. Use this to make @ref
+	 * Add the main game config widget in a new page. Use this to make 
 	 * gameConfig return something useful.
 	 **/
 	void addGameConfig(KGameDialogGeneralConfig* conf);
@@ -259,13 +259,13 @@ protected:
 	 * yourself as you have to provide a message id)
 	 * @param initConfigs The widgets to be created
 	 * @param chatMsgId The msgid for the chat config (only if specified in
-	 * initConfigs) - see @ref KGameDialogChatConfig
+	 * initConfigs) - see KGameDialogChatConfig
 	 **/
 	void initDefaultDialog(ConfigOptions initConfigs, int chatMsgId = 15432);
 
 	/**
-	 * Go through all config widgets and call their @ref
-	 * KGameDialogConfig::setKGame and @ref KGameDialogConfig::setOwner implementation
+	 * Go through all config widgets and call their 
+	 * KGameDialogConfig::setKGame and KGameDialogConfig::setOwner implementation
 	 * 
 	 * This function could be private and probably will be very soon.
 	 * Don't use it yourself
@@ -274,39 +274,39 @@ protected:
 
 protected slots:
 	/**
-	 * Called when the user clicks on Ok. Calls @ref slotApply and @ref
+	 * Called when the user clicks on Ok. Calls slotApply and
 	 * QDialog::accept()
 	 **/
 	virtual void slotOk();
 
 	/**
-	 * Just calls @ref submitToKGame()
+	 * Just calls submitToKGame()
 	 **/
 	virtual void slotApply();
 
 	/**
 	 * Sets the default values for the configuration widgets. Set these
-	 * values by (e.g.) @ref setDefaultMaxPlayers()
-	 * OBSOLETE!!!
+	 * values by (e.g.) setDefaultMaxPlayers()
+	 * @deprecated
 	 **/
 	virtual void slotDefault();
 
 	/**
-	 * Called when the @ref KGame object is destroyed. Calls setKGame(0) so
+	 * Called when the KGame object is destroyed. Calls setKGame(0) so
 	 * that all widgets can disconnect their slots and so on.
 	 **/
 	void slotUnsetKGame();
 
 	/**
-	 * Called when the ADMIN status of this KGame client changes. See @ref
+	 * Called when the ADMIN status of this KGame client changes. See 
 	 * KGameNetwork::signalAdminStatusChanged
 	 * @param isAdmin TRUE if this client is now the ADMIN otherwise FALSE
 	 **/
 	void setAdmin(bool isAdmin);
 
 	/**
-	 * Remove a config widget from the widget list. See also @ref
-	 * QObject::destroyed
+	 * Remove a config widget from the widget list. 
+	 * @see QObject::destroyed
 	 **/
 	void slotRemoveConfigWidget(QObject* configWidget);
 

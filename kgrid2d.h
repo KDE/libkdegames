@@ -319,8 +319,8 @@ class Square : public Generic<T>, public SquareBase
 
     /**
      * @return the neighbours of coordinate @param c
-     * to the given set of coordinates @param neighbours.
-     *
+     * to the given set of coordinates
+     * @param c the coordinate to use as the reference point
      * @param insideOnly only add coordinates that are inside the grid.
      * @param directOnly only add the four nearest neighbours.
      */
@@ -338,6 +338,7 @@ class Square : public Generic<T>, public SquareBase
     /**
      * @return the "projection" of the given coordinate on the grid edges.
      *
+     * @param c the coordinate to use as the reference point
      * @param n the direction of projection.
      */
     Coord toEdge(const Coord &c, Neighbour n) const {
@@ -436,7 +437,7 @@ class HexagonalBase
 };
 
 /**
- * This template implements @Generic for an hexagonal grid
+ * This template implements a hexagonal grid
  * where hexagons form horizontal lines:
  * <pre>
  * (0,0)   (0,1)   (0,2)
@@ -458,8 +459,8 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
 
     /**
      * @return the neighbours of coordinate @param c
-     * to the given set of coordinates @param neighbours.
-     *
+     * to the given set of coordinates
+     * @param c the coordiante to use as the reference point
      * @param insideOnly only add coordinates that are inside the grid.
      */
     CoordList neighbours(const Coord &c, bool insideOnly = true) const {
@@ -475,8 +476,7 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
 
     /**
      * @return the neighbours at distance @param distance of coordinate
-     * @param c.
-     *
+     * @param c the coordinate to use as the reference point
      * @param distance distance to the neighbour (1 means at contact).
      * @param insideOnly only add coordinates that are inside the grid.
      * @param all returns all neighbours at distance equal and less than
