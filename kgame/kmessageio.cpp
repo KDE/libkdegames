@@ -132,7 +132,7 @@ void KMessageSocket::processNewData ()
     else
     {
       // Data not completly read => wait for more
-      if (mSocket->bytesAvailable() < (int) mNextBlockLength)
+      if (mSocket->bytesAvailable() < (Q_ULONG) mNextBlockLength)
         return;
 
       QByteArray msg (mNextBlockLength);
@@ -279,7 +279,7 @@ void KMessageProcess::writeToProcess()
 
   // write it out to the process
   //kdDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
-  char *p=mSendBuffer->data();
+  //char *p=mSendBuffer->data();
   //for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
   mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());
 
