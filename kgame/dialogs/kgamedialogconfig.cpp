@@ -242,16 +242,27 @@ class KGameDialogMsgServerConfigPrivate
 public:
 	KGameDialogMsgServerConfigPrivate() 
 	{
+		senderLayout = 0;
+		localLayout = 0;
+	
 		changeMaxClients = 0;
 		changeAdmin= 0;
 		removeClient= 0;
+
+		game = 0;
+
+		noMaster = 0;
 	}
+
+	QHBoxLayout* senderLayout;
+	QHBoxLayout* localLayout;
 
 	QPushButton* changeMaxClients;
 	QPushButton* changeAdmin;
 	QPushButton* removeClient;
-
 	QLabel* noAdmin;
+
+	QLabel* noMaster;
 
 	KGame* game;
 
@@ -266,8 +277,9 @@ KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent)
 {
  d = new KGameDialogMsgServerConfigPrivate;
 
- QVBoxLayout* layout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
- layout->setAutoAdd(true);
+ QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ d->senderLayout = new QHBoxLayout(topLayout);
+ d->localLayout = new QHBoxLayout(topLayout);
 }
 
 KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
@@ -275,12 +287,18 @@ KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
  delete d;
 }
 
-
 void KGameDialogMsgServerConfig::setKGame(KGame* g)
 {
  d->game = g;
- //TODO display the ID of the admin if we aren't:
- // connect(g, SIGNAL(signalAdminChanged(int)), this, SLOT(slotChangeIsAdmin(int)));
+ //TODO display the ID of the admin if we aren't
+ // connect(g, SIGNAL(signalAdminChanged(int)), this, SLOT(slotChangeIsAdmin(int)));//TODO
+ if (!g) {
+	// we cannot do anything without a KGame object!
+	setAdmin(false);
+	return;
+ }
+ setAdmin(g->isAdmin());
+ setHasMsgServer(d->game->messageServer());
 }
 
 
@@ -342,19 +360,54 @@ void KGameDialogMsgServerConfig::removeClient(Q_UINT32 id)
 void KGameDialogMsgServerConfig::setAdmin(bool admin)
 {
  if (admin) {
-	delete d->noAdmin;
+	if (d->noAdmin) {
+		delete d->noAdmin;
+		d->noAdmin = 0;
+	}
 	d->changeMaxClients = new QPushButton(i18n("Change Maximal number of Clients"), this);
 	connect(d->changeMaxClients, SIGNAL(pressed()), this, SLOT(changeMaxClients()));
 	d->changeAdmin = new QPushButton(i18n("Change Admin"), this);
 	connect(d->changeAdmin, SIGNAL(pressed()), this, SLOT(changeAdmin()));
 	d->removeClient = new QPushButton(i18n("Remove a Client with all Players"), this);
 	connect(d->removeClient, SIGNAL(pressed()), this, SLOT(removeClient()));
+	d->senderLayout->addWidget(d->changeMaxClients);
+	d->senderLayout->addWidget(d->changeAdmin);
+	d->senderLayout->addWidget(d->removeClient);
  } else {
-	delete d->changeMaxClients;
-	delete d->changeAdmin;
-	delete d->removeClient;
+	if (d->changeMaxClients) {
+		delete d->changeMaxClients;
+		d->changeMaxClients = 0;
+	}
+	if (d->changeAdmin) {
+		delete d->changeAdmin;
+		d->changeAdmin = 0;
+	}
+	if (d->removeClient) {
+		delete d->removeClient;
+		d->removeClient = 0;
+	}
 	d->noAdmin = new QLabel(i18n("Only the admin can configure the message server!"), this);
+	d->senderLayout->addWidget(d->noAdmin);
  }
 }
 
 
+void KGameDialogMsgServerConfig::submitToKGame(KGame*, KPlayer*)
+{
+}
+
+void KGameDialogMsgServerConfig::setHasMsgServer(bool has)
+{
+ if (!has) {
+	// delete all inputs
+	if (!d->noMaster) {
+		d->noMaster = new QLabel(i18n("You don't own the message server"), this);
+		d->localLayout->addWidget(d->noMaster);
+	}
+	return;
+ }
+ if (d->noMaster) {
+	delete d->noMaster;
+	d->noMaster = 0;
+ }
+}

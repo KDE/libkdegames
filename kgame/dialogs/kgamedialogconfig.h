@@ -198,9 +198,13 @@ public:
 	KGameDialogMsgServerConfig(QWidget* parent);
 	~KGameDialogMsgServerConfig();
 
+	virtual void submitToKGame(KGame*, KPlayer*);
+
 	void changeMaxClients();
 	void changeAdmin();
 	void removeClient();
+	void setHasMsgServer(bool);
+
 	virtual void setKGame(KGame*);
 	virtual void setAdmin(bool);
 

@@ -51,11 +51,13 @@ public:
 		mGame = 0;
 		mGamePage = 0;
 		mNetworkPage = 0;
+		mMsgServerPage = 0;
 
 	}
 
 	QVBox* mGamePage;
 	QVBox* mNetworkPage;
+	QVBox* mMsgServerPage;// unused here?
 	QVBoxLayout* mTopLayout;
 	KGameDialogNetworkConfig* mNetworkConfig;
 	KGameDialogGeneralConfig* mGameConfig;
@@ -76,11 +78,12 @@ public:
 	KGame* mGame;
 };
 
-KGameDialog::KGameDialog(KGameDialogGeneralConfig* config, KGameDialogNetworkConfig* netConf,
+KGameDialog::KGameDialog(KGameDialogGeneralConfig* config, KGameDialogNetworkConfig* netConf, 
+	KGameDialogMsgServerConfig* msgConf,
 	KGame* g, KPlayer* owner, const QString& title, QWidget* parent, bool modal, int chatMsgid)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply, Ok, parent, 0, modal, true)
 {
- init(config, netConf, g, title, owner, chatMsgid);
+ init(config, netConf, msgConf, g, title, owner, chatMsgid);
 }
 
 
@@ -88,11 +91,13 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, QWidget
 	: KDialogBase(Tabbed, title, Ok|Default|Apply,
 	Ok, parent, 0, modal, true)
 {
- init(new KGameDialogGeneralConfig(0), new KGameDialogNetworkConfig(0), g, title, owner, chatMsgid);
+// make msgserver parameter configurable!
+ init(new KGameDialogGeneralConfig(0), new KGameDialogNetworkConfig(0), new KGameDialogMsgServerConfig(0), g, title, owner, chatMsgid);
 
 }
 
 void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf,
+	KGameDialogMsgServerConfig* msgConf, 
 	KGame* g, const QString& title, KPlayer* owner, int chatMsgid)
 {
 //TODO title
@@ -107,6 +112,9 @@ void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig*
  }
  if (netConf) {
 	addNetworkConfig(netConf);
+ }
+ if (msgConf) {
+	addMsgServerConfig(msgConf);
  }
 
 //AB: do we need a "Cancel" Button? currently removed
@@ -160,6 +168,14 @@ void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
 			SLOT(slotInitConnection(bool&, bool&)));// is this mGame dependant?
  }
  d->mNetworkPage = addConfigPage(netConf, i18n("Network"));
+}
+
+void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
+{
+ if (!msgConf) {
+	return;
+ }
+ d->mMsgServerPage = addConfigPage(msgConf, i18n("Message Server"));
 }
 
 QVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)

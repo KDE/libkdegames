@@ -41,6 +41,7 @@ class KGamePropertyBase;
 class KGameDialogConfig;
 class KGameDialogGeneralConfig;
 class KGameDialogNetworkConfig;
+class KGameDialogMsgServerConfig;
 
 class KGameDialogPrivate;
 /**
@@ -71,19 +72,27 @@ class KGameDialog : public KDialogBase
 {
 	Q_OBJECT
 public:
+	/**
+	 * Just the smae as the other constructor below but just creates the
+	 * default widgets.
+	 **/
 	KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
 			QWidget* parent, bool modal = false, 
 			int chatMsgId = 15432);
 
 	/**
+	 * Construct a very configurable KGameDialog. You will probably want to
+	 * use this unless you implement your own constructor.
 	 * @param config The game configuration widget. Note that it will be
 	 * reparented. 0 will not create any game config widget
 	 * @param netConfig The network configuration widget. Note that it will
-	 * be reparented. 0 will not create any network configuration widget
+	 * be reparented. 0 will not create any network configuration widget.
+	 * Use "new" to create a config widget for this constructor (use 0 as
+	 * parent - it will be reparented to KGameDialog).
 	 **/
 	KGameDialog(KGameDialogGeneralConfig* config, 
-			KGameDialogNetworkConfig* netConfig, KGame* g,
-			KPlayer* owner, const QString& title,
+			KGameDialogNetworkConfig* netConfig, KGameDialogMsgServerConfig* msgConf, 
+			KGame* g, KPlayer* owner, const QString& title,
 			QWidget* parent, bool modal = false, 
 			int chatMsgId = 15432);
 
@@ -150,6 +159,7 @@ protected:
 	void addConfigWidget(KGameDialogConfig* widget, QWidget* parent);
 	void addNetworkConfig(KGameDialogNetworkConfig* netConf);
 	void addGameConfig(KGameDialogGeneralConfig* conf);
+	void addMsgServerConfig(KGameDialogMsgServerConfig* conf);
 
 	KGameDialogNetworkConfig* networkConfig() const;
 	KGameDialogGeneralConfig* gameConfig() const;
@@ -221,7 +231,10 @@ protected slots:
 
 private:
 //	void init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf);
-	void init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf, KGame*, const QString& title, KPlayer*, int chatMsgid);
+	void init(KGameDialogGeneralConfig* conf, 
+			KGameDialogNetworkConfig* netConf, 
+			KGameDialogMsgServerConfig* msgServerConfig, 
+			KGame*, const QString& title, KPlayer*, int chatMsgid);
 	KGameDialogPrivate* d;
 };
 
