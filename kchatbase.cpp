@@ -229,7 +229,7 @@ void KChatBase::init(bool noComboBox)
  if (!noComboBox) {
 	d->mCombo = new QComboBox(this);
 	h->addWidget(d->mCombo);
-	addSendingEntry(i18n("Send to all players"), SendToAll);//FIXME: where to put the id?
+	addSendingEntry(i18n("Send to All Players"), SendToAll);//FIXME: where to put the id?
  }
 
  d->mAcceptMessage = true; // by default
@@ -249,7 +249,7 @@ bool KChatBase::addSendingEntry(const QString& text, int id)
 //FIXME: is ID used correctly? 
 // do we need ID at all? 
 // what the hell should be here?
-// d->mCombo->insertItem(i18n("Send to all players"), SendToAll);
+// d->mCombo->insertItem(i18n("Send to All Players"), SendToAll);
  return insertSendingEntry(text, id);
 }
 
