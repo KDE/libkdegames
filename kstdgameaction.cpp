@@ -263,7 +263,7 @@ KAction *KStdGameAction::carddecks(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
 //AB: maybe we need an icon?
-    return new KAction(i18n("Configure &Carddecks"), 
+    return new KAction(i18n("Configure &Carddecks..."), 
                        0, recvr, slot, parent,
                        name ? name : stdName(Carddecks));
 }
