@@ -65,17 +65,18 @@ KGameNetwork::KGameNetwork(int cookie,QObject* parent) : QObject(parent, 0)
   d->mMessageClient = new KMessageClient (this);
   d->mMessageClient->setServer (d->mMessageServer);
 
-  connect (d->mMessageClient, SIGNAL (broadcastReceived(const QByteArray&, Q_UINT32)),
-           this, SLOT (receiveNetworkTransmission(const QByteArray&, Q_UINT32)));
-  connect (d->mMessageClient, SIGNAL (connectionBroken()),
-           this, SLOT (slotConnectionLost()));
-
-  connect (d->mMessageClient, SIGNAL (eventClientConnected(Q_UINT32)),
-           this, SLOT (slotClientConnected(Q_UINT32)));
-  connect (d->mMessageClient, SIGNAL (eventClientDisconnected(Q_UINT32)),
-           this, SLOT (slotClientDisconnected(Q_UINT32)));
-  // BL: The connect to the signals "adminStatusChanged" is maybe also necessary.
-  // FIXME
+  connect (d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
+           this, SLOT(receiveNetworkTransmission(const QByteArray&, Q_UINT32)));
+  connect (d->mMessageClient, SIGNAL(connectionBroken()),
+           this, SIGNAL(signalConnectionBroken())); // TODO: Return to a non-network game?
+  connect (d->mMessageClient, SIGNAL(adminStatusChanged(bool)),
+           this, SLOT(slotAdminStatusChanged(bool)));
+  connect (d->mMessageClient, SIGNAL(eventClientConnected(Q_UINT32)),
+           this, SIGNAL(signalClientConnected(Q_UINT32)));
+  connect (d->mMessageClient, SIGNAL(eventClientDisconnected(Q_UINT32)),
+           this, SIGNAL(signalClientDisconnected(Q_UINT32)));
+  connect (d->mMessageClient, SIGNAL(eventClientConnectionBroken(Q_UINT32)),
+           this, SIGNAL(signalClientConnectionBroken(Q_UINT32)));
 
   d->mCookie = (Q_INT16)cookie;
   kdDebug(11001) << "CREATE(KGameNetwork=" << this <<") cookie=" << d->mCookie << " sizeof(this)="<<sizeof(KGameNetwork) << endl;
@@ -161,6 +162,7 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
 			<< "make sure that all clients connect to that server! "
 			<< "quitting the local server now..." << endl;
     stopServerConnection();
+    d->mMessageClient->setServer((KMessageIO*)0);
     delete d->mMessageServer;
     d->mMessageServer = 0;
   }
@@ -346,28 +348,9 @@ bool KGameNetwork::unregisterListener(KGameIO *l)
 }
 
 // -------------- slots for the signals of the client
-void KGameNetwork::slotClientConnected (Q_UINT32 clientID)
+void KGameNetwork::slotAdminStatusChanged(bool isAdmin)
 {
-  kdDebug(11001) << "KGameNetwork::slotClientConnected, clientID = " << clientID << endl;
-  // this will initialize the client - e.g. transmit the players to the new client:
-
-  // AB: TODO: if the new client has too many player - i.e. playerCount would be >
-  // maxPlayers then deny the connection! I don't know exactly where to do this.
-  // Somewhere in IdSetupGame I guess but it would be much better here.
-  negotiateNetworkGame (clientID);
-}
-
-void KGameNetwork::slotClientDisconnected (Q_UINT32 clientID)
-{
-  kdDebug(11001) << "KGameNetwork::slotClientDisconnected, clientID = " << clientID << endl;
-  // TODO: Remove the players of that client and to some other cleanup stuff. (Can the game
-  // still be continued?)
-}
-
-void KGameNetwork::slotConnectionLost ()
-{
-  kdDebug(11001) << "KGameNetwork::slotConnectionLost" << endl;
-  // TODO: Return to a non-network game?
+//FIXME TODO
 }
 
 void KGameNetwork::Debug()

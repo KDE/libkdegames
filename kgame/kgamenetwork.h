@@ -117,7 +117,6 @@ public:
 
     /**
      * Stops offering server connections - only for game MASTER
-     *
      * @return true
      **/
     bool stopServerConnection();
@@ -237,7 +236,6 @@ public:
 signals:
     /**
      * A network error occured
-     *
      * @param error the error code
      * @param text the error text
      */
@@ -249,40 +247,42 @@ signals:
      */
     void signalNetworkVersionError(Q_UINT32 clientID);
 
-
-protected:
     /**
-     * Called by @ref slotClientConnected(). Will be overwritten by
-     * @ref KGame and handle the incoming message.
+     * The connection to the @ref KMessageServer is broken
+     * See @ref KMessageClient::connectionBroken
      **/
-    virtual void negotiateNetworkGame(Q_UINT32 clientID) = 0;
+    void signalConnectionBroken();
+
+    /**
+     * This signal is emitted whenever the @ref KMessageServer sends us a message that a
+     * new client connected.
+     * @ref KGame uses this to call
+     * KGame::negotiateNetworkGame for the newly connected client if we are
+     * admin (see @ref isAdmin)
+     *
+     * See @ref KMessageClient::eventClientConnected
+     * @param clientID the ID of the newly connected client
+     **/
+    void signalClientConnected(Q_UINT32 clientID);
+
+    /**
+     * This signal is emitted whenever the @ref KMessageServer sends us a message that a
+     * client has lost the connection to the server. Note that this is emitted 
+     * even if the client disconnected on purpose!
+     *
+     * See @ref KMessageClient::eventClientDisconnected
+     * @prarm clientID the client that has disconnected
+     */
+    void signalClientDisconnected(Q_UINT32 clientID);
+
+    /**
+     * The connection to a client has been lost by accident. Note that this is
+     * not emitted if the client is removed on purpose!
+     * @param clientID the ID of the client
+     **/
+    void signalConnectionLost(Q_UINT32 clientID);
 
 protected slots:
-    /**
-     * This slot is called whenever the KMessageServer sends us a message that a
-     * new client connected. THIS IS ONLY SENT TO THE MASTER CLIENT!
-     * This calls negotiateNetworkGame, that is overwritten in KGame. It will initialize the
-     * new client here, e.g. the players are exchanged, etc.
-     **/
-    // BL: Instead of this connect the signal to negotiateNetworkGame directly ?
-    void slotClientConnected (Q_UINT32 clientID);
-
-    /**
-     * This slot is called whenever the KMessageServer sends us a message that a
-     * client has lost the connection to the server. THIS IS ONLY SENT TO THE MASTER CLIENT!
-     *
-     * FIXME: This slot does nothing at the moment but giving a debug message!
-     */
-    void slotClientDisconnected (Q_UINT32 clientID);
-
-    /**
-     * This slot is called whenever we loose the contact to the message server. (This could
-     * be because the message server kicked us off, or the connection has broken.
-     *
-     * FIXME: This slot does nothing at the moment but giving a debug message!
-     */
-    void slotConnectionLost ();
-
     /**
      * Called by @ref KMessageClient::broadcastReceived() and will check if the
      * message format is valid. If it is not, it will generate an error (see
@@ -291,6 +291,12 @@ protected slots:
      * (This one is overwritten in KGame.)
      **/
     void receiveNetworkTransmission(const QByteArray& a, Q_UINT32 clientID);
+
+    /**
+     * This KGame object receives or looses the admin status.
+     * @param isAdmin Whether we are admin or not
+     **/
+    void slotAdminStatusChanged(bool isAdmin);
 
 private:
     /**

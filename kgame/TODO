@@ -1,0 +1,49 @@
+- 18.02.2001: Network Init can be called more than once. Has very interesting
+              effects ;-). Should be prevented (if (connected()) return false; ??
+              Kind of fixed?
+- 23.02.2001: doku: signalPlayerInput/playerInput are main functions. Must be
+              explained
+- 24.02.2001: KGameErrorDialog::slotVersionError(): cookie and version (local and remote) must be shown in the message 
+              TODO: more parameters to signal
+- 26.02.2001: load/save games check and improve if not working. load/save signals needed??
+- 27.02.2001: non-KGame KGameDialog?
+- 28.02.2001: Direct computer player for kpoker like games support needs to be improved
+- 28.02.2001: Non existing properties in load should be created, resp like the player
+              creation a signal should prompt the player.
+              Problem, are these properties deleted? Maybe a flag canDelete?
+- 05.03.2001: Documentation. Especially KGameIO is nearly undocumented. I am
+              thinking of an explaination of the class + methods and example
+              code for the "key" methods. A sample implementation in a small
+              game (like the current kdenonbeta/kgame but with a real sense -
+              mabye use the QT tic-tac-toe example?) would be very great (this
+              could be stuff of a tutorial instead of KGame documentation)
+              MH: Even better idea
+- 11.04.2001: I made a major design change so many things are broken now (e.g.
+              clients which send a message will receive it from the server as
+              well - so they have to care about this on receiving and no more on
+              sending).
+              Things I declare as broken (more or less) currently:
+              - KGameProcessIO (writeBuffers() must be rewritten)
+              all K*Process* classes must be tested extremely, 
+              especially KGameClientProcess which is untested!
+              KGameChat adds the local player twice on the master to the player
+              list
+              - Message format in messages.txt - much has changed... the hidden
+              headers are now *always* in the message (size + magic cookie)
+              - KPlayerData: is emitSignal still working?
+              - KGameDialog cannot configure KMessageServer :-(
+- 16.04.2001: removePlayer() has been redesigned for KGameComServer but still
+              has to be tested. I don't have any way to do this currently, as
+              kgame mostly removes players on destruct
+- 25.05.2001: connect to the signal KGameNetwork::connectionBroken and start a
+              local non-network game
+- 25.05.2001: rewrite KGame::slotClientDisconnected
+
+ ********************************************************************
+  
+  WHY DOES THE TODO LIST GROW FASTER THAN THE PROGRAM ??????????? ;-))
+  AB: because we don't delete the jobs we've done!!!!!!!!! ;-))
+  MH: Oh ;-)
+
+ ********************************************************************
+

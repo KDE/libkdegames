@@ -91,6 +91,12 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
   d->mCookie=cookie;
   mRandom.setSeed(0);
 
+  connect(this, SIGNAL(signalClientConnected(Q_UINT32)),
+  	this, SLOT(slotClientConnected(Q_UINT32)));
+  connect(this, SIGNAL(signaClientDisconnected(Q_UINT32)),
+  	this, SLOT(slotClientDisconnected(Q_UINT32)));
+
+
   // BL: FIXME This signal does no longer exist. When we are merging
   // MH: super....and how do I find out about the lost conenction now?
   // KGame and KGameNetwork, this could be improved!
@@ -569,32 +575,32 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
 
   switch(msgid)
   {
-  	case KGameMessage::IdSetupGame:  // Client: First step in setup game
-	    {
+    case KGameMessage::IdSetupGame:  // Client: First step in setup game
+      {
         Q_INT16 v;
         Q_INT32 c;
-       stream >> v >> c;
-		   kdDebug(11001) << " ===================> (Client) KGame::networkTransmission:: Got IdSetupGame ================== " << endl;
-       kdDebug(11001) << "our game id is " << gameId() << " Lib version="<<v << " App Cookie="<<c << endl; 
-       if (c!=cookie())
-       {
-         kdError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
-         // MH TODO: disconnect from master
-       }
-       else setupGame(stream, sender);
-		   break;
-  	  }
-  	case KGameMessage::IdSetupGameContinue:  // Master: second step in game setup
-	    {
-	    	kdDebug(11001) << "=====>(Master) KGame::networkTransmission() - IdSetupGameContinue" << endl;
-	    	setupGameContinue(stream, sender);
-	    	syncRandom();
+        stream >> v >> c;
+	kdDebug(11001) << " ===================> (Client) KGame::networkTransmission:: Got IdSetupGame ================== " << endl;
+        kdDebug(11001) << "our game id is " << gameId() << " Lib version="<<v << " App Cookie="<<c << endl; 
+        if (c!=cookie())
+        {
+          kdError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
+          // MH TODO: disconnect from master
+        }
+        else setupGame(stream, sender);
+	break;
+      }
+    case KGameMessage::IdSetupGameContinue:  // Master: second step in game setup
+      {
+        kdDebug(11001) << "=====>(Master) KGame::networkTransmission() - IdSetupGameContinue" << endl;
+        setupGameContinue(stream, sender);
+        syncRandom();
       }
     break;
-  	case KGameMessage::IdGameReactivatePlayer:  // Client: Reactivate player
-	    {
-	    	kdDebug(11001) << "=====>(client) KGame::networkTransmission() - IdGameRactivatePlayer" << endl;
-	    	gameReactivatePlayer(stream, sender);
+    case KGameMessage::IdGameReactivatePlayer:  // Client: Reactivate player
+      {
+        kdDebug(11001) << "=====>(client) KGame::networkTransmission() - IdGameRactivatePlayer" << endl;
+        gameReactivatePlayer(stream, sender);
       }
     break;
     case KGameMessage::IdActivatePlayer:  // Activate Player
@@ -814,14 +820,20 @@ void KGame::Debug()
    kdDebug(11001) << "---------------------------------------------------" << endl;
 }
 
-void KGame::slotConnectionLost(Q_UINT32 clientID)
+void KGame::slotClientConnected(Q_UINT32 clientID)
 {
-  // We lost the socket connection...we better remove all players
-  // belong to that socket NOW
+ if (isAdmin()) {
+	negotiateNetworkGame(clientID);
+ }
+}
 
-  // BL: FIXME
-  // This code doesn't work any more, since we have to KGameClient object
-  // holding a playerList.
+void KGame::slotClientDisconnected(Q_UINT32 clientID)
+{
+ //TODO: remove/replace the players of this client and do some other cleanup
+ //stuff (can the game still be continued?)
+
+//FIXME: the code below was in slotConnectionLost which is obsolete. Must be
+//replaced/rewritten somehow!
 /*
   kdDebug(11001) << "KGame::slotConnectionLost(" << client << ")" << endl;
   if (!client) return ;

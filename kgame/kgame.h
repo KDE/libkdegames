@@ -338,20 +338,25 @@ public:
     virtual void networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID);
 
 
-
-
 protected slots:
-    /**
-     * This slot is called whenever the connection to a client is lost (ie the
-     * signal @ref KGameNetwork::signalConnectionLost is called) and will remove
-     * the players from that client.
-     * @param client The client the connection has been lost to
-     **/
-    void slotConnectionLost(Q_UINT32 clientID);
     /**
      * Prepare the call of next() after a QTimer event to allow QT Event processing
      */
     void prepareNext();
+
+    /**
+     * Calls @ref negotiateNetworkGame
+     * See @ref KGameNetwork::signalClientConnected
+     **/
+    void slotClientConnected(Q_UINT32 clientId);
+
+    /**
+     * This slot is called whenever the connection to a client is lost (ie the
+     * signal @ref KGameNetwork::signalClientDisconnected is emitted) and will remove
+     * the players from that client.
+     * @param client The client the connection has been lost to
+     **/
+    void slotClientDisconnected(Q_UINT32 clientId);
 
 signals:
     /**
@@ -499,14 +504,13 @@ protected:
     void systemRemovePlayer(KPlayer* player);
     
     /**
-     * This slot is called when a new client has connected to the game. This
-     * member function will transmit e.g. all players to that client, as well as
+     * This member function will transmit e.g. all players to that client, as well as
      * all properties of these players (at least if they have been added by
      * @ref KPlayer::addProperty) so that the client will finally have the same
      * status as the master. You want to overwrite this function if you expand
      * KGame by any properties which have to be known by all clients.
      *
-     * Only the MASTER is allowed to call this.
+     * Only the ADMIN is allowed to call this.
      * @param clientID The ID of the message client which has connected
      **/
     virtual void negotiateNetworkGame(Q_UINT32 clientID);

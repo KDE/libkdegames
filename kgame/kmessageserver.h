@@ -185,14 +185,14 @@ public:
           REQ_REMOVE_CLIENT, REQ_MAX_NUM_CLIENTS, REQ_CLIENT_LIST};
 
     /**
-      MessageIDs for messages from the message server to a client.
-    */
+     * MessageIDs for messages from the message server to a client.
+     **/
     enum {MSG_BROADCAST = 101, MSG_FORWARD, ANS_CLIENT_ID, ANS_ADMIN_ID, ANS_CLIENT_LIST,
           EVNT_CLIENT_CONNECTED, EVNT_CLIENT_DISCONNECTED};
 
     /**
      * Create a KGameNetwork object
-     */
+     **/
     KMessageServer(Q_UINT16 cookie = 42, QObject* parent = 0);
 
     ~KMessageServer();
@@ -205,61 +205,61 @@ public:
 //---------------------------------- TCP/IP server stuff
 
     /**
-     Starts the Communication server to listen for incoming TCP/IP connections.
-
-     @param port The port on which the service is offered, or 0 to let the
-                 system pick a free port
-     @return true if it worked
+     * Starts the Communication server to listen for incoming TCP/IP connections.
+     *
+     * @param port The port on which the service is offered, or 0 to let the
+     * system pick a free port
+     * @return true if it worked
     */
     bool initNetwork (Q_UINT16 port = 0);
 
     /**
-     Returns the TCP/IP port number we are listening to for incoming connections.
-     (This has to be known by other clients so that they can connect to us. It's
-     especially necessary if you used 0 as port number in initNetwork().
-
-     @return the port number
-    */
+     * Returns the TCP/IP port number we are listening to for incoming connections.
+     * (This has to be known by other clients so that they can connect to us. It's
+     * especially necessary if you used 0 as port number in initNetwork().
+     * @return the port number
+     **/
     Q_UINT16 serverPort () const;
 
     /**
-     Stops listening for connections. The already running connections are
-     not affected.
-     To listen for connections again call initNetwork again.
-    */
+     * Stops listening for connections. The already running connections are
+     * not affected.
+     * To listen for connections again call initNetwork again.
+     **/
     void stopNetwork();
 
     /**
-     Are we still offer offering server connections?
-
-     @return true, if we are still listening to connections requests
-    */
+     * Are we still offer offering server connections?
+     * @return true, if we are still listening to connections requests
+     **/
     bool isOfferingConnections() const;
 
 //---------------------------------- adding / removing clients
 
 public slots:
     /**
-      Adds a new KMessageIO object to the communication server. This "client"
-      gets a unique ID.
-
-      This slot method is automatically called for any incoming TCP/IP
-      connection. You can use it to add other types of connections, e.g.
-      local connections (KMessageDirect) to the server manually.
-
-      NOTE: The KMessageIO object gets owned by the KMessageServer,
-      so don't delete or manipulate it afterwards. It is automatically deleted
-      when the connection is broken or the communication server is deleted.
-      So, add a KMessageIO object to just ONE KMessageServer.
-    */
+     * Adds a new @ref KMessageIO object to the communication server. This "client"
+     * gets a unique ID.
+     *
+     * This slot method is automatically called for any incoming TCP/IP
+     * connection. You can use it to add other types of connections, e.g.
+     * local connections (KMessageDirect) to the server manually.
+     *
+     * NOTE: The @ref KMessageIO object gets owned by the KMessageServer,
+     * so don't delete or manipulate it afterwards. It is automatically deleted
+     * when the connection is broken or the communication server is deleted.
+     * So, add a @ref KMessageIO object to just ONE KMessageServer.
+     **/
     void addClient (KMessageIO *);
 
     /**
-      Removes the KMessageIO object from the client list and deletes it.
-      This destroys the connection, if it already was up.
-      Does NOT emit connectionLost.
-    */
-    void removeClient (KMessageIO *);
+     * Removes the KMessageIO object from the client list and deletes it.
+     * This destroys the connection, if it already was up.
+     * Does NOT emit connectionLost.
+     * @param purpose Whether the client is removed on purpose or not. 
+     * Mostly used internally. You will probably not need this.
+     **/
+    void removeClient (KMessageIO *, bool purpose = true);
 
     /**
       Deletes all connections to the clients.
@@ -268,11 +268,11 @@ public slots:
 
 private slots:
     /**
-      Removes the sender object of the signal that called this slot. It is
-      automatically connected to KMessageIO::connectionBroken.
-      Emits connectionLost (KMessageIO*), and deletes the KMessageIO object.
-      Don't call it directly!
-    */
+     * Removes the sender object of the signal that called this slot. It is
+     * automatically connected to @ref KMessageIO::connectionBroken.
+     * Emits @ref connectionLost (KMessageIO*), and deletes the @ref KMessageIO object.
+     * Don't call it directly!
+     **/
     void removeBrokenClient ();
 
 public:
@@ -304,44 +304,43 @@ public:
     int clientCount() const;
 
     /**
-      returns a list of the unique IDs of all clients.
-    */
+     * returns a list of the unique IDs of all clients.
+     **/
     QValueList <Q_UINT32> clientIDs() const;
 
     /**
-      Find the KMessageIO object to the given client number.
-
-      @param no the client number to look for, or 0 to look for the admin
-      @return address of the client, or 0 if no client with that number exists
-    */
+     * Find the @ref KMessageIO object to the given client number.
+     * @param no the client number to look for, or 0 to look for the admin
+     * @return address of the client, or 0 if no client with that number exists
+     **/
     KMessageIO *findClient (Q_UINT32 no) const;
 
     /**
-      Returns the clientID of the admin, if there is a admin, 0 otherwise.
-
-      NOTE: Most often you don't need to know that id, since you can
-      use clientID 0 to specify the admin.
-    */
+     * Returns the clientID of the admin, if there is a admin, 0 otherwise.
+     *
+     * NOTE: Most often you don't need to know that id, since you can
+     * use clientID 0 to specify the admin.
+     **/
     Q_UINT32 adminID() const;
 
     /**
-      Sets the admin to a new client with the given ID.
-      The old admin (if existed) and the new admin will get the ANS_ADMIN message.
-      If you use 0 as new adminID, no client will be admin.
-    */
+     * Sets the admin to a new client with the given ID.
+     * The old admin (if existed) and the new admin will get the ANS_ADMIN message.
+     * If you use 0 as new adminID, no client will be admin.
+     **/
     void setAdmin (Q_UINT32 adminID);
 
 
 //------------------------------ ID stuff
 
-    /**
+    /*
      * The unique ID of this game
      *
      * @return int id
      **/
 //    int gameId() const;
 
-    /**
+    /*
      * Application cookie. this idendifies the game application. It
      * help to distinguish between e.g. KPoker and KWin4
      *
@@ -353,51 +352,51 @@ public:
 
 public:
     /**
-      Sends a message to all connected clients.
-      The message is NOT translated in any way. This method calls
-      KMessageIO::send for every client added.
-    */
+     * Sends a message to all connected clients.
+     * The message is NOT translated in any way. This method calls
+     * @ref KMessageIO::send for every client added.
+     **/
     virtual void broadcastMessage (const QByteArray &msg);
 
     /**
-      Sends a message to a single client with the given ID.
-      The message is NOT translated in any way.
-      If no client with the given id exists, nothing is done.
-      This is just a convenience method. You could also call
-      findClient (id)->send(msg) manually, but this method checks for
-      errors.
-    */
+     * Sends a message to a single client with the given ID.
+     * The message is NOT translated in any way.
+     * If no client with the given id exists, nothing is done.
+     * This is just a convenience method. You could also call
+     * @ref findClient (id)->send(msg) manually, but this method checks for
+     * errors.
+     **/
     virtual void sendMessage (Q_UINT32 id, const QByteArray &msg);
 
     /**
-      Sends a message to a list of clients. Their ID is given in ids. If
-      a client id is given more than once in the list, the message is also
-      sent several times to that client.
-      This is just a convenience method. You could also iterate over the
-      list of IDs.
-    */
+     * Sends a message to a list of clients. Their ID is given in ids. If
+     * a client id is given more than once in the list, the message is also
+     * sent several times to that client.
+     * This is just a convenience method. You could also iterate over the
+     * list of IDs.
+     **/
     virtual void sendMessage (const QValueList <Q_UINT32> &ids, const QByteArray &msg);
 
 protected slots:
     /**
-      This slot receives all the messages from the KMessageIO::received signals.
-      It stores the messages in a queue. The messages are later taken out of the queue
-      by getReceivedMessage.
-
-      NOTE: It is important that this slot may only be called from the signal
-      KMessageIO::received, since the sender() object is used to find out
-      the client that sent the message!
-    */
+     * This slot receives all the messages from the @ref KMessageIO::received signals.
+     * It stores the messages in a queue. The messages are later taken out of the queue
+     * by @ref getReceivedMessage.
+     *
+     * NOTE: It is important that this slot may only be called from the signal
+     * @ref KMessageIO::received, since the sender() object is used to find out
+     * the client that sent the message!
+     **/
     virtual void getReceivedMessage (const QByteArray &msg);
 
     /**
-      This slot is called whenever there are elements in the message queue. This queue
-      is filled by getReceivedMessage.
-      This slot takes one message out of the queue and analyses processes it,
-      if it recognizes it. (See message types in the description of the class.)
-      After that, the signal messageReceived is emitted. Connect to that signal if
-      you want to process other types of messages.
-    */
+     * This slot is called whenever there are elements in the message queue. This queue
+     * is filled by @ref getReceivedMessage.
+     * This slot takes one message out of the queue and analyses processes it,
+     * if it recognizes it. (See message types in the description of the class.)
+     * After that, the signal @ref messageReceived is emitted. Connect to that signal if
+     * you want to process other types of messages.
+     **/
     virtual void processOneMessage ();
 
 //---------------------------- Signals
@@ -419,25 +418,25 @@ signals:
     void connectionLost (KMessageIO *client);
 
     /**
-      This signal is always emitted when a message from a client is received.
-
-      You can use this signal to extend the communication server without subclassing.
-      Just connect to this signal and analyse the message, if unknown is true.
-      If you recognize a message and process it, set unknown to false, otherwise
-      a warning message is printed.
-
-      @param data the message data
-      @param clientID the ID of the KMessageIO object that received the message
-      @param unknown true, if the message type is not known by the KMessageServer
-    */
+     * This signal is always emitted when a message from a client is received.
+     *
+     * You can use this signal to extend the communication server without subclassing.
+     * Just connect to this signal and analyse the message, if unknown is true.
+     * If you recognize a message and process it, set unknown to false, otherwise
+     * a warning message is printed.
+     *
+     * @param data the message data
+     * @param clientID the ID of the KMessageIO object that received the message
+     * @param unknown true, if the message type is not known by the KMessageServer
+     **/
     void messageReceived (const QByteArray &data, Q_UINT32 clientID, bool &unknown);
 
 protected:
     /**
-      @return A unique number which can be used as the id of a @ref KMessageIO. It is
-      incremented after every call so if you need the id twice you have to save
-      it anywhere. It's currently used to initialize newly connected clints only.
-    */
+     * @return A unique number which can be used as the id of a @ref KMessageIO. It is
+     * incremented after every call so if you need the id twice you have to save
+     * it anywhere. It's currently used to initialize newly connected clints only.
+     **/
     Q_UINT32 uniqueClientNumber() const;
 
 private:

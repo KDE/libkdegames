@@ -222,13 +222,19 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
     case KMessageServer::EVNT_CLIENT_DISCONNECTED:
       {
         Q_UINT32 id;
+        Q_INT8 purpose;
         in_stream >> id;
+        in_stream >> purpose;
 
         if (!d->clientList.contains (id))
           kdWarning (11001) << "KMessageClient::processIncomingMessage: Removing a client that doesn't exist!" << endl;
         else
           d->clientList.remove (id);
 
+        if (bool(purpose)) 
+        {
+          emit eventClientConnectionBroken(id);
+        }
         emit eventClientDisconnected (id);
       }
       break;

@@ -48,11 +48,10 @@ void KGameErrorDialog::setKGame(const KGame* g)
 		this, SLOT(slotError(int, QString)));
  connect(mGame, SIGNAL(signalNetworkVersionError(Q_UINT32)), 
 		this, SLOT(slotVersionError(Q_UINT32)));
-
-// AB: might be obsolete since KMessageServer
-// what is the replacement
-// connect(mGame, SIGNAL(signalConnectionLost(KGameClient*)), 
-//		this, SLOT(slotConnectionLost(KGameClient*)));
+ connect(mGame, SIGNAL(signalConnectionBroken()), 
+		this, SLOT(slotServerConnectionLost()));
+ connect(mGame, SIGNAL(signalConnectionLost(Q_UINT32)), 
+		this, SLOT(slotClientConnectionLost(Q_UINT32)));
 }
 
 void KGameErrorDialog::error(const QString& errorText, QWidget* parent)
@@ -78,9 +77,16 @@ void KGameErrorDialog::slotVersionError(Q_UINT32 client)
  error(message, (QWidget*)parent());
 }
 
-//FIXME:
-/*void KGameErrorDialog::slotConnectionLost(KGameClient* c)
+void KGameErrorDialog::slotServerConnectionLost()
 {
+// TODO: add IP/port of the server
+ QString message = i18n("Connection to the server has been lost!");
+ error(message, (QWidget*)parent());
+}
+
+void KGameErrorDialog::slotClientConnectionLost(Q_UINT32 id)
+{
+//TODO: add IP/port of the client
  QString message;
 // if (c) {
 //	message = i18n("Connection to client has been lost!\nID: %1\nIP: %2").arg(c->id()).arg(c->IP());
@@ -89,7 +95,7 @@ void KGameErrorDialog::slotVersionError(Q_UINT32 client)
 // }
  message = i18n("Connection to client has been lost!");
  error(message, (QWidget*)parent());
-}*/
+}
 
 void KGameErrorDialog::slotError(int errorNo, QString text)
 {

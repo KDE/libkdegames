@@ -284,6 +284,14 @@ signals:
   void eventClientDisconnected (Q_UINT32 clientID);
 
   /**
+   * This signal is emitted when the server has lost the connection to a client
+   * by accident. This is an extension to @ref eventClientDisconnected and is
+   * emitted _before_ that signal.
+   * @param clientID the ID of the client that has lost the connection
+   **/
+  void eventClientConnectionBroken (Q_UINT32 clientID);
+
+  /**
     This signal is emitted on every message that came from the server. You can connect to this
     signal to see the messages directly. They are in the format specified in @ref KMessageServer.
 

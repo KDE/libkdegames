@@ -64,7 +64,20 @@ public:
 public slots:
 	void slotError(int error, QString text);
 	void slotVersionError(Q_UINT32 client);
-//	void slotConnectionLost(KGameClient* c);//FIXME
+	
+	/**
+	 * The connection to the @ref KMessageServer has been lost
+	 *
+	 * See @ref KGameNetwork::signalConnectionBoken
+	 **/
+	void slotServerConnectionLost();
+
+	/**
+	 * The connection to a client has been lost by accident
+	 *
+	 * See @ref KGameNetwork::signalConnectionLost
+	 **/
+	void slotClientConnectionLost(Q_UINT32 clientID);
 
 protected:
 	void error(const QString& errorText, QWidget* parent = 0);
