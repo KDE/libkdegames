@@ -65,14 +65,14 @@ public slots:
 	/**
 	 * The connection to the @ref KMessageServer has been lost
 	 *
-	 * See @ref KGameNetwork::signalConnectionBoken
+	 * See @ref KGameNetwork::signalConnectionBroken
 	 **/
 	void slotServerConnectionLost();
 
 	/**
 	 * The connection to a client has been lost by accident
 	 *
-	 * See @ref KGameNetwork::signalConnectionLost
+	 * See @ref KGameNetwork::signalClientDisconnected
 	 **/
 	void slotClientConnectionLost(Q_UINT32 clientID,bool broken);
 	
