@@ -33,21 +33,23 @@ class KGameMessage
      * player id in the lower bits and the game number in the higher bits.
      * Do not rely on the exact bit positions as they are internal.
      *
-     * @param playerid the player id - can include an gameid
-     * @param gameid The game id (<64)
+     * @param playerid the player id - can include a gameid (will get removed)
+     * @param gameid The game id (<64). 0 For broadcast.
      * @return the new player id
      */
-    static Q_UINT32 createPlayerId(int player,Q_UINT32 game);
+    static Q_UINT32 createPlayerId(int player, Q_UINT32 game);
+
     /**
      * Checks whether a message receiver/sender is a player
-     * 
+     *
      * @param msgid the message id
      * @return true/false
      */
     static bool isPlayer(int msgid);
+
     /**
      * Checks whether the sender/receiver of a message is a game
-     * 
+     *
      * @param msgid the message id
      * @return true/false
      */
@@ -125,6 +127,8 @@ class KGameMessage
 
   /**
    * Message Ids used inside @ref KGame.
+   *
+   * You can use your own custom message Id by adding @p IdUser to it.
    **/
 // please document every new id with a short comment
   enum GameMessageIds {
@@ -147,7 +151,7 @@ class KGameMessage
     IdActivatePlayer=32,    // Activate a player
     IdInactivatePlayer=33,  // Inactivate a player
     IdTurn=34,              // Turn to be prepared
-    
+
 // to-be-categorized
     IdError=100,            // an error occured
     IdPlayerInput=101,      // a player input occured
@@ -159,11 +163,6 @@ class KGameMessage
 
     IdUser=256          // a user specified message
   };
-
-  protected:
-    /**
-     * Returns the  magic cookie for the messages
-     */
 };
 
 #endif

@@ -88,7 +88,7 @@ bool KGameProcess::exec(int argc, char *argv[])
 //    QByteArray buffer;
 //    QDataStream wstream(buffer,IO_WriteOnly);
 //    then stream data into the stream and call this function
-void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,int receiver)
+void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 receiver)
 {
   fprintf(stderr,"KGameProcess::sendMessage id=%d recv=%d",msgid,receiver);
   QByteArray a;
@@ -107,7 +107,7 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,int receiver)
   if (mMessageIO) mMessageIO->send(a);
 }
 
-void KGameProcess::sendMessage(QDataStream &stream,int msgid,int receiver)
+void KGameProcess::sendMessage(QDataStream &stream,int msgid,Q_UINT32 receiver)
 {
   sendSystemMessage(stream,msgid+KGameMessage::IdUser,receiver);
 }

@@ -93,7 +93,7 @@ public:
       *
       * @return 0 for default KPlayer.
       */
-      virtual int rtti() const {return 0;}  
+      virtual int rtti() const {return 0;}
 
       /**
       * Gives debug output of the game status
@@ -107,7 +107,7 @@ public:
        * @return list of devices
        */
       KGameIOList *ioList() {return &mInputList;}
-     
+
       /**
        * sets the game the player belongs to. This
        * is usually automatically done when adding a
@@ -123,7 +123,7 @@ public:
        * @return the game
        */
       KGame *game() const {return mGame;}
-    
+
       /**
        * Set whether this player can make turns/input
        * all the time (true) or only when it is its
@@ -132,7 +132,7 @@ public:
        * @param a async=true turn based=false
        */
       void setAsyncInput(bool a) {mAsyncInput = a;}
-      
+
       /**
        * Query whether this player does asynchronous 
        * input
@@ -258,12 +258,12 @@ public:
        * Can be set arbitrary by you.
        */
       void setGroup(const QString& group);
-      
+
       /**
        * Query the group the player belongs to.
        */
       virtual const QString& group() const;
-      
+
       /**
        * Sets the name of the player.
        * This can be choosen arbitrary.
@@ -287,7 +287,7 @@ public:
        * @return true if ok
        */
       bool addGameIO(KGameIO *input);
-      
+
       /**
        * remove (and delete) a game IO device
        *
@@ -299,7 +299,7 @@ public:
        * @return true on ok
        */
       bool removeGameIO(KGameIO *input=0,bool deleteit=true);
-      
+
       /**
        * Finds the KGameIO devies with the given rtti code.
        * E.g. find the mouse or network device
@@ -347,7 +347,7 @@ public:
        * Sets whether this player is the next to turn.
        * If exclusive is given all other players are set
        * to setTurn(false) and only this player can move
-       * 
+       *
        * @param b true/false
        * @param exlusive true (default)/ false
        * @return should be void
@@ -444,7 +444,7 @@ protected slots:
        * Called by KGameProperty only! Internal function!
        **/
       void emitSignal(KGamePropertyBase *me);
-     
+
 
 private:
       void init();

@@ -19,6 +19,7 @@
 */
 
 #include "kgamechat.h"
+#include "kgamechat.moc"
 
 #include "kgame.h"
 #include "kplayer.h"
@@ -122,10 +123,10 @@ void KGameChat::returnPressed(const QString& text)
  if (isToGroupMessage(id)) {
 	// note: there is currently no support for other groups than the players
 	// group! It might be useful to send to other groups, too
-	QString group = d->mFromPlayer->group(); 
+	QString group = d->mFromPlayer->group();
 	kdDebug(11001) << "send to group " << group << endl;
 	int sender = d->mFromPlayer->id();
-	d->mGame->sendGroupMessage(text, messageId(), sender, group);
+	d->mGame->sendGroupMessage(text, messageId(), KGameMessage::createPlayerId(sender, d->mGame->gameId()), group);
 
 	//TODO
 	//AB: this message is never received!! we need to connect to
@@ -143,7 +144,7 @@ void KGameChat::returnPressed(const QString& text)
 	} 
 	int receiver = toPlayer;
 	int sender = d->mFromPlayer->id();
-	d->mGame->sendMessage(text, messageId(), receiver, sender);
+	d->mGame->sendMessage(text, messageId(), KGameMessage::createPlayerId(receiver, 0), KGameMessage::createPlayerId(sender, d->mGame->gameId()));
  }
 }
 
@@ -281,10 +282,7 @@ void KGameChat::slotAddPlayer(KPlayer* p)
  addSendingEntry(comboBoxItem(p->name()), sendingId);
  d->mSendId2PlayerId.insert(sendingId, p->id());
  connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
-		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*))); 
-
- //TODO: remove the player when the he is removed from game!!!
-
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
 }
 
 void KGameChat::slotRemovePlayer(KPlayer* p)
@@ -330,4 +328,3 @@ void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32
  addMessage(sender, text);
 }
 
-#include "kgamechat.moc"

@@ -31,10 +31,7 @@
 #include <krandomsequence.h>
 
 class KPlayer;
-//class KMessageClient;
-//class KMessageServer;
 class KMessageFilePipe;
-//class KRandomSequence;
 
 /**
  * This is the process class used on the computer player
@@ -47,7 +44,7 @@ class KGameProcess:  public QObject
   Q_OBJECT
 
   public:
-    /** 
+    /**
      * Creates a KGameProcess class. Done only in the computer
      * player. To activate the communication you have to call
      * the @ref exec function of this class which will listen
@@ -84,7 +81,7 @@ class KGameProcess:  public QObject
      * return on setTerminate(true)!
      */
     bool exec(int argc, char *argv[]);
-    
+
     /**
      * Should the computer process leave its exec function?
      * Activated if you setTerminate(true);
@@ -92,7 +89,7 @@ class KGameProcess:  public QObject
      * @return true/false
      */
     bool terminate() const {return mTerminate;}
-    
+
     /**
      * Set this to true if the computer process should end, ie
      * leave its exec function.
@@ -100,15 +97,15 @@ class KGameProcess:  public QObject
      * @param b true for exit the exec function
      */
     void setTerminate(bool b) {mTerminate=b;}
-    
+
     /**
      * Sends a message to the corresponding KGameIO
-     * device. Works like the sendSystemMessage but
+     * device. Works like the @ref sendSystemMessage but
      * for user id's
      *
      * @param the QDataStream containing the message
      */
-    void sendMessage(QDataStream &stream,int msgid,int receiver=0);
+    void sendMessage(QDataStream &stream,int msgid,Q_UINT32 receiver=0);
 
     /**
      * Sends a system message to the corresonding KGameIO device.
@@ -129,7 +126,7 @@ class KGameProcess:  public QObject
      * @param msgid - the message id for the message
      * @param receiver - unused
      */
-    void sendSystemMessage(QDataStream &stream,int msgid,int receiver=0);
+    void sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 receiver=0);
 
     /**
      * Returns a pointer to a KRandomSequence. You can generate
@@ -181,8 +178,8 @@ class KGameProcess:  public QObject
 
      /**
       * This signal is emmited if the computer player should perform a turn.
-      * Calculatisn can be made here and the move can then be send back with 
-      * sendSystemMessage with the message id KGameMessage::IdPlayerInput.
+      * Calculations can be made here and the move can then be send back with
+      * @ref sendSystemMessage with the message id KGameMessage::IdPlayerInput.
       * These must provide a move which complies to your other move syntax as
       * e.g. produces by keyboard or mouse input.
       * Additonal data which have been written into the stream from the
@@ -212,9 +209,9 @@ class KGameProcess:  public QObject
       * }
       * </pre>
       *
-      * @param The datastream which contains user data 
+      * @param The datastream which contains user data
       * @param True or false whether the turn is activated or deactivated
-      * 
+      *
       */
      void signalTurn(QDataStream &stream,bool turn);
 

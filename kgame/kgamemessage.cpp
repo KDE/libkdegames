@@ -29,30 +29,35 @@
 
 Q_UINT32 KGameMessage::rawGameId(Q_UINT32 playerid)
 {
-  return (playerid&0xfc00)>>10;
+  return (playerid & 0xfc00) >> 10;
 }
+
 int KGameMessage::rawPlayerId(Q_UINT32 playerid)
 {
-  return playerid&0x03ff;
+  return playerid & 0x03ff;
 }
 
 bool KGameMessage::isPlayer(int msgid)
 {
-  if (msgid&0xfc00) return true;
-  else return false;
+  if (msgid & 0xfc00) {
+	return true;
+  } else {
+	return false;
+  }
 }
+
 bool KGameMessage::isGame(int msgid)
 {
   return !isPlayer(msgid);
 }
+
 Q_UINT32 KGameMessage::createPlayerId(int oldplayerid,Q_UINT32 gameid)
 {
   int p;
-  p=oldplayerid&0x3ff; // remove game id
-  p|= (gameid <<10);
+  p = oldplayerid & 0x3ff; // remove game id
+  p |= (gameid << 10);
   return p;
 }
-
 
 void KGameMessage::createHeader(QDataStream &msg,Q_UINT32 sender,Q_UINT32 receiver,int msgid)
 {

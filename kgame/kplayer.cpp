@@ -113,7 +113,7 @@ KPlayer::~KPlayer()
   {
     delete input;
   }
-  if (game()) 
+  if (game())
   {
     game()->playerDeleted(this);
   }
@@ -127,11 +127,11 @@ KPlayer::~KPlayer()
 
 bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT32 sender)
 {
-  if (!isActive()) 
+  if (!isActive())
   {
     return false;
   }
-  if (!game()) 
+  if (!game())
   {
     return false;
   }
@@ -141,11 +141,11 @@ bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT
 
 bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
 {
-  if (!isActive()) 
+  if (!isActive())
   {
     return false;
   }
-  if (!game()) 
+  if (!game())
   {
     return false;
   }
@@ -165,7 +165,7 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
   {
     kdDebug(11001) << "indirect playerInput" << endl;
     return game()->sendPlayerInput(msg,this,sender);
-  } 
+  }
   else
   {
     kdDebug(11001) << "direct playerInput" << endl;
@@ -218,7 +218,7 @@ void KPlayer::setNetworkPriority(int p)
 
 bool KPlayer::addGameIO(KGameIO *input)
 {
-  if (!input) 
+  if (!input)
   {
     return false;
   }
@@ -243,7 +243,7 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
   else
   {
 //    kdDebug(11001) << "remove IO " << targetinput << endl;
-    if (deleteit) 
+    if (deleteit)
     {
       delete targetinput;
     }
@@ -256,41 +256,40 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
   return result;
 }
 
-
 KGameIO * KPlayer::findRttiIO(int rtti) const
 {
   QPtrListIterator<KGameIO> it(mInputList);
-  while (it.current()) 
+  while (it.current())
   {
-    if (it.current()->rtti() == rtti) 
+    if (it.current()->rtti() == rtti)
     {
       return it.current();
     }
     ++it;
   }
   return 0;
-} 
+}
 
 int KPlayer::calcIOValue()
 {
   int value=0;
   QPtrListIterator<KGameIO> it(mInputList);
-  while (it.current()) 
+  while (it.current())
   {
     value|=it.current()->rtti();
     ++it;
   }
   return value;
-} 
+}
 
 bool KPlayer::setTurn(bool b, bool exclusive)
 {
   kdDebug(11001) << k_funcinfo << ": " << id() << " (" << this << ") to " << b << endl;
-  if (!isActive()) 
+  if (!isActive())
   {
     return false;
   }
-   
+
   // if we get to do an exclusive turn all other players are disallowed
   if (exclusive && b && game())
   {
@@ -298,7 +297,7 @@ bool KPlayer::setTurn(bool b, bool exclusive)
      KGame::KGamePlayerList *list=game()->playerList();
      for ( player=list->first(); player != 0; player=list->next() )
      {
-       if (player==this) 
+       if (player==this)
        {
          continue;
        }
@@ -337,10 +336,11 @@ bool KPlayer::load(QDataStream &stream)
   // emit signalLoad(stream);
   return true;
 }
+
 bool KPlayer::save(QDataStream &stream)
 {
   stream << (Q_INT32)id() << (Q_INT32)networkPriority();
-  
+
   d->mProperties.save(stream);
 
   stream << (Q_INT16)KPLAYER_LOAD_COOKIE;
@@ -355,15 +355,15 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
   //kdDebug(11001) << k_funcinfo ": msgid=" << msgid << " sender=" << sender << " we are=" << id() << endl;
   // PlayerProperties processed
   bool issender;
-  if (game()) 
+  if (game())
   {
     issender=sender==game()->gameId();
   }
-  else 
+  else
   {
     issender=true;
   }
-  if (d->mProperties.processMessage(stream,msgid,issender)) 
+  if (d->mProperties.processMessage(stream,msgid,issender))
   {
 	return ;
   }
@@ -400,7 +400,7 @@ void KPlayer::sendProperty(int msgid, QDataStream& stream, bool* sent)
 {
   if (game())
   {
-    bool s = game()->sendPlayerProperty(msgid, stream, id());
+    bool s = game()->sendPlayerProperty(msgid, stream, KGameMessage::createPlayerId(id(), 0));
     if (s)
     {
       *sent = true;
@@ -415,7 +415,7 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
   {
     //kdDebug(11001) << k_funcinfo << ": for KGamePropertyBase::IdTurn " << endl;
     QPtrListIterator<KGameIO> it(mInputList);
-    while (it.current()) 
+    while (it.current())
     {
       it.current()->notifyTurn(mMyTurn.value());
       ++it;

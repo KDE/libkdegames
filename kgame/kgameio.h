@@ -91,7 +91,7 @@ public:
     * @return the @ref KGame object of this player
     **/
    KGame* game() const;
-   
+
    /**
     * Sets the player to which this IO belongs to. This
     * is done automatically when adding a device to a 
@@ -101,7 +101,7 @@ public:
     */
    void setPlayer(KPlayer *p) {mPlayer=p;}
 
-   /** 
+   /**
     * Init this device by setting the player and e.g. sending an
     * init message to the device. This initialisation message is
     * very useful for computer players as you can transmit the
@@ -128,7 +128,7 @@ public:
      **/
     bool sendInput(QDataStream& stream, bool transmit = true, Q_UINT32 sender = 0);
 
-signals:  
+signals:
     /**
      * Signal generated when @ref KPlayer::myTurn changes. This can either be
      * when you get the turn status or when you loose it.
@@ -163,7 +163,7 @@ signals:
     void signalPrepareTurn(QDataStream & stream, bool turn, KGameIO *io, bool * send);
 
 
-private:  
+private:
    KPlayer *mPlayer;
 };
 
@@ -175,7 +175,7 @@ private:
 class KGameKeyIO : public KGameIO
 {
   Q_OBJECT
-    
+
 public:
     /**
      * Create a keyboard input devices. All keyboards

@@ -42,7 +42,6 @@ class KGameNetworkPrivate;
  * @short The main KDE game object
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
- *
  */
 class KGameNetwork : public QObject
 {
@@ -55,8 +54,6 @@ public:
     KGameNetwork(int cookie=42,QObject* parent=0);
     virtual ~KGameNetwork();
 
-    //enum PlayerId {IdBroadcast=-1,IdClient=0};
-
     /**
      * Gives debug output of the game status
      **/
@@ -67,7 +64,7 @@ public:
      * connected to a remote MASTER.
      **/
     bool isNetwork() const;
-    
+
     /**
      * Is this the game MASTER (i.e. has started the @ref KMessageServer). A
      * game has always exactly one MASTER. This is either a KGame object (i.e. a
@@ -156,9 +153,9 @@ public:
      * @param msgid an id for this message. See @ref
      * KGameMessage::GameMessageIds
      * @param receiver the @ref KGame / @ref KPlayer this message is for. See
-     * @ref KGameMessage::calcMessageId to create this parameter
+     * @ref KGameMessage::createPlayerId to create this parameter
      * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
-     * you). See @ref KGameMessage::calcMessageId to create this parameter. You
+     * you). See @ref KGameMessage::createPlayerId to create this parameter. You
      * probably want to leave this 0, then KGameNetwork will create the correct
      * value for you. You might want to use this if you send a message from a
      * specific player.
@@ -193,7 +190,7 @@ public:
      * message from a specific player.
      **/
     void sendError(int error, const QByteArray& message, Q_UINT32 receiver=0, Q_UINT32 sender=0);
-    
+
     /**
      * Are we still offer offering server connections - only for game MASTER
      * @return true/false
@@ -233,9 +230,9 @@ public:
      * @param msgid an id for this message. See @ref
      * KGameMessage::GameMessageIds
      * @param receiver the @ref KGame / @ref KPlayer this message is for. See
-     * @ref KGameMessage::calcMessageId to create this parameter
+     * @ref KGameMessage::createPlayerId to create this parameter
      * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
-     * you). See @ref KGameMessage::calcMessageId to create this parameter. You
+     * you). See @ref KGameMessage::createPlayerId to create this parameter. You
      * probably want to leave this 0, then KGameNetwork will create the correct
      * value for you. You might want to use this if you send a message from a
      * specific player.
@@ -309,7 +306,7 @@ public:
      * See @ref KMessageClient::lock
      **/
     virtual void lock();
-    
+
     /**
      * See @ref KMessageClient::unlock
      **/
@@ -399,9 +396,7 @@ protected slots:
 
 
 private:
-
-private:
-    KGameNetworkPrivate* d;
+     KGameNetworkPrivate* d;
 };
 
 #endif

@@ -22,6 +22,7 @@
 */
 
 #include "kgameio.h"
+#include "kgameio.moc"
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
@@ -56,7 +57,7 @@ KGameIO::~KGameIO()
 {
   kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
   // unregister ourselves
-  if (player()) 
+  if (player())
   {
     player()->removeGameIO(this, false);
   }
@@ -89,7 +90,7 @@ void KGameIO::notifyTurn(bool b)
 
 KGame* KGameIO::game() const
 {
-  if (!player()) 
+  if (!player())
   {
     return 0;
   }
@@ -98,7 +99,7 @@ KGame* KGameIO::game() const
 
 bool KGameIO::sendInput(QDataStream& s, bool transmit, Q_UINT32 sender)
 {
-  if (!player()) 
+  if (!player())
   {
     return false;
   }
@@ -128,7 +129,7 @@ KGameKeyIO::KGameKeyIO(QWidget *parent)
 
 KGameKeyIO::~KGameKeyIO()
 {
-  if (parent()) 
+  if (parent())
   {
     parent()->removeEventFilter(this);
   }
@@ -138,7 +139,7 @@ int KGameKeyIO::rtti() const { return KeyIO; }
 
 bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
 {
-  if (!player()) 
+  if (!player())
   {
     return false;
   }
@@ -146,7 +147,7 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
   // key press/release
   if ( e->type() == QEvent::KeyPress ||
        e->type() == QEvent::KeyRelease )
-  { 
+  {
      QKeyEvent *k = (QKeyEvent*)e;
   //   kdDebug(11001) << "KGameKeyIO " << this << " key press/release " <<  k->key() << endl ;
      QByteArray buffer;
@@ -154,8 +155,8 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
      bool eatevent=false;
      emit signalKeyEvent(this,stream,k,&eatevent);
      QDataStream msg(buffer,IO_ReadOnly);
-     
-     if (eatevent && sendInput(msg)) 
+
+     if (eatevent && sendInput(msg))
      {
        return eatevent;
      }
@@ -179,15 +180,15 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
 
 KGameMouseIO::~KGameMouseIO()
 {
-  if (parent()) 
+  if (parent())
   {
     parent()->removeEventFilter(this);
   }
 }
 
-int KGameMouseIO::rtti() const 
-{ 
-  return MouseIO; 
+int KGameMouseIO::rtti() const
+{
+  return MouseIO;
 }
 
 void KGameMouseIO::setMouseTracking(bool b)
@@ -205,15 +206,15 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
     return false;
   }
 //  kdDebug(11001) << "KGameMouseIO " << this  << endl ;
- 
+
   // mouse action
   if ( e->type() == QEvent::MouseButtonPress ||
        e->type() == QEvent::MouseButtonRelease ||
        e->type() == QEvent::MouseButtonDblClick ||
        e->type() == QEvent::Wheel ||
-       e->type() == QEvent::MouseMove 
+       e->type() == QEvent::MouseMove
        )
-  { 
+  {
      QMouseEvent *k = (QMouseEvent*)e;
      // kdDebug(11001) << "KGameMouseIO " << this  << endl ;
      QByteArray buffer;
@@ -278,11 +279,11 @@ KGameProcessIO::~KGameProcessIO()
 {
   kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
   kdDebug(11001) << "player="<<player() << endl;
-  if (player()) 
+  if (player())
   {
-    player()->removeGameIO(this,false); 
+    player()->removeGameIO(this,false);
   }
-  if (d->mProcessIO) 
+  if (d->mProcessIO)
   {
     delete d->mProcessIO;
     d->mProcessIO=0;
@@ -290,9 +291,9 @@ KGameProcessIO::~KGameProcessIO()
   delete d;
 }
 
-int KGameProcessIO::rtti() const 
+int KGameProcessIO::rtti() const
 {
-  return ProcessIO; 
+  return ProcessIO;
 }
 
 void KGameProcessIO::initIO(KPlayer *p)
@@ -310,14 +311,14 @@ void KGameProcessIO::initIO(KPlayer *p)
     emit signalIOAdded(this,stream,p,&sendit);
     if (sendit )
     {
-      Q_UINT32 sender = p->id();  
+      Q_UINT32 sender = p->id();
       kdDebug(11001) <<  "Sending IOAdded to process player !!!!!!!!!!!!!! " << endl;
-      sendSystemMessage(stream, KGameMessage::IdIOAdded, 0, sender);
+      sendSystemMessage(stream, KGameMessage::IdIOAdded, 0, KGameMessage::createPlayerId(sender, game()->gameId()));
     }
   }
 }
 
-void KGameProcessIO::notifyTurn(bool b) 
+void KGameProcessIO::notifyTurn(bool b)
 {
   if (!player())
   {
@@ -331,9 +332,9 @@ void KGameProcessIO::notifyTurn(bool b)
   emit signalPrepareTurn(stream,b,this,&sendit);
   if (sendit)
   {
-    Q_UINT32 sender=player()->id();  
+    Q_UINT32 sender=player()->id();
     kdDebug(11001) <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
-    sendSystemMessage(stream,KGameMessage::IdTurn,0,sender);
+    sendSystemMessage(stream, KGameMessage::IdTurn, 0, KGameMessage::createPlayerId(sender, game()->gameId()));
   }
 }
 
@@ -364,13 +365,13 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 rec
   QDataStream ostream(buffer,IO_WriteOnly);
   QBuffer *device=(QBuffer *)stream.device();
   QByteArray data=device->buffer();;
-  
+
   KGameMessage::createHeader(ostream,sender,receiver,msgid);
   // ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
   ostream.writeRawBytes(data.data(),data.size());
   kdDebug(11001) << "   Adding user data from pos="<< device->at() <<" amount= " << data.size() << " byte " << endl;
   //if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
-  if (d->mProcessIO) 
+  if (d->mProcessIO)
   {
     d->mProcessIO->send(buffer);
   }
@@ -380,7 +381,7 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 rec
 void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 {
   QDataStream stream(receiveBuffer,IO_ReadOnly);
-  int msgid; 
+  int msgid;
   Q_UINT32 sender;
   Q_UINT32 receiver;
   KGameMessage::extractHeader(stream,sender,receiver,msgid);
@@ -398,7 +399,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 
 
 
-	// This is a dummy message which allows us the process to talk with its owner
+// This is a dummy message which allows us the process to talk with its owner
   if (msgid==KGameMessage::IdProcessQuery)
   {
     emit signalProcessQuery(ostream,this);
@@ -415,7 +416,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
       player()->forwardMessage(ostream,msgid,receiver,sender);
     }
   }
-  else 
+  else
   {
     kdDebug(11001) << k_funcinfo << ": Got message from process but no player defined!" << endl;
   }
@@ -462,16 +463,16 @@ void KGameComputerIO::init()
 
 KGameComputerIO::~KGameComputerIO()
 {
-  if (d->mAdvanceTimer) 
+  if (d->mAdvanceTimer)
   {
     delete d->mAdvanceTimer;
   }
   delete d;
 }
 
-int KGameComputerIO::rtti() const 
-{ 
-  return ComputerIO; 
+int KGameComputerIO::rtti() const
+{
+  return ComputerIO;
 }
 
 void KGameComputerIO::setReactionPeriod(int calls)
@@ -513,12 +514,12 @@ void KGameComputerIO::unpause()
 
 void KGameComputerIO::advance()
 {
-  if (d->mPauseCounter > 0) 
+  if (d->mPauseCounter > 0)
   {
     d->mPauseCounter--;
     return;
   }
-  else if (d->mPauseCounter < 0) 
+  else if (d->mPauseCounter < 0)
   {
     return;
   }
@@ -536,4 +537,3 @@ void KGameComputerIO::reaction()
 }
 
 
-#include "kgameio.moc"
