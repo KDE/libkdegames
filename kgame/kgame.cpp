@@ -185,7 +185,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  if (c!=cookie())
  {
-   kdWarning() << "Trying to load different game version we="<<cookie() << " saved=" << c << endl;
+   kdWarning(11001) << "Trying to load different game version we="<<cookie() << " saved=" << c << endl;
    bool result=false;
    emit signalLoadError(stream,network,(int)c,result);
    return result;
@@ -1076,7 +1076,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
     }
     else 
     {
-      kdError() << "Couldn't find a player to dectivate..That is not so good..." << endl;
+      kdError(11001) << "Couldn't find a player to dectivate..That is not so good..." << endl;
       break;
     }
   }
