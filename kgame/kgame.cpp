@@ -492,7 +492,7 @@ void KGame::systemRemovePlayer(KPlayer* player,bool deleteit)
 
  if (gameStatus()==(int)Run && playerCount()<minPlayers()) 
  {
-   kdWarning(11001) << k_funcinfo ": not enough players, pausing game\n" << endl;
+   kdWarning(11001) << k_funcinfo ": not enough players, PAUSING game\n" << endl;
    setGameStatus(Pause);
  }
 }
@@ -793,7 +793,7 @@ KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
 
 void KGame::setGameStatus(int status)
 {
- kdDebug(11001) << k_funcinfo << ": " << status << endl;
+ kdDebug(11001) << k_funcinfo << ": GAMESTATUS CHANGED  to" << status << endl;
  if (status==(int)Run && playerCount()<minPlayers()) 
  {
    kdDebug(11001) << k_funcinfo << ": not enough players, pausing game\n" << endl;
@@ -867,6 +867,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
      {
        setupGame(sender);
      }
+     kdDebug(11001) << "========== (Client) Setup game done\n";
    }
    break;
    case KGameMessage::IdSetupGameContinue:  // Master: second step in game setup
@@ -1122,12 +1123,6 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
     }
   }
 
-  // Save the game over the network
-  QByteArray bufferS;
-  QDataStream streamS(bufferS,IO_WriteOnly);
-  save(streamS);
-  sendSystemMessage(streamS,KGameMessage::IdGameLoad,sender);
- 
   // Now send out the player list which the client can activate
   for ( player=newPlayerList.first(); player != 0; player=newPlayerList.next() ) 
   {
@@ -1140,6 +1135,13 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
     kdDebug(11001) << " -> the client can ******** reactivate ********  " << player->id() << endl;
     sendSystemMessage(player->id(), KGameMessage::IdActivatePlayer,sender);
   }
+
+  // Save the game over the network
+  QByteArray bufferS;
+  QDataStream streamS(bufferS,IO_WriteOnly);
+  save(streamS);
+  sendSystemMessage(streamS,KGameMessage::IdGameLoad,sender);
+ 
 
   // Only to the client first , as the client will add players
   sendSystemMessage(sender, KGameMessage::IdGameSetupDone, sender);

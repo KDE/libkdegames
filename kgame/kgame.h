@@ -797,8 +797,10 @@ protected:
     virtual int checkGameOver(KPlayer *player);
 
     /**
-     * Load a saved game, from file OR network. Internal. Might
-     * loose its virtual status! Do not use if possible.
+     * Load a saved game, from file OR network. Internal. 
+     * Warning: loadgame must not rely that all players all already
+     * activated. Actually the network will activate a player AFTER
+     * the loadgame only
      *
      * @param stream a data stream where you can stream the game from
      * @param is it a network call -> make players virtual
