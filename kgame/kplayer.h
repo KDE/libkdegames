@@ -322,6 +322,9 @@ public:
       /**
        * Forwards input to the game object..internal use only
        *
+       * This method is used by @ref KGameIO::sendInput. Use that function
+       * instead to send player inputs!
+       *
        * This function forwards a player input (see @ref KGameIO classes) to the
        * game object, see @ref KGame, either to @ref KGame::sendPlayerInput (if
        * transmit=true, ie the message has just been created) or to @ref
