@@ -45,7 +45,7 @@ public:
   
   KGamePropertyArray( const KGamePropertyArray<type> &a ) : QMemArray<type>(a)
   {
-    send();
+    KGamePropertyArray<type>::send();
   }
   
   bool  resize( uint size )
