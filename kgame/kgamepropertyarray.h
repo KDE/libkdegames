@@ -49,12 +49,19 @@ public:
   {
     if (size!=QArray<type>::size())
     {
+      bool a=true;
       QByteArray b;
       QDataStream s(b, IO_WriteOnly);
-      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdResize);
-      s << size ;
-      if (mOwner)  mOwner->sendProperty(s);
-      bool a=QArray<type>::resize(size);
+      if (policy()==PolicyClean || policy()==PolicyDirty)
+      {
+        KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdResize);
+        s << size ;
+        if (mOwner)  mOwner->sendProperty(s);
+      }
+      if (policy()==PolicyLocal || policy()==PolicyDirty)
+      {
+        a=QArray<type>::resize(size);
+      }
       return a;
     }
     else return true;
@@ -64,11 +71,17 @@ public:
   {
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
-    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAt);
-    s << i ;
-    s << data;
-    if (mOwner)  mOwner->sendProperty(s);
-    QArray<type>::at(i)=data;
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAt);
+      s << i ;
+      s << data;
+      if (mOwner)  mOwner->sendProperty(s);
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::at(i)=data;
+    }
     //kdDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
 
@@ -92,54 +105,96 @@ public:
   }
   bool  fill( const type &data, int size = -1 )
   {
-    bool r;
-    r=QArray<type>::fill(data,size);
+    bool r=true;
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      r=QArray<type>::fill(data,size);
+    }
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
-    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
-    s << data;
-    s << size ;
-    if (mOwner)  mOwner->sendProperty(s);
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
+      s << data;
+      s << size ;
+      if (mOwner)  mOwner->sendProperty(s);
+    }
     return r;
   }
   KGamePropertyArray<type>& assign( const KGamePropertyArray<type>& a )
   {
 // note: send() has been replaced by sendProperty so it might be broken now!
-    QArray<type>::assign(a);
-    sendProperty();
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::assign(a);
+    }
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      sendProperty();
+    }
     return *this;
   }
   KGamePropertyArray<type>& assign( const type *a, uint n )
   {
-    QArray<type>::assign(a,n);
-    sendProperty();
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::assign(a,n);
+    }
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      sendProperty();
+    }
     return *this;
   }
   KGamePropertyArray<type>& duplicate( const KGamePropertyArray<type>& a )
   {
-    QArray<type>::duplicate(a);
-    sendProperty();
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::duplicate(a);
+    }
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      sendProperty();
+    }
     return *this;
   }
   KGamePropertyArray<type>& duplicate( const type *a, uint n )
   {
-    QArray<type>::duplicate(a,n);
-    sendProperty();
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::duplicate(a,n);
+    }
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      sendProperty();
+    }
     return *this;
   }
   KGamePropertyArray<type>& setRawData( const type *a, uint n )
   {
-    QArray<type>::setRawData(a,n);
-    sendProperty();
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::setRawData(a,n);
+    }
+      if (policy()==PolicyClean || policy()==PolicyDirty)
+      {
+        sendProperty();
+    }
     return *this;
   }
   void sort()
   {
-    QArray<type>::sort();
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QArray<type>::sort();
+    }
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
-    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
-    if (mOwner)  mOwner->sendProperty(s);
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
+      if (mOwner)  mOwner->sendProperty(s);
+    }
   }
 
 	void load(QDataStream& s)
