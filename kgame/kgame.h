@@ -800,7 +800,8 @@ protected:
      * Load a saved game, from file OR network. Internal. 
      * Warning: loadgame must not rely that all players all already
      * activated. Actually the network will activate a player AFTER
-     * the loadgame only
+     * the loadgame only. This is not true anymore. But be careful 
+     * anyway.
      *
      * @param stream a data stream where you can stream the game from
      * @param is it a network call -> make players virtual
