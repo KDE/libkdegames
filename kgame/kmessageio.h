@@ -30,6 +30,7 @@
 #include <qstring.h>
 #include <qptrqueue.h>
 #include <qfile.h>
+#include <kdebug.h>
 
 class QSocket;
 class KProcess;
@@ -58,19 +59,29 @@ class KMessageIO : public QObject
 
 public:
   /**
-    The usual QObject constructor, does nothing else.
+  * The usual QObject constructor, does nothing else.
   */
   KMessageIO (QObject *parent = 0, const char *name = 0);
 
   /**
-    The usual destructor, does nothing special.
+  * The usual destructor, does nothing special.
   */
   ~KMessageIO ();
 
   /**
+  * The runtime idendifcation
+  */
+  virtual int rtti() const {return 0;}
+
+  /**
    * @return Whether this KMessageIO is a network IO or not.
    **/
-  virtual bool isNetwork () const = 0;
+  //virtual bool isNetwork () const = 0;
+  virtual bool isNetwork () const 
+  {
+   kdError(11001) << "Calling PURE virtual isNetwork...BAD" << endl;
+   return false;
+  }
 
   /**
     This method returns the status of the object, whether it is already
@@ -79,7 +90,12 @@ public:
     This is a pure virtual method, so it has to be implemented in a subclass
     of KMessageIO.
   */
-  virtual bool isConnected () const = 0;
+  //virtual bool isConnected () const = 0;
+  virtual bool isConnected () const 
+  {
+   kdError(11001) << "Calling PURE virtual isConencted...BAD" << endl;
+   return false;
+  }
 
   /**
     Sets the ID number of this object. This number can for example be used to
@@ -199,6 +215,12 @@ public:
   ~KMessageSocket ();
 
   /**
+  * The runtime idendifcation
+  */
+  virtual int rtti() const {return 1;}
+
+
+  /**
     @return TRUE as this is a network IO.
   */
   bool isNetwork() const { return true; }
@@ -268,6 +290,12 @@ public:
   ~KMessageDirect ();
 
   /**
+  * The runtime idendifcation
+  */
+  virtual int rtti() const {return 2;}
+
+
+  /**
     @return FALSE as this is no network IO.
   */
   bool isNetwork() const { return false; }
@@ -309,6 +337,12 @@ class KMessageProcess : public KMessageIO
       @return FALSE as this is no network IO.
     */
     bool isNetwork() const { return false; }
+
+  /**
+  * The runtime idendifcation
+  */
+  virtual int rtti() const {return 3;}
+
   
     
   public slots:
@@ -341,6 +375,12 @@ class KMessageFilePipe : public KMessageIO
       @return FALSE as this is no network IO.
     */
     bool isNetwork() const { return false; }
+
+  /**
+  * The runtime idendifcation
+  */
+  virtual int rtti() const {return 4;}
+
   
 
   private:

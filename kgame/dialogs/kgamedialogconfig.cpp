@@ -97,14 +97,16 @@ public:
 	{
 		mInitConnection = 0;
 		mNetworkLabel = 0;
+    mDisconnectButton = 0;
 		mConnect = 0;
-		mDefaultServer=true;
+    mDefaultServer=true;
 
 	}
 
 	// QPushButton* mInitConnection;
 	QHGroupBox* mInitConnection;
 	QLabel* mNetworkLabel;
+  QPushButton *mDisconnectButton;
 
 	bool mDefaultServer;
 	QString mDefaultHost;
@@ -121,8 +123,28 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
 
+ QHBoxLayout *hb=new QHBoxLayout(this, KDialog::spacingHint());
+
  d->mNetworkLabel = new QLabel(this);
- topLayout->addWidget(d->mNetworkLabel);
+ //topLayout->addWidget(d->mNetworkLabel);
+ hb->addWidget(d->mNetworkLabel);
+ 
+ d->mDisconnectButton=new QPushButton(i18n("Disconnect"),this);
+ connect(d->mDisconnectButton, SIGNAL(clicked()), this, SLOT(slotExitConnection()));
+ hb->addWidget(d->mDisconnectButton);
+
+ topLayout->addItem(hb);
+
+ /*
+ d->mInitConnection = new QPushButton(this);
+ d->mInitConnection->setText(i18n("Start Network game"));
+ connect(d->mInitConnection, SIGNAL(clicked()), this, SLOT(slotInitConnection()));
+ topLayout->addWidget(d->mInitConnection);
+ */
+ // MH 30082001
+
+
+ // Needs to be BEFORE the creation of the dialog below
 
  d->mInitConnection = new QHGroupBox(i18n("Network configuration"), this);
  topLayout->addWidget(d->mInitConnection);
@@ -130,13 +152,25 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
  d->mConnect = new KGameConnectWidget(d->mInitConnection);
  connect(d->mConnect, SIGNAL(signalNetworkSetup()), this, SLOT(slotInitConnection()));
 
+ // TODO MH: Still needed (next 2 lines)
+ //d->Connect->reparent(d->mInitConnection, QPoint(0,0));
+ //d->Connect->show();
+
+ // Needs to be AFTER the creation of the dialogs
  setConnected(false);
  setDefaultNetworkInfo("localhost", 7654,true);
 }
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
 {
- delete d; 
+  delete d;
+}
+
+void KGameDialogNetworkConfig::slotExitConnection()
+{
+ kdDebug(11000) << "KGameDialogNetworkConfig::slotEXITConnection() !!!!!!!!!!!!!!!!!!!!!!!" << endl;
+  if (game()) game()->disconnect();
+  setConnected(false,false);
 }
 
 void KGameDialogNetworkConfig::slotInitConnection()
@@ -157,9 +191,20 @@ void KGameDialogNetworkConfig::slotInitConnection()
 	if (game()) {
 		connected = game()->connectToServer(host, port);
 	}
+  // We need to learn about failed connections
+  if (game()) {
+     connect(game(), SIGNAL(signalConnectionBroken()), 
+      this, SLOT(slotConnectionBroken()));
+  }
  }
-
  setConnected(connected, master);
+}
+
+void KGameDialogNetworkConfig::slotConnectionBroken()
+{
+  kdDebug(11001) << "KGameDialogNetworkConfig::slotConnectionBroken()"<<endl;
+  setConnected(false,false);
+  KMessageBox::error(this, i18n("Cannot connect to the network"));
 }
 
 void KGameDialogNetworkConfig::setConnected(bool connected, bool master)
@@ -167,6 +212,7 @@ void KGameDialogNetworkConfig::setConnected(bool connected, bool master)
  if (!connected) {
 	d->mNetworkLabel->setText(i18n("Network status: No Network"));
 	d->mInitConnection->setEnabled(true);
+  d->mDisconnectButton->setEnabled(false);
 	return;
  }
  if (master) {
@@ -175,6 +221,7 @@ void KGameDialogNetworkConfig::setConnected(bool connected, bool master)
 	d->mNetworkLabel->setText(i18n("Network status: You are connected"));
  }
  d->mInitConnection->setEnabled(false);
+ d->mDisconnectButton->setEnabled(true);
 }
 
 void KGameDialogNetworkConfig::submitToKGame(KGame* , KPlayer* )

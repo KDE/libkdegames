@@ -64,13 +64,13 @@ public:
 };
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
-		QWidget* parent, bool modal, bool initConfigs, int chatMsgId)
+		QWidget* parent, bool modal, long initConfigs, int chatMsgId)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply,
 	Ok, parent, 0, modal, true)
 {
  init(g, owner);
- if (initConfigs) {
-	initDefaultDialog(0, 0, 0, new KGameDialogChatConfig(chatMsgId, 0), 0);
+ if ((ConfigOptions)initConfigs!=NoConfig) {
+	initDefaultDialog((ConfigOptions)initConfigs,0, 0, 0, new KGameDialogChatConfig(chatMsgId, 0), 0);
  }
 }
 
@@ -90,7 +90,8 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
  }
 }
 
-void KGameDialog::initDefaultDialog(KGameDialogGeneralConfig* conf, 
+void KGameDialog::initDefaultDialog(ConfigOptions initConfigs,
+    KGameDialogGeneralConfig* conf, 
 		KGameDialogNetworkConfig* netConf, 
 		KGameDialogMsgServerConfig* msgConf,
 		KGameDialogChatConfig* chat, 
@@ -98,23 +99,26 @@ void KGameDialog::initDefaultDialog(KGameDialogGeneralConfig* conf,
 {
  if (conf) {
 	addGameConfig(conf);
- } else {
-	addGameConfig(new KGameDialogGeneralConfig(0));
+ } else if (initConfigs& (ChatConfig|PlayerConfig) )
+ {
+  KGameDialogGeneralConfig* c=new KGameDialogGeneralConfig(0);
+	addGameConfig(c);
+  if (! (initConfigs&PlayerConfig) )  c->setEnabled(false);
  }
  if (netConf) {
 	addNetworkConfig(netConf);
- } else {
+ } else if (initConfigs&NetworkConfig) {
 	addNetworkConfig(new KGameDialogNetworkConfig(0));
  }
  if (msgConf) {
 	addMsgServerConfig(msgConf);
- } else {
+ } else if ( initConfigs&(ClientConfig|AdminConfig) ) {
 	addMsgServerConfig(new KGameDialogMsgServerConfig(0));
  }
- if (d->mGamePage && chat) {
+ if (d->mGamePage && chat && (initConfigs&ChatConfig)) {
 	addChatWidget(chat, d->mGamePage);
  }
- if (d->mNetworkPage) {
+ if (d->mNetworkPage && (initConfigs&BanPlayerConfig) ) {
 	// add the connection management system - ie the widget where the ADMIN can
 	// kick players out
 	if (connection) {

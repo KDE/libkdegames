@@ -155,7 +155,7 @@ void KGame::deleteInactivePlayers()
  }
 }
 
-bool KGame::load(QString filename)
+bool KGame::load(QString filename,bool reset)
 {
   if (filename.isNull()) 
   {
@@ -167,57 +167,66 @@ bool KGame::load(QString filename)
     return false;
   }
   QDataStream s( &f );
-  load(s);
+  load(s,reset);
   f.close();
   return true;
 }
 
-bool KGame::load(QDataStream &stream)
-{ return loadgame(stream, false); }
+bool KGame::load(QDataStream &stream,bool reset)
+{ return loadgame(stream, false,reset); }
 
-bool KGame::loadgame(QDataStream &stream, bool network)
+bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 {
  // Load Game Data
 
  // internal data
+ Q_INT32 c;
+ stream >> c; // cookie
+
+ if (c!=cookie())
+ {
+   kdWarning() << "Trying to load different game version we="<<cookie() << " saved=" << c << endl;
+   bool result=false;
+   emit signalLoadError(stream,network,(int)c,result);
+   return result;
+ }
+ if (resetgame) reset();
+ 
  uint i;
  stream >> i;
  setPolicy((GamePolicy)i);
 
  stream >> d->mUniquePlayerNumber;
 
- d->mCurrentPlayer=0;  // TODO !!!
- int newseed;
- stream >> newseed;
- d->mRandom->setSeed(newseed);
+  d->mCurrentPlayer=0;  // TODO !!!
+  int newseed;
+  stream >> newseed;
+  d->mRandom->setSeed(newseed);
 
- // Properties
- dataHandler()->load(stream);
+  // Properties
+  dataHandler()->load(stream);
 
 
- // Load Playerobjects
- uint playercount;
- stream >> playercount;
- kdDebug(11001) << "Loading KGame " << playercount << " KPlayer objects " << endl;
- for (i=0;i<playercount;i++)
- {
-   KPlayer *newplayer=loadPlayer(stream,network);
-   systemAddPlayer(newplayer);
- }
+  // Load Playerobjects
+  uint playercount;
+  stream >> playercount;
+  kdDebug(11001) << "Loading KGame " << playercount << " KPlayer objects " << endl;
+  for (i=0;i<playercount;i++)
+  {
+    KPlayer *newplayer=loadPlayer(stream,network);
+    systemAddPlayer(newplayer);
+  }
 
- Q_INT16 cookie;
- stream >> cookie;
- if (cookie==KGAME_LOAD_COOKIE) 
- {
-   kdDebug(11001) << "   Game loaded propertly"<<endl;
- } 
- else 
- {
-   kdError(11001) << "   Game loading error. probably format error"<<endl;
- }
+  Q_INT16 cookie;
+  stream >> cookie;
+  if (cookie==KGAME_LOAD_COOKIE) {
+    kdDebug(11001) << "   Game loaded propertly"<<endl;
+  } else {
+    kdError(11001) << "   Game loading error. probably format error"<<endl;
+  }
 
- emit signalLoad(stream);
- return true;
+  emit signalLoad(stream);
+  return true;
 }
 
 bool KGame::save(QString filename,bool saveplayers)
@@ -239,17 +248,19 @@ bool KGame::save(QString filename,bool saveplayers)
 
 bool KGame::save(QDataStream &stream,bool saveplayers)
 {
- // Save Game Data
+  // Save Game Data
 
- // internal variables
- uint p=(uint)policy();
- stream << p;
- stream << d->mUniquePlayerNumber;
- int newseed=(int)d->mRandom->getLong(65535);
- stream << newseed;
- d->mRandom->setSeed(newseed);
+  // internal variables
+  Q_INT32 c=cookie();
+  stream << c;
 
- 
+  uint p=(uint)policy();
+  stream << p;
+  stream << d->mUniquePlayerNumber;
+  int newseed=(int)d->mRandom->getLong(65535);
+  stream << newseed;
+  d->mRandom->setSeed(newseed);
+
  // Properties
  dataHandler()->save(stream);
 
@@ -294,31 +305,39 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
  }
 }
 
+KPlayer *KGame::createPlayer(int /*rtti*/,int /*io*/,bool /*isvirtual*/)
+{
+  kdWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
+  return new KPlayer;
+}
 KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
 {
- Q_INT32 rtti,id,iovalue;
- stream >> rtti >> id >> iovalue;
- KPlayer *newplayer=findPlayer(id);
- if (!newplayer)
- {
-   kdDebug(11001) << "loadPlayer::   Player "<< id << "not found...asking user to create one " << endl;
-   emit signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
- }
- if (!newplayer)
- {
-   kdWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
-   newplayer=new KPlayer;
- }
- else
- {
-   kdDebug(11001) << "   USER Player " << newplayer << " done player->rtti=" << newplayer->rtti() << " rtti=" << rtti << endl;
- }
- newplayer->load(stream);
- if (isvirtual)
- {
-   newplayer->setVirtual(true);
- }
- return newplayer;
+  Q_INT32 rtti,id,iovalue;
+  stream >> rtti >> id >> iovalue;
+  KPlayer *newplayer=findPlayer(id);
+  if (!newplayer)
+  {
+    kdDebug(11001) << "loadPlayer::   Player "<< id << "not found...asking user to create one " << endl;
+    newplayer=createPlayer(rtti,iovalue,isvirtual);
+    //emit signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
+  }
+  /*
+  if (!newplayer)
+  {
+    kdWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
+    newplayer=new KPlayer;
+  }
+  else
+  {
+    kdDebug(11001) << "   USER Player " << newplayer << " done player->rtti=" << newplayer->rtti() << " rtti=" << rtti << endl;
+  }
+  */
+  newplayer->load(stream);
+  if (isvirtual)
+  {
+    newplayer->setVirtual(true);
+  }
+  return newplayer;
 }
 
 // ----------------- Player handling -----------------------
@@ -893,7 +912,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
    case KGameMessage::IdGameLoad:
    {
      kdDebug(11001) << "====> (Client) KGame::slotNetworkTransmission:: Got IdGameLoad" << endl;
-     loadgame(stream,true);
+     loadgame(stream,true,false);
    }
    break;
    case KGameMessage::IdGameSetupDone:
@@ -909,7 +928,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
      int cid;
      stream >> cid;
      kdDebug(11001) << "====> (ALL) KGame::slotNetworkTransmission:: Got IdGameConnected for client "<< cid << " we are =" << gameId() << endl;
-     emit signalClientConnected(cid,this);
+     emit signalClientJoinedGame(cid,this);
    }
    break;
      
@@ -1165,9 +1184,11 @@ void KGame::slotClientConnected(Q_UINT32 clientID)
  }
 }
 
-void KGame::slotServerDisconnected()
+void KGame::slotServerDisconnected() // Client side
 {
-  kdDebug(11001) << "+++++++++++KGame::slotServerDisconnected our GameID="<<gameId() << endl;
+  kdDebug(11001) << "+++ (CLIENT)++++++++KGame::slotServerDisconnected our GameID="<<gameId() << endl;
+
+  int oldgamestatus=gameStatus();
 
   KPlayer *player;
   KGamePlayerList removeList;
@@ -1200,21 +1221,29 @@ void KGame::slotServerDisconnected()
       systemActivatePlayer(player);
     }
   }
-  kdDebug(11001) << " Players activated cnt=" << playerCount() << endl;
+  kdDebug(11001) << " Players activated player-cnt=" << playerCount() << endl;
 
-  KGamePlayerList mIdList(d->mPlayerList);
-  for ( player=mReList.first(); player != 0; player=mReList.next() )
+  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
   {
+    int oldid=player->id();
     player->setId(KGameMessage::createPlayerId(player->id(),gameId()));
-    kdDebug(11001) << "Player id changed to " << player->id() << " as we are no local" << endl;
+    kdDebug(11001) << "Player id " << oldid <<" changed to " << player->id() << " as we are now local" << endl;
   }
   // TODO clear inactive lists ?
+  Debug();
+  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
+  {
+    player->Debug();
+  }
   kdDebug(11001) << "+++++++++++KGame::slotServerDisconnected DONE=" << endl;
+  emit signalClientLeftGame(0,oldgamestatus,this);
 }
 
-void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
+void KGame::slotClientDisconnected(Q_UINT32 clientID,bool /*broken*/) // server side
 {
- kdDebug(11001) << "+++++++++++KGame::slotClientDisconnected(" << clientID << ")" << endl;
+ kdDebug(11001) << "++++(SERVER)+++++++KGame::slotClientDisconnected(" << clientID << ")" << endl;
+
+ int oldgamestatus=gameStatus();
 
  KPlayer *player;
  KGamePlayerList removeList;
@@ -1245,6 +1274,7 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
      activatePlayer(player);
    }
  }
+  emit signalClientLeftGame(clientID,oldgamestatus,this);
 }
 
 

@@ -146,7 +146,7 @@ bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
 
 bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, QString name)
 {
-// kdDebug(11001) << "KGamePropertyHandler::addproperty("<<data<<endl;
+ //kdDebug(11001) << "***********KGamePropertyHandler::addproperty("<<data->id()<<")"<<endl;
  if (d->mIdDict.find(data->id())) {
 	// this id already exists
 	kdError(11001) << "  -> cannot add property " << data->id() << endl;
@@ -157,9 +157,9 @@ bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, QString name)
   // and save memory!!
 	if (!name.isNull()) {
 		d->mNameMap.insert(data->id(), name);
-//		kdDebug(11001) << "KGamePropertyHandler::addProperty: nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
-//		kdDebug(11001) << "Typeid=" << typeid(data).name() << endl;
-//		kdDebug(11001) << "Typeid call=" << data->typeinfo()->name() << endl;
+		//kdDebug(11001) << "KGamePropertyHandler::addProperty: nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
+		//kdDebug(11001) << "Typeid=" << typeid(data).name() << endl;
+  	//kdDebug(11001) << "Typeid call=" << data->typeinfo()->name() << endl;
 	}
  }
  return true;
@@ -192,7 +192,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  Q_INT16 cookie;
  stream >> cookie;
  if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
-	//kdDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
+	kdDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
  } else {
 	kdError(11001) << "KGamePropertyHandler loading error. probably format error"<<endl;
  }
@@ -223,7 +223,7 @@ KGamePropertyBase::PropertyPolicy KGamePropertyHandler::policy()
 }
 void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool userspace)
 {
- kdDebug(11001) << "KGamePropertyHandler::setPolicy " << p << endl;
+ // kdDebug(11001) << "KGamePropertyHandler::setPolicy " << p << endl;
  d->mDefaultPolicy=p;
  d->mDefaultUserspace=userspace;
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);

@@ -29,6 +29,7 @@
 #define __KGAMEDIALOGCONFIG_H__
 
 #include <qwidget.h>
+#include <kdebug.h>
 
 class QGridLayout;
 class QVBoxLayout;
@@ -61,7 +62,11 @@ public:
 	 * @param g A pointer to your KGame.
 	 * @param p A pointer to the player owning this dialog
 	 **/
-	virtual void submitToKGame(KGame* g, KPlayer* p) = 0;
+	//virtual void submitToKGame(KGame* g, KPlayer* p) = 0;
+	virtual void submitToKGame(KGame* g, KPlayer* p) 
+  {
+    kdError(11001) << "submitToKGame pure virtual call ...BAD " << endl;
+  }
 
 	/**
 	 * The owner player of the dialog has been changed. The default
@@ -174,6 +179,8 @@ protected slots:
 	 * or starts listening to the port.
 	 **/
 	void slotInitConnection();
+	void slotExitConnection();
+	void slotConnectionBroken();
 
 private:
 	KGameDialogNetworkConfigPrivate* d;

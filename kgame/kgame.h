@@ -44,6 +44,7 @@ class KGamePrivate;
  * - Game status (end,start,pause,...)
  * - load/save
  * - Move (and message) handling 
+ * - nextPlayer and gameOver()
  * - Network connection (for KGameNetwork)
  *
  * Example:
@@ -51,12 +52,9 @@ class KGamePrivate;
  * KGame *game=new KGame;
  * </pre>
  *
- * Note: I think KGame and KGameNetwork should
- *       be merged into one class
  *
  * @short The main KDE game object
  * @author Martin Heni <martin@heni-online.de>
- * @version $Id$
  *
  */
 class KGame : public KGameNetwork
@@ -96,9 +94,15 @@ public:
 	};
 
     /** 
-     * Create a KGame object
+     * Create a KGame object. The cookie is used to identify your
+     * game in load/save and network operations. Change this between
+     * games.
      */
     KGame(int cookie=42,QObject* parent=0);
+
+    /**
+    * Destructs the game
+    */
     ~KGame();
 
     /**
@@ -107,7 +111,9 @@ public:
     virtual void Debug();
 
     /**
-     * Game status: kind of unused at the moment
+     * Game status - Use this to Control the game flow.
+     * The KGame e.g. sets the status to Pause when you have
+     * less player than the minimum amount
      */
     enum GameStatus { Init, Run, Pause, End, Abort, SystemPause, Intro, UserStatus };
 
@@ -187,7 +193,7 @@ public:
     bool removePlayer(KPlayer * player) { return removePlayer(player, 0); }
 
     /**
-     * Called by the desvtuctor of KPlayer to remove itself from the game
+     * Called by the destructor of KPlayer to remove itself from the game
      *
      **/
     void playerDeleted(KPlayer * player);
@@ -254,10 +260,41 @@ public:
      * Called when a player input arrives from @ref KMessageServer.
      *
      * Calls @ref prepareNext (using @ref QTimer::singleShot) if @ref gameOver
-     * returns 0
-     * TODO: documentation!!
+     * returns 0. This function should normally not be used outside KGame.
+     * It could be made non-virtual,protected in a later version. At the
+     * moment it is a virtual function to give you more control over KGame.
+     * 
+     * For documentation see @ref signalPlayerInput.
      **/
     virtual bool playerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
+
+    /**
+    * This virtual function is called if the KGame needs to create a new player.
+    * This happens only over a network and with load/save. Doing nothing
+    * will create a default KPlayer. If you want to have your own player
+    * you have to create one with the given rtti here. 
+    * Note: If your game uses a player class derived from KPlayer you MUST
+    * overwrite this function and create your player here. Otherwise the
+    * game will crash.
+    * Example:
+    * <pre>
+    *  KPlayer *MyGame::createPlayer(int rtti,int io,bool isvirtual)
+    *  {
+    *    KPlayer *player=new MyPlayer;
+    *    if (!isvirtual) // network player ?
+    *    {
+    *      // Define something like this to add the IO modules
+    *      createIO(player,(KGameIO::IOMode)io);
+    *    }
+    *    return player;
+    *    }
+    * </pre>
+    *
+    * @param player is the player object which got created
+    * @param rtti is the type of the player (0 means default KPlayer)
+    * @param io is the 'or'ed rtti of the KGameIO's
+    */
+    virtual KPlayer *createPlayer(int rtti,int io,bool isvirtual);
 
     // load/save
     /**
@@ -268,19 +305,21 @@ public:
      * to make sure you load into an clear state.
      *
      * @param stream a data stream where you can stream the game from
+     * @param reset - shall the game be reset before loading
      *
      * @return true?
      */
-    virtual bool load(QDataStream &stream);
+    virtual bool load(QDataStream &stream,bool reset=true);
 
     /**
      * Same as above function but with different parameters
      *
-     * @param the filename of the file to be opened
+     * @param filename - the filename of the file to be opened
+     * @param reset - shall the game be reset before loading
      *
      * @return true?
      **/
-    virtual bool load(QString filename);
+    virtual bool load(QString filename,bool reset=true);
     
     /**
      * Save a game to a file OR to network. Otherwise the same as 
@@ -327,9 +366,11 @@ public:
      * @param status the new status
      * @param transmit command over network
      */
-    virtual void setGameStatus(int status);
+    void setGameStatus(int status);
 
-    //AB: docu: see @ref KPlayer
+    /**
+    *  docu: see @ref KPlayer
+    **/
     bool addProperty(KGamePropertyBase* data);
 
     /**
@@ -337,6 +378,10 @@ public:
      **/
     bool sendPlayerProperty(QDataStream& s, Q_UINT32 playerId);
     
+    /**
+    * This function allows to find the pointer to a player 
+    * property when you know it's id
+    */
     KGamePropertyBase* findProperty(int id) const;
 
     /**
@@ -451,20 +496,35 @@ signals:
     void signalPlayerInput(QDataStream &msg,KPlayer *player);
     
     /**
-     * the game will be loaded from the given stream. We better
-     * fill our data.
+     * The game will be loaded from the given stream. Load from here
+     * the data which is NOT a game or player property.
+     * It is not necessary to use this signal for a full property game.
      *
      * @param stream the load stream
      */
     void signalLoad(QDataStream &stream);
     
     /**
-     * the game will be saved to the given stream. We better
-     * put our data.
+     * The game will be saved to the given stream. Fill this with data
+     * which is NOT a game or player property.
+     * It is not necessary to use this signal for a full property game.
      *
      * @param stream the save stream
      */
     void signalSave(QDataStream &stream);
+
+    /**
+     * Is emmited if a game with a different version cookie is loaded.
+     * Normally this should result in an error. But maybe you do support
+     * loading of older game versions. Here would be a good place to do a 
+     * conversion.
+     *
+     * @param stream - the load stream
+     * @param network - true if this is a network connect. False for load game
+     * @param cookie - the saved cookie. It differs from KGame::cookie()
+     * @param result - set this to true if you managed to load the game
+     */
+    void signalLoadError(QDataStream &stream,bool network,int cookie, bool &result);
 
     /**
      * We got an user defined update message. This is usually done
@@ -482,7 +542,7 @@ signals:
     void signalMessageUpdate(int msgid,Q_UINT32 receiver,Q_UINT32 sender);
     
     /**
-     * a player left the game because of a broken connection!
+     * a player left the game because of a broken connection or so!
      *
      * @param player the player who left the game
      */
@@ -495,17 +555,6 @@ signals:
      */
     void signalPlayerJoinedGame(KPlayer *player);
 
-    /**
-    * This signal is emmited if the KGame needs to create a new player.
-    * Currently this happens only over a network connection. Doing nothing
-    * will create a default KPlayer. If you want to have your own player
-    * you have to create one with the given rtti here.
-    *
-    * @param player is the player object which got created
-    * @param rtti is the type of the player (0 means default KPlayer)
-    * @param io is the 'or'ed rtti of the KGameIO's
-    */
-    void signalCreatePlayer(KPlayer *&player,int rtti,int io,bool isvirtual,KGame *me);
 
     /**
     * This signal is emmited if a player property changes its value and
@@ -534,7 +583,26 @@ signals:
     * @param clientid - The id of the new client
     * @param me - our game pointer
     */
-    void signalClientConnected(Q_UINT32 clientid,KGame *me);
+    void signalClientJoinedGame(Q_UINT32 clientid,KGame *me);
+
+    /**
+    * This signal is emmited after a network partner left the
+    * game (either by a broken connection of voluntarily).
+    * All changes to the network players have already be done.
+    * If there are not enough players left, the game might have 
+    * been paused. To check this you get the old gamestatus
+    * before the disconnection as argument here. The id of the
+    * client who left the game allows to distinguish who left the
+    * game. If it is 0, the server disconnected and you were a client
+    * which has been switched back to local play.
+    * You can use this signal to, e.g. set some menues back to local
+    * player when they were network before.
+    *
+    * @param clientId - 0:server left, otherwise the client who left
+    * @parma oldgamestatus - the gamestatus before the loss
+    * @param me - our game pointer
+    **/
+    void signalClientLeftGame(int clientID,int oldgamestatus,KGame *me);
 
 
 protected:
@@ -675,14 +743,16 @@ protected:
     virtual int gameOver(KPlayer *player);
 
     /**
-     * Load a saved game, from file OR network. Internal
+     * Load a saved game, from file OR network. Internal. Might
+     * loose its virtual status! Do not use if possible.
      *
      * @param stream a data stream where you can stream the game from
      * @param is it a network call -> make players virtual
+     * @param reset - shall the game be reset before loading
      *
      * @return true?
      */
-    virtual bool loadgame(QDataStream &stream, bool network);
+    virtual bool loadgame(QDataStream &stream, bool network,bool reset);
 
 private:
     //AB: this is to hide the "receiver" parameter from the user. It shouldn't be

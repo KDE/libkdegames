@@ -65,6 +65,7 @@ void KMessageClient::setServer (const QString &host, Q_UINT16 port)
 
 void KMessageClient::setServer (KMessageServer *server)
 {
+ 
   KMessageDirect *serverIO = new KMessageDirect ();
   setServer (new KMessageDirect (serverIO));
   server->addClient (serverIO);
@@ -79,7 +80,7 @@ void KMessageClient::setServer (KMessageIO *connection)
   }
 
   d->connection = connection;
-  if (connection)
+  if (connection )
   {
     connect (connection, SIGNAL (received(const QByteArray &)),
              this, SLOT (processIncomingMessage(const QByteArray &)));
@@ -266,9 +267,10 @@ void KMessageClient::removeBrokenConnection ()
 {
   kdDebug (11001) << "KMessageClient::removeBrokenConnection: timer single shot for removal" << endl;
   // MH We cannot directly delete the socket. otherwise QSocket crashes
-  QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
+	QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
   return;
 }
+
 
 void KMessageClient::removeBrokenConnection2 ()
 {
@@ -278,9 +280,8 @@ void KMessageClient::removeBrokenConnection2 ()
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
-  kdDebug (11001) << "KMessageClient::removeBrokenConnection2: Deleting the connection object DONE" << endl;
+  kdDebug (11001) << "KMessageClient::removeBrokenConnection: Deleting the connection object DONE" << endl;
 }
-
 
 void KMessageClient::disconnect ()
 {
@@ -292,5 +293,4 @@ void KMessageClient::disconnect ()
   emit connectionBroken();
   kdDebug (11001) << "KMessageClient::disconnect: Deleting the connection object DONE" << endl;
 }
-
 #include "kmessageclient.moc"

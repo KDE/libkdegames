@@ -161,22 +161,12 @@ void KGameProcessIO::sendMessage(QDataStream &stream,int msgid, Q_UINT32 receive
 void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 receiver, Q_UINT32 sender, bool usermsg)
 {
   kdDebug(11001) << "==============>  KGameProcessIO::sendMessage (usermsg="<<usermsg<<")" << endl;
-  if (!player()) 
-  {
-    return ;
-  }
+  // if (!player()) return ;
+  //if (!player()->isActive()) return ;
 
-  if (!player()->isActive()) 
-  {
-    return ;
-  }
+  if (usermsg) msgid+=KGameMessage::IdUser;
 
-  if (usermsg) 
-  {
-    msgid+=KGameMessage::IdUser;
-  }
-
-  kdDebug(11001) << "============= ProcessIO (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
+  kdDebug(11001) << "=============* ProcessIO (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
 
   QByteArray buffer;
   QDataStream ostream(buffer,IO_WriteOnly);
@@ -213,29 +203,28 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   QDataStream ostream(newbuffer,IO_ReadOnly);
   kdDebug(11001) << "Newbuffer size=" << newbuffer.size() << endl;
 
-  if (!player())
-  {
-    kdDebug() << "KGameProcessIO::receivedMessage: Got message from process but no player defined!" << endl;
-    return ;
-  }
 
 
 	// This is a dummy message which allows us the process to talk with its owner
-  if (msgid==KGameMessage::IdProcessQuery)
+	if (msgid==KGameMessage::IdProcessQuery)
   {
-    emit signalProcessQuery(ostream,this);
-  }
-  else /* if (player()) */
+		emit signalProcessQuery(ostream,this);
+	}
+  else if (player())
   {
-    sender=player()->id();  // force correct sender
+		sender=player()->id();  // force correct sender
     if (msgid==KGameMessage::IdPlayerInput) 
     {
       sendInput(ostream,true,sender);
     }
     else
     {
-      player()->forwardMessage(ostream,msgid,receiver,sender);
-    }
+			player()->forwardMessage(ostream,msgid,receiver,sender);
+		}
+	}
+  else 
+  {
+    kdDebug() << "KGameProcessIO::receivedMessage: Got message from process but no player defined!" << endl;
   }
   newbuffer.resetRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
 }

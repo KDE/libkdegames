@@ -278,9 +278,9 @@ void KMessageProcess::writeToProcess()
   if (!mSendBuffer) return ;
 
   // write it out to the process
-  //kdDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
-  //char *p=mSendBuffer->data();
-  //for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
+  //  kdDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
+  //  char *p=mSendBuffer->data();
+  //  for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
   mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());
 
 }

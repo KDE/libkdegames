@@ -65,7 +65,8 @@ KChatDialog::KChatDialog(KChatBase* chat, QWidget* parent, bool modal)
 }
 
 KChatDialog::KChatDialog(QWidget* parent, bool modal) 
-	: KDialogBase(Tabbed, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
+//	: KDialogBase(Tabbed, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
+	: KDialogBase(Plain, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
 {
  init();
 }

@@ -331,7 +331,7 @@ bool KPlayer::load(QDataStream &stream)
       kdError(11001) << "   Player loading error. probably format error"<<endl;
   }
 
-  //emit signalLoad(stream);
+  // emit signalLoad(stream);
   return true;
 }
 bool KPlayer::save(QDataStream &stream)

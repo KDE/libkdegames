@@ -75,6 +75,18 @@ class KGameDialog : public KDialogBase
 {
 	Q_OBJECT
 public:
+
+   enum ConfigOptions
+   {
+     NoConfig=0,
+     ChatConfig=1,
+     PlayerConfig=2,
+     NetworkConfig=4,
+     ClientConfig=8,
+     AdminConfig=16,
+     BanPlayerConfig=32,
+     AllConfig=0xffff
+   };
 	/**
 	 * Create a KGameDialog with the standard configuration widgets. This
 	 * creates the following widgets:
@@ -106,7 +118,7 @@ public:
 	 **/
 	KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
 			QWidget* parent, bool modal = false, 
-			bool initConfigs = true, int chatMsgId = 15432);
+			long initConfigs = AllConfig, int chatMsgId = 15432);
 
 	~KGameDialog();
 
@@ -204,7 +216,7 @@ protected:
 	 * will be used! (except the chat widget - you need to create it
 	 * yourself as you have to provide a message id)
 	 **/
-	void initDefaultDialog(KGameDialogGeneralConfig* conf, 
+	void initDefaultDialog(ConfigOptions initConfigs,KGameDialogGeneralConfig* conf, 
 			KGameDialogNetworkConfig* netConf, 
 			KGameDialogMsgServerConfig* msgServerConfig,
 			KGameDialogChatConfig* chat,
