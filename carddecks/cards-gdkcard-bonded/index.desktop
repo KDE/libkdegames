@@ -1,4 +1,16 @@
 [KDE Backdeck]
 Name=Bonded
+Name[cs]=Lepenka
+Name[de]=Verbunden
+Name[eo]=Benda
+Name[es]=Unido
+Name[fi]=Sidottu
+Name[is]=Bundið
+Name[ko]=보세
+Name[lv]=Ieķīlāts
+Name[pt]=Unidos
+Name[ru]=Переплетения
+Name[tr]=Bağlı
+Name[uk]=Бони
 Preview=11.png
 PySol=yes
