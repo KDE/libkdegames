@@ -164,7 +164,9 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, int receiver
   QByteArray data=device->buffer();;
   
   KGameMessage::createHeader(ostream,sender,receiver,msgid);
-  ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
+  // ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
+  ostream.writeRawBytes(data.data(),data.size());
+  kdDebug(11001) << "   Adding user data from pos="<< device->at() <<" amount= " << data.size() << " byte " << endl;
   //if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
   if (d->mProcessIO) d->mProcessIO->send(buffer);
 }

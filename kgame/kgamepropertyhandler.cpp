@@ -109,7 +109,7 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSe
   {
     int cmd;
     KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
-    kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
+    //kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
     p = d->mIdDict.find(propertyId);
     if (p)
     {

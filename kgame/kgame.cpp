@@ -725,7 +725,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
  // player. Otherwise we proceed here and hope the best that the user processes
  // the message
 
-  kdDebug(11001) <<"+++++++++++++KGame::networkTransmission: we="<<(int)gameId()<<" id="<<msgid<<" recv=" << receiver << " sender=" << sender << endl;
+//  kdDebug(11001) <<"+++++++++++++KGame::networkTransmission: we="<<(int)gameId()<<" id="<<msgid<<" recv=" << receiver << " sender=" << sender << endl;
 
  
  // *first* notice the game that something has changed - so no return prevents

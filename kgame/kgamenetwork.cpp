@@ -252,9 +252,11 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, Q_UINT32
  KGameMessage::createHeader(stream, sender, receiver, msgid);
  stream.writeRawBytes(data.data(), data.size());
  
+ /*
  kdDebug(11001) << "transmitGameClientMessage msgid=" << msgid << " recv="
                 << receiver << " sender=" << sender << " Buffersize="
                 << buffer.size() << endl;
+  */
  
 // kdDebug(11001) << "   cookie=" << cookie() << " version="
 //    << KGameMessage::version() << endl;
