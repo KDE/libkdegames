@@ -46,8 +46,6 @@ public:
    typedef QMap<Fields, QString> FieldInfo;
 
    /**
-    * @param latest Ranking of the latest entry. [1 - 10]
-    * Use 0 for none.
     * @param fields Which fields should be listed.
     */
    KScoreDialog(int fields, QWidget *parent=0, const char *name=0);
