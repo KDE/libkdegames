@@ -55,11 +55,32 @@ KAction *KStdGameAction::action(StdGameAction act_enum, const QObject *recvr,
     case End:
         act = end(recvr, slot, parent, name);
         break;
+    case Pause:
+        act = pause(recvr, slot, parent, name);
+	break;
+    case Highscores:
+        act = highscores(recvr, slot, parent, name);
+	break;
     case Print:
         act = print(recvr, slot, parent, name);
         break;
     case Quit:
         act = quit(recvr, slot, parent, name);
+        break;
+    case Repeat:
+        act = repeat(recvr, slot, parent, name);
+        break;
+    case Undo:
+        act = undo(recvr, slot, parent, name);
+        break;
+    case Redo:
+        act = redo(recvr, slot, parent, name);
+        break;
+    case EndTurn:
+        act = endTurn(recvr, slot, parent, name);
+        break;
+    case Carddecks:
+        act = carddecks(recvr, slot, parent, name);
         break;
 
     default:
@@ -89,6 +110,9 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
     case End:
         ret = "game_end";
         break;
+    case Pause:
+        ret = "game_pause";
+	break;
     case Highscores:
         ret = "game_highscores";
 	break;
@@ -98,7 +122,18 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
     case Quit:
         ret = "game_quit";
         break;
-
+    case Repeat:
+        ret = "move_repeat";
+	break;
+    case Undo:
+        ret = "move_undo";
+	break;
+    case Redo:
+        ret = "move_redo";
+	break;
+    case EndTurn:
+        ret = "move_endturn";
+	break;
     case Carddecks:
         ret = "options_configure_carddecks";
 	break;
@@ -139,6 +174,13 @@ KAction *KStdGameAction::saveAs(const QObject *recvr, const char *slot,
 {
     return new KAction(i18n("Save &As..."), 0, recvr, slot, parent,
                        name ? name : stdName(SaveAs));
+}
+
+KAction *KStdGameAction::pause(const QObject *recvr, const char *slot,
+                                                  QObject *parent, const char *name )
+{
+    return new KAction(i18n("Pa&use"), 0, recvr, slot, parent,
+                       name ? name : stdName(Pause));
 }
 
 KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,

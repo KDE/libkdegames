@@ -48,7 +48,7 @@ public:
    **/
     enum StdGameAction {
         // Game menu
-        New=1, Load, Save, SaveAs, End, Highscores,
+        New=1, Load, Save, SaveAs, End, Pause, Highscores,
         Print, Quit,
 	// Move menu
 	Repeat, Undo, Redo, EndTurn,
@@ -102,6 +102,12 @@ public:
     static KAction *saveAs(const QObject *recvr = 0, const char *slot = 0,
                            QObject *parent = 0, const char *name = 0L );
 
+    /**
+     * Pause the game
+     **/
+    static KAction *pause(const QObject *recvr = 0, const char *slot = 0,
+                           QObject *parent = 0, const char *name = 0L );
+    
     /**
      * Show the highscores.
      */
