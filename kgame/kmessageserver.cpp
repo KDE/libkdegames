@@ -77,7 +77,7 @@ public:
 
   KMessageServerSocket* mServerSocket;
 
-  QList <KMessageIO> mClientList;
+  QPtrList <KMessageIO> mClientList;
   QPtrQueue <MessageBuffer> mMessageQueue;
   QTimer mTimer;
 };
