@@ -379,7 +379,8 @@ void KGame::addPlayer(KPlayer* newplayer)
   
  if (maxPlayers() >= 0 && (int)playerCount() >= maxPlayers())
  {
-   kdWarning(11001) << "cannot add more than " << maxPlayers() << " players" << endl;
+   kdWarning(11001) << "cannot add more than " << maxPlayers() << " players - deleting..." << endl;
+  delete newplayer;
    return;
  }
 
