@@ -36,7 +36,8 @@ class KGameNetworkPrivate;
  * The KGameNetwork class is the KGame class with network
  * support. All other features are the same but they are
  * now network transparent. It is not used directly but
- * only via a KGame
+ * only via a KGame object. So you do not really have
+ * to bother with this object.
  *
  * @short The main KDE game object
  * @author Martin Heni <martin@heni-online.de>

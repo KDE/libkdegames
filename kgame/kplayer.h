@@ -44,23 +44,16 @@ class KPlayerPrivate;
  * - Turn handling (turn based, asynchronous)
  *
  * A KPlayer depends on a @ref KGame object. Call @ref KGame::addPlayer to plug
- * a KPlayer into a @ref KGame object. Note that you cannot much with a
+ * a KPlayer into a @ref KGame object. Note that you cannot do much with a
  * KPlayer object before it has been plugged into a @ref KGame. This is because
  * most properties of KPlayer are @ref KGameProperty which need to send messages
- * through a @ref KGame object to be changed. Therefore you cannot even change
- * the name of a player before @ref KGame::addPlayer was called. (UPDATE: you
- * can! if there is no @ref KMessageServer available the property uses @ref
- * KGameProperty::setLocal instead)
+ * through a @ref KGame object to be changed. 
  *
- * You should not (I repeat: NOT!) send your game messages direclty through a
- * KPlayer object. FOr example if you want your player to move by 4 fields DON'T
- * call player->move(4); or something like this. Use a @ref KGameIO for these
- * things. 
- * A KGameIO represents the inmput methods of a player and you should make all
+ * A KGameIO represents the input methods of a player and you should make all
  * player inputs through it. So call something like playerInput->move(4);
  * instead which should call @ref KGameIO::sendInput to actually move. This way
  * you gain a *very* big advantage: you can exchange a @ref KGameIO whenever you
- * want! YOu can e.g. remove the KGameIO of a local (human) player and just
+ * want! You can e.g. remove the KGameIO of a local (human) player and just
  * replace it by a computerIO on the fly! So from that point on all playerInputs
  * are done by the computerIO instead of the human player. You also can replace
  * all network players by computer players when the network connection is broken
@@ -152,7 +145,7 @@ public:
        * Is this player a virtual player, ie is it 
        * created by mirroring a real player from another
        * network game. This mirroring is done autmatically
-       * as soon as a network connectionis build and it affects
+       * as soon as a network connection is build and it affects
        * all players regardless what type
        *
        * @return true/false
@@ -200,6 +193,12 @@ public:
 
       /**
        * Returns the user defined id of the player
+       * This value can be used arbitrary by you to
+       * have some user idendification for your player,
+       * e.g. 0 for a white chess player, 1 for a black 
+       * one. This value is more reliable than the player 
+       * id whcih can even change when you make a network 
+       * connection.
        *
        * @return the user defined player id
        */
@@ -212,9 +211,12 @@ public:
       void setUserId(int i) {mUserId = i;}
 
       /**
-       * returns whether this player can be replaced by a network
+       * Returns whether this player can be replaced by a network
        * connection player. The name of this function can be 
-       * improved ;-)
+       * improved ;-) If you do not overwrite the function to 
+       * select what players shall play in a network the KGame
+       * does an automatic selection based on the networkPriority
+       * This is not a terrible important function at the moment.
        *
        * @return true/false
        */
@@ -230,7 +232,7 @@ public:
        * you would tag one or both players of all participants. As
        * soon as the connect the tagged player will then be replaced
        * by the network partner and it is then controlled over the network.
-       * On connection loss the old situation is automatically retored.
+       * On connection loss the old situation is automatically restored.
        *
        * The name of this function can be improved;-)
        *
@@ -252,7 +254,8 @@ public:
 
       // A name and group the player belongs to
       /**
-       * A group the player belongs to.
+       * A group the player belongs to. This
+       * Can be set arbitrary by you.
        */
       void setGroup(const QString& group);
       
@@ -263,6 +266,7 @@ public:
       
       /**
        * Sets the name of the player.
+       * This can be choosen arbitrary.
        * @param name The player's name
        */
       void setName(const QString& name);
@@ -384,14 +388,17 @@ public:
       void networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender);
 
       /**
-       * Searches for a property of the player.
+       * Searches for a property of the player given its id. 
        * @param id The id of the property
        * @return The property with the specified id
        **/
       KGamePropertyBase* findProperty(int id) const;
 
       /**
-       * Adds a property
+       * Adds a property to a player. You would add all
+       * your player specific game data as KGameProperty and
+       * they are automatically saved and exchanged over network.
+       *
        * @param data The property to be added. Must have an unique id!
        * @return false if the given id is not valid (ie another property owns
        * the id) or true if the property could be added successfully
@@ -401,7 +408,8 @@ public:
       /**
        * Calculates a checksum over the IO devices. Can be used to
        * restore the IO handlers. The value returned is the 'or'ed
-       * value of the KGameIO rtti's
+       * value of the KGameIO rtti's. 
+       * this is itnernally used for saving and restorign a player.
        */
       int calcIOValue();
 
@@ -414,14 +422,16 @@ signals:
       /**
        *  The player object got a message which was targeted
        *  at it but has no default method to process it. This
-       *  means probagbly a user message. Conencting to this signal
+       *  means probably a user message. Connecting to this signal
        *  allowed to process it.
        */
        void signalNetworkData(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer *me);
 
        /**
         * This signal is emmited if a player property changes its value and
-        * the property is set to notify this change
+        * the property is set to notify this change. This is an
+        * important signal as you should base the actions on a reaction
+        * to this property changes.
         */
        void signalPropertyChanged(KGamePropertyBase *property,KPlayer *me);
 
