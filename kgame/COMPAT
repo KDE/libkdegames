@@ -37,3 +37,6 @@
             The behavior of KGamePropertyArray may have changed in this turn,
             too!
             The API stays the same.
+11.10.2001  KGameDialogGeneralConfig now doesn't provide setMin/maxPlayers()
+            anymore. The game should manage this internally. layout() is
+            obsolete as well 

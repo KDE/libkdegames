@@ -241,62 +241,48 @@ class KGameDialogGeneralConfigPrivate
 public:
 	KGameDialogGeneralConfigPrivate() 
 	{
-		mMaxPlayers = 0;
-		mMinPlayers = 0;
+		mTopLayout = 0;
 		mName = 0;
 	}
 	
-	KIntNumInput* mMaxPlayers;
-	KIntNumInput* mMinPlayers;
 	QLineEdit* mName;
 
-	QGridLayout* mTopLayout; //TODO
+	QVBoxLayout* mTopLayout;
 };
 
-KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent) 
+KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initializeGUI)
 		: KGameDialogConfig(parent)
 {
 // kdDebug(11001) << "CONSTRUCT KGameDialogGeneralConfig " << this << endl;
- d = new KGameDialogGeneralConfigPrivate();
+ d = new KGameDialogGeneralConfigPrivate;
 
- d->mTopLayout = new QGridLayout(this, 2, 2, KDialog::marginHint(), KDialog::spacingHint());
+ if (initializeGUI) {
+	d->mTopLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+	d->mTopLayout->setAutoAdd(true);
 
- d->mMaxPlayers = new KIntNumInput(this);
- d->mMaxPlayers->setLabel(i18n("Maximal number of players:"));
- d->mTopLayout->addWidget(d->mMaxPlayers, 0, 0);
-
- d->mMinPlayers = new KIntNumInput(this);
- d->mMinPlayers->setLabel(i18n("Minimum number of players:"));
- d->mTopLayout->addWidget(d->mMinPlayers, 0, 1);
-
- d->mName = new QLineEdit(this);
- d->mTopLayout->addWidget(d->mName, 1, 0);
-
- setMinPlayersRange(0, 20);
- setMaxPlayersRange(-1, 20);
+	QWidget* nameWidget = new QWidget(this);
+	QHBoxLayout* l = new QHBoxLayout(nameWidget);
+	QLabel* nameLabel = new QLabel(i18n("Your Name:"), nameWidget);
+	l->addWidget(nameLabel);
+	d->mName = new QLineEdit(nameWidget);
+	l->addWidget(d->mName);
+ }
 }
 
 KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 { delete d; } 
 
-void KGameDialogGeneralConfig::setMaxPlayers(int m)
-{ d->mMaxPlayers->setValue(m); }
-void KGameDialogGeneralConfig::setMinPlayers(int m)
-{ d->mMinPlayers->setValue(m); }
-void KGameDialogGeneralConfig::setMinPlayersRange(unsigned int lower, unsigned int upper)
-{ d->mMinPlayers->setRange(lower, upper, 1); }
-void KGameDialogGeneralConfig::setMaxPlayersRange(int lower, int upper)
-{ d->mMaxPlayers->setRange(lower, upper, 1); }
-int KGameDialogGeneralConfig::minPlayers() const
-{ return d->mMinPlayers->value(); }
-int KGameDialogGeneralConfig::maxPlayers() const
-{ return d->mMaxPlayers->value(); }
 void KGameDialogGeneralConfig::setPlayerName(const QString& name)
-{ d->mName->setText(name); }
+{ 
+ if (d->mName) {
+	d->mName->setText(name);
+ }
+}
+
 QString KGameDialogGeneralConfig::playerName() const
-{ return d->mName->text(); }
-QGridLayout* KGameDialogGeneralConfig::layout() const
-{ return d->mTopLayout; }
+{
+ return d->mName ? d->mName->text() : QString::null; 
+}
 
 void KGameDialogGeneralConfig::setOwner(KPlayer* p) 
 {
@@ -324,15 +310,13 @@ void KGameDialogGeneralConfig::setKGame(KGame* g)
 	// maybe call hide()
 	return;
  }
- setMaxPlayers(g->maxPlayers());
- setMinPlayers(g->minPlayers());
 }
 
 void KGameDialogGeneralConfig::setAdmin(bool admin)
 {
  KGameDialogConfig::setAdmin(admin);
- d->mMaxPlayers->setEnabled(admin);
- d->mMinPlayers->setEnabled(admin);
+// enable/disable widgets
+
 }
 
 void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
@@ -342,11 +326,6 @@ void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
 	p->setName(playerName());
  }
  if (g) {
- return;
-	if (g->isAdmin()) {
-		g->setMaxPlayers(maxPlayers());
-		g->setMinPlayers(minPlayers());
-	}
  }
 }
 
@@ -613,6 +592,7 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  topLayout->setAutoAdd(true);
  QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), this);
  d->mPlayerBox = new KListBox(b);
+ setMinimumHeight(100);
 
 }
 

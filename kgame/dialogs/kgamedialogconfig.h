@@ -133,6 +133,80 @@ private:
 	KGameDialogConfigPrivate* d;
 };
 
+/**
+ * The main game configuration widget.
+ * 
+ * It currently contains a line edit for the name of the player only. You can
+ * add widgets by using the KGameDialogGeneralConfig as parent parameter as it
+ * uses @ref QLayout::autoAdd == true.
+ * @shot The main @ref KGameDialog configuration widget
+ * @author Andreas Beckermann <b_mann@gmx.de>
+ **/
+class KGameDialogGeneralConfigPrivate;
+class KGameDialogGeneralConfig : public KGameDialogConfig
+{
+	Q_OBJECT
+public:
+	/**
+	 * Construct a KGameDialogGeneralConfig. Currently it contains a line
+	 * edit widget to change the player name only.
+	 *
+	 * @param initializeGUI If you really don't want to use the 
+	 * predefined widget and/or layout use FALSE here. Note that then none
+	 * of the predefined widgets (currently only the name of the player) 
+	 * will exist anymore.
+	 *
+	 * If you just want to add more widgets you can just create your widgets
+	 * with the KGameDialogGeneralConfig as parent as it uses @ref
+	 * QLayout::setAutoAdd(true).
+	 **/
+	KGameDialogGeneralConfig(QWidget* parent = 0, bool initializeGUI = true);
+	virtual ~KGameDialogGeneralConfig();
+
+	/**
+	 * Called by @ref KGameDialog to submit all settings to the KGame
+	 * Object.
+	 * You have to replace this if you add your own widgets!
+	 * @param g A pointer to your KGame.
+	 * @param p A pointer to the player owning this dialog
+	 **/
+	virtual void submitToKGame(KGame* g, KPlayer* p);
+
+	/**
+	 * Change the owner of the config widget.
+	 *
+	 * Changes the playername in the line edit
+	 * @param p The new owner player
+	 **/
+	virtual void setOwner(KPlayer* p);
+
+	/**
+	 * See @ref KGameDialogConfig::setKGame
+	 *
+	 * Sets the default values of all KGame related predefined widgets
+	 * (currently none)
+	 **/
+	virtual void setKGame(KGame* g);
+
+	/**
+	 * See @ref KGameDialogConfig::setAdmin
+	 *
+	 * This deactivates the min/max player widgets
+	 **/
+	virtual void setAdmin(bool admin);
+
+protected slots:
+	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
+
+protected:
+	void setPlayerName(const QString& name);
+
+	QString playerName() const;
+
+private:
+	KGameDialogGeneralConfigPrivate* d;
+};
+
 class KGameDialogNetworkConfigPrivate;
 class KGameDialogNetworkConfig : public KGameDialogConfig
 {
@@ -170,71 +244,12 @@ protected:
 	void setConnected(bool connected, bool master = false);
 
 protected slots:
-	/**
-	 * Start a @ref KGameConnectDialog and connects to the desired host/port
-	 * or starts listening to the port.
-	 **/
 	void slotInitConnection();
 	void slotExitConnection();
 	void slotConnectionBroken();
 
 private:
 	KGameDialogNetworkConfigPrivate* d;
-};
-
-class KGameDialogGeneralConfigPrivate;
-class KGameDialogGeneralConfig : public KGameDialogConfig
-{
-	Q_OBJECT
-public:
-	KGameDialogGeneralConfig(QWidget* parent = 0);
-	virtual ~KGameDialogGeneralConfig();
-
-	/**
-	 * Called by @ref KGameDialog to submit all settings to the KGame
-	 * Object.
-	 * You have to replace this if you add your own widgets!
-	 * @param g A pointer to your KGame.
-	 * @param p A pointer to the player owning this dialog
-	 **/
-	virtual void submitToKGame(KGame* g, KPlayer* p);
-
-	QGridLayout* layout() const;//FIXME: layout for derived classes - this is a workaround
-
-	/**
-	 * Change the owner of the config widget.
-	 *
-	 * Changes the playername in the line edit
-	 * @param p The new owner player
-	 **/
-	virtual void setOwner(KPlayer* p);
-
-	virtual void setKGame(KGame* g);
-
-	/**
-	 * See @ref KGameDialogConfig::setAdmin
-	 *
-	 * This deactivates the min/max player widgets
-	 **/
-	virtual void setAdmin(bool admin);
-
-	void setMaxPlayersRange(int lower, int upper);
-	void setMinPlayersRange(unsigned int lower, unsigned int upper);
-
-protected slots:
-	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
-
-protected:
-	void setMaxPlayers(int m);
-	void setMinPlayers(int m);
-	void setPlayerName(const QString& name);
-
-	int maxPlayers() const;
-	int minPlayers() const;
-	QString playerName() const;
-
-private:
-	KGameDialogGeneralConfigPrivate* d;
 };
 
 class KGameDialogMsgServerConfigPrivate;
@@ -268,6 +283,8 @@ class KGameDialogChatConfigPrivate;
 /**
  * This is not really a configuration widget but rather a simple chat widget.
  * This widget does nothing but just providing a @ref KGameChat object.
+ * @short A chat widget inside a @ref KGameDialog
+ * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KGameDialogChatConfig : public KGameDialogConfig
 {
@@ -285,6 +302,10 @@ private:
 	KGameDialogChatConfigPrivate* d;
 };
 
+/**
+ * @short Lists all connected players and gives the ability to kick them off the
+ * game
+ **/
 class KGameDialogConnectionConfigPrivate;
 class KGameDialogConnectionConfig : public KGameDialogConfig
 {
