@@ -70,10 +70,10 @@ void KGamePropertyBase::init()
  setOptimized(false); 
  
  setReadOnly(false);
- mFlags.bits.locked = false & 1; // setLocked(false); is NOT possible as it checks whether isLocked() allows to change the status
+ mFlags.bits.locked = false ; // setLocked(false); is NOT possible as it checks whether isLocked() allows to change the status
 
  // clean is default
- setPolicy(PolicyClean);
+ setPolicy(PolicyDirty);
 }
 
 void KGamePropertyBase::registerData(int id, KGame* owner, QString name)
@@ -122,12 +122,28 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
  return true;
 }
 
-void KGamePropertyBase::setLocked(bool l)
+bool KGamePropertyBase::lock()
 {
- if (isLocked()) {
-	return;
+ if (isLocked())
+ {
+	return false;
  }
+ setLock(true);
+ return true;
+}
 
+bool KGamePropertyBase::unlock(bool force)
+{
+ if (isLocked() && !force)
+ {
+	return false;
+ }
+ setLock(false);
+ return true;
+}
+
+void KGamePropertyBase::setLock(bool l)
+{
  QByteArray b;
  QDataStream s(b, IO_WriteOnly);
  KGameMessage::createPropertyCommand(s, IdCommand, id(), CmdLock);
@@ -137,7 +153,7 @@ void KGamePropertyBase::setLocked(bool l)
 	mOwner->sendProperty(s);
  } else {
 	kdError(11001) << "KGamePropertyBase::sendLocked(): Cannot send because there is no receiver defined" << endl;
-	return;
+	return ;
  }
 }
 
@@ -159,7 +175,7 @@ void KGamePropertyBase::command(QDataStream& s, int cmd, bool isSender)
 		if (!isSender) {
 			Q_INT8 locked;
 			s >> locked;
-			mFlags.bits.locked = (bool)locked & 1;
+			mFlags.bits.locked = (bool)locked ;
 			break;
 		}
 	}

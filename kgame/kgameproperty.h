@@ -132,19 +132,19 @@ public:
 	 *
 	 * It is up to you to decide how you want to work. 
 	 **/
-	void setPolicy(PropertyPolicy p) { mPolicy = p; } // TODO: bit field?
+	void setPolicy(PropertyPolicy p) { mFlags.bits.policy = p; } // TODO: bit field?
 
 	/**
 	 * @return The default policy of the property
 	 **/
-	PropertyPolicy policy() const { return mPolicy; }
+	PropertyPolicy policy() const { return (PropertyPolicy)mFlags.bits.policy; }
 
 	/**
 	 * Sets this property to emit a signal on value changed.
 	 * As the proerties do not inehrit QObject for optimisation
 	 * this signal is emited via the KPlayer or KGame object
 	 **/
-	void setEmittingSignal(bool p)	{ mFlags.bits.emitsignal=p&1; }
+	void setEmittingSignal(bool p)	{ mFlags.bits.emitsignal=p; }
 
 	/**
 	 * See also @ref setEmittingSignal
@@ -162,7 +162,7 @@ public:
 	 * Sets this property to try to optimize signal and network handling
 	 * by not sending it out when the property value is not changed.
 	 **/
-	void setOptimized(bool p) { mFlags.bits.optimize = p & 1; }
+	void setOptimized(bool p) { mFlags.bits.optimize = p ; }
 
 	/**
 	 * See also @ref setOptimize
@@ -189,8 +189,24 @@ public:
 	 * You can only call this if @ref isLocked is false. A message is sent
 	 * over network so that the property is locked for all players except
 	 * you.
+   *
+   * @return returns false if the property can not be locked, i.e. it is already locked
+   *
 	 **/
-	void setLocked(bool l);
+	bool lock();
+
+	/**
+	 * A locked property can only be changed by the player who has set the
+	 * lock.
+	 *
+	 * You can only call this if @ref isLocked is false. A message is sent
+	 * over network so that the property is locked for all players except
+	 * you.
+   *
+   * @return returns false if the property can not be locked, i.e. it is already locked
+   *
+	 **/
+	bool unlock(bool force=false);
 
 	/**
 	 * A readonly property cannot be changed. Use this if you to prevent a
@@ -201,7 +217,7 @@ public:
 	 * value of the property again. The default is not readonly.
 	 * @param p True to lock this property, false to unlock it
 	 **/
-	void setReadOnly(bool p) { mFlags.bits.readonly = p&1; }
+	void setReadOnly(bool p) { mFlags.bits.readonly = p; }
 	
 	/**
 	 * This will read the value of this property from the stream. You MUST
@@ -263,6 +279,18 @@ public:
  
 protected:
 	/**
+	 * A locked property can only be changed by the player who has set the
+	 * lock.
+	 *
+	 * You can only call this if @ref isLocked is false. A message is sent
+	 * over network so that the property is locked for all players except
+	 * you. 
+   * Usually you use @ref lock and @ref unlock to access this property
+   *
+	 **/
+	void setLock(bool l);
+
+	/**
 	 * Sets the "dirty" flag of the property. If a property is "dirty" i.e.
 	 * @ref KGameProperty::setLocal has been called there is no guarantee
 	 * that all clients share the same value. You have to ensure this
@@ -270,7 +298,7 @@ protected:
 	 * client. You can also ignore the dirty flag and continue working withe
 	 * the property depending on your situation.
 	 **/
-	void setDirty(bool d) { mFlags.bits.dirty = d & 1; }
+	void setDirty(bool d) { mFlags.bits.dirty = d ; }
 
 	/**
 	 * Forward the data to the owner of this property which then sends it
@@ -320,11 +348,10 @@ protected:
                                              // sends it later on - fast
                                              // changing variables
 			unsigned char emitsignal : 1; // KPlayer notifies on variable change (true)
-						      // can used 2 more
 			unsigned char readonly : 1; // whether the property can be changed (false)
 			unsigned char optimize : 1; // whether the property tries to optimize send/emit (false)
 			unsigned char dirty: 1; // whether the property dirty (setLocal() was used)
-			unsigned char cleanPolicy : 1; // whether the property is always consistent (true)
+			unsigned char policy : 2; // whether the property is always consistent (see PropertyPolicy)
 			unsigned char locked: 1; // whether the property is locked (true)
 		} bits;
 	} mFlags;
@@ -336,7 +363,6 @@ private:
 private:
 	int mId;
 
-	PropertyPolicy mPolicy; // FIXME bitfield
 };
 
 /**
