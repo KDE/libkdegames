@@ -27,6 +27,7 @@
 #include <kdialogbase.h>
 
 class KGame;
+class KGameErrorDialogPrivate;
 
 /**
  * Use error(), warning() and information() to display the information about a
@@ -78,12 +79,22 @@ public slots:
 	 * See @ref KGameNetwork::signalConnectionLost
 	 **/
 	void slotClientConnectionLost(Q_UINT32 clientID);
+	
+	/**
+	 * Unsets a @ref KGame which has been set using @ref setKGame before.
+	 * This is called automatically when the @ref KGame object is destroyed
+	 * and you normally don't have to call this yourself.
+	 *
+	 * Note that @ref setKGame also unsets an already existing @ref KGame
+	 * object if exising.
+	 **/
+	void slotUnsetKGame();
 
 protected:
 	void error(const QString& errorText, QWidget* parent = 0);
 
 private:
-	const KGame* mGame;
+	KGameErrorDialogPrivate* d;
 };
 
 /**

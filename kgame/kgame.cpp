@@ -61,18 +61,24 @@ public:
         mCookie=0;
     }
 
+    int mCookie;  // Application identifier
     int mUniquePlayerNumber;
     KPlayer *mCurrentPlayer;
     QQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
+    KRandomSequence* mRandom;
 
 
     KGamePropertyHandler<KGame> mProperties;
+
+    // player lists
+    KGame::KGamePlayerList mPlayerList;
+    KGame::KGamePlayerList mInactivePlayerList;
 
     //KGamePropertys
     KGamePropertyInt mMaxPlayer;
     KGamePropertyUInt mMinPlayer;
     KGamePropertyInt mGameStatus; // Game running?
-    int mCookie;  // Application identifier
+
 };
 
 // ------------------- GAME CLASS --------------------------
@@ -90,8 +96,8 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d->mGameStatus.setValue(End);
  d->mUniquePlayerNumber=0;
  d->mCookie=cookie;
- mRandom = new KRandomSequence;
- mRandom->setSeed(0);
+ d->mRandom = new KRandomSequence;
+ d->mRandom->setSeed(0);
 
  connect(this, SIGNAL(signalClientConnected(Q_UINT32)),
  	this, SLOT(slotClientConnected(Q_UINT32)));
@@ -111,7 +117,7 @@ KGame::~KGame()
  kdDebug(11001) << "DESTRUCT(KGame=" << this <<")" << endl;
  Debug();
  reset();
- delete mRandom;
+ delete d->mRandom;
  delete d;
  kdDebug(11001) << "DESTRUCT(KGame=" << this <<") done" << endl;
 }
@@ -127,11 +133,11 @@ void KGame::deletePlayers()
 {
  kdDebug(11001) << "KGame::deletePlayers()" << endl;
  KPlayer *player;
- while((player=mPlayerList.first())) {
+ while((player=d->mPlayerList.first())) {
    // AB: we cannot call KGame::removePlayer here, as we don't want any network
    // transmit in destructing. We just remove the players from the list and
    // delete them.
-   mPlayerList.remove(player);
+   d->mPlayerList.remove(player);
    delete player; // delete removes the player
  }
  kdDebug(11001) << "KGame::deletePlayers() done" << endl;
@@ -140,9 +146,9 @@ void KGame::deletePlayers()
 void KGame::deleteInactivePlayers()
 {
  KPlayer *player;
- while((player=mInactivePlayerList.first())) {
+ while((player=d->mInactivePlayerList.first())) {
    //player->setGame(0); // prevent call backs
-   mInactivePlayerList.remove(player);
+   d->mInactivePlayerList.remove(player);
    delete player;
  }
 }
@@ -203,7 +209,7 @@ bool KGame::save(QDataStream &stream,bool saveplayers)
    kdDebug(11001) << "Saving KGame " << playerCount() << " KPlayer objects " << endl;
    stream << playerCount();
    KPlayer *player;
-   for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
+   for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
      stream << (int)player->rtti();
      stream << (int)player->id();
      stream << (int)player->calcIOValue();
@@ -225,12 +231,12 @@ bool KGame::save(QDataStream &stream,bool saveplayers)
 
 KPlayer * KGame::findPlayer(int id) const
 {
- for (QListIterator<KPlayer> it(mPlayerList); it.current(); ++it) {
+ for (QListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it) {
    if (it.current()->id() == id) {
      return it.current();
    }
  }
- for (QListIterator<KPlayer> it(mInactivePlayerList); it.current(); ++it) {
+ for (QListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it) {
    if (it.current()->id() == id) {
      return it.current();
    }
@@ -317,10 +323,10 @@ bool KGame::systemRemove(KPlayer* p)
  bool result;
  kdDebug(11001) << "KGame::systemRemove: Player (" << p->id() << ") to be removed " << p << endl;
 
- if (mPlayerList.count() == 0) {
+ if (d->mPlayerList.count() == 0) {
    result = false;
  } else {
-   result = mPlayerList.remove(p);
+   result = d->mPlayerList.remove(p);
  }
 
  if (p->isVirtual()) {
@@ -360,8 +366,8 @@ bool KGame::systemInactivatePlayer(KPlayer* player)
  if (player->isVirtual()) {
    systemRemovePlayer(player);
  } else {
-   mPlayerList.remove(player);
-   mInactivePlayerList.append(player);
+   d->mPlayerList.remove(player);
+   d->mInactivePlayerList.append(player);
    player->setActive(false);
  } 
  emit signalPlayerLeftGame(player);
@@ -386,7 +392,7 @@ bool KGame::systemActivatePlayer(KPlayer* player)
  }
  kdDebug(11001) << "KGame::systemActivatePlayer(" << player->id() << ")" << endl;
 
- mInactivePlayerList.remove(player);
+ d->mInactivePlayerList.remove(player);
  player->setActive(true);
  addPlayer(player);
  return true;
@@ -432,7 +438,7 @@ int KGame::maxPlayers() const
 { return d->mMaxPlayer.value(); }
 
 uint KGame::playerCount() const
-{ return mPlayerList.count(); }
+{ return d->mPlayerList.count(); }
 
 int KGame::gameStatus() const
 { return d->mGameStatus.value(); }
@@ -442,6 +448,18 @@ bool KGame::isRunning() const
 
 KGamePropertyHandlerBase* KGame::dataHandler()
 { return &d->mProperties; }
+
+KGame::KGamePlayerList* KGame::inactivePlayerList()
+{ return &d->mInactivePlayerList; }
+
+KGame::KGamePlayerList* KGame::playerList()
+{ return &d->mPlayerList; }
+
+const KGame::KGamePlayerList* KGame::playerList() const
+{ return &d->mPlayerList; }
+
+KRandomSequence* KGame::random()
+{ return d->mRandom; }
 
 
 bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
@@ -520,7 +538,7 @@ bool KGame::nextPlayer(KPlayer *last,bool exclusive)
  minplayer=0;
 
  KPlayer *player;
- for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
+ for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
    // Find the first player for a cycle
    if (player->id()<minId) {
      minId=player->id();
@@ -541,7 +559,7 @@ bool KGame::nextPlayer(KPlayer *last,bool exclusive)
    nextplayer=minplayer;
  }
 
- kdDebug(11001) << "KGame::nextPlayer ##### lastId=" << lastId << " excluseive=" << exclusive << "  minId=" << minId << " bextid=" << nextId << " count=" <<mPlayerList.count()  << endl;
+ kdDebug(11001) << "KGame::nextPlayer ##### lastId=" << lastId << " excluseive=" << exclusive << "  minId=" << minId << " bextid=" << nextId << " count=" <<d->mPlayerList.count()  << endl;
  if (nextplayer) {
    nextplayer->setTurn(true,exclusive);
  }
@@ -652,7 +670,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      loadgame(stream,true);
      KPlayer *player;
      int gameid=KGameMessage::calcMessageId(gameId(),0);
-     for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
+     for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
        if ((player->id()&gameid)==gameid) {
          //kdDebug(11001) << "$$$ do not virtualizing player "<<player->id()<< " gameid="<<gameid << "=" << gameId() << endl;
          continue; // local player
@@ -671,7 +689,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      int newseed;
      stream >> newseed;
      kdDebug(11001) << "CLIENT: setting random seed to " << newseed << endl;
-     mRandom->setSeed(newseed);
+     d->mRandom->setSeed(newseed);
    }
    break;
    case KGameMessage::IdDisconnect:
@@ -721,7 +739,7 @@ void KGame::setupGameContinue(QDataStream& stream, int sender)
  kdDebug(11001) << "setupGameContinue:: idcount=" << playerId.count() << " pricnt=" << playerPriority.count() << endl;
 
  // Add all other network players to the client list - we are master here
- QListIterator<KPlayer> it(mPlayerList);
+ QListIterator<KPlayer> it(d->mPlayerList);
  while (it.current()) {
   playerId.append(it.current()->id());
   playerPriority.append(it.current()->networkPriority());
@@ -789,7 +807,7 @@ void KGame::setupGame(int sender)
  
  // Deactivate all players
  // QList<KPlayer> toBeAdded;
- QListIterator<KPlayer> it(mPlayerList);
+ QListIterator<KPlayer> it(d->mPlayerList);
  while (it.current()) {
    //toBeAdded.append(it.current());
    //systemRemove(it.current());
@@ -798,7 +816,7 @@ void KGame::setupGame(int sender)
    systemInactivatePlayer(it.current());
    ++it;
  }
- if (mPlayerList.count() > 0) {
+ if (d->mPlayerList.count() > 0) {
    kdFatal(11001) << "KGame::setupGame(): Player list is not empty!" << endl;
  }
 
@@ -811,9 +829,9 @@ void KGame::setupGame(int sender)
 
 void KGame::syncRandom()
 {
- int newseed=(int)mRandom->getLong(65535);
+ int newseed=(int)d->mRandom->getLong(65535);
  sendSystemMessage(newseed,KGameMessage::IdSyncRandom); // Broadcast
- mRandom->setSeed(newseed);
+ d->mRandom->setSeed(newseed);
 }
 
 void KGame::Debug()
@@ -825,7 +843,7 @@ void KGame::Debug()
  kdDebug(11001) << "gameStatus     " << gameStatus() << endl;
  kdDebug(11001) << "MaxPlayers :   " << maxPlayers() << endl;
  kdDebug(11001) << "NoOfPlayers :  " << playerCount() << endl;
- kdDebug(11001) << "NoOfInactive:  " << mInactivePlayerList.count() << endl;
+ kdDebug(11001) << "NoOfInactive:  " << d->mInactivePlayerList.count() << endl;
  kdDebug(11001) << "---------------------------------------------------" << endl;
 }
 
@@ -891,7 +909,7 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
 bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const QString& group)
 {
  KPlayer *player;
- for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
+ for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
    if (player && player->group()==group) {
      sendMessage(msg,msgid,KGameMessage::calcMessageId(0,player->id()), sender);
    }
@@ -971,11 +989,11 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 
    kdDebug(11001) << "Trying to add player " << newplayer <<" maxPlayers="<<maxPlayers()<<" playerCount="<<playerCount() << endl;
    // Add the virtual player to the game
-   mPlayerList.append(newplayer); 
+   d->mPlayerList.append(newplayer); 
    newplayer->setGame(this);
    kdDebug() << "Player is virtual=" << newplayer->isVirtual() << endl;
    kdDebug(11001) << "@@@@@@@@@@@@ Player (id=" << newplayer->id() << ") #Players="
-                  << mPlayerList.count() << " added " << newplayer 
+                  << d->mPlayerList.count() << " added " << newplayer 
                   << "  (virtual=" << newplayer->isVirtual() << ") @@@@@@@@@@@@" << endl;
    emit signalPlayerJoinedGame(newplayer);
  }
@@ -1004,13 +1022,13 @@ void KGame::updatePlayerIds()
 // do they exist here? this is only called if by setupGame()
 
  KPlayer *player;
- for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
+ for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
    if (player->isVirtual()) {
      continue;
    }
    player->setId(KGameMessage::calcMessageId(gameId(),0)|(player->id()&0x3ff));
  }
- for ( player=mInactivePlayerList.first(); player != 0; player=mInactivePlayerList.next() ) {
+ for ( player=d->mInactivePlayerList.first(); player != 0; player=d->mInactivePlayerList.next() ) {
    if (player->isVirtual()) {
      continue;
    }

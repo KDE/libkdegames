@@ -28,30 +28,48 @@
 
 #include "kgameerrordialog.h"
 
+class KGameErrorDialogPrivate
+{
+public:
+	KGameErrorDialogPrivate()
+	{
+		mGame = 0;
+	}
+
+	const KGame* mGame;
+};
+
 KGameErrorDialog::KGameErrorDialog(QWidget* parent) : QObject(parent)
 {
- mGame = 0;
+ d = new KGameErrorDialogPrivate;
 }
 
 KGameErrorDialog::~KGameErrorDialog()
 {
+ delete d;
 }
 
 void KGameErrorDialog::setKGame(const KGame* g)
 {
- if (mGame) {
-	// disconnect a previous connection
-	disconnect(mGame, 0, this, 0);
- }
- mGame = g;
- connect(mGame, SIGNAL(signalNetworkErrorMessage(int, QString)), 
+ slotUnsetKGame();
+ d->mGame = g;
+ connect(d->mGame, SIGNAL(signalNetworkErrorMessage(int, QString)), 
 		this, SLOT(slotError(int, QString)));
- connect(mGame, SIGNAL(signalNetworkVersionError(Q_UINT32)), 
+ connect(d->mGame, SIGNAL(signalNetworkVersionError(Q_UINT32)), 
 		this, SLOT(slotVersionError(Q_UINT32)));
- connect(mGame, SIGNAL(signalConnectionBroken()), 
+ connect(d->mGame, SIGNAL(signalConnectionBroken()), 
 		this, SLOT(slotServerConnectionLost()));
- connect(mGame, SIGNAL(signalConnectionLost(Q_UINT32)), 
+ connect(d->mGame, SIGNAL(signalConnectionLost(Q_UINT32)), 
 		this, SLOT(slotClientConnectionLost(Q_UINT32)));
+ connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
+}
+
+void KGameErrorDialog::slotUnsetKGame()
+{
+ if (d->mGame) {
+	disconnect(d->mGame, 0, this, 0);
+ }
+ d->mGame = 0;
 }
 
 void KGameErrorDialog::error(const QString& errorText, QWidget* parent)

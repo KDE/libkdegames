@@ -91,30 +91,30 @@ public:
      *
      * @return the list of players
      */
-    KGamePlayerList *playerList() { return &mPlayerList; }
+    KGamePlayerList *playerList();
 
     /**
      * The same as @ref playerList but returns a const pointer.
      **/
-    const KGamePlayerList *playerList() const { return &mPlayerList; }
+    const KGamePlayerList *playerList() const;
 
     /**
      * Returns a list of all inactive players 
      * @return the list of players
      */
-    KGamePlayerList *inactivePlayerList() {return &mInactivePlayerList;}
+    KGamePlayerList *inactivePlayerList();
 
     /**
      * The same as @ref inactivePlayerList but returns a const pointer.
      **/
-    const KGamePlayerList *inactivePlayerList() const {return &mInactivePlayerList;}
+    const KGamePlayerList *inactivePlayerList() const;
     
     /**
      * Returns a pointer to the game's @ref KRandomSequence. This sequence is
      * identical for all network players!
      * @return @ref KRandomSequence pointer
      */
-    KRandomSequence *random() {return mRandom;}
+    KRandomSequence *random();
 
     /**
      * Is the game running
@@ -597,11 +597,6 @@ private:
     
     
 private:
-    KRandomSequence* mRandom;
-
-    KGamePlayerList mPlayerList;
-    KGamePlayerList mInactivePlayerList;
-
     KGamePrivate* d;
 };
 
