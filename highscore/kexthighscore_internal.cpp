@@ -590,7 +590,7 @@ bool ManagerPrivate::doQuery(const KURL &url, QWidget *parent,
     KIO::http_update_cache(url, true, 0); // remove cache !
 
     QString tmpFile;
-    if ( !KIO::NetAccess::download(url, tmpFile) ) {
+    if ( !KIO::NetAccess::download(url, tmpFile, parent) ) {
         QString details = i18n("Server URL: %1").arg(url.host());
         KMessageBox::detailedSorry(parent, i18n(UNABLE_TO_CONTACT), details);
         return false;
