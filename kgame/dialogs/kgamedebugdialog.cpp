@@ -287,8 +287,7 @@ void KGameDebugDialog::updateGameData()
 //	KGamePropertyBase* prop = it.current();
 	QString name = handler->propertyName(it.current()->id());
 	(void) new QListViewItem(d->mGameProperties,
-			propertyName(it.current(), handler),
-			propertyValue(it.current(), handler));
+			name, handler->propertyValue(it.current()));
 	kdDebug(11001) << "updateGameData: checking for all game properties: found property name " << name << endl;
 	++it;
  }
@@ -332,8 +331,8 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
  QIntDictIterator<KGamePropertyBase> it((handler->dict()));
  while (it.current()) {
 	(void)new QListViewItem(d->mPlayerProperties,
-			propertyName(it.current(),handler),
-			propertyValue(it.current(),handler));
+			handler->propertyName(it.current()->id()),
+			handler->propertyValue(it.current()));
 	++it;
  }
 }
@@ -397,60 +396,6 @@ void KGameDebugDialog::removePlayer(QListBoxItem* i)
 	clearPlayerData();
  }
  delete i;
-}
-
-QString KGameDebugDialog::propertyName(KGamePropertyBase* prop, KGamePropertyHandler *handler) const
-{
- if (!prop) {
-	return i18n("NULL pointer");
- }
-
- return handler->propertyName(prop->id());
-}
-
-QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHandler *handler) 
-{
- if (!prop) {
-	return i18n("NULL pointer");
- }
- 
- int id = prop->id();
- QString name = handler->propertyName(id);
- QString value;
-
- type_info* t = prop->typeinfo();
- if (*t == typeid(int)) {
-	kdDebug(11001)  << "INTEGER variable name=" << name << " id=" << id << " found " << endl;
-	value = QString::number(((KGamePropertyInt*)prop)->value());
- } else if (*t == typeid(unsigned int)) {
-	kdDebug(11001)  << "unsigned int variable name=" << name << " id=" << id << " found " << endl;
-	value = QString::number(((KGamePropertyUInt *)prop)->value());
- } else if (*t == typeid(long int)) {
-	kdDebug(11001)  << "long int variable name=" << name << " id=" << id << " found " << endl;
-	value = QString::number(((KGameProperty<long int> *)prop)->value());
- } else if (*t == typeid(unsigned long int)) {
-	kdDebug(11001)  << "unsigned long int variable name=" << name << " id=" << id << " found " << endl;
-	value = QString::number(((KGameProperty<unsigned long int> *)prop)->value());
- } else if (*t == typeid(QString)) {
-	kdDebug(11001)  << "QString variable name=" << name << " id=" << id << " found " << endl;
-	value = ((KGamePropertyQString*)prop)->value();
- } else if (*t == typeid(Q_INT8)) {
-	kdDebug(11001)  << "Q_INT8 variable name=" << name << " id=" << id << " found " << endl;
-	value = ((KGamePropertyBool*)prop)->value() ? i18n("True") : i18n("False"); 
-/*	if (((KGamePropertyBool *)prop)->value() ) {
-		value = i18n("true");
-	} else {
-		value = i18n("false");
-	}*/
- } else {
-	kdDebug(11001)  << "USER variable name=" << name << " id=" << id << " found " << endl;
-	emit signalRequestValue(prop, value);
- }
-
- if (value == QString::null) {
-	value = i18n("Unknown");
- }
- return value;
 }
 
 #include "kgamedebugdialog.moc"

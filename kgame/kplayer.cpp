@@ -58,6 +58,17 @@ public:
 
 KPlayer::KPlayer() : QObject(0,0)
 {
+ init();
+}
+
+KPlayer::KPlayer(KGame* game) : QObject(0, 0)
+{
+ init();
+ game->addPlayer(this);
+}
+
+void KPlayer::init()
+{
 // note that NO KGame object exists here! so we cannot use KGameProperty::send!
    kdDebug(11001) << "CREATE(KPlayer=" << this <<") sizeof(this)="<<sizeof(KPlayer) << endl;
    kdDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup)<<endl;
@@ -74,18 +85,18 @@ KPlayer::KPlayer() : QObject(0,0)
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
 
-   d->mGroup.registerData(KGamePropertyBase::IdGroup, this,i18n("Group"));
+   d->mGroup.registerData(KGamePropertyBase::IdGroup, this, i18n("Group"));
    d->mGroup.initData(i18n("default"));
-   d->mName.registerData(KGamePropertyBase::IdName, this);
+   d->mName.registerData(KGamePropertyBase::IdName, this, i18n("Name"));
    d->mName.initData(i18n("default"));
 
-   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this,i18n("AsyncInput"));
+   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this, i18n("AsyncInput"));
    mAsyncInput.initData(false);
-   mMyTurn.registerData(KGamePropertyBase::IdTurn, this,i18n("myTurn"));
+   mMyTurn.registerData(KGamePropertyBase::IdTurn, this, i18n("myTurn"));
    mMyTurn.initData(false);
    mMyTurn.setEmittingSignal(true);
    mMyTurn.setOptimized(false);
-   mUserId.registerData(KGamePropertyBase::IdUserId, this,i18n("UserId"));
+   mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
    mUserId.initData(0);
 }
 

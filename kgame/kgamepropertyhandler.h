@@ -115,7 +115,7 @@ public:
 	 **/ 
 	void emitSignal(KGamePropertyBase *data);
 
-	QString propertyName(int id);
+	QString propertyName(int id) const;
 
 	KGamePropertyBase *find(int id);
 	void clear();
@@ -145,10 +145,44 @@ public:
 	 **/
 	QIntDict<KGamePropertyBase> &dict() const;
 
+	/**
+	 * In several situations you just want to have a @ref QString of a @ref
+	 * KGameProperty object. This is e.g. the case in the @ref
+	 * KGameDebugDialog where the value of all properties is displayed. This
+	 * function will provide you with such a @ref QString for all the types
+	 * used inside of all @ref KGame classes. If you have a non-standard
+	 * property (probably a self defined class or something like this) you
+	 * also need to connect to @ref signalRequestValue to make this function
+	 * useful.
+	 * @ref property Return the value of this @ref KGameProperty 
+	 * @return The value of a @ref KGameProperty
+	 **/
+	QString propertyValue(KGamePropertyBase* property);
 
 signals:
       void signalPropertyChanged(KGamePropertyBase *);
       void signalSendMessage(QDataStream &);
+
+      /**
+       * If you call @ref propertyValue with a non-standard @ref KGameProperty
+       * it is possible that the value cannot automatically be converted into a
+       * @ref QString. Then this signal is emitted and asks you to provide the
+       * correct value. You probably want to use something like this to achieve
+       * this:
+       * <pre>
+       * #include <typeinfo>
+       * void slotRequestValue(KGamePropertyBase* p, QString& value)
+       * {
+       * 	if (*(p->typeinfo()) == typeid(MyType) {
+       * 		value = QString(((KGameProperty<MyType>*)p)->value());
+       * 	}
+       * }
+       * </pre>
+       *
+       * @ref property The @ref KGamePropertyBase the value is requested for
+       * @ref value The value of this property. You have to set this.
+       **/
+      void signalRequestValue(KGamePropertyBase* property, QString& value);
 
 private:
 	void init();

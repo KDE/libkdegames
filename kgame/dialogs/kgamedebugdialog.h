@@ -112,9 +112,6 @@ protected:
 	 **/
 	void clearGameData();
 
-	QString propertyName(KGamePropertyBase* p,KGamePropertyHandler *h) const;
-	QString propertyValue(KGamePropertyBase* p,KGamePropertyHandler *h);
-	
 protected slots:
 	/**
 	 * Update the data of the player specified in item

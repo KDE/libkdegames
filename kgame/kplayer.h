@@ -42,6 +42,13 @@ class KPlayerPrivate;
  * - Handling of IO devices
  * - load/save
  * - Turn handling (turn based, asynchronous)
+ *
+ * A KPlayer depends on a @ref KGame object. Call @ref KGame::addPlayer to plug
+ * a KPlayer into a @ref KGame object. Note that you cannot do _anything_ with a
+ * KPlayer object before it has been plugged into a @ref KGame. This is because
+ * most properties of KPlayer are @ref KGameProperty which need to send messages
+ * through a @ref KGame object to be changed. Therefore you cannot even change
+ * the name of a player before @ref KGame::addPlayer was called.
  */
 class KPlayer : public QObject
 {
@@ -53,10 +60,17 @@ public:
       // KPlayer(KGame *,KGameIO * input=0);
       /**
        * Create a new player object. It will be automatically
-       * deleted if the game it belongs to is deleted. An optional
-       * constructor could be KPlayer(KGame *)
+       * deleted if the game it belongs to is deleted.
        */
       KPlayer();
+
+      /**
+       * Create a new player object. It will be automatically
+       * deleted if the game it belongs to is deleted. This constructor
+       * automatically adds the player to the game using @ref KGame::addPlayer
+       */
+      KPlayer(KGame* game);
+
       ~KPlayer();
 
       /**
@@ -407,6 +421,9 @@ protected slots:
        **/
       void emitSignal(KGamePropertyBase *me);
      
+
+private:
+      void init();
 
 private:
       KGame *mGame;
