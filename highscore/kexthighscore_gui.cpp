@@ -181,7 +181,6 @@ void HighscoresWidget::changeTab(int i)
 
 void HighscoresWidget::showURL(const QString &url) const
 {
-    KFileOpenWithHandler foo;
     (void)new KRun(KURL(url));
 }
 
