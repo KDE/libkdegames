@@ -1,25 +1,22 @@
-/* **************************************************************************
-                           KGameNetwork Class
-                           -------------------
-    begin                : 1 January 2001
-    copyright            : (C) 2001 by Martin Heni and Andreas Beckermann
-    email                : martin@heni-online.de and b_mann@gmx.de
- ***************************************************************************/
+/*
+    This file is part of the KDE games library
+    Copyright (C) 2001 Martin Heni (martin@heni-online.de)
+    Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
 
-/* **************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   Additional license: Any of the above copyright holders can add an     *
- *   enhanced license which complies with the license of the KDE core      *
- *   libraries so that this file resp. this library is compatible with     *
- *   the KDE core libraries.                                               *
- *   The user of this program shall have the choice which license to use   *
- *                                                                         *
- ***************************************************************************/
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Library General Public
+    License version 2 as published by the Free Software Foundation.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Library General Public License for more details.
+
+    You should have received a copy of the GNU Library General Public License
+    along with this library; see the file COPYING.LIB.  If not, write to
+    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+    Boston, MA 02111-1307, USA.
+*/
 /*
     $Id$
 */
@@ -264,9 +261,20 @@ public:
 
 
     /**
-     * Disconnect the current connection and establish a new local one. 
+     * Disconnect the current connection and establish a new local one.
      **/
     void disconnect();
+
+
+    /**
+     * If you are the ADMIN of the game you can give the ADMIN status away to
+     * another client. Use this e.g. if you want to quit the game or if you want
+     * another client to administrate the game (note that @ref disconnect calls
+     * this automatically).
+     * @param clientID the ID of the new ADMIN (note: this is the _client_ID
+     * which has nothing to do with the player IDs. See @ref KMessageServer)
+     **/
+    void electAdmin(Q_UINT32 clientID);
 
 signals:
     /**
@@ -320,7 +328,7 @@ protected:
      * running!
      **/
     void setMaster();
-    
+
 protected slots:
     /**
      * Called by @ref KMessageClient::broadcastReceived() and will check if the

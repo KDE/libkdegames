@@ -1,9 +1,24 @@
 /*
-     KMessageIO class and subclasses KMessageSocket and KMessageDirect
+    This file is part of the KDE games library
+    Copyright (C) 2001 Burkhard Lehner (Burkhard.Lehner@gmx.de)
 
-     Begin     : 13 April 2001
-     Copyright : (c) 2001 by Burkhard Lehner
-     eMail     : Burkhard.Lehner@gmx.de
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Library General Public
+    License version 2 as published by the Free Software Foundation.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Library General Public License for more details.
+
+    You should have received a copy of the GNU Library General Public License
+    along with this library; see the file COPYING.LIB.  If not, write to
+    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+    Boston, MA 02111-1307, USA.
+*/
+
+/*
+     KMessageIO class and subclasses KMessageSocket and KMessageDirect
 */
 
 #ifndef _KMESSAGEIO_H_
