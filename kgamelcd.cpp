@@ -185,6 +185,12 @@ void KGameLCDClock::setTime(const QString &s)
 
 
 //-----------------------------------------------------------------------------
+class KGameLCDList::KGameLCDListPrivate
+{
+public:
+  QValueVector<QLabel *> _leadings;
+};
+
 KGameLCDList::KGameLCDList(const QString &title, QWidget *parent,
                            const char *name)
     : QWidget(parent, name)
@@ -199,26 +205,46 @@ KGameLCDList::KGameLCDList(QWidget *parent, const char *name)
 }
 
 KGameLCDList::~KGameLCDList()
-{}
+{
+  delete d;
+}
 
 void KGameLCDList::init(const QString &title)
 {
-    QVBoxLayout *top = new QVBoxLayout(this, 5);
+    d = new KGameLCDListPrivate;
+
+    QGridLayout *top = new QGridLayout(this, 1, 2, 5);
+    top->setColStretch(1, 1);
 
     _title = new QLabel(title, this);
     _title->setAlignment(AlignCenter);
-    top->addWidget(_title, AlignCenter);
+    top->addMultiCellWidget(_title, 0, 0, 0, 1, AlignCenter);
 }
 
 void KGameLCDList::append(QLCDNumber *lcd)
 {
+    append(QString::null, lcd);
+}
+
+void KGameLCDList::append(const QString &leading, QLCDNumber *lcd)
+{
+    uint i = size();
+    QLabel *label = 0;
+    if ( !leading.isEmpty() ) {
+      label = new QLabel(leading, this);
+      static_cast<QGridLayout *>(layout())->addWidget(label, i+1, 0);
+    }
+    d->_leadings.push_back(label);
     _lcds.push_back(lcd);
-    static_cast<QVBoxLayout *>(layout())->addWidget(lcd);
+    static_cast<QGridLayout *>(layout())->addWidget(lcd, i+1, 1);
 }
 
 void KGameLCDList::clear()
 {
-    for (uint i=0; i<_lcds.size(); i++)
+    for (uint i=0; i<_lcds.size(); i++) {
+        delete d->_leadings[i];
         delete _lcds[i];
+    }
+    d->_leadings.clear();
     _lcds.clear();
 }

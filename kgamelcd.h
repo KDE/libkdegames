@@ -209,6 +209,12 @@ public:
      * The QLCDNumber should have the KGameLCDList as parent.
      */
     void append(QLCDNumber *lcd);
+    
+    /**
+     * Append a QLCDNumber at the bottom of the list.
+     * The QLCDNumber should have the KGameLCDList as parent.
+     */
+    void append(const QString &leading, QLCDNumber *lcd);
 
     /**
      * Delete all @ref QLCDNumber and clear the list.
@@ -224,7 +230,7 @@ public:
      * @return the QLCDNumber at index @param i
      */
     QLCDNumber *lcd(uint i) const { return _lcds[i]; }
-
+    
     /**
      * @return the number of QLCDNumber in the list.
      */
