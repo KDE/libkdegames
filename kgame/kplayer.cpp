@@ -226,7 +226,11 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
   {
 //    kdDebug(11001) << "remove IO " << targetinput << endl;
     if (deleteit) delete targetinput;
-    else result=mInputList.remove(targetinput);
+    else
+    {
+      targetinput->setPlayer(0);
+      result=mInputList.remove(targetinput);
+    }
   }
   return result;
 }
