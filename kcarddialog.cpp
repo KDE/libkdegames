@@ -13,6 +13,13 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
+ *   Additional license: Any of the above copyright holders can add an     *
+ *   enhanced license which complies with the license of the KDE core      *
+ *   libraries so that this file resp. this library is compatible with     *
+ *   the KDE core libraries.                                               *
+ *   The user of this program shall have the choice which license to use   *
+ *                                                                         *
+ *                                                                         *
  ***************************************************************************/
 /*
     $Id$
@@ -26,6 +33,7 @@
 #include <qdir.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
+#include <qtooltip.h>
 #include <kapp.h>
 #include <klocale.h>
 #include <kstddirs.h>
@@ -225,6 +233,7 @@ void KCardDialog::setupDialog()
           QPixmap pixmap(file);
           pixmap=pixmap.xForm(m);
           deckLabel->setPixmap(pixmap);
+          QToolTip::add(deckLabel,helpMap[file]);
       }
   }
 
@@ -241,6 +250,7 @@ void KCardDialog::setupDialog()
         QPixmap pixmap(file);
         pixmap = pixmap.xForm(m);
         cardLabel->setPixmap(pixmap);
+        QToolTip::add(cardLabel,helpMap[cardDir()]);
     }
   }
 
@@ -249,18 +259,18 @@ void KCardDialog::setupDialog()
 void KCardDialog::insertCardIcons()
 {
     QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop", false, true);
-    kdDebug() << "insert " << list.count() << endl;
+    // kdDebug() << "insert " << list.count() << endl;
     if (list.isEmpty())
         return;
 
     // We shrink the icons a little
+    // 
     QWMatrix m;
     m.scale(0.8,0.8);
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
         KSimpleConfig cfg(*it);
-
         cfg.setGroup(QString::fromLatin1("KDE Backdeck"));
         QString path = (*it).left((*it).findRev('/') + 1);
         assert(path[path.length() - 1] == '/');
@@ -269,7 +279,8 @@ void KCardDialog::insertCardIcons()
         if (pixmap.isNull())
             continue;
 
-        QIconViewItem *item= new QIconViewItem(cardIconView, cfg.readEntry("Name", i18n("unnamed")), pixmap);
+        QString name=cfg.readEntry("Name", i18n("unnamed"));
+        QIconViewItem *item= new QIconViewItem(cardIconView, name, pixmap);
 
         item->setDragEnabled(false);
         item->setDropEnabled(false);
@@ -277,6 +288,7 @@ void KCardDialog::insertCardIcons()
         item->setSelectable(true);
 
         cardMap[item] = path;
+        helpMap[path] = cfg.readEntry("Info",name);
     }
 }
 
@@ -299,16 +311,18 @@ void KCardDialog::insertDeckIcons()
         if (pixmap.isNull())
             continue;
 
-        pixmap=pixmap.xForm(m);
+        // pixmap=pixmap.xForm(m);
 
         cfg.setGroup(QString::fromLatin1("KDE Cards"));
-        QIconViewItem *item= new QIconViewItem(deckIconView, cfg.readEntry("Name", i18n("unnamed")), pixmap);
+        QString name=cfg.readEntry("Name", i18n("unnamed"));
+        QIconViewItem *item= new QIconViewItem(deckIconView,name, pixmap);
 
         item->setDragEnabled(false);
         item->setDropEnabled(false);
         item->setRenameEnabled(false);
 
         deckMap[item] = getDeckName(*it);
+        helpMap[deckMap[item]] = cfg.readEntry("Info",name);
     }
 }
 
@@ -334,6 +348,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
     if (item && item->pixmap())
     {
         deckLabel->setPixmap(* (item->pixmap()));
+        QToolTip::add(deckLabel,helpMap[deckMap[item]]);
         setDeck(deckMap[item]);
     }
 }
@@ -343,6 +358,7 @@ void KCardDialog::slotCardClicked(QIconViewItem *item)
     {
         cardLabel->setPixmap(* (item->pixmap()));
         QString path = cardMap[item];
+        QToolTip::add(cardLabel,helpMap[path]);
         setCardDir(path);
     }
 }

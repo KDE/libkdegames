@@ -13,11 +13,18 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
+ *   Additional license: Any of the above copyright holders can add an     *
+ *   enhanced license which complies with the license of the KDE core      *
+ *   libraries so that this file resp. this library is compatible with     *
+ *   the KDE core libraries.                                               *
+ *   The user of this program shall have the choice which license to use   *
+ *                                                                         *
  ***************************************************************************/
 #ifndef __KCARDDLG_H_
 #define __KCARDDLG_H_
 
 #include <qstring.h>
+#include <qmap.h>
 #include <kdialogbase.h>
 
 class QCheckBox;
@@ -256,6 +263,7 @@ private:
     QCheckBox* randomCardDir;
     QMap<QIconViewItem*, QString> deckMap;
     QMap<QIconViewItem*, QString> cardMap;
+    QMap<QString,QString> helpMap;
 
     // set/query variables
     CardFlags cFlags;
