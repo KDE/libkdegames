@@ -81,7 +81,7 @@ public:
     int i=findIterator(it);
     s << i;
     if (mOwner)  mOwner->sendProperty(s);
-    QValueList<type>::remove(it);
+    return QValueList<type>::remove(it);
   }
   void remove( const type& d )
   {
