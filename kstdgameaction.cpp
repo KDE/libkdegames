@@ -181,7 +181,7 @@ KAction *KStdGameAction::saveAs(const QObject *recvr, const char *slot,
 KToggleAction *KStdGameAction::pause(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
-    return new KToggleAction(i18n("Pa&use"), "player_pause", 0, recvr, slot, parent,
+    return new KToggleAction(i18n("Pa&use"), "player_pause", Qt::Key_P, recvr, slot, parent,
                        name ? name : stdName(Pause));
 }
 
