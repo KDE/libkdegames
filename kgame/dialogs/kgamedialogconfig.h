@@ -217,6 +217,7 @@ public:
 
 protected slots:
 	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
+
 protected:
 	void setMaxPlayers(int m);
 	void setMinPlayers(int m);
@@ -238,19 +239,20 @@ public:
 	KGameDialogMsgServerConfig(QWidget* parent = 0);
 	~KGameDialogMsgServerConfig();
 
-	virtual void submitToKGame(KGame*, KPlayer*);
+	virtual void submitToKGame(KGame*, KPlayer*) {}
 
-	void changeMaxClients();
-	void changeAdmin();
-	void removeClient();
 	void setHasMsgServer(bool);
 
 	virtual void setKGame(KGame*);
 	virtual void setAdmin(bool);
 
+protected slots:
+	void slotChangeMaxClients();
+	void slotChangeAdmin();
+	void slotRemoveClient();
+
 protected:
 	void removeClient(Q_UINT32 id);
-
 
 private:
 	KGameDialogMsgServerConfigPrivate* d;
@@ -271,7 +273,7 @@ public:
 	virtual void setKGame(KGame*);
 	virtual void setOwner(KPlayer*);
 
-	virtual void submitToKGame(KGame*, KPlayer*) {}
+	virtual void submitToKGame(KGame*, KPlayer*) { }
 
 private:
 	KGameDialogChatConfigPrivate* d;
@@ -289,7 +291,7 @@ public:
 	virtual void setOwner(KPlayer*);
 	virtual void setAdmin(bool admin);
 
-	virtual void submitToKGame(KGame*, KPlayer*) {}
+	virtual void submitToKGame(KGame*, KPlayer*) { }
 
 protected slots:
 	void slotPlayerChanged(KPlayer*);

@@ -140,7 +140,7 @@ void KGameDialog::addGameConfig(KGameDialogGeneralConfig* conf)
 
 // kdDebug(11001) << "adding game config" << endl;
  d->mGameConfig = conf;
- d->mGamePage = addConfigPage(d->mGameConfig, i18n("Game"));
+ d->mGamePage = addConfigPage(d->mGameConfig, i18n("&Game"));
 // QHGroupBox* b = new QHGroupBox(i18n("Game Configuration"), d->mGamePage);
 }
 
@@ -150,7 +150,7 @@ void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
 	return;
  }
  d->mNetworkConfig = netConf;
- d->mNetworkPage = addConfigPage(netConf, i18n("Network"));
+ d->mNetworkPage = addConfigPage(netConf, i18n("&Network"));
 }
 
 void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
@@ -158,7 +158,7 @@ void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
  if (!msgConf) {
 	return;
  }
- d->mMsgServerPage = addConfigPage(msgConf, i18n("Message Server"));
+ d->mMsgServerPage = addConfigPage(msgConf, i18n("&Message Server"));
 }
 
 void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, QVBox* parent)
