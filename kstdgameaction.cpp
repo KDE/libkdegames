@@ -239,7 +239,7 @@ KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::endTurn(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
-    return new KAction(i18n("End Turn"), 
+    return new KAction(i18n("End Turn"), "stop",
                        0, recvr, slot, parent,
                        name ? name : stdName(EndTurn));
 }
