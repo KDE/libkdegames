@@ -309,7 +309,7 @@ void KMessageClient::processFirstMessage()
 
 void KMessageClient::removeBrokenConnection ()
 {
-  kdDebug (11001) << k_funcinfo << ": timer single shot for removal" << endl;
+  kdDebug (11001) << k_funcinfo << ": timer single shot for removeBrokenConnection"<<this << endl;
   // MH We cannot directly delete the socket. otherwise QSocket crashes
 	QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
   return;
@@ -318,24 +318,26 @@ void KMessageClient::removeBrokenConnection ()
 
 void KMessageClient::removeBrokenConnection2 ()
 {
-  kdDebug (11001) << k_funcinfo << ": Deleting the connection object" << endl;
-  emit connectionBroken();
+  kdDebug (11001) << k_funcinfo << ": Broken:Deleting the connection object"<<this << endl;
 
+  emit aboutToDisconnect(id());
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
-  kdDebug (11001) << k_funcinfo << ": Deleting the connection object DONE" << endl;
+  emit connectionBroken();
+  kdDebug (11001) << k_funcinfo << ": Broken:Deleting the connection object DONE" << endl;
 }
 
 void KMessageClient::disconnect ()
 {
-  kdDebug (11001) << k_funcinfo << ": Deleting the connection object" << endl;
+  kdDebug (11001) << k_funcinfo << ": Disconnect:Deleting the connection object" << endl;
 
+  emit aboutToDisconnect(id());
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
   emit connectionBroken();
-  kdDebug (11001) << k_funcinfo << ": Deleting the connection object DONE" << endl;
+  kdDebug (11001) << k_funcinfo << ": Disconnect:Deleting the connection object DONE" << endl;
 }
 
 void KMessageClient::lock ()

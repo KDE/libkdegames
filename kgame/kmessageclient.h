@@ -302,6 +302,12 @@ signals:
   void connectionBroken ();
 
   /**
+    This signal is emitted right before the client disconnects. It can be used
+    to this store the id of the client which is about to be lost.
+  */
+  void aboutToDisconnect(Q_UINT32 id);
+
+  /**
     This signal is emitted when this client becomes the admin client or when it looses
     the admin client status. Connect to this signal if you have to do any initialization
     or cleanup.

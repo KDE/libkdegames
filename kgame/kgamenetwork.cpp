@@ -46,7 +46,7 @@ public:
 public:
 	KMessageClient* mMessageClient;
 	KMessageServer* mMessageServer;
-  Q_UINT32 mDisconnectId;
+  Q_UINT32 mDisconnectId;  // Stores gameId() over a disconnect process
 
 	int mCookie;
 };
@@ -111,7 +111,11 @@ void KGameNetwork::setMaster()
   connect (d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
             this, SLOT(receiveNetworkTransmission(const QByteArray&, Q_UINT32)));
   connect (d->mMessageClient, SIGNAL(connectionBroken()),
-            this, SIGNAL(signalConnectionBroken())); // TODO: Return to a non-network game?
+            this, SIGNAL(signalConnectionBroken())); 
+  connect (d->mMessageClient, SIGNAL(aboutToDisconnect(Q_UINT32)),
+            this, SLOT(aboutToLooseConnection(Q_UINT32)));
+  connect (d->mMessageClient, SIGNAL(connectionBroken()),
+            this, SLOT(slotResetConnection())); 
   
   connect (d->mMessageClient, SIGNAL(adminStatusChanged(bool)),
             this, SLOT(slotAdminStatusChanged(bool)));
@@ -133,6 +137,9 @@ bool KGameNetwork::offerConnections(Q_UINT16 port)
  if (!isMaster()) {
 	setMaster();
  }
+
+ // Make sure this is 0
+ d->mDisconnectId = 0;
 
  // FIXME: This debug message can be removed when the program is working correct.
  if (d->mMessageServer && d->mMessageServer->isOfferingConnections()) {
@@ -158,6 +165,9 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
    kdError(11001) << k_funcinfo << ": No hostname given" << endl;
    return false;
  }
+
+ // Make sure this is 0
+ d->mDisconnectId = 0;
 
 // if (!d->mMessageServer) {
 //   // FIXME: What shall we do here? Probably must stop a running game.
@@ -232,11 +242,8 @@ void KGameNetwork::disconnect()
    kdDebug(11001) << k_funcinfo << ": before client->disconnect() id="<<gameId()<< endl;
    //d->mMessageClient->setServer((KMessageIO*)0);
    kdDebug(11001) << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl;
-   d->mDisconnectId = gameId();
-
    d->mMessageClient->disconnect();
 
-   d->mDisconnectId = 0;
    kdDebug(11001) << "++++++--------------------------------------------+++++"<<endl;
  }
  //setMaster();
@@ -251,6 +258,18 @@ void KGameNetwork::disconnect()
  }
  */
  kdDebug(11001) << k_funcinfo << ": DONE" << endl;
+}
+
+void KGameNetwork::aboutToLooseConnection(Q_UINT32 clientID)
+{
+  kdDebug(11001) << "Storing client id of connection "<<clientID<<endl;
+  d->mDisconnectId = clientID;
+}
+
+void KGameNetwork::slotResetConnection()
+{
+  kdDebug(11001) << "Resseting client disconnect id"<<endl;
+  d->mDisconnectId = 0;
 }
 
 void KGameNetwork::electAdmin(Q_UINT32 clientID)

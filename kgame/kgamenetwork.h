@@ -385,6 +385,19 @@ protected slots:
      **/
     void slotAdminStatusChanged(bool isAdmin);
 
+    /**
+     * Called when the network connection is about to terminate. Is used
+     * to store the network parameter like the game id
+     */
+     void aboutToLooseConnection(Q_UINT32 id);
+
+    /**
+     * Called when the network connection is terminated. Used to clean
+     * up the disconnect parameter
+     */
+     void slotResetConnection();
+
+
 private:
 
 private:
