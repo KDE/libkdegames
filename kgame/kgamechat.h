@@ -1,7 +1,7 @@
 /*
     This file is part of the KDE games library
+    Copyright (C) 2001-2002 Andreas Beckermann (b_mann@gmx.de)
     Copyright (C) 2001 Martin Heni (martin@heni-online.de)
-    Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -62,6 +62,8 @@ public:
 	 **/
 	void setFromPlayer(KPlayer* player);
 
+	KPlayer* fromPlayer() const;
+
 	/**
 	 * Set the @ref KGame object for this chat widget. All messages will be
 	 * sent through this object. You don't have to implement any send
@@ -70,6 +72,8 @@ public:
 	 * @param g The @ref KGame object the messages will be sent through
 	 **/
 	void setKGame(KGame* g);
+
+	KGame* game() const;
 
 	/**
 	 * @return The id of the messages produced by KGameChat. The id will be

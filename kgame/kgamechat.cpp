@@ -1,6 +1,6 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
+    Copyright (C) 2001-2002 Andreas Beckermann (b_mann@gmx.de)
     Copyright (C) 2001 Martin Heni (martin@heni-online.de)
 
     This library is free software; you can redistribute it and/or
@@ -232,6 +232,16 @@ void KGameChat::setKGame(KGame* g)
 		slotAddPlayer(playerList.at(i));
 	}
  }
+}
+
+KGame* KGameChat::game() const
+{
+ return d->mGame;
+}
+
+KPlayer* KGameChat::fromPlayer() const
+{
+ return d->mFromPlayer;
 }
 
 void KGameChat::slotUnsetKGame()
