@@ -45,10 +45,26 @@ class KGameChat : public KChatBase
 	Q_OBJECT
 public:
 	/**
-	 *
+	 * Construct a @ref KGame chat widget on @p game that used @p msgid for
+	 * the chat message. The @p fromPlayer is the local player (see @ref
+	 * setFromPlayer).
 	 **/
-	KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget * parent);
-	KGameChat(KGame* g, int msgId, QWidget* parent);
+	KGameChat(KGame* game, int msgid, KPlayer* fromPlayer, QWidget * parent);
+
+	/**
+	 * @overload
+	 * To make use of this widget you need to call @ref setFromPlayer
+	 * manually.
+	 **/
+	KGameChat(KGame* game, int msgId, QWidget* parent);
+
+	/**
+	 * @overload
+	 * This constructs a widget that is not usable. You must call at least
+	 * @ref setGame, @ref setFromPlayer and @ref setMessageId manually.
+	 * @since 3.2
+	 **/
+	KGameChat(QWidget* parent);
 
 	virtual ~KGameChat();
 
@@ -57,7 +73,9 @@ public:
 	};
 
 	/**
-	 * TODO: doku
+	 * This sets the @ref fromPlayer to @p player. The fromPlayer is the
+	 * player that will appear as "from" when you send messages through this
+	 * widget.
 	 * @param player The player of this widget
 	 **/
 	void setFromPlayer(KPlayer* player);
@@ -80,6 +98,17 @@ public:
 	 * used in @ref KGame as parameter msgid in the method @ref KGame::sendMessage
 	 **/
 	int messageId() const;
+
+	/**
+	 * Change the message id of the chat widget. It is recommended that you
+	 * don't use this but prefer the constructor instead, but in certain
+	 * situations (such as using this widget in Qt designer) it may be
+	 * useful to change the message id.
+	 *
+	 * See also @ref messageId
+	 * @since 3.2
+	 **/
+	void setMessageId(int msgid);
 
 	/**
 	 * reimplemented from @ref KChatBase

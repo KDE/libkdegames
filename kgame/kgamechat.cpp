@@ -67,6 +67,11 @@ KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent) 
  setFromPlayer(fromPlayer);
 }
 
+KGameChat::KGameChat(QWidget* parent) : KChatBase(parent)
+{
+ init(0, -1);
+}
+
 KGameChat::~KGameChat()
 {
  kdDebug(11001) << k_funcinfo << endl;
@@ -77,7 +82,7 @@ void KGameChat::init(KGame* g, int msgId)
 {
  kdDebug(11001) << k_funcinfo << endl;
  d = new KGameChatPrivate;
- d->mMessageId = msgId;
+ setMessageId(msgId);
 
  setKGame(g);
 }
@@ -141,6 +146,9 @@ void KGameChat::returnPressed(const QString& text)
 	d->mGame->sendMessage(text, messageId(), receiver, sender);
  }
 }
+
+void KGameChat::setMessageId(int msgid)
+{ d->mMessageId = msgid; }
 
 int KGameChat::messageId() const
 { return d->mMessageId; }
