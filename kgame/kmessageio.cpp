@@ -113,7 +113,10 @@ void KMessageSocket::processNewData ()
     {
       // Header = magic number + packet length = 5 bytes
       if (mSocket->bytesAvailable() < 5)
+      {
+        isRecursive = false;
         return;
+      }
 
       // Read the magic number first. If something unexpected is found,
       // start over again, ignoring the data that was read up to then.
@@ -133,7 +136,10 @@ void KMessageSocket::processNewData ()
     {
       // Data not completely read => wait for more
       if (mSocket->bytesAvailable() < (Q_ULONG) mNextBlockLength)
+      {
+        isRecursive = false;
         return;
+      }
 
       QByteArray msg (mNextBlockLength);
       str.readRawBytes (msg.data(), mNextBlockLength);
