@@ -72,18 +72,18 @@ KPlayer::KPlayer() : QObject(0,0)
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
 
-   d->mGroup.registerData(KGamePropertyBase::IdGroup, this);
+   d->mGroup.registerData(KGamePropertyBase::IdGroup, this,i18n("Group"));
    d->mGroup.initData(i18n("default"));
    d->mName.registerData(KGamePropertyBase::IdName, this);
    d->mName.initData(i18n("default"));
 
-   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this);
+   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this,i18n("AsyncInput"));
    mAsyncInput.initData(false);
-   mMyTurn.registerData(KGamePropertyBase::IdTurn, this);
+   mMyTurn.registerData(KGamePropertyBase::IdTurn, this,i18n("myTurn"));
    mMyTurn.initData(false);
    mMyTurn.setEmittingSignal(true);
    mMyTurn.setOptimized(false);
-   mUserId.registerData(KGamePropertyBase::IdUserId, this);
+   mUserId.registerData(KGamePropertyBase::IdUserId, this,i18n("UserId"));
    mUserId.initData(0);
 }
 

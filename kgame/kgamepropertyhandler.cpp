@@ -26,6 +26,8 @@
 #include "kgamemessage.h"
 #include "kplayer.h"
 #include "kgame.h"
+#include <klocale.h>
+#include <typeinfo>
 
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 
@@ -96,17 +98,44 @@ bool KGamePropertyHandlerBase::removeProperty(KGamePropertyBase* data)
  }
  return remove(data->id());
 }
-bool KGamePropertyHandlerBase::addProperty(KGamePropertyBase* data)
+bool KGamePropertyHandlerBase::addProperty(KGamePropertyBase* data,QString name)
 {
   //kdDebug(11001) << "KGamePropertyHandler::addproperty("<<data<<endl;
  if (find(data->id())) {
 	// this id already exists
 	kdError(11001) << "  -> cannot add property " << data->id() << endl;
 	return false;
- } else {
+ }
+ else
+ {
 	insert(data->id(), data);
+  // if here is a check for "is_debug" or so we can add the strings only in debug mode
+  // and save memory!!
+  if (!name.isNull())
+  {
+    mNameMap.insert(data->id(),name);
+    kdDebug() << "KGamePropertyHandlerBase::addProperty: nid="<< (data->id()) << " inserted in Map name=" << mNameMap[data->id()] <<endl;
+    kdDebug() << "Typeid=" << typeid(data).name() << endl;
+    kdDebug() << "Typeid call=" << data->typeinfo()->name() << endl;
+  }
  }
  return true;
+}
+
+QString KGamePropertyHandlerBase::propertyName(int id)
+{
+  QString s;
+  if (find(id))
+  {
+    if (mNameMap.contains(id)) s=mNameMap[id];
+    else s.setNum(id);
+  }
+  else
+  {
+    // Should _never_ happen
+    s=i18n("%1 unregistered").arg(id);
+  }
+  return s;
 }
 
 bool KGamePropertyHandlerBase::load(QDataStream &stream)

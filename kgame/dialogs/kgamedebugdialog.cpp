@@ -26,6 +26,9 @@
 #include <klocale.h>
 #include <kdebug.h>
 
+#include <qintdict.h>
+#include <typeinfo>
+
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamepropertyhandler.h"
@@ -273,6 +276,21 @@ void KGameDebugDialog::updateGameData()
 
 //TODO ios
 //TODO properties?
+ KGamePropertyHandlerBase *handler=((KGame *)(d->mGame))->dataHandler();
+
+ QIntDictIterator<KGamePropertyBase> it(*handler);
+ while (it.current())
+ {
+	KGamePropertyBase *base=it.current();
+	if (base)
+  {
+    int id=base->id();
+    QString name=handler->propertyName(id);
+    kdDebug() << "updateGameData: checking for all game properties: found property name " << name << endl;
+	}
+	++it;
+ }
+
 }
 
 void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
@@ -312,8 +330,8 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
  QIntDictIterator<KGamePropertyBase> it(*handler);
  while (it.current()) {
 	QListViewItem* prop = new QListViewItem(d->mPlayerProperties,
-			i18n(propertyName(it.current())),
-			propertyValue(it.current()));
+			i18n(propertyName(it.current(),handler)),
+			propertyValue(it.current(),handler));
 	++it;
  }
 }
@@ -379,11 +397,15 @@ void KGameDebugDialog::removePlayer(QListBoxItem* i)
  delete i;
 }
 
-QString KGameDebugDialog::propertyName(KGamePropertyBase* prop) const
+QString KGameDebugDialog::propertyName(KGamePropertyBase* prop, KGamePropertyHandlerBase *handler) const
 {
  if (!prop) {
 	return i18n("NULL pointer");
  }
+
+ // MH
+ int id=prop->id();
+ return handler->propertyName(id);
 
  switch (prop->id()) {
 	case KGamePropertyBase::IdGroup:
@@ -408,13 +430,47 @@ QString KGameDebugDialog::propertyName(KGamePropertyBase* prop) const
 
 }
 
-QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop) 
+QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHandlerBase *handler) 
 {
  if (!prop) {
 	return i18n("NULL pointer");
  }
-
+ 
+ int id=prop->id();
+ QString name=handler->propertyName(id);
  QString value;
+
+ if (*(prop->typeinfo())== typeid(int))
+ {
+   kdDebug()  << "INTEGER variable name="<<name<<" id="<<id<<" found "<<endl;
+   value=QString("%1").arg( ((KGamePropertyInt *)prop)->value());
+ }
+ else if (*(prop->typeinfo())== typeid(QString))
+ {
+   kdDebug()  << "QString variable name="<<name<<" id="<<id<<" found "<<endl;
+   value=QString("%1").arg( ((KGamePropertyQString *)prop)->value());
+ }
+ else if (*(prop->typeinfo())== typeid(Q_INT8))
+ {
+   kdDebug()  << "Q_INT8 variable name="<<name<<" id="<<id<<" found "<<endl;
+   if (((KGamePropertyBool *)prop)->value() ) value=QString("true");
+   else value=QString("false");
+ }
+ else if (*(prop->typeinfo())== typeid(unsigned int))
+ {
+   kdDebug()  << "unsigned int variable name="<<name<<" id="<<id<<" found "<<endl;
+   value=QString("%1").arg( ((KGamePropertyUInt *)prop)->value());
+ }
+ else
+ {
+   kdDebug()  << "UNKOWN variable name="<<name<<" id="<<id<<" found "<<endl;
+   kdDebug()  << "type=" << prop->typeinfo()->name() << " int=" << typeid(int).name() << " QString="<<typeid(QString).name() << endl;
+   kdDebug()  << " bool=" << typeid(bool).name() << " Q_INT8="<<typeid(Q_INT8).name() << endl;
+ }
+
+ if (!value.isNull()) return value;
+
+
  switch (prop->id()) {
 	case KGamePropertyBase::IdGroup:
 		value = *(KGameProperty<QString>*)prop;

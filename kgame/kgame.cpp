@@ -86,11 +86,11 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d = new KGamePrivate;
   
  d->mProperties.registerHandler(KGameMessage::IdGameProperty,this);
- d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this);
+ d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this,i18n("MaxPlayers"));
  d->mMaxPlayer.initData(-1);  // Infinite
- d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this);
+ d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this,i18n("MinPlayers"));
  d->mMinPlayer.initData(0);   // Always ok     
- d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this);
+ d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this,i18n("GameStatus"));
  d->mGameStatus.initData(End);
  d->mUniquePlayerNumber = 0;
  d->mCookie=cookie;

@@ -25,6 +25,7 @@
 #include <qintdict.h>
 
 #include <kdebug.h>
+#include <typeinfo>
 
 class KGame;
 class KPlayer;
@@ -195,6 +196,8 @@ public:
 	 **/
 	int id() const { return mId; }
 
+  virtual const type_info * typeinfo() {return &typeid(this);};
+
 	/**
 	 * You have to register a KGamePropertyBase before you can use it.
 	 *
@@ -208,10 +211,10 @@ public:
 	 * using @ref KPropertyHandler::sendProperty whenever you call @ref send
 	 *
 	 **/
-	void registerData(int id, KGamePropertyHandlerBase* owner);
+	void registerData(int id, KGamePropertyHandlerBase* owner,QString name=0);
 
-	void registerData(int id, KGame* owner);
-	void registerData(int id, KPlayer* owner);
+	void registerData(int id, KGame* owner,QString name=0);
+	void registerData(int id, KPlayer* owner,QString name=0);
 
 protected:
 	//AB: I had problems when putting this into KGameProperty::setValue() as I
@@ -572,6 +575,8 @@ public:
 	 * @return See @ref value
 	 **/
 	operator type() const { return value(); }
+
+  virtual const type_info * typeinfo() {return &typeid(type);};
 
 private:
 	void init()

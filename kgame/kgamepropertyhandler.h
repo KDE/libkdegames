@@ -23,6 +23,7 @@
 
 #include <qdatastream.h>
 #include <qintdict.h>
+#include <qmap.h>
 
 #include <kdebug.h>
 
@@ -65,7 +66,7 @@ public:
 	 * @param data the property
 	 * @return true on success
 	 **/
-	bool addProperty(KGamePropertyBase *data);
+	bool addProperty(KGamePropertyBase *data,QString name=0);
 
 	/**
 	 * Removes a property from the handler
@@ -104,6 +105,8 @@ public:
 	 **/ 
 	virtual void emitSignal(KGamePropertyBase *data) = 0;
 
+  QString propertyName(int id);
+
 	void setId(int id)//AB: TODO: make this protected in KGamePropertyHandler!!
 	{
 		mId = id;
@@ -113,6 +116,7 @@ private:
 	void init();
 	KGamePropertyHandlerBasePrivate* d;
 	int mId;
+  QMap<int,QString> mNameMap;
 };
 
 

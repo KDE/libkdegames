@@ -75,19 +75,19 @@ void KGamePropertyBase::init()
  setAlwaysConsistent(true);
 }
 
-void KGamePropertyBase::registerData(int id, KGame* owner)
-{ registerData(id, owner->dataHandler());  }
+void KGamePropertyBase::registerData(int id, KGame* owner,QString name)
+{ registerData(id, owner->dataHandler(),name);  }
 
-void KGamePropertyBase::registerData(int id, KPlayer* owner)
-{ registerData(id, owner->dataHandler());  }
+void KGamePropertyBase::registerData(int id, KPlayer* owner,QString name)
+{ registerData(id, owner->dataHandler(),name);  }
 
-void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner)
+void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner,QString name)
 {
 // we don't support changing the id
  if (!mOwner) {
 	mId = id;
 	mOwner = owner;
-	mOwner->addProperty(this);
+	mOwner->addProperty(this,name);
  }
 }
 
@@ -128,5 +128,6 @@ void KGamePropertyBase::emitSignal()
 	kdError(11001) << "KGamePropertyBase::emitSignal(): Cannot emitSignal because there is no receiver defined" << endl;
  }
 }
+
 
 
