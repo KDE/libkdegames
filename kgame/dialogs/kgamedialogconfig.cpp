@@ -266,7 +266,7 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 
 	QWidget* nameWidget = new QWidget(this);
 	QHBoxLayout* l = new QHBoxLayout(nameWidget);
-	QLabel* nameLabel = new QLabel(i18n("Your Name:"), nameWidget);
+	QLabel* nameLabel = new QLabel(i18n("Your name:"), nameWidget);
 	l->addWidget(nameLabel);
 	d->mName = new QLineEdit(nameWidget);
 	l->addWidget(d->mName);
