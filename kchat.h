@@ -26,10 +26,10 @@
 class KChatPrivate;
 
 /**
- * A chat widget for non-KGame use.
+ * @short A chat widget for non-KGame games
  *
  * Docu is TODO
- * @short A chat widget for non-KGame games
+ *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KChat : public KChatBase
