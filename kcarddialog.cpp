@@ -50,11 +50,11 @@ int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,i
   }
 
   dlg.setDeck(mDeck);
-  dlg.setCarddir(mCarddir);
+  dlg.setCardDir(mCarddir);
   dlg.setFlags(mFlags);
   dlg.setFilemask(mMask);
   dlg.setAlternateDeck(mAlternateDeck);
-  dlg.setAlternateCarddir(mAlternateCarddir);
+  dlg.setAlternateCardDir(mAlternateCarddir);
   
   dlg.setupDialog();
   result=dlg.exec();
@@ -65,7 +65,7 @@ int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,i
     {
       mDeck+=dlg.filemask();
     }
-    mCarddir=dlg.carddir();
+    mCarddir=dlg.cardDir();
     if (!mCarddir.isNull() && mCarddir.right(1)!=QString::fromLatin1("/"))
     {
       mCarddir+=QString::fromLatin1("/");
@@ -74,7 +74,7 @@ int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,i
   return result;
 }
 
-QString KCardDialog::getDefaultDeckpath(int mFlags,QString mAlternateDeck)
+QString KCardDialog::getDefaultDeckPath(int mFlags,QString mAlternateDeck)
 {
     QString file=KCARD_DECKPATH+KCARD_DEFAULTDECK+KCARD_DEFAULTFILEMASK;
     QString path=kapp->dirs()->findResourceDir("data",file);
@@ -93,7 +93,7 @@ QString KCardDialog::getDefaultDeckpath(int mFlags,QString mAlternateDeck)
     }
 }
 
-QString KCardDialog::getDefaultCardpath(int mFlags,QString mAlternateCarddir)
+QString KCardDialog::getDefaultCardPath(int mFlags,QString mAlternateCarddir)
 {
     QString file=KCARD_CARDPATH+KCARD_DEFAULTCARDDIR+KCARD_DEFAULTCARD+KCARD_DEFAULTFILEMASK;
     QString path=kapp->dirs()->findResourceDir("data",file);
@@ -114,22 +114,22 @@ QString KCardDialog::getDefaultCardpath(int mFlags,QString mAlternateCarddir)
 
 QString KCardDialog::deck() { return cDeck; }
 void KCardDialog::setDeck(QString file) { cDeck=file; }
-QString KCardDialog::carddir() { return cCardDir; }
-void KCardDialog::setCarddir(QString dir) { cCardDir=dir; }
+QString KCardDialog::cardDir() { return cCardDir; }
+void KCardDialog::setCardDir(QString dir) { cCardDir=dir; }
 int KCardDialog::flags() { return cFlags; }
 void KCardDialog::setFlags(int f) { cFlags=f; }
 QString KCardDialog::filemask() { return cMask; }
 void KCardDialog::setFilemask(QString mask) { cMask=mask; }
 QString KCardDialog::alternateDeck() { return cAltDeck; }
 void KCardDialog::setAlternateDeck(QString file) { cAltDeck=file; }
-QString KCardDialog::alternateCarddir() { return cAltCarddir; }
-void KCardDialog::setAlternateCarddir(QString dir) { cAltCarddir=dir; }
+QString KCardDialog::alternateCardDir() { return cAltCarddir; }
+void KCardDialog::setAlternateCardDir(QString dir) { cAltCarddir=dir; }
 
 // protected
-QString KCardDialog::deckpath() { return cDeckpath; }
-void KCardDialog::setDeckpath(QString path) { cDeckpath=path; }
-QString KCardDialog::cardpath() { return cCardpath; }
-void KCardDialog::setCardpath(QString path) { cCardpath=path; }
+QString KCardDialog::deckPath() { return cDeckpath; }
+void KCardDialog::setDeckPath(QString path) { cDeckpath=path; }
+QString KCardDialog::cardPath() { return cCardpath; }
+void KCardDialog::setCardPath(QString path) { cCardpath=path; }
 
 void KCardDialog::setupDialog()
 {
@@ -248,15 +248,15 @@ void KCardDialog::setupDialog()
     // and default deck found
     if (alternateDeck().isNull() || (!path.isNull() && (flags()&ProbeDefaultDir)))
     {
-      setDeckpath(path);
+      setDeckPath(path);
     }
     else
     {
-      setDeckpath(alternateDeck());
+      setDeckPath(alternateDeck());
     }
 
 
-    InsertDeckIcons(deckpath());
+    insertDeckIcons(deckPath());
     deckIconView->arrangeItemsInGrid();
  
     // Set default icons if given
@@ -283,22 +283,22 @@ void KCardDialog::setupDialog()
     }
     // Set default pat if no alternate deck given or probe default deck given
     // and default deck found
-    if (alternateCarddir().isNull() || (!path.isNull() && (flags()&ProbeDefaultDir)))
+    if (alternateCardDir().isNull() || (!path.isNull() && (flags()&ProbeDefaultDir)))
     {
-      setCardpath(path);
+      setCardPath(path);
     }
     else
     {
-      setCardpath(alternateCarddir());
+      setCardPath(alternateCardDir());
     }
 
-    InsertCardIcons(cardpath());
+    insertCardIcons(cardPath());
     cardIconView->arrangeItemsInGrid();
 
     // Set default icons if given
-    if (!carddir().isNull())
+    if (!cardDir().isNull())
     {
-      file=carddir()+KCARD_DEFAULTCARD+filemask();
+      file=cardDir()+KCARD_DEFAULTCARD+filemask();
       QPixmap *pixmap=new QPixmap(file);
       QPixmap *pixmap2=new QPixmap;
       *pixmap2=pixmap->xForm(m);
@@ -310,7 +310,7 @@ void KCardDialog::setupDialog()
 
 }
 
-void KCardDialog::InsertCardIcons(QString path)
+void KCardDialog::insertCardIcons(QString path)
 {
   QDir dir;
   QString label;
@@ -351,7 +351,7 @@ void KCardDialog::InsertCardIcons(QString path)
   }
 }
   
-void KCardDialog::InsertDeckIcons(QString path)
+void KCardDialog::insertDeckIcons(QString path)
 {
   QDir dir;
   QString label;
@@ -409,7 +409,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
     if (item && item->pixmap()) 
     {
       deckLabel->setPixmap(* (item->pixmap()));
-      setDeck(deckpath()+item->text());
+      setDeck(deckPath()+item->text());
     }
 }
 void KCardDialog::slotCardClicked(QIconViewItem *item)
@@ -417,7 +417,7 @@ void KCardDialog::slotCardClicked(QIconViewItem *item)
     if (item && item->pixmap()) 
     {
       cardLabel->setPixmap(* (item->pixmap()));
-      setCarddir(cardpath()+item->text());
+      setCardDir(cardPath()+item->text());
     }
 
 }

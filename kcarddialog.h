@@ -58,7 +58,7 @@
  *
  * @short A carddeck selection dialog for card games.
  * @author Martin Heni <martin@heni-online.de>
- * @version $Id:$
+ * @version $Id$
  */
 class KCardDialog : public KDialog
 {
@@ -128,7 +128,7 @@ public:
    * to use this usually before the user used the card dialog the first
    * time to get an default deck. You can assume that
    * <pre>
-   *   getDefaultDeckpath()+QString::fromLatin1("deck0.png")
+   *   getDefaultDeckPath()+QString::fromLatin1("deck0.png")
    * </pre>
    * is a valid deck.
    *
@@ -141,7 +141,7 @@ public:
    *        the probing option is given the default directory is preferred
    *        if existant
    */
-   static QString getDefaultDeckpath(int mFlags=0,QString mAlternateDeck=0 );
+   static QString getDefaultDeckPath(int mFlags=0,QString mAlternateDeck=0 );
 
    /**
    * Returns the default path to the card frontsides. You want
@@ -160,7 +160,7 @@ public:
    *
    * @return returns the path to the card directory
    */
-   static QString getDefaultCardpath(int mFlags=0,QString mAlternateCarddir=0);
+   static QString getDefaultCardPath(int mFlags=0,QString mAlternateCarddir=0);
 
 
    /**
@@ -183,7 +183,7 @@ public:
    * 
    * @return The card directory
    */
-   QString carddir();
+   QString cardDir();
 
    /**
    * Sets the default card directory.
@@ -191,7 +191,7 @@ public:
    * @param dir The full path to an card directory
    * 
    */
-   void setCarddir(QString dir);
+   void setCardDir(QString dir);
 
    /**
    * Returns the flags set to the dialog
@@ -246,7 +246,7 @@ public:
    * 
    * @return the alternative card directory
    */
-   QString alternateCarddir();
+   QString alternateCardDir();
 
    /**
    * Sets the alternative card directory
@@ -255,7 +255,7 @@ public:
    *       cards1, cards2, ... are stored
    * 
    */
-   void setAlternateCarddir(QString dir);
+   void setAlternateCardDir(QString dir);
 
    /**
    * Creates the default widgets in the dialog. Must be called after
@@ -272,12 +272,12 @@ protected slots:
    void slotCardClicked(QIconViewItem *);
 
 private:
-   QString deckpath();
-   void setDeckpath(QString path);
-   QString cardpath();
-   void setCardpath(QString path);
-   void InsertCardIcons(QString path);
-   void InsertDeckIcons(QString path);
+   QString deckPath();
+   void setDeckPath(QString path);
+   QString cardPath();
+   void setCardPath(QString path);
+   void insertCardIcons(QString path);
+   void insertDeckIcons(QString path);
 
 
 private:
