@@ -43,7 +43,7 @@ class KGamePrivate;
  * - Player handling (add, remove,...)
  * - Game status (end,start,pause,...)
  * - load/save
- * - Move (and message) handling 
+ * - Move (and message) handling
  * - nextPlayer and gameOver()
  * - Network connection (for KGameNetwork)
  *
@@ -75,8 +75,8 @@ public:
 	 *
 	 * A "dirty" policy means that as soon as @ref setValue is called the
 	 * property is changed immediately. And additionally sent over network.
-	 * This can sometimes lead to bugs as the other clients do not 
-	 * immediately have the same value. For more information see 
+	 * This can sometimes lead to bugs as the other clients do not
+	 * immediately have the same value. For more information see
 	 * @ref changeValue.
 	 *
 	 * PolicyLocal means that a @ref KGameProperty behaves like ever
@@ -93,7 +93,7 @@ public:
 		PolicyLocal = 3
 	};
 
-    /** 
+    /**
      * Create a KGame object. The cookie is used to identify your
      * game in load/save and network operations. Change this between
      * games.
@@ -115,7 +115,7 @@ public:
      * The KGame e.g. sets the status to Pause when you have
      * less player than the minimum amount
      */
-    enum GameStatus 
+    enum GameStatus
     {
 	    Init = 0,
 	    Run = 1,
@@ -129,7 +129,7 @@ public:
 
     // Properties
     /**
-     * Returns a list of all active players 
+     * Returns a list of all active players
      *
      * @return the list of players
      */
@@ -141,7 +141,7 @@ public:
     const KGamePlayerList *playerList() const;
 
     /**
-     * Returns a list of all inactive players 
+     * Returns a list of all inactive players
      * @return the list of players
      */
     KGamePlayerList *inactivePlayerList();
@@ -150,7 +150,7 @@ public:
      * The same as @ref inactivePlayerList but returns a const pointer.
      **/
     const KGamePlayerList *inactivePlayerList() const;
-    
+
     /**
      * Returns a pointer to the game's @ref KRandomSequence. This sequence is
      * identical for all network players!
@@ -190,7 +190,7 @@ public:
      * all clients and add the player using @ref systemAddPlayer
      **/
     void addPlayer(KPlayer* newplayer);
-    
+
     /**
      * Sends a message over the network, msgid=IdRemovePlayer.
      *
@@ -221,17 +221,17 @@ public:
     /**
      * Set the maximal number of players. After this is
      * reached no more players can be added. You must be ADMIN to call this (see
-     * @ref isAdmin)! 
+     * @ref isAdmin)!
      * @param maxnumber maximal number of players
      */
     void setMaxPlayers(uint maxnumber);
-    
+
     /**
      * What is the maximal number of players?
      * @return maximal number of players
      */
     int maxPlayers() const;
-    
+
     /**
      * Set the minimal number of players. A game can not be started
      * with less player resp. is paused when already running. You must be ADMIN
@@ -273,7 +273,7 @@ public:
      * returns 0. This function should normally not be used outside KGame.
      * It could be made non-virtual,protected in a later version. At the
      * moment it is a virtual function to give you more control over KGame.
-     * 
+     *
      * For documentation see @ref signalPlayerInput.
      **/
     virtual bool systemPlayerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
@@ -282,7 +282,7 @@ public:
     * This virtual function is called if the KGame needs to create a new player.
     * This happens only over a network and with load/save. Doing nothing
     * will create a default KPlayer. If you want to have your own player
-    * you have to create one with the given rtti here. 
+    * you have to create one with the given rtti here.
     * Note: If your game uses a player class derived from KPlayer you MUST
     * overwrite this function and create your player here. Otherwise the
     * game will crash.
@@ -330,9 +330,9 @@ public:
      * @return true?
      **/
     virtual bool load(QString filename,bool reset=true);
-    
+
     /**
-     * Save a game to a file OR to network. Otherwise the same as 
+     * Save a game to a file OR to network. Otherwise the same as
      * the load function
      *
      * @param stream a data stream to load the game from
@@ -369,7 +369,7 @@ public:
      * @return game status
      */
     int gameStatus() const;
-    
+
     /**
      * sets the game status
      *
@@ -387,18 +387,18 @@ public:
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
     bool sendPlayerProperty(QDataStream& s, Q_UINT32 playerId);
-    
+
     /**
-    * This function allows to find the pointer to a player 
+    * This function allows to find the pointer to a player
     * property when you know it's id
     */
     KGamePropertyBase* findProperty(int id) const;
 
     /**
-     * Changes the consistency policy of a property. The @ref 
+     * Changes the consistency policy of a property. The @ref
      * GamePolicy is one of PolicyClean (defaulz), PolicyDirty or PolicyLocal.
      *
-     * It is up to you to decide how you want to work. 
+     * It is up to you to decide how you want to work.
      **/
     void setPolicy(GamePolicy p,bool recursive=true);
 
@@ -423,7 +423,7 @@ public:
     bool sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, const QString& group);
 
     /**
-     * This will either forward an incoming message to a specified player 
+     * This will either forward an incoming message to a specified player
      * (see @ref KPlayer::networkTransmission) or
      * handle the message directly (e.g. if msgif==IdRemovePlayer it will remove
      * the (in the stream) specified player). If both is not possible (i.e. the
@@ -494,7 +494,7 @@ signals:
      * @param stream the load stream
      */
     void signalLoad(QDataStream &stream);
-    
+
     /**
      * The game will be saved to the given stream. Fill this with data
      * which is NOT a game or player property.
@@ -507,7 +507,7 @@ signals:
     /**
      * Is emmited if a game with a different version cookie is loaded.
      * Normally this should result in an error. But maybe you do support
-     * loading of older game versions. Here would be a good place to do a 
+     * loading of older game versions. Here would be a good place to do a
      * conversion.
      *
      * @param stream - the load stream
@@ -531,14 +531,14 @@ signals:
      * the best possible method to do this is unclear...
      */
     void signalMessageUpdate(int msgid,Q_UINT32 receiver,Q_UINT32 sender);
-    
+
     /**
      * a player left the game because of a broken connection or so!
      *
      * @param player the player who left the game
      */
     void signalPlayerLeftGame(KPlayer *player);
-    
+
     /**
      * a player joined the game
      *
@@ -562,11 +562,11 @@ signals:
      * @param me a pointer to the KGame object
      */
     void signalGameOver(int status, KPlayer *current, KGame *me);
-     
+
     /**
     * Is emmited after a client is sucessfully connected to the game.
     * The client id is the id of the new game client. An easy way to
-    * check whether that's us is 
+    * check whether that's us is
     * <pre>
     *   if (clientid==gameid()) .. // we joined
     *   else ... // someone joined the game
@@ -580,7 +580,7 @@ signals:
     * This signal is emmited after a network partner left the
     * game (either by a broken connection of voluntarily).
     * All changes to the network players have already be done.
-    * If there are not enough players left, the game might have 
+    * If there are not enough players left, the game might have
     * been paused. To check this you get the old gamestatus
     * before the disconnection as argument here. The id of the
     * client who left the game allows to distinguish who left the
@@ -606,17 +606,18 @@ protected:
      * Generally you have to return TRUE in this function. Only then
      * the game sequence is proceeded by calling @ref playerInputFinished
      * which in turn will check for game over or the next player
-     * However, if you have a delqayed move, because you e.g. move a
+     * However, if you have a delayed move, because you e.g. move a
      * card or a piece you want to return FALSE to pause the game sequence
      * and then manually call @ref playerInputFinished to resume it.
      * Example:
      * <pre>
-     * void MyClass::playerInput(QDataStream &msg,KPlayer *player)
+     * bool MyClass::playerInput(QDataStream &msg,KPlayer *player)
      * {
      *   Q_INT32 move;
      *   msg >>  move;
      *   kdDebug() << "  Player " << player->id() << " moved to " << move <<
      *   endl;
+     *   return true;
      * }
      * </pre>
      *
@@ -625,12 +626,12 @@ protected:
      * @return true - input ready, false: input manual
      */
     virtual bool playerInput(QDataStream &msg,KPlayer *player)=0;
-    
+
 
     /**
     * Called after the player input is processed by the game. Here the
     * checks for game over and nextPlayer (in the case of turn base games)
-    * are processed. 
+    * are processed.
     * Call this manually if you have a delayed move, i.e. your playerInput
     * function returns FALSE. If it returns true you need not do anything
     * here.
@@ -649,14 +650,14 @@ protected:
     * This is of particular importance if you have a game with fixed number of
     * player like e.g. chess. A network connect needs to disable one player of
     * each game to make sense.
-    * 
+    *
     * Not overwriting this function will activate a default behaviour which
     * will deactivate players until the @ref maxPlayers() numebr is reached
     * according to the KPlayer::networkPriority() value. Players with a low
     * value will be kicked out first. With equal priority players of the new
     * client will leave first. This means, not setting this value and not
     * overwriting this function will never allow a chess game to add client
-    * players!!! 
+    * players!!!
     * On the other hand setting one player of each game to a networkPriorty of
     * say 10, already does most of the work for you.
     *
@@ -668,12 +669,12 @@ protected:
     * <pre>
     * inactivate.append(player->id());
     * </pre>
-    * 
+    *
     * @param oldplayer - the list of the network players
     * @param newplayer - the list of the client players
     * @param inactivate - the value list of ids to be deactivated
     *
-    **/ 
+    **/
     virtual void newPlayersJoin(KGamePlayerList *,KGamePlayerList *,QValueList<int> &) {};
 
     /**
@@ -706,7 +707,7 @@ protected:
     *
     **/
     KPlayer *loadPlayer(QDataStream& stream,bool isvirtual=false);
-    
+
 
     /**
      * inactivates player. Use @ref inactivatePlayer instead!
@@ -746,7 +747,7 @@ protected:
      *
      **/
     void systemRemovePlayer(KPlayer* player,bool deleteit);
-    
+
     /**
      * This member function will transmit e.g. all players to that client, as well as
      * all properties of these players (at least if they have been added by
@@ -827,7 +828,7 @@ private:
      **/
     bool systemRemove(KPlayer* player,bool deleteit);
 
-    
+
 private:
     KGamePrivate* d;
 };
