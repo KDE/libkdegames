@@ -1,4 +1,0 @@
-some thoughts and comments about the lib - usually for KGame hackers
-
-- setMin/MaxPlayers() etc. use KGameProperty::changeValue() which is slightly
-  unclean but as these functions can only called by the ADMIN it doesn't matter.
