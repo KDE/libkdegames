@@ -30,10 +30,10 @@
 
 #include "kgameconnectdialog.h"
 
-class KGameConnectDialogPrivate
+class KGameConnectWidgetPrivate
 {
-public:
-	KGameConnectDialogPrivate()
+ public:
+	KGameConnectWidgetPrivate()
 	{
 		mPort = 0;
 		mHost = 0;
@@ -45,29 +45,93 @@ public:
 	QVButtonGroup* mButtonGroup;
 };
 
+KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
+{
+ d = new KGameConnectWidgetPrivate;
+
+ QVBoxLayout* vb = new QVBoxLayout(this, KDialog::spacingHint());
+ d->mButtonGroup = new QVButtonGroup(this);
+ vb->addWidget(d->mButtonGroup);
+ connect(d->mButtonGroup, SIGNAL(clicked(int)), this, SLOT(slotTypeChanged(int)));
+ (void)new QRadioButton(i18n("Create a network game"), d->mButtonGroup);
+ (void)new QRadioButton(i18n("Join a network game"), d->mButtonGroup);
+
+ QGrid* g = new QGrid(2, this);
+ vb->addWidget(g);
+ g->setSpacing(KDialog::spacingHint());
+ (void)new QLabel(i18n("Port to connect to"), g);
+ d->mPort = new KIntNumInput(g);
+ (void)new QLabel(i18n("Host to connect to"), g);
+ d->mHost = new QLineEdit(g); 
+
+ QPushButton *button=new QPushButton(i18n("&Start network"), this);
+ connect(button, SIGNAL(clicked()), this, SIGNAL(signalNetworkSetup()));
+ vb->addWidget(button);
+}
+
+KGameConnectWidget::~KGameConnectWidget()
+{
+ delete d;
+}
+
+QString KGameConnectWidget::host() const
+{ 
+ if (d->mHost->isEnabled()) {
+	return d->mHost->text();
+ } else {
+	return QString::null;
+ }
+}
+
+unsigned short int KGameConnectWidget::port() const
+{
+ return d->mPort->value(); 
+}
+
+void KGameConnectWidget::setHost(const QString& host)
+{ 
+ d->mHost->setText(host); 
+}
+
+void KGameConnectWidget::setPort(unsigned short int port)
+{
+ d->mPort->setValue(port); 
+}
+
+void KGameConnectWidget::setDefault(int state)
+{
+ d->mButtonGroup->setButton(state); 
+ slotTypeChanged(state); 
+}
+
+void KGameConnectWidget::slotTypeChanged(int t)
+{
+ if (t == 0) {
+	d->mHost->setEnabled(false);
+ } else if (t == 1) {
+	d->mHost->setEnabled(true);
+ }
+}
+
+class KGameConnectDialogPrivate
+{
+ public:
+	KGameConnectDialogPrivate()
+	{
+		mConnect = 0;
+	}
+
+	KGameConnectWidget* mConnect;
+};
+
 // buttonmask =Ok|Cancel
 KGameConnectDialog::KGameConnectDialog(QWidget* parent,int buttonmask) : KDialogBase(Plain,
 		i18n("Network Game"),buttonmask , Ok, parent, 0, true, buttonmask!=0)
 {
  d = new KGameConnectDialogPrivate;
  QVBoxLayout* vb = new QVBoxLayout(plainPage(), spacingHint());
- d->mButtonGroup = new QVButtonGroup(plainPage());
- vb->addWidget(d->mButtonGroup);
- connect(d->mButtonGroup, SIGNAL(clicked(int)), this, SLOT(slotTypeChanged(int)));
- (void)new QRadioButton(i18n("Create a network game"), d->mButtonGroup);
- (void)new QRadioButton(i18n("Join a network game"), d->mButtonGroup);
-
- QGrid* g = new QGrid(2, plainPage());
- vb->addWidget(g);
- g->setSpacing(spacingHint());
- (void)new QLabel(i18n("Port to connect to"), g);
- d->mPort = new KIntNumInput(g);
- (void)new QLabel(i18n("Host to connect to"), g);
- d->mHost = new QLineEdit(g); 
-
- QPushButton *button=new QPushButton(i18n("Start network"),plainPage());
- connect(button, SIGNAL(clicked()), this, SIGNAL(signalNetworkSetup()));
- vb->addWidget(button);
+ d->mConnect = new KGameConnectWidget(plainPage());
+ vb->addWidget(d->mConnect);
 }
 
 KGameConnectDialog::~KGameConnectDialog()
@@ -96,29 +160,31 @@ int KGameConnectDialog::initConnection( unsigned short int& port,
 }
 
 QString KGameConnectDialog::host() const
-{ 
- if (d->mHost->isEnabled()) {
-	return d->mHost->text();
- } else {
-	return QString::null;
- }
+{
+ return d->mConnect->host();
 }
 
 unsigned short int KGameConnectDialog::port() const
-{ return d->mPort->value(); }
-void KGameConnectDialog::setHost(const QString& host)
-{ d->mHost->setText(host); }
-void KGameConnectDialog::setPort(unsigned short int port)
-{ d->mPort->setValue(port); }
-void KGameConnectDialog::setDefault(int state)
-{ d->mButtonGroup->setButton(state); slotTypeChanged(state); }
-
-void KGameConnectDialog::slotTypeChanged(int t)
 {
- if (t == 0) {
-	d->mHost->setEnabled(false);
- } else if (t == 1) {
-	d->mHost->setEnabled(true);
- }
+ return d->mConnect->port();
 }
+
+void KGameConnectDialog::setHost(const QString& host)
+{
+ d->mConnect->setHost(host);
+}
+
+void KGameConnectDialog::setPort(unsigned short int port)
+{
+ d->mConnect->setPort(port);
+}
+
+void KGameConnectDialog::setDefault(int state)
+{
+ d->mConnect->setDefault(state);
+}
+
+
+
 #include "kgameconnectdialog.moc"
+

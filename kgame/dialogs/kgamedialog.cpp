@@ -261,7 +261,7 @@ void KGameDialog::slotDefault()
 void KGameDialog::slotOk()
 {
  slotApply();
- return QDialog::accept();
+ QDialog::accept();
 }
 
 void KGameDialog::setOwner(KPlayer* owner)

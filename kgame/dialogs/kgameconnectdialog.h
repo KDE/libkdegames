@@ -24,6 +24,56 @@
 #include <kdialogbase.h>
 
 class KGameConnectDialogPrivate;
+class KGameConnectWidgetPrivate;
+
+class KGameConnectWidget : public QWidget
+{
+	Q_OBJECT
+public:
+	KGameConnectWidget(QWidget* parent);
+	~KGameConnectWidget();
+
+	/**
+	 * @param host The host to connect to by default
+	 **/
+	void setHost(const QString& host);
+
+	/**
+	 * @return The host to connect to or QString::null if the user wants to
+	 * be the MASTER
+	 **/ 
+	QString host() const;
+
+	/**
+	 * @param port The port that will be shown by default
+	 **/
+	void setPort(unsigned short int port);
+
+	/**
+	 * @return The port to connect to / to listen
+	 **/
+	unsigned short int port() const;
+
+	/**
+	 * Specifies which state is the default (0 = server game; 1 = join game)
+	 * @param state The default state. 0 For a server game, 1 to join a game
+	 **/
+	void setDefault(int state);
+
+protected slots:
+	/**
+	 * The type has changed, ie the user switched between creating or
+	 * joining.
+	 **/
+	void slotTypeChanged(int);
+
+signals:
+	void signalNetworkSetup();
+
+private:
+	KGameConnectWidgetPrivate* d;
+
+};
 
 /**
  * This Dialog is used to create a game. You call initConnection(port,
@@ -78,15 +128,8 @@ public:
 	 **/
 	void setDefault(int state);
 
-protected slots:
-	/**
-	 * The type has changed, ie the user switched between creating or
-	 * joining.
-	 **/
-	void slotTypeChanged(int);
-
 signals:
-  void signalNetworkSetup();
+	void signalNetworkSetup();
 
 	
 private:
