@@ -37,6 +37,7 @@ AB: 3.x is obsolete!
 3.2 Custom Classes
 3.3 Concepts
 
+4. KGameIO (Andreas Beckermann 10.08.2001)
 
 ---------------------------------------------------------------------
 1. DEFINITIONS
@@ -291,4 +292,39 @@ changeValue() also uses send() to change the value but additionally calls
 setLocal() to create a local copy of the property. This copy now has the value
 you supplied with "=" and is deleted again as soon as any value from the network
 is received. 
+
+4. KGameIO
+----------
+The class KGameIO is used to let the players communicate with the server. You
+can plug as many KGameIO objects into a player as you want, e.g. you can plug a
+KGameMouseIO and a KGameKeyIO into a player so that you can control the player
+with the mouse and the keyboard - e.g. in a breakout game. 
+You can probably see the advantage: as most of the control stuff is common in a
+lot of games you can use the same IO class in many different games with very
+small adjustments. 
+You could also put all the IO stuff directly into your KPlayer object, like
+sendBet(int money) for a poker game. But there is a major disadvantage and I'm
+very sure you don't want to use a KPlayer object for your IO stuff as soon as
+you know which disadvantage:
+KGameIO is designed to be able to switch between different IOs "on the fly". So
+you might have a KGamePlayerIO, derived from KGameIO, for your game. But now
+this player (who "owns"/uses the KGamePlayerIO) leaves the game (e.g. because he
+was a remote player). So now the game would be over for every player as one
+player is now out of order. But with KGameIO you can just let any of the
+remaining clients create a KGameComputerIO and plug this into the player. So the
+player now is controlled by the computer and the game can continue. 
+
+Think about it! You don't have to care about removing players when a player
+leaves as you can just replace it! The same works the other way round: imagine a
+game with 10 player (e.g. 5 human and 5 computer players) that has already
+started. You cannot add any further players without restarting. So if there are
+any additional player you can just call KPlayer::removeGameIO() which removes
+the IO of a computer player and then call KPlayer::addGameIO() for the same
+player which adds a GameIO for new human player. That's all!
+
+To achieve this you just have to make sure that you make *all* of your IO
+operations through a KGameIO! So instead of using MyPlayer::sendBet(int money)
+you should use something like MyIO::sendBet(). The amount of money would
+probably be calculated by the game IO itself.
+
 

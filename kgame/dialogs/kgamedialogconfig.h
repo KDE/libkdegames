@@ -215,6 +215,9 @@ public:
 	 **/
 	virtual void setAdmin(bool admin);
 
+	void setMaxPlayersRange(int lower, int upper);
+	void setMinPlayersRange(unsigned int lower, unsigned int upper);
+
 protected slots:
 	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
 

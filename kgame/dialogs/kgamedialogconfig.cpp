@@ -227,6 +227,9 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent)
 
  d->mName = new QLineEdit(this);
  d->mTopLayout->addWidget(d->mName, 1, 0);
+
+ setMinPlayersRange(0, 20);
+ setMaxPlayersRange(-1, 20);
 }
 
 KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
@@ -236,6 +239,10 @@ void KGameDialogGeneralConfig::setMaxPlayers(int m)
 { d->mMaxPlayers->setValue(m); }
 void KGameDialogGeneralConfig::setMinPlayers(int m)
 { d->mMinPlayers->setValue(m); }
+void KGameDialogGeneralConfig::setMinPlayersRange(unsigned int lower, unsigned int upper)
+{ d->mMinPlayers->setRange(lower, upper, 1); }
+void KGameDialogGeneralConfig::setMaxPlayersRange(int lower, int upper)
+{ d->mMaxPlayers->setRange(lower, upper, 1); }
 int KGameDialogGeneralConfig::minPlayers() const
 { return d->mMinPlayers->value(); }
 int KGameDialogGeneralConfig::maxPlayers() const

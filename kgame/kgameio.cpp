@@ -316,6 +316,13 @@ KGameIO::KGameIO() : QObject(0,0)
    mPlayer=0;
 }
 
+KGameIO::KGameIO(KPlayer* player) : QObject(0,0)
+{
+   kdDebug(11001) << "CREATE(KGameIO=" << this <<") sizeof(this)"<<sizeof(KGameIO) << endl;
+   mPlayer=0;
+   initIO(player);
+}
+
 KGameIO::~KGameIO()
 {
    kdDebug(11001) << "DESTRUCT(KGameIO=" << this <<")" << endl;

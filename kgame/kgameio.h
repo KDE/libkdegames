@@ -54,6 +54,7 @@ public:
      * Constructs a KGameIO object
      */
    KGameIO();
+   KGameIO(KPlayer*);
    ~KGameIO();
 
     /**
