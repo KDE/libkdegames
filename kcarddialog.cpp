@@ -193,7 +193,7 @@ void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCar
  if (conf->readBoolEntry(CONF_RANDOMCARDDIR) || !conf->hasKey(CONF_CARDDIR)) {
 	pCardDir = getRandomCardDir();
  } else {
-	pCardDir = conf->readEntry(CONF_CARDDIR);
+	pCardDir = conf->readPathEntry(CONF_CARDDIR);
  }
  pScale = conf->readDoubleNumEntry(CONF_SCALE, 1.0);
 
@@ -667,7 +667,7 @@ void KCardDialog::loadConfig(KConfig* conf)
  }
  if (! (flags() & NoCards)) {
 	if (conf->hasKey(CONF_CARDDIR)) {
-		setCardDir(conf->readEntry(CONF_CARDDIR));
+		setCardDir(conf->readPathEntry(CONF_CARDDIR));
 	}
 
 	bool random = conf->readBoolEntry(CONF_RANDOMCARDDIR, false);
@@ -729,9 +729,9 @@ void KCardDialog::saveConfig(KConfig* conf)
 	conf->writeEntry(CONF_USEGLOBALDECK, d->globalDeck->isChecked());
  }
  if (! (flags() & NoCards)) {
-	conf->writeEntry(CONF_CARDDIR, cardDir());
-	conf->writeEntry(CONF_RANDOMCARDDIR, isRandomCardDir());
-	conf->writeEntry(CONF_USEGLOBALCARDDIR, d->globalCardDir->isChecked());
+	conf->writePathEntry(CONF_CARDDIR, cardDir());
+	conf->writePathEntry(CONF_RANDOMCARDDIR, isRandomCardDir());
+	conf->writePathEntry(CONF_USEGLOBALCARDDIR, d->globalCardDir->isChecked());
  }
  conf->writeEntry(CONF_SCALE, d->cScale);
 
@@ -754,8 +754,8 @@ void KCardDialog::slotSetGlobalCardDir()
  KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), false);
  conf->setGroup(CONF_GLOBAL_GROUP);
  
- conf->writeEntry(CONF_GLOBAL_CARDDIR, cardDir());
- conf->writeEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
+ conf->writePathEntry(CONF_GLOBAL_CARDDIR, cardDir());
+ conf->writePathEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
 
  delete conf;
 }
@@ -785,7 +785,7 @@ void KCardDialog::getGlobalCardDir(QString& dir, bool& random)
 	dir = getRandomCardDir();
 	random = true;
  } else {
-	dir = conf->readEntry(CONF_GLOBAL_CARDDIR);
+	dir = conf->readPathEntry(CONF_GLOBAL_CARDDIR);
 	random = conf->readBoolEntry(CONF_GLOBAL_RANDOMCARDDIR, false);
  }
 
