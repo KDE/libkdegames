@@ -235,7 +235,10 @@ void KChatBase::init(bool noComboBox)
  d->mAcceptMessage = true; // by default
  setMaxItems(-1); // unlimited
 
- readConfig();
+ if (kapp) {
+	// kapp might be NULL as well - in case we are in Qt designer.
+	readConfig();
+ }
 }
 
 bool KChatBase::acceptMessage() const
