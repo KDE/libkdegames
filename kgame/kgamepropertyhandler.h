@@ -29,7 +29,6 @@
 class QDataStream;
 class KGame;
 class KPlayer;
-//class KGamePropertyBase;
 
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
@@ -234,23 +233,23 @@ public:
 	 **/
 	void setPolicy(KGamePropertyBase::PropertyPolicy p, bool userspace=true);
 
-  /**
-  * Called by the KGame or KPlayer object or the handler itself to delay
-  * emmiting of signals. Lockign keeps a counter and unlock is only achieved
-  * when every lock is canceld by an unlock.
-  * While this is set signals are  quequed and only emmited after this
-  * is reset. Its deeper meaning is to prevent inconsistencies in a game
-  * load or network transfer where a emit could access a property not
-  * yet loaded or transmitted. Calling this by yourself you better know
-  * what your are doing.
-  **/
-  void lockDirectEmit();
+	/**
+	 * Called by the KGame or KPlayer object or the handler itself to delay
+	 * emmiting of signals. Lockign keeps a counter and unlock is only achieved
+	 * when every lock is canceld by an unlock.
+	 * While this is set signals are  quequed and only emmited after this
+	 * is reset. Its deeper meaning is to prevent inconsistencies in a game
+	 * load or network transfer where a emit could access a property not
+	 * yet loaded or transmitted. Calling this by yourself you better know
+	 * what your are doing.
+	 **/
+	void lockDirectEmit();
 
-  /**
-  * Removes the lock from the emitting of property signals. Corresponds to
-  * the @ref lockIndirectEmits
-  **/
-  void unlockDirectEmit();
+	/**
+	 * Removes the lock from the emitting of property signals. Corresponds to
+	 * the @ref lockIndirectEmits
+	 **/
+	void unlockDirectEmit();
   
 	/**
 	 * Returns the default policy for this property handler. All properties
