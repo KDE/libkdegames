@@ -171,6 +171,7 @@ class ConfigDialog : public KDialogBase
     void removeSlot();
     void accept();
     void slotApply() { save(); }
+    void nickNameChanged(const QString &);
 
  private:
     bool         _saved;

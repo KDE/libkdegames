@@ -379,6 +379,9 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     _nickname = new QLineEdit(page);
     connect(_nickname, SIGNAL(textChanged(const QString &)),
             SLOT(modifiedSlot()));
+    connect(_nickname, SIGNAL(textChanged(const QString &)),
+            SLOT(nickNameChanged(const QString &)));
+
     _nickname->setMaxLength(16);
     pageTop->addWidget(_nickname, 0, 1);
 
@@ -423,12 +426,19 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     }
 
     load();
+    enableButtonOK( !_nickname->text().isEmpty() );
     enableButtonApply(false);
 }
 
+void ConfigDialog::nickNameChanged(const QString &text)
+{
+    enableButtonOK( !text.isEmpty() );
+}
+
+
 void ConfigDialog::modifiedSlot()
 {
-    enableButtonApply(true);
+    enableButtonApply(true && !_nickname->text().isEmpty() );
 }
 
 void ConfigDialog::accept()
