@@ -198,60 +198,63 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  stream >> d->mUniquePlayerNumber;
 
-  d->mCurrentPlayer=0;  // TODO !!!
-  int newseed;
-  stream >> newseed;
-  d->mRandom->setSeed(newseed);
+ d->mCurrentPlayer=0;  // TODO !!!
+ int newseed;
+ stream >> newseed;
+ d->mRandom->setSeed(newseed);
 
-  // Switch off the direct emitting of signals while
-  // loading properties. This can cause inconsistencies
-  // otherwise if a property emits and this emit accesses
-  // a property not yet loaded
-  // Note we habe to have this external locking to prevent the games unlocking
-  // to access the players
-  dataHandler()->lockDirectEmit();
-  KPlayer *player;
-  for ( player=playerList()->first(); player != 0; player=playerList()->next() )
-  {
-    player->dataHandler()->lockDirectEmit();
-    // kdDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
-  }
+ // Switch off the direct emitting of signals while
+ // loading properties. This can cause inconsistencies
+ // otherwise if a property emits and this emit accesses
+ // a property not yet loaded
+ // Note we habe to have this external locking to prevent the games unlocking
+ // to access the players
+ dataHandler()->lockDirectEmit();
+ KPlayer *player;
+ for ( player=playerList()->first(); player != 0; player=playerList()->next() )
+ {
+   player->dataHandler()->lockDirectEmit();
+   // kdDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
+ }
 
-  // Properties
-  dataHandler()->load(stream);
+ // Properties
+ dataHandler()->load(stream);
 
+ // If there is additional data to be loaded before players are loaded then do
+ // this here.
+ emit signalLoadPrePlayer(stream);
 
-  // Load Playerobjects
-  uint playercount;
-  stream >> playercount;
-  kdDebug(11001) << "Loading KGame " << playercount << " KPlayer objects " << endl;
-  for (i=0;i<playercount;i++)
-  {
-    KPlayer *newplayer=loadPlayer(stream,network);
-    systemAddPlayer(newplayer);
-  }
+ // Load Playerobjects
+ uint playercount;
+ stream >> playercount;
+ kdDebug(11001) << "Loading KGame " << playercount << " KPlayer objects " << endl;
+ for (i=0;i<playercount;i++)
+ {
+   KPlayer *newplayer=loadPlayer(stream,network);
+   systemAddPlayer(newplayer);
+ }
 
-  Q_INT16 cookie;
-  stream >> cookie;
-  if (cookie==KGAME_LOAD_COOKIE) {
-    kdDebug(11001) << "   Game loaded propertly"<<endl;
-  } else {
-    kdError(11001) << "   Game loading error. probably format error"<<endl;
-  }
+ Q_INT16 cookie;
+ stream >> cookie;
+ if (cookie==KGAME_LOAD_COOKIE) {
+   kdDebug(11001) << "   Game loaded propertly"<<endl;
+ } else {
+   kdError(11001) << "   Game loading error. probably format error"<<endl;
+ }
 
-  // Switch back on the direct emitting of signals and emit the
-  // queued signals.
-  // Note we habe to have this external locking to prevent the games unlocking
-  // to access the players
-  dataHandler()->unlockDirectEmit();
-  for ( player=playerList()->first(); player != 0; player=playerList()->next() )
-  {
-    player->dataHandler()->unlockDirectEmit();
-    // kdDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
-  }
+ // Switch back on the direct emitting of signals and emit the
+ // queued signals.
+ // Note we habe to have this external locking to prevent the games unlocking
+ // to access the players
+ dataHandler()->unlockDirectEmit();
+ for ( player=playerList()->first(); player != 0; player=playerList()->next() )
+ {
+   player->dataHandler()->unlockDirectEmit();
+   // kdDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
+ }
 
-  emit signalLoad(stream);
-  return true;
+ emit signalLoad(stream);
+ return true;
 }
 
 bool KGame::save(QString filename,bool saveplayers)
@@ -288,6 +291,9 @@ bool KGame::save(QDataStream &stream,bool saveplayers)
 
  // Properties
  dataHandler()->save(stream);
+ 
+ // Save all data that need to be saved *before* the players are saved
+ emit signalSavePrePlayers(stream);
 
  if (saveplayers)
  {

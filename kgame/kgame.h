@@ -504,7 +504,23 @@ signals:
      * removed completely.
      **/
     void signalReplacePlayerIO(KPlayer* player, bool* remove);
-    
+
+    /**
+     * The game will be loaded from the given stream. Load from here
+     * the data which is NOT a game or player property.
+     * It is not necessary to use this signal for a full property game.
+     *
+     * This signal is emitted <em>before</em> the players are loaded by @ref
+     * KGame. See also @ref signalLoad
+     *
+     * You must load <em>exactly</em> the same data from the stream that you have saved
+     * in @ref signalSavePrePlayers! Otherwise player loading will not work
+     * anymore.
+     *
+     * @param stream the load stream
+     */
+    void signalLoadPrePlayers(QDataStream &stream);
+
     /**
      * The game will be loaded from the given stream. Load from here
      * the data which is NOT a game or player property.
@@ -514,6 +530,21 @@ signals:
      */
     void signalLoad(QDataStream &stream);
 
+    /**
+     * The game will be saved to the given stream. Fill this with data
+     * which is NOT a game or player property.
+     * It is not necessary to use this signal for a full property game.
+     *
+     * This signal is emitted <em>before</em> the players are saved by @ref
+     * KGame. See also @ref signalSave
+     *
+     * If you can choose between signalSavePrePlayers and @ref signalSave then
+     * better use @ref signalSave
+     *
+     * @param stream the save stream
+     **/
+    void signalSavePrePlayers(QDataStream &stream);
+    
     /**
      * The game will be saved to the given stream. Fill this with data
      * which is NOT a game or player property.
