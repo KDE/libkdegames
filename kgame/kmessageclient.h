@@ -217,6 +217,21 @@ public:
   */
   void sendForward (const QByteArray &msg, Q_UINT32 client);
 
+  /**
+    Once this function is called no message will be received anymore. @ref 
+    processIncomingMessage gets delayed unti @ref unlock is called.
+
+    Note that all messages are still received, but their delivery (like @ref 
+    broadcastReceived) get delayed only.
+   */
+  void lock();
+
+  /**
+    Deliver every message that was delayed by @ref lock and actually deliver 
+    all messages that get received from now on.
+   */
+  void unlock();
+
 signals:
   /**
     This signal is emitted when the client receives a broadcast message from the
@@ -321,6 +336,26 @@ signals:
   //class!!!)
   void serverMessageReceived (const QByteArray &msg, bool &unknown);
 
+protected:
+  /**
+    This slot is called from @ref processIncomingMessage or @ref 
+    processFirstMessage, depending on whether the client is locked or a delayed
+    message is still here (see @ref lock)
+
+    It processes the message and analyses it. If it is a broadcast or a forward message from
+    another client, it emits the signal @ref processBroadcast or @ref processForward accordingly.
+
+    If you want to treat additional server messages, you can overwrite this method. Don't
+    forget to call @ref processIncomingMessage of your suberclass!
+
+    At the moment, the following server messages are interpreted:
+
+    MSG_BROADCAST, MSG_FORWARD, ANS_CLIENT_ID, ANS_ADMIN_ID, ANS_CLIENT_LIST
+    @param msg The incoming message
+  */
+
+  virtual void processMessage (const QByteArray& msg);
+
 protected slots:
   /**
     This slot is called from the signal @ref KMessageIO::received whenever a message from the
@@ -338,6 +373,12 @@ protected slots:
     @param msg The incoming message
   */
   virtual void processIncomingMessage (const QByteArray &msg);
+
+  /**
+    Called from @ref unlock (using @ref QTimer::singleShot) until all delayed 
+    messages are delivered.
+  */
+  void processFirstMessage();
 
   /**
     This slot is called from the signal @ref KMessageIO::connectionBroken.

@@ -267,6 +267,20 @@ void KGameNetwork::setMaxClients(int max)
  d->mMessageClient->sendServerMessage(buffer);
 }
 
+void KGameNetwork::lock()
+{
+ if (messageClient()) {
+   messageClient()->lock();
+ }
+}
+
+void KGameNetwork::unlock()
+{
+ if (messageClient()) {
+   messageClient()->unlock();
+ }
+}
+
 // --------------------- send messages ---------------------------
 
 bool KGameNetwork::sendSystemMessage(int data, int msgid, Q_UINT32 receiver, Q_UINT32 sender)

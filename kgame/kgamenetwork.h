@@ -302,6 +302,19 @@ public:
      **/
     KMessageServer* messageServer() const;
 
+    /**
+     * You should call this before doing thigs like, e.g. qApp->processEvents().
+     * Don't forget to call @ref unlock once you are done!
+     * 
+     * See @ref KMessageClient::lock
+     **/
+    virtual void lock();
+    
+    /**
+     * See @ref KMessageClient::unlock
+     **/
+    virtual void unlock();
+
 signals:
     /**
      * A network error occured

@@ -43,16 +43,21 @@ public:
   Q_UINT32 adminID;
   QValueList <Q_UINT32> clientList;
   KMessageIO *connection;
+
+  bool isLocked;
+  QValueList <QByteArray> delayedMessages;
 };
 
 KMessageClient::KMessageClient (QObject *parent, const char *name)
   : QObject (parent, name)
 {
   d = new KMessageClientPrivate ();
+  d->isLocked = false;
 }
 
 KMessageClient::~KMessageClient ()
 {
+  d->delayedMessages.clear();
   delete d;
 }
 
@@ -167,6 +172,30 @@ void KMessageClient::sendForward (const QByteArray &msg, Q_UINT32 client)
 
 void KMessageClient::processIncomingMessage (const QByteArray &msg)
 {
+  if (d->isLocked)
+  {
+    d->delayedMessages.append(msg);
+    return;
+  }
+  if (d->delayedMessages.count() > 0)
+  {
+    d->delayedMessages.append (msg);
+    processMessage (*d->delayedMessages.begin());
+    d->delayedMessages.remove (d->delayedMessages.begin());
+  }
+  else
+  {
+    processMessage(msg);
+  }
+}
+
+void KMessageClient::processMessage (const QByteArray &msg)
+{
+  if (d->isLocked)
+  { // must NOT happen, since we check in processIncomingMessage as well as in processFirstMessage
+    d->delayedMessages.append(msg);
+    return;
+  }
   QBuffer in_buffer (msg);
   in_buffer.open (IO_ReadOnly);
   QDataStream in_stream (&in_buffer);
@@ -263,6 +292,21 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
     kdWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
 }
 
+void KMessageClient::processFirstMessage()
+{
+  if (d->isLocked)
+  {
+    return;
+  }
+  if (d->delayedMessages.count() == 0)
+  {
+    kdDebug(11001) << k_funcinfo << ": no messages delayed" << endl;
+    return;
+  }
+  processMessage (*d->delayedMessages.begin());
+  d->delayedMessages.remove (d->delayedMessages.begin());
+}
+
 void KMessageClient::removeBrokenConnection ()
 {
   kdDebug (11001) << k_funcinfo << ": timer single shot for removal" << endl;
@@ -292,5 +336,19 @@ void KMessageClient::disconnect ()
   d->adminID = 0;
   emit connectionBroken();
   kdDebug (11001) << k_funcinfo << ": Deleting the connection object DONE" << endl;
+}
+
+void KMessageClient::lock ()
+{
+  d->isLocked = true;
+}
+
+void KMessageClient::unlock ()
+{
+  d->isLocked = false;
+  for (unsigned int i = 0; i < d->delayedMessages.count(); i++)
+  {
+    QTimer::singleShot(0, this, SLOT(processFirstMessage()));
+  }
 }
 #include "kmessageclient.moc"
