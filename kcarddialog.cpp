@@ -803,7 +803,7 @@ void KCardDialog::init()
 #endif
 
     KGlobal::locale()->insertCatalogue("libkdegames");
-
+    _inited = true;
 }
 
 #include "kcarddialog.moc"
