@@ -34,9 +34,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include <sys/types.h>
-#include <sys/socket.h>
-
 #include <qbuffer.h>
 #include <qtimer.h>
 #include <qptrqueue.h>
@@ -453,7 +450,7 @@ bool KGame::removePlayer(KPlayer * player, Q_UINT32 receiver)
    kdDebug(11001) << "KGame::removePlayer:: sending IdRemovePlayer "<<player->id() << endl;
    sendSystemMessage(player->id(),KGameMessage::IdRemovePlayer, receiver);
  }
- return send;
+ return true;
  // we will receive the message in networkTransmission()
 }
 
