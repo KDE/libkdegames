@@ -63,6 +63,12 @@ public:
 	KGame* mGame;
 };
 
+KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
+		QWidget* parent, bool modal)
+{
+ init(g, owner);
+}
+
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
 		QWidget* parent, bool modal, long initConfigs, int chatMsgId)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply,
@@ -70,7 +76,7 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 {
  init(g, owner);
  if ((ConfigOptions)initConfigs!=NoConfig) {
-	initDefaultDialog((ConfigOptions)initConfigs,0, 0, 0, new KGameDialogChatConfig(chatMsgId, 0), 0);
+	initDefaultDialog((ConfigOptions)initConfigs, chatMsgId);
  }
 }
 
@@ -90,49 +96,45 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
  }
 }
 
-void KGameDialog::initDefaultDialog(ConfigOptions initConfigs,
-		KGameDialogGeneralConfig* conf, 
-		KGameDialogNetworkConfig* netConf, 
-		KGameDialogMsgServerConfig* msgConf,
-		KGameDialogChatConfig* chat, 
-		KGameDialogConnectionConfig* connection)
+void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 {
- if (conf) {
-	addGameConfig(conf);
- } else if (initConfigs& (ChatConfig|GameConfig) ) {
-	KGameDialogGeneralConfig* c=new KGameDialogGeneralConfig(0);
-	addGameConfig(c);
-	if (! (initConfigs&GameConfig) ) {
-		c->setEnabled(false);
-	}
+ if (initConfigs | GameConfig) {
+	addGameConfig(new KGameDialogGeneralConfig(0));
  }
- if (netConf) {
-	addNetworkConfig(netConf);
- } else if (initConfigs&NetworkConfig) {
+ if (initConfigs & NetworkConfig) {
 	addNetworkConfig(new KGameDialogNetworkConfig(0));
  }
- if (msgConf) {
-	addMsgServerConfig(msgConf);
- } else if ( initConfigs&(ClientConfig|AdminConfig) ) {
+ if (initConfigs & (ClientConfig|AdminConfig) ) {
 	addMsgServerConfig(new KGameDialogMsgServerConfig(0));
  }
- if (d->mGamePage && chat && (initConfigs&ChatConfig)) {
-	addChatWidget(chat, d->mGamePage);
+ if (initConfigs & ChatConfig) {
+	KGameDialogChatConfig * c = new KGameDialogChatConfig(chatMsgId, 0);
+	if (d->mGamePage) {
+		addChatWidget(c, d->mGamePage);
+	} else {
+		addConfigPage(c, i18n("&Chat"));
+	}
  }
- if (d->mNetworkPage && (initConfigs&BanPlayerConfig) ) {
+ if (initConfigs & BanPlayerConfig) {
 	// add the connection management system - ie the widget where the ADMIN can
 	// kick players out
-	if (connection) {
-		addConnectionList(connection, d->mNetworkPage);
+	if (d->mNetworkPage) {
+		// put it on the network page
+		addConnectionList(new KGameDialogConnectionConfig(0), d->mNetworkPage);
 	} else {
-		addConnectionList(new KGameDialogConnectionConfig, d->mNetworkPage);
+		// if no network page available put it on an own page
+		addConfigPage(new KGameDialogConnectionConfig(0), i18n("C&onnections"));
 	}
+ }
+ if (d->mNetworkPage && (initConfigs & BanPlayerConfig) ) {
  }
 }
 
 KGameDialog::~KGameDialog()
 {
 // kdDebug(11001) << "DESTRUCT KGameDialog" << this << endl;
+ d->mConfigWidgets.setAutoDelete(true);
+ d->mConfigWidgets.clear();
  delete d;
 }
 
@@ -141,17 +143,8 @@ void KGameDialog::addGameConfig(KGameDialogGeneralConfig* conf)
  if (!conf) {
 	return;
  }
-/* kdDebug(11001) << "adding game config" << endl;
- d->mGamePage = addVBoxPage(i18n("Game")); //TODO game specific
-
- QHGroupBox* b = new QHGroupBox(i18n("Game Configuration"), d->mGamePage);
- d->mGameConfig = conf;
- addConfigWidget(d->mGameConfig, b);*/
-
-// kdDebug(11001) << "adding game config" << endl;
  d->mGameConfig = conf;
  d->mGamePage = addConfigPage(d->mGameConfig, i18n("&Game"));
-// QHGroupBox* b = new QHGroupBox(i18n("Game Configuration"), d->mGamePage);
 }
 
 void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
@@ -183,7 +176,6 @@ void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, QVBox* parent)
 	kdError(11001) << "cannot add chat widget without page" << endl;
 	return;
  }
-// QHGroupBox* b = new QHGroupBox(i18n("Chat"), parent);
  addConfigWidget(chat, parent);
 }
 
@@ -199,8 +191,6 @@ void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, QVBox* paren
 	kdError(11001) << "Cannot add connection list without page" << endl;
 	return;
  }
-
-// QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), parent);
  addConfigWidget(c, parent);
 }
 

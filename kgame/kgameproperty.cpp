@@ -91,23 +91,23 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, QString
 int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, QString name)
 {
 // we don't support changing the id
- if (!owner)
- {
-   kdWarning() << "KGamePropertyBase::registerData:: Resetting owner=0. Sure you want to do this?" << endl;
-   mOwner=0;
-   return -1;
+ if (!owner) {
+	kdWarning() << "KGamePropertyBase::registerData:: Resetting owner=0. Sure you want to do this?" << endl;
+	mOwner=0;
+	return -1;
  }
- if (!mOwner)
- {
-  if (id==-1) id=owner->uniquePropertyId();
+ if (!mOwner) {
+	if (id==-1) {
+		id=owner->uniquePropertyId();
+	}
 	mId = id;
 	mOwner = owner;
 	mOwner->addProperty(this, name);
-  if (p!=PolicyUndefined) setPolicy(p);
-  else
-  {
-    setPolicy(mOwner->policy());
-  }
+	if (p!=PolicyUndefined) {
+		setPolicy(p);
+	} else {
+		setPolicy(mOwner->policy());
+	}
  }
  return mId;
 }
@@ -151,8 +151,7 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
 
 bool KGamePropertyBase::lock()
 {
- if (isLocked())
- {
+ if (isLocked()) {
 	return false;
  }
  setLock(true);
@@ -161,8 +160,7 @@ bool KGamePropertyBase::lock()
 
 bool KGamePropertyBase::unlock(bool force)
 {
- if (isLocked() && !force)
- {
+ if (isLocked() && !force) {
 	return false;
  }
  setLock(false);

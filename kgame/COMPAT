@@ -51,3 +51,5 @@
             processMessage() in slotNetworkData()
 03.11.2001  KPlayer::signalNetworkData now emits msgid-KGameMessage::IdUser just
             like KGame::signalNetworkData does
+06.11.2001  KGameDialog has some small improvements - easier and IMHO better
+            constructor code. Most code should be compatible :-)

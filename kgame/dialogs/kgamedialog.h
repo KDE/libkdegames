@@ -78,15 +78,29 @@ public:
 
 	enum ConfigOptions
 	{
-		NoConfig=0,
-		ChatConfig=1,
-		GameConfig=2,
-		NetworkConfig=4,
-		ClientConfig=8,
-		AdminConfig=16,
-		BanPlayerConfig=32,
-		AllConfig=0xffff
+		NoConfig = 0,
+		ChatConfig = 1,
+		GameConfig = 2,
+		NetworkConfig = 4,
+		ClientConfig = 8,
+		AdminConfig = 16,
+		BanPlayerConfig = 32,
+		AllConfig = 0xffff
 	};
+
+	/**
+	 * Create an empty KGameDialog. You can add widgets using @ref
+	 * addConfigPage.
+	 * @param g The @ref KGame object of this game
+	 * @param owner The @ref KPlayer object who is responsible for this
+	 * dialog, aka "the local player"
+	 * @param title The title of the dialog - see @ref KDialog::setCaption
+	 * @param parent The parent of the dialog
+	 * @param modal Whether the dialog is modal or not
+	 **/
+	KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
+			QWidget* parent, bool modal = false);
+	
 	/**
 	 * Create a KGameDialog with the standard configuration widgets. This
 	 * creates the following widgets:
@@ -103,7 +117,7 @@ public:
 	 * addConnectionList in this case.
 	 *
 	 * If you want to add further configuration widget you can simply use
-	 * @ref addConfigWidget
+	 * @ref addConfigPage
 	 * @param g The @ref KGame object of this game
 	 * @param owner The @ref KPlayer object who is responsible for this
 	 * dialog, aka "the local player"
@@ -154,19 +168,15 @@ public:
 	 **/
 	virtual void submitToKGame();
 
-
 	/**
 	 * Adds a @ref KGameChat to the dialog. If no parent is specified the
 	 * game page will be used.
-	 * @parent msgid The Chat message ID. See @ref KGameChat::KGameChat for
-	 * more information
-	 * @parent The parent of the chat widget. Note that the game page will
-	 * be used if parent is 0.
 	 * @param chat The chat widget
-	 * KGameDialogChatWidget is used.
+	 * @param parent The parent of the chat widget. This MUST be an
+	 * already added config widget. Note that the game page will be used
+	 * if parent is 0.
 	 **/
 	void addChatWidget(KGameDialogChatConfig* chat, QVBox* parent = 0);
-
 
 	/**
 	 * Add a connection list to the dialog. The list consists of a @ref
@@ -200,7 +210,16 @@ public:
 	 **/
 	QVBox *configPage(ConfigOptions which);
 
+	/**
+	 * @return The default netowrk config. Note that this always returns 0 if
+	 * you did not specify @ref NetworkConfig in the constructor!
+	 **/
 	KGameDialogNetworkConfig* networkConfig() const;
+
+	/**
+	 * @return The default game config. Note that this always returns 0 if
+	 * you did not specify @ref GameConfig in the constructor!
+	 **/
 	KGameDialogGeneralConfig* gameConfig() const;
 
 protected:
@@ -218,12 +237,11 @@ protected:
 	 * Note that if one of the widgets is NULL the default implementation
 	 * will be used! (except the chat widget - you need to create it
 	 * yourself as you have to provide a message id)
+	 * @param initConfigs The widgets to be created
+	 * @param chatMsgId The msgid for the chat config (only if specified in
+	 * initConfigs) - see @ref KGameDialogChatConfig
 	 **/
-	void initDefaultDialog(ConfigOptions initConfigs,KGameDialogGeneralConfig* conf, 
-			KGameDialogNetworkConfig* netConf, 
-			KGameDialogMsgServerConfig* msgServerConfig,
-			KGameDialogChatConfig* chat,
-			KGameDialogConnectionConfig* connection);
+	void initDefaultDialog(ConfigOptions initConfigs, int chatMsgId = 15432);
 	/**
 	 * Go through all config widgets and call their @ref
 	 * KGameDialogConfig::setKGame and @ref KGameDialogConfig::setOwner implementation
@@ -267,6 +285,8 @@ protected slots:
 
 private:
 	void init(KGame*, KPlayer*);
+
+private:
 	KGameDialogPrivate* d;
 };
 
