@@ -309,7 +309,7 @@ void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
  }
 }
 
-void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32 receiver, Q_UINT32 sender)
+void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32 , Q_UINT32 sender)
 {
  QDataStream msg(buffer, IO_ReadOnly);
  if (msgid != messageId()) {
