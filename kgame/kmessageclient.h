@@ -121,6 +121,11 @@ public:
   void setServer (KMessageServer *server);
 
   /**
+   * Corresponds to setServer(0); but also emits the connectionBroken signal
+   **/
+  void disconnect();
+
+  /**
     Connects the client to (another) server.
 
     To use this method, you have to create a @ref KMessageIO object with new (indeed you must
@@ -341,6 +346,7 @@ protected slots:
     values. To connect again to another server, use @ref setServer.
   */
   virtual void removeBrokenConnection ();
+  void removeBrokenConnection2 ();
 
 private:
   KMessageClientPrivate *d;

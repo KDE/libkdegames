@@ -71,10 +71,6 @@ void KMessageClient::setServer (KMessageServer *server)
 
 void KMessageClient::setServer (KMessageIO *connection)
 {
-// AB: TODO: check if connection was really established!
-// seems that the game is crashing if you try to connect to a server that
-// doesn't exist - probably the bug is here. For socket connections check e.g.
-// if socket == -1 and (if so) abort
   if (d->connection)
   {
     delete d->connection;
@@ -267,13 +263,33 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
 
 void KMessageClient::removeBrokenConnection ()
 {
-  kdDebug (11001) << "KMessageClient::removeBrokenConnection: Deleting the connection object" << endl;
+  kdDebug (11001) << "KMessageClient::removeBrokenConnection: timer single shot for removal" << endl;
+  // MH We cannot directly delete the socket. otherwise QSocket crashes
+  QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
+  return;
+}
+
+void KMessageClient::removeBrokenConnection2 ()
+{
+  kdDebug (11001) << "KMessageClient::removeBrokenConnection2: Deleting the connection object" << endl;
   emit connectionBroken();
 
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
-  kdDebug (11001) << "KMessageClient::removeBrokenConnection: Deleting the connection object DONE" << endl;
+  kdDebug (11001) << "KMessageClient::removeBrokenConnection2: Deleting the connection object DONE" << endl;
+}
+
+
+void KMessageClient::disconnect ()
+{
+  kdDebug (11001) << "KMessageClient::disconnect: Deleting the connection object" << endl;
+
+  delete d->connection;
+  d->connection = 0;
+  d->adminID = 0;
+  emit connectionBroken();
+  kdDebug (11001) << "KMessageClient::disconnect: Deleting the connection object DONE" << endl;
 }
 
 #include "kmessageclient.moc"
