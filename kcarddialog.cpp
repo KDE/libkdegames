@@ -26,6 +26,7 @@
 */
 
 #include <stdio.h>
+#include <assert.h>
 
 #include <qgroupbox.h>
 #include <qpushbutton.h>
@@ -34,20 +35,52 @@
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
+#include <qpixmap.h>
+#include <qmap.h>
+
 #include <kapp.h>
 #include <klocale.h>
 #include <kstddirs.h>
 #include <kiconview.h>
 #include <kimageio.h>
-#include "kcarddialog.h"
-#include <kdebug.h>
 #include <ksimpleconfig.h>
-#include <qpixmap.h>
-#include <assert.h>
+#include <kdebug.h>
+
+#include "kcarddialog.h"
 
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
 #define KCARD_DEFAULTCARD QString::fromLatin1("11.png")
 #define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards-default/")
+
+
+class KCardDialogPrivate
+{
+public:
+    KCardDialogPrivate()
+    {
+       deckLabel = 0;
+       cardLabel = 0;
+       deckIconView = 0;
+       cardIconView = 0;
+       randomDeck = 0;
+       randomCardDir = 0;
+    }
+
+    QLabel* deckLabel;
+    QLabel* cardLabel;
+    KIconView* deckIconView;
+    KIconView* cardIconView;
+    QCheckBox* randomDeck;
+    QCheckBox* randomCardDir;
+    QMap<QIconViewItem*, QString> deckMap;
+    QMap<QIconViewItem*, QString> cardMap;
+    QMap<QString, QString> helpMap;
+
+    //set query variables
+    KCardDialog::CardFlags cFlags;
+    QString cDeck;
+    QString cCardDir;
+};
 
 int KCardDialog::getCardDeck(QString &mDeck, QString &mCarddir, QWidget *mParent,
                              CardFlags mFlags, bool* mRandomDeck, bool* mRandomCardDir)
@@ -110,18 +143,19 @@ QString KCardDialog::getCardPath(const QString &carddir, int index)
     return QString::null;
 }
 
-QString KCardDialog::deck() const { return cDeck; }
-void KCardDialog::setDeck(const QString& file) { cDeck=file; }
-QString KCardDialog::cardDir() const { return cCardDir; }
-void KCardDialog::setCardDir(const QString& dir) { cCardDir=dir; }
+const QString& KCardDialog::deck() const { return d->cDeck; }
+void KCardDialog::setDeck(const QString& file) { d->cDeck=file; }
+const QString& KCardDialog::cardDir() const { return d->cCardDir; }
+void KCardDialog::setCardDir(const QString& dir) { d->cCardDir=dir; }
+KCardDialog::CardFlags KCardDialog::flags() const { return d->cFlags; }
 bool KCardDialog::isRandomDeck() const
 {
-  if (randomDeck) return randomDeck->isChecked();
+  if (d->randomDeck) return d->randomDeck->isChecked();
   else return false;
 }
 bool KCardDialog::isRandomCardDir() const
 {
-  if (randomCardDir) return randomCardDir->isChecked();
+  if (d->randomCardDir) return d->randomCardDir->isChecked();
   else return false;
 }
 
@@ -142,39 +176,39 @@ void KCardDialog::setupDialog()
     QGroupBox* grp1 = new QGroupBox(1, Horizontal, i18n("Choose backside"), plainPage());
     layout->addWidget(grp1);
 
-    deckIconView = new KIconView(grp1,"decks");
-    deckIconView->setSpacing(8);
+    d->deckIconView = new KIconView(grp1,"decks");
+    d->deckIconView->setSpacing(8);
     /*
     deckIconView->setGridX(-1);
     deckIconView->setGridY(50);
     */
-    deckIconView->setGridX(82);
-    deckIconView->setGridY(106);
-    deckIconView->setSelectionMode(QIconView::Single);
-    deckIconView->setResizeMode(QIconView::Adjust);
-    deckIconView->setMinimumWidth(360);
-    deckIconView->setMinimumHeight(170);
-    deckIconView->setWordWrapIconText(false);
-    deckIconView->showToolTips();
+    d->deckIconView->setGridX(82);
+    d->deckIconView->setGridY(106);
+    d->deckIconView->setSelectionMode(QIconView::Single);
+    d->deckIconView->setResizeMode(QIconView::Adjust);
+    d->deckIconView->setMinimumWidth(360);
+    d->deckIconView->setMinimumHeight(170);
+    d->deckIconView->setWordWrapIconText(false);
+    d->deckIconView->showToolTips();
 
     // deck select
     QVBoxLayout* l = new QVBoxLayout(layout);
     QGroupBox* grp3 = new QGroupBox(i18n("Backside"), plainPage());
     grp3->setFixedSize(100, 130);
     l->addWidget(grp3, 0, AlignTop|AlignHCenter);
-    deckLabel = new QLabel(grp3);
-    deckLabel->setText(i18n("empty"));
-    deckLabel->setAlignment(AlignHCenter|AlignVCenter);
-    deckLabel->setGeometry(10, 20, 80, 90);
+    d->deckLabel = new QLabel(grp3);
+    d->deckLabel->setText(i18n("empty"));
+    d->deckLabel->setAlignment(AlignHCenter|AlignVCenter);
+    d->deckLabel->setGeometry(10, 20, 80, 90);
 
-    randomDeck = new QCheckBox(plainPage());
-    randomDeck->setChecked(false);
-    connect(randomDeck, SIGNAL(toggled(bool)), this,
+    d->randomDeck = new QCheckBox(plainPage());
+    d->randomDeck->setChecked(false);
+    connect(d->randomDeck, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomDeckToggled(bool)));
-    randomDeck->setText(i18n("Random backside"));
-    l->addWidget(randomDeck, 0, AlignTop|AlignHCenter);
+    d->randomDeck->setText(i18n("Random backside"));
+    l->addWidget(d->randomDeck, 0, AlignTop|AlignHCenter);
 
-    connect(deckIconView,SIGNAL(clicked(QIconViewItem *)),
+    connect(d->deckIconView,SIGNAL(clicked(QIconViewItem *)),
             this,SLOT(slotDeckClicked(QIconViewItem *)));
   }
 
@@ -185,37 +219,37 @@ void KCardDialog::setupDialog()
     QGroupBox* grp2 = new QGroupBox(1, Horizontal, i18n("Choose frontside"), plainPage());
     layout->addWidget(grp2);
 
-    cardIconView =new KIconView(grp2,"cards");
+    d->cardIconView =new KIconView(grp2,"cards");
     /*
     cardIconView->setGridX(36);
     cardIconView->setGridY(50);
     */
-    cardIconView->setGridX(82);
-    cardIconView->setGridY(106);
-    cardIconView->setResizeMode(QIconView::Adjust);
-    cardIconView->setMinimumWidth(360);
-    cardIconView->setMinimumHeight(170);
-    cardIconView->setWordWrapIconText(false);
-    cardIconView->showToolTips();
+    d->cardIconView->setGridX(82);
+    d->cardIconView->setGridY(106);
+    d->cardIconView->setResizeMode(QIconView::Adjust);
+    d->cardIconView->setMinimumWidth(360);
+    d->cardIconView->setMinimumHeight(170);
+    d->cardIconView->setWordWrapIconText(false);
+    d->cardIconView->showToolTips();
 
     // Card select
     QVBoxLayout* l = new QVBoxLayout(layout);
     QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), plainPage());
     grp4->setFixedSize(100, 130);
     l->addWidget(grp4, 0, AlignTop|AlignHCenter);
-    cardLabel = new QLabel(grp4);
-    cardLabel->setText(i18n("empty"));
-    cardLabel->setAlignment(AlignHCenter|AlignVCenter);
-    cardLabel->setGeometry(10, 20, 80, 90 );
+    d->cardLabel = new QLabel(grp4);
+    d->cardLabel->setText(i18n("empty"));
+    d->cardLabel->setAlignment(AlignHCenter|AlignVCenter);
+    d->cardLabel->setGeometry(10, 20, 80, 90 );
 
-    randomCardDir = new QCheckBox(plainPage());
-    randomCardDir->setChecked(false);
-    connect(randomCardDir, SIGNAL(toggled(bool)), this,
+    d->randomCardDir = new QCheckBox(plainPage());
+    d->randomCardDir->setChecked(false);
+    connect(d->randomCardDir, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomCardDirToggled(bool)));
-    randomCardDir->setText(i18n("Random frontside"));
-    l->addWidget(randomCardDir, 0, AlignTop|AlignHCenter);
+    d->randomCardDir->setText(i18n("Random frontside"));
+    l->addWidget(d->randomCardDir, 0, AlignTop|AlignHCenter);
 
-    connect(cardIconView,SIGNAL(clicked(QIconViewItem *)),
+    connect(d->cardIconView,SIGNAL(clicked(QIconViewItem *)),
             this,SLOT(slotCardClicked(QIconViewItem *)));
   }
 
@@ -224,7 +258,7 @@ void KCardDialog::setupDialog()
   if (! (flags() & NoDeck))
   {
       insertDeckIcons();
-      deckIconView->arrangeItemsInGrid();
+      d->deckIconView->arrangeItemsInGrid();
 
       // Set default icons if given
       if (!deck().isNull())
@@ -232,8 +266,8 @@ void KCardDialog::setupDialog()
           file=deck();
           QPixmap pixmap(file);
           pixmap=pixmap.xForm(m);
-          deckLabel->setPixmap(pixmap);
-          QToolTip::add(deckLabel,helpMap[file]);
+          d->deckLabel->setPixmap(pixmap);
+          QToolTip::add(d->deckLabel,d->helpMap[file]);
       }
   }
 
@@ -241,7 +275,7 @@ void KCardDialog::setupDialog()
   if (! (flags() & NoCards))
   {
       insertCardIcons();
-      cardIconView->arrangeItemsInGrid();
+      d->cardIconView->arrangeItemsInGrid();
 
     // Set default icons if given
     if (!cardDir().isNull())
@@ -249,8 +283,8 @@ void KCardDialog::setupDialog()
         file = cardDir() + KCARD_DEFAULTCARD;
         QPixmap pixmap(file);
         pixmap = pixmap.xForm(m);
-        cardLabel->setPixmap(pixmap);
-        QToolTip::add(cardLabel,helpMap[cardDir()]);
+        d->cardLabel->setPixmap(pixmap);
+        QToolTip::add(d->cardLabel,d->helpMap[cardDir()]);
     }
   }
 
@@ -259,7 +293,7 @@ void KCardDialog::setupDialog()
 void KCardDialog::insertCardIcons()
 {
     QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop", false, true);
-    // kdDebug() << "insert " << list.count() << endl;
+    // kdDebug(11001) << "insert " << list.count() << endl;
     if (list.isEmpty())
         return;
 
@@ -280,15 +314,15 @@ void KCardDialog::insertCardIcons()
             continue;
 
         QString name=cfg.readEntry("Name", i18n("unnamed"));
-        QIconViewItem *item= new QIconViewItem(cardIconView, name, pixmap);
+        QIconViewItem *item= new QIconViewItem(d->cardIconView, name, pixmap);
 
         item->setDragEnabled(false);
         item->setDropEnabled(false);
         item->setRenameEnabled(false);
         item->setSelectable(true);
 
-        cardMap[item] = path;
-        helpMap[path] = cfg.readEntry("Comment",name);
+        d->cardMap[item] = path;
+        d->helpMap[path] = cfg.readEntry("Info",name);
     }
 }
 
@@ -315,20 +349,21 @@ void KCardDialog::insertDeckIcons()
 
         cfg.setGroup(QString::fromLatin1("KDE Cards"));
         QString name=cfg.readEntry("Name", i18n("unnamed"));
-        QIconViewItem *item= new QIconViewItem(deckIconView,name, pixmap);
+        QIconViewItem *item= new QIconViewItem(d->deckIconView,name, pixmap);
 
         item->setDragEnabled(false);
         item->setDropEnabled(false);
         item->setRenameEnabled(false);
 
-        deckMap[item] = getDeckName(*it);
-        helpMap[deckMap[item]] = cfg.readEntry("Comment",name);
+        d->deckMap[item] = getDeckName(*it);
+        d->helpMap[d->deckMap[item]] = cfg.readEntry("Info",name);
     }
 }
 
 
 KCardDialog::~KCardDialog()
 {
+ delete d;
 }
 
 
@@ -338,27 +373,26 @@ KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
 {
     KCardDialog::init();
 
-    randomDeck = 0;
-    randomCardDir = 0;
-    cFlags = mFlags;
+    d = new KCardDialogPrivate;
+    d->cFlags = mFlags;
 }
 
 void KCardDialog::slotDeckClicked(QIconViewItem *item)
 {
     if (item && item->pixmap())
     {
-        deckLabel->setPixmap(* (item->pixmap()));
-        QToolTip::add(deckLabel,helpMap[deckMap[item]]);
-        setDeck(deckMap[item]);
+        d->deckLabel->setPixmap(* (item->pixmap()));
+        QToolTip::add(d->deckLabel,d->helpMap[d->deckMap[item]]);
+        setDeck(d->deckMap[item]);
     }
 }
 void KCardDialog::slotCardClicked(QIconViewItem *item)
 {
     if (item && item->pixmap())
     {
-        cardLabel->setPixmap(* (item->pixmap()));
-        QString path = cardMap[item];
-        QToolTip::add(cardLabel,helpMap[path]);
+        d->cardLabel->setPixmap(* (item->pixmap()));
+        QString path = d->cardMap[item];
+        QToolTip::add(d->cardLabel,d->helpMap[path]);
         setCardDir(path);
     }
 }
@@ -402,33 +436,33 @@ QString KCardDialog::getRandomCardDir()
 
 void KCardDialog::showRandomDeckBox(bool s)
 {
-    if (!randomDeck)
+    if (!d->randomDeck)
 	return;
 
     if (s)
-        randomDeck->show();
+        d->randomDeck->show();
     else
-        randomDeck->hide();
+        d->randomDeck->hide();
 }
 
 void KCardDialog::showRandomCardDirBox(bool s)
 {
-    if (!randomCardDir)
+    if (!d->randomCardDir)
 	return;
 
     if (s)
-        randomCardDir->show();
+        d->randomCardDir->show();
     else
-        randomCardDir->hide();
+        d->randomCardDir->hide();
 }
 
 void KCardDialog::slotRandomDeckToggled(bool on)
 {
   if (on) {
-    deckLabel->setText("random");
+    d->deckLabel->setText("random");
     setDeck(getRandomDeck());
   } else {
-    deckLabel->setText("empty");
+    d->deckLabel->setText("empty");
     setDeck(0);
   }
 }
@@ -436,13 +470,13 @@ void KCardDialog::slotRandomDeckToggled(bool on)
 void KCardDialog::slotRandomCardDirToggled(bool on)
 {
   if (on) {
-      cardLabel->setText("random");
+      d->cardLabel->setText("random");
       setCardDir(getRandomCardDir());
       if (cardDir().length()>0 && cardDir().right(1)!=QString::fromLatin1("/"))  {
           setCardDir(cardDir() + QString::fromLatin1("/"));
       }
   } else {
-      cardLabel->setText("empty");
+      d->cardLabel->setText("empty");
       setCardDir(0);
   }
 }

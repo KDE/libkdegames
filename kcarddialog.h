@@ -24,13 +24,12 @@
 #define __KCARDDLG_H_
 
 #include <qstring.h>
-#include <qmap.h>
 #include <kdialogbase.h>
+#include <qmap.h> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
-class QCheckBox;
 class QIconViewItem;
-class QLabel;
-class KIconView;
+
+class KCardDialogPrivate;
 
 /**
  * The KCardDialog provides a dialog for interactive carddeck selection.
@@ -94,26 +93,26 @@ public:
    * Creates a modal carddeck dialog, lets the user choose a deck,
    * and returns when the dialog is closed.
    *
-   * @param mDeck a reference to the filename used as backside of the
+   * @param deck a reference to the filename used as backside of the
    *        cards. It is an absolute path and can directly be loaded as
    *        pixmap.
    *
-   * @param mCarddir a reference to the directory name used as front of the
+   * @param carddir a reference to the directory name used as front of the
    *        cards. The directory contains the card images as 1.png to 52.png
    *
-   * @param mParent an optional pointer to the parent window of the dialog
+   * @param parent an optional pointer to the parent window of the dialog
    *
-   * @param mFlags what to show
+   * @param flags what to show
    *
-   * @param mMask An optinonal filemask for the icons. Per default *.png
+   * @param mask An optinonal filemask for the icons. Per default *.png
    *        images are assumed.
    *
-   * @param mRandomDeck if this pointer is non-zero, *ok is set to TRUE if
+   * @param randomDeck if this pointer is non-zero, *ok is set to TRUE if
    *        the user wants a random deck otherwise to FALSE. Use this in the
    *        config file of your game to load a random deck on startup.
    *        See @ref getRandomDeck()
    *
-   * @param mRandomCardDir if this pointer is non-zero, *ok is set to TRUE if
+   * @param randomCardDir if this pointer is non-zero, *ok is set to TRUE if
    *        the user wants a random card otherwise to FALSE.
    *        Use this in the config file of your game to load a random card
    *        foregrounds on startup.
@@ -121,9 +120,9 @@ public:
    *
    * @return @ref #QDialog::result().
    */
-   static int getCardDeck(QString &mDeck,QString &mCarddir, QWidget *mParent=0,
-                          CardFlags mFlags=Both, bool* mRandomDeck=0,
-                          bool* mRandomCardDir=0);
+   static int getCardDeck(QString &deck,QString &carddir, QWidget *parent=0,
+                          CardFlags flags=Both, bool* randomDeck=0,
+                          bool* randomCardDir=0);
 
    /**
    * Returns the default path to the card deck backsides. You want
@@ -190,7 +189,7 @@ public:
    *
    * @return The deck
    */
-   QString deck() const;
+   const QString& deck() const;
 
    /**
    * Sets the default deck.
@@ -204,7 +203,7 @@ public:
    *
    * @return The card directory
    */
-   QString cardDir() const;
+   const QString& cardDir() const;
 
    /**
    * Sets the default card directory.
@@ -219,7 +218,7 @@ public:
    *
    * @return the flags
    */
-    CardFlags flags() const { return cFlags; }
+   CardFlags flags() const;
 
    /**
    * Creates the default widgets in the dialog. Must be called after
@@ -240,7 +239,6 @@ public:
     **/
    bool isRandomCardDir() const;
 
-    static void init();
 
 protected:
     void insertCardIcons();
@@ -255,19 +253,9 @@ protected slots:
    void slotRandomDeckToggled(bool on);
 
 private:
-    QLabel *deckLabel;
-    QLabel *cardLabel;
-    KIconView *deckIconView;
-    KIconView *cardIconView;
-    QCheckBox* randomDeck;
-    QCheckBox* randomCardDir;
-    QMap<QIconViewItem*, QString> deckMap;
-    QMap<QIconViewItem*, QString> cardMap;
-    QMap<QString,QString> helpMap;
+   static void init();
 
-    // set/query variables
-    CardFlags cFlags;
-    QString cDeck, cCardDir;
+   KCardDialogPrivate* d;
 };
 
 #endif
