@@ -47,13 +47,13 @@ public:
    * The standard menubar and toolbar actions.
    **/
     enum StdGameAction {
-        // Game Menu
+        // Game menu
         New=1, Load, Save, SaveAs, End, Highscores,
         Print, Quit,
+	// Move menu
+	Repeat, Undo, Redo, EndTurn,
 	// Settings menu
 	Carddecks
-//AB: do we need more? maybe a "move" menu with "undo", "redo" or so ?
-
     };
 
     /**
@@ -127,6 +127,33 @@ public:
      * Quit the game.
      */
     static KAction *quit(const QObject *recvr = 0, const char *slot = 0,
+                         QObject *parent = 0, const char *name = 0L );
+
+
+   
+    /**
+     * Repeat the last move.
+     **/
+    static KAction *repeat(const QObject *recvr = 0, const char *slot = 0,
+                         QObject *parent = 0, const char *name = 0L );
+
+    /**
+     * Undo the last move
+     **/
+    static KAction *undo(const QObject *recvr = 0, const char *slot = 0,
+                         QObject *parent = 0, const char *name = 0L );
+
+    /**
+     * Redo the last move (which has been undone)
+     **/
+    static KAction *redo(const QObject *recvr = 0, const char *slot = 0,
+                         QObject *parent = 0, const char *name = 0L );
+
+    /**
+     * End the current turn (not the game). Usually to let the next player
+     * start
+     **/
+    static KAction *endTurn(const QObject *recvr = 0, const char *slot = 0,
                          QObject *parent = 0, const char *name = 0L );
 
 

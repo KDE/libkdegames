@@ -174,11 +174,44 @@ KAction *KStdGameAction::quit(const QObject *recvr, const char *slot,
                        name ? name : stdName(Quit));
 }
 
+KAction *KStdGameAction::repeat(const QObject *recvr, const char *slot,
+                                                  QObject *parent, const char *name )
+{
+    return new KAction(i18n("Repeat"), /*0,*/// hm do we have a suitable icon for this?
+//                       KStdAccel::key(KStdAccel::Redo), recvr, slot, parent,
+                       0, recvr, slot, parent, // what about an accel?
+                       name ? name : stdName(Repeat));
+}
+
+KAction *KStdGameAction::undo(const QObject *recvr, const char *slot,
+                                                  QObject *parent, const char *name )
+{
+    return new KAction(i18n("Und&o"), "undo",
+                       KStdAccel::key(KStdAccel::Undo), recvr, slot, parent,
+                       name ? name : stdName(Undo));
+}
+
+KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
+                                                  QObject *parent, const char *name )
+{
+    return new KAction(i18n("Re&do"), "redo",
+                       KStdAccel::key(KStdAccel::Redo), recvr, slot, parent,
+                       name ? name : stdName(Redo));
+}
+
+KAction *KStdGameAction::endTurn(const QObject *recvr, const char *slot,
+                                                  QObject *parent, const char *name )
+{
+    return new KAction(i18n("End Turn"), 
+                       0, recvr, slot, parent,
+                       name ? name : stdName(EndTurn));
+}
+
 KAction *KStdGameAction::carddecks(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
 //AB: maybe we need an icon?
-    return new KAction(i18n("Configure &carddecks"), 
+    return new KAction(i18n("Configure &Carddecks"), 
                        0, recvr, slot, parent,
                        name ? name : stdName(Carddecks));
 }
