@@ -5,7 +5,7 @@ noinst_LTLIBRARIES = libkgame.la
 
 # compile-order doesn't matter here but maybe we will split these section soon
 
-KGAME = kgame.cpp kplayer.cpp kgamenetwork.cpp kgameproperty.cpp kgamemessage.cpp kgameio.cpp #kgameprocess.cpp 
+KGAME = kgame.cpp kplayer.cpp kgamenetwork.cpp kgameproperty.cpp kgamemessage.cpp kgameio.cpp kgameprocess.cpp 
 KGAME_H = kgame.h kplayer.h kgamenetwork.h kgameproperty.h kgamemessage.h kgameio.h kgameprocess.h 
 
 KGAME_DIALOGS = kgamedialog.cpp kgamechat.cpp kgameconnectdialog.cpp kgameerrordialog.cpp 

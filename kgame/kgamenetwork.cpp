@@ -235,9 +235,11 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, int rece
 
  KGameMessage::createHeader(stream, sender, receiver, msgid);
  stream.writeRawBytes(data.data(), data.size());
+ /*
  kdDebug(11001) << "transmitGameClientMessage msgid=" << msgid << " recv="
                 << receiver << " sender=" << sender << " Buffersize="
                 << buffer.size() << endl;
+ */
 // kdDebug(11001) << "   cookie=" << cookie() << " version="
 //    << KGameMessage::version() << endl;
 
@@ -307,7 +309,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  int receiver; // the id of the KGame/KPlayer the message is for - see KGameMessage::calcMessageId()
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
  Q_UINT32 gameid = KGameMessage::calcGameId(receiver);
- kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
+// kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
 
  // Forward to registered KGameIO clients
  KGameIO *input;

@@ -13,8 +13,12 @@
 #include <qhostaddress.h>
 #include <qobject.h>
 #include <qstring.h>
+#include <qqueue.h>
+#include <qfile.h>
 
 class QSocket;
+class KProcess;
+//class QFile;
 
 
 /**
@@ -260,5 +264,48 @@ protected:
   KMessageDirect *mPartner;
 };
 
+class KMessageProcess : public KMessageIO
+{
+  Q_OBJECT 
+
+  public:
+    KMessageProcess(QObject *parent, QString file);
+    ~KMessageProcess();
+    bool isConnected();
+    void send (const QByteArray &msg);
+    void writeToProcess();
+    
+  public slots:
+  void  slotReceivedStdout(KProcess *proc, char *buffer, int buflen);
+  void  slotReceivedStderr(KProcess *proc, char *buffer, int buflen);
+  void  slotProcessExited(KProcess *p);
+  void  slotWroteStdin(KProcess *p);
+
+  private:
+    QString mProcessName;
+    KProcess *mProcess;
+    QQueue <QByteArray> mQueue;
+    QByteArray *mSendBuffer;
+    QByteArray mReceiveBuffer;
+    unsigned int mReceiveCount;
+};
+
+class KMessageFilePipe : public KMessageIO
+{
+  Q_OBJECT 
+
+  public:
+    KMessageFilePipe(QObject *parent,QFile *readFile,QFile *writeFile);
+    ~KMessageFilePipe();
+    bool isConnected();
+    void send (const QByteArray &msg);
+    void exec();
+
+  private:
+    QFile *mReadFile;
+    QFile *mWriteFile;
+    QByteArray mReceiveBuffer;
+    unsigned int mReceiveCount;
+};
 
 #endif

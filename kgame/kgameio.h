@@ -77,6 +77,12 @@ public:
     */
    void setPlayer(KPlayer *p) {mPlayer=p;}
 
+   /** 
+    * Init this device by setting the player and e.g. sending an
+    * init message to the device
+    */
+   virtual void initIO(KPlayer *p);
+
    /**
     * Message to clients. Needs to be overwritten to be
     * of use.
@@ -137,7 +143,7 @@ public:
      *
      * @return KeyIO
      */
-    virtual int rtti() const;
+    int rtti() const;
 
 signals:
       // calulate move message from mouse event
@@ -162,7 +168,7 @@ signals:
       void signalKeyEvent(KGameIO *,QDataStream &stream,QKeyEvent *m,bool &eatevent);
 
 protected:
-  virtual bool eventFilter( QObject *o, QEvent *e );
+       bool eventFilter( QObject *o, QEvent *e );
 };
 
 /**
@@ -194,7 +200,7 @@ public:
      *
      * @return MouseIO
      */
-    virtual int rtti() const; 
+    int rtti() const; 
 
 signals:
       // calulate move message from mouse event
@@ -220,7 +226,7 @@ signals:
       void signalMouseEvent(KGameIO *,QDataStream &stream,QMouseEvent *m,bool &eatevent);
 
 protected:
-  virtual bool eventFilter( QObject *o, QEvent *e );
+      bool eventFilter( QObject *o, QEvent *e );
 
 };
 
@@ -245,50 +251,26 @@ public:
      */
     KGameProcessIO(const QString& name);
     ~KGameProcessIO();
-    /**
-     * Returns whether the process is still running
-     *
-     * @return true/false
-     */
-    bool isRunning();
 
     /**
      * The idendification of the IO
      *
      * @return ProcessIO
      */
-    virtual int rtti() const;
+    int rtti() const;
+    
+    /**
+     * forward a message from the game to the process.
+     */
+    void receiveMessage(QDataStream &stream,int msgid, int receiver, int sender);
+    void receiveSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
+    void receiveAllMessage(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
+
     /** 
-     * The internal sleep time 
+     * Init this device by setting the player and e.g. sending an
+     * init message to the device
      */
-    unsigned long sleepTime() const {return mSleep;}
-    /**
-     * Change the internal sleep time which is used
-     * to wait for communication events
-     */
-    void  setSleepTime(unsigned long t) {mSleep=t;}
-    /**
-     * forward a message from the game to the process. Do not
-     * call directly. Use @ref sendProcess instead.
-     */
-    virtual void receiveMessage(QDataStream &stream,int msgid, int receiver, int sender);
-    virtual void receiveSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
-    virtual void receiveAllMessage(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
-
-    /**
-     * Sends a message to the process. Cookie needs to be the application cookie
-     * (or 4242 as generic one...).
-     *
-     * @param stream is the message
-     * @param msgid   is the message id
-     * @param receiver is the receiver and does not really matter
-     * @param sender  is the sender of the message and does not really matter
-     * @param sender  is the sender of the message and does not really matter
-     * @param cookie is the application cookie and does not really matter
-     *
-     */ 
-    bool sendProcess(const QDataStream &stream,int msgid,int receiver=0,int sender=0);
-
+    void initIO(KPlayer *p);
 
     /**
      *  Notifies the IO device that the player's setTurn had been called
@@ -296,18 +278,16 @@ public:
      *
      *  @param turn is true/false
      */
-    virtual void notifyTurn(bool b);
+    void notifyTurn(bool b);
 
-public slots:
-  void  slotReceivedStdout(KProcess *proc, char *buffer, int buflen);
-  void  slotReceivedStderr(KProcess *proc, char *buffer, int buflen);
-  void  slotProcessExited(KProcess *p);
-  void  slotWroteStdin(KProcess *p);
 
     /**
      * forward to the computer player. Needs to be improved 
      */
   //virtual bool SendIOMessage(QDataStream &msg,int cmd=0); // msg to client
+  protected slots:
+    void clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv);
+
   
 signals:
   /**
@@ -349,15 +329,8 @@ signals:
 
 
 protected:
-  void Exit();
-  bool Init();
-    /**
-     * write the collected buffers to stdout
-     */
-    bool writeBuffers();
 
 private:
-  unsigned long mSleep;
 
   KGameProcessIOPrivate* d;
 };
@@ -379,14 +352,14 @@ public:
      */
     KGameComputerIO();
     ~KGameComputerIO();
-    virtual int rtti() const;
+    int rtti() const;
     /**
      *  Notifies the IO device that the player's setTurn had been called
      *  Called by KPlayer
      *
      *  @param turn is true/false
      */
-    virtual void notifyTurn(bool b);
+    void notifyTurn(bool b);
 
 public slots:
   

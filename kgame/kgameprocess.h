@@ -29,9 +29,15 @@
 #include <qstring.h>
 #include <qobject.h>
 #include <kgameproperty.h>
+#include <qfile.h>
+#include <krandomsequence.h>
 
 //class KGameClientProcess;
 class KPlayer;
+class KMessageClient;
+class KMessageServer;
+class KMessageFilePipe;
+//class KRandomSequence;
 
 /**
  * This is the process class used on the computer player
@@ -77,23 +83,21 @@ class KGameProcess:  public QObject
      */
     void setTerminate(bool b) {mTerminate=b;}
     /**
-     * returns the sleep time used in the event loop
-     *
-     * @return the sleep time
-     */
-    unsigned long sleepTime() const {return mSleep;}
-    /**
-     * Sets the sleep time used in the event loop
-     *
-     * @param t the sleep time
-     */
-    void setSleepTime(unsigned long t) {mSleep=t;}
-
-    /**
      * Sends a message to the network
      * @param the QDataStream containing the message
      */
     void sendMessage(QDataStream &stream,int msgid,int receiver=0);
+    /**
+     * Sends a system message to the network
+     * @param the QDataStream containing the message
+     */
+    void sendSystemMessage(QDataStream &stream,int msgid,int receiver=0);
+    /**
+     * Returns a pointer to the game's @ref KRandomSequence. This sequence is
+     * identical for all network players!
+     * @return @ref KRandomSequence pointer
+     */
+    KRandomSequence *random() {return mRandom;}
 
   protected:
     /**
@@ -102,10 +106,8 @@ class KGameProcess:  public QObject
      */
     void processArgs(int argc, char *argv[]);
 
-    /**
-     * Processes the incoming message and produces the signals
-     */
-    bool processInput();
+  protected slots:
+      void receivedMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID);
 
   signals:
     /**
@@ -127,14 +129,19 @@ class KGameProcess:  public QObject
      * @param inputStream the incoming data stream
      * @param outputStream the outgoing data stream for the move
      */
-    void signalReceivedCommand(QDataStream &inputStream,int msgid,int receiver,int sender);
+     void signalCommand(QDataStream &inputStream,int msgid,int receiver,int sender);
 
 
 
     
   protected:
     bool mTerminate;
-    unsigned long mSleep;
-    //KGameClientProcess *mClient;
+    KMessageFilePipe *mMessageIO;
+    KMessageClient *mMessageClient;
+    KMessageServer *mMessageServer;
+  private:
+    QFile rFile;
+    QFile wFile;
+    KRandomSequence* mRandom;
 };
 #endif

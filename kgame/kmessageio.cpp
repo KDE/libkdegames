@@ -9,6 +9,8 @@
 #include "kmessageio.h"
 #include <qsocket.h>
 #include <kdebug.h>
+#include <kprocess.h>
+#include <qfile.h>
 
 // ----------------------- KMessageIO -------------------------
 
@@ -188,5 +190,259 @@ void KMessageDirect::send (const QByteArray &msg)
     kdError(11001) << "KMessageDirect::send: Not yet connected!" << endl;
 }
 
+
+// ----------------------- KMessageProcess ---------------------------
+
+KMessageProcess::~KMessageProcess()
+{
+  kdDebug() << "@@@KMessageProcess::Delete process" << endl;
+  if (mProcess)
+  {
+    mProcess->kill();
+    delete mProcess;
+    mProcess=0;
+    // Remove not send buffers
+    mQueue.setAutoDelete(true);
+    mQueue.clear();
+    // Maybe todo: delete mSendBuffer
+  }
+}
+KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(parent,0)
+{
+  // Start process
+  kdDebug() << "@@@KMessageProcess::Start process" << endl;
+  mProcessName=file;
+  mProcess=new KProcess;
+  int id=0;
+  *mProcess << mProcessName << QString("%1").arg(id);
+  kdDebug(11001) << "@@@KMessageProcess::Init:Id= " << id << endl;
+  kdDebug(11001) << "@@@KMessgeProcess::Init:Processname: " << mProcessName << endl;
+  connect(mProcess, SIGNAL(receivedStdout(KProcess *, char *, int )),
+                        this, SLOT(slotReceivedStdout(KProcess *, char * , int )));
+  connect(mProcess, SIGNAL(receivedStderr(KProcess *, char *, int )),
+                        this, SLOT(slotReceivedStderr(KProcess *, char * , int )));
+  connect(mProcess, SIGNAL(processExited(KProcess *)),
+                        this, SLOT(slotProcessExited(KProcess *)));
+  connect(mProcess, SIGNAL(wroteStdin(KProcess *)),
+                        this, SLOT(slotWroteStdin(KProcess *)));
+  mProcess->start(KProcess::NotifyOnExit,KProcess::All);
+  mSendBuffer=0;
+  mReceiveCount=0;
+  mReceiveBuffer.resize(1024);
+}
+bool KMessageProcess::isConnected()
+{
+  kdDebug() << "@@@KMessageProcess::Is conencted" << endl;
+  if (!mProcess) return false;
+  return mProcess->isRunning();
+}
+void KMessageProcess::send(const QByteArray &msg)
+{
+  kdDebug() << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process" << endl;
+  unsigned int size=msg.size()+2*sizeof(long);
+
+  char *tmpbuffer=new char[size];
+  long *p1=(long *)tmpbuffer;
+  long *p2=p1+1;
+  kdDebug()  << "p1="<<p1 << "p2="<< p2 << endl;
+  memcpy(tmpbuffer+2*sizeof(long),msg.data(),msg.size());
+  *p1=0x4242aeae;
+  *p2=size;
+  
+  QByteArray *buffer=new QByteArray();
+  buffer->assign(tmpbuffer,size);
+  // buffer->duplicate(msg);
+  mQueue.enqueue(buffer);
+  writeToProcess(); 
+}
+void KMessageProcess::writeToProcess()
+{
+  // Previous send ok and item in queue
+  if (mSendBuffer || mQueue.isEmpty()) return ;
+  mSendBuffer=mQueue.dequeue();
+  if (!mSendBuffer) return ;
+
+  // write it out to the process
+  //kdDebug() << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
+  char *p=mSendBuffer->data();
+  //for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
+  mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());
+
+}
+void KMessageProcess::slotWroteStdin(KProcess * )
+{
+  kdDebug(11001)<<"@@@@ KMessageProcess::slotWroteStdin" << endl;
+  if (mSendBuffer)
+  {
+    delete mSendBuffer;
+    mSendBuffer=0;
+  }
+  writeToProcess();
+}
+
+void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int buflen)
+{
+  int pid=0;
+  int len;
+  char *p;
+  char *pos;
+//  kdDebug(11001)<<"############# Got stderr " << buflen << " bytes" << endl;
+
+  if (!buffer || buflen==0) return ; 
+  if (proc) pid=proc->pid();
+
+
+  pos=buffer;
+  do
+  {
+    p=(char *)memchr(pos,'\n',buflen);
+    if (!p) len=buflen;
+    else len=p-pos;
+
+    QByteArray a;
+    a.setRawData(pos,len);
+    QString s(a);
+    kdDebug(11001) << "PID" <<pid<< ":" << s << endl;
+    a.resetRawData(pos,len);
+    if (p) pos=p+1;
+    buflen-=len+1;
+  }while(buflen>0);
+}
+
+
+void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
+{
+  kdDebug(11001) << "$$$$$$ KMessageProcess::SLOTReceivedStdout::Received " << buflen << " bytes over inter process communication" << endl;
+
+  // TODO Make a plausibility check on buflen to avoid memory overflow
+  while (mReceiveCount+buflen>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
+  memcpy(mReceiveBuffer.data()+mReceiveCount,buffer,buflen);
+  mReceiveCount+=buflen;
+
+  // Possbile message
+  while (mReceiveCount>2*sizeof(long))
+  {
+    long *p1=(long *)mReceiveBuffer.data();
+    long *p2=p1+1;
+    unsigned int len;
+    if (*p1!=0x4242aeae)
+    {
+      kdDebug(11001) << "KMessageProcess::slotReceivedStdout:: Cookie error...transmission failure...serious problem..." << endl;
+//      for (int i=0;i<mReceiveCount;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
+    }
+    len=(int)(*p2);
+    if (len<2*sizeof(long))
+    {
+      kdDebug(11001) << "KMessageProcess::slotReceivedStdout:: Message size error" << endl;
+      break;
+    }
+    if (len<=mReceiveCount)
+    {
+      kdDebug(11001) << "KMessageProcess::Got message with len " << len << endl;
+
+      QByteArray msg;
+      msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+      emit received(msg);
+      msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+      // Shift buffer
+      if (len<mReceiveCount)
+      {
+        memmove(mReceiveBuffer.data(),mReceiveBuffer.data()+len,mReceiveCount-len);
+      }
+      mReceiveCount-=len;
+    }
+    else break;
+  }
+}
+
+void KMessageProcess::slotProcessExited(KProcess * /*p*/)
+{
+  kdDebug(11001) << "Process exited (slot)" << endl;
+  emit connectionBroken();
+  delete mProcess;
+  mProcess=0;
+}
+
+
+// ----------------------- KMessageFilePipe ---------------------------
+KMessageFilePipe::KMessageFilePipe(QObject *parent,QFile *readfile,QFile *writefile) : KMessageIO(parent,0)
+{
+  mReadFile=readfile;
+  mWriteFile=writefile;
+  mReceiveCount=0;
+  mReceiveBuffer.resize(1024);
+}
+
+KMessageFilePipe::~KMessageFilePipe()
+{
+}
+
+bool KMessageFilePipe::isConnected ()
+{
+  return (mReadFile!=0)&&(mWriteFile!=0);
+}
+
+void KMessageFilePipe::send(const QByteArray &msg)
+{
+  unsigned int size=msg.size()+2*sizeof(long);
+
+  char *tmpbuffer=new char[size];
+  long *p1=(long *)tmpbuffer;
+  long *p2=p1+1;
+  memcpy(tmpbuffer+2*sizeof(long),msg.data(),msg.size());
+  *p1=0x4242aeae;
+  *p2=size;
+  
+  QByteArray buffer;
+  buffer.assign(tmpbuffer,size);
+  mWriteFile->writeBlock(buffer);
+  mWriteFile->flush();
+  /*
+  fprintf(stderr,"+++ KMessageFilePipe:: SEND(%d to parent) realsize=%d\n",msg.size(),buffer.size());
+  for (int i=0;i<buffer.size();i++) fprintf(stderr,"%02x ",buffer[i]);fprintf(stderr,"\n");
+  fflush(stderr);
+  */
+}
+
+void KMessageFilePipe::exec()
+{
+
+  while(mReadFile->atEnd()) { usleep(100); }
+
+   int ch=mReadFile->getch();
+
+   while (mReceiveCount>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
+   mReceiveBuffer[mReceiveCount]=(char)ch;
+   mReceiveCount++;
+
+   // Change for message 
+   if (mReceiveCount>=2*sizeof(long))
+   {
+     long *p1=(long *)mReceiveBuffer.data();
+     long *p2=p1+1;
+     unsigned int len;
+     if (*p1!=0x4242aeae)
+     {
+       fprintf(stderr,"KMessageFilePipe::exec:: Cookie error...transmission failure...serious problem...\n");
+//       for (int i=0;i<16;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
+     }
+     len=(int)(*p2);
+     if (len==mReceiveCount)
+     {
+       //fprintf(stderr,"KMessageFilePipe::exec:: Got Message with len %d\n",len);
+
+       QByteArray msg;
+       msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+       emit received(msg);
+       msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+       mReceiveCount=0;
+     }
+   }
+   
+
+   return ;
+
+  
+}
 #include "kmessageio.moc"
 

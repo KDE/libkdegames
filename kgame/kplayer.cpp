@@ -142,9 +142,13 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
   // this function is called twice (on sender side) - once with transmit = true
   // where it sends the input to the comserver and once with transmit = false
   // where it really looks at the input
-  if (transmit) {
+  if (transmit)
+  {
+    kdDebug() << "indirect playerInput" << endl;
     return game()->sendPlayerInput(msg,this,sender);
-  } else {
+  } else
+  {
+    kdDebug() << "direct playerInput" << endl;
     return game()->playerInput(msg,this,sender);
   }
 }
@@ -215,7 +219,8 @@ bool KPlayer::addGameIO(KGameIO *input)
 {
   if (!input) return false;
   mInputList.append(input); 
-  input->setPlayer(this);
+  input->initIO(this); // set player and init device
+  // input->setPlayer(this);
   return true;
 }
 

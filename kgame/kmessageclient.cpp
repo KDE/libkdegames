@@ -7,6 +7,7 @@
 ***************************************************************************/
 
 #include <kdebug.h>
+#include <stdio.h>
 
 #include <qbuffer.h>
 
@@ -156,6 +157,7 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
   in_buffer.open (IO_ReadOnly);
   QDataStream in_stream (&in_buffer);
 
+
   bool unknown = false;
 
   Q_UINT32 messageID;
@@ -175,7 +177,9 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
         Q_UINT32 clientID;
         QValueList <Q_UINT32> receivers;
         in_stream >> clientID >> receivers;
+        kdDebug() << "********** KMEssageCLIENT forwardRecevied to emit" <<endl;
         emit forwardReceived (in_buffer.readAll(), clientID, receivers);
+        kdDebug() << "********** KMEssageCLIENT forwardRecevied emitted" <<endl;
       }
       break;
 

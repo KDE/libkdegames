@@ -112,6 +112,7 @@ class KGameMessage
 // to-be-categorized
     IdError=100,            // an error occured
     IdPlayerInput=101,      // a player input occured
+    IdIOAdded=102,          // KGameIO got added to a player...init this IO
 
 // special ids for computer player
     IdProcessQuery=220,     // Process queries data (process only)

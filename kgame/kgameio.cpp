@@ -38,31 +38,31 @@
 
 #include <kdebug.h>
 #include <ksock.h>
-#include <kprocess.h>
 
 #include "kgameio.h"
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
+#include "kmessageserver.h"
+#include "kmessageclient.h"
+#include "kmessageio.h"
 
 
 //#define READ_BUFFER_SIZE   1024   // and automatically multiples
 
+// ----------------------- KGameProcesPrivate ---------------------------
 class KGameProcessIOPrivate
 {
 public:
   KGameProcessIOPrivate()
   {
-    mProcess = 0;
-    mCanWriteBuffer = 0;
-
-    mCanWrite = false;
+    mMessageServer = 0;
+    mMessageClient = 0;
+    mProcessIO=0;
   }
-  
-  KProcess* mProcess;
-  QString mProcessName;
-  bool mCanWrite;
-  char* mCanWriteBuffer;
+  KMessageServer *mMessageServer;
+  KMessageClient *mMessageClient;
+  KMessageProcess *mProcessIO;
 };
 
 // ----------------------- Process IO ---------------------------
@@ -72,150 +72,56 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   kdDebug(11001) << "CREATE KGameProcessIO ("<<this<<") sizeof(this)="<<sizeof(KGameProcessIO)<<endl;
   d = new KGameProcessIOPrivate;
 
-  d->mProcessName=name;
-  mSleep = 100;
+  kdDebug(11001) << "================= KMEssageServer ==================== " << endl;
+  d->mMessageServer=new KMessageServer(0,this);
+  kdDebug(11001) << "================= KMEssageClient ==================== " << endl;
+  d->mMessageClient=new KMessageClient(this);
+  kdDebug(11001) << "================= KMEssageProcessIO ==================== " << endl;
+  d->mProcessIO=new KMessageProcess(this,name);
+  kdDebug(11001) << "================= KMEssage Add client ==================== " << endl;
+  d->mMessageServer->addClient(d->mProcessIO);
+  kdDebug(11001) << "================= KMEssage SetSErver ==================== " << endl;
+  d->mMessageClient->setServer(d->mMessageServer);
+  kdDebug(11001) << "================= KMEssage: Connect ==================== " << endl;
+  //connect(d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
+  //        this, SLOT(clientMessage(const QByteArray&, Q_UINT32)));
+  connect(d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)),
+          this, SLOT(clientMessage(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)));
+  kdDebug() << "Our client is id="<<d->mMessageClient->id() << endl;
+
 
 }
 
 int KGameProcessIO::rtti() const { return ProcessIO; }
-
-void KGameProcessIO::Exit()
-{
-  kdDebug(11001) << " KGameProcessIO::Exit" << endl;
-  if (d->mProcess)
-  {
-    d->mProcess->kill();
-    delete d->mProcess;
-    d->mProcess=(KProcess *)0;
-  }
-}
-
-bool KGameProcessIO::isRunning()
-{
-  if (!d->mProcess) return false;
-  return d->mProcess->isRunning();
-}
 
 KGameProcessIO::~KGameProcessIO()
 {
   kdDebug(11001) << "DESTRUCT (KGameProcessIO="<<this<<")"<<endl;
   kdDebug(11001) << "player="<<player() << endl;
   if (player()) player()->removeGameIO(this); 
-  if (player() && player()->game()) player()->game()->unregisterListener(this);
-  Exit();
-  // unregister ourselves
-  //delete readBuffer;
+  if (d->mMessageServer) 
+  {
+    delete d->mMessageServer;
+    d->mMessageServer=0;
+  }
+  if (d->mMessageClient) 
+  {
+    delete d->mMessageClient;
+    d->mMessageClient=0;
+  }
   delete d;
 }
 
-bool KGameProcessIO::Init()
+
+void KGameProcessIO::initIO(KPlayer *p)
 {
-  Exit();
-  d->mProcess=new KProcess;
-  int id=0;
-  int cookie=0;
-  if (player()) id=player()->id();
-  if (player() && player()->game()) cookie=player()->game()->cookie();
-  *d->mProcess << d->mProcessName << QString("%1").arg(id) << QString("%1").arg(cookie);
-  kdDebug(11001) << "--------->>>KGameProcessIO::Init:Id= " << id << " Cookie="<<cookie << endl;
-  kdDebug(11001) << "--------->>>KGameProcessIO::Init:Processname: " << d->mProcessName << endl;
-  connect(d->mProcess, SIGNAL(receivedStdout(KProcess *, char *, int )),
-                        this, SLOT(slotReceivedStdout(KProcess *, char * , int )));
-  connect(d->mProcess, SIGNAL(receivedStderr(KProcess *, char *, int )),
-                        this, SLOT(slotReceivedStderr(KProcess *, char * , int )));
-  connect(d->mProcess, SIGNAL(processExited(KProcess *)),
-                        this, SLOT(slotProcessExited(KProcess *)));
-  connect(d->mProcess, SIGNAL(wroteStdin(KProcess *)),
-                        this, SLOT(slotWroteStdin(KProcess *)));
-  d->mCanWrite=true;
+  setPlayer(p);
+  // Send 'hello' to process
+  QByteArray buffer;
+  QDataStream stream(buffer,IO_WriteOnly);
+  stream << ((int)42);
 
-  bool result=d->mProcess->start(KProcess::NotifyOnExit,KProcess::All);
-  return result;
-}
-
-
-
-void KGameProcessIO::slotWroteStdin(KProcess * )
-{/*
-//  kdDebug(11001)<<"!!!! KGameProcessIO::slotWroteStdin" << endl;
-  d->mCanWrite=true;
-  mClient->deleteDelayedBuffers();
-  writeBuffers();*/
-}
-
-void KGameProcessIO::slotReceivedStderr(KProcess * proc, char *buffer, int buflen)
-{
-  int pid=0;
-  int len;
-  char *p;
-  char *pos;
-  if (!buffer || buflen==0) return ; 
-  if (proc) pid=proc->pid();
-
-  //kdDebug(11001)<<" Got stderr " << buflen << " bytes" << endl;
-
-  pos=buffer;
-  do
-  {
-    p=(char *)memchr(pos,'\n',buflen);
-    if (!p) len=buflen;
-    else len=p-pos;
-
-    QByteArray a;
-    a.setRawData(pos,len);
-    QString s(a);
-    kdDebug(11001) << "PID" <<pid<< ":" << s << endl;
-    a.resetRawData(pos,len);
-    if (p) pos=p+1;
-    buflen-=len+1;
-  }while(buflen>0);
-
-}
-
-
-void KGameProcessIO::slotReceivedStdout(KProcess * , char *buffer, int buflen)
-{
- kdDebug(11001) << "KGameProcessIO::slotReceivedStdout::Received " << buflen << " bytes over inter process communication" << endl;
-
- /*
- for (QByteArray* a = mClient->readBuffer(); a; a = mClient->readBuffer()) {
-	QDataStream stream(*a,IO_ReadOnly);
-	int xcookie;
-	int  xversion;
-	int msgid; 
-	int sender;
-	int receiver;
-	KGameMessage::extractHeader(stream,xcookie,xversion,sender,receiver,msgid);
-	QBuffer *device=(QBuffer *)stream.device();
-
-	kdDebug(11001) << "************* Got process message with cookie=" << xcookie << " version=" << xversion << endl;
-	kdDebug(11001) << "   sender =" << sender << " receiver=" << receiver << endl;
-	kdDebug(11001) << "   msgid="<< msgid <<endl;
-
-	QByteArray b;
-	b.setRawData(a->data() + device->at(), a->size() - device->at());
-	QDataStream ostream(b,IO_ReadOnly);
-
-	// This is a dummy message which allows us the process to talk with its owner
-	if (msgid==KGameMessage::IdProcessQuery) {
-		emit signalProcessQuery(stream,this);
-	} else if (player()) {
-		sender=KGameMessage::calcMessageId(0,player()->id());  // force correct sender
-		if (msgid==KGameMessage::IdPlayerInput) {
-			player()->forwardInput(ostream,true,sender);
-		} else {
-			player()->forwardMessage(ostream,msgid,receiver,sender);
-		}
-	}
-	delete a;
- }
- */
-}
-
-void KGameProcessIO::slotProcessExited(KProcess * /*p*/)
-{
-  kdDebug(11001) << "Process exited (slot)" << endl;
-  emit signalProcessExited(this);
+  if (p) receiveSystemMessage(stream,KGameMessage::IdIOAdded,0,KGameMessage::calcMessageId(0,p->id()));
 }
 
 void KGameProcessIO::receiveSystemMessage(QDataStream &stream,int msgid, int receiver, int sender)
@@ -228,7 +134,6 @@ void KGameProcessIO::receiveMessage(QDataStream &stream,int msgid, int receiver,
   receiveAllMessage(stream, msgid, receiver, sender, true);
 }
 
-// unused... can be removed .... MH
 void KGameProcessIO::receiveAllMessage(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg)
 {
   kdDebug(11001) << "==============>  KGameProcessIO::receiveMessage (usermsg="<<usermsg<<")" << endl;
@@ -238,103 +143,17 @@ void KGameProcessIO::receiveAllMessage(QDataStream &stream,int msgid, int receiv
 
   if (usermsg) msgid+=KGameMessage::IdUser;
 
-  kdDebug(11001) << "============= ProcessIO Network SNOOP    (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
+  kdDebug(11001) << "============= ProcessIO (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
 
-  if (sender==KGameMessage::calcMessageId(0,player()->id()))
-  {
-    kdDebug(11001) << "  -> ignoring message from ourselves sender="<<sender << " player->id="<<player()->id() << endl;
-    return ;
-  }
-
-  bool killit=false;
-  emit signalProcessIOMessage((int)msgid,killit);
-  if (killit)
-  {
-    kdDebug(11001) << "  -> ignoring message as requested by signal" << endl;
-    return ;
-  }
-//  sendProcess(stream,msgid,receiver,sender,xcookie);//AB: sorry, broken :-( do
-//  really all these functions need the cookie as a parameter ? NO
-}
-
-bool KGameProcessIO::sendProcess(const QDataStream &stream,int msgid,int receiver,int sender)
-{
-  if (!isRunning())
-  {
-    if (!Init()) 
-    {
-      return false;
-    }
-  }
   QByteArray buffer;
   QDataStream ostream(buffer,IO_WriteOnly);
   QBuffer *device=(QBuffer *)stream.device();
   QByteArray data=device->buffer();;
   
-  //receiver=player()->id();
   KGameMessage::createHeader(ostream,sender,receiver,msgid);
   ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
-  /*
-  mClient->sendMessage(buffer);
-  */
-  writeBuffers();
-  return true;
-}
-
-
-bool KGameProcessIO::writeBuffers()
-{//AB FIXME: KGameClient has changed! use KGameProcess - this function has to be ported!!
-
-  int timeout;
-  bool result=false;
-  //kdDebug(11001) << "==============>  KGameProcessIO::writeBuffers:Process running=" << isRunning() << "canWRite="<<d->mCanWrite << endl;
-  /*
-  if (!isRunning())
-  {
-    if (!Init()) 
-    {
-      return false;
-    }
-  }
-  if (!d->mProcess || !mClient || !mClient->transmit()) 
-  {
-    return false;
-  }
-  */
-  /*//AB FIXME: must be ported
-  kdDebug(11001) << "KGameProcessIO::writeBuffers:Process running= " << isRunning() << " pid=" << d->mProcess->pid() << endl;
-
-  // Delay writing
-  if (!d->mCanWrite) 
-  {
-    return false;
-  }
-
-  timeout=10;
-
-  QByteArray *buffer;
-  buffer=mClient->getBuffer();
-  if (!buffer) kdDebug(11001)<< " No buffer found to send to process"<<endl;
-  if (buffer && buffer->size()>0)
-  {
-    do
-    {
-      result=d->mProcess->writeStdin(buffer->data(),buffer->size());
-      d->mCanWrite=false; // we have to wait until we are clear for writing again
-      //kdDebug(11001) << "result="<<result << "timeout="<< timeout <<" running="<< d->mProcess->isRunning() <<endl;
-      if (!result)
-      {
-        timeout--;
-        usleep(mSleep); 
-      }
-    }while(!result && timeout>0);
-  }
-  else kdWarning(11001) << "   processWrite no buffer (data) found" << endl;
-  // mClient->sendBufferList.clear();
-  //if (buffer) mClient->sendBufferList.remove(buffer);
-  if (buffer) mClient->delayDeleteBuffer(buffer);
-  */
-  return result;
+  kdDebug() << "Our client is id="<<d->mMessageClient->id() << endl;
+  if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
 }
 
 void KGameProcessIO::notifyTurn(bool b) 
@@ -345,8 +164,43 @@ void KGameProcessIO::notifyTurn(bool b)
   emit signalPrepareTurn(this,stream,b,sendit);
   int sender=KGameMessage::calcMessageId(0,player()->id());  
   kdDebug(11001) <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
-//  sendProcess(stream,KGameMessage::IdTurn,0,sender);//AB (010614): IdTurn is
-//  obsolete since we use KGameProperty (for quite a long time now)
+  //sendProcess(stream,KGameMessage::IdTurn,0,sender);
+}
+
+void KGameProcessIO::clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv)
+{
+	QDataStream stream(receiveBuffer,IO_ReadOnly);
+	int msgid; 
+	int sender;
+	int receiver;
+	KGameMessage::extractHeader(stream,sender,receiver,msgid);
+
+	kdDebug() << "************* Got process message sender =" << sender << " receiver=" << receiver << "   msgid="<< msgid <<endl;
+
+
+  // Cut out the header part...to not confuse network code
+  QBuffer *buf=(QBuffer *)stream.device();
+  QByteArray newbuffer;
+  newbuffer.setRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
+  QDataStream ostream(newbuffer,IO_ReadOnly);
+  kdDebug() << "Newbuffer size=" << newbuffer.size() << endl;
+
+
+	// This is a dummy message which allows us the process to talk with its owner
+	if (msgid==KGameMessage::IdProcessQuery)
+  {
+		emit signalProcessQuery(ostream,this);
+	}
+  else if (player())
+  {
+		sender=KGameMessage::calcMessageId(0,player()->id());  // force correct sender
+		if (msgid==KGameMessage::IdPlayerInput) {
+			player()->forwardInput(ostream,true,sender);
+		} else {
+			player()->forwardMessage(ostream,msgid,receiver,sender);
+		}
+	}
+  newbuffer.resetRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
 }
 
 
@@ -373,6 +227,7 @@ void KGameComputerIO::notifyTurn(bool b)
   {
     QDataStream ostream(buffer,IO_ReadOnly);
     int	sender=KGameMessage::calcMessageId(0,player()->id());  // force correct sender
+    kdDebug() << " Prepare turn forwardInput" << endl;
     player()->forwardInput(ostream,true,sender);
   }
 }
@@ -476,6 +331,11 @@ KGameIO::~KGameIO()
    kdDebug(11001) << "DESTRUCT(KGameIO=" << this <<")" << endl;
    // unregister ourselves
    if (player()) player()->removeGameIO(this); 
+}
+
+void KGameIO::initIO(KPlayer *p)
+{
+  setPlayer(p);
 }
 
 void KGameIO::receiveSystemMessage(QDataStream &,int , int , int ) {}

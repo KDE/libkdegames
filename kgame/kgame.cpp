@@ -462,6 +462,14 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
 
 bool KGame::playerInput(QDataStream &msg, KPlayer *player, int sender)
 {
+  /*
+  QBuffer *b=(QBuffer *)msg.device();
+  kdDebug() << "size of stream=" << b->buffer().size() << endl;
+  char *p=b->buffer().data();
+  for (int i=0;i<b->buffer().size();i++) fprintf(stderr,"%02x ",p[i]);fprintf(stderr,"\n");
+  */
+
+  
  if (!player) {
    kdError(11001) << "KGame::playerInput(): NULL player" << endl;
    return false;

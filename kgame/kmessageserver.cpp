@@ -55,7 +55,9 @@ class MessageBuffer
   public:
     MessageBuffer (Q_UINT32 clientID, const QByteArray &messageData)
       : id (clientID), data (messageData)
-    {}
+    {
+      data.detach(); // otherwise we seem to loose arrays which are deleted during the timer run
+    }
     ~MessageBuffer () {}
     Q_UINT32 id;
     QByteArray data;
@@ -181,6 +183,7 @@ void KMessageServer::addClient (KMessageIO* client)
 
   // give it a unique ID
   client->setId (uniqueClientNumber());
+  kdDebug (11001) << "=====>KMessageServer::addClient " << client->id() << endl;
 
   // connect its signals
   connect (client, SIGNAL (connectionBroken()),
@@ -365,8 +368,15 @@ void KMessageServer::getReceivedMessage (const QByteArray &msg)
     kdError (11001) << "KMessageServer::processReceivedMessage: slot was not called from KMessageIO!" << endl;
     return;
   }
+  //kdDebug() << "KMessageServer::getReceivedMessage size=" << msg.size() << endl;
   KMessageIO *client = (KMessageIO *) sender();
   Q_UINT32 clientID = client->id();
+
+  //QByteArray *ta=new QByteArray;
+  //ta->duplicate(msg);
+  //d->mMessageQueue.enqueue (new MessageBuffer (clientID, *ta));
+
+  
   d->mMessageQueue.enqueue (new MessageBuffer (clientID, msg));
   if (!d->mTimer.isActive())
     d->mTimer.start(0); // AB: should be , TRUE i guess
@@ -395,8 +405,10 @@ void KMessageServer::processOneMessage ()
 
   bool unknown = false;
 
+  QByteArray ttt=in_buffer.buffer();
   Q_UINT32 messageID;
   in_stream >> messageID;
+  //kdDebug(11001) << "KMessageServer::processOneMessage:: got message with messageID=" << messageID << endl;
   switch (messageID)
   {
     case REQ_BROADCAST:
