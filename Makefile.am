@@ -16,7 +16,7 @@ include_HEADERS = kcard.h kgamemisc.h kcarddialog.h kstdgameaction.h \
 INCLUDES = $(all_includes)
 METASOURCES = AUTO
 
-SUBDIRS = carddecks kgame
+SUBDIRS = carddecks
 
 messages:
 #	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
