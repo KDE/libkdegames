@@ -98,6 +98,9 @@ bool KGameNetwork::isAdmin() const
 KMessageClient* KGameNetwork::messageClient() const
 { return d->mMessageClient; }
 
+KMessageServer* KGameNetwork::messageServer() const
+{ return d->mMessageServer; }
+
 // ----------------------- network init
 void KGameNetwork::setMaster()
 {

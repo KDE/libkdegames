@@ -22,28 +22,22 @@
 #define __KGAMEPROPERTYHANDLER_H_
 
 #include <qobject.h>
-#include <qdatastream.h>
 #include <qintdict.h>
-#include <qmap.h>
 
-#include <kdebug.h>
-
-#include "kgameproperty.h"
-
+class QDataStream;
 class KGame;
 class KPlayer;
-// class KGamePropertyHandlerBase;
+class KGamePropertyBase;
 
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
 class KGamePropertyHandler : public QObject
-// QIntDict<KGamePropertyBase>
 {
   Q_OBJECT
 
 public:
-	KGamePropertyHandler();
-	KGamePropertyHandler(int id,const QObject * receiver, const char * sendf, const char *emitf);
+	KGamePropertyHandler(QObject* parent = 0);
+	KGamePropertyHandler(int id,const QObject * receiver, const char * sendf, const char *emitf, QObject* parent = 0);
 	~KGamePropertyHandler();
 
 	/**
@@ -82,7 +76,7 @@ public:
 	 * @param data the property
 	 * @return true on success
 	 **/
-	bool addProperty(KGamePropertyBase *data,QString name=0);
+	bool addProperty(KGamePropertyBase *data, QString name=0);
 
 	/**
 	 * Removes a property from the handler
@@ -121,34 +115,35 @@ public:
 	 **/ 
 	void emitSignal(KGamePropertyBase *data);
 
-  QString propertyName(int id);
+	QString propertyName(int id);
 
-  KGamePropertyBase *find(int id);
-  void clear();
+	KGamePropertyBase *find(int id);
+	void clear();
 
 	void setId(int id)//AB: TODO: make this protected in KGamePropertyHandler!!
 	{
 		mId = id;
 	}
 
-      /**
-       * Calls @ref KGamePropertyBase::setLocked(false) for all properties of this
-       * player
-       **/
-      void unlockProperties();
-      /**
-       * Calls @ref KGamePropertyBase::setLocked(true) for all properties of this
-       * player
-       *
-       * Use with care! This will even lock the core properties, like name,
-       * group and myTurn!!
-       **/
-      void lockProperties();
+	/**
+	 * Calls @ref KGamePropertyBase::setLocked(false) for all properties of this
+	 * player
+	 **/
+	void unlockProperties();
 
-      /**
-       * Reference to the internal dictionary
-       **/
-      QIntDict<KGamePropertyBase> &dict() {return mIdDict;}
+	/**
+	 * Calls @ref KGamePropertyBase::setLocked(true) for all properties of this
+	 * player
+	 *
+	 * Use with care! This will even lock the core properties, like name,
+	 * group and myTurn!!
+	 **/
+	void lockProperties();
+
+	/**
+	 * Reference to the internal dictionary
+	 **/
+	QIntDict<KGamePropertyBase> &dict() const;
 
 
 signals:
@@ -157,11 +152,10 @@ signals:
 
 private:
 	void init();
+
+private:
 	KGamePropertyHandlerPrivate* d;
 	int mId;
-  QMap<int,QString> mNameMap;
-  QIntDict<KGamePropertyBase> mIdDict;
 };
-
 
 #endif

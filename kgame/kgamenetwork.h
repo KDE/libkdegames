@@ -30,6 +30,7 @@
 
 class KGameIO;
 class KMessageClient;
+class KMessageServer;
 
 class KGameNetworkPrivate;
 
@@ -298,6 +299,16 @@ public:
      * messages. You should rather use one of the send functions!
      **/
     KMessageClient* messageClient() const;
+
+    /**
+     * Don't use this unless you really know what you are doing! You might
+     * experience some strange behaviour if you use the message server directly!
+     *
+     * @return a pointer to the message server if this is the MASTER @ref KGame
+     * object. Note that it might be possible that no @ref KGame object contains
+     * the @ref KMessageServer at all! It might even run stand alone!
+     **/
+    KMessageServer* messageServer() const;
 
 signals:
     /**

@@ -196,7 +196,7 @@ public:
 	 **/
 	int id() const { return mId; }
 
-  virtual const type_info * typeinfo() {return &typeid(this);};
+	virtual const type_info * typeinfo() {return &typeid(this);};
 
 	/**
 	 * You have to register a KGamePropertyBase before you can use it.

@@ -321,7 +321,7 @@ public:
      **/
     virtual void networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID);
 
-    KGamePropertyHandler* dataHandler();
+    KGamePropertyHandler* dataHandler() const;
 
 protected slots:
     /**

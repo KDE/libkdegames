@@ -21,18 +21,6 @@
     $Id$
 */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <assert.h>
-
-#include <qbuffer.h>
-#include <qtimer.h>
-#include <qqueue.h>
-
-#include <klocale.h>
-#include <krandomsequence.h>
-#include <kdebug.h>
-
 #include "kgamepropertyhandler.h"
 #include "kgameproperty.h"
 #include "kplayer.h"
@@ -41,9 +29,20 @@
 
 #include "kgamemessage.h"
 
+#include <unistd.h>
+#include <stdio.h>
+#include <assert.h>
+
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <unistd.h>
+
+#include <qbuffer.h>
+#include <qtimer.h>
+#include <qqueue.h>
+
+#include <klocale.h>
+#include <krandomsequence.h>
+#include <kdebug.h>
 
 #define KGAME_LOAD_COOKIE 4210
 
@@ -66,7 +65,7 @@ public:
     KRandomSequence* mRandom;
 
 
-    KGamePropertyHandler mProperties;
+    KGamePropertyHandler* mProperties;
 
     // player lists
     KGame::KGamePlayerList mPlayerList;
@@ -84,15 +83,17 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
 {
  kdDebug(11001) << "CREATE(KGame=" << this <<") sizeof(this)="<<sizeof(KGame) << endl;
  d = new KGamePrivate;
+
+ d->mProperties = new KGamePropertyHandler(this);
   
- d->mProperties.registerHandler(KGameMessage::IdGameProperty,
+ d->mProperties->registerHandler(KGameMessage::IdGameProperty,
                                 this,SLOT(sendProperty(QDataStream& )),
                                      SLOT(emitSignal(KGamePropertyBase *)));
- d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this,i18n("MaxPlayers"));
+ d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this, i18n("MaxPlayers"));
  d->mMaxPlayer.initData(-1);  // Infinite
- d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this,i18n("MinPlayers"));
+ d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this, i18n("MinPlayers"));
  d->mMinPlayer.initData(0);   // Always ok     
- d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this,i18n("GameStatus"));
+ d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
  d->mGameStatus.initData(End);
  d->mUniquePlayerNumber = 0;
  d->mCookie=cookie;
@@ -162,7 +163,7 @@ bool KGame::loadgame(QDataStream &stream, bool network)
 {
  // Load Game Data
  uint i;
- d->mProperties.load(stream);
+ dataHandler()->load(stream);
 
  // Load Playerobjects
  uint playercount;
@@ -205,7 +206,7 @@ bool KGame::loadgame(QDataStream &stream, bool network)
 bool KGame::save(QDataStream &stream,bool saveplayers)
 {
  // Save Game Data
- d->mProperties.save(stream);
+ dataHandler()->save(stream);
 
  if (saveplayers) {
    kdDebug(11001) << "Saving KGame " << playerCount() << " KPlayer objects " << endl;
@@ -449,8 +450,8 @@ int KGame::gameStatus() const
 bool KGame::isRunning() const
 { return d->mGameStatus.value() == Run; }
 
-KGamePropertyHandler* KGame::dataHandler()
-{ return &d->mProperties; }
+KGamePropertyHandler* KGame::dataHandler() const
+{ return d->mProperties; }
 
 KGame::KGamePlayerList* KGame::inactivePlayerList()
 { return &d->mInactivePlayerList; }
@@ -611,7 +612,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
  // gamenetwork would not have passed the message to us!
 
  // GameProperties processed
- if (d->mProperties.processMessage(stream,msgid)) {
+ if (d->mProperties->processMessage(stream,msgid)) {
 //   kdDebug(11001 ) << "KGame: message taken by property - returning" << endl;
    return ;
  }
@@ -1067,7 +1068,7 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 
 
 bool KGame::addProperty(KGamePropertyBase* data)
-{ return d->mProperties.addProperty(data); }
+{ return dataHandler()->addProperty(data); }
 
 bool KGame::sendPlayerProperty(QDataStream& s, int playerId)
 { return sendSystemMessage(s, KGameMessage::IdPlayerProperty, playerId); }
@@ -1083,7 +1084,7 @@ void KGame::emitSignal(KGamePropertyBase *me)
 }
 
 KGamePropertyBase* KGame::findProperty(int id) const
-{ return d->mProperties.find(id); }
+{ return d->mProperties->find(id); }
 
 void KGame::updatePlayerIds()
 {
