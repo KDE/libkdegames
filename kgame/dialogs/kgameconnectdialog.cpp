@@ -18,17 +18,18 @@
     Boston, MA 02111-1307, USA.
 */
 
+
+#include "kgameconnectdialog.h"
+
+#include <knuminput.h>
+#include <klocale.h>
+
 #include <qlineedit.h>
 #include <qvbuttongroup.h>
 #include <qvgroupbox.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <qlabel.h>
-
-#include <knuminput.h>
-#include <klocale.h>
-
-#include "kgameconnectdialog.h"
 
 class KGameConnectWidgetPrivate
 {

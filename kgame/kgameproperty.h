@@ -56,7 +56,7 @@ public:
 		IdCommand, // Reserved for internal use
 		IdUser=256,
 
-    IdAutomatic=0x7000  // Id's from here on are automatically given (16bit)
+		IdAutomatic=0x7000  // Id's from here on are automatically given (16bit)
     
 	};
 
@@ -103,7 +103,7 @@ public:
 	 **/
 	enum PropertyPolicy
 	{
-    PolicyUndefined = 0,
+		PolicyUndefined = 0,
 		PolicyClean = 1,
 		PolicyDirty = 2,
 		PolicyLocal = 3
@@ -188,9 +188,9 @@ public:
 	 * You can only call this if @ref isLocked is false. A message is sent
 	 * over network so that the property is locked for all players except
 	 * you.
-   *
-   * @return returns false if the property can not be locked, i.e. it is already locked
-   *
+	 *
+	 * @return returns false if the property can not be locked, i.e. it is already locked
+	 *
 	 **/
 	bool lock();
 
@@ -201,9 +201,9 @@ public:
 	 * You can only call this if @ref isLocked is false. A message is sent
 	 * over network so that the property is locked for all players except
 	 * you.
-   *
-   * @return returns false if the property can not be locked, i.e. it is already locked
-   *
+	 *
+	 * @return returns false if the property can not be locked, i.e. it is already locked
+	 *
 	 **/
 	bool unlock(bool force=false);
 
@@ -247,13 +247,13 @@ public:
 	 * unique, i.e. you cannot have two properties with the same id for one
 	 * player, although (currently) nothing prevents you from doing so. But
 	 * you will get strange results!
-   *
+	 *
 	 * @param owner The owner of this data. This will send the data
 	 * using @ref KPropertyHandler::sendProperty whenever you call @ref send
-   *
-   * @param If not 0 you can set the policy of the property here
-   *
-   * @param if not 0 you can assign a name to this property
+	 *
+	 * @param If not 0 you can set the policy of the property here
+	 *
+	 * @param if not 0 you can assign a name to this property
 	 *
 	 **/
 	int registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, QString name=0);
@@ -279,8 +279,8 @@ public:
 	/** 
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
-   * In particular you can use this function to create properties which
-   * will have an automatic id assigned. The new id is returned.
+	 * In particular you can use this function to create properties which
+	 * will have an automatic id assigned. The new id is returned.
 	 **/
 	int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, QString name=0);
 
@@ -293,8 +293,8 @@ protected:
 	 * You can only call this if @ref isLocked is false. A message is sent
 	 * over network so that the property is locked for all players except
 	 * you. 
-   * Usually you use @ref lock and @ref unlock to access this property
-   *
+	 * Usually you use @ref lock and @ref unlock to access this property
+	 *
 	 **/
 	void setLock(bool l);
 

@@ -131,10 +131,8 @@ public:
 signals:
 	void signalNetworkSetup();
 
-	
 private:
 	KGameConnectDialogPrivate* d;
-
 };
 
 #endif

@@ -150,6 +150,7 @@ void KGameDebugDialog::initGamePage()
  d->mGameProperties = new KListView(d->mGamePage);
  d->mGameProperties->addColumn(i18n("Property"));
  d->mGameProperties->addColumn(i18n("Value"));
+ d->mGameProperties->addColumn(i18n("Policy"));
  layout->addWidget(d->mGameProperties);
  
  QPushButton* b = new QPushButton(i18n("Update"), d->mGamePage);
@@ -193,6 +194,7 @@ void KGameDebugDialog::initPlayerPage()
  d->mPlayerProperties = new KListView(d->mPlayerPage);
  d->mPlayerProperties->addColumn(i18n("Property"));
  d->mPlayerProperties->addColumn(i18n("Value"));
+ d->mPlayerProperties->addColumn(i18n("Policy"));
  layout->addWidget(d->mPlayerProperties);
  
  QPushButton* b = new QPushButton(i18n("Update"), d->mPlayerPage);
@@ -327,9 +329,26 @@ void KGameDebugDialog::slotUpdateGameData()
  KGamePropertyHandler* handler = d->mGame->dataHandler();
  QIntDictIterator<KGamePropertyBase> it(handler->dict());
  while (it.current()) {
-	QString name = handler->propertyName(it.current()->id());
+	QString policy;
+	switch (it.current()->policy()) {
+		case KGamePropertyBase::PolicyClean:
+			policy = i18n("Clean");
+			break;
+		case KGamePropertyBase::PolicyDirty:
+			policy = i18n("Dirty");
+			break;
+		case KGamePropertyBase::PolicyLocal:
+			policy = i18n("Local");
+			break;
+		case KGamePropertyBase::PolicyUndefined:
+		default:
+			policy = i18n("Undefined");
+			break;
+	}
 	(void) new QListViewItem(d->mGameProperties,
-			name, handler->propertyValue(it.current()));
+			handler->propertyName(it.current()->id()),
+			handler->propertyValue(it.current()), 
+			policy);
 //	kdDebug(11001) << "slotUpdateGameData: checking for all game properties: found property name " << name << endl;
 	++it;
  }
@@ -372,9 +391,26 @@ void KGameDebugDialog::slotUpdatePlayerData(QListBoxItem* item)
  KGamePropertyHandler * handler = p->dataHandler();
  QIntDictIterator<KGamePropertyBase> it((handler->dict()));
  while (it.current()) {
+	QString policy;
+	switch (it.current()->policy()) {
+		case KGamePropertyBase::PolicyClean:
+			policy = i18n("Clean");
+			break;
+		case KGamePropertyBase::PolicyDirty:
+			policy = i18n("Dirty");
+			break;
+		case KGamePropertyBase::PolicyLocal:
+			policy = i18n("Local");
+			break;
+		case KGamePropertyBase::PolicyUndefined:
+		default:
+			policy = i18n("Undefined");
+			break;
+	}
 	(void)new QListViewItem(d->mPlayerProperties,
 			handler->propertyName(it.current()->id()),
-			handler->propertyValue(it.current()));
+			handler->propertyValue(it.current()),
+			policy);
 	++it;
  }
 }

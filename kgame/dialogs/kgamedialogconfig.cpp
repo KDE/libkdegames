@@ -441,7 +441,8 @@ void KGameDialogMsgServerConfig::slotChangeAdmin()
 	kdError(11001) << "changeAdmin(): only ADMIN is allowed to call this!" << endl;
 	return;
  }
- Q_UINT32 newAdmin;
+ //TODO
+ Q_UINT32 newAdmin = 0;
 // newAdmin = ;
  game()->electAdmin(newAdmin);
 }

@@ -218,7 +218,7 @@ bool KGamePropertyHandler::save(QDataStream &stream)
 
 KGamePropertyBase::PropertyPolicy KGamePropertyHandler::policy()
 {
- kdDebug(11001) << "KGamePropertyHandler::policy " << d->mDefaultPolicy << endl;
+// kdDebug(11001) << "KGamePropertyHandler::policy " << d->mDefaultPolicy << endl;
  return d->mDefaultPolicy;
 }
 void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool userspace)
