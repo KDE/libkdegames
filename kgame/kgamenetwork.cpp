@@ -78,7 +78,7 @@ KGameNetwork::KGameNetwork(int c,QObject* parent) : QObject(parent, 0)
 KGameNetwork::~KGameNetwork()
 {
  kdDebug(11001) << "DESTRUCT(KGameNetwork=" << this <<")" << endl;
- Debug();
+// Debug();
  delete d;
 }
 
@@ -260,11 +260,11 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, int rece
 
  KGameMessage::createHeader(stream, sender, receiver, msgid);
  stream.writeRawBytes(data.data(), data.size());
- /*
+ 
  kdDebug(11001) << "transmitGameClientMessage msgid=" << msgid << " recv="
                 << receiver << " sender=" << sender << " Buffersize="
                 << buffer.size() << endl;
- */
+ 
 // kdDebug(11001) << "   cookie=" << cookie() << " version="
 //    << KGameMessage::version() << endl;
 

@@ -118,7 +118,7 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
 KGame::~KGame()
 {
  kdDebug(11001) << "DESTRUCT(KGame=" << this <<")" << endl;
- Debug();
+// Debug();
  reset();
  delete d->mRandom;
  delete d;

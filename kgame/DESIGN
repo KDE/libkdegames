@@ -14,6 +14,9 @@ AB: please remove this comments as soon as all KGame hackers have read the
 document
 !!!
 
+Please refer the API documentation of every KGame class if you want up tp date
+information.
+
 
 0. Contents
 -----------
@@ -27,6 +30,11 @@ document
 1.6 Player
 
 2. Game Negotiation (M.Heni 20.05.2001)
+
+3. Game Properties (Andreas Beckermann 28.07.2001) ( not yet completed )
+3.1 Using KGameProperty
+3.2 Custom Classes
+3.3 Concepts
 
 
 ---------------------------------------------------------------------
@@ -178,4 +186,108 @@ IdGameReactivate
 
 IdSyncRandom
   int randomseed
+
+
+3. Game Properties
+------------------
+A very hard task in a network game is consistency. You have to achieve that all
+properties of the game and of all players have the same value on all clients
+every time. This is because 
+a) the user might be confused if he sees "Player has $0" on client A but 
+"Player has $10" on client B and 
+b) Often game handling depends on those values, e.g. if the example above
+happens the computer might quit the game for the Player on client A because
+he/she doesn't have enough money. But the game continues on client B. 
+Another not that easy task is the network protocol itself. You have to write
+several send() and receive() functions which apply changed values of properties
+to the local property. 
+
+KGameProperty is designed to do all of this for you. KGameProperty is
+implemented as a template so you can use it theoretically for every type of data
+- even for your self defined classes. 
+
+
+3.1 Using KGameProperty
+-----------------------
+It is basically very easy to use a KGameProperty. You first create your own
+class containing the property, e.g:
+class MyGame : public KGame
+{
+[...]
+protected:
+	KGamePropertyInt money;
+	KGamePropertyQString name;
+	KGameProperty<AntotherClass> myProperty;
+};
+KGamePropertyInt is just a typedef for KGameProperty<int> - just like
+KGamePropertyQString. Now you need to register the properties in the constructor
+of the class to the KGamePropertyHandler:
+MyGame::MyGame() : KGame(myCookie)
+{
+ money.registerData(KGamePropertyBase::IdUser+1, dataHandler(), "Money");
+ name.registerData(KGamePropertyBase::IdUser+2, this, "Name");
+ myProperty.registerData(KGamePropertyBase::IdUser+3, dataHandler(), "MyProperty");
+}
+-> You need to specify a *unique* ID. This ID must be greater than
+KGamePropertyBase::IdUser. IDs below this are reserved for KGame. Probably this
+will be changed so that you cannot use IDs below IdUser in the future. Then you
+have to specify the dataHandler(). You can also use a KGame or KPlayer pointer.
+This will automatically use KGame::dataHandler() or KPlayer::dataHandler().
+Finally you *can* provide a name for the property. This will be used for
+debugging in KGameDebugDialog. If you want to save some memory you can leave
+this out.
+Note that if you use pointers to create the properties dynamically they are
+*not* deleted automatically! You MUST delete them yourself!
+Now you can use the KGameProperty like every variable else. See also Section 
+"3.3 Concepts" for restrictions in use.
+
+3.2 Custom Classes
+------------------
+To make custom classes possible you have to implement several operators for your
+them: you need at least << and >> for QDataStream as well as "==" for your own
+class. To overload the "<<" you would e.g. do something like this:
+QDataStream& operator<<(QDataStream& stream, MyData& data)
+{
+ int type = data.type;
+ QString name = data.name;
+ stream << type << name;
+ return stream;
+}
+So you basically just have to split your class to several basic types and stream
+them.
+
+3.3 Concepts
+------------
+You can use KGameProperty basically in two completely different ways. You can
+also use a mixture of both but this is not recommended. The default behaviour
+and therefore also the recommended is the "clean" way: 
+a) Always Consistent. This means that a KGameProperty has always the same value
+on *every* client. This is achieved by using KGameProperty::send() whenever you
+want to change the value using "=". You can still use changeValue() or
+setLocal() but send() will be the default. If you use send() then the value of
+the property does *NOT* change immediately. It is just sent to the
+KMessageServer which forwards the value to all clients. As soon as the new value
+is received from the message server the KGamePropertyHandler (a collection class
+for KGameProperty) calls KGameProperty::load() and changes the value of the
+property. So the game first has to go into the event loop, where the message is
+received. This means to you that you cannot do this:
+myIntProperty = 10;
+int value = myIntProperty;
+As myIntPoperty still has the old value when "value = myIntProperty" is called.
+This might seem to be quite complex, but 
+KGamePropertyHandler::signalPropertyChanged() is emitted whenever a new value is
+assigned so you can connect to this and work immediately with the new value.
+You gain the certainty that the value is the same on every client every time.
+That will safe you a lot of time debugging!
+Another way is the "dirty" way:
+b) Not Always Consistent. Sometimes you really *want* to do something like
+myIntProperty = 10;
+int value = myIntProperty;
+but this is not possible with the default behaviour. If you call
+KGameProperty::setAlwaysConsistent(false) in the constructor (right after
+registerData()) you get another behaviour. "=" means changeValue() now.
+changeValue() also uses send() to change the value but additionally calls
+setLocal() to create a local copy of the property. This copy now has the value
+you supplied with "=" and is deleted again as soon as any value from the network
+is received. 
 

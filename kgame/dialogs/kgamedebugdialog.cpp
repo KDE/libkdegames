@@ -327,11 +327,10 @@ void KGameDebugDialog::slotUpdateGameData()
  KGamePropertyHandler* handler = d->mGame->dataHandler();
  QIntDictIterator<KGamePropertyBase> it(handler->dict());
  while (it.current()) {
-//	KGamePropertyBase* prop = it.current();
 	QString name = handler->propertyName(it.current()->id());
 	(void) new QListViewItem(d->mGameProperties,
 			name, handler->propertyValue(it.current()));
-	kdDebug(11001) << "slotUpdateGameData: checking for all game properties: found property name " << name << endl;
+//	kdDebug(11001) << "slotUpdateGameData: checking for all game properties: found property name " << name << endl;
 	++it;
  }
 }
@@ -478,11 +477,17 @@ void KGameDebugDialog::slotShowId()
 		d->mHideIdList->removeItem(i->);
 	}
  }*/
+ if (!d->mHideIdList->currentItem()) {
+	return;
+ }
  d->mHideIdList->removeItem(d->mHideIdList->currentItem());
 }
 
 void KGameDebugDialog::slotHideId()
 {
+ if (!d->mMessageList->currentItem()) {
+	return;
+ }
  int msgid = d->mMessageList->currentItem()->text(1).toInt();
  if (!showId(msgid)) {
 	return;

@@ -46,8 +46,15 @@ class KGameDialogConfigPrivate
 public:
 	KGameDialogConfigPrivate() 
 	{
+		mOwner = 0;
+		mGame = 0;
+
+		mAdmin = false;
 	}
 
+	bool mAdmin;
+	KGame* mGame;
+	KPlayer* mOwner;
 };
 
 KGameDialogConfig::KGameDialogConfig(QWidget* parent) : QWidget(parent)
@@ -60,15 +67,27 @@ KGameDialogConfig::~KGameDialogConfig()
  delete d;
 }
 
-void KGameDialogConfig::setKGame(KGame* )
-{ }
+void KGameDialogConfig::setKGame(KGame* g)
+{ 
+ d->mGame = g;
+}
 
-void KGameDialogConfig::setOwner(KPlayer* )
-{ }
+void KGameDialogConfig::setOwner(KPlayer* p)
+{
+ d->mOwner = p;
+}
 
-void KGameDialogConfig::setAdmin(bool )
-{ }
+void KGameDialogConfig::setAdmin(bool a)
+{
+ d->mAdmin = a;
+}
 
+KGame* KGameDialogConfig::game() const
+{ return d->mGame; }
+bool KGameDialogConfig::admin() const
+{ return d->mAdmin; }
+KPlayer* KGameDialogConfig::owner() const
+{ return d->mOwner; }
 
 /////////////////////////// KGameDialogNetworkConfig /////////////////////////
 class KGameDialogNetworkConfigPrivate
@@ -79,14 +98,11 @@ public:
 		mInitConnection = 0;
 		mNetworkLabel = 0;
 
-		mGame = 0;
 	}
 
 	QPushButton* mInitConnection;
 	QLabel* mNetworkLabel;
 
-	KGame* mGame;
-	
 	QString mDefaultHost;
 	unsigned short int mDefaultPort;
 };
@@ -126,13 +142,13 @@ void KGameDialogNetworkConfig::slotInitConnection()
  } else {
 	if (host.isNull()) {
 		master = true;
-		if (d->mGame) {
-			connected = d->mGame->offerConnections(port);
+		if (game()) {
+			connected = game()->offerConnections(port);
 		}
 	} else {
 		master = false;
-		if (d->mGame) {
-			connected = d->mGame->connectToServer(host, port);
+		if (game()) {
+			connected = game()->connectToServer(host, port);
 		}
 	}
  }
@@ -161,12 +177,12 @@ void KGameDialogNetworkConfig::submitToKGame(KGame* , KPlayer* )
 
 void KGameDialogNetworkConfig::setKGame(KGame* g)
 {
- if (!g) {
+ KGameDialogConfig::setKGame(g);
+ if (!game()) {
 	setConnected(false);
 	return;
  }
- setConnected(g->isNetwork(), g->isMaster());
- d->mGame = g;
+ setConnected(game()->isNetwork(), game()->isMaster());
 }
 
 void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsigned short int port)
@@ -179,12 +195,16 @@ void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsign
 class KGameDialogGeneralConfigPrivate
 {
 public:
-	KGameDialogGeneralConfigPrivate() {}
+	KGameDialogGeneralConfigPrivate() 
+	{
+		mMaxPlayers = 0;
+		mMinPlayers = 0;
+		mName = 0;
+	}
 	
 	KIntNumInput* mMaxPlayers;
 	KIntNumInput* mMinPlayers;
 	QLineEdit* mName;
-
 
 	QGridLayout* mTopLayout; //TODO
 };
@@ -193,7 +213,6 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent)
 		: KGameDialogConfig(parent)
 {
 // kdDebug(11001) << "CONSTRUCT KGameDialogGeneralConfig " << this << endl;
-
  d = new KGameDialogGeneralConfigPrivate();
 
  d->mTopLayout = new QGridLayout(this, 2, 2, KDialog::marginHint(), KDialog::spacingHint());
@@ -230,18 +249,25 @@ QGridLayout* KGameDialogGeneralConfig::layout() const
 
 void KGameDialogGeneralConfig::setOwner(KPlayer* p) 
 {
- if (!p) {
-	// TODO
+ if (owner()) {
+	owner()->disconnect(this);
+ }
+ KGameDialogConfig::setOwner(p);
+ if (!owner()) {
 	// can this config be used at all?
 	// maybe call hide()
 	return;
  }
+ connect(owner(), SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+ kdDebug(11001) << "name: " << p->name() << endl;
  setPlayerName(p->name());
  //TODO: connect signalPropertyChanged and check for playername changes!
 }
 
 void KGameDialogGeneralConfig::setKGame(KGame* g) 
 {
+ KGameDialogConfig::setKGame(g);
  if (!g) {
 	// TODO
 	// can this config be used at all?
@@ -254,8 +280,9 @@ void KGameDialogGeneralConfig::setKGame(KGame* g)
 
 void KGameDialogGeneralConfig::setAdmin(bool admin)
 {
-	d->mMaxPlayers->setEnabled(admin);
-	d->mMinPlayers->setEnabled(admin);
+ KGameDialogConfig::setAdmin(admin);
+ d->mMaxPlayers->setEnabled(admin);
+ d->mMinPlayers->setEnabled(admin);
 }
 
 void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
@@ -273,6 +300,24 @@ void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
  }
 }
 
+void KGameDialogGeneralConfig::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p)
+{
+kdDebug() << "slot changed prop" << endl;
+ if (!prop || !p || p != owner()) {
+kdDebug() << "slot changed prop: return" << endl;
+	return;
+ }
+ switch (prop->id()) {
+	case KGamePropertyBase::IdName:
+kdDebug() << "slot changed prop: name" << endl;
+		setPlayerName(p->name());
+		break;
+	default:
+kdDebug() << "slot changed prop: default" << endl;
+		break;
+ }
+}
+
 class KGameDialogMsgServerConfigPrivate
 {
 public:
@@ -287,8 +332,6 @@ public:
 		noAdmin = 0;
 
 		noMaster = 0;
-
-		game = 0;
 	}
 
 	QHBoxLayout* senderLayout;
@@ -300,9 +343,6 @@ public:
 	QLabel* noAdmin;
 
 	QLabel* noMaster;
-
-	KGame* game;
-
 };
 
 
@@ -326,26 +366,26 @@ KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
 
 void KGameDialogMsgServerConfig::setKGame(KGame* g)
 {
- d->game = g;
+ KGameDialogConfig::setKGame(g);
  //TODO display the ID of the admin if we aren't
  // connect(g, SIGNAL(signalAdminChanged(int)), this, SLOT(slotChangeIsAdmin(int)));//TODO
- if (!g) {
+ if (!game()) {
 	// we cannot do anything without a KGame object!
 	setAdmin(false);
 	return;
  }
- setAdmin(g->isAdmin());
- setHasMsgServer(d->game->messageServer());
+ setAdmin(game()->isAdmin());
+ setHasMsgServer(game()->messageServer());
 }
 
 
 void KGameDialogMsgServerConfig::changeMaxClients()
 {
- if (!d->game) {
+ if (!game()) {
 	kdError(11001) << "no valid game object available!" << endl;
 	return;
  }
- if (!d->game->isAdmin()) {
+ if (!game()->isAdmin()) {
 	kdError(11001) << "changeMaxClients(): only ADMIN is allowed to call this!" << endl;
 	return;
  }
@@ -364,7 +404,7 @@ void KGameDialogMsgServerConfig::changeMaxClients()
 	bool ok;
 	max = edit->text().toInt(&ok);
 	if (ok) {
-		d->game->setMaxClients(max);
+		game()->setMaxClients(max);
 	}
  }
 
@@ -376,17 +416,17 @@ void KGameDialogMsgServerConfig::removeClient()
 
 void KGameDialogMsgServerConfig::changeAdmin()
 {
- if (!d->game) {
+ if (!game()) {
 	kdError(11001) << "no valid game object available!" << endl;
 	return;
  }
- if (!d->game->isAdmin()) {
+ if (!admin()) {
 	kdError(11001) << "changeAdmin(): only ADMIN is allowed to call this!" << endl;
 	return;
  }
  Q_UINT32 newAdmin;
 // newAdmin = ;
- d->game->electAdmin(newAdmin);
+ game()->electAdmin(newAdmin);
 }
 
 void KGameDialogMsgServerConfig::removeClient(Q_UINT32 id)
@@ -394,9 +434,10 @@ void KGameDialogMsgServerConfig::removeClient(Q_UINT32 id)
 //TODO
 }
 
-void KGameDialogMsgServerConfig::setAdmin(bool admin)
+void KGameDialogMsgServerConfig::setAdmin(bool a)
 {
- if (admin) {
+ KGameDialogConfig::setAdmin(a);
+ if (admin()) {
 	if (d->noAdmin) {
 		delete d->noAdmin;
 		d->noAdmin = 0;
@@ -476,23 +517,25 @@ KGameDialogChatConfig::~KGameDialogChatConfig()
  delete d;
 }
 
-void KGameDialogChatConfig::setKGame(KGame* game)
+void KGameDialogChatConfig::setKGame(KGame* g)
 {
- d->mChat->setKGame(game);
- if (!game) {
+ KGameDialogConfig::setKGame(g);
+ d->mChat->setKGame(game());
+ if (!game()) {
 	hide();
  } else {
 	show();
  }
 }
 
-void KGameDialogChatConfig::setOwner(KPlayer* owner) 
+void KGameDialogChatConfig::setOwner(KPlayer* p) 
 {
- if (!owner) {
+ KGameDialogConfig::setOwner(p);
+ if (!owner()) {
 	hide();
 	return;
  }
- d->mChat->setFromPlayer(owner);
+ d->mChat->setFromPlayer(owner());
  show();
 }
 
@@ -504,14 +547,10 @@ public:
 	KGameDialogConnectionConfigPrivate()
 	{
 		mPlayers = 0;
-		mGame = 0;
-		mOwner = 0;
 	}
 
 	QPtrDict<KPlayer> mItem2Player;
 	KListBox* mPlayers;
-	KGame* mGame;
-	KPlayer* mOwner;
 };
 
 KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
@@ -533,15 +572,15 @@ KGameDialogConnectionConfig::~KGameDialogConnectionConfig()
 
 void KGameDialogConnectionConfig::setKGame(KGame* g)
 {
- if (d->mGame) {
-	disconnect(d->mGame, 0, this, 0);
+ if (game()) {
+	disconnect(game(), 0, this, 0);
  }
- d->mGame = g;
- if (d->mGame) {
+ KGameDialogConfig::setKGame(g);
+ if (game()) {
 // react to changes in KGame::playerList()
-	connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)),
+	connect(game(), SIGNAL(signalPlayerJoinedGame(KPlayer*)),
 			this, SLOT(slotPlayerChanged(KPlayer*)));
-	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)),
+	connect(game(), SIGNAL(signalPlayerLeftGame(KPlayer*)),
 			this, SLOT(slotPlayerChanged(KPlayer*)));
  }
  slotPlayerChanged(0);
@@ -549,16 +588,17 @@ void KGameDialogConnectionConfig::setKGame(KGame* g)
 
 void KGameDialogConnectionConfig::setOwner(KPlayer* p)
 {
- d->mOwner = p;
+ KGameDialogConfig::setOwner(p);
 }
 
-void KGameDialogConnectionConfig::setAdmin(bool admin)
+void KGameDialogConnectionConfig::setAdmin(bool a)
 {
- if (!d->mGame) {
+ KGameDialogConfig::setAdmin(a);
+ if (!game()) {
 	return;
  }
- disconnect(d->mGame, SIGNAL(executed(QListBoxItem*)), this, 0);
- if (admin) {
+ disconnect(game(), SIGNAL(executed(QListBoxItem*)), this, 0);
+ if (admin()) {
 	connect(d->mPlayers, SIGNAL(executed(QListBoxItem*)), this,
 			SLOT(slotKickPlayerOut(QListBoxItem*)));
  }
@@ -575,11 +615,11 @@ void KGameDialogConnectionConfig::slotPlayerChanged(KPlayer* )
  d->mItem2Player.clear();
  d->mPlayers->clear();
 
- if (!d->mGame) {
+ if (!game()) {
 	return;
  }
 
- KGame::KGamePlayerList l = *d->mGame->playerList();
+ KGame::KGamePlayerList l = *game()->playerList();
  for (KPlayer* p = l.first(); p; p = l.next()) {
 	QListBoxText* t = new QListBoxText(p->name());
 	d->mItem2Player.insert(t, p);
@@ -593,18 +633,18 @@ void KGameDialogConnectionConfig::slotPlayerChanged(KPlayer* )
 void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
 {
  KPlayer* p = d->mItem2Player[item];
- if (!d->mGame || !d->mGame->isAdmin() || !p) {
+ if (!game()|| !admin() || !p) {
 	return;
  }
 
- if (p == d->mOwner) { // you wanna ban the ADMIN ??
+ if (p == owner()) { // you wanna ban the ADMIN ??
 	return;
  }
 		       
  if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?").arg(
 		p->name())) == KMessageBox::Yes) {
 	kdDebug(11001) << "will remove player " << p << endl;
-	d->mGame->removePlayer(p);
+	game()->removePlayer(p);
 	d->mPlayers->removeItem(d->mPlayers->index(item));
 	slotPlayerChanged(p);
  } else {

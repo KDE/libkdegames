@@ -249,32 +249,25 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
 
  const type_info* t = prop->typeinfo();
  if (*t == typeid(int)) {
-	kdDebug(11001)  << "INTEGER variable name=" << name 
-			<< " id=" << id << " found " << endl;
+//	kdDebug(11001)  << "INTEGER variable name=" << name << " id=" << id << " found " << endl;
 	value = QString::number(((KGamePropertyInt*)prop)->value());
  } else if (*t == typeid(unsigned int)) {
-	kdDebug(11001)  << "unsigned int variable name=" << name << " id=" 
-			<< id << " found " << endl;
+//	kdDebug(11001)  << "unsigned int variable name=" << name << " id=" << id << " found " << endl;
 	value = QString::number(((KGamePropertyUInt *)prop)->value());
  } else if (*t == typeid(long int)) {
-	kdDebug(11001)  << "long int variable name=" << name << " id=" << id 
-			<< " found " << endl;
+//	kdDebug(11001)  << "long int variable name=" << name << " id=" << id << " found " << endl;
 	value = QString::number(((KGameProperty<long int> *)prop)->value()); 
  } else if (*t == typeid(unsigned long int)) {
-	kdDebug(11001) << "unsigned long int variable name=" << name << " id="
-			<< id << " found " << endl;
+//	kdDebug(11001) << "unsigned long int variable name=" << name << " id=" << id << " found " << endl;
 	value = QString::number(((KGameProperty<unsigned long int> *)prop)->value());
  } else if (*t == typeid(QString)) { 
-	kdDebug(11001) << "QString variable name=" << name << " id=" 
-			<< id << " found " << endl; 
+//	kdDebug(11001) << "QString variable name=" << name << " id=" << id << " found " << endl; 
 	value = ((KGamePropertyQString*)prop)->value();
  } else if (*t == typeid(Q_INT8)) { 
-	kdDebug(11001) << "Q_INT8 variable name=" << name << " id=" 
-			<< id << " found " << endl;
+//	kdDebug(11001) << "Q_INT8 variable name=" << name << " id=" << id << " found " << endl;
 	value = ((KGamePropertyBool*)prop)->value() ?  i18n("True") : i18n("False");
  } else {
-         kdDebug(11001)  << "USER variable name=" << name << " id=" << id 
-			 << " found " << endl;
+//	kdDebug(11001)  << "USER variable name=" << name << " id=" << id << " found " << endl;
 	emit signalRequestValue(prop, value);
  }
 		   

@@ -65,8 +65,11 @@ public:
 
 	/**
 	 * The owner player of the dialog has been changed. The default
-	 * implementation does nothing. You can use this e.g. to change a
-	 * line edit widget containing the player name.
+	 * changes the pointer for @ref owner so don't forget to call the
+	 * default implementation if you overwrite this!
+	 *
+	 * You can use this e.g. to change a line edit widget containing the 
+	 * player name.
 	 *
 	 * Note: even NULL players are allowed!
 	 * @param p The new owner player of the dialog
@@ -75,8 +78,10 @@ public:
 
 	/**
 	 * The KGame object of the dialog has been changed. The default
-	 * implementation does nothing. You can use this e.g. to re-read the
-	 * min/max player settings.
+	 * implementation changes the pointer for @ref game so don't forget to
+	 * call the default implementation if you overwrite this!
+	 *
+	 * You can use this e.g. to re-read the min/max player settings.
 	 * @param p The new owner player of the dialog
 	 **/
 	virtual void setKGame(KGame* g);
@@ -90,12 +95,36 @@ public:
 	 * configured by the player. Mainly the KGame configuration can be done
 	 * by the admin only.
 	 *
-	 * By default this does nothing. You have to overwrite it in derived
-	 * classes.
+	 * By default this does nothing. Changes the value for @ref admin so 
+	 * don't forget to call the default implementation in derived classes!
 	 * @param admin Whether the KGame object of this dialog can be
 	 * configured
 	 **/
 	virtual void setAdmin(bool admin);
+
+	/**
+	 * A pointer to the @ref KGame object that has been set by @ref setKGame.
+	 *
+	 * Note that NULL is allowed!
+	 * @return The @ref KGame object assigned to this dialog
+	 **/
+	KGame* game() const;
+
+	/**
+	 * A pointer to the @ref KPlayer object that has been set by @ref
+	 * setOwner.
+	 *
+	 * Note that NULL is allowed!
+	 * @return The owner of the dialog
+	 **/
+	KPlayer* owner() const;
+
+	/**
+	 * @return True if the @ref owner is ADMIN otherwise FALSE. See also
+	 * @ref setAdmin
+	 **/
+	bool admin() const;
+
 
 protected:
 
@@ -186,6 +215,8 @@ public:
 	 **/
 	virtual void setAdmin(bool admin);
 
+protected slots:
+	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
 protected:
 	void setMaxPlayers(int m);
 	void setMinPlayers(int m);

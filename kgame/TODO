@@ -40,3 +40,5 @@
               can be applied
 - 11.07.2001: go through the entire API documentation and change/delete what is
               obsolete.
+- 28.07.2001: make KGameProperty::load() protected as this changes the network
+              value. KGamePropertyHandler should be friend
