@@ -65,6 +65,22 @@ void KGameMessage::extractPropertyHeader(QDataStream &msg,int &id)
   id=d1;
 }
 
+void KGameMessage::createPropertyCommand(QDataStream &msg,int cmdid,int pid,int cmd)
+{
+  createPropertyHeader(msg,cmdid);
+  msg << (Q_INT16)pid ;
+  msg << (Q_INT8)cmd ;
+}
+
+void KGameMessage::extractPropertyCommand(QDataStream &msg,int &pid,int &cmd)
+{
+  Q_INT16 d1;
+  Q_INT8 d2;
+  msg >> d1 >> d2;
+  pid=d1;
+  cmd=d2;
+}
+
 int KGameMessage::version()
 {
   return MESSAGE_VERSION;

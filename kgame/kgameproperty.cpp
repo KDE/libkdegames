@@ -126,10 +126,20 @@ bool KGamePropertyHandlerBase::processMessage(QDataStream &stream, int id)
  if (id != mId) {
 	return false; // Is the message meant for us?
  }
+ KGamePropertyBase* p;
  int propertyId;
  KGameMessage::extractPropertyHeader(stream,propertyId);
  //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
- KGamePropertyBase* p = find(propertyId);
+ if (propertyId==KGamePropertyBase::IdCommand)
+ {
+   int cmd;
+   KGameMessage::extractPropertyCommand(stream,propertyId,cmd);
+   kdDebug() << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
+   p = find(propertyId);
+   p->command(stream,cmd);
+   return true;
+ }
+ p = find(propertyId);
  if (p) {
 	//kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
 	p->load(stream);

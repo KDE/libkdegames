@@ -84,6 +84,16 @@ class KGameMessage
     static void extractPropertyHeader(QDataStream &msg,int &id);
 
     /**
+     * Creates a property header  given the property id
+     */
+    static void createPropertyCommand(QDataStream &msg,int cmdid,int pid,int cmd);
+
+    /**
+     * Retrieves the property id from a property message header
+     */
+    static void extractPropertyCommand(QDataStream &msg,int &pid,int &cmd);
+
+    /**
      * @return Version of the network library
      */
     static int version();

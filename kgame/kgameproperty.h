@@ -26,6 +26,7 @@
 #include <qdatastream.h>
 #include <qintdict.h>
 #include <kdebug.h>
+#include "kgamemessage.h"
 
 class KGame;
 class KPlayer;
@@ -41,7 +42,7 @@ class KGamePropertyHandlerBase;
 class KGamePropertyBase
 {
 public:
-	enum PlayerDataIds  { // these belong to KPlayer!
+	enum PropertyDataIds  { // these belong to KPlayer!
 		IdGroup=1,
 		IdName=2,
 		IdAsyncInput=3,
@@ -50,8 +51,18 @@ public:
 		IdMaxPlayer=6,
 		IdMinPlayer=7,
 		IdUserId=8,
+    IdCommand, // Reserved for internal use
 		IdUser=256
 	};
+  /**
+   * Commands for advanced properties (Q_INT8)
+   */
+  enum PropertyCommandIds 
+  {
+    CmdAt=1,
+    CmdResize=2,
+    CmdFill=3
+  };
 
 	/**
 	 * Constructs a KGamePropertyBase object and calls @ref registerData.
@@ -120,6 +131,11 @@ public:
 	 **/
 	virtual void load(QDataStream& s) = 0;
 	virtual void save(QDataStream& s) = 0;
+
+  /** 
+   * send a command to advanced properties like arrays
+   */
+  virtual void command(QDataStream & s,int cmd) {};
 
 	/**
 	 * @return The id of this property
