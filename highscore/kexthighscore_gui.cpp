@@ -254,7 +254,7 @@ void HighscoresDialog::slotUser2()
 {
     KURL url = KFileDialog::getSaveURL(QString::null, QString::null, this);
     if ( url.isEmpty() ) return;
-    if ( KIO::NetAccess::exists(url) ) {
+    if ( KIO::NetAccess::exists(url, true, this) ) {
         KGuiItem gi = KStdGuiItem::save();
         gi.setText(i18n("Overwrite"));
         int res = KMessageBox::warningYesNo(this,
@@ -265,7 +265,7 @@ void HighscoresDialog::slotUser2()
     KTempFile tmp;
     internal->exportHighscores(*tmp.textStream());
     tmp.close();
-    KIO::NetAccess::upload(tmp.name(), url);
+    KIO::NetAccess::upload(tmp.name(), url, this);
     tmp.unlink();
 }
 
@@ -518,7 +518,7 @@ bool ConfigDialog::save()
 
 //-----------------------------------------------------------------------------
 AskNameDialog::AskNameDialog(QWidget *parent)
-    : KDialogBase(Plain, i18n("Enter Your Nickname"), Ok | Cancel, Cancel,
+    : KDialogBase(Plain, i18n("Enter Your Nickname"), Ok | Cancel, Ok,
                   parent, "ask_name_dialog")
 {
     internal->hsConfig().readCurrentConfig();
