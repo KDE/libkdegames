@@ -163,7 +163,7 @@ public:
 	 * @param port The default port to connect to / listen on
 	 * @param host The default host to connect to
 	 **/
-	void setDefaultNetworkInfo(const QString& host, unsigned short int port);
+	void setDefaultNetworkInfo(const QString& host, unsigned short int port,bool server=true);
 
 protected:
 	void setConnected(bool connected, bool master = false);

@@ -45,8 +45,9 @@ public:
 	QVButtonGroup* mButtonGroup;
 };
 
-KGameConnectDialog::KGameConnectDialog(QWidget* parent) : KDialogBase(Plain,
-		i18n("Network Game"), Ok|Cancel, Ok, parent, 0, true, true)
+// buttonmask =Ok|Cancel
+KGameConnectDialog::KGameConnectDialog(QWidget* parent,int buttonmask) : KDialogBase(Plain,
+		i18n("Network Game"),buttonmask , Ok, parent, 0, true, buttonmask!=0)
 {
  d = new KGameConnectDialogPrivate;
  QVBoxLayout* vb = new QVBoxLayout(plainPage(), spacingHint());
@@ -63,6 +64,10 @@ KGameConnectDialog::KGameConnectDialog(QWidget* parent) : KDialogBase(Plain,
  d->mPort = new KIntNumInput(g);
  (void)new QLabel(i18n("Host to connect to"), g);
  d->mHost = new QLineEdit(g); 
+
+ QPushButton *button=new QPushButton(i18n("Start network"),plainPage());
+ connect(button, SIGNAL(clicked()), this, SIGNAL(signalNetworkSetup()));
+ vb->addWidget(button);
 }
 
 KGameConnectDialog::~KGameConnectDialog()

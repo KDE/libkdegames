@@ -206,7 +206,7 @@ void KGameDebugDialog::initPlayerPage()
  d->mPlayerUserId = new QListViewItem(v, i18n("Player User ID"));
  d->mPlayerMyTurn = new QListViewItem(v, i18n("My Turn"));
  d->mPlayerAsyncInput = new QListViewItem(v, i18n("Async Input"));
- d->mPlayerKGameAddress = new QListViewItem(v, i18n("Player's KGame Object Address"));
+ d->mPlayerKGameAddress = new QListViewItem(v, i18n("KGame Address"));
  d->mPlayerVirtual = new QListViewItem(v, i18n("Player is Virtual"));
  d->mPlayerActive = new QListViewItem(v, i18n("Player is Active"));
  d->mPlayerRtti = new QListViewItem(v, i18n("RTTI"));
@@ -403,7 +403,7 @@ void KGameDebugDialog::setKGame(const KGame* g)
 
 	slotUpdateGameData();
 
-	connect(d->mGame, SIGNAL(signalMessageUpdate(int, int, int)), this, SLOT(slotMessageUpdate(int, int, int)));
+	connect(d->mGame, SIGNAL(signalMessageUpdate(int, Q_UINT32, Q_UINT32)), this, SLOT(slotMessageUpdate(int, Q_UINT32, Q_UINT32)));
  }
 }
 
@@ -443,7 +443,7 @@ void KGameDebugDialog::removePlayer(QListBoxItem* i)
  delete i;
 }
 
-void KGameDebugDialog::slotMessageUpdate(int msgid, int receiver, int sender)
+void KGameDebugDialog::slotMessageUpdate(int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  if (!showId(msgid)) {
 	return;

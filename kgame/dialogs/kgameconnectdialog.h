@@ -36,7 +36,7 @@ class KGameConnectDialog : public KDialogBase
 {
 	Q_OBJECT
 public:
-	KGameConnectDialog(QWidget* parent = 0);
+	KGameConnectDialog(QWidget* parent = 0,int buttonmask=Ok|Cancel);
 	~KGameConnectDialog();
 	
 	/**
@@ -84,6 +84,10 @@ protected slots:
 	 * joining.
 	 **/
 	void slotTypeChanged(int);
+
+signals:
+  void signalNetworkSetup();
+
 	
 private:
 	KGameConnectDialogPrivate* d;

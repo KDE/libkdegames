@@ -97,14 +97,20 @@ public:
 	{
 		mInitConnection = 0;
 		mNetworkLabel = 0;
+		mNetworkDlg = 0;
+    mDefaultServer=true;
 
 	}
 
-	QPushButton* mInitConnection;
+	// QPushButton* mInitConnection;
+	QHGroupBox* mInitConnection;
 	QLabel* mNetworkLabel;
 
+  bool mDefaultServer;
 	QString mDefaultHost;
 	unsigned short int mDefaultPort;
+  KGameConnectDialog *mNetworkDlg;
+
 };
 
 
@@ -119,12 +125,28 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
  d->mNetworkLabel = new QLabel(this);
  topLayout->addWidget(d->mNetworkLabel);
 
+ /*
  d->mInitConnection = new QPushButton(this);
  d->mInitConnection->setText(i18n("Start Network game"));
  connect(d->mInitConnection, SIGNAL(clicked()), this, SLOT(slotInitConnection()));
  topLayout->addWidget(d->mInitConnection);
+ */
+ // MH 30082001
+
+
+ // Needs to be BEFORE the creation of the dialog below
+
+ d->mInitConnection = new QHGroupBox(i18n("Network configuration"), this);
+ topLayout->addWidget(d->mInitConnection);
+
+ d->mNetworkDlg=new KGameConnectDialog(0,0);
+ connect(d->mNetworkDlg, SIGNAL(signalNetworkSetup()), this, SLOT(slotInitConnection()));
+ d->mNetworkDlg->reparent(d->mInitConnection, QPoint(0,0));
+ d->mNetworkDlg->show();
+
+ // Needs to be AFTER the creation of the dialogs
  setConnected(false);
- setDefaultNetworkInfo("localhost", 0);
+ setDefaultNetworkInfo("localhost", 7654,true);
 }
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
@@ -132,11 +154,25 @@ KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
 
 void KGameDialogNetworkConfig::slotInitConnection()
 {
+ kdDebug(11000) << "KGameDialogNetworkConfig::slotInitConnection() !!!!!!!!!!!!!!!!!!!!!!!" << endl;
  bool connected = false;
  bool master = true;
  unsigned short int port = d->mDefaultPort;
  QString host = d->mDefaultHost;
- int result = KGameConnectDialog::initConnection(port, host, this, true);
+ int result;
+
+ // MH 30082001
+ if (d->mNetworkDlg)
+ {
+  result=QDialog::Accepted; 
+  host=d->mNetworkDlg->host();
+  port=d->mNetworkDlg->port();
+ }
+ else
+ {
+  result = KGameConnectDialog::initConnection(port, host, this, true);
+ } 
+ 
  if (result != QDialog::Accepted) {
 	connected = false;
  } else {
@@ -159,14 +195,14 @@ void KGameDialogNetworkConfig::slotInitConnection()
 void KGameDialogNetworkConfig::setConnected(bool connected, bool master)
 {
  if (!connected) {
-	d->mNetworkLabel->setText(i18n("No Network"));
+	d->mNetworkLabel->setText(i18n("Network status: No Network"));
 	d->mInitConnection->setEnabled(true);
 	return;
  }
  if (master) {
-	d->mNetworkLabel->setText(i18n("You are MASTER"));
+	d->mNetworkLabel->setText(i18n("Network status: You are MASTER"));
  } else {
-	d->mNetworkLabel->setText(i18n("You are connected"));
+	d->mNetworkLabel->setText(i18n("Network status: You are connected"));
  }
  d->mInitConnection->setEnabled(false);
 }
@@ -185,10 +221,18 @@ void KGameDialogNetworkConfig::setKGame(KGame* g)
  setConnected(game()->isNetwork(), game()->isMaster());
 }
 
-void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsigned short int port)
+void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsigned short int port,bool server)
 {
  d->mDefaultPort = port;
  d->mDefaultHost = host;
+ d->mDefaultServer = server;
+ if (d->mNetworkDlg)
+ {
+   d->mNetworkDlg->setHost(host);
+   d->mNetworkDlg->setPort(port);
+   if (server) d->mNetworkDlg->setDefault(0);
+   else d->mNetworkDlg->setDefault(1);
+ }
 }
 
 /////////////////////////// KGameDialogGeneralConfig /////////////////////////
