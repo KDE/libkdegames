@@ -152,7 +152,7 @@ void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
      emit signalInit(stream,(int)id);
    break;
    default:
-      emit signalCommand(stream,msgid,receiver,sender);
+      emit signalCommand(stream,msgid-KGameMessage::IdUser,receiver,sender);
    break;
  }
 }
