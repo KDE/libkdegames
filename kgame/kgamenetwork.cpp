@@ -130,6 +130,10 @@ void KGameNetwork::setMaster()
    connect (d->mMessageClient, SIGNAL(eventClientDisconnected(Q_UINT32, bool)),
             this, SIGNAL(signalClientDisconnected(Q_UINT32, bool)));
 
+   // broacast and direct messages are treated equally on receive.
+   connect (d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const QValueList<Q_UINT32>&)),
+            d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)));
+
  } else {
    // should be no problem but still has to be tested
    kdDebug(11001) << k_funcinfo << "Client already exists!" << endl;
@@ -347,6 +351,9 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, Q_UINT32
    sender = gameId();
  }
 
+ Q_UINT32 receiverClient = KGameMessage::rawGameId(receiver); // KGame::gameId()
+ int receiverPlayer = KGameMessage::rawPlayerId(receiver); // KPlayer::id()
+
  KGameMessage::createHeader(stream, sender, receiver, msgid);
  stream.writeRawBytes(data.data(), data.size());
 
@@ -364,7 +371,17 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, Q_UINT32
    return false;
  }
 
- d->mMessageClient->sendBroadcast(buffer);
+ if (receiverClient == 0 || receiverPlayer != 0)
+ {
+   // if receiverClient == 0 this is a broadcast message. if it is != 0 but
+   // receiverPlayer is also != 0 we have to send broadcast anyway, because the
+   // KPlayer object on all clients needs to receive the message.
+   d->mMessageClient->sendBroadcast(buffer);
+ }
+ else
+ {
+   d->mMessageClient->sendForward(buffer, receiverClient);
+ }
  return true;
 }
 

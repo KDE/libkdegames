@@ -164,22 +164,22 @@ public:
     bool sendSystemMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
-     * This is an overloaded member function, provided for convenience.
+     * @overload
      **/
     bool sendSystemMessage(int data, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
-     * This is an overloaded member function, provided for convenience.
+     * @overload
      **/
     bool sendSystemMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
-     * This is an overloaded member function, provided for convenience.
+     * @overload
      **/
     bool sendSystemMessage(const QString& msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
-     * Sends a network message 
+     * Sends a network message
      * @param error The error code
      * @param message The error message - use @ref KGameError
      * @param receiver the @ref KGame / @ref KPlayer this message is for. 0 For
