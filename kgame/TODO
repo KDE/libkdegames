@@ -9,16 +9,16 @@
 - 28.02.2001: Non existing properties in load should be created, resp like the player
               creation a signal should prompt the player.
               Problem, are these properties deleted? Maybe a flag canDelete?
-- 05.03.2001: Documentation. Especially KGameIO is nearly undocumented. I am
-              thinking of an explaination of the class + methods and example
-              code for the "key" methods. A sample implementation in a small
-              game (like the current kdenonbeta/kgame but with a real sense -
-              mabye use the QT tic-tac-toe example?) would be very great (this
-              could be stuff of a tutorial instead of KGame documentation)
+- 05.03.2001: Documentation. I am thinking of an explaination of the 
+              class + methods and example code for the "key" methods. A sample
+              implementation in a small game (like the current kdenonbeta/kgame
+              but with a real sense - mabye use the QT tic-tac-toe example?)
+              would be very great (this could be stuff of a tutorial instead of
+              KGame documentation)
               MH: Even better idea
-- 03.06.2001: can KGameNetwork::sendSystemMessage made protected (maybe using
+- 03.06.2001: can KGameNetwork::sendSystemMessage be made protected (maybe using
               friends)? sendSystenMessage AND sendMessage is very confusing to
-              the user... same applies to e.g. sendProperty which is internal
+              the user...
 - 03.06.2001: can we translate the group of a KPlayer? Probably not as there are
               no international connections possible then... maybe a group id?
 - 05.06.2001: KGameDialog::saveConfig(KConfig*) might be useful (as well as
@@ -37,10 +37,4 @@
               01/09/09: FIXED! (AB) TODO: check if this behavior also appears in
 	      KGamePropertyList and KGamePropertyArray. Althogh this should not
 	      be the case
-
-
-
-
-
-
 

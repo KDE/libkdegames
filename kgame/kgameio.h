@@ -34,7 +34,7 @@ class KProcess;
  *  The KGameIO class. This is the master class for
  *  creating IO game devices. You cannot use it directly.
  *  Either take one of the classes derived from it or
- *  you have to create your own IO class derived from it.
+ *  you have to create your own IO class derived from it (more probably).
  *
  *  The idea behind this class is to provide a common interface
  *  for input devices into your game. By programming a KGameIO
@@ -44,6 +44,10 @@ class KProcess;
  *  A further advantage of using the IO's is that you can exchange
  *  the control of a player at runtime. E.g. you switch a player
  *  to be controlled by the computer or vice versa.
+ *
+ *  To achieve this you have to make all of your player inputs through a
+ *  KGameIO. You will usually call @ref KGameIO::sendInput to do so. 
+ *  }
  */
 class KGameIO : public QObject
 {

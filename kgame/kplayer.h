@@ -40,15 +40,36 @@ class KPlayerPrivate;
  * input the player does. For this arbitrary many KGameIO
  * modules can be plugged into it. Main features are:
  * - Handling of IO devices
- * - load/save
+ * - load/save (mostly handled by @ref KGamePropertyHandler)
  * - Turn handling (turn based, asynchronous)
  *
  * A KPlayer depends on a @ref KGame object. Call @ref KGame::addPlayer to plug
- * a KPlayer into a @ref KGame object. Note that you cannot do _anything_ with a
+ * a KPlayer into a @ref KGame object. Note that you cannot much with a
  * KPlayer object before it has been plugged into a @ref KGame. This is because
  * most properties of KPlayer are @ref KGameProperty which need to send messages
  * through a @ref KGame object to be changed. Therefore you cannot even change
- * the name of a player before @ref KGame::addPlayer was called.
+ * the name of a player before @ref KGame::addPlayer was called. (UPDATE: you
+ * can! if there is no @ref KMessageServer available the property uses @ref
+ * KGameProperty::setLocal instead)
+ *
+ * You should not (I repeat: NOT!) send your game messages direclty through a
+ * KPlayer object. FOr example if you want your player to move by 4 fields DON'T
+ * call player->move(4); or something like this. Use a @ref KGameIO for these
+ * things. 
+ * A KGameIO represents the inmput methods of a player and you should make all
+ * player inputs through it. So call something like playerInput->move(4);
+ * instead which should call @ref KGameIO::sendInput to actually move. This way
+ * you gain a *very* big advantage: you can exchange a @ref KGameIO whenever you
+ * want! YOu can e.g. remove the KGameIO of a local (human) player and just
+ * replace it by a computerIO on the fly! So from that point on all playerInputs
+ * are done by the computerIO instead of the human player. You also can replace
+ * all network players by computer players when the network connection is broken
+ * or a player wants to quit. 
+ * So remember: use @ref KGameIO whenever possible! A KPlayer should just
+ * contain all data of the player (@ref KGameIO must not!) and several common
+ * functions which are shared by all of your KGameIOs.
+ *
+ * @short Base class for a game player
  */
 class KPlayer : public QObject
 {
@@ -102,6 +123,7 @@ public:
        * @param game the game
        */
       void setGame(KGame *game) {mGame=game;}
+
       /**
        * Query to which game the player belongs to
        *
@@ -117,6 +139,7 @@ public:
        * @param a async=true turn based=false
        */
       void setAsyncInput(bool a) {mAsyncInput = a;}
+      
       /**
        * Query whether this player does asynchronous 
        * input
@@ -338,6 +361,7 @@ public:
       * @return true?
       */
       virtual bool load(QDataStream &stream);
+
      /**
       * Save a player to a file OR to network. Otherwise the same as 
       * the load function
@@ -371,7 +395,6 @@ public:
        * the id) or true if the property could be added successfully
        **/
       bool addProperty(KGamePropertyBase* data);
-
 
       /**
        * Calculates a checksum over the IO devices. Can be used to
@@ -411,10 +434,8 @@ signals:
        /**
         * This signal is emmited if a player property changes its value and
         * the property is set to notify this change
-        *
         */
        void signalPropertyChanged(KGamePropertyBase *property,KPlayer *me);
-
 
 protected slots:
       /**

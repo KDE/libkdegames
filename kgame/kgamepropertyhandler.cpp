@@ -262,7 +262,9 @@ void KGamePropertyHandler::flush()
 {
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
-	if (it.current()->isDirty()) it.current()->sendProperty();
+	if (it.current()->isDirty()) {
+		it.current()->sendProperty();
+	}
 	++it;
  }
 }
