@@ -554,6 +554,11 @@ signals:
     /**
      * a player left the game because of a broken connection or so!
      *
+     * Note that when this signal is emitted the player is not part of @ref
+     * playerList anymore but the pointer is still valid. You should do some
+     * final cleanups here since the player is usually deleted after the signal
+     * is emitted.
+     *
      * @param player the player who left the game
      */
     void signalPlayerLeftGame(KPlayer *player);
@@ -763,7 +768,6 @@ protected:
      * Use @ref removePlayer to send @ref KGameMessage::IdRemovePlayer. As soon
      * as this Id is received systemRemovePlayer is called and the player is
      * removed directly.
-     *
      **/
     void systemRemovePlayer(KPlayer* player,bool deleteit);
 

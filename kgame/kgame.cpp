@@ -501,11 +501,7 @@ bool KGame::removePlayer(KPlayer * player, Q_UINT32 receiver)
 
 void KGame::systemRemovePlayer(KPlayer* player,bool deleteit)
 {
- if (player) 
- {
-   emit signalPlayerLeftGame(player);
- }
- else 
+ if (!player) 
  {
    kdWarning(11001) << "cannot remove NULL player" << endl;
    return;
@@ -540,6 +536,8 @@ bool KGame::systemRemove(KPlayer* p,bool deleteit)
  {
    result = d->mPlayerList.remove(p);
  }
+
+ emit signalPlayerLeftGame(p);
 
  p->setGame(0);
  if (deleteit) 
