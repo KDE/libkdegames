@@ -34,6 +34,7 @@ class KRandomSequence;
 class KPlayer;
 class KGamePropertyBase;
 class KGamePropertyHandler;
+class KGameSequence;
 
 class KGamePrivate;
 
@@ -159,6 +160,12 @@ public:
     KRandomSequence *random() const;
 
     /**
+     * @return The @ref KGameSequence object that is currently in use. See also
+     * @ref setGameSequence
+     **/
+    KGameSequence *gameSequence() const;
+
+    /**
      * Is the game running
      * @return true/false
      */
@@ -171,6 +178,17 @@ public:
      * @return player object
      */
     KPlayer *findPlayer(Q_UINT32 id) const;
+
+    /**
+     * Set a new @ref KGameSequence to control player management. By default
+     * KGame uses a normal @ref KGameSequence object. You might want to subclass
+     * that and provide your own object.
+     *
+     * The previous sequence will get deleted.
+     * @param sequence The new game sequence object. KGame takes ownership and
+     * will delete it on destruction!
+     **/
+    void setGameSequence(KGameSequence* sequence);
 
     /**
      * Note that @ref KPlayer::save must be implemented properly, as well as
@@ -253,10 +271,9 @@ public:
     uint playerCount() const;
 
     /**
-     * Select the next player in a turn based game. In an asynchronous game this
-     * function has no meaning. Overwrite this function for your own game sequence.
-     * Per default it selects the next player in the playerList
-     */
+     * @deprecated
+     * Use @ref KGameSequence::nextPlayer instead
+     **/
     virtual KPlayer * nextPlayer(KPlayer *last,bool exclusive=true);
 
     // Input events
@@ -459,8 +476,9 @@ protected slots:
     void emitSignal(KGamePropertyBase *me);
 
     /**
-     * Prepare the call of nextPlayer() after a QTimer event to allow QT Event processing
-     */
+     * @deprecated
+     * Use @ref KGameSequence::prepareNext instead
+     **/
     virtual void prepareNext();
 
 
@@ -824,7 +842,8 @@ protected:
     void deleteInactivePlayers();
 
     /**
-     * Check whether the game is over.
+     * @deprecated
+     * Use @ref KGameSequence instead.
      *
      * @param player the player who made the last move
      * @return anything else but 0 is considered as game over

@@ -28,6 +28,7 @@
 #include "kplayer.h"
 #include "kgameio.h"
 #include "kgameerror.h"
+#include "kgamesequence.h"
 
 #include "kgamemessage.h"
 
@@ -54,15 +55,15 @@ public:
     KGamePrivate()
     {
         mUniquePlayerNumber = 0;
-        mCurrentPlayer = 0 ; // use this only for the singleShot otherwise load problems
         mPolicy=KGame::PolicyLocal;
+        mGameSequence = 0;
     }
 
     int mUniquePlayerNumber;
-    KPlayer *mCurrentPlayer;
     QPtrQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
     KRandomSequence* mRandom;
     KGame::GamePolicy mPolicy;
+    KGameSequence* mGameSequence;
 
 
     KGamePropertyHandler* mProperties;
@@ -107,6 +108,7 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  connect(this, SIGNAL(signalConnectionBroken()),
                 this, SLOT(slotServerDisconnected()));
 
+ setGameSequence(new KGameSequence());
 
  // BL: FIXME This signal does no longer exist. When we are merging
  // MH: super....and how do I find out about the lost conenction now?
@@ -120,6 +122,7 @@ KGame::~KGame()
  kdDebug(11001) << k_funcinfo << endl;
 // Debug();
  reset();
+ delete d->mGameSequence;
  delete d->mRandom;
  delete d;
  kdDebug(11001) << k_funcinfo << " done" << endl;
@@ -199,7 +202,10 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  stream >> d->mUniquePlayerNumber;
 
- d->mCurrentPlayer=0;  // TODO !!!
+ if (gameSequence())
+ {
+   gameSequence()->setCurrentPlayer(0);  // TODO !!!
+ }
  int newseed;
  stream >> newseed;
  d->mRandom->setSeed(newseed);
@@ -739,92 +745,73 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
 {
  kdDebug(11001) << k_funcinfo<<"player input finished for "<<player->id()<<endl;
  // Check for game over and if not allow the next player to move
- d->mCurrentPlayer=player;
- int gameOver=checkGameOver(player);
+ int gameOver = 0;
+ if (gameSequence())
+ {
+   gameSequence()->setCurrentPlayer(player);
+   gameOver = gameSequence()->checkGameOver(player);
+ }
  if (gameOver!=0)
  {
-   if (player) player->setTurn(false);
+   if (player)
+   {
+     player->setTurn(false);
+   }
    setGameStatus(End);
    emit signalGameOver(gameOver,player,this);
  }
  else if (!player->asyncInput())
  {
    player->setTurn(false); // in turn based games we have to switch off input now
-   QTimer::singleShot(0,this,SLOT(prepareNext()));
+   if (gameSequence())
+   {
+     QTimer::singleShot(0,this,SLOT(prepareNext()));
+   }
  }
  return player;
 }
 
 // Per default we do not do anything
-int KGame::checkGameOver(KPlayer *)
+int KGame::checkGameOver(KPlayer *player)
 {
+ if (gameSequence())
+ {
+   return gameSequence()->checkGameOver(player);
+ }
  return 0;
+}
+
+void KGame::setGameSequence(KGameSequence* sequence)
+{
+ delete d->mGameSequence;
+ d->mGameSequence = sequence;
+ if (d->mGameSequence)
+ {
+   d->mGameSequence->setGame(this);
+ }
+}
+
+KGameSequence* KGame::gameSequence() const
+{
+  return d->mGameSequence;
 }
 
 void KGame::prepareNext()
 {
- nextPlayer(d->mCurrentPlayer);
+ if (gameSequence())
+ {
+   // we don't call gameSequence->nextPlayer() to keep old code working
+   nextPlayer(gameSequence()->currentPlayer());
+ }
 }
 
 KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
 {
- kdDebug(11001) << "=================== NEXT PLAYER =========================="<<endl;
- unsigned int minId,nextId,lastId;
- KPlayer *nextplayer, *minplayer;
- if (last)
+ if (gameSequence())
  {
-   lastId = last->id();
+   return gameSequence()->nextPlayer(last, exclusive);
  }
- else
- {
-   lastId = 0;
- }
-
- kdDebug(11001) << "nextPlayer: lastId="<<lastId<<endl;
-
- // remove when this has been checked
- minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...
- nextId = minId;
- nextplayer = 0;
- minplayer = 0;
-
- KPlayer *player;
- for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
- {
-   // Find the first player for a cycle
-   if (player->id() < minId)
-   {
-     minId=player->id();
-     minplayer=player;
-   }
-   if (player==last)
-   {
-     continue;
-   }
-   // Find the next player which is bigger than the current one
-   if (player->id() > lastId && player->id() < nextId)
-   {
-     nextId=player->id();
-     nextplayer=player;
-   }
- }
-
- // Cycle to the beginning
- if (!nextplayer)
- {
-   nextplayer=minplayer;
- }
-
- kdDebug(11001) << k_funcinfo << " ##### lastId=" << lastId << " exclusive=" << exclusive << "  minId=" << minId << " nextid=" << nextId << " count=" <<d->mPlayerList.count()  << endl;
- if (nextplayer)
- {
-   nextplayer->setTurn(true,exclusive);
- }
- else
- {
-   return 0;
- }
- return nextplayer;
+ return 0;
 }
 
 void KGame::setGameStatus(int status)
