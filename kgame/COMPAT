@@ -24,8 +24,8 @@
              signal to playerInput() and return TRUE in it. This will make it 100%
              compatible to the old version. I think this chagne is necessary especially
              as a signal is of no use here as you cannot read twice from the same stream.
-             Therefore ther can only be one function processing the input. If you really
-             need a signal, you can of course simly emit it in the overwritten playerInput
+             Therefore there can be only one function processing the input. If you really
+             need a signal, you can of course simply emit it in the overwritten playerInput
              function
 20.09.2001  playerInputFinished(void->KPlayer *)
 --------------------- KGAME_ALPHA_1 --------------------- 

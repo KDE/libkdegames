@@ -674,12 +674,12 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
 {
  if (!player) 
  {
-   kdError(11001) << "KGame::playerInput(): NULL player" << endl;
+   kdError(11001) << "KGame::systemPlayerInput(): NULL player" << endl;
    return false;
  }
  if (!isRunning()) 
  {
-   kdError(11001) << "KGame::playerInput(): game not running" << endl;
+   kdError(11001) << "KGame::systemPlayerInput(): game not running" << endl;
    return false;
  }
  kdDebug(11001) << "KGame: Got playerInput from messageServer... sender: " << sender << endl;
