@@ -164,8 +164,8 @@ void KGameDialogNetworkConfig::slotInitConnection()
  kdDebug(11001) << k_funcinfo << endl;
  bool connected = false;
  bool master = true;
- unsigned short int port = port = d->mConnect->port();
- QString host = host = d->mConnect->host();
+ unsigned short int port = d->mConnect->port();
+ QString host = d->mConnect->host();
  
  if (host.isNull()) {
 	master = true;
