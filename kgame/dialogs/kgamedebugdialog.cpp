@@ -138,7 +138,7 @@ KGameDebugDialog::~KGameDebugDialog()
 
 void KGameDebugDialog::initGamePage()
 {
- d->mGamePage = addPage(i18n("Debug KGame"));
+ d->mGamePage = addPage(i18n("Debug &KGame"));
  QVBoxLayout* topLayout = new QVBoxLayout(d->mGamePage, marginHint(), spacingHint());
  QHBoxLayout* layout = new QHBoxLayout(topLayout);
 
@@ -173,7 +173,7 @@ void KGameDebugDialog::initGamePage()
 
 void KGameDebugDialog::initPlayerPage()
 {
- d->mPlayerPage = addPage(i18n("Debug Players"));
+ d->mPlayerPage = addPage(i18n("Debug &Players"));
  QVBoxLayout* topLayout = new QVBoxLayout(d->mPlayerPage, marginHint(), spacingHint());
  QHBoxLayout* layout = new QHBoxLayout(topLayout);
 
@@ -217,7 +217,7 @@ void KGameDebugDialog::initPlayerPage()
 
 void KGameDebugDialog::initMessagePage()
 {
- d->mMessagePage = addPage(i18n("Debug Messages"));
+ d->mMessagePage = addPage(i18n("Debug &Messages"));
  QGridLayout* layout = new QGridLayout(d->mMessagePage, 11, 7, marginHint(), spacingHint());
  d->mMessageList = new KListView(d->mMessagePage);
  layout->addMultiCellWidget(d->mMessageList, 0, 9, 0, 3);
