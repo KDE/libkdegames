@@ -91,7 +91,7 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 }
 
 void KGameDialog::initDefaultDialog(ConfigOptions initConfigs,
-    KGameDialogGeneralConfig* conf, 
+		KGameDialogGeneralConfig* conf, 
 		KGameDialogNetworkConfig* netConf, 
 		KGameDialogMsgServerConfig* msgConf,
 		KGameDialogChatConfig* chat, 
@@ -99,11 +99,12 @@ void KGameDialog::initDefaultDialog(ConfigOptions initConfigs,
 {
  if (conf) {
 	addGameConfig(conf);
- } else if (initConfigs& (ChatConfig|PlayerConfig) )
- {
-  KGameDialogGeneralConfig* c=new KGameDialogGeneralConfig(0);
+ } else if (initConfigs& (ChatConfig|PlayerConfig) ) {
+	KGameDialogGeneralConfig* c=new KGameDialogGeneralConfig(0);
 	addGameConfig(c);
-  if (! (initConfigs&PlayerConfig) )  c->setEnabled(false);
+	if (! (initConfigs&PlayerConfig) ) {
+		c->setEnabled(false);
+	}
  }
  if (netConf) {
 	addNetworkConfig(netConf);

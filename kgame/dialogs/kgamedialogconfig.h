@@ -62,11 +62,11 @@ public:
 	 * @param g A pointer to your KGame.
 	 * @param p A pointer to the player owning this dialog
 	 **/
-	//virtual void submitToKGame(KGame* g, KPlayer* p) = 0;
-	virtual void submitToKGame(KGame* g, KPlayer* p) 
+	virtual void submitToKGame(KGame* g, KPlayer* p) = 0;
+/*	virtual void submitToKGame(KGame* g, KPlayer* p) 
   {
     kdError(11001) << "submitToKGame pure virtual call ...BAD " << endl;
-  }
+  }*/
 
 	/**
 	 * The owner player of the dialog has been changed. The default

@@ -59,13 +59,13 @@ class KMessageIO : public QObject
 
 public:
   /**
-  * The usual QObject constructor, does nothing else.
-  */
+   * The usual QObject constructor, does nothing else.
+   **/
   KMessageIO (QObject *parent = 0, const char *name = 0);
 
   /**
-  * The usual destructor, does nothing special.
-  */
+   * The usual destructor, does nothing special.
+   **/
   ~KMessageIO ();
 
   /**

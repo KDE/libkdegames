@@ -76,17 +76,17 @@ class KGameDialog : public KDialogBase
 	Q_OBJECT
 public:
 
-   enum ConfigOptions
-   {
-     NoConfig=0,
-     ChatConfig=1,
-     PlayerConfig=2,
-     NetworkConfig=4,
-     ClientConfig=8,
-     AdminConfig=16,
-     BanPlayerConfig=32,
-     AllConfig=0xffff
-   };
+	enum ConfigOptions
+	{
+		NoConfig=0,
+		ChatConfig=1,
+		PlayerConfig=2,
+		NetworkConfig=4,
+		ClientConfig=8,
+		AdminConfig=16,
+		BanPlayerConfig=32,
+		AllConfig=0xffff
+	};
 	/**
 	 * Create a KGameDialog with the standard configuration widgets. This
 	 * creates the following widgets:
