@@ -279,7 +279,10 @@ QValueList <Q_UINT32> KMessageServer::clientIDs () const
   QValueList <Q_UINT32> list;
   QListIterator <KMessageIO> iter (d->mClientList);
   while (*iter)
+  {
     list.append ((*iter)->id());
+    ++iter;
+  }
   return list;
 }
 
