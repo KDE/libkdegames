@@ -283,6 +283,12 @@ protected slots:
 	 **/
 	void setAdmin(bool isAdmin);
 
+	/**
+	 * Remove a config widget from the widget list. See also @ref
+	 * QObject::destroyed
+	 **/
+	void slotRemoveConfigWidget(QObject* configWidget);
+
 private:
 	void init(KGame*, KPlayer*);
 

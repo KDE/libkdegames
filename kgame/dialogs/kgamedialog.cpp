@@ -65,6 +65,8 @@ public:
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 		QWidget* parent, bool modal)
+	: KDialogBase(Tabbed, title, Ok|Default|Apply,
+	Ok, parent, 0, modal, true)
 {
  init(g, owner);
 }
@@ -125,8 +127,6 @@ void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 		// if no network page available put it on an own page
 		addConfigPage(new KGameDialogConnectionConfig(0), i18n("C&onnections"));
 	}
- }
- if (d->mNetworkPage && (initConfigs & BanPlayerConfig) ) {
  }
 }
 
@@ -238,6 +238,7 @@ void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
 // kdDebug(11001) << "reparenting widget" << endl;
  widget->reparent(parent, QPoint(0,0));
  d->mConfigWidgets.append(widget);
+ connect(widget, SIGNAL(destroyed(QObject*)), this, SLOT(slotRemoveConfigWidget(QObject*)));
  if (!d->mGame) {
 	kdWarning(11001) << "No game has been set!" << endl;
  } else {
@@ -336,5 +337,10 @@ void KGameDialog::submitToKGame()
 	d->mConfigWidgets.at(i)->submitToKGame(d->mGame, d->mOwner);
 // kdDebug(11001) << "done: submit to kgame " << i << endl;
  }
+}
+
+void KGameDialog::slotRemoveConfigWidget(QObject* configWidget)
+{
+ d->mConfigWidgets.removeRef((KGameDialogConfig*)configWidget);
 }
 
