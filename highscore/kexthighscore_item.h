@@ -60,16 +60,17 @@ class Item
      * <ul>
      * <li> @p NoSpecial : no special value ; a null DateTime is replaced by
      *      "--" (default) </li>
-     * <li> ZeroNotDefine : 0 is replaced by "--" (only for UInt, Int and
+     * <li> ZeroNotDefined : 0 is replaced by "--" (only for UInt, Int and
      *      Double) </li>
      * <li> @p NegativeNotDefined : negative values are replaced by "--" (only
      *      for Int and Double) </li>
+     * <li> @p DefaultNotDefined : deafult value is replaced by "--" </lit>
      * <li> @p Anonymous : replace the special value @ref ItemBase::ANONYMOUS
      *      by i18n("anonymous") (only for String) </li>
      * </ul>
      */
     enum Special { NoSpecial, ZeroNotDefined, NegativeNotDefined,
-                   Anonymous };
+                   DefaultNotDefined, Anonymous };
 
     /**
      * Constructor.
@@ -101,6 +102,11 @@ class Item
      * @return if the item is shown.
      */
     bool isVisible() const    { return !_label.isEmpty(); }
+
+    /**
+     * Set the label.
+     */
+    void setLabel(const QString &label) { _label = label; }
 
     /**
      * @return the label.

@@ -89,6 +89,7 @@ class ItemContainer
 
     void setItem(Item *item);
     const Item *item() const { return _item; }
+    Item *item() { return _item; }
 
     void setName(const QString &name) { _name = name; }
     QString name() const { return _name; }
@@ -130,6 +131,7 @@ class ItemArray : public QMemArray<ItemContainer *>
     virtual uint nbEntries() const = 0;
 
     const ItemContainer *item(const QString &name) const;
+    ItemContainer *item(const QString &name);
 
     void addItem(const QString &name, Item *, bool stored = true,
                  bool canHaveSubGroup = false);

@@ -73,8 +73,8 @@ void Item::setPrettyFormat(Format format)
 void Item::setPrettySpecial(Special special)
 {
     bool buint = ( _default.type()==QVariant::UInt );
-    bool bdouble = ( _default.type()==QVariant::Double );
-    bool bnum = ( buint || bdouble || _default.type()==QVariant::Int );
+    bool bnum = ( buint || _default.type()==QVariant::Double
+                  || _default.type()==QVariant::Int );
 
     switch (special) {
     case ZeroNotDefined:
@@ -82,6 +82,8 @@ void Item::setPrettySpecial(Special special)
         break;
     case NegativeNotDefined:
         Q_ASSERT(bnum && !buint);
+        break;
+    case DefaultNotDefined:
         break;
     case Anonymous:
         Q_ASSERT( _default.type()==QVariant::String );
@@ -109,6 +111,9 @@ QString Item::pretty(uint, const QVariant &value) const
         break;
     case NegativeNotDefined:
         if ( value.toInt()<0 ) return "--";
+        break;
+    case DefaultNotDefined:
+        if ( value==_default ) return "--";
         break;
     case Anonymous:
         if ( value.toString()==ItemContainer::ANONYMOUS )

@@ -121,6 +121,14 @@ const ItemContainer *ItemArray::item(const QString &name) const
     return at(i);
 }
 
+ItemContainer *ItemArray::item(const QString &name)
+{
+    int i = findIndex(name);
+    if ( i==-1 ) kdError(11002) << k_funcinfo << "no item named \"" << name
+                                << "\"" << endl;
+    return at(i);
+}
+
 void ItemArray::setItem(const QString &name, Item *item)
 {
     int i = findIndex(name);
@@ -342,13 +350,16 @@ void PlayerInfos::submitScore(const Score &score) const
     if ( !lost ) {
         uint nbWonGames = nbGames - item("nb lost games")->read(_id).toUInt()
                        - item("nb black marks")->read(_id).toUInt(); // legacy
-        double mean = item("mean score")->read(_id).toDouble();
+        double mean =
+            (nbWonGames==1 ? 0.0 : item("mean score")->read(_id).toDouble());
         mean += (double(score.score()) - mean) / nbWonGames;
         item("mean score")->write(_id, mean);
     }
 
     // update best score
-    if ( score.score()>item("best score")->read(_id).toUInt() ) {
+    Score best = score; //copy optionnal fields that are not taken into account
+    best.setScore( item("best score")->read(_id).toUInt() );
+    if ( best<score ) {
         item("best score")->write(_id, score.score());
         item("date")->write(_id, score.data("date").toDateTime());
     }

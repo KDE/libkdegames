@@ -195,11 +195,11 @@ Item *Manager::createItem(ItemType type)
     case MeanScoreDefault:
         item = new Item((double)0, i18n("Mean Score"), Qt::AlignRight);
         item->setPrettyFormat(Item::OneDecimal);
-        item->setPrettySpecial(Item::ZeroNotDefined);
+        item->setPrettySpecial(Item::DefaultNotDefined);
         break;
     case BestScoreDefault:
         item = new Item((uint)0, i18n("Best Score"), Qt::AlignRight);
-        item->setPrettySpecial(Item::ZeroNotDefined);
+        item->setPrettySpecial(Item::DefaultNotDefined);
         break;
     case ElapsedTime:
         item = new Item((uint)0, i18n("Elapsed Time"), Qt::AlignRight);
@@ -214,6 +214,10 @@ void Manager::setScoreItem(uint worstScore, Item *item)
 {
     item->setDefaultValue(worstScore);
     internal->scoreInfos().setItem("score", item);
+    internal->playerInfos().item("mean score")
+        ->item()->setDefaultValue(double(worstScore));
+    internal->playerInfos().item("best score")
+        ->item()->setDefaultValue(worstScore);
 }
 
 void Manager::addScoreItem(const QString &name, Item *item)
@@ -232,6 +236,8 @@ void Manager::setPlayerItem(PlayerItemType type, Item *item)
         name = "best score";
         break;
     }
+    const Item *scoreItem = internal->scoreInfos().item("score")->item();
+    item->setDefaultValue( scoreItem->defaultValue() );
     internal->playerInfos().setItem(name, item);
 }
 
