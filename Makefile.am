@@ -2,7 +2,7 @@
 lib_LTLIBRARIES = libkdegames.la
 libkdegames_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -no-undefined -version-info 3:0:2
 libkdegames_la_LIBADD  = highscore/libkhighscore.la kgame/libkgame.la kgame/dialogs/libkgamedialogs.la \
-		$(LIB_KSYCOCA)
+		$(LIB_KSYCOCA) $(LIB_KDNSSD)
 
 libkdegames_la_SOURCES = kcarddialog.cpp kstdgameaction.cpp \
 		kgamemisc.cpp kchatbase.cpp kchat.cpp \

@@ -170,6 +170,7 @@ void KGameDialogNetworkConfig::slotInitConnection()
  if (host.isNull()) {
 	master = true;
 	if (game()) {
+		game()->setDiscoveryInfo(d->mConnect->type(),d->mConnect->gameName());
 		connected = game()->offerConnections(port);
 	}
  } else {
@@ -238,6 +239,12 @@ void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsign
 	d->mConnect->setDefault(1);
  }
 }
+
+void KGameDialogNetworkConfig::setDiscoveryInfo(const QString& type, const QString& name)
+{
+ d->mConnect->setType(type);
+ d->mConnect->setName(name);
+} 
 
 /////////////////////////// KGameDialogGeneralConfig /////////////////////////
 class KGameDialogGeneralConfigPrivate

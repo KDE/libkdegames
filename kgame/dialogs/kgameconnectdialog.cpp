@@ -25,10 +25,12 @@
 #include <klocale.h>
 
 #include <qlineedit.h>
+#include <qcombobox.h>
 #include <qvbuttongroup.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <qlabel.h>
+#include <dnssd/servicebrowser.h>
 #include <qpushbutton.h>
 #include <qgrid.h>
 
@@ -40,11 +42,18 @@ class KGameConnectWidgetPrivate
 		mPort = 0;
 		mHost = 0;
 		mButtonGroup = 0;
+		mBrowser = 0;
 	}
 
 	KIntNumInput* mPort;
 	QLineEdit* mHost; //KLineEdit?
 	QVButtonGroup* mButtonGroup;
+	QComboBox *mClientName;
+	QLabel *mClientNameLabel;
+	DNSSD::ServiceBrowser *mBrowser;
+	QLabel *mServerNameLabel;
+	QLineEdit *mServerName;
+	QString mType;
 };
 
 KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
@@ -61,6 +70,11 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  QGrid* g = new QGrid(2, this);
  vb->addWidget(g);
  g->setSpacing(KDialog::spacingHint());
+ d->mServerNameLabel = new QLabel(i18n("Game name:"), g);
+ d->mServerName = new QLineEdit(g);
+ d->mClientNameLabel = new QLabel(i18n("Network games:"), g);
+ d->mClientName = new QComboBox(g);
+ connect(d->mClientName,SIGNAL(activated(int)),SLOT(slotGameSelected(int)));
  (void)new QLabel(i18n("Port to connect to:"), g);
  d->mPort = new KIntNumInput(g);
  (void)new QLabel(i18n("Host to connect to:"), g);
@@ -69,10 +83,80 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  QPushButton *button=new QPushButton(i18n("&Start Network"), this);
  connect(button, SIGNAL(clicked()), this, SIGNAL(signalNetworkSetup()));
  vb->addWidget(button);
+ // Hide until type is set
+ d->mClientName->hide();
+ d->mClientNameLabel->hide();
+ d->mServerName->hide();
+ d->mServerNameLabel->hide();
 }
 
+void KGameConnectWidget::showDnssdControls() 
+{
+ if (!d->mBrowser) return;
+ if (d->mHost->isEnabled()) {      // client	
+  d->mClientName->show();
+  d->mClientNameLabel->show();
+  d->mServerName->hide();
+  d->mServerNameLabel->hide();
+  slotGameSelected(d->mClientName->currentItem());
+ } else {
+  d->mClientName->hide();
+  d->mClientNameLabel->hide();
+  d->mServerName->show();
+  d->mServerNameLabel->show();
+ }
+}
+
+void KGameConnectWidget::setType(const QString& type) 
+{
+ d->mType = type;
+ delete d->mBrowser;
+ d->mBrowser = new DNSSD::ServiceBrowser(type);
+ connect(d->mBrowser,SIGNAL(finished()),SLOT(slotGamesFound()));
+ d->mBrowser->startBrowse();
+ showDnssdControls();
+}
+
+void KGameConnectWidget::slotGamesFound()
+{
+ bool autoselect=false;
+ if (!d->mClientName->count()) autoselect=true;
+ d->mClientName->clear();
+ QStringList names;
+ QValueList<DNSSD::RemoteService::Ptr>::ConstIterator itEnd = d->mBrowser->services().end();
+ for (QValueList<DNSSD::RemoteService::Ptr>::ConstIterator it = d->mBrowser->services().begin();
+  it!=itEnd; ++it) names << (*it)->serviceName();
+ d->mClientName->insertStringList(names);
+ if (autoselect && d->mClientName->count()) slotGameSelected(0);
+}
+
+void KGameConnectWidget::setName(const QString& name) 
+{
+ d->mServerName->setText(name);
+}
+
+QString KGameConnectWidget::gameName() const
+{
+ return d->mServerName->text();
+}
+
+QString KGameConnectWidget::type() const
+{
+ return d->mType;
+}
+
+void KGameConnectWidget::slotGameSelected(int nr)
+{
+ if (nr>=(d->mBrowser->services().count()) || nr<0) return;
+ if (!d->mHost->isEnabled()) return; // this is server mode, do not overwrite host and port controls
+ DNSSD::RemoteService::Ptr srv = d->mBrowser->services()[nr];
+ if (!srv->isResolved() && !srv->resolve()) return;
+ d->mHost->setText(srv->hostName());
+ d->mPort->setValue(srv->port());
+}
 KGameConnectWidget::~KGameConnectWidget()
 {
+ delete d->mBrowser;
  delete d;
 }
 
@@ -113,6 +197,7 @@ void KGameConnectWidget::slotTypeChanged(int t)
  } else if (t == 1) {
 	d->mHost->setEnabled(true);
  }
+ showDnssdControls();
  emit signalServerTypeChanged(t);
 }
 

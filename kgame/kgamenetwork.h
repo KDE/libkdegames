@@ -110,6 +110,8 @@ public:
      **/
     bool offerConnections (Q_UINT16 port);
 
+    void setDiscoveryInfo(const QString& type, const QString& name=QString::null);
+    
     /**
      * Inits a network game as a network CLIENT
      *
@@ -411,6 +413,8 @@ protected slots:
 
 
 private:
+     void tryPublish();
+     void tryStopPublishing();
      KGameNetworkPrivate* d;
 };
 

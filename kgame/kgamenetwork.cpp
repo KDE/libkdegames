@@ -29,6 +29,7 @@
 #include "kmessageserver.h"
 #include "kmessageclient.h"
 #include "kmessageio.h"
+#include <dnssd/publicservice.h>
 
 #include <kdebug.h>
 
@@ -43,12 +44,16 @@ public:
                 mMessageClient = 0;
                 mMessageServer = 0;
                 mDisconnectId = 0;
+		mService = 0;
         }
 
 public:
         KMessageClient* mMessageClient;
         KMessageServer* mMessageServer;
         Q_UINT32 mDisconnectId;  // Stores gameId() over a disconnect process
+	DNSSD::PublicService* mService;
+	QString mType;
+	QString mName;
 
         int mCookie;
 };
@@ -70,6 +75,7 @@ KGameNetwork::~KGameNetwork()
 {
  kdDebug(11001) << k_funcinfo << "this=" << this << endl;
 // Debug();
+ delete d->mService;
  delete d;
 }
 
@@ -141,6 +147,30 @@ void KGameNetwork::setMaster()
  d->mMessageClient->setServer(d->mMessageServer);
 }
 
+void KGameNetwork::setDiscoveryInfo(const QString& type, const QString& name)
+{
+ kdDebug() << k_funcinfo << type << ":" << name << endl;
+ d->mType = type;
+ d->mName = name;
+ tryPublish();
+}
+
+void KGameNetwork::tryPublish()
+{
+ if (d->mType.isNull() || !isOfferingConnections()) return;
+ if (!d->mService) d->mService = new DNSSD::PublicService(d->mName,d->mType,port());
+ else {
+   if (d->mType!=d->mService->type()) d->mService->setType(d->mType);
+   if (d->mName!=d->mService->serviceName()) d->mService->setServiceName(d->mName);
+   }
+ if (!d->mService->isPublished()) d->mService->publishAsync();
+}
+
+void KGameNetwork::tryStopPublishing()
+{
+ if (d->mService) d->mService->stop();
+}
+
 bool KGameNetwork::offerConnections(Q_UINT16 port)
 {
  kdDebug (11001) << k_funcinfo << "on port " << port << endl;
@@ -156,6 +186,7 @@ bool KGameNetwork::offerConnections(Q_UINT16 port)
    kdDebug (11001) << k_funcinfo << "Already running as server! Changing the port now!" << endl;
  }
 
+ tryStopPublishing();
  kdDebug (11001) << k_funcinfo << "before Server->initNetwork" << endl;
  if (!d->mMessageServer->initNetwork (port)) {
    kdError (11001) << k_funcinfo << "Unable to bind to port " << port << "!" << endl;
@@ -166,6 +197,7 @@ bool KGameNetwork::offerConnections(Q_UINT16 port)
    return false;
  }
  kdDebug (11001) << k_funcinfo << "after Server->initNetwork" << endl;
+ tryPublish();
  return true;
 }
 
@@ -227,6 +259,7 @@ QString KGameNetwork::hostName() const
 bool KGameNetwork::stopServerConnection()
 {
  // We still are the Master, we just don't accept further connections!
+ tryStopPublishing();
  if (d->mMessageServer) {
    d->mMessageServer->stopNetwork();
    return true;

@@ -59,6 +59,31 @@ public:
 	 * @param state The default state. 0 For a server game, 1 to join a game
 	 **/
 	void setDefault(int state);
+	
+	/**
+	 * Sets DNS-SD service type, both for publishing and browsing
+	 * @param type Service type (something like _kwin4._tcp). 
+	 * It should be unique for application.
+	 * @since 3.4
+	 **/
+	void setType(const QString& type);
+	
+	/**
+	 * @return service type
+	 */
+	QString type() const;
+	
+	/** 
+	 * Set game name for publishing. 
+	 * @param name Game name. Important only for server mode. If not
+	 * set hostname will be used. In case of name conflict -2, -3 and so on will be added to name.
+	 */
+	void setName(const QString& name);
+	
+	/**
+	 * @return game name. 
+	 */
+	QString gameName() const;
 
 protected slots:
 	/**
@@ -66,12 +91,15 @@ protected slots:
 	 * joining.
 	 **/
 	void slotTypeChanged(int);
+	void slotGamesFound();
+	void slotGameSelected(int);
 
 signals:
 	void signalNetworkSetup();
   void signalServerTypeChanged(int);
 
 private:
+	void showDnssdControls();
 	KGameConnectWidgetPrivate* d;
 
 };
