@@ -1,0 +1,187 @@
+<html>
+  <head>
+    <title>Documentation for libkdegames</title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+    <H1>Documentation for the classes in libkdegames</H1>
+<!-------------------------------------------------------------------------------->
+    <H3>Design Principles</H3>
+    The library <em>kdegames</em> contains a collection of classes that can be used
+    to develop games using the KDE environment very easily. There are a few
+    principles that were used when developing the library:<P>
+
+    <UL>
+      <LI><b>usable for a big variety of games</b><br>
+          The class <em>KGame</em> provides many features that are needed in many games.
+          It can be used for board games, card games, maze games, simulation games, strategy games and
+          many more.<br>
+          It does not (yet) include special features for realtime games, but can be used there, too.
+      <LI><b>features one-player and multi-player games</b></br>
+          A game developed with this library can easily support any number of simultaneous players.
+          So use it for one-player games (like Tetris or KSame), for two-player games (like TicTacToe
+          or chess) or for games with an arbitrary number of players.
+      <LI><b>computer players can easily be developed</b><br>
+          The class <em>KPlayer</em> represents an abstract player in a game. This can be a
+          human player that gets the input from the mouse or the keyboard. Or it can be a computer
+          player that makes moves by random or with artificial intelligence. All this can be achieved
+          subclassing KPlayer.
+      <LI><b>support for network games transparently</b><br>
+          The class <em>KGame</em> contains lots of features for network game support. Developing
+          a network game using a TCP/IP connection is very easy this way. But the default
+          case is still the local game. So the user should not need to connect to the internet
+          or to select a game server to play a game.
+      <LI><b>support for turn based and for asynchronous games</b><br>
+          You can use this library for turn based games, when only one player can make a move at a time
+          (like most bord games or card games), but also for asynchronous games, when every player can
+          make a move any time (like many action games).
+    </UL>
+<!-------------------------------------------------------------------------------->
+    <H3>The central game class: <em>KGame</em></H3>
+
+    When you want to develop your own KDE game using the KDE games library, you most likely want
+    to use the <em>KGame</em> class. There are two possible ways to extend it to your own needs:
+    Create a subclass and overwrite the virtual methods, or simply create an instance of KGame
+    and connect to the appropriate signals.<P>
+
+    &lt;&lt;more code about KGame, an easy example&gt;&gt;
+
+<!-------------------------------------------------------------------------------->
+    <H3>Network games and related classes</H3>
+
+    One of the main principles in the design of <em>KGame</em> was to make network games possible
+    with a minimum of effort for the game developer.<P>
+
+    A network game is a game with usually several players, that are on different computers. These
+    computers are usually connected to the internet, and all the moves a player does are exchanged
+    over this network.<P>
+
+    The exchange of moves and other information is done using the class <em>KMessageServer</em>.
+    An object of this class is a server that waits for connections. Someone who wants to take part
+    in the game has to connect to this server - usually using an internet socket connection. He does
+    this by creating a <em>KMessageClient</em> object. This object connects to the message server.<P>
+
+    The transfer of data is realised by subclasses of the abstract class <em>KMessageIO</em>. One object
+    of this class is created on the client side, one on the server side. Different types of networks can
+    be supported by creating new subclasses of KMessageIO. There are already two subclasses of KMessageIO:
+    <em>KMessageSocket</em> uses a internet socket connection to transfer the data from the message client
+    to the message server or vice versa. <em>KMessageDirect</em> can be used if both the message server and
+    the message client are within the same process. The data blocks are copied directly to the other side,
+    so the transfer is faster and needs no network bandwidth.<P>
+
+    A typical network game situation could look like this:<P>
+
+    <IMG SRC="kmessageserver.png"><P>
+
+    Here, three KGame object (called message clients) are connected to the KMessageServer object. One
+    is in the same process, so it uses KMessageDirect. The other two use KMessageSocket, so an internet
+    socket connection is used. KGame doesn't talk directly to the message server, but uses a KMessageClient
+    object instead. One of the KMessageClient objects is the admin of the message server. This client has some
+    priviledges. It may e.g. kill the connection to other message clients, or limit the number of clients
+    that may connect.<P>
+
+    The KGame objects are by default all equal. So the usual approach will be that every KGame object will
+    store the complete status of the game, and any change or move will be broadcasted to the other KGame
+    objects, so that they all change the status in identical ways. Sometimes it may be necessary (or just
+    easier to implement) that one KGame object is a <em>game server</em> (i.e. he is repsonsible for everything,
+    he coordinates the complete game and stores the game status), whereas the other KGame objects are
+    only dumb stubs that are used to contact the <em>game server</em>. You can implement both approaches
+    using the message server structure. If you need to elect the KGame object that shall be
+    the game server, you may e.g. use the one that has the KMessageClient that is the admin of the message
+    server. (Of course this is only a suggestion, you can use other approaches.)<P>
+
+    The main principle when developing the message server/client structure was, that the message server
+    doesn't have <em>any</em> idea of the game and its rules that is played. The message server only forwards
+    messages from one message client to the others without interpreting or manipulating the data. So always
+    keep in mind that the message server is <em>not</em> a game server! It does not store any data about
+    the game status. It is only a server for network connections and message broadcasting, <em>not</em>
+    for game purposes. The reason for this principle is, that <em>any</em> game can be played using a
+    KMessageServer on any computer. The computer being the message server doesn't need to know anything
+    about the game that is played on it. So you don't have to install new versions of the game there. Only
+    the clients need to be game specific.<P>
+
+    Usually you don't need to create <em>KMessageServer</em> or <em>KMessageClient</em> objects in your game,
+    since <em>KGame</em> does this for you. There are three different scenarios fo network games that are
+    all supported in <em>KGame</em>:<P>
+
+    <b>Scenario 1: local game</b><P>
+
+    The local game should always be the default state a game should be in. To avoid having this scenario
+    as a special case, <em>KGame</em> automatically creates a KMessageServer object and a KMessageClient
+    object. So every change and every move is sent to the message server and is returned to the KGame
+    object before it is processed. Since the connection between the message client and the message server
+    uses KMessageDirect the data transfer is very fast and wont hurt in most cases.<P>
+
+    <IMG SRC="scenario0.png"><P>
+
+    This is the default situation right after creating the <em>KGame</em> object.<P>
+
+    <b>Scenario 2: network game, started by one player</b><P>
+
+    If one user is bored of playing alone, he can open his game for connections from the outside world.
+    He listens to a TCP/IP socket port (i.e. a number between 0 and 65535). Other players can create
+    KGame objects of their own and connect to this port. They need to know the IP address of that computer
+    and the port number. This situation will have this structure:
+
+    <IMG SRC="scenario1.png"><P>
+
+    The first player has to do something like:<P>
+
+    <PRE>
+      KGame *myGame = new KGame ();
+      // wait for connections on port 12345
+      myGame->offerConnections (12345);
+    </PRE>
+
+    And the other players have to do something like:<P>
+
+    <PRE>
+      KGame *myGame = new KGame ();
+      // connect to the message server
+      myGame->connectToServer ("theServer.theDomain.com", 12345);
+    </PRE>
+
+    This automatically removes the message server in these KGame objects and connects to the given
+    one instead.<P>
+
+    <b>Scenario 3: network game, using a stand alone message server</b><P>
+
+    Sometimes it is not possible to let the message server run on one of the players computer. If e.g. all
+    the players have their computer in a local network that uses masquerading to contact the internet,
+    other computers cannot connect to them since the computer doesn't have a IP address to the outside
+    world. Then the only way to play a network game is to have a standalone KMessageServer object on
+    another server computer (somthing like "games.kde.org" e.g.). Since the KMessageServer isn't game
+    specific at all, every game can be played using it. There doesn't have to be any special software
+    installed on that server computer, only the program creating a KMessageServer object.<P>
+
+    This scenario has some more advantages: The message server can be a well known meeting point to
+    start a game. This way one could play games against other players you never knew before. Furthermore
+    the game is stopped brutally when the program that contains the message server in scenario 2 is
+    quitted. (Migration of message servers is not yet implemented, but may be in the future.) Using a
+    stand alone message server, the players may enter and leave the game as they want.
+
+    <IMG SRC="scenario2.png"><P>
+
+    To create this scenario, a special KMessageServer program has to be started on the computer
+    that shall be the stand alone message server:<P>
+
+    <PRE>
+      % kmessageserver -port=12345
+    </PRE>
+
+    The other games that want to connect have to do this (supposed the stand alone message server
+    has the IP address "games.kde.org"):<P>
+
+    <PRE>
+      KGame *myGame = new KGame ();
+      // connect to the message server
+      myGame->connectToServer ("games.kde.org", 12345);
+    </PRE>
+
+
+
+
+<!-------------------------------------------------------------------------------->
+  </body>
+</html>
