@@ -126,8 +126,9 @@ public:
     }
 	}
 
-  void command(QDataStream &s,int cmd)
+  void command(QDataStream &s,int cmd,bool)
   {
+    KGamePropertyBase::command(s, cmd);
     kdDebug(11001) << "---> LIST id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
     Iterator it;
     switch(cmd)

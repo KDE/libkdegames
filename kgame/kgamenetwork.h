@@ -163,22 +163,22 @@ public:
      * specific player.
      * @return true if worked
      */
-    bool sendSystemMessage(const QByteArray& buffer, int msgid, int receiver=0, int sender=0);
+    bool sendSystemMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendSystemMessage(int data, int msgid, int receiver=0,int sender=0);
+    bool sendSystemMessage(int data, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendSystemMessage(const QDataStream &msg, int msgid, int receiver=0, int sender=0);
+    bool sendSystemMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendSystemMessage(const QString& msg, int msgid, int receiver=0, int sender=0);
+    bool sendSystemMessage(const QString& msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * Sends a network message 
@@ -191,7 +191,7 @@ public:
      * the correct value for you. You might want to use this if you send a 
      * message from a specific player.
      **/
-    void sendError(int error, const QByteArray& message,int receiver=0,int sender=0);
+    void sendError(int error, const QByteArray& message, Q_UINT32 receiver=0, Q_UINT32 sender=0);
     
     /**
      * Are we still offer offering server connections - only for game MASTER
@@ -240,29 +240,29 @@ public:
      * specific player.
      * @return true if worked
      **/
-    bool sendMessage(const QByteArray& buffer, int msgid, int receiver=0, int sender=0);
+    bool sendMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendMessage(const QDataStream &msg, int msgid, int receiver=0, int sender=0);
+    bool sendMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendMessage(const QString& msg, int msgid, int receiver=0, int sender=0);
+    bool sendMessage(const QString& msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendMessage(int data, int msgid, int receiver=0, int sender=0);
+    bool sendMessage(int data, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
 
     /**
      * Called by @ref ReceiveNetworkTransmission(). Will be overwritten by
      * @ref KGame and handle the incoming message.
      **/
-    virtual void networkTransmission(QDataStream&, int, int, int, Q_UINT32 clientID) = 0;
+    virtual void networkTransmission(QDataStream&, int, Q_UINT32, Q_UINT32, Q_UINT32 clientID) = 0;
 
 
     /**

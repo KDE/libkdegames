@@ -223,7 +223,7 @@ void KGameNetwork::setMaxClients(int max)
 
 // --------------------- send messages ---------------------------
 
-bool KGameNetwork::sendSystemMessage(int data, int msgid, int receiver, int sender)
+bool KGameNetwork::sendSystemMessage(int data, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
@@ -231,7 +231,7 @@ bool KGameNetwork::sendSystemMessage(int data, int msgid, int receiver, int send
  return sendSystemMessage(buffer,msgid,receiver,sender);
 }
 
-bool KGameNetwork::sendSystemMessage(const QString &msg, int msgid, int receiver, int sender)
+bool KGameNetwork::sendSystemMessage(const QString &msg, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
  QDataStream stream(buffer, IO_WriteOnly);
@@ -239,10 +239,10 @@ bool KGameNetwork::sendSystemMessage(const QString &msg, int msgid, int receiver
  return sendSystemMessage(buffer, msgid, receiver, sender);
 }
 
-bool KGameNetwork::sendSystemMessage(const QDataStream &msg, int msgid, int receiver, int sender)
+bool KGameNetwork::sendSystemMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 { return sendSystemMessage(((QBuffer*)msg.device())->buffer(), msgid, receiver, sender); }
 
-bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, int receiver, int sender)
+bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
@@ -272,19 +272,19 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, int rece
  return true;
 }
 
-bool KGameNetwork::sendMessage(int data, int msgid, int receiver, int sender)
+bool KGameNetwork::sendMessage(int data, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 { return sendSystemMessage(data,msgid+KGameMessage::IdUser,receiver,sender); }
 
-bool KGameNetwork::sendMessage(const QString &msg, int msgid, int receiver, int sender)
+bool KGameNetwork::sendMessage(const QString &msg, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 { return sendSystemMessage(msg,msgid+KGameMessage::IdUser,receiver,sender); }
 
-bool KGameNetwork::sendMessage(const QDataStream &msg, int msgid, int receiver, int sender)
+bool KGameNetwork::sendMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 { return sendSystemMessage(msg, msgid+KGameMessage::IdUser, receiver, sender); }
 
-bool KGameNetwork::sendMessage(const QByteArray &msg, int msgid, int receiver, int sender)
+bool KGameNetwork::sendMessage(const QByteArray &msg, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 { return sendSystemMessage(msg, msgid+KGameMessage::IdUser, receiver, sender); }
 
-void KGameNetwork::sendError(int error,const QByteArray& message,int receiver,int sender)
+void KGameNetwork::sendError(int error,const QByteArray& message, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
@@ -299,8 +299,8 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
 {
  QDataStream stream(receiveBuffer, IO_ReadOnly);
  int msgid;
- int sender; // the id of the KGame/KPlayer who sent the message
- int receiver; // the id of the KGame/KPlayer the message is for 
+ Q_UINT32 sender; // the id of the KGame/KPlayer who sent the message
+ Q_UINT32 receiver; // the id of the KGame/KPlayer the message is for 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
 // kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
 

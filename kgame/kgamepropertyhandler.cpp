@@ -81,7 +81,7 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
  }
 }
 
-bool KGamePropertyHandler::processMessage(QDataStream &stream, int id)
+bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSender)
 {
  //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << mId << endl;
  if (id != mId) {
@@ -89,14 +89,14 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id)
  }
  KGamePropertyBase* p;
  int propertyId;
- KGameMessage::extractPropertyHeader(stream,propertyId);
+ KGameMessage::extractPropertyHeader(stream, propertyId);
  //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
  if (propertyId==KGamePropertyBase::IdCommand) {
 	int cmd;
-	KGameMessage::extractPropertyCommand(stream,propertyId,cmd);
+	KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
 	kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
 	p = d->mIdDict.find(propertyId);
-	p->command(stream,cmd);
+	p->command(stream, cmd, isSender);
 	return true;
  }
  p = d->mIdDict.find(propertyId);

@@ -165,14 +165,14 @@ public:
        *
        * @return the player id
        */
-      int id() const; 
+      Q_UINT32 id() const; 
 
       /* Set the players id. This is done automatically by
        * the game object when adding a new player!
        *
        * @param i the player id
        */
-      void setId(int i);
+      void setId(Q_UINT32 i);
 
       /**
        * Returns the user defined id of the player

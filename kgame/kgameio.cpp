@@ -120,7 +120,7 @@ void KGameProcessIO::initIO(KPlayer *p)
   emit signalIOAdded(this,stream,p,sendit);
   if (sendit && p)
   {
-    int sender=p->id();  
+    Q_UINT32 sender=p->id();  
     kdDebug(11001) <<  "Sending IOAdded to process player !!!!!!!!!!!!!! " << endl;
     sendSystemMessage(stream,KGameMessage::IdIOAdded,0,sender);
   }
@@ -179,8 +179,8 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 {
 	QDataStream stream(receiveBuffer,IO_ReadOnly);
 	int msgid; 
-	int sender;
-	int receiver;
+	Q_UINT32 sender;
+	Q_UINT32 receiver;
 	KGameMessage::extractHeader(stream,sender,receiver,msgid);
 
 	kdDebug(11001) << "************* Got process message sender =" << sender << " receiver=" << receiver << "   msgid="<< msgid <<endl;

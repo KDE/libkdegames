@@ -155,8 +155,9 @@ public:
     for (unsigned int i=0;i<QArray<type>::size();i++) s << at(i);
 	}
 
-  void command(QDataStream &s,int cmd)
+  void command(QDataStream &s,int cmd,bool)
   {
+    KGamePropertyBase::command(s, cmd);
     kdDebug(11001) << "Array id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
     switch(cmd)
     {

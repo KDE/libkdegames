@@ -43,7 +43,7 @@ public:
       mNetworkPlayer = 0;
    }
 
-   int mId;
+   Q_UINT32 mId;
    bool mVirtual; // virtual player
    int mPriority; // tag for replacement
 
@@ -164,7 +164,7 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
   }
 }
 
-void KPlayer::setId(int newid)
+void KPlayer::setId(Q_UINT32 newid)
 {
   // Needs to be after the sendProcess
   d->mId=newid;
@@ -183,7 +183,7 @@ void KPlayer::setName(const QString& name)
 const QString& KPlayer::name() const
 { return d->mName.value(); }
 
-int KPlayer::id() const
+Q_UINT32 KPlayer::id() const
 { return d->mId; }
 
 KGamePropertyHandler * KPlayer::dataHandler()

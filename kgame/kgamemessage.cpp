@@ -27,11 +27,11 @@
 
 #define MESSAGE_VERSION 1
 
-int KGameMessage::rawGameId(int playerid)
+Q_UINT32 KGameMessage::rawGameId(Q_UINT32 playerid)
 {
   return playerid&0x3ff;
 }
-int KGameMessage::rawPlayerId(int playerid)
+int KGameMessage::rawPlayerId(Q_UINT32 playerid)
 {
   return playerid&0x3ff;
 }
@@ -45,7 +45,7 @@ bool KGameMessage::isGame(int msgid)
 {
   return !isPlayer(msgid);
 }
-int KGameMessage::createPlayerId(int oldplayerid,int gameid)
+Q_UINT32 KGameMessage::createPlayerId(int oldplayerid,Q_UINT32 gameid)
 {
   int p;
   p=oldplayerid&0x3ff; // remove game id
@@ -54,12 +54,12 @@ int KGameMessage::createPlayerId(int oldplayerid,int gameid)
 }
 
 
-void KGameMessage::createHeader(QDataStream &msg,int sender,int receiver,int msgid)
+void KGameMessage::createHeader(QDataStream &msg,Q_UINT32 sender,Q_UINT32 receiver,int msgid)
 {
   msg << (Q_INT16)sender << (Q_INT16)receiver << (Q_INT16)msgid;
 }
 
-void KGameMessage::extractHeader(QDataStream &msg,int &sender,int &receiver,int &msgid)
+void KGameMessage::extractHeader(QDataStream &msg,Q_UINT32 &sender,Q_UINT32 &receiver,int &msgid)
 {
   Q_INT16 d3,d4,d5;
   msg >> d3 >> d4 >> d5;

@@ -62,15 +62,18 @@ public:
 	 **/
 	enum PropertyCommandIds 
 	{
+		// General
+		CmdLock=1,
+		
 		// Array
-		CmdAt=1,
-		CmdResize=2,
-		CmdFill=3,
-		CmdSort=4,
-		// List (could be the same id's actually
-		CmdInsert=5,
-		CmdRemove=6,
-		CmdClear=7
+		CmdAt=51,
+		CmdResize=52,
+		CmdFill=53,
+		CmdSort=54,
+		// List (could be the same id's actually)
+		CmdInsert=61,
+		CmdRemove=62,
+		CmdClear=63
 	};
 
 	/**
@@ -125,7 +128,7 @@ public:
 
 	/**
 	 * Changes the consistency policy of a property. The @ref 
-	 * PropertyPolicy is one of PolicyClean, PolicyDirty or PolicyLocal.
+	 * PropertyPolicy is one of PolicyClean (defaulz), PolicyDirty or PolicyLocal.
 	 *
 	 * It is up to you to decide how you want to work. 
 	 **/
@@ -173,6 +176,23 @@ public:
 	bool isDirty() const { return mFlags.bits.dirty; }
 
 	/**
+	 * A locked property can only be changed by the player who has set the
+	 * lock. See also @ref setLocked
+	 * @return Whether this property is currently locked. 
+	 **/
+	bool isLocked() const { return mFlags.bits.locked; }
+
+	/**
+	 * A locked property can only be changed by the player who has set the
+	 * lock.
+	 *
+	 * You can only call this if @ref isLocked is false. A message is sent
+	 * over network so that the property is locked for all players except
+	 * you.
+	 **/
+	void setLocked(bool l);
+
+	/**
 	 * A readonly property cannot be changed. Use this if you to prevent a
 	 * player from changing something, e.g. for a money-bases card game you
 	 * will want to lock the "bet" property after a player has bet.
@@ -197,8 +217,11 @@ public:
 
 	/** 
 	 * send a command to advanced properties like arrays
+	 * @param stream The stream containing the data of the comand
+	 * @param cmdid The ID of the command - see @ref PropertyCommandIds
+	 * @param isSender whether this client is also the sender of the command
 	 **/
-	virtual void command(QDataStream &, int ) { }
+	virtual void command(QDataStream &, int msgid, bool isSender=false);
 
 	/**
 	 * @return The id of this property
@@ -254,10 +277,24 @@ protected:
 	 * over network. @ref save is used to store the data into a stream so
 	 * you have to make sure that function is working properly if you
 	 * implement your own property!
+	 *
+	 * Note: this sends the <em>current</em> property!
+	 *
+	 * Might be obsolete - KGamePropertyArray still uses it. Is this a bug
+	 * or correct?
 	 **/
 	bool sendProperty();
 	
 	/**
+	 * Forward the data to the owner of this property which then sends it
+	 * over network. @ref save is used to store the data into a stream so
+	 * you have to make sure that function is working properly if you
+	 * implement your own property!
+	 *
+	 * This function is used by @ref send to send the data over network.
+	 * This does <em>not</em> send the current value but the explicitly
+	 * given value. 
+	 *
 	 * @return TRUE if the message could be sent successfully, otherwise
 	 * FALSE
 	 **/
@@ -288,17 +325,18 @@ protected:
 			unsigned char optimize : 1; // whether the property tries to optimize send/emit (false)
 			unsigned char dirty: 1; // whether the property dirty (setLocal() was used)
 			unsigned char cleanPolicy : 1; // whether the property is always consistent (true)
+			unsigned char locked: 1; // whether the property is locked (true)
 		} bits;
 	} mFlags;
 	
 private:
+	friend class KGamePropertyHandler;
 	void init();
 	
 private:
-	bool mPublic;
 	int mId;
 
-	PropertyPolicy mPolicy;
+	PropertyPolicy mPolicy; // FIXME bitfield
 };
 
 /**
@@ -532,6 +570,7 @@ public:
 	 * setConsistent). By default KGameProperty just uses @ref send to set
 	 * the value of a property. This behaviour can be changed by using @ref
 	 * setConsistent.
+	 * @param v The new value of the property
 	 **/
 	void setValue(type v)
 	{
@@ -557,7 +596,7 @@ public:
 	 * Note that the value DOES NOT change when you call this function. This
 	 * function saves the value into a @ref QDataStream and calls @ref
 	 * sendProperty where it gets forwarded to the owner and finally the
-	 * value is sent over network. The @ref KMessageServer now send the
+	 * value is sent over network. The @ref KMessageServer now sends the
 	 * value to ALL clients - even the one who called this function. As soon
 	 * as the value from the message server is received @ref load is called
 	 * and _then_ the value of the KGameProperty has been set.
@@ -566,29 +605,27 @@ public:
 	 * _every_ client in the network. Note that this means you can NOT do
 	 * something like
 	 * <pre>
-	 * myProperty = 1;
+	 * myProperty.send(1);
 	 * doSomething(myProperty);
 	 * </pre>
 	 * as myProperty has not yet been set when doSomething is being called.
+	 *
 	 * You are informed about a value change by a singal from the parent of
 	 * the property which can be deactivated by @ref setEmittingSignal because of
 	 * performance (you probably don't have to deactivate it - except you
 	 * want to write a real-time game like Command&Conquer with a lot of
 	 * acitvity). See @ref emitSignal
 	 * 
-	 * @param sendOnly If FALSE and the value couldn't be sent by any reason
-	 * (e.g. because no owner has been set who can send the value) then the
-	 * local value is set using @ref setLocal. If TRUE then the value is
-	 * sent only and nothing is done if sending is not possible
+	 * @param v The new value of the property
 	 * @return whether the property could be sent successfully
-	 * @see setValue setLocal changeValue value networkValue
+	 * @see setValue setLocal changeValue value
 	 **/
 	bool send(type v)
 	{
 		if (isOptimized() && mData == v) {
 			return true;
 		}
-		if (isReadOnly()) {
+		if (isReadOnly() || isLocked()) {
 			return false;
 		}
 		QByteArray b;
@@ -598,54 +635,60 @@ public:
 	}
 
 	/**
-	 * This function is a workaround for a big problem of KProperty: if you
-	 * do e.g.
+	 * This function sets the value of the property directly, i.e. it
+	 * doesn't send it to the network. 
+	 *
+	 * Int contrast to @see you change _only_ the local value when using
+	 * this function. You do _not_ change the value of any other client. You
+	 * probably don't want to use this if you are using a dedicated server
+	 * (which is the only "client" which is allowed to change a value) but
+	 * rather want to use @send. 
+	 *
+	 * But if you use your clients as servers (i.e. all clients receive a
+	 * players turn and then calculate the reaction of the game theirselves)
+	 * then you probably want to use setLocal as you can do things like
 	 * <pre>
-	 * myProperty = 1;
+	 * myProperty.setLocal(1);
 	 * doSomething(myProperty);
 	 * </pre>
-	 * then this will fail. The myProperty = 1 part calls @ref send which
-	 * sends the value over network. But it doesn't actually set the value
-	 * of the property - this is done as soon as the @ref KMessageServer
-	 * sends this message to this client. So doSomething(myProperty) still
-	 * contains the old value (i.e. NOT 1).
-	 *
-	 * To solve this problem you can call setLocal(). This function creates
-	 * a duplicated version of the property which is ONLY locally available.
-	 * The value is NOT sent over network. 
-	 *
-	 * As soon as a value over network is received the local duplication is
-	 * deleted again. Note that this behaviour might be disturbing or even
-	 * confusing!
+	 * on every client.
 	 *
 	 * If you want to set the value locally AND send it over network you
 	 * want to call @ref changeValue!
 	 *
-	 * @see setValue send changeValue value networkValue
+	 * You can also use @ref setPolicy to set the default policy to
+	 * PolicyLocal.
+	 *
+	 * @see setValue send changeValue value
 	 **/
-	void setLocal(type v) 
+	bool setLocal(type v) 
 	{
-		if (!isOptimized() || mData != v) {
-			if (isReadOnly()) {
-				return;
-			}
-			mData = v;
-			setDirty(true);
-			if (isEmittingSignal()) {
-				emitSignal();
-			}
+		if (isOptimized() && mData == v) {
+			return false;
 		}
+		if (isReadOnly() || isLocked()) {
+			return false;
+		}
+		mData = v;
+		setDirty(true);
+		if (isEmittingSignal()) {
+			emitSignal();
+		}
+		return true;
 	}
 
 	/**
 	 * This function does both, change the local value and change the
-	 * network value. The local value is created/changed first, then the
-	 * value is sent over network.
+	 * network value. The value is sent over network first, then changed
+	 * locally.
 	 *
-	 * This function is a convenience function and just calls @ref setLocal
-	 * followed by @ref send
+	 * This function is a convenience function and just calls @ref send
+	 * followed by @ref setLocal
 	 *
-	 * @see send setLocal setValue value networkValue
+	 * Note that @ref emitSignal is also called twice: once after @ref
+	 * setLocal and once when the value from @ref send is received
+	 *
+	 * @see send setLocal setValue value 
 	 **/
 	void changeValue(type v)
 	{
@@ -673,13 +716,14 @@ public:
 	}
 
 	/**
-	 * Reads from a stream and assigns the read value to this object. This
-	 * also deletes an existing local value (see @ref setLocal)
+	 * Reads from a stream and assigns the read value to this object.
 	 *
 	 * This function is called automatically when a new value is received
 	 * over network (i.e. it has been sent using @ref send on this or any
 	 * other client) or when a game is loaded (and maybe on some other
 	 * events).
+	 *
+	 * Also calls @ref emitSignal if @ref isEmittingSignal is TRUE.
 	 * @param s The stream to read from
 	 **/
 	virtual void load(QDataStream& s)
@@ -696,10 +740,9 @@ public:
 	 * that depending on the policy (see @ref setAlwaysConsistent) the
 	 * returned value might be different from the assigned value!!
 	 *
-	 * So if you use @ref setAlwaysConsistent(false):
+	 * So if you use @ref setPolicy(PolicyClean):
 	 * <pre>
 	 * int a, b = 10;
-	 * myProperty.initData(0);
 	 * myProperty = b;
 	 * a = myProperty.value();
 	 * </pre>
@@ -707,7 +750,7 @@ public:
 	 * The value is actually set as soon as it is received form the @ref
 	 * KMessageServer which forwards it to ALL clients in the network.
 	 *
-	 * If you use a clean policy (i.e. @ref isAlwaysConsistent == true) then
+	 * If you use a clean policy (see @ref setPolicy) then
 	 * the returned value is the assigned value
 	 * @return See @ref value
 	 **/
@@ -720,9 +763,7 @@ public:
 	/**
 	 * Yeah, you can do it!
 	 * <pre>
-	 * 	KGameProperty<int> integerData(0, owner);
-	 * 	integerData.setValue(100);
-	 * 	kdDebug(11001) << integerData << endl;
+	 * 	int a = myGamePropertyInt;
 	 * </pre>
 	 * If you don't see it: you don't have to use integerData.value()
 	 * @return See @ref value
@@ -732,9 +773,7 @@ public:
 	virtual const type_info* typeinfo() { return &typeid(type); }
 
 private:
-	void init()
-	{
-	}
+	void init() { }
 		
 private:
 	type mData;

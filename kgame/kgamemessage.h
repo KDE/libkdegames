@@ -37,7 +37,7 @@ class KGameMessage
      * @param gameid The game id (<64)
      * @return the new player id
      */
-    static int createPlayerId(int player,int game);
+    static Q_UINT32 createPlayerId(int player,Q_UINT32 game);
     /**
      * Checks whether a message receiver/sender is a player
      * 
@@ -60,7 +60,7 @@ class KGameMessage
      * @param the player id
      * @return the raw player id
      **/
-    static int rawPlayerId(int playerid);
+    static int rawPlayerId(Q_UINT32 playerid);
 
     /**
      * Returns the raw game id, that is, the game id the player
@@ -69,7 +69,7 @@ class KGameMessage
      * @param the player id
      * @return the raw game id
      **/
-    static int rawGameId(int playerid);
+    static Q_UINT32 rawGameId(Q_UINT32 playerid);
 
     /**
      * Creates a message header given cookie,sender,receiver,...
@@ -78,14 +78,14 @@ class KGameMessage
      * (message length and magic cookie). If you don't need them remove them
      * with @ref dropExternalHeader
      */
-    static void createHeader(QDataStream &msg,int sender,int receiver,int msgid);
+    static void createHeader(QDataStream &msg,Q_UINT32 sender,Q_UINT32 receiver,int msgid);
 
     /**
      * Retrieves the information like cookie,sender,receiver,... from a message header 
      *
      * Note that it could be necessary to call @ref dropExternalHeader first
      */
-    static void extractHeader(QDataStream &msg,int &sender,int &receiver,int &msgid);
+    static void extractHeader(QDataStream &msg,Q_UINT32 &sender,Q_UINT32 &receiver,int &msgid);
 
     /**
      * Creates a property header  given the property id
@@ -98,7 +98,7 @@ class KGameMessage
     static void extractPropertyHeader(QDataStream &msg,int &id);
 
     /**
-     * Creates a property header  given the property id
+     * Creates a property header given the property id
      */
     static void createPropertyCommand(QDataStream &msg,int cmdid,int pid,int cmd);
 

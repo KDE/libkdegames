@@ -234,7 +234,7 @@ bool KGame::save(QDataStream &stream,bool saveplayers)
 
 // ----------------- Player handling -----------------------
 
-KPlayer * KGame::findPlayer(int id) const
+KPlayer * KGame::findPlayer(Q_UINT32 id) const
 {
  for (QListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it) {
    if (it.current()->id() == id) {
@@ -596,7 +596,7 @@ void KGame::setGameStatus(int status)
  d->mGameStatus = status;
 }
 
-void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 /*clientID*/)
+void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender, Q_UINT32 /*clientID*/)
 {//clientID is unused
  // message targets a playerobject. If we find it we forward the message to the
  // player. Otherwise we proceed here and hope the best that the user processes
@@ -604,7 +604,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
 
  // *first* notice the game that something has changed - so no return prevents
  // this
- emit signalMessageUpdate((int)msgid,receiver,sender);
+ emit signalMessageUpdate(msgid, receiver, sender);
  if (KGameMessage::isPlayer(receiver))
  {
    kdDebug(11001) << "message id " << msgid << " seems to be for a player" << endl;
@@ -625,7 +625,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
  // gamenetwork would not have passed the message to us!
 
  // GameProperties processed
- if (d->mProperties->processMessage(stream,msgid)) {
+ if (d->mProperties->processMessage(stream, msgid, sender == gameId())) {
 //   kdDebug(11001 ) << "KGame: message taken by property - returning" << endl;
    return ;
  }
@@ -700,7 +700,7 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      kdDebug(11001) << "====> (Client) KGame::slotNetworkTransmission:: Got IdGameLoad" << endl;
      loadgame(stream,true);
      KPlayer *player;
-     int gameid=gameId();
+     Q_UINT32 gameid=gameId();
      for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
        if ((KGameMessage::rawGameId(player->id())==gameid)) {
          //kdDebug(11001) << "$$$ do not virtualizing player "<<player->id()<< " gameid="<<gameid << "=" << gameId() << endl;
@@ -811,7 +811,7 @@ void KGame::setupGameContinue(QDataStream& stream, int sender)
 }
 
 // called by the IdGameReactivatePlayer Message - CLIENT SIDE
-void KGame::gameReactivatePlayer(QDataStream& stream, int sender)  
+void KGame::gameReactivatePlayer(QDataStream& stream, Q_UINT32 sender)  
 {
  QValueList<int> activatePlayer;
  stream >> activatePlayer;
@@ -960,7 +960,7 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
  // Now add inactive players
  // TODO Obey priorities !
  // TODO remove players from removed game
- for (int idx=0;idx<d->mInactiveIdList.count();idx++)
+ for (unsigned int idx=0;idx<d->mInactiveIdList.count();idx++)
  {
    QValueList<int>::Iterator it1=d->mInactiveIdList.at(idx);
    QValueList<int>::Iterator it2=d->mInactivePriorityList.at(idx);

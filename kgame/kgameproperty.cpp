@@ -59,7 +59,8 @@ KGamePropertyBase::~KGamePropertyBase()
 
 void KGamePropertyBase::init()
 {
- mOwner=0;
+ mOwner = 0;
+ setDirty(false);
 
  // this is very useful and used by e.g. KGameDialog so
  // it is activated by default. Big games may profit by deactivating it to get
@@ -98,9 +99,7 @@ bool KGamePropertyBase::sendProperty()//obsolete
  save(s);
  if (mOwner) {
 	mOwner->sendProperty(s);
- }
- else
- {
+ } else {
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
  }
@@ -111,17 +110,34 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
 {
  QByteArray b;
  QDataStream s(b, IO_WriteOnly);
- KGameMessage::createPropertyHeader(s,id());
+ KGameMessage::createPropertyHeader(s, id());
  s.writeRawBytes(data.data(), data.size());
  if (mOwner) {
 	mOwner->sendProperty(s);
- }
- else
- {
+ } else {
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
  }
  return true;
+}
+
+void KGamePropertyBase::setLocked(bool l)
+{
+ if (isLocked()) {
+	return;
+ }
+
+ QByteArray b;
+ QDataStream s(b, IO_WriteOnly);
+ KGameMessage::createPropertyCommand(s, IdCommand, id(), CmdLock);
+ 
+ s << (Q_INT8)l;
+ if (mOwner) {
+	mOwner->sendProperty(s);
+ } else {
+	kdError(11001) << "KGamePropertyBase::sendLocked(): Cannot send because there is no receiver defined" << endl;
+	return;
+ }
 }
 
 void KGamePropertyBase::emitSignal()
@@ -134,5 +150,20 @@ void KGamePropertyBase::emitSignal()
  }
 }
 
-
+void KGamePropertyBase::command(QDataStream& s, int cmd, bool isSender)
+{
+ switch (cmd) {
+	case CmdLock:
+	{
+		if (!isSender) {
+			Q_INT8 locked;
+			s >> locked;
+			mFlags.bits.locked = (bool)locked & 1;
+			break;
+		}
+	}
+	default: // probably in derived classes
+		break;
+ }
+}
 

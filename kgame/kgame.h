@@ -124,7 +124,7 @@ public:
      * @param id Player id
      * @return player object
      */
-    KPlayer *findPlayer(int id) const;
+    KPlayer *findPlayer(Q_UINT32 id) const;
 
     /**
      * Note that @ref KPlayer::save must be implemented properly, as well as
@@ -314,7 +314,7 @@ public:
      * @param sender
      * @param clientID the client from which we received the transmission - hardly used
      **/
-    virtual void networkTransmission(QDataStream &stream, int msgid, int receiver, int sender, Q_UINT32 clientID);
+    virtual void networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender, Q_UINT32 clientID);
 
     KGamePropertyHandler* dataHandler() const;
 
@@ -573,7 +573,7 @@ private:
     /**
      * Helping function - game negotiation
      **/
-    void gameReactivatePlayer(QDataStream& msg, int sender);
+    void gameReactivatePlayer(QDataStream& msg, Q_UINT32 sender);
 
     /**
      * Removes a player from all list, removes the @ref KGame pointer from the

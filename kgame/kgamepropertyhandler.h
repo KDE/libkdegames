@@ -108,14 +108,15 @@ public:
 	 * and processed. Otherwise false is returned.
 	 * Example:
 	 * <pre>
-	 *   if (mProperties.processMessage(stream,msgid)) return ;
+	 *   if (mProperties.processMessage(stream,msgid,sender==gameId())) return ;
 	 * </pre>
 	 * 
 	 * @param stream The data stream containing the message
 	 * @param id the message id of the message
+	 * @param isSender Whether the receiver is also the sender
 	 * @return true on message processed otherwise false
 	 **/
-	bool processMessage(QDataStream &stream, int id);
+	bool processMessage(QDataStream &stream, int id, bool isSender = false);
 	
 	/**
 	 * @return the id of the handler
@@ -161,6 +162,8 @@ public:
 	 * the parent object
 	 **/ 
 	void sendProperty(QDataStream &s);
+
+	void sendLocked(bool l);
 
 	/**
 	 * called by a property to emit a signal 
