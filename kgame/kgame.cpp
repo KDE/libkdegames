@@ -1286,7 +1286,7 @@ void KGame::slotServerDisconnected() // Client side
     emit signalReplacePlayerIO(player, &remove);
     if (remove)
     {
-      boDebug(11001) << " ---> Removing player " << player->id() <<  endl;
+      kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
       systemRemovePlayer(player,true); // no network necessary
     }
   }
