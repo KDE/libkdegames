@@ -1,5 +1,5 @@
 DECKDIRS = cards-aisleriot cards-dondorf-whist-b cards-gdkcard-bonded cards-hard-a-port \
-	cards-penguins cards-spaced cards-xskat-french cards-default decks
+	cards-penguins cards-spaced cards-xskat-french cards-default decks cards-konqi-modern
 
 deckdir = $(kde_datadir)/carddecks
 
