@@ -133,7 +133,7 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
  connect(d->mDisconnectButton, SIGNAL(clicked()), this, SLOT(slotExitConnection()));
  hb->addWidget(d->mDisconnectButton);
 
- d->mInitConnection = new QHGroupBox(i18n("Network configuration"), this);
+ d->mInitConnection = new QHGroupBox(i18n("Network Configuration"), this);
  topLayout->addWidget(d->mInitConnection);
 
  d->mConnect = new KGameConnectWidget(d->mInitConnection);
