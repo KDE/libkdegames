@@ -61,7 +61,8 @@ public:
    ~KScoreDialog();
 
    /**
-    * @param group to use for reading/writing highscores from/to.
+    * @param group to use for reading/writing highscores from/to. By default
+    * the class will use "High Score"
     */
    void setConfigGroup(const QString &group);
 
