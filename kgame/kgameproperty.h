@@ -475,7 +475,7 @@ private:
  * KMessageServer receives a message from the local client (just as explained
  * above in "Always Consistent"). As soon as the message returns to the local
  * client again the local value is deleted, as the "network value" has the same
- * value as the local one. So you won't loose the ability to use the always
+ * value as the local one. So you won't lose the ability to use the always
  * consistent "clean" value of the property if you use the "dirty" way. Just use
  * @ref networkValue to access the value which is consistent among all clients. 
  *

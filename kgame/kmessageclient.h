@@ -315,7 +315,7 @@ signals:
   void aboutToDisconnect(Q_UINT32 id);
 
   /**
-    This signal is emitted when this client becomes the admin client or when it looses
+    This signal is emitted when this client becomes the admin client or when it loses
     the admin client status. Connect to this signal if you have to do any initialization
     or cleanup.
     @param isAdmin Whether we are now admin or not

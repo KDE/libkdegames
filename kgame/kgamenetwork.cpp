@@ -119,7 +119,7 @@ void KGameNetwork::setMaster()
    connect (d->mMessageClient, SIGNAL(connectionBroken()),
             this, SIGNAL(signalConnectionBroken()));
    connect (d->mMessageClient, SIGNAL(aboutToDisconnect(Q_UINT32)),
-            this, SLOT(aboutToLooseConnection(Q_UINT32)));
+            this, SLOT(aboutToLoseConnection(Q_UINT32)));
    connect (d->mMessageClient, SIGNAL(connectionBroken()),
             this, SLOT(slotResetConnection()));
 
@@ -282,7 +282,7 @@ void KGameNetwork::disconnect()
  kdDebug(11001) << k_funcinfo << "DONE" << endl;
 }
 
-void KGameNetwork::aboutToLooseConnection(Q_UINT32 clientID)
+void KGameNetwork::aboutToLoseConnection(Q_UINT32 clientID)
 {
   kdDebug(11001) << "Storing client id of connection "<<clientID<<endl;
   d->mDisconnectId = clientID;

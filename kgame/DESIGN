@@ -113,7 +113,7 @@ of connected message clients and can drop the connection to some other clients,
 as well as he can configure game specific ssettings (like max/min players, start
 money, ...). The Admin also initializes newly connected Clients. If the Admin
 himself disconnects, another Client becomes Admin (The Admin can himself elect
-some other Client to become Admin. He himself looses that Admin status then).
+some other Client to become Admin. He himself loses that Admin status then).
 An Admin is *alway* a KGame object. The Admin is usually the same as the Master,
 but if the Master is an own process (i.e. the Message Server has been started
 outside KGame) then Master and Admin differ. An Admin *must* be a KGame object

@@ -31,7 +31,7 @@ class KGameErrorDialogPrivate;
  * network game. Maybe a better solution is to use KMessageBoxes
  * You can connect to the public slots, too - they will call the static
  * functions, so that you can always have a KGameErrorDialog object lying around
- * without loosing much memory (a KGameErrorMessageDialog Object will be
+ * without losing much memory (a KGameErrorMessageDialog Object will be
  * created)
  * @short Error handling for KGame
  * @author Andreas Beckermann <b_mann@gmx.de>

@@ -131,7 +131,7 @@ public:
 signals:
     /**
      * Signal generated when @ref KPlayer::myTurn changes. This can either be
-     * when you get the turn status or when you loose it.
+     * when you get the turn status or when you lose it.
      *
      * The datastream has to be filled with a move. If you set (or leave) the
      * send parameter to FALSE then nothing happens: the datastream will be

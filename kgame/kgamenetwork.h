@@ -359,7 +359,7 @@ signals:
     void signalClientDisconnected(Q_UINT32 clientID, bool broken);
 
     /**
-     * This client gets or looses the admin status. See @ref
+     * This client gets or loses the admin status. See @ref
      * KMessageClient::adminStatusChanged
      * @param isAdmin True if this client gets the ADMIN status otherwise FALSE
      **/
@@ -385,7 +385,7 @@ protected slots:
     void receiveNetworkTransmission(const QByteArray& a, Q_UINT32 clientID);
 
     /**
-     * This KGame object receives or looses the admin status.
+     * This KGame object receives or loses the admin status.
      * @param isAdmin Whether we are admin or not
      **/
     void slotAdminStatusChanged(bool isAdmin);
@@ -394,7 +394,7 @@ protected slots:
      * Called when the network connection is about to terminate. Is used
      * to store the network parameter like the game id
      */
-     void aboutToLooseConnection(Q_UINT32 id);
+     void aboutToLoseConnection(Q_UINT32 id);
 
     /**
      * Called when the network connection is terminated. Used to clean
