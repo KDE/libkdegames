@@ -202,7 +202,7 @@ void KGameChat::setFromPlayer(KPlayer* p)
 		removeSendingEntry(d->mToMyGroup);
 	}
 	d->mToMyGroup = nextId();
-	addSendingEntry(i18n("Send to my Group (\"%1\")").arg(p->group()), d->mToMyGroup);
+	addSendingEntry(i18n("Send to My Group (\"%1\")").arg(p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
  kdDebug(11001) << k_funcinfo << " player=" << p << endl;
