@@ -83,7 +83,10 @@ Score firstScore();
  * feature we probably need a locking mechanism in @ref KHighscore).
  *
  * You need one instance of this class during the application lifetime ; in
- * main() just insert <pre> KExtHighscore::Manager highscoresManager; </pre>
+ * main() just insert 
+ * \code
+ *   KExtHighscore::Manager highscoresManager;
+ * \endcode
  * with the needed arguments. Use the derived class if you need to
  * reimplement some of the default methods.
  *
