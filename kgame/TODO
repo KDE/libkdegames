@@ -48,12 +48,6 @@
               config file (setGroup("KGameDialog")). Problem: shalll network
               settings be saved? Could be used for startup configuration (i.e.
               load the config of the previous game) otherwise.
-
- ********************************************************************
-  
-  WHY DOES THE TODO LIST GROW FASTER THAN THE PROGRAM ??????????? ;-))
-  AB: because we don't delete the jobs we've done!!!!!!!!! ;-))
-  MH: Oh ;-)
-
- ********************************************************************
-
+- 21.06.2001: KPlayerPropertyArray does not yet support at() and operator[]
+              assignments. Need to check whether the method from QBitArray
+              can be applied
