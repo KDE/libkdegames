@@ -70,6 +70,7 @@ void KGamePropertyBase::init()
  setOptimized(false); 
  
  setReadOnly(false);
+ mFlags.bits.locked = false & 1; // setLocked(false); is NOT possible as it checks whether isLocked() allows to change the status
 
  // clean is default
  setPolicy(PolicyClean);
