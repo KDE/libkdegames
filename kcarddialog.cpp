@@ -542,6 +542,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
     if (item && item->pixmap())
     {
         d->deckLabel->setPixmap(* (item->pixmap()));
+        QToolTip::remove( d->deckLabel );
         QToolTip::add(d->deckLabel,d->helpMap[d->deckMap[item]]);
         setDeck(d->deckMap[item]);
     }
@@ -552,6 +553,7 @@ void KCardDialog::slotCardClicked(QIconViewItem *item)
     {
         d->cardLabel->setPixmap(* (item->pixmap()));
         QString path = d->cardMap[item];
+        QToolTip::remove( d->deckLabel );
         QToolTip::add(d->cardLabel,d->helpMap[path]);
         setCardDir(path);
     }
