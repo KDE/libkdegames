@@ -180,8 +180,9 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
   if (d->delayedMessages.count() > 0)
   {
     d->delayedMessages.append (msg);
-    processMessage (*d->delayedMessages.begin());
-    d->delayedMessages.remove (d->delayedMessages.begin());
+    QByteArray first = d->delayedMessages.front();
+    d->delayedMessages.pop_front();
+    processMessage (first);
   }
   else
   {
@@ -303,8 +304,9 @@ void KMessageClient::processFirstMessage()
     kdDebug(11001) << k_funcinfo << ": no messages delayed" << endl;
     return;
   }
-  processMessage (*d->delayedMessages.begin());
-  d->delayedMessages.remove (d->delayedMessages.begin());
+  QByteArray first = d->delayedMessages.front();
+  d->delayedMessages.pop_front();
+  processMessage (first);
 }
 
 void KMessageClient::removeBrokenConnection ()

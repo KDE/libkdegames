@@ -92,7 +92,7 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,Property
 {
 // we don't support changing the id
  if (!owner) {
-	kdWarning(11001) << k_funcinfo << ": Resetting owner=0. Sure you want to do this?" << endl;
+	kdWarning(11001) << k_funcinfo << "Resetting owner=0. Sure you want to do this?" << endl;
 	mOwner=0;
 	return -1;
  }
@@ -130,7 +130,7 @@ bool KGamePropertyBase::sendProperty()
  if (mOwner) {
 	return mOwner->sendProperty(s);
  } else {
-	kdError(11001) << k_funcinfo << ": Cannot send because there is no receiver defined" << endl;
+	kdError(11001) << k_funcinfo << "Cannot send because there is no receiver defined" << endl;
 	return false;
  }
 }
