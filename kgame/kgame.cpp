@@ -990,7 +990,8 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   kdDebug(11001) << " MaxPlayers for this game is " << maxPlayers() << endl;
 
   // Do we have too many players? (After the programmer disabled some?)
-  while (maxPlayers()< cnt+playerCount()-inactivateIds.count())
+  int havePlayers = cnt+playerCount()-inactivateIds.count();
+  while (maxPlayers()< havePlayers)
   {
     kdDebug(11001) << "  Still to deacticvate " << (cnt+playerCount()-inactivateIds.count())-maxPlayers() <<endl;
     KPlayer *currentPlayer=0;
