@@ -65,7 +65,7 @@ public:
 
 
 KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
-        : KDialogBase(parent, oname, true, i18n("High Scores")), Ok, Ok, true)
+        : KDialogBase(parent, oname, true, i18n("High Scores"), Ok, Ok, true)
 {
    d = new KScoreDialogPrivate();
    d->edit = 0;
