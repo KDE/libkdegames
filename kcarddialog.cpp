@@ -24,30 +24,35 @@
  *
  */
 
+#include <stdio.h>
+
 #include <qgroupbox.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qdir.h>
-#include <stdio.h>
+#include <qcheckbox.h>
+#include <qlayout.h>
+#include <kapp.h>
 #include <klocale.h>
 #include <kstddirs.h>
+#include <kiconview.h>
+
 #include "kcarddialog.h"
 
-int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,int mFlags,
-                       QString mAlternateDeck,QString mAlternateCarddir,QString mMask)
+int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,
+                  int mFlags, QString mAlternateDeck,QString mAlternateCarddir,
+                  QString mMask, bool* mRandomDeck, bool* mRandomCardDir)
 {
-
-
   KCardDialog dlg(mParent);
   int result;
-
   // Default filemaks is a PNG icon
   if (mMask.isNull()) mMask=QString::fromLatin1(".png");
-  // Remove mask from deck if given
-  if (!mDeck.isNull() && !mMask.isNull())
-  {
-    if (mDeck.right(mMask.length())==mMask) mDeck=mDeck.left(mDeck.length()-mMask.length());
-  }
+
+  // Remove mask from deck if given // WHY?? removed - AB
+//  if (!mDeck.isNull() && !mMask.isNull())
+//  {
+//    if (mDeck.right(mMask.length())==mMask) mDeck=mDeck.left(mDeck.length()-mMask.length());
+//  }
 
   dlg.setDeck(mDeck);
   dlg.setCardDir(mCarddir);
@@ -57,18 +62,24 @@ int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,i
   dlg.setAlternateCardDir(mAlternateCarddir);
   
   dlg.setupDialog();
+  dlg.showRandomDeckBox(mRandomDeck ? true : false);
+  dlg.showRandomCardDirBox(mRandomCardDir ? true : false);
   result=dlg.exec();
   if (result==QDialog::Accepted)
   {
     mDeck=dlg.deck();
-    if (!mDeck.isNull())
-    {
-      mDeck+=dlg.filemask();
-    }
     mCarddir=dlg.cardDir();
     if (!mCarddir.isNull() && mCarddir.right(1)!=QString::fromLatin1("/"))
     {
       mCarddir+=QString::fromLatin1("/");
+    }
+    if (mRandomDeck)
+    {
+      *mRandomDeck = dlg.isRandomDeck();
+    }
+    if (mRandomCardDir)
+    {
+      *mRandomCardDir = dlg.isRandomCardDir();
     }
   }
   return result;
@@ -112,73 +123,74 @@ QString KCardDialog::getDefaultCardPath(int mFlags,QString mAlternateCarddir)
     }
 }
 
-QString KCardDialog::deck() { return cDeck; }
+QString KCardDialog::deck() const { return cDeck; }
 void KCardDialog::setDeck(QString file) { cDeck=file; }
-QString KCardDialog::cardDir() { return cCardDir; }
+QString KCardDialog::cardDir() const { return cCardDir; }
 void KCardDialog::setCardDir(QString dir) { cCardDir=dir; }
-int KCardDialog::flags() { return cFlags; }
+int KCardDialog::flags() const { return cFlags; }
 void KCardDialog::setFlags(int f) { cFlags=f; }
-QString KCardDialog::filemask() { return cMask; }
+QString KCardDialog::filemask() const { return cMask; }
 void KCardDialog::setFilemask(QString mask) { cMask=mask; }
-QString KCardDialog::alternateDeck() { return cAltDeck; }
+QString KCardDialog::alternateDeck() const { return cAltDeck; }
 void KCardDialog::setAlternateDeck(QString file) { cAltDeck=file; }
-QString KCardDialog::alternateCardDir() { return cAltCarddir; }
+QString KCardDialog::alternateCardDir() const { return cAltCarddir; }
 void KCardDialog::setAlternateCardDir(QString dir) { cAltCarddir=dir; }
+bool KCardDialog::isRandomDeck() const 
+{
+  if (randomDeck) return randomDeck->isChecked(); 
+  else return false;
+}
+bool KCardDialog::isRandomCardDir() const 
+{ 
+  if (randomCardDir) return randomCardDir->isChecked(); 
+  else return false;
+}
 
 // protected
-QString KCardDialog::deckPath() { return cDeckpath; }
+QString KCardDialog::deckPath() const { return cDeckpath; }
 void KCardDialog::setDeckPath(QString path) { cDeckpath=path; }
-QString KCardDialog::cardPath() { return cCardpath; }
+QString KCardDialog::cardPath() const { return cCardpath; }
 void KCardDialog::setCardPath(QString path) { cCardpath=path; }
 
 void KCardDialog::setupDialog()
 {
-  QString file,path;
-  int y_pos,y_pos2;
+  QVBoxLayout* topLayout = new QVBoxLayout(plainPage(), spacingHint());
+  QString path, file;
   QWMatrix m;
   m.scale(0.8,0.8);
 
-  setCaption(i18n("Carddeck selection"));
-  setMinimumSize(200,160);
-  setMaximumSize(800,600);                                                        
-
-  if (flags() & (NoDeck|NoCards))
-  {
-    resize(550,240);
-    y_pos=200;
-    y_pos2=0;
-  }
-  else
-  {
-    resize( 550, 480 );
-    y_pos=440;
-    y_pos2=220;
-  }
-
   if (! (flags() & NoDeck))
   {
-    // Deck iconview
-    QGroupBox* grp1;
-    grp1 = new QGroupBox(i18n("Choose backside"), this);
-    grp1->resize(380,200);
-    grp1->move(10,10);
+    QHBoxLayout* layout = new QHBoxLayout(topLayout);
 
-    deckIconView =new KIconView(grp1,"decks");
-    deckIconView->setGeometry( 10, 20, 360, 170 );
+    // Deck iconview
+    QGroupBox* grp1 = new QGroupBox(1, Horizontal, i18n("Choose backside"), plainPage());
+    layout->addWidget(grp1);
+
+    deckIconView = new KIconView(grp1,"decks");
     deckIconView->setGridX(36);
     deckIconView->setGridY(50);
     deckIconView->setSelectionMode(QIconView::Single);
+    deckIconView->setResizeMode(QIconView::Adjust);
+    deckIconView->setMinimumWidth(360);
+    deckIconView->setMaximumHeight(170);
 
     // deck select
-    QGroupBox* grp3;
-    grp3 = new QGroupBox(i18n("Back"), this);
-    grp3->resize(100,130);
-    grp3->move(400,10);
-
+    QVBoxLayout* l = new QVBoxLayout(layout);
+    QGroupBox* grp3 = new QGroupBox(i18n("Back"), plainPage());
+    grp3->setFixedSize(100, 130);
+    l->addWidget(grp3, 0, AlignTop|AlignHCenter);
     deckLabel = new QLabel(grp3);
-    deckLabel->setGeometry(10, 20, 80, 90 );
     deckLabel->setText(i18n("empty"));
     deckLabel->setAlignment(AlignHCenter|AlignVCenter);
+    deckLabel->setGeometry(10, 20, 80, 90);
+
+    randomDeck = new QCheckBox(plainPage());
+    randomDeck->setChecked(false);
+    connect(randomDeck, SIGNAL(toggled(bool)), this, 
+            SLOT(slotRandomDeckToggled(bool)));
+    randomDeck->setText(i18n("Random backside"));
+    l->addWidget(randomDeck, 0, AlignTop|AlignHCenter);
 
     connect(deckIconView,SIGNAL(clicked(QIconViewItem *)),
             this,SLOT(slotDeckClicked(QIconViewItem *)));
@@ -187,53 +199,40 @@ void KCardDialog::setupDialog()
   if (! (flags() & NoCards))
   {
     // Cards iconview
-    QGroupBox* grp2;
-    grp2 = new QGroupBox(i18n("Choose frontside"), this);
-    grp2->resize(380,200);
-    grp2->move(10,10+y_pos2);
+    QHBoxLayout* layout = new QHBoxLayout(topLayout);
+    QGroupBox* grp2 = new QGroupBox(1, Horizontal, i18n("Choose frontside"), plainPage());
+    layout->addWidget(grp2);
 
     cardIconView =new KIconView(grp2,"cards");
-    cardIconView->setGeometry( 10, 20, 360, 170 );
     cardIconView->setGridX(36);
     cardIconView->setGridY(50);
+    cardIconView->setResizeMode(QIconView::Adjust);
+    cardIconView->setMinimumWidth(360);
+    cardIconView->setMaximumHeight(170);
 
     // Card select
-    QGroupBox* grp4;
-    grp4 = new QGroupBox(i18n("Front"), this);
-    grp4->resize(100,130);
-    grp4->move(400,10+y_pos2);
-
+    QVBoxLayout* l = new QVBoxLayout(layout);
+    QGroupBox* grp4 = new QGroupBox(i18n("Front"), plainPage());
+    grp4->setFixedSize(100, 130);
+    l->addWidget(grp4, 0, AlignTop|AlignHCenter);
     cardLabel = new QLabel(grp4);
-    cardLabel->setGeometry(10, 20, 80, 90 );
     cardLabel->setText(i18n("empty"));
     cardLabel->setAlignment(AlignHCenter|AlignVCenter);
+    cardLabel->setGeometry(10, 20, 80, 90 );
+
+    randomCardDir = new QCheckBox(plainPage());
+    randomCardDir->setChecked(false);
+    connect(randomCardDir, SIGNAL(toggled(bool)), this, 
+            SLOT(slotRandomCardDirToggled(bool)));
+    randomCardDir->setText(i18n("Random frontside"));
+    l->addWidget(randomCardDir, 0, AlignTop|AlignHCenter);
 
     connect(cardIconView,SIGNAL(clicked(QIconViewItem *)),
             this,SLOT(slotCardClicked(QIconViewItem *)));
   }
 
-
-
-  // Buttons
-  QPushButton *PushButton;
-  PushButton = new QPushButton( this, "Button_1" );
-  PushButton->setGeometry( 390, y_pos, 65, 30 );
-  connect( PushButton, SIGNAL(clicked()), SLOT(accept()) );
-  PushButton->setText( i18n("OK" ));
-  PushButton->setAutoRepeat( FALSE );
-  PushButton->setAutoResize( FALSE );
-
-  PushButton = new QPushButton( this, "Button_2" );
-  PushButton->setGeometry( 470, y_pos, 65, 30 );
-  connect( PushButton, SIGNAL(clicked()), SLOT(reject()) );
-  PushButton->setText( i18n("Cancel" ));
-  PushButton->setAutoRepeat( FALSE );
-  PushButton->setAutoResize( FALSE );
-
-
-  // Insert Deckicons 
+  // Insert deck icons 
   // First find the default or alternate path
- 
   if (! (flags() & NoDeck))
   {
     file=KCARD_DECKPATH+KCARD_DEFAULTDECK+filemask();
@@ -243,8 +242,7 @@ void KCardDialog::setupDialog()
       path+=KCARD_DECKPATH;
     }
 
-
-    // Set default pat if no alternate deck given or probe default deck given
+    // Set default path if no alternate deck given or probe default deck given
     // and default deck found
     if (alternateDeck().isNull() || (!path.isNull() && (flags()&ProbeDefaultDir)))
     {
@@ -262,7 +260,7 @@ void KCardDialog::setupDialog()
     // Set default icons if given
     if (!deck().isNull())
     {
-      file=deck()+filemask();
+      file=deck();
       QPixmap *pixmap=new QPixmap(file);
       QPixmap *pixmap2=new QPixmap;
       *pixmap2=pixmap->xForm(m);
@@ -281,7 +279,7 @@ void KCardDialog::setupDialog()
     {
       path+=KCARD_CARDPATH;
     }
-    // Set default pat if no alternate deck given or probe default deck given
+    // Set default path if no alternate deck given or probe default deck given
     // and default deck found
     if (alternateCardDir().isNull() || (!path.isNull() && (flags()&ProbeDefaultDir)))
     {
@@ -398,9 +396,11 @@ KCardDialog::~KCardDialog()
 
 
 // Create the dialog 
-KCardDialog::KCardDialog( QWidget *parent, const char *name,bool modal , WFlags f )
-    : KDialog( parent, name,modal,f )
+KCardDialog::KCardDialog( QWidget *parent, const char *name,bool modal)
+    : KDialogBase( Plain, i18n("Carddeck selection"), Ok|Cancel, Ok, parent, name, modal, true)
 {
+  randomDeck = 0;
+  randomCardDir = 0;
   pixmapList.setAutoDelete(TRUE);
 }
 
@@ -409,7 +409,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
     if (item && item->pixmap()) 
     {
       deckLabel->setPixmap(* (item->pixmap()));
-      setDeck(deckPath()+item->text());
+      setDeck(deckPath()+item->text()+filemask());
     }
 }
 void KCardDialog::slotCardClicked(QIconViewItem *item)
@@ -418,8 +418,104 @@ void KCardDialog::slotCardClicked(QIconViewItem *item)
     {
       cardLabel->setPixmap(* (item->pixmap()));
       setCardDir(cardPath()+item->text());
+      if (cardDir().length()>0 && cardDir().right(1)!=QString::fromLatin1("/")) 
+      {
+        setCardDir(cardDir() + QString::fromLatin1("/"));
+      }
     }
+}
 
+QString KCardDialog::getRandomDeck(int mFlags, QString alternateDeck, QString mMask)
+{
+  if (mMask.isNull()) {
+    mMask=QString::fromLatin1(".png");
+  }
+
+  QString file=KCARD_DECKPATH+KCARD_DEFAULTDECK+mMask;
+  QString path=kapp->dirs()->findResourceDir("data", file);
+
+  if (!path.isNull()) {
+    path+=KCARD_DECKPATH;
+  }
+  if (!alternateDeck.isNull() && !(!path.isNull() && mFlags&ProbeDefaultDir)) {
+    path=alternateDeck;
+  }
+
+  QDir dir;
+  dir.cd(path);
+  dir.setSorting(QDir::Name);
+  dir.setNameFilter(QString::fromLatin1("*")+mMask);
+  int d = kapp->random() % dir.count();
+  return dir.absPath() + "/" + dir[d];
+}
+
+QString KCardDialog::getRandomCardDir(int mFlags, QString alternateCardDir, QString mMask)
+{
+  if (mMask.isNull()) {
+    mMask=QString::fromLatin1(".png");
+  }
+
+  QString file=KCARD_CARDPATH+KCARD_DEFAULTCARDDIR+KCARD_DEFAULTCARD+mMask;
+  QString path=kapp->dirs()->findResourceDir("data", file);
+
+  if (!path.isNull()) {
+    path+=KCARD_CARDPATH;
+  }
+  if (!alternateCardDir.isNull() && !(!path.isNull() && mFlags&ProbeDefaultDir)) {//uff what ugly...
+    path=alternateCardDir;
+  }
+
+  QDir dir;
+  dir.cd(path);
+  dir.setSorting(QDir::Name);
+  dir.setNameFilter("card*");
+  int d = kapp->random() % dir.count();
+  return dir.absPath() + "/" + dir[d];
+}
+
+void KCardDialog::showRandomDeckBox(bool s)
+{
+ if (!randomDeck)
+	return;
+ if (s)
+   randomDeck->show();
+ else
+   randomDeck->hide();
+}
+
+void KCardDialog::showRandomCardDirBox(bool s)
+{
+ if (!randomCardDir)
+	return;
+ if (s)
+   randomCardDir->show();
+ else
+   randomCardDir->hide();
+}
+
+void KCardDialog::slotRandomDeckToggled(bool on)
+{
+  if (on) {
+    deckLabel->setText("random");
+    setDeck(getRandomDeck(0, deckPath()));
+  } else {
+    deckLabel->setText("empty");
+    setDeck(0);
+  }
+}
+
+void KCardDialog::slotRandomCardDirToggled(bool on)
+{
+  if (on) {
+    cardLabel->setText("random");
+    setCardDir(getRandomCardDir(0, cardPath()));
+    if (cardDir().length()>0 && cardDir().right(1)!=QString::fromLatin1("/"))  {
+      setCardDir(cardDir() + QString::fromLatin1("/"));
+    }
+  } else {
+    cardLabel->setText("empty");
+    setCardDir(0);
+  }
 }
 
 #include "kcarddialog.moc"

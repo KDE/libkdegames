@@ -16,12 +16,14 @@
  ***************************************************************************/
 #ifndef __KCARDDLG_H_
 #define __KCARDDLG_H_
-#include <kapp.h>
+
 #include <qstring.h>
-#include <qdialog.h>
-#include <qlabel.h>
-#include <kiconview.h>
-#include <kdialog.h>
+#include <kdialogbase.h>
+
+class QCheckBox;
+class QIconViewItem;
+class QLabel;
+class KIconView;
 
 #define KCARD_DECKPATH QString::fromLatin1("carddecks/decks/")
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0")
@@ -60,7 +62,7 @@
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
-class KCardDialog : public KDialog
+class KCardDialog : public KDialogBase
 {
   Q_OBJECT
 
@@ -71,11 +73,10 @@ public:
    * @param parent The parent widget of the dialog, if any.
    * @param name The name of the dialog.
    * @param modal Specifies whether the dialog is modal or not.
-   * @param f Passes window flags to the dialog.
    *
    */
    KCardDialog (QWidget* parent = NULL,const char* name = NULL,
-             bool modal = true, WFlags f = 0);
+             bool modal = true);
    /**
    * Destructs a card deck selection dialog.
    *
@@ -117,16 +118,28 @@ public:
    * @param mMask An optinonal filemask for the icons. Per default *.png
    *        images are assumed.
    *
+   * @param mRandomDeck if this pointer is non-zero, *ok is set to TRUE if
+   *        the user wants a random deck otherwise to FALSE. Use this in the
+   *        config file of your game to load a random deck on startup.
+   *        See @ref getRandomDeck()
+   *
+   * @param mRandomCardDir if this pointer is non-zero, *ok is set to TRUE if
+   *        the user wants a random card otherwise to FALSE.
+   *        Use this in the config file of your game to load a random card
+   *        foregrounds on startup.
+   *        See @ref getRandomCardDir()
+   * 
    * @return @ref #QDialog::result().
    */
-   static int getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent=0,
+   static int getCardDeck(QString &mDeck,QString &mCarddir, QWidget *mParent=0,
                        int mFlags=0, QString mAlternateDeck=0,
-                       QString mAlternateCarddir=0,QString mMask=0);
+                       QString mAlternateCarddir=0, QString mMask=0, 
+                       bool* mRandomDeck=0, bool* mRandomCardDir=0);
 
    /**
    * Returns the default path to the card deck backsides. You want
    * to use this usually before the user used the card dialog the first
-   * time to get an default deck. You can assume that
+   * time to get a default deck. You can assume that
    * <pre>
    *   getDefaultDeckPath()+QString::fromLatin1("deck0.png")
    * </pre>
@@ -148,7 +161,7 @@ public:
    * to use this usually before the user used the card dialog the first
    * time to get an default deck. You can assume that
    * <pre>
-   *   getDefaultCardpath()+QString::fromLatin1("*.png")
+   *   getDefaultCardPath()+QString::fromLatin1("*.png")
    * </pre>
    * are valid cards for * from 1 to 52.
    *
@@ -162,19 +175,48 @@ public:
    */
    static QString getDefaultCardPath(int mFlags=0,QString mAlternateCarddir=0);
 
+   /**
+    * Returns a random deck in @ref deckPath() or mAlternateDeck if given
+    * @param mFlags You can assign @p ProbeDefaultDir to this
+    * @param mAlternateDeck an alternative dir to search for the decks
+    * @param mMask The filemask. See @ref setFileMask() - .png is default
+    * @return A random deck
+    **/
+   static QString getRandomDeck(int mFlags=0, QString mAlternateDeck=0, QString mMask=0);
 
+   /**
+    * Returns a random directory of cards in @ref cardPath() or 
+    * mAlternateCardDir if given.
+    * @param mFlags You can assign @p ProbeDefaultDir to this
+    * @param mAlternateDeck An alternative dir to search for the card dirs 
+    * @param mMask The filemask. See @ref setFileMask() - .png is default
+    * @return A random card dir
+    **/
+   static QString getRandomCardDir(int mFlags=0, QString mAlternateCardDir=0, QString mMask=0);
+
+   /**
+    * Show or hides the "random backside" checkbox
+    * @param s Shows the checkbox if true otherwise hides it
+    **/
+   void showRandomDeckBox(bool s);
+
+   /**
+    * Show or hides the "random foreside" checkbox
+    * @param s Shows the checkbox if true otherwise hides it
+    **/
+   void showRandomCardDirBox(bool s);
+   
    /**
    * Returns the choosen deck, which is a valid path to a imagefile.
    * 
    * @return The deck
    */
-   QString deck();
+   QString deck() const;
 
    /**
    * Sets the default deck.
    *
    * @param file The full path to an image file
-   * 
    */
    void setDeck(QString file);
 
@@ -183,7 +225,7 @@ public:
    * 
    * @return The card directory
    */
-   QString cardDir();
+   QString cardDir() const;
 
    /**
    * Sets the default card directory.
@@ -198,7 +240,7 @@ public:
    * 
    * @return the flags
    */
-   int flags();
+   int flags() const;
 
    /**
    * Sets the flags for the dialog
@@ -213,7 +255,7 @@ public:
    * 
    * @return the filemask
    */
-   QString filemask();
+   QString filemask() const;
 
    /**
    * Sets the filemask
@@ -229,7 +271,7 @@ public:
    * @return the directory
    * 
    */
-   QString alternateDeck();
+   QString alternateDeck() const;
 
    /**
    * Sets the alternative deck directory
@@ -246,7 +288,7 @@ public:
    * 
    * @return the alternative card directory
    */
-   QString alternateCardDir();
+   QString alternateCardDir() const;
 
    /**
    * Sets the alternative card directory
@@ -261,24 +303,37 @@ public:
    * Creates the default widgets in the dialog. Must be called after
    * all flags are set. This is only needed if you do NOT use the
    * @ref #getCardDeck static function which provides all calls for you.
-   * 
    */
    void setupDialog();
 
+   /**
+    * @return TRUE if the selected deck is a random deck (i.e. the user checked
+    * the random checkbox) otherwise FALSE
+    **/
+   bool isRandomDeck() const;
+
+   /**
+    * @return TRUE if the selected carddir is a random dir (i.e. the user 
+    * checked the random checkbox) otherwise FALSE
+    **/
+   bool isRandomCardDir() const;
+
 protected:
-
-protected slots:
-   void slotDeckClicked(QIconViewItem *);
-   void slotCardClicked(QIconViewItem *);
-
-private:
-   QString deckPath();
+   QString deckPath() const;
    void setDeckPath(QString path);
-   QString cardPath();
+   QString cardPath() const;
    void setCardPath(QString path);
    void insertCardIcons(QString path);
    void insertDeckIcons(QString path);
 
+
+protected slots:
+   void slotDeckClicked(QIconViewItem *);
+   void slotCardClicked(QIconViewItem *);
+   void slotRandomCardDirToggled(bool on);
+   void slotRandomDeckToggled(bool on);
+
+   
 
 private:
    QList <QPixmap > pixmapList;
@@ -286,6 +341,8 @@ private:
    QLabel *cardLabel;
    KIconView *deckIconView;
    KIconView *cardIconView;
+   QCheckBox* randomDeck;
+   QCheckBox* randomCardDir;
 
    // set/query variables
    QString cDeck,cCardDir,cMask;
