@@ -15,3 +15,7 @@
              everywhere in KGame... hope nothing else is affecterd by this
              problem (signalPrepareMove was fixed already by me)
 18.09.2001:  bool* for Key/Mouseevents and IOAdded in kgameio.h too
+18.09.2001:  Question: Should the signal signalPlayerInput(QDataStream &,KPlayer *))
+             be made a virtual function? Means: is this ever needed outside
+             the derived KGame class?
+              

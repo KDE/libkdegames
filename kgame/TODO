@@ -1,14 +1,9 @@
 - 18.02.2001: Network Init can be called more than once. Has very interesting
               effects ;-). Should be prevented (if (connected()) return false; ??
               Kind of fixed?
-- 23.02.2001: doku: signalPlayerInput/playerInput are main functions. Must be
-              explained
 - 24.02.2001: KGameErrorDialog::slotVersionError(): cookie and version (local and remote) must be shown in the message 
               TODO: more parameters to signal
 - 28.02.2001: Direct computer player for kpoker like games support needs to be improved
-- 28.02.2001: Non existing properties in load should be created, resp like the player
-              creation a signal should prompt the player.
-              Problem, are these properties deleted? Maybe a flag canDelete?
 - 05.03.2001: Documentation. I am thinking of an explaination of the 
               class + methods and example code for the "key" methods. A sample
               implementation in a small game (like the current kdenonbeta/kgame
