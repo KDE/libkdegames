@@ -447,7 +447,7 @@ signals:
      * @param current the player who did the last move
      * @param me a pointer to the KGame object
      */
-    void signalGameOver(int status,KPlayer *current, KGame *me);
+    void signalGameOver(int status, KPlayer *current, KGame *me);
 
 protected:
     /**
@@ -513,11 +513,6 @@ protected:
      */
     void syncRandom();
 
-    /**
-     * Well what do you think will this member function set?
-     * @param id Uff - What is this parameter for? I don't know ;-)
-     **/
-    virtual void setGameId(int id);
     void deletePlayers();
     void deleteInactivePlayers();
 
@@ -538,7 +533,7 @@ protected:
      *
      * @return true?
      */
-    virtual bool loadgame(QDataStream &stream,bool network);
+    virtual bool loadgame(QDataStream &stream, bool network);
 
 private:
     //AB: this is to hide the "receiver" parameter from the user. It shouldn't be
@@ -551,24 +546,24 @@ private:
      * ever need this. It it internally used to initialize a newly connected
      * client.
      **/
-    void addPlayer(KPlayer* newplayer, int receiver);
+    void addPlayer(KPlayer* newplayer, Q_UINT32 receiver);
 
     /**
      * Just the same as the public one except receiver:
      * @param receiver 0 for broadcast, otherwise the receiver. Should only be
      * used in special circumstances and not outside KGame.
      **/
-    bool removePlayer(KPlayer * player, int receiver);
+    bool removePlayer(KPlayer * player, Q_UINT32 receiver);
 
     /**
      * Helping function - game negotiation
      **/
-    void setupGame(int sender);
+    void setupGame(Q_UINT32 sender);
 
     /**
      * Helping function - game negotiation
      **/
-    void setupGameContinue(QDataStream& msg, int sender);
+    void setupGameContinue(QDataStream& msg, Q_UINT32 sender);
 
     /**
      * Helping function - game negotiation
@@ -593,7 +588,7 @@ private:
      * @ref addPlayer as well as in @ref negotiateNetworkGame
      * @param receiver The owner of the player
      **/
-    void savePlayer(QDataStream& stream,KPlayer* player, int receiver=0);
+    void savePlayer(QDataStream& stream,KPlayer* player, Q_UINT32 receiver=0);
     
     
 private:

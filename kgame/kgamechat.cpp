@@ -18,19 +18,19 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include <qbuffer.h>
-#include <qmap.h>
-#include <qintdict.h>
-
-#include <klocale.h>
-#include <kdebug.h>
+#include "kgamechat.h"
 
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgameproperty.h"
 #include "kgamemessage.h"
 
-#include "kgamechat.h"
+#include <klocale.h>
+#include <kdebug.h>
+
+#include <qbuffer.h>
+#include <qmap.h>
+#include <qintdict.h>
 
 //FIXME:
 #define FIRST_ID 2 // first id, that is free of use, aka not defined above
@@ -42,6 +42,7 @@ public:
 	{
 		mFromPlayer = 0;
 		mGame = 0;
+
 		mToMyGroup = -1;
 	}
 	
@@ -153,8 +154,6 @@ bool KGameChat::isToGroupMessage(int id) const
 
 bool KGameChat::isToPlayerMessage(int id) const
 {
-kdDebug(11001) << id << endl;
-kdDebug(11001) << d->mSendId2PlayerId.contains(id) << endl;
 return d->mSendId2PlayerId.contains(id); }
 
 QString KGameChat::sendToPlayerEntry(const QString& name) const
@@ -211,7 +210,7 @@ void KGameChat::setKGame(KGame* g)
  }
  d->mGame = g;
 
- if (g) {
+ if (d->mGame) {
 	connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)), 
 			this, SLOT(slotAddPlayer(KPlayer*)));
 	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 

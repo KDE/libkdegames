@@ -256,7 +256,7 @@ KPlayer * KGame::findPlayer(Q_UINT32 id) const
 // and the clients are working correctly.
 // BUT: if addPlayer(foo) does not arrive by any reason while addPlayer(bar)
 // does, we would be in trouble...
-void KGame::addPlayer(KPlayer* newplayer, int receiver)
+void KGame::addPlayer(KPlayer* newplayer, Q_UINT32 receiver)
 {//transmit to all clients, or to receiver only
  kdDebug(11001) << "Trying to send addPlayer  " << "; maxPlayers=" << maxPlayers() << " playerCount=" << playerCount() << endl;
   
@@ -272,7 +272,7 @@ void KGame::addPlayer(KPlayer* newplayer, int receiver)
  sendSystemMessage(stream,(int)KGameMessage::IdAddPlayer, receiver, gameId());
 }
 
-void KGame::savePlayer(QDataStream &stream,KPlayer* p, int owner)
+void KGame::savePlayer(QDataStream &stream,KPlayer* p, Q_UINT32 owner)
 {
 // this could be in KGameMessage as well
  stream << (int)p->rtti();
@@ -281,7 +281,7 @@ void KGame::savePlayer(QDataStream &stream,KPlayer* p, int owner)
  p->save(stream);
 }
 
-bool KGame::removePlayer(KPlayer * player, int receiver)
+bool KGame::removePlayer(KPlayer * player, Q_UINT32 receiver)
 {//transmit to all clients, or to receiver only
  if (!player) {
    return false;
@@ -420,27 +420,6 @@ bool KGame::systemActivatePlayer(KPlayer* player)
 }
 
 // -------------------- Properties ---------------------------
-void KGame::setGameId(int id)
-{
- kdError (11001) << "KGame::setGameID " << id << ": Is broken at the moment!" << endl;
- // FIXME: This is not possible at the moment!
-
-/*
-//AB: the following is completely obsolete. can probably be removed.
- KGameNetwork::setGameId(id);
- // Adjust all player id after the gameid got changed...which better happens ONLY by
- // a remote call by the gamemaster(admin?)!
- KPlayer *player;
- for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() ) {
-   if (player->isVirtual()) continue;
-   player->setId(KGameMessage::calcMessageId(gameId(),0)|(player->id()&0x3ff));
- }
- for ( player=mInactivePlayerList.first(); player != 0; player=mInactivePlayerList.next() ) {
-   if (player->isVirtual()) continue;
-   player->setId(KGameMessage::calcMessageId(gameId(),0)|(player->id()&0x3ff));
- }
-*/
-}
 
 void KGame::setMaxPlayers(uint maxnumber)
 { if (isAdmin()) { d->mMaxPlayer.changeValue(maxnumber); } }
@@ -753,7 +732,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
 }
 
 // called by the IdSetupGameContinue Message - MASTER SIDE
-void KGame::setupGameContinue(QDataStream& stream, int sender)
+void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
 {
  QValueList<int> playerId;
  QValueList<int> playerPriority;
@@ -825,7 +804,7 @@ void KGame::gameReactivatePlayer(QDataStream& stream, Q_UINT32 sender)
 }
 
 // called by the IdSetupGame Message - CLIENT SIDE
-void KGame::setupGame(int sender)  
+void KGame::setupGame(Q_UINT32 sender)  
 {
 
  QValueList<int> playerId;
@@ -921,7 +900,7 @@ void KGame::slotServerDisconnected()
   for ( player=mReList.first(); player != 0; player=mReList.next() )
   {
     // TODO check for priority
-    if (playerCount()<maxPlayers())
+    if ((int)playerCount()<maxPlayers())
     {
       systemActivatePlayer(player);
     }
@@ -966,7 +945,7 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
    QValueList<int>::Iterator it2=d->mInactivePriorityList.at(idx);
    player=findPlayer(*it1);
    int pri=*it2;
-   if (playerCount()<maxPlayers() && player && KGameMessage::rawGameId(*it1)!=clientID)
+   if ((int)playerCount()<maxPlayers() && player && KGameMessage::rawGameId(*it1)!=clientID)
    {
      activatePlayer(player);
    }
