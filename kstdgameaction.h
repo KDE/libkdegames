@@ -24,6 +24,8 @@
 class KAction;
 class KToggleAction;
 class QObject;
+class KActionCollection;
+class KRecentFilesAction;
 
 /**
  * @see KStdAction
@@ -45,7 +47,7 @@ public:
    **/
     enum StdGameAction {
         // Game menu
-        New=1, Load, Save, SaveAs, End, Pause, Highscores,
+        New=1, Load, LoadRecent, Save, SaveAs, End, Pause, Highscores,
         Print, Quit,
 	// Move menu
 	Repeat, Undo, Redo, Roll, EndTurn,
@@ -67,7 +69,7 @@ public:
      * @ref KStdGameAction::StdGameAction enum.
      */
     static KAction *action(StdGameAction act_enum, const QObject *recvr = 0,
-                           const char *slot = 0, QObject *parent = 0,
+                           const char *slot = 0, KActionCollection *parent = 0,
                            const char *name = 0L );
 
     /**
@@ -79,37 +81,43 @@ public:
      * Start a new game
      **/
     static KAction *gameNew(const QObject *recvr = 0, const char *slot = 0,
-                            QObject *parent = 0, const char *name = 0L );
+                            KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Load a previousely saved game
      */
     static KAction *load(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
+
+    /**
+     * Load a recently loaded game.
+     */
+    static KRecentFilesAction *loadRecent(const QObject *recvr = 0, const char *slot = 0,
+                         KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Save the current game.
      */
     static KAction *save(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Save the current game under a different filename.
      */
     static KAction *saveAs(const QObject *recvr = 0, const char *slot = 0,
-                           QObject *parent = 0, const char *name = 0L );
+                           KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Pause the game
      **/
     static KToggleAction *pause(const QObject *recvr = 0, const char *slot = 0,
-                           QObject *parent = 0, const char *name = 0L );
+                           KActionCollection *parent = 0, const char *name = 0L );
     
     /**
      * Show the highscores.
      */
     static KAction *highscores(const QObject *recvr = 0, const char *slot = 0,
-                           QObject *parent = 0, const char *name = 0L );
+                           KActionCollection *parent = 0, const char *name = 0L );
 
 
     /**
@@ -117,20 +125,20 @@ public:
      * entry.
      */
     static KAction *end(const QObject *recvr = 0, const char *slot = 0,
-                          QObject *parent = 0, const char *name = 0L );
+                          KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Print the current screen? Game? Whatever - hardly used in games but there
      * is at least one example (ktuberling)
      */
     static KAction *print(const QObject *recvr = 0, const char *slot = 0,
-                          QObject *parent = 0, const char *name = 0L );
+                          KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Quit the game.
      */
     static KAction *quit(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
 
    
@@ -138,39 +146,39 @@ public:
      * Repeat the last move.
      **/
     static KAction *repeat(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Undo the last move
      **/
     static KAction *undo(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Redo the last move (which has been undone)
      **/
     static KAction *redo(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Roll die or dice
      **/
     static KAction *roll(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * End the current turn (not the game). Usually to let the next player
      * start
      **/
     static KAction *endTurn(const QObject *recvr = 0, const char *slot = 0,
-                         QObject *parent = 0, const char *name = 0L );
+                         KActionCollection *parent = 0, const char *name = 0L );
 
 
     /**
      * Display configure carddecks dialog.
      */
     static KAction *carddecks(const QObject *recvr = 0, const char *slot = 0,
-                                QObject *parent = 0, const char *name = 0L );
+                                KActionCollection *parent = 0, const char *name = 0L );
 
 };
 

@@ -31,7 +31,7 @@ KStdGameAction::~KStdGameAction()
 }
 
 KAction *KStdGameAction::action(StdGameAction act_enum, const QObject *recvr,
-                            const char *slot, QObject *parent, const char *name )
+                            const char *slot, KActionCollection *parent, const char *name )
 {
     KAction *act;
     switch (act_enum)
@@ -41,6 +41,9 @@ KAction *KStdGameAction::action(StdGameAction act_enum, const QObject *recvr,
         break;
     case Load:
         act = load(recvr, slot, parent, name);
+        break;
+    case LoadRecent:
+        act = loadRecent(recvr, slot, parent, name);
         break;
     case Save:
         act = save(recvr, slot, parent, name);
@@ -100,6 +103,9 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
     case Load:
         ret = "game_load";
         break;
+    case LoadRecent:
+        ret = "game_load_recent";
+        break;
     case Save:
         ret = "game_save";
         break;
@@ -148,7 +154,7 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
 }
 
 KAction *KStdGameAction::gameNew(const QObject *recvr, const char *slot,
-                             QObject *parent, const char *name )
+                             KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("new game", "&New"), "filenew",
                        KStdAccel::key(KStdAccel::New), recvr, slot, parent,
@@ -156,15 +162,23 @@ KAction *KStdGameAction::gameNew(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::load(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("&Load..."), "fileopen",
                        KStdAccel::key(KStdAccel::Open), recvr, slot, parent,
                        name ? name : stdName(Load));
 }
 
+KRecentFilesAction *KStdGameAction::loadRecent(const QObject *recvr, const char *slot,
+                                                  KActionCollection *parent, const char *name )
+{
+    return new KRecentFilesAction(i18n("Load &Recent"), 0,
+                       KStdAccel::AccelNone, recvr, slot, parent,
+                       name ? name : stdName(LoadRecent));
+}
+
 KAction *KStdGameAction::save(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("&Save"), "filesave",
                        KStdAccel::key(KStdAccel::Save), recvr, slot, parent,
@@ -172,21 +186,21 @@ KAction *KStdGameAction::save(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::saveAs(const QObject *recvr, const char *slot,
-                                                        QObject *parent, const char *name )
+                                                        KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("Save &As..."), 0, recvr, slot, parent,
                        name ? name : stdName(SaveAs));
 }
 
 KToggleAction *KStdGameAction::pause(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KToggleAction(i18n("Pa&use"), "player_pause", Qt::Key_P, recvr, slot, parent,
                        name ? name : stdName(Pause));
 }
 
 KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,
-                                                        QObject *parent, const char *name )
+                                                        KActionCollection *parent, const char *name )
 {
 //hmm perhaps we need a KStdGameAccel one day? currently this entry is hard
 //coded...
@@ -195,7 +209,7 @@ KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::print(const QObject *recvr, const char *slot,
-                                                   QObject *parent, const char *name )
+                                                   KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("&Print..."), "fileprint",
                        KStdAccel::key(KStdAccel::Print), recvr, slot, parent,
@@ -203,7 +217,7 @@ KAction *KStdGameAction::print(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::end(const QObject *recvr, const char *slot,
-                                                   QObject *parent, const char *name )
+                                                   KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("&End Game"), "fileclose",
                        KStdAccel::key(KStdAccel::End), recvr, slot, parent,
@@ -211,7 +225,7 @@ KAction *KStdGameAction::end(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::quit(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("&Quit"), "exit",
                        KStdAccel::key(KStdAccel::Quit), recvr, slot, parent,
@@ -219,7 +233,7 @@ KAction *KStdGameAction::quit(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::repeat(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("Repeat"), /*0,*/// hm do we have a suitable icon for this?
 //                       KStdAccel::key(KStdAccel::Redo), recvr, slot, parent,
@@ -228,7 +242,7 @@ KAction *KStdGameAction::repeat(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::undo(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("Und&o"), "undo",
                        KStdAccel::key(KStdAccel::Undo), recvr, slot, parent,
@@ -236,7 +250,7 @@ KAction *KStdGameAction::undo(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("Re&do"), "redo",
                        KStdAccel::key(KStdAccel::Redo), recvr, slot, parent,
@@ -244,7 +258,7 @@ KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("Roll"), "roll",
                        0, recvr, slot, parent,
@@ -252,7 +266,7 @@ KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::endTurn(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
     return new KAction(i18n("End Turn"), "stop",
                        0, recvr, slot, parent,
@@ -260,7 +274,7 @@ KAction *KStdGameAction::endTurn(const QObject *recvr, const char *slot,
 }
 
 KAction *KStdGameAction::carddecks(const QObject *recvr, const char *slot,
-                                                  QObject *parent, const char *name )
+                                                  KActionCollection *parent, const char *name )
 {
 //AB: maybe we need an icon?
     return new KAction(i18n("Configure &Carddecks..."), 
