@@ -33,4 +33,7 @@
               here so that I don't forget it
 - 06.10.2001: add KGamePropertyHandler::setDebug(false) to clear all debug names
               (and to not accept new names) of KGameProperty. Will save some
-	      memory
+              memory
+- 06.10.2001: If one kicks a player (in KGameDialog) the client should be kicked
+              as well. Perhaps always disconnect a client when all players from
+              it have disappeared?
