@@ -27,6 +27,7 @@
 #include <qobject.h>
 
 class KPlayer;
+class KGame;
 class KProcess;
 
 /**
@@ -68,12 +69,20 @@ public:
     * @return rtti value
     */
    virtual int rtti() const = 0;  // Computer, network, local, ...
+   
    /**
     * This function returns the player who owns this IO
     *
     * @return the player this IO device is plugged into
     */
    KPlayer *player() const {return mPlayer;}
+
+   /**
+    * Equivalent to player()->game()
+    * @return the @ref KGame object of this player
+    **/
+   KGame* game() const;
+   
    /**
     * Sets the player to which this IO belongs to. This
     * is done automatically when adding a device to a 
@@ -92,31 +101,45 @@ public:
     */
    virtual void initIO(KPlayer *p);
 
-   /**
-    * Message to clients. Needs to be overwritten to be
-    * of use.
-    *
-    */
-    virtual void sendSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
-
     /**
-    * Message to clients. Needs to be overwritten to be
-    * of use.
-    *
-    * You probably want to use this for your game messages instead of @ref
-    * sendSystemMessage
-    **/
-    virtual void sendMessage(QDataStream &stream, int msgid, int receiver, int sender);
-    
-    /**
-     *  Notifies the IO device that the player's setTurn had been called
-     *  Called by KPlayer
+     * Notifies the IO device that the player's setTurn had been called
+     * Called by KPlayer
      *
-     *  @param turn is true/false
+     * This emits @ref signalPrepareTurn and sends the turn if the send
+     * parameter is set to true.
+     *
+     * @param turn is true/false
      */
     virtual void notifyTurn(bool b);
 
-    
+    /**
+     * Send an input message using @ref KPlayer::forwardInput
+     **/
+    bool sendInput(QDataStream& stream, bool transmit = true, Q_UINT32 sender = 0);
+
+signals:  
+    /**
+     * Signal generated when @ref KPlayer::myTurn changes. This can either be
+     * when you get the turn status or when you loose it.
+     *
+     * The datastream has to be filled with a move. If you set (or leave) the
+     * send parameter to FALSE then nothing happens: the datastream will be
+     * ignored. If you set it to FALSE @ref sendInput is used to
+     * send the move.
+     *
+     * Often you want to ignore this signal (leave send=FALSE) and send the
+     * message later. This is usually the case for a human player as he probably
+     * doesn't react immediately. But you can still use this e.g. to notify the
+     * player about the turn change. 
+     *
+     * @param io the KGameIO object itself
+     * @param stream the stream into which the move will be written
+     * @param turn the argument of setTurn
+     * @param send set this to true to send the generated move using @ref
+     * sendInput
+     **/
+    void signalPrepareTurn(QDataStream & stream, bool turn, KGameIO *io, bool & send);
+
 
 private:  
    KPlayer *mPlayer;
@@ -302,17 +325,19 @@ public:
 
     /**
      *  Notifies the IO device that the player's setTurn had been called
-     *  Called by KPlayer. You can react on the signalPrepareTurn to
+     *  Called by KPlayer. You can react on the @ref signalPrepareTurn to
      *  prepare a message for the process
      *
      *  @param turn is true/false
      */
-    void notifyTurn(bool b);
+    virtual void notifyTurn(bool turn);
 
   protected:
     /**
-     * Combined function for all message handling */
+     * Combined function for all message handling 
+     **/
     void sendAllMessages(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
+
   protected slots:
     void receivedMessage(const QByteArray& receiveBuffer);
 
@@ -327,21 +352,6 @@ signals:
    * needs to calculate a move.
    */
   void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
-
-  /**
-  * Signal generated when the computer player is about to perform a turn. 
-  * The datastream has to be filled with user data for the computer player
-  * to make a proper move. What you write into the stream is completely
-  * up to you. The stream will be received by the corresponding process
-  * which emits a signal on which you can react to retrieve the data from
-  * the stream.
-  *
-  * @param the KGameIO object itself
-  * @param the stream into which themove will be written
-  * @param the argument of setTurn
-  * @param set this to false if no move should be generated
-  */
-  void signalPrepareTurn(QDataStream &,bool,KGameIO *,bool &);
 
   /**
   * Signal generated when the computer player is added. 
@@ -378,31 +388,13 @@ public:
      *
      */
     KGameComputerIO();
-
     ~KGameComputerIO();
+
     int rtti() const;
-    /**
-     *  Notifies the IO device that the player's setTurn had been called
-     *  Called by KPlayer
-     *
-     *  @param turn is true/false
-     */
-    void notifyTurn(bool b);
 
 public slots:
   
 signals:
-      /**
-      * Signal generated when the computer player is activated. 
-      * The datastream has to be filled with a move
-      *
-      * @param the KGameIO object itself
-      * @param the stream into which themove will be written
-      * @param the argument of setTurn
-      * @param set this to false if no move should be generated
-      */
-      void signalPrepareTurn(QDataStream &,bool,KGameIO *,bool &);
-
 protected:
 
 private:

@@ -137,6 +137,7 @@ public:
       bool isVirtual() const;
 
       /**
+       * @internal
        * Sets whether this player is virtual. This is internally
        * called
        *
@@ -296,12 +297,12 @@ public:
        * KGame::playerInput (if player=false, ie the message *was* sent through
        * @ref KGame::sendPlayerInput).
        */
-      virtual bool forwardInput(QDataStream &msg,bool transmit=true,int sender=0);
+      virtual bool forwardInput(QDataStream &msg,bool transmit=true, Q_UINT32 sender=0);
 
       /**
        * Forwards Message to the game object..internal use only
        */
-      virtual bool forwardMessage(QDataStream &msg,int msgid,int receiver=0,int sender=0);
+      virtual bool forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver=0,Q_UINT32 sender=0);
 
       // Game logic
       /**

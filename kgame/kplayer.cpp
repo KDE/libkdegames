@@ -125,7 +125,7 @@ KPlayer::~KPlayer()
 //  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") done" << endl;
 }
 
-bool KPlayer::forwardMessage(QDataStream &msg,int msgid,int receiver,int sender)
+bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT32 sender)
 {
   if (!isActive()) {
     return false;
@@ -137,7 +137,7 @@ bool KPlayer::forwardMessage(QDataStream &msg,int msgid,int receiver,int sender)
   return game()->sendSystemMessage(msg,msgid,receiver,sender);
 }
 
-bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
+bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
 {
   if (!isActive()) return false;
   if (!game()) return false;
@@ -212,7 +212,6 @@ bool KPlayer::addGameIO(KGameIO *input)
   if (!input) return false;
   mInputList.append(input); 
   input->initIO(this); // set player and init device
-  // input->setPlayer(this);
   return true;
 }
 

@@ -34,18 +34,13 @@
 #include <qfile.h>
 
 #include <kdebug.h>
-#include <ksock.h>
 
 #include "kgameio.h"
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
-//#include "kmessageserver.h"
-//#include "kmessageclient.h"
 #include "kmessageio.h"
 
-
-//#define READ_BUFFER_SIZE   1024   // and automatically multiples
 
 // ----------------------- KGameProcesPrivate ---------------------------
 class KGameProcessIOPrivate
@@ -109,7 +104,7 @@ KGameProcessIO::~KGameProcessIO()
 
 void KGameProcessIO::initIO(KPlayer *p)
 {
-  setPlayer(p);
+  KGameIO::initIO(p);
   // Send 'hello' to process
   QByteArray buffer;
   QDataStream stream(buffer,IO_WriteOnly);
@@ -203,7 +198,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   {
 		sender=player()->id();  // force correct sender
 		if (msgid==KGameMessage::IdPlayerInput) {
-			player()->forwardInput(ostream,true,sender);
+			sendInput(ostream,true,sender);
 		} else {
 			player()->forwardMessage(ostream,msgid,receiver,sender);
 		}
@@ -222,22 +217,9 @@ int KGameComputerIO::rtti() const { return ComputerIO; }
 
 KGameComputerIO::~KGameComputerIO()
 {
-   if (player()) player()->removeGameIO(this); 
-}
-
-void KGameComputerIO::notifyTurn(bool b) 
-{
-  bool sendit=true;
-  QByteArray buffer;
-  QDataStream stream(buffer,IO_WriteOnly);
-  emit signalPrepareTurn(stream,b,this,sendit);
-  if (sendit)
-  {
-    QDataStream ostream(buffer,IO_ReadOnly);
-    int	sender=player()->id();  // force correct sender
-    kdDebug(11001) << " Prepare turn forwardInput" << endl;
-    player()->forwardInput(ostream,true,sender);
-  }
+ if (player()) {
+	player()->removeGameIO(this); 
+ }
 }
 
 
@@ -280,7 +262,7 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
      bool eatevent=false;
      emit signalMouseEvent(this,stream,k,eatevent);
      QDataStream msg(buffer,IO_ReadOnly);
-     if (eatevent && player()->forwardInput(msg))
+     if (eatevent && sendInput(msg))
      {
        return eatevent;
      }
@@ -319,7 +301,7 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
      emit signalKeyEvent(this,stream,k,eatevent);
      QDataStream msg(buffer,IO_ReadOnly);
      
-     if (eatevent && player()->forwardInput(msg)) return eatevent;
+     if (eatevent && sendInput(msg)) return eatevent;
      return false; // do not eat otherwise
   }
   return QObject::eventFilter( o, e );    // standard event processing
@@ -346,9 +328,26 @@ void KGameIO::initIO(KPlayer *p)
   setPlayer(p);
 }
 
-void KGameIO::sendSystemMessage(QDataStream &,int , int , int ) {}
-void KGameIO::sendMessage(QDataStream & /*stream*/,int, int, int) {}
-void KGameIO::notifyTurn(bool ) {}
+void KGameIO::notifyTurn(bool b)
+{
+  bool sendit=false;
+  QByteArray buffer;
+  QDataStream stream(buffer,IO_WriteOnly);
+  emit signalPrepareTurn(stream, b, this, sendit);
+  if (sendit)
+  {
+    QDataStream ostream(buffer,IO_ReadOnly);
+    Q_UINT32 sender = player()->id();  // force correct sender
+    kdDebug(11001) << "Prepare turn sendInput" << endl;
+    sendInput(ostream,true,sender);
+  }
+}
+
+KGame* KGameIO::game() const
+{ return player()->game(); }
+
+bool KGameIO::sendInput(QDataStream& s, bool transmit, Q_UINT32 sender)
+{ return player()->forwardInput(s, transmit, sender); }
 
 
 void KGameIO::Debug()

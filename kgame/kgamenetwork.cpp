@@ -27,7 +27,6 @@
 #include <klocale.h>
 
 #include "kplayer.h"
-#include "kgameio.h"
 #include "kgamenetwork.h"
 #include "kgamemessage.h"
 #include "kgameerror.h"
