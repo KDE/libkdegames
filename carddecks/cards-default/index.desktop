@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Standard
 Name[af]=Standaard
+Name[ar]=المعيار
 Name[az]=Standart
 Name[bg]=Стандарт
 Name[bn]=প্রমিত
@@ -44,6 +45,7 @@ Preview=11.png
 PySol=false
 Comment=Standard KDE card set\nGPL license
 Comment[af]=Standaard Kde kaart stel\nGPL lisensie
+Comment[ar]=مجموعة بطاقات KDE القياسية\nGPL رخصة
 Comment[az]=Standart KDE kart dəstəsi\nGPL license
 Comment[bg]=Стандартна колода карти КДЕ\nОПЛ лиценз(GPL)
 Comment[bn]=কেডিই-এর প্রমিত তাস সেট\nজিপিএল লাইসেন্স
