@@ -404,6 +404,7 @@ signals:
 
 
 protected:
+       friend class KGameDebugDialog;
        /**
         * @return the property handler
         */

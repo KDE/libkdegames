@@ -40,6 +40,7 @@ public:
 		mGame = 0;
 
 		mGamePage = 0;
+		mGameProperties = 0;
 		mGameAddress = 0;
 		mGameId = 0;
 		mGameCookie = 0;
@@ -54,6 +55,7 @@ public:
 
 		mPlayerPage = 0;
 		mPlayerList = 0;
+		mPlayerProperties = 0;
 		mPlayerAddress = 0;
 		mPlayerId = 0;
 		mPlayerName = 0;
@@ -71,6 +73,7 @@ public:
 	const KGame* mGame;
 
 	QFrame* mGamePage;
+	KListView* mGameProperties;
 	QListViewItem* mGameAddress;
 	QListViewItem* mGameId;
 	QListViewItem* mGameCookie;
@@ -85,6 +88,7 @@ public:
 	
 	QFrame* mPlayerPage;
 	KListBox* mPlayerList;
+	KListView* mPlayerProperties;
 	QListViewItem* mPlayerAddress;
 	QListViewItem* mPlayerId;
 	QListViewItem* mPlayerName;
@@ -120,14 +124,23 @@ void KGameDebugDialog::initGamePage()
 {
  d->mGamePage = addPage(i18n("Debug KGame"));
  QVBoxLayout* layout = new QVBoxLayout(d->mGamePage, marginHint(), spacingHint());
- layout->setAutoAdd(true);
+ QHBoxLayout* l = new QHBoxLayout(layout);
 
  KListView* v = new KListView(d->mGamePage);
- v->addColumn(i18n("Property"));
+ v->addColumn(i18n("Data"));
  v->addColumn(i18n("Value"));
+ l->addWidget(v);
+
+ d->mGameProperties = new KListView(d->mGamePage);
+ d->mGameProperties->addColumn(i18n("Property"));
+ d->mGameProperties->addColumn(i18n("Value"));
+ l->addWidget(d->mGameProperties);
+ 
  QPushButton* b = new QPushButton(i18n("Update"), d->mGamePage);
  connect(b, SIGNAL(pressed()), this, SLOT(updateGameData()));
- 
+ layout->addWidget(v);
+
+// game data
  d->mGameAddress = new QListViewItem(v, i18n("KGame Pointer"));
  d->mGameId = new QListViewItem(v, i18n("Game ID"));
  d->mGameCookie = new QListViewItem(v, i18n("Game Cookie"));
@@ -152,6 +165,11 @@ void KGameDebugDialog::initPlayerPage()
  connect(d->mPlayerList, SIGNAL(executed(QListBoxItem*)), this, SLOT(updatePlayerData(QListBoxItem*)));
  layout->addWidget(d->mPlayerList);
 
+ d->mPlayerProperties = new KListView(d->mPlayerPage);
+ d->mPlayerProperties->addColumn(i18n("Property"));
+ d->mPlayerProperties->addColumn(i18n("Value"));
+ layout->addWidget(d->mPlayerProperties);
+ 
  QPushButton* b = new QPushButton(i18n("Update"), d->mPlayerPage);
  connect(b, SIGNAL(pressed()), this, SLOT(updatePlayerList()));
  topLayout->addWidget(b);
@@ -189,6 +207,8 @@ void KGameDebugDialog::clearPlayerData()
  d->mPlayerActive->setText(1, "");
  d->mPlayerRtti->setText(1, "");
  d->mPlayerNetworkPriority->setText(1, "");
+
+ d->mPlayerProperties->clear();
 }
 
 void KGameDebugDialog::clearGameData()
@@ -203,6 +223,8 @@ void KGameDebugDialog::clearGameData()
  d->mGameRunning->setText(1, "");
  d->mGameMaxPlayers->setText(1, "");
  d->mGameMinPlayers->setText(1, "");
+
+ d->mGameProperties->clear();
 }
 
 void KGameDebugDialog::updatePlayerData()
@@ -245,6 +267,10 @@ void KGameDebugDialog::updateGameData()
  d->mGameMaxPlayers->setText(1, QString::number(d->mGame->maxPlayers()));
  d->mGameMinPlayers->setText(1, QString::number(d->mGame->minPlayers()));
  d->mGamePlayerCount->setText(1, QString::number(d->mGame->playerCount()));
+
+// Properties
+// KGamePropertyHandlerBase* b = d->mGame->dataHandler();
+
 //TODO ios
 //TODO properties?
 }
@@ -262,6 +288,8 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
 	return;
  }
 
+ clearPlayerData();
+
  QString buf;
  buf.sprintf("%p", p);
  d->mPlayerAddress->setText(1, buf);
@@ -278,7 +306,15 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
  d->mPlayerRtti->setText(1, QString::number(p->rtti()));
  d->mPlayerNetworkPriority->setText(1, QString::number(p->networkPriority()));
 //TODO ios
-//TODO properties?
+
+// Properties
+ KGamePropertyHandlerBase* handler = p->dataHandler();
+ QIntDictIterator<KGamePropertyBase> it(*handler);
+ while (it.current()) {
+	QListViewItem* prop = new QListViewItem(d->mPlayerProperties,
+			i18n(propertyName(it.current())),
+			propertyValue(it.current()));
+ }
 }
 
 void KGameDebugDialog::clearPages()
@@ -342,5 +378,42 @@ void KGameDebugDialog::removePlayer(QListBoxItem* i)
  delete i;
 }
 
+QString KGameDebugDialog::propertyName(KGamePropertyBase* prop) const
+{
+ if (!prop) {
+	return i18n("NULL pointer");
+ }
+
+ switch (prop->id()) {
+	case KGamePropertyBase::IdGroup:
+		return i18n("Group");
+	case KGamePropertyBase::IdName:
+		return i18n("Name");
+	case KGamePropertyBase::IdAsyncInput:
+		return i18n("AsyncInput");
+	case KGamePropertyBase::IdTurn:
+		return i18n("Turn");
+	case KGamePropertyBase::IdUserId:
+		return i18n("User Id");
+	case KGamePropertyBase::IdGameStatus:
+		return i18n("Game Status");
+	case KGamePropertyBase::IdMaxPlayer:
+		return i18n("Max Players");
+	case KGamePropertyBase::IdMinPlayer:
+		return i18n("Min Players");
+	default:
+		return i18n("User Property");//FIXME should display a name, too
+ }
+
+}
+
+QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop) const
+{
+ if (!prop) {
+	return i18n("NULL pointer");
+ }
+ //TODO
+
+}
 
 #include "kgamedebugdialog.moc"

@@ -18,14 +18,15 @@
     Boston, MA 02111-1307, USA.
 */
 
-#ifndef __KGAMEDEBUG_H__
-#define __KGAMEDEBUG_H__
+#ifndef __KGAMEDEBUGDIALOG_H__
+#define __KGAMEDEBUGDIALOG_H__
 
 #include <kdialogbase.h>
 
 class KGame;
 class KGameIO;
 class KPlayer;
+class KGamePropertyBase;
 
 class KGameDebugDialogPrivate;
 
@@ -84,6 +85,9 @@ protected:
 	 * Clear the data view of the @ref KGame object
 	 **/
 	void clearGameData();
+
+	QString propertyName(KGamePropertyBase* p) const;
+	QString propertyValue(KGamePropertyBase* p) const;
 	
 protected slots:
 	/**

@@ -18,8 +18,8 @@
     Boston, MA 02111-1307, USA.
 */
 
-#ifndef KGAMECONNECTDIALOG_H
-#define KGAMECONNECTDIALOG_H
+#ifndef __KGAMECONNECTDIALOG_H__
+#define __KGAMECONNECTDIALOG_H__
 
 #include <kdialogbase.h>
 
