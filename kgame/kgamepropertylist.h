@@ -67,7 +67,7 @@ public:
     int i=findIterator(it);
     s << i;
     s << d;
-    //if (mOwner)  mOwner->sendProperty(s);
+    if (mOwner)  mOwner->sendProperty(s);
     return it;
   }
   void  prepend( const type& d) { insert(begin(),d); }
@@ -80,7 +80,7 @@ public:
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdRemove);
     int i=findIterator(it);
     s << i;
-    //if (mOwner)  mOwner->sendProperty(s);
+    if (mOwner)  mOwner->sendProperty(s);
     QValueList<type>::remove(it);
   }
   void remove( const type& d )

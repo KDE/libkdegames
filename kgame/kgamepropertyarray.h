@@ -53,7 +53,7 @@ public:
       QDataStream s(b, IO_WriteOnly);
       KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdResize);
       s << size ;
-      //if (mOwner)  mOwner->sendProperty(s);
+      if (mOwner)  mOwner->sendProperty(s);
       bool a=QArray<type>::resize(size);
       return a;
     }
@@ -67,7 +67,7 @@ public:
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAt);
     s << i ;
     s << data;
-    //if (mOwner)  mOwner->sendProperty(s);
+    if (mOwner)  mOwner->sendProperty(s);
     QArray<type>::at(i)=data;
     //kdDebug() << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
@@ -99,7 +99,7 @@ public:
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
     s << data;
     s << size ;
-    //if (mOwner)  mOwner->sendProperty(s);
+    if (mOwner)  mOwner->sendProperty(s);
     return r;
   }
   KGamePropertyArray<type>& assign( const KGamePropertyArray<type>& a )
@@ -139,7 +139,7 @@ public:
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
-    //if (mOwner)  mOwner->sendProperty(s);
+    if (mOwner)  mOwner->sendProperty(s);
   }
 
 	void load(QDataStream& s)
