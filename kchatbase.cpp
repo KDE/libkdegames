@@ -16,9 +16,10 @@
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
 */
-//#include <qlistbox.h>
+
 #include <qlayout.h>
 #include <qcombobox.h>
+#include <qapp.h>
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -32,22 +33,26 @@ class KChatBaseTextPrivate
 public:
 	KChatBaseTextPrivate()
 	{
-		
+		mNameFont = 0;
+		mMessageFont = 0;
 	}
 
 	QString mName;
 	QString mMessage;
+
+	const QFont* mNameFont;
+	const QFont* mMessageFont;
 };
 
 
-KChatBaseText::KChatBaseText(QListBox* listbox, const QString& player, const QString& message) : QListBoxText(listbox)
+KChatBaseText::KChatBaseText(const QString& name, const QString& message) : QListBoxText()
 {
  init();
- setPlayer(player);
+ setName(name);
  setMessage(message);
 }
 
-KChatBaseText::KChatBaseText(QListBox* listbox, const QString& message) : QListBoxText(listbox)
+KChatBaseText::KChatBaseText(const QString& message) : QListBoxText()
 {
  init();
  setMessage(message);
@@ -63,31 +68,89 @@ void KChatBaseText::init()
  d = new KChatBaseTextPrivate;
 }
 
-void KChatBaseText::setPlayer(const QString& player)
+void KChatBaseText::setName(const QString& n)
 {
- d->mName = player;
+// d->mName = n;
+ d->mName = QString("%1: ").arg(n);
+ setText(QString("%1: %2").arg(name()).arg(message())); // esp. for sorting
 }
 
-void KChatBaseText::setMessage(const QString& message)
+void KChatBaseText::setMessage(const QString& m)
 {
- d->mMessage = message;
+ d->mMessage = m;
+ setText(QString("%1: %2").arg(name()).arg(message())); // esp. for sorting
 }
 
-void KChatBaseText::paint(QListBox* lb)
-{
+const QString& KChatBaseText::name() const
+{ return d->mName; }
 
+const QString& KChatBaseText::message() const
+{ return d->mMessage; }
+
+QFont KChatBaseText::nameFont() const
+{
+ if (d->mNameFont) {
+	return *d->mNameFont; 
+ } else if (listBox()) {
+	return listBox()->font();
+ } else {
+	return QFont();
+ }
+}
+
+QFont KChatBaseText::messageFont() const
+{
+ if (d->mMessageFont) {
+	return *d->mMessageFont; 
+ } else if (listBox()) {
+	return listBox()->font();
+ } else {
+	return QFont();
+ }
+}
+
+void KChatBaseText::setNameFont(const QFont* f)
+{ d->mNameFont = f; }
+
+void KChatBaseText::setMessageFont(const QFont* f)
+{ d->mMessageFont = f; }
+
+void KChatBaseText::paint(QPainter* painter)
+{
+ QFontMetrics fm = painter->fontMetrics();
+ painter->setFont(nameFont());
+ painter->drawText(3, fm.ascent() + fm.leading()/2, name());
+ painter->setFont(messageFont());
+ painter->drawText(3 + QFontMetrics(nameFont()).width(name()), fm.ascent() + fm.leading()/2, message());
 }
 
 int KChatBaseText::width(QListBox* lb) const
 {
-
+ int w = 0;
+ if (lb) {
+	w += 6;
+	w += QFontMetrics(nameFont()).width(name());
+	w += QFontMetrics(messageFont()).width(message());
+ }
+// int w = lb ? lb->fontMetrics().width( text() ) + 6 : 0; // QT orig
+ return QMAX(w, QApplication::globalStrut().width());
 }
 
 int KChatBaseText::height(QListBox* lb) const
 {
-
+ int h = 0;
+ if (lb) {
+	h += 2;
+	// AB: is lineSpacing still correct?
+	if (QFontMetrics(nameFont()).lineSpacing() > QFontMetrics(messageFont()).lineSpacing()) { 
+		h += QFontMetrics(nameFont()).lineSpacing();
+	} else {
+		h += QFontMetrics(messageFont()).lineSpacing();
+	}
+ }
+// int h = lb ? lb->fontMetrics().lineSpacing() + 2 : 0; // QT orig
+ return QMAX(h, QApplication::globalStrut().height());
 }
-
 
 
 
@@ -108,6 +171,11 @@ public:
 	bool mAcceptMessage;
 
 	QValueList<int> mIndex2Id;
+
+	QFont mNameFont;
+	QFont mMessageFont;
+	QFont mSystemNameFont;
+	QFont mSystemMessageFont;
 };
 
 KChatBase::KChatBase(QWidget* parent, bool noComboBox) : QFrame(parent)
@@ -117,18 +185,18 @@ KChatBase::KChatBase(QWidget* parent, bool noComboBox) : QFrame(parent)
 
 KChatBase::~KChatBase()
 {
- kdDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
+// kdDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
  delete d;
 }
 
 void KChatBase::init(bool noComboBox)
 {
- kdDebug(11000) << "KChatBase: INIT (" << this << ")" << endl;
+// kdDebug(11000) << "KChatBase: INIT (" << this << ")" << endl;
 
  d = new KChatBasePrivate;
 
  setMinimumWidth(100);
- setMinimumHeight(100);
+ setMinimumHeight(150);
  
  QVBoxLayout* l = new QVBoxLayout(this);
 
@@ -269,6 +337,11 @@ void KChatBase::addMessage(const QString& fromName, const QString& text)
 void KChatBase::addSystemMessage(const QString& fromName, const QString& text)
 {
  addItem(layoutSystemMessage(fromName, text));
+ static int i = 0;
+ i++;
+ if (i == 4) {
+ d->mNameFont.setBold(true);
+ }
 }
 
 QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
@@ -279,10 +352,16 @@ QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& t
 	// replace "/me" by a nice star. leave one space after the star
 	QPixmap pix;
 	pix.load(locate("data", QString::fromLatin1("kdegames/pics/star.png")));
-	message = (QListBoxItem*)new QListBoxPixmap(pix, text.mid(3));
+	
+	//TODO KChatBasePixmap? Should change the font here!
+	
+	message = (QListBoxItem*)new QListBoxPixmap(pix, i18n("%1 %2").arg(fromName).arg(text.mid(3)));
  } else {
-	// not edited in any way. just return a text item
-	message = (QListBoxItem*)new KChatBaseText(d->mBox, fromName, text);
+	// the text is not edited in any way. just return an item
+	KChatBaseText* m = new KChatBaseText(fromName, text);
+	m->setNameFont(&d->mNameFont);
+	m->setMessageFont(&d->mMessageFont);
+	message = (QListBoxItem*)m;
  }
  return message;
 }
@@ -292,7 +371,10 @@ QListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QStr
  //TODO: KChatBaseConfigure? - e.g. color
 
  // no need to check for /me etc.
- return (QListBoxItem*)new QListBoxText(i18n("--- %1: %2").arg(fromName).arg(text));
+ KChatBaseText* m = new KChatBaseText(i18n("--- %1").arg(fromName), text);
+ m->setNameFont(&d->mSystemNameFont);
+ m->setNameFont(&d->mSystemMessageFont);
+ return (QListBoxItem*)m;
 }
 
 void KChatBase::slotReturnPressed(const QString& text)
@@ -321,5 +403,43 @@ void KChatBase::slotClear()
 
 void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
 { d->mEdit->setCompletionMode(mode); }
+
+void KChatBase::setNameFont(const QFont& font)
+{ d->mNameFont = font; }
+
+void KChatBase::setMessageFont(const QFont& font)
+{ d->mMessageFont = font; }
+
+void KChatBase::setBothFont(const QFont& font)
+{
+ setNameFont(font);
+ setMessageFont(font);
+}
+
+const QFont& KChatBase::nameFont() const
+{ return d->mNameFont; }
+
+const QFont& KChatBase::messageFont() const
+{ return d->mMessageFont; }
+
+void KChatBase::setSystemNameFont(const QFont& font)
+{ d->mSystemNameFont = font; }
+
+void KChatBase::setSystemMessageFont(const QFont& font)
+{ d->mSystemMessageFont = font; }
+
+void KChatBase::setSystemBothFont(const QFont& font)
+{
+ setSystemNameFont(font);
+ setSystemMessageFont(font);
+}
+
+const QFont& KChatBase::systemNameFont() const
+{ return d->mSystemNameFont; }
+
+const QFont& KChatBase::systemMessageFont() const
+{ return d->mSystemMessageFont; }
+
+
 
 #include "kchatbase.moc"

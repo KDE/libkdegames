@@ -50,26 +50,91 @@ public:
 	/**
 	 * Constructs a KChatBaseText object with the player and text part
 	 **/
-	KChatBaseText(QListBox* listbox, const QString& player, const QString& text);
+	KChatBaseText(const QString& player, const QString& text);
 	
 	/**
 	 * Constructs a KChatBaseText object without player part
 	 **/
-	KChatBaseText(QListBox* listbox, const QString& text);
+	KChatBaseText(const QString& text);
 	
 	/**
 	 * Destruct a KChatBaseText object
 	 **/
 	~KChatBaseText();
 
-	void setPlayer(const QString& name);
+	/**
+	 * Set the name part of a message. A message is usually shown like
+	 * "name: text" and you can change both parts independently.
+	 * 
+	 * See also @ref setMessage
+	 * @ref name The name of the sender (e.g. the player)
+	 **/
+	void setName(const QString& name);
+
+	/**
+	 * Set the text part of a message. A message is usually shown like
+	 * "name: message" and you can change both parts independently.
+	 * 
+	 * See also @ref setName
+	 * @ref message The message that has been sent
+	 **/
 	void setMessage(const QString& message);
 
+	/**
+	 * @return The name part of a message. See also @ref setName
+	 **/
+	const QString& name() const;
+
+	/**
+	 * @return The message text. See also @ref setMessage
+	 **/
+	const QString& message() const;
+
+	/**
+	 * You can set the font of the sender name independently of the message
+	 * itself. This font is used as the "name: " part of the message.
+	 * @return The font that is used for the name
+	 **/
+	QFont nameFont() const;
+
+	/**
+	 * You can set the font of the message independently of the sender name.
+	 * This font is used as the text part of the message.
+	 * @return The font thaz is used for message text
+	 **/
+	QFont messageFont() const;
+
+	/**
+	 * Set the font for the name. See also @ref nameFont
+	 * @param font A pointer to the name font. Only the pointer is stored so
+	 * don't delete the object! This way there is only one object for a lot
+	 * of messages in memory.
+	 **/
+	void setNameFont(const QFont* font);
+
+	/**
+	 * Set the font for the message text. See also @ref messageFont
+	 * @param font A pointer to the message font. Only the pointer is stored so
+	 * don't delete the object! This way there is only one object for a lot
+	 * of messages in memory.
+	 **/
+	void setMessageFont(const QFont* font);
+
+	/**
+	 * @reimplemented
+	 **/
 	virtual int width(QListBox* ) const;
+
+	/**
+	 * @reimplemented
+	 **/
 	virtual int height(QListBox* ) const;
 
 protected:
-	virtual void paint(QListBox*);
+	/**
+	 * @reimplemented
+	 **/
+	virtual void paint(QPainter*);
 
 private:
 	void init();
@@ -213,6 +278,73 @@ public:
 	 **/
 	void setCompletionMode(KGlobalSettings::Completion mode);
 
+	/**
+	 * Set the font that used used for the name part of a message. See also
+	 * @ref nameFont and @ref setBothFont
+	 **/
+	void setNameFont(const QFont& font);
+	
+	/**
+	 * Set the font that used used for the message part of a message. See also
+	 * @ref messageFont and @ref setBothFont
+	 **/
+	void setMessageFont(const QFont& font);
+
+	/**
+	 * This sets both - @ref nameFont and @ref messageFont to font. You
+	 * probably want to use this if you don't make a difference between
+	 * these parts of a message.
+	 * @param font A font used for both, @ref nameFont and @ref messageFont
+	 **/
+	void setBothFont(const QFont& font);
+
+	/**
+	 * Same as @ref setNameFont but applies only to system messages. See
+	 * also @ref layoutSystemMessage
+	 **/
+	void setSystemNameFont(const QFont& font);
+
+	/**
+	 * Same as @ref setMessageFont but applies only to system messages. See
+	 * also @ref layoutSystemMessage
+	 **/
+	void setSystemMessageFont(const QFont& font);
+
+	/**
+	 * Same as @ref setBothFont but applies only to system messages. See
+	 * also @ref layoutSystemMessage
+	 **/
+	void setSystemBothFont(const QFont& font);
+
+	/**
+	 * This font should be used for the name (the "from: " part) of a
+	 * message. @ref layoutMessage uses this to set the font using @ref
+	 * KChatBaseText::setNameFont but if you want to overwrite @ref
+	 * layoutMessage you should do this yourself.
+	 * @return The font that is used for the name part of the message.
+	 **/
+	const QFont& nameFont() const;
+
+	/**
+	 * This font should be used for a message. @ref layoutMessage sets the
+	 * font of a message using @ref KChatBaseText::setMessageFont but if ypu
+	 * replace @ref layoutMessage with your own function you should use
+	 * messageFont() yourself.
+	 * @return The font that is used for a message
+	 **/
+	const QFont& messageFont() const;
+
+	/**
+	 * Same as @ref systemNameFont but applies only to system messages. See
+	 * also @ref layoutSystemMessage
+	 **/
+	const QFont& systemNameFont() const;
+
+	/**
+	 * Same as @ref systemMessageFont but applies only to system messages. See
+	 * also @ref layoutSystemMessage
+	 **/
+	const QFont& systemMessageFont() const;
 public slots:
 	/**
 	 * Add a text in the listbox. See also @ref signalSendMessage()
