@@ -89,6 +89,9 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
     case End:
         ret = "game_end";
         break;
+    case Highscores:
+        ret = "game_highscores";
+	break;
     case Print:
         ret = "game_print";
         break;
