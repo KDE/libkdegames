@@ -51,11 +51,11 @@ public:
 
    KPlayer* mNetworkPlayer; // replacement player
 
-   KPlayerDataHandler mProperties;
+   KGamePropertyHandler<KPlayer> mProperties;
 
 // Playerdata
-   KPlayerDataQString mName;
-   KPlayerDataQString mGroup;
+   KGamePropertyQString mName;
+   KGamePropertyQString mGroup;
 };
 
 KPlayer::KPlayer() : QObject(0,0)
@@ -73,16 +73,16 @@ KPlayer::KPlayer() : QObject(0,0)
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
 
-   d->mGroup.registerData(KPlayerDataBase::IdGroup, dataHandler());
+   d->mGroup.registerData(KGamePropertyBase::IdGroup, dataHandler());
    d->mGroup = i18n("default");
-   d->mName.registerData(KPlayerDataBase::IdName, dataHandler());
+   d->mName.registerData(KGamePropertyBase::IdName, dataHandler());
    d->mName = i18n("default");
 
-   mAsyncInput.registerData(KPlayerDataBase::IdAsyncInput, dataHandler());
+   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, dataHandler());
    mAsyncInput.setValue(false);
-   mMyTurn.registerData(KPlayerDataBase::IdTurn, dataHandler());
+   mMyTurn.registerData(KGamePropertyBase::IdTurn, dataHandler());
    mMyTurn.setValue(false);
-   mUserId.registerData(KPlayerDataBase::IdUserId, dataHandler());
+   mUserId.registerData(KGamePropertyBase::IdUserId, dataHandler());
    mUserId.setValue(0);
 
 
@@ -190,7 +190,7 @@ const QString& KPlayer::name() const
 int KPlayer::id() const
 { return d->mId; }
 
-KPlayerDataHandler* KPlayer::dataHandler()
+KGamePropertyHandlerBase* KPlayer::dataHandler()
 { return &d->mProperties; }
 
 void KPlayer::setVirtual(bool v)
@@ -366,12 +366,12 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,int sender)
 
 }
 
-KPlayerDataBase* KPlayer::findProperty(int id) const
+KGamePropertyBase* KPlayer::findProperty(int id) const
 {
   return d->mProperties[id];
 }
 
-bool KPlayer::addProperty(KPlayerDataBase* data)
+bool KPlayer::addProperty(KGamePropertyBase* data)
 {
   return d->mProperties.addProperty(data);
 }
@@ -383,14 +383,14 @@ void KPlayer::sendProperty(QDataStream& s, bool isPublic)
   game()->sendPlayerProperty(s, id(), isPublic);
 }
 
-void KPlayer::emitSignal(KPlayerDataBase *me)
+void KPlayer::emitSignal(KGamePropertyBase *me)
 {
   emit signalPropertyChanged(me,this);
 }
 
 void KPlayer::unlockProperties()
 {
- QIntDictIterator<KPlayerDataBase> it(d->mProperties);
+ QIntDictIterator<KGamePropertyBase> it(d->mProperties);
  while (it.current()) {
 	it.current()->setLocked(false);
 	++it;
@@ -399,7 +399,7 @@ void KPlayer::unlockProperties()
 
 void KPlayer::lockProperties()
 {
- QIntDictIterator<KPlayerDataBase> it(d->mProperties);
+ QIntDictIterator<KGamePropertyBase> it(d->mProperties);
  while (it.current()) {
 	it.current()->setLocked(true);
 	++it;

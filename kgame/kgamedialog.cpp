@@ -37,7 +37,7 @@
 #include "kgame.h"
 #include "kgamechat.h"
 #include "kplayer.h"
-#include "kplayerdata.h"
+#include "kgameproperty.h"
 #include "kgamedialog.h"
 
 #include "kgamedialog.moc"
@@ -452,8 +452,8 @@ void KGameDialog::slotPlayerChanged(KPlayer*)
 	d->mItem2Player.insert(t, p);
 	d->mPlayers->insertItem(t);
 
-	connect(p, SIGNAL(signalPropertyChanged(KPlayerDataBase*, KPlayer*)),
-			this, SLOT(slotPropertyChanged(KPlayerDataBase*, KPlayer*)));
+	connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
+			this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
  }
 }
 
@@ -479,9 +479,9 @@ void KGameDialog::slotKickPlayerOut(QListBoxItem* item)
  }
 }
 
-void KGameDialog::slotPropertyChanged(KPlayerDataBase* prop, KPlayer* player)
+void KGameDialog::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
- if(prop->id() == KPlayerDataBase::IdName) {
+ if(prop->id() == KGamePropertyBase::IdName) {
 	QListBoxText* old = 0;
 	QPtrDictIterator<KPlayer> it(d->mItem2Player);
 	while (it.current() && !old) {

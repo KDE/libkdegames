@@ -28,7 +28,7 @@
 
 #include <qstring.h>
 #include <qobject.h>
-#include <kplayerdata.h>
+#include <kgameproperty.h>
 
 class KGameClientProcess;
 class KPlayer;

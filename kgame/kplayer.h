@@ -27,11 +27,11 @@
 #include <qobject.h>
 #include <qlist.h>
 
-#include "kplayerdata.h"
+#include "kgameproperty.h"
 
 class KGame;
 class KGameIO;
-class KPlayerDataBase;
+class KGamePropertyBase;
 
 class KPlayerPrivate;
 
@@ -321,13 +321,13 @@ public:
       virtual bool save(QDataStream &stream);
 
       /**
-       * Called by KPlayerData only! Internal function!
+       * Called by KGameProperty only! Internal function!
        **/
       void sendProperty(QDataStream& s, bool isPublic = true);
       /**
-       * Called by KPlayerData only! Internal function!
+       * Called by KGameProperty only! Internal function!
        **/
-      void emitSignal(KPlayerDataBase *me);
+      void emitSignal(KGamePropertyBase *me);
      
       /**
        * Receives a message
@@ -343,7 +343,7 @@ public:
        * @param id The id of the property
        * @return The property with the specified id
        **/
-      KPlayerDataBase* findProperty(int id) const;
+      KGamePropertyBase* findProperty(int id) const;
 
       /**
        * Adds a property
@@ -351,15 +351,15 @@ public:
        * @return false if the given id is not valid (ie another property owns
        * the id) or true if the property could be added successfully
        **/
-      bool addProperty(KPlayerDataBase* data);
+      bool addProperty(KGamePropertyBase* data);
 
       /**
-       * Calls @ref KPlayerDataBase::setLocked(false) for all properties of this
+       * Calls @ref KGamePropertyBase::setLocked(false) for all properties of this
        * player
        **/
       void unlockProperties();
       /**
-       * Calls @ref KPlayerDataBase::setLocked(true) for all properties of this
+       * Calls @ref KGamePropertyBase::setLocked(true) for all properties of this
        * player
        *
        * Use with care! This will even lock the core properties, like name,
@@ -402,25 +402,25 @@ signals:
         * the property is set to notify this change
         *
         */
-       void signalPropertyChanged(KPlayerDataBase *property,KPlayer *me);
+       void signalPropertyChanged(KGamePropertyBase *property,KPlayer *me);
 
 
 protected:
        /**
         * @return the property handler
         */
-       KPlayerDataHandler* dataHandler();
+       KGamePropertyHandlerBase* dataHandler();
 
 private:
       KGame *mGame;
       bool mActive;      // active player
       KGameIOList mInputList;
 
-      // Playerdata // AB: I think we can't move them to KPlayerPrivate - inline
+      // GameProperty // AB: I think we can't move them to KPlayerPrivate - inline
       // makes sense here
-      KPlayerDataBool mAsyncInput;  // async input allowed
-      KPlayerDataBool mMyTurn;      // Is it my turn to play (only useful if not async)?
-      KPlayerDataInt  mUserId;      // a user defined id
+      KGamePropertyBool mAsyncInput;  // async input allowed
+      KGamePropertyBool mMyTurn;      // Is it my turn to play (only useful if not async)?
+      KGamePropertyInt  mUserId;      // a user defined id
 
       KPlayerPrivate* d;
 };

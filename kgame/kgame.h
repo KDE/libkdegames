@@ -34,8 +34,8 @@
 #include "kgamenetwork.h"
 
 class KPlayer;
-class KPlayerDataBase;
-class KPlayerDataHandler;
+class KGamePropertyBase;
+class KGamePropertyHandlerBase;
 
 class KGamePrivate;
 
@@ -228,7 +228,7 @@ public:
     /**
      * Load a saved game, from file OR network. This function has
      * to be overwritten or you need to connect to the load signal
-     * if you have game data other than KPlayerData.
+     * if you have game data other than KGameProperty.
      * For file load you should reset() the game before any load attempt
      * to make sure you load into an clear state.
      *
@@ -274,22 +274,22 @@ public:
     virtual void setGameStatus(int status);
 
     //AB: docu: see KPlayer
-    bool addProperty(KPlayerDataBase* data);
+    bool addProperty(KGamePropertyBase* data);
 
     /**
-     * Caled by KPlayerData only! Internal function!
+     * Caled by KGameProperty only! Internal function!
      **/
     void sendProperty(QDataStream& s, bool isPublic = true);
     /**
-      * Called by KPlayerData only! Internal function!
+      * Called by KGameProperty only! Internal function!
      **/
-    void emitSignal(KPlayerDataBase *me);
+    void emitSignal(KGamePropertyBase *me);
     /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
     void sendPlayerProperty(QDataStream& s, int playerId, bool isPublic = true);
     
-    KPlayerDataBase* findProperty(int id) const;
+    KGamePropertyBase* findProperty(int id) const;
 
     /**
      * Returns a pointer to the game's KRandomSequence. This sequence is
@@ -429,7 +429,7 @@ signals:
     * the property is set to notify this change
     *
     */
-    void signalPropertyChanged(KPlayerDataBase *property,KGame *me);
+    void signalPropertyChanged(KGamePropertyBase *property,KGame *me);
 
     /**
      * Is emitted after a call to gameOver() returns a nonm zero
@@ -535,7 +535,7 @@ protected:
      */
     virtual bool loadgame(QDataStream &stream,bool network);
 
-    KPlayerDataHandler* dataHandler();
+    KGamePropertyHandlerBase* dataHandler();
 
 private:
     //AB: this is to hide the "receiver" parameter from the user. It shouldn't be

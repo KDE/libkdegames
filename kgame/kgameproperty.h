@@ -1,5 +1,5 @@
 /* **************************************************************************
-                           KPlayerData Class
+                           KGameProperty Class
                            -------------------
     begin                : 1 January 2001
     copyright            : (C) 2001 by Andreas Beckermann and Martin Heni
@@ -20,8 +20,8 @@
  *   The user of this program shall have the choice which license to use   *
  *                                                                         *
  ***************************************************************************/
-#ifndef __KPLAYERDATA_H_
-#define __KPLAYERDATA_H_
+#ifndef __KGAMEPROPERTY_H_
+#define __KGAMEPROPERTY_H_
 
 #include <qdatastream.h>
 #include <qintdict.h>
@@ -29,16 +29,16 @@
 
 class KGame;
 class KPlayer;
-class KPlayerDataHandler;
+class KGamePropertyHandlerBase;
 
 /**
- * The KPlayerDataBase class is the base class of KPlayerData. See @ref
- * KPlayerData for further information.
+ * The KGamePropertyBase class is the base class of KGameProperty. See @ref
+ * KGameProperty for further information.
  * 
- * @short Base class of KPlayerData
+ * @short Base class of KGameProperty
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KPlayerDataBase
+class KGamePropertyBase
 {
 public:
 	enum PlayerDataIds  { // these belong to KPlayer!
@@ -54,37 +54,23 @@ public:
 	};
 
 	/**
-	 * Constructs a KPlayerDataBase object and calls @ref registerData.
+	 * Constructs a KGamePropertyBase object and calls @ref registerData.
 	 * @param id The id of this property. MUST be UNIQUE! Used to send and
 	 * receive changes in the property of the playere automatically via
 	 * network. 
-	 * @param owner The owner of the object. Must be a KPlayerDataHandler which manages
+	 * @param owner The owner of the object. Must be a KGamePropertyHandler which manages
 	 * the changes made to this object, i.e. which will send the new data
 	 **/
-	KPlayerDataBase(int id, KPlayerDataHandler* owner);
+	KGamePropertyBase(int id, KGamePropertyHandlerBase* owner);
 
 	/**
-	 * Creates a KPlayerDataBase object without an owner. Remember to call
+	 * Creates a KGamePropertyBase object without an owner. Remember to call
 	 * @ref registerData!
 	 **/
-	KPlayerDataBase();
+	KGamePropertyBase();
 
-	virtual ~KPlayerDataBase();
+	virtual ~KGamePropertyBase();
 
-	/**
-	 * Sets this property to public or non-public. Public means that all
-	 * players receive the new value when it has changed. 
-	 * NOTE: non-public use is a TODO
-	 **/
-	void setPublic(bool p)	{ mFlags.bits.ispublic=p&1; }
-
-	/**
-	 * See also @ref setPublic
-	 * NOTE: non-public use is a TODO
-	 * @return Whether this is a public property
-	 **/
-	bool isPublic()	const { return mFlags.bits.ispublic; }
-	
 	/**
 	 * Sets this property to emit a signal on value changed.
 	 * As the proerties do not inehrit QObject for optimisation
@@ -130,11 +116,11 @@ public:
 	int id() const { return mId; }
 
 	/**
-	 * You have to register a KPlayerDataBase before you can use it.
+	 * You have to register a KGamePropertyBase before you can use it.
 	 *
-	 * You MUST call this before you can use KPlayerDataBase!
+	 * You MUST call this before you can use KGamePropertyBase!
 	 *
-	 * @param id the id of this KPlayerDataBase object. The id MUST be
+	 * @param id the id of this KGamePropertyBase object. The id MUST be
 	 * unique, i.e. you cannot have two properties with the same id for one
 	 * player, although (currently) nothing prevents you from doing so. But
 	 * you will get strange results!
@@ -142,14 +128,14 @@ public:
 	 * using @ref KPlayer::sendProperty whenever you call @ref setValue
 	 *
 	 **/
-	void registerData(int id, KPlayerDataHandler* owner);
+	void registerData(int id, KGamePropertyHandlerBase* owner);
 
 protected:
-	//AB: I had problems when putting this into KPlayerData::setValue() as I
+	//AB: I had problems when putting this into KGameProperty::setValue() as I
 	//had to include kplayer.h and kgame.h which caused problems e.g.
-	//because they both include kplayerdata.h this member function is a
+	//because they both include kgameproperty.h this member function is a
 	//workaround to put the stuff into the .cpp file (as i cannot put
-	//anything from KPlayerData into the .cpp file)
+	//anything from KGameProperty into the .cpp file)
 	//The problem now is that there is one more function call and could one
 	//day be bad for performance
 	/**
@@ -163,7 +149,7 @@ protected:
 	 **/
 	void emitSignal();
 
-		KPlayerDataHandler* mOwner;
+	KGamePropertyHandlerBase* mOwner;
 	
 	// Having this as a union of the bitfield and the char
 	// allows us to stream this quantity easily (if we need to)
@@ -171,7 +157,6 @@ protected:
 	union Flags {
 		char flag;
 		struct {
-			unsigned char ispublic : 1;   // is Public
 			// unsigned char dosave : 1;   // do save this property
 			// unsigned char delaytransmit : 1;   // do not send immediately on
                                              // change but a KPlayer:QTimer
@@ -191,12 +176,12 @@ private:
 };
 
 /**
- * The class KPlayerData can store any form of data and will transmit it via
+ * The class KGameProperty can store any form of data and will transmit it via
  * network whenver you call @ref setValue. This makes network transparent games
  * very easy. You first have to register the data to a @ref KPlayer using @ref
- * KPlayerDataBase::registerData (which is called by the constructor)
+ * KGamePropertyBase::registerData (which is called by the constructor)
  *
- * If you want to use a custum class with KPlayerData you have to implement the
+ * If you want to use a custum class with KGameProperty you have to implement the
  * operators << and >> for QDataStream:
  * <pre>
  * class Card
@@ -227,23 +212,23 @@ private:
  * class Player : KPlayer
  * {
  * [...]
- * KPlayerData<Card> mCards;
+ * KGameProperty<Card> mCards;
  * };
  * </pre>
  *
  *
- * Note: unlike most QT classes KPlayerData objects are *not* deleted
- * automatically! So if you create an object using e.g. KPlayerData<int>* data =
- * new KPlayerData(0, this) you have to put a delete data into your destructor!
+ * Note: unlike most QT classes KGameProperty objects are *not* deleted
+ * automatically! So if you create an object using e.g. KGameProperty<int>* data =
+ * new KGameProperty(0, this) you have to put a delete data into your destructor!
  * @short A class for network transparent games
  **/
 template<class type>
-class KPlayerData  : public KPlayerDataBase
+class KGameProperty  : public KGamePropertyBase
 {
 
 public:
 	/**
-	 * Constructs a KPlayerData object. A KPlayerData object will transmit
+	 * Constructs a KGameProperty object. A KGameProperty object will transmit
 	 * any changes to the server/master and, if public() is true, to the
 	 * other clients in the game.
 	 * @param id The id of this property. MUST be UNIQUE! Used to send and
@@ -253,16 +238,16 @@ public:
 	 * @param parent The parent of the object. Must be a KGame which manages
 	 * the changes made to this object, i.e. which will send the new data
 	 **/
-	KPlayerData(int id, KPlayerDataHandler* owner) : KPlayerDataBase(id, owner) {}
+	KGameProperty(int id, KGamePropertyHandlerBase* owner) : KGamePropertyBase(id, owner) {}
 
 	/**
 	 * This constructor does nothing. You have to call @ref
-	 * KPlayerDataBase::registerData
-	 * yourself before using the KPlayerData object.
+	 * KGamePropertyBase::registerData
+	 * yourself before using the KGameProperty object.
 	 **/
-	KPlayerData() : KPlayerDataBase() {}
+	KGameProperty() : KGamePropertyBase() {}
 
-	virtual ~KPlayerData() {}
+	virtual ~KGameProperty() {}
 
 
 	/**
@@ -274,9 +259,9 @@ public:
 	 * clients which sets the values of the properties on receiving. 
 	 **/
 	void setValue(type v, bool sendValue = true)
-	// i am not able to put this to kplayerdata.cpp - why?
+	// i am not able to put this to kgameproperty.cpp - why?
 	{
-		//kdDebug(11001) << "+++KPlayerData::setValue(" << id() << ") = " << v << endl;
+		//kdDebug(11001) << "+++KGameProperty::setValue(" << id() << ") = " << v << endl;
 		if (mData!=v) { // not possible as "!=" is not always implemented
 			if (isLocked()) {
 				return;
@@ -327,7 +312,7 @@ public:
 	/**
 	 * Well, look at this code:
 	 * <pre>
-	 * 	KPlayerData<int> integerData(0, owner);
+	 * 	KGameProperty<int> integerData(0, owner);
 	 * 	integerData = 100;
 	 * 	kdDebug(11001) << integerData.value() << endl;
 	 * </pre>
@@ -342,7 +327,7 @@ public:
 	/**
 	 * Yeah, you can do it!
 	 * <pre>
-	 * 	KPlayerData<int> integerData(0, owner);
+	 * 	KGameProperty<int> integerData(0, owner);
 	 * 	integerData.setValue(100);
 	 * 	kdDebug(11001) << integerData << endl;
 	 * </pre>
@@ -355,143 +340,173 @@ private:
 };
 
 
-typedef KPlayerData<int>   KPlayerDataInt;
-typedef KPlayerData<unsigned int>   KPlayerDataUInt;
-typedef KPlayerData<QString>   KPlayerDataQString;
-typedef KPlayerData<Q_INT8>   KPlayerDataBool;
+typedef KGameProperty<int>   KGamePropertyInt;
+typedef KGameProperty<unsigned int>   KGamePropertyUInt;
+typedef KGameProperty<QString>   KGamePropertyQString;
+typedef KGameProperty<Q_INT8>   KGamePropertyBool;
 
 
-
-class KPlayerDataHandler : public QIntDict<KPlayerDataBase>
+class KGamePropertyHandlerBasePrivate; // wow - what a name ;-)
+class KGamePropertyHandlerBase : public QIntDict<KGamePropertyBase>
 {
-  public:
-    /** 
-     * Constructs a KPlayerDataHandler object
-     **/
-    KPlayerDataHandler();
-    /**
-     * Just for convenience, same as @ref KPlayerDataHandler
-     **/
-    KPlayerDataHandler(int id, KPlayer *parent);
-    /**
-     * Just for convenience, same as @ref KPlayerDataHandler
-     *
-     * @param The id of the message to listen for
-     * @param the parent object
-     *
-     **/
-    KPlayerDataHandler(int id, KGame *parent);
-    /**
-     * Just for convenience, same as @ref KPlayerDataHandler
-     *
-     * @param The id of the message to listen for
-     * @param the parent object
-     **/
-    KPlayerDataHandler(int id, void *parent,int type);
+public:
+	KGamePropertyHandlerBase();
+	~KGamePropertyHandlerBase();
+
+	/**
+	 * Main message process function. This has to be called by
+	 * the parent's message event handler. If the id of the message
+	 * agrees with the id of the handler, the message is extracted 
+	 * and processed. Otherwise false is returned.
+	 * Example:
+	 * <pre>
+	 *   if (mProperties.processMessage(stream,msgid)) return ;
+	 * </pre>
+	 * 
+	 * @param stream The data stream containing the message
+	 * @param id the message id of the message
+	 * @return true on message processed otherwise false
+	 **/
+	bool processMessage(QDataStream &stream, int id);
+	
+	/**
+	 * @return the id of the handler
+	 **/
+	int id() const { return mId; }
+	
+	/**
+	 * Adds a @ref KGameProperty property to the handler
+	 * @param data the property
+	 * @return true on success
+	 **/
+	bool addProperty(KGamePropertyBase *data);
+
+	/**
+	 * Removes a property from the handler
+	 * @param data the property
+	 * @return true on success
+	 **/
+	bool removeProperty(KGamePropertyBase *data);
+
+	/**
+	 * Loads properties from the datastream
+	 *
+	 * @param stream the datastream to save from
+	 * @return true on success otherwise false
+	 **/
+	virtual bool load(QDataStream &stream);
+
+	/**
+	 * Saves properties into the datastream
+	 *
+	 * @param stream the datastream to save to
+	 * @return true on success otherwise false
+	 **/
+	virtual bool save(QDataStream &stream);
+	
+	/**
+	 * called by a property to send itself into the
+	 * datastream. This call is simply forwarded to
+	 * the parent object
+	 **/ 
+	virtual void sendProperty(QDataStream &s) = 0;
+
+	/**
+	 * called by a property to emit a signal 
+	 * This call is simply forwarded to
+	 * the parent object
+	 **/ 
+	virtual void emitSignal(KGamePropertyBase *data) = 0;
+
+	void setId(int id)//AB: TODO: make this protected in KGamePropertyHandler!!
+	{
+		mId = id;
+	}
+
+private:
+	void init();
+	KGamePropertyHandlerBasePrivate* d;
+	int mId;
+};
+
+
+template<class type>
+class KGamePropertyHandler : public KGamePropertyHandlerBase
+{
+public:
+	/** 
+	 * Constructs a KGamePropertyHandler object
+	 **/
+	KGamePropertyHandler() : KGamePropertyHandlerBase()
+	{
+		init();
+	}
+
+	/**
+	 * Just for convenience, same as @ref KGamePropertyHandler
+	 **/
+	KGamePropertyHandler(int id, type* owner) : KGamePropertyHandlerBase()
+	{
+		init();
+		registerHandler(id, owner);
+	}
     
-    /**
-     * Register the handler with a parent. This is to use
-     * if the constructor without arguments has been choosen.
-     * Otherwise you need not call this.
-     *
-     * @param The id of the message to listen for
-     * @param the parent object
-     **/
-    void registerHandler(int id, KPlayer *parent);
-    /**
-     * Same as @ref registerHandler but with different
-     * parent class
-     *
-     * @param The id of the message to listen for
-     * @param the parent object
-     **/
-    void registerHandler(int id, KGame *parent);
-    /**
-     * Same as @ref registerHandler but with different
-     * parent class
-     *
-     * @param The id of the message to listen for
-     * @param the parent object
-     **/
-    void registerHandler(int id, void *parent,int type);
-    /**
-     *  Destruct the KPlayerDataHandler
-     **/
-    ~KPlayerDataHandler();
+	/**
+	 * Register the handler with a parent. This is to use
+	 * if the constructor without arguments has been choosen.
+	 * Otherwise you need not call this.
+	 *
+	 * @param id The id of the message to listen for
+	 * @param owner the parent object
+	 **/
+	void registerHandler(int id, type* owner)
+	{
+		setId(id);
+		mOwner = owner;
+	}
 
-    /**
-     * Main message process function. This has to be called by
-     * the parent's message event handler. If the id of the message
-     * agrees with the id of the handler, the message is extracted 
-     * and processed. Otherwise false is returned.
-     * Example:
-     * <pre>
-     *   if (mProperties.processMessage(stream,msgid)) return ;
-     * </pre>
-     * 
-     * @param The data stream containing the message
-     * @param the message id of the message
-     * @return true on message processed otherwise false
-     *
-     **/
-    bool processMessage(QDataStream &stream, int id);
-    /**
-     * returns the type of the handler 
-     **/
-    int type() const {return mType;}
-    /**
-     * returns the id of the handler
-     **/
-    int id() const {return mId;}
-    /**
-     * returns the owner of the handler
-     **/
-    void *owner() const {return mOwner;}
-    /**
-     * Adds a KPlayerData property to the handler
-     *
-     * @param the property
-     * @return true on success
-     **/
-    bool addProperty(KPlayerDataBase *data);
-    /**
-     * Removes a property from the handler
-     *
-     * @param the property
-     * @return true on success
-     */
-    bool removeProperty(KPlayerDataBase *data);
-    /**
-     * called by a property to send itself into the
-     * datastream. This call is simply forwarded to
-     * the parent object
-     **/ 
-    virtual void sendProperty(QDataStream &s,bool isPublic=true);
-    /**
-     * called by a property to emit a signal 
-     * This call is simply forwarded to
-     * the parent object
-     **/ 
-    virtual void emitSignal(KPlayerDataBase *data);
-    /**
-     * Loads properties from the datastream
-     *
-     * @param the datastream
-     * @return true on success
-     **/
-    virtual bool load(QDataStream &stream);
-    /**
-     * Saves properties into the datastream
-     *
-     * @param the datastream
-     * @return true on success
-     **/
-    virtual bool save(QDataStream &stream);
-  private:
-    int mType;
-    void *mOwner;
-    int mId;
+	/**
+	 *  Destruct the KGamePropertyHandler
+	 **/
+	~KGamePropertyHandler()
+	{
+	}
 
+	/**
+	 * @return the owner of the handler
+	 **/
+	type* owner() const { return mOwner; }
+
+	/**
+	 * called by a property to send itself into the
+	 * datastream. This call is simply forwarded to
+	 * the parent object
+	 **/ 
+	void sendProperty(QDataStream &s)
+	{
+		if (mOwner) {
+			mOwner->sendProperty(s);
+		}
+	}
+	
+	/**
+	 * called by a property to emit a signal 
+	 * This call is simply forwarded to
+	 * the parent object
+	 **/ 
+	void emitSignal(KGamePropertyBase *data)
+	{
+		if (mOwner) {
+			mOwner->emitSignal(data);
+		}
+	}
+	
+private:
+	void init()
+	{
+		mOwner = 0;
+	}
+	type* mOwner;
 };
 
 #endif

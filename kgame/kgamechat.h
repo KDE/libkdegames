@@ -30,7 +30,7 @@
 
 class KPlayer;
 class KGame;
-class KPlayerDataBase;
+class KGamePropertyBase;
 
 class KGameChatPrivate;
 
@@ -99,7 +99,7 @@ protected:
 	virtual void sendMessage(int fromPlayer, const QString& text, int toPlayer, const QString& toGroup);
 
 protected slots:
-	void slotPropertyChanged(KPlayerDataBase*, KPlayer*);
+	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
 	void slotAddPlayer(KPlayer*);
 	void slotRemovePlayer(KPlayer*);
 

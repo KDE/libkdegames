@@ -39,7 +39,7 @@ class QListBoxItem;
 
 class KGame;
 class KPlayer;
-class KPlayerDataBase;
+class KGamePropertyBase;
 
 class KGameDialogConfigPrivate;
 /**
@@ -333,7 +333,7 @@ protected slots:
 	 * @param prop The property that has changed
 	 * @param player The owner of the property
 	 **/
-	void slotPropertyChanged(KPlayerDataBase* prop, KPlayer* player);
+	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player);
 
 	/**
 	 * Called when the user clicks on Ok. Calles @ref slotApply and @ref

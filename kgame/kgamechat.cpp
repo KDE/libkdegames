@@ -27,7 +27,7 @@
 
 #include "kgame.h"
 #include "kplayer.h"
-#include "kplayerdata.h"
+#include "kgameproperty.h"
 
 #include "kgamechat.h"
 
@@ -180,8 +180,8 @@ void KGameChat::slotAddPlayer(KPlayer* p)
  p->disconnect(this);
  addSendingEntry(comboBoxItem(p->name()), SEND_TO_GROUP_ID);
 // mIndex2Player.insert(mCombo->count() - 1, p);
- connect(p, SIGNAL(signalPropertyChanged(KPlayerDataBase*, KPlayer*)),
-		this, SLOT(slotPropertyChanged(KPlayerDataBase*, KPlayer*))); 
+ connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*))); 
  // where to put the id ?? TODO
 }
 
@@ -214,9 +214,9 @@ void KGameChat::slotRemovePlayer(KPlayer* p)
  }*/
 }
 
-void KGameChat::slotPropertyChanged(KPlayerDataBase* prop, KPlayer* player)
+void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
- if (prop->id() == KPlayerDataBase::IdName) {
+ if (prop->id() == KGamePropertyBase::IdName) {
 	kdDebug(11001) << "new Name" << endl;
 	int index = -1;
 	QIntDictIterator<KPlayer> it(d->mIndex2Player);
@@ -233,7 +233,7 @@ void KGameChat::slotPropertyChanged(KPlayerDataBase* prop, KPlayer* player)
 /*
 	mCombo->changeItem(comboBoxItem(player->name()), index);
  */
- } else if (prop->id() == KPlayerDataBase::IdGroup) {
+ } else if (prop->id() == KGamePropertyBase::IdGroup) {
  //TODO
  }
 }

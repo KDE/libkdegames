@@ -35,7 +35,7 @@
 #include <qtimer.h>
 #include <qqueue.h>
 
-#include "kplayerdata.h"
+#include "kgameproperty.h"
 #include "kplayer.h"
 #include "kgame.h"
 #include "kgameio.h"
@@ -64,12 +64,12 @@ public:
     QQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
 
 
-    KPlayerDataHandler mProperties;
+    KGamePropertyHandler<KGame> mProperties;
 
-    //KPlayerDatas
-    KPlayerDataInt mMaxPlayer;
-    KPlayerDataUInt mMinPlayer;
-    KPlayerDataInt mGameStatus; // Game running?
+    //KGamePropertys
+    KGamePropertyInt mMaxPlayer;
+    KGamePropertyUInt mMinPlayer;
+    KGamePropertyInt mGameStatus; // Game running?
 };
 
 // ------------------- GAME CLASS --------------------------
@@ -79,11 +79,11 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
   d = new KGamePrivate;
   
   d->mProperties.registerHandler(KGameMessage::IdGameProperty,this);
-  d->mMaxPlayer.registerData(KPlayerDataBase::IdMaxPlayer, dataHandler());
+  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, dataHandler());
   d->mMaxPlayer.setValue(-1);  // Infinite
-  d->mMinPlayer.registerData(KPlayerDataBase::IdMinPlayer, dataHandler());
+  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, dataHandler());
   d->mMinPlayer.setValue(0);   // Always ok     
-  d->mGameStatus.registerData(KPlayerDataBase::IdGameStatus, dataHandler());
+  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, dataHandler());
   d->mGameStatus.setValue(End);
   d->mUniquePlayerNumber=0;
   mRandom.setSeed(0);
@@ -439,7 +439,7 @@ int KGame::gameStatus() const
 bool KGame::isRunning() const
 { return d->mGameStatus.value() == Run; }
 
-KPlayerDataHandler* KGame::dataHandler()
+KGamePropertyHandlerBase* KGame::dataHandler()
 { return &d->mProperties; }
 
 
@@ -943,7 +943,7 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 }
 
 
-bool KGame::addProperty(KPlayerDataBase* data)
+bool KGame::addProperty(KGamePropertyBase* data)
 {
   return d->mProperties.addProperty(data);
 }
@@ -959,12 +959,12 @@ void KGame::sendProperty(QDataStream& s, bool /*isPublic*/)
 //  kdDebug(11001) << "KGame::sendProperty " << endl;
   sendSystemMessage(s, KGameMessage::IdGameProperty);
 }
-void KGame::emitSignal(KPlayerDataBase *me)
+void KGame::emitSignal(KGamePropertyBase *me)
 {
   emit signalPropertyChanged(me,this);
 }
 
-KPlayerDataBase* KGame::findProperty(int id) const
+KGamePropertyBase* KGame::findProperty(int id) const
 {
   return d->mProperties[id];
 }
