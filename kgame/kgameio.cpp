@@ -224,7 +224,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 	}
   else 
   {
-    kdDebug() << "KGameProcessIO::receivedMessage: Got message from process but no player defined!" << endl;
+    kdDebug(11001) << "KGameProcessIO::receivedMessage: Got message from process but no player defined!" << endl;
   }
   newbuffer.resetRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
 }

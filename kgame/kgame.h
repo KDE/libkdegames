@@ -62,7 +62,7 @@ class KGame : public KGameNetwork
   Q_OBJECT
 
 public:
-  typedef QPtrList<KPlayer> KGamePlayerList;
+	typedef QPtrList<KPlayer> KGamePlayerList;
 
 	/**
 	 * The policy of the property. This can be PolicyClean (@ref setVale uses
@@ -87,7 +87,7 @@ public:
 	 **/
 	enum GamePolicy
 	{
-    PolicyUndefined = 0,
+		PolicyUndefined = 0,
 		PolicyClean = 1,
 		PolicyDirty = 2,
 		PolicyLocal = 3
@@ -115,7 +115,17 @@ public:
      * The KGame e.g. sets the status to Pause when you have
      * less player than the minimum amount
      */
-    enum GameStatus { Init, Run, Pause, End, Abort, SystemPause, Intro, UserStatus };
+    enum GameStatus 
+    {
+	    Init = 0,
+	    Run = 1,
+	    Pause = 2,
+	    End = 3,
+	    Abort = 4,
+	    SystemPause = 5,
+	    Intro = 6,
+	    UserStatus = 7
+    };
 
     // Properties
     /**
