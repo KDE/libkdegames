@@ -4,3 +4,7 @@
 - 10.07.2001: better layout for the resize box
 - 10.07.2001: global decks/carddirs need extensive testing
 
+-These pertain to the highscore widget
+The Ok button when adding a name should be enabled when the lineedit is filled with a QString of length() > 0
+
+The lineedit by default should come up with the user name that is loged in.
