@@ -29,6 +29,7 @@ this software.
 #include <qlineedit.h>
 #include <qwidgetstack.h>
 #include <qtimer.h>
+#include <qevent.h>
 #include <qptrvector.h>
 
 #include <kapplication.h>
@@ -85,6 +86,8 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
    d->header[Score] = i18n("Score");
    d->key[Score] = "Score";
    d->page = makeMainWidget();
+   
+   connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
 }
 
 KScoreDialog::~KScoreDialog()
@@ -235,7 +238,6 @@ void KScoreDialog::aboutToShow()
            d->edit->setFocus();
            connect(d->edit, SIGNAL(returnPressed()), 
                  this, SLOT(slotGotReturn()));
-           enableButtonOK(false);
          }
          else
          {
@@ -382,7 +384,6 @@ void KScoreDialog::slotGotName()
    delete d->edit;
    d->edit = 0;
    d->newName = -1;
-   enableButtonOK(true);
 }
 
 int KScoreDialog::highScore()
@@ -391,6 +392,16 @@ int KScoreDialog::highScore()
       loadScores();
 
    return (*d->scores.first())[Score].toInt();
+}
+
+void KScoreDialog::keyPressEvent( QKeyEvent *ev)
+{
+   if ((d->newName != -1) && (ev->key() == Key_Return))
+   {
+       ev->ignore();
+       return;
+   }
+   KDialogBase::keyPressEvent(ev);
 }
 
 
