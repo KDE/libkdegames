@@ -25,20 +25,59 @@ this software.
 #ifndef KSCOREDIALOG_H
 #define KSCOREDIALOG_H
 
+#include <qmap.h>
+#include <qptrlist.h>
+
 #include <kdialogbase.h>
+
+class QGridLayout;
+class QLineEdit;
+class QWidgetStack;
 
 /**
  * A simple high score dialog.
  */
 class KScoreDialog : public KDialogBase {
+   Q_OBJECT
+   
 public:
-        enum Fields { None = 0, Level = 1 };
-        /**
-         * @param latest Ranking of the latest entry. [1 - 10]
-         * Use 0 for none.
-         * @param fields Show additional fields besides Rank, Name and Score.
-         */
-	KScoreDialog(int latest=0, int fields = None, QWidget *parent=0, const char *name=0);
+   enum Fields { None = 0, Name = 1, Score = 2, Level = 4, Time = 8 };
+        
+   typedef QMap<Fields, QString> FieldInfo;
+
+   /**
+    * @param latest Ranking of the latest entry. [1 - 10]
+    * Use 0 for none.
+    * @param fields Which fields should be listed.
+    */
+   KScoreDialog(int fields, QWidget *parent=0, const char *name=0);
+
+   ~KScoreDialog();
+
+   /**
+    * Adds a new score to the list.
+    *
+    * Returns true when the score was good enough to make it into
+    * the list.
+    */   
+   bool addScore(int newScore, const FieldInfo &newInfo, bool askName=true);
+
+   virtual void show();
+
+private slots:
+   void slotGotReturn();
+   void slotGotName();
+
+private:
+   /* read scores */
+   void loadScores();   
+   void saveScores();
+   
+   void aboutToShow();
+
+private:           
+   class KScoreDialogPrivate;
+   KScoreDialogPrivate *d;
 };
 
 #endif // !KSCOREDIALOG_H
