@@ -264,6 +264,8 @@ public:
       /**
        * remove a game IO device
        *
+       * The remove IO(s) is/are <em>not</em> deleted!
+       *
        * @param the device to be removed or 0 for all devices
        * @return true on ok
        */

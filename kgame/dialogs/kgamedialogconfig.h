@@ -295,8 +295,11 @@ public:
 
 protected slots:
 	void slotPlayerChanged(KPlayer*);
+
 	void slotKickPlayerOut(QListBoxItem* item);
 	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p);
+	void slotPlayerLeftGame(KPlayer* p);
+	void slotPlayerJoinedGame(KPlayer* p);
 
 private:
 	KGameDialogConnectionConfigPrivate* d;

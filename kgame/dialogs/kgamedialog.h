@@ -134,6 +134,8 @@ public:
 	 **/
 	void setKGame(KGame* g);
 
+	void setAdmin(bool admin);
+
 	/**
 	 * This will submit all configuration data to the @ref KGame object.
 	 * Automatically called by @ref slotApply and @ref slotOk

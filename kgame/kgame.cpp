@@ -310,13 +310,11 @@ void KGame::systemRemovePlayer(KPlayer* player)
  if (!systemRemove(player)) {
    kdWarning(11001) << "player " << player << "(" << player->id() << ") Could not be found!" << endl;
  }
- delete player;
 
  if (gameStatus()==(int)Run && playerCount()<minPlayers()) {
    kdWarning(11001) << "KGame::removePlayer: not enough players, pausing game\n" << endl;
    setGameStatus(Pause);
  }
-// return result;
 }
 
 bool KGame::systemRemove(KPlayer* p)
@@ -334,17 +332,8 @@ bool KGame::systemRemove(KPlayer* p)
    result = d->mPlayerList.remove(p);
  }
 
- if (p->isVirtual()) {
- //FIXME:
-/*   QPtrDictIterator<KGameClient> it(clientMap());
-   for( ; it.current(); ++it ) {
-     KGameClient *client=it.current();
-     client->playerList()->remove(p);
-   }*/
- }
-
- // otherwise the .clear() does not work
  p->setGame(0);
+ delete p;
 
  return result;
 }

@@ -431,6 +431,10 @@ void KGameDialogMsgServerConfig::removeClient(Q_UINT32 id)
 
 void KGameDialogMsgServerConfig::setAdmin(bool a)
 {
+ if (admin() == a) {
+	// no need to do anything
+	return;
+ }
  KGameDialogConfig::setAdmin(a);
  if (admin()) {
 	if (d->noAdmin) {
@@ -574,9 +578,9 @@ void KGameDialogConnectionConfig::setKGame(KGame* g)
  if (game()) {
 // react to changes in KGame::playerList()
 	connect(game(), SIGNAL(signalPlayerJoinedGame(KPlayer*)),
-			this, SLOT(slotPlayerChanged(KPlayer*)));
+			this, SLOT(slotPlayerJoinedGame(KPlayer*)));
 	connect(game(), SIGNAL(signalPlayerLeftGame(KPlayer*)),
-			this, SLOT(slotPlayerChanged(KPlayer*)));
+			this, SLOT(slotPlayerLeftGame(KPlayer*)));
  }
  slotPlayerChanged(0);
 }
@@ -588,11 +592,13 @@ void KGameDialogConnectionConfig::setOwner(KPlayer* p)
 
 void KGameDialogConnectionConfig::setAdmin(bool a)
 {
- KGameDialogConfig::setAdmin(a);
- if (!game()) {
+ if (!game()) {// not possible... in theory
 	return;
  }
- disconnect(game(), SIGNAL(executed(QListBoxItem*)), this, 0);
+ if (admin()) {
+	disconnect(game(), SIGNAL(executed(QListBoxItem*)), this, 0);
+ }
+ KGameDialogConfig::setAdmin(a);
  if (admin()) {
 	connect(d->mPlayers, SIGNAL(executed(QListBoxItem*)), this,
 			SLOT(slotKickPlayerOut(QListBoxItem*)));
@@ -601,6 +607,7 @@ void KGameDialogConnectionConfig::setAdmin(bool a)
 
 void KGameDialogConnectionConfig::slotPlayerChanged(KPlayer* )
 {
+ kdDebug(11001) << "KGameDialogConfig::slotPlayerChanged()" << endl;
  QPtrDictIterator<KPlayer> it(d->mItem2Player);
  while (it.current()) {
 	// disconnect everything first
@@ -611,28 +618,59 @@ void KGameDialogConnectionConfig::slotPlayerChanged(KPlayer* )
  d->mPlayers->clear();
 
  if (!game()) {
+	kdError(11001) << "no game set" << endl;
 	return;
  }
 
  KGame::KGamePlayerList l = *game()->playerList();
  for (KPlayer* p = l.first(); p; p = l.next()) {
-	QListBoxText* t = new QListBoxText(p->name());
+	slotPlayerJoinedGame(p);
+/*	QListBoxText* t = new QListBoxText(p->name());
 	d->mItem2Player.insert(t, p);
 	d->mPlayers->insertItem(t);
 
 	connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
-			this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+			this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));*/
  }
+}
+
+void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
+{
+ if (d->mItem2Player[p]) {
+	kdError(11001) << "attempt to double add player" << endl;
+	return;
+ }
+ QListBoxText* t = new QListBoxText(p->name());
+ d->mItem2Player.insert(t, p);
+ d->mPlayers->insertItem(t);
+
+ connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+ 
+}
+
+void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
+{
 }
 
 void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
 {
+ kdDebug(11001) << "kick player out" << endl;
  KPlayer* p = d->mItem2Player[item];
- if (!game()|| !admin() || !p) {
+ if (!p) {
+	kdError(11001) << "invalid item selected - no player found" << endl;
 	return;
  }
-
+ if (!game()) {
+	kdWarning(11001) << "no game set" << endl;
+	return;
+ }
+ if (!admin()) {
+	kdDebug(11001) << "Only the ADMIN can kick players" << endl;
+	return;
+ }
  if (p == owner()) { // you wanna ban the ADMIN ??
+	kdDebug(11001) << "you cannot kick the ADMIN" << endl;
 	return;
  }
 		       
@@ -641,7 +679,7 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
 	kdDebug(11001) << "will remove player " << p << endl;
 	game()->removePlayer(p);
 	d->mPlayers->removeItem(d->mPlayers->index(item));
-	slotPlayerChanged(p);
+//	slotPlayerChanged(p);
  } else {
 	kdDebug(11001) << "will NOT remove player " << p << endl;
  }

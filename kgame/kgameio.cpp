@@ -218,7 +218,7 @@ int KGameComputerIO::rtti() const { return ComputerIO; }
 KGameComputerIO::~KGameComputerIO()
 {
  if (player()) {
-	player()->removeGameIO(this); 
+//	player()->removeGameIO(this); //KGameIO
  }
 }
 

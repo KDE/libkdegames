@@ -571,8 +571,8 @@ private:
     void gameReactivatePlayer(QDataStream& msg, Q_UINT32 sender);
 
     /**
-     * Removes a player from all list, removes the @ref KGame pointer from the
-     * @ref KPlayer but does not delete the player. Used by (e.g.) @ref
+     * Removes a player from all lists, removes the @ref KGame pointer from the
+     * @ref KPlayer and deletes the player. Used by (e.g.) @ref
      * systemRemovePlayer
      * @return True if the player has been removed, false if the current is not
      * found

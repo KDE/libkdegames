@@ -108,12 +108,6 @@ KPlayer::~KPlayer()
   KGameIO *input;
   while((input=mInputList.first()))
   {
-//    kdDebug(11001) << "KPlayer: delete input" << endl;
-    /*
-        if (game()) {
-          game()->unregisterListener(input);
-    }
-    */
     delete input;
   }
   if (mGame) mGame->removePlayer(this);
@@ -218,17 +212,19 @@ bool KPlayer::addGameIO(KGameIO *input)
 // input=0, remove all
 bool KPlayer::removeGameIO(KGameIO *targetinput)
 {
+//  kdDebug(11001) << "KPlayer::removeGameIO()" << endl;
   bool result=true;
   if (!targetinput) // delete all
   {
     KGameIO *input;
     while((input=mInputList.first()))
     {
-      mInputList.remove(input);
+      removeGameIO(targetinput);
     }
   }
   else
   {
+//    kdDebug(11001) << "remove IO " << targetinput << endl;
     result=mInputList.remove(targetinput);
   }
   return result;

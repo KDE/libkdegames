@@ -83,6 +83,11 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 
  setOwner(owner);
  setKGame(g);
+ if (g) {
+	setAdmin(g->isAdmin());
+ } else {
+	setAdmin(false);
+ }
 }
 
 void KGameDialog::initDefaultDialog(KGameDialogGeneralConfig* conf, 
@@ -222,13 +227,13 @@ void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
 	kdWarning(11001) << "No game has been set!" << endl;
  } else {
 	widget->setKGame(d->mGame);
+	widget->setAdmin(d->mGame->isAdmin());
  }
  if (!d->mOwner) {
 	kdWarning(11001) << "No player has been set!" << endl;
  } else {
 	widget->setOwner(d->mOwner);
  }
- //TODO: call setAdmin?
  widget->show();
 }
 
@@ -282,6 +287,17 @@ void KGameDialog::setKGame(KGame* g)
  connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
  for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
 	d->mConfigWidgets.at(i)->setKGame(d->mGame);
+ }
+
+ if (d->mGame) {
+	setAdmin(d->mGame->isAdmin());
+ }
+}
+
+void KGameDialog::setAdmin(bool admin)
+{
+ for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
+	d->mConfigWidgets.at(i)->setAdmin(admin);
  }
 }
 
