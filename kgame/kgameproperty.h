@@ -29,6 +29,7 @@
 class KGame;
 class KPlayer;
 class KGamePropertyHandler;
+using namespace std;
 
 /**
  * The KGamePropertyBase class is the base class of KGameProperty. See @ref
