@@ -80,7 +80,7 @@ void KPlayer::init()
    d->mVirtual=false;
    mActive=true;
    mGame=0;
-   d->mId=0;
+   d->mId=0; // "0" is always an invalid ID!
    d->mPriority=0;
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
@@ -277,7 +277,7 @@ bool KPlayer::setTurn(bool b,bool exclusive)
   return true;
 }
 
-bool KPlayer:: load(QDataStream &stream)
+bool KPlayer::load(QDataStream &stream)
 {
   Q_INT32 id,priority;
   stream >> id >> priority;

@@ -505,22 +505,24 @@ void KGame::prepareNext()
 
 bool KGame::nextPlayer(KPlayer *last,bool exclusive)
 {
- int lastId,minId,nextId;
- KPlayer *nextplayer,*minplayer;
+ unsigned int minId,nextId,lastId;
+ KPlayer *nextplayer, *minplayer;
  if (last) {
-   lastId=last->id();
+   lastId = last->id();
  } else {
-   lastId=-1;
+   lastId = 0;
  }
- minId=0xffff;
- nextId=minId;
- nextplayer=0;
- minplayer=0;
+ // remove when this has been checked
+ #warning Martin please check if this is stil correct!  minId is now unsigned int and i dont know about 0xffff :-(
+ minId = 0xffff; 
+ nextId = minId;
+ nextplayer = 0;
+ minplayer = 0;
 
  KPlayer *player;
  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
    // Find the first player for a cycle
-   if (player->id()<minId) {
+   if (player->id() < minId) {
      minId=player->id();
      minplayer=player;
    }
@@ -528,7 +530,7 @@ bool KGame::nextPlayer(KPlayer *last,bool exclusive)
      continue;
    }
    // Find the next player which is bigger than the current one
-   if (player->id()>lastId && player->id()<nextId) {
+   if (player->id() > lastId && player->id() < nextId) {
      nextId=player->id();
      nextplayer=player;
    }
@@ -898,6 +900,7 @@ void KGame::slotServerDisconnected()
   }
   // TODO clear inactive lists ?
 }
+
 void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
 {
  kdDebug(11001) << "+++++++++++KGame::slotClientDisconnected(" << clientID << ")" << endl;
@@ -925,11 +928,11 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
  // TODO remove players from removed game
  for (unsigned int idx=0;idx<d->mInactiveIdList.count();idx++)
  {
-   QValueList<int>::Iterator it1=d->mInactiveIdList.at(idx);
-   QValueList<int>::Iterator it2=d->mInactivePriorityList.at(idx);
-   player=findPlayer(*it1);
-   int pri=*it2;
-   if ((int)playerCount()<maxPlayers() && player && KGameMessage::rawGameId(*it1)!=clientID)
+   QValueList<int>::Iterator it1 = d->mInactiveIdList.at(idx);
+   QValueList<int>::Iterator it2 = d->mInactivePriorityList.at(idx);
+   player = findPlayer(*it1);
+   int pri = *it2;
+   if ((int)playerCount() < maxPlayers() && player && KGameMessage::rawGameId(*it1) != clientID)
    {
      activatePlayer(player);
    }
