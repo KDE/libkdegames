@@ -170,7 +170,7 @@ QString KGamePropertyHandler::propertyName(int id) const
  QString s;
  if (d->mIdDict.find(id)) {
 	if (d->mNameMap.contains(id)) {
-		s = d->mNameMap[id];
+		s = i18n("%1 (%2)").arg(d->mNameMap[id]).arg(id);
 	} else {
 		s = i18n("Unnamed - ID: %1").arg(id);
 	}
@@ -288,6 +288,7 @@ KGamePropertyBase *KGamePropertyHandler::find(int id)
 
 void KGamePropertyHandler::clear()
 {
+ kdDebug(11001) << "KGamePropertyHandler::clear()" << endl;
  d->mIdDict.clear();
  d->mNameMap.clear();
 }
