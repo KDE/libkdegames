@@ -246,7 +246,7 @@ KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
-    return new KAction(i18n("Roll"), "die",
+    return new KAction(i18n("Roll"), "roll",
                        0, recvr, slot, parent,
                        name ? name : stdName(Roll));
 }
