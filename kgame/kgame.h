@@ -236,6 +236,15 @@ public:
      * @return true?
      */
     virtual bool load(QDataStream &stream);
+
+    /**
+     * Same as above function but with different parameters
+     *
+     * @param the filename of the file to be opened
+     *
+     * @return true?
+     **/
+    virtual bool load(QString filename);
     
     /**
      * Save a game to a file OR to network. Otherwise the same as 
@@ -247,6 +256,16 @@ public:
      * @return true?
      */
     virtual bool save(QDataStream &stream,bool saveplayers=true);
+
+    /**
+     * Same as above function but with different parameters
+     *
+     * @param the filename of the file to be saved
+     * @param saveplayers If true then all players wil be saved too
+     *
+     * @return true?
+     **/
+    virtual bool save(QString filename,bool saveplayers=true);
 
     /**
      * Resets the game, i.e. puts it into a state where everything

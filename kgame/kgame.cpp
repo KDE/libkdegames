@@ -40,6 +40,7 @@
 #include <qbuffer.h>
 #include <qtimer.h>
 #include <qqueue.h>
+#include <qfile.h>
 
 #include <klocale.h>
 #include <krandomsequence.h>
@@ -158,6 +159,17 @@ void KGame::deleteInactivePlayers()
  }
 }
 
+bool KGame::load(QString filename)
+{
+  if (filename.isNull()) return false;
+  QFile f(filename);
+  if (!f.open(IO_ReadOnly)) return false;
+  QDataStream s( &f );
+  load(s);
+  f.close();
+  return true;
+}
+
 bool KGame::load(QDataStream &stream)
 { return loadgame(stream, false); }
 
@@ -205,6 +217,16 @@ bool KGame::loadgame(QDataStream &stream, bool network)
  return true;
 }
 
+bool KGame::save(QString filename,bool saveplayers)
+{
+  if (filename.isNull()) return false;
+  QFile f(filename);
+  if (!f.open(IO_WriteOnly)) return false;
+  QDataStream s( &f );
+  save(s,saveplayers);
+  f.close();
+  return true;
+}
 bool KGame::save(QDataStream &stream,bool saveplayers)
 {
  // Save Game Data
