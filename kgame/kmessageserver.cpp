@@ -154,8 +154,11 @@ Q_UINT16 KMessageServer::serverPort () const
 
 void KMessageServer::stopNetwork()
 {
-  delete d->mServerSocket;
-  d->mServerSocket = 0;
+  if (d->mServerSocket) 
+  {
+    delete d->mServerSocket;
+    d->mServerSocket = 0;
+  }
 }
 
 bool KMessageServer::isOfferingConnections() const

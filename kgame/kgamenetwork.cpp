@@ -148,19 +148,19 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
     return false;
   }
 
-  if (!d->mMessageServer)
-  {
-    // FIXME: What shall we do here? Probably must stop a running game.
-    kdWarning (11001) << "KGameNetwork::connectToServer: We are already connected to another server!" << endl;
-  }
+//  if (!d->mMessageServer)
+//  {
+//    // FIXME: What shall we do here? Probably must stop a running game.
+//    kdWarning (11001) << "KGameNetwork::connectToServer: We are already connected to another server!" << endl;
+///  }
 
-  if (d->mMessageServer && d->mMessageServer->isOfferingConnections())
+  if (d->mMessageServer)
   {
     // FIXME: What shall we do here? Probably must stop a running game.
     kdWarning(11001) << "we are server but we are trying to connect to another server! "
 			<< "make sure that all clients connect to that server! "
 			<< "quitting the local server now..." << endl;
-    d->mMessageServer->stopNetwork();
+    stopServerConnection();
     delete d->mMessageServer;
     d->mMessageServer = 0;
   }
@@ -179,13 +179,12 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
 bool KGameNetwork::stopServerConnection()
 {
   // We still are the Master, we just don't accept further connections!
-  if (!d->mMessageServer)
+  if (d->mMessageServer)
   {
-    kdError(11001) << "KGameNetwork::stopServerConnection: We don't have the server!" << endl;
-    return false;
+    d->mMessageServer->stopNetwork();
+    return true;
   }
-  d->mMessageServer->stopNetwork();
-  return true;
+  return false;
 }
 
 bool KGameNetwork::isOfferingConnections() const
