@@ -24,7 +24,6 @@
 #include <kdebug.h>
 #include <ksimpleconfig.h>
 #include <kglobal.h>
-#include <kglobal.h>
 
 #include "khighscore.h"
 #include "config.h" // HIGHSCORE_DIRECTORY is defined here (or not)
