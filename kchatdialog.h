@@ -86,6 +86,12 @@ public:
 	 **/
 	void configureChatWidget(KChatBase* widget);
 
+	/**
+	 * @return The maximal allowed messages in the chat widget. -1 is
+	 * unlimited
+	 **/
+	int maxMessages() const;
+
 protected slots:
 	void slotGetNameFont();
 	void slotGetTextFont();
@@ -100,6 +106,7 @@ private:
 	void setTextFont(QFont);
 	void setSystemNameFont(QFont);
 	void setSystemTextFont(QFont);
+	void setMaxMessages(int max);
 
 private:
 	void init();

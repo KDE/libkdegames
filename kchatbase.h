@@ -27,6 +27,8 @@
 
 class QListBoxItem;
 
+class KConfig;
+
 
 class KChatBaseTextPrivate;
 
@@ -47,6 +49,7 @@ class KChatBaseTextPrivate;
 class KChatBaseText : public QListBoxText
 {
 public:
+
 	/**
 	 * Constructs a KChatBaseText object with the player and text part
 	 **/
@@ -58,7 +61,7 @@ public:
 	KChatBaseText(const QString& text);
 	
 	/**
-	 * Destruct a KChatBaseText object
+	 * Destruct a KChatBaseText object.
 	 **/
 	~KChatBaseText();
 
@@ -187,6 +190,11 @@ public:
 	 **/
 	KChatBase(QWidget* parent, bool noComboBox = false);
 
+	/**
+	 * Destruct the KChatBase object
+	 *
+	 * Also calls @ref saveConfig
+	 **/
 	~KChatBase();
 
 	enum SendingIds {
@@ -345,6 +353,46 @@ public:
 	 * also @ref layoutSystemMessage
 	 **/
 	const QFont& systemMessageFont() const;
+
+	/**
+	 * Save the configuration of the dialog to a @ref KConfig object. If
+	 * the supplied @ref KConfig pointer is NULL then kapp->config() is used
+	 * instead (and the group is changed to "KChatBase") butr the current
+	 * group is restored at the end.
+	 * @param conf A pointer to the @ref KConfig object to save the config
+	 * to. If you use 0 then kapp->config() is used and the group is changed
+	 * to "KChatBase" (the current group is restored at the end).
+	 **/
+	virtual void saveConfig(KConfig* conf = 0);
+
+	/**
+	 * Read the configuration from a @ref KConfig object. If the pointer is
+	 * NULL kapp->config() is used and the group is changed to "KChatBase".
+	 * The current @ref KConfig::group is restored after this call.
+	 **/
+	virtual void readConfig(KConfig* conf = 0);
+
+	/**
+	 * Set the maximum number of items in the list. If the number of item
+	 * exceeds the maximum as many items are deleted (oldest first) as
+	 * necessary. The number of items will never exceed this value.
+	 * @param maxItems the maximum number of items. -1 (default) for
+	 * unlimited.
+	 **/
+	void setMaxItems(int maxItems);
+
+	/**
+	 * Clear all messages in the list.
+	 **/
+	void clear();
+
+	/**
+	 * @return The maximum number of messages in the list. -1 is unlimited. See alse
+	 * @ref setMaxItems
+	 **/
+	int maxItems() const;
+
+
 public slots:
 	/**
 	 * Add a text in the listbox. See also @ref signalSendMessage()

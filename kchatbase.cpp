@@ -17,16 +17,18 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qapp.h>
+#include "kchatbase.h"
 
 #include <klineedit.h>
 #include <klocale.h>
 #include <kstddirs.h>
+#include <kconfig.h>
+#include <kapp.h>
 #include <kdebug.h>
 
-#include "kchatbase.h"
+#include <qlayout.h>
+#include <qcombobox.h>
+#include <qapp.h>
 
 class KChatBaseTextPrivate
 {
@@ -164,11 +166,13 @@ public:
 		mCombo = 0;
 
 		mAcceptMessage = true;
+		mMaxItems = -1;
 	}
 	QListBox* mBox;
 	KLineEdit* mEdit;
 	QComboBox* mCombo;
 	bool mAcceptMessage;
+	int mMaxItems;
 
 	QValueList<int> mIndex2Id;
 
@@ -186,6 +190,7 @@ KChatBase::KChatBase(QWidget* parent, bool noComboBox) : QFrame(parent)
 KChatBase::~KChatBase()
 {
 // kdDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
+ saveConfig();
  delete d;
 }
 
@@ -228,6 +233,9 @@ void KChatBase::init(bool noComboBox)
  }
 
  d->mAcceptMessage = true; // by default
+ setMaxItems(-1); // unlimited
+
+ readConfig();
 }
 
 bool KChatBase::acceptMessage() const
@@ -326,6 +334,9 @@ void KChatBase::addItem(const QListBoxItem* text)
  d->mBox->insertItem(text); 
  int index = d->mBox->count() -1;
  d->mBox->setBottomItem(index);//FIXME: don't scroll to bottom if user scrolled down manually
+ if (d->mBox->count() > maxItems()) {
+	d->mBox->removeItem(0);
+ }
 }
 
 void KChatBase::addMessage(const QString& fromName, const QString& text)
@@ -337,11 +348,6 @@ void KChatBase::addMessage(const QString& fromName, const QString& text)
 void KChatBase::addSystemMessage(const QString& fromName, const QString& text)
 {
  addItem(layoutSystemMessage(fromName, text));
- static int i = 0;
- i++;
- if (i == 4) {
- d->mNameFont.setBold(true);
- }
 }
 
 QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
@@ -452,6 +458,66 @@ const QFont& KChatBase::systemNameFont() const
 const QFont& KChatBase::systemMessageFont() const
 { return d->mSystemMessageFont; }
 
+void KChatBase::saveConfig(KConfig* conf)
+{
+ QString oldGroup;
+ if (!conf) {
+	conf = kapp->config();
+	oldGroup = conf->group();
+	conf->setGroup("KChatBase");
+ }
+
+ conf->writeEntry("NameFont", nameFont());
+ conf->writeEntry("MessageFont", messageFont());
+ conf->writeEntry("SystemNameFont", systemNameFont());
+ conf->writeEntry("SystemMessageFont", systemMessageFont());
+ conf->writeEntry("MaxMessages", maxItems());
+
+ if (oldGroup != QString::null) {
+	conf->setGroup(oldGroup);
+ }
+}
+
+void KChatBase::readConfig(KConfig* conf)
+{
+ QString oldGroup;
+ if (!conf) {
+	conf = kapp->config();
+	oldGroup = conf->group();
+	conf->setGroup("KChatBase");
+ }
+
+ setNameFont(conf->readFontEntry("NameFont"));
+ setMessageFont(conf->readFontEntry("MessageFont"));
+ setSystemNameFont(conf->readFontEntry("SystemNameFont"));
+ setSystemMessageFont(conf->readFontEntry("SystemMessageFont"));
+ setMaxItems(conf->readNumEntry("MaxMessages", -1));
+
+ if (oldGroup != QString::null) {
+	conf->setGroup(oldGroup);
+ }
+}
+
+void KChatBase::clear()
+{
+ d->mBox->clear();
+}
+
+void KChatBase::setMaxItems(int maxItems)
+{
+ d->mMaxItems = maxItems;
+ //TODO cut too many messages
+ if (maxItems == 0) {
+	clear();
+ } else if (maxItems > 0) {
+	while (d->mBox->count() > maxItems) {
+		d->mBox->removeItem(0);
+	}
+ }
+}
+
+int KChatBase::maxItems() const
+{ return d->mMaxItems; }
 
 
 #include "kchatbase.moc"
