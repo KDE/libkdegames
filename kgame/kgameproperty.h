@@ -57,7 +57,6 @@ public:
 		IdUser=256,
 
 		IdAutomatic=0x7000  // Id's from here on are automatically given (16bit)
-    
 	};
 
 	/**
@@ -831,7 +830,7 @@ public:
 
 private:
 	void init() { }
-		
+
 private:
 	type mData;
 };

@@ -427,7 +427,7 @@ protected slots:
       /**
        * Called by KGameProperty only! Internal function!
        **/
-      void sendProperty(QDataStream& stream, bool& sent);
+      void sendProperty(QDataStream& stream, bool* sent);
       /**
        * Called by KGameProperty only! Internal function!
        **/

@@ -124,7 +124,6 @@ bool KGamePropertyBase::sendProperty()
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
  }
- return true;
 }
 
 bool KGamePropertyBase::sendProperty(const QByteArray& data)
@@ -139,7 +138,6 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
  }
- return true;
 }
 
 bool KGamePropertyBase::lock()

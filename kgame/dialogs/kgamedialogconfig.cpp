@@ -97,16 +97,16 @@ public:
 	{
 		mInitConnection = 0;
 		mNetworkLabel = 0;
-    mDisconnectButton = 0;
+		mDisconnectButton = 0;
 		mConnect = 0;
-    mDefaultServer=true;
+		mDefaultServer=true;
 
 	}
 
 	// QPushButton* mInitConnection;
 	QHGroupBox* mInitConnection;
 	QLabel* mNetworkLabel;
-  QPushButton *mDisconnectButton;
+	QPushButton *mDisconnectButton;
 
 	bool mDefaultServer;
 	QString mDefaultHost;

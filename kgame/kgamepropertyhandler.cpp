@@ -91,7 +91,7 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
  setId(id); 
  if (receiver && sendf) {
 	kdDebug(11001) << "Connecting SLOT " << sendf << endl;
-	connect(this, SIGNAL(signalSendMessage(QDataStream &, bool&)), receiver, sendf);
+	connect(this, SIGNAL(signalSendMessage(QDataStream &, bool*)), receiver, sendf);
  }
  if (receiver && emitf) {
 	kdDebug(11001) << "Connecting SLOT " << emitf << endl;
@@ -277,7 +277,7 @@ void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
 bool KGamePropertyHandler::sendProperty(QDataStream &s)
 {
  bool sent = false;
- emit signalSendMessage(s, sent);
+ emit signalSendMessage(s, &sent);
  return sent;
 }
 

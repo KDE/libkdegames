@@ -9,3 +9,8 @@
 06.09.2001:  KGameIO::signalPrepareMove(..., bool&) ->
              KGameIO::signalPrepareMove(..., bool*): don't know why this was
              necessary but it didn't work anymore...
+16.09.2001:  KGamePropertyHandler uses bool* for the sent parameter now. This is
+             because QT3 obviously doesn't honor referneces in signals/slots.
+             This might even be a QT bug. Bad situation - we use references
+             everywhere in KGame... hope nothing else is affecterd by this
+             problem (signalPrepareMove was fixed already by me)
