@@ -48,8 +48,11 @@ public:
    int fields;
    int newName;
    int latest;
+   bool loaded;
    
-   QMap<Fields, int> col;
+   QMap<int, int> col;
+   QMap<int, QString> header;
+   QMap<int, QString> key;
    QString player;
 };
 
@@ -62,19 +65,44 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
     d->fields = fields;
     d->newName = -1;
     d->latest = -1;
+    d->loaded = false;
     
     d->scores.setAutoDelete(true);
-
+    d->header[Name] = i18n("Name");
+    d->key[Name] = "Name";
+    
+    d->header[Level] = i18n("Level");
+    d->key[Level] = "Level";
+    
+    d->header[Score] = i18n("Score");
+    d->key[Score] = "Score";
     d->page = makeMainWidget();
+}
+
+KScoreDialog::~KScoreDialog()
+{
+    delete d;
+}
+
+void KScoreDialog::addField(int field, const QString &header, const QString &key)
+{
+   d->fields |= field;
+   d->header[field] = header;
+   d->key[field] = key;
+}
+
+void KScoreDialog::aboutToShow()
+{
+    if (!d->loaded)
+       loadScores();
+
     int nrCols = 1;
-    if (fields & Name)
-       d->col[Name] = nrCols++;
-       
-    if (fields & Level)
-       d->col[Level] = nrCols++;
-       
-    if (fields & Score)
-       d->col[Score] = nrCols++;
+    
+    for(int field = 1; field < d->fields; field = field * 2)
+    {
+       if (d->fields & field)
+           d->col[field] = nrCols++;
+    }
        
     d->layout = new QGridLayout(d->page, 12, nrCols, marginHint() + 20, spacingHint());
     d->layout->addRowSpacing(1, 15);
@@ -89,48 +117,20 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
     d->layout->addWidget(label, 0, 0);
     label->setFont(bold);
 
-    if (fields & Name)
+    for(int field = 1; field < d->fields; field = field * 2)
     {
-       d->layout->addColSpacing(d->col[Name], 50);
+       if (d->fields & field)
+       {
+           d->layout->addColSpacing(d->col[field], 50);
 
-       label = new QLabel(i18n("Name"), d->page);
-       d->layout->addWidget(label, 0, d->col[Name]);
-       label->setFont(bold);
+           label = new QLabel(d->header[field], d->page);
+           d->layout->addWidget(label, 0, d->col[field], field <= Name ? AlignLeft : AlignRight);
+           label->setFont(bold);
+       }
     }
 
-    if (fields & Level)
-    {
-       d->layout->addColSpacing(d->col[Level], 50);
-
-       label = new QLabel(i18n("Level"), d->page);
-       d->layout->addWidget(label, 0, d->col[Level], AlignRight);
-       label->setFont(bold);
-    }
-
-    if (fields & Score)
-    {
-       d->layout->addColSpacing(d->col[Score], 50);
-
-       label = new QLabel(i18n("Score"), d->page);
-       d->layout->addWidget(label, 0, d->col[Score], AlignRight);
-       label->setFont(bold);
-    }
-    
     KSeparator *sep = new KSeparator(Horizontal, d->page);
     d->layout->addMultiCellWidget(sep, 1, 1, 0, nrCols-1);
-
-    loadScores();
-}
-
-KScoreDialog::~KScoreDialog()
-{
-    delete d;
-}
-
-void KScoreDialog::aboutToShow()
-{
-    QFont bold = font();
-    bold.setBold(true);
 
     QString num;
     for (int i = 1; i <= 10; ++i) {
@@ -163,17 +163,14 @@ void KScoreDialog::aboutToShow()
            }
            
         }
-        if (d->fields & Level)
+        for(int field = Name * 2; field < d->fields; field = field * 2)
         {
-	    label = new QLabel((*score)[Level], d->page);
-	    if (i == d->latest) label->setFont(bold);
-            d->layout->addWidget(label, i+1, d->col[Level], AlignRight);
-        }
-        if (d->fields & Score)
-        {
-            label = new QLabel((*score)[Score], d->page);
-            if (i == d->latest) label->setFont(bold);
-            d->layout->addWidget(label, i+1, d->col[Score], AlignRight);
+           if (d->fields & field)
+           {
+              label = new QLabel((*score)[field], d->page);
+              if (i == d->latest) label->setFont(bold);
+              d->layout->addWidget(label, i+1, d->col[field], AlignRight);
+           }
         }
     }
     incInitialSize(QSize(), true); // Fixed.
@@ -182,6 +179,7 @@ void KScoreDialog::aboutToShow()
 void KScoreDialog::loadScores()
 {
     QString key, value;
+    d->loaded = true;
     d->scores.clear();
     KConfigGroup config(kapp->config(), "High Score");
 
@@ -191,20 +189,13 @@ void KScoreDialog::loadScores()
     for (int i = 1; i <= 10; ++i) {
         num.setNum(i);
         FieldInfo *score = new FieldInfo();
-        if (d->fields & Level)
+        for(int field = 1; field < d->fields; field = field * 2)
         {
-           key = "Pos" + num + "Level";
-           (*score)[Level] = config.readEntry(key, "0");
-        }
-        if (d->fields & Score)
-        {
-           key = "Pos" + num + "Score";
-           (*score)[Score] = config.readEntry(key, "0");
-        }
-        if (d->fields & Name)
-        {
-           key = "Pos" + num + "Name";
-           (*score)[Name] = config.readEntry(key, i18n("Noname"));
+            if (d->fields & field)
+            {
+               key = "Pos" + num + d->key[field];
+               (*score)[field] = config.readEntry(key, "-");
+            }
         }
         d->scores.append(score);
     }
@@ -221,20 +212,13 @@ void KScoreDialog::saveScores()
     for (int i = 1; i <= 10; ++i) {
         num.setNum(i);
         FieldInfo *score = d->scores.at(i-1);
-        if (d->fields & Level)
+        for(int field = 1; field < d->fields; field = field * 2)
         {
-           key = "Pos" + num + "Level";
-           config.writeEntry(key, (*score)[Level]);
-        }
-        if (d->fields & Score)
-        {
-           key = "Pos" + num + "Score";
-           config.writeEntry(key, (*score)[Score]);
-        }
-        if (d->fields & Name)
-        {
-           key = "Pos" + num + "Name";
-           config.writeEntry(key, (*score)[Name]);
+            if (d->fields & field)
+            {
+                key = "Pos" + num + d->key[field];
+                config.writeEntry(key, (*score)[field]);
+            }
         }
     }
     kapp->config()->sync();
@@ -242,6 +226,8 @@ void KScoreDialog::saveScores()
 
 bool KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)
 {
+    if (!d->loaded)
+       loadScores();
     FieldInfo *score = d->scores.first();
     int i = 1;
     for(; score; score = d->scores.next(), i++)

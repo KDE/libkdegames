@@ -41,9 +41,17 @@ class KScoreDialog : public KDialogBase {
    Q_OBJECT
    
 public:
-   enum Fields { None = 0, Name = 1, Score = 2, Level = 4, Time = 8 };
+   enum Fields { Name = 1 << 0, 
+                 Level = 1 << 1, 
+                 
+                 Custom1 = 1 << 10,
+                 Custom2 = 1 << 11,
+                 Custom3 = 1 << 12,   	
+                 
+                 Time = 1 << 28, 
+                 Score = 1 << 29 };
         
-   typedef QMap<Fields, QString> FieldInfo;
+   typedef QMap<int, QString> FieldInfo;
 
    /**
     * @param fields Which fields should be listed.
@@ -51,6 +59,14 @@ public:
    KScoreDialog(int fields, QWidget *parent=0, const char *name=0);
 
    ~KScoreDialog();
+
+   /**
+    * Define an extra FieldInfo entry.
+    * @param field Id of this field
+    * @param header Header shown in the dialog for this field
+    * @param key used to store this field with.
+    */
+   void addField(int field, const QString &header, const QString &key); 
 
    /**
     * Adds a new score to the list.
