@@ -1,5 +1,5 @@
 
-CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
+AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
 
 lib_LTLIBRARIES = libkdegames.la
 libkdegames_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -no-undefined -version-info 1:1

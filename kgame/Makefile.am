@@ -1,5 +1,5 @@
 
-CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
+AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
 
 noinst_LTLIBRARIES = libkgame.la
 

@@ -1,5 +1,5 @@
 
-CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
+AM_CPPFLAGS = -DSRCDIR="\"$(shell (cd $(srcdir) && pwd))\""
 
 noinst_LTLIBRARIES = libkgamedialogs.la
 
@@ -13,8 +13,6 @@ libkgamedialogsinclude_HEADERS = kgamedialog.h kgameconnectdialog.h kgameerrordi
 
 INCLUDES = -I$(top_srcdir)/libkdegames -I$(top_srcdir)/libkdegames/kgame $(all_includes)
 METASOURCES = AUTO
-
-SUBDIRS =
 
 messages:
 #	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
