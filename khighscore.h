@@ -116,7 +116,8 @@ public:
 	 * Reads a list of entries from the highscore table starting at 1 until
 	 * lastEntry. If an entry between those numbers doesn't exist the
 	 * function aborts reading even if after the missing entry is an
-	 * existing one.
+	 * existing one. The first entry of the list is the first placing, the
+	 * last on is the last placing.
 	 * @return A list of the entries of this key. You could also calls
 	 * @readEntry(i, key) where i is from 1 to 20. Note that this function
 	 * depends on "1" as the first entry!
@@ -125,7 +126,8 @@ public:
 	 * are prefixed with the entry number
 	 * @param lastEntry the last entry which will be includes into the list.
 	 * 1 will include a list with maximal 1 entry - 20 a list with maximal
-	 * 20 entries.
+	 * 20 entries. If lastEntry is <= 0 then rading is only stopped when when an
+	 * entry does not exist.
 	 **/
 	QStringList readList(const QString& key, int lastEntry = 20) const;
 

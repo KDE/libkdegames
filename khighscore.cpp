@@ -128,22 +128,16 @@ bool KHighscore::hasEntry(int entry, const QString& key) const
 QStringList KHighscore::readList(const QString& key, int lastEntry) const
 {
  QStringList list;
- for (int i = 1; i <= lastEntry; i++) {
-	QString e = readEntry(i, key);
-	if (e != QString::null) {
-		list.append(e);
-	} else {
-		// abort reading
-		i = lastEntry + 1;
-	}
+ for (int i = 1; hasEntry(i, key) && ((lastEntry > 0) ? (i <= lastEntry) : true); i++) {
+	list.append(readEntry(i, key));
  }
  return list;
 }
 
 void KHighscore::writeList(const QString& key, const QStringList& list)
 {
- for (int unsigned i = 0; i < list.count(); i++) {
-	writeEntry(i + 1, key, list[i]);
+ for (int unsigned i = 1; i <= list.count(); i++) {
+	writeEntry(i, key, list[i - 1]);
  }
 }
 
