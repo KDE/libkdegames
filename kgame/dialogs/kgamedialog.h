@@ -120,7 +120,7 @@ public:
 			QWidget* parent, bool modal = false, 
 			long initConfigs = AllConfig, int chatMsgId = 15432);
 
-	~KGameDialog();
+	virtual ~KGameDialog();
 
 
 	/**

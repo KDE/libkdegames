@@ -31,7 +31,7 @@ class KGameConnectWidget : public QWidget
 	Q_OBJECT
 public:
 	KGameConnectWidget(QWidget* parent);
-	~KGameConnectWidget();
+	virtual ~KGameConnectWidget();
 
 	/**
 	 * @param host The host to connect to by default
@@ -87,7 +87,7 @@ class KGameConnectDialog : public KDialogBase
 	Q_OBJECT
 public:
 	KGameConnectDialog(QWidget* parent = 0,int buttonmask=Ok|Cancel);
-	~KGameConnectDialog();
+	virtual ~KGameConnectDialog();
 	
 	/**
 	 * Shows a dialog to either connect to an existing game or to create a

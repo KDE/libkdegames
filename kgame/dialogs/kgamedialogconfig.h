@@ -53,7 +53,7 @@ class KGameDialogConfig : public QWidget
 	Q_OBJECT
 public:
 	KGameDialogConfig(QWidget* parent = 0);
-	~KGameDialogConfig();
+	virtual ~KGameDialogConfig();
 
 	/**
 	 * Called by @ref KGameDialog to submit all settings to the KGame
@@ -63,10 +63,6 @@ public:
 	 * @param p A pointer to the player owning this dialog
 	 **/
 	virtual void submitToKGame(KGame* g, KPlayer* p) = 0;
-/*	virtual void submitToKGame(KGame* g, KPlayer* p) 
-  {
-    kdError(11001) << "submitToKGame pure virtual call ...BAD " << endl;
-  }*/
 
 	/**
 	 * The owner player of the dialog has been changed. The default
@@ -143,7 +139,7 @@ class KGameDialogNetworkConfig : public KGameDialogConfig
 	Q_OBJECT
 public:
 	KGameDialogNetworkConfig(QWidget* parent = 0);
-	~KGameDialogNetworkConfig();
+	virtual ~KGameDialogNetworkConfig();
 
 
 	void disableInitConnection();
@@ -192,7 +188,7 @@ class KGameDialogGeneralConfig : public KGameDialogConfig
 	Q_OBJECT
 public:
 	KGameDialogGeneralConfig(QWidget* parent = 0);
-	~KGameDialogGeneralConfig();
+	virtual ~KGameDialogGeneralConfig();
 
 	/**
 	 * Called by @ref KGameDialog to submit all settings to the KGame
@@ -247,7 +243,7 @@ class KGameDialogMsgServerConfig : public KGameDialogConfig
 	Q_OBJECT
 public:
 	KGameDialogMsgServerConfig(QWidget* parent = 0);
-	~KGameDialogMsgServerConfig();
+	virtual ~KGameDialogMsgServerConfig();
 
 	virtual void submitToKGame(KGame*, KPlayer*) {}
 
@@ -278,7 +274,7 @@ class KGameDialogChatConfig : public KGameDialogConfig
 	Q_OBJECT
 public:
 	KGameDialogChatConfig(int chatMsgId, QWidget* parent = 0);
-	~KGameDialogChatConfig();
+	virtual ~KGameDialogChatConfig();
 
 	virtual void setKGame(KGame*);
 	virtual void setOwner(KPlayer*);
@@ -295,7 +291,7 @@ class KGameDialogConnectionConfig : public KGameDialogConfig
 	Q_OBJECT
 public:
 	KGameDialogConnectionConfig(QWidget* parent = 0);
-	~KGameDialogConnectionConfig();
+	virtual ~KGameDialogConnectionConfig();
 
 	virtual void setKGame(KGame*);
 	virtual void setOwner(KPlayer*);
