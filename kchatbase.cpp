@@ -26,6 +26,7 @@
 
 #include <klineedit.h>
 #include <klocale.h>
+#include <kstddirs.h>
 #include <kdebug.h>
 
 #include "kchatbase.h"
@@ -198,8 +199,16 @@ void KChatBase::addMessage(const QString& fromName, const QString& text)
 
 QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
 {
-//TODO
- QListBoxText* message = new QListBoxText(i18n("%1: %2").arg(fromName).arg(text));
+ QListBoxItem* message;
+ if (text.startsWith("/me ")) {
+	// replace "/me" by a nice star. leave one space after the star
+	QPixmap pix;
+	pix.load(locate("data", QString::fromLatin1("kdegames/pics/star.png")));
+	message = (QListBoxItem*)new QListBoxPixmap(pix, text.mid(3));
+ } else {
+	// not edited in any way. just return a text item
+	message = (QListBoxItem*)new QListBoxText(i18n("%1: %2").arg(fromName).arg(text));
+ }
  return message;
 }
 
