@@ -95,7 +95,11 @@ public:
     Q_UINT32 gameId() const;
 
     /**
-     * Inits a network game as network MASTER
+     * Inits a network game as network MASTER. Note that if the @ref
+     * KMessageServer is not yet started it will be started here (see @ref
+     * setMaster). Any existing connection will be disconnected.
+     *
+     * If you already offer connections the port is changed.
      *
      * @param The port on which the service is offered
      * @return true if it worked

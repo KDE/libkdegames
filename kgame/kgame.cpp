@@ -97,7 +97,6 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
  d->mGameStatus.initData(Init);
  d->mUniquePlayerNumber = 0;
- d->mCookie=cookie;
  d->mRandom = new KRandomSequence;
  d->mRandom->setSeed(0);
 
@@ -403,11 +402,6 @@ bool KGame::systemActivatePlayer(KPlayer* player)
 }
 
 // -------------------- Properties ---------------------------
-int KGame::cookie() const
-{
- return d->mCookie;
-}
-
 void KGame::setGameId(int id)
 {
  kdError (11001) << "KGame::setGameID " << id << ": Is broken at the moment!" << endl;

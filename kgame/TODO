@@ -38,8 +38,5 @@
 - 21.06.2001: KPlayerPropertyArray does not yet support at() and operator[]
               assignments. Need to check whether the method from QBitArray
               can be applied
-- 11.07.2001: there is KGame::cookie() and KGameNetwork::cookie() - one is
-              probably obsolete
 - 11.07.2001: go through the entire API documentation and change/delete what is
               obsolete.
-- 14.07.2001: KGameProperty API docs need a complete cleanup

@@ -52,10 +52,10 @@ public:
 };
 
 // ------------------- NETWORK GAME ------------------------
-KGameNetwork::KGameNetwork(int cookie,QObject* parent) : QObject(parent, 0)
+KGameNetwork::KGameNetwork(int c,QObject* parent) : QObject(parent, 0)
 {
  d = new KGameNetworkPrivate;
- d->mCookie = (Q_INT16)cookie;
+ d->mCookie = (Q_INT16)c;
 
  // Init the game as a local game, i.e.
  // create your own KMessageServer and a KMessageClient connected to it.
@@ -72,7 +72,7 @@ KGameNetwork::KGameNetwork(int cookie,QObject* parent) : QObject(parent, 0)
  connect (d->mMessageClient, SIGNAL(eventClientDisconnected(Q_UINT32, bool)),
           this, SIGNAL(signalClientDisconnected(Q_UINT32, bool)));
 
- kdDebug(11001) << "CREATE(KGameNetwork=" << this <<") cookie=" << d->mCookie << " sizeof(this)="<<sizeof(KGameNetwork) << endl;
+ kdDebug(11001) << "CREATE(KGameNetwork=" << this <<") cookie=" << cookie() << " sizeof(this)="<<sizeof(KGameNetwork) << endl;
 }
 
 KGameNetwork::~KGameNetwork()
@@ -105,7 +105,7 @@ KMessageServer* KGameNetwork::messageServer() const
 void KGameNetwork::setMaster()
 {
  if (!d->mMessageServer) {
-	d->mMessageServer = new KMessageServer (d->mCookie, this);
+	d->mMessageServer = new KMessageServer (cookie(), this);
  } else {
 	kdWarning(11001) << "KGameNetwork::setMaster(): Server already running!!" << endl;
  }
@@ -118,17 +118,10 @@ void KGameNetwork::setMaster()
  d->mMessageClient->setServer (d->mMessageServer);
 }
 
-bool KGameNetwork::offerConnections (Q_UINT16 port)
+bool KGameNetwork::offerConnections(Q_UINT16 port)
 {
- if (!d->mMessageServer) {
-   // When we are connected to a server in another process, we stop the network game here.
-   // FIXME: Probably there is more to do here! (Stop a running game, etc.)
-   kdWarning (11001) << "KGameNetwork::offerConnections: We are connected to another client!" << endl
-                     << "        We close that connection and create our own server here!" << endl;
-
-   // Create our own server again and connect to it.
-   d->mMessageServer = new KMessageServer (d->mCookie, this);
-   d->mMessageClient->setServer (d->mMessageServer);
+ if (!isMaster()) {
+	setMaster();
  }
 
  // FIXME: This debug message can be removed when the program is working correct.
@@ -140,9 +133,9 @@ bool KGameNetwork::offerConnections (Q_UINT16 port)
    kdError (11001) << "KGameNetwork::offerConnections: Unable to bind to port " << port << "!" << endl;
    delete d->mMessageServer;
    d->mMessageServer = 0;
+   d->mMessageClient->setServer((KMessageServer*)0);
    return false;
  }
-
  return true;
 }
 
