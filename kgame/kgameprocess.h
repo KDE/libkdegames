@@ -60,8 +60,17 @@ class KGameProcess:  public QObject
      * message is received and perform the calculations there!
      * Example:
      * <pre>
-     *  KGameProcess proc;
-     *  return proc.exec();
+     *  int main(int argc ,char * argv[])
+     *  {
+     *    KGameProcess proc;
+     *    connect(&proc,SIGNAL(signalCommand(QDataStream &,int ,int ,int )),
+     *                    this,SLOT(slotCommand(QDataStream & ,int ,int ,int )));
+     *    connect(&proc,SIGNAL(signalInit(QDataStream &,int)),
+     *                    this,SLOT(slotInit(QDataStream & ,int )));
+     *    connect(&proc,SIGNAL(signalTurn(QDataStream &,bool )),
+     *                    this,SLOT(slotTurn(QDataStream & ,bool )));
+     *    return proc.exec(argc,argv);
+     *  }
      *  </pre>
      */
     KGameProcess();
@@ -98,7 +107,17 @@ class KGameProcess:  public QObject
     /**
      * Sends a system message to the corresonding KGameIO device.
      * This will normally be either a perfomred move or a query
-     * (IdProcessQuery)
+     * (IdProcessQuery). The query option is a way to communicate
+     * with the KGameIO at the other side and e.g. retrieve some
+     * game relevant data from here.
+     * Exmaple for a query:
+     * <pre>
+     *  QByteArray buffer;
+     *  QDataStream out(buffer,IO_WriteOnly);
+     *  int msgid=KGameMessage::IdProcessQuery;
+     *  out << (int)1;
+     *  proc.sendSystemMessage(out,msgid,0);
+     * </pre>
      *
      * @param the QDataStream containing the message
      * @param msgid - the message id for the message
@@ -107,7 +126,10 @@ class KGameProcess:  public QObject
     void sendSystemMessage(QDataStream &stream,int msgid,int receiver=0);
     /**
      * Returns a pointer to a KRandomSequence. You can generate
-     * random numbers via e.g. random->getLong(100);
+     * random numbers via e.g.
+     * <pre>
+     *   random()->getLong(100);
+     * </pre>
      * 
      * @return @ref KRandomSequence pointer
      */
@@ -121,6 +143,10 @@ class KGameProcess:  public QObject
     void processArgs(int argc, char *argv[]);
 
   protected slots:
+    /**
+     * A message is received via the interprocess connection. The
+     * appropriate signals are called.
+     */
       void receivedMessage(const QByteArray& receiveBuffer);
 
   signals:
@@ -155,6 +181,29 @@ class KGameProcess:  public QObject
       * Additonal data which have been written into the stream from the
       * ProcessIO's signal signalPrepareTurn can be retrieved from the
       * stream here.
+      * Example:
+      * <pre>
+      * void slotTurn(QDataStream &in,bool turn)
+      * {
+      *   int id;
+      *   int recv;
+      *   QByteArray buffer;
+      *   QDataStream out(buffer,IO_WriteOnly);
+      *   if (turn)
+      *   {
+      *     // Create a move - the format is yours to decide
+      *     // It arrives exactly as this in the kgame inputMove function!!
+      *     Q_INT8 x1,y1,pl;
+      *     pl=-1;
+      *     x1=proc.random()->getLong(8);
+      *     y1=proc.random()->getLong(8);
+      *     // Stream it
+      *     out << pl << x1 << y1;
+      *     id=KGameMessage::IdPlayerInput;
+      *     proc.sendSystemMessage(out,id,0);
+      *   }
+      * }
+      * </pre>
       *
       * @param The datastream which contains user data 
       * @param True or false whether the turn is activated or deactivated
@@ -166,6 +215,8 @@ class KGameProcess:  public QObject
       * to a KPlayer. Initial initialisation can be performed here be reacting
       * to the KProcessIO signal signalIOAdded and retrieving the data here
       * from the stream. 
+      * It works just as the @signalTurn but is only send when the player is
+      * added to the game, i.e. it needs some initialization data
       *
       * @param The datastream which contains user data 
       * @param The userId of the player. (Careful to rely on it yet)

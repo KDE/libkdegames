@@ -41,6 +41,9 @@ class KProcess;
  *  device you need not distinguish the actual IO in the game
  *  anymore. All work is done by the IO's. This allows very
  *  easy reuse in other games as well.
+ *  A further advantage of using the IO's is that you can exchange
+ *  the control of a player at runtime. E.g. you switch a player
+ *  to be controlled by the computer or vice versa.
  */
 class KGameIO : public QObject
 {
@@ -132,6 +135,17 @@ signals:
      * doesn't react immediately. But you can still use this e.g. to notify the
      * player about the turn change. 
      *
+     * Example:
+     * <pre>
+     *  void GameWindow::slotPrepareTurn(QDataStream &stream,bool b,KGameIO *input,bool & )
+     *  {
+     *    KPlayer *player=input->player();
+     *    if (!player->myTurn()) return ;
+     *    if (!b) return ;        // only do something on setTurn(true)
+     *    stream << 1 << 2 << 3;  // Some data for the process
+     *  }
+     * </pre>
+     *
      * @param io the KGameIO object itself
      * @param stream the stream into which the move will be written
      * @param turn the argument of setTurn
@@ -159,6 +173,13 @@ public:
      * inputs of the given widgets are passed through a signal
      * handler @ref #signalKeyEvent and can be used to generate
      * a valid move for the player.
+     * Example:
+     * <pre>
+     * KGameKeyIO *input;
+     *  input=new KGameKeyIO(myWidget);
+     *  connect(input,SIGNAL(signalKeyEvent(KGameIO *,QDataStream &,QKeyEvent *,bool &)),
+     *          this,SLOT(slotKeyInput(KGameIO *,QDataStream &,QKeyEvent *,bool &)));
+     * </pre>
      *
      * @param parent The parents widget whose keyboard events * should be grabbed
      */
@@ -211,6 +232,13 @@ public:
      * Creates a mouse IO device. It captures all mouse
      * event of the given widget and forwards them to the
      * signal handler @ref #signalMouseEvent.
+     * Example:
+     * <pre>
+     * KGameMouseIO *input;
+     * input=new KGameMouseIO(mView);
+     * connect(input,SIGNAL(signalMouseEvent(KGameIO *,QDataStream &,QMouseEvent *,bool &)),
+     *        this,SLOT(slotMouseInput(KGameIO *,QDataStream &,QMouseEvent *,bool &)));
+     * </pre>
      *
      * @param parent the parent widget whose events shoudl be captured
      * @param trackmouse enables mouse tracking (gives mouse move events)
@@ -273,6 +301,15 @@ public:
     /** 
      * Creates a computer player via a separate process. The process
      * name is given as fully qualified filename. 
+     * Example:
+     * <pre>
+     * KGameProcessIO *input;
+     *   input=new KGameProcessIO(executable_file);
+     *  connect(input,SIGNAL(signalPrepareTurn(QDataStream &,bool,KGameIO *,bool &)),
+     *          this,SLOT(slotPrepareTurn(QDataStream &,bool,KGameIO *,bool &)));
+     *  connect(input,SIGNAL(signalProcessQuery(QDataStream &,KGameProcessIO *)),
+     *          this,SLOT(slotProcessQuery(QDataStream &,KGameProcessIO *)));
+     * </pre>
      *
      * @param name the filename of the process to start
      */
@@ -350,6 +387,21 @@ signals:
    * Racting to this message allows you to 'answer' questions
    * of the process, e.g. sending addition data which the process
    * needs to calculate a move.
+   *
+   * Example:
+   * <pre>
+   *  void GameWindow::slotProcessQuery(QDataStream &stream,KGameProcessIO *reply)
+   *  {
+   *    int no;
+   *    stream >> no;  // We assume the process sends us an integer question numner
+   *    if (no==1)     // but YOU have to do this in the process player
+   *    {
+   *      QByteArray buffer;
+   *      QDataStream out(buffer,IO_WriteOnly);
+   *      reply->sendSystemMessage(out,4242,0,0);  // lets reply something...
+   *    }
+   *  }
+   * </pre>
    */
   void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
 
