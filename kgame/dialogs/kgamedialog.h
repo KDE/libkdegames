@@ -80,7 +80,7 @@ public:
 	{
 		NoConfig=0,
 		ChatConfig=1,
-		PlayerConfig=2,
+		GameConfig=2,
 		NetworkConfig=4,
 		ClientConfig=8,
 		AdminConfig=16,

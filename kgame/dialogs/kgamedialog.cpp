@@ -99,10 +99,10 @@ void KGameDialog::initDefaultDialog(ConfigOptions initConfigs,
 {
  if (conf) {
 	addGameConfig(conf);
- } else if (initConfigs& (ChatConfig|PlayerConfig) ) {
+ } else if (initConfigs& (ChatConfig|GameConfig) ) {
 	KGameDialogGeneralConfig* c=new KGameDialogGeneralConfig(0);
 	addGameConfig(c);
-	if (! (initConfigs&PlayerConfig) ) {
+	if (! (initConfigs&GameConfig) ) {
 		c->setEnabled(false);
 	}
  }
@@ -212,7 +212,7 @@ QVBox *KGameDialog::configPage(ConfigOptions which)
 	case NetworkConfig:
 		box = d->mNetworkPage;
 		break;
-	case PlayerConfig:
+	case GameConfig:
 		box = d->mGamePage;
 		break;
 	case AdminConfig:
