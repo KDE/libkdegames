@@ -54,6 +54,10 @@ public:
 		IdMaxPlayer=7,
 		IdMinPlayer=8,
 
+    // Input Grabbing
+    IdGrabInput=16,
+    IdReleaseInput=17,
+
 		IdCommand, // Reserved for internal use
 		IdUser=256,
 
