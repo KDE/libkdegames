@@ -46,7 +46,7 @@ version.
   restrictive
 MsgId specifies the kind of the message data (see below).
 SenderId is the id of the KGame/KPlayer object which sent the message, it is
-coded like this: the lower 10 bits specifiy a player and the upper bit
+coded like this: the lower 10 bits specify a player and the upper bit
 represent the game id shifted by 10 bits. So we get
 Id=playerId | (gameId<<10);
 ReceiverId is the id of the receiver of the message. It can be either

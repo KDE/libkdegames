@@ -1,7 +1,7 @@
 06.09.2001:  replace the signal signalCreatePlayer by the virtual function
              createPlayer. It has the same arguments but the return value
              is the new player
-06.09.2001:  the KGameConfig dialog changes the paramter initConfigs from bool
+06.09.2001:  the KGameConfig dialog changes the parameter initConfigs from bool
              to long. Use the ConfigOptions to specify what options you want
              to have enabled. Default is all
 06.09.2001:  some int->Q_UINT32 in sender, receiver and player parameters. maybe
