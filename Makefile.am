@@ -7,9 +7,6 @@ libkdegames_la_LIBADD  = $(top_builddir)/libkdegames/kgame/libkgame.la \
 		$(top_builddir)/libkdegames/kgame/dialogs/libkgamedialogs.la \
 		$(LIB_KSYCOCA)
 
-picsdir = $(kde_datadir)/kdegames/pics
-pics_DATA = star.png
-
 libkdegames_la_SOURCES = kcarddialog.cpp kstdgameaction.cpp \
 		kgamemisc.cpp khighscore.cpp kchatbase.cpp kchat.cpp \
 		kchatdialog.cpp
@@ -19,8 +16,7 @@ include_HEADERS = kgamemisc.h kcarddialog.h kstdgameaction.h \
 INCLUDES = $(all_includes)
 METASOURCES = AUTO
 
-SUBDIRS = carddecks kgame
+SUBDIRS = carddecks kgame pics
 
 messages:
 #	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
-
