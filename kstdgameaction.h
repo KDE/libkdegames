@@ -33,7 +33,7 @@ class QObject;
  *
  * Games often use different menu entries than other programs, e.g. games use
  * the menu "game" instead of "file". This class provides the entries which
- * differ from the usual @ref KSdtAction entries.
+ * differ from the usual @ref KStdAction entries.
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
