@@ -40,8 +40,8 @@
 #include "kgame.h"
 #include "kgamemessage.h"
 #include "kmessageio.h"
-#include "kmessageclient.h"
-#include "kmessageserver.h"
+//#include "kmessageclient.h"
+//#include "kmessageserver.h"
 
 #define READ_BUFFER_SIZE  1024
 
@@ -55,10 +55,12 @@ KGameProcess::KGameProcess() : QObject(0,0)
   rFile.open(IO_ReadOnly|IO_Raw,stdin);
   wFile.open(IO_WriteOnly|IO_Raw,stdout);
   mMessageIO=new KMessageFilePipe(this,&rFile,&wFile);
-  mMessageClient=new KMessageClient(this);
-  mMessageClient->setServer(mMessageIO);
-  connect (mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
-          this, SLOT(receivedMessage(const QByteArray&, Q_UINT32)));
+//  mMessageClient=new KMessageClient(this);
+//  mMessageClient->setServer(mMessageIO);
+//  connect (mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
+//          this, SLOT(receivedMessage(const QByteArray&, Q_UINT32)));
+  connect (mMessageIO, SIGNAL(received(const QByteArray&)),
+          this, SLOT(receivedMessage(const QByteArray&)));
   fprintf(stderr,"KGameProcess::construtcor %p %p\n",&rFile,&wFile);
  
   mRandom = new KRandomSequence;
@@ -67,9 +69,9 @@ KGameProcess::KGameProcess() : QObject(0,0)
 KGameProcess::~KGameProcess() 
 {
   delete mRandom;
-  delete mMessageClient;
-  delete mMessageServer;
-  // TODO: do we need to delete the KMessageIO ?
+  //delete mMessageClient;
+  //delete mMessageServer;
+  delete mMessageIO;
   rFile.close();
   wFile.close();
   fprintf(stderr,"KGameProcess::destructor\n");
@@ -106,7 +108,8 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,int receiver)
   //if (mMessageClient) mMessageClient->sendBroadcast(a);
   // TODO: The fixed received 2 will cause problems. But how to address the
   // proper one?
-  if (mMessageClient) mMessageClient->sendForward(a,2);
+//  if (mMessageClient) mMessageClient->sendForward(a,2);
+  if (mMessageIO) mMessageIO->send(a);
 }
 
 void KGameProcess::sendMessage(QDataStream &stream,int msgid,int receiver)
@@ -131,7 +134,7 @@ void KGameProcess::processArgs(int argc, char *argv[])
   fflush(stderr);
 }
 
-void KGameProcess::receivedMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID)
+void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
 {
  QDataStream stream(receiveBuffer, IO_ReadOnly);
  int msgid;

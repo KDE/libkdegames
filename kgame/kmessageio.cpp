@@ -407,7 +407,8 @@ void KMessageFilePipe::send(const QByteArray &msg)
 void KMessageFilePipe::exec()
 {
 
-  while(mReadFile->atEnd()) { usleep(100); }
+  // According to BL: Blocking read is ok
+  // while(mReadFile->atEnd()) { usleep(100); }
 
    int ch=mReadFile->getch();
 

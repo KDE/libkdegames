@@ -282,7 +282,8 @@ public:
   protected:
     void sendAllMessages(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
   protected slots:
-    void clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv);
+    //void clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv);
+    void receivedMessage(const QByteArray& receiveBuffer);
 
   
 signals:

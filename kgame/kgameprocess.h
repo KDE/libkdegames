@@ -34,8 +34,8 @@
 
 //class KGameClientProcess;
 class KPlayer;
-class KMessageClient;
-class KMessageServer;
+//class KMessageClient;
+//class KMessageServer;
 class KMessageFilePipe;
 //class KRandomSequence;
 
@@ -107,7 +107,7 @@ class KGameProcess:  public QObject
     void processArgs(int argc, char *argv[]);
 
   protected slots:
-      void receivedMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID);
+      void receivedMessage(const QByteArray& receiveBuffer);
 
   signals:
     /**
@@ -158,8 +158,8 @@ class KGameProcess:  public QObject
   protected:
     bool mTerminate;
     KMessageFilePipe *mMessageIO;
-    KMessageClient *mMessageClient;
-    KMessageServer *mMessageServer;
+    //KMessageClient *mMessageClient;
+    //KMessageServer *mMessageServer;
   private:
     QFile rFile;
     QFile wFile;

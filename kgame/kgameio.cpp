@@ -43,8 +43,8 @@
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
-#include "kmessageserver.h"
-#include "kmessageclient.h"
+//#include "kmessageserver.h"
+//#include "kmessageclient.h"
 #include "kmessageio.h"
 
 
@@ -56,12 +56,12 @@ class KGameProcessIOPrivate
 public:
   KGameProcessIOPrivate()
   {
-    mMessageServer = 0;
-    mMessageClient = 0;
+    //mMessageServer = 0;
+    //mMessageClient = 0;
     mProcessIO=0;
   }
-  KMessageServer *mMessageServer;
-  KMessageClient *mMessageClient;
+  //KMessageServer *mMessageServer;
+  //KMessageClient *mMessageClient;
   KMessageProcess *mProcessIO;
 };
 
@@ -72,22 +72,24 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   kdDebug(11001) << "CREATE KGameProcessIO ("<<this<<") sizeof(this)="<<sizeof(KGameProcessIO)<<endl;
   d = new KGameProcessIOPrivate;
 
-  kdDebug(11001) << "================= KMEssageServer ==================== " << endl;
-  d->mMessageServer=new KMessageServer(0,this);
-  kdDebug(11001) << "================= KMEssageClient ==================== " << endl;
-  d->mMessageClient=new KMessageClient(this);
+  //kdDebug(11001) << "================= KMEssageServer ==================== " << endl;
+  //d->mMessageServer=new KMessageServer(0,this);
+  //kdDebug(11001) << "================= KMEssageClient ==================== " << endl;
+  //d->mMessageClient=new KMessageClient(this);
   kdDebug(11001) << "================= KMEssageProcessIO ==================== " << endl;
   d->mProcessIO=new KMessageProcess(this,name);
   kdDebug(11001) << "================= KMEssage Add client ==================== " << endl;
-  d->mMessageServer->addClient(d->mProcessIO);
-  kdDebug(11001) << "================= KMEssage SetSErver ==================== " << endl;
-  d->mMessageClient->setServer(d->mMessageServer);
+  //d->mMessageServer->addClient(d->mProcessIO);
+  //kdDebug(11001) << "================= KMEssage SetSErver ==================== " << endl;
+  //d->mMessageClient->setServer(d->mMessageServer);
   kdDebug(11001) << "================= KMEssage: Connect ==================== " << endl;
   //connect(d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
   //        this, SLOT(clientMessage(const QByteArray&, Q_UINT32)));
-  connect(d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)),
-          this, SLOT(clientMessage(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)));
-  kdDebug() << "Our client is id="<<d->mMessageClient->id() << endl;
+  //connect(d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)),
+  //        this, SLOT(clientMessage(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)));
+  connect(d->mProcessIO, SIGNAL(received(const QByteArray&)),
+          this, SLOT(receivedMessage(const QByteArray&)));
+  //kdDebug() << "Our client is id="<<d->mMessageClient->id() << endl;
 
 
 }
@@ -99,15 +101,10 @@ KGameProcessIO::~KGameProcessIO()
   kdDebug(11001) << "DESTRUCT (KGameProcessIO="<<this<<")"<<endl;
   kdDebug(11001) << "player="<<player() << endl;
   if (player()) player()->removeGameIO(this); 
-  if (d->mMessageServer) 
+  if (d->mProcessIO) 
   {
-    delete d->mMessageServer;
-    d->mMessageServer=0;
-  }
-  if (d->mMessageClient) 
-  {
-    delete d->mMessageClient;
-    d->mMessageClient=0;
+    delete d->mProcessIO;
+    d->mProcessIO=0;
   }
   delete d;
 }
@@ -176,10 +173,12 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, int receiver
   
   KGameMessage::createHeader(ostream,sender,receiver,msgid);
   ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
-  if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
+  //if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
+  if (d->mProcessIO) d->mProcessIO->send(buffer);
 }
 
-void KGameProcessIO::clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv)
+//void KGameProcessIO::clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv)
+void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 {
 	QDataStream stream(receiveBuffer,IO_ReadOnly);
 	int msgid; 
