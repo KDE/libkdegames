@@ -24,14 +24,10 @@
 #include <assert.h>
 
 #include <qgroupbox.h>
-#include <qpushbutton.h>
 #include <qlabel.h>
-#include <qdir.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qpixmap.h>
-#include <qmap.h>
 #include <qslider.h>
 #include <qwmatrix.h>
 
@@ -39,10 +35,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kiconview.h>
-#include <kimageio.h>
 #include <ksimpleconfig.h>
-#include <kconfig.h>
-#include <kdebug.h>
 
 #include "kcarddialog.h"
 

@@ -28,7 +28,6 @@
 
 #include <qlayout.h>
 #include <qcombobox.h>
-#include <qapplication.h>
 #include <qpainter.h>
 
 class KChatBaseTextPrivate
