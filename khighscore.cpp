@@ -30,7 +30,7 @@
 #include <kglobal.h>
 #include <kglobal.h>
 
-#include "khighscore.h"
+#include "khighscore.moc"
 #include "config.h" // HIGHSCORE_DIRECTORY is defined here (or not)
 
 #define GROUP "KHighscore"
