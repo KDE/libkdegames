@@ -29,6 +29,7 @@ this software.
 #include <qlineedit.h>
 #include <qwidgetstack.h>
 #include <qtimer.h>
+#include <qptrvector.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -44,11 +45,16 @@ public:
    QWidget *page;
    QGridLayout *layout;
    QLineEdit *edit;
-   QWidgetStack *stack;
+   QPtrVector<QWidgetStack> stack;
+   QPtrVector<QLabel> labels;
+   QLabel *commentLabel;
+   QString comment;
    int fields;
    int newName;
    int latest;
+   int nrCols;
    bool loaded;
+   QString configGroup;
    
    QMap<int, int> col;
    QMap<int, QString> header;
@@ -60,28 +66,41 @@ public:
 KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
         : KDialogBase(parent, oname, true, i18n("%1 High Scores").arg(kapp->caption()), Ok, Ok, true)
 {
-    d = new KScoreDialogPrivate();
-    d->edit = 0;
-    d->fields = fields;
-    d->newName = -1;
-    d->latest = -1;
-    d->loaded = false;
-    
-    d->scores.setAutoDelete(true);
-    d->header[Name] = i18n("Name");
-    d->key[Name] = "Name";
-    
-    d->header[Level] = i18n("Level");
-    d->key[Level] = "Level";
-    
-    d->header[Score] = i18n("Score");
-    d->key[Score] = "Score";
-    d->page = makeMainWidget();
+   d = new KScoreDialogPrivate();
+   d->edit = 0;
+   d->fields = fields;
+   d->newName = -1;
+   d->latest = -1;
+   d->loaded = false;
+   d->nrCols = 0;
+   d->configGroup = "High Score";
+   
+   d->scores.setAutoDelete(true);
+   d->header[Name] = i18n("Name");
+   d->key[Name] = "Name";
+   
+   d->header[Level] = i18n("Level");
+   d->key[Level] = "Level";
+   
+   d->header[Score] = i18n("Score");
+   d->key[Score] = "Score";
+   d->page = makeMainWidget();
 }
 
 KScoreDialog::~KScoreDialog()
 {
-    delete d;
+   delete d;
+}
+
+void KScoreDialog::setConfigGroup(const QString &group)
+{
+   d->configGroup = group;
+   d->loaded = false;
+}
+
+void KScoreDialog::setComment(const QString &comment)
+{
+   d->comment = comment;
 }
 
 void KScoreDialog::addField(int field, const QString &header, const QString &key)
@@ -91,194 +110,288 @@ void KScoreDialog::addField(int field, const QString &header, const QString &key
    d->key[field] = key;
 }
 
+void KScoreDialog::setupDialog()
+{
+   d->nrCols = 1;
+   
+   for(int field = 1; field < d->fields; field = field * 2)
+   {
+      if (d->fields & field)
+         d->col[field] = d->nrCols++;
+   }
+      
+   d->layout = new QGridLayout(d->page, 15, d->nrCols, marginHint() + 20, spacingHint());
+   d->layout->addRowSpacing(4, 15);
+
+   d->commentLabel = new QLabel(d->page);
+   d->commentLabel->setAlignment(AlignVCenter | AlignHCenter);
+   d->layout->addMultiCellWidget(d->commentLabel, 1, 1, 0, d->nrCols-1);
+
+   QFont bold = font();
+   bold.setBold(true);
+
+   QLabel *label;
+   d->layout->addColSpacing(0, 50);
+   label = new QLabel(i18n("Rank"), d->page);
+   d->layout->addWidget(label, 3, 0);
+   label->setFont(bold);
+
+   for(int field = 1; field < d->fields; field = field * 2)
+   {
+      if (d->fields & field)
+      {
+         d->layout->addColSpacing(d->col[field], 50);
+
+         label = new QLabel(d->header[field], d->page);
+         d->layout->addWidget(label, 3, d->col[field], field <= Name ? AlignLeft : AlignRight);
+         label->setFont(bold);
+      }
+   }
+
+   KSeparator *sep = new KSeparator(Horizontal, d->page);
+   d->layout->addMultiCellWidget(sep, 4, 4, 0, d->nrCols-1);
+
+   d->labels.resize(d->nrCols * 10);
+   d->stack.resize(10);
+
+   QString num;
+   for (int i = 1; i <= 10; ++i) {
+      QLabel *label;
+      num.setNum(i);
+      label = new QLabel("#"+num, d->page);
+      d->labels.insert((i-1)*d->nrCols + 0, label);
+      d->layout->addWidget(label, i+4, 0);
+      if (d->fields & Name)
+      {
+         QWidgetStack *stack = new QWidgetStack(d->page);
+         d->stack.insert(i-1, stack);
+         d->layout->addWidget(stack, i+4, d->col[Name]);
+         label = new QLabel(d->page);
+         d->labels.insert((i-1)*d->nrCols + d->col[Name], label);
+         stack->addWidget(label);
+         stack->raiseWidget(label);
+      }
+      for(int field = Name * 2; field < d->fields; field = field * 2)
+      {
+         if (d->fields & field)
+         {
+           label = new QLabel(d->page);
+           d->labels.insert((i-1)*d->nrCols + d->col[field], label);
+           d->layout->addWidget(label, i+4, d->col[field], AlignRight);
+         }
+      }
+   }
+}
+
 void KScoreDialog::aboutToShow()
 {
-    if (!d->loaded)
-       loadScores();
+   if (!d->loaded)
+      loadScores();
+      
+   if (!d->nrCols)
+      setupDialog();
 
-    int nrCols = 1;
-    
-    for(int field = 1; field < d->fields; field = field * 2)
-    {
-       if (d->fields & field)
-           d->col[field] = nrCols++;
-    }
-       
-    d->layout = new QGridLayout(d->page, 12, nrCols, marginHint() + 20, spacingHint());
-    d->layout->addRowSpacing(1, 15);
+   d->commentLabel->setText(d->comment);
+   if (d->comment.isEmpty())
+   {
+      d->commentLabel->setMinimumSize(QSize(1,1));
+      d->commentLabel->hide();    
+      d->layout->addRowSpacing(0, -15);
+      d->layout->addRowSpacing(2, -15);
+   } 
+   else
+   {
+      d->commentLabel->setMinimumSize(d->commentLabel->sizeHint());
+      d->commentLabel->show();
+      d->layout->addRowSpacing(0, -10);
+      d->layout->addRowSpacing(2, 10);
+   }
+   d->comment = QString::null;
 
-    QFont bold = font();
-    bold.setBold(true);
+   QFont normal = font();
+   QFont bold = normal;
+   bold.setBold(true);
 
-    QLabel *label;
+   QString num;
+   for (int i = 1; i <= 10; ++i) {
+      QLabel *label;
+      num.setNum(i);
+      FieldInfo *score = d->scores.at(i-1);
+      label = d->labels[(i-1)*d->nrCols + 0];
+      if (i == d->latest) 
+         label->setFont(bold);
+      else
+         label->setFont(normal);
 
-    d->layout->addColSpacing(0, 50);
-    label = new QLabel(i18n("Rank"), d->page);
-    d->layout->addWidget(label, 0, 0);
-    label->setFont(bold);
-
-    for(int field = 1; field < d->fields; field = field * 2)
-    {
-       if (d->fields & field)
-       {
-           d->layout->addColSpacing(d->col[field], 50);
-
-           label = new QLabel(d->header[field], d->page);
-           d->layout->addWidget(label, 0, d->col[field], field <= Name ? AlignLeft : AlignRight);
-           label->setFont(bold);
-       }
-    }
-
-    KSeparator *sep = new KSeparator(Horizontal, d->page);
-    d->layout->addMultiCellWidget(sep, 1, 1, 0, nrCols-1);
-
-    QString num;
-    for (int i = 1; i <= 10; ++i) {
-        QLabel *label;
-        num.setNum(i);
-        FieldInfo *score = d->scores.at(i-1);
-	label = new QLabel("#"+num, d->page);
-	if (i == d->latest) label->setFont(bold);
-        d->layout->addWidget(label, i+1, 0);
-        if (d->fields & Name)
-        {
-           if (d->newName == i)
-           {
-              d->stack = new QWidgetStack(d->page);
-              d->edit = new QLineEdit(d->player, d->stack);
-              d->edit->setMinimumWidth(40);
-              d->stack->addWidget(d->edit);
-              d->stack->raiseWidget(d->edit);
-              d->layout->addWidget(d->stack, i+1, d->col[Name]);
-              d->edit->setFocus();
-              connect(d->edit, SIGNAL(returnPressed()), 
-                      this, SLOT(slotGotReturn()));
-              enableButtonOK(false);
-           }
+      if (d->fields & Name)
+      {
+         if (d->newName == i)
+         {
+           QWidgetStack *stack = d->stack[i-1];
+           d->edit = new QLineEdit(d->player, stack);
+           d->edit->setMinimumWidth(40);
+           stack->addWidget(d->edit);
+           stack->raiseWidget(d->edit);
+           d->edit->setFocus();
+           connect(d->edit, SIGNAL(returnPressed()), 
+                 this, SLOT(slotGotReturn()));
+           enableButtonOK(false);
+         }
+         else
+         {
+           label = d->labels[(i-1)*d->nrCols + d->col[Name]];
+           if (i == d->latest) 
+             label->setFont(bold);
            else
-           {
-              label = new QLabel((*score)[Name], d->page);
-              if (i == d->latest) label->setFont(bold);
-              d->layout->addWidget(label, i+1, d->col[Name]);
-           }
-           
-        }
-        for(int field = Name * 2; field < d->fields; field = field * 2)
-        {
-           if (d->fields & field)
-           {
-              label = new QLabel((*score)[field], d->page);
-              if (i == d->latest) label->setFont(bold);
-              d->layout->addWidget(label, i+1, d->col[field], AlignRight);
-           }
-        }
-    }
-    incInitialSize(QSize(), true); // Fixed.
+             label->setFont(normal);
+           label->setText((*score)[Name]);
+         }
+         
+      }
+      for(int field = Name * 2; field < d->fields; field = field * 2)
+      {
+         if (d->fields & field)
+         {
+           label = d->labels[(i-1)*d->nrCols + d->col[field]];
+           if (i == d->latest) 
+             label->setFont(bold);
+           else
+             label->setFont(normal);
+           label->setText((*score)[field]);
+         }
+      }
+   }
+   d->latest = -1;
+   setFixedSize(minimumSizeHint());
 }
 
 void KScoreDialog::loadScores()
 {
-    QString key, value;
-    d->loaded = true;
-    d->scores.clear();
-    KConfigGroup config(kapp->config(), "High Score");
+   QString key, value;
+   d->loaded = true;
+   d->scores.clear();
+   KConfigGroup config(kapp->config(), d->configGroup.utf8());
 
-    d->player = config.readEntry("LastPlayer");
+   d->player = config.readEntry("LastPlayer");
 
-    QString num;
-    for (int i = 1; i <= 10; ++i) {
-        num.setNum(i);
-        FieldInfo *score = new FieldInfo();
-        for(int field = 1; field < d->fields; field = field * 2)
-        {
-            if (d->fields & field)
-            {
-               key = "Pos" + num + d->key[field];
-               (*score)[field] = config.readEntry(key, "-");
-            }
-        }
-        d->scores.append(score);
-    }
+   QString num;
+   for (int i = 1; i <= 10; ++i) {
+      num.setNum(i);
+      FieldInfo *score = new FieldInfo();
+      for(int field = 1; field < d->fields; field = field * 2)
+      {
+         if (d->fields & field)
+         {
+            key = "Pos" + num + d->key[field];
+            (*score)[field] = config.readEntry(key, "-");
+         }
+      }
+      d->scores.append(score);
+   }
 }
 
 void KScoreDialog::saveScores()
 {
-    QString key, value;
-    KConfigGroup config(kapp->config(), "High Score");
+   QString key, value;
+   KConfigGroup config(kapp->config(), d->configGroup.utf8());
 
-    config.writeEntry("LastPlayer", d->player);
+   config.writeEntry("LastPlayer", d->player);
 
-    QString num;
-    for (int i = 1; i <= 10; ++i) {
-        num.setNum(i);
-        FieldInfo *score = d->scores.at(i-1);
-        for(int field = 1; field < d->fields; field = field * 2)
-        {
-            if (d->fields & field)
-            {
-                key = "Pos" + num + d->key[field];
-                config.writeEntry(key, (*score)[field]);
-            }
-        }
-    }
-    kapp->config()->sync();
+   QString num;
+   for (int i = 1; i <= 10; ++i) {
+      num.setNum(i);
+      FieldInfo *score = d->scores.at(i-1);
+      for(int field = 1; field < d->fields; field = field * 2)
+      {
+         if (d->fields & field)
+         {
+            key = "Pos" + num + d->key[field];
+            config.writeEntry(key, (*score)[field]);
+         }
+      }
+   }
+   kapp->config()->sync();
 }
 
-bool KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)
+int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)
 {
-    if (!d->loaded)
-       loadScores();
-    FieldInfo *score = d->scores.first();
-    int i = 1;
-    for(; score; score = d->scores.next(), i++)
-    {
-       int num_score = (*score)[Score].toLong();
-       if (newScore > num_score)
-       {
-          score = new FieldInfo(newInfo);
-          (*score)[Score].setNum(newScore);
-          d->scores.insert(i-1, score);
-          d->scores.remove(10);
-          d->latest = i;
-          if (askName)
-             d->newName = i;
-          else
-             saveScores();
-          return true;
-       }
-    }
-    return false;
+   return addScore(newScore, newInfo, askName, false);
+}
+
+int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore)
+{
+   if (!d->loaded)
+      loadScores();
+   FieldInfo *score = d->scores.first();
+   int i = 1;
+   for(; score; score = d->scores.next(), i++)
+   {
+      bool ok;
+      int num_score = (*score)[Score].toLong(&ok);
+      if (lessIsMore && !ok)
+         num_score = 1 << 30;
+      if (((newScore > num_score) && !lessIsMore) ||
+          ((newScore < num_score) && lessIsMore))
+      {
+        score = new FieldInfo(newInfo);
+        (*score)[Score].setNum(newScore);
+        d->scores.insert(i-1, score);
+        d->scores.remove(10);
+        d->latest = i;
+        if (askName)
+          d->newName = i;
+        else
+          saveScores();
+        if (i == 1)
+          d->comment = i18n("Excellent!\nYou have a new high score!");
+        else
+          d->comment = i18n("Well done!\nYou made it in the high score list!");
+        return i;
+      }
+   }
+   return 0;
 }
 
 void KScoreDialog::show()
 {
-    aboutToShow();
-    KDialogBase::show();
+   aboutToShow();
+   KDialogBase::show();
 }
 
 void KScoreDialog::slotGotReturn()
 {
-    QTimer::singleShot(0, this, SLOT(slotGotName()));
+   QTimer::singleShot(0, this, SLOT(slotGotName()));
 }
 
 void KScoreDialog::slotGotName()
 {
-    if (d->newName == -1) return;
-    
-    d->player = d->edit->text();
-    
-    (*d->scores.at(d->newName-1))[Name] = d->player;
-    saveScores();
+   if (d->newName == -1) return;
+   
+   d->player = d->edit->text();
+   
+   (*d->scores.at(d->newName-1))[Name] = d->player;
+   saveScores();
 
-    QFont bold = font();
-    bold.setBold(true);
-    
-    QLabel *label = new QLabel(d->player, d->stack);
-    label->setFont(bold);
-    d->stack->addWidget(label);
-    d->stack->raiseWidget(label);
-    d->newName = -1;
-    enableButtonOK(true);
+   QFont bold = font();
+   bold.setBold(true);
+   
+   QLabel *label = d->labels[(d->newName-1)*d->nrCols + d->col[Name]];
+   label->setFont(bold);
+   label->setText(d->player);
+   d->stack[(d->newName-1)]->raiseWidget(label);
+   delete d->edit;
+   d->edit = 0;
+   d->newName = -1;
+   enableButtonOK(true);
 }
+
+int KScoreDialog::highScore()
+{
+   if (!d->loaded)
+      loadScores();
+
+   return (*d->scores.first())[Score].toInt();
+}
+
 
 #include "kscoredialog.moc"

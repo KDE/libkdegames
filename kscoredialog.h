@@ -61,6 +61,17 @@ public:
    ~KScoreDialog();
 
    /**
+    * @param group to use for reading/writing highscores from/to.
+    */
+   void setConfigGroup(const QString &group);
+
+   /**
+    * @param comment to add when showing high-scores.
+    * The comment is only used once.  
+    */
+   void setComment(const QString &comment);
+
+   /**
     * Define an extra FieldInfo entry.
     * @param field Id of this field
     * @param header Header shown in the dialog for this field
@@ -71,10 +82,21 @@ public:
    /**
     * Adds a new score to the list.
     *
-    * Returns true when the score was good enough to make it into
-    * the list.
+    * @param newScore the score of this game.
+    * @param newInfo additional info about the score.
+    * @param askName Whether to prompt for the players name.
+    * @param lessIsMore If true, the lowest score is the best score.
+    *
+    * @returns The highscore position if the score was good enough to 
+    * make it into the list (1 being topscore) or 0 otherwise.
     */   
-   bool addScore(int newScore, const FieldInfo &newInfo, bool askName=true);
+   int addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore);
+   int addScore(int newScore, const FieldInfo &newInfo, bool askName=true);
+
+   /**
+    * Returns the current best score.
+    */
+   int highScore();
 
    virtual void show();
 
@@ -88,6 +110,7 @@ private:
    void saveScores();
    
    void aboutToShow();
+   void setupDialog();
 
 private:           
    class KScoreDialogPrivate;
