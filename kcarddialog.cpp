@@ -18,12 +18,6 @@
     $Id$
 */
 
-/* TODO:
- *  - Check for tailing "/" in getDefaultXXX
- *  - check whether alternate dirs exists!
- *
- */
-
 #include <stdio.h>
 
 #include <qgroupbox.h>
@@ -45,7 +39,7 @@
 
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
 #define KCARD_DEFAULTCARD QString::fromLatin1("11.png")
-#define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards1/")
+#define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards-default/")
 
 int KCardDialog::getCardDeck(QString &mDeck, QString &mCarddir, QWidget *mParent,
                              CardFlags mFlags, bool* mRandomDeck, bool* mRandomCardDir)
@@ -141,14 +135,19 @@ void KCardDialog::setupDialog()
     layout->addWidget(grp1);
 
     deckIconView = new KIconView(grp1,"decks");
-    deckIconView->setGridX(-1);
     deckIconView->setSpacing(8);
+    /*
+    deckIconView->setGridX(-1);
     deckIconView->setGridY(50);
+    */
+    deckIconView->setGridX(82);
+    deckIconView->setGridY(106);
     deckIconView->setSelectionMode(QIconView::Single);
     deckIconView->setResizeMode(QIconView::Adjust);
     deckIconView->setMinimumWidth(360);
     deckIconView->setMinimumHeight(170);
     deckIconView->setWordWrapIconText(false);
+    deckIconView->showToolTips();
 
     // deck select
     QVBoxLayout* l = new QVBoxLayout(layout);
@@ -179,11 +178,17 @@ void KCardDialog::setupDialog()
     layout->addWidget(grp2);
 
     cardIconView =new KIconView(grp2,"cards");
+    /*
     cardIconView->setGridX(36);
     cardIconView->setGridY(50);
+    */
+    cardIconView->setGridX(82);
+    cardIconView->setGridY(106);
     cardIconView->setResizeMode(QIconView::Adjust);
     cardIconView->setMinimumWidth(360);
     cardIconView->setMinimumHeight(170);
+    cardIconView->setWordWrapIconText(false);
+    cardIconView->showToolTips();
 
     // Card select
     QVBoxLayout* l = new QVBoxLayout(layout);
