@@ -81,7 +81,7 @@ void KGameErrorDialog::slotServerConnectionLost()
  error(message, (QWidget*)parent());
 }
 
-void KGameErrorDialog::slotClientConnectionLost(Q_UINT32 id,bool)
+void KGameErrorDialog::slotClientConnectionLost(Q_UINT32 /*id*/,bool)
 {
 //TODO: add IP/port of the client
  QString message;

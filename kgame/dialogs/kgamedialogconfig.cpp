@@ -463,7 +463,7 @@ void KGameDialogMsgServerConfig::slotChangeAdmin()
  game()->electAdmin(newAdmin);
 }
 
-void KGameDialogMsgServerConfig::removeClient(Q_UINT32 id)
+void KGameDialogMsgServerConfig::removeClient(Q_UINT32 /*id*/)
 {
 //TODO
 }

@@ -269,7 +269,7 @@ public:
 	KGameDialogMsgServerConfig(QWidget* parent = 0);
 	virtual ~KGameDialogMsgServerConfig();
 
-	virtual void submitToKGame(KGame* g, KPlayer* p) {}
+	virtual void submitToKGame(KGame*, KPlayer*) {}
 
 	void setHasMsgServer(bool);
 
@@ -305,7 +305,7 @@ public:
 	virtual void setKGame(KGame* g);
 	virtual void setOwner(KPlayer* p);
 
-	virtual void submitToKGame(KGame* g, KPlayer* p) { }
+	virtual void submitToKGame(KGame*, KPlayer*) { }
 
 private:
 	KGameDialogChatConfigPrivate* d;
