@@ -1,0 +1,135 @@
+This document trie to describe the design of KGame - the KDE multiplayer
+library.
+This document has been written by Andreas Beckermann <b_mann@gmx.de> so you
+know who to blame for errors ;-)
+This document is published under the terms of the GNU FDL
+
+!!!
+Not that this is the initial version of this document and has not yet been
+aproved by all core developers (and is for from being complete)
+AB: please remove this comments as soon as all KGame hackers have read the
+document
+!!!
+
+
+0. Contents
+-----------
+
+1. DEFINITIONS
+1.1 Message Server
+1.2 Client or Message Client
+1.3 Master
+1.4 Admin
+1.5 Server
+1.6 Player
+
+
+---------------------------------------------------------------------
+1. DEFINITIONS
+--------------
+
+First we have to clear some words. The main expressions used in KGame which
+needs a definitions are
+
+1.1 Message Server
+1.2 Client or Message Client
+1.3 Master
+1.4 Admin
+1.5 Server
+1.6 Player
+
+The most important and confusing ones are Master, Admin and Server. We make
+quite big a differerence between those inside KGame.
+
+1.1 Message Server:
+-------------------
+A game has always exactly one object of this class, for local games as well as
+ for network games. For network games,
+this object can be on one of the users processes (usually inside KGame), or it
+ can also be on an
+independant computer, that has no idea about what game is played on it. A
+KMessageClient object can connect to it.
+It's main purpose is transmitting messages between KMessageClient objects.
+The Message Server is the main communication object. It is represented by the
+ class KMessageServer. Note that there is also a "Master" and a "Server" which
+ both differ heavily from the Message Server!
+
+1.2 Client, Message Client:
+---------------------------
+Each process that wants to take part in the game must have a
+KMessageClient object, that is connected to the Message Server. KGame creates
+this object and connects it to the Messager Server, so that you usually don't
+need to create these of your own. Even in a local game (no network) there
+must be a message server and one message client connected to it. Each message
+client has a unique ID number (a positive integer value, not zero).
+The KMessageClient object, which does the communication with the Message Server
+ is called "Message Client" and to simplify the use we call any KGame object (or
+ even the game process) that is connected to a game (i.e. even the Master) just
+ "Client"
+The main purpose of a Client is to connect to a Master (i.e. to a game) and to
+ communicate with it. A client has always a KGame object.
+
+1.3 Master:
+-----------
+The process that contains the Message Server is called "Master". In any local
+ game this is the game process. The Message Server is started by KGame using
+KGame::setMaster(true) which is automatically done on startup. The Message
+Server is deleted automatically as soon as you connect to another Master.
+So in most cases there is exactly one KGame object / Client which is Master. But
+in one case there can be no KGame object / Client that is Master - if the
+Message Server is started as an own process. This "Message-Server-only" process
+is called "Master" then, although there is no KGame object which is Master. See
+also the definition of Admin!
+
+1.4 Admin:
+----------
+One (and only one) of the Clients is the Admin. He can configure the Message
+Server and the game in general in several ways. He can limit the maximum number
+of connected message clients and can drop the connection to some other clients,
+as well as he can configure game specific ssettings (like max/min players, start
+money, ...). The Admin also initializes newly connected Clients. If the Admin
+himself disconnects, another Client becomes Admin (The Admin can himself elect
+some other Client to become Admin. He himself looses that Admin status then).
+An Admin is *alway* a KGame object. The Admin is usually the same as the Master,
+but if the Master is an own process (i.e. the Message Server has been started
+outside KGame) then Master and Admin differ. An Admin *must* be a KGame object
+while the Master doesn't have to be.
+
+1.5 Server:
+-----------
+The definition of Server differs quite much from the definition of Master.
+A Master just accepts connections and forwards messages. The Server on the other
+side checks these messages, calculates results and sends the results to the
+Clients. That means the Server does all game calculations and doesn't directly
+forward the messages from one Clients to all other Clients.
+KGamer makes it possible to write multiplayer games even without a Server. All
+Clients just send their moves to the Master which forwards them to all Clients.
+Now all Clients calculate the result.
+E.g. in a poker game a player selects two of five cards to be exchanges and
+clicks on "draw" then the client sends the message "Exchange Card-1 and Card-2"
+to the Master. A no-Server solution forwards this to all Clients, and these
+Clients exchange the cards of the player. Note that in a no-Server solution
+(you can also see it as a "every-Client-is-a-Server solution") all Clients must
+have the same random seed and must be of the same version, i.e. the result must
+be the same on all Clients.
+In a Server-Solution on the other hand the Master forwards the Message
+("Exchange Card-1 and Card-2") to the Server only. This Server now calculates
+the result, and sends the new cards back to the Client.
+Both concepts have advantages and disadvantages. It is on you - the game
+developer - to decide which way is better for you.
+E.g. the Server-Solution makes it easier for you to write games. The version
+must not necessarily be the same, you have one central computer which does the
+calcultations. The No-Server-Solution on the other hand decreases network
+traffik as the Clients just send their moves and all Clients can calculate the
+reactions. I'm sure there are a lot of advantages/disadvantages more for both
+concepts.
+
+1.6 Player:
+-----------
+A KPlayer object is always connected to a KGame object and represents a
+player that participates the game. In a network game, every KPlayer object is
+duplicated on every other KGame object connected to the message server with
+virtual KPlayer objects. So at every time in the game, every KGame object has
+the same number of KPlayer objects.
+
+
