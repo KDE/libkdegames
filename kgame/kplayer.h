@@ -23,7 +23,7 @@
 
 #include <qstring.h>
 #include <qobject.h>
-#include <qlist.h>
+#include <qptrlist.h>
 
 #include "kgameproperty.h"
 

@@ -24,7 +24,7 @@
 #define __KGAME_H_
 
 #include <qstring.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qvaluelist.h>
 
 #include "kgamenetwork.h"
