@@ -730,8 +730,8 @@ void KCardDialog::saveConfig(KConfig* conf)
  }
  if (! (flags() & NoCards)) {
 	conf->writePathEntry(CONF_CARDDIR, cardDir());
-	conf->writePathEntry(CONF_RANDOMCARDDIR, isRandomCardDir());
-	conf->writePathEntry(CONF_USEGLOBALCARDDIR, d->globalCardDir->isChecked());
+	conf->writeEntry(CONF_RANDOMCARDDIR, isRandomCardDir());
+	conf->writeEntry(CONF_USEGLOBALCARDDIR, d->globalCardDir->isChecked());
  }
  conf->writeEntry(CONF_SCALE, d->cScale);
 
@@ -755,7 +755,7 @@ void KCardDialog::slotSetGlobalCardDir()
  conf->setGroup(CONF_GLOBAL_GROUP);
  
  conf->writePathEntry(CONF_GLOBAL_CARDDIR, cardDir());
- conf->writePathEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
+ conf->writeEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
 
  delete conf;
 }
