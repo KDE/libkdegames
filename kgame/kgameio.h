@@ -135,7 +135,7 @@ signals:
      *
      * The datastream has to be filled with a move. If you set (or leave) the
      * send parameter to FALSE then nothing happens: the datastream will be
-     * ignored. If you set it to FALSE @ref sendInput is used to
+     * ignored. If you set it to TRUE @ref sendInput is used to
      * send the move.
      *
      * Often you want to ignore this signal (leave send=FALSE) and send the
@@ -145,7 +145,7 @@ signals:
      *
      * Example:
      * <pre>
-     *  void GameWindow::slotPrepareTurn(QDataStream &stream,bool b,KGameIO *input,bool & )
+     *  void GameWindow::slotPrepareTurn(QDataStream &stream,bool b,KGameIO *input,bool * )
      *  {
      *    KPlayer *player=input->player();
      *    if (!player->myTurn()) return ;
@@ -182,12 +182,17 @@ public:
      * inputs of the given widgets are passed through a signal
      * handler @ref #signalKeyEvent and can be used to generate
      * a valid move for the player.
+     * Note the widget you pass to the constructor must be
+     * the main window of your application, e.g. view->parentWidget()
+     * as QT does not forward your keyevents otherwise. This means
+     * that this might be a different widget comapred to the one you
+     * use for mouse inputs!
      * Example:
      * <pre>
      * KGameKeyIO *input;
      *  input=new KGameKeyIO(myWidget);
-     *  connect(input,SIGNAL(signalKeyEvent(KGameIO *,QDataStream &,QKeyEvent *,bool &)),
-     *          this,SLOT(slotKeyInput(KGameIO *,QDataStream &,QKeyEvent *,bool &)));
+     *  connect(input,SIGNAL(signalKeyEvent(KGameIO *,QDataStream &,QKeyEvent *,bool *)),
+     *          this,SLOT(slotKeyInput(KGameIO *,QDataStream &,QKeyEvent *,bool *)));
      * </pre>
      *
      * @param parent The parents widget whose keyboard events * should be grabbed
@@ -227,6 +232,9 @@ signals:
       void signalKeyEvent(KGameIO *,QDataStream &stream,QKeyEvent *m,bool *eatevent);
 
 protected:
+       /**
+       * Internal method to process the events
+       */
        bool eventFilter( QObject *o, QEvent *e );
 };
 
@@ -248,11 +256,11 @@ public:
      * <pre>
      * KGameMouseIO *input;
      * input=new KGameMouseIO(mView);
-     * connect(input,SIGNAL(signalMouseEvent(KGameIO *,QDataStream &,QMouseEvent *,bool &)),
-     *        this,SLOT(slotMouseInput(KGameIO *,QDataStream &,QMouseEvent *,bool &)));
+     * connect(input,SIGNAL(signalMouseEvent(KGameIO *,QDataStream &,QMouseEvent *,bool *)),
+     *        this,SLOT(slotMouseInput(KGameIO *,QDataStream &,QMouseEvent *,bool *)));
      * </pre>
      *
-     * @param parent the parent widget whose events shoudl be captured
+     * @param The widget whose events should be captured
      * @param trackmouse enables mouse tracking (gives mouse move events)
      */
     KGameMouseIO(QWidget *parent,bool trackmouse=false);
@@ -294,6 +302,9 @@ signals:
       void signalMouseEvent(KGameIO *,QDataStream &stream,QMouseEvent *m,bool *eatevent);
 
 protected:
+      /**
+      * Internal event filter
+      */
       bool eventFilter( QObject *o, QEvent *e );
 
 };
@@ -319,8 +330,8 @@ public:
      * <pre>
      * KGameProcessIO *input;
      *   input=new KGameProcessIO(executable_file);
-     *  connect(input,SIGNAL(signalPrepareTurn(QDataStream &,bool,KGameIO *,bool &)),
-     *          this,SLOT(slotPrepareTurn(QDataStream &,bool,KGameIO *,bool &)));
+     *  connect(input,SIGNAL(signalPrepareTurn(QDataStream &,bool,KGameIO *,bool *)),
+     *          this,SLOT(slotPrepareTurn(QDataStream &,bool,KGameIO *,bool *)));
      *  connect(input,SIGNAL(signalProcessQuery(QDataStream &,KGameProcessIO *)),
      *          this,SLOT(slotProcessQuery(QDataStream &,KGameProcessIO *)));
      * </pre>
@@ -368,7 +379,8 @@ public:
     /** 
      * Init this device by setting the player and e.g. sending an
      * init message to the device. Calling this function will emit
-     * the IOAdded signal on which you can react. 
+     * the IOAdded signal on which you can react and initilise the
+     * computer player. 
      * This function is called automatically when adding the IO to
      * a player.
      */
@@ -377,7 +389,9 @@ public:
     /**
      *  Notifies the IO device that the player's setTurn had been called
      *  Called by KPlayer. You can react on the @ref signalPrepareTurn to
-     *  prepare a message for the process
+     *  prepare a message for the process, i.e. either update it on
+     * the changes made to the game since the last turn or the initIO
+     * has been called or transmit your gamestatus now.
      *
      *  @param turn is true/false
      */
@@ -385,11 +399,14 @@ public:
 
   protected:
     /**
-     * Combined function for all message handling 
+     * Internal ~ombined function for all message handling 
      **/
     void sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 receiver, Q_UINT32 sender, bool usermsg);
 
   protected slots:
+  /**
+  * Internal message handler to receive data from the process
+  */
     void receivedMessage(const QByteArray& receiveBuffer);
 
   
@@ -398,7 +415,7 @@ signals:
    * A computer query message is received. This is a 'dummy'
    * message sent by the process if it needs to communicate
    * with us. It is not forwarded over the network.
-   * Racting to this message allows you to 'answer' questions
+   * Reacting to this message allows you to 'answer' questions
    * of the process, e.g. sending addition data which the process
    * needs to calculate a move.
    *
@@ -450,6 +467,8 @@ private:
  *  KGameIO::notifyTurn there.
  *
  *  This is rather meant to be of use in real time games.
+ *
+ *  @author  <b_mann@gmx.de>
  */
 class KGameComputerIO : public KGameIO
 {

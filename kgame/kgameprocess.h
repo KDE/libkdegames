@@ -84,12 +84,15 @@ class KGameProcess:  public QObject
      * return on setTerminate(true)!
      */
     bool exec(int argc, char *argv[]);
+    
     /**
      * Should the computer process leave its exec function?
+     * Activated if you setTerminate(true);
      *
      * @return true/false
      */
     bool terminate() const {return mTerminate;}
+    
     /**
      * Set this to true if the computer process should end, ie
      * leave its exec function.
@@ -97,16 +100,19 @@ class KGameProcess:  public QObject
      * @param b true for exit the exec function
      */
     void setTerminate(bool b) {mTerminate=b;}
+    
     /**
      * Sends a message to the corresponding KGameIO
-     * device.
+     * device. Works like the sendSystemMessage but
+     * for user id's
      *
      * @param the QDataStream containing the message
      */
     void sendMessage(QDataStream &stream,int msgid,int receiver=0);
+
     /**
      * Sends a system message to the corresonding KGameIO device.
-     * This will normally be either a perfomred move or a query
+     * This will normally be either a performed move or a query
      * (IdProcessQuery). The query option is a way to communicate
      * with the KGameIO at the other side and e.g. retrieve some
      * game relevant data from here.
@@ -124,6 +130,7 @@ class KGameProcess:  public QObject
      * @param receiver - unused
      */
     void sendSystemMessage(QDataStream &stream,int msgid,int receiver=0);
+
     /**
      * Returns a pointer to a KRandomSequence. You can generate
      * random numbers via e.g.
@@ -210,6 +217,7 @@ class KGameProcess:  public QObject
       * 
       */
      void signalTurn(QDataStream &stream,bool turn);
+
      /**
       * This signal is emmited when the process is initialized, i.e. added
       * to a KPlayer. Initial initialisation can be performed here be reacting
