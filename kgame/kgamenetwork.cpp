@@ -221,7 +221,7 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, int rece
     sender = (int)KGameMessage::calcMessageId(gameId(), 0);
   }
 
-  KGameMessage::createHeader(stream, cookie(), KGameMessage::version(), sender, receiver, msgid);
+  KGameMessage::createHeader(stream, sender, receiver, msgid);
   stream.writeRawBytes(data.data(), data.size());
   kdDebug(11001) << "transmitGameClientMessage msgid=" << msgid << " recv="
 		<< receiver << " sender=" << sender << " Buffersize="
@@ -275,8 +275,8 @@ bool KGameNetwork::sendGameIOMessage(const QByteArray& sendBuffer, int msgid, KG
       << " sender=" << sender << " Buffersize=" << buffer.size()
       << "   cookie=" << cookie() << " version="
       << KGameMessage::version() << endl;
-    int c, v, m, r, s;
-    KGameMessage::extractHeader(ostream, c, v, m, r, s);
+    int m, r, s;
+    KGameMessage::extractHeader(ostream, m, r, s);
     if (!userMessage) {
        client->receiveSystemMessage(ostream, msgid, receiver, sender);
     } else {
@@ -289,12 +289,10 @@ bool KGameNetwork::sendGameIOMessage(const QByteArray& sendBuffer, int msgid, KG
 void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q_UINT32 clientID)
 {
   QDataStream stream(receiveBuffer, IO_ReadOnly);
-  int xcookie;
-  int xversion; // must be the same as KNETWORKGAME_VERSION
   int msgid;
   int sender;
   int receiver; // the id of the KPlayer who sent the message  ??
-  KGameMessage::extractHeader(stream,xcookie,xversion,sender,receiver,msgid);
+  KGameMessage::extractHeader(stream,sender,receiver,msgid);
   Q_UINT32 gameid=KGameMessage::calcGameId(receiver);
 
   // Forward to registered KGameIO clients
@@ -304,15 +302,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
   }
 
 //  kdDebug(11001) << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
-//  kdDebug(11001) << "Control: cookie=" << xcookie << "==" << cookie() << " Version=" << xversion << "==" << KGameMessage::version() << endl;
-  if (xcookie!=cookie() || xversion!=KGameMessage::version()) {
-    kdWarning(11001) << "Network warning: Connected to wrong version of game network library" << endl;
-    kdDebug(11001) << "xcookie: " << xcookie << endl;
-    kdDebug(11001) << "cookie: " << cookie() << endl;
-    kdDebug(11001) << "xversion: " << xversion << endl;
-    kdDebug(11001) << "version: " << KGameMessage::version() << endl;
-    emit signalNetworkVersionError(clientID);
-  } else if (gameid && gameid!=gameId()) { // gameid=0 is broadcast or player message
+  if (gameid && gameid!=gameId()) { // gameid=0 is broadcast or player message
     kdDebug(11001) << "KGameNetwork::ReceiveNetworkTransmission: Message not meant for us "<<gameId()<<"!="<<receiver  << endl;
     return;
   } else if (msgid==KGameMessage::IdError) {

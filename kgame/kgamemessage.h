@@ -64,14 +64,14 @@ class KGameMessage
      * (message length and magic cookie). If you don't need them remove them
      * with @ref dropExternalHeader
      */
-    static void createHeader(QDataStream &msg,int cookie,int msgversion,int sender,int receiver,int msgid);
+    static void createHeader(QDataStream &msg,int sender,int receiver,int msgid);
 
     /**
      * Retrieves the information like cookie,sender,receiver,... from a message header 
      *
      * Note that it could be necessary to call @ref dropExternalHeader first
      */
-    static void extractHeader(QDataStream &msg,int &cookie,int &msgversion,int &sender,int &receiver,int &msgid);
+    static void extractHeader(QDataStream &msg,int &sender,int &receiver,int &msgid);
 
     /**
      * Creates a property header  given the property id
@@ -87,34 +87,6 @@ class KGameMessage
      * @return Version of the network library
      */
     static int version();
-
-    /**
-     * Returns the size of the magiccookie
-     */
-    static size_t systemHeaderSize();
-
-    /**
-     * inserts the magiccookie and the len into the mesage
-     */
-    static void createSystemHeader(char *buffer, size_t size);
-
-    /** 
-     * retrieves the length of the data block from the message
-     */
-    static bool extractMessageLength(const char *buffer,size_t &len);
-
-    /**
-     * Creates basic information for the setupGame code
-     * @param isOffering Whether connections are offered
-     **/
-    static bool createSetupGame(QDataStream& stream, bool isOffering, int maxPlayers, int clientId, int gameId, uint playerCount);
-
-    /**
-     * Extracts the information created by @ref createSetupGame
-     **/
-    static bool extractSetupGame(QDataStream& stream,Q_INT32& isOffering, Q_INT32& maxPlayers, Q_INT32& clientId, Q_INT32& gameId, Q_INT32& playerCount);
-
-
 
   enum GameMessageIds {
     IdMessage,
@@ -142,7 +114,6 @@ class KGameMessage
     /**
      * Returns the  magic cookie for the messages
      */
-    static Q_INT32 magicCookie();
 };
 
 #endif

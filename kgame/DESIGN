@@ -162,7 +162,10 @@ of KGame:
 master:               client:
 ------------          ------------
 IdSetupGame
-  no data
+  QINT16 Library
+         Version
+  QINT32 Application
+         cookie
                       IdSetupGameContinue;
                         QValueList<int> player id's
                         QValueList<int> network priority's

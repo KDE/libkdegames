@@ -57,6 +57,7 @@ public:
     {
         mUniquePlayerNumber = 0;
         mCurrentPlayer = 0 ;
+        mCookie=0;
     }
 
     int mUniquePlayerNumber;
@@ -70,6 +71,7 @@ public:
     KGamePropertyInt mMaxPlayer;
     KGamePropertyUInt mMinPlayer;
     KGamePropertyInt mGameStatus; // Game running?
+    int mCookie;  // Application identifier
 };
 
 // ------------------- GAME CLASS --------------------------
@@ -86,6 +88,7 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
   d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, dataHandler());
   d->mGameStatus.setValue(End);
   d->mUniquePlayerNumber=0;
+  d->mCookie=cookie;
   mRandom.setSeed(0);
 
   // BL: FIXME This signal does no longer exist. When we are merging
@@ -394,9 +397,13 @@ bool KGame::systemActivatePlayer(KPlayer* player)
 }
 
 // -------------------- Properties ---------------------------
+int KGame::cookie() 
+{
+  return d->mCookie;
+}
 void KGame::setGameId(int id)
 {
-  kdError (11001) << "KGame::setGameID: Is broken at the moment!" << endl;
+  kdError (11001) << "KGame::setGameID " << id << ": Is broken at the moment!" << endl;
   // FIXME: This is not possible at the moment!
 
 /*
@@ -564,9 +571,17 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
   {
   	case KGameMessage::IdSetupGame:  // Client: First step in setup game
 	    {
+        Q_INT16 v;
+        Q_INT32 c;
+       stream >> v >> c;
 		   kdDebug(11001) << " ===================> (Client) KGame::networkTransmission:: Got IdSetupGame ================== " << endl;
-       kdDebug(11001) << "our game id is " << gameId() << endl; 
-		   setupGame(stream, sender);
+       kdDebug(11001) << "our game id is " << gameId() << " Lib version="<<v << " App Cookie="<<c << endl; 
+       if (c!=cookie())
+       {
+         kdError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
+         // MH TODO: disconnect from master
+       }
+       else setupGame(stream, sender);
 		   break;
   	  }
   	case KGameMessage::IdSetupGameContinue:  // Master: second step in game setup
@@ -690,7 +705,7 @@ void KGame::setupGameContinue(QDataStream& stream, int sender)
   ++it;
   }
 
-  while(maxPlayers()>=0 && playerId.count()>maxPlayers())
+  while(maxPlayers()>=0 && playerId.count()>(unsigned int)maxPlayers())
   {
     int minvalue=playerPriority[0];
     int minpos=0;
@@ -847,6 +862,9 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  // AB: check if this is really received/used by the "receiver" client only. We
  // have currently at least two network ports which could break this...
  int receiver = KGameMessage::calcMessageId(clientID, 0);
+ Q_INT16 v=KGameMessage::version();
+ Q_INT32 c=cookie();
+ streamGS << v << c;
  sendSystemMessage(streamGS, KGameMessage::IdSetupGame, receiver);
 }
 
@@ -882,12 +900,12 @@ void KGame::systemAddPlayer(QDataStream& stream)
   stream >> iovalue;
   kdDebug(11001) << "KGame::systemAddPlayer() rtti: " << rtti << " io=" << iovalue << endl;
   KPlayer *newplayer=0;
-  if (owner == gameId()) {
+  if (owner == (int)gameId()) {
     // we sent the message so the player is already available
     kdDebug(11001) << "dequeue previously added player" << endl;
     newplayer = d->mAddPlayerList.dequeue();
   } else {
-    emit signalCreatePlayer(newplayer, rtti, iovalue, owner != gameId(), this);
+    emit signalCreatePlayer(newplayer, rtti, iovalue, owner != (int)gameId(), this);
     if (!newplayer) {
       kdDebug(11001) << "No user defined player created. Creating default KPlayer " << endl;
       newplayer = new KPlayer;
@@ -901,7 +919,7 @@ void KGame::systemAddPlayer(QDataStream& stream)
     return;
   }
 
-  if (owner != gameId()) {
+  if (owner != (int)gameId()) {
     newplayer->setVirtual(true);
   } else {
     newplayer->setVirtual(false);

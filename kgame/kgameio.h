@@ -31,8 +31,6 @@
 #include <qobject.h>
 
 class KPlayer;
-class KGameClient;
-class KGameClientProcess;
 class KProcess;
 
 /**
@@ -291,10 +289,6 @@ public:
      */ 
     bool sendProcess(const QDataStream &stream,int msgid,int receiver=0,int sender=0);
 
-    /**
-     * Returns the KGameClientProcess object used
-     */
-    KGameClientProcess *client() const {return mClient;}
 
     /**
      *  Notifies the IO device that the player's setTurn had been called
@@ -364,7 +358,6 @@ protected:
 
 private:
   unsigned long mSleep;
-  KGameClientProcess *mClient;
 
   KGameProcessIOPrivate* d;
 };

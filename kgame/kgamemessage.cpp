@@ -26,7 +26,6 @@
 #include "kgamemessage.h"
 
 #define MESSAGE_VERSION 1
-#define MESSAGE_MAGIC_COOKIE 0x02905723;
 
 
 int KGameMessage::calcMessageId(int gameid,int playerid)
@@ -42,17 +41,16 @@ int KGameMessage::calcGameId(int msgid)
   return calcPlayerId(msgid) ? 0 : (msgid >> 10);
 }
 
-void KGameMessage::createHeader(QDataStream &msg,int cookie,int msgversion,int sender,int receiver,int msgid)
+void KGameMessage::createHeader(QDataStream &msg,int sender,int receiver,int msgid)
 {
-  msg << (Q_INT16)cookie << (Q_INT8)msgversion << (Q_INT16)sender << (Q_INT16)receiver << (Q_INT16)msgid;
+  msg << (Q_INT16)sender << (Q_INT16)receiver << (Q_INT16)msgid;
 }
 
-void KGameMessage::extractHeader(QDataStream &msg,int &cookie,int &msgversion,int &sender,int &receiver,int &msgid)
+void KGameMessage::extractHeader(QDataStream &msg,int &sender,int &receiver,int &msgid)
 {
-  Q_INT16 d1,d3,d4,d5;
-  Q_INT8 d2;
-  msg >> d1 >> d2 >> d3 >> d4 >> d5;
-  cookie=d1;msgversion=d2;sender=d3;receiver=d4;msgid=d5;
+  Q_INT16 d3,d4,d5;
+  msg >> d3 >> d4 >> d5;
+  sender=d3;receiver=d4;msgid=d5;
 }
 
 void KGameMessage::createPropertyHeader(QDataStream &msg,int id)
@@ -67,57 +65,8 @@ void KGameMessage::extractPropertyHeader(QDataStream &msg,int &id)
   id=d1;
 }
 
-void KGameMessage::createSystemHeader(char *buffer,size_t size)
-{
-  Q_INT32 *cookie = (Q_INT32 *)buffer;
-  Q_INT32 *len = (Q_INT32 *)(buffer + sizeof(Q_INT32));
-  *cookie = magicCookie();
-  *len = size;// - sizeof(Q_INT32) - sizeof(Q_INT32);// count cookie and len, too as we use it everywhere, now
-}
-
-bool KGameMessage::extractMessageLength(const char *buffer,size_t &len)
-{
-  Q_INT32 cookie=magicCookie();
-  if (0==memcmp(buffer,&cookie,sizeof(Q_INT32)))
-  {
-     Q_INT32 *pL=(Q_INT32 *)(buffer+sizeof(Q_INT32));
-     len=(size_t)(*pL);
-     return true;
-  }
-  else return false;
-}
-
 int KGameMessage::version()
 {
   return MESSAGE_VERSION;
 }
 
-size_t KGameMessage::systemHeaderSize()
-{
-    return sizeof(Q_INT32)+sizeof(Q_INT32);
-}
-
-Q_INT32 KGameMessage::magicCookie()
-{
-    return MESSAGE_MAGIC_COOKIE;
-}
-
-bool KGameMessage::createSetupGame(QDataStream& stream, bool isOffering, int maxPlayers, int clientId, int gameId, uint playerCount)
-{
- stream << (Q_INT32)isOffering;
- stream << (Q_INT32)maxPlayers;
- stream << (Q_INT32)clientId; // hmm maybe obsolete
- stream << (Q_INT32)gameId;
- stream << (Q_INT32)playerCount;
- return true;
-}
-
-bool KGameMessage::extractSetupGame(QDataStream& stream, Q_INT32& isOffering, Q_INT32& maxPlayers, Q_INT32& clientId, Q_INT32& gameId, Q_INT32& playerCount)
-{
- stream >> isOffering;
- stream >> maxPlayers;
- stream >>clientId;
- stream >> gameId;
- stream >> playerCount;
- return true;
-}

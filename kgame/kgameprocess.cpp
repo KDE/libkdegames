@@ -42,8 +42,6 @@
 
 #define READ_BUFFER_SIZE  1024
 
-//AB: KGameClient is obsolete! don't use it
-#include "kgameclient.h"
 
 // ----------------------- Process Child ---------------------------
 
@@ -51,13 +49,15 @@ KGameProcess::KGameProcess() : QObject(0,0)
 {
   mTerminate=false;
   mSleep=100;
-  mClient=new KGameClientProcess(this);
+  //mClient=new KGameClientProcess(this);
 }
 KGameProcess::~KGameProcess() 
 {
+  /*
  if (mClient) {
 	delete mClient;
  }
+ */
 }
 
 
@@ -77,7 +77,7 @@ bool KGameProcess::exec(int argc, char *argv[])
 		usleep(mSleep);
 	}
     kdDebug(11001) << " before readInput" << endl;
-	mClient->readInput(&rFile);
+	//mClient->readInput(&rFile);
     kdDebug(11001) << " before process Input" << endl;
 	processInput();
 
@@ -88,6 +88,7 @@ bool KGameProcess::exec(int argc, char *argv[])
 
 bool KGameProcess::processInput()
 {
+  /*
  QByteArray* a = mClient->readBuffer();
  if (!a) {
 	return true ; // Message not yet arrived
@@ -126,6 +127,7 @@ bool KGameProcess::processInput()
  }
 
  delete a;
+ */
  return true;
 }
 
@@ -145,10 +147,10 @@ void KGameProcess::sendMessage(QDataStream &stream,int msgid,int receiver)
   // Sender can be 0 as it will be forced to be correct by the KGameIO device
   // Cookie and version apply only to the communication between us and the KGameIO
   // Receiver nesessary if used not as gameMessage, id id!=IdPlayerInput
-  KGameMessage::createHeader(outstream,0,KGameMessage::version(),0,receiver,msgid);
+  KGameMessage::createHeader(outstream,0,receiver,msgid);
   outstream.writeRawBytes(data.data(),data.size());
 
-  mClient->sendMessage(a);
+  //mClient->sendMessage(a);
 }
 
 void KGameProcess::processArgs(int argc, char *argv[])

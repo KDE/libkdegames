@@ -30,7 +30,7 @@
 #include <qobject.h>
 #include <kgameproperty.h>
 
-class KGameClientProcess;
+//class KGameClientProcess;
 class KPlayer;
 
 /**
@@ -135,6 +135,6 @@ class KGameProcess:  public QObject
   protected:
     bool mTerminate;
     unsigned long mSleep;
-    KGameClientProcess *mClient;
+    //KGameClientProcess *mClient;
 };
 #endif

@@ -260,6 +260,14 @@ public:
 
     // Game sequence
     /**
+     * Returns the application cookie. Every program should have a
+     * different cookie. This allows the network lib to identify the programs
+     * and prevent connnection of different programs/versions.
+     * Global cookies might be listed on http://games.kde.org/cookies.html
+     */
+    int cookie();
+    //
+    /**
      * returns the game status, ie running,pause,ended,...
      *
      * @return game status

@@ -48,8 +48,6 @@
 #define READ_BUFFER_SIZE   1024   // and automatically multiples
 
 
-//AB: KGameClient is obsolete! don't use it
-#include "kgameclient.h"
 
 
 class KGameProcessIOPrivate
@@ -79,7 +77,6 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   d->mProcessName=name;
   mSleep = 100;
 
-  mClient = 0;
 }
 
 int KGameProcessIO::rtti() const { return ProcessIO; }
@@ -108,11 +105,6 @@ KGameProcessIO::~KGameProcessIO()
   if (player()) player()->removeGameIO(this); 
   if (player() && player()->game()) player()->game()->unregisterListener(this);
   Exit();
-  if (mClient)
-  {
-    delete mClient;
-    mClient=0;
-  }
   // unregister ourselves
   //delete readBuffer;
   delete d;
@@ -122,10 +114,6 @@ bool KGameProcessIO::Init()
 {
   Exit();
   d->mProcess=new KProcess;
-  mClient = new KGameClientProcess(d->mProcess);
-  mClient->setTransmit(true);
-  mClient->setStatus(KGameClient::Wait);
-  mClient->setId(-1);
   int id=0;
   int cookie=0;
   if (player()) id=player()->id();
@@ -143,10 +131,7 @@ bool KGameProcessIO::Init()
                         this, SLOT(slotWroteStdin(KProcess *)));
   d->mCanWrite=true;
 
-  mClient->setStatus(KGameClient::Listen);
-  ((KGameClientSocket*)mClient)->setIP(d->mProcessName);
   bool result=d->mProcess->start(KProcess::NotifyOnExit,KProcess::All);
-  mClient->setTransmit(result);
   return result;
 }
 
@@ -193,11 +178,8 @@ void KGameProcessIO::slotReceivedStderr(KProcess * proc, char *buffer, int bufle
 void KGameProcessIO::slotReceivedStdout(KProcess * , char *buffer, int buflen)
 {
  kdDebug(11001) << "KGameProcessIO::slotReceivedStdout::Received " << buflen << " bytes over inter process communication" << endl;
- if (!mClient) {
-	return ;
- }
- mClient->readInput(buffer,buflen);
 
+ /*
  for (QByteArray* a = mClient->readBuffer(); a; a = mClient->readBuffer()) {
 	QDataStream stream(*a,IO_ReadOnly);
 	int xcookie;
@@ -229,6 +211,7 @@ void KGameProcessIO::slotReceivedStdout(KProcess * , char *buffer, int buflen)
 	}
 	delete a;
  }
+ */
 }
 
 void KGameProcessIO::slotProcessExited(KProcess * /*p*/)
@@ -291,9 +274,11 @@ bool KGameProcessIO::sendProcess(const QDataStream &stream,int msgid,int receive
   QByteArray data=device->buffer();;
   
   //receiver=player()->id();
-  KGameMessage::createHeader(ostream,0,KGameMessage::version(),sender,receiver,msgid);
+  KGameMessage::createHeader(ostream,sender,receiver,msgid);
   ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
+  /*
   mClient->sendMessage(buffer);
+  */
   writeBuffers();
   return true;
 }
@@ -305,6 +290,7 @@ bool KGameProcessIO::writeBuffers()
   int timeout;
   bool result=false;
   //kdDebug(11001) << "==============>  KGameProcessIO::writeBuffers:Process running=" << isRunning() << "canWRite="<<d->mCanWrite << endl;
+  /*
   if (!isRunning())
   {
     if (!Init()) 
@@ -316,6 +302,7 @@ bool KGameProcessIO::writeBuffers()
   {
     return false;
   }
+  */
   /*//AB FIXME: must be ported
   kdDebug(11001) << "KGameProcessIO::writeBuffers:Process running= " << isRunning() << " pid=" << d->mProcess->pid() << endl;
 
