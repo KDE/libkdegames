@@ -14,3 +14,4 @@
              This might even be a QT bug. Bad situation - we use references
              everywhere in KGame... hope nothing else is affecterd by this
              problem (signalPrepareMove was fixed already by me)
+18.09.2001:  bool* for Key/Mouseevents and IOAdded in kgameio.h too

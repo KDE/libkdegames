@@ -117,7 +117,7 @@ void KGameProcessIO::initIO(KPlayer *p)
   bool sendit=true;
   if (p)
   {
-    emit signalIOAdded(this,stream,p,sendit);
+    emit signalIOAdded(this,stream,p,&sendit);
     if (sendit )
     {
       Q_UINT32 sender=p->id();  
@@ -287,7 +287,8 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
      QByteArray buffer;
      QDataStream stream(buffer,IO_WriteOnly);
      bool eatevent=false;
-     emit signalMouseEvent(this,stream,k,eatevent);
+     emit signalMouseEvent(this,stream,k,&eatevent);
+     kdDebug(11001) << "################# eatevent=" << eatevent << endl;
      QDataStream msg(buffer,IO_ReadOnly);
      if (eatevent && sendInput(msg))
      {
@@ -328,7 +329,7 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
      QByteArray buffer;
      QDataStream stream(buffer,IO_WriteOnly);
      bool eatevent=false;
-     emit signalKeyEvent(this,stream,k,eatevent);
+     emit signalKeyEvent(this,stream,k,&eatevent);
      QDataStream msg(buffer,IO_ReadOnly);
      
      if (eatevent && sendInput(msg)) 

@@ -220,7 +220,7 @@ signals:
        * @param m The QKeyEvent we can evaluate
        * @param eatevent set this to true if we processed the event
        */
-      void signalKeyEvent(KGameIO *,QDataStream &stream,QKeyEvent *m,bool &eatevent);
+      void signalKeyEvent(KGameIO *,QDataStream &stream,QKeyEvent *m,bool *eatevent);
 
 protected:
        bool eventFilter( QObject *o, QEvent *e );
@@ -284,7 +284,7 @@ signals:
        * @param m The QMouseEvent we can evaluate
        * @param eatevent set this to true if we processed the event
        */
-      void signalMouseEvent(KGameIO *,QDataStream &stream,QMouseEvent *m,bool &eatevent);
+      void signalMouseEvent(KGameIO *,QDataStream &stream,QMouseEvent *m,bool *eatevent);
 
 protected:
       bool eventFilter( QObject *o, QEvent *e );
@@ -422,7 +422,7 @@ signals:
   * @param the player itself
   * @param set this to false if no move should be generated
   */
-  void signalIOAdded(KGameIO *,QDataStream &,KPlayer *p,bool &);
+  void signalIOAdded(KGameIO *,QDataStream &,KPlayer *p,bool *);
 
 
 protected:
