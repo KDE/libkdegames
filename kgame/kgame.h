@@ -195,7 +195,7 @@ public:
      * @ref KPlayer::rtti!
      * This will only send a message to all clients. The player is _not_ added
      * directly!
-     * See also @ref signalPlayerInput which will be emitted as soon as the
+     * See also @ref playerInput which will be called as soon as the
      * player really has been added.
      *
      * Note that an added player will first get into a "queue" and won't be in
@@ -291,7 +291,7 @@ public:
      * It could be made non-virtual,protected in a later version. At the
      * moment it is a virtual function to give you more control over KGame.
      *
-     * For documentation see @ref signalPlayerInput.
+     * For documentation see @ref playerInput.
      **/
     virtual bool systemPlayerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
 
