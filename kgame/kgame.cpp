@@ -549,8 +549,8 @@ void KGame::setGameStatus(int status)
 }
 
 
-void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID)
-{
+void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 /*clientID*/)
+{//clientID is unused
  kdDebug(11001) << "KGame::networkTransmission:: msgid=" << msgid << " sender=" << sender << " receiver=" << receiver << endl;
  // message targets a playerobject. If we find it we forward the message to the
  // player. Otherwise we proceed here and hope the best that the user processes
@@ -581,13 +581,13 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
         Q_INT32 c;
         stream >> v >> c;
 	kdDebug(11001) << " ===================> (Client) KGame::networkTransmission:: Got IdSetupGame ================== " << endl;
-        kdDebug(11001) << "our game id is " << gameId() << " Lib version="<<v << " App Cookie="<<c << endl; 
-        if (c!=cookie())
-        {
+        kdDebug(11001) << "our game id is " << gameId() << " Lib version=" << v << " App Cookie=" << c << endl; 
+        if (c!=cookie()) {
           kdError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
           // MH TODO: disconnect from master
-        }
-        else setupGame(stream, sender);
+        } else {
+	  setupGame(sender);
+	}
 	break;
       }
     case KGameMessage::IdSetupGameContinue:  // Master: second step in game setup
@@ -768,7 +768,7 @@ void KGame::gameReactivatePlayer(QDataStream& stream, int sender)
 }
 
 // called by the IdSetupGame Message - CLIENT SIDE
-void KGame::setupGame(QDataStream& stream, int sender)  
+void KGame::setupGame(int sender)  
 {
  // remove the local players from all lists first. We add them regulary after
  // the other player we received from the MASTER
@@ -780,13 +780,12 @@ void KGame::setupGame(QDataStream& stream, int sender)
  // Deactivate all players
  // QList<KPlayer> toBeAdded;
  QListIterator<KPlayer> it(mPlayerList);
- while (it.current())
- {
+ while (it.current()) {
 	//toBeAdded.append(it.current());
 	//systemRemove(it.current());
-   playerId.append(it.current()->id());
-   playerPriority.append(it.current()->networkPriority());
-   systemInactivatePlayer(it.current());
+	playerId.append(it.current()->id());
+	playerPriority.append(it.current()->networkPriority());
+	systemInactivatePlayer(it.current());
 	 ++it;
  }
  if (mPlayerList.count() > 0) {

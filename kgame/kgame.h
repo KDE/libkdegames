@@ -333,7 +333,7 @@ public:
      * @param stream The message that is being sent
      * @param receiver The is of the player this message is for. 0 For broadcast.
      * @param sender
-     * @param the client from which we received the transmission - hardly used
+     * @param clientID the client from which we received the transmission - hardly used
      **/
     virtual void networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID);
 
@@ -572,7 +572,7 @@ private:
     /**
      * Helping function - game negotiation
      **/
-    void setupGame(QDataStream& msg, int sender);
+    void setupGame(int sender);
 
     /**
      * Helping function - game negotiation

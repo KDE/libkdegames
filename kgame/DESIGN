@@ -144,8 +144,8 @@ the same number of KPlayer objects.
 
 2. Game negotiation
 -------------------
-Upon connection  of a client the master and the client try to negotiate
-the game setup. Basically this means the game of the master is transferred
+Upon connection  of a client the admin and the client try to negotiate
+the game setup. Basically this means the game of the admin is transferred
 (saved) on the client. However, the client's players are added to the game
 as far as possible. If the addition of the client's players would add more
 players than allowed some players are inactivated. Which players are
@@ -159,7 +159,7 @@ The following is the negotiation procedure as started by the connection
 of a client. It is initiated in the negotiateNetworkGame() virtual function
 of KGame:
 
-master:               client:
+admin:                client:
 ------------          ------------
 IdSetupGame
   QINT16 Library
