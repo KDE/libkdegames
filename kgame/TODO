@@ -39,4 +39,6 @@
 - 28.07.2001: make KGameProperty::load() protected as this changes the network
               value. KGamePropertyHandler should be friend
 - 15.08.2001: KGamePropertyList/Array don't honor Policies - only Clean is
-              possible currently
+              possible current
+- 23.08.2001: load/save need to save a user specified version in the save files
+              which allows for savegame version control!
