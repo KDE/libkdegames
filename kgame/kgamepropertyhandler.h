@@ -283,6 +283,14 @@ public:
 	 **/ 
 	void Debug();
 
+protected slots:  
+  /**
+  * Called when the emitSignal property changed timer is
+  * done. This is used to send out the queque of signals
+  * after they are collected in the emitSignal code
+  **/
+  void mTimerDone();
+
 signals:
 	/**
 	 * This is emitted by a property. @ref KGamePropertyBase::emitSignal

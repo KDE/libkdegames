@@ -26,6 +26,8 @@
 #include "kgamemessage.h"
 
 #include <qmap.h>
+#include <qptrqueue.h>
+#include <qtimer.h>
 
 #include <klocale.h>
 #include <typeinfo>
@@ -46,6 +48,8 @@ public:
 	int mId;
 	KGamePropertyBase::PropertyPolicy mDefaultPolicy;
 	bool mDefaultUserspace;
+  QTimer mTimer;
+  QPtrQueue<KGamePropertyBase> mSignalQueue;
 };
 
 KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent) : QObject(parent)
@@ -73,6 +77,7 @@ void KGamePropertyHandler::init()
  d->mUniqueId=KGamePropertyBase::IdAutomatic;
  d->mDefaultPolicy=KGamePropertyBase::PolicyLocal;
  d->mDefaultUserspace=true;
+ connect( &d->mTimer, SIGNAL(timeout()), this, SLOT(mTimerDone()) );
 }
 
 
@@ -269,9 +274,31 @@ void KGamePropertyHandler::flush()
  }
 }
 
+/* Fire all property signal changed which are collected in
+ * the queque
+ **/
+void KGamePropertyHandler::mTimerDone()
+{
+  KGamePropertyBase *prop;
+  while(prop=d->mSignalQueue.dequeue())
+  {
+    // kdDebug(11001) << "emmiting signal for " << prop->id() << endl;
+    emit signalPropertyChanged(prop);
+  }
+}
+
 void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
 {
- emit signalPropertyChanged(prop);
+ // We cannot emit the signals directly as it can happend that
+ // a sigal causes an access to a property which is e.g. not
+ // yet loaded or received
+ // was 24.01.02: emit signalPropertyChanged(prop);
+
+ // Queque the signal
+ d->mSignalQueue.enqueue(prop);
+
+ // Start the timer single shot only if it is not running
+ if (!d->mTimer.isActive()) d->mTimer.start(0,TRUE);
 }
 
 bool KGamePropertyHandler::sendProperty(QDataStream &s)
