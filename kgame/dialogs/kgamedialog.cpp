@@ -18,20 +18,13 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include "kgamedialog.h"
-
 #include <qlayout.h>
 #include <qhgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlineedit.h>
 #include <qvbox.h>
 
 #include <klistbox.h>
 #include <klocale.h>
-#include <knuminput.h>
 #include <kmessagebox.h>
-#include <kseparator.h>
 
 #include "kgameconnectdialog.h"
 #include "kgame.h"
@@ -39,6 +32,8 @@
 #include "kplayer.h"
 #include "kgameproperty.h"
 #include "kgamedialogconfig.h"
+
+#include "kgamedialog.h"
 
 #include "kgamedialog.moc"
 
@@ -100,7 +95,8 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, QWidget
 void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf,
 	KGame* g, const QString& title, KPlayer* owner, int chatMsgid)
 {
- kdDebug(11001) << "CONSTRUCT KGameDialog" << this << endl;
+//TODO title
+// kdDebug(11001) << "CONSTRUCT KGameDialog" << this << endl;
  d = new KGameDialogPrivate;
 
  setOwner(owner);
@@ -130,7 +126,7 @@ void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig*
 
 KGameDialog::~KGameDialog()
 {
- kdDebug(11001) << "DESTRUCT KGameDialog" << this << endl;
+// kdDebug(11001) << "DESTRUCT KGameDialog" << this << endl;
  delete d;
 }
 
@@ -139,12 +135,17 @@ void KGameDialog::addGameConfig(KGameDialogGeneralConfig* conf)
  if (!conf) {
 	return;
  }
- kdDebug(11001) << "adding game config" << endl;
+/* kdDebug(11001) << "adding game config" << endl;
  d->mGamePage = addVBoxPage(i18n("Game")); //TODO game specific
 
  QHGroupBox* b = new QHGroupBox(i18n("Game Configuration"), d->mGamePage);
  d->mGameConfig = conf;
- addConfigWidget(d->mGameConfig, b);
+ addConfigWidget(d->mGameConfig, b);*/
+
+// kdDebug(11001) << "adding game config" << endl;
+ d->mGameConfig = conf;
+ d->mGamePage = addConfigPage(d->mGameConfig, i18n("Page"));
+// QHGroupBox* b = new QHGroupBox(i18n("Game Configuration"), d->mGamePage);
 }
 
 void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
@@ -152,15 +153,24 @@ void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
  if (!netConf) {
 	return;
  }
- kdDebug(11001) << "adding network config" << endl;
- d->mNetworkPage = addVBoxPage(i18n("Network"));
-
+// kdDebug(11001) << "adding network config" << endl;
  d->mNetworkConfig = netConf;
  if (networkConfig()) {
 	connect(networkConfig(), SIGNAL(signalInitConnection(bool&, bool&)), this,
 			SLOT(slotInitConnection(bool&, bool&)));// is this mGame dependant?
  }
- addConfigWidget(d->mNetworkConfig, d->mNetworkPage);
+ d->mNetworkPage = addConfigPage(netConf, i18n("Network"));
+}
+
+QVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
+{
+ if (!widget) {
+	kdError(11001) << "Cannot add NULL config widget" << endl;
+	return 0;
+ }
+ QVBox* page = addVBoxPage(title);
+ addConfigWidget(widget, page);
+ return page;
 }
 
 void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
@@ -173,7 +183,7 @@ void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
 	kdError(11001) << "Cannot reparent to NULL widget" << endl;
 	return;
  }
- kdDebug(11001) << "reparentin widget" << endl;
+// kdDebug(11001) << "reparenting widget" << endl;
  widget->reparent(parent, QPoint(0,0));
  d->mConfigWidgets.append(widget);
  if (!d->mGame) {
@@ -191,7 +201,7 @@ void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
 
 void KGameDialog::addChatWidget(int chatMsgId)
 {
- kdDebug(11001) << "adding chat widget" << endl;
+// kdDebug(11001) << "adding chat widget" << endl;
  if (!d->mGamePage) {
 	kdError(11001) << "cannot add chat widget without game page" << endl;
  }
@@ -205,9 +215,13 @@ void KGameDialog::addConnectionList()
 	kdWarning(11001) << "Cannot add connection list without network page" << endl;
 	return;
  }
- kdDebug(11001) << "adding connection list" << endl;
+// kdDebug(11001) << "adding connection list" << endl;
  //TODO: prevent player to ban himself
 
+ if (!d->mNetworkPage) {
+	kdError(11001) << "cannot add connection list without network page" << endl;
+	return;
+ }
  QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), d->mNetworkPage);
  d->mPlayers = new KListBox(b);
 // h->addWidget(b, 1);
@@ -381,8 +395,8 @@ void KGameDialog::submitToKGame()
  }
 
  for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
- kdDebug(11001) << "submit to kgame " << i << endl;
+// kdDebug(11001) << "submit to kgame " << i << endl;
 	d->mConfigWidgets.at(i)->submitToKGame(d->mGame, d->mOwner);
- kdDebug(11001) << "done: submit to kgame " << i << endl;
+// kdDebug(11001) << "done: submit to kgame " << i << endl;
  }
 }

@@ -331,6 +331,7 @@ public:
      **/
     virtual void networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID);
 
+    KGamePropertyHandlerBase* dataHandler();
 
 protected slots:
     /**
@@ -543,8 +544,6 @@ protected:
      * @return true?
      */
     virtual bool loadgame(QDataStream &stream,bool network);
-
-    KGamePropertyHandlerBase* dataHandler();
 
 private:
     //AB: this is to hide the "receiver" parameter from the user. It shouldn't be

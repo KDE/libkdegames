@@ -72,6 +72,32 @@ public slots:
 	 **/
 	void updatePlayerList();
 
+signals:
+	/**
+	 * As it is not possible to find out which type a @ref KGameProperty has
+	 * you have to provide its value first. This signal is emitted when the
+	 * value for the property prop is requested - it is not emitted for
+	 * default types (like @ref KPlayer::name or @ref KPlayer::group). You
+	 * probably want to connect a slot to this signal which tests for the
+	 * @ref KGamePropertyBase::id and sets the value according to this id.
+	 * Example:
+	 * <pre>
+	 * switch (prop->id()) {
+	 * 	case myPropertyId1:
+	 * 		value = (KGameProperty<QString>*)->value();
+	 * 		break;
+	 * 	case myPropertyId2:
+	 * 		value = QString::number((KGamePropertyInt*)prop->value());
+	 * 		break;
+	 * 	default:
+	 * 		value = i18n("Unknown");
+	 * 		break;
+	 * }
+	 * @param prop The @ref KGameProperty the value is requested for
+	 * @param value The value of this property. You have to set this.
+	 **/
+	void signalRequestValue(KGamePropertyBase* prop, QString& value);
+
 protected:
 	void clearPages();
 
@@ -87,7 +113,7 @@ protected:
 	void clearGameData();
 
 	QString propertyName(KGamePropertyBase* p) const;
-	QString propertyValue(KGamePropertyBase* p) const;
+	QString propertyValue(KGamePropertyBase* p);
 	
 protected slots:
 	/**

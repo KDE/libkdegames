@@ -29,6 +29,7 @@
 
 
 class KGameIO;
+class KMessageClient;
 
 class KGameNetworkPrivate;
 
@@ -117,6 +118,18 @@ public:
      * @return true
      **/
     bool stopServerConnection();
+
+    /**
+     * Changes the maximal connection number of the @ref KMessageServer to max.
+     * -1 Means infinite connections are possible. Note that existing
+     * connections are not affected, so even if you set this to 0 in a running
+     * game no client is being disconnected. You can call this onyl if you are
+     * the ADMIN!
+     *
+     * See also @ref KMessageServer::setMaxClients
+     * @param max The maximal number of connections possible.
+     **/
+    void setMaxClients(int max);
 
     //AB: is this now internal only? Can we make it protected (maybe with
     //friends)? sendSystemMessage AND sendMessage is very confusing to the
@@ -275,6 +288,16 @@ public:
      * which has nothing to do with the player IDs. See @ref KMessageServer)
      **/
     void electAdmin(Q_UINT32 clientID);
+
+    /**
+     * Don't use this unless you really know what youre doing! You might
+     * experience some strange behaviour if you send your messages directly
+     * through the @ref KMessageClient!
+     *
+     * @return a pointer to the @ref KMessageClient used internally to send the
+     * messages. You should rather use one of the send functions!
+     **/
+    KMessageClient* messageClient() const;
 
 signals:
     /**

@@ -22,11 +22,24 @@
 */
 
 #include "kgameproperty.h"
+#include "kgamepropertyhandler.h"
 #include "kgamemessage.h"
 #include "kplayer.h"
 #include "kgame.h"
 
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
+
+KGamePropertyBase::KGamePropertyBase(int id, KGame* parent)
+{
+ init();
+ registerData(id, parent);
+}
+
+KGamePropertyBase::KGamePropertyBase(int id, KPlayer* parent)
+{
+ init();
+ registerData(id, parent);
+}
 
 KGamePropertyBase::KGamePropertyBase(int id, KGamePropertyHandlerBase* owner)
 {
@@ -41,11 +54,11 @@ KGamePropertyBase::KGamePropertyBase()
 
 KGamePropertyBase::~KGamePropertyBase()
 {
+//TODO delete all properties
 }
 
 void KGamePropertyBase::init()
 {
-
  mOwner=0;
 
  // this is very useful and used by e.g. KGameDialog so
@@ -61,6 +74,12 @@ void KGamePropertyBase::init()
  // easier to use though...
  setAlwaysConsistent(true);
 }
+
+void KGamePropertyBase::registerData(int id, KGame* owner)
+{ registerData(id, owner->dataHandler());  }
+
+void KGamePropertyBase::registerData(int id, KPlayer* owner)
+{ registerData(id, owner->dataHandler());  }
 
 void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner)
 {
@@ -110,119 +129,4 @@ void KGamePropertyBase::emitSignal()
  }
 }
 
-
-//---------------------- KGamePropertyHandler -----------------------------------
-class KGamePropertyHandlerBasePrivate
-{
-public:
-	KGamePropertyHandlerBasePrivate()
-	{
-	}
-};
-
-KGamePropertyHandlerBase::KGamePropertyHandlerBase() : QIntDict<KGamePropertyBase>()
-{
- init();
-}
-
-void KGamePropertyHandlerBase::init()
-{
- kdDebug(11001) << "CREATE KGamePropertyHandlerBase("<<this<<")"<<endl;
- mId = 0;
- d = new KGamePropertyHandlerBasePrivate; // for future use - is BC important to us?
-}
-
-KGamePropertyHandlerBase::~KGamePropertyHandlerBase()
-{
- clear();
- delete d;
-}
-
-bool KGamePropertyHandlerBase::processMessage(QDataStream &stream, int id)
-{
- //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << mId << endl;
- if (id != mId) {
-	return false; // Is the message meant for us?
- }
- KGamePropertyBase* p;
- int propertyId;
- KGameMessage::extractPropertyHeader(stream,propertyId);
- //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
- if (propertyId==KGamePropertyBase::IdCommand)
- {
-   int cmd;
-   KGameMessage::extractPropertyCommand(stream,propertyId,cmd);
-   kdDebug() << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
-   p = find(propertyId);
-   p->command(stream,cmd);
-   return true;
- }
- p = find(propertyId);
- if (p) {
-	//kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
-	p->load(stream);
-	//kdDebug(11001) << "done" << endl;
- } else {
-	if (!p) {
-		kdError(11001) << "KGamePropertyHandler::processMessage:property " << propertyId << " not found" << endl;
-	}
- }
- return true;
-}
-
-
-bool KGamePropertyHandlerBase::removeProperty(KGamePropertyBase* data)
-{
- if (!data) {
-	return false;
- }
- return remove(data->id());
-}
-bool KGamePropertyHandlerBase::addProperty(KGamePropertyBase* data)
-{
-  //kdDebug(11001) << "KGamePropertyHandler::addproperty("<<data<<endl;
- if (find(data->id())) {
-	// this id already exists
-	kdError(11001) << "  -> cannot add property " << data->id() << endl;
-	return false;
- } else {
-	insert(data->id(), data);
- }
- return true;
-}
-
-bool KGamePropertyHandlerBase::load(QDataStream &stream)
-{
- uint count,i;
- stream >> count;
- kdDebug(11001) << "KGamePropertyHandler::load " << count << " KGameProperty objects " << endl;
- for (i = 0; i < count; i++) {
-	processMessage(stream, id());
- }
- Q_INT16 cookie;
- stream >> cookie;
- if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
-	//kdDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
- } else {
-	kdError(11001) << "KGamePropertyHandler loading error. probably format error"<<endl;
- }
- return true;
-}
-
-bool KGamePropertyHandlerBase::save(QDataStream &stream)
-{
- kdDebug(11001) << "KGamePropertyHandler::save " << count() << " KGameProperty objects " << endl;
- stream << (uint)count();
- QIntDictIterator<KGamePropertyBase> it(*this);
- while (it.current()) {
-	KGamePropertyBase *base=it.current();
-	if (base) {
-		KGameMessage::createPropertyHeader(stream, base->id());
-		base->save(stream);
-	}
-	++it;
- }
- stream << (Q_INT16)KPLAYERHANDLER_LOAD_COOKIE;
- return true;
-}
 

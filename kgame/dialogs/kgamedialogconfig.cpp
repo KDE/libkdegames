@@ -18,28 +18,21 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include "kgamedialogconfig.h"
-
 #include <qlayout.h>
-#include <qhgroupbox.h>
+//#include <qhgroupbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qvbox.h>
 
-#include <klistbox.h>
 #include <klocale.h>
 #include <knuminput.h>
-#include <kmessagebox.h>
-#include <kseparator.h>
+#include <kdialog.h>
 
-#include "kgameconnectdialog.h"
 #include "kgame.h"
-#include "kgamechat.h"
 #include "kplayer.h"
-#include "kgameproperty.h"
-#include "kgamedialog.h"
 
+#include "kgamedialogconfig.h"
 
 #include "kgamedialogconfig.moc"
 
@@ -48,7 +41,6 @@ class KGameDialogConfigPrivate
 public:
 	KGameDialogConfigPrivate() 
 	{
-
 	}
 
 };
@@ -72,7 +64,6 @@ void KGameDialogConfig::setOwner(KPlayer* )
 void KGameDialogConfig::setAdmin(bool )
 { }
 
-
 class KGameDialogNetworkConfigPrivate
 {
 public:
@@ -92,7 +83,7 @@ public:
 KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent) 
 		: KGameDialogConfig(parent)
 {
- kdDebug(11001) << "CONSTRUCT KGameDialogNetworkConfig " << this << endl;
+// kdDebug(11001) << "CONSTRUCT KGameDialogNetworkConfig " << this << endl;
 
  d = new KGameDialogNetworkConfigPrivate();
 
@@ -134,7 +125,7 @@ void KGameDialogNetworkConfig::slotInitConnection()
  }
 }
 
-void KGameDialogNetworkConfig::submitToKGame(KGame* g, KPlayer* p)
+void KGameDialogNetworkConfig::submitToKGame(KGame* g, KPlayer* )
 {
  if (!g) {
 	return;
@@ -165,7 +156,7 @@ public:
 KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent) 
 		: KGameDialogConfig(parent)
 {
- kdDebug(11001) << "CONSTRUCT KGameDialogGeneralConfig " << this << endl;
+// kdDebug(11001) << "CONSTRUCT KGameDialogGeneralConfig " << this << endl;
 
  d = new KGameDialogGeneralConfigPrivate();
 
@@ -233,57 +224,137 @@ void KGameDialogGeneralConfig::setAdmin(bool admin)
 
 void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
 {
+//FIXME
  if (p) {
 	p->setName(playerName());
  }
  if (g) {
  return;
 	if (g->isAdmin()) {
-kdDebug(11001) << "setmax player" << endl;
 		g->setMaxPlayers(maxPlayers());
-kdDebug(11001) << "setmin player" << endl;
 		g->setMinPlayers(minPlayers());
-kdDebug(11001) << "setmin player done" << endl;
 	}
  }
 }
 
-class KGameDialogPrivate
+class KGameDialogMsgServerConfigPrivate
 {
 public:
-	KGameDialogPrivate() 
+	KGameDialogMsgServerConfigPrivate() 
 	{
-		mTopLayout = 0;
-		mNetworkConfig = 0;
-		mGameConfig = 0;
-		mChat = 0;
-		mPlayers = 0;
-		mOwner = 0;
-		mGame = 0;
-		mGamePage = 0;
-		mNetworkPage = 0;
-
+		changeMaxClients = 0;
+		changeAdmin= 0;
+		removeClient= 0;
 	}
 
-	QVBox* mGamePage;
-	QVBox* mNetworkPage;
-	QVBoxLayout* mTopLayout;
-	KGameDialogNetworkConfig* mNetworkConfig;
-	KGameDialogGeneralConfig* mGameConfig;
-	KGameChat* mChat;
-	KListBox* mPlayers;
-	QPtrDict<KPlayer> mItem2Player;
+	QPushButton* changeMaxClients;
+	QPushButton* changeAdmin;
+	QPushButton* removeClient;
 
-// a list of all config widgets added to this dialog
-	QList<KGameDialogConfig> mConfigWidgets;
+	QLabel* noAdmin;
 
-// for KGameConnectDialog
-	unsigned short int mPort;
-	QString mHost;
+	KGame* game;
 
-
-// just pointers:
-	KPlayer* mOwner;
-	KGame* mGame;
 };
+
+
+// TODO: change ADMIN ID, remove CLIENTS, change MAXCLIENTS
+// we do everything here with QPushButtons as we want to wait a moment before
+// continuing - the message must be sent over network first
+KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent) 
+		: KGameDialogConfig(parent)
+{
+ d = new KGameDialogMsgServerConfigPrivate;
+
+ QVBoxLayout* layout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ layout->setAutoAdd(true);
+}
+
+KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
+{
+ delete d;
+}
+
+
+void KGameDialogMsgServerConfig::setKGame(KGame* g)
+{
+ d->game = g;
+ //TODO display the ID of the admin if we aren't:
+ // connect(g, SIGNAL(signalAdminChanged(int)), this, SLOT(slotChangeIsAdmin(int)));
+}
+
+
+void KGameDialogMsgServerConfig::changeMaxClients()
+{
+ if (!d->game) {
+	kdError(11001) << "no valid game object available!" << endl;
+	return;
+ }
+ if (!d->game->isAdmin()) {
+	kdError(11001) << "changeMaxClients(): only ADMIN is allowed to call this!" << endl;
+	return;
+ }
+ int max;
+// edit->setText(QString::number()); // current max clients! //TODO
+
+ QDialog* dialog = new QDialog();
+ dialog->setCaption(i18n("Maximal number of clients"));
+ QHBoxLayout* l = new QHBoxLayout(dialog, KDialog::marginHint(), KDialog::spacingHint());
+ l->setAutoAdd(true);
+
+ (void) new QLabel(i18n("Maximal number of clients (-1 = infinite):"), dialog);
+ QLineEdit* edit = new QLineEdit(dialog);//TODO: use KIntNumInput
+// edit->setText(QString::number(max)); // current max clients! //TODO
+ if (dialog->exec() == QDialog::Accepted) {
+	bool ok;
+	max = edit->text().toInt(&ok);
+	if (ok) {
+		d->game->setMaxClients(max);
+	}
+ }
+
+}
+
+void KGameDialogMsgServerConfig::removeClient()
+{
+}
+
+void KGameDialogMsgServerConfig::changeAdmin()
+{
+ if (!d->game) {
+	kdError(11001) << "no valid game object available!" << endl;
+	return;
+ }
+ if (!d->game->isAdmin()) {
+	kdError(11001) << "changeAdmin(): only ADMIN is allowed to call this!" << endl;
+	return;
+ }
+ Q_UINT32 newAdmin;
+// newAdmin = ;
+ d->game->electAdmin(newAdmin);
+}
+
+void KGameDialogMsgServerConfig::removeClient(Q_UINT32 id)
+{
+//TODO
+}
+
+void KGameDialogMsgServerConfig::setAdmin(bool admin)
+{
+ if (admin) {
+	delete d->noAdmin;
+	d->changeMaxClients = new QPushButton(i18n("Change Maximal number of Clients"), this);
+	connect(d->changeMaxClients, SIGNAL(pressed()), this, SLOT(changeMaxClients()));
+	d->changeAdmin = new QPushButton(i18n("Change Admin"), this);
+	connect(d->changeAdmin, SIGNAL(pressed()), this, SLOT(changeAdmin()));
+	d->removeClient = new QPushButton(i18n("Remove a Client with all Players"), this);
+	connect(d->removeClient, SIGNAL(pressed()), this, SLOT(removeClient()));
+ } else {
+	delete d->changeMaxClients;
+	delete d->changeAdmin;
+	delete d->removeClient;
+	d->noAdmin = new QLabel(i18n("Only the admin can configure the message server!"), this);
+ }
+}
+
 

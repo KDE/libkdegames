@@ -137,6 +137,7 @@ public:
        * @return true/false
        */
       bool isActive() const {return mActive;}
+
       /**
        * Set an player as active (true) or inactive (false)
        *
@@ -150,6 +151,7 @@ public:
        * @return the player id
        */
       int id() const; 
+
       /* Set the players id. This is done automatically by
        * the game object when adding a new player!
        *
@@ -163,6 +165,7 @@ public:
        * @return the user defined player id
        */
       int userId() const {return mUserId.value();} 
+
       /* Set the user defined players id.
        *
        * @param i the user defined player id
@@ -177,6 +180,7 @@ public:
        * @return true/false
        */
       int networkPriority() const;
+
       /**
        * Set whether this player can be replaced by a network
        * player. There are to possible games. The first type
@@ -212,15 +216,18 @@ public:
        * A group the player belongs to.
        */
       void setGroup(const QString& group);
+      
       /**
        * Query the group the player belongs to.
        */
       virtual const QString& group() const;
+      
       /**
        * Sets the name of the player.
        * @param name The player's name
        */
       void setName(const QString& name);
+
       /**
        * @return The name of the player.
        */
@@ -237,6 +244,7 @@ public:
        * @return true if ok
        */
       bool addGameIO(KGameIO *input);
+      
       /**
        * remove a game IO device
        *
@@ -253,6 +261,7 @@ public:
        * @return the KGameIO device
        */
       KGameIO *findRttiIO(int rtti) const;
+
       /**
        * Checks whether this player has a IO device of the
        * given rtti type
@@ -286,6 +295,7 @@ public:
        * @return true/false
        */
       bool myTurn() const {return mMyTurn.value();}
+
       /**
        * Sets whether this player is the next to turn.
        * If exclusive is given all other players are set
@@ -372,6 +382,11 @@ public:
        */
       int calcIOValue();
 
+       /**
+        * @return the property handler
+        */
+       KGamePropertyHandlerBase* dataHandler();
+
 signals:
      /**
       * the player will be loaded from the given stream. We better
@@ -404,11 +419,6 @@ signals:
 
 
 protected:
-       friend class KGameDebugDialog;
-       /**
-        * @return the property handler
-        */
-       KGamePropertyHandlerBase* dataHandler();
 
 private:
       KGame *mGame;

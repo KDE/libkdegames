@@ -33,6 +33,7 @@
 #include <krandomsequence.h>
 #include <kdebug.h>
 
+#include "kgamepropertyhandler.h"
 #include "kgameproperty.h"
 #include "kplayer.h"
 #include "kgame.h"
@@ -85,11 +86,11 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d = new KGamePrivate;
   
  d->mProperties.registerHandler(KGameMessage::IdGameProperty,this);
- d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, dataHandler());
+ d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this);
  d->mMaxPlayer.initData(-1);  // Infinite
- d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, dataHandler());
+ d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this);
  d->mMinPlayer.initData(0);   // Always ok     
- d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, dataHandler());
+ d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this);
  d->mGameStatus.initData(End);
  d->mUniquePlayerNumber = 0;
  d->mCookie=cookie;
@@ -474,7 +475,7 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
  }
 
  kdDebug(11001) << "KGame: transmitting playerInput over network" << endl;
- sendSystemMessage(msg, (int)KGameMessage::IdPlayerInput, KGameMessage::calcMessageId(0,player->id()), sender);
+ sendSystemMessage(msg, (int)KGameMessage::IdPlayerInput, player->id() sender);
  return true;
 }
 
@@ -588,12 +589,19 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
  // player. Otherwise we proceed here and hope the best that the user processes
  // the message
  if (KGameMessage::calcPlayerId(receiver)) {
+   kdDebug(11001) << "message id " << msgid << " seems to be for a player" << endl;
+   kdDebug(11001) << "receiver: " << receiver << endl;
    KPlayer *p=findPlayer(receiver);
    if (p && p->isActive()) {
      kdDebug(11001) << "forwarding message to player " << receiver << endl;
      p->networkTransmission(stream,msgid,sender);
      emit signalMessageUpdate(msgid,receiver,sender); // hmmmm...but how else do we notice that somehting happended?
      return;
+   }
+   if (p) {
+      kdDebug(11001) << "player is here but not active" << endl;
+   } else {
+      kdDebug(11001) << "no player found" << endl;
    }
  }
  // If it is not for a player it is meant for us!!!! Otherwise the
@@ -1070,7 +1078,7 @@ bool KGame::addProperty(KGamePropertyBase* data)
 { return d->mProperties.addProperty(data); }
 
 bool KGame::sendPlayerProperty(QDataStream& s, int playerId)
-{ return sendSystemMessage(s, KGameMessage::IdPlayerProperty, KGameMessage::calcMessageId(0,playerId)); }
+{ return sendSystemMessage(s, KGameMessage::IdPlayerProperty, playerId); }
 
 bool KGame::sendProperty(QDataStream& s)
 { return sendSystemMessage(s, KGameMessage::IdGameProperty); }

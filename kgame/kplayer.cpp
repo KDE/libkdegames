@@ -31,6 +31,7 @@
 #include "kgameio.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
+#include "kgamepropertyhandler.h"
 
 #define KPLAYER_LOAD_COOKIE 7285
 
@@ -71,18 +72,18 @@ KPlayer::KPlayer() : QObject(0,0)
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
 
-   d->mGroup.registerData(KGamePropertyBase::IdGroup, dataHandler());
+   d->mGroup.registerData(KGamePropertyBase::IdGroup, this);
    d->mGroup.initData(i18n("default"));
-   d->mName.registerData(KGamePropertyBase::IdName, dataHandler());
+   d->mName.registerData(KGamePropertyBase::IdName, this);
    d->mName.initData(i18n("default"));
 
-   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, dataHandler());
+   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this);
    mAsyncInput.initData(false);
-   mMyTurn.registerData(KGamePropertyBase::IdTurn, dataHandler());
+   mMyTurn.registerData(KGamePropertyBase::IdTurn, this);
    mMyTurn.initData(false);
    mMyTurn.setEmittingSignal(true);
    mMyTurn.setOptimized(false);
-   mUserId.registerData(KGamePropertyBase::IdUserId, dataHandler());
+   mUserId.registerData(KGamePropertyBase::IdUserId, this);
    mUserId.initData(0);
 }
 

@@ -26,6 +26,7 @@
 #include <kdebug.h>
 #include "kgamemessage.h"
 #include "kgameproperty.h"
+#include "kgamepropertyhandler.h"
 
 
 template<class type>

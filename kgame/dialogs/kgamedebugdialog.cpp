@@ -23,12 +23,12 @@
 #include <klistview.h>
 #include <klistbox.h>
 
-//#include <kmessagebox.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 #include "kgame.h"
 #include "kplayer.h"
+#include "kgamepropertyhandler.h"
 
 #include "kgamedebugdialog.h"
 
@@ -314,6 +314,7 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
 	QListViewItem* prop = new QListViewItem(d->mPlayerProperties,
 			i18n(propertyName(it.current())),
 			propertyValue(it.current()));
+	++it;
  }
 }
 
@@ -407,13 +408,37 @@ QString KGameDebugDialog::propertyName(KGamePropertyBase* prop) const
 
 }
 
-QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop) const
+QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop) 
 {
  if (!prop) {
 	return i18n("NULL pointer");
  }
- //TODO
 
+ QString value;
+ switch (prop->id()) {
+	case KGamePropertyBase::IdGroup:
+		value = *(KGameProperty<QString>*)prop;
+	case KGamePropertyBase::IdName:
+		value = *(KGameProperty<QString>*)prop;
+	case KGamePropertyBase::IdAsyncInput:
+		value = (*(KGamePropertyBool*)prop) ? i18n("True") : i18n("False");
+	case KGamePropertyBase::IdTurn:
+		value = (*(KGamePropertyBool*)prop) ? i18n("True") : i18n("False");
+	case KGamePropertyBase::IdUserId:
+		value = QString::number(*(KGamePropertyBool*)prop);
+	case KGamePropertyBase::IdGameStatus:
+		value = QString::number(*(KGamePropertyBool*)prop);
+	case KGamePropertyBase::IdMaxPlayer:
+		value = QString::number(*(KGamePropertyBool*)prop);
+	case KGamePropertyBase::IdMinPlayer:
+		value = QString::number(*(KGamePropertyBool*)prop);
+	default:
+		emit signalRequestValue(prop, value);
+ }
+ if (value == QString::null) {
+	value = i18n("Unknown");
+ }
+ return value;
 }
 
 #include "kgamedebugdialog.moc"

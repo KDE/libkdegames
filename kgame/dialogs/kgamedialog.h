@@ -133,13 +133,18 @@ public:
 	void addChatWidget(int msgid);
 	void addConnectionList();
 
+	
 	/**
-	 * Add a new wiget to the dialog. The widget will be reparented to this
-	 * dialog. This also calls @ref KGameDialogConfig::setKGame and @ref
-	 * KGameDialogConfig::setOwner.
+	 * Add a new page to the dialog. The page will contain you new config
+	 * widget and will have your provided title.
+	 *
+	 * The widget will be reparented to this dialog. This also calls @ref
+	 * KGameDialogConfig::setKGame and @ref KGameDialogConfig::setOwner.
 	 * @param widget The new config widget
+	 * @param title The title of the newly added page.
+	 * @return The newly added page which contains your config widget.
 	 **/
-	void addConfigWidget(KGameDialogConfig* widget) { addConfigWidget(widget, 0); }
+	QVBox* addConfigPage(KGameDialogConfig* widget, const QString& title);
 
 protected:
 	void addConfigWidget(KGameDialogConfig* widget, QWidget* parent);

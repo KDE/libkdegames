@@ -28,7 +28,7 @@
 #ifndef __KGAMEDIALOGCONFIG_H__
 #define __KGAMEDIALOGCONFIG_H__
 
-#include <kdialogbase.h>
+#include <qwidget.h>
 
 class QGridLayout;
 class QVBoxLayout;
@@ -190,4 +190,25 @@ private:
 	KGameDialogGeneralConfigPrivate* d;
 };
 
+class KGameDialogMsgServerConfigPrivate;
+class KGameDialogMsgServerConfig : public KGameDialogConfig
+{
+	Q_OBJECT
+public:
+	KGameDialogMsgServerConfig(QWidget* parent);
+	~KGameDialogMsgServerConfig();
+
+	void changeMaxClients();
+	void changeAdmin();
+	void removeClient();
+	virtual void setKGame(KGame*);
+	virtual void setAdmin(bool);
+
+protected:
+	void removeClient(Q_UINT32 id);
+
+
+private:
+	KGameDialogMsgServerConfigPrivate* d;
+};
 #endif
