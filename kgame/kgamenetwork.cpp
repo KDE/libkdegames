@@ -46,7 +46,6 @@ public:
 public:
 	KMessageClient* mMessageClient;
 	KMessageServer* mMessageServer;
-	QList<KGameIO> mMessageListener;
 
 	int mCookie;
 };
@@ -296,30 +295,6 @@ void KGameNetwork::sendError(int error,const QString& text,int receiver,int send
  sendSystemMessage(stream,KGameMessage::IdError,receiver,sender);
 }
 
-bool KGameNetwork::sendGameIOMessage(const QByteArray& sendBuffer, int msgid, KGameIO *client,int receiver, int sender)
-{
- if (!client) {
-   return false;
- }
-
- QByteArray buffer;
- buffer.duplicate(sendBuffer);
-
- bool userMessage = msgid > KGameMessage::IdUser;
- if (userMessage) {
-   msgid -= KGameMessage::IdUser;
- }
-
- QDataStream ostream(buffer,IO_ReadOnly);
- int m, r, s;
- KGameMessage::extractHeader(ostream, m, r, s);
- if (!userMessage) {
-   client->sendSystemMessage(ostream, msgid, receiver, sender);
- } else {
-   client->sendMessage(ostream, msgid, receiver, sender);
- }
- return true;
-}
 
 // ----------------- receive messages from the network
 void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q_UINT32 clientID)
@@ -330,19 +305,6 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  int receiver; // the id of the KGame/KPlayer the message is for 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
 // kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
-
- // Forward to registered KGameIO clients
- KGameIO *input;
- for ( input = d->mMessageListener.first(); input != 0; input = d->mMessageListener.next() ) {
-   if (input == d->mMessageListener.first())  {
-     kdDebug(11001) << "forwarding to IOs ; id=" << msgid << " recv=" << receiver
-                    << " sender=" << sender << endl;
-//                    << " Buffersize=" << buffer.size()
-//                    << "   cookie=" << cookie() << " version="
-//                    << KGameMessage::version() << endl;
-   }
-   sendGameIOMessage(receiveBuffer, msgid, input, receiver, sender);
- }
 
  kdDebug() << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
  // No broadcast : receiver==0
@@ -379,23 +341,6 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  {
    networkTransmission(stream, msgid, receiver, sender, clientID);
  }
-}
-
-// -------------------- Listener ---------------------------
-bool KGameNetwork::registerListener (KGameIO *l)
-{
- kdDebug(11001) << "KGameNetwork::registerListener " << l << endl;
- if (!l) {
-   return false;
- }
- d->mMessageListener.append(l);
- return true;
-}
-
-bool KGameNetwork::unregisterListener(KGameIO *l)
-{
- kdDebug(11001) << "KGameNetwork::unregisterListener " << l << endl;
- return d->mMessageListener.remove(l);
 }
 
 // -------------- slots for the signals of the client

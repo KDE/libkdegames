@@ -248,22 +248,6 @@ public:
      **/
     bool sendMessage(int data, int msgid, int receiver=0, int sender=0);
 
-    /**
-     * Register a KGameIO devices as message listener. This means this
-     * device will get all messages to this game client forwarded
-     * @param l The client
-     * @return TRUE if the listener was successfully added to the list,
-     * otherwise FALSE
-     */
-    bool registerListener(KGameIO *l);
-
-    /**
-     * Unregister a @ref KGameIO device as messager listner.
-     * @param l The @ref KGameIO object to be unregistered
-     * @return TRUE if the listener was successfully removed from the list,
-     * otherwise FALSE
-     */
-    bool unregisterListener(KGameIO *l);
 
     /**
      * Called by @ref ReceiveNetworkTransmission(). Will be overwritten by
@@ -378,12 +362,6 @@ protected slots:
     void slotAdminStatusChanged(bool isAdmin);
 
 private:
-    /**
-     * @internal
-     * Same then the other transmitGameNetworkMessage except for different parameters. It is internally
-     * called by the other functions.
-     */
-    bool sendGameIOMessage(const QByteArray &msg, int msgid, KGameIO *client, int receiver=0, int sender=0 );
 
 private:
     KGameNetworkPrivate* d;
