@@ -637,7 +637,7 @@ signals:
     void signalGameOver(int status, KPlayer *current, KGame *me);
 
     /**
-    * Is emmited after a client is sucessfully connected to the game.
+    * Is emmited after a client is successfully connected to the game.
     * The client id is the id of the new game client. An easy way to
     * check whether that's us is
     * <pre>
@@ -671,7 +671,7 @@ signals:
 
 protected:
     /**
-     * A player input occured. This is the most important function
+     * A player input occurred. This is the most important function
      * as the given message will contain the current move made by
      * the given player.
      * Note that you HAVE to overwrite this function. Otherwise your
@@ -716,7 +716,7 @@ protected:
 
 
     /**
-    * This virtual function can be overwritten for your own player managment.
+    * This virtual function can be overwritten for your own player management.
     * It is called when a new game connects to an existing network game or
     * to the network master. In case you do not want all players of both games
     * to be present in the new network game, you can deactivate players here.
@@ -734,7 +734,7 @@ protected:
     * On the other hand setting one player of each game to a networkPriorty of
     * say 10, already does most of the work for you.
     *
-    * The parameters of this functin are the playerlist of the network game,
+    * The parameters of this function are the playerlist of the network game,
     * which is @ref playerList(). The second argument is the player list of
     * the new client who wants to join and the third argument serves as return
     * parameter. All <em>player ID's</em> which are written into this list

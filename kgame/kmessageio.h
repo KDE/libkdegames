@@ -258,7 +258,7 @@ protected:
   bool mAwaitingHeader;
   Q_UINT32 mNextBlockLength;
 
-  bool isRecursive;  // workarround for "bug" in QSocket, Qt 2.2.3 or older
+  bool isRecursive;  // workaround for "bug" in QSocket, Qt 2.2.3 or older
 };
 
 

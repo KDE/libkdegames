@@ -217,7 +217,7 @@ public:
 	 * @param id An ID for this entry. This must be unique for this
 	 * entry. It has nothing to do with the position of the entry in the
 	 * combo box! See @ref nextId
-	 * @return True if successfull, otherwise false (e.g. if the id is already used)
+	 * @return True if successful, otherwise false (e.g. if the id is already used)
 	 **/
 	bool addSendingEntry(const QString& text, int id);
 
@@ -229,7 +229,7 @@ public:
 	 * combo box! See @ref nextId
 	 * @param index The position of the entry. If -1 the entry will be added
 	 * at the bottom
-	 * @return True if successfull, otherwise false (e.g. if the id is already used)
+	 * @return True if successful, otherwise false (e.g. if the id is already used)
 	 **/
 	bool insertSendingEntry(const QString& text, int id, int index = -1);
 

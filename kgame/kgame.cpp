@@ -854,7 +854,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
  emit signalMessageUpdate(msgid, receiver, sender);
  if (KGameMessage::isPlayer(receiver))
  {
-   //kdDebug(11001) << "message id " << msgid << " seems to be for a player ("<<active=p->isActive()<<" recv="<< recevier << endl;
+   //kdDebug(11001) << "message id " << msgid << " seems to be for a player ("<<active=p->isActive()<<" recv="<< receiver << endl;
    KPlayer *p=findPlayer(receiver);
    if (p && p->isActive())
    {

@@ -266,7 +266,7 @@ public:
 
       /**
        * Sets the name of the player.
-       * This can be choosen arbitrary.
+       * This can be chosen arbitrary.
        * @param name The player's name
        */
       void setName(const QString& name);

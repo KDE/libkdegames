@@ -232,7 +232,7 @@ public:
    void showRandomCardDirBox(bool s);
 
    /**
-   * Returns the choosen deck, which is a valid path to a imagefile.
+   * Returns the chosen deck, which is a valid path to a imagefile.
    *
    * @return The deck
    */

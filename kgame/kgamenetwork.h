@@ -224,7 +224,7 @@ public:
      *
      * SendMessage differs from @ref sendSystemMessage only by the msgid parameter.
      * @ref sendSystemMessage is thought as a KGame only mehtod while
-     * sendMessage is for public use. The msgid paramter will be
+     * sendMessage is for public use. The msgid parameter will be
      * +=KGameMessage::IdUser and in @ref KGame::signalNetworkData msgid will
      * be -= KGameMessage::IdUser again, so that one can easily distinguish
      * between system and user messages.
@@ -322,7 +322,7 @@ public:
 
 signals:
     /**
-     * A network error occured
+     * A network error occurred
      * @param error the error code
      * @param text the error text
      */

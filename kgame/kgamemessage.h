@@ -140,7 +140,7 @@ class KGameMessage
     IdSetupGame=1,         // sent to a newly connected player
     IdSetupGameContinue=2, // continue the setup
     IdGameLoad=3,          // load/save the game to the client
-    IdGameConnected=4,     // Client sucessfully connected to master
+    IdGameConnected=4,     // Client successfully connected to master
     IdSyncRandom=5,        // new random seed set - sync games
     IdDisconnect=6,        // KGame object disconnects from game
     IdGameSetupDone=7,     // New game client is now operational
@@ -157,8 +157,8 @@ class KGameMessage
     IdTurn=34,              // Turn to be prepared
 
 // to-be-categorized
-    IdError=100,            // an error occured
-    IdPlayerInput=101,      // a player input occured
+    IdError=100,            // an error occurred
+    IdPlayerInput=101,      // a player input occurred
     IdIOAdded=102,          // KGameIO got added to a player...init this IO
 
 // special ids for computer player

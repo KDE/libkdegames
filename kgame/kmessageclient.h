@@ -150,7 +150,7 @@ public:
 
   /**
     @return True, if a connection to a @ref KMessageServer has been started, and if the
-    connection is ready for transfering data. (It will return false e.g. as long as
+    connection is ready for transferring data. (It will return false e.g. as long as
     a socket connection hasn't been established, and it will also return false after
     a socket connection is broken.)
   */

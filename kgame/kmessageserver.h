@@ -53,7 +53,7 @@ class KMessageServerPrivate;
   Usually that is everything you will do. There are a lot of public methods to
   administrate the object (maximum number of clients, finding clients, removing
   clients, setting the admin client, ...), but this functionality can also
-  be done by messages from the clients. So you can administrate the object completly
+  be done by messages from the clients. So you can administrate the object completely
   on remote.
 
   If you want to extend the Server for your own needs (e.g. additional message types),

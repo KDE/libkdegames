@@ -131,7 +131,7 @@ void KMessageSocket::processNewData ()
     }
     else
     {
-      // Data not completly read => wait for more
+      // Data not completely read => wait for more
       if (mSocket->bytesAvailable() < (Q_ULONG) mNextBlockLength)
         return;
 

@@ -90,7 +90,7 @@ public:
 
 	/**
 	 * Register the handler with a parent. This is to use
-	 * if the constructor without arguments has been choosen.
+	 * if the constructor without arguments has been chosen.
 	 * Otherwise you need not call this.
 	 *
 	 * @param id The id of the message to listen for
