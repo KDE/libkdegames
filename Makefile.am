@@ -9,9 +9,10 @@ libkdegames_la_LIBADD  = $(top_builddir)/libkdegames/kgame/libkgame.la \
 
 libkdegames_la_SOURCES = kcarddialog.cpp kstdgameaction.cpp \
 		kgamemisc.cpp khighscore.cpp kchatbase.cpp kchat.cpp \
-		kchatdialog.cpp kscoredialog.cpp
+		kchatdialog.cpp kscoredialog.cpp kgameprogress.cpp
 include_HEADERS = kgamemisc.h kcarddialog.h kstdgameaction.h \
-		khighscore.h kchatbase.h kchat.h kchatdialog.h kscoredialog.h
+		khighscore.h kchatbase.h kchat.h kchatdialog.h kscoredialog.h \
+                kgameprogress.h
 
 INCLUDES = $(all_includes)
 METASOURCES = AUTO
