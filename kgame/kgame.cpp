@@ -749,8 +749,9 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
  if (gameSequence())
  {
    gameSequence()->setCurrentPlayer(player);
-   gameOver = gameSequence()->checkGameOver(player);
  }
+ // do not call gameSequence()->checkGameOver() to keep backward compatibility!
+ gameOver = checkGameOver(player);
  if (gameOver!=0)
  {
    if (player)
