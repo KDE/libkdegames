@@ -1,9 +1,11 @@
 [KDE Backdeck]
 Name=Blue Balloon
 Name[af]=Blou Ballon
+Name[ar]=بالون أزرق
 Name[az]=Göy Balon
 Name[bg]=Син балон
 Name[bn]=নীল বেলুন
+Name[br]=Boull glas
 Name[bs]=Plavi balon
 Name[ca]=Pilota blava
 Name[cs]=Modrý balón
@@ -24,6 +26,7 @@ Name[it]=Pallone blu
 Name[ja]=青風船
 Name[ko]=파란 풍선
 Name[lv]=Zils Balons
+Name[mk]=Син балон
 Name[mt]=Bużżieqa Blu
 Name[nb]=Blå ballong
 Name[nl]=Blauwe ballon
@@ -77,6 +80,7 @@ Comment[is]=Spilastokkur eftir Warwick Allison
 Comment[it]=Mazzo di carte fornito da Warwick Allison
 Comment[ja]=カードセット by Warwick Allison
 Comment[lv]=Kāršu komplekts no Warwick Allison
+Comment[mk]=Комплетот карти е обезбеден од Ворвик Алисон (Warwick Allison)
 Comment[mt]=Sett ta' karti mogħti minn Warwick Allison
 Comment[nb]=Kortstokk levert av Warwick Allison
 Comment[nl]=Kaartset, geleverd door Warwick Allison

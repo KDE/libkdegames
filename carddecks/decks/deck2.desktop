@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Starrise
+Name[ar]=ظهور النجوم
 Name[bg]=Звезди
 Name[bn]=তারার উদয়
 Name[ca]=Estrellat
@@ -15,6 +16,7 @@ Name[hu]=Csillagok
 Name[is]=Ris stjarna
 Name[it]=Alba spaziale
 Name[ko]=별무리
+Name[mk]=Изгрев
 Name[mt]=SemaStilel
 Name[nb]=Stjerner
 Name[nl]=Sterrijzenis
