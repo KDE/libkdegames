@@ -798,10 +798,6 @@ void KCardDialog::init()
     if (_inited)
         return;
     KGlobal::dirs()->addResourceType("cards", KStandardDirs::kde_default("data") + QString::fromLatin1("carddecks/"));
-#ifdef SRCDIR
-    KGlobal::dirs()->addResourceDir("cards", SRCDIR + QString::fromLatin1("/carddecks/"));
-#endif
-
     KGlobal::locale()->insertCatalogue("libkdegames");
     _inited = true;
 }
