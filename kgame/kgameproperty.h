@@ -283,6 +283,8 @@ public:
 	 **/
 	int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, QString name=0);
 
+	void unregisterData();
+
  
 protected:
 	/**

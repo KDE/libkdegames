@@ -140,7 +140,7 @@ bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
  if (!data) {
 	return false;
  }
- d->mNameMap.remove(data->id());
+ d->mNameMap.erase(data->id());
  return d->mIdDict.remove(data->id());
 }
 
@@ -156,7 +156,7 @@ bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, QString name)
   // if here is a check for "is_debug" or so we can add the strings only in debug mode
   // and save memory!!
 	if (!name.isNull()) {
-		d->mNameMap.insert(data->id(), name);
+		d->mNameMap[data->id()] = name;
 		//kdDebug(11001) << "KGamePropertyHandler::addProperty: nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
 		//kdDebug(11001) << "Typeid=" << typeid(data).name() << endl;
   	//kdDebug(11001) << "Typeid call=" << data->typeinfo()->name() << endl;
@@ -288,9 +288,17 @@ KGamePropertyBase *KGamePropertyHandler::find(int id)
 
 void KGamePropertyHandler::clear()
 {
- kdDebug(11001) << "KGamePropertyHandler::clear()" << endl;
- d->mIdDict.clear();
- d->mNameMap.clear();
+ kdDebug(11001) << "KGamePropertyHandler::clear() " << id() << endl;
+ QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ while (it.toFirst()) {
+	KGamePropertyBase* p = it.toFirst();
+	p->unregisterData();
+	if (d->mIdDict.find(p->id())) {
+		// shouldn't happen - but if mOwner in KGamePropertyBase is NULL
+		// this might be possible
+		removeProperty(p); 
+	}
+ }
 }
 
 QIntDict<KGamePropertyBase>& KGamePropertyHandler::dict() const

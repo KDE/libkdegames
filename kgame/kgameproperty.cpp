@@ -54,9 +54,7 @@ KGamePropertyBase::KGamePropertyBase()
 
 KGamePropertyBase::~KGamePropertyBase()
 {
- if (mOwner) {
-//	mOwner->removeProperty(this);
- }
+ unregisterData();
 }
 
 void KGamePropertyBase::init()
@@ -112,6 +110,15 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,Property
   }
  }
  return mId;
+}
+
+void KGamePropertyBase::unregisterData()
+{
+ if (!mOwner) {
+	return;
+ }
+ mOwner->removeProperty(this);
+ mOwner = 0;
 }
 
 bool KGamePropertyBase::sendProperty()
