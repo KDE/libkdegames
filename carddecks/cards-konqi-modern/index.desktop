@@ -1,13 +1,12 @@
 [KDE Backdeck]
 Name=Konqi
-Name[af]=konqi
 Name[cs]=Konqui
 Name[eo]=Konĉja
 Name[it]=Konqui
 Name[ko]=콩키
 Name[lv]=Konkvi
 Name[ru]=Конки
-Name[xx]=xx
+Name[zu]=I-Konqi
 Preview=11.png
 PySol=false
 Comment=Modern Konqi - play the family carddeck\nDesign: Laura Layland\n     <l_layland@hotmail.com>\nKatie by Agnieszka Czajkowska\n     <agnieszka@imagegalaxy.de>\nKonqi by Stefan Spatz\n     <stefan.spatz@stud-mail.uni-wuerzburg.de>
