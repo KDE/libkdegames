@@ -32,12 +32,12 @@ class KGamePropertyBase;
 class KGameChatPrivate;
 
 /**
- * This is a chat widget which can easily added to a KGame based game.
+ * @short A Chat widget for KGame-based games
  *
  * Call @ref setFromPlayer() first - this will be used as the "from" part of
  * every message you will send. Otherwise it won't work! You can also use the
  * fromPlayer parameter in the constructor though...
- * @short A Chat widget for KGame-based games
+ *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KGameChat : public KChatBase
