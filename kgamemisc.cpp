@@ -341,6 +341,6 @@ QString KGameMisc::randomName()// do we need i18n? I think yes
    case 276: return i18n("Woohyun");
    case 277: return i18n("Wynn");
    case 278: return i18n("Yves");
-   default: return i18n("Unknwon");
+   default: return i18n("Unknown");
  };
 }
