@@ -184,11 +184,11 @@ KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 { delete d; } 
 
 void KGameDialogGeneralConfig::setMaxPlayers(int m)
-{ d->mMaxPlayers = m; }
+{ d->mMaxPlayers = (KIntNumInput *)m; }
 void KGameDialogGeneralConfig::setPlayerName(const QString& name)
 { d->mName->setText(name); }
 void KGameDialogGeneralConfig::setMinPlayers(int m)
-{ d->mMinPlayers = m; }
+{ d->mMinPlayers = (KIntNumInput *)m; }
 int KGameDialogGeneralConfig::minPlayers() const
 { return d->mMinPlayers->value(); }
 int KGameDialogGeneralConfig::maxPlayers() const
