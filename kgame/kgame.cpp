@@ -86,11 +86,11 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
   
  d->mProperties.registerHandler(KGameMessage::IdGameProperty,this);
  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, dataHandler());
- d->mMaxPlayer.changeValue(-1);  // Infinite
+ d->mMaxPlayer.initData(-1);  // Infinite
  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, dataHandler());
- d->mMinPlayer.changeValue(0);   // Always ok     
+ d->mMinPlayer.initData(0);   // Always ok     
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, dataHandler());
- d->mGameStatus = End;
+ d->mGameStatus.initData(End);
  d->mUniquePlayerNumber = 0;
  d->mCookie=cookie;
  d->mRandom = new KRandomSequence;
@@ -430,17 +430,16 @@ void KGame::setMinPlayers(uint minnumber)
 { if (isAdmin()) { d->mMinPlayer.changeValue(minnumber); } }
 
 uint KGame::minPlayers() const
-{ return d->mMinPlayer.localValue(); }
+{ return d->mMinPlayer.value(); }
 
 int KGame::maxPlayers() const
-{ return d->mMaxPlayer.localValue(); }
+{ return d->mMaxPlayer.value(); }
 
 uint KGame::playerCount() const
 { return d->mPlayerList.count(); }
 
 int KGame::gameStatus() const
 { return d->mGameStatus.value(); }
-//{ return d->mGameStatus.localValue(); }
 
 bool KGame::isRunning() const
 { return d->mGameStatus.value() == Run; }

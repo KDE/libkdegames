@@ -51,9 +51,15 @@ void KGamePropertyBase::init()
  // this is very useful and used by e.g. KGameDialog so
  // it is activated by default. Big games may profit by deactivating it to get
  // a better performance. 
- setEmittingSignal(true); 
+ setEmittingSignal(true);
+
  setOptimized(false); 
+ 
  setReadOnly(false);
+ 
+ // we default to always consistent as it is much more clean. (false) might be
+ // easier to use though...
+ setAlwaysConsistent(true);
 }
 
 void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner)
@@ -219,3 +225,4 @@ bool KGamePropertyHandlerBase::save(QDataStream &stream)
  stream << (Q_INT16)KPLAYERHANDLER_LOAD_COOKIE;
  return true;
 }
+

@@ -40,15 +40,19 @@ class KGamePropertyHandlerBase;
 class KGamePropertyBase
 {
 public:
-	enum PropertyDataIds  { // these belong to KPlayer!
+	enum PropertyDataIds  { // these belong to KPlayer/KGame!
+		//KPlayer
 		IdGroup=1,
 		IdName=2,
 		IdAsyncInput=3,
 		IdTurn=4,
-		IdGameStatus=5,
-		IdMaxPlayer=6,
-		IdMinPlayer=7,
-		IdUserId=8,
+		IdUserId=5,
+
+		//KGame
+		IdGameStatus=6,
+		IdMaxPlayer=7,
+		IdMinPlayer=8,
+
 		IdCommand, // Reserved for internal use
 		IdUser=256
 	};
@@ -68,6 +72,41 @@ public:
 		CmdRemove=6,
 		CmdClear=7
 	};
+
+	/**
+	 * The policy of the property. This is either clean (@ref setVale uses
+	 * @ref send) or dirty (@ref setValue uses @ref changeValue).
+	 *
+	 * A "clean" policy means that the property is always the same on every
+	 * client. This is achieved by calling @ref send which actually changes
+	 * the value only when the message from the MessageServer is received.
+	 *
+	 * A "dirty" policy means that as soon as @ref setValue is called the
+	 * property is changed immediately. This can sometimes lead to bugs as
+	 * the other clients do not immediately have the same value. For more
+	 * information see @ref changeValue
+	 **/
+	enum PropertyPolicy
+	{
+		PolicyClean = 1,
+		PolicyDirty = 2
+	};
+
+	/**
+	 * Changes the consistency policy of a property. This is either true (default)
+	 * which means a "clean" (always consistent) policy or a "dirty" policy. 
+	 *
+	 * A clean policy (true) means that you cannot work immediately with the new
+	 * value of the property as it has to be received from the Message
+	 * Server first.
+	 *
+	 * On the other hand a dirty policy (false) might introduce evil bugs as the
+	 * property has a different value on different clients until the network
+	 * value is received.
+	 *
+	 * It is up to you to decide how you want to work. 
+	 **/
+	void setAlwaysConsistent(bool c) { mFlags.bits.cleanPolicy=c&1; }
 
 	/**
 	 * Constructs a KGamePropertyBase object and calls @ref registerData.
@@ -118,6 +157,13 @@ public:
 	bool isOptimized() const { return mFlags.bits.optimize; }
 
 	/**
+	 * See also @ref setAlwaysConsistent
+	 * @return TRUE if the property uses a "clean" (always consistent)
+	 * policy, otherwise FALSE.
+	 **/
+	bool isAlwaysConsistent() const { return mFlags.bits.cleanPolicy; }
+
+	/**
 	 * A readonly property cannot be changed. Use this if you to prevent a
 	 * player from changing something, e.g. for a money-bases card game you
 	 * will want to lock the "bet" property after a player has bet.
@@ -128,7 +174,6 @@ public:
 	 **/
 	void setReadOnly(bool p) { mFlags.bits.readonly = p&1; }
 	
-
 	/**
 	 * This will read the value of this property from the stream. You MUST
 	 * overwrite this method in order to use this class
@@ -206,6 +251,7 @@ protected:
 						// can used 2 more
 			unsigned char readonly : 1; // whether the property can be changed (false)
 			unsigned char optimize : 1; // whether the property tries to optimize send/emit (false)
+			unsigned char cleanPolicy : 1; // whether the property is always consistent (true)
 		} bits;
 	} mFlags;
 	
@@ -289,6 +335,21 @@ public:
 	KGameProperty() : KGamePropertyBase() { init(); }
 
 	virtual ~KGameProperty() {}
+
+	/**
+	 * Set the value depending on the current policy (see @ref
+	 * setConsistent). By default KGameProperty just uses @ref send to set
+	 * the value of a property. This behaviour can be changed by using @ref
+	 * setConsistent and using this funcition.
+	 **/
+	void setValue(type v)
+	{
+		if (isAlwaysConsistent()) {
+			send(v);
+		} else {
+			changeValue(v);
+		}
+	}
 
 
 	/**
@@ -419,7 +480,6 @@ public:
 	 **/
 	void changeValue(type v)
 	{
-		kdDebug() << "changeValue()" << endl;
 		setLocal(v);
 		send(v);
 	}
@@ -434,15 +494,17 @@ public:
 	}
 
 	/**
-	 * @return The value of this object
-	 **/
-	const type& value() const	{ return mData; }
-
-	/**
 	 * @return The local value (see @ref setLocal) if it is existing,
 	 * otherwise the same as @ref value.
 	 **/
-	const type& localValue() const { return (mLocalData ? *mLocalData : mData); }
+	const type& value() const	{ return (mLocalData ? *mLocalData : mData); }
+
+	/**
+	 * You usually don't want to call this but rather @ref value
+	 * @return The network value which is __always__ consistent among all
+	 * clients. 
+	 **/
+	const type& networkValue() const { return mData; }
 
 	/**
 	 * Reads from a stream and assigns the read value to this object. This
@@ -468,8 +530,11 @@ public:
 	}
 
 	/**
-	 * This calls @ref send to send the value over network. Note that the
-	 * returned value is NOT the same as the assigned value!! E.g.
+	 * This calls @ref setValue to change the value of the property. Not
+	 * that depending on the policy (see @ref setAlwaysConsistent) the
+	 * returned value might be different from the assigned value!!
+	 *
+	 * So if you use @ref setAlwaysConsistent(false):
 	 * <pre>
 	 * int a, b = 10;
 	 * myProperty = b;
@@ -477,15 +542,17 @@ public:
 	 * </pre>
 	 * Here a and b would differ (except if myProperty.value() has been 10
 	 * before)!
-	 *
 	 * The value is actually set as soon as it is received form the @ref
 	 * KMessageServer which forwards it to ALL clients in the network.
-	 * @return @ref value - note that the returned value is NOT t!
+	 *
+	 * If you use a clean policy (i.e. @ref alwaysConsistent == true) then
+	 * the returned value is the assigned value
+	 * @return See @ref value
 	 **/
 	const type& operator=(const type& t) 
 	{ 
-		send(t); 
-		return mData;
+		setValue(t); 
+		return value();
 	}
 
 	/**

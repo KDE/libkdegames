@@ -161,13 +161,13 @@ void KPlayer::setGroup(const QString& group)
 { d->mGroup = group; }
 
 const QString& KPlayer::group() const
-{ return d->mGroup.localValue(); }
+{ return d->mGroup.value(); }
 
 void KPlayer::setName(const QString& name)
 { d->mName = name; }
 
 const QString& KPlayer::name() const
-{ return d->mName.localValue(); }
+{ return d->mName.value(); }
 
 int KPlayer::id() const
 { return d->mId; }
