@@ -487,6 +487,25 @@ protected slots:
 
 signals:
     /**
+     * When a client disconnects from the game usually all players from that
+     * client are removed. But if you use completely the KGame structure you
+     * probably don't want this. You just want to replace the KGameIO of the
+     * (human) player by a computer KGameIO. So this player continues game but
+     * is from this point on controlled by the computer.
+     *
+     * You achieve this by connecting to this signal. It is emitted as soon as a
+     * client disconnects on <em>all</em> other clients. Make sure to add a new
+     * KGameIO only once! you might want to use @ref isAdmin for this. If you
+     * added a new KGameIO set *remove=false otherwise the player is completely
+     * removed.
+     * @param player The player that is about to be removed. Add your new
+     * KGameIO here - but only on <em>one</em> client!
+     * @param remove Set this to FALSE if you don't want this player to be
+     * removed completely.
+     **/
+    void signalReplacePlayerIO(KPlayer* player, bool* remove);
+    
+    /**
      * The game will be loaded from the given stream. Load from here
      * the data which is NOT a game or player property.
      * It is not necessary to use this signal for a full property game.

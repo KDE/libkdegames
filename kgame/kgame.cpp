@@ -380,7 +380,7 @@ void KGame::addPlayer(KPlayer* newplayer)
  if (maxPlayers() >= 0 && (int)playerCount() >= maxPlayers())
  {
    kdWarning(11001) << "cannot add more than " << maxPlayers() << " players - deleting..." << endl;
-  delete newplayer;
+   delete newplayer;
    return;
  }
 
@@ -1280,8 +1280,14 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool /*broken*/) // server 
 
  for ( player=removeList.first(); player != 0; player=removeList.next() )
  {
-   kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
-   removePlayer(player,0);
+   // try to replace the KGameIO first
+   bool remove = true;
+   emit signalReplacePlayerIO(player, &remove);
+   if (remove) {
+     // otherwise (no new KGameIO) remove the player
+     kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
+     removePlayer(player,0);
+   }
  }
 
  // Now add inactive players - sequence should be ok
