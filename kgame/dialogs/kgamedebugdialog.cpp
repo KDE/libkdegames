@@ -29,13 +29,14 @@
 #include <klistbox.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kpushbutton.h>
+#include <kstdguiitem.h>
 
 #include <qlayout.h>
 #include <qstring.h>
 #include <qintdict.h>
 #include <qlabel.h>
 #include <qdatetime.h>
-#include <qpushbutton.h>
 
 #include <typeinfo>
 
@@ -97,7 +98,7 @@ public:
 	QListViewItem* mGameMaxPlayers;
 	QListViewItem* mGameMinPlayers;
 	QListViewItem* mGamePlayerCount;
-	
+
 	QFrame* mPlayerPage;
 	KListBox* mPlayerList;
 	KListView* mPlayerProperties;
@@ -120,7 +121,7 @@ public:
 };
 
 KGameDebugDialog::KGameDebugDialog(KGame* g, QWidget* parent, bool modal) :
-		KDialogBase(Tabbed, i18n("KGame Debug Dialog"), Close, Close, 
+		KDialogBase(Tabbed, i18n("KGame Debug Dialog"), Close, Close,
 		parent, 0, modal, true)
 {
  d = new KGameDebugDialogPrivate;
@@ -153,7 +154,7 @@ void KGameDebugDialog::initGamePage()
  d->mGameProperties->addColumn(i18n("Value"));
  d->mGameProperties->addColumn(i18n("Policy"));
  layout->addWidget(d->mGameProperties);
- 
+
  QPushButton* b = new QPushButton(i18n("Update"), d->mGamePage);
  connect(b, SIGNAL(pressed()), this, SLOT(slotUpdateGameData()));
  topLayout->addWidget(b);
@@ -191,13 +192,13 @@ void KGameDebugDialog::initPlayerPage()
  layout->addWidget(v);
  v->addColumn(i18n("Data"));
  v->addColumn(i18n("Value"));
- 
+
  d->mPlayerProperties = new KListView(d->mPlayerPage);
  d->mPlayerProperties->addColumn(i18n("Property"));
  d->mPlayerProperties->addColumn(i18n("Value"));
  d->mPlayerProperties->addColumn(i18n("Policy"));
  layout->addWidget(d->mPlayerProperties);
- 
+
  QPushButton* b = new QPushButton(i18n("Update"), d->mPlayerPage);
  connect(b, SIGNAL(pressed()), this, SLOT(slotUpdatePlayerList()));
  topLayout->addWidget(b);
@@ -231,7 +232,7 @@ void KGameDebugDialog::initMessagePage()
  QPushButton* hide = new QPushButton(i18n("&>>"), d->mMessagePage);
  connect(hide, SIGNAL(pressed()), this, SLOT(slotHideId()));
  layout->addWidget(hide, 4, 4);
- 
+
  QPushButton* show = new QPushButton(i18n("&<<"), d->mMessagePage);
  connect(show, SIGNAL(pressed()), this, SLOT(slotShowId()));
  layout->addWidget(show, 6, 4);
@@ -241,7 +242,7 @@ void KGameDebugDialog::initMessagePage()
  d->mHideIdList = new KListBox(d->mMessagePage);
  layout->addMultiCellWidget(d->mHideIdList, 1, 8, 5, 6);
 
- QPushButton* clear = new QPushButton(i18n("Clear"), d->mMessagePage);
+ QPushButton* clear = new KPushButton(KStdGuiItem::clear(), d->mMessagePage);
  connect(clear, SIGNAL(pressed()), this, SLOT(slotClearMessages()));
  layout->addMultiCellWidget(clear, 10, 10, 0, 6);
  //TODO: "show all but..." and "show nothing but..."
@@ -291,7 +292,7 @@ void KGameDebugDialog::slotUpdatePlayerData()
 
 void KGameDebugDialog::slotUpdatePlayerList()
 {
- QListBoxItem* i = d->mPlayerList->firstItem(); 
+ QListBoxItem* i = d->mPlayerList->firstItem();
  for (; i; i = d->mPlayerList->firstItem()) {
 	removePlayer(i);
  }
@@ -348,7 +349,7 @@ void KGameDebugDialog::slotUpdateGameData()
 	}
 	(void) new QListViewItem(d->mGameProperties,
 			handler->propertyName(it.current()->id()),
-			handler->propertyValue(it.current()), 
+			handler->propertyValue(it.current()),
 			policy);
 //	kdDebug(11001) << k_funcinfo << ": checking for all game properties: found property name " << name << endl;
 	++it;
@@ -496,8 +497,8 @@ void KGameDebugDialog::slotMessageUpdate(int msgid, Q_UINT32 receiver, Q_UINT32 
 		msgidText = i18n("Unknown");
 	}
  }
- (void) new QListViewItem( d->mMessageList, QTime::currentTime().toString(), 
-		QString::number(msgid), QString::number(receiver), 
+ (void) new QListViewItem( d->mMessageList, QTime::currentTime().toString(),
+		QString::number(msgid), QString::number(receiver),
 		QString::number(sender), msgidText);
 }
 
