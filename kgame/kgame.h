@@ -513,7 +513,7 @@ signals:
     void signalPropertyChanged(KGamePropertyBase *property, KGame *me);
 
     /**
-     * Is emitted after a call to gameOver() returns a nonm zero
+     * Is emitted after a call to gameOver() returns a non zero
      * return code. This code is forwarded to this signal as 'status'.
      *
      * @param status the return code of gameOver()
@@ -521,8 +521,58 @@ signals:
      * @param me a pointer to the KGame object
      */
     void signalGameOver(int status, KPlayer *current, KGame *me);
+     
+    /**
+    * Is emmited after a client is sucessfully connected to the game.
+    * The client id is the id of the new game client. An easy way to
+    * check whether that's us is 
+    * <pre>
+    *   if (clientid==gameid()) .. // we joined
+    *   else ... // someone joined the game
+    * </pre>
+    * @param clientid - The id of the new client
+    * @param me - our game pointer
+    */
+    void signalClientConnected(int clientid,KGame *me);
+
 
 protected:
+
+    /**
+    * This virtual function can be overwritten for your own player managment.
+    * It is called when a new game connects to an existing network game or
+    * to the network master. In case you do not want all players of both games
+    * to be present in the new network game, you can deactivate players here.
+    * This is of particular importance if you have a game with fixed number of
+    * player like e.g. chess. A network connect needs to disable one player of
+    * each game to make sense.
+    * 
+    * Not overwriting this function will activate a default behaviour which
+    * will deactivate players until the @ref maxPlayers() numebr is reached
+    * according to the KPlayer::networkPriority() value. Players with a low
+    * value will be kicked out first. With equal priority players of the new
+    * client will leave first. This means, not setting this value and not
+    * overwriting this function will never allow a chess game to add client
+    * players!!! 
+    * On the other hand setting one player of each game to a networkPriorty of
+    * say 10, already does most of the work for you.
+    *
+    * The parameters of this functin are the playerlist of the network game,
+    * which is @ref playerList(). The second argument is the player list of
+    * the new client who wants to join and the third argument serves as return
+    * parameter. All <em>player ID's</em> which are written into this list
+    * will be <em>removed</em> from the created game. You do this by an
+    * <pre>
+    * inactivate.append(player->id());
+    * </pre>
+    * 
+    * @param oldplayer - the list of the network players
+    * @param newplayer - the list of the client players
+    * @param inactivate - the value list of ids to be deactivated
+    *
+    **/ 
+    virtual void newPlayersJoin(KGamePlayerList *oldplayer,KGamePlayerList *newplayer,QValueList<int> &inactivate) {};
+
     /**
     * Save the player list to a stream. Used for network game and load/save.
     * Can be overwritten if you know what you are doing
@@ -668,11 +718,6 @@ private:
      * Helping function - game negotiation
      **/
     void setupGameContinue(QDataStream& msg, Q_UINT32 sender);
-
-    /**
-     * Helping function - game negotiation
-     **/
-    void gameReactivatePlayer(QDataStream& msg, Q_UINT32 sender);
 
     /**
      * Removes a player from all lists, removes the @ref KGame pointer from the

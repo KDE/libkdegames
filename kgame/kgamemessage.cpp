@@ -29,11 +29,11 @@
 
 Q_UINT32 KGameMessage::rawGameId(Q_UINT32 playerid)
 {
-  return playerid&0x3ff;
+  return (playerid&0xfc00)>>10;
 }
 int KGameMessage::rawPlayerId(Q_UINT32 playerid)
 {
-  return playerid&0x3ff;
+  return playerid&0x03ff;
 }
 
 bool KGameMessage::isPlayer(int msgid)
@@ -111,8 +111,10 @@ QString KGameMessage::messageId2Text(int msgid)
 		return i18n("Setup Game Continue");
 	case KGameMessage::IdGameLoad:
 		return i18n("Load Game");
-	case KGameMessage::IdGameReactivatePlayer:
-		return i18n("Reactivate Player");
+	case KGameMessage::IdGameConnected:
+		return i18n("Client game connected");
+	case KGameMessage::IdGameSetupDone:
+		return i18n("Game setup done");
 	case KGameMessage::IdSyncRandom:
 		return i18n("Synchronize Random");
 	case KGameMessage::IdDisconnect:

@@ -132,9 +132,10 @@ class KGameMessage
     IdSetupGame=1,         // sent to a newly connected player
     IdSetupGameContinue=2, // continue the setup
     IdGameLoad=3,          // load/save the game to the client
-    IdGameReactivatePlayer=4,   // reactive the inactive players
+    IdGameConnected=4,     // Client sucessfully connected to master
     IdSyncRandom=5,        // new random seed set - sync games
     IdDisconnect=6,        // KGame object disconnects from game
+    IdGameSetupDone=7,     // New game client is now operational
 
 // properties
     IdPlayerProperty=20,   // a player property changed
