@@ -44,7 +44,7 @@ public:
 	KConfig* mConfig;
 };
 
-KHighscore::KHighscore()
+KHighscore::KHighscore(QObject* parent) : QObject(parent)
 {
  d = new KHighscorePrivate;
 
@@ -79,9 +79,6 @@ KConfig* KHighscore::config() const
 
 void KHighscore::writeEntry(int entry, const QString& key, const QString& value)
 {
- if (entry < 1) {
-	return;
- }
  // save the group in case that we are on kapp->config()
  QString group = config()->group();
  QString confKey = QString("%1_%2").arg(entry).arg(key);
@@ -90,21 +87,42 @@ void KHighscore::writeEntry(int entry, const QString& key, const QString& value)
  config()->setGroup(group);
 }
 
+void KHighscore::writeEntry(int entry, const QString& key, int value)
+{ writeEntry(entry, key, QString::number(value)); }
 
-QString KHighscore::readEntry(int entry, const QString& key) const
+QString KHighscore::readEntry(int entry, const QString& key, const QString& pDefault) const
 {
- if (entry < 1) {
-	return QString::null;
- }
  // save the group in case that we are on kapp->config()
  QString group = config()->group();
- QString confKey = QString("%1_%2").arg(entry).arg(key);
  config()->setGroup(GROUP);
- QString value = config()->readEntry(confKey);
+ QString value;
+ if (hasEntry(entry, key)) {
+	QString confKey = QString("%1_%2").arg(entry).arg(key);
+	value = config()->readEntry(confKey);
+ } else {
+	value = pDefault;
+ }
  config()->setGroup(group);
  return value;
 }
 
+int KHighscore::readNumEntry(int entry, const QString& key, int pDefault) const
+{
+ QString v = readEntry(entry, key, QString::number(pDefault));
+ bool ok;
+ int value = v.toInt(&ok);
+ return ok ? value : pDefault;
+}
+
+bool KHighscore::hasEntry(int entry, const QString& key) const
+{
+ QString group = config()->group();
+ QString confKey = QString("%1_%2").arg(entry).arg(key);
+ config()->setGroup(GROUP);
+ bool value = config()->hasKey(confKey);
+ config()->setGroup(group);
+ return value;
+}
 
 QStringList KHighscore::readList(const QString& key, int lastEntry) const
 {
@@ -123,8 +141,12 @@ QStringList KHighscore::readList(const QString& key, int lastEntry) const
 
 void KHighscore::writeList(const QString& key, const QStringList& list)
 {
- for (int i = 0; i < list.count(); i++) {
+ for (int unsigned i = 0; i < list.count(); i++) {
 	writeEntry(i + 1, key, list[i]);
  }
 }
+
+bool KHighscore::hasTable() const
+{ return config()->hasGroup(GROUP); }
+
 

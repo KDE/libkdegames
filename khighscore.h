@@ -27,6 +27,7 @@
 #define __KHIGHSCORE_H__
 
 #include <qstring.h>
+#include <qobject.h>
 
 class KConfig;
 
@@ -57,10 +58,11 @@ class KHighscorePrivate;
  * @short Class for managing highscore tables
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/ 
-class KHighscore
+class KHighscore : public QObject
 {
+	Q_OBJECT
 public:
-	KHighscore();
+	KHighscore(QObject* parent = 0);
 	~KHighscore();
 
 	/**
@@ -73,14 +75,42 @@ public:
 	void writeEntry(int entry, const QString& key, const QString& value);
 
 	/**
+	 * This is an overloaded member function, provided for convinience.
+	 * It differs from the above function only in what argument(s) it accepts.
+	 **/
+	void writeEntry(int entry, const QString& key, int value);
+
+	/**
 	 * Reads an entry from the highscore table.
 	 * @param entry The number of the entry / the placing to be read
 	 * @param key The key of the entry. E.g. "name" for the name of the
 	 * player. Nearly the same as the usual keys in @ref KConfig - but they
 	 * are prefixed with the entry number
-	 * @return The value of this entry+key pair
+	 * @param pDefault This will be used as default value if the key+pair
+	 * entry can't be found.
+	 * @return The value of this entry+key pair or pDefault if the entry+key
+	 * pair doesn't exist
 	 **/
-	QString readEntry(int entry, const QString& key) const;
+	QString readEntry(int entry, const QString& key, const QString& pDefault = QString::null) const;
+
+	/**
+	 * Read a numeric value.
+	 * @param entry The number of the entry / the placing to be read
+	 * @param key The key of the entry. E.g. "name" for the name of the
+	 * player. Nearly the same as the usual keys in @ref KConfig - but they
+	 * are prefixed with the entry number
+	 * @param pDefault This will be used as default value if the key+pair
+	 * entry can't be found.
+	 * @return The value of this entry+key pair or pDefault if the entry+key
+	 * pair doesn't exist
+	 **/
+	int readNumEntry(int entry, const QString& key, int pDefault = -1) const;
+
+	/**
+	 * @return True if the highscore table conatins the entry/key pair,
+	 * otherwise false
+	 **/
+	bool hasEntry(int entry, const QString& key) const;
 
 	/**
 	 * Reads a list of entries from the highscore table starting at 1 until
@@ -111,6 +141,15 @@ public:
 	 * @param list The list of values
 	 **/
 	void writeList(const QString& key, const QStringList& list);
+
+	/**
+	 * @return Whether a highscore table exists. You can use this
+	 * function to indicate whether KHighscore created a highscore table
+	 * before and - if not - read your old (non-KHighscore) table instead.
+	 * This way you can safely read an old table and save it using
+	 * KHighscore without losing any data
+	 **/
+	bool hasTable() const;
 
 protected:
 	/**
