@@ -152,15 +152,15 @@ public:
      * @param buffer the message which will be send. See messages.txt for contents
      * @param msgid an id for this message. See @ref
      * KGameMessage::GameMessageIds
-     * @param receiver the @ref KGame / @ref KPlayer this message is for. See
-     * @ref KGameMessage::createPlayerId to create this parameter
+     * @param receiver the @ref KGame / @ref KPlayer this message is for.
      * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
-     * you). See @ref KGameMessage::createPlayerId to create this parameter. You
+     * you). You
      * probably want to leave this 0, then KGameNetwork will create the correct
      * value for you. You might want to use this if you send a message from a
      * specific player.
      * @return true if worked
      */
+    // AB: TODO: doc on how "receiver" and "sender" should be created!
     bool sendSystemMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**
@@ -229,15 +229,15 @@ public:
      * @param buffer the message which will be send. See messages.txt for contents
      * @param msgid an id for this message. See @ref
      * KGameMessage::GameMessageIds
-     * @param receiver the @ref KGame / @ref KPlayer this message is for. See
-     * @ref KGameMessage::createPlayerId to create this parameter
+     * @param receiver the @ref KGame / @ref KPlayer this message is for.
      * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
-     * you). See @ref KGameMessage::createPlayerId to create this parameter. You
+     * you). You
      * probably want to leave this 0, then KGameNetwork will create the correct
      * value for you. You might want to use this if you send a message from a
      * specific player.
      * @return true if worked
      **/
+    // AB: TODO: doc on how "receiver" and "sender" should be created!
     bool sendMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
 
     /**

@@ -313,7 +313,7 @@ void KGameProcessIO::initIO(KPlayer *p)
     {
       Q_UINT32 sender = p->id();
       kdDebug(11001) <<  "Sending IOAdded to process player !!!!!!!!!!!!!! " << endl;
-      sendSystemMessage(stream, KGameMessage::IdIOAdded, 0, KGameMessage::createPlayerId(sender, game()->gameId()));
+      sendSystemMessage(stream, KGameMessage::IdIOAdded, 0, sender);
     }
   }
 }
@@ -334,7 +334,7 @@ void KGameProcessIO::notifyTurn(bool b)
   {
     Q_UINT32 sender=player()->id();
     kdDebug(11001) <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
-    sendSystemMessage(stream, KGameMessage::IdTurn, 0, KGameMessage::createPlayerId(sender, game()->gameId()));
+    sendSystemMessage(stream, KGameMessage::IdTurn, 0, sender);
   }
 }
 

@@ -126,7 +126,7 @@ void KGameChat::returnPressed(const QString& text)
 	QString group = d->mFromPlayer->group();
 	kdDebug(11001) << "send to group " << group << endl;
 	int sender = d->mFromPlayer->id();
-	d->mGame->sendGroupMessage(text, messageId(), KGameMessage::createPlayerId(sender, d->mGame->gameId()), group);
+	d->mGame->sendGroupMessage(text, messageId(), sender, group);
 
 	//TODO
 	//AB: this message is never received!! we need to connect to
@@ -144,7 +144,7 @@ void KGameChat::returnPressed(const QString& text)
 	} 
 	int receiver = toPlayer;
 	int sender = d->mFromPlayer->id();
-	d->mGame->sendMessage(text, messageId(), KGameMessage::createPlayerId(receiver, 0), KGameMessage::createPlayerId(sender, d->mGame->gameId()));
+	d->mGame->sendMessage(text, messageId(), receiver, sender);
  }
 }
 

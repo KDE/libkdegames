@@ -400,7 +400,7 @@ void KPlayer::sendProperty(int msgid, QDataStream& stream, bool* sent)
 {
   if (game())
   {
-    bool s = game()->sendPlayerProperty(msgid, stream, KGameMessage::createPlayerId(id(), 0));
+    bool s = game()->sendPlayerProperty(msgid, stream, id());
     if (s)
     {
       *sent = true;
