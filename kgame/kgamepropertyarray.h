@@ -66,8 +66,8 @@ public:
       }
       if (policy()==PolicyLocal || policy()==PolicyDirty)
       {
+        extractProperty(b);
 //        a=QMemArray<type>::resize(size);// FIXME: return value!
-        command(s, CmdResize, true); //AB: return value must be fixed! 
       }
       return a;
     }
@@ -90,7 +90,7 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      command(s, CmdAt, true);
+      extractProperty(b);
     }
     //kdDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
@@ -132,8 +132,8 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
+      extractProperty(b);
 //      r=QMemArray<type>::fill(data,size);//FIXME: return value!
-      command(s, CmdFill, true);
     }
     return r;
   }
@@ -213,7 +213,7 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      command(s, CmdSort, true);
+      extractProperty(b);
     }
   }
 
@@ -285,7 +285,16 @@ public:
         break;
     }
   }
-
+protected:
+  void extractProperty(const QByteArray& b)
+  {
+    QDataStream s(b, IO_ReadOnly);
+    int cmd;
+    int propId;
+    KGameMessage::extractPropertyHeader(s, propId):
+    KGameMessage::extractPropertyCommand(s, propId, cmd):
+    command(s, cmd, true);
+  }
 
 };
 

@@ -84,7 +84,7 @@ public:
     }
     if (policy() == PolicyDirty || policy() == PolicyLocal)
     {
-      command(s, CmdInsert, true);
+      extractProperty(b);
     }
     return it;
   }
@@ -106,7 +106,7 @@ public:
     }
     if (policy() == PolicyDirty || policy() == PolicyLocal)
     {
-      command(s, CmdAppend, true);
+      extractProperty(b);
     }
   }
 
@@ -126,7 +126,7 @@ public:
     }
     if (policy() == PolicyDirty || policy() == PolicyLocal)
     {
-      command(s, CmdRemove, true);
+      extractProperty(b);
     }
     //TODO: return value - is it correct for PolicyLocal|PolicyDirty?
 //    return QValueList<type>::remove(it);
@@ -158,7 +158,7 @@ public:
     }
     if (policy() == PolicyDirty || policy() == PolicyLocal)
     {
-      command(s, CmdClear, true);
+      extractProperty(b);
     }
   }
 
@@ -241,6 +241,18 @@ public:
     }
   }
 
+protected:
+  void extractProperty(const QByteArray& b)
+  // this is called for Policy[Dirty|Local] after putting the stuff into the
+  // stream
+  {
+    QDataStream s(b, IO_ReadOnly);
+    int cmd;
+    int propId;
+    KGameMessage::extractPropertyHeader(s, propId);
+    KGameMessage::extractPropertyCommand(s, propId, cmd);
+    command(s, cmd, true);
+  }
 
 };
 
