@@ -34,7 +34,9 @@
 - 02.04.2001: VERY DANGEROUS: property1=property2 does NOT assign the values, e.g. int
               but assignes the whole property, i.e. you have then two properties with
               the same id and everything is wrong
-
+              01/09/09: FIXED! (AB) TODO: check if this behavior also appears in
+	      KGamePropertyList and KGamePropertyArray. Althogh this should not
+	      be the case
 
 
 

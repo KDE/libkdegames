@@ -619,6 +619,7 @@ public:
 				setLocal(v);
 				break;
 			default: // NEVER!
+				kdError(11001) << "Undefined Policy in property " << id() << endl;
 				return;
 		}
 	}
@@ -801,6 +802,18 @@ public:
 	const type& operator=(const type& t) 
 	{ 
 		setValue(t); 
+		return value();
+	}
+
+	/**
+	 * This copies the data of property to the KGameProperty object.
+	 *
+	 * Equalivent to setValue(property.value());
+	 * @return See @ref value
+	 **/
+	const type& operator=(const KGameProperty& property)
+	{
+		setValue(property.value());
 		return value();
 	}
 
