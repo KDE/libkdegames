@@ -37,14 +37,17 @@ public:
   {
     //kdDebug(11001) << "KGamePropertyArray init" << endl;
   }
+  
   KGamePropertyArray( int size )
   {
     resize(size);
   }
+  
   KGamePropertyArray( const KGamePropertyArray<type> &a ) : QMemArray<type>(a)
   {
     send();
   }
+  
   bool  resize( uint size )
   {
     if (size!=QMemArray<type>::size())
@@ -52,15 +55,19 @@ public:
       bool a=true;
       QByteArray b;
       QDataStream s(b, IO_WriteOnly);
+      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdResize);
+      s << size ;
       if (policy()==PolicyClean || policy()==PolicyDirty)
       {
-        KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdResize);
-        s << size ;
-        if (mOwner)  mOwner->sendProperty(s);
+        if (mOwner)
+        {
+          mOwner->sendProperty(s);
+        }
       }
       if (policy()==PolicyLocal || policy()==PolicyDirty)
       {
-        a=QMemArray<type>::resize(size);
+//        a=QMemArray<type>::resize(size);// FIXME: return value!
+        command(s, CmdResize, true); //AB: return value must be fixed! 
       }
       return a;
     }
@@ -71,16 +78,19 @@ public:
   {
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
+    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAt);
+    s << i ;
+    s << data;
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
-      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAt);
-      s << i ;
-      s << data;
-      if (mOwner)  mOwner->sendProperty(s);
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QMemArray<type>::at(i)=data;
+      command(s, CmdAt, true);
     }
     //kdDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
@@ -89,6 +99,7 @@ public:
   {
     return QMemArray<type>::at(i);
   }
+  
   type operator[]( int i ) const
   {
     return QMemArray<type>::at(i);
@@ -103,112 +114,131 @@ public:
   {
     return resize(pos);
   }
+  
   bool  fill( const type &data, int size = -1 )
   {
     bool r=true;
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      r=QMemArray<type>::fill(data,size);
-    }
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
+    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
+    s << data;
+    s << size ;
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
-      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
-      s << data;
-      s << size ;
-      if (mOwner)  mOwner->sendProperty(s);
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+//      r=QMemArray<type>::fill(data,size);//FIXME: return value!
+      command(s, CmdFille, true);
     }
     return r;
   }
+
   KGamePropertyArray<type>& assign( const KGamePropertyArray<type>& a )
   {
 // note: send() has been replaced by sendProperty so it might be broken now!
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      QMemArray<type>::assign(a);
-    }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
       sendProperty();
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QMemArray<type>::assign(a);
     }
     return *this;
   }
   KGamePropertyArray<type>& assign( const type *a, uint n )
   {
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      QMemArray<type>::assign(a,n);
-    }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
       sendProperty();
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QMemArray<type>::assign(a,n);
     }
     return *this;
   }
   KGamePropertyArray<type>& duplicate( const KGamePropertyArray<type>& a )
   {
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      QMemArray<type>::duplicate(a);
-    }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
       sendProperty();
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QMemArray<type>::duplicate(a);
     }
     return *this;
   }
   KGamePropertyArray<type>& duplicate( const type *a, uint n )
   {
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      QMemArray<type>::duplicate(a,n);
-    }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
       sendProperty();
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      QMemArray<type>::duplicate(a,n);
     }
     return *this;
   }
   KGamePropertyArray<type>& setRawData( const type *a, uint n )
   {
+    if (policy()==PolicyClean || policy()==PolicyDirty)
+    {
+      sendProperty();
+    }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
       QMemArray<type>::setRawData(a,n);
-    }
-      if (policy()==PolicyClean || policy()==PolicyDirty)
-      {
-        sendProperty();
     }
     return *this;
   }
   void sort()
   {
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      QMemArray<type>::sort();
-    }
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
+    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
-      if (mOwner)  mOwner->sendProperty(s);
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
+    }
+    if (policy()==PolicyLocal || policy()==PolicyDirty)
+    {
+      command(s, CmdSort, true);
     }
   }
 
-	void load(QDataStream& s)
-	{
+  void load(QDataStream& s)
+  {
     //kdDebug(11001) << "KGamePropertyArray load " << id() << endl;
     type data;
-    for (unsigned int i=0;i<QMemArray<type>::size();i++) {s >> data;  QMemArray<type>::at(i)=data;}
-		if (isEmittingSignal()) emitSignal();
+    for (unsigned int i=0; i<QMemArray<type>::size(); i++) 
+    {
+      s >> data;
+      QMemArray<type>::at(i)=data;
+    }
+    if (isEmittingSignal())
+    {
+      emitSignal();
+    }
   }
-	void save(QDataStream &s)
-	{
+  void save(QDataStream &s)
+  {
     //kdDebug(11001) << "KGamePropertyArray save "<<id() << endl;
-    for (unsigned int i=0;i<QMemArray<type>::size();i++) s << at(i);
-	}
+    for (unsigned int i=0; i<QMemArray<type>::size(); i++) 
+    {
+      s << at(i);
+    }
+  }
 
   void command(QDataStream &s,int cmd,bool)
   {

@@ -32,4 +32,8 @@
 06.10.2001  adding KGameNetwork::signalAdminStatusChanged - needed for
             KGameDialog
 06.10.2001  KGame::loadGame() doesn't call setPolicy() anymore!
-
+08.10.2001  KGamePropertyList now honor policies! Use setPolicy(PolicyDirty) to
+            get the old behavior!
+            The behavior of KGamePropertyArray may have changed in this turn,
+            too!
+            The API stays the same.

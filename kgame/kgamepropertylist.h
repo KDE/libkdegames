@@ -29,6 +29,7 @@
 #include "kgameproperty.h"
 #include "kgamepropertyhandler.h"
 
+// AB: also see README.LIB!
 
 template<class type>
 class KGamePropertyList : public QValueList<type>, public KGamePropertyBase
@@ -43,10 +44,12 @@ public:
   KGamePropertyList() :QValueList<type>(), KGamePropertyBase()
   {
   }
+
   KGamePropertyList( const KGamePropertyList<type> &a ) : QValueList<type>(a)
   {
     send();
   }
+
   uint findIterator(Iterator me)
   {
     Iterator it;
@@ -57,6 +60,7 @@ public:
     }
     return count();
   }
+
   Iterator insert( Iterator it, const type& d )
   {
     it=QValueList<type>::insert(it,d);
@@ -67,9 +71,20 @@ public:
     int i=findIterator(it);
     s << i;
     s << d;
-    if (mOwner)  mOwner->sendProperty(s);
+    if (policy() == PolicyClean || policy() == PolicyDirty)
+    {
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
+    }
+    if (policy() == PolicyDirty || policy() == PolicyLocal)
+    {
+      command(s, CmdInsert, true);
+    }
     return it;
   }
+
   void  prepend( const type& d) { insert(begin(),d); }
   
   void  append( const type& d ) 
@@ -78,19 +93,47 @@ public:
     QDataStream s(b, IO_WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAppend);
     s << d;
-    if (mOwner)  mOwner->sendProperty(s);
+    if (policy() == PolicyClean || policy() == PolicyDirty)
+    {
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
+    }
+    if (policy() == PolicyDirty || policy() == PolicyLocal)
+    {
+      command(s, CmdAppend, true);
+    }
   }
 
-  Iterator remove( Iterator it )
+  Iterator erase( Iterator it )
   {
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdRemove);
     int i=findIterator(it);
     s << i;
-    if (mOwner)  mOwner->sendProperty(s);
-    return QValueList<type>::remove(it);
+    if (policy() == PolicyClean || policy() == PolicyDirty)
+    {
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
+    }
+    if (policy() == PolicyDirty || policy() == PolicyLocal)
+    {
+      command(s, CmdRemove, true);
+    }
+    //TODO: return value - is it correct for PolicyLocal|PolicyDirty?
+//    return QValueList<type>::remove(it);
+    return it;
   }
+
+  Iterator remove( Iterator it )
+  {
+    erase(it);
+  }
+
   void remove( const type& d )
   {
     Iterator it=find(d);
@@ -102,11 +145,21 @@ public:
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdClear);
-    QValueList<type>::clear();
+    if (policy() == PolicyClean || policy() == PolicyDirty)
+    {
+      if (mOwner)
+      {
+        mOwner->sendProperty(s);
+      }
+    }
+    if (policy() == PolicyDirty || policy() == PolicyLocal)
+    {
+      command(s, CmdClear, true);
+    }
   }
 
-	void load(QDataStream& s)
-	{
+  void load(QDataStream& s)
+  {
     kdDebug(11001) << "KGamePropertyList load " << id() << endl;
     QValueList<type>::clear();
     uint size;
@@ -120,8 +173,9 @@ public:
     }
     if (isEmittingSignal()) emitSignal();
   }
-	void save(QDataStream &s)
-	{
+
+  void save(QDataStream &s)
+  {
     kdDebug(11001) << "KGamePropertyList save "<<id() << endl;
     type data;
     uint size=count();
@@ -132,7 +186,7 @@ public:
       data=*it;
       s << data;
     }
-	}
+  }
 
   void command(QDataStream &s,int cmd,bool)
   {

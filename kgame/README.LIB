@@ -2,3 +2,11 @@ some thoughts and comments about the lib - usually for KGame hackers
 
 - setMin/MaxPlayers() etc. use KGameProperty::changeValue() which is slightly
   unclean but as these functions can only called by the ADMIN it doesn't matter.
+- AB: KGamePropertyList && KGamePropertyArray:
+     for PolicyClean||PolicyDirty the values are streamed into a QDataStream as usual
+     for PolicyDirty||PolicyLocal the values are streamed as well but
+     additionally command() is called immediately. The values are read from
+     the stream there. This is some kind of performance loss as it would be
+     faster *not* to stream it but imediately call e.g. insert(). But it will
+     probably save a *lot* of bugs!
+

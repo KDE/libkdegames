@@ -20,8 +20,6 @@
 - 21.06.2001: KPlayerPropertyArray does not yet support at() and operator[]
               assignments. Need to check whether the method from QBitArray
               can be applied
-- 15.08.2001: KGamePropertyList doesn't honor Policies - only Clean is
-              possible current
 - 02.04.2001: VERY DANGEROUS: property1=property2 does NOT assign the values, e.g. int
               but assignes the whole property, i.e. you have then two properties with
               the same id and everything is wrong
@@ -39,3 +37,5 @@
               it have disappeared?
 - 07.10.2001: display (List) or (Array) for KGameProperty[List|Array] in
               KGameDebugDialog as value
+- 08.10.2001: KGamePropertyList|KGamePropertyArray must be ported to new QT3 API
+              (e.g. erase instead of remove, ...)
