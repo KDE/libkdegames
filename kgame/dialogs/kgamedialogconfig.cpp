@@ -18,13 +18,12 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include <qlayout.h>
-#include <qhgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlineedit.h>
-#include <qvbox.h>
-#include <qptrdict.h>
+#include "kgamedialogconfig.h"
+
+#include "kgame.h"
+#include "kplayer.h"
+#include "kgamechat.h"
+#include "kgameconnectdialog.h"
 
 #include <klocale.h>
 #include <knuminput.h>
@@ -32,11 +31,13 @@
 #include <klistbox.h>
 #include <kmessagebox.h>
 
-#include "kgame.h"
-#include "kplayer.h"
-#include "kgamechat.h"
-
-#include "kgamedialogconfig.h"
+#include <qlayout.h>
+#include <qhgroupbox.h>
+#include <qlabel.h>
+#include <qpushbutton.h>
+#include <qlineedit.h>
+#include <qvbox.h>
+#include <qptrdict.h>
 
 #include "kgamedialogconfig.moc"
 
@@ -68,19 +69,26 @@ void KGameDialogConfig::setOwner(KPlayer* )
 void KGameDialogConfig::setAdmin(bool )
 { }
 
+
+/////////////////////////// KGameDialogNetworkConfig /////////////////////////
 class KGameDialogNetworkConfigPrivate
 {
 public:
 	KGameDialogNetworkConfigPrivate() 
 	{
-//		mMaxClients = 0;
 		mInitConnection = 0;
 		mNetworkLabel = 0;
+
+		mGame = 0;
 	}
 
-//	KIntNumInput* mMaxClients;
 	QPushButton* mInitConnection;
 	QLabel* mNetworkLabel;
+
+	KGame* mGame;
+	
+	QString mDefaultHost;
+	unsigned short int mDefaultPort;
 };
 
 
@@ -88,62 +96,86 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 		: KGameDialogConfig(parent)
 {
 // kdDebug(11001) << "CONSTRUCT KGameDialogNetworkConfig " << this << endl;
-
  d = new KGameDialogNetworkConfigPrivate();
 
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
 
- d->mNetworkLabel = new QLabel(i18n("No network"), this);
+ d->mNetworkLabel = new QLabel(this);
  topLayout->addWidget(d->mNetworkLabel);
 
  d->mInitConnection = new QPushButton(this);
  d->mInitConnection->setText(i18n("Start Network game"));
  connect(d->mInitConnection, SIGNAL(clicked()), this, SLOT(slotInitConnection()));
  topLayout->addWidget(d->mInitConnection);
-
-// d->mMaxClients = new KIntNumInput(this);
-// d->mMaxClients->setLabel(i18n("Maximal allowed connections:"));
-// topLayout->addWidget(d->mMaxClients);
+ setConnected(false);
+ setDefaultNetworkInfo("localhost", 0);
 }
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
 { delete d; }
 
-void KGameDialogNetworkConfig::disableInitConnection()
-{ d->mInitConnection->setEnabled(false); }
-void KGameDialogNetworkConfig::setNetworkText(const QString& text)
-{ d->mNetworkLabel->setText(text); }
 void KGameDialogNetworkConfig::slotInitConnection()
 {
  bool connected = false;
  bool master = true;
- emit signalInitConnection(connected, master);
+ unsigned short int port = d->mDefaultPort;
+ QString host = d->mDefaultHost;
+ int result = KGameConnectDialog::initConnection(port, host, this, true);
+ if (result != QDialog::Accepted) {
+	connected = false;
+ } else {
+	if (host.isNull()) {
+		master = true;
+		if (d->mGame) {
+			d->mGame->offerConnections(port);
+		}
+	} else {
+		master = false;
+		if (d->mGame) {
+			d->mGame->connectToServer(host, port);
+		}
+	}
+ }
+
+ setConnected(connected, master);
+}
+
+void KGameDialogNetworkConfig::setConnected(bool connected, bool master)
+{
  if (!connected) {
+	d->mNetworkLabel->setText(i18n("No Network"));
+	d->mInitConnection->setEnabled(true);
 	return;
  }
- d->mInitConnection->setEnabled(false);
  if (master) {
 	d->mNetworkLabel->setText(i18n("You are MASTER"));
  } else {
 	d->mNetworkLabel->setText(i18n("You are connected"));
  }
+ d->mInitConnection->setEnabled(false);
 }
 
-void KGameDialogNetworkConfig::submitToKGame(KGame* g, KPlayer* )
+void KGameDialogNetworkConfig::submitToKGame(KGame* , KPlayer* )
 {
- if (!g) {
-	return;
- }
-// g->setMaxClients(maxClients());//FIXME
-
 }
 
 void KGameDialogNetworkConfig::setKGame(KGame* g)
 {
-// setMaxClients(g->maxClients());
+ if (!g) {
+	setConnected(false);
+	return;
+ }
+ setConnected(g->isNetwork(), g->isMaster());
+ d->mGame = g;
 }
 
+void KGameDialogNetworkConfig::setDefaultNetworkInfo(const QString& host, unsigned short int port)
+{
+ d->mDefaultPort = port;
+ d->mDefaultHost = host;
+}
 
+/////////////////////////// KGameDialogGeneralConfig /////////////////////////
 class KGameDialogGeneralConfigPrivate
 {
 public:

@@ -47,6 +47,7 @@ class KGameDialogConnectionConfig;
 
 class KGameDialogPrivate;
 /**
+ * TODO: rewrite entire documentation. Nearly nothing is valid anymore.
  * The main configuration dialog for KGame. Here all players meat each other,
  * every player can see how many players connected (and their names) and the
  * ADMIN can even "kick" players out. You can talk to each other (using @ref
@@ -61,7 +62,7 @@ class KGameDialogPrivate;
  * <pre>
  * 	KGameDialog dlg(kgame, i18n("New Game"), localPlayer, this, true,
  * 	ID_CHAT);
- * 	dlg.setDefaultNetworkInfo(port, host);
+ * 	dlg.setDefaultNetworkInfo(port, host); // AB: obsolete!
  * 	dlg.exec();
  * </pre>
  * This will create a default modal dialog with the title "New Game". You don't
@@ -134,14 +135,6 @@ public:
 	void setKGame(KGame* g);
 
 	/**
-	 * This will set the default port and host used in @ref
-	 * KGameConnectDialog. The user will be able to change these defaults!
-	 * @param port The default port
-	 * @param host The default host to connect to
-	 **/
-	void setDefaultNetworkInfo(unsigned short int port, const QString& host);
-
-	/**
 	 * This will submit all configuration data to the @ref KGame object.
 	 * Automatically called by @ref slotApply and @ref slotOk
 	 * Tere is no need to replace this unless you
@@ -190,14 +183,14 @@ public:
 	 **/
 	QVBox* addConfigPage(KGameDialogConfig* widget, const QString& title);
 
+	KGameDialogNetworkConfig* networkConfig() const;
+	KGameDialogGeneralConfig* gameConfig() const;
+
 protected:
 	void addConfigWidget(KGameDialogConfig* widget, QWidget* parent);
 	void addNetworkConfig(KGameDialogNetworkConfig* netConf);
 	void addGameConfig(KGameDialogGeneralConfig* conf);
 	void addMsgServerConfig(KGameDialogMsgServerConfig* conf);
-
-	KGameDialogNetworkConfig* networkConfig() const;
-	KGameDialogGeneralConfig* gameConfig() const;
 
 	/**
 	 * This is used to create a dialog containing all the default widgets. 
@@ -242,18 +235,6 @@ protected slots:
 	 * OBSOLTETE!!!
 	 **/
 	virtual void slotDefault();
-
-
-	/**
-	 * Starts KGameConnectDialog by default. Overwrite for a custimzed
-	 * behaviour!
-	 * @param connected Whether the init connection button should be
-	 * disabled.
-	 * Set to true after a connection has been initialized to disable the
-	 * button!
-	 * @param admin Whether this client is ADMIN.
-	 **/
-	virtual void slotInitConnection(bool& connected, bool& admin);
 
 	/**
 	 * Called when the @ref KGame object is destroyed. Calls setKGame(0) so

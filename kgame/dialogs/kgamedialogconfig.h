@@ -113,7 +113,6 @@ public:
 
 
 	void disableInitConnection();
-	void setNetworkText(const QString& text);
 
 	/**
 	 * Called by @ref KGameDialog to submit all settings to the KGame
@@ -126,16 +125,26 @@ public:
 
 	virtual void setKGame(KGame* g);
 
-signals:
-	void signalInitConnection(bool&, bool&);
+	/**
+	 * This sets the default port and host used in @ref KGameConnectDialog.
+	 * The user will be able to change these defaults!
+	 *
+	 * If you don't call this then host "localhost" and port "0" is used.
+	 * You are strongly encouraged to change at least the port!
+	 * @param port The default port to connect to / listen on
+	 * @param host The default host to connect to
+	 **/
+	void setDefaultNetworkInfo(const QString& host, unsigned short int port);
 
 protected:
-//	void setMaxClients(int m);//obsoleted by KMessageServer
-//	int maxClients() const;
+	void setConnected(bool connected, bool master = false);
 
 protected slots:
+	/**
+	 * Start a @ref KGameConnectDialog and connects to the desired host/port
+	 * or starts listening to the port.
+	 **/
 	void slotInitConnection();
-
 
 private:
 	KGameDialogNetworkConfigPrivate* d;

@@ -23,7 +23,6 @@
 
 #include <klocale.h>
 
-#include "kgameconnectdialog.h"//maybe in KGameDialogNetworkConfig?
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamedialogconfig.h"
@@ -58,10 +57,6 @@ public:
 
 // a list of all config widgets added to this dialog
 	QList<KGameDialogConfig> mConfigWidgets;
-
-// for KGameConnectDialog
-	unsigned short int mPort;
-	QString mHost;
 
 // just pointers:
 	KPlayer* mOwner;
@@ -155,10 +150,6 @@ void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
 	return;
  }
  d->mNetworkConfig = netConf;
- if (networkConfig()) {
-	connect(networkConfig(), SIGNAL(signalInitConnection(bool&, bool&)), this,
-			SLOT(slotInitConnection(bool&, bool&)));// is this mGame dependant?
- }
  d->mNetworkPage = addConfigPage(netConf, i18n("Network"));
 }
 
@@ -245,8 +236,6 @@ KGameDialogGeneralConfig* KGameDialog::gameConfig() const
 { return d->mGameConfig; }
 KGameDialogNetworkConfig* KGameDialog::networkConfig() const
 { return d->mNetworkConfig; }
-void KGameDialog::setDefaultNetworkInfo(unsigned short int p, const QString& h)
-{ d->mPort = p; d->mHost = h; }
 
 void KGameDialog::slotApply()
 {
@@ -270,28 +259,6 @@ void KGameDialog::slotOk()
  return QDialog::accept();
 }
 
-void KGameDialog::slotInitConnection(bool& connected, bool& master)
-{
- int result = KGameConnectDialog::initConnection(d->mPort, d->mHost, this, true);
- if (result != QDialog::Accepted) {
-	connected = false;
-	return;
- }
- if (d->mHost.isNull()) {
-	master = true;
-	if (d->mGame) {
-		connected = d->mGame->offerConnections(d->mPort);
-	}
-	return;
- } else {
-	master = false;
-	if (d->mGame) {
-		connected = d->mGame->connectToServer(d->mHost, d->mPort);
-	}
-	return;
- }
-}
-
 void KGameDialog::setOwner(KPlayer* owner)
 {
 //AB: note: NULL player is ok!
@@ -304,14 +271,6 @@ void KGameDialog::setOwner(KPlayer* owner)
 		kdError(11001) << "NULL widget??" << endl;
 	}
  }
-
-/* if (d->mChat) {
-	if (!d->mOwner) {
-		d->mChat->hide();
-	} else {
-		d->mChat->setFromPlayer(d->mOwner);
-	}
- }*/
 }
 
 void KGameDialog::setKGame(KGame* g)
