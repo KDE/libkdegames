@@ -110,21 +110,26 @@ KPlayer::~KPlayer()
   {
     delete input;
   }
-  if (mGame) mGame->playerDeleted(this);
+  if (game()) 
+  {
+    game()->playerDeleted(this);
+  }
 
 // note: mProperties does not use autoDelete or so - user must delete objects
 // himself
   d->mProperties.clear();
   delete d;
-//  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") done" << endl;
+  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") done" << endl;
 }
 
 bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT32 sender)
 {
-  if (!isActive()) {
+  if (!isActive()) 
+  {
     return false;
   }
-  if (!game()) {
+  if (!game()) 
+  {
     return false;
   }
   kdDebug(11001) << "KPlayer::forwardMessage to game sender="<<sender<<"" << "recv="<<receiver <<"msgid="<<msgid << endl;
@@ -133,8 +138,14 @@ bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT
 
 bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
 {
-  if (!isActive()) return false;
-  if (!game()) return false;
+  if (!isActive()) 
+  {
+    return false;
+  }
+  if (!game()) 
+  {
+    return false;
+  }
 
   kdDebug(11001) << "KPlayer::forwardInput to game playerInput(sender="<<sender<<")" << endl;
   if (!asyncInput() && !myTurn())
@@ -151,7 +162,8 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
   {
     kdDebug(11001) << "indirect playerInput" << endl;
     return game()->sendPlayerInput(msg,this,sender);
-  } else
+  } 
+  else
   {
     kdDebug(11001) << "direct playerInput" << endl;
     return game()->playerInput(msg,this,sender);
@@ -203,7 +215,10 @@ void KPlayer::setNetworkPriority(int p)
 
 bool KPlayer::addGameIO(KGameIO *input)
 {
-  if (!input) return false;
+  if (!input) 
+  {
+    return false;
+  }
   mInputList.append(input); 
   input->initIO(this); // set player and init device
   return true;
@@ -225,7 +240,10 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
   else
   {
 //    kdDebug(11001) << "remove IO " << targetinput << endl;
-    if (deleteit) delete targetinput;
+    if (deleteit) 
+    {
+      delete targetinput;
+    }
     else
     {
       targetinput->setPlayer(0);
@@ -241,7 +259,10 @@ KGameIO * KPlayer::findRttiIO(int rtti) const
   QPtrListIterator<KGameIO> it(mInputList);
   while (it.current()) 
   {
-    if (it.current()->rtti() == rtti) return it.current();
+    if (it.current()->rtti() == rtti) 
+    {
+      return it.current();
+    }
     ++it;
   }
   return 0;
@@ -262,7 +283,10 @@ int KPlayer::calcIOValue()
 bool KPlayer::setTurn(bool b,bool exclusive)
 {
   kdDebug(11001) << "KPlayer::setTurn " << this << " to " << b << endl;
-  if (!isActive()) return false;
+  if (!isActive()) 
+  {
+    return false;
+  }
    
   // if we get to do an exclusive turn all other players are disallowed
   if (exclusive && b && game())
@@ -271,7 +295,10 @@ bool KPlayer::setTurn(bool b,bool exclusive)
      KGame::KGamePlayerList *list=game()->playerList();
      for ( player=list->first(); player != 0; player=list->next() )
      {
-       if (player==this) continue;
+       if (player==this) 
+       {
+         continue;
+       }
        player->setTurn(false,false);
      }
   }
@@ -329,8 +356,12 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
   {
     issender=sender==game()->gameId();
   }
-  else issender=true;
-  if (d->mProperties.processMessage(stream,msgid,issender)) {
+  else 
+  {
+    issender=true;
+  }
+  if (d->mProperties.processMessage(stream,msgid,issender)) 
+  {
 	return ;
   }
   switch(msgid)
