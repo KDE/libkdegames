@@ -61,7 +61,6 @@ public:
 
 public slots:
 	void slotError(int error, QString text);
-	void slotVersionError(Q_UINT32 client);
 	
 	/**
 	 * The connection to the @ref KMessageServer has been lost

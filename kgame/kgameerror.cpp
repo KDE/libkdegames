@@ -46,8 +46,13 @@ QByteArray KGameError::errCookie(int localCookie, int remoteCookie)
 
 QString KGameError::errorText(int errorCode, const QByteArray& message)
 {
- QString text;
  QDataStream s(message, IO_ReadOnly);
+ return errorText(errorCode, s);
+}
+
+QString KGameError::errorText(int errorCode, QDataStream& s)
+{
+ QString text;
  switch (errorCode) {
 	case Cookie:
 	{

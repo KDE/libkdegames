@@ -30,6 +30,7 @@
 #include "kgameio.h"
 #include "kgamenetwork.h"
 #include "kgamemessage.h"
+#include "kgameerror.h"
 
 #include "kmessageserver.h"
 #include "kmessageclient.h"
@@ -323,8 +324,9 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  {
    QString text;
    Q_INT32 error;
-   stream >> error >> text;
+   stream >> error;
    kdDebug(11001) << "KGame::receiveNetworkTransmission: Got IdError " << error << endl;
+   text = KGameError::errorText(error, stream);
    kdDebug(11001) << "Error text: " << text.latin1() << endl;
    emit signalNetworkErrorMessage((int)error,text);
  }

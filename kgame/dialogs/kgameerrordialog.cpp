@@ -53,8 +53,6 @@ void KGameErrorDialog::setKGame(const KGame* g)
  d->mGame = g;
  connect(d->mGame, SIGNAL(signalNetworkErrorMessage(int, QString)), 
 		this, SLOT(slotError(int, QString)));
- connect(d->mGame, SIGNAL(signalNetworkVersionError(Q_UINT32)), 
-		this, SLOT(slotVersionError(Q_UINT32)));
  connect(d->mGame, SIGNAL(signalConnectionBroken()), 
 		this, SLOT(slotServerConnectionLost()));
  connect(d->mGame, SIGNAL(signalClientDisconnected(Q_UINT32,bool)), 
@@ -72,26 +70,6 @@ void KGameErrorDialog::slotUnsetKGame()
 
 void KGameErrorDialog::error(const QString& errorText, QWidget* parent)
 { KMessageBox::error(parent, errorText); }
-
-void KGameErrorDialog::slotVersionError(Q_UINT32 client)
-{
- QString message;
- /*
-//TODO: IP, versions/cookies of both sides, port, ...
- if (c) {
-	QString IP = c->IP();
-	//TODO:
-//	QString version = 
-//	QString cookie = 
-//	QString localVersion = 
-//	QString localCookie = 
-	message = i18n("%1 caused a version error!!\n").arg(IP);
- } else {
-	message = i18n("Version error!\n");
- }*/
- message = i18n("%1 caused a version error!!\n").arg(client);//FIXME: id is ugly.
- error(message, (QWidget*)parent());
-}
 
 void KGameErrorDialog::slotServerConnectionLost()
 {

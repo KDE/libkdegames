@@ -51,6 +51,7 @@ public:
 	 * displayed to the user.
 	 * @return an error message 
 	 **/
+	static QString errorText(int errorCode, QDataStream& message);
 	static QString errorText(int errorCode, const QByteArray& message);
 
 };
