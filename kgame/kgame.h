@@ -115,17 +115,17 @@ public:
      * The KGame e.g. sets the status to Pause when you have
      * less player than the minimum amount
      */
-    enum GameStatus
-    {
-	    Init = 0,
-	    Run = 1,
-	    Pause = 2,
-	    End = 3,
-	    Abort = 4,
-	    SystemPause = 5,
-	    Intro = 6,
-	    UserStatus = 7
-    };
+	enum GameStatus
+	{
+		Init = 0,
+		Run = 1,
+		Pause = 2,
+		End = 3,
+		Abort = 4,
+		SystemPause = 5,
+		Intro = 6,
+		UserStatus = 7
+	};
 
     // Properties
     /**

@@ -1029,7 +1029,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   // MH: We cannot use have player here as it CHANGES in the loop
   // int havePlayers = cnt+playerCount()-inactivateIds.count();
   kdDebug(11001) << " havePlayers " << cnt+playerCount()-inactivateIds.count() << endl;
-  while (maxPlayers() < cnt+playerCount()-inactivateIds.count())
+  while (maxPlayers() < (int)(cnt+playerCount() - inactivateIds.count()))
   {
     kdDebug(11001) << "  Still to deacticvate " 
             << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers() 
