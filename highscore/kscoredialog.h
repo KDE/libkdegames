@@ -48,6 +48,7 @@ public:
                  Custom2 = 1 << 11,
                  Custom3 = 1 << 12,   	
                  
+                 Date = 1 << 27, 
                  Time = 1 << 28, 
                  Score = 1 << 29 };
         
