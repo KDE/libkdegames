@@ -114,7 +114,7 @@ void KGameChat::returnPressed(const QString& text)
 	// group! It might be useful to send to other groups, too
 	QString group = d->mFromPlayer->group(); 
 	kdDebug() << "send to group " << group << endl;
-	int sender = KGameMessage::calcMessageId(d->mGame->gameId(), d->mFromPlayer->id());
+	int sender = d->mFromPlayer->id();
 	d->mGame->sendGroupMessage(text, messageId(), sender, group);
 
 	//TODO
@@ -131,8 +131,8 @@ void KGameChat::returnPressed(const QString& text)
 					<< "- internal ERROR" << endl;
 		}
 	} 
-	int receiver = KGameMessage::calcMessageId(0, toPlayer);
-	int sender = KGameMessage::calcMessageId(d->mGame->gameId(), d->mFromPlayer->id());
+	int receiver = toPlayer;
+	int sender = d->mFromPlayer->id();
 	d->mGame->sendMessage(text, messageId(), receiver, sender);
  }
 }

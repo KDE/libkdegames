@@ -248,7 +248,7 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, int rece
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
  if (!sender) {
-   sender = (int)KGameMessage::calcMessageId(gameId(), 0);
+   sender = gameId();
  }
 
  KGameMessage::createHeader(stream, sender, receiver, msgid);
@@ -323,10 +323,9 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
 {
  QDataStream stream(receiveBuffer, IO_ReadOnly);
  int msgid;
- int sender; // the id of the KGame/KPlayer who sent the message - see KGameMessage::calcMessageId()
- int receiver; // the id of the KGame/KPlayer the message is for - see KGameMessage::calcMessageId()
+ int sender; // the id of the KGame/KPlayer who sent the message
+ int receiver; // the id of the KGame/KPlayer the message is for 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
- Q_UINT32 gameid = KGameMessage::calcGameId(receiver);
 // kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
 
  // Forward to registered KGameIO clients
@@ -342,18 +341,27 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
    sendGameIOMessage(receiveBuffer, msgid, input, receiver, sender);
  }
 
-// kdDebug(11001) << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
- if (gameid && gameid!=gameId()) { // gameid=0 is broadcast or player message
-   kdDebug(11001) << "KGameNetwork::receiveNetworkTransmission: Message not meant for us " << gameId() << "!=" << gameid << endl;
+ kdDebug() << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
+ // No broadcast : receiver==0
+ // No player isPlayer(receiver)
+ // Different game gameId()!=receiver
+ if (receiver &&  receiver!=gameId() && !KGameMessage::isPlayer(receiver) ) 
+ {
+   // receiver=0 is broadcast or player message
+   kdDebug(11001) << "KGameNetwork::receiveNetworkTransmission: Message not meant for us " << gameId() << "!=" << receiver << " rawid=" << KGameMessage::rawGameId(receiver) << endl;
    return;
- } else if (msgid==KGameMessage::IdError) {
+ }
+ else if (msgid==KGameMessage::IdError)
+ {
    QString text;
    Q_INT32 error;
    stream >> error >> text;
    kdDebug(11001) << "KGame::receiveNetworkTransmission: Got IdError " << error << endl;
    kdDebug(11001) << "Error text: " << text.latin1() << endl;
    emit signalNetworkErrorMessage((int)error,text);
- } else if (msgid == 0 && receiver == 0) {
+ }
+ else if (msgid == 0 && receiver == 0)
+ {
      // TODO: Must be supported, but who shall do it?
  /*
    kdDebug(11001) << "receive new id old id: " << client->id() << endl;
@@ -363,7 +371,9 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
    setGameId(newid);// is this correct? is the local client->id() == gameId()?
    kdDebug(11001) << "receive new id new id: " << client->id() << endl;
  */
- } else {
+ }
+ else
+ {
    networkTransmission(stream, msgid, receiver, sender, clientID);
  }
 }

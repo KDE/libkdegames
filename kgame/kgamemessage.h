@@ -29,30 +29,47 @@ class KGameMessage
 {
   public:
     /**
-     * Calculates a sender or receiver message id from a given game and player
-     * id.
+     * Creates a fully qualified player ID which contains the original
+     * player id in the lower bits and the game number in the higher bits.
+     * Do not rely on the exact bit positions as they are internal.
      *
+     * @param playerid the player id - can include an gameid
      * @param gameid The game id (<64)
-     * @param playerid the player id (<1024)
-     * @return The message id
+     * @return the new player id
      */
-    static int calcMessageId(int gameid,int playerid);
+    static int createPlayerId(int player,int game);
     /**
-     * Calculates the player id from a given message id
+     * Checks whether a message receiver/sender is a player
      * 
-     *
      * @param msgid the message id
-     * @return The player id
+     * @return true/false
      */
-    static int calcPlayerId(int msgid);
+    static bool isPlayer(int msgid);
     /**
-     * Calculates the gmae id from a given message id
+     * Checks whether the sender/receiver of a message is a game
      * 
-     *
      * @param msgid the message id
-     * @return The game id
+     * @return true/false
      */
-    static int calcGameId(int msgid);
+    static bool isGame(int msgid);
+
+    /**
+     * Returns the raw playerid, that is, a id which does not
+     * contain the game number encoded in it
+     *
+     * @param the player id
+     * @return the raw player id
+     **/
+    static int rawPlayerId(int playerid);
+
+    /**
+     * Returns the raw game id, that is, the game id the player
+     * belongs to
+     *
+     * @param the player id
+     * @return the raw game id
+     **/
+    static int rawGameId(int playerid);
 
     /**
      * Creates a message header given cookie,sender,receiver,...

@@ -138,7 +138,6 @@ void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
  int sender; 
  int receiver; 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
- Q_UINT32 gameid = KGameMessage::calcGameId(receiver);
  fprintf(stderr,"------ receiveNetworkTransmission(): id=%d sender=%d,recv=%d\n",msgid,sender,receiver);
  switch(msgid)
  {

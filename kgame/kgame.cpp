@@ -266,7 +266,7 @@ void KGame::addPlayer(KPlayer* newplayer, int receiver)
  QDataStream stream(buffer,IO_WriteOnly);
  savePlayer(stream,newplayer, receiver);
  d->mAddPlayerList.enqueue(newplayer);
- sendSystemMessage(stream,(int)KGameMessage::IdAddPlayer, receiver, KGameMessage::calcMessageId(gameId(),0));
+ sendSystemMessage(stream,(int)KGameMessage::IdAddPlayer, receiver, gameId());
 }
 
 void KGame::savePlayer(QDataStream &stream,KPlayer* p, int owner)
@@ -287,7 +287,7 @@ bool KGame::removePlayer(KPlayer * player, int receiver)
 
  // Send also for virtual player?
  bool send = true;
- send = sendSystemMessage(KGameMessage::calcMessageId(0,player->id()),KGameMessage::IdRemovePlayer, receiver);
+ send = sendSystemMessage(player->id(),KGameMessage::IdRemovePlayer, receiver);
  if (!send) {// if we couldn't send remove the player directly
    systemRemovePlayer(player);
    return true;
@@ -353,7 +353,7 @@ bool KGame::inactivatePlayer(KPlayer* player)
  }
  kdDebug(11001) << "send to Inactivate player " << player->id() << endl;
 
- sendSystemMessage(KGameMessage::calcMessageId(0,player->id()), KGameMessage::IdInactivatePlayer);
+ sendSystemMessage(player->id(), KGameMessage::IdInactivatePlayer);
  return true;
 }
 
@@ -383,7 +383,7 @@ bool KGame::activatePlayer(KPlayer * player)
  }
  kdDebug(11001) << "KGame::activatePlayer sending (" << player->id() << ")" << endl;
  
- sendSystemMessage(KGameMessage::calcMessageId(0, player->id()), KGameMessage::IdActivatePlayer);
+ sendSystemMessage(player->id(), KGameMessage::IdActivatePlayer);
  return true;
 }
 
@@ -590,7 +590,8 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
  // message targets a playerobject. If we find it we forward the message to the
  // player. Otherwise we proceed here and hope the best that the user processes
  // the message
- if (KGameMessage::calcPlayerId(receiver)) {
+ if (KGameMessage::isPlayer(receiver))
+ {
    kdDebug(11001) << "message id " << msgid << " seems to be for a player" << endl;
    kdDebug(11001) << "receiver: " << receiver << endl;
    KPlayer *p=findPlayer(receiver);
@@ -682,9 +683,9 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      kdDebug(11001) << "====> (Client) KGame::slotNetworkTransmission:: Got IdGameLoad" << endl;
      loadgame(stream,true);
      KPlayer *player;
-     int gameid=KGameMessage::calcMessageId(gameId(),0);
+     int gameid=gameId();
      for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
-       if ((player->id()&gameid)==gameid) {
+       if ((KGameMessage::rawGameId(player->id())==gameid)) {
          //kdDebug(11001) << "$$$ do not virtualizing player "<<player->id()<< " gameid="<<gameid << "=" << gameId() << endl;
          continue; // local player
        }
@@ -827,7 +828,7 @@ void KGame::setupGame(int sender)
    player=it.current();
    systemInactivatePlayer(player);
    // Give the new game id to all players (which are inactivated now)
-   player->setId(KGameMessage::calcMessageId(gameId(),0)|(player->id()&0x3ff));
+   player->setId(KGameMessage::createPlayerId(player->id(),gameId()));
    playerId.append(player->id());
    kdDebug() << " appending player " << player->id() << endl;
    playerPriority.append(player->networkPriority());
@@ -883,15 +884,9 @@ void KGame::slotServerDisconnected()
   KPlayer *player;
   KGamePlayerList removeList;
   kdDebug() << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
-  int idmask=KGameMessage::calcMessageId(0xff,0);
-  int pidmask=KGameMessage::calcMessageId(0,0xffff);
-  QString s;
-  s.setNum(idmask,16);
-  kdDebug() << " idmask=0x"<<s<<endl;
-  int gameid=KGameMessage::calcMessageId(gameId(),0);
   for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
   {
-    if ((player->id() & idmask) != gameid)
+    if (KGameMessage::rawGameId(player->id()) != gameId())
     {
       kdDebug() << "Player " << player->id() << " belongs to a removed game" << endl;
       removeList.append(player);
@@ -916,7 +911,7 @@ void KGame::slotServerDisconnected()
   KGamePlayerList mIdList(d->mPlayerList);
   for ( player=mReList.first(); player != 0; player=mReList.next() )
   {
-    player->setId(player->id() & pidmask);
+    player->setId(KGameMessage::createPlayerId(player->id(),gameId()));
     kdDebug() << "Player id changed to " << player->id() << " as we are no local" << endl;
   }
 }
@@ -927,14 +922,9 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
  KPlayer *player;
  KGamePlayerList removeList;
  kdDebug() << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
- int idmask=KGameMessage::calcMessageId(0xff,0);
- QString s;
- s.setNum(idmask,16);
- kdDebug() << " idmask=0x"<<s<<endl;
- int gameid=KGameMessage::calcMessageId(clientID,0);
  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
  {
-   if ((player->id() & idmask) == gameid)
+   if (KGameMessage::rawGameId(player->id())==gameId())
    {
      kdDebug() << "Player " << player->id() << " belongs to removed game" << endl;
      removeList.append(player);
@@ -973,7 +963,7 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  // send to the newly connected client *only*
  // AB: check if this is really received/used by the "receiver" client only. We
  // have currently at least two network ports which could break this...
- int receiver = KGameMessage::calcMessageId(clientID, 0);
+ int receiver = clientID;
  Q_INT16 v=KGameMessage::version();
  Q_INT32 c=cookie();
  streamGS << v << c;
@@ -987,7 +977,7 @@ bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const
  KPlayer *player;
  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) {
    if (player && player->group()==group) {
-     sendMessage(msg,msgid,KGameMessage::calcMessageId(0,player->id()), sender);
+     sendMessage(msg,msgid,player->id(), sender);
    }
  }
  return true;
@@ -1050,7 +1040,7 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
  }
  if (newplayer->id() == 0) {
    d->mUniquePlayerNumber++;
-   newplayer->setId(KGameMessage::calcMessageId(gameId(), 0) | d->mUniquePlayerNumber);
+   newplayer->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber,gameId()));
    kdDebug(11001) << "systemAddPlayer: NEW!!! player " << newplayer << " now has id " << newplayer->id() << endl;
  }
 
