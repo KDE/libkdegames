@@ -55,8 +55,8 @@ void KGamePropertyBase::init()
  // it is activated by default. Big games may profit by deactivating it to get
  // a better performance. 
  setEmittingSignal(true); 
- 
- setLocked(false);
+ setOptimized(false); 
+ setReadOnly(false);
 }
 
 void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner)

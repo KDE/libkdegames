@@ -55,11 +55,8 @@ KGameProcess::KGameProcess() : QObject(0,0)
   rFile.open(IO_ReadOnly|IO_Raw,stdin);
   wFile.open(IO_WriteOnly|IO_Raw,stdout);
   mMessageIO=new KMessageFilePipe(this,&rFile,&wFile);
-  //mMessageServer=new KMessageServer(0,this);
   mMessageClient=new KMessageClient(this);
   mMessageClient->setServer(mMessageIO);
-  //mMessageClient->setServer(mMessageServer);
-  //mMessageServer->addClient(mMessageIO);
   connect (mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
           this, SLOT(receivedMessage(const QByteArray&, Q_UINT32)));
   fprintf(stderr,"KGameProcess::construtcor %p %p\n",&rFile,&wFile);
@@ -143,7 +140,22 @@ void KGameProcess::receivedMessage(const QByteArray& receiveBuffer, Q_UINT32 cli
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
  Q_UINT32 gameid = KGameMessage::calcGameId(receiver);
  fprintf(stderr,"------ receiveNetworkTransmission(): id=%d sender=%d,recv=%d\n",msgid,sender,receiver);
- emit signalCommand(stream,msgid,receiver,sender);
+ switch(msgid)
+ {
+   case KGameMessage::IdTurn:
+     Q_INT8 b;
+     stream >> b;
+     emit signalTurn(stream,(bool)b);
+   break;
+   case KGameMessage::IdIOAdded:
+     Q_INT16 id;
+     stream >> id;
+     emit signalInit(stream,(int)id);
+   break;
+   default:
+      emit signalCommand(stream,msgid,receiver,sender);
+   break;
+ }
 }
 
 #include "kgameprocess.moc"

@@ -82,11 +82,10 @@ KPlayer::KPlayer() : QObject(0,0)
    mAsyncInput.setValue(false);
    mMyTurn.registerData(KGamePropertyBase::IdTurn, dataHandler());
    mMyTurn.setValue(false);
+   mMyTurn.setEmittingSignal(true);
+   mMyTurn.setOptimized(false);
    mUserId.registerData(KGamePropertyBase::IdUserId, dataHandler());
    mUserId.setValue(0);
-
-
-
 }
 
 KPlayer::~KPlayer()
@@ -155,25 +154,6 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
 
 void KPlayer::setId(int newid)
 {
-  // Remove it...MH...unused
-#ifdef THIS_CAN_BE_REMOVED
-//AB: this is unclean. Should be in KGameProcessIO
-
-  // If we have a process input device we need to tellit our id change....
-  KGameProcessIO *input=(KGameProcessIO *)findRttiIO(KGameIO::ProcessIO);
-  // If the process is not running we need not send as the init of
-  // the process transmits the id...this is ONLY if the id of the player
-  // changes after the process is setup
-  if (input && newid!=d->mId  && input->isRunning()) 
-  {
-    int cookie=4242;
-    if (game()) cookie=game()->cookie();
-    QByteArray a;
-    QDataStream stream(a,IO_WriteOnly);
-    stream << newid;
-    input->sendProcess(stream,KGameMessage::IdPlayerId,0,KGameMessage::calcMessageId(0,id()),cookie);
-  }
-#endif
   // Needs to be after the sendProcess
   d->mId=newid;
 }
@@ -269,6 +249,7 @@ int KPlayer::calcIOValue()
 
 bool KPlayer::setTurn(bool b,bool exclusive)
 {
+  kdDebug() << "KPlayer::setTurn " << this << " to " << b << endl;
   if (!isActive()) return false;
   // forward to all mirror players...ehm why????? TODO: MH 28022001
   // if (transmit) game()->sendSystemMessage(b,KGameMessage::IdTurn,KGameMessage::calcMessageId(0,id()));
@@ -286,19 +267,7 @@ bool KPlayer::setTurn(bool b,bool exclusive)
   }
 
   // Return if nothing changed
-  if (b==mMyTurn.value()) return true;
-
   mMyTurn.setValue(b);
-
-  // notify KGameIO's from the turn (computer player)
-  //AB: this is probably a bug. The IOs should be notified when the property
-  //mMyTurn is *received*!
-  QListIterator<KGameIO> it(mInputList);
-  while (it.current()) 
-  {
-    it.current()->notifyTurn(b);
-    ++it;
-  }
 
   return true;
 }
@@ -356,16 +325,6 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,int sender)
         forwardInput(stream,false);
       }
     break;
-    /*
-    case KGameMessage::IdTurn:
-      {
-        kdDebug(11001) << "KPlayer::networkTransmission: Got remote player turn" << endl;
-        int turn;
-        stream >> turn;
-        setTurn((bool)turn,false,false);
-      }
-    break;
-    */
     default:
           emit signalNetworkData((int)msgid,stream,(int)sender,this);
           kdDebug(11001) << "KPlayer::ReceiveNetworkTransmision: User data msgid " << msgid << endl;
@@ -392,6 +351,17 @@ void KPlayer::sendProperty(QDataStream& s)
 
 void KPlayer::emitSignal(KGamePropertyBase *me)
 {
+  // Notify KGameIO (Process) for a new turn
+  if (me->id()==KGamePropertyBase::IdTurn)
+  {
+    //kdDebug() << "KPlayer::emitSignal for KGamePropertyBase::IdTurn " << endl;
+    QListIterator<KGameIO> it(mInputList);
+    while (it.current()) 
+    {
+      it.current()->notifyTurn(mMyTurn.value());
+      ++it;
+    }
+  }
   emit signalPropertyChanged(me,this);
 }
 
@@ -399,7 +369,7 @@ void KPlayer::unlockProperties()
 {
  QIntDictIterator<KGamePropertyBase> it(d->mProperties);
  while (it.current()) {
-	it.current()->setLocked(false);
+	it.current()->setReadOnly(false);
 	++it;
  }
 }
@@ -408,7 +378,7 @@ void KPlayer::lockProperties()
 {
  QIntDictIterator<KGamePropertyBase> it(d->mProperties);
  while (it.current()) {
-	it.current()->setLocked(true);
+	it.current()->setReadOnly(true);
 	++it;
  }
 }

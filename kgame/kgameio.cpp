@@ -119,24 +119,48 @@ void KGameProcessIO::initIO(KPlayer *p)
   // Send 'hello' to process
   QByteArray buffer;
   QDataStream stream(buffer,IO_WriteOnly);
-  stream << ((int)42);
+  Q_INT16 id=p->userId();
+  stream << id;
 
-  if (p) receiveSystemMessage(stream,KGameMessage::IdIOAdded,0,KGameMessage::calcMessageId(0,p->id()));
+  bool sendit=true;
+  emit signalIOAdded(this,stream,p,sendit);
+  if (sendit && p)
+  {
+    int sender=KGameMessage::calcMessageId(0,p->id());  
+    kdDebug() <<  "Sending IOAdded to process player !!!!!!!!!!!!!! " << endl;
+    sendSystemMessage(stream,KGameMessage::IdIOAdded,0,sender);
+  }
 }
 
-void KGameProcessIO::receiveSystemMessage(QDataStream &stream,int msgid, int receiver, int sender)
+void KGameProcessIO::notifyTurn(bool b) 
 {
-  receiveAllMessage(stream, msgid, receiver, sender, false);
+  bool sendit=true;
+  QByteArray buffer;
+  QDataStream stream(buffer,IO_WriteOnly);
+  stream << (Q_INT8)b;
+  emit signalPrepareTurn(stream,b,this,sendit);
+  if (sendit)
+  {
+    int sender=KGameMessage::calcMessageId(0,player()->id());  
+    kdDebug() <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
+    sendSystemMessage(stream,KGameMessage::IdTurn,0,sender);
+  }
 }
 
-void KGameProcessIO::receiveMessage(QDataStream &stream,int msgid, int receiver, int sender)
+
+void KGameProcessIO::sendSystemMessage(QDataStream &stream,int msgid, int receiver, int sender)
 {
-  receiveAllMessage(stream, msgid, receiver, sender, true);
+  sendAllMessages(stream, msgid, receiver, sender, false);
 }
 
-void KGameProcessIO::receiveAllMessage(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg)
+void KGameProcessIO::sendMessage(QDataStream &stream,int msgid, int receiver, int sender)
 {
-  kdDebug(11001) << "==============>  KGameProcessIO::receiveMessage (usermsg="<<usermsg<<")" << endl;
+  sendAllMessages(stream, msgid, receiver, sender, true);
+}
+
+void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg)
+{
+  kdDebug(11001) << "==============>  KGameProcessIO::sendMessage (usermsg="<<usermsg<<")" << endl;
   if (!player()) return ;
 
   if (!player()->isActive()) return ;
@@ -152,19 +176,7 @@ void KGameProcessIO::receiveAllMessage(QDataStream &stream,int msgid, int receiv
   
   KGameMessage::createHeader(ostream,sender,receiver,msgid);
   ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
-  kdDebug() << "Our client is id="<<d->mMessageClient->id() << endl;
   if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
-}
-
-void KGameProcessIO::notifyTurn(bool b) 
-{
-  bool sendit=true;
-  QByteArray buffer;
-  QDataStream stream(buffer,IO_WriteOnly);
-  emit signalPrepareTurn(this,stream,b,sendit);
-  int sender=KGameMessage::calcMessageId(0,player()->id());  
-  kdDebug(11001) <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
-  //sendProcess(stream,KGameMessage::IdTurn,0,sender);
 }
 
 void KGameProcessIO::clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv)
@@ -222,7 +234,7 @@ void KGameComputerIO::notifyTurn(bool b)
   bool sendit=true;
   QByteArray buffer;
   QDataStream stream(buffer,IO_WriteOnly);
-  emit signalPrepareTurn(this,stream,b,sendit);
+  emit signalPrepareTurn(stream,b,this,sendit);
   if (sendit)
   {
     QDataStream ostream(buffer,IO_ReadOnly);
@@ -338,8 +350,8 @@ void KGameIO::initIO(KPlayer *p)
   setPlayer(p);
 }
 
-void KGameIO::receiveSystemMessage(QDataStream &,int , int , int ) {}
-void KGameIO::receiveMessage(QDataStream & /*stream*/,int, int, int) {}
+void KGameIO::sendSystemMessage(QDataStream &,int , int , int ) {}
+void KGameIO::sendMessage(QDataStream & /*stream*/,int, int, int) {}
 void KGameIO::notifyTurn(bool ) {}
 
 

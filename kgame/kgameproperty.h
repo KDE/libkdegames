@@ -85,21 +85,32 @@ public:
 	bool isEmittingSignal()	const { return mFlags.bits.emitsignal; }
 
 	/**
-	 * See also @ref setLocked
+	 * See also @ref setReadOnly
 	 * @return Whether the property can be changed
 	 **/
-	bool isLocked() const { return mFlags.bits.locked; }
+	bool isReadOnly() const { return mFlags.bits.readonly; }
 
 	/**
-	 * A locked property cannot be changed. Use this if you to prevent a
+	 * Sets this property to try to optimize signal and network handling
+   * by not sending it out when the property value is not changed.
+	 **/
+	void setOptimized(bool p)	{ mFlags.bits.optimize=p&1; }
+	/**
+	 * See also @ref setOptimize
+	 * @return Whether the property optimizes access (signals,network traffic)
+	 **/
+	bool isOptimized() const { return mFlags.bits.optimize; }
+
+	/**
+	 * A readonly property cannot be changed. Use this if you to prevent a
 	 * player from changing something, e.g. for a money-bases card game you
 	 * will want to lock the "bet" property after a player has bet.
 	 * 
-	 * You have to call setLocked(false) before you are able to change the
-	 * value of the property again. The default is not locked.
+	 * You have to call setReadOnly(false) before you are able to change the
+	 * value of the property again. The default is not readonly.
 	 * @param p True to lock this property, false to unlock it
 	 **/
-	void setLocked(bool p) { mFlags.bits.locked = p&1; }
+	void setReadOnly(bool p) { mFlags.bits.readonly = p&1; }
 	
 
 	/**
@@ -162,9 +173,10 @@ protected:
                                              // change but a KPlayer:QTimer
                                              // sends it later on - fast
                                              // changing variables
-			unsigned char emitsignal:1; // KPlayer notifies on variable change
+			unsigned char emitsignal:1; // KPlayer notifies on variable change (true)
 						// can used 2 more
-			unsigned char locked : 1; // whether the property can be changed
+			unsigned char readonly : 1; // whether the property can be changed (false)
+			unsigned char optimize : 1; // whether the property tries to optimize send/emit (false)
 		} bits;
 	} mFlags;
 	
@@ -262,19 +274,17 @@ public:
 	// i am not able to put this to kgameproperty.cpp - why?
 	{
 		//kdDebug(11001) << "+++KGameProperty::setValue(" << id() << ") = " << v << endl;
-		if (mData!=v) { // not possible as "!=" is not always implemented
-			if (isLocked()) {
-				return;
-			}
+		if (!isOptimized() || mData!=v)
+    {
+			if (isReadOnly()) return;
 			mData = v;
-			if (isEmittingSignal()) {
+			if (isEmittingSignal())
+      {
 				//AB: cannot be done here!!
 				//the remote clients won't receive this signal!
 //				emitSignal();
 			}
-			if (sendValue) {
-				send();
-			}
+			if (sendValue) { send(); }
 		} 
 	}
 

@@ -177,9 +177,7 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
         Q_UINT32 clientID;
         QValueList <Q_UINT32> receivers;
         in_stream >> clientID >> receivers;
-        kdDebug() << "********** KMEssageCLIENT forwardRecevied to emit" <<endl;
         emit forwardReceived (in_buffer.readAll(), clientID, receivers);
-        kdDebug() << "********** KMEssageCLIENT forwardRecevied emitted" <<endl;
       }
       break;
 

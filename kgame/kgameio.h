@@ -89,9 +89,9 @@ public:
     * You have to call @ref KGameNetwork::registerListener to receive messages!
     *
     * This is used for messages sent through sendSystemMessage, like adding
-    * player. Use @ref receiveMessage for your own messages instead!
+    * player. Use @ref sendMessage for your own messages instead!
     */
-    virtual void receiveSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
+    virtual void sendSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
 
     /**
     * Message to clients. Needs to be overwritten to be
@@ -102,9 +102,9 @@ public:
     * KGame::sendMessage
     *
     * You probably want to use this for your game messages instead of @ref
-    * receiveSystemMessage
+    * sendSystemMessage
     **/
-    virtual void receiveMessage(QDataStream &stream, int msgid, int receiver, int sender);
+    virtual void sendMessage(QDataStream &stream, int msgid, int receiver, int sender);
     
     /**
      *  Notifies the IO device that the player's setTurn had been called
@@ -260,11 +260,10 @@ public:
     int rtti() const;
     
     /**
-     * forward a message from the game to the process.
+     * send a message to the process
      */
-    void receiveMessage(QDataStream &stream,int msgid, int receiver, int sender);
-    void receiveSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
-    void receiveAllMessage(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
+    void sendMessage(QDataStream &stream,int msgid, int receiver, int sender);
+    void sendSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
 
     /** 
      * Init this device by setting the player and e.g. sending an
@@ -280,52 +279,42 @@ public:
      */
     void notifyTurn(bool b);
 
-
-    /**
-     * forward to the computer player. Needs to be improved 
-     */
-  //virtual bool SendIOMessage(QDataStream &msg,int cmd=0); // msg to client
+  protected:
+    void sendAllMessages(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
   protected slots:
     void clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv);
 
   
 signals:
   /**
-   * Gives a signal that the computer player ended. Maybe we could give
-   * an option to automatically restart the player?
-   */
-  void signalProcessExited(KGameProcessIO *me);
-
-  /**
-   * This signal is emmited if the computer player is about to
-   * receive a message. If the parameter killit is set to
-   * true the message is not forwarded to the player. This can
-   * be used as a message filter. A more detailed filter
-   * has to be implemented inthe computer player itself. But
-   * stopping messages here saves traffic.
-   *
-   * @param msgid the message id
-   * @param killit set this to true to not deliver the message
-   */
-  void signalProcessIOMessage(int msgid, bool &killit);
-
-  /**
    * A computer query message is received. This is a 'dummy'
    * message sent by the process if it needs to communicate
    * with us. It is not forwarded over the network.
    */
-  void signalProcessQuery(const QDataStream &stream,KGameProcessIO *me);
+  void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
 
   /**
-  * Signal generated when the computer player is activated. 
-  * The datastream has to be filled with a move
+  * Signal generated when the computer player is about to perform a turn. 
+  * The datastream has to be filled with user data for the computer player
+  * to make a proper move
   *
   * @param the KGameIO object itself
   * @param the stream into which themove will be written
   * @param the argument of setTurn
   * @param set this to false if no move should be generated
   */
-  void signalPrepareTurn(KGameIO *,QDataStream &,bool,bool &);
+  void signalPrepareTurn(QDataStream &,bool,KGameIO *,bool &);
+
+  /**
+  * Signal generated when the computer player is added. 
+  * You can use this to communicated with the process
+  *
+  * @param the KGameIO object itself
+  * @param the stream into which themove will be written
+  * @param the player itself
+  * @param set this to false if no move should be generated
+  */
+  void signalIOAdded(KGameIO *,QDataStream &,KPlayer *p,bool &);
 
 
 protected:
@@ -373,7 +362,7 @@ signals:
       * @param the argument of setTurn
       * @param set this to false if no move should be generated
       */
-      void signalPrepareTurn(KGameIO *,QDataStream &,bool,bool &);
+      void signalPrepareTurn(QDataStream &,bool,KGameIO *,bool &);
 
 protected:
 

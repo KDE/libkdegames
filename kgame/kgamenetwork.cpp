@@ -293,9 +293,9 @@ bool KGameNetwork::sendGameIOMessage(const QByteArray& sendBuffer, int msgid, KG
  int m, r, s;
  KGameMessage::extractHeader(ostream, m, r, s);
  if (!userMessage) {
-   client->receiveSystemMessage(ostream, msgid, receiver, sender);
+   client->sendSystemMessage(ostream, msgid, receiver, sender);
  } else {
-   client->receiveMessage(ostream, msgid, receiver, sender);
+   client->sendMessage(ostream, msgid, receiver, sender);
  }
  return true;
 }

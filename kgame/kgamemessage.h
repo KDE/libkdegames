@@ -108,6 +108,7 @@ class KGameMessage
     IdRemovePlayer=31,      // the player will be removed
     IdActivatePlayer=32,    // Activate a player
     IdInactivatePlayer=33,  // Inactivate a player
+    IdTurn=34,              // Turn to be prepared
     
 // to-be-categorized
     IdError=100,            // an error occured

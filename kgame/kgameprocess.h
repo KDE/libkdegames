@@ -131,9 +131,30 @@ class KGameProcess:  public QObject
      */
      void signalCommand(QDataStream &inputStream,int msgid,int receiver,int sender);
 
+     /**
+      * This signal is emmited if the computer player should perform a turn.
+      * Calculatisn can be made here and the move will then send back with 
+      * sendSystemMessage with the message id KGameMessage::IdPlayerInput.
+      * Additonal data which have been written into the stream from the
+      * ProcessIO's signal signalPrepareTurn can be retrieved from the
+      * stream here.
+      *
+      * @param The datastream which contains user data 
+      * @param True or false whether the turn is activated or deactivated
+      * 
+      */
+     void signalTurn(QDataStream &stream,bool turn);
+     /**
+      * This signal is emmited when the process is initialized, i.e. added
+      * to a KPlayer. Initial initialisation can be performed here be reacting
+      * to the KProcessIO signal signalIOAdded and retrieving the data here
+      * from the stream. 
+      *
+      * @param The datastream which contains user data 
+      * @param The userId of the player. (Careful to rely on it yet)
+      */
+     void signalInit(QDataStream &stream,int userid);
 
-
-    
   protected:
     bool mTerminate;
     KMessageFilePipe *mMessageIO;
