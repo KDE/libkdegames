@@ -63,7 +63,36 @@ class KGame : public KGameNetwork
   Q_OBJECT
 
 public:
-    typedef QList<KPlayer> KGamePlayerList;
+  typedef QList<KPlayer> KGamePlayerList;
+
+	/**
+	 * The policy of the property. This can be PolicyClean (@ref setVale uses
+	 * @ref send), PolicyDirty (@ref setValue uses @ref changeValue) or
+	 * PolicyLocal (@ref setValue uses @ref setLocal).
+	 *
+	 * A "clean" policy means that the property is always the same on every
+	 * client. This is achieved by calling @ref send which actually changes
+	 * the value only when the message from the MessageServer is received.
+	 *
+	 * A "dirty" policy means that as soon as @ref setValue is called the
+	 * property is changed immediately. And additionally sent over network.
+	 * This can sometimes lead to bugs as the other clients do not 
+	 * immediately have the same value. For more information see 
+	 * @ref changeValue.
+	 *
+	 * PolicyLocal means that a @ref KGameProperty behaves like ever
+	 * "normal" variable. Whenever @ref setValue is called (e.g. using "=")
+	 * the value of the property is changes immediately without sending it
+	 * over network. You might want to use this if you are sure that all
+	 * clients set the property at the same time.
+	 **/
+	enum GamePolicy
+	{
+    PolicyUndefined = 0,
+		PolicyClean = 1,
+		PolicyDirty = 2,
+		PolicyLocal = 3
+	};
 
     /** 
      * Create a KGame object
@@ -155,6 +184,12 @@ public:
     //sent, eg if a socket is connected, etc. If sendMessage returns false
     //remove the player directly using systemRemovePlayer
     bool removePlayer(KPlayer * player) { return removePlayer(player, 0); }
+
+    /**
+     * Called by the desvtuctor of KPlayer to remove itself from the game
+     *
+     **/
+    void playerDeleted(KPlayer * player);
 
     /**
      * sends activate player: interal use only?
@@ -302,6 +337,19 @@ public:
     bool sendPlayerProperty(QDataStream& s, Q_UINT32 playerId);
     
     KGamePropertyBase* findProperty(int id) const;
+
+	/**
+	 * Changes the consistency policy of a property. The @ref 
+	 * GamePolicy is one of PolicyClean (defaulz), PolicyDirty or PolicyLocal.
+	 *
+	 * It is up to you to decide how you want to work. 
+	 **/
+	void setPolicy(GamePolicy p);
+
+	/**
+	 * @return The default policy of the property
+	 **/
+	GamePolicy policy() const;
 
     /**
      * See @ref KGameNetwork::sendMessage
@@ -519,7 +567,7 @@ protected:
      * removed directly.
      *
      **/
-    void systemRemovePlayer(KPlayer* player);
+    void systemRemovePlayer(KPlayer* player,bool deleteit);
     
     /**
      * This member function will transmit e.g. all players to that client, as well as
@@ -535,6 +583,7 @@ protected:
 
     /**
      * syncronise the random numbers with all network clients
+     * not used by KGame - if it should be kept then as public method
      */
     void syncRandom();
 
@@ -601,7 +650,7 @@ private:
      * @return True if the player has been removed, false if the current is not
      * found
      **/
-    bool systemRemove(KPlayer* player);
+    bool systemRemove(KPlayer* player,bool deleteit);
 
     /**
      * Prepare a player for being added. Put all data about a player into the
