@@ -291,8 +291,8 @@ protected:
     QDataStream s(b, IO_ReadOnly);
     int cmd;
     int propId;
-    KGameMessage::extractPropertyHeader(s, propId):
-    KGameMessage::extractPropertyCommand(s, propId, cmd):
+    KGameMessage::extractPropertyHeader(s, propId);
+    KGameMessage::extractPropertyCommand(s, propId, cmd);
     command(s, cmd, true);
   }
 
