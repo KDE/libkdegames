@@ -97,33 +97,47 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
 
 bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSender)
 {
- //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
- if (id != d->mId) {
-	return false; // Is the message meant for us?
- }
- KGamePropertyBase* p;
- int propertyId;
- KGameMessage::extractPropertyHeader(stream, propertyId);
- //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
- if (propertyId==KGamePropertyBase::IdCommand) {
-	int cmd;
-	KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
-	kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
-	p = d->mIdDict.find(propertyId);
-	p->command(stream, cmd, isSender);
-	return true;
- }
- p = d->mIdDict.find(propertyId);
- if (p) {
-	//kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
-	p->load(stream);
-	//kdDebug(11001) << "done" << endl;
- } else {
-	if (!p) {
-		kdError(11001) << "KGamePropertyHandler::processMessage:property " << propertyId << " not found" << endl;
-	}
- }
- return true;
+  //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
+  if (id != d->mId) {
+  	return false; // Is the message meant for us?
+  }
+  KGamePropertyBase* p;
+  int propertyId;
+  KGameMessage::extractPropertyHeader(stream, propertyId);
+  //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
+  if (propertyId==KGamePropertyBase::IdCommand)
+  {
+    int cmd;
+    KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
+    kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
+    p = d->mIdDict.find(propertyId);
+    if (p)
+    {
+      if (!isSender || p->policy()==KGamePropertyBase::PolicyClean)
+      {
+        p->command(stream, cmd, isSender);
+      }
+    }
+    else
+    {
+      kdError(11001) << "KGamePropertyHandler::processMessage:propertyCommand " << propertyId << " not found" << endl;
+    }
+    return true;
+  }
+  p = d->mIdDict.find(propertyId);
+  if (p)
+  {
+	  //kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
+    if (!isSender || p->policy()==KGamePropertyBase::PolicyClean)
+    {
+      p->load(stream);
+    }
+  }
+  else
+  {
+    kdError(11001) << "KGamePropertyHandler::processMessage:property " << propertyId << " not found" << endl;
+  }
+  return true;
 }
 
 bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
@@ -178,7 +192,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  stream >> count;
  kdDebug(11001) << "KGamePropertyHandler::load " << count << " KGameProperty objects " << endl;
  for (i = 0; i < count; i++) {
-	processMessage(stream, id());
+	processMessage(stream, id(),false);
  }
  Q_INT16 cookie;
  stream >> cookie;

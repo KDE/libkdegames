@@ -137,7 +137,7 @@ public:
 	 *
 	 * It is up to you to decide how you want to work. 
 	 **/
-	void setPolicy(PropertyPolicy p) { mFlags.bits.policy = p; } // TODO: bit field?
+	void setPolicy(PropertyPolicy p) { mFlags.bits.policy = p; } 
 
 	/**
 	 * @return The default policy of the property

@@ -116,7 +116,7 @@ public:
 	 * @param isSender Whether the receiver is also the sender
 	 * @return true on message processed otherwise false
 	 **/
-	bool processMessage(QDataStream &stream, int id, bool isSender = false);
+	bool processMessage(QDataStream &stream, int id, bool isSender );
 	
 	/**
 	 * @return the id of the handler
