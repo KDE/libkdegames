@@ -239,7 +239,7 @@ protected:
 };
 
 /**
- *  The KMouseKeyIO class. It is used to process mouse input
+ *  The KGameMouseIO class. It is used to process mouse input
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <martin@heni-online.de>
  */
@@ -311,7 +311,7 @@ protected:
 
 
 /**
- *  The KProcessIO class. It is used to create a computer player
+ *  The KGameProcessIO class. It is used to create a computer player
  *  via a separate process and communicate transparetly with it.
  *  Its counterpart is the @ref KGameProcess class which needs
  *  to be used by the computer player. See its documentation
@@ -457,7 +457,7 @@ private:
 };
 
 /**
- *  The KComputerIO class. It is used to create a LOCAL computer player
+ *  The KGameComputerIO class. It is used to create a LOCAL computer player
  *  and communicate transparetly with it. 
  *  Question: Is this needed or is it overwritten anyway for a real game?
  *
