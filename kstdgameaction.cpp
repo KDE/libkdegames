@@ -33,124 +33,87 @@ KStdGameAction::~KStdGameAction()
 KAction *KStdGameAction::action(StdGameAction act_enum, const QObject *recvr,
                             const char *slot, KActionCollection *parent, const char *name )
 {
-    KAction *act;
     switch (act_enum)
     {
     case New:
-        act = gameNew(recvr, slot, parent, name);
-        break;
+        return gameNew(recvr, slot, parent, name);
     case Load:
-        act = load(recvr, slot, parent, name);
-        break;
+        return load(recvr, slot, parent, name);
     case LoadRecent:
-        act = loadRecent(recvr, slot, parent, name);
-        break;
+        return loadRecent(recvr, slot, parent, name);
     case Save:
-        act = save(recvr, slot, parent, name);
-        break;
+        return save(recvr, slot, parent, name);
     case SaveAs:
-        act = saveAs(recvr, slot, parent, name);
-        break;
+        return saveAs(recvr, slot, parent, name);
     case End:
-        act = end(recvr, slot, parent, name);
-        break;
+        return end(recvr, slot, parent, name);
     case Pause:
-        act = pause(recvr, slot, parent, name);
-        break;
+        return pause(recvr, slot, parent, name);
     case Highscores:
-        act = highscores(recvr, slot, parent, name);
-        break;
+        return highscores(recvr, slot, parent, name);
     case Print:
-        act = print(recvr, slot, parent, name);
-        break;
+        return print(recvr, slot, parent, name);
     case Quit:
-        act = quit(recvr, slot, parent, name);
-        break;
+        return quit(recvr, slot, parent, name);
     case Repeat:
-        act = repeat(recvr, slot, parent, name);
-        break;
+        return repeat(recvr, slot, parent, name);
     case Undo:
-        act = undo(recvr, slot, parent, name);
-        break;
+        return undo(recvr, slot, parent, name);
     case Redo:
-        act = redo(recvr, slot, parent, name);
-        break;
+        return redo(recvr, slot, parent, name);
     case EndTurn:
-        act = endTurn(recvr, slot, parent, name);
-        break;
+        return endTurn(recvr, slot, parent, name);
     case Roll:
-        act = roll(recvr, slot, parent, name);
-        break;
+        return roll(recvr, slot, parent, name);
     case Carddecks:
-        act = carddecks(recvr, slot, parent, name);
-        break;
-
+        return carddecks(recvr, slot, parent, name);
     default:
-        act = 0;
+        break;
     }
-
-    return act;
+    return 0;
 }
 
 const char* KStdGameAction::stdName(StdGameAction act_enum)
 {
-    const char *ret;
     switch (act_enum)
     {
     case New:
-        ret = "game_new";
-        break;
+        return "game_new";
     case Load:
-        ret = "game_load";
-        break;
+        return "game_load";
     case LoadRecent:
-        ret = "game_load_recent";
-        break;
+        return "game_load_recent";
     case Save:
-        ret = "game_save";
-        break;
+        return "game_save";
     case SaveAs:
-        ret = "game_save_as";
-        break;
+        return "game_save_as";
     case End:
-        ret = "game_end";
-        break;
+        return "game_end";
     case Pause:
-        ret = "game_pause";
-        break;
+        return "game_pause";
     case Highscores:
-        ret = "game_highscores";
-        break;
+        return "game_highscores";
     case Print:
-        ret = "game_print";
-        break;
+        return "game_print";
     case Quit:
-        ret = "game_quit";
-        break;
+        return "game_quit";
     case Repeat:
-        ret = "move_repeat";
-        break;
+        return "move_repeat";
     case Undo:
-        ret = "move_undo";
-        break;
+        return "move_undo";
     case Redo:
-        ret = "move_redo";
-        break;
+        return "move_redo";
     case Roll:
-        ret = "move_roll";
-        break;
+        return "move_roll";
     case EndTurn:
-        ret = "move_endturn";
-        break;
+        return "move_endturn";
     case Carddecks:
-        ret = "options_configure_carddecks";
-        break;
-
+        return "options_configure_carddecks";
     default:
-        ret = "";
+        break;
     }
 
-    return ret;
+    return "";
 }
 
 KAction *KStdGameAction::gameNew(const QObject *recvr, const char *slot,
@@ -204,7 +167,7 @@ KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,
 {
 //hmm perhaps we need a KStdGameAccel one day? currently this entry is hard
 //coded...
-    return new KAction(i18n("Show Highscores"), "highscore",
+    return new KAction(i18n("Show &Highscores"), "highscore",
                        Qt::CTRL+Qt::Key_H, recvr, slot, parent,
                        name ? name : stdName(Highscores));
 }
