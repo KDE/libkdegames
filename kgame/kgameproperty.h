@@ -718,6 +718,8 @@ public:
 	 **/
 	operator type() const { return value(); }
 
+	virtual const type_info* typeinfo() { return &typeid(type); }
+
 private:
 	void init()
 	{
