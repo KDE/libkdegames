@@ -164,8 +164,9 @@ class Item
  * Possible score type.
  * @p Won the game has been won.
  * @p Lost the game has been lost or has been aborted.
+ * @p Draw the game is a draw.
  */
-enum ScoreType { Won = 0, Lost = -1 };
+enum ScoreType { Won = 0, Lost = -1, Draw = -2 };
 
 /**
  * This class contains data for a score. You should not inherit from

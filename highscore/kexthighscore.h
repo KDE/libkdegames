@@ -121,7 +121,7 @@ Score firstScore();
  * <li> the player comment (as defined by the user in the
  *      configuration dialog) </li>
  * </ul>
- * You can replace the best score and the mean score item
+ * You can replace the best score and the mean score items
  * by calling setPlayerItem.
  *
  * To submit a new score at game end, just construct a Score, set the
@@ -148,14 +148,15 @@ class Manager
      */
     Manager(uint nbGameTypes = 1, uint maxNbEntries = 10);
     virtual ~Manager();
-
+    
     /**
      * Set the world-wide highscores.
+     * By default there is no world-wide highscores.
      *
      * Note: should be called at construction time.
      *
      * @param url the web server url
-     * @param version the game version which is sent to the wrb server (it can
+     * @param version the game version which is sent to the web server (it can
      * be useful for backward compatibility on the server side).
      */
     void setWWHighscores(const KURL &url, const QString &version);
@@ -163,20 +164,45 @@ class Manager
     /**
      * Set if the number of lost games should be track for the world-wide
      * highscores statistics. By default, there is no tracking.
+     * False by default.
      *
      * Note: should be called at construction time.
      */
     void setTrackLostGames(bool track);
+    
+    /**
+     * @since 3.3
+     * Set if the number of "draw" games should be track for the world-wide
+     * highscores statistics. By default, there is no tracking.
+     * False by default.
+     *
+     * Note: should be called at construction time.
+     */
+    void setTrackDrawGames(bool track);
 
     /**
+     * @since 3.3
      * Set if the statistics tab should be shown in the highscores dialog.
      * You only want to show this tab if it makes sense to lose or to win the
      * game (for e.g. it makes no sense for a tetris game but it does for a
      * minesweeper game).
+     * False by default.
      *
      * Note: should be called at construction time.
      */
-    void showStatistics(bool show);
+    void setShowStatistics(bool show);
+    
+    /** @obsolete */
+    // KDE4 remove this
+    void showStatistics(bool show) KDE_DEPRECATED;
+    
+    /**
+     * @since 3.3
+     * Set if draw games statistics should be shown (enable this if
+     * draws are possible in your game).
+     * False by default.
+     */
+    void setShowDrawGamesStatistic(bool show);
 
     enum ScoreTypeBound { ScoreNotBound, ScoreBound };
     /**
@@ -190,7 +216,7 @@ class Manager
                     ShowForHighestScore };
     /**
      * Set how the highscores dialog is shown at game end.
-     * By default, the mode is ShowAtHigherScore.
+     * By default, the mode is @ref ShowForHigherScore.
      *
      * Note: should be called at construction time.
      */
@@ -204,6 +230,7 @@ class Manager
     enum ScoreType { Normal, MinuteTime };
     /**
      * Set score type. Helper method to quickly set the type of score.
+     * By default the type is @ref Normal.
      *
      * Note: should be called at construction time.
      */
@@ -211,11 +238,11 @@ class Manager
 
     /**
      * Some predefined item types.
-     * @p Score default item for the score in the highscores list.
-     * @p MeanScore default item for the mean score (only show one decimal and
+     * @p ScoreDefault default item for the score in the highscores list.
+     * @p MeanScoreDefault default item for the mean score (only show one decimal and
      * 0 is shown as "--".
-     * @p BestScore default item for the best score (0 is shown as "--").
-     * @p Optionnal item for elapsed time (maximum value is 3599 seconds).
+     * @p BestScoreDefault default item for the best score (0 is shown as "--").
+     * @p ElapsedTime optionnal item for elapsed time (maximum value is 3599 seconds).
      */
     enum ItemType { ScoreDefault, MeanScoreDefault, BestScoreDefault,
                     ElapsedTime };

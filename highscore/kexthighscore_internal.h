@@ -250,7 +250,7 @@ class ManagerPrivate
     Manager &manager;
     KURL     serverURL;
     QString  version;
-    bool     showStatistics, trackLostGames;
+    bool     showStatistics, showDrawGames, trackLostGames, trackDrawGames;
     Manager::ShowMode showMode;
 
  private:

@@ -125,9 +125,24 @@ void Manager::setTrackLostGames(bool track)
     internal->trackLostGames = track;
 }
 
+void Manager::setTrackDrawGames(bool track)
+{
+    internal->trackDrawGames = track;
+}
+
+void Manager::setShowStatistics(bool show)
+{
+    internal->showStatistics = show;
+}
+
 void Manager::showStatistics(bool show)
 {
     internal->showStatistics = show;
+}
+
+void Manager::setShowDrawGamesStatistic(bool show)
+{
+    internal->showDrawGames = show;
 }
 
 void Manager::setWWHighscores(const KURL &url, const QString &version)

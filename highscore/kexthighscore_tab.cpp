@@ -109,7 +109,8 @@ void AdditionalTab::load()
 
 //-----------------------------------------------------------------------------
 const char *StatisticsTab::COUNT_LABELS[Nb_Counts] = {
-    I18N_NOOP("Total:"), I18N_NOOP("Won:"), I18N_NOOP("Lost:")
+    I18N_NOOP("Total:"), I18N_NOOP("Won:"), I18N_NOOP("Lost:"),
+    I18N_NOOP("Draw:")
 };
 const char *StatisticsTab::TREND_LABELS[Nb_Trends] = {
     I18N_NOOP("Current:"), I18N_NOOP("Max won:"), I18N_NOOP("Max lost:")
@@ -128,6 +129,7 @@ StatisticsTab::StatisticsTab(QWidget *parent)
     QGrid *grid = new QGrid(3, group);
     grid->setSpacing(KDialogBase::spacingHint());
     for (uint k=0; k<Nb_Counts; k++) {
+        if ( Count(k)==Draw && !internal->showDrawGames ) continue;
         (void)new QLabel(i18n(COUNT_LABELS[k]), grid);
         _nbs[k] = new QLabel(grid);
         _percents[k] = new QLabel(grid);
@@ -156,7 +158,9 @@ void StatisticsTab::load()
         _data[i].count[Total] = pi.item("nb games")->read(i).toUInt();
         _data[i].count[Lost] = pi.item("nb lost games")->read(i).toUInt()
                        + pi.item("nb black marks")->read(i).toUInt(); // legacy
-        _data[i].count[Won] = _data[i].count[Total] - _data[i].count[Lost];
+        _data[i].count[Draw] = pi.item("nb draw games")->read(i).toUInt();
+        _data[i].count[Won] = _data[i].count[Total] - _data[i].count[Lost]
+                              - _data[i].count[Draw];
         _data[i].trend[CurrentTrend] =
             pi.item("current trend")->read(i).toInt();
         _data[i].trend[WonTrend] = pi.item("max won trend")->read(i).toUInt();
@@ -188,8 +192,9 @@ void StatisticsTab::display(uint i)
 {
     const Data &d = _data[i];
     for (uint k=0; k<Nb_Counts; k++) {
+        if ( Count(k) && !internal->showDrawGames ) continue;
         _nbs[k]->setText(QString::number(d.count[k]));
-        _percents[k]->setText(percent(d, (Count)k));
+        _percents[k]->setText(percent(d, Count(k)));
     }
     for (uint k=0; k<Nb_Trends; k++) {
         QString s;

@@ -80,7 +80,7 @@ class StatisticsTab : public AdditionalTab
     void load();
 
  private:
-    enum Count { Total = 0, Won, Lost, Nb_Counts };
+    enum Count { Total = 0, Won, Lost, Draw, Nb_Counts };
     static const char *COUNT_LABELS[Nb_Counts];
     enum Trend { CurrentTrend = 0, WonTrend, LostTrend, Nb_Trends };
     static const char *TREND_LABELS[Nb_Trends];

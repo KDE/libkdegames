@@ -274,6 +274,7 @@ PlayerInfos::PlayerInfos()
     // statistics items
     addItem("nb black marks", new Item((uint)0), true, true); // legacy
     addItem("nb lost games", new Item((uint)0), true, true);
+    addItem("nb draw games", new Item((uint)0), true, true);
     addItem("current trend", new Item((int)0), true, true);
     addItem("max lost trend", new Item((uint)0), true, true);
     addItem("max won trend", new Item((uint)0), true, true);
@@ -383,19 +384,20 @@ void PlayerInfos::submitScore(const Score &score) const
 {
     // update counts
     uint nbGames = item("nb games")->increment(_id);
-    bool lost = true;
     switch (score.type()) {
     case Lost:
         item("nb lost games")->increment(_id);
         break;
-    case Won:
-        lost = false;
+    case Won: break;
+    case Draw:
+        item("nb draw games")->increment(_id);
         break;
     };
 
     // update mean
-    if ( !lost ) {
+    if ( score.type()==Won ) {
         uint nbWonGames = nbGames - item("nb lost games")->read(_id).toUInt()
+                        - item("nb draw games")->read(_id).toUInt()
                         - item("nb black marks")->read(_id).toUInt(); // legacy
         double mean = (nbWonGames==1 ? 0.0
                        : item("mean score")->read(_id).toDouble());
@@ -404,7 +406,7 @@ void PlayerInfos::submitScore(const Score &score) const
     }
 
     // update best score
-    Score best = score; //copy optionnal fields that are not taken into account
+    Score best = score; // copy optionnal fields (there are not taken into account here)
     best.setScore( item("best score")->read(_id).toUInt() );
     if ( best<score ) {
         item("best score")->write(_id, score.score());
@@ -413,22 +415,30 @@ void PlayerInfos::submitScore(const Score &score) const
 
     // update trends
     int current = item("current trend")->read(_id).toInt();
-    if (lost) {
+    switch (score.type()) {
+    case Won: {
+        if ( current<0 ) current = 0;
+        current++;
+        uint won = item("max won trend")->read(_id).toUInt();
+        if ( (uint)current>won ) item("max won trend")->write(_id, current);
+        break;
+    }
+    case Lost: {
         if ( current>0 ) current = 0;
         current--;
         uint lost = item("max lost trend")->read(_id).toUInt();
         uint clost = -current;
         if ( clost>lost ) item("max lost trend")->write(_id, clost);
-    } else {
-        if ( current<0 ) current = 0;
-        current++;
-        uint won = item("max won trend")->read(_id).toUInt();
-        if ( (uint)current>won ) item("max won trend")->write(_id, current);
+        break;
+    }
+    case Draw:
+        current = 0;
+        break;
     }
     item("current trend")->write(_id, current);
 
     // update histogram
-    if ( !lost ) {
+    if ( score.type()==Won ) {
         const QMemArray<uint> &sh = _histogram;
         for (uint i=1; i<histoSize(); i++)
             if ( i==sh.size() || score.score()<sh[i] ) {
@@ -494,7 +504,8 @@ void PlayerInfos::removeKey()
 
 //-----------------------------------------------------------------------------
 ManagerPrivate::ManagerPrivate(uint nbGameTypes, Manager &m)
-    : manager(m), showStatistics(false), trackLostGames(false),
+    : manager(m), showStatistics(false), showDrawGames(false),
+      trackLostGames(false), trackDrawGames(false), 
       showMode(Manager::ShowForHigherScore),
       _first(true), _nbGameTypes(nbGameTypes), _gameType(0)
 {}
@@ -810,6 +821,7 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
                                      QWidget *widget) const
 {
     if ( score.type()==Lost && !trackLostGames ) return true;
+    if ( score.type()==Draw && !trackDrawGames ) return true;
 
     KURL url = queryURL(Submit);
     manager.additionalQueryItems(url, score);
