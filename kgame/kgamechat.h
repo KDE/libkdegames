@@ -203,6 +203,13 @@ protected slots:
 	void slotAddPlayer(KPlayer*);
 	void slotRemovePlayer(KPlayer*);
 
+	/**
+	 * Called when @ref KPlayer::signalNetworkData is emitted. The message
+	 * gets forwarded to @ref slotReceiveMessage if @p me equals @ref
+	 * fromPlayer.
+	 **/
+	void slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer* me);
+
 protected:
 	virtual void returnPressed(const QString&);
 

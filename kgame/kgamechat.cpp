@@ -283,6 +283,8 @@ void KGameChat::slotAddPlayer(KPlayer* p)
  d->mSendId2PlayerId.insert(sendingId, p->id());
  connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+ connect(p, SIGNAL(signalNetworkData(int, const QByteArray&, Q_UINT32, KPlayer*)),
+		this, SLOT(slotReceivePrivateMessage(int, const QByteArray&, Q_UINT32, KPlayer*)));
 }
 
 void KGameChat::slotRemovePlayer(KPlayer* p)
@@ -313,6 +315,15 @@ void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
  } else if (prop->id() == KGamePropertyBase::IdGroup) {
  //TODO
  }
+}
+
+void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer* me)
+{
+ if (!me || me != fromPlayer()) {
+	kdDebug() << k_funcinfo << "nope - not for us!"  << endl;
+	return;
+ }
+ slotReceiveMessage(msgid, buffer, me->id(), sender);
 }
 
 void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32 , Q_UINT32 sender)
