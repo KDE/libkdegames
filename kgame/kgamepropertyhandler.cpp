@@ -59,12 +59,12 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
   setId(id); 
   if (receiver && emitf)
   {
-    kdDebug() << "Connecting SLOT " << emitf << endl;
+    kdDebug(11001) << "Connecting SLOT " << emitf << endl;
     connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase *)), receiver, emitf);
   }
   if (receiver && sendf)
   {
-    kdDebug() << "Connecting SLOT " << sendf << endl;
+    kdDebug(11001) << "Connecting SLOT " << sendf << endl;
     connect(this, SIGNAL(signalSendMessage(QDataStream &)), receiver, sendf);
   }
 }
@@ -95,7 +95,7 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id)
  {
    int cmd;
    KGameMessage::extractPropertyCommand(stream,propertyId,cmd);
-   kdDebug() << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
+   kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
    p = d->mIdDict.find(propertyId);
    p->command(stream,cmd);
    return true;
@@ -136,9 +136,9 @@ bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, QString name)
   if (!name.isNull())
   {
     d->mNameMap.insert(data->id(),name);
-    kdDebug() << "KGamePropertyHandler::addProperty: nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
-    kdDebug() << "Typeid=" << typeid(data).name() << endl;
-    kdDebug() << "Typeid call=" << data->typeinfo()->name() << endl;
+    kdDebug(11001) << "KGamePropertyHandler::addProperty: nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
+    kdDebug(11001) << "Typeid=" << typeid(data).name() << endl;
+    kdDebug(11001) << "Typeid call=" << data->typeinfo()->name() << endl;
   }
  }
  return true;

@@ -362,7 +362,7 @@ void KMessageServer::getReceivedMessage (const QByteArray &msg)
     kdError (11001) << "KMessageServer::processReceivedMessage: slot was not called from KMessageIO!" << endl;
     return;
   }
-  //kdDebug() << "KMessageServer::getReceivedMessage size=" << msg.size() << endl;
+  //kdDebug(11001) << "KMessageServer::getReceivedMessage size=" << msg.size() << endl;
   KMessageIO *client = (KMessageIO *) sender();
   Q_UINT32 clientID = client->id();
 

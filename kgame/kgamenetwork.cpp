@@ -195,7 +195,7 @@ bool KGameNetwork::isOfferingConnections() const
 void KGameNetwork::disconnect()
 {
  //currently does nothing
- kdDebug() << "needs to be implemented!" << endl;
+ kdDebug(11001) << "needs to be implemented!" << endl;
 }
 
 void KGameNetwork::electAdmin(Q_UINT32 clientID)
@@ -306,7 +306,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
 // kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
 
- kdDebug() << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
+ kdDebug(11001) << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
  // No broadcast : receiver==0
  // No player isPlayer(receiver)
  // Different game gameId()!=receiver

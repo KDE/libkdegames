@@ -210,7 +210,7 @@ void KMessageDirect::send (const QByteArray &msg)
 
 KMessageProcess::~KMessageProcess()
 {
-  kdDebug() << "@@@KMessageProcess::Delete process" << endl;
+  kdDebug(11001) << "@@@KMessageProcess::Delete process" << endl;
   if (mProcess)
   {
     mProcess->kill();
@@ -225,7 +225,7 @@ KMessageProcess::~KMessageProcess()
 KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(parent,0)
 {
   // Start process
-  kdDebug() << "@@@KMessageProcess::Start process" << endl;
+  kdDebug(11001) << "@@@KMessageProcess::Start process" << endl;
   mProcessName=file;
   mProcess=new KProcess;
   int id=0;
@@ -247,19 +247,19 @@ KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(par
 }
 bool KMessageProcess::isConnected()
 {
-  kdDebug() << "@@@KMessageProcess::Is conencted" << endl;
+  kdDebug(11001) << "@@@KMessageProcess::Is conencted" << endl;
   if (!mProcess) return false;
   return mProcess->isRunning();
 }
 void KMessageProcess::send(const QByteArray &msg)
 {
-  kdDebug() << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process" << endl;
+  kdDebug(11001) << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process" << endl;
   unsigned int size=msg.size()+2*sizeof(long);
 
   char *tmpbuffer=new char[size];
   long *p1=(long *)tmpbuffer;
   long *p2=p1+1;
-  kdDebug()  << "p1="<<p1 << "p2="<< p2 << endl;
+  kdDebug(11001)  << "p1="<<p1 << "p2="<< p2 << endl;
   memcpy(tmpbuffer+2*sizeof(long),msg.data(),msg.size());
   *p1=0x4242aeae;
   *p2=size;
@@ -278,7 +278,7 @@ void KMessageProcess::writeToProcess()
   if (!mSendBuffer) return ;
 
   // write it out to the process
-  //kdDebug() << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
+  //kdDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
   char *p=mSendBuffer->data();
   //for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
   mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());

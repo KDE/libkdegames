@@ -86,7 +86,7 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   //        this, SLOT(clientMessage(const QByteArray&, Q_UINT32, const QValueList <Q_UINT32> &)));
   connect(d->mProcessIO, SIGNAL(received(const QByteArray&)),
           this, SLOT(receivedMessage(const QByteArray&)));
-  //kdDebug() << "Our client is id="<<d->mMessageClient->id() << endl;
+  //kdDebug(11001) << "Our client is id="<<d->mMessageClient->id() << endl;
 
 
 }
@@ -121,7 +121,7 @@ void KGameProcessIO::initIO(KPlayer *p)
   if (sendit && p)
   {
     int sender=p->id();  
-    kdDebug() <<  "Sending IOAdded to process player !!!!!!!!!!!!!! " << endl;
+    kdDebug(11001) <<  "Sending IOAdded to process player !!!!!!!!!!!!!! " << endl;
     sendSystemMessage(stream,KGameMessage::IdIOAdded,0,sender);
   }
 }
@@ -136,7 +136,7 @@ void KGameProcessIO::notifyTurn(bool b)
   if (sendit)
   {
     int sender=player()->id();  
-    kdDebug() <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
+    kdDebug(11001) <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
     sendSystemMessage(stream,KGameMessage::IdTurn,0,sender);
   }
 }
@@ -183,7 +183,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 	int receiver;
 	KGameMessage::extractHeader(stream,sender,receiver,msgid);
 
-	kdDebug() << "************* Got process message sender =" << sender << " receiver=" << receiver << "   msgid="<< msgid <<endl;
+	kdDebug(11001) << "************* Got process message sender =" << sender << " receiver=" << receiver << "   msgid="<< msgid <<endl;
 
 
   // Cut out the header part...to not confuse network code
@@ -191,7 +191,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   QByteArray newbuffer;
   newbuffer.setRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
   QDataStream ostream(newbuffer,IO_ReadOnly);
-  kdDebug() << "Newbuffer size=" << newbuffer.size() << endl;
+  kdDebug(11001) << "Newbuffer size=" << newbuffer.size() << endl;
 
 
 	// This is a dummy message which allows us the process to talk with its owner
@@ -235,7 +235,7 @@ void KGameComputerIO::notifyTurn(bool b)
   {
     QDataStream ostream(buffer,IO_ReadOnly);
     int	sender=player()->id();  // force correct sender
-    kdDebug() << " Prepare turn forwardInput" << endl;
+    kdDebug(11001) << " Prepare turn forwardInput" << endl;
     player()->forwardInput(ostream,true,sender);
   }
 }

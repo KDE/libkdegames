@@ -99,7 +99,7 @@ public:
 
 	void load(QDataStream& s)
 	{
-    kdDebug() << "KGamePropertyList load " << id() << endl;
+    kdDebug(11001) << "KGamePropertyList load " << id() << endl;
     QValueList<type>::clear();
     uint size;
     type data;
@@ -114,7 +114,7 @@ public:
   }
 	void save(QDataStream &s)
 	{
-    kdDebug() << "KGamePropertyList save "<<id() << endl;
+    kdDebug(11001) << "KGamePropertyList save "<<id() << endl;
     type data;
     uint size=count();
     s << size;
@@ -128,7 +128,7 @@ public:
 
   void command(QDataStream &s,int cmd)
   {
-    kdDebug() << "---> LIST id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
+    kdDebug(11001) << "---> LIST id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
     Iterator it;
     switch(cmd)
     {
@@ -139,7 +139,7 @@ public:
         s >> i >> data;
         it=at(i);
         QValueList<type>::insert(it,data);
-        kdDebug() << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
+        kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
@@ -149,19 +149,19 @@ public:
         s >> i;
         it=at(i);
         QValueList<type>::remove(it);
-        kdDebug() << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
+        kdDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdClear:
       {
         QValueList<type>::clear();
-        kdDebug() << "CmdClear:id="<<id()<<endl; 
+        kdDebug(11001) << "CmdClear:id="<<id()<<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       default: 
-        kdDebug() << "Error in KPropertyList::command: Unknown command " << cmd << endl;
+        kdDebug(11001) << "Error in KPropertyList::command: Unknown command " << cmd << endl;
     }
   }
 

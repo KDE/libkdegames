@@ -289,7 +289,7 @@ void KGameDebugDialog::updateGameData()
 	(void) new QListViewItem(d->mGameProperties,
 			propertyName(it.current(), handler),
 			propertyValue(it.current(), handler));
-	kdDebug() << "updateGameData: checking for all game properties: found property name " << name << endl;
+	kdDebug(11001) << "updateGameData: checking for all game properties: found property name " << name << endl;
 	++it;
  }
 }
@@ -419,13 +419,13 @@ QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHa
  QString value;
 
  if (*(prop->typeinfo()) == typeid(int)) {
-	kdDebug()  << "INTEGER variable name=" << name << " id=" << id << " found " << endl;
+	kdDebug(11001)  << "INTEGER variable name=" << name << " id=" << id << " found " << endl;
 	value = QString::number(((KGamePropertyInt*)prop)->value());
  } else if (*(prop->typeinfo()) == typeid(QString)) {
-	kdDebug()  << "QString variable name=" << name << " id=" << id << " found " << endl;
+	kdDebug(11001)  << "QString variable name=" << name << " id=" << id << " found " << endl;
 	value = ((KGamePropertyQString*)prop)->value();
  } else if (*(prop->typeinfo()) == typeid(Q_INT8)) {
-	kdDebug()  << "Q_INT8 variable name=" << name << " id=" << id << " found " << endl;
+	kdDebug(11001)  << "Q_INT8 variable name=" << name << " id=" << id << " found " << endl;
 	value = ((KGamePropertyBool*)prop)->value() ? i18n("True") : i18n("False"); 
 /*	if (((KGamePropertyBool *)prop)->value() ) {
 		value = i18n("true");
@@ -433,10 +433,10 @@ QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHa
 		value = i18n("false");
 	}*/
  } else if (*(prop->typeinfo()) == typeid(unsigned int)) {
-	kdDebug()  << "unsigned int variable name=" << name << " id=" << id << " found " << endl;
+	kdDebug(11001)  << "unsigned int variable name=" << name << " id=" << id << " found " << endl;
 	value = QString::number(((KGamePropertyUInt *)prop)->value());
  } else {
-	kdDebug()  << "USER variable name=" << name << " id=" << id << " found " << endl;
+	kdDebug(11001)  << "USER variable name=" << name << " id=" << id << " found " << endl;
 	emit signalRequestValue(prop, value);
  }
 

@@ -35,7 +35,7 @@ class KGamePropertyArray : public QArray<type>, public KGamePropertyBase
 public:
   KGamePropertyArray() :QArray<type>(), KGamePropertyBase()
   {
-    //kdDebug() << "KGamePropertyArray init" << endl;
+    //kdDebug(11001) << "KGamePropertyArray init" << endl;
   }
   KGamePropertyArray( int size )
   {
@@ -69,7 +69,7 @@ public:
     s << data;
     if (mOwner)  mOwner->sendProperty(s);
     QArray<type>::at(i)=data;
-    //kdDebug() << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
+    //kdDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
 
   type at( uint i ) const
@@ -144,20 +144,20 @@ public:
 
 	void load(QDataStream& s)
 	{
-    kdDebug() << "KGamePropertyArray load " << id() << endl;
+    kdDebug(11001) << "KGamePropertyArray load " << id() << endl;
     type data;
     for (unsigned int i=0;i<QArray<type>::size();i++) {s >> data;  QArray<type>::at(i)=data;}
 		if (isEmittingSignal()) emitSignal();
   }
 	void save(QDataStream &s)
 	{
-    kdDebug() << "KGamePropertyArray save "<<id() << endl;
+    kdDebug(11001) << "KGamePropertyArray save "<<id() << endl;
     for (unsigned int i=0;i<QArray<type>::size();i++) s << at(i);
 	}
 
   void command(QDataStream &s,int cmd)
   {
-    kdDebug() << "Array id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
+    kdDebug(11001) << "Array id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
     switch(cmd)
     {
       case CmdAt:
@@ -166,7 +166,7 @@ public:
         type data;
         s >> i >> data;
         QArray<type>::at(i)=data;
-        kdDebug() << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
+        kdDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
@@ -174,7 +174,7 @@ public:
       {
         uint size;
         s >> size;
-        kdDebug() << "CmdResize:id="<<id()<<" oldsize="<<QArray<type>::size()<<" newsize="<<size <<endl; 
+        kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QArray<type>::size()<<" newsize="<<size <<endl; 
         if (QArray<type>::size()!=size) resize(size);
         break;
       }
@@ -183,19 +183,19 @@ public:
         int size;
         type data;
         s >> data >> size;
-        kdDebug() << "CmdFill:id="<<id()<<"size="<<size <<endl; 
+        kdDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl; 
         QArray<type>::fill(data,size);
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdSort:
       {
-        kdDebug() << "CmdSort:id="<<id()<<endl; 
+        kdDebug(11001) << "CmdSort:id="<<id()<<endl; 
         QArray<type>::sort();
         break;
       }
       default: 
-        kdDebug() << "Error in KPropertyArray::command: Unknown command " << cmd << endl;
+        kdDebug(11001) << "Error in KPropertyArray::command: Unknown command " << cmd << endl;
     }
   }
 

@@ -131,10 +131,10 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
   if (!isActive()) return false;
   if (!game()) return false;
 
-  kdDebug() << "KPlayer::forwardInput to game playerInput(sender="<<sender<<")" << endl;
+  kdDebug(11001) << "KPlayer::forwardInput to game playerInput(sender="<<sender<<")" << endl;
   if (!asyncInput() && !myTurn())
   {
-    kdDebug() << "KPlayer::forwardInput rejected cause it is not our turn" << endl;
+    kdDebug(11001) << "KPlayer::forwardInput rejected cause it is not our turn" << endl;
     return false;
   }
 
@@ -144,11 +144,11 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,int sender)
   // where it really looks at the input
   if (transmit)
   {
-    kdDebug() << "indirect playerInput" << endl;
+    kdDebug(11001) << "indirect playerInput" << endl;
     return game()->sendPlayerInput(msg,this,sender);
   } else
   {
-    kdDebug() << "direct playerInput" << endl;
+    kdDebug(11001) << "direct playerInput" << endl;
     return game()->playerInput(msg,this,sender);
   }
 }
@@ -250,7 +250,7 @@ int KPlayer::calcIOValue()
 
 bool KPlayer::setTurn(bool b,bool exclusive)
 {
-  kdDebug() << "KPlayer::setTurn " << this << " to " << b << endl;
+  kdDebug(11001) << "KPlayer::setTurn " << this << " to " << b << endl;
   if (!isActive()) return false;
   // forward to all mirror players...ehm why????? TODO: MH 28022001
   // if (transmit) game()->sendSystemMessage(b,KGameMessage::IdTurn,KGameMessage::calcMessageId(0,id()));
@@ -355,7 +355,7 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
   // Notify KGameIO (Process) for a new turn
   if (me->id()==KGamePropertyBase::IdTurn)
   {
-    //kdDebug() << "KPlayer::emitSignal for KGamePropertyBase::IdTurn " << endl;
+    //kdDebug(11001) << "KPlayer::emitSignal for KGamePropertyBase::IdTurn " << endl;
     QListIterator<KGameIO> it(mInputList);
     while (it.current()) 
     {

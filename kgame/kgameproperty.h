@@ -443,19 +443,15 @@ public:
 	 **/
 	void setLocal(type v) 
 	{
-		kdDebug() << "setLocal" << endl;
+		kdDebug(11001) << "setLocal" << endl;
 		if (!mLocalData) {
-		kdDebug() << "setLocal: create" << endl;
 			mLocalData = new type;
-		kdDebug() << "setLocal: created" << endl;
 		}
 		if (!isOptimized() || *mLocalData != v) {
 			if (isReadOnly()) {
 				return;
 			}
-		kdDebug() << "setLocal: set" << endl;
 			*mLocalData = v;
-		kdDebug() << "setLocal: set done" << endl;
 		}
 	}
 

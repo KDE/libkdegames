@@ -114,7 +114,7 @@ void KGameChat::returnPressed(const QString& text)
 	// note: there is currently no support for other groups than the players
 	// group! It might be useful to send to other groups, too
 	QString group = d->mFromPlayer->group(); 
-	kdDebug() << "send to group " << group << endl;
+	kdDebug(11001) << "send to group " << group << endl;
 	int sender = d->mFromPlayer->id();
 	d->mGame->sendGroupMessage(text, messageId(), sender, group);
 
@@ -149,8 +149,8 @@ bool KGameChat::isToGroupMessage(int id) const
 
 bool KGameChat::isToPlayerMessage(int id) const
 {
-kdDebug() << id << endl;
-kdDebug() << d->mSendId2PlayerId.contains(id) << endl;
+kdDebug(11001) << id << endl;
+kdDebug(11001) << d->mSendId2PlayerId.contains(id) << endl;
 return d->mSendId2PlayerId.contains(id); }
 
 QString KGameChat::sendToPlayerEntry(const QString& name) const
