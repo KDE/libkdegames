@@ -65,11 +65,30 @@ public:
     virtual void Debug();
 
     /**
-     * Is this the game MASTER (usually the one that started the message server)
+     * Is this the game MASTER (i.e. has started the @ref KMessageServer). A
+     * game has always exactly one MASTER. This is either a KGame object (i.e. a
+     * Client) or an own MessageServer-process. A KGame object that has the
+     * MASTER status is always admin.
      *
-     * @return true/false
+     * You probably don't want to use this. It is a mostly internal method which
+     * will probably become protected. Better use @ref isAdmin
+     *
+     * See also @ref isAdmin
+     * @return Whether this client has started the @ref KMessageServer
      **/
-    bool gameMaster() const;
+    bool isMaster() const;
+
+    /**
+     * The admin of a game is the one who initializes newly connected clients
+     * using @ref negotiateNetworkGame and is allowed to configure the game.
+     * E.g. only the admin is allowed to use @ref KGame::setMaxPlayers.
+     *
+     * If one KGame object in the game is MASTER then this client is the admin
+     * as well. @ref isMaster and isAdmin differ only if the @ref KMessageServer
+     * is running in an own process.
+     * @ref Whether this client (KGame object) is the admin
+     **/
+    bool isAdmin() const;
 
     /**
      * The unique ID of this game

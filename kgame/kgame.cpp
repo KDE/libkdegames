@@ -400,9 +400,10 @@ void KGame::setGameId(int id)
   // FIXME: This is not possible at the moment!
 
 /*
+//AB: the following is completely obsolete. can probably be removed.
   KGameNetwork::setGameId(id);
   // Adjust all player id after the gameid got changed...which better happens ONLY by
-  // a remote call by the gamemaster!
+  // a remote call by the gamemaster(admin?)!
   KPlayer *player;
   for ( player=mPlayerList.first(); player != 0; player=mPlayerList.next() )
   {
@@ -830,8 +831,8 @@ void KGame::slotConnectionLost(Q_UINT32 clientID)
 void KGame::negotiateNetworkGame(Q_UINT32 clientID)
 {
  kdDebug(11001) << "===========================negotiateNetworkGame(): clientID=" << clientID << " =========================== "<< endl;
- if (!gameMaster()) {
-	kdError(11001) << "negotiateNetworkGame(): Serious WARNING..only gameMaster should call this" << endl;
+ if (!isAdmin()) {
+	kdError(11001) << "negotiateNetworkGame(): Serious WARNING..only gameAdmin should call this" << endl;
 	return ;
  }
 

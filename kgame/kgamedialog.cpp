@@ -68,8 +68,7 @@ void KGameDialogConfig::setKGame(KGame* )
 void KGameDialogConfig::setOwner(KPlayer* )
 { }
 
-//AB Master migh change to Admin very soon
-void KGameDialogConfig::setMaster(bool )
+void KGameDialogConfig::setAdmin(bool )
 { }
 
 
@@ -225,10 +224,10 @@ void KGameDialogGeneralConfig::setKGame(KGame* g)
  setMinPlayers(g->minPlayers());
 }
 
-void KGameDialogGeneralConfig::setMaster(bool master)
+void KGameDialogGeneralConfig::setAdmin(bool admin)
 {
-	d->mMaxPlayers->setEnabled(master);
-	d->mMinPlayers->setEnabled(master);
+	d->mMaxPlayers->setEnabled(admin);
+	d->mMinPlayers->setEnabled(admin);
 }
 
 void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
@@ -237,7 +236,7 @@ void KGameDialogGeneralConfig::submitToKGame(KGame* g, KPlayer* p)
 	p->setName(playerName());
  }
  if (g) {
-	if (g->gameMaster()) {// AB maybe g->admin()
+	if (g->isAdmin()) {
 		g->setMaxPlayers(maxPlayers());
 		g->setMinPlayers(minPlayers());
 	}
@@ -320,7 +319,7 @@ void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig*
 // addConfigPages();
  addChatWidget(chatMsgid);
 
-// add the connection management system - ie the widget where the MASTER can
+// add the connection management system - ie the widget where the ADMIN can
 // kick players out
  addConnectionList();
 
@@ -414,7 +413,7 @@ void KGameDialog::addConnectionList()
  QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), d->mNetworkPage);
  d->mPlayers = new KListBox(b);
 // h->addWidget(b, 1);
- if (d->mGame->gameMaster()) {
+ if (d->mGame->isAdmin()) {
 	connect(d->mPlayers, SIGNAL(executed(QListBoxItem*)), this, 
 			SLOT(slotKickPlayerOut(QListBoxItem*)));
  }
@@ -461,11 +460,11 @@ void KGameDialog::slotPlayerChanged(KPlayer*)
 void KGameDialog::slotKickPlayerOut(QListBoxItem* item)
 {
  KPlayer* p = d->mItem2Player[item];
- if (!d->mGame || !d->mGame->gameMaster() || !p) {
+ if (!d->mGame || !d->mGame->isAdmin() || !p) {
 	return;
  }
 
- if (p == d->mOwner) { // you wanna ban the MASTER??
+ if (p == d->mOwner) { // you wanna ban the ADMIN ??
 	return;
  }
 

@@ -99,7 +99,12 @@ int KGameNetwork::cookie() const
   return d->mCookie;
 }
 
-bool KGameNetwork::gameMaster() const
+bool KGameNetwork::isMaster() const
+{
+  return (d->mMessageServer != 0);
+}
+
+bool KGameNetwork::isAdmin() const
 {
   return (d->mMessageClient->isAdmin());
 }
@@ -380,7 +385,8 @@ void KGameNetwork::Debug()
 {
  kdDebug(11001) << "------------------- KNETWORKGAME -------------------------" << endl;
  kdDebug(11001) << "gameId         " << gameId() << endl;
- kdDebug(11001) << "gameMaster     " << gameMaster() << endl;
+ kdDebug(11001) << "gameMaster     " << isMaster() << endl;
+ kdDebug(11001) << "gameAdmin      " << isAdmin() << endl;
  kdDebug(11001) << "---------------------------------------------------" << endl;
 }
 

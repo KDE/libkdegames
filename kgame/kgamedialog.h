@@ -85,20 +85,20 @@ public:
 	virtual void setKGame(KGame* g);
 
 	/**
-	 * Changes the MASTER status (AB: the word "master" might change to
-	 * "admin" very soon!). If the KGame object of this config widget is the
-	 * master/admin the user is allowed to configure it. Otherwise most
+	 * The admin status has been changed.
+	 * If the KGame object of this config widget is the
+	 * admin the user is allowed to configure it. Otherwise most
 	 * widgets will have to be disabled. Note that you don't necessarily
 	 * need to deactivate all widget - e.g. the player name must be
 	 * configured by the player. Mainly the KGame configuration can be done
-	 * by the master/admin only.
+	 * by the admin only.
 	 *
 	 * By default this does nothing. You have to overwrite it in derived
 	 * classes.
-	 * @param master Whether the KGame object of this dialog can be
+	 * @param admin Whether the KGame object of this dialog can be
 	 * configured
 	 **/
-	virtual void setMaster(bool master);
+	virtual void setAdmin(bool admin);
 
 protected:
 
@@ -174,11 +174,11 @@ public:
 	virtual void setKGame(KGame* g);
 
 	/**
-	 * See @ref KGameDialogConfig::setMaster
+	 * See @ref KGameDialogConfig::setAdmin
 	 *
 	 * This deactivates the min/max player widgets
 	 **/
-	virtual void setMaster(bool master);
+	virtual void setAdmin(bool admin);
 
 protected:
 	void setMaxPlayers(int m);
@@ -197,8 +197,8 @@ class KGameDialogPrivate;
 /**
  * The main configuration dialog for KGame. Here all players meat each other,
  * every player can see how many players connected (and their names) and the
- * MASTER can even "kick" players out. You can talk to each other (using @ref
- * KGameChat and the MASTER can define the maxPlayers/minPlayers as well as the
+ * ADMIN can even "kick" players out. You can talk to each other (using @ref
+ * KGameChat and the ADMIN can define the maxPlayers/minPlayers as well as the
  * number of computer players.
  *
  *
@@ -361,9 +361,9 @@ protected slots:
 	 * disabled.
 	 * Set to true after a connection has been initialized to disable the
 	 * button!
-	 * @master Whether this client is MASTER.
+	 * @admin Whether this client is ADMIN.
 	 **/
-	virtual void slotInitConnection(bool& connected, bool& master);
+	virtual void slotInitConnection(bool& connected, bool& admin);
 
 private:
 //	void init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf);
