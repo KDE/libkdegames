@@ -54,9 +54,11 @@ public:
     {
         mUniquePlayerNumber = 0;
         mCurrentPlayer = 0 ;
+        mGameOver = 0;
         mPolicy=KGame::PolicyLocal;
     }
 
+    int mGameOver;
     int mUniquePlayerNumber;
     KPlayer *mCurrentPlayer;
     QPtrQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
@@ -688,10 +690,11 @@ bool KGame::playerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
   
  d->mCurrentPlayer=player;
  // Check for game over and if not allow the next player to move
- int over=gameOver(player);
- if (over!=0) 
+ d->mGameOver=checkGameOver(player);
+ if (d->mGameOver!=0) 
  {
-   emit signalGameOver(over,player,this);
+   player->setTurn(false);
+   QTimer::singleShot(0,this,SLOT(prepareGameOver()));
  }
  else if (!player->asyncInput()) 
  {
@@ -703,9 +706,14 @@ bool KGame::playerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
 }
 
 // Per default we do not do anything
-int KGame::gameOver(KPlayer *)
+int KGame::checkGameOver(KPlayer *)
 {
  return 0;
+}
+
+void KGame::prepareGameOver()
+{
+   emit signalGameOver(d->mGameOver,d->mCurrentPlayer,this);
 }
 
 void KGame::prepareNext()
@@ -713,7 +721,7 @@ void KGame::prepareNext()
  nextPlayer(d->mCurrentPlayer);
 }
 
-bool KGame::nextPlayer(KPlayer *last,bool exclusive)
+KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
 {
  unsigned int minId,nextId,lastId;
  KPlayer *nextplayer, *minplayer;
@@ -765,9 +773,9 @@ bool KGame::nextPlayer(KPlayer *last,bool exclusive)
  }
  else 
  {
-   return false;
+   return 0;
  }
- return true;
+ return nextplayer;
 }
 
 void KGame::setGameStatus(int status)

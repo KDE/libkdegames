@@ -18,4 +18,5 @@
 18.09.2001:  Question: Should the signal signalPlayerInput(QDataStream &,KPlayer *))
              be made a virtual function? Means: is this ever needed outside
              the derived KGame class?
-              
+19.09.2001:  Kgame:nextPlayer retunrs the KPlayer *nextplayer instead of bool              
+19.09.2001:  gameOver() renamed to checkGameOver() !!!!!

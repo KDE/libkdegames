@@ -257,7 +257,7 @@ public:
      * function has no meaning. Overwrite this function for your own game sequence.
      * Per default it selects the next player in the playerList
      */
-    virtual bool nextPlayer(KPlayer *last,bool exclusive=true);
+    virtual KPlayer * nextPlayer(KPlayer *last,bool exclusive=true);
 
     // Input events
     /**
@@ -459,9 +459,14 @@ protected slots:
     void emitSignal(KGamePropertyBase *me);
 
     /**
-     * Prepare the call of next() after a QTimer event to allow QT Event processing
+     * Prepare the call of nextPlayer() after a QTimer event to allow QT Event processing
      */
-    void prepareNext();
+    virtual void prepareNext();
+
+    /**
+     * Prepare the call of the signaleGameOver after a QTimer event to allow QT Event processing
+     */
+    virtual void prepareGameOver();
 
     /**
      * Calls @ref negotiateNetworkGame
@@ -750,7 +755,7 @@ protected:
      * @param player the player who made the last move
      * @return anything else but 0 is considered as game over
      */
-    virtual int gameOver(KPlayer *player);
+    virtual int checkGameOver(KPlayer *player);
 
     /**
      * Load a saved game, from file OR network. Internal. Might
