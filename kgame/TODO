@@ -18,13 +18,9 @@
               mabye use the QT tic-tac-toe example?) would be very great (this
               could be stuff of a tutorial instead of KGame documentation)
               MH: Even better idea
-- 11.04.2001: KGameDialog cannot configure KMessageServer :-(
-- 16.04.2001: removePlayer() has been redesigned for KGameComServer but still
-              has to be tested. I don't have any way to do this currently, as
-              kgame mostly removes players on destruct
 - 25.05.2001: connect to the signal KGameNetwork::connectionBroken and start a
               local non-network game
-- 25.05.2001: rewrite KGame::slotClientDisconnected
+- 25.05.2001: rewrite KGame::slotClientDisconnected - probably done
 - 03.06.2001: can KGameNetwork::sendSystemMessage made protected (maybe using
               friends)? sendSystenMessage AND sendMessage is very confusing to
               the user... same applies to e.g. sendProperty which is internal
@@ -42,3 +38,5 @@
               obsolete.
 - 28.07.2001: make KGameProperty::load() protected as this changes the network
               value. KGamePropertyHandler should be friend
+- 15.08.2001: KGamePropertyList/Array don't honor Policies - only Clean is
+              possible currently

@@ -71,7 +71,15 @@ public:
     return it;
   }
   void  prepend( const type& d) { insert(begin(),d); }
-  void  append( const type& d ) { insert(end(),d); }
+  
+  void  append( const type& d ) 
+  {
+    QByteArray b;
+    QDataStream s(b, IO_WriteOnly);
+    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAppend);
+    s << d;
+    if (mOwner)  mOwner->sendProperty(s);
+  }
 
   Iterator remove( Iterator it )
   {
@@ -143,6 +151,15 @@ public:
         kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
+      }
+      case CmdAppend:
+      {
+        type data;
+	s >> data;
+        QValueList<type>::append(data);
+        kdDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
+        if (isEmittingSignal()) emitSignal();
+	break;
       }
       case CmdRemove:
       {

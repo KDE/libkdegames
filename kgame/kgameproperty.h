@@ -72,8 +72,9 @@ public:
 		CmdSort=54,
 		// List (could be the same id's actually)
 		CmdInsert=61,
-		CmdRemove=62,
-		CmdClear=63
+		CmdAppend=62,
+		CmdRemove=63,
+		CmdClear=64
 	};
 
 	/**
