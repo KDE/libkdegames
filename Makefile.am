@@ -13,11 +13,5 @@ METASOURCES = AUTO
 
 SUBDIRS = carddecks
 
-noinst_PROGRAMS = test
-test_SOURCES = test.cpp
-test_LDADD = ./libkdegames.la
-test_LDFLAGS = $(KDE_RPATH)
-
 messages:
 	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
-
