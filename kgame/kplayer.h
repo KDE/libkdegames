@@ -262,14 +262,16 @@ public:
       bool addGameIO(KGameIO *input);
       
       /**
-       * remove a game IO device
+       * remove (and delete) a game IO device
        *
-       * The remove IO(s) is/are <em>not</em> deleted!
+       * The remove IO(s) is/are deleted by default. If
+       * you do not want this set the parameter deleteit to false
        *
        * @param the device to be removed or 0 for all devices
+       * @param true (default) to delete the device otherwisse just remove it
        * @return true on ok
        */
-      bool removeGameIO(KGameIO *input=0);
+      bool removeGameIO(KGameIO *input=0,bool deleteit=true);
       
       /**
        * Finds the KGameIO devies with the given rtti code.

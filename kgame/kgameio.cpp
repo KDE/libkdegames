@@ -92,7 +92,7 @@ KGameProcessIO::~KGameProcessIO()
 {
   kdDebug(11001) << "DESTRUCT (KGameProcessIO="<<this<<")"<<endl;
   kdDebug(11001) << "player="<<player() << endl;
-  if (player()) player()->removeGameIO(this); 
+  if (player()) player()->removeGameIO(this,false); 
   if (d->mProcessIO) 
   {
     delete d->mProcessIO;
@@ -218,7 +218,7 @@ int KGameComputerIO::rtti() const { return ComputerIO; }
 KGameComputerIO::~KGameComputerIO()
 {
  if (player()) {
-//	player()->removeGameIO(this); //KGameIO
+//	player()->removeGameIO(this,false); //KGameIO
  }
 }
 
@@ -327,7 +327,7 @@ KGameIO::~KGameIO()
 {
    kdDebug(11001) << "DESTRUCT(KGameIO=" << this <<")" << endl;
    // unregister ourselves
-   if (player()) player()->removeGameIO(this); 
+   if (player()) player()->removeGameIO(this,false); 
 }
 
 void KGameIO::initIO(KPlayer *p)

@@ -210,22 +210,23 @@ bool KPlayer::addGameIO(KGameIO *input)
 }
 
 // input=0, remove all
-bool KPlayer::removeGameIO(KGameIO *targetinput)
+bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
 {
-//  kdDebug(11001) << "KPlayer::removeGameIO()" << endl;
+  kdDebug(11001) << "KPlayer::removeGameIO()" << targetinput << " delete=" << deleteit<< endl;
   bool result=true;
   if (!targetinput) // delete all
   {
     KGameIO *input;
     while((input=mInputList.first()))
     {
-      removeGameIO(targetinput);
+      if (input) removeGameIO(input,deleteit);
     }
   }
   else
   {
 //    kdDebug(11001) << "remove IO " << targetinput << endl;
-    result=mInputList.remove(targetinput);
+    if (deleteit) delete targetinput;
+    else result=mInputList.remove(targetinput);
   }
   return result;
 }
