@@ -137,10 +137,12 @@ bool KGame::reset()
 void KGame::deletePlayers()
 {
 // kdDebug(11001) << "KGame::deletePlayers()" << endl;
+ KGamePlayerList tmp = d->mPlayerList; // in case of PolicyClean player=d->mPlayerList.first() is infinite
  KPlayer *player;
- while((player=d->mPlayerList.first())) 
+ while((player=tmp.first())) 
  {
    delete player; // delete and removes the player
+   tmp.removeFirst();
  }
 // kdDebug(11001) << "KGame::deletePlayers() done" << endl;
 }
@@ -428,7 +430,7 @@ void KGame::playerDeleted(KPlayer *player)
    if (!player->isVirtual())
    {
      kdDebug(11001) << "KGame::playerDeleted:: sending IdRemovePlayer "<<player->id() << endl;
-     sendSystemMessage(player->id(),KGameMessage::IdRemovePlayer, 0);
+     sendSystemMessage(player->id(), KGameMessage::IdRemovePlayer, 0);
    }
  }
 }
