@@ -54,10 +54,7 @@ class MessageBuffer
 {
   public:
     MessageBuffer (Q_UINT32 clientID, const QByteArray &messageData)
-      : id (clientID), data (messageData)
-    {
-      data.detach(); // otherwise we seem to loose arrays which are deleted during the timer run
-    }
+      : id (clientID), data (messageData) { }
     ~MessageBuffer () {}
     Q_UINT32 id;
     QByteArray data;

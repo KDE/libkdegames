@@ -341,9 +341,10 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
       kdDebug(11001) << "KMessageProcess::Got message with len " << len << endl;
 
       QByteArray msg;
-      msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+    //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+      msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       emit received(msg);
-      msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+     // msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       // Shift buffer
       if (len<mReceiveCount)
       {
@@ -433,9 +434,10 @@ void KMessageFilePipe::exec()
        //fprintf(stderr,"KMessageFilePipe::exec:: Got Message with len %d\n",len);
 
        QByteArray msg;
-       msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+       //msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
        emit received(msg);
-       msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+       //msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
        mReceiveCount=0;
      }
    }
