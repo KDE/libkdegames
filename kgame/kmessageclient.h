@@ -232,6 +232,11 @@ public:
    */
   void unlock();
 
+  /**
+    @return The number of messages that got delayed since @ref lock was called
+   */
+  unsigned int delayedMessageCount() const;
+
 signals:
   /**
     This signal is emitted when the client receives a broadcast message from the

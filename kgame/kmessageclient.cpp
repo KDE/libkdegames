@@ -351,4 +351,10 @@ void KMessageClient::unlock ()
     QTimer::singleShot(0, this, SLOT(processFirstMessage()));
   }
 }
+
+unsigned int KMessageClient::delayedMessageCount() const
+{
+  return d->delayedMessages.count();
+}
+
 #include "kmessageclient.moc"
