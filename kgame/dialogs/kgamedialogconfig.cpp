@@ -64,7 +64,9 @@ KGameDialogConfig::KGameDialogConfig(QWidget* parent) : QWidget(parent)
 
 KGameDialogConfig::~KGameDialogConfig()
 {
+ kdDebug() << "~KGameDialogConfig()" << endl;
  delete d;
+ kdDebug() << "~KGameDialogConfig() done" << endl;
 }
 
 void KGameDialogConfig::setKGame(KGame* g)
@@ -145,7 +147,9 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
 {
-  delete d;
+ kdDebug() << "~KGameDialogNetworkConfig()" << endl;
+ delete d;
+ kdDebug() << "~KGameDialogNetworkConfig() done" << endl;
 }
 
 void KGameDialogNetworkConfig::slotExitConnection()
@@ -270,7 +274,11 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 }
 
 KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
-{ delete d; } 
+{
+ kdDebug() << "~KGameDialogGeneralConfig()" << endl;
+ delete d; 
+ kdDebug() << "~KGameDialogGeneralConfig() done" << endl;
+}
 
 void KGameDialogGeneralConfig::setPlayerName(const QString& name)
 { 
@@ -386,7 +394,9 @@ KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent)
 
 KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
 {
+ kdDebug() << "~KGameDialogMsgServerConfig()" << endl;
  delete d;
+ kdDebug() << "~KGameDialogMsgServerConfig() done" << endl;
 }
 
 void KGameDialogMsgServerConfig::setKGame(KGame* g)
@@ -544,7 +554,9 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
 
 KGameDialogChatConfig::~KGameDialogChatConfig()
 {
+ kdDebug() << "~KGameDialogChatConfig()" << endl;
  delete d;
+ kdDebug() << "~KGameDialogChatConfig() done" << endl;
 }
 
 void KGameDialogChatConfig::setKGame(KGame* g)
@@ -593,12 +605,14 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), this);
  d->mPlayerBox = new KListBox(b);
  setMinimumHeight(100);
-
 }
 
 KGameDialogConnectionConfig::~KGameDialogConnectionConfig()
 {
+ kdDebug() << "~KGameDialogConnectionConfig()" << endl;
+ // d->mIem2Player.clear();
  delete d;
+ kdDebug() << "~KGameDialogConnectionConfig() done" << endl;
 }
 
 void KGameDialogConnectionConfig::setKGame(KGame* g)
@@ -607,18 +621,18 @@ void KGameDialogConnectionConfig::setKGame(KGame* g)
 	disconnect(game(), 0, this, 0);
  }
  KGameDialogConfig::setKGame(g);
+ slotClearPlayers();
  if (game()) {
 // react to changes in KGame::playerList()
 	connect(game(), SIGNAL(signalPlayerJoinedGame(KPlayer*)),
 			this, SLOT(slotPlayerJoinedGame(KPlayer*)));
 	connect(game(), SIGNAL(signalPlayerLeftGame(KPlayer*)),
 			this, SLOT(slotPlayerLeftGame(KPlayer*)));
- }
 
- slotClearPlayers();
- KGame::KGamePlayerList l = *game()->playerList();
- for (KPlayer* p = l.first(); p; p = l.next()) {
-	slotPlayerJoinedGame(p);
+	KGame::KGamePlayerList l = *game()->playerList();
+	for (KPlayer* p = l.first(); p; p = l.next()) {
+		slotPlayerJoinedGame(p);
+	}
  }
 }
 
@@ -663,11 +677,11 @@ void KGameDialogConnectionConfig::slotClearPlayers()
  }
 
  if (d->mItem2Player.count() > 0) {
-	kdWarning(12001) << "KGameDialogConnectionConfig: itemList wasn't cleared properly" << endl;
+	kdWarning(11001) << "KGameDialogConnectionConfig: itemList wasn't cleared properly" << endl;
 	d->mItem2Player.clear();
  }
  if (d->mPlayerBox->count() > 0) {
-	kdWarning(12001) << "KGameDialogConnectionConfig: listBox wasn't cleared properly" << endl;
+	kdWarning(11001) << "KGameDialogConnectionConfig: listBox wasn't cleared properly" << endl;
 	d->mPlayerBox->clear();
  }
 
