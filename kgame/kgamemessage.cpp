@@ -25,7 +25,7 @@
 
 #include <klocale.h>
 
-#define MESSAGE_VERSION 1
+#define MESSAGE_VERSION 2
 
 Q_UINT32 KGameMessage::rawGameId(Q_UINT32 playerid)
 {
