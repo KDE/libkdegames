@@ -213,11 +213,7 @@ void KGameProgress::styleChange(QStyle&)
 
 void KGameProgress::adjustStyle()
 {
-#if QT_VERSION < 300
-	switch (style().guiStyle()) {
-#else
 	switch (style().styleHint(QStyle::SH_GUIStyle)) {
-#endif
 		case WindowsStyle:
 			setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
 			break;
