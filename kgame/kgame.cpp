@@ -987,7 +987,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
      stream >> cid;
      kdDebug(11001) << "====> (CLIENT) " << k_funcinfo << ": Got IdGameSetupDone for client "
              << cid << " we are =" << gameId() << endl;
-     sendSystemMessage(gameId(), KGameMessage::IdGameConnected);
+     sendSystemMessage(gameId(), KGameMessage::IdGameConnected, 0);
    }
    break;
    case KGameMessage::IdGameConnected:
