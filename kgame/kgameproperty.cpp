@@ -55,7 +55,7 @@ KGamePropertyBase::KGamePropertyBase()
 KGamePropertyBase::~KGamePropertyBase()
 {
  if (mOwner) {
-	mOwner->removeProperty(this);
+//	mOwner->removeProperty(this);
  }
 }
 
