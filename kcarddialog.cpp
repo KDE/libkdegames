@@ -311,7 +311,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
     d->globalDeck = new QCheckBox(plainPage());
     d->globalDeck->setChecked(false);
-    d->globalDeck->setText(i18n("Use Global Backside"));
+    d->globalDeck->setText(i18n("Use global backside"));
     l->addWidget(d->globalDeck, 0, AlignTop|AlignHCenter);
 
     QPushButton* b = new QPushButton(i18n("Make Backside Global"), plainPage());
@@ -361,7 +361,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
     d->globalCardDir = new QCheckBox(plainPage());
     d->globalCardDir->setChecked(false);
-    d->globalCardDir->setText(i18n("Use Global Frontside"));
+    d->globalCardDir->setText(i18n("Use global frontside"));
     l->addWidget(d->globalCardDir, 0, AlignTop|AlignHCenter);
 
     QPushButton* b = new QPushButton(i18n("Make Frontside Global"), plainPage());
