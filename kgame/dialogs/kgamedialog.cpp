@@ -309,13 +309,14 @@ void KGameDialog::setKGame(KGame* g)
 	disconnect(d->mGame, 0, this, 0);
  }
  d->mGame = g;
- connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
  for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
 	d->mConfigWidgets.at(i)->setKGame(d->mGame);
  }
-
  if (d->mGame) {
 	setAdmin(d->mGame->isAdmin());
+	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
+	connect(d->mGame, SIGNAL(signalAdminStatusChanged(bool)), 
+			this, SLOT(setAdmin(bool)));
  }
 }
 
@@ -346,3 +347,4 @@ void KGameDialog::submitToKGame()
 // kdDebug(11001) << "done: submit to kgame " << i << endl;
  }
 }
+

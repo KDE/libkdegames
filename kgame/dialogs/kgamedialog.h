@@ -146,8 +146,6 @@ public:
 	 **/
 	void setKGame(KGame* g);
 
-	void setAdmin(bool admin);
-
 	/**
 	 * This will submit all configuration data to the @ref KGame object.
 	 * Automatically called by @ref slotApply and @ref slotOk
@@ -184,7 +182,6 @@ public:
 	 **/
 	void addConnectionList(KGameDialogConnectionConfig* c, QVBox* parent = 0);
 
-	
 	/**
 	 * Add a new page to the dialog. The page will contain you new config
 	 * widget and will have your provided title.
@@ -236,7 +233,6 @@ protected:
 	 **/
 	void configureConfigWidgets();
 
-
 protected slots:
 	/**
 	 * Called when the user clicks on Ok. Calles @ref slotApply and @ref
@@ -261,6 +257,13 @@ protected slots:
 	 * that all widgets can disconnect their slots and so on.
 	 **/
 	void slotUnsetKGame();
+
+	/**
+	 * Called when the ADMIN status of this KGame client changes. See @ref
+	 * KGameNetwork::signalAdminStatusChanged
+	 * @param isAdmin TRUE if this client is now the ADMIN otherwise FALSE
+	 **/
+	void setAdmin(bool isAdmin);
 
 private:
 	void init(KGame*, KPlayer*);
