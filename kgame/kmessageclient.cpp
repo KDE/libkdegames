@@ -76,7 +76,7 @@ void KMessageClient::setServer (KMessageIO *connection)
   if (d->connection)
   {
     delete d->connection;
-    kdDebug (11001) << "KMessageClient::setServer: We are changing the server!" << endl;
+    kdDebug (11001) << k_funcinfo << ": We are changing the server!" << endl;
   }
 
   d->connection = connection;
@@ -127,7 +127,7 @@ void KMessageClient::sendServerMessage (const QByteArray &msg)
 {
   if (!d->connection)
   {
-    kdWarning (11001) << "KMessageClient::sendServerMessage: We have no connection yet!" << endl;
+    kdWarning (11001) << k_funcinfo << ": We have no connection yet!" << endl;
     return;
   }
   d->connection->send (msg);
@@ -227,7 +227,7 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
         in_stream >> id;
 
         if (d->clientList.contains (id))
-          kdWarning (11001) << "KMessageClient::processIncomingMessage: Adding a client that already existed!" << endl;
+          kdWarning (11001) << k_funcinfo << ": Adding a client that already existed!" << endl;
         else
           d->clientList.append (id);
 
@@ -242,7 +242,7 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
         in_stream >> id >> broken;
 
         if (!d->clientList.contains (id))
-          kdWarning (11001) << "KMessageClient::processIncomingMessage: Removing a client that doesn't exist!" << endl;
+          kdWarning (11001) << k_funcinfo << ": Removing a client that doesn't exist!" << endl;
         else
           d->clientList.remove (id);
 
@@ -255,17 +255,17 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
   }
 
   if (!unknown && !in_buffer.atEnd())
-    kdWarning (11001) << "KMessageClient::processIncomingMessage: Extra data received for message ID " << messageID << endl;
+    kdWarning (11001) << k_funcinfo << ": Extra data received for message ID " << messageID << endl;
 
   emit serverMessageReceived (msg, unknown);
 
   if (unknown)
-    kdWarning (11001) << "KMessageClient::processIncomingMessage: received unknown message ID " << messageID << endl;
+    kdWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
 }
 
 void KMessageClient::removeBrokenConnection ()
 {
-  kdDebug (11001) << "KMessageClient::removeBrokenConnection: timer single shot for removal" << endl;
+  kdDebug (11001) << k_funcinfo << ": timer single shot for removal" << endl;
   // MH We cannot directly delete the socket. otherwise QSocket crashes
 	QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
   return;
@@ -274,23 +274,23 @@ void KMessageClient::removeBrokenConnection ()
 
 void KMessageClient::removeBrokenConnection2 ()
 {
-  kdDebug (11001) << "KMessageClient::removeBrokenConnection2: Deleting the connection object" << endl;
+  kdDebug (11001) << k_funcinfo << ": Deleting the connection object" << endl;
   emit connectionBroken();
 
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
-  kdDebug (11001) << "KMessageClient::removeBrokenConnection: Deleting the connection object DONE" << endl;
+  kdDebug (11001) << k_funcinfo << ": Deleting the connection object DONE" << endl;
 }
 
 void KMessageClient::disconnect ()
 {
-  kdDebug (11001) << "KMessageClient::disconnect: Deleting the connection object" << endl;
+  kdDebug (11001) << k_funcinfo << ": Deleting the connection object" << endl;
 
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
   emit connectionBroken();
-  kdDebug (11001) << "KMessageClient::disconnect: Deleting the connection object DONE" << endl;
+  kdDebug (11001) << k_funcinfo << ": Deleting the connection object DONE" << endl;
 }
 #include "kmessageclient.moc"

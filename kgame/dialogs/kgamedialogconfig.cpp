@@ -64,9 +64,8 @@ KGameDialogConfig::KGameDialogConfig(QWidget* parent) : QWidget(parent)
 
 KGameDialogConfig::~KGameDialogConfig()
 {
- kdDebug() << "~KGameDialogConfig()" << endl;
+ kdDebug() << k_funcinfo << endl;
  delete d;
- kdDebug() << "~KGameDialogConfig() done" << endl;
 }
 
 void KGameDialogConfig::setKGame(KGame* g)
@@ -120,7 +119,7 @@ public:
 KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent) 
 		: KGameDialogConfig(parent)
 {
-// kdDebug(11001) << "CONSTRUCT KGameDialogNetworkConfig " << this << endl;
+// kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
  d = new KGameDialogNetworkConfigPrivate();
 
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint(), "toplayout");
@@ -147,21 +146,20 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
 {
- kdDebug() << "~KGameDialogNetworkConfig()" << endl;
+ kdDebug() << k_funcinfo << endl;
  delete d;
- kdDebug() << "~KGameDialogNetworkConfig() done" << endl;
 }
 
 void KGameDialogNetworkConfig::slotExitConnection()
 {
- kdDebug(11000) << "KGameDialogNetworkConfig::slotEXITConnection() !!!!!!!!!!!!!!!!!!!!!!!" << endl;
+ kdDebug(11000) << k_funcinfo << " !!!!!!!!!!!!!!!!!!!!!!!" << endl;
   if (game()) game()->disconnect();
   setConnected(false,false);
 }
 
 void KGameDialogNetworkConfig::slotInitConnection()
 {
- kdDebug(11001) << "KGameDialogNetworkConfig::slotInitConnection()" << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  bool connected = false;
  bool master = true;
  unsigned short int port = port = d->mConnect->port();
@@ -188,7 +186,7 @@ void KGameDialogNetworkConfig::slotInitConnection()
 
 void KGameDialogNetworkConfig::slotConnectionBroken()
 {
-  kdDebug(11001) << "KGameDialogNetworkConfig::slotConnectionBroken()"<<endl;
+  kdDebug(11001) << k_funcinfo << endl;
   setConnected(false,false);
   KMessageBox::error(this, i18n("Cannot connect to the network"));
 }
@@ -257,7 +255,7 @@ public:
 KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initializeGUI)
 		: KGameDialogConfig(parent)
 {
-// kdDebug(11001) << "CONSTRUCT KGameDialogGeneralConfig " << this << endl;
+// kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
  d = new KGameDialogGeneralConfigPrivate;
 
  if (initializeGUI) {
@@ -275,9 +273,8 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 
 KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 {
- kdDebug() << "~KGameDialogGeneralConfig()" << endl;
+ kdDebug() << k_funcinfo << endl;
  delete d; 
- kdDebug() << "~KGameDialogGeneralConfig() done" << endl;
 }
 
 void KGameDialogGeneralConfig::setPlayerName(const QString& name)
@@ -394,9 +391,8 @@ KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent)
 
 KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
 {
- kdDebug() << "~KGameDialogMsgServerConfig()" << endl;
+ kdDebug() << k_funcinfo << endl;
  delete d;
- kdDebug() << "~KGameDialogMsgServerConfig() done" << endl;
 }
 
 void KGameDialogMsgServerConfig::setKGame(KGame* g)
@@ -417,11 +413,11 @@ void KGameDialogMsgServerConfig::setKGame(KGame* g)
 void KGameDialogMsgServerConfig::slotChangeMaxClients()
 {
  if (!game()) {
-	kdError(11001) << "no valid game object available!" << endl;
+	kdError(11001) << k_funcinfo << ": no valid game object available!" << endl;
 	return;
  }
  if (!game()->isAdmin()) {
-	kdError(11001) << "changeMaxClients(): only ADMIN is allowed to call this!" << endl;
+	kdError(11001) << k_funcinfo << ": only ADMIN is allowed to call this!" << endl;
 	return;
  }
  int max;
@@ -452,11 +448,11 @@ void KGameDialogMsgServerConfig::slotRemoveClient()
 void KGameDialogMsgServerConfig::slotChangeAdmin()
 {
  if (!game()) {
-	kdError(11001) << "no valid game object available!" << endl;
+	kdError(11001) << k_funcinfo << ": no valid game object available!" << endl;
 	return;
  }
  if (!admin()) {
-	kdError(11001) << "changeAdmin(): only ADMIN is allowed to call this!" << endl;
+	kdError(11001) << k_funcinfo << ": only ADMIN is allowed to call this!" << endl;
 	return;
  }
  //TODO
@@ -554,9 +550,8 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
 
 KGameDialogChatConfig::~KGameDialogChatConfig()
 {
- kdDebug() << "~KGameDialogChatConfig()" << endl;
+ kdDebug() << k_funcinfo << endl;
  delete d;
- kdDebug() << "~KGameDialogChatConfig() done" << endl;
 }
 
 void KGameDialogChatConfig::setKGame(KGame* g)
@@ -609,10 +604,9 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
 
 KGameDialogConnectionConfig::~KGameDialogConnectionConfig()
 {
- kdDebug() << "~KGameDialogConnectionConfig()" << endl;
+ kdDebug() << k_funcinfo << endl;
  // d->mIem2Player.clear();
  delete d;
- kdDebug() << "~KGameDialogConnectionConfig() done" << endl;
 }
 
 void KGameDialogConnectionConfig::setKGame(KGame* g)
@@ -677,11 +671,11 @@ void KGameDialogConnectionConfig::slotClearPlayers()
  }
 
  if (d->mItem2Player.count() > 0) {
-	kdWarning(11001) << "KGameDialogConnectionConfig: itemList wasn't cleared properly" << endl;
+	kdWarning(11001) << k_funcinfo << ": itemList wasn't cleared properly" << endl;
 	d->mItem2Player.clear();
  }
  if (d->mPlayerBox->count() > 0) {
-	kdWarning(11001) << "KGameDialogConnectionConfig: listBox wasn't cleared properly" << endl;
+	kdWarning(11001) << k_funcinfo << ": listBox wasn't cleared properly" << endl;
 	d->mPlayerBox->clear();
  }
 
@@ -690,14 +684,13 @@ void KGameDialogConnectionConfig::slotClearPlayers()
 void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << "KGameDialogConnectionConfig: Cannot add NULL player" << endl;
+	kdError(11001) << k_funcinfo << ": Cannot add NULL player" << endl;
  }
  if (d->mItem2Player[p]) {
-	kdError(11001) << "KGameDialogConnectionConfig: attempt to double add player" 
-			<< endl;
+	kdError(11001) << k_funcinfo << ": attempt to double add player" << endl;
 	return;
  }
- kdDebug(11001) << "KGameDialogConnectionConfig: add player " << p->id() << endl;
+ kdDebug(11001) << k_funcinfo << ": add player " << p->id() << endl;
  QListBoxText* t = new QListBoxText(p->name());
  d->mItem2Player.insert(t, p);
  d->mPlayerBox->insertItem(t);
@@ -712,8 +705,8 @@ void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
  // disconnect first
  this->disconnect(p);
  if (!item(p)) {
-	kdError(11001) << "KGameDialogConnectionConfig::slotPlayerLeftGame(): cannot find " 
-			<< p->id() << " in list" << endl;
+	kdError(11001) << k_funcinfo << ": cannot find " << p->id() 
+			<< " in list" << endl;
 	return;
  }
  d->mPlayerBox->removeItem(d->mPlayerBox->index(item(p)));

@@ -350,7 +350,7 @@ void KGameDebugDialog::slotUpdateGameData()
 			handler->propertyName(it.current()->id()),
 			handler->propertyValue(it.current()), 
 			policy);
-//	kdDebug(11001) << "slotUpdateGameData: checking for all game properties: found property name " << name << endl;
+//	kdDebug(11001) << k_funcinfo << ": checking for all game properties: found property name " << name << endl;
 	++it;
  }
 }
@@ -364,7 +364,7 @@ void KGameDebugDialog::slotUpdatePlayerData(QListBoxItem* item)
  KPlayer* p = d->mGame->findPlayer(item->text().toInt());
 
  if (!p) {
-	kdError(11001) << "KGameDebugDialog: cannot find player" << endl;
+	kdError(11001) << k_funcinfo << ": cannot find player" << endl;
 	return;
  }
 

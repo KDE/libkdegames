@@ -103,23 +103,23 @@ KMessageServer::KMessageServer (Q_UINT16 cookie,QObject* parent)
 
 KMessageServer::~KMessageServer()
 {
-  kdDebug(11001) << "DESTRUCT(KMessageServer=" << this <<")" << endl;
+  kdDebug(11001) << k_funcinfo << "this=" << this << endl;
   Debug();
   stopNetwork();
   deleteClients();
   delete d;
-  kdDebug(11001) << "DESTRUCT(KMessageServer=" << this <<") done" << endl;
+  kdDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 //------------------------------------- TCP/IP server stuff
 
 bool KMessageServer::initNetwork (Q_UINT16 port)
 {
-  kdDebug(11001) << "KMessageServer::initNetwork" << endl;
+  kdDebug(11001) << k_funcinfo << endl;
 
   if (d->mServerSocket)
   {
-    kdDebug (11001) << "KMessageServer::initNetwork: We were already offering connections!" << endl;
+    kdDebug (11001) << k_funcinfo << ": We were already offering connections!" << endl;
     delete d->mServerSocket;
   }
 
@@ -127,13 +127,13 @@ bool KMessageServer::initNetwork (Q_UINT16 port)
 
   if (!d->mServerSocket || !d->mServerSocket->ok())
   {
-    kdError(11001) << "KMessageServer::initNetwork: Serversocket::ok() == false" << endl;
+    kdError(11001) << k_funcinfo << ": Serversocket::ok() == false" << endl;
     delete d->mServerSocket;
     d->mServerSocket=0;
     return false;
   }
 
-  kdDebug (11001) << "KMessageServer::initNetwork: Now listening to port "
+  kdDebug (11001) << k_funcinfo << ": Now listening to port "
                   << d->mServerSocket->port() << endl;
   connect (d->mServerSocket, SIGNAL (newClientConnected (KMessageIO*)),
            this, SLOT (addClient (KMessageIO*)));
@@ -171,13 +171,13 @@ void KMessageServer::addClient (KMessageIO* client)
   // maximum number of clients reached?
   if (d->mMaxClients >= 0 && d->mMaxClients <= clientCount())
   {
-    kdError (11001) << "KMessageServer::addClient: Maximum number of clients reached!" << endl;
+    kdError (11001) << k_funcinfo << ": Maximum number of clients reached!" << endl;
     return;
   }
 
   // give it a unique ID
   client->setId (uniqueClientNumber());
-  kdDebug (11001) << "=====>KMessageServer::addClient " << client->id() << endl;
+  kdDebug (11001) << k_funcinfo << ": " << client->id() << endl;
 
   // connect its signals
   connect (client, SIGNAL (connectionBroken()),
@@ -222,7 +222,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
   Q_UINT32 clientID = client->id();
   if (!d->mClientList.removeRef (client))
   {
-    kdError(11001) << "KMessageServer::removeClient: Deleting client that wasn't added before!" << endl;
+    kdError(11001) << k_funcinfo << ": Deleting client that wasn't added before!" << endl;
     return;
   }
 
@@ -251,7 +251,7 @@ void KMessageServer::removeBrokenClient ()
 {
   if (!sender()->inherits ("KMessageIO"))
   {
-    kdError (11001) << "KMessageServer::removeBrokenClient: sender of the signal was not a KMessageIO object!" << endl;
+    kdError (11001) << k_funcinfo << ": sender of the signal was not a KMessageIO object!" << endl;
     return;
   }
 
@@ -359,10 +359,10 @@ void KMessageServer::getReceivedMessage (const QByteArray &msg)
 {
   if (!sender() || !sender()->inherits("KMessageIO"))
   {
-    kdError (11001) << "KMessageServer::processReceivedMessage: slot was not called from KMessageIO!" << endl;
+    kdError (11001) << k_funcinfo << ": slot was not called from KMessageIO!" << endl;
     return;
   }
-  //kdDebug(11001) << "KMessageServer::getReceivedMessage size=" << msg.size() << endl;
+  //kdDebug(11001) << k_funcinfo << ": size=" << msg.size() << endl;
   KMessageIO *client = (KMessageIO *) sender();
   Q_UINT32 clientID = client->id();
 
@@ -402,7 +402,7 @@ void KMessageServer::processOneMessage ()
   QByteArray ttt=in_buffer.buffer();
   Q_UINT32 messageID;
   in_stream >> messageID;
-  //kdDebug(11001) << "KMessageServer::processOneMessage:: got message with messageID=" << messageID << endl;
+  //kdDebug(11001) << k_funcinfo << ": got message with messageID=" << messageID << endl;
   switch (messageID)
   {
     case REQ_BROADCAST:
@@ -455,7 +455,7 @@ void KMessageServer::processOneMessage ()
           if (client)
             removeClient (client, false);
           else
-            kdWarning (11001) << "KMessageServer::processReceivedMessage: removing non-existing clientID" << endl;
+            kdWarning (11001) << k_funcinfo << ": removing non-existing clientID" << endl;
         }
       }
       break;
@@ -482,12 +482,12 @@ void KMessageServer::processOneMessage ()
 
   // check if all the data has been used
   if (!unknown && !in_buffer.atEnd())
-    kdWarning (11001) << "KMessageServer::processReceivedMessage: Extra data received for message ID " << messageID << endl;
+    kdWarning (11001) << k_funcinfo << ": Extra data received for message ID " << messageID << endl;
 
   emit messageReceived (msg_buf->data, clientID, unknown);
 
   if (unknown)
-    kdWarning (11001) << "KMessageServer::processReceivedMessage: received unknown message ID " << messageID << endl;
+    kdWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
 
   // remove the message, since we are ready with it
   d->mMessageQueue.remove();

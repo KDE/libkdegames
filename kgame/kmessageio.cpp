@@ -122,7 +122,7 @@ void KMessageSocket::processNewData ()
       str >> v;
       if (v != 'M')
       {
-        kdWarning(11001) << "KMessageSocket::processNewData: Received unexpected data, magic number wrong!" << endl;
+        kdWarning(11001) << k_funcinfo << ": Received unexpected data, magic number wrong!" << endl;
         continue;
       }
 
@@ -172,7 +172,7 @@ const char *name)
   // Check if the other object is already connected
   if (partner && partner->mPartner)
   {
-    kdWarning(11001) << "KMessageDirect::KMessageDirect: Object is already connected!" << endl;
+    kdWarning(11001) << k_funcinfo << ": Object is already connected!" << endl;
     return;
   }
 
@@ -202,7 +202,7 @@ void KMessageDirect::send (const QByteArray &msg)
   if (mPartner)
     emit mPartner->received (msg);
   else
-    kdError(11001) << "KMessageDirect::send: Not yet connected!" << endl;
+    kdError(11001) << k_funcinfo << ": Not yet connected!" << endl;
 }
 
 
@@ -286,7 +286,7 @@ void KMessageProcess::writeToProcess()
 }
 void KMessageProcess::slotWroteStdin(KProcess * )
 {
-  kdDebug(11001)<<"@@@@ KMessageProcess::slotWroteStdin" << endl;
+  kdDebug(11001) << k_funcinfo << endl;
   if (mSendBuffer)
   {
     delete mSendBuffer;
@@ -327,7 +327,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
 
 void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
 {
-  kdDebug(11001) << "$$$$$$ KMessageProcess::SLOTReceivedStdout::Received " << buflen << " bytes over inter process communication" << endl;
+  kdDebug(11001) << "$$$$$$ " << k_funcinfo << ": Received " << buflen << " bytes over inter process communication" << endl;
 
   // TODO Make a plausibility check on buflen to avoid memory overflow
   while (mReceiveCount+buflen>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
@@ -342,18 +342,18 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
     unsigned int len;
     if (*p1!=0x4242aeae)
     {
-      kdDebug(11001) << "KMessageProcess::slotReceivedStdout:: Cookie error...transmission failure...serious problem..." << endl;
+      kdDebug(11001) << k_funcinfo << ": Cookie error...transmission failure...serious problem..." << endl;
 //      for (int i=0;i<mReceiveCount;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
     }
     len=(int)(*p2);
     if (len<2*sizeof(long))
     {
-      kdDebug(11001) << "KMessageProcess::slotReceivedStdout:: Message size error" << endl;
+      kdDebug(11001) << k_funcinfo << ": Message size error" << endl;
       break;
     }
     if (len<=mReceiveCount)
     {
-      kdDebug(11001) << "KMessageProcess::Got message with len " << len << endl;
+      kdDebug(11001) << k_funcinfo << ": Got message with len " << len << endl;
 
       QByteArray msg;
     //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));

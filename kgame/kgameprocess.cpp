@@ -21,27 +21,25 @@
     $Id$
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-
-#include <qbuffer.h>
-#include <qdatastream.h>
-#include <qcstring.h>
-#include <assert.h>
-
-#include <krandomsequence.h>
 #include "kgameprocess.h"
 #include "kplayer.h"
 #include "kgame.h"
 #include "kgamemessage.h"
 #include "kmessageio.h"
-//#include "kmessageclient.h"
-//#include "kmessageserver.h"
+
+#include <krandomsequence.h>
+
+#include <qbuffer.h>
+#include <qdatastream.h>
+#include <qcstring.h>
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 
 #define READ_BUFFER_SIZE  1024
-
 
 // ----------------------- Process Child ---------------------------
 

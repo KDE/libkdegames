@@ -86,7 +86,7 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 {
 //AB: do we need a "Cancel" Button? currently removed
 
-// kdDebug(11001) << "CONSTRUCT KGameDialog" << this << endl;
+// kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
  d = new KGameDialogPrivate;
 
  setOwner(owner);
@@ -210,7 +210,7 @@ QVBox *KGameDialog::configPage(ConfigOptions which)
 		box = d->mMsgServerPage;
 		break;
 	default:
-		kdError(11001) << "KGameDialog::configPage(): Parameter " << which << " not supported" << endl;
+		kdError(11001) << k_funcinfo << ": Parameter " << which << " not supported" << endl;
  }
  return box;
 }
@@ -325,11 +325,11 @@ void KGameDialog::slotUnsetKGame() // called when KGame is destroyed
 void KGameDialog::submitToKGame()
 {
  if (!d->mGame) {
-	kdError(11001) << "KGameDialog::submitToKGame: no game has been set" << endl;
+	kdError(11001) << k_funcinfo << ": no game has been set" << endl;
 	return;
  }
  if (!d->mOwner) {
-	kdError(11001) << "KGameDialog::submitToKGame: no player has been set" << endl;
+	kdError(11001) << k_funcinfo << ": no player has been set" << endl;
 	return;
  }
 

@@ -38,13 +38,13 @@
 // ----------------------- Generic IO -------------------------
 KGameIO::KGameIO() : QObject(0,0)
 {
-  kdDebug(11001) << "CREATE(KGameIO=" << this <<") sizeof(this)"<<sizeof(KGameIO) << endl;
+  kdDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO) << endl;
   mPlayer = 0;
 }
 
 KGameIO::KGameIO(KPlayer* player) : QObject(0,0)
 {
-  kdDebug(11001) << "CREATE(KGameIO=" << this <<") sizeof(this)"<<sizeof(KGameIO) << endl;
+  kdDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO) << endl;
   mPlayer = 0;
   if (player)
   {
@@ -54,7 +54,7 @@ KGameIO::KGameIO(KPlayer* player) : QObject(0,0)
 
 KGameIO::~KGameIO()
 {
-  kdDebug(11001) << "DESTRUCT(KGameIO=" << this <<")" << endl;
+  kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
   // unregister ourselves
   if (player()) 
   {
@@ -71,7 +71,7 @@ void KGameIO::notifyTurn(bool b)
 {
   if (!player())
   {
-    kdWarning(11001) << "KGameIO::notifyTurn(): player() is NULL" << endl;
+    kdWarning(11001) << k_funcinfo << ": player() is NULL" << endl;
     return;
   }
   bool sendit=false;
@@ -251,7 +251,7 @@ public:
 KGameProcessIO::KGameProcessIO(const QString& name) 
    : KGameIO()
 {
-  kdDebug(11001) << "CREATE KGameProcessIO ("<<this<<") sizeof(this)="<<sizeof(KGameProcessIO)<<endl;
+  kdDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)=" << sizeof(KGameProcessIO) << endl;
   d = new KGameProcessIOPrivate;
 
   //kdDebug(11001) << "================= KMEssageServer ==================== " << endl;
@@ -276,7 +276,7 @@ KGameProcessIO::KGameProcessIO(const QString& name)
 
 KGameProcessIO::~KGameProcessIO()
 {
-  kdDebug(11001) << "DESTRUCT (KGameProcessIO="<<this<<")"<<endl;
+  kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
   kdDebug(11001) << "player="<<player() << endl;
   if (player()) 
   {
@@ -321,7 +321,7 @@ void KGameProcessIO::notifyTurn(bool b)
 {
   if (!player())
   {
-    kdWarning(11001) << "KGameProcessIO::notifyTurn(): player() is NULL" << endl;
+    kdWarning(11001) << k_funcinfo << ": player() is NULL" << endl;
     return;
   }
   bool sendit=true;
@@ -417,7 +417,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   }
   else 
   {
-    kdDebug(11001) << "KGameProcessIO::receivedMessage: Got message from process but no player defined!" << endl;
+    kdDebug(11001) << k_funcinfo << ": Got message from process but no player defined!" << endl;
   }
   newbuffer.resetRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
 }

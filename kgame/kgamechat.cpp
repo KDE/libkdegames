@@ -70,13 +70,13 @@ KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent) 
 
 KGameChat::~KGameChat()
 {
- kdDebug(11001) << "DESTRUCT KGameChat " << this << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  delete d;
 }
 
 void KGameChat::init(KGame* g, int msgId)
 {
- kdDebug(11001) << "INIT KGameChat " << this << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  d = new KGameChatPrivate;
  d->mMessageId = msgId;
 
@@ -103,11 +103,11 @@ void KGameChat::addMessage(int fromId, const QString& text)
 void KGameChat::returnPressed(const QString& text)
 {
  if (!d->mFromPlayer) {
-	kdWarning(11001) << "KGameChat: You must set a player first!" << endl;
+	kdWarning(11001) << k_funcinfo << ": You must set a player first!" << endl;
 	return;
  }
  if (!d->mGame) {
-	kdWarning(11001) << "KGameChat: You must set a game first!" << endl;
+	kdWarning(11001) << k_funcinfo << ": You must set a game first!" << endl;
 	return;
  }
 
@@ -133,7 +133,7 @@ void KGameChat::returnPressed(const QString& text)
 	if (!isSendToAllMessage(id) && isToPlayerMessage(id)) {
 		toPlayer = playerId(id);
 		if (toPlayer == -1) {
-			kdError(11001) << "KGameChat: don't know that player "
+			kdError(11001) << k_funcinfo << ": don't know that player "
 					<< "- internal ERROR" << endl;
 		}
 	} 
@@ -190,7 +190,7 @@ bool KGameChat::hasPlayer(int id) const
 void KGameChat::setFromPlayer(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << "KGameChat::setFromPlayer(): NULL player" << endl;
+	kdError(11001) << k_funcinfo << ": NULL player" << endl;
 	removeSendingEntry(d->mToMyGroup);
 	d->mFromPlayer = 0;
 	return;
@@ -206,7 +206,7 @@ void KGameChat::setFromPlayer(KPlayer* p)
 	addSendingEntry(i18n("Send to my group (\"%1\")").arg(p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
- kdDebug(11001) << "KGameChat::setFromPlayer() player=" << p << endl;
+ kdDebug(11001) << k_funcinfo << " player=" << p << endl;
 }
 
 
@@ -215,7 +215,7 @@ void KGameChat::setKGame(KGame* g)
  if (d->mGame) {
 	slotUnsetKGame();
  }
- kdDebug(11001) << "KGameChat::setKGame() game=" << g << endl;
+ kdDebug(11001) << k_funcinfo << " game=" << g << endl;
  d->mGame = g;
 
  if (d->mGame) {
@@ -252,11 +252,11 @@ void KGameChat::slotUnsetKGame()
 void KGameChat::slotAddPlayer(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << "KGameChat::slotAddPlayer(): cannot add NULL player" << endl;
+	kdError(11001) << k_funcinfo << ": cannot add NULL player" << endl;
 	return;
  }
  if (hasPlayer(p->id())) {
-	kdError(11001) << "KGameChat: player was added before" << endl;
+	kdError(11001) << k_funcinfo << ": player was added before" << endl;
 	return;
  }
 
@@ -273,11 +273,11 @@ void KGameChat::slotAddPlayer(KPlayer* p)
 void KGameChat::slotRemovePlayer(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << "KGameChat::slotRemovePlayer(): NULL player" << endl;
+	kdError(11001) << k_funcinfo << ": NULL player" << endl;
 	return;
  }
  if (!hasPlayer(p->id())) {
-	kdError(11001) << "KGameChat: cannot remove non-existent player" << endl;
+	kdError(11001) << k_funcinfo << ": cannot remove non-existent player" << endl;
 	return;
  }
 

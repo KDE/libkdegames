@@ -52,7 +52,7 @@ public:
 };
 
 // ------------------- NETWORK GAME ------------------------
-KGameNetwork::KGameNetwork(int c,QObject* parent) : QObject(parent, 0)
+KGameNetwork::KGameNetwork(int c, QObject* parent) : QObject(parent, 0)
 {
  d = new KGameNetworkPrivate;
  d->mCookie = (Q_INT16)c;
@@ -61,12 +61,12 @@ KGameNetwork::KGameNetwork(int c,QObject* parent) : QObject(parent, 0)
  // create your own KMessageServer and a KMessageClient connected to it.
  setMaster();
 
- kdDebug(11001) << "CREATE(KGameNetwork=" << this <<") cookie=" << cookie() << " sizeof(this)="<<sizeof(KGameNetwork) << endl;
+ kdDebug(11001) << k_funcinfo << ": this=" << this <<", cookie=" << cookie() << " sizeof(this)="<<sizeof(KGameNetwork) << endl;
 }
 
 KGameNetwork::~KGameNetwork()
 {
- kdDebug(11001) << "DESTRUCT(KGameNetwork=" << this <<")" << endl;
+ kdDebug(11001) << k_funcinfo << ": this=" << this << endl;
 // Debug();
  delete d;
 }
@@ -98,7 +98,7 @@ void KGameNetwork::setMaster()
  if (!d->mMessageServer) {
 	d->mMessageServer = new KMessageServer (cookie(), this);
  } else {
-	kdWarning(11001) << "KGameNetwork::setMaster(): Server already running!!" << endl;
+	kdWarning(11001) << k_funcinfo << ": Server already running!!" << endl;
  }
  if (!d->mMessageClient) {
 	d->mMessageClient = new KMessageClient (this);
@@ -116,46 +116,46 @@ void KGameNetwork::setMaster()
 
  } else {
 	// should be no problem but still has to be tested
-	kdDebug(11001) << "KGameNetwork::setMaster(): Client already exists!" << endl;
+	kdDebug(11001) << k_funcinfo << ": Client already exists!" << endl;
  }
  d->mMessageClient->setServer(d->mMessageServer);
 }
 
 bool KGameNetwork::offerConnections(Q_UINT16 port)
 {
- kdDebug (11001) << "KGameNetwork::offerConnections: on port " << port << endl;
+ kdDebug (11001) << k_funcinfo << ": on port " << port << endl;
  if (!isMaster()) {
 	setMaster();
  }
 
  // FIXME: This debug message can be removed when the program is working correct.
  if (d->mMessageServer && d->mMessageServer->isOfferingConnections()) {
-   kdDebug (11001) << "KGameNetwork::offerConnections: Already running as server! Changing the port now!" << endl;
+   kdDebug (11001) << k_funcinfo << ": Already running as server! Changing the port now!" << endl;
  }
 
- kdDebug (11001) << "KGameNetwork::before Server->initNetwork" << endl;
+ kdDebug (11001) << k_funcinfo << ": before Server->initNetwork" << endl;
  if (!d->mMessageServer->initNetwork (port)) {
-   kdError (11001) << "KGameNetwork::offerConnections: Unable to bind to port " << port << "!" << endl;
+   kdError (11001) << k_funcinfo << ": Unable to bind to port " << port << "!" << endl;
    // no need to delete - we just cannot listen to the port
 //   delete d->mMessageServer;
 //   d->mMessageServer = 0;
 //   d->mMessageClient->setServer((KMessageServer*)0);
    return false;
  }
- kdDebug (11001) << "KGameNetwork::after Server->initNetwork" << endl;
+ kdDebug (11001) << k_funcinfo << ": after Server->initNetwork" << endl;
  return true;
 }
 
 bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
 {
  if (host.isEmpty()) {
-   kdError(11001) << "KGameNetwork::connectToServer: No hostname given" << endl;
+   kdError(11001) << k_funcinfo << ": No hostname given" << endl;
    return false;
  }
 
 // if (!d->mMessageServer) {
 //   // FIXME: What shall we do here? Probably must stop a running game.
-//   kdWarning (11001) << "KGameNetwork::connectToServer: We are already connected to another server!" << endl;
+//   kdWarning (11001) << k_funcinfo << ": We are already connected to another server!" << endl;
 /// }
 
  if (d->mMessageServer) {
@@ -197,7 +197,7 @@ bool KGameNetwork::isOfferingConnections() const
 void KGameNetwork::disconnect()
 {
  // TODO MH
- kdDebug(11001) << "KGameNetwork::disconnect() " << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  stopServerConnection();
  if (d->mMessageServer) {
     QValueList <Q_UINT32> list=d->mMessageServer->clientIDs();
@@ -206,15 +206,24 @@ void KGameNetwork::disconnect()
     {
       kdDebug(11001) << "Client id=" << (*it) <<  endl;
       KMessageIO *client=d->mMessageServer->findClient(*it);
-      if (!client) continue;
+      if (!client) 
+      {
+        continue;
+      }
       kdDebug(11001) << "   rtti=" << client->rtti() <<  endl;
-      if (client->rtti()==2) kdDebug(11001) << "DIRECT IO " << endl;
-      else d->mMessageServer->removeClient(client,false);
+      if (client->rtti()==2)
+      {
+        kdDebug(11001) << "DIRECT IO " << endl;
+      }
+      else
+      {
+        d->mMessageServer->removeClient(client,false);
+      }
     }
  }
  else
  {
-   kdDebug(11001) << "vor client->disconnect()" << endl;
+   kdDebug(11001) << k_funcinfo << ": before client->disconnect()" << endl;
    //d->mMessageClient->setServer((KMessageIO*)0);
    d->mMessageClient->disconnect();
  }
@@ -229,13 +238,13 @@ void KGameNetwork::disconnect()
   kdDebug(11001) << "  server deleteClients" << endl;
  }
  */
- kdDebug(11001) << "  disconnect() DONE" << endl;
+ kdDebug(11001) << k_funcinfo << ": DONE" << endl;
 }
 
 void KGameNetwork::electAdmin(Q_UINT32 clientID)
 {
  if (!isAdmin()) {
-	kdWarning(11001) << "KGameNetwork::electAdmin(): only ADMIN is allowed to call this!" << endl;
+	kdWarning(11001) << k_funcinfo << ": only ADMIN is allowed to call this!" << endl;
 	return;
  }
  QByteArray buffer;
@@ -248,7 +257,7 @@ void KGameNetwork::electAdmin(Q_UINT32 clientID)
 void KGameNetwork::setMaxClients(int max)
 {
  if (!isAdmin()) {
-	kdWarning(11001) << "KGameNetwork::electAdmin(): only ADMIN is allowed to call this!" << endl;
+	kdWarning(11001) << k_funcinfo << ": only ADMIN is allowed to call this!" << endl;
 	return;
  }
  QByteArray buffer;
@@ -300,7 +309,7 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, Q_UINT32
    // No client created, this should never happen!
    // Having a local game means we have our own
    // KMessageServer and we are the only client.
-   kdWarning (11001) << "KGameNetwork::sendSystemMessage: We don't have a client! Should never happen!" << endl;
+   kdWarning (11001) << k_funcinfo << ": We don't have a client! Should never happen!" << endl;
    return false;
  }
 
@@ -338,16 +347,15 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  Q_UINT32 sender; // the id of the KGame/KPlayer who sent the message
  Q_UINT32 receiver; // the id of the KGame/KPlayer the message is for 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
-// kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
+// kdDebug(11001) << k_funcinfo << ": id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
 
-// kdDebug(11001) << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
  // No broadcast : receiver==0
  // No player isPlayer(receiver)
  // Different game gameId()!=receiver
  if (receiver &&  receiver!=gameId() && !KGameMessage::isPlayer(receiver) ) 
  {
    // receiver=0 is broadcast or player message
-   kdDebug(11001) << "KGameNetwork::receiveNetworkTransmission: Message not meant for us " 
+   kdDebug(11001) << k_funcinfo << ": Message not meant for us " 
             << gameId() << "!=" << receiver << " rawid=" 
 	    << KGameMessage::rawGameId(receiver) << endl;
    return;
@@ -357,7 +365,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
    QString text;
    Q_INT32 error;
    stream >> error;
-   kdDebug(11001) << "KGame::receiveNetworkTransmission: Got IdError " << error << endl;
+   kdDebug(11001) << k_funcinfo << ": Got IdError " << error << endl;
    text = KGameError::errorText(error, stream);
    kdDebug(11001) << "Error text: " << text.latin1() << endl;
    emit signalNetworkErrorMessage((int)error,text);

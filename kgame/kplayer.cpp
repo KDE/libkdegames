@@ -73,7 +73,7 @@ KPlayer::KPlayer(KGame* game) : QObject(0, 0)
 void KPlayer::init()
 {
 // note that NO KGame object exists here! so we cannot use KGameProperty::send!
-   kdDebug(11001) << "CREATE(KPlayer=" << this <<") sizeof(this)="<<sizeof(KPlayer) << endl;
+   kdDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)="<<sizeof(KPlayer) << endl;
    kdDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup)<<endl;
    d = new KPlayerPrivate;
 
@@ -105,7 +105,7 @@ void KPlayer::init()
 
 KPlayer::~KPlayer()
 {
-  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") id=" << this->id() << endl;
+  kdDebug(11001) << k_funcinfo << ": this=" << this <<", id=" << this->id() << endl;
 
   // Delete IODevices
   KGameIO *input;
@@ -122,7 +122,7 @@ KPlayer::~KPlayer()
 // himself
   d->mProperties.clear();
   delete d;
-//  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") done" << endl;
+//  kdDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT32 sender)
@@ -135,7 +135,7 @@ bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT
   {
     return false;
   }
-  kdDebug(11001) << "KPlayer::forwardMessage to game sender="<<sender<<"" << "recv="<<receiver <<"msgid="<<msgid << endl;
+  kdDebug(11001) << k_funcinfo << ": to game sender="<<sender<<"" << "recv="<<receiver <<"msgid="<<msgid << endl;
   return game()->sendSystemMessage(msg,msgid,receiver,sender);
 }
 
@@ -150,10 +150,10 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
     return false;
   }
 
-  kdDebug(11001) << "KPlayer::forwardInput to game playerInput(sender="<<sender<<")" << endl;
+  kdDebug(11001) << k_funcinfo << ": to game playerInput(sender="<<sender<<")" << endl;
   if (!asyncInput() && !myTurn())
   {
-    kdDebug(11001) << "KPlayer::forwardInput rejected cause it is not our turn" << endl;
+    kdDebug(11001) << k_funcinfo << ": rejected cause it is not our turn" << endl;
     return false;
   }
 
@@ -230,7 +230,7 @@ bool KPlayer::addGameIO(KGameIO *input)
 // input=0, remove all
 bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
 {
-  kdDebug(11001) << "KPlayer::removeGameIO()" << targetinput << " delete=" << deleteit<< endl;
+  kdDebug(11001) << k_funcinfo << ": " << targetinput << " delete=" << deleteit<< endl;
   bool result=true;
   if (!targetinput) // delete all
   {
@@ -285,7 +285,7 @@ int KPlayer::calcIOValue()
 
 bool KPlayer::setTurn(bool b, bool exclusive)
 {
-  kdDebug(11001) << "KPlayer::setTurn " << id() << " (" << this << ") to " << b << endl;
+  kdDebug(11001) << k_funcinfo << ": " << id() << " (" << this << ") to " << b << endl;
   if (!isActive()) 
   {
     return false;
@@ -352,7 +352,7 @@ bool KPlayer::save(QDataStream &stream)
 
 void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
 {
-  //kdDebug(11001) << "KPlayer::ReceiveNetworkTransmission: msgid=" << msgid << " sender=" << sender << " we are=" << id() << endl;
+  //kdDebug(11001) << k_funcinfo ": msgid=" << msgid << " sender=" << sender << " we are=" << id() << endl;
   // PlayerProperties processed
   bool issender;
   if (game()) 
@@ -371,7 +371,7 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
   {
     case KGameMessage::IdPlayerInput:
       {
-        kdDebug(11001) << "KPlayer::networkTransmission: Got player move "
+        kdDebug(11001) << k_funcinfo << ": Got player move "
 	        << "KPlayer (virtual) forwards it to the game object" << endl;
         forwardInput(stream,false);
       }
@@ -379,7 +379,7 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
     default:
         emit signalNetworkData(msgid - KGameMessage::IdUser,
 	        ((QBuffer*)stream.device())->readAll(),sender,this);
-        kdDebug(11001) << "KPlayer::ReceiveNetworkTransmision: "
+        kdDebug(11001) << k_funcinfo << ": "
 	        << "User data msgid " << msgid << endl;
     break;
   }
@@ -413,7 +413,7 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
   // Notify KGameIO (Process) for a new turn
   if (me->id()==KGamePropertyBase::IdTurn)
   {
-    //kdDebug(11001) << "KPlayer::emitSignal for KGamePropertyBase::IdTurn " << endl;
+    //kdDebug(11001) << k_funcinfo << ": for KGamePropertyBase::IdTurn " << endl;
     QPtrListIterator<KGameIO> it(mInputList);
     while (it.current()) 
     {
