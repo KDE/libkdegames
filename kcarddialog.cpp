@@ -529,7 +529,7 @@ KCardDialog::~KCardDialog()
 
 // Create the dialog
 KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
-    : KDialogBase( Plain, i18n("Carddeck selection"), Ok|Cancel, Ok, parent, name, true, true)
+    : KDialogBase( Plain, i18n("Carddeck Selection"), Ok|Cancel, Ok, parent, name, true, true)
 {
     KCardDialog::init();
 

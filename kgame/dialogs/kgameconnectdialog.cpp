@@ -67,7 +67,7 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  (void)new QLabel(i18n("Host to connect to"), g);
  d->mHost = new QLineEdit(g); 
 
- QPushButton *button=new QPushButton(i18n("&Start network"), this);
+ QPushButton *button=new QPushButton(i18n("&Start Network"), this);
  connect(button, SIGNAL(clicked()), this, SIGNAL(signalNetworkSetup()));
  vb->addWidget(button);
 }

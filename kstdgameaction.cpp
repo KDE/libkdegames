@@ -205,7 +205,7 @@ KAction *KStdGameAction::print(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::end(const QObject *recvr, const char *slot,
                                                    QObject *parent, const char *name )
 {
-    return new KAction(i18n("&End game"), "fileclose",
+    return new KAction(i18n("&End Game"), "fileclose",
                        KStdAccel::key(KStdAccel::End), recvr, slot, parent,
                        name ? name : stdName(End));
 }
