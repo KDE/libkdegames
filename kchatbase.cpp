@@ -21,14 +21,14 @@
 
 #include <klineedit.h>
 #include <klocale.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <kconfig.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
 
 #include <qlayout.h>
 #include <qcombobox.h>
-#include <qapp.h>
+#include <qapplication.h>
 #include <qpainter.h>
 
 class KChatBaseTextPrivate

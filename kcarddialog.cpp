@@ -35,9 +35,9 @@
 #include <qslider.h>
 #include <qwmatrix.h>
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <klocale.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <kiconview.h>
 #include <kimageio.h>
 #include <ksimpleconfig.h>

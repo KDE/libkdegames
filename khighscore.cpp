@@ -20,7 +20,7 @@
     $Id$
 */
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
 #include <ksimpleconfig.h>
 #include <kglobal.h>
