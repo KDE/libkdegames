@@ -1061,7 +1061,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   // MH: We cannot use have player here as it CHANGES in the loop
   // int havePlayers = cnt+playerCount()-inactivateIds.count();
   kdDebug(11001) << " havePlayers " << cnt+playerCount()-inactivateIds.count() << endl;
-  while (maxPlayers() < (int)(cnt+playerCount() - inactivateIds.count()))
+  while (maxPlayers() > 0 && maxPlayers() < (int)(cnt+playerCount() - inactivateIds.count()))
   {
     kdDebug(11001) << "  Still to deacticvate " 
             << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers() 
@@ -1269,8 +1269,8 @@ void KGame::slotServerDisconnected() // Client side
   KGamePlayerList mReList(d->mInactivePlayerList);
   for ( player=mReList.first(); player != 0; player=mReList.next() )
   {
-    // TODO ?check for priority? Sequence shouzld be ok
-    if ((int)playerCount()<maxPlayers())
+    // TODO ?check for priority? Sequence should be ok
+    if ((int)playerCount()<maxPlayers() || maxPlayers()<0)
     {
       systemActivatePlayer(player);
     }
@@ -1329,7 +1329,7 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool /*broken*/) // server 
  {
    QValueList<int>::Iterator it1 = d->mInactiveIdList.at(idx);
    player = findPlayer(*it1);
-   if ((int)playerCount() < maxPlayers() && player && KGameMessage::rawGameId(*it1) != clientID)
+   if (((int)playerCount() < maxPlayers() || maxPlayers() < 0) && player && KGameMessage::rawGameId(*it1) != clientID)
    {
      activatePlayer(player);
    }
