@@ -16,7 +16,7 @@
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
 */
-#include <qlistbox.h>
+//#include <qlistbox.h>
 #include <qlayout.h>
 #include <qcombobox.h>
 
@@ -26,6 +26,70 @@
 #include <kdebug.h>
 
 #include "kchatbase.h"
+
+class KChatBaseTextPrivate
+{
+public:
+	KChatBaseTextPrivate()
+	{
+		
+	}
+
+	QString mName;
+	QString mMessage;
+};
+
+
+KChatBaseText::KChatBaseText(QListBox* listbox, const QString& player, const QString& message) : QListBoxText(listbox)
+{
+ init();
+ setPlayer(player);
+ setMessage(message);
+}
+
+KChatBaseText::KChatBaseText(QListBox* listbox, const QString& message) : QListBoxText(listbox)
+{
+ init();
+ setMessage(message);
+}
+
+KChatBaseText::~KChatBaseText()
+{ 
+ delete d;
+}
+
+void KChatBaseText::init()
+{
+ d = new KChatBaseTextPrivate;
+}
+
+void KChatBaseText::setPlayer(const QString& player)
+{
+ d->mName = player;
+}
+
+void KChatBaseText::setMessage(const QString& message)
+{
+ d->mMessage = message;
+}
+
+void KChatBaseText::paint(QListBox* lb)
+{
+
+}
+
+int KChatBaseText::width(QListBox* lb) const
+{
+
+}
+
+int KChatBaseText::height(QListBox* lb) const
+{
+
+}
+
+
+
 
 class KChatBasePrivate
 {
@@ -202,8 +266,14 @@ void KChatBase::addMessage(const QString& fromName, const QString& text)
  addItem(layoutMessage(fromName, text));
 }
 
+void KChatBase::addSystemMessage(const QString& fromName, const QString& text)
+{
+ addItem(layoutSystemMessage(fromName, text));
+}
+
 QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
 {
+ //TODO: KChatBaseConfigure? - e.g. color
  QListBoxItem* message;
  if (text.startsWith("/me ")) {
 	// replace "/me" by a nice star. leave one space after the star
@@ -212,9 +282,17 @@ QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& t
 	message = (QListBoxItem*)new QListBoxPixmap(pix, text.mid(3));
  } else {
 	// not edited in any way. just return a text item
-	message = (QListBoxItem*)new QListBoxText(i18n("%1: %2").arg(fromName).arg(text));
+	message = (QListBoxItem*)new KChatBaseText(d->mBox, fromName, text);
  }
  return message;
+}
+
+QListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QString& text)
+{
+ //TODO: KChatBaseConfigure? - e.g. color
+
+ // no need to check for /me etc.
+ return (QListBoxItem*)new QListBoxText(i18n("--- %1: %2").arg(fromName).arg(text));
 }
 
 void KChatBase::slotReturnPressed(const QString& text)

@@ -1,0 +1,6 @@
+- 17.04.2001: change version number of the kdenonbeta one
+- 10.07.2001: scaling has been added to KCard and KCardDialog. Find out if there
+  is a memory leak!!
+- 10.07.2001: better layout for the resize box
+- 10.07.2001: global decks/carddirs need extensive testing
+

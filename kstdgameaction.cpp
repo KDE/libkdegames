@@ -16,6 +16,7 @@
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
 */
+
 #include <kstdgameaction.h>
 #include <kstdaccel.h>
 #include <klocale.h>
@@ -74,6 +75,9 @@ KAction *KStdGameAction::action(StdGameAction act_enum, const QObject *recvr,
     case EndTurn:
         act = endTurn(recvr, slot, parent, name);
         break;
+    case Roll:
+        act = roll(recvr, slot, parent, name);
+        break;
     case Carddecks:
         act = carddecks(recvr, slot, parent, name);
         break;
@@ -125,6 +129,9 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
 	break;
     case Redo:
         ret = "move_redo";
+	break;
+    case Roll:
+        ret = "move_roll";
 	break;
     case EndTurn:
         ret = "move_endturn";
@@ -234,6 +241,14 @@ KAction *KStdGameAction::redo(const QObject *recvr, const char *slot,
     return new KAction(i18n("Re&do"), "redo",
                        KStdAccel::key(KStdAccel::Redo), recvr, slot, parent,
                        name ? name : stdName(Redo));
+}
+
+KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
+                                                  QObject *parent, const char *name )
+{
+    return new KAction(i18n("Roll"), "die",
+                       0, recvr, slot, parent,
+                       name ? name : stdName(Roll));
 }
 
 KAction *KStdGameAction::endTurn(const QObject *recvr, const char *slot,

@@ -32,6 +32,7 @@
 #include <qtooltip.h>
 #include <qpixmap.h>
 #include <qmap.h>
+#include <qslider.h>
 
 #include <kapp.h>
 #include <klocale.h>
@@ -39,6 +40,7 @@
 #include <kiconview.h>
 #include <kimageio.h>
 #include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kdebug.h>
 
 #include "kcarddialog.h"
@@ -46,6 +48,26 @@
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
 #define KCARD_DEFAULTCARD QString::fromLatin1("11.png")
 #define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards-default/")
+
+// values for the resize slider
+#define SLIDER_MIN 400
+#define SLIDER_MAX 3000
+
+// KConfig entries
+#define CONF_GROUP "KCardDialog"
+#define CONF_RANDOMDECK QString::fromLatin1("RandomDeck")
+#define CONF_DECK QString::fromLatin1("Deck")
+#define CONF_CARDDIR QString::fromLatin1("CardDir")
+#define CONF_RANDOMCARDDIR QString::fromLatin1("RandomCardDir")
+#define CONF_USEGLOBALDECK QString::fromLatin1("GlobalDeck")
+#define CONF_USEGLOBALCARDDIR QString::fromLatin1("GlobalCardDir")
+#define CONF_SCALE QString::fromLatin1("Scale")
+
+#define CONF_GLOBAL_GROUP QString::fromLatin1("KCardDialog Settings")
+#define CONF_GLOBAL_DECK QString::fromLatin1("GlobalDeck")
+#define CONF_GLOBAL_CARDDIR QString::fromLatin1("GlobalCardDir")
+#define CONF_GLOBAL_RANDOMDECK QString::fromLatin1("GlobalRandomDeck")
+#define CONF_GLOBAL_RANDOMCARDDIR QString::fromLatin1("GlobalRandomCardDir")
 
 
 class KCardDialogPrivate
@@ -59,6 +81,12 @@ public:
        cardIconView = 0;
        randomDeck = 0;
        randomCardDir = 0;
+       cPreview = 0;
+       scaleSlider = 0;
+       globalDeck = 0;
+       globalCardDir = 0;
+
+       cScale = 1;
     }
 
     QLabel* deckLabel;
@@ -67,6 +95,13 @@ public:
     KIconView* cardIconView;
     QCheckBox* randomDeck;
     QCheckBox* randomCardDir;
+    QCheckBox* globalDeck;
+    QCheckBox* globalCardDir;
+    
+    QSlider* scaleSlider;
+    QPixmap cPreviewPix;
+    QLabel* cPreview;
+
     QMap<QIconViewItem*, QString> deckMap;
     QMap<QIconViewItem*, QString> cardMap;
     QMap<QString, QString> helpMap;
@@ -75,38 +110,113 @@ public:
     KCardDialog::CardFlags cFlags;
     QString cDeck;
     QString cCardDir;
+    double cScale;
 };
 
-int KCardDialog::getCardDeck(QString &mDeck, QString &mCarddir, QWidget *mParent,
-                             CardFlags mFlags, bool* mRandomDeck, bool* mRandomCardDir)
+int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent,
+                             CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir, 
+			     double* pScale, KConfig* pConf)
 {
-    KCardDialog dlg(mParent, "dlg", mFlags);
+    KCardDialog dlg(pParent, "dlg", pFlags);
 
-    dlg.setDeck(mDeck);
-    dlg.setCardDir(mCarddir);
+    dlg.setDeck(pDeck);
+    dlg.setCardDir(pCardDir);
 
-    dlg.setupDialog();
-    dlg.showRandomDeckBox(mRandomDeck != 0);
-    dlg.showRandomCardDirBox(mRandomCardDir != 0);
+    dlg.setupDialog(pScale != 0);
+    dlg.loadConfig(pConf);
+    dlg.showRandomDeckBox(pRandomDeck != 0);
+    dlg.showRandomCardDirBox(pRandomCardDir != 0);
     int result=dlg.exec();
     if (result==QDialog::Accepted)
     {
-        mDeck=dlg.deck();
-        mCarddir=dlg.cardDir();
-        if (!mCarddir.isNull() && mCarddir.right(1)!=QString::fromLatin1("/"))
+    // TODO check for global cards/decks!!!!
+        pDeck=dlg.deck();
+        pCardDir=dlg.cardDir();
+        if (!pCardDir.isNull() && pCardDir.right(1)!=QString::fromLatin1("/"))
         {
-            mCarddir+=QString::fromLatin1("/");
+            pCardDir+=QString::fromLatin1("/");
         }
-        if (mRandomDeck)
+        if (pRandomDeck)
         {
-            *mRandomDeck = dlg.isRandomDeck();
+            *pRandomDeck = dlg.isRandomDeck();
         }
-        if (mRandomCardDir)
+        if (pRandomCardDir)
         {
-            *mRandomCardDir = dlg.isRandomCardDir();
+            *pRandomCardDir = dlg.isRandomCardDir();
         }
+	if (pScale) 
+	{
+            *pScale = dlg.cardScale();
+	}
+
+        if (dlg.isGlobalDeck()) 
+	{
+	    kdDebug(11000) << "use global deck" << endl;
+	    bool random;
+	    getGlobalDeck(pDeck, random);
+	    kdDebug(11000) << "use: " << pDeck<< endl;
+	    if (pRandomDeck)
+	    {
+	        *pRandomDeck=random;
+		if (random)
+	        kdDebug(11000) << "use random deck" << endl;
+	    }
+	}
+        if (dlg.isGlobalCardDir()) 
+	{
+	    kdDebug(11000) << "use global carddir" << endl;
+	    bool random;
+	    getGlobalCardDir(pCardDir, random);
+	    kdDebug(11000) << "use: " << pCardDir << endl;
+	    if (pRandomCardDir)
+	    {
+	        *pRandomCardDir=random;
+		if (random)
+	        kdDebug(11000) << "use random carddir" << endl;
+	    }
+	}
     }
+    dlg.saveConfig(pConf);
     return result;
+}
+
+void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCardDir, double& pScale)
+{
+// TODO check for global cards/decks!!!!
+ if (!conf) {
+	return;
+ }
+ QString origGroup = conf->group();
+
+ conf->setGroup(CONF_GROUP);
+ if (conf->readBoolEntry(CONF_RANDOMDECK) || !conf->hasKey(CONF_DECK)) {
+	pDeck = getRandomDeck();
+ } else {
+	pDeck = conf->readEntry(CONF_DECK);
+ }
+ if (conf->readBoolEntry(CONF_RANDOMCARDDIR) || !conf->hasKey(CONF_CARDDIR)) {
+	pCardDir = getRandomCardDir();
+ } else {
+	pCardDir = conf->readEntry(CONF_CARDDIR);
+ }
+ pScale = conf->readDoubleNumEntry(CONF_SCALE, 1.0);
+
+ if (conf->readBoolEntry(CONF_USEGLOBALDECK, false)) {
+	bool random;
+	getGlobalDeck(pCardDir, random);
+	if (random || pDeck == QString::null) {
+		pDeck = getRandomDeck();
+	}
+ }
+ if (conf->readBoolEntry(CONF_USEGLOBALCARDDIR, false)) {
+	bool random;
+	getGlobalCardDir(pCardDir, random);
+	if (random || pCardDir == QString::null) {
+		pCardDir = getRandomCardDir();
+	}
+ }
+
+ conf->setGroup(origGroup);
 }
 
 QString KCardDialog::getDefaultDeck()
@@ -143,20 +253,20 @@ void KCardDialog::setDeck(const QString& file) { d->cDeck=file; }
 const QString& KCardDialog::cardDir() const { return d->cCardDir; }
 void KCardDialog::setCardDir(const QString& dir) { d->cCardDir=dir; }
 KCardDialog::CardFlags KCardDialog::flags() const { return d->cFlags; }
+double KCardDialog::cardScale() const { return d->cScale; }
 bool KCardDialog::isRandomDeck() const
-{
-  if (d->randomDeck) return d->randomDeck->isChecked();
-  else return false;
-}
+{ return (d->randomDeck ? d->randomDeck->isChecked() : false); }
 bool KCardDialog::isRandomCardDir() const
-{
-  if (d->randomCardDir) return d->randomCardDir->isChecked();
-  else return false;
-}
+{ return (d->randomCardDir ? d->randomCardDir->isChecked() : false); }
+bool KCardDialog::isGlobalDeck() const
+{ return (d->globalDeck ? d->globalDeck->isChecked() : false); }
+bool KCardDialog::isGlobalCardDir() const
+{ return (d->globalCardDir ? d->globalCardDir->isChecked() : false); }
 
-void KCardDialog::setupDialog()
+void KCardDialog::setupDialog(bool showResizeBox)
 {
-  QVBoxLayout* topLayout = new QVBoxLayout(plainPage(), spacingHint());
+  QHBoxLayout* topLayout = new QHBoxLayout(plainPage(), spacingHint());
+  QVBoxLayout* cardLayout = new QVBoxLayout(topLayout);
   QString path, file;
   QWMatrix m;
   m.scale(0.8,0.8);
@@ -165,10 +275,10 @@ void KCardDialog::setupDialog()
 
   if (! (flags() & NoDeck))
   {
-    QHBoxLayout* layout = new QHBoxLayout(topLayout);
+    QHBoxLayout* layout = new QHBoxLayout(cardLayout);
 
     // Deck iconview
-    QGroupBox* grp1 = new QGroupBox(1, Horizontal, i18n("Choose backside"), plainPage());
+    QGroupBox* grp1 = new QGroupBox(1, Horizontal, i18n("Choose Backside"), plainPage());
     layout->addWidget(grp1);
 
     d->deckIconView = new KIconView(grp1,"decks");
@@ -200,8 +310,17 @@ void KCardDialog::setupDialog()
     d->randomDeck->setChecked(false);
     connect(d->randomDeck, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomDeckToggled(bool)));
-    d->randomDeck->setText(i18n("Random backside"));
+    d->randomDeck->setText(i18n("Random Backside"));
     l->addWidget(d->randomDeck, 0, AlignTop|AlignHCenter);
+
+    d->globalDeck = new QCheckBox(plainPage());
+    d->globalDeck->setChecked(true);
+    d->globalDeck->setText(i18n("Use Global Backside"));
+    l->addWidget(d->globalDeck, 0, AlignTop|AlignHCenter);
+
+    QPushButton* b = new QPushButton(i18n("Make Backside Global"), plainPage());
+    connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalDeck()));
+    l->addWidget(b, 0, AlignTop|AlignHCenter);
 
     connect(d->deckIconView,SIGNAL(clicked(QIconViewItem *)),
             this,SLOT(slotDeckClicked(QIconViewItem *)));
@@ -210,8 +329,8 @@ void KCardDialog::setupDialog()
   if (! (flags() & NoCards))
   {
     // Cards iconview
-    QHBoxLayout* layout = new QHBoxLayout(topLayout);
-    QGroupBox* grp2 = new QGroupBox(1, Horizontal, i18n("Choose frontside"), plainPage());
+    QHBoxLayout* layout = new QHBoxLayout(cardLayout);
+    QGroupBox* grp2 = new QGroupBox(1, Horizontal, i18n("Choose Frontside"), plainPage());
     layout->addWidget(grp2);
 
     d->cardIconView =new KIconView(grp2,"cards");
@@ -241,8 +360,17 @@ void KCardDialog::setupDialog()
     d->randomCardDir->setChecked(false);
     connect(d->randomCardDir, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomCardDirToggled(bool)));
-    d->randomCardDir->setText(i18n("Random frontside"));
+    d->randomCardDir->setText(i18n("Random Frontside"));
     l->addWidget(d->randomCardDir, 0, AlignTop|AlignHCenter);
+
+    d->globalCardDir = new QCheckBox(plainPage());
+    d->globalCardDir->setChecked(true);
+    d->globalCardDir->setText(i18n("Use Global Frontside"));
+    l->addWidget(d->globalCardDir, 0, AlignTop|AlignHCenter);
+
+    QPushButton* b = new QPushButton(i18n("Make Frontside Global"), plainPage());
+    connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalCardDir()));
+    l->addWidget(b, 0, AlignTop|AlignHCenter);
 
     connect(d->cardIconView,SIGNAL(clicked(QIconViewItem *)),
             this,SLOT(slotCardClicked(QIconViewItem *)));
@@ -283,12 +411,53 @@ void KCardDialog::setupDialog()
     }
   }
 
+  // insert resize box
+  if (showResizeBox)
+  {
+    // this part is a little bit...tricky.
+    // i'm sure there is a cleaner way but i cannot find it.
+    // whenever the pixmap is resized (aka scaled) the box is resized, too. This
+    // leads to an always resizing dialog which is *very* ugly. i worked around
+    // this by using a QWidget which is the only child widget of the group box.
+    // The other widget are managed inside this QWidget - a stretch area on the
+    // right ensures that the KIconViews are not resized...
+
+    // note that the dialog is still resized if you you scale the pixmap very
+    // large. This is desired behaviour as i don't want to make the box even
+    // larger but i want the complete pixmap to be displayed. the dialog is not
+    // resized if you make the pixmap smaller again.
+    QVBoxLayout* layout = new QVBoxLayout(topLayout);
+    QGroupBox* grp = new QGroupBox(1, Horizontal, i18n("Resize Cards"), plainPage());
+    layout->setResizeMode(QLayout::Fixed);
+    layout->addWidget(grp);
+    QWidget* box = new QWidget(grp);
+    QHBoxLayout* hbox = new QHBoxLayout(box, 0, spacingHint());
+    QVBoxLayout* boxLayout = new QVBoxLayout(hbox);
+    hbox->addStretch(0);
+
+    d->scaleSlider = new QSlider(1, SLIDER_MAX, 1, (-1000+SLIDER_MIN+SLIDER_MAX), Horizontal, box);
+    d->scaleSlider->setMinValue(SLIDER_MIN);
+    connect(d->scaleSlider, SIGNAL(valueChanged(int)), this, SLOT(slotCardResized(int)));
+    boxLayout->addWidget(d->scaleSlider, 0, AlignLeft);
+
+    QPushButton* b = new QPushButton(i18n("Default Size"), box);
+    connect(b, SIGNAL(pressed()), this, SLOT(slotDefaultSize()));
+    boxLayout->addWidget(b, 0, AlignLeft);
+
+    QLabel* l = new QLabel(i18n("Preview:"), box);
+    boxLayout->addWidget(l);
+    d->cPreviewPix.load(getDefaultDeck());
+    d->cPreview = new QLabel(box);
+    boxLayout->addWidget(d->cPreview, 0, AlignCenter|AlignVCenter);
+
+    slotCardResized(d->scaleSlider->value());
+  }
 }
 
 void KCardDialog::insertCardIcons()
 {
     QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop", false, true);
-    // kdDebug(11001) << "insert " << list.count() << endl;
+    // kdDebug(11000) << "insert " << list.count() << endl;
     if (list.isEmpty())
         return;
 
@@ -474,6 +643,157 @@ void KCardDialog::slotRandomCardDirToggled(bool on)
       d->cardLabel->setText("empty");
       setCardDir(0);
   }
+}
+
+void KCardDialog::loadConfig(KConfig* conf)
+{
+ if (!conf) {
+	return;
+ }
+
+ QString origGroup = conf->group();
+
+ conf->setGroup(CONF_GROUP);
+ if (! (flags() & NoDeck)) {
+	if (conf->hasKey(CONF_DECK)) {
+		setDeck(conf->readEntry(CONF_DECK));
+	}
+
+	bool random = conf->readBoolEntry(CONF_RANDOMDECK, false);
+	d->randomDeck->setChecked(random);
+	slotRandomDeckToggled(random);
+
+	if (!conf->hasKey(CONF_USEGLOBALDECK) || conf->readBoolEntry(CONF_USEGLOBALDECK)) {
+		d->globalDeck->setChecked(true);
+	} else {
+		d->globalDeck->setChecked(false);
+	}
+ }
+ if (! (flags() & NoCards)) {
+	if (conf->hasKey(CONF_CARDDIR)) {
+		setCardDir(conf->readEntry(CONF_CARDDIR));
+	}
+
+	bool random = conf->readBoolEntry(CONF_RANDOMCARDDIR, false);
+	d->randomCardDir->setChecked(random);
+	slotRandomCardDirToggled(random);
+
+	if (!conf->hasKey(CONF_USEGLOBALCARDDIR) || conf->readBoolEntry(CONF_USEGLOBALCARDDIR)) {
+		d->globalCardDir->setChecked(true);
+	} else {
+		d->globalCardDir->setChecked(false);
+	}
+ }
+
+ d->cScale = conf->readDoubleNumEntry(CONF_SCALE, 1.0);
+
+ conf->setGroup(origGroup);
+}
+
+void KCardDialog::slotCardResized(int s)
+{
+ if (!d->cPreview) {
+	return;
+ }
+ if (s < SLIDER_MIN || s > SLIDER_MAX) {
+	kdError(11000) << "invalid scaling value!" << endl;
+	return;
+ }
+
+ s *= -1;
+ s += (SLIDER_MIN + SLIDER_MAX);
+ 
+ QWMatrix m;
+ double scale = (double)1000/s;
+ m.scale(scale, scale);
+ QPixmap pix = d->cPreviewPix.xForm(m);
+ d->cPreview->setPixmap(pix);
+ d->cScale = scale;
+}
+
+void KCardDialog::slotDefaultSize()
+{
+ if (!d->scaleSlider) {
+	return;
+ }
+ d->scaleSlider->setValue(-1000 + SLIDER_MIN + SLIDER_MAX);
+}
+
+void KCardDialog::saveConfig(KConfig* conf)
+{
+ if (!conf) {
+	return;
+ }
+ QString origGroup = conf->group();
+
+ conf->setGroup(CONF_GROUP);
+ if (! (flags() & NoDeck)) {
+	conf->writeEntry(CONF_DECK, deck());
+	conf->writeEntry(CONF_RANDOMDECK, isRandomDeck());
+	conf->writeEntry(CONF_USEGLOBALDECK, d->globalDeck->isChecked());
+ }
+ if (! (flags() & NoCards)) {
+	conf->writeEntry(CONF_CARDDIR, cardDir());
+	conf->writeEntry(CONF_RANDOMCARDDIR, isRandomCardDir());
+	conf->writeEntry(CONF_USEGLOBALCARDDIR, d->globalCardDir->isChecked());
+ }
+ conf->writeEntry(CONF_SCALE, d->cScale);
+
+ conf->setGroup(origGroup);
+}
+
+void KCardDialog::slotSetGlobalDeck()
+{
+ KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), false);
+ conf->setGroup(CONF_GLOBAL_GROUP);
+
+ conf->writeEntry(CONF_GLOBAL_DECK, deck());
+ conf->writeEntry(CONF_GLOBAL_RANDOMDECK, isRandomDeck());
+
+ delete conf;
+}
+
+void KCardDialog::slotSetGlobalCardDir()
+{
+ KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), false);
+ conf->setGroup(CONF_GLOBAL_GROUP);
+ 
+ conf->writeEntry(CONF_GLOBAL_CARDDIR, cardDir());
+ conf->writeEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
+
+ delete conf;
+}
+
+void KCardDialog::getGlobalDeck(QString& deck, bool& random)
+{
+ KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), true);
+ conf->setGroup(CONF_GLOBAL_GROUP);
+ 
+ if (!conf->hasKey(CONF_GLOBAL_DECK) || conf->readBoolEntry(CONF_GLOBAL_RANDOMDECK, false)) {
+	deck = getRandomDeck();
+	random = true;
+ } else {
+	deck = conf->readEntry(CONF_GLOBAL_DECK);
+	random = conf->readBoolEntry(CONF_GLOBAL_RANDOMDECK, false);
+ }
+
+ delete conf;
+}
+
+void KCardDialog::getGlobalCardDir(QString& dir, bool& random)
+{
+ KSimpleConfig* conf = new KSimpleConfig(QString::fromLatin1("kdeglobals"), true);
+ conf->setGroup(CONF_GLOBAL_GROUP);
+ 
+ if (!conf->hasKey(CONF_GLOBAL_CARDDIR) || conf->readBoolEntry(CONF_GLOBAL_RANDOMCARDDIR, false)) {
+	dir = getRandomCardDir();
+	random = true;
+ } else {
+	dir = conf->readEntry(CONF_GLOBAL_CARDDIR);
+	random = conf->readBoolEntry(CONF_GLOBAL_RANDOMCARDDIR, false);
+ }
+
+ delete conf;
 }
 
 void KCardDialog::init()

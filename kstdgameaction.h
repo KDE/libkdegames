@@ -1,7 +1,6 @@
 /*
     This file is part of the KDE games library
     Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
-    Copyright (C) 2000 Martin Heni (martin@heni-online.de)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -19,8 +18,8 @@
 */
 // this class was shamelessy stolen from kdelibs/kdeui/kstdction.[cpp|h] and
 // after that just edited for our needs
-#ifndef __KSTDGAMEACTION_H__
-#define __KSTDGAMEACTION_H__
+#ifndef KSTDGAMEACTION_H
+#define KSTDGAMEACTION_H
 
 class KAction;
 class KToggleAction;
@@ -49,7 +48,7 @@ public:
         New=1, Load, Save, SaveAs, End, Pause, Highscores,
         Print, Quit,
 	// Move menu
-	Repeat, Undo, Redo, EndTurn,
+	Repeat, Undo, Redo, Roll, EndTurn,
 	// Settings menu
 	Carddecks
     };
@@ -151,6 +150,12 @@ public:
      * Redo the last move (which has been undone)
      **/
     static KAction *redo(const QObject *recvr = 0, const char *slot = 0,
+                         QObject *parent = 0, const char *name = 0L );
+
+    /**
+     * Roll die or dice
+     **/
+    static KAction *roll(const QObject *recvr = 0, const char *slot = 0,
                          QObject *parent = 0, const char *name = 0L );
 
     /**

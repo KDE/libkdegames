@@ -16,3 +16,8 @@ Contents:
              a list (translators note: happy translating ;) i copied kde-common/accounts
              for this so there are nearly 300 entries...)
 
+if you use libkdegames in your game please also add
+KGlobal::locale()->insertCatalogue("libkdegames");
+to main()
+This will add libkdegames.pot to your game and therefore all libkdegames 
+strings get translated.

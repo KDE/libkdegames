@@ -21,10 +21,63 @@
 
 #include <qframe.h>
 #include <qstring.h>
+#include <qlistbox.h>
 
 #include <kglobalsettings.h>
 
 class QListBoxItem;
+
+
+class KChatBaseTextPrivate;
+
+/**
+ * A @ref QListBoxText implementation for @ref KChatBase.
+ *
+ * It supports different colors, text fonts, ...
+ *
+ * A KChatBaseText consists of two text items: first the player part then the
+ * text part. This honors @ref KChatBase::addMessage which also uses both. 
+ * You can leave the player part out if you don't need it - there won't be any
+ * difference. 
+ *
+ * You can set different colors and fonts for both parts. In the future there
+ * will probably some kind of KChatBaseDialog which offers the user the ability
+ * to configure things like color and font on the fly.
+ **/
+class KChatBaseText : public QListBoxText
+{
+public:
+	/**
+	 * Constructs a KChatBaseText object with the player and text part
+	 **/
+	KChatBaseText(QListBox* listbox, const QString& player, const QString& text);
+	
+	/**
+	 * Constructs a KChatBaseText object without player part
+	 **/
+	KChatBaseText(QListBox* listbox, const QString& text);
+	
+	/**
+	 * Destruct a KChatBaseText object
+	 **/
+	~KChatBaseText();
+
+	void setPlayer(const QString& name);
+	void setMessage(const QString& message);
+
+	virtual int width(QListBox* ) const;
+	virtual int height(QListBox* ) const;
+
+protected:
+	virtual void paint(QListBox*);
+
+private:
+	void init();
+
+private:
+	KChatBaseTextPrivate* d;
+};
+
 
 class KChatBasePrivate;
 
@@ -162,7 +215,7 @@ public:
 
 public slots:
 	/**
-	 * Adds a text in the listbox. See also @ref signalSendMessage()
+	 * Add a text in the listbox. See also @ref signalSendMessage()
 	 *
 	 * Maybe you want to replace this with a function that creates a nicer text
 	 * than "fromName: text"
@@ -174,6 +227,14 @@ public slots:
 	 **/
 	virtual void addMessage(const QString& fromName, const QString& text);
 
+	/**
+	 * This works just like @ref addMessage but adds a system message. @ref
+	 * layoutSystemMessage is used to generate the displayed item. System
+	 * messages will have a different look than player messages.
+	 *
+	 * You can use this e.g. to display status information from your game.
+	 **/
+	virtual void addSystemMessage(const QString& fromName, const QString& text);
 
 	/**
 	 * This member function is mainly internally used to add a message. It
@@ -237,6 +298,15 @@ protected:
 	 * This should fit most peoples needs but needs further improvements.
 	 **/
 	virtual QListBoxItem* layoutMessage(const QString& fromName, const QString& text);
+
+	/**
+	 * Create a @ref QListBoxItem for this message. This does the same as
+	 * @ref layoutMessage but generates a system message. You might want to
+	 * use such a message to display e.g. status information from your game.
+	 *
+	 * The default implementation just prepends "--- ".
+	 **/
+	virtual QListBoxItem* layoutSystemMessage(const QString& fromName, const QString& text);
 
 private slots:
 	/**
