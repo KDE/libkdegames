@@ -40,11 +40,13 @@ public:
 	{
 		mMessageClient = 0;
 		mMessageServer = 0;
+    mDisconnectId = 0;
 	}
 
 public:
 	KMessageClient* mMessageClient;
 	KMessageServer* mMessageServer;
+  Q_UINT32 mDisconnectId;
 
 	int mCookie;
 };
@@ -73,7 +75,13 @@ KGameNetwork::~KGameNetwork()
 bool KGameNetwork::isNetwork() const
 { return isOfferingConnections() || d->mMessageClient->isNetwork();}
 Q_UINT32 KGameNetwork::gameId() const
-{ return d->mMessageClient->id(); }
+{
+  //return d->mMessageClient->id() ;
+  // Return stored id in the case of disconnect. In any other
+  // case the disconnect id is 0
+  if (d->mMessageClient->id()!=0 ) return d->mMessageClient->id() ;
+  else return d->mDisconnectId;
+}
 
 int KGameNetwork::cookie() const
 { return d->mCookie; }
@@ -221,9 +229,15 @@ void KGameNetwork::disconnect()
  }
  else
  {
-   kdDebug(11001) << k_funcinfo << ": before client->disconnect()" << endl;
+   kdDebug(11001) << k_funcinfo << ": before client->disconnect() id="<<gameId()<< endl;
    //d->mMessageClient->setServer((KMessageIO*)0);
+   kdDebug(11001) << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl;
+   d->mDisconnectId = gameId();
+
    d->mMessageClient->disconnect();
+
+   d->mDisconnectId = 0;
+   kdDebug(11001) << "++++++--------------------------------------------+++++"<<endl;
  }
  //setMaster();
  /*
