@@ -373,7 +373,7 @@ QListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QStr
  // no need to check for /me etc.
  KChatBaseText* m = new KChatBaseText(i18n("--- %1").arg(fromName), text);
  m->setNameFont(&d->mSystemNameFont);
- m->setNameFont(&d->mSystemMessageFont);
+ m->setMessageFont(&d->mSystemMessageFont);
  return (QListBoxItem*)m;
 }
 
@@ -405,10 +405,16 @@ void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
 { d->mEdit->setCompletionMode(mode); }
 
 void KChatBase::setNameFont(const QFont& font)
-{ d->mNameFont = font; }
+{
+ d->mNameFont = font; 
+ d->mBox->triggerUpdate(false);
+}
 
 void KChatBase::setMessageFont(const QFont& font)
-{ d->mMessageFont = font; }
+{
+ d->mMessageFont = font; 
+ d->mBox->triggerUpdate(false);
+}
 
 void KChatBase::setBothFont(const QFont& font)
 {
@@ -423,10 +429,16 @@ const QFont& KChatBase::messageFont() const
 { return d->mMessageFont; }
 
 void KChatBase::setSystemNameFont(const QFont& font)
-{ d->mSystemNameFont = font; }
+{
+ d->mSystemNameFont = font; 
+ d->mBox->triggerUpdate(false);
+}
 
 void KChatBase::setSystemMessageFont(const QFont& font)
-{ d->mSystemMessageFont = font; }
+{
+ d->mSystemMessageFont = font; 
+ d->mBox->triggerUpdate(false);
+}
 
 void KChatBase::setSystemBothFont(const QFont& font)
 {
