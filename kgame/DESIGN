@@ -1,7 +1,10 @@
-This document trie to describe the design of KGame - the KDE multiplayer
+This document tries to describe the design of KGame - the KDE multiplayer
 library.
-This document has been written by Andreas Beckermann <b_mann@gmx.de> so you
-know who to blame for errors ;-)
+This document has been written by:
+ Andreas Beckermann <b_mann@gmx.de>
+ M. Heni <martin@heni-online.de>
+ B.??? <???>
+
 This document is published under the terms of the GNU FDL
 
 !!!
@@ -22,6 +25,8 @@ document
 1.4 Admin
 1.5 Server
 1.6 Player
+
+2. Game Negotiation (M.Heni 20.05.2001)
 
 
 ---------------------------------------------------------------------
@@ -132,4 +137,38 @@ duplicated on every other KGame object connected to the message server with
 virtual KPlayer objects. So at every time in the game, every KGame object has
 the same number of KPlayer objects.
 
+
+2. Game negotiation
+-------------------
+Upon connection  of a client the master and the client try to negotiate
+the game setup. Basically this means the game of the master is transferred
+(saved) on the client. However, the client's players are added to the game
+as far as possible. If the addition of the client's players would add more
+players than allowed some players are inactivated. Which players are
+inactivated depends on their networkPriority(). This procedure allows
+easy replacement of players in a constant number game (e.g. chess). If
+this feature is of no interest simply keep the priorities equal (all 0)
+and the client will only add only players if the number of players is
+less or equal the maximum player number.
+
+The following is the negotiation procedure as started by the connection
+of a client. It is initiated in the negotiateNetworkGame() virtual function
+of KGame:
+
+master:               client:
+------------          ------------
+IdSetupGame
+  no data
+                      IdSetupGameContinue;
+                        QValueList<int> player id's
+                        QValueList<int> network priority's
+
+IdGameLoad
+  all game data
+
+IdGameReactivate
+  QValueList<int> id's
+
+IdSyncRandom
+  int randomseed
 

@@ -119,14 +119,14 @@ class KGameMessage
   enum GameMessageIds {
     IdMessage,
     IdSetupGame,        // sent to a newly connected player
-    IdContinueSetup,    // continue the setup
-    IdSendPlayer,       // continue setu - players should be send
-    IdGameSave,         // save the game
+    IdSetupGameContinue,// continue the setup
+    IdGameLoad,         // load/save the game to the client
+    IdGameReactivatePlayer,   // reactive the inactive players
+    IdSyncRandom,       // new random seed set - sync games
     IdAddPlayer,        // add a player
     IdRemovePlayer,     // the player will be removed
     IdActivatePlayer,   // Activate a player
     IdInactivatePlayer, // Inactivate a player
-    IdRandomSeed,       // new random seed set
     IdError,            // an error occured
     IdPlayerInput,      // a player input occured
     IdTurn,             // unused?

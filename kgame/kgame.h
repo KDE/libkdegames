@@ -515,7 +515,6 @@ protected:
     virtual void setGameId(int id);
     void deletePlayers();
     void deleteInactivePlayers();
-    bool SendAllPlayer(bool sendvirtual=false,int receiver=0);
 
     /**
      * Check whether the game is over.
@@ -559,9 +558,19 @@ private:
     bool removePlayer(KPlayer * player, int receiver);
 
     /**
-     * Helping function: this code is currently buggy.
+     * Helping function - game negotiation
      **/
     void setupGame(QDataStream& msg, int sender);
+
+    /**
+     * Helping function - game negotiation
+     **/
+    void setupGameContinue(QDataStream& msg, int sender);
+
+    /**
+     * Helping function - game negotiation
+     **/
+    void gameReactivatePlayer(QDataStream& msg, int sender);
 
     /**
      * Removes a player from all list, removes the @ref KGame pointer from the
@@ -581,7 +590,7 @@ private:
      * @ref addPlayer as well as in @ref negotiateNetworkGame
      * @param receiver The owner of the player
      **/
-    void writeToStream(KPlayer* player, int receiver, QDataStream& stream);
+    void savePlayer(QDataStream& stream,KPlayer* player, int receiver=0);
     
 private:
     KRandomSequence mRandom;

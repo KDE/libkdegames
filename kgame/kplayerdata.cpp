@@ -236,7 +236,7 @@ bool KPlayerDataHandler::load(QDataStream &stream)
 {
   uint count,i;
   stream >> count;
-//  kdDebug(11001) << "KPlayerDataHandler::load " << count << " KPlayerData objects " << endl;
+  kdDebug(11001) << "KPlayerDataHandler::load " << count << " KPlayerData objects " << endl;
   for (i=0;i<count;i++)
   {
     processMessage(stream,id());
@@ -255,7 +255,7 @@ bool KPlayerDataHandler::load(QDataStream &stream)
 }
 bool KPlayerDataHandler::save(QDataStream &stream)
 {
-  //kdDebug(11001) << "KPlayerDataHandler::save " << count() << " KPlayerData objects " << endl;
+  kdDebug(11001) << "KPlayerDataHandler::save " << count() << " KPlayerData objects " << endl;
   stream << (uint)count();
   QIntDictIterator<KPlayerDataBase> it(*this);
   while (it.current())
