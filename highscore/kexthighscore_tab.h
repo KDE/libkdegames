@@ -112,6 +112,6 @@ class HistogramTab : public AdditionalTab
     void display(uint i);
 };
 
-}; // namespace
+} // namespace
 
 #endif

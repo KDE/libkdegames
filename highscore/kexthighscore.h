@@ -322,6 +322,6 @@ class Manager
     Manager &operator =(const Manager &);
 };
 
-}; // namespace
+} // namespace
 
 #endif

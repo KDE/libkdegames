@@ -309,6 +309,6 @@ class MultiplayerScores
 QDataStream &operator <<(QDataStream &stream, const MultiplayerScores &score);
 QDataStream &operator >>(QDataStream &stream, MultiplayerScores &score);
 
-}; // namespace
+} // namespace
 
 #endif

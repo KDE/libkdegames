@@ -309,4 +309,4 @@ QDataStream &operator >>(QDataStream &s, MultiplayerScores &score)
     return s;
 }
 
-}; // namespace
+} // namespace

@@ -846,4 +846,4 @@ void ManagerPrivate::exportHighscores(QTextStream &s)
     setGameType(tmp);
 }
 
-}; // namespace
+} // namespace

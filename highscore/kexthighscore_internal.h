@@ -272,6 +272,6 @@ class ManagerPrivate
     void convertToGlobal();
 };
 
-}; // namespace
+} // namespace
 
 #endif

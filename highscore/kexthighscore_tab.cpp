@@ -273,4 +273,4 @@ void HistogramTab::display(uint i)
     }
 }
 
-}; // namespace
+} // namespace

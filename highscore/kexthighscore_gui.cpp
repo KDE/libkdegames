@@ -540,4 +540,4 @@ void AskNameDialog::nameChanged()
                     && !internal->playerInfos().isNameUsed(name()) );
 }
 
-}; // namespace
+} // namespace

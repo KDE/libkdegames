@@ -201,6 +201,6 @@ class AskNameDialog : public KDialogBase
     QCheckBox *_checkbox;
 };
 
-}; // namespace
+} // namespace
 
 #endif

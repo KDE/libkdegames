@@ -43,7 +43,7 @@ namespace KGrid2D
      * @since 3.2
      */
     typedef QValueList<Coord> CoordList;
-};
+}
 
 inline KGrid2D::Coord
 operator +(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
@@ -202,7 +202,7 @@ class Generic
     uint               _width, _height;
     QValueVector<Type> _vector;
 };
-};
+}
 
 template <class Type>
 QDataStream &operator <<(QDataStream &s, const KGrid2D::Generic<Type> &m) {
@@ -307,15 +307,15 @@ class SquareBase
  *
  * @since 3.2
  */
-template <class Type>
-class Square : public Generic<Type>, public SquareBase
+template <class T>
+class Square : public Generic<T>, public SquareBase
 {
  public:
     /**
      * Constructor.
      */
     Square(uint width = 0, uint height = 0)
-        : Generic<Type>(width, height) {}
+        : Generic<T>(width, height) {}
 
     /**
      * @return the neighbours of coordinate @param c
@@ -329,7 +329,7 @@ class Square : public Generic<Type>, public SquareBase
         CoordList neighbours;
         for (uint i=0; i<(directOnly ? LeftUp : Nb_Neighbour); i++) {
             Coord n = neighbour(c, (Neighbour)i);
-            if ( insideOnly && !inside(n) ) continue;
+            if ( insideOnly && !Generic<T>::inside(n) ) continue;
             neighbours.append(n);
         }
         return neighbours;
@@ -343,13 +343,13 @@ class Square : public Generic<Type>, public SquareBase
     Coord toEdge(const Coord &c, Neighbour n) const {
         switch (n) {
         case Left:      return Coord(0, c.second);
-        case Right:     return Coord(width()-1, c.second);
+        case Right:     return Coord(Generic<T>::width()-1, c.second);
         case Up:        return Coord(c.first, 0);
-        case Down:      return Coord(c.first, height()-1);
+        case Down:      return Coord(c.first, Generic<T>::height()-1);
         case LeftUp:    return Coord(0, 0);
-        case LeftDown:  return Coord(0, height()-1);
-        case RightUp:   return Coord(width()-1, 0);
-        case RightDown: return Coord(width()-1, height()-1);
+        case LeftDown:  return Coord(0, Generic<T>::height()-1);
+        case RightUp:   return Coord(Generic<T>::width()-1, 0);
+        case RightDown: return Coord(Generic<T>::width()-1, Generic<T>::height()-1);
         case Nb_Neighbour: Q_ASSERT(false);
         }
         return c;
@@ -466,7 +466,7 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
         CoordList neighbours;
         for (uint i=0; i<Nb_Neighbour; i++) {
             Coord n = neighbour(c, (Neighbour)i);
-            if ( insideOnly && !inside(n) ) continue;
+            if ( insideOnly && !Generic<Type>::inside(n) ) continue;
             neighbours.append(n);
         }
         return neighbours;
@@ -515,6 +515,6 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
     }
 };
 
-}; // namespace
+} // namespace
 
 #endif

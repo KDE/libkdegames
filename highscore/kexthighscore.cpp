@@ -258,7 +258,7 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
     case WW:       return "normal";
     }
     return QString::null;
-};
+}
 
 void Manager::addToQueryURL(KURL &url, const QString &item,
                                const QString &content)
@@ -271,4 +271,4 @@ void Manager::addToQueryURL(KURL &url, const QString &item,
 	url.setQuery(query);
 }
 
-}; // namescape
+} // namescape
