@@ -709,6 +709,7 @@ KPlayer * KGame::playerInputFinished()
  if (d->mGameOver!=0) 
  {
    player->setTurn(false);
+   setGameStatus(End);
    emit signalGameOver(d->mGameOver,d->mCurrentPlayer,this);
  }
  else if (!player->asyncInput()) 
