@@ -238,12 +238,10 @@ public:
     static void init();
 
 protected:
-    QString deckPath() const;
-    void setDeckPath(const QString& path);
     QString cardPath() const;
     void setCardPath(const QString& path);
     void insertCardIcons(const QString& path);
-    void insertDeckIcons(const QString& path);
+    void insertDeckIcons();
 
     static QString getDeckName(const QString& desktop);
 
@@ -254,13 +252,13 @@ protected slots:
    void slotRandomDeckToggled(bool on);
 
 private:
-   QList <QPixmap > pixmapList;
-   QLabel *deckLabel;
-   QLabel *cardLabel;
-   KIconView *deckIconView;
-   KIconView *cardIconView;
-   QCheckBox* randomDeck;
-   QCheckBox* randomCardDir;
+    QLabel *deckLabel;
+    QLabel *cardLabel;
+    KIconView *deckIconView;
+    KIconView *cardIconView;
+    QCheckBox* randomDeck;
+    QCheckBox* randomCardDir;
+    QMap<QIconViewItem*, QString> deckMap;
 
    // set/query variables
    QString cDeck, cCardDir;

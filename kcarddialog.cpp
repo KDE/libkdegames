@@ -39,6 +39,8 @@
 #include <kimageio.h>
 #include "kcarddialog.h"
 #include <kdebug.h>
+#include <ksimpleconfig.h>
+#include <qpixmap.h>
 
 #define KCARD_DECKPATH QString::fromLatin1("carddecks/decks/")
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
@@ -50,31 +52,31 @@ int KCardDialog::getCardDeck(QString &mDeck, QString &mCarddir, QWidget *mParent
 {
     KCardDialog dlg(mParent, "dlg", mFlags);
 
-  dlg.setDeck(mDeck);
-  dlg.setCardDir(mCarddir);
+    dlg.setDeck(mDeck);
+    dlg.setCardDir(mCarddir);
 
-  dlg.setupDialog();
-  dlg.showRandomDeckBox(mRandomDeck != 0);
-  dlg.showRandomCardDirBox(mRandomCardDir != 0);
-  int result=dlg.exec();
-  if (result==QDialog::Accepted)
-  {
-    mDeck=dlg.deck();
-    mCarddir=dlg.cardDir();
-    if (!mCarddir.isNull() && mCarddir.right(1)!=QString::fromLatin1("/"))
+    dlg.setupDialog();
+    dlg.showRandomDeckBox(mRandomDeck != 0);
+    dlg.showRandomCardDirBox(mRandomCardDir != 0);
+    int result=dlg.exec();
+    if (result==QDialog::Accepted)
     {
-      mCarddir+=QString::fromLatin1("/");
+        mDeck=dlg.deck();
+        mCarddir=dlg.cardDir();
+        if (!mCarddir.isNull() && mCarddir.right(1)!=QString::fromLatin1("/"))
+        {
+            mCarddir+=QString::fromLatin1("/");
+        }
+        if (mRandomDeck)
+        {
+            *mRandomDeck = dlg.isRandomDeck();
+        }
+        if (mRandomCardDir)
+        {
+            *mRandomCardDir = dlg.isRandomCardDir();
+        }
     }
-    if (mRandomDeck)
-    {
-      *mRandomDeck = dlg.isRandomDeck();
-    }
-    if (mRandomCardDir)
-    {
-      *mRandomCardDir = dlg.isRandomCardDir();
-    }
-  }
-  return result;
+    return result;
 }
 
 QString KCardDialog::getDefaultDeck()
@@ -122,8 +124,6 @@ bool KCardDialog::isRandomCardDir() const
 }
 
 // protected
-QString KCardDialog::deckPath() const { return cDeckpath; }
-void KCardDialog::setDeckPath(const QString& path) { cDeckpath=path; }
 QString KCardDialog::cardPath() const { return cCardpath; }
 void KCardDialog::setCardPath(const QString& path) { cCardpath=path; }
 
@@ -145,12 +145,14 @@ void KCardDialog::setupDialog()
     layout->addWidget(grp1);
 
     deckIconView = new KIconView(grp1,"decks");
-    deckIconView->setGridX(36);
+    deckIconView->setGridX(-1);
+    deckIconView->setSpacing(8);
     deckIconView->setGridY(50);
     deckIconView->setSelectionMode(QIconView::Single);
     deckIconView->setResizeMode(QIconView::Adjust);
     deckIconView->setMinimumWidth(360);
     deckIconView->setMinimumHeight(170);
+    deckIconView->setWordWrapIconText(false);
 
     // deck select
     QVBoxLayout* l = new QVBoxLayout(layout);
@@ -212,31 +214,20 @@ void KCardDialog::setupDialog()
   // First find the default or alternate path
   if (! (flags() & NoDeck))
   {
-      file=KCARD_DECKPATH+KCARD_DEFAULTDECK;
-      path=KGlobal::dirs()->findResourceDir("data",file);
-      if (!path.isNull())
-      {
-          path+=KCARD_DECKPATH;
-      }
-
-      setDeckPath(path);
-      insertDeckIcons(deckPath());
+      insertDeckIcons();
       deckIconView->arrangeItemsInGrid();
 
       // Set default icons if given
       if (!deck().isNull())
       {
           file=deck();
-          QPixmap *pixmap=new QPixmap(file);
-          QPixmap *pixmap2=new QPixmap;
-          *pixmap2=pixmap->xForm(m);
-          delete pixmap;
-          deckLabel->setPixmap(*pixmap2);
-          pixmapList.append(pixmap2);
+          QPixmap pixmap(file);
+          pixmap=pixmap.xForm(m);
+          deckLabel->setPixmap(pixmap);
       }
   }
 
-  // Insert cardicons
+  // Insert card icons
   if (! (flags() & NoCards))
   {
       file=KCARD_DEFAULTCARDDIR+KCARD_DEFAULTCARD;
@@ -250,12 +241,9 @@ void KCardDialog::setupDialog()
     if (!cardDir().isNull())
     {
         file=cardDir()+KCARD_DEFAULTCARD;
-      QPixmap *pixmap=new QPixmap(file);
-      QPixmap *pixmap2=new QPixmap;
-      *pixmap2=pixmap->xForm(m);
-      delete pixmap;
-      cardLabel->setPixmap(*pixmap2);
-      pixmapList.append(pixmap2);
+        QPixmap pixmap(file);
+        pixmap = pixmap.xForm(m);
+        cardLabel->setPixmap(pixmap);
     }
   }
 
@@ -278,20 +266,12 @@ void KCardDialog::insertCardIcons(const QString& path)
     {
         label = dir[i]+ QString::fromLatin1("/") + KCARD_DEFAULTCARD;
 
-        QPixmap *pixmap=new QPixmap(path+label);
-        if (pixmap->isNull())
-        {
-            delete pixmap;
+        QPixmap pixmap(path+label);
+        if (pixmap.isNull())
             continue;
-        }
+        pixmap=pixmap.xForm(m);
 
-        QPixmap *pixmap2=new QPixmap;
-        *pixmap2=pixmap->xForm(m);
-        delete pixmap;
-
-        pixmapList.append(pixmap2);
-
-        QIconViewItem *item= new QIconViewItem(cardIconView,dir[i],*pixmap2);
+        QIconViewItem *item= new QIconViewItem(cardIconView,dir[i],pixmap);
         item->setDragEnabled(false);
         item->setDropEnabled(false);
         item->setRenameEnabled(false);
@@ -299,46 +279,36 @@ void KCardDialog::insertCardIcons(const QString& path)
     }
 }
 
-void KCardDialog::insertDeckIcons(const QString& path)
+void KCardDialog::insertDeckIcons()
 {
-  QDir dir;
-  QString label;
-  unsigned int i;
+    QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop", false, true);
+    if (list.isEmpty())
+        return;
 
-  // We shrink the icons a little
-  QWMatrix m;
-  m.scale(0.8,0.8);
+    QString label;
 
-  // Read in directory sorted by name
-  dir.cd(path);
-  dir.setSorting(QDir::Name);
-  dir.setNameFilter(KImageIO::pattern());
+    // We shrink the icons a little
+    QWMatrix m;
+    m.scale(0.8,0.8);
 
-  for (i=0;i<dir.count();i++)
-  {
-    label=dir[i];
-    QPixmap *pixmap=new QPixmap(path+label);
-    if (pixmap->isNull())
+    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
-      delete pixmap;
-      continue;
+        KSimpleConfig cfg(*it);
+        QPixmap pixmap(getDeckName(*it));
+        if (pixmap.isNull())
+            continue;
+
+        pixmap=pixmap.xForm(m);
+
+        cfg.setGroup(QString::fromLatin1("KDE Cards"));
+        QIconViewItem *item= new QIconViewItem(deckIconView, cfg.readEntry("Name", i18n("unnamed")), pixmap);
+
+        item->setDragEnabled(false);
+        item->setDropEnabled(false);
+        item->setRenameEnabled(false);
+
+        deckMap[item] = getDeckName(*it);
     }
-    // Transform bitmap (shrink)
-    QPixmap *pixmap2=new QPixmap;
-    *pixmap2=pixmap->xForm(m);
-    delete pixmap;
-
-    // To get rid of the pixmaps later on
-    pixmapList.append(pixmap2);
-
-    // TODO
-    // label = label.left(label.findRev('.'));
-    QIconViewItem *item= new QIconViewItem(deckIconView, label, *pixmap2);
-
-    item->setDragEnabled(false);
-    item->setDropEnabled(false);
-    item->setRenameEnabled(false);
-  }
 }
 
 
@@ -355,7 +325,6 @@ KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
 
     randomDeck = 0;
     randomCardDir = 0;
-    pixmapList.setAutoDelete(TRUE);
     cFlags = mFlags;
 }
 
@@ -364,7 +333,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
     if (item && item->pixmap())
     {
         deckLabel->setPixmap(* (item->pixmap()));
-        setDeck(deckPath()+item->text());
+        setDeck(deckMap[item]);
     }
 }
 void KCardDialog::slotCardClicked(QIconViewItem *item)
@@ -473,6 +442,8 @@ void KCardDialog::init()
 #ifdef SRCDIR
     KGlobal::dirs()->addResourceDir("cards", SRCDIR + QString::fromLatin1("/carddecks/"));
 #endif
+
+    KGlobal::locale()->insertCatalogue("libkdegames");
 
 }
 
