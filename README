@@ -1,0 +1,7 @@
+This directory contains the library for the kdegames packege.
+It is a collection of functions used by some games or which
+are useful for other games.
+
+Contents:
+  kcarddialog: Access to carddeck selection and administration
+               for cardgames
