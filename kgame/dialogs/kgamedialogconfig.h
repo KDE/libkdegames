@@ -51,7 +51,7 @@ class KGameDialogConfig : public QWidget
 {
 	Q_OBJECT
 public:
-	KGameDialogConfig(QWidget* parent);
+	KGameDialogConfig(QWidget* parent = 0);
 	~KGameDialogConfig();
 
 	/**
@@ -108,7 +108,7 @@ class KGameDialogNetworkConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:
-	KGameDialogNetworkConfig(QWidget* parent);
+	KGameDialogNetworkConfig(QWidget* parent = 0);
 	~KGameDialogNetworkConfig();
 
 
@@ -146,7 +146,7 @@ class KGameDialogGeneralConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:
-	KGameDialogGeneralConfig(QWidget* parent);
+	KGameDialogGeneralConfig(QWidget* parent = 0);
 	~KGameDialogGeneralConfig();
 
 	/**
@@ -195,7 +195,7 @@ class KGameDialogMsgServerConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:
-	KGameDialogMsgServerConfig(QWidget* parent);
+	KGameDialogMsgServerConfig(QWidget* parent = 0);
 	~KGameDialogMsgServerConfig();
 
 	virtual void submitToKGame(KGame*, KPlayer*);
@@ -225,7 +225,7 @@ class KGameDialogChatConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:
-	KGameDialogChatConfig(int chatMsgId, QWidget* parent);
+	KGameDialogChatConfig(int chatMsgId, QWidget* parent = 0);
 	~KGameDialogChatConfig();
 
 	virtual void setKGame(KGame*);
@@ -242,7 +242,7 @@ class KGameDialogConnectionConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:
-	KGameDialogConnectionConfig(QWidget* parent);
+	KGameDialogConnectionConfig(QWidget* parent = 0);
 	~KGameDialogConnectionConfig();
 
 	virtual void setKGame(KGame*);

@@ -68,57 +68,61 @@ public:
 	KGame* mGame;
 };
 
-KGameDialog::KGameDialog(KGameDialogGeneralConfig* config, KGameDialogNetworkConfig* netConf, 
-	KGameDialogMsgServerConfig* msgConf,
-	KGame* g, KPlayer* owner, const QString& title, QWidget* parent, bool modal, int chatMsgid)
-	: KDialogBase(Tabbed, title, Ok|Default|Apply, Ok, parent, 0, modal, true)
-{
- init(config, netConf, msgConf, g, owner, chatMsgid);
-}
-
-
-KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, QWidget* parent, bool modal, int chatMsgid)
+KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
+		QWidget* parent, bool modal, bool initConfigs, int chatMsgId)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply,
 	Ok, parent, 0, modal, true)
 {
-// make msgserver parameter configurable!
- init(new KGameDialogGeneralConfig(0), new KGameDialogNetworkConfig(0), 
-		new KGameDialogMsgServerConfig(0), g, owner, chatMsgid);
-
+ init(g, owner);
+ if (initConfigs) {
+	initDefaultDialog(0, 0, 0, new KGameDialogChatConfig(chatMsgId, 0), 0);
+ }
 }
 
-void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf,
-	KGameDialogMsgServerConfig* msgConf, 
-	KGame* g, KPlayer* owner, int chatMsgid)
+void KGameDialog::init(KGame* g, KPlayer* owner)
 {
+//AB: do we need a "Cancel" Button? currently removed
+
 // kdDebug(11001) << "CONSTRUCT KGameDialog" << this << endl;
  d = new KGameDialogPrivate;
 
  setOwner(owner);
  setKGame(g);
- 
+}
+
+void KGameDialog::initDefaultDialog(KGameDialogGeneralConfig* conf, 
+		KGameDialogNetworkConfig* netConf, 
+		KGameDialogMsgServerConfig* msgConf,
+		KGameDialogChatConfig* chat, 
+		KGameDialogConnectionConfig* connection)
+{
  if (conf) {
 	addGameConfig(conf);
+ } else {
+	addGameConfig(new KGameDialogGeneralConfig(0));
  }
  if (netConf) {
 	addNetworkConfig(netConf);
+ } else {
+	addNetworkConfig(new KGameDialogNetworkConfig(0));
  }
  if (msgConf) {
 	addMsgServerConfig(msgConf);
+ } else {
+	addMsgServerConfig(new KGameDialogMsgServerConfig(0));
  }
-
- if (d->mGamePage) {
-	addChatWidget(chatMsgid, 0, d->mGamePage);
+ if (d->mGamePage && chat) {
+	addChatWidget(chat, d->mGamePage);
  }
-
-// add the connection management system - ie the widget where the ADMIN can
-// kick players out
  if (d->mNetworkPage) {
-	addConnectionList(0, d->mNetworkPage);
+	// add the connection management system - ie the widget where the ADMIN can
+	// kick players out
+	if (connection) {
+		addConnectionList(connection, d->mNetworkPage);
+	} else {
+		addConnectionList(new KGameDialogConnectionConfig, d->mNetworkPage);
+	}
  }
-
-
-//AB: do we need a "Cancel" Button? currently removed
 }
 
 KGameDialog::~KGameDialog()
@@ -141,7 +145,7 @@ void KGameDialog::addGameConfig(KGameDialogGeneralConfig* conf)
 
 // kdDebug(11001) << "adding game config" << endl;
  d->mGameConfig = conf;
- d->mGamePage = addConfigPage(d->mGameConfig, i18n("Page"));
+ d->mGamePage = addConfigPage(d->mGameConfig, i18n("Game"));
 // QHGroupBox* b = new QHGroupBox(i18n("Game Configuration"), d->mGamePage);
 }
 
@@ -150,7 +154,6 @@ void KGameDialog::addNetworkConfig(KGameDialogNetworkConfig* netConf)
  if (!netConf) {
 	return;
  }
-// kdDebug(11001) << "adding network config" << endl;
  d->mNetworkConfig = netConf;
  if (networkConfig()) {
 	connect(networkConfig(), SIGNAL(signalInitConnection(bool&, bool&)), this,
@@ -167,10 +170,10 @@ void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
  d->mMsgServerPage = addConfigPage(msgConf, i18n("Message Server"));
 }
 
-void KGameDialog::addChatWidget(int chatMsgId, KGameDialogChatConfig* chat, QVBox* parent)
+void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, QVBox* parent)
 {
  if (!chat) {
-	chat = new KGameDialogChatConfig(chatMsgId, 0);
+	return;
  }
  if (!parent) {
 	parent = d->mGamePage;
@@ -186,7 +189,7 @@ void KGameDialog::addChatWidget(int chatMsgId, KGameDialogChatConfig* chat, QVBo
 void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, QVBox* parent)
 {
  if (!c) {
-	c = new KGameDialogConnectionConfig(0);
+	return;
  }
  if (!parent) {
 	parent = d->mNetworkPage;
