@@ -46,7 +46,7 @@ class KGameDialogConfigPrivate;
  * Base class for configuration widgets.
  *
  * You can inherit form this and implement @ref submitToKGame, @ref
- * setOwner and @ref setKGame to create your personal @reg KGame configuration widget :-)
+ * setOwner and @ref setKGame to create your personal @ref KGame configuration widget :-)
  * @short Base class for configuration widgets
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
@@ -361,7 +361,7 @@ protected slots:
 	 * disabled.
 	 * Set to true after a connection has been initialized to disable the
 	 * button!
-	 * @admin Whether this client is ADMIN.
+	 * @param admin Whether this client is ADMIN.
 	 **/
 	virtual void slotInitConnection(bool& connected, bool& admin);
 
