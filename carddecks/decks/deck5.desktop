@@ -1,8 +1,10 @@
 [KDE Cards]
 Name=Water
+Name[ar]=ماء
 Name[az]=Su
 Name[bg]=Вода
 Name[bn]=পানি
+Name[br]=Dou
 Name[bs]=Voda
 Name[ca]=Aigua
 Name[cs]=Voda
@@ -25,6 +27,7 @@ Name[it]=Acqua
 Name[ja]=水
 Name[ko]=물
 Name[lv]=Ūdens
+Name[mk]=Вода
 Name[mt]=Ilma
 Name[nb]=Vann
 Name[nn]=Vatn
