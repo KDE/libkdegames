@@ -1,11 +1,15 @@
 [KDE Backdeck]
 Name=AisleRiot
-Name[af]=AISLERIOT
+Name[af]=aisleriot
 Name[cs]=Pozdvižení v uličce
 Name[eo]=Simpla
 Name[is]=Óeirðir í Hagkaup
 Name[ko]=왕관
 Name[sv]=Kyrkouppror
 Name[uk]=Заколот на човні
+Name[vi]= AisleRiot
+Name[xh]=Uqhushululu lwesithuba phakathi kwemiqolo yezihlalo
+Name[xx]=xx
+Name[zu]=Udlame Lwendawo evulekileyo
 Preview=11.png
 PySol=yes
