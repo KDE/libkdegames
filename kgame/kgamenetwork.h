@@ -339,6 +339,13 @@ signals:
      */
     void signalClientDisconnected(Q_UINT32 clientID, bool broken);
 
+    /**
+     * This client gets or looses the admin status. See @ref
+     * KMessageClient::adminStatusChanged
+     * @param isAdmin True if this client gets the ADMIN status otherwise FALSE
+     **/
+    void signalAdminStatusChanged(bool isAdmin);
+
 protected:
     /**
      * @internal

@@ -171,6 +171,7 @@ bool KGameNetwork::connectToServer (const QString& host, Q_UINT16 port)
 
  kdDebug(11001) << "    about to set server" << endl;
  d->mMessageClient->setServer(host, port);
+ emit signalAdminStatusChanged(false); // as we delete the connection above isAdmin() is always false now!
 
  // OK: We say that we already have connected, but this isn't so yet!
  // If the connection cannot be established, it will look as being disconnected
@@ -368,9 +369,11 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
 }
 
 // -------------- slots for the signals of the client
-void KGameNetwork::slotAdminStatusChanged(bool /* isAdmin*/)
+void KGameNetwork::slotAdminStatusChanged(bool isAdmin)
 {
-  //FIXME TODO
+ emit signalAdminStatusChanged(isAdmin);
+
+// TODO: I'm pretty sure there are a lot of things that should be done here...
 }
 
 void KGameNetwork::Debug()

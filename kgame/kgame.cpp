@@ -867,7 +867,6 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
    {
      kdDebug(11001) << "=====>(Master) KGame::networkTransmission() - IdSetupGameContinue" << endl;
      setupGameContinue(stream, sender);
-     //syncRandom(); // done in load now
    }
    break;
    case KGameMessage::IdActivatePlayer:  // Activate Player
@@ -936,7 +935,8 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
    {
      int cid;
      stream >> cid;
-     kdDebug(11001) << "====> (CLIENT) KGame::slotNetworkTransmission:: Got IdGameSetupDone for client "<< cid << " we are =" << gameId() << endl;
+     kdDebug(11001) << "====> (CLIENT) KGame::slotNetworkTransmission:: Got IdGameSetupDone for client "
+             << cid << " we are =" << gameId() << endl;
      sendSystemMessage(gameId(), KGameMessage::IdGameConnected);
    }
    break;
@@ -1029,9 +1029,11 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   // MH: We cannot use have player here as it CHANGES in the loop
   // int havePlayers = cnt+playerCount()-inactivateIds.count();
   kdDebug(11001) << " havePlayers " << cnt+playerCount()-inactivateIds.count() << endl;
-  while (maxPlayers()< cnt+playerCount()-inactivateIds.count())
+  while (maxPlayers() < cnt+playerCount()-inactivateIds.count())
   {
-    kdDebug(11001) << "  Still to deacticvate " << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers() <<endl;
+    kdDebug(11001) << "  Still to deacticvate " 
+            << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers() 
+	    << endl;
     KPlayer *currentPlayer=0;
     int currentPriority=0x7fff; // MAX_UINT (16bit?) to get the maximum of the list
     // find lowest network priority which is not yet in the newPlayerList
@@ -1134,7 +1136,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   }
 
   // Only to the client first , as the client will add players
-  sendSystemMessage(sender, KGameMessage::IdGameSetupDone,sender);
+  sendSystemMessage(sender, KGameMessage::IdGameSetupDone, sender);
 }
 
 // called by the IdSetupGame Message - CLIENT SIDE

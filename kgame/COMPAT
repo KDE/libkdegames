@@ -29,6 +29,7 @@
              function
 20.09.2001  playerInputFinished(void->KPlayer *)
 --------------------- KGAME_ALPHA_1 --------------------- 
-
+06.10.2001  adding KGameNetwork::signalAdminStatusChanged - needed for
+            KGameDialog
 
 
