@@ -1282,8 +1282,13 @@ void KGame::slotServerDisconnected() // Client side
 
   for ( player=removeList.first(); player != 0; player=removeList.next() )
   {
-    kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
-    systemRemovePlayer(player,true); // no network necessary
+    bool remove = true;
+    emit signalReplacePlayerIO(player, &remove);
+    if (remove)
+    {
+      boDebug(11001) << " ---> Removing player " << player->id() <<  endl;
+      systemRemovePlayer(player,true); // no network necessary
+    }
   }
 
   setMaster();
@@ -1303,7 +1308,8 @@ void KGame::slotServerDisconnected() // Client side
   for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
   {
     int oldid=player->id();
-    player->setId(KGameMessage::createPlayerId(player->id(),gameId()));
+    d->mUniquePlayerNumber++;
+    player->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber,gameId()));
     kdDebug(11001) << "Player id " << oldid <<" changed to " << player->id() << " as we are now local" << endl;
   }
   // TODO clear inactive lists ?
