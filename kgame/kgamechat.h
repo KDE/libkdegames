@@ -88,7 +88,7 @@ public slots:
 	virtual void addMessage(const QString& fromName, const QString& message) { KChatBase::addMessage(fromName, message);}
 	virtual void addMessage(int fromId, const QString& message);
 
-	void slotReceiveMessage(int, const QByteArray&, int, int sender);
+	void slotReceiveMessage(int, const QByteArray&, Q_UINT32 receiver, Q_UINT32 sender);
 
 protected:
 	/**

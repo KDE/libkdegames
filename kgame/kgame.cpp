@@ -450,7 +450,7 @@ KRandomSequence* KGame::random() const
 { return d->mRandom; }
 
 
-bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
+bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
 {
  if (!player) {
    kdError(11001) << "KGame::sendPlayerInput(): NULL player" << endl;
@@ -466,7 +466,7 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
  return true;
 }
 
-bool KGame::playerInput(QDataStream &msg, KPlayer *player, int sender)
+bool KGame::playerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
 {
  if (!player) {
    kdError(11001) << "KGame::playerInput(): NULL player" << endl;
@@ -968,7 +968,7 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  sendSystemMessage(streamGS, KGameMessage::IdSetupGame, clientID);
 }
 
-bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const QString& group)
+bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, Q_UINT32 sender, const QString& group)
 {
 // AB: group must not be i18n'ed!! we should better use an id for group and use
 // a groupName() for the name // FIXME
@@ -981,10 +981,10 @@ bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const
  return true;
 }
 
-bool KGame::sendGroupMessage(const QDataStream &msg, int msgid, int sender, const QString& group)
+bool KGame::sendGroupMessage(const QDataStream &msg, int msgid, Q_UINT32 sender, const QString& group)
 { return sendGroupMessage(((QBuffer*)msg.device())->buffer(), msgid, sender, group); }
 
-bool KGame::sendGroupMessage(const QString& msg, int msgid, int sender, const QString& group)
+bool KGame::sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, const QString& group)
 {
  QByteArray buffer;
  QDataStream stream(buffer, IO_WriteOnly);
@@ -1067,7 +1067,7 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 bool KGame::addProperty(KGamePropertyBase* data)
 { return dataHandler()->addProperty(data); }
 
-bool KGame::sendPlayerProperty(QDataStream& s, int playerId)
+bool KGame::sendPlayerProperty(QDataStream& s, Q_UINT32 playerId)
 { return sendSystemMessage(s, KGameMessage::IdPlayerProperty, playerId); }
 
 void KGame::sendProperty(QDataStream& stream, bool& sent)

@@ -212,7 +212,7 @@ public:
      * Called by @ref KPlayer to send a player input to the @ref
      * KMessageServer.
      **/
-    virtual bool sendPlayerInput(QDataStream &msg,KPlayer *player,int sender=0);
+    virtual bool sendPlayerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
 
     /**
      * Called when a player input arrives from @ref KMessageServer.
@@ -221,7 +221,7 @@ public:
      * returns 0
      * TODO: documentation!!
      **/
-    virtual bool playerInput(QDataStream &msg,KPlayer *player,int sender=0);
+    virtual bool playerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
 
     // load/save
     /**
@@ -280,7 +280,7 @@ public:
     /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
-    bool sendPlayerProperty(QDataStream& s, int playerId);
+    bool sendPlayerProperty(QDataStream& s, Q_UINT32 playerId);
     
     KGamePropertyBase* findProperty(int id) const;
 
@@ -294,10 +294,10 @@ public:
      * @param group the group of the receivers
      * @return true if worked
      */
-    bool sendGroupMessage(const QByteArray& msg, int msgid, int sender, const QString& group);
-    bool sendGroupMessage(const QDataStream &msg, int msgid, int sender, const QString& group);
-    bool sendGroupMessage(int msg, int msgid, int sender, const QString& group);
-    bool sendGroupMessage(const QString& msg, int msgid, int sender, const QString& group);
+    bool sendGroupMessage(const QByteArray& msg, int msgid, Q_UINT32 sender, const QString& group);
+    bool sendGroupMessage(const QDataStream &msg, int msgid, Q_UINT32 sender, const QString& group);
+    bool sendGroupMessage(int msg, int msgid, Q_UINT32 sender, const QString& group);
+    bool sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, const QString& group);
 
     /**
      * This will either forward an incoming message to a specified player 
@@ -401,14 +401,14 @@ signals:
      * own methods and has to syncronise them over the network.
      * Reaction to this is usually a call to a KGame function.
      */
-    void signalNetworkData(int msgid,const QByteArray& buffer,int receiver,int sender);
+    void signalNetworkData(int msgid,const QByteArray& buffer, Q_UINT32 receiver, Q_UINT32 sender);
 
     /**
      * We got an network message. this can be used to notify us that something
      * changed. What changed can be seen in the message id. Whether this is
      * the best possible method to do this is unclear...
      */
-    void signalMessageUpdate(int msgid,int receiver,int sender);
+    void signalMessageUpdate(int msgid,Q_UINT32 receiver,Q_UINT32 sender);
     
     /**
      * a player left the game because of a broken connection!

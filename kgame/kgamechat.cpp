@@ -215,8 +215,8 @@ void KGameChat::setKGame(KGame* g)
 			this, SLOT(slotAddPlayer(KPlayer*)));
 	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
 			this, SLOT(slotRemovePlayer(KPlayer*)));
-	connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, int, int)),
-			this, SLOT(slotReceiveMessage(int, const QByteArray&, int, int)));
+	connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, Q_UINT32, Q_UINT32)),
+			this, SLOT(slotReceiveMessage(int, const QByteArray&, Q_UINT32, Q_UINT32)));
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
 	QList<KPlayer> playerList = *d->mGame->playerList();
@@ -284,7 +284,7 @@ void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
  }
 }
 
-void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, int receiver, int sender)
+void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QDataStream msg(buffer, IO_ReadOnly);
  if (msgid != messageId()) {
