@@ -25,8 +25,6 @@
 
 #include <qstring.h>
 #include <qobject.h>
-#include <qptrdict.h>
-
 
 class KGameIO;
 class KMessageClient;

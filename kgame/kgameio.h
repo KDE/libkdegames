@@ -23,7 +23,6 @@
 #ifndef __KGAMEIO_H__
 #define __KGAMEIO_H__
 
-
 #include <qstring.h>
 #include <qobject.h>
 

@@ -21,6 +21,7 @@
 #include <qlayout.h>
 #include <qhgroupbox.h>
 #include <qvbox.h>
+#include <qptrdict.h>
 
 #include <klistbox.h>
 #include <klocale.h>

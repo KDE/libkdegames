@@ -21,9 +21,10 @@
 #ifndef __KGAMEPROPERTYLIST_H_
 #define __KGAMEPROPERTYLIST_H_
 
-#include <qdatastream.h>
 #include <qvaluelist.h>
+
 #include <kdebug.h>
+
 #include "kgamemessage.h"
 #include "kgameproperty.h"
 #include "kgamepropertyhandler.h"

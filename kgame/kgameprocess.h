@@ -25,11 +25,11 @@
 
 #include <qstring.h>
 #include <qobject.h>
-#include <kgameproperty.h>
 #include <qfile.h>
+
+#include "kgameproperty.h"
 #include <krandomsequence.h>
 
-//class KGameClientProcess;
 class KPlayer;
 //class KMessageClient;
 //class KMessageServer;

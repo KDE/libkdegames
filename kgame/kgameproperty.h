@@ -22,7 +22,6 @@
 #define __KGAMEPROPERTY_H_
 
 #include <qdatastream.h>
-#include <qintdict.h>
 
 #include <kdebug.h>
 #include <typeinfo>
