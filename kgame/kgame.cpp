@@ -222,7 +222,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  // If there is additional data to be loaded before players are loaded then do
  // this here.
- emit signalLoadPrePlayer(stream);
+ emit signalLoadPrePlayers(stream);
 
  // Load Playerobjects
  uint playercount;
