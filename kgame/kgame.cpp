@@ -475,7 +475,7 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
  }
 
  kdDebug(11001) << "KGame: transmitting playerInput over network" << endl;
- sendSystemMessage(msg, (int)KGameMessage::IdPlayerInput, player->id() sender);
+ sendSystemMessage(msg, (int)KGameMessage::IdPlayerInput, player->id(), sender);
  return true;
 }
 
