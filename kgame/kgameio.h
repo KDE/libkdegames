@@ -193,12 +193,14 @@ public:
      * @param parent The parents widget whose keyboard events * should be grabbed
      */
     KGameKeyIO(QWidget *parent);
+    virtual ~KGameKeyIO();
+
     /**
      * The idendification of the IO
      *
      * @return KeyIO
      */
-    int rtti() const;
+    virtual int rtti() const;
 
 signals:
       /**
@@ -254,6 +256,8 @@ public:
      * @param trackmouse enables mouse tracking (gives mouse move events)
      */
     KGameMouseIO(QWidget *parent,bool trackmouse=false);
+    virtual ~KGameMouseIO();
+    
     /**
      * Manually activate or deactivate mouse tracking
      *
@@ -265,7 +269,7 @@ public:
      *
      * @return MouseIO
      */
-    int rtti() const; 
+    virtual int rtti() const; 
 
 signals:
       /**

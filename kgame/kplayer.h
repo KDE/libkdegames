@@ -353,8 +353,11 @@ public:
 
       // load/save
      /**
-      * Load a saved player, from file OR network. This function has
-      * to be overwritten or you need to connect to the load signal!
+      * Load a saved player, from file OR network. By default all @ref 
+      * KGameProperty objects in the @ref dataHandler of this player are loaded
+      * and saved when using load or @ref save. If you need to save/load more
+      * you have to replace this function (and @ref save). You will probably
+      * still want to call the default implementation additionally!
       * 
       * @param stream a data stream where you can stream the player from
       *
@@ -363,8 +366,7 @@ public:
       virtual bool load(QDataStream &stream);
 
      /**
-      * Save a player to a file OR to network. Otherwise the same as 
-      * the load function
+      * Save a player to a file OR to network. See also @ref load
       *
       * @param stream a data stream to load the player from
       *
