@@ -480,7 +480,7 @@ void KChatBase::saveConfig(KConfig* conf)
  conf->writeEntry("SystemMessageFont", systemMessageFont());
  conf->writeEntry("MaxMessages", maxItems());
 
- if (oldGroup != QString::null) {
+ if (!oldGroup.isNull()) {
 	conf->setGroup(oldGroup);
  }
 }
@@ -500,7 +500,7 @@ void KChatBase::readConfig(KConfig* conf)
  setSystemMessageFont(conf->readFontEntry("SystemMessageFont"));
  setMaxItems(conf->readNumEntry("MaxMessages", -1));
 
- if (oldGroup != QString::null) {
+ if (!oldGroup.isNull()) {
 	conf->setGroup(oldGroup);
  }
 }
