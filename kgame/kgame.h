@@ -39,6 +39,8 @@ class KGameSequence;
 class KGamePrivate;
 
 /**
+ * @short The main KDE game object
+ *
  * The KGame class is the central game object. A game basically
  * consists of following features:
  * - Player handling (add, remove,...)
@@ -49,12 +51,11 @@ class KGamePrivate;
  * - Network connection (for KGameNetwork)
  *
  * Example:
- * <pre>
+ * \code
  * KGame *game=new KGame;
- * </pre>
+ * \endcode
  *
  *
- * @short The main KDE game object
  * @author Martin Heni <martin@heni-online.de>
  *
  */
@@ -641,18 +642,18 @@ signals:
     * Is emmited after a client is successfully connected to the game.
     * The client id is the id of the new game client. An easy way to
     * check whether that's us is
-    * <pre>
+    * \code
     *   if (clientid==gameid()) .. // we joined
     *   else ... // someone joined the game
-    * </pre>
+    * \endcode
     * @param clientid - The id of the new client
     * @param me - our game pointer
     */
     void signalClientJoinedGame(Q_UINT32 clientid,KGame *me);
 
     /**
-    * This signal is emmited after a network partner left the
-    * game (either by a broken connection of voluntarily).
+    * This signal is emitted after a network partner left the
+    * game (either by a broken connection or voluntarily).
     * All changes to the network players have already be done.
     * If there are not enough players left, the game might have
     * been paused. To check this you get the old gamestatus
@@ -684,7 +685,7 @@ protected:
      * card or a piece you want to return FALSE to pause the game sequence
      * and then manually call @ref playerInputFinished to resume it.
      * Example:
-     * <pre>
+     * \code
      * bool MyClass::playerInput(QDataStream &msg,KPlayer *player)
      * {
      *   Q_INT32 move;
@@ -693,7 +694,7 @@ protected:
      *   endl;
      *   return true;
      * }
-     * </pre>
+     * \endcode
      *
      * @param msg the move message
      * @param player the player who did the move
@@ -740,9 +741,9 @@ protected:
     * the new client who wants to join and the third argument serves as return
     * parameter. All <em>player ID's</em> which are written into this list
     * will be <em>removed</em> from the created game. You do this by an
-    * <pre>
+    * \code
     * inactivate.append(player->id());
-    * </pre>
+    * \endcode
     *
     * @param oldplayer - the list of the network players
     * @param newplayer - the list of the client players

@@ -31,7 +31,9 @@ class KGame;
 class KProcess;
 
 /**
- *  The KGameIO class. This is the master class for
+ *  \short Base class for IO devices for games
+ *
+ *  This is the master class for
  *  creating IO game devices. You cannot use it directly.
  *  Either take one of the classes derived from it or
  *  you have to create your own IO class derived from it (more probably).
@@ -47,7 +49,7 @@ class KProcess;
  *
  *  To achieve this you have to make all of your player inputs through a
  *  KGameIO. You will usually call KGameIO::sendInput to do so. 
- *  }
+ *
  *  @author Martin Heni <martin@heni-online.de>
  */
 class KGameIO : public QObject
@@ -144,7 +146,7 @@ signals:
      * player about the turn change. 
      *
      * Example:
-     * <pre>
+     * \code
      *  void GameWindow::slotPrepareTurn(QDataStream &stream,bool b,KGameIO *input,bool * )
      *  {
      *    KPlayer *player=input->player();
@@ -152,7 +154,7 @@ signals:
      *    if (!b) return ;        // only do something on setTurn(true)
      *    stream << 1 << 2 << 3;  // Some data for the process
      *  }
-     * </pre>
+     * \endcode
      *
      * @param io the KGameIO object itself
      * @param stream the stream into which the move will be written
@@ -327,14 +329,14 @@ public:
      * Creates a computer player via a separate process. The process
      * name is given as fully qualified filename. 
      * Example:
-     * <pre>
+     * \code
      * KGameProcessIO *input;
      *   input=new KGameProcessIO(executable_file);
      *  connect(input,SIGNAL(signalPrepareTurn(QDataStream &,bool,KGameIO *,bool *)),
      *          this,SLOT(slotPrepareTurn(QDataStream &,bool,KGameIO *,bool *)));
      *  connect(input,SIGNAL(signalProcessQuery(QDataStream &,KGameProcessIO *)),
      *          this,SLOT(slotProcessQuery(QDataStream &,KGameProcessIO *)));
-     * </pre>
+     * \endcode
      *
      * @param name the filename of the process to start
      */
@@ -420,7 +422,7 @@ signals:
    * needs to calculate a move.
    *
    * Example:
-   * <pre>
+   * \code
    *  void GameWindow::slotProcessQuery(QDataStream &stream,KGameProcessIO *reply)
    *  {
    *    int no;
@@ -432,7 +434,7 @@ signals:
    *      reply->sendSystemMessage(out,4242,0,0);  // lets reply something...
    *    }
    *  }
-   * </pre>
+   * \endcode
    */
   void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
 
@@ -457,8 +459,10 @@ private:
 };
 
 /**
+ *  \brief KGameIO variant for real-time games
+ *
  *  The KGameComputerIO class. It is used to create a LOCAL computer player
- *  and communicate transparetly with it. 
+ *  and communicate transparently with it. 
  *  Question: Is this needed or is it overwritten anyway for a real game?
  *
  *  You most probably don't want to use this if you want to design a turn based
