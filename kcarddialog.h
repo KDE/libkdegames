@@ -76,11 +76,11 @@ class KCardDialogPrivate;
  * dialog (the scale box won't be shown if you don't provide this parameter).
  * You might want to check out QPixmap::xFrom which gives you access to
  * scaling. You can e.g. use
- * <pre>
+ * \code
  * QWMatrix m;
  * m.scale(s,s);
  * pixmap.xForm(m);
- * </pre>
+ * \endcode
  * to scale your pixmap.
  *
  * @author Martin Heni <martin@heni-online.de>
@@ -177,9 +177,9 @@ public:
    * Returns the default path to the card deck backsides. You want
    * to use this usually before the user used the card dialog the first
    * time to get a default deck. You can assume that
-   * <pre>
+   * \code
    *   getDefaultDeckPath()
-   * </pre>
+   * \endcode
    * is a valid deck.
    *
    * @return The default path
@@ -190,9 +190,9 @@ public:
    * Returns the default path to the card frontsides. You want
    * to use this usually before the user used the card dialog the first
    * time to get an default deck. You can assume that
-   * <pre>
+   * \code
    *   getCardPath(getDefaultCardPath(), *)
-   * </pre>
+   * \endcode
    * are valid cards for * from 1 to 52.
    *
    * @return returns the path to the card directory
