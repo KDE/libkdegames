@@ -17,14 +17,14 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include "ghighscores.h"
+#include "kexthighscore.h"
 
 #include <qlayout.h>
 
 #include <kdebug.h>
 
-#include "ghighscores_internal.h"
-#include "ghighscores_gui.h"
+#include "kexthighscore_internal.h"
+#include "kexthighscore_gui.h"
 
 
 namespace KExtHighscore

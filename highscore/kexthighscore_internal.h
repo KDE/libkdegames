@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kurl.h>
 
-#include "ghighscores.h"
+#include "kexthighscore.h"
 
 class QTextStream;
 class QTabWidget;

@@ -30,7 +30,7 @@
 #include <kpushbutton.h>
 #include <kdialogbase.h>
 
-#include "ghighscores.h"
+#include "kexthighscore.h"
 
 
 namespace KExtHighscore

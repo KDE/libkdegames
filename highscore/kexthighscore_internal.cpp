@@ -17,7 +17,7 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include "ghighscores_internal.h"
+#include "kexthighscore_internal.h"
 
 #include <qfile.h>
 #include <qlayout.h>
@@ -31,8 +31,8 @@
 #include <kdebug.h>
 
 #include "khighscore.h"
-#include "ghighscores.h"
-#include "ghighscores_gui.h"
+#include "kexthighscore.h"
+#include "kexthighscore_gui.h"
 
 
 namespace KExtHighscore
