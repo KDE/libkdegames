@@ -8,9 +8,9 @@ libkdegames_la_LIBADD  = $(top_builddir)/libkdegames/kgame/libkgame.la $(LIB_KSY
 picsdir = $(kde_datadir)/kdegames/pics
 pics_DATA = star.png
 
-libkdegames_la_SOURCES = kcarddialog.cpp kcard.cpp kstdgameaction.cpp \
+libkdegames_la_SOURCES = kcarddialog.cpp kstdgameaction.cpp \
 		kgamemisc.cpp khighscore.cpp kchatbase.cpp kchat.cpp
-include_HEADERS = kcard.h kgamemisc.h kcarddialog.h kstdgameaction.h \
+include_HEADERS = kgamemisc.h kcarddialog.h kstdgameaction.h \
 		khighscore.h kchatbase.h kchat.h
 
 INCLUDES = $(all_includes)
