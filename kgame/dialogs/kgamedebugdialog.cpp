@@ -29,13 +29,14 @@
 #include <klistbox.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kpushbutton.h>
+#include <kstdguiitem.h>
 
 #include <qlayout.h>
 #include <qstring.h>
 #include <qintdict.h>
 #include <qlabel.h>
 #include <qdatetime.h>
-#include <qpushbutton.h>
 
 #include <typeinfo>
 
@@ -241,7 +242,7 @@ void KGameDebugDialog::initMessagePage()
  d->mHideIdList = new KListBox(d->mMessagePage);
  layout->addMultiCellWidget(d->mHideIdList, 1, 8, 5, 6);
 
- QPushButton* clear = new QPushButton(i18n("Clear"), d->mMessagePage);
+ QPushButton* clear = new KPushButton(KStdGuiItem::clear(), d->mMessagePage);
  connect(clear, SIGNAL(pressed()), this, SLOT(slotClearMessages()));
  layout->addMultiCellWidget(clear, 10, 10, 0, 6);
  //TODO: "show all but..." and "show nothing but..."
