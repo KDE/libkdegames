@@ -110,7 +110,7 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
 KAction *KStdGameAction::gameNew(const QObject *recvr, const char *slot,
                              QObject *parent, const char *name )
 {
-    return new KAction(i18n("&New"), "gamenew",
+    return new KAction(i18n("&New"), "filenew",
                        KStdAccel::key(KStdAccel::New), recvr, slot, parent,
                        name ? name : stdName(New));
 }
@@ -118,7 +118,7 @@ KAction *KStdGameAction::gameNew(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::load(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
-    return new KAction(i18n("&Load..."), "gameload",
+    return new KAction(i18n("&Load..."), "fileopen",
                        KStdAccel::key(KStdAccel::Open), recvr, slot, parent,
                        name ? name : stdName(Load));
 }
@@ -126,7 +126,7 @@ KAction *KStdGameAction::load(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::save(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
-    return new KAction(i18n("&Save"), "gamesave",
+    return new KAction(i18n("&Save"), "filesave",
                        KStdAccel::key(KStdAccel::Save), recvr, slot, parent,
                        name ? name : stdName(Save));
 }
@@ -150,7 +150,7 @@ KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::print(const QObject *recvr, const char *slot,
                                                    QObject *parent, const char *name )
 {
-    return new KAction(i18n("&Print..."), "gameprint",
+    return new KAction(i18n("&Print..."), "fileprint",
                        KStdAccel::key(KStdAccel::Print), recvr, slot, parent,
                        name ? name : stdName(Print));
 }
@@ -158,7 +158,7 @@ KAction *KStdGameAction::print(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::end(const QObject *recvr, const char *slot,
                                                    QObject *parent, const char *name )
 {
-    return new KAction(i18n("&End game"), "gameend",
+    return new KAction(i18n("&End game"), "fileclose",
                        KStdAccel::key(KStdAccel::End), recvr, slot, parent,
                        name ? name : stdName(End));
 }
@@ -174,7 +174,8 @@ KAction *KStdGameAction::quit(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::carddecks(const QObject *recvr, const char *slot,
                                                   QObject *parent, const char *name )
 {
-    return new KAction(i18n("Configure &carddecks"), "carddeck",
+//AB: maybe we need an icon?
+    return new KAction(i18n("Configure &carddecks"), 
                        0, recvr, slot, parent,
                        name ? name : stdName(Carddecks));
 }
