@@ -211,6 +211,15 @@ void KGamePropertyHandler::lockProperties()
  }
 }
 
+void KGamePropertyHandler::flush()
+{
+ QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ while (it.current()) {
+	if (it.current()->isDirty()) it.current()->sendProperty();
+	++it;
+ }
+}
+
 void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
 {
  emit signalPropertyChanged(prop);

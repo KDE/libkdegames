@@ -92,7 +92,7 @@ void KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, QStrin
  }
 }
 
-bool KGamePropertyBase::sendProperty()//obsolete
+bool KGamePropertyBase::sendProperty()
 {
  QByteArray b;
  QDataStream s(b, IO_WriteOnly);

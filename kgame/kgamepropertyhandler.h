@@ -227,6 +227,12 @@ public:
 	 **/
 	void lockProperties();
 
+  /**
+   * Sends all properties which are marked dirty over the network. This will
+   * make a forced synchornisation of the properties and mark them all not dirty.
+   **/
+  void flush();
+
 	/**
 	 * Reference to the internal dictionary
 	 **/
