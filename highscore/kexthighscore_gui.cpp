@@ -518,7 +518,7 @@ bool ConfigDialog::save()
 
 //-----------------------------------------------------------------------------
 AskNameDialog::AskNameDialog(QWidget *parent)
-    : KDialogBase(Plain, i18n("Enter Your Nickname"), Ok | Cancel, Cancel,
+    : KDialogBase(Plain, i18n("Enter Your Nickname"), Ok | Cancel, Ok,
                   parent, "ask_name_dialog")
 {
     internal->hsConfig().readCurrentConfig();
