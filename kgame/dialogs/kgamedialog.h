@@ -274,20 +274,20 @@ protected:
 
 protected slots:
 	/**
-	 * Called when the user clicks on Ok. Calles @ref slotApply and @ref
+	 * Called when the user clicks on Ok. Calls @ref slotApply and @ref
 	 * QDialog::accept()
 	 **/
 	virtual void slotOk();
 
 	/**
-	 * Just calles @ref submitToKGame()
+	 * Just calls @ref submitToKGame()
 	 **/
 	virtual void slotApply();
 
 	/**
 	 * Sets the default values for the configuration widgets. Set these
 	 * values by (e.g.) @ref setDefaultMaxPlayers()
-	 * OBSOLTETE!!!
+	 * OBSOLETE!!!
 	 **/
 	virtual void slotDefault();
 
