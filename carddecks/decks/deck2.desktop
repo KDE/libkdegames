@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Starrise
 Name[bg]=Звезди
+Name[bn]=তারার উদয়
 Name[ca]=Estrellat
 Name[cs]=Úsvit
 Name[de]=Sternenaufgang
@@ -25,8 +26,10 @@ Name[ru]=Восход звезды
 Name[sk]=Východ hviezd
 Name[sl]=Vzhod zvezde
 Name[sr]=Сазвежђе
+Name[sr@Latn]=Sazvežđe
 Name[sv]=Stjärnuppgång
 Name[ta]=நட்சத்திர உதயம்
+Name[tg]=Пайдоиши ситора
 Name[uk]=Схід зірки
 Name[ven]=Vhubva naledzi
 Name[xh]=Inkwenkwezi ephumayo
