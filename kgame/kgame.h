@@ -25,6 +25,7 @@
 
 #include <qstring.h>
 #include <qlist.h>
+#include <qvaluelist.h>
 
 #include "kgamenetwork.h"
 
