@@ -233,15 +233,15 @@ KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 { delete d; } 
 
 void KGameDialogGeneralConfig::setMaxPlayers(int m)
-{ d->mMaxPlayers = (KIntNumInput *)m; }
-void KGameDialogGeneralConfig::setPlayerName(const QString& name)
-{ d->mName->setText(name); }
+{ d->mMaxPlayers->setValue(m); }
 void KGameDialogGeneralConfig::setMinPlayers(int m)
-{ d->mMinPlayers = (KIntNumInput *)m; }
+{ d->mMinPlayers->setValue(m); }
 int KGameDialogGeneralConfig::minPlayers() const
 { return d->mMinPlayers->value(); }
 int KGameDialogGeneralConfig::maxPlayers() const
 { return d->mMaxPlayers->value(); }
+void KGameDialogGeneralConfig::setPlayerName(const QString& name)
+{ d->mName->setText(name); }
 QString KGameDialogGeneralConfig::playerName() const
 { return d->mName->text(); }
 QGridLayout* KGameDialogGeneralConfig::layout() const
@@ -260,7 +260,6 @@ void KGameDialogGeneralConfig::setOwner(KPlayer* p)
  }
  connect(owner(), SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
- kdDebug(11001) << "name: " << p->name() << endl;
  setPlayerName(p->name());
  //TODO: connect signalPropertyChanged and check for playername changes!
 }
