@@ -1,0 +1,12 @@
+This directory contains all carddecks fro KDE cardgames.
+
+The backsides of the cards are stored as PNG images in
+the directory decks as deck0.png, deck1.png, ...
+
+The cardsets with 52 cards are stored in the directories
+cards1,cards2,cards3,... where each directory contains 52
+PNG images of the cards labels 1.png,2.png,...52.png
+
+Access to these cards works by using the kcardialog library
+in libkdegames. See for documentation there.
+
