@@ -42,6 +42,8 @@ class KGameDialogConfig;
 class KGameDialogGeneralConfig;
 class KGameDialogNetworkConfig;
 class KGameDialogMsgServerConfig;
+class KGameDialogChatConfig;
+class KGameDialogConnectionConfig;
 
 class KGameDialogPrivate;
 /**
@@ -139,8 +141,34 @@ public:
 	virtual void submitToKGame();
 
 
-	void addChatWidget(int msgid);
-	void addConnectionList();
+	/**
+	 * Adds a @ref KGameChat to the dialog. If no parent is specified the
+	 * game page will be used.
+	 * @parent msgid The Chat message ID. See @ref KGameChat::KGameChat for
+	 * more information
+	 * @parent The parent of the chat widget. Note that the game page will
+	 * be used if parent is 0.
+	 * @param chat If you sub-class @ref KGameDialogChatConfig you can use
+	 * your own chat widget. If chat is 0 the default @ref
+	 * KGameDialogChatWidget is used.
+	 **/
+	void addChatWidget(int msgid, KGameDialogChatConfig* chat = 0, QVBox* parent = 0);
+
+
+	/**
+	 * Add a connection list to the dialog. The list consists of a @ref
+	 * KLisBox containing all players in the current game (see @ref
+	 * KGame::playerList). The admin can "ban" players, ie kick them out of
+	 * the game.
+	 *
+	 * This is another not-really-config-config-widget. It just displays the
+	 * connections and lets you ban players.
+	 * @param c If 0 a standard @ref KGameDialogConnectionConfig is created,
+	 * otherwise you custom widget is used.
+	 * @param parent The parent of the widget. If 0 the @ref networkConfig
+	 * page is used.
+	 **/
+	void addConnectionList(KGameDialogConnectionConfig* c = 0, QVBox* parent = 0);
 
 	
 	/**
@@ -164,8 +192,6 @@ protected:
 	KGameDialogNetworkConfig* networkConfig() const;
 	KGameDialogGeneralConfig* gameConfig() const;
 
-	QVBoxLayout* layout() const;//AB: really ugly!
-
 	/**
 	 * Go through all config widgets and call their @ref
 	 * KGameDialogConfig::setKGame and @ref KGameDialogConfig::setOwner implementation
@@ -177,28 +203,6 @@ protected:
 
 
 protected slots:
-	/**
-	 * This slots reacts to all changes in KGame::playerList(), like new
-	 * player joined or player left the game.
-	 *
-	 * Not very nice though, as this just rebuilds the local player list.
-	 **/
-	void slotPlayerChanged(KPlayer*);
-
-	/**
-	 * Ban a player from the game. The player still can connect again!
-	 * @param item The entry of the player
-	 **/
-	void slotKickPlayerOut(QListBoxItem* item);
-
-	/*
-	 * @ref KGameChat has its own slotPropertyChanged but we need another
-	 * one for the list of all connected players, here
-	 * @param prop The property that has changed
-	 * @param player The owner of the property
-	 **/
-	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player);
-
 	/**
 	 * Called when the user clicks on Ok. Calles @ref slotApply and @ref
 	 * QDialog::accept()
@@ -229,12 +233,18 @@ protected slots:
 	 **/
 	virtual void slotInitConnection(bool& connected, bool& admin);
 
+	/**
+	 * Called when the @ref KGame object is destroyed. Calls setKGame(0) so
+	 * that all widgets can disconnect their slots and so on.
+	 **/
+	void slotUnsetKGame();
+
 private:
 //	void init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf);
 	void init(KGameDialogGeneralConfig* conf, 
 			KGameDialogNetworkConfig* netConf, 
 			KGameDialogMsgServerConfig* msgServerConfig, 
-			KGame*, const QString& title, KPlayer*, int chatMsgid);
+			KGame*, KPlayer*, int chatMsgid);
 	KGameDialogPrivate* d;
 };
 

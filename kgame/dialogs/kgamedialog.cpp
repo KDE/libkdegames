@@ -19,19 +19,13 @@
 */
 
 #include <qlayout.h>
-#include <qhgroupbox.h>
 #include <qvbox.h>
-#include <qptrdict.h>
 
-#include <klistbox.h>
 #include <klocale.h>
-#include <kmessagebox.h>
 
-#include "kgameconnectdialog.h"
+#include "kgameconnectdialog.h"//maybe in KGameDialogNetworkConfig?
 #include "kgame.h"
-#include "kgamechat.h"
 #include "kplayer.h"
-#include "kgameproperty.h"
 #include "kgamedialogconfig.h"
 
 #include "kgamedialog.h"
@@ -43,17 +37,16 @@ class KGameDialogPrivate
 public:
 	KGameDialogPrivate() 
 	{
-		mTopLayout = 0;
-		mNetworkConfig = 0;
-		mGameConfig = 0;
-		mChat = 0;
-		mPlayers = 0;
-		mOwner = 0;
-		mGame = 0;
 		mGamePage = 0;
 		mNetworkPage = 0;
 		mMsgServerPage = 0;
+		mTopLayout = 0;
 
+		mNetworkConfig = 0;
+		mGameConfig = 0;
+
+		mOwner = 0;
+		mGame = 0;
 	}
 
 	QVBox* mGamePage;
@@ -62,9 +55,6 @@ public:
 	QVBoxLayout* mTopLayout;
 	KGameDialogNetworkConfig* mNetworkConfig;
 	KGameDialogGeneralConfig* mGameConfig;
-	KGameChat* mChat;
-	KListBox* mPlayers;
-	QPtrDict<KPlayer> mItem2Player;
 
 // a list of all config widgets added to this dialog
 	QList<KGameDialogConfig> mConfigWidgets;
@@ -72,7 +62,6 @@ public:
 // for KGameConnectDialog
 	unsigned short int mPort;
 	QString mHost;
-
 
 // just pointers:
 	KPlayer* mOwner;
@@ -84,7 +73,7 @@ KGameDialog::KGameDialog(KGameDialogGeneralConfig* config, KGameDialogNetworkCon
 	KGame* g, KPlayer* owner, const QString& title, QWidget* parent, bool modal, int chatMsgid)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply, Ok, parent, 0, modal, true)
 {
- init(config, netConf, msgConf, g, title, owner, chatMsgid);
+ init(config, netConf, msgConf, g, owner, chatMsgid);
 }
 
 
@@ -93,15 +82,15 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, QWidget
 	Ok, parent, 0, modal, true)
 {
 // make msgserver parameter configurable!
- init(new KGameDialogGeneralConfig(0), new KGameDialogNetworkConfig(0), new KGameDialogMsgServerConfig(0), g, title, owner, chatMsgid);
+ init(new KGameDialogGeneralConfig(0), new KGameDialogNetworkConfig(0), 
+		new KGameDialogMsgServerConfig(0), g, owner, chatMsgid);
 
 }
 
 void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig* netConf,
 	KGameDialogMsgServerConfig* msgConf, 
-	KGame* g, const QString& title, KPlayer* owner, int chatMsgid)
+	KGame* g, KPlayer* owner, int chatMsgid)
 {
-//TODO title
 // kdDebug(11001) << "CONSTRUCT KGameDialog" << this << endl;
  d = new KGameDialogPrivate;
 
@@ -118,19 +107,18 @@ void KGameDialog::init(KGameDialogGeneralConfig* conf, KGameDialogNetworkConfig*
 	addMsgServerConfig(msgConf);
  }
 
-//AB: do we need a "Cancel" Button? currently removed
-
-// addConfigPages();
- addChatWidget(chatMsgid);
+ if (d->mGamePage) {
+	addChatWidget(chatMsgid, 0, d->mGamePage);
+ }
 
 // add the connection management system - ie the widget where the ADMIN can
 // kick players out
- addConnectionList();
-
-// the owner of the dialog
- if (owner) {
-	setOwner(owner);
+ if (d->mNetworkPage) {
+	addConnectionList(0, d->mNetworkPage);
  }
+
+
+//AB: do we need a "Cancel" Button? currently removed
 }
 
 KGameDialog::~KGameDialog()
@@ -179,6 +167,39 @@ void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
  d->mMsgServerPage = addConfigPage(msgConf, i18n("Message Server"));
 }
 
+void KGameDialog::addChatWidget(int chatMsgId, KGameDialogChatConfig* chat, QVBox* parent)
+{
+ if (!chat) {
+	chat = new KGameDialogChatConfig(chatMsgId, 0);
+ }
+ if (!parent) {
+	parent = d->mGamePage;
+ }
+ if (!parent) {
+	kdError(11001) << "cannot add chat widget without page" << endl;
+	return;
+ }
+// QHGroupBox* b = new QHGroupBox(i18n("Chat"), parent);
+ addConfigWidget(chat, parent);
+}
+
+void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, QVBox* parent)
+{
+ if (!c) {
+	c = new KGameDialogConnectionConfig(0);
+ }
+ if (!parent) {
+	parent = d->mNetworkPage;
+ }
+ if (!parent) {
+	kdError(11001) << "Cannot add connection list without page" << endl;
+	return;
+ }
+
+// QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), parent);
+ addConfigWidget(c, parent);
+}
+
 QVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
 {
  if (!widget) {
@@ -213,118 +234,16 @@ void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
  } else {
 	widget->setOwner(d->mOwner);
  }
+ //TODO: call setAdmin?
  widget->show();
 }
 
-void KGameDialog::addChatWidget(int chatMsgId)
-{
-// kdDebug(11001) << "adding chat widget" << endl;
- if (!d->mGamePage) {
-	kdError(11001) << "cannot add chat widget without game page" << endl;
- }
- QHGroupBox* b = new QHGroupBox(i18n("Chat"), d->mGamePage);
- d->mChat = new KGameChat(d->mGame, chatMsgId, b);
-}
-
-void KGameDialog::addConnectionList()
-{
- if (!d->mNetworkPage) {
-	kdWarning(11001) << "Cannot add connection list without network page" << endl;
-	return;
- }
-// kdDebug(11001) << "adding connection list" << endl;
- //TODO: prevent player to ban himself
-
- if (!d->mNetworkPage) {
-	kdError(11001) << "cannot add connection list without network page" << endl;
-	return;
- }
- QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), d->mNetworkPage);
- d->mPlayers = new KListBox(b);
-// h->addWidget(b, 1);
- if (d->mGame->isAdmin()) {
-	connect(d->mPlayers, SIGNAL(executed(QListBoxItem*)), this, 
-			SLOT(slotKickPlayerOut(QListBoxItem*)));
- }
-
-// react to changes in KGame::playerList()
- connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)), 
-		this, SLOT(slotPlayerChanged(KPlayer*)));
- connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
-		this, SLOT(slotPlayerChanged(KPlayer*)));
-}
-
-QVBoxLayout* KGameDialog::layout() const 
-{ return d->mTopLayout; }
 KGameDialogGeneralConfig* KGameDialog::gameConfig() const
 { return d->mGameConfig; }
 KGameDialogNetworkConfig* KGameDialog::networkConfig() const
 { return d->mNetworkConfig; }
 void KGameDialog::setDefaultNetworkInfo(unsigned short int p, const QString& h)
 { d->mPort = p; d->mHost = h; }
-
-
-void KGameDialog::slotPlayerChanged(KPlayer*)
-{
- QPtrDictIterator<KPlayer> it(d->mItem2Player);
- while (it.current()) {
-	// disconnect everything first
-	this->disconnect(it.current());
-	++it;
- }
- d->mItem2Player.clear();
- d->mPlayers->clear();
-
- KGame::KGamePlayerList l = *d->mGame->playerList();
- for (KPlayer* p = l.first(); p; p = l.next()) {
-	QListBoxText* t = new QListBoxText(p->name());
-	d->mItem2Player.insert(t, p);
-	d->mPlayers->insertItem(t);
-
-	connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
-			this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
- }
-}
-
-void KGameDialog::slotKickPlayerOut(QListBoxItem* item)
-{
- KPlayer* p = d->mItem2Player[item];
- if (!d->mGame || !d->mGame->isAdmin() || !p) {
-	return;
- }
-
- if (p == d->mOwner) { // you wanna ban the ADMIN ??
-	return;
- }
-
- if (KMessageBox::questionYesNo(this, 
-		i18n("Do you want to ban player \"%1\" from the game?").arg(p->name())) == KMessageBox::Yes) {
-	kdDebug(11001) << "will remove player " << p << endl;
-	d->mGame->removePlayer(p);
-	d->mPlayers->removeItem(d->mPlayers->index(item));
-	slotPlayerChanged(p);
- } else {
-	kdDebug(11001) << "will NOT remove player " << p << endl;
- }
-}
-
-void KGameDialog::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
-{
- if(prop->id() == KGamePropertyBase::IdName) {
-	QListBoxText* old = 0;
-	QPtrDictIterator<KPlayer> it(d->mItem2Player);
-	while (it.current() && !old) {
-		if (it.current() == player) {
-			old = (QListBoxText*)it.currentKey();
-		}
-		++it;
-	}
-	QListBoxText* t = new QListBoxText(player->name());
-	d->mPlayers->changeItem(t, d->mPlayers->index(old));
-	d->mItem2Player.remove(old);
-	d->mItem2Player.insert(t, player);
- }
-}
 
 void KGameDialog::slotApply()
 {
@@ -375,30 +294,37 @@ void KGameDialog::setOwner(KPlayer* owner)
 //AB: note: NULL player is ok!
  d->mOwner = owner;
  for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
-	d->mConfigWidgets.at(i)->setOwner(d->mOwner);
+	if (d->mConfigWidgets.at(i)) {
+		d->mConfigWidgets.at(i)->setOwner(d->mOwner);
+		//TODO: hide playerName in KGameDialogGeneralConfig
+	} else {
+		kdError(11001) << "NULL widget??" << endl;
+	}
  }
 
- if (d->mChat) {
+/* if (d->mChat) {
 	if (!d->mOwner) {
 		d->mChat->hide();
-		//TODO: hide playerName in KGameDialogGeneralConfig
 	} else {
 		d->mChat->setFromPlayer(d->mOwner);
 	}
- }
+ }*/
 }
 
 void KGameDialog::setKGame(KGame* g)
 {
- if (!g) {
-	kdError(11001) << "Cannot add NULL KGame!" << endl;
-	return;
+ if (d->mGame) {
+	disconnect(d->mGame, 0, this, 0);
  }
  d->mGame = g;
+ connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
  for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
 	d->mConfigWidgets.at(i)->setKGame(d->mGame);
  }
 }
+
+void KGameDialog::slotUnsetKGame() // called when KGame is destroyed
+{ setKGame(0); }
 
 void KGameDialog::submitToKGame()
 {

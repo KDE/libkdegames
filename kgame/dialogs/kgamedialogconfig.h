@@ -215,4 +215,49 @@ protected:
 private:
 	KGameDialogMsgServerConfigPrivate* d;
 };
+
+class KGameDialogChatConfigPrivate;
+/**
+ * This is not really a configuration widget but rather a simple chat widget.
+ * This widget does nothing but just providing a @ref KGameChat object.
+ **/
+class KGameDialogChatConfig : public KGameDialogConfig
+{
+	Q_OBJECT
+public:
+	KGameDialogChatConfig(int chatMsgId, QWidget* parent);
+	~KGameDialogChatConfig();
+
+	virtual void setKGame(KGame*);
+	virtual void setOwner(KPlayer*);
+
+	virtual void submitToKGame(KGame*, KPlayer*) {}
+
+private:
+	KGameDialogChatConfigPrivate* d;
+};
+
+class KGameDialogConnectionConfigPrivate;
+class KGameDialogConnectionConfig : public KGameDialogConfig
+{
+	Q_OBJECT
+public:
+	KGameDialogConnectionConfig(QWidget* parent);
+	~KGameDialogConnectionConfig();
+
+	virtual void setKGame(KGame*);
+	virtual void setOwner(KPlayer*);
+	virtual void setAdmin(bool admin);
+
+	virtual void submitToKGame(KGame*, KPlayer*) {}
+
+protected slots:
+	void slotPlayerChanged(KPlayer*);
+	void slotKickPlayerOut(QListBoxItem* item);
+	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p);
+
+private:
+	KGameDialogConnectionConfigPrivate* d;
+		
+};
 #endif

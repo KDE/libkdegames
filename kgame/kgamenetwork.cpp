@@ -306,14 +306,16 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
 // kdDebug(11001) << "------ receiveNetworkTransmission(): id=" << msgid << " sender=" << sender << " recv=" << receiver << endl;
 
- kdDebug(11001) << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
+// kdDebug(11001) << "============= ReceiveNetworkTransmission (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
  // No broadcast : receiver==0
  // No player isPlayer(receiver)
  // Different game gameId()!=receiver
  if (receiver &&  receiver!=gameId() && !KGameMessage::isPlayer(receiver) ) 
  {
    // receiver=0 is broadcast or player message
-   kdDebug(11001) << "KGameNetwork::receiveNetworkTransmission: Message not meant for us " << gameId() << "!=" << receiver << " rawid=" << KGameMessage::rawGameId(receiver) << endl;
+   kdDebug(11001) << "KGameNetwork::receiveNetworkTransmission: Message not meant for us " 
+            << gameId() << "!=" << receiver << " rawid=" 
+	    << KGameMessage::rawGameId(receiver) << endl;
    return;
  }
  else if (msgid==KGameMessage::IdError)

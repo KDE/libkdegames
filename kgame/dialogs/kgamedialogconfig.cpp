@@ -19,18 +19,22 @@
 */
 
 #include <qlayout.h>
-//#include <qhgroupbox.h>
+#include <qhgroupbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qvbox.h>
+#include <qptrdict.h>
 
 #include <klocale.h>
 #include <knuminput.h>
 #include <kdialog.h>
+#include <klistbox.h>
+#include <kmessagebox.h>
 
 #include "kgame.h"
 #include "kplayer.h"
+#include "kgamechat.h"
 
 #include "kgamedialogconfig.h"
 
@@ -412,3 +416,186 @@ void KGameDialogMsgServerConfig::setHasMsgServer(bool has)
 	d->noMaster = 0;
  }
 }
+
+
+class KGameDialogChatConfigPrivate
+{
+public:
+	KGameDialogChatConfigPrivate()
+	{
+		mChat = 0;
+	}
+
+	KGameChat* mChat;
+};
+
+KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent) 
+		: KGameDialogConfig(parent)
+{
+ d = new KGameDialogChatConfigPrivate;
+ QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ topLayout->setAutoAdd(true);
+ QHGroupBox* b = new QHGroupBox(i18n("Chat"), this);
+ d->mChat = new KGameChat(0, chatMsgId, b);
+}
+
+KGameDialogChatConfig::~KGameDialogChatConfig()
+{
+ delete d;
+}
+
+void KGameDialogChatConfig::setKGame(KGame* game)
+{
+ d->mChat->setKGame(game);
+ if (!game) {
+	hide();
+ } else {
+	show();
+ }
+}
+
+void KGameDialogChatConfig::setOwner(KPlayer* owner) 
+{
+ if (!owner) {
+	hide();
+	return;
+ }
+ d->mChat->setFromPlayer(owner);
+ show();
+}
+
+
+
+class KGameDialogConnectionConfigPrivate
+{
+public:
+	KGameDialogConnectionConfigPrivate()
+	{
+		mPlayers = 0;
+		mGame = 0;
+		mOwner = 0;
+	}
+
+	QPtrDict<KPlayer> mItem2Player;
+	KListBox* mPlayers;
+	KGame* mGame;
+	KPlayer* mOwner;
+};
+
+KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
+		: KGameDialogConfig(parent)
+{
+ //TODO: prevent player to ban himself 
+ d = new KGameDialogConnectionConfigPrivate;
+ QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ topLayout->setAutoAdd(true);
+ QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), this);
+ d->mPlayers = new KListBox(b);
+
+}
+
+KGameDialogConnectionConfig::~KGameDialogConnectionConfig()
+{
+ delete d;
+}
+
+void KGameDialogConnectionConfig::setKGame(KGame* g)
+{
+ if (d->mGame) {
+	disconnect(d->mGame, 0, this, 0);
+ }
+ d->mGame = g;
+ if (d->mGame) {
+// react to changes in KGame::playerList()
+	connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)),
+			this, SLOT(slotPlayerChanged(KPlayer*)));
+	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)),
+			this, SLOT(slotPlayerChanged(KPlayer*)));
+ }
+ slotPlayerChanged(0);
+}
+
+void KGameDialogConnectionConfig::setOwner(KPlayer* p)
+{
+ d->mOwner = p;
+}
+
+void KGameDialogConnectionConfig::setAdmin(bool admin)
+{
+ if (!d->mGame) {
+	return;
+ }
+ disconnect(d->mGame, SIGNAL(executed(QListBoxItem*)), this, 0);
+ if (admin) {
+	connect(d->mPlayers, SIGNAL(executed(QListBoxItem*)), this,
+			SLOT(slotKickPlayerOut(QListBoxItem*)));
+ }
+}
+
+void KGameDialogConnectionConfig::slotPlayerChanged(KPlayer* )
+{
+ QPtrDictIterator<KPlayer> it(d->mItem2Player);
+ while (it.current()) {
+	// disconnect everything first
+	this->disconnect(it.current());
+	++it;
+ }
+ d->mItem2Player.clear();
+ d->mPlayers->clear();
+
+ if (!d->mGame) {
+	return;
+ }
+
+ KGame::KGamePlayerList l = *d->mGame->playerList();
+ for (KPlayer* p = l.first(); p; p = l.next()) {
+	QListBoxText* t = new QListBoxText(p->name());
+	d->mItem2Player.insert(t, p);
+	d->mPlayers->insertItem(t);
+
+	connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
+			this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+ }
+}
+
+void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
+{
+ KPlayer* p = d->mItem2Player[item];
+ if (!d->mGame || !d->mGame->isAdmin() || !p) {
+	return;
+ }
+
+ if (p == d->mOwner) { // you wanna ban the ADMIN ??
+	return;
+ }
+		       
+ if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?").arg(
+		p->name())) == KMessageBox::Yes) {
+	kdDebug(11001) << "will remove player " << p << endl;
+	d->mGame->removePlayer(p);
+	d->mPlayers->removeItem(d->mPlayers->index(item));
+	slotPlayerChanged(p);
+ } else {
+	kdDebug(11001) << "will NOT remove player " << p << endl;
+ }
+}
+
+void KGameDialogConnectionConfig::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
+{
+ if(prop->id() == KGamePropertyBase::IdName) {
+	QListBoxText* old = 0;
+	QPtrDictIterator<KPlayer> it(d->mItem2Player);
+	while (it.current() && !old) {
+		if (it.current() == player) {
+			old = (QListBoxText*)it.currentKey();
+		}
+		++it;
+	}
+	QListBoxText* t = new QListBoxText(player->name());
+	d->mPlayers->changeItem(t,
+	d->mPlayers->index(old));
+	d->mItem2Player.remove(old);
+	d->mItem2Player.insert(t, player);
+ }
+}
+

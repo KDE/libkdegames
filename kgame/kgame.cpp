@@ -94,7 +94,7 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this, i18n("MinPlayers"));
  d->mMinPlayer.initData(0);   // Always ok     
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
- d->mGameStatus.initData(End);
+ d->mGameStatus.initData(Init);
  d->mUniquePlayerNumber = 0;
  d->mCookie=cookie;
  d->mRandom = new KRandomSequence;

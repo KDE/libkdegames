@@ -443,7 +443,7 @@ public:
 	 **/
 	void setLocal(type v) 
 	{
-		kdDebug(11001) << "setLocal" << endl;
+//		kdDebug(11001) << "setLocal" << endl;
 		if (!mLocalData) {
 			mLocalData = new type;
 		}

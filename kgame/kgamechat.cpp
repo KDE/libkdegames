@@ -105,6 +105,10 @@ void KGameChat::returnPressed(const QString& text)
 	kdWarning(11001) << "KGameChat: You must set a player first!" << endl;
 	return;
  }
+ if (!d->mGame) {
+	kdWarning(11001) << "KGameChat: You must set a game first!" << endl;
+	return;
+ }
 
  kdDebug(11001) << "from: " << d->mFromPlayer->id() << "==" << d->mFromPlayer->name() << endl;
 
@@ -206,17 +210,20 @@ void KGameChat::setKGame(KGame* g)
 	slotUnsetKGame();
  }
  d->mGame = g;
- connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)), 
-		this, SLOT(slotAddPlayer(KPlayer*)));
- connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
-		this, SLOT(slotRemovePlayer(KPlayer*)));
- connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, int, int)),
-		this, SLOT(slotReceiveMessage(int, const QByteArray&, int, int)));
- connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
- QList<KPlayer> playerList = *d->mGame->playerList();
- for (int unsigned i = 0; i < playerList.count(); i++) {
-	slotAddPlayer(playerList.at(i));
+ if (g) {
+	connect(d->mGame, SIGNAL(signalPlayerJoinedGame(KPlayer*)), 
+			this, SLOT(slotAddPlayer(KPlayer*)));
+	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
+			this, SLOT(slotRemovePlayer(KPlayer*)));
+	connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, int, int)),
+			this, SLOT(slotReceiveMessage(int, const QByteArray&, int, int)));
+	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
+
+	QList<KPlayer> playerList = *d->mGame->playerList();
+	for (int unsigned i = 0; i < playerList.count(); i++) {
+		slotAddPlayer(playerList.at(i));
+	}
  }
 }
 
