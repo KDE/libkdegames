@@ -356,25 +356,30 @@ void KGameIO::initIO(KPlayer *p)
 
 void KGameIO::notifyTurn(bool b)
 {
+  if (!player())
+  {
+    kdWarning(11001) << "KGameIO::notifyTurn(): player() is NULL" << endl;
+    return;
+  }
   bool sendit=false;
   QByteArray buffer;
   QDataStream stream(buffer,IO_WriteOnly);
-  if (player())
+  emit signalPrepareTurn(stream, b, this, sendit);
+  if (sendit)
   {
-    emit signalPrepareTurn(stream, b, this, sendit);
-    if (sendit)
-    {
-      QDataStream ostream(buffer,IO_ReadOnly);
-      Q_UINT32 sender = player()->id();  // force correct sender
-      kdDebug(11001) << "Prepare turn sendInput" << endl;
-      sendInput(ostream,true,sender);
-    }
+    QDataStream ostream(buffer,IO_ReadOnly);
+    Q_UINT32 sender = player()->id();  // force correct sender
+    kdDebug(11001) << "Prepare turn sendInput" << endl;
+    sendInput(ostream,true,sender);
   }
 }
 
 KGame* KGameIO::game() const
 {
-  if (!player()) return 0;
+  if (!player()) 
+  {
+    return 0;
+  }
   return player()->game();
 }
 

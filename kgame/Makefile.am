@@ -11,9 +11,10 @@ KGAME_H = kgame.h kplayer.h kgamenetwork.h kgameproperty.h kgamemessage.h kgamei
 KMESSAGE = kmessageio.cpp kmessageserver.cpp kmessageclient.cpp
 KMESSAGE_H = kmessageio.h kmessageserver.h kmessageclient.h
 
+libkgameincludedir=$(includedir)/kgame
 libkgame_la_SOURCES = $(KMESSAGE) $(KGAME)
 
-include_HEADERS = $(KMESSAGE_H) $(KGAME_H)
+libkgameinclude_HEADERS = $(KMESSAGE_H) $(KGAME_H)
 
 INCLUDES = -I$(top_srcdir)/libkdegames $(all_includes)
 METASOURCES = AUTO

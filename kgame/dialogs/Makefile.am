@@ -7,7 +7,9 @@ noinst_LTLIBRARIES = libkgamedialogs.la
 
 
 libkgamedialogs_la_SOURCES = kgamedialog.cpp kgameconnectdialog.cpp kgameerrordialog.cpp kgamedebugdialog.cpp kgamedialogconfig.cpp
-include_HEADERS = kgamedialog.h kgameconnectdialog.h kgameerrordialog.h kgamedebugdialog.h kgamedialogconfig.h
+
+libkgamedialogsincludedir=$(includedir)/kgame
+libkgamedialogsinclude_HEADERS = kgamedialog.h kgameconnectdialog.h kgameerrordialog.h kgamedebugdialog.h kgamedialogconfig.h
 
 INCLUDES = -I$(top_srcdir)/libkdegames -I$(top_srcdir)/libkdegames/kgame $(all_includes)
 METASOURCES = AUTO
