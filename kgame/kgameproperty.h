@@ -74,39 +74,33 @@ public:
 	};
 
 	/**
-	 * The policy of the property. This is either clean (@ref setVale uses
-	 * @ref send) or dirty (@ref setValue uses @ref changeValue).
+	 * The policy of the property. This can be PolicyClean (@ref setVale uses
+	 * @ref send), PolicyDirty (@ref setValue uses @ref changeValue) or
+	 * PolicyLocal (@ref setValue uses @ref setLocal).
 	 *
 	 * A "clean" policy means that the property is always the same on every
 	 * client. This is achieved by calling @ref send which actually changes
 	 * the value only when the message from the MessageServer is received.
 	 *
 	 * A "dirty" policy means that as soon as @ref setValue is called the
-	 * property is changed immediately. This can sometimes lead to bugs as
-	 * the other clients do not immediately have the same value. For more
-	 * information see @ref changeValue
+	 * property is changed immediately. And additionally sent over network.
+	 * This can sometimes lead to bugs as the other clients do not 
+	 * immediately have the same value. For more information see 
+	 * @ref changeValue.
+	 *
+	 * PolicyLocal means that a @ref KGameProperty behaves like ever
+	 * "normal" variable. Whenever @ref setValue is called (e.g. using "=")
+	 * the value of the property is changes immediately without sending it
+	 * over network. You might want to use this if you are sure that all
+	 * clients set the property at the same time.
 	 **/
 	enum PropertyPolicy
 	{
 		PolicyClean = 1,
-		PolicyDirty = 2
+		PolicyDirty = 2,
+		PolicyLocal = 3
 	};
 
-	/**
-	 * Changes the consistency policy of a property. This is either true (default)
-	 * which means a "clean" (always consistent) policy or a "dirty" policy. 
-	 *
-	 * A clean policy (true) means that you cannot work immediately with the new
-	 * value of the property as it has to be received from the Message
-	 * Server first.
-	 *
-	 * On the other hand a dirty policy (false) might introduce evil bugs as the
-	 * property has a different value on different clients until the network
-	 * value is received.
-	 *
-	 * It is up to you to decide how you want to work. 
-	 **/
-	void setAlwaysConsistent(bool c) { mFlags.bits.cleanPolicy=c&1; }
 
 	/**
 	 * Constructs a KGamePropertyBase object and calls @ref registerData.
@@ -128,6 +122,19 @@ public:
 	KGamePropertyBase();
 
 	virtual ~KGamePropertyBase();
+
+	/**
+	 * Changes the consistency policy of a property. The @ref 
+	 * PropertyPolicy is one of PolicyClean, PolicyDirty or PolicyLocal.
+	 *
+	 * It is up to you to decide how you want to work. 
+	 **/
+	void setPolicy(PropertyPolicy p) { mPolicy = p; } // TODO: bit field?
+
+	/**
+	 * @return The default policy of the property
+	 **/
+	PropertyPolicy policy() const { return mPolicy; }
 
 	/**
 	 * Sets this property to emit a signal on value changed.
@@ -152,7 +159,7 @@ public:
 	 * Sets this property to try to optimize signal and network handling
 	 * by not sending it out when the property value is not changed.
 	 **/
-	void setOptimized(bool p) { mFlags.bits.optimize=p&1; }
+	void setOptimized(bool p) { mFlags.bits.optimize = p & 1; }
 
 	/**
 	 * See also @ref setOptimize
@@ -161,11 +168,9 @@ public:
 	bool isOptimized() const { return mFlags.bits.optimize; }
 
 	/**
-	 * See also @ref setAlwaysConsistent
-	 * @return TRUE if the property uses a "clean" (always consistent)
-	 * policy, otherwise FALSE.
+	 * @return Whether this property is "dirty". See alos @ref setDirty
 	 **/
-	bool isAlwaysConsistent() const { return mFlags.bits.cleanPolicy; }
+	bool isDirty() const { return mFlags.bits.dirty; }
 
 	/**
 	 * A readonly property cannot be changed. Use this if you to prevent a
@@ -193,7 +198,7 @@ public:
 	/** 
 	 * send a command to advanced properties like arrays
 	 **/
-	virtual void command(QDataStream & ,int ) {};
+	virtual void command(QDataStream &, int ) { }
 
 	/**
 	 * @return The id of this property
@@ -221,10 +226,29 @@ public:
 	 **/
 	void registerData(int id, KGamePropertyHandler* owner, QString name=0);
 
+	/** 
+	 * This is an overloaded member function, provided for convenience.
+	 * It differs from the above function only in what argument(s) it accepts.
+	 **/
 	void registerData(int id, KGame* owner, QString name=0);
-	void registerData(int id, KPlayer* owner, QString name=0);
 
+	/** 
+	 * This is an overloaded member function, provided for convenience.
+	 * It differs from the above function only in what argument(s) it accepts.
+	 **/
+	void registerData(int id, KPlayer* owner, QString name=0);
+ 
 protected:
+	/**
+	 * Sets the "dirty" flag of the property. If a property is "dirty" i.e.
+	 * @ref KGameProperty::setLocal has been called there is no guarantee
+	 * that all clients share the same value. You have to ensure this
+	 * yourself e.g. by calling @ref KGameProperty::setLocal on every
+	 * client. You can also ignore the dirty flag and continue working withe
+	 * the property depending on your situation.
+	 **/
+	void setDirty(bool d) { mFlags.bits.dirty = d & 1; }
+
 	/**
 	 * Forward the data to the owner of this property which then sends it
 	 * over network. @ref save is used to store the data into a stream so
@@ -244,6 +268,7 @@ protected:
 	 **/
 	void emitSignal();
 
+protected:
 	KGamePropertyHandler* mOwner;
 	
 	// Having this as a union of the bitfield and the char
@@ -257,10 +282,11 @@ protected:
                                              // change but a KPlayer:QTimer
                                              // sends it later on - fast
                                              // changing variables
-			unsigned char emitsignal:1; // KPlayer notifies on variable change (true)
-						// can used 2 more
+			unsigned char emitsignal : 1; // KPlayer notifies on variable change (true)
+						      // can used 2 more
 			unsigned char readonly : 1; // whether the property can be changed (false)
 			unsigned char optimize : 1; // whether the property tries to optimize send/emit (false)
+			unsigned char dirty: 1; // whether the property dirty (setLocal() was used)
 			unsigned char cleanPolicy : 1; // whether the property is always consistent (true)
 		} bits;
 	} mFlags;
@@ -268,11 +294,18 @@ protected:
 private:
 	void init();
 	
+private:
 	bool mPublic;
 	int mId;
+
+	PropertyPolicy mPolicy;
 };
 
 /**
+ * Note: The entire API documentation is obsolete!
+ *
+ *
+ * 
  * The class KGameProperty can store any form of data and will transmit it via
  * network whenver you call @ref send. This makes network transparent games
  * very easy. You first have to register the data to a @ref KGamePropertyHandler
@@ -325,7 +358,7 @@ private:
  * queue the message. The game first has to go back into the event loop where
  * the message is received. The @ref KGamePropertyHandler receives the new value
  * sets the property. So if you need the new value you need to store it in a
- * different variable (see @ref setLocalData which creates one for you until the
+ * different variable (see @ref setLocal which creates one for you until the
  * message is received). The @ref KGamePropertyHandler emits a signal (unless
  * you calles @ref setEmitSignal with false) when the new value is received:
  * @ref KGamePropertyHandler::signalPropertyChanged. You can use this to react
@@ -350,7 +383,7 @@ private:
  * behaviour of the @ref KGameProperty. If a property is not always consistent
  * it will use @ref changeValue to send the property. @ref changeValue also uses
  * @ref send to send the new value over network but it also uses @ref
- * setLocalData to create a local copy of the property. This copy is created
+ * setLocal to create a local copy of the property. This copy is created
  * dynamically and is deleted again as soon as the next message from the network
  * is received. To use the example above again:
  * <pre>
@@ -502,10 +535,18 @@ public:
 	 **/
 	void setValue(type v)
 	{
-		if (isAlwaysConsistent()) {
-			send(v);
-		} else {
-			changeValue(v);
+		switch (policy()) {
+			case PolicyClean:
+				send(v);
+				break;
+			case PolicyDirty:
+				changeValue(v);
+				break;
+			case PolicyLocal:
+				setLocal(v);
+				break;
+			default: // NEVER!
+				return;
 		}
 	}
 
@@ -584,32 +625,16 @@ public:
 	 **/
 	void setLocal(type v) 
 	{
-		if (!mLocalData) {
-			mLocalData = new type;
-		}
-		if (!isOptimized() || *mLocalData != v) {
+		if (!isOptimized() || mData != v) {
 			if (isReadOnly()) {
 				return;
 			}
-			*mLocalData = v;
+			mData = v;
+			setDirty(true);
+			if (isEmittingSignal()) {
+				emitSignal();
+			}
 		}
-	}
-
-	/**
-	 * Sometime you have to change the network value (i.e. the value that is
-	 * set by @ref send) on your own, so without sending it. You can do this
-	 * with initData but note that you should _only_ do this when the @ref
-	 * KMessageServer is not available. This is usually the case in the
-	 * constructor only.
-	 *
-	 * Do <em>not</em> call this if there is another possibility! You should only
-	 * call this to set the initial value!
-	 *
-	 * Better use @ref setLocal if possible
-	 **/
-	void initData(type v)
-	{
-		mData = v;
 	}
 
 	/**
@@ -624,8 +649,8 @@ public:
 	 **/
 	void changeValue(type v)
 	{
-		setLocal(v);
 		send(v);
+		setLocal(v);
 	}
 
 	/**
@@ -644,19 +669,8 @@ public:
 	 **/
 	const type& value() const
 	{
-		if (mLocalData) {
-			return *mLocalData;
-		} else {
-			return mData;
-		}
+		return mData;
 	}
-
-	/**
-	 * You usually don't want to call this but rather @ref value
-	 * @return The network value which is __always__ consistent among all
-	 * clients. 
-	 **/
-	const type& networkValue() const { return mData; }
 
 	/**
 	 * Reads from a stream and assigns the read value to this object. This
@@ -670,11 +684,8 @@ public:
 	 **/
 	virtual void load(QDataStream& s)
 	{
-		if (mLocalData) {
-			delete mLocalData;
-			mLocalData = 0;
-		}
 		s >> mData;
+		setDirty(false);
 		if (isEmittingSignal()) {
 			emitSignal();
 		}
@@ -723,12 +734,10 @@ public:
 private:
 	void init()
 	{
-		mLocalData = 0;
 	}
 		
 private:
 	type mData;
-	type* mLocalData;
 };
 
 

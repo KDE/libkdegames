@@ -86,18 +86,18 @@ void KPlayer::init()
    // international conenctions are possible
 
    d->mGroup.registerData(KGamePropertyBase::IdGroup, this, i18n("Group"));
-   d->mGroup.initData(i18n("default"));
+   d->mGroup.setLocal(i18n("default"));
    d->mName.registerData(KGamePropertyBase::IdName, this, i18n("Name"));
-   d->mName.initData(i18n("default"));
+   d->mName.setLocal(i18n("default"));
 
    mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this, i18n("AsyncInput"));
-   mAsyncInput.initData(false);
+   mAsyncInput.setLocal(false);
    mMyTurn.registerData(KGamePropertyBase::IdTurn, this, i18n("myTurn"));
-   mMyTurn.initData(false);
+   mMyTurn.setLocal(false);
    mMyTurn.setEmittingSignal(true);
    mMyTurn.setOptimized(false);
    mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
-   mUserId.initData(0);
+   mUserId.setLocal(0);
 }
 
 KPlayer::~KPlayer()

@@ -69,10 +69,9 @@ void KGamePropertyBase::init()
  setOptimized(false); 
  
  setReadOnly(false);
- 
- // we default to always consistent as it is much more clean. (false) might be
- // easier to use though...
- setAlwaysConsistent(true);
+
+ // clean is default
+ setPolicy(PolicyClean);
 }
 
 void KGamePropertyBase::registerData(int id, KGame* owner, QString name)

@@ -91,11 +91,11 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
                                 this,SLOT(sendProperty(QDataStream& )),
                                      SLOT(emitSignal(KGamePropertyBase *)));
  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this, i18n("MaxPlayers"));
- d->mMaxPlayer.initData(-1);  // Infinite
+ d->mMaxPlayer.setLocal(-1);  // Infinite
  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this, i18n("MinPlayers"));
- d->mMinPlayer.initData(0);   // Always ok     
+ d->mMinPlayer.setLocal(0);   // Always ok     
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
- d->mGameStatus.initData(Init);
+ d->mGameStatus.setLocal(Init);
  d->mUniquePlayerNumber = 0;
  d->mRandom = new KRandomSequence;
  d->mRandom->setSeed(0);
