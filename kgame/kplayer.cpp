@@ -110,7 +110,7 @@ KPlayer::~KPlayer()
   {
     delete input;
   }
-  if (mGame) mGame->removePlayer(this);
+  if (mGame) mGame->playerDeleted(this);
 
 // note: mProperties does not use autoDelete or so - user must delete objects
 // himself
@@ -319,7 +319,10 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,int sender)
 {
   kdDebug(11001) << "KPlayer::ReceiveNetworkTransmission: msgid=" << msgid << " sender=" << sender << " we are=" << id() << endl;
   // PlayerProperties processed
-  if (d->mProperties.processMessage(stream,msgid)) {
+  bool issender;
+  if (game()) issender=sender==game()->gameId();
+  else issender=true;
+  if (d->mProperties.processMessage(stream,msgid,issender)) {
 	return ;
   }
   switch(msgid)
