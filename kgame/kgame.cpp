@@ -691,7 +691,7 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
  {
    if (!player->asyncInput()) 
    {
-     player->setTurn(false); // in turn based games we have to switch of input now
+     player->setTurn(false); // in turn based games we have to switch off input now
    }
  }
  return true;
@@ -711,7 +711,7 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
  }
  else if (!player->asyncInput()) 
  {
-   player->setTurn(false); // in turn based games we have to switch of input now
+   player->setTurn(false); // in turn based games we have to switch off input now
    QTimer::singleShot(0,this,SLOT(prepareNext()));
  }
  return player;
