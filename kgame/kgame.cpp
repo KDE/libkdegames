@@ -695,6 +695,7 @@ bool KGame::playerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
  }
  else if (!player->asyncInput()) 
  {
+   player->setTurn(false); // in turn based games we have to switch of input now
    QTimer::singleShot(0,this,SLOT(prepareNext()));
  }
 
