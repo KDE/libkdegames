@@ -149,7 +149,7 @@ void KMessageClient::sendBroadcast (const QByteArray &msg)
   buffer.open (IO_WriteOnly);
   QDataStream stream (&buffer);
 
-  stream << KMessageServer::REQ_BROADCAST;
+  stream << static_cast<Q_UINT32> ( KMessageServer::REQ_BROADCAST );
   buffer.QIODevice::writeBlock (msg);
   sendServerMessage (sendBuffer);
 }
@@ -161,7 +161,7 @@ void KMessageClient::sendForward (const QByteArray &msg, const QValueList <Q_UIN
   buffer.open (IO_WriteOnly);
   QDataStream stream (&buffer);
 
-  stream << KMessageServer::REQ_FORWARD << clients;
+  stream << static_cast<Q_UINT32>( KMessageServer::REQ_FORWARD ) << clients;
   buffer.QIODevice::writeBlock (msg);
   sendServerMessage (sendBuffer);
 }

@@ -302,7 +302,7 @@ void KGameNetwork::electAdmin(Q_UINT32 clientID)
  }
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
- stream << KMessageServer::REQ_ADMIN_CHANGE;
+ stream << static_cast<Q_UINT32>( KMessageServer::REQ_ADMIN_CHANGE );
  stream << clientID;
  d->mMessageClient->sendServerMessage(buffer);
 }
@@ -315,7 +315,7 @@ void KGameNetwork::setMaxClients(int max)
  }
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
- stream << KMessageServer::REQ_MAX_NUM_CLIENTS;
+ stream << static_cast<Q_UINT32>( KMessageServer::REQ_MAX_NUM_CLIENTS );
  stream << (Q_INT32)max;
  d->mMessageClient->sendServerMessage(buffer);
 }
