@@ -76,6 +76,8 @@ public:
     KGamePropertyInt mMaxPlayer;
     KGamePropertyUInt mMinPlayer;
     KGamePropertyInt mGameStatus; // Game running?
+    QValueList<int> mInactiveIdList;
+    QValueList<int> mInactivePriorityList;
 
 };
 
@@ -374,6 +376,11 @@ bool KGame::systemInactivatePlayer(KPlayer* player)
    player->setActive(false);
  } 
  emit signalPlayerLeftGame(player);
+ if (isAdmin())
+ {
+   d->mInactiveIdList.append(player->id());
+   d->mInactivePriorityList.append(player->networkPriority());
+ }
  return true;
 }
 
@@ -398,6 +405,17 @@ bool KGame::systemActivatePlayer(KPlayer* player)
  d->mInactivePlayerList.remove(player);
  player->setActive(true);
  addPlayer(player);
+ if (isAdmin())
+ {
+   int idx=d->mInactiveIdList.findIndex(player->id());
+   if (idx>=0)
+   {
+     QValueList<int>::Iterator it1=d->mInactiveIdList.at(idx);
+     QValueList<int>::Iterator it2=d->mInactivePriorityList.at(idx);
+     d->mInactiveIdList.remove(it1);
+     d->mInactivePriorityList.remove(it2);
+   }
+ }
  return true;
 }
 
@@ -902,7 +920,11 @@ void KGame::slotServerDisconnected()
   KGamePlayerList mReList(d->mInactivePlayerList);
   for ( player=mReList.first(); player != 0; player=mReList.next() )
   {
-    systemActivatePlayer(player);
+    // TODO check for priority
+    if (playerCount()<maxPlayers())
+    {
+      systemActivatePlayer(player);
+    }
   }
 
   KGamePlayerList mIdList(d->mPlayerList);
@@ -911,6 +933,7 @@ void KGame::slotServerDisconnected()
     player->setId(KGameMessage::createPlayerId(player->id(),gameId()));
     kdDebug(11001) << "Player id changed to " << player->id() << " as we are no local" << endl;
   }
+  // TODO clear inactive lists ?
 }
 void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
 {
@@ -921,9 +944,9 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
  kdDebug(11001) << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
  {
-   if (KGameMessage::rawGameId(player->id())==gameId())
+   if (KGameMessage::rawGameId(player->id())==clientID)
    {
-     kdDebug(11001) << "Player " << player->id() << " belongs to removed game" << endl;
+     kdDebug(11001) << "Player " << player->id() << " belongs to the removed game" << endl;
      removeList.append(player);
    }
  }
@@ -932,6 +955,21 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool broken)
  {
    kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
    removePlayer(player,0);
+ }
+
+ // Now add inactive players
+ // TODO Obey priorities !
+ // TODO remove players from removed game
+ for (int idx=0;idx<d->mInactiveIdList.count();idx++)
+ {
+   QValueList<int>::Iterator it1=d->mInactiveIdList.at(idx);
+   QValueList<int>::Iterator it2=d->mInactivePriorityList.at(idx);
+   player=findPlayer(*it1);
+   int pri=*it2;
+   if (playerCount()<maxPlayers() && player && KGameMessage::rawGameId(*it1)!=clientID)
+   {
+     activatePlayer(player);
+   }
  }
 }
 

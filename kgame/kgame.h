@@ -79,7 +79,7 @@ public:
     /**
      * Game status: kind of unused at the moment
      */
-    enum GameStatus { Init, Run, Pause, End, Abort };
+    enum GameStatus { Init, Run, Pause, End, Abort, SystemPause };
 
     // Properties
     /**
