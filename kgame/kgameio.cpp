@@ -345,7 +345,8 @@ void KGameProcessIO::notifyTurn(bool b)
   emit signalPrepareTurn(this,stream,b,sendit);
   int sender=KGameMessage::calcMessageId(0,player()->id());  
   kdDebug(11001) <<  "Sending Turn to process player !!!!!!!!!!!!!! " << endl;
-  sendProcess(stream,KGameMessage::IdTurn,0,sender);
+//  sendProcess(stream,KGameMessage::IdTurn,0,sender);//AB (010614): IdTurn is
+//  obsolete since we use KGameProperty (for quite a long time now)
 }
 
 

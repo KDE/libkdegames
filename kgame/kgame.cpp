@@ -666,6 +666,21 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      mRandom->setSeed(newseed);
    }
    break;
+   case KGameMessage::IdDisconnect:
+   {
+   // if we disconnect we *always* start a local game. 
+   // this could lead into problems if we just change the message server
+     if (sender != gameId()) {
+         kdDebug(11001) << "client " << sender << " leaves game" << endl;
+	 return;
+     }
+     kdDebug(11001) << "leaving the game" << endl;
+     // start a new local game
+     // no other client is by default connected to this so this call should be
+     // enough
+     setMaster();
+   }
+   break;
    default:
     {
      if (msgid < KGameMessage::IdUser) {
@@ -994,6 +1009,5 @@ void KGame::updatePlayerIds()
    player->setId(KGameMessage::calcMessageId(gameId(),0)|(player->id()&0x3ff));
  }
 }
-
 
 #include "kgame.moc"

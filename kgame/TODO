@@ -43,6 +43,11 @@
               the user... same applies to e.g. sendProperty which is internal
 - 03.06.2001: can we translate the group of a KPlayer? Probably not as there are
               no international connections possible then... maybe a group id?
+- 05.06.2001: KGameDialog::saveConfig(KConfig*) might be useful (as well as
+              KGameDialog::loadConfig(KConfig*). Should set an own group in the
+              config file (setGroup("KGameDialog")). Problem: shalll network
+              settings be saved? Could be used for startup configuration (i.e.
+              load the config of the previous game) otherwise.
 
  ********************************************************************
   

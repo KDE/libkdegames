@@ -58,12 +58,11 @@ public:
 KGameNetwork::KGameNetwork(int cookie,QObject* parent) : QObject(parent, 0)
 {
  d = new KGameNetworkPrivate;
+ d->mCookie = (Q_INT16)cookie;
 
  // Init the game as a local game, i.e.
  // create your own KMessageServer and a KMessageClient connected to it.
- d->mMessageServer = new KMessageServer (cookie, this);
- d->mMessageClient = new KMessageClient (this);
- d->mMessageClient->setServer (d->mMessageServer);
+ setMaster();
 
  connect (d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
           this, SLOT(receiveNetworkTransmission(const QByteArray&, Q_UINT32)));
@@ -76,7 +75,6 @@ KGameNetwork::KGameNetwork(int cookie,QObject* parent) : QObject(parent, 0)
  connect (d->mMessageClient, SIGNAL(eventClientDisconnected(Q_UINT32, bool)),
           this, SIGNAL(signalClientDisconnected(Q_UINT32, bool)));
 
- d->mCookie = (Q_INT16)cookie;
  kdDebug(11001) << "CREATE(KGameNetwork=" << this <<") cookie=" << d->mCookie << " sizeof(this)="<<sizeof(KGameNetwork) << endl;
 }
 
@@ -101,6 +99,22 @@ bool KGameNetwork::isAdmin() const
 { return (d->mMessageClient->isAdmin()); }
 
 // ----------------------- network init
+void KGameNetwork::setMaster()
+{
+ if (!d->mMessageServer) {
+	d->mMessageServer = new KMessageServer (d->mCookie, this);
+ } else {
+	kdWarning(11001) << "KGameNetwork::setMaster(): Server already running!!" << endl;
+ }
+ if (!d->mMessageClient) {
+	d->mMessageClient = new KMessageClient (this);
+ } else {
+	// should be no problem but still has to be tested
+	kdDebug(11001) << "KGameNetwork::setMaster(): Client already exists!" << endl;
+ }
+ d->mMessageClient->setServer (d->mMessageServer);
+}
+
 bool KGameNetwork::offerConnections (Q_UINT16 port)
 {
  if (!d->mMessageServer) {
@@ -175,6 +189,20 @@ bool KGameNetwork::stopServerConnection()
 
 bool KGameNetwork::isOfferingConnections() const
 { return (d->mMessageServer && d->mMessageServer->isOfferingConnections()); }
+
+void KGameNetwork::disconnect()
+{
+ if (isAdmin()) {
+	kdWarning(11001) << "admin cannot disconnect - elect enother admin first!" << endl;
+	return;
+ }
+ if (isMaster()) {
+	kdWarning(11001) << "master cannot disconnect - start another master first!" << endl;
+	return;
+ }
+
+ sendSystemMessage(0, KGameMessage::IdDisconnect);
+}
 
 // --------------------- send messages ---------------------------
 

@@ -88,23 +88,35 @@ class KGameMessage
      */
     static int version();
 
+
+// please document every new id with a short comment
   enum GameMessageIds {
+// game init, game load, disconnect, ...
     IdSetupGame=1,         // sent to a newly connected player
     IdSetupGameContinue=2, // continue the setup
     IdGameLoad=3,          // load/save the game to the client
     IdGameReactivatePlayer=4,   // reactive the inactive players
     IdSyncRandom=5,        // new random seed set - sync games
-    IdAddPlayer=6,         // add a player
-    IdRemovePlayer=7,      // the player will be removed
-    IdActivatePlayer=8,    // Activate a player
-    IdInactivatePlayer=9,  // Inactivate a player
-    IdError=10,            // an error occured
-    IdPlayerInput=11,      // a player input occured
-    IdTurn=12,             // unused?
-    IdPlayerProperty=13,   // a player property changed
-    IdGameProperty=14,     // a game property changed
-    IdProcessQuery=15,     // Process queries data (process only)
-    IdPlayerId=16,         // PlayerId got changed (process only)
+    IdDisconnect=6,        // KGame object disconnects from game
+
+// properties
+    IdPlayerProperty=20,   // a player property changed
+    IdGameProperty=21,     // a game property changed
+
+// player management
+    IdAddPlayer=30,         // add a player
+    IdRemovePlayer=31,      // the player will be removed
+    IdActivatePlayer=32,    // Activate a player
+    IdInactivatePlayer=33,  // Inactivate a player
+    
+// to-be-categorized
+    IdError=100,            // an error occured
+    IdPlayerInput=101,      // a player input occured
+
+// special ids for computer player
+    IdProcessQuery=220,     // Process queries data (process only)
+    IdPlayerId=221,         // PlayerId got changed (process only)
+
     IdUser=256          // a user specified message
   };
 

@@ -262,6 +262,12 @@ public:
      **/
     virtual void networkTransmission(QDataStream&, int, int, int, Q_UINT32 clientID) = 0;
 
+
+    /**
+     * Disconnect the current connection and establish a new local one. 
+     **/
+    void disconnect();
+
 signals:
     /**
      * A network error occured
@@ -306,6 +312,15 @@ signals:
      */
     void signalClientDisconnected(Q_UINT32 clientID, bool broken);
 
+protected:
+    /**
+     * @internal
+     * Start a @ref KMessageServer object and use it as the MASTER of the game.
+     * Note that you must not call this if there is already another master
+     * running!
+     **/
+    void setMaster();
+    
 protected slots:
     /**
      * Called by @ref KMessageClient::broadcastReceived() and will check if the
