@@ -112,8 +112,8 @@ protected:
 	 **/
 	void clearGameData();
 
-	QString propertyName(KGamePropertyBase* p,KGamePropertyHandlerBase *h) const;
-	QString propertyValue(KGamePropertyBase* p,KGamePropertyHandlerBase *h);
+	QString propertyName(KGamePropertyBase* p,KGamePropertyHandler *h) const;
+	QString propertyValue(KGamePropertyBase* p,KGamePropertyHandler *h);
 	
 protected slots:
 	/**

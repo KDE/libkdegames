@@ -41,7 +41,7 @@ KGamePropertyBase::KGamePropertyBase(int id, KPlayer* parent)
  registerData(id, parent);
 }
 
-KGamePropertyBase::KGamePropertyBase(int id, KGamePropertyHandlerBase* owner)
+KGamePropertyBase::KGamePropertyBase(int id, KGamePropertyHandler* owner)
 {
  init();
  registerData(id, owner);
@@ -81,7 +81,7 @@ void KGamePropertyBase::registerData(int id, KGame* owner,QString name)
 void KGamePropertyBase::registerData(int id, KPlayer* owner,QString name)
 { registerData(id, owner->dataHandler(),name);  }
 
-void KGamePropertyBase::registerData(int id, KGamePropertyHandlerBase* owner,QString name)
+void KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,QString name)
 {
 // we don't support changing the id
  if (!mOwner) {
@@ -98,11 +98,14 @@ bool KGamePropertyBase::sendProperty()//obsolete
  KGameMessage::createPropertyHeader(s,id());
  save(s);
  if (mOwner) {
-	return mOwner->sendProperty(s);
- } else {
+	mOwner->sendProperty(s);
+ }
+ else
+ {
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
  }
+ return true;
 }
 
 bool KGamePropertyBase::sendProperty(const QByteArray& data)
@@ -112,11 +115,14 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
  KGameMessage::createPropertyHeader(s,id());
  s.writeRawBytes(data.data(), data.size());
  if (mOwner) {
-	return mOwner->sendProperty(s);
- } else {
+	mOwner->sendProperty(s);
+ }
+ else
+ {
 	kdError(11001) << "KGamePropertyBase::sendProperty(): Cannot send because there is no receiver defined" << endl;
 	return false;
  }
+ return true;
 }
 
 void KGamePropertyBase::emitSignal()

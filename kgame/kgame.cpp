@@ -66,7 +66,7 @@ public:
     KRandomSequence* mRandom;
 
 
-    KGamePropertyHandler<KGame> mProperties;
+    KGamePropertyHandler mProperties;
 
     // player lists
     KGame::KGamePlayerList mPlayerList;
@@ -85,7 +85,9 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  kdDebug(11001) << "CREATE(KGame=" << this <<") sizeof(this)="<<sizeof(KGame) << endl;
  d = new KGamePrivate;
   
- d->mProperties.registerHandler(KGameMessage::IdGameProperty,this);
+ d->mProperties.registerHandler(KGameMessage::IdGameProperty,
+                                this,SLOT(sendProperty(QDataStream& )),
+                                     SLOT(emitSignal(KGamePropertyBase *)));
  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this,i18n("MaxPlayers"));
  d->mMaxPlayer.initData(-1);  // Infinite
  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this,i18n("MinPlayers"));
@@ -447,7 +449,7 @@ int KGame::gameStatus() const
 bool KGame::isRunning() const
 { return d->mGameStatus.value() == Run; }
 
-KGamePropertyHandlerBase* KGame::dataHandler()
+KGamePropertyHandler* KGame::dataHandler()
 { return &d->mProperties; }
 
 KGame::KGamePlayerList* KGame::inactivePlayerList()
@@ -1081,13 +1083,17 @@ bool KGame::sendPlayerProperty(QDataStream& s, int playerId)
 { return sendSystemMessage(s, KGameMessage::IdPlayerProperty, playerId); }
 
 bool KGame::sendProperty(QDataStream& s)
-{ return sendSystemMessage(s, KGameMessage::IdGameProperty); }
+{
+  return sendSystemMessage(s, KGameMessage::IdGameProperty);
+}
 
 void KGame::emitSignal(KGamePropertyBase *me)
-{ emit signalPropertyChanged(me,this); }
+{
+  emit signalPropertyChanged(me,this);
+}
 
 KGamePropertyBase* KGame::findProperty(int id) const
-{ return d->mProperties[id]; }
+{ return d->mProperties.find(id); }
 
 void KGame::updatePlayerIds()
 {

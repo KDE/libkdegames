@@ -29,7 +29,7 @@
 
 class KGame;
 class KPlayer;
-class KGamePropertyHandlerBase;
+class KGamePropertyHandler;
 
 /**
  * The KGamePropertyBase class is the base class of KGameProperty. See @ref
@@ -117,7 +117,7 @@ public:
 	 * @param owner The owner of the object. Must be a KGamePropertyHandler which manages
 	 * the changes made to this object, i.e. which will send the new data
 	 **/
-	KGamePropertyBase(int id, KGamePropertyHandlerBase* owner);
+	KGamePropertyBase(int id, KGamePropertyHandler* owner);
 
 	KGamePropertyBase(int id, KGame* parent);
 	KGamePropertyBase(int id, KPlayer* parent);
@@ -211,7 +211,7 @@ public:
 	 * using @ref KPropertyHandler::sendProperty whenever you call @ref send
 	 *
 	 **/
-	void registerData(int id, KGamePropertyHandlerBase* owner,QString name=0);
+	void registerData(int id, KGamePropertyHandler* owner,QString name=0);
 
 	void registerData(int id, KGame* owner,QString name=0);
 	void registerData(int id, KPlayer* owner,QString name=0);
@@ -243,7 +243,7 @@ protected:
 	 **/
 	void emitSignal();
 
-	KGamePropertyHandlerBase* mOwner;
+	KGamePropertyHandler* mOwner;
 	
 	// Having this as a union of the bitfield and the char
 	// allows us to stream this quantity easily (if we need to)
@@ -334,7 +334,7 @@ public:
 	 * @param parent The parent of the object. Must be a KGame which manages
 	 * the changes made to this object, i.e. which will send the new data
 	 **/
-	KGameProperty(int id, KGamePropertyHandlerBase* owner) : KGamePropertyBase(id, owner) { init(); }
+	KGameProperty(int id, KGamePropertyHandler* owner) : KGamePropertyBase(id, owner) { init(); }
 
 	/**
 	 * This constructor does nothing. You have to call @ref

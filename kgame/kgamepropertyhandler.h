@@ -21,6 +21,7 @@
 #ifndef __KGAMEPROPERTYHANDLER_H_
 #define __KGAMEPROPERTYHANDLER_H_
 
+#include <qobject.h>
 #include <qdatastream.h>
 #include <qintdict.h>
 #include <qmap.h>
@@ -31,14 +32,29 @@
 
 class KGame;
 class KPlayer;
-class KGamePropertyHandlerBase;
+// class KGamePropertyHandlerBase;
 
-class KGamePropertyHandlerBasePrivate; // wow - what a name ;-)
-class KGamePropertyHandlerBase : public QIntDict<KGamePropertyBase>
+class KGamePropertyHandlerPrivate; // wow - what a name ;-)
+
+class KGamePropertyHandler : public QObject
+// QIntDict<KGamePropertyBase>
 {
+  Q_OBJECT
+
 public:
-	KGamePropertyHandlerBase();
-	~KGamePropertyHandlerBase();
+	KGamePropertyHandler();
+	KGamePropertyHandler(int id,const QObject * receiver, const char * sendf, const char *emitf);
+	~KGamePropertyHandler();
+
+	/**
+	 * Register the handler with a parent. This is to use
+	 * if the constructor without arguments has been choosen.
+	 * Otherwise you need not call this.
+	 *
+	 * @param id The id of the message to listen for
+	 * @param owner the parent object
+	 **/
+	void registerHandler(int id,const QObject *receiver, const char * send, const char *emit); 
 
 	/**
 	 * Main message process function. This has to be called by
@@ -96,110 +112,56 @@ public:
 	 * datastream. This call is simply forwarded to
 	 * the parent object
 	 **/ 
-	virtual bool sendProperty(QDataStream &s) = 0;
+	void sendProperty(QDataStream &s);
 
 	/**
 	 * called by a property to emit a signal 
 	 * This call is simply forwarded to
 	 * the parent object
 	 **/ 
-	virtual void emitSignal(KGamePropertyBase *data) = 0;
+	void emitSignal(KGamePropertyBase *data);
 
   QString propertyName(int id);
+
+  KGamePropertyBase *find(int id);
+  void clear();
 
 	void setId(int id)//AB: TODO: make this protected in KGamePropertyHandler!!
 	{
 		mId = id;
 	}
 
+      /**
+       * Calls @ref KGamePropertyBase::setLocked(false) for all properties of this
+       * player
+       **/
+      void unlockProperties();
+      /**
+       * Calls @ref KGamePropertyBase::setLocked(true) for all properties of this
+       * player
+       *
+       * Use with care! This will even lock the core properties, like name,
+       * group and myTurn!!
+       **/
+      void lockProperties();
+
+      /**
+       * Reference to the internal dictionary
+       **/
+      QIntDict<KGamePropertyBase> &dict() {return mIdDict;}
+
+
+signals:
+      void signalPropertyChanged(KGamePropertyBase *);
+      void signalSendMessage(QDataStream &);
+
 private:
 	void init();
-	KGamePropertyHandlerBasePrivate* d;
+	KGamePropertyHandlerPrivate* d;
 	int mId;
   QMap<int,QString> mNameMap;
+  QIntDict<KGamePropertyBase> mIdDict;
 };
 
-
-template<class type>
-class KGamePropertyHandler : public KGamePropertyHandlerBase
-{
-public:
-	/** 
-	 * Constructs a KGamePropertyHandler object
-	 **/
-	KGamePropertyHandler() : KGamePropertyHandlerBase()
-	{
-		init();
-	}
-
-	/**
-	 * Just for convenience, same as @ref KGamePropertyHandler
-	 **/
-	KGamePropertyHandler(int id, type* owner) : KGamePropertyHandlerBase()
-	{
-		init();
-		registerHandler(id, owner);
-	}
-    
-	/**
-	 * Register the handler with a parent. This is to use
-	 * if the constructor without arguments has been choosen.
-	 * Otherwise you need not call this.
-	 *
-	 * @param id The id of the message to listen for
-	 * @param owner the parent object
-	 **/
-	void registerHandler(int id, type* owner)
-	{
-		setId(id);
-		mOwner = owner;
-	}
-
-	/**
-	 *  Destruct the KGamePropertyHandler
-	 **/
-	~KGamePropertyHandler()
-	{
-	}
-
-	/**
-	 * @return the owner of the handler
-	 **/
-	type* owner() const { return mOwner; }
-
-	/**
-	 * called by a property to send itself into the
-	 * datastream. This call is simply forwarded to
-	 * the parent object
-	 * @return TRUE if the message could be sent otherwise FALSE
-	 **/ 
-	bool sendProperty(QDataStream &s)
-	{
-		if (mOwner) {
-			return mOwner->sendProperty(s);
-		} else {
-			return false;
-		}
-	}
-	
-	/**
-	 * called by a property to emit a signal 
-	 * This call is simply forwarded to
-	 * the parent object
-	 **/ 
-	void emitSignal(KGamePropertyBase *data)
-	{
-		if (mOwner) {
-			mOwner->emitSignal(data);
-		}
-	}
-	
-private:
-	void init()
-	{
-		mOwner = 0;
-	}
-	type* mOwner;
-};
 
 #endif

@@ -32,33 +32,52 @@
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 
 //---------------------- KGamePropertyHandler -----------------------------------
-class KGamePropertyHandlerBasePrivate
+class KGamePropertyHandlerPrivate
 {
 public:
-	KGamePropertyHandlerBasePrivate()
+	KGamePropertyHandlerPrivate()
 	{
 	}
 };
 
-KGamePropertyHandlerBase::KGamePropertyHandlerBase() : QIntDict<KGamePropertyBase>()
+KGamePropertyHandler::KGamePropertyHandler(int id,const QObject * receiver, const char * sendf, const char *emitf) : QObject(0,0)
+{
+  init();
+  registerHandler(id,receiver,sendf,emitf);
+}
+KGamePropertyHandler::KGamePropertyHandler() : QObject(0,0)
 {
  init();
 }
 
-void KGamePropertyHandlerBase::init()
+void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, const char * sendf,const char *emitf)
 {
- kdDebug(11001) << "CREATE KGamePropertyHandlerBase("<<this<<")"<<endl;
+  setId(id); 
+  if (receiver && emitf)
+  {
+    kdDebug() << "Connecting SLOT " << emitf << endl;
+    connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase *)), receiver, emitf);
+  }
+  if (receiver && sendf)
+  {
+    kdDebug() << "Connecting SLOT " << sendf << endl;
+    connect(this, SIGNAL(signalSendMessage(QDataStream &)), receiver, sendf);
+  }
+}
+void KGamePropertyHandler::init()
+{
+ kdDebug(11001) << "CREATE KGamePropertyHandler("<<this<<")"<<endl;
  mId = 0;
- d = new KGamePropertyHandlerBasePrivate; // for future use - is BC important to us?
+ d = new KGamePropertyHandlerPrivate; // for future use - is BC important to us?
 }
 
-KGamePropertyHandlerBase::~KGamePropertyHandlerBase()
+KGamePropertyHandler::~KGamePropertyHandler()
 {
- clear();
- delete d;
+  clear();
+  delete d;
 }
 
-bool KGamePropertyHandlerBase::processMessage(QDataStream &stream, int id)
+bool KGamePropertyHandler::processMessage(QDataStream &stream, int id)
 {
  //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << mId << endl;
  if (id != mId) {
@@ -73,11 +92,11 @@ bool KGamePropertyHandlerBase::processMessage(QDataStream &stream, int id)
    int cmd;
    KGameMessage::extractPropertyCommand(stream,propertyId,cmd);
    kdDebug() << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
-   p = find(propertyId);
+   p = mIdDict.find(propertyId);
    p->command(stream,cmd);
    return true;
  }
- p = find(propertyId);
+ p = mIdDict.find(propertyId);
  if (p) {
 	//kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
 	p->load(stream);
@@ -91,30 +110,31 @@ bool KGamePropertyHandlerBase::processMessage(QDataStream &stream, int id)
 }
 
 
-bool KGamePropertyHandlerBase::removeProperty(KGamePropertyBase* data)
+bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
 {
  if (!data) {
 	return false;
  }
- return remove(data->id());
+ mNameMap.remove(data->id());
+ return mIdDict.remove(data->id());
 }
-bool KGamePropertyHandlerBase::addProperty(KGamePropertyBase* data,QString name)
+bool KGamePropertyHandler::addProperty(KGamePropertyBase* data,QString name)
 {
   //kdDebug(11001) << "KGamePropertyHandler::addproperty("<<data<<endl;
- if (find(data->id())) {
+ if (mIdDict.find(data->id())) {
 	// this id already exists
 	kdError(11001) << "  -> cannot add property " << data->id() << endl;
 	return false;
  }
  else
  {
-	insert(data->id(), data);
+	mIdDict.insert(data->id(), data);
   // if here is a check for "is_debug" or so we can add the strings only in debug mode
   // and save memory!!
   if (!name.isNull())
   {
     mNameMap.insert(data->id(),name);
-    kdDebug() << "KGamePropertyHandlerBase::addProperty: nid="<< (data->id()) << " inserted in Map name=" << mNameMap[data->id()] <<endl;
+    kdDebug() << "KGamePropertyHandler::addProperty: nid="<< (data->id()) << " inserted in Map name=" << mNameMap[data->id()] <<endl;
     kdDebug() << "Typeid=" << typeid(data).name() << endl;
     kdDebug() << "Typeid call=" << data->typeinfo()->name() << endl;
   }
@@ -122,10 +142,10 @@ bool KGamePropertyHandlerBase::addProperty(KGamePropertyBase* data,QString name)
  return true;
 }
 
-QString KGamePropertyHandlerBase::propertyName(int id)
+QString KGamePropertyHandler::propertyName(int id)
 {
   QString s;
-  if (find(id))
+  if (mIdDict.find(id))
   {
     if (mNameMap.contains(id)) s=mNameMap[id];
     else s.setNum(id);
@@ -138,7 +158,7 @@ QString KGamePropertyHandlerBase::propertyName(int id)
   return s;
 }
 
-bool KGamePropertyHandlerBase::load(QDataStream &stream)
+bool KGamePropertyHandler::load(QDataStream &stream)
 {
  uint count,i;
  stream >> count;
@@ -156,11 +176,11 @@ bool KGamePropertyHandlerBase::load(QDataStream &stream)
  return true;
 }
 
-bool KGamePropertyHandlerBase::save(QDataStream &stream)
+bool KGamePropertyHandler::save(QDataStream &stream)
 {
- kdDebug(11001) << "KGamePropertyHandler::save " << count() << " KGameProperty objects " << endl;
- stream << (uint)count();
- QIntDictIterator<KGamePropertyBase> it(*this);
+ kdDebug(11001) << "KGamePropertyHandler::save " << mIdDict.count() << " KGameProperty objects " << endl;
+ stream << (uint)mIdDict.count();
+ QIntDictIterator<KGamePropertyBase> it(mIdDict);
  while (it.current()) {
 	KGamePropertyBase *base=it.current();
 	if (base) {
@@ -171,5 +191,44 @@ bool KGamePropertyHandlerBase::save(QDataStream &stream)
  }
  stream << (Q_INT16)KPLAYERHANDLER_LOAD_COOKIE;
  return true;
+}
+
+void KGamePropertyHandler::unlockProperties()
+{
+ QIntDictIterator<KGamePropertyBase> it(mIdDict);
+ while (it.current()) {
+	it.current()->setReadOnly(false);
+	++it;
+ }
+}
+
+void KGamePropertyHandler::lockProperties()
+{
+ QIntDictIterator<KGamePropertyBase> it(mIdDict);
+ while (it.current()) {
+	it.current()->setReadOnly(true);
+	++it;
+ }
+}
+
+void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
+{
+  emit signalPropertyChanged(prop);
+}
+
+void KGamePropertyHandler::sendProperty(QDataStream &s)
+{
+  emit signalSendMessage(s);
+}
+
+KGamePropertyBase *KGamePropertyHandler::find(int id)
+{
+  return mIdDict.find(id);
+}
+
+void KGamePropertyHandler::clear()
+{
+ mIdDict.clear();
+ mNameMap.clear();
 }
 

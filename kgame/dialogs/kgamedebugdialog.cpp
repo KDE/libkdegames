@@ -272,13 +272,13 @@ void KGameDebugDialog::updateGameData()
  d->mGamePlayerCount->setText(1, QString::number(d->mGame->playerCount()));
 
 // Properties
-// KGamePropertyHandlerBase* b = d->mGame->dataHandler();
+// KGamePropertyHandler* b = d->mGame->dataHandler();
 
 //TODO ios
 //TODO properties?
- KGamePropertyHandlerBase *handler=((KGame *)(d->mGame))->dataHandler();
+ KGamePropertyHandler *handler=((KGame *)(d->mGame))->dataHandler();
 
- QIntDictIterator<KGamePropertyBase> it(*handler);
+ QIntDictIterator<KGamePropertyBase> it((handler->dict()));
  while (it.current())
  {
 	KGamePropertyBase *base=it.current();
@@ -326,8 +326,8 @@ void KGameDebugDialog::updatePlayerData(QListBoxItem* item)
 //TODO ios
 
 // Properties
- KGamePropertyHandlerBase* handler = p->dataHandler();
- QIntDictIterator<KGamePropertyBase> it(*handler);
+ KGamePropertyHandler * handler = p->dataHandler();
+ QIntDictIterator<KGamePropertyBase> it((handler->dict()));
  while (it.current()) {
 	QListViewItem* prop = new QListViewItem(d->mPlayerProperties,
 			i18n(propertyName(it.current(),handler)),
@@ -397,7 +397,7 @@ void KGameDebugDialog::removePlayer(QListBoxItem* i)
  delete i;
 }
 
-QString KGameDebugDialog::propertyName(KGamePropertyBase* prop, KGamePropertyHandlerBase *handler) const
+QString KGameDebugDialog::propertyName(KGamePropertyBase* prop, KGamePropertyHandler *handler) const
 {
  if (!prop) {
 	return i18n("NULL pointer");
@@ -430,7 +430,7 @@ QString KGameDebugDialog::propertyName(KGamePropertyBase* prop, KGamePropertyHan
 
 }
 
-QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHandlerBase *handler) 
+QString KGameDebugDialog::propertyValue(KGamePropertyBase* prop, KGamePropertyHandler *handler) 
 {
  if (!prop) {
 	return i18n("NULL pointer");

@@ -30,6 +30,7 @@
 class KGame;
 class KGameIO;
 class KGamePropertyBase;
+class KGamePropertyHandler;
 
 class KPlayerPrivate;
 
@@ -329,15 +330,6 @@ public:
       virtual bool save(QDataStream &stream);
 
       /**
-       * Called by KGameProperty only! Internal function!
-       **/
-      bool sendProperty(QDataStream& s);
-      /**
-       * Called by KGameProperty only! Internal function!
-       **/
-      void emitSignal(KGamePropertyBase *me);
-     
-      /**
        * Receives a message
        * @param msgid The kind of the message. See messages.txt for further
        * information
@@ -361,19 +353,6 @@ public:
        **/
       bool addProperty(KGamePropertyBase* data);
 
-      /**
-       * Calls @ref KGamePropertyBase::setLocked(false) for all properties of this
-       * player
-       **/
-      void unlockProperties();
-      /**
-       * Calls @ref KGamePropertyBase::setLocked(true) for all properties of this
-       * player
-       *
-       * Use with care! This will even lock the core properties, like name,
-       * group and myTurn!!
-       **/
-      void lockProperties();
 
       /**
        * Calculates a checksum over the IO devices. Can be used to
@@ -385,7 +364,7 @@ public:
        /**
         * @return the property handler
         */
-       KGamePropertyHandlerBase* dataHandler();
+       KGamePropertyHandler* dataHandler();
 
 signals:
      /**
@@ -418,7 +397,16 @@ signals:
        void signalPropertyChanged(KGamePropertyBase *property,KPlayer *me);
 
 
-protected:
+protected slots:
+      /**
+       * Called by KGameProperty only! Internal function!
+       **/
+      bool sendProperty(QDataStream& s);
+      /**
+       * Called by KGameProperty only! Internal function!
+       **/
+      void emitSignal(KGamePropertyBase *me);
+     
 
 private:
       KGame *mGame;

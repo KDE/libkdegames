@@ -49,7 +49,7 @@ public:
 
    KPlayer* mNetworkPlayer; // replacement player
 
-   KGamePropertyHandler<KPlayer> mProperties;
+   KGamePropertyHandler mProperties;
 
 // Playerdata
    KGamePropertyQString mName;
@@ -63,7 +63,9 @@ KPlayer::KPlayer() : QObject(0,0)
    kdDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup)<<endl;
    d = new KPlayerPrivate;
 
-   d->mProperties.registerHandler(KGameMessage::IdPlayerProperty,this);
+   d->mProperties.registerHandler(KGameMessage::IdPlayerProperty,
+                                  this,SLOT(sendProperty(QDataStream&)),
+                                       SLOT(emitSignal(KGamePropertyBase *)));
    d->mVirtual=false;
    mActive=true;
    mGame=0;
@@ -173,7 +175,7 @@ const QString& KPlayer::name() const
 int KPlayer::id() const
 { return d->mId; }
 
-KGamePropertyHandlerBase* KPlayer::dataHandler()
+KGamePropertyHandler * KPlayer::dataHandler()
 { return &d->mProperties; }
 
 void KPlayer::setVirtual(bool v)
@@ -334,7 +336,7 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,int sender)
 
 KGamePropertyBase* KPlayer::findProperty(int id) const
 {
-  return d->mProperties[id];
+  return d->mProperties.find(id);
 }
 
 bool KPlayer::addProperty(KGamePropertyBase* data)
@@ -362,24 +364,6 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
     }
   }
   emit signalPropertyChanged(me,this);
-}
-
-void KPlayer::unlockProperties()
-{
- QIntDictIterator<KGamePropertyBase> it(d->mProperties);
- while (it.current()) {
-	it.current()->setReadOnly(false);
-	++it;
- }
-}
-
-void KPlayer::lockProperties()
-{
- QIntDictIterator<KGamePropertyBase> it(d->mProperties);
- while (it.current()) {
-	it.current()->setReadOnly(true);
-	++it;
- }
 }
 
 // --------------------- DEBUG --------------------

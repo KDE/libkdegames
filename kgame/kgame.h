@@ -33,7 +33,7 @@ class KRandomSequence;
 
 class KPlayer;
 class KGamePropertyBase;
-class KGamePropertyHandlerBase;
+class KGamePropertyHandler;
 
 class KGamePrivate;
 
@@ -284,16 +284,6 @@ public:
     bool addProperty(KGamePropertyBase* data);
 
     /**
-     * Called by @ref KGameProperty only! Internal function!
-     **/
-    bool sendProperty(QDataStream& s);
-
-    /**
-      * Called by @ref KGameProperty only! Internal function!
-     **/
-    void emitSignal(KGamePropertyBase *me);
-
-    /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
     bool sendPlayerProperty(QDataStream& s, int playerId);
@@ -331,9 +321,19 @@ public:
      **/
     virtual void networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 clientID);
 
-    KGamePropertyHandlerBase* dataHandler();
+    KGamePropertyHandler* dataHandler();
 
 protected slots:
+    /**
+     * Called by @ref KGameProperty only! Internal function!
+     **/
+    bool sendProperty(QDataStream& s);
+
+    /**
+      * Called by @ref KGameProperty only! Internal function!
+     **/
+    void emitSignal(KGamePropertyBase *me);
+
     /**
      * Prepare the call of next() after a QTimer event to allow QT Event processing
      */
