@@ -47,7 +47,6 @@ public:
 
   KGamePropertyList( const KGamePropertyList<type> &a ) : QValueList<type>(a)
   {
-    send();
   }
 
   uint findIterator(Iterator me)
