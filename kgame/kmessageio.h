@@ -28,7 +28,7 @@
 #include <qhostaddress.h>
 #include <qobject.h>
 #include <qstring.h>
-#include <qqueue.h>
+#include <qptrqueue.h>
 #include <qfile.h>
 
 class QSocket;
@@ -320,7 +320,7 @@ class KMessageProcess : public KMessageIO
   private:
     QString mProcessName;
     KProcess *mProcess;
-    QQueue <QByteArray> mQueue;
+    QPtrQueue <QByteArray> mQueue;
     QByteArray *mSendBuffer;
     QByteArray mReceiveBuffer;
     unsigned int mReceiveCount;

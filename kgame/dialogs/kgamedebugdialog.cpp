@@ -293,7 +293,7 @@ void KGameDebugDialog::slotUpdatePlayerList()
 	removePlayer(i);
  }
 
- QList<KPlayer> list = *d->mGame->playerList();
+ QPtrList<KPlayer> list = *d->mGame->playerList();
  for (KPlayer* p = list.first(); p; p = list.next()) {
 	addPlayer(p);
  }
@@ -396,7 +396,7 @@ void KGameDebugDialog::setKGame(const KGame* g)
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 //	connect();
 
-	QList<KPlayer> list = *d->mGame->playerList();
+	QPtrList<KPlayer> list = *d->mGame->playerList();
 	for (KPlayer* p = list.first(); p; p = list.next()) {
 		addPlayer(p);
 	}

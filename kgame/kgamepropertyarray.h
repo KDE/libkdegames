@@ -30,10 +30,10 @@
 
 
 template<class type>
-class KGamePropertyArray : public QArray<type>, public KGamePropertyBase
+class KGamePropertyArray : public QMemArray<type>, public KGamePropertyBase
 {
 public:
-  KGamePropertyArray() :QArray<type>(), KGamePropertyBase()
+  KGamePropertyArray() :QMemArray<type>(), KGamePropertyBase()
   {
     //kdDebug(11001) << "KGamePropertyArray init" << endl;
   }
@@ -41,13 +41,13 @@ public:
   {
     resize(size);
   }
-  KGamePropertyArray( const KGamePropertyArray<type> &a ) : QArray<type>(a)
+  KGamePropertyArray( const KGamePropertyArray<type> &a ) : QMemArray<type>(a)
   {
     send();
   }
   bool  resize( uint size )
   {
-    if (size!=QArray<type>::size())
+    if (size!=QMemArray<type>::size())
     {
       bool a=true;
       QByteArray b;
@@ -60,7 +60,7 @@ public:
       }
       if (policy()==PolicyLocal || policy()==PolicyDirty)
       {
-        a=QArray<type>::resize(size);
+        a=QMemArray<type>::resize(size);
       }
       return a;
     }
@@ -80,18 +80,18 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::at(i)=data;
+      QMemArray<type>::at(i)=data;
     }
     //kdDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
 
   type at( uint i ) const
   {
-    return QArray<type>::at(i);
+    return QMemArray<type>::at(i);
   }
   type operator[]( int i ) const
   {
-    return QArray<type>::at(i);
+    return QMemArray<type>::at(i);
   }
 
   KGamePropertyArray<type> &operator=(const KGamePropertyArray<type> &a)
@@ -108,7 +108,7 @@ public:
     bool r=true;
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      r=QArray<type>::fill(data,size);
+      r=QMemArray<type>::fill(data,size);
     }
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
@@ -126,7 +126,7 @@ public:
 // note: send() has been replaced by sendProperty so it might be broken now!
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::assign(a);
+      QMemArray<type>::assign(a);
     }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
@@ -138,7 +138,7 @@ public:
   {
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::assign(a,n);
+      QMemArray<type>::assign(a,n);
     }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
@@ -150,7 +150,7 @@ public:
   {
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::duplicate(a);
+      QMemArray<type>::duplicate(a);
     }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
@@ -162,7 +162,7 @@ public:
   {
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::duplicate(a,n);
+      QMemArray<type>::duplicate(a,n);
     }
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
@@ -174,7 +174,7 @@ public:
   {
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::setRawData(a,n);
+      QMemArray<type>::setRawData(a,n);
     }
       if (policy()==PolicyClean || policy()==PolicyDirty)
       {
@@ -186,7 +186,7 @@ public:
   {
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QArray<type>::sort();
+      QMemArray<type>::sort();
     }
     QByteArray b;
     QDataStream s(b, IO_WriteOnly);
@@ -201,13 +201,13 @@ public:
 	{
     //kdDebug(11001) << "KGamePropertyArray load " << id() << endl;
     type data;
-    for (unsigned int i=0;i<QArray<type>::size();i++) {s >> data;  QArray<type>::at(i)=data;}
+    for (unsigned int i=0;i<QMemArray<type>::size();i++) {s >> data;  QArray<type>::at(i)=data;}
 		if (isEmittingSignal()) emitSignal();
   }
 	void save(QDataStream &s)
 	{
     //kdDebug(11001) << "KGamePropertyArray save "<<id() << endl;
-    for (unsigned int i=0;i<QArray<type>::size();i++) s << at(i);
+    for (unsigned int i=0;i<QMemArray<type>::size();i++) s << at(i);
 	}
 
   void command(QDataStream &s,int cmd,bool)
@@ -221,7 +221,7 @@ public:
         uint i;
         type data;
         s >> i >> data;
-        QArray<type>::at(i)=data;
+        QMemArray<type>::at(i)=data;
         //kdDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
@@ -230,8 +230,8 @@ public:
       {
         uint size;
         s >> size;
-        //kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QArray<type>::size()<<" newsize="<<size <<endl; 
-        if (QArray<type>::size()!=size) resize(size);
+        //kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl; 
+        if (QMemArray<type>::size()!=size) resize(size);
         break;
       }
       case CmdFill:
@@ -240,14 +240,14 @@ public:
         type data;
         s >> data >> size;
         //kdDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl; 
-        QArray<type>::fill(data,size);
+        QMemArray<type>::fill(data,size);
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdSort:
       {
         //kdDebug(11001) << "CmdSort:id="<<id()<<endl; 
-        QArray<type>::sort();
+        QMemArray<type>::sort();
         break;
       }
       default: 

@@ -56,7 +56,7 @@ public:
 	KGameDialogGeneralConfig* mGameConfig;
 
 // a list of all config widgets added to this dialog
-	QList<KGameDialogConfig> mConfigWidgets;
+	QPtrList<KGameDialogConfig> mConfigWidgets;
 
 // just pointers:
 	KPlayer* mOwner;

@@ -33,6 +33,7 @@
 #include <qpixmap.h>
 #include <qmap.h>
 #include <qslider.h>
+#include <qwmatrix.h>
 
 #include <kapp.h>
 #include <klocale.h>

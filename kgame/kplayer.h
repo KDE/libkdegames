@@ -55,7 +55,7 @@ class KPlayer : public QObject
   Q_OBJECT
 
 public:
-      typedef QList<KGameIO> KGameIOList;
+      typedef QPtrList<KGameIO> KGameIOList;
 
       // KPlayer(KGame *,KGameIO * input=0);
       /**

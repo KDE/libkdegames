@@ -64,7 +64,7 @@ class KGame : public KGameNetwork
   Q_OBJECT
 
 public:
-  typedef QList<KPlayer> KGamePlayerList;
+  typedef QPtrList<KPlayer> KGamePlayerList;
 
 	/**
 	 * The policy of the property. This can be PolicyClean (@ref setVale uses

@@ -19,8 +19,8 @@
 
 #include <qiodevice.h>
 #include <qbuffer.h>
-#include <qlist.h>
-#include <qqueue.h>
+#include <qptrlist.h>
+#include <qptrqueue.h>
 #include <qtimer.h>
 #include <qvaluelist.h>
 
@@ -78,7 +78,7 @@ public:
   KMessageServerSocket* mServerSocket;
 
   QList <KMessageIO> mClientList;
-  QQueue <MessageBuffer> mMessageQueue;
+  QPtrQueue <MessageBuffer> mMessageQueue;
   QTimer mTimer;
 };
 
@@ -280,7 +280,7 @@ int KMessageServer::clientCount() const
 QValueList <Q_UINT32> KMessageServer::clientIDs () const
 {
   QValueList <Q_UINT32> list;
-  for (QListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
+  for (QPtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
     list.append ((*iter)->id());
   return list;
 }
@@ -290,7 +290,7 @@ KMessageIO* KMessageServer::findClient (Q_UINT32 no) const
   if (no == 0)
     no = d->mAdminID;
 
-  QListIterator <KMessageIO> iter (d->mClientList);
+  QPtrListIterator <KMessageIO> iter (d->mClientList);
   while (*iter)
   {
     if ((*iter)->id() == no)
@@ -338,7 +338,7 @@ Q_UINT32 KMessageServer::uniqueClientNumber() const
 
 void KMessageServer::broadcastMessage (const QByteArray &msg)
 {
-  for (QListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
+  for (QPtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
     (*iter)->send (msg);
 }
 

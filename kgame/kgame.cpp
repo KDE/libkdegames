@@ -39,7 +39,7 @@
 
 #include <qbuffer.h>
 #include <qtimer.h>
-#include <qqueue.h>
+#include <qptrqueue.h>
 #include <qfile.h>
 
 #include <klocale.h>
@@ -62,7 +62,7 @@ public:
 
     int mUniquePlayerNumber;
     KPlayer *mCurrentPlayer;
-    QQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
+    QPtrQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
     KRandomSequence* mRandom;
     KGame::GamePolicy mPolicy;
 
@@ -303,12 +303,12 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
 
 KPlayer * KGame::findPlayer(Q_UINT32 id) const
 {
- for (QListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it) {
+ for (QPtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it) {
    if (it.current()->id() == id) {
      return it.current();
    }
  }
- for (QListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it) {
+ for (QPtrListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it) {
    if (it.current()->id() == id) {
      return it.current();
    }
@@ -1022,7 +1022,7 @@ void KGame::setupGame(Q_UINT32 sender)
 
   streamS << cnt;
 
-  QListIterator<KPlayer> it(mTmpList);
+  QPtrListIterator<KPlayer> it(mTmpList);
   KPlayer *player;
   while (it.current()) {
     player=it.current();
@@ -1271,10 +1271,10 @@ void KGame::setPolicy(GamePolicy p,bool recursive)
     dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
 
     // Set all KPLayer (active or inactive) property policy
-    for (QListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it) {
+    for (QPtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it) {
       it.current()->dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
     }
-    for (QListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it) {
+    for (QPtrListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it) {
       it.current()->dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
     }
   }
