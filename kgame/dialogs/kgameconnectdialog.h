@@ -77,10 +77,12 @@ private:
 };
 
 /**
+ * @short Dialog to ask for host and port
+ *
  * This Dialog is used to create a game. You call initConnection(port,
  * QString::null, parent, true) to create a network game (as a server)
  * or initConnection(port, host, parent) to join a network game.
- * @short Dialog to ask for host and port
+ *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KGameConnectDialog : public KDialogBase
