@@ -21,17 +21,20 @@
     $Id$
 */
 
-#include <stdio.h>
-
-#include <kdebug.h>
-#include <klocale.h>
-#include <assert.h>
 
 #include "kgame.h"
 #include "kgameio.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
 #include "kgamepropertyhandler.h"
+
+#include <kdebug.h>
+#include <klocale.h>
+
+#include <qbuffer.h>
+
+#include <stdio.h>
+#include <assert.h>
 
 #define KPLAYER_LOAD_COOKIE 7285
 
@@ -373,7 +376,11 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
       }
     break;
     default:
-          emit signalNetworkData((int)msgid,stream,(int)sender,this);
+    // FIXME ab: is this correct
+          emit signalNetworkData(msgid,((QBuffer*)stream.device())->readAll(),sender,this);
+    // or this?  -> KGame::networkTransmission uses msgid - IdUser but it wasn't
+    // used here...
+//         emit signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),sender,this);
           kdDebug(11001) << "KPlayer::ReceiveNetworkTransmision: User data msgid " << msgid << endl;
     break;
   }

@@ -40,3 +40,6 @@
 11.10.2001  KGameDialogGeneralConfig now doesn't provide setMin/maxPlayers()
             anymore. The game should manage this internally. layout() is
             obsolete as well 
+18.10.2001  KPlayer::signalNetworkData contained QDataStream& instead of const
+            QByteArray& parameter (oops!). This is fixed now. All apps which
+            used this signal must be changed.

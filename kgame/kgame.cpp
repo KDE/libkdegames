@@ -981,7 +981,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
                       << endl;
      }
      kdDebug(11001) << "KGame::slotNetworkTransmision:: User data msgid " << msgid << endl;
-     emit signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),(int)receiver,sender);
+     emit signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),receiver,sender);
    }
    break;
  }

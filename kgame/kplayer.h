@@ -413,9 +413,9 @@ signals:
        *  The player object got a message which was targeted
        *  at it but has no default method to process it. This
        *  means probagbly a user message. Conencting to this signal
-       *  alloed to process it.
+       *  allowed to process it.
        */
-       void signalNetworkData(int msgid,QDataStream &stream,Q_UINT32 sender,KPlayer *me);
+       void signalNetworkData(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer *me);
 
        /**
         * This signal is emmited if a player property changes its value and

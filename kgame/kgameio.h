@@ -48,6 +48,7 @@ class KProcess;
  *  To achieve this you have to make all of your player inputs through a
  *  KGameIO. You will usually call @ref KGameIO::sendInput to do so. 
  *  }
+ *  @author Martin Heni <martin@heni-online.de>
  */
 class KGameIO : public QObject
 {
@@ -169,6 +170,7 @@ private:
 /**
  *  The KGameKeyIO class. It is used to process keyboard input
  *  from a widget and create moves for the player it belongs to.
+ *  @author Martin Heni <martin@heni-online.de>
  */
 class KGameKeyIO : public KGameIO
 {
@@ -229,6 +231,7 @@ protected:
 /**
  *  The KMouseKeyIO class. It is used to process mouse input
  *  from a widget and create moves for the player it belongs to.
+ *  @author Martin Heni <martin@heni-online.de>
  */
 class KGameMouseIO : public KGameIO
 {
@@ -299,6 +302,7 @@ class KGameProcessIOPrivate;
  *  Its counterpart is the @ref KGameProcess class which needs
  *  to be used by the computer player. See its documentation
  *  for the definition of the computer player.
+ *  @author Martin Heni <martin@heni-online.de>
  */
 class KGameProcessIO : public KGameIO
 {

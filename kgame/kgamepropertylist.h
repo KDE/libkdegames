@@ -135,7 +135,7 @@ public:
 
   Iterator remove( Iterator it )
   {
-    erase(it);
+    return erase(it);
   }
 
   void remove( const type& d )
@@ -206,7 +206,7 @@ public:
         s >> i >> data;
         it=at(i);
         QValueList<type>::insert(it,data);
-        kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
+//        kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
@@ -215,7 +215,7 @@ public:
         type data;
 	s >> data;
         QValueList<type>::append(data);
-        kdDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
+//        kdDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
         if (isEmittingSignal()) emitSignal();
 	break;
       }
