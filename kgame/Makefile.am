@@ -9,7 +9,7 @@ KGAME = kgame.cpp kplayer.cpp kgamenetwork.cpp kgameproperty.cpp \
 KGAME_H = kgame.h kplayer.h kgamenetwork.h kgameproperty.h kgamemessage.h \
 		kgameio.h kgameprocess.h kgamepropertyarray.h \
 		kgamepropertylist.h kgamechat.h kgamepropertyhandler.h \
-		kgameerror.h kgamesequence.h
+		kgameerror.h kgamesequence.h kgameversion.h
 
 KMESSAGE = kmessageio.cpp kmessageserver.cpp kmessageclient.cpp
 KMESSAGE_H = kmessageio.h kmessageserver.h kmessageclient.h
