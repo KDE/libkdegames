@@ -24,14 +24,8 @@
 #include <kstdgameaction.h>
 #include <kstdaccel.h>
 #include <klocale.h>
-
 #include <kaction.h>
 
-#include <kapp.h>
-
-
-//TODO: ui_standards: carddeck?
-//TODO highscores
 KStdGameAction::KStdGameAction()
 {
 }

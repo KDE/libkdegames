@@ -25,7 +25,6 @@
 #ifndef KSTDGAMEACTION_H
 #define KSTDGAMEACTION_H
 
-//class KToggleAction;
 class KAction;
 class QObject;
 
@@ -51,9 +50,10 @@ public:
         // Game Menu
         New=1, Load, Save, SaveAs, End, Highscores,
         Print, Quit,
+	// Settings menu
 	Carddecks
 //AB: do we need more? maybe a "move" menu with "undo", "redo" or so ?
-//
+
     };
 
     /**
