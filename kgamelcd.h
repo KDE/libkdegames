@@ -31,7 +31,7 @@ class QTimer;
 /**
  * This class is a visually enhanced @ref QLCDNumber:
  * <ul>
- * <li> It can show an additionnal string before the integer being
+ * <li> It can show an additional string before the integer being
  * displayed.</li>
  * <li> Its foreground and background colors can easily be modified. </li>
  * <li> It can be highlighted for a short time. </li>

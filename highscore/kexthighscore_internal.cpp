@@ -812,7 +812,7 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     if ( score.type()==Lost && !trackLostGames ) return true;
 
     KURL url = queryURL(Submit);
-    manager.additionnalQueryItems(url, score);
+    manager.additionalQueryItems(url, score);
     int s = (score.type()==Won ? score.score() : (int)score.type());
     QString str =  QString::number(s);
     Manager::addToQueryURL(url, "score", str);

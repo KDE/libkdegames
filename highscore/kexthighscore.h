@@ -247,7 +247,7 @@ class Manager
     /**
      * @return true if the first score is strictly worse than the second one.
      * By default return <pre>s1.score()<s2.score()</pre>. You can reimplement
-     * this method if additionnal items added to @ref Score can further
+     * this method if additional items added to @ref Score can further
      * differentiate the scores (for e.g. the time spent).
      *
      * Note that you do not need to use directly this method, simply write
@@ -303,11 +303,11 @@ class Manager
      *
      * @param score the score to be submitted.
      */
-    virtual void additionnalQueryItems(KURL &url, const Score &score) const
+    virtual void additionalQueryItems(KURL &url, const Score &score) const
         { Q_UNUSED(url); Q_UNUSED(score); }
 
     /**
-     * Add an entry to the url to be submitted (@see additionnalQueryItems).
+     * Add an entry to the url to be submitted (@see additionalQueryItems).
      *
      * @param item the item name
      * @param content the item content

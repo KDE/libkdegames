@@ -321,7 +321,7 @@ void TotalMultipleScoresList::addLineItem(const ItemArray &si,
 {
     const PlayerInfos &pi = internal->playerInfos();
     uint k = 1; // skip "id"
-    for (uint i=0; i<4; i++) { // skip additionnal fields
+    for (uint i=0; i<4; i++) { // skip additional fields
         const ItemContainer *container;
         if ( i==2 ) container = pi.item("nb games");
         else if ( i==3 ) container = pi.item("mean score");
