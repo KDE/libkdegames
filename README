@@ -5,3 +5,6 @@ are useful for other games.
 Contents:
   kcarddialog: Access to carddeck selection and administration
                for cardgames
+  kstdgameaction: just like kstdaction this provides some default action for
+                  kde games. games often use different entries than other apps
+                  (like "game" instead of "file"), so use this if possible
