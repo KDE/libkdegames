@@ -105,6 +105,9 @@ protected slots:
 
 protected:
 	virtual void returnPressed(const QString&);
+	/**
+	 * obsolete
+	 **/
 	void updatePlayers();
 
 private:

@@ -132,6 +132,8 @@ void KGameChat::setFromPlayer(KPlayer* p)
  d->mFromPlayer = p;
 }
 
+
+// obsolete - will be removed *very* soon
 void KGameChat::updatePlayers()
 {
 kdError(11001) << "KGameChat::updatePlayers() is not working and shouldn't be called" << endl;

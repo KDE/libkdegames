@@ -135,8 +135,6 @@ protected:
 	 **/
 	virtual void returnPressed(const QString&);
 
-	void updatePlayers();//TODO
-
 	/**
 	 * The Id of the next player. Incremented after every call.
 	 **/

@@ -27,14 +27,38 @@
 #include <qframe.h>
 #include <qstring.h>
 
+#include <kglobalsettings.h>
+
 class QListBoxItem;
 
 class KChatBasePrivate;
 
 /**
- * This is the base class for both KChat and KGameChat. KGameChat is the class
- * you want to use if you write a KGame based game as it will do most things for
- * you. KChat is more or less the same but not KGame dependant
+ * This is the base class for both @ref KChat and @ref KGameChat. @ref KGameChat is the class
+ * you want to use if you write a @ref KGame based game as it will do most things for
+ * you. @ref KChat is more or less the same but not KGame dependant
+ *
+ * KChatBase provides a complete chat widget, featuring different sending means
+ * (e.g. "send to all", "send to player1", "send to group2" and so on - see @ref
+ * addSendingEntry). It also provides full auto-completion capabilities (see
+ * @ref KCompletion and @ref KLineEdit) which defaults to disabled. The user can
+ * change this by right-clicking on the @ref KLineEdit widget and selecting the
+ * desired behaviour. You can also change this manually by calling @ref
+ * setCompletionMode.
+ *
+ * To make KChatBase useful you have to overwrite at least @ref returnPressed.
+ * Here you should send the message to all of your clients (or just some of
+ * them, depending on @ref sendingEntry).
+ *
+ * To add a message just call @ref addMessage with the nickname of the player
+ * who sent the message and the message itself. If you don't want to use @ref
+ * layoutMessage by any reason you can also call @ref addItem directly. But you
+ * should better replace @ref layoutMessage instead.
+ *
+ * You probably don't want to use the abstract class KChatBase directly but use
+ * one of the derived classess @ref KChat or @ref KGameChat. The latter is the
+ * widget of choice if you develop a @ref KGame application as you don't have to
+ * do anything but providing a @ref KGame object.
  *
  * @short The base class for chat widgets
  * @author Andreas Beckermann <b_mann@gmx.de>
@@ -65,14 +89,35 @@ public:
 
 	/**
 	 * Adds a new entry in the combo box. The default is "send to all
-	 * players" only.
+	 * players" only. This function is provided for convenience. You can
+	 * also call @ref inserSendingEntry with index = -1.
+	 * See also @ref nextId!
 	 * @param text The text of the new entry
 	 * @param id An ID for this entry. This must be unique for this
 	 * entry. It has nothing to do with the position of the entry in the
-	 * combo box!
+	 * combo box! See @ref nextId
 	 * @return True if successfull, otherwise false (e.g. if the id is already used)
 	 **/
 	bool addSendingEntry(const QString& text, int id);
+
+	/**
+	 * Inserts a new entry in the combo box.
+	 * @param text The entry
+	 * @param id An ID for this entry. This must be unique for this
+	 * entry. It has nothing to do with the position of the entry in the
+	 * combo box! See @ref nextId
+	 * @param index The position of the entry. If -1 the entry will be added
+	 * at the bottom
+	 * @return True if successfull, otherwise false (e.g. if the id is already used)
+	 **/
+	bool insertSendingEntry(const QString& text, int id, int index = -1);
+
+	/**
+	 * This changes a combo box entry.
+	 * @param text The new text of the entry
+	 * @param id The ID of the item to be changed
+	 **/
+	void changeSendingEntry(const QString& text, int id);
 
 	/**
 	 * Removes the entry with the ID id from the combo box. Note that id is
@@ -87,29 +132,6 @@ public:
 	 **/
 	int sendingEntry() const;
 	
-	/**
-	 * Inserts a new entry in the combo box.
-	 * Note that this is still under construction and probably not working.
-	 * Other functions will manipulate the positions according to their
-	 * specifications and it is not sure that they will follow your given
-	 * index. In short: this is a TODO
-	 * @param text The entry
-	 * @param id An ID for this entry. This must be unique for this
-	 * entry. It has nothing to do with the position of the entry in the
-	 * combo box!
-	 * @param index The position of the entry. If -1 the entry will be added
-	 * at the bottom
-	 * @return True if successfull, otherwise false (e.g. if the id is already used)
-	 **/
-	bool insertSendingEntry(const QString& text, int id, int index = -1);
-
-	/**
-	 * This changes a combo box entry.
-	 * @param text The new text of the entry
-	 * @param id The ID of the item to be changed
-	 **/
-	void changeSendingEntry(const QString& text, int id);
-
 	/**
 	 * @return The index of the combo box entry with the given id
 	 **/
@@ -128,6 +150,11 @@ public:
 	 * default)
 	 **/
 	virtual bool acceptMessage() const;
+
+	/**
+	 * See @ref KLineEdit::setCompletionMode
+	 **/
+	void setCompletionMode(KGlobalSettings::Completion mode);
 
 public slots:
 	/**
@@ -181,6 +208,10 @@ protected:
 	 * This is called whenever the user pushed return ie wants to send a
 	 * message.
 	 *
+	 * Note that you MUST add the message to the widget when this function
+	 * is called as it has already been added to the @ref KCompletion object
+	 * of the @ref KLineEdit widget!
+	 *
 	 * Must be implemented in derived classes
 	 * @param text The message to be sent
 	 **/
@@ -195,13 +226,19 @@ protected:
 	 **/
 	virtual QString comboBoxItem(const QString& name) const;
 
+	/**
+	 * Create a @ref QListBoxItem for this message. This function is not yet
+	 * written usefully - currently just a @ref QListBoxTex object is
+	 * created which shows the message in this format: "fromName: text".
+	 * This should fit most peoples needs but needs further improvements.
+	 **/
 	virtual QListBoxItem* layoutMessage(const QString& fromName, const QString& text);
-	
-	void updatePlayers();
 
 private slots:
 	/**
-	 * checks if a text was entered and calls @ref returnPressed
+	 * Check if a text was entered and if @ref acceptMessage returns true. 
+	 * Then add the message to the @ref KCompletion object of the @ref KLineEdit
+	 * widget and call @ref returnPressed
 	 **/
 	void slotReturnPressed(const QString&);
 

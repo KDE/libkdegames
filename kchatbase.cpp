@@ -87,6 +87,8 @@ void KChatBase::init(bool noComboBox)
  d->mEdit = new KLineEdit(this);
  d->mEdit->setHandleSignals(false);
  d->mEdit->setTrapReturnKey(true);
+ d->mEdit->completionObject(); // add the completion object
+ d->mEdit->setCompletionMode(KGlobalSettings::CompletionNone);
  connect(d->mEdit, SIGNAL(returnPressed(const QString&)), this, SLOT(slotReturnPressed(const QString&)));
  h->addWidget(d->mEdit);
 
@@ -122,7 +124,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
  }
  if (d->mIndex2Id.findIndex(id) != -1) {
 	kdError(11000) << "KChatBase: Cannot add more than one entry with the same ID! " << endl;
-	kdError(11000) << "KChatBase: Text=" << text << endl;
+	kdError(11000) << "KChatBase: Text="<<text<<endl;
 	return false;
  }
  d->mCombo->insertItem(text, index);
@@ -140,7 +142,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 int KChatBase::sendingEntry() const
 {
  int index = d->mCombo->currentItem();
- if (d->mIndex2Id.at(index) == d->mIndex2Id.end()) {
+ if (!d->mIndex2Id.contains(index)) {
 	kdWarning(11000) << "could not find the selected sending entry!" << endl;
 	return -1;
  }
@@ -209,12 +211,10 @@ void KChatBase::slotReturnPressed(const QString& text)
  } else if (!acceptMessage()) {
 	return;
  }
+ d->mEdit->completionObject()->addItem(text);
+// connect(d->mEdit, SIGNAL(returnPressed(const QString&)), comp, SLOT(addItem(const QString&)));
  d->mEdit->clear();
  returnPressed(text);
-}
-
-void KChatBase::updatePlayers()
-{
 }
 
 QString KChatBase::comboBoxItem(const QString& name) const
@@ -226,5 +226,8 @@ void KChatBase::slotClear()
 {
  d->mBox->clear();
 }
+
+void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
+{ d->mEdit->setCompletionMode(mode); }
 
 #include "kchatbase.moc"

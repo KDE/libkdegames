@@ -95,12 +95,6 @@ void KChat::returnPressed(const QString& text)
  }
 }
 
-void KChat::updatePlayers()
-{
-//TODO
-
-}
-
 int KChat::addPlayer(const QString& nickname)
 {
  int id = uniqueId();
