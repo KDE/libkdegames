@@ -42,6 +42,8 @@ public:
 
 	QMap<int, QString> mNameMap;
 	QIntDict<KGamePropertyBase> mIdDict;
+  int mUniqueId;
+	int mId;
 };
 
 KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent) : QObject(parent)
@@ -65,7 +67,19 @@ void KGamePropertyHandler::init()
 {
  kdDebug(11001) << "CREATE KGamePropertyHandler("<<this<<")"<<endl;
  d = new KGamePropertyHandlerPrivate; // for future use - is BC important to us?
- mId = 0;
+ d->mId = 0;
+ d->mUniqueId=KGamePropertyBase::IdAutomatic;
+}
+
+
+int KGamePropertyHandler::id() const
+{
+  return d->mId;
+}
+
+void KGamePropertyHandler::setId(int id)
+{
+  d->mId = id;
 }
 
 void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, const char * sendf, const char *emitf)
@@ -83,8 +97,8 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
 
 bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSender)
 {
- //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << mId << endl;
- if (id != mId) {
+ //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
+ if (id != d->mId) {
 	return false; // Is the message meant for us?
  }
  KGamePropertyBase* p;
@@ -193,11 +207,24 @@ bool KGamePropertyHandler::save(QDataStream &stream)
  return true;
 }
 
+void KGamePropertyHandler::setPolicy(int p,bool userspace)
+{
+ QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ while (it.current())
+ {
+   if (!userspace || it.current()->id()>=KGamePropertyBase::IdUser)
+   {
+     it.current()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
+   }
+	++it;
+ }
+}
+
 void KGamePropertyHandler::unlockProperties()
 {
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
-	it.current()->setReadOnly(false);
+	it.current()->unlock();
 	++it;
  }
 }
@@ -206,9 +233,14 @@ void KGamePropertyHandler::lockProperties()
 {
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
-	it.current()->setReadOnly(true);
+	it.current()->lock();
 	++it;
  }
+}
+
+int KGamePropertyHandler::uniquePropertyId()
+{
+  return d->mUniqueId++;
 }
 
 void KGamePropertyHandler::flush()

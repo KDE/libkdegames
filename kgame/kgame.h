@@ -79,7 +79,7 @@ public:
     /**
      * Game status: kind of unused at the moment
      */
-    enum GameStatus { Init, Run, Pause, End, Abort, SystemPause };
+    enum GameStatus { Init, Run, Pause, End, Abort, SystemPause, Intro, UserStatus };
 
     // Properties
     /**
@@ -319,6 +319,9 @@ public:
      **/
     virtual void networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender, Q_UINT32 clientID);
 
+    /**
+     * Returns a pointer to the KGAme property handler
+     **/
     KGamePropertyHandler* dataHandler() const;
 
 protected slots:

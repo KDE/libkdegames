@@ -54,7 +54,10 @@ public:
 		IdMinPlayer=8,
 
 		IdCommand, // Reserved for internal use
-		IdUser=256
+		IdUser=256,
+
+    IdAutomatic=0x7000  // Id's from here on are automatically given (16bit)
+    
 	};
 
 	/**
@@ -100,6 +103,7 @@ public:
 	 **/
 	enum PropertyPolicy
 	{
+    PolicyUndefined = 0,
 		PolicyClean = 1,
 		PolicyDirty = 2,
 		PolicyLocal = 3
@@ -260,23 +264,43 @@ public:
 	 * unique, i.e. you cannot have two properties with the same id for one
 	 * player, although (currently) nothing prevents you from doing so. But
 	 * you will get strange results!
+   *
 	 * @param owner The owner of this data. This will send the data
 	 * using @ref KPropertyHandler::sendProperty whenever you call @ref send
+   *
+   * @param If not 0 you can set the policy of the property here
+   *
+   * @param if not 0 you can assign a name to this property
 	 *
 	 **/
-	void registerData(int id, KGamePropertyHandler* owner, QString name=0);
+	int registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, QString name=0);
 
 	/** 
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-	void registerData(int id, KGame* owner, QString name=0);
+	int registerData(int id, KGamePropertyHandler* owner, QString name=0);
 
 	/** 
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-	void registerData(int id, KPlayer* owner, QString name=0);
+	int registerData(int id, KGame* owner, QString name=0);
+
+	/** 
+	 * This is an overloaded member function, provided for convenience.
+	 * It differs from the above function only in what argument(s) it accepts.
+	 **/
+	int registerData(int id, KPlayer* owner, QString name=0);
+
+	/** 
+	 * This is an overloaded member function, provided for convenience.
+	 * It differs from the above function only in what argument(s) it accepts.
+   * In particular you can use this function to create properties which
+   * will have an automatic id assigned. The new id is returned.
+	 **/
+	int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, QString name=0);
+
  
 protected:
 	/**

@@ -434,6 +434,7 @@ bool KGame::isRunning() const
 KGamePropertyHandler* KGame::dataHandler() const
 { return d->mProperties; }
 
+
 KGame::KGamePlayerList* KGame::inactivePlayerList()
 { return &d->mInactivePlayerList; }
 
@@ -513,8 +514,7 @@ bool KGame::nextPlayer(KPlayer *last,bool exclusive)
    lastId = 0;
  }
  // remove when this has been checked
- #warning Martin please check if this is stil correct!  minId is now unsigned int and i dont know about 0xffff :-(
- minId = 0xffff; 
+ minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...
  nextId = minId;
  nextplayer = 0;
  minplayer = 0;

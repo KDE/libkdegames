@@ -72,24 +72,40 @@ void KGamePropertyBase::init()
  setReadOnly(false);
  mFlags.bits.locked = false ; // setLocked(false); is NOT possible as it checks whether isLocked() allows to change the status
 
- // clean is default
- setPolicy(PolicyClean);
+ // local is default
+ setPolicy(PolicyLocal);
 }
 
-void KGamePropertyBase::registerData(int id, KGame* owner, QString name)
-{ registerData(id, owner->dataHandler(), name);  }
+int KGamePropertyBase::registerData(int id, KGame* owner, QString name)
+{ return registerData(id, owner->dataHandler(), name);  }
 
-void KGamePropertyBase::registerData(int id, KPlayer* owner, QString name)
-{ registerData(id, owner->dataHandler(), name);  }
+int KGamePropertyBase::registerData(int id, KPlayer* owner, QString name)
+{ return registerData(id, owner->dataHandler(), name);  }
 
-void KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, QString name)
+int KGamePropertyBase::registerData( KGamePropertyHandler* owner,PropertyPolicy p, QString name)
+{ return registerData(-1, owner,p, name);  }
+
+int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, QString name)
+{ return registerData(id, owner,PolicyUndefined, name);  }
+
+int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, QString name)
 {
 // we don't support changing the id
- if (!mOwner) {
+ if (!owner)
+ {
+   kdWarning() << "KGamePropertyBase::registerData:: Resetting owner=0. Sure you want to do this?" << endl;
+   mOwner=0;
+   return -1;
+ }
+ if (!mOwner)
+ {
+  if (id==-1) id=owner->uniquePropertyId();
 	mId = id;
 	mOwner = owner;
 	mOwner->addProperty(this, name);
+  if (p!=PolicyUndefined) setPolicy(p);
  }
+ return mId;
 }
 
 bool KGamePropertyBase::sendProperty()

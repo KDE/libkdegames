@@ -121,7 +121,7 @@ public:
 	/**
 	 * @return the id of the handler
 	 **/
-	int id() const { return mId; }
+	int id() const;
 	
 	/**
 	 * Adds a @ref KGameProperty property to the handler
@@ -139,6 +139,16 @@ public:
 	 * @return true on success
 	 **/
 	bool removeProperty(KGamePropertyBase *data);
+
+  /**
+   * returns a unique property ID starting called usually with a base of
+   * @ref KGamePropertyBase::IdAutomatic. This is used internally by
+   * the property base to assign automtic id's. Not much need to
+   * call this yourself.
+   *
+   */
+  int uniquePropertyId();
+
 
 	/**
 	 * Loads properties from the datastream
@@ -205,16 +215,23 @@ public:
 	 * Use id as new ID for this KGamePropertyHandler. This is used
 	 * internally only.
 	 **/
-	void setId(int id)//AB: TODO: make this protected in KGamePropertyHandler!!
-	{
-		mId = id;
-	}
+	void setId(int id);//AB: TODO: make this protected in KGamePropertyHandler!!
 
 	/**
 	 * Calls @ref KGamePropertyBase::setReadOnly(false) for all properties of this
 	 * player. See also @ref lockProperties
 	 **/
 	void unlockProperties();
+
+	/**
+     * Set the policy for all kgame variables which are currently registerd in
+     * the KGame proeprty handler. See @ref KGamePropertyBase::setPolicy
+     *
+     * @param p is the new policy for all properties of this handler
+     * @param is userspace=true (default) only user properties are changed.
+     * Otherwise also the system properties
+	 **/
+	void setPolicy(int p, bool userspace=true);
 
 	/**
 	 * Calls @ref KGamePropertyBase::setReadOnly(true) for all properties of this
@@ -299,7 +316,6 @@ private:
 
 private:
 	KGamePropertyHandlerPrivate* d;
-	int mId;
 };
 
 #endif
