@@ -3,13 +3,13 @@ library.
 This document has been written by:
  Andreas Beckermann <b_mann@gmx.de>
  M. Heni <martin@heni-online.de>
- B.??? <???>
+ Burkhard Lehner <Burkhard.Lehner@gmx.de>
 
 This document is published under the terms of the GNU FDL
 
 !!!
-Not that this is the initial version of this document and has not yet been
-aproved by all core developers (and is for from being complete)
+Note that this is the initial version of this document and has not yet been
+aproved by all core developers (and is far from being complete)
 AB: please remove this comments as soon as all KGame hackers have read the
 document
 !!!
@@ -34,7 +34,7 @@ document
 --------------
 
 First we have to clear some words. The main expressions used in KGame which
-needs a definitions are
+need a definition are
 
 1.1 Message Server
 1.2 Client or Message Client
@@ -44,20 +44,21 @@ needs a definitions are
 1.6 Player
 
 The most important and confusing ones are Master, Admin and Server. We make
-quite big a differerence between those inside KGame.
+quite big differerences between those inside KGame.
 
 1.1 Message Server:
 -------------------
 A game has always exactly one object of this class, for local games as well as
- for network games. For network games,
-this object can be on one of the users processes (usually inside KGame), or it
- can also be on an
-independant computer, that has no idea about what game is played on it. A
-KMessageClient object can connect to it.
-It's main purpose is transmitting messages between KMessageClient objects.
+for network games. For network games, this object can be on one of the users
+processes (usually inside KGame), or it can also be on an independant computer,
+that has no idea about what game is played on it.
+
+A KMessageClient object can connect to it. It's main purpose is transmitting
+messages between KMessageClient objects.
+
 The Message Server is the main communication object. It is represented by the
- class KMessageServer. Note that there is also a "Master" and a "Server" which
- both differ heavily from the Message Server!
+class KMessageServer. Note that there is also a "Master" and a "Server" which
+both differ heavily from the Message Server!
 
 1.2 Client, Message Client:
 ---------------------------
@@ -65,19 +66,22 @@ Each process that wants to take part in the game must have a
 KMessageClient object, that is connected to the Message Server. KGame creates
 this object and connects it to the Messager Server, so that you usually don't
 need to create these of your own. Even in a local game (no network) there
-must be a message server and one message client connected to it. Each message
-client has a unique ID number (a positive integer value, not zero).
+must be a message server and one message client connected to it. This is usually
+done by the KGame object itself.
+
+Each message client has a unique ID number (a positive integer value, not zero).
 The KMessageClient object, which does the communication with the Message Server
- is called "Message Client" and to simplify the use we call any KGame object (or
- even the game process) that is connected to a game (i.e. even the Master) just
- "Client"
+is called "Message Client" and to simplify the use we call any KGame object (or
+even the game process) that is connected to a game (i.e. even the Master) just
+"Client".
+
 The main purpose of a Client is to connect to a Master (i.e. to a game) and to
- communicate with it. A client has always a KGame object.
+communicate with it. A client has always a KGame object.
 
 1.3 Master:
 -----------
 The process that contains the Message Server is called "Master". In any local
- game this is the game process. The Message Server is started by KGame using
+game this is the game process. The Message Server is started by KGame using
 KGame::setMaster(true) which is automatically done on startup. The Message
 Server is deleted automatically as soon as you connect to another Master.
 So in most cases there is exactly one KGame object / Client which is Master. But
