@@ -25,12 +25,6 @@ class QIconViewItem;
 class QLabel;
 class KIconView;
 
-#define KCARD_DECKPATH QString::fromLatin1("carddecks/decks/")
-#define KCARD_DEFAULTDECK QString::fromLatin1("deck0")
-#define KCARD_CARDPATH QString::fromLatin1("carddecks/")
-#define KCARD_DEFAULTCARD QString::fromLatin1("11")
-#define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards1/")
-#define KCARD_DEFAULTFILEMASK QString::fromLatin1(".png");
 
 
 /**

@@ -39,6 +39,13 @@
 
 #include "kcarddialog.h"
 
+#define KCARD_DECKPATH QString::fromLatin1("carddecks/decks/")
+#define KCARD_DEFAULTDECK QString::fromLatin1("deck0")
+#define KCARD_CARDPATH QString::fromLatin1("carddecks/")
+#define KCARD_DEFAULTCARD QString::fromLatin1("11")
+#define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards1/")
+#define KCARD_DEFAULTFILEMASK QString::fromLatin1(".png");
+
 int KCardDialog::getCardDeck(QString &mDeck,QString &mCarddir,QWidget *mParent,
                   int mFlags, QString mAlternateDeck,QString mAlternateCarddir,
                   QString mMask, bool* mRandomDeck, bool* mRandomCardDir)
@@ -158,6 +165,8 @@ void KCardDialog::setupDialog()
   QString path, file;
   QWMatrix m;
   m.scale(0.8,0.8);
+  
+  setInitialSize(QSize(600,400));
 
   if (! (flags() & NoDeck))
   {
@@ -173,11 +182,11 @@ void KCardDialog::setupDialog()
     deckIconView->setSelectionMode(QIconView::Single);
     deckIconView->setResizeMode(QIconView::Adjust);
     deckIconView->setMinimumWidth(360);
-    deckIconView->setMaximumHeight(170);
+    deckIconView->setMinimumHeight(170);
 
     // deck select
     QVBoxLayout* l = new QVBoxLayout(layout);
-    QGroupBox* grp3 = new QGroupBox(i18n("Back"), plainPage());
+    QGroupBox* grp3 = new QGroupBox(i18n("Backside"), plainPage());
     grp3->setFixedSize(100, 130);
     l->addWidget(grp3, 0, AlignTop|AlignHCenter);
     deckLabel = new QLabel(grp3);
@@ -208,11 +217,11 @@ void KCardDialog::setupDialog()
     cardIconView->setGridY(50);
     cardIconView->setResizeMode(QIconView::Adjust);
     cardIconView->setMinimumWidth(360);
-    cardIconView->setMaximumHeight(170);
+    cardIconView->setMinimumHeight(170);
 
     // Card select
     QVBoxLayout* l = new QVBoxLayout(layout);
-    QGroupBox* grp4 = new QGroupBox(i18n("Front"), plainPage());
+    QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), plainPage());
     grp4->setFixedSize(100, 130);
     l->addWidget(grp4, 0, AlignTop|AlignHCenter);
     cardLabel = new QLabel(grp4);
