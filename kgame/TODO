@@ -1,9 +1,5 @@
-- 18.02.2001: Network Init can be called more than once. Has very interesting
-              effects ;-). Should be prevented (if (connected()) return false; ??
-              Kind of fixed?
-- 24.02.2001: KGameErrorDialog::slotVersionError(): cookie and version (local and remote) must be shown in the message 
-              TODO: more parameters to signal
-- 28.02.2001: Direct computer player for kpoker like games support needs to be improved
+- 28.02.2001: Direct computer player for kpoker like games support needs to be 
+              improved. UPDATE (01/10/06): but what is needed there?
 - 05.03.2001: Documentation. I am thinking of an explaination of the 
               class + methods and example code for the "key" methods. A sample
               implementation in a small game (like the current kdenonbeta/kgame
@@ -35,3 +31,6 @@
 - 23.09.2001: does the virtual destructor make sense for KGamePropertyBase?
 - 29.09.2001: GGZ integration. I (Andi) already volunteered for this - it's just
               here so that I don't forget it
+- 06.10.2001: add KGamePropertyHandler::setDebug(false) to clear all debug names
+              (and to not accept new names) of KGameProperty. Will save some
+	      memory

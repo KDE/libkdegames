@@ -51,13 +51,16 @@ void KGameErrorDialog::setKGame(const KGame* g)
 {
  slotUnsetKGame();
  d->mGame = g;
+
+ connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
+
+// the error signals:
  connect(d->mGame, SIGNAL(signalNetworkErrorMessage(int, QString)), 
 		this, SLOT(slotError(int, QString)));
  connect(d->mGame, SIGNAL(signalConnectionBroken()), 
 		this, SLOT(slotServerConnectionLost()));
  connect(d->mGame, SIGNAL(signalClientDisconnected(Q_UINT32,bool)), 
 		this, SLOT(slotClientConnectionLost(Q_UINT32,bool)));
- connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 }
 
 void KGameErrorDialog::slotUnsetKGame()

@@ -60,16 +60,16 @@ QString KGameError::errorText(int errorCode, QDataStream& s)
 		Q_INT32 cookie2;
 		s >> cookie1;
 		s >> cookie2;
-		text = i18n("Cookie mismatch!\n");
+		text = i18n("Cookie mismatch!\nExpected Cookie: %1\nReceived Cookie: %2").arg(cookie1).arg(cookie2);
 		break;
 	}
 	case Version:
 	{
-		Q_INT32 cookie1; 
-		Q_INT32 cookie2;
-		s >> cookie1;
-		s >> cookie2;
-		text = i18n("KGame Version mismatch!\n");
+		Q_INT32 version1;
+		Q_INT32 version2;
+		s >> version1;
+		s >> version2;
+		text = i18n("KGame Version mismatch!\nExpected Version: %1\nReceived Version: %2\n").arg(version1).arg(version2);
 		break;
 	}
 	default:
