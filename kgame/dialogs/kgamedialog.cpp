@@ -204,6 +204,26 @@ void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, QVBox* paren
  addConfigWidget(c, parent);
 }
 
+QVBox *KGameDialog::getConfigPage(ConfigOptions which)
+{
+  QVBox *box=0;
+  switch(which)
+  {
+    case NetworkConfig:
+        box=d->mNetworkPage;
+    break;
+    case PlayerConfig:
+      box=d->mGamePage;
+    break;
+    case AdminConfig:
+      box=d->mMsgServerPage;
+    break;
+    default:
+      kdError(11001) << "KGameDialog::getConfigPage: Parameter not supported" << endl;
+  }
+ return box;
+}
+
 QVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
 {
  if (!widget) {

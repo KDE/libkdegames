@@ -197,8 +197,15 @@ public:
 	 **/
 	QVBox* addConfigPage(KGameDialogConfig* widget, const QString& title);
 
+  /**
+  * Returns the Vbox of the given key, The key is from @ref ConfigOptions
+  * Note that not all are supported yet
+  **/
+  QVBox *getConfigPage(ConfigOptions which);
+
 	KGameDialogNetworkConfig* networkConfig() const;
 	KGameDialogGeneralConfig* gameConfig() const;
+
 
 protected:
 	void addConfigWidget(KGameDialogConfig* widget, QWidget* parent);
