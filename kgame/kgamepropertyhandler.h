@@ -142,14 +142,13 @@ public:
 	 **/
 	bool removeProperty(KGamePropertyBase *data);
 
-  /**
-   * returns a unique property ID starting called usually with a base of
-   * @ref KGamePropertyBase::IdAutomatic. This is used internally by
-   * the property base to assign automtic id's. Not much need to
-   * call this yourself.
-   *
-   */
-  int uniquePropertyId();
+	/**
+	 * returns a unique property ID starting called usually with a base of
+	 * @ref KGamePropertyBase::IdAutomatic. This is used internally by
+	 * the property base to assign automtic id's. Not much need to
+	 * call this yourself.
+	 **/
+	int uniquePropertyId();
 
 
 	/**
@@ -226,22 +225,21 @@ public:
 	void unlockProperties();
 
 	/**
-     * Set the policy for all kgame variables which are currently registerd in
-     * the KGame proeprty handler. See @ref KGamePropertyBase::setPolicy
-     *
-     * @param p is the new policy for all properties of this handler
-     * @param is userspace=true (default) only user properties are changed.
-     * Otherwise also the system properties
+	 * Set the policy for all kgame variables which are currently registerd in
+	 * the KGame proeprty handler. See @ref KGamePropertyBase::setPolicy
+	 *
+	 * @param p is the new policy for all properties of this handler
+	 * @param is userspace=true (default) only user properties are changed.
+	 * Otherwise also the system properties
 	 **/
 	void setPolicy(KGamePropertyBase::PropertyPolicy p, bool userspace=true);
 
   
 	/**
-     * Returns the default policy for this property handler. All properties
-     * registered newly, will have this property.
-     *
+	 * Returns the default policy for this property handler. All properties
+	 * registered newly, will have this property.
 	 **/
-  KGamePropertyBase::PropertyPolicy policy();
+	KGamePropertyBase::PropertyPolicy policy();
 
 	/**
 	 * Calls @ref KGamePropertyBase::setReadOnly(true) for all properties of this
@@ -254,11 +252,11 @@ public:
 	 **/
 	void lockProperties();
 
-  /**
-   * Sends all properties which are marked dirty over the network. This will
-   * make a forced synchornisation of the properties and mark them all not dirty.
-   **/
-  void flush();
+	/**
+	 * Sends all properties which are marked dirty over the network. This will
+	 * make a forced synchornisation of the properties and mark them all not dirty.
+	 **/
+	void flush();
 
 	/**
 	 * Reference to the internal dictionary
@@ -280,10 +278,10 @@ public:
 	QString propertyValue(KGamePropertyBase* property);
 
 
-  /**
-  * Writes some debug output to the console.
-  */ 
-  void Debug();
+	/**
+	 * Writes some debug output to the console.
+	 **/ 
+	void Debug();
 
 signals:
 	/**

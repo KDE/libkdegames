@@ -52,7 +52,7 @@ public:
      * Create a KGameNetwork object
      */
     KGameNetwork(int cookie=42,QObject* parent=0);
-    ~KGameNetwork();
+    virtual ~KGameNetwork();
 
     //enum PlayerId {IdBroadcast=-1,IdClient=0};
 

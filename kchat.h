@@ -43,7 +43,7 @@ public:
 	 **/
 	KChat(QWidget* parent, bool twoPlayerGame = false);
 
-	~KChat();
+	virtual ~KChat();
 
 	/**
 	 * Equivalent to player(fromId())

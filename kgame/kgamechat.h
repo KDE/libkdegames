@@ -50,7 +50,7 @@ public:
 	KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget * parent);
 	KGameChat(KGame* g, int msgId, QWidget* parent);
 
-	~KGameChat();
+	virtual ~KGameChat();
 
 	enum SendingIds {
 		SendToGroup = 1

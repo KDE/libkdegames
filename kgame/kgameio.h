@@ -59,7 +59,7 @@ public:
      */
    KGameIO();
    KGameIO(KPlayer*);
-   ~KGameIO();
+   virtual ~KGameIO();
 
     /**
      * Gives debug output of the game status
