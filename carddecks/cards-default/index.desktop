@@ -1,6 +1,6 @@
 [KDE Backdeck]
 Name=Standard
-Name[af]=standaard
+Name[af]=Standaard
 Name[ar]=قياسي
 Name[az]=Standart
 Name[be]=Стандартная
@@ -33,7 +33,7 @@ Name[zu]=Omgangatho olinganayo
 Preview=11.png
 PySol=false
 Comment=Standard KDE card set\nGPL license
-Comment[af]=standaard kde kaart stel\nGPL lisensie
+Comment[af]=Standaard Kde kaart stel\nGPL lisensie
 Comment[ar]=بطاقات كيدي القياسية\n رخصة GPL
 Comment[az]=Standart KDE kart dəstəsi\nGPL license
 Comment[be]=Стандартная калода KDE\nЛіцэнзія GPL

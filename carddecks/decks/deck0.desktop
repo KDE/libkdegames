@@ -1,6 +1,5 @@
 [KDE Cards]
 Name=Technics
-Name[af]=technics
 Name[az]=Texnik
 Name[bg]=Техника
 Name[bs]=Tehnički
@@ -41,7 +40,7 @@ Name[zh_CN]=工艺
 Name[zh_TW]=工藝
 Name[zu]=Izinto zobuchwepheshe
 Comment=Standard KDE card deck
-Comment[af]=standaard kde kaart pak
+Comment[af]=Standaard Kde kaart pak
 Comment[ar]=بطاقات كيدي القياسية
 Comment[az]=Standart KDE kart dəstəsi
 Comment[bg]=Стандартна колода карт за KDE
