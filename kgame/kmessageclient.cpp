@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include <qbuffer.h>
+#include <qtimer.h>
 
 #include "kmessageio.h"
 #include "kmessageserver.h"
