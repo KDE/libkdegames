@@ -30,6 +30,8 @@
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <qlabel.h>
+#include <qpushbutton.h>
+#include <qgrid.h>
 
 class KGameConnectWidgetPrivate
 {

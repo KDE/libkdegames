@@ -26,6 +26,7 @@
 
 #include <qlayout.h>
 #include <qlabel.h>
+#include <qpushbutton.h>
 
 class KChatDialogPrivate
 {

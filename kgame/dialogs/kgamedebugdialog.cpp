@@ -35,6 +35,7 @@
 #include <qintdict.h>
 #include <qlabel.h>
 #include <qdatetime.h>
+#include <qpushbutton.h>
 
 #include <typeinfo>
 
