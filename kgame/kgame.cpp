@@ -26,6 +26,7 @@
 #include "kplayer.h"
 #include "kgame.h"
 #include "kgameio.h"
+#include "kgameerror.h"
 
 #include "kgamemessage.h"
 
@@ -134,7 +135,7 @@ bool KGame::reset()
 
 void KGame::deletePlayers()
 {
- kdDebug(11001) << "KGame::deletePlayers()" << endl;
+// kdDebug(11001) << "KGame::deletePlayers()" << endl;
  KPlayer *player;
  while((player=d->mPlayerList.first())) {
    // AB: we cannot call KGame::removePlayer here, as we don't want any network
@@ -143,7 +144,7 @@ void KGame::deletePlayers()
    d->mPlayerList.remove(player);
    delete player; // delete removes the player
  }
- kdDebug(11001) << "KGame::deletePlayers() done" << endl;
+// kdDebug(11001) << "KGame::deletePlayers() done" << endl;
 }
 
 void KGame::deleteInactivePlayers()
@@ -580,10 +581,7 @@ void KGame::setGameStatus(int status)
    kdDebug(11001) << "KGame::gameStatus: not enough players, pausing game\n" << endl;
    status=Pause;
  }
- //FIXME: setValue() has been replaced by "=" aka "send()". This might have
- //broken it.
  d->mGameStatus = status;
-// d->mGameStatus.changeValue(status);
 }
 
 void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int sender, Q_UINT32 /*clientID*/)
@@ -627,7 +625,10 @@ void KGame::networkTransmission(QDataStream &stream,int msgid,int receiver,int s
      kdDebug(11001) << "our game id is " << gameId() << " Lib version=" << v << " App Cookie=" << c << endl; 
      if (c!=cookie()) {
        kdError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
+       sendError(KGameError::Cookie, KGameError::errCookie(cookie(), c));
        // MH TODO: disconnect from master
+     } else if (v!=KGameMessage::version()) {
+       sendError(KGameError::Version, KGameError::errVersion(v));
      } else {
        setupGame(sender);
      }

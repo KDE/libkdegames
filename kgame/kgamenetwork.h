@@ -171,19 +171,18 @@ public:
     bool sendSystemMessage(const QString& msg, int msgid, int receiver=0, int sender=0);
 
     /**
-     * sends a network message with an error text
+     * Sends a network message 
      * @param error The error code
-     * @param text The error message
-     * @param receiver the @ref KGame / @ref KPlayer this message is for. See
-     * @ref KGameMessage::calcMessageId to create this parameter
+     * @param message The error message - use @ref KGameError
+     * @param receiver the @ref KGame / @ref KPlayer this message is for. 0 For
+     * all
      * @param sender The @ref KGame / @ref KPlayer this message is from (i.e.
-     * you). See @ref KGameMessage::calcMessageId to create this parameter. You
-     * probably want to leave this 0, then KGameNetwork will create the correct
-     * value for you. You might want to use this if you send a message from a
-     * specific player.
+     * you). You probably want to leave this 0, then KGameNetwork will create 
+     * the correct value for you. You might want to use this if you send a 
+     * message from a specific player.
      **/
-    void sendError(int error, const QString& text,int receiver=0,int sender=0);
-
+    void sendError(int error, const QByteArray& message,int receiver=0,int sender=0);
+    
     /**
      * Are we still offer offering server connections - only for game MASTER
      * @return true/false
@@ -299,12 +298,6 @@ signals:
      * @param text the error text
      */
     void signalNetworkErrorMessage(int error, QString text);
-
-    /**
-     * Network message received but with wrong checks, version
-     * cookie, etc
-     */
-    void signalNetworkVersionError(Q_UINT32 clientID);
 
     /**
      * Our connection to the @ref KMessageServer has broken.

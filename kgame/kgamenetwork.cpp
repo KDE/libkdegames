@@ -287,11 +287,12 @@ bool KGameNetwork::sendMessage(const QDataStream &msg, int msgid, int receiver, 
 bool KGameNetwork::sendMessage(const QByteArray &msg, int msgid, int receiver, int sender)
 { return sendSystemMessage(msg, msgid+KGameMessage::IdUser, receiver, sender); }
 
-void KGameNetwork::sendError(int error,const QString& text,int receiver,int sender)
+void KGameNetwork::sendError(int error,const QByteArray& message,int receiver,int sender)
 {
  QByteArray buffer;
  QDataStream stream(buffer,IO_WriteOnly);
- stream << (Q_INT32) error << text;
+ stream << (Q_INT32) error;
+ stream.writeRawBytes(message.data(), message.size());
  sendSystemMessage(stream,KGameMessage::IdError,receiver,sender);
 }
 
