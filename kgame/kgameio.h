@@ -102,6 +102,8 @@ public:
     * very useful for computer players as you can transmit the
     * game status to them and only update this status in the setTurn
     * commands.
+    *
+    * Called by @ref KPlayer::addGameIO only!
     */
    virtual void initIO(KPlayer *p);
 

@@ -73,7 +73,7 @@ void KGamePropertyBase::init()
  mFlags.bits.locked = false ; // setLocked(false); is NOT possible as it checks whether isLocked() allows to change the status
 
  // clean is default
- setPolicy(PolicyDirty);
+ setPolicy(PolicyClean);
 }
 
 void KGamePropertyBase::registerData(int id, KGame* owner, QString name)

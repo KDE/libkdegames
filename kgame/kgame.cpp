@@ -964,13 +964,10 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  //streamGS << (Q_INT32)minPlayers();
 
  // send to the newly connected client *only*
- // AB: check if this is really received/used by the "receiver" client only. We
- // have currently at least two network ports which could break this...
- int receiver = clientID;
  Q_INT16 v=KGameMessage::version();
  Q_INT32 c=cookie();
  streamGS << v << c;
- sendSystemMessage(streamGS, KGameMessage::IdSetupGame, receiver);
+ sendSystemMessage(streamGS, KGameMessage::IdSetupGame, clientID);
 }
 
 bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, int sender, const QString& group)

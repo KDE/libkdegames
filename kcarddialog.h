@@ -72,9 +72,14 @@ class KCardDialogPrivate;
  * Another Parameter for @ref KCardDialog::getCardDeck is scale. This pointer
  * to a double variable contains the scaling factor the user has chosen in the
  * dialog (the scale box won't be shown if you don't provide this parameter).
- * You might want to check out @ref KCard which gives you easy access to
- * scaling. See @ref KCard::scale - you can just forward the scaling factor to
- * this function and let @ref KCard do the rest.
+ * You might want to check out @ref QPixmap::xFrom which gives you access to
+ * scaling. You can e.g. use
+ * <pre>
+ * QWMatrix m;
+ * m.scale(s,s);
+ * pixmap.xForm(m);
+ * </pre>
+ * to scale your pixmap.
  *
  * @short A carddeck selection dialog for card games.
  * @author Martin Heni <martin@heni-online.de>

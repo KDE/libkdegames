@@ -258,8 +258,6 @@ bool KPlayer::setTurn(bool b,bool exclusive)
 {
   kdDebug(11001) << "KPlayer::setTurn " << this << " to " << b << endl;
   if (!isActive()) return false;
-  // forward to all mirror players...ehm why????? TODO: MH 28022001
-  // if (transmit) game()->sendSystemMessage(b,KGameMessage::IdTurn,KGameMessage::calcMessageId(0,id()));
    
   // if we get to do an exclusive turn all other players are disallowed
   if (exclusive && b && game())
