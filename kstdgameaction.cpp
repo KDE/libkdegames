@@ -150,7 +150,7 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
 KAction *KStdGameAction::gameNew(const QObject *recvr, const char *slot,
                              QObject *parent, const char *name )
 {
-    return new KAction(i18n("&New"), "filenew",
+    return new KAction(i18n("new game", "&New"), "filenew",
                        KStdAccel::key(KStdAccel::New), recvr, slot, parent,
                        name ? name : stdName(New));
 }

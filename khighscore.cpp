@@ -60,10 +60,9 @@ KConfig* KHighscore::config() const
 {
  #ifdef HIGHSCORE_DIRECTORY
 	if (!d->mConfig) {
-		//AB: is fromLatin1 correct? Better fromLocal8Bit? don't know...
 		//AB: is instanceName() correct? MUST be the same for all
 		//processes of the game!
-		QString file=QString::fromLatin1("%1/%2").arg(HIGHSCORE_DIRECTORY).arg(KGlobal::instance()->instanceName());
+		QString file=QString::fromLocal8Bit("%1/%2").arg(HIGHSCORE_DIRECTORY).arg(KGlobal::instance()->instanceName());
 		d->mConfig = new KSimpleConfig(file);
 	}
 	return d->mConfig;
