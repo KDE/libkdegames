@@ -143,7 +143,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 int KChatBase::sendingEntry() const
 {
  int index = d->mCombo->currentItem();
- if (!d->mIndex2Id.contains(index)) {
+ if (d->mIndex2Id.at(index) == d->mIndex2Id.end()) {
 	kdWarning(11000) << "could not find the selected sending entry!" << endl;
 	return -1;
  }
@@ -156,8 +156,8 @@ void KChatBase::removeSendingEntry(int id)
 	kdWarning(11000) << "KChatBase: Cannot remove an entry from the combo box" << endl;
 	return;
  }
- d->mIndex2Id.remove(id);
  d->mCombo->removeItem(findIndex(id));
+ d->mIndex2Id.remove(id);
 }
 
 void KChatBase::changeSendingEntry(const QString& text, int id)
