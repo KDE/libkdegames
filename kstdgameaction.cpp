@@ -190,7 +190,7 @@ KAction *KStdGameAction::highscores(const QObject *recvr, const char *slot,
 {
 //hmm perhaps we need a KStdGameAccel one day? currently this entry is hard
 //coded...
-    return new KAction(i18n("Show Highscores"), KKeySequence("Ctrl+H"), recvr, slot, parent,
+    return new KAction(i18n("Show Highscores"), Qt::CTRL+Qt::Key_H, recvr, slot, parent,
                        name ? name : stdName(Highscores));
 }
 
