@@ -118,6 +118,12 @@ public:
   */
   virtual Q_UINT16 peerPort () const { return 0; }
 
+  /**
+    @since 3.2
+    @return "localhost" in the default implementation. Reimplemented in @ref KMessageSocket
+  */
+  virtual QString peerName () const { return QString::fromLatin1("localhost"); }
+
 
 signals:
   /**
@@ -230,6 +236,12 @@ public:
     @return The port that this object is connected to. See @ref QSocket::peerPort
   */
   virtual Q_UINT16 peerPort () const;
+
+  /**
+    @since 3.2
+    @return The hostname this object is connected to. See @ref QSocket::peerName.
+  */
+  virtual QString peerName () const;
 
   /**
     @return TRUE as this is a network IO.

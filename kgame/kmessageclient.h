@@ -164,10 +164,17 @@ public:
 
   /**
     @since 3.2
-    @return 0 if @ref is FALSE, otherwise the port number this client is
-    connected to. See also @ref KMessageIO::peerPort and QSocket::peerPort.
+    @return 0 if @ref isConnected is FALSE, otherwise the port number this client is
+    connected to. See also @ref KMessageIO::peerPort and @ref QSocket::peerPort.
   */
   Q_UINT16 peerPort () const;
+
+  /**
+    @since 3.2
+    @return "localhost" if @ref isConnected is FALSE, otherwise the hostname this client is
+    connected to. See also @ref KMessageIO::peerName and @ref QSocket::peerName.
+  */
+  QString peerName() const;
 
   /**
     Sends a message to the @ref KMessageServer. If we are not yet connected to one, nothing

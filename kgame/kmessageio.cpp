@@ -164,6 +164,11 @@ Q_UINT16 KMessageSocket::peerPort () const
   return mSocket->peerPort();
 }
 
+QString KMessageSocket::peerName () const
+{
+  return mSocket->peerName();
+}
+
 // ----------------------KMessageDirect -----------------------
 
 KMessageDirect::KMessageDirect (KMessageDirect *partner, QObject *parent, 

@@ -219,6 +219,11 @@ Q_UINT16 KGameNetwork::port() const
  return 0;
 }
 
+QString KGameNetwork::hostName() const
+{
+ return d->mMessageClient->peerName();
+}
+
 bool KGameNetwork::stopServerConnection()
 {
  // We still are the Master, we just don't accept further connections!

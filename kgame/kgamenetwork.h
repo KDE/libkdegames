@@ -129,6 +129,14 @@ public:
     Q_UINT16 port() const;
 
     /**
+     * @since 3.2
+     * @return The name of the host that we are currently connected to if @ref
+     * isNetwork is TURE and we are not the MASTER, i.e. if @ref connectToServer
+     * was called. Otherwise this will return "localhost".
+     **/
+    QString hostName() const;
+
+    /**
      * Stops offering server connections - only for game MASTER
      * @return true
      **/

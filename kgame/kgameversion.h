@@ -40,6 +40,9 @@
 // KGameNetwork::port(), KMessageIO::peerPort() and friends were added in KDE 3.2
 #define KGAME_HAVE_KGAME_PORT 1
 
+// KGameNetwork::hostName(), KMessageIO::peerName() and friends were added in KDE 3.2
+#define KGAME_HAVE_KGAME_HOSTNAME 1
+
 // KGameSequence class was added in KDE 3.2
 #define KGAME_HAVE_KGAMESEQUENCE 1
 

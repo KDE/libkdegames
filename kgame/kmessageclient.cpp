@@ -130,6 +130,11 @@ Q_UINT16 KMessageClient::peerPort () const
  return d->connection ? d->connection->peerPort() : 0;
 }
 
+QString KMessageClient::peerName () const
+{
+ return d->connection ? d->connection->peerName() : QString::fromLatin1("localhost");
+}
+
 // --------------------- Sending messages
 
 void KMessageClient::sendServerMessage (const QByteArray &msg)
