@@ -330,18 +330,6 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q
    kdDebug(11001) << "Error text: " << text.latin1() << endl;
    emit signalNetworkErrorMessage((int)error,text);
  }
- else if (msgid == 0 && receiver == 0)
- {
-     // TODO: Must be supported, but who shall do it?
- /*
-   kdDebug(11001) << "receive new id old id: " << client->id() << endl;
-   int newid;
-   stream >> newid;
-   client->setId(newid);
-   setGameId(newid);// is this correct? is the local client->id() == gameId()?
-   kdDebug(11001) << "receive new id new id: " << client->id() << endl;
- */
- }
  else
  {
    networkTransmission(stream, msgid, receiver, sender, clientID);

@@ -75,19 +75,19 @@ void KGamePropertyBase::init()
  setAlwaysConsistent(true);
 }
 
-void KGamePropertyBase::registerData(int id, KGame* owner,QString name)
-{ registerData(id, owner->dataHandler(),name);  }
+void KGamePropertyBase::registerData(int id, KGame* owner, QString name)
+{ registerData(id, owner->dataHandler(), name);  }
 
-void KGamePropertyBase::registerData(int id, KPlayer* owner,QString name)
-{ registerData(id, owner->dataHandler(),name);  }
+void KGamePropertyBase::registerData(int id, KPlayer* owner, QString name)
+{ registerData(id, owner->dataHandler(), name);  }
 
-void KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,QString name)
+void KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, QString name)
 {
 // we don't support changing the id
  if (!mOwner) {
 	mId = id;
 	mOwner = owner;
-	mOwner->addProperty(this,name);
+	mOwner->addProperty(this, name);
  }
 }
 
@@ -95,7 +95,7 @@ bool KGamePropertyBase::sendProperty()//obsolete
 {
  QByteArray b;
  QDataStream s(b, IO_WriteOnly);
- KGameMessage::createPropertyHeader(s,id());
+ KGameMessage::createPropertyHeader(s, id());
  save(s);
  if (mOwner) {
 	mOwner->sendProperty(s);

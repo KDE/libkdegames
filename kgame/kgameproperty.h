@@ -294,7 +294,8 @@ private:
  * you have a good reason for this you will probably introduce some hard to find
  * (and to fix) bugs.
  *
- * @sect Always consistent (clean)
+ * @sect Always consistent (clean):
+ * 
  * This "policy" is default. Whenever you create a KGameProperty it is always
  * consistent. This means that consistency is the most important thing for the
  * property. This is achieved by using @ref send to change the value of the
@@ -342,7 +343,8 @@ private:
  * change it. You probably want to use @ref
  * KGamePropertyHandler::signalPropertyChanged for this.
  *
- * @sect Not Always Consistent (dirty)
+ * @sect Not Always Consistent (dirty):
+ * 
  * There are a lot of people who don't want to use the (sometimes quite complex)
  * "clean" way. You can use @ref setAlwaysConsistent to change the default
  * behaviour of the @ref KGameProperty. If a property is not always consistent
@@ -380,7 +382,8 @@ private:
  * you will probably start with "dirty" properties as it is you will not have to
  * change that much code...
  *
- * @sect A Mixture (very dirty)
+ * @sect A Mixture (very dirty):
+ * 
  * You can also mix the concepts above. Note that we really don't recommend
  * this. With a mixture I mean something like this:
  * <pre>
@@ -418,7 +421,8 @@ private:
  * exactly know which concept you are currently following because you used the
  * function of the other concept only once. 
  *
- * @sect Custom classes
+ * @sect Custom classes:
+ *
  * If you want to use a custum class with KGameProperty you have to implement the
  * operators << and >> for QDataStream:
  * <pre>
@@ -457,7 +461,8 @@ private:
  *
  * Note: unlike most QT classes KGameProperty objects are *not* deleted
  * automatically! So if you create an object using e.g. KGameProperty<int>* data =
- * new KGameProperty(0, this) you have to put a delete data into your destructor!
+ * new KGameProperty(id, dataHandler()) you have to put a delete data into your
+ * destructor!
  * @short A class for network transparent games
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
@@ -549,9 +554,6 @@ public:
 		QDataStream stream(b, IO_WriteOnly);
 		stream << v;
 		return sendProperty(b);
-/*		if (!sendProperty(b) && !sendOnly) {
-			setLocal(v);
-		}*/
 	}
 
 	/**
@@ -715,8 +717,6 @@ public:
 	 * @return See @ref value
 	 **/
 	operator type() const { return value(); }
-
-//	virtual const type_info * typeinfo() {return &typeid(type);};
 
 private:
 	void init()

@@ -31,13 +31,59 @@ class KGamePropertyBase;
 
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
+/**
+ * The KGamePropertyHandler class is some kind of a collection class for
+ * KGameProperty. You usually don't have to create one yourself, as both @ref
+ * KPlayer and @ref KGame provide a handler. In most cases you do not even have
+ * to care about the KGamePropertHandler. @ref KGame and @ref KPlayer implement
+ * all features of KGamePropertyHandler so you will rather use it there.
+ *
+ * You have to use the KGamePropertyHandler as parent for all @ref KGameProperty
+ * objects but you can also use @ref KPlayer or @ref KGame as parent - then @ref
+ * KPlayer::dataHandler or @ref KGame::dataHandler will be used. 
+ *
+ * Every KGamePropertyHandler must have - just like every @ref KGameProperty -
+ * a unique ID. This ID is provided either in the constructor or in @ref
+ * registerHandler. The ID is used to assign an incoming message (e.g. a changed
+ * property) to the correct handler. Inside the handler the property ID is used
+ * to change the correct property. 
+ *
+ * The constructor or @ref registerHandler takes 3 addittional arguments: a
+ * receiver and two slots. The first slot is connected to @ref
+ * signalSendMessage, the second to @ref signalPropertyChanged. You must provide
+ * these in order to use the KGamePropertyHandler. 
+ *
+ * The most important function of KGamePropertyHandler is @ref processMessage
+ * which assigns an incoming value to the correct property. 
+ *
+ * A KGamePropertyHandler is also used - indirectly using @ref emitSignal - to
+ * emit a signal when the value of a property changes. This is done this way
+ * because a @ref KGameProperty does not inherit @ref QObject because of memory
+ * advantages. Many games can have dozens or even hundreds of @ref KGameProperty
+ * objects so every additional variable in @ref KGameProperty would be
+ * multiplied. 
+ *
+ * @short A collection class for @ref KGameProperty objects
+ **/
 class KGamePropertyHandler : public QObject
 {
   Q_OBJECT
 
 public:
+	/**
+	 * Construct an unregistered KGamePropertyHandler
+	 *
+	 * You have to call @ref registerHandler before you can use this
+	 * handler!
+	 **/
 	KGamePropertyHandler(QObject* parent = 0);
-	KGamePropertyHandler(int id,const QObject * receiver, const char * sendf, const char *emitf, QObject* parent = 0);
+
+	/**
+	 * Construct a registered handler. 
+	 *
+	 * See also @ref registerHandler
+	 **/
+	KGamePropertyHandler(int id, const QObject* receiver, const char* sendf, const char* emitf, QObject* parent = 0);
 	~KGamePropertyHandler();
 
 	/**
@@ -47,8 +93,13 @@ public:
 	 *
 	 * @param id The id of the message to listen for
 	 * @param owner the parent object
+	 * @param receiver The object that will receive the signals of
+	 * KGamePropertyHandler
+	 * @param send A slot that is being connected to @ref signalSendMessage
+	 * @param emit A slot that is being connected to @ref
+	 * signalPropertyChanged
 	 **/
-	void registerHandler(int id,const QObject *receiver, const char * send, const char *emit); 
+	void registerHandler(int id, const QObject *receiver, const char * send, const char *emit); 
 
 	/**
 	 * Main message process function. This has to be called by
@@ -74,6 +125,9 @@ public:
 	/**
 	 * Adds a @ref KGameProperty property to the handler
 	 * @param data the property
+	 * @param name A description of the property, which will be returned by
+	 * @ref propertyName. This is used for debugging, e.g. in @ref
+	 * KGameDebugDialog
 	 * @return true on success
 	 **/
 	bool addProperty(KGamePropertyBase *data, QString name=0);
@@ -88,7 +142,7 @@ public:
 	/**
 	 * Loads properties from the datastream
 	 *
-	 * @param stream the datastream to save from
+	 * @param stream the datastream to load from
 	 * @return true on success otherwise false
 	 **/
 	virtual bool load(QDataStream &stream);
@@ -115,28 +169,58 @@ public:
 	 **/ 
 	void emitSignal(KGamePropertyBase *data);
 
+	/**
+	 * @param id The ID of the property
+	 * @return A name of the property which can be used for debugging. Don't
+	 * depend on this function! It it possible not to provide a name or to
+	 * provide the same name for multiple properties!
+	 **/
 	QString propertyName(int id) const;
 
+	/**
+	 * @param id The ID of the property. See @ref KGamePropertyBase::id
+	 * @return The @ref KGameProperty this ID is assigned to
+	 **/
 	KGamePropertyBase *find(int id);
+
+	/**
+	 * Clear the KGamePropertyHandler. Note that the properties are
+	 * <em>not</em> deleted so if you created your @ref KGameProperty
+	 * objects dynamically like
+	 * <pre>
+	 * KGamePropertyInt* myProperty = new KGamePropertyInt(id, dataHandler());
+	 * </pre>
+	 * you also have to delete it:
+	 * <pre>
+	 * dataHandler()->clear();
+	 * delete myProperty;
+	 * </pre>
+	 **/
 	void clear();
 
+	/**
+	 * Use id as new ID for this KGamePropertyHandler. This is used
+	 * internally only.
+	 **/
 	void setId(int id)//AB: TODO: make this protected in KGamePropertyHandler!!
 	{
 		mId = id;
 	}
 
 	/**
-	 * Calls @ref KGamePropertyBase::setLocked(false) for all properties of this
-	 * player
+	 * Calls @ref KGamePropertyBase::setReadOnly(false) for all properties of this
+	 * player. See also @ref lockProperties
 	 **/
 	void unlockProperties();
 
 	/**
-	 * Calls @ref KGamePropertyBase::setLocked(true) for all properties of this
-	 * player
+	 * Calls @ref KGamePropertyBase::setReadOnly(true) for all properties of this
+	 * handler
 	 *
 	 * Use with care! This will even lock the core properties, like name,
 	 * group and myTurn!!
+	 *
+	 * See also @ref unlockProperties
 	 **/
 	void lockProperties();
 
@@ -160,29 +244,44 @@ public:
 	QString propertyValue(KGamePropertyBase* property);
 
 signals:
-      void signalPropertyChanged(KGamePropertyBase *);
-      void signalSendMessage(QDataStream &);
+	/**
+	 * This is emitted by a property. @ref KGamePropertyBase::emitSignal
+	 * calls @ref emitSignal which emits this signal. 
+	 *
+	 * This signal is emitted whenever the property is changed. Note that
+	 * you can switch off this behaviour using @ref
+	 * KGamePropertyBase::setEmittingSignal in favor of performance. Note
+	 * that you won't experience any performance loss using signals unless
+	 * you use dozens or hundreds of properties which change very often.
+	 **/
+	void signalPropertyChanged(KGamePropertyBase *);
 
-      /**
-       * If you call @ref propertyValue with a non-standard @ref KGameProperty
-       * it is possible that the value cannot automatically be converted into a
-       * @ref QString. Then this signal is emitted and asks you to provide the
-       * correct value. You probably want to use something like this to achieve
-       * this:
-       * <pre>
-       * #include <typeinfo>
-       * void slotRequestValue(KGamePropertyBase* p, QString& value)
-       * {
-       * 	if (*(p->typeinfo()) == typeid(MyType) {
-       * 		value = QString(((KGameProperty<MyType>*)p)->value());
-       * 	}
-       * }
-       * </pre>
-       *
-       * @ref property The @ref KGamePropertyBase the value is requested for
-       * @ref value The value of this property. You have to set this.
-       **/
-      void signalRequestValue(KGamePropertyBase* property, QString& value);
+	/**
+	 * This signal is emitted when a property needs to be sent. Only the
+	 * parent has to react to this.
+	 **/
+	void signalSendMessage(QDataStream &);
+
+	/**
+	 * If you call @ref propertyValue with a non-standard @ref KGameProperty
+	 * it is possible that the value cannot automatically be converted into a
+	 * @ref QString. Then this signal is emitted and asks you to provide the
+	 * correct value. You probably want to use something like this to achieve
+	 * this:
+	 * <pre>
+	 * #include <typeinfo>
+	 * void slotRequestValue(KGamePropertyBase* p, QString& value)
+	 * {
+	 * 	if (*(p->typeinfo()) == typeid(MyType) {
+	 * 		value = QString(((KGameProperty<MyType>*)p)->value());
+	 * 	}
+	 * }
+	 * </pre>
+	 *
+	 * @ref property The @ref KGamePropertyBase the value is requested for
+	 * @ref value The value of this property. You have to set this.
+	 **/
+	void signalRequestValue(KGamePropertyBase* property, QString& value);
 
 private:
 	void init();
