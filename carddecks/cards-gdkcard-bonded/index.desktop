@@ -1,15 +1,21 @@
 [KDE Backdeck]
 Name=Bonded
+Name[af]=GEHEG
+Name[az]=Bağlı
+Name[bg]=Завързан
 Name[cs]=Lepenka
 Name[de]=Verbunden
 Name[eo]=Benda
-Name[es]=Unido
+Name[es]=Unidas
 Name[fi]=Sidottu
+Name[fr]=Compact
 Name[is]=Bundið
 Name[ko]=보세
 Name[lv]=Ieķīlāts
+Name[mt]=Mehmuż
 Name[pt]=Unidos
 Name[ru]=Переплетения
+Name[ta]=´ð¼ôÀð¼
 Name[tr]=Bağlı
 Name[uk]=Бони
 Preview=11.png

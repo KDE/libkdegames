@@ -1,21 +1,25 @@
 [KDE Cards]
 Name=Starrise
+Name[af]=STARRISE
+Name[bg]=Звезден възход
 Name[cs]=Úsvit
 Name[de]=Sternenaufgang
 Name[eo]=Stellumo
 Name[et]=Tähetõus
 Name[fi]=Tähdennousu
+Name[fr]=Étoiles
 Name[hu]=csillagok
 Name[is]=Ris stjarna
 Name[it]=Comparsa stelle
 Name[ko]=별무리
+Name[mt]=SemaStilel
 Name[nl]=Sterrijzenis
 Name[no]=Stjerner
 Name[no_NY]=Stjerner
-Name[ro]=Constelaţie
+Name[pl]=Wschód gwiazdy
 Name[ru]=Восход звезды
 Name[sk]=Východ hviezd
-Name[sl]=Rojstvo zvezde
+Name[sl]=Vzhod zvezde
 Name[sv]=Stjärnuppgång
 Name[uk]=Схід зірки
 Name[zh_CN.GB2312]=星空
