@@ -200,14 +200,14 @@ void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCar
  if (conf->readBoolEntry(CONF_USEGLOBALDECK, false)) {
 	bool random;
 	getGlobalDeck(pCardDir, random);
-	if (random || pDeck == QString::null) {
+	if (random || pDeck.isNull() ) {
 		pDeck = getRandomDeck();
 	}
  }
  if (conf->readBoolEntry(CONF_USEGLOBALCARDDIR, false)) {
 	bool random;
 	getGlobalCardDir(pCardDir, random);
-	if (random || pCardDir == QString::null) {
+	if (random || pCardDir.isNull() ) {
 		pCardDir = getRandomCardDir();
 	}
  }
