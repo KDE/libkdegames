@@ -1,4 +1,20 @@
 [KDE Backdeck]
 Name=Spaced
+Name[cs]=Vesmír
+Name[de]=Mit Abstand
+Name[eo]=Komika
+Name[es]=Espaciado
+Name[fr]=Spatial
+Name[hu]=űr
+Name[is]=Speisað
+Name[it]=Spazio
+Name[nl]=Ruimtelijk
+Name[no]=Rom-duell
+Name[pt]=Espacial
+Name[ro]=Spaţiat
+Name[sl]=Vesoljski dvoboj
+Name[sv]=Spejsad
+Name[tr]=Boşluklu
+Name[uk]=Космічний
 Preview=11.png
 PySol=yes
