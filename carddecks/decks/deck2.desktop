@@ -1,6 +1,6 @@
 [KDE Cards]
 Name=Starrise
-Name[bg]=Звезден възход
+Name[bg]=Звезди
 Name[ca]=Estrellat
 Name[cs]=Úsvit
 Name[de]=Sternenaufgang
@@ -13,6 +13,7 @@ Name[hu]=csillagok
 Name[is]=Ris stjarna
 Name[it]=Alba spaziale
 Name[ko]=별무리
+Name[mk]=Starrise 
 Name[mt]=SemaStilel
 Name[nb]=Stjerner
 Name[nl]=Sterrijzenis
