@@ -166,8 +166,8 @@ void KGameChat::setGame(KGame* g)
 		this, SLOT(slotAddPlayer(KPlayer*)));
  connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
 		this, SLOT(slotRemovePlayer(KPlayer*)));
- connect(d->mGame, SIGNAL(signalNetworkData(int, QDataStream&, int, int)),
-		this, SLOT(slotReceiveMessage(int, QDataStream&, int, int)));
+ connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, int, int)),
+		this, SLOT(slotReceiveMessage(int, const QByteArray&, int, int)));
 
  QList<KPlayer> playerList = *d->mGame->playerList();
  for (int i = 0; i < playerList.count(); i++) {
@@ -253,8 +253,9 @@ void KGameChat::sendMessage(int fromPlayer, const QString& text, int toPlayer, c
  }
 }
 
-void KGameChat::slotReceiveMessage(int msgid, QDataStream& msg, int receiver, int sender)
+void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, int receiver, int sender)
 {
+ QDataStream msg(buffer, IO_ReadOnly);
  if (msgid != messageId()) {
 	return;
  }
