@@ -29,7 +29,6 @@
 #define __KGAMEDIALOGCONFIG_H__
 
 #include <qwidget.h>
-#include <kdebug.h>
 
 class QGridLayout;
 class QVBoxLayout;
