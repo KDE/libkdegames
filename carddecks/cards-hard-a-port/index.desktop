@@ -1,4 +1,10 @@
 [KDE Backdeck]
 Name=Hard a Port
+Name[de]=Hart Backbord
+Name[eo]=Tenta
+Name[is]=Hart á bakborða
+Name[it]=Donnine
+Name[ko]=폼 잡기 힘들다
+Name[sv]=Dikt babord
 Preview=11.png
 PySol=yes
