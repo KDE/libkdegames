@@ -347,6 +347,7 @@ a slot like
 slotDebug()
 {
  KGameDebugDialog* dialog = new KGameDebugDialog(mGame, this);
+ connect(dialog, SIGNAL(finished()), dialog, SLOT(slotDelayedDestruct()));
  dialog->show();
 }
 that's it.

@@ -54,7 +54,9 @@ KGamePropertyBase::KGamePropertyBase()
 
 KGamePropertyBase::~KGamePropertyBase()
 {
-//TODO delete all properties
+ if (mOwner) {
+	mOwner->removeProperty(this);
+ }
 }
 
 void KGamePropertyBase::init()
