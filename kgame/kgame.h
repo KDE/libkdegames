@@ -110,7 +110,7 @@ public:
      * identical for all network players!
      * @return @ref KRandomSequence pointer
      */
-    KRandomSequence *random();
+    KRandomSequence *random() const;
 
     /**
      * Is the game running
@@ -210,13 +210,16 @@ public:
     // Input events
     /**
      * Called by @ref KPlayer to send a player input to the @ref
-     * KGameCommunicationServer.
+     * KMessageServer.
      **/
     virtual bool sendPlayerInput(QDataStream &msg,KPlayer *player,int sender=0);
 
     /**
-     * Called when a player input arrives from @ref KGameCommunicationServer.
-     * TODO: docu!!
+     * Called when a player input arrives from @ref KMessageServer.
+     *
+     * Calls @ref prepareNext (using @ref QTimer::singleShot) if @ref gameOver
+     * returns 0
+     * TODO: documentation!!
      **/
     virtual bool playerInput(QDataStream &msg,KPlayer *player,int sender=0);
 
@@ -519,9 +522,8 @@ protected:
     /**
      * Check whether the game is over.
      *
-     * @param the player who made the last move
+     * @param player the player who made the last move
      * @return anything else but 0 is considered as game over
-     *
      */
     virtual int gameOver(KPlayer *player);
 

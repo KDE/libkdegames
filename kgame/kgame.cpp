@@ -437,13 +437,16 @@ KGamePropertyHandler* KGame::dataHandler() const
 KGame::KGamePlayerList* KGame::inactivePlayerList()
 { return &d->mInactivePlayerList; }
 
+const KGame::KGamePlayerList* KGame::inactivePlayerList() const
+{ return &d->mInactivePlayerList; }
+
 KGame::KGamePlayerList* KGame::playerList()
 { return &d->mPlayerList; }
 
 const KGame::KGamePlayerList* KGame::playerList() const
 { return &d->mPlayerList; }
 
-KRandomSequence* KGame::random()
+KRandomSequence* KGame::random() const
 { return d->mRandom; }
 
 
@@ -465,14 +468,6 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, int sender)
 
 bool KGame::playerInput(QDataStream &msg, KPlayer *player, int sender)
 {
-  /*
-  QBuffer *b=(QBuffer *)msg.device();
-  kdDebug(11001) << "size of stream=" << b->buffer().size() << endl;
-  char *p=b->buffer().data();
-  for (int i=0;i<b->buffer().size();i++) fprintf(stderr,"%02x ",p[i]);fprintf(stderr,"\n");
-  */
-
-  
  if (!player) {
    kdError(11001) << "KGame::playerInput(): NULL player" << endl;
    return false;
