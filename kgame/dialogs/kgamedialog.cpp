@@ -72,7 +72,7 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 }
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
-		QWidget* parent, bool modal, long initConfigs, int chatMsgId)
+		QWidget* parent, long initConfigs, int chatMsgId, bool modal)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply,
 	Ok, parent, 0, modal, true)
 {
@@ -100,13 +100,14 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 
 void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 {
- if (initConfigs | GameConfig) {
+ if (initConfigs & GameConfig) {
+	kdDebug() << "add gameconf" << endl;
 	addGameConfig(new KGameDialogGeneralConfig(0));
  }
  if (initConfigs & NetworkConfig) {
 	addNetworkConfig(new KGameDialogNetworkConfig(0));
  }
- if (initConfigs & (ClientConfig|AdminConfig) ) {
+ if (initConfigs & (MsgServerConfig) ) {
 	addMsgServerConfig(new KGameDialogMsgServerConfig(0));
  }
  if (initConfigs & ChatConfig) {
@@ -205,7 +206,7 @@ QVBox *KGameDialog::configPage(ConfigOptions which)
 	case GameConfig:
 		box = d->mGamePage;
 		break;
-	case AdminConfig:
+	case MsgServerConfig:
 		box = d->mMsgServerPage;
 		break;
 	default:

@@ -82,9 +82,8 @@ public:
 		ChatConfig = 1,
 		GameConfig = 2,
 		NetworkConfig = 4,
-		ClientConfig = 8,
-		AdminConfig = 16,
-		BanPlayerConfig = 32,
+		MsgServerConfig = 8,
+		BanPlayerConfig = 16,
 		AllConfig = 0xffff
 	};
 
@@ -131,8 +130,8 @@ public:
 	 * if initConfigs = false
 	 **/
 	KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
-			QWidget* parent, bool modal = false, 
-			long initConfigs = AllConfig, int chatMsgId = 15432);
+			QWidget* parent, long initConfigs = AllConfig, 
+			int chatMsgId = 15432, bool modal = false);
 
 	virtual ~KGameDialog();
 
@@ -222,11 +221,32 @@ public:
 	 **/
 	KGameDialogGeneralConfig* gameConfig() const;
 
-protected:
+	/**
+	 * Add a config widget to the specified parent. Usually you call @ref
+	 * addConfigPage for one widget and addConfigWidget for another to add
+	 * it to the same page. Just use the returned page of @ref
+	 * addConfigPage.
+	 **/
 	void addConfigWidget(KGameDialogConfig* widget, QWidget* parent);
+
+	/**
+	 * Used to add the main network config widget in a new page. Use this to
+	 * make @ref networkConfig return something useful.
+	 **/
 	void addNetworkConfig(KGameDialogNetworkConfig* netConf);
+
+	/**
+	 * Add the main game config widget in a new page. Use this to make @ref
+	 * gameConfig return something useful.
+	 **/
 	void addGameConfig(KGameDialogGeneralConfig* conf);
+
+	/**
+	 * Used to add the message server config widget in a new page.
+	 **/
 	void addMsgServerConfig(KGameDialogMsgServerConfig* conf);
+
+protected:
 
 	/**
 	 * This is used to create a dialog containing all the default widgets. 
@@ -242,6 +262,7 @@ protected:
 	 * initConfigs) - see @ref KGameDialogChatConfig
 	 **/
 	void initDefaultDialog(ConfigOptions initConfigs, int chatMsgId = 15432);
+
 	/**
 	 * Go through all config widgets and call their @ref
 	 * KGameDialogConfig::setKGame and @ref KGameDialogConfig::setOwner implementation
