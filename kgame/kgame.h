@@ -172,7 +172,7 @@ public:
      * @param newplayer The player you want to add. KGame will send a message to
      * all clients and add the player using @ref systemAddPlayer
      **/
-    void addPlayer(KPlayer* newplayer) { addPlayer(newplayer, 0); }
+    void addPlayer(KPlayer* newplayer);
     
     /**
      * Sends a message over the network, msgid=IdRemovePlayer.
@@ -524,6 +524,38 @@ signals:
 
 protected:
     /**
+    * Save the player list to a stream. Used for network game and load/save.
+    * Can be overwritten if you know what you are doing
+    *
+    * @param stream is the stream to save the player to
+    * @param the optional list is the player list to be saved, default is playerList()
+    *
+    **/
+    void savePlayers(QDataStream &stream,KGamePlayerList *list=0);
+
+    /**
+     * Prepare a player for being added. Put all data about a player into the
+     * stream so that it can be sent to the @ref KGameCommunicationServer using
+     * @ref addPlayer (e.g.)
+     *
+     * This function ensures that the code for adding a player is the same in
+     * @ref addPlayer as well as in @ref negotiateNetworkGame
+     * @param receiver The owner of the player
+     **/
+    void savePlayer(QDataStream& stream,KPlayer* player);
+
+    /**
+    * Load the player list from a stream. Used for network game and load/save.
+    * Can be overwritten if you know what you are doing
+    *
+    * @param stream is the stream to save the player to
+    * @param isvirtual will set the virtual flag true/false
+    *
+    **/
+    KPlayer *loadPlayer(QDataStream& stream,bool isvirtual=false);
+    
+
+    /**
      * Updates the ids of the players. Called when a connection is changed, e.g.
      * when you connect from a local game to a network game.
      **/
@@ -552,7 +584,6 @@ protected:
      * If you need to do some changes to your newly added player just connect to
      * @ref signalPlayerJoinedGame
      */
-    void systemAddPlayer(QDataStream& stream);
 
     /**
      * Finally adds a player to the game and therefore to the list.
@@ -619,7 +650,7 @@ private:
      * ever need this. It it internally used to initialize a newly connected
      * client.
      **/
-    void addPlayer(KPlayer* newplayer, Q_UINT32 receiver);
+    //void addPlayer(KPlayer* newplayer, Q_UINT32 receiver);
 
     /**
      * Just the same as the public one except receiver:
@@ -652,17 +683,6 @@ private:
      **/
     bool systemRemove(KPlayer* player,bool deleteit);
 
-    /**
-     * Prepare a player for being added. Put all data about a player into the
-     * stream so that it can be sent to the @ref KGameCommunicationServer using
-     * @ref addPlayer (e.g.)
-     *
-     * This function ensures that the code for adding a player is the same in
-     * @ref addPlayer as well as in @ref negotiateNetworkGame
-     * @param receiver The owner of the player
-     **/
-    void savePlayer(QDataStream& stream,KPlayer* player, Q_UINT32 receiver=0);
-    
     
 private:
     KGamePrivate* d;
