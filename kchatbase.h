@@ -24,7 +24,7 @@
 #include <qlistbox.h>
 
 #include <kglobalsettings.h>
-
+#include <kdemacros.h>
 class QListBoxItem;
 
 class KConfig;
@@ -181,7 +181,7 @@ class KChatBasePrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KChatBase : public QFrame
+class KDE_EXPORT KChatBase : public QFrame
 {
 	Q_OBJECT
 public:

@@ -25,7 +25,7 @@
 
 #include <qstring.h>
 #include <qobject.h>
-
+#include <kdemacros.h>
 class KConfig;
 class KFileLock;
 class KRawConfig;
@@ -81,7 +81,7 @@ class KHighscorePrivate;
  * Easy, what?
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KHighscore : public QObject
+class KDE_EXPORT KHighscore : public QObject
 {
 	Q_OBJECT
 public:

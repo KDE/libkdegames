@@ -22,6 +22,7 @@
 #include <qstring.h>
 
 #include "kchatbase.h"
+#include <kdemacros.h>
 
 class KChatPrivate;
 
@@ -32,7 +33,7 @@ class KChatPrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KChat : public KChatBase
+class KDE_EXPORT KChat : public KChatBase
 {
 	Q_OBJECT
 public:

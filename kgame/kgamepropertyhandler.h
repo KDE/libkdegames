@@ -25,6 +25,7 @@
 #include <qintdict.h>
 
 #include "kgameproperty.h"
+#include <kdemacros.h>
 
 class QDataStream;
 class KGame;
@@ -68,7 +69,7 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
  * multiplied. 
  *
  **/
-class KGamePropertyHandler : public QObject
+class KDE_EXPORT KGamePropertyHandler : public QObject
 {
 	Q_OBJECT
 

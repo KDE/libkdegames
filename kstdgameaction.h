@@ -27,7 +27,7 @@ class QObject;
 class KActionCollection;
 class KRecentFilesAction;
 class KSelectAction;
-
+#include <kdemacros.h>
 
 //-----------------------------------------------------------------------------
 /**
@@ -45,7 +45,7 @@ class KSelectAction;
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
 // #### KDE4: transform in namespace
-class KStdGameAction
+class KDE_EXPORT KStdGameAction
 {
 public:
   /**

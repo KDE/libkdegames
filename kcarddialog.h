@@ -23,6 +23,7 @@
 #include <kdialogbase.h>
 #include <qmap.h> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
+#include <kdemacros.h>
 class QIconViewItem;
 
 class KConfig;
@@ -86,7 +87,7 @@ class KCardDialogPrivate;
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
-class KCardDialog : public KDialogBase
+class KDE_EXPORT KCardDialog : public KDialogBase
 {
   Q_OBJECT
 

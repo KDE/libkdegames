@@ -28,7 +28,7 @@
 #include <qvaluelist.h>
 
 #include "kgamenetwork.h"
-
+#include <kdemacros.h>
 class KRandomSequence;
 
 class KPlayer;
@@ -59,7 +59,7 @@ class KGamePrivate;
  * @author Martin Heni <martin@heni-online.de>
  *
  */
-class KGame : public KGameNetwork
+class KDE_EXPORT KGame : public KGameNetwork
 {
   Q_OBJECT
 

@@ -26,7 +26,7 @@
 
 #include <qframe.h>
 #include <qrangecontrol.h>
-
+#include <kdemacros.h>
 /**
  * @short A progress indicator widget.
  *
@@ -47,7 +47,7 @@
  * @author Martynas Kunigelis
  * @version $Id$
  */
-class KGameProgress : public QFrame, public QRangeControl
+class KDE_EXPORT KGameProgress : public QFrame, public QRangeControl
 {
   Q_OBJECT
   Q_ENUMS( BarStyle )

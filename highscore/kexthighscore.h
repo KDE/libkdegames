@@ -23,6 +23,7 @@
 #include "kexthighscore_item.h"
 
 #include <kurl.h>
+#include <kdemacros.h>
 
 class QTabWidget;
 
@@ -39,42 +40,42 @@ extern ManagerPrivate *internal;
 /**
  * Get the current game type.
  */
-uint gameType();
+KDE_EXPORT uint gameType();
 
 /**
  * Set the current game type.
  */
-void setGameType(uint gameType);
+KDE_EXPORT void setGameType(uint gameType);
 
 /**
  * Configure the highscores.
  * @return true if the configuration has been modified and saved
  */
-bool configure(QWidget *parent);
+KDE_EXPORT bool configure(QWidget *parent);
 
 /**
  * Show the highscores lists.
  */
-void show(QWidget *parent);
+KDE_EXPORT void show(QWidget *parent);
 
 /**
  * Submit a score. See @ref Manager for usage example.
  *
  * @param widget a widget used as parent for error message box.
  */
-void submitScore(const Score &score, QWidget *widget);
+KDE_EXPORT void submitScore(const Score &score, QWidget *widget);
 
 /**
  * @return the last score in the local list of highscores. The worst possible
  * score if there are less items than the maximum number.
  */
-Score lastScore();
+KDE_EXPORT Score lastScore();
 
 /**
  * @return the first score in the local list of highscores (the worst possible
  * score if there is no entry).
  */
-Score firstScore();
+KDE_EXPORT Score firstScore();
 
 /**
  * This class manages highscores and players entries (several players can
@@ -135,7 +136,7 @@ Score firstScore();
  * and the value of the items that you have optionnally added
  * with Score::setData() ; player name and date are set automatically.
  */
-class Manager
+class KDE_EXPORT Manager
 {
  public:
     /**

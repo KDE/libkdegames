@@ -29,7 +29,7 @@ this software.
 #include <qptrlist.h>
 
 #include <kdialogbase.h>
-
+#include <kdemacros.h>
 class QGridLayout;
 class QLineEdit;
 class QWidgetStack;
@@ -37,7 +37,7 @@ class QWidgetStack;
 /**
  * A simple high score dialog.
  */
-class KScoreDialog : public KDialogBase {
+class KDE_EXPORT KScoreDialog : public KDialogBase {
    Q_OBJECT
    
 public:

@@ -24,7 +24,7 @@
 #include <qstring.h>
 
 #include "kchatbase.h"
-
+#include <kdemacros.h>
 class KPlayer;
 class KGame;
 class KGamePropertyBase;
@@ -40,7 +40,7 @@ class KGameChatPrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGameChat : public KChatBase
+class KDE_EXPORT KGameChat : public KChatBase
 {
 	Q_OBJECT
 public:

@@ -21,6 +21,7 @@
 #define KCANVASROOTPIXMAP_H
 
 #include <krootpixmap.h>
+#include <kdemacros.h>
 
 class QCanvasView;
 
@@ -36,7 +37,7 @@ class QCanvasView;
  * <li>other views of the canvas will have the same background pixmap.</li>
  * </ul>
  */
-class KCanvasRootPixmap : public KRootPixmap
+class KDE_EXPORT KCanvasRootPixmap : public KRootPixmap
 {
  Q_OBJECT
 

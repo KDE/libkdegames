@@ -24,7 +24,7 @@
 #include <qnamespace.h>
 #include <qmap.h>
 #include <qvaluevector.h>
-
+#include <kdemacros.h>
 class QWidget;
 
 
@@ -37,7 +37,7 @@ namespace KExtHighscore
  * a highscore element (such as the score, the date, ...) or a player
  * info (such as the player name, the best score, ...).
  */
-class Item
+class KDE_EXPORT Item
 {
  public:
     /**
@@ -172,7 +172,7 @@ enum ScoreType { Won = 0, Lost = -1, Draw = -2 };
  * This class contains data for a score. You should not inherit from
  * this class but reimplement the methods in Highscores.
  */
-class Score
+class KDE_EXPORT Score
 {
  public:
     Score(ScoreType type = Won);
@@ -241,8 +241,8 @@ class Score
     friend QDataStream &operator >>(QDataStream &stream, Score &score);
 };
 
-QDataStream &operator <<(QDataStream &stream, const Score &score);
-QDataStream &operator >>(QDataStream &stream, Score &score);
+KDE_EXPORT QDataStream &operator <<(QDataStream &stream, const Score &score);
+KDE_EXPORT QDataStream &operator >>(QDataStream &stream, Score &score);
 
 /**
  * This class is used to store and show scores for multiplayer games.
@@ -264,7 +264,7 @@ QDataStream &operator >>(QDataStream &stream, Score &score);
  * ms.addScore(1, score);
  * </pre>
  */
-class MultiplayerScores
+class KDE_EXPORT MultiplayerScores
 {
  public:
     MultiplayerScores();
@@ -309,8 +309,8 @@ class MultiplayerScores
                                     MultiplayerScores &score);
 };
 
-QDataStream &operator <<(QDataStream &stream, const MultiplayerScores &score);
-QDataStream &operator >>(QDataStream &stream, MultiplayerScores &score);
+KDE_EXPORT QDataStream &operator <<(QDataStream &stream, const MultiplayerScores &score);
+KDE_EXPORT QDataStream &operator >>(QDataStream &stream, MultiplayerScores &score);
 
 } // namespace
 

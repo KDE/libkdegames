@@ -25,7 +25,7 @@
 
 #include <qstring.h>
 #include <qobject.h>
-
+#include <kdemacros.h>
 class KGameIO;
 class KMessageClient;
 class KMessageServer;
@@ -43,7 +43,7 @@ class KGameNetworkPrivate;
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
-class KGameNetwork : public QObject
+class KDE_EXPORT KGameNetwork : public QObject
 {
   Q_OBJECT
 

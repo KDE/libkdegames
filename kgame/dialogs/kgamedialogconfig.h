@@ -29,6 +29,7 @@
 #define __KGAMEDIALOGCONFIG_H__
 
 #include <qwidget.h>
+#include <kdemacros.h>
 
 class QGridLayout;
 class QVBoxLayout;
@@ -47,7 +48,7 @@ class KGameDialogConfigPrivate;
  * @short Base class for configuration widgets
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGameDialogConfig : public QWidget
+class KDE_EXPORT KGameDialogConfig : public QWidget
 {
 	Q_OBJECT
 public:
@@ -206,7 +207,7 @@ private:
 };
 
 class KGameDialogNetworkConfigPrivate;
-class KGameDialogNetworkConfig : public KGameDialogConfig
+class KDE_EXPORT KGameDialogNetworkConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:

@@ -22,7 +22,7 @@
 
 #include <qlcdnumber.h>
 #include <qvaluevector.h>
-
+#include <kdemacros.h>
 
 class QLabel;
 class QTimer;
@@ -39,7 +39,7 @@ class QTimer;
  *
  * @since 3.2
  */
-class KGameLCD : public QLCDNumber
+class KDE_EXPORT KGameLCD : public QLCDNumber
 {
     Q_OBJECT
 public:
@@ -123,7 +123,7 @@ private:
  *
  * @since 3.2
  */
-class KGameLCDClock : public KGameLCD
+class KDE_EXPORT KGameLCDClock : public KGameLCD
 {
     Q_OBJECT
 public:
@@ -187,7 +187,7 @@ private:
  *
  * @since 3.2
  */
-class KGameLCDList : public QWidget
+class KDE_EXPORT KGameLCDList : public QWidget
 {
     Q_OBJECT
 public:

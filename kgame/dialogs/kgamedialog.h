@@ -29,7 +29,7 @@
 #define __KGAMEDIALOG_H__
 
 #include <kdialogbase.h>
-
+#include <kdemacros.h>
 class QGridLayout;
 class QVBoxLayout;
 class QListBoxItem;
@@ -71,7 +71,7 @@ class KGameDialogPrivate;
  * @short Main configuration dialog for KGame
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGameDialog : public KDialogBase
+class KDE_EXPORT KGameDialog : public KDialogBase
 {
 	Q_OBJECT
 public:

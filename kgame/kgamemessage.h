@@ -24,8 +24,9 @@
 #define __KGAMEMSG_H_
 
 #include <qdatastream.h>
+#include <kdemacros.h>
 
-class KGameMessage
+class KDE_EXPORT KGameMessage
 {
   public:
     /**
