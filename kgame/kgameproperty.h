@@ -81,7 +81,7 @@ public:
 	};
 
 	/**
-	 * The policy of the property. This can be PolicyClean (@ref setVale uses
+	 * The policy of the property. This can be PolicyClean (@ref setValue uses
 	 * @ref send), PolicyDirty (@ref setValue uses @ref changeValue) or
 	 * PolicyLocal (@ref setValue uses @ref setLocal).
 	 *
