@@ -56,7 +56,11 @@ public:
     uint cnt=0;
     for( it = begin(); it != end(); ++it )
     {
-      if (me==it) return cnt;
+      if (me==it) 
+      {
+        return cnt;
+      }
+      cnt++;
     }
     return count();
   }
