@@ -26,6 +26,7 @@
 #include "kgamemessage.h"
 #include "kplayer.h"
 #include "kgame.h"
+
 #include <klocale.h>
 #include <typeinfo>
 
@@ -232,3 +233,4 @@ void KGamePropertyHandler::clear()
  mNameMap.clear();
 }
 
+#include "kgamepropertyhandler.moc"
