@@ -4,7 +4,7 @@ DECKDIRS = cards-aisleriot cards-dondorf-whist-b cards-gdkcard-bonded cards-hard
 deckdir = $(kde_datadir)/carddecks
 
 install-data-local:
-	@$(mkinstalldirs) $(deckdir)
+	@$(mkinstalldirs) $(DESTDIR)$(deckdir)
 	@for i in $(DECKDIRS); do \
 	if test ! -d $(DESTDIR)$(deckdir)/$$i; then \
 		echo "installing $$i" ;\
