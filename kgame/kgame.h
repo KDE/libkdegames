@@ -386,7 +386,7 @@ public:
     /**
      * This is called by @ref KPlayer::sendProperty only! Internal function!
      **/
-    bool sendPlayerProperty(QDataStream& s, Q_UINT32 playerId);
+    bool sendPlayerProperty(int msgid, QDataStream& s, Q_UINT32 playerId);
 
     /**
     * This function allows to find the pointer to a player
@@ -451,7 +451,7 @@ protected slots:
     /**
      * Called by @ref KGamePropertyHandler only! Internal function!
      **/
-    void sendProperty(QDataStream& stream, bool* sent);
+    void sendProperty(int msgid, QDataStream& stream, bool* sent);
 
     /**
       * Called by @ref KGamePropertyHandler only! Internal function!

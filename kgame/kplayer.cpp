@@ -78,7 +78,7 @@ void KPlayer::init()
    d = new KPlayerPrivate;
 
    d->mProperties.registerHandler(KGameMessage::IdPlayerProperty,
-                                  this,SLOT(sendProperty(QDataStream&, bool*)),
+                                  this,SLOT(sendProperty(int, QDataStream&, bool*)),
                                        SLOT(emitSignal(KGamePropertyBase *)));
    d->mVirtual=false;
    mActive=true;
@@ -397,11 +397,11 @@ bool KPlayer::addProperty(KGamePropertyBase* data)
   return d->mProperties.addProperty(data);
 }
 
-void KPlayer::sendProperty(QDataStream& stream, bool* sent)
+void KPlayer::sendProperty(int msgid, QDataStream& stream, bool* sent)
 {
   if (game())
   {
-    bool s = game()->sendPlayerProperty(stream, id());
+    bool s = game()->sendPlayerProperty(msgid, stream, id());
     if (s)
     {
       *sent = true;

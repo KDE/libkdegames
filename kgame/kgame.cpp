@@ -87,7 +87,7 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d->mProperties = new KGamePropertyHandler(this);
   
  d->mProperties->registerHandler(KGameMessage::IdGameProperty,
-                                this,SLOT(sendProperty(QDataStream&, bool* )),
+                                this,SLOT(sendProperty(int, QDataStream&, bool* )),
                                      SLOT(emitSignal(KGamePropertyBase *)));
  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this, i18n("MaxPlayers"));
  d->mMaxPlayer.setLocal(-1);  // Infinite
@@ -1358,12 +1358,12 @@ bool KGame::sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, con
 bool KGame::addProperty(KGamePropertyBase* data)
 { return dataHandler()->addProperty(data); }
 
-bool KGame::sendPlayerProperty(QDataStream& s, Q_UINT32 playerId)
-{ return sendSystemMessage(s, KGameMessage::IdPlayerProperty, playerId); }
+bool KGame::sendPlayerProperty(int msgid, QDataStream& s, Q_UINT32 playerId)
+{ return sendSystemMessage(s, msgid, playerId); }
 
-void KGame::sendProperty(QDataStream& stream, bool* sent)
+void KGame::sendProperty(int msgid, QDataStream& stream, bool* sent)
 {
-  bool s = sendSystemMessage(stream, KGameMessage::IdGameProperty);
+  bool s = sendSystemMessage(stream, msgid);
   if (s) 
   {
     *sent = true;

@@ -43,3 +43,9 @@
 18.10.2001  KPlayer::signalNetworkData contained QDataStream& instead of const
             QByteArray& parameter (oops!). This is fixed now. All apps which
             used this signal must be changed.
+18.10.2001  KGame::sendProperty(), KGame::sendPlayerProperty(),
+            KPlayer::sendProperty() and related functions contain a "int msgid"
+            parameter. This is the id() of the property handler. This parameter
+            enables us to easily add any number of property handler to a game
+            just by connecting it to existing send slots and call
+            processMessage() in slotNetworkData()

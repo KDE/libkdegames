@@ -91,7 +91,7 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
  setId(id); 
  if (receiver && sendf) {
 	kdDebug(11001) << "Connecting SLOT " << sendf << endl;
-	connect(this, SIGNAL(signalSendMessage(QDataStream &, bool*)), receiver, sendf);
+	connect(this, SIGNAL(signalSendMessage(int, QDataStream &, bool*)), receiver, sendf);
  }
  if (receiver && emitf) {
 	kdDebug(11001) << "Connecting SLOT " << emitf << endl;
@@ -101,14 +101,14 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
 
 bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSender)
 {
- //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
+// kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
  if (id != d->mId) {
  	return false; // Is the message meant for us?
  }
  KGamePropertyBase* p;
  int propertyId;
  KGameMessage::extractPropertyHeader(stream, propertyId);
- //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
+// kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
  if (propertyId==KGamePropertyBase::IdCommand) {
 	int cmd;
 	KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
@@ -119,7 +119,7 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSe
 			p->command(stream, cmd, isSender);
 		}
 	} else {
-		kdError(11001) << "KGamePropertyHandler::processMessage:propertyCommand " << propertyId << " not found" << endl;
+		kdError(11001) << "KGamePropertyHandler::processMessage: (cmd): property " << propertyId << " not found" << endl;
 	}
 	return true;
  }
@@ -277,7 +277,7 @@ void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
 bool KGamePropertyHandler::sendProperty(QDataStream &s)
 {
  bool sent = false;
- emit signalSendMessage(s, &sent);
+ emit signalSendMessage(id(), s, &sent);
  return sent;
 }
 

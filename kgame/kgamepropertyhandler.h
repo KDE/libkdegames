@@ -301,8 +301,9 @@ signals:
 	 * parent has to react to this.
 	 * @param sent set this to true if the property was sent successfully -
 	 * otherwise don't touch
+	 * @param msgid The @ref id of the handler
 	 **/
-	void signalSendMessage(QDataStream &, bool* sent); //AB: sent shold be a reference but it just doesn't work!! QT3 doesn't honor references !!!
+	void signalSendMessage(int msgid, QDataStream &, bool* sent); // AB shall we change bool* into bool& again?
 
 	/**
 	 * If you call @ref propertyValue with a non-standard @ref KGameProperty
