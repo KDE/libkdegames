@@ -63,7 +63,7 @@ KChatBase::~KChatBase()
 
 void KChatBase::init(bool noComboBox)
 {
- kdDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
+ kdDebug(11000) << "KChatBase: INIT (" << this << ")" << endl;
 
  d = new KChatBasePrivate;
 
