@@ -28,7 +28,6 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qbuffer.h>
 #include <qmap.h>
 #include <qintdict.h>
 

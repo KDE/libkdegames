@@ -27,7 +27,6 @@
 
 #include <qmap.h>
 #include <qptrqueue.h>
-#include <qtimer.h>
 
 #include <klocale.h>
 #include <typeinfo>
