@@ -33,6 +33,9 @@ class KGameMessage
      * player id in the lower bits and the game number in the higher bits.
      * Do not rely on the exact bit positions as they are internal.
      *
+     * See also @ref rawPlayerId and @ref rawGameId which are the inverse
+     * operations
+     *
      * @param playerid the player id - can include a gameid (will get removed)
      * @param gameid The game id (<64). 0 For broadcast.
      * @return the new player id
@@ -40,24 +43,9 @@ class KGameMessage
     static Q_UINT32 createPlayerId(int player, Q_UINT32 game);
 
     /**
-     * Checks whether a message receiver/sender is a player
-     *
-     * @param msgid the message id
-     * @return true/false
-     */
-    static bool isPlayer(int msgid);
-
-    /**
-     * Checks whether the sender/receiver of a message is a game
-     *
-     * @param msgid the message id
-     * @return true/false
-     */
-    static bool isGame(int msgid);
-
-    /**
      * Returns the raw playerid, that is, a id which does not
-     * contain the game number encoded in it
+     * contain the game number encoded in it. See also @ref createPlayerId which
+     * is the inverse operation.
      *
      * @param the player id
      * @return the raw player id
@@ -66,12 +54,28 @@ class KGameMessage
 
     /**
      * Returns the raw game id, that is, the game id the player
-     * belongs to
+     * belongs to. Se also @ref createPlayerId which is the inverse operation.
      *
      * @param the player id
      * @return the raw game id
      **/
     static Q_UINT32 rawGameId(Q_UINT32 playerid);
+
+    /**
+     * Checks whether a message receiver/sender is a player
+     *
+     * @param id The ID of the sender/receiver
+     * @return true/false
+     */
+    static bool isPlayer(Q_UINT32 id);
+
+    /**
+     * Checks whether the sender/receiver of a message is a game
+     *
+     * @param id The ID of the sender/receiver
+     * @return true/false
+     */
+    static bool isGame(Q_UINT32 id);
 
     /**
      * Creates a message header given cookie,sender,receiver,...
@@ -80,34 +84,34 @@ class KGameMessage
      * (message length and magic cookie). If you don't need them remove them
      * with @ref dropExternalHeader
      */
-    static void createHeader(QDataStream &msg,Q_UINT32 sender,Q_UINT32 receiver,int msgid);
+    static void createHeader(QDataStream &msg, Q_UINT32 sender, Q_UINT32 receiver, int msgid);
 
     /**
      * Retrieves the information like cookie,sender,receiver,... from a message header 
      *
      * Note that it could be necessary to call @ref dropExternalHeader first
      */
-    static void extractHeader(QDataStream &msg,Q_UINT32 &sender,Q_UINT32 &receiver,int &msgid);
+    static void extractHeader(QDataStream &msg,Q_UINT32 &sender, Q_UINT32 &receiver, int &msgid);
 
     /**
      * Creates a property header  given the property id
      */
-    static void createPropertyHeader(QDataStream &msg,int id);
+    static void createPropertyHeader(QDataStream &msg, int id);
 
     /**
      * Retrieves the property id from a property message header
      */
-    static void extractPropertyHeader(QDataStream &msg,int &id);
+    static void extractPropertyHeader(QDataStream &msg, int &id);
 
     /**
      * Creates a property header given the property id
      */
-    static void createPropertyCommand(QDataStream &msg,int cmdid,int pid,int cmd);
+    static void createPropertyCommand(QDataStream &msg, int cmdid, int pid, int cmd);
 
     /**
      * Retrieves the property id from a property message header
      */
-    static void extractPropertyCommand(QDataStream &msg,int &pid,int &cmd);
+    static void extractPropertyCommand(QDataStream &msg, int &pid, int &cmd);
 
     /**
      * @return Version of the network library
