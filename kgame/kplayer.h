@@ -415,14 +415,16 @@ signals:
       *
       * @param stream the load stream
       */
-      void signalLoad(QDataStream &stream);
+//      void signalLoad(QDataStream &stream);
+      
      /**
       * the player will be saved to the given stream. We better
       * put our data.
       *
       * @param stream the save stream
       */
-      void signalSave(QDataStream &stream);
+//      void signalSave(QDataStream &stream);
+      
       /**
        *  The player object got a message which was targeted
        *  at it but has no default method to process it. This

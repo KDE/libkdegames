@@ -119,7 +119,7 @@ KPlayer::~KPlayer()
 // himself
   d->mProperties.clear();
   delete d;
-  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") done" << endl;
+//  kdDebug(11001) << "DESTRUCT(KPlayer=" << this <<") done" << endl;
 }
 
 bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT32 sender)
@@ -331,7 +331,7 @@ bool KPlayer::load(QDataStream &stream)
       kdError(11001) << "   Player loading error. probably format error"<<endl;
   }
 
-  emit signalLoad(stream);
+  //emit signalLoad(stream);
   return true;
 }
 bool KPlayer::save(QDataStream &stream)
@@ -342,7 +342,7 @@ bool KPlayer::save(QDataStream &stream)
 
   stream << (Q_INT16)KPLAYER_LOAD_COOKIE;
 
-  emit signalSave(stream);
+  //emit signalSave(stream);
   return true;
 }
 
