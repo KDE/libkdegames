@@ -56,10 +56,10 @@ KAction *KStdGameAction::action(StdGameAction act_enum, const QObject *recvr,
         break;
     case Pause:
         act = pause(recvr, slot, parent, name);
-	break;
+        break;
     case Highscores:
         act = highscores(recvr, slot, parent, name);
-	break;
+        break;
     case Print:
         act = print(recvr, slot, parent, name);
         break;
@@ -117,10 +117,10 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
         break;
     case Pause:
         ret = "game_pause";
-	break;
+        break;
     case Highscores:
         ret = "game_highscores";
-	break;
+        break;
     case Print:
         ret = "game_print";
         break;
@@ -129,22 +129,22 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
         break;
     case Repeat:
         ret = "move_repeat";
-	break;
+        break;
     case Undo:
         ret = "move_undo";
-	break;
+        break;
     case Redo:
         ret = "move_redo";
-	break;
+        break;
     case Roll:
         ret = "move_roll";
-	break;
+        break;
     case EndTurn:
         ret = "move_endturn";
-	break;
+        break;
     case Carddecks:
         ret = "options_configure_carddecks";
-	break;
+        break;
 
     default:
         ret = "";
@@ -263,7 +263,7 @@ KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
 {
 //hmm perhaps we need a KStdGameAccel one day? currently this entry is hard
 //coded...
-    return new KAction(i18n("Roll Dice"), "roll",
+    return new KAction(i18n("&Roll Dice"), "roll",
                        Qt::CTRL+Qt::Key_R, recvr, slot, parent,
                        name ? name : stdName(Roll));
 }
