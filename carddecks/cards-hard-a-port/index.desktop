@@ -1,18 +1,23 @@
 [KDE Backdeck]
 Name=Hard a Port
 Name[af]=Hard 'n Poort
+Name[bg]=Дамски
 Name[de]=Hart Backbord
 Name[eo]=Tenta
+Name[hi]=हार्ड ए पोर्ट
 Name[hr]=Tvrdi na portu
 Name[is]=Hart Ã¡ bakborÃ°a
 Name[it]=Donnine
 Name[ko]=폼 잡기 힘들다
-Name[pt_BR]=Feche a Porta
+Name[pt_BR]=Duramente um Porto
 Name[ro]=Licenţioase
 Name[ru]=Пышка
+Name[sr]=Хард-а-порт
 Name[sv]=Dikt babord
+Name[ta]=முணையத்தை கடினமாக்கு
 Name[ven]=Port yo Khwathaho
 Name[xh]=Izibuko Esport eqinileyo
+Name[xx]=xxHard a Portxx
 Name[zu]=Qinisa isikhumulo
 Preview=11.png
 PySol=yes

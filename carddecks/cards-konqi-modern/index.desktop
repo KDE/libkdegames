@@ -1,11 +1,16 @@
 [KDE Backdeck]
 Name=Konqi
+Name[bg]=Конки
 Name[cs]=Konqui
 Name[eo]=Konĉja
+Name[hi]=के-ऑन्गी
 Name[it]=Konqui
 Name[ko]=콩키
 Name[lv]=Konkvi
 Name[ru]=Конки
+Name[sr]=Конки
+Name[ta]=கான்கி
+Name[xx]=xxKonqixx
 Name[zu]=I-Konqi
 Preview=11.png
 PySol=false
