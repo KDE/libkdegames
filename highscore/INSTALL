@@ -1,0 +1,12 @@
+Installation notes for the highscore files ; this is only relevant if you
+configured libkdegames with option --enable-highscore-dir=DIR (usually DIR is
+/var/games) for using system-wide highscore files.
+
+For each game using the highscore system :
+
+- the game executable "mygame" should be installed sgid "games"
+
+- an empty file "mygame.scores" should be created in the directory pointed by
+the configuration option. It should be owned by group "games" with read and
+write permissions and should -not- be world readable (since it can contains
+possibly sensitive information associating username with game usage).

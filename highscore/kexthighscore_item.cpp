@@ -117,7 +117,7 @@ QString Item::pretty(uint, const QVariant &value) const
         break;
     case Anonymous:
         if ( value.toString()==ItemContainer::ANONYMOUS )
-            return i18n("anonymous");
+            return i18n(ItemContainer::ANONYMOUS_LABEL);
         break;
     case NoFormat:
         break;

@@ -25,6 +25,7 @@
 #include <klocale.h>
 #include <kurl.h>
 
+#include "khighscore.h"
 #include "kexthighscore.h"
 
 class QTextStream;
@@ -100,12 +101,14 @@ class ItemContainer
     void setSubGroup(const QString &subGroup) { _subGroup = subGroup; }
     bool canHaveSubGroup() const { return !_subGroup.isNull(); }
 
-    static const char *ANONYMOUS; // name assigned to anonymous players
+    static const char ANONYMOUS[]; // name assigned to anonymous players
+    static const char ANONYMOUS_LABEL[];
 
     QVariant read(uint i) const;
     QString pretty(uint i) const;
     void write(uint i, const QVariant &value) const;
-    uint increment(uint i) const; // for UInt QVariant (return new value)
+    // for UInt QVariant (return new value)
+    uint increment(uint i) const;
 
  private:
     Item    *_item;
@@ -173,7 +176,8 @@ class ScoreInfos : public ItemArray
 class ConfigGroup : public KConfigGroupSaver
 {
  public:
-    ConfigGroup() : KConfigGroupSaver(kapp->config(), QString::null) {}
+    ConfigGroup(const QString &group = QString::null)
+        : KConfigGroupSaver(kapp->config(), group) {}
 };
 
 //-----------------------------------------------------------------------------
@@ -183,16 +187,18 @@ class PlayerInfos : public ItemArray
     PlayerInfos();
 
     bool isNewPlayer() const { return _newPlayer; }
+    bool isOldLocalPlayer() const { return _oldLocalPlayer; }
     uint nbEntries() const;
     QString name() const { return item("name")->read(_id).toString(); }
     bool isAnonymous() const;
-    QString prettyName() const        { return prettyName(_id); }
+    QString prettyName() const { return prettyName(_id); }
     QString prettyName(uint id) const { return item("name")->pretty(id); }
     QString registeredName() const;
     QString comment() const { return item("comment")->pretty(_id); }
     bool isWWEnabled() const;
     QString key() const;
     uint id() const { return _id; }
+    uint oldLocalId() const { return _oldLocalId; }
 
     void createHistoItems(const QMemArray<uint> &scores, bool bound);
     QString histoName(uint i) const;
@@ -200,13 +206,16 @@ class PlayerInfos : public ItemArray
     const QMemArray<uint> &histogram() const { return _histogram; }
 
     void submitScore(const Score &) const;
+    // return true if the nickname is already used locally
+    bool isNameUsed(const QString &name) const;
+    void modifyName(const QString &newName) const;
     void modifySettings(const QString &newName, const QString &comment,
                         bool WWEnabled, const QString &newKey) const;
     void removeKey();
 
  private:
-    bool _newPlayer, _bound;
-    uint _id;
+    bool _newPlayer, _bound, _oldLocalPlayer;
+    uint _id, _oldLocalId;
     QMemArray<uint> _histogram;
 };
 
@@ -214,23 +223,25 @@ class PlayerInfos : public ItemArray
 class ManagerPrivate
 {
  public:
-    ManagerPrivate(uint nbGameTypes, uint maxNbentries, Manager &manager);
+    ManagerPrivate(uint nbGameTypes, Manager &manager);
+    void init(uint maxNbentries);
     ~ManagerPrivate();
 
     bool modifySettings(const QString &newName, const QString &comment,
-                        bool WWEnabled, QWidget *parent);
+                        bool WWEnabled, QWidget *widget);
 
     void setGameType(uint type);
     void checkFirst();
     int submitLocal(const Score &score);
-    int submitScore(const Score &score, QWidget *parent);
+    int submitScore(const Score &score, QWidget *widget, bool askIfAnonymous);
     Score readScore(uint i) const;
 
-    uint gameType() const            { return _gameType; }
-    uint nbGameTypes() const         { return _nbGameTypes; }
-    bool isWWHSAvailable() const     { return !serverURL.isEmpty(); }
-    ScoreInfos &scoreInfos() const   { return *_scoreInfos; }
-    PlayerInfos &playerInfos() const { return *_playerInfos; }
+    uint gameType() const        { return _gameType; }
+    uint nbGameTypes() const     { return _nbGameTypes; }
+    bool isWWHSAvailable() const { return !serverURL.isEmpty(); }
+    ScoreInfos &scoreInfos()     { return *_scoreInfos; }
+    PlayerInfos &playerInfos()   { return *_playerInfos; }
+    KHighscore &hsConfig()       { return *_hsConfig; }
     enum QueryType { Submit, Register, Change, Players, Scores };
     KURL queryURL(QueryType type, const QString &newName=QString::null) const;
 
@@ -243,6 +254,7 @@ class ManagerPrivate
     Manager::ShowMode showMode;
 
  private:
+    KHighscore   *_hsConfig;
     PlayerInfos  *_playerInfos;
     ScoreInfos   *_scoreInfos;
     bool          _first;
@@ -257,6 +269,7 @@ class ManagerPrivate
                         QDomNamedNodeMap *map = 0);
     static bool getFromQuery(const QDomNamedNodeMap &map, const QString &name,
                              QString &value, QWidget *parent);
+    void convertToGlobal();
 };
 
 }; // namespace

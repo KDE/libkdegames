@@ -229,6 +229,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
 
 void HighscoresDialog::createPage(QWidget *page)
 {
+    internal->hsConfig().readCurrentConfig();
     _current = page;
     bool several = ( internal->nbGameTypes()>1 );
     int i = (several ? pageIndex(page) : 0);
@@ -434,7 +435,7 @@ void ConfigDialog::accept()
 {
     if ( save() ) {
         KDialogBase::accept();
-        kapp->config()->sync(); // #### safer
+        kapp->config()->sync(); // safer
     }
 }
 
@@ -459,6 +460,7 @@ void ConfigDialog::removeSlot()
 
 void ConfigDialog::load()
 {
+    internal->hsConfig().readCurrentConfig();
     const PlayerInfos &infos = internal->playerInfos();
     _nickname->setText(infos.isAnonymous() ? QString::null : infos.name());
     _comment->setText(infos.comment());
@@ -480,18 +482,62 @@ bool ConfigDialog::save()
 
     // do not bother the user with "nickname empty" if he has not
     // messed with nickname settings ...
-    if ( _nickname->text().isEmpty()
-         && !internal->playerInfos().isAnonymous() && !enabled )
-        return true;
+    QString newName = _nickname->text().lower();
+    if ( newName.isEmpty() && !internal->playerInfos().isAnonymous()
+         && !enabled ) return true;
 
-    bool res = internal->modifySettings(_nickname->text().lower(),
-                                        _comment->text(), enabled, this);
+    if ( newName.isEmpty() ) {
+        KMessageBox::sorry(this, i18n("Please choose a non empty nickname."));
+        return false;
+    }
+    if ( internal->playerInfos().isNameUsed(newName) ) {
+        KMessageBox::sorry(this, i18n("Nickname already in use. Please "
+                                      "choose another one"));
+        return false;
+    }
+
+    int res =
+        internal->modifySettings(newName, _comment->text(), enabled, this);
     if (res) {
         load(); // needed to update view when "apply" is clicked
         enableButtonApply(false);
     }
     _saved = true;
     return res;
+}
+
+//-----------------------------------------------------------------------------
+AskNameDialog::AskNameDialog(QWidget *parent)
+    : KDialogBase(Plain, i18n("Enter your nickname"), Ok | Cancel, Cancel,
+                  parent, "ask_name_dialog")
+{
+    internal->hsConfig().readCurrentConfig();
+
+    QVBoxLayout *top =
+        new QVBoxLayout(plainPage(), marginHint(), spacingHint());
+    QLabel *label =
+        new QLabel(i18n("Congratulations, you have won!"), plainPage());
+    top->addWidget(label);
+
+    QHBoxLayout *hbox = new QHBoxLayout(top);
+    label = new QLabel(i18n("Enter your nickname:"), plainPage());
+    hbox->addWidget(label);
+    _edit = new QLineEdit(plainPage());
+    _edit->setFocus();
+    connect(_edit, SIGNAL(textChanged(const QString &)), SLOT(nameChanged()));
+    hbox->addWidget(_edit);
+
+    top->addSpacing(spacingHint());
+    _checkbox = new QCheckBox(i18n("Do not ask again."),  plainPage());
+    top->addWidget(_checkbox);
+
+    nameChanged();
+}
+
+void AskNameDialog::nameChanged()
+{
+    enableButtonOK( !name().isEmpty()
+                    && !internal->playerInfos().isNameUsed(name()) );
 }
 
 }; // namespace

@@ -57,39 +57,40 @@ bool configure(QWidget *parent)
 void show(QWidget *parent, int rank)
 {
     HighscoresDialog *hd = new HighscoresDialog(rank, parent);
-	hd->exec();
+    hd->exec();
     delete hd;
 }
 
-void submitScore(const Score &score, QWidget *parent)
+void submitScore(const Score &score, QWidget *widget)
 {
-    int rank = internal->submitScore(score, parent);
+    int rank = internal->submitScore(score, widget,
+                                     internal->showMode!=Manager::NeverShow);
 
     switch (internal->showMode) {
     case Manager::AlwaysShow:
-        show(parent, -1);
+        show(widget, -1);
         break;
     case Manager::ShowForHigherScore:
-        if ( rank!=-1) show(parent, rank);
+        if ( rank!=-1) show(widget, rank);
         break;
     case Manager::ShowForHighestScore:
-        if ( rank==0 )
-            show(parent, rank);
+        if ( rank==0 ) show(widget, rank);
         break;
     case Manager::NeverShow:
         break;
     }
 }
 
-void show(QWidget *parent)
+void show(QWidget *widget)
 {
     internal->checkFirst();
-    show(parent, -1);
+    show(widget, -1);
 }
 
 Score lastScore()
 {
     internal->checkFirst();
+    internal->hsConfig().readCurrentConfig();
     uint nb = internal->scoreInfos().maxNbEntries();
     return internal->readScore(nb-1);
 }
@@ -97,6 +98,7 @@ Score lastScore()
 Score firstScore()
 {
     internal->checkFirst();
+    internal->hsConfig().readCurrentConfig();
     return internal->readScore(0);
 }
 
@@ -108,7 +110,8 @@ Manager::Manager(uint nbGameTypes, uint maxNbEntries)
     Q_ASSERT(maxNbEntries);
     if (internal)
         kdFatal(11002) << "A highscore object already exists" << endl;
-    internal = new ManagerPrivate(nbGameTypes, maxNbEntries, *this);
+    internal = new ManagerPrivate(nbGameTypes, *this);
+    internal->init(maxNbEntries);
 }
 
 Manager::~Manager()
@@ -227,17 +230,19 @@ void Manager::addScoreItem(const QString &name, Item *item)
 
 void Manager::setPlayerItem(PlayerItemType type, Item *item)
 {
+    const Item *scoreItem = internal->scoreInfos().item("score")->item();
+    uint def = scoreItem->defaultValue().toUInt();
     QString name;
     switch (type) {
     case MeanScore:
         name = "mean score";
+        item->setDefaultValue(double(def));
         break;
     case BestScore:
         name = "best score";
+        item->setDefaultValue(def);
         break;
     }
-    const Item *scoreItem = internal->scoreInfos().item("score")->item();
-    item->setDefaultValue( scoreItem->defaultValue() );
     internal->playerInfos().setItem(name, item);
 }
 

@@ -183,6 +183,24 @@ class ConfigDialog : public KDialogBase
     bool save();
 };
 
+//-----------------------------------------------------------------------------
+class AskNameDialog : public KDialogBase
+{
+ Q_OBJECT
+ public:
+    AskNameDialog(QWidget *parent);
+
+    QString name() const { return _edit->text().lower(); }
+    bool dontAskAgain() const { return _checkbox->isChecked(); }
+
+ private slots:
+    void nameChanged();
+
+ private:
+    QLineEdit *_edit;
+    QCheckBox *_checkbox;
+};
+
 }; // namespace
 
 #endif

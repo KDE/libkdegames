@@ -134,7 +134,7 @@ class Item
      *
      * @param i the element index ("rank" for score / "id" for player)
      */
-	virtual QVariant read(uint i, const QVariant &value) const;
+    virtual QVariant read(uint i, const QVariant &value) const;
 
     /**
      * @return the string to be displayed. You may need to reimplement this
@@ -142,10 +142,10 @@ class Item
      *
      * @param i the element index ("rank" for score / "id" for player)
      */
-	virtual QString pretty(uint i, const QVariant &value) const;
+    virtual QString pretty(uint i, const QVariant &value) const;
 
  private:
-	QVariant _default;
+    QVariant _default;
     QString  _label;
     int      _alignment;
     Format   _format;

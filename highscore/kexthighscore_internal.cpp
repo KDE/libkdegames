@@ -19,6 +19,10 @@
 
 #include "kexthighscore_internal.h"
 
+#include <pwd.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 #include <qfile.h>
 #include <qlayout.h>
 #include <qdom.h>
@@ -30,7 +34,7 @@
 #include <kmdcodec.h>
 #include <kdebug.h>
 
-#include "khighscore.h"
+#include "config.h"
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
 
@@ -39,7 +43,8 @@ namespace KExtHighscore
 {
 
 //-----------------------------------------------------------------------------
-const char *ItemContainer::ANONYMOUS = "_";
+const char ItemContainer::ANONYMOUS[] = "_";
+const char ItemContainer::ANONYMOUS_LABEL[] = I18N_NOOP("anonymous");
 
 ItemContainer::ItemContainer()
     : _item(0)
@@ -68,9 +73,8 @@ QVariant ItemContainer::read(uint i) const
 
     QVariant v = _item->defaultValue();
     if ( isStored() ) {
-        KHighscore hs;
-        hs.setHighscoreGroup(_group);
-        v = hs.readPropertyEntry(i+1, entryName(), v);
+        internal->hsConfig().setHighscoreGroup(_group);
+        v = internal->hsConfig().readPropertyEntry(i+1, entryName(), v);
     }
     return _item->read(i, v);
 }
@@ -84,9 +88,9 @@ QString ItemContainer::pretty(uint i) const
 void ItemContainer::write(uint i, const QVariant &value) const
 {
     Q_ASSERT( isStored() );
-    KHighscore hs;
-    hs.setHighscoreGroup(_group);
-    hs.writeEntry(i+1, entryName(), value);
+    Q_ASSERT( internal->hsConfig().isLocked() );
+    internal->hsConfig().setHighscoreGroup(_group);
+    internal->hsConfig().writeEntry(i+1, entryName(), value);
 }
 
 uint ItemContainer::increment(uint i) const
@@ -242,7 +246,7 @@ uint ScoreInfos::nbEntries() const
     for (; i<_maxNbEntries; i++)
         if ( item("score")->read(i)==item("score")->item()->defaultValue() )
             break;
-	return i;
+    return i;
 }
 
 //-----------------------------------------------------------------------------
@@ -274,14 +278,58 @@ PlayerInfos::PlayerInfos()
     addItem("max lost trend", new Item((uint)0), true, true);
     addItem("max won trend", new Item((uint)0), true, true);
 
+#ifdef HIGHSCORE_DIRECTORY
+    struct passwd *pwd = getpwuid(getuid());
+    QString username = pwd->pw_name;
+    internal->hsConfig().setHighscoreGroup("users");
+    for (uint i=0; ;i++) {
+        if ( !internal->hsConfig().hasEntry(i+1, "username") ) {
+            _newPlayer = true;
+            _id = i;
+            break;
+        }
+        if ( internal->hsConfig().readEntry(i+1, "username")==username ) {
+            _newPlayer = false;
+            _id = i;
+            return;
+        }
+    }
+#endif
+    internal->hsConfig().lockForWriting();
+#ifdef HIGHSCORE_DIRECTORY
+    internal->hsConfig().writeEntry(_id+1, "username", username);
+    item("name")->write(_id, QString(ItemContainer::ANONYMOUS));
+#endif
+
     ConfigGroup cg;
-    _newPlayer = !cg.config()->hasKey(HS_ID);
-    if ( !_newPlayer ) _id = cg.config()->readUnsignedNumEntry(HS_ID);
+    _oldLocalPlayer = cg.config()->hasKey(HS_ID);
+    _oldLocalId = cg.config()->readUnsignedNumEntry(HS_ID);
+#ifdef HIGHSCORE_DIRECTORY
+    if (_oldLocalPlayer) { // player already exists in local config file
+        // copy player data
+        QString prefix = QString("%1_").arg(_oldLocalId+1);
+        QMap<QString, QString> entries =
+            cg.config()->entryMap("KHighscore_players");
+        QMap<QString, QString>::const_iterator it;
+        for (it=entries.begin(); it!=entries.end(); ++it) {
+            QString key = it.key();
+            if ( key.find(prefix)==0 ) {
+                QString name = key.right(key.length()-prefix.length());
+                if ( name!="name" || !isNameUsed(it.data()) )
+                    internal->hsConfig().writeEntry(_id+1, name, it.data());
+            }
+        }
+    }
+#else
+    _newPlayer = !_oldLocalPlayer;
+    if (_oldLocalPlayer) _id = _oldLocalId;
     else {
         _id = nbEntries();
         cg.config()->writeEntry(HS_ID, _id);
         item("name")->write(_id, QString(ItemContainer::ANONYMOUS));
     }
+#endif
+    internal->hsConfig().writeAndUnlock();
 }
 
 void PlayerInfos::createHistoItems(const QMemArray<uint> &scores, bool bound)
@@ -300,9 +348,8 @@ bool PlayerInfos::isAnonymous() const
 
 uint PlayerInfos::nbEntries() const
 {
-    KHighscore hs;
-    hs.setHighscoreGroup("players");
-    QStringList list = hs.readList("name", -1);
+    internal->hsConfig().setHighscoreGroup("players");
+    QStringList list = internal->hsConfig().readList("name", -1);
     return list.count();
 }
 
@@ -349,9 +396,9 @@ void PlayerInfos::submitScore(const Score &score) const
     // update mean
     if ( !lost ) {
         uint nbWonGames = nbGames - item("nb lost games")->read(_id).toUInt()
-                       - item("nb black marks")->read(_id).toUInt(); // legacy
-        double mean =
-            (nbWonGames==1 ? 0.0 : item("mean score")->read(_id).toDouble());
+                        - item("nb black marks")->read(_id).toUInt(); // legacy
+        double mean = (nbWonGames==1 ? 0.0
+                       : item("mean score")->read(_id).toDouble());
         mean += (double(score.score()) - mean) / nbWonGames;
         item("mean score")->write(_id, mean);
     }
@@ -391,11 +438,25 @@ void PlayerInfos::submitScore(const Score &score) const
     }
 }
 
+bool PlayerInfos::isNameUsed(const QString &newName) const
+{
+    if ( newName==name() ) return false; // own name...
+    for (uint i=0; i<nbEntries(); i++)
+        if ( newName==item("name")->read(i).toString() ) return true;
+    if ( newName==i18n(ItemContainer::ANONYMOUS_LABEL) ) return true;
+    return false;
+}
+
+void PlayerInfos::modifyName(const QString &newName) const
+{
+    item("name")->write(_id, newName);
+}
+
 void PlayerInfos::modifySettings(const QString &newName,
                                  const QString &comment, bool WWEnabled,
                                  const QString &newKey) const
 {
-    item("name")->write(_id, newName);
+    modifyName(newName);
     item("comment")->write(_id, comment);
     ConfigGroup cg;
     cg.config()->writeEntry(HS_WW_ENABLED, WWEnabled);
@@ -432,15 +493,15 @@ void PlayerInfos::removeKey()
 }
 
 //-----------------------------------------------------------------------------
-ManagerPrivate::ManagerPrivate(uint nbGameTypes, uint maxNbEntries,
-                               Manager &m)
+ManagerPrivate::ManagerPrivate(uint nbGameTypes, Manager &m)
     : manager(m), showStatistics(false), trackLostGames(false),
       showMode(Manager::ShowForHigherScore),
       _first(true), _nbGameTypes(nbGameTypes), _gameType(0)
-{
-    Q_ASSERT(nbGameTypes);
-    Q_ASSERT(maxNbEntries);
+{}
 
+void ManagerPrivate::init(uint maxNbEntries)
+{
+    _hsConfig = new KHighscore(false, 0);
     _playerInfos = new PlayerInfos;
     _scoreInfos = new ScoreInfos(maxNbEntries, *_playerInfos);
 }
@@ -449,6 +510,7 @@ ManagerPrivate::~ManagerPrivate()
 {
     delete _scoreInfos;
     delete _playerInfos;
+    delete _hsConfig;
 }
 
 KURL ManagerPrivate::queryURL(QueryType type, const QString &newName) const
@@ -573,8 +635,8 @@ bool ManagerPrivate::doQuery(const KURL &url, QWidget *parent,
 }
 
 bool ManagerPrivate::getFromQuery(const QDomNamedNodeMap &map,
-                                     const QString &name, QString &value,
-                                     QWidget *parent)
+                                  const QString &name, QString &value,
+                                  QWidget *parent)
 {
     QDomAttr attr = map.namedItem(name).toAttr();
     if ( attr.isNull() ) {
@@ -582,9 +644,9 @@ bool ManagerPrivate::getFromQuery(const QDomNamedNodeMap &map,
                i18n("Invalid answer from world-wide "
                     "highscores server (missing item: %1).").arg(name));
 		return false;
-	}
-	value = attr.value();
-	return true;
+    }
+    value = attr.value();
+    return true;
 }
 
 Score ManagerPrivate::readScore(uint i) const
@@ -604,14 +666,9 @@ int ManagerPrivate::rank(const Score &score) const
 }
 
 bool ManagerPrivate::modifySettings(const QString &newName,
-                                       const QString &comment, bool WWEnabled,
-                                       QWidget *parent)
+                                    const QString &comment, bool WWEnabled,
+                                    QWidget *widget)
 {
-    if ( newName.isEmpty() ) {
-        KMessageBox::sorry(parent,i18n("Please choose a non empty nickname."));
-	    return false;
-	}
-
     QString newKey;
     bool newPlayer = false;
 
@@ -622,13 +679,41 @@ bool ManagerPrivate::modifySettings(const QString &newName,
         Manager::addToQueryURL(url, "comment", comment);
 
         QDomNamedNodeMap map;
-        bool ok = doQuery(url, parent, &map);
-        if ( !ok || (newPlayer && !getFromQuery(map, "key", newKey, parent)) )
+        bool ok = doQuery(url, widget, &map);
+        if ( !ok || (newPlayer && !getFromQuery(map, "key", newKey, widget)) )
             return false;
     }
 
-    _playerInfos->modifySettings(newName, comment, WWEnabled, newKey);
-    return true;
+    bool ok = _hsConfig->lockForWriting(widget); // no GUI when locking
+    if (ok) {
+        // check again name in case the config file has been changed...
+        // if it has, it is unfortunate because the WWW name is already
+        // committed but should be very rare and not really problematic
+        ok = ( !_playerInfos->isNameUsed(newName) );
+        if (ok)
+            _playerInfos->modifySettings(newName, comment, WWEnabled, newKey);
+        _hsConfig->writeAndUnlock();
+    }
+    return ok;
+}
+
+void ManagerPrivate::convertToGlobal()
+{
+    // read old highscores
+    KHighscore *tmp = _hsConfig;
+    _hsConfig = new KHighscore(true, 0);
+    QValueVector<Score> scores(_scoreInfos->nbEntries());
+    for (uint i=0; i<scores.count(); i++)
+        scores[i] = readScore(i);
+
+    // commit them
+    delete _hsConfig;
+    _hsConfig = tmp;
+    _hsConfig->lockForWriting();
+    for (uint i=0; i<scores.count(); i++)
+        if ( scores[i].data("id").toUInt()==_playerInfos->oldLocalId()+1 )
+            submitLocal(scores[i]);
+    _hsConfig->writeAndUnlock();
 }
 
 void ManagerPrivate::setGameType(uint type)
@@ -636,10 +721,21 @@ void ManagerPrivate::setGameType(uint type)
     if (_first) {
         _first = false;
         if ( _playerInfos->isNewPlayer() ) {
+            // convert legacy highscores
             for (uint i=0; i<_nbGameTypes; i++) {
                 setGameType(i);
                 manager.convertLegacy(i);
             }
+
+#ifdef HIGHSCORE_DIRECTORY
+            if ( _playerInfos->isOldLocalPlayer() ) {
+                // convert local to global highscores
+                for (uint i=0; i<_nbGameTypes; i++) {
+                    setGameType(i);
+                    convertToGlobal();
+                }
+            }
+#endif
         }
     }
 
@@ -659,7 +755,8 @@ void ManagerPrivate::checkFirst()
     if (_first) setGameType(0);
 }
 
-int ManagerPrivate::submitScore(const Score &ascore, QWidget *parent)
+int ManagerPrivate::submitScore(const Score &ascore,
+                                QWidget *widget, bool askIfAnonymous)
 {
     checkFirst();
 
@@ -667,13 +764,34 @@ int ManagerPrivate::submitScore(const Score &ascore, QWidget *parent)
     score.setData("id", _playerInfos->id() + 1);
     score.setData("date", QDateTime::currentDateTime());
 
-    _playerInfos->submitScore(score);
-    if ( _playerInfos->isWWEnabled() )
-        submitWorldWide(score, parent);
+    // ask new name if anonymous and winner
+    const char *dontAskAgainName = "highscore_ask_name_dialog";
+    QString newName;
+    KMessageBox::ButtonCode dummy;
+    if ( score.type()==Won && askIfAnonymous && _playerInfos->isAnonymous()
+     && KMessageBox::shouldBeShownYesNo(dontAskAgainName, dummy) ) {
+         AskNameDialog d(widget);
+         if ( d.exec()==QDialog::Accepted ) newName = d.name();
+         if ( d.dontAskAgain() )
+             KMessageBox::saveDontShowAgainYesNo(dontAskAgainName,
+                                                 KMessageBox::No);
+    }
 
     int rank = -1;
-    if ( score.type()==Won )
-        rank = submitLocal(score);
+    if ( _hsConfig->lockForWriting(widget) ) { // no GUI when locking
+        // check again new name in case the config file has been changed...
+        if ( !newName.isEmpty() && !_playerInfos->isNameUsed(newName) )
+             _playerInfos->modifyName(newName);
+
+        // commit locally
+        _playerInfos->submitScore(score);
+        if ( score.type()==Won ) rank = submitLocal(score);
+        _hsConfig->writeAndUnlock();
+    }
+
+    if ( _playerInfos->isWWEnabled() )
+        submitWorldWide(score, widget);
+
     return rank;
 }
 
@@ -689,7 +807,7 @@ int ManagerPrivate::submitLocal(const Score &score)
 }
 
 bool ManagerPrivate::submitWorldWide(const Score &score,
-                                     QWidget *parent) const
+                                     QWidget *widget) const
 {
     if ( score.type()==Lost && !trackLostGames ) return true;
 
@@ -701,7 +819,7 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     KMD5 context(QString(_playerInfos->registeredName() + str).latin1());
     Manager::addToQueryURL(url, "check", context.hexDigest());
 
-    return doQuery(url, parent);
+    return doQuery(url, widget);
 }
 
 void ManagerPrivate::exportHighscores(QTextStream &s)

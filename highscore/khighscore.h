@@ -1,6 +1,7 @@
 /*
     This file is part of the KDE games library
     Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
+    Copyright (C) 2003 Nicolas Hadacek <hadacek@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -26,12 +27,14 @@
 #include <qobject.h>
 
 class KConfig;
-
+class KFileLock;
+class KRawConfig;
 class KHighscorePrivate;
+
 /**
  * This is the KDE class for saving and reading highscore tables. It offers the
  * possibility for system-wide highscore tables (configure with e.g.
- * --enable-highscore=/var/games) and a theoretically unlimited number of
+ * --enable-highscore-dir=/var/games) and a theoretically unlimited number of
  * entries.
  *
  * You can specify different "keys" for an entry - just like the @ref KConfig
@@ -42,13 +45,13 @@ class KHighscorePrivate;
  * highscore->writeEntry(1, "name", myPlayer->name());
  * </pre>
  * Note that it doesn't really matter if you use "0" or "1" as the first entry
- * of the list as long as your program always uses the same for the first entry.
- * I recommend to use "1", as several convenience methods use this.
+ * of the list as long as your program always uses the same for the first
+ * entry. I recommend to use "1", as several convenience methods use this.
  *
- * You can also specify different groups using @ref setHighscoreGroup. Just like
- * the keys mentioned above the groups behave like groups in @ref KConfig but
- * are prefixed with "KHighscore_". The default group is just "KHighscore". You
- * might use this e.g. to create different highscore tables like
+ * You can also specify different groups using @ref setHighscoreGroup. Just
+ * like the keys mentioned above the groups behave like groups in @ref KConfig
+ * but are prefixed with "KHighscore_". The default group is just "KHighscore".
+ * You might use this e.g. to create different highscore tables like
  * <pre>
  * table->setHighscoreGroup("Easy");
  * // write the highscores for level "easy" to the table
@@ -67,8 +70,9 @@ class KHighscorePrivate;
  * writeHighscore(table, player, level);
  * </pre>
  *
- * Also note that yout MUST NOT mark the key or the group for translation! I.e. don't use
- * i18n() for the keys or groups! Here is the code to read the above written entry:
+ * Also note that you MUST NOT mark the key or the group for translation! I.e.
+ * don't use i18n() for the keys or groups! Here is the code to read the above
+ * written entry:
  * <pre>
  * QString firstName = highscore->readEntry(0, "name");
  * </pre>
@@ -80,7 +84,74 @@ class KHighscore : public QObject
 {
 	Q_OBJECT
 public:
+        /** @obsolete
+         * Constructor. The highscore file is forced to be local to support
+         * games using the old behaviour.
+         */
 	KHighscore(QObject* parent = 0);
+
+        /** @since 3.2
+         * Constructor.
+         *
+         * @param forceLocal if true, the local highscore file is used even
+         * when the configuration has been set to use a system-wide file. This
+         * is convenient for converting highscores from legacy applications.
+         */
+        KHighscore(bool forceLocal, QObject *parent);
+
+        /** @since 3.2
+         * Read the current state of the highscore file. Remember that when
+         * it's not locked for writing, this file can change at any time.
+         * (This method is only useful for a system-wide highscore file).
+         */
+        void readCurrentConfig();
+
+        /** @since 3.2
+         * This method open the system-wide highscore file using the effective
+         * group id of the game executable (which should be "games"). The
+         * effective group id is completely dropped afterwards.
+         *
+         * Note: this method should be called in main() before creating a
+         * KApplication and doing anything else (KApplication checks that the
+         * program is not suid/sgid and will exit the program for security
+         * reason if it is the case).
+         */
+        static void init(const char *appname);
+
+        /** @since 3.2
+         * Lock the system-wide highscore file for writing (does nothing and
+         * return true if the local file is used).
+         * You should perform writing without GUI interaction to avoid
+         * blocking and don't forget to unlock the file as soon as possible
+         * with @ref writeAndUnlock().
+         *
+         * If the config file cannot be locked,
+         * the method waits for 1 second and, if it failed again, displays
+         * a message box asking for retry or cancel.
+         * @param widget used as the parent of the message box.
+         *
+         * @return false on error or if the config file is locked by another
+         * process. In such case, the config stays read-only.
+         */
+        bool lockForWriting(QWidget *widget = 0);
+
+        /** @since 3.2
+         * Effectively write and unlock the system-wide highscore file
+         * (@see lockForWriting).
+         * If using a local highscore file, it will sync the config.
+         */
+        void writeAndUnlock();
+
+        /** @since 3.2
+         * @return true if the highscore file is locked or if a local
+         * file is used.
+         */
+        bool isLocked() const;
+
+        /**
+         * Destructor.
+         * If necessary, write and unlock the highscore file.
+         */
 	~KHighscore();
 
 	/**
@@ -187,6 +258,9 @@ public:
 	 **/
 	bool hasTable() const;
 
+        /** @obsolete
+         * This does the same as writeAndUnlock().
+         */
 	void sync();
 
 	/**
@@ -200,8 +274,8 @@ public:
 
 	/**
 	 * @return The currently used group. This doesn't contain the prefix
-	 * ("KHighscore_") but the same as @ref setHighscoreGroup uses. The default is
-	 * QString::null
+	 * ("KHighscore_") but the same as @ref setHighscoreGroup uses. The
+         * default is QString::null
 	 **/
 	const QString& highscoreGroup() const;
 
@@ -214,13 +288,18 @@ protected:
 
 	/**
 	 * @return A pointer to the @ref KConfig object to be used. This is
-	 * either kapp->config() (default) or a @ref KSimpleConfig object (if
-	 * you configured with --enable-highscore)
+	 * either kapp->config() (default) or a @ref KSimpleConfig object for
+         * a system-wide highscore file.
 	 **/
 	KConfig* config() const;
 
+        void init(bool forceLocal);
+
 private:
 	KHighscorePrivate* d;
+
+        static KFileLock *_lock; // lock on system-wide highscore file
+        static KRawConfig *_config; // config for system-wide highscore file
 };
 
 #endif
