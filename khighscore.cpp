@@ -30,7 +30,7 @@
 #include <kglobal.h>
 #include <kglobal.h>
 
-#include "khighscore.moc"
+#include "khighscore.h"
 #include "config.h" // HIGHSCORE_DIRECTORY is defined here (or not)
 
 #define GROUP "KHighscore"
@@ -44,6 +44,7 @@ public:
 	}
 	
 	KConfig* mConfig;
+	QString group;
 };
 
 KHighscore::KHighscore(QObject* parent) : QObject(parent)
@@ -81,11 +82,11 @@ KConfig* KHighscore::config() const
 void KHighscore::writeEntry(int entry, const QString& key, const QString& value)
 {
  // save the group in case that we are on kapp->config()
- QString group = config()->group();
+ QString origGroup = config()->group();
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- config()->setGroup(GROUP);
+ config()->setGroup(group());
  config()->writeEntry(confKey, value);
- config()->setGroup(group);
+ config()->setGroup(origGroup);
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, int value)
@@ -94,8 +95,8 @@ void KHighscore::writeEntry(int entry, const QString& key, int value)
 QString KHighscore::readEntry(int entry, const QString& key, const QString& pDefault) const
 {
  // save the group in case that we are on kapp->config()
- QString group = config()->group();
- config()->setGroup(GROUP);
+ QString origGroup = config()->group();
+ config()->setGroup(group());
  QString value;
  if (hasEntry(entry, key)) {
 	QString confKey = QString("%1_%2").arg(entry).arg(key);
@@ -103,7 +104,7 @@ QString KHighscore::readEntry(int entry, const QString& key, const QString& pDef
  } else {
 	value = pDefault;
  }
- config()->setGroup(group);
+ config()->setGroup(origGroup);
  return value;
 }
 
@@ -117,11 +118,11 @@ int KHighscore::readNumEntry(int entry, const QString& key, int pDefault) const
 
 bool KHighscore::hasEntry(int entry, const QString& key) const
 {
- QString group = config()->group();
+ QString origGroup = config()->group();
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- config()->setGroup(GROUP);
+ config()->setGroup(group());
  bool value = config()->hasKey(confKey);
- config()->setGroup(group);
+ config()->setGroup(origGroup);
  return value;
 }
 
@@ -141,8 +142,28 @@ void KHighscore::writeList(const QString& key, const QStringList& list)
  }
 }
 
+void KHighscore::setHighscoreGroup(const QString& group)
+{
+ d->group = group;
+}
+
+const QString& KHighscore::highscoreGroup() const
+{
+ return d->group;
+}
+
+QString KHighscore::group() const
+{
+ if (highscoreGroup() == QString::null) {
+	return GROUP;
+ } else {
+	return QString("%1_%2").arg(GROUP).arg(highscoreGroup());
+ }
+}
+
 bool KHighscore::hasTable() const
-{ return config()->hasGroup(GROUP); }
+{ return config()->hasGroup(group()); }
 
 void KHighscore::sync()
 { config()->sync(); }
+#include "khighscore.moc"

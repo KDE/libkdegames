@@ -35,7 +35,7 @@ class KHighscorePrivate;
 /**
  * This is the KDE class for saving and reading highscore tables. It offers the
  * possibility for system-wide highscore tables (configure with e.g.
- * --enable-highscore=/var/games) and a theoretically unlimited number of of
+ * --enable-highscore=/var/games) and a theoretically unlimited number of
  * entries. 
  *
  * You can specify different "keys" for an entry - just like the @ref KConfig
@@ -48,9 +48,31 @@ class KHighscorePrivate;
  * Note that it doesn't really matter if you use "0" or "1" as the first entry
  * of the list as long as your program always uses the same for the first entry.
  * I recommend to use "1", as several convenience methods use this.
+ *
+ * You can also specify different groups using @ref setHighscoreGroup. Just like
+ * the keys mentioned above the groups behave like groups in @ref KConfig but
+ * are prefixed with "KHighscore_". The default group is just "KHighscore". You
+ * might use this e.g. to create different highscore tables like
+ * <pre>
+ * table->setHighscoreGroup("Easy");
+ * // write the highscores for level "easy" to the table
+ * writeEasyHighscores(table);
  * 
- * Also note that yout MUST NOT mark the key for translation! I.e. don't use
- * i18n() for the keys! Here is the code to read the above written entry:
+ * table->setHighscore("Player_1");
+ * // write player specific highscores to the table
+ * writePlayerHighscores(table);
+ * </pre>
+ * As you can see above you can also use this to write the highscores of a
+ * single player, so the "best times" of a player. To write highscores for a
+ * specific player in a specific level you will have to use a more complex way:
+ * <pre>
+ * QString group = QString("%1_%2").arg(player).arg(level);
+ * table->setGroup(group);
+ * writeHighscore(table, player, level);
+ * </pre>
+ * 
+ * Also note that yout MUST NOT mark the key or the group for translation! I.e. don't use
+ * i18n() for the keys or groups! Here is the code to read the above written entry:
  * <pre>
  * QString firstName = highscore->readEntry(0, "name");
  * </pre>
@@ -155,7 +177,29 @@ public:
 
 	void sync();
 
+	/**
+	 * Set the new highscore group. The group is being prefixed with
+	 * "KHighscore_" in the table.
+	 * @param groupname The new groupname. E.g. use "easy" for the easy 
+	 * level of your game. If you use QString::null (the default) the
+	 * default group is used.
+	 **/
+	void setHighscoreGroup(const QString& groupname = QString::null);
+
+	/**
+	 * @return The currently used group. This doesn't contain the prefix
+	 * ("KHighscore_") but the same as @ref setHighscoreGroup uses. The default is
+	 * QString::null
+	 **/
+	const QString& highscoreGroup() const;
+
 protected:
+	/**
+	 * @return A groupname to be used in @ref KConfig. Used internally to
+	 * prefix the value from @ref highscoreGroup() with "KHighscore_"
+	 **/
+	QString group() const;
+		
 	/**
 	 * @return A pointer to the @ref KConfig object to be used. This is
 	 * either kapp->config() (default) or a @ref KSimpleConfig object (if
