@@ -21,6 +21,8 @@
     $Id$
 */
 
+#include <config.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <sys/file.h>
 
@@ -34,7 +36,6 @@
 #include <kstaticdeleter.h>
 
 #include "khighscore.h"
-#include "config.h" // HIGHSCORE_DIRECTORY is defined here (or not)
 #include "kconfigrawbackend.h"
 #include "kfilelock.h"
 
