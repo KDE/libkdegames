@@ -1028,10 +1028,12 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   kdDebug(11001) << " MaxPlayers for this game is " << maxPlayers() << endl;
 
   // Do we have too many players? (After the programmer disabled some?)
-  int havePlayers = cnt+playerCount()-inactivateIds.count();
-  while (maxPlayers()< havePlayers)
+  // MH: We cannot use have player here as it CHANGES in the loop
+  // int havePlayers = cnt+playerCount()-inactivateIds.count();
+  kdDebug(11001) << " havePlayers " << cnt+playerCount()-inactivateIds.count() << endl;
+  while (maxPlayers()< cnt+playerCount()-inactivateIds.count())
   {
-    kdDebug(11001) << "  Still to deacticvate " << (cnt+playerCount()-inactivateIds.count())-maxPlayers() <<endl;
+    kdDebug(11001) << "  Still to deacticvate " << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers() <<endl;
     KPlayer *currentPlayer=0;
     int currentPriority=0x7fff; // MAX_UINT (16bit?) to get the maximum of the list
     // find lowest network priority which is not yet in the newPlayerList
