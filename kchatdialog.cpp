@@ -123,7 +123,7 @@ void KChatDialog::init()
  systemMessageLayout->addWidget(d->mSystemTextPreview, 1);
 
 // message count
- QLabel* maxMessages = new QLabel(i18n("Maximal number of messages (-1 = inlimited):"), d->mTextPage);
+ QLabel* maxMessages = new QLabel(i18n("Maximal number of messages (-1 = unlimited):"), d->mTextPage);
  layout->addWidget(maxMessages, 6, 0);
  d->mMaxMessages = new QLineEdit(d->mTextPage);
  d->mMaxMessages->setText(QString::number(-1));

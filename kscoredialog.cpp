@@ -345,7 +345,7 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName,
         if (i == 1)
           d->comment = i18n("Excellent!\nYou have a new high score!");
         else
-          d->comment = i18n("Well done!\nYou made it in the high score list!");
+          d->comment = i18n("Well done!\nYou made it to the high score list!");
         return i;
       }
    }
