@@ -111,6 +111,7 @@ private:
    
    void aboutToShow();
    void setupDialog();
+   void keyPressEvent( QKeyEvent *ev);
 
 private:           
    class KScoreDialogPrivate;
