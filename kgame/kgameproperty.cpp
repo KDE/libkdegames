@@ -69,7 +69,7 @@ void KGamePropertyBase::init()
 
  setOptimized(false); 
  
- setReadOnly(false);
+ //setReadOnly(false);
  mFlags.bits.locked = false ; // setLocked(false); is NOT possible as it checks whether isLocked() allows to change the status
 
  // local is default
@@ -104,6 +104,10 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,Property
 	mOwner = owner;
 	mOwner->addProperty(this, name);
   if (p!=PolicyUndefined) setPolicy(p);
+  else
+  {
+    setPolicy(mOwner->policy());
+  }
  }
  return mId;
 }

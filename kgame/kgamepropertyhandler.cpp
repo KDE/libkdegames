@@ -44,6 +44,8 @@ public:
 	QIntDict<KGamePropertyBase> mIdDict;
   int mUniqueId;
 	int mId;
+  KGamePropertyBase::PropertyPolicy mDefaultPolicy;
+  bool mDefaultUserspace;
 };
 
 KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent) : QObject(parent)
@@ -69,6 +71,8 @@ void KGamePropertyHandler::init()
  d = new KGamePropertyHandlerPrivate; // for future use - is BC important to us?
  d->mId = 0;
  d->mUniqueId=KGamePropertyBase::IdAutomatic;
+ d->mDefaultPolicy=KGamePropertyBase::PolicyLocal;
+ d->mDefaultUserspace=true;
 }
 
 
@@ -221,8 +225,16 @@ bool KGamePropertyHandler::save(QDataStream &stream)
  return true;
 }
 
-void KGamePropertyHandler::setPolicy(int p,bool userspace)
+KGamePropertyBase::PropertyPolicy KGamePropertyHandler::policy()
 {
+  kdDebug(11001) << "KGamePropertyHandler::policy " << d->mDefaultPolicy << endl;
+  return d->mDefaultPolicy;
+}
+void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool userspace)
+{
+ kdDebug(11001) << "KGamePropertyHandler::setPolicy " << p << endl;
+ d->mDefaultPolicy=p;
+ d->mDefaultUserspace=userspace;
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current())
  {
@@ -333,5 +345,25 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
  }
  return value;
 }
+
+void KGamePropertyHandler::Debug()
+{
+ kdDebug(11001) << "-----------------------------------------------------------" << endl;
+ kdDebug(11001) << "KGamePropertyHandler:: Debug this=" << this << endl;
+
+ kdDebug(11001) << "  Registered properties: (Policy,Lock,Emit,Optimized, Dirty)" << endl;
+ QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ while (it.current()) {
+  KGamePropertyBase *p=it.current();
+  kdDebug(11001) 
+   << "  "<<p->id() << ": p=" << p->policy() << " l="<<p->isLocked()
+   << " e="<<p->isEmittingSignal() << " o=" << p->isOptimized() 
+   << " d="<<p->isDirty() 
+   << endl;
+	++it;
+ }
+ kdDebug(11001) << "-----------------------------------------------------------" << endl;
+}
+
 
 #include "kgamepropertyhandler.moc"

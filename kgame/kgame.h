@@ -344,7 +344,7 @@ public:
 	 *
 	 * It is up to you to decide how you want to work. 
 	 **/
-	void setPolicy(GamePolicy p);
+	void setPolicy(GamePolicy p,bool recursive=true);
 
 	/**
 	 * @return The default policy of the property
@@ -387,7 +387,7 @@ public:
     virtual void networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender, Q_UINT32 clientID);
 
     /**
-     * Returns a pointer to the KGAme property handler
+     * Returns a pointer to the KGame property handler
      **/
     KGamePropertyHandler* dataHandler() const;
 
@@ -571,7 +571,7 @@ protected:
     * @param inactivate - the value list of ids to be deactivated
     *
     **/ 
-    virtual void newPlayersJoin(KGamePlayerList *oldplayer,KGamePlayerList *newplayer,QValueList<int> &inactivate) {};
+    virtual void newPlayersJoin(KGamePlayerList *,KGamePlayerList *,QValueList<int> &) {};
 
     /**
     * Save the player list to a stream. Used for network game and load/save.

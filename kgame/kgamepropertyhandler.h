@@ -24,10 +24,12 @@
 #include <qobject.h>
 #include <qintdict.h>
 
+#include "kgameproperty.h"
+
 class QDataStream;
 class KGame;
 class KPlayer;
-class KGamePropertyBase;
+//class KGamePropertyBase;
 
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
@@ -231,7 +233,15 @@ public:
      * @param is userspace=true (default) only user properties are changed.
      * Otherwise also the system properties
 	 **/
-	void setPolicy(int p, bool userspace=true);
+	void setPolicy(KGamePropertyBase::PropertyPolicy p, bool userspace=true);
+
+  
+	/**
+     * Returns the default policy for this property handler. All properties
+     * registered newly, will have this property.
+     *
+	 **/
+  KGamePropertyBase::PropertyPolicy policy();
 
 	/**
 	 * Calls @ref KGamePropertyBase::setReadOnly(true) for all properties of this
@@ -268,6 +278,12 @@ public:
 	 * @return The value of a @ref KGameProperty
 	 **/
 	QString propertyValue(KGamePropertyBase* property);
+
+
+  /**
+  * Writes some debug output to the console.
+  */ 
+  void Debug();
 
 signals:
 	/**

@@ -158,12 +158,6 @@ public:
 	bool isEmittingSignal()	const { return mFlags.bits.emitsignal; }
 
 	/**
-	 * See also @ref setReadOnly
-	 * @return Whether the property is read only
-	 **/
-	bool isReadOnly() const { return mFlags.bits.readonly; }
-
-	/**
 	 * Sets this property to try to optimize signal and network handling
 	 * by not sending it out when the property value is not changed.
 	 **/
@@ -213,17 +207,6 @@ public:
 	 **/
 	bool unlock(bool force=false);
 
-	/**
-	 * A readonly property cannot be changed. Use this if you to prevent a
-	 * player from changing something, e.g. for a money-bases card game you
-	 * will want to lock the "bet" property after a player has bet.
-	 * 
-	 * You have to call setReadOnly(false) before you are able to change the
-	 * value of the property again. The default is not readonly.
-	 * @param p True to lock this property, false to unlock it
-	 **/
-	void setReadOnly(bool p) { mFlags.bits.readonly = p; }
-	
 	/**
 	 * This will read the value of this property from the stream. You MUST
 	 * overwrite this method in order to use this class
@@ -373,7 +356,7 @@ protected:
                                              // sends it later on - fast
                                              // changing variables
 			unsigned char emitsignal : 1; // KPlayer notifies on variable change (true)
-			unsigned char readonly : 1; // whether the property can be changed (false)
+			//unsigned char readonly : 1; // whether the property can be changed (false)
 			unsigned char optimize : 1; // whether the property tries to optimize send/emit (false)
 			unsigned char dirty: 1; // whether the property dirty (setLocal() was used)
 			unsigned char policy : 2; // whether the property is always consistent (see PropertyPolicy)
@@ -682,7 +665,7 @@ public:
 		if (isOptimized() && mData == v) {
 			return true;
 		}
-		if (isReadOnly() || isLocked()) {
+		if (isLocked()) {
 			return false;
 		}
 		QByteArray b;
@@ -727,7 +710,7 @@ public:
 		if (isOptimized() && mData == v) {
 			return false;
 		}
-		if (isReadOnly() || isLocked()) {
+		if (isLocked()) {
 			return false;
 		}
 		mData = v;
