@@ -26,7 +26,6 @@
 
 #include <qlineedit.h>
 #include <qvbuttongroup.h>
-#include <qvgroupbox.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <qlabel.h>
