@@ -76,7 +76,7 @@ KGameNetwork::KGameNetwork(int cookie,QObject* parent) : QObject(parent, 0)
   connect (d->mMessageClient, SIGNAL(eventClientDisconnected(Q_UINT32)),
            this, SIGNAL(signalClientDisconnected(Q_UINT32)));
   connect (d->mMessageClient, SIGNAL(eventClientConnectionBroken(Q_UINT32)),
-           this, SIGNAL(signalClientConnectionBroken(Q_UINT32)));
+           this, SIGNAL(signalConnectionLost(Q_UINT32)));
 
   d->mCookie = (Q_INT16)cookie;
   kdDebug(11001) << "CREATE(KGameNetwork=" << this <<") cookie=" << d->mCookie << " sizeof(this)="<<sizeof(KGameNetwork) << endl;

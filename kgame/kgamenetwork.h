@@ -278,6 +278,8 @@ signals:
     /**
      * The connection to a client has been lost by accident. Note that this is
      * not emitted if the client is removed on purpose!
+     *
+     * See @ref KMessageClient::eventClientConnectionBroken
      * @param clientID the ID of the client
      **/
     void signalConnectionLost(Q_UINT32 clientID);

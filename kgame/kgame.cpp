@@ -93,7 +93,7 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
 
   connect(this, SIGNAL(signalClientConnected(Q_UINT32)),
   	this, SLOT(slotClientConnected(Q_UINT32)));
-  connect(this, SIGNAL(signaClientDisconnected(Q_UINT32)),
+  connect(this, SIGNAL(signalClientDisconnected(Q_UINT32)),
   	this, SLOT(slotClientDisconnected(Q_UINT32)));
 
 
