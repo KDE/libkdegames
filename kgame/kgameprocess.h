@@ -52,7 +52,15 @@ class KGameProcess:  public QObject
   public:
     /** 
      * Creates a KGameProcess class. Done only in the computer
-     * player. 
+     * player. To activate the communication you have to call
+     * the @ref exec function of this class which will listen
+     * to the communication and emit signals to notify you of
+     * any incoming messages.
+     * Note: This function will only return after you set
+     * @ref setTerminate(true) in one of the received signals.
+     * So you can not do any computer calculation after the exec function.
+     * Instead you react on the signals which are emitted after a
+     * message is received and perform the calculations there!
      * Example:
      * <pre>
      *  KGameProcess proc;
@@ -66,7 +74,8 @@ class KGameProcess:  public QObject
     ~KGameProcess();
 
     /**
-     * Enters the event loop of the computer process
+     * Enters the event loop of the computer process. Does only
+     * return on setTerminate(true)!
      */
     bool exec(int argc, char *argv[]);
     /**
@@ -83,18 +92,26 @@ class KGameProcess:  public QObject
      */
     void setTerminate(bool b) {mTerminate=b;}
     /**
-     * Sends a message to the network
+     * Sends a message to the corresponding KGameIO
+     * device.
+     *
      * @param the QDataStream containing the message
      */
     void sendMessage(QDataStream &stream,int msgid,int receiver=0);
     /**
-     * Sends a system message to the network
+     * Sends a system message to the corresonding KGameIO device.
+     * This will normally be either a perfomred move or a query
+     * (IdProcessQuery)
+     *
      * @param the QDataStream containing the message
+     * @param msgid - the message id for the message
+     * @param receiver - unused
      */
     void sendSystemMessage(QDataStream &stream,int msgid,int receiver=0);
     /**
-     * Returns a pointer to the game's @ref KRandomSequence. This sequence is
-     * identical for all network players!
+     * Returns a pointer to a KRandomSequence. You can generate
+     * random numbers via e.g. random->getLong(100);
+     * 
      * @return @ref KRandomSequence pointer
      */
     KRandomSequence *random() {return mRandom;}
@@ -111,8 +128,9 @@ class KGameProcess:  public QObject
 
   signals:
     /**
-     * The main communication signal. You have to connect to this
-     * signal to generate a valid computer response.
+     * The generic communication signal. You have to connect to this
+     * signal to generate a valid computer response onto arbitrary messages.
+     * All signals but IdIOAdded and IdTurn end up here!
      * Example:
      * <pre>
      * void Computer::slotCommand(int &msgid,QDataStream &in,QDataStream &out)
@@ -133,8 +151,10 @@ class KGameProcess:  public QObject
 
      /**
       * This signal is emmited if the computer player should perform a turn.
-      * Calculatisn can be made here and the move will then send back with 
+      * Calculatisn can be made here and the move can then be send back with 
       * sendSystemMessage with the message id KGameMessage::IdPlayerInput.
+      * These must provide a move which complies to your other move syntax as
+      * e.g. produces by keyboard or mouse input.
       * Additonal data which have been written into the stream from the
       * ProcessIO's signal signalPrepareTurn can be retrieved from the
       * stream here.
@@ -158,8 +178,6 @@ class KGameProcess:  public QObject
   protected:
     bool mTerminate;
     KMessageFilePipe *mMessageIO;
-    //KMessageClient *mMessageClient;
-    //KMessageServer *mMessageServer;
   private:
     QFile rFile;
     QFile wFile;

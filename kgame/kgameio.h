@@ -38,6 +38,12 @@ class KProcess;
  *  creating IO game devices. You cannot use it directly.
  *  Either take one of the classes derived from it or
  *  you have to create your own IO class derived from it.
+ *
+ *  The idea behind this class is to provide a common interface
+ *  for input devices into your game. By programming a KGameIO
+ *  device you need not distinguish the actual IO in the game
+ *  anymore. All work is done by the IO's. This allows very
+ *  easy reuse in other games as well.
  */
 class KGameIO : public QObject
 {
@@ -55,16 +61,20 @@ public:
      */
    void Debug();
 
+   /**
+    * Identifies the KGameIO via the rtti function
+    */
    enum IOMode {GenericIO=1,KeyIO=2,MouseIO=4,ProcessIO=8,ComputerIO=16};
    /**
     * Run time idendification. Predefined values are from IOMode
-    *
     * You MUST overwrite this in derived classes!
     *
     * @return rtti value
     */
    virtual int rtti() const = 0;  // Computer, network, local, ...
    /**
+    * This function returns the player who owns this IO
+    *
     * @return the player this IO device is plugged into
     */
    KPlayer *player() const {return mPlayer;}
@@ -79,27 +89,23 @@ public:
 
    /** 
     * Init this device by setting the player and e.g. sending an
-    * init message to the device
+    * init message to the device. This initialisation message is
+    * very useful for computer players as you can transmit the
+    * game status to them and only update this status in the setTurn
+    * commands.
     */
    virtual void initIO(KPlayer *p);
 
    /**
     * Message to clients. Needs to be overwritten to be
     * of use.
-    * You have to call @ref KGameNetwork::registerListener to receive messages!
     *
-    * This is used for messages sent through sendSystemMessage, like adding
-    * player. Use @ref sendMessage for your own messages instead!
     */
     virtual void sendSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
 
     /**
     * Message to clients. Needs to be overwritten to be
     * of use.
-    * You have to call @ref KGameNetwork::registerListener to receive messages!
-    *
-    * This is used for user messages, ie messages sent through @ref
-    * KGame::sendMessage
     *
     * You probably want to use this for your game messages instead of @ref
     * sendSystemMessage
@@ -130,9 +136,9 @@ class KGameKeyIO : public KGameIO
     
 public:
     /**
-     * Create a Keyboard input devices. All keyboards
+     * Create a keyboard input devices. All keyboards
      * inputs of the given widgets are passed through a signal
-     * handler @ref #signalKeyEvent and can beused to generate
+     * handler @ref #signalKeyEvent and can be used to generate
      * a valid move for the player.
      *
      * @param parent The parents widget whose keyboard events * should be grabbed
@@ -146,12 +152,14 @@ public:
     int rtti() const;
 
 signals:
-      // calulate move message from mouse event
       /**
        * Signal handler for keyboard events. This function is called
        * on every keyboard event. If appropriate it can generate a
        * move for the player the device belongs to. If this is done
        * and the event is eaten eatevent needs to be set to true.
+       * What move you generate (i.e. what you write to the stream)
+       * is totally up to you as it will not be evaluated but forwared
+       * to the player's/game's  input move function
        * Example:
        * <pre>
        * KPlayer *player=input->player(); // Get the player
@@ -203,7 +211,6 @@ public:
     int rtti() const; 
 
 signals:
-      // calulate move message from mouse event
       /**
        * Signal handler for mouse events. This function is called
        * on every mouse event. If appropriate it can generate a
@@ -235,6 +242,9 @@ class KGameProcessIOPrivate;
 /**
  *  The KProcessIO class. It is used to create a computer player
  *  via a separate process and communicate transparetly with it.
+ *  Its counterpart is the @ref KGameProcess class which needs
+ *  to be used by the computer player. See its documentation
+ *  for the definition of the computer player.
  */
 class KGameProcessIO : public KGameIO
 {
@@ -243,13 +253,15 @@ class KGameProcessIO : public KGameIO
 public:
     /** 
      * Creates a computer player via a separate process. The process
-     * name is given as fully qualified filename. As soon as any input
-     * goes to this process it is started and it is killed when the input
-     * devices is deleted.
+     * name is given as fully qualified filename. 
      *
      * @param name the filename of the process to start
      */
     KGameProcessIO(const QString& name);
+
+    /**
+     * Deletes the process input devices 
+     */
     ~KGameProcessIO();
 
     /**
@@ -260,29 +272,52 @@ public:
     int rtti() const;
     
     /**
-     * send a message to the process
+     * Send a message to the process. This is analogous to the sendMessage
+     * commands of KGame. It will result in a signal of the computer player
+     * on which you can react in the process player.
+     *
+     * @param stream  - the actual data
+     * @param msgid - the id of the message
+     * @param receiver - not used
+     * @param sender - who send the message
      */
     void sendMessage(QDataStream &stream,int msgid, int receiver, int sender);
+
+    /**
+     * Send a system message to the process. This is analogous to the sendMessage
+     * commands of KGame. It will result in a signal of the computer player
+     * on which you can react in the process player.
+     *
+     * @param stream  - the actual data
+     * @param msgid - the id of the message
+     * @param receiver - not used
+     * @param sender - who send the message
+     */
     void sendSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
 
     /** 
      * Init this device by setting the player and e.g. sending an
-     * init message to the device
+     * init message to the device. Calling this function will emit
+     * the IOAdded signal on which you can react. 
+     * This function is called automatically when adding the IO to
+     * a player.
      */
     void initIO(KPlayer *p);
 
     /**
      *  Notifies the IO device that the player's setTurn had been called
-     *  Called by KPlayer
+     *  Called by KPlayer. You can react on the signalPrepareTurn to
+     *  prepare a message for the process
      *
      *  @param turn is true/false
      */
     void notifyTurn(bool b);
 
   protected:
+    /**
+     * Combined function for all message handling */
     void sendAllMessages(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
   protected slots:
-    //void clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv);
     void receivedMessage(const QByteArray& receiveBuffer);
 
   
@@ -291,13 +326,19 @@ signals:
    * A computer query message is received. This is a 'dummy'
    * message sent by the process if it needs to communicate
    * with us. It is not forwarded over the network.
+   * Racting to this message allows you to 'answer' questions
+   * of the process, e.g. sending addition data which the process
+   * needs to calculate a move.
    */
   void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
 
   /**
   * Signal generated when the computer player is about to perform a turn. 
   * The datastream has to be filled with user data for the computer player
-  * to make a proper move
+  * to make a proper move. What you write into the stream is completely
+  * up to you. The stream will be received by the corresponding process
+  * which emits a signal on which you can react to retrieve the data from
+  * the stream.
   *
   * @param the KGameIO object itself
   * @param the stream into which themove will be written
@@ -308,7 +349,8 @@ signals:
 
   /**
   * Signal generated when the computer player is added. 
-  * You can use this to communicated with the process
+  * You can use this to communicated with the process and
+  * e.g. send initialisation information to the process.
   *
   * @param the KGameIO object itself
   * @param the stream into which themove will be written
@@ -327,9 +369,8 @@ private:
 
 /**
  *  The KComputerIO class. It is used to create a LOCAL computer player
- *  and communicate transparetly with it.
- *  TODO: All functions are just dummy. I hopy Andi fills in his
- *  kpoker computer player class!
+ *  and communicate transparetly with it. 
+ *  Question: Is this needed or is it overwritten anyway for a real game?
  */
 class KGameComputerIO : public KGameIO
 {
@@ -341,6 +382,7 @@ public:
      *
      */
     KGameComputerIO();
+
     ~KGameComputerIO();
     int rtti() const;
     /**
