@@ -64,7 +64,7 @@ KGameDialogConfig::KGameDialogConfig(QWidget* parent) : QWidget(parent)
 
 KGameDialogConfig::~KGameDialogConfig()
 {
- kdDebug() << k_funcinfo << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  delete d;
 }
 
@@ -146,13 +146,13 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()
 {
- kdDebug() << k_funcinfo << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  delete d;
 }
 
 void KGameDialogNetworkConfig::slotExitConnection()
 {
- kdDebug(11000) << k_funcinfo << " !!!!!!!!!!!!!!!!!!!!!!!" << endl;
+ kdDebug(11001) << k_funcinfo << " !!!!!!!!!!!!!!!!!!!!!!!" << endl;
   if (game()) game()->disconnect();
   setConnected(false,false);
 }
@@ -273,7 +273,7 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 
 KGameDialogGeneralConfig::~KGameDialogGeneralConfig()
 {
- kdDebug() << k_funcinfo << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  delete d; 
 }
 
@@ -391,7 +391,7 @@ KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent)
 
 KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
 {
- kdDebug() << k_funcinfo << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  delete d;
 }
 
@@ -550,7 +550,7 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
 
 KGameDialogChatConfig::~KGameDialogChatConfig()
 {
- kdDebug() << k_funcinfo << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  delete d;
 }
 
@@ -604,7 +604,7 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
 
 KGameDialogConnectionConfig::~KGameDialogConnectionConfig()
 {
- kdDebug() << k_funcinfo << endl;
+ kdDebug(11001) << k_funcinfo << endl;
  // d->mIem2Player.clear();
  delete d;
 }
