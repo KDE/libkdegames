@@ -121,40 +121,22 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 // kdDebug(11001) << "CONSTRUCT KGameDialogNetworkConfig " << this << endl;
  d = new KGameDialogNetworkConfigPrivate();
 
- QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint(), "toplayout");
 
- QHBoxLayout *hb=new QHBoxLayout(this, KDialog::spacingHint());
+ QHBoxLayout *hb = new QHBoxLayout(topLayout, KDialog::spacingHint());
 
  d->mNetworkLabel = new QLabel(this);
- //topLayout->addWidget(d->mNetworkLabel);
  hb->addWidget(d->mNetworkLabel);
  
  d->mDisconnectButton=new QPushButton(i18n("Disconnect"),this);
  connect(d->mDisconnectButton, SIGNAL(clicked()), this, SLOT(slotExitConnection()));
  hb->addWidget(d->mDisconnectButton);
 
- topLayout->addItem(hb);
-
- /*
- d->mInitConnection = new QPushButton(this);
- d->mInitConnection->setText(i18n("Start Network game"));
- connect(d->mInitConnection, SIGNAL(clicked()), this, SLOT(slotInitConnection()));
- topLayout->addWidget(d->mInitConnection);
- */
- // MH 30082001
-
-
- // Needs to be BEFORE the creation of the dialog below
-
  d->mInitConnection = new QHGroupBox(i18n("Network configuration"), this);
  topLayout->addWidget(d->mInitConnection);
 
  d->mConnect = new KGameConnectWidget(d->mInitConnection);
  connect(d->mConnect, SIGNAL(signalNetworkSetup()), this, SLOT(slotInitConnection()));
-
- // TODO MH: Still needed (next 2 lines)
- //d->Connect->reparent(d->mInitConnection, QPoint(0,0));
- //d->Connect->show();
 
  // Needs to be AFTER the creation of the dialogs
  setConnected(false);
@@ -615,11 +597,11 @@ class KGameDialogConnectionConfigPrivate
 public:
 	KGameDialogConnectionConfigPrivate()
 	{
-		mPlayers = 0;
+		mPlayerBox = 0;
 	}
 
 	QPtrDict<KPlayer> mItem2Player;
-	KListBox* mPlayers;
+	KListBox* mPlayerBox;
 };
 
 KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
@@ -630,7 +612,7 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
  topLayout->setAutoAdd(true);
  QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), this);
- d->mPlayers = new KListBox(b);
+ d->mPlayerBox = new KListBox(b);
 
 }
 
@@ -652,7 +634,12 @@ void KGameDialogConnectionConfig::setKGame(KGame* g)
 	connect(game(), SIGNAL(signalPlayerLeftGame(KPlayer*)),
 			this, SLOT(slotPlayerLeftGame(KPlayer*)));
  }
- slotPlayerChanged(0);
+
+ slotClearPlayers();
+ KGame::KGamePlayerList l = *game()->playerList();
+ for (KPlayer* p = l.first(); p; p = l.next()) {
+	slotPlayerJoinedGame(p);
+ }
 }
 
 void KGameDialogConnectionConfig::setOwner(KPlayer* p)
@@ -670,49 +657,56 @@ void KGameDialogConnectionConfig::setAdmin(bool a)
  }
  KGameDialogConfig::setAdmin(a);
  if (admin()) {
-	connect(d->mPlayers, SIGNAL(executed(QListBoxItem*)), this,
+	connect(d->mPlayerBox, SIGNAL(executed(QListBoxItem*)), this,
 			SLOT(slotKickPlayerOut(QListBoxItem*)));
  }
 }
 
-void KGameDialogConnectionConfig::slotPlayerChanged(KPlayer* )
+QListBoxItem* KGameDialogConnectionConfig::item(KPlayer* p) const
 {
- kdDebug(11001) << "KGameDialogConfig::slotPlayerChanged()" << endl;
  QPtrDictIterator<KPlayer> it(d->mItem2Player);
  while (it.current()) {
-	// disconnect everything first
-	this->disconnect(it.current());
+	if (it.current() == p) {
+		return (QListBoxItem*)it.currentKey();
+	}
 	++it;
  }
- d->mItem2Player.clear();
- d->mPlayers->clear();
+ return 0;
+}
 
- if (!game()) {
-	kdError(11001) << "no game set" << endl;
-	return;
+void KGameDialogConnectionConfig::slotClearPlayers() 
+{
+ QPtrDictIterator<KPlayer> it(d->mItem2Player);
+ while (it.current()) {
+	slotPlayerLeftGame(it.current());
+	++it;
  }
 
- KGame::KGamePlayerList l = *game()->playerList();
- for (KPlayer* p = l.first(); p; p = l.next()) {
-	slotPlayerJoinedGame(p);
-/*	QListBoxText* t = new QListBoxText(p->name());
-	d->mItem2Player.insert(t, p);
-	d->mPlayers->insertItem(t);
-
-	connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
-			this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));*/
+ if (d->mItem2Player.count() > 0) {
+	kdWarning(12001) << "KGameDialogConnectionConfig: itemList wasn't cleared properly" << endl;
+	d->mItem2Player.clear();
  }
+ if (d->mPlayerBox->count() > 0) {
+	kdWarning(12001) << "KGameDialogConnectionConfig: listBox wasn't cleared properly" << endl;
+	d->mPlayerBox->clear();
+ }
+
 }
 
 void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
 {
+ if (!p) {
+	kdError(11001) << "KGameDialogConnectionConfig: Cannot add NULL player" << endl;
+ }
  if (d->mItem2Player[p]) {
-	kdError(11001) << "attempt to double add player" << endl;
+	kdError(11001) << "KGameDialogConnectionConfig: attempt to double add player" 
+			<< endl;
 	return;
  }
+ kdDebug(11001) << "KGameDialogConnectionConfig: add player " << p->id() << endl;
  QListBoxText* t = new QListBoxText(p->name());
  d->mItem2Player.insert(t, p);
- d->mPlayers->insertItem(t);
+ d->mPlayerBox->insertItem(t);
 
  connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)), 
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
@@ -721,6 +715,15 @@ void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
 
 void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
 {
+ // disconnect first
+ this->disconnect(p);
+ if (!item(p)) {
+	kdError(11001) << "KGameDialogConnectionConfig::slotPlayerLeftGame(): cannot find " 
+			<< p->id() << " in list" << endl;
+	return;
+ }
+ d->mPlayerBox->removeItem(d->mPlayerBox->index(item(p)));
+
 }
 
 void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
@@ -748,8 +751,7 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
 		p->name())) == KMessageBox::Yes) {
 	kdDebug(11001) << "will remove player " << p << endl;
 	game()->removePlayer(p);
-	d->mPlayers->removeItem(d->mPlayers->index(item));
-//	slotPlayerChanged(p);
+//	d->mPlayerBox->removeItem(d->mPlayerBox->index(item)); // should be done by signalPlayerLeftGame
  } else {
 	kdDebug(11001) << "will NOT remove player " << p << endl;
  }
@@ -767,8 +769,7 @@ void KGameDialogConnectionConfig::slotPropertyChanged(KGamePropertyBase* prop, K
 		++it;
 	}
 	QListBoxText* t = new QListBoxText(player->name());
-	d->mPlayers->changeItem(t,
-	d->mPlayers->index(old));
+	d->mPlayerBox->changeItem(t, d->mPlayerBox->index(old));
 	d->mItem2Player.remove(old);
 	d->mItem2Player.insert(t, player);
  }

@@ -299,13 +299,18 @@ public:
 
 	virtual void submitToKGame(KGame*, KPlayer*) { }
 
-protected slots:
-	void slotPlayerChanged(KPlayer*);
+protected:
+	/**
+	 * @return The @ref QListBoxItem that belongs to the player p
+	 **/
+	QListBoxItem* item(KPlayer* p) const;
 
+protected slots:
 	void slotKickPlayerOut(QListBoxItem* item);
 	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p);
 	void slotPlayerLeftGame(KPlayer* p);
 	void slotPlayerJoinedGame(KPlayer* p);
+	void slotClearPlayers();
 
 private:
 	KGameDialogConnectionConfigPrivate* d;
