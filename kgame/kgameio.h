@@ -155,7 +155,7 @@ signals:
      * @param send set this to true to send the generated move using @ref
      * sendInput
      **/
-    void signalPrepareTurn(QDataStream & stream, bool turn, KGameIO *io, bool & send);
+    void signalPrepareTurn(QDataStream & stream, bool turn, KGameIO *io, bool * send);
 
 
 private:  
@@ -340,7 +340,7 @@ public:
      * @param receiver - not used
      * @param sender - who send the message
      */
-    void sendMessage(QDataStream &stream,int msgid, int receiver, int sender);
+    void sendMessage(QDataStream &stream,int msgid, Q_UINT32 receiver, Q_UINT32 sender);
 
     /**
      * Send a system message to the process. This is analogous to the sendMessage
@@ -352,7 +352,7 @@ public:
      * @param receiver - not used
      * @param sender - who send the message
      */
-    void sendSystemMessage(QDataStream &stream, int msgid, int receiver, int sender);
+    void sendSystemMessage(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender);
 
     /** 
      * Init this device by setting the player and e.g. sending an
@@ -376,7 +376,7 @@ public:
     /**
      * Combined function for all message handling 
      **/
-    void sendAllMessages(QDataStream &stream,int msgid, int receiver, int sender, bool usermsg);
+    void sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 receiver, Q_UINT32 sender, bool usermsg);
 
   protected slots:
     void receivedMessage(const QByteArray& receiveBuffer);

@@ -320,12 +320,15 @@ bool KPlayer::save(QDataStream &stream)
 }
 
 
-void KPlayer::networkTransmission(QDataStream &stream,int msgid,int sender)
+void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
 {
   //kdDebug(11001) << "KPlayer::ReceiveNetworkTransmission: msgid=" << msgid << " sender=" << sender << " we are=" << id() << endl;
   // PlayerProperties processed
   bool issender;
-  if (game()) issender=sender==game()->gameId();
+  if (game()) 
+  {
+    issender=sender==game()->gameId();
+  }
   else issender=true;
   if (d->mProperties.processMessage(stream,msgid,issender)) {
 	return ;

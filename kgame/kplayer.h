@@ -355,7 +355,7 @@ public:
        * @param stream The message itself
        * @param sender 
        **/
-      void networkTransmission(QDataStream &stream,int msgid,int sender);
+      void networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender);
 
       /**
        * Searches for a property of the player.
@@ -406,7 +406,7 @@ signals:
        *  means probagbly a user message. Conencting to this signal
        *  alloed to process it.
        */
-       void signalNetworkData(int msgid,QDataStream &stream,int sender,KPlayer *me);
+       void signalNetworkData(int msgid,QDataStream &stream,Q_UINT32 sender,KPlayer *me);
 
        /**
         * This signal is emmited if a player property changes its value and

@@ -339,18 +339,18 @@ public:
     
     KGamePropertyBase* findProperty(int id) const;
 
-	/**
-	 * Changes the consistency policy of a property. The @ref 
-	 * GamePolicy is one of PolicyClean (defaulz), PolicyDirty or PolicyLocal.
-	 *
-	 * It is up to you to decide how you want to work. 
-	 **/
-	void setPolicy(GamePolicy p,bool recursive=true);
+    /**
+     * Changes the consistency policy of a property. The @ref 
+     * GamePolicy is one of PolicyClean (defaulz), PolicyDirty or PolicyLocal.
+     *
+     * It is up to you to decide how you want to work. 
+     **/
+    void setPolicy(GamePolicy p,bool recursive=true);
 
-	/**
-	 * @return The default policy of the property
-	 **/
-	GamePolicy policy() const;
+    /**
+     * @return The default policy of the property
+     **/
+    GamePolicy policy() const;
 
     /**
      * See @ref KGameNetwork::sendMessage
@@ -534,7 +534,7 @@ signals:
     * @param clientid - The id of the new client
     * @param me - our game pointer
     */
-    void signalClientConnected(int clientid,KGame *me);
+    void signalClientConnected(Q_UINT32 clientid,KGame *me);
 
 
 protected:
@@ -606,12 +606,6 @@ protected:
     KPlayer *loadPlayer(QDataStream& stream,bool isvirtual=false);
     
 
-    /**
-     * Updates the ids of the players. Called when a connection is changed, e.g.
-     * when you connect from a local game to a network game.
-     **/
-    void updatePlayerIds();
-    
     /**
      * inactivates player. Use @ref inactivatePlayer instead!
      */
