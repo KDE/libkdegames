@@ -299,7 +299,6 @@ protected:
 };
 
 
-class KGameProcessIOPrivate;
 /**
  *  The KProcessIO class. It is used to create a computer player
  *  via a separate process and communicate transparetly with it.
@@ -333,7 +332,7 @@ public:
     /**
      * Deletes the process input devices 
      */
-    ~KGameProcessIO();
+    virtual ~KGameProcessIO();
 
     /**
      * The idendification of the IO
@@ -436,7 +435,7 @@ signals:
 protected:
 
 private:
-
+  class KGameProcessIOPrivate;
   KGameProcessIOPrivate* d;
 };
 
@@ -444,6 +443,13 @@ private:
  *  The KComputerIO class. It is used to create a LOCAL computer player
  *  and communicate transparetly with it. 
  *  Question: Is this needed or is it overwritten anyway for a real game?
+ *
+ *  You most probably don't want to use this if you want to design a turn based
+ *  game/player. You'll rather use @ref KGameIO directly, i.e. subclass it
+ *  yourself. You just need to use @ref KGameIO::signalPrepareTurn and/or @ref
+ *  KGameIO::notifyTurn there.
+ *
+ *  This is rather meant to be of use in real time games.
  */
 class KGameComputerIO : public KGameIO
 {
@@ -455,16 +461,82 @@ public:
      *
      */
     KGameComputerIO();
+    KGameComputerIO(KPlayer* player);
     ~KGameComputerIO();
 
     int rtti() const;
 
+    /**
+     * The number of @ref advance calls unitl the player (or rather: the IO)
+     * does something (default: 1). 
+     **/
+    void setReactionPeriod(int advanceCalls);
+    int reactionPeriod() const;
+
+    /**
+     * Start a @ref QTimer which calls @ref advance every ms milli seconds.
+     **/
+    void setAdvancePeriod(int ms);
+
+    void stopAdvancePeriod();
+
+    /**
+     * Ignore calls number of @ref advance calls. if calls is -1 then all 
+     * following advance calls are ignored until @ref unpause is called.
+     *
+     * This simply prevents the internal advance counter to be increased.
+     *
+     * You may want to use this to emulate a "thinking" computer player. Note
+     * that this means if you increase the advance period (see @ref
+     * setAdvancePeriod), i.e. if you change the speed of your game, your
+     * computer player thinks "faster".
+     * @ref calls Number of @ref advance calls to be ignored
+     **/
+    void pause(int calls = -1);
+
+    /**
+     * Equivalent to pause(0). Immediately continue to increase the internal
+     * advance counter.
+     **/
+    void unpause();
+    
 public slots:
+    /**
+     * Works kind of similar to @ref QCanvas::advance. Increase the internal
+     * advance counter. If @reactionPeriod is reached the counter is set back to
+     * 0 and @ref signalReaction is emitted. This is when the player is meant 
+     * to do something (move its units or so).
+     *
+     * This is very useful if you use @ref QCanvas as you can use this in your
+     * @ref QCanvas::advance call. The advantage is that if you change the speed
+     * of the game (i.e. change @ref QCanvas::setAdvancePeriod) the computer
+     * player gets slower as well.
+     *
+     * If you don't use @ref QCanvas you can use @ref setAdvancePeriod to get
+     * the same result. Alternatively you can just use a @ref QTimer.
+     * 
+     **/
+    virtual void advance();
   
 signals:
+    /**
+     * This signal is emitted when your computer player is meant to do
+     * something, or better is meant to be allowed to do something.
+     **/
+    void signalReaction();
+
 protected:
+    /**
+     * Default implementation simply emits @ref signalReaction
+     **/
+    virtual void reaction();
 
 private:
+    void init();
+ 
+private:
+    class KGameComputerIOPrivate;
+    KGameComputerIOPrivate* d;
 };
 
 
