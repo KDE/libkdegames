@@ -744,6 +744,8 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender
  else
  {
    kdDebug(11001) << k_funcinfo<<": switching off player input"<<endl;
+   // TODO: (MH 03-2003): We need an return option from playerInput so that
+   // the player's is not automatically disabled here 
    if (!player->asyncInput())
    {
      player->setTurn(false); // in turn based games we have to switch off input now
