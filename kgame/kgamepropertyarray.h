@@ -201,7 +201,7 @@ public:
 	{
     //kdDebug(11001) << "KGamePropertyArray load " << id() << endl;
     type data;
-    for (unsigned int i=0;i<QMemArray<type>::size();i++) {s >> data;  QArray<type>::at(i)=data;}
+    for (unsigned int i=0;i<QMemArray<type>::size();i++) {s >> data;  QMemArray<type>::at(i)=data;}
 		if (isEmittingSignal()) emitSignal();
   }
 	void save(QDataStream &s)
