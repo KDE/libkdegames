@@ -31,7 +31,7 @@ class KSelectAction;
 
 //-----------------------------------------------------------------------------
 /**
- * @see KStdAction
+ * Replacement for KStdAction for KDE Games
  *
  * This class is an extension to the usual KStdAction class which provides
  * easy access to often used KDE actions
@@ -39,6 +39,8 @@ class KSelectAction;
  * Games often use different menu entries than other programs, e.g. games use
  * the menu "game" instead of "file". This class provides the entries which
  * differ from the usual KStdAction entries.
+ *
+ * @see KStdAction
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
