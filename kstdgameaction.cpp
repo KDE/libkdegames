@@ -271,7 +271,7 @@ KAction *KStdGameAction::roll(const QObject *recvr, const char *slot,
 KAction *KStdGameAction::endTurn(const QObject *recvr, const char *slot,
                                                   KActionCollection *parent, const char *name )
 {
-    return new KAction(i18n("End Turn"), "stop",
+    return new KAction(i18n("End Turn"), "endturn",
                        0, recvr, slot, parent,
                        name ? name : stdName(EndTurn));
 }
