@@ -42,10 +42,10 @@ public:
 
 	QMap<int, QString> mNameMap;
 	QIntDict<KGamePropertyBase> mIdDict;
-  int mUniqueId;
+	int mUniqueId;
 	int mId;
-  KGamePropertyBase::PropertyPolicy mDefaultPolicy;
-  bool mDefaultUserspace;
+	KGamePropertyBase::PropertyPolicy mDefaultPolicy;
+	bool mDefaultUserspace;
 };
 
 KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent) : QObject(parent)
@@ -78,12 +78,12 @@ void KGamePropertyHandler::init()
 
 int KGamePropertyHandler::id() const
 {
-  return d->mId;
+ return d->mId;
 }
 
 void KGamePropertyHandler::setId(int id)
 {
-  d->mId = id;
+ d->mId = id;
 }
 
 void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, const char * sendf, const char *emitf)
@@ -101,47 +101,38 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
 
 bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSender)
 {
-  //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
-  if (id != d->mId) {
-  	return false; // Is the message meant for us?
-  }
-  KGamePropertyBase* p;
-  int propertyId;
-  KGameMessage::extractPropertyHeader(stream, propertyId);
-  //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
-  if (propertyId==KGamePropertyBase::IdCommand)
-  {
-    int cmd;
-    KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
-    //kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
-    p = d->mIdDict.find(propertyId);
-    if (p)
-    {
-      if (!isSender || p->policy()==KGamePropertyBase::PolicyClean)
-      {
-        p->command(stream, cmd, isSender);
-      }
-    }
-    else
-    {
-      kdError(11001) << "KGamePropertyHandler::processMessage:propertyCommand " << propertyId << " not found" << endl;
-    }
-    return true;
-  }
-  p = d->mIdDict.find(propertyId);
-  if (p)
-  {
-	  //kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
-    if (!isSender || p->policy()==KGamePropertyBase::PolicyClean)
-    {
-      p->load(stream);
-    }
-  }
-  else
-  {
-    kdError(11001) << "KGamePropertyHandler::processMessage:property " << propertyId << " not found" << endl;
-  }
-  return true;
+ //kdDebug(11001) << "KGamePropertyHandler::processMessage: id=" << id << " mId=" << d->mId << endl;
+ if (id != d->mId) {
+ 	return false; // Is the message meant for us?
+ }
+ KGamePropertyBase* p;
+ int propertyId;
+ KGameMessage::extractPropertyHeader(stream, propertyId);
+ //kdDebug(11001) << "KGamePropertyHandler::networkTransmission: Got property " << propertyId << endl;
+ if (propertyId==KGamePropertyBase::IdCommand) {
+	int cmd;
+	KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
+//kdDebug(11001) << "KGamePropertyHandlerBase::processMessage: Got COMMAND for id= "<<propertyId <<endl;
+	p = d->mIdDict.find(propertyId);
+	if (p) {
+		if (!isSender || p->policy()==KGamePropertyBase::PolicyClean) {
+			p->command(stream, cmd, isSender);
+		}
+	} else {
+		kdError(11001) << "KGamePropertyHandler::processMessage:propertyCommand " << propertyId << " not found" << endl;
+	}
+	return true;
+ }
+ p = d->mIdDict.find(propertyId);
+ if (p) {
+	//kdDebug(11001) << "KGamePropertyHandler::processMessage: Loading " << propertyId << endl;
+	if (!isSender || p->policy()==KGamePropertyBase::PolicyClean) {
+		p->load(stream);
+	}
+ } else {
+	kdError(11001) << "KGamePropertyHandler::processMessage:property " << propertyId << " not found" << endl;
+ }
+ return true;
 }
 
 bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
@@ -227,8 +218,8 @@ bool KGamePropertyHandler::save(QDataStream &stream)
 
 KGamePropertyBase::PropertyPolicy KGamePropertyHandler::policy()
 {
-  kdDebug(11001) << "KGamePropertyHandler::policy " << d->mDefaultPolicy << endl;
-  return d->mDefaultPolicy;
+ kdDebug(11001) << "KGamePropertyHandler::policy " << d->mDefaultPolicy << endl;
+ return d->mDefaultPolicy;
 }
 void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool userspace)
 {
@@ -236,12 +227,10 @@ void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool us
  d->mDefaultPolicy=p;
  d->mDefaultUserspace=userspace;
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
- while (it.current())
- {
-   if (!userspace || it.current()->id()>=KGamePropertyBase::IdUser)
-   {
-     it.current()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
-   }
+ while (it.current()) {
+	if (!userspace || it.current()->id()>=KGamePropertyBase::IdUser) {
+		it.current()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
+	}
 	++it;
  }
 }
@@ -266,7 +255,7 @@ void KGamePropertyHandler::lockProperties()
 
 int KGamePropertyHandler::uniquePropertyId()
 {
-  return d->mUniqueId++;
+ return d->mUniqueId++;
 }
 
 void KGamePropertyHandler::flush()
@@ -354,16 +343,16 @@ void KGamePropertyHandler::Debug()
  kdDebug(11001) << "  Registered properties: (Policy,Lock,Emit,Optimized, Dirty)" << endl;
  QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
-  KGamePropertyBase *p=it.current();
-  kdDebug(11001) 
-   << "  "<<p->id() << ": p=" << p->policy() << " l="<<p->isLocked()
-   << " e="<<p->isEmittingSignal() << " o=" << p->isOptimized() 
-   << " d="<<p->isDirty() 
-   << endl;
+	KGamePropertyBase *p=it.current();
+	kdDebug(11001) << "  "<< p->id() << ": p=" << p->policy() 
+			<< " l="<<p->isLocked()
+			<< " e="<<p->isEmittingSignal() 
+			<< " o=" << p->isOptimized() 
+			<< " d="<<p->isDirty() 
+			<< endl;
 	++it;
  }
  kdDebug(11001) << "-----------------------------------------------------------" << endl;
 }
-
 
 #include "kgamepropertyhandler.moc"
