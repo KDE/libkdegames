@@ -253,7 +253,10 @@ public:
         s >> i >> data;
         QMemArray<type>::at(i)=data;
         //kdDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
-        if (isEmittingSignal()) emitSignal();
+        if (isEmittingSignal()) 
+        {
+          emitSignal();
+        }
         break;
       }
       case CmdResize:
@@ -261,7 +264,10 @@ public:
         uint size;
         s >> size;
         //kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl; 
-        if (QMemArray<type>::size()!=size) resize(size);
+        if (QMemArray<type>::size() != size)
+        {
+          QMemArray<type>::resize(size);
+        }
         break;
       }
       case CmdFill:
@@ -271,7 +277,10 @@ public:
         s >> data >> size;
         //kdDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl; 
         QMemArray<type>::fill(data,size);
-        if (isEmittingSignal()) emitSignal();
+        if (isEmittingSignal()) 
+        {
+          emitSignal();
+        }
         break;
       }
       case CmdSort:
