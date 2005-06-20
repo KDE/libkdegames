@@ -50,7 +50,7 @@ void KConfigRawBackEnd::sync(bool bMerge)
 
   _file.reset();
   KEntryMap aTempMap;
-  getEntryMap(aTempMap, true, bMerge ? &_file : 0);
+  getEntryMap(aTempMap, false, bMerge ? &_file : 0);
 
   if ( _stream==0 ) {
       _stream = fdopen(_fd, "w");

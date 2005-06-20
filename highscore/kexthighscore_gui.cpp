@@ -491,7 +491,7 @@ bool ConfigDialog::save()
 
     // do not bother the user with "nickname empty" if he has not
     // messed with nickname settings ...
-    QString newName = _nickname->text().lower();
+    QString newName = _nickname->text();
     if ( newName.isEmpty() && !internal->playerInfos().isAnonymous()
          && !enabled ) return true;
 
