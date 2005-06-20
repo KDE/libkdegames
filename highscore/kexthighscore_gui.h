@@ -191,7 +191,7 @@ class AskNameDialog : public KDialogBase
  public:
     AskNameDialog(QWidget *parent);
 
-    QString name() const { return _edit->text().lower(); }
+    QString name() const { return _edit->text(); }
     bool dontAskAgain() const { return _checkbox->isChecked(); }
 
  private slots:

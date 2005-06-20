@@ -37,6 +37,7 @@
 #include "config.h"
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
+#include "kemailsettings.h"
 
 
 namespace KExtHighscore
@@ -297,9 +298,14 @@ PlayerInfos::PlayerInfos()
     }
 #endif
     internal->hsConfig().lockForWriting();
+	KEMailSettings emailConfig;
+	emailConfig.setProfile(emailConfig.defaultProfileName());
+	QString name = emailConfig.getSetting(KEMailSettings::RealName);
+	if ( name.isEmpty() || isNameUsed(name) ) name = username;
+	if ( isNameUsed(name) ) name= QString(ItemContainer::ANONYMOUS);
 #ifdef HIGHSCORE_DIRECTORY
     internal->hsConfig().writeEntry(_id+1, "username", username);
-    item("name")->write(_id, QString(ItemContainer::ANONYMOUS));
+    item("name")->write(_id, name);
 #endif
 
     ConfigGroup cg;
@@ -327,7 +333,7 @@ PlayerInfos::PlayerInfos()
     else {
         _id = nbEntries();
         cg.config()->writeEntry(HS_ID, _id);
-        item("name")->write(_id, QString(ItemContainer::ANONYMOUS));
+        item("name")->write(_id, name);
     }
 #endif
     internal->hsConfig().writeAndUnlock();
@@ -452,7 +458,7 @@ bool PlayerInfos::isNameUsed(const QString &newName) const
 {
     if ( newName==name() ) return false; // own name...
     for (uint i=0; i<nbEntries(); i++)
-        if ( newName==item("name")->read(i).toString() ) return true;
+        if ( newName.lower()==item("name")->read(i).toString().lower() ) return true;
     if ( newName==i18n(ItemContainer::ANONYMOUS_LABEL) ) return true;
     return false;
 }
