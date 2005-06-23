@@ -17,6 +17,8 @@
     Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+
 #include "kexthighscore_item.h"
 
 #include <qlayout.h>

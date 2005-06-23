@@ -22,7 +22,7 @@ arising out of or in connection with the use or performance of
 this software.
 ****************************************************************/
 
-#include "config.h"
+#include <config.h>
 
 #include <qlabel.h>
 #include <qlayout.h>

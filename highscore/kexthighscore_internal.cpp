@@ -17,6 +17,8 @@
     Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+
 #include "kexthighscore_internal.h"
 
 #include <pwd.h>
@@ -34,7 +36,6 @@
 #include <kmdcodec.h>
 #include <kdebug.h>
 
-#include "config.h"
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
 #include "kemailsettings.h"
@@ -296,6 +297,8 @@ PlayerInfos::PlayerInfos()
             return;
         }
     }
+#else
+    QString username;
 #endif
     internal->hsConfig().lockForWriting();
 	KEMailSettings emailConfig;
@@ -511,7 +514,7 @@ void PlayerInfos::removeKey()
 //-----------------------------------------------------------------------------
 ManagerPrivate::ManagerPrivate(uint nbGameTypes, Manager &m)
     : manager(m), showStatistics(false), showDrawGames(false),
-      trackLostGames(false), trackDrawGames(false), 
+      trackLostGames(false), trackDrawGames(false),
       showMode(Manager::ShowForHigherScore),
       _first(true), _nbGameTypes(nbGameTypes), _gameType(0)
 {}
