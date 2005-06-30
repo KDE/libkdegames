@@ -297,8 +297,6 @@ PlayerInfos::PlayerInfos()
             return;
         }
     }
-#else
-    QString username;
 #endif
     internal->hsConfig().lockForWriting();
 	KEMailSettings emailConfig;
