@@ -284,7 +284,7 @@ PlayerInfos::PlayerInfos()
 #ifdef HIGHSCORE_DIRECTORY
     struct passwd *pwd = getpwuid(getuid());
     QString username = pwd->pw_name;
-    internal->hsConfig().setHighscoreGroup("users");
+    internal->hsConfig().setHighscoreGroup("players");
     for (uint i=0; ;i++) {
         if ( !internal->hsConfig().hasEntry(i+1, "username") ) {
             _newPlayer = true;
