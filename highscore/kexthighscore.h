@@ -213,11 +213,18 @@ class KDE_EXPORT Manager
      */
     void setScoreHistogram(const QMemArray<uint> &scores, ScoreTypeBound type);
 
-    enum ShowMode { AlwaysShow, NeverShow, ShowForHigherScore,
-                    ShowForHighestScore };
+    /** 
+    * Enumerate different conditions under which to show the
+    * high score dialog.
+    */
+    enum ShowMode { AlwaysShow,          ///< Always show the dialog
+                    NeverShow,           ///< Never show the dialog
+                    ShowForHigherScore,  ///< Show if score has improved
+                    ShowForHighestScore  ///< Only for the top spot
+                  };
     /**
      * Set how the highscores dialog is shown at game end.
-     * By default, the mode is @ref ShowForHigherScore.
+     * By default, the mode is ShowForHigherScore.
      *
      * Note: should be called at construction time.
      */
@@ -231,7 +238,7 @@ class KDE_EXPORT Manager
     enum ScoreType { Normal, MinuteTime };
     /**
      * Set score type. Helper method to quickly set the type of score.
-     * By default the type is @ref Normal.
+     * By default the type is Normal.
      *
      * Note: should be called at construction time.
      */

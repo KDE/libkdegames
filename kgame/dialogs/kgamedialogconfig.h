@@ -137,8 +137,7 @@ private:
  * 
  * It currently contains a line edit for the name of the player only. You can
  * add widgets by using the KGameDialogGeneralConfig as parent parameter as it
- * uses @ref QLayout::autoAdd == true.
- * @shot The main @ref KGameDialog configuration widget
+ * uses QLayout::autoAdd == true.
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KGameDialogGeneralConfigPrivate;
@@ -150,14 +149,16 @@ public:
 	 * Construct a KGameDialogGeneralConfig. Currently it contains a line
 	 * edit widget to change the player name only.
 	 *
+	 * If you just want to add more widgets you can just create your widgets
+	 * with the KGameDialogGeneralConfig as parent as it uses
+	 * QLayout::setAutoAdd(true).
+	 *
+	 * @param parent Parent widget for this dialog.
 	 * @param initializeGUI If you really don't want to use the 
 	 * predefined widget and/or layout use FALSE here. Note that then none
 	 * of the predefined widgets (currently only the name of the player) 
 	 * will exist anymore.
 	 *
-	 * If you just want to add more widgets you can just create your widgets
-	 * with the KGameDialogGeneralConfig as parent as it uses @ref
-	 * QLayout::setAutoAdd(true).
 	 **/
 	KGameDialogGeneralConfig(QWidget* parent = 0, bool initializeGUI = true);
 	virtual ~KGameDialogGeneralConfig();
@@ -316,7 +317,7 @@ public:
 	virtual void setKGame(KGame* g);
 	virtual void setOwner(KPlayer* p);
 
-	virtual void submitToKGame(KGame*, KPlayer*) { }
+	virtual void submitToKGame(KGame* g, KPlayer* p) { Q_UNUSED(g); Q_UNUSED(p); }
 
 private:
 	KGameDialogChatConfigPrivate* d;
@@ -338,11 +339,12 @@ public:
 	virtual void setOwner(KPlayer*);
 	virtual void setAdmin(bool admin);
 
-	virtual void submitToKGame(KGame*, KPlayer*) { }
+	virtual void submitToKGame(KGame* g, KPlayer* p) { Q_UNUSED(g); Q_UNUSED(p); }
 
 protected:
 	/**
-	 * @return The @ref QListBoxItem that belongs to the player p
+	 * @param p A player
+	 * @return The @ref QListBoxItem that belongs to the player @p p
 	 **/
 	QListBoxItem* item(KPlayer* p) const;
 
