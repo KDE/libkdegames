@@ -233,13 +233,13 @@ public:
 
   /**
     @since 3.2
-    @return The port that this object is connected to. See @ref QSocket::peerPort
+    @return The port that this object is connected to. See QSocket::peerPort
   */
   virtual Q_UINT16 peerPort () const;
 
   /**
     @since 3.2
-    @return The hostname this object is connected to. See @ref QSocket::peerName.
+    @return The hostname this object is connected to. See QSocket::peerName.
   */
   virtual QString peerName () const;
 

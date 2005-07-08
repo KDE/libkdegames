@@ -335,8 +335,8 @@ public:
 	KGameDialogConnectionConfig(QWidget* parent = 0);
 	virtual ~KGameDialogConnectionConfig();
 
-	virtual void setKGame(KGame*);
-	virtual void setOwner(KPlayer*);
+	virtual void setKGame(KGame* g);
+	virtual void setOwner(KPlayer* p);
 	virtual void setAdmin(bool admin);
 
 	virtual void submitToKGame(KGame* g, KPlayer* p) { Q_UNUSED(g); Q_UNUSED(p); }
