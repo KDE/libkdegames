@@ -256,10 +256,10 @@ void HighscoresDialog::slotUser2()
     if ( KIO::NetAccess::exists(url, true, this) ) {
         KGuiItem gi = KStdGuiItem::save();
         gi.setText(i18n("Overwrite"));
-        int res = KMessageBox::warningYesNo(this,
+        int res = KMessageBox::warningContinueCancel(this,
                                  i18n("The file already exists. Overwrite?"),
-                                 i18n("Export"), gi, KStdGuiItem::cancel());
-        if ( res==KMessageBox::No ) return;
+                                 i18n("Export"), gi);
+        if ( res==KMessageBox::Cancel ) return;
     }
     KTempFile tmp;
     internal->exportHighscores(*tmp.textStream());
@@ -452,12 +452,12 @@ void ConfigDialog::removeSlot()
 {
     KGuiItem gi = KStdGuiItem::clear();
     gi.setText(i18n("Remove"));
-    int res = KMessageBox::warningYesNo(this,
+    int res = KMessageBox::warningContinueCancel(this,
                                i18n("This will permanently remove your "
                                "registration key. You will not be able to use "
                                "the currently registered nickname anymore."),
-                               QString::null, gi, KStdGuiItem::cancel());
-    if ( res==KMessageBox::Yes ) {
+                               QString::null, gi);
+    if ( res==KMessageBox::Continue ) {
         internal->playerInfos().removeKey();
         _registeredName->clear();
         _key->clear();
