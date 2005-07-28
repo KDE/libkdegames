@@ -23,7 +23,7 @@
 
 #include <qstring.h>
 #include <qobject.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 
 #include "kgameproperty.h"
 #include <kdemacros.h>
@@ -71,7 +71,7 @@ class KDE_EXPORT KPlayer : public QObject
   Q_OBJECT
 
 public:
-      typedef QPtrList<KGameIO> KGameIOList;
+      typedef Q3PtrList<KGameIO> KGameIOList;
 
       // KPlayer(KGame *,KGameIO * input=0);
       /**

@@ -19,7 +19,10 @@
 */
 
 #include <qlayout.h>
-#include <qvbox.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3PtrList>
 
 #include <klocale.h>
 
@@ -48,15 +51,15 @@ public:
 		mGame = 0;
 	}
 
-	QVBox* mGamePage;
-	QVBox* mNetworkPage;
-	QVBox* mMsgServerPage;// unused here?
+	Q3VBox* mGamePage;
+	Q3VBox* mNetworkPage;
+	Q3VBox* mMsgServerPage;// unused here?
 	QVBoxLayout* mTopLayout;
 	KGameDialogNetworkConfig* mNetworkConfig;
 	KGameDialogGeneralConfig* mGameConfig;
 
 // a list of all config widgets added to this dialog
-	QPtrList<KGameDialogConfig> mConfigWidgets;
+	Q3PtrList<KGameDialogConfig> mConfigWidgets;
 
 // just pointers:
 	KPlayer* mOwner;
@@ -165,7 +168,7 @@ void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
  d->mMsgServerPage = addConfigPage(msgConf, i18n("&Message Server"));
 }
 
-void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, QVBox* parent)
+void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, Q3VBox* parent)
 {
  if (!chat) {
 	return;
@@ -180,7 +183,7 @@ void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, QVBox* parent)
  addConfigWidget(chat, parent);
 }
 
-void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, QVBox* parent)
+void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, Q3VBox* parent)
 {
  if (!c) {
 	return;
@@ -195,9 +198,9 @@ void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, QVBox* paren
  addConfigWidget(c, parent);
 }
 
-QVBox *KGameDialog::configPage(ConfigOptions which)
+Q3VBox *KGameDialog::configPage(ConfigOptions which)
 {
- QVBox *box = 0;
+ Q3VBox *box = 0;
  switch(which)
  {
 	case NetworkConfig:
@@ -215,13 +218,13 @@ QVBox *KGameDialog::configPage(ConfigOptions which)
  return box;
 }
 
-QVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
+Q3VBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
 {
  if (!widget) {
 	kdError(11001) << "Cannot add NULL config widget" << endl;
 	return 0;
  }
- QVBox* page = addVBoxPage(title);
+ Q3VBox* page = addVBoxPage(title);
  addConfigWidget(widget, page);
  return page;
 }

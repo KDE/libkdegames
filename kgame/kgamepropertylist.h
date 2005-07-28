@@ -21,7 +21,7 @@
 #ifndef __KGAMEPROPERTYLIST_H_
 #define __KGAMEPROPERTYLIST_H_
 
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 
 #include <kdebug.h>
 
@@ -32,20 +32,20 @@
 // AB: also see README.LIB!
 
 template<class type>
-class KGamePropertyList : public QValueList<type>, public KGamePropertyBase
+class KGamePropertyList : public Q3ValueList<type>, public KGamePropertyBase
 {
 public:
      /**
      * Typedefs
      */
-    typedef QValueListIterator<type> Iterator;
-    typedef QValueListConstIterator<type> ConstIterator;
+    typedef Q3ValueListIterator<type> Iterator;
+    typedef Q3ValueListConstIterator<type> ConstIterator;
 
-  KGamePropertyList() :QValueList<type>(), KGamePropertyBase()
+  KGamePropertyList() :Q3ValueList<type>(), KGamePropertyBase()
   {
   }
 
-  KGamePropertyList( const KGamePropertyList<type> &a ) : QValueList<type>(a)
+  KGamePropertyList( const KGamePropertyList<type> &a ) : Q3ValueList<type>(a)
   {
   }
 
@@ -66,10 +66,10 @@ public:
 
   Iterator insert( Iterator it, const type& d )
   {
-    it=QValueList<type>::insert(it,d);
+    it=Q3ValueList<type>::insert(it,d);
 
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdInsert);
     int i=findIterator(it);
     s << i;
@@ -93,7 +93,7 @@ public:
   void  append( const type& d ) 
   {
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAppend);
     s << d;
     if (policy() == PolicyClean || policy() == PolicyDirty)
@@ -112,7 +112,7 @@ public:
   Iterator erase( Iterator it )
   {
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdRemove);
     int i=findIterator(it);
     s << i;
@@ -146,7 +146,7 @@ public:
   void clear()
   {
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdClear);
     if (policy() == PolicyClean || policy() == PolicyDirty)
     {
@@ -164,7 +164,7 @@ public:
   void load(QDataStream& s)
   {
     kdDebug(11001) << "KGamePropertyList load " << id() << endl;
-    QValueList<type>::clear();
+    Q3ValueList<type>::clear();
     uint size;
     type data;
     s >> size;
@@ -172,7 +172,7 @@ public:
     for (unsigned int i=0;i<size;i++)
     {
       s >> data;
-      QValueList<type>::append(data);
+      Q3ValueList<type>::append(data);
     }
     if (isEmittingSignal()) emitSignal();
   }
@@ -204,7 +204,7 @@ public:
         type data;
         s >> i >> data;
         it=at(i);
-        QValueList<type>::insert(it,data);
+        Q3ValueList<type>::insert(it,data);
 //        kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
@@ -213,7 +213,7 @@ public:
       {
         type data;
 	s >> data;
-        QValueList<type>::append(data);
+        Q3ValueList<type>::append(data);
 //        kdDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
         if (isEmittingSignal()) emitSignal();
 	break;
@@ -223,14 +223,14 @@ public:
         uint i;
         s >> i;
         it=at(i);
-        QValueList<type>::remove(it);
+        Q3ValueList<type>::remove(it);
         kdDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdClear:
       {
-        QValueList<type>::clear();
+        Q3ValueList<type>::clear();
         kdDebug(11001) << "CmdClear:id="<<id()<<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
@@ -245,7 +245,7 @@ protected:
   // this is called for Policy[Dirty|Local] after putting the stuff into the
   // stream
   {
-    QDataStream s(b, IO_ReadOnly);
+    QDataStream s(b, QIODevice::ReadOnly);
     int cmd;
     int propId;
     KGameMessage::extractPropertyHeader(s, propId);

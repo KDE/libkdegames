@@ -22,6 +22,8 @@
 
 #include <qbuffer.h>
 #include <qtimer.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 #include "kmessageio.h"
 #include "kmessageserver.h"
@@ -41,11 +43,11 @@ public:
   }
 
   Q_UINT32 adminID;
-  QValueList <Q_UINT32> clientList;
+  Q3ValueList <Q_UINT32> clientList;
   KMessageIO *connection;
 
   bool isLocked;
-  QValueList <QByteArray> delayedMessages;
+  Q3ValueList <QByteArray> delayedMessages;
 };
 
 KMessageClient::KMessageClient (QObject *parent, const char *name)
@@ -110,7 +112,7 @@ Q_UINT32 KMessageClient::adminId () const
   return d->adminID;
 }
 
-const QValueList <Q_UINT32> &KMessageClient::clientList() const
+const Q3ValueList <Q_UINT32> &KMessageClient::clientList() const
 {
   return d->clientList;
 }
@@ -150,8 +152,8 @@ void KMessageClient::sendServerMessage (const QByteArray &msg)
 void KMessageClient::sendBroadcast (const QByteArray &msg)
 {
   QByteArray sendBuffer;
-  QBuffer buffer (sendBuffer);
-  buffer.open (IO_WriteOnly);
+  QBuffer buffer (&sendBuffer);
+  buffer.open (QIODevice::WriteOnly);
   QDataStream stream (&buffer);
 
   stream << static_cast<Q_UINT32> ( KMessageServer::REQ_BROADCAST );
@@ -159,11 +161,11 @@ void KMessageClient::sendBroadcast (const QByteArray &msg)
   sendServerMessage (sendBuffer);
 }
 
-void KMessageClient::sendForward (const QByteArray &msg, const QValueList <Q_UINT32> &clients)
+void KMessageClient::sendForward (const QByteArray &msg, const Q3ValueList <Q_UINT32> &clients)
 {
   QByteArray sendBuffer;
-  QBuffer buffer (sendBuffer);
-  buffer.open (IO_WriteOnly);
+  QBuffer buffer (&sendBuffer);
+  buffer.open (QIODevice::WriteOnly);
   QDataStream stream (&buffer);
 
   stream << static_cast<Q_UINT32>( KMessageServer::REQ_FORWARD ) << clients;
@@ -173,7 +175,7 @@ void KMessageClient::sendForward (const QByteArray &msg, const QValueList <Q_UIN
 
 void KMessageClient::sendForward (const QByteArray &msg, Q_UINT32 client)
 {
-  sendForward (msg, QValueList <Q_UINT32> () << client);
+  sendForward (msg, Q3ValueList <Q_UINT32> () << client);
 }
 
 
@@ -206,8 +208,9 @@ void KMessageClient::processMessage (const QByteArray &msg)
     d->delayedMessages.append(msg);
     return;
   }
-  QBuffer in_buffer (msg);
-  in_buffer.open (IO_ReadOnly);
+  QBuffer in_buffer;
+  in_buffer.setData(msg);
+  in_buffer.open (QIODevice::ReadOnly);
   QDataStream in_stream (&in_buffer);
 
 
@@ -228,7 +231,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
     case KMessageServer::MSG_FORWARD:
       {
         Q_UINT32 clientID;
-        QValueList <Q_UINT32> receivers;
+        Q3ValueList <Q_UINT32> receivers;
         in_stream >> clientID >> receivers;
         emit forwardReceived (in_buffer.readAll(), clientID, receivers);
       }
@@ -359,7 +362,7 @@ void KMessageClient::lock ()
 void KMessageClient::unlock ()
 {
   d->isLocked = false;
-  for (unsigned int i = 0; i < d->delayedMessages.count(); i++)
+  for (int i = 0; i < d->delayedMessages.count(); i++)
   {
     QTimer::singleShot(0, this, SLOT(processFirstMessage()));
   }

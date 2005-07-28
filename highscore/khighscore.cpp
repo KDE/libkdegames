@@ -17,9 +17,6 @@
     the Free Software Foundation, Inc., 51 Franklin Steet, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-/*
-    $Id$
-*/
 
 #include <config.h>
 #include <fcntl.h>
@@ -228,7 +225,7 @@ QStringList KHighscore::readList(const QString& key, int lastEntry) const
 
 void KHighscore::writeList(const QString& key, const QStringList& list)
 {
- for (int unsigned i = 1; i <= list.count(); i++) {
+ for (int i = 1; i <= list.count(); i++) {
 	writeEntry(i, key, list[i - 1]);
  }
 }
@@ -246,7 +243,7 @@ const QString& KHighscore::highscoreGroup() const
 QString KHighscore::group() const
 {
     if ( highscoreGroup().isNull() )
-        return (d->global ? QString::null : GROUP);
+        return (d->global ? QString() : QString::fromLatin1(GROUP));
     return (d->global ? highscoreGroup()
             : QString("%1_%2").arg(GROUP).arg(highscoreGroup()));
 }

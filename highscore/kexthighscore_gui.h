@@ -22,7 +22,7 @@
 
 #include <qcheckbox.h>
 #include <qlabel.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qtabwidget.h>
 
 #include <klistview.h>
@@ -45,7 +45,7 @@ class AdditionalTab;
 class ShowItem : public KListViewItem
 {
  public:
-    ShowItem(QListView *, bool highlight);
+    ShowItem(Q3ListView *, bool highlight);
 
  protected:
     virtual void paintCell(QPainter *, const QColorGroup &, int column,
@@ -64,12 +64,12 @@ class ScoresList : public KListView
     void addHeader(const ItemArray &);
 
  protected:
-    QListViewItem *addLine(const ItemArray &, uint index, bool highlight);
+    Q3ListViewItem *addLine(const ItemArray &, uint index, bool highlight);
     virtual QString itemText(const ItemContainer &, uint row) const = 0;
 
  private:
     virtual void addLineItem(const ItemArray &, uint index,
-                             QListViewItem *item);
+                             Q3ListViewItem *item);
 };
 
 //-----------------------------------------------------------------------------
@@ -125,7 +125,7 @@ class HighscoresDialog : public KDialogBase
  private:
     int _rank, _tab;
     QWidget *_current;
-    QValueVector<HighscoresWidget *> _widgets;
+    Q3ValueVector<HighscoresWidget *> _widgets;
 };
 
 //-----------------------------------------------------------------------------
@@ -133,28 +133,28 @@ class LastMultipleScoresList : public ScoresList
 {
     Q_OBJECT
 public:
-    LastMultipleScoresList(const QValueVector<Score> &, QWidget *parent);
+    LastMultipleScoresList(const Q3ValueVector<Score> &, QWidget *parent);
 
 private:
-    void addLineItem(const ItemArray &, uint index, QListViewItem *line);
+    void addLineItem(const ItemArray &, uint index, Q3ListViewItem *line);
     QString itemText(const ItemContainer &, uint row) const;
 
 private:
-    const QValueVector<Score> &_scores;
+    const Q3ValueVector<Score> &_scores;
 };
 
 class TotalMultipleScoresList : public ScoresList
 {
     Q_OBJECT
 public:
-    TotalMultipleScoresList(const QValueVector<Score> &, QWidget *parent);
+    TotalMultipleScoresList(const Q3ValueVector<Score> &, QWidget *parent);
 
 private:
-    void addLineItem(const ItemArray &, uint index, QListViewItem *line);
+    void addLineItem(const ItemArray &, uint index, Q3ListViewItem *line);
     QString itemText(const ItemContainer &, uint row) const;
 
 private:
-    const QValueVector<Score> &_scores;
+    const Q3ValueVector<Score> &_scores;
 };
 
 //-----------------------------------------------------------------------------

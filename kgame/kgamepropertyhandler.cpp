@@ -26,7 +26,7 @@
 #include "kgamemessage.h"
 
 #include <qmap.h>
-#include <qptrqueue.h>
+#include <q3ptrqueue.h>
 
 #include <klocale.h>
 #include <typeinfo>
@@ -42,13 +42,13 @@ public:
 	}
 
 	QMap<int, QString> mNameMap;
-	QIntDict<KGamePropertyBase> mIdDict;
+	Q3IntDict<KGamePropertyBase> mIdDict;
 	int mUniqueId;
 	int mId;
 	KGamePropertyBase::PropertyPolicy mDefaultPolicy;
 	bool mDefaultUserspace;
   int mIndirectEmit;
-  QPtrQueue<KGamePropertyBase> mSignalQueue;
+  Q3PtrQueue<KGamePropertyBase> mSignalQueue;
 };
 
 KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent) : QObject(parent)
@@ -211,7 +211,7 @@ bool KGamePropertyHandler::save(QDataStream &stream)
 {
  kdDebug(11001) << k_funcinfo << ": " << d->mIdDict.count() << " KGameProperty objects " << endl;
  stream << (uint)d->mIdDict.count();
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
 	KGamePropertyBase *base=it.current();
 	if (base) {
@@ -234,7 +234,7 @@ void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool us
  // kdDebug(11001) << k_funcinfo << ": " << p << endl;
  d->mDefaultPolicy=p;
  d->mDefaultUserspace=userspace;
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
 	if (!userspace || it.current()->id()>=KGamePropertyBase::IdUser) {
 		it.current()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
@@ -245,7 +245,7 @@ void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool us
 
 void KGamePropertyHandler::unlockProperties()
 {
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
 	it.current()->unlock();
 	++it;
@@ -254,7 +254,7 @@ void KGamePropertyHandler::unlockProperties()
 
 void KGamePropertyHandler::lockProperties()
 {
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
 	it.current()->lock();
 	++it;
@@ -268,7 +268,7 @@ int KGamePropertyHandler::uniquePropertyId()
 
 void KGamePropertyHandler::flush()
 {
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
 	if (it.current()->isDirty()) {
 		it.current()->sendProperty();
@@ -334,7 +334,7 @@ KGamePropertyBase *KGamePropertyHandler::find(int id)
 void KGamePropertyHandler::clear()
 {
  kdDebug(11001) << k_funcinfo << id() << endl;
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.toFirst()) {
 	KGamePropertyBase* p = it.toFirst();
 	p->unregisterData();
@@ -346,7 +346,7 @@ void KGamePropertyHandler::clear()
  }
 }
 
-QIntDict<KGamePropertyBase>& KGamePropertyHandler::dict() const
+Q3IntDict<KGamePropertyBase>& KGamePropertyHandler::dict() const
 { 
  return d->mIdDict; 
 }
@@ -390,7 +390,7 @@ void KGamePropertyHandler::Debug()
  kdDebug(11001) << "KGamePropertyHandler:: Debug this=" << this << endl;
 
  kdDebug(11001) << "  Registered properties: (Policy,Lock,Emit,Optimized, Dirty)" << endl;
- QIntDictIterator<KGamePropertyBase> it(d->mIdDict);
+ Q3IntDictIterator<KGamePropertyBase> it(d->mIdDict);
  while (it.current()) {
 	KGamePropertyBase *p=it.current();
 	kdDebug(11001) << "  "<< p->id() << ": p=" << p->policy() 

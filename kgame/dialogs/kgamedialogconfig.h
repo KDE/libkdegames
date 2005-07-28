@@ -29,11 +29,14 @@
 #define __KGAMEDIALOGCONFIG_H__
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QGridLayout>
 #include <kdemacros.h>
 
 class QGridLayout;
 class QVBoxLayout;
-class QListBoxItem;
+class Q3ListBoxItem;
 
 class KGame;
 class KPlayer;
@@ -346,10 +349,10 @@ protected:
 	 * @param p A player
 	 * @return The @ref QListBoxItem that belongs to the player @p p
 	 **/
-	QListBoxItem* item(KPlayer* p) const;
+	Q3ListBoxItem* item(KPlayer* p) const;
 
 protected slots:
-	void slotKickPlayerOut(QListBoxItem* item);
+	void slotKickPlayerOut(Q3ListBoxItem* item);
 	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p);
 	void slotPlayerLeftGame(KPlayer* p);
 	void slotPlayerJoinedGame(KPlayer* p);

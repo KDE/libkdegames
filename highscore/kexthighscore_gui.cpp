@@ -22,9 +22,14 @@
 
 #include <qlayout.h>
 #include <qtextstream.h>
-#include <qheader.h>
-#include <qgrid.h>
-#include <qvgroupbox.h>
+#include <q3header.h>
+#include <q3grid.h>
+//Added by qt3to4:
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <Q3GroupBox>
 
 #include <kapplication.h>
 #include <kmessagebox.h>
@@ -45,7 +50,7 @@ namespace KExtHighscore
 {
 
 //-----------------------------------------------------------------------------
-ShowItem::ShowItem(QListView *list, bool highlight)
+ShowItem::ShowItem(Q3ListView *list, bool highlight)
     : KListViewItem(list), _highlight(highlight)
 {}
 
@@ -53,7 +58,7 @@ void ShowItem::paintCell(QPainter *p, const QColorGroup &cg,
                          int column, int width, int align)
 {
     QColorGroup cgrp(cg);
-    if (_highlight) cgrp.setColor(QColorGroup::Text, red);
+    if (_highlight) cgrp.setColor(QColorGroup::Text, Qt::red);
     KListViewItem::paintCell(p, cgrp, column, width, align);
 }
 
@@ -61,7 +66,7 @@ void ShowItem::paintCell(QPainter *p, const QColorGroup &cg,
 ScoresList::ScoresList(QWidget *parent)
     : KListView(parent)
 {
-    setSelectionMode(QListView::NoSelection);
+    setSelectionMode(Q3ListView::NoSelection);
     setItemMargin(3);
     setAllColumnsShowFocus(true);
     setSorting(-1);
@@ -74,16 +79,16 @@ void ScoresList::addHeader(const ItemArray &items)
     addLineItem(items, 0, 0);
 }
 
-QListViewItem *ScoresList::addLine(const ItemArray &items,
+Q3ListViewItem *ScoresList::addLine(const ItemArray &items,
                                    uint index, bool highlight)
 {
-    QListViewItem *item = new ShowItem(this, highlight);
+    Q3ListViewItem *item = new ShowItem(this, highlight);
     addLineItem(items, index, item);
     return item;
 }
 
 void ScoresList::addLineItem(const ItemArray &items,
-                             uint index, QListViewItem *line)
+                             uint index, Q3ListViewItem *line)
 {
     uint k = 0;
     for (uint i=0; i<items.size(); i++) {
@@ -111,9 +116,9 @@ QString HighscoresList::itemText(const ItemContainer &item, uint row) const
 void HighscoresList::load(const ItemArray &items, int highlight)
 {
     clear();
-    QListViewItem *line = 0;
+    Q3ListViewItem *line = 0;
     for (int j=items.nbEntries()-1; j>=0; j--) {
-        QListViewItem *item = addLine(items, j, j==highlight);
+        Q3ListViewItem *item = addLine(items, j, j==highlight);
         if ( j==highlight ) line = item;
     }
     if (line) ensureItemVisible(line);
@@ -270,16 +275,16 @@ void HighscoresDialog::slotUser2()
 
 //-----------------------------------------------------------------------------
 LastMultipleScoresList::LastMultipleScoresList(
-                            const QValueVector<Score> &scores, QWidget *parent)
+                            const Q3ValueVector<Score> &scores, QWidget *parent)
     : ScoresList(parent), _scores(scores)
 {
     const ScoreInfos &s = internal->scoreInfos();
     addHeader(s);
-    for (uint i=0; i<scores.size(); i++) addLine(s, i, false);
+    for (int i=0; i<scores.size(); i++) addLine(s, i, false);
 }
 
 void LastMultipleScoresList::addLineItem(const ItemArray &si,
-                                         uint index, QListViewItem *line)
+                                         uint index, Q3ListViewItem *line)
 {
     uint k = 1; // skip "id"
     for (uint i=0; i<si.size()-2; i++) {
@@ -307,16 +312,16 @@ QString LastMultipleScoresList::itemText(const ItemContainer &item,
 
 //-----------------------------------------------------------------------------
 TotalMultipleScoresList::TotalMultipleScoresList(
-                            const QValueVector<Score> &scores, QWidget *parent)
+                            const Q3ValueVector<Score> &scores, QWidget *parent)
     : ScoresList(parent), _scores(scores)
 {
     const ScoreInfos &s = internal->scoreInfos();
     addHeader(s);
-    for (uint i=0; i<scores.size(); i++) addLine(s, i, false);
+    for (int i=0; i<scores.size(); i++) addLine(s, i, false);
 }
 
 void TotalMultipleScoresList::addLineItem(const ItemArray &si,
-                                          uint index, QListViewItem *line)
+                                          uint index, Q3ListViewItem *line)
 {
     const PlayerInfos &pi = internal->playerInfos();
     uint k = 1; // skip "id"
@@ -405,9 +410,9 @@ ConfigDialog::ConfigDialog(QWidget *parent)
         QVBoxLayout *pageTop =
             new QVBoxLayout(page, spacingHint(), spacingHint());
 
-        QVGroupBox *group = new QVGroupBox(i18n("Registration Data"), page);
+        Q3GroupBox *group = new Q3GroupBox(1, Qt::Vertical, i18n("Registration Data"), page);
         pageTop->addWidget(group);
-        QGrid *grid = new QGrid(2, group);
+        Q3Grid *grid = new Q3Grid(2, group);
         grid->setSpacing(spacingHint());
 
         label = new QLabel(i18n("Nickname:"), grid);

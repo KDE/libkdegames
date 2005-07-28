@@ -124,7 +124,7 @@ void KGamePropertyBase::unregisterData()
 bool KGamePropertyBase::sendProperty()
 {
  QByteArray b;
- QDataStream s(b, IO_WriteOnly);
+ QDataStream s(&b, QIODevice::WriteOnly);
  KGameMessage::createPropertyHeader(s, id());
  save(s);
  if (mOwner) {
@@ -138,7 +138,7 @@ bool KGamePropertyBase::sendProperty()
 bool KGamePropertyBase::sendProperty(const QByteArray& data)
 {
  QByteArray b;
- QDataStream s(b, IO_WriteOnly);
+ QDataStream s(&b, QIODevice::WriteOnly);
  KGameMessage::createPropertyHeader(s, id());
  s.writeRawBytes(data.data(), data.size());
  if (mOwner) {
@@ -170,7 +170,7 @@ bool KGamePropertyBase::unlock(bool force)
 void KGamePropertyBase::setLock(bool l)
 {
  QByteArray b;
- QDataStream s(b, IO_WriteOnly);
+ QDataStream s(&b, QIODevice::WriteOnly);
  KGameMessage::createPropertyCommand(s, IdCommand, id(), CmdLock);
  
  s << (Q_INT8)l;

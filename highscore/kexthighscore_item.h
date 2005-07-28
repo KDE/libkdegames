@@ -23,7 +23,7 @@
 #include <qvariant.h>
 #include <qnamespace.h>
 #include <qmap.h>
-#include <qvaluevector.h>
+#include <q3valuevector.h>
 #include <kdemacros.h>
 class QWidget;
 
@@ -82,7 +82,7 @@ class KDE_EXPORT Item
      * @param alignment the alignment of the item.
      */
     Item(const QVariant &def = QVariant::Invalid,
-         const QString &label = QString::null, int alignment = Qt::AlignRight);
+         const QString &label = QString::null, Qt::AlignmentFlag alignment = Qt::AlignRight);
 
     virtual ~Item();
 
@@ -149,7 +149,7 @@ class KDE_EXPORT Item
  private:
     QVariant _default;
     QString  _label;
-    int      _alignment;
+    Qt::AlignmentFlag   _alignment;
     Format   _format;
     Special  _special;
 
@@ -192,7 +192,7 @@ class KDE_EXPORT Score
     /**
      * @return the data associated with the named Item.
      */
-    const QVariant &data(const QString &name) const;
+    QVariant data(const QString &name) const;
 
     /**
      * Set the data associated with the named Item. Note that the
@@ -297,8 +297,8 @@ class KDE_EXPORT MultiplayerScores
     void show(QWidget *parent);
 
  private:
-    QValueVector<uint>  _nbGames;
-    QValueVector<Score> _scores;
+    Q3ValueVector<uint>  _nbGames;
+    Q3ValueVector<Score> _scores;
 
     class MultiplayerScoresPrivate;
     MultiplayerScoresPrivate *d;

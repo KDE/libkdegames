@@ -32,12 +32,15 @@
 #include <kmessagebox.h>
 
 #include <qlayout.h>
-#include <qhgroupbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
-#include <qvbox.h>
-#include <qptrdict.h>
+#include <q3vbox.h>
+#include <q3ptrdict.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <Q3GroupBox>
 
 #include "kgamedialogconfig.moc"
 
@@ -105,7 +108,7 @@ public:
 	}
 
 	// QPushButton* mInitConnection;
-	QHGroupBox* mInitConnection;
+	Q3GroupBox* mInitConnection;
 	QLabel* mNetworkLabel;
 	QPushButton *mDisconnectButton;
 
@@ -133,7 +136,7 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
  connect(d->mDisconnectButton, SIGNAL(clicked()), this, SLOT(slotExitConnection()));
  hb->addWidget(d->mDisconnectButton);
 
- d->mInitConnection = new QHGroupBox(i18n("Network Configuration"), this);
+ d->mInitConnection = new Q3GroupBox(1, Qt::Horizontal, i18n("Network Configuration"), this);
  topLayout->addWidget(d->mInitConnection);
 
  d->mConnect = new KGameConnectWidget(d->mInitConnection);
@@ -553,7 +556,7 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
  d = new KGameDialogChatConfigPrivate;
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
  topLayout->setAutoAdd(true);
- QHGroupBox* b = new QHGroupBox(i18n("Chat"), this);
+ Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Chat"), this);
  d->mChat = new KGameChat(0, chatMsgId, b);
 }
 
@@ -595,7 +598,7 @@ public:
 		mPlayerBox = 0;
 	}
 
-	QPtrDict<KPlayer> mItem2Player;
+	Q3PtrDict<KPlayer> mItem2Player;
 	KListBox* mPlayerBox;
 };
 
@@ -606,7 +609,7 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  d = new KGameDialogConnectionConfigPrivate;
  QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
  topLayout->setAutoAdd(true);
- QHGroupBox* b = new QHGroupBox(i18n("Connected Players"), this);
+ Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Connected Players"), this);
  d->mPlayerBox = new KListBox(b);
  setMinimumHeight(100);
 }
@@ -650,21 +653,21 @@ void KGameDialogConnectionConfig::setAdmin(bool a)
 	return;
  }
  if (admin()) {
-	disconnect(game(), SIGNAL(executed(QListBoxItem*)), this, 0);
+	disconnect(game(), SIGNAL(executed(Q3ListBoxItem*)), this, 0);
  }
  KGameDialogConfig::setAdmin(a);
  if (admin()) {
-	connect(d->mPlayerBox, SIGNAL(executed(QListBoxItem*)), this,
-			SLOT(slotKickPlayerOut(QListBoxItem*)));
+	connect(d->mPlayerBox, SIGNAL(executed(Q3ListBoxItem*)), this,
+			SLOT(slotKickPlayerOut(Q3ListBoxItem*)));
  }
 }
 
-QListBoxItem* KGameDialogConnectionConfig::item(KPlayer* p) const
+Q3ListBoxItem* KGameDialogConnectionConfig::item(KPlayer* p) const
 {
- QPtrDictIterator<KPlayer> it(d->mItem2Player);
+ Q3PtrDictIterator<KPlayer> it(d->mItem2Player);
  while (it.current()) {
 	if (it.current() == p) {
-		return (QListBoxItem*)it.currentKey();
+		return (Q3ListBoxItem*)it.currentKey();
 	}
 	++it;
  }
@@ -673,7 +676,7 @@ QListBoxItem* KGameDialogConnectionConfig::item(KPlayer* p) const
 
 void KGameDialogConnectionConfig::slotClearPlayers()
 {
- QPtrDictIterator<KPlayer> it(d->mItem2Player);
+ Q3PtrDictIterator<KPlayer> it(d->mItem2Player);
  while (it.current()) {
 	slotPlayerLeftGame(it.current());
 	++it;
@@ -700,7 +703,7 @@ void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
 	return;
  }
  kdDebug(11001) << k_funcinfo << ": add player " << p->id() << endl;
- QListBoxText* t = new QListBoxText(p->name());
+ Q3ListBoxText* t = new Q3ListBoxText(p->name());
  d->mItem2Player.insert(t, p);
  d->mPlayerBox->insertItem(t);
 
@@ -722,7 +725,7 @@ void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
 
 }
 
-void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
+void KGameDialogConnectionConfig::slotKickPlayerOut(Q3ListBoxItem* item)
 {
  kdDebug(11001) << "kick player out" << endl;
  KPlayer* p = d->mItem2Player[item];
@@ -756,15 +759,15 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(QListBoxItem* item)
 void KGameDialogConnectionConfig::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
  if(prop->id() == KGamePropertyBase::IdName) {
-	QListBoxText* old = 0;
-	QPtrDictIterator<KPlayer> it(d->mItem2Player);
+	Q3ListBoxText* old = 0;
+	Q3PtrDictIterator<KPlayer> it(d->mItem2Player);
 	while (it.current() && !old) {
 		if (it.current() == player) {
-			old = (QListBoxText*)it.currentKey();
+			old = (Q3ListBoxText*)it.currentKey();
 		}
 		++it;
 	}
-	QListBoxText* t = new QListBoxText(player->name());
+	Q3ListBoxText* t = new Q3ListBoxText(player->name());
 	d->mPlayerBox->changeItem(t, d->mPlayerBox->index(old));
 	d->mItem2Player.remove(old);
 	d->mItem2Player.insert(t, player);

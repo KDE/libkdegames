@@ -20,6 +20,9 @@
 #include "kexthighscore_item.h"
 
 #include <qlayout.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QHBoxLayout>
 #include <kglobal.h>
 #include <kdialogbase.h>
 #include <kdebug.h>
@@ -33,7 +36,7 @@ namespace KExtHighscore
 {
 
 //-----------------------------------------------------------------------------
-Item::Item(const QVariant &def, const QString &label, int alignment)
+Item::Item(const QVariant &def, const QString &label, Qt::AlignmentFlag alignment)
     : _default(def), _label(label), _alignment(alignment),
       _format(NoFormat), _special(NoSpecial)
 {}
@@ -152,7 +155,7 @@ Score::Score(ScoreType type)
 Score::~Score()
 {}
 
-const QVariant &Score::data(const QString &name) const
+QVariant Score::data(const QString &name) const
 {
     Q_ASSERT( _data.contains(name) );
     return _data[name];
@@ -202,7 +205,7 @@ MultiplayerScores::~MultiplayerScores()
 void MultiplayerScores::clear()
 {
     Score score;
-    for (uint i=0; i<_scores.size(); i++) {
+    for (int i=0; i<_scores.size(); i++) {
         _nbGames[i] = 0;
         QVariant name = _scores[i].data("name");
         _scores[i] = score;
@@ -245,18 +248,18 @@ void MultiplayerScores::show(QWidget *parent)
     else {
         bool ok = true;
         uint nb = _nbGames[0];
-        for (uint i=1; i<_nbGames.size(); i++)
+        for (int i=1; i<_nbGames.size(); i++)
             if ( _nbGames[i]!=nb ) ok = false;
         if (!ok)
            kdWarning(11002) << "players have not same number of games" << endl;
     }
 
     // order the players according to the number of won games
-    QValueVector<Score> ordered;
-    for (uint i=0; i<_scores.size(); i++) {
+    Q3ValueVector<Score> ordered;
+    for (int i=0; i<_scores.size(); i++) {
         uint won = _scores[i].data("nb won games").toUInt();
         double mean = _scores[i].data("mean score").toDouble();
-        QValueVector<Score>::iterator it;
+        Q3ValueVector<Score>::iterator it;
         for(it = ordered.begin(); it!=ordered.end(); ++it) {
             uint cwon = (*it).data("nb won games").toUInt();
             double cmean = (*it).data("mean score").toDouble();
@@ -275,7 +278,7 @@ void MultiplayerScores::show(QWidget *parent)
     QHBoxLayout *hbox = new QHBoxLayout(dialog.plainPage(),
                                 KDialog::marginHint(), KDialog::spacingHint());
 
-    QVBox *vbox = new QVBox(dialog.plainPage());
+    Q3VBox *vbox = new Q3VBox(dialog.plainPage());
     hbox->addWidget(vbox);
     if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played."), vbox);
     else {
@@ -284,7 +287,7 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     if ( _nbGames[0]>1 ) {
-        vbox = new QVBox(dialog.plainPage());
+        vbox = new Q3VBox(dialog.plainPage());
         hbox->addWidget(vbox);
         (void)new QLabel(i18n("Scores for the last %1 games:")
                          .arg(_nbGames[0]), vbox);

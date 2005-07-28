@@ -22,6 +22,8 @@
 #define __KGAMEPROPERTYARRAY_H_
 
 #include <qdatastream.h>
+//Added by qt3to4:
+#include <QVector>
 #include <kdebug.h>
 
 #include "kgamemessage.h"
@@ -30,10 +32,10 @@
 
 
 template<class type>
-class KGamePropertyArray : public QMemArray<type>, public KGamePropertyBase
+class KGamePropertyArray : public QVector<type>, public KGamePropertyBase
 {
 public:
-  KGamePropertyArray() :QMemArray<type>(), KGamePropertyBase()
+  KGamePropertyArray() :QVector<type>(), KGamePropertyBase()
   {
     //kdDebug(11001) << "KGamePropertyArray init" << endl;
   }
@@ -43,17 +45,17 @@ public:
     resize(size);
   }
   
-  KGamePropertyArray( const KGamePropertyArray<type> &a ) : QMemArray<type>(a)
+  KGamePropertyArray( const KGamePropertyArray<type> &a ) : QVector<type>(a)
   {
   }
   
   bool  resize( uint size )
   {
-    if (size!=QMemArray<type>::size())
+    if (size!=QVector<type>::size())
     {
       bool a=true;
       QByteArray b;
-      QDataStream s(b, IO_WriteOnly);
+      QDataStream s(&b, QIODevice::WriteOnly);
       KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdResize);
       s << size ;
       if (policy()==PolicyClean || policy()==PolicyDirty)
@@ -76,7 +78,7 @@ public:
   void setAt(uint i,type data)
   {
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(&b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdAt);
     s << i ;
     s << data;
@@ -96,12 +98,12 @@ public:
 
   type at( uint i ) const
   {
-    return QMemArray<type>::at(i);
+    return QVector<type>::at(i);
   }
   
   type operator[]( int i ) const
   {
-    return QMemArray<type>::at(i);
+    return QVector<type>::at(i);
   }
 
   KGamePropertyArray<type> &operator=(const KGamePropertyArray<type> &a)
@@ -118,7 +120,7 @@ public:
   {
     bool r=true;
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(&b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdFill);
     s << data;
     s << size ;
@@ -146,7 +148,7 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QMemArray<type>::assign(a);
+      QVector<type>::assign(a);
     }
     return *this;
   }
@@ -158,7 +160,7 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QMemArray<type>::assign(a,n);
+      QVector<type>::assign(a,n);
     }
     return *this;
   }
@@ -170,7 +172,7 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QMemArray<type>::duplicate(a);
+      QVector<type>::duplicate(a);
     }
     return *this;
   }
@@ -182,7 +184,7 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QMemArray<type>::duplicate(a,n);
+      QVector<type>::duplicate(a,n);
     }
     return *this;
   }
@@ -194,14 +196,14 @@ public:
     }
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
-      QMemArray<type>::setRawData(a,n);
+      QVector<type>::setRawData(a,n);
     }
     return *this;
   }
   void sort()
   {
     QByteArray b;
-    QDataStream s(b, IO_WriteOnly);
+    QDataStream s(b, QIODevice::WriteOnly);
     KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
     if (policy()==PolicyLocal || policy()==PolicyDirty)
     {
@@ -220,10 +222,10 @@ public:
   {
     //kdDebug(11001) << "KGamePropertyArray load " << id() << endl;
     type data;
-    for (unsigned int i=0; i<QMemArray<type>::size(); i++) 
+    for (unsigned int i=0; i<QVector<type>::size(); i++) 
     {
       s >> data;
-      QMemArray<type>::at(i)=data;
+      QVector<type>::at(i)=data;
     }
     if (isEmittingSignal())
     {
@@ -233,7 +235,7 @@ public:
   void save(QDataStream &s)
   {
     //kdDebug(11001) << "KGamePropertyArray save "<<id() << endl;
-    for (unsigned int i=0; i<QMemArray<type>::size(); i++) 
+    for (unsigned int i=0; i<QVector<type>::size(); i++) 
     {
       s << at(i);
     }
@@ -250,7 +252,7 @@ public:
         uint i;
         type data;
         s >> i >> data;
-        QMemArray<type>::at(i)=data;
+        QVector<type>::at(i)=data;
         //kdDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) 
         {
@@ -263,9 +265,9 @@ public:
         uint size;
         s >> size;
         //kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl; 
-        if (QMemArray<type>::size() != size)
+        if (QVector<type>::size() != size)
         {
-          QMemArray<type>::resize(size);
+          QVector<type>::resize(size);
         }
         break;
       }
@@ -275,7 +277,7 @@ public:
         type data;
         s >> data >> size;
         //kdDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl; 
-        QMemArray<type>::fill(data,size);
+        QVector<type>::fill(data,size);
         if (isEmittingSignal()) 
         {
           emitSignal();
@@ -285,7 +287,7 @@ public:
       case CmdSort:
       {
         //kdDebug(11001) << "CmdSort:id="<<id()<<endl; 
-        QMemArray<type>::sort();
+        QVector<type>::sort();
         break;
       }
       default: 
@@ -296,7 +298,8 @@ public:
 protected:
   void extractProperty(const QByteArray& b)
   {
-    QDataStream s(b, IO_ReadOnly);
+	QByteArray _b(b);
+    QDataStream s(&_b, QIODevice::ReadOnly);
     int cmd;
     int propId;
     KGameMessage::extractPropertyHeader(s, propId);

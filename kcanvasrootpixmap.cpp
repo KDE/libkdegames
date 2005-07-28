@@ -19,10 +19,12 @@
 
 #include "kcanvasrootpixmap.h"
 
-#include <qcanvas.h>
+#include <q3canvas.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 
-KCanvasRootPixmap::KCanvasRootPixmap(QCanvasView *view, const char *name)
+KCanvasRootPixmap::KCanvasRootPixmap(Q3CanvasView *view, const char *name)
     : KRootPixmap(view, name), _view(view)
 {
     setCustomPainting(true);

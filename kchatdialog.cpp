@@ -27,6 +27,10 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <QGridLayout>
 
 class KChatDialogPrivate
 {
@@ -90,8 +94,8 @@ void KChatDialog::init()
  connect(textFont, SIGNAL(pressed()), this, SLOT(slotGetTextFont()));
  layout->addWidget(textFont, 0, 1);
 
- QFrame* messagePreview = new QFrame(d->mTextPage);
- messagePreview->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+ Q3Frame* messagePreview = new Q3Frame(d->mTextPage);
+ messagePreview->setFrameStyle(Q3Frame::StyledPanel | Q3Frame::Sunken);
  QHBoxLayout* messageLayout = new QHBoxLayout(messagePreview);
  layout->addMultiCellWidget(messagePreview, 1, 1, 0, 1);
 
@@ -112,8 +116,8 @@ void KChatDialog::init()
  connect(systemTextFont, SIGNAL(pressed()), this, SLOT(slotGetSystemTextFont()));
  layout->addWidget(systemTextFont, 4, 1);
 
- QFrame* systemMessagePreview = new QFrame(d->mTextPage);
- systemMessagePreview->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+ Q3Frame* systemMessagePreview = new Q3Frame(d->mTextPage);
+ systemMessagePreview->setFrameStyle(Q3Frame::StyledPanel | Q3Frame::Sunken);
  QHBoxLayout* systemMessageLayout = new QHBoxLayout(systemMessagePreview);
  layout->addMultiCellWidget(systemMessagePreview, 5, 5, 0, 1);
  

@@ -258,7 +258,7 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
 
 KGameIO * KPlayer::findRttiIO(int rtti) const
 {
-  QPtrListIterator<KGameIO> it(mInputList);
+  Q3PtrListIterator<KGameIO> it(mInputList);
   while (it.current())
   {
     if (it.current()->rtti() == rtti)
@@ -273,7 +273,7 @@ KGameIO * KPlayer::findRttiIO(int rtti) const
 int KPlayer::calcIOValue()
 {
   int value=0;
-  QPtrListIterator<KGameIO> it(mInputList);
+  Q3PtrListIterator<KGameIO> it(mInputList);
   while (it.current())
   {
     value|=it.current()->rtti();
@@ -414,7 +414,7 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
   if (me->id()==KGamePropertyBase::IdTurn)
   {
     //kdDebug(11001) << k_funcinfo << ": for KGamePropertyBase::IdTurn " << endl;
-    QPtrListIterator<KGameIO> it(mInputList);
+    Q3PtrListIterator<KGameIO> it(mInputList);
     while (it.current())
     {
       it.current()->notifyTurn(mMyTurn.value());

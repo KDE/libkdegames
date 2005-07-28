@@ -676,7 +676,7 @@ public:
 			return false;
 		}
 		QByteArray b;
-		QDataStream stream(b, IO_WriteOnly);
+		QDataStream stream(&b, QIODevice::WriteOnly);
 		stream << v;
 		if (!sendProperty(b)) {
 			setLocal(v);

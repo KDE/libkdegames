@@ -26,12 +26,15 @@
 #include <qfile.h>
 #include <qlayout.h>
 #include <qdom.h>
+//Added by qt3to4:
+#include <QTextStream>
+#include <Q3MemArray>
 
 #include <kglobal.h>
 #include <kio/netaccess.h>
 #include <kio/job.h>
 #include <kmessagebox.h>
-#include <kmdcodec.h>
+#include <kcodecs.h>
 #include <kdebug.h>
 
 #include "config.h"
@@ -269,7 +272,7 @@ PlayerInfos::PlayerInfos()
     it = Manager::createItem(Manager::BestScoreDefault);
     addItem("best score", it, true, true);
     addItem("date", new DateItem, true, true);
-    it = new Item(QString::null, i18n("Comment"), Qt::AlignLeft);
+    it = new Item(QString(), i18n("Comment"), Qt::AlignLeft);
     addItem("comment", it);
 
     // statistics items
@@ -339,7 +342,7 @@ PlayerInfos::PlayerInfos()
     internal->hsConfig().writeAndUnlock();
 }
 
-void PlayerInfos::createHistoItems(const QMemArray<uint> &scores, bool bound)
+void PlayerInfos::createHistoItems(const Q3MemArray<uint> &scores, bool bound)
 {
     Q_ASSERT( _histogram.size()==0 );
     _bound = bound;
@@ -374,7 +377,7 @@ bool PlayerInfos::isWWEnabled() const
 
 QString PlayerInfos::histoName(uint i) const
 {
-    const QMemArray<uint> &sh = _histogram;
+    const Q3MemArray<uint> &sh = _histogram;
     Q_ASSERT( i<sh.size() || (_bound || i==sh.size()) );
     if ( i==sh.size() )
         return QString("nb scores greater than %1").arg(sh[sh.size()-1]);
@@ -445,7 +448,7 @@ void PlayerInfos::submitScore(const Score &score) const
 
     // update histogram
     if ( score.type()==Won ) {
-        const QMemArray<uint> &sh = _histogram;
+        const Q3MemArray<uint> &sh = _histogram;
         for (uint i=1; i<histoSize(); i++)
             if ( i==sh.size() || score.score()<sh[i] ) {
                 item(histoName(i))->increment(_id);
@@ -614,7 +617,7 @@ bool ManagerPrivate::doQuery(const KURL &url, QWidget *parent,
     }
 
 	QFile file(tmpFile);
-	if ( !file.open(IO_ReadOnly) ) {
+	if ( !file.open(QIODevice::ReadOnly) ) {
         KIO::NetAccess::removeTempFile(tmpFile);
         QString details = i18n("Unable to open temporary file.");
         KMessageBox::detailedSorry(parent, i18n(UNABLE_TO_CONTACT), details);
@@ -719,15 +722,15 @@ void ManagerPrivate::convertToGlobal()
     // read old highscores
     KHighscore *tmp = _hsConfig;
     _hsConfig = new KHighscore(true, 0);
-    QValueVector<Score> scores(_scoreInfos->nbEntries());
-    for (uint i=0; i<scores.count(); i++)
+    Q3ValueVector<Score> scores(_scoreInfos->nbEntries());
+    for (int i=0; i<scores.count(); i++)
         scores[i] = readScore(i);
 
     // commit them
     delete _hsConfig;
     _hsConfig = tmp;
     _hsConfig->lockForWriting();
-    for (uint i=0; i<scores.count(); i++)
+    for (int i=0; i<scores.count(); i++)
         if ( scores[i].data("id").toUInt()==_playerInfos->oldLocalId()+1 )
             submitLocal(scores[i]);
     _hsConfig->writeAndUnlock();

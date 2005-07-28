@@ -24,8 +24,8 @@
 #define __KGAME_H_
 
 #include <qstring.h>
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <q3ptrlist.h>
+#include <q3valuelist.h>
 
 #include "kgamenetwork.h"
 #include <kdemacros.h>
@@ -64,7 +64,7 @@ class KDE_EXPORT KGame : public KGameNetwork
   Q_OBJECT
 
 public:
-	typedef QPtrList<KPlayer> KGamePlayerList;
+	typedef Q3PtrList<KPlayer> KGamePlayerList;
 
 	/**
 	 * The policy of the property. This can be PolicyClean (setVale uses
@@ -752,7 +752,7 @@ protected:
     **/
     virtual void newPlayersJoin(KGamePlayerList *oldplayer,
 				KGamePlayerList *newplayer,
-				QValueList<int> &inactivate) {
+				Q3ValueList<int> &inactivate) {
 		Q_UNUSED( oldplayer );
 		Q_UNUSED( newplayer );
 		Q_UNUSED( inactivate );

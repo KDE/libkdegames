@@ -24,6 +24,8 @@
 
 #include <kurl.h>
 #include <kdemacros.h>
+//Added by qt3to4:
+#include <QVector>
 
 class QTabWidget;
 
@@ -211,7 +213,7 @@ class KDE_EXPORT Manager
      *
      * Note: should be called at construction time.
      */
-    void setScoreHistogram(const QMemArray<uint> &scores, ScoreTypeBound type);
+    void setScoreHistogram(const QVector<uint> &scores, ScoreTypeBound type);
 
     /** 
     * Enumerate different conditions under which to show the

@@ -20,6 +20,8 @@
 #include "kexthighscore.h"
 
 #include <qlayout.h>
+//Added by qt3to4:
+#include <QVector>
 
 #include <kdebug.h>
 
@@ -157,7 +159,7 @@ void Manager::setWWHighscores(const KURL &url, const QString &version)
     internal->version = version;
 }
 
-void Manager::setScoreHistogram(const QMemArray<uint> &scores,
+void Manager::setScoreHistogram(const QVector<uint> &scores,
                                 ScoreTypeBound type)
 {
     Q_ASSERT( scores.size()>=2 );

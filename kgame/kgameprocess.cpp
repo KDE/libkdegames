@@ -17,9 +17,6 @@
     the Free Software Foundation, Inc., 51 Franklin Steet, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-/*
-    $Id$
-*/
 
 #include "kgameprocess.h"
 #include "kplayer.h"
@@ -31,7 +28,7 @@
 
 #include <qbuffer.h>
 #include <qdatastream.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 
 #include <assert.h>
 #include <stdio.h>
@@ -47,8 +44,8 @@ KGameProcess::KGameProcess() : QObject(0,0)
 {
   mTerminate=false;
   // Check whether a player is set. If not create one!
-  rFile.open(IO_ReadOnly|IO_Raw,stdin);
-  wFile.open(IO_WriteOnly|IO_Raw,stdout);
+  rFile.open(QIODevice::ReadOnly|QIODevice::Unbuffered,stdin);
+  wFile.open(QIODevice::WriteOnly|QIODevice::Unbuffered,stdout);
   mMessageIO=new KMessageFilePipe(this,&rFile,&wFile);
 //  mMessageClient=new KMessageClient(this);
 //  mMessageClient->setServer(mMessageIO);
@@ -92,7 +89,7 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 rece
 {
   fprintf(stderr,"KGameProcess::sendMessage id=%d recv=%d",msgid,receiver);
   QByteArray a;
-  QDataStream outstream(a,IO_WriteOnly);
+  QDataStream outstream(&a,QIODevice::WriteOnly);
 
   QBuffer *device=(QBuffer *)stream.device();
   QByteArray data=device->buffer();;
@@ -131,7 +128,7 @@ void KGameProcess::processArgs(int argc, char *argv[])
 
 void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
 {
- QDataStream stream(receiveBuffer, IO_ReadOnly);
+ QDataStream stream(receiveBuffer);
  int msgid;
  Q_UINT32 sender; 
  Q_UINT32 receiver; 

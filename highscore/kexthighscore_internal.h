@@ -27,6 +27,9 @@
 
 #include "khighscore.h"
 #include "kexthighscore.h"
+//Added by qt3to4:
+#include <QTextStream>
+#include <Q3MemArray>
 
 class QTextStream;
 class QTabWidget;
@@ -57,7 +60,7 @@ class NameItem : public Item
 {
  public:
     NameItem()
-        : Item(QString::null, i18n("Name"), Qt::AlignLeft) {
+        : Item(QString(), i18n("Name"), Qt::AlignLeft) {
             setPrettySpecial(Anonymous);
     }
 };
@@ -125,7 +128,7 @@ class ItemContainer
  * Manage a bunch of @ref Item which are saved under the same group
  * in KHighscores config file.
  */
-class ItemArray : public QMemArray<ItemContainer *>
+class ItemArray : public Q3MemArray<ItemContainer *>
 {
  public:
     ItemArray();
@@ -200,10 +203,10 @@ class PlayerInfos : public ItemArray
     uint id() const { return _id; }
     uint oldLocalId() const { return _oldLocalId; }
 
-    void createHistoItems(const QMemArray<uint> &scores, bool bound);
+    void createHistoItems(const Q3MemArray<uint> &scores, bool bound);
     QString histoName(uint i) const;
     uint histoSize() const;
-    const QMemArray<uint> &histogram() const { return _histogram; }
+    const Q3MemArray<uint> &histogram() const { return _histogram; }
 
     void submitScore(const Score &) const;
     // return true if the nickname is already used locally
@@ -216,7 +219,7 @@ class PlayerInfos : public ItemArray
  private:
     bool _newPlayer, _bound, _oldLocalPlayer;
     uint _id, _oldLocalId;
-    QMemArray<uint> _histogram;
+    Q3MemArray<uint> _histogram;
 };
 
 //-----------------------------------------------------------------------------

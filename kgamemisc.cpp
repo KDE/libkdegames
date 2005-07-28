@@ -58,5 +58,5 @@ QString KGameMisc::randomName()// do we need i18n? I think yes
               "Kirk Marc Mike Neil Paul Rik Robert Sam Sean "
               "Thomas Tim Walter" ) );
     KRandomSequence random;
-    return *names.at( random.getLong( names.count() ) );
+    return names.at( random.getLong( names.count() ) );
 }

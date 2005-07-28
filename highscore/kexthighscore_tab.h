@@ -21,7 +21,9 @@
 #define KEXTHIGHSCORE_TAB_H
 
 #include <qcombobox.h>
-#include <qmemarray.h>
+
+//Added by qt3to4:
+#include <QLabel>
 
 class QLabel;
 class KListView;
@@ -88,7 +90,7 @@ class StatisticsTab : public AdditionalTab
         uint count[Nb_Counts];
         double trend[Nb_Trends];
     };
-    QMemArray<Data> _data;
+    QVector<Data> _data;
     QLabel *_nbs[Nb_Counts], *_percents[Nb_Counts], *_trends[Nb_Trends];
 
     QString percent(const Data &, Count) const;
@@ -105,8 +107,8 @@ class HistogramTab : public AdditionalTab
     void load();
 
  private:
-    QMemArray<uint> _counts;
-    QMemArray<uint> _data;
+    QVector<uint> _counts;
+    QVector<uint> _data;
     KListView       *_list;
 
     void display(uint i);

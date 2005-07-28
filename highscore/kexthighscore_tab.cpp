@@ -22,9 +22,14 @@
 
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qvgroupbox.h>
-#include <qgrid.h>
-#include <qheader.h>
+#include <q3grid.h>
+#include <q3header.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QVector>
+#include <Q3GroupBox>
 
 #include <kdialogbase.h>
 #include <klistview.h>
@@ -124,9 +129,9 @@ StatisticsTab::StatisticsTab(QWidget *parent)
 
     QHBoxLayout *hbox = new QHBoxLayout(top);
     QVBoxLayout *vbox = new QVBoxLayout(hbox);
-    QVGroupBox *group = new QVGroupBox(i18n("Game Counts"), this);
+    Q3GroupBox *group = new Q3GroupBox(1, Qt::Vertical, i18n("Game Counts"), this);
     vbox->addWidget(group);
-    QGrid *grid = new QGrid(3, group);
+    Q3Grid *grid = new Q3Grid(3, group);
     grid->setSpacing(KDialogBase::spacingHint());
     for (uint k=0; k<Nb_Counts; k++) {
         if ( Count(k)==Draw && !internal->showDrawGames ) continue;
@@ -135,9 +140,9 @@ StatisticsTab::StatisticsTab(QWidget *parent)
         _percents[k] = new QLabel(grid);
     }
 
-    group = new QVGroupBox(i18n("Trends"), this);
+    group = new Q3GroupBox(1, Qt::Vertical, i18n("Trends"), this);
     vbox->addWidget(group);
-    grid = new QGrid(2, group);
+    grid = new Q3Grid(2, group);
     grid->setSpacing(KDialogBase::spacingHint());
     for (uint k=0; k<Nb_Trends; k++) {
         (void)new QLabel(i18n(TREND_LABELS[k]), grid);
@@ -168,9 +173,9 @@ void StatisticsTab::load()
             -(int)pi.item("max lost trend")->read(i).toUInt();
     }
 
-    for (uint k=0; k<Nb_Counts; k++) _data[nb].count[k] = 0;
-    for (uint k=0; k<Nb_Trends; k++) _data[nb].trend[k] = 0;
-    for (uint i=0; i<_data.size()-1; i++) {
+    for (int k=0; k<Nb_Counts; k++) _data[nb].count[k] = 0;
+    for (int k=0; k<Nb_Trends; k++) _data[nb].trend[k] = 0;
+    for (int i=0; i<_data.size()-1; i++) {
         for (uint k=0; k<Nb_Counts; k++)
             _data[nb].count[k] += _data[i].count[k];
         for (uint k=0; k<Nb_Trends; k++)
@@ -212,7 +217,7 @@ HistogramTab::HistogramTab(QWidget *parent)
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 
     _list = new KListView(this);
-    _list->setSelectionMode(QListView::NoSelection);
+    _list->setSelectionMode(Q3ListView::NoSelection);
     _list->setItemMargin(3);
     _list->setAllColumnsShowFocus(true);
     _list->setSorting(-1);
@@ -224,12 +229,12 @@ HistogramTab::HistogramTab(QWidget *parent)
     _list->addColumn(i18n("To"));
     _list->addColumn(i18n("Count"));
     _list->addColumn(i18n("Percent"));
-    for (uint i=0; i<4; i++) _list->setColumnAlignment(i, AlignRight);
+    for (int i=0; i<4; i++) _list->setColumnAlignment(i, Qt::AlignRight);
     _list->addColumn(QString::null);
 
     const Item *sitem = internal->scoreInfos().item("score")->item();
     const PlayerInfos &pi = internal->playerInfos();
-    const QMemArray<uint> &sh = pi.histogram();
+    const QVector<uint> &sh = pi.histogram();
     for (uint k=1; k<pi.histoSize(); k++) {
         QString s1 = sitem->pretty(0, sh[k-1]);
         QString s2;
@@ -264,7 +269,7 @@ void HistogramTab::load()
 void HistogramTab::display(uint i)
 {
     const PlayerInfos &pi = internal->playerInfos();
-    QListViewItem *item = _list->firstChild();
+    Q3ListViewItem *item = _list->firstChild();
     uint s = pi.histoSize() - 1;
     for (int k=s-1; k>=0; k--) {
         uint nb = _counts[i*s + k];
@@ -272,7 +277,7 @@ void HistogramTab::display(uint i)
         item->setText(3, percent(nb, _data[i]));
         uint width = (_data[i]==0 ? 0 : qRound(150.0 * nb / _data[i]));
         QPixmap pixmap(width, 10);
-        pixmap.fill(blue);
+        pixmap.fill(Qt::blue);
         item->setPixmap(4, pixmap);
         item = item->nextSibling();
     }

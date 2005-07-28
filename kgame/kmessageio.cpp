@@ -22,11 +22,11 @@
 */
 
 #include "kmessageio.h"
-#include <qsocket.h>
+#include <q3socket.h>
 #include <kdebug.h>
 #include <kprocess.h>
 #include <qfile.h>
-
+#include <QDataStream>
 // ----------------------- KMessageIO -------------------------
 
 KMessageIO::KMessageIO (QObject *parent, const char *name)
@@ -52,7 +52,7 @@ KMessageSocket::KMessageSocket (QString host, Q_UINT16 port, QObject *parent,
 const char *name)
   : KMessageIO (parent, name)
 {
-  mSocket = new QSocket ();
+  mSocket = new Q3Socket ();
   mSocket->connectToHost (host, port);
   initSocket ();
 }
@@ -61,12 +61,12 @@ KMessageSocket::KMessageSocket (QHostAddress host, Q_UINT16 port, QObject
 *parent, const char *name)
   : KMessageIO (parent, name)
 {
-  mSocket = new QSocket ();
+  mSocket = new Q3Socket ();
   mSocket->connectToHost (host.toString(), port);
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (QSocket *socket, QObject *parent, const char 
+KMessageSocket::KMessageSocket (Q3Socket *socket, QObject *parent, const char 
 *name)
   : KMessageIO (parent, name)
 {
@@ -78,7 +78,7 @@ KMessageSocket::KMessageSocket (int socketFD, QObject *parent, const char
 *name)
   : KMessageIO (parent, name)
 {
-  mSocket = new QSocket ();
+  mSocket = new Q3Socket ();
   mSocket->setSocket (socketFD);
   initSocket ();
 }
@@ -90,7 +90,7 @@ KMessageSocket::~KMessageSocket ()
 
 bool KMessageSocket::isConnected () const
 {
-  return mSocket->state() == QSocket::Connection;
+  return mSocket->state() == Q3Socket::Connection;
 }
 
 void KMessageSocket::send (const QByteArray &msg)
@@ -280,8 +280,8 @@ void KMessageProcess::send(const QByteArray &msg)
   *p1=0x4242aeae;
   *p2=size;
   
-  QByteArray *buffer=new QByteArray();
-  buffer->assign(tmpbuffer,size);
+  QByteArray *buffer=new QByteArray(tmpbuffer,size);
+  delete [] tmpbuffer;
   // buffer->duplicate(msg);
   mQueue.enqueue(buffer);
   writeToProcess(); 
@@ -425,10 +425,10 @@ void KMessageFilePipe::send(const QByteArray &msg)
   *p1=0x4242aeae;
   *p2=size;
   
-  QByteArray buffer;
-  buffer.assign(tmpbuffer,size);
+  QByteArray buffer(tmpbuffer,size);
   mWriteFile->writeBlock(buffer);
   mWriteFile->flush();
+  delete [] tmpbuffer;
   /*
   fprintf(stderr,"+++ KMessageFilePipe:: SEND(%d to parent) realsize=%d\n",msg.size(),buffer.size());
   for (int i=0;i<buffer.size();i++) fprintf(stderr,"%02x ",buffer[i]);fprintf(stderr,"\n");

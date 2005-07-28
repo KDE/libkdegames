@@ -52,7 +52,7 @@ public:
 	 * @return The name that will be shown for messages from this widget.
 	 * That is the string from @ref setFromNickname
 	 **/
-	virtual const QString& fromName() const;
+	virtual QString fromName() const;
 
 	/**
 	 * This sets the name that will be shown on all chat widgets if this

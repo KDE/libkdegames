@@ -23,6 +23,8 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qtimer.h>
+//Added by qt3to4:
+#include <QGridLayout>
 
 #include <kglobal.h>
 
@@ -188,7 +190,7 @@ void KGameLCDClock::setTime(const QString &s)
 class KGameLCDList::KGameLCDListPrivate
 {
 public:
-  QValueVector<QLabel *> _leadings;
+  Q3ValueVector<QLabel *> _leadings;
 };
 
 KGameLCDList::KGameLCDList(const QString &title, QWidget *parent,
@@ -217,8 +219,8 @@ void KGameLCDList::init(const QString &title)
     top->setColStretch(1, 1);
 
     _title = new QLabel(title, this);
-    _title->setAlignment(AlignCenter);
-    top->addMultiCellWidget(_title, 0, 0, 0, 1, AlignCenter);
+    _title->setAlignment(Qt::AlignCenter);
+    top->addMultiCellWidget(_title, 0, 0, 0, 1, Qt::AlignCenter);
 }
 
 void KGameLCDList::append(QLCDNumber *lcd)
@@ -241,7 +243,7 @@ void KGameLCDList::append(const QString &leading, QLCDNumber *lcd)
 
 void KGameLCDList::clear()
 {
-    for (uint i=0; i<_lcds.size(); i++) {
+    for (int i=0; i<_lcds.size(); i++) {
         delete d->_leadings[i];
         delete _lcds[i];
     }

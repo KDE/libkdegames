@@ -24,31 +24,33 @@
 #include <qstring.h>
 #include <qregexp.h>
 #include <qstyle.h>
+//Added by qt3to4:
+#include <Q3Frame>
 
 #include "kgameprogress.h"
 
 #include <kapplication.h>
 
 KGameProgress::KGameProgress(QWidget *parent, const char *name)
-	: QFrame(parent, name),
-	QRangeControl(0, 100, 1, 10, 0),
-	orient(Horizontal)
+	: Q3Frame(parent, name),
+	Q3RangeControl(0, 100, 1, 10, 0),
+	orient(Qt::Horizontal)
 {
 	initialize();
 }
 
-KGameProgress::KGameProgress(Orientation orientation, QWidget *parent, const char *name)
-	: QFrame(parent, name),
-	QRangeControl(0, 100, 1, 10, 0),
+KGameProgress::KGameProgress(Qt::Orientation orientation, QWidget *parent, const char *name)
+	: Q3Frame(parent, name),
+	Q3RangeControl(0, 100, 1, 10, 0),
 	orient(orientation)
 {
 	initialize();
 }
 
 KGameProgress::KGameProgress(int minValue, int maxValue, int value,
-                     Orientation orientation, QWidget *parent, const char *name)
-	: QFrame(parent, name),
-	QRangeControl(minValue, maxValue, 1, 10, value),
+                     Qt::Orientation orientation, QWidget *parent, const char *name)
+	: Q3Frame(parent, name),
+	Q3RangeControl(minValue, maxValue, 1, 10, value),
 	orient(orientation)
 {
 	initialize();
@@ -71,7 +73,7 @@ void KGameProgress::initialize()
 	bar_pixmap = 0;
 	bar_style = Solid;
 	text_enabled = TRUE;
-	setBackgroundMode( PaletteBackground );
+	setBackgroundMode( Qt::PaletteBackground );
 	connect(kapp, SIGNAL(appearanceChanged()), this, SLOT(paletteChange()));
 	paletteChange();
 }
@@ -118,7 +120,7 @@ void KGameProgress::setBarStyle(BarStyle style)
 	}
 }
 
-void KGameProgress::setOrientation(Orientation orientation)
+void KGameProgress::setOrientation(Qt::Orientation orientation)
 {
 	if (orient != orientation) {
 		orient = orientation;
@@ -128,7 +130,7 @@ void KGameProgress::setOrientation(Orientation orientation)
 
 void KGameProgress::setValue(int value)
 {
-	QRangeControl::setValue(value);
+	Q3RangeControl::setValue(value);
 }
 
 void KGameProgress::setTextEnabled(bool enable)
@@ -155,7 +157,7 @@ QSize KGameProgress::sizeHint() const
 {
 	QSize s( size() );
 
-	if(orientation() == KGameProgress::Vertical) {
+	if(orientation() == Qt::Vertical) {
 		s.setWidth(24);
 	} else {
 		s.setHeight(24);
@@ -171,13 +173,13 @@ QSize KGameProgress::minimumSizeHint() const
 
 QSizePolicy KGameProgress::sizePolicy() const
 {
-	if ( orientation()==KGameProgress::Vertical )
+	if ( orientation()==Qt::Vertical )
 		return QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Expanding );
 	else
 		return QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
 }
 
-KGameProgress::Orientation KGameProgress::orientation() const
+Qt::Orientation KGameProgress::orientation() const
 {
 	return orient;
 }
@@ -213,13 +215,13 @@ void KGameProgress::styleChange(QStyle&)
 
 void KGameProgress::adjustStyle()
 {
-	switch (style().styleHint(QStyle::SH_GUIStyle)) {
-		case WindowsStyle:
-			setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
+	switch (style()->styleHint(QStyle::SH_GUIStyle)) {
+		case Qt::WindowsStyle:
+			setFrameStyle(Q3Frame::WinPanel | Q3Frame::Sunken);
 			break;
-		case MotifStyle:
+		case Qt::MotifStyle:
 		default:
-			setFrameStyle(QFrame::Panel | QFrame::Sunken);
+			setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
 			setLineWidth( 2 );
 			break;
 	}
@@ -230,7 +232,7 @@ void KGameProgress::paletteChange( const QPalette &p )
 {
 	// This never gets called for global color changes 
 	// because we call setPalette() ourselves.
-	QFrame::paletteChange(p);
+	Q3Frame::paletteChange(p);
 }
 
 void KGameProgress::drawText(QPainter *p)
@@ -251,10 +253,10 @@ void KGameProgress::drawText(QPainter *p)
 	font.setBold(true);
 	p->setFont(font);
 	//p->setRasterOp(XorROP);
-	p->drawText(r, AlignCenter, s);
+	p->drawText(r, Qt::AlignCenter, s);
 	p->setClipRegion( fr );
 	p->setPen(bar_text_color);
-	p->drawText(r, AlignCenter, s);
+	p->drawText(r, Qt::AlignCenter, s);
 }
 
 void KGameProgress::drawContents(QPainter *p)
@@ -271,7 +273,7 @@ void KGameProgress::drawContents(QPainter *p)
 
 	switch (bar_style) {
 		case Solid:
-			if (orient == Horizontal) {
+			if (orient == Qt::Horizontal) {
 				fr.setWidth(recalcValue(cr.width()));
 				er.setLeft(fr.right() + 1);
 			} else {
@@ -289,7 +291,7 @@ void KGameProgress::drawContents(QPainter *p)
 		case Blocked:
 			const int margin = 2;
 			int max, num, dx, dy;
-			if (orient == Horizontal) {
+			if (orient == Qt::Horizontal) {
 				fr.setHeight(cr.height() - 2 * margin);
 				fr.setWidth((int)(0.67 * fr.height()));
 				fr.moveTopLeft(QPoint(cr.left() + margin, cr.top() + margin));
@@ -315,7 +317,7 @@ void KGameProgress::drawContents(QPainter *p)
 			}
 			
 			if (num != max) {
-				if (orient == Horizontal)
+				if (orient == Qt::Horizontal)
 					er.setLeft(fr.right() + 1);
 				else
 					er.setBottom(fr.bottom() + 1);

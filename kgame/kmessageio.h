@@ -24,15 +24,15 @@
 #ifndef _KMESSAGEIO_H_
 #define _KMESSAGEIO_H_
 
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qhostaddress.h>
 #include <qobject.h>
 #include <qstring.h>
-#include <qptrqueue.h>
+#include <q3ptrqueue.h>
 #include <qfile.h>
 #include <kdebug.h>
 
-class QSocket;
+class Q3Socket;
 class KProcess;
 //class QFile;
 
@@ -206,7 +206,7 @@ public:
     together with this KMessageSocket object. (Use 0 as parent for the QSocket
     object t ensure it is not deleted.)
   */
-  KMessageSocket (QSocket *socket, QObject *parent = 0, const char *name = 0);
+  KMessageSocket (Q3Socket *socket, QObject *parent = 0, const char *name = 0);
 
   /**
     Uses the socket specified by the socket descriptor socketFD to do the
@@ -266,7 +266,7 @@ protected slots:
 
 protected:
   void initSocket ();
-  QSocket *mSocket;
+  Q3Socket *mSocket;
   bool mAwaitingHeader;
   Q_UINT32 mNextBlockLength;
 
@@ -377,7 +377,7 @@ class KMessageProcess : public KMessageIO
   private:
     QString mProcessName;
     KProcess *mProcess;
-    QPtrQueue <QByteArray> mQueue;
+    Q3PtrQueue <QByteArray> mQueue;
     QByteArray *mSendBuffer;
     QByteArray mReceiveBuffer;
     unsigned int mReceiveCount;

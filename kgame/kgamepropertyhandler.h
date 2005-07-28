@@ -22,7 +22,7 @@
 #define __KGAMEPROPERTYHANDLER_H_
 
 #include <qobject.h>
-#include <qintdict.h>
+#include <q3intdict.h>
 
 #include "kgameproperty.h"
 #include <kdemacros.h>
@@ -277,7 +277,7 @@ public:
 	/**
 	 * Reference to the internal dictionary
 	 **/
-	QIntDict<KGamePropertyBase> &dict() const;
+	Q3IntDict<KGamePropertyBase> &dict() const;
 
 	/**
 	 * In several situations you just want to have a QString of a

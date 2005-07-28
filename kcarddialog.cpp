@@ -16,20 +16,21 @@
     the Free Software Foundation, Inc., 51 Franklin Steet, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-/*
-    $Id$
-*/
 
 #include <stdio.h>
 #include <assert.h>
 
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
 #include <qslider.h>
-#include <qwmatrix.h>
+#include <qmatrix.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include <kapplication.h>
 #include <klocale.h>
@@ -98,8 +99,8 @@ public:
     QPixmap cPreviewPix;
     QLabel* cPreview;
 
-    QMap<QIconViewItem*, QString> deckMap;
-    QMap<QIconViewItem*, QString> cardMap;
+    QMap<Q3IconViewItem*, QString> deckMap;
+    QMap<Q3IconViewItem*, QString> cardMap;
     QMap<QString, QString> helpMap;
 
     //set query variables
@@ -264,7 +265,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
   QHBoxLayout* topLayout = new QHBoxLayout(plainPage(), spacingHint());
   QVBoxLayout* cardLayout = new QVBoxLayout(topLayout);
   QString path, file;
-  QWMatrix m;
+  QMatrix m;
   m.scale(0.8,0.8);
 
   setInitialSize(QSize(600,400));
@@ -274,7 +275,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     QHBoxLayout* layout = new QHBoxLayout(cardLayout);
 
     // Deck iconview
-    QGroupBox* grp1 = new QGroupBox(1, Horizontal, i18n("Choose Backside"), plainPage());
+    Q3GroupBox* grp1 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Backside"), plainPage());
     layout->addWidget(grp1);
 
     d->deckIconView = new KIconView(grp1,"decks");
@@ -285,8 +286,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
     */
     d->deckIconView->setGridX(82);
     d->deckIconView->setGridY(106);
-    d->deckIconView->setSelectionMode(QIconView::Single);
-    d->deckIconView->setResizeMode(QIconView::Adjust);
+    d->deckIconView->setSelectionMode(Q3IconView::Single);
+    d->deckIconView->setResizeMode(Q3IconView::Adjust);
     d->deckIconView->setMinimumWidth(360);
     d->deckIconView->setMinimumHeight(170);
     d->deckIconView->setWordWrapIconText(false);
@@ -294,12 +295,12 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
     // deck select
     QVBoxLayout* l = new QVBoxLayout(layout);
-    QGroupBox* grp3 = new QGroupBox(i18n("Backside"), plainPage());
+    Q3GroupBox* grp3 = new Q3GroupBox(i18n("Backside"), plainPage());
     grp3->setFixedSize(100, 130);
-    l->addWidget(grp3, 0, AlignTop|AlignHCenter);
+    l->addWidget(grp3, 0, Qt::AlignTop|Qt::AlignHCenter);
     d->deckLabel = new QLabel(grp3);
     d->deckLabel->setText(i18n("empty"));
-    d->deckLabel->setAlignment(AlignHCenter|AlignVCenter);
+    d->deckLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     d->deckLabel->setGeometry(10, 20, 80, 90);
 
     d->randomDeck = new QCheckBox(plainPage());
@@ -307,26 +308,26 @@ void KCardDialog::setupDialog(bool showResizeBox)
     connect(d->randomDeck, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomDeckToggled(bool)));
     d->randomDeck->setText(i18n("Random backside"));
-    l->addWidget(d->randomDeck, 0, AlignTop|AlignHCenter);
+    l->addWidget(d->randomDeck, 0, Qt::AlignTop|Qt::AlignHCenter);
 
     d->globalDeck = new QCheckBox(plainPage());
     d->globalDeck->setChecked(false);
     d->globalDeck->setText(i18n("Use global backside"));
-    l->addWidget(d->globalDeck, 0, AlignTop|AlignHCenter);
+    l->addWidget(d->globalDeck, 0, Qt::AlignTop|Qt::AlignHCenter);
 
     QPushButton* b = new QPushButton(i18n("Make Backside Global"), plainPage());
     connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalDeck()));
-    l->addWidget(b, 0, AlignTop|AlignHCenter);
+    l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    connect(d->deckIconView,SIGNAL(clicked(QIconViewItem *)),
-            this,SLOT(slotDeckClicked(QIconViewItem *)));
+    connect(d->deckIconView,SIGNAL(clicked(Q3IconViewItem *)),
+            this,SLOT(slotDeckClicked(Q3IconViewItem *)));
   }
 
   if (! (flags() & NoCards))
   {
     // Cards iconview
     QHBoxLayout* layout = new QHBoxLayout(cardLayout);
-    QGroupBox* grp2 = new QGroupBox(1, Horizontal, i18n("Choose Frontside"), plainPage());
+    Q3GroupBox* grp2 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Frontside"), plainPage());
     layout->addWidget(grp2);
 
     d->cardIconView =new KIconView(grp2,"cards");
@@ -336,7 +337,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     */
     d->cardIconView->setGridX(82);
     d->cardIconView->setGridY(106);
-    d->cardIconView->setResizeMode(QIconView::Adjust);
+    d->cardIconView->setResizeMode(Q3IconView::Adjust);
     d->cardIconView->setMinimumWidth(360);
     d->cardIconView->setMinimumHeight(170);
     d->cardIconView->setWordWrapIconText(false);
@@ -344,12 +345,12 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
     // Card select
     QVBoxLayout* l = new QVBoxLayout(layout);
-    QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), plainPage());
+    Q3GroupBox* grp4 = new Q3GroupBox(i18n("Frontside"), plainPage());
     grp4->setFixedSize(100, 130);
-    l->addWidget(grp4, 0, AlignTop|AlignHCenter);
+    l->addWidget(grp4, 0, Qt::AlignTop|Qt::AlignHCenter);
     d->cardLabel = new QLabel(grp4);
     d->cardLabel->setText(i18n("empty"));
-    d->cardLabel->setAlignment(AlignHCenter|AlignVCenter);
+    d->cardLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     d->cardLabel->setGeometry(10, 20, 80, 90 );
 
     d->randomCardDir = new QCheckBox(plainPage());
@@ -357,19 +358,19 @@ void KCardDialog::setupDialog(bool showResizeBox)
     connect(d->randomCardDir, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomCardDirToggled(bool)));
     d->randomCardDir->setText(i18n("Random frontside"));
-    l->addWidget(d->randomCardDir, 0, AlignTop|AlignHCenter);
+    l->addWidget(d->randomCardDir, 0, Qt::AlignTop|Qt::AlignHCenter);
 
     d->globalCardDir = new QCheckBox(plainPage());
     d->globalCardDir->setChecked(false);
     d->globalCardDir->setText(i18n("Use global frontside"));
-    l->addWidget(d->globalCardDir, 0, AlignTop|AlignHCenter);
+    l->addWidget(d->globalCardDir, 0, Qt::AlignTop|Qt::AlignHCenter);
 
     QPushButton* b = new QPushButton(i18n("Make Frontside Global"), plainPage());
     connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalCardDir()));
-    l->addWidget(b, 0, AlignTop|AlignHCenter);
+    l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    connect(d->cardIconView,SIGNAL(clicked(QIconViewItem *)),
-            this,SLOT(slotCardClicked(QIconViewItem *)));
+    connect(d->cardIconView,SIGNAL(clicked(Q3IconViewItem *)),
+            this,SLOT(slotCardClicked(Q3IconViewItem *)));
   }
 
   // Insert deck icons
@@ -423,7 +424,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // larger but i want the complete pixmap to be displayed. the dialog is not
     // resized if you make the pixmap smaller again.
     QVBoxLayout* layout = new QVBoxLayout(topLayout);
-    QGroupBox* grp = new QGroupBox(1, Horizontal, i18n("Resize Cards"), plainPage());
+    Q3GroupBox* grp = new Q3GroupBox(1, Qt::Horizontal, i18n("Resize Cards"), plainPage());
     layout->setResizeMode(QLayout::Fixed);
     layout->addWidget(grp);
     QWidget* box = new QWidget(grp);
@@ -431,20 +432,20 @@ void KCardDialog::setupDialog(bool showResizeBox)
     QVBoxLayout* boxLayout = new QVBoxLayout(hbox);
     hbox->addStretch(0);
 
-    d->scaleSlider = new QSlider(1, SLIDER_MAX, 1, (-1000+SLIDER_MIN+SLIDER_MAX), Horizontal, box);
+    d->scaleSlider = new QSlider(1, SLIDER_MAX, 1, (-1000+SLIDER_MIN+SLIDER_MAX), Qt::Horizontal, box);
     d->scaleSlider->setMinValue(SLIDER_MIN);
     connect(d->scaleSlider, SIGNAL(valueChanged(int)), this, SLOT(slotCardResized(int)));
-    boxLayout->addWidget(d->scaleSlider, 0, AlignLeft);
+    boxLayout->addWidget(d->scaleSlider, 0, Qt::AlignLeft);
 
     QPushButton* b = new QPushButton(i18n("Default Size"), box);
     connect(b, SIGNAL(pressed()), this, SLOT(slotDefaultSize()));
-    boxLayout->addWidget(b, 0, AlignLeft);
+    boxLayout->addWidget(b, 0, Qt::AlignLeft);
 
     QLabel* l = new QLabel(i18n("Preview:"), box);
     boxLayout->addWidget(l);
     d->cPreviewPix.load(getDefaultDeck());
     d->cPreview = new QLabel(box);
-    boxLayout->addWidget(d->cPreview, 0, AlignCenter|AlignVCenter);
+    boxLayout->addWidget(d->cPreview, 0, Qt::AlignCenter|Qt::AlignVCenter);
 
     slotCardResized(d->scaleSlider->value());
   }
@@ -459,7 +460,7 @@ void KCardDialog::insertCardIcons()
 
     // We shrink the icons a little
     //
-    QWMatrix m;
+    QMatrix m;
     m.scale(0.8,0.8);
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
@@ -474,7 +475,7 @@ void KCardDialog::insertCardIcons()
             continue;
 
         QString name=cfg.readEntry("Name", i18n("unnamed"));
-        QIconViewItem *item= new QIconViewItem(d->cardIconView, name, pixmap);
+        Q3IconViewItem *item= new Q3IconViewItem(d->cardIconView, name, pixmap);
 
         item->setDragEnabled(false);
         item->setDropEnabled(false);
@@ -495,7 +496,7 @@ void KCardDialog::insertDeckIcons()
     QString label;
 
     // We shrink the icons a little
-    QWMatrix m;
+    QMatrix m;
     m.scale(0.8,0.8);
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
@@ -509,7 +510,7 @@ void KCardDialog::insertDeckIcons()
 
         cfg.setGroup(QString::fromLatin1("KDE Cards"));
         QString name=cfg.readEntry("Name", i18n("unnamed"));
-        QIconViewItem *item= new QIconViewItem(d->deckIconView,name, pixmap);
+        Q3IconViewItem *item= new Q3IconViewItem(d->deckIconView,name, pixmap);
 
         item->setDragEnabled(false);
         item->setDropEnabled(false);
@@ -537,7 +538,7 @@ KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
     d->cFlags = mFlags;
 }
 
-void KCardDialog::slotDeckClicked(QIconViewItem *item)
+void KCardDialog::slotDeckClicked(Q3IconViewItem *item)
 {
     if (item && item->pixmap())
     {
@@ -547,7 +548,7 @@ void KCardDialog::slotDeckClicked(QIconViewItem *item)
         setDeck(d->deckMap[item]);
     }
 }
-void KCardDialog::slotCardClicked(QIconViewItem *item)
+void KCardDialog::slotCardClicked(Q3IconViewItem *item)
 {
     if (item && item->pixmap())
     {
@@ -580,7 +581,7 @@ QString KCardDialog::getRandomDeck()
         return QString::null;
 
     int d = KApplication::random() % list.count();
-    return getDeckName(*list.at(d));
+    return getDeckName(list.at(d));
 }
 
 QString KCardDialog::getRandomCardDir()
@@ -592,7 +593,7 @@ QString KCardDialog::getRandomCardDir()
         return QString::null;
 
     int d = KApplication::random() % list.count();
-    QString entry = *list.at(d);
+    QString entry = list.at(d);
     return entry.left(entry.length() - strlen("index.desktop"));
 }
 
@@ -701,7 +702,7 @@ void KCardDialog::slotCardResized(int s)
  s *= -1;
  s += (SLIDER_MIN + SLIDER_MAX);
 
- QWMatrix m;
+ QMatrix m;
  double scale = (double)1000/s;
  m.scale(scale, scale);
  QPixmap pix = d->cPreviewPix.xForm(m);

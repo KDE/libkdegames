@@ -19,13 +19,13 @@
 #ifndef __KCHATBASE_H__
 #define __KCHATBASE_H__
 
-#include <qframe.h>
+#include <q3frame.h>
 #include <qstring.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
 
 #include <kglobalsettings.h>
 #include <kdemacros.h>
-class QListBoxItem;
+class Q3ListBoxItem;
 
 class KConfig;
 
@@ -46,7 +46,7 @@ class KChatBaseTextPrivate;
  * will probably some kind of KChatBaseDialog which offers the user the ability
  * to configure things like color and font on the fly.
  **/
-class KChatBaseText : public QListBoxText
+class KChatBaseText : public Q3ListBoxText
 {
 public:
 
@@ -129,11 +129,11 @@ public:
 
 	/**
 	 **/
-	virtual int width(QListBox* ) const;
+	virtual int width(Q3ListBox* ) const;
 
 	/**
 	 **/
-	virtual int height(QListBox* ) const;
+	virtual int height(Q3ListBox* ) const;
 
 protected:
 	/**
@@ -181,7 +181,7 @@ class KChatBasePrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDE_EXPORT KChatBase : public QFrame
+class KDE_EXPORT KChatBase : public Q3Frame
 {
 	Q_OBJECT
 public:
@@ -209,7 +209,7 @@ public:
 	 * string that was set by setFromName or the name of the player
 	 * that was set by setFromPlayer
 	 **/
-	virtual const QString& fromName() const = 0;
+	virtual QString fromName() const = 0;
 
 	/**
 	 * Adds a new entry in the combo box. The default is "send to all
@@ -431,7 +431,7 @@ public slots:
 	 * non-default (maybe nicer ;-) ) behaviour
 	 * @param item The QListBoxItem that is being added
 	 **/
-	virtual void addItem(const QListBoxItem* item);
+	virtual void addItem(const Q3ListBoxItem* item);
 
 
 	/**
@@ -451,7 +451,7 @@ signals:
 	 * Emitted when the user right-clicks on a list item. 
 	 * @see QListBox::rightButtonClicked
 	 **/
-	void rightButtonClicked(QListBoxItem*, const QPoint&);
+	void rightButtonClicked(Q3ListBoxItem*, const QPoint&);
 
 protected:
 	/**
@@ -482,7 +482,7 @@ protected:
 	 * created which shows the message in this format: "fromName: text".
 	 * This should fit most peoples needs but needs further improvements.
 	 **/
-	virtual QListBoxItem* layoutMessage(const QString& fromName, const QString& text);
+	virtual Q3ListBoxItem* layoutMessage(const QString& fromName, const QString& text);
 
 	/**
 	 * Create a QListBoxItem for this message. This does the same as
@@ -491,7 +491,7 @@ protected:
 	 *
 	 * The default implementation just prepends "--- ".
 	 **/
-	virtual QListBoxItem* layoutSystemMessage(const QString& fromName, const QString& text);
+	virtual Q3ListBoxItem* layoutSystemMessage(const QString& fromName, const QString& text);
 
 private slots:
 	/**

@@ -114,7 +114,7 @@ public:
 	 * reimplemented from @ref KChatBase
 	 * @return @ref KPlayer::name() for the player set by @ref setFromPlayer
 	 **/
-	virtual const QString& fromName() const;
+	virtual QString fromName() const;
 
 
 public slots:

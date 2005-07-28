@@ -26,13 +26,16 @@
 
 #include <qlineedit.h>
 #include <qcombobox.h>
-#include <qvbuttongroup.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
 #include <qlabel.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3ValueList>
+#include <Q3VButtonGroup>
 #include <dnssd/servicebrowser.h>
 #include <qpushbutton.h>
-#include <qgrid.h>
+#include <q3grid.h>
 
 class KGameConnectWidgetPrivate
 {
@@ -47,7 +50,7 @@ class KGameConnectWidgetPrivate
 
 	KIntNumInput* mPort;
 	QLineEdit* mHost; //KLineEdit?
-	QVButtonGroup* mButtonGroup;
+	Q3VButtonGroup* mButtonGroup;
 	QComboBox *mClientName;
 	QLabel *mClientNameLabel;
 	DNSSD::ServiceBrowser *mBrowser;
@@ -61,13 +64,13 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  d = new KGameConnectWidgetPrivate;
 
  QVBoxLayout* vb = new QVBoxLayout(this, KDialog::spacingHint());
- d->mButtonGroup = new QVButtonGroup(this);
+ d->mButtonGroup = new Q3VButtonGroup(this);
  vb->addWidget(d->mButtonGroup);
  connect(d->mButtonGroup, SIGNAL(clicked(int)), this, SLOT(slotTypeChanged(int)));
  (void)new QRadioButton(i18n("Create a network game"), d->mButtonGroup);
  (void)new QRadioButton(i18n("Join a network game"), d->mButtonGroup);
 
- QGrid* g = new QGrid(2, this);
+ Q3Grid* g = new Q3Grid(2, this);
  vb->addWidget(g);
  g->setSpacing(KDialog::spacingHint());
  d->mServerNameLabel = new QLabel(i18n("Game name:"), g);
@@ -123,9 +126,10 @@ void KGameConnectWidget::slotGamesFound()
  if (!d->mClientName->count()) autoselect=true;
  d->mClientName->clear();
  QStringList names;
- QValueList<DNSSD::RemoteService::Ptr>::ConstIterator itEnd = d->mBrowser->services().end();
- for (QValueList<DNSSD::RemoteService::Ptr>::ConstIterator it = d->mBrowser->services().begin();
-  it!=itEnd; ++it) names << (*it)->serviceName();
+ 
+ QListIterator<DNSSD::RemoteService::Ptr> it(d->mBrowser->services());
+ while (it.hasNext())
+  names << it.next()->serviceName();
  d->mClientName->insertStringList(names);
  if (autoselect && d->mClientName->count()) slotGameSelected(0);
 }

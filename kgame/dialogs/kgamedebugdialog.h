@@ -113,7 +113,7 @@ protected:
 	/**
 	 * Remove a player from the list
 	 **/
-	void removePlayer(QListBoxItem* item);
+	void removePlayer(Q3ListBoxItem* item);
 
 	/**
 	 * @return Whether messages with this msgid shall be displayed or not
@@ -126,7 +126,7 @@ protected slots:
 	 * @param item The @ref QListBoxItem of the player to be updated. Note
 	 * that the text of this item MUST be the ID of the player
 	 **/
-	void slotUpdatePlayerData(QListBoxItem* item);
+	void slotUpdatePlayerData(Q3ListBoxItem* item);
 
 	void slotShowId();
 	void slotHideId();

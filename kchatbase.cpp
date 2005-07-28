@@ -29,6 +29,12 @@
 #include <qlayout.h>
 #include <qcombobox.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <Q3ValueList>
+#include <QVBoxLayout>
 
 class KChatBaseTextPrivate
 {
@@ -47,14 +53,14 @@ public:
 };
 
 
-KChatBaseText::KChatBaseText(const QString& name, const QString& message) : QListBoxText()
+KChatBaseText::KChatBaseText(const QString& name, const QString& message) : Q3ListBoxText()
 {
  init();
  setName(name);
  setMessage(message);
 }
 
-KChatBaseText::KChatBaseText(const QString& message) : QListBoxText()
+KChatBaseText::KChatBaseText(const QString& message) : Q3ListBoxText()
 {
  init();
  setMessage(message);
@@ -126,7 +132,7 @@ void KChatBaseText::paint(QPainter* painter)
  painter->drawText(3 + QFontMetrics(nameFont()).width(name()), fm.ascent() + fm.leading()/2, message());
 }
 
-int KChatBaseText::width(QListBox* lb) const
+int KChatBaseText::width(Q3ListBox* lb) const
 {
  int w = 0;
  if (lb) {
@@ -138,7 +144,7 @@ int KChatBaseText::width(QListBox* lb) const
  return QMAX(w, QApplication::globalStrut().width());
 }
 
-int KChatBaseText::height(QListBox* lb) const
+int KChatBaseText::height(Q3ListBox* lb) const
 {
  int h = 0;
  if (lb) {
@@ -168,13 +174,13 @@ public:
 		mAcceptMessage = true;
 		mMaxItems = -1;
 	}
-	QListBox* mBox;
+	Q3ListBox* mBox;
 	KLineEdit* mEdit;
 	QComboBox* mCombo;
 	bool mAcceptMessage;
 	int mMaxItems;
 
-	QValueList<int> mIndex2Id;
+	Q3ValueList<int> mIndex2Id;
 
 	QFont mNameFont;
 	QFont mMessageFont;
@@ -182,7 +188,7 @@ public:
 	QFont mSystemMessageFont;
 };
 
-KChatBase::KChatBase(QWidget* parent, bool noComboBox) : QFrame(parent)
+KChatBase::KChatBase(QWidget* parent, bool noComboBox) : Q3Frame(parent)
 {
  init(noComboBox); 
 }
@@ -205,15 +211,15 @@ void KChatBase::init(bool noComboBox)
  
  QVBoxLayout* l = new QVBoxLayout(this);
 
- d->mBox = new QListBox(this);
- connect(d->mBox, SIGNAL(rightButtonClicked(QListBoxItem*, const QPoint&)), 
-		this, SIGNAL(rightButtonClicked(QListBoxItem*, const QPoint&)));
+ d->mBox = new Q3ListBox(this);
+ connect(d->mBox, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)), 
+		this, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)));
  l->addWidget(d->mBox);
- d->mBox->setVScrollBarMode(QScrollView::AlwaysOn);
- d->mBox->setHScrollBarMode(QScrollView::AlwaysOff);
- d->mBox->setFocusPolicy(QWidget::NoFocus);
+ d->mBox->setVScrollBarMode(Q3ScrollView::AlwaysOn);
+ d->mBox->setHScrollBarMode(Q3ScrollView::AlwaysOff);
+ d->mBox->setFocusPolicy(Qt::NoFocus);
 // d->mBox->setSelectionMode(QListBox::NoSelection);
- d->mBox->setSelectionMode(QListBox::Single);
+ d->mBox->setSelectionMode(Q3ListBox::Single);
 
  l->addSpacing(5);
 
@@ -273,7 +279,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
  } else {
 	d->mIndex2Id.insert(d->mIndex2Id.at(index), id);
  }
- if (d->mIndex2Id.count() != (uint)d->mCombo->count()) {
+ if (d->mIndex2Id.count() != d->mCombo->count()) {
 	kdError(11000) << "KChatBase: internal ERROR - local IDs do not match combo box entries!" << endl;
  }
  return true;
@@ -336,7 +342,7 @@ int KChatBase::nextId() const
  return i;
 }
 
-void KChatBase::addItem(const QListBoxItem* text)
+void KChatBase::addItem(const Q3ListBoxItem* text)
 {
  d->mBox->insertItem(text); 
  int index = d->mBox->count() -1;
@@ -357,10 +363,10 @@ void KChatBase::addSystemMessage(const QString& fromName, const QString& text)
  addItem(layoutSystemMessage(fromName, text));
 }
 
-QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
+Q3ListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
 {
  //TODO: KChatBaseConfigure? - e.g. color
- QListBoxItem* message;
+ Q3ListBoxItem* message;
  if (text.startsWith("/me ")) {
 	// replace "/me" by a nice star. leave one space after the star
 	QPixmap pix;
@@ -368,18 +374,18 @@ QListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& t
 	
 	//TODO KChatBasePixmap? Should change the font here!
 	
-	message = (QListBoxItem*)new QListBoxPixmap(pix, i18n("%1 %2").arg(fromName).arg(text.mid(3)));
+	message = (Q3ListBoxItem*)new Q3ListBoxPixmap(pix, i18n("%1 %2").arg(fromName).arg(text.mid(3)));
  } else {
 	// the text is not edited in any way. just return an item
 	KChatBaseText* m = new KChatBaseText(fromName, text);
 	m->setNameFont(&d->mNameFont);
 	m->setMessageFont(&d->mMessageFont);
-	message = (QListBoxItem*)m;
+	message = (Q3ListBoxItem*)m;
  }
  return message;
 }
 
-QListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QString& text)
+Q3ListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QString& text)
 {
  //TODO: KChatBaseConfigure? - e.g. color
 
@@ -387,7 +393,7 @@ QListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QStr
  KChatBaseText* m = new KChatBaseText(i18n("--- %1").arg(fromName), text);
  m->setNameFont(&d->mSystemNameFont);
  m->setMessageFont(&d->mSystemMessageFont);
- return (QListBoxItem*)m;
+ return (Q3ListBoxItem*)m;
 }
 
 void KChatBase::slotReturnPressed(const QString& text)

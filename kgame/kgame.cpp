@@ -38,8 +38,10 @@
 
 #include <qbuffer.h>
 #include <qtimer.h>
-#include <qptrqueue.h>
+#include <q3ptrqueue.h>
 #include <qfile.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 #include <klocale.h>
 #include <krandomsequence.h>
@@ -60,7 +62,7 @@ public:
     }
 
     int mUniquePlayerNumber;
-    QPtrQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
+    Q3PtrQueue<KPlayer> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
     KRandomSequence* mRandom;
     KGame::GamePolicy mPolicy;
     KGameSequence* mGameSequence;
@@ -76,7 +78,7 @@ public:
     KGamePropertyInt mMaxPlayer;
     KGamePropertyUInt mMinPlayer;
     KGamePropertyInt mGameStatus; // Game running?
-    QValueList<int> mInactiveIdList;
+    Q3ValueList<int> mInactiveIdList;
 
 };
 
@@ -166,7 +168,7 @@ bool KGame::load(QString filename,bool reset)
     return false;
   }
   QFile f(filename);
-  if (!f.open(IO_ReadOnly))
+  if (!f.open(QIODevice::ReadOnly))
   {
     return false;
   }
@@ -271,7 +273,7 @@ bool KGame::save(QString filename,bool saveplayers)
    return false;
  }
  QFile f(filename);
- if (!f.open(IO_WriteOnly))
+ if (!f.open(QIODevice::WriteOnly))
  {
    return false;
  }
@@ -385,14 +387,14 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
 
 KPlayer * KGame::findPlayer(Q_UINT32 id) const
 {
- for (QPtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it)
+ for (Q3PtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it)
  {
    if (it.current()->id() == id)
    {
      return it.current();
    }
  }
- for (QPtrListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it)
+ for (Q3PtrListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it)
  {
    if (it.current()->id() == id)
    {
@@ -439,7 +441,7 @@ void KGame::addPlayer(KPlayer* newplayer)
  }
 
  QByteArray buffer;
- QDataStream stream(buffer,IO_WriteOnly);
+ QDataStream stream(&buffer,QIODevice::WriteOnly);
  // We distinguis here what policy we have
  if (policy()==PolicyLocal || policy()==PolicyDirty)
  {
@@ -1050,7 +1052,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
   int i;
   stream >> cnt;
 
-  QValueList<int> inactivateIds;
+  Q3ValueList<int> inactivateIds;
 
   KGamePlayerList newPlayerList;
   newPlayerList.setAutoDelete(true);
@@ -1135,7 +1137,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
 
   kdDebug(11001) << "Alltogether deactivated " << inactivateIds.count() << " players" << endl;
 
-  QValueList<int>::Iterator it;
+  Q3ValueList<int>::Iterator it;
   for ( it = inactivateIds.begin(); it != inactivateIds.end(); ++it )
   {
     int pid=*it;
@@ -1183,7 +1185,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
 
   // Save the game over the network
   QByteArray bufferS;
-  QDataStream streamS(bufferS,IO_WriteOnly);
+  QDataStream streamS(&bufferS,QIODevice::WriteOnly);
   // Save game over netowrk and save players
   savegame(streamS,true,true);
   sendSystemMessage(streamS,KGameMessage::IdGameLoad,sender);
@@ -1198,7 +1200,7 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
 void KGame::setupGame(Q_UINT32 sender)
 {
   QByteArray bufferS;
-  QDataStream streamS(bufferS,IO_WriteOnly);
+  QDataStream streamS(&bufferS,QIODevice::WriteOnly);
 
   // Deactivate all players
   KGamePlayerList mTmpList(d->mPlayerList); // we need copy otherwise the removal crashes
@@ -1207,7 +1209,7 @@ void KGame::setupGame(Q_UINT32 sender)
 
   streamS << cnt;
 
-  QPtrListIterator<KPlayer> it(mTmpList);
+  Q3PtrListIterator<KPlayer> it(mTmpList);
   KPlayer *player;
   while (it.current())
   {
@@ -1354,9 +1356,9 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool /*broken*/) // server 
 
  // Now add inactive players - sequence should be ok
  // TODO remove players from removed game
- for (unsigned int idx=0;idx<d->mInactiveIdList.count();idx++)
+ for (int idx=0;idx<d->mInactiveIdList.count();idx++)
  {
-   QValueList<int>::Iterator it1 = d->mInactiveIdList.at(idx);
+   Q3ValueList<int>::Iterator it1 = d->mInactiveIdList.at(idx);
    player = findPlayer(*it1);
    if (((int)playerCount() < maxPlayers() || maxPlayers() < 0) && player && KGameMessage::rawGameId(*it1) != clientID)
    {
@@ -1383,7 +1385,7 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  }
 
  QByteArray buffer;
- QDataStream streamGS(buffer,IO_WriteOnly);
+ QDataStream streamGS(&buffer,QIODevice::WriteOnly);
 
  // write Game setup specific data
  //streamGS << (Q_INT32)maxPlayers();
@@ -1417,7 +1419,7 @@ bool KGame::sendGroupMessage(const QDataStream &msg, int msgid, Q_UINT32 sender,
 bool KGame::sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, const QString& group)
 {
  QByteArray buffer;
- QDataStream stream(buffer, IO_WriteOnly);
+ QDataStream stream(&buffer, QIODevice::WriteOnly);
  stream << msg;
  return sendGroupMessage(stream, msgid, sender, group);
 }
@@ -1459,11 +1461,11 @@ void KGame::setPolicy(GamePolicy p,bool recursive)
    dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
 
    // Set all KPLayer (active or inactive) property policy
-   for (QPtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it)
+   for (Q3PtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it)
    {
      it.current()->dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
    }
-   for (QPtrListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it)
+   for (Q3PtrListIterator<KPlayer> it(d->mInactivePlayerList); it.current(); ++it)
    {
      it.current()->dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
    }

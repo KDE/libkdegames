@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <qmap.h>
+
 #include <klocale.h>
 #include <kdebug.h>
 
@@ -58,7 +60,7 @@ void KChat::init()
 
 void KChat::setFromNickname(const QString& n)
 { d->mFromId = addPlayer(n); }
-const QString& KChat::fromName() const
+QString KChat::fromName() const
 { return player(fromId()); }
 void KChat::setAutoAddMessages(bool add) 
 { d->mAutoAddMessages = add; }

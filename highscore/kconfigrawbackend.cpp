@@ -28,7 +28,7 @@ KConfigRawBackEnd::KConfigRawBackEnd(KConfigBase *_config, int fd)
     : KConfigINIBackEnd(_config, QString::null, "config", false),
       _fd(fd), _stream(0)
 {
-    _file.open(IO_ReadOnly, _fd);
+    _file.open(QIODevice::ReadOnly, _fd);
 }
 
 KConfigRawBackEnd::~KConfigRawBackEnd()

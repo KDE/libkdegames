@@ -34,6 +34,8 @@
 #include <kdebug.h>
 
 #include <qbuffer.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 
 class KGameNetworkPrivate
@@ -137,7 +139,7 @@ void KGameNetwork::setMaster()
             this, SIGNAL(signalClientDisconnected(Q_UINT32, bool)));
 
    // broacast and direct messages are treated equally on receive.
-   connect (d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const QValueList<Q_UINT32>&)),
+   connect (d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const Q3ValueList<Q_UINT32>&)),
             d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)));
 
  } else {
@@ -276,8 +278,8 @@ void KGameNetwork::disconnect()
  kdDebug(11001) << k_funcinfo << endl;
  stopServerConnection();
  if (d->mMessageServer) {
-    QValueList <Q_UINT32> list=d->mMessageServer->clientIDs();
-    QValueList<Q_UINT32>::Iterator it;
+    Q3ValueList <Q_UINT32> list=d->mMessageServer->clientIDs();
+    Q3ValueList<Q_UINT32>::Iterator it;
     for( it = list.begin(); it != list.end(); ++it )
     {
       kdDebug(11001) << "Client id=" << (*it) <<  endl;
@@ -339,7 +341,7 @@ void KGameNetwork::electAdmin(Q_UINT32 clientID)
 	return;
  }
  QByteArray buffer;
- QDataStream stream(buffer,IO_WriteOnly);
+ QDataStream stream(&buffer,QIODevice::WriteOnly);
  stream << static_cast<Q_UINT32>( KMessageServer::REQ_ADMIN_CHANGE );
  stream << clientID;
  d->mMessageClient->sendServerMessage(buffer);
@@ -352,7 +354,7 @@ void KGameNetwork::setMaxClients(int max)
 	return;
  }
  QByteArray buffer;
- QDataStream stream(buffer,IO_WriteOnly);
+ QDataStream stream(&buffer,QIODevice::WriteOnly);
  stream << static_cast<Q_UINT32>( KMessageServer::REQ_MAX_NUM_CLIENTS );
  stream << (Q_INT32)max;
  d->mMessageClient->sendServerMessage(buffer);
@@ -377,7 +379,7 @@ void KGameNetwork::unlock()
 bool KGameNetwork::sendSystemMessage(int data, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
- QDataStream stream(buffer,IO_WriteOnly);
+ QDataStream stream(&buffer,QIODevice::WriteOnly);
  stream << data;
  return sendSystemMessage(buffer,msgid,receiver,sender);
 }
@@ -385,7 +387,7 @@ bool KGameNetwork::sendSystemMessage(int data, int msgid, Q_UINT32 receiver, Q_U
 bool KGameNetwork::sendSystemMessage(const QString &msg, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
- QDataStream stream(buffer, IO_WriteOnly);
+ QDataStream stream(&buffer, QIODevice::WriteOnly);
  stream << msg;
  return sendSystemMessage(buffer, msgid, receiver, sender);
 }
@@ -396,7 +398,7 @@ bool KGameNetwork::sendSystemMessage(const QDataStream &msg, int msgid, Q_UINT32
 bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
- QDataStream stream(buffer,IO_WriteOnly);
+ QDataStream stream(&buffer,QIODevice::WriteOnly);
  if (!sender) {
    sender = gameId();
  }
@@ -450,7 +452,7 @@ bool KGameNetwork::sendMessage(const QByteArray &msg, int msgid, Q_UINT32 receiv
 void KGameNetwork::sendError(int error,const QByteArray& message, Q_UINT32 receiver, Q_UINT32 sender)
 {
  QByteArray buffer;
- QDataStream stream(buffer,IO_WriteOnly);
+ QDataStream stream(&buffer,QIODevice::WriteOnly);
  stream << (Q_INT32) error;
  stream.writeRawBytes(message.data(), message.size());
  sendSystemMessage(stream,KGameMessage::IdError,receiver,sender);
@@ -460,7 +462,7 @@ void KGameNetwork::sendError(int error,const QByteArray& message, Q_UINT32 recei
 // ----------------- receive messages from the network
 void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, Q_UINT32 clientID)
 {
- QDataStream stream(receiveBuffer, IO_ReadOnly);
+ QDataStream stream(receiveBuffer);
  int msgid;
  Q_UINT32 sender; // the id of the KGame/KPlayer who sent the message
  Q_UINT32 receiver; // the id of the KGame/KPlayer the message is for 

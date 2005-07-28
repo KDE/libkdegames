@@ -27,10 +27,14 @@ this software.
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qwidgetstack.h>
+#include <q3widgetstack.h>
 #include <qtimer.h>
 #include <qevent.h>
-#include <qptrvector.h>
+#include <q3ptrvector.h>
+//Added by qt3to4:
+#include <QGridLayout>
+#include <QKeyEvent>
+#include <Q3PtrList>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -42,12 +46,12 @@ this software.
 class KScoreDialog::KScoreDialogPrivate
 { 
 public:  
-   QPtrList<FieldInfo> scores;
+   Q3PtrList<FieldInfo> scores;
    QWidget *page;
    QGridLayout *layout;
    QLineEdit *edit;
-   QPtrVector<QWidgetStack> stack;
-   QPtrVector<QLabel> labels;
+   Q3PtrVector<Q3WidgetStack> stack;
+   Q3PtrVector<QLabel> labels;
    QLabel *commentLabel;
    QString comment;
    int fields;
@@ -130,7 +134,7 @@ void KScoreDialog::setupDialog()
    d->layout->addRowSpacing(4, 15);
 
    d->commentLabel = new QLabel(d->page);
-   d->commentLabel->setAlignment(AlignVCenter | AlignHCenter);
+   d->commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
    d->layout->addMultiCellWidget(d->commentLabel, 1, 1, 0, d->nrCols-1);
 
    QFont bold = font();
@@ -149,12 +153,12 @@ void KScoreDialog::setupDialog()
          d->layout->addColSpacing(d->col[field], 50);
 
          label = new QLabel(d->header[field], d->page);
-         d->layout->addWidget(label, 3, d->col[field], field <= Name ? AlignLeft : AlignRight);
+         d->layout->addWidget(label, 3, d->col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
          label->setFont(bold);
       }
    }
 
-   KSeparator *sep = new KSeparator(Horizontal, d->page);
+   KSeparator *sep = new KSeparator(Qt::Horizontal, d->page);
    d->layout->addMultiCellWidget(sep, 4, 4, 0, d->nrCols-1);
 
    d->labels.resize(d->nrCols * 10);
@@ -169,7 +173,7 @@ void KScoreDialog::setupDialog()
       d->layout->addWidget(label, i+4, 0);
       if (d->fields & Name)
       {
-         QWidgetStack *stack = new QWidgetStack(d->page);
+         Q3WidgetStack *stack = new Q3WidgetStack(d->page);
          d->stack.insert(i-1, stack);
          d->layout->addWidget(stack, i+4, d->col[Name]);
          label = new QLabel(d->page);
@@ -183,7 +187,7 @@ void KScoreDialog::setupDialog()
          {
            label = new QLabel(d->page);
            d->labels.insert((i-1)*d->nrCols + d->col[field], label);
-           d->layout->addWidget(label, i+4, d->col[field], AlignRight);
+           d->layout->addWidget(label, i+4, d->col[field], Qt::AlignRight);
          }
       }
    }
@@ -233,7 +237,7 @@ void KScoreDialog::aboutToShow()
       {
          if (d->newName == i)
          {
-           QWidgetStack *stack = d->stack[i-1];
+           Q3WidgetStack *stack = d->stack[i-1];
            d->edit = new QLineEdit(d->player, stack);
            d->edit->setMinimumWidth(40);
            stack->addWidget(d->edit);
@@ -399,7 +403,7 @@ int KScoreDialog::highScore()
 
 void KScoreDialog::keyPressEvent( QKeyEvent *ev)
 {
-   if ((d->newName != -1) && (ev->key() == Key_Return))
+   if ((d->newName != -1) && (ev->key() == Qt::Key_Return))
    {
        ev->ignore();
        return;

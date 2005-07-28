@@ -33,6 +33,10 @@
 #include <qwidget.h>
 #include <qbuffer.h>
 #include <qtimer.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QKeyEvent>
+#include <QEvent>
 
 #include <stdlib.h>
 
@@ -77,11 +81,11 @@ void KGameIO::notifyTurn(bool b)
   }
   bool sendit=false;
   QByteArray buffer;
-  QDataStream stream(buffer, IO_WriteOnly);
+  QDataStream stream(&buffer, QIODevice::WriteOnly);
   emit signalPrepareTurn(stream, b, this, &sendit);
   if (sendit)
   {
-    QDataStream ostream(buffer,IO_ReadOnly);
+    QDataStream ostream(buffer);
     Q_UINT32 sender = player()->id();  // force correct sender
     kdDebug(11001) << "Prepare turn sendInput" << endl;
     sendInput(ostream, true, sender);
@@ -151,10 +155,10 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
      QKeyEvent *k = (QKeyEvent*)e;
   //   kdDebug(11001) << "KGameKeyIO " << this << " key press/release " <<  k->key() << endl ;
      QByteArray buffer;
-     QDataStream stream(buffer,IO_WriteOnly);
+     QDataStream stream(&buffer,QIODevice::WriteOnly);
      bool eatevent=false;
      emit signalKeyEvent(this,stream,k,&eatevent);
-     QDataStream msg(buffer,IO_ReadOnly);
+     QDataStream msg(buffer);
 
      if (eatevent && sendInput(msg))
      {
@@ -218,11 +222,11 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
      QMouseEvent *k = (QMouseEvent*)e;
      // kdDebug(11001) << "KGameMouseIO " << this  << endl ;
      QByteArray buffer;
-     QDataStream stream(buffer,IO_WriteOnly);
+     QDataStream stream(&buffer,QIODevice::WriteOnly);
      bool eatevent=false;
      emit signalMouseEvent(this,stream,k,&eatevent);
 //     kdDebug(11001) << "################# eatevent=" << eatevent << endl;
-     QDataStream msg(buffer,IO_ReadOnly);
+     QDataStream msg(buffer);
      if (eatevent && sendInput(msg))
      {
        return eatevent;
@@ -301,7 +305,7 @@ void KGameProcessIO::initIO(KPlayer *p)
   KGameIO::initIO(p);
   // Send 'hello' to process
   QByteArray buffer;
-  QDataStream stream(buffer, IO_WriteOnly);
+  QDataStream stream(&buffer, QIODevice::WriteOnly);
   Q_INT16 id = p->userId();
   stream << id;
 
@@ -327,7 +331,7 @@ void KGameProcessIO::notifyTurn(bool b)
   }
   bool sendit=true;
   QByteArray buffer;
-  QDataStream stream(buffer,IO_WriteOnly);
+  QDataStream stream(&buffer,QIODevice::WriteOnly);
   stream << (Q_INT8)b;
   emit signalPrepareTurn(stream,b,this,&sendit);
   if (sendit)
@@ -362,7 +366,7 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 rec
   kdDebug(11001) << "=============* ProcessIO (" << msgid << "," << receiver << "," << sender << ") ===========" << endl;
 
   QByteArray buffer;
-  QDataStream ostream(buffer,IO_WriteOnly);
+  QDataStream ostream(&buffer,QIODevice::WriteOnly);
   QBuffer *device=(QBuffer *)stream.device();
   QByteArray data=device->buffer();;
 
@@ -380,7 +384,7 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 rec
 //void KGameProcessIO::clientMessage(const QByteArray& receiveBuffer, Q_UINT32 clientID, const QValueList <Q_UINT32> &recv)
 void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 {
-  QDataStream stream(receiveBuffer,IO_ReadOnly);
+  QDataStream stream(receiveBuffer);
   int msgid;
   Q_UINT32 sender;
   Q_UINT32 receiver;
@@ -394,7 +398,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   QBuffer *buf=(QBuffer *)stream.device();
   QByteArray newbuffer;
   newbuffer.setRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
-  QDataStream ostream(newbuffer,IO_ReadOnly);
+  QDataStream ostream(newbuffer);
   kdDebug(11001) << "Newbuffer size=" << newbuffer.size() << endl;
 
 

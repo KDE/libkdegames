@@ -24,7 +24,7 @@
 #include <qmap.h> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
 #include <kdemacros.h>
-class QIconViewItem;
+class Q3IconViewItem;
 
 class KConfig;
 
@@ -327,8 +327,8 @@ protected:
     static QString group();
 
 protected slots:
-   void slotDeckClicked(QIconViewItem *);
-   void slotCardClicked(QIconViewItem *);
+   void slotDeckClicked(Q3IconViewItem *);
+   void slotCardClicked(Q3IconViewItem *);
    void slotRandomCardDirToggled(bool on);
    void slotRandomDeckToggled(bool on);
    void slotCardResized(int);

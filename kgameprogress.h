@@ -24,8 +24,10 @@
 #ifndef _KPROGRES_H
 #define _KPROGRES_H "$Id$"
 
-#include <qframe.h>
-#include <qrangecontrol.h>
+#include <q3frame.h>
+#include <q3rangecontrol.h>
+//Added by qt3to4:
+#include <QPixmap>
 #include <kdemacros.h>
 /**
  * @short A progress indicator widget.
@@ -47,7 +49,7 @@
  * @author Martynas Kunigelis
  * @version $Id$
  */
-class KDE_EXPORT KGameProgress : public QFrame, public QRangeControl
+class KDE_EXPORT KGameProgress : public Q3Frame, public Q3RangeControl
 {
   Q_OBJECT
   Q_ENUMS( BarStyle )
@@ -55,7 +57,7 @@ class KDE_EXPORT KGameProgress : public QFrame, public QRangeControl
   Q_PROPERTY( BarStyle barStyle READ barStyle WRITE setBarStyle )
   Q_PROPERTY( QColor barColor READ barColor WRITE setBarColor )
   Q_PROPERTY( QPixmap barPixmap READ barPixmap WRITE setBarPixmap )
-  Q_PROPERTY( Orientation orientation READ orientation WRITE setOrientation )
+  Q_PROPERTY( Qt::Orientation orientation READ orientation WRITE setOrientation )
   Q_PROPERTY( bool textEnabled READ textEnabled WRITE setTextEnabled )
 
 public:
@@ -75,12 +77,12 @@ public:
   /**
    * Construct a progress bar with orientation @p orient.
    */
-  KGameProgress(Orientation orient, QWidget *parent=0, const char *name=0);
+  KGameProgress(Qt::Orientation orient, QWidget *parent=0, const char *name=0);
 
   /**
    * Construct a progress bar with minimum, maximum and initial values.
    */
-  KGameProgress(int minValue, int maxValue, int value, Orientation,
+  KGameProgress(int minValue, int maxValue, int value, Qt::Orientation,
                 QWidget *parent=0, const char *name=0);
 
   /**
@@ -110,7 +112,7 @@ public:
    *
    * Allowed values are @p Horizontal and @p Vertical.
    */
-  void setOrientation(Orientation);
+  void setOrientation(Qt::Orientation);
 
   /**
    * If this is set to @p true, the progress text will be displayed.
@@ -143,13 +145,13 @@ public:
    *
    * @see setValue()
    */
-  int value() const { return QRangeControl::value(); }
+  int value() const { return Q3RangeControl::value(); }
   /**
    * Retrive the orientation of the progress bar.
    *
    * @see setOrientation()
    */
-  Orientation orientation() const;
+  Qt::Orientation orientation() const;
 
   /**
    * Returns @p true if progress text will be displayed,
@@ -239,7 +241,7 @@ private:
   QColor    text_color;
   QRect     fr;
   BarStyle  bar_style;
-  Orientation orient;
+  Qt::Orientation orient;
   bool      text_enabled;
   QString   format_;
   void      initialize();

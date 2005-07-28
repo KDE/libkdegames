@@ -23,8 +23,10 @@
 #include <math.h>
 
 #include <qpair.h>
-#include <qvaluelist.h>
-#include <qvaluevector.h>
+#include <q3valuelist.h>
+#include <q3valuevector.h>
+//Added by qt3to4:
+#include <QTextStream>
 
 #include <kglobal.h>
 
@@ -42,7 +44,7 @@ namespace KGrid2D
      * This type represents a list of @ref Coord.
      * @since 3.2
      */
-    typedef QValueList<Coord> CoordList;
+    typedef Q3ValueList<Coord> CoordList;
 }
 
 inline KGrid2D::Coord
@@ -118,7 +120,7 @@ class Generic
      * Fill the nodes with the given value.
      */
     void fill(const Type &value) {
-        for (uint i=0; i<_vector.count(); i++) _vector[i] = value;
+        for (int i=0; i<_vector.count(); i++) _vector[i] = value;
     }
 
     /**
@@ -200,7 +202,7 @@ class Generic
 
  protected:
     uint               _width, _height;
-    QValueVector<Type> _vector;
+    Q3ValueVector<Type> _vector;
 };
 }
 

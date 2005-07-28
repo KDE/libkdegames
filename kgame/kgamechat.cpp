@@ -30,7 +30,9 @@
 #include <kdebug.h>
 
 #include <qmap.h>
-#include <qintdict.h>
+#include <q3intdict.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 
 //FIXME:
 #define FIRST_ID 2 // first id, that is free of use, aka not defined above
@@ -51,7 +53,7 @@ public:
 	int mMessageId;
 
 
-	QIntDict<KPlayer> mIndex2Player;
+	Q3IntDict<KPlayer> mIndex2Player;
 
 	QMap<int, int> mSendId2PlayerId;
 	int mToMyGroup; // just as the above - but for the group, not for players
@@ -187,8 +189,8 @@ int KGameChat::sendingId(int playerId) const
  return -1;
 }
 
-const QString& KGameChat::fromName() const
-{ return d->mFromPlayer ? d->mFromPlayer->name() : QString::null; }
+QString KGameChat::fromName() const
+{ return d->mFromPlayer ? d->mFromPlayer->name() : QString(); }
 
 bool KGameChat::hasPlayer(int id) const
 {
@@ -235,7 +237,7 @@ void KGameChat::setKGame(KGame* g)
 			this, SLOT(slotReceiveMessage(int, const QByteArray&, Q_UINT32, Q_UINT32)));
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
-	QPtrList<KPlayer> playerList = *d->mGame->playerList();
+	Q3PtrList<KPlayer> playerList = *d->mGame->playerList();
 	for (int unsigned i = 0; i < playerList.count(); i++) {
 		slotAddPlayer(playerList.at(i));
 	}
@@ -328,7 +330,7 @@ void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q
 
 void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32 , Q_UINT32 sender)
 {
- QDataStream msg(buffer, IO_ReadOnly);
+ QDataStream msg(buffer);
  if (msgid != messageId()) {
 	return;
  }

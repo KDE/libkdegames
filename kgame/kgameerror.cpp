@@ -17,9 +17,6 @@
     the Free Software Foundation, Inc., 51 Franklin Steet, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-/*
-    $Id$
-*/
 
 #include "kgameerror.h"
 #include "kgamemessage.h"
@@ -29,7 +26,7 @@
 QByteArray KGameError::errVersion(int remoteVersion)
 {
  QByteArray b;
- QDataStream s(b, IO_WriteOnly);
+ QDataStream s(&b, QIODevice::WriteOnly);
  s << (Q_INT32)KGameMessage::version();
  s << (Q_INT32)remoteVersion;
  return b;
@@ -38,7 +35,7 @@ QByteArray KGameError::errVersion(int remoteVersion)
 QByteArray KGameError::errCookie(int localCookie, int remoteCookie)
 {
  QByteArray b;
- QDataStream s(b, IO_WriteOnly);
+ QDataStream s(&b, QIODevice::WriteOnly);
  s << (Q_INT32)localCookie;
  s << (Q_INT32)remoteCookie;
  return b;
@@ -46,7 +43,7 @@ QByteArray KGameError::errCookie(int localCookie, int remoteCookie)
 
 QString KGameError::errorText(int errorCode, const QByteArray& message)
 {
- QDataStream s(message, IO_ReadOnly);
+ QDataStream s(message);
  return errorText(errorCode, s);
 }
 

@@ -21,9 +21,9 @@
 #define __KMESSAGESERVER_H__
 
 #include <qobject.h>
-#include <qserversocket.h>
+#include <q3serversocket.h>
 #include <qstring.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 
 class KMessageIO;
 class KMessageServerPrivate;
@@ -325,7 +325,7 @@ public:
     /**
      * returns a list of the unique IDs of all clients.
      **/
-    QValueList <Q_UINT32> clientIDs() const;
+    Q3ValueList <Q_UINT32> clientIDs() const;
 
     /**
      * Find the @ref KMessageIO object to the given client number.
@@ -394,7 +394,7 @@ public:
      * This is just a convenience method. You could also iterate over the
      * list of IDs.
      **/
-    virtual void sendMessage (const QValueList <Q_UINT32> &ids, const QByteArray &msg);
+    virtual void sendMessage (const Q3ValueList <Q_UINT32> &ids, const QByteArray &msg);
 
 protected slots:
     /**
@@ -473,7 +473,7 @@ private:
   @short An internal class for KServerSocket
   @author Burkhard Lehner <Burkhard.Lehner@gmx.de>
 */
-class KMessageServerSocket : public QServerSocket
+class KMessageServerSocket : public Q3ServerSocket
 {
   Q_OBJECT
 

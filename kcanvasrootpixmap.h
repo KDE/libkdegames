@@ -22,8 +22,10 @@
 
 #include <krootpixmap.h>
 #include <kdemacros.h>
+//Added by qt3to4:
+#include <QPixmap>
 
-class QCanvasView;
+class Q3CanvasView;
 
 /**
  * Implement KRootPixmap for a QCanvasView.
@@ -45,13 +47,13 @@ class KDE_EXPORT KCanvasRootPixmap : public KRootPixmap
     /**
      * Constructor.
      */
-    KCanvasRootPixmap(QCanvasView *view, const char *name = 0);
+    KCanvasRootPixmap(Q3CanvasView *view, const char *name = 0);
 
  private slots:
     void backgroundUpdatedSlot(const QPixmap &);
 
  private:
-    QCanvasView *_view;
+    Q3CanvasView *_view;
 
     class KCanvasRootPixmapPrivate;
     KCanvasRootPixmapPrivate *d;

@@ -19,10 +19,10 @@
 
 #include <qiodevice.h>
 #include <qbuffer.h>
-#include <qptrlist.h>
-#include <qptrqueue.h>
+#include <q3ptrlist.h>
+#include <q3ptrqueue.h>
 #include <qtimer.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 
 #include <kdebug.h>
 
@@ -32,7 +32,7 @@
 // --------------- internal class KMessageServerSocket
 
 KMessageServerSocket::KMessageServerSocket (Q_UINT16 port, QObject *parent)
-  : QServerSocket (port, 0, parent)
+  : Q3ServerSocket (port, 0, parent)
 {
 }
 
@@ -77,8 +77,8 @@ public:
 
   KMessageServerSocket* mServerSocket;
 
-  QPtrList <KMessageIO> mClientList;
-  QPtrQueue <MessageBuffer> mMessageQueue;
+  Q3PtrList <KMessageIO> mClientList;
+  Q3PtrQueue <MessageBuffer> mMessageQueue;
   QTimer mTimer;
   bool mIsRecursive;
 };
@@ -190,18 +190,18 @@ void KMessageServer::addClient (KMessageIO* client)
 
   // Tell everyone about the new guest
   // Note: The new client doesn't get this message!
-  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (EVNT_CLIENT_CONNECTED) << client->id();
+  QDataStream (&msg, QIODevice::WriteOnly) << Q_UINT32 (EVNT_CLIENT_CONNECTED) << client->id();
   broadcastMessage (msg);
 
   // add to our list
   d->mClientList.append (client);
 
   // tell it its ID
-  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (ANS_CLIENT_ID) << client->id();
+  QDataStream (&msg, QIODevice::WriteOnly) << Q_UINT32 (ANS_CLIENT_ID) << client->id();
   client->send (msg);
 
   // Give it the complete list of client IDs
-  QDataStream (msg, IO_WriteOnly)  << Q_UINT32 (ANS_CLIENT_LIST) << clientIDs();
+  QDataStream (&msg, QIODevice::WriteOnly)  << Q_UINT32 (ANS_CLIENT_LIST) << clientIDs();
   client->send (msg);
 
 
@@ -213,7 +213,7 @@ void KMessageServer::addClient (KMessageIO* client)
   else
   {
     // otherwise tell it who is the admin
-    QDataStream (msg, IO_WriteOnly) << Q_UINT32 (ANS_ADMIN_ID) << adminID();
+    QDataStream (&msg, QIODevice::WriteOnly) << Q_UINT32 (ANS_ADMIN_ID) << adminID();
     client->send (msg);
   }
 
@@ -231,7 +231,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
 
   // tell everyone about the removed client
   QByteArray msg;
-  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (EVNT_CLIENT_DISCONNECTED) << client->id() << (Q_INT8)broken;
+  QDataStream (&msg, QIODevice::WriteOnly) << Q_UINT32 (EVNT_CLIENT_DISCONNECTED) << client->id() << (Q_INT8)broken;
   broadcastMessage (msg);
 
   // If it was the admin, select a new admin.
@@ -280,10 +280,10 @@ int KMessageServer::clientCount() const
   return d->mClientList.count();
 }
 
-QValueList <Q_UINT32> KMessageServer::clientIDs () const
+Q3ValueList <Q_UINT32> KMessageServer::clientIDs () const
 {
-  QValueList <Q_UINT32> list;
-  for (QPtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
+  Q3ValueList <Q_UINT32> list;
+  for (Q3PtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
     list.append ((*iter)->id());
   return list;
 }
@@ -293,7 +293,7 @@ KMessageIO* KMessageServer::findClient (Q_UINT32 no) const
   if (no == 0)
     no = d->mAdminID;
 
-  QPtrListIterator <KMessageIO> iter (d->mClientList);
+  Q3PtrListIterator <KMessageIO> iter (d->mClientList);
   while (*iter)
   {
     if ((*iter)->id() == no)
@@ -323,7 +323,7 @@ void KMessageServer::setAdmin (Q_UINT32 adminID)
   d->mAdminID = adminID;
 
   QByteArray msg;
-  QDataStream (msg, IO_WriteOnly) << Q_UINT32 (ANS_ADMIN_ID) << adminID;
+  QDataStream (&msg, QIODevice::WriteOnly) << Q_UINT32 (ANS_ADMIN_ID) << adminID;
 
   // Tell everyone about the new master
   broadcastMessage (msg);
@@ -341,7 +341,7 @@ Q_UINT32 KMessageServer::uniqueClientNumber() const
 
 void KMessageServer::broadcastMessage (const QByteArray &msg)
 {
-  for (QPtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
+  for (Q3PtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
     (*iter)->send (msg);
 }
 
@@ -352,9 +352,9 @@ void KMessageServer::sendMessage (Q_UINT32 id, const QByteArray &msg)
     client->send (msg);
 }
 
-void KMessageServer::sendMessage (const QValueList <Q_UINT32> &ids, const QByteArray &msg)
+void KMessageServer::sendMessage (const Q3ValueList <Q_UINT32> &ids, const QByteArray &msg)
 {
-  for (QValueListConstIterator <Q_UINT32> iter = ids.begin(); iter != ids.end(); ++iter)
+  for (Q3ValueListConstIterator <Q_UINT32> iter = ids.begin(); iter != ids.end(); ++iter)
     sendMessage (*iter, msg);
 }
 
@@ -396,13 +396,13 @@ void KMessageServer::processOneMessage ()
   MessageBuffer *msg_buf = d->mMessageQueue.head();
 
   Q_UINT32 clientID = msg_buf->id;
-  QBuffer in_buffer (msg_buf->data);
-  in_buffer.open (IO_ReadOnly);
+  QBuffer in_buffer (&msg_buf->data);
+  in_buffer.open (QIODevice::ReadOnly);
   QDataStream in_stream (&in_buffer);
 
   QByteArray out_msg;
-  QBuffer out_buffer (out_msg);
-  out_buffer.open (IO_WriteOnly);
+  QBuffer out_buffer (&out_msg);
+  out_buffer.open (QIODevice::WriteOnly);
   QDataStream out_stream (&out_buffer);
 
   bool unknown = false;
@@ -424,7 +424,7 @@ void KMessageServer::processOneMessage ()
 
     case REQ_FORWARD:
       {
-        QValueList <Q_UINT32> clients;
+        Q3ValueList <Q_UINT32> clients;
         in_stream >> clients;
         out_stream << Q_UINT32 (MSG_FORWARD) << clientID << clients;
         // see above!
@@ -455,9 +455,9 @@ void KMessageServer::processOneMessage ()
     case REQ_REMOVE_CLIENT:
       if (clientID == d->mAdminID)
       {
-        QValueList <Q_UINT32> client_list;
+        Q3ValueList <Q_UINT32> client_list;
         in_stream >> client_list;
-        for (QValueListIterator <Q_UINT32> iter = client_list.begin(); iter != client_list.end(); ++iter)
+        for (Q3ValueListIterator <Q_UINT32> iter = client_list.begin(); iter != client_list.end(); ++iter)
         {
           KMessageIO *client = findClient (*iter);
           if (client)
