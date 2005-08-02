@@ -21,12 +21,16 @@ fi
 
 AC_MSG_CHECKING(whether to setgid binaries)
 AC_ARG_ENABLE(setgid,
-  [  --disable-setgid           Disable the use of setgid binaries],
+  [  --enable-setgid           Enable the use of setgid binaries],
   [case "${enableval}" in
-    yes) case "$use_highscore_dir" in yes) setgid=true;; no) setgid=false;; esac ;;
+    yes) 
+        case "$use_highscore_dir" in 
+           yes) setgid=true;; 
+           no) setgid=false;; 
+        esac ;;
     no)  setgid=false ;;
     *) AC_MSG_ERROR(bad value ${enableval} for --disable-setgid) ;;
-   esac],[setgid=true])
+   esac],[setgid=false])
 AC_SUBST(setgid)
 AC_MSG_RESULT($setgid)
 
