@@ -163,7 +163,7 @@ void Manager::setScoreHistogram(const QVector<uint> &scores,
                                 ScoreTypeBound type)
 {
     Q_ASSERT( scores.size()>=2 );
-    for (uint i=0; i<scores.size()-1; i++)
+    for (int i=0; i<scores.size()-1; i++)
         Q_ASSERT( scores[i]<scores[i+1] );
     internal->playerInfos().createHistoItems(scores, type==ScoreBound);
 }

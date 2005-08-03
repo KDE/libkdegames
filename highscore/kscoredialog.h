@@ -26,16 +26,10 @@ this software.
 #define KSCOREDIALOG_H
 
 #include <qmap.h>
-#include <q3ptrlist.h>
-//Added by qt3to4:
-#include <QGridLayout>
 #include <QKeyEvent>
 
 #include <kdialogbase.h>
 #include <kdemacros.h>
-class QGridLayout;
-class QLineEdit;
-class Q3WidgetStack;
 
 /**
  * A simple high score dialog.

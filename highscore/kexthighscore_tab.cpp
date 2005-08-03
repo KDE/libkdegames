@@ -159,7 +159,7 @@ void StatisticsTab::load()
     const PlayerInfos &pi = internal->playerInfos();
     uint nb = pi.nbEntries();
     _data.resize(nb+1);
-    for (uint i=0; i<_data.size()-1; i++) {
+    for (int i=0; i<_data.size()-1; i++) {
         _data[i].count[Total] = pi.item("nb games")->read(i).toUInt();
         _data[i].count[Lost] = pi.item("nb lost games")->read(i).toUInt()
                        + pi.item("nb black marks")->read(i).toUInt(); // legacy

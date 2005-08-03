@@ -195,10 +195,6 @@ class KDE_EXPORT Manager
      */
     void setShowStatistics(bool show);
     
-    /** @obsolete */
-    // KDE4 remove this
-    void showStatistics(bool show) KDE_DEPRECATED;
-    
     /**
      * @since 3.3
      * Set if draw games statistics should be shown (enable this if
