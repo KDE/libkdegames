@@ -137,11 +137,6 @@ void Manager::setShowStatistics(bool show)
     internal->showStatistics = show;
 }
 
-void Manager::showStatistics(bool show)
-{
-    internal->showStatistics = show;
-}
-
 void Manager::setShowDrawGamesStatistic(bool show)
 {
     internal->showDrawGames = show;

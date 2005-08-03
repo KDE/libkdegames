@@ -22,9 +22,6 @@
 
 #include <qcombobox.h>
 
-//Added by qt3to4:
-#include <QLabel>
-
 class QLabel;
 class KListView;
 
