@@ -367,6 +367,12 @@ void KScoreDialog::show()
    KDialogBase::show();
 }
 
+void KScoreDialog::exec()
+{
+   aboutToShow();
+   KDialogBase::exec();
+}
+
 void KScoreDialog::slotGotReturn()
 {
    QTimer::singleShot(0, this, SLOT(slotGotName()));

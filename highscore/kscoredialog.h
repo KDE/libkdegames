@@ -100,6 +100,7 @@ public:
    int highScore();
 
    virtual void show();
+   virtual void exec();
 
 private slots:
    void slotGotReturn();
