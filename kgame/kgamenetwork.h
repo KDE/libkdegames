@@ -109,7 +109,17 @@ public:
      * @return true if it worked
      **/
     bool offerConnections (Q_UINT16 port);
-
+    
+    /**
+     * Announces game MASTER on network using DNS-SD. Clients then can discover it using
+     * DNSSD::ServiceBrowser (or KGameConnectWidget) instead of manually entering 
+     * IP address.
+     * @param type service type (something like _kwin4._tcp). 
+     * It should be unique for application.
+     * @param name game name that will be displayed by clients.  If not
+     * set hostname will be used. In case of name conflict -2, -3 and so on will be added to name.
+     * @since 3.4
+     **/
     void setDiscoveryInfo(const QString& type, const QString& name=QString::null);
     
     /**
