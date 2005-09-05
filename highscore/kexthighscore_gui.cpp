@@ -139,24 +139,24 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     vbox->addWidget(_tw);
 
     // scores tab
-    _scoresList = new HighscoresList(_tw);
+    _scoresList = new HighscoresList(0);
     _scoresList->addHeader(s);
     _tw->addTab(_scoresList, i18n("Best &Scores"));
 
     // players tab
-    _playersList = new HighscoresList(_tw);
+    _playersList = new HighscoresList(0);
     _playersList->addHeader(p);
     _tw->addTab(_playersList, i18n("&Players"));
 
     // statistics tab
     if ( internal->showStatistics ) {
-        _statsTab = new StatisticsTab(_tw);
+        _statsTab = new StatisticsTab(0);
         _tw->addTab(_statsTab, i18n("Statistics"));
     }
 
     // histogram tab
     if ( p.histogram().size()!=0 ) {
-        _histoTab = new HistogramTab(_tw);
+        _histoTab = new HistogramTab(0);
         _tw->addTab(_histoTab, i18n("Histogram"));
     }
 
