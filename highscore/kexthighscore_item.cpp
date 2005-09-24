@@ -102,8 +102,8 @@ QString Item::timeFormat(uint n)
 {
     Q_ASSERT( n<=3600 && n!=0 );
     n = 3600 - n;
-    return QString::number(n / 60).rightJustify(2, '0') + ':'
-        + QString::number(n % 60).rightJustify(2, '0');
+    return QString::number(n / 60).rightJustified(2, '0') + ':'
+        + QString::number(n % 60).rightJustified(2, '0');
 }
 
 QString Item::pretty(uint, const QVariant &value) const

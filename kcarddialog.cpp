@@ -467,7 +467,7 @@ void KCardDialog::insertCardIcons()
     {
         KSimpleConfig cfg(*it);
         cfg.setGroup(QString::fromLatin1("KDE Backdeck"));
-        QString path = (*it).left((*it).findRev('/') + 1);
+        QString path = (*it).left((*it).lastIndexOf('/') + 1);
         assert(path[path.length() - 1] == '/');
         QPixmap pixmap(path + cfg.readEntry("Preview", "12c.png"));
 

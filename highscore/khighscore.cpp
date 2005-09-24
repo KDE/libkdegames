@@ -94,7 +94,7 @@ void KHighscore::init(const char *appname)
 #ifdef HIGHSCORE_DIRECTORY
     const QString filename =  QString::fromLocal8Bit("%1/%2.scores")
                               .arg(HIGHSCORE_DIRECTORY).arg(appname);
-    int fd = open(filename.local8Bit(), O_RDWR);
+    int fd = open(filename.toLocal8Bit(), O_RDWR);
     if ( fd<0 ) kdFatal(11002) << "cannot open global highscore file \""
                                << filename << "\"" << endl;
     lockSD.setObject(_lock, new KFileLock(fd));

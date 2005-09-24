@@ -279,7 +279,7 @@ void KScoreDialog::loadScores()
    QString key, value;
    d->loaded = true;
    d->scores.clear();
-   KConfigGroup config(kapp->config(), d->configGroup.utf8());
+   KConfigGroup config(kapp->config(), d->configGroup.toUtf8());
 
    d->player = config.readEntry("LastPlayer");
 
@@ -302,7 +302,7 @@ void KScoreDialog::loadScores()
 void KScoreDialog::saveScores()
 {
    QString key, value;
-   KConfigGroup config(kapp->config(), d->configGroup.utf8());
+   KConfigGroup config(kapp->config(), d->configGroup.toUtf8());
 
    config.writeEntry("LastPlayer", d->player);
 

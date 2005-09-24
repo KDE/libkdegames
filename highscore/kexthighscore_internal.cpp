@@ -625,7 +625,7 @@ bool ManagerPrivate::doQuery(const KURL &url, QWidget *parent,
     }
 
 	QTextStream t(&file);
-	QString content = t.read().stripWhiteSpace();
+	QString content = t.read().trimmed();
 	file.close();
     KIO::NetAccess::removeTempFile(tmpFile);
 

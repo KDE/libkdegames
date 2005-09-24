@@ -96,7 +96,7 @@ void KGameLCD::setColor(const QColor &color)
 void KGameLCD::displayInt(int v)
 {
     int n = numDigits() - _lead.length();
-    display(_lead + QString::number(v).rightJustify(n));
+    display(_lead + QString::number(v).rightJustified(n));
 }
 
 void KGameLCD::highlight()
@@ -136,8 +136,8 @@ void KGameLCDClock::timeoutClock()
 
 QString KGameLCDClock::pretty() const
 {
-    QString sec = QString::number(_sec).rightJustify(2, '0', true);
-    QString min = QString::number(_min).rightJustify(2, '0', true);
+    QString sec = QString::number(_sec).rightJustified(2, '0', true);
+    QString min = QString::number(_min).rightJustified(2, '0', true);
     return min + ':' + sec;
 }
 
