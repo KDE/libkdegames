@@ -37,6 +37,7 @@
 #include <kopenwith.h>
 #include <krun.h>
 #include <kfiledialog.h>
+#include <kvbox.h>
 #include <ktempfile.h>
 #include <kio/netaccess.h>
 #include <kiconloader.h>
@@ -185,9 +186,9 @@ void HighscoresWidget::changeTab(int i)
         _tw->setCurrentPage(i);
 }
 
-void HighscoresWidget::showURL(const QString &url) const
+void HighscoresWidget::showURL(const QString &url) 
 {
-    (void)new KRun(KURL(url), (QWidget*)this);
+    (void)new KRun(KURL(url), this);
 }
 
 void HighscoresWidget::load(int rank)

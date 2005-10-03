@@ -37,7 +37,7 @@
 class KGameDialogPrivate
 {
 public:
-	KGameDialogPrivate() 
+	KGameDialogPrivate()
 	{
 		mGamePage = 0;
 		mNetworkPage = 0;
@@ -74,7 +74,7 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
  init(g, owner);
 }
 
-KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title, 
+KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 		QWidget* parent, long initConfigs, int chatMsgId, bool modal)
 	: KDialogBase(Tabbed, title, Ok|Default|Apply,
 	Ok, parent, 0, modal, true)
@@ -272,7 +272,7 @@ void KGameDialog::slotDefault()
  if (!d->mGame) {
 	return;
  }
- 
+
 //TODO *only*  call setKGame/setOwner for the *current* page!!
  setKGame(d->mGame);
  setOwner(d->mOwner);
@@ -310,7 +310,7 @@ void KGameDialog::setKGame(KGame* g)
  if (d->mGame) {
 	setAdmin(d->mGame->isAdmin());
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
-	connect(d->mGame, SIGNAL(signalAdminStatusChanged(bool)), 
+	connect(d->mGame, SIGNAL(signalAdminStatusChanged(bool)),
 			this, SLOT(setAdmin(bool)));
  }
 }

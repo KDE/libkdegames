@@ -31,6 +31,7 @@
 #include <QDateTime>
 #include <QTextStream>
 #include <Q3MemArray>
+#include <QDateTime>
 
 class QTextStream;
 class QTabWidget;

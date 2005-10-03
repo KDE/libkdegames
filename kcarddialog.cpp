@@ -42,6 +42,7 @@
 #include "kcarddialog.h"
 #include <qpushbutton.h>
 #include <kdebug.h>
+#include <krandom.h>
 
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
 #define KCARD_DEFAULTCARD QString::fromLatin1("11.png")
