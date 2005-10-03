@@ -344,7 +344,7 @@ public:
 protected:
 	/**
 	 * @param p A player
-	 * @return The @ref QListBoxItem that belongs to the player @p p
+	 * @return The QListBoxItem that belongs to the player @p p
 	 **/
 	QListBoxItem* item(KPlayer* p) const;
 
