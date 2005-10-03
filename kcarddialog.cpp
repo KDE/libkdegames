@@ -36,6 +36,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kiconview.h>
+#include <krandom.h>
 #include <ksimpleconfig.h>
 
 #include "kcarddialog.h"
@@ -580,7 +581,7 @@ QString KCardDialog::getRandomDeck()
     if (list.isEmpty())
         return QString::null;
 
-    int d = KApplication::random() % list.count();
+    int d = KRandom::random() % list.count();
     return getDeckName(list.at(d));
 }
 
@@ -592,7 +593,7 @@ QString KCardDialog::getRandomCardDir()
     if (list.isEmpty())
         return QString::null;
 
-    int d = KApplication::random() % list.count();
+    int d = KRandom::random() % list.count();
     QString entry = list.at(d);
     return entry.left(entry.length() - strlen("index.desktop"));
 }
@@ -802,7 +803,7 @@ void KCardDialog::init()
         return;
     KGlobal::dirs()->addResourceType("cards", KStandardDirs::kde_default("data") + QString::fromLatin1("carddecks/"));
 
-    KGlobal::locale()->insertCatalogue("libkdegames");
+    KGlobal::locale()->insertCatalog("libkdegames");
     _inited = true;
 }
 

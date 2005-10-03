@@ -36,6 +36,7 @@
 class QGridLayout;
 class QVBoxLayout;
 class Q3ListBoxItem;
+class KVBox;
 
 class KGame;
 class KPlayer;
@@ -178,7 +179,7 @@ public:
 	 * already added config widget. Note that the game page will be used
 	 * if parent is 0.
 	 **/
-	void addChatWidget(KGameDialogChatConfig* chat, Q3VBox* parent = 0);
+	void addChatWidget(KGameDialogChatConfig* chat, KVBox* parent = 0);
 
 	/**
 	 * Add a connection list to the dialog. The list consists of a
@@ -192,7 +193,7 @@ public:
 	 * @param parent The parent of the widget. If 0 the networkConfig
 	 * page is used.
 	 **/
-	void addConnectionList(KGameDialogConnectionConfig* c, Q3VBox* parent = 0);
+	void addConnectionList(KGameDialogConnectionConfig* c, KVBox* parent = 0);
 
 	/**
 	 * Add a new page to the dialog. The page will contain you new config
@@ -204,13 +205,13 @@ public:
 	 * @param title The title of the newly added page.
 	 * @return The newly added page which contains your config widget.
 	 **/
-	Q3VBox* addConfigPage(KGameDialogConfig* widget, const QString& title);
+	KVBox* addConfigPage(KGameDialogConfig* widget, const QString& title);
 
 	/**
 	 * @return The QVBox of the given key, The key is from ConfigOptions
 	 * Note that not all are supported yet
 	 **/
-	Q3VBox *configPage(ConfigOptions which);
+	KVBox *configPage(ConfigOptions which);
 
 	/**
 	 * @return The default netowrk config. Note that this always returns 0 if

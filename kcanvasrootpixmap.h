@@ -47,7 +47,7 @@ class KDE_EXPORT KCanvasRootPixmap : public KRootPixmap
     /**
      * Constructor.
      */
-    KCanvasRootPixmap(Q3CanvasView *view, const char *name = 0);
+    KCanvasRootPixmap(Q3CanvasView *view);
 
  private slots:
     void backgroundUpdatedSlot(const QPixmap &);

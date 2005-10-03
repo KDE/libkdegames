@@ -19,12 +19,12 @@
 */
 
 #include <qlayout.h>
-#include <q3vbox.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <Q3PtrList>
 
 #include <klocale.h>
+#include <kvbox.h>
 
 #include "kgame.h"
 #include "kplayer.h"
@@ -51,9 +51,9 @@ public:
 		mGame = 0;
 	}
 
-	Q3VBox* mGamePage;
-	Q3VBox* mNetworkPage;
-	Q3VBox* mMsgServerPage;// unused here?
+	KVBox* mGamePage;
+	KVBox* mNetworkPage;
+	KVBox* mMsgServerPage;// unused here?
 	QVBoxLayout* mTopLayout;
 	KGameDialogNetworkConfig* mNetworkConfig;
 	KGameDialogGeneralConfig* mGameConfig;
@@ -168,7 +168,7 @@ void KGameDialog::addMsgServerConfig(KGameDialogMsgServerConfig* msgConf)
  d->mMsgServerPage = addConfigPage(msgConf, i18n("&Message Server"));
 }
 
-void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, Q3VBox* parent)
+void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, KVBox* parent)
 {
  if (!chat) {
 	return;
@@ -183,7 +183,7 @@ void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, Q3VBox* parent)
  addConfigWidget(chat, parent);
 }
 
-void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, Q3VBox* parent)
+void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, KVBox* parent)
 {
  if (!c) {
 	return;
@@ -198,9 +198,9 @@ void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, Q3VBox* pare
  addConfigWidget(c, parent);
 }
 
-Q3VBox *KGameDialog::configPage(ConfigOptions which)
+KVBox *KGameDialog::configPage(ConfigOptions which)
 {
- Q3VBox *box = 0;
+ KVBox *box = 0;
  switch(which)
  {
 	case NetworkConfig:
@@ -218,13 +218,13 @@ Q3VBox *KGameDialog::configPage(ConfigOptions which)
  return box;
 }
 
-Q3VBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
+KVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
 {
  if (!widget) {
 	kdError(11001) << "Cannot add NULL config widget" << endl;
 	return 0;
  }
- Q3VBox* page = addVBoxPage(title);
+ KVBox* page = addVBoxPage(title);
  addConfigWidget(widget, page);
  return page;
 }

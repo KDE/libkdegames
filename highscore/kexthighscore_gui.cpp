@@ -40,6 +40,7 @@
 #include <ktempfile.h>
 #include <kio/netaccess.h>
 #include <kiconloader.h>
+#include <kvbox.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
@@ -186,7 +187,7 @@ void HighscoresWidget::changeTab(int i)
 
 void HighscoresWidget::showURL(const QString &url) const
 {
-    (void)new KRun(KURL(url));
+    (void)new KRun(KURL(url), (QWidget*)this);
 }
 
 void HighscoresWidget::load(int rank)

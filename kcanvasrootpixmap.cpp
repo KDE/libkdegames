@@ -24,8 +24,8 @@
 #include <QPixmap>
 
 
-KCanvasRootPixmap::KCanvasRootPixmap(Q3CanvasView *view, const char *name)
-    : KRootPixmap(view, name), _view(view)
+KCanvasRootPixmap::KCanvasRootPixmap(Q3CanvasView *view)
+    : KRootPixmap(view), _view(view)
 {
     setCustomPainting(true);
     connect(this, SIGNAL(backgroundUpdated(const QPixmap &)),
