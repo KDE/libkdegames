@@ -225,7 +225,7 @@ public:
     for (unsigned int i=0; i<QVector<type>::size(); i++) 
     {
       s >> data;
-      QVector<type>::at(i)=data;
+      QVector<type>::replace(i,data);
     }
     if (isEmittingSignal())
     {
