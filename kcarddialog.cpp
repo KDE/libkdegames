@@ -221,30 +221,22 @@ void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCar
 QString KCardDialog::getDefaultDeck()
 {
     KCardDialog::init();
-    return locate("cards", QString::fromLatin1("decks/") + KCARD_DEFAULTDECK);
+    return QLatin1String("decks/") + KCARD_DEFAULTDECK;
 }
 
 QString KCardDialog::getDefaultCardDir()
 {
     KCardDialog::init();
 
-    QString file = KCARD_DEFAULTCARDDIR + KCARD_DEFAULTCARD;
-    return KGlobal::dirs()->findResourceDir("cards",file) + KCARD_DEFAULTCARDDIR;
+    return KCARD_DEFAULTCARDDIR;
 }
 
 QString KCardDialog::getCardPath(const QString &carddir, int index)
 {
     KCardDialog::init();
 
-    QString entry = carddir + QString::number(index);
-    if (KStandardDirs::exists(entry + QString::fromLatin1(".png")))
-        return entry + QString::fromLatin1(".png");
-
-    // rather theoretical
-    if (KStandardDirs::exists(entry + QString::fromLatin1(".xpm")))
-        return entry + QString::fromLatin1(".xpm");
-
-    return QString::null;
+    QString entry = carddir + QString::number(index) + QLatin1String(".png");
+    return locate( "cards", entry );
 }
 
 const QString& KCardDialog::deck() const { return d->cDeck; }
