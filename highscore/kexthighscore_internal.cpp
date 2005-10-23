@@ -760,7 +760,7 @@ void ManagerPrivate::setGameType(uint type)
     }
 
     Q_ASSERT( type<_nbGameTypes );
-    _gameType = kMin(type, _nbGameTypes-1);
+    _gameType = qMin(type, _nbGameTypes-1);
     QString str = "scores";
     QString lab = manager.gameTypeLabel(_gameType, Manager::Standard);
     if ( !lab.isEmpty() ) {

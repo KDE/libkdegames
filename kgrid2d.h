@@ -63,7 +63,7 @@ operator -(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
  */
 inline KGrid2D::Coord
 maximum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
-    return KGrid2D::Coord(kMax(c1.first, c2.first), kMax(c1.second, c2.second));
+    return KGrid2D::Coord(qMax(c1.first, c2.first), qMax(c1.second, c2.second));
 }
 /**
  * @return the minimum of both coordinates.
@@ -71,7 +71,7 @@ maximum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
  */
 inline KGrid2D::Coord
 minimum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
-    return KGrid2D::Coord(kMin(c1.first, c2.first), kMin(c1.second, c2.second));
+    return KGrid2D::Coord(qMin(c1.first, c2.first), qMin(c1.second, c2.second));
 }
 
 inline QTextStream &operator <<(QTextStream &s, const KGrid2D::Coord &c) {
@@ -196,8 +196,8 @@ class Generic
      * Bound the given coordinate with the grid dimensions.
      */
     void bound(Coord &c) const {
-        c.first = kMax(kMin(c.first, (int)_width-1), 0);
-        c.second = kMax(kMin(c.second, (int)_height-1), 0);
+        c.first = qMax(qMin(c.first, (int)_width-1), 0);
+        c.second = qMax(qMin(c.second, (int)_height-1), 0);
     }
 
  protected:
@@ -433,7 +433,7 @@ class HexagonalBase
     * @return the distance between the two coordinates in term of hexagons.
     */
     static uint distance(const Coord &c1, const Coord &c2) {
-        return kAbs(c1.first - c2.first) + kAbs(c1.second - c2.second)
+        return qAbs(c1.first - c2.first) + qAbs(c1.second - c2.second)
             + (c1.first==c2.first || c1.second==c2.second ? 0 : -1);
     }
 };

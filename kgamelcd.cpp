@@ -180,8 +180,8 @@ void KGameLCDClock::setTime(uint sec)
 void KGameLCDClock::setTime(const QString &s)
 {
     Q_ASSERT( s.length()==5 && s[2]==':' );
-    uint min = kMin(s.section(':', 0, 0).toUInt(), uint(59));
-    uint sec = kMin(s.section(':', 1, 1).toUInt(), uint(59));
+    uint min = qMin(s.section(':', 0, 0).toUInt(), uint(59));
+    uint sec = qMin(s.section(':', 1, 1).toUInt(), uint(59));
     setTime(sec + min*60);
 }
 
