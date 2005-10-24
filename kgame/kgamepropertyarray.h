@@ -39,19 +39,19 @@ public:
   {
     //kdDebug(11001) << "KGamePropertyArray init" << endl;
   }
-  
+
   KGamePropertyArray( int size )
   {
     resize(size);
   }
-  
+
   KGamePropertyArray( const KGamePropertyArray<type> &a ) : QVector<type>(a)
   {
   }
-  
+
   bool  resize( uint size )
   {
-    if (size!=QVector<type>::size())
+    if (size!= ( uint )QVector<type>::size())
     {
       bool a=true;
       QByteArray b;
@@ -100,7 +100,7 @@ public:
   {
     return QVector<type>::at(i);
   }
-  
+
   type operator[]( int i ) const
   {
     return QVector<type>::at(i);
@@ -115,7 +115,7 @@ public:
   {
     return resize(pos);
   }
-  
+
   bool  fill( const type &data, int size = -1 )
   {
     bool r=true;
@@ -222,7 +222,7 @@ public:
   {
     //kdDebug(11001) << "KGamePropertyArray load " << id() << endl;
     type data;
-    for (unsigned int i=0; i<QVector<type>::size(); i++) 
+    for (int i=0; i<QVector<type>::size(); i++)
     {
       s >> data;
       QVector<type>::replace(i,data);
@@ -235,7 +235,7 @@ public:
   void save(QDataStream &s)
   {
     //kdDebug(11001) << "KGamePropertyArray save "<<id() << endl;
-    for (unsigned int i=0; i<QVector<type>::size(); i++) 
+    for (int i=0; i<QVector<type>::size(); i++)
     {
       s << at(i);
     }
@@ -244,7 +244,7 @@ public:
   void command(QDataStream &s,int cmd,bool)
   {
     KGamePropertyBase::command(s, cmd);
-    //kdDebug(11001) << "Array id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
+    //kdDebug(11001) << "Array id="<<id()<<" got command ("<<cmd<<") !!!" <<endl;
     switch(cmd)
     {
       case CmdAt:
@@ -252,9 +252,9 @@ public:
         uint i;
         type data;
         s >> i >> data;
-        QVector<type>::at(i)=data;
-        //kdDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
-        if (isEmittingSignal()) 
+        replace( i, data );
+        //kdDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl;
+        if (isEmittingSignal())
         {
           emitSignal();
         }
@@ -264,8 +264,8 @@ public:
       {
         uint size;
         s >> size;
-        //kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl; 
-        if (QVector<type>::size() != size)
+        //kdDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl;
+        if (( uint )QVector<type>::size() != size)
         {
           QVector<type>::resize(size);
         }
@@ -276,9 +276,9 @@ public:
         int size;
         type data;
         s >> data >> size;
-        //kdDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl; 
+        //kdDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl;
         QVector<type>::fill(data,size);
-        if (isEmittingSignal()) 
+        if (isEmittingSignal())
         {
           emitSignal();
         }
@@ -286,11 +286,11 @@ public:
       }
       case CmdSort:
       {
-        //kdDebug(11001) << "CmdSort:id="<<id()<<endl; 
-        QVector<type>::sort();
+        //kdDebug(11001) << "CmdSort:id="<<id()<<endl;
+        qSort( *this );
         break;
       }
-      default: 
+      default:
         kdError(11001) << "Error in KPropertyArray::command: Unknown command " << cmd << endl;
         break;
     }
