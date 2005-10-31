@@ -312,8 +312,8 @@ PlayerInfos::PlayerInfos()
 #endif
 
     ConfigGroup cg;
-    _oldLocalPlayer = cg.config()->hasKey(HS_ID);
-    _oldLocalId = cg.config()->readUnsignedNumEntry(HS_ID);
+    _oldLocalPlayer = cg.hasKey(HS_ID);
+    _oldLocalId = cg.readUnsignedNumEntry(HS_ID);
 #ifdef HIGHSCORE_DIRECTORY
     if (_oldLocalPlayer) { // player already exists in local config file
         // copy player data
@@ -335,7 +335,7 @@ PlayerInfos::PlayerInfos()
     if (_oldLocalPlayer) _id = _oldLocalId;
     else {
         _id = nbEntries();
-        cg.config()->writeEntry(HS_ID, _id);
+        cg.writeEntry(HS_ID, _id);
         item("name")->write(_id, name);
     }
 #endif
@@ -366,13 +366,13 @@ uint PlayerInfos::nbEntries() const
 QString PlayerInfos::key() const
 {
     ConfigGroup cg;
-    return cg.config()->readEntry(HS_KEY, QString::null);
+    return cg.readEntry(HS_KEY, QString::null);
 }
 
 bool PlayerInfos::isWWEnabled() const
 {
     ConfigGroup cg;
-    return cg.config()->readBoolEntry(HS_WW_ENABLED, false);
+    return cg.readBoolEntry(HS_WW_ENABLED, false);
 }
 
 QString PlayerInfos::histoName(uint i) const
@@ -478,15 +478,15 @@ void PlayerInfos::modifySettings(const QString &newName,
     modifyName(newName);
     item("comment")->write(_id, comment);
     ConfigGroup cg;
-    cg.config()->writeEntry(HS_WW_ENABLED, WWEnabled);
-    if ( !newKey.isEmpty() ) cg.config()->writeEntry(HS_KEY, newKey);
-    if (WWEnabled) cg.config()->writeEntry(HS_REGISTERED_NAME, newName);
+    cg.writeEntry(HS_WW_ENABLED, WWEnabled);
+    if ( !newKey.isEmpty() ) cg.writeEntry(HS_KEY, newKey);
+    if (WWEnabled) cg.writeEntry(HS_REGISTERED_NAME, newName);
 }
 
 QString PlayerInfos::registeredName() const
 {
     ConfigGroup cg;
-    return cg.config()->readEntry(HS_REGISTERED_NAME, QString::null);
+    return cg.readEntry(HS_REGISTERED_NAME, QString::null);
 }
 
 void PlayerInfos::removeKey()
@@ -500,15 +500,15 @@ void PlayerInfos::removeKey()
     do {
         i++;
         sk = str.arg(HS_KEY).arg(i);
-    } while ( !cg.config()->readEntry(sk, QString::null).isEmpty() );
-    cg.config()->writeEntry(sk, key());
-    cg.config()->writeEntry(str.arg(HS_REGISTERED_NAME).arg(i),
+    } while ( !cg.readEntry(sk, QString::null).isEmpty() );
+    cg.writeEntry(sk, key());
+    cg.writeEntry(str.arg(HS_REGISTERED_NAME).arg(i),
                             registeredName());
 
     // clear current key/nickname
-    cg.config()->deleteEntry(HS_KEY);
-    cg.config()->deleteEntry(HS_REGISTERED_NAME);
-    cg.config()->writeEntry(HS_WW_ENABLED, false);
+    cg.deleteEntry(HS_KEY);
+    cg.deleteEntry(HS_REGISTERED_NAME);
+    cg.writeEntry(HS_WW_ENABLED, false);
 }
 
 //-----------------------------------------------------------------------------

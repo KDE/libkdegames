@@ -165,53 +165,53 @@ KConfig* KHighscore::config() const
 void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)
 {
  Q_ASSERT( isLocked() );
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- cg.config()->writeEntry(confKey, value);
+ cg.writeEntry(confKey, value);
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, int value)
 {
  Q_ASSERT( isLocked() );
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- cg.config()->writeEntry(confKey, value);
+ cg.writeEntry(confKey, value);
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, const QString &value)
 {
  Q_ASSERT (isLocked() );
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- cg.config()->writeEntry(confKey, value);
+ cg.writeEntry(confKey, value);
 }
 
 QVariant KHighscore::readPropertyEntry(int entry, const QString& key, const QVariant& pDefault) const
 {
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.config()->readPropertyEntry(confKey, pDefault);
+ return cg.readPropertyEntry(confKey, pDefault);
 }
 
 QString KHighscore::readEntry(int entry, const QString& key, const QString& pDefault) const
 {
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.config()->readEntry(confKey, pDefault);
+ return cg.readEntry(confKey, pDefault);
 }
 
 int KHighscore::readNumEntry(int entry, const QString& key, int pDefault) const
 {
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.config()->readNumEntry(confKey, pDefault);
+ return cg.readNumEntry(confKey, pDefault);
 }
 
 bool KHighscore::hasEntry(int entry, const QString& key) const
 {
- KConfigGroupSaver cg(config(), group());
+ KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.config()->hasKey(confKey);
+ return cg.hasKey(confKey);
 }
 
 QStringList KHighscore::readList(const QString& key, int lastEntry) const

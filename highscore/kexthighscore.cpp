@@ -148,9 +148,9 @@ void Manager::setWWHighscores(const KURL &url, const QString &version)
     internal->serverURL = url;
     const char *HS_WW_URL = "ww hs url";
     ConfigGroup cg;
-    if ( cg.config()->hasKey(HS_WW_URL) )
-        internal->serverURL = cg.config()->readEntry(HS_WW_URL);
-    else cg.config()->writeEntry(HS_WW_URL, url.url());
+    if ( cg.hasKey(HS_WW_URL) )
+        internal->serverURL = cg.readEntry(HS_WW_URL);
+    else cg.writeEntry(HS_WW_URL, url.url());
     internal->version = version;
 }
 

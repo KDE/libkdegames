@@ -178,11 +178,11 @@ class ScoreInfos : public ItemArray
 };
 
 //-----------------------------------------------------------------------------
-class ConfigGroup : public KConfigGroupSaver
+class ConfigGroup : public KConfigGroup
 {
  public:
     ConfigGroup(const QString &group = QString::null)
-        : KConfigGroupSaver(kapp->config(), group) {}
+        : KConfigGroup(kapp->config(), group) {}
 };
 
 //-----------------------------------------------------------------------------
