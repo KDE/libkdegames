@@ -40,6 +40,7 @@ this software.
 #include <kconfig.h>
 #include <klocale.h>
 #include <kseparator.h>
+#include <kglobal.h>
 
 #include "kscoredialog.h"
 
@@ -279,7 +280,7 @@ void KScoreDialog::loadScores()
    QString key, value;
    d->loaded = true;
    d->scores.clear();
-   KConfigGroup config(kapp->config(), d->configGroup.toUtf8());
+   KConfigGroup config(KGlobal::config(), d->configGroup.toUtf8());
 
    d->player = config.readEntry("LastPlayer");
 
@@ -302,7 +303,7 @@ void KScoreDialog::loadScores()
 void KScoreDialog::saveScores()
 {
    QString key, value;
-   KConfigGroup config(kapp->config(), d->configGroup.toUtf8());
+   KConfigGroup config(KGlobal::config(), d->configGroup.toUtf8());
 
    config.writeEntry("LastPlayer", d->player);
 
@@ -319,7 +320,7 @@ void KScoreDialog::saveScores()
          }
       }
    }
-   kapp->config()->sync();
+   KGlobal::config()->sync();
 }
 
 int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)

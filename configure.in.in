@@ -1,5 +1,5 @@
 dnl AB: checking for a system-wide highscore file. If "no" then the default
-dnl (just kapp->config()) is used. See KHighscore for details.
+dnl (just KGlobal::config()) is used. See KHighscore for details.
 
 AC_MSG_CHECKING(whether to use system-wide highscores)
 AC_ARG_ENABLE(highscore-dir,

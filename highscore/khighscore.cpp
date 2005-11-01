@@ -140,7 +140,7 @@ bool KHighscore::lockForWriting(QWidget *widget)
 void KHighscore::writeAndUnlock()
 {
     if ( !d->global ) {
-        kapp->config()->sync();
+        KGlobal::config()->sync();
         return;
     }
     if ( !isLocked() ) return;
@@ -159,7 +159,7 @@ KHighscore::~KHighscore()
 
 KConfig* KHighscore::config() const
 {
-    return (d->global ? _config : kapp->config());
+    return (d->global ? _config : KGlobal::config());
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)

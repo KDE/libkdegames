@@ -26,6 +26,7 @@
 #include <qstring.h>
 #include <qobject.h>
 #include <kdemacros.h>
+#include <kglobal.h>
 class KConfig;
 class KFileLock;
 class KRawConfig;
@@ -294,7 +295,7 @@ protected:
 
 	/**
 	 * @return A pointer to the KConfig object to be used. This is
-	 * either kapp->config() (default) or a KSimpleConfig object for
+	 * either KGlobal::config() (default) or a KSimpleConfig object for
          * a system-wide highscore file.
 	 **/
 	KConfig* config() const;

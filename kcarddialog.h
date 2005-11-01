@@ -24,6 +24,7 @@
 #include <qmap.h> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
 #include <kdemacros.h>
+#include <kglobal.h>
 class Q3IconViewItem;
 
 class KConfig;
@@ -63,7 +64,7 @@ class KCardDialogPrivate;
  * deck/carddir. You have to save the value of those parameters in your config
  * file - that's why the parameters are needed. 
  *
- * You can also provide a KConfig pointer (usually kapp->config()). This
+ * You can also provide a KConfig pointer (usually KGlobal::config()). This
  * pointer is used to store information about the dialog in an own group
  * ("KCardDailog"). 
  * So you can just ignore the randomCardDir and randomDeck

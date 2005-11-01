@@ -451,7 +451,7 @@ void ConfigDialog::accept()
 {
     if ( save() ) {
         KDialogBase::accept();
-        kapp->config()->sync(); // safer
+        KGlobal::config()->sync(); // safer
     }
 }
 

@@ -25,6 +25,7 @@
 
 #include <kglobalsettings.h>
 #include <kdemacros.h>
+#include <kglobal.h>
 class Q3ListBoxItem;
 
 class KConfig;
@@ -361,18 +362,18 @@ public:
 
 	/**
 	 * Save the configuration of the dialog to a KConfig object. If
-	 * the supplied KConfig pointer is NULL then kapp->config() is used
+	 * the supplied KConfig pointer is NULL then KGlobal::config() is used
 	 * instead (and the group is changed to "KChatBase") butr the current
 	 * group is restored at the end.
 	 * @param conf A pointer to the KConfig object to save the config
-	 * to. If you use 0 then kapp->config() is used and the group is changed
+	 * to. If you use 0 then KGlobal::config() is used and the group is changed
 	 * to "KChatBase" (the current group is restored at the end).
 	 **/
 	virtual void saveConfig(KConfig* conf = 0);
 
 	/**
 	 * Read the configuration from a KConfig object. If the pointer is
-	 * NULL kapp->config() is used and the group is changed to "KChatBase".
+	 * NULL KGlobal::config() is used and the group is changed to "KChatBase".
 	 * The current KConfig::group is restored after this call.
 	 **/
 	virtual void readConfig(KConfig* conf = 0);

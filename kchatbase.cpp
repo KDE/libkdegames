@@ -35,6 +35,7 @@
 #include <QHBoxLayout>
 #include <Q3ValueList>
 #include <QVBoxLayout>
+#include <kglobal.h>
 
 class KChatBaseTextPrivate
 {
@@ -475,7 +476,7 @@ void KChatBase::saveConfig(KConfig* conf)
 {
  QString oldGroup;
  if (!conf) {
-	conf = kapp->config();
+	conf = KGlobal::config();
 	oldGroup = conf->group();
 	conf->setGroup("KChatBase");
  }
@@ -495,7 +496,7 @@ void KChatBase::readConfig(KConfig* conf)
 {
  QString oldGroup;
  if (!conf) {
-	conf = kapp->config();
+	conf = KGlobal::config();
 	oldGroup = conf->group();
 	conf->setGroup("KChatBase");
  }

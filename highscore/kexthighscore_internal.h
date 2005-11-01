@@ -20,7 +20,7 @@
 #ifndef KEXTHIGHSCORE_INTERNAL_H
 #define KEXTHIGHSCORE_INTERNAL_H
 
-#include <kapplication.h>
+#include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kurl.h>
@@ -182,7 +182,7 @@ class ConfigGroup : public KConfigGroup
 {
  public:
     ConfigGroup(const QString &group = QString::null)
-        : KConfigGroup(kapp->config(), group) {}
+        : KConfigGroup(KGlobal::config(), group) {}
 };
 
 //-----------------------------------------------------------------------------
