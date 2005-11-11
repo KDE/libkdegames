@@ -79,9 +79,9 @@ class KCardDialogPrivate;
  * You might want to check out QPixmap::xFrom which gives you access to
  * scaling. You can e.g. use
  * \code
- * QWMatrix m;
+ * QMatrix m;
  * m.scale(s,s);
- * pixmap.xForm(m);
+ * pixmap.transformed(m);
  * \endcode
  * to scale your pixmap.
  *

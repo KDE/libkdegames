@@ -379,7 +379,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
       {
           file=deck();
           QPixmap pixmap(file);
-          pixmap=pixmap.xForm(m);
+          pixmap=pixmap.transformed(m);
           d->deckLabel->setPixmap(pixmap);
           QToolTip::add(d->deckLabel,d->helpMap[file]);
       }
@@ -396,7 +396,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     {
         file = cardDir() + KCARD_DEFAULTCARD;
         QPixmap pixmap(file);
-        pixmap = pixmap.xForm(m);
+        pixmap = pixmap.transformed(m);
         d->cardLabel->setPixmap(pixmap);
         QToolTip::add(d->cardLabel,d->helpMap[cardDir()]);
     }
@@ -500,7 +500,7 @@ void KCardDialog::insertDeckIcons()
         if (pixmap.isNull())
             continue;
 
-        // pixmap=pixmap.xForm(m);
+        // pixmap=pixmap.transformed(m);
 
         cfg.setGroup(QString::fromLatin1("KDE Cards"));
         QString name=cfg.readEntry("Name", i18n("unnamed"));
@@ -699,7 +699,7 @@ void KCardDialog::slotCardResized(int s)
  QMatrix m;
  double scale = (double)1000/s;
  m.scale(scale, scale);
- QPixmap pix = d->cPreviewPix.xForm(m);
+ QPixmap pix = d->cPreviewPix.transformed(m);
  d->cPreview->setPixmap(pix);
  d->cScale = scale;
 }
