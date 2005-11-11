@@ -434,7 +434,7 @@ signals:
    *    if (no==1)     // but YOU have to do this in the process player
    *    {
    *      QByteArray buffer;
-   *      QDataStream out(buffer,IO_WriteOnly);
+   *      QDataStream out(buffer,QIODevice::WriteOnly);
    *      reply->sendSystemMessage(out,4242,0,0);  // lets reply something...
    *    }
    *  }

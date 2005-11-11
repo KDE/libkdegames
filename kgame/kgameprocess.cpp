@@ -83,7 +83,7 @@ bool KGameProcess::exec(int argc, char *argv[])
 
 //    You have to do this to create a message 
 //    QByteArray buffer;
-//    QDataStream wstream(buffer,IO_WriteOnly);
+//    QDataStream wstream(buffer,QIODevice::WriteOnly);
 //    then stream data into the stream and call this function
 void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 receiver)
 {

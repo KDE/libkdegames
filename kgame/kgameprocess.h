@@ -118,7 +118,7 @@ class KDE_EXPORT KGameProcess:  public QObject
      * Exmaple for a query:
      * \code
      *  QByteArray buffer;
-     *  QDataStream out(buffer,IO_WriteOnly);
+     *  QDataStream out(buffer,QIODevice::WriteOnly);
      *  int msgid=KGameMessage::IdProcessQuery;
      *  out << (int)1;
      *  proc.sendSystemMessage(out,msgid,0);
@@ -195,7 +195,7 @@ class KDE_EXPORT KGameProcess:  public QObject
       *   int id;
       *   int recv;
       *   QByteArray buffer;
-      *   QDataStream out(buffer,IO_WriteOnly);
+      *   QDataStream out(buffer,QIODevice::WriteOnly);
       *   if (turn)
       *   {
       *     // Create a move - the format is yours to decide
