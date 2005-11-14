@@ -35,7 +35,7 @@
 
 #include <qbuffer.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 
 class KGameNetworkPrivate
@@ -139,7 +139,7 @@ void KGameNetwork::setMaster()
             this, SIGNAL(signalClientDisconnected(Q_UINT32, bool)));
 
    // broacast and direct messages are treated equally on receive.
-   connect (d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const Q3ValueList<Q_UINT32>&)),
+   connect (d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, Q_UINT32, const QList<Q_UINT32>&)),
             d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)));
 
  } else {
@@ -278,8 +278,8 @@ void KGameNetwork::disconnect()
  kdDebug(11001) << k_funcinfo << endl;
  stopServerConnection();
  if (d->mMessageServer) {
-    Q3ValueList <Q_UINT32> list=d->mMessageServer->clientIDs();
-    Q3ValueList<Q_UINT32>::Iterator it;
+    QList <Q_UINT32> list=d->mMessageServer->clientIDs();
+    QList<Q_UINT32>::Iterator it;
     for( it = list.begin(); it != list.end(); ++it )
     {
       kdDebug(11001) << "Client id=" << (*it) <<  endl;

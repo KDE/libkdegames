@@ -44,7 +44,7 @@ namespace KGrid2D
      * This type represents a list of @ref Coord.
      * @since 3.2
      */
-    typedef Q3ValueList<Coord> CoordList;
+    typedef QList<Coord> CoordList;
 }
 
 inline KGrid2D::Coord

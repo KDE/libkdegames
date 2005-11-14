@@ -31,7 +31,7 @@
 #include <qlabel.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3ValueList>
+#include <QList>
 #include <Q3VButtonGroup>
 #include <dnssd/servicebrowser.h>
 #include <qpushbutton.h>

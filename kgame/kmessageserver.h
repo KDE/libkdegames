@@ -325,7 +325,7 @@ public:
     /**
      * returns a list of the unique IDs of all clients.
      **/
-    Q3ValueList <Q_UINT32> clientIDs() const;
+    QList <Q_UINT32> clientIDs() const;
 
     /**
      * Find the @ref KMessageIO object to the given client number.
@@ -394,7 +394,7 @@ public:
      * This is just a convenience method. You could also iterate over the
      * list of IDs.
      **/
-    virtual void sendMessage (const Q3ValueList <Q_UINT32> &ids, const QByteArray &msg);
+    virtual void sendMessage (const QList <Q_UINT32> &ids, const QByteArray &msg);
 
 protected slots:
     /**

@@ -280,9 +280,9 @@ int KMessageServer::clientCount() const
   return d->mClientList.count();
 }
 
-Q3ValueList <Q_UINT32> KMessageServer::clientIDs () const
+QList <Q_UINT32> KMessageServer::clientIDs () const
 {
-  Q3ValueList <Q_UINT32> list;
+  QList <Q_UINT32> list;
   for (Q3PtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
     list.append ((*iter)->id());
   return list;
@@ -352,9 +352,9 @@ void KMessageServer::sendMessage (Q_UINT32 id, const QByteArray &msg)
     client->send (msg);
 }
 
-void KMessageServer::sendMessage (const Q3ValueList <Q_UINT32> &ids, const QByteArray &msg)
+void KMessageServer::sendMessage (const QList <Q_UINT32> &ids, const QByteArray &msg)
 {
-  for (Q3ValueListConstIterator <Q_UINT32> iter = ids.begin(); iter != ids.end(); ++iter)
+  for (QList<Q_UINT32>::ConstIterator  iter = ids.begin(); iter != ids.end(); ++iter)
     sendMessage (*iter, msg);
 }
 
@@ -424,7 +424,7 @@ void KMessageServer::processOneMessage ()
 
     case REQ_FORWARD:
       {
-        Q3ValueList <Q_UINT32> clients;
+        QList <Q_UINT32> clients;
         in_stream >> clients;
         out_stream << Q_UINT32 (MSG_FORWARD) << clientID << clients;
         // see above!
@@ -455,9 +455,9 @@ void KMessageServer::processOneMessage ()
     case REQ_REMOVE_CLIENT:
       if (clientID == d->mAdminID)
       {
-        Q3ValueList <Q_UINT32> client_list;
+        QList <Q_UINT32> client_list;
         in_stream >> client_list;
-        for (Q3ValueListIterator <Q_UINT32> iter = client_list.begin(); iter != client_list.end(); ++iter)
+        for (QList<Q_UINT32>::Iterator  iter = client_list.begin(); iter != client_list.end(); ++iter)
         {
           KMessageIO *client = findClient (*iter);
           if (client)

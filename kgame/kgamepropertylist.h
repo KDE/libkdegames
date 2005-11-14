@@ -32,20 +32,20 @@
 // AB: also see README.LIB!
 
 template<class type>
-class KGamePropertyList : public Q3ValueList<type>, public KGamePropertyBase
+class KGamePropertyList : public QList<type>, public KGamePropertyBase
 {
 public:
      /**
      * Typedefs
      */
-    typedef Q3ValueListIterator<type> Iterator;
-    typedef Q3ValueListConstIterator<type> ConstIterator;
+    typedef QListIterator<type> Iterator;
+    typedef QListConstIterator<type> ConstIterator;
 
-  KGamePropertyList() :Q3ValueList<type>(), KGamePropertyBase()
+  KGamePropertyList() :QList<type>(), KGamePropertyBase()
   {
   }
 
-  KGamePropertyList( const KGamePropertyList<type> &a ) : Q3ValueList<type>(a)
+  KGamePropertyList( const KGamePropertyList<type> &a ) : QList<type>(a)
   {
   }
 
@@ -66,7 +66,7 @@ public:
 
   Iterator insert( Iterator it, const type& d )
   {
-    it=Q3ValueList<type>::insert(it,d);
+    it=QList<type>::insert(it,d);
 
     QByteArray b;
     QDataStream s(b, QIODevice::WriteOnly);
@@ -164,7 +164,7 @@ public:
   void load(QDataStream& s)
   {
     kdDebug(11001) << "KGamePropertyList load " << id() << endl;
-    Q3ValueList<type>::clear();
+    QList<type>::clear();
     uint size;
     type data;
     s >> size;
@@ -172,7 +172,7 @@ public:
     for (unsigned int i=0;i<size;i++)
     {
       s >> data;
-      Q3ValueList<type>::append(data);
+      QList<type>::append(data);
     }
     if (isEmittingSignal()) emitSignal();
   }
@@ -204,7 +204,7 @@ public:
         type data;
         s >> i >> data;
         it=at(i);
-        Q3ValueList<type>::insert(it,data);
+        QList<type>::insert(it,data);
 //        kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
@@ -213,7 +213,7 @@ public:
       {
         type data;
 	s >> data;
-        Q3ValueList<type>::append(data);
+        QList<type>::append(data);
 //        kdDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
         if (isEmittingSignal()) emitSignal();
 	break;
@@ -223,14 +223,14 @@ public:
         uint i;
         s >> i;
         it=at(i);
-        Q3ValueList<type>::remove(it);
+        QList<type>::remove(it);
         kdDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdClear:
       {
-        Q3ValueList<type>::clear();
+        QList<type>::clear();
         kdDebug(11001) << "CmdClear:id="<<id()<<endl; 
         if (isEmittingSignal()) emitSignal();
         break;

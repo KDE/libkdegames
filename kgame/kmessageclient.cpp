@@ -23,7 +23,7 @@
 #include <qbuffer.h>
 #include <qtimer.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 #include "kmessageio.h"
 #include "kmessageserver.h"
@@ -43,11 +43,11 @@ public:
   }
 
   Q_UINT32 adminID;
-  Q3ValueList <Q_UINT32> clientList;
+  QList <Q_UINT32> clientList;
   KMessageIO *connection;
 
   bool isLocked;
-  Q3ValueList <QByteArray> delayedMessages;
+  QList <QByteArray> delayedMessages;
 };
 
 KMessageClient::KMessageClient (QObject *parent, const char *name)
@@ -112,7 +112,7 @@ Q_UINT32 KMessageClient::adminId () const
   return d->adminID;
 }
 
-const Q3ValueList <Q_UINT32> &KMessageClient::clientList() const
+const QList <Q_UINT32> &KMessageClient::clientList() const
 {
   return d->clientList;
 }
@@ -161,7 +161,7 @@ void KMessageClient::sendBroadcast (const QByteArray &msg)
   sendServerMessage (sendBuffer);
 }
 
-void KMessageClient::sendForward (const QByteArray &msg, const Q3ValueList <Q_UINT32> &clients)
+void KMessageClient::sendForward (const QByteArray &msg, const QList <Q_UINT32> &clients)
 {
   QByteArray sendBuffer;
   QBuffer buffer (&sendBuffer);
@@ -175,7 +175,7 @@ void KMessageClient::sendForward (const QByteArray &msg, const Q3ValueList <Q_UI
 
 void KMessageClient::sendForward (const QByteArray &msg, Q_UINT32 client)
 {
-  sendForward (msg, Q3ValueList <Q_UINT32> () << client);
+  sendForward (msg, QList <Q_UINT32> () << client);
 }
 
 
@@ -231,7 +231,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
     case KMessageServer::MSG_FORWARD:
       {
         Q_UINT32 clientID;
-        Q3ValueList <Q_UINT32> receivers;
+        QList <Q_UINT32> receivers;
         in_stream >> clientID >> receivers;
         emit forwardReceived (in_buffer.readAll(), clientID, receivers);
       }

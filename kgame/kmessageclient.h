@@ -95,7 +95,7 @@ public:
   /**
     @return The list of the IDs of all the message clients connected to the message server.
   */
-  const Q3ValueList <Q_UINT32> &clientList() const;
+  const QList <Q_UINT32> &clientList() const;
 
   /**
     Connects the client to (another) server.
@@ -218,7 +218,7 @@ public:
     @param clients A list of clients the message should be sent to
   */
   //AB: processForward doesn't exist!! is processIncomingMessage meant?
-  void sendForward (const QByteArray &msg, const Q3ValueList <Q_UINT32> &clients);
+  void sendForward (const QByteArray &msg, const QList <Q_UINT32> &clients);
 
   /**
     Sends a message to a single client. This is a convenieance method. It calls
@@ -303,7 +303,7 @@ signals:
     @param senderID The ID of the client which sent the message
     @param receivers All clients which receive this message
   */
-  void forwardReceived (const QByteArray &msg, Q_UINT32 senderID, const Q3ValueList <Q_UINT32> &receivers);
+  void forwardReceived (const QByteArray &msg, Q_UINT32 senderID, const QList <Q_UINT32> &receivers);
 
   /**
     This signal is emitted when the connection to the KMessageServer is broken.
