@@ -297,7 +297,7 @@ protected slots:
 	void slotRemoveClient();
 
 protected:
-	void removeClient(Q_UINT32 id);
+	void removeClient(quint32 id);
 
 private:
 	KGameDialogMsgServerConfigPrivate* d;

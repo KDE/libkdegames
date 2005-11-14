@@ -59,16 +59,16 @@ MsgId           UserData
 ---------------------------------------------------------
 IdMessage        user defined
 
-IdSetupGame      Q_INT32  isServer
-                 Q_INT32  maxPlayers
-                 Q_INT32  newid (id for the new game)
-                 Q_INT32  cntR (virtual player nunmber)
-                 Q_INT32  cntT (tagged player number)
+IdSetupGame      qint32  isServer
+                 qint32  maxPlayers
+                 qint32  newid (id for the new game)
+                 qint32  cntR (virtual player nunmber)
+                 qint32  cntT (tagged player number)
                  TODO: Changed
 
 IdContinueSetup: TODO
 
-IdSendPlayer     Q_INT32  omit how many tagged players for replacement
+IdSendPlayer     qint32  omit how many tagged players for replacement
                  TODO: Changed
 
 IdGameSave       Save(msg)->Load(msg)
@@ -77,17 +77,17 @@ IdAddPlayer      rtti
                  gameid() of the owner
 		 player->Save(msg) -> player->Load(msg)
 
-IdRemovePlayer   Q_INT16  playerid
+IdRemovePlayer   qint16  playerid
 
-IdError          Q_INT32  errorcode
+IdError          qint32  errorcode
                  QString  errortext
 
-IdGameStatus     Q_INT32  status
+IdGameStatus     qint32  status
 
-IdPlayerProperty Q_INT16  propertyId
+IdPlayerProperty qint16  propertyId
                  user defined -> the property
 
-IdGameProperty   Q_INT16  propertyId
+IdGameProperty   qint16  propertyId
                  user defined -> the property
 
 IdPlayerInput    user defined

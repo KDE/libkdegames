@@ -105,18 +105,18 @@ public:
     have the same ID number. You have to do so yourself, KMessageIO doesn't
     change this value on its own!
   */
-  void setId (Q_UINT32 id);
+  void setId (quint32 id);
 
   /**
     Queries the ID of this object.
   */
-  Q_UINT32 id ();
+  quint32 id ();
 
   /**
     @since 3.2
     @return 0 in the default implementation. Reimplemented in @ref KMessageSocket.
   */
-  virtual Q_UINT16 peerPort () const { return 0; }
+  virtual quint16 peerPort () const { return 0; }
 
   /**
     @since 3.2
@@ -157,7 +157,7 @@ public slots:
   virtual void send (const QByteArray &msg) = 0;
 
 protected:
-  Q_UINT32 m_id;
+  quint32 m_id;
 };
 
 
@@ -181,7 +181,7 @@ public:
     If the connection could not be established (e.g. unknown host or no server
     socket at this port), the signal /e connectionBroken is emitted.
   */
-  KMessageSocket (QString host, Q_UINT16 port, QObject *parent = 0,
+  KMessageSocket (QString host, quint16 port, QObject *parent = 0,
                   const char *name = 0);
 
   /**
@@ -192,7 +192,7 @@ public:
     If the connection could not be established (e.g. unknown host or no server
     socket at this port), the signal /e connectionBroken is emitted.
   */
-  KMessageSocket (QHostAddress host, Q_UINT16 port, QObject *parent = 0,
+  KMessageSocket (QHostAddress host, quint16 port, QObject *parent = 0,
                   const char *name = 0);
 
   /**
@@ -235,7 +235,7 @@ public:
     @since 3.2
     @return The port that this object is connected to. See QSocket::peerPort
   */
-  virtual Q_UINT16 peerPort () const;
+  virtual quint16 peerPort () const;
 
   /**
     @since 3.2
@@ -268,7 +268,7 @@ protected:
   void initSocket ();
   Q3Socket *mSocket;
   bool mAwaitingHeader;
-  Q_UINT32 mNextBlockLength;
+  quint32 mNextBlockLength;
 
   bool isRecursive;  // workaround for "bug" in QSocket, Qt 2.2.3 or older
 };

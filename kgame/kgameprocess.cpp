@@ -49,8 +49,8 @@ KGameProcess::KGameProcess() : QObject(0,0)
   mMessageIO=new KMessageFilePipe(this,&rFile,&wFile);
 //  mMessageClient=new KMessageClient(this);
 //  mMessageClient->setServer(mMessageIO);
-//  connect (mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, Q_UINT32)),
-//          this, SLOT(receivedMessage(const QByteArray&, Q_UINT32)));
+//  connect (mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, quint32)),
+//          this, SLOT(receivedMessage(const QByteArray&, quint32)));
   connect (mMessageIO, SIGNAL(received(const QByteArray&)),
           this, SLOT(receivedMessage(const QByteArray&)));
   fprintf(stderr,"KGameProcess::constructor %p %p\n",&rFile,&wFile);
@@ -85,7 +85,7 @@ bool KGameProcess::exec(int argc, char *argv[])
 //    QByteArray buffer;
 //    QDataStream wstream(buffer,QIODevice::WriteOnly);
 //    then stream data into the stream and call this function
-void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 receiver)
+void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,quint32 receiver)
 {
   fprintf(stderr,"KGameProcess::sendMessage id=%d recv=%d",msgid,receiver);
   QByteArray a;
@@ -104,7 +104,7 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 rece
   if (mMessageIO) mMessageIO->send(a);
 }
 
-void KGameProcess::sendMessage(QDataStream &stream,int msgid,Q_UINT32 receiver)
+void KGameProcess::sendMessage(QDataStream &stream,int msgid,quint32 receiver)
 {
   sendSystemMessage(stream,msgid+KGameMessage::IdUser,receiver);
 }
@@ -130,19 +130,19 @@ void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
 {
  QDataStream stream(receiveBuffer);
  int msgid;
- Q_UINT32 sender; 
- Q_UINT32 receiver; 
+ quint32 sender; 
+ quint32 receiver; 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
  fprintf(stderr,"------ receiveNetworkTransmission(): id=%d sender=%d,recv=%d\n",msgid,sender,receiver);
  switch(msgid)
  {
    case KGameMessage::IdTurn:
-     Q_INT8 b;
+     qint8 b;
      stream >> b;
      emit signalTurn(stream,(bool)b);
    break;
    case KGameMessage::IdIOAdded:
-     Q_INT16 id;
+     qint16 id;
      stream >> id;
      emit signalInit(stream,(int)id);
    break;

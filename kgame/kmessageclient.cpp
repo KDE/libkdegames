@@ -42,8 +42,8 @@ public:
     delete connection;
   }
 
-  Q_UINT32 adminID;
-  QList <Q_UINT32> clientList;
+  quint32 adminID;
+  QList <quint32> clientList;
   KMessageIO *connection;
 
   bool isLocked;
@@ -65,7 +65,7 @@ KMessageClient::~KMessageClient ()
 
 // -- setServer stuff
 
-void KMessageClient::setServer (const QString &host, Q_UINT16 port)
+void KMessageClient::setServer (const QString &host, quint16 port)
 {
   setServer (new KMessageSocket (host, port));
 }
@@ -97,7 +97,7 @@ void KMessageClient::setServer (KMessageIO *connection)
 
 // -- id stuff
 
-Q_UINT32 KMessageClient::id () const
+quint32 KMessageClient::id () const
 {
   return (d->connection) ? d->connection->id () : 0;
 }
@@ -107,12 +107,12 @@ bool KMessageClient::isAdmin () const
   return id() != 0 && id() == adminId();
 }
 
-Q_UINT32 KMessageClient::adminId () const
+quint32 KMessageClient::adminId () const
 {
   return d->adminID;
 }
 
-const QList <Q_UINT32> &KMessageClient::clientList() const
+const QList <quint32> &KMessageClient::clientList() const
 {
   return d->clientList;
 }
@@ -127,7 +127,7 @@ bool KMessageClient::isNetwork () const
   return isConnected() ? d->connection->isNetwork() : false;
 }
 
-Q_UINT16 KMessageClient::peerPort () const
+quint16 KMessageClient::peerPort () const
 {
  return d->connection ? d->connection->peerPort() : 0;
 }
@@ -156,26 +156,26 @@ void KMessageClient::sendBroadcast (const QByteArray &msg)
   buffer.open (QIODevice::WriteOnly);
   QDataStream stream (&buffer);
 
-  stream << static_cast<Q_UINT32> ( KMessageServer::REQ_BROADCAST );
+  stream << static_cast<quint32> ( KMessageServer::REQ_BROADCAST );
   buffer.QIODevice::writeBlock (msg);
   sendServerMessage (sendBuffer);
 }
 
-void KMessageClient::sendForward (const QByteArray &msg, const QList <Q_UINT32> &clients)
+void KMessageClient::sendForward (const QByteArray &msg, const QList <quint32> &clients)
 {
   QByteArray sendBuffer;
   QBuffer buffer (&sendBuffer);
   buffer.open (QIODevice::WriteOnly);
   QDataStream stream (&buffer);
 
-  stream << static_cast<Q_UINT32>( KMessageServer::REQ_FORWARD ) << clients;
+  stream << static_cast<quint32>( KMessageServer::REQ_FORWARD ) << clients;
   buffer.QIODevice::writeBlock (msg);
   sendServerMessage (sendBuffer);
 }
 
-void KMessageClient::sendForward (const QByteArray &msg, Q_UINT32 client)
+void KMessageClient::sendForward (const QByteArray &msg, quint32 client)
 {
-  sendForward (msg, QList <Q_UINT32> () << client);
+  sendForward (msg, QList <quint32> () << client);
 }
 
 
@@ -216,13 +216,13 @@ void KMessageClient::processMessage (const QByteArray &msg)
 
   bool unknown = false;
 
-  Q_UINT32 messageID;
+  quint32 messageID;
   in_stream >> messageID;
   switch (messageID)
   {
     case KMessageServer::MSG_BROADCAST:
       {
-        Q_UINT32 clientID;
+        quint32 clientID;
         in_stream >> clientID;
         emit broadcastReceived (in_buffer.readAll(), clientID);
       }
@@ -230,8 +230,8 @@ void KMessageClient::processMessage (const QByteArray &msg)
 
     case KMessageServer::MSG_FORWARD:
       {
-        Q_UINT32 clientID;
-        QList <Q_UINT32> receivers;
+        quint32 clientID;
+        QList <quint32> receivers;
         in_stream >> clientID >> receivers;
         emit forwardReceived (in_buffer.readAll(), clientID, receivers);
       }
@@ -240,7 +240,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
     case KMessageServer::ANS_CLIENT_ID:
       {
         bool old_admin = isAdmin();
-        Q_UINT32 clientID;
+        quint32 clientID;
         in_stream >> clientID;
         d->connection->setId (clientID);
         if (old_admin != isAdmin())
@@ -265,7 +265,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
 
     case KMessageServer::EVNT_CLIENT_CONNECTED:
       {
-        Q_UINT32 id;
+        quint32 id;
         in_stream >> id;
 
         if (d->clientList.contains (id))
@@ -279,8 +279,8 @@ void KMessageClient::processMessage (const QByteArray &msg)
 
     case KMessageServer::EVNT_CLIENT_DISCONNECTED:
       {
-        Q_UINT32 id;
-        Q_INT8 broken;
+        quint32 id;
+        qint8 broken;
         in_stream >> id >> broken;
 
         if (!d->clientList.contains (id))

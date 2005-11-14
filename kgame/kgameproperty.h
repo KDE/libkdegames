@@ -66,7 +66,7 @@ public:
 	};
 
 	/**
-	 * Commands for advanced properties (Q_INT8)
+	 * Commands for advanced properties (qint8)
 	 **/
 	enum PropertyCommandIds 
 	{
@@ -546,16 +546,16 @@ private:
  * };
  * QDataStream& operator<<(QDataStream& stream, Card& card)
  * {
- * Q_INT16 type = card.type;
- * Q_INT16 suite = card.suite;
+ * qint16 type = card.type;
+ * qint16 suite = card.suite;
  * s << type;
  * s << suite;
  * return s;
  * }
  * QDataStream& operator>>(QDataStream& stream, Card& card)
  * {
- * Q_INT16 type;
- * Q_INT16 suite;
+ * qint16 type;
+ * qint16 suite;
  * s >> type;
  * s >> suite;
  * card.type = (int)type;
@@ -843,6 +843,6 @@ private:
 typedef KGameProperty<int>   KGamePropertyInt;
 typedef KGameProperty<unsigned int>   KGamePropertyUInt;
 typedef KGameProperty<QString>   KGamePropertyQString;
-typedef KGameProperty<Q_INT8>   KGamePropertyBool;
+typedef KGameProperty<qint8>   KGamePropertyBool;
 
 #endif

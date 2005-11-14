@@ -447,7 +447,7 @@ void KGameDebugDialog::setKGame(const KGame* g)
 
 	slotUpdateGameData();
 
-	connect(d->mGame, SIGNAL(signalMessageUpdate(int, Q_UINT32, Q_UINT32)), this, SLOT(slotMessageUpdate(int, Q_UINT32, Q_UINT32)));
+	connect(d->mGame, SIGNAL(signalMessageUpdate(int, quint32, quint32)), this, SLOT(slotMessageUpdate(int, quint32, quint32)));
  }
 }
 
@@ -487,7 +487,7 @@ void KGameDebugDialog::removePlayer(Q3ListBoxItem* i)
  delete i;
 }
 
-void KGameDebugDialog::slotMessageUpdate(int msgid, Q_UINT32 receiver, Q_UINT32 sender)
+void KGameDebugDialog::slotMessageUpdate(int msgid, quint32 receiver, quint32 sender)
 {
  if (!showId(msgid)) {
 	return;

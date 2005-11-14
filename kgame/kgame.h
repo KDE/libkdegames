@@ -178,7 +178,7 @@ public:
      * @param id Player id
      * @return player object
      */
-    KPlayer *findPlayer(Q_UINT32 id) const;
+    KPlayer *findPlayer(quint32 id) const;
 
     /**
      * Set a new @ref KGameSequence to control player management. By default
@@ -282,7 +282,7 @@ public:
      * Called by KPlayer to send a player input to the
      * KMessageServer.
      **/
-    virtual bool sendPlayerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
+    virtual bool sendPlayerInput(QDataStream &msg,KPlayer *player,quint32 sender=0);
 
     /**
      * Called when a player input arrives from KMessageServer.
@@ -294,7 +294,7 @@ public:
      *
      * For documentation see playerInput.
      **/
-    virtual bool systemPlayerInput(QDataStream &msg,KPlayer *player,Q_UINT32 sender=0);
+    virtual bool systemPlayerInput(QDataStream &msg,KPlayer *player,quint32 sender=0);
 
     /**
     * This virtual function is called if the KGame needs to create a new player.
@@ -403,7 +403,7 @@ public:
     /**
      * This is called by KPlayer::sendProperty only! Internal function!
      **/
-    bool sendPlayerProperty(int msgid, QDataStream& s, Q_UINT32 playerId);
+    bool sendPlayerProperty(int msgid, QDataStream& s, quint32 playerId);
 
     /**
     * This function allows to find the pointer to a player
@@ -435,10 +435,10 @@ public:
      * @param group the group of the receivers
      * @return true if worked
      */
-    bool sendGroupMessage(const QByteArray& msg, int msgid, Q_UINT32 sender, const QString& group);
-    bool sendGroupMessage(const QDataStream &msg, int msgid, Q_UINT32 sender, const QString& group);
-    bool sendGroupMessage(int msg, int msgid, Q_UINT32 sender, const QString& group);
-    bool sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, const QString& group);
+    bool sendGroupMessage(const QByteArray& msg, int msgid, quint32 sender, const QString& group);
+    bool sendGroupMessage(const QDataStream &msg, int msgid, quint32 sender, const QString& group);
+    bool sendGroupMessage(int msg, int msgid, quint32 sender, const QString& group);
+    bool sendGroupMessage(const QString& msg, int msgid, quint32 sender, const QString& group);
 
     /**
      * This will either forward an incoming message to a specified player
@@ -458,7 +458,7 @@ public:
      * @param sender
      * @param clientID the client from which we received the transmission - hardly used
      **/
-    virtual void networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender, Q_UINT32 clientID);
+    virtual void networkTransmission(QDataStream &stream, int msgid, quint32 receiver, quint32 sender, quint32 clientID);
 
     /**
      * Returns a pointer to the KGame property handler
@@ -487,7 +487,7 @@ protected slots:
      * Calls negotiateNetworkGame()
      * See KGameNetwork::signalClientConnected
      **/
-    void slotClientConnected(Q_UINT32 clientId);
+    void slotClientConnected(quint32 clientId);
 
     /**
      * This slot is called whenever the connection to a client is lost (ie the
@@ -496,7 +496,7 @@ protected slots:
      * @param clientId The client the connection has been lost to
      * @param broken (ignore this - not used)
      **/
-    void slotClientDisconnected(Q_UINT32 clientId,bool broken);
+    void slotClientDisconnected(quint32 clientId,bool broken);
 
     /**
      * This slot is called whenever the connection to the server is lost (ie the
@@ -593,14 +593,14 @@ signals:
      * own methods and has to syncronise them over the network.
      * Reaction to this is usually a call to a KGame function.
      */
-    void signalNetworkData(int msgid,const QByteArray& buffer, Q_UINT32 receiver, Q_UINT32 sender);
+    void signalNetworkData(int msgid,const QByteArray& buffer, quint32 receiver, quint32 sender);
 
     /**
      * We got an network message. this can be used to notify us that something
      * changed. What changed can be seen in the message id. Whether this is
      * the best possible method to do this is unclear...
      */
-    void signalMessageUpdate(int msgid,Q_UINT32 receiver,Q_UINT32 sender);
+    void signalMessageUpdate(int msgid,quint32 receiver,quint32 sender);
 
     /**
      * a player left the game because of a broken connection or so!
@@ -649,7 +649,7 @@ signals:
     * @param clientid - The id of the new client
     * @param me - our game pointer
     */
-    void signalClientJoinedGame(Q_UINT32 clientid,KGame *me);
+    void signalClientJoinedGame(quint32 clientid,KGame *me);
 
     /**
     * This signal is emitted after a network partner left the
@@ -688,7 +688,7 @@ protected:
      * \code
      * bool MyClass::playerInput(QDataStream &msg,KPlayer *player)
      * {
-     *   Q_INT32 move;
+     *   qint32 move;
      *   msg >>  move;
      *   kdDebug() << "  Player " << player->id() << " moved to " << move <<
      *   endl;
@@ -839,7 +839,7 @@ protected:
      * Only the ADMIN is allowed to call this.
      * @param clientID The ID of the message client which has connected
      **/
-    virtual void negotiateNetworkGame(Q_UINT32 clientID);
+    virtual void negotiateNetworkGame(quint32 clientID);
 
     /**
      * syncronise the random numbers with all network clients
@@ -896,24 +896,24 @@ private:
      * ever need this. It it internally used to initialize a newly connected
      * client.
      **/
-    //void addPlayer(KPlayer* newplayer, Q_UINT32 receiver);
+    //void addPlayer(KPlayer* newplayer, quint32 receiver);
 
     /**
      * Just the same as the public one except receiver:
      * @param receiver 0 for broadcast, otherwise the receiver. Should only be
      * used in special circumstances and not outside KGame.
      **/
-    bool removePlayer(KPlayer * player, Q_UINT32 receiver);
+    bool removePlayer(KPlayer * player, quint32 receiver);
 
     /**
      * Helping function - game negotiation
      **/
-    void setupGame(Q_UINT32 sender);
+    void setupGame(quint32 sender);
 
     /**
      * Helping function - game negotiation
      **/
-    void setupGameContinue(QDataStream& msg, Q_UINT32 sender);
+    void setupGameContinue(QDataStream& msg, quint32 sender);
 
     /**
      * Removes a player from all lists, removes the @ref KGame pointer from the

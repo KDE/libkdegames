@@ -121,7 +121,7 @@ public slots:
 	virtual void addMessage(const QString& fromName, const QString& text) { KChatBase::addMessage(fromName, text);}
 	virtual void addMessage(int fromId, const QString& text);
 
-	void slotReceiveMessage(int, const QByteArray&, Q_UINT32 receiver, Q_UINT32 sender);
+	void slotReceiveMessage(int, const QByteArray&, quint32 receiver, quint32 sender);
 
 protected:
 	/**
@@ -208,7 +208,7 @@ protected slots:
 	 * gets forwarded to slotReceiveMessage if @p me equals
 	 * fromPlayer.
 	 **/
-	void slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer* me);
+	void slotReceivePrivateMessage(int msgid, const QByteArray& buffer, quint32 sender, KPlayer* me);
 
 protected:
 	virtual void returnPressed(const QString& text);

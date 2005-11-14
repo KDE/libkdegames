@@ -103,10 +103,10 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
  d->mRandom = new KRandomSequence;
  d->mRandom->setSeed(0);
 
- connect(this, SIGNAL(signalClientConnected(Q_UINT32)),
-                this, SLOT(slotClientConnected(Q_UINT32)));
- connect(this, SIGNAL(signalClientDisconnected(Q_UINT32,bool)),
-                this, SLOT(slotClientDisconnected(Q_UINT32,bool)));
+ connect(this, SIGNAL(signalClientConnected(quint32)),
+                this, SLOT(slotClientConnected(quint32)));
+ connect(this, SIGNAL(signalClientDisconnected(quint32,bool)),
+                this, SLOT(slotClientDisconnected(quint32,bool)));
  connect(this, SIGNAL(signalConnectionBroken()),
                 this, SLOT(slotServerDisconnected()));
 
@@ -186,7 +186,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  // Load Game Data
 
  // internal data
- Q_INT32 c;
+ qint32 c;
  stream >> c; // cookie
 
  if (c!=cookie())
@@ -243,7 +243,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
    systemAddPlayer(newplayer);
  }
 
- Q_INT16 cookie;
+ qint16 cookie;
  stream >> cookie;
  if (cookie==KGAME_LOAD_COOKIE) {
    kdDebug(11001) << "   Game loaded propertly"<<endl;
@@ -291,7 +291,7 @@ bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
   // Save Game Data
 
   // internal variables
-  Q_INT32 c=cookie();
+  qint32 c=cookie();
   stream << c;
 
   uint p=(uint)policy();
@@ -316,7 +316,7 @@ bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
    stream << (uint)0; // no players saved
  }
 
- stream << (Q_INT16)KGAME_LOAD_COOKIE;
+ stream << (qint16)KGAME_LOAD_COOKIE;
 
  emit signalSave(stream);
  return true;
@@ -325,9 +325,9 @@ bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
 void KGame::savePlayer(QDataStream &stream,KPlayer* p)
 {
 // this could be in KGameMessage as well
- stream << (Q_INT32)p->rtti();
- stream << (Q_INT32)p->id();
- stream << (Q_INT32)p->calcIOValue();
+ stream << (qint32)p->rtti();
+ stream << (qint32)p->id();
+ stream << (qint32)p->calcIOValue();
  p->save(stream);
 }
 
@@ -338,7 +338,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
    list=playerList();
  }
 
- Q_INT32 cnt=list->count();
+ qint32 cnt=list->count();
  kdDebug(11001) << "Saving KGame " << cnt << " KPlayer objects " << endl;
  stream << cnt;
  KPlayer *player;
@@ -355,7 +355,7 @@ KPlayer *KGame::createPlayer(int /*rtti*/,int /*io*/,bool /*isvirtual*/)
 }
 KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
 {
-  Q_INT32 rtti,id,iovalue;
+  qint32 rtti,id,iovalue;
   stream >> rtti >> id >> iovalue;
   KPlayer *newplayer=findPlayer(id);
   if (!newplayer)
@@ -385,7 +385,7 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
 
 // ----------------- Player handling -----------------------
 
-KPlayer * KGame::findPlayer(Q_UINT32 id) const
+KPlayer * KGame::findPlayer(quint32 id) const
 {
  for (Q3PtrListIterator<KPlayer> it(d->mPlayerList); it.current(); ++it)
  {
@@ -509,7 +509,7 @@ void KGame::playerDeleted(KPlayer *player)
  }
 }
 
-bool KGame::removePlayer(KPlayer * player, Q_UINT32 receiver)
+bool KGame::removePlayer(KPlayer * player, quint32 receiver)
 {//transmit to all clients, or to receiver only
  if (!player)
  {
@@ -708,7 +708,7 @@ KRandomSequence* KGame::random() const
 { return d->mRandom; }
 
 
-bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
+bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
  if (!player)
  {
@@ -726,7 +726,7 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
  return true;
 }
 
-bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, Q_UINT32 sender)
+bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
  if (!player)
  {
@@ -842,7 +842,7 @@ void KGame::setGameStatus(int status)
  d->mGameStatus = status;
 }
 
-void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender, Q_UINT32 /*clientID*/)
+void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver, quint32 sender, quint32 /*clientID*/)
 {//clientID is unused
  // message targets a playerobject. If we find it we forward the message to the
  // player. Otherwise we proceed here and hope the best that the user processes
@@ -886,8 +886,8 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
  {
    case KGameMessage::IdSetupGame:  // Client: First step in setup game
    {
-     Q_INT16 v;
-     Q_INT32 c;
+     qint16 v;
+     qint32 c;
      stream >> v >> c;
      kdDebug(11001) << " ===================> (Client) " << k_funcinfo << ": Got IdSetupGame ================== " << endl;
      kdDebug(11001) << "our game id is " << gameId() << " Lib version=" << v << " App Cookie=" << c << endl; 
@@ -1045,10 +1045,10 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, Q_UINT32 receive
 // called by the IdSetupGameContinue Message - MASTER SIDE
 // Here the master needs to decide which players can take part at the game
 // and which will be deactivated
-void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
+void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
 {
   KPlayer *player;
-  Q_INT32 cnt;
+  qint32 cnt;
   int i;
   stream >> cnt;
 
@@ -1197,14 +1197,14 @@ void KGame::setupGameContinue(QDataStream& stream, Q_UINT32 sender)
 
 // called by the IdSetupGame Message - CLIENT SIDE
 // Client needs to prepare for network transfer
-void KGame::setupGame(Q_UINT32 sender)
+void KGame::setupGame(quint32 sender)
 {
   QByteArray bufferS;
   QDataStream streamS(&bufferS,QIODevice::WriteOnly);
 
   // Deactivate all players
   KGamePlayerList mTmpList(d->mPlayerList); // we need copy otherwise the removal crashes
-  Q_INT32 cnt=mTmpList.count();
+  qint32 cnt=mTmpList.count();
   kdDebug(11001) << "Client: playerlistcount=" << d->mPlayerList.count() << " tmplistcout=" << cnt << endl;
 
   streamS << cnt;
@@ -1253,7 +1253,7 @@ void KGame::Debug()
  kdDebug(11001) << "---------------------------------------------------" << endl;
 }
 
-void KGame::slotClientConnected(Q_UINT32 clientID)
+void KGame::slotClientConnected(quint32 clientID)
 {
  if (isAdmin())
  {
@@ -1324,7 +1324,7 @@ void KGame::slotServerDisconnected() // Client side
   emit signalClientLeftGame(0,oldgamestatus,this);
 }
 
-void KGame::slotClientDisconnected(Q_UINT32 clientID,bool /*broken*/) // server side
+void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server side
 {
  kdDebug(11001) << "++++(SERVER)+++++++" << k_funcinfo << " clientId=" << clientID << endl;
 
@@ -1375,7 +1375,7 @@ void KGame::slotClientDisconnected(Q_UINT32 clientID,bool /*broken*/) // server 
 // we send the number of players (including type) as well as game status and
 // properties to the client. After the initialization has been completed both
 // clients should have the same status (ie players, properties, etc)
-void KGame::negotiateNetworkGame(Q_UINT32 clientID)
+void KGame::negotiateNetworkGame(quint32 clientID)
 {
  kdDebug(11001) << "===========================" << k_funcinfo << ": clientID=" << clientID << " =========================== "<< endl;
  if (!isAdmin())
@@ -1388,17 +1388,17 @@ void KGame::negotiateNetworkGame(Q_UINT32 clientID)
  QDataStream streamGS(&buffer,QIODevice::WriteOnly);
 
  // write Game setup specific data
- //streamGS << (Q_INT32)maxPlayers();
- //streamGS << (Q_INT32)minPlayers();
+ //streamGS << (qint32)maxPlayers();
+ //streamGS << (qint32)minPlayers();
 
  // send to the newly connected client *only*
- Q_INT16 v=KGameMessage::version();
- Q_INT32 c=cookie();
+ qint16 v=KGameMessage::version();
+ qint32 c=cookie();
  streamGS << v << c;
  sendSystemMessage(streamGS, KGameMessage::IdSetupGame, clientID);
 }
 
-bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, Q_UINT32 sender, const QString& group)
+bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, quint32 sender, const QString& group)
 {
 // AB: group must not be i18n'ed!! we should better use an id for group and use
 // a groupName() for the name // FIXME
@@ -1413,10 +1413,10 @@ bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, Q_UINT32 sender, 
  return true;
 }
 
-bool KGame::sendGroupMessage(const QDataStream &msg, int msgid, Q_UINT32 sender, const QString& group)
+bool KGame::sendGroupMessage(const QDataStream &msg, int msgid, quint32 sender, const QString& group)
 { return sendGroupMessage(((QBuffer*)msg.device())->buffer(), msgid, sender, group); }
 
-bool KGame::sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, const QString& group)
+bool KGame::sendGroupMessage(const QString& msg, int msgid, quint32 sender, const QString& group)
 {
  QByteArray buffer;
  QDataStream stream(&buffer, QIODevice::WriteOnly);
@@ -1427,7 +1427,7 @@ bool KGame::sendGroupMessage(const QString& msg, int msgid, Q_UINT32 sender, con
 bool KGame::addProperty(KGamePropertyBase* data)
 { return dataHandler()->addProperty(data); }
 
-bool KGame::sendPlayerProperty(int msgid, QDataStream& s, Q_UINT32 playerId)
+bool KGame::sendPlayerProperty(int msgid, QDataStream& s, quint32 playerId)
 { return sendSystemMessage(s, msgid, playerId); }
 
 void KGame::sendProperty(int msgid, QDataStream& stream, bool* sent)

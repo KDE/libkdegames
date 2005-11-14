@@ -173,7 +173,7 @@ void KGamePropertyBase::setLock(bool l)
  QDataStream s(&b, QIODevice::WriteOnly);
  KGameMessage::createPropertyCommand(s, IdCommand, id(), CmdLock);
  
- s << (Q_INT8)l;
+ s << (qint8)l;
  if (mOwner) {
 	mOwner->sendProperty(s);
  } else {
@@ -198,7 +198,7 @@ void KGamePropertyBase::command(QDataStream& s, int cmd, bool isSender)
 	case CmdLock:
 	{
 		if (!isSender) {
-			Q_INT8 locked;
+			qint8 locked;
 			s >> locked;
 			mFlags.bits.locked = (bool)locked ;
 			break;

@@ -142,7 +142,7 @@ int KChatBaseText::width(Q3ListBox* lb) const
 	w += QFontMetrics(messageFont()).width(message());
  }
 // int w = lb ? lb->fontMetrics().width( text() ) + 6 : 0; // QT orig
- return QMAX(w, QApplication::globalStrut().width());
+ return qMax(w, QApplication::globalStrut().width());
 }
 
 int KChatBaseText::height(Q3ListBox* lb) const
@@ -158,7 +158,7 @@ int KChatBaseText::height(Q3ListBox* lb) const
 	}
  }
 // int h = lb ? lb->fontMetrics().lineSpacing() + 2 : 0; // QT orig
- return QMAX(h, QApplication::globalStrut().height());
+ return qMax(h, QApplication::globalStrut().height());
 }
 
 

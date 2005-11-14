@@ -184,14 +184,14 @@ public:
        *
        * @return the player id
        */
-      Q_UINT32 id() const; 
+      quint32 id() const; 
 
       /* Set the players id. This is done automatically by
        * the game object when adding a new player!
        *
        * @param i the player id
        */
-      void setId(Q_UINT32 i);
+      void setId(quint32 i);
 
       /**
        * Returns the user defined id of the player
@@ -333,12 +333,12 @@ public:
        * KGame::playerInput() (if player=false, ie the message *was* sent through
        * KGame::sendPlayerInput).
        */
-      virtual bool forwardInput(QDataStream &msg,bool transmit=true, Q_UINT32 sender=0);
+      virtual bool forwardInput(QDataStream &msg,bool transmit=true, quint32 sender=0);
 
       /**
        * Forwards Message to the game object..internal use only
        */
-      virtual bool forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver=0,Q_UINT32 sender=0);
+      virtual bool forwardMessage(QDataStream &msg,int msgid,quint32 receiver=0,quint32 sender=0);
 
       // Game logic
       /**
@@ -390,7 +390,7 @@ public:
        * @param stream The message itself
        * @param sender 
        **/
-      void networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender);
+      void networkTransmission(QDataStream &stream,int msgid,quint32 sender);
 
       /**
        * Searches for a property of the player given its id. 
@@ -430,7 +430,7 @@ signals:
        *  means probably a user message. Connecting to this signal
        *  allowed to process it.
        */
-       void signalNetworkData(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer *me);
+       void signalNetworkData(int msgid, const QByteArray& buffer, quint32 sender, KPlayer *me);
 
        /**
         * This signal is emmited if a player property changes its value and

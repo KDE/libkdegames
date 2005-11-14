@@ -132,7 +132,7 @@ public:
     /**
      * Send an input message using @ref KPlayer::forwardInput
      **/
-    bool sendInput(QDataStream& stream, bool transmit = true, Q_UINT32 sender = 0);
+    bool sendInput(QDataStream& stream, bool transmit = true, quint32 sender = 0);
 
 signals:
     /**
@@ -225,7 +225,7 @@ signals:
        * Example:
        * \code
        * KPlayer *player=input->player(); // Get the player
-       * Q_INT32 key=e->key();
+       * qint32 key=e->key();
        * stream << key;
        * eatevent=true;
        * \endcode
@@ -295,7 +295,7 @@ signals:
        * Example:
        * \code
        * KPlayer *player=input->player(); // Get the player
-       * Q_INT32 button=e->button();
+       * qint32 button=e->button();
        * stream << button;
        * eatevent=true;
        * \endcode
@@ -368,7 +368,7 @@ public:
      * @param receiver - not used
      * @param sender - who send the message
      */
-    void sendMessage(QDataStream &stream,int msgid, Q_UINT32 receiver, Q_UINT32 sender);
+    void sendMessage(QDataStream &stream,int msgid, quint32 receiver, quint32 sender);
 
     /**
      * Send a system message to the process. This is analogous to the sendMessage
@@ -380,7 +380,7 @@ public:
      * @param receiver - not used
      * @param sender - who send the message
      */
-    void sendSystemMessage(QDataStream &stream, int msgid, Q_UINT32 receiver, Q_UINT32 sender);
+    void sendSystemMessage(QDataStream &stream, int msgid, quint32 receiver, quint32 sender);
 
     /** 
      * Init this device by setting the player and e.g. sending an
@@ -407,7 +407,7 @@ public:
     /**
      * Internal ~ombined function for all message handling 
      **/
-    void sendAllMessages(QDataStream &stream,int msgid, Q_UINT32 receiver, Q_UINT32 sender, bool usermsg);
+    void sendAllMessages(QDataStream &stream,int msgid, quint32 receiver, quint32 sender, bool usermsg);
 
   protected slots:
   /**

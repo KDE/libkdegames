@@ -36,19 +36,19 @@ KMessageIO::KMessageIO (QObject *parent, const char *name)
 KMessageIO::~KMessageIO ()
 {}
 
-void KMessageIO::setId (Q_UINT32 id)
+void KMessageIO::setId (quint32 id)
 {
   m_id = id;
 }
 
-Q_UINT32 KMessageIO::id ()
+quint32 KMessageIO::id ()
 {
   return m_id;
 }
 
 // ----------------------KMessageSocket -----------------------
 
-KMessageSocket::KMessageSocket (QString host, Q_UINT16 port, QObject *parent, 
+KMessageSocket::KMessageSocket (QString host, quint16 port, QObject *parent, 
 const char *name)
   : KMessageIO (parent, name)
 {
@@ -57,7 +57,7 @@ const char *name)
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (QHostAddress host, Q_UINT16 port, QObject 
+KMessageSocket::KMessageSocket (QHostAddress host, quint16 port, QObject 
 *parent, const char *name)
   : KMessageIO (parent, name)
 {
@@ -96,8 +96,8 @@ bool KMessageSocket::isConnected () const
 void KMessageSocket::send (const QByteArray &msg)
 {
   QDataStream str (mSocket);
-  str << Q_UINT8 ('M');  // magic number for begin of message
-  str.writeBytes (msg.data(), msg.size());  // writes the length (as Q_UINT32) and the data
+  str << quint8 ('M');  // magic number for begin of message
+  str.writeBytes (msg.data(), msg.size());  // writes the length (as quint32) and the data
 }
 
 void KMessageSocket::processNewData ()
@@ -121,7 +121,7 @@ void KMessageSocket::processNewData ()
       // Read the magic number first. If something unexpected is found,
       // start over again, ignoring the data that was read up to then.
 
-      Q_UINT8 v;
+      quint8 v;
       str >> v;
       if (v != 'M')
       {
@@ -165,7 +165,7 @@ void KMessageSocket::initSocket ()
   isRecursive = false;
 }
 
-Q_UINT16 KMessageSocket::peerPort () const
+quint16 KMessageSocket::peerPort () const
 {
   return mSocket->peerPort();
 }

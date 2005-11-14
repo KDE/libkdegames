@@ -73,53 +73,53 @@ class KMessageServerPrivate;
 
   Here is a list of the messages the KMessageServer understands:
   &lt;&lt; means, the value is inserted into the QByteArray using QDataStream. The
-  messageIDs (REQ_BROADCAST, ...) are of type Q_UINT32.
+  messageIDs (REQ_BROADCAST, ...) are of type quint32.
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_BROADCAST ) << raw_data
+  - QByteArray << static_cast&lt;quint32>( REQ_BROADCAST ) << raw_data
 
     When the server receives this message, it sends the following message to
     ALL connected clients (a broadcast), where the raw_data is left unchanged:
-       QByteArray << static_cast &lt;Q_UINT32>( MSG_BROADCAST ) << clientID << raw_data
-       Q_UINT32 clientID; // the ID of the client that sent the broadcast request
+       QByteArray << static_cast &lt;quint32>( MSG_BROADCAST ) << clientID << raw_data
+       quint32 clientID; // the ID of the client that sent the broadcast request
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_FORWARD ) << client_list << raw_data
-    QValueList &lt;Q_UINT32> client_list; // list of receivers
+  - QByteArray << static_cast&lt;quint32>( REQ_FORWARD ) << client_list << raw_data
+    QValueList &lt;quint32> client_list; // list of receivers
 
     When the server receives this message, it sends the following message to
     the clients in client_list:
-        QByteArray << static_cast&lt;Q_UINT32>( MSG_FORWARD ) << senderID << client_list << raw_data
-        Q_UINT32 senderID;  // the sender of the forward request
-        QValueList &lt;Q_UINT32> client_list; // a copy of the receiver list
+        QByteArray << static_cast&lt;quint32>( MSG_FORWARD ) << senderID << client_list << raw_data
+        quint32 senderID;  // the sender of the forward request
+        QValueList &lt;quint32> client_list; // a copy of the receiver list
 
     Note: Every client receives the message as many times as he is in the client_list.
     Note: Since the client_list is sent to all the clients, every client can see who else
           got the message. If you want to prevent this, send a single REQ_FORWARD
           message for every receiver.
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_CLIENT_ID )
+  - QByteArray << static_cast&lt;quint32>( REQ_CLIENT_ID )
 
     When the server receives this message, it sends the following message to
     the asking client:
-        QByteArray << static_cast&lt;Q_UINT32>( ANS_CLIENT_ID ) << clientID
-        Q_UINT32 clientID;  // The ID of the client who asked for it
+        QByteArray << static_cast&lt;quint32>( ANS_CLIENT_ID ) << clientID
+        quint32 clientID;  // The ID of the client who asked for it
 
     Note: This answer is also automatically sent to a new connected client, so that he
           can store his ID. The ID of a client doesn't change during his lifetime, and is
           unique for this KMessageServer.
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_ADMIN_ID )
+  - QByteArray << static_cast&lt;quint32>( REQ_ADMIN_ID )
 
     When the server receives this message, it sends the following message to
     the asking client:
         QByteArray << ANS_ADMIN_ID << adminID
-        Q_UINT32 adminID;  // The ID of the admin
+        quint32 adminID;  // The ID of the admin
 
     Note: This answer is also automatically sent to a new connected client, so that he
           can see if he is the admin or not. It will also be sent to all connected clients
           when a new admin is set (see REQ_ADMIN_CHANGE).
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_ADMIN_CHANGE ) << new_admin
-    Q_UINT32 new_admin;  // the ID of the new admin, or 0 for no admin
+  - QByteArray << static_cast&lt;quint32>( REQ_ADMIN_CHANGE ) << new_admin
+    quint32 new_admin;  // the ID of the new admin, or 0 for no admin
 
     When the server receives this message, it sets the admin to the new ID. If no client
     with that ID exists, nothing happens. With new_admin == 0 no client is a admin.
@@ -127,8 +127,8 @@ class KMessageServerPrivate;
 
     Note: The server sends a ANS_ADMIN_ID message to every connected client.
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_REMOVE_CLIENT ) << client_list
-    QValueList &lt;Q_UINT32> client_list; // The list of clients to be removed
+  - QByteArray << static_cast&lt;quint32>( REQ_REMOVE_CLIENT ) << client_list
+    QValueList &lt;quint32> client_list; // The list of clients to be removed
 
     When the server receives this message, it removes the clients with the ids stored in
     client_list, disconnecting the connection to them.
@@ -137,8 +137,8 @@ class KMessageServerPrivate;
     Note: If one of the clients is the admin himself, he will also be deleted.
           Another client (if any left) will become the new admin.
 
-  - QByteArray << static_cast&lt;Q_UINT32>( REQ_MAX_NUM_CLIENTS ) << maximum_clients
-    Q_INT32 maximum_clients; // The maximum of clients connected, or infinite if -1
+  - QByteArray << static_cast&lt;quint32>( REQ_MAX_NUM_CLIENTS ) << maximum_clients
+    qint32 maximum_clients; // The maximum of clients connected, or infinite if -1
 
     When the server receives this message, it limits the number of clients to the number given,
     or sets it unlimited for maximum_clients == -1.
@@ -147,12 +147,12 @@ class KMessageServerPrivate;
     Note: If there are already more clients, they are not affected. It only prevents new Clients
           to be added. To assure this limit, remove clients afterwards (REQ_REMOVE_CLIENT)
 
-  - QByteArray  << static_cast&lt;Q_UINT32>( REQ_CLIENT_LIST )
+  - QByteArray  << static_cast&lt;quint32>( REQ_CLIENT_LIST )
 
     When the server receives this message, it answers by sending a list of IDs of all the clients
     that are connected at the moment. So it sends the following message to the asking client:
-        QByteArray << static_cast&lt;Q_UINT32>( ANS_CLIENT_LIST ) << clientList
-        QValueList &lt;Q_UINT32> clientList;  // The IDs of the connected clients
+        QByteArray << static_cast&lt;quint32>( ANS_CLIENT_LIST ) << clientList
+        QValueList &lt;quint32> clientList;  // The IDs of the connected clients
 
     Note: This message is also sent to every new connected client, so that he knows the other
           clients.
@@ -160,12 +160,12 @@ class KMessageServerPrivate;
   There are two more messages that are sent from the server to the every client automatically
   when a new client connects or a connection to a client is lost:
 
-        QByteArray << static_cast&lt;Q_UINT32>( EVNT_CLIENT_CONNECTED ) << clientID;
-        Q_UINT32 clientID;   // the ID of the new connected client
+        QByteArray << static_cast&lt;quint32>( EVNT_CLIENT_CONNECTED ) << clientID;
+        quint32 clientID;   // the ID of the new connected client
 
-        QByteArray << static_cast&lt;Q_UINT32>( EVNT_CLIENT_DISCONNECTED ) << clientID;
-        Q_UINT32 clientID;   // the ID of the client that lost the connection
-        Q_UINT8 broken;      // 1 if the network connection was closed, 0 if it was disconnected
+        QByteArray << static_cast&lt;quint32>( EVNT_CLIENT_DISCONNECTED ) << clientID;
+        quint32 clientID;   // the ID of the client that lost the connection
+        quint8 broken;      // 1 if the network connection was closed, 0 if it was disconnected
                              // on purpose
 
 
@@ -208,7 +208,7 @@ public:
     /**
      * Create a KGameNetwork object
      **/
-    KMessageServer(Q_UINT16 cookie = 42, QObject* parent = 0);
+    KMessageServer(quint16 cookie = 42, QObject* parent = 0);
 
     ~KMessageServer();
 
@@ -226,7 +226,7 @@ public:
      * system pick a free port
      * @return true if it worked
     */
-    bool initNetwork (Q_UINT16 port = 0);
+    bool initNetwork (quint16 port = 0);
 
     /**
      * Returns the TCP/IP port number we are listening to for incoming connections.
@@ -234,7 +234,7 @@ public:
      * especially necessary if you used 0 as port number in initNetwork().
      * @return the port number
      **/
-    Q_UINT16 serverPort () const;
+    quint16 serverPort () const;
 
     /**
      * Stops listening for connections. The already running connections are
@@ -325,14 +325,14 @@ public:
     /**
      * returns a list of the unique IDs of all clients.
      **/
-    QList <Q_UINT32> clientIDs() const;
+    QList <quint32> clientIDs() const;
 
     /**
      * Find the @ref KMessageIO object to the given client number.
      * @param no the client number to look for, or 0 to look for the admin
      * @return address of the client, or 0 if no client with that number exists
      **/
-    KMessageIO *findClient (Q_UINT32 no) const;
+    KMessageIO *findClient (quint32 no) const;
 
     /**
      * Returns the clientID of the admin, if there is a admin, 0 otherwise.
@@ -340,14 +340,14 @@ public:
      * NOTE: Most often you don't need to know that id, since you can
      * use clientID 0 to specify the admin.
      **/
-    Q_UINT32 adminID() const;
+    quint32 adminID() const;
 
     /**
      * Sets the admin to a new client with the given ID.
      * The old admin (if existed) and the new admin will get the ANS_ADMIN message.
      * If you use 0 as new adminID, no client will be admin.
      **/
-    void setAdmin (Q_UINT32 adminID);
+    void setAdmin (quint32 adminID);
 
 
 //------------------------------ ID stuff
@@ -385,7 +385,7 @@ public:
      * @ref findClient (id)->send(msg) manually, but this method checks for
      * errors.
      **/
-    virtual void sendMessage (Q_UINT32 id, const QByteArray &msg);
+    virtual void sendMessage (quint32 id, const QByteArray &msg);
 
     /**
      * Sends a message to a list of clients. Their ID is given in ids. If
@@ -394,7 +394,7 @@ public:
      * This is just a convenience method. You could also iterate over the
      * list of IDs.
      **/
-    virtual void sendMessage (const QList <Q_UINT32> &ids, const QByteArray &msg);
+    virtual void sendMessage (const QList <quint32> &ids, const QByteArray &msg);
 
 protected slots:
     /**
@@ -448,7 +448,7 @@ signals:
      * @param clientID the ID of the KMessageIO object that received the message
      * @param unknown true, if the message type is not known by the KMessageServer
      **/
-    void messageReceived (const QByteArray &data, Q_UINT32 clientID, bool &unknown);
+    void messageReceived (const QByteArray &data, quint32 clientID, bool &unknown);
 
 protected:
     /**
@@ -456,7 +456,7 @@ protected:
      * incremented after every call so if you need the id twice you have to save
      * it anywhere. It's currently used to initialize newly connected clints only.
      **/
-    Q_UINT32 uniqueClientNumber() const;
+    quint32 uniqueClientNumber() const;
 
 private:
     KMessageServerPrivate* d;
@@ -478,7 +478,7 @@ class KMessageServerSocket : public Q3ServerSocket
   Q_OBJECT
 
 public:
-  KMessageServerSocket (Q_UINT16 port, QObject *parent = 0);
+  KMessageServerSocket (quint16 port, QObject *parent = 0);
   ~KMessageServerSocket ();
 
   void newConnection (int socket);

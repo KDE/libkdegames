@@ -96,7 +96,7 @@ public:
      *
      * @return int id
      **/
-    Q_UINT32 gameId() const;
+    quint32 gameId() const;
 
     /**
      * Inits a network game as network MASTER. Note that if the
@@ -108,7 +108,7 @@ public:
      * @param port The port on which the service is offered
      * @return true if it worked
      **/
-    bool offerConnections (Q_UINT16 port);
+    bool offerConnections (quint16 port);
 
     void setDiscoveryInfo(const QString& type, const QString& name=QString::null);
     
@@ -120,7 +120,7 @@ public:
      *
      * @return true if connected
      **/
-    bool connectToServer(const QString& host, Q_UINT16 port);
+    bool connectToServer(const QString& host, quint16 port);
 
     /**
      * @since 3.2
@@ -128,7 +128,7 @@ public:
      * or the port we are connected to if connectToServer was called.
      * Otherwise 0.
      **/
-    Q_UINT16 port() const;
+    quint16 port() const;
 
     /**
      * @since 3.2
@@ -179,22 +179,22 @@ public:
      * @return true if worked
      */
     // AB: TODO: doc on how "receiver" and "sender" should be created!
-    bool sendSystemMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendSystemMessage(const QByteArray& buffer, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * @overload
      **/
-    bool sendSystemMessage(int data, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendSystemMessage(int data, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * @overload
      **/
-    bool sendSystemMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendSystemMessage(const QDataStream &msg, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * @overload
      **/
-    bool sendSystemMessage(const QString& msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendSystemMessage(const QString& msg, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * Sends a network message
@@ -207,7 +207,7 @@ public:
      * the correct value for you. You might want to use this if you send a 
      * message from a specific player.
      **/
-    void sendError(int error, const QByteArray& message, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    void sendError(int error, const QByteArray& message, quint32 receiver=0, quint32 sender=0);
 
     /**
      * Are we still offer offering server connections - only for game MASTER
@@ -255,29 +255,29 @@ public:
      * @return true if worked
      **/
     // AB: TODO: doc on how "receiver" and "sender" should be created!
-    bool sendMessage(const QByteArray& buffer, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendMessage(const QByteArray& buffer, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendMessage(const QDataStream &msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendMessage(const QDataStream &msg, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendMessage(const QString& msg, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendMessage(const QString& msg, int msgid, quint32 receiver=0, quint32 sender=0);
 
     /**
      * This is an overloaded member function, provided for convenience.
      **/
-    bool sendMessage(int data, int msgid, Q_UINT32 receiver=0, Q_UINT32 sender=0);
+    bool sendMessage(int data, int msgid, quint32 receiver=0, quint32 sender=0);
 
 
     /**
      * Called by ReceiveNetworkTransmission(). Will be overwritten by
      * KGame and handle the incoming message.
      **/
-    virtual void networkTransmission(QDataStream&, int, Q_UINT32, Q_UINT32, Q_UINT32 clientID) = 0;
+    virtual void networkTransmission(QDataStream&, int, quint32, quint32, quint32 clientID) = 0;
 
 
     /**
@@ -294,7 +294,7 @@ public:
      * @param clientID the ID of the new ADMIN (note: this is the _client_ID
      * which has nothing to do with the player IDs. See KMessageServer)
      **/
-    void electAdmin(Q_UINT32 clientID);
+    void electAdmin(quint32 clientID);
 
     /**
      * Don't use this unless you really know what youre doing! You might
@@ -352,7 +352,7 @@ signals:
      *
      * @param clientID the ID of the newly connected client
      **/
-    void signalClientConnected(Q_UINT32 clientID);
+    void signalClientConnected(quint32 clientID);
 
     /**
      * This signal is emitted whenever the KMessageServer sends us a message
@@ -365,7 +365,7 @@ signals:
      * @param broken true if the connection was lost because of a network error, false
      *        if the connection was closed by the message server admin.
      */
-    void signalClientDisconnected(Q_UINT32 clientID, bool broken);
+    void signalClientDisconnected(quint32 clientID, bool broken);
 
     /**
      * This client gets or loses the admin status.
@@ -391,7 +391,7 @@ protected slots:
      * If it is valid, the pure virtual method networkTransmission() is called.
      * (This one is overwritten in KGame.)
      **/
-    void receiveNetworkTransmission(const QByteArray& a, Q_UINT32 clientID);
+    void receiveNetworkTransmission(const QByteArray& a, quint32 clientID);
 
     /**
      * This KGame object receives or loses the admin status.
@@ -403,7 +403,7 @@ protected slots:
      * Called when the network connection is about to terminate. Is used
      * to store the network parameter like the game id
      */
-     void aboutToLoseConnection(Q_UINT32 id);
+     void aboutToLoseConnection(quint32 id);
 
     /**
      * Called when the network connection is terminated. Used to clean

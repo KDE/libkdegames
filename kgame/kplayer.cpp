@@ -46,7 +46,7 @@ public:
       mNetworkPlayer = 0;
    }
 
-   Q_UINT32 mId;
+   quint32 mId;
    bool mVirtual; // virtual player
    int mPriority; // tag for replacement
 
@@ -125,7 +125,7 @@ KPlayer::~KPlayer()
 //  kdDebug(11001) << k_funcinfo << " done" << endl;
 }
 
-bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT32 sender)
+bool KPlayer::forwardMessage(QDataStream &msg,int msgid,quint32 receiver,quint32 sender)
 {
   if (!isActive())
   {
@@ -139,7 +139,7 @@ bool KPlayer::forwardMessage(QDataStream &msg,int msgid,Q_UINT32 receiver,Q_UINT
   return game()->sendSystemMessage(msg,msgid,receiver,sender);
 }
 
-bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
+bool KPlayer::forwardInput(QDataStream &msg,bool transmit,quint32 sender)
 {
   if (!isActive())
   {
@@ -173,7 +173,7 @@ bool KPlayer::forwardInput(QDataStream &msg,bool transmit,Q_UINT32 sender)
   }
 }
 
-void KPlayer::setId(Q_UINT32 newid)
+void KPlayer::setId(quint32 newid)
 {
   // Needs to be after the sendProcess
   d->mId=newid;
@@ -192,7 +192,7 @@ void KPlayer::setName(const QString& name)
 const QString& KPlayer::name() const
 { return d->mName.value(); }
 
-Q_UINT32 KPlayer::id() const
+quint32 KPlayer::id() const
 { return d->mId; }
 
 KGamePropertyHandler * KPlayer::dataHandler()
@@ -313,7 +313,7 @@ bool KPlayer::setTurn(bool b, bool exclusive)
 
 bool KPlayer::load(QDataStream &stream)
 {
-  Q_INT32 id,priority;
+  qint32 id,priority;
   stream >> id >> priority;
   setId(id);
   setNetworkPriority(priority);
@@ -322,7 +322,7 @@ bool KPlayer::load(QDataStream &stream)
   //FIXME: maybe set all properties setEmitSignal(false) before?
   d->mProperties.load(stream);
 
-  Q_INT16 cookie;
+  qint16 cookie;
   stream >> cookie;
   if (cookie==KPLAYER_LOAD_COOKIE)
   {
@@ -339,18 +339,18 @@ bool KPlayer::load(QDataStream &stream)
 
 bool KPlayer::save(QDataStream &stream)
 {
-  stream << (Q_INT32)id() << (Q_INT32)networkPriority();
+  stream << (qint32)id() << (qint32)networkPriority();
 
   d->mProperties.save(stream);
 
-  stream << (Q_INT16)KPLAYER_LOAD_COOKIE;
+  stream << (qint16)KPLAYER_LOAD_COOKIE;
 
   //emit signalSave(stream);
   return true;
 }
 
 
-void KPlayer::networkTransmission(QDataStream &stream,int msgid,Q_UINT32 sender)
+void KPlayer::networkTransmission(QDataStream &stream,int msgid,quint32 sender)
 {
   //kdDebug(11001) << k_funcinfo ": msgid=" << msgid << " sender=" << sender << " we are=" << id() << endl;
   // PlayerProperties processed

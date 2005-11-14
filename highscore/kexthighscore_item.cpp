@@ -181,14 +181,14 @@ bool Score::operator <(const Score &score)
 
 QDataStream &operator <<(QDataStream &s, const Score &score)
 {
-    s << (Q_UINT8)score.type();
+    s << (quint8)score.type();
     s << score._data;
     return s;
 }
 
 QDataStream &operator >>(QDataStream &s, Score &score)
 {
-    Q_UINT8 type;
+    quint8 type;
     s >> type;
     score._type = (ScoreType)type;
     s >> score._data;

@@ -59,8 +59,8 @@ void KGameErrorDialog::setKGame(const KGame* g)
 		this, SLOT(slotError(int, QString)));
  connect(d->mGame, SIGNAL(signalConnectionBroken()), 
 		this, SLOT(slotServerConnectionLost()));
- connect(d->mGame, SIGNAL(signalClientDisconnected(Q_UINT32,bool)), 
-		this, SLOT(slotClientConnectionLost(Q_UINT32,bool)));
+ connect(d->mGame, SIGNAL(signalClientDisconnected(quint32,bool)), 
+		this, SLOT(slotClientConnectionLost(quint32,bool)));
 }
 
 void KGameErrorDialog::slotUnsetKGame()
@@ -81,7 +81,7 @@ void KGameErrorDialog::slotServerConnectionLost()
  error(message, (QWidget*)parent());
 }
 
-void KGameErrorDialog::slotClientConnectionLost(Q_UINT32 /*id*/,bool)
+void KGameErrorDialog::slotClientConnectionLost(quint32 /*id*/,bool)
 {
 //TODO: add IP/port of the client
  QString message;

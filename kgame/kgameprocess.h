@@ -107,7 +107,7 @@ class KDE_EXPORT KGameProcess:  public QObject
      * @param msgid the message id for the message
      * @param receiver unused
      */
-    void sendMessage(QDataStream &stream,int msgid,Q_UINT32 receiver=0);
+    void sendMessage(QDataStream &stream,int msgid,quint32 receiver=0);
 
     /**
      * Sends a system message to the corresonding KGameIO device.
@@ -128,7 +128,7 @@ class KDE_EXPORT KGameProcess:  public QObject
      * @param msgid the message id for the message
      * @param receiver unused
      */
-    void sendSystemMessage(QDataStream &stream,int msgid,Q_UINT32 receiver=0);
+    void sendSystemMessage(QDataStream &stream,int msgid,quint32 receiver=0);
 
     /**
      * Returns a pointer to a KRandomSequence. You can generate
@@ -164,7 +164,7 @@ class KDE_EXPORT KGameProcess:  public QObject
      * \code
      * void Computer::slotCommand(int &msgid,QDataStream &in,QDataStream &out)
      * {
-     *   Q_INT32 data,move;
+     *   qint32 data,move;
      *   in >> data;
      *   // compute move ...
      *   move=data*2;
@@ -200,7 +200,7 @@ class KDE_EXPORT KGameProcess:  public QObject
       *   {
       *     // Create a move - the format is yours to decide
       *     // It arrives exactly as this in the kgame inputMove function!!
-      *     Q_INT8 x1,y1,pl;
+      *     qint8 x1,y1,pl;
       *     pl=-1;
       *     x1=proc.random()->getLong(8);
       *     y1=proc.random()->getLong(8);

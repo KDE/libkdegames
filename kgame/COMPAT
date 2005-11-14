@@ -4,7 +4,7 @@
 06.09.2001:  the KGameConfig dialog changes the parameter initConfigs from bool
              to long. Use the ConfigOptions to specify what options you want
              to have enabled. Default is all
-06.09.2001:  some int->Q_UINT32 in sender, receiver and player parameters. maybe
+06.09.2001:  some int->quint32 in sender, receiver and player parameters. maybe
              more will follow.
 06.09.2001:  KGameIO::signalPrepareMove(..., bool&) ->
              KGameIO::signalPrepareMove(..., bool*): don't know why this was

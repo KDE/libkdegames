@@ -233,8 +233,8 @@ void KGameChat::setKGame(KGame* g)
 			this, SLOT(slotAddPlayer(KPlayer*)));
 	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
 			this, SLOT(slotRemovePlayer(KPlayer*)));
-	connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, Q_UINT32, Q_UINT32)),
-			this, SLOT(slotReceiveMessage(int, const QByteArray&, Q_UINT32, Q_UINT32)));
+	connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, quint32, quint32)),
+			this, SLOT(slotReceiveMessage(int, const QByteArray&, quint32, quint32)));
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
 	Q3PtrList<KPlayer> playerList = *d->mGame->playerList();
@@ -285,8 +285,8 @@ void KGameChat::slotAddPlayer(KPlayer* p)
  d->mSendId2PlayerId.insert(sendingId, p->id());
  connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
- connect(p, SIGNAL(signalNetworkData(int, const QByteArray&, Q_UINT32, KPlayer*)),
-		this, SLOT(slotReceivePrivateMessage(int, const QByteArray&, Q_UINT32, KPlayer*)));
+ connect(p, SIGNAL(signalNetworkData(int, const QByteArray&, quint32, KPlayer*)),
+		this, SLOT(slotReceivePrivateMessage(int, const QByteArray&, quint32, KPlayer*)));
 }
 
 void KGameChat::slotRemovePlayer(KPlayer* p)
@@ -319,7 +319,7 @@ void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
  }
 }
 
-void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q_UINT32 sender, KPlayer* me)
+void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, quint32 sender, KPlayer* me)
 {
  if (!me || me != fromPlayer()) {
 	kdDebug() << k_funcinfo << "nope - not for us!"  << endl;
@@ -328,7 +328,7 @@ void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, Q
  slotReceiveMessage(msgid, buffer, me->id(), sender);
 }
 
-void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, Q_UINT32 , Q_UINT32 sender)
+void KGameChat::slotReceiveMessage(int msgid, const QByteArray& buffer, quint32 , quint32 sender)
 {
  QDataStream msg(buffer);
  if (msgid != messageId()) {

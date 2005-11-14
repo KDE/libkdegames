@@ -208,14 +208,14 @@ class Generic
 
 template <class Type>
 QDataStream &operator <<(QDataStream &s, const KGrid2D::Generic<Type> &m) {
-    s << (Q_UINT32)m.width() << (Q_UINT32)m.height();
+    s << (quint32)m.width() << (quint32)m.height();
     for (uint i=0; i<m.size(); i++) s << m[i];
     return s;
 }
 
 template <class Type>
 QDataStream &operator >>(QDataStream &s, KGrid2D::Generic<Type> &m) {
-    Q_UINT32 w, h;
+    quint32 w, h;
     s >> w >> h;
     m.resize(w, h);
     for (uint i=0; i<m.size(); i++) s >> m[i];

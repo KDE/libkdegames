@@ -195,7 +195,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  for (i = 0; i < count; i++) {
 	processMessage(stream, id(),false);
  }
- Q_INT16 cookie;
+ qint16 cookie;
  stream >> cookie;
  if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
 	kdDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
@@ -220,7 +220,7 @@ bool KGamePropertyHandler::save(QDataStream &stream)
 	}
 	++it;
  }
- stream << (Q_INT16)KPLAYERHANDLER_LOAD_COOKIE;
+ stream << (qint16)KPLAYERHANDLER_LOAD_COOKIE;
  return true;
 }
 
@@ -372,7 +372,7 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
 	value = QString::number(((KGameProperty<unsigned long int> *)prop)->value());
  } else if (*t == typeid(QString)) { 
 	value = ((KGamePropertyQString*)prop)->value();
- } else if (*t == typeid(Q_INT8)) { 
+ } else if (*t == typeid(qint8)) { 
 	value = ((KGamePropertyBool*)prop)->value() ?  i18n("True") : i18n("False");
  } else {
 	emit signalRequestValue(prop, value);

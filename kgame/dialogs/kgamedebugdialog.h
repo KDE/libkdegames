@@ -134,7 +134,7 @@ protected slots:
 	/**
 	 * A message has been received - see @ref KGame::signalMessageUpdate
 	 **/
-	void slotMessageUpdate(int msgid, Q_UINT32 receiver, Q_UINT32 sender);
+	void slotMessageUpdate(int msgid, quint32 receiver, quint32 sender);
 
 private:
 	void initGamePage();

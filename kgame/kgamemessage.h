@@ -41,7 +41,7 @@ class KDE_EXPORT KGameMessage
      * @param gameid The game id (<64). 0 For broadcast.
      * @return the new player id
      */
-    static Q_UINT32 createPlayerId(int player, Q_UINT32 game);
+    static quint32 createPlayerId(int player, quint32 game);
 
     /**
      * Returns the raw playerid, that is, a id which does not
@@ -51,7 +51,7 @@ class KDE_EXPORT KGameMessage
      * @param the player id
      * @return the raw player id
      **/
-    static int rawPlayerId(Q_UINT32 playerid);
+    static int rawPlayerId(quint32 playerid);
 
     /**
      * Returns the raw game id, that is, the game id the player
@@ -60,7 +60,7 @@ class KDE_EXPORT KGameMessage
      * @param the player id
      * @return the raw game id
      **/
-    static Q_UINT32 rawGameId(Q_UINT32 playerid);
+    static quint32 rawGameId(quint32 playerid);
 
     /**
      * Checks whether a message receiver/sender is a player
@@ -68,7 +68,7 @@ class KDE_EXPORT KGameMessage
      * @param id The ID of the sender/receiver
      * @return true/false
      */
-    static bool isPlayer(Q_UINT32 id);
+    static bool isPlayer(quint32 id);
 
     /**
      * Checks whether the sender/receiver of a message is a game
@@ -76,7 +76,7 @@ class KDE_EXPORT KGameMessage
      * @param id The ID of the sender/receiver
      * @return true/false
      */
-    static bool isGame(Q_UINT32 id);
+    static bool isGame(quint32 id);
 
     /**
      * Creates a message header given cookie,sender,receiver,...
@@ -85,14 +85,14 @@ class KDE_EXPORT KGameMessage
      * (message length and magic cookie). If you don't need them remove them
      * with @ref dropExternalHeader
      */
-    static void createHeader(QDataStream &msg, Q_UINT32 sender, Q_UINT32 receiver, int msgid);
+    static void createHeader(QDataStream &msg, quint32 sender, quint32 receiver, int msgid);
 
     /**
      * Retrieves the information like cookie,sender,receiver,... from a message header 
      *
      * Note that it could be necessary to call @ref dropExternalHeader first
      */
-    static void extractHeader(QDataStream &msg,Q_UINT32 &sender, Q_UINT32 &receiver, int &msgid);
+    static void extractHeader(QDataStream &msg,quint32 &sender, quint32 &receiver, int &msgid);
 
     /**
      * Creates a property header  given the property id
