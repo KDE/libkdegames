@@ -27,7 +27,7 @@ this software.
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <q3widgetstack.h>
+#include <QStackedWidget>
 #include <qtimer.h>
 #include <qevent.h>
 #include <q3ptrvector.h>
@@ -51,7 +51,7 @@ public:
    QWidget *page;
    QGridLayout *layout;
    QLineEdit *edit;
-   Q3PtrVector<Q3WidgetStack> stack;
+   Q3PtrVector<QStackedWidget> stack;
    Q3PtrVector<QLabel> labels;
    QLabel *commentLabel;
    QString comment;
@@ -174,13 +174,13 @@ void KScoreDialog::setupDialog()
       d->layout->addWidget(label, i+4, 0);
       if (d->fields & Name)
       {
-         Q3WidgetStack *stack = new Q3WidgetStack(d->page);
+         QStackedWidget *stack = new QStackedWidget(d->page);
          d->stack.insert(i-1, stack);
          d->layout->addWidget(stack, i+4, d->col[Name]);
          label = new QLabel(d->page);
          d->labels.insert((i-1)*d->nrCols + d->col[Name], label);
          stack->addWidget(label);
-         stack->raiseWidget(label);
+         stack->setCurrentWidget(label);
       }
       for(int field = Name * 2; field < d->fields; field = field * 2)
       {
@@ -238,11 +238,11 @@ void KScoreDialog::aboutToShow()
       {
          if (d->newName == i)
          {
-           Q3WidgetStack *stack = d->stack[i-1];
+           QStackedWidget *stack = d->stack[i-1];
            d->edit = new QLineEdit(d->player, stack);
            d->edit->setMinimumWidth(40);
            stack->addWidget(d->edit);
-           stack->raiseWidget(d->edit);
+           stack->setCurrentWidget(d->edit);
            d->edit->setFocus();
            connect(d->edit, SIGNAL(returnPressed()), 
                  this, SLOT(slotGotReturn()));
@@ -394,7 +394,7 @@ void KScoreDialog::slotGotName()
    QLabel *label = d->labels[(d->newName-1)*d->nrCols + d->col[Name]];
    label->setFont(bold);
    label->setText(d->player);
-   d->stack[(d->newName-1)]->raiseWidget(label);
+   d->stack[(d->newName-1)]->setCurrentWidget(label);
    delete d->edit;
    d->edit = 0;
    d->newName = -1;

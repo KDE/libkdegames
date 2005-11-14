@@ -26,6 +26,7 @@
 #include <kglobal.h>
 #include <kdialogbase.h>
 #include <kdebug.h>
+#include <kvbox.h>
 
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
@@ -278,7 +279,7 @@ void MultiplayerScores::show(QWidget *parent)
     QHBoxLayout *hbox = new QHBoxLayout(dialog.plainPage(),
                                 KDialog::marginHint(), KDialog::spacingHint());
 
-    Q3VBox *vbox = new Q3VBox(dialog.plainPage());
+    KVBox *vbox = new KVBox(dialog.plainPage());
     hbox->addWidget(vbox);
     if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played."), vbox);
     else {
@@ -287,7 +288,7 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     if ( _nbGames[0]>1 ) {
-        vbox = new Q3VBox(dialog.plainPage());
+        vbox = new KVBox(dialog.plainPage());
         hbox->addWidget(vbox);
         (void)new QLabel(i18n("Scores for the last %1 games:")
                          .arg(_nbGames[0]), vbox);
