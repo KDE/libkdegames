@@ -18,7 +18,6 @@
 */
 
 #include "kconfigrawbackend.h"
-#include "kconfigrawbackend.moc"
 
 #include <unistd.h>
 #include <qfile.h>

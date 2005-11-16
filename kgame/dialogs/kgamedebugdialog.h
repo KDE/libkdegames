@@ -23,7 +23,7 @@
 
 #include <kdialogbase.h>
 #include <kdemacros.h>
-
+#include <Q3ListBoxItem>
 class KGame;
 class KGameIO;
 class KPlayer;
