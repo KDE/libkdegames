@@ -752,7 +752,7 @@ protected:
     **/
     virtual void newPlayersJoin(KGamePlayerList *oldplayer,
 				KGamePlayerList *newplayer,
-				Q3ValueList<int> &inactivate) {
+				QList<int> &inactivate) {
 		Q_UNUSED( oldplayer );
 		Q_UNUSED( newplayer );
 		Q_UNUSED( inactivate );

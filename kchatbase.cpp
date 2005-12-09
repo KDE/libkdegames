@@ -33,7 +33,7 @@
 #include <QPixmap>
 #include <Q3Frame>
 #include <QHBoxLayout>
-#include <Q3ValueList>
+#include <QList>
 #include <QVBoxLayout>
 #include <kglobal.h>
 
@@ -181,7 +181,7 @@ public:
 	bool mAcceptMessage;
 	int mMaxItems;
 
-	Q3ValueList<int> mIndex2Id;
+	QList<int> mIndex2Id;
 
 	QFont mNameFont;
 	QFont mMessageFont;
@@ -293,7 +293,7 @@ int KChatBase::sendingEntry() const
 	return -1;
  }
  int index = d->mCombo->currentItem();
- if (d->mIndex2Id.at(index) == d->mIndex2Id.end()) {
+ if ( index > 0 && index <  d->mIndex2Id.size()) {
 	kdWarning(11000) << "could not find the selected sending entry!" << endl;
 	return -1;
  }

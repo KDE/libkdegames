@@ -41,7 +41,7 @@
 #include <q3ptrqueue.h>
 #include <qfile.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 #include <klocale.h>
 #include <krandomsequence.h>
@@ -78,7 +78,7 @@ public:
     KGamePropertyInt mMaxPlayer;
     KGamePropertyUInt mMinPlayer;
     KGamePropertyInt mGameStatus; // Game running?
-    Q3ValueList<int> mInactiveIdList;
+    QList<int> mInactiveIdList;
 
 };
 
@@ -1052,7 +1052,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
   int i;
   stream >> cnt;
 
-  Q3ValueList<int> inactivateIds;
+  QList<int> inactivateIds;
 
   KGamePlayerList newPlayerList;
   newPlayerList.setAutoDelete(true);
@@ -1137,7 +1137,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
 
   kdDebug(11001) << "Alltogether deactivated " << inactivateIds.count() << " players" << endl;
 
-  Q3ValueList<int>::Iterator it;
+  QList<int>::Iterator it;
   for ( it = inactivateIds.begin(); it != inactivateIds.end(); ++it )
   {
     int pid=*it;
@@ -1358,9 +1358,9 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
  // TODO remove players from removed game
  for (int idx=0;idx<d->mInactiveIdList.count();idx++)
  {
-   Q3ValueList<int>::Iterator it1 = d->mInactiveIdList.at(idx);
-   player = findPlayer(*it1);
-   if (((int)playerCount() < maxPlayers() || maxPlayers() < 0) && player && KGameMessage::rawGameId(*it1) != clientID)
+   int it1 = d->mInactiveIdList.at(idx);
+   player = findPlayer(it1);
+   if (((int)playerCount() < maxPlayers() || maxPlayers() < 0) && player && KGameMessage::rawGameId(it1) != clientID)
    {
      activatePlayer(player);
    }
