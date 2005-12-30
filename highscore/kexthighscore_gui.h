@@ -125,7 +125,7 @@ class HighscoresDialog : public KDialogBase
  private:
     int _rank, _tab;
     QWidget *_current;
-    Q3ValueVector<HighscoresWidget *> _widgets;
+    QVector<HighscoresWidget *> _widgets;
 };
 
 //-----------------------------------------------------------------------------
@@ -133,28 +133,28 @@ class LastMultipleScoresList : public ScoresList
 {
     Q_OBJECT
 public:
-    LastMultipleScoresList(const Q3ValueVector<Score> &, QWidget *parent);
+    LastMultipleScoresList(const QVector<Score> &, QWidget *parent);
 
 private:
     void addLineItem(const ItemArray &, uint index, Q3ListViewItem *line);
     QString itemText(const ItemContainer &, uint row) const;
 
 private:
-    const Q3ValueVector<Score> &_scores;
+    const QVector<Score> &_scores;
 };
 
 class TotalMultipleScoresList : public ScoresList
 {
     Q_OBJECT
 public:
-    TotalMultipleScoresList(const Q3ValueVector<Score> &, QWidget *parent);
+    TotalMultipleScoresList(const QVector<Score> &, QWidget *parent);
 
 private:
     void addLineItem(const ItemArray &, uint index, Q3ListViewItem *line);
     QString itemText(const ItemContainer &, uint row) const;
 
 private:
-    const Q3ValueVector<Score> &_scores;
+    const QVector<Score> &_scores;
 };
 
 //-----------------------------------------------------------------------------

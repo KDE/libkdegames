@@ -211,7 +211,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
                   KGuiItem(i18n("Configure..."), "configure"),
                   KGuiItem(i18n("Export..."))), _rank(rank), _tab(0)
 {
-    _widgets.resize(internal->nbGameTypes(), 0);
+    _widgets.insert(internal->nbGameTypes(),0);
 
     if ( internal->nbGameTypes()>1 ) {
         for (uint i=0; i<internal->nbGameTypes(); i++) {
@@ -277,7 +277,7 @@ void HighscoresDialog::slotUser2()
 
 //-----------------------------------------------------------------------------
 LastMultipleScoresList::LastMultipleScoresList(
-                            const Q3ValueVector<Score> &scores, QWidget *parent)
+                            const QVector<Score> &scores, QWidget *parent)
     : ScoresList(parent), _scores(scores)
 {
     const ScoreInfos &s = internal->scoreInfos();
@@ -314,7 +314,7 @@ QString LastMultipleScoresList::itemText(const ItemContainer &item,
 
 //-----------------------------------------------------------------------------
 TotalMultipleScoresList::TotalMultipleScoresList(
-                            const Q3ValueVector<Score> &scores, QWidget *parent)
+                            const QVector<Score> &scores, QWidget *parent)
     : ScoresList(parent), _scores(scores)
 {
     const ScoreInfos &s = internal->scoreInfos();

@@ -21,7 +21,7 @@
 #define __KGAMELCD_H
 
 #include <qlcdnumber.h>
-#include <q3valuevector.h>
+#include <QVector>
 //Added by qt3to4:
 #include <QLabel>
 #include <kdemacros.h>
@@ -240,7 +240,7 @@ public:
 
 private:
     QLabel *_title;
-    Q3ValueVector<QLCDNumber *> _lcds;
+    QVector<QLCDNumber *> _lcds;
 
     class KGameLCDListPrivate;
     KGameLCDListPrivate *d;

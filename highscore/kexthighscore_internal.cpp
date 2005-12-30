@@ -722,7 +722,7 @@ void ManagerPrivate::convertToGlobal()
     // read old highscores
     KHighscore *tmp = _hsConfig;
     _hsConfig = new KHighscore(true, 0);
-    Q3ValueVector<Score> scores(_scoreInfos->nbEntries());
+    QVector<Score> scores(_scoreInfos->nbEntries());
     for (int i=0; i<scores.count(); i++)
         scores[i] = readScore(i);
 

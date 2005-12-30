@@ -190,7 +190,7 @@ void KGameLCDClock::setTime(const QString &s)
 class KGameLCDList::KGameLCDListPrivate
 {
 public:
-  Q3ValueVector<QLabel *> _leadings;
+  QVector<QLabel *> _leadings;
 };
 
 KGameLCDList::KGameLCDList(const QString &title, QWidget *parent,

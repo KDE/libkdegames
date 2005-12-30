@@ -23,7 +23,7 @@
 #include <qvariant.h>
 #include <qnamespace.h>
 #include <qmap.h>
-#include <q3valuevector.h>
+#include <QVector>
 #include <kdemacros.h>
 class QWidget;
 
@@ -297,8 +297,8 @@ class KDE_EXPORT MultiplayerScores
     void show(QWidget *parent);
 
  private:
-    Q3ValueVector<uint>  _nbGames;
-    Q3ValueVector<Score> _scores;
+    QVector<uint>  _nbGames;
+    QVector<Score> _scores;
 
     class MultiplayerScoresPrivate;
     MultiplayerScoresPrivate *d;
