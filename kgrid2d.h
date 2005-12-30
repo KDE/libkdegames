@@ -23,8 +23,7 @@
 #include <math.h>
 
 #include <qpair.h>
-#include <q3valuelist.h>
-#include <q3valuevector.h>
+#include <qvector.h>
 //Added by qt3to4:
 #include <QTextStream>
 
@@ -202,7 +201,7 @@ class Generic
 
  protected:
     uint               _width, _height;
-    Q3ValueVector<Type> _vector;
+    QVector<Type> _vector;
 };
 }
 

@@ -22,7 +22,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
-#include <q3valuelist.h>
+
 
 class KMessageIO;
 class KMessageServer;

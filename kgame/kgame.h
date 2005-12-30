@@ -25,7 +25,7 @@
 
 #include <qstring.h>
 #include <q3ptrlist.h>
-#include <q3valuelist.h>
+
 
 #include "kgamenetwork.h"
 #include <kdemacros.h>

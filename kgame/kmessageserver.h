@@ -23,7 +23,7 @@
 #include <qobject.h>
 #include <q3serversocket.h>
 #include <qstring.h>
-#include <q3valuelist.h>
+
 
 class KMessageIO;
 class KMessageServerPrivate;

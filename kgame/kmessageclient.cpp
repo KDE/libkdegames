@@ -22,9 +22,8 @@
 
 #include <qbuffer.h>
 #include <qtimer.h>
-//Added by qt3to4:
 #include <QList>
-
+#include <QDataStream>
 #include "kmessageio.h"
 #include "kmessageserver.h"
 

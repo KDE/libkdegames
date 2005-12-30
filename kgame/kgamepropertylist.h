@@ -21,7 +21,7 @@
 #ifndef __KGAMEPROPERTYLIST_H_
 #define __KGAMEPROPERTYLIST_H_
 
-#include <q3valuelist.h>
+
 
 #include <kdebug.h>
 

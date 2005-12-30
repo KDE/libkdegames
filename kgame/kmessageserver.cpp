@@ -22,7 +22,7 @@
 #include <q3ptrlist.h>
 #include <q3ptrqueue.h>
 #include <qtimer.h>
-#include <q3valuelist.h>
+#include <QDataStream>
 
 #include <kdebug.h>
 
