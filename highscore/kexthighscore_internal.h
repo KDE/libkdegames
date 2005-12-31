@@ -30,7 +30,7 @@
 //Added by qt3to4:
 #include <QDateTime>
 #include <QTextStream>
-#include <Q3MemArray>
+#include <QVector>
 #include <QDateTime>
 
 class QTextStream;
@@ -130,7 +130,7 @@ class ItemContainer
  * Manage a bunch of @ref Item which are saved under the same group
  * in KHighscores config file.
  */
-class ItemArray : public Q3MemArray<ItemContainer *>
+class ItemArray : public QVector<ItemContainer *>
 {
  public:
     ItemArray();
@@ -205,10 +205,10 @@ class PlayerInfos : public ItemArray
     uint id() const { return _id; }
     uint oldLocalId() const { return _oldLocalId; }
 
-    void createHistoItems(const Q3MemArray<uint> &scores, bool bound);
+    void createHistoItems(const QVector<uint> &scores, bool bound);
     QString histoName(uint i) const;
     uint histoSize() const;
-    const Q3MemArray<uint> &histogram() const { return _histogram; }
+    const QVector<uint> &histogram() const { return _histogram; }
 
     void submitScore(const Score &) const;
     // return true if the nickname is already used locally
@@ -221,7 +221,7 @@ class PlayerInfos : public ItemArray
  private:
     bool _newPlayer, _bound, _oldLocalPlayer;
     uint _id, _oldLocalId;
-    Q3MemArray<uint> _histogram;
+    QVector<uint> _histogram;
 };
 
 //-----------------------------------------------------------------------------

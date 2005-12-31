@@ -28,7 +28,7 @@
 #include <qdom.h>
 //Added by qt3to4:
 #include <QTextStream>
-#include <Q3MemArray>
+#include <QVector>
 
 #include <kglobal.h>
 #include <kio/netaccess.h>
@@ -154,7 +154,8 @@ void ItemArray::addItem(const QString &name, Item *item,
         kdError(11002) << "item already exists \"" << name << "\"" << endl;
     uint i = size();
     resize(i+1);
-    at(i) = new ItemContainer;
+	insert(i, new ItemContainer);
+    //at(i) = new ItemContainer;
     _setItem(i, name, item, stored, canHaveSubGroup);
 }
 
@@ -342,7 +343,7 @@ PlayerInfos::PlayerInfos()
     internal->hsConfig().writeAndUnlock();
 }
 
-void PlayerInfos::createHistoItems(const Q3MemArray<uint> &scores, bool bound)
+void PlayerInfos::createHistoItems(const QVector<uint> &scores, bool bound)
 {
     Q_ASSERT( _histogram.size()==0 );
     _bound = bound;
@@ -377,7 +378,7 @@ bool PlayerInfos::isWWEnabled() const
 
 QString PlayerInfos::histoName(uint i) const
 {
-    const Q3MemArray<uint> &sh = _histogram;
+    const QVector<uint> &sh = _histogram;
     Q_ASSERT( i<sh.size() || (_bound || i==sh.size()) );
     if ( i==sh.size() )
         return QString("nb scores greater than %1").arg(sh[sh.size()-1]);
@@ -448,7 +449,7 @@ void PlayerInfos::submitScore(const Score &score) const
 
     // update histogram
     if ( score.type()==Won ) {
-        const Q3MemArray<uint> &sh = _histogram;
+        const QVector<uint> &sh = _histogram;
         for (uint i=1; i<histoSize(); i++)
             if ( i==sh.size() || score.score()<sh[i] ) {
                 item(histoName(i))->increment(_id);
