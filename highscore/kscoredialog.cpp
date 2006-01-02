@@ -293,7 +293,7 @@ void KScoreDialog::loadScores()
          if (d->fields & field)
          {
             key = "Pos" + num + d->key[field];
-            (*score)[field] = config.readEntry(key, "-");
+            (*score)[field] = config.readEntry(key, QString("-"));
          }
       }
       d->scores.append(score);

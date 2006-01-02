@@ -55,7 +55,7 @@
 // KConfig entries
 #define CONF_GROUP "KCardDialog"
 #define CONF_RANDOMDECK QString::fromLatin1("RandomDeck")
-#define CONF_DECK QString::fromLatin1("Deck")
+#define CONF_DECK "Deck"
 #define CONF_CARDDIR QString::fromLatin1("CardDir")
 #define CONF_RANDOMCARDDIR QString::fromLatin1("RandomCardDir")
 #define CONF_USEGLOBALDECK QString::fromLatin1("GlobalDeck")
@@ -63,7 +63,7 @@
 #define CONF_SCALE QString::fromLatin1("Scale")
 
 #define CONF_GLOBAL_GROUP QString::fromLatin1("KCardDialog Settings")
-#define CONF_GLOBAL_DECK QString::fromLatin1("GlobalDeck")
+#define CONF_GLOBAL_DECK "GlobalDeck"
 #define CONF_GLOBAL_CARDDIR QString::fromLatin1("GlobalCardDir")
 #define CONF_GLOBAL_RANDOMDECK QString::fromLatin1("GlobalRandomDeck")
 #define CONF_GLOBAL_RANDOMCARDDIR QString::fromLatin1("GlobalRandomCardDir")
