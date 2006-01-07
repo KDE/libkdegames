@@ -1,17 +1,5 @@
 [KDE Backdeck]
 Name=Dondorf
-Name[bg]=Дондроф
-Name[bn]=ডনডর্ফ
-Name[eo]=Bela
-Name[hi]=डॉनड्रॉफ
-Name[ko]=돈돌프
-Name[lv]=Vācu
-Name[mk]=Дондорф
-Name[ru]=Дондорф
-Name[sr]=Дондорф
-Name[ta]=டேன்டார்ஃப்
-Name[tg]=Дондорф
-Name[xx]=xxDondorfxx
-Name[zu]=I-Dondorf
+Name[x-test]=xxDondorfxx
 Preview=11.png
 PySol=yes
