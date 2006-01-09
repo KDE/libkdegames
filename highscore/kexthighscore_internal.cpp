@@ -367,7 +367,7 @@ uint PlayerInfos::nbEntries() const
 QString PlayerInfos::key() const
 {
     ConfigGroup cg;
-    return cg.readEntry(HS_KEY, QString::null);
+    return cg.readEntry(HS_KEY, QString());
 }
 
 bool PlayerInfos::isWWEnabled() const
@@ -487,7 +487,7 @@ void PlayerInfos::modifySettings(const QString &newName,
 QString PlayerInfos::registeredName() const
 {
     ConfigGroup cg;
-    return cg.readEntry(HS_REGISTERED_NAME, QString::null);
+    return cg.readEntry(HS_REGISTERED_NAME, QString());
 }
 
 void PlayerInfos::removeKey()
@@ -501,7 +501,7 @@ void PlayerInfos::removeKey()
     do {
         i++;
         sk = str.arg(HS_KEY).arg(i);
-    } while ( !cg.readEntry(sk, QString::null).isEmpty() );
+    } while ( !cg.readEntry(sk, QString()).isEmpty() );
     cg.writeEntry(sk, key());
     cg.writeEntry(str.arg(HS_REGISTERED_NAME).arg(i),
                             registeredName());
