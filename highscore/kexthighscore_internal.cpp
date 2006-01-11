@@ -373,7 +373,7 @@ QString PlayerInfos::key() const
 bool PlayerInfos::isWWEnabled() const
 {
     ConfigGroup cg;
-    return cg.readBoolEntry(HS_WW_ENABLED, false);
+    return cg.readEntry(HS_WW_ENABLED, false);
 }
 
 QString PlayerInfos::histoName(uint i) const
