@@ -149,7 +149,7 @@ Score::Score(ScoreType type)
     : _type(type)
 {
     const ItemArray &items = internal->scoreInfos();
-    for (uint i=0; i<items.size(); i++)
+    for (int i=0; i<items.size(); i++)
         _data[items[i]->name()] = items[i]->item()->defaultValue();
 }
 

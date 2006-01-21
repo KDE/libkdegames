@@ -206,8 +206,8 @@ class PlayerInfos : public ItemArray
     uint oldLocalId() const { return _oldLocalId; }
 
     void createHistoItems(const QVector<uint> &scores, bool bound);
-    QString histoName(uint i) const;
-    uint histoSize() const;
+    QString histoName(int i) const;
+    int histoSize() const;
     const QVector<uint> &histogram() const { return _histogram; }
 
     void submitScore(const Score &) const;

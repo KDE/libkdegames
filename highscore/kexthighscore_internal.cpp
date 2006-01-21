@@ -111,12 +111,12 @@ ItemArray::ItemArray()
 
 ItemArray::~ItemArray()
 {
-    for (uint i=0; i<size(); i++) delete at(i);
+    for (int i=0; i<size(); i++) delete at(i);
 }
 
 int ItemArray::findIndex(const QString &name) const
 {
-    for (uint i=0; i<size(); i++)
+    for (int i=0; i<size(); i++)
         if ( at(i)->name()==name ) return i;
     return -1;
 }
@@ -172,7 +172,7 @@ void ItemArray::setGroup(const QString &group)
 {
     Q_ASSERT( !group.isNull() );
     _group = group;
-    for (uint i=0; i<size(); i++)
+    for (int i=0; i<size(); i++)
         if ( at(i)->isStored() ) at(i)->setGroup(group);
 }
 
@@ -180,13 +180,13 @@ void ItemArray::setSubGroup(const QString &subGroup)
 {
     Q_ASSERT( !subGroup.isNull() );
     _subGroup = subGroup;
-    for (uint i=0; i<size(); i++)
+    for (int i=0; i<size(); i++)
         if ( at(i)->canHaveSubGroup() ) at(i)->setSubGroup(subGroup);
 }
 
 void ItemArray::read(uint k, Score &data) const
 {
-    for (uint i=0; i<size(); i++) {
+    for (int i=0; i<size(); i++) {
         if ( !at(i)->isStored() ) continue;
         data.setData(at(i)->name(), at(i)->read(k));
     }
@@ -194,7 +194,7 @@ void ItemArray::read(uint k, Score &data) const
 
 void ItemArray::write(uint k, const Score &data, uint nb) const
 {
-    for (uint i=0; i<size(); i++) {
+    for (int i=0; i<size(); i++) {
         if ( !at(i)->isStored() ) continue;
         for (uint j=nb-1; j>k; j--)  at(i)->write(j, at(i)->read(j-1));
         at(i)->write(k, data.data(at(i)->name()));
@@ -204,7 +204,7 @@ void ItemArray::write(uint k, const Score &data, uint nb) const
 void ItemArray::exportToText(QTextStream &s) const
 {
     for (uint k=0; k<nbEntries()+1; k++) {
-        for (uint i=0; i<size(); i++) {
+        for (int i=0; i<size(); i++) {
             const Item *item = at(i)->item();
             if ( item->isVisible() ) {
                 if ( i!=0 ) s << '\t';
@@ -314,7 +314,7 @@ PlayerInfos::PlayerInfos()
 
     ConfigGroup cg;
     _oldLocalPlayer = cg.hasKey(HS_ID);
-    _oldLocalId = cg.readUnsignedNumEntry(HS_ID);
+    _oldLocalId = cg.readEntry(HS_ID).toUInt();
 #ifdef HIGHSCORE_DIRECTORY
     if (_oldLocalPlayer) { // player already exists in local config file
         // copy player data
@@ -348,7 +348,7 @@ void PlayerInfos::createHistoItems(const QVector<uint> &scores, bool bound)
     Q_ASSERT( _histogram.size()==0 );
     _bound = bound;
     _histogram = scores;
-    for (uint i=1; i<histoSize(); i++)
+    for (int i=1; i<histoSize(); i++)
         addItem(histoName(i), new Item((uint)0), true, true);
 }
 
@@ -376,7 +376,7 @@ bool PlayerInfos::isWWEnabled() const
     return cg.readEntry(HS_WW_ENABLED, false);
 }
 
-QString PlayerInfos::histoName(uint i) const
+QString PlayerInfos::histoName(int i) const
 {
     const QVector<uint> &sh = _histogram;
     Q_ASSERT( i<sh.size() || (_bound || i==sh.size()) );
@@ -385,7 +385,7 @@ QString PlayerInfos::histoName(uint i) const
     return QString("nb scores less than %1").arg(sh[i]);
 }
 
-uint PlayerInfos::histoSize() const
+int PlayerInfos::histoSize() const
 {
      return _histogram.size() + (_bound ? 0 : 1);
 }
@@ -450,7 +450,7 @@ void PlayerInfos::submitScore(const Score &score) const
     // update histogram
     if ( score.type()==Won ) {
         const QVector<uint> &sh = _histogram;
-        for (uint i=1; i<histoSize(); i++)
+        for (int i=1; i<histoSize(); i++)
             if ( i==sh.size() || score.score()<sh[i] ) {
                 item(histoName(i))->increment(_id);
                 break;

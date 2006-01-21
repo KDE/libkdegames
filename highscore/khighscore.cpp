@@ -190,7 +190,7 @@ QVariant KHighscore::readPropertyEntry(int entry, const QString& key, const QVar
 {
  KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.readPropertyEntry(confKey, pDefault);
+ return cg.readEntry(confKey, pDefault);
 }
 
 QString KHighscore::readEntry(int entry, const QString& key, const QString& pDefault) const
@@ -204,7 +204,7 @@ int KHighscore::readNumEntry(int entry, const QString& key, int pDefault) const
 {
  KConfigGroup cg(config(), group());
  QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.readNumEntry(confKey, pDefault);
+ return cg.readEntry(confKey, pDefault);
 }
 
 bool KHighscore::hasEntry(int entry, const QString& key) const

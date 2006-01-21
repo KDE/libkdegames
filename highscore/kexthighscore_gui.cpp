@@ -93,7 +93,7 @@ void ScoresList::addLineItem(const ItemArray &items,
                              uint index, Q3ListViewItem *line)
 {
     uint k = 0;
-    for (uint i=0; i<items.size(); i++) {
+    for (int i=0; i<items.size(); i++) {
         const ItemContainer &container = *items[i];
         if ( !container.item()->isVisible() ) continue;
         if (line) line->setText(k, itemText(container, index));
@@ -289,7 +289,7 @@ void LastMultipleScoresList::addLineItem(const ItemArray &si,
                                          uint index, Q3ListViewItem *line)
 {
     uint k = 1; // skip "id"
-    for (uint i=0; i<si.size()-2; i++) {
+    for (int i=0; i<si.size()-2; i++) {
         if ( i==3 ) k = 5; // skip "date"
         const ItemContainer *container = si[k];
         k++;
