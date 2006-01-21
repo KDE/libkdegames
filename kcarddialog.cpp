@@ -198,7 +198,7 @@ void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCar
  } else {
 	pCardDir = conf->readPathEntry(CONF_CARDDIR);
  }
- pScale = conf->readDoubleNumEntry(CONF_SCALE, 1.0);
+ pScale = conf->readEntry(CONF_SCALE, 1.0);
 
  if (conf->readEntry(CONF_USEGLOBALDECK, false)) {
 	bool random;
@@ -678,7 +678,7 @@ void KCardDialog::loadConfig(KConfig* conf)
 	}
  }
 
- d->cScale = conf->readDoubleNumEntry(CONF_SCALE, 1.0);
+ d->cScale = conf->readEntry(CONF_SCALE, 1.0);
 
  conf->setGroup(origGroup);
 }

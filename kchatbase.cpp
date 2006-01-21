@@ -501,11 +501,11 @@ void KChatBase::readConfig(KConfig* conf)
 	conf->setGroup("KChatBase");
  }
 
- setNameFont(conf->readFontEntry("NameFont"));
- setMessageFont(conf->readFontEntry("MessageFont"));
- setSystemNameFont(conf->readFontEntry("SystemNameFont"));
- setSystemMessageFont(conf->readFontEntry("SystemMessageFont"));
- setMaxItems(conf->readNumEntry("MaxMessages", -1));
+ setNameFont(conf->readEntry("NameFont", QFont()));
+ setMessageFont(conf->readEntry("MessageFont", QFont()));
+ setSystemNameFont(conf->readEntry("SystemNameFont", QFont()));
+ setSystemMessageFont(conf->readEntry("SystemMessageFont", QFont()));
+ setMaxItems(conf->readEntry("MaxMessages", -1));
 
  if (!oldGroup.isNull()) {
 	conf->setGroup(oldGroup);
