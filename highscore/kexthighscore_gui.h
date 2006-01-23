@@ -106,7 +106,7 @@ class HighscoresWidget : public QWidget
  private:
     QTabWidget     *_tw;
     HighscoresList *_scoresList, *_playersList;
-    KURLLabel      *_scoresUrl, *_playersUrl;
+    KUrlLabel      *_scoresUrl, *_playersUrl;
     AdditionalTab  *_statsTab, *_histoTab;
 };
 
