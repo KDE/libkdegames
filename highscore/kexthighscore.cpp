@@ -142,7 +142,7 @@ void Manager::setShowDrawGamesStatistic(bool show)
     internal->showDrawGames = show;
 }
 
-void Manager::setWWHighscores(const KURL &url, const QString &version)
+void Manager::setWWHighscores(const KUrl &url, const QString &version)
 {
     Q_ASSERT( url.isValid() );
     internal->serverURL = url;
@@ -272,14 +272,14 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
     return QString::null;
 }
 
-void Manager::addToQueryURL(KURL &url, const QString &item,
+void Manager::addToQueryURL(KUrl &url, const QString &item,
                                const QString &content)
 {
     Q_ASSERT( !item.isEmpty() && url.queryItem(item).isNull() );
 
     QString query = url.query();
     if ( !query.isEmpty() ) query += '&';
-	query += item + '=' + KURL::encode_string(content);
+	query += item + '=' + KUrl::encode_string(content);
 	url.setQuery(query);
 }
 

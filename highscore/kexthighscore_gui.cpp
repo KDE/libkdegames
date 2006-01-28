@@ -164,7 +164,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
     // url labels
     if ( internal->isWWHSAvailable() ) {
-        KURL url = internal->queryURL(ManagerPrivate::Scores);
+        KUrl url = internal->queryURL(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
         connect(_scoresUrl, SIGNAL(leftClickedURL(const QString &)),
@@ -258,7 +258,7 @@ void HighscoresDialog::slotUser1()
 
 void HighscoresDialog::slotUser2()
 {
-    KURL url = KFileDialog::getSaveURL(QString::null, QString::null, this);
+    KUrl url = KFileDialog::getSaveURL(QString::null, QString::null, this);
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, true, this) ) {
         KGuiItem gi = KStdGuiItem::save();

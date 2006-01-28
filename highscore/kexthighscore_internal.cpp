@@ -534,9 +534,9 @@ ManagerPrivate::~ManagerPrivate()
     delete _hsConfig;
 }
 
-KURL ManagerPrivate::queryURL(QueryType type, const QString &newName) const
+KUrl ManagerPrivate::queryURL(QueryType type, const QString &newName) const
 {
-    KURL url = serverURL;
+    KUrl url = serverURL;
     QString nameItem = "nickname";
     QString name = _playerInfos->registeredName();
     bool withVersion = true;
@@ -605,7 +605,7 @@ const char *DUMMY_STRINGS[] = {
 const char *UNABLE_TO_CONTACT =
     I18N_NOOP("Unable to contact world-wide highscore server");
 
-bool ManagerPrivate::doQuery(const KURL &url, QWidget *parent,
+bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
                                 QDomNamedNodeMap *map)
 {
     KIO::http_update_cache(url, true, 0); // remove cache !
@@ -696,7 +696,7 @@ bool ManagerPrivate::modifySettings(const QString &newName,
     if (WWEnabled) {
         newPlayer = _playerInfos->key().isEmpty()
                     || _playerInfos->registeredName().isEmpty();
-        KURL url = queryURL((newPlayer ? Register : Change), newName);
+        KUrl url = queryURL((newPlayer ? Register : Change), newName);
         Manager::addToQueryURL(url, "comment", comment);
 
         QDomNamedNodeMap map;
@@ -833,7 +833,7 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     if ( score.type()==Lost && !trackLostGames ) return true;
     if ( score.type()==Draw && !trackDrawGames ) return true;
 
-    KURL url = queryURL(Submit);
+    KUrl url = queryURL(Submit);
     manager.additionalQueryItems(url, score);
     int s = (score.type()==Won ? score.score() : (int)score.type());
     QString str =  QString::number(s);

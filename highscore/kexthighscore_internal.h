@@ -248,12 +248,12 @@ class ManagerPrivate
     PlayerInfos &playerInfos()   { return *_playerInfos; }
     KHighscore &hsConfig()       { return *_hsConfig; }
     enum QueryType { Submit, Register, Change, Players, Scores };
-    KURL queryURL(QueryType type, const QString &newName=QString::null) const;
+    KUrl queryURL(QueryType type, const QString &newName=QString::null) const;
 
     void exportHighscores(QTextStream &);
 
     Manager &manager;
-    KURL     serverURL;
+    KUrl     serverURL;
     QString  version;
     bool     showStatistics, showDrawGames, trackLostGames, trackDrawGames;
     Manager::ShowMode showMode;
@@ -270,7 +270,7 @@ class ManagerPrivate
     int rank(const Score &score) const;
 
     bool submitWorldWide(const Score &score, QWidget *parent) const;
-    static bool doQuery(const KURL &url, QWidget *parent,
+    static bool doQuery(const KUrl &url, QWidget *parent,
                         QDomNamedNodeMap *map = 0);
     static bool getFromQuery(const QDomNamedNodeMap &map, const QString &name,
                              QString &value, QWidget *parent);

@@ -162,7 +162,7 @@ class KDE_EXPORT Manager
      * @param version the game version which is sent to the web server (it can
      * be useful for backward compatibility on the server side).
      */
-    void setWWHighscores(const KURL &url, const QString &version);
+    void setWWHighscores(const KUrl &url, const QString &version);
 
     /**
      * Set if the number of lost games should be track for the world-wide
@@ -340,7 +340,7 @@ class KDE_EXPORT Manager
      * @param url the URL to query
      * @param score the score to be submitted.
      */
-    virtual void additionalQueryItems(KURL &url, const Score &score) const
+    virtual void additionalQueryItems(KUrl &url, const Score &score) const
         { Q_UNUSED(url); Q_UNUSED(score); }
 
     /**
@@ -350,7 +350,7 @@ class KDE_EXPORT Manager
      * @param item the item name
      * @param content the item content
      */
-    static void addToQueryURL(KURL &url, const QString &item,
+    static void addToQueryURL(KUrl &url, const QString &item,
                               const QString &content);
 
     friend class ManagerPrivate;
