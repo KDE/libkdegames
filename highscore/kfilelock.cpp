@@ -32,7 +32,7 @@ KFileLock::KFileLock(int fd)
 
 int KFileLock::lock()
 {
-    kdDebug(11002) << "lock fd=" << _fd << endl;
+    kDebug(11002) << "lock fd=" << _fd << endl;
 #ifdef F_SETLK
 # ifndef SEEK_SET
 #  define SEEK_SET 0
@@ -70,7 +70,7 @@ KFileLock::~KFileLock()
 void KFileLock::unlock()
 {
     if ( !_locked ) return;
-    kdDebug(11002) << "unlock" << endl;
+    kDebug(11002) << "unlock" << endl;
 # ifdef F_SETLK
     struct flock lock_data;
     lock_data.l_type = F_UNLCK;

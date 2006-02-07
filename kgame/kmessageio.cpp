@@ -125,7 +125,7 @@ void KMessageSocket::processNewData ()
       str >> v;
       if (v != 'M')
       {
-        kdWarning(11001) << k_funcinfo << ": Received unexpected data, magic number wrong!" << endl;
+        kWarning(11001) << k_funcinfo << ": Received unexpected data, magic number wrong!" << endl;
         continue;
       }
 
@@ -188,7 +188,7 @@ const char *name)
   // Check if the other object is already connected
   if (partner && partner->mPartner)
   {
-    kdWarning(11001) << k_funcinfo << ": Object is already connected!" << endl;
+    kWarning(11001) << k_funcinfo << ": Object is already connected!" << endl;
     return;
   }
 
@@ -218,7 +218,7 @@ void KMessageDirect::send (const QByteArray &msg)
   if (mPartner)
     emit mPartner->received (msg);
   else
-    kdError(11001) << k_funcinfo << ": Not yet connected!" << endl;
+    kError(11001) << k_funcinfo << ": Not yet connected!" << endl;
 }
 
 
@@ -226,7 +226,7 @@ void KMessageDirect::send (const QByteArray &msg)
 
 KMessageProcess::~KMessageProcess()
 {
-  kdDebug(11001) << "@@@KMessageProcess::Delete process" << endl;
+  kDebug(11001) << "@@@KMessageProcess::Delete process" << endl;
   if (mProcess)
   {
     mProcess->kill();
@@ -241,13 +241,13 @@ KMessageProcess::~KMessageProcess()
 KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(parent,0)
 {
   // Start process
-  kdDebug(11001) << "@@@KMessageProcess::Start process" << endl;
+  kDebug(11001) << "@@@KMessageProcess::Start process" << endl;
   mProcessName=file;
   mProcess=new KProcess;
   int id=0;
   *mProcess << mProcessName << QString("%1").arg(id);
-  kdDebug(11001) << "@@@KMessageProcess::Init:Id= " << id << endl;
-  kdDebug(11001) << "@@@KMessgeProcess::Init:Processname: " << mProcessName << endl;
+  kDebug(11001) << "@@@KMessageProcess::Init:Id= " << id << endl;
+  kDebug(11001) << "@@@KMessgeProcess::Init:Processname: " << mProcessName << endl;
   connect(mProcess, SIGNAL(receivedStdout(KProcess *, char *, int )),
                         this, SLOT(slotReceivedStdout(KProcess *, char * , int )));
   connect(mProcess, SIGNAL(receivedStderr(KProcess *, char *, int )),
@@ -263,19 +263,19 @@ KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(par
 }
 bool KMessageProcess::isConnected() const
 {
-  kdDebug(11001) << "@@@KMessageProcess::Is conencted" << endl;
+  kDebug(11001) << "@@@KMessageProcess::Is conencted" << endl;
   if (!mProcess) return false;
   return mProcess->isRunning();
 }
 void KMessageProcess::send(const QByteArray &msg)
 {
-  kdDebug(11001) << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process" << endl;
+  kDebug(11001) << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process" << endl;
   unsigned int size=msg.size()+2*sizeof(long);
 
   char *tmpbuffer=new char[size];
   long *p1=(long *)tmpbuffer;
   long *p2=p1+1;
-  kdDebug(11001)  << "p1="<<p1 << "p2="<< p2 << endl;
+  kDebug(11001)  << "p1="<<p1 << "p2="<< p2 << endl;
   memcpy(tmpbuffer+2*sizeof(long),msg.data(),msg.size());
   *p1=0x4242aeae;
   *p2=size;
@@ -294,7 +294,7 @@ void KMessageProcess::writeToProcess()
   if (!mSendBuffer) return ;
 
   // write it out to the process
-  //  kdDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
+  //  kDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
   //  char *p=mSendBuffer->data();
   //  for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
   mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());
@@ -302,7 +302,7 @@ void KMessageProcess::writeToProcess()
 }
 void KMessageProcess::slotWroteStdin(KProcess * )
 {
-  kdDebug(11001) << k_funcinfo << endl;
+  kDebug(11001) << k_funcinfo << endl;
   if (mSendBuffer)
   {
     delete mSendBuffer;
@@ -317,7 +317,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
   int len;
   char *p;
   char *pos;
-//  kdDebug(11001)<<"############# Got stderr " << buflen << " bytes" << endl;
+//  kDebug(11001)<<"############# Got stderr " << buflen << " bytes" << endl;
 
   if (!buffer || buflen==0) return ; 
   if (proc) pid=proc->pid();
@@ -333,7 +333,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
     QByteArray a;
     a.setRawData(pos,len);
     QString s(a);
-    kdDebug(11001) << "PID" <<pid<< ":" << s << endl;
+    kDebug(11001) << "PID" <<pid<< ":" << s << endl;
     a.resetRawData(pos,len);
     if (p) pos=p+1;
     buflen-=len+1;
@@ -343,7 +343,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
 
 void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
 {
-  kdDebug(11001) << "$$$$$$ " << k_funcinfo << ": Received " << buflen << " bytes over inter process communication" << endl;
+  kDebug(11001) << "$$$$$$ " << k_funcinfo << ": Received " << buflen << " bytes over inter process communication" << endl;
 
   // TODO Make a plausibility check on buflen to avoid memory overflow
   while (mReceiveCount+buflen>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
@@ -358,18 +358,18 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
     unsigned int len;
     if (*p1!=0x4242aeae)
     {
-      kdDebug(11001) << k_funcinfo << ": Cookie error...transmission failure...serious problem..." << endl;
+      kDebug(11001) << k_funcinfo << ": Cookie error...transmission failure...serious problem..." << endl;
 //      for (int i=0;i<mReceiveCount;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
     }
     len=(int)(*p2);
     if (len<2*sizeof(long))
     {
-      kdDebug(11001) << k_funcinfo << ": Message size error" << endl;
+      kDebug(11001) << k_funcinfo << ": Message size error" << endl;
       break;
     }
     if (len<=mReceiveCount)
     {
-      kdDebug(11001) << k_funcinfo << ": Got message with len " << len << endl;
+      kDebug(11001) << k_funcinfo << ": Got message with len " << len << endl;
 
       QByteArray msg;
     //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
@@ -389,7 +389,7 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
 
 void KMessageProcess::slotProcessExited(KProcess * /*p*/)
 {
-  kdDebug(11001) << "Process exited (slot)" << endl;
+  kDebug(11001) << "Process exited (slot)" << endl;
   emit connectionBroken();
   delete mProcess;
   mProcess=0;

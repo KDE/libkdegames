@@ -124,7 +124,7 @@ int ItemArray::findIndex(const QString &name) const
 const ItemContainer *ItemArray::item(const QString &name) const
 {
     int i = findIndex(name);
-    if ( i==-1 ) kdError(11002) << k_funcinfo << "no item named \"" << name
+    if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
                                 << "\"" << endl;
     return at(i);
 }
@@ -132,7 +132,7 @@ const ItemContainer *ItemArray::item(const QString &name) const
 ItemContainer *ItemArray::item(const QString &name)
 {
     int i = findIndex(name);
-    if ( i==-1 ) kdError(11002) << k_funcinfo << "no item named \"" << name
+    if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
                                 << "\"" << endl;
     return at(i);
 }
@@ -140,7 +140,7 @@ ItemContainer *ItemArray::item(const QString &name)
 void ItemArray::setItem(const QString &name, Item *item)
 {
     int i = findIndex(name);
-    if ( i==-1 ) kdError(11002) << k_funcinfo << "no item named \"" << name
+    if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
                                 << "\"" << endl;
     bool stored = at(i)->isStored();
     bool canHaveSubGroup = at(i)->canHaveSubGroup();
@@ -151,7 +151,7 @@ void ItemArray::addItem(const QString &name, Item *item,
                         bool stored, bool canHaveSubGroup)
 {
     if ( findIndex(name)!=-1 )
-        kdError(11002) << "item already exists \"" << name << "\"" << endl;
+        kError(11002) << "item already exists \"" << name << "\"" << endl;
     uint i = size();
     resize(i+1);
 	insert(i, new ItemContainer);

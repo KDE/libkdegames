@@ -85,7 +85,7 @@ public:
 // ------------------- GAME CLASS --------------------------
 KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
 {
- kdDebug(11001) << k_funcinfo << " - " << this << ", sizeof(KGame)=" << sizeof(KGame) << endl;
+ kDebug(11001) << k_funcinfo << " - " << this << ", sizeof(KGame)=" << sizeof(KGame) << endl;
  d = new KGamePrivate;
 
  d->mProperties = new KGamePropertyHandler(this);
@@ -121,13 +121,13 @@ KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
 
 KGame::~KGame()
 {
- kdDebug(11001) << k_funcinfo << endl;
+ kDebug(11001) << k_funcinfo << endl;
 // Debug();
  reset();
  delete d->mGameSequence;
  delete d->mRandom;
  delete d;
- kdDebug(11001) << k_funcinfo << " done" << endl;
+ kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 bool KGame::reset()
@@ -139,7 +139,7 @@ bool KGame::reset()
 
 void KGame::deletePlayers()
 {
-// kdDebug(11001) << k_funcinfo << endl;
+// kDebug(11001) << k_funcinfo << endl;
  KGamePlayerList tmp = d->mPlayerList; // in case of PolicyClean player=d->mPlayerList.first() is infinite
  KPlayer *player;
  while((player=tmp.first()))
@@ -147,7 +147,7 @@ void KGame::deletePlayers()
    delete player; // delete and removes the player
    tmp.removeFirst();
  }
-// kdDebug(11001) << k_funcinfo << " done" << endl;
+// kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 void KGame::deleteInactivePlayers()
@@ -191,7 +191,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  if (c!=cookie())
  {
-   kdWarning(11001) << "Trying to load different game version we="<<cookie() << " saved=" << c << endl;
+   kWarning(11001) << "Trying to load different game version we="<<cookie() << " saved=" << c << endl;
    bool result=false;
    emit signalLoadError(stream,network,(int)c,result);
    return result;
@@ -223,7 +223,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  for ( player=playerList()->first(); player != 0; player=playerList()->next() )
  {
    player->dataHandler()->lockDirectEmit();
-   // kdDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
+   // kDebug(11001) << "Player "<<player->id() << " to indirect emit" <<endl;
  }
 
  // Properties
@@ -236,7 +236,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  // Load Playerobjects
  uint playercount;
  stream >> playercount;
- kdDebug(11001) << "Loading KGame " << playercount << " KPlayer objects " << endl;
+ kDebug(11001) << "Loading KGame " << playercount << " KPlayer objects " << endl;
  for (i=0;i<playercount;i++)
  {
    KPlayer *newplayer=loadPlayer(stream,network);
@@ -246,9 +246,9 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  qint16 cookie;
  stream >> cookie;
  if (cookie==KGAME_LOAD_COOKIE) {
-   kdDebug(11001) << "   Game loaded propertly"<<endl;
+   kDebug(11001) << "   Game loaded propertly"<<endl;
  } else {
-   kdError(11001) << "   Game loading error. probably format error"<<endl;
+   kError(11001) << "   Game loading error. probably format error"<<endl;
  }
 
  // Switch back on the direct emitting of signals and emit the
@@ -259,7 +259,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  for ( player=playerList()->first(); player != 0; player=playerList()->next() )
  {
    player->dataHandler()->unlockDirectEmit();
-   // kdDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
+   // kDebug(11001) << "Player "<<player->id() << " to direct emit" <<endl;
  }
 
  emit signalLoad(stream);
@@ -339,7 +339,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
  }
 
  qint32 cnt=list->count();
- kdDebug(11001) << "Saving KGame " << cnt << " KPlayer objects " << endl;
+ kDebug(11001) << "Saving KGame " << cnt << " KPlayer objects " << endl;
  stream << cnt;
  KPlayer *player;
  for ( player=list->first(); player != 0; player=list->next() )
@@ -350,7 +350,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
 
 KPlayer *KGame::createPlayer(int /*rtti*/,int /*io*/,bool /*isvirtual*/)
 {
-  kdWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
+  kWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
   return new KPlayer;
 }
 KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
@@ -360,19 +360,19 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
   KPlayer *newplayer=findPlayer(id);
   if (!newplayer)
   {
-    kdDebug(11001) << k_funcinfo << "Player "<< id << " not found...asking user to create one " << endl;
+    kDebug(11001) << k_funcinfo << "Player "<< id << " not found...asking user to create one " << endl;
     newplayer=createPlayer(rtti,iovalue,isvirtual);
     //emit signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
   }
   /*
   if (!newplayer)
   {
-    kdWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
+    kWarning(11001) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! " << endl;
     newplayer=new KPlayer;
   }
   else
   {
-    kdDebug(11001) << "   USER Player " << newplayer << " done player->rtti=" << newplayer->rtti() << " rtti=" << rtti << endl;
+    kDebug(11001) << "   USER Player " << newplayer << " done player->rtti=" << newplayer->rtti() << " rtti=" << rtti << endl;
   }
   */
   newplayer->load(stream);
@@ -413,16 +413,16 @@ KPlayer * KGame::findPlayer(quint32 id) const
 // does, we would be in trouble...
 void KGame::addPlayer(KPlayer* newplayer)
 {
- kdDebug(11001) << k_funcinfo << ":  " << "; maxPlayers=" << maxPlayers() << " playerCount=" << playerCount() << endl;
+ kDebug(11001) << k_funcinfo << ":  " << "; maxPlayers=" << maxPlayers() << " playerCount=" << playerCount() << endl;
  if (!newplayer)
  {
-  kdFatal(11001) << "trying to add NULL player in KGame::addPlayer()" << endl;
+  kFatal(11001) << "trying to add NULL player in KGame::addPlayer()" << endl;
   return ;
  }
 
  if (maxPlayers() >= 0 && (int)playerCount() >= maxPlayers())
  {
-   kdWarning(11001) << "cannot add more than " << maxPlayers() << " players - deleting..." << endl;
+   kWarning(11001) << "cannot add more than " << maxPlayers() << " players - deleting..." << endl;
    delete newplayer;
    return;
  }
@@ -431,13 +431,13 @@ void KGame::addPlayer(KPlayer* newplayer)
  {
    d->mUniquePlayerNumber++;
    newplayer->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber, gameId()));
-   kdDebug(11001) << k_funcinfo << "NEW!!! player " << newplayer << " now has id " << newplayer->id() << endl;
+   kDebug(11001) << k_funcinfo << "NEW!!! player " << newplayer << " now has id " << newplayer->id() << endl;
  }
  else
  {
    // this could happen in games which use their own ID management by certain
    // reasons. that is NOT recommended
-   kdDebug(11001) << k_funcinfo << "player " << newplayer << " already has an id: " << newplayer->id() << endl;
+   kDebug(11001) << k_funcinfo << "player " << newplayer << " already has an id: " << newplayer->id() << endl;
  }
 
  QByteArray buffer;
@@ -463,27 +463,27 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 {
  if (!newplayer)
  {
-   kdFatal(11001) << "trying to add NULL player in KGame::systemAddPlayer()" << endl;
+   kFatal(11001) << "trying to add NULL player in KGame::systemAddPlayer()" << endl;
    return ;
  }
  if (newplayer->id() == 0)
  {
-   kdWarning(11001) << k_funcinfo << "player " << newplayer << " has no ID" << endl;
+   kWarning(11001) << k_funcinfo << "player " << newplayer << " has no ID" << endl;
  }
 
  if (findPlayer(newplayer->id()))
  {
-   kdError(11001) << "ERROR: Double adding player !!!!! NOT GOOD !!!!!! " << newplayer->id() << "...I delete it again" << endl;
+   kError(11001) << "ERROR: Double adding player !!!!! NOT GOOD !!!!!! " << newplayer->id() << "...I delete it again" << endl;
    delete newplayer;
  }
  else
  {
-   kdDebug(11001) << "Trying to add player " << newplayer <<" maxPlayers="<<maxPlayers()<<" playerCount="<<playerCount() << endl;
+   kDebug(11001) << "Trying to add player " << newplayer <<" maxPlayers="<<maxPlayers()<<" playerCount="<<playerCount() << endl;
    // Add the player to the game
    d->mPlayerList.append(newplayer);
    newplayer->setGame(this);
-   kdDebug(11001) << "Player: isVirtual=" << newplayer->isVirtual() << endl;
-   kdDebug(11001) << "        id=" << newplayer->id() << "  #Players="
+   kDebug(11001) << "Player: isVirtual=" << newplayer->isVirtual() << endl;
+   kDebug(11001) << "        id=" << newplayer->id() << "  #Players="
                   << d->mPlayerList.count() << " added " << newplayer
                   << "  (virtual=" << newplayer->isVirtual() << ")" << endl;
    emit signalPlayerJoinedGame(newplayer);
@@ -493,7 +493,7 @@ void KGame::systemAddPlayer(KPlayer* newplayer)
 // Called by the KPlayer destructor
 void KGame::playerDeleted(KPlayer *player)
 {
- kdDebug(11001) << k_funcinfo << ": id (" << player->id() << ") to be removed " << player << endl;
+ kDebug(11001) << k_funcinfo << ": id (" << player->id() << ") to be removed " << player << endl;
 
  if (policy()==PolicyLocal || policy()==PolicyDirty)
  {
@@ -503,7 +503,7 @@ void KGame::playerDeleted(KPlayer *player)
  {
    if (!player->isVirtual())
    {
-     kdDebug(11001) << k_funcinfo << ": sending IdRemovePlayer "<<player->id() << endl;
+     kDebug(11001) << k_funcinfo << ": sending IdRemovePlayer "<<player->id() << endl;
      sendSystemMessage(player->id(), KGameMessage::IdRemovePlayer, 0);
    }
  }
@@ -513,10 +513,10 @@ bool KGame::removePlayer(KPlayer * player, quint32 receiver)
 {//transmit to all clients, or to receiver only
  if (!player)
  {
-   kdFatal(11001) << "trying to remove NULL player in KGame::removePlayer()" << endl;
+   kFatal(11001) << "trying to remove NULL player in KGame::removePlayer()" << endl;
    return false;
  }
- kdDebug(11001) << k_funcinfo << ": id (" << player->id() << ") to be removed " << player << endl;
+ kDebug(11001) << k_funcinfo << ": id (" << player->id() << ") to be removed " << player << endl;
 
  if (policy()==PolicyLocal || policy()==PolicyDirty)
  {
@@ -524,7 +524,7 @@ bool KGame::removePlayer(KPlayer * player, quint32 receiver)
  }
  if (policy()==PolicyClean || policy()==PolicyDirty)
  {
-   kdDebug(11001) << k_funcinfo << ": sending IdRemovePlayer "<<player->id() << endl;
+   kDebug(11001) << k_funcinfo << ": sending IdRemovePlayer "<<player->id() << endl;
    sendSystemMessage(player->id(),KGameMessage::IdRemovePlayer, receiver);
  }
  return true;
@@ -533,20 +533,20 @@ bool KGame::removePlayer(KPlayer * player, quint32 receiver)
 
 void KGame::systemRemovePlayer(KPlayer* player,bool deleteit)
 {
- kdDebug(11001) << k_funcinfo << endl;
+ kDebug(11001) << k_funcinfo << endl;
  if (!player)
  {
-   kdWarning(11001) << "cannot remove NULL player" << endl;
+   kWarning(11001) << "cannot remove NULL player" << endl;
    return;
  }
  if (!systemRemove(player,deleteit))
  {
-   kdWarning(11001) << "player " << player << "(" << player->id() << ") Could not be found!" << endl;
+   kWarning(11001) << "player " << player << "(" << player->id() << ") Could not be found!" << endl;
  }
 
  if (gameStatus()==(int)Run && playerCount()<minPlayers())
  {
-   kdWarning(11001) << k_funcinfo ": not enough players, PAUSING game\n" << endl;
+   kWarning(11001) << k_funcinfo ": not enough players, PAUSING game\n" << endl;
    setGameStatus(Pause);
  }
 }
@@ -555,11 +555,11 @@ bool KGame::systemRemove(KPlayer* p,bool deleteit)
 {
  if (!p)
  {
-   kdWarning(11001) << "cannot remove NULL player" << endl;
+   kWarning(11001) << "cannot remove NULL player" << endl;
    return false;
  }
  bool result;
- kdDebug(11001) << k_funcinfo << ": Player (" << p->id() << ") to be removed " << p << endl;
+ kDebug(11001) << k_funcinfo << ": Player (" << p->id() << ") to be removed " << p << endl;
 
  if (d->mPlayerList.count() == 0)
  {
@@ -587,7 +587,7 @@ bool KGame::inactivatePlayer(KPlayer* player)
  {
    return false;
  }
- kdDebug(11001) << "Inactivate player " << player->id() << endl;
+ kDebug(11001) << "Inactivate player " << player->id() << endl;
 
  if (policy()==PolicyLocal || policy()==PolicyDirty)
  {
@@ -607,7 +607,7 @@ bool KGame::systemInactivatePlayer(KPlayer* player)
  {
    return false;
  }
- kdDebug(11001) << " Inactivate player " << player->id() << endl;
+ kDebug(11001) << " Inactivate player " << player->id() << endl;
 
  int pid=player->id();
  // Virtual players cannot be deactivated. They will be removed
@@ -635,7 +635,7 @@ bool KGame::activatePlayer(KPlayer * player)
   {
     return false;
   }
-  kdDebug(11001) << k_funcinfo << ": activate " << player->id() << endl;
+  kDebug(11001) << k_funcinfo << ": activate " << player->id() << endl;
   if (policy()==PolicyLocal || policy()==PolicyDirty)
   {
     systemActivatePlayer(player);
@@ -653,7 +653,7 @@ bool KGame::systemActivatePlayer(KPlayer* player)
  {
    return false;
  }
- kdDebug(11001) << k_funcinfo << ": activate " << player->id() << endl;
+ kDebug(11001) << k_funcinfo << ": activate " << player->id() << endl;
 
  d->mInactivePlayerList.remove(player);
  player->setActive(true);
@@ -712,16 +712,16 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
  if (!player)
  {
-   kdError(11001) << k_funcinfo << ": NULL player" << endl;
+   kError(11001) << k_funcinfo << ": NULL player" << endl;
    return false;
  }
  if (!isRunning())
  {
-   kdError(11001) << k_funcinfo << ": game not running" << endl;
+   kError(11001) << k_funcinfo << ": game not running" << endl;
    return false;
  }
 
- kdDebug(11001) << k_funcinfo << ": transmitting playerInput over network" << endl;
+ kDebug(11001) << k_funcinfo << ": transmitting playerInput over network" << endl;
  sendSystemMessage(msg, (int)KGameMessage::IdPlayerInput, player->id(), sender);
  return true;
 }
@@ -730,22 +730,22 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
  if (!player)
  {
-   kdError(11001) << k_funcinfo << ": NULL player" << endl;
+   kError(11001) << k_funcinfo << ": NULL player" << endl;
    return false;
  }
  if (!isRunning())
  {
-   kdError(11001) << k_funcinfo << ": game not running" << endl;
+   kError(11001) << k_funcinfo << ": game not running" << endl;
    return false;
  }
- kdDebug(11001) << "KGame: Got playerInput from messageServer... sender: " << sender << endl;
+ kDebug(11001) << "KGame: Got playerInput from messageServer... sender: " << sender << endl;
  if (playerInput(msg,player))
  {
    playerInputFinished(player);
  }
  else
  {
-   kdDebug(11001) << k_funcinfo<<": switching off player input"<<endl;
+   kDebug(11001) << k_funcinfo<<": switching off player input"<<endl;
    // TODO: (MH 03-2003): We need an return option from playerInput so that
    // the player's is not automatically disabled here 
    if (!player->asyncInput())
@@ -759,7 +759,7 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 
 KPlayer * KGame::playerInputFinished(KPlayer *player)
 {
- kdDebug(11001) << k_funcinfo<<"player input finished for "<<player->id()<<endl;
+ kDebug(11001) << k_funcinfo<<"player input finished for "<<player->id()<<endl;
  // Check for game over and if not allow the next player to move
  int gameOver = 0;
  if (gameSequence())
@@ -833,10 +833,10 @@ KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
 
 void KGame::setGameStatus(int status)
 {
- kdDebug(11001) << k_funcinfo << ": GAMESTATUS CHANGED  to" << status << endl;
+ kDebug(11001) << k_funcinfo << ": GAMESTATUS CHANGED  to" << status << endl;
  if (status==(int)Run && playerCount()<minPlayers()) 
  {
-   kdDebug(11001) << k_funcinfo << ": not enough players, pausing game\n" << endl;
+   kDebug(11001) << k_funcinfo << ": not enough players, pausing game\n" << endl;
    status=Pause;
  }
  d->mGameStatus = status;
@@ -848,7 +848,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
  // player. Otherwise we proceed here and hope the best that the user processes
  // the message
 
-//  kdDebug(11001) << k_funcinfo << ": we="<<(int)gameId()<<" id="<<msgid<<" recv=" << receiver << " sender=" << sender << endl;
+//  kDebug(11001) << k_funcinfo << ": we="<<(int)gameId()<<" id="<<msgid<<" recv=" << receiver << " sender=" << sender << endl;
 
  
  // *first* notice the game that something has changed - so no return prevents
@@ -856,7 +856,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
  emit signalMessageUpdate(msgid, receiver, sender);
  if (KGameMessage::isPlayer(receiver))
  {
-   //kdDebug(11001) << "message id " << msgid << " seems to be for a player ("<<active=p->isActive()<<" recv="<< receiver << endl;
+   //kDebug(11001) << "message id " << msgid << " seems to be for a player ("<<active=p->isActive()<<" recv="<< receiver << endl;
    KPlayer *p=findPlayer(receiver);
    if (p && p->isActive())
    {
@@ -865,11 +865,11 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    }
    if (p)
    {
-      kdDebug(11001) << "player is here but not active" << endl;
+      kDebug(11001) << "player is here but not active" << endl;
    }
    else
    {
-      kdDebug(11001) << "no player found" << endl;
+      kDebug(11001) << "no player found" << endl;
    }
  }
  // If it is not for a player it is meant for us!!!! Otherwise the
@@ -878,7 +878,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
  // GameProperties processed
  if (d->mProperties->processMessage(stream, msgid, sender == gameId())) 
  {
-//   kdDebug(11001 ) << "KGame: message taken by property - returning" << endl;
+//   kDebug(11001 ) << "KGame: message taken by property - returning" << endl;
    return ;
  }
 
@@ -889,12 +889,12 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
      qint16 v;
      qint32 c;
      stream >> v >> c;
-     kdDebug(11001) << " ===================> (Client) " << k_funcinfo << ": Got IdSetupGame ================== " << endl;
-     kdDebug(11001) << "our game id is " << gameId() << " Lib version=" << v << " App Cookie=" << c << endl; 
+     kDebug(11001) << " ===================> (Client) " << k_funcinfo << ": Got IdSetupGame ================== " << endl;
+     kDebug(11001) << "our game id is " << gameId() << " Lib version=" << v << " App Cookie=" << c << endl; 
      // Verify identity of the network partners
      if (c!=cookie())
      {
-       kdError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
+       kError(11001) << "IdGameSetup: Negotiate Game: cookie mismatch I'am="<<cookie()<<" master="<<c<<endl;
        sendError(KGameError::Cookie, KGameError::errCookie(cookie(), c));
        disconnect(); // disconnect from master
      }
@@ -907,12 +907,12 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
      {
        setupGame(sender);
      }
-     kdDebug(11001) << "========== (Client) Setup game done\n";
+     kDebug(11001) << "========== (Client) Setup game done\n";
    }
    break;
    case KGameMessage::IdSetupGameContinue:  // Master: second step in game setup
    {
-     kdDebug(11001) << "=====>(Master) " << k_funcinfo << " - IdSetupGameContinue" << endl;
+     kDebug(11001) << "=====>(Master) " << k_funcinfo << " - IdSetupGameContinue" << endl;
      setupGameContinue(stream, sender);
    }
    break;
@@ -920,7 +920,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    {
      int id;
      stream >> id;
-     kdDebug(11001) << "Got IdActivatePlayer id=" << id << endl;
+     kDebug(11001) << "Got IdActivatePlayer id=" << id << endl;
      if (sender!=gameId()  || policy()!=PolicyDirty)
      {
        systemActivatePlayer(findPlayer(id));
@@ -931,7 +931,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    {
      int id;
      stream >> id;
-     kdDebug(11001) << "Got IdInactivatePlayer id=" << id << endl;
+     kDebug(11001) << "Got IdInactivatePlayer id=" << id << endl;
      if (sender!=gameId()  || policy()!=PolicyDirty)
      {
        systemInactivatePlayer(findPlayer(id));
@@ -940,14 +940,14 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    break;
    case KGameMessage::IdAddPlayer:
    {
-     kdDebug(11001) << k_funcinfo << ": Got IdAddPlayer" << endl;
+     kDebug(11001) << k_funcinfo << ": Got IdAddPlayer" << endl;
      if (sender!=gameId()  || policy()!=PolicyDirty)
      {
        KPlayer *newplayer=0;
        // We sent the message so the player is already available
        if (sender==gameId())
        {
-          kdDebug(11001) << "dequeue previously added player" << endl;
+          kDebug(11001) << "dequeue previously added player" << endl;
           newplayer = d->mAddPlayerList.dequeue();
        }
        else
@@ -963,7 +963,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    {
      int id;
      stream >> id;
-     kdDebug(11001) << k_funcinfo << ": Got IdRemovePlayer " << id << endl;
+     kDebug(11001) << k_funcinfo << ": Got IdRemovePlayer " << id << endl;
      KPlayer *p=findPlayer(id);
      if (p)
      {
@@ -975,13 +975,13 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
      }
      else
      {
-       kdWarning(11001) << k_funcinfo << "Cannot find player " << id << endl;
+       kWarning(11001) << k_funcinfo << "Cannot find player " << id << endl;
      }
    }
    break;
    case KGameMessage::IdGameLoad:
    {
-     kdDebug(11001) << "====> (Client) " << k_funcinfo << ": Got IdGameLoad" << endl;
+     kDebug(11001) << "====> (Client) " << k_funcinfo << ": Got IdGameLoad" << endl;
      loadgame(stream,true,false);
    }
    break;
@@ -989,7 +989,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    {
      int cid;
      stream >> cid;
-     kdDebug(11001) << "====> (CLIENT) " << k_funcinfo << ": Got IdGameSetupDone for client "
+     kDebug(11001) << "====> (CLIENT) " << k_funcinfo << ": Got IdGameSetupDone for client "
              << cid << " we are =" << gameId() << endl;
      sendSystemMessage(gameId(), KGameMessage::IdGameConnected, 0);
    }
@@ -998,7 +998,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    {
      int cid;
      stream >> cid;
-     kdDebug(11001) << "====> (ALL) " << k_funcinfo << ": Got IdGameConnected for client "<< cid << " we are =" << gameId() << endl;
+     kDebug(11001) << "====> (ALL) " << k_funcinfo << ": Got IdGameConnected for client "<< cid << " we are =" << gameId() << endl;
      emit signalClientJoinedGame(cid,this);
    }
    break;
@@ -1007,7 +1007,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    {
      int newseed;
      stream >> newseed;
-     kdDebug(11001) << "CLIENT: setting random seed to " << newseed << endl;
+     kDebug(11001) << "CLIENT: setting random seed to " << newseed << endl;
      d->mRandom->setSeed(newseed);
    }
    break;
@@ -1017,10 +1017,10 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    // this could lead into problems if we just change the message server
      if (sender != gameId())
      {
-         kdDebug(11001) << "client " << sender << " leaves game" << endl;
+         kDebug(11001) << "client " << sender << " leaves game" << endl;
          return;
      }
-     kdDebug(11001) << "leaving the game" << endl;
+     kDebug(11001) << "leaving the game" << endl;
      // start a new local game
      // no other client is by default connected to this so this call should be
      // enough
@@ -1031,10 +1031,10 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
     {
      if (msgid < KGameMessage::IdUser)
      {
-       kdError(11001) << "incorrect message id " << msgid << " - emit anyway"
+       kError(11001) << "incorrect message id " << msgid << " - emit anyway"
                       << endl;
      }
-     kdDebug(11001) << k_funcinfo << ": User data msgid " << msgid << endl;
+     kDebug(11001) << k_funcinfo << ": User data msgid " << msgid << endl;
      emit signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),receiver,sender);
    }
    break;
@@ -1059,33 +1059,33 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
   for (i=0;i<cnt;i++)
   {
     player=loadPlayer(stream,true);
-    kdDebug(11001) << " Master got player " << player->id() <<" rawgame=" << KGameMessage::rawGameId(player->id())  << " from sender " << sender << endl;
+    kDebug(11001) << " Master got player " << player->id() <<" rawgame=" << KGameMessage::rawGameId(player->id())  << " from sender " << sender << endl;
     if (KGameMessage::rawGameId(player->id()) != sender)
     {
-      kdError(11001) << "Client tries to add player with wrong game id - cheat possible" << endl;
+      kError(11001) << "Client tries to add player with wrong game id - cheat possible" << endl;
     }
     else
     {
       newPlayerList.append(player);
-      kdDebug(11001) << " newplayerlist appended " << player->id() << endl;
+      kDebug(11001) << " newplayerlist appended " << player->id() << endl;
     }
   }
 
   newPlayersJoin(playerList(),&newPlayerList,inactivateIds);
 
 
-  kdDebug(11001) << " Master calculates how many players to activate client has cnt=" << cnt << endl;
-  kdDebug(11001) << " The game has " << playerCount() << " active players" << endl;
-  kdDebug(11001) << " The user deactivated "<< inactivateIds.count() << " player already " << endl;
-  kdDebug(11001) << " MaxPlayers for this game is " << maxPlayers() << endl;
+  kDebug(11001) << " Master calculates how many players to activate client has cnt=" << cnt << endl;
+  kDebug(11001) << " The game has " << playerCount() << " active players" << endl;
+  kDebug(11001) << " The user deactivated "<< inactivateIds.count() << " player already " << endl;
+  kDebug(11001) << " MaxPlayers for this game is " << maxPlayers() << endl;
 
   // Do we have too many players? (After the programmer disabled some?)
   // MH: We cannot use have player here as it CHANGES in the loop
   // int havePlayers = cnt+playerCount()-inactivateIds.count();
-  kdDebug(11001) << " havePlayers " << cnt+playerCount()-inactivateIds.count() << endl;
+  kDebug(11001) << " havePlayers " << cnt+playerCount()-inactivateIds.count() << endl;
   while (maxPlayers() > 0 && maxPlayers() < (int)(cnt+playerCount() - inactivateIds.count()))
   {
-    kdDebug(11001) << "  Still to deacticvate "
+    kDebug(11001) << "  Still to deacticvate "
             << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers() 
             << endl;
     KPlayer *currentPlayer=0;
@@ -1125,23 +1125,23 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     // add it to inactivateIds
     if (currentPlayer)
     {
-      kdDebug(11001) << "Marking player " << currentPlayer->id() << " for inactivation" << endl;
+      kDebug(11001) << "Marking player " << currentPlayer->id() << " for inactivation" << endl;
       inactivateIds.append(currentPlayer->id());
     }
     else
     {
-      kdError(11001) << "Couldn't find a player to dectivate..That is not so good..." << endl;
+      kError(11001) << "Couldn't find a player to dectivate..That is not so good..." << endl;
       break;
     }
   }
 
-  kdDebug(11001) << "Alltogether deactivated " << inactivateIds.count() << " players" << endl;
+  kDebug(11001) << "Alltogether deactivated " << inactivateIds.count() << " players" << endl;
 
   QList<int>::Iterator it;
   for ( it = inactivateIds.begin(); it != inactivateIds.end(); ++it )
   {
     int pid=*it;
-    kdDebug(11001) << " pid=" << pid << endl;
+    kDebug(11001) << " pid=" << pid << endl;
   }
 
   // Now deactivate the network players from the inactivateId list
@@ -1153,7 +1153,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     {
       continue; // client's player
     }
-    kdDebug(11001) << " -> the network needs to deactivate " << pid <<endl;
+    kDebug(11001) << " -> the network needs to deactivate " << pid <<endl;
     player=findPlayer(pid);
     if (player)
     {
@@ -1166,20 +1166,20 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     }
     else
     {
-      kdError(11001) << " We should deactivate a player, but cannot find it...not good." << endl;
+      kError(11001) << " We should deactivate a player, but cannot find it...not good." << endl;
     }
   }
 
   // Now send out the player list which the client can activate
   for ( player=newPlayerList.first(); player != 0; player=newPlayerList.next() )
   {
-    kdDebug(11001) << " newplayerlist contains " << player->id() << endl;
+    kDebug(11001) << " newplayerlist contains " << player->id() << endl;
     // Only activate what is not in the list
     if (inactivateIds.find(player->id())!=inactivateIds.end())
     {
       continue;
     }
-    kdDebug(11001) << " -> the client can ******** reactivate ********  " << player->id() << endl;
+    kDebug(11001) << " -> the client can ******** reactivate ********  " << player->id() << endl;
     sendSystemMessage(player->id(), KGameMessage::IdActivatePlayer, sender);
   }
 
@@ -1205,7 +1205,7 @@ void KGame::setupGame(quint32 sender)
   // Deactivate all players
   KGamePlayerList mTmpList(d->mPlayerList); // we need copy otherwise the removal crashes
   qint32 cnt=mTmpList.count();
-  kdDebug(11001) << "Client: playerlistcount=" << d->mPlayerList.count() << " tmplistcout=" << cnt << endl;
+  kDebug(11001) << "Client: playerlistcount=" << d->mPlayerList.count() << " tmplistcout=" << cnt << endl;
 
   streamS << cnt;
 
@@ -1226,7 +1226,7 @@ void KGame::setupGame(quint32 sender)
   }
   if (d->mPlayerList.count() > 0 || cnt!=0)
   {
-    kdFatal(11001) << "KGame::setupGame(): Player list is not empty! or cnt!=0=" <<cnt << endl;
+    kFatal(11001) << "KGame::setupGame(): Player list is not empty! or cnt!=0=" <<cnt << endl;
   }
 
   sendSystemMessage(streamS,KGameMessage::IdSetupGameContinue,sender);
@@ -1243,14 +1243,14 @@ void KGame::syncRandom()
 void KGame::Debug()
 {
  KGameNetwork::Debug();
- kdDebug(11001) << "------------------- KGAME -------------------------" << endl;
- kdDebug(11001) << "this:          " << this << endl;
- kdDebug(11001) << "uniquePlayer   " << d->mUniquePlayerNumber << endl;
- kdDebug(11001) << "gameStatus     " << gameStatus() << endl;
- kdDebug(11001) << "MaxPlayers :   " << maxPlayers() << endl;
- kdDebug(11001) << "NoOfPlayers :  " << playerCount() << endl;
- kdDebug(11001) << "NoOfInactive:  " << d->mInactivePlayerList.count() << endl;
- kdDebug(11001) << "---------------------------------------------------" << endl;
+ kDebug(11001) << "------------------- KGAME -------------------------" << endl;
+ kDebug(11001) << "this:          " << this << endl;
+ kDebug(11001) << "uniquePlayer   " << d->mUniquePlayerNumber << endl;
+ kDebug(11001) << "gameStatus     " << gameStatus() << endl;
+ kDebug(11001) << "MaxPlayers :   " << maxPlayers() << endl;
+ kDebug(11001) << "NoOfPlayers :  " << playerCount() << endl;
+ kDebug(11001) << "NoOfInactive:  " << d->mInactivePlayerList.count() << endl;
+ kDebug(11001) << "---------------------------------------------------" << endl;
 }
 
 void KGame::slotClientConnected(quint32 clientID)
@@ -1263,21 +1263,21 @@ void KGame::slotClientConnected(quint32 clientID)
 
 void KGame::slotServerDisconnected() // Client side
 {
-  kdDebug(11001) << "======= SERVER DISCONNECT ======="<<endl;
-  kdDebug(11001) << "+++ (CLIENT)++++++++" << k_funcinfo << ": our GameID="<<gameId() << endl;
+  kDebug(11001) << "======= SERVER DISCONNECT ======="<<endl;
+  kDebug(11001) << "+++ (CLIENT)++++++++" << k_funcinfo << ": our GameID="<<gameId() << endl;
 
   int oldgamestatus=gameStatus();
 
   KPlayer *player;
   KGamePlayerList removeList;
-  kdDebug(11001) << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
-  kdDebug(11001) << "Inactive Playerlist of client=" << d->mInactivePlayerList.count() << " count" << endl;
+  kDebug(11001) << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
+  kDebug(11001) << "Inactive Playerlist of client=" << d->mInactivePlayerList.count() << " count" << endl;
   for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
   {
     // TODO: CHECK: id=0, could not connect to server in the first place??
     if (KGameMessage::rawGameId(player->id()) != gameId() && gameId()!=0)
     {
-      kdDebug(11001) << "Player " << player->id() << " belongs to a removed game" << endl;
+      kDebug(11001) << "Player " << player->id() << " belongs to a removed game" << endl;
       removeList.append(player);
     }
   }
@@ -1288,13 +1288,13 @@ void KGame::slotServerDisconnected() // Client side
     emit signalReplacePlayerIO(player, &remove);
     if (remove)
     {
-      kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
+      kDebug(11001) << " ---> Removing player " << player->id() <<  endl;
       systemRemovePlayer(player,true); // no network necessary
     }
   }
 
   setMaster();
-  kdDebug(11001) << " our game id is after setMaster " << gameId() << endl;
+  kDebug(11001) << " our game id is after setMaster " << gameId() << endl;
 
   KGamePlayerList mReList(d->mInactivePlayerList);
   for ( player=mReList.first(); player != 0; player=mReList.next() )
@@ -1305,14 +1305,14 @@ void KGame::slotServerDisconnected() // Client side
       systemActivatePlayer(player);
     }
   }
-  kdDebug(11001) << " Players activated player-cnt=" << playerCount() << endl;
+  kDebug(11001) << " Players activated player-cnt=" << playerCount() << endl;
 
   for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
   {
     int oldid=player->id();
     d->mUniquePlayerNumber++;
     player->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber,gameId()));
-    kdDebug(11001) << "Player id " << oldid <<" changed to " << player->id() << " as we are now local" << endl;
+    kDebug(11001) << "Player id " << oldid <<" changed to " << player->id() << " as we are now local" << endl;
   }
   // TODO clear inactive lists ?
   Debug();
@@ -1320,24 +1320,24 @@ void KGame::slotServerDisconnected() // Client side
   {
     player->Debug();
   }
-  kdDebug(11001) << "+++++++++++" << k_funcinfo << " DONE=" << endl;
+  kDebug(11001) << "+++++++++++" << k_funcinfo << " DONE=" << endl;
   emit signalClientLeftGame(0,oldgamestatus,this);
 }
 
 void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server side
 {
- kdDebug(11001) << "++++(SERVER)+++++++" << k_funcinfo << " clientId=" << clientID << endl;
+ kDebug(11001) << "++++(SERVER)+++++++" << k_funcinfo << " clientId=" << clientID << endl;
 
  int oldgamestatus=gameStatus();
 
  KPlayer *player;
  KGamePlayerList removeList;
- kdDebug(11001) << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
+ kDebug(11001) << "Playerlist of client=" << d->mPlayerList.count() << " count" << endl;
  for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() )
  {
    if (KGameMessage::rawGameId(player->id())==clientID)
    {
-     kdDebug(11001) << "Player " << player->id() << " belongs to the removed game" << endl;
+     kDebug(11001) << "Player " << player->id() << " belongs to the removed game" << endl;
      removeList.append(player);
    }
  }
@@ -1349,7 +1349,7 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
    emit signalReplacePlayerIO(player, &remove);
    if (remove) {
      // otherwise (no new KGameIO) remove the player
-     kdDebug(11001) << " ---> Removing player " << player->id() <<  endl;
+     kDebug(11001) << " ---> Removing player " << player->id() <<  endl;
      removePlayer(player,0);
    }
  }
@@ -1377,10 +1377,10 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
 // clients should have the same status (ie players, properties, etc)
 void KGame::negotiateNetworkGame(quint32 clientID)
 {
- kdDebug(11001) << "===========================" << k_funcinfo << ": clientID=" << clientID << " =========================== "<< endl;
+ kDebug(11001) << "===========================" << k_funcinfo << ": clientID=" << clientID << " =========================== "<< endl;
  if (!isAdmin())
  {
-   kdError(11001) << k_funcinfo << ": Serious WARNING..only gameAdmin should call this" << endl;
+   kError(11001) << k_funcinfo << ": Serious WARNING..only gameAdmin should call this" << endl;
    return ;
  }
 

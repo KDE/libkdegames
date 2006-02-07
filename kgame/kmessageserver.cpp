@@ -94,7 +94,7 @@ KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
   d->mCookie=cookie;
   connect (&(d->mTimer), SIGNAL (timeout()),
            this, SLOT (processOneMessage()));
-  kdDebug(11001) << "CREATE(KMessageServer="
+  kDebug(11001) << "CREATE(KMessageServer="
 		<< this
 		<< ") cookie="
 		<< d->mCookie
@@ -105,23 +105,23 @@ KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
 
 KMessageServer::~KMessageServer()
 {
-  kdDebug(11001) << k_funcinfo << "this=" << this << endl;
+  kDebug(11001) << k_funcinfo << "this=" << this << endl;
   Debug();
   stopNetwork();
   deleteClients();
   delete d;
-  kdDebug(11001) << k_funcinfo << " done" << endl;
+  kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 //------------------------------------- TCP/IP server stuff
 
 bool KMessageServer::initNetwork (quint16 port)
 {
-  kdDebug(11001) << k_funcinfo << endl;
+  kDebug(11001) << k_funcinfo << endl;
 
   if (d->mServerSocket)
   {
-    kdDebug (11001) << k_funcinfo << ": We were already offering connections!" << endl;
+    kDebug (11001) << k_funcinfo << ": We were already offering connections!" << endl;
     delete d->mServerSocket;
   }
 
@@ -130,13 +130,13 @@ bool KMessageServer::initNetwork (quint16 port)
 
   if (!d->mServerSocket || !d->mServerSocket->ok())
   {
-    kdError(11001) << k_funcinfo << ": Serversocket::ok() == false" << endl;
+    kError(11001) << k_funcinfo << ": Serversocket::ok() == false" << endl;
     delete d->mServerSocket;
     d->mServerSocket=0;
     return false;
   }
 
-  kdDebug (11001) << k_funcinfo << ": Now listening to port "
+  kDebug (11001) << k_funcinfo << ": Now listening to port "
                   << d->mServerSocket->port() << endl;
   connect (d->mServerSocket, SIGNAL (newClientConnected (KMessageIO*)),
            this, SLOT (addClient (KMessageIO*)));
@@ -174,13 +174,13 @@ void KMessageServer::addClient (KMessageIO* client)
   // maximum number of clients reached?
   if (d->mMaxClients >= 0 && d->mMaxClients <= clientCount())
   {
-    kdError (11001) << k_funcinfo << ": Maximum number of clients reached!" << endl;
+    kError (11001) << k_funcinfo << ": Maximum number of clients reached!" << endl;
     return;
   }
 
   // give it a unique ID
   client->setId (uniqueClientNumber());
-  kdDebug (11001) << k_funcinfo << ": " << client->id() << endl;
+  kDebug (11001) << k_funcinfo << ": " << client->id() << endl;
 
   // connect its signals
   connect (client, SIGNAL (connectionBroken()),
@@ -225,7 +225,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
   quint32 clientID = client->id();
   if (!d->mClientList.removeRef (client))
   {
-    kdError(11001) << k_funcinfo << ": Deleting client that wasn't added before!" << endl;
+    kError(11001) << k_funcinfo << ": Deleting client that wasn't added before!" << endl;
     return;
   }
 
@@ -254,7 +254,7 @@ void KMessageServer::removeBrokenClient ()
 {
   if (!sender()->inherits ("KMessageIO"))
   {
-    kdError (11001) << k_funcinfo << ": sender of the signal was not a KMessageIO object!" << endl;
+    kError (11001) << k_funcinfo << ": sender of the signal was not a KMessageIO object!" << endl;
     return;
   }
 
@@ -316,7 +316,7 @@ void KMessageServer::setAdmin (quint32 adminID)
 
   if (adminID > 0 && findClient (adminID) == 0)
   {
-    kdWarning (11001) << "Trying to set a new admin that doesn't exist!" << endl;
+    kWarning (11001) << "Trying to set a new admin that doesn't exist!" << endl;
     return;
   }
 
@@ -362,10 +362,10 @@ void KMessageServer::getReceivedMessage (const QByteArray &msg)
 {
   if (!sender() || !sender()->inherits("KMessageIO"))
   {
-    kdError (11001) << k_funcinfo << ": slot was not called from KMessageIO!" << endl;
+    kError (11001) << k_funcinfo << ": slot was not called from KMessageIO!" << endl;
     return;
   }
-  //kdDebug(11001) << k_funcinfo << ": size=" << msg.size() << endl;
+  //kDebug(11001) << k_funcinfo << ": size=" << msg.size() << endl;
   KMessageIO *client = (KMessageIO *) sender();
   quint32 clientID = client->id();
 
@@ -410,7 +410,7 @@ void KMessageServer::processOneMessage ()
   QByteArray ttt=in_buffer.buffer();
   quint32 messageID;
   in_stream >> messageID;
-  //kdDebug(11001) << k_funcinfo << ": got message with messageID=" << messageID << endl;
+  //kDebug(11001) << k_funcinfo << ": got message with messageID=" << messageID << endl;
   switch (messageID)
   {
     case REQ_BROADCAST:
@@ -463,7 +463,7 @@ void KMessageServer::processOneMessage ()
           if (client)
             removeClient (client, false);
           else
-            kdWarning (11001) << k_funcinfo << ": removing non-existing clientID" << endl;
+            kWarning (11001) << k_funcinfo << ": removing non-existing clientID" << endl;
         }
       }
       break;
@@ -490,12 +490,12 @@ void KMessageServer::processOneMessage ()
 
   // check if all the data has been used
   if (!unknown && !in_buffer.atEnd())
-    kdWarning (11001) << k_funcinfo << ": Extra data received for message ID " << messageID << endl;
+    kWarning (11001) << k_funcinfo << ": Extra data received for message ID " << messageID << endl;
 
   emit messageReceived (msg_buf->data, clientID, unknown);
 
   if (unknown)
-    kdWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
+    kWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
 
   // remove the message, since we are ready with it
   d->mMessageQueue.remove();
@@ -506,10 +506,10 @@ void KMessageServer::processOneMessage ()
 
 void KMessageServer::Debug()
 {
-   kdDebug(11001) << "------------------ KMESSAGESERVER -----------------------" << endl;
-   kdDebug(11001) << "MaxClients :   " << maxClients() << endl;
-   kdDebug(11001) << "NoOfClients :  " << clientCount() << endl;
-   kdDebug(11001) << "---------------------------------------------------" << endl;
+   kDebug(11001) << "------------------ KMESSAGESERVER -----------------------" << endl;
+   kDebug(11001) << "MaxClients :   " << maxClients() << endl;
+   kDebug(11001) << "NoOfClients :  " << clientCount() << endl;
+   kDebug(11001) << "---------------------------------------------------" << endl;
 }
 
 #include "kmessageserver.moc"

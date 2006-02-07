@@ -245,14 +245,14 @@ void MultiplayerScores::addScore(uint i, const Score &score)
 void MultiplayerScores::show(QWidget *parent)
 {
     // check consistency
-    if ( _nbGames.size()<2 ) kdWarning(11002) << "less than 2 players" << endl;
+    if ( _nbGames.size()<2 ) kWarning(11002) << "less than 2 players" << endl;
     else {
         bool ok = true;
         uint nb = _nbGames[0];
         for (int i=1; i<_nbGames.size(); i++)
             if ( _nbGames[i]!=nb ) ok = false;
         if (!ok)
-           kdWarning(11002) << "players have not same number of games" << endl;
+           kWarning(11002) << "players have not same number of games" << endl;
     }
 
     // order the players according to the number of won games

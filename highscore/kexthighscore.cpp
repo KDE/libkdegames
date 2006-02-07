@@ -111,7 +111,7 @@ Manager::Manager(uint nbGameTypes, uint maxNbEntries)
     Q_ASSERT(nbGameTypes);
     Q_ASSERT(maxNbEntries);
     if (internal)
-        kdFatal(11002) << "A highscore object already exists" << endl;
+        kFatal(11002) << "A highscore object already exists" << endl;
     internal = new ManagerPrivate(nbGameTypes, *this);
     internal->init(maxNbEntries);
 }
@@ -261,7 +261,7 @@ void Manager::setPlayerItem(PlayerItemType type, Item *item)
 QString Manager::gameTypeLabel(uint gameType, LabelType type) const
 {
     if ( gameType!=0 )
-        kdFatal(11002) << "You need to reimplement KExtHighscore::Manager for "
+        kFatal(11002) << "You need to reimplement KExtHighscore::Manager for "
                        << "multiple game types" << endl;
     switch (type) {
     case Icon:

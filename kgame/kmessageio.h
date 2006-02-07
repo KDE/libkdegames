@@ -79,7 +79,7 @@ public:
   //virtual bool isNetwork () const = 0;
   virtual bool isNetwork () const
   {
-   kdError(11001) << "Calling PURE virtual isNetwork...BAD" << endl;
+   kError(11001) << "Calling PURE virtual isNetwork...BAD" << endl;
    return false;
   }
 
@@ -93,7 +93,7 @@ public:
   //virtual bool isConnected () const = 0;
   virtual bool isConnected () const
   {
-   kdError(11001) << "Calling PURE virtual isConencted...BAD" << endl;
+   kError(11001) << "Calling PURE virtual isConencted...BAD" << endl;
    return false;
   }
 

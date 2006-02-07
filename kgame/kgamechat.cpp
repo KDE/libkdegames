@@ -77,13 +77,13 @@ KGameChat::KGameChat(QWidget* parent) : KChatBase(parent)
 
 KGameChat::~KGameChat()
 {
- kdDebug(11001) << k_funcinfo << endl;
+ kDebug(11001) << k_funcinfo << endl;
  delete d;
 }
 
 void KGameChat::init(KGame* g, int msgId)
 {
- kdDebug(11001) << k_funcinfo << endl;
+ kDebug(11001) << k_funcinfo << endl;
  d = new KGameChatPrivate;
  setMessageId(msgId);
 
@@ -93,15 +93,15 @@ void KGameChat::init(KGame* g, int msgId)
 void KGameChat::addMessage(int fromId, const QString& text)
 {
  if (!d->mGame) {
-	kdWarning(11001) << "no KGame object has been set" << endl;
+	kWarning(11001) << "no KGame object has been set" << endl;
 	addMessage(i18n("Player %1").arg(fromId), text);
  } else {
 	KPlayer* p = d->mGame->findPlayer(fromId);
 	if (p) {
-		kdDebug(11001) << "adding message of player " << p->name() << "id=" << fromId << endl;
+		kDebug(11001) << "adding message of player " << p->name() << "id=" << fromId << endl;
 		addMessage(p->name(), text);
 	} else {
-		kdWarning(11001) << "Could not find player id " << fromId << endl;
+		kWarning(11001) << "Could not find player id " << fromId << endl;
 		addMessage(i18n("Unknown"), text);
 	}
  }
@@ -110,15 +110,15 @@ void KGameChat::addMessage(int fromId, const QString& text)
 void KGameChat::returnPressed(const QString& text)
 {
  if (!d->mFromPlayer) {
-	kdWarning(11001) << k_funcinfo << ": You must set a player first!" << endl;
+	kWarning(11001) << k_funcinfo << ": You must set a player first!" << endl;
 	return;
  }
  if (!d->mGame) {
-	kdWarning(11001) << k_funcinfo << ": You must set a game first!" << endl;
+	kWarning(11001) << k_funcinfo << ": You must set a game first!" << endl;
 	return;
  }
 
- kdDebug(11001) << "from: " << d->mFromPlayer->id() << "==" << d->mFromPlayer->name() << endl;
+ kDebug(11001) << "from: " << d->mFromPlayer->id() << "==" << d->mFromPlayer->name() << endl;
 
  int id = sendingEntry();
 
@@ -126,7 +126,7 @@ void KGameChat::returnPressed(const QString& text)
 	// note: there is currently no support for other groups than the players
 	// group! It might be useful to send to other groups, too
 	QString group = d->mFromPlayer->group();
-	kdDebug(11001) << "send to group " << group << endl;
+	kDebug(11001) << "send to group " << group << endl;
 	int sender = d->mFromPlayer->id();
 	d->mGame->sendGroupMessage(text, messageId(), sender, group);
 
@@ -140,7 +140,7 @@ void KGameChat::returnPressed(const QString& text)
 	if (!isSendToAllMessage(id) && isToPlayerMessage(id)) {
 		toPlayer = playerId(id);
 		if (toPlayer == -1) {
-			kdError(11001) << k_funcinfo << ": don't know that player "
+			kError(11001) << k_funcinfo << ": don't know that player "
 					<< "- internal ERROR" << endl;
 		}
 	} 
@@ -200,7 +200,7 @@ bool KGameChat::hasPlayer(int id) const
 void KGameChat::setFromPlayer(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << k_funcinfo << ": NULL player" << endl;
+	kError(11001) << k_funcinfo << ": NULL player" << endl;
 	removeSendingEntry(d->mToMyGroup);
 	d->mFromPlayer = 0;
 	return;
@@ -209,14 +209,14 @@ void KGameChat::setFromPlayer(KPlayer* p)
 	changeSendingEntry(p->group(), d->mToMyGroup);
  } else {
 	if (d->mToMyGroup != -1) {
-		kdWarning(11001) << "send to my group exists already - removing" << endl;
+		kWarning(11001) << "send to my group exists already - removing" << endl;
 		removeSendingEntry(d->mToMyGroup);
 	}
 	d->mToMyGroup = nextId();
 	addSendingEntry(i18n("Send to My Group (\"%1\")").arg(p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
- kdDebug(11001) << k_funcinfo << " player=" << p << endl;
+ kDebug(11001) << k_funcinfo << " player=" << p << endl;
 }
 
 
@@ -225,7 +225,7 @@ void KGameChat::setKGame(KGame* g)
  if (d->mGame) {
 	slotUnsetKGame();
  }
- kdDebug(11001) << k_funcinfo << " game=" << g << endl;
+ kDebug(11001) << k_funcinfo << " game=" << g << endl;
  d->mGame = g;
 
  if (d->mGame) {
@@ -272,11 +272,11 @@ void KGameChat::slotUnsetKGame()
 void KGameChat::slotAddPlayer(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << k_funcinfo << ": cannot add NULL player" << endl;
+	kError(11001) << k_funcinfo << ": cannot add NULL player" << endl;
 	return;
  }
  if (hasPlayer(p->id())) {
-	kdError(11001) << k_funcinfo << ": player was added before" << endl;
+	kError(11001) << k_funcinfo << ": player was added before" << endl;
 	return;
  }
 
@@ -292,11 +292,11 @@ void KGameChat::slotAddPlayer(KPlayer* p)
 void KGameChat::slotRemovePlayer(KPlayer* p)
 {
  if (!p) {
-	kdError(11001) << k_funcinfo << ": NULL player" << endl;
+	kError(11001) << k_funcinfo << ": NULL player" << endl;
 	return;
  }
  if (!hasPlayer(p->id())) {
-	kdError(11001) << k_funcinfo << ": cannot remove non-existent player" << endl;
+	kError(11001) << k_funcinfo << ": cannot remove non-existent player" << endl;
 	return;
  }
 
@@ -309,7 +309,7 @@ void KGameChat::slotRemovePlayer(KPlayer* p)
 void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
  if (prop->id() == KGamePropertyBase::IdName) {
-//	kdDebug(11001) << "new Name" << endl;
+//	kDebug(11001) << "new Name" << endl;
 	changeSendingEntry(player->name(), sendingId(player->id()));
 /*
 	mCombo->changeItem(comboBoxItem(player->name()), index);
@@ -322,7 +322,7 @@ void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, quint32 sender, KPlayer* me)
 {
  if (!me || me != fromPlayer()) {
-	kdDebug() << k_funcinfo << "nope - not for us!"  << endl;
+	kDebug() << k_funcinfo << "nope - not for us!"  << endl;
 	return;
  }
  slotReceiveMessage(msgid, buffer, me->id(), sender);

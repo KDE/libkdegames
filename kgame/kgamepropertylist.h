@@ -163,7 +163,7 @@ public:
 
   void load(QDataStream& s)
   {
-    kdDebug(11001) << "KGamePropertyList load " << id() << endl;
+    kDebug(11001) << "KGamePropertyList load " << id() << endl;
     QList<type>::clear();
     uint size;
     type data;
@@ -179,7 +179,7 @@ public:
 
   void save(QDataStream &s)
   {
-    kdDebug(11001) << "KGamePropertyList save "<<id() << endl;
+    kDebug(11001) << "KGamePropertyList save "<<id() << endl;
     type data;
     uint size=count();
     s << size;
@@ -194,7 +194,7 @@ public:
   void command(QDataStream &s,int cmd,bool)
   {
     KGamePropertyBase::command(s, cmd);
-    kdDebug(11001) << "---> LIST id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
+    kDebug(11001) << "---> LIST id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
     Iterator it;
     switch(cmd)
     {
@@ -205,7 +205,7 @@ public:
         s >> i >> data;
         it=at(i);
         QList<type>::insert(it,data);
-//        kdDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
+//        kDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
@@ -214,7 +214,7 @@ public:
         type data;
 	s >> data;
         QList<type>::append(data);
-//        kdDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
+//        kDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
         if (isEmittingSignal()) emitSignal();
 	break;
       }
@@ -224,19 +224,19 @@ public:
         s >> i;
         it=at(i);
         QList<type>::remove(it);
-        kdDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
+        kDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdClear:
       {
         QList<type>::clear();
-        kdDebug(11001) << "CmdClear:id="<<id()<<endl; 
+        kDebug(11001) << "CmdClear:id="<<id()<<endl; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       default: 
-        kdDebug(11001) << "Error in KPropertyList::command: Unknown command " << cmd << endl;
+        kDebug(11001) << "Error in KPropertyList::command: Unknown command " << cmd << endl;
     }
   }
 

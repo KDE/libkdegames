@@ -101,7 +101,7 @@ KAction* KStdGameAction::create(StdGameAction id, const char *name,
 {
 	KAction* pAction = 0;
 	const KStdGameActionInfo* pInfo = infoPtr( id );
-	kdDebug(125) << "KStdGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << ", " << name << " )" << endl;
+	kDebug(125) << "KStdGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << ", " << name << " )" << endl;
 	if( pInfo ) {
 		QString sLabel = i18n(pInfo->psLabel);
 		KShortcut cut = (pInfo->globalAccel==KStdAccel::AccelNone

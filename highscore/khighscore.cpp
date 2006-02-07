@@ -71,7 +71,7 @@ void KHighscore::init(bool forceLocal)
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
     if ( d->global && _lock==0 )
-        kdFatal(11002) << "KHighscore::init should be called before!!" << endl;
+        kFatal(11002) << "KHighscore::init should be called before!!" << endl;
 #else
     d->global = false;
     Q_UNUSED(forceLocal);
@@ -95,7 +95,7 @@ void KHighscore::init(const char *appname)
     const QString filename =  QString::fromLocal8Bit("%1/%2.scores")
                               .arg(HIGHSCORE_DIRECTORY).arg(appname);
     int fd = open(filename.toLocal8Bit(), O_RDWR);
-    if ( fd<0 ) kdFatal(11002) << "cannot open global highscore file \""
+    if ( fd<0 ) kFatal(11002) << "cannot open global highscore file \""
                                << filename << "\"" << endl;
     lockSD.setObject(_lock, new KFileLock(fd));
     configSD.setObject(_config, new KRawConfig(fd, true)); // read-only
@@ -114,11 +114,11 @@ bool KHighscore::lockForWriting(QWidget *widget)
 
     bool first = true;
     for (;;) {
-        kdDebug(11002) << "try locking" << endl;
+        kDebug(11002) << "try locking" << endl;
         // lock the highscore file (it should exist)
         int result = _lock->lock();
         bool ok = ( result==0 );
-        kdDebug(11002) << "locking system-wide highscore file res="
+        kDebug(11002) << "locking system-wide highscore file res="
                        <<  result << " (ok=" << ok << ")" << endl;
         if (ok) {
             readCurrentConfig();
@@ -145,7 +145,7 @@ void KHighscore::writeAndUnlock()
     }
     if ( !isLocked() ) return;
 
-    kdDebug(11002) << "unlocking" << endl;
+    kDebug(11002) << "unlocking" << endl;
     _config->sync(); // write config
     _lock->unlock();
     _config->setReadOnly(true);
