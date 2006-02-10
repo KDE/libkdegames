@@ -381,7 +381,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
           QPixmap pixmap(file);
           pixmap=pixmap.transformed(m);
           d->deckLabel->setPixmap(pixmap);
-          QToolTip::add(d->deckLabel,d->helpMap[file]);
+          d->deckLabel->setToolTip(d->helpMap[file]);
       }
   }
 
@@ -398,7 +398,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
         QPixmap pixmap(file);
         pixmap = pixmap.transformed(m);
         d->cardLabel->setPixmap(pixmap);
-        QToolTip::add(d->cardLabel,d->helpMap[cardDir()]);
+        d->cardLabel->setToolTip(d->helpMap[cardDir()]);
     }
   }
 
@@ -537,8 +537,7 @@ void KCardDialog::slotDeckClicked(Q3IconViewItem *item)
     if (item && item->pixmap())
     {
         d->deckLabel->setPixmap(* (item->pixmap()));
-        QToolTip::remove( d->deckLabel );
-        QToolTip::add(d->deckLabel,d->helpMap[d->deckMap[item]]);
+        d->deckLabel->setToolTip(d->helpMap[d->deckMap[item]]);
         setDeck(d->deckMap[item]);
     }
 }
@@ -548,8 +547,7 @@ void KCardDialog::slotCardClicked(Q3IconViewItem *item)
     {
         d->cardLabel->setPixmap(* (item->pixmap()));
         QString path = d->cardMap[item];
-        QToolTip::remove( d->deckLabel );
-        QToolTip::add(d->cardLabel,d->helpMap[path]);
+        d->cardLabel->setToolTip(d->helpMap[path]);
         setCardDir(path);
     }
 }
