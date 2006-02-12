@@ -188,7 +188,7 @@ void HighscoresWidget::changeTab(int i)
 
 void HighscoresWidget::showURL(const QString &url) 
 {
-    (void)new KRun(KURL(url), this);
+    (void)new KRun(KUrl(url), this);
 }
 
 void HighscoresWidget::load(int rank)
