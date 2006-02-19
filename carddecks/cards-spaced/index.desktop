@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Spaced
+Name[fr]=Spatial
 Name[x-test]=xxSpacedxx
 Preview=11.png
 PySol=yes

@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Bonded
+Name[fr]=Compact
 Name[x-test]=xxBondedxx
 Preview=11.png
 PySol=yes
