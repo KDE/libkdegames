@@ -39,6 +39,9 @@ set(libkgame_SRCS
 	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamepropertyhandler.cpp 
 	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgameerror.cpp 
 	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamesequence.cpp
+	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kmessageio.cpp 
+	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kmessageserver.cpp 
+	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kmessageclient.cpp
 	)
 
 set(libkgamedialog_SRCS 
@@ -64,7 +67,7 @@ kde4_automoc(${kdegames_LIB_SRCS})
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames  ${LIB_KDE3SUPPORT} kdnssd ${QT_QTXML_LIBRARY} )
+target_link_libraries(kdegames  ${LIB_KDE3SUPPORT} kdnssd ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY})
 
 set_target_properties(kdegames PROPERTIES VERSION 1.2.0 SOVERSION 1 )
 install_targets(${LIB_INSTALL_DIR} kdegames )
