@@ -23,7 +23,7 @@
 #include <qcombobox.h>
 
 class QLabel;
-class KListView;
+class K3ListView;
 
 
 namespace KExtHighscore
@@ -106,7 +106,7 @@ class HistogramTab : public AdditionalTab
  private:
     QVector<uint> _counts;
     QVector<uint> _data;
-    KListView       *_list;
+    K3ListView       *_list;
 
     void display(uint i);
 };

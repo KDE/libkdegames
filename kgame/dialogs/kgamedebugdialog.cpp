@@ -25,7 +25,7 @@
 #include "kplayer.h"
 #include "kgamepropertyhandler.h"
 
-#include <klistview.h>
+#include <k3listview.h>
 #include <klistbox.h>
 #include <klocale.h>
 #include <kdebug.h>
@@ -92,7 +92,7 @@ public:
 	const KGame* mGame;
 
 	QFrame* mGamePage;
-	KListView* mGameProperties;
+	K3ListView* mGameProperties;
 	Q3ListViewItem* mGameAddress;
 	Q3ListViewItem* mGameId;
 	Q3ListViewItem* mGameCookie;
@@ -107,7 +107,7 @@ public:
 	
 	QFrame* mPlayerPage;
 	KListBox* mPlayerList;
-	KListView* mPlayerProperties;
+	K3ListView* mPlayerProperties;
 	Q3ListViewItem* mPlayerAddress;
 	Q3ListViewItem* mPlayerId;
 	Q3ListViewItem* mPlayerName;
@@ -122,7 +122,7 @@ public:
 	Q3ListViewItem* mPlayerNetworkPriority;
 
 	QFrame* mMessagePage;
-	KListView* mMessageList;
+	K3ListView* mMessageList;
 	KListBox* mHideIdList;
 };
 
@@ -150,12 +150,12 @@ void KGameDebugDialog::initGamePage()
  QVBoxLayout* topLayout = new QVBoxLayout(d->mGamePage, marginHint(), spacingHint());
  QHBoxLayout* layout = new QHBoxLayout(topLayout);
 
- KListView* v = new KListView(d->mGamePage);
+ K3ListView* v = new K3ListView(d->mGamePage);
  v->addColumn(i18n("Data"));
  v->addColumn(i18n("Value"));
  layout->addWidget(v);
 
- d->mGameProperties = new KListView(d->mGamePage);
+ d->mGameProperties = new K3ListView(d->mGamePage);
  d->mGameProperties->addColumn(i18n("Property"));
  d->mGameProperties->addColumn(i18n("Value"));
  d->mGameProperties->addColumn(i18n("Policy"));
@@ -194,12 +194,12 @@ void KGameDebugDialog::initPlayerPage()
  listLayout->addWidget(d->mPlayerList);
  d->mPlayerList->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
 
- KListView* v = new KListView(d->mPlayerPage);
+ K3ListView* v = new K3ListView(d->mPlayerPage);
  layout->addWidget(v);
  v->addColumn(i18n("Data"));
  v->addColumn(i18n("Value"));
  
- d->mPlayerProperties = new KListView(d->mPlayerPage);
+ d->mPlayerProperties = new K3ListView(d->mPlayerPage);
  d->mPlayerProperties->addColumn(i18n("Property"));
  d->mPlayerProperties->addColumn(i18n("Value"));
  d->mPlayerProperties->addColumn(i18n("Policy"));
@@ -227,7 +227,7 @@ void KGameDebugDialog::initMessagePage()
 {
  d->mMessagePage = addPage(i18n("Debug &Messages"));
  QGridLayout* layout = new QGridLayout(d->mMessagePage, 11, 7, marginHint(), spacingHint());
- d->mMessageList = new KListView(d->mMessagePage);
+ d->mMessageList = new K3ListView(d->mMessagePage);
  layout->addMultiCellWidget(d->mMessageList, 0, 9, 0, 3);
  d->mMessageList->addColumn(i18n("Time"));
  d->mMessageList->addColumn(i18n("ID"));

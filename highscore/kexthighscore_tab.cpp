@@ -32,7 +32,7 @@
 #include <Q3GroupBox>
 
 #include <kdialogbase.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <kdebug.h>
 #include <kglobal.h>
 
@@ -216,7 +216,7 @@ HistogramTab::HistogramTab(QWidget *parent)
     // construct GUI
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 
-    _list = new KListView(this);
+    _list = new K3ListView(this);
     _list->setSelectionMode(Q3ListView::NoSelection);
     _list->setItemMargin(3);
     _list->setAllColumnsShowFocus(true);
@@ -240,7 +240,7 @@ HistogramTab::HistogramTab(QWidget *parent)
         QString s2;
         if ( k==sh.size() ) s2 = "...";
         else if ( sh[k]!=sh[k-1]+1 ) s2 = sitem->pretty(0, sh[k]);
-        (void)new KListViewItem(_list, s1, s2);
+        (void)new K3ListViewItem(_list, s1, s2);
     }
 }
 

@@ -53,7 +53,7 @@ namespace KExtHighscore
 
 //-----------------------------------------------------------------------------
 ShowItem::ShowItem(Q3ListView *list, bool highlight)
-    : KListViewItem(list), _highlight(highlight)
+    : K3ListViewItem(list), _highlight(highlight)
 {}
 
 void ShowItem::paintCell(QPainter *p, const QColorGroup &cg,
@@ -61,12 +61,12 @@ void ShowItem::paintCell(QPainter *p, const QColorGroup &cg,
 {
     QColorGroup cgrp(cg);
     if (_highlight) cgrp.setColor(QColorGroup::Text, Qt::red);
-    KListViewItem::paintCell(p, cgrp, column, width, align);
+    K3ListViewItem::paintCell(p, cgrp, column, width, align);
 }
 
 //-----------------------------------------------------------------------------
 ScoresList::ScoresList(QWidget *parent)
-    : KListView(parent)
+    : K3ListView(parent)
 {
     setSelectionMode(Q3ListView::NoSelection);
     setItemMargin(3);

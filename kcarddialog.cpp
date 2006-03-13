@@ -35,7 +35,7 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kiconview.h>
+#include <k3iconview.h>
 #include <krandom.h>
 #include <ksimpleconfig.h>
 
@@ -90,8 +90,8 @@ public:
 
     QLabel* deckLabel;
     QLabel* cardLabel;
-    KIconView* deckIconView;
-    KIconView* cardIconView;
+    K3IconView* deckIconView;
+    K3IconView* cardIconView;
     QCheckBox* randomDeck;
     QCheckBox* randomCardDir;
     QCheckBox* globalDeck;
@@ -272,7 +272,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     Q3GroupBox* grp1 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Backside"), plainPage());
     layout->addWidget(grp1);
 
-    d->deckIconView = new KIconView(grp1,"decks");
+    d->deckIconView = new K3IconView(grp1,"decks");
     d->deckIconView->setSpacing(8);
     /*
     deckIconView->setGridX(-1);
@@ -324,7 +324,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     Q3GroupBox* grp2 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Frontside"), plainPage());
     layout->addWidget(grp2);
 
-    d->cardIconView =new KIconView(grp2,"cards");
+    d->cardIconView =new K3IconView(grp2,"cards");
     /*
     cardIconView->setGridX(36);
     cardIconView->setGridY(50);

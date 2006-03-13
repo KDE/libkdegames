@@ -25,7 +25,7 @@
 #include <q3vbox.h>
 #include <qtabwidget.h>
 
-#include <klistview.h>
+#include <k3listview.h>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kdialogbase.h>
@@ -42,7 +42,7 @@ class Score;
 class AdditionalTab;
 
 //-----------------------------------------------------------------------------
-class ShowItem : public KListViewItem
+class ShowItem : public K3ListViewItem
 {
  public:
     ShowItem(Q3ListView *, bool highlight);
@@ -55,7 +55,7 @@ class ShowItem : public KListViewItem
     bool _highlight;
 };
 
-class ScoresList : public KListView
+class ScoresList : public K3ListView
 {
  Q_OBJECT
  public:
