@@ -1,4 +1,5 @@
 kde4_header()
+project(libkdegames)
 
 add_subdirectory( carddecks ) 
 add_subdirectory( highscore ) 
