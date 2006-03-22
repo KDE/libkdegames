@@ -218,7 +218,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
             QString title = internal->manager.gameTypeLabel(i, Manager::I18N);
             QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
             QWidget *w = addVBoxPage(title, QString::null,
-                                     BarIcon(icon, KIcon::SizeLarge));
+                                     BarIcon(icon, K3Icon::SizeLarge));
             if ( i==internal->gameType() ) createPage(w);
         }
 
