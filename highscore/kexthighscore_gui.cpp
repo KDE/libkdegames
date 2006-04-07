@@ -134,7 +134,8 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     const ScoreInfos &s = internal->scoreInfos();
     const PlayerInfos &p = internal->playerInfos();
 
-    QVBoxLayout *vbox = new QVBoxLayout(this, KDialogBase::spacingHint());
+    QVBoxLayout *vbox = new QVBoxLayout(this);
+    vbox->setSpacing(KDialogBase::spacingHint());
 
     _tw = new QTabWidget(this);
     connect(_tw, SIGNAL(currentChanged(QWidget *)), SLOT(tabChanged()));
@@ -182,7 +183,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
 void HighscoresWidget::changeTab(int i)
 {
-    if ( i!=_tw->currentPageIndex() )
+    if ( i!=_tw->currentIndex() )
         _tw->setCurrentPage(i);
 }
 
@@ -409,8 +410,9 @@ ConfigDialog::ConfigDialog(QWidget *parent)
         // advanced tab
         QWidget *page = new QWidget(tab);
         tab->addTab(page, i18n("Advanced"));
-        QVBoxLayout *pageTop =
-            new QVBoxLayout(page, spacingHint(), spacingHint());
+        QVBoxLayout *pageTop = new QVBoxLayout(page);
+        pageTop->setMargin(marginHint());
+        pageTop->setSpacing(spacingHint());
 
         Q3GroupBox *group = new Q3GroupBox(1, Qt::Vertical, i18n("Registration Data"), page);
         pageTop->addWidget(group);

@@ -276,8 +276,9 @@ void MultiplayerScores::show(QWidget *parent)
     KDialogBase dialog(KDialogBase::Plain, i18n("Multiplayers Scores"),
                        KDialogBase::Close, KDialogBase::Close,
                        parent, "show_multiplayers_score", true, true);
-    QHBoxLayout *hbox = new QHBoxLayout(dialog.plainPage(),
-                                KDialog::marginHint(), KDialog::spacingHint());
+    QHBoxLayout *hbox = new QHBoxLayout(dialog.plainPage());
+    hbox->setMargin(KDialog::marginHint());
+    hbox->setSpacing(KDialog::spacingHint());
 
     KVBox *vbox = new KVBox(dialog.plainPage());
     hbox->addWidget(vbox);

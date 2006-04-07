@@ -427,7 +427,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     hbox->addStretch(0);
 
     d->scaleSlider = new QSlider(1, SLIDER_MAX, 1, (-1000+SLIDER_MIN+SLIDER_MAX), Qt::Horizontal, box);
-    d->scaleSlider->setMinValue(SLIDER_MIN);
+    d->scaleSlider->setMinimum(SLIDER_MIN);
     connect(d->scaleSlider, SIGNAL(valueChanged(int)), this, SLOT(slotCardResized(int)));
     boxLayout->addWidget(d->scaleSlider, 0, Qt::AlignLeft);
 

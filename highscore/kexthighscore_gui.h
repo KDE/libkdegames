@@ -101,7 +101,7 @@ class HighscoresWidget : public QWidget
 
  private slots:
     void showURL(const QString &);
-    void tabChanged() { emit tabChanged(_tw->currentPageIndex()); }
+    void tabChanged() { emit tabChanged(_tw->currentIndex()); }
 
  private:
     QTabWidget     *_tw;

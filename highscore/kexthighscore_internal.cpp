@@ -462,7 +462,7 @@ bool PlayerInfos::isNameUsed(const QString &newName) const
 {
     if ( newName==name() ) return false; // own name...
     for (uint i=0; i<nbEntries(); i++)
-        if ( newName.lower()==item("name")->read(i).toString().lower() ) return true;
+        if ( newName.toLower()==item("name")->read(i).toString().toLower() ) return true;
     if ( newName==i18n(ItemContainer::ANONYMOUS_LABEL) ) return true;
     return false;
 }
