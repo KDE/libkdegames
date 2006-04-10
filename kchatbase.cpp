@@ -375,7 +375,7 @@ Q3ListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& 
 	
 	//TODO KChatBasePixmap? Should change the font here!
 	
-	message = (Q3ListBoxItem*)new Q3ListBoxPixmap(pix, i18n("%1 %2").arg(fromName).arg(text.mid(3)));
+	message = (Q3ListBoxItem*)new Q3ListBoxPixmap(pix, i18n("%1 %2", fromName, text.mid(3)));
  } else {
 	// the text is not edited in any way. just return an item
 	KChatBaseText* m = new KChatBaseText(fromName, text);
@@ -391,7 +391,7 @@ Q3ListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QSt
  //TODO: KChatBaseConfigure? - e.g. color
 
  // no need to check for /me etc.
- KChatBaseText* m = new KChatBaseText(i18n("--- %1").arg(fromName), text);
+ KChatBaseText* m = new KChatBaseText(i18n("--- %1", fromName), text);
  m->setNameFont(&d->mSystemNameFont);
  m->setMessageFont(&d->mSystemMessageFont);
  return (Q3ListBoxItem*)m;
@@ -413,7 +413,7 @@ void KChatBase::slotReturnPressed(const QString& text)
 
 QString KChatBase::comboBoxItem(const QString& name) const
 { // TODO: such a function for "send to all" and "send to my group"
- return i18n("Send to %1").arg(name);
+ return i18n("Send to %1", name);
 }
 
 void KChatBase::slotClear()

@@ -612,7 +612,7 @@ bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
 
     QString tmpFile;
     if ( !KIO::NetAccess::download(url, tmpFile, parent) ) {
-        QString details = i18n("Server URL: %1").arg(url.host());
+        QString details = i18n("Server URL: %1", url.host());
         KMessageBox::detailedSorry(parent, i18n(UNABLE_TO_CONTACT), details);
         return false;
     }
@@ -650,7 +650,7 @@ bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
         }
     }
     QString msg = i18n("Invalid answer from world-wide highscores server.");
-    QString details = i18n("Raw message: %1").arg(content);
+    QString details = i18n("Raw message: %1", content);
     KMessageBox::detailedSorry(parent, msg, details);
     return false;
 }
@@ -663,7 +663,7 @@ bool ManagerPrivate::getFromQuery(const QDomNamedNodeMap &map,
     if ( attr.isNull() ) {
 	    KMessageBox::sorry(parent,
                i18n("Invalid answer from world-wide "
-                    "highscores server (missing item: %1).").arg(name));
+                    "highscores server (missing item: %1).", name));
 		return false;
     }
     value = attr.value();

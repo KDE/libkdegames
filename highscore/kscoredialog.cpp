@@ -169,7 +169,7 @@ void KScoreDialog::setupDialog()
    for (int i = 1; i <= 10; ++i) {
       QLabel *label;
       num.setNum(i);
-      label = new QLabel(i18n("#%1").arg(num), d->page);
+      label = new QLabel(i18n("#%1", num), d->page);
       d->labels.insert((i-1)*d->nrCols + 0, label);
       d->layout->addWidget(label, i+4, 0);
       if (d->fields & Name)

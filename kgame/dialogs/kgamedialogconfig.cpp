@@ -746,7 +746,7 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(Q3ListBoxItem* item)
 	return;
  }
 
- if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?").arg(
+ if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?", 
 		p->name()), QString::null, i18n("Ban Player"), i18n("Do Not Ban")) == KMessageBox::Yes) {
 	kDebug(11001) << "will remove player " << p << endl;
 	game()->removePlayer(p);

@@ -94,7 +94,7 @@ void KGameChat::addMessage(int fromId, const QString& text)
 {
  if (!d->mGame) {
 	kWarning(11001) << "no KGame object has been set" << endl;
-	addMessage(i18n("Player %1").arg(fromId), text);
+	addMessage(i18n("Player %1", fromId), text);
  } else {
 	KPlayer* p = d->mGame->findPlayer(fromId);
 	if (p) {
@@ -167,7 +167,7 @@ bool KGameChat::isToPlayerMessage(int id) const
 return d->mSendId2PlayerId.contains(id); }
 
 QString KGameChat::sendToPlayerEntry(const QString& name) const
-{ return i18n("Send to %1").arg(name); }
+{ return i18n("Send to %1", name); }
 
 int KGameChat::playerId(int id) const
 {
@@ -213,7 +213,7 @@ void KGameChat::setFromPlayer(KPlayer* p)
 		removeSendingEntry(d->mToMyGroup);
 	}
 	d->mToMyGroup = nextId();
-	addSendingEntry(i18n("Send to My Group (\"%1\")").arg(p->group()), d->mToMyGroup);
+	addSendingEntry(i18n("Send to My Group (\"%1\")", p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
  kDebug(11001) << k_funcinfo << " player=" << p << endl;

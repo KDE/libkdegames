@@ -174,13 +174,13 @@ QString KGamePropertyHandler::propertyName(int id) const
  QString s;
  if (d->mIdDict.find(id)) {
 	if (d->mNameMap.contains(id)) {
-		s = i18n("%1 (%2)").arg(d->mNameMap[id]).arg(id);
+		s = i18n("%1 (%2)", d->mNameMap[id], id);
 	} else {
-		s = i18n("Unnamed - ID: %1").arg(id);
+		s = i18n("Unnamed - ID: %1", id);
 	}
  } else {
 	// Should _never_ happen
-	s = i18n("%1 unregistered").arg(id);
+	s = i18n("%1 unregistered", id);
  }
  return s;
 }

@@ -96,7 +96,7 @@ void KGameErrorDialog::slotClientConnectionLost(quint32 /*id*/,bool)
 
 void KGameErrorDialog::slotError(int errorNo, QString text)
 {
- QString message = i18n("Received a network error!\nError number: %1\nError message: %2").arg(errorNo).arg(text);
+ QString message = i18n("Received a network error!\nError number: %1\nError message: %2", errorNo, text);
  error(message, (QWidget*)parent());
 }
 
@@ -106,7 +106,7 @@ void KGameErrorDialog::connectionError(QString s)
  if (s.isNull()) {
 	message = i18n("No connection could be created.");
  } else {
-	message = i18n("No connection could be created.\nThe error message was:\n%1").arg(s);
+	message = i18n("No connection could be created.\nThe error message was:\n%1", s);
  }
  error(message, (QWidget*)parent());
 }

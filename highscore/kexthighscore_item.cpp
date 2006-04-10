@@ -291,8 +291,8 @@ void MultiplayerScores::show(QWidget *parent)
     if ( _nbGames[0]>1 ) {
         vbox = new KVBox(dialog.plainPage());
         hbox->addWidget(vbox);
-        (void)new QLabel(i18n("Scores for the last %1 games:")
-                         .arg(_nbGames[0]), vbox);
+        (void)new QLabel(i18n("Scores for the last %1 games:",
+                          _nbGames[0]), vbox);
         (void)new TotalMultipleScoresList(ordered, vbox);
     }
 

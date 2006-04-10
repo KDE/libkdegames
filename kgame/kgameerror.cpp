@@ -57,7 +57,7 @@ QString KGameError::errorText(int errorCode, QDataStream& s)
 		qint32 cookie2;
 		s >> cookie1;
 		s >> cookie2;
-		text = i18n("Cookie mismatch!\nExpected Cookie: %1\nReceived Cookie: %2").arg(cookie1).arg(cookie2);
+		text = i18n("Cookie mismatch!\nExpected Cookie: %1\nReceived Cookie: %2", cookie1, cookie2);
 		break;
 	}
 	case Version:
@@ -66,11 +66,11 @@ QString KGameError::errorText(int errorCode, QDataStream& s)
 		qint32 version2;
 		s >> version1;
 		s >> version2;
-		text = i18n("KGame Version mismatch!\nExpected Version: %1\nReceived Version: %2\n").arg(version1).arg(version2);
+		text = i18n("KGame Version mismatch!\nExpected Version: %1\nReceived Version: %2\n", version1, version2);
 		break;
 	}
 	default:
-		text = i18n("Unknown error code %1").arg(errorCode);
+		text = i18n("Unknown error code %1", errorCode);
  }
  return text;
 }
