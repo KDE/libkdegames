@@ -184,7 +184,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 void HighscoresWidget::changeTab(int i)
 {
     if ( i!=_tw->currentIndex() )
-        _tw->setCurrentPage(i);
+        _tw->setCurrentIndex(i);
 }
 
 void HighscoresWidget::showURL(const QString &url) 

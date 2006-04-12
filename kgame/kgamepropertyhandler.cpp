@@ -144,7 +144,7 @@ bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
  if (!data) {
 	return false;
  }
- d->mNameMap.erase(data->id());
+ d->mNameMap.remove(data->id());
  return d->mIdDict.remove(data->id());
 }
 

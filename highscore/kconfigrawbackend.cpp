@@ -20,14 +20,12 @@
 #include "kconfigrawbackend.h"
 
 #include <unistd.h>
-#include <qfile.h>
-
 
 KConfigRawBackEnd::KConfigRawBackEnd(KConfigBase *_config, int fd)
     : KConfigINIBackEnd(_config, QString::null, "config", false),
       _fd(fd), _stream(0)
 {
-    _file.open(QIODevice::ReadOnly, _fd);
+    _file.open(_fd, QIODevice::ReadOnly);
 }
 
 KConfigRawBackEnd::~KConfigRawBackEnd()

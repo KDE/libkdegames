@@ -660,7 +660,7 @@ bool KGame::systemActivatePlayer(KPlayer* player)
  addPlayer(player);
  if (isAdmin())
  {
-   d->mInactiveIdList.remove(player->id());
+   d->mInactiveIdList.removeAll(player->id());
  }
  return true;
 }
@@ -1095,7 +1095,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     for ( player=newPlayerList.first(); player != 0; player=newPlayerList.next() ) 
     {
       // Already in the list
-      if (inactivateIds.find(player->id())!=inactivateIds.end()) 
+      if (inactivateIds.indexOf(player->id())!=-1) 
       {
         continue;
       }
@@ -1111,7 +1111,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     for ( player=d->mPlayerList.first(); player != 0; player=d->mPlayerList.next() ) 
     {
       // Already in the list
-      if (inactivateIds.find(player->id())!=inactivateIds.end()) 
+      if (inactivateIds.indexOf(player->id())!=-1) 
       {
         continue;
       }
@@ -1175,7 +1175,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
   {
     kDebug(11001) << " newplayerlist contains " << player->id() << endl;
     // Only activate what is not in the list
-    if (inactivateIds.find(player->id())!=inactivateIds.end())
+    if (inactivateIds.indexOf(player->id())!=-1)
     {
       continue;
     }

@@ -142,7 +142,7 @@ void KMessageSocket::processNewData ()
       }
 
       QByteArray msg (mNextBlockLength);
-      str.readRawBytes (msg.data(), mNextBlockLength);
+      str.readRawData (msg.data(), mNextBlockLength);
 
       // send the received message
       emit received (msg);
@@ -331,10 +331,10 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
     else len=p-pos;
 
     QByteArray a;
-    a.setRawData(pos,len);
+    a.fromRawData(pos,len);
     QString s(a);
     kDebug(11001) << "PID" <<pid<< ":" << s << endl;
-    a.resetRawData(pos,len);
+    a.clear();
     if (p) pos=p+1;
     buflen-=len+1;
   }while(buflen>0);
@@ -426,7 +426,7 @@ void KMessageFilePipe::send(const QByteArray &msg)
   *p2=size;
   
   QByteArray buffer(tmpbuffer,size);
-  mWriteFile->writeBlock(buffer);
+  mWriteFile->write(buffer);
   mWriteFile->flush();
   delete [] tmpbuffer;
   /*
@@ -441,11 +441,11 @@ void KMessageFilePipe::exec()
 
   // According to BL: Blocking read is ok
   // while(mReadFile->atEnd()) { usleep(100); }
-
-   int ch=mReadFile->getch();
+   char ch;
+   mReadFile->getChar(&ch);
 
    while (mReceiveCount>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
-   mReceiveBuffer[mReceiveCount]=(char)ch;
+   mReceiveBuffer[mReceiveCount]=ch;
    mReceiveCount++;
 
    // Change for message 

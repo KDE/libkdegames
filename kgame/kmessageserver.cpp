@@ -418,7 +418,7 @@ void KMessageServer::processOneMessage ()
       // FIXME, compiler bug?
       // this should be okay, since QBuffer is subclass of QIODevice! :
       // out_buffer.writeBlock (in_buffer.readAll());
-      out_buffer.QIODevice::writeBlock (in_buffer.readAll());
+      out_buffer.QIODevice::write (in_buffer.readAll());
       broadcastMessage (out_msg);
       break;
 
@@ -428,7 +428,7 @@ void KMessageServer::processOneMessage ()
         in_stream >> clients;
         out_stream << quint32 (MSG_FORWARD) << clientID << clients;
         // see above!
-        out_buffer.QIODevice::writeBlock (in_buffer.readAll());
+        out_buffer.QIODevice::write (in_buffer.readAll());
         sendMessage (clients, out_msg);
       }
       break;

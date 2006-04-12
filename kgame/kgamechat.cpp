@@ -182,7 +182,7 @@ int KGameChat::sendingId(int playerId) const
 {
  QMap<int, int>::Iterator it;
  for (it = d->mSendId2PlayerId.begin(); it != d->mSendId2PlayerId.end(); ++it) {
-	if (it.data() == playerId) {
+	if (it.value() == playerId) {
 		return it.key();
 	}
  }
@@ -265,7 +265,7 @@ void KGameChat::slotUnsetKGame()
  removeSendingEntry(d->mToMyGroup);
  QMap<int, int>::Iterator it;
  for (it = d->mSendId2PlayerId.begin(); it != d->mSendId2PlayerId.end(); ++it) {
-	removeSendingEntry(it.data());
+	removeSendingEntry(it.value());
  }
 }
 

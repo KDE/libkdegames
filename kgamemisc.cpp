@@ -50,13 +50,13 @@ KGameMisc::~KGameMisc()
 
 QString KGameMisc::randomName()// do we need i18n? I think yes
 {
-    QStringList names = QStringList::split( QChar(' '),
-        i18nc( "A list of language typical names ( for games ), separated by spaces",
+    QStringList names = QString(
+       i18nc( "A list of language typical names ( for games ), separated by spaces",
               "Adam Alex Andreas Andrew Bart Ben Bernd Bill "
               "Chris Chuck Daniel Don Duncan Ed Emily Eric "
               "Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken "
               "Kirk Marc Mike Neil Paul Rik Robert Sam Sean "
-              "Thomas Tim Walter" ) );
+              "Thomas Tim Walter" ) ).split( QChar(' ') );
     KRandomSequence random;
     return names.at( random.getLong( names.count() ) );
 }

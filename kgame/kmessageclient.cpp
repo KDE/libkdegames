@@ -156,7 +156,7 @@ void KMessageClient::sendBroadcast (const QByteArray &msg)
   QDataStream stream (&buffer);
 
   stream << static_cast<quint32> ( KMessageServer::REQ_BROADCAST );
-  buffer.QIODevice::writeBlock (msg);
+  buffer.QIODevice::write (msg);
   sendServerMessage (sendBuffer);
 }
 
@@ -168,7 +168,7 @@ void KMessageClient::sendForward (const QByteArray &msg, const QList <quint32> &
   QDataStream stream (&buffer);
 
   stream << static_cast<quint32>( KMessageServer::REQ_FORWARD ) << clients;
-  buffer.QIODevice::writeBlock (msg);
+  buffer.QIODevice::write (msg);
   sendServerMessage (sendBuffer);
 }
 
@@ -285,7 +285,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         if (!d->clientList.contains (id))
           kWarning (11001) << k_funcinfo << ": Removing a client that doesn't exist!" << endl;
         else
-          d->clientList.remove (id);
+          d->clientList.removeAll (id);
 
         emit eventClientDisconnected (id, bool (broken));
       }

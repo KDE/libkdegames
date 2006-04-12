@@ -101,7 +101,7 @@ void KGameConnectWidget::showDnssdControls()
   d->mClientNameLabel->show();
   d->mServerName->hide();
   d->mServerNameLabel->hide();
-  slotGameSelected(d->mClientName->currentItem());
+  slotGameSelected(d->mClientName->currentIndex());
  } else {
   d->mClientName->hide();
   d->mClientNameLabel->hide();
@@ -130,7 +130,7 @@ void KGameConnectWidget::slotGamesFound()
  QListIterator<DNSSD::RemoteService::Ptr> it(d->mBrowser->services());
  while (it.hasNext())
   names << it.next()->serviceName();
- d->mClientName->insertStringList(names);
+ d->mClientName->insertItems(0, names);
  if (autoselect && d->mClientName->count()) slotGameSelected(0);
 }
 

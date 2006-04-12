@@ -152,11 +152,10 @@ void ItemArray::addItem(const QString &name, Item *item,
 {
     if ( findIndex(name)!=-1 )
         kError(11002) << "item already exists \"" << name << "\"" << endl;
-    uint i = size();
-    resize(i+1);
-	insert(i, new ItemContainer);
+
+    append(new ItemContainer);
     //at(i) = new ItemContainer;
-    _setItem(i, name, item, stored, canHaveSubGroup);
+    _setItem(size()-1, name, item, stored, canHaveSubGroup);
 }
 
 void ItemArray::_setItem(uint i, const QString &name, Item *item,
@@ -626,7 +625,7 @@ bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
     }
 
 	QTextStream t(&file);
-	QString content = t.read().trimmed();
+	QString content = t.readAll().trimmed();
 	file.close();
     KIO::NetAccess::removeTempFile(tmpFile);
 
@@ -641,7 +640,7 @@ bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
         if ( element.tagName()=="error" ) {
             QDomAttr attr = element.attributes().namedItem("label").toAttr();
             if ( !attr.isNull() ) {
-                QString msg = i18n(attr.value().latin1());
+                QString msg = i18n(attr.value().toLatin1());
                 QString caption = i18n("Message from world-wide highscores "
                                        "server");
                 KMessageBox::sorry(parent, msg, caption);
@@ -838,7 +837,7 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     int s = (score.type()==Won ? score.score() : (int)score.type());
     QString str =  QString::number(s);
     Manager::addToQueryURL(url, "score", str);
-    KMD5 context(QString(_playerInfos->registeredName() + str).latin1());
+    KMD5 context(QString(_playerInfos->registeredName() + str).toLatin1());
     Manager::addToQueryURL(url, "check", context.hexDigest());
 
     return doQuery(url, widget);

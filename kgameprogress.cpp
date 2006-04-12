@@ -198,13 +198,13 @@ int KGameProgress::recalcValue(int range)
 
 void KGameProgress::valueChange()
 {
-	repaint(contentsRect(), FALSE);
+	repaint(contentsRect());
 	emit percentageChanged(recalcValue(100));
 }
 
 void KGameProgress::rangeChange()
 {
-	repaint(contentsRect(), FALSE);
+	repaint(contentsRect());
 	emit percentageChanged(recalcValue(100));
 }
 
@@ -266,10 +266,10 @@ void KGameProgress::drawContents(QPainter *p)
 	QBrush fb(bar_color), eb(backgroundColor());
 
 	if (bar_pixmap)
-		fb.setPixmap(*bar_pixmap);
+		fb.setTexture(*bar_pixmap);
 
 	if (backgroundPixmap())
-		eb.setPixmap(*backgroundPixmap());
+		eb.setTexture(*backgroundPixmap());
 
 	switch (bar_style) {
 		case Solid:
@@ -313,7 +313,7 @@ void KGameProgress::drawContents(QPainter *p)
 			for (int i = 0; i < num; i++) {
 				p->setBrushOrigin(fr.topLeft());
 				p->fillRect(fr, fb);
-				fr.moveBy(dx, dy);
+				fr.translate(dx, dy);
 			}
 			
 			if (num != max) {

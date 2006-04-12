@@ -372,8 +372,8 @@ void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, quint32 rece
 
   KGameMessage::createHeader(ostream,sender,receiver,msgid);
   // ostream.writeRawBytes(data.data()+device->at(),data.size()-device->at());
-  ostream.writeRawBytes(data.data(),data.size());
-  kDebug(11001) << "   Adding user data from pos="<< device->at() <<" amount= " << data.size() << " byte " << endl;
+  ostream.writeRawData(data.data(),data.size());
+  kDebug(11001) << "   Adding user data from pos="<< device->pos() <<" amount= " << data.size() << " byte " << endl;
   //if (d->mMessageClient) d->mMessageClient->sendBroadcast(buffer);
   if (d->mProcessIO)
   {
@@ -397,7 +397,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   // Cut out the header part...to not confuse network code
   QBuffer *buf=(QBuffer *)stream.device();
   QByteArray newbuffer;
-  newbuffer.setRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
+  newbuffer.fromRawData(buf->buffer().data()+buf->pos(),buf->size()-buf->pos());
   QDataStream ostream(newbuffer);
   kDebug(11001) << "Newbuffer size=" << newbuffer.size() << endl;
 
@@ -424,7 +424,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   {
     kDebug(11001) << k_funcinfo << ": Got message from process but no player defined!" << endl;
   }
-  newbuffer.resetRawData(buf->buffer().data()+buf->at(),buf->size()-buf->at());
+  newbuffer.clear();
 }
 
 

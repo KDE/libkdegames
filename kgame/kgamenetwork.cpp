@@ -407,7 +407,7 @@ bool KGameNetwork::sendSystemMessage(const QByteArray& data, int msgid, quint32 
  int receiverPlayer = KGameMessage::rawPlayerId(receiver); // KPlayer::id()
 
  KGameMessage::createHeader(stream, sender, receiver, msgid);
- stream.writeRawBytes(data.data(), data.size());
+ stream.writeRawData(data.data(), data.size());
 
  /*
  kDebug(11001) << "transmitGameClientMessage msgid=" << msgid << " recv="
@@ -454,7 +454,7 @@ void KGameNetwork::sendError(int error,const QByteArray& message, quint32 receiv
  QByteArray buffer;
  QDataStream stream(&buffer,QIODevice::WriteOnly);
  stream << (qint32) error;
- stream.writeRawBytes(message.data(), message.size());
+ stream.writeRawData(message.data(), message.size());
  sendSystemMessage(stream,KGameMessage::IdError,receiver,sender);
 }
 
@@ -487,7 +487,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, q
    stream >> error;
    kDebug(11001) << k_funcinfo << "Got IdError " << error << endl;
    text = KGameError::errorText(error, stream);
-   kDebug(11001) << "Error text: " << text.latin1() << endl;
+   kDebug(11001) << "Error text: " << text.toLatin1() << endl;
    emit signalNetworkErrorMessage((int)error,text);
  }
  else

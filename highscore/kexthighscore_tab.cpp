@@ -49,8 +49,8 @@ PlayersCombo::PlayersCombo(QWidget *parent, const char *name)
 {
     const PlayerInfos &p = internal->playerInfos();
     for (uint i = 0; i<p.nbEntries(); i++)
-        insertItem(p.prettyName(i));
-    insertItem(QString("<") + i18n("all") + '>');
+        insertItem(i, p.prettyName(i));
+    insertItem(p.nbEntries(), QString("<") + i18n("all") + '>');
     connect(this, SIGNAL(activated(int)), SLOT(activatedSlot(int)));
 }
 
@@ -66,7 +66,7 @@ void PlayersCombo::load()
 {
     const PlayerInfos &p = internal->playerInfos();
     for (uint i = 0; i<p.nbEntries(); i++)
-        changeItem(p.prettyName(i), i);
+        setItemText(i, p.prettyName(i));
 }
 
 //-----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ AdditionalTab::AdditionalTab(QWidget *parent, const char *name)
 void AdditionalTab::init()
 {
     uint id = internal->playerInfos().id();
-    _combo->setCurrentItem(id);
+    _combo->setCurrentIndex(id);
     playerSelected(id);
 }
 

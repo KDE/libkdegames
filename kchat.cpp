@@ -107,8 +107,8 @@ void KChat::removePlayer(const QString& nickname)
 {
  QMap<int, QString>::Iterator it;
  for (it = d->mPlayerMap.begin(); it != d->mPlayerMap.end(); ++it) {
-	if (it.data() == nickname) {
-		d->mPlayerMap.remove(it);
+	if (it.value() == nickname) {
+		d->mPlayerMap.erase(it);
 	}
  }
 }

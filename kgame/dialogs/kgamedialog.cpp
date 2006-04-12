@@ -240,7 +240,8 @@ void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
 	return;
  }
 // kDebug(11001) << "reparenting widget" << endl;
- widget->reparent(parent, QPoint(0,0));
+ widget->setParent(parent);
+ widget->move(QPoint(0,0));
  d->mConfigWidgets.append(widget);
  connect(widget, SIGNAL(destroyed(QObject*)), this, SLOT(slotRemoveConfigWidget(QObject*)));
  if (!d->mGame) {

@@ -102,7 +102,8 @@ void KGameLCD::displayInt(int v)
 void KGameLCD::highlight()
 {
     highlight(true);
-    _timer->start(_htime, true);
+    _timer->setSingleShot(true);
+    _timer->start(_htime);
 }
 
 void KGameLCD::highlight(bool light)

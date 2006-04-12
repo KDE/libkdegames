@@ -44,8 +44,8 @@ KGameProcess::KGameProcess() : QObject(0,0)
 {
   mTerminate=false;
   // Check whether a player is set. If not create one!
-  rFile.open(QIODevice::ReadOnly|QIODevice::Unbuffered,stdin);
-  wFile.open(QIODevice::WriteOnly|QIODevice::Unbuffered,stdout);
+  rFile.open(stdin, QIODevice::ReadOnly|QIODevice::Unbuffered);
+  wFile.open(stdout, QIODevice::WriteOnly|QIODevice::Unbuffered);
   mMessageIO=new KMessageFilePipe(this,&rFile,&wFile);
 //  mMessageClient=new KMessageClient(this);
 //  mMessageClient->setServer(mMessageIO);
@@ -95,7 +95,7 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,quint32 recei
   QByteArray data=device->buffer();;
 
   KGameMessage::createHeader(outstream,0,receiver,msgid);
-  outstream.writeRawBytes(data.data(),data.size());
+  outstream.writeRawData(data.data(),data.size());
 
   //if (mMessageClient) mMessageClient->sendBroadcast(a);
   // TODO: The fixed received 2 will cause problems. But how to address the

@@ -269,12 +269,12 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 	kWarning(11000) << "KChatBase: Cannot add an entry to the combo box" << endl;
 	return false;
  }
- if (d->mIndex2Id.findIndex(id) != -1) {
+ if (d->mIndex2Id.indexOf(id) != -1) {
 	kError(11000) << "KChatBase: Cannot add more than one entry with the same ID! " << endl;
 	kError(11000) << "KChatBase: Text="<<text<<endl;
 	return false;
  }
- d->mCombo->insertItem(text, index);
+ d->mCombo->insertItem(index, text);
  if (index < 0) {
 	d->mIndex2Id.append(id);
  } else {
@@ -292,7 +292,7 @@ int KChatBase::sendingEntry() const
 	kWarning(11001) << "Cannot retrieve index from NULL combo box" << endl;
 	return -1;
  }
- int index = d->mCombo->currentItem();
+ int index = d->mCombo->currentIndex();
  if ( index > 0 && index <  d->mIndex2Id.size()) {
 	kWarning(11000) << "could not find the selected sending entry!" << endl;
 	return -1;
@@ -307,7 +307,7 @@ void KChatBase::removeSendingEntry(int id)
 	return;
  }
  d->mCombo->removeItem(findIndex(id));
- d->mIndex2Id.remove(id);
+ d->mIndex2Id.removeAll(id);
 }
 
 void KChatBase::changeSendingEntry(const QString& text, int id)
@@ -317,7 +317,7 @@ void KChatBase::changeSendingEntry(const QString& text, int id)
 	return;
  }
  int index = findIndex(id);
- d->mCombo->changeItem(text, index);
+ d->mCombo->setItemText(index, text);
 }
 
 void KChatBase::setSendingEntry(int id)
@@ -326,18 +326,18 @@ void KChatBase::setSendingEntry(int id)
 	kWarning(11000) << "KChatBase: Cannot set an entry in the combo box" << endl;
 	return;
  }
- d->mCombo->setCurrentItem(findIndex(id));
+ d->mCombo->setCurrentIndex(findIndex(id));
 }
  
 int KChatBase::findIndex(int id) const
 {
- return d->mIndex2Id.findIndex(id);
+ return d->mIndex2Id.indexOf(id);
 }
 
 int KChatBase::nextId() const
 {
  int i = SendToAll + 1;
- while (d->mIndex2Id.findIndex(i) != -1) {
+ while (d->mIndex2Id.indexOf(i) != -1) {
 	i++;
  }
  return i;

@@ -140,7 +140,7 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
  QByteArray b;
  QDataStream s(&b, QIODevice::WriteOnly);
  KGameMessage::createPropertyHeader(s, id());
- s.writeRawBytes(data.data(), data.size());
+ s.writeRawData(data.data(), data.size());
  if (mOwner) {
 	return mOwner->sendProperty(s);
  } else {

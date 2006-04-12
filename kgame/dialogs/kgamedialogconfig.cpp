@@ -436,7 +436,7 @@ void KGameDialogMsgServerConfig::slotChangeMaxClients()
 // edit->setText(QString::number()); // current max clients! //TODO
 
  QDialog* dialog = new QDialog();
- dialog->setCaption(i18n("Maximal Number of Clients"));
+ dialog->setWindowTitle(i18n("Maximal Number of Clients"));
  QHBoxLayout* l = new QHBoxLayout(dialog, KDialog::marginHint(), KDialog::spacingHint());
  l->setAutoAdd(true);
 
