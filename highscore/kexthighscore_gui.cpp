@@ -212,7 +212,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
                   KGuiItem(i18n("Configure..."), "configure"),
                   KGuiItem(i18n("Export..."))), _rank(rank), _tab(0)
 {
-    _widgets.insert(internal->nbGameTypes(),0);
+    _widgets.resize(internal->nbGameTypes());
 
     if ( internal->nbGameTypes()>1 ) {
         for (uint i=0; i<internal->nbGameTypes(); i++) {
