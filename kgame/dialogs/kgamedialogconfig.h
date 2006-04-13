@@ -240,6 +240,7 @@ public:
 	 * You are strongly encouraged to change at least the port!
 	 * @param port The default port to connect to / listen on
 	 * @param host The default host to connect to
+	 * @param server The default state. 0 For a server game, 1 to join a game
 	 **/
 	void setDefaultNetworkInfo(const QString& host, unsigned short int port,bool server=true);
 	
@@ -258,9 +259,9 @@ signals:
   * This signal is emmited if the user changes the server type (client/server)
   * in the network configuration dialog. 
   *
-  * @param t - type type (0/1) of the connection
+  * @param t type (0/1) of the connection
   **/
-  void signalServerTypeChanged(int);
+  void signalServerTypeChanged(int t);
 
 
 protected:
@@ -284,12 +285,12 @@ public:
 	KGameDialogMsgServerConfig(QWidget* parent = 0);
 	virtual ~KGameDialogMsgServerConfig();
 
-	virtual void submitToKGame(KGame*, KPlayer*) {}
+	virtual void submitToKGame(KGame* g, KPlayer* p) {}
 
 	void setHasMsgServer(bool);
 
 	virtual void setKGame(KGame* g);
-	virtual void setAdmin(bool);
+	virtual void setAdmin(bool admin);
 
 protected slots:
 	void slotChangeMaxClients();

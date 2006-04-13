@@ -37,9 +37,9 @@ class KDE_EXPORT KGameMessage
      * See also @ref rawPlayerId and @ref rawGameId which are the inverse
      * operations
      *
-     * @param playerid the player id - can include a gameid (will get removed)
-     * @param gameid The game id (<64). 0 For broadcast.
-     * @return the new player id
+     * @param player The player id - can include a gameid (will get removed)
+     * @param game The game id (<64). 0 For broadcast.
+     * @return The new player id
      */
     static quint32 createPlayerId(int player, quint32 game);
 
@@ -48,8 +48,8 @@ class KDE_EXPORT KGameMessage
      * contain the game number encoded in it. See also @ref createPlayerId which
      * is the inverse operation.
      *
-     * @param the player id
-     * @return the raw player id
+     * @param playerid The player id
+     * @return The raw player id
      **/
     static int rawPlayerId(quint32 playerid);
 
@@ -57,8 +57,8 @@ class KDE_EXPORT KGameMessage
      * Returns the raw game id, that is, the game id the player
      * belongs to. Se also @ref createPlayerId which is the inverse operation.
      *
-     * @param the player id
-     * @return the raw game id
+     * @param playerid The player id
+     * @return The raw game id
      **/
     static quint32 rawGameId(quint32 playerid);
 
@@ -83,14 +83,14 @@ class KDE_EXPORT KGameMessage
      *
      * Also puts "hidden" header into the stream which are used by KGameClient
      * (message length and magic cookie). If you don't need them remove them
-     * with @ref dropExternalHeader
+     * with dropExternalHeader
      */
     static void createHeader(QDataStream &msg, quint32 sender, quint32 receiver, int msgid);
 
     /**
      * Retrieves the information like cookie,sender,receiver,... from a message header 
      *
-     * Note that it could be necessary to call @ref dropExternalHeader first
+     * Note that it could be necessary to call dropExternalHeader first
      */
     static void extractHeader(QDataStream &msg,quint32 &sender, quint32 &receiver, int &msgid);
 

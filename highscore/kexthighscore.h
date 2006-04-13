@@ -63,6 +63,7 @@ KDE_EXPORT void show(QWidget *parent);
 /**
  * Submit a score. See @ref Manager for usage example.
  *
+ * @param score the players score
  * @param widget a widget used as parent for error message box.
  */
 KDE_EXPORT void submitScore(const Score &score, QWidget *widget);

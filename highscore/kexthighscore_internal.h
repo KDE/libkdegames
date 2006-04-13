@@ -53,9 +53,9 @@ class RankItem : public Item
     RankItem()
         : Item((uint)0, i18n("Rank"), Qt::AlignRight) {}
 
-    QVariant read(uint rank, const QVariant &) const  { return rank; }
-    QString pretty(uint rank, const QVariant &) const
-        { return QString::number(rank+1); }
+    QVariant read(uint i, const QVariant &value) const  { return i; }
+    QString pretty(uint i, const QVariant &value) const
+        { return QString::number(i+1); }
 };
 
 class NameItem : public Item

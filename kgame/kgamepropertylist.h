@@ -191,18 +191,18 @@ public:
     }
   }
 
-  void command(QDataStream &s,int cmd,bool)
+  void command(QDataStream &stream, int msgid, bool isSender)
   {
-    KGamePropertyBase::command(s, cmd);
-    kDebug(11001) << "---> LIST id="<<id()<<" got command ("<<cmd<<") !!!" <<endl; 
+    KGamePropertyBase::command(stream, msgid);
+    kDebug(11001) << "---> LIST id="<<id()<<" got command ("<<msgid<<") !!!" <<endl; 
     Iterator it;
-    switch(cmd)
+    switch(msgid)
     {
       case CmdInsert:
       {
         uint i;
         type data;
-        s >> i >> data;
+        stream >> i >> data;
         it=at(i);
         QList<type>::insert(it,data);
 //        kDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
@@ -212,7 +212,7 @@ public:
       case CmdAppend:
       {
         type data;
-	s >> data;
+	stream >> data;
         QList<type>::append(data);
 //        kDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
         if (isEmittingSignal()) emitSignal();
@@ -221,7 +221,7 @@ public:
       case CmdRemove:
       {
         uint i;
-        s >> i;
+        stream >> i;
         it=at(i);
         QList<type>::remove(it);
         kDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
@@ -236,7 +236,7 @@ public:
         break;
       }
       default: 
-        kDebug(11001) << "Error in KPropertyList::command: Unknown command " << cmd << endl;
+        kDebug(11001) << "Error in KPropertyList::command: Unknown command " << msgid << endl;
     }
   }
 

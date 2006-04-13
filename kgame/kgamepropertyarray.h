@@ -241,17 +241,17 @@ public:
     }
   }
 
-  void command(QDataStream &s,int cmd,bool)
+  void command(QDataStream &steam,int msgid, bool isSender)
   {
-    KGamePropertyBase::command(s, cmd);
-    //kDebug(11001) << "Array id="<<id()<<" got command ("<<cmd<<") !!!" <<endl;
-    switch(cmd)
+    KGamePropertyBase::command(stream, msgid);
+    //kDebug(11001) << "Array id="<<id()<<" got command ("<<msgid<<") !!!" <<endl;
+    switch(msgid)
     {
       case CmdAt:
       {
         uint i;
         type data;
-        s >> i >> data;
+        stream >> i >> data;
         replace( i, data );
         //kDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl;
         if (isEmittingSignal())
@@ -263,7 +263,7 @@ public:
       case CmdResize:
       {
         uint size;
-        s >> size;
+        stream >> size;
         //kDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl;
         if (( uint )QVector<type>::size() != size)
         {
@@ -275,7 +275,7 @@ public:
       {
         int size;
         type data;
-        s >> data >> size;
+        stream >> data >> size;
         //kDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl;
         QVector<type>::fill(data,size);
         if (isEmittingSignal())
@@ -291,7 +291,7 @@ public:
         break;
       }
       default:
-        kError(11001) << "Error in KPropertyArray::command: Unknown command " << cmd << endl;
+        kError(11001) << "Error in KPropertyArray::command: Unknown command " << msgid << endl;
         break;
     }
   }

@@ -74,7 +74,7 @@ public:
 	 * Set the widget that will be configured by the dialog. Use this if you
 	 * don't want to configure the widget yourself.
 	 * @param widget The chat widget that shall be configured
-	 * @param Whether you want to have the current @ref KChatBase fonts as
+	 * @param applyFonts Whether you want to have the current @ref KChatBase fonts as
 	 * defaults in the dialog
 	 **/
 	void plugChatWidget(KChatBase* widget, bool applyFonts = true);
