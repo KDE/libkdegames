@@ -83,9 +83,9 @@ signals:
 	 * @param messageid The ID of the message. As given to @ref
 	 * KGame::sendMessage
 	 * @param userid User defined msgIds are internally increased by
-	 * @ref KGameMessage::IdUser. You don't have to care about this but if
+	 * KGameMessage::IdUser. You don't have to care about this but if
 	 * this signal is emitted with userid=false (shouldn't happen) then the
-	 * name of an internal message as defined in @ref
+	 * name of an internal message as defined in 
 	 * KGameMessage::GameMessageIds couldn't be found.
 	 * @param name The name of the msgid. You have to fill this!
 	 **/
