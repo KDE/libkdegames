@@ -125,9 +125,13 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 // kDebug(11001) << k_funcinfo << ": this=" << this << endl;
  d = new KGameDialogNetworkConfigPrivate();
 
- QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint(), "toplayout");
+ QVBoxLayout* topLayout = new QVBoxLayout(this);
+ topLayout->setMargin( KDialog::marginHint() );
+ topLayout->setSpacing( KDialog::spacingHint() );
 
- QHBoxLayout *hb = new QHBoxLayout(topLayout, KDialog::spacingHint());
+ QHBoxLayout *hb = new QHBoxLayout;
+ hb->setSpacing( KDialog::spacingHint() );
+ topLayout->addLayout(hb);
 
  d->mNetworkLabel = new QLabel(this);
  hb->addWidget(d->mNetworkLabel);
@@ -271,7 +275,9 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
  d = new KGameDialogGeneralConfigPrivate;
 
  if (initializeGUI) {
-	d->mTopLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+	d->mTopLayout = new QVBoxLayout(this);
+       d->mTopLayout->setMargin( KDialog::marginHint() );
+       d->mTopLayout->setSpacing( KDialog::spacingHint() );
 	d->mTopLayout->setAutoAdd(true);
 
 	QWidget* nameWidget = new QWidget(this);
@@ -396,9 +402,13 @@ KGameDialogMsgServerConfig::KGameDialogMsgServerConfig(QWidget* parent)
 {
  d = new KGameDialogMsgServerConfigPrivate;
 
- QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
- d->senderLayout = new QVBoxLayout(topLayout);
- d->localLayout = new QHBoxLayout(topLayout);
+ QVBoxLayout* topLayout = new QVBoxLayout(this);
+ topLayout->setMargin( KDialog::marginHint() );
+ topLayout->setSpacing( KDialog::spacingHint() );
+ d->senderLayout = new QVBoxLayout;
+ d->localLayout = new QHBoxLayout;
+ topLayout->addLayout( d->senderLayout );
+ topLayout->addLayout( d->localLayout );
 }
 
 KGameDialogMsgServerConfig::~KGameDialogMsgServerConfig()
@@ -437,7 +447,9 @@ void KGameDialogMsgServerConfig::slotChangeMaxClients()
 
  QDialog* dialog = new QDialog();
  dialog->setWindowTitle(i18n("Maximal Number of Clients"));
- QHBoxLayout* l = new QHBoxLayout(dialog, KDialog::marginHint(), KDialog::spacingHint());
+ QHBoxLayout* l = new QHBoxLayout(dialog);
+ l->setMargin( KDialog::marginHint() );
+ l->setSpacing( KDialog::spacingHint() );
  l->setAutoAdd(true);
 
  (void) new QLabel(i18n("Maximal number of clients (-1 = infinite):"), dialog);
@@ -554,7 +566,9 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
 		: KGameDialogConfig(parent)
 {
  d = new KGameDialogChatConfigPrivate;
- QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ QVBoxLayout* topLayout = new QVBoxLayout(this);
+ topLayout->setMargin( KDialog::marginHint() );
+ topLayout->setSpacing( KDialog::spacingHint() );
  topLayout->setAutoAdd(true);
  Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Chat"), this);
  d->mChat = new KGameChat(0, chatMsgId, b);
@@ -607,7 +621,9 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
 {
  //TODO: prevent player to ban himself
  d = new KGameDialogConnectionConfigPrivate;
- QVBoxLayout* topLayout = new QVBoxLayout(this, KDialog::marginHint(), KDialog::spacingHint());
+ QVBoxLayout* topLayout = new QVBoxLayout(this);
+ topLayout->setMargin( KDialog::marginHint() );
+ topLayout->setSpacing( KDialog::spacingHint() );
  topLayout->setAutoAdd(true);
  Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Connected Players"), this);
  d->mPlayerBox = new KListBox(b);

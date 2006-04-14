@@ -87,7 +87,7 @@ public:
 // ------------------ KMessageServer
 
 KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
-  : QObject(parent, 0)
+  : QObject(parent)
 {
   d = new KMessageServerPrivate;
   d->mIsRecursive=false;

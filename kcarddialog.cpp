@@ -256,8 +256,10 @@ bool KCardDialog::isGlobalCardDir() const
 
 void KCardDialog::setupDialog(bool showResizeBox)
 {
-  QHBoxLayout* topLayout = new QHBoxLayout(plainPage(), spacingHint());
-  QVBoxLayout* cardLayout = new QVBoxLayout(topLayout);
+  QHBoxLayout* topLayout = new QHBoxLayout(plainPage());
+  topLayout->setSpacing( spacingHint() );
+  QVBoxLayout* cardLayout = new QVBoxLayout;
+  topLayout->addLayout( cardLayout );
   QString path, file;
   QMatrix m;
   m.scale(0.8,0.8);
@@ -266,7 +268,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
   if (! (flags() & NoDeck))
   {
-    QHBoxLayout* layout = new QHBoxLayout(cardLayout);
+    QHBoxLayout* layout = new QHBoxLayout;
+    cardLayout->addLayout( layout );
 
     // Deck iconview
     Q3GroupBox* grp1 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Backside"), plainPage());
@@ -288,7 +291,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->deckIconView->showToolTips();
 
     // deck select
-    QVBoxLayout* l = new QVBoxLayout(layout);
+    QVBoxLayout* l = new QVBoxLayout;
+    layout->addLayout(l);
     Q3GroupBox* grp3 = new Q3GroupBox(i18n("Backside"), plainPage());
     grp3->setFixedSize(100, 130);
     l->addWidget(grp3, 0, Qt::AlignTop|Qt::AlignHCenter);
@@ -320,7 +324,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
   if (! (flags() & NoCards))
   {
     // Cards iconview
-    QHBoxLayout* layout = new QHBoxLayout(cardLayout);
+    QHBoxLayout* layout = new QHBoxLayout;
+    cardLayout->addLayout(layout);
     Q3GroupBox* grp2 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Frontside"), plainPage());
     layout->addWidget(grp2);
 
@@ -338,7 +343,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->cardIconView->showToolTips();
 
     // Card select
-    QVBoxLayout* l = new QVBoxLayout(layout);
+    QVBoxLayout* l = new QVBoxLayout;
+    layout->addLayout(l);
     Q3GroupBox* grp4 = new Q3GroupBox(i18n("Frontside"), plainPage());
     grp4->setFixedSize(100, 130);
     l->addWidget(grp4, 0, Qt::AlignTop|Qt::AlignHCenter);
@@ -417,17 +423,24 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // large. This is desired behaviour as i don't want to make the box even
     // larger but i want the complete pixmap to be displayed. the dialog is not
     // resized if you make the pixmap smaller again.
-    QVBoxLayout* layout = new QVBoxLayout(topLayout);
+    QVBoxLayout* layout = new QVBoxLayout;
+    topLayout->addLayout(layout);
     Q3GroupBox* grp = new Q3GroupBox(1, Qt::Horizontal, i18n("Resize Cards"), plainPage());
-    layout->setResizeMode(QLayout::Fixed);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
     layout->addWidget(grp);
     QWidget* box = new QWidget(grp);
-    QHBoxLayout* hbox = new QHBoxLayout(box, 0, spacingHint());
-    QVBoxLayout* boxLayout = new QVBoxLayout(hbox);
+    QHBoxLayout* hbox = new QHBoxLayout(box);
+    hbox->setMargin(0);
+    hbox->setSpacing(spacingHint());
+    QVBoxLayout* boxLayout = new QVBoxLayout;
+    hbox->addLayout(boxLayout);
     hbox->addStretch(0);
 
-    d->scaleSlider = new QSlider(1, SLIDER_MAX, 1, (-1000+SLIDER_MIN+SLIDER_MAX), Qt::Horizontal, box);
-    d->scaleSlider->setMinimum(SLIDER_MIN);
+    d->scaleSlider = new QSlider(Qt::Horizontal, box);
+    d->scaleSlider->setRange( SLIDER_MIN, SLIDER_MAX );
+    d->scaleSlider->setPageStep(1);
+    d->scaleSlider->setValue( -1000+SLIDER_MIN+SLIDER_MAX );
+
     connect(d->scaleSlider, SIGNAL(valueChanged(int)), this, SLOT(slotCardResized(int)));
     boxLayout->addWidget(d->scaleSlider, 0, Qt::AlignLeft);
 

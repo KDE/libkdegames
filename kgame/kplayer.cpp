@@ -59,12 +59,12 @@ public:
    KGamePropertyQString mGroup;
 };
 
-KPlayer::KPlayer() : QObject(0,0)
+KPlayer::KPlayer()
 {
  init();
 }
 
-KPlayer::KPlayer(KGame* game) : QObject(0, 0)
+KPlayer::KPlayer(KGame* game)
 {
  init();
  game->addPlayer(this);

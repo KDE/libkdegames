@@ -128,9 +128,10 @@ void HighscoresList::load(const ItemArray &items, int highlight)
 
 //-----------------------------------------------------------------------------
 HighscoresWidget::HighscoresWidget(QWidget *parent)
-    : QWidget(parent, "show_highscores_widget"),
+    : QWidget(parent),
       _scoresUrl(0), _playersUrl(0), _statsTab(0), _histoTab(0)
 {
+    setObjectName("show_highscores_widget");
     const ScoreInfos &s = internal->scoreInfos();
     const PlayerInfos &p = internal->playerInfos();
 
@@ -531,13 +532,16 @@ AskNameDialog::AskNameDialog(QWidget *parent)
 {
     internal->hsConfig().readCurrentConfig();
 
-    QVBoxLayout *top =
-        new QVBoxLayout(plainPage(), marginHint(), spacingHint());
+    QVBoxLayout *top = new QVBoxLayout(plainPage());
+    top->setMargin( marginHint() );
+    top->setSpacing( spacingHint() );
+
     QLabel *label =
         new QLabel(i18n("Congratulations, you have won!"), plainPage());
     top->addWidget(label);
 
-    QHBoxLayout *hbox = new QHBoxLayout(top);
+    QHBoxLayout *hbox = new QHBoxLayout;
+    top->addLayout(hbox);
     label = new QLabel(i18n("Enter your nickname:"), plainPage());
     hbox->addWidget(label);
     _edit = new QLineEdit(plainPage());

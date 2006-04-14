@@ -49,8 +49,8 @@ public:
   QList <QByteArray> delayedMessages;
 };
 
-KMessageClient::KMessageClient (QObject *parent, const char *name)
-  : QObject (parent, name)
+KMessageClient::KMessageClient (QObject *parent)
+  : QObject (parent)
 {
   d = new KMessageClientPrivate ();
   d->isLocked = false;

@@ -40,7 +40,7 @@
 
 // ----------------------- Process Child ---------------------------
 
-KGameProcess::KGameProcess() : QObject(0,0)
+KGameProcess::KGameProcess()
 {
   mTerminate=false;
   // Check whether a player is set. If not create one!

@@ -224,7 +224,8 @@ void KChatBase::init(bool noComboBox)
 
  l->addSpacing(5);
 
- QHBoxLayout* h = new QHBoxLayout(l);
+ QHBoxLayout* h = new QHBoxLayout;
+ l->addLayout(h);
  d->mEdit = new KLineEdit(this);
  d->mEdit->setHandleSignals(false);
  d->mEdit->setTrapReturnKey(true);

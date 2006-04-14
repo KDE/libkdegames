@@ -81,11 +81,10 @@ void KGameProgress::initialize()
 void KGameProgress::paletteChange()
 {
 	QPalette p = kapp->palette();
-	const QColorGroup &colorGroup = p.active();
 	if (!use_supplied_bar_color)
-		bar_color = colorGroup.highlight();
-	bar_text_color = colorGroup.highlightedText();
-	text_color = colorGroup.text();
+		bar_color = p.color( QPalette::Active, QPalette::Highlight );
+	bar_text_color = p.color( QPalette::Active, QPalette::HighlightedText );
+	text_color = p.color( QPalette::Active, QPalette::Text );
 	setPalette(p);
 
 	adjustStyle();

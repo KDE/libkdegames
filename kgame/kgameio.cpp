@@ -41,13 +41,13 @@
 #include <stdlib.h>
 
 // ----------------------- Generic IO -------------------------
-KGameIO::KGameIO() : QObject(0,0)
+KGameIO::KGameIO()
 {
   kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO) << endl;
   mPlayer = 0;
 }
 
-KGameIO::KGameIO(KPlayer* player) : QObject(0,0)
+KGameIO::KGameIO(KPlayer* player)
 {
   kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO) << endl;
   mPlayer = 0;

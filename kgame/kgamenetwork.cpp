@@ -61,7 +61,7 @@ public:
 };
 
 // ------------------- NETWORK GAME ------------------------
-KGameNetwork::KGameNetwork(int c, QObject* parent) : QObject(parent, 0)
+KGameNetwork::KGameNetwork(int c, QObject* parent) : QObject(parent)
 {
  d = new KGameNetworkPrivate;
  d->mCookie = (qint16)c;

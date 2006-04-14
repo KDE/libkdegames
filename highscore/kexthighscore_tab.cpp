@@ -44,8 +44,8 @@ namespace KExtHighscore
 {
 
 //-----------------------------------------------------------------------------
-PlayersCombo::PlayersCombo(QWidget *parent, const char *name)
-    : QComboBox(parent, name)
+PlayersCombo::PlayersCombo(QWidget *parent)
+    : QComboBox(parent)
 {
     const PlayerInfos &p = internal->playerInfos();
     for (uint i = 0; i<p.nbEntries(); i++)
@@ -70,13 +70,15 @@ void PlayersCombo::load()
 }
 
 //-----------------------------------------------------------------------------
-AdditionalTab::AdditionalTab(QWidget *parent, const char *name)
-    : QWidget(parent, name)
+AdditionalTab::AdditionalTab(QWidget *parent)
+    : QWidget(parent)
 {
-    QVBoxLayout *top = new QVBoxLayout(this, KDialogBase::marginHint(),
-                                       KDialogBase::spacingHint());
+    QVBoxLayout *top = new QVBoxLayout(this);
+    top->setMargin( KDialogBase::marginHint() );
+    top->setSpacing( KDialogBase::spacingHint() );
 
-    QHBoxLayout *hbox = new QHBoxLayout(top);
+    QHBoxLayout *hbox = new QHBoxLayout;
+    top->addLayout(hbox);
     QLabel *label = new QLabel(i18n("Select player:"), this);
     hbox->addWidget(label);
     _combo = new PlayersCombo(this);
@@ -122,13 +124,17 @@ const char *StatisticsTab::TREND_LABELS[Nb_Trends] = {
 };
 
 StatisticsTab::StatisticsTab(QWidget *parent)
-    : AdditionalTab(parent, "statistics_tab")
+    : AdditionalTab(parent)
 {
+    setObjectName("statistics_tab");
     // construct GUI
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 
-    QHBoxLayout *hbox = new QHBoxLayout(top);
-    QVBoxLayout *vbox = new QVBoxLayout(hbox);
+    QHBoxLayout *hbox = new QHBoxLayout;
+    QVBoxLayout *vbox = new QVBoxLayout;
+    hbox->addLayout(vbox);
+    top->addLayout(hbox);
+
     Q3GroupBox *group = new Q3GroupBox(1, Qt::Vertical, i18n("Game Counts"), this);
     vbox->addWidget(group);
     Q3Grid *grid = new Q3Grid(3, group);
@@ -211,8 +217,9 @@ void StatisticsTab::display(uint i)
 
 //-----------------------------------------------------------------------------
 HistogramTab::HistogramTab(QWidget *parent)
-    : AdditionalTab(parent, "histogram_tab")
+    : AdditionalTab(parent)
 {
+    setObjectName("histogram_tab");
     // construct GUI
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 

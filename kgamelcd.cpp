@@ -30,8 +30,8 @@
 
 
 //-----------------------------------------------------------------------------
-KGameLCD::KGameLCD(uint nbDigits, QWidget *parent, const char *name)
-    : QLCDNumber(nbDigits, parent, name), _htime(800)
+KGameLCD::KGameLCD(uint nbDigits, QWidget *parent)
+    : QLCDNumber(nbDigits, parent), _htime(800)
 {
     const QPalette &p = palette();
     _fgColor = p.color(QPalette::Active, QColorGroup::Foreground);
@@ -113,8 +113,8 @@ void KGameLCD::highlight(bool light)
 }
 
 //-----------------------------------------------------------------------------
-KGameLCDClock::KGameLCDClock(QWidget *parent, const char *name)
-: KGameLCD(5, parent, name)
+KGameLCDClock::KGameLCDClock(QWidget *parent)
+: KGameLCD(5, parent)
 {
     _timerClock = new QTimer(this);
     connect(_timerClock, SIGNAL(timeout()), SLOT(timeoutClock()));
@@ -194,15 +194,14 @@ public:
   QVector<QLabel *> _leadings;
 };
 
-KGameLCDList::KGameLCDList(const QString &title, QWidget *parent,
-                           const char *name)
-    : QWidget(parent, name)
+KGameLCDList::KGameLCDList(const QString &title, QWidget *parent)
+    : QWidget(parent)
 {
     init(title);
 }
 
-KGameLCDList::KGameLCDList(QWidget *parent, const char *name)
-    : QWidget(parent, name)
+KGameLCDList::KGameLCDList(QWidget *parent)
+    : QWidget(parent)
 {
     init(QString::null);
 }

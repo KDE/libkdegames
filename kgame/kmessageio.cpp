@@ -29,8 +29,8 @@
 #include <QDataStream>
 // ----------------------- KMessageIO -------------------------
 
-KMessageIO::KMessageIO (QObject *parent, const char *name)
-  : QObject (parent, name), m_id (0)
+KMessageIO::KMessageIO (QObject *parent)
+  : QObject (parent), m_id (0)
 {}
 
 KMessageIO::~KMessageIO ()
@@ -48,35 +48,31 @@ quint32 KMessageIO::id ()
 
 // ----------------------KMessageSocket -----------------------
 
-KMessageSocket::KMessageSocket (QString host, quint16 port, QObject *parent, 
-const char *name)
-  : KMessageIO (parent, name)
+KMessageSocket::KMessageSocket (QString host, quint16 port, QObject *parent)
+  : KMessageIO (parent)
 {
   mSocket = new Q3Socket ();
   mSocket->connectToHost (host, port);
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (QHostAddress host, quint16 port, QObject 
-*parent, const char *name)
-  : KMessageIO (parent, name)
+KMessageSocket::KMessageSocket (QHostAddress host, quint16 port, QObject *parent)
+  : KMessageIO (parent)
 {
   mSocket = new Q3Socket ();
   mSocket->connectToHost (host.toString(), port);
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (Q3Socket *socket, QObject *parent, const char 
-*name)
-  : KMessageIO (parent, name)
+KMessageSocket::KMessageSocket (Q3Socket *socket, QObject *parent)
+  : KMessageIO (parent)
 {
   mSocket = socket;
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (int socketFD, QObject *parent, const char 
-*name)
-  : KMessageIO (parent, name)
+KMessageSocket::KMessageSocket (int socketFD, QObject *parent)
+  : KMessageIO (parent)
 {
   mSocket = new Q3Socket ();
   mSocket->setSocket (socketFD);
@@ -141,7 +137,7 @@ void KMessageSocket::processNewData ()
         return;
       }
 
-      QByteArray msg (mNextBlockLength);
+      QByteArray msg (mNextBlockLength, 0);
       str.readRawData (msg.data(), mNextBlockLength);
 
       // send the received message
@@ -177,9 +173,8 @@ QString KMessageSocket::peerName () const
 
 // ----------------------KMessageDirect -----------------------
 
-KMessageDirect::KMessageDirect (KMessageDirect *partner, QObject *parent, 
-const char *name)
-  : KMessageIO (parent, name), mPartner (0)
+KMessageDirect::KMessageDirect (KMessageDirect *partner, QObject *parent)
+  : KMessageIO (parent), mPartner (0)
 {
   // 0 as first parameter leaves the object unconnected
   if (!partner)
@@ -238,7 +233,7 @@ KMessageProcess::~KMessageProcess()
     // Maybe todo: delete mSendBuffer
   }
 }
-KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(parent,0)
+KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(parent)
 {
   // Start process
   kDebug(11001) << "@@@KMessageProcess::Start process" << endl;
@@ -397,7 +392,7 @@ void KMessageProcess::slotProcessExited(KProcess * /*p*/)
 
 
 // ----------------------- KMessageFilePipe ---------------------------
-KMessageFilePipe::KMessageFilePipe(QObject *parent,QFile *readfile,QFile *writefile) : KMessageIO(parent,0)
+KMessageFilePipe::KMessageFilePipe(QObject *parent,QFile *readfile,QFile *writefile) : KMessageIO(parent)
 {
   mReadFile=readfile;
   mWriteFile=writefile;

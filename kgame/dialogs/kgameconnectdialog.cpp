@@ -63,7 +63,8 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
 {
  d = new KGameConnectWidgetPrivate;
 
- QVBoxLayout* vb = new QVBoxLayout(this, KDialog::spacingHint());
+ QVBoxLayout* vb = new QVBoxLayout(this);
+ vb->setSpacing( KDialog::spacingHint() );
  d->mButtonGroup = new Q3VButtonGroup(this);
  vb->addWidget(d->mButtonGroup);
  connect(d->mButtonGroup, SIGNAL(clicked(int)), this, SLOT(slotTypeChanged(int)));
@@ -221,7 +222,8 @@ KGameConnectDialog::KGameConnectDialog(QWidget* parent,int buttonmask) : KDialog
 		i18n("Network Game"),buttonmask , Ok, parent, 0, true, buttonmask!=0)
 {
  d = new KGameConnectDialogPrivate;
- QVBoxLayout* vb = new QVBoxLayout(plainPage(), spacingHint());
+ QVBoxLayout* vb = new QVBoxLayout(plainPage());
+ vb->setSpacing( spacingHint() );
  d->mConnect = new KGameConnectWidget(plainPage());
  vb->addWidget(d->mConnect);
 }

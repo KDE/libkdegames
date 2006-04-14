@@ -58,7 +58,7 @@ public:
     Creates an unconnected KMessageClient object. Use setServer() later to connect to a
     KMessageServer object.
   */
-  KMessageClient (QObject *parent = 0, const char *name = 0);
+  KMessageClient (QObject *parent = 0);
 
   /**
     Destructor.

@@ -45,7 +45,7 @@ class KDE_EXPORT KGameLCD : public QLCDNumber
 {
     Q_OBJECT
 public:
-    KGameLCD(uint nbDigits, QWidget *parent = 0, const char *name = 0);
+    KGameLCD(uint nbDigits, QWidget *parent = 0);
 
     ~KGameLCD();
 
@@ -129,7 +129,7 @@ class KDE_EXPORT KGameLCDClock : public KGameLCD
 {
     Q_OBJECT
 public:
-    KGameLCDClock(QWidget *parent = 0, const char *name = 0);
+    KGameLCDClock(QWidget *parent = 0);
 
     ~KGameLCDClock();
 
@@ -201,8 +201,8 @@ public:
      * @param name passed to the QWidget constructor
      */
     KGameLCDList(const QString &title,
-                 QWidget *parent = 0, const char *name = 0);
-    KGameLCDList(QWidget *parent = 0, const char *name = 0);
+                 QWidget *parent = 0);
+    KGameLCDList(QWidget *parent = 0);
 
     ~KGameLCDList();
 

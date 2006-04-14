@@ -147,8 +147,11 @@ KGameDebugDialog::~KGameDebugDialog()
 void KGameDebugDialog::initGamePage()
 {
  d->mGamePage = addPage(i18n("Debug &KGame"));
- QVBoxLayout* topLayout = new QVBoxLayout(d->mGamePage, marginHint(), spacingHint());
- QHBoxLayout* layout = new QHBoxLayout(topLayout);
+ QVBoxLayout* topLayout = new QVBoxLayout(d->mGamePage);
+ topLayout->setMargin( marginHint() );
+ topLayout->setSpacing( spacingHint() );
+ QHBoxLayout* layout = new QHBoxLayout;
+ topLayout->addLayout(layout);
 
  K3ListView* v = new K3ListView(d->mGamePage);
  v->addColumn(i18n("Data"));
@@ -182,11 +185,15 @@ void KGameDebugDialog::initGamePage()
 void KGameDebugDialog::initPlayerPage()
 {
  d->mPlayerPage = addPage(i18n("Debug &Players"));
- QVBoxLayout* topLayout = new QVBoxLayout(d->mPlayerPage, marginHint(), spacingHint());
- QHBoxLayout* layout = new QHBoxLayout(topLayout);
+ QVBoxLayout* topLayout = new QVBoxLayout(d->mPlayerPage);
+ topLayout->setMargin( marginHint() );
+ topLayout->setSpacing( spacingHint() );
+ QHBoxLayout* layout = new QHBoxLayout;
+ topLayout->addLayout(layout);
 
  //TODO: connect to the KGame signals for joined/removed players!!!
- QVBoxLayout* listLayout = new QVBoxLayout(layout);
+ QVBoxLayout* listLayout = new QVBoxLayout;
+ layout->addLayout(listLayout);
  QLabel* listLabel = new QLabel(i18n("Available Players"), d->mPlayerPage);
  listLayout->addWidget(listLabel);
  d->mPlayerList = new KListBox(d->mPlayerPage);

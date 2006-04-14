@@ -34,7 +34,7 @@ class PlayersCombo : public QComboBox
 {
  Q_OBJECT
  public:
-    PlayersCombo(QWidget *parent = 0, const char *name = 0);
+    PlayersCombo(QWidget *parent = 0);
 
     void load();
 
@@ -52,7 +52,7 @@ class AdditionalTab : public QWidget
 {
  Q_OBJECT
  public:
-    AdditionalTab(QWidget *parent, const char *name);
+    AdditionalTab(QWidget *parent);
 
     virtual void load();
 
