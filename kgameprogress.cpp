@@ -73,7 +73,6 @@ void KGameProgress::initialize()
 	bar_pixmap = 0;
 	bar_style = Solid;
 	text_enabled = TRUE;
-	setBackgroundMode( Qt::PaletteBackground );
 	connect(kapp, SIGNAL(appearanceChanged()), this, SLOT(paletteChange()));
 	paletteChange();
 }
@@ -262,13 +261,14 @@ void KGameProgress::drawContents(QPainter *p)
 {
 	QRect cr = contentsRect(), er = cr;
 	fr = cr;
-	QBrush fb(bar_color), eb(backgroundColor());
+        QBrush fb(bar_color), eb(palette().color(backgroundRole()));
 
 	if (bar_pixmap)
 		fb.setTexture(*bar_pixmap);
 
-	if (backgroundPixmap())
-		eb.setTexture(*backgroundPixmap());
+        QPixmap bkgnd_pix = palette().brush(backgroundRole()).texture();
+	if (!bkgnd_pix.isNull())
+		eb.setTexture(bkgnd_pix);
 
 	switch (bar_style) {
 		case Solid:

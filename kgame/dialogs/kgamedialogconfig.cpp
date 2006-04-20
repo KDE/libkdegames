@@ -276,11 +276,11 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 
  if (initializeGUI) {
 	d->mTopLayout = new QVBoxLayout(this);
-       d->mTopLayout->setMargin( KDialog::marginHint() );
-       d->mTopLayout->setSpacing( KDialog::spacingHint() );
-	d->mTopLayout->setAutoAdd(true);
+	d->mTopLayout->setMargin( KDialog::marginHint() );
+	d->mTopLayout->setSpacing( KDialog::spacingHint() );
 
 	QWidget* nameWidget = new QWidget(this);
+        d->mTopLayout->addWidget(nameWidget);
 	QHBoxLayout* l = new QHBoxLayout(nameWidget);
 	QLabel* nameLabel = new QLabel(i18n("Your name:"), nameWidget);
 	l->addWidget(nameLabel);
@@ -450,10 +450,10 @@ void KGameDialogMsgServerConfig::slotChangeMaxClients()
  QHBoxLayout* l = new QHBoxLayout(dialog);
  l->setMargin( KDialog::marginHint() );
  l->setSpacing( KDialog::spacingHint() );
- l->setAutoAdd(true);
 
- (void) new QLabel(i18n("Maximal number of clients (-1 = infinite):"), dialog);
+ l->addWidget(new QLabel(i18n("Maximal number of clients (-1 = infinite):"), dialog));
  QLineEdit* edit = new QLineEdit(dialog);//TODO: use KIntNumInput
+ l->addWidget(edit);
 // edit->setText(QString::number(max)); // current max clients! //TODO
  if (dialog->exec() == QDialog::Accepted) {
 	bool ok;
@@ -569,8 +569,8 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
  QVBoxLayout* topLayout = new QVBoxLayout(this);
  topLayout->setMargin( KDialog::marginHint() );
  topLayout->setSpacing( KDialog::spacingHint() );
- topLayout->setAutoAdd(true);
  Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Chat"), this);
+ topLayout->addWidget(b);
  d->mChat = new KGameChat(0, chatMsgId, b);
 }
 
@@ -624,8 +624,8 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  QVBoxLayout* topLayout = new QVBoxLayout(this);
  topLayout->setMargin( KDialog::marginHint() );
  topLayout->setSpacing( KDialog::spacingHint() );
- topLayout->setAutoAdd(true);
  Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Connected Players"), this);
+ topLayout->addWidget(b);
  d->mPlayerBox = new KListBox(b);
  setMinimumHeight(100);
 }

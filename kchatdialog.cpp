@@ -84,7 +84,9 @@ void KChatDialog::init()
  d = new KChatDialogPrivate;
 // d->mTextPage = addPage(i18n("&Messages"));// not a good name - game Messages?
  d->mTextPage = plainPage();
- QGridLayout* layout = new QGridLayout(d->mTextPage, 7, 2, KDialog::marginHint(), KDialog::spacingHint());
+ QGridLayout* layout = new QGridLayout(d->mTextPage);
+ layout->setMargin(KDialog::marginHint());
+ layout->setSpacing(KDialog::spacingHint());
 
 // General fonts
  QPushButton* nameFont = new QPushButton(i18n("Name Font..."), d->mTextPage);
@@ -97,18 +99,18 @@ void KChatDialog::init()
  Q3Frame* messagePreview = new Q3Frame(d->mTextPage);
  messagePreview->setFrameStyle(Q3Frame::StyledPanel | Q3Frame::Sunken);
  QHBoxLayout* messageLayout = new QHBoxLayout(messagePreview);
- layout->addMultiCellWidget(messagePreview, 1, 1, 0, 1);
+ layout->addWidget(messagePreview, 1, 0, 1, 2);
 
  d->mNamePreview = new QLabel(i18n("Player: "), messagePreview);
  messageLayout->addWidget(d->mNamePreview, 0);
  d->mTextPreview = new QLabel(i18n("This is a player message"), messagePreview);
  messageLayout->addWidget(d->mTextPreview, 1);
 
- layout->addItem( new QSpacerItem( 0, 10), 2, 0 );
+ layout->addItem(new QSpacerItem(0, 10), 2, 0);
  
 // System Message fonts
  QLabel* systemMessages = new QLabel(i18n("System Messages - Messages directly sent from the game"), d->mTextPage);
- layout->addMultiCellWidget(systemMessages, 3, 3, 0, 1);
+ layout->addWidget(systemMessages, 3, 0, 1, 2);
  QPushButton* systemNameFont = new QPushButton(i18n("Name Font..."), d->mTextPage);
  connect(systemNameFont, SIGNAL(pressed()), this, SLOT(slotGetSystemNameFont()));
  layout->addWidget(systemNameFont, 4, 0);
@@ -119,7 +121,7 @@ void KChatDialog::init()
  Q3Frame* systemMessagePreview = new Q3Frame(d->mTextPage);
  systemMessagePreview->setFrameStyle(Q3Frame::StyledPanel | Q3Frame::Sunken);
  QHBoxLayout* systemMessageLayout = new QHBoxLayout(systemMessagePreview);
- layout->addMultiCellWidget(systemMessagePreview, 5, 5, 0, 1);
+ layout->addWidget(systemMessagePreview, 5, 0, 1, 2);
  
  d->mSystemNamePreview = new QLabel(i18n("--- Game: "), systemMessagePreview);
  systemMessageLayout->addWidget(d->mSystemNamePreview, 0);

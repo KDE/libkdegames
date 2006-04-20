@@ -233,9 +233,11 @@ void KGameDebugDialog::initPlayerPage()
 void KGameDebugDialog::initMessagePage()
 {
  d->mMessagePage = addPage(i18n("Debug &Messages"));
- QGridLayout* layout = new QGridLayout(d->mMessagePage, 11, 7, marginHint(), spacingHint());
+ QGridLayout* layout = new QGridLayout(d->mMessagePage);
+ layout->setMargin(marginHint());
+ layout->setSpacing(spacingHint());
  d->mMessageList = new K3ListView(d->mMessagePage);
- layout->addMultiCellWidget(d->mMessageList, 0, 9, 0, 3);
+ layout->addWidget(d->mMessageList, 0, 0, 10, 4);
  d->mMessageList->addColumn(i18n("Time"));
  d->mMessageList->addColumn(i18n("ID"));
  d->mMessageList->addColumn(i18n("Receiver"));
@@ -251,13 +253,13 @@ void KGameDebugDialog::initMessagePage()
  layout->addWidget(show, 6, 4);
 
  QLabel* l = new QLabel(i18n("Do not show IDs:"), d->mMessagePage);
- layout->addMultiCellWidget(l, 0, 0, 5, 6);
+ layout->addWidget(l, 0, 5, 1, 2);
  d->mHideIdList = new KListBox(d->mMessagePage);
- layout->addMultiCellWidget(d->mHideIdList, 1, 8, 5, 6);
+ layout->addWidget(d->mHideIdList, 1, 5, 8, 2);
 
  QPushButton* clear = new KPushButton(KStdGuiItem::clear(), d->mMessagePage);
  connect(clear, SIGNAL(pressed()), this, SLOT(slotClearMessages()));
- layout->addMultiCellWidget(clear, 10, 10, 0, 6);
+ layout->addWidget(clear, 10, 0, 1, 7);
  //TODO: "show all but..." and "show nothing but..."
 }
 

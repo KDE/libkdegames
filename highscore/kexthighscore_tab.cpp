@@ -49,8 +49,8 @@ PlayersCombo::PlayersCombo(QWidget *parent)
 {
     const PlayerInfos &p = internal->playerInfos();
     for (uint i = 0; i<p.nbEntries(); i++)
-        insertItem(i, p.prettyName(i));
-    insertItem(p.nbEntries(), QString("<") + i18n("all") + '>');
+        addItem(p.prettyName(i));
+    addItem(QString("<") + i18n("all") + '>');
     connect(this, SIGNAL(activated(int)), SLOT(activatedSlot(int)));
 }
 

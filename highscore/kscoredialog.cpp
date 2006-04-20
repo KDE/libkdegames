@@ -124,25 +124,27 @@ void KScoreDialog::addField(int field, const QString &header, const QString &key
 void KScoreDialog::setupDialog()
 {
    d->nrCols = 1;
-   
+
    for(int field = 1; field < d->fields; field = field * 2)
    {
       if (d->fields & field)
          d->col[field] = d->nrCols++;
    }
-      
-   d->layout = new QGridLayout(d->page, 15, d->nrCols, marginHint() + 20, spacingHint());
-   d->layout->addItem( new QSpacerItem( 0, 15), 4, 0 );
+
+   d->layout = new QGridLayout(d->page);
+   d->layout->setMargin(marginHint()+20);
+   d->layout->setSpacing(spacingHint());
+   d->layout->addItem(new QSpacerItem(0, 15), 4, 0);
 
    d->commentLabel = new QLabel(d->page);
    d->commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
-   d->layout->addMultiCellWidget(d->commentLabel, 1, 1, 0, d->nrCols-1);
+   d->layout->addWidget(d->commentLabel, 1, 0, 1, d->nrCols);
 
    QFont bold = font();
    bold.setBold(true);
 
    QLabel *label;
-   d->layout->addItem( new QSpacerItem( 50, 0 ), 0, 0 );
+   d->layout->addItem(new QSpacerItem(50, 0), 0, 0);
    label = new QLabel(i18n("Rank"), d->page);
    d->layout->addWidget(label, 3, 0);
    label->setFont(bold);
@@ -152,7 +154,6 @@ void KScoreDialog::setupDialog()
       if (d->fields & field)
       {
          d->layout->addItem( new QSpacerItem( 50, 0 ), 0, d->col[field] );
-
          label = new QLabel(d->header[field], d->page);
          d->layout->addWidget(label, 3, d->col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
          label->setFont(bold);
@@ -160,7 +161,7 @@ void KScoreDialog::setupDialog()
    }
 
    KSeparator *sep = new KSeparator(Qt::Horizontal, d->page);
-   d->layout->addMultiCellWidget(sep, 4, 4, 0, d->nrCols-1);
+   d->layout->addWidget(sep, 4, 0, 1, d->nrCols);
 
    d->labels.resize(d->nrCols * 10);
    d->stack.resize(10);
@@ -177,7 +178,7 @@ void KScoreDialog::setupDialog()
          QStackedWidget *stack = new QStackedWidget(d->page);
          d->stack.insert(i-1, stack);
          d->layout->addWidget(stack, i+4, d->col[Name]);
-         label = new QLabel(d->page);
+         label = new QLabel(stack);
          d->labels.insert((i-1)*d->nrCols + d->col[Name], label);
          stack->addWidget(label);
          stack->setCurrentWidget(label);
@@ -186,9 +187,9 @@ void KScoreDialog::setupDialog()
       {
          if (d->fields & field)
          {
-           label = new QLabel(d->page);
-           d->labels.insert((i-1)*d->nrCols + d->col[field], label);
-           d->layout->addWidget(label, i+4, d->col[field], Qt::AlignRight);
+            label = new QLabel(d->page);
+            d->labels.insert((i-1)*d->nrCols + d->col[field], label);
+            d->layout->addWidget(label, i+4, d->col[field], Qt::AlignRight);
          }
       }
    }
@@ -207,15 +208,15 @@ void KScoreDialog::aboutToShow()
    {
       d->commentLabel->setMinimumSize(QSize(1,1));
       d->commentLabel->hide();    
-      d->layout->addItem( new QSpacerItem( 0, -15), 0, 0 );
-      d->layout->addItem( new QSpacerItem( 0, -15), 2, 0 );
+      d->layout->addItem( new QSpacerItem( 0, -15 ), 0, 0 );
+      d->layout->addItem( new QSpacerItem( 0, -15 ), 2, 0 );
    } 
    else
    {
       d->commentLabel->setMinimumSize(d->commentLabel->sizeHint());
       d->commentLabel->show();
-      d->layout->addItem( new QSpacerItem( 0, -10), 0, 0 );
-      d->layout->addItem( new QSpacerItem( 0, 10), 2, 0 );
+      d->layout->addItem( new QSpacerItem( 0, -10 ), 0, 0 );
+      d->layout->addItem( new QSpacerItem( 0, 10 ), 2, 0 );
    }
    d->comment = QString::null;
 

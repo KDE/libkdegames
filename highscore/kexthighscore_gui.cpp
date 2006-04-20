@@ -23,13 +23,12 @@
 #include <qlayout.h>
 #include <qtextstream.h>
 #include <q3header.h>
-#include <q3grid.h>
 //Added by qt3to4:
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QVBoxLayout>
-#include <Q3GroupBox>
+#include <QGroupBox>
 
 #include <kapplication.h>
 #include <kmessagebox.h>
@@ -372,7 +371,7 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     if ( internal->isWWHSAvailable() ) {
         tab = new QTabWidget(this);
         setMainWidget(tab);
-        page = new QWidget(tab);
+        page = new QWidget;
         tab->addTab(page, i18n("Main"));
     } else {
         page = new QWidget(this);
@@ -380,7 +379,9 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     }
 
     QGridLayout *pageTop =
-        new QGridLayout(page, 2, 2, spacingHint(), spacingHint());
+        new QGridLayout(page);
+    pageTop->setMargin(spacingHint());
+    pageTop->setSpacing(spacingHint());
 
     QLabel *label = new QLabel(i18n("Nickname:"), page);
     pageTop->addWidget(label, 0, 0);
@@ -406,31 +407,37 @@ ConfigDialog::ConfigDialog(QWidget *parent)
             = new QCheckBox(i18n("World-wide highscores enabled"), page);
         connect(_WWHEnabled, SIGNAL(toggled(bool)),
                 SLOT(modifiedSlot()));
-        pageTop->addMultiCellWidget(_WWHEnabled, 2, 2, 0, 1);
+        pageTop->addWidget(_WWHEnabled, 2, 0, 1, 2 );
 
         // advanced tab
-        QWidget *page = new QWidget(tab);
+        QWidget *page = new QWidget;
         tab->addTab(page, i18n("Advanced"));
         QVBoxLayout *pageTop = new QVBoxLayout(page);
         pageTop->setMargin(marginHint());
         pageTop->setSpacing(spacingHint());
 
-        Q3GroupBox *group = new Q3GroupBox(1, Qt::Vertical, i18n("Registration Data"), page);
+        QGroupBox *group = new QGroupBox(page);
+        group->setTitle( i18n("Registration Data") );
         pageTop->addWidget(group);
-        Q3Grid *grid = new Q3Grid(2, group);
-        grid->setSpacing(spacingHint());
+        QGridLayout *groupLayout = new QGridLayout(group);
+        groupLayout->setSpacing(spacingHint());
 
-        label = new QLabel(i18n("Nickname:"), grid);
-        _registeredName = new KLineEdit(grid);
+        label = new QLabel(i18n("Nickname:"), group);
+        groupLayout->addWidget(label, 0, 0);
+        _registeredName = new KLineEdit(group);
         _registeredName->setReadOnly(true);
+        groupLayout->addWidget(_registeredName, 0, 1);
 
-        label = new QLabel(i18n("Key:"), grid);
-        _key = new KLineEdit(grid);
+        label = new QLabel(i18n("Key:"), group);
+        groupLayout->addWidget(label, 1, 0);
+        _key = new KLineEdit(group);
         _key->setReadOnly(true);
+        groupLayout->addWidget(_key, 1, 1);
 
         KGuiItem gi = KStdGuiItem::clear();
         gi.setText(i18n("Remove"));
-        _removeButton = new KPushButton(gi, grid);
+        _removeButton = new KPushButton(gi, group);
+        groupLayout->addWidget(_removeButton, 2, 0);
         connect(_removeButton, SIGNAL(clicked()), SLOT(removeSlot()));
     }
 

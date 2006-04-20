@@ -215,12 +215,13 @@ void KGameLCDList::init(const QString &title)
 {
     d = new KGameLCDListPrivate;
 
-    QGridLayout *top = new QGridLayout(this, 1, 2, 5);
-    top->setColStretch(1, 1);
+    QGridLayout *top = new QGridLayout(this);
+    top->setMargin(5);
+    top->setColumnStretch(1, 1);
 
     _title = new QLabel(title, this);
     _title->setAlignment(Qt::AlignCenter);
-    top->addMultiCellWidget(_title, 0, 0, 0, 1, Qt::AlignCenter);
+    top->addWidget(_title, 0, 0, 1, 2, Qt::AlignCenter);
 }
 
 void KGameLCDList::append(QLCDNumber *lcd)
