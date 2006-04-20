@@ -104,7 +104,7 @@ void KChatDialog::init()
  d->mTextPreview = new QLabel(i18n("This is a player message"), messagePreview);
  messageLayout->addWidget(d->mTextPreview, 1);
 
- layout->addRowSpacing(2, 10);
+ layout->addItem( new QSpacerItem( 0, 10), 2, 0 );
  
 // System Message fonts
  QLabel* systemMessages = new QLabel(i18n("System Messages - Messages directly sent from the game"), d->mTextPage);
