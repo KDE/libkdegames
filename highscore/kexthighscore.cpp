@@ -279,7 +279,7 @@ void Manager::addToQueryURL(KUrl &url, const QString &item,
 
     QString query = url.query();
     if ( !query.isEmpty() ) query += '&';
-	query += item + '=' + KUrl::encode_string(content);
+	query += item + '=' + QUrl::toPercentEncoding( content );
 	url.setQuery(query);
 }
 
