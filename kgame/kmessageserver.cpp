@@ -417,7 +417,7 @@ void KMessageServer::processOneMessage ()
       out_stream << quint32 (MSG_BROADCAST) << clientID;
       // FIXME, compiler bug?
       // this should be okay, since QBuffer is subclass of QIODevice! :
-      // out_buffer.writeBlock (in_buffer.readAll());
+      // out_buffer.write (in_buffer.readAll());
       out_buffer.QIODevice::write (in_buffer.readAll());
       broadcastMessage (out_msg);
       break;
