@@ -28,13 +28,13 @@ this software.
 #include <qmap.h>
 #include <QKeyEvent>
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kdemacros.h>
 
 /**
  * A simple high score dialog.
  */
-class KDE_EXPORT KScoreDialog : public KDialogBase {
+class KDE_EXPORT KScoreDialog : public KDialog {
    Q_OBJECT
    
 public:
@@ -56,7 +56,7 @@ public:
     * @param parent passed to parent QWidget constructor
     * @param name passed to parent QWidget constructor
     */
-   KScoreDialog(int fields, QWidget *parent=0, const char *name=0);
+   KScoreDialog(int fields, QWidget *parent);
 
    ~KScoreDialog();
 

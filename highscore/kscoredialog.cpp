@@ -45,8 +45,8 @@ this software.
 #include "kscoredialog.h"
 
 class KScoreDialog::KScoreDialogPrivate
-{ 
-public:  
+{
+public:
    Q3PtrList<FieldInfo> scores;
    QWidget *page;
    QGridLayout *layout;
@@ -61,7 +61,7 @@ public:
    int nrCols;
    bool loaded;
    QString configGroup;
-   
+
    QMap<int, int> col;
    QMap<int, QString> header;
    QMap<int, QString> key;
@@ -69,9 +69,10 @@ public:
 };
 
 
-KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
-        : KDialogBase(parent, oname, true, i18n("High Scores"), Ok, Ok, true)
+KScoreDialog::KScoreDialog(int fields, QWidget *parent)
+        : KDialog(parent, i18n("High Scores") )
 {
+    setModal( true );
    d = new KScoreDialogPrivate();
    d->edit = 0;
    d->fields = fields;
@@ -80,21 +81,22 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent, const char *oname)
    d->loaded = false;
    d->nrCols = 0;
    d->configGroup = "High Score";
-   
+
    d->scores.setAutoDelete(true);
    d->header[Name] = i18n("Name");
    d->key[Name] = "Name";
-   
+
    d->header[Date] = i18n("Date");
    d->key[Date] = "Date";
-   
+
    d->header[Level] = i18n("Level");
    d->key[Level] = "Level";
-   
+
    d->header[Score] = i18n("Score");
    d->key[Score] = "Score";
-   d->page = makeMainWidget();
-   
+   d->page = new QWidget( this );
+   setMainWidget(d->page);
+
    connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
 }
 
@@ -199,7 +201,7 @@ void KScoreDialog::aboutToShow()
 {
    if (!d->loaded)
       loadScores();
-      
+
    if (!d->nrCols)
       setupDialog();
 
@@ -207,10 +209,10 @@ void KScoreDialog::aboutToShow()
    if (d->comment.isEmpty())
    {
       d->commentLabel->setMinimumSize(QSize(1,1));
-      d->commentLabel->hide();    
+      d->commentLabel->hide();
       d->layout->addItem( new QSpacerItem( 0, -15 ), 0, 0 );
       d->layout->addItem( new QSpacerItem( 0, -15 ), 2, 0 );
-   } 
+   }
    else
    {
       d->commentLabel->setMinimumSize(d->commentLabel->sizeHint());
@@ -230,7 +232,7 @@ void KScoreDialog::aboutToShow()
       num.setNum(i);
       FieldInfo *score = d->scores.at(i-1);
       label = d->labels[(i-1)*d->nrCols + 0];
-      if (i == d->latest) 
+      if (i == d->latest)
          label->setFont(bold);
       else
          label->setFont(normal);
@@ -245,26 +247,26 @@ void KScoreDialog::aboutToShow()
            stack->addWidget(d->edit);
            stack->setCurrentWidget(d->edit);
            d->edit->setFocus();
-           connect(d->edit, SIGNAL(returnPressed()), 
+           connect(d->edit, SIGNAL(returnPressed()),
                  this, SLOT(slotGotReturn()));
          }
          else
          {
            label = d->labels[(i-1)*d->nrCols + d->col[Name]];
-           if (i == d->latest) 
+           if (i == d->latest)
              label->setFont(bold);
            else
              label->setFont(normal);
            label->setText((*score)[Name]);
          }
-         
+
       }
       for(int field = Name * 2; field < d->fields; field = field * 2)
       {
          if (d->fields & field)
          {
            label = d->labels[(i-1)*d->nrCols + d->col[field]];
-           if (i == d->latest) 
+           if (i == d->latest)
              label->setFont(bold);
            else
              label->setFont(normal);
@@ -366,13 +368,13 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName,
 void KScoreDialog::show()
 {
    aboutToShow();
-   KDialogBase::show();
+   KDialog::show();
 }
 
 void KScoreDialog::exec()
 {
    aboutToShow();
-   KDialogBase::exec();
+   KDialog::exec();
 }
 
 void KScoreDialog::slotGotReturn()
@@ -383,15 +385,15 @@ void KScoreDialog::slotGotReturn()
 void KScoreDialog::slotGotName()
 {
    if (d->newName == -1) return;
-   
+
    d->player = d->edit->text();
-   
+
    (*d->scores.at(d->newName-1))[Name] = d->player;
    saveScores();
 
    QFont bold = font();
    bold.setBold(true);
-   
+
    QLabel *label = d->labels[(d->newName-1)*d->nrCols + d->col[Name]];
    label->setFont(bold);
    label->setText(d->player);
@@ -416,7 +418,7 @@ void KScoreDialog::keyPressEvent( QKeyEvent *ev)
        ev->ignore();
        return;
    }
-   KDialogBase::keyPressEvent(ev);
+   KDialog::keyPressEvent(ev);
 }
 
 
