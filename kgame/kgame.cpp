@@ -614,6 +614,7 @@ bool KGame::systemInactivatePlayer(KPlayer* player)
  if (player->isVirtual())
  {
    systemRemovePlayer(player,true);
+   return false; // don't touch player after this!
  }
  else
  {
@@ -1158,11 +1159,11 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     if (player)
     {
       // We have to make REALLY sure that the player is gone. With any policy
-      systemInactivatePlayer(player);
-      if (policy()!=PolicyLocal)
+      if (systemInactivatePlayer(player) && policy()!=PolicyLocal)
       {
         sendSystemMessage(player->id(), KGameMessage::IdInactivatePlayer);
-      }
+      } else
+	player = 0;
     }
     else
     {
