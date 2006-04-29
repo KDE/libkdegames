@@ -68,7 +68,7 @@ KChatBaseText::KChatBaseText(const QString& message) : Q3ListBoxText()
 }
 
 KChatBaseText::~KChatBaseText()
-{ 
+{
  delete d;
 }
 
@@ -99,7 +99,7 @@ const QString& KChatBaseText::message() const
 QFont KChatBaseText::nameFont() const
 {
  if (d->mNameFont) {
-	return *d->mNameFont; 
+	return *d->mNameFont;
  } else if (listBox()) {
 	return listBox()->font();
  } else {
@@ -110,7 +110,7 @@ QFont KChatBaseText::nameFont() const
 QFont KChatBaseText::messageFont() const
 {
  if (d->mMessageFont) {
-	return *d->mMessageFont; 
+	return *d->mMessageFont;
  } else if (listBox()) {
 	return listBox()->font();
  } else {
@@ -133,7 +133,7 @@ void KChatBaseText::paint(QPainter* painter)
  painter->drawText(3 + QFontMetrics(nameFont()).width(name()), fm.ascent() + fm.leading()/2, message());
 }
 
-int KChatBaseText::width(Q3ListBox* lb) const
+int KChatBaseText::width(const Q3ListBox* lb) const
 {
  int w = 0;
  if (lb) {
@@ -145,13 +145,13 @@ int KChatBaseText::width(Q3ListBox* lb) const
  return qMax(w, QApplication::globalStrut().width());
 }
 
-int KChatBaseText::height(Q3ListBox* lb) const
+int KChatBaseText::height(const Q3ListBox* lb) const
 {
  int h = 0;
  if (lb) {
 	h += 2;
 	// AB: is lineSpacing still correct?
-	if (QFontMetrics(nameFont()).lineSpacing() > QFontMetrics(messageFont()).lineSpacing()) { 
+	if (QFontMetrics(nameFont()).lineSpacing() > QFontMetrics(messageFont()).lineSpacing()) {
 		h += QFontMetrics(nameFont()).lineSpacing();
 	} else {
 		h += QFontMetrics(messageFont()).lineSpacing();
@@ -166,8 +166,8 @@ int KChatBaseText::height(Q3ListBox* lb) const
 class KChatBasePrivate
 {
 public:
-	KChatBasePrivate() 
-	{ 
+	KChatBasePrivate()
+	{
 		mBox = 0;
 		mEdit = 0;
 		mCombo = 0;
@@ -191,7 +191,7 @@ public:
 
 KChatBase::KChatBase(QWidget* parent, bool noComboBox) : Q3Frame(parent)
 {
- init(noComboBox); 
+ init(noComboBox);
 }
 
 KChatBase::~KChatBase()
@@ -209,11 +209,11 @@ void KChatBase::init(bool noComboBox)
 
  setMinimumWidth(100);
  setMinimumHeight(150);
- 
+
  QVBoxLayout* l = new QVBoxLayout(this);
 
  d->mBox = new Q3ListBox(this);
- connect(d->mBox, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)), 
+ connect(d->mBox, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)),
 		this, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)));
  l->addWidget(d->mBox);
  d->mBox->setVScrollBarMode(Q3ScrollView::AlwaysOn);
@@ -257,8 +257,8 @@ void KChatBase::setAcceptMessage(bool a)
 
 bool KChatBase::addSendingEntry(const QString& text, int id)
 {
-//FIXME: is ID used correctly? 
-// do we need ID at all? 
+//FIXME: is ID used correctly?
+// do we need ID at all?
 // what the hell should be here?
 // d->mCombo->insertItem(i18n("Send to All Players"), SendToAll);
  return insertSendingEntry(text, id);
@@ -329,7 +329,7 @@ void KChatBase::setSendingEntry(int id)
  }
  d->mCombo->setCurrentIndex(findIndex(id));
 }
- 
+
 int KChatBase::findIndex(int id) const
 {
  return d->mIndex2Id.indexOf(id);
@@ -346,7 +346,7 @@ int KChatBase::nextId() const
 
 void KChatBase::addItem(const Q3ListBoxItem* text)
 {
- d->mBox->insertItem(text); 
+ d->mBox->insertItem(text);
  int index = d->mBox->count() -1;
  d->mBox->setBottomItem(index);//FIXME: don't scroll to bottom if user scrolled down manually
  if (maxItems() >= 0 && d->mBox->count() > (unsigned int)maxItems()) {
@@ -373,9 +373,9 @@ Q3ListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& 
 	// replace "/me" by a nice star. leave one space after the star
 	QPixmap pix;
 	pix.load(locate("data", QString::fromLatin1("kdegames/pics/star.png")));
-	
+
 	//TODO KChatBasePixmap? Should change the font here!
-	
+
 	message = (Q3ListBoxItem*)new Q3ListBoxPixmap(pix, i18n("%1 %2", fromName, text.mid(3)));
  } else {
 	// the text is not edited in any way. just return an item
@@ -427,13 +427,13 @@ void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
 
 void KChatBase::setNameFont(const QFont& font)
 {
- d->mNameFont = font; 
+ d->mNameFont = font;
  d->mBox->triggerUpdate(false);
 }
 
 void KChatBase::setMessageFont(const QFont& font)
 {
- d->mMessageFont = font; 
+ d->mMessageFont = font;
  d->mBox->triggerUpdate(false);
 }
 
@@ -451,13 +451,13 @@ const QFont& KChatBase::messageFont() const
 
 void KChatBase::setSystemNameFont(const QFont& font)
 {
- d->mSystemNameFont = font; 
+ d->mSystemNameFont = font;
  d->mBox->triggerUpdate(false);
 }
 
 void KChatBase::setSystemMessageFont(const QFont& font)
 {
- d->mSystemMessageFont = font; 
+ d->mSystemMessageFont = font;
  d->mBox->triggerUpdate(false);
 }
 

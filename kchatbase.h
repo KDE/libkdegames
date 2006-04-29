@@ -130,11 +130,11 @@ public:
 
 	/**
 	 **/
-	virtual int width(Q3ListBox* ) const;
+	virtual int width(const Q3ListBox* ) const;
 
 	/**
 	 **/
-	virtual int height(Q3ListBox* ) const;
+	virtual int height(const Q3ListBox* ) const;
 
 protected:
 	/**
