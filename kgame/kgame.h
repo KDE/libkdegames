@@ -818,7 +818,7 @@ protected:
     /**
      * Finally adds a player to the game and therefore to the list.
      **/
-    void systemAddPlayer(KPlayer* newplayer);
+    bool systemAddPlayer(KPlayer* newplayer);
 
     /**
      * Removes a player from the game

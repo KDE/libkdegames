@@ -465,7 +465,7 @@ bool KGame::systemAddPlayer(KPlayer* newplayer)
  if (!newplayer)
  {
    kFatal(11001) << "trying to add NULL player in KGame::systemAddPlayer()" << endl;
-   return ;
+   return false ;
  }
  if (newplayer->id() == 0)
  {
