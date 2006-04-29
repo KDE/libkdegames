@@ -251,7 +251,7 @@ void KGameDialogNetworkConfig::setDiscoveryInfo(const QString& type, const QStri
 {
  d->mConnect->setType(type);
  d->mConnect->setName(name);
-} 
+}
 
 /////////////////////////// KGameDialogGeneralConfig /////////////////////////
 class KGameDialogGeneralConfigPrivate
@@ -713,6 +713,7 @@ void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
 {
  if (!p) {
 	kError(11001) << k_funcinfo << ": Cannot add NULL player" << endl;
+        return;
  }
  if (d->mItem2Player[p]) {
 	kError(11001) << k_funcinfo << ": attempt to double add player" << endl;
@@ -762,7 +763,7 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(Q3ListBoxItem* item)
 	return;
  }
 
- if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?", 
+ if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?",
 		p->name()), QString::null, i18n("Ban Player"), i18n("Do Not Ban")) == KMessageBox::Yes) {
 	kDebug(11001) << "will remove player " << p << endl;
 	game()->removePlayer(p);
