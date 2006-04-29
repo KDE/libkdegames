@@ -411,20 +411,19 @@ KPlayer * KGame::findPlayer(quint32 id) const
 // and the clients are working correctly.
 // BUT: if addPlayer(foo) does not arrive by any reason while addPlayer(bar)
 // does, we would be in trouble...
-void KGame::addPlayer(KPlayer* newplayer)
+bool KGame::addPlayer(KPlayer* newplayer)
 {
  kDebug(11001) << k_funcinfo << ":  " << "; maxPlayers=" << maxPlayers() << " playerCount=" << playerCount() << endl;
  if (!newplayer)
  {
   kFatal(11001) << "trying to add NULL player in KGame::addPlayer()" << endl;
-  return ;
+  return false;
  }
 
  if (maxPlayers() >= 0 && (int)playerCount() >= maxPlayers())
  {
    kWarning(11001) << "cannot add more than " << maxPlayers() << " players - deleting..." << endl;
-   delete newplayer;
-   return;
+   return false;
  }
 
  if (newplayer->id() == 0)
@@ -457,6 +456,7 @@ void KGame::addPlayer(KPlayer* newplayer)
    }
    sendSystemMessage(stream,(int)KGameMessage::IdAddPlayer, 0);
  }
+ return true;
 }
 
 void KGame::systemAddPlayer(KPlayer* newplayer)

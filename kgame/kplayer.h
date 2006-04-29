@@ -80,13 +80,6 @@ public:
        */
       KPlayer();
 
-      /**
-       * Create a new player object. It will be automatically
-       * deleted if the game it belongs to is deleted. This constructor
-       * automatically adds the player to the game using KGame::addPlayer()
-       */
-      KPlayer(KGame* game);
-
       virtual ~KPlayer();
 
       /**

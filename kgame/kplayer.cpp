@@ -64,12 +64,6 @@ KPlayer::KPlayer()
  init();
 }
 
-KPlayer::KPlayer(KGame* game)
-{
- init();
- game->addPlayer(this);
-}
-
 void KPlayer::init()
 {
 // note that NO KGame object exists here! so we cannot use KGameProperty::send!

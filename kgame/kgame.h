@@ -208,7 +208,7 @@ public:
      * @param newplayer The player you want to add. KGame will send a message to
      * all clients and add the player using systemAddPlayer
      **/
-    void addPlayer(KPlayer* newplayer);
+    bool addPlayer(KPlayer* newplayer);
 
     /**
      * Sends a message over the network, msgid=IdRemovePlayer.
