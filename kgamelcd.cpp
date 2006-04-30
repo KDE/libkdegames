@@ -34,8 +34,8 @@ KGameLCD::KGameLCD(uint nbDigits, QWidget *parent)
     : QLCDNumber(nbDigits, parent), _htime(800)
 {
     const QPalette &p = palette();
-    _fgColor = p.color(QPalette::Active, QColorGroup::Foreground);
-    _hlColor = p.color(QPalette::Active, QColorGroup::HighlightedText);
+    _fgColor = p.color(QPalette::Active, QPalette::Foreground);
+    _hlColor = p.color(QPalette::Active, QPalette::HighlightedText);
 
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), SLOT(timeout()));
@@ -52,7 +52,7 @@ KGameLCD::~KGameLCD()
 void KGameLCD::setDefaultBackgroundColor(const QColor &color)
 {
     QPalette p = palette();
-    p.setColor(QColorGroup::Background, color);
+    p.setColor(QPalette::Background, color);
     setPalette(p);
 }
 
@@ -60,7 +60,7 @@ void KGameLCD::setDefaultColor(const QColor &color)
 {
     _fgColor = color;
     QPalette p = palette();
-    p.setColor(QColorGroup::Foreground, color);
+    p.setColor(QPalette::Foreground, color);
     setPalette(p);
 }
 
@@ -89,7 +89,7 @@ void KGameLCD::setColor(const QColor &color)
 {
     const QColor &c = (color.isValid() ? color : _fgColor);
     QPalette p = palette();
-    p.setColor(QColorGroup::Foreground, c);
+    p.setColor(QPalette::Foreground, c);
     setPalette(p);
 }
 

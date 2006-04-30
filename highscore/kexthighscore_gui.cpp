@@ -59,7 +59,7 @@ void ShowItem::paintCell(QPainter *p, const QColorGroup &cg,
                          int column, int width, int align)
 {
     QColorGroup cgrp(cg);
-    if (_highlight) cgrp.setColor(QColorGroup::Text, Qt::red);
+    if (_highlight) cgrp.setColor(QPalette::Text, Qt::red);
     K3ListViewItem::paintCell(p, cgrp, column, width, align);
 }
 
