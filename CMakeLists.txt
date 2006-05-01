@@ -78,8 +78,6 @@ install_targets(${LIB_INSTALL_DIR} kdegames )
 
 install_files( /include FILES kgamemisc.h kcarddialog.h kstdgameaction.h  		kchatbase.h kchat.h kchatdialog.h          kgameprogress.h kcanvasrootpixmap.h kgamelcd.h kgrid2d.h )
 
-kde4_create_doxygen_docs(  )
-
 kde4_footer()
 
 
