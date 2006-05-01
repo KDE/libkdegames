@@ -12,6 +12,3 @@ libkgamedialogsinclude_HEADERS = kgamedialog.h kgameconnectdialog.h kgameerrordi
 INCLUDES = -I$(top_srcdir)/libkdegames -I$(top_srcdir)/libkdegames/kgame $(all_includes)
 METASOURCES = AUTO
 
-messages:
-#	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdegames.pot 
-
