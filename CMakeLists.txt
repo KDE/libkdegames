@@ -7,50 +7,49 @@ add_subdirectory( kgame )
 add_subdirectory( pics ) 
 
 include_directories( 
-	${CMAKE_SOURCE_DIR}/libkdegames/ 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/ 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/ 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/dialogs/ 
+       ${CMAKE_CURRENT_SOURCE_DIR}/highscore/
+       ${CMAKE_CURRENT_SOURCE_DIR}/kgame/
+       ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs/
 	${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
 
 ########### next target ###############
 
 set(libkhighscore_SRCS  
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kconfigrawbackend.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kfilelock.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/khighscore.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kscoredialog.cpp
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kexthighscore_item.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kexthighscore_internal.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kexthighscore_tab.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kexthighscore_gui.cpp
-	${CMAKE_SOURCE_DIR}/libkdegames/highscore/kexthighscore.cpp
+	highscore/kconfigrawbackend.cpp 
+	highscore/kfilelock.cpp 
+	highscore/khighscore.cpp 
+	highscore/kscoredialog.cpp
+	highscore/kexthighscore_item.cpp 
+	highscore/kexthighscore_internal.cpp 
+	highscore/kexthighscore_tab.cpp 
+	highscore/kexthighscore_gui.cpp
+	highscore/kexthighscore.cpp
 )
 
 set(libkgame_SRCS 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgame.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kplayer.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamenetwork.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgameproperty.cpp
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamemessage.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgameio.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgameprocess.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamechat.cpp
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamepropertyhandler.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgameerror.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kgamesequence.cpp
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kmessageio.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kmessageserver.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/kmessageclient.cpp
+	kgame/kgame.cpp 
+	kgame/kplayer.cpp 
+	kgame/kgamenetwork.cpp 
+	kgame/kgameproperty.cpp
+	kgame/kgamemessage.cpp 
+	kgame/kgameio.cpp 
+	kgame/kgameprocess.cpp 
+	kgame/kgamechat.cpp
+	kgame/kgamepropertyhandler.cpp 
+	kgame/kgameerror.cpp 
+	kgame/kgamesequence.cpp
+	kgame/kmessageio.cpp 
+	kgame/kmessageserver.cpp 
+	kgame/kmessageclient.cpp
 	)
 
 set(libkgamedialog_SRCS 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/dialogs/kgamedialog.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/dialogs/kgameconnectdialog.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/dialogs/kgameerrordialog.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/dialogs/kgamedebugdialog.cpp 
-	${CMAKE_SOURCE_DIR}/libkdegames/kgame/dialogs/kgamedialogconfig.cpp
+	kgame/dialogs/kgamedialog.cpp 
+	kgame/dialogs/kgameconnectdialog.cpp 
+	kgame/dialogs/kgameerrordialog.cpp 
+	kgame/dialogs/kgamedebugdialog.cpp 
+	kgame/dialogs/kgamedialogconfig.cpp
 	)
 
 set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS}
