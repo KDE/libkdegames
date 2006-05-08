@@ -241,8 +241,9 @@ public:
     }
   }
 
-  void command(QDataStream &stream,int msgid, bool /* isSender */)
+  void command(QDataStream &stream,int msgid, bool isSender)
   {
+    Q_UNUSED(isSender);
     KGamePropertyBase::command(stream, msgid);
     //kDebug(11001) << "Array id="<<id()<<" got command ("<<msgid<<") !!!" <<endl;
     switch(msgid)

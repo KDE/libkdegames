@@ -285,7 +285,7 @@ public:
 	KGameDialogMsgServerConfig(QWidget* parent = 0);
 	virtual ~KGameDialogMsgServerConfig();
 
-	virtual void submitToKGame(KGame* /*g*/, KPlayer* /*p*/) {}
+	virtual void submitToKGame(KGame* g, KPlayer* p) { Q_UNUSED(g); Q_UNUSED(p); }
 
 	void setHasMsgServer(bool);
 

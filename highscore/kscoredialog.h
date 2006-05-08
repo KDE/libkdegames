@@ -53,8 +53,7 @@ public:
 
    /**
     * @param fields Which fields should be listed.
-    * @param parent passed to parent QWidget constructor
-    * @param name passed to parent QWidget constructor
+    * @param parent passed to parent QWidget constructor.
     */
    KScoreDialog(int fields, QWidget *parent);
 
