@@ -28,7 +28,7 @@ class KActionCollection;
 class KRecentFilesAction;
 class KSelectAction;
 #include <kdemacros.h>
-
+#include <krecentfilesaction.h>
 //-----------------------------------------------------------------------------
 /**
  * Replacement for KStdAction for KDE Games
