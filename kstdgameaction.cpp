@@ -22,6 +22,7 @@
 #include <klocale.h>
 #include <kaction.h>
 #include <kstdaccel.h>
+#include <ktoggleaction.h>
 #include <kconfig.h>
 #include <kdebug.h>
 
