@@ -28,7 +28,7 @@
 #include <q3rangecontrol.h>
 //Added by qt3to4:
 #include <QPixmap>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 /**
  * @short A progress indicator widget.
  *
@@ -49,7 +49,7 @@
  * @author Martynas Kunigelis
  * @version $Id$
  */
-class KDE_EXPORT KGameProgress : public Q3Frame, public Q3RangeControl
+class KDEGAMES_EXPORT KGameProgress : public Q3Frame, public Q3RangeControl
 {
   Q_OBJECT
   Q_ENUMS( BarStyle )

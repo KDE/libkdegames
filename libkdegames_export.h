@@ -47,6 +47,17 @@
 # endif
 #endif
 
+#ifndef KDEGAMES_EXPORT
+# ifdef MAKE_KDEGAMES_LIB
+#  define KDEGAMES_EXPORT KDE_EXPORT
+# elif KDE_MAKE_LIB
+#  define KDEGAMES_EXPORT KDE_IMPORT
+# else
+#  define KDEGAMES_EXPORT
+# endif
+#endif
+
+
 #ifndef KGAME_EXPORT
 # ifdef MAKE_KGAME_LIB
 #  define KGAME_EXPORT KDE_EXPORT
@@ -58,12 +69,12 @@
 #endif
 
 
-
 #else // not windows
 
 #define HIGHSCORE_EXPORT KDE_EXPORT
 #define DIALOGS_EXPORT KDE_EXPORT
 #define KGAME_EXPORT KDE_EXPORT
+#define KDEGAMES_EXPORT KDE_EXPORT
 #endif /* not windows */
 
 #endif /* _LIBKDEGAMES_EXPORT_H */

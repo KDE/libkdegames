@@ -21,13 +21,13 @@
 #define __KCHATDIALOG_H__
 
 #include <kdialogbase.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 class KChatBase;
 
 class KChatDialogPrivate;
 
-class KDE_EXPORT KChatDialog : public KDialogBase
+class KDEGAMES_EXPORT KChatDialog : public KDialogBase
 {
 	Q_OBJECT
 public:

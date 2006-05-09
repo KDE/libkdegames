@@ -22,7 +22,7 @@
 #include <QString>
 
 #include "kchatbase.h"
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 class KChatPrivate;
 
@@ -33,7 +33,7 @@ class KChatPrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDE_EXPORT KChat : public KChatBase
+class KDEGAMES_EXPORT KChat : public KChatBase
 {
 	Q_OBJECT
 public:

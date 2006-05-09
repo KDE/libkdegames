@@ -24,7 +24,7 @@
 #include <q3listbox.h>
 
 #include <kglobalsettings.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 #include <kglobal.h>
 class Q3ListBoxItem;
 
@@ -182,7 +182,7 @@ class KChatBasePrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDE_EXPORT KChatBase : public Q3Frame
+class KDEGAMES_EXPORT KChatBase : public Q3Frame
 {
 	Q_OBJECT
 public:

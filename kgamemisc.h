@@ -23,14 +23,14 @@
 #define __KGAMEMISC_H__
 
 #include <QString>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 class KGameMiscPrivate;
 /**
  * This class contains several (usually static) functions I really did not know
  * a class for. If you know a class for any of these member s please drop one of
  * the above copyright holders a mail (or just kde-games-devel@kde.org)
  **/
-class KDE_EXPORT KGameMisc
+class KDEGAMES_EXPORT KGameMisc
 {
 public:
 	KGameMisc();

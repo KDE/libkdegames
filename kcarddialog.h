@@ -23,7 +23,7 @@
 #include <kdialogbase.h>
 #include <QMap> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 #include <kglobal.h>
 class Q3IconViewItem;
 
@@ -88,7 +88,7 @@ class KCardDialogPrivate;
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
-class KDE_EXPORT KCardDialog : public KDialogBase
+class KDEGAMES_EXPORT KCardDialog : public KDialogBase
 {
   Q_OBJECT
 

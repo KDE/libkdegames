@@ -24,7 +24,7 @@
 #include <QVector>
 //Added by qt3to4:
 #include <QLabel>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 class QLabel;
 class QTimer;
@@ -41,7 +41,7 @@ class QTimer;
  *
  * @since 3.2
  */
-class KDE_EXPORT KGameLCD : public QLCDNumber
+class KDEGAMES_EXPORT KGameLCD : public QLCDNumber
 {
     Q_OBJECT
 public:
@@ -125,7 +125,7 @@ private:
  *
  * @since 3.2
  */
-class KDE_EXPORT KGameLCDClock : public KGameLCD
+class KDEGAMES_EXPORT KGameLCDClock : public KGameLCD
 {
     Q_OBJECT
 public:
@@ -189,7 +189,7 @@ private:
  *
  * @since 3.2
  */
-class KDE_EXPORT KGameLCDList : public QWidget
+class KDEGAMES_EXPORT KGameLCDList : public QWidget
 {
     Q_OBJECT
 public:
