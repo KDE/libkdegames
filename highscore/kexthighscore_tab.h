@@ -20,7 +20,7 @@
 #ifndef KEXTHIGHSCORE_TAB_H
 #define KEXTHIGHSCORE_TAB_H
 
-#include <qcombobox.h>
+#include <QComboBox>
 
 class QLabel;
 class K3ListView;

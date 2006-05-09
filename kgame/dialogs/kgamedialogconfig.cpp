@@ -31,10 +31,10 @@
 #include <klistbox.h>
 #include <kmessagebox.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlineedit.h>
+#include <QLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QLineEdit>
 #include <q3vbox.h>
 #include <q3ptrdict.h>
 //Added by qt3to4:

@@ -23,7 +23,7 @@
 #ifndef __KGAMEMSG_H_
 #define __KGAMEMSG_H_
 
-#include <qdatastream.h>
+#include <QDataStream>
 #include <kdemacros.h>
 
 class KDE_EXPORT KGameMessage

@@ -24,9 +24,9 @@ this software.
 
 #include "config.h"
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
 #include <QStackedWidget>
 #include <qtimer.h>
 #include <qevent.h>

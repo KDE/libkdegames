@@ -25,7 +25,7 @@
 #include <q3socket.h>
 #include <kdebug.h>
 #include <kprocess.h>
-#include <qfile.h>
+#include <QFile>
 #include <QDataStream>
 // ----------------------- KMessageIO -------------------------
 

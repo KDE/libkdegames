@@ -21,7 +21,7 @@
 #ifndef __KGAMECHAT_H__
 #define __KGAMECHAT_H__
 
-#include <qstring.h>
+#include <QString>
 
 #include "kchatbase.h"
 #include <kdemacros.h>

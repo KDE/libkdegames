@@ -20,8 +20,8 @@
 #include "kexthighscore_tab.h"
 #include "kexthighscore_tab.moc"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <QLayout>
+#include <QLabel>
 #include <q3grid.h>
 #include <q3header.h>
 //Added by qt3to4:

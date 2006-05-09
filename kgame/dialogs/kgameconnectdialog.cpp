@@ -24,17 +24,17 @@
 #include <knuminput.h>
 #include <klocale.h>
 
-#include <qlineedit.h>
-#include <qcombobox.h>
-#include <qlayout.h>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QLayout>
 #include <qradiobutton.h>
-#include <qlabel.h>
+#include <QLabel>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QList>
 #include <Q3VButtonGroup>
 #include <dnssd/servicebrowser.h>
-#include <qpushbutton.h>
+#include <QPushButton>
 #include <q3grid.h>
 
 class KGameConnectWidgetPrivate

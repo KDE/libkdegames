@@ -20,7 +20,7 @@
 #define __KCHATBASE_H__
 
 #include <q3frame.h>
-#include <qstring.h>
+#include <QString>
 #include <q3listbox.h>
 
 #include <kglobalsettings.h>

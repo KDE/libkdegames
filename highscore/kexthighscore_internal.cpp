@@ -23,8 +23,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <qfile.h>
-#include <qlayout.h>
+#include <QFile>
+#include <QLayout>
 #include <qdom.h>
 //Added by qt3to4:
 #include <QTextStream>

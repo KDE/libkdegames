@@ -28,7 +28,7 @@
 #ifndef __KGAMEDIALOGCONFIG_H__
 #define __KGAMEDIALOGCONFIG_H__
 
-#include <qwidget.h>
+#include <QWidget>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QGridLayout>

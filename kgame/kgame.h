@@ -23,7 +23,7 @@
 #ifndef __KGAME_H_
 #define __KGAME_H_
 
-#include <qstring.h>
+#include <QString>
 #include <q3ptrlist.h>
 
 

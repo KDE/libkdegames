@@ -24,9 +24,9 @@
 #include <klocale.h>
 #include <kfontdialog.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
+#include <QLayout>
+#include <QLabel>
+#include <QPushButton>
 //Added by qt3to4:
 #include <Q3Frame>
 #include <QHBoxLayout>

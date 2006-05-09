@@ -25,7 +25,7 @@ this software.
 #ifndef KSCOREDIALOG_H
 #define KSCOREDIALOG_H
 
-#include <qmap.h>
+#include <QMap>
 #include <QKeyEvent>
 
 #include <kdialog.h>

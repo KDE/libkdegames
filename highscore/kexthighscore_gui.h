@@ -20,8 +20,8 @@
 #ifndef KEXTHIGHSCORE_GUI_H
 #define KEXTHIGHSCORE_GUI_H
 
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <QCheckBox>
+#include <QLabel>
 #include <q3vbox.h>
 #include <qtabwidget.h>
 

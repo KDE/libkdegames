@@ -20,7 +20,7 @@
 #ifndef _KCONFIGRAWBACKEND_H
 #define _KCONFIGRAWBACKEND_H
 
-#include <qfile.h>
+#include <QFile>
 
 #include <kconfigbackend.h>
 #include <ksimpleconfig.h>

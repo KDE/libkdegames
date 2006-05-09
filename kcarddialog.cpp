@@ -21,10 +21,10 @@
 #include <assert.h>
 
 #include <q3groupbox.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qtooltip.h>
+#include <QLabel>
+#include <QCheckBox>
+#include <QLayout>
+#include <QToolTip>
 #include <qslider.h>
 #include <qmatrix.h>
 //Added by qt3to4:
@@ -40,7 +40,7 @@
 #include <ksimpleconfig.h>
 
 #include "kcarddialog.h"
-#include <qpushbutton.h>
+#include <QPushButton>
 #include <kdebug.h>
 #include <krandom.h>
 

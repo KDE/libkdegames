@@ -30,7 +30,7 @@
 
 #include <kdebug.h>
 
-#include <qwidget.h>
+#include <QWidget>
 #include <qbuffer.h>
 #include <qtimer.h>
 //Added by qt3to4:

@@ -21,7 +21,7 @@
 #define __KMESSAGECLIENT_H__
 
 #include <qobject.h>
-#include <qstring.h>
+#include <QString>
 
 
 class KMessageIO;

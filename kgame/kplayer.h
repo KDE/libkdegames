@@ -21,7 +21,7 @@
 #ifndef __KPLAYER_H_
 #define __KPLAYER_H_
 
-#include <qstring.h>
+#include <QString>
 #include <qobject.h>
 #include <q3ptrlist.h>
 

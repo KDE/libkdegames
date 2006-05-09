@@ -23,7 +23,7 @@
 #ifndef __KGAMEIO_H__
 #define __KGAMEIO_H__
 
-#include <qstring.h>
+#include <QString>
 #include <qobject.h>
 //Added by qt3to4:
 #include <QMouseEvent>

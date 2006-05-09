@@ -27,7 +27,7 @@
 #include <krandomsequence.h>
 
 #include <qbuffer.h>
-#include <qdatastream.h>
+#include <QDataStream>
 #include <q3cstring.h>
 
 #include <assert.h>

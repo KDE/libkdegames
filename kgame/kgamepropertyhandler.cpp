@@ -25,7 +25,7 @@
 #include "kgameproperty.h"
 #include "kgamemessage.h"
 
-#include <qmap.h>
+#include <QMap>
 #include <q3ptrqueue.h>
 
 #include <klocale.h>

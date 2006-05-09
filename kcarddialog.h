@@ -19,9 +19,9 @@
 #ifndef __KCARDDIALOG_H_
 #define __KCARDDIALOG_H_
 
-#include <qstring.h>
+#include <QString>
 #include <kdialogbase.h>
-#include <qmap.h> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
+#include <QMap> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
 #include <kdemacros.h>
 #include <kglobal.h>

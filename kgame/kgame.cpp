@@ -39,7 +39,7 @@
 #include <qbuffer.h>
 #include <qtimer.h>
 #include <q3ptrqueue.h>
-#include <qfile.h>
+#include <QFile>
 //Added by qt3to4:
 #include <QList>
 

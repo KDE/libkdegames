@@ -26,8 +26,8 @@
 #include <kapplication.h>
 #include <kdebug.h>
 
-#include <qlayout.h>
-#include <qcombobox.h>
+#include <QLayout>
+#include <QComboBox>
 #include <qpainter.h>
 //Added by qt3to4:
 #include <QPixmap>

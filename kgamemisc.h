@@ -22,7 +22,7 @@
 #ifndef __KGAMEMISC_H__
 #define __KGAMEMISC_H__
 
-#include <qstring.h>
+#include <QString>
 #include <kdemacros.h>
 class KGameMiscPrivate;
 /**

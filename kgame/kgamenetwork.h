@@ -23,7 +23,7 @@
 #ifndef __KGAMENETWORK_H_
 #define __KGAMENETWORK_H_
 
-#include <qstring.h>
+#include <QString>
 #include <qobject.h>
 #include <kdemacros.h>
 class KGameIO;

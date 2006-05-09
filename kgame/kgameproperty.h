@@ -21,7 +21,7 @@
 #ifndef __KGAMEPROPERTY_H_
 #define __KGAMEPROPERTY_H_
 
-#include <qdatastream.h>
+#include <QDataStream>
 
 #include <kdebug.h>
 #include <typeinfo>

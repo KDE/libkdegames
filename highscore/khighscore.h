@@ -23,7 +23,7 @@
 #ifndef __KHIGHSCORE_H__
 #define __KHIGHSCORE_H__
 
-#include <qstring.h>
+#include <QString>
 #include <qobject.h>
 #include <kdemacros.h>
 #include <kglobal.h>

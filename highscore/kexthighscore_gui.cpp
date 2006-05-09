@@ -20,7 +20,7 @@
 #include "kexthighscore_gui.h"
 #include "kexthighscore_gui.moc"
 
-#include <qlayout.h>
+#include <QLayout>
 #include <qtextstream.h>
 #include <q3header.h>
 //Added by qt3to4:

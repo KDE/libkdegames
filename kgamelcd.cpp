@@ -20,8 +20,8 @@
 #include "kgamelcd.h"
 #include "kgamelcd.moc"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <QLayout>
+#include <QLabel>
 #include <qtimer.h>
 //Added by qt3to4:
 #include <QGridLayout>

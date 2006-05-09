@@ -27,9 +27,9 @@
 #include <q3cstring.h>
 #include <qhostaddress.h>
 #include <qobject.h>
-#include <qstring.h>
+#include <QString>
 #include <q3ptrqueue.h>
-#include <qfile.h>
+#include <QFile>
 #include <kdebug.h>
 
 class Q3Socket;

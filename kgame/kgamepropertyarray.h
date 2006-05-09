@@ -21,7 +21,7 @@
 #ifndef __KGAMEPROPERTYARRAY_H_
 #define __KGAMEPROPERTYARRAY_H_
 
-#include <qdatastream.h>
+#include <QDataStream>
 //Added by qt3to4:
 #include <QVector>
 #include <kdebug.h>

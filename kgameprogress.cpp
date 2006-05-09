@@ -21,8 +21,8 @@
 
 #include <qpainter.h>
 #include <qpixmap.h>
-#include <qstring.h>
-#include <qregexp.h>
+#include <QString>
+#include <QRegExp>
 #include <qstyle.h>
 //Added by qt3to4:
 #include <Q3Frame>

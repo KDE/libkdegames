@@ -23,9 +23,9 @@
 #ifndef __KGAMEPROCESS_H_
 #define __KGAMEPROCESS_H_
 
-#include <qstring.h>
+#include <QString>
 #include <qobject.h>
-#include <qfile.h>
+#include <QFile>
 
 #include "kgameproperty.h"
 #include <krandomsequence.h>
