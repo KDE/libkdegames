@@ -23,7 +23,7 @@
 #include "kexthighscore_item.h"
 
 #include <kurl.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 //Added by qt3to4:
 #include <QVector>
 
@@ -42,23 +42,23 @@ extern ManagerPrivate *internal;
 /**
  * Get the current game type.
  */
-KDE_EXPORT uint gameType();
+HIGHSCORE_EXPORT uint gameType();
 
 /**
  * Set the current game type.
  */
-KDE_EXPORT void setGameType(uint gameType);
+HIGHSCORE_EXPORT void setGameType(uint gameType);
 
 /**
  * Configure the highscores.
  * @return true if the configuration has been modified and saved
  */
-KDE_EXPORT bool configure(QWidget *parent);
+HIGHSCORE_EXPORT bool configure(QWidget *parent);
 
 /**
  * Show the highscores lists.
  */
-KDE_EXPORT void show(QWidget *parent);
+HIGHSCORE_EXPORT void show(QWidget *parent);
 
 /**
  * Submit a score. See @ref Manager for usage example.
@@ -66,19 +66,19 @@ KDE_EXPORT void show(QWidget *parent);
  * @param score the players score
  * @param widget a widget used as parent for error message box.
  */
-KDE_EXPORT void submitScore(const Score &score, QWidget *widget);
+HIGHSCORE_EXPORT void submitScore(const Score &score, QWidget *widget);
 
 /**
  * @return the last score in the local list of highscores. The worst possible
  * score if there are less items than the maximum number.
  */
-KDE_EXPORT Score lastScore();
+HIGHSCORE_EXPORT Score lastScore();
 
 /**
  * @return the first score in the local list of highscores (the worst possible
  * score if there is no entry).
  */
-KDE_EXPORT Score firstScore();
+HIGHSCORE_EXPORT Score firstScore();
 
 /**
  * This class manages highscores and players entries (several players can
@@ -139,7 +139,7 @@ KDE_EXPORT Score firstScore();
  * and the value of the items that you have optionnally added
  * with Score::setData() ; player name and date are set automatically.
  */
-class KDE_EXPORT Manager
+class HIGHSCORE_EXPORT Manager
 {
  public:
     /**

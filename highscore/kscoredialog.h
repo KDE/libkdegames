@@ -29,12 +29,12 @@ this software.
 #include <QKeyEvent>
 
 #include <kdialog.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 /**
  * A simple high score dialog.
  */
-class KDE_EXPORT KScoreDialog : public KDialog {
+class HIGHSCORE_EXPORT KScoreDialog : public KDialog {
    Q_OBJECT
    
 public:

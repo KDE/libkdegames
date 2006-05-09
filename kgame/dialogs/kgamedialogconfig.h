@@ -32,7 +32,7 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QGridLayout>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 class QGridLayout;
 class QVBoxLayout;
@@ -51,7 +51,7 @@ class KGameDialogConfigPrivate;
  * @short Base class for configuration widgets
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDE_EXPORT KGameDialogConfig : public QWidget
+class DIALOGS_EXPORT KGameDialogConfig : public QWidget
 {
 	Q_OBJECT
 public:
@@ -211,7 +211,7 @@ private:
 };
 
 class KGameDialogNetworkConfigPrivate;
-class KDE_EXPORT KGameDialogNetworkConfig : public KGameDialogConfig
+class DIALOGS_EXPORT KGameDialogNetworkConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:

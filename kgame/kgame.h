@@ -28,7 +28,7 @@
 
 
 #include "kgamenetwork.h"
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 class KRandomSequence;
 
 class KPlayer;
@@ -59,7 +59,7 @@ class KGamePrivate;
  * @author Martin Heni <martin@heni-online.de>
  *
  */
-class KDE_EXPORT KGame : public KGameNetwork
+class KGAME_EXPORT KGame : public KGameNetwork
 {
   Q_OBJECT
 

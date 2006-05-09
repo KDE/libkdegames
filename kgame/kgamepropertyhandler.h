@@ -25,7 +25,7 @@
 #include <q3intdict.h>
 
 #include "kgameproperty.h"
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 class QDataStream;
 class KGame;
@@ -69,7 +69,7 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
  * multiplied. 
  *
  **/
-class KDE_EXPORT KGamePropertyHandler : public QObject
+class KGAME_EXPORT KGamePropertyHandler : public QObject
 {
 	Q_OBJECT
 

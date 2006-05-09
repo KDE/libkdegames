@@ -25,7 +25,7 @@
 
 #include <QString>
 #include <qobject.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 #include <kglobal.h>
 class KConfig;
 class KFileLock;
@@ -82,7 +82,7 @@ class KHighscorePrivate;
  * Easy, what?
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDE_EXPORT KHighscore : public QObject
+class HIGHSCORE_EXPORT KHighscore : public QObject
 {
 	Q_OBJECT
 public:

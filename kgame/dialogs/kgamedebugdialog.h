@@ -22,7 +22,7 @@
 #define __KGAMEDEBUGDIALOG_H__
 
 #include <kdialogbase.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 #include <Q3ListBoxItem>
 class KGame;
 class KGameIO;
@@ -31,7 +31,7 @@ class KGamePropertyBase;
 
 class KGameDebugDialogPrivate;
 
-class KDE_EXPORT KGameDebugDialog : public KDialogBase
+class DIALOGS_EXPORT KGameDebugDialog : public KDialogBase
 {
 	Q_OBJECT
 public:

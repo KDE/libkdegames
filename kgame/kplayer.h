@@ -26,7 +26,7 @@
 #include <q3ptrlist.h>
 
 #include "kgameproperty.h"
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 
 class KGame;
 class KGameIO;
@@ -66,7 +66,7 @@ class KPlayerPrivate;
  * functions which are shared by all of your KGameIOs.
  *
  */
-class KDE_EXPORT KPlayer : public QObject
+class KGAME_EXPORT KPlayer : public QObject
 {
   Q_OBJECT
 

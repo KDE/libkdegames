@@ -29,7 +29,7 @@
 
 #include "kgameproperty.h"
 #include <krandomsequence.h>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 class KPlayer;
 class KMessageFilePipe;
 
@@ -39,7 +39,7 @@ class KMessageFilePipe;
  * Using these two classes will give fully transparent communication
  * via QDataStreams.
  */
-class KDE_EXPORT KGameProcess:  public QObject
+class KGAME_EXPORT KGameProcess:  public QObject
 {
   Q_OBJECT
 

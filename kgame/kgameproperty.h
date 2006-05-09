@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 #include <typeinfo>
-#include <kdemacros.h>
+#include <libkdegames_export.h>
 class KGame;
 class KPlayer;
 class KGamePropertyHandler;
@@ -39,7 +39,7 @@ using namespace std;
  * 
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDE_EXPORT KGamePropertyBase
+class KGAME_EXPORT KGamePropertyBase
 {
 public:
 	enum PropertyDataIds  { // these belong to KPlayer/KGame!
