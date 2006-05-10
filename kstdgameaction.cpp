@@ -116,8 +116,9 @@ KAction* KStdGameAction::create(StdGameAction id, const char *name,
             break;
         case Pause:
         case Demo:
-			pAction = new KToggleAction( sLabel, pInfo->psIconName, cut,
-                                         recvr, slot, parent, n);
+			pAction = new KToggleAction(KIcon(pInfo->psIconName), sLabel, parent, n);
+			QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
+			pAction->setShortcut(cut);
 			break;
         case ChooseGameType:
             pAction = new KSelectAction( sLabel, pInfo->psIconName, cut,
