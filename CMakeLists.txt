@@ -76,6 +76,7 @@ install_targets(${LIB_INSTALL_DIR} kdegames )
 ########### install files ###############
 
 install_files(/include FILES
+   libkdegames_export.h
    kgamemisc.h
    kcarddialog.h
    kstdgameaction.h
