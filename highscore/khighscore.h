@@ -24,7 +24,7 @@
 #define __KHIGHSCORE_H__
 
 #include <QString>
-#include <qobject.h>
+#include <QObject>
 #include <libkdegames_export.h>
 #include <kglobal.h>
 class KConfig;

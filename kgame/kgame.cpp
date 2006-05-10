@@ -37,7 +37,7 @@
 #include <assert.h>
 
 #include <qbuffer.h>
-#include <qtimer.h>
+#include <QTimer>
 #include <q3ptrqueue.h>
 #include <QFile>
 //Added by qt3to4:

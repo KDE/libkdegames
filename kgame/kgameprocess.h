@@ -24,7 +24,7 @@
 #define __KGAMEPROCESS_H_
 
 #include <QString>
-#include <qobject.h>
+#include <QObject>
 #include <QFile>
 
 #include "kgameproperty.h"

@@ -21,7 +21,7 @@
 #ifndef __KGAMEPROPERTYHANDLER_H_
 #define __KGAMEPROPERTYHANDLER_H_
 
-#include <qobject.h>
+#include <QObject>
 #include <q3intdict.h>
 
 #include "kgameproperty.h"

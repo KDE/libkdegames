@@ -21,7 +21,7 @@
 #include <stdio.h>
 
 #include <qbuffer.h>
-#include <qtimer.h>
+#include <QTimer>
 #include <QList>
 #include <QDataStream>
 #include "kmessageio.h"

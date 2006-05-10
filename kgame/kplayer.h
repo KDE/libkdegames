@@ -22,7 +22,7 @@
 #define __KPLAYER_H_
 
 #include <QString>
-#include <qobject.h>
+#include <QObject>
 #include <q3ptrlist.h>
 
 #include "kgameproperty.h"

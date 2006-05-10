@@ -24,7 +24,7 @@
 #define __KGAMEIO_H__
 
 #include <QString>
-#include <qobject.h>
+#include <QObject>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QKeyEvent>

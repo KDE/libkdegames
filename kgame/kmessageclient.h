@@ -20,7 +20,7 @@
 #ifndef __KMESSAGECLIENT_H__
 #define __KMESSAGECLIENT_H__
 
-#include <qobject.h>
+#include <QObject>
 #include <QString>
 
 

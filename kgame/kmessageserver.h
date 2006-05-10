@@ -20,7 +20,7 @@
 #ifndef __KMESSAGESERVER_H__
 #define __KMESSAGESERVER_H__
 
-#include <qobject.h>
+#include <QObject>
 #include <q3serversocket.h>
 #include <QString>
 

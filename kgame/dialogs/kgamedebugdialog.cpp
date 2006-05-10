@@ -36,7 +36,7 @@
 #include <QString>
 #include <q3intdict.h>
 #include <QLabel>
-#include <qdatetime.h>
+#include <QDateTime>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <Q3Frame>

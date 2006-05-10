@@ -28,7 +28,7 @@ this software.
 #include <QLayout>
 #include <QLineEdit>
 #include <QStackedWidget>
-#include <qtimer.h>
+#include <QTimer>
 #include <qevent.h>
 #include <q3ptrvector.h>
 //Added by qt3to4:

@@ -26,7 +26,7 @@
 
 #include <q3cstring.h>
 #include <qhostaddress.h>
-#include <qobject.h>
+#include <QObject>
 #include <QString>
 #include <q3ptrqueue.h>
 #include <QFile>
