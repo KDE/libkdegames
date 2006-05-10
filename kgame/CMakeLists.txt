@@ -10,7 +10,25 @@ include_directories( ${CMAKE_SOURCE_DIR}/libkdegames ${KDE4_INCLUDE_DIR} ${QT_IN
 
 ########### install files ###############
 
-install_files( /include/kgame FILES kgame.h kplayer.h kgamenetwork.h kgameproperty.h kgamemessage.h kgameio.h kgameprocess.h kgamepropertyarray.h kgamepropertylist.h kgamechat.h kgamepropertyhandler.h kgameerror.h kgamesequence.h kgameversion.h kmessageio.h kmessageserver.h kmessageclient.h )
+install_files(/include/kgame FILES
+   kgame.h
+   kplayer.h
+   kgamenetwork.h
+   kgameproperty.h
+   kgamemessage.h
+   kgameio.h
+   kgameprocess.h
+   kgamepropertyarray.h
+   kgamepropertylist.h
+   kgamechat.h
+   kgamepropertyhandler.h
+   kgameerror.h
+   kgamesequence.h
+   kgameversion.h
+   kmessageio.h
+   kmessageserver.h
+   kmessageclient.h
+)
 
 kde4_footer()
 

@@ -8,7 +8,12 @@ include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_D
 
 ########### install files ###############
 
-install_files( /include FILES khighscore.h kscoredialog.h                    kexthighscore_item.h kexthighscore.h )
+install_files(/include FILES
+   khighscore.h
+   kscoredialog.h
+   kexthighscore_item.h
+   kexthighscore.h
+)
 
 kde4_footer()
 
