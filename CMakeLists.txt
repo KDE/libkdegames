@@ -6,11 +6,7 @@ add_subdirectory( highscore )
 add_subdirectory( kgame ) 
 add_subdirectory( pics ) 
 
-include_directories( 
-       ${CMAKE_CURRENT_SOURCE_DIR}/highscore/
-       ${CMAKE_CURRENT_SOURCE_DIR}/kgame/
-       ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs/
-	${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/highscore/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs/ )
 
 
 ########### next target ###############
