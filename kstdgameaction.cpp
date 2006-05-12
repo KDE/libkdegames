@@ -125,8 +125,9 @@ KAction* KStdGameAction::create(StdGameAction id, const char *name,
                                          recvr, slot, parent, n);
             break;
 		 default:
-			pAction = new KAction( sLabel, pInfo->psIconName, cut,
-                                   recvr, slot, parent, n);
+			pAction = new KAction(KIcon(pInfo->psIconName),  sLabel, parent, n);
+			QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
+			pAction->setShortcut(cut);
 			break;
 		}
 	}
