@@ -1,4 +1,3 @@
-kde4_header()
 
 
 
@@ -15,7 +14,6 @@ install_files(/include FILES
    kexthighscore.h
 )
 
-kde4_footer()
 
 
 

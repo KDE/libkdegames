@@ -1,4 +1,3 @@
-kde4_header()
 project(libkdegames)
 
 add_subdirectory( carddecks ) 
@@ -85,7 +84,6 @@ install_files(/include FILES
    kgrid2d.h
 )
 
-kde4_footer()
 
 
 

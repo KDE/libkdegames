@@ -1,9 +1,7 @@
-kde4_header()
 
 
 install_files( /include/kgame FILES kgamedialog.h kgameconnectdialog.h kgameerrordialog.h kgamedebugdialog.h kgamedialogconfig.h )
 
-kde4_footer()
 
 
 

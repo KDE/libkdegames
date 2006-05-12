@@ -1,4 +1,3 @@
-kde4_header()
 
 # will be used in subdirs' CMakeLists.txt
 set( carddecks_base_dir ${CMAKE_CURRENT_SOURCE_DIR} )
@@ -22,7 +21,6 @@ add_subdirectory( cards-xskat-german)
 
 install_files( ${DATA_INSTALL_DIR}/carddecks FILES  )
 
-kde4_footer()
 
 
 

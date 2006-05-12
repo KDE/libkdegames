@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( dialogs ) 
 
@@ -29,7 +28,6 @@ install_files(/include/kgame FILES
    kmessageclient.h
 )
 
-kde4_footer()
 
 
 
