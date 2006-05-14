@@ -223,7 +223,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
             if ( i==internal->gameType() ) createPage(w);
         }
 
-        connect(this, SIGNAL(aboutToShowPage(QWidget *)),
+        connect(this, SIGNAL( currentPageChanged(QWidget *)),
                 SLOT(createPage(QWidget *)));
         showPage(internal->gameType());
     } else {
