@@ -26,7 +26,6 @@ this software.
 #define KSCOREDIALOG_H
 
 #include <QMap>
-#include <QKeyEvent>
 
 #include <kdialog.h>
 #include <libkdegames_export.h>

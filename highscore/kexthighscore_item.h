@@ -21,7 +21,6 @@
 #define KEXTHIGHSCORE_ITEM_H
 
 #include <QVariant>
-#include <qnamespace.h>
 #include <QMap>
 #include <QVector>
 #include <libkdegames_export.h>

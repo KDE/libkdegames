@@ -22,14 +22,10 @@
 
 #include <QLayout>
 #include <QLabel>
-#include <q3grid.h>
-#include <q3header.h>
-//Added by qt3to4:
 #include <QPixmap>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QVector>
-#include <Q3GroupBox>
+#include <QGroupBox>
+#include <q3header.h>
 
 #include <kdialogbase.h>
 #include <k3listview.h>
@@ -135,24 +131,27 @@ StatisticsTab::StatisticsTab(QWidget *parent)
     hbox->addLayout(vbox);
     top->addLayout(hbox);
 
-    Q3GroupBox *group = new Q3GroupBox(1, Qt::Vertical, i18n("Game Counts"), this);
+    QGroupBox *group = new QGroupBox(i18n("Game Counts"), this);
     vbox->addWidget(group);
-    Q3Grid *grid = new Q3Grid(3, group);
-    grid->setSpacing(KDialogBase::spacingHint());
+    QGridLayout *gridLay = new QGridLayout(group);
+    gridLay->setSpacing(KDialogBase::spacingHint());
     for (uint k=0; k<Nb_Counts; k++) {
         if ( Count(k)==Draw && !internal->showDrawGames ) continue;
-        (void)new QLabel(i18n(COUNT_LABELS[k]), grid);
-        _nbs[k] = new QLabel(grid);
-        _percents[k] = new QLabel(grid);
+        gridLay->addWidget(new QLabel(i18n(COUNT_LABELS[k]), group), k, 0);
+        _nbs[k] = new QLabel(group);
+        gridLay->addWidget(_nbs[k], k, 1);
+        _percents[k] = new QLabel(group);
+        gridLay->addWidget(_percents[k], k, 2);
     }
 
-    group = new Q3GroupBox(1, Qt::Vertical, i18n("Trends"), this);
+    group = new QGroupBox(i18n("Trends"), this);
     vbox->addWidget(group);
-    grid = new Q3Grid(2, group);
-    grid->setSpacing(KDialogBase::spacingHint());
+    gridLay = new QGridLayout(group);
+    gridLay->setSpacing(KDialogBase::spacingHint());
     for (uint k=0; k<Nb_Trends; k++) {
-        (void)new QLabel(i18n(TREND_LABELS[k]), grid);
-        _trends[k] = new QLabel(grid);
+        gridLay->addWidget(new QLabel(i18n(TREND_LABELS[k]), group), k, 0);
+        _trends[k] = new QLabel(group);
+        gridLay->addWidget(_trends[k], k, 1);
     }
 
     hbox->addStretch(1);

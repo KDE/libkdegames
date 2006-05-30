@@ -29,12 +29,9 @@ this software.
 #include <QLineEdit>
 #include <QStackedWidget>
 #include <QTimer>
-#include <qevent.h>
-#include <q3ptrvector.h>
-//Added by qt3to4:
 #include <QGridLayout>
 #include <QKeyEvent>
-#include <Q3PtrList>
+#include <QList>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -47,12 +44,12 @@ this software.
 class KScoreDialog::KScoreDialogPrivate
 {
 public:
-   Q3PtrList<FieldInfo> scores;
+   QList<FieldInfo*> scores;
    QWidget *page;
    QGridLayout *layout;
    QLineEdit *edit;
-   Q3PtrVector<QStackedWidget> stack;
-   Q3PtrVector<QLabel> labels;
+   QList<QStackedWidget*> stack;
+   QList<QLabel*> labels;
    QLabel *commentLabel;
    QString comment;
    int fields;
@@ -82,7 +79,6 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
    d->nrCols = 0;
    d->configGroup = "High Score";
 
-   d->scores.setAutoDelete(true);
    d->header[Name] = i18n("Name");
    d->key[Name] = "Name";
 
@@ -164,9 +160,6 @@ void KScoreDialog::setupDialog()
 
    KSeparator *sep = new KSeparator(Qt::Horizontal, d->page);
    d->layout->addWidget(sep, 4, 0, 1, d->nrCols);
-
-   d->labels.resize(d->nrCols * 10);
-   d->stack.resize(10);
 
    QString num;
    for (int i = 1; i <= 10; ++i) {
@@ -282,6 +275,7 @@ void KScoreDialog::loadScores()
 {
    QString key, value;
    d->loaded = true;
+   qDeleteAll( d->scores );
    d->scores.clear();
    KConfigGroup config(KGlobal::config(), d->configGroup.toUtf8());
 
@@ -335,10 +329,10 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName,
 {
    if (!d->loaded)
       loadScores();
-   FieldInfo *score = d->scores.first();
-   int i = 1;
-   for(; score; score = d->scores.next(), i++)
+   FieldInfo *score;
+   for(int i=0; i<d->scores.size(); i++)
    {
+      score = d->scores.at(i);
       bool ok;
       int num_score = (*score)[Score].toLong(&ok);
       if (lessIsMore && !ok)
@@ -348,18 +342,18 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName,
       {
         score = new FieldInfo(newInfo);
         (*score)[Score].setNum(newScore);
-        d->scores.insert(i-1, score);
-        d->scores.remove(10);
-        d->latest = i;
+        d->scores.insert(i, score);
+        d->scores.removeAt(10);
+        d->latest = i+1;
         if (askName)
-          d->newName = i;
+          d->newName = i+1;
         else
           saveScores();
-        if (i == 1)
+        if (i == 0)
           d->comment = i18n("Excellent!\nYou have a new high score!");
         else
           d->comment = i18n("Well done!\nYou made it to the high score list!");
-        return i;
+        return i+1;
       }
    }
    return 0;
