@@ -35,12 +35,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
-#include <q3vbox.h>
 #include <q3ptrdict.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <Q3GroupBox>
+#include <QGroupBox>
 
 #include "kgamedialogconfig.moc"
 
@@ -108,7 +104,7 @@ public:
 	}
 
 	// QPushButton* mInitConnection;
-	Q3GroupBox* mInitConnection;
+	QGroupBox* mInitConnection;
 	QLabel* mNetworkLabel;
 	QPushButton *mDisconnectButton;
 
@@ -140,10 +136,12 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
  connect(d->mDisconnectButton, SIGNAL(clicked()), this, SLOT(slotExitConnection()));
  hb->addWidget(d->mDisconnectButton);
 
- d->mInitConnection = new Q3GroupBox(1, Qt::Horizontal, i18n("Network Configuration"), this);
+ d->mInitConnection = new QGroupBox(i18n("Network Configuration"), this);
+ QHBoxLayout* gboxLay = new QHBoxLayout(d->mInitConnection);
  topLayout->addWidget(d->mInitConnection);
 
  d->mConnect = new KGameConnectWidget(d->mInitConnection);
+ gboxLay->addWidget(d->mConnect);
  connect(d->mConnect, SIGNAL(signalNetworkSetup()), this, SLOT(slotInitConnection()));
  connect(d->mConnect, SIGNAL(signalServerTypeChanged(int)),
          this, SIGNAL(signalServerTypeChanged(int)));
@@ -569,9 +567,11 @@ KGameDialogChatConfig::KGameDialogChatConfig(int chatMsgId, QWidget* parent)
  QVBoxLayout* topLayout = new QVBoxLayout(this);
  topLayout->setMargin( KDialog::marginHint() );
  topLayout->setSpacing( KDialog::spacingHint() );
- Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Chat"), this);
+ QGroupBox* b = new QGroupBox(i18n("Chat"), this);
  topLayout->addWidget(b);
+ QHBoxLayout* gboxLay = new QHBoxLayout(b);
  d->mChat = new KGameChat(0, chatMsgId, b);
+ gboxLay->addWidget(d->mChat);
 }
 
 KGameDialogChatConfig::~KGameDialogChatConfig()
@@ -624,9 +624,11 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  QVBoxLayout* topLayout = new QVBoxLayout(this);
  topLayout->setMargin( KDialog::marginHint() );
  topLayout->setSpacing( KDialog::spacingHint() );
- Q3GroupBox* b = new Q3GroupBox(1, Qt::Horizontal, i18n("Connected Players"), this);
+ QGroupBox* b = new QGroupBox(i18n("Connected Players"), this);
  topLayout->addWidget(b);
+ QHBoxLayout* gboxLay = new QHBoxLayout(b);
  d->mPlayerBox = new KListBox(b);
+ gboxLay->addWidget(d->mPlayerBox);
  setMinimumHeight(100);
 }
 

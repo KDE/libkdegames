@@ -29,9 +29,6 @@
 #define __KGAMEDIALOGCONFIG_H__
 
 #include <QWidget>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QGridLayout>
 #include <libkdegames_export.h>
 
 class QGridLayout;

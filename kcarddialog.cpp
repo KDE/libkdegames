@@ -20,17 +20,15 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include <q3groupbox.h>
 #include <QLabel>
 #include <QCheckBox>
 #include <QLayout>
 #include <QToolTip>
-#include <qslider.h>
-#include <qmatrix.h>
-//Added by qt3to4:
+#include <QGroupBox>
+#include <QSlider>
+#include <QMatrix>
 #include <QPixmap>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
+#include <QPushButton>
 
 #include <kapplication.h>
 #include <klocale.h>
@@ -40,7 +38,6 @@
 #include <ksimpleconfig.h>
 
 #include "kcarddialog.h"
-#include <QPushButton>
 #include <kdebug.h>
 #include <krandom.h>
 
@@ -259,6 +256,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
   QHBoxLayout* topLayout = new QHBoxLayout(plainPage());
   topLayout->setSpacing( spacingHint() );
   QVBoxLayout* cardLayout = new QVBoxLayout;
+  QVBoxLayout* gboxLayout;
   topLayout->addLayout( cardLayout );
   QString path, file;
   QMatrix m;
@@ -272,8 +270,9 @@ void KCardDialog::setupDialog(bool showResizeBox)
     cardLayout->addLayout( layout );
 
     // Deck iconview
-    Q3GroupBox* grp1 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Backside"), plainPage());
+    QGroupBox* grp1 = new QGroupBox(i18n("Choose Backside"), plainPage());
     layout->addWidget(grp1);
+    gboxLayout = new QVBoxLayout(grp1);
 
     d->deckIconView = new K3IconView(grp1,"decks");
     d->deckIconView->setSpacing(8);
@@ -289,17 +288,20 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->deckIconView->setMinimumHeight(170);
     d->deckIconView->setWordWrapIconText(false);
     d->deckIconView->showToolTips();
+    gboxLayout->addWidget(d->deckIconView);
 
     // deck select
     QVBoxLayout* l = new QVBoxLayout;
     layout->addLayout(l);
-    Q3GroupBox* grp3 = new Q3GroupBox(i18n("Backside"), plainPage());
+    QGroupBox* grp3 = new QGroupBox(i18n("Backside"), plainPage());
     grp3->setFixedSize(100, 130);
+    gboxLayout = new QVBoxLayout(grp3);
     l->addWidget(grp3, 0, Qt::AlignTop|Qt::AlignHCenter);
     d->deckLabel = new QLabel(grp3);
     d->deckLabel->setText(i18n("empty"));
     d->deckLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     d->deckLabel->setGeometry(10, 20, 80, 90);
+    gboxLayout->addWidget(d->deckLabel);
 
     d->randomDeck = new QCheckBox(plainPage());
     d->randomDeck->setChecked(false);
@@ -326,8 +328,9 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // Cards iconview
     QHBoxLayout* layout = new QHBoxLayout;
     cardLayout->addLayout(layout);
-    Q3GroupBox* grp2 = new Q3GroupBox(1, Qt::Horizontal, i18n("Choose Frontside"), plainPage());
+    QGroupBox* grp2 = new QGroupBox(i18n("Choose Frontside"), plainPage());
     layout->addWidget(grp2);
+    gboxLayout = new QVBoxLayout(grp2);
 
     d->cardIconView =new K3IconView(grp2,"cards");
     /*
@@ -341,17 +344,20 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->cardIconView->setMinimumHeight(170);
     d->cardIconView->setWordWrapIconText(false);
     d->cardIconView->showToolTips();
+    gboxLayout->addWidget(d->cardIconView);
 
     // Card select
     QVBoxLayout* l = new QVBoxLayout;
     layout->addLayout(l);
-    Q3GroupBox* grp4 = new Q3GroupBox(i18n("Frontside"), plainPage());
+    QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), plainPage());
     grp4->setFixedSize(100, 130);
+    gboxLayout = new QVBoxLayout(grp4);
     l->addWidget(grp4, 0, Qt::AlignTop|Qt::AlignHCenter);
     d->cardLabel = new QLabel(grp4);
     d->cardLabel->setText(i18n("empty"));
     d->cardLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     d->cardLabel->setGeometry(10, 20, 80, 90 );
+    gboxLayout->addWidget(d->cardLabel);
 
     d->randomCardDir = new QCheckBox(plainPage());
     d->randomCardDir->setChecked(false);
@@ -425,10 +431,12 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // resized if you make the pixmap smaller again.
     QVBoxLayout* layout = new QVBoxLayout;
     topLayout->addLayout(layout);
-    Q3GroupBox* grp = new Q3GroupBox(1, Qt::Horizontal, i18n("Resize Cards"), plainPage());
+    QGroupBox* grp = new QGroupBox(i18n("Resize Cards"), plainPage());
     layout->setSizeConstraint(QLayout::SetFixedSize);
     layout->addWidget(grp);
+    gboxLayout = new QVBoxLayout(grp);
     QWidget* box = new QWidget(grp);
+    gboxLayout->addWidget(box);
     QHBoxLayout* hbox = new QHBoxLayout(box);
     hbox->setMargin(0);
     hbox->setSpacing(spacingHint());
