@@ -19,8 +19,6 @@
 #ifndef __KCHAT_H__
 #define __KCHAT_H__
 
-#include <QString>
-
 #include "kchatbase.h"
 #include <libkdegames_export.h>
 

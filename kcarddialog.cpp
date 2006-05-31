@@ -17,13 +17,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <stdio.h>
-#include <assert.h>
-
 #include <QLabel>
 #include <QCheckBox>
 #include <QLayout>
-#include <QToolTip>
 #include <QGroupBox>
 #include <QSlider>
 #include <QMatrix>
@@ -483,7 +479,7 @@ void KCardDialog::insertCardIcons()
         KSimpleConfig cfg(*it);
         cfg.setGroup(QString::fromLatin1("KDE Backdeck"));
         QString path = (*it).left((*it).lastIndexOf('/') + 1);
-        assert(path[path.length() - 1] == '/');
+        Q_ASSERT(path[path.length() - 1] == '/');
         QPixmap pixmap(path + cfg.readEntry("Preview", "12c.png"));
 
         if (pixmap.isNull())

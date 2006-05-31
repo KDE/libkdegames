@@ -22,8 +22,6 @@
 
 #include <krootpixmap.h>
 #include <libkdegames_export.h>
-//Added by qt3to4:
-#include <QPixmap>
 
 class Q3CanvasView;
 

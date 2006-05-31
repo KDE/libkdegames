@@ -19,9 +19,7 @@
 #ifndef __KCARDDIALOG_H_
 #define __KCARDDIALOG_H_
 
-#include <QString>
 #include <kdialogbase.h>
-#include <QMap> // TODO: remove - it is in kcarddialog.cpp now; left here for source compatibility
 
 #include <libkdegames_export.h>
 #include <kglobal.h>

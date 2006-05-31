@@ -19,13 +19,11 @@
 #ifndef __KCHATBASE_H__
 #define __KCHATBASE_H__
 
-#include <q3frame.h>
-#include <QString>
+#include <QFrame>
 #include <q3listbox.h>
 
 #include <kglobalsettings.h>
 #include <libkdegames_export.h>
-#include <kglobal.h>
 class Q3ListBoxItem;
 
 class KConfig;
@@ -182,7 +180,7 @@ class KChatBasePrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDEGAMES_EXPORT KChatBase : public Q3Frame
+class KDEGAMES_EXPORT KChatBase : public QFrame
 {
 	Q_OBJECT
 public:

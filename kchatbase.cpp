@@ -25,17 +25,13 @@
 #include <kconfig.h>
 #include <kapplication.h>
 #include <kdebug.h>
+#include <kglobal.h>
 
 #include <QLayout>
 #include <QComboBox>
-#include <qpainter.h>
-//Added by qt3to4:
+#include <QPainter>
 #include <QPixmap>
-#include <Q3Frame>
-#include <QHBoxLayout>
 #include <QList>
-#include <QVBoxLayout>
-#include <kglobal.h>
 
 class KChatBaseTextPrivate
 {
@@ -189,7 +185,7 @@ public:
 	QFont mSystemMessageFont;
 };
 
-KChatBase::KChatBase(QWidget* parent, bool noComboBox) : Q3Frame(parent)
+KChatBase::KChatBase(QWidget* parent, bool noComboBox) : QFrame(parent)
 {
  init(noComboBox);
 }

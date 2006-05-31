@@ -20,10 +20,8 @@
 #ifndef __KGAMELCD_H
 #define __KGAMELCD_H
 
-#include <qlcdnumber.h>
 #include <QVector>
-//Added by qt3to4:
-#include <QLabel>
+#include <QLCDNumber>
 #include <libkdegames_export.h>
 
 class QLabel;

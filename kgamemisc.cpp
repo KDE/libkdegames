@@ -19,8 +19,7 @@
 /*
     $Id$
 */
-
-#include <qstringlist.h>
+#include <QStringList>
 
 #include <krandomsequence.h>
 #include <klocale.h>

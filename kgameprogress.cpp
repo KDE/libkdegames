@@ -19,28 +19,27 @@
  * KGameProgress -- a progress indicator widget for KDE.
  */
 
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <QPainter>
+#include <QPixmap>
 #include <QString>
 #include <QRegExp>
-#include <qstyle.h>
-//Added by qt3to4:
-#include <Q3Frame>
+#include <QStyle>
+#include <QFrame>
 
 #include "kgameprogress.h"
 
 #include <kapplication.h>
 
-KGameProgress::KGameProgress(QWidget *parent, const char *name)
-	: Q3Frame(parent, name),
+KGameProgress::KGameProgress(QWidget *parent)
+	: QFrame(parent),
 	Q3RangeControl(0, 100, 1, 10, 0),
 	orient(Qt::Horizontal)
 {
 	initialize();
 }
 
-KGameProgress::KGameProgress(Qt::Orientation orientation, QWidget *parent, const char *name)
-	: Q3Frame(parent, name),
+KGameProgress::KGameProgress(Qt::Orientation orientation, QWidget *parent)
+	: QFrame(parent),
 	Q3RangeControl(0, 100, 1, 10, 0),
 	orient(orientation)
 {
@@ -48,8 +47,8 @@ KGameProgress::KGameProgress(Qt::Orientation orientation, QWidget *parent, const
 }
 
 KGameProgress::KGameProgress(int minValue, int maxValue, int value,
-                     Qt::Orientation orientation, QWidget *parent, const char *name)
-	: Q3Frame(parent, name),
+                     Qt::Orientation orientation, QWidget *parent)
+	: QFrame(parent),
 	Q3RangeControl(minValue, maxValue, 1, 10, value),
 	orient(orientation)
 {
@@ -215,11 +214,11 @@ void KGameProgress::adjustStyle()
 {
 	switch (style()->styleHint(QStyle::SH_GUIStyle)) {
 		case Qt::WindowsStyle:
-			setFrameStyle(Q3Frame::WinPanel | Q3Frame::Sunken);
+			setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
 			break;
 		case Qt::MotifStyle:
 		default:
-			setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
+			setFrameStyle(QFrame::Panel | QFrame::Sunken);
 			setLineWidth( 2 );
 			break;
 	}
@@ -230,7 +229,7 @@ void KGameProgress::paletteChange( const QPalette &p )
 {
 	// This never gets called for global color changes 
 	// because we call setPalette() ourselves.
-	Q3Frame::paletteChange(p);
+	QFrame::paletteChange(p);
 }
 
 void KGameProgress::drawText(QPainter *p)

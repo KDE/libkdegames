@@ -22,7 +22,6 @@
 #ifndef __KGAMEMISC_H__
 #define __KGAMEMISC_H__
 
-#include <QString>
 #include <libkdegames_export.h>
 class KGameMiscPrivate;
 /**

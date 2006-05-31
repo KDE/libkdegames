@@ -24,10 +24,8 @@
 #ifndef _KPROGRES_H
 #define _KPROGRES_H "$Id$"
 
-#include <q3frame.h>
+#include <QFrame>
 #include <q3rangecontrol.h>
-//Added by qt3to4:
-#include <QPixmap>
 #include <libkdegames_export.h>
 /**
  * @short A progress indicator widget.
@@ -49,7 +47,7 @@
  * @author Martynas Kunigelis
  * @version $Id$
  */
-class KDEGAMES_EXPORT KGameProgress : public Q3Frame, public Q3RangeControl
+class KDEGAMES_EXPORT KGameProgress : public QFrame, public Q3RangeControl
 {
   Q_OBJECT
   Q_ENUMS( BarStyle )
@@ -72,18 +70,18 @@ public:
   /**
    * Construct a horizontal progress bar.
    */
-  KGameProgress(QWidget *parent=0, const char *name=0);
+  KGameProgress(QWidget *parent=0);
 
   /**
    * Construct a progress bar with orientation @p orient.
    */
-  KGameProgress(Qt::Orientation orient, QWidget *parent=0, const char *name=0);
+  KGameProgress(Qt::Orientation orient, QWidget *parent=0);
 
   /**
    * Construct a progress bar with minimum, maximum and initial values.
    */
   KGameProgress(int minValue, int maxValue, int value, Qt::Orientation,
-                QWidget *parent=0, const char *name=0);
+                QWidget *parent=0);
 
   /**
    * Destruct the progress bar.
