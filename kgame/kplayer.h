@@ -21,9 +21,7 @@
 #ifndef __KPLAYER_H_
 #define __KPLAYER_H_
 
-#include <QString>
-#include <QObject>
-#include <q3ptrlist.h>
+#include <QList>
 
 #include "kgameproperty.h"
 #include <libkdegames_export.h>
@@ -71,7 +69,7 @@ class KGAME_EXPORT KPlayer : public QObject
   Q_OBJECT
 
 public:
-      typedef Q3PtrList<KGameIO> KGameIOList;
+      typedef QList<KGameIO*> KGameIOList;
 
       // KPlayer(KGame *,KGameIO * input=0);
       /**

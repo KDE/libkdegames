@@ -102,11 +102,8 @@ KPlayer::~KPlayer()
   kDebug(11001) << k_funcinfo << ": this=" << this <<", id=" << this->id() << endl;
 
   // Delete IODevices
-  KGameIO *input;
-  while((input=mInputList.first()))
-  {
-    delete input;
-  }
+  qDeleteAll(mInputList.begin(), mInputList.end());
+  mInputList.clear();
   if (game())
   {
     game()->playerDeleted(this);
@@ -229,8 +226,9 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
   if (!targetinput) // delete all
   {
     KGameIO *input;
-    while((input=mInputList.first()))
+    while(!mInputList.isEmpty())
     {
+      input = mInputList.first();
       if (input) removeGameIO(input,deleteit);
     }
   }
@@ -244,7 +242,7 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
     else
     {
       targetinput->setPlayer(0);
-      result=mInputList.remove(targetinput);
+      result=mInputList.removeAll(targetinput);
     }
   }
   return result;
@@ -252,14 +250,14 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
 
 KGameIO * KPlayer::findRttiIO(int rtti) const
 {
-  Q3PtrListIterator<KGameIO> it(mInputList);
-  while (it.current())
+  QListIterator<KGameIO*> it(mInputList);
+  while (it.hasNext())
   {
-    if (it.current()->rtti() == rtti)
+    KGameIO* curGameIO = it.next();
+    if (curGameIO->rtti() == rtti)
     {
-      return it.current();
+      return curGameIO;
     }
-    ++it;
   }
   return 0;
 }
@@ -267,11 +265,10 @@ KGameIO * KPlayer::findRttiIO(int rtti) const
 int KPlayer::calcIOValue()
 {
   int value=0;
-  Q3PtrListIterator<KGameIO> it(mInputList);
-  while (it.current())
+  QListIterator<KGameIO*> it(mInputList);
+  while (it.hasNext())
   {
-    value|=it.current()->rtti();
-    ++it;
+    value|=it.next()->rtti();
   }
   return value;
 }
@@ -408,11 +405,10 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
   if (me->id()==KGamePropertyBase::IdTurn)
   {
     //kDebug(11001) << k_funcinfo << ": for KGamePropertyBase::IdTurn " << endl;
-    Q3PtrListIterator<KGameIO> it(mInputList);
-    while (it.current())
+    QListIterator<KGameIO*> it(mInputList);
+    while (it.hasNext())
     {
-      it.current()->notifyTurn(mMyTurn.value());
-      ++it;
+      it.next()->notifyTurn(mMyTurn.value());
     }
   }
   emit signalPropertyChanged(me,this);
