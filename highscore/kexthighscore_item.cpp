@@ -24,10 +24,10 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <kglobal.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kdebug.h>
 #include <kvbox.h>
-
+#include <kpagedialog.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
 #include "kexthighscore_gui.h"
@@ -273,14 +273,17 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     // show the scores
-    KDialogBase dialog(KDialogBase::Plain, i18n("Multiplayers Scores"),
-                       KDialogBase::Close, KDialogBase::Close,
-                       parent, "show_multiplayers_score", true, true);
-    QHBoxLayout *hbox = new QHBoxLayout(dialog.plainPage());
+    KPageDialog dialog(parent);
+	dialog.setCaption(i18n("Multiplayers Scores"));
+	dialog.setButtons(KDialog::Close);
+	dialog.setModal(true);
+	dialog.setFaceType(KPageDialog::Plain);
+	KPageWidgetItem *page = new KPageWidgetItem( new QLabel(""), "" );
+    QHBoxLayout *hbox = new QHBoxLayout(page->widget());
     hbox->setMargin(KDialog::marginHint());
     hbox->setSpacing(KDialog::spacingHint());
 
-    KVBox *vbox = new KVBox(dialog.plainPage());
+    KVBox *vbox = new KVBox(page->widget());
     hbox->addWidget(vbox);
     if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played."), vbox);
     else {
@@ -289,7 +292,7 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     if ( _nbGames[0]>1 ) {
-        vbox = new KVBox(dialog.plainPage());
+        vbox = new KVBox(page->widget());
         hbox->addWidget(vbox);
         (void)new QLabel(i18n("Scores for the last %1 games:",
                           _nbGames[0]), vbox);
@@ -297,6 +300,7 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     dialog.enableButtonSeparator(false);
+	dialog.addPage(page);
     dialog.exec();
 }
 

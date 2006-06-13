@@ -24,11 +24,11 @@
 #include <QLabel>
 #include <q3vbox.h>
 #include <qtabwidget.h>
-
+#include <kurllabel.h>
 #include <k3listview.h>
 #include <klineedit.h>
 #include <kpushbutton.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include "kexthighscore.h"
 
@@ -110,7 +110,7 @@ class HighscoresWidget : public QWidget
     AdditionalTab  *_statsTab, *_histoTab;
 };
 
-class HighscoresDialog : public KDialogBase
+class HighscoresDialog : public KDialog
 {
  Q_OBJECT
  public:
@@ -158,7 +158,7 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-class ConfigDialog : public KDialogBase
+class ConfigDialog : public KDialog
 {
  Q_OBJECT
  public:
@@ -185,7 +185,7 @@ class ConfigDialog : public KDialogBase
 };
 
 //-----------------------------------------------------------------------------
-class AskNameDialog : public KDialogBase
+class AskNameDialog : public KDialog
 {
  Q_OBJECT
  public:

@@ -135,7 +135,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     const PlayerInfos &p = internal->playerInfos();
 
     QVBoxLayout *vbox = new QVBoxLayout(this);
-    vbox->setSpacing(KDialogBase::spacingHint());
+    vbox->setSpacing(KDialog::spacingHint());
 
     _tw = new QTabWidget(this);
     connect(_tw, SIGNAL(currentChanged(QWidget *)), SLOT(tabChanged()));

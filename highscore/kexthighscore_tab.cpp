@@ -27,7 +27,7 @@
 #include <QGroupBox>
 #include <q3header.h>
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <k3listview.h>
 #include <kdebug.h>
 #include <kglobal.h>
@@ -70,8 +70,8 @@ AdditionalTab::AdditionalTab(QWidget *parent)
     : QWidget(parent)
 {
     QVBoxLayout *top = new QVBoxLayout(this);
-    top->setMargin( KDialogBase::marginHint() );
-    top->setSpacing( KDialogBase::spacingHint() );
+    top->setMargin( KDialog::marginHint() );
+    top->setSpacing( KDialog::spacingHint() );
 
     QHBoxLayout *hbox = new QHBoxLayout;
     top->addLayout(hbox);
@@ -134,7 +134,7 @@ StatisticsTab::StatisticsTab(QWidget *parent)
     QGroupBox *group = new QGroupBox(i18n("Game Counts"), this);
     vbox->addWidget(group);
     QGridLayout *gridLay = new QGridLayout(group);
-    gridLay->setSpacing(KDialogBase::spacingHint());
+    gridLay->setSpacing(KDialog::spacingHint());
     for (uint k=0; k<Nb_Counts; k++) {
         if ( Count(k)==Draw && !internal->showDrawGames ) continue;
         gridLay->addWidget(new QLabel(i18n(COUNT_LABELS[k]), group), k, 0);
@@ -147,7 +147,7 @@ StatisticsTab::StatisticsTab(QWidget *parent)
     group = new QGroupBox(i18n("Trends"), this);
     vbox->addWidget(group);
     gridLay = new QGridLayout(group);
-    gridLay->setSpacing(KDialogBase::spacingHint());
+    gridLay->setSpacing(KDialog::spacingHint());
     for (uint k=0; k<Nb_Trends; k++) {
         gridLay->addWidget(new QLabel(i18n(TREND_LABELS[k]), group), k, 0);
         _trends[k] = new QLabel(group);
