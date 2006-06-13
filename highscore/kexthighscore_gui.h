@@ -28,7 +28,7 @@
 #include <k3listview.h>
 #include <klineedit.h>
 #include <kpushbutton.h>
-#include <kdialog.h>
+#include <kpagedialog.h>
 
 #include "kexthighscore.h"
 
@@ -110,7 +110,7 @@ class HighscoresWidget : public QWidget
     AdditionalTab  *_statsTab, *_histoTab;
 };
 
-class HighscoresDialog : public KDialog
+class HighscoresDialog : public KPageDialog
 {
  Q_OBJECT
  public:

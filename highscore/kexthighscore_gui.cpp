@@ -187,7 +187,7 @@ void HighscoresWidget::changeTab(int i)
         _tw->setCurrentIndex(i);
 }
 
-void HighscoresWidget::showURL(const QString &url) 
+void HighscoresWidget::showURL(const QString &url)
 {
     (void)new KRun(KUrl(url), this);
 }
@@ -206,12 +206,17 @@ void HighscoresWidget::load(int rank)
 
 //-----------------------------------------------------------------------------
 HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
-    : KDialogBase(internal->nbGameTypes()>1 ? TreeList : Plain,
-                  i18n("Highscores"), Close|User1|User2, Close,
-                  parent, "show_highscores", true, true,
-                  KGuiItem(i18n("Configure..."), "configure"),
-                  KGuiItem(i18n("Export..."))), _rank(rank), _tab(0)
+    : KPageDialog(parent), _rank(rank), _tab(0)
 {
+    setCaption( i18n("Highscores") );
+    setButtons( Close|User1|User2 );
+    setDefaultButton( Close );
+    if ( internal->nbGameTypes()>1 )
+        setFaceType( KPageDialog::Tree );
+    else
+        setFaceType( KPageDialog::Plain );
+    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), "configure") );
+    setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
     _widgets.resize(internal->nbGameTypes());
 
     if ( internal->nbGameTypes()>1 ) {
@@ -227,8 +232,10 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
                 SLOT(createPage(QWidget *)));
         showPage(internal->gameType());
     } else {
-        QVBoxLayout *vbox = new QVBoxLayout(plainPage());
-        createPage(plainPage());
+        QWidget *main = new QWidget( this );
+        setMainWidget( main );
+        QVBoxLayout *vbox = new QVBoxLayout(main);
+        createPage(main);
         vbox->addWidget(_widgets[0]);
         setMainWidget(_widgets[0]);
     }
@@ -361,11 +368,13 @@ QString TotalMultipleScoresList::itemText(const ItemContainer &item,
 
 //-----------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent)
-    : KDialogBase(Swallow, i18n("Configure Highscores"),
-                  Ok|Apply|Cancel, Cancel,
-                  parent, "configure_highscores", true, true),
+    : KDialog(parent),
       _saved(false), _WWHEnabled(0)
 {
+    setCaption( i18n("Configure Highscores") );
+    setButtons( Ok|Apply|Cancel );
+    setDefaultButton( Cancel );
+    setModal( true );
     QWidget *page = 0;
     QTabWidget *tab = 0;
     if ( internal->isWWHSAvailable() ) {
@@ -460,7 +469,7 @@ void ConfigDialog::modifiedSlot()
 void ConfigDialog::accept()
 {
     if ( save() ) {
-        KDialogBase::accept();
+        KDialog::accept();
         KGlobal::config()->sync(); // safer
     }
 }
@@ -534,17 +543,21 @@ bool ConfigDialog::save()
 
 //-----------------------------------------------------------------------------
 AskNameDialog::AskNameDialog(QWidget *parent)
-    : KDialogBase(Plain, i18n("Enter Your Nickname"), Ok | Cancel, Ok,
-                  parent, "ask_name_dialog")
+    : KDialog(parent)
 {
-    internal->hsConfig().readCurrentConfig();
+    setCaption( i18n("Enter Your Nickname") );
+    setButtons( Ok | Cancel );
+    setDefaultButton( Ok );
 
-    QVBoxLayout *top = new QVBoxLayout(plainPage());
+    internal->hsConfig().readCurrentConfig();
+    QWidget *main = new QWidget( this );
+    setMainWidget( main );
+    QVBoxLayout *top = new QVBoxLayout( main );
     top->setMargin( marginHint() );
     top->setSpacing( spacingHint() );
 
     QLabel *label =
-        new QLabel(i18n("Congratulations, you have won!"), plainPage());
+        new QLabel(i18n("Congratulations, you have won!"), main);
     top->addWidget(label);
 
     QHBoxLayout *hbox = new QHBoxLayout;
