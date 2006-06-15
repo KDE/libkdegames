@@ -223,8 +223,10 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
         for (uint i=0; i<internal->nbGameTypes(); i++) {
             QString title = internal->manager.gameTypeLabel(i, Manager::I18N);
             QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
-            QWidget *w = addVBoxPage(title, QString::null,
-                                     BarIcon(icon, K3Icon::SizeLarge));
+            QWidget *w = new QWidget();
+            KPageWidgetItem *pageItem = new KPageWidgetItem( w, title);
+            pageItem->setIcon( BarIcon(icon, K3Icon::SizeLarge) );
+            addPage( pageItem );
             if ( i==internal->gameType() ) createPage(w);
         }
 
@@ -562,7 +564,7 @@ AskNameDialog::AskNameDialog(QWidget *parent)
 
     QHBoxLayout *hbox = new QHBoxLayout;
     top->addLayout(hbox);
-    label = new QLabel(i18n("Enter your nickname:"), plainPage());
+    label = new QLabel(i18n("Enter your nickname:"), main);
     hbox->addWidget(label);
     _edit = new QLineEdit(plainPage());
     _edit->setFocus();
@@ -570,7 +572,7 @@ AskNameDialog::AskNameDialog(QWidget *parent)
     hbox->addWidget(_edit);
 
     top->addSpacing(spacingHint());
-    _checkbox = new QCheckBox(i18n("Do not ask again."),  plainPage());
+    _checkbox = new QCheckBox(i18n("Do not ask again."),  main);
     top->addWidget(_checkbox);
 
     nameChanged();
