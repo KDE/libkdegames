@@ -21,7 +21,7 @@
 #ifndef __KGAMEERRORDIALOG_H__
 #define __KGAMEERRORDIALOG_H__
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KGame;
 class KGameErrorDialogPrivate;
@@ -100,7 +100,7 @@ private:
  * @short Internally used by @ref KGameErrorDialog
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGameErrorMessageDialog : public KDialogBase
+class KGameErrorMessageDialog : public KDialog
 {
 	Q_OBJECT
 public:

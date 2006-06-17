@@ -116,8 +116,13 @@ void KGameErrorDialog::connectionError(QString s)
 // should become the real dialog - currently we just use messageboxes 
 // -> maybe unused forever
 KGameErrorMessageDialog::KGameErrorMessageDialog(QWidget* parent) 
-		: KDialogBase(Plain, i18n("Error"), Ok, Ok, parent, 0, true, true)
+		: KDialog(parent)
 {
+	setCaption(i18n("Error"));
+	setButtons(Ok);
+	setDefaultButton(Ok);
+	setModal(true);
+	enableButtonSeparator(true);
 }
 
 KGameErrorMessageDialog::~KGameErrorMessageDialog()

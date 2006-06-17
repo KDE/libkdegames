@@ -230,9 +230,11 @@ KGameConnectDialog::KGameConnectDialog(QWidget* parent,int buttonmask) :
 #warning "kde4: port it"
  //buttonmark
  d = new KGameConnectDialogPrivate;
- QVBoxLayout* vb = new QVBoxLayout(plainPage());
+ QFrame *frame = new QFrame(this);
+ setMainWidget(frame);
+ QVBoxLayout* vb = new QVBoxLayout(frame);
  vb->setSpacing( spacingHint() );
- d->mConnect = new KGameConnectWidget(plainPage());
+ d->mConnect = new KGameConnectWidget(frame);
  vb->addWidget(d->mConnect);
 }
 
