@@ -249,7 +249,9 @@ bool KCardDialog::isGlobalCardDir() const
 
 void KCardDialog::setupDialog(bool showResizeBox)
 {
-  QHBoxLayout* topLayout = new QHBoxLayout(plainPage());
+  QFrame *main =new QFrame(this);
+  setMainWidget(main);
+  QHBoxLayout* topLayout = new QHBoxLayout(main);
   topLayout->setSpacing( spacingHint() );
   QVBoxLayout* cardLayout = new QVBoxLayout;
   QVBoxLayout* gboxLayout;
@@ -266,7 +268,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     cardLayout->addLayout( layout );
 
     // Deck iconview
-    QGroupBox* grp1 = new QGroupBox(i18n("Choose Backside"), plainPage());
+    QGroupBox* grp1 = new QGroupBox(i18n("Choose Backside"), main);
     layout->addWidget(grp1);
     gboxLayout = new QVBoxLayout(grp1);
 
@@ -289,7 +291,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // deck select
     QVBoxLayout* l = new QVBoxLayout;
     layout->addLayout(l);
-    QGroupBox* grp3 = new QGroupBox(i18n("Backside"), plainPage());
+    QGroupBox* grp3 = new QGroupBox(i18n("Backside"), main);
     grp3->setFixedSize(100, 130);
     gboxLayout = new QVBoxLayout(grp3);
     l->addWidget(grp3, 0, Qt::AlignTop|Qt::AlignHCenter);
@@ -299,19 +301,19 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->deckLabel->setGeometry(10, 20, 80, 90);
     gboxLayout->addWidget(d->deckLabel);
 
-    d->randomDeck = new QCheckBox(plainPage());
+    d->randomDeck = new QCheckBox(main);
     d->randomDeck->setChecked(false);
     connect(d->randomDeck, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomDeckToggled(bool)));
     d->randomDeck->setText(i18n("Random backside"));
     l->addWidget(d->randomDeck, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    d->globalDeck = new QCheckBox(plainPage());
+    d->globalDeck = new QCheckBox(main);
     d->globalDeck->setChecked(false);
     d->globalDeck->setText(i18n("Use global backside"));
     l->addWidget(d->globalDeck, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    QPushButton* b = new QPushButton(i18n("Make Backside Global"), plainPage());
+    QPushButton* b = new QPushButton(i18n("Make Backside Global"), main);
     connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalDeck()));
     l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
 
@@ -324,7 +326,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // Cards iconview
     QHBoxLayout* layout = new QHBoxLayout;
     cardLayout->addLayout(layout);
-    QGroupBox* grp2 = new QGroupBox(i18n("Choose Frontside"), plainPage());
+    QGroupBox* grp2 = new QGroupBox(i18n("Choose Frontside"), main);
     layout->addWidget(grp2);
     gboxLayout = new QVBoxLayout(grp2);
 
@@ -345,7 +347,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // Card select
     QVBoxLayout* l = new QVBoxLayout;
     layout->addLayout(l);
-    QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), plainPage());
+    QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), main);
     grp4->setFixedSize(100, 130);
     gboxLayout = new QVBoxLayout(grp4);
     l->addWidget(grp4, 0, Qt::AlignTop|Qt::AlignHCenter);
@@ -355,19 +357,19 @@ void KCardDialog::setupDialog(bool showResizeBox)
     d->cardLabel->setGeometry(10, 20, 80, 90 );
     gboxLayout->addWidget(d->cardLabel);
 
-    d->randomCardDir = new QCheckBox(plainPage());
+    d->randomCardDir = new QCheckBox(main);
     d->randomCardDir->setChecked(false);
     connect(d->randomCardDir, SIGNAL(toggled(bool)), this,
             SLOT(slotRandomCardDirToggled(bool)));
     d->randomCardDir->setText(i18n("Random frontside"));
     l->addWidget(d->randomCardDir, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    d->globalCardDir = new QCheckBox(plainPage());
+    d->globalCardDir = new QCheckBox(main);
     d->globalCardDir->setChecked(false);
     d->globalCardDir->setText(i18n("Use global frontside"));
     l->addWidget(d->globalCardDir, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    QPushButton* b = new QPushButton(i18n("Make Frontside Global"), plainPage());
+    QPushButton* b = new QPushButton(i18n("Make Frontside Global"), main);
     connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalCardDir()));
     l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
 
@@ -427,7 +429,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
     // resized if you make the pixmap smaller again.
     QVBoxLayout* layout = new QVBoxLayout;
     topLayout->addLayout(layout);
-    QGroupBox* grp = new QGroupBox(i18n("Resize Cards"), plainPage());
+    QGroupBox* grp = new QGroupBox(i18n("Resize Cards"), main);
     layout->setSizeConstraint(QLayout::SetFixedSize);
     layout->addWidget(grp);
     gboxLayout = new QVBoxLayout(grp);
@@ -541,8 +543,13 @@ KCardDialog::~KCardDialog()
 
 // Create the dialog
 KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
-    : KDialogBase( Plain, i18n("Carddeck Selection"), Ok|Cancel, Ok, parent, name, true, true)
+    : KDialog( parent)
 {
+	setCaption(i18n("Carddeck Selection"));
+	setButtons(Ok|Cancel);
+	setDefaultButton(Ok);
+	setModal(true);
+	enableButtonSeparator(true);
     KCardDialog::init();
 
     d = new KCardDialogPrivate;

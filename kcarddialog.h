@@ -19,7 +19,7 @@
 #ifndef __KCARDDIALOG_H_
 #define __KCARDDIALOG_H_
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include <libkdegames_export.h>
 #include <kglobal.h>
@@ -86,7 +86,7 @@ class KCardDialogPrivate;
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
-class KDEGAMES_EXPORT KCardDialog : public KDialogBase
+class KDEGAMES_EXPORT KCardDialog : public KDialog
 {
   Q_OBJECT
 
