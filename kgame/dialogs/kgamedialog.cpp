@@ -68,17 +68,25 @@ public:
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 		QWidget* parent, bool modal)
-	: KDialogBase(Tabbed, title, Ok|Default|Apply,
-	Ok, parent, 0, modal, true)
+	: KPageDialog(parent)
 {
+	setCaption(title);
+	setButtons(Ok|Default|Apply); 
+	setDefaultButton(Ok);
+	setFaceType(KPageDialog::Tabbed);
+	setModal(modal);
  init(g, owner);
 }
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 		QWidget* parent, long initConfigs, int chatMsgId, bool modal)
-	: KDialogBase(Tabbed, title, Ok|Default|Apply,
-	Ok, parent, 0, modal, true)
+	: KPageDialog(parent)
 {
+    setCaption(title);
+    setButtons(Ok|Default|Apply);
+    setDefaultButton(Ok);
+    setFaceType(KPageDialog::Tabbed);
+    setModal(modal);
  init(g, owner);
  if ((ConfigOptions)initConfigs!=NoConfig) {
 	initDefaultDialog((ConfigOptions)initConfigs, chatMsgId);
@@ -224,7 +232,8 @@ KVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& titl
 	kError(11001) << "Cannot add NULL config widget" << endl;
 	return 0;
  }
- KVBox* page = addVBoxPage(title);
+ KVBox* page = new KVBox();
+ addPage(page,title);
  addConfigWidget(widget, page);
  return page;
 }

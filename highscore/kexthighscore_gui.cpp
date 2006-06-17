@@ -232,7 +232,8 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
 
         connect(this, SIGNAL( currentPageChanged(QWidget *)),
                 SLOT(createPage(QWidget *)));
-        showPage(internal->gameType());
+#warning "kde4: port it"        
+		//showPage(internal->gameType());
     } else {
         QWidget *main = new QWidget( this );
         setMainWidget( main );
@@ -247,6 +248,8 @@ void HighscoresDialog::createPage(QWidget *page)
 {
     internal->hsConfig().readCurrentConfig();
     _current = page;
+#warning "kde4: port it"
+#if 0
     bool several = ( internal->nbGameTypes()>1 );
     int i = (several ? pageIndex(page) : 0);
     if ( _widgets[i]==0 ) {
@@ -258,6 +261,7 @@ void HighscoresDialog::createPage(QWidget *page)
     _widgets[i]->load(uint(i)==type ? _rank : -1);
     if (several) setGameType(type);
     _widgets[i]->changeTab(_tab);
+#endif
 }
 
 void HighscoresDialog::slotUser1()
@@ -566,7 +570,7 @@ AskNameDialog::AskNameDialog(QWidget *parent)
     top->addLayout(hbox);
     label = new QLabel(i18n("Enter your nickname:"), main);
     hbox->addWidget(label);
-    _edit = new QLineEdit(plainPage());
+    _edit = new QLineEdit(main);
     _edit->setFocus();
     connect(_edit, SIGNAL(textChanged(const QString &)), SLOT(nameChanged()));
     hbox->addWidget(_edit);

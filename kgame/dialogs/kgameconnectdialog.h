@@ -21,7 +21,7 @@
 #ifndef __KGAMECONNECTDIALOG_H__
 #define __KGAMECONNECTDIALOG_H__
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KGameConnectDialogPrivate;
 class KGameConnectWidgetPrivate;
@@ -113,7 +113,7 @@ private:
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGameConnectDialog : public KDialogBase
+class KGameConnectDialog : public KDialog
 {
 	Q_OBJECT
 public:

@@ -28,7 +28,7 @@
 #ifndef __KGAMEDIALOG_H__
 #define __KGAMEDIALOG_H__
 
-#include <kdialogbase.h>
+#include <kpagedialog.h>
 #include <libkdegames_export.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
@@ -75,7 +75,7 @@ class KGameDialogPrivate;
  * @short Main configuration dialog for KGame
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class DIALOGS_EXPORT KGameDialog : public KDialogBase
+class DIALOGS_EXPORT KGameDialog : public KPageDialog
 {
 	Q_OBJECT
 public:

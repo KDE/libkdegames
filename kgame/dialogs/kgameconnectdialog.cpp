@@ -218,9 +218,17 @@ class KGameConnectDialogPrivate
 };
 
 // buttonmask =Ok|Cancel
-KGameConnectDialog::KGameConnectDialog(QWidget* parent,int buttonmask) : KDialogBase(Plain,
-		i18n("Network Game"),buttonmask , Ok, parent, 0, true, buttonmask!=0)
+KGameConnectDialog::KGameConnectDialog(QWidget* parent,int buttonmask) : 
+		KDialog(parent)
+		//KDialog(Plain,
+		//i18n("Network Game"),buttonmask , Ok, parent, 0, true, buttonmask!=0)
 {
+ setCaption(i18n("Network Game"));
+ setButtons(Ok);
+ setDefaultButton(Ok);
+ setModal(true);
+#warning "kde4: port it"
+ //buttonmark
  d = new KGameConnectDialogPrivate;
  QVBoxLayout* vb = new QVBoxLayout(plainPage());
  vb->setSpacing( spacingHint() );
