@@ -57,17 +57,22 @@ class KChatDialogPrivate
 };
 
 KChatDialog::KChatDialog(KChatBase* chat, QWidget* parent, bool modal) 
-//	: KDialogBase(Tabbed, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
-	: KDialogBase(Plain, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
+	: KDialog(parent)
 {
+ setCaption(i18n("Configure Chat"));
+ setButtons(Ok|Default|Apply|Cancel);
+ setModal(modal);
  init();
  plugChatWidget(chat);
 }
 
 KChatDialog::KChatDialog(QWidget* parent, bool modal) 
-//	: KDialogBase(Tabbed, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
-	: KDialogBase(Plain, i18n("Configure Chat"), Ok|Default|Apply|Cancel, Ok, parent, 0, modal, true)
+	: KDialog(parent)
 {
+ setCaption(i18n("Configure Chat"));
+ setButtons(Ok|Default|Apply|Cancel);
+ setModal(modal);
+ init();
  init();
 }
 
@@ -79,8 +84,8 @@ KChatDialog::~KChatDialog()
 void KChatDialog::init()
 {
  d = new KChatDialogPrivate;
-// d->mTextPage = addPage(i18n("&Messages"));// not a good name - game Messages?
- d->mTextPage = plainPage();
+ d->mTextPage = new QFrame( this );
+ setMainWidget( d->mTextPage );
  QGridLayout* layout = new QGridLayout(d->mTextPage);
  layout->setMargin(KDialog::marginHint());
  layout->setSpacing(KDialog::spacingHint());
@@ -207,10 +212,11 @@ void KChatDialog::configureChatWidget(KChatBase* widget)
  widget->setMaxItems(maxMessages());
 }
 
+#warning this probably does not work because of the whole KDialog changes but i just need to build libkdegames
 void KChatDialog::slotOk()
 {
  slotApply();
- KDialogBase::slotOk();
+// KDialog::slotOk();
 }
 
 void KChatDialog::slotApply()
