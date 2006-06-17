@@ -212,11 +212,10 @@ void KChatDialog::configureChatWidget(KChatBase* widget)
  widget->setMaxItems(maxMessages());
 }
 
-#warning this probably does not work because of the whole KDialog changes but i just need to build libkdegames
 void KChatDialog::slotOk()
 {
  slotApply();
-// KDialog::slotOk();
+ KDialog::accept();
 }
 
 void KChatDialog::slotApply()
