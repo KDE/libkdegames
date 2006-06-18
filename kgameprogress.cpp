@@ -71,7 +71,7 @@ void KGameProgress::initialize()
 	use_supplied_bar_color = false;
 	bar_pixmap = 0;
 	bar_style = Solid;
-	text_enabled = TRUE;
+	text_enabled = true;
 	connect(kapp, SIGNAL(appearanceChanged()), this, SLOT(paletteChange()));
 	paletteChange();
 }
