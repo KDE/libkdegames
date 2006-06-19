@@ -457,13 +457,13 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     }
 
     load();
-    enableButtonOK( !_nickname->text().isEmpty() );
+    enableButtonOk( !_nickname->text().isEmpty() );
     enableButtonApply(false);
 }
 
 void ConfigDialog::nickNameChanged(const QString &text)
 {
-    enableButtonOK( !text.isEmpty() );
+    enableButtonOk( !text.isEmpty() );
 }
 
 
@@ -584,7 +584,7 @@ AskNameDialog::AskNameDialog(QWidget *parent)
 
 void AskNameDialog::nameChanged()
 {
-    enableButtonOK( !name().isEmpty()
+    enableButtonOk( !name().isEmpty()
                     && !internal->playerInfos().isNameUsed(name()) );
 }
 
