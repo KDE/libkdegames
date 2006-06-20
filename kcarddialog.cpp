@@ -416,7 +416,7 @@ void KCardDialog::setupDialog(bool showResizeBox)
   if (showResizeBox)
   {
     // this part is a little bit...tricky.
-    // i'm sure there is a cleaner way but i cannot find it.
+    // I'm sure there is a cleaner way but I cannot find it.
     // whenever the pixmap is resized (aka scaled) the box is resized, too. This
     // leads to an always resizing dialog which is *very* ugly. i worked around
     // this by using a QWidget which is the only child widget of the group box.

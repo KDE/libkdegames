@@ -92,7 +92,7 @@ public slots:
     void highlight();
 
     /**
-     * Display the given integer with the (optionnal) leading string.
+     * Display the given integer with the (optional) leading string.
      *
      * Note: we cannot use display(int) since QLCDNumber::display is
      * not virtual... And you cannot use QLCDNumber::intValue() to retrieve

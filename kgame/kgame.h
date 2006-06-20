@@ -661,7 +661,7 @@ signals:
     * client who left the game allows to distinguish who left the
     * game. If it is 0, the server disconnected and you were a client
     * which has been switched back to local play.
-    * You can use this signal to, e.g. set some menues back to local
+    * You can use this signal to, e.g. set some menus back to local
     * player when they were network before.
     *
     * @param clientID - 0:server left, otherwise the client who left

@@ -33,7 +33,7 @@ class KMessageServerPrivate;
 
   An object of this class listens for incoming connections via TCP/IP sockets and
   creates KMessageSocket objects for every established connection. It receives
-  messages from the "clients", analyses them and processes an appropriate
+  messages from the "clients", analyzes them and processes an appropriate
   reaction.
 
   You can also use other KMessageIO objects with KMessageServer, not only
@@ -61,7 +61,7 @@ class KMessageServerPrivate;
   If you want to extend the Server for your own needs (e.g. additional message types),
   you can either create a subclass and overwrite the method processOneMessage.
   (But don't forget to call the method of the superclass!) Or you can connect to
-  the signal messageReceived, and analyse the messages there.
+  the signal messageReceived, and analyze the messages there.
 
   Every client has a unique ID, so that messages can be sent to another dedicated
   client or a list of clients.
@@ -411,7 +411,7 @@ protected slots:
     /**
      * This slot is called whenever there are elements in the message queue. This queue
      * is filled by @ref getReceivedMessage.
-     * This slot takes one message out of the queue and analyses processes it,
+     * This slot takes one message out of the queue and analyzes processes it,
      * if it recognizes it. (See message types in the description of the class.)
      * After that, the signal @ref messageReceived is emitted. Connect to that signal if
      * you want to process other types of messages.
@@ -440,7 +440,7 @@ signals:
      * This signal is always emitted when a message from a client is received.
      *
      * You can use this signal to extend the communication server without subclassing.
-     * Just connect to this signal and analyse the message, if unknown is true.
+     * Just connect to this signal and analyze the message, if unknown is true.
      * If you recognize a message and process it, set unknown to false, otherwise
      * a warning message is printed.
      *

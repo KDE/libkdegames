@@ -98,7 +98,7 @@ HIGHSCORE_EXPORT Score firstScore();
  * <ul>
  * <li> Update the highscores list when new entries are submitted </li>
  * <li> Display the highscores list and the players list </li>
- * <li> Send query to an optionnal web server to support world-wide
+ * <li> Send query to an optional web server to support world-wide
  *      highscores </li>
  * </ul>
  *
@@ -249,7 +249,7 @@ class HIGHSCORE_EXPORT Manager
      * @p MeanScoreDefault default item for the mean score (only show one decimal and
      * 0 is shown as "--".
      * @p BestScoreDefault default item for the best score (0 is shown as "--").
-     * @p ElapsedTime optionnal item for elapsed time (maximum value is 3599 seconds).
+     * @p ElapsedTime optional item for elapsed time (maximum value is 3599 seconds).
      */
     enum ItemType { ScoreDefault, MeanScoreDefault, BestScoreDefault,
                     ElapsedTime };

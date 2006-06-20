@@ -151,7 +151,7 @@ public:
 
 	/**
 	 * Sets this property to emit a signal on value changed.
-	 * As the proerties do not inehrit QObject for optimisation
+	 * As the properties do not inherit QObject for optimization
 	 * this signal is emited via the KPlayer or KGame object
 	 **/
 	void setEmittingSignal(bool p)	{ mFlags.bits.emitsignal=p; }

@@ -35,7 +35,7 @@ class KMessageClientPrivate;
   It can be used to exchange messages between clients.
 
   Usually you will connect the signals broadcastReceived and forwardReceived to
-  some specific slots. In these slot methods you can analyse the messages that are
+  some specific slots. In these slot methods you can analyze the messages that are
   sent to you from other clients.
 
   To send messages to other clients, use the methods sendBroadcast() (to send to all
@@ -255,7 +255,7 @@ public:
 signals:
   /**
     This signal is emitted when the client receives a broadcast message from the
-    KMessageServer, sent by another client. Connect to this signal to analyse the
+    KMessageServer, sent by another client. Connect to this signal to analyze the
     received message and do the right reaction.
 
     senderID contains the ID of the client that sent the broadcast message. You can
@@ -277,7 +277,7 @@ signals:
 
   /**
     This signal is emitted when the client receives a forward message from the
-    KMessageServer, sent by another client. Connect to this signal to analyse the
+    KMessageServer, sent by another client. Connect to this signal to analyze the
     received message and do the right reaction.
 
     senderID contains the ID of the client that sent the broadcast message. You can
@@ -354,7 +354,7 @@ signals:
     @param msg The message that has been sent to us
     @param unknown True when KMessageClient didn't recognize the message, i.e. it contained an unknown
     message ID. If you want to add additional message types to the client, connect to this signal,
-    and if unknown is true, analyse the message by yourself. If you recognized the message,
+    and if unknown is true, analyze the message by yourself. If you recognized the message,
     set unknown to false (Otherwise a debug message will be printed).
   */
   //AB: maybe add a setNoEmit() so that the other signals can be deactivated?
@@ -368,7 +368,7 @@ protected:
     processFirstMessage, depending on whether the client is locked or a delayed
     message is still here (see lock)
 
-    It processes the message and analyses it. If it is a broadcast or a forward message from
+    It processes the message and analyzes it. If it is a broadcast or a forward message from
     another client, it emits the signal processBroadcast or processForward accordingly.
 
     If you want to treat additional server messages, you can overwrite this method. Don't
@@ -387,7 +387,7 @@ protected slots:
     This slot is called from the signal KMessageIO::received whenever a message from the
     KMessageServer arrives.
 
-    It processes the message and analyses it. If it is a broadcast or a forward message from
+    It processes the message and analyzes it. If it is a broadcast or a forward message from
     another client, it emits the signal processBroadcast or processForward accordingly.
 
     If you want to treat additional server messages, you can overwrite this method. Don't

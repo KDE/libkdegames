@@ -1377,7 +1377,7 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
 }
 
 
-// -------------------- Synchronisation -----------------------
+// -------------------- Synchronization -----------------------
 
 // this initializes a newly connected client.
 // we send the number of players (including type) as well as game status and

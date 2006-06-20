@@ -415,7 +415,7 @@ void PlayerInfos::submitScore(const Score &score) const
     }
 
     // update best score
-    Score best = score; // copy optionnal fields (there are not taken into account here)
+    Score best = score; // copy optional fields (there are not taken into account here)
     best.setScore( item("best score")->read(_id).toUInt() );
     if ( best<score ) {
         item("best score")->write(_id, score.score());

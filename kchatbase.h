@@ -174,7 +174,7 @@ class KChatBasePrivate;
  * should better replace layoutMessage instead.
  *
  * You probably don't want to use the abstract class KChatBase directly but use
- * one of the derived classess KChat or KGameChat. The latter is the
+ * one of the derived classes KChat or KGameChat. The latter is the
  * widget of choice if you develop a KGame application as you don't have to
  * do anything but providing a KGame object.
  *
@@ -467,7 +467,7 @@ protected:
 	virtual void returnPressed(const QString& text) = 0;
 
 	/**
-	 * Replace to customise the combo box.
+	 * Replace to customize the combo box.
 	 *
 	 * Default: i18n("Send to %1).arg(name)
 	 * @param name The name of the player
