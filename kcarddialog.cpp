@@ -549,7 +549,7 @@ KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
 	setButtons(Ok|Cancel);
 	setDefaultButton(Ok);
 	setModal(true);
-	enableButtonSeparator(true);
+	showButtonSeparator(true);
     KCardDialog::init();
 
     d = new KCardDialogPrivate;

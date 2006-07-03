@@ -28,6 +28,7 @@
 #include <kdebug.h>
 #include <kvbox.h>
 #include <kpagedialog.h>
+#include <kpagewidgetmodel.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
 #include "kexthighscore_gui.h"
@@ -274,11 +275,11 @@ void MultiplayerScores::show(QWidget *parent)
 
     // show the scores
     KPageDialog dialog(parent);
-	dialog.setCaption(i18n("Multiplayers Scores"));
-	dialog.setButtons(KDialog::Close);
-	dialog.setModal(true);
-	dialog.setFaceType(KPageDialog::Plain);
-	KPageWidgetItem *page = new KPageWidgetItem( new QLabel(""), "" );
+    dialog.setCaption(i18n("Multiplayers Scores"));
+    dialog.setButtons(KDialog::Close);
+    dialog.setModal(true);
+    dialog.setFaceType(KPageDialog::Plain);
+    KPageWidgetItem *page = new KPageWidgetItem( new QLabel(""), "" );
     QHBoxLayout *hbox = new QHBoxLayout(page->widget());
     hbox->setMargin(KDialog::marginHint());
     hbox->setSpacing(KDialog::spacingHint());
@@ -299,8 +300,8 @@ void MultiplayerScores::show(QWidget *parent)
         (void)new TotalMultipleScoresList(ordered, vbox);
     }
 
-    dialog.enableButtonSeparator(false);
-	dialog.addPage(page);
+    dialog.showButtonSeparator(false);
+    dialog.addPage(page);
     dialog.exec();
 }
 

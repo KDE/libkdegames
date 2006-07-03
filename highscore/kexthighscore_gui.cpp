@@ -23,7 +23,6 @@
 #include <QLayout>
 #include <qtextstream.h>
 #include <q3header.h>
-//Added by qt3to4:
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -39,8 +38,10 @@
 #include <kvbox.h>
 #include <ktempfile.h>
 #include <kio/netaccess.h>
+#include <kicon.h>
 #include <kiconloader.h>
 #include <kvbox.h>
+#include <kpagewidgetmodel.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
@@ -197,9 +198,9 @@ void HighscoresWidget::load(int rank)
     _scoresList->load(internal->scoreInfos(), rank);
     _playersList->load(internal->playerInfos(), internal->playerInfos().id());
     if (_scoresUrl)
-        _scoresUrl->setURL(internal->queryURL(ManagerPrivate::Scores).url());
+        _scoresUrl->setUrl(internal->queryURL(ManagerPrivate::Scores).url());
     if (_playersUrl)
-        _playersUrl->setURL(internal->queryURL(ManagerPrivate::Players).url());
+        _playersUrl->setUrl(internal->queryURL(ManagerPrivate::Players).url());
     if (_statsTab) _statsTab->load();
     if (_histoTab) _histoTab->load();
 }
@@ -225,7 +226,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
             QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
             QWidget *w = new QWidget();
             KPageWidgetItem *pageItem = new KPageWidgetItem( w, title);
-            pageItem->setIcon( BarIcon(icon, K3Icon::SizeLarge) );
+            pageItem->setIcon( KIcon( BarIcon(icon, K3Icon::SizeLarge) ) );
             addPage( pageItem );
             if ( i==internal->gameType() ) createPage(w);
         }
@@ -272,7 +273,7 @@ void HighscoresDialog::slotUser1()
 
 void HighscoresDialog::slotUser2()
 {
-    KUrl url = KFileDialog::getSaveURL(QString::null, QString::null, this);
+    KUrl url = KFileDialog::getSaveURL(KUrl(), QString(), this);
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, true, this) ) {
         KGuiItem gi = KStdGuiItem::save();

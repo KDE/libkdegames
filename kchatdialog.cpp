@@ -28,6 +28,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QFrame>
+#include <QLineEdit>
 
 class KChatDialogPrivate
 {

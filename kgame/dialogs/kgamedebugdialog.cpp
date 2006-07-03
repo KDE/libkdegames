@@ -133,7 +133,7 @@ KGameDebugDialog::KGameDebugDialog(KGame* g, QWidget* parent, bool modal) :
  setButtons(Close);
  setDefaultButton(Close);
  setModal(modal);
- enableButtonSeparator(true);
+ showButtonSeparator(true);
  setFaceType(KPageDialog::Tabbed);
  d = new KGameDebugDialogPrivate;
 

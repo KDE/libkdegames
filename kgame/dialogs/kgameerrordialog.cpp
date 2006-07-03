@@ -122,7 +122,7 @@ KGameErrorMessageDialog::KGameErrorMessageDialog(QWidget* parent)
 	setButtons(Ok);
 	setDefaultButton(Ok);
 	setModal(true);
-	enableButtonSeparator(true);
+	showButtonSeparator(true);
 }
 
 KGameErrorMessageDialog::~KGameErrorMessageDialog()
