@@ -166,14 +166,14 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
     // url labels
     if ( internal->isWWHSAvailable() ) {
-        KUrl url = internal->queryURL(ManagerPrivate::Scores);
+        KUrl url = internal->queryUrl(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
         connect(_scoresUrl, SIGNAL(leftClickedURL(const QString &)),
                 SLOT(showURL(const QString &)));
         vbox->addWidget(_scoresUrl);
 
-        url = internal->queryURL(ManagerPrivate::Players);
+        url = internal->queryUrl(ManagerPrivate::Players);
         _playersUrl = new KUrlLabel(url.url(),
                                     i18n("View world-wide players"), this);
         connect(_playersUrl, SIGNAL(leftClickedURL(const QString &)),
@@ -198,9 +198,9 @@ void HighscoresWidget::load(int rank)
     _scoresList->load(internal->scoreInfos(), rank);
     _playersList->load(internal->playerInfos(), internal->playerInfos().id());
     if (_scoresUrl)
-        _scoresUrl->setUrl(internal->queryURL(ManagerPrivate::Scores).url());
+        _scoresUrl->setUrl(internal->queryUrl(ManagerPrivate::Scores).url());
     if (_playersUrl)
-        _playersUrl->setUrl(internal->queryURL(ManagerPrivate::Players).url());
+        _playersUrl->setUrl(internal->queryUrl(ManagerPrivate::Players).url());
     if (_statsTab) _statsTab->load();
     if (_histoTab) _histoTab->load();
 }

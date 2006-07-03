@@ -533,7 +533,7 @@ ManagerPrivate::~ManagerPrivate()
     delete _hsConfig;
 }
 
-KUrl ManagerPrivate::queryURL(QueryType type, const QString &newName) const
+KUrl ManagerPrivate::queryUrl(QueryType type, const QString &newName) const
 {
     KUrl url = serverURL;
     QString nameItem = "nickname";
@@ -695,7 +695,7 @@ bool ManagerPrivate::modifySettings(const QString &newName,
     if (WWEnabled) {
         newPlayer = _playerInfos->key().isEmpty()
                     || _playerInfos->registeredName().isEmpty();
-        KUrl url = queryURL((newPlayer ? Register : Change), newName);
+        KUrl url = queryUrl((newPlayer ? Register : Change), newName);
         Manager::addToQueryURL(url, "comment", comment);
 
         QDomNamedNodeMap map;
@@ -832,7 +832,7 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     if ( score.type()==Lost && !trackLostGames ) return true;
     if ( score.type()==Draw && !trackDrawGames ) return true;
 
-    KUrl url = queryURL(Submit);
+    KUrl url = queryUrl(Submit);
     manager.additionalQueryItems(url, score);
     int s = (score.type()==Won ? score.score() : (int)score.type());
     QString str =  QString::number(s);
