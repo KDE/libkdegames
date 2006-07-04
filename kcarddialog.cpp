@@ -229,7 +229,7 @@ QString KCardDialog::getCardPath(const QString &carddir, int index)
     KCardDialog::init();
 
     QString entry = carddir + QString::number(index) + QLatin1String(".png");
-    return locate( "cards", entry );
+    return KStandardDirs::locate( "cards", entry );
 }
 
 const QString& KCardDialog::deck() const { return d->cDeck; }

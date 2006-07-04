@@ -368,7 +368,7 @@ Q3ListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& 
  if (text.startsWith("/me ")) {
 	// replace "/me" by a nice star. leave one space after the star
 	QPixmap pix;
-	pix.load(locate("data", QString::fromLatin1("kdegames/pics/star.png")));
+	pix.load(KStandardDirs::locate("data", QString::fromLatin1("kdegames/pics/star.png")));
 
 	//TODO KChatBasePixmap? Should change the font here!
 
