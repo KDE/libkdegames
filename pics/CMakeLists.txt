@@ -4,7 +4,7 @@
 
 ########### install files ###############
 
-install_files( ${DATA_INSTALL_DIR}/kdegames/pics FILES star.png )
+install( FILES star.png  DESTINATION  ${DATA_INSTALL_DIR}/kdegames/pics )
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 

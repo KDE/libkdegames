@@ -19,7 +19,6 @@ add_subdirectory( cards-xskat-german)
 
 ########### install files ###############
 
-install_files( ${DATA_INSTALL_DIR}/carddecks FILES  )
 
 
 
