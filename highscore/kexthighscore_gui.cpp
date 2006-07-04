@@ -273,7 +273,7 @@ void HighscoresDialog::slotUser1()
 
 void HighscoresDialog::slotUser2()
 {
-    KUrl url = KFileDialog::getSaveURL(KUrl(), QString(), this);
+    KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, true, this) ) {
         KGuiItem gi = KStdGuiItem::save();
