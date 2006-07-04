@@ -55,7 +55,6 @@ set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SR
    kchat.cpp 
    kchatdialog.cpp 
    kgameprogress.cpp 
-   kcanvasrootpixmap.cpp 
    kgamelcd.cpp )
 
 kde4_automoc(${kdegames_LIB_SRCS})
@@ -79,7 +78,6 @@ install(FILES
    kchat.h
    kchatdialog.h
    kgameprogress.h
-   kcanvasrootpixmap.h
    kgamelcd.h
    kgrid2d.h
 DESTINATION ${INCLUDE_INSTALL_DIR})
