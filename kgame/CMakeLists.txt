@@ -8,7 +8,7 @@ add_subdirectory( dialogs )
 
 ########### install files ###############
 
-install_files(/include/kgame FILES
+install(FILES
    kgame.h
    kplayer.h
    kgamenetwork.h
@@ -26,7 +26,7 @@ install_files(/include/kgame FILES
    kmessageio.h
    kmessageserver.h
    kmessageclient.h
-)
+DESTINATION ${INCLUDE_INSTALL_DIR}/kgame)
 
 
 

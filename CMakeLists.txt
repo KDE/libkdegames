@@ -70,7 +70,7 @@ install(TARGETS kdegames  DESTINATION ${LIB_INSTALL_DIR} )
 
 ########### install files ###############
 
-install_files(/include FILES
+install(FILES
    libkdegames_export.h
    kgamemisc.h
    kcarddialog.h
@@ -82,7 +82,7 @@ install_files(/include FILES
    kcanvasrootpixmap.h
    kgamelcd.h
    kgrid2d.h
-)
+DESTINATION ${INCLUDE_INSTALL_DIR})
 
 
 

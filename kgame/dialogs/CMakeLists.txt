@@ -1,6 +1,6 @@
 
 
-install_files( /include/kgame FILES kgamedialog.h kgameconnectdialog.h kgameerrordialog.h kgamedebugdialog.h kgamedialogconfig.h )
+install( FILES kgamedialog.h kgameconnectdialog.h kgameerrordialog.h kgamedebugdialog.h kgamedialogconfig.h  DESTINATION  ${INCLUDE_INSTALL_DIR}/kgame )
 
 
 
