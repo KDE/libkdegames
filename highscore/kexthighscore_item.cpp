@@ -28,7 +28,6 @@
 #include <kdebug.h>
 #include <kvbox.h>
 #include <kpagedialog.h>
-#include <kpagewidgetmodel.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
 #include "kexthighscore_gui.h"

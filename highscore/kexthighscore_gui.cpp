@@ -41,7 +41,6 @@
 #include <kicon.h>
 #include <kiconloader.h>
 #include <kvbox.h>
-#include <kpagewidgetmodel.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
