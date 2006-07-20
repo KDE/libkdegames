@@ -123,8 +123,11 @@ public:
     static KAction *load(const QObject *recvr = 0, const char *slot = 0,
                          KActionCollection *parent = 0, const char *name = 0L );
 
+    // FIXME why not to delete this and use just KStdAction::openRecent???
+    // loadRecent seems to mimic its behaviour
     /**
      * Load a recently loaded game.
+     * The signature of slot is of the form slotURLSelected(const KUrl&)
      */
     static KRecentFilesAction *loadRecent(const QObject *recvr = 0, const char *slot = 0,
                          KActionCollection *parent = 0, const char *name = 0L );
@@ -243,7 +246,7 @@ public:
                           KActionCollection *parent = 0, const char *name = 0L );
 
     /**
-     * Choose game type.
+     * Choose game type. The signature of slot is of the form slotGameTypeChosen(int)
      * @since 3.2
      */
     static KSelectAction *chooseGameType(const QObject *recvr = 0, const char *slot = 0,

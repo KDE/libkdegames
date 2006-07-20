@@ -111,24 +111,26 @@ KAction* KStdGameAction::create(StdGameAction id, const char *name,
         const char *n = name ? name : pInfo->psName;
 		switch( id ) {
         case LoadRecent:
-            pAction =
-                new KRecentFilesAction(sLabel, cut, recvr, slot, parent, n);
+            pAction = new KRecentFilesAction(sLabel, parent, n);
+            pAction->setShortcut( cut );
+            QObject::connect( pAction, SIGNAL(urlSelected(const KUrl&)), recvr, slot);
             break;
         case Pause:
         case Demo:
-			pAction = new KToggleAction(KIcon(pInfo->psIconName), sLabel, parent, n);
-			QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
-			pAction->setShortcut(cut);
-			break;
-        case ChooseGameType:
-            pAction = new KSelectAction( sLabel, pInfo->psIconName, cut,
-                                         recvr, slot, parent, n);
+            pAction = new KToggleAction(KIcon(pInfo->psIconName), sLabel, parent, n);
+            QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
+            pAction->setShortcut(cut);
             break;
-		 default:
-			pAction = new KAction(KIcon(pInfo->psIconName),  sLabel, parent, n);
-			QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
-			pAction->setShortcut(cut);
-			break;
+        case ChooseGameType:
+            pAction = new KSelectAction( KIcon(pInfo->psIconName), sLabel, parent, n);
+            pAction->setShortcut( cut );
+            QObject::connect( pAction, SIGNAL( triggered(int) ), recvr, slot );
+            break;
+        default:
+            pAction = new KAction(KIcon(pInfo->psIconName),  sLabel, parent, n);
+            QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
+            pAction->setShortcut(cut);
+            break;
 		}
 	}
 	return pAction;

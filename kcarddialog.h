@@ -103,11 +103,9 @@ public:
    * Constructs a card deck selection dialog.
    *
    * @param parent The parent widget of the dialog, if any.
-   * @param name The name of the dialog.
    * @param flags Specifies whether the dialog is modal or not.
    */
-   KCardDialog (QWidget* parent = NULL,const char* name = NULL,
-                CardFlags flags = Both);
+   KCardDialog (QWidget* parent = NULL, CardFlags flags = Both);
    /**
    * Destructs a card deck selection dialog.
    */

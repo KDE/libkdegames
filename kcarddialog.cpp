@@ -109,7 +109,7 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
                              CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir,
 			     double* pScale, KConfig* pConf)
 {
-    KCardDialog dlg(pParent, "dlg", pFlags);
+    KCardDialog dlg(pParent, pFlags);
 
     dlg.setDeck(pDeck);
     dlg.setCardDir(pCardDir);
@@ -542,7 +542,7 @@ KCardDialog::~KCardDialog()
 
 
 // Create the dialog
-KCardDialog::KCardDialog( QWidget *parent, const char *name, CardFlags mFlags)
+KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
     : KDialog( parent)
 {
 	setCaption(i18n("Carddeck Selection"));
