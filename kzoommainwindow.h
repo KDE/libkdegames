@@ -26,15 +26,19 @@
 #include <libkdegames_export.h>
 
 class KToggleAction;
+class Zoomable;
 
 /**
  * KZoomMainWindow is a main window of fixed size. Its size can be
  * modified with the "zoom in"/"zoom out" actions.
  *
- * It manages one or several widgets: their adjustSize() method is
- * called whenever the zoom level is changed.
- * The usual implementation for those widget is to redefine adjustSize()
- * with code like:
+ * It manages one or several objects of Zoomable type: 
+ * their zoomChanged() method is called whenever the zoom
+ * level is changed.
+ * To react to zoom events make your widget (or whatever)
+ * additionally inherit from Zoomable class 
+ * and reimplement zoomChanged() virtual functon.
+ * The usual implementation looks like this
  * /code
  * setFixedSize(newsize);
  * /endcode
@@ -49,11 +53,14 @@ public:
   /** Constructor. */
   KZoomMainWindow(uint minZoom, uint maxZoom, uint zoomStep);
 
-  /** Add a widget to be managed i.e. the adjustSize() method of the
-   * widget is called whenever the zoom is changed.
-   * This function assumes that the topLevelWidget() is the KZoomMainWindow.
+  /** Add a zoomable to be managed i.e. the zoomChanged() method of the
+   * passed object is called whenever the zoom is changed.
    */
-  static void addWidget(QWidget *widget);
+  void addZoomable(Zoomable *z);
+  /**
+   *  Remove a zoomable from a list of managed objects.
+   */
+  void removeZoomable(Zoomable *z);
                   
   uint zoom() const { return _zoom; }
   
@@ -112,12 +119,9 @@ protected:
    */
   virtual bool menubarVisibleSetting() const = 0;
 
-private slots:
-  void widgetDestroyed();
-  
 private:
   uint _zoom, _zoomStep, _minZoom, _maxZoom;
-  QList<QWidget*> _widgets;
+  QList<Zoomable*> _zoomables;
   KAction *_zoomInAction, *_zoomOutAction;
   KToggleAction *_menu;
   
@@ -125,6 +129,24 @@ private:
   class KZoomMainWindowPrivate;
   KZoomMainWindowPrivate *d;
    */
+};
+
+/**
+ *  Interface class for widgets intended to be a childs
+ *  of KZoomMainWindow which support zooming.
+ *  Inherit from this class, reimplement zoomChanged(),
+ *  call KZoomMainWindow::addZoomable() somewhere and you're done.
+ */
+class Zoomable
+{
+public:
+    Zoomable() { }
+    virtual ~Zoomable() { }
+    /**
+     *  This method will be called by KZoomMainWindow when
+     *  zoom actions will be triggered
+     */
+    virtual void zoomChanged() { }
 };
 
 #endif

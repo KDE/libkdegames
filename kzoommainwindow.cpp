@@ -25,6 +25,7 @@
 #include <ktoggleaction.h>
 #include <kmenubar.h>
 #include <kxmlguifactory.h>
+#include <kdebug.h>
 
 #include <QEvent>
 
@@ -61,20 +62,14 @@ void KZoomMainWindow::init(const char *popupName)
   }
 }
 
-void KZoomMainWindow::addWidget(QWidget *widget)
+void KZoomMainWindow::addZoomable(Zoomable *z)
 {
-  widget->adjustSize();
-  QWidget *tlw = widget->topLevelWidget();
-  KZoomMainWindow *zm = static_cast<KZoomMainWindow *>(qobject_cast<KZoomMainWindow*>(tlw)); 
-    //static_cast<KZoomMainWindow *>(tlw->qt_cast("KZoomMainWindow"));
-  Q_ASSERT(zm);
-  zm->_widgets.append(widget);
-  connect(widget, SIGNAL(destroyed()), zm, SLOT(widgetDestroyed()));
+  _zoomables.append(z);
 }
 
-void KZoomMainWindow::widgetDestroyed()
+void KZoomMainWindow::removeZoomable(Zoomable *z)
 {
-  _widgets.removeAll(static_cast<QWidget *>(sender()));
+  _zoomables.removeAll(z);
 }
 
 bool KZoomMainWindow::eventFilter(QObject *o, QEvent *e)
@@ -91,8 +86,8 @@ void KZoomMainWindow::setZoom(uint zoom)
   _zoom = zoom;
   writeZoomSetting(_zoom);
 
-  foreach(QWidget* wid, _widgets)
-    wid->adjustSize();; 
+  foreach(Zoomable* wid, _zoomables)
+    wid->zoomChanged(); 
   _zoomOutAction->setEnabled( _zoom>_minZoom );
   _zoomInAction->setEnabled( _zoom<_maxZoom );
 }
