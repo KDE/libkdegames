@@ -25,6 +25,7 @@
 #include <ktoggleaction.h>
 #include <kconfig.h>
 #include <kdebug.h>
+#include <kicon.h>
 
 
 KStdGameAction::KStdGameAction()
