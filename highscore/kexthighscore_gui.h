@@ -28,6 +28,7 @@
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kpagedialog.h>
+#include <QList>
 
 #include "kexthighscore.h"
 
@@ -119,12 +120,12 @@ class HighscoresDialog : public KPageDialog
     void slotUser1();
     void slotUser2();
     void tabChanged(int i) { _tab = i; }
-    void createPage(QWidget *);
+    void highscorePageChanged(KPageWidgetItem *newpage, KPageWidgetItem *before);
 
  private:
     int _rank, _tab;
     QWidget *_current;
-    QVector<HighscoresWidget *> _widgets;
+    QList<KPageWidgetItem*> _pages;
 };
 
 //-----------------------------------------------------------------------------

@@ -168,14 +168,14 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
         KUrl url = internal->queryUrl(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
-        connect(_scoresUrl, SIGNAL(leftClickedURL(const QString &)),
+        connect(_scoresUrl, SIGNAL(leftClickedUrl(const QString &)),
                 SLOT(showURL(const QString &)));
         vbox->addWidget(_scoresUrl);
 
         url = internal->queryUrl(ManagerPrivate::Players);
         _playersUrl = new KUrlLabel(url.url(),
                                     i18n("View world-wide players"), this);
-        connect(_playersUrl, SIGNAL(leftClickedURL(const QString &)),
+        connect(_playersUrl, SIGNAL(leftClickedUrl(const QString &)),
                 SLOT(showURL(const QString &)));
         vbox->addWidget(_playersUrl);
     }
@@ -217,57 +217,46 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
         setFaceType( KPageDialog::Plain );
     setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), "configure") );
     setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
-    _widgets.resize(internal->nbGameTypes());
+    connect( this, SIGNAL(user1Clicked()), SLOT(slotUser1()) );
+    connect( this, SIGNAL(user2Clicked()), SLOT(slotUser2()) );
 
-    if ( internal->nbGameTypes()>1 ) {
-        for (uint i=0; i<internal->nbGameTypes(); i++) {
-            QString title = internal->manager.gameTypeLabel(i, Manager::I18N);
-            QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
-            QWidget *w = new QWidget();
-            KPageWidgetItem *pageItem = new KPageWidgetItem( w, title);
-            pageItem->setIcon( KIcon( BarIcon(icon, K3Icon::SizeLarge) ) );
-            addPage( pageItem );
-            if ( i==internal->gameType() ) createPage(w);
-        }
-
-        connect(this, SIGNAL( currentPageChanged(QWidget *)),
-                SLOT(createPage(QWidget *)));
-#warning "kde4: port it"        
-		//showPage(internal->gameType());
-    } else {
-        QWidget *main = new QWidget( this );
-        setMainWidget( main );
-        QVBoxLayout *vbox = new QVBoxLayout(main);
-        createPage(main);
-        vbox->addWidget(_widgets[0]);
-        setMainWidget(_widgets[0]);
+    for (uint i=0; i<internal->nbGameTypes(); i++) {
+        QString title = internal->manager.gameTypeLabel(i, Manager::I18N);
+        QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
+        HighscoresWidget *hsw = new HighscoresWidget(0);
+        KPageWidgetItem *pageItem = new KPageWidgetItem( hsw, title);
+        pageItem->setIcon( KIcon( BarIcon(icon, K3Icon::SizeLarge) ) );
+        addPage( pageItem );
+        _pages.append(pageItem);
+        connect(hsw, SIGNAL(tabChanged(int)), SLOT(tabChanged(int)));
     }
+
+    connect(this, SIGNAL( currentPageChanged(KPageWidgetItem *, KPageWidgetItem *)),
+            SLOT(highscorePageChanged(KPageWidgetItem *, KPageWidgetItem *)));
+    setCurrentPage(_pages[internal->gameType()]);
 }
 
-void HighscoresDialog::createPage(QWidget *page)
+void HighscoresDialog::highscorePageChanged(KPageWidgetItem* page, KPageWidgetItem* pageold)
 {
+    Q_UNUSED(pageold);
+    int idx = _pages.indexOf( page );
+    Q_ASSERT(idx != -1);
+
     internal->hsConfig().readCurrentConfig();
-    _current = page;
-#warning "kde4: port it"
-#if 0
-    bool several = ( internal->nbGameTypes()>1 );
-    int i = (several ? pageIndex(page) : 0);
-    if ( _widgets[i]==0 ) {
-        _widgets[i] = new HighscoresWidget(page);
-        connect(_widgets[i], SIGNAL(tabChanged(int)), SLOT(tabChanged(int)));
-    }
     uint type = internal->gameType();
-    if (several) internal->setGameType(i);
-    _widgets[i]->load(uint(i)==type ? _rank : -1);
+    bool several = ( internal->nbGameTypes()>1 );
+    if (several)
+        internal->setGameType(idx);
+    HighscoresWidget *hsw = static_cast<HighscoresWidget*>(page->widget());
+    hsw->load(uint(idx)==type ? _rank : -1);
     if (several) setGameType(type);
-    _widgets[i]->changeTab(_tab);
-#endif
+    hsw->changeTab(_tab);
 }
 
 void HighscoresDialog::slotUser1()
 {
     if ( KExtHighscore::configure(this) )
-        createPage(_current);
+        highscorePageChanged(currentPage(), 0);//update data
 }
 
 void HighscoresDialog::slotUser2()

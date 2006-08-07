@@ -90,6 +90,7 @@ void KZoomMainWindow::setZoom(uint zoom)
     wid->zoomChanged(); 
   _zoomOutAction->setEnabled( _zoom>_minZoom );
   _zoomInAction->setEnabled( _zoom<_maxZoom );
+  adjustSize();
 }
 
 void KZoomMainWindow::zoomIn()
