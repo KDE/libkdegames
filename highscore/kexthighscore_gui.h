@@ -22,7 +22,6 @@
 
 #include <QCheckBox>
 #include <QLabel>
-#include <q3vbox.h>
 #include <qtabwidget.h>
 #include <kurllabel.h>
 #include <k3listview.h>
