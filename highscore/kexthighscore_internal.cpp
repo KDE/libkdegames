@@ -318,6 +318,8 @@ PlayerInfos::PlayerInfos()
     if (_oldLocalPlayer) { // player already exists in local config file
         // copy player data
         QString prefix = QString("%1_").arg(_oldLocalId+1);
+#warning "kde4 port g.config()->entryMap";
+#if 0
         QMap<QString, QString> entries =
             cg.config()->entryMap("KHighscore_players");
         QMap<QString, QString>::const_iterator it;
@@ -329,7 +331,8 @@ PlayerInfos::PlayerInfos()
                     internal->hsConfig().writeEntry(_id+1, name, it.data());
             }
         }
-    }
+#endif
+    }    
 #else
     _newPlayer = !_oldLocalPlayer;
     if (_oldLocalPlayer) _id = _oldLocalId;
