@@ -47,7 +47,6 @@ private:
 
 class KRawConfig : public KSimpleConfig
 {
-    Q_OBJECT
 public:
     KRawConfig(int fd, bool readOnly)
         : KSimpleConfig(new KConfigRawBackEnd(this, fd), readOnly) {}
