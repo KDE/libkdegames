@@ -43,7 +43,7 @@ class KMessageServerPrivate;
 
   The messages are always packages of an arbitrary length. The format of the messages
   is given below. All the data is stored and received with QDataStream, to be
-  platform independant.
+  platform independent.
 
   Setting up a KMessageServer can be done like this:
 
@@ -69,7 +69,7 @@ class KMessageServerPrivate;
   One of the clients (the admin) has a special administration right. Some of the
   administration messages can only be used with him. The admin can give the admin
   status to another client. You can send a message to the admin by using clientID 0.
-  This is always interpreted as the admin client, independant of its real clientID.
+  This is always interpreted as the admin client,  of its real clientID.
 
   Here is a list of the messages the KMessageServer understands:
   &lt;&lt; means, the value is inserted into the QByteArray using QDataStream. The

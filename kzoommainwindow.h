@@ -132,7 +132,7 @@ private:
 };
 
 /**
- *  Interface class for widgets intended to be a childs
+ *  Interface class for widgets intended to be children
  *  of KZoomMainWindow which support zooming.
  *  Inherit from this class, reimplement zoomChanged(),
  *  call KZoomMainWindow::addZoomable() somewhere and you're done.
