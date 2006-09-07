@@ -259,6 +259,7 @@ void KGameProgress::drawText(QPainter *p)
 
 void KGameProgress::paintEvent( QPaintEvent *e )
 {
+	Q_UNUSED(e);
 	QPainter p(this);
 	
 	QRect cr = contentsRect(), er = cr;
