@@ -19,6 +19,7 @@
  * KGameProgress -- a progress indicator widget for KDE.
  */
 
+#include <QPaintEvent>
 #include <QPainter>
 #include <QPixmap>
 #include <QString>
@@ -256,8 +257,10 @@ void KGameProgress::drawText(QPainter *p)
 	p->drawText(r, Qt::AlignCenter, s);
 }
 
-void KGameProgress::drawContents(QPainter *p)
+void KGameProgress::paintEvent( QPaintEvent *e )
 {
+	QPainter p(this);
+	
 	QRect cr = contentsRect(), er = cr;
 	fr = cr;
         QBrush fb(bar_color), eb(palette().color(backgroundRole()));
@@ -279,10 +282,10 @@ void KGameProgress::drawContents(QPainter *p)
 				er.setBottom(fr.top() - 1);
 			}
 
-			p->setBrushOrigin(cr.topLeft());
-			p->fillRect(fr, fb);
+			p.setBrushOrigin(cr.topLeft());
+			p.fillRect(fr, fb);
 
-			p->fillRect(er, eb);
+			p.fillRect(er, eb);
 
 			break;
 
@@ -306,11 +309,11 @@ void KGameProgress::drawContents(QPainter *p)
 				max = (cr.height() - margin) / (fr.height() + margin) + 1;
 				num = recalcValue(max);
 			}
-			p->setClipRect(cr.x() + margin, cr.y() + margin,
+			p.setClipRect(cr.x() + margin, cr.y() + margin,
 			               cr.width() - margin, cr.height() - margin);
 			for (int i = 0; i < num; i++) {
-				p->setBrushOrigin(fr.topLeft());
-				p->fillRect(fr, fb);
+				p.setBrushOrigin(fr.topLeft());
+				p.fillRect(fr, fb);
 				fr.translate(dx, dy);
 			}
 			
@@ -320,8 +323,8 @@ void KGameProgress::drawContents(QPainter *p)
 				else
 					er.setBottom(fr.bottom() + 1);
 				if (!er.isNull()) {
-					p->setBrushOrigin(cr.topLeft());
-					p->fillRect(er, eb);
+					p.setBrushOrigin(cr.topLeft());
+					p.fillRect(er, eb);
 				}
 			}
 
@@ -329,7 +332,7 @@ void KGameProgress::drawContents(QPainter *p)
 	}
 
 	if (text_enabled && bar_style != Blocked)
-		drawText(p);
+		drawText(&p);
 }
 
 void KGameProgress::setFormat(const QString & format)

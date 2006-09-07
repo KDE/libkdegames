@@ -226,7 +226,7 @@ protected:
   void paletteChange( const QPalette & );
   /**
    */
-  void drawContents( QPainter * );
+  void paintEvent( QPaintEvent *e );
 
 private slots:
   void paletteChange();
