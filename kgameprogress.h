@@ -25,7 +25,7 @@
 #define _KPROGRES_H "$Id$"
 
 #include <QFrame>
-#include <q3rangecontrol.h>
+#include <QAbstractSlider>
 #include <libkdegames_export.h>
 /**
  * @short A progress indicator widget.
@@ -47,11 +47,13 @@
  * @author Martynas Kunigelis
  * @version $Id$
  */
-class KDEGAMES_EXPORT KGameProgress : public QFrame, public Q3RangeControl
+class KDEGAMES_EXPORT KGameProgress : public QFrame
 {
   Q_OBJECT
   Q_ENUMS( BarStyle )
   Q_PROPERTY( int value READ value WRITE setValue)
+  Q_PROPERTY( int mininum READ minimum WRITE setMinimum)
+  Q_PROPERTY( int maximum READ maximum WRITE setMaximum)
   Q_PROPERTY( BarStyle barStyle READ barStyle WRITE setBarStyle )
   Q_PROPERTY( QColor barColor READ barColor WRITE setBarColor )
   Q_PROPERTY( QPixmap barPixmap READ barPixmap WRITE setBarPixmap )
@@ -76,12 +78,6 @@ public:
    * Construct a progress bar with orientation @p orient.
    */
   KGameProgress(Qt::Orientation orient, QWidget *parent=0);
-
-  /**
-   * Construct a progress bar with minimum, maximum and initial values.
-   */
-  KGameProgress(int minValue, int maxValue, int value, Qt::Orientation,
-                QWidget *parent=0);
 
   /**
    * Destruct the progress bar.
@@ -143,7 +139,22 @@ public:
    *
    * @see setValue()
    */
-  int value() const { return Q3RangeControl::value(); }
+  int value() const { return slider->value(); }
+
+  /**
+   * Retrieve the minimum value
+   *
+   * @see setMinimum()
+   */
+  int minimum() const { return slider->minimum(); }
+
+  /**
+   * Retrieve the maximum value
+   *
+   * @see setMaximum()
+   */
+  int maximum() const { return slider->maximum(); }
+
   /**
    * Retrive the orientation of the progress bar.
    *
@@ -197,6 +208,20 @@ public slots:
   void setValue(int value);
 
   /**
+   * Set the minimum value of the progress bar to @p value.
+   *
+   * The maximum value may be changed to keep the range valid.
+   */
+  void setMinimum(int value);
+
+  /**
+   * Set the maximum value of the progress bar to @p value.
+   *
+   * The minimum value may be changed to keep the range valid.
+   */
+  void setMaximum(int value);
+
+  /**
    * Advance the progress bar by @p prog.
    *
    * This method is
@@ -205,6 +230,10 @@ public slots:
    */
   void advance(int prog);
 
+  /**
+   */
+  void valueChange(int newValue);
+
 signals:
   /**
    * Emitted when the state of the progress bar changes.
@@ -212,12 +241,6 @@ signals:
   void percentageChanged(int);
 
 protected:
-  /**
-   */
-  void valueChange();
-  /**
-   */
-  void rangeChange();
   /**
    */
   void styleChange( QStyle& );
@@ -239,9 +262,9 @@ private:
   QColor    text_color;
   QRect     fr;
   BarStyle  bar_style;
-  Qt::Orientation orient;
   bool      text_enabled;
   QString   format_;
+  QAbstractSlider *slider;
   void      initialize();
   int       recalcValue(int);
   void      drawText(QPainter *);

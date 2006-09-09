@@ -32,32 +32,22 @@
 #include <kapplication.h>
 
 KGameProgress::KGameProgress(QWidget *parent)
-	: QFrame(parent),
-	Q3RangeControl(0, 100, 1, 10, 0),
-	orient(Qt::Horizontal)
+	: QFrame(parent)
 {
 	initialize();
+	slider->setOrientation(Qt::Horizontal);
 }
 
 KGameProgress::KGameProgress(Qt::Orientation orientation, QWidget *parent)
-	: QFrame(parent),
-	Q3RangeControl(0, 100, 1, 10, 0),
-	orient(orientation)
+	: QFrame(parent)
 {
 	initialize();
-}
-
-KGameProgress::KGameProgress(int minValue, int maxValue, int value,
-                     Qt::Orientation orientation, QWidget *parent)
-	: QFrame(parent),
-	Q3RangeControl(minValue, maxValue, 1, 10, value),
-	orient(orientation)
-{
-	initialize();
+	slider->setOrientation(orientation);
 }
 
 KGameProgress::~KGameProgress()
 {
+	delete slider;
 	delete bar_pixmap;
 }
 
@@ -68,11 +58,18 @@ void KGameProgress::advance(int offset)
 
 void KGameProgress::initialize()
 {
+	slider = new QAbstractSlider(this);
+
+	slider->setMinimum(0);
+	slider->setMaximum(100);
+	slider->setValue(0);
+
 	format_ = "%p%";
 	use_supplied_bar_color = false;
 	bar_pixmap = 0;
 	bar_style = Solid;
 	text_enabled = true;
+	connect(slider, SIGNAL(valueChanged(int)), this, SLOT(valueChange(int)));
 	connect(kapp, SIGNAL(appearanceChanged()), this, SLOT(paletteChange()));
 	paletteChange();
 }
@@ -120,15 +117,25 @@ void KGameProgress::setBarStyle(BarStyle style)
 
 void KGameProgress::setOrientation(Qt::Orientation orientation)
 {
-	if (orient != orientation) {
-		orient = orientation;
+	if (this->orientation() != orientation) {
+		setOrientation(orientation);
 		update();
 	}
 }
 
 void KGameProgress::setValue(int value)
 {
-	Q3RangeControl::setValue(value);
+	slider->setValue( value );
+}
+
+void KGameProgress::setMinimum(int value)
+{
+	slider->setMinimum( value );
+}
+
+void KGameProgress::setMaximum(int value)
+{
+	slider->setMaximum( value );
 }
 
 void KGameProgress::setTextEnabled(bool enable)
@@ -179,7 +186,7 @@ QSizePolicy KGameProgress::sizePolicy() const
 
 Qt::Orientation KGameProgress::orientation() const
 {
-	return orient;
+	return slider->orientation();
 }
 
 KGameProgress::BarStyle KGameProgress::barStyle() const
@@ -189,19 +196,15 @@ KGameProgress::BarStyle KGameProgress::barStyle() const
 
 int KGameProgress::recalcValue(int range)
 {
-	int abs_value = value() - minValue();
-	int abs_range = maxValue() - minValue();
+	int abs_value = value() - minimum();
+	int abs_range = maximum() - minimum();
 	return abs_range ? range * abs_value / abs_range : 0;
 }
 
-void KGameProgress::valueChange()
+void KGameProgress::valueChange(int newValue)
 {
-	repaint(contentsRect());
-	emit percentageChanged(recalcValue(100));
-}
+	Q_UNUSED(newValue);
 
-void KGameProgress::rangeChange()
-{
 	repaint(contentsRect());
 	emit percentageChanged(recalcValue(100));
 }
@@ -244,7 +247,7 @@ void KGameProgress::drawText(QPainter *p)
 
 	s.replace(QRegExp(QString::fromLatin1("%p")), QString::number(recalcValue(100)));
 	s.replace(QRegExp(QString::fromLatin1("%v")), QString::number(value()));
-	s.replace(QRegExp(QString::fromLatin1("%m")), QString::number(maxValue()));
+	s.replace(QRegExp(QString::fromLatin1("%m")), QString::number(maximum()));
 
 	p->setPen(text_color);
 	QFont font = p->font();
@@ -259,7 +262,10 @@ void KGameProgress::drawText(QPainter *p)
 
 void KGameProgress::paintEvent( QPaintEvent *e )
 {
-	Q_UNUSED(e);
+	//paint the frame
+	QFrame::paintEvent(e);
+
+	//now for the inside of the Widget
 	QPainter p(this);
 	
 	QRect cr = contentsRect(), er = cr;
@@ -275,7 +281,7 @@ void KGameProgress::paintEvent( QPaintEvent *e )
 
 	switch (bar_style) {
 		case Solid:
-			if (orient == Qt::Horizontal) {
+			if (orientation() == Qt::Horizontal) {
 				fr.setWidth(recalcValue(cr.width()));
 				er.setLeft(fr.right() + 1);
 			} else {
@@ -293,7 +299,7 @@ void KGameProgress::paintEvent( QPaintEvent *e )
 		case Blocked:
 			const int margin = 2;
 			int max, num, dx, dy;
-			if (orient == Qt::Horizontal) {
+			if (orientation() == Qt::Horizontal) {
 				fr.setHeight(cr.height() - 2 * margin);
 				fr.setWidth((int)(0.67 * fr.height()));
 				fr.moveTopLeft(QPoint(cr.left() + margin, cr.top() + margin));
@@ -319,7 +325,7 @@ void KGameProgress::paintEvent( QPaintEvent *e )
 			}
 			
 			if (num != max) {
-				if (orient == Qt::Horizontal)
+				if (orientation() == Qt::Horizontal)
 					er.setLeft(fr.right() + 1);
 				else
 					er.setBottom(fr.bottom() + 1);
