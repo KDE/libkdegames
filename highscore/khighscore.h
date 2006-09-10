@@ -99,7 +99,6 @@ public:
          * when the configuration has been set to use a system-wide file. This
          * is convenient for converting highscores from legacy applications.
 	 * @param parent parent widget for this widget
-	 * @since 3.2
          */
         KHighscore(bool forceLocal, QObject *parent);
 
@@ -107,11 +106,10 @@ public:
          * Read the current state of the highscore file. Remember that when
          * it's not locked for writing, this file can change at any time.
          * (This method is only useful for a system-wide highscore file).
-	 * @since 3.2
          */
         void readCurrentConfig();
 
-        /** @since 3.2
+        /**
          * This method open the system-wide highscore file using the effective
          * group id of the game executable (which should be "games"). The
          * effective group id is completely dropped afterwards.
@@ -123,7 +121,7 @@ public:
          */
         static void init(const char *appname);
 
-        /** @since 3.2
+        /**
          * Lock the system-wide highscore file for writing (does nothing and
          * return true if the local file is used).
          * You should perform writing without GUI interaction to avoid
@@ -144,14 +142,12 @@ public:
          * Effectively write and unlock the system-wide highscore file
          * (@see lockForWriting).
          * If using a local highscore file, it will sync the config.
-	 * @since 3.2
          */
         void writeAndUnlock();
 
         /**
          * @return true if the highscore file is locked or if a local
          * file is used.
-	 *  @since 3.2
          */
         bool isLocked() const;
 

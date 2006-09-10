@@ -113,13 +113,11 @@ public:
   quint32 id ();
 
   /**
-    @since 3.2
     @return 0 in the default implementation. Reimplemented in @ref KMessageSocket.
   */
   virtual quint16 peerPort () const { return 0; }
 
   /**
-    @since 3.2
     @return "localhost" in the default implementation. Reimplemented in @ref KMessageSocket
   */
   virtual QString peerName () const { return QString::fromLatin1("localhost"); }
@@ -230,13 +228,11 @@ public:
   virtual int rtti() const {return 1;}
 
   /**
-    @since 3.2
     @return The port that this object is connected to. See QSocket::peerPort
   */
   virtual quint16 peerPort () const;
 
   /**
-    @since 3.2
     @return The hostname this object is connected to. See QSocket::peerName.
   */
   virtual QString peerName () const;

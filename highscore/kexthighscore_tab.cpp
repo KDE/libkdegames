@@ -101,7 +101,7 @@ QString AdditionalTab::percent(uint n, uint total, bool withBraces)
 {
     if ( n==0 || total==0 ) return QString::null;
     QString s =  QString("%1%").arg(100.0 * n / total, 0, 'f', 1);
-    return (withBraces ? QString("(") + s + ")" : s);
+    return (withBraces ? QString('(') + s + ')' : s);
 }
 
 void AdditionalTab::load()

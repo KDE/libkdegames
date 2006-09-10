@@ -68,7 +68,7 @@ void ItemContainer::setItem(Item *item)
 QString ItemContainer::entryName() const
 {
     if ( _subGroup.isEmpty() ) return _name;
-    return _name + "_" + _subGroup;
+    return _name + '_' + _subGroup;
 }
 
 QVariant ItemContainer::read(uint i) const
@@ -768,7 +768,7 @@ void ManagerPrivate::setGameType(uint type)
     QString lab = manager.gameTypeLabel(_gameType, Manager::Standard);
     if ( !lab.isEmpty() ) {
         _playerInfos->setSubGroup(lab);
-        str += "_" + lab;
+        str += '_' + lab;
     }
     _scoreInfos->setGroup(str);
 }

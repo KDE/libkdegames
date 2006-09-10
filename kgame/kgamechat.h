@@ -62,7 +62,6 @@ public:
 	 * @overload
 	 * This constructs a widget that is not usable. You must call at least
 	 * setGame, setFromPlayer and setMessageId manually.
-	 * @since 3.2
 	 **/
 	KGameChat(QWidget* parent);
 
@@ -106,7 +105,6 @@ public:
 	 * useful to change the message id.
 	 *
 	 * See also @ref messageId
-	 * @since 3.2
 	 **/
 	void setMessageId(int msgid);
 

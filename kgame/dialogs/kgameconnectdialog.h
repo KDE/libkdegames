@@ -64,7 +64,6 @@ public:
 	 * Sets DNS-SD service type, both for publishing and browsing
 	 * @param type Service type (something like _kwin4._tcp). 
 	 * It should be unique for application.
-	 * @since 3.4
 	 **/
 	void setType(const QString& type);
 	

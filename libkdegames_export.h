@@ -1,6 +1,6 @@
 /*
     This file is part of kdegames
-    Copyright (c) 2006 kdegames Team
+    Copyright (c) 2006 kdegames Team <kde-games-devel@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public

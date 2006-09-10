@@ -131,7 +131,7 @@ QString Item::pretty(uint, const QVariant &value) const
     case OneDecimal:
         return QString::number(value.toDouble(), 'f', 1);
     case Percentage:
-        return QString::number(value.toDouble(), 'f', 1) + "%";
+        return QString::number(value.toDouble(), 'f', 1) + '%';
     case MinuteTime:
         return timeFormat(value.toUInt());
     case DateTime:

@@ -175,7 +175,6 @@ class HIGHSCORE_EXPORT Manager
     void setTrackLostGames(bool track);
     
     /**
-     * @since 3.3
      * Set if the number of "draw" games should be track for the world-wide
      * highscores statistics. By default, there is no tracking.
      * False by default.
@@ -185,7 +184,6 @@ class HIGHSCORE_EXPORT Manager
     void setTrackDrawGames(bool track);
 
     /**
-     * @since 3.3
      * Set if the statistics tab should be shown in the highscores dialog.
      * You only want to show this tab if it makes sense to lose or to win the
      * game (for e.g. it makes no sense for a tetris game but it does for a
@@ -197,7 +195,6 @@ class HIGHSCORE_EXPORT Manager
     void setShowStatistics(bool show);
     
     /**
-     * @since 3.3
      * Set if draw games statistics should be shown (enable this if
      * draws are possible in your game).
      * False by default.

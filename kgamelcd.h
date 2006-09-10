@@ -36,8 +36,6 @@ class QTimer;
  * <li> Its foreground and background colors can easily be modified. </li>
  * <li> It can be highlighted for a short time. </li>
  * </ul>
- *
- * @since 3.2
  */
 class KDEGAMES_EXPORT KGameLCD : public QLCDNumber
 {
@@ -120,8 +118,6 @@ private:
 /**
  * This class is a digital clock widget. It has a maximum duration of
  * 3599 seconds (one hour) and it gets updated every second.
- *
- * @since 3.2
  */
 class KDEGAMES_EXPORT KGameLCDClock : public KGameLCD
 {
@@ -184,8 +180,6 @@ private:
 /**
  * This widget holds a list of @ref QLCDNumber arranged in a vertical layout.
  * It also shows a label at the top of the list.
- *
- * @since 3.2
  */
 class KDEGAMES_EXPORT KGameLCDList : public QWidget
 {

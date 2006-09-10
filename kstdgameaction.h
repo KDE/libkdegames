@@ -59,14 +59,13 @@ public:
         Repeat, Undo, Redo, Roll, EndTurn,
         // Settings menu
         Carddecks,
-        ChooseGameType, // @since 3.2
-        ConfigureHighscores, // @since 3.2
-
-        Restart, // @since 3.2
-        Hint, // @since 3.2
-        Demo, // @since 3.2
-        Solve, // @since 3.2
-        ActionNone // @since 3.2
+        ChooseGameType,
+        ConfigureHighscores,
+        Restart,
+        Hint,
+        Demo,
+        Solve,
+        ActionNone
     };
 
     KStdGameAction();
@@ -75,16 +74,12 @@ public:
     /**
      * Creates an action corresponding to the
      * KStdAction::StdAction enum.
-     * @since 3.2
      */
     static KAction* create( StdGameAction id, const char *name,
 			    const QObject *recvr, const char *slot,
 			    KActionCollection* parent );
 
-    /**
-     * @since 3.2
-     */
-	static KAction* create( StdGameAction id,
+    static KAction* create( StdGameAction id,
 		const QObject *recvr, const char *slot,
 		KActionCollection* parent )
 		{ return create( id, 0, recvr, slot, parent ); }
@@ -101,7 +96,6 @@ public:
 
     /**
      * This will return the internal name of a given standard action.
-     * @since 3.2
      */
     static const char* name( StdGameAction id );
 
@@ -219,42 +213,36 @@ public:
 
     /**
      * Display configure highscores dialog.
-     * @since 3.2
      */
     static KAction *configureHighscores(const QObject *recvr = 0, const char *slot = 0,
                                 KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Give an advice/hint.
-     * @since 3.2
      */
     static KAction *hint(const QObject *recvr = 0, const char *slot = 0,
                          KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Show a demo.
-     * @since 3.2
      */
     static KToggleAction *demo(const QObject *recvr = 0, const char *slot = 0,
                                KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Solve the game.
-     * @since 3.2
      */
     static KAction *solve(const QObject *recvr = 0, const char *slot = 0,
                           KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Choose game type. The signature of slot is of the form slotGameTypeChosen(int)
-     * @since 3.2
      */
     static KSelectAction *chooseGameType(const QObject *recvr = 0, const char *slot = 0,
                                          KActionCollection *parent = 0, const char *name = 0L );
 
     /**
      * Restart game.
-     * @since 3.2
      */
     static KAction *restart(const QObject *recvr = 0, const char *slot = 0,
                             KActionCollection *parent = 0, const char *name = 0L );

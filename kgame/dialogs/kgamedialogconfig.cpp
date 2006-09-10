@@ -533,7 +533,7 @@ void KGameDialogMsgServerConfig::setHasMsgServer(bool has)
  if (!has) {
 	// delete all inputs
 	if (!d->noMaster) {
-		d->noMaster = new QLabel(i18n("You don't own the message server"), this);
+		d->noMaster = new QLabel(i18n("You do not own the message server"), this);
 		d->localLayout->addWidget(d->noMaster);
 	}
 	return;

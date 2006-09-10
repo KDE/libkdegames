@@ -166,12 +166,10 @@ public:
   /**
     @return 0 if isConnected() is FALSE, otherwise the port number this client is
     connected to. See also KMessageIO::peerPort and QSocket::peerPort.
-    @since 3.2
   */
   quint16 peerPort () const;
 
   /**
-    @since 3.2
     @return "localhost" if isConnected() is FALSE, otherwise the hostname this client is
     connected to. See also KMessageIO::peerName() and QSocket::peerName().
   */

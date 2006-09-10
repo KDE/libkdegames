@@ -247,7 +247,6 @@ public:
 	 * @param name Game name. Important only for server mode. If not
 	 * set hostname will be used. In case of name conflict -2, -3 and so on will be added to name.
 	 * @param type Service type (something like _kwin4._tcp). It should be unique for application.
-	 * @since 3.4
 	 **/
 	void setDiscoveryInfo(const QString& type, const QString& name=QString::null);
 	
