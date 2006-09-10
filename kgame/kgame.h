@@ -347,7 +347,7 @@ public:
      *
      * @return true?
      **/
-    virtual bool load(QString filename,bool reset=true);
+    virtual bool load(const QString& filename,bool reset=true);
 
     /**
      * Save a game to a file OR to network. Otherwise the same as
@@ -368,7 +368,7 @@ public:
      *
      * @return true?
      **/
-    virtual bool save(QString filename,bool saveplayers=true);
+    virtual bool save(const QString& filename,bool saveplayers=true);
 
     /**
      * Resets the game, i.e. puts it into a state where everything

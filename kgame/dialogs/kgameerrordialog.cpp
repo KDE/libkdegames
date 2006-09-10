@@ -94,13 +94,13 @@ void KGameErrorDialog::slotClientConnectionLost(quint32 /*id*/,bool)
  error(message, (QWidget*)parent());
 }
 
-void KGameErrorDialog::slotError(int errorNo, QString text)
+void KGameErrorDialog::slotError(int errorNo, const QString& text)
 {
  QString message = i18n("Received a network error!\nError number: %1\nError message: %2", errorNo, text);
  error(message, (QWidget*)parent());
 }
 
-void KGameErrorDialog::connectionError(QString s)
+void KGameErrorDialog::connectionError(const QString& s)
 {
  QString message;
  if (s.isNull()) {

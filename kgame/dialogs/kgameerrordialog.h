@@ -57,10 +57,10 @@ public:
 	 * @param s A string that describes the error further (like port is
 	 * already in use). Will be ignored if QString::null
 	 **/
-	void connectionError(QString s = QString::null);
+	void connectionError(const QString& s = QString::null);
 
 public slots:
-	void slotError(int error, QString text);
+	void slotError(int error, const QString& text);
 	
 	/**
 	 * The connection to the @ref KMessageServer has been lost

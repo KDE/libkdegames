@@ -48,7 +48,7 @@ quint32 KMessageIO::id ()
 
 // ----------------------KMessageSocket -----------------------
 
-KMessageSocket::KMessageSocket (QString host, quint16 port, QObject *parent)
+KMessageSocket::KMessageSocket (const QString& host, quint16 port, QObject *parent)
   : KMessageIO (parent)
 {
   mSocket = new Q3Socket ();
@@ -233,7 +233,7 @@ KMessageProcess::~KMessageProcess()
     // Maybe todo: delete mSendBuffer
   }
 }
-KMessageProcess::KMessageProcess(QObject *parent, QString file) : KMessageIO(parent)
+KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessageIO(parent)
 {
   // Start process
   kDebug(11001) << "@@@KMessageProcess::Start process" << endl;

@@ -99,7 +99,7 @@ void AdditionalTab::allSelected()
 
 QString AdditionalTab::percent(uint n, uint total, bool withBraces)
 {
-    if ( n==0 || total==0 ) return QString::null;
+    if ( n==0 || total==0 ) return QString();
     QString s =  QString("%1%").arg(100.0 * n / total, 0, 'f', 1);
     return (withBraces ? QString('(') + s + ')' : s);
 }
@@ -194,7 +194,7 @@ void StatisticsTab::load()
 
 QString StatisticsTab::percent(const Data &d, Count count) const
 {
-    if ( count==Total ) return QString::null;
+    if ( count==Total ) return QString();
     return AdditionalTab::percent(d.count[count], d.count[Total], true);
 }
 

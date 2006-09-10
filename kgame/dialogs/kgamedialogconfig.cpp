@@ -302,7 +302,7 @@ void KGameDialogGeneralConfig::setPlayerName(const QString& name)
 
 QString KGameDialogGeneralConfig::playerName() const
 {
- return d->mName ? d->mName->text() : QString::null;
+ return d->mName ? d->mName->text() : QString();
 }
 
 void KGameDialogGeneralConfig::setOwner(KPlayer* p)

@@ -606,7 +606,7 @@ QString KCardDialog::getRandomCardDir()
 
     QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop");
     if (list.isEmpty())
-        return QString::null;
+        return QString();
 
     int d = KRandom::random() % list.count();
     QString entry = list.at(d);

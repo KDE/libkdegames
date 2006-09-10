@@ -161,7 +161,7 @@ void KGame::deleteInactivePlayers()
  }
 }
 
-bool KGame::load(QString filename,bool reset)
+bool KGame::load(const QString& filename,bool reset)
 {
   if (filename.isNull())
   {
@@ -266,7 +266,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  return true;
 }
 
-bool KGame::save(QString filename,bool saveplayers)
+bool KGame::save(const QString& filename,bool saveplayers)
 {
  if (filename.isNull())
  {

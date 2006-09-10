@@ -170,7 +170,7 @@ QString KGameConnectWidget::host() const
  if (d->mHost->isEnabled()) {
 	return d->mHost->text();
  } else {
-	return QString::null;
+	return QString();
  }
 }
 

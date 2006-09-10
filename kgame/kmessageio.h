@@ -179,7 +179,7 @@ public:
     If the connection could not be established (e.g. unknown host or no server
     socket at this port), the signal /e connectionBroken is emitted.
   */
-  KMessageSocket (QString host, quint16 port, QObject *parent = 0 );
+  KMessageSocket (const QString& host, quint16 port, QObject *parent = 0 );
 
   /**
     Connects to a server socket on /e host with /e port. You can immediately
@@ -343,7 +343,7 @@ class KMessageProcess : public KMessageIO
   Q_OBJECT 
 
   public:
-    KMessageProcess(QObject *parent, QString file);
+    KMessageProcess(QObject *parent, const QString& file);
     ~KMessageProcess();
     bool isConnected() const;
     void send (const QByteArray &msg);

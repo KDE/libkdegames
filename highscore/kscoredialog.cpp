@@ -214,7 +214,7 @@ void KScoreDialog::aboutToShow()
       d->layout->addItem( new QSpacerItem( 0, -10 ), 0, 0 );
       d->layout->addItem( new QSpacerItem( 0, 10 ), 2, 0 );
    }
-   d->comment = QString::null;
+   d->comment.clear();
 
    QFont normal = font();
    QFont bold = normal;

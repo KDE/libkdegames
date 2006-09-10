@@ -148,7 +148,7 @@ bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
  return d->mIdDict.remove(data->id());
 }
 
-bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, QString name)
+bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, const QString& name)
 {
  //kDebug(11001) << k_funcinfo << ": " << data->id() << endl;
  if (d->mIdDict.find(data->id())) {

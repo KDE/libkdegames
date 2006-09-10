@@ -269,7 +269,7 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
     case I18N:     break;
     case WW:       return "normal";
     }
-    return QString::null;
+    return QString();
 }
 
 void Manager::addToQueryURL(KUrl &url, const QString &item,

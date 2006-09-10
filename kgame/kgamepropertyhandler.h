@@ -132,7 +132,7 @@ public:
 	 * propertyName. This is used for debugging, e.g. in KGameDebugDialog
 	 * @return true on success
 	 **/
-	bool addProperty(KGamePropertyBase *data, QString name=0);
+	bool addProperty(KGamePropertyBase *data, const QString& name=QString());
 
 	/**
 	 * Removes a property from the handler

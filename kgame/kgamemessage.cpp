@@ -151,6 +151,6 @@ QString KGameMessage::messageId2Text(int msgid)
 		return i18n("Player ID");
 	case KGameMessage::IdUser: // IdUser must be unknown for use, too!
 	default:
-		return QString::null;
+		return QString();
   }
 }
