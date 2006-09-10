@@ -34,7 +34,7 @@ public:
 	/**
 	 * Construct a KChatDialog widget
 	 **/
-	KChatDialog(QWidget* parent, bool modal = false);
+	explicit KChatDialog(QWidget* parent, bool modal = false);
 
 	/**
 	 * Construct a KChatDialog widget which automatically configures the

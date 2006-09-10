@@ -77,7 +77,7 @@ class HighscoresList : public ScoresList
 {
  Q_OBJECT
  public:
-    HighscoresList(QWidget *parent);
+    explicit HighscoresList(QWidget *parent);
 
     void load(const ItemArray &, int highlight);
 
@@ -89,7 +89,7 @@ class HighscoresWidget : public QWidget
 {
  Q_OBJECT
  public:
-    HighscoresWidget(QWidget *parent);
+    explicit HighscoresWidget(QWidget *parent);
 
     void load(int rank);
 
@@ -162,7 +162,7 @@ class ConfigDialog : public KDialog
 {
  Q_OBJECT
  public:
-    ConfigDialog(QWidget *parent);
+    explicit ConfigDialog(QWidget *parent);
 
     bool hasBeenSaved() const { return _saved; }
 
@@ -189,7 +189,7 @@ class AskNameDialog : public KDialog
 {
  Q_OBJECT
  public:
-    AskNameDialog(QWidget *parent);
+    explicit AskNameDialog(QWidget *parent);
 
     QString name() const { return _edit->text(); }
     bool dontAskAgain() const { return _checkbox->isChecked(); }

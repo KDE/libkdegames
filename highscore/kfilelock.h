@@ -23,7 +23,7 @@
 class KFileLock
 {
 public:
-    KFileLock(int fd);
+    explicit KFileLock(int fd);
 
     /** Call unlock(). */
     ~KFileLock();

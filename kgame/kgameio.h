@@ -269,7 +269,7 @@ public:
      * @param parent The widget whose events should be captured
      * @param trackmouse enables mouse tracking (gives mouse move events)
      */
-    KGameMouseIO(QWidget *parent,bool trackmouse=false);
+    explicit KGameMouseIO(QWidget *parent,bool trackmouse=false);
     virtual ~KGameMouseIO();
     
     /**

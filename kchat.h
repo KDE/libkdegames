@@ -41,7 +41,7 @@ public:
 	 * choose to send to a single player or to all players will not be added
 	 * as you will hardly need it in 2-player games.
 	 **/
-	KChat(QWidget* parent, bool twoPlayerGame = false);
+	explicit KChat(QWidget* parent, bool twoPlayerGame = false);
 
 	virtual ~KChat();
 

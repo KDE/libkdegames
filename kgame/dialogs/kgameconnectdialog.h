@@ -30,7 +30,7 @@ class KGameConnectWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	KGameConnectWidget(QWidget* parent);
+	explicit KGameConnectWidget(QWidget* parent);
 	virtual ~KGameConnectWidget();
 
 	/**

@@ -72,12 +72,12 @@ public:
   /**
    * Construct a horizontal progress bar.
    */
-  KGameProgress(QWidget *parent=0);
+  explicit KGameProgress(QWidget *parent=0);
 
   /**
    * Construct a progress bar with orientation @p orient.
    */
-  KGameProgress(Qt::Orientation orient, QWidget *parent=0);
+  explicit KGameProgress(Qt::Orientation orient, QWidget *parent=0);
 
   /**
    * Destruct the progress bar.

@@ -57,7 +57,7 @@ public:
 	/**
 	 * Constructs a KChatBaseText object without player part
 	 **/
-	KChatBaseText(const QString& text);
+	explicit KChatBaseText(const QString& text);
 	
 	/**
 	 * Destruct a KChatBaseText object.

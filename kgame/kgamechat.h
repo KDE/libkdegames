@@ -63,7 +63,7 @@ public:
 	 * This constructs a widget that is not usable. You must call at least
 	 * setGame, setFromPlayer and setMessageId manually.
 	 **/
-	KGameChat(QWidget* parent);
+	explicit KGameChat(QWidget* parent);
 
 	virtual ~KGameChat();
 

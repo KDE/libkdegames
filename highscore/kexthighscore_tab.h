@@ -74,7 +74,7 @@ class StatisticsTab : public AdditionalTab
 {
  Q_OBJECT
  public:
-    StatisticsTab(QWidget *parent);
+    explicit StatisticsTab(QWidget *parent);
 
     void load();
 

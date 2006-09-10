@@ -40,7 +40,7 @@ class KGameErrorDialog : public QObject
 {
 	Q_OBJECT
 public:
-	KGameErrorDialog(QWidget* parent);
+	explicit KGameErrorDialog(QWidget* parent);
 	~KGameErrorDialog();
 
 	/**

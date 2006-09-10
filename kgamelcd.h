@@ -41,7 +41,7 @@ class KDEGAMES_EXPORT KGameLCD : public QLCDNumber
 {
     Q_OBJECT
 public:
-    KGameLCD(uint nbDigits, QWidget *parent = 0);
+    explicit KGameLCD(uint nbDigits, QWidget *parent = 0);
 
     ~KGameLCD();
 

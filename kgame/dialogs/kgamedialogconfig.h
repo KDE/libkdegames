@@ -311,7 +311,7 @@ class KGameDialogChatConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:
-	KGameDialogChatConfig(int chatMsgId, QWidget* parent = 0);
+	explicit KGameDialogChatConfig(int chatMsgId, QWidget* parent = 0);
 	virtual ~KGameDialogChatConfig();
 
 	virtual void setKGame(KGame* g);
