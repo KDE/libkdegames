@@ -299,7 +299,7 @@ void MultiplayerScores::show(QWidget *parent)
         (void)new TotalMultipleScoresList(ordered, vbox);
     }
 
-    dialog.showButtonSeparator(false);
+    //dialog.showButtonSeparator(false);
     dialog.addPage(page);
     dialog.exec();
 }
