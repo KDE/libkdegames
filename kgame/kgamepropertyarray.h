@@ -253,7 +253,7 @@ public:
         uint i;
         type data;
         stream >> i >> data;
-        replace( i, data );
+        QVector<type>::replace( i, data );
         //kDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl;
         if (isEmittingSignal())
         {
