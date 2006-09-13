@@ -27,6 +27,7 @@
 #include <QStyle>
 #include <QFrame>
 
+#include <kglobalsettings.h>
 #include "kgameprogress.h"
 
 #include <kapplication.h>
@@ -70,7 +71,7 @@ void KGameProgress::initialize()
 	bar_style = Solid;
 	text_enabled = true;
 	connect(slider, SIGNAL(valueChanged(int)), this, SLOT(valueChange(int)));
-	connect(kapp, SIGNAL(appearanceChanged()), this, SLOT(paletteChange()));
+	connect(KGlobalSettings::self(), SIGNAL(appearanceChanged()), this, SLOT(paletteChange()));
 	paletteChange();
 }
 
