@@ -36,7 +36,7 @@
 #include <krun.h>
 #include <kfiledialog.h>
 #include <kvbox.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
@@ -271,11 +271,11 @@ void HighscoresDialog::slotUser2()
                                  i18n("Export"), gi);
         if ( res==KMessageBox::Cancel ) return;
     }
-    KTempFile tmp;
-    internal->exportHighscores(*tmp.textStream());
-    tmp.close();
-    KIO::NetAccess::upload(tmp.name(), url, this);
-    tmp.unlink();
+    KTemporaryFile tmp;
+    tmp.open();
+    QTextStream stream(&tmp);
+    internal->exportHighscores(stream);
+    KIO::NetAccess::upload(tmp.fileName(), url, this);
 }
 
 //-----------------------------------------------------------------------------
