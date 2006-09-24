@@ -275,6 +275,7 @@ void HighscoresDialog::slotUser2()
     tmp.open();
     QTextStream stream(&tmp);
     internal->exportHighscores(stream);
+    stream.flush();
     KIO::NetAccess::upload(tmp.fileName(), url, this);
 }
 
