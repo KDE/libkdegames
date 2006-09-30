@@ -48,6 +48,7 @@ set(libkgamedialog_SRCS
 	)
 
 set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS}
+   kgamecanvas.cpp 
    kcarddialog.cpp 
    kstdgameaction.cpp 
    kzoommainwindow.cpp
@@ -82,5 +83,6 @@ install(FILES
    kgameprogress.h
    kgamelcd.h
    kgrid2d.h
+   kgamecanvas.h
 DESTINATION ${INCLUDE_INSTALL_DIR})
 
