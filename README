@@ -18,6 +18,7 @@ Contents:
   kgame: this is a complete network/game handling library. it constists of a lot
          of classes which are explained in the kgame docu (as soon as it is
          written)
+  kgamecanvas: a fast game-oriented canvas library
 if you use libkdegames in your game please also add
 KGlobal::locale()->insertCatalog("libkdegames");
 to main()
