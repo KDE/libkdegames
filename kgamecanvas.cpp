@@ -51,8 +51,8 @@ KGameCanvasAbstract::KGameCanvasAbstract() {
 }
 
 KGameCanvasAbstract::~KGameCanvasAbstract() {
-  for(int i=0;i<m_items.size();i++)
-    m_items[i]->m_canvas = NULL;
+   for(int i=0;i<m_items.size();i++)
+     m_items[i]->m_canvas = NULL;
 }
 
 KGameCanvasItem* KGameCanvasAbstract::itemAt(QPoint pt) const {
@@ -62,6 +62,10 @@ KGameCanvasItem* KGameCanvasAbstract::itemAt(QPoint pt) const {
       return el;
   }
   return NULL;
+}
+
+void KGameCanvasAbstract::clearAll() {
+   m_items.clear();
 }
 
 QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(QPoint pt) const {
@@ -327,7 +331,7 @@ void KGameCanvasItem::putInCanvas(KGameCanvasAbstract *c) {
   if(m_canvas == c)
       return;
 
-  if(m_canvas) {
+  if(!m_canvas) {
     if(m_visible)
       m_canvas->invalidate(rect());
     m_canvas->m_items.removeAll(this);
