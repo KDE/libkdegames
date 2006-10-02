@@ -65,7 +65,8 @@ KGameCanvasItem* KGameCanvasAbstract::itemAt(QPoint pt) const {
 }
 
 void KGameCanvasAbstract::clearAll() {
-   m_items.clear();
+  qDeleteAll(m_items);
+  m_items.clear();
 }
 
 QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(QPoint pt) const {
