@@ -51,6 +51,7 @@ KGameCanvasAbstract::KGameCanvasAbstract() {
 }
 
 KGameCanvasAbstract::~KGameCanvasAbstract() {
+   //Note: this does not delete the items, be sure not to leak memory!
    for(int i=0;i<m_items.size();i++)
      m_items[i]->m_canvas = NULL;
 }
@@ -62,11 +63,6 @@ KGameCanvasItem* KGameCanvasAbstract::itemAt(QPoint pt) const {
       return el;
   }
   return NULL;
-}
-
-void KGameCanvasAbstract::clearAll() {
-  qDeleteAll(m_items);
-  m_items.clear();
 }
 
 QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(QPoint pt) const {

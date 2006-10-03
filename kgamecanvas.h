@@ -62,8 +62,6 @@ public:
 
     virtual ~KGameCanvasAbstract();
 
-    void clearAll();
-
     /** Returns a const pointer to the list holding all the items in the canvas */
     const QList<KGameCanvasItem*>* items() const { return &m_items; };
 
