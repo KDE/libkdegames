@@ -1,5 +1,5 @@
 /* This file is part of the KDE libraries
-   Copyright (C) 1996 Martynas Kunigelis
+   Copyright (C) 1996 Martynas Kunigelis martynas.kunigelis@vm.ktu.lt
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
