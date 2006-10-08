@@ -17,6 +17,7 @@ add_subdirectory( cards-konqi-modern )
 add_subdirectory( cards-warwick )
 add_subdirectory( cards-xskat-german )
 add_subdirectory( svg-ornamental )
+add_subdirectory( SVG-cards-2.0 )
 
 ########### install files ###############
 
