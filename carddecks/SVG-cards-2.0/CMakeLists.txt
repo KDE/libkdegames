@@ -6,5 +6,5 @@ FILE(GLOB _desktopfile "*.desktop" )
 install( FILES ${_pngfile} DESTINATION ${DATA_INSTALL_DIR}/carddecks/${current_dir} )
 install( FILES ${_desktopfile} DESTINATION ${DATA_INSTALL_DIR}/carddecks/${current_dir} )
 install( FILES COPYING  DESTINATION  ${DATA_INSTALL_DIR}/carddecks/${current_dir} )
-install( FILES svg-cards-2.0.svg DESTINATION  ${DATA_INSTALL_DIR}/carddecks/${current_dir} )
+install( FILES svg-cards-2.0.svgz DESTINATION  ${DATA_INSTALL_DIR}/carddecks/${current_dir} )
 
