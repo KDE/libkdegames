@@ -74,9 +74,9 @@ const KStdGameActionInfo g_rgActionInfo[] = {
     { KStdGameAction::Redo, KStdAccel::Redo, 0, "move_redo", I18N_NOOP("Re&do"), 0, "redo" },
     { KStdGameAction::Roll, KStdAccel::AccelNone, Qt::CTRL+Qt::Key_R, "move_roll", I18N_NOOP("&Roll Dice"), 0, "roll" },
     { KStdGameAction::EndTurn, KStdAccel::AccelNone, 0, "move_end_turn", I18N_NOOP("End Turn"), 0, "endturn" },
-    { KStdGameAction::Hint, KStdAccel::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "wizard" },
+    { KStdGameAction::Hint, KStdAccel::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "idea" },
     { KStdGameAction::Demo, KStdAccel::AccelNone, Qt::Key_D, "move_demo", I18N_NOOP("&Demo"), 0, "1rightarrow" },
-    { KStdGameAction::Solve, KStdAccel::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "idea" },
+    { KStdGameAction::Solve, KStdAccel::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "wizard" },
 // "settings" menu
     { KStdGameAction::ChooseGameType, KStdAccel::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0 },
     { KStdGameAction::Carddecks, KStdAccel::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0 },
