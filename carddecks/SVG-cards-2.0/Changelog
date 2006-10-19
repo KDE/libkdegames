@@ -1,3 +1,6 @@
+2006-06-27 David Bellot <david.bellot@free.fr>
+	* fixed namespace bug that prevented svg-card to be correctly displayed in Firefox and Illustrator
+
 2005-08-12  David Bellot <david.bellot@free.fr>
 	* completely new deck of cards based on the previous one
 	* reducing the size of the deck from 4.4Mb to onlyt 910Kb
