@@ -16,8 +16,12 @@ add_subdirectory( decks )
 add_subdirectory( cards-konqi-modern )
 add_subdirectory( cards-warwick )
 add_subdirectory( cards-xskat-german )
-add_subdirectory( svg-ornamental )
+add_subdirectory( svg-nicu-ornamental )
 add_subdirectory( SVG-cards-2.0 )
+add_subdirectory( svg-dondorf )
+add_subdirectory( svg-nicu-white )
+add_subdirectory( svg-gm-paris )
+add_subdirectory( svg-dondorf )
 
 ########### install files ###############
 
