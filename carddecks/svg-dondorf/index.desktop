@@ -1,4 +1,5 @@
 [KDE Backdeck]
 Name=Dondorf
+Name[x-test]=xxDondorfxx
 Preview=11.png
 SVG=dondorf.svgz
