@@ -58,7 +58,7 @@
      inkscape:cx="593.54919"
      inkscape:cy="310.28525"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="2_spade"
      inkscape:window-width="1392"
      inkscape:window-height="975"
      inkscape:window-x="0"
@@ -2131,31 +2131,15 @@
          width="71.115479"
          id="rect16880"
          style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#3e0300;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98711344" />
-      <text
-         sodipodi:linespacing="100%"
-         id="text3315"
-         y="269.02557"
-         x="1550.6461"
+      <path
          style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Serif"
-         xml:space="preserve"><tspan
-           style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Serif"
-           y="269.02557"
-           x="1550.6461"
-           id="tspan3317"
-           sodipodi:role="line">2</tspan></text>
-      <text
+         d="M 1558.8024,269.02557 L 1551.0768,269.02557 L 1551.0768,267.83905 C 1553.192,265.80585 1554.566,264.3205 1555.1989,263.383 C 1555.8375,262.43964 1556.1569,261.49921 1556.1569,260.56171 C 1556.1569,259.9289 1555.9899,259.42793 1555.6559,259.05878 C 1555.3219,258.68379 1554.8942,258.49629 1554.3727,258.49628 C 1553.236,258.49629 1552.3541,259.13203 1551.7272,260.4035 L 1551.1647,260.26288 C 1551.9147,257.98359 1553.2418,256.84395 1555.1461,256.84393 C 1556.1832,256.84395 1557.0211,257.16035 1557.6598,257.79315 C 1558.2985,258.42012 1558.6178,259.24922 1558.6178,260.28046 C 1558.6178,261.0539 1558.3658,261.79511 1557.8619,262.50409 C 1557.358,263.20722 1556.6285,263.96015 1555.6735,264.76288 L 1552.7906,267.18866 L 1556.9303,267.18866 C 1557.5045,267.18866 1557.8619,267.08319 1558.0026,266.87225 C 1558.149,266.66132 1558.2223,266.14862 1558.2223,265.33417 L 1558.8024,265.33417 L 1558.8024,269.02557"
+         id="text3315" />
+      <path
          transform="scale(-1,-1)"
-         xml:space="preserve"
          style="font-size:17.26366043px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Serif"
-         x="-1614.6381"
-         y="-333.47876"
-         id="text3327"
-         sodipodi:linespacing="100%"><tspan
-           sodipodi:role="line"
-           id="tspan3329"
-           x="-1614.6381"
-           y="-333.47876"
-           style="font-size:17.26366043px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Serif">2</tspan></text>
+         d="M -1606.8155,-333.47876 L -1614.225,-333.47876 L -1614.225,-334.61675 C -1612.1963,-336.56677 -1610.8785,-337.99136 -1610.2716,-338.89051 C -1609.659,-339.79528 -1609.3528,-340.69723 -1609.3528,-341.59639 C -1609.3528,-342.20331 -1609.5129,-342.68379 -1609.8332,-343.03784 C -1610.1536,-343.39749 -1610.5638,-343.57732 -1611.0639,-343.57733 C -1612.1542,-343.57732 -1612.9999,-342.96758 -1613.6012,-341.74812 L -1614.1407,-341.88299 C -1613.4214,-344.06904 -1612.1485,-345.16207 -1610.3221,-345.16208 C -1609.3275,-345.16207 -1608.5239,-344.8586 -1607.9113,-344.25169 C -1607.2988,-343.65037 -1606.9925,-342.85519 -1606.9925,-341.86613 C -1606.9925,-341.12433 -1607.2341,-340.41344 -1607.7174,-339.73346 C -1608.2007,-339.0591 -1608.9004,-338.33697 -1609.8164,-337.56708 L -1612.5813,-335.24053 L -1608.611,-335.24053 C -1608.0602,-335.24053 -1607.7174,-335.34168 -1607.5826,-335.54399 C -1607.4421,-335.7463 -1607.3718,-336.23802 -1607.3718,-337.01916 L -1606.8155,-337.01916 L -1606.8155,-333.47876"
+         id="text3327" />
       <use
          height="1488.189"
          width="2104.7244"
