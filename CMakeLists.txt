@@ -59,7 +59,7 @@ set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SR
    kgameprogress.cpp 
    kgamelcd.cpp )
 
-kde4_automoc(kdegames ${kdegames_LIB_SRCS})
+kde4_automoc(${kdegames_LIB_SRCS})
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
