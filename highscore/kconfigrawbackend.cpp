@@ -53,7 +53,7 @@ void KConfigRawBackEnd::sync(bool bMerge)
       _stream = fdopen(_fd, "w");
       if ( _stream==0 ) return;
   }
-  ftruncate(_fd, 0);
+  _file.resize(0);
   writeEntries(_stream, aTempMap);
   fflush(_stream);
 }

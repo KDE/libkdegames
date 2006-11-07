@@ -318,7 +318,7 @@ class Square : public Generic<T>, public SquareBase
     CoordList neighbours(const Coord &c, bool insideOnly = true,
                          bool directOnly = false) const {
         CoordList neighbours;
-        for (uint i=0; i<(directOnly ? LeftUp : Nb_Neighbour); i++) {
+        for (int i=0; i<(directOnly ? LeftUp : Nb_Neighbour); i++) {
             Coord n = neighbour(c, (Neighbour)i);
             if ( insideOnly && !Generic<T>::inside(n) ) continue;
             neighbours.append(n);

@@ -367,9 +367,9 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
  } else if (*t == typeid(unsigned int)) {
 	value = QString::number(((KGamePropertyUInt *)prop)->value());
  } else if (*t == typeid(long int)) {
-	value = QString::number(((KGameProperty<long int> *)prop)->value()); 
+	value = QString::number(((KGameProperty<qint64> *)prop)->value()); 
  } else if (*t == typeid(unsigned long int)) {
-	value = QString::number(((KGameProperty<unsigned long int> *)prop)->value());
+	value = QString::number(((KGameProperty<quint64> *)prop)->value());
  } else if (*t == typeid(QString)) { 
 	value = ((KGamePropertyQString*)prop)->value();
  } else if (*t == typeid(qint8)) { 
