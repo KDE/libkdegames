@@ -31,10 +31,11 @@
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <kstaticdeleter.h>
+#include <klockfile.h>
 
 #include "khighscore.h"
 #include "kconfigrawbackend.h"
-#include "kfilelock.h"
+
 
 #define GROUP "KHighscore"
 
@@ -47,9 +48,9 @@ public:
     bool     global;
 };
 
-KFileLock *KHighscore::_lock = 0;
+KLockFile *KHighscore::_lock = 0;
 KRawConfig *KHighscore::_config = 0;
-static KStaticDeleter<KFileLock> lockSD;
+static KStaticDeleter<KLockFile> lockSD;
 static KStaticDeleter<KRawConfig> configSD;
 
 

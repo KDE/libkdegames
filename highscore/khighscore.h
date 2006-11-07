@@ -28,7 +28,7 @@
 #include <libkdegames_export.h>
 #include <kglobal.h>
 class KConfig;
-class KFileLock;
+class KLockFile;
 class KRawConfig;
 class KHighscorePrivate;
 
@@ -301,7 +301,7 @@ protected:
 private:
 	KHighscorePrivate* d;
 
-        static KFileLock *_lock; // lock on system-wide highscore file
+        static KLockFile *_lock; // lock on system-wide highscore file
         static KRawConfig *_config; // config for system-wide highscore file
 };
 

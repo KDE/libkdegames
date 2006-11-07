@@ -12,7 +12,6 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/highscore/ ${CMAKE_CURRENT_SOUR
 
 set(libkhighscore_SRCS  
 	highscore/kconfigrawbackend.cpp 
-	highscore/kfilelock.cpp 
 	highscore/khighscore.cpp 
 	highscore/kscoredialog.cpp
 	highscore/kexthighscore_item.cpp 
