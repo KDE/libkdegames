@@ -39,6 +39,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QRect>
 #include <QRegion>
 #include <QWidget>
+#include <libkdegames_export.h>
 
 class KGameCanvasItem;
 
@@ -48,7 +49,7 @@ class KGameCanvasItem;
 
     A KGameCanvasAbstract is a set of canvas items.
 */
-class KGameCanvasAbstract
+class KDEGAMES_EXPORT KGameCanvasAbstract
 {
 protected:
     friend class KGameCanvasItem;
@@ -104,7 +105,7 @@ class KGameCanvasAbstract;
     A KGameCanvasItem is an abstract class to represent a generic item that can be
     put in a canvas.
 */
-class KGameCanvasItem
+class KDEGAMES_EXPORT KGameCanvasItem
 {
 private:
     friend class KGameCanvasAbstract;
@@ -228,7 +229,7 @@ public:
     You can use it as reference for stacking items in the canvas using the
     stackOver and stackUnder functions.
 */
-class KGameCanvasDummy : public KGameCanvasItem
+class KDEGAMES_EXPORT KGameCanvasDummy : public KGameCanvasItem
 {
 private:
     /** This function does nothing (of course) */
@@ -256,7 +257,7 @@ public:
     A KGameCanvasGroup is an KGameCanvasItem, but it is also a KGameCanvasAbstract,
     so you can add children items to it. Just an inner canvas, if you prefer.
 */
-class KGameCanvasGroup : public KGameCanvasItem, public KGameCanvasAbstract
+class KDEGAMES_EXPORT KGameCanvasGroup : public KGameCanvasItem, public KGameCanvasAbstract
 {
 private:
     mutable bool m_child_rect_changed;
@@ -297,7 +298,7 @@ public:
 
     A KGameCanvasPicture is a picture that can be replayed on the canvas.
 */
-class KGameCanvasPicture : public KGameCanvasItem
+class KDEGAMES_EXPORT KGameCanvasPicture : public KGameCanvasItem
 {
 private:
     QPicture m_picture;
@@ -327,7 +328,7 @@ public:
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
 */
-class KGameCanvasPixmap : public KGameCanvasItem
+class KDEGAMES_EXPORT KGameCanvasPixmap : public KGameCanvasItem
 {
 private:
     QPixmap m_pixmap;
@@ -363,7 +364,7 @@ public:
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
 */
-class KGameCanvasTiledPixmap : public KGameCanvasItem
+class KDEGAMES_EXPORT  KGameCanvasTiledPixmap : public KGameCanvasItem
 {
 private:
     QPixmap m_pixmap;
@@ -419,7 +420,7 @@ public:
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
 */
-class KGameCanvasRectangle : public KGameCanvasItem
+class KDEGAMES_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
 {
 private:
     QColor m_color;
@@ -457,7 +458,7 @@ public:
 
     A KGameCanvasText is a text that can be put in the canvas.
 */
-class KGameCanvasText : public KGameCanvasItem
+class KDEGAMES_EXPORT KGameCanvasText : public KGameCanvasItem
 {
 public:
     /** Specifies the meaning of the x coordinate of the item. It can
@@ -547,7 +548,7 @@ public:
     A KGameCanvasWidget is a widget that can contain many KGameCanvasItem (images, rectangles, lines, etc).
     Portions of the widget are automatically redrawn to update the changes made to the items.
 */
-class KGameCanvasWidget : public QWidget, public KGameCanvasAbstract
+class KDEGAMES_EXPORT KGameCanvasWidget : public QWidget, public KGameCanvasAbstract
 {
 Q_OBJECT
 private:
