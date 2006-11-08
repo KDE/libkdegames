@@ -75,7 +75,7 @@ class KGameDialogPrivate;
  * @short Main configuration dialog for KGame
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class DIALOGS_EXPORT KGameDialog : public KPageDialog
+class KDEGAMES_EXPORT KGameDialog : public KPageDialog
 {
 	Q_OBJECT
 public:

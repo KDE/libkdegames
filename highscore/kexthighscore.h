@@ -42,23 +42,23 @@ extern ManagerPrivate *internal;
 /**
  * Get the current game type.
  */
-HIGHSCORE_EXPORT uint gameType();
+KDEGAMES_EXPORT uint gameType();
 
 /**
  * Set the current game type.
  */
-HIGHSCORE_EXPORT void setGameType(uint gameType);
+KDEGAMES_EXPORT void setGameType(uint gameType);
 
 /**
  * Configure the highscores.
  * @return true if the configuration has been modified and saved
  */
-HIGHSCORE_EXPORT bool configure(QWidget *parent);
+KDEGAMES_EXPORT bool configure(QWidget *parent);
 
 /**
  * Show the highscores lists.
  */
-HIGHSCORE_EXPORT void show(QWidget *parent);
+KDEGAMES_EXPORT void show(QWidget *parent);
 
 /**
  * Submit a score. See @ref Manager for usage example.
@@ -66,19 +66,19 @@ HIGHSCORE_EXPORT void show(QWidget *parent);
  * @param score the players score
  * @param widget a widget used as parent for error message box.
  */
-HIGHSCORE_EXPORT void submitScore(const Score &score, QWidget *widget);
+KDEGAMES_EXPORT void submitScore(const Score &score, QWidget *widget);
 
 /**
  * @return the last score in the local list of highscores. The worst possible
  * score if there are less items than the maximum number.
  */
-HIGHSCORE_EXPORT Score lastScore();
+KDEGAMES_EXPORT Score lastScore();
 
 /**
  * @return the first score in the local list of highscores (the worst possible
  * score if there is no entry).
  */
-HIGHSCORE_EXPORT Score firstScore();
+KDEGAMES_EXPORT Score firstScore();
 
 /**
  * This class manages highscores and players entries (several players can
@@ -139,7 +139,7 @@ HIGHSCORE_EXPORT Score firstScore();
  * and the value of the items that you have optionnally added
  * with Score::setData() ; player name and date are set automatically.
  */
-class HIGHSCORE_EXPORT Manager
+class KDEGAMES_EXPORT Manager
 {
  public:
     /**

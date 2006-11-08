@@ -36,7 +36,7 @@ namespace KExtHighscore
  * a highscore element (such as the score, the date, ...) or a player
  * info (such as the player name, the best score, ...).
  */
-class HIGHSCORE_EXPORT Item
+class KDEGAMES_EXPORT Item
 {
  public:
     /**
@@ -171,7 +171,7 @@ enum ScoreType { Won = 0, Lost = -1, Draw = -2 };
  * This class contains data for a score. You should not inherit from
  * this class but reimplement the methods in Highscores.
  */
-class HIGHSCORE_EXPORT Score
+class KDEGAMES_EXPORT Score
 {
  public:
     Score(ScoreType type = Won);
@@ -240,8 +240,8 @@ class HIGHSCORE_EXPORT Score
     friend QDataStream &operator >>(QDataStream &stream, Score &score);
 };
 
-HIGHSCORE_EXPORT QDataStream &operator <<(QDataStream &stream, const Score &score);
-HIGHSCORE_EXPORT QDataStream &operator >>(QDataStream &stream, Score &score);
+KDEGAMES_EXPORT QDataStream &operator <<(QDataStream &stream, const Score &score);
+KDEGAMES_EXPORT QDataStream &operator >>(QDataStream &stream, Score &score);
 
 /**
  * This class is used to store and show scores for multiplayer games.
@@ -263,7 +263,7 @@ HIGHSCORE_EXPORT QDataStream &operator >>(QDataStream &stream, Score &score);
  * ms.addScore(1, score);
  * </pre>
  */
-class HIGHSCORE_EXPORT MultiplayerScores
+class KDEGAMES_EXPORT MultiplayerScores
 {
  public:
     MultiplayerScores();
@@ -308,8 +308,8 @@ class HIGHSCORE_EXPORT MultiplayerScores
                                     MultiplayerScores &score);
 };
 
-HIGHSCORE_EXPORT QDataStream &operator <<(QDataStream &stream, const MultiplayerScores &score);
-HIGHSCORE_EXPORT QDataStream &operator >>(QDataStream &stream, MultiplayerScores &score);
+KDEGAMES_EXPORT QDataStream &operator <<(QDataStream &stream, const MultiplayerScores &score);
+KDEGAMES_EXPORT QDataStream &operator >>(QDataStream &stream, MultiplayerScores &score);
 
 } // namespace
 

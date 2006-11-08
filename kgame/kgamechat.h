@@ -40,7 +40,7 @@ class KGameChatPrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGAME_EXPORT KGameChat : public KChatBase
+class KDEGAMES_EXPORT KGameChat : public KChatBase
 {
 	Q_OBJECT
 public:

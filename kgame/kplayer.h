@@ -64,7 +64,7 @@ class KPlayerPrivate;
  * functions which are shared by all of your KGameIOs.
  *
  */
-class KGAME_EXPORT KPlayer : public QObject
+class KDEGAMES_EXPORT KPlayer : public QObject
 {
   Q_OBJECT
 

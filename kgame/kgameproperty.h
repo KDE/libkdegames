@@ -39,7 +39,7 @@ using namespace std;
  * 
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGAME_EXPORT KGamePropertyBase
+class KDEGAMES_EXPORT KGamePropertyBase
 {
 public:
 	enum PropertyDataIds  { // these belong to KPlayer/KGame!

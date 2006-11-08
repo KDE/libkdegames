@@ -33,7 +33,7 @@ this software.
 /**
  * A simple high score dialog.
  */
-class HIGHSCORE_EXPORT KScoreDialog : public KDialog {
+class KDEGAMES_EXPORT KScoreDialog : public KDialog {
    Q_OBJECT
    
 public:

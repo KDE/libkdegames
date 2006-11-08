@@ -31,7 +31,7 @@ class KGamePropertyBase;
 
 class KGameDebugDialogPrivate;
 
-class DIALOGS_EXPORT KGameDebugDialog : public KPageDialog
+class KDEGAMES_EXPORT KGameDebugDialog : public KPageDialog
 {
 	Q_OBJECT
 public:

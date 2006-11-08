@@ -69,7 +69,7 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
  * multiplied. 
  *
  **/
-class KGAME_EXPORT KGamePropertyHandler : public QObject
+class KDEGAMES_EXPORT KGamePropertyHandler : public QObject
 {
 	Q_OBJECT
 

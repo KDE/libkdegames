@@ -56,7 +56,7 @@ class KProcess;
  *
  *  @author Martin Heni <martin@heni-online.de>
  */
-class KGAME_EXPORT KGameIO : public QObject
+class KDEGAMES_EXPORT KGameIO : public QObject
 {
   Q_OBJECT
 
@@ -178,7 +178,7 @@ private:
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <martin@heni-online.de>
  */
-class KGAME_EXPORT KGameKeyIO : public KGameIO
+class KDEGAMES_EXPORT KGameKeyIO : public KGameIO
 {
   Q_OBJECT
 
@@ -249,7 +249,7 @@ protected:
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <martin@heni-online.de>
  */
-class KGAME_EXPORT KGameMouseIO : public KGameIO
+class KDEGAMES_EXPORT KGameMouseIO : public KGameIO
 {
   Q_OBJECT
     
@@ -324,7 +324,7 @@ protected:
  *  for the definition of the computer player.
  *  @author Martin Heni <martin@heni-online.de>
  */
-class KGAME_EXPORT KGameProcessIO : public KGameIO
+class KDEGAMES_EXPORT KGameProcessIO : public KGameIO
 {
   Q_OBJECT
     
@@ -478,7 +478,7 @@ private:
  *
  *  @author  <b_mann@gmx.de>
  */
-class KGAME_EXPORT KGameComputerIO : public KGameIO
+class KDEGAMES_EXPORT KGameComputerIO : public KGameIO
 {
   Q_OBJECT
     

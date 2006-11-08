@@ -39,7 +39,7 @@ class KMessageFilePipe;
  * Using these two classes will give fully transparent communication
  * via QDataStreams.
  */
-class KGAME_EXPORT KGameProcess:  public QObject
+class KDEGAMES_EXPORT KGameProcess:  public QObject
 {
   Q_OBJECT
 

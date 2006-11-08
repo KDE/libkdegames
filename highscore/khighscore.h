@@ -82,7 +82,7 @@ class KHighscorePrivate;
  * Easy, what?
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class HIGHSCORE_EXPORT KHighscore : public QObject
+class KDEGAMES_EXPORT KHighscore : public QObject
 {
 	Q_OBJECT
 public:

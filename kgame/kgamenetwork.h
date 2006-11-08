@@ -43,7 +43,7 @@ class KGameNetworkPrivate;
  * @author Martin Heni <martin@heni-online.de>
  * @version $Id$
  */
-class KGAME_EXPORT KGameNetwork : public QObject
+class KDEGAMES_EXPORT KGameNetwork : public QObject
 {
   Q_OBJECT
 
