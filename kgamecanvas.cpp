@@ -380,6 +380,8 @@ void KGameCanvasItem::setAnimated(bool a) {
 }
 
 void KGameCanvasItem::setOpacity(int o) {
+  if (o<0) o=0;
+  if (o>255) o = 255;
   m_opacity = o;
 
   if(m_canvas && m_visible)
