@@ -29,6 +29,7 @@
 //Added by qt3to4:
 #include <QTextStream>
 #include <QVector>
+#include <kuser.h>
 
 #include <kglobal.h>
 #include <kio/netaccess.h>
