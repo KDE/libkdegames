@@ -283,8 +283,8 @@ PlayerInfos::PlayerInfos()
     addItem("max lost trend", new Item((uint)0), true, true);
     addItem("max won trend", new Item((uint)0), true, true);
 
-    struct passwd *pwd = getpwuid(getuid());
-    QString username = pwd->pw_name;
+    QString username = KUser().loginName();
+ 
 #ifdef HIGHSCORE_DIRECTORY
     internal->hsConfig().setHighscoreGroup("players");
     for (uint i=0; ;i++) {

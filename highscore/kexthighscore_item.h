@@ -240,8 +240,8 @@ class KDEGAMES_EXPORT Score
 
     friend class MultiplayerScores;
 
-    friend QDataStream &operator <<(QDataStream &stream, const Score &score);
-    friend QDataStream &operator >>(QDataStream &stream, Score &score);
+    friend KDEGAMES_EXPORT QDataStream &operator <<(QDataStream &stream, const Score &score);
+    friend KDEGAMES_EXPORT QDataStream &operator >>(QDataStream &stream, Score &score);
 };
 
 class MultiplayerScores;
@@ -307,9 +307,9 @@ class KDEGAMES_EXPORT MultiplayerScores
     class MultiplayerScoresPrivate;
     MultiplayerScoresPrivate *d;
 
-    friend QDataStream &operator <<(QDataStream &stream,
+    friend KDEGAMES_EXPORT QDataStream &operator <<(QDataStream &stream,
                                     const MultiplayerScores &score);
-    friend QDataStream &operator >>(QDataStream &stream,
+    friend KDEGAMES_EXPORT QDataStream &operator >>(QDataStream &stream,
                                     MultiplayerScores &score);
 };
 

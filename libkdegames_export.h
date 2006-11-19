@@ -30,10 +30,8 @@
 #ifndef KDEGAMES_EXPORT
 # ifdef MAKE_KDEGAMES_LIB
 #  define KDEGAMES_EXPORT KDE_EXPORT
-# elif KDE_MAKE_LIB
-#  define KDEGAMES_EXPORT KDE_IMPORT
 # else
-#  define KDEGAMES_EXPORT
+#  define KDEGAMES_EXPORT KDE_IMPORT
 # endif
 #endif
 
