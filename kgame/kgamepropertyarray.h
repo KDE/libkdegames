@@ -49,9 +49,9 @@ public:
   {
   }
 
-  bool  resize( uint size )
+  bool  resize( int size )
   {
-    if (size!= ( uint )QVector<type>::size())
+    if (size!= QVector<type>::size())
     {
       bool a=true;
       QByteArray b;
@@ -75,7 +75,7 @@ public:
     else return true;
   }
 
-  void setAt(uint i,type data)
+  void setAt(int i,type data)
   {
     QByteArray b;
     QDataStream s(&b, QIODevice::WriteOnly);
@@ -96,7 +96,7 @@ public:
     //kDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
   }
 
-  type at( uint i ) const
+  type at( int i ) const
   {
     return QVector<type>::at(i);
   }
@@ -111,7 +111,7 @@ public:
     return assign(a);
   }
 
-  bool  truncate( uint pos )
+  bool  truncate( int pos )
   {
     return resize(pos);
   }
@@ -152,7 +152,7 @@ public:
     }
     return *this;
   }
-  KGamePropertyArray<type>& assign( const type *a, uint n )
+  KGamePropertyArray<type>& assign( const type *a, int n )
   {
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
@@ -176,7 +176,7 @@ public:
     }
     return *this;
   }
-  KGamePropertyArray<type>& duplicate( const type *a, uint n )
+  KGamePropertyArray<type>& duplicate( const type *a, int n )
   {
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {
@@ -188,7 +188,7 @@ public:
     }
     return *this;
   }
-  KGamePropertyArray<type>& setRawData( const type *a, uint n )
+  KGamePropertyArray<type>& setRawData( const type *a, int n )
   {
     if (policy()==PolicyClean || policy()==PolicyDirty)
     {

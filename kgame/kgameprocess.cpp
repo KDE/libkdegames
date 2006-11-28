@@ -53,7 +53,6 @@ KGameProcess::KGameProcess()
 //          this, SLOT(receivedMessage(const QByteArray&, quint32)));
   connect (mMessageIO, SIGNAL(received(const QByteArray&)),
           this, SLOT(receivedMessage(const QByteArray&)));
-  fprintf(stderr,"KGameProcess::constructor %p %p\n",&rFile,&wFile);
  
   mRandom = new KRandomSequence;
   mRandom->setSeed(0);

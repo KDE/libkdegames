@@ -346,18 +346,18 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
   mReceiveCount+=buflen;
 
   // Possbile message
-  while (mReceiveCount>2*sizeof(long))
+  while (mReceiveCount>int(2*sizeof(long)))
   {
     long *p1=(long *)mReceiveBuffer.data();
     long *p2=p1+1;
-    unsigned int len;
+    int len;
     if (*p1!=0x4242aeae)
     {
       kDebug(11001) << k_funcinfo << ": Cookie error...transmission failure...serious problem..." << endl;
 //      for (int i=0;i<mReceiveCount;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
     }
     len=(int)(*p2);
-    if (len<2*sizeof(long))
+    if (len<int(2*sizeof(long)))
     {
       kDebug(11001) << k_funcinfo << ": Message size error" << endl;
       break;
@@ -444,11 +444,11 @@ void KMessageFilePipe::exec()
    mReceiveCount++;
 
    // Change for message 
-   if (mReceiveCount>=2*sizeof(long))
+   if (mReceiveCount>=int(2*sizeof(long)))
    {
      long *p1=(long *)mReceiveBuffer.data();
      long *p2=p1+1;
-     unsigned int len;
+     int len;
      if (*p1!=0x4242aeae)
      {
        fprintf(stderr,"KMessageFilePipe::exec:: Cookie error...transmission failure...serious problem...\n");

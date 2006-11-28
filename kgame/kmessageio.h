@@ -373,7 +373,7 @@ class KMessageProcess : public KMessageIO
     Q3PtrQueue <QByteArray> mQueue;
     QByteArray *mSendBuffer;
     QByteArray mReceiveBuffer;
-    unsigned int mReceiveCount;
+    int mReceiveCount;
 };
 
 class KMessageFilePipe : public KMessageIO
@@ -403,7 +403,7 @@ class KMessageFilePipe : public KMessageIO
     QFile *mReadFile;
     QFile *mWriteFile;
     QByteArray mReceiveBuffer;
-    unsigned int mReceiveCount;
+    int mReceiveCount;
 };
 
 #endif
