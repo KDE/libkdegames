@@ -3,3 +3,4 @@ Name=Dondorf
 Name[x-test]=xxDondorfxx
 Preview=11.png
 PySol=yes
+BackSize=72,96

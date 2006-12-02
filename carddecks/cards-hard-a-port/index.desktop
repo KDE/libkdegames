@@ -3,3 +3,4 @@ Name=Hard a Port
 Name[x-test]=xxHard a Portxx
 Preview=11.png
 PySol=yes
+BackSize=72,96

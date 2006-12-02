@@ -3,3 +3,4 @@ Name=AisleRiot
 Name[x-test]=xxAisleRiotxx
 Preview=11.png
 PySol=yes
+BackSize=72,96
