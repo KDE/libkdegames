@@ -26,6 +26,7 @@
 #include <libkdegames_export.h>
 
 class KToggleAction;
+class KAction;
 class Zoomable;
 
 /**
