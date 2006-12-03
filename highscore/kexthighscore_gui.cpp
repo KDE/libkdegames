@@ -32,7 +32,6 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kurllabel.h>
-#include <kopenwith.h>
 #include <krun.h>
 #include <kfiledialog.h>
 #include <kvbox.h>
