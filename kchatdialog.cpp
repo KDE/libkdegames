@@ -137,6 +137,8 @@ void KChatDialog::init()
  d->mMaxMessages = new QLineEdit(d->mTextPage);
  d->mMaxMessages->setText(QString::number(-1));
  layout->addWidget(d->mMaxMessages, 6, 1);
+ connect(this, SIGNAL(applyClicked()),this,SLOT(slotApply()));
+ connect(this, SIGNAL(okClicked()),this,SLOT(slotOk()));
 }
 
 void KChatDialog::slotGetNameFont()
