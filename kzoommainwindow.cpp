@@ -21,7 +21,7 @@
 #include "kzoommainwindow.moc"
 
 #include <kaction.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <ktoggleaction.h>
 #include <kmenubar.h>
 #include <kxmlguifactory.h>
@@ -34,11 +34,11 @@ KZoomMainWindow::KZoomMainWindow(uint min, uint max, uint step)
 {
   installEventFilter(this);
   
-  _zoomInAction = KStdAction::zoomIn(this, SLOT(zoomIn()), actionCollection());
+  _zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), actionCollection());
   _zoomOutAction =
-    KStdAction::zoomOut(this, SLOT(zoomOut()), actionCollection());
+    KStandardAction::zoomOut(this, SLOT(zoomOut()), actionCollection());
   _menu =
-    KStdAction::showMenubar(this, SLOT(toggleMenubar()), actionCollection());
+    KStandardAction::showMenubar(this, SLOT(toggleMenubar()), actionCollection());
 }
 
 void KZoomMainWindow::init(const char *popupName)
