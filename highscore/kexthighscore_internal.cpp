@@ -343,6 +343,7 @@ PlayerInfos::PlayerInfos()
         item("name")->write(_id, name);
     }
 #endif
+    _bound = true;
     internal->hsConfig().writeAndUnlock();
 }
 
