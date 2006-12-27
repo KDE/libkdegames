@@ -18,8 +18,8 @@
 */
 // this class was shamelessy stolen from kdelibs/kdeui/kstdction.[cpp|h] and
 // after that just edited for our needs
-#ifndef KSTDGAMEACTION_H
-#define KSTDGAMEACTION_H
+#ifndef KSTANDADDGAMEACTION_H
+#define KSTANDARDGAMEACTION_H
 
 class KAction;
 class KToggleAction;
@@ -31,27 +31,27 @@ class KSelectAction;
 #include <krecentfilesaction.h>
 //-----------------------------------------------------------------------------
 /**
- * Replacement for KStdAction for KDE Games
+ * Replacement for KStandardAction for KDE Games
  *
- * This class is an extension to the usual KStdAction class which provides
+ * This class is an extension to the usual KStandardAction class which provides
  * easy access to often used KDE actions
  *
  * Games often use different menu entries than other programs, e.g. games use
  * the menu "game" instead of "file". This class provides the entries which
- * differ from the usual KStdAction entries.
+ * differ from the usual KStandardAction entries.
  *
- * @see KStdAction
+ * @see KStandardAction
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
 // #### KDE4: transform in namespace
-class KDEGAMES_EXPORT KStdGameAction
+class KDEGAMES_EXPORT KStandardGameAction
 {
 public:
   /**
    * The standard menubar and toolbar actions.
    **/
-    enum StdGameAction {
+    enum StandardGameAction {
         // Game menu
         New=1, Load, LoadRecent, Save, SaveAs, End, Pause, Highscores,
         Print, Quit,
@@ -68,18 +68,18 @@ public:
         ActionNone
     };
 
-    KStdGameAction();
-    ~KStdGameAction();
+    KStandardGameAction();
+    ~KStandardGameAction();
 
     /**
      * Creates an action corresponding to the
-     * KStdAction::StdAction enum.
+     * KStandardAction::StandardAction enum.
      */
-    static KAction* create( StdGameAction id, const char *name,
+    static KAction* create( StandardGameAction id, const char *name,
 			    const QObject *recvr, const char *slot,
 			    KActionCollection* parent );
 
-    static KAction* create( StdGameAction id,
+    static KAction* create( StandardGameAction id,
 		const QObject *recvr, const char *slot,
 		KActionCollection* parent )
 		{ return create( id, 0, recvr, slot, parent ); }
@@ -87,23 +87,23 @@ public:
 
     /**
      * Retrieve the action corresponding to the
-     * KStdGameAction::StdGameAction enum.
+     * KStandardGameAction::StandardGameAction enum.
      * @deprecated
      */
-    static KAction *action(StdGameAction act_enum, const QObject *recvr = 0,
+    static KAction *action(StandardGameAction act_enum, const QObject *recvr = 0,
                            const char *slot = 0, KActionCollection *parent = 0,
                            const char *name = 0L );
 
     /**
      * This will return the internal name of a given standard action.
      */
-    static const char* name( StdGameAction id );
+    static const char* name( StandardGameAction id );
 
     /**
      * This will return the internal name of a given standard action.
      * @deprecated
      */
-    static const char* stdName(StdGameAction act_enum);
+    static const char* stdName(StandardGameAction act_enum);
 
     /**
      * Start a new game
@@ -117,7 +117,7 @@ public:
     static KAction *load(const QObject *recvr = 0, const char *slot = 0,
                          KActionCollection *parent = 0, const char *name = 0L );
 
-    // FIXME why not to delete this and use just KStdAction::openRecent???
+    // FIXME why not to delete this and use just KStandardGameAction::openRecent???
     // loadRecent seems to mimic its behaviour
     /**
      * Load a recently loaded game.
