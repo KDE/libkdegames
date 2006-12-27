@@ -26,7 +26,7 @@
 #include <kapplication.h>
 #include <ksimpleconfig.h>
 #include <kglobal.h>
-#include <kstdguiitem.h>
+#include <KStandardGuiItem>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
@@ -128,7 +128,7 @@ bool KHighscore::lockForWriting(QWidget *widget)
         }
 
         if ( !first ) {
-            KGuiItem item = KStdGuiItem::cont();
+            KGuiItem item = KStandardGuiItem::cont();
             item.setText(i18n("Retry"));
             int res = KMessageBox::warningContinueCancel(widget, i18n("Cannot access the highscore file. Another user is probably currently writing to it."), QString::null, item, "ask_lock_global_highscore_file");
             if ( res==KMessageBox::Cancel ) break;

@@ -21,7 +21,7 @@
 
 #include <klocale.h>
 #include <kaction.h>
-#include <kstdaccel.h>
+#include <kstandardshortcut.h>
 #include <ktoggleaction.h>
 #include <kconfig.h>
 #include <kdebug.h>
@@ -49,7 +49,7 @@ const char* KStdGameAction::stdName(StdGameAction act_enum)
 struct KStdGameActionInfo
 {
 	KStdGameAction::StdGameAction id;
-	KStdAccel::StdAccel globalAccel; // if we reuse a global accel
+	KStandardShortcut::StandardShortcut globalAccel; // if we reuse a global accel
     int shortcut; // specific shortcut (NH: should be configurable)
 	const char* psName;
 	const char* psLabel;
@@ -59,32 +59,32 @@ struct KStdGameActionInfo
 
 const KStdGameActionInfo g_rgActionInfo[] = {
 // "game" menu
-    { KStdGameAction::New, KStdAccel::New, 0, "game_new", I18N_NOOP2("new game", "&New"), 0, "filenew" },
-    { KStdGameAction::Load, KStdAccel::Open, 0, "game_load", I18N_NOOP("&Load..."), 0, "fileopen" },
-    { KStdGameAction::LoadRecent, KStdAccel::AccelNone, 0, "game_load_recent", I18N_NOOP("Load &Recent"), 0, 0 },
-    { KStdGameAction::Restart, KStdAccel::Reload, 0, "game_restart", I18N_NOOP("Restart &Game"), 0, "reload" },
-    { KStdGameAction::Save, KStdAccel::Save, 0, "game_save", I18N_NOOP("&Save"), 0, "filesave" },
-    { KStdGameAction::SaveAs, KStdAccel::AccelNone, 0, "game_save_as", I18N_NOOP("Save &As..."), 0, "filesaveas" },
-    { KStdGameAction::End, KStdAccel::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "fileclose" },
-    { KStdGameAction::Pause, KStdAccel::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "player_pause" },
-    { KStdGameAction::Highscores, KStdAccel::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "highscore" },
-    { KStdGameAction::Print, KStdAccel::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "fileprint" },
-    { KStdGameAction::Quit, KStdAccel::Quit, 0, "game_quit", I18N_NOOP("&Quit"), 0, "exit" },
+    { KStdGameAction::New, KStandardShortcut::New, 0, "game_new", I18N_NOOP2("new game", "&New"), 0, "filenew" },
+    { KStdGameAction::Load, KStandardShortcut::Open, 0, "game_load", I18N_NOOP("&Load..."), 0, "fileopen" },
+    { KStdGameAction::LoadRecent, KStandardShortcut::AccelNone, 0, "game_load_recent", I18N_NOOP("Load &Recent"), 0, 0 },
+    { KStdGameAction::Restart, KStandardShortcut::Reload, 0, "game_restart", I18N_NOOP("Restart &Game"), 0, "reload" },
+    { KStdGameAction::Save, KStandardShortcut::Save, 0, "game_save", I18N_NOOP("&Save"), 0, "filesave" },
+    { KStdGameAction::SaveAs, KStandardShortcut::AccelNone, 0, "game_save_as", I18N_NOOP("Save &As..."), 0, "filesaveas" },
+    { KStdGameAction::End, KStandardShortcut::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "fileclose" },
+    { KStdGameAction::Pause, KStandardShortcut::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "player_pause" },
+    { KStdGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "highscore" },
+    { KStdGameAction::Print, KStandardShortcut::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "fileprint" },
+    { KStdGameAction::Quit, KStandardShortcut::Quit, 0, "game_quit", I18N_NOOP("&Quit"), 0, "exit" },
 // "move" menu
-    { KStdGameAction::Repeat, KStdAccel::AccelNone, 0, "move_repeat", I18N_NOOP("Repeat"), 0, 0 },
-    { KStdGameAction::Undo, KStdAccel::Undo, 0, "move_undo", I18N_NOOP("Und&o"), 0, "undo" },
-    { KStdGameAction::Redo, KStdAccel::Redo, 0, "move_redo", I18N_NOOP("Re&do"), 0, "redo" },
-    { KStdGameAction::Roll, KStdAccel::AccelNone, Qt::CTRL+Qt::Key_R, "move_roll", I18N_NOOP("&Roll Dice"), 0, "roll" },
-    { KStdGameAction::EndTurn, KStdAccel::AccelNone, 0, "move_end_turn", I18N_NOOP("End Turn"), 0, "endturn" },
-    { KStdGameAction::Hint, KStdAccel::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "idea" },
-    { KStdGameAction::Demo, KStdAccel::AccelNone, Qt::Key_D, "move_demo", I18N_NOOP("&Demo"), 0, "1rightarrow" },
-    { KStdGameAction::Solve, KStdAccel::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "wizard" },
+    { KStdGameAction::Repeat, KStandardShortcut::AccelNone, 0, "move_repeat", I18N_NOOP("Repeat"), 0, 0 },
+    { KStdGameAction::Undo, KStandardShortcut::Undo, 0, "move_undo", I18N_NOOP("Und&o"), 0, "undo" },
+    { KStdGameAction::Redo, KStandardShortcut::Redo, 0, "move_redo", I18N_NOOP("Re&do"), 0, "redo" },
+    { KStdGameAction::Roll, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_R, "move_roll", I18N_NOOP("&Roll Dice"), 0, "roll" },
+    { KStdGameAction::EndTurn, KStandardShortcut::AccelNone, 0, "move_end_turn", I18N_NOOP("End Turn"), 0, "endturn" },
+    { KStdGameAction::Hint, KStandardShortcut::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "idea" },
+    { KStdGameAction::Demo, KStandardShortcut::AccelNone, Qt::Key_D, "move_demo", I18N_NOOP("&Demo"), 0, "1rightarrow" },
+    { KStdGameAction::Solve, KStandardShortcut::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "wizard" },
 // "settings" menu
-    { KStdGameAction::ChooseGameType, KStdAccel::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0 },
-    { KStdGameAction::Carddecks, KStdAccel::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0 },
-    { KStdGameAction::ConfigureHighscores, KStdAccel::AccelNone, 0, "options_configure_highscores", I18N_NOOP("Configure &Highscores..."), 0, 0 },
+    { KStdGameAction::ChooseGameType, KStandardShortcut::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0 },
+    { KStdGameAction::Carddecks, KStandardShortcut::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0 },
+    { KStdGameAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, "options_configure_highscores", I18N_NOOP("Configure &Highscores..."), 0, 0 },
 
-    { KStdGameAction::ActionNone, KStdAccel::AccelNone, 0, 0, 0, 0, 0 }
+    { KStdGameAction::ActionNone, KStandardShortcut::AccelNone, 0, 0, 0, 0, 0 }
 };
 
 static const KStdGameActionInfo* infoPtr( KStdGameAction::StdGameAction id )
@@ -106,9 +106,9 @@ KAction* KStdGameAction::create(StdGameAction id, const char *name,
 	kDebug(125) << "KStdGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << ", " << name << " )" << endl;
 	if( pInfo ) {
 		QString sLabel = i18n(pInfo->psLabel);
-		KShortcut cut = (pInfo->globalAccel==KStdAccel::AccelNone
+		KShortcut cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
                          ? KShortcut(pInfo->shortcut)
-                         : KStdAccel::shortcut(pInfo->globalAccel));
+                         : KStandardShortcut::shortcut(pInfo->globalAccel));
         const char *n = name ? name : pInfo->psName;
         bool do_connect = (recvr && slot); //both not 0
         switch( id ) {

@@ -30,7 +30,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
+#include <KStandardGuiItem>
 
 #include <QLayout>
 #include <QString>
@@ -265,7 +265,7 @@ void KGameDebugDialog::initMessagePage()
  d->mHideIdList = new KListBox(d->mMessagePage);
  layout->addWidget(d->mHideIdList, 1, 5, 8, 2);
 
- QPushButton* clear = new KPushButton(KStdGuiItem::clear(), d->mMessagePage);
+ QPushButton* clear = new KPushButton(KStandardGuiItem::clear(), d->mMessagePage);
  connect(clear, SIGNAL(pressed()), this, SLOT(slotClearMessages()));
  layout->addWidget(clear, 10, 0, 1, 7);
  //TODO: "show all but..." and "show nothing but..."

@@ -263,7 +263,7 @@ void HighscoresDialog::slotUser2()
     KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, true, this) ) {
-        KGuiItem gi = KStdGuiItem::save();
+        KGuiItem gi = KStandardGuiItem::save();
         gi.setText(i18n("Overwrite"));
         int res = KMessageBox::warningContinueCancel(this,
                                  i18n("The file already exists. Overwrite?"),
@@ -438,7 +438,7 @@ ConfigDialog::ConfigDialog(QWidget *parent)
         _key->setReadOnly(true);
         groupLayout->addWidget(_key, 1, 1);
 
-        KGuiItem gi = KStdGuiItem::clear();
+        KGuiItem gi = KStandardGuiItem::clear();
         gi.setText(i18n("Remove"));
         _removeButton = new KPushButton(gi, group);
         groupLayout->addWidget(_removeButton, 2, 0);
@@ -471,7 +471,7 @@ void ConfigDialog::accept()
 
 void ConfigDialog::removeSlot()
 {
-    KGuiItem gi = KStdGuiItem::clear();
+    KGuiItem gi = KStandardGuiItem::clear();
     gi.setText(i18n("Remove"));
     int res = KMessageBox::warningContinueCancel(this,
                                i18n("This will permanently remove your "
