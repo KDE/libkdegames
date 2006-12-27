@@ -34,18 +34,6 @@ KStandardGameAction::KStandardGameAction()
 KStandardGameAction::~KStandardGameAction()
 {}
 
-KAction *KStandardGameAction::action(StandardGameAction act_enum, const QObject *recvr,
-                                const char *slot, KActionCollection *parent,
-                                const char *name)
-{
-    return create( act_enum, name, recvr, slot, parent );
-}
-
-const char* KStandardGameAction::stdName(StandardGameAction act_enum)
-{
-    return name(act_enum);
-}
-
 struct KStandardGameActionInfo
 {
 	KStandardGameAction::StandardGameAction id;

@@ -86,24 +86,9 @@ public:
 
 
     /**
-     * Retrieve the action corresponding to the
-     * KStandardGameAction::StandardGameAction enum.
-     * @deprecated
-     */
-    static KAction *action(StandardGameAction act_enum, const QObject *recvr = 0,
-                           const char *slot = 0, KActionCollection *parent = 0,
-                           const char *name = 0L );
-
-    /**
      * This will return the internal name of a given standard action.
      */
     static const char* name( StandardGameAction id );
-
-    /**
-     * This will return the internal name of a given standard action.
-     * @deprecated
-     */
-    static const char* stdName(StandardGameAction act_enum);
 
     /**
      * Start a new game
