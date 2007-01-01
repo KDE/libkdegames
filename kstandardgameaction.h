@@ -24,7 +24,6 @@
 class KAction;
 class KToggleAction;
 class QObject;
-class KActionCollection;
 class KRecentFilesAction;
 class KSelectAction;
 #include <libkdegames_export.h>
@@ -75,14 +74,8 @@ public:
      * Creates an action corresponding to the
      * KStandardAction::StandardAction enum.
      */
-    static KAction* create( StandardGameAction id, const char *name,
-			    const QObject *recvr, const char *slot,
-			    KActionCollection* parent );
-
-    static KAction* create( StandardGameAction id,
-		const QObject *recvr, const char *slot,
-		KActionCollection* parent )
-		{ return create( id, 0, recvr, slot, parent ); }
+    static KAction* create( StandardGameAction id, const QObject *recvr, const char *slot,
+			    QObject* parent );
 
 
     /**
@@ -93,14 +86,14 @@ public:
     /**
      * Start a new game
      **/
-    static KAction *gameNew(const QObject *recvr = 0, const char *slot = 0,
-                            KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *gameNew(const QObject *recvr, const char *slot,
+                            QObject *parent );
 
     /**
      * Load a previousely saved game
      */
-    static KAction *load(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *load(const QObject *recvr, const char *slot,
+                         QObject *parent );
 
     // FIXME why not to delete this and use just KStandardGameAction::openRecent???
     // loadRecent seems to mimic its behaviour
@@ -108,129 +101,129 @@ public:
      * Load a recently loaded game.
      * The signature of slot is of the form slotURLSelected(const KUrl&)
      */
-    static KRecentFilesAction *loadRecent(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KRecentFilesAction *loadRecent(const QObject *recvr, const char *slot,
+                                          QObject *parent );
 
     /**
      * Save the current game.
      */
-    static KAction *save(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *save(const QObject *recvr, const char *slot,
+                         QObject *parent);
 
     /**
      * Save the current game under a different filename.
      */
-    static KAction *saveAs(const QObject *recvr = 0, const char *slot = 0,
-                           KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *saveAs(const QObject *recvr, const char *slot,
+                           QObject *parent );
 
     /**
      * Pause the game
      **/
-    static KToggleAction *pause(const QObject *recvr = 0, const char *slot = 0,
-                           KActionCollection *parent = 0, const char *name = 0L );
+    static KToggleAction *pause(const QObject *recvr, const char *slot,
+                                QObject *parent );
 
     /**
      * Show the highscores.
      */
-    static KAction *highscores(const QObject *recvr = 0, const char *slot = 0,
-                           KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *highscores(const QObject *recvr, const char *slot,
+                               QObject *parent );
 
 
     /**
      * End the current game, but do not quit the program. Think of a "close"
      * entry.
      */
-    static KAction *end(const QObject *recvr = 0, const char *slot = 0,
-                          KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *end(const QObject *recvr, const char *slot,
+                        QObject *parent );
 
     /**
      * Print the current screen? Game? Whatever - hardly used in games but there
      * is at least one example (ktuberling)
      */
-    static KAction *print(const QObject *recvr = 0, const char *slot = 0,
-                          KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *print(const QObject *recvr, const char *slot,
+                          QObject *parent );
 
     /**
      * Quit the game.
      */
-    static KAction *quit(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *quit(const QObject *recvr, const char *slot,
+                         QObject *parent );
 
 
 
     /**
      * Repeat the last move.
      **/
-    static KAction *repeat(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *repeat(const QObject *recvr, const char *slot,
+                           QObject *parent );
 
     /**
      * Undo the last move
      **/
-    static KAction *undo(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *undo(const QObject *recvr, const char *slot,
+                         QObject *parent );
 
     /**
      * Redo the last move (which has been undone)
      **/
-    static KAction *redo(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *redo(const QObject *recvr, const char *slot,
+                         QObject *parent );
 
     /**
      * Roll die or dice
      **/
-    static KAction *roll(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *roll(const QObject *recvr, const char *slot,
+                         QObject *parent );
 
     /**
      * End the current turn (not the game). Usually to let the next player
      * start
      **/
-    static KAction *endTurn(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *endTurn(const QObject *recvr, const char *slot,
+                            QObject *parent );
 
 
     /**
      * Display configure carddecks dialog.
      */
-    static KAction *carddecks(const QObject *recvr = 0, const char *slot = 0,
-                                KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *carddecks(const QObject *recvr, const char *slot,
+                              QObject *parent );
 
     /**
      * Display configure highscores dialog.
      */
-    static KAction *configureHighscores(const QObject *recvr = 0, const char *slot = 0,
-                                KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *configureHighscores(const QObject *recvr, const char *slot,
+                                        QObject *parent );
 
     /**
      * Give an advice/hint.
      */
-    static KAction *hint(const QObject *recvr = 0, const char *slot = 0,
-                         KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *hint(const QObject *recvr, const char *slot,
+                         QObject *parent );
 
     /**
      * Show a demo.
      */
-    static KToggleAction *demo(const QObject *recvr = 0, const char *slot = 0,
-                               KActionCollection *parent = 0, const char *name = 0L );
+    static KToggleAction *demo(const QObject *recvr, const char *slot,
+                               QObject *parent );
 
     /**
      * Solve the game.
      */
-    static KAction *solve(const QObject *recvr = 0, const char *slot = 0,
-                          KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *solve(const QObject *recvr, const char *slot,
+                          QObject *parent );
 
     /**
      * Choose game type. The signature of slot is of the form slotGameTypeChosen(int)
      */
-    static KSelectAction *chooseGameType(const QObject *recvr = 0, const char *slot = 0,
-                                         KActionCollection *parent = 0, const char *name = 0L );
+    static KSelectAction *chooseGameType(const QObject *recvr, const char *slot,
+                                         QObject *parent );
 
     /**
      * Restart game.
      */
-    static KAction *restart(const QObject *recvr = 0, const char *slot = 0,
-                            KActionCollection *parent = 0, const char *name = 0L );
+    static KAction *restart(const QObject *recvr, const char *slot,
+                            QObject *parent );
 
 };
 

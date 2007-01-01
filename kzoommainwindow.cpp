@@ -21,6 +21,7 @@
 #include "kzoommainwindow.moc"
 
 #include <kaction.h>
+#include <kactioncollection.h>
 #include <kstandardaction.h>
 #include <ktoggleaction.h>
 #include <kmenubar.h>
@@ -33,12 +34,13 @@ KZoomMainWindow::KZoomMainWindow(uint min, uint max, uint step)
   : KMainWindow(0), _zoomStep(step), _minZoom(min), _maxZoom(max)
 {
   installEventFilter(this);
-  
-  _zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), actionCollection());
-  _zoomOutAction =
-    KStandardAction::zoomOut(this, SLOT(zoomOut()), actionCollection());
-  _menu =
-    KStandardAction::showMenubar(this, SLOT(toggleMenubar()), actionCollection());
+
+  _zoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()), this);
+  actionCollection()->addAction(_zoomInAction->objectName(), _zoomInAction);
+  _zoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), this);
+  actionCollection()->addAction(_zoomOutAction->objectName(), _zoomOutAction);
+  _menu = KStandardAction::showMenubar(this, SLOT(toggleMenubar()), this);
+  actionCollection()->addAction(_menu->objectName(), _menu);
 }
 
 void KZoomMainWindow::init(const char *popupName)
@@ -47,9 +49,9 @@ void KZoomMainWindow::init(const char *popupName)
   setZoom(readZoomSetting());
 
   // menubar
-  _menu->setChecked( menubarVisibleSetting() );  
+  _menu->setChecked( menubarVisibleSetting() );
   toggleMenubar();
-  
+
   // context popup
   if (popupName) {
     QMenu *popup =
@@ -87,7 +89,7 @@ void KZoomMainWindow::setZoom(uint zoom)
   writeZoomSetting(_zoom);
 
   foreach(Zoomable* wid, _zoomables)
-    wid->zoomChanged(); 
+    wid->zoomChanged();
   _zoomOutAction->setEnabled( _zoom>_minZoom );
   _zoomInAction->setEnabled( _zoom<_maxZoom );
   adjustSize();
