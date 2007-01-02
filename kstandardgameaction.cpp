@@ -21,6 +21,7 @@
 
 #include <klocale.h>
 #include <kaction.h>
+#include <kactioncollection.h>
 #include <kstandardshortcut.h>
 #include <ktoggleaction.h>
 #include <kconfig.h>
@@ -127,6 +128,9 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
 	}
 
         pAction->setObjectName(pInfo->psName);
+
+        if (KActionCollection *collection = qobject_cast<KActionCollection *>(parent))
+            collection->addAction(pAction->objectName(), pAction);
 
 	return pAction;
 }
