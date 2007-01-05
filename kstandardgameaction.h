@@ -18,7 +18,7 @@
 */
 // this class was shamelessy stolen from kdelibs/kdeui/kstdction.[cpp|h] and
 // after that just edited for our needs
-#ifndef KSTANDADDGAMEACTION_H
+#ifndef KSTANDARDGAMEACTION_H
 #define KSTANDARDGAMEACTION_H
 
 class KAction;
