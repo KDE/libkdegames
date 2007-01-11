@@ -319,7 +319,9 @@ PlayerInfos::PlayerInfos()
     if (_oldLocalPlayer) { // player already exists in local config file
         // copy player data
         QString prefix = QString("%1_").arg(_oldLocalId+1);
+#ifdef __GNUC__
 #warning "kde4 port g.config()->entryMap";
+#endif
 #if 0
         QMap<QString, QString> entries =
             cg.config()->entryMap("KHighscore_players");
