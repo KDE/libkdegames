@@ -23,7 +23,6 @@
 #include <unistd.h>
 #include <sys/file.h>
 
-#include <kapplication.h>
 #include <ksimpleconfig.h>
 #include <kglobal.h>
 #include <KStandardGuiItem>

@@ -23,10 +23,9 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
-#include <kapplication.h>
 #include <kdebug.h>
 #include <kglobal.h>
-
+#include <kapplication.h>
 #include <QLayout>
 #include <QComboBox>
 #include <QPainter>

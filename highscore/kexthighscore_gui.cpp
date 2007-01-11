@@ -29,7 +29,6 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 
-#include <kapplication.h>
 #include <kmessagebox.h>
 #include <kurllabel.h>
 #include <krun.h>

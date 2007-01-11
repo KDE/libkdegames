@@ -26,7 +26,6 @@
 #include <QPixmap>
 #include <QPushButton>
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <k3iconview.h>

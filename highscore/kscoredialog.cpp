@@ -33,7 +33,6 @@ this software.
 #include <QKeyEvent>
 #include <QList>
 
-#include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kseparator.h>

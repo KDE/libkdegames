@@ -26,11 +26,10 @@
 #include <QRegExp>
 #include <QStyle>
 #include <QFrame>
-
+#include <QApplication>
 #include <kglobalsettings.h>
 #include "kgameprogress.h"
 
-#include <kapplication.h>
 
 KGameProgress::KGameProgress(QWidget *parent)
 	: QFrame(parent)
@@ -77,7 +76,7 @@ void KGameProgress::initialize()
 
 void KGameProgress::paletteChange()
 {
-	QPalette p = kapp->palette();
+	QPalette p = qApp->palette();
 	if (!use_supplied_bar_color)
 		bar_color = p.color( QPalette::Active, QPalette::Highlight );
 	bar_text_color = p.color( QPalette::Active, QPalette::HighlightedText );
