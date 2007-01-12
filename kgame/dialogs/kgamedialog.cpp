@@ -91,6 +91,9 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
  if ((ConfigOptions)initConfigs!=NoConfig) {
 	initDefaultDialog((ConfigOptions)initConfigs, chatMsgId);
  }
+ connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+ connect(this,SIGNAL(defaultClicked()),this,SLOT(slotDefault()));
+ connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
 }
 
 void KGameDialog::init(KGame* g, KPlayer* owner)
