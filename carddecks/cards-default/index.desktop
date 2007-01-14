@@ -1,9 +1,11 @@
 [KDE Backdeck]
 Name=Standard
+Name[ja]=標準
 Name[x-test]=xxStandardxx
 Preview=11.png
 PySol=false
 Comment=Standard KDE card set\nGPL license
 Comment[fr]=Jeu de cartes standard de KDE\nLicence GPL
+Comment[ja]=標準 KDE カードセット\nGPL ライセンス
 Comment[x-test]=xxStandard KDE card set\nGPL licensexx
 BackSize=72,96
