@@ -5,6 +5,7 @@ Name[x-test]=xxStandardxx
 Preview=11.png
 PySol=false
 Comment=Standard KDE card set\nGPL license
+Comment[el]=Προκαθορισμένο σετ καρτών του KDE\nΆδεια GPL
 Comment[fr]=Jeu de cartes standard de KDE\nLicence GPL
 Comment[ja]=標準 KDE カードセット\nGPL ライセンス
 Comment[x-test]=xxStandard KDE card set\nGPL licensexx

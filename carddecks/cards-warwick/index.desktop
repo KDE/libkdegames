@@ -1,11 +1,13 @@
 [KDE Backdeck]
 Name=Blue Balloon
+Name[el]=Μπλε μπαλόνι
 Name[fr]=Ballon bleu
 Name[ja]=青風船
 Name[x-test]=xxBlue Balloonxx
 Preview=11.png
 PySol=false
 Comment=Card set supplied by Warwick Allison
+Comment[el]=Σετ καρτών από τον Warwick Allison
 Comment[fr]=Jeu de cartes fourni par Warwick Allison
 Comment[ja]=カードセット by Warwick Allison
 Comment[x-test]=xxCard set supplied by Warwick Allisonxx
