@@ -30,6 +30,7 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <libkdegames_export.h>
+class QGraphicsScene;
 class KPlayer;
 class KGame;
 class KProcess;
@@ -270,6 +271,7 @@ public:
      * @param trackmouse enables mouse tracking (gives mouse move events)
      */
     explicit KGameMouseIO(QWidget *parent,bool trackmouse=false);
+    explicit KGameMouseIO(QGraphicsScene *parent,bool trackmouse=false);
     virtual ~KGameMouseIO();
     
     /**

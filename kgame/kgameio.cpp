@@ -34,6 +34,7 @@
 #include <qbuffer.h>
 #include <QTimer>
 //Added by qt3to4:
+#include <QGraphicsScene>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QEvent>
@@ -182,6 +183,17 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
   }
 }
 
+KGameMouseIO::KGameMouseIO(QGraphicsScene *parent,bool trackmouse) 
+   : KGameIO()
+{
+  if (parent)
+  {
+    //kDebug(11001) << "Mouse Event filter installed tracking=" << trackmouse << endl;
+    parent->installEventFilter(this);
+//     parent->setMouseTracking(trackmouse);
+  }
+}
+
 KGameMouseIO::~KGameMouseIO()
 {
   if (parent())
@@ -209,14 +221,19 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
   {
     return false;
   }
-//  kDebug(11001) << "KGameMouseIO " << this  << endl ;
+  //kDebug(11001) << "KGameMouseIO " << this << " " << e->type() << endl ;
 
   // mouse action
   if ( e->type() == QEvent::MouseButtonPress ||
        e->type() == QEvent::MouseButtonRelease ||
        e->type() == QEvent::MouseButtonDblClick ||
        e->type() == QEvent::Wheel ||
-       e->type() == QEvent::MouseMove
+       e->type() == QEvent::MouseMove ||
+       e->type() == QEvent::GraphicsSceneMousePress ||
+       e->type() == QEvent::GraphicsSceneMouseRelease ||
+       e->type() == QEvent::GraphicsSceneMouseDoubleClick ||
+       e->type() == QEvent::GraphicsSceneWheel ||
+       e->type() == QEvent::GraphicsSceneMouseMove
        )
   {
      QMouseEvent *k = (QMouseEvent*)e;

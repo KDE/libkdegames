@@ -22,7 +22,6 @@
 #define __KGAMEPROPERTYLIST_H_
 
 
-
 #include <kdebug.h>
 
 #include "kgamemessage.h"
@@ -39,7 +38,6 @@ public:
      * Typedefs
      */
     typedef QListIterator<type> Iterator;
-    typedef QListConstIterator<type> ConstIterator;
 
   KGamePropertyList() :QList<type>(), KGamePropertyBase()
   {
