@@ -18,10 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <config.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/file.h>
+#include <config-highscore.h>
+#include <unistd.h> // sleep
 
 #include <ksimpleconfig.h>
 #include <kglobal.h>

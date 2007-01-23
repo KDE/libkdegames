@@ -22,8 +22,6 @@ arising out of or in connection with the use or performance of
 this software.
 ****************************************************************/
 
-#include "config.h"
-
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>

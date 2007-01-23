@@ -38,7 +38,7 @@
 #include <kcodecs.h>
 #include <kdebug.h>
 
-#include "config.h"
+#include "config-highscore.h"
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
 #include "kemailsettings.h"
