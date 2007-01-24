@@ -27,8 +27,7 @@
 
 #include "khighscore.h"
 #include "kexthighscore.h"
-//Added by qt3to4:
-#include <QDateTime>
+
 #include <QTextStream>
 #include <QVector>
 #include <QDateTime>
