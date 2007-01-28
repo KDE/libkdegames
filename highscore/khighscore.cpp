@@ -29,6 +29,7 @@
 #include <kdebug.h>
 #include <kstaticdeleter.h>
 #include <klockfile.h>
+#include <kconfiggroup.h>
 
 #include "khighscore.h"
 #include "kconfigrawbackend.h"
@@ -157,7 +158,7 @@ KHighscore::~KHighscore()
 
 KConfig* KHighscore::config() const
 {
-    return (d->global ? _config : KGlobal::config());
+    return (d->global ? _config : static_cast<KConfig*>(KGlobal::config().data()));
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)

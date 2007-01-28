@@ -31,6 +31,7 @@
 #include <QTextStream>
 #include <QVector>
 #include <QDateTime>
+#include <kconfiggroup.h>
 
 class QTextStream;
 class QTabWidget;

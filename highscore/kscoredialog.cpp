@@ -35,6 +35,7 @@ this software.
 #include <klocale.h>
 #include <kseparator.h>
 #include <kglobal.h>
+#include <kconfiggroup.h>
 
 #include "kscoredialog.h"
 
