@@ -472,7 +472,7 @@ void KChatBase::saveConfig(KConfig* conf)
 {
  QString oldGroup;
  if (!conf) {
-	conf = KGlobal::config();
+	conf = KGlobal::config().data();
 	oldGroup = conf->group();
 	conf->setGroup("KChatBase");
  }
@@ -492,7 +492,7 @@ void KChatBase::readConfig(KConfig* conf)
 {
  QString oldGroup;
  if (!conf) {
-	conf = KGlobal::config();
+	conf = KGlobal::config().data();
 	oldGroup = conf->group();
 	conf->setGroup("KChatBase");
  }
