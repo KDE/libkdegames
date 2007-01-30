@@ -312,7 +312,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
   int len;
   char *p;
   char *pos;
-//  kDebug(11001)<<"############# Got stderr " << buflen << " bytes" << endl;
+  kDebug(11001)<<"@@@ KMessageProcess::slotReceivedStderr " << buflen << " bytes" << endl;
 
   if (!buffer || buflen==0) return ; 
   if (proc) pid=proc->pid();
@@ -325,10 +325,9 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
     if (!p) len=buflen;
     else len=p-pos;
 
-    QByteArray a;
-    a.fromRawData(pos,len);
+    QByteArray a(pos, len);
     QString s(a);
-    kDebug(11001) << "PID" <<pid<< ":" << s << endl;
+    kDebug(11001) << "KProcess:" <<pid<<"("<<len<< "):" << s << endl;
     a.clear();
     if (p) pos=p+1;
     buflen-=len+1;
