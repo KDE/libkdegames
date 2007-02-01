@@ -414,11 +414,9 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   // Cut out the header part...to not confuse network code
   QBuffer *buf=(QBuffer *)stream.device();
   QByteArray newbuffer;
-  newbuffer.fromRawData(buf->buffer().data()+buf->pos(),buf->size()-buf->pos());
+  newbuffer = QByteArray::fromRawData(buf->buffer().data()+buf->pos(),buf->size()-buf->pos());
   QDataStream ostream(newbuffer);
   kDebug(11001) << "Newbuffer size=" << newbuffer.size() << endl;
-
-
 
 // This is a dummy message which allows us the process to talk with its owner
   if (msgid==KGameMessage::IdProcessQuery)

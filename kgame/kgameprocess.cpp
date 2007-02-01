@@ -91,7 +91,7 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,quint32 recei
   QDataStream outstream(&a,QIODevice::WriteOnly);
 
   QBuffer *device=(QBuffer *)stream.device();
-  QByteArray data=device->buffer();;
+  QByteArray data=device->buffer();
 
   KGameMessage::createHeader(outstream,0,receiver,msgid);
   outstream.writeRawData(data.data(),data.size());
