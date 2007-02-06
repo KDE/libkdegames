@@ -485,9 +485,9 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
                 CoordList n = neighbours(*it, insideOnly);
                 CoordList::const_iterator it2;
                 for (it2=n.begin(); it2!=n.end(); ++it2)
-                    if ( center.find(*it2)==center.end()
-                         && ring.find(*it2)==ring.end()
-                         && newRing.find(*it2)==newRing.end() )
+                    if ( center.indexOf(*it2)==-1
+                         && ring.indexOf(*it2)==-1
+                         && newRing.indexOf(*it2)==-1 )
                         newRing.append(*it2);
                 center.append(*it);
             }
@@ -497,7 +497,7 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
         CoordList::const_iterator it;
         for (it=ring.begin(); it!=ring.end(); ++it)
             center.append(*it);
-        center.remove(c);
+        center.removeAll(c);
         return center;
     }
 };
