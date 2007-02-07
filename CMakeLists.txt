@@ -9,6 +9,7 @@ add_subdirectory( pics )
 
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}/highscore ${CMAKE_CURRENT_SOURCE_DIR}/highscore/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs/ )
 
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 ########### next target ###############
 
