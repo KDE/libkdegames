@@ -125,11 +125,12 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
 		}
-	}
 
         pAction->setObjectName(pInfo->psName);
+        }
 
-        if (KActionCollection *collection = qobject_cast<KActionCollection *>(parent))
+        KActionCollection *collection = qobject_cast<KActionCollection *>(parent);
+        if (collection && pAction)
             collection->addAction(pAction->objectName(), pAction);
 
 	return pAction;
