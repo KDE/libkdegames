@@ -465,7 +465,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
 void KCardDialog::insertCardIcons()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop", false, true);
+    QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop",
+                                                         KStandardDirs::NoDuplicates);
     // kDebug(11000) << "insert " << list.count() << endl;
     if (list.isEmpty())
         return;
@@ -501,7 +502,8 @@ void KCardDialog::insertCardIcons()
 
 void KCardDialog::insertDeckIcons()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop", false, true);
+    QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop",
+                                                         KStandardDirs::NoDuplicates);
     if (list.isEmpty())
         return;
 
