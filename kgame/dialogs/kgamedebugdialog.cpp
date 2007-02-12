@@ -26,7 +26,7 @@
 #include "kgamepropertyhandler.h"
 
 #include <k3listview.h>
-#include <klistbox.h>
+#include <klistwidget.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kpushbutton.h>
@@ -106,7 +106,7 @@ public:
 	Q3ListViewItem* mGamePlayerCount;
 	
 	QFrame* mPlayerPage;
-	KListBox* mPlayerList;
+	KListWidget* mPlayerList;
 	K3ListView* mPlayerProperties;
 	Q3ListViewItem* mPlayerAddress;
 	Q3ListViewItem* mPlayerId;
@@ -123,7 +123,7 @@ public:
 
 	QFrame* mMessagePage;
 	K3ListView* mMessageList;
-	KListBox* mHideIdList;
+	KListWidget* mHideIdList;
 };
 
 KGameDebugDialog::KGameDebugDialog(KGame* g, QWidget* parent, bool modal) :
@@ -203,7 +203,7 @@ void KGameDebugDialog::initPlayerPage()
  layout->addLayout(listLayout);
  QLabel* listLabel = new QLabel(i18n("Available Players"), d->mPlayerPage);
  listLayout->addWidget(listLabel);
- d->mPlayerList = new KListBox(d->mPlayerPage);
+ d->mPlayerList = new KListWidget(d->mPlayerPage);
  connect(d->mPlayerList, SIGNAL(executed(Q3ListBoxItem*)), this, SLOT(slotUpdatePlayerData(Q3ListBoxItem*)));
  listLayout->addWidget(d->mPlayerList);
  d->mPlayerList->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
@@ -262,7 +262,7 @@ void KGameDebugDialog::initMessagePage()
 
  QLabel* l = new QLabel(i18n("Do not show IDs:"), d->mMessagePage);
  layout->addWidget(l, 0, 5, 1, 2);
- d->mHideIdList = new KListBox(d->mMessagePage);
+ d->mHideIdList = new KListWidget(d->mMessagePage);
  layout->addWidget(d->mHideIdList, 1, 5, 8, 2);
 
  QPushButton* clear = new KPushButton(KStandardGuiItem::clear(), d->mMessagePage);
@@ -307,16 +307,16 @@ void KGameDebugDialog::clearGameData()
 
 void KGameDebugDialog::slotUpdatePlayerData()
 {
- if (!d->mGame || d->mPlayerList->currentItem() == -1) {
+ if (!d->mGame || d->mPlayerList->currentRow() == -1) {
 	return;
  }
- slotUpdatePlayerData(d->mPlayerList->item(d->mPlayerList->currentItem()));
+ slotUpdatePlayerData(d->mPlayerList->item(d->mPlayerList->currentRow()));
 }
 
 void KGameDebugDialog::slotUpdatePlayerList()
 {
- Q3ListBoxItem* i = d->mPlayerList->firstItem(); 
- for (; i; i = d->mPlayerList->firstItem()) {
+ QListWidgetItem* i = d->mPlayerList->item(0); 
+ for (; d->mPlayerList->count() > 0; i = d->mPlayerList->item(0)) {
 	removePlayer(i);
  }
 
@@ -379,7 +379,7 @@ void KGameDebugDialog::slotUpdateGameData()
  }
 }
 
-void KGameDebugDialog::slotUpdatePlayerData(Q3ListBoxItem* item)
+void KGameDebugDialog::slotUpdatePlayerData(QListWidgetItem* item)
 {
  if (!item || !d->mGame) {
 	return;
@@ -484,11 +484,11 @@ void KGameDebugDialog::addPlayer(KPlayer* p)
 	return;
  }
 
- (void) new Q3ListBoxText(d->mPlayerList, QString::number(p->id()));
+ (void) new QListWidgetItem(QString::number(p->id()), d->mPlayerList);
  //TODO connect to signals, like deleted/removed, ...
 }
 
-void KGameDebugDialog::removePlayer(Q3ListBoxItem* i)
+void KGameDebugDialog::removePlayer(QListWidgetItem* i)
 {
  if (!i || !d->mGame) {
 	return;
@@ -541,7 +541,7 @@ void KGameDebugDialog::slotShowId()
  if (!d->mHideIdList->currentItem()) {
 	return;
  }
- d->mHideIdList->removeItem(d->mHideIdList->currentItem());
+ d->mHideIdList->takeItem(d->mHideIdList->currentRow());
 }
 
 void KGameDebugDialog::slotHideId()
@@ -553,13 +553,13 @@ void KGameDebugDialog::slotHideId()
  if (!showId(msgid)) {
 	return;
  }
- (void)new Q3ListBoxText(d->mHideIdList, QString::number(msgid));
+ (void)new QListWidgetItem(QString::number(msgid), d->mHideIdList);
 }
 
 bool KGameDebugDialog::showId(int msgid)
 {
- Q3ListBoxItem* i = d->mHideIdList->firstItem();
- for (; i; i = i->next()) {
+ for (int j = 0; j < d->mHideIdList->count(); ++j) {
+ 	QListWidgetItem* i = d->mHideIdList->item(j);
 	if (i->text().toInt() == msgid) {
 		return false;
 	}

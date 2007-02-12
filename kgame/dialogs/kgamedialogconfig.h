@@ -33,7 +33,7 @@
 
 class QGridLayout;
 class QVBoxLayout;
-class Q3ListBoxItem;
+class QListWidgetItem;
 
 class KGame;
 class KPlayer;
@@ -344,12 +344,12 @@ public:
 protected:
 	/**
 	 * @param p A player
-	 * @return The @ref QListBoxItem that belongs to the player @p p
+	 * @return The @ref QListWidgetItem that belongs to the player @p p
 	 **/
-	Q3ListBoxItem* item(KPlayer* p) const;
+	QListWidgetItem* item(KPlayer* p) const;
 
 protected slots:
-	void slotKickPlayerOut(Q3ListBoxItem* item);
+	void slotKickPlayerOut(QListWidgetItem* item);
 	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p);
 	void slotPlayerLeftGame(KPlayer* p);
 	void slotPlayerJoinedGame(KPlayer* p);

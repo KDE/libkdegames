@@ -23,7 +23,9 @@
 
 #include <kpagedialog.h>
 #include <libkdegames_export.h>
-#include <Q3ListBoxItem>
+
+class QListWidgetItem;
+
 class KGame;
 class KGameIO;
 class KPlayer;
@@ -113,7 +115,7 @@ protected:
 	/**
 	 * Remove a player from the list
 	 **/
-	void removePlayer(Q3ListBoxItem* item);
+	void removePlayer(QListWidgetItem* item);
 
 	/**
 	 * @return Whether messages with this msgid shall be displayed or not
@@ -123,10 +125,10 @@ protected:
 protected slots:
 	/**
 	 * Update the data of the player specified in item
-	 * @param item The @ref QListBoxItem of the player to be updated. Note
+	 * @param item The @ref QListWidgetItem of the player to be updated. Note
 	 * that the text of this item MUST be the ID of the player
 	 **/
-	void slotUpdatePlayerData(Q3ListBoxItem* item);
+	void slotUpdatePlayerData(QListWidgetItem* item);
 
 	void slotShowId();
 	void slotHideId();

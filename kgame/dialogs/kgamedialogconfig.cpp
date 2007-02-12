@@ -25,10 +25,10 @@
 #include "kgamechat.h"
 #include "kgameconnectdialog.h"
 
+#include <klistwidget.h>
 #include <klocale.h>
 #include <knuminput.h>
 #include <kdialog.h>
-#include <klistbox.h>
 #include <kmessagebox.h>
 
 #include <QLayout>
@@ -612,8 +612,8 @@ public:
 		mPlayerBox = 0;
 	}
 
-	Q3PtrDict<KPlayer> mItem2Player;
-	KListBox* mPlayerBox;
+	QHash<QListWidgetItem*, KPlayer*> mItem2Player;
+	KListWidget* mPlayerBox;
 };
 
 KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
@@ -627,7 +627,7 @@ KGameDialogConnectionConfig::KGameDialogConnectionConfig(QWidget* parent)
  QGroupBox* b = new QGroupBox(i18n("Connected Players"), this);
  topLayout->addWidget(b);
  QHBoxLayout* gboxLay = new QHBoxLayout(b);
- d->mPlayerBox = new KListBox(b);
+ d->mPlayerBox = new KListWidget(b);
  gboxLay->addWidget(d->mPlayerBox);
  setMinimumHeight(100);
 }
@@ -680,24 +680,24 @@ void KGameDialogConnectionConfig::setAdmin(bool a)
  }
 }
 
-Q3ListBoxItem* KGameDialogConnectionConfig::item(KPlayer* p) const
+QListWidgetItem* KGameDialogConnectionConfig::item(KPlayer* p) const
 {
- Q3PtrDictIterator<KPlayer> it(d->mItem2Player);
- while (it.current()) {
-	if (it.current() == p) {
-		return (Q3ListBoxItem*)it.currentKey();
-	}
-	++it;
+ QHash<QListWidgetItem*, KPlayer*>::const_iterator it, itEnd;
+ it = d->mItem2Player.constBegin();
+ itEnd = d->mItem2Player.constEnd();
+ for ( ; it != itEnd; ++it ) {
+	if (it.value() == p) return it.key();
  }
  return 0;
 }
 
 void KGameDialogConnectionConfig::slotClearPlayers()
 {
- Q3PtrDictIterator<KPlayer> it(d->mItem2Player);
- while (it.current()) {
-	slotPlayerLeftGame(it.current());
-	++it;
+ QHash<QListWidgetItem*, KPlayer*>::const_iterator it, itEnd;
+ it = d->mItem2Player.constBegin();
+ itEnd = d->mItem2Player.constEnd();
+ for ( ; it != itEnd; ++it ) {
+	slotPlayerLeftGame(it.value());
  }
 
  if (d->mItem2Player.count() > 0) {
@@ -717,14 +717,18 @@ void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
 	kError(11001) << k_funcinfo << ": Cannot add NULL player" << endl;
         return;
  }
- if (d->mItem2Player[p]) {
+ bool playerFound = false;
+ QHash<QListWidgetItem*, KPlayer*>::const_iterator it, itEnd;
+ it = d->mItem2Player.constBegin();
+ itEnd = d->mItem2Player.constEnd();
+ for ( ; !playerFound && it != itEnd; ++it ) playerFound = it.value() == p;
+ if (playerFound) {
 	kError(11001) << k_funcinfo << ": attempt to double add player" << endl;
 	return;
  }
  kDebug(11001) << k_funcinfo << ": add player " << p->id() << endl;
- Q3ListBoxText* t = new Q3ListBoxText(p->name());
+ QListWidgetItem* t = new QListWidgetItem(p->name(), d->mPlayerBox);
  d->mItem2Player.insert(t, p);
- d->mPlayerBox->insertItem(t);
 
  connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
 		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
@@ -740,11 +744,11 @@ void KGameDialogConnectionConfig::slotPlayerLeftGame(KPlayer* p)
 			<< " in list" << endl;
 	return;
  }
- d->mPlayerBox->removeItem(d->mPlayerBox->index(item(p)));
+ d->mPlayerBox->takeItem(d->mPlayerBox->row(item(p)));
 
 }
 
-void KGameDialogConnectionConfig::slotKickPlayerOut(Q3ListBoxItem* item)
+void KGameDialogConnectionConfig::slotKickPlayerOut(QListWidgetItem* item)
 {
  kDebug(11001) << "kick player out" << endl;
  KPlayer* p = d->mItem2Player[item];
@@ -778,16 +782,11 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(Q3ListBoxItem* item)
 void KGameDialogConnectionConfig::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
  if(prop->id() == KGamePropertyBase::IdName) {
-	Q3ListBoxText* old = 0;
-	Q3PtrDictIterator<KPlayer> it(d->mItem2Player);
-	while (it.current() && !old) {
-		if (it.current() == player) {
-			old = (Q3ListBoxText*)it.currentKey();
-		}
-		++it;
-	}
-	Q3ListBoxText* t = new Q3ListBoxText(player->name());
-	d->mPlayerBox->changeItem(t, d->mPlayerBox->index(old));
+	QListWidgetItem* old = item(player);
+	QListWidgetItem* t = new QListWidgetItem(player->name());
+	int row = d->mPlayerBox->row(old);
+	d->mPlayerBox->takeItem( row );
+	d->mPlayerBox->insertItem(row, t);
 	d->mItem2Player.remove(old);
 	d->mItem2Player.insert(t, player);
  }
