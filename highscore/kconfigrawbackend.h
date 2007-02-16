@@ -23,7 +23,7 @@
 #include <QFile>
 
 #include <kconfigbackend.h>
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 
 
 class KConfigRawBackEnd : public KConfigINIBackEnd

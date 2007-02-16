@@ -21,7 +21,7 @@
 #include <config-highscore.h>
 #include <unistd.h> // sleep
 
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kglobal.h>
 #include <KStandardGuiItem>
 #include <klocale.h>

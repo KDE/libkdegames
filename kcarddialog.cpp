@@ -30,7 +30,7 @@
 #include <kstandarddirs.h>
 #include <k3iconview.h>
 #include <krandom.h>
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 
 #include "kcarddialog.h"
 #include <kdebug.h>
