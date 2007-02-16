@@ -48,8 +48,8 @@ private:
 class KRawConfig : public KSimpleConfig
 {
 public:
-    KRawConfig(int fd, bool readOnly)
-        : KSimpleConfig(new KConfigRawBackEnd(this, fd), readOnly) {}
+    KRawConfig(int fd)
+        : KSimpleConfig(new KConfigRawBackEnd(this, fd) ) {}
 };
 
 
