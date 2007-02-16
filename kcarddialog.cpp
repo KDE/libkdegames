@@ -758,7 +758,7 @@ void KCardDialog::saveConfig(KConfig* conf)
 
 void KCardDialog::slotSetGlobalDeck()
 {
- KSimpleConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
+ KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
  conf->setGroup(CONF_GLOBAL_GROUP);
 
  conf->writeEntry(CONF_GLOBAL_DECK, deck());
@@ -769,7 +769,7 @@ void KCardDialog::slotSetGlobalDeck()
 
 void KCardDialog::slotSetGlobalCardDir()
 {
- KSimpleConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
+ KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
  conf->setGroup(CONF_GLOBAL_GROUP);
 
  conf->writePathEntry(CONF_GLOBAL_CARDDIR, cardDir());
@@ -780,7 +780,7 @@ void KCardDialog::slotSetGlobalCardDir()
 
 void KCardDialog::getGlobalDeck(QString& deck, bool& random)
 {
- KSimpleConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
+ KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
  conf->setGroup(CONF_GLOBAL_GROUP);
 
  if (!conf->hasKey(CONF_GLOBAL_DECK) || conf->readEntry(CONF_GLOBAL_RANDOMDECK, false)) {
@@ -796,7 +796,7 @@ void KCardDialog::getGlobalDeck(QString& deck, bool& random)
 
 void KCardDialog::getGlobalCardDir(QString& dir, bool& random)
 {
- KSimpleConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
+ KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
  conf->setGroup(CONF_GLOBAL_GROUP);
 
  if (!conf->hasKey(CONF_GLOBAL_CARDDIR) || conf->readEntry(CONF_GLOBAL_RANDOMCARDDIR, false)) {
