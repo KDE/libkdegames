@@ -38,7 +38,6 @@
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
-#include <kvbox.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
