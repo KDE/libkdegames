@@ -22,7 +22,7 @@
 #include <unistd.h>
 
 KConfigRawBackEnd::KConfigRawBackEnd(KConfigBase *_config, int fd)
-    : KConfigINIBackEnd(_config, QString::null, "config", false),
+    : KConfigINIBackEnd(_config, QString(), "config", false),
       _fd(fd), _stream(0)
 {
     _file.open(_fd, QIODevice::ReadOnly);

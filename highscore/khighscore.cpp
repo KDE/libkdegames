@@ -128,7 +128,7 @@ bool KHighscore::lockForWriting(QWidget *widget)
         if ( !first ) {
             KGuiItem item = KStandardGuiItem::cont();
             item.setText(i18n("Retry"));
-            int res = KMessageBox::warningContinueCancel(widget, i18n("Cannot access the highscore file. Another user is probably currently writing to it."), QString::null, item, "ask_lock_global_highscore_file");
+            int res = KMessageBox::warningContinueCancel(widget, i18n("Cannot access the highscore file. Another user is probably currently writing to it."), QString(), item, "ask_lock_global_highscore_file");
             if ( res==KMessageBox::Cancel ) break;
         } else sleep(1);
         first = false;

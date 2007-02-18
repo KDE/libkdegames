@@ -236,7 +236,7 @@ HistogramTab::HistogramTab(QWidget *parent)
     _list->addColumn(i18n("Count"));
     _list->addColumn(i18n("Percent"));
     for (int i=0; i<4; i++) _list->setColumnAlignment(i, Qt::AlignRight);
-    _list->addColumn(QString::null);
+    _list->addColumn(QString());
 
     const Item *sitem = internal->scoreInfos().item("score")->item();
     const PlayerInfos &pi = internal->playerInfos();

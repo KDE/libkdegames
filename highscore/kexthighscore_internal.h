@@ -181,7 +181,7 @@ class ScoreInfos : public ItemArray
 class ConfigGroup : public KConfigGroup
 {
  public:
-    ConfigGroup(const QString &group = QString::null)
+    ConfigGroup(const QString &group = "")
         : KConfigGroup(KGlobal::config(), group) {}
 };
 
@@ -248,7 +248,7 @@ class ManagerPrivate
     PlayerInfos &playerInfos()   { return *_playerInfos; }
     KHighscore &hsConfig()       { return *_hsConfig; }
     enum QueryType { Submit, Register, Change, Players, Scores };
-    KUrl queryUrl(QueryType type, const QString &newName=QString::null) const;
+    KUrl queryUrl(QueryType type, const QString &newName = "") const;
 
     void exportHighscores(QTextStream &);
 

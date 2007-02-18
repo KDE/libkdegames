@@ -164,8 +164,8 @@ void ItemArray::_setItem(uint i, const QString &name, Item *item,
 {
     at(i)->setItem(item);
     at(i)->setName(name);
-    at(i)->setGroup(stored ? _group : QString::null);
-    at(i)->setSubGroup(canHaveSubGroup ? _subGroup : QString::null);
+    at(i)->setGroup(stored ? _group : QString());
+    at(i)->setSubGroup(canHaveSubGroup ? _subGroup : QString());
 }
 
 void ItemArray::setGroup(const QString &group)

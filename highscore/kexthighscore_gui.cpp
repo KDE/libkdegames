@@ -307,7 +307,7 @@ QString LastMultipleScoresList::itemText(const ItemContainer &item,
 {
     QString name = item.name();
     if ( name=="rank" )
-        return (_scores[row].type()==Won ? i18n("Winner") : QString::null);
+        return (_scores[row].type()==Won ? i18n("Winner") : QString());
     QVariant v = _scores[row].data(name);
     if ( name=="name" ) return v.toString();
     return item.item()->pretty(row, v);
@@ -475,7 +475,7 @@ void ConfigDialog::removeSlot()
                                i18n("This will permanently remove your "
                                "registration key. You will not be able to use "
                                "the currently registered nickname anymore."),
-                               QString::null, gi);
+                               QString(), gi);
     if ( res==KMessageBox::Continue ) {
         internal->playerInfos().removeKey();
         _registeredName->clear();

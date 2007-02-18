@@ -150,7 +150,7 @@ class KDEGAMES_EXPORT Manager
      * @param maxNbEntries the maximum numbers of highscores entries (by game
      *        types)
      */
-    Manager(uint nbGameTypes = 1, uint maxNbEntries = 10);
+    explicit Manager(uint nbGameTypes = 1, uint maxNbEntries = 10);
     virtual ~Manager();
     
     /**

@@ -80,8 +80,8 @@ class KDEGAMES_EXPORT Item
      *              is not shown.
      * @param alignment the alignment of the item.
      */
-    Item(const QVariant &def = QVariant::Invalid,
-         const QString &label = QString::null, Qt::AlignmentFlag alignment = Qt::AlignRight);
+    explicit Item(const QVariant &def = QVariant::Invalid,
+         const QString &label = QString(), Qt::AlignmentFlag alignment = Qt::AlignRight);
 
     virtual ~Item();
 

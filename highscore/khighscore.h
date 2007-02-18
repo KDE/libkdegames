@@ -190,7 +190,7 @@ public:
 	 * @return The value of this entry+key pair or pDefault if the entry+key
 	 * pair doesn't exist
 	 **/
-	QString readEntry(int entry, const QString& key, const QString& pDefault = QString::null) const;
+	QString readEntry(int entry, const QString& key, const QString& pDefault = "") const;
 
 	/**
 	 * Read a numeric value.
@@ -273,7 +273,7 @@ public:
 	 * level of your game. If you use QString::null (the default) the
 	 * default group is used.
 	 **/
-	void setHighscoreGroup(const QString& groupname = QString::null);
+	void setHighscoreGroup(const QString& groupname = "");
 
 	/**
 	 * @return The currently used group. This doesn't contain the prefix
