@@ -22,10 +22,8 @@
 
 #include <QFile>
 
-#include <kconfigini.h>
-#include <ksimpleconfig.h>
 #include <kconfig.h>
-
+#include <kconfigini.h>
 
 class KConfigRawBackEnd : public KConfigINIBackEnd
 {
@@ -46,11 +44,11 @@ private:
     KConfigRawBackEndPrivate *d;
 };
 
-class KRawConfig : public KSimpleConfig
+class KRawConfig : public KConfig
 {
 public:
     KRawConfig(int fd)
-        : KSimpleConfig(new KConfigRawBackEnd(this, fd) ) {}
+        : KConfig(new KConfigRawBackEnd(this, fd) ) {}
 };
 
 
