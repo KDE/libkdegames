@@ -22,7 +22,8 @@
 
 #include <QFile>
 
-#include <kconfigbackend.h>
+#include <kconfigini.h>
+#include <ksimpleconfig.h>
 #include <kconfig.h>
 
 
