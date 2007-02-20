@@ -21,7 +21,7 @@
 #include <config-highscore.h>
 #include <unistd.h> // sleep
 
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kglobal.h>
 #include <KStandardGuiItem>
 #include <klocale.h>
@@ -121,7 +121,6 @@ bool KHighscore::lockForWriting(QWidget *widget)
                        <<  result << " (ok=" << ok << ")" << endl;
         if (ok) {
             readCurrentConfig();
-            _config->setReadOnly(false);
             return true;
         }
 
@@ -147,7 +146,6 @@ void KHighscore::writeAndUnlock()
     kDebug(11002) << "unlocking" << endl;
     _config->sync(); // write config
     _lock->unlock();
-    _config->setReadOnly(true);
 }
 
 KHighscore::~KHighscore()

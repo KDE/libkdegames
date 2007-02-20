@@ -43,7 +43,7 @@ bool KConfigRawBackEnd::parseConfigFiles()
 void KConfigRawBackEnd::sync(bool bMerge)
 {
   // write-sync is only necessary if there are dirty entries
-  if ( !pConfig->isDirty() || pConfig->isReadOnly() ) return;
+  if ( !pConfig->isDirty() ) return;
 
   _file.reset();
   KEntryMap aTempMap;
