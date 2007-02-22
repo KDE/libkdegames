@@ -23,6 +23,8 @@
 #define __KGAMEMISC_H__
 
 #include <libkdegames_export.h>
+#include <QtCore/Qstring>
+
 class KGameMiscPrivate;
 /**
  * This class contains several (usually static) functions I really did not know
