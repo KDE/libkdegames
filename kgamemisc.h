@@ -23,7 +23,7 @@
 #define __KGAMEMISC_H__
 
 #include <libkdegames_export.h>
-#include <QtCore/Qstring>
+#include <QtCore/QString>
 
 class KGameMiscPrivate;
 /**
