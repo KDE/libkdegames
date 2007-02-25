@@ -82,7 +82,7 @@ public:
      */
     void setColor(const QColor &color);
 
-public slots:
+public Q_SLOTS:
     /**
      * Highlight the LCD with the QColorGourp::HighlightedText color
      * for a small time (setHighlightTime).
@@ -98,7 +98,7 @@ public slots:
      */
     void displayInt(int value);
 
-private slots:
+private Q_SLOTS:
     void timeout() { highlight(false); }
 
 private:
@@ -147,7 +147,7 @@ public:
      */
     void setTime(const QString &s);
 
-public slots:
+public Q_SLOTS:
     /**
      * Stop the clock and reset it to zero.
      */
@@ -163,7 +163,7 @@ public slots:
      */
 	virtual void start();
 
-protected slots:
+protected Q_SLOTS:
     virtual void timeoutClock();
 
 private:

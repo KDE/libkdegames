@@ -234,7 +234,7 @@ public slots:
    */
   void valueChange(int newValue);
 
-signals:
+Q_SIGNALS:
   /**
    * Emitted when the state of the progress bar changes.
    */
@@ -251,7 +251,7 @@ protected:
    */
   void paintEvent( QPaintEvent *e );
 
-private slots:
+private Q_SLOTS:
   void paletteChange();
 
 private:
