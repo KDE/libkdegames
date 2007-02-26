@@ -41,13 +41,13 @@
 namespace KIO
 {
 	class Job;
-};
+}
 
 namespace KGGZMod
 {
 	class Module;
 	class Player;
-};
+}
 
 class QScrollArea;
 class QLabel;
