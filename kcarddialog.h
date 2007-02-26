@@ -23,7 +23,8 @@
 
 #include <libkdegames_export.h>
 #include <kglobal.h>
-class Q3IconViewItem;
+
+class QListWidgetItem;
 
 class KConfig;
 
@@ -324,8 +325,8 @@ protected:
     static QString group();
 
 protected slots:
-   void slotDeckClicked(Q3IconViewItem *);
-   void slotCardClicked(Q3IconViewItem *);
+   void slotDeckClicked(QListWidgetItem *);
+   void slotCardClicked(QListWidgetItem *);
    void slotRandomCardDirToggled(bool on);
    void slotRandomDeckToggled(bool on);
    void slotCardResized(int);

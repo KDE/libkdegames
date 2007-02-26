@@ -25,10 +25,11 @@
 #include <QMatrix>
 #include <QPixmap>
 #include <QPushButton>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <k3iconview.h>
 #include <krandom.h>
 #include <kconfig.h>
 
@@ -81,8 +82,8 @@ public:
 
     QLabel* deckLabel;
     QLabel* cardLabel;
-    K3IconView* deckIconView;
-    K3IconView* cardIconView;
+    QListWidget* deckIconView;
+    QListWidget* cardIconView;
     QCheckBox* randomDeck;
     QCheckBox* randomCardDir;
     QCheckBox* globalDeck;
@@ -92,8 +93,8 @@ public:
     QPixmap cPreviewPix;
     QLabel* cPreview;
 
-    QMap<Q3IconViewItem*, QString> deckMap;
-    QMap<Q3IconViewItem*, QString> cardMap;
+    QMap<QListWidgetItem*, QString> deckMap;
+    QMap<QListWidgetItem*, QString> cardMap;
     QMap<QString, QString> helpMap;
 
     //set query variables
@@ -270,20 +271,16 @@ void KCardDialog::setupDialog(bool showResizeBox)
     layout->addWidget(grp1);
     gboxLayout = new QVBoxLayout(grp1);
 
-    d->deckIconView = new K3IconView(grp1,"decks");
+    d->deckIconView = new QListWidget(grp1);
+    d->deckIconView->setObjectName(QLatin1String("decks"));
     d->deckIconView->setSpacing(8);
-    /*
-    deckIconView->setGridX(-1);
-    deckIconView->setGridY(50);
-    */
-    d->deckIconView->setGridX(82);
-    d->deckIconView->setGridY(106);
-    d->deckIconView->setSelectionMode(Q3IconView::Single);
-    d->deckIconView->setResizeMode(Q3IconView::Adjust);
+//    d->deckIconView->setUniformItemSizes(true);
+    d->deckIconView->setSelectionMode(QAbstractItemView::SingleSelection);
+    d->deckIconView->setResizeMode(QListView::Adjust);
     d->deckIconView->setMinimumWidth(360);
     d->deckIconView->setMinimumHeight(170);
-    d->deckIconView->setWordWrapIconText(false);
-    d->deckIconView->showToolTips();
+    d->deckIconView->setWordWrap(false);
+    d->deckIconView->setViewMode(QListView::IconMode);
     gboxLayout->addWidget(d->deckIconView);
 
     // deck select
@@ -315,8 +312,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
     connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalDeck()));
     l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    connect(d->deckIconView,SIGNAL(clicked(Q3IconViewItem *)),
-            this,SLOT(slotDeckClicked(Q3IconViewItem *)));
+    connect(d->deckIconView,SIGNAL(itemClicked(QListWidgetItem *)),
+            this,SLOT(slotDeckClicked(QListWidgetItem *)));
   }
 
   if (! (flags() & NoCards))
@@ -328,18 +325,16 @@ void KCardDialog::setupDialog(bool showResizeBox)
     layout->addWidget(grp2);
     gboxLayout = new QVBoxLayout(grp2);
 
-    d->cardIconView =new K3IconView(grp2,"cards");
-    /*
-    cardIconView->setGridX(36);
-    cardIconView->setGridY(50);
-    */
-    d->cardIconView->setGridX(82);
-    d->cardIconView->setGridY(106);
-    d->cardIconView->setResizeMode(Q3IconView::Adjust);
+    d->cardIconView = new QListWidget(grp2);
+    d->cardIconView->setObjectName(QLatin1String("cards"));
+    d->cardIconView->setSpacing(8);
+//    d->cardIconView->setUniformItemSizes(true);
+    d->cardIconView->setSelectionMode(QAbstractItemView::SingleSelection);
+    d->cardIconView->setResizeMode(QListView::Adjust);
     d->cardIconView->setMinimumWidth(360);
     d->cardIconView->setMinimumHeight(170);
-    d->cardIconView->setWordWrapIconText(false);
-    d->cardIconView->showToolTips();
+    d->cardIconView->setWordWrap(false);
+    d->cardIconView->setViewMode(QListView::IconMode);
     gboxLayout->addWidget(d->cardIconView);
 
     // Card select
@@ -371,8 +366,8 @@ void KCardDialog::setupDialog(bool showResizeBox)
     connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalCardDir()));
     l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
 
-    connect(d->cardIconView,SIGNAL(clicked(Q3IconViewItem *)),
-            this,SLOT(slotCardClicked(Q3IconViewItem *)));
+    connect(d->cardIconView,SIGNAL(itemClicked(QListWidgetItem *)),
+            this,SLOT(slotCardClicked(QListWidgetItem *)));
   }
 
   // Insert deck icons
@@ -380,7 +375,6 @@ void KCardDialog::setupDialog(bool showResizeBox)
   if (! (flags() & NoDeck))
   {
       insertDeckIcons();
-      d->deckIconView->arrangeItemsInGrid();
 
       // Set default icons if given
       if (!deck().isNull())
@@ -397,7 +391,6 @@ void KCardDialog::setupDialog(bool showResizeBox)
   if (! (flags() & NoCards))
   {
       insertCardIcons();
-      d->cardIconView->arrangeItemsInGrid();
 
     // Set default icons if given
     if (!cardDir().isNull())
@@ -475,6 +468,8 @@ void KCardDialog::insertCardIcons()
     QMatrix m;
     m.scale(0.8,0.8);
 
+    QSize itemSize;
+
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
         KConfig cfg(*it, KConfig::OnlyLocal);
@@ -487,16 +482,18 @@ void KCardDialog::insertCardIcons()
             continue;
 
         QString name=cfg.readEntry("Name", i18n("unnamed"));
-        Q3IconViewItem *item= new Q3IconViewItem(d->cardIconView, name, pixmap);
-
-        item->setDragEnabled(false);
-        item->setDropEnabled(false);
-        item->setRenameEnabled(false);
-        item->setSelectable(true);
+        QListWidgetItem *item = new QListWidgetItem(name, d->cardIconView);
+        item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        item->setToolTip(name);
+        item->setData(Qt::DecorationRole, pixmap);
 
         d->cardMap[item] = path;
         d->helpMap[path] = cfg.readEntry("Comment",name);
+
+        itemSize = itemSize.expandedTo(pixmap.size());
     }
+//    d->cardIconView->setUniformItemSizes(true);
+    d->cardIconView->setIconSize(itemSize);
 }
 
 void KCardDialog::insertDeckIcons()
@@ -512,6 +509,8 @@ void KCardDialog::insertDeckIcons()
     QMatrix m;
     m.scale(0.8,0.8);
 
+    QSize itemSize;
+
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
         KConfig cfg(*it, KConfig::OnlyLocal);
@@ -523,15 +522,18 @@ void KCardDialog::insertDeckIcons()
 
         cfg.setGroup(QString::fromLatin1("KDE Cards"));
         QString name=cfg.readEntry("Name", i18n("unnamed"));
-        Q3IconViewItem *item= new Q3IconViewItem(d->deckIconView,name, pixmap);
-
-        item->setDragEnabled(false);
-        item->setDropEnabled(false);
-        item->setRenameEnabled(false);
+        QListWidgetItem *item = new QListWidgetItem(name, d->deckIconView);
+        item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        item->setToolTip(name);
+        item->setData(Qt::DecorationRole, pixmap);
 
         d->deckMap[item] = getDeckName(*it);
         d->helpMap[d->deckMap[item]] = cfg.readEntry("Comment",name);
+
+        itemSize = itemSize.expandedTo(pixmap.size());
     }
+//    d->deckIconView->setUniformItemSizes(true);
+    d->deckIconView->setIconSize(itemSize);
 }
 
 
@@ -556,20 +558,21 @@ KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
     d->cFlags = mFlags;
 }
 
-void KCardDialog::slotDeckClicked(Q3IconViewItem *item)
+void KCardDialog::slotDeckClicked(QListWidgetItem *item)
 {
-    if (item && item->pixmap())
+    if (item && item->data(Qt::DecorationRole).type() == QVariant::Pixmap)
     {
-        d->deckLabel->setPixmap(* (item->pixmap()));
+        d->deckLabel->setPixmap(item->data(Qt::DecorationRole).value<QPixmap>());
         d->deckLabel->setToolTip(d->helpMap[d->deckMap[item]]);
         setDeck(d->deckMap[item]);
     }
 }
-void KCardDialog::slotCardClicked(Q3IconViewItem *item)
+
+void KCardDialog::slotCardClicked(QListWidgetItem *item)
 {
-    if (item && item->pixmap())
+    if (item && item->data(Qt::DecorationRole).type() == QVariant::Pixmap)
     {
-        d->cardLabel->setPixmap(* (item->pixmap()));
+        d->cardLabel->setPixmap(item->data(Qt::DecorationRole).value<QPixmap>());
         QString path = d->cardMap[item];
         d->cardLabel->setToolTip(d->helpMap[path]);
         setCardDir(path);
