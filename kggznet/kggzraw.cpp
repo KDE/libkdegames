@@ -80,7 +80,7 @@ void KGGZRaw::setNetwork(int fd)
 
 	// Create a datastream on an unbuffered TCP socket
 	m_socket = new QAbstractSocket(QAbstractSocket::TcpSocket, this);
-	m_socket->setSocketDescriptor(fd, QAbstractSocket::Connected, QIODevice::ReadWrite | QIODevice::Unbuffered);
+	m_socket->setSocketDescriptor(fd, QAbstractSocket::ConnectedState, QIODevice::ReadWrite | QIODevice::Unbuffered);
 
 	m_net = new QDataStream(m_socket);
 }
