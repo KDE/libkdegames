@@ -1,0 +1,23 @@
+The kggzmod library
+===================
+
+This is the 'ggzmod' library equivalent for Qt/KDE-based applications.
+It is finally introduced for GGZ 0.0.14 to let the games interact
+with the GGZ core client in a more suitable way.
+
+There are currently two variants: one for Qt3 and one for Qt4.
+In the future, all the Qt3-based stuff in ggz-kde-* will be ported and
+thus the Qt4 versions will be made the default. Right now however
+the Qt4 versions only live in playground/ggz-kde4 to be prepared for
+their usage in KDE SVN.
+
+The kggzmod library is a complete reimplementation of ggzmod and does
+not depend on any other GGZ libraries.
+In addition, the kggzgames library which sits on top of kggzmod has
+been ported, as it previously also only used pure ggzmod.
+With kggzgames, KDE/Qt games can get standard dialogs in addition
+to the non-GUI kggzmod functionality.
+
+For more information on kggzmod, have a look at its API documentation
+(make apidocs).
+

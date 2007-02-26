@@ -2,10 +2,13 @@ project(libkdegames)
 
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
-add_subdirectory( carddecks ) 
-add_subdirectory( highscore ) 
-add_subdirectory( kgame ) 
-add_subdirectory( pics ) 
+add_subdirectory( carddecks )
+add_subdirectory( highscore )
+add_subdirectory( kgame )
+add_subdirectory( pics )
+add_subdirectory( kggznet )
+add_subdirectory( kggzmod )
+add_subdirectory( kggzgames )
 
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}/highscore ${CMAKE_CURRENT_SOURCE_DIR}/highscore/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs/ )
 
