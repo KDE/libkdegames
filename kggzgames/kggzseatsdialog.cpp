@@ -171,7 +171,7 @@ void KGGZSeatsDialog::displaySeats()
 			default:
 				break;
 		}
-		QLabel *typelabel = new QLabel(i18n("Type: %1").arg(type), w);
+		QLabel *typelabel = new QLabel(i18n("Type: %1", type), w);
 
 		QString name = p->name();
 	       	if(name.isNull()) name = i18n("(unnamed)");
@@ -259,7 +259,7 @@ void KGGZSeatsDialog::displaySpectators()
 		numberframe->display(i + 1);
 
 		QString type = i18n("Spectator");
-		QLabel *typelabel = new QLabel(i18n("Type: %1").arg(type), w);
+		QLabel *typelabel = new QLabel(i18n("Type: %1", type), w);
 
 		QString name = p->name();
 	       	if(name.isNull()) name = i18n("(unnamed)");
@@ -414,13 +414,13 @@ void KGGZSeatsDialog::infos()
 		{
 			if(!p->hostname().isEmpty())
 			{
-				QString hostname = i18n("Host: %1").arg(p->hostname());
+				QString hostname = i18n("Host: %1", p->hostname());
 				m_hostnames[i]->setText(hostname);
 				m_hostnames[i]->show();
 			}
 			if(!p->realname().isEmpty())
 			{
-				QString realname = i18n("Realname: %1").arg(p->realname());
+				QString realname = i18n("Realname: %1", p->realname());
 				m_realnames[i]->setText(realname);
 				m_realnames[i]->show();
 			}
