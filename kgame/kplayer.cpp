@@ -284,15 +284,14 @@ bool KPlayer::setTurn(bool b, bool exclusive)
   // if we get to do an exclusive turn all other players are disallowed
   if (exclusive && b && game())
   {
-     KPlayer *player;
-     KGame::KGamePlayerList *list=game()->playerList();
-     for ( player=list->first(); player != 0; player=list->next() )
+     for ( KGame::KGamePlayerList::iterator it = game()->playerList()->begin();
+            it!=game()->playerList()->end();it++)
      {
-       if (player==this)
+       if ((*it)==this)
        {
          continue;
        }
-       player->setTurn(false,false);
+       (*it)->setTurn(false,false);
      }
   }
 

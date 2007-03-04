@@ -237,8 +237,8 @@ void KGameChat::setKGame(KGame* g)
 			this, SLOT(slotReceiveMessage(int, const QByteArray&, quint32, quint32)));
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
-	Q3PtrList<KPlayer> playerList = *d->mGame->playerList();
-	for (int unsigned i = 0; i < playerList.count(); i++) {
+	QList<KPlayer*> playerList = *d->mGame->playerList();
+	for (int i = 0; i < playerList.count(); i++) {
 		slotAddPlayer(playerList.at(i));
 	}
  }

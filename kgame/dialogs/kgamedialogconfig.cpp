@@ -653,9 +653,9 @@ void KGameDialogConnectionConfig::setKGame(KGame* g)
 	connect(game(), SIGNAL(signalPlayerLeftGame(KPlayer*)),
 			this, SLOT(slotPlayerLeftGame(KPlayer*)));
 
-	KGame::KGamePlayerList l = *game()->playerList();
-	for (KPlayer* p = l.first(); p; p = l.next()) {
-		slotPlayerJoinedGame(p);
+  for ( QList<KPlayer*>::const_iterator it = game()->playerList()->begin(); it!=game()->playerList()->end();it++ )
+  {
+		slotPlayerJoinedGame(*it);
 	}
  }
 }

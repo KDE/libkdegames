@@ -24,7 +24,7 @@
 #define __KGAME_H_
 
 #include <QString>
-#include <q3ptrlist.h>
+#include <QList>
 
 
 #include "kgamenetwork.h"
@@ -64,7 +64,7 @@ class KDEGAMES_EXPORT KGame : public KGameNetwork
   Q_OBJECT
 
 public:
-	typedef Q3PtrList<KPlayer> KGamePlayerList;
+	typedef QList<KPlayer*> KGamePlayerList;
 
 	/**
 	 * The policy of the property. This can be PolicyClean (setVale uses

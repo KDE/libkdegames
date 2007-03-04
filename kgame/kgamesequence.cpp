@@ -74,9 +74,10 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
  nextplayer = 0;
  minplayer = 0;
 
- KPlayer *player;
- for (player = game()->playerList()->first(); player != 0; player=game()->playerList()->next() )
+ QList<KPlayer*>::iterator it = game()->playerList()->begin();
+ for (;it != game()->playerList()->end(); it++ )
  {
+   KPlayer* player = *it;
    // Find the first player for a cycle
    if (player->id() < minId)
    {
