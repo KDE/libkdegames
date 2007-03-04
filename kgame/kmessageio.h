@@ -367,6 +367,9 @@ class KMessageProcess : public KMessageIO
   void  slotProcessExited(KProcess *p);
   void  slotWroteStdin(KProcess *p);
 
+  signals:
+    void signalReceivedStderr(QString msg);
+
   private:
     QString mProcessName;
     KProcess *mProcess;

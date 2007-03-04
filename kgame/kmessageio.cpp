@@ -328,6 +328,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
     QByteArray a(pos, len);
     QString s(a);
     kDebug(11001) << "KProcess:" <<pid<<"("<<len<< "):" << s << endl;
+    emit signalReceivedStderr(s);
     a.clear();
     if (p) pos=p+1;
     buflen-=len+1;

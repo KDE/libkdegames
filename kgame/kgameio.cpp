@@ -293,6 +293,9 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   //        this, SLOT(clientMessage(const QByteArray&, quint32, const QValueList <quint32> &)));
   connect(d->mProcessIO, SIGNAL(received(const QByteArray&)),
           this, SLOT(receivedMessage(const QByteArray&)));
+  // Relay signal
+  connect(d->mProcessIO, SIGNAL(signalReceivedStderr(QString)),
+          this, SIGNAL(signalReceivedStderr(QString)));
   //kDebug(11001) << "Our client is id="<<d->mMessageClient->id() << endl;
 }
 

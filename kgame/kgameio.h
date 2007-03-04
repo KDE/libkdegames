@@ -456,6 +456,12 @@ signals:
   */
   void signalIOAdded(KGameIO *game,QDataStream &stream,KPlayer *p,bool *send);
 
+  /** Text is received by the process on STDERR. This is usually a debug string.
+    * @param msg The text
+    */
+  void signalReceivedStderr(QString msg);
+
+
 
 protected:
 
