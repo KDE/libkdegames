@@ -140,23 +140,20 @@ void KGame::deletePlayers()
 {
 // kDebug(11001) << k_funcinfo << endl;
  KGamePlayerList tmp = d->mPlayerList; // in case of PolicyClean player=d->mPlayerList.first() is infinite
- KPlayer *player;
- while((player=tmp.first()))
+ for ( KGamePlayerList::iterator it = tmp.begin(); it!=tmp.end();it++ )
  {
-   delete player; // delete and removes the player
-   tmp.removeFirst();
+   delete (*it);
  }
 // kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 void KGame::deleteInactivePlayers()
 {
- KPlayer *player;
- while((player=d->mInactivePlayerList.first()))
+ for ( KGamePlayerList::iterator it = d->mInactivePlayerList.begin(); it!=d->mInactivePlayerList.end();it++ )
  {
    //player->setGame(0); // prevent call backs
-   d->mInactivePlayerList.remove(player);
-   delete player;
+   d->mInactivePlayerList.remove(*it);
+   delete (*it);
  }
 }
 
