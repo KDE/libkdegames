@@ -1,5 +1,17 @@
 [KDE Backdeck]
 Name=AisleRiot
+Name[af]=Aisleriot
+Name[be]=Эслрыёт (пасьянсы)
+Name[cs]=Pozdvižení v uličce
+Name[eo]=Simpla
+Name[hr]=Pobuna u prolazu
+Name[ko]=왕관
+Name[ne]=आइस्ले रिओट
+Name[pa]=ਇਲਸੀਰਓਟ
+Name[ru]=ЭшлРиот (коллекция пасьянсов)
+Name[sv]=Kyrkouppror
+Name[ta]= அய்ஸில்ரியாட்
+Name[uk]=Заколот на човні
 Name[x-test]=xxAisleRiotxx
 Preview=11.png
 PySol=yes

@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=SVG Cards
+Name[uk]=Карти в SVG
+Name[x-test]=xxSVG Cardsxx
 Preview=11.png
 SVG=ornamental.svgz
 BackSize=139,189

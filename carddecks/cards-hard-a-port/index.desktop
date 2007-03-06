@@ -1,6 +1,27 @@
 [KDE Backdeck]
 Name=Hard a Port
+Name[af]=Hard 'n Poort
+Name[be]=Пампушка
+Name[de]=Hart Backbord
+Name[eo]=Tenta
+Name[hr]=Tvrdi na portu
+Name[is]=Hart á bakborða
+Name[it]=Donnine
+Name[km]=ច្រក​រឹង
+Name[ko]=폼 잡기 힘들다
+Name[lv]=Klasisks
+Name[nds]=Hatt Backboord
+Name[ne]=कडा एउटा पोर्ट
+Name[pt_BR]=Duramente um Porto
+Name[ro]=Licenţioase
+Name[ru]=Пышка
+Name[sr]=Хард-а-порт
+Name[sr@Latn]=Hard-a-port
+Name[sv]=Dikt babord
+Name[ta]=முனையத்தை கடினமாக்கு
+Name[tg]=Даргоҳи Сахт
 Name[x-test]=xxHard a Portxx
+Name[xh]=Izibuko Esport eqinileyo
 Preview=11.png
 PySol=yes
 BackSize=72,96
