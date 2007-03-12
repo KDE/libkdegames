@@ -93,7 +93,7 @@ public:
 	 **/
 	int maxMessages() const;
 
-protected slots:
+protected Q_SLOTS:
 	void slotGetNameFont();
 	void slotGetTextFont();
 	void slotGetSystemNameFont();
