@@ -32,6 +32,8 @@ Player::Player()
 	d->m_stats = 0;
 }
 
+Player::~Player() { delete d; }
+
 Player::Type Player::type() const
 {
 	return d->m_type;

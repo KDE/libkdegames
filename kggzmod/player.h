@@ -147,6 +147,7 @@ class Player
 
 	private:
 		Player();
+		~Player();
 		PlayerPrivate *d;
 		void init(PlayerPrivate *x);
 };
