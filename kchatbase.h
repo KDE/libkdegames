@@ -397,7 +397,7 @@ public:
 	int maxItems() const;
 
 
-public slots:
+public Q_SLOTS:
 	/**
 	 * Add a text in the listbox. See also signalSendMessage()
 	 *
@@ -445,7 +445,7 @@ public slots:
 	 **/
 	void setAcceptMessage(bool a);
 	
-signals:
+Q_SIGNALS:
 	/**
 	 * Emitted when the user right-clicks on a list item. 
 	 * @see QListBox::rightButtonClicked
@@ -492,7 +492,7 @@ protected:
 	 **/
 	virtual Q3ListBoxItem* layoutSystemMessage(const QString& fromName, const QString& text);
 
-private slots:
+private Q_SLOTS:
 	/**
 	 * Check if a text was entered and if acceptMessage returns true. 
 	 * Then add the message to the KCompletion object of the KLineEdit

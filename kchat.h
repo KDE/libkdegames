@@ -112,7 +112,7 @@ public:
 	int fromId() const;
 	
 
-signals:
+Q_SIGNALS:
 	/**
 	 * This signal is emitted when the player wants to send a message.
 	 *
