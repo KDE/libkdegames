@@ -68,7 +68,6 @@ class KChatBaseItemDelegate;
  * @author Andreas Beckermann <b_mann@gmx.de>
  * @author Gael de Chalendar (aka Kleag) <kleag@free.fr> for the port to Model/View
  * 
- * @todo Correct the use of max items.
  **/
 class KDEGAMES_EXPORT KChatBase : public QFrame
 {
