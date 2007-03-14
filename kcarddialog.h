@@ -324,7 +324,7 @@ protected:
      **/
     static QString group();
 
-protected slots:
+protected Q_SLOTS:
    void slotDeckClicked(QListWidgetItem *);
    void slotCardClicked(QListWidgetItem *);
    void slotRandomCardDirToggled(bool on);

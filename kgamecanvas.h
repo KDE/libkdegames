@@ -564,7 +564,7 @@ private:
 
     virtual void paintEvent(QPaintEvent *event);
 
-private slots:
+private Q_SLOTS:
     void processAnimations();
     void updateChanges();
 

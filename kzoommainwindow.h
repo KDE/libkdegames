@@ -65,7 +65,7 @@ public:
                   
   uint zoom() const { return _zoom; }
   
-public slots:
+public Q_SLOTS:
   void zoomIn();
   void zoomOut();
   void toggleMenubar();
