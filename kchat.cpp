@@ -23,6 +23,8 @@
 #include <kdebug.h>
 
 #include "kchat.h"
+#include "kchatbasemodel.h"
+#include "kchatbaseitemdelegate.h"
 
 class KChatPrivate
 {
@@ -38,7 +40,9 @@ public:
 	int mFromId;
 };
 
-KChat::KChat(QWidget* parent, bool twoPlayerGame) : KChatBase(parent, twoPlayerGame)
+KChat::KChat(QWidget* parent, bool twoPlayerGame) : KChatBase(parent, 
+    new KChatBaseModel(parent),
+    new KChatBaseItemDelegate(parent),twoPlayerGame)
 {
  init(); 
 }

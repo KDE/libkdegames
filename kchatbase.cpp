@@ -1,6 +1,7 @@
 /*
     This file is part of the KDE games library
     Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
+    Copyright (C) 2007 Gael de Chalendar (aka Kleag) <kleag@free.fr>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -18,6 +19,8 @@
 */
 
 #include "kchatbase.h"
+#include "kchatbasemodel.h"
+#include "kchatbaseitemdelegate.h"
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -33,190 +36,67 @@
 #include <QList>
 #include <QApplication>
 
-class KChatBaseTextPrivate
-{
-public:
-	KChatBaseTextPrivate()
-	{
-		mNameFont = 0;
-		mMessageFont = 0;
-	}
-
-	QString mName;
-	QString mMessage;
-
-	const QFont* mNameFont;
-	const QFont* mMessageFont;
-};
-
-
-KChatBaseText::KChatBaseText(const QString& name, const QString& message) : Q3ListBoxText()
-{
- init();
- setName(name);
- setMessage(message);
-}
-
-KChatBaseText::KChatBaseText(const QString& message) : Q3ListBoxText()
-{
- init();
- setMessage(message);
-}
-
-KChatBaseText::~KChatBaseText()
-{
- delete d;
-}
-
-void KChatBaseText::init()
-{
- d = new KChatBaseTextPrivate;
-}
-
-void KChatBaseText::setName(const QString& n)
-{
-// d->mName = n;
- d->mName = QString("%1: ").arg(n);
- setText(QString("%1: %2").arg(name()).arg(message())); // esp. for sorting
-}
-
-void KChatBaseText::setMessage(const QString& m)
-{
- d->mMessage = m;
- setText(QString("%1: %2").arg(name()).arg(message())); // esp. for sorting
-}
-
-const QString& KChatBaseText::name() const
-{ return d->mName; }
-
-const QString& KChatBaseText::message() const
-{ return d->mMessage; }
-
-QFont KChatBaseText::nameFont() const
-{
- if (d->mNameFont) {
-	return *d->mNameFont;
- } else if (listBox()) {
-	return listBox()->font();
- } else {
-	return QFont();
- }
-}
-
-QFont KChatBaseText::messageFont() const
-{
- if (d->mMessageFont) {
-	return *d->mMessageFont;
- } else if (listBox()) {
-	return listBox()->font();
- } else {
-	return QFont();
- }
-}
-
-void KChatBaseText::setNameFont(const QFont* f)
-{ d->mNameFont = f; }
-
-void KChatBaseText::setMessageFont(const QFont* f)
-{ d->mMessageFont = f; }
-
-void KChatBaseText::paint(QPainter* painter)
-{
- QFontMetrics fm = painter->fontMetrics();
- painter->setFont(nameFont());
- painter->drawText(3, fm.ascent() + fm.leading()/2, name());
- painter->setFont(messageFont());
- painter->drawText(3 + QFontMetrics(nameFont()).width(name()), fm.ascent() + fm.leading()/2, message());
-}
-
-int KChatBaseText::width(const Q3ListBox* lb) const
-{
- int w = 0;
- if (lb) {
-	w += 6;
-	w += QFontMetrics(nameFont()).width(name());
-	w += QFontMetrics(messageFont()).width(message());
- }
-// int w = lb ? lb->fontMetrics().width( text() ) + 6 : 0; // QT orig
- return qMax(w, QApplication::globalStrut().width());
-}
-
-int KChatBaseText::height(const Q3ListBox* lb) const
-{
- int h = 0;
- if (lb) {
-	h += 2;
-	// AB: is lineSpacing still correct?
-	if (QFontMetrics(nameFont()).lineSpacing() > QFontMetrics(messageFont()).lineSpacing()) {
-		h += QFontMetrics(nameFont()).lineSpacing();
-	} else {
-		h += QFontMetrics(messageFont()).lineSpacing();
-	}
- }
-// int h = lb ? lb->fontMetrics().lineSpacing() + 2 : 0; // QT orig
- return qMax(h, QApplication::globalStrut().height());
-}
-
 
 
 class KChatBasePrivate
 {
 public:
-	KChatBasePrivate()
-	{
-		mBox = 0;
-		mEdit = 0;
-		mCombo = 0;
+  KChatBasePrivate(KChatBaseModel* model, KChatBaseItemDelegate* delegate)
+  {
+    mBox = 0;
+    mEdit = 0;
+    mCombo = 0;
+  
+    mAcceptMessage = true;
 
-		mAcceptMessage = true;
-		mMaxItems = -1;
-	}
-	Q3ListBox* mBox;
-	KLineEdit* mEdit;
-	QComboBox* mCombo;
-	bool mAcceptMessage;
-	int mMaxItems;
+    mModel = model;
+    mDelegate = delegate;
+  }
+  QListView* mBox;
+  KLineEdit* mEdit;
+  QComboBox* mCombo;
+  bool mAcceptMessage;
 
-	QList<int> mIndex2Id;
+  QList<int> mIndex2Id;
 
-	QFont mNameFont;
-	QFont mMessageFont;
-	QFont mSystemNameFont;
-	QFont mSystemMessageFont;
+  KChatBaseModel* mModel;
+  KChatBaseItemDelegate* mDelegate;
 };
 
-KChatBase::KChatBase(QWidget* parent, bool noComboBox) : QFrame(parent)
+void KChatBase::setModel(KChatBaseModel* m)
 {
- init(noComboBox);
+    d->mModel=m;
 }
 
-KChatBase::~KChatBase()
+KChatBaseModel* KChatBase::model()
 {
-// kDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
- saveConfig();
- delete d;
+    return d->mModel;
 }
 
-void KChatBase::init(bool noComboBox)
+KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate, bool noComboBox) : QFrame(parent)
 {
-// kDebug(11000) << "KChatBase: INIT (" << this << ")" << endl;
-
- d = new KChatBasePrivate;
+  KChatBaseModel* mod = model;
+  if (mod==0)
+    mod = new KChatBaseModel(parent);
+  KChatBaseItemDelegate* del = delegate;
+  if (del == 0)
+    del = new KChatBaseItemDelegate(parent);
+  
+  d = new KChatBasePrivate(mod, del);
 
  setMinimumWidth(100);
  setMinimumHeight(150);
 
  QVBoxLayout* l = new QVBoxLayout(this);
 
- d->mBox = new Q3ListBox(this);
- connect(d->mBox, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)),
-		this, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)));
+ d->mBox = new QListView();
+ d->mBox->setModel(d->mModel);
+ d->mBox->setItemDelegate(d->mDelegate);
+ connect(d->mBox, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)),
+		this, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)));
  l->addWidget(d->mBox);
- d->mBox->setVScrollBarMode(Q3ScrollView::AlwaysOn);
- d->mBox->setHScrollBarMode(Q3ScrollView::AlwaysOff);
  d->mBox->setFocusPolicy(Qt::NoFocus);
-// d->mBox->setSelectionMode(QListBox::NoSelection);
- d->mBox->setSelectionMode(Q3ListBox::Single);
+ d->mBox->setSelectionMode(QAbstractItemView::SingleSelection);
 
  l->addSpacing(5);
 
@@ -240,6 +120,13 @@ void KChatBase::init(bool noComboBox)
  setMaxItems(-1); // unlimited
 
  readConfig();
+}
+
+KChatBase::~KChatBase()
+{
+// kDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
+ saveConfig();
+ delete d;
 }
 
 bool KChatBase::acceptMessage() const
@@ -337,60 +224,6 @@ int KChatBase::nextId() const
  return i;
 }
 
-void KChatBase::addItem(const Q3ListBoxItem* text)
-{
- d->mBox->insertItem(text);
- int index = d->mBox->count() -1;
- d->mBox->setBottomItem(index);//FIXME: don't scroll to bottom if user scrolled down manually
- if (maxItems() >= 0 && d->mBox->count() > (unsigned int)maxItems()) {
-	d->mBox->removeItem(0);
- }
-}
-
-void KChatBase::addMessage(const QString& fromName, const QString& text)
-{
-//maybe "%1 says: %2" or so
- addItem(layoutMessage(fromName, text));
-}
-
-void KChatBase::addSystemMessage(const QString& fromName, const QString& text)
-{
- addItem(layoutSystemMessage(fromName, text));
-}
-
-Q3ListBoxItem* KChatBase::layoutMessage(const QString& fromName, const QString& text)
-{
- //TODO: KChatBaseConfigure? - e.g. color
- Q3ListBoxItem* message;
- if (text.startsWith("/me ")) {
-	// replace "/me" by a nice star. leave one space after the star
-	QPixmap pix;
-	pix.load(KStandardDirs::locate("data", QString::fromLatin1("kdegames/pics/star.png")));
-
-	//TODO KChatBasePixmap? Should change the font here!
-
-	message = (Q3ListBoxItem*)new Q3ListBoxPixmap(pix, i18n("%1 %2", fromName, text.mid(3)));
- } else {
-	// the text is not edited in any way. just return an item
-	KChatBaseText* m = new KChatBaseText(fromName, text);
-	m->setNameFont(&d->mNameFont);
-	m->setMessageFont(&d->mMessageFont);
-	message = (Q3ListBoxItem*)m;
- }
- return message;
-}
-
-Q3ListBoxItem* KChatBase::layoutSystemMessage(const QString& fromName, const QString& text)
-{
- //TODO: KChatBaseConfigure? - e.g. color
-
- // no need to check for /me etc.
- KChatBaseText* m = new KChatBaseText(i18n("--- %1", fromName), text);
- m->setNameFont(&d->mSystemNameFont);
- m->setMessageFont(&d->mSystemMessageFont);
- return (Q3ListBoxItem*)m;
-}
-
 void KChatBase::slotReturnPressed(const QString& text)
 {
  if (text.length() <= 0) {
@@ -400,7 +233,6 @@ void KChatBase::slotReturnPressed(const QString& text)
 	return;
  }
  d->mEdit->completionObject()->addItem(text);
-// connect(d->mEdit, SIGNAL(returnPressed(const QString&)), comp, SLOT(addItem(const QString&)));
  d->mEdit->clear();
  returnPressed(text);
 }
@@ -412,120 +244,104 @@ QString KChatBase::comboBoxItem(const QString& name) const
 
 void KChatBase::slotClear()
 {
- d->mBox->clear();
+ clear();
 }
 
 void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
 { d->mEdit->setCompletionMode(mode); }
 
-void KChatBase::setNameFont(const QFont& font)
-{
- d->mNameFont = font;
- d->mBox->triggerUpdate(false);
-}
-
-void KChatBase::setMessageFont(const QFont& font)
-{
- d->mMessageFont = font;
- d->mBox->triggerUpdate(false);
-}
-
-void KChatBase::setBothFont(const QFont& font)
-{
- setNameFont(font);
- setMessageFont(font);
-}
-
-const QFont& KChatBase::nameFont() const
-{ return d->mNameFont; }
-
-const QFont& KChatBase::messageFont() const
-{ return d->mMessageFont; }
-
-void KChatBase::setSystemNameFont(const QFont& font)
-{
- d->mSystemNameFont = font;
- d->mBox->triggerUpdate(false);
-}
-
-void KChatBase::setSystemMessageFont(const QFont& font)
-{
- d->mSystemMessageFont = font;
- d->mBox->triggerUpdate(false);
-}
-
-void KChatBase::setSystemBothFont(const QFont& font)
-{
- setSystemNameFont(font);
- setSystemMessageFont(font);
-}
-
-const QFont& KChatBase::systemNameFont() const
-{ return d->mSystemNameFont; }
-
-const QFont& KChatBase::systemMessageFont() const
-{ return d->mSystemMessageFont; }
-
 void KChatBase::saveConfig(KConfig* conf)
 {
- QString oldGroup;
- if (!conf) {
-	conf = KGlobal::config().data();
-	oldGroup = conf->group();
-	conf->setGroup("KChatBase");
- }
-
- conf->writeEntry("NameFont", nameFont());
- conf->writeEntry("MessageFont", messageFont());
- conf->writeEntry("SystemNameFont", systemNameFont());
- conf->writeEntry("SystemMessageFont", systemMessageFont());
- conf->writeEntry("MaxMessages", maxItems());
-
- if (!oldGroup.isNull()) {
-	conf->setGroup(oldGroup);
- }
+  d->mModel->saveConfig(conf);
 }
 
 void KChatBase::readConfig(KConfig* conf)
 {
- QString oldGroup;
- if (!conf) {
-	conf = KGlobal::config().data();
-	oldGroup = conf->group();
-	conf->setGroup("KChatBase");
- }
-
- setNameFont(conf->readEntry("NameFont", QFont()));
- setMessageFont(conf->readEntry("MessageFont", QFont()));
- setSystemNameFont(conf->readEntry("SystemNameFont", QFont()));
- setSystemMessageFont(conf->readEntry("SystemMessageFont", QFont()));
- setMaxItems(conf->readEntry("MaxMessages", -1));
-
- if (!oldGroup.isNull()) {
-	conf->setGroup(oldGroup);
- }
+  d->mModel->readConfig(conf);
 }
 
 void KChatBase::clear()
 {
- d->mBox->clear();
+ d->mModel->removeRows(0, d->mModel->rowCount());
 }
 
 void KChatBase::setMaxItems(int maxItems)
 {
- d->mMaxItems = maxItems;
+ d->mModel->setMaxItems(maxItems);
  //TODO cut too many messages
  if (maxItems == 0) {
 	clear();
  } else if (maxItems > 0) {
-	while (d->mBox->count() > (unsigned int)maxItems) {
-		d->mBox->removeItem(0);
-	}
+  while (d->mModel->rowCount() > (int)maxItems) {
+   d->mModel->removeRow(0);
+  }
  }
 }
 
 int KChatBase::maxItems() const
-{ return d->mMaxItems; }
+{ 
+  return d->mModel->maxItems(); 
+}
 
+
+const QFont& KChatBase::nameFont() const
+{
+  return d->mModel->nameFont();
+}
+
+const QFont& KChatBase::messageFont() const
+{
+  return d->mModel->messageFont();
+}
+
+const QFont& KChatBase::systemNameFont() const
+{
+  return d->mModel->systemNameFont();
+}
+
+const QFont& KChatBase::systemMessageFont() const
+{
+  return d->mModel->systemMessageFont();
+}
+
+void KChatBase::setNameFont(const QFont& font)
+{
+  d->mModel->setNameFont(font);
+}
+
+void KChatBase::setMessageFont(const QFont& font)
+{
+  d->mModel->setMessageFont(font);
+}
+
+void KChatBase::setBothFont(const QFont& font)
+{
+  d->mModel->setBothFont(font);
+}
+
+void KChatBase::setSystemNameFont(const QFont& font)
+{
+  d->mModel->setSystemNameFont(font);
+}
+
+void KChatBase::setSystemMessageFont(const QFont& font)
+{
+  d->mModel->setSystemMessageFont(font);
+}
+
+void KChatBase::setSystemBothFont(const QFont& font)
+{
+  d->mModel->setSystemBothFont(font);
+}
+
+void KChatBase::addMessage(const QString& fromName, const QString& text)
+{
+   d->mModel->addMessage(fromName, text);
+}
+
+void KChatBase::addSystemMessage(const QString& fromName, const QString& text)
+{
+   d->mModel->addSystemMessage(fromName, text);
+}
 
 #include "kchatbase.moc"

@@ -213,6 +213,8 @@ void KChatDialog::configureChatWidget(KChatBase* widget)
  widget->setSystemMessageFont(systemTextFont());
  
  widget->setMaxItems(maxMessages());
+ widget->saveConfig();
+ kDebug() << "Saved configuration" << endl;
 }
 
 void KChatDialog::slotOk()

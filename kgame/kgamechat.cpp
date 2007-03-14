@@ -30,9 +30,6 @@
 #include <kdebug.h>
 
 #include <QMap>
-#include <q3intdict.h>
-//Added by qt3to4:
-#include <Q3PtrList>
 
 //FIXME:
 #define FIRST_ID 2 // first id, that is free of use, aka not defined above
@@ -53,18 +50,16 @@ public:
 	int mMessageId;
 
 
-	Q3IntDict<KPlayer> mIndex2Player;
-
 	QMap<int, int> mSendId2PlayerId;
 	int mToMyGroup; // just as the above - but for the group, not for players
 };
 
-KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent) : KChatBase(parent)
+KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate) : KChatBase(parent, model, delegate)
 {
  init(g, msgid); 
 }
 
-KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent) : KChatBase(parent)
+KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate) : KChatBase(parent,model,delegate)
 {
  init(g, msgid);
  setFromPlayer(fromPlayer);

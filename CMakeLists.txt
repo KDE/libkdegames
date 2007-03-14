@@ -61,6 +61,8 @@ set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SR
    kzoommainwindow.cpp
    kgamemisc.cpp 
    kchatbase.cpp 
+   kchatbasemodel.cpp 
+   kchatbaseitemdelegate.cpp 
    kchat.cpp 
    kchatdialog.cpp 
    kgameprogress.cpp 
@@ -85,6 +87,8 @@ install(FILES
    kstandardgameaction.h
    kzoommainwindow.h
    kchatbase.h
+   kchatbasemodel.h
+   kchatbaseitemdelegate.h
    kchat.h
    kchatdialog.h
    kgameprogress.h

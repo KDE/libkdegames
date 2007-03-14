@@ -49,14 +49,14 @@ public:
 	 * the chat message. The @p fromPlayer is the local player (see @ref
 	 * setFromPlayer).
 	 **/
-	KGameChat(KGame* game, int msgid, KPlayer* fromPlayer, QWidget * parent);
+	KGameChat(KGame* game, int msgid, KPlayer* fromPlayer, QWidget * parent, KChatBaseModel* model=0, KChatBaseItemDelegate* delegate=0);
 
 	/**
 	 * @overload
 	 * To make use of this widget you need to call @ref setFromPlayer
 	 * manually.
 	 **/
-	KGameChat(KGame* game, int msgId, QWidget* parent);
+	KGameChat(KGame* game, int msgId, QWidget* parent, KChatBaseModel* model=0, KChatBaseItemDelegate* delegate=0);
 
 	/**
 	 * @overload
