@@ -63,7 +63,7 @@ class KDEGAMES_EXPORT KChatBaseMessage : public QPair< QString, QString >
   private:
     KChatBaseMessagePrivate* d;
 };
-Q_DECLARE_METATYPE(KChatBaseMessage);
+Q_DECLARE_METATYPE(KChatBaseMessage)
 
 /**
  * The model used to store messages displayed in the chat dialog messages 
