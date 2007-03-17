@@ -4,6 +4,7 @@ configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/hi
 
 add_subdirectory( carddecks )
 add_subdirectory( highscore )
+add_subdirectory( includes )
 add_subdirectory( kgame )
 add_subdirectory( pics )
 if(NOT WIN32)
