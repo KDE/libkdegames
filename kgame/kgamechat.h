@@ -115,7 +115,7 @@ public:
 	virtual QString fromName() const;
 
 
-public slots:
+public Q_SLOTS:
 	virtual void addMessage(const QString& fromName, const QString& text) { KChatBase::addMessage(fromName, text);}
 	virtual void addMessage(int fromId, const QString& text);
 
@@ -188,7 +188,7 @@ protected:
 	virtual QString sendToPlayerEntry(const QString& name) const;
 
 
-protected slots:
+protected Q_SLOTS:
 	/**
 	 * Unsets a KGame object that has been set using setKGame
 	 * before. You don't have to call this - this is usually done

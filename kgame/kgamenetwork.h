@@ -329,7 +329,7 @@ public:
      **/
     virtual void unlock();
 
-signals:
+Q_SIGNALS:
     /**
      * A network error occurred
      * @param error the error code
@@ -383,7 +383,7 @@ protected:
      **/
     void setMaster();
 
-protected slots:
+protected Q_SLOTS:
     /**
      * Called by KMessageClient::broadcastReceived() and will check if the
      * message format is valid. If it is not, it will generate an error (see

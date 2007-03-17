@@ -300,7 +300,7 @@ public:
 	void Debug();
 
 
-signals:
+Q_SIGNALS:
 	/**
 	 * This is emitted by a property. KGamePropertyBase::emitSignal
 	 * calls emitSignal which emits this signal. 

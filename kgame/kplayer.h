@@ -414,7 +414,7 @@ public:
         */
        KGamePropertyHandler* dataHandler();
 
-signals:
+Q_SIGNALS:
       /**
        *  The player object got a message which was targeted
        *  at it but has no default method to process it. This
@@ -431,7 +431,7 @@ signals:
         */
        void signalPropertyChanged(KGamePropertyBase *property,KPlayer *me);
 
-protected slots:
+protected Q_SLOTS:
       /**
        * Called by KGameProperty only! Internal function!
        **/

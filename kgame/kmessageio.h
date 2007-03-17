@@ -123,7 +123,7 @@ public:
   virtual QString peerName () const { return QString::fromLatin1("localhost"); }
 
 
-signals:
+Q_SIGNALS:
   /**
     This signal is emitted when /e send() on the connected KMessageIO
     object is called. The parameter contains the same data array in /e msg
@@ -141,7 +141,7 @@ signals:
   */
   void connectionBroken ();
 
-public slots:
+public Q_SLOTS:
 
   /**
     This slot sends the data block in /e msg to the connected object, that will
@@ -255,7 +255,7 @@ public:
   */
   void send (const QByteArray &msg);
 
-protected slots:
+protected Q_SLOTS:
   virtual void processNewData ();
 
 protected:
@@ -361,13 +361,13 @@ class KMessageProcess : public KMessageIO
 
 
 
-  public slots:
+  public Q_SLOTS:
   void  slotReceivedStdout(KProcess *proc, char *buffer, int buflen);
   void  slotReceivedStderr(KProcess *proc, char *buffer, int buflen);
   void  slotProcessExited(KProcess *p);
   void  slotWroteStdin(KProcess *p);
 
-  signals:
+  Q_SIGNALS:
     void signalReceivedStderr(QString msg);
 
   private:

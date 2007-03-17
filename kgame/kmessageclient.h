@@ -250,7 +250,7 @@ public:
    */
   unsigned int delayedMessageCount() const;
 
-signals:
+Q_SIGNALS:
   /**
     This signal is emitted when the client receives a broadcast message from the
     KMessageServer, sent by another client. Connect to this signal to analyze the
@@ -380,7 +380,7 @@ protected:
 
   virtual void processMessage (const QByteArray& msg);
 
-protected slots:
+protected Q_SLOTS:
   /**
     This slot is called from the signal KMessageIO::received whenever a message from the
     KMessageServer arrives.

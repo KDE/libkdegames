@@ -465,7 +465,7 @@ public:
      **/
     KGamePropertyHandler* dataHandler() const;
 
-protected slots:
+protected Q_SLOTS:
     /**
      * Called by KGamePropertyHandler only! Internal function!
      **/
@@ -505,7 +505,7 @@ protected slots:
      **/
     void slotServerDisconnected();
 
-signals:
+Q_SIGNALS:
     /**
      * When a client disconnects from the game usually all players from that
      * client are removed. But if you use completely the KGame structure you

@@ -251,7 +251,7 @@ public:
 
 //---------------------------------- adding / removing clients
 
-public slots:
+public Q_SLOTS:
     /**
      * Adds a new @ref KMessageIO object to the communication server. This "client"
      * gets a unique ID.
@@ -285,7 +285,7 @@ public slots:
     */
     void deleteClients();
 
-private slots:
+private Q_SLOTS:
     /**
      * Removes the sender object of the signal that called this slot. It is
      * automatically connected to @ref KMessageIO::connectionBroken.
@@ -396,7 +396,7 @@ public:
      **/
     virtual void sendMessage (const QList <quint32> &ids, const QByteArray &msg);
 
-protected slots:
+protected Q_SLOTS:
     /**
      * This slot receives all the messages from the @ref KMessageIO::received signals.
      * It stores the messages in a queue. The messages are later taken out of the queue
@@ -420,7 +420,7 @@ protected slots:
 
 //---------------------------- Signals
 
-signals:
+Q_SIGNALS:
     /**
      * A new client connected to the game
      * @param client the client object that connected
@@ -483,7 +483,7 @@ public:
 
   void newConnection (int socket);
 
-signals:
+Q_SIGNALS:
   void newClientConnected (KMessageIO *client);
 };
 

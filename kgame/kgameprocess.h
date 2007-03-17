@@ -148,14 +148,14 @@ class KDEGAMES_EXPORT KGameProcess:  public QObject
      */
     void processArgs(int argc, char *argv[]);
 
-  protected slots:
+  protected Q_SLOTS:
     /**
      * A message is received via the interprocess connection. The
      * appropriate signals are called.
      */
       void receivedMessage(const QByteArray& receiveBuffer);
 
-  signals:
+  Q_SIGNALS:
     /**
      * The generic communication signal. You have to connect to this
      * signal to generate a valid computer response onto arbitrary messages.

@@ -135,7 +135,7 @@ public:
      **/
     bool sendInput(QDataStream& stream, bool transmit = true, quint32 sender = 0);
 
-signals:
+Q_SIGNALS:
     /**
      * Signal generated when @ref KPlayer::myTurn changes. This can either be
      * when you get the turn status or when you lose it.
@@ -214,7 +214,7 @@ public:
      */
     virtual int rtti() const;
 
-signals:
+Q_SIGNALS:
       /**
        * Signal handler for keyboard events. This function is called
        * on every keyboard event. If appropriate it can generate a
@@ -287,7 +287,7 @@ public:
      */
     virtual int rtti() const; 
 
-signals:
+Q_SIGNALS:
       /**
        * Signal handler for mouse events. This function is called
        * on every mouse event. If appropriate it can generate a
@@ -411,14 +411,14 @@ public:
      **/
     void sendAllMessages(QDataStream &stream,int msgid, quint32 receiver, quint32 sender, bool usermsg);
 
-  protected slots:
+  protected Q_SLOTS:
   /**
   * Internal message handler to receive data from the process
   */
     void receivedMessage(const QByteArray& receiveBuffer);
 
   
-signals:
+Q_SIGNALS:
   /**
    * A computer query message is received. This is a 'dummy'
    * message sent by the process if it needs to communicate
@@ -535,7 +535,7 @@ public:
      **/
     void unpause();
     
-public slots:
+public Q_SLOTS:
     /**
      * Works kind of similar to QCanvas::advance. Increase the internal
      * advance counter. If @p reactionPeriod is reached the counter is set back to
@@ -553,7 +553,7 @@ public slots:
      **/
     virtual void advance();
   
-signals:
+Q_SIGNALS:
     /**
      * This signal is emitted when your computer player is meant to do
      * something, or better is meant to be allowed to do something.
