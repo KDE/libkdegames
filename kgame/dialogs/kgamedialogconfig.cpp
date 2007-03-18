@@ -35,7 +35,6 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
-#include <q3ptrdict.h>
 #include <QGroupBox>
 
 #include "kgamedialogconfig.moc"
@@ -671,12 +670,12 @@ void KGameDialogConnectionConfig::setAdmin(bool a)
 	return;
  }
  if (admin()) {
-	disconnect(game(), SIGNAL(executed(Q3ListBoxItem*)), this, 0);
+	disconnect(game(), SIGNAL(executed(QListWidgetItem*)), this, 0);
  }
  KGameDialogConfig::setAdmin(a);
  if (admin()) {
-	connect(d->mPlayerBox, SIGNAL(executed(Q3ListBoxItem*)), this,
-			SLOT(slotKickPlayerOut(Q3ListBoxItem*)));
+	connect(d->mPlayerBox, SIGNAL(executed(QListWidgetItem*)), this,
+			SLOT(slotKickPlayerOut(QListWidgetItem*)));
  }
 }
 

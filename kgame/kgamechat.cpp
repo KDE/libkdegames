@@ -93,7 +93,7 @@ void KGameChat::addMessage(int fromId, const QString& text)
  } else {
 	KPlayer* p = d->mGame->findPlayer(fromId);
 	if (p) {
-		kDebug(11001) << "adding message of player " << p->name() << "id=" << fromId << endl;
+		kDebug(11001) << "adding message of player " << p->name() << " id=" << fromId << endl;
 		addMessage(p->name(), text);
 	} else {
 		kWarning(11001) << "Could not find player id " << fromId << endl;

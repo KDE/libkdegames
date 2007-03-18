@@ -30,12 +30,10 @@
 
 #include <kpagedialog.h>
 #include <libkdegames_export.h>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QGridLayout>
 class QGridLayout;
 class QVBoxLayout;
-class Q3ListBoxItem;
 class KVBox;
 
 class KGame;

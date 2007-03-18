@@ -25,10 +25,10 @@
 #include <QPixmap>
 #include <QVector>
 #include <QGroupBox>
-#include <q3header.h>
+#include <QTreeWidget>
+#include <QHeaderView>
 
 #include <kdialog.h>
-#include <k3listview.h>
 #include <kdebug.h>
 #include <kglobal.h>
 
@@ -222,21 +222,22 @@ HistogramTab::HistogramTab(QWidget *parent)
     // construct GUI
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 
-    _list = new K3ListView(this);
-    _list->setSelectionMode(Q3ListView::NoSelection);
-    _list->setItemMargin(3);
+    _list = new QTreeWidget(this);
+    _list->setSelectionMode(QAbstractItemView::NoSelection);
+/// @todo to port or no more necessary ?
+//     _list->setItemMargin(3);
     _list->setAllColumnsShowFocus(true);
-    _list->setSorting(-1);
-    _list->header()->setClickEnabled(false);
-    _list->header()->setMovingEnabled(false);
+    _list->setSortingEnabled(false);
+    _list->header()->setClickable(false);
+    _list->header()->setMovable(false);
     top->addWidget(_list);
 
-    _list->addColumn(i18n("From"));
-    _list->addColumn(i18n("To"));
-    _list->addColumn(i18n("Count"));
-    _list->addColumn(i18n("Percent"));
-    for (int i=0; i<4; i++) _list->setColumnAlignment(i, Qt::AlignRight);
-    _list->addColumn(QString());
+    _list->headerItem()->setText(0,i18n("From")); 
+    _list->headerItem()->setText(1,i18n("To")); 
+    _list->headerItem()->setText(2,i18n("Count")); 
+    _list->headerItem()->setText(3,i18n("Percent")); 
+    for (int i=0; i<4; i++) _list->headerItem()->setTextAlignment(i, Qt::AlignRight);
+    _list->headerItem()->setText(4,QString()); 
 
     const Item *sitem = internal->scoreInfos().item("score")->item();
     const PlayerInfos &pi = internal->playerInfos();
@@ -246,7 +247,8 @@ HistogramTab::HistogramTab(QWidget *parent)
         QString s2;
         if ( k==sh.size() ) s2 = "...";
         else if ( sh[k]!=sh[k-1]+1 ) s2 = sitem->pretty(0, sh[k]);
-        (void)new K3ListViewItem(_list, s1, s2);
+	QStringList items; items << s1 << s2;
+        (void)new QTreeWidgetItem(_list, items);
     }
 }
 
@@ -275,17 +277,25 @@ void HistogramTab::load()
 void HistogramTab::display(uint i)
 {
     const PlayerInfos &pi = internal->playerInfos();
-    Q3ListViewItem *item = _list->firstChild();
+    uint itemNum = 0;
+    QTreeWidgetItem *item = _list->topLevelItem(itemNum);
     uint s = pi.histoSize() - 1;
     for (int k=s-1; k>=0; k--) {
         uint nb = _counts[i*s + k];
         item->setText(2, QString::number(nb));
         item->setText(3, percent(nb, _data[i]));
         uint width = (_data[i]==0 ? 0 : qRound(150.0 * nb / _data[i]));
-        QPixmap pixmap(width, 10);
+	/// @todo temporarily ported the pixmap setting to setting a blank 
+	/// text. To fix, the widget should be changed from QTreeWidget to 
+	///view+model+delegate
+/*        QPixmap pixmap(width, 10);
         pixmap.fill(Qt::blue);
-        item->setPixmap(4, pixmap);
-        item = item->nextSibling();
+        item->setPixmap(4, pixmap);*/
+	item->setForeground(4, Qt::blue);
+	item->setBackground(4, Qt::blue);
+        item->setText(4, " ");
+	itemNum++;
+        item = _list->topLevelItem(itemNum);
     }
 }
 

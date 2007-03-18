@@ -19,8 +19,8 @@
 
 #include <qiodevice.h>
 #include <qbuffer.h>
-#include <q3ptrlist.h>
-#include <q3ptrqueue.h>
+#include <QList>
+#include <QQueue>
 #include <QTimer>
 #include <QDataStream>
 
@@ -32,17 +32,23 @@
 // --------------- internal class KMessageServerSocket
 
 KMessageServerSocket::KMessageServerSocket (quint16 port, QObject *parent)
-  : Q3ServerSocket (port, 0, parent)
+  : QTcpServer (parent)
 {
+  listen ( QHostAddress::Any, port );
+  connect(this,SIGNAL(void newConnection()),this,SLOT(slotNewConnection()));
 }
+
 
 KMessageServerSocket::~KMessageServerSocket ()
 {
 }
 
-void KMessageServerSocket::newConnection (int socket)
+void KMessageServerSocket::slotNewConnection ()
 {
-  emit newClientConnected (new KMessageSocket (socket));
+  if (hasPendingConnections())
+  {
+    emit newClientConnected (new KMessageSocket (nextPendingConnection()));
+  }
 }
 
 // ---------------- class for storing an incoming message
@@ -63,10 +69,18 @@ class KMessageServerPrivate
 {
 public:
   KMessageServerPrivate()
-    : mMaxClients (-1), mGameId (1), mUniqueClientNumber (1), mAdminID (0), mServerSocket (0)
+    : mMaxClients (-1), mGameId (1), mUniqueClientNumber (1), mAdminID (0), mServerSocket (0) {}
+
+  ~KMessageServerPrivate()
   {
-    mClientList.setAutoDelete (true);
-    mMessageQueue.setAutoDelete (true);
+    while (!mClientList.isEmpty())
+    {
+      delete mClientList.takeFirst();
+    }
+    while (!mMessageQueue.isEmpty())
+    {
+      delete mMessageQueue.dequeue();
+    }
   }
 
   int mMaxClients;
@@ -77,8 +91,8 @@ public:
 
   KMessageServerSocket* mServerSocket;
 
-  Q3PtrList <KMessageIO> mClientList;
-  Q3PtrQueue <MessageBuffer> mMessageQueue;
+  QList<KMessageIO*> mClientList;
+  QQueue <MessageBuffer*> mMessageQueue;
   QTimer mTimer;
   bool mIsRecursive;
 };
@@ -128,7 +142,8 @@ bool KMessageServer::initNetwork (quint16 port)
   d->mServerSocket = new KMessageServerSocket (port);
   d->mIsRecursive = false;
 
-  if (!d->mServerSocket || !d->mServerSocket->ok())
+  if (!d->mServerSocket 
+    || !d->mServerSocket->isListening())
   {
     kError(11001) << k_funcinfo << ": Serversocket::ok() == false" << endl;
     delete d->mServerSocket;
@@ -137,7 +152,7 @@ bool KMessageServer::initNetwork (quint16 port)
   }
 
   kDebug (11001) << k_funcinfo << ": Now listening to port "
-                  << d->mServerSocket->port() << endl;
+                  << d->mServerSocket->serverPort() << endl;
   connect (d->mServerSocket, SIGNAL (newClientConnected (KMessageIO*)),
            this, SLOT (addClient (KMessageIO*)));
   return true;
@@ -146,7 +161,7 @@ bool KMessageServer::initNetwork (quint16 port)
 quint16 KMessageServer::serverPort () const
 {
   if (d->mServerSocket)
-    return d->mServerSocket->port();
+    return d->mServerSocket->serverPort();
   else
     return 0;
 }
@@ -194,7 +209,7 @@ void KMessageServer::addClient (KMessageIO* client)
   broadcastMessage (msg);
 
   // add to our list
-  d->mClientList.append (client);
+  d->mClientList.push_back(client);
 
   // tell it its ID
   QDataStream (&msg, QIODevice::WriteOnly) << quint32 (ANS_CLIENT_ID) << client->id();
@@ -223,7 +238,7 @@ void KMessageServer::addClient (KMessageIO* client)
 void KMessageServer::removeClient (KMessageIO* client, bool broken)
 {
   quint32 clientID = client->id();
-  if (!d->mClientList.removeRef (client))
+  if (!d->mClientList.removeAll(client))
   {
     kError(11001) << k_funcinfo << ": Deleting client that wasn't added before!" << endl;
     return;
@@ -238,7 +253,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
   if (clientID == adminID())
   {
     if (!d->mClientList.isEmpty())
-      setAdmin (d->mClientList.first()->id());
+      setAdmin (d->mClientList.front()->id());
     else
       setAdmin (0);
   }
@@ -246,7 +261,10 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
 
 void KMessageServer::deleteClients()
 {
-  d->mClientList.clear();
+  while (!d->mClientList.isEmpty())
+  {
+    delete d->mClientList.takeFirst();
+  }
   d->mAdminID = 0;
 }
 
@@ -283,7 +301,7 @@ int KMessageServer::clientCount() const
 QList <quint32> KMessageServer::clientIDs () const
 {
   QList <quint32> list;
-  for (Q3PtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
+  for (QList<KMessageIO*>::iterator iter(d->mClientList.begin()); iter!=d->mClientList.end(); ++iter)
     list.append ((*iter)->id());
   return list;
 }
@@ -293,8 +311,8 @@ KMessageIO* KMessageServer::findClient (quint32 no) const
   if (no == 0)
     no = d->mAdminID;
 
-  Q3PtrListIterator <KMessageIO> iter (d->mClientList);
-  while (*iter)
+  QList<KMessageIO*>::iterator iter = d->mClientList.begin();
+  while (iter!=d->mClientList.end())
   {
     if ((*iter)->id() == no)
       return (*iter);
@@ -341,7 +359,7 @@ quint32 KMessageServer::uniqueClientNumber() const
 
 void KMessageServer::broadcastMessage (const QByteArray &msg)
 {
-  for (Q3PtrListIterator <KMessageIO> iter (d->mClientList); *iter; ++iter)
+  for (QList<KMessageIO*>::iterator iter (d->mClientList.begin()); iter!=d->mClientList.end(); ++iter)
     (*iter)->send (msg);
 }
 
@@ -498,7 +516,7 @@ void KMessageServer::processOneMessage ()
     kWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
 
   // remove the message, since we are ready with it
-  d->mMessageQueue.remove();
+  d->mMessageQueue.dequeue();
   if (d->mMessageQueue.isEmpty())
     d->mTimer.stop();
   d->mIsRecursive = false;

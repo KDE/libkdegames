@@ -76,7 +76,7 @@ void KZoomMainWindow::removeZoomable(Zoomable *z)
 
 bool KZoomMainWindow::eventFilter(QObject *o, QEvent *e)
 {
-  if ( e->type()==QEvent::LayoutHint )
+  if ( e->type()==QEvent::LayoutRequest )
     setFixedSize(minimumSize()); // because K/QMainWindow
                                  // does not manage fixed central widget
                                  // with hidden menubar...

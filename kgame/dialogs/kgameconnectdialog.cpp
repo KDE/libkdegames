@@ -29,13 +29,11 @@
 #include <QLayout>
 #include <qradiobutton.h>
 #include <QLabel>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QList>
-#include <Q3VButtonGroup>
+#include <QButtonGroup>
 #include <dnssd/servicebrowser.h>
 #include <QPushButton>
-#include <q3grid.h>
 
 class KGameConnectWidgetPrivate
 {
@@ -50,7 +48,7 @@ class KGameConnectWidgetPrivate
 
 	KIntNumInput* mPort;
 	QLineEdit* mHost; //KLineEdit?
-	Q3VButtonGroup* mButtonGroup;
+	QButtonGroup* mButtonGroup;
 	QComboBox *mClientName;
 	QLabel *mClientNameLabel;
 	DNSSD::ServiceBrowser *mBrowser;
@@ -65,19 +63,29 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
 
  QVBoxLayout* vb = new QVBoxLayout(this);
  vb->setSpacing( KDialog::spacingHint() );
- d->mButtonGroup = new Q3VButtonGroup(this);
- vb->addWidget(d->mButtonGroup);
- connect(d->mButtonGroup, SIGNAL(clicked(int)), this, SLOT(slotTypeChanged(int)));
- (void)new QRadioButton(i18n("Create a network game"), d->mButtonGroup);
- (void)new QRadioButton(i18n("Join a network game"), d->mButtonGroup);
+ d->mButtonGroup = new QButtonGroup(this);
+ d->mButtonGroup->setExclusive(true);
+//  vb->addWidget(d->mButtonGroup);
+ connect(d->mButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotTypeChanged(int)));
+ QRadioButton* buttonCreate = new QRadioButton(i18n("Create a network game"), this);
+ d->mButtonGroup->addButton(buttonCreate,0);
+ QRadioButton* buttonJoin = new QRadioButton(i18n("Join a network game"), this);
+ d->mButtonGroup->addButton(buttonJoin,1);
 
- Q3Grid* g = new Q3Grid(2, this);
+ QWidget *g = new QWidget(this);
  vb->addWidget(g);
- g->setSpacing(KDialog::spacingHint());
  d->mServerNameLabel = new QLabel(i18n("Game name:"), g);
  d->mServerName = new QLineEdit(g);
  d->mClientNameLabel = new QLabel(i18n("Network games:"), g);
  d->mClientName = new QComboBox(g);
+
+ QGridLayout* layout = new QGridLayout;
+ layout->addWidget(d->mServerNameLabel, 0, 0);
+ layout->addWidget(d->mServerName, 0, 1);
+ layout->addWidget(d->mClientNameLabel, 1, 0);
+ layout->addWidget(d->mClientName, 1, 1);
+ layout->setSpacing(KDialog::spacingHint());
+ g->setLayout(layout);
  connect(d->mClientName,SIGNAL(activated(int)),SLOT(slotGameSelected(int)));
  (void)new QLabel(i18n("Port to connect to:"), g);
  d->mPort = new KIntNumInput(g);
@@ -191,7 +199,11 @@ void KGameConnectWidget::setPort(unsigned short int port)
 
 void KGameConnectWidget::setDefault(int state)
 {
- d->mButtonGroup->setButton(state); 
+ if (d->mButtonGroup->button(state) == 0) {
+  kError(11001) << "KGameConnectWidget::setDefault " << state << endl;
+  return;
+ } 
+ d->mButtonGroup->button(state)->setChecked(true);
  slotTypeChanged(state); 
 }
 

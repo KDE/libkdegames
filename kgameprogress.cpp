@@ -216,7 +216,8 @@ void KGameProgress::styleChange(QStyle&)
 
 void KGameProgress::adjustStyle()
 {
-	switch (style()->styleHint(QStyle::SH_GUIStyle)) {
+/// @todo Is the code below still necessary in KDE4 ???
+/*	switch (style()->styleHint(QStyle::SH_GUIStyle)) {
 		case Qt::WindowsStyle:
 			setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
 			break;
@@ -225,7 +226,7 @@ void KGameProgress::adjustStyle()
 			setFrameStyle(QFrame::Panel | QFrame::Sunken);
 			setLineWidth( 2 );
 			break;
-	}
+	}*/
 	update();
 }
 

@@ -240,7 +240,7 @@ void KChatBaseModel::addMessage(const QString& fromName, const QString& text)
   d->m_messages.push_back(KChatBaseMessage(fromName,text));
   endInsertRows();
   
-  while (rowCount() > (int)d->mMaxItems) 
+  while (maxItems()>-1 && rowCount() > maxItems()) 
   {
     beginRemoveRows(QModelIndex(), row, row);
     d->m_messages.pop_front();

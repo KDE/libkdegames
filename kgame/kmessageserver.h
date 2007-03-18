@@ -21,9 +21,8 @@
 #define __KMESSAGESERVER_H__
 
 #include <QObject>
-#include <q3serversocket.h>
 #include <QString>
-
+#include <QTcpServer>
 
 class KMessageIO;
 class KMessageServerPrivate;
@@ -473,7 +472,7 @@ private:
   @short An internal class for KServerSocket
   @author Burkhard Lehner <Burkhard.Lehner@gmx.de>
 */
-class KMessageServerSocket : public Q3ServerSocket
+class KMessageServerSocket : public QTcpServer
 {
   Q_OBJECT
 
@@ -481,7 +480,8 @@ public:
   KMessageServerSocket (quint16 port, QObject *parent = 0);
   ~KMessageServerSocket ();
 
-  void newConnection (int socket);
+public slots:
+  void slotNewConnection();
 
 Q_SIGNALS:
   void newClientConnected (KMessageIO *client);

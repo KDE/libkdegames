@@ -24,7 +24,7 @@
 #include <QLabel>
 #include <qtabwidget.h>
 #include <kurllabel.h>
-#include <k3listview.h>
+#include <QTreeWidget>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kpagedialog.h>
@@ -42,20 +42,16 @@ class Score;
 class AdditionalTab;
 
 //-----------------------------------------------------------------------------
-class ShowItem : public K3ListViewItem
+class ShowItem : public QTreeWidgetItem
 {
  public:
-    ShowItem(Q3ListView *, bool highlight);
-
- protected:
-    virtual void paintCell(QPainter *, const QColorGroup &, int column,
-						   int width, int align);
+    ShowItem(QTreeWidget *, bool highlight);
 
  private:
     bool _highlight;
 };
 
-class ScoresList : public K3ListView
+class ScoresList : public QTreeWidget
 {
  Q_OBJECT
  public:
@@ -64,12 +60,12 @@ class ScoresList : public K3ListView
     void addHeader(const ItemArray &);
 
  protected:
-    Q3ListViewItem *addLine(const ItemArray &, uint index, bool highlight);
+    QTreeWidgetItem *addLine(const ItemArray &, uint index, bool highlight);
     virtual QString itemText(const ItemContainer &, uint row) const = 0;
 
  private:
     virtual void addLineItem(const ItemArray &, uint index,
-                             Q3ListViewItem *item);
+                             QTreeWidgetItem *item);
 };
 
 //-----------------------------------------------------------------------------
@@ -136,7 +132,7 @@ public:
     LastMultipleScoresList(const QVector<Score> &, QWidget *parent);
 
 private:
-    void addLineItem(const ItemArray &, uint index, Q3ListViewItem *line);
+    void addLineItem(const ItemArray &, uint index, QTreeWidgetItem *line);
     QString itemText(const ItemContainer &, uint row) const;
 
 private:
@@ -150,7 +146,7 @@ public:
     TotalMultipleScoresList(const QVector<Score> &, QWidget *parent);
 
 private:
-    void addLineItem(const ItemArray &, uint index, Q3ListViewItem *line);
+    void addLineItem(const ItemArray &, uint index, QTreeWidgetItem *line);
     QString itemText(const ItemContainer &, uint row) const;
 
 private:

@@ -22,7 +22,7 @@
 */
 
 #include "kmessageio.h"
-#include <q3socket.h>
+#include <QTcpSocket>
 #include <kdebug.h>
 #include <kprocess.h>
 #include <QFile>
@@ -51,7 +51,7 @@ quint32 KMessageIO::id ()
 KMessageSocket::KMessageSocket (const QString& host, quint16 port, QObject *parent)
   : KMessageIO (parent)
 {
-  mSocket = new Q3Socket ();
+  mSocket = new QTcpSocket ();
   mSocket->connectToHost (host, port);
   initSocket ();
 }
@@ -59,12 +59,12 @@ KMessageSocket::KMessageSocket (const QString& host, quint16 port, QObject *pare
 KMessageSocket::KMessageSocket (QHostAddress host, quint16 port, QObject *parent)
   : KMessageIO (parent)
 {
-  mSocket = new Q3Socket ();
+  mSocket = new QTcpSocket ();
   mSocket->connectToHost (host.toString(), port);
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (Q3Socket *socket, QObject *parent)
+KMessageSocket::KMessageSocket (QTcpSocket *socket, QObject *parent)
   : KMessageIO (parent)
 {
   mSocket = socket;
@@ -74,8 +74,8 @@ KMessageSocket::KMessageSocket (Q3Socket *socket, QObject *parent)
 KMessageSocket::KMessageSocket (int socketFD, QObject *parent)
   : KMessageIO (parent)
 {
-  mSocket = new Q3Socket ();
-  mSocket->setSocket (socketFD);
+  mSocket = new QTcpSocket ();
+  mSocket->setSocketDescriptor (socketFD);
   initSocket ();
 }
 
@@ -86,7 +86,7 @@ KMessageSocket::~KMessageSocket ()
 
 bool KMessageSocket::isConnected () const
 {
-  return mSocket->state() == Q3Socket::Connection;
+  return mSocket->state() == QAbstractSocket::ConnectedState;
 }
 
 void KMessageSocket::send (const QByteArray &msg)
@@ -131,7 +131,7 @@ void KMessageSocket::processNewData ()
     else
     {
       // Data not completely read => wait for more
-      if (mSocket->bytesAvailable() < (Q_ULONG) mNextBlockLength)
+      if (mSocket->bytesAvailable() < (qint64) mNextBlockLength)
       {
         isRecursive = false;
         return;
@@ -228,8 +228,9 @@ KMessageProcess::~KMessageProcess()
     delete mProcess;
     mProcess=0;
     // Remove not send buffers
-    mQueue.setAutoDelete(true);
-    mQueue.clear();
+//     mQueue.setAutoDelete(true);
+     while (!mQueue.isEmpty())
+         delete mQueue.dequeue();
     // Maybe todo: delete mSendBuffer
   }
 }
@@ -275,7 +276,7 @@ void KMessageProcess::send(const QByteArray &msg)
   *p1=0x4242aeae;
   *p2=size;
   
-  QByteArray *buffer=new QByteArray(tmpbuffer,size);
+  QByteArray* buffer = new QByteArray(tmpbuffer,size);
   delete [] tmpbuffer;
   // buffer->duplicate(msg);
   mQueue.enqueue(buffer);
@@ -292,6 +293,11 @@ void KMessageProcess::writeToProcess()
   //  kDebug(11001) << " @@@@@@ writeToProcess::SEND to process " << mSendBuffer->size() << " BYTE " << endl;
   //  char *p=mSendBuffer->data();
   //  for (int i=0;i<16;i++) printf("%02x ",(unsigned char)(*(p+i)));printf("\n");
+  /// @todo avoids crash, but is it the good solution ???
+  if (mProcess == 0) {
+    kDebug(11001) << "@@@KMessageProcess:: cannot write to stdin, no process available" << endl;
+    return;
+  }
   mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());
 
 }
@@ -366,9 +372,12 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
     {
       kDebug(11001) << k_funcinfo << ": Got message with len " << len << endl;
 
-      QByteArray msg;
+      QByteArray msg ;
     //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
-      msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+     
+      qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.end(),
+	    msg.begin());
+//       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       emit received(msg);
      // msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       // Shift buffer
@@ -461,7 +470,9 @@ void KMessageFilePipe::exec()
 
        QByteArray msg;
        //msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
-       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
+       qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.end(),
+	    msg.begin());
+// 	msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
        emit received(msg);
        //msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
        mReceiveCount=0;

@@ -21,7 +21,7 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3PtrList>
+#include <QList>
 
 #include <klocale.h>
 #include <kvbox.h>
@@ -59,7 +59,7 @@ public:
 	KGameDialogGeneralConfig* mGameConfig;
 
 // a list of all config widgets added to this dialog
-	Q3PtrList<KGameDialogConfig> mConfigWidgets;
+	QList<KGameDialogConfig*> mConfigWidgets;
 
 // just pointers:
 	KPlayer* mOwner;
@@ -148,8 +148,8 @@ void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 KGameDialog::~KGameDialog()
 {
 // kDebug(11001) << "DESTRUCT KGameDialog" << this << endl;
- d->mConfigWidgets.setAutoDelete(true);
- d->mConfigWidgets.clear();
+ while (!d->mConfigWidgets.isEmpty())
+         delete d->mConfigWidgets.takeFirst();
  delete d;
 }
 
@@ -358,6 +358,6 @@ void KGameDialog::submitToKGame()
 
 void KGameDialog::slotRemoveConfigWidget(QObject* configWidget)
 {
- d->mConfigWidgets.removeRef((KGameDialogConfig*)configWidget);
+ d->mConfigWidgets.removeAll((KGameDialogConfig*)configWidget);
 }
 

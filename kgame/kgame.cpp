@@ -140,21 +140,15 @@ void KGame::deletePlayers()
 {
 // kDebug(11001) << k_funcinfo << endl;
  KGamePlayerList tmp = d->mPlayerList; // in case of PolicyClean player=d->mPlayerList.first() is infinite
- for ( KGamePlayerList::iterator it = tmp.begin(); it!=tmp.end();it++ )
- {
-   delete (*it);
- }
+ while (!tmp.isEmpty())
+         delete tmp.takeFirst();
 // kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 void KGame::deleteInactivePlayers()
 {
- for ( KGamePlayerList::iterator it = d->mInactivePlayerList.begin(); it!=d->mInactivePlayerList.end();it++ )
- {
-   //player->setGame(0); // prevent call backs
-   d->mInactivePlayerList.remove(*it);
-   delete (*it);
- }
+ while (!d->mInactivePlayerList.isEmpty())
+         delete d->mInactivePlayerList.takeFirst();
 }
 
 bool KGame::load(const QString& filename,bool reset)
@@ -570,7 +564,8 @@ bool KGame::systemRemove(KPlayer* p,bool deleteit)
  }
  else
  {
-   result = d->mPlayerList.remove(p);
+
+   result = d->mPlayerList.removeAll(p);
  }
 
  emit signalPlayerLeftGame(p);
@@ -622,7 +617,7 @@ bool KGame::systemInactivatePlayer(KPlayer* player)
  }
  else
  {
-   d->mPlayerList.remove(player);
+   d->mPlayerList.removeAll(player);
    d->mInactivePlayerList.prepend(player);
    player->setActive(false);
  }
@@ -661,7 +656,7 @@ bool KGame::systemActivatePlayer(KPlayer* player)
  }
  kDebug(11001) << k_funcinfo << ": activate " << player->id() << endl;
 
- d->mInactivePlayerList.remove(player);
+ d->mInactivePlayerList.removeAll(player);
  player->setActive(true);
  if ( !addPlayer(player) ) // player is gone
      return false;
