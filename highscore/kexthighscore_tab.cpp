@@ -285,15 +285,9 @@ void HistogramTab::display(uint i)
         item->setText(2, QString::number(nb));
         item->setText(3, percent(nb, _data[i]));
         uint width = (_data[i]==0 ? 0 : qRound(150.0 * nb / _data[i]));
-	/// @todo temporarily ported the pixmap setting to setting a blank 
-	/// text. To fix, the widget should be changed from QTreeWidget to 
-	///view+model+delegate
-/*        QPixmap pixmap(width, 10);
+        QPixmap pixmap(width, 10);
         pixmap.fill(Qt::blue);
-        item->setPixmap(4, pixmap);*/
-	item->setForeground(4, Qt::blue);
-	item->setBackground(4, Qt::blue);
-        item->setText(4, " ");
+        item->setData(4, Qt::DecorationRole, pixmap);
 	itemNum++;
         item = _list->topLevelItem(itemNum);
     }

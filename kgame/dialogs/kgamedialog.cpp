@@ -301,7 +301,7 @@ void KGameDialog::setOwner(KPlayer* owner)
 {
 //AB: note: NULL player is ok!
  d->mOwner = owner;
- for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
+ for (int i = 0; i < d->mConfigWidgets.count(); i++) {
 	if (d->mConfigWidgets.at(i)) {
 		d->mConfigWidgets.at(i)->setOwner(d->mOwner);
 		//TODO: hide playerName in KGameDialogGeneralConfig
@@ -317,7 +317,7 @@ void KGameDialog::setKGame(KGame* g)
 	disconnect(d->mGame, 0, this, 0);
  }
  d->mGame = g;
- for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
+ for (int i = 0; i < d->mConfigWidgets.count(); i++) {
 	d->mConfigWidgets.at(i)->setKGame(d->mGame);
  }
  if (d->mGame) {
@@ -330,7 +330,7 @@ void KGameDialog::setKGame(KGame* g)
 
 void KGameDialog::setAdmin(bool admin)
 {
- for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
+ for (int i = 0; i < d->mConfigWidgets.count(); i++) {
 	d->mConfigWidgets.at(i)->setAdmin(admin);
  }
 }
@@ -349,7 +349,7 @@ void KGameDialog::submitToKGame()
 	return;
  }
 
- for (int unsigned i = 0; i < d->mConfigWidgets.count(); i++) {
+ for (int i = 0; i < d->mConfigWidgets.count(); i++) {
 // kDebug(11001) << "submit to kgame " << i << endl;
 	d->mConfigWidgets.at(i)->submitToKGame(d->mGame, d->mOwner);
 // kDebug(11001) << "done: submit to kgame " << i << endl;
