@@ -195,7 +195,7 @@ public:
 	 **/
 	virtual void setAdmin(bool admin);
 
-protected slots:
+protected Q_SLOTS:
 	void slotPropertyChanged(KGamePropertyBase*, KPlayer*);
 
 protected:
@@ -250,7 +250,7 @@ public:
 	 **/
 	void setDiscoveryInfo(const QString& type, const QString& name=QString::null);
 	
-signals:
+Q_SIGNALS:
   /**
   * This signal is emmited if the user changes the server type (client/server)
   * in the network configuration dialog. 
@@ -263,7 +263,7 @@ signals:
 protected:
 	void setConnected(bool connected, bool master = false);
 
-protected slots:
+protected Q_SLOTS:
 	void slotInitConnection();
 	void slotExitConnection();
 	void slotConnectionBroken();
@@ -288,7 +288,7 @@ public:
 	virtual void setKGame(KGame* g);
 	virtual void setAdmin(bool admin);
 
-protected slots:
+protected Q_SLOTS:
 	void slotChangeMaxClients();
 	void slotChangeAdmin();
 	void slotRemoveClient();
@@ -348,7 +348,7 @@ protected:
 	 **/
 	QListWidgetItem* item(KPlayer* p) const;
 
-protected slots:
+protected Q_SLOTS:
 	void slotKickPlayerOut(QListWidgetItem* item);
 	void slotPropertyChanged(KGamePropertyBase* prop, KPlayer* p);
 	void slotPlayerLeftGame(KPlayer* p);

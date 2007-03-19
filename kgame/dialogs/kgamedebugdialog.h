@@ -48,7 +48,7 @@ public:
 	 **/
 	void setKGame(const KGame* g);
 
-public slots:
+public Q_SLOTS:
 	/**
 	 * Unsets a @ref KGame which has been set using @ref setKGame before.
 	 * This is called automatically when the @ref KGame object is destroyed
@@ -77,7 +77,7 @@ public slots:
 
 	void slotClearMessages();
 
-signals:
+Q_SIGNALS:
 	/**
 	 * This signal is emitted when the "debug messages" page couldn't find
 	 * the name of a message id. This is usually the case for user-defined
@@ -122,7 +122,7 @@ protected:
 	 **/
 	bool showId(int msgid);
 
-protected slots:
+protected Q_SLOTS:
 	/**
 	 * Update the data of the player specified in item
 	 * @param item The @ref QListWidgetItem of the player to be updated. Note

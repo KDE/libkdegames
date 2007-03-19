@@ -84,7 +84,7 @@ public:
 	 */
 	QString gameName() const;
 
-protected slots:
+protected Q_SLOTS:
 	/**
 	 * The type has changed, ie the user switched between creating or
 	 * joining.
@@ -93,7 +93,7 @@ protected slots:
 	void slotGamesFound();
 	void slotGameSelected(int);
 
-signals:
+Q_SIGNALS:
 	void signalNetworkSetup();
   void signalServerTypeChanged(int);
 
@@ -158,7 +158,7 @@ public:
 	 **/
 	void setDefault(int state);
 
-signals:
+Q_SIGNALS:
 	void signalNetworkSetup();
 
 private:
