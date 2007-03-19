@@ -23,7 +23,7 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kapplication.h>
+#include <ksharedconfig.h>
 #include <QFont>
 
 class KChatBaseMessagePrivate
