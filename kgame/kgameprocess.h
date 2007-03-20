@@ -23,13 +23,13 @@
 #ifndef __KGAMEPROCESS_H_
 #define __KGAMEPROCESS_H_
 
-#include <QString>
-#include <QObject>
-#include <QFile>
+#include <QtCore/QObject>
+#include <QtCore/QFile>
 
 #include "kgameproperty.h"
 #include <krandomsequence.h>
 #include <libkdegames_export.h>
+
 class KPlayer;
 class KMessageFilePipe;
 

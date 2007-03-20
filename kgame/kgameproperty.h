@@ -21,11 +21,12 @@
 #ifndef __KGAMEPROPERTY_H_
 #define __KGAMEPROPERTY_H_
 
-#include <QDataStream>
+#include <QtCore/QDataStream>
 
 #include <kdebug.h>
 #include <typeinfo>
 #include <libkdegames_export.h>
+
 class KGame;
 class KPlayer;
 class KGamePropertyHandler;

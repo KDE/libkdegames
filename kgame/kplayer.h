@@ -21,7 +21,8 @@
 #ifndef __KPLAYER_H_
 #define __KPLAYER_H_
 
-#include <QList>
+#include <QtCore/QObject>
+#include <QtCore/QList>
 
 #include "kgameproperty.h"
 #include <libkdegames_export.h>

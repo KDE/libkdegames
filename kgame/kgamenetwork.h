@@ -23,9 +23,10 @@
 #ifndef __KGAMENETWORK_H_
 #define __KGAMENETWORK_H_
 
-#include <QString>
-#include <QObject>
+#include <QtCore/QString>
+#include <QtCore/QObject>
 #include <libkdegames_export.h>
+
 class KGameIO;
 class KMessageClient;
 class KMessageServer;

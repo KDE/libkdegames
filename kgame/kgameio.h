@@ -23,14 +23,15 @@
 #ifndef __KGAMEIO_H__
 #define __KGAMEIO_H__
 
-#include <QString>
-#include <QObject>
-//Added by qt3to4:
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <QEvent>
+#include <QtCore/QString>
+#include <QtCore/QObject>
+
 #include <libkdegames_export.h>
+
+class QEvent;
 class QGraphicsScene;
+class QKeyEvent;
+class QMouseEvent;
 class KPlayer;
 class KGame;
 class KProcess;

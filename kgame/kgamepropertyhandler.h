@@ -21,15 +21,14 @@
 #ifndef __KGAMEPROPERTYHANDLER_H_
 #define __KGAMEPROPERTYHANDLER_H_
 
-#include <QObject>
-#include <QMultiHash>
+#include <QtCore/QObject>
+#include <QtCore/QMultiHash>
 
 #include "kgameproperty.h"
 #include <libkdegames_export.h>
 
 class QDataStream;
 class KGame;
-class KPlayer;
 //class KGamePropertyBase;
 
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)

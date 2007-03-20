@@ -20,9 +20,9 @@
 #ifndef __KMESSAGESERVER_H__
 #define __KMESSAGESERVER_H__
 
-#include <QObject>
-#include <QString>
-#include <QTcpServer>
+#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtNetwork/QTcpServer>
 
 class KMessageIO;
 class KMessageServerPrivate;
