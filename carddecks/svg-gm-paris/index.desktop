@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Paris
+Name[el]=Παρίσι
 Name[x-test]=xxParisxx
 Preview=11.png
 SVG=paris.svgz
