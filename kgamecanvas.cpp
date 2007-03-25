@@ -454,7 +454,7 @@ void KGameCanvasItem::stackOver(KGameCanvasItem* ref)
 
     int old_pos = m_canvas->m_items.indexOf(this);
     m_canvas->m_items.removeAt(old_pos);
-    i = m_canvas->m_items.indexOf( ref, i-1 );
+    i = m_canvas->m_items.indexOf( ref );
     m_canvas->m_items.insert(i+1,this);
 
     if(m_visible)
@@ -479,7 +479,7 @@ void KGameCanvasItem::stackUnder(KGameCanvasItem* ref)
 
     int old_pos = m_canvas->m_items.indexOf(this);
     m_canvas->m_items.removeAt(old_pos);
-    i = m_canvas->m_items.indexOf( ref, i-1 );
+    i = m_canvas->m_items.indexOf( ref );
     m_canvas->m_items.insert(i,this);
 
     if(m_visible)
