@@ -153,9 +153,9 @@ void KMessageSocket::processNewData ()
 
 void KMessageSocket::initSocket ()
 {
-  connect (mSocket, SIGNAL (error(int)), SIGNAL (connectionBroken()));
-  connect (mSocket, SIGNAL (connectionClosed()), SIGNAL (connectionBroken()));
-  connect (mSocket, SIGNAL (readyRead()), SLOT (processNewData()));
+  connect (mSocket, SIGNAL (error(QAbstractSocket::SocketError)), this, SIGNAL (connectionBroken()));
+  connect (mSocket, SIGNAL (disconnected()), this, SIGNAL (connectionBroken()));
+  connect (mSocket, SIGNAL (readyRead()), this, SLOT (processNewData()));
   mAwaitingHeader = true;
   mNextBlockLength = 0;
   isRecursive = false;

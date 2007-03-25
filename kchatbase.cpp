@@ -251,11 +251,17 @@ void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
 
 void KChatBase::saveConfig(KConfig* conf)
 {
+  if (conf == 0) {
+    return;
+  }
   d->mModel->saveConfig(conf);
 }
 
 void KChatBase::readConfig(KConfig* conf)
 {
+  if (conf == 0) {
+    return;
+  }
   d->mModel->readConfig(conf);
 }
 

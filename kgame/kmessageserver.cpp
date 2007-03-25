@@ -35,7 +35,7 @@ KMessageServerSocket::KMessageServerSocket (quint16 port, QObject *parent)
   : QTcpServer (parent)
 {
   listen ( QHostAddress::Any, port );
-  connect(this,SIGNAL(void newConnection()),this,SLOT(slotNewConnection()));
+  connect(this,SIGNAL(newConnection()),this,SLOT(slotNewConnection()));
 }
 
 
