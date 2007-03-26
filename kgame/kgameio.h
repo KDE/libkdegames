@@ -34,7 +34,6 @@ class QKeyEvent;
 class QMouseEvent;
 class KPlayer;
 class KGame;
-class KProcess;
 
 /**
  *  \short Base class for IO devices for games

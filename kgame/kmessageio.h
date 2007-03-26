@@ -32,7 +32,7 @@
 #include <kdebug.h>
 
 class QTcpSocket;
-class KProcess;
+class K3Process;
 //class QFile;
 
 
@@ -361,17 +361,17 @@ class KMessageProcess : public KMessageIO
 
 
   public Q_SLOTS:
-  void  slotReceivedStdout(KProcess *proc, char *buffer, int buflen);
-  void  slotReceivedStderr(KProcess *proc, char *buffer, int buflen);
-  void  slotProcessExited(KProcess *p);
-  void  slotWroteStdin(KProcess *p);
+  void  slotReceivedStdout(K3Process *proc, char *buffer, int buflen);
+  void  slotReceivedStderr(K3Process *proc, char *buffer, int buflen);
+  void  slotProcessExited(K3Process *p);
+  void  slotWroteStdin(K3Process *p);
 
   Q_SIGNALS:
     void signalReceivedStderr(QString msg);
 
   private:
     QString mProcessName;
-    KProcess *mProcess;
+    K3Process *mProcess;
     QQueue<QByteArray*> mQueue;
     QByteArray* mSendBuffer;
     QByteArray mReceiveBuffer;

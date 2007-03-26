@@ -24,7 +24,7 @@
 #include "kmessageio.h"
 #include <QTcpSocket>
 #include <kdebug.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <QFile>
 #include <QDataStream>
 // ----------------------- KMessageIO -------------------------
@@ -239,20 +239,20 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   // Start process
   kDebug(11001) << "@@@KMessageProcess::Start process" << endl;
   mProcessName=file;
-  mProcess=new KProcess;
+  mProcess=new K3Process;
   int id=0;
   *mProcess << mProcessName << QString("%1").arg(id);
   kDebug(11001) << "@@@KMessageProcess::Init:Id= " << id << endl;
   kDebug(11001) << "@@@KMessgeProcess::Init:Processname: " << mProcessName << endl;
-  connect(mProcess, SIGNAL(receivedStdout(KProcess *, char *, int )),
-                        this, SLOT(slotReceivedStdout(KProcess *, char * , int )));
-  connect(mProcess, SIGNAL(receivedStderr(KProcess *, char *, int )),
-                        this, SLOT(slotReceivedStderr(KProcess *, char * , int )));
-  connect(mProcess, SIGNAL(processExited(KProcess *)),
-                        this, SLOT(slotProcessExited(KProcess *)));
-  connect(mProcess, SIGNAL(wroteStdin(KProcess *)),
-                        this, SLOT(slotWroteStdin(KProcess *)));
-  mProcess->start(KProcess::NotifyOnExit,KProcess::All);
+  connect(mProcess, SIGNAL(receivedStdout(K3Process *, char *, int )),
+                        this, SLOT(slotReceivedStdout(K3Process *, char * , int )));
+  connect(mProcess, SIGNAL(receivedStderr(K3Process *, char *, int )),
+                        this, SLOT(slotReceivedStderr(K3Process *, char * , int )));
+  connect(mProcess, SIGNAL(processExited(K3Process *)),
+                        this, SLOT(slotProcessExited(K3Process *)));
+  connect(mProcess, SIGNAL(wroteStdin(K3Process *)),
+                        this, SLOT(slotWroteStdin(K3Process *)));
+  mProcess->start(K3Process::NotifyOnExit,K3Process::All);
   mSendBuffer=0;
   mReceiveCount=0;
   mReceiveBuffer.resize(1024);
@@ -301,7 +301,7 @@ void KMessageProcess::writeToProcess()
   mProcess->writeStdin(mSendBuffer->data(),mSendBuffer->size());
 
 }
-void KMessageProcess::slotWroteStdin(KProcess * )
+void KMessageProcess::slotWroteStdin(K3Process * )
 {
   kDebug(11001) << k_funcinfo << endl;
   if (mSendBuffer)
@@ -312,7 +312,7 @@ void KMessageProcess::slotWroteStdin(KProcess * )
   writeToProcess();
 }
 
-void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int buflen)
+void KMessageProcess::slotReceivedStderr(K3Process * proc, char *buffer, int buflen)
 {
   int pid=0;
   int len;
@@ -333,7 +333,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
 
     QByteArray a(pos, len);
     QString s(a);
-    kDebug(11001) << "KProcess:" <<pid<<"("<<len<< "):" << s << endl;
+    kDebug(11001) << "K3Process:" <<pid<<"("<<len<< "):" << s << endl;
     emit signalReceivedStderr(s);
     a.clear();
     if (p) pos=p+1;
@@ -342,7 +342,7 @@ void KMessageProcess::slotReceivedStderr(KProcess * proc, char *buffer, int bufl
 }
 
 
-void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
+void KMessageProcess::slotReceivedStdout(K3Process * , char *buffer, int buflen)
 {
   kDebug(11001) << "$$$$$$ " << k_funcinfo << ": Received " << buflen << " bytes over inter process communication" << endl;
 
@@ -391,7 +391,7 @@ void KMessageProcess::slotReceivedStdout(KProcess * , char *buffer, int buflen)
   }
 }
 
-void KMessageProcess::slotProcessExited(KProcess * /*p*/)
+void KMessageProcess::slotProcessExited(K3Process * /*p*/)
 {
   kDebug(11001) << "Process exited (slot)" << endl;
   emit connectionBroken();
