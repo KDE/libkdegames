@@ -177,37 +177,34 @@ void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCar
  if (!conf) {
 	return;
  }
- QString origGroup = conf->group();
+ KConfigGroup cg(conf, CONF_GROUP);
 
- conf->setGroup(CONF_GROUP);
- if (conf->readEntry(CONF_RANDOMDECK,false) || !conf->hasKey(CONF_DECK)) {
+ if (cg.readEntry(CONF_RANDOMDECK,false) || !cg.hasKey(CONF_DECK)) {
 	pDeck = getRandomDeck();
  } else {
-	pDeck = conf->readEntry(CONF_DECK);
+	pDeck = cg.readEntry(CONF_DECK);
  }
- if (conf->readEntry(CONF_RANDOMCARDDIR,false) || !conf->hasKey(CONF_CARDDIR)) {
+ if (cg.readEntry(CONF_RANDOMCARDDIR,false) || !cg.hasKey(CONF_CARDDIR)) {
 	pCardDir = getRandomCardDir();
  } else {
-	pCardDir = conf->readPathEntry(CONF_CARDDIR);
+	pCardDir = cg.readPathEntry(CONF_CARDDIR);
  }
- pScale = conf->readEntry(CONF_SCALE, 1.0);
+ pScale = cg.readEntry(CONF_SCALE, 1.0);
 
- if (conf->readEntry(CONF_USEGLOBALDECK, false)) {
+ if (cg.readEntry(CONF_USEGLOBALDECK, false)) {
 	bool random;
 	getGlobalDeck(pCardDir, random);
 	if (random || pDeck.isNull() ) {
 		pDeck = getRandomDeck();
 	}
  }
- if (conf->readEntry(CONF_USEGLOBALCARDDIR, false)) {
+ if (cg.readEntry(CONF_USEGLOBALCARDDIR, false)) {
 	bool random;
 	getGlobalCardDir(pCardDir, random);
 	if (random || pCardDir.isNull() ) {
 		pCardDir = getRandomCardDir();
 	}
  }
-
- conf->setGroup(origGroup);
 }
 
 QString KCardDialog::getDefaultDeck()
@@ -669,43 +666,40 @@ void KCardDialog::loadConfig(KConfig* conf)
 	return;
  }
 
- QString origGroup = conf->group();
+ KConfigGroup cg(conf, CONF_GROUP);
 
- conf->setGroup(CONF_GROUP);
  if (! (flags() & NoDeck)) {
-	if (conf->hasKey(CONF_DECK)) {
-		setDeck(conf->readEntry(CONF_DECK));
+	if (cg.hasKey(CONF_DECK)) {
+		setDeck(cg.readEntry(CONF_DECK));
 	}
 
-	bool random = conf->readEntry(CONF_RANDOMDECK, false);
+	bool random = cg.readEntry(CONF_RANDOMDECK, false);
 	d->randomDeck->setChecked(random);
 	slotRandomDeckToggled(random);
 
-	if (conf->hasKey(CONF_USEGLOBALDECK) && conf->readEntry(CONF_USEGLOBALDECK,false)) {
+	if (cg.hasKey(CONF_USEGLOBALDECK) && cg.readEntry(CONF_USEGLOBALDECK,false)) {
 		d->globalDeck->setChecked(true);
 	} else {
 		d->globalDeck->setChecked(false);
 	}
  }
  if (! (flags() & NoCards)) {
-	if (conf->hasKey(CONF_CARDDIR)) {
-		setCardDir(conf->readPathEntry(CONF_CARDDIR));
+	if (cg.hasKey(CONF_CARDDIR)) {
+		setCardDir(cg.readPathEntry(CONF_CARDDIR));
 	}
 
-	bool random = conf->readEntry(CONF_RANDOMCARDDIR, false);
+	bool random = cg.readEntry(CONF_RANDOMCARDDIR, false);
 	d->randomCardDir->setChecked(random);
 	slotRandomCardDirToggled(random);
 
-	if (conf->hasKey(CONF_USEGLOBALCARDDIR) && conf->readEntry(CONF_USEGLOBALCARDDIR,false)) {
+	if (cg.hasKey(CONF_USEGLOBALCARDDIR) && cg.readEntry(CONF_USEGLOBALCARDDIR,false)) {
 		d->globalCardDir->setChecked(true);
 	} else {
 		d->globalCardDir->setChecked(false);
 	}
  }
 
- d->cScale = conf->readEntry(CONF_SCALE, 1.0);
-
- conf->setGroup(origGroup);
+ d->cScale = cg.readEntry(CONF_SCALE, 1.0);
 }
 
 void KCardDialog::slotCardResized(int s)
@@ -785,14 +779,14 @@ void KCardDialog::slotSetGlobalCardDir()
 void KCardDialog::getGlobalDeck(QString& deck, bool& random)
 {
  KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
- conf->setGroup(CONF_GLOBAL_GROUP);
+ KConfigGroup cg(conf, CONF_GLOBAL_GROUP);
 
- if (!conf->hasKey(CONF_GLOBAL_DECK) || conf->readEntry(CONF_GLOBAL_RANDOMDECK, false)) {
+ if (!cg.hasKey(CONF_GLOBAL_DECK) || cg.readEntry(CONF_GLOBAL_RANDOMDECK, false)) {
 	deck = getRandomDeck();
 	random = true;
  } else {
-	deck = conf->readEntry(CONF_GLOBAL_DECK);
-	random = conf->readEntry(CONF_GLOBAL_RANDOMDECK, false);
+	deck = cg.readEntry(CONF_GLOBAL_DECK);
+	random = cg.readEntry(CONF_GLOBAL_RANDOMDECK, false);
  }
 
  delete conf;
@@ -801,14 +795,14 @@ void KCardDialog::getGlobalDeck(QString& deck, bool& random)
 void KCardDialog::getGlobalCardDir(QString& dir, bool& random)
 {
  KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
- conf->setGroup(CONF_GLOBAL_GROUP);
+ KConfigGroup cg(conf, CONF_GLOBAL_GROUP);
 
- if (!conf->hasKey(CONF_GLOBAL_CARDDIR) || conf->readEntry(CONF_GLOBAL_RANDOMCARDDIR, false)) {
+ if (!cg.hasKey(CONF_GLOBAL_CARDDIR) || cg.readEntry(CONF_GLOBAL_RANDOMCARDDIR, false)) {
 	dir = getRandomCardDir();
 	random = true;
  } else {
-	dir = conf->readPathEntry(CONF_GLOBAL_CARDDIR);
-	random = conf->readEntry(CONF_GLOBAL_RANDOMCARDDIR, false);
+	dir = cg.readPathEntry(CONF_GLOBAL_CARDDIR);
+	random = cg.readEntry(CONF_GLOBAL_RANDOMCARDDIR, false);
  }
 
  delete conf;

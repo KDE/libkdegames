@@ -320,7 +320,7 @@ void KMessageProcess::slotReceivedStderr(K3Process * proc, char *buffer, int buf
   char *pos;
   kDebug(11001)<<"@@@ KMessageProcess::slotReceivedStderr " << buflen << " bytes" << endl;
 
-  if (!buffer || buflen==0) return ; 
+  if (!buffer || buflen==0) return ;
   if (proc) pid=proc->pid();
 
 

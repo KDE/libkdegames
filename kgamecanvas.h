@@ -64,7 +64,7 @@ public:
     virtual ~KGameCanvasAbstract();
 
     /** Returns a const pointer to the list holding all the items in the canvas */
-    const QList<KGameCanvasItem*>* items() const { return &m_items; };
+    const QList<KGameCanvasItem*>* items() const { return &m_items; }
 
     /** Helper function to retrieve the topmost item at the given position */
     KGameCanvasItem* itemAt(QPoint pos) const;
