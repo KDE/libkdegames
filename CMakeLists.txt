@@ -54,18 +54,20 @@ set(libkgamedialog_SRCS
 	)
 
 set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS}
-   kgamecanvas.cpp 
-   kcarddialog.cpp 
-   kstandardgameaction.cpp 
-   kzoommainwindow.cpp
-   kgamemisc.cpp 
-   kchatbase.cpp 
-   kchatbasemodel.cpp 
-   kchatbaseitemdelegate.cpp 
-   kchat.cpp 
-   kchatdialog.cpp 
-   kgameprogress.cpp 
-   kgamelcd.cpp )
+    kgamecanvas.cpp 
+    kcarddialog.cpp 
+    kstandardgameaction.cpp 
+    kzoommainwindow.cpp
+    kgamemisc.cpp 
+    kchatbase.cpp 
+    kchatbasemodel.cpp 
+    kchatbaseitemdelegate.cpp 
+    kchat.cpp 
+    kchatdialog.cpp 
+    kgameprogress.cpp 
+    kgamelcd.cpp
+    kgamesvgdocument.cpp
+   )
 
 kde4_automoc(${kdegames_LIB_SRCS})
 
@@ -80,19 +82,20 @@ install(TARGETS kdegames  DESTINATION ${LIB_INSTALL_DIR} )
 ########### install files ###############
 
 install(FILES
-   libkdegames_export.h
-   kgamemisc.h
-   kcarddialog.h
-   kstandardgameaction.h
-   kzoommainwindow.h
-   kchatbase.h
-   kchatbasemodel.h
-   kchatbaseitemdelegate.h
-   kchat.h
-   kchatdialog.h
-   kgameprogress.h
-   kgamelcd.h
-   kgrid2d.h
-   kgamecanvas.h
-DESTINATION ${INCLUDE_INSTALL_DIR})
+    libkdegames_export.h
+    kgamemisc.h
+    kcarddialog.h
+    kstandardgameaction.h
+    kzoommainwindow.h
+    kchatbase.h
+    kchatbasemodel.h
+    kchatbaseitemdelegate.h
+    kchat.h
+    kchatdialog.h
+    kgameprogress.h
+    kgamelcd.h
+    kgamesvgdocument.h
+    kgrid2d.h
+    kgamecanvas.h
+    DESTINATION ${INCLUDE_INSTALL_DIR})
 
