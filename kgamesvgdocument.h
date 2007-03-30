@@ -28,6 +28,8 @@
 #include <QHash>
 #include <QMatrix>
 #include <QStringList>
+#include <libkdegames_export.h>
+
 
 class KGameSvgDocumentPrivate;
 
@@ -110,7 +112,7 @@ class KGameSvgDocumentPrivate;
  * @todo Add convenience functions for getting/setting individual style properties.
  *     I haven't completely convinced myself of the utility of this, so don't hold your breathe. ;-)
  */
-class KGameSvgDocument : public QDomDocument
+class KDEGAMES_EXPORT KGameSvgDocument : public QDomDocument
 {
 public:
     /**
