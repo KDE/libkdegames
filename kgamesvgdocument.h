@@ -138,7 +138,7 @@ public:
         ReplaceCurrentMatrix = 0x02
     };
     Q_DECLARE_FLAGS(MatrixOptions,
-                        MatrixOption);
+                        MatrixOption)
 
     /**
      * Options for sorting style properties when building a style attribute
@@ -154,7 +154,7 @@ public:
         UseInkscapeOrder = 0x02
     };
     Q_DECLARE_FLAGS(StylePropertySortOptions,
-                        StylePropertySortOption);
+                        StylePropertySortOption)
 
     /**
      * @brief Returns the node with the given value for the given attribute.
