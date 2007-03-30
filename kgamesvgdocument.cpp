@@ -35,7 +35,7 @@
  * @brief A class holding private members for KGameSvgDocument
  *
  * @see KGameSvgDocument
- * @author Mark A. Taff \<marktaff\@comcast.net\>
+ * @author Mark A. Taff \<kde@marktaff.com\>
  * @version 0.1
  */
 class KGameSvgDocumentPrivate

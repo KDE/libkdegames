@@ -104,7 +104,7 @@ class KGameSvgDocumentPrivate;
  * @endcode
  * 
  * @see QDomDocument, KSvgRenderer
- * @author Mark A. Taff \<marktaff\@comcast.net\>
+ * @author Mark A. Taff \<kde@marktaff.com\>
  * @version 0.1
  *
  * @todo Add convenience functions for getting/setting individual style properties.
@@ -321,7 +321,6 @@ public:
     /**
      * @brief Returns the current node and it's children as a new xml svg document.
      * @returns The xml for the new svg document
-     * @author Mark A. Taff \<marktaff\@comcast.net\>
      */
     QString nodeToSvg() const;
 
