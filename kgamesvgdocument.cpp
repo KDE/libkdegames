@@ -102,7 +102,7 @@ class KGameSvgDocumentPrivate
     /**
      * @brief The ratio of a circle's radius to its circumference
      */
-    static const double PI = 3.14159265;
+    static const double PI;
 
     /**
      * @brief The xml that must be prepended to a node to make it a valid svg document
@@ -125,7 +125,7 @@ class KGameSvgDocumentPrivate
 
 };
 
-
+const double KGameSvgDocumentPrivate::PI = 3.14159265;
 const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QString("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
 const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QString("</svg>");
 
