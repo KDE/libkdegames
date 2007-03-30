@@ -37,7 +37,6 @@
  * @see KGameSvgDocument
  * @author Mark A. Taff \<marktaff\@comcast.net\>
  * @version 0.1
- * @since 4.0
  */
 class KGameSvgDocumentPrivate
 {
@@ -45,8 +44,6 @@ class KGameSvgDocumentPrivate
 
     /**
      * @brief Instantiates a KGameSvgDocument object
-     *
-     * @since 4.0
      */
     KGameSvgDocumentPrivate()
     {}
@@ -61,14 +58,12 @@ class KGameSvgDocumentPrivate
      * @param attributeValue The value of the @p attributeName attribute to find
      * @param node The node to start the traversal from.
      * @returns the node with id of @c elementId.  If no node has that id, returns a null node.
-     * @since 4.0
      */
     QDomNode findElementById(const QString& attributeName, const QString& attributeValue, const QDomNode& node);
 
     /**
      * @brief Returns the current element
      * @returns The current element
-     * @since 4.0
      */
     QDomElement currentElement() const;
 
@@ -76,7 +71,6 @@ class KGameSvgDocumentPrivate
      * @brief Sets the current element
      *
      * @returns nothing
-     * @since 4.0
      */
     void setCurrentElement();
 
@@ -345,7 +339,7 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     /* The style attr may have a trailing semi-colon.  If it does, split()
      * gives us an empty final element.  Remove it or we get 'index out of range' errors
      */
-    if (styleProperties.at((styleProperties.count()-1)) == "")
+    if (styleProperties.at((styleProperties.count()-1)).isEmpty())
     {
         styleProperties.removeAt((styleProperties.count()-1));
     }
@@ -373,7 +367,7 @@ void KGameSvgDocument::setStyleProperties(QHash<QString, QString> stylePropertie
             property = d->m_inkscapeOrder.at(i);
             if (styleProperties.contains(property))
             {
-                styleBuffer += property + ":" + styleProperties.take(property) + ";";
+                styleBuffer += property + ':' + styleProperties.take(property) + ';';
             }
             else
             {
@@ -389,7 +383,7 @@ void KGameSvgDocument::setStyleProperties(QHash<QString, QString> stylePropertie
         while (it.hasNext())
         {
             it.next();
-            styleBuffer += it.key() + ":" + it.value() + ";";
+            styleBuffer += it.key() + ':' + it.value() + ';';
         }
     }
 
@@ -426,12 +420,12 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
     }
 
     transformBuffer = "matrix(";
-    transformBuffer += tmp.setNum(matrix.m11()) + ",";
-    transformBuffer += tmp.setNum(matrix.m12()) + ",";
-    transformBuffer += tmp.setNum(matrix.m21()) + ",";
-    transformBuffer += tmp.setNum(matrix.m22()) + ",";
-    transformBuffer += tmp.setNum(matrix.dx()) + ",";
-    transformBuffer += tmp.setNum(matrix.dy()) + ")";
+    transformBuffer += tmp.setNum(matrix.m11()) + ',';
+    transformBuffer += tmp.setNum(matrix.m12()) + ',';
+    transformBuffer += tmp.setNum(matrix.m21()) + ',';
+    transformBuffer += tmp.setNum(matrix.m22()) + ',';
+    transformBuffer += tmp.setNum(matrix.dx()) + ',';
+    transformBuffer += tmp.setNum(matrix.dy()) + ')';
 
     setTransform(transformBuffer);
 }

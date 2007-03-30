@@ -106,7 +106,6 @@ class KGameSvgDocumentPrivate;
  * @see QDomDocument, KSvgRenderer
  * @author Mark A. Taff \<marktaff\@comcast.net\>
  * @version 0.1
- * @since 4.0
  *
  * @todo Add convenience functions for getting/setting individual style properties.
  *     I haven't completely convinced myself of the utility of this, so don't hold your breathe. ;-)
@@ -172,7 +171,6 @@ public:
      *     The values held in this attribute must be unique in the document, or the consequences
      *     may be unpredictably incorrect.  You've been warned. ;-)
      * @returns the matching node, or a null node if no matching node found
-     * @since 4.0
      */
     QDomNode elementByUniqueAttributeValue(const QString& attributeName, const QString& attributeValue);
 
@@ -188,7 +186,6 @@ public:
      * @param attributeValue The value of the id attribute to find
      * @returns the matching node, or a null node if no matching node found
      * @see elementByUniqueAttributeValue()
-     * @since 4.0
      */
     QDomNode elementById(const QString& attributeValue);
 
@@ -205,7 +202,6 @@ public:
      *
      * @param svgFilename The filename of the SVG file to open.
      * @returns nothing
-     * @since 4.0
      */
     void load(const QString& svgFilename);
 
@@ -216,7 +212,6 @@ public:
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
      * @see QMatrix#rotate()
-     * @since 4.0
      */
     void rotate(double degrees, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -228,7 +223,6 @@ public:
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
      * @see QMatrix::translate()
-     * @since 4.0
      */
     void translate(int xPixels, int yPixels, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -240,7 +234,6 @@ public:
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
      * @see QMatrix::shear()
-     * @since 4.0
      */
     void shear(double xRadians, double yRadians, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -255,7 +248,6 @@ public:
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
      * @see shear()
-     * @since 4.0
      */
     void skew(double xDegrees, double yDegrees, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -267,14 +259,12 @@ public:
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
      * @see QMatrix::scale()
-     * @since 4.0
      */
     void scale(double xFactor, double yFactor, const MatrixOptions& options = ApplyToCurrentMatrix);
 
     /**
      * @brief Returns the last node found by elementById, or null if node not found
      * @returns The current node
-     * @since 4.0
      */
     QDomNode currentNode() const;
 
@@ -283,14 +273,12 @@ public:
      *
      * @param node The node to set currentNode to.
      * @returns nothing
-     * @since 4.0
      */
     void setCurrentNode(const QDomNode& node);
 
     /**
      * @brief Returns the name of the SVG file this DOM represents.
      * @returns The current filename.
-     * @since 4.0
      */
     QString svgFilename() const;
 
@@ -299,7 +287,6 @@ public:
      *
      * @param svgFilename The filename of the SVG file to open.
      * @returns nothing
-     * @since 4.0
      */
     void setSvgFilename(const QString& svgFilename);
 
@@ -314,7 +301,6 @@ public:
      *
      * @param propertyName the name of the property to return
      * @returns The value style property given, or null if no such property for this node.
-     * @since 4.0
      */
     QString styleProperty(const QString& propertyName) const;
 
@@ -329,7 +315,6 @@ public:
      * @param propertyName The name of the property to set.
      * @param propertyValue The value of the property to set.
      * @returns nothing
-     * @since 4.0
      */
     void setStyleProperty(const QString& propertyName, const QString& propertyValue);
 
@@ -337,7 +322,6 @@ public:
      * @brief Returns the current node and it's children as a new xml svg document.
      * @returns The xml for the new svg document
      * @author Mark A. Taff \<marktaff\@comcast.net\>
-     * @since 4.0
      */
     QString nodeToSvg() const;
 
@@ -348,7 +332,6 @@ public:
      * should be called @b instead of @c nodeToSvg().
      *
      * @returns the QByteArray
-     * @since 4.0
      */
     QByteArray nodeToByteArray() const;
 
@@ -360,7 +343,6 @@ public:
      * 
      * @returns The style atttibute.
      * @see styleProperty() stylyProperties()
-     * @since 4.0
      */
     QString style() const;
 
@@ -374,7 +356,6 @@ public:
      * @returns nothing
      * 
      * @see setStyleProperty() setStylyProperties()
-     * @since 4.0
      */
     void setStyle(const QString& styleAttribute);
 
@@ -394,14 +375,12 @@ public:
      * @param transformAttribute The transform attribute to apply.
      * @returns nothing
      * @see setTransformMatrix()
-     * @since 4.0
      */
     void setTransform(const QString& transformAttribute);
 
     /**
      * @brief Returns a hash of the style properties of the current node.
      * @returns The style properties.
-     * @since 4.0
      */
     QHash<QString, QString> styleProperties() const;
 
@@ -409,20 +388,18 @@ public:
      * @brief Sets the style properties of the current node.
      *
      * The only(?) reason to set useInkscapeOrder to true is if you are saving the svg xml to a file
-     * that may be human-edited later, for consistency. There is a performace hit, since hashes store
+     * that may be human-edited later, for consistency. There is a performance hit, since hashes store
      * their data unsorted.
      *
      * @param styleProperties The hash of style properties to apply.
      * @param options Apply the hash so the properties are in the same order as Inkscape writes them.
      * @returns nothing
-     * @since 4.0
      */
     void setStyleProperties(const QHash<QString, QString> styleProperties, const StylePropertySortOptions& options = Unsorted);
 
     /**
      * @brief Returns the transform attribute of the current node as a matrix.
      * @returns The matrix for the transform atttibute.
-     * @since 4.0
      */
     QMatrix transformMatrix() const;
 
@@ -436,7 +413,6 @@ public:
      *     Normally we want to apply the existing matrix. If we apply the matrix,
      *     we potentially end up squaring with each call, e.g. x^2. 
      * @returns nothing
-     * @since 4.0
      */
     void setTransformMatrix(QMatrix& matrix, const MatrixOptions& options = ApplyToCurrentMatrix);
 
