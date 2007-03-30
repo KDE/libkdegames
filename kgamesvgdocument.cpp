@@ -27,6 +27,8 @@
 #include <QDomElement>
 #include <QString>
 
+#include <math.h>
+
 //
 // Public
 //
@@ -94,11 +96,6 @@ class KGameSvgDocumentPrivate
     QStringList m_inkscapeOrder;
 
     /**
-     * @brief The ratio of a circle's radius to its circumference
-     */
-    static const double PI;
-
-    /**
      * @brief The xml that must be prepended to a node to make it a valid svg document
      *
      * Defined as: <?xml version="1.0" encoding="UTF-8" standalone="no"?>\<svg\>
@@ -119,7 +116,6 @@ class KGameSvgDocumentPrivate
 
 };
 
-const double KGameSvgDocumentPrivate::PI = 3.14159265;
 const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QString("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
 const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QString("</svg>");
 
@@ -232,8 +228,8 @@ void KGameSvgDocument::shear(double xRadians, double yRadians, const MatrixOptio
 
 void KGameSvgDocument::skew(double xDegrees, double yDegrees, const MatrixOptions& options)
 {
-    double xRadians = xDegrees * (d->PI / 180);
-    double yRadians = yDegrees * (d->PI / 180);
+    double xRadians = xDegrees * (M_PI / 180);
+    double yRadians = yDegrees * (M_PI / 180);
 
     shear(xRadians, yRadians, options);
 }
