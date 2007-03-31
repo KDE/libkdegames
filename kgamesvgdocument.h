@@ -194,7 +194,6 @@ public:
     /**
      * @brief Reads the SVG file svgFilename() into DOM.
      * @returns nothing
-     * @since 4.0
      */
     void load();
 
@@ -363,7 +362,6 @@ public:
     /**
      * @brief Returns the transform attribute of the current node.
      * @returns The transform atttibute.
-     * @since 4.0
      */
     QString transform() const;
 
