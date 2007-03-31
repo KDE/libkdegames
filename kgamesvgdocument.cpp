@@ -45,7 +45,7 @@ class KGameSvgDocumentPrivate
     public:
 
     /**
-     * @brief Instantiates a KGameSvgDocument object
+     * @brief Instantiates a KGameSvgDocumentPrivate object
      */
     KGameSvgDocumentPrivate()
     {}
