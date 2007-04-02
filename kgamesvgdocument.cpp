@@ -477,4 +477,3 @@ void KGameSvgDocumentPrivate::setCurrentElement()
     m_currentElement = m_currentNode.toElement();
 }
 
-#include "kgamesvgdocument.moc"
