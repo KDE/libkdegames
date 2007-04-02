@@ -86,12 +86,6 @@ class KDEGAMES_EXPORT KHighscore : public QObject
 {
 	Q_OBJECT
 public:
-        /** @obsolete
-         * Constructor. The highscore file is forced to be local to support
-         * games using the old behaviour.
-         */
-	KHighscore(QObject* parent = 0);
-
         /**
          * Constructor.
          *
@@ -100,7 +94,7 @@ public:
          * is convenient for converting highscores from legacy applications.
 	 * @param parent parent widget for this widget
          */
-        KHighscore(bool forceLocal, QObject *parent);
+        explicit KHighscore(bool forceLocal=true, QObject *parent=0);
 
         /**
          * Read the current state of the highscore file. Remember that when
@@ -260,11 +254,6 @@ public:
 	 * KHighscore without losing any data
 	 **/
 	bool hasTable() const;
-
-        /** @obsolete
-         * This does the same as writeAndUnlock().
-         */
-	void sync();
 
 	/**
 	 * Set the new highscore group. The group is being prefixed with

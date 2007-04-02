@@ -51,13 +51,6 @@ KRawConfig *KHighscore::_config = 0;
 static KStaticDeleter<KLockFile> lockSD;
 static KStaticDeleter<KRawConfig> configSD;
 
-
-KHighscore::KHighscore(QObject* parent)
-    : QObject(parent)
-{
-    init(true);
-}
-
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent)
 {
@@ -247,10 +240,5 @@ QString KHighscore::group() const
 
 bool KHighscore::hasTable() const
 { return config()->hasGroup(group()); }
-
-void KHighscore::sync()
-{
-    writeAndUnlock();
-}
 
 #include "khighscore.moc"

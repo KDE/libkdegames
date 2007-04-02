@@ -83,7 +83,7 @@ public:
     */
     void addField(int field, const QString &header, const QString &key); 
 
-   /**
+    /**
      * @deprecated
      * 
      * Adds a new score to the list.
@@ -97,7 +97,7 @@ public:
      * make it into the list (1 being topscore) or 0 otherwise.
     */
     int addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore);
-   /// @deprecated
+    /// @deprecated
     int addScore(int newScore, const FieldInfo &newInfo, bool askName);
    
    /**
