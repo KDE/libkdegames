@@ -98,7 +98,7 @@ public:
     */
     int addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore);
    /// @deprecated
-    int addScore(int newScore, const FieldInfo &newInfo, bool askName=true);
+    int addScore(int newScore, const FieldInfo &newInfo, bool askName);
    
    /**
      * Adds a new score to the list.
