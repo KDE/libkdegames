@@ -1,10 +1,7 @@
 # Tests don't need to go into toplevel/bin, they are fine in the current dir.
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
-# This can be used for finding .rc files in the source dir, without installing them
-add_definitions( -DKDESRCDIR=\\"${CMAKE_CURRENT_SOURCE_DIR}\\" )
-
-include_directories( ${KDE4_KDEGAMES_INCLUDES} )
+include_directories(  ${CMAKE_SOURCE_DIR}/libkdegames )
 
 MACRO(LIBKDEGAMES_BUILD_TESTS)
        FOREACH(_testname ${ARGN})
