@@ -65,11 +65,10 @@ public:
 
 
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
-        : KDialog(parent)
+    : KDialog(parent), d(new KScoreDialogPrivate)
 {
     setCaption( i18n("High Scores") );
     setModal( true );
-   d = new KScoreDialogPrivate();
    d->edit = 0;
    d->fields = fields;
    d->newName = -1;
