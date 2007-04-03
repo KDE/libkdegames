@@ -8,10 +8,8 @@
 void tst_KGameSvgDocument::noScalingByZero()
 {
 	KGameSvgDocument svgDom;
-	KGameSvgDocument *svgDom_ptr;
 	svgDom.load("kgamesvgdocumenttest.svg");
-	svgDom_ptr = &svgDom;
-	svgDom_ptr->scale(0, 0, KGameSvgDocument::ApplyToCurrentMatrix);
+	svgDom.scale(0, 0, KGameSvgDocument::ApplyToCurrentMatrix);
 	// Performs no tests, just skeleton for now
 }
 
