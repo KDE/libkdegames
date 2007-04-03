@@ -1,0 +1,8 @@
+This folder contains (or should contain) unit tests for all classes 
+in kdegames/libkdegames.
+
+Classes in subfolders like kgame should have
+tests in kdegames/libkdegames/kgame/tests
+
+When you commit a new class, please add a test file, even if it is a 
+skeleton file to be fleshed out later.

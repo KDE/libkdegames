@@ -237,6 +237,14 @@ void KGameSvgDocument::skew(double xDegrees, double yDegrees, const MatrixOption
 void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions& options)
 {
     QMatrix matrix;
+    if ((xFactor == 0) || (yFactor == 0))
+    {
+        qDebug () << "KGameSvgDocument::scale: You cannnot scale either the x or y\n \
+                        dimension by zero as that would scale the element into non-existance!\n \
+                        Perhaps you mean to be scaling by one (1)? x*0=0, but x*1=x";
+    }
+    Q_ASSERT_X(xFactor != 0, "scale", "cannot scale x dimension to zero units");
+    Q_ASSERT_X(yFactor != 0, "scale", "cannot scale y dimension to zero units");
 
     if (options == ApplyToCurrentMatrix)
     {

@@ -1,3 +1,5 @@
+enable_testing()
+
 project(libkdegames)
 
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
@@ -7,6 +9,7 @@ add_subdirectory( highscore )
 add_subdirectory( includes )
 add_subdirectory( kgame )
 add_subdirectory( pics )
+add_subdirectory( tests )
 if(NOT WIN32)
   add_subdirectory( kggznet )
   add_subdirectory( kggzmod )

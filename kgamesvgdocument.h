@@ -255,6 +255,9 @@ public:
     /**
      * @brief Scales the origin of the current node.
      *
+     * @note Neither @c xFactor nor @c yFactor may be zero, otherwise you scale
+     *        the element into nonexistence.
+     *
      * @param xFactor The factor to scale the x-axis by.
      * @param yFactor The factor to scale the y-axis by.
      * @param options Apply to current matrix or replace current matrix.
