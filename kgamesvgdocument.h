@@ -120,10 +120,14 @@ public:
      */
     explicit KGameSvgDocument();
 
+    KGameSvgDocument(const KGameSvgDocument &doc);
+
     /**
      * Destructor
      */
     virtual ~KGameSvgDocument();
+
+    KGameSvgDocument& operator=(const KGameSvgDocument &doc);
 
     /**
      * Options for applying (multiplying) or replacing the current matrix

@@ -119,12 +119,25 @@ class KGameSvgDocumentPrivate
 const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QString("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
 const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QString("</svg>");
 
-KGameSvgDocument::KGameSvgDocument() : d(new KGameSvgDocumentPrivate)
+KGameSvgDocument::KGameSvgDocument()
+    : QDomDocument(), d(new KGameSvgDocumentPrivate)
 {}
+
+KGameSvgDocument::KGameSvgDocument(const KGameSvgDocument &doc)
+    : QDomDocument(), d(new KGameSvgDocumentPrivate(*doc.d))
+{
+}
 
 KGameSvgDocument::~KGameSvgDocument()
 {
     delete d;
+}
+
+KGameSvgDocument& KGameSvgDocument::operator=(const KGameSvgDocument &doc)
+{
+    QDomDocument::operator=(doc);
+    *d = *doc.d;
+    return *this;
 }
 
 QDomNode KGameSvgDocument::elementByUniqueAttributeValue(const QString& attributeName, const QString& attributeValue)
