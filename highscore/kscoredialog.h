@@ -136,7 +136,7 @@ public:
 
     private:           
         class KScoreDialogPrivate;
-        KScoreDialogPrivate *d;
+        KScoreDialogPrivate* const d;
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 

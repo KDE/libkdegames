@@ -21,6 +21,7 @@
 #include <config-highscore.h>
 #include <unistd.h> // sleep
 
+#include <QFile>
 #include <kconfig.h>
 #include <kglobal.h>
 #include <KStandardGuiItem>
@@ -86,11 +87,12 @@ void KHighscore::init(const char *appname)
 #ifdef HIGHSCORE_DIRECTORY
     const QString filename =  QString::fromLocal8Bit("%1/%2.scores")
                               .arg(HIGHSCORE_DIRECTORY).arg(appname);
-    int fd = open(filename.toLocal8Bit(), O_RDWR);
-    if ( fd<0 ) kFatal(11002) << "cannot open global highscore file \""
+    //int fd = fopen(filename.toLocal8Bit(), O_RDWR);
+    QFile file(filename);
+    if ( !file.open(QIODevice::ReadWrite) ) kFatal(11002) << "cannot open global highscore file \""
                                << filename << "\"" << endl;
-    lockSD.setObject(_lock, new KFileLock(fd));
-    configSD.setObject(_config, new KRawConfig(fd, true)); // read-only
+    lockSD.setObject(_lock, new KFileLock(filename));
+    configSD.setObject(_config, new KRawConfig(file.handle(), true)); // read-only
 
     // drop the effective gid
     int gid = getgid();
