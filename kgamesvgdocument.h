@@ -196,7 +196,7 @@ public:
     QDomNode elementById(const QString& attributeValue);
 
     /**
-     * @brief Reads the SVG file svgFilename() into DOM.
+     * @brief Reads the SVG file svgFileName() into DOM.
      * @returns nothing
      */
     void load();
@@ -288,7 +288,7 @@ public:
      * @brief Returns the name of the SVG file this DOM represents.
      * @returns The current filename.
      */
-    QString svgFilename() const;
+    QString svgFileName() const;
 
     /**
      * @brief Sets the current SVG filename.
@@ -296,7 +296,7 @@ public:
      * @param svgFilename The filename of the SVG file to open.
      * @returns nothing
      */
-    void setSvgFilename(const QString& svgFilename);
+    void setSvgFileName(const QString& svgFilename);
 
     /**
      * @brief Returns the value of the style property given for the current node.
@@ -401,7 +401,7 @@ public:
      * @param options Apply the hash so the properties are in the same order as Inkscape writes them.
      * @returns nothing
      */
-    void setStyleProperties(const QHash<QString, QString> styleProperties, const StylePropertySortOptions& options = Unsorted);
+    void setStyleProperties(const QHash<QString, QString>& _styleProperties, const StylePropertySortOptions& options = Unsorted);
 
     /**
      * @brief Returns the transform attribute of the current node as a matrix.

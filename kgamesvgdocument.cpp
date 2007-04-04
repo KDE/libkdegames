@@ -187,7 +187,7 @@ void KGameSvgDocument::load()
 
 void KGameSvgDocument::load(const QString& svgFilename)
 {
-    setSvgFilename(svgFilename);
+    setSvgFileName(svgFilename);
     load();
 }
 
@@ -282,12 +282,12 @@ void KGameSvgDocument::setCurrentNode(const QDomNode& node)
     d->setCurrentElement();
 }
 
-QString KGameSvgDocument::svgFilename() const
+QString KGameSvgDocument::svgFileName() const
 {
     return d->m_svgFilename;
 }
 
-void KGameSvgDocument::setSvgFilename(const QString& svgFilename)
+void KGameSvgDocument::setSvgFileName(const QString& svgFilename)
 {
     d->m_svgFilename = svgFilename;
 }
@@ -370,8 +370,9 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     return stylePropertiesHash;
 }
 
-void KGameSvgDocument::setStyleProperties(QHash<QString, QString> styleProperties, const StylePropertySortOptions& options)
+void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleProperties, const StylePropertySortOptions& options)
 {
+    QHash<QString, QString> styleProperties = _styleProperties;
     QString styleBuffer, property;
 
     d->m_inkscapeOrder << "fill" << "fill-opacity" << "fill-rule" << "stroke" << "stroke-width" << "stroke-linecap"
