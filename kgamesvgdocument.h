@@ -397,7 +397,7 @@ public:
      * that may be human-edited later, for consistency. There is a performance hit, since hashes store
      * their data unsorted.
      *
-     * @param styleProperties The hash of style properties to apply.
+     * @param _styleProperties The hash of style properties to apply.
      * @param options Apply the hash so the properties are in the same order as Inkscape writes them.
      * @returns nothing
      */
