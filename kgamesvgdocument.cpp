@@ -19,6 +19,7 @@
 #include "kgamesvgdocument.h"
 
 #include <kfilterdev.h>
+#include <kdebug.h>
 
 #include <QDebug>
 #include <QFile>
@@ -77,6 +78,20 @@ class KGameSvgDocumentPrivate
     void setCurrentElement();
 
     /**
+     * @brief Returns whether the original style attribute has a trailing semicolon
+     * @returns whether the original style attribute has a trailing semicolon
+     */
+    bool styleHasTrailingSemicolon() const;
+
+    /**
+     * @brief Sets whether the original style attribute has a trailing semicolon
+     *
+     * @param hasSemicolon whether the original style attribute has a trailing semicolon
+     * @returns nothing
+     */
+    void setStyleHasTrailingSemicolon(bool hasSemicolon);
+
+    /**
      * @brief The last node found by elementById, or a null node if not found.
      */
     QDomNode m_currentNode;
@@ -114,6 +129,10 @@ class KGameSvgDocumentPrivate
      */
     QString m_svgFilename;
 
+    /**
+     * @brief The the filename of the SVG file to open.
+     */
+    bool m_hasSemicolon;
 };
 
 const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QString("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
@@ -252,12 +271,8 @@ void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions
     QMatrix matrix;
     if ((xFactor == 0) || (yFactor == 0))
     {
-        qDebug () << "KGameSvgDocument::scale: You cannnot scale either the x or y\n \
-                        dimension by zero as that would scale the element into non-existance!\n \
-                        Perhaps you mean to be scaling by one (1)? x*0=0, but x*1=x";
+        kWarning () << "KGameSvgDocument::scale: You cannnot scale by zero" << endl;
     }
-    Q_ASSERT_X(xFactor != 0, "scale", "cannot scale x dimension to zero units");
-    Q_ASSERT_X(yFactor != 0, "scale", "cannot scale y dimension to zero units");
 
     if (options == ApplyToCurrentMatrix)
     {
@@ -359,7 +374,9 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     if (styleProperties.at((styleProperties.count()-1)).isEmpty())
     {
         styleProperties.removeAt((styleProperties.count()-1));
+        d->setStyleHasTrailingSemicolon(true);
     }
+    else {d->setStyleHasTrailingSemicolon(false);}
 
     for (int i = 0; i < styleProperties.size(); i++)
     {
@@ -405,6 +422,8 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
         }
     }
 
+    // Remove trailing semicolon if original didn't have one
+    if (!d->styleHasTrailingSemicolon()) {styleBuffer.chop(1);}
     setStyle(styleBuffer);
 }
 
@@ -413,6 +432,22 @@ QMatrix KGameSvgDocument::transformMatrix() const
     QString transformAttribute;
 
     transformAttribute = transform();
+	/**
+	 * @bug We assume the transform attribute is a matrix.  Bad assumption. :-(
+	 * 
+	 * Could be like:
+	 * 		"matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)"
+	 *		"translate(-165.4719,-5.300633)"
+	 * 		"translate(-10,-20) scale(2) rotate(45) translate(5,10)"
+	 * 		"translate(-10,-20), scale(2),rotate(45) translate(5,10), matrix(1,2,3,4,5,6)" valid as well
+	 *
+	 * @see: http://www.w3.org/TR/SVG/coords.html#TransformAttribute
+	 * 
+	 * note that the separators used are comma-whitespace
+	 * 
+	 * We should combine everything into a single matrix, and only write
+	 * the single matrix back to DOM
+	 */
 
     QRegExp rx("matrix\\((.*),(.*),(.*),(.*),(.*),(.*)\\)");
     int result = rx.indexIn(transformAttribute);
@@ -438,12 +473,12 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
     }
 
     transformBuffer = "matrix(";
-    transformBuffer += tmp.setNum(matrix.m11()) + ',';
-    transformBuffer += tmp.setNum(matrix.m12()) + ',';
-    transformBuffer += tmp.setNum(matrix.m21()) + ',';
-    transformBuffer += tmp.setNum(matrix.m22()) + ',';
-    transformBuffer += tmp.setNum(matrix.dx()) + ',';
-    transformBuffer += tmp.setNum(matrix.dy()) + ')';
+    transformBuffer += tmp.setNum(matrix.m11(),'g',7) + ',';
+    transformBuffer += tmp.setNum(matrix.m12(),'g',7) + ',';
+    transformBuffer += tmp.setNum(matrix.m21(),'g',7) + ',';
+    transformBuffer += tmp.setNum(matrix.m22(),'g',7) + ',';
+    transformBuffer += tmp.setNum(matrix.dx(),'g',7) + ',';
+    transformBuffer += tmp.setNum(matrix.dy(),'g',7) + ')';
 
     setTransform(transformBuffer);
 }
@@ -497,5 +532,15 @@ QDomElement KGameSvgDocumentPrivate::currentElement() const
 void KGameSvgDocumentPrivate::setCurrentElement()
 {
     m_currentElement = m_currentNode.toElement();
+}
+
+bool KGameSvgDocumentPrivate::styleHasTrailingSemicolon() const
+{
+    return m_hasSemicolon;
+}
+
+void KGameSvgDocumentPrivate::setStyleHasTrailingSemicolon(bool hasSemicolon)
+{
+    m_hasSemicolon = hasSemicolon;
 }
 

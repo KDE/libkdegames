@@ -31,6 +31,11 @@ LIBKDEGAMES_BUILD_TESTS(
 )
 endif (Q_WS_X11)
 
+# Install any data files needed by the unit tests
+install(FILES
+	kgamesvgdocumenttest.svg
+    DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+
 LIBKDEGAMES_EXECUTE_TESTS(
     ${libkdegames_unittests}
 )
