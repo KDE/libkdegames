@@ -3,6 +3,8 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 include_directories(  ${CMAKE_SOURCE_DIR}/libkdegames )
 
+configure_file(config-tests.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
+
 MACRO(LIBKDEGAMES_BUILD_TESTS)
        FOREACH(_testname ${ARGN})
                kde4_automoc(${_testname}.cpp)

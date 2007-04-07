@@ -3,9 +3,11 @@
 
 #include "kgamesvgdocumenttest.h"
 
+#include "config-tests.h"
+
 void tst_KGameSvgDocument::initTestCase()
 {
-    m_svgDom.load("kgamesvgdocumenttest.svg");
+    m_svgDom.load(TESTS_PATH"kgamesvgdocumenttest.svg");
 }
 
 void tst_KGameSvgDocument::cleanupTestCase()
