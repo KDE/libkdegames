@@ -148,42 +148,30 @@ const QFont& KChatBaseModel::systemMessageFont() const
 
 void KChatBaseModel::saveConfig(KConfig* conf)
 {
- QString oldGroup;
  if (!conf) {
 	conf = KGlobal::config().data();
-	oldGroup = conf->group();
-	conf->setGroup("KChatBaseModelPrivate");
  }
+ KConfigGroup cg(conf, "KChatBaseModelPrivate");
 
- conf->writeEntry("NameFont", nameFont());
- conf->writeEntry("MessageFont", messageFont());
- conf->writeEntry("SystemNameFont", systemNameFont());
- conf->writeEntry("SystemMessageFont", systemMessageFont());
- conf->writeEntry("MaxMessages", maxItems());
-
- if (!oldGroup.isNull()) {
-	conf->setGroup(oldGroup);
- }
+ cg.writeEntry("NameFont", nameFont());
+ cg.writeEntry("MessageFont", messageFont());
+ cg.writeEntry("SystemNameFont", systemNameFont());
+ cg.writeEntry("SystemMessageFont", systemMessageFont());
+ cg.writeEntry("MaxMessages", maxItems());
 }
 
 void KChatBaseModel::readConfig(KConfig* conf)
 {
- QString oldGroup;
  if (!conf) {
 	conf = KGlobal::config().data();
-	oldGroup = conf->group();
-	conf->setGroup("KChatBaseModelPrivate");
  }
+ KConfigGroup cg(conf, "KChatBaseModelPrivate");
 
- setNameFont(conf->readEntry("NameFont", QFont()));
- setMessageFont(conf->readEntry("MessageFont", QFont()));
- setSystemNameFont(conf->readEntry("SystemNameFont", QFont()));
- setSystemMessageFont(conf->readEntry("SystemMessageFont", QFont()));
- setMaxItems(conf->readEntry("MaxMessages", -1));
-
- if (!oldGroup.isNull()) {
-	conf->setGroup(oldGroup);
- }
+ setNameFont(cg.readEntry("NameFont", QFont()));
+ setMessageFont(cg.readEntry("MessageFont", QFont()));
+ setSystemNameFont(cg.readEntry("SystemNameFont", QFont()));
+ setSystemMessageFont(cg.readEntry("SystemMessageFont", QFont()));
+ setMaxItems(cg.readEntry("MaxMessages", -1));
 }
 
 void KChatBaseModel::clear()
