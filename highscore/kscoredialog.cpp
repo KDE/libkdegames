@@ -37,6 +37,7 @@ this software.
 #include <kglobal.h>
 #include <kconfiggroup.h>
 
+#include "khighscore.h"
 #include "kscoredialog.h"
 
 class KScoreDialog::KScoreDialogPrivate
@@ -56,6 +57,7 @@ public:
    int nrCols;
    bool loaded;
    QString configGroup;
+   KHighscore* highscoreObject;
 
    QMap<int, int> col;
    QMap<int, QString> header;
@@ -69,6 +71,7 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 {
     setCaption( i18n("High Scores") );
     setModal( true );
+    d->highscoreObject = new KHighscore();
    d->edit = 0;
    d->fields = fields;
    d->newName = -1;
@@ -271,53 +274,51 @@ void KScoreDialog::aboutToShow()
 
 void KScoreDialog::loadScores()
 {
-   QString key, value;
-   d->loaded = true;
-   qDeleteAll( d->scores );
-   d->scores.clear();
-   KConfigGroup config(KGlobal::config(), d->configGroup.toUtf8());
+    QString key, value;
+    d->loaded = true;
+    qDeleteAll( d->scores );
+    d->scores.clear();
+    d->highscoreObject->setHighscoreGroup(d->configGroup.toUtf8());
 
-   d->player = config.readEntry("LastPlayer");
+    d->player = d->highscoreObject->readEntry(0,"LastPlayer");
 
-   QString num;
-   for (int i = 1; i <= 10; ++i) {
-      num.setNum(i);
-      FieldInfo *score = new FieldInfo();
-      for(int field = 1; field < d->fields; field = field * 2)
-      {
-         if (d->fields & field)
-         {
-            key = "Pos" + num + d->key[field];
-            (*score)[field] = config.readEntry(key, QString("-"));
-         }
-      }
-      d->scores.append(score);
-   }
+    QString num;
+    for (int i = 1; i <= 10; ++i)
+    {
+        FieldInfo *score = new FieldInfo();
+        for(int field = 1; field < d->fields; field = field * 2)
+        {
+            if (d->fields & field)
+            {
+                (*score)[field] = d->highscoreObject->readEntry(i, d->key[field], QString("-"));
+            }
+        }
+        d->scores.append(score);
+    }
 }
 
 void KScoreDialog::saveScores()
 {
-   QString key, value;
-   KConfigGroup config(KGlobal::config(), d->configGroup.toUtf8());
-
-   config.writeEntry("LastPlayer", d->player);
-
-   QString num;
-   for (int i = 1; i <= 10; ++i) {
-      num.setNum(i);
-      FieldInfo *score = d->scores.at(i-1);
-      for(int field = 1; field < d->fields; field = field * 2)
-      {
-         if (d->fields & field)
-         {
-            key = "Pos" + num + d->key[field];
-            config.writeEntry(key, (*score)[field]);
-         }
-      }
-   }
-   KGlobal::config()->sync();
+    QString key, value;
+    d->highscoreObject->setHighscoreGroup(d->configGroup.toUtf8());
+    
+    d->highscoreObject->writeEntry(0,"LastPlayer", d->player);
+    
+    for (int i = 1; i <= 10; ++i)
+    {
+        FieldInfo *score = d->scores.at(i-1);
+        for(int field = 1; field < d->fields; field = field * 2)
+        {
+            if (d->fields & field)
+            {
+                d->highscoreObject->writeEntry(i, d->key[field], (*score)[field]);
+            }
+        }
+    }
+    KGlobal::config()->sync();
 }
 
+//deprecated
 int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)
 {
    return addScore(newScore, newInfo, askName, false);
@@ -365,6 +366,7 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, AddScoreFlags
     return 0;
 }
 
+//deprecated
 int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore)
 {
    if (!d->loaded)

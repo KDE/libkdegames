@@ -29,15 +29,16 @@
 #include <kglobal.h>
 class KConfig;
 class KLockFile;
-class KRawConfig;
+//class KRawConfig;
+class KConfig;
 class KHighscorePrivate;
 
 /**
  * @short Class for managing highscore tables
  *
  * This is the KDE class for saving and reading highscore tables. It offers the
- * possibility for system-wide highscore tables (configure with e.g.
- * --enable-highscore-dir=/var/games) and a theoretically unlimited number of
+ * possibility for system-wide highscore tables (cmake with e.g.
+ * -DHIGHSCORE_DIRECTORY=/var/games) and a theoretically unlimited number of
  * entries.
  *
  * You can specify different "keys" for an entry - just like the KConfig
@@ -291,7 +292,8 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         KHighscorePrivate* d;
 
         static KLockFile *_lock; // lock on system-wide highscore file
-        static KRawConfig *_config; // config for system-wide highscore file
+        //static KRawConfig *_config; // config for system-wide highscore file
+        static KConfig *_config; // config for system-wide highscore file
 };
 
 #endif

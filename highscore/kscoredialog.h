@@ -134,7 +134,7 @@ public:
         void setupDialog();
         void keyPressEvent( QKeyEvent *ev);
 
-    private:           
+    private:
         class KScoreDialogPrivate;
         KScoreDialogPrivate* const d;
 };

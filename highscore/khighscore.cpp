@@ -48,9 +48,11 @@ public:
 };
 
 KLockFile *KHighscore::_lock = 0;
-KRawConfig *KHighscore::_config = 0;
+//KRawConfig *KHighscore::_config = 0;
+KConfig *KHighscore::_config = 0;
 static KStaticDeleter<KLockFile> lockSD;
-static KStaticDeleter<KRawConfig> configSD;
+//static KStaticDeleter<KRawConfig> configSD;
+static KStaticDeleter<KConfig> configSD;
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent)
@@ -63,7 +65,7 @@ void KHighscore::init(bool forceLocal)
     d = new KHighscorePrivate;
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
-    if ( d->global && _lock==0 )
+    if ( d->global && _lock==0 )    //If we're doing global highscores but not KFileLock has been set up yet
         kFatal(11002) << "KHighscore::init should be called before!!" << endl;
 #else
     d->global = false;
@@ -88,13 +90,17 @@ void KHighscore::init(const char *appname)
     const QString filename =  QString::fromLocal8Bit("%1/%2.scores")
                               .arg(HIGHSCORE_DIRECTORY).arg(appname);
     //int fd = fopen(filename.toLocal8Bit(), O_RDWR);
-    QFile file(filename);
+    /*QFile file(filename);
     if ( !file.open(QIODevice::ReadWrite) ) kFatal(11002) << "cannot open global highscore file \""
-                               << filename << "\"" << endl;
-    lockSD.setObject(_lock, new KFileLock(filename));
-    configSD.setObject(_config, new KRawConfig(file.handle(), true)); // read-only
+                               << filename << "\"" << endl;*/
+    /*if (!(QFile::permissions(filename) & QFile::WriteOwner)) kFatal(11002) << "cannot write to global highscore file \""
+                << filename << "\"" << endl;*/
+    kDebug() << "Global highscore file \"" << filename << "\"" << endl;
+    lockSD.setObject(_lock, new KLockFile(filename));
+    configSD.setObject(_config, new KConfig(filename, KConfig::OpenFlags(KConfig::NoGlobals | KConfig::OnlyLocal))); // read-only   (matt-?)
 
     // drop the effective gid
+    #warning not portable yet. Unix only
     int gid = getgid();
     setregid(gid, gid);
 #else
@@ -172,10 +178,10 @@ void KHighscore::writeEntry(int entry, const QString& key, int value)
 
 void KHighscore::writeEntry(int entry, const QString& key, const QString &value)
 {
- Q_ASSERT (isLocked() );
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- cg.writeEntry(confKey, value);
+    Q_ASSERT (isLocked() );
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    cg.writeEntry(confKey, value);
 }
 
 QVariant KHighscore::readPropertyEntry(int entry, const QString& key, const QVariant& pDefault) const
