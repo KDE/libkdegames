@@ -163,7 +163,7 @@ public:
     virtual void show();
     virtual void exec();
 
-    private slots:
+    private Q_SLOTS:
         void slotGotReturn();
         void slotGotName();
 

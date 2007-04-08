@@ -20,10 +20,9 @@
 /*
     $Id$
 */
-#ifndef __KHIGHSCORE_H__
-#define __KHIGHSCORE_H__
+#ifndef KHIGHSCORE_H
+#define KHIGHSCORE_H
 
-#include <QString>
 #include <QObject>
 #include <libkdegames_export.h>
 #include <kglobal.h>
