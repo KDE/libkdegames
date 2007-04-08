@@ -324,7 +324,7 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)
    return addScore(newScore, newInfo, askName, false);
 }
 
-int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, AddScoreFlags flags, const QString &name)
+int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScoreFlags& flags, const QString &name)
 {
     bool askName=false, lessIsMore=false;
     if((flags & KScoreDialog::AskName) == KScoreDialog::AskName)

@@ -110,13 +110,13 @@ public:
      * This will be prefixed be KHighscore_. By default the class
      * will use "High Score"
      */
-    void setConfigGroup(const QString &group);
+    void setConfigGroup(const QString& group);
 
     /**
      * @param comment to add when showing high-scores.
      * The comment is only used once.  
      */
-    void setComment(const QString &comment);
+    void setComment(const QString& comment);
 
     /**
      * Define an extra FieldInfo entry.
@@ -124,7 +124,7 @@ public:
      * @param header Header shown in the dialog for this field
      * @param key used to store this field with.
      */
-    void addField(int field, const QString &header, const QString &key); 
+    void addField(int field, const QString& header, const QString& key); 
 
     /**
      * @deprecated
@@ -138,9 +138,9 @@ public:
      * @returns The highscore position if the score was good enough to 
      * make it into the list (1 being topscore) or 0 otherwise.
      */
-    int addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore);
+    int addScore(int newScore, const FieldInfo& newInfo, bool askName, bool lessIsMore);
     /// @deprecated
-    int addScore(int newScore, const FieldInfo &newInfo, bool askName);
+    int addScore(int newScore, const FieldInfo& newInfo, bool askName);
    
     /**
      * Adds a new score to the list.
@@ -153,7 +153,7 @@ public:
      * @returns The highscore position if the score was good enough to 
      * make it into the list (1 being topscore) or 0 otherwise.
      */
-    int addScore(int newScore, const FieldInfo &newInfo, AddScoreFlags flags=AskName, const QString &name=QString::null);
+    int addScore(int newScore, const FieldInfo& newInfo, const AddScoreFlags& flags=AskName, const QString& name=QString::null);
 
     /**
      * @returns the current best score.
