@@ -353,7 +353,10 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, AddScoreFlags
             d->scores.removeAt(10);
 
             if (askName)
+            {
+                d->player=name;
                 d->newName = i+1;
+            }
             else
                 saveScores();
             if (i == 0)
