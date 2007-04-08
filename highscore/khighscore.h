@@ -289,7 +289,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         void init(bool forceLocal);
 
     private:
-        KHighscorePrivate* d;
+        KHighscorePrivate* const d;
 
         static KLockFile *_lock; // lock on system-wide highscore file
         //static KRawConfig *_config; // config for system-wide highscore file

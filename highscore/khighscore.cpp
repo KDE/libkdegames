@@ -55,14 +55,13 @@ static KStaticDeleter<KLockFile> lockSD;
 static KStaticDeleter<KConfig> configSD;
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
-    : QObject(parent)
+    : QObject(parent), d(new KHighscorePrivate)
 {
     init(forceLocal);
 }
 
 void KHighscore::init(bool forceLocal)
 {
-    d = new KHighscorePrivate;
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
     if ( d->global && _lock==0 )    //If we're doing global highscores but not KFileLock has been set up yet
