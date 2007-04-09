@@ -25,7 +25,7 @@
 
 #include <QObject>
 #include <libkdegames_export.h>
-#include <kglobal.h>
+#include <KGlobal>
 class KConfig;
 class KLockFile;
 //class KRawConfig;
