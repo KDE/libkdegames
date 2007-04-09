@@ -22,6 +22,12 @@ private slots:
     /// @brief We scale up, then back, and verify scaling is reversible
     void scale();
 
+    /// @brief Test the transform attribute QRegExp
+    void transformRegex();
+
+    /// @brief We test that transforms can be read and written to DOM
+    void transform();
+
     /// @brief This function is called last, so you can do final stuff here.
     void cleanupTestCase();
 };

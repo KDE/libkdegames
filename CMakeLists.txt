@@ -98,6 +98,7 @@ install(FILES
     kgameprogress.h
     kgamelcd.h
     kgamesvgdocument.h
+    kgamesvgdocument_p.h
     kgrid2d.h
     kgamecanvas.h
     DESTINATION ${INCLUDE_INSTALL_DIR})

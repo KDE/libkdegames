@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "kgamesvgdocument.h"
+#include "kgamesvgdocument_p.h"
 
 #include <kfilterdev.h>
 #include <kdebug.h>
@@ -125,14 +126,16 @@ class KGameSvgDocumentPrivate
     static const QString SVG_XML_APPEND;
 
     /**
-     * @brief The the filename of the SVG file to open.
+     * @brief The filename of the SVG file to open.
      */
     QString m_svgFilename;
 
     /**
-     * @brief The the filename of the SVG file to open.
+     * @brief Whether the style attribute has a trailing semicolon
      */
     bool m_hasSemicolon;
+
+
 };
 
 const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QString("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
@@ -429,43 +432,122 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
 
 QMatrix KGameSvgDocument::transformMatrix() const
 {
+    /*
+     * Transform attributes can be quite complex.  Here, we assemble this tangled web of
+     * complexity into an single matrix.
+     * 
+     * The regex's that make this bearable live in kgamesvgdocument_p.h.  As these regex's
+     * get quite complex, we have some code in tests/kgamesvgdocumenttest.cpp to help verify 
+     * they are still correct after being edited.
+     *
+     * Warning: This code depends on the capturing parenthesis in the regex's not changing.
+     *
+     * For all the gory details, see http://www.w3.org/TR/SVG/coords.html#TransformAttribute
+     */
+    QRegExp rx;
     QString transformAttribute;
+    int result;
+    int i = 0;
+    QMatrix baseMatrix = QMatrix();
 
     transformAttribute = transform();
-	/**
-	 * @bug We assume the transform attribute is a matrix.  Bad assumption. :-(
-	 * 
-	 * Could be like:
-	 * 		"matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)"
-	 *		"translate(-165.4719,-5.300633)"
-	 * 		"translate(-10,-20) scale(2) rotate(45) translate(5,10)"
-	 * 		"translate(-10,-20), scale(2),rotate(45) translate(5,10), matrix(1,2,3,4,5,6)" valid as well
-	 *
-	 * @see: http://www.w3.org/TR/SVG/coords.html#TransformAttribute
-	 * 
-	 * note that the separators used are comma-whitespace
-	 * 
-	 * We should combine everything into a single matrix, and only write
-	 * the single matrix back to DOM
-	 */
-
-    QRegExp rx("matrix\\((.*),(.*),(.*),(.*),(.*),(.*)\\)");
-    int result = rx.indexIn(transformAttribute);
-
-    if (result == -1) // Matrix not found
+    if (transformAttribute == "Element has no transform attribute.")
     {
         return QMatrix();
     }
-    else
+    transformAttribute.trimmed();
+
+    rx.setPattern(TRANSFORMS);
+    if (!rx.exactMatch(transformAttribute))
     {
-        return QMatrix(
-            rx.cap(1).toDouble(), rx.cap(2).toDouble(), rx.cap(3).toDouble(),
-            rx.cap(4).toDouble(), rx.cap(5).toDouble(), rx.cap(6).toDouble());
+        kWarning () << "Transform attribute seems to be invalid. Check your SVG file." << endl;
+        return QMatrix();
     }
+
+    rx.setPattern(TRANSFORM);
+
+    while (transformAttribute.size() > 0 && i < 32) // 32 is an arbitrary limit for the number of transforms for a single node
+    {
+        result = rx.indexIn(transformAttribute);
+        if (result != -1) // Found left-most transform
+        {
+            if (rx.cap(1) == "matrix")
+            {
+                // If the first transform found is a matrix, use it as the base,
+                // else we use a null matrix.
+                if (i == 0)
+                {
+                    baseMatrix = QMatrix(rx.cap(2).toDouble(), rx.cap(3).toDouble(), rx.cap(4).toDouble(),
+                                         rx.cap(5).toDouble(), rx.cap(6).toDouble(), rx.cap(7).toDouble());
+                }
+                else
+                {
+                    baseMatrix = QMatrix(rx.cap(2).toDouble(), rx.cap(3).toDouble(), rx.cap(4).toDouble(),
+                                         rx.cap(5).toDouble(), rx.cap(6).toDouble(), rx.cap(7).toDouble()) * baseMatrix;
+                }
+            }
+
+            if (rx.cap(8) == "translate")
+            {
+                double x = rx.cap(9).toDouble();
+                double y = rx.cap(10).toDouble();
+                if (rx.cap(10) == "" ) // y defaults to zero per SVG standard
+                {
+                    y = 0;
+                }
+                baseMatrix = baseMatrix.translate(x, y);
+            }
+
+            if (rx.cap(11) == "scale")
+            {
+                double x = rx.cap(12).toDouble();
+                double y = rx.cap(12).toDouble();
+                if (rx.cap(13) == "" ) // y defaults to x per SVG standard
+                {
+                    y = x;
+                }
+                baseMatrix = baseMatrix.scale(x, y);
+            }
+
+            if (rx.cap(14) == "rotate")
+            {
+                double a = rx.cap(15).toDouble();
+                double cx = rx.cap(16).toDouble();
+                double cy = rx.cap(17).toDouble();
+
+                if ((cx > 0) || (cy > 0)) // rotate around point (cx, cy)
+                {
+                    baseMatrix.translate(cx, cy);
+                    baseMatrix.rotate(a);
+                    baseMatrix.translate((cx * -1), (cy * -1));
+                }
+                else
+                {
+                    baseMatrix = baseMatrix.rotate(a); // rotate around origin
+                }
+            }
+
+            if (rx.cap(18) == "skewX")
+            {
+                baseMatrix = baseMatrix.shear(rx.cap(19).toDouble() * (M_PI / 180), 0);
+            }
+
+            if (rx.cap(20) == "skewY")
+            {
+                baseMatrix = baseMatrix.shear(0, rx.cap(21).toDouble() * (M_PI / 180));
+            }
+        }
+        transformAttribute = transformAttribute.mid(rx.matchedLength() + result);
+        i++;
+    }
+
+    return baseMatrix;
 }
+
 void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& options)
 {
     QString transformBuffer, tmp;
+    QMatrix null = QMatrix();
 
     if (options == ApplyToCurrentMatrix)
     {
@@ -480,7 +562,14 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
     transformBuffer += tmp.setNum(matrix.dx(),'g',7) + ',';
     transformBuffer += tmp.setNum(matrix.dy(),'g',7) + ')';
 
-    setTransform(transformBuffer);
+    if ((transform() == "Element has no transform attribute.") && (matrix == null))
+    {
+        // Do not write a meaningless matrix to DOM
+    }
+    else
+    {
+        setTransform(transformBuffer);
+    }
 }
 
 
