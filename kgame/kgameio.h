@@ -34,6 +34,11 @@ class QKeyEvent;
 class QMouseEvent;
 class KPlayer;
 class KGame;
+class KGameIOPrivate;
+class KGameKeyIOPrivate;
+class KGameMouseIOPrivate;
+class KGameProcessIOPrivate;
+class KGameComputerIOPrivate;
 
 /**
  *  \short Base class for IO devices for games
@@ -91,7 +96,7 @@ public:
     *
     * @return the player this IO device is plugged into
     */
-   KPlayer *player() const {return mPlayer;}
+   KPlayer *player() const;
 
    /**
     * Equivalent to player()->game()
@@ -106,7 +111,7 @@ public:
     *
     * @param p the player
     */
-   void setPlayer(KPlayer *p) {mPlayer=p;}
+   void setPlayer(KPlayer *p);
 
    /**
     * Init this device by setting the player and e.g. sending an
@@ -171,7 +176,10 @@ Q_SIGNALS:
 
 
 private:
-   KPlayer *mPlayer;
+    friend class KGameIOPrivate;
+    KGameIOPrivate *const d;
+
+    Q_DISABLE_COPY(KGameIO)
 };
 
 /**
@@ -243,6 +251,12 @@ protected:
        * Internal method to process the events
        */
        bool eventFilter( QObject *o, QEvent *e );
+
+private:
+    friend class KGameKeyIOPrivate;
+    KGameKeyIOPrivate *const d;
+
+    Q_DISABLE_COPY(KGameKeyIO)
 };
 
 /**
@@ -315,6 +329,11 @@ protected:
       */
       bool eventFilter( QObject *o, QEvent *e );
 
+private:
+    friend class KGameMouseIOPrivate;
+    KGameMouseIOPrivate *const d;
+
+    Q_DISABLE_COPY(KGameMouseIO)
 };
 
 
@@ -461,13 +480,11 @@ Q_SIGNALS:
     */
   void signalReceivedStderr(QString msg);
 
-
-
-protected:
-
 private:
-  class KGameProcessIOPrivate;
-  KGameProcessIOPrivate* d;
+    friend class KGameProcessIOPrivate;
+    KGameProcessIOPrivate *const d;
+
+    Q_DISABLE_COPY(KGameProcessIO)
 };
 
 /**
@@ -567,11 +584,10 @@ protected:
     virtual void reaction();
 
 private:
-    void init();
- 
-private:
-    class KGameComputerIOPrivate;
-    KGameComputerIOPrivate* d;
+    friend class KGameComputerIOPrivate;
+    KGameComputerIOPrivate *const d;
+
+    Q_DISABLE_COPY(KGameComputerIO)
 };
 
 

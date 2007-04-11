@@ -24,7 +24,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-#include "kgameproperty.h"
 #include <libkdegames_export.h>
 
 class KGame;
@@ -87,7 +86,7 @@ public:
       *
       * @return 0 for default KPlayer.
       */
-      virtual int rtti() const {return 0;}
+      virtual int rtti() const;
 
       /**
       * Gives debug output of the game status
@@ -100,7 +99,7 @@ public:
        *
        * @return list of devices
        */
-      KGameIOList *ioList() {return &mInputList;}
+      KGameIOList *ioList();
 
       /**
        * sets the game the player belongs to. This
@@ -109,14 +108,14 @@ public:
        *
        * @param game the game
        */
-      void setGame(KGame *game) {mGame=game;}
+      void setGame(KGame *game);
 
       /**
        * Query to which game the player belongs to
        *
        * @return the game
        */
-      KGame *game() const {return mGame;}
+      KGame *game() const;
 
       /**
        * Set whether this player can make turns/input
@@ -125,7 +124,7 @@ public:
        *
        * @param a async=true turn based=false
        */
-      void setAsyncInput(bool a) {mAsyncInput = a;}
+      void setAsyncInput(bool a);
 
       /**
        * Query whether this player does asynchronous 
@@ -133,7 +132,7 @@ public:
        *
        * @return true/false
        */
-      bool asyncInput() const {return mAsyncInput.value();}
+      bool asyncInput() const;
 
       /**
        * Is this player a virtual player, ie is it 
@@ -162,14 +161,14 @@ public:
        *
        * @return true/false
        */
-      bool isActive() const {return mActive;}
+      bool isActive() const;
 
       /**
        * Set an player as active (true) or inactive (false)
        *
        * @param v true=active, false=inactive
        */
-      void setActive(bool v) {mActive=v;}
+      void setActive(bool v);
 
       /**
        * Returns the id of the player
@@ -196,13 +195,13 @@ public:
        *
        * @return the user defined player id
        */
-      int userId() const {return mUserId.value();} 
+      int userId() const;
 
       /* Set the user defined players id.
        *
        * @param i the user defined player id
        */
-      void setUserId(int i) {mUserId = i;}
+      void setUserId(int i);
 
       /**
        * Returns whether this player can be replaced by a network
@@ -310,7 +309,7 @@ public:
        * @param rtti the rtti typed to be checked for
        * @return true if it exists
        */
-      bool hasRtti(int rtti) const  {return findRttiIO(rtti)!=0;}
+      bool hasRtti(int rtti) const;
 
       // Message exchange
       /**
@@ -338,7 +337,7 @@ public:
        *
        * @return true/false
        */
-      bool myTurn() const {return mMyTurn.value();}
+      bool myTurn() const;
 
       /**
        * Sets whether this player is the next to turn.
@@ -447,17 +446,10 @@ private:
       void init();
 
 private:
-      KGame *mGame;
-      bool mActive;      // active player
-      KGameIOList mInputList;
+      friend class KPlayerPrivate;
+      KPlayerPrivate *const d;
 
-      // GameProperty // AB: I think we can't move them to KPlayerPrivate - inline
-      // makes sense here
-      KGamePropertyBool mAsyncInput;  // async input allowed
-      KGamePropertyBool mMyTurn;      // Is it my turn to play (only useful if not async)?
-      KGamePropertyInt  mUserId;      // a user defined id
-
-      KPlayerPrivate* d;
+      Q_DISABLE_COPY(KPlayer)
 };
 
 #endif

@@ -23,9 +23,9 @@
 #ifndef __KGAME_H_
 #define __KGAME_H_
 
+#include <QtCore/QDataStream>
 #include <QtCore/QString>
 #include <QtCore/QList>
-
 
 #include "kgamenetwork.h"
 #include <libkdegames_export.h>

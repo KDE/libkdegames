@@ -41,17 +41,29 @@
 
 #include <stdlib.h>
 
+class KGameIOPrivate
+{
+public:
+  KGameIOPrivate()
+    : mPlayer(0)
+  {
+  }
+
+  KPlayer *mPlayer;
+};
+
+
 // ----------------------- Generic IO -------------------------
 KGameIO::KGameIO()
+  : d(new KGameIOPrivate)
 {
   kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO) << endl;
-  mPlayer = 0;
 }
 
 KGameIO::KGameIO(KPlayer* player)
+  : d(new KGameIOPrivate)
 {
   kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO) << endl;
-  mPlayer = 0;
   if (player)
   {
     player->addGameIO(this);
@@ -66,6 +78,17 @@ KGameIO::~KGameIO()
   {
     player()->removeGameIO(this, false);
   }
+  delete d;
+}
+
+KPlayer* KGameIO::player() const
+{
+  return d->mPlayer;
+}
+
+void KGameIO::setPlayer(KPlayer *p)
+{
+  d->mPlayer = p;
 }
 
 void KGameIO::initIO(KPlayer *p)
@@ -120,10 +143,13 @@ void KGameIO::Debug()
   kDebug(11001) << "---------------------------------------------------" << endl;
 }
 
-
 // ----------------------- Key IO ---------------------------
+class KGameKeyIOPrivate
+{
+};
+
 KGameKeyIO::KGameKeyIO(QWidget *parent) 
-   : KGameIO()
+   : KGameIO(), d(0)
 {
   if (parent)
   {
@@ -138,6 +164,7 @@ KGameKeyIO::~KGameKeyIO()
   {
     parent()->removeEventFilter(this);
   }
+  delete d;
 }
 
 int KGameKeyIO::rtti() const { return KeyIO; }
@@ -172,8 +199,12 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
 
 
 // ----------------------- Mouse IO ---------------------------
+class KGameMouseIOPrivate
+{
+};
+
 KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse) 
-   : KGameIO()
+   : KGameIO(), d(0)
 {
   if (parent)
   {
@@ -184,7 +215,7 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
 }
 
 KGameMouseIO::KGameMouseIO(QGraphicsScene *parent,bool trackmouse) 
-   : KGameIO()
+   : KGameIO(), d(0)
 {
   if (parent)
   {
@@ -200,6 +231,7 @@ KGameMouseIO::~KGameMouseIO()
   {
     parent()->removeEventFilter(this);
   }
+  delete d;
 }
 
 int KGameMouseIO::rtti() const
@@ -255,7 +287,7 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
 
 
 // ----------------------- KGameProcesPrivate ---------------------------
-class KGameProcessIO::KGameProcessIOPrivate
+class KGameProcessIOPrivate
 {
 public:
   KGameProcessIOPrivate()
@@ -271,10 +303,9 @@ public:
 
 // ----------------------- Process IO ---------------------------
 KGameProcessIO::KGameProcessIO(const QString& name) 
-   : KGameIO()
+   : KGameIO(), d(new KGameProcessIOPrivate)
 {
   kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)=" << sizeof(KGameProcessIO) << endl;
-  d = new KGameProcessIOPrivate;
 
   //kDebug(11001) << "================= KMEssageServer ==================== " << endl;
   //d->mMessageServer=new KMessageServer(0,this);
@@ -447,7 +478,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 
 
 // ----------------------- Computer IO --------------------------
-class KGameComputerIO::KGameComputerIOPrivate
+class KGameComputerIOPrivate
 {
 //TODO: maybe these should be KGameProperties!!
 public:
@@ -468,19 +499,14 @@ public:
   QTimer* mAdvanceTimer;
 };
 
-KGameComputerIO::KGameComputerIO() : KGameIO()
+KGameComputerIO::KGameComputerIO()
+    : KGameIO(), d(new KGameComputerIOPrivate)
 {
-  init();
 }
 
-KGameComputerIO::KGameComputerIO(KPlayer* p) : KGameIO(p)
+KGameComputerIO::KGameComputerIO(KPlayer *p)
+    : KGameIO(p), d(new KGameComputerIOPrivate)
 {
-  init();
-}
-
-void KGameComputerIO::init()
-{
-  d = new KGameComputerIOPrivate;
 }
 
 KGameComputerIO::~KGameComputerIO()

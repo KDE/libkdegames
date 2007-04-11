@@ -343,10 +343,10 @@ Q_SIGNALS:
 	void signalRequestValue(KGamePropertyBase* property, QString& value);
 
 private:
-	void init();
+	friend class KGamePropertyHandlerPrivate;
+	KGamePropertyHandlerPrivate *const d;
 
-private:
-	KGamePropertyHandlerPrivate* d;
+	Q_DISABLE_COPY(KGamePropertyHandler)
 };
 
 #endif

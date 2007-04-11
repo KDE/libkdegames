@@ -24,14 +24,15 @@
 #define __KGAMEPROCESS_H_
 
 #include <QtCore/QObject>
-#include <QtCore/QFile>
 
 #include "kgameproperty.h"
-#include <krandomsequence.h>
 #include <libkdegames_export.h>
+
+class KRandomSequence;
 
 class KPlayer;
 class KMessageFilePipe;
+class KGameProcessPrivate;
 
 /**
  * This is the process class used on the computer player
@@ -139,7 +140,7 @@ class KDEGAMES_EXPORT KGameProcess:  public QObject
      * 
      * @return KRandomSequence pointer
      */
-    KRandomSequence *random() {return mRandom;}
+    KRandomSequence *random();
 
   protected:
     /**
@@ -235,8 +236,9 @@ class KDEGAMES_EXPORT KGameProcess:  public QObject
     bool mTerminate;
     KMessageFilePipe *mMessageIO;
   private:
-    QFile rFile;
-    QFile wFile;
-    KRandomSequence* mRandom;
+    friend class KGameProcessPrivate;
+    KGameProcessPrivate *const d;
+
+    Q_DISABLE_COPY(KGameProcess)
 };
 #endif

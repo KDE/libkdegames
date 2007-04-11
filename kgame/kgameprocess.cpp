@@ -28,6 +28,7 @@
 
 #include <qbuffer.h>
 #include <QDataStream>
+#include <QtCore/QFile>
 
 #include <assert.h>
 #include <stdio.h>
@@ -37,15 +38,24 @@
 
 #define READ_BUFFER_SIZE  1024
 
+class KGameProcessPrivate
+{
+public:
+    QFile rFile;
+    QFile wFile;
+    KRandomSequence* mRandom;
+};
+
 // ----------------------- Process Child ---------------------------
 
 KGameProcess::KGameProcess()
+    : QObject(), d(new KGameProcessPrivate)
 {
   mTerminate=false;
   // Check whether a player is set. If not create one!
-  rFile.open(stdin, QIODevice::ReadOnly|QIODevice::Unbuffered);
-  wFile.open(stdout, QIODevice::WriteOnly|QIODevice::Unbuffered);
-  mMessageIO=new KMessageFilePipe(this,&rFile,&wFile);
+  d->rFile.open(stdin, QIODevice::ReadOnly|QIODevice::Unbuffered);
+  d->wFile.open(stdout, QIODevice::WriteOnly|QIODevice::Unbuffered);
+  mMessageIO = new KMessageFilePipe(this, &d->rFile, &d->wFile);
 //  mMessageClient=new KMessageClient(this);
 //  mMessageClient->setServer(mMessageIO);
 //  connect (mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, quint32)),
@@ -53,18 +63,19 @@ KGameProcess::KGameProcess()
   connect (mMessageIO, SIGNAL(received(const QByteArray&)),
           this, SLOT(receivedMessage(const QByteArray&)));
  
-  mRandom = new KRandomSequence;
-  mRandom->setSeed(0);
+  d->mRandom = new KRandomSequence;
+  d->mRandom->setSeed(0);
 }
 KGameProcess::~KGameProcess() 
 {
-  delete mRandom;
+  delete d->mRandom;
   //delete mMessageClient;
   //delete mMessageServer;
   delete mMessageIO;
-  rFile.close();
-  wFile.close();
+  d->rFile.close();
+  d->wFile.close();
   fprintf(stderr,"KGameProcess::destructor\n");
+  delete d;
 }
 
 
@@ -149,5 +160,11 @@ void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
    break;
  }
 }
+
+KRandomSequence* KGameProcess::random()
+{
+  return d->mRandom;
+}
+
 
 #include "kgameprocess.moc"

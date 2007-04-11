@@ -24,6 +24,7 @@
 #include "kplayer.h"
 #include "kgamechat.h"
 #include "kgameconnectdialog.h"
+#include "kgameproperty.h"
 
 #include <klistwidget.h>
 #include <klocale.h>

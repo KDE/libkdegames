@@ -37,10 +37,15 @@
 class KGamePropertyHandlerPrivate
 {
 public:
-	KGamePropertyHandlerPrivate()
-	{
-	}
+  KGamePropertyHandlerPrivate(KGamePropertyHandler *qq)
+      : q(qq), mUniqueId(KGamePropertyBase::IdAutomatic), mId(0),
+        mDefaultPolicy(KGamePropertyBase::PolicyLocal), mDefaultUserspace(true),
+        mIndirectEmit(0)
+  {
+    kDebug(11001) << k_funcinfo << ": this=" << q << endl;
+  }
 
+  KGamePropertyHandler *q;
 	QMap<int, QString> mNameMap;
   QMultiHash<int, KGamePropertyBase*> mIdDict;
 	int mUniqueId;
@@ -51,15 +56,15 @@ public:
   QQueue<KGamePropertyBase*> mSignalQueue;
 };
 
-KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent) : QObject(parent)
+KGamePropertyHandler::KGamePropertyHandler(int id, const QObject* receiver, const char * sendf, const char *emitf, QObject* parent)
+    : QObject(parent), d(new KGamePropertyHandlerPrivate(this))
 {
- init();
  registerHandler(id,receiver,sendf,emitf);
 }
 
-KGamePropertyHandler::KGamePropertyHandler(QObject* parent) : QObject(parent)
+KGamePropertyHandler::KGamePropertyHandler(QObject* parent)
+    : QObject(parent), d(new KGamePropertyHandlerPrivate(this))
 {
- init();
 }
 
 KGamePropertyHandler::~KGamePropertyHandler()
@@ -67,18 +72,6 @@ KGamePropertyHandler::~KGamePropertyHandler()
  clear();
  delete d;
 }
-
-void KGamePropertyHandler::init()
-{
- kDebug(11001) << k_funcinfo << ": this=" << this << endl;
- d = new KGamePropertyHandlerPrivate; // for future use - is BC important to us?
- d->mId = 0;
- d->mUniqueId=KGamePropertyBase::IdAutomatic;
- d->mDefaultPolicy=KGamePropertyBase::PolicyLocal;
- d->mDefaultUserspace=true;
- d->mIndirectEmit=0;
-}
-
 
 int KGamePropertyHandler::id() const
 {

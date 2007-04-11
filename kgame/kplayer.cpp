@@ -22,10 +22,11 @@
 */
 
 
+#include "kplayer.h"
 #include "kgame.h"
 #include "kgameio.h"
-#include "kplayer.h"
 #include "kgamemessage.h"
+#include "kgameproperty.h"
 #include "kgamepropertyhandler.h"
 
 #include <kdebug.h>
@@ -46,6 +47,15 @@ public:
       mNetworkPlayer = 0;
    }
 
+   KGame *mGame;
+   bool mActive;      // active player
+   KPlayer::KGameIOList mInputList;
+
+   // GameProperty
+   KGamePropertyBool mAsyncInput;  // async input allowed
+   KGamePropertyBool mMyTurn;      // Is it my turn to play (only useful if not async)?
+   KGamePropertyInt  mUserId;      // a user defined id
+
    quint32 mId;
    bool mVirtual; // virtual player
    int mPriority; // tag for replacement
@@ -60,6 +70,7 @@ public:
 };
 
 KPlayer::KPlayer()
+    : QObject(), d(new KPlayerPrivate)
 {
  init();
 }
@@ -69,32 +80,31 @@ void KPlayer::init()
 // note that NO KGame object exists here! so we cannot use KGameProperty::send!
    kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)="<<sizeof(KPlayer) << endl;
    kDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup)<<endl;
-   d = new KPlayerPrivate;
 
    d->mProperties.registerHandler(KGameMessage::IdPlayerProperty,
                                   this,SLOT(sendProperty(int, QDataStream&, bool*)),
                                        SLOT(emitSignal(KGamePropertyBase *)));
    d->mVirtual=false;
-   mActive=true;
-   mGame=0;
+   d->mActive=true;
+   d->mGame=0;
    d->mId=0; // "0" is always an invalid ID!
    d->mPriority=0;
    // I guess we cannot translate the group otherwise no
    // international conenctions are possible
 
-   mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
-   mUserId.setLocal(0);
+   d->mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
+   d->mUserId.setLocal(0);
    d->mGroup.registerData(KGamePropertyBase::IdGroup, this, i18n("Group"));
    d->mGroup.setLocal(i18n("default"));
    d->mName.registerData(KGamePropertyBase::IdName, this, i18n("Name"));
    d->mName.setLocal(i18n("default"));
 
-   mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this, i18n("AsyncInput"));
-   mAsyncInput.setLocal(false);
-   mMyTurn.registerData(KGamePropertyBase::IdTurn, this, i18n("myTurn"));
-   mMyTurn.setLocal(false);
-   mMyTurn.setEmittingSignal(true);
-   mMyTurn.setOptimized(false);
+   d->mAsyncInput.registerData(KGamePropertyBase::IdAsyncInput, this, i18n("AsyncInput"));
+   d->mAsyncInput.setLocal(false);
+   d->mMyTurn.registerData(KGamePropertyBase::IdTurn, this, i18n("myTurn"));
+   d->mMyTurn.setLocal(false);
+   d->mMyTurn.setEmittingSignal(true);
+   d->mMyTurn.setOptimized(false);
 }
 
 KPlayer::~KPlayer()
@@ -102,8 +112,8 @@ KPlayer::~KPlayer()
   kDebug(11001) << k_funcinfo << ": this=" << this <<", id=" << this->id() << endl;
 
   // Delete IODevices
-  qDeleteAll(mInputList.begin(), mInputList.end());
-  mInputList.clear();
+  qDeleteAll(d->mInputList);
+  d->mInputList.clear();
   if (game())
   {
     game()->playerDeleted(this);
@@ -114,6 +124,61 @@ KPlayer::~KPlayer()
   d->mProperties.clear();
   delete d;
 //  kDebug(11001) << k_funcinfo << " done" << endl;
+}
+
+int KPlayer::rtti() const
+{
+  return 0;
+}
+
+KPlayer::KGameIOList* KPlayer::ioList()
+{
+  return &d->mInputList;
+}
+
+void KPlayer::setGame(KGame *game)
+{
+  d->mGame = game;
+}
+
+KGame* KPlayer::game() const
+{
+  return d->mGame;
+}
+
+void KPlayer::setAsyncInput(bool a)
+{
+  d->mAsyncInput = a;
+}
+
+bool KPlayer::asyncInput() const
+{
+  return d->mAsyncInput.value();
+}
+
+bool KPlayer::isActive() const
+{
+  return d->mActive;
+}
+
+void KPlayer::setActive(bool v)
+{
+  d->mActive = v;
+}
+
+int KPlayer::userId() const
+{
+  return d->mUserId.value();
+}
+
+void KPlayer::setUserId(int i)
+{
+  d->mUserId = i;
+}
+
+bool KPlayer::myTurn() const
+{
+  return d->mMyTurn.value();
 }
 
 bool KPlayer::forwardMessage(QDataStream &msg,int msgid,quint32 receiver,quint32 sender)
@@ -213,7 +278,7 @@ bool KPlayer::addGameIO(KGameIO *input)
   {
     return false;
   }
-  mInputList.append(input); 
+  d->mInputList.append(input);
   input->initIO(this); // set player and init device
   return true;
 }
@@ -226,9 +291,9 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
   if (!targetinput) // delete all
   {
     KGameIO *input;
-    while(!mInputList.isEmpty())
+    while(!d->mInputList.isEmpty())
     {
-      input = mInputList.first();
+      input = d->mInputList.first();
       if (input) removeGameIO(input,deleteit);
     }
   }
@@ -242,15 +307,20 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
     else
     {
       targetinput->setPlayer(0);
-      result=mInputList.removeAll(targetinput);
+      result = d->mInputList.removeAll(targetinput);
     }
   }
   return result;
 }
 
+bool KPlayer::hasRtti(int rtti) const
+{
+  return findRttiIO(rtti) != 0;
+}
+
 KGameIO * KPlayer::findRttiIO(int rtti) const
 {
-  QListIterator<KGameIO*> it(mInputList);
+  QListIterator<KGameIO*> it(d->mInputList);
   while (it.hasNext())
   {
     KGameIO* curGameIO = it.next();
@@ -265,7 +335,7 @@ KGameIO * KPlayer::findRttiIO(int rtti) const
 int KPlayer::calcIOValue()
 {
   int value=0;
-  QListIterator<KGameIO*> it(mInputList);
+  QListIterator<KGameIO*> it(d->mInputList);
   while (it.hasNext())
   {
     value|=it.next()->rtti();
@@ -296,7 +366,7 @@ bool KPlayer::setTurn(bool b, bool exclusive)
   }
 
   // Return if nothing changed
-  mMyTurn = b;
+  d->mMyTurn = b;
 
   return true;
 }
@@ -404,10 +474,10 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
   if (me->id()==KGamePropertyBase::IdTurn)
   {
     //kDebug(11001) << k_funcinfo << ": for KGamePropertyBase::IdTurn " << endl;
-    QListIterator<KGameIO*> it(mInputList);
+    QListIterator<KGameIO*> it(d->mInputList);
     while (it.hasNext())
     {
-      it.next()->notifyTurn(mMyTurn.value());
+      it.next()->notifyTurn(d->mMyTurn.value());
     }
   }
   emit signalPropertyChanged(me,this);
@@ -428,7 +498,7 @@ void KPlayer::Debug()
    kDebug(11001) << "Active:  " << isActive() << endl;
    kDebug(11001) << "Priority:" << networkPriority() << endl;
    kDebug(11001) << "Game   : " << game() << endl;
-   kDebug(11001) << "#IOs:    " << mInputList.count() << endl;
+   kDebug(11001) << "#IOs:    " << d->mInputList.count() << endl;
    kDebug(11001) << "---------------------------------------------------" << endl;
 }
 

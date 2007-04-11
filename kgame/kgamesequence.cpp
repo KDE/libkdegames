@@ -27,6 +27,8 @@
 #include "kplayer.h"
 #include "kgame.h"
 
+#include <kdebug.h>
+
 KGameSequence::KGameSequence() : QObject()
 {
  mGame = 0;
