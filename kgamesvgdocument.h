@@ -24,10 +24,10 @@
 #ifndef _KGAMESVGDOCUMENT_H_
 #define _KGAMESVGDOCUMENT_H_
 
-#include <QtXml/QDomDocument>
 #include <QtCore/QHash>
-#include <QtGui/QMatrix>
 #include <QtCore/QStringList>
+#include <QtGui/QMatrix>
+#include <QtXml/QDomDocument>
 #include <libkdegames_export.h>
 
 
@@ -365,6 +365,41 @@ public:
      * @see setStyleProperty() setStylyProperties()
      */
     void setStyle(const QString& styleAttribute);
+
+    /**
+     * @brief Returns the patterns in the document
+     *
+     * @returns The patterns in the document
+     */
+    QDomNodeList patterns() const;
+
+    /**
+     * @brief Returns the linearGradients in the document
+     *
+     * @returns The linearGradients in the document
+     */
+    QDomNodeList linearGradients() const;
+
+    /**
+     * @brief Returns the radialGradients in the document
+     *
+     * @returns The radialGradients in the document
+     */
+    QDomNodeList radialGradients() const;
+
+    /**
+     * @brief Returns the defs in the document
+     *
+     * @returns The defs in the document
+     */
+    QDomNodeList defs() const;
+
+    /**
+     * @brief Returns the first def in the document
+     *
+     * @returns The first def in the document
+     */
+    QDomNode def() const;
 
     /**
      * @brief Returns the transform attribute of the current node.

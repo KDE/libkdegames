@@ -24,10 +24,10 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtXml/QDomElement>
 #include <QtXml/QDomNode>
-#include <QStringList>
-#include <QDomElement>
-#include <QString>
 
 #include <math.h>
 
@@ -167,7 +167,7 @@ QDomNode KGameSvgDocument::elementByUniqueAttributeValue(const QString& attribut
     /* DOM is always "live", so there maybe a new root node.  We always have to ask for the
      * root node instead of keeping a pointer to it.
      */
-    QDomElement docElem = documentElement();    
+    QDomElement docElem = documentElement();
     QDomNode n = docElem.firstChild();
 
     QDomNode node = d->findElementById(attributeName, attributeValue, n);
@@ -327,14 +327,52 @@ void KGameSvgDocument::setStyleProperty(const QString& propertyName, const QStri
 
 QString KGameSvgDocument::nodeToSvg() const
 {
-    QString s, xml;
+    QString s, t, xml, defs, pattern;
     QTextStream str(&s);
+    QTextStream str_t(&t);
+    QStringList defsAdded;
+    int result = 0;
+    QRegExp rx;
 
     currentNode().save(str, 1);
     xml = *str.string();
 
+    // Find and add any required gradients or patterns
+    pattern = "url" + WSP_ASTERISK + OPEN_PARENS + WSP_ASTERISK + "#(.*)" + WSP_ASTERISK + CLOSE_PARENS;
+    rx.setPattern(pattern);
+    if (rx.indexIn(xml, result) != -1)
+    {
+        QDomNode node, nodeBase;
+        QString baseId;
+        QDomNode n = def();
+
+        result = 0;
+        while ((result = rx.indexIn(xml, result)) != -1)
+        {
+            // Find the pattern or gradient referenced
+            result += rx.matchedLength();
+            if (!defsAdded.contains(rx.cap(1)))
+            {
+                node = d->findElementById("id", rx.cap(1), n);
+                node.save(str_t, 1);
+                defsAdded.append(rx.cap(1));
+            }
+
+            // Find the gradient the above gradient is based on
+            baseId = node.toElement().attribute("xlink:href").mid(1);
+            if (!defsAdded.contains(baseId))
+            {
+                nodeBase = d->findElementById("id", baseId, n);
+                nodeBase.save(str_t, 1);
+                defsAdded.append(baseId);
+            }
+        }
+        defs = *str_t.string();
+        defs = "<defs>" + defs + "</defs>";
+    }
+
     // Need to make node be a real svg document, so prepend and append required tags.
-    xml = d->SVG_XML_PREPEND + xml + d->SVG_XML_APPEND;
+    xml = d->SVG_XML_PREPEND + defs + xml + d->SVG_XML_APPEND;
     return xml;
 }
 
@@ -351,6 +389,31 @@ QString KGameSvgDocument::style() const
 void KGameSvgDocument::setStyle(const QString& styleAttribute)
 {
     d->m_currentElement.setAttribute("style", styleAttribute);
+}
+
+QDomNodeList KGameSvgDocument::patterns() const
+{
+    return elementsByTagName("pattern");
+}
+
+QDomNodeList KGameSvgDocument::linearGradients() const
+{
+    return elementsByTagName("linearGradient");
+}
+
+QDomNodeList KGameSvgDocument::radialGradients() const
+{
+    return elementsByTagName("radialGradient");
+}
+
+QDomNodeList KGameSvgDocument::defs() const
+{
+    return elementsByTagName("defs");
+}
+
+QDomNode KGameSvgDocument::def() const
+{
+    return defs().at(0);
 }
 
 QString KGameSvgDocument::transform() const
