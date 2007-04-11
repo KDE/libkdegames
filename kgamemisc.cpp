@@ -19,12 +19,13 @@
 /*
     $Id$
 */
+#include "kgamemisc.h"
+
 #include <QStringList>
 
 #include <krandomsequence.h>
 #include <klocale.h>
 
-#include "kgamemisc.h"
 
 class KGameMiscPrivate
 {

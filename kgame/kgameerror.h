@@ -23,7 +23,7 @@
 #ifndef __KGAMEERROR_H_
 #define __KGAMEERROR_H_
 
-#include <QString>
+#include <QtCore/QString>
 
 
 class KGameError

@@ -19,6 +19,8 @@
  * KGameProgress -- a progress indicator widget for KDE.
  */
 
+#include "kgameprogress.h"
+
 #include <QPaintEvent>
 #include <QPainter>
 #include <QPixmap>
@@ -28,7 +30,6 @@
 #include <QFrame>
 #include <QApplication>
 #include <kglobalsettings.h>
-#include "kgameprogress.h"
 
 
 KGameProgress::KGameProgress(QWidget *parent)

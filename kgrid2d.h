@@ -22,10 +22,10 @@
 
 #include <math.h>
 
-#include <qpair.h>
-#include <qvector.h>
+#include <QtCore/QPair>
+#include <QtCore/QVector>
 //Added by qt3to4:
-#include <QTextStream>
+#include <QtCore/QTextStream>
 
 #include <kglobal.h>
 

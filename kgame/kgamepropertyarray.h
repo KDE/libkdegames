@@ -21,9 +21,9 @@
 #ifndef __KGAMEPROPERTYARRAY_H_
 #define __KGAMEPROPERTYARRAY_H_
 
-#include <QDataStream>
+#include <QtCore/QDataStream>
 //Added by qt3to4:
-#include <QVector>
+#include <QtCore/QVector>
 #include <kdebug.h>
 
 #include "kgamemessage.h"

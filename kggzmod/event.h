@@ -21,8 +21,8 @@
 #ifndef KGGZMOD_EVENT_H
 #define KGGZMOD_EVENT_H
 
-#include <QMap>
-#include <QString>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 namespace KGGZMod
 {

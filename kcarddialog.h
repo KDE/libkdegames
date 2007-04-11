@@ -19,7 +19,7 @@
 #ifndef __KCARDDIALOG_H_
 #define __KCARDDIALOG_H_
 
-#include <kdialog.h>
+#include <KDialog>
 
 #include <libkdegames_export.h>
 #include <kglobal.h>

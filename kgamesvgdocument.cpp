@@ -22,9 +22,9 @@
 #include <kfilterdev.h>
 #include <kdebug.h>
 
-#include <QDebug>
-#include <QFile>
-#include <QDomNode>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtXml/QDomNode>
 #include <QStringList>
 #include <QDomElement>
 #include <QString>
@@ -491,7 +491,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
             {
                 double x = rx.cap(9).toDouble();
                 double y = rx.cap(10).toDouble();
-                if (rx.cap(10) == "" ) // y defaults to zero per SVG standard
+                if (rx.cap(10).isEmpty()) // y defaults to zero per SVG standard
                 {
                     y = 0;
                 }
@@ -502,7 +502,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
             {
                 double x = rx.cap(12).toDouble();
                 double y = rx.cap(12).toDouble();
-                if (rx.cap(13) == "" ) // y defaults to x per SVG standard
+                if (rx.cap(13).isEmpty()) // y defaults to x per SVG standard
                 {
                     y = x;
                 }

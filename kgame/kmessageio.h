@@ -25,10 +25,10 @@
 #define _KMESSAGEIO_H_
 
 #include <qhostaddress.h>
-#include <QObject>
-#include <QString>
-#include <QQueue>
-#include <QFile>
+#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QQueue>
+#include <QtCore/QFile>
 #include <kdebug.h>
 
 class QTcpSocket;

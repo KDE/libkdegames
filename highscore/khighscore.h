@@ -23,9 +23,10 @@
 #ifndef KHIGHSCORE_H
 #define KHIGHSCORE_H
 
-#include <QObject>
+#include <QtCore/QObject>
 #include <libkdegames_export.h>
 #include <KGlobal>
+
 class KConfig;
 class KLockFile;
 //class KRawConfig;

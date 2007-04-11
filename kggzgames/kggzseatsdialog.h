@@ -23,7 +23,7 @@
 
 #include <kggzmod/event.h>
 
-#include <qwidget.h>
+#include <QtGui/QWidget>
 
 /**
  * @mainpage

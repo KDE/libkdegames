@@ -201,7 +201,7 @@ KGameLCDList::KGameLCDList(const QString &title, QWidget *parent)
 KGameLCDList::KGameLCDList(QWidget *parent)
     : QWidget(parent)
 {
-    init(QString::null);
+    init(QString());
 }
 
 KGameLCDList::~KGameLCDList()
@@ -224,7 +224,7 @@ void KGameLCDList::init(const QString &title)
 
 void KGameLCDList::append(QLCDNumber *lcd)
 {
-    append(QString::null, lcd);
+    append(QString(), lcd);
 }
 
 void KGameLCDList::append(const QString &leading, QLCDNumber *lcd)

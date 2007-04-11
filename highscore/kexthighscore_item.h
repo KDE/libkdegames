@@ -20,9 +20,9 @@
 #ifndef KEXTHIGHSCORE_ITEM_H
 #define KEXTHIGHSCORE_ITEM_H
 
-#include <QVariant>
-#include <QMap>
-#include <QVector>
+#include <QtCore/QVariant>
+#include <QtCore/QMap>
+#include <QtCore/QVector>
 #include <libkdegames_export.h>
 class QWidget;
 

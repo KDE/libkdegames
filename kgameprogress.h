@@ -24,8 +24,8 @@
 #ifndef _KPROGRES_H
 #define _KPROGRES_H "$Id$"
 
-#include <QFrame>
-#include <QAbstractSlider>
+#include <QtGui/QFrame>
+#include <QtGui/QAbstractSlider>
 #include <libkdegames_export.h>
 /**
  * @short A progress indicator widget.

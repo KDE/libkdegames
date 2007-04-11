@@ -21,8 +21,8 @@
 #ifndef KGGZMOD_REQUEST_H
 #define KGGZMOD_REQUEST_H
 
-#include <QMap>
-#include <QString>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 namespace KGGZMod
 {
@@ -164,7 +164,7 @@ class BootRequest : public Request
  * @short Bot player addition request to the GGZ core client.
  *
  * This request puts a bot player into a specific seat,
- * which must be empty at the time of issueing this request.
+ * which must be empty at the time of issuing this request.
  *
  * Refer to the \ref Request documentation for everything else.
  *

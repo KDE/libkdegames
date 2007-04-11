@@ -18,6 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kgamedialog.h"
+
 #include <QLayout>
 //Added by qt3to4:
 #include <QVBoxLayout>
@@ -29,8 +31,6 @@
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamedialogconfig.h"
-
-#include "kgamedialog.h"
 
 #include "kgamedialog.moc"
 

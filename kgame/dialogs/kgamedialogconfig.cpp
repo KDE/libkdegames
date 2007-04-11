@@ -769,7 +769,7 @@ void KGameDialogConnectionConfig::slotKickPlayerOut(QListWidgetItem* item)
  }
 
  if (KMessageBox::questionYesNo(this, i18n("Do you want to ban player \"%1\" from the game?",
-		p->name()), QString::null, KGuiItem (i18n("Ban Player")), KGuiItem (i18n("Do Not Ban"))) == KMessageBox::Yes) {
+		p->name()), QString(), KGuiItem (i18n("Ban Player")), KGuiItem (i18n("Do Not Ban"))) == KMessageBox::Yes) {
 	kDebug(11001) << "will remove player " << p << endl;
 	game()->removePlayer(p);
 //	d->mPlayerBox->removeItem(d->mPlayerBox->index(item)); // should be done by signalPlayerLeftGame

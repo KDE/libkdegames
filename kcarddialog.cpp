@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kcarddialog.h"
+
 #include <QLabel>
 #include <QCheckBox>
 #include <QLayout>
@@ -33,7 +35,6 @@
 #include <krandom.h>
 #include <kconfig.h>
 
-#include "kcarddialog.h"
 #include <kdebug.h>
 
 #define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")

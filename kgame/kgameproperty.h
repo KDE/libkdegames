@@ -153,7 +153,7 @@ public:
 	/**
 	 * Sets this property to emit a signal on value changed.
 	 * As the properties do not inherit QObject for optimization
-	 * this signal is emited via the KPlayer or KGame object
+	 * this signal is emitted via the KPlayer or KGame object
 	 **/
 	void setEmittingSignal(bool p)	{ mFlags.bits.emitsignal=p; }
 
@@ -262,25 +262,25 @@ public:
 	 * @param name if not 0 you can assign a name to this property
 	 *
 	 **/
-	int registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, QString name=0);
+	int registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, const QString& name=0);
 
 	/** 
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-	int registerData(int id, KGamePropertyHandler* owner, QString name=0);
+	int registerData(int id, KGamePropertyHandler* owner, const QString& name=0);
 
 	/** 
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-	int registerData(int id, KGame* owner, QString name=0);
+        int registerData(int id, KGame* owner, const QString& name=0);
 
 	/** 
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-	int registerData(int id, KPlayer* owner, QString name=0);
+        int registerData(int id, KPlayer* owner, const QString& name=0);
 
 	/** 
 	 * This is an overloaded member function, provided for convenience.
@@ -288,7 +288,7 @@ public:
 	 * In particular you can use this function to create properties which
 	 * will have an automatic id assigned. The new id is returned.
 	 **/
-	int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, QString name=0);
+        int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, const QString& name=0);
 
 	void unregisterData();
 

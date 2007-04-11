@@ -18,6 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "khighscore.h"
+
 #include <config-highscore.h>
 #include <unistd.h> // sleep
 
@@ -32,9 +34,7 @@
 #include <klockfile.h>
 #include <kconfiggroup.h>
 
-#include "khighscore.h"
 #include "kconfigrawbackend.h"
-
 
 #define GROUP "KHighscore"
 

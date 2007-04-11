@@ -24,10 +24,10 @@
 #ifndef _KGAMESVGDOCUMENT_H_
 #define _KGAMESVGDOCUMENT_H_
 
-#include <QDomDocument>
-#include <QHash>
-#include <QMatrix>
-#include <QStringList>
+#include <QtXml/QDomDocument>
+#include <QtCore/QHash>
+#include <QtGui/QMatrix>
+#include <QtCore/QStringList>
 #include <libkdegames_export.h>
 
 

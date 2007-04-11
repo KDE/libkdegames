@@ -26,13 +26,14 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // KGame namespace changes: mauricio@tabuleiro.com
 
+#include "kgamecanvas.h"
+
 #include <QPaintEvent>
 #include <QPainter>
 #include <QRegion>
 #include <QApplication>
 #include <QTimer>
 #include <QTime>
-#include "kgamecanvas.h"
 
 /*
   TODO:

@@ -21,7 +21,7 @@
 #ifndef KGGZMOD_PLAYER_H
 #define KGGZMOD_PLAYER_H
 
-#include <qstring.h>
+#include <QtCore/QString>
 
 namespace KGGZMod
 {

@@ -21,7 +21,7 @@
 #define KZOOMMAINWINDOW_H
 
 #include <kmainwindow.h>
-#include <QList>
+#include <QtCore/QList>
 
 #include <libkdegames_export.h>
 

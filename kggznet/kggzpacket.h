@@ -21,8 +21,8 @@
 #ifndef KGGZNET_PACKET_H
 #define KGGZNET_PACKET_H
 
-#include <qobject.h>
-#include <qdatastream.h>
+#include <QtCore/QObject>
+#include <QtCore/QDataStream>
 
 class QAbstractSocket;
 

@@ -23,8 +23,8 @@
 #ifndef __KGAME_H_
 #define __KGAME_H_
 
-#include <QString>
-#include <QList>
+#include <QtCore/QString>
+#include <QtCore/QList>
 
 
 #include "kgamenetwork.h"

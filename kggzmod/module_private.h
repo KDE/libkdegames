@@ -24,8 +24,8 @@
 #include <kggzmod/module.h>
 #include <kggzmod/player.h>
 
-#include <QSocketNotifier>
-#include <QList>
+#include <QtCore/QSocketNotifier>
+#include <QtCore/QList>
 
 class KGGZRaw;
 

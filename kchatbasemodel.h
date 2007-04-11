@@ -20,7 +20,7 @@
 #ifndef __KCHATBASEMODEL_H__
 #define __KCHATBASEMODEL_H__
 
-#include <QAbstractListModel>
+#include <QtCore/QAbstractListModel>
 
 #include <kglobalsettings.h>
 #include <libkdegames_export.h>

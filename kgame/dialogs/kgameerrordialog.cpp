@@ -18,13 +18,13 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kgameerrordialog.h"
+
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 #include "kgame.h"
-
-#include "kgameerrordialog.h"
 
 class KGameErrorDialogPrivate
 {

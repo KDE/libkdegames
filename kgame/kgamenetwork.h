@@ -111,7 +111,7 @@ public:
      **/
     bool offerConnections (quint16 port);
 
-    void setDiscoveryInfo(const QString& type, const QString& name=QString::null);
+    void setDiscoveryInfo(const QString& type, const QString& name=QString());
     
     /**
      * Inits a network game as a network CLIENT
@@ -124,7 +124,6 @@ public:
     bool connectToServer(const QString& host, quint16 port);
 
     /**
-     * @since 3.2
      * @return The port we are listening to if offerConnections was called
      * or the port we are connected to if connectToServer was called.
      * Otherwise 0.
@@ -132,7 +131,6 @@ public:
     quint16 port() const;
 
     /**
-     * @since 3.2
      * @return The name of the host that we are currently connected to is
      * isNetwork is TRUE and we are not the MASTER, i.e. if connectToServer
      * was called. Otherwise this will return "localhost".

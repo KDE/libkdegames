@@ -28,9 +28,9 @@
 #include "khighscore.h"
 #include "kexthighscore.h"
 
-#include <QTextStream>
-#include <QVector>
-#include <QDateTime>
+#include <QtCore/QTextStream>
+#include <QtCore/QVector>
+#include <QtCore/QDateTime>
 #include <kconfiggroup.h>
 
 class QTextStream;

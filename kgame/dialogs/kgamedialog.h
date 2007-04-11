@@ -30,8 +30,8 @@
 
 #include <kpagedialog.h>
 #include <libkdegames_export.h>
-#include <QVBoxLayout>
-#include <QGridLayout>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QGridLayout>
 class QGridLayout;
 class QVBoxLayout;
 class KVBox;

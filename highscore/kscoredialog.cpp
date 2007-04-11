@@ -22,6 +22,8 @@ arising out of or in connection with the use or performance of
 this software.
 ****************************************************************/
 
+#include "kscoredialog.h"
+
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
@@ -38,7 +40,6 @@ this software.
 #include <kconfiggroup.h>
 
 #include "khighscore.h"
-#include "kscoredialog.h"
 
 class KScoreDialog::KScoreDialogPrivate
 {

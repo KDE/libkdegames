@@ -20,7 +20,7 @@
 #ifndef __KCHATDIALOG_H__
 #define __KCHATDIALOG_H__
 
-#include <kdialog.h>
+#include <KDialog>
 #include <libkdegames_export.h>
 
 class KChatBase;

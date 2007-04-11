@@ -178,7 +178,7 @@ QString ModulePrivate::requestString(Request::Type requestcode)
 		str = "??unknown??";
 	}
 
-	str += " (" + QString::number(requestcode) + ")";
+	str += " (" + QString::number(requestcode) + ')';
 
 	return str;
 }
@@ -207,7 +207,7 @@ QString ModulePrivate::opcodeString(int opcode)
 		str = "??unknown??";
 	}
 
-	str += " (" + QString::number(opcode) + ")";
+	str += " (" + QString::number(opcode) + ')';
 
 	return str;
 }

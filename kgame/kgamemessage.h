@@ -23,7 +23,7 @@
 #ifndef __KGAMEMSG_H_
 #define __KGAMEMSG_H_
 
-#include <QDataStream>
+#include <QtCore/QDataStream>
 #include <libkdegames_export.h>
 
 class KDEGAMES_EXPORT KGameMessage

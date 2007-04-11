@@ -20,7 +20,7 @@
 #ifndef _KCONFIGRAWBACKEND_H
 #define _KCONFIGRAWBACKEND_H
 
-#include <QFile>
+#include <QtCore/QFile>
 
 #include <kconfig.h>
 #include <kconfigini.h>

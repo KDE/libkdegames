@@ -24,8 +24,8 @@
 #include <kggzmod/request.h>
 #include <kggzmod/event.h>
 
-#include <QObject>
-#include <QList>
+#include <QtCore/QObject>
+#include <QtCore/QList>
 
 /**
  * @mainpage

@@ -25,10 +25,10 @@ this software.
 #ifndef KSCOREDIALOG_H
 #define KSCOREDIALOG_H
 
-#include <QMap>
-#include <QFlags>
+#include <QtCore/QMap>
+#include <QtCore/QFlags>
 
-#include <kdialog.h>
+#include <KDialog>
 #include <libkdegames_export.h>
 
 /**
@@ -153,7 +153,7 @@ public:
      * @returns The highscore position if the score was good enough to 
      * make it into the list (1 being topscore) or 0 otherwise.
      */
-    int addScore(int newScore, const FieldInfo& newInfo, const AddScoreFlags& flags=AskName, const QString& name=QString::null);
+    int addScore(int newScore, const FieldInfo& newInfo, const AddScoreFlags& flags=AskName, const QString& name=QString());
 
     /**
      * @returns the current best score.

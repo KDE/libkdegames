@@ -20,8 +20,8 @@
 #ifndef __KMESSAGECLIENT_H__
 #define __KMESSAGECLIENT_H__
 
-#include <QObject>
-#include <QString>
+#include <QtCore/QObject>
+#include <QtCore/QString>
 
 
 class KMessageIO;

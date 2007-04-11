@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kmessageclient.h"
+
 #include <kdebug.h>
 #include <stdio.h>
 
@@ -26,8 +28,6 @@
 #include <QDataStream>
 #include "kmessageio.h"
 #include "kmessageserver.h"
-
-#include "kmessageclient.h"
 
 class KMessageClientPrivate
 {

@@ -57,7 +57,7 @@ public:
 	 * @param s A string that describes the error further (like port is
 	 * already in use). Will be ignored if QString::null
 	 **/
-	void connectionError(const QString& s = QString::null);
+	void connectionError(const QString& s = QString());
 
 public slots:
 	void slotError(int error, const QString& text);

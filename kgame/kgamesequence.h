@@ -23,7 +23,7 @@
 #ifndef __KGAMESEQUENCE_H_
 #define __KGAMESEQUENCE_H_
 
-#include <QObject>
+#include <QtCore/QObject>
 
 class KPlayer;
 class KGame;

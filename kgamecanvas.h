@@ -31,14 +31,14 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  Author: Maurizio Monge <maurizio.monge@gmail.com>
  */
 
-#include <QList>
-#include <QPoint>
-#include <QPicture>
-#include <QPixmap>
-#include <QPainter>
-#include <QRect>
-#include <QRegion>
-#include <QWidget>
+#include <QtCore/QList>
+#include <QtCore/QPoint>
+#include <QtGui/QPicture>
+#include <QtGui/QPixmap>
+#include <QtGui/QPainter>
+#include <QtCore/QRect>
+#include <QtGui/QRegion>
+#include <QtGui/QWidget>
 #include <libkdegames_export.h>
 
 class KGameCanvasItem;

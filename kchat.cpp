@@ -17,12 +17,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QMap>
+#include "kchat.h"
+
+#include <QtCore/QMap>
 
 #include <klocale.h>
 #include <kdebug.h>
 
-#include "kchat.h"
 #include "kchatbasemodel.h"
 #include "kchatbaseitemdelegate.h"
 

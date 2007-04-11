@@ -21,7 +21,7 @@
 #ifndef KGGZNET_RAW_H
 #define KGGZNET_RAW_H
 
-#include <qobject.h>
+#include <QtCore/QObject>
 
 /**
  * @mainpage

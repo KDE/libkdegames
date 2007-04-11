@@ -20,15 +20,15 @@
 #ifndef KEXTHIGHSCORE_GUI_H
 #define KEXTHIGHSCORE_GUI_H
 
-#include <QCheckBox>
-#include <QLabel>
-#include <qtabwidget.h>
+#include <QtGui/QCheckBox>
+#include <QtGui/QLabel>
+#include <QtGui/QTabWidget>
 #include <kurllabel.h>
-#include <QTreeWidget>
+#include <QtGui/QTreeWidget>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kpagedialog.h>
-#include <QList>
+#include <QtCore/QList>
 
 #include "kexthighscore.h"
 

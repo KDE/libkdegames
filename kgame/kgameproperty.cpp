@@ -76,19 +76,19 @@ void KGamePropertyBase::init()
  setPolicy(PolicyLocal);
 }
 
-int KGamePropertyBase::registerData(int id, KGame* owner, QString name)
+int KGamePropertyBase::registerData(int id, KGame* owner, const QString& name)
 { return registerData(id, owner->dataHandler(), name);  }
 
-int KGamePropertyBase::registerData(int id, KPlayer* owner, QString name)
+int KGamePropertyBase::registerData(int id, KPlayer* owner, const QString& name)
 { return registerData(id, owner->dataHandler(), name);  }
 
-int KGamePropertyBase::registerData( KGamePropertyHandler* owner,PropertyPolicy p, QString name)
+int KGamePropertyBase::registerData( KGamePropertyHandler* owner,PropertyPolicy p, const QString& name)
 { return registerData(-1, owner,p, name);  }
 
-int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, QString name)
+int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner, const QString& name)
 { return registerData(id, owner,PolicyUndefined, name);  }
 
-int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, QString name)
+int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, const QString& name)
 {
 // we don't support changing the id
  if (!owner) {

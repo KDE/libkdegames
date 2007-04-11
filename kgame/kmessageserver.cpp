@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kmessageserver.h"
+
 #include <qiodevice.h>
 #include <qbuffer.h>
 #include <QList>
@@ -27,7 +29,6 @@
 #include <kdebug.h>
 
 #include "kmessageio.h"
-#include "kmessageserver.h"
 
 // --------------- internal class KMessageServerSocket
 
