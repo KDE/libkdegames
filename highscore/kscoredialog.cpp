@@ -319,12 +319,6 @@ void KScoreDialog::saveScores()
     KGlobal::config()->sync();
 }
 
-//deprecated
-int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName)
-{
-   return addScore(newScore, newInfo, askName, false);
-}
-
 int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScoreFlags& flags, const QString &name)
 {
     bool askName=false, lessIsMore=false;
@@ -368,41 +362,6 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScor
         }
     }
     return 0;
-}
-
-//deprecated
-int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, bool askName, bool lessIsMore)
-{
-   if (!d->loaded)
-      loadScores();
-   FieldInfo *score;
-   for(int i=0; i<d->scores.size(); i++)
-   {
-      score = d->scores.at(i);
-      bool ok;
-      int num_score = (*score)[Score].toLong(&ok);
-      if (lessIsMore && !ok)
-         num_score = 1 << 30;
-      if (((newScore > num_score) && !lessIsMore) ||
-          ((newScore < num_score) && lessIsMore))
-      {
-        score = new FieldInfo(newInfo);
-        (*score)[Score].setNum(newScore);
-        d->scores.insert(i, score);
-        d->scores.removeAt(10);
-        d->latest = i+1;
-        if (askName)
-          d->newName = i+1;
-        else
-          saveScores();
-        if (i == 0)
-          d->comment = i18n("Excellent!\nYou have a new high score!");
-        else
-          d->comment = i18n("Well done!\nYou made it to the high score list!");
-        return i+1;
-      }
-   }
-   return 0;
 }
 
 void KScoreDialog::show()

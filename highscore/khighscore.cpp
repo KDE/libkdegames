@@ -241,8 +241,9 @@ QString KHighscore::group() const
 {
     if ( highscoreGroup().isNull() )
         return (d->global ? QString() : QString::fromLatin1(GROUP));
-    return (d->global ? highscoreGroup()
-            : QString("%1_%2").arg(GROUP).arg(highscoreGroup()));
+    return (d->global ?
+            highscoreGroup() :
+            QString("%1_%2").arg(GROUP).arg(highscoreGroup()));
 }
 
 bool KHighscore::hasTable() const

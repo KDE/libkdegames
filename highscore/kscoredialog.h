@@ -127,22 +127,6 @@ public:
     void addField(int field, const QString& header, const QString& key); 
 
     /**
-     * @deprecated
-     * Adds a new score to the list.
-     *
-     * @param newScore the score of this game.
-     * @param newInfo additional info about the score.
-     * @param askName Whether to prompt for the players name.
-     * @param lessIsMore If true, the lowest score is the best score.
-     *
-     * @returns The highscore position if the score was good enough to 
-     * make it into the list (1 being topscore) or 0 otherwise.
-     */
-    int addScore(int newScore, const FieldInfo& newInfo, bool askName, bool lessIsMore);
-    /// @deprecated
-    int addScore(int newScore, const FieldInfo& newInfo, bool askName);
-   
-    /**
      * Adds a new score to the list.
      *
      * @param newScore the score of this game.
