@@ -75,6 +75,8 @@ class KDEGAMES_EXPORT KChatBase : public QFrame
 public:
 	/**
 	 * @param parent The parent widget for this widget.
+         * @param model
+         * @param delegate
 	 * @param noComboBox If true then the combo box where the player can
 	 * choose where to send messages to (either globally or just to some
 	 * players) will not be added.
