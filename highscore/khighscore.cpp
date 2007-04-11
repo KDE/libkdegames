@@ -161,18 +161,18 @@ KConfig* KHighscore::config() const
 
 void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)
 {
- Q_ASSERT( isLocked() );
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- cg.writeEntry(confKey, value);
+    Q_ASSERT( isLocked() );
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    cg.writeEntry(confKey, value);
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, int value)
 {
- Q_ASSERT( isLocked() );
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- cg.writeEntry(confKey, value);
+    Q_ASSERT( isLocked() );
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    cg.writeEntry(confKey, value);
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, const QString &value)
@@ -185,61 +185,78 @@ void KHighscore::writeEntry(int entry, const QString& key, const QString &value)
 
 QVariant KHighscore::readPropertyEntry(int entry, const QString& key, const QVariant& pDefault) const
 {
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.readEntry(confKey, pDefault);
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    return cg.readEntry(confKey, pDefault);
 }
 
 QString KHighscore::readEntry(int entry, const QString& key, const QString& pDefault) const
 {
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.readEntry(confKey, pDefault);
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    return cg.readEntry(confKey, pDefault);
 }
 
 int KHighscore::readNumEntry(int entry, const QString& key, int pDefault) const
 {
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.readEntry(confKey, pDefault);
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    return cg.readEntry(confKey, pDefault);
 }
 
 bool KHighscore::hasEntry(int entry, const QString& key) const
 {
- KConfigGroup cg(config(), group());
- QString confKey = QString("%1_%2").arg(entry).arg(key);
- return cg.hasKey(confKey);
+    KConfigGroup cg(config(), group());
+    QString confKey = QString("%1_%2").arg(entry).arg(key);
+    return cg.hasKey(confKey);
 }
 
 QStringList KHighscore::readList(const QString& key, int lastEntry) const
 {
- QStringList list;
- for (int i = 1; hasEntry(i, key) && ((lastEntry > 0) ? (i <= lastEntry) : true); i++) {
-	list.append(readEntry(i, key));
- }
- return list;
+    QStringList list;
+    for (int i = 1; hasEntry(i, key) && ((lastEntry > 0) ? (i <= lastEntry) : true); i++) {
+        list.append(readEntry(i, key));
+    }
+    return list;
 }
 
 void KHighscore::writeList(const QString& key, const QStringList& list)
 {
- for (int i = 1; i <= list.count(); i++) {
-	writeEntry(i, key, list[i - 1]);
- }
+    for (int i = 1; i <= list.count(); i++) {
+            writeEntry(i, key, list[i - 1]);
+    }
 }
 
 void KHighscore::setHighscoreGroup(const QString& group)
 {
- d->group = group;
+    d->group = group;
 }
 
 const QString& KHighscore::highscoreGroup() const
 {
- return d->group;
+    return d->group;
+}
+
+QStringList KHighscore::groupList() const
+{
+    QStringList groupList = config()->groupList();
+    QStringList highscoreGroupList;
+    foreach (QString group, groupList)
+    {
+        if(group.contains("KHighscore")) //If it's one of _our_ groups (KHighscore or KHighscore_xxx)
+        {
+            if(group != "KHighscore") //Dont strip if the group is 'KHighscore'
+                group.replace("KHighscore_", QString()); //Remove the KHighscore_ prefix
+            highscoreGroupList << group;
+        }
+    }
+
+    return highscoreGroupList;
 }
 
 QString KHighscore::group() const
 {
-    if ( highscoreGroup().isNull() )
+    if (highscoreGroup().isEmpty())
         return (d->global ? QString() : QString::fromLatin1(GROUP));
     return (d->global ?
             highscoreGroup() :
@@ -247,6 +264,8 @@ QString KHighscore::group() const
 }
 
 bool KHighscore::hasTable() const
-{ return config()->hasGroup(group()); }
+{
+    return config()->hasGroup(group());
+}
 
 #include "khighscore.moc"

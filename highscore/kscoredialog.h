@@ -72,97 +72,96 @@ this software.
 class KDEGAMES_EXPORT KScoreDialog : public KDialog 
 {
     Q_OBJECT
-   
-public:
-    ///Highscore fields
-    enum Fields { 
-        Name = 1 << 0,
-        Level = 1 << 1,
-        
-        Custom1 = 1 << 10,
-        Custom2 = 1 << 11,
-        Custom3 = 1 << 12,
-        
-        Date = 1 << 27,
-        Time = 1 << 28,
-        Score = 1 << 29
-    };
 
-    ///Flags for setting preferences for adding scores
-    enum AddScoreFlag {
-        AskName = 0x1, /**< Promt the player for their name */
-        LessIsMore = 0x2 /**< A lower numerical score means higher placing on the table */
-    };
-    Q_DECLARE_FLAGS(AddScoreFlags, AddScoreFlag)
+    public:
+        ///Highscore fields
+        enum Fields { 
+            Name = 1 << 0,
+            Level = 1 << 1,
+            
+            Custom1 = 1 << 10,
+            Custom2 = 1 << 11,
+            Custom3 = 1 << 12,
+            
+            Date = 1 << 27,
+            Time = 1 << 28,
+            Score = 1 << 29
+        };
 
-    typedef QMap<int, QString> FieldInfo;
+        ///Flags for setting preferences for adding scores
+        enum AddScoreFlag {
+            AskName = 0x1, /**< Promt the player for their name */
+            LessIsMore = 0x2 /**< A lower numerical score means higher placing on the table */
+        };
+        Q_DECLARE_FLAGS(AddScoreFlags, AddScoreFlag)
 
-    /**
-     * @param fields Bitwise OR of the @ref Fields that should be listed.
-     * @param parent passed to parent QWidget constructor.
-     */
-    KScoreDialog(int fields, QWidget *parent);
+        typedef QMap<int, QString> FieldInfo;
 
-    ~KScoreDialog();
+        /**
+        * @param fields Bitwise OR of the @ref Fields that should be listed.
+        * @param parent passed to parent QWidget constructor.
+        */
+        KScoreDialog(int fields, QWidget *parent);
 
-    /**
-     * @param group to use for reading/writing highscores from/to.
-     * This will be prefixed be KHighscore_. By default the class
-     * will use "High Score"
-     */
-    void setConfigGroup(const QString& group);
+        ~KScoreDialog();
 
-    /**
-     * @param comment to add when showing high-scores.
-     * The comment is only used once.  
-     */
-    void setComment(const QString& comment);
+        /**
+        * @param group to use for reading/writing highscores from/to.
+        * If you get a group, it will be prefixed by 'KHighscore_' otherwise
+        * the group will simply be 'KHighscore'
+        */
+        void setConfigGroup(const QString& group = QString());
 
-    /**
-     * Define an extra FieldInfo entry.
-     * @param field Id of this field
-     * @param header Header shown in the dialog for this field
-     * @param key used to store this field with.
-     */
-    void addField(int field, const QString& header, const QString& key); 
+        /**
+        * @param comment to add when showing high-scores.
+        * The comment is only used once.  
+        */
+        void setComment(const QString& comment);
 
-    /**
-     * Adds a new score to the list.
-     *
-     * @param newScore the score of this game.
-     * @param newInfo additional info about the score.
-     * @param flags set whether the user should be prompted for their name and how the scores should be sorted
-     * @param name the name of the player
-     *
-     * @returns The highscore position if the score was good enough to 
-     * make it into the list (1 being topscore) or 0 otherwise.
-     */
-    int addScore(int newScore, const FieldInfo& newInfo, const AddScoreFlags& flags=AskName, const QString& name=QString());
+        /**
+        * Define an extra FieldInfo entry.
+        * @param field Id of this field
+        * @param header Header shown in the dialog for this field
+        * @param key used to store this field with.
+        */
+        void addField(int field, const QString& header, const QString& key); 
 
-    /**
-     * @returns the current best score.
-     */
-    int highScore();
+        /**
+        * Adds a new score to the list.
+        *
+        * @param newScore the score of this game.
+        * @param newInfo additional info about the score.
+        * @param flags set whether the user should be prompted for their name and how the scores should be sorted
+        * @param name the name of the player
+        *
+        * @returns The highscore position if the score was good enough to 
+        * make it into the list (1 being topscore) or 0 otherwise.
+        */
+        int addScore(int newScore, const FieldInfo& newInfo, const AddScoreFlags& flags=AskName, const QString& name=QString());
 
-    virtual void show();
-    virtual void exec();
+        /**
+        * @returns the current best score.
+        */
+        int highScore();
 
-    private Q_SLOTS:
-        void slotGotReturn();
-        void slotGotName();
+        virtual void show();
+        virtual void exec();
 
-    private:
-        /* read scores */
-        void loadScores();   
-        void saveScores();
-   
-        void aboutToShow();
-        void setupDialog();
-        void keyPressEvent( QKeyEvent *ev);
+        private Q_SLOTS:
+            void slotGotReturn();
+            void slotGotName();
 
-    private:
-        class KScoreDialogPrivate;
-        KScoreDialogPrivate* const d;
+        private:
+            void loadScores();
+            void saveScores();
+
+            void aboutToShow();
+            void setupDialog();
+            void keyPressEvent( QKeyEvent *ev);
+
+        private:
+            class KScoreDialogPrivate;
+            KScoreDialogPrivate* const d;
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 

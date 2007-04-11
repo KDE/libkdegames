@@ -248,11 +248,12 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         void writeList(const QString& key, const QStringList& list);
 
 	/**
-         * @return Whether a highscore table exists. You can use this
-         * function to indicate whether KHighscore created a highscore table
-         * before and - if not - read your old (non-KHighscore) table instead.
+         * You can use this function to indicate whether KHighscore created a
+         * highscore table before and - if not - read your old (non-KHighscore)
+         * table instead.
          * This way you can safely read an old table and save it using
          * KHighscore without losing any data
+         * @return Whether a highscore table exists.
          **/
         bool hasTable() const;
 
@@ -264,11 +265,20 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * default group is used.
          **/
         void setHighscoreGroup(const QString& groupname = "");
+        
+        /**
+         * If a group is simply called 'KHighscore' then the string will be 
+         * 'KHighscore'. Otherwise it will return a list of group names 
+         * without the KHighscore_ prexix.
+         * 
+         * @return A list of highscore groups.
+         **/
+        QStringList groupList() const;
 
 	/**
          * @return The currently used group. This doesn't contain the prefix
          * ("KHighscore_") but the same as setHighscoreGroup uses. The
-         * default is QString::null
+         * default is QString()
          **/
         const QString& highscoreGroup() const;
 
