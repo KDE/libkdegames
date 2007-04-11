@@ -28,7 +28,6 @@
 
 #include <qbuffer.h>
 #include <QDataStream>
-#include <q3cstring.h>
 
 #include <assert.h>
 #include <stdio.h>
