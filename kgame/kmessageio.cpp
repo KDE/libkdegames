@@ -373,10 +373,10 @@ void KMessageProcess::slotReceivedStdout(K3Process * , char *buffer, int buflen)
       kDebug(11001) << k_funcinfo << ": Got message with len " << len << endl;
 
       QByteArray msg ;
+      msg.resize(len);
     //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
      
-      qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.end(),
-	    msg.begin());
+      qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.begin()+len, msg.begin());
 //       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       emit received(msg);
      // msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
@@ -461,6 +461,7 @@ void KMessageFilePipe::exec()
      if (*p1!=0x4242aeae)
      {
        fprintf(stderr,"KMessageFilePipe::exec:: Cookie error...transmission failure...serious problem...\n");
+       fflush(stderr);
 //       for (int i=0;i<16;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
      }
      len=(int)(*p2);
@@ -469,9 +470,9 @@ void KMessageFilePipe::exec()
        //fprintf(stderr,"KMessageFilePipe::exec:: Got Message with len %d\n",len);
 
        QByteArray msg;
+       msg.resize(len);
        //msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
-       qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.end(),
-	    msg.begin());
+       qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.begin()+len, msg.begin());
 // 	msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
        emit received(msg);
        //msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
