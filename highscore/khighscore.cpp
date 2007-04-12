@@ -19,11 +19,9 @@
 */
 
 #include "khighscore.h"
-
+#include "kconfigrawbackend.h"
 #include <config-highscore.h>
-#include <unistd.h> // sleep
 
-#include <QtCore/QFile>
 #include <KConfig>
 #include <KGlobal>
 #include <KStandardGuiItem>
@@ -34,11 +32,13 @@
 #include <KLockFile>
 #include <KConfigGroup>
 
-#include "kconfigrawbackend.h"
+#include <QtCore/QFile>
+
+#include <unistd.h> // sleep
 
 #define GROUP "KHighscore"
 
-class KHighscorePrivate
+class KHighscore::KHighscorePrivate
 {
 public:
     KHighscorePrivate() {}
@@ -245,7 +245,9 @@ QStringList KHighscore::groupList() const
     {
         if(group.contains("KHighscore")) //If it's one of _our_ groups (KHighscore or KHighscore_xxx)
         {
-            if(group != "KHighscore") //Dont strip if the group is 'KHighscore'
+            if(group == "KHighscore")
+                group.replace("KHighscore", QString()); //Set to blank
+            else
                 group.replace("KHighscore_", QString()); //Remove the KHighscore_ prefix
             highscoreGroupList << group;
         }

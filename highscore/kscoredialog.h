@@ -1,6 +1,7 @@
 /****************************************************************
-Copyright (c) 1998 Sandro Sigala <ssigala@globalnet.it>.
+Copyright (c) 1998 Sandro Sigala <ssigala@globalnet.it>
 Copyright (c) 2001 Waldo Bastian <bastian@kde.org>
+Copyright (c) 2007 Matt Williams <matt@milliams.com>
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software
@@ -25,12 +26,11 @@ this software.
 #ifndef KSCOREDIALOG_H
 #define KSCOREDIALOG_H
 
-#include <QtCore/QMap>
-#include <QtCore/QFlags>
-
 #include <KDialog>
 #include <libkdegames_export.h>
 
+#include <QtCore/QMap>
+#include <QtCore/QFlags>
 /**
  * @short A simple high score implementation
  * 

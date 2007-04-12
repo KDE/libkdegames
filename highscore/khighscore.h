@@ -23,15 +23,15 @@
 #ifndef KHIGHSCORE_H
 #define KHIGHSCORE_H
 
-#include <QtCore/QObject>
 #include <libkdegames_export.h>
 #include <KGlobal>
+
+#include <QtCore/QObject>
 
 class KConfig;
 class KLockFile;
 //class KRawConfig;
 class KConfig;
-class KHighscorePrivate;
 
 /**
  * @short Class for managing highscore tables
@@ -267,9 +267,9 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         void setHighscoreGroup(const QString& groupname = "");
         
         /**
-         * If a group is simply called 'KHighscore' then the string will be 
-         * 'KHighscore'. Otherwise it will return a list of group names 
-         * without the KHighscore_ prexix.
+         * Returns a list of group names without the KHighscore_ prexix.
+         * E.g, "KHighscore", "KHighscore_Easy", "KHighscore_Medium"
+         * will return "", "Easy", "Medium"
          * 
          * @return A list of highscore groups.
          **/
@@ -299,6 +299,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         void init(bool forceLocal);
 
     private:
+        class KHighscorePrivate;
         KHighscorePrivate* const d;
 
         static KLockFile *_lock; // lock on system-wide highscore file
