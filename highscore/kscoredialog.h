@@ -55,7 +55,7 @@ this software.
  * their name filled in automatically.
  * \code
  * KScoreDialog ksdialog(KScoreDialog::Name | KScoreDialog::Score, this);
- * ksdialog.addScore(playersScore, KScoreDialog::FieldInfo());
+ * ksdialog.addScore(playersScore);
  * ksdialog.exec();
  * \endcode
  * If you want to prompt the player for their name every time do something
@@ -137,7 +137,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         * @returns The highscore position if the score was good enough to 
         * make it into the list (1 being topscore) or 0 otherwise.
         */
-        int addScore(int newScore, const FieldInfo& newInfo, const AddScoreFlags& flags=AskName, const QString& name=QString());
+        int addScore(int newScore, const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags=AskName, const QString& name=QString());
 
         /**
         * @returns the current best score.

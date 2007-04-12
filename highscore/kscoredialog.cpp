@@ -24,46 +24,48 @@ this software.
 
 #include "kscoredialog.h"
 
-#include <QLabel>
-#include <QLayout>
-#include <QLineEdit>
-#include <QStackedWidget>
-#include <QTimer>
-#include <QGridLayout>
-#include <QKeyEvent>
-#include <QList>
+#include <QtCore/QTimer>
+#include <QtCore/QList>
+#include <QtGui/QGridLayout>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QLineEdit>
+#include <QtGui/QStackedWidget>
 
-#include <kconfig.h>
-#include <klocale.h>
-#include <kseparator.h>
-#include <kglobal.h>
-#include <kconfiggroup.h>
+#include <KConfig>
+#include <KLocale>
+#include <KSeparator>
+#include <KGlobal>
+#include <KConfigGroup>
+#include <KTabWidget>
 
 #include "khighscore.h"
 
 class KScoreDialog::KScoreDialogPrivate
 {
-public:
-   QList<FieldInfo*> scores;
-   QWidget *page;
-   QGridLayout *layout;
-   QLineEdit *edit;
-   QList<QStackedWidget*> stack;
-   QList<QLabel*> labels;
-   QLabel *commentLabel;
-   QString comment;
-   int fields;
-   int newName;
-   int latest;
-   int nrCols;
-   bool loaded;
-   QString configGroup;
-   KHighscore* highscoreObject;
-
-   QMap<int, int> col;
-   QMap<int, QString> header;
-   QMap<int, QString> key;
-   QString player;
+    public:
+        QList<FieldInfo*> scores;
+        KTabWidget *tabWidget;
+        QWidget *page;
+        QGridLayout *layout;
+        QLineEdit *edit;
+        QList<QStackedWidget*> stack;
+        QList<QLabel*> labels;
+        QLabel *commentLabel;
+        QString comment;
+        int fields;
+        int newName;
+        int latest;
+        int nrCols;
+        bool loaded;
+        QString configGroup;
+        KHighscore* highscoreObject;
+        
+        QMap<int, int> col;
+        QMap<int, QString> header;
+        QMap<int, QString> key;
+        QString player;
 };
 
 
@@ -91,33 +93,41 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     
     d->header[Score] = i18n("Score");
     d->key[Score] = "Score";
-    d->page = new QWidget( this );
-    setMainWidget(d->page);
+    
+    d->page = new QWidget(this);
+    
+    //temporary
+    d->tabWidget = new KTabWidget(this);
+    d->tabWidget->setTabPosition(QTabWidget::West);
+    d->tabWidget->addTab(d->page, "Default");
+    //temporary
+    
+    setMainWidget(d->tabWidget);
     
     connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
 }
 
 KScoreDialog::~KScoreDialog()
 {
-   delete d;
+    delete d;
 }
 
 void KScoreDialog::setConfigGroup(const QString &group)
 {
-   d->configGroup = group;
-   d->loaded = false;
+    d->configGroup = group;
+    d->loaded = false;
 }
 
 void KScoreDialog::setComment(const QString &comment)
 {
-   d->comment = comment;
+    d->comment = comment;
 }
 
 void KScoreDialog::addField(int field, const QString &header, const QString &key)
 {
-   d->fields |= field;
-   d->header[field] = header;
-   d->key[field] = key;
+    d->fields |= field;
+    d->header[field] = header;
+    d->key[field] = key;
 }
 
 void KScoreDialog::setupDialog()
@@ -274,7 +284,8 @@ void KScoreDialog::aboutToShow()
 
 void KScoreDialog::loadScores()
 {
-    QString key, value;
+    QString key;
+    QString value;
     d->loaded = true;
     qDeleteAll( d->scores );
     d->scores.clear();

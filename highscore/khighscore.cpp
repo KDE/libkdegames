@@ -23,16 +23,16 @@
 #include <config-highscore.h>
 #include <unistd.h> // sleep
 
-#include <QFile>
-#include <kconfig.h>
-#include <kglobal.h>
+#include <QtCore/QFile>
+#include <KConfig>
+#include <KGlobal>
 #include <KStandardGuiItem>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kdebug.h>
-#include <kstaticdeleter.h>
-#include <klockfile.h>
-#include <kconfiggroup.h>
+#include <KLocale>
+#include <KMessageBox>
+#include <KDebug>
+#include <KStaticDeleter>
+#include <KLockFile>
+#include <KConfigGroup>
 
 #include "kconfigrawbackend.h"
 
