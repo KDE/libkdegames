@@ -1,1 +1,1 @@
-#include "../kexthighscore.h"
+#include "../highscore/kexthighscore.h"

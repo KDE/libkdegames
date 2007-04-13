@@ -1,1 +1,1 @@
-#include "../kscoredialog.h"
+#include "../highscore/kscoredialog.h"
