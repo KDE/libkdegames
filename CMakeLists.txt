@@ -21,7 +21,7 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR}/highscore ${CMAKE_CURRENT_SOURC
 ########### next target ###############
 
 set(libkhighscore_SRCS  
-	highscore/kconfigrawbackend.cpp 
+#	highscore/kconfigrawbackend.cpp 
 	highscore/khighscore.cpp 
 	highscore/kscoredialog.cpp
 	highscore/kexthighscore_item.cpp 
