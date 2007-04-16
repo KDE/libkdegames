@@ -31,7 +31,7 @@
 #include <QEvent>
 
 KZoomMainWindow::KZoomMainWindow(uint min, uint max, uint step)
-  : KMainWindow(0), _zoomStep(step), _minZoom(min), _maxZoom(max)
+  : KXmlGuiWindow(0), _zoomStep(step), _minZoom(min), _maxZoom(max)
 {
   installEventFilter(this);
 
@@ -80,7 +80,7 @@ bool KZoomMainWindow::eventFilter(QObject *o, QEvent *e)
     setFixedSize(minimumSize()); // because K/QMainWindow
                                  // does not manage fixed central widget
                                  // with hidden menubar...
-  return KMainWindow::eventFilter(o, e);
+  return KXmlGuiWindow::eventFilter(o, e);
 }
 
 void KZoomMainWindow::setZoom(uint zoom)
@@ -115,5 +115,5 @@ void KZoomMainWindow::toggleMenubar()
 bool KZoomMainWindow::queryExit()
 {
   writeMenubarVisibleSetting(_menu->isChecked());
-  return KMainWindow::queryExit();
+  return KXmlGuiWindow::queryExit();
 }
