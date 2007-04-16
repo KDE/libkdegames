@@ -20,7 +20,7 @@
 #ifndef KZOOMMAINWINDOW_H
 #define KZOOMMAINWINDOW_H
 
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 #include <QtCore/QList>
 
 #include <libkdegames_export.h>
@@ -33,11 +33,11 @@ class Zoomable;
  * KZoomMainWindow is a main window of fixed size. Its size can be
  * modified with the "zoom in"/"zoom out" actions.
  *
- * It manages one or several objects of Zoomable type: 
+ * It manages one or several objects of Zoomable type:
  * their zoomChanged() method is called whenever the zoom
  * level is changed.
  * To react to zoom events make your widget (or whatever)
- * additionally inherit from Zoomable class 
+ * additionally inherit from Zoomable class
  * and reimplement zoomChanged() virtual functon.
  * The usual implementation looks like this
  * /code
@@ -47,7 +47,7 @@ class Zoomable;
  * This class also has a "show/hide menubar" action and allows the use
  * of a context popup menu (useful to restore the menubar when hidden).
  */
-class KDEGAMES_EXPORT KZoomMainWindow : public KMainWindow
+class KDEGAMES_EXPORT KZoomMainWindow : public KXmlGuiWindow
 {
   Q_OBJECT
 public:
@@ -62,9 +62,9 @@ public:
    *  Remove a zoomable from a list of managed objects.
    */
   void removeZoomable(Zoomable *z);
-                  
+
   uint zoom() const { return _zoom; }
-  
+
 public Q_SLOTS:
   void zoomIn();
   void zoomOut();
@@ -77,11 +77,11 @@ protected:
    * the ui.rc file.
    */
   void init(const char *popupName = 0);
-    
+
   virtual void setZoom(uint zoom);
   virtual bool eventFilter(QObject *o, QEvent *e);
   virtual bool queryExit();
-  
+
   /** You need to implement this method since different application
    * use different setting class names and keys.
    * Use something like:
@@ -91,7 +91,7 @@ protected:
    * /endcode
    */
   virtual void writeZoomSetting(uint zoom) = 0;
-  
+
   /** Youneed to implement this method since different application
    * use different setting class names and keys.
    * Use something like:
@@ -100,7 +100,7 @@ protected:
    * /endcode
    */
   virtual uint readZoomSetting() const = 0;
-  
+
   /** You need to implement this method since different application
    * use different setting class names and keys.
    * Use something like:
@@ -110,10 +110,10 @@ protected:
    * /endcode
    */
   virtual void writeMenubarVisibleSetting(bool visible) = 0;
-  
+
   /** You need to implement this method since different application
    * use different setting class names and keys.
-   * Use something like: 
+   * Use something like:
    * /code
    * Settings::menubarVisible();
    * /endcode
@@ -125,8 +125,8 @@ private:
   QList<Zoomable*> _zoomables;
   KAction *_zoomInAction, *_zoomOutAction;
   KToggleAction *_menu;
-  
-  /* 
+
+  /*
   class KZoomMainWindowPrivate;
   KZoomMainWindowPrivate *d;
    */
