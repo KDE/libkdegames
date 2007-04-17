@@ -80,8 +80,6 @@ void KGameClock::showTime()
       emit timeChanged(minSecString());
     else
       emit timeChanged(hourMinSecString());
-
-qDebug() << "showtime called" << hourMinSecString();
 }
 
 void KGameClock::restart()
@@ -90,6 +88,7 @@ void KGameClock::restart()
     d->sec = 0;
     d->min = 0;
     d->hour = 0;
+    resume();
     showTime();
 }
 
