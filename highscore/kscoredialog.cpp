@@ -100,10 +100,8 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     
     //d->page = new QWidget(this);
     
-    //temporary
     d->tabWidget = new KTabWidget(this);
     d->tabWidget->setTabPosition(QTabWidget::West);
-    //temporary
     
     setMainWidget(d->tabWidget);
     
@@ -145,26 +143,25 @@ void KScoreDialog::setupDialog()
     d->tabWidget->clear();
     foreach(QString groupName, d->scores.keys())
     {
-        if(groupName.isEmpty())
+        if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
             d->tabWidget->addTab(new QWidget(this), "High Scores");
         else
             d->tabWidget->addTab(new QWidget(this), groupName);
         d->tabWidget->setCurrentIndex(d->tabWidget->count()-1);
-    
+        
         QGridLayout* layout;
         layout = new QGridLayout( d->tabWidget->widget( d->tabWidget->currentIndex() ) );
         //layout->setObjectName("ScoreTab-"+groupName);
         layout->setMargin(marginHint()+20);
         layout->setSpacing(spacingHint());
         layout->addItem(new QSpacerItem(0, 15), 4, 0);
-    
-        d->commentLabel = new QLabel(d->tabWidget->widget(d->tabWidget->currentIndex()));
+        
+        d->commentLabel = new QLabel(d->tabWidget);
         d->commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
-        layout->addWidget(d->commentLabel, 1, 0, 1, d->nrCols);
-    
+        
         QFont bold = font();
         bold.setBold(true);
-    
+        
         QLabel *label;
         layout->addItem(new QSpacerItem(50, 0), 0, 0);
         label = new QLabel(i18n("Rank"), d->tabWidget->widget(d->tabWidget->currentIndex()));
@@ -225,26 +222,33 @@ void KScoreDialog::aboutToShow()
         setupDialog();
     
     int tabIndex=0;
+    int newScoreTabIndex=0;
     foreach(QString groupName, d->scores.keys())
     {
-        d->commentLabel->setText(d->comment);
-        if (d->comment.isEmpty())
+        //Only display the comment on the page with the new score
+        if((d->latest.first == d->tabWidget->tabText(tabIndex)) || ( d->latest.first=="" && d->tabWidget->tabText(tabIndex) == "High Scores" ))
         {
-            d->commentLabel->setMinimumSize(QSize(1,1));
-            d->commentLabel->hide();
-            QGridLayout* layout = qobject_cast<QGridLayout*>(d->tabWidget->widget(tabIndex)->layout());
-            layout->addItem( new QSpacerItem( 0, -15 ), 0, 0 );
-            layout->addItem( new QSpacerItem( 0, -15 ), 2, 0 );
+            newScoreTabIndex=tabIndex;
+            d->commentLabel->setText(d->comment);
+            if (d->comment.isEmpty())
+            {
+                d->commentLabel->setMinimumSize(QSize(1,1));
+                d->commentLabel->hide();
+                QGridLayout* layout = qobject_cast<QGridLayout*>(d->tabWidget->widget(newScoreTabIndex)->layout());
+                layout->addItem( new QSpacerItem( 0, -15 ), 0, 0 );
+                layout->addItem( new QSpacerItem( 0, -15 ), 2, 0 );
+            }
+            else
+            {
+                QGridLayout* layout = qobject_cast<QGridLayout*>(d->tabWidget->widget(newScoreTabIndex)->layout());
+                layout->addWidget(d->commentLabel, 1, 0, 1, d->nrCols);
+                d->commentLabel->setMinimumSize(d->commentLabel->sizeHint());
+                d->commentLabel->show();
+                layout->addItem( new QSpacerItem( 0, -10 ), 0, 0 );
+                layout->addItem( new QSpacerItem( 0, 10 ), 2, 0 );
+            }
+            d->comment.clear(); //TODO move out
         }
-        else
-        {
-            d->commentLabel->setMinimumSize(d->commentLabel->sizeHint());
-            d->commentLabel->show();
-            QGridLayout* layout = qobject_cast<QGridLayout*>(d->tabWidget->widget(tabIndex)->layout());
-            layout->addItem( new QSpacerItem( 0, -10 ), 0, 0 );
-            layout->addItem( new QSpacerItem( 0, 10 ), 2, 0 );
-        }
-        d->comment.clear(); //TODO move out
         
         QFont normal = font();
         QFont bold = normal;
@@ -305,6 +309,7 @@ void KScoreDialog::aboutToShow()
     }
     d->latest = QPair<QString,int>(QString(),-1);
     setFixedSize(minimumSizeHint());
+    d->tabWidget->setCurrentIndex(newScoreTabIndex);
 }
 
 void KScoreDialog::loadScores()
@@ -312,25 +317,23 @@ void KScoreDialog::loadScores()
     QString key;
     QString value;
     
-    d->loaded = true;
     d->scores.clear();
     
-    QStringList groupList = d->highscoreObject->groupList();
+    QStringList groupList = d->highscoreObject->groupList(); //List of the group names
     d->numberOfPages = groupList.size();
     
-    QString currentGroup;   //TODO remove
-    currentGroup=d->configGroup;
+    QString tempCurrentGroup = d->configGroup; //temp to store the user-set group name
     
-    if (groupList.count(currentGroup) == 0) //If this is a new group
+    if (groupList.count(d->configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
-        kDebug() << "The current group isn't in the list, adding it" << endl;
-        groupList << currentGroup;
+        kDebug() << "The current high score group \"" << d->configGroup << "\" isn't in the list, adding it" << endl;
+        groupList << d->configGroup;
     }
     
     foreach(QString groupName, groupList)
     {
         d->highscoreObject->setHighscoreGroup(groupName);
-        d->player = d->highscoreObject->readEntry(0,"LastPlayer");  //FIXME
+        d->player = d->highscoreObject->readEntry(0, "LastPlayer");  //FIXME
         
         for (int i = 1; i <= 10; ++i)
         {
@@ -345,6 +348,8 @@ void KScoreDialog::loadScores()
             d->scores[groupName].append(score);
         }
     }
+    d->highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
+    d->loaded = true;
 }
 
 void KScoreDialog::saveScores()
@@ -365,7 +370,6 @@ void KScoreDialog::saveScores()
             }
         }
     }
-    //KGlobal::config()->sync();
     d->highscoreObject->writeAndUnlock();
 }
 
@@ -404,6 +408,7 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScor
             }
             else
                 saveScores();
+            
             if (i == 0)
                 d->comment = i18n("Excellent!\nYou have a new high score!");
             else
@@ -460,7 +465,7 @@ int KScoreDialog::highScore()
     return (*d->scores[d->configGroup].first())[Score].toInt();
 }
 
-void KScoreDialog::keyPressEvent( QKeyEvent *ev)
+void KScoreDialog::keyPressEvent(QKeyEvent *ev)
 {
     if ((d->newName.second != -1) && (ev->key() == Qt::Key_Return))
     {
