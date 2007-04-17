@@ -65,7 +65,8 @@ this software.
  * \code
  * KScoreDialog::FieldInfo scoreInfo;
  * scoreInfo[KScoreDialog::Name] = "Matt";
- * ksdialog.addScore(playerScore, scoreInfo);
+ * scoreInfo[KScoreDialog::Score] = playersScore;
+ * ksdialog.addScore(scoreInfo);
  * \endcode
  */
 class KDEGAMES_EXPORT KScoreDialog : public KDialog 
@@ -74,7 +75,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
 
     public:
         ///Highscore fields
-        enum Fields { 
+        enum Fields {
             Name = 1 << 0,
             Level = 1 << 1,
             
@@ -128,15 +129,25 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         /**
          * Adds a new score to the list.
          *
-         * @param newScore the score of this game.
-         * @param newInfo additional info about the score.
+         * @param newInfo info about the score.
          * @param flags set whether the user should be prompted for their name and how the scores should be sorted
          *
          * @returns The highscore position if the score was good enough to 
          * make it into the list (1 being topscore) or 0 otherwise.
          */
-        int addScore(int newScore, const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags=AskName);
-
+        int addScore(const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags=0);
+        
+        /**
+         * Convenience function for ease of use.
+         *
+         * @param newScore the score of the player.
+         * @param flags set whether the user should be prompted for their name and how the scores should be sorted
+         *
+         * @returns The highscore position if the score was good enough to 
+         * make it into the list (1 being topscore) or 0 otherwise.
+         */
+        int addScore(int newScore, const AddScoreFlags& flags=0);
+        
         /**
          * @returns the current best score.
          */
@@ -163,4 +174,4 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 
-#endif // !KSCOREDIALOG_H
+#endif //KSCOREDIALOG_H

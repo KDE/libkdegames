@@ -373,7 +373,7 @@ void KScoreDialog::saveScores()
     d->highscoreObject->writeAndUnlock();
 }
 
-int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScoreFlags& flags)
+int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 {
     bool askName=false, lessIsMore=false;
     if((flags & KScoreDialog::AskName) == KScoreDialog::AskName)
@@ -386,16 +386,19 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScor
     FieldInfo *score;
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
-        score = d->scores[d->configGroup].at(i);
+        score = d->scores[d->configGroup].at(i); //First look at the score in theconfig file
         bool ok;
-        int num_score = (*score)[Score].toLong(&ok);
+        int num_score = (*score)[Score].toLong(&ok); //test if the stored score is a number
         if (lessIsMore && !ok)
-            num_score = 1 << 30;
+            num_score = 1 << 30; //this is a very large number so the score won't be on the table
+        
+        score = new FieldInfo(newInfo); //now look at the submitted score
+        int newScore = (*score)[Score].toInt();
+        
         if (((newScore > num_score) && !lessIsMore) ||
-	    ((newScore < num_score) && lessIsMore))
+              ((newScore < num_score) && lessIsMore))
         {
-            score = new FieldInfo(newInfo);
-            (*score)[Score].setNum(newScore);
+            
             d->latest = QPair<QString,int>(d->configGroup,i+1);
             d->scores[d->configGroup].insert(i, score);
             d->scores[d->configGroup].removeAt(10);
@@ -419,6 +422,13 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScor
         }
     }
     return 0;
+}
+
+int KScoreDialog::addScore(int newScore, const AddScoreFlags& flags)
+{
+    FieldInfo scoreInfo;
+    scoreInfo[Score]=newScore;
+    return addScore(scoreInfo, AskName | flags);
 }
 
 void KScoreDialog::show()
