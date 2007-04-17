@@ -42,7 +42,9 @@ KGameClock::KGameClock(QObject *parent, KGameClock::ClockType clocktype)
 }
 
 KGameClock::~KGameClock()
-{}
+{
+    delete d;
+}
 
 void KGameClock::timeoutClock()
 {
