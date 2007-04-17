@@ -70,6 +70,7 @@ set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SR
     kgameprogress.cpp 
     kgamelcd.cpp
     kgamesvgdocument.cpp
+    kgameclock.cpp
    )
 
 kde4_automoc(${kdegames_LIB_SRCS})
@@ -101,5 +102,6 @@ install(FILES
     kgamesvgdocument_p.h
     kgrid2d.h
     kgamecanvas.h
+    kgameclock.h
     DESTINATION ${INCLUDE_INSTALL_DIR})
 
