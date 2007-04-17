@@ -144,9 +144,9 @@ void KScoreDialog::setupDialog()
     foreach(QString groupName, d->scores.keys())
     {
         if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
-            d->tabWidget->addTab(new QWidget(this), "High Scores");
+            d->tabWidget->addTab(new QWidget(this), i18n("High Scores"));
         else
-            d->tabWidget->addTab(new QWidget(this), groupName);
+            d->tabWidget->addTab(new QWidget(this), i18n(groupName));
         d->tabWidget->setCurrentIndex(d->tabWidget->count()-1);
         
         QGridLayout* layout;
