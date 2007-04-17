@@ -99,7 +99,7 @@ void KHighscore::init(const char *appname)
     configSD.setObject(_config, new KConfig(filename, KConfig::OpenFlags(KConfig::NoGlobals | KConfig::OnlyLocal))); // read-only   (matt-?)
 
     // drop the effective gid
-    #warning not portable yet. Unix only
+    #warning not portable yet. Unix only. Actually it doesn't even work there yet.
     int gid = getgid();
     setregid(gid, gid);
 #else

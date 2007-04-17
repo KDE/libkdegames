@@ -180,7 +180,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
             void slotGotName();
 
         private:
-            void keyPressEvent( QKeyEvent *ev);
+            void keyPressEvent(QKeyEvent *ev);
 
         private:
             class KScoreDialogPrivate;

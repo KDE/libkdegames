@@ -42,6 +42,8 @@ this software.
 #include <QtGui/QLineEdit>
 #include <QtGui/QStackedWidget>
 
+#define DEFAULT_GROUP_NAME "High Scores"
+
 typedef QList<KScoreDialog::FieldInfo*> GroupScores;
 
 class KScoreDialog::KScoreDialogPrivate
@@ -87,13 +89,13 @@ class KScoreDialog::KScoreDialogPrivate
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     : KDialog(parent), d(new KScoreDialogPrivate(this))
 {
-    setCaption( i18n("High Scores") );
+    setCaption( i18n(DEFAULT_GROUP_NAME) );
     setModal( true );
     d->highscoreObject = new KHighscore();
     d->edit = 0;
     d->fields = fields;
     d->newName = QPair<QString,int>(QString(),-1);
-    d->latest = QPair<QString,int>(QString(),-1);
+    d->latest = QPair<QString,int>("Null",-1);
     d->loaded = false;
     d->nrCols = 0;
     d->numberOfPages=0;
@@ -155,7 +157,7 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
     foreach(QString groupName, scores.keys())
     {
         if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
-            tabWidget->addTab(new QWidget(q), i18n("High Scores"));
+            tabWidget->addTab(new QWidget(q), i18n(DEFAULT_GROUP_NAME));
         else
             tabWidget->addTab(new QWidget(q), i18n(groupName.toUtf8()));
         tabWidget->setCurrentIndex(tabWidget->count()-1);
@@ -237,7 +239,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     foreach(QString groupName, scores.keys())
     {
         //Only display the comment on the page with the new score
-        if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first=="" && tabWidget->tabText(tabIndex) == i18n("High Scores") ))
+        if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first=="" && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
         {
             newScoreTabIndex=tabIndex;
             commentLabel->setText(comment);
@@ -331,10 +333,11 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     numberOfPages = groupList.size();
     
     QString tempCurrentGroup = configGroup; //temp to store the user-set group name
+    kDebug() << "Temp group: \"" << tempCurrentGroup << "\"." << endl;
     
     if (groupList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
-        kDebug() << "The current high score group \"" << configGroup << "\" isn't in the list, adding it" << endl;
+        kDebug(11002) << "The current high score group \"" << configGroup << "\" isn't in the list, adding it" << endl;
         groupList << configGroup;
     }
     
@@ -357,6 +360,14 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         }
     }
     highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
+    foreach(QString groupName, scores.keys())
+    {
+        if( (scores[groupName][0]->value(Score)=="-") && (scores.size() > 1) && (latest.first != groupName) )
+        {
+            kDebug(11002) << "Removing group \"" << groupName << "\" since it's unused." << endl;
+            scores.remove(groupName);
+        }
+    }
     loaded = true;
 }
 
@@ -388,12 +399,15 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
     if(flags.testFlag(KScoreDialog::LessIsMore))
         lessIsMore = true;
     
+    d->latest.first = d->configGroup; //Temporarily set this so loadScores() knows not to delete this group
     if (!d->loaded)
         d->loadScores();
+    d->latest.first = "Null"; //and reset it.
+    
     FieldInfo *score;
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
-        score = d->scores[d->configGroup].at(i); //First look at the score in theconfig file
+        score = d->scores[d->configGroup].at(i); //First look at the score in the config file
         bool ok;
         int num_score = (*score)[Score].toLong(&ok); //test if the stored score is a number
         if (lessIsMore && !ok)
@@ -401,7 +415,6 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
         
         score = new FieldInfo(newInfo); //now look at the submitted score
         int newScore = (*score)[Score].toInt();
-        
         if (((newScore > num_score) && !lessIsMore) ||
               ((newScore < num_score) && lessIsMore))
         {
