@@ -93,7 +93,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
             Name = 1 << 0,
             Level = 1 << 1,
             
-            Custom1 = 1 << 10,
+            Custom1 = 1 << 10, ///<Field for custom information
             Custom2 = 1 << 11,
             Custom3 = 1 << 12,
             Custom4 = 1 << 13,
@@ -105,7 +105,8 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         };
 
         ///Flags for setting preferences for adding scores
-        enum AddScoreFlag {
+        enum AddScoreFlag
+        {
             AskName = 0x1, /**< Promt the player for their name */
             LessIsMore = 0x2 /**< A lower numerical score means higher placing on the table */
         };
@@ -130,17 +131,17 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
 
         /**
          * @param comment to add when showing high-scores.
-         * The comment is only used once.  
+         * The comment is only used once.
          */
         void setComment(const QString& comment);
 
         /**
          * Define an extra FieldInfo entry.
-         * @param field Id of this field
-         * @param header Header shown in the dialog for this field
-         * @param key used to store this field with.
+         * @param field id of this field @ref Fields e.g. KScoreDialog::Custom1
+         * @param header text shown in the header in the dialog for this field. e.g. "Number of Moves"
+         * @param key unique key used to store this field. e.g. "moves"
          */
-        void addField(int field, const QString& header, const QString& key); 
+        void addField(int field, const QString& header, const QString& key);
 
         /**
          * Adds a new score to the list.
@@ -169,7 +170,9 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
          */
         int highScore();
 
+        ///Display the dialog
         virtual void show();
+        ///Display the dialog
         virtual void exec();
 
         private Q_SLOTS:
@@ -177,11 +180,6 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
             void slotGotName();
 
         private:
-            void loadScores();
-            void saveScores();
-
-            void aboutToShow();
-            void setupDialog();
             void keyPressEvent( QKeyEvent *ev);
 
         private:

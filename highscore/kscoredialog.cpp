@@ -70,11 +70,22 @@ class KScoreDialog::KScoreDialogPrivate
         QMap<int, QString> header; ///<Header for fields. Maps field index to a string
         QMap<int, QString> key; ///<Keys for fields. Maps field index to a string
         QString player;
+        
+        //Q-Pointer
+        KScoreDialogPrivate(KScoreDialog* parent):q(parent){};
+        KScoreDialog* const q;
+        
+        //Functions
+        void loadScores();
+        void saveScores();
+        
+        void setupDialog();
+        void aboutToShow();
 };
 
 
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
-    : KDialog(parent), d(new KScoreDialogPrivate)
+    : KDialog(parent), d(new KScoreDialogPrivate(this))
 {
     setCaption( i18n("High Scores") );
     setModal( true );
@@ -131,126 +142,126 @@ void KScoreDialog::addField(int field, const QString &header, const QString &key
     d->key[field] = key;
 }
 
-void KScoreDialog::setupDialog()
+void KScoreDialog::KScoreDialogPrivate::setupDialog()
 {
-    d->nrCols = 1;
-    for(int field = 1; field < d->fields; field = field * 2)
+    nrCols = 1;
+    for(int field = 1; field < fields; field = field * 2)
     {
-        if (d->fields & field)
-            d->col[field] = d->nrCols++;
+        if (fields & field)
+            col[field] = nrCols++;
     }
     
-    d->tabWidget->clear();
-    foreach(QString groupName, d->scores.keys())
+    tabWidget->clear();
+    foreach(QString groupName, scores.keys())
     {
         if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
-            d->tabWidget->addTab(new QWidget(this), i18n("High Scores"));
+            tabWidget->addTab(new QWidget(q), i18n("High Scores"));
         else
-            d->tabWidget->addTab(new QWidget(this), i18n(groupName.toUtf8()));
-        d->tabWidget->setCurrentIndex(d->tabWidget->count()-1);
+            tabWidget->addTab(new QWidget(q), i18n(groupName.toUtf8()));
+        tabWidget->setCurrentIndex(tabWidget->count()-1);
         
         QGridLayout* layout;
-        layout = new QGridLayout( d->tabWidget->widget( d->tabWidget->currentIndex() ) );
+        layout = new QGridLayout( tabWidget->widget( tabWidget->currentIndex() ) );
         //layout->setObjectName("ScoreTab-"+groupName);
         layout->setMargin(marginHint()+20);
         layout->setSpacing(spacingHint());
         layout->addItem(new QSpacerItem(0, 15), 4, 0);
         
-        d->commentLabel = new QLabel(d->tabWidget);
-        d->commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+        commentLabel = new QLabel(tabWidget);
+        commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
         
-        QFont bold = font();
+        QFont bold = q->font();
         bold.setBold(true);
         
         QLabel *label;
         layout->addItem(new QSpacerItem(50, 0), 0, 0);
-        label = new QLabel(i18n("Rank"), d->tabWidget->widget(d->tabWidget->currentIndex()));
+        label = new QLabel(i18n("Rank"), tabWidget->widget(tabWidget->currentIndex()));
         layout->addWidget(label, 3, 0);
         label->setFont(bold);
         
-        for(int field = 1; field < d->fields; field = field * 2)
+        for(int field = 1; field < fields; field = field * 2)
         {
-            if (d->fields & field)
+            if (fields & field)
             {
-                layout->addItem( new QSpacerItem( 50, 0 ), 0, d->col[field] );
-                label = new QLabel(d->header[field], d->tabWidget->widget(d->tabWidget->currentIndex()));
-                layout->addWidget(label, 3, d->col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
+                layout->addItem( new QSpacerItem( 50, 0 ), 0, col[field] );
+                label = new QLabel(header[field], tabWidget->widget(tabWidget->currentIndex()));
+                layout->addWidget(label, 3, col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
                 label->setFont(bold);
             }
         }
         
-        KSeparator *sep = new KSeparator(Qt::Horizontal, d->tabWidget->widget(d->tabWidget->currentIndex()));
-        layout->addWidget(sep, 4, 0, 1, d->nrCols);
+        KSeparator *sep = new KSeparator(Qt::Horizontal, tabWidget->widget(tabWidget->currentIndex()));
+        layout->addWidget(sep, 4, 0, 1, nrCols);
         
         QString num;
         for (int i = 1; i <= 10; ++i) 
         {
             QLabel *label;
             num.setNum(i);
-            label = new QLabel(i18n("#%1", num), d->tabWidget->widget(d->tabWidget->currentIndex()));
-            d->labels[groupName].insert((i-1)*d->nrCols + 0, label);
+            label = new QLabel(i18n("#%1", num), tabWidget->widget(tabWidget->currentIndex()));
+            labels[groupName].insert((i-1)*nrCols + 0, label);
             layout->addWidget(label, i+4, 0);
-            if (d->fields & Name) //If we have a Name field
+            if (fields & Name) //If we have a Name field
             {
-                QStackedWidget *stack = new QStackedWidget(d->tabWidget->widget(d->tabWidget->currentIndex()));
-                d->stack[groupName].insert(i-1, stack);
-                layout->addWidget(stack, i+4, d->col[Name]);
-                label = new QLabel(stack);
-                d->labels[groupName].insert((i-1)*d->nrCols + d->col[Name], label);
-                stack->addWidget(label);
-                stack->setCurrentWidget(label);
+                QStackedWidget *localStack = new QStackedWidget(tabWidget->widget(tabWidget->currentIndex()));
+                stack[groupName].insert(i-1, localStack);
+                layout->addWidget(localStack, i+4, col[Name]);
+                label = new QLabel(localStack);
+                labels[groupName].insert((i-1)*nrCols + col[Name], label);
+                localStack->addWidget(label);
+                localStack->setCurrentWidget(label);
             }
-            for(int field = Name * 2; field < d->fields; field = field * 2)
+            for(int field = Name * 2; field < fields; field = field * 2)
             {
-                if (d->fields & field)
+                if (fields & field)
                 {
-                    label = new QLabel(d->tabWidget->widget(d->tabWidget->currentIndex()));
-                    d->labels[groupName].insert((i-1)*d->nrCols + d->col[field], label);
-                    layout->addWidget(label, i+4, d->col[field], Qt::AlignRight);
+                    label = new QLabel(tabWidget->widget(tabWidget->currentIndex()));
+                    labels[groupName].insert((i-1)*nrCols + col[field], label);
+                    layout->addWidget(label, i+4, col[field], Qt::AlignRight);
                 }
             }
         }
     }
 }
 
-void KScoreDialog::aboutToShow()
+void KScoreDialog::KScoreDialogPrivate::aboutToShow()
 {
-    if (!d->loaded)
+    if (!loaded)
         loadScores();
     
-    if (!d->nrCols)
+    if (!nrCols)
         setupDialog();
     
     int tabIndex=0;
     int newScoreTabIndex=0;
-    foreach(QString groupName, d->scores.keys())
+    foreach(QString groupName, scores.keys())
     {
         //Only display the comment on the page with the new score
-        if((d->latest.first == d->tabWidget->tabText(tabIndex)) || ( d->latest.first=="" && d->tabWidget->tabText(tabIndex) == "High Scores" ))
+        if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first=="" && tabWidget->tabText(tabIndex) == i18n("High Scores") ))
         {
             newScoreTabIndex=tabIndex;
-            d->commentLabel->setText(d->comment);
-            if (d->comment.isEmpty())
+            commentLabel->setText(comment);
+            if (comment.isEmpty())
             {
-                d->commentLabel->setMinimumSize(QSize(1,1));
-                d->commentLabel->hide();
-                QGridLayout* layout = qobject_cast<QGridLayout*>(d->tabWidget->widget(newScoreTabIndex)->layout());
+                commentLabel->setMinimumSize(QSize(1,1));
+                commentLabel->hide();
+                QGridLayout* layout = qobject_cast<QGridLayout*>(tabWidget->widget(newScoreTabIndex)->layout());
                 layout->addItem( new QSpacerItem( 0, -15 ), 0, 0 );
                 layout->addItem( new QSpacerItem( 0, -15 ), 2, 0 );
             }
             else
             {
-                QGridLayout* layout = qobject_cast<QGridLayout*>(d->tabWidget->widget(newScoreTabIndex)->layout());
-                layout->addWidget(d->commentLabel, 1, 0, 1, d->nrCols);
-                d->commentLabel->setMinimumSize(d->commentLabel->sizeHint());
-                d->commentLabel->show();
+                QGridLayout* layout = qobject_cast<QGridLayout*>(tabWidget->widget(newScoreTabIndex)->layout());
+                layout->addWidget(commentLabel, 1, 0, 1, nrCols);
+                commentLabel->setMinimumSize(commentLabel->sizeHint());
+                commentLabel->show();
                 layout->addItem( new QSpacerItem( 0, -10 ), 0, 0 );
                 layout->addItem( new QSpacerItem( 0, 10 ), 2, 0 );
             }
-            d->comment.clear(); //TODO move out
+            comment.clear();
         }
         
-        QFont normal = font();
+        QFont normal = q->font();
         QFont bold = normal;
         bold.setBold(true);
         
@@ -262,29 +273,29 @@ void KScoreDialog::aboutToShow()
             
             //kDebug() << "groupName: " << groupName << " id: " << i-1 << endl;
             
-            FieldInfo *score = d->scores[groupName].at(i-1);
-            label = d->labels[groupName].at((i-1)*d->nrCols + 0);
-            if ( (i == d->latest.second) && (groupName == d->latest.first) )
+            FieldInfo *score = scores[groupName].at(i-1);
+            label = labels[groupName].at((i-1)*nrCols + 0);
+            if ( (i == latest.second) && (groupName == latest.first) )
                 label->setFont(bold);
             else
                 label->setFont(normal);
     
-            if (d->fields & Name)
+            if (fields & Name)
             {
-                if ( (d->newName.second == i) && (groupName == d->newName.first) )
+                if ( (newName.second == i) && (groupName == newName.first) )
                 {
-                    QStackedWidget *stack = d->stack[groupName].at(i-1);
-                    d->edit = new QLineEdit(d->player, stack);
-                    d->edit->setMinimumWidth(40);
-                    stack->addWidget(d->edit);
-                    stack->setCurrentWidget(d->edit);
-                    d->edit->setFocus();
-                    connect(d->edit, SIGNAL(returnPressed()), this, SLOT(slotGotReturn()));
+                    QStackedWidget *localStack = stack[groupName].at(i-1);
+                    edit = new QLineEdit(player, localStack);
+                    edit->setMinimumWidth(40);
+                    localStack->addWidget(edit);
+                    localStack->setCurrentWidget(edit);
+                    edit->setFocus();
+                    connect(edit, SIGNAL(returnPressed()), q, SLOT(slotGotReturn()));
                 }
                 else
                 {
-                    label = d->labels[groupName].at((i-1)*d->nrCols + d->col[Name]);
-                    if ( (i == d->latest.second) && (groupName == d->latest.first) )
+                    label = labels[groupName].at((i-1)*nrCols + col[Name]);
+                    if ( (i == latest.second) && (groupName == latest.first) )
                         label->setFont(bold);
                     else
                         label->setFont(normal);
@@ -292,12 +303,12 @@ void KScoreDialog::aboutToShow()
                 }
         
             }
-            for(int field = Name * 2; field < d->fields; field = field * 2)
+            for(int field = Name * 2; field < fields; field = field * 2)
             {
-                if (d->fields & field)
+                if (fields & field)
                 {
-                    label = d->labels[groupName].at((i-1)*d->nrCols + d->col[field]);
-                    if ( (i == d->latest.second) && (groupName == d->latest.first) )
+                    label = labels[groupName].at((i-1)*nrCols + col[field]);
+                    if ( (i == latest.second) && (groupName == latest.first) )
                         label->setFont(bold);
                     else
                         label->setFont(normal);
@@ -307,82 +318,78 @@ void KScoreDialog::aboutToShow()
         }
         tabIndex++;
     }
-    d->latest = QPair<QString,int>(QString(),-1);
-    setFixedSize(minimumSizeHint());
-    d->tabWidget->setCurrentIndex(newScoreTabIndex);
+    latest = QPair<QString,int>(QString(),-1);
+    q->setFixedSize(q->minimumSizeHint());
+    tabWidget->setCurrentIndex(newScoreTabIndex);
 }
 
-void KScoreDialog::loadScores()
+void KScoreDialog::KScoreDialogPrivate::loadScores()
 {
-    QString key;
-    QString value;
+    scores.clear();
     
-    d->scores.clear();
+    QStringList groupList = highscoreObject->groupList(); //List of the group names
+    numberOfPages = groupList.size();
     
-    QStringList groupList = d->highscoreObject->groupList(); //List of the group names
-    d->numberOfPages = groupList.size();
+    QString tempCurrentGroup = configGroup; //temp to store the user-set group name
     
-    QString tempCurrentGroup = d->configGroup; //temp to store the user-set group name
-    
-    if (groupList.count(d->configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
+    if (groupList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
-        kDebug() << "The current high score group \"" << d->configGroup << "\" isn't in the list, adding it" << endl;
-        groupList << d->configGroup;
+        kDebug() << "The current high score group \"" << configGroup << "\" isn't in the list, adding it" << endl;
+        groupList << configGroup;
     }
     
     foreach(QString groupName, groupList)
     {
-        d->highscoreObject->setHighscoreGroup(groupName);
-        d->player = d->highscoreObject->readEntry(0, "LastPlayer");  //FIXME
+        highscoreObject->setHighscoreGroup(groupName);
+        player = highscoreObject->readEntry(0, "LastPlayer");  //FIXME
         
         for (int i = 1; i <= 10; ++i)
         {
             FieldInfo *score = new FieldInfo();
-            for(int field = 1; field < d->fields; field = field * 2)
+            for(int field = 1; field < fields; field = field * 2)
             {
-                if (d->fields & field)
+                if (fields & field)
                 {
-                    (*score)[field] = d->highscoreObject->readEntry(i, d->key[field], QString("-"));
+                    (*score)[field] = highscoreObject->readEntry(i, key[field], QString("-"));
                 }
             }
-            d->scores[groupName].append(score);
+            scores[groupName].append(score);
         }
     }
-    d->highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
-    d->loaded = true;
+    highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
+    loaded = true;
 }
 
-void KScoreDialog::saveScores()
+void KScoreDialog::KScoreDialogPrivate::saveScores()
 {
-    QString key, value;
-    d->highscoreObject->setHighscoreGroup(d->configGroup.toUtf8());
+    highscoreObject->setHighscoreGroup(configGroup.toUtf8());
     
-    d->highscoreObject->writeEntry(0,"LastPlayer", d->player);
+    highscoreObject->writeEntry(0,"LastPlayer", player);
     
     for (int i = 1; i <= 10; ++i)
     {
-        FieldInfo *score = d->scores[d->configGroup].at(i-1);
-        for(int field = 1; field < d->fields; field = field * 2)
+        FieldInfo *score = scores[configGroup].at(i-1);
+        for(int field = 1; field < fields; field = field * 2)
         {
-            if (d->fields & field)
+            if (fields & field)
             {
-                d->highscoreObject->writeEntry(i, d->key[field], (*score)[field]);
+                highscoreObject->writeEntry(i, key[field], (*score)[field]);
             }
         }
     }
-    d->highscoreObject->writeAndUnlock();
+    highscoreObject->writeAndUnlock();
 }
 
 int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 {
     bool askName=false, lessIsMore=false;
-    if((flags & KScoreDialog::AskName) == KScoreDialog::AskName)
+    if(flags.testFlag(KScoreDialog::AskName))
         askName = true;
-    if((flags & KScoreDialog::LessIsMore) == KScoreDialog::LessIsMore)
+    if(flags.testFlag(KScoreDialog::LessIsMore))
         lessIsMore = true;
     
     if (!d->loaded)
-        loadScores();
+        d->loadScores();
     FieldInfo *score;
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
@@ -412,7 +419,7 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
                 d->newName = QPair<QString,int>(d->configGroup,i+1);
             }
             else
-                saveScores();
+                d->saveScores();
             
             if (i == 0)
                 d->comment = i18n("Excellent!\nYou have a new high score!");
@@ -433,13 +440,13 @@ int KScoreDialog::addScore(int newScore, const AddScoreFlags& flags)
 
 void KScoreDialog::show()
 {
-    aboutToShow();
+    d->aboutToShow();
     KDialog::show();
 }
 
 void KScoreDialog::exec()
 {
-    aboutToShow();
+    d->aboutToShow();
     KDialog::exec();
 }
 
@@ -455,7 +462,7 @@ void KScoreDialog::slotGotName()
     d->player = d->edit->text();
     
     (*d->scores[d->newName.first].at(d->newName.second-1))[Name] = d->player;
-    saveScores();
+    d->saveScores();
     
     QFont bold = font();
     bold.setBold(true);
@@ -472,7 +479,7 @@ void KScoreDialog::slotGotName()
 int KScoreDialog::highScore()
 {
     if (!d->loaded)
-        loadScores();
+        d->loadScores();
     
     return (*d->scores[d->configGroup].first())[Score].toInt();
 }
