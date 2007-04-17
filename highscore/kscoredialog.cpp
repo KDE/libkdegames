@@ -67,8 +67,8 @@ class KScoreDialog::KScoreDialogPrivate
         KHighscore* highscoreObject;
         
         QMap<int, int> col;
-        QMap<int, QString> header;
-        QMap<int, QString> key;
+        QMap<int, QString> header; ///<Header for fields. Maps field index to a string
+        QMap<int, QString> key; ///<Keys for fields. Maps field index to a string
         QString player;
 };
 
@@ -373,7 +373,7 @@ void KScoreDialog::saveScores()
     d->highscoreObject->writeAndUnlock();
 }
 
-int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScoreFlags& flags, const QString &name)
+int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScoreFlags& flags)
 {
     bool askName=false, lessIsMore=false;
     if((flags & KScoreDialog::AskName) == KScoreDialog::AskName)
@@ -396,14 +396,16 @@ int KScoreDialog::addScore(int newScore, const FieldInfo &newInfo, const AddScor
         {
             score = new FieldInfo(newInfo);
             (*score)[Score].setNum(newScore);
-            (*score)[Name]=name;
             d->latest = QPair<QString,int>(d->configGroup,i+1);
             d->scores[d->configGroup].insert(i, score);
             d->scores[d->configGroup].removeAt(10);
-
+            
+            if((*score)[Name].isEmpty()) //If we don't have a name, prompt the player.
+                askName = true;
+            
             if (askName)
             {
-                d->player=name;
+                d->player=(*score)[Name];
                 d->newName = QPair<QString,int>(d->configGroup,i+1);
             }
             else

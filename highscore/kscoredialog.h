@@ -45,6 +45,7 @@ this software.
  * KScoreDialog ksdialog(KScoreDialog::Name | KScoreDialog::Score, this);
  * ksdialog.exec();
  * \endcode
+ * 
  * To add a new highscore, e.g. at the end of a game you simply create an
  * object with the @ref Fields you want to write (i.e. KScoreDialog::Name | 
  * KScoreDialog::Score), call addScore and then (optionally) display
@@ -58,15 +59,13 @@ this software.
  * ksdialog.addScore(playersScore);
  * ksdialog.exec();
  * \endcode
- * If you want to prompt the player for their name every time do something
- * like
- * \code
- * ksdialog.addScore(playersScore, KScoreDialog::FieldInfo(), KScoreDialog::AskName);
- * \endcode
+ * 
  * Or if you want to fill the name in from the code you can pass a default
  * name by doing
  * \code
- * ksdialog.addScore(playerScore, KScoreDialog::FieldInfo(), KScoreDialog::AskName, playerName);
+ * KScoreDialog::FieldInfo scoreInfo;
+ * scoreInfo[KScoreDialog::Name] = "Matt";
+ * ksdialog.addScore(playerScore, scoreInfo);
  * \endcode
  */
 class KDEGAMES_EXPORT KScoreDialog : public KDialog 
@@ -113,35 +112,34 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         void setConfigGroup(const QString& group = QString());
 
         /**
-        * @param comment to add when showing high-scores.
-        * The comment is only used once.  
-        */
+         * @param comment to add when showing high-scores.
+         * The comment is only used once.  
+         */
         void setComment(const QString& comment);
 
         /**
-        * Define an extra FieldInfo entry.
-        * @param field Id of this field
-        * @param header Header shown in the dialog for this field
-        * @param key used to store this field with.
-        */
+         * Define an extra FieldInfo entry.
+         * @param field Id of this field
+         * @param header Header shown in the dialog for this field
+         * @param key used to store this field with.
+         */
         void addField(int field, const QString& header, const QString& key); 
 
         /**
-        * Adds a new score to the list.
-        *
-        * @param newScore the score of this game.
-        * @param newInfo additional info about the score.
-        * @param flags set whether the user should be prompted for their name and how the scores should be sorted
-        * @param name the name of the player
-        *
-        * @returns The highscore position if the score was good enough to 
-        * make it into the list (1 being topscore) or 0 otherwise.
-        */
-        int addScore(int newScore, const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags=AskName, const QString& name=QString());
+         * Adds a new score to the list.
+         *
+         * @param newScore the score of this game.
+         * @param newInfo additional info about the score.
+         * @param flags set whether the user should be prompted for their name and how the scores should be sorted
+         *
+         * @returns The highscore position if the score was good enough to 
+         * make it into the list (1 being topscore) or 0 otherwise.
+         */
+        int addScore(int newScore, const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags=AskName);
 
         /**
-        * @returns the current best score.
-        */
+         * @returns the current best score.
+         */
         int highScore();
 
         virtual void show();

@@ -232,7 +232,7 @@ void KHighscore::setHighscoreGroup(const QString& group)
     d->group = group;
 }
 
-const QString& KHighscore::highscoreGroup() const
+QString KHighscore::highscoreGroup() const
 {
     return d->group;
 }

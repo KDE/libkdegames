@@ -280,7 +280,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * ("KHighscore_") but the same as setHighscoreGroup uses. The
          * default is QString()
          **/
-        const QString& highscoreGroup() const;
+        QString highscoreGroup() const;
 
     protected:
 	/**
