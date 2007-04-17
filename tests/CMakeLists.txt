@@ -21,6 +21,7 @@ ENDMACRO(LIBKDEGAMES_EXECUTE_TESTS)
 
 set(libkdegames_unittests
     kgamesvgdocumenttest 
+    kgamesvgdigitstest 
 )
 
 LIBKDEGAMES_BUILD_TESTS(

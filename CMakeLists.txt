@@ -5,6 +5,7 @@ project(libkdegames)
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
 add_subdirectory( carddecks )
+add_subdirectory( digits )
 add_subdirectory( highscore )
 add_subdirectory( includes )
 add_subdirectory( kgame )
@@ -21,42 +22,46 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR}/highscore ${CMAKE_CURRENT_SOURC
 ########### next target ###############
 
 set(libkhighscore_SRCS  
-#	highscore/kconfigrawbackend.cpp 
-	highscore/khighscore.cpp 
-	highscore/kscoredialog.cpp
-	highscore/kexthighscore_item.cpp 
-	highscore/kexthighscore_internal.cpp 
-	highscore/kexthighscore_tab.cpp 
-	highscore/kexthighscore_gui.cpp
-	highscore/kexthighscore.cpp
+#   highscore/kconfigrawbackend.cpp 
+    highscore/khighscore.cpp 
+    highscore/kscoredialog.cpp
+    highscore/kexthighscore_item.cpp 
+    highscore/kexthighscore_internal.cpp 
+    highscore/kexthighscore_tab.cpp 
+    highscore/kexthighscore_gui.cpp
+    highscore/kexthighscore.cpp
 )
 
+set(libkgamedigits_SRCS 
+    digits/kgamesvgdigits.cpp 
+    )
+
 set(libkgame_SRCS 
-	kgame/kgame.cpp 
-	kgame/kplayer.cpp 
-	kgame/kgamenetwork.cpp 
-	kgame/kgameproperty.cpp
-	kgame/kgamemessage.cpp 
-	kgame/kgameio.cpp 
-	kgame/kgameprocess.cpp 
-	kgame/kgamechat.cpp
-	kgame/kgamepropertyhandler.cpp 
-	kgame/kgameerror.cpp 
-	kgame/kgamesequence.cpp
-	kgame/kmessageio.cpp 
-	kgame/kmessageserver.cpp 
-	kgame/kmessageclient.cpp
-	)
+    kgame/kgame.cpp 
+    kgame/kplayer.cpp 
+    kgame/kgamenetwork.cpp 
+    kgame/kgameproperty.cpp
+    kgame/kgamemessage.cpp 
+    kgame/kgameio.cpp 
+    kgame/kgameprocess.cpp 
+    kgame/kgamechat.cpp
+    kgame/kgamepropertyhandler.cpp 
+    kgame/kgameerror.cpp 
+    kgame/kgamesequence.cpp
+    kgame/kmessageio.cpp 
+    kgame/kmessageserver.cpp 
+    kgame/kmessageclient.cpp
+    )
 
 set(libkgamedialog_SRCS 
-	kgame/dialogs/kgamedialog.cpp 
-	kgame/dialogs/kgameconnectdialog.cpp 
-	kgame/dialogs/kgameerrordialog.cpp 
-	kgame/dialogs/kgamedebugdialog.cpp 
-	kgame/dialogs/kgamedialogconfig.cpp
-	)
+    kgame/dialogs/kgamedialog.cpp 
+    kgame/dialogs/kgameconnectdialog.cpp 
+    kgame/dialogs/kgameerrordialog.cpp 
+    kgame/dialogs/kgamedebugdialog.cpp 
+    kgame/dialogs/kgamedialogconfig.cpp
+    )
 
-set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS}
+set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS} ${libkgamedigits_SRCS}
     kgamecanvas.cpp 
     kcarddialog.cpp 
     kstandardgameaction.cpp 
@@ -69,7 +74,7 @@ set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SR
     kchatdialog.cpp 
     kgameprogress.cpp 
     kgamelcd.cpp
-    kgamesvgdocument.cpp
+    kgamesvgdocument.cpp 
     kgameclock.cpp
    )
 
