@@ -65,9 +65,23 @@ this software.
  * \code
  * KScoreDialog::FieldInfo scoreInfo;
  * scoreInfo[KScoreDialog::Name] = "Matt";
- * scoreInfo[KScoreDialog::Score] = playersScore;
+ * scoreInfo[KScoreDialog::Score].setNum(playersScore);
  * ksdialog.addScore(scoreInfo);
  * \endcode
+ * 
+ * If you want to add an extra field (e.g. the number of moves taken) then
+ * do
+ * \code
+ * KScoreDialog::FieldInfo scoreInfo;
+ * scoreInfo[KScoreDialog::Name] = "Matt";
+ * scoreInfo[KScoreDialog::Score].setNum(playersScore);
+ * 
+ * ksdialog.addField(KScoreDialog::Custom1, "Num of Moves", "moves");
+ * scoreInfo[KScoreDialog::Custom1].setNum(42);
+ * 
+ * ksdialog.addScore(scoreInfo);
+ * \endcode
+ * You can add up to 5 Custom fields.
  */
 class KDEGAMES_EXPORT KScoreDialog : public KDialog 
 {
@@ -82,6 +96,8 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
             Custom1 = 1 << 10,
             Custom2 = 1 << 11,
             Custom3 = 1 << 12,
+            Custom4 = 1 << 13,
+            Custom5 = 1 << 14,
             
             Date = 1 << 27,
             Time = 1 << 28,
@@ -107,7 +123,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
 
         /**
         * @param group to use for reading/writing highscores from/to.
-        * If you get a group, it will be prefixed by 'KHighscore_' otherwise
+        * If you set a group, it will be prefixed by 'KHighscore_' otherwise
         * the group will simply be 'KHighscore'
         */
         void setConfigGroup(const QString& group = QString());
@@ -149,7 +165,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         int addScore(int newScore, const AddScoreFlags& flags=0);
         
         /**
-         * @returns the current best score.
+         * @returns the current best score in the group
          */
         int highScore();
 
