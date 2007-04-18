@@ -18,7 +18,9 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
+#include <QtCore/QMap>
 #include <QtCore/QTimer>
+#include <QtCore/QString>
 #include <QtGui/QPainter>
 
 #include <KConfig>
@@ -46,6 +48,22 @@ class KGameSvgDigitsPrivate
     {}
 
     /**
+     * @brief Renders the digit.
+     * 
+     * @param node The node to render
+     * @param cacheID The id of the digit in the pixmap cache
+     * @returns returns nothing.
+     */
+    void renderDigit(const QDomNode& node, const QString& cacheID);
+
+    /**
+     * @brief Swaps colors between normal foreground/background colors and highlight foreground/background colors
+     *
+     * @returns returns nothing.
+     */
+    void swapColors();
+
+    /**
      * @brief Applies the digit bitmask
      *
      * @returns returns nothing.
@@ -60,6 +78,27 @@ class KGameSvgDigitsPrivate
      * @returns returns nothing.
      */
     void applyColor(QDomNode node, QColor color);
+
+    /**
+     * @brief Cache individual style digits
+     * @returns returns nothing.
+     */
+    void cacheIndividualDigits();
+
+    /**
+     * @brief Cache seven and fourteen segment digits
+     * @returns returns nothing.
+     */
+    void cacheSegmentedDigits();
+
+    /**
+     * @brief Helps render segmented digits
+     *
+     * @param element The svg element to process
+     * @param map The digit map
+     * @returns returns nothing.
+     */
+	void cacheSegmentedDigits_helper(const QString& element, QMap<QString, QString>& map);
 
     /**
      * @brief DOM of m_svgFile
@@ -267,7 +306,24 @@ void KGameSvgDigits::loadTheme(const QString& svgFile)
     // Parse the artist-friendly map strings into bitmasks.
     if (digitType() != IndividualDigit)
     {
+		// Numbers
         QMapIterator<QString, QString> it(d->m_numbersMap);
+        while (it.hasNext())
+        {
+            it.next();
+            d->m_bitmasks.insert(it.key(), toBitmask(it.value()));
+        }
+
+		// Punctuation
+        it = d->m_punctuationMap;
+        while (it.hasNext())
+        {
+            it.next();
+            d->m_bitmasks.insert(it.key(), toBitmask(it.value()));
+        }
+
+		// Alpha
+        it = d->m_alphaMap;
         while (it.hasNext())
         {
             it.next();
@@ -295,6 +351,8 @@ void KGameSvgDigits::loadTheme(const QString& svgFile)
     if (!settings.value("scaleY").isEmpty()) {setScaleY(settings.value("scaleY").toInt());}
     if (!settings.value("digitStyle").isEmpty()) {setDigitStyle(settings.value("digitStyle"));}
     if (!settings.value("cacheOption").isEmpty()) {setCacheOption(settings.value("cacheOption"));}
+
+    kDebug () << "Cache option set to: " << settings.value("cacheOption") << cacheOption() << endl;
 
     d->m_highlighted = false;
 
@@ -333,11 +391,13 @@ QPixmap KGameSvgDigits::display(const QString& display)
 
         if (d->m_highlighted)
         {
-            character = character + ".highlight";
+			if (character == " ") {character = "blank.highlight";}
+			else {character = character + ".highlight";}
         }
         else
         {
             character = character;
+			if (character == " ") {character = "blank";}
         }
 
         if (d->m_digitsPixmapCache.value(character).isNull())
@@ -359,7 +419,6 @@ QPixmap KGameSvgDigits::display(const QString& display)
 
 void KGameSvgDigits::flash(int interval)
 {
-    /// @todo should we connect here, or in the ctor?
     d->m_flashTimer_ptr = new QTimer();
     connect(d->m_flashTimer_ptr, SIGNAL(timeout()), this, SLOT(updateFlash()));
     d->m_flashTimer_ptr->start(interval);
@@ -371,13 +430,20 @@ void KGameSvgDigits::flash()
     flash(interval);
 }
 
-void KGameSvgDigits::stopFlash()
+void KGameSvgDigits::stopFlashing()
 {
     d->m_flashTimer_ptr->stop();
     if (d->m_highlighted)
     {
-        swapColors();
+        d->swapColors();
     }
+	emit signalDisplayDirty();
+}
+
+void KGameSvgDigits::highlight()
+{
+    d->swapColors();
+	emit signalDisplayDirty();
 }
 
 ulong KGameSvgDigits::toBitmask(QString string)
@@ -400,6 +466,7 @@ void KGameSvgDigits::refreshCache()
     d->m_digitsPixmapCache.clear();
     kDebug () << "cache has been cleared" << endl;
 
+    kDebug () << cacheOption() << endl;
     if (cacheOption() == CacheNone){return;}
     if (cacheOption() == CachePreviouslyRendered){return;}
 
@@ -409,17 +476,17 @@ void KGameSvgDigits::refreshCache()
         switch (digitType())
         {
             case IndividualDigit:
-                cacheIndividualDigits();
+                d->cacheIndividualDigits();
 
                 break;
 
             case SevenSegmentDigit:
-                cacheSegmentedDigits();
+                d->cacheSegmentedDigits();
 
                 break;
 
             case FourteenSegmentDigit:
-                cacheSegmentedDigits();
+                d->cacheSegmentedDigits();
 
                 break;
         }
@@ -427,155 +494,6 @@ void KGameSvgDigits::refreshCache()
 
     kDebug () << "cache has been rebuilt" << endl;
 }
-
-void KGameSvgDigits::cacheIndividualDigits()
-{
-    QDomNode containerElement;
-    QDomNode backgroundElement;
-    QDomNode faceElement;
-    QString s;
-    QString id;
-    QString colorStyle = "";
-    QStringList numbersOnly;
-    QMap<QString, QString> elementsToRender = d->m_numbersMap;
-
-    if (cacheOption() == CacheNumeralsOnly) {elementsToRender.unite(d->m_punctuationMap);}
-    if (cacheOption() == CacheAll) {elementsToRender.unite(d->m_alphaMap);}
-
-    QMapIterator<QString, QString> it(elementsToRender);
-
-    for (int i=0; i<2; i++)
-    {
-        if (i == 1)
-        {
-            colorStyle = ".highlight";
-        }
-        while (it.hasNext())
-        {
-            it.next();
-
-            id = it.key();
-            setElementId(it.value());
-            containerElement = d->m_svgDOM.elementById(d->m_elementId);
-            faceElement = d->m_svgDOM.elementById(d->m_elementId + "Foreground");
-
-//          kDebug () << "elementId: " << m_elementId << endl;
-
-            if(!faceElement.isNull() && (!d->m_elementId.contains("blank")) )
-            {
-                d->applyColor(faceElement, d->m_foregroundColor);
-            }
-
-            id += colorStyle;
-//          kDebug () << "elementId: " << d->m_elementId << " id: " << id << endl;
-            renderDigit(containerElement, id);
-        }
-        swapColors();
-        it.toFront();
-    }
-
-}
-
-void KGameSvgDigits::cacheSegmentedDigits()
-{
-    QDomNode containerElement;
-    QDomNode backgroundElement;
-    QDomNode faceElement;
-    QString s;
-    QString id;
-    QString colorStyle = "";
-
-    setElementId("digit");
-    containerElement = d->m_svgDOM.elementById(d->m_elementId);
-    backgroundElement = d->m_svgDOM.elementById(d->m_elementId + "Background");
-    faceElement = QDomNode(d->m_svgDOM.elementById(d->m_elementId + "Face"));
-
-    QDomNodeList faceElementPaths = faceElement.childNodes();
-
-    for (int i=0; i<2; i++)
-    {
-        if (i == 1)
-        {
-            colorStyle = ".highlight";
-        }
-        // Make digits 0-9
-        for (int i=0; i<10; i++)
-        {
-            id.setNum(i);
-            s.setNum(i);
-            setBitmask(d->m_bitmasks.value(s));
-            d->applyBitmask(faceElementPaths);
-
-            id += colorStyle;
-            renderDigit(containerElement, id);
-        }
-        setBitmask(d->m_bitmasks.value("blank"));
-        d->applyBitmask(faceElementPaths);
-
-        renderDigit(containerElement, "blank" + colorStyle);
-
-        swapColors();
-    }
-}
-
-void KGameSvgDigits::renderDigit(const QDomNode& node, const QString& cacheID)
-{
-    QByteArray svg;
-    QPixmap pixmap;
-
-    d->m_svgDOM.setCurrentNode(node);
-
-    // set scale, set skew
-    d->m_svgDOM.skew(d->m_skewX, d->m_skewY, KGameSvgDocument::ReplaceCurrentMatrix);
-    d->m_svgDOM.scale(d->m_scaleX, d->m_scaleY, KGameSvgDocument::ApplyToCurrentMatrix);
-
-    svg = d->m_svgDOM.nodeToByteArray();
-    d->m_svgRenderer.load(svg);
-
-    double width = d->m_svgRenderer.boundsOnElement(d->m_elementId).width();
-    double height = d->m_svgRenderer.boundsOnElement(d->m_elementId).height();
-
-    int x = qRound(width);
-    int y = qRound(height);
-
-    int translateX = 0;
-    int translateY = 0;
-
-    QRectF viewport = QRectF(translateX, translateY, x, y);
-
-    pixmap = QPixmap((x + translateX), (y + translateY));
-    pixmap.fill(d->m_backgroundColor);
-
-    QPainter painter (&pixmap);
-
-    d->m_svgRenderer.render(&painter, d->m_elementId, viewport);
-
-    if (cacheOption() != CacheNone)
-    {
-        d->m_digitsPixmapCache.insert(cacheID, pixmap);
-        kDebug () << "caching digit: " << cacheID << endl;
-    }
-
-}
-
-void KGameSvgDigits::swapColors()
-{
-//  qDebug () << "In TSvgDigitBase::swapColors()";
-    
-    QColor fg_temp, bg_temp;
-    fg_temp = d->m_foregroundColor;
-    bg_temp = d->m_backgroundColor;
-
-    setForegroundColor(d->m_foregroundHighlightColor);
-    setBackgroundColor(d->m_backgroundHighlightColor);
-
-    setForegroundHighlightColor(fg_temp);
-    setBackgroundHighlightColor(bg_temp);
-
-    d->m_highlighted = !d->m_highlighted;
-}
-
-
 
 /*
  * Setters and Accessors
@@ -598,19 +516,19 @@ void KGameSvgDigits::setCacheOption(CacheOptions option)
 
 void KGameSvgDigits::setCacheOption(const QString& option)
 {
-    if (option == "cacheAll")
+    if (option.toLower() == "cacheall")
     {
         setCacheOption(CacheAll);
     }
-    else if (option == "cacheNone")
+    else if (option.toLower() == "cachenone")
     {
         setCacheOption(CacheNone);
     }
-    else if (option == "cacheNumeralsOnly")
+    else if (option.toLower() == "cachenumeralsonly")
     {
         setCacheOption(CacheNumeralsOnly);
     }
-    else if (option == "cachePreviouslyRendered")
+    else if (option.toLower() == "cachepreviouslyrendered")
     {
         setCacheOption(CachePreviouslyRendered);
     }
@@ -814,6 +732,158 @@ void KGameSvgDigits::updateFlash()
 //
 // KGameSvgDigitsPrivate definition
 //
+
+void KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& cacheID)
+{
+    QByteArray svg;
+    QPixmap pixmap;
+
+    m_svgDOM.setCurrentNode(node);
+
+    // set scale, set skew
+    m_svgDOM.skew(m_skewX, m_skewY, KGameSvgDocument::ReplaceCurrentMatrix);
+    m_svgDOM.scale(m_scaleX, m_scaleY, KGameSvgDocument::ApplyToCurrentMatrix);
+
+    svg = m_svgDOM.nodeToByteArray();
+    m_svgRenderer.load(svg);
+
+    double width = m_svgRenderer.boundsOnElement(m_elementId).width();
+    double height = m_svgRenderer.boundsOnElement(m_elementId).height();
+
+    int x = qRound(width);
+    int y = qRound(height);
+
+    int translateX = 0;
+    int translateY = 0;
+
+    QRectF viewport = QRectF(translateX, translateY, x, y);
+
+    pixmap = QPixmap((x + translateX), (y + translateY));
+    pixmap.fill(m_backgroundColor);
+
+    QPainter painter (&pixmap);
+
+    m_svgRenderer.render(&painter, m_elementId, viewport);
+
+    if (m_cacheOption != KGameSvgDigits::CacheNone)
+    {
+        m_digitsPixmapCache.insert(cacheID, pixmap);
+        kDebug () << "caching digit: " << cacheID << endl;
+    }
+
+}
+
+void KGameSvgDigitsPrivate::cacheIndividualDigits()
+{
+    QDomNode containerElement;
+    QDomNode backgroundElement;
+    QDomNode faceElement;
+    QString s;
+    QString id;
+    QString colorStyle = "";
+    QMap<QString, QString> elementsToRender = m_numbersMap;
+
+    if (m_cacheOption == KGameSvgDigits::CacheNumeralsOnly) {elementsToRender.unite(m_punctuationMap);}
+    if (m_cacheOption == KGameSvgDigits::CacheAll) {elementsToRender.unite(m_alphaMap);}
+
+    QMapIterator<QString, QString> it(elementsToRender);
+
+    for (int i=0; i<2; i++)
+    {
+        if (i == 1)
+        {
+            colorStyle = ".highlight";
+        }
+        while (it.hasNext())
+        {
+            it.next();
+
+            id = it.key();
+            m_elementId = it.value();
+            containerElement = m_svgDOM.elementById(m_elementId);
+            faceElement = m_svgDOM.elementById(m_elementId + "Foreground");
+
+//          kDebug () << "elementId: " << m_elementId << endl;
+
+            if(!faceElement.isNull() && (!m_elementId.contains("blank")) )
+            {
+                applyColor(faceElement, m_foregroundColor);
+            }
+
+            id += colorStyle;
+//          kDebug () << "elementId: " << d->m_elementId << " id: " << id << endl;
+            renderDigit(containerElement, id);
+        }
+        swapColors();
+        it.toFront();
+    }
+
+}
+
+void KGameSvgDigitsPrivate::cacheSegmentedDigits_helper(const QString& element, QMap<QString, QString>& map)
+{
+    QDomNode containerElement;
+    QDomNode backgroundElement;
+    QDomNode faceElement;
+    QString s;
+    QString id;
+    QString colorStyle = "";
+
+	QDomNodeList faceElementPaths;
+	QMapIterator<QString, QString> it(map);
+
+	m_elementId = element;
+	containerElement = m_svgDOM.elementById(m_elementId);
+	faceElement = QDomNode(m_svgDOM.elementById(m_elementId + "Face"));
+
+	faceElementPaths = faceElement.childNodes();
+
+	for (int i=0; i<2; i++)
+	{
+		if (i == 1)
+		{
+			colorStyle = ".highlight";
+		}
+		while (it.hasNext())
+		{
+			it.next();
+
+			id = it.key();
+			m_bitmask = m_bitmasks.value(it.key());
+			applyBitmask(faceElementPaths);
+	
+			id += colorStyle;
+			renderDigit(containerElement, id);
+		}
+
+		swapColors();
+		it.toFront();
+		colorStyle = "";
+	}
+}
+
+void KGameSvgDigitsPrivate::cacheSegmentedDigits()
+{
+	cacheSegmentedDigits_helper(QString("punctuation"), m_punctuationMap);
+	cacheSegmentedDigits_helper(QString("digit"), m_numbersMap);
+	cacheSegmentedDigits_helper(QString("digit"), m_alphaMap);
+}
+
+void KGameSvgDigitsPrivate::swapColors()
+{
+
+    QColor fg_temp, bg_temp;
+    fg_temp = m_foregroundColor;
+    bg_temp = m_backgroundColor;
+
+    m_foregroundColor = m_foregroundHighlightColor;
+    m_backgroundColor = m_backgroundHighlightColor;
+
+    m_foregroundHighlightColor = fg_temp;
+    m_backgroundHighlightColor = bg_temp;
+
+    m_highlighted = !m_highlighted;
+}
 
 void KGameSvgDigitsPrivate::applyColor(QDomNode node, QColor color)
 {

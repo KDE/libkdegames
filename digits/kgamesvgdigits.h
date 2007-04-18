@@ -199,35 +199,14 @@ public:
      *
      * @returns returns nothing.
      */
-    void stopFlash();
+    void stopFlashing();
 
     /**
-     * @brief Cache seven and fourteen segment digits
-     * @returns returns nothing.
-     */
-    void cacheSegmentedDigits();
-
-    /**
-     * @brief Cache individual style digits
-     * @returns returns nothing.
-     */
-    void cacheIndividualDigits();
-
-    /**
-     * @brief Swaps colors between normal foreground/background colors and highlight foreground/background colors
+     * @brief Toggle highlighting the display
      *
      * @returns returns nothing.
      */
-    void swapColors();
-
-    /**
-     * @brief Renders the digit.
-     * 
-     * @param node The node to render
-     * @param cacheID The id of the digit in the pixmap cache
-     * @returns returns nothing.
-     */
-    void renderDigit(const QDomNode& node, const QString& cacheID);
+    void highlight();
 
     /**
      * @brief Convert a string binary representation to convert to a bitmask
