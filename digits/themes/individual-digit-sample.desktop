@@ -1,0 +1,44 @@
+[Desktop Entry]
+Version=0.1.0
+Encoding=UTF-8
+Name=Individual Digit
+Type=IndividualDigit
+Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual.digit.svg
+
+[Settings]
+foregroundColor=0xffffaa00
+backgroundColor=0xff323232
+foregroundHighlightColor=0xffff0000
+backgroundHighlightColor=0xffeeeeec
+ledOffSegmentAlphaLevel=10
+skewX=0
+skewY=0
+scaleX=1
+scaleY=1
+digitStyle=LcdStyle
+cacheOption=CacheNumeralsOnly
+
+[Digits]
+blank=blank
+0=zero
+1=one
+2=two
+3=three
+4=four
+5=five
+6=six
+7=seven
+8=eight
+9=nine
+
+[Punctuation]
+.=dot
+,=comma
+:=colon
+;=semicolon
+-=minus
+
+[Alpha]
+A=A
+a=a
+
