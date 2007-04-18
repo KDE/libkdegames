@@ -15,6 +15,7 @@ install( FILES
 	KStandardGameAction
 	KZoomMainWindow
 	KGameSvgDocument
+	KGameSvgDigits
 DESTINATION ${INCLUDE_INSTALL_DIR}/KDE )
 
 install( FILES
