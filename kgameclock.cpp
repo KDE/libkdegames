@@ -61,27 +61,19 @@ void KGameClock::timeoutClock()
     showTime();
 }
 
-QString KGameClock::minSecString() const
+QString KGameClock::timeString() const
 {
     QString sec = QString::number(d->sec).rightJustified(2, '0', true);
     QString min = QString::number(d->min).rightJustified(2, '0', true);
-    return min + ':' + sec;
-}
-
-QString KGameClock::hourMinSecString() const
-{
-    QString sec = QString::number(d->sec).rightJustified(2, '0', true);
-    QString min = QString::number(d->min).rightJustified(2, '0', true);
+    if (d->clocktype==MinSecOnly) return min + ':' + sec;
+    //else return hour as well
     QString hour = QString::number(d->hour).rightJustified(2, '0', true);
     return hour + ':' + min + ':' + sec;
 }
 
 void KGameClock::showTime()
 {
-    if (d->clocktype==MinSecOnly)
-      emit timeChanged(minSecString());
-    else
-      emit timeChanged(hourMinSecString());
+    emit timeChanged(timeString());
 }
 
 void KGameClock::restart()

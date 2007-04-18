@@ -50,14 +50,9 @@ public:
     uint seconds() const;
 
     /**
-     * @return the time as a string to be displayed: "mm:ss".
+     * @return the time as a string to be displayed: "mm:ss" or "hh:mm:ss" depending on clock type.
      */
-    QString minSecString() const;
-
-    /**
-     * @return the time as a string to be displayed: "hh:mm:ss".
-     */
-    QString hourMinSecString() const;
+    QString timeString() const;
 
     /**
      * Set the time.
