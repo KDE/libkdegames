@@ -14,6 +14,7 @@ install( FILES
 	KScoreDialog
 	KStandardGameAction
 	KZoomMainWindow
+	KGameSvgDocument
 DESTINATION ${INCLUDE_INSTALL_DIR}/KDE )
 
 install( FILES
