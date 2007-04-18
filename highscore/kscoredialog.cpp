@@ -492,8 +492,11 @@ int KScoreDialog::highScore()
 {
     if (!d->loaded)
         d->loadScores();
-    
-    return (*d->scores[d->configGroup].first())[Score].toInt();
+   
+    if (!d->scores[d->configGroup].isEmpty())
+        return (*d->scores[d->configGroup].first())[Score].toInt();
+    else
+        return 0;
 }
 
 void KScoreDialog::keyPressEvent(QKeyEvent *ev)
