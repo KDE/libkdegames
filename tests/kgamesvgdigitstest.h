@@ -2,7 +2,7 @@
 #define KGAMESVGDIGITSTEST_H
 
 #include "qtest_kde.h"
-#include "kgamesvgdigits.h"
+#include <KGameSvgDigits>
 
 class tst_KGameSvgDigits : public QObject
 {
