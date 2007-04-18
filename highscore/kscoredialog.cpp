@@ -321,7 +321,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
         tabIndex++;
     }
     latest = QPair<QString,int>(QString(),-1);
-    q->setFixedSize(q->minimumSizeHint());
+    q->setFixedSize(q->minimumSizeHint()); //NOTE Remove this line to make dialog resizable
     tabWidget->setCurrentIndex(newScoreTabIndex);
 }
 
@@ -333,7 +333,6 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     numberOfPages = groupList.size();
     
     QString tempCurrentGroup = configGroup; //temp to store the user-set group name
-    kDebug() << "Temp group: \"" << tempCurrentGroup << "\"." << endl;
     
     if (groupList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
