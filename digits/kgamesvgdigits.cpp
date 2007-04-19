@@ -16,6 +16,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
+#include "kgamesvgdigits.h"
+
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMap>
@@ -25,8 +27,6 @@
 
 #include <KConfig>
 #include <KGameSvgDocument>
-
-#include "kgamesvgdigits.h"
 
 /**
  * @brief A class holding private members for KGameSvgDigits

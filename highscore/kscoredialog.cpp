@@ -75,6 +75,7 @@ class KScoreDialog::KScoreDialogPrivate
         
         //Q-Pointer
         KScoreDialogPrivate(KScoreDialog* parent):q(parent){};
+        ~KScoreDialogPrivate(){delete q;};
         KScoreDialog* const q;
         
         //Functions
@@ -239,7 +240,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     foreach(QString groupName, scores.keys())
     {
         //Only display the comment on the page with the new score
-        if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first=="" && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
+        if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first.isEmpty() && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
         {
             newScoreTabIndex=tabIndex;
             commentLabel->setText(comment);

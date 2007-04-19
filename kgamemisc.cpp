@@ -27,19 +27,13 @@
 #include <klocale.h>
 
 
-class KGameMiscPrivate
+class KGameMisc::KGameMiscPrivate
 {
-public:
-	KGameMiscPrivate()
-	{
-	}
 
 };
 
-KGameMisc::KGameMisc()
+KGameMisc::KGameMisc() : d(new KGameMiscPrivate)
 {
-// not yet used
-// d = new KGamePrivate;
 }
 
 KGameMisc::~KGameMisc()

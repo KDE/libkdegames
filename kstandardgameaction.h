@@ -95,7 +95,7 @@ public:
     static KAction *load(const QObject *recvr, const char *slot,
                          QObject *parent );
 
-    // FIXME why not to delete this and use just KStandardGameAction::openRecent???
+    // FIXME why not to delete this and use just KStandardAction::openRecent???
     // loadRecent seems to mimic its behaviour
     /**
      * Load a recently loaded game.

@@ -125,7 +125,7 @@ public:
    * Retrieve the bar color.
    * @see setBarColor()
    */
-  const QColor &barColor() const;
+  QColor barColor() const;
 
   /**
    * Retrieve the bar pixmap.

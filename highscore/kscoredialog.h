@@ -39,7 +39,7 @@ this software.
  * implementing a simple highscore table.
  * 
  * To display the current highscores it is simply a case of creating
- * a KScoreDialog object and calling exec. This example code will
+ * a KScoreDialog object and calling exec(). This example code will
  * display the Name and Score of the top 10 players:
  * \code
  * KScoreDialog ksdialog(KScoreDialog::Name | KScoreDialog::Score, this);
@@ -118,7 +118,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         * @param fields Bitwise OR of the @ref Fields that should be listed.
         * @param parent passed to parent QWidget constructor.
         */
-        KScoreDialog(int fields, QWidget *parent=0);
+        explicit KScoreDialog(int fields, QWidget *parent=0);
 
         ~KScoreDialog();
 

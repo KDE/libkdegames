@@ -25,7 +25,6 @@
 #include <libkdegames_export.h>
 #include <QtCore/QString>
 
-class KGameMiscPrivate;
 /**
  * This class contains several (usually static) functions I really did not know
  * a class for. If you know a class for any of these member s please drop one of
@@ -34,13 +33,14 @@ class KGameMiscPrivate;
 class KDEGAMES_EXPORT KGameMisc
 {
 public:
-	KGameMisc();
-	~KGameMisc();
-	
-	static QString randomName();
-	
+    KGameMisc();
+    ~KGameMisc();
+    
+    static QString randomName();
+    
 private:
-	KGameMiscPrivate* d;
+    class KGameMiscPrivate;
+    KGameMiscPrivate* const d;
 };
 
 #endif

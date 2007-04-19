@@ -22,7 +22,7 @@
 #ifndef __KGAMELCD_H
 #define __KGAMELCD_H
 
-#include <QObject>
+#include <QtCore/QObject>
 #include <libkdegames_export.h>
 
 class QTimer;

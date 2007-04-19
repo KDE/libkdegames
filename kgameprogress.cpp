@@ -144,7 +144,7 @@ void KGameProgress::setTextEnabled(bool enable)
 	text_enabled = enable;
 }
 
-const QColor & KGameProgress::barColor() const
+QColor KGameProgress::barColor() const
 {
 	return bar_color;
 }
