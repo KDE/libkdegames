@@ -60,6 +60,7 @@ class KScoreDialog::KScoreDialogPrivate
         QLabel *commentLabel;
         QString comment;
         int fields;
+        int hiddenFields;
         QPair<QString, int> newName; //index of the newname to add
         QPair<QString, int> latest; //index of the latest addition
         int nrCols;
@@ -93,7 +94,9 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     setModal( true );
     d->highscoreObject = new KHighscore();
     d->edit = 0;
+    fields |= Score; //Make 'Score' field automatic (it can be hidden if necessary)
     d->fields = fields;
+    d->hiddenFields = 0;
     d->newName = QPair<QString,int>(QString(),-1);
     d->latest = QPair<QString,int>("Null",-1);
     d->loaded = false;
@@ -110,6 +113,8 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     d->key[Level] = "Level";
     d->header[Score] = i18n("Score");
     d->key[Score] = "Score";
+    d->header[Time] = i18n("Time");
+    d->key[Time] = "Time";
     
     //d->page = new QWidget(this);
     
@@ -144,12 +149,17 @@ void KScoreDialog::addField(int field, const QString &header, const QString &key
     d->key[field] = key;
 }
 
+void KScoreDialog::hideField(int field)
+{
+    d->hiddenFields |= field;
+}
+
 void KScoreDialog::KScoreDialogPrivate::setupDialog()
 {
     nrCols = 1;
     for(int field = 1; field < fields; field = field * 2)
     {
-        if (fields & field)
+        if ( (fields & field) && !(hiddenFields & field ) )
             col[field] = nrCols++;
     }
     
@@ -183,7 +193,7 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
         
         for(int field = 1; field < fields; field = field * 2)
         {
-            if (fields & field)
+            if ( (fields & field) && !(hiddenFields & field ) )
             {
                 layout->addItem( new QSpacerItem( 50, 0 ), 0, col[field] );
                 label = new QLabel(header[field], tabWidget->widget(tabWidget->currentIndex()));
@@ -215,7 +225,7 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
             }
             for(int field = Name * 2; field < fields; field = field * 2)
             {
-                if (fields & field)
+                if ( (fields & field) && !(hiddenFields & field ) )
                 {
                     label = new QLabel(tabWidget->widget(tabWidget->currentIndex()));
                     labels[groupName].insert((i-1)*nrCols + col[field], label);
@@ -307,7 +317,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             }
             for(int field = Name * 2; field < fields; field = field * 2)
             {
-                if (fields & field)
+                if ( (fields & field) && !(hiddenFields & field ) )
                 {
                     label = labels[groupName].at((i-1)*nrCols + col[field]);
                     if ( (i == latest.second) && (groupName == latest.first) )

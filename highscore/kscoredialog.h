@@ -40,9 +40,11 @@ this software.
  * 
  * To display the current highscores it is simply a case of creating
  * a KScoreDialog object and calling exec(). This example code will
- * display the Name and Score of the top 10 players:
+ * display the Name and Score (the score is always added automatically
+ * unless hidden @ref hideField since it is used for sorting) of the 
+ * top 10 players:
  * \code
- * KScoreDialog ksdialog(KScoreDialog::Name | KScoreDialog::Score, this);
+ * KScoreDialog ksdialog(KScoreDialog::Name, this);
  * ksdialog.exec();
  * \endcode
  * 
@@ -55,7 +57,7 @@ this software.
  * will be prompted for their name but subsequent times they will have
  * their name filled in automatically.
  * \code
- * KScoreDialog ksdialog(KScoreDialog::Name | KScoreDialog::Score, this);
+ * KScoreDialog ksdialog(KScoreDialog::Name, this);
  * ksdialog.addScore(playersScore);
  * ksdialog.exec();
  * \endcode
@@ -92,6 +94,9 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         enum Fields {
             Name = 1 << 0,
             Level = 1 << 1,
+            Date = 1 << 2,
+            Time = 1 << 3,
+            Score = 1 << 4,
             
             Custom1 = 1 << 10, ///<Field for custom information
             Custom2 = 1 << 11,
@@ -99,9 +104,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
             Custom4 = 1 << 13,
             Custom5 = 1 << 14,
             
-            Date = 1 << 27,
-            Time = 1 << 28,
-            Score = 1 << 29
+            Max = 1 << 30 ///<Only for setting a maximum
         };
 
         ///Flags for setting preferences for adding scores
@@ -115,10 +118,10 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         typedef QMap<int, QString> FieldInfo;
 
         /**
-        * @param fields Bitwise OR of the @ref Fields that should be listed.
+        * @param fields Bitwise OR of the @ref Fields that should be listed (Score is always present)
         * @param parent passed to parent QWidget constructor.
         */
-        explicit KScoreDialog(int fields, QWidget *parent=0);
+        explicit KScoreDialog(int fields=Name, QWidget *parent=0);
 
         ~KScoreDialog();
 
@@ -142,6 +145,12 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
          * @param key unique key used to store this field. e.g. "moves"
          */
         void addField(int field, const QString& header, const QString& key);
+        
+        /**
+         * Hide a field so that it is not shown on the table (but is still stored in the configuration file).
+         * @param field id of this field @ref Fields e.g. KScoreDialog::Score
+         */
+        void hideField(int field);
 
         /**
          * Adds a new score to the list.
