@@ -75,7 +75,6 @@ class KScoreDialog::KScoreDialogPrivate
         
         //Q-Pointer
         KScoreDialogPrivate(KScoreDialog* parent):q(parent){};
-        ~KScoreDialogPrivate(){delete q;};
         KScoreDialog* const q;
         
         //Functions
