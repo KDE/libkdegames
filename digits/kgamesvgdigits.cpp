@@ -42,7 +42,7 @@ class KGameSvgDigitsPrivate
     /**
      * @brief Instantiates a KGameSvgDigitsPrivate object
      */
-    KGameSvgDigitsPrivate() : m_scaleX(1), m_scaleY(1), m_skewX(0), m_skewY(0)
+    KGameSvgDigitsPrivate() : m_scaleX(1), m_scaleY(1), m_skewX(0), m_skewY(0), m_letterSpacing(0)
     {}
 
     ~KGameSvgDigitsPrivate()
@@ -287,6 +287,10 @@ class KGameSvgDigitsPrivate
      */
     QTimer *m_flashTimer_ptr;
 
+    /**
+     * @brief The horizontal spacing in pixels between the digits
+     */
+    int m_letterSpacing;
 
 }; // End KGameSvgDigitsPrivate definition
 
@@ -388,6 +392,8 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
     if (!settings.value("backgroundHighlightColor").isEmpty())
          {setBackgroundHighlightColor(QColor::fromRgba(settings.value("backgroundHighlightColor").toLong(&ok, 16)));}
 
+    if (!settings.value("letter-spacing").isEmpty()) {setLetterSpacing(settings.value("letter-spacing").toInt());}
+
     if (!settings.value("ledOffSegmentAlphaLevel").isEmpty())
         { setLedOffSegmentAlphaLevel(settings.value("ledOffSegmentAlphaLevel").toInt()); }
     if (!settings.value("skewX").isEmpty()) {setSkewX(settings.value("skewX").toInt()); }
@@ -432,10 +438,11 @@ QPixmap KGameSvgDigits::display(const QString& display)
         setNumberOfDigits(str.size());
     }
 
-    int t_width = static_cast<int> (d->m_widthHint * numberOfDigits() * 1.1);
+    int t_width = static_cast<int> ((d->m_widthHint + letterSpacing()) * numberOfDigits() * 1.1);
     int t_height = static_cast<int> (d->m_heightHint * 1.1);
 
     QPixmap finalPixmap = QPixmap(t_width, t_height);
+    finalPixmap.fill(d->m_backgroundColor);
 
     QPainter painter(&finalPixmap);
 
@@ -500,10 +507,13 @@ QPixmap KGameSvgDigits::display(const QString& display)
         // Draw digit on final pixmap
         if (!tmp_pixmap.isNull())
         {
-            x = width + x;
+            x += width;
+
+			// Add letter-spacing between digits
+			if ((i > 0) && (i < numberOfDigits())) {x += letterSpacing();}
             width = static_cast<int> (tmp_pixmap.width());
             height = static_cast<int> (tmp_pixmap.height());
-    
+
             painter.drawPixmap(x, y, tmp_pixmap);
         }
         else
@@ -776,6 +786,8 @@ QColor KGameSvgDigits::backgroundHighlightColor()
 void KGameSvgDigits::setScaleX(double scale)
 {
     d->m_scaleX = scale;
+    // Scale letter-spacing as needed
+    d->m_letterSpacing = qRound(d->m_letterSpacing * scale);
     d->m_pixmapCacheDirty = true;
 }
 
@@ -846,6 +858,16 @@ void KGameSvgDigits::setElementId(const QString& elementId)
 QString KGameSvgDigits::elementId()
 {
     return d->m_elementId;
+}
+
+void KGameSvgDigits::setLetterSpacing(const int spacing)
+{
+    d->m_letterSpacing = spacing;
+}
+
+int KGameSvgDigits::letterSpacing()
+{
+    return d->m_letterSpacing;
 }
 
 //

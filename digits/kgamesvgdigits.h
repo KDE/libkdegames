@@ -495,6 +495,24 @@ public:
      */
     QString elementId();
 
+    /**
+     * @brief Sets the horizontal spacing in pixels between the digits
+     * 
+     * The spacing in pixels to use when scaleX == 1.  Letter-spacing is scaled the same as
+     * the digits themselves.
+     *
+     * @param spacing The horizontal spacing in pixels between the digits
+     * @returns returns nothing.
+     */
+    void setLetterSpacing(const int spacing);
+
+    /**
+     * @brief Returns the horizontal spacing in pixels between the digits.
+     *
+     * @returns Returns the horizontal spacing in pixels between the digits.
+     */
+    int letterSpacing();
+
 //
 // Properties
 //

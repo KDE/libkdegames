@@ -11,6 +11,7 @@ backgroundColor=0xff323232
 foregroundHighlightColor=0xffff0000
 backgroundHighlightColor=0xffeeeeec
 ledOffSegmentAlphaLevel=10
+letter-spacing=0
 skewX=0
 skewY=0
 scaleX=1
