@@ -509,8 +509,8 @@ QPixmap KGameSvgDigits::display(const QString& display)
         {
             x += width;
 
-			// Add letter-spacing between digits
-			if ((i > 0) && (i < numberOfDigits())) {x += letterSpacing();}
+            // Add letter-spacing between digits
+            if ((i > 0) && (i < numberOfDigits())) {x += letterSpacing();}
             width = static_cast<int> (tmp_pixmap.width());
             height = static_cast<int> (tmp_pixmap.height());
 
@@ -963,7 +963,11 @@ QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& 
     QRectF viewport = QRectF(translateX, translateY, x, y);
 
     pixmap = QPixmap((x + translateX), (y + translateY));
-    pixmap.fill(m_backgroundColor);
+//     pixmap.fill(m_backgroundColor);
+    /// @todo OPTIMIZE: If this works w/o artifacts, make QColor alpha a member variable 
+    QColor alpha = m_backgroundColor;
+    alpha.setAlpha(0); // make transparent
+    pixmap.fill(alpha);
 
     QPainter painter (&pixmap);
 
