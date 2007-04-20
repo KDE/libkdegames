@@ -68,10 +68,10 @@ public:
      * @li @c cache to @c CacheNumeralsOnly
      * @li @c style to @c LedStyle
      *
-     * @param svgFile The path to the svg file to load
+     * @param themeFile The path to the theme's *.desktop file to load
      * @returns nothing
      */
-    explicit KGameSvgDigits(const QString& svgFile);
+    explicit KGameSvgDigits(const QString& themeFile);
 
     /**
      * @overload
@@ -99,9 +99,10 @@ public:
     /**
      * @brief Loads a theme
      *
+     * @param themeFile The path to the theme's *.desktop file to load
      * @returns nothing
      */
-    void loadTheme(const QString& svgFile);
+    void loadTheme(const QString& themeFile);
 
     /**
      * @brief Options for cacheing pixmaps of rendered digits
@@ -208,22 +209,13 @@ public:
      */
     void highlight();
 
-    /**
-     * @brief Convert a string binary representation to convert to a bitmask
-     *
-     * @param string The string binary representation, e.g. "01001111", to convert to a bitmask
-     * @returns returns the bitmask
-     */
-    ulong toBitmask(QString string);
-
-
 //
 // Setters & Accessors
 //
 
     /**
      * @brief Sets whether the pixmap cache is dirty
-     *
+     * 
      * @param isDirty Is the pixmap cache dirty?
      * @returns returns nothing.
      */
@@ -503,12 +495,9 @@ public:
      */
     QString elementId();
 
-
-
 //
 // Properties
 //
-
 
 private:
 

@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=0.1.0
 Encoding=UTF-8
-Name=Individual Digit
+Name=Individual Digit Sample
 Type=IndividualDigit
-Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual.digit.svg
+Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svg
 
 [Settings]
 foregroundColor=0xffffaa00
@@ -16,7 +16,10 @@ skewY=0
 scaleX=1
 scaleY=1
 digitStyle=LcdStyle
-cacheOption=CacheNumeralsOnly
+# cacheOption=CacheNone
+# cacheOption=CacheAll
+cacheOption=CachePreviouslyRendered
+# cacheOption=CacheNumeralsOnly
 
 [Digits]
 blank=blank

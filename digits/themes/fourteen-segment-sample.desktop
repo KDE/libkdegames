@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=0.1.0
 Encoding=UTF-8
-Name=14 Segment Default
+Name=Fourteen Segment Sample
 Type=FourteenSegmentDigit
-Comment=This file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme 14segment.svg
+Comment=This file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svg
 
 [Settings]
 foregroundColor=0xffffaa00
@@ -17,7 +17,9 @@ scaleX=1
 scaleY=1
 digitStyle=LedStyle
 # cacheOption=CacheNone
-cacheOption=CacheNumeralsOnly
+# cacheOption=CacheAll
+cacheOption=CachePreviouslyRendered
+# cacheOption=CacheNumeralsOnly
 
 [Digits]
 blank=0000000000000000000
