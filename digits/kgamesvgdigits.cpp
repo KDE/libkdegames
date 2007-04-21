@@ -421,10 +421,10 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
 
     if (!settings.value("ledOffSegmentAlphaLevel").isEmpty())
         { setLedOffSegmentAlphaLevel(settings.value("ledOffSegmentAlphaLevel").toInt()); }
-    if (!settings.value("skewX").isEmpty()) {setSkewX(settings.value("skewX").toInt()); }
-    if (!settings.value("skewY").isEmpty()) {setSkewY(settings.value("skewY").toInt());}
-    if (!settings.value("scaleX").isEmpty()) {setScaleX(settings.value("scaleX").toInt());}
-    if (!settings.value("scaleY").isEmpty()) {setScaleY(settings.value("scaleY").toInt());}
+    if (!settings.value("skewX").isEmpty()) {setSkewX(settings.value("skewX").toDouble()); }
+    if (!settings.value("skewY").isEmpty()) {setSkewY(settings.value("skewY").toDouble());}
+    if (!settings.value("scaleX").isEmpty()) {setScaleX(settings.value("scaleX").toDouble());}
+    if (!settings.value("scaleY").isEmpty()) {setScaleY(settings.value("scaleY").toDouble());}
     if (!settings.value("digitStyle").isEmpty()) {setDigitStyle(settings.value("digitStyle"));}
     if (!settings.value("cacheOption").isEmpty()) {setCacheOption(settings.value("cacheOption"));}
 
