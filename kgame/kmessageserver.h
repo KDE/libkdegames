@@ -22,7 +22,6 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <QtNetwork/QTcpServer>
 
 class KMessageIO;
 class KMessageServerPrivate;
@@ -460,33 +459,6 @@ protected:
 private:
     KMessageServerPrivate* d;
 };
-
-
-/**
-  Internal class of KMessageServer. Creates a server socket and waits for
-  connections.
-
-  NOTE: This has to be here in the header file, because it is a subclass from
-  QObject and has to go through the moc.
-
-  @short An internal class for KServerSocket
-  @author Burkhard Lehner <Burkhard.Lehner@gmx.de>
-*/
-class KMessageServerSocket : public QTcpServer
-{
-  Q_OBJECT
-
-public:
-  KMessageServerSocket (quint16 port, QObject *parent = 0);
-  ~KMessageServerSocket ();
-
-public slots:
-  void slotNewConnection();
-
-Q_SIGNALS:
-  void newClientConnected (KMessageIO *client);
-};
-
 
 
 #endif

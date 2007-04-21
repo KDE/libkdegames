@@ -29,6 +29,7 @@
 #include <kdebug.h>
 
 #include "kmessageio.h"
+#include "kmessageserver_p.h"
 
 // --------------- internal class KMessageServerSocket
 
@@ -532,3 +533,4 @@ void KMessageServer::Debug()
 }
 
 #include "kmessageserver.moc"
+#include "kmessageserver_p.moc"
