@@ -42,7 +42,8 @@ class KGameSvgDigitsPrivate
     /**
      * @brief Instantiates a KGameSvgDigitsPrivate object
      */
-    KGameSvgDigitsPrivate() : m_scaleX(1), m_scaleY(1), m_skewX(0), m_skewY(0), m_letterSpacing(0)
+    KGameSvgDigitsPrivate() : m_scaleX(1), m_scaleY(1), m_skewX(0), m_skewY(0), m_letterSpacing(0),
+                              m_paddingTop(0), m_paddingRight(0), m_paddingBottom(0), m_paddingLeft(0)
     {}
 
     ~KGameSvgDigitsPrivate()
@@ -292,6 +293,26 @@ class KGameSvgDigitsPrivate
      */
     int m_letterSpacing;
 
+    /**
+     * @brief The padding in pixels between the top of the digits and the top of the display
+     */
+    int m_paddingTop;
+
+    /**
+     * @brief The padding in pixels between the right-most digit and the right edge of the display
+     */
+    int m_paddingRight;
+
+    /**
+     * @brief The padding in pixels between the bottom of the digits and the botom of the display
+     */
+    int m_paddingBottom;
+
+    /**
+     * @brief The padding in pixels between the leftmost digit and the left edge of the display
+     */
+    int m_paddingLeft;
+
 }; // End KGameSvgDigitsPrivate definition
 
 
@@ -393,6 +414,10 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
          {setBackgroundHighlightColor(QColor::fromRgba(settings.value("backgroundHighlightColor").toLong(&ok, 16)));}
 
     if (!settings.value("letter-spacing").isEmpty()) {setLetterSpacing(settings.value("letter-spacing").toInt());}
+    if (!settings.value("padding-top").isEmpty()) {setPaddingTop(settings.value("padding-top").toInt());}
+    if (!settings.value("padding-right").isEmpty()) {setPaddingRight(settings.value("padding-right").toInt());}
+    if (!settings.value("padding-bottom").isEmpty()) {setPaddingBottom(settings.value("padding-bottom").toInt());}
+    if (!settings.value("padding-left").isEmpty()) {setPaddingLeft(settings.value("padding-left").toInt());}
 
     if (!settings.value("ledOffSegmentAlphaLevel").isEmpty())
         { setLedOffSegmentAlphaLevel(settings.value("ledOffSegmentAlphaLevel").toInt()); }
@@ -414,8 +439,8 @@ QPixmap KGameSvgDigits::display(const QString& display)
     QChar currentCharacter;
 
     int i;
-    int x = 0;
-    int y = 0;
+    int x = paddingLeft();
+    int y = paddingTop();
     int width = 0;
     int height = 0;
 
@@ -439,7 +464,9 @@ QPixmap KGameSvgDigits::display(const QString& display)
     }
 
     int t_width = static_cast<int> ((d->m_widthHint + letterSpacing()) * numberOfDigits() * 1.1);
+    t_width += paddingLeft() + paddingRight();
     int t_height = static_cast<int> (d->m_heightHint * 1.1);
+    t_height += paddingTop() + paddingBottom();
 
     QPixmap finalPixmap = QPixmap(t_width, t_height);
     finalPixmap.fill(d->m_backgroundColor);
@@ -522,7 +549,8 @@ QPixmap KGameSvgDigits::display(const QString& display)
                       << characterToDisplay << " Skipping." << endl;
         }
     }
-    return finalPixmap.copy(0, 0, width + x, height);
+    return finalPixmap.copy(0, 0, width + x + paddingRight(), height + paddingTop() + paddingBottom());
+//     return finalPixmap.copy(0, 0, width + x, height);
 }
 
 void KGameSvgDigits::flash(int interval)
@@ -786,8 +814,11 @@ QColor KGameSvgDigits::backgroundHighlightColor()
 void KGameSvgDigits::setScaleX(double scale)
 {
     d->m_scaleX = scale;
-    // Scale letter-spacing as needed
+    // Scale letter-spacing & padding as needed
     d->m_letterSpacing = qRound(d->m_letterSpacing * scale);
+    d->m_paddingLeft = qRound(d->m_paddingLeft * scale);
+    d->m_paddingRight = qRound(d->m_paddingRight * scale);
+
     d->m_pixmapCacheDirty = true;
 }
 
@@ -799,6 +830,10 @@ double KGameSvgDigits::scaleX()
 void KGameSvgDigits::setScaleY(double scale)
 {
     d->m_scaleY = scale;
+    // Scale padding as needed
+    d->m_paddingTop = qRound(d->m_paddingTop * scale);
+    d->m_paddingBottom = qRound(d->m_paddingBottom * scale);
+
     d->m_pixmapCacheDirty = true;
 }
 
@@ -868,6 +903,55 @@ void KGameSvgDigits::setLetterSpacing(const int spacing)
 int KGameSvgDigits::letterSpacing()
 {
     return d->m_letterSpacing;
+}
+
+void KGameSvgDigits::setPaddingTop(const int padding)
+{
+    d->m_paddingTop = padding;
+}
+
+int KGameSvgDigits::paddingTop()
+{
+    return d->m_paddingTop;
+}
+
+void KGameSvgDigits::setPaddingRight(const int padding)
+{
+    d->m_paddingRight = padding;
+}
+
+int KGameSvgDigits::paddingRight()
+{
+    return d->m_paddingRight;
+}
+
+void KGameSvgDigits::setPaddingBottom(const int padding)
+{
+    d->m_paddingBottom = padding;
+}
+
+int KGameSvgDigits::paddingBottom()
+{
+    return d->m_paddingBottom;
+}
+
+void KGameSvgDigits::setPaddingLeft(const int padding)
+{
+    d->m_paddingLeft = padding;
+}
+
+int KGameSvgDigits::paddingLeft()
+{
+    return d->m_paddingLeft;
+}
+
+void KGameSvgDigits::setPadding(const int paddingTop, const int paddingRight,
+                                const int paddingBottom, const int paddingLeft)
+{
+    setPaddingTop(paddingTop);
+    setPaddingRight(paddingRight);
+    setPaddingBottom(paddingBottom);
+    setPaddingLeft(paddingLeft);
 }
 
 //
@@ -963,10 +1047,10 @@ QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& 
     QRectF viewport = QRectF(translateX, translateY, x, y);
 
     pixmap = QPixmap((x + translateX), (y + translateY));
-//     pixmap.fill(m_backgroundColor);
-    /// @todo OPTIMIZE: If this works w/o artifacts, make QColor alpha a member variable 
+
+    // Use a transparent background for each digit
     QColor alpha = m_backgroundColor;
-    alpha.setAlpha(0); // make transparent
+    alpha.setAlpha(0);
     pixmap.fill(alpha);
 
     QPainter painter (&pixmap);

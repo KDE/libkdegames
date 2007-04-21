@@ -513,6 +513,93 @@ public:
      */
     int letterSpacing();
 
+    /**
+     * @brief Sets the padding in pixels between the top of the digits and the top of the display.
+     * 
+     * The padding in pixels to use when scaleX == 1.  padding-top is scaled the same as
+     * the digits themselves.
+     *
+     * @param padding The padding in pixels between the top of the digits and the top of the display
+     * @returns returns nothing.
+     */
+    void setPaddingTop(const int padding);
+
+    /**
+     * @brief Returns the padding in pixels between the top of the digits and the top of the display.
+     *
+     * @returns Returns the padding in pixels between the top of the digits and the top of the display.
+     */
+    int paddingTop();
+
+    /**
+     * @brief Sets the padding in pixels between the right-most digit and the right edge of the display.
+     * 
+     * The padding in pixels to use when scaleX == 1.  padding-right is scaled the same as
+     * the digits themselves.
+     *
+     * @param padding The padding in pixels between the right-most digit and the right edge of the display
+     * @returns returns nothing.
+     */
+    void setPaddingRight(const int padding);
+
+    /**
+     * @brief Returns the padding in pixels between the right-most digit and the right edge of the display.
+     *
+     * @returns Returns the padding in pixels between the right-most digit and the right edge of the display
+     */
+    int paddingRight();
+
+    /**
+     * @brief Sets the padding in pixels between the bottom of the digits and the botom of the display.
+     * 
+     * The padding in pixels to use when scaleX == 1.  padding-bottom is scaled the same as
+     * the digits themselves.
+     *
+     * @param padding The padding in pixels between the bottom of the digits and the botom of the display
+     * @returns returns nothing.
+     */
+    void setPaddingBottom(const int padding);
+
+    /**
+     * @brief Returns the padding in pixels between the bottom of the digits and the botom of the display.
+     *
+     * @returns Returns the padding in pixels between the bottom of the digits and the botom of the display
+     */
+    int paddingBottom();
+
+    /**
+     * @brief Sets the padding in pixels between the leftmost digit and the left edge of the display.
+     * 
+     * The padding in pixels to use when scaleX == 1.  padding-left is scaled the same as
+     * the digits themselves.
+     *
+     * @param padding The padding in pixels between the leftmost digit and the left edge of the display
+     * @returns returns nothing.
+     */
+    void setPaddingLeft(const int padding);
+
+    /**
+     * @brief Returns the padding in pixels between the leftmost digit and the left edge of the display.
+     *
+     * @returns Returns the padding in pixels between the leftmost digit and the left edge of the display
+     */
+    int paddingLeft();
+
+    /**
+     * @brief Sets the padding in pixels.
+     * 
+     * The padding in pixels to use when scaleX == 1.  padding is scaled the same as
+     * the digits themselves.
+     *
+     * @param paddingTop The padding-top in pixels
+     * @param paddingRight The padding-right in pixels
+     * @param paddingBottom The padding-bottom in pixels
+     * @param paddingLeft The padding-left in pixels
+     * @returns returns nothing.
+     */
+    void setPadding(const int paddingTop, const int paddingRight,
+                    const int paddingBottom, const int paddingLeft);
+
 //
 // Properties
 //
