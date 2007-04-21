@@ -17,7 +17,12 @@ if(NOT WIN32)
   add_subdirectory( kggzgames )
 endif(NOT WIN32)
 
-include_directories( ${CMAKE_CURRENT_BINARY_DIR}/highscore ${CMAKE_CURRENT_SOURCE_DIR}/highscore/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/ ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs/ )
+include_directories(
+   ${CMAKE_CURRENT_SOURCE_DIR}/highscore
+   ${CMAKE_CURRENT_SOURCE_DIR}/kgame
+   ${CMAKE_CURRENT_SOURCE_DIR}/kgame/dialogs
+   ${CMAKE_CURRENT_BINARY_DIR}/highscore
+)
 
 ########### next target ###############
 
