@@ -27,6 +27,7 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kicon.h>
+#include <krecentfilesaction.h>
 
 
 KStandardGameAction::KStandardGameAction()

@@ -21,13 +21,10 @@
 #define __KCHATBASE_H__
 
 #include <QtGui/QFrame>
-#include <QtGui/QListWidget>
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QList>
-#include <QtCore/QPair>
 
 #include <kglobalsettings.h>
 #include <libkdegames_export.h>
+
 class QListWidgetItem;
 
 class KConfig;

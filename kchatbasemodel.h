@@ -21,8 +21,8 @@
 #define __KCHATBASEMODEL_H__
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QPair>
 
-#include <kglobalsettings.h>
 #include <libkdegames_export.h>
 
 class QListWidgetItem;
@@ -195,7 +195,7 @@ public:
    **/
   int maxItems() const;
 
-public slots:
+public Q_SLOTS:
   /**
    * Add a text in the listbox. See also signalSendMessage()
    *

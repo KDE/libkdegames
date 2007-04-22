@@ -34,6 +34,7 @@
 #include <QPixmap>
 #include <QList>
 #include <QApplication>
+#include <QListView>
 
 
 

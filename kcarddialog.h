@@ -19,10 +19,9 @@
 #ifndef __KCARDDIALOG_H_
 #define __KCARDDIALOG_H_
 
-#include <KDialog>
+#include <kdialog.h>
 
 #include <libkdegames_export.h>
-#include <kglobal.h>
 
 class QListWidgetItem;
 

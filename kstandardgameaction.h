@@ -21,14 +21,14 @@
 #ifndef KSTANDARDGAMEACTION_H
 #define KSTANDARDGAMEACTION_H
 
+#include <libkdegames_export.h>
+
 class KAction;
 class KToggleAction;
 class QObject;
 class KRecentFilesAction;
 class KSelectAction;
-#include <libkdegames_export.h>
-#include <krecentfilesaction.h>
-//-----------------------------------------------------------------------------
+
 /**
  * Replacement for KStandardAction for KDE Games
  *
