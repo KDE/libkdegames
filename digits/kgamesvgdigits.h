@@ -24,14 +24,12 @@
 #ifndef _KGAMESVGDIGITS_H_
 #define _KGAMESVGDIGITS_H_
 
-#include <QtCore/QHash>
-#include <QtCore/QList>
+#include <QtCore/QObject>
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
-#include <QtXml/QDomDocument>
 
-#include <KGameSvgDocument>
-#include <KSvgRenderer>
+#include <kgamesvgdocument.h>
+#include <ksvgrenderer.h>
 
 #include <libkdegames_export.h>
 
@@ -731,14 +729,14 @@ private:
      */
     KGameSvgDigitsPrivate * const d;
 
-signals:
+Q_SIGNALS:
 
     /**
     * Use this signal to change the content of the display
     */
     void signalDisplayDirty();
 
-private slots:
+private Q_SLOTS:
 
     void updateFlash();
 
