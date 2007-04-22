@@ -25,8 +25,8 @@
 #define _KPROGRES_H
 
 #include <QtGui/QFrame>
-#include <QtGui/QAbstractSlider>
 #include <libkdegames_export.h>
+
 /**
  * @short A progress indicator widget.
  *
@@ -138,21 +138,21 @@ public:
    *
    * @see setValue()
    */
-  int value() const { return slider->value(); }
+  int value() const;
 
   /**
    * Retrieve the minimum value
    *
    * @see setMinimum()
    */
-  int minimum() const { return slider->minimum(); }
+  int minimum() const;
 
   /**
    * Retrieve the maximum value
    *
    * @see setMaximum()
    */
-  int maximum() const { return slider->maximum(); }
+  int maximum() const;
 
   /**
    * Retrive the orientation of the progress bar.
@@ -254,21 +254,6 @@ private Q_SLOTS:
   void paletteChange();
 
 private:
-  QPixmap  *bar_pixmap;
-  bool      use_supplied_bar_color;
-  QColor    bar_color;
-  QColor    bar_text_color;
-  QColor    text_color;
-  QRect     fr;
-  BarStyle  bar_style;
-  bool      text_enabled;
-  QString   format_;
-  QAbstractSlider *slider;
-  void      initialize();
-  int       recalcValue(int);
-  void      drawText(QPainter *);
-  void      adjustStyle();
-
   class KGameProgressPrivate;
   KGameProgressPrivate *d;
 };
