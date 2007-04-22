@@ -59,7 +59,7 @@ public:
 	 **/
 	void connectionError(const QString& s = QString());
 
-public slots:
+public Q_SLOTS:
 	void slotError(int error, const QString& text);
 	
 	/**

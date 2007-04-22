@@ -274,7 +274,7 @@ protected:
 	 **/
 	void configureConfigWidgets();
 
-protected slots:
+protected Q_SLOTS:
 	/**
 	 * Called when the user clicks on Ok. Calls slotApply and
 	 * QDialog::accept()
