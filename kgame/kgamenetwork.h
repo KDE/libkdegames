@@ -1,6 +1,6 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001 Martin Heni (martin@heni-online.de)
+    Copyright (C) 2001 Martin Heni (kde at heni-online.de)
     Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
 
     This library is free software; you can redistribute it and/or
@@ -39,7 +39,6 @@ class KGameNetworkPrivate;
  * to bother with this object.
  *
  * @short The main KDE game object
- * @author Martin Heni <martin@heni-online.de>
  */
 class KDEGAMES_EXPORT KGameNetwork : public QObject
 {

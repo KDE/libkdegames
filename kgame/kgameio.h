@@ -1,6 +1,6 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001 Martin Heni (martin@heni-online.de)
+    Copyright (C) 2001 Martin Heni (kde at heni-online.de)
     Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
 
     This library is free software; you can redistribute it and/or
@@ -58,7 +58,7 @@ class KGameComputerIOPrivate;
  *  To achieve this you have to make all of your player inputs through a
  *  KGameIO. You will usually call KGameIO::sendInput to do so. 
  *
- *  @author Martin Heni <martin@heni-online.de>
+ *  @author Martin Heni <kde at heni-online.de>
  */
 class KDEGAMES_EXPORT KGameIO : public QObject
 {
@@ -183,7 +183,7 @@ private:
 /**
  *  The KGameKeyIO class. It is used to process keyboard input
  *  from a widget and create moves for the player it belongs to.
- *  @author Martin Heni <martin@heni-online.de>
+ *  @author Martin Heni <kde at heni-online.de>
  */
 class KDEGAMES_EXPORT KGameKeyIO : public KGameIO
 {
@@ -260,7 +260,7 @@ private:
 /**
  *  The KGameMouseIO class. It is used to process mouse input
  *  from a widget and create moves for the player it belongs to.
- *  @author Martin Heni <martin@heni-online.de>
+ *  @author Martin Heni <kde at heni-online.de>
  */
 class KDEGAMES_EXPORT KGameMouseIO : public KGameIO
 {
@@ -341,7 +341,6 @@ private:
  *  Its counterpart is the @ref KGameProcess class which needs
  *  to be used by the computer player. See its documentation
  *  for the definition of the computer player.
- *  @author Martin Heni <martin@heni-online.de>
  */
 class KDEGAMES_EXPORT KGameProcessIO : public KGameIO
 {

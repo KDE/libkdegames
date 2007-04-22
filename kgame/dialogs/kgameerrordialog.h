@@ -1,7 +1,7 @@
 /*
     This file is part of the KDE games library
     Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
-    Copyright (C) 2001 Martin Heni (martin@heni-online.de)
+    Copyright (C) 2001 Martin Heni (kde at heni-online.de)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
