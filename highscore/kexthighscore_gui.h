@@ -21,17 +21,17 @@
 #define KEXTHIGHSCORE_GUI_H
 
 #include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
-#include <QtGui/QTabWidget>
-#include <kurllabel.h>
+#include <QtGui/QLineEdit>
 #include <QtGui/QTreeWidget>
-#include <klineedit.h>
-#include <kpushbutton.h>
 #include <kpagedialog.h>
 #include <QtCore/QList>
 
 #include "kexthighscore.h"
 
+class QTabWidget;
+class KLineEdit;
+class KPushButton;
+class KUrlLabel;
 
 namespace KExtHighscore
 {

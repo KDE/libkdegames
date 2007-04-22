@@ -28,6 +28,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QHeaderView>
+#include <QtGui/QTabWidget>
 
 #include <kmessagebox.h>
 #include <kurllabel.h>
@@ -38,6 +39,8 @@
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
+#include <klineedit.h>
+#include <kpushbutton.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"

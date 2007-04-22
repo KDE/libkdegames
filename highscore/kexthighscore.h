@@ -24,7 +24,7 @@
 
 #include <kurl.h>
 #include <libkdegames_export.h>
-//Added by qt3to4:
+
 #include <QtCore/QVector>
 
 class QTabWidget;

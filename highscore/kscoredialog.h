@@ -26,11 +26,13 @@ this software.
 #ifndef KSCOREDIALOG_H
 #define KSCOREDIALOG_H
 
-#include <KDialog>
 #include <libkdegames_export.h>
 
 #include <QtCore/QMap>
 #include <QtCore/QFlags>
+
+#include <kdialog.h>
+
 /**
  * @short A simple high score implementation
  * 

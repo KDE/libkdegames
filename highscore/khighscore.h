@@ -24,7 +24,6 @@
 #define KHIGHSCORE_H
 
 #include <libkdegames_export.h>
-#include <KGlobal>
 
 #include <QtCore/QObject>
 
