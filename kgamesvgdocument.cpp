@@ -209,7 +209,7 @@ void KGameSvgDocument::load()
 
 void KGameSvgDocument::load(const QString& svgFilename)
 {
-    setSvgFileName(svgFilename);
+    setSvgFilename(svgFilename);
     load();
 }
 
@@ -300,12 +300,12 @@ void KGameSvgDocument::setCurrentNode(const QDomNode& node)
     d->setCurrentElement();
 }
 
-QString KGameSvgDocument::svgFileName() const
+QString KGameSvgDocument::svgFilename() const
 {
     return d->m_svgFilename;
 }
 
-void KGameSvgDocument::setSvgFileName(const QString& svgFilename)
+void KGameSvgDocument::setSvgFilename(const QString& svgFilename)
 {
     d->m_svgFilename = svgFilename;
 }

@@ -4,6 +4,7 @@
 #include "qtest_kde.h"
 #include <KGameSvgDigits>
 
+/// @brief A test class for KGameSvgDigits
 class tst_KGameSvgDigits : public QObject
 {
     Q_OBJECT

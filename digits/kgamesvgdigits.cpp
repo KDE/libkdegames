@@ -53,19 +53,19 @@ class KGameSvgDigitsPrivate
      * @brief Renders the digit.
      * 
      * @param node The node to render
-     * @param cacheID The id of the digit in the pixmap cache
+     * @param cacheId The id of the digit in the pixmap cache
      * @returns returns the pixmap
      */
-    QPixmap renderDigit(const QDomNode& node, const QString& cacheID);
+    QPixmap renderDigit(const QDomNode& node, const QString& cacheId);
 
     /**
      * @brief Renders the digit.
      * 
      * @param element The node to render
-     * @param cacheID The id of the digit in the pixmap cache
+     * @param cacheId The id of the digit in the pixmap cache
      * @returns returns nothing.
      */
-    QPixmap renderSegmentedDigit(const QString& element, const QString& cacheID);
+    QPixmap renderSegmentedDigit(const QString& element, const QString& cacheId);
 
     /**
      * @brief Swaps colors between normal foreground/background colors and highlight foreground/background colors
@@ -85,7 +85,7 @@ class KGameSvgDigitsPrivate
     /**
      * @brief Returns the name of the digit style
      *
-     * @param option A digitStyle enum value
+     * @param style A digitStyle enum value
      * @returns returns the name of the digit style
      */
     QString lookupDigitStyleName(const int style);
@@ -93,9 +93,10 @@ class KGameSvgDigitsPrivate
     /**
      * @brief Applies the digit bitmask
      *
+     * @param nodes A list of segment nodes to turn on or off
      * @returns returns nothing.
      */
-    void applyBitmask(QDomNodeList nodes);
+    void applyBitmask(const QDomNodeList& nodes);
 
     /**
      * @brief Applies an RGBA color to a node in the svg DOM tree
@@ -114,6 +115,9 @@ class KGameSvgDigitsPrivate
 
     /**
      * @brief Renders an individual style digit
+     * 
+     * @param element The svg element to process
+     * @param cacheId The id of the digit in the pixmap cache
      * @returns returns nothing.
      */
     QPixmap renderIndividualDigit(const QString& element, const QString& cacheId);
@@ -133,7 +137,7 @@ class KGameSvgDigitsPrivate
      * @param string The string binary representation, e.g. "01001111", to convert to a bitmask
      * @returns returns the bitmask
      */
-    ulong toBitmask(QString string);
+    ulong toBitmask(const QString& string);
 
     /**
      * @brief DOM of m_svgFile
@@ -319,7 +323,7 @@ class KGameSvgDigitsPrivate
 KGameSvgDigits::KGameSvgDigits(const QString& themeFile) : d(new KGameSvgDigitsPrivate)
 {
     // Set default colors
-    /// @todo get feedback from #kdegames@freenode about good default colors
+    /// @todo get feedback from other devs about good default colors
     setForegroundColor(QColor::fromRgba(0xffffaa00));
     setBackgroundColor(QColor::fromRgba(0xff323232));
     setForegroundHighlightColor(QColor::fromRgba(0xffff0000));
@@ -337,7 +341,7 @@ KGameSvgDigits::KGameSvgDigits(const QString& themeFile) : d(new KGameSvgDigitsP
 KGameSvgDigits::KGameSvgDigits() : d(new KGameSvgDigitsPrivate)
 {
     // Set default colors
-    /// @todo get feedback from #kdegames@freenode about good default colors
+    /// @todo get feedback from other devs about good default colors
     setForegroundColor(QColor::fromRgba(0xffffaa00));
     setBackgroundColor(QColor::fromRgba(0xff323232));
     setForegroundHighlightColor(QColor::fromRgba(0xffff0000));
@@ -969,7 +973,7 @@ void KGameSvgDigits::updateFlash()
 // KGameSvgDigitsPrivate definition
 //
 
-ulong KGameSvgDigitsPrivate::toBitmask(QString string)
+ulong KGameSvgDigitsPrivate::toBitmask(const QString& string)
 {
     ulong tmpMask = 0;
 
@@ -1021,7 +1025,7 @@ QString KGameSvgDigitsPrivate::lookupDigitStyleName(const int style)
     }
 }
 
-QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& cacheID)
+QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& cacheId)
 {
     QByteArray svg;
     QPixmap pixmap;
@@ -1059,8 +1063,8 @@ QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& 
 
     if (m_cacheOption != KGameSvgDigits::CacheNone)
     {
-        m_digitsPixmapCache.insert(cacheID, pixmap);
-        kDebug () << "caching digit: " << cacheID << endl;
+        m_digitsPixmapCache.insert(cacheId, pixmap);
+        kDebug () << "caching digit: " << cacheId << endl;
     }
 
     return pixmap;
@@ -1202,7 +1206,7 @@ void KGameSvgDigitsPrivate::applyColor(QDomNode node, QColor color)
     m_svgDOM.setStyleProperty("fill-opacity", svgFillOpacity);
 }
 
-void KGameSvgDigitsPrivate::applyBitmask(QDomNodeList nodes)
+void KGameSvgDigitsPrivate::applyBitmask(const QDomNodeList& nodes)
 {
     bool ok;
     int hex;

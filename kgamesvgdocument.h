@@ -53,17 +53,15 @@ class KGameSvgDocumentPrivate;
  * To read an SVG file into DOM:
  * @code
  * KGameSvgDocument svgDom;
- * KGameSvgDocument *svgDom_ptr;
  * svgDom.load("/path/to/svgFile.svg");
- * svgDom_ptr = &svgDom;
  * @endcode
  *
  * To find a node with a specific value in its id attribute, for example where id="playerOneGamepiece":
  * @code
- * QDomNode playerOneGamepiece = svgDom_ptr->elementById("playerOneGamepiece");
+ * QDomNode playerOneGamepiece = svgDom.elementById("playerOneGamepiece");
  *
  * // This works too
- * QDomNode playerOneGamepiece = svgDom_ptr->elementByUniqueAttributeValue("id", "playerOneGamepiece");
+ * QDomNode playerOneGamepiece = svgDom.elementByUniqueAttributeValue("id", "playerOneGamepiece");
  * @endcode
  *
  * Most methods operate on the last node found by @c elementById() or @c elementByUniqueAttributeValue().
@@ -71,20 +69,20 @@ class KGameSvgDocumentPrivate;
  * the last node (or you found a bug).  Try calling @c setCurrentNode() with the node you are
  * wanting to modify to see if this is the issue.  Consider the following code for example:
  * @code
- * QDomNode playerOneGamepiece = svgDom_ptr->elementById("playerOneGamepiece");
- * QDomNode playerTwoGamepiece = svgDom_ptr->elementById("playerTwoGamepiece");
+ * QDomNode playerOneGamepiece = svgDom.elementById("playerOneGamepiece");
+ * QDomNode playerTwoGamepiece = svgDom.elementById("playerTwoGamepiece");
  *
  * // Set player one's game piece to have a white fill
- * svgDom_ptr->setStyleProperty("fill", "#ffffff");  // INCORRECT: playerTwoGamepiece is the last node, not playerOneGamepiece
+ * svgDom.setStyleProperty("fill", "#ffffff");  // INCORRECT: playerTwoGamepiece is the last node, not playerOneGamepiece
  *
- * svgDom_ptr->setCurrentNode(playerOneGamepiece);   // CORRECT: Set current node to the node we want,
- * svgDom_ptr->setStyleProperty("fill", "#ffffff");  // then we modify the node
+ * svgDom.setCurrentNode(playerOneGamepiece);   // CORRECT: Set current node to the node we want,
+ * svgDom.setStyleProperty("fill", "#ffffff");  // then we modify the node
  * @endcode
  *
  * To skew the @c currentNode():
  * @code
  * // Skew the horizontal axis 7.5 degrees
- * svgDom_ptr->skew(-7.5, 0, KGameSvgDocument::ReplaceCurrentMatrix);
+ * svgDom.skew(-7.5, 0, KGameSvgDocument::ReplaceCurrentMatrix);
  * @endcode
  * 
  * @warning Be careful when using the KGameSvgDocument::ApplyToCurrentMatrix flag. It multiplies the matrices,
@@ -94,14 +92,14 @@ class KGameSvgDocumentPrivate;
  * To output @c currentNode() to be rendered:
  * @code
  * KSvgRenderer svgRenderer;
- * QByteArray svg = svgDom_ptr->nodeToByteArray();
+ * QByteArray svg = svgDom.nodeToByteArray();
  * svgRenderer.load(svg);
  * @endcode
  *
  * To output the whole document to be rendered (See QDomDocument::toByteArray()):
  * @code
  * KSvgRenderer svgRenderer;
- * QByteArray svg = svgDom_ptr->toByteArray();
+ * QByteArray svg = svgDom.toByteArray();
  * svgRenderer.load(svg);
  * @endcode
  * 
@@ -116,21 +114,27 @@ class KDEGAMES_EXPORT KGameSvgDocument : public QDomDocument
 {
 public:
     /**
-     * Constructor
+     * @brief Constructor
      */
     explicit KGameSvgDocument();
 
+    /**
+     * @brief Copy Constructor
+     */
     KGameSvgDocument(const KGameSvgDocument &doc);
 
     /**
-     * Destructor
+     * @brief Destructor
      */
     virtual ~KGameSvgDocument();
 
+    /**
+     * @brief Assignment Operator
+     */
     KGameSvgDocument& operator=(const KGameSvgDocument &doc);
 
     /**
-     * Options for applying (multiplying) or replacing the current matrix
+     * @brief Options for applying (multiplying) or replacing the current matrix
      */ 
     enum MatrixOption {
         /**
@@ -196,7 +200,7 @@ public:
     QDomNode elementById(const QString& attributeValue);
 
     /**
-     * @brief Reads the SVG file svgFileName() into DOM.
+     * @brief Reads the SVG file svgFilename() into DOM.
      * @returns nothing
      */
     void load();
@@ -272,7 +276,9 @@ public:
 
     /**
      * @brief Returns the last node found by elementById, or null if node not found
+     * 
      * @returns The current node
+     * @see setCurrentNode()
      */
     QDomNode currentNode() const;
 
@@ -281,25 +287,30 @@ public:
      *
      * @param node The node to set currentNode to.
      * @returns nothing
+     * @see currentNode()
      */
     void setCurrentNode(const QDomNode& node);
 
     /**
      * @brief Returns the name of the SVG file this DOM represents.
+     * 
      * @returns The current filename.
+     * @see setSvgFilename()
      */
-    QString svgFileName() const;
+    QString svgFilename() const;
 
     /**
      * @brief Sets the current SVG filename.
      *
      * @param svgFilename The filename of the SVG file to open.
      * @returns nothing
+     * @see svgFilename()
      */
-    void setSvgFileName(const QString& svgFilename);
+    void setSvgFilename(const QString& svgFilename);
 
     /**
      * @brief Returns the value of the style property given for the current node.
+     * 
      * @note Internally, we create a hash with @c styleProperties, then return the value
      *     of the @c propertyName property.  As such, if you need the values of multiple
      *     properties, it will be more efficient to call @c styleProperties()
@@ -309,11 +320,13 @@ public:
      *
      * @param propertyName the name of the property to return
      * @returns The value style property given, or null if no such property for this node.
+     * @see setStyleProperty(), styleProperties(), setStyleProperties()
      */
     QString styleProperty(const QString& propertyName) const;
 
     /**
      * @brief Sets the value of the style property given for the current node.
+     * 
      * @note Internally, we create a hash with @c styleProperties, then update the
      *  @p propertyName to @p propertyValue, before finally applying the hash to
      *      DOM via @c setStyleProperties().  Because of this, if you need to set multiple
@@ -323,11 +336,13 @@ public:
      * @param propertyName The name of the property to set.
      * @param propertyValue The value of the property to set.
      * @returns nothing
+     * @see styleProperty(), styleProperties(), setStyleProperties()
      */
     void setStyleProperty(const QString& propertyName, const QString& propertyValue);
 
     /**
      * @brief Returns the current node and it's children as a new xml svg document.
+     * 
      * @returns The xml for the new svg document
      */
     QString nodeToSvg() const;
@@ -349,7 +364,7 @@ public:
      * want to use styleProperty() or styleProperties().
      * 
      * @returns The style atttibute.
-     * @see styleProperty() stylyProperties()
+     * @see styleProperty() styleProperties()
      */
     QString style() const;
 
@@ -362,7 +377,7 @@ public:
      * @param styleAttribute The style attribute to apply.
      * @returns nothing
      * 
-     * @see setStyleProperty() setStylyProperties()
+     * @see setStyleProperty() setStyleProperties()
      */
     void setStyle(const QString& styleAttribute);
 
@@ -404,6 +419,7 @@ public:
     /**
      * @brief Returns the transform attribute of the current node.
      * @returns The transform atttibute.
+     * @see setTransform(), transformMatrix(), setTransformMatrix()
      */
     QString transform() const;
 
@@ -415,13 +431,14 @@ public:
      *
      * @param transformAttribute The transform attribute to apply.
      * @returns nothing
-     * @see setTransformMatrix()
+     * @see transform(), transformMatrix(), setTransformMatrix()
      */
     void setTransform(const QString& transformAttribute);
 
     /**
      * @brief Returns a hash of the style properties of the current node.
      * @returns The style properties.
+     * @see setStyleProperties()
      */
     QHash<QString, QString> styleProperties() const;
 
@@ -435,12 +452,15 @@ public:
      * @param _styleProperties The hash of style properties to apply.
      * @param options Apply the hash so the properties are in the same order as Inkscape writes them.
      * @returns nothing
+     * @see styleProperties()
      */
     void setStyleProperties(const QHash<QString, QString>& _styleProperties, const StylePropertySortOptions& options = Unsorted);
 
     /**
      * @brief Returns the transform attribute of the current node as a matrix.
+     * 
      * @returns The matrix for the transform atttibute.
+     * @see setTransformMatrix()
      */
     QMatrix transformMatrix() const;
 
@@ -454,6 +474,7 @@ public:
      *     Normally we want to apply the existing matrix. If we apply the matrix,
      *     we potentially end up squaring with each call, e.g. x^2. 
      * @returns nothing
+     * @see transformMatrix()
      */
     void setTransformMatrix(QMatrix& matrix, const MatrixOptions& options = ApplyToCurrentMatrix);
 
