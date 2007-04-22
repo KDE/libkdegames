@@ -33,7 +33,7 @@
 
 #include <QTreeWidget>
 #include <QLayout>
-#include <QString>
+
 #include <QLabel>
 #include <QDateTime>
 #include <QVBoxLayout>

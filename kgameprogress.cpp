@@ -24,7 +24,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QPixmap>
-#include <QString>
+
 #include <QRegExp>
 #include <QStyle>
 #include <QFrame>
