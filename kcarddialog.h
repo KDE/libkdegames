@@ -84,7 +84,6 @@ class KCardDialogPrivate;
  * to scale your pixmap.
  *
  * @author Martin Heni <martin@heni-online.de>
- * @version $Id$
  */
 class KDEGAMES_EXPORT KCardDialog : public KDialog
 {

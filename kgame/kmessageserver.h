@@ -168,7 +168,6 @@ class KMessageServerPrivate;
 
 
   @author Andreas Beckermann <b_mann@gmx.de>, Burkhard Lehner <Burkhard.Lehner@gmx.de>
-  @version $Id$
 */
 class KMessageServer : public QObject
 {

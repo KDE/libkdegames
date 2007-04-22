@@ -17,9 +17,7 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-/*
-    $Id$
-*/
+
 #ifndef __KGAMENETWORK_H_
 #define __KGAMENETWORK_H_
 
@@ -42,7 +40,6 @@ class KGameNetworkPrivate;
  *
  * @short The main KDE game object
  * @author Martin Heni <martin@heni-online.de>
- * @version $Id$
  */
 class KDEGAMES_EXPORT KGameNetwork : public QObject
 {

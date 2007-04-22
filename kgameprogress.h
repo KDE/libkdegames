@@ -22,7 +22,7 @@
 *****************************************************************************/
 
 #ifndef _KPROGRES_H
-#define _KPROGRES_H "$Id$"
+#define _KPROGRES_H
 
 #include <QtGui/QFrame>
 #include <QtGui/QAbstractSlider>
@@ -45,7 +45,6 @@
  * and connect the signal to it.
  *
  * @author Martynas Kunigelis
- * @version $Id$
  */
 class KDEGAMES_EXPORT KGameProgress : public QFrame
 {

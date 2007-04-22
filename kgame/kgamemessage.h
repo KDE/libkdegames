@@ -17,9 +17,7 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-/*
-    $Id$
-*/
+
 #ifndef __KGAMEMSG_H_
 #define __KGAMEMSG_H_
 
