@@ -1,6 +1,5 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2000 Martin Heni (martin@heni-online.de)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -83,7 +82,6 @@ class KCardDialogPrivate;
  * \endcode
  * to scale your pixmap.
  *
- * @author Martin Heni <martin@heni-online.de>
  */
 class KDEGAMES_EXPORT KCardDialog : public KDialog
 {
@@ -96,7 +94,7 @@ public:
    *  @li @p NoDeck - The deck (back) selection is not shown
    *  @li @p NoCards - The cards (front) selection is not shown
    */
-   enum CardFlags { Both=0, NoDeck=0x01, NoCards=0x02 };
+   enum CardFlags { Both=0, NoDeck=0x01, NoCards=0x02, SVGCards=0x04 };
 
    /**
    * Constructs a card deck selection dialog.

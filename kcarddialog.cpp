@@ -1,6 +1,5 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2000 Martin Heni (martin@heni-online.de)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -109,6 +108,7 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
                              CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir,
 			     double* pScale, KConfig* pConf)
 {
+    kDebug() << "PFlags=" << pFlags<<endl;
     KCardDialog dlg(pParent, pFlags);
 
     dlg.setDeck(pDeck);
@@ -455,7 +455,15 @@ void KCardDialog::setupDialog(bool showResizeBox)
 
 void KCardDialog::insertCardIcons()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop",
+    QStringList svg;
+    // Add SVG card sets
+    kDebug() << "CFlags = " << d->cFlags<<endl;
+    if (d->cFlags & SVGCards)
+    {
+      svg = KGlobal::dirs()->findAllResources("cards", "svg*/index.desktop",
+                                                           KStandardDirs::NoDuplicates);
+    }
+    QStringList list = svg+KGlobal::dirs()->findAllResources("cards", "card*/index.desktop",
                                                          KStandardDirs::NoDuplicates);
     // kDebug(11000) << "insert " << list.count() << endl;
     if (list.isEmpty())
@@ -553,6 +561,7 @@ KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
     KCardDialog::init();
 
     d = new KCardDialogPrivate;
+    kDebug() << "mFlags=" << mFlags<<endl;
     d->cFlags = mFlags;
 }
 
