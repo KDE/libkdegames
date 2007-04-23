@@ -1,7 +1,5 @@
 [KDE Backdeck]
 Name=Spacy Classic (SVG)
-Name[sv]=Klassisk rymd
-Name[x-test]=xxSpacy Classicxx
 Preview=11.png
 SVG=classic.svg
 BackSize=71.1155,95.4103
