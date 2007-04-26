@@ -108,7 +108,6 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
                              CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir,
 			     double* pScale, KConfig* pConf)
 {
-    kDebug() << "PFlags=" << pFlags<<endl;
     KCardDialog dlg(pParent, pFlags);
 
     dlg.setDeck(pDeck);
@@ -457,7 +456,6 @@ void KCardDialog::insertCardIcons()
 {
     QStringList svg;
     // Add SVG card sets
-    kDebug() << "CFlags = " << d->cFlags<<endl;
     if (d->cFlags & SVGCards)
     {
       svg = KGlobal::dirs()->findAllResources("cards", "svg*/index.desktop",
@@ -561,7 +559,6 @@ KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
     KCardDialog::init();
 
     d = new KCardDialogPrivate;
-    kDebug() << "mFlags=" << mFlags<<endl;
     d->cFlags = mFlags;
 }
 
