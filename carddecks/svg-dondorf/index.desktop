@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Dondorf (SVG)
+Name[x-test]=xxDondorf (SVG)xx
 Preview=11.png
 SVG=dondorf.svgz
 BackSize=63.6686,99.8159

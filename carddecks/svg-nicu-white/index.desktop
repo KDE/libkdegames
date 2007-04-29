@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=White NICU (SVG)
+Name[x-test]=xxWhite NICU (SVG)xx
 Preview=11.png
 SVG=white.svgz
 BackSize=139,189

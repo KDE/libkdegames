@@ -1,4 +1,6 @@
 [KDE Cards]
 Name=Classic (SVG)
+Name[x-test]=xxClassic (SVG)xx
 SVG=deck27_classic.svgz
 Comment=SVG Classic
+Comment[x-test]=xxSVG Classicxx

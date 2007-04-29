@@ -2,8 +2,10 @@
 Version=0.1.0
 Encoding=UTF-8
 Name=Fourteen Segment Sample
+Name[x-test]=xxFourteen Segment Samplexx
 Type=FourteenSegmentDigit
 Comment=This file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svg
+Comment[x-test]=xxThis file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svgxx
 
 [Settings]
 foregroundColor=0xffffaa00

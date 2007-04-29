@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Nicu Ornamental (SVG)
+Name[x-test]=xxNicu Ornamental (SVG)xx
 Preview=11.png
 SVG=ornamental.svgz
 BackSize=139,189

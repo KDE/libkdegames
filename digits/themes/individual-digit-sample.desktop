@@ -2,8 +2,10 @@
 Version=0.1.0
 Encoding=UTF-8
 Name=Individual Digit Sample
+Name[x-test]=xxIndividual Digit Samplexx
 Type=IndividualDigit
 Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svg
+Comment[x-test]=xxThis file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svgxx
 
 [Settings]
 foregroundColor=0xffffaa00

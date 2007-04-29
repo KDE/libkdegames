@@ -1,4 +1,6 @@
 [KDE Cards]
 Name=Dondorf (SVG)
+Name[x-test]=xxDondorf (SVG)xx
 SVG=deck25_dondorf.svgz
 Comment=SVG Dondorf
+Comment[x-test]=xxSVG Dondorfxx

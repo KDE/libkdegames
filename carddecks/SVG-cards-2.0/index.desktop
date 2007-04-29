@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Cards (SVG, BROKEN)
+Name[x-test]=xxCards (SVG, BROKEN)xx
 Preview=11.png
 SVG=svg-cards-2.0.svgz
 BackSize=166.575,242.14
