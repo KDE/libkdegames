@@ -39,16 +39,16 @@ public:
         mDefaultPolicy(KGamePropertyBase::PolicyLocal), mDefaultUserspace(true),
         mIndirectEmit(0)
   {
-    kDebug(11001) << k_funcinfo << ": this=" << q << endl;
+    //kDebug(11001) << k_funcinfo << ": this=" << q << endl;
   }
 
   KGamePropertyHandler *q;
-	QMap<int, QString> mNameMap;
+        QMap<int, QString> mNameMap;
   QMultiHash<int, KGamePropertyBase*> mIdDict;
-	int mUniqueId;
-	int mId;
-	KGamePropertyBase::PropertyPolicy mDefaultPolicy;
-	bool mDefaultUserspace;
+        int mUniqueId;
+        int mId;
+        KGamePropertyBase::PropertyPolicy mDefaultPolicy;
+        bool mDefaultUserspace;
   int mIndirectEmit;
   QQueue<KGamePropertyBase*> mSignalQueue;
 };
@@ -66,8 +66,10 @@ KGamePropertyHandler::KGamePropertyHandler(QObject* parent)
 
 KGamePropertyHandler::~KGamePropertyHandler()
 {
+ //kDebug(11001) << k_funcinfo << endl;
  clear();
  delete d;
+ //kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 int KGamePropertyHandler::id() const
@@ -84,12 +86,10 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
 {
  setId(id); 
  if (receiver && sendf) {
-	kDebug(11001) << "Connecting SLOT " << sendf << endl;
-	connect(this, SIGNAL(signalSendMessage(int, QDataStream &, bool*)), receiver, sendf);
+        connect(this, SIGNAL(signalSendMessage(int, QDataStream &, bool*)), receiver, sendf);
  }
  if (receiver && emitf) {
-	kDebug(11001) << "Connecting SLOT " << emitf << endl;
-	connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase *)), receiver, emitf);
+        connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase *)), receiver, emitf);
  }
 }
 
@@ -97,66 +97,67 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSe
 {
 // kDebug(11001) << k_funcinfo << ": id=" << id << " mId=" << d->mId << endl;
  if (id != d->mId) {
- 	return false; // Is the message meant for us?
+        return false; // Is the message meant for us?
  }
  KGamePropertyBase* p;
  int propertyId;
  KGameMessage::extractPropertyHeader(stream, propertyId);
 // kDebug(11001) << k_funcinfo << ": Got property " << propertyId << endl;
  if (propertyId==KGamePropertyBase::IdCommand) {
-	int cmd;
-	KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
+        int cmd;
+        KGameMessage::extractPropertyCommand(stream, propertyId, cmd);
 //kDebug(11001) << k_funcinfo << ": Got COMMAND for id= "<<propertyId <<endl;
   QMultiHash<int, KGamePropertyBase*>::iterator it = d->mIdDict.find(propertyId);
   if (it != d->mIdDict.end()) {
     p = *it;
-		if (!isSender || p->policy()==KGamePropertyBase::PolicyClean) {
-			p->command(stream, cmd, isSender);
-		}
-	} else {
-		kError(11001) << k_funcinfo << ": (cmd): property " << propertyId << " not found" << endl;
-	}
-	return true;
+                if (!isSender || p->policy()==KGamePropertyBase::PolicyClean) {
+                        p->command(stream, cmd, isSender);
+                }
+        } else {
+                kError(11001) << k_funcinfo << ": (cmd): property " << propertyId << " not found" << endl;
+        }
+        return true;
  }
  QMultiHash<int, KGamePropertyBase*>::iterator it = d->mIdDict.find(propertyId);
  if (it != d->mIdDict.end()) {
   p = *it;
-	//kDebug(11001) << k_funcinfo << ": Loading " << propertyId << endl;
-	if (!isSender || p->policy()==KGamePropertyBase::PolicyClean) {
-		p->load(stream);
-	}
+        //kDebug(11001) << k_funcinfo << ": Loading " << propertyId << endl;
+        if (!isSender || p->policy()==KGamePropertyBase::PolicyClean) {
+                p->load(stream);
+        }
  } else {
-	kError(11001) << k_funcinfo << ": property " << propertyId << " not found" << endl;
+        kError(11001) << k_funcinfo << ": property " << propertyId << " not found" << endl;
  }
  return true;
 }
 
 bool KGamePropertyHandler::removeProperty(KGamePropertyBase* data)
 {
- if (!data) {
-	return false;
- }
- d->mNameMap.remove(data->id());
- return d->mIdDict.remove(data->id());
+  if (!data) {
+         return false;
+  }
+  
+  d->mNameMap.remove(data->id());
+  return d->mIdDict.remove(data->id());
 }
 
 bool KGamePropertyHandler::addProperty(KGamePropertyBase* data, const QString& name)
 {
  //kDebug(11001) << k_funcinfo << ": " << data->id() << endl;
  if ( d->mIdDict.find(data->id()) != d->mIdDict.end() ) {
-	// this id already exists
-	kError(11001) << "  -> cannot add property " << data->id() << endl;
-	return false;
+        // this id already exists
+        kError(11001) << "  -> cannot add property " << data->id() << endl;
+        return false;
  } else {
-	d->mIdDict.insert(data->id(), data);
+        d->mIdDict.insert(data->id(), data);
   // if here is a check for "is_debug" or so we can add the strings only in debug mode
   // and save memory!!
-	if (!name.isNull()) {
-		d->mNameMap[data->id()] = name;
-		//kDebug(11001) << k_funcinfo << ": nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
-		//kDebug(11001) << "Typeid=" << typeid(data).name() << endl;
-  	//kDebug(11001) << "Typeid call=" << data->typeinfo()->name() << endl;
-	}
+        if (!name.isNull()) {
+                d->mNameMap[data->id()] = name;
+                //kDebug(11001) << k_funcinfo << ": nid="<< (data->id()) << " inserted in Map name=" << d->mNameMap[data->id()] <<endl;
+                //kDebug(11001) << "Typeid=" << typeid(data).name() << endl;
+        //kDebug(11001) << "Typeid call=" << data->typeinfo()->name() << endl;
+        }
  }
  return true;
 }
@@ -165,14 +166,14 @@ QString KGamePropertyHandler::propertyName(int id) const
 {
  QString s;
  if (d->mIdDict.find(id) != d->mIdDict.end()) {
-	if (d->mNameMap.contains(id)) {
-		s = i18n("%1 (%2)", d->mNameMap[id], id);
-	} else {
-		s = i18n("Unnamed - ID: %1", id);
-	}
+        if (d->mNameMap.contains(id)) {
+                s = i18n("%1 (%2)", d->mNameMap[id], id);
+        } else {
+                s = i18n("Unnamed - ID: %1", id);
+        }
  } else {
-	// Should _never_ happen
-	s = i18n("%1 unregistered", id);
+        // Should _never_ happen
+        s = i18n("%1 unregistered", id);
  }
  return s;
 }
@@ -185,14 +186,14 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  stream >> count;
  kDebug(11001) << k_funcinfo << ": " << count << " KGameProperty objects " << endl;
  for (i = 0; i < count; i++) {
-	processMessage(stream, id(),false);
+        processMessage(stream, id(),false);
  }
  qint16 cookie;
  stream >> cookie;
  if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
-	kDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
+        kDebug(11001) << "   KGamePropertyHandler loaded propertly"<<endl;
  } else {
-	kError(11001) << "KGamePropertyHandler loading error. probably format error"<<endl;
+        kError(11001) << "KGamePropertyHandler loading error. probably format error"<<endl;
  }
  // Allow direct emmiting (if no other lock still holds)
  unlockDirectEmit();
@@ -206,11 +207,11 @@ bool KGamePropertyHandler::save(QDataStream &stream)
  QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
  while (it.hasNext()) {
 it.next();
-	KGamePropertyBase *base=it.value();
-	if (base) {
-		KGameMessage::createPropertyHeader(stream, base->id());
-		base->save(stream);
-	}
+        KGamePropertyBase *base=it.value();
+        if (base) {
+                KGameMessage::createPropertyHeader(stream, base->id());
+                base->save(stream);
+        }
  }
  stream << (qint16)KPLAYERHANDLER_LOAD_COOKIE;
  return true;
@@ -229,9 +230,9 @@ void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p,bool us
  QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
  while (it.hasNext()) {
 it.next();
-	if (!userspace || it.value()->id()>=KGamePropertyBase::IdUser) {
-		it.value()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
-	}
+        if (!userspace || it.value()->id()>=KGamePropertyBase::IdUser) {
+                it.value()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
+        }
  }
 }
 
@@ -240,7 +241,7 @@ void KGamePropertyHandler::unlockProperties()
  QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
  while (it.hasNext()) {
 it.next();
-	it.value()->unlock();
+        it.value()->unlock();
  }
 }
 
@@ -249,7 +250,7 @@ void KGamePropertyHandler::lockProperties()
  QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
  while (it.hasNext()) {
 it.next();
-	it.value()->lock();
+        it.value()->lock();
  }
 }
 
@@ -263,9 +264,9 @@ void KGamePropertyHandler::flush()
  QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
  while (it.hasNext()) {
 it.next();
-	if (it.value()->isDirty()) {
-		it.value()->sendProperty();
-	}
+        if (it.value()->isDirty()) {
+                it.value()->sendProperty();
+        }
  }
 }
 
@@ -327,18 +328,21 @@ KGamePropertyBase* KGamePropertyHandler::find(int id)
 
 void KGamePropertyHandler::clear()
 {
- kDebug(11001) << k_funcinfo << id() << endl;
- QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
- while (!(d->mIdDict.empty())) {
-	it.toFront();
-	KGamePropertyBase* p = it.value();
-	p->unregisterData();
-	if (d->mIdDict.find(p->id()) != d->mIdDict.end()) {
-		// shouldn't happen - but if mOwner in KGamePropertyBase is NULL
-		// this might be possible
-		removeProperty(p); 
-	}
- }
+  // Note: Hash iterator method 'toFront()' crashes when applied to first item.
+  // Therefore we get the keys as list first.
+  QList<int> list = d->mIdDict.keys();
+  for (int i = 0; i < list.size(); ++i) 
+  {
+    int key = list.at(i);
+    KGamePropertyBase* p = d->mIdDict.value(key);
+    p->unregisterData();
+    if (d->mIdDict.find(p->id()) != d->mIdDict.end())
+    {
+      // shouldn't happen - but if mOwner in KGamePropertyBase is NULL
+      // this might be possible
+      removeProperty(p); 
+    }
+  }
 }
 
 QMultiHash<int, KGamePropertyBase*>& KGamePropertyHandler::dict() const
@@ -351,30 +355,30 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
  if (!prop) {
          return i18n("NULL pointer");
  }
-	   
+           
  int id = prop->id();
  QString name = propertyName(id);
  QString value;
 
  const type_info* t = prop->typeinfo();
  if (*t == typeid(int)) {
-	value = QString::number(((KGamePropertyInt*)prop)->value());
+        value = QString::number(((KGamePropertyInt*)prop)->value());
  } else if (*t == typeid(unsigned int)) {
-	value = QString::number(((KGamePropertyUInt *)prop)->value());
+        value = QString::number(((KGamePropertyUInt *)prop)->value());
  } else if (*t == typeid(long int)) {
-	value = QString::number(((KGameProperty<qint64> *)prop)->value()); 
+        value = QString::number(((KGameProperty<qint64> *)prop)->value()); 
  } else if (*t == typeid(unsigned long int)) {
-	value = QString::number(((KGameProperty<quint64> *)prop)->value());
+        value = QString::number(((KGameProperty<quint64> *)prop)->value());
  } else if (*t == typeid(QString)) { 
-	value = ((KGamePropertyQString*)prop)->value();
+        value = ((KGamePropertyQString*)prop)->value();
  } else if (*t == typeid(qint8)) { 
-	value = ((KGamePropertyBool*)prop)->value() ?  i18n("True") : i18n("False");
+        value = ((KGamePropertyBool*)prop)->value() ?  i18n("True") : i18n("False");
  } else {
-	emit signalRequestValue(prop, value);
+        emit signalRequestValue(prop, value);
  }
-		   
+                   
  if (value.isNull()) {
-	value = i18n("Unknown");
+        value = i18n("Unknown");
  }
  return value;
 }
@@ -388,13 +392,13 @@ void KGamePropertyHandler::Debug()
  QHashIterator<int, KGamePropertyBase*> it(d->mIdDict);
  while (it.hasNext()) {
 it.next();
-	KGamePropertyBase *p=it.value();
-	kDebug(11001) << "  "<< p->id() << ": p=" << p->policy() 
-			<< " l="<<p->isLocked()
-			<< " e="<<p->isEmittingSignal() 
-			<< " o=" << p->isOptimized() 
-			<< " d="<<p->isDirty() 
-			<< endl;
+        KGamePropertyBase *p=it.value();
+        kDebug(11001) << "  "<< p->id() << ": p=" << p->policy() 
+                        << " l="<<p->isLocked()
+                        << " e="<<p->isEmittingSignal() 
+                        << " o=" << p->isOptimized() 
+                        << " d="<<p->isDirty() 
+                        << endl;
  }
  kDebug(11001) << "-----------------------------------------------------------" << endl;
 }

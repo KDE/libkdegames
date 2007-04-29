@@ -119,7 +119,7 @@ KPlayer::~KPlayer()
 // himself
   d->mProperties.clear();
   delete d;
-//  kDebug(11001) << k_funcinfo << " done" << endl;
+  kDebug(11001) << k_funcinfo << " done" << endl;
 }
 
 int KPlayer::rtti() const
