@@ -4,8 +4,8 @@
 #include <QDataStream>
 
 #include "qtest_kde.h"
-#include "../kgame/kgame.h"
-#include "../kgame/kgamepropertyhandler.h"
+#include "kgame/kgame.h"
+#include "kgame/kgamepropertyhandler.h"
 
 /// @brief A test class for KGameSvgDigits
 class tst_KGamePropertyTest : public QObject
