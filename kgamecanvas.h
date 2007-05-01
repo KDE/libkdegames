@@ -534,9 +534,6 @@ public:
     /** Sets the positioning style */
     void setPositioning(HPos hp, VPos vp);
 
-    /** Sets the size */
-    void setSize(QSize size);
-
     virtual void paint(QPainter* p);
     virtual QRect rect() const;
 };
