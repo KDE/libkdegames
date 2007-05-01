@@ -28,6 +28,8 @@
 #include <QPushButton>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QFileInfo>
+#include <QDir>
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -817,5 +819,49 @@ void KCardDialog::init()
     KGlobal::locale()->insertCatalog("libkdegames");
     _inited = true;
 }
+
+
+// Check whether the card back deck contains also an SVG file.
+bool KCardDialog::isSVGDeck(QString deck)
+{
+  return !deckSVGFilePath(deck).isNull();
+}
+
+// Check whether the card set is SVG or not.
+bool KCardDialog::isSVGCards(QString cardDir)
+{
+  return !cardSVGFilePath(cardDir).isNull();
+}
+
+
+// Retreive the SVG file belonging to the given card back deck.
+QString KCardDialog::deckSVGFilePath(QString deck)
+{
+  QFileInfo info(deck);
+  QString deckIndex = deck;
+  deckIndex.replace(".png",".desktop");
+
+  // Card deck section
+  KConfig deckInfo( deckIndex, KConfig::OnlyLocal);
+  KConfigGroup deckGroup(&deckInfo, "KDE Cards");
+  QString deckSVG  = deckGroup.readEntry("SVG", QString());
+  if (deckSVG.isNull()) return deckSVG;
+
+  QFileInfo svgInfo(QDir(info.path()), deckSVG);
+  return svgInfo.filePath();
+}
+
+
+// Retreive the SVG file belonging to the given card back deck.
+QString KCardDialog::cardSVGFilePath(QString cardDir)
+{
+  KConfig cardInfo(cardDir+"/index.desktop", KConfig::OnlyLocal);
+  KConfigGroup cardGroup(&cardInfo, "KDE Backdeck");
+  QString cardSVG    = cardGroup.readEntry("SVG", QString());
+  if (cardSVG.isNull()) return cardSVG;
+  QFileInfo svgInfo(QDir(cardDir), cardSVG);
+  return svgInfo.filePath();
+}
+
 
 #include "kcarddialog.moc"

@@ -47,9 +47,32 @@ class KCardDialogPrivate;
  *
  * \code
  *      QString deck,card;
- *      int result = KCardDialog::getCardDeck(deck,card );
+ *      int result = KCardDialog::getCardDeck(deck, card);
  *      if ( result == KCardDialog::Accepted )
  *            ...
+ * \endcode
+ *
+ * Retrieve the SVG information for the card back (deck):
+ *
+ * \code
+ *      QString deck,card;
+ *      int result       = KCardDialog::getCardDeck(deck, card);
+ *      ...
+ *      QString deckFile = KCardDialog::deckSVGFilePath(deck);
+ *      bool    isSVG    = KCardDialog::isSVGDeck(deck);
+ *      ...
+ * \endcode
+ *
+ *
+ * Retrieve the SVG information for the card set (front):
+ *
+ * \code
+ *      QString deck,card;
+ *      int result       = KCardDialog::getCardDeck(deck, card);
+ *      ...
+ *      QString cardFile = KCardDialog::cardSVGFilePath(card);
+ *      bool    isSVG    = KCardDialog::isSVGCards(card);
+ *      ...
  * \endcode
  *
  * Here you can see a card dialog in action
@@ -303,6 +326,32 @@ public:
     * getConfigCardDeck.
     **/
    void saveConfig(KConfig* conf);
+
+   /** Check whether the card back deck contains also an SVG file.
+     * The deck is the complete file path to the deck (directory and filename).
+     * @return True if SVG data is available.
+     */
+   static bool isSVGDeck(QString deck);
+
+   /** Retrieve the SVG file belonging to the given card back deck. 
+     * The cardDir is the file path to the card directory.
+     * @return The file name and path to the SVG file or QString::null if not available. 
+     */
+   static QString deckSVGFilePath(QString deck);
+
+   /** Check whether the card set is SVG or not.
+     * @return True if SVG data is available.
+     */
+   static bool isSVGCards(QString cardDir);
+
+   /** Retrieve the SVG file belonging to the given card set. 
+     * The cardDir is the file path to the card directory.
+     * The SVG IDs used for the card back is '1_club' for Ace of clubs, '10_spade' for
+     * 10 of spades, 'queen_heart' for Queen of Hearts, '2_diamond' for 2 of diamonds and
+     * so on.
+     * @return The file name and path to the SVG file or QString::null if not available. 
+     */
+   static QString cardSVGFilePath(QString cardDir);
 
 
 protected:
