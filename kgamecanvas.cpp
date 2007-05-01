@@ -329,7 +329,7 @@ void KGameCanvasItem::putInCanvas(KGameCanvasAbstract *c) {
   if(m_canvas == c)
       return;
 
-  if(!m_canvas) {
+  if(m_canvas) {
     if(m_visible)
       m_canvas->invalidate(rect());
     m_canvas->m_items.removeAll(this);
