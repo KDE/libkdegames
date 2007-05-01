@@ -143,7 +143,7 @@ public:
     virtual ~KGameCanvasItem();
 
     /** schedule an update if the item */
-    void changed();
+    virtual void changed();
 
     /** Returns true if the item is visible */
     bool visible() const { return m_visible; }
