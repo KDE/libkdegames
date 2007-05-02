@@ -11,10 +11,10 @@ add_subdirectory( includes )
 add_subdirectory( kgame )
 add_subdirectory( pics )
 add_subdirectory( tests )
+add_subdirectory( kggznet )
+add_subdirectory( kggzgames )
 if(NOT WIN32)
-  add_subdirectory( kggznet )
   add_subdirectory( kggzmod )
-  add_subdirectory( kggzgames )
 endif(NOT WIN32)
 
 include_directories(
