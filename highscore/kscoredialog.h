@@ -46,7 +46,7 @@ this software.
  * unless hidden @ref hideField since it is used for sorting) of the 
  * top 10 players:
  * \code
- * KScoreDialog ksdialog(KScoreDialog::Name, this);
+ * KScoreDialog ksdialog(this);
  * ksdialog.exec();
  * \endcode
  * 
@@ -59,7 +59,7 @@ this software.
  * will be prompted for their name but subsequent times they will have
  * their name filled in automatically.
  * \code
- * KScoreDialog ksdialog(KScoreDialog::Name, this);
+ * KScoreDialog ksdialog(this);
  * ksdialog.addScore(playersScore);
  * ksdialog.exec();
  * \endcode
@@ -85,7 +85,8 @@ this software.
  * 
  * ksdialog.addScore(scoreInfo);
  * \endcode
- * You can add up to 5 Custom fields.
+ * You can define up to 5 Custom fields.
+ * @author Matt Williams <matt@milliams.com>
  */
 class KDEGAMES_EXPORT KScoreDialog : public KDialog 
 {
