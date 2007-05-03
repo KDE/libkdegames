@@ -36,8 +36,12 @@ namespace KGGZMod
 // The return code has been C++-ified
 // All GGZ debug/error handling code has been removed
 
+// On windows, this function will never be called
+// (no ModulePrivate::msgserverfd will ever arrive)
+
 bool readfiledescriptor(int sock, int *recvfd)
 {
+#ifndef Q_OS_WIN
 	struct msghdr msg;
 	struct iovec iov[1];
 	ssize_t	n;
@@ -92,6 +96,9 @@ bool readfiledescriptor(int sock, int *recvfd)
 	*recvfd = *((int *) CMSG_DATA(cmptr));
 	
         return true;
+#else
+	return false;
+#endif
 }
 
 }
