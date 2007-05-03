@@ -13,9 +13,7 @@ add_subdirectory( pics )
 add_subdirectory( tests )
 add_subdirectory( kggznet )
 add_subdirectory( kggzgames )
-if(NOT WIN32)
-  add_subdirectory( kggzmod )
-endif(NOT WIN32)
+add_subdirectory( kggzmod )
 
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}/highscore
