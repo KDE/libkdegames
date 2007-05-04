@@ -75,7 +75,7 @@ class KScoreDialog::KScoreDialogPrivate
         QString player;
         
         //Q-Pointer
-        KScoreDialogPrivate(KScoreDialog* parent):q(parent){};
+        KScoreDialogPrivate(KScoreDialog* parent):q(parent){}
         KScoreDialog* const q;
         
         //Functions
