@@ -13,7 +13,6 @@ install( FILES
 	KHighscore
 	KScoreDialog
 	KStandardGameAction
-	KZoomMainWindow
 	KGameSvgDocument
 	KGameSvgDigits
 DESTINATION ${INCLUDE_INSTALL_DIR}/KDE )
