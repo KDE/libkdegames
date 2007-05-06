@@ -26,24 +26,46 @@
 
 #include <kdebug.h>
 
-KGameSequence::KGameSequence() : QObject()
+class KGameSequence::KGameSequencePrivate
 {
- mGame = 0;
- mCurrentPlayer = 0;
+  public:
+    KGameSequencePrivate()
+      : mGame(0), mCurrentPlayer(0)
+    {
+    }
+
+    KGame* mGame;
+    KPlayer* mCurrentPlayer;
+};
+
+KGameSequence::KGameSequence()
+  : QObject(), d(new KGameSequencePrivate)
+{
 }
 
 KGameSequence::~KGameSequence()
 {
+ delete d;
 }
 
 void KGameSequence::setGame(KGame* game)
 {
- mGame = game;
+ d->mGame = game;
+}
+
+KGame* KGameSequence::game() const
+{
+ return d->mGame;
+}
+
+KPlayer* KGameSequence::currentPlayer() const
+{
+ return d->mCurrentPlayer;
 }
 
 void KGameSequence::setCurrentPlayer(KPlayer* player)
 {
- mCurrentPlayer = player;
+ d->mCurrentPlayer = player;
 }
 
 KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)

@@ -58,9 +58,9 @@ public:
 	/**
 	 * @return The @ref KGame object this sequence is for, or NULL if none.
 	 **/
-	KGame* game() const { return mGame; }
+	KGame* game() const;
 
-	KPlayer* currentPlayer() const { return mCurrentPlayer; }
+	KPlayer* currentPlayer() const;
 
 	/**
 	 * Set the @ref KGame object for this sequence. This is called
@@ -79,8 +79,10 @@ public:
 	virtual int checkGameOver(KPlayer *player);
 
 private:
-	KGame* mGame;
-	KPlayer* mCurrentPlayer;
+	class KGameSequencePrivate;
+	KGameSequencePrivate *const d;
+
+	Q_DISABLE_COPY(KGameSequence)
 };
 
 #endif
