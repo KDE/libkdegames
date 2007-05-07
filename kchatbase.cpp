@@ -95,6 +95,11 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  connect(d->mBox, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)),
 		this, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)));
  l->addWidget(d->mBox);
+
+ connect(d->mModel, SIGNAL(rowsInserted (const QModelIndex&,int,int)),
+          d->mBox, SLOT(scrollToBottom()));
+          
+
  d->mBox->setFocusPolicy(Qt::NoFocus);
  d->mBox->setSelectionMode(QAbstractItemView::SingleSelection);
 

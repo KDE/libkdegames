@@ -74,7 +74,7 @@ KChatDialog::KChatDialog(QWidget* parent, bool modal)
  setButtons(Ok|Default|Apply|Cancel);
  setModal(modal);
  init();
- init();
+//  init();
 }
 
 KChatDialog::~KChatDialog()
