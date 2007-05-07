@@ -18,30 +18,44 @@
 
 #include "kgamethemeselector.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
-#include <QPainter>
+#include <KLocale>
+#include <KStandardDirs>
+#include <QtGui/QPainter>
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
 
+#include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
 
-KGameThemeSelector::KGameThemeSelector( QWidget* parent, KConfigSkeleton * aconfig )
-        : QWidget( parent )
+class KGameThemeSelector::KGameThemeSelectorPrivate
 {
-    setupUi(this);
-    setupData(aconfig);
+    public:
+        KGameThemeSelectorPrivate(KGameThemeSelector* parent) : q(parent) {};
+        KGameThemeSelector* q;
+        
+        QMap<QString, KGameTheme*> themeMap;
+        Ui::KGameThemeSelectorBase ui;
+        
+        void setupData(KConfigSkeleton* config);
+};
+
+KGameThemeSelector::KGameThemeSelector( QWidget* parent, KConfigSkeleton * aconfig )
+    : QWidget(parent), d(new KGameThemeSelectorPrivate(this))
+{
+    d->setupData(aconfig);
 }
 
-void KGameThemeSelector::setupData(KConfigSkeleton * aconfig)
+void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig)
 {
+    ui.setupUi(q);
+    
     //Get our currently configured Tileset entry
     KConfig * config = aconfig->config();
     KConfigGroup group = config->group("General");
     QString initialGroup = group.readEntry("Theme");
 
     //The lineEdit widget holds our bg path, but the user does not manipulate it directly
-    kcfg_Theme->hide();
+    ui.kcfg_Theme->hide();
 
     KGameTheme bg;
 
@@ -56,12 +70,12 @@ void KGameThemeSelector::setupData(KConfigSkeleton * aconfig)
         QString themepath = themesAvailable.at(i);
         if (atheme->load(themepath)) {
             themeMap.insert(atheme->authorProperty(namestr), atheme);
-            themeList->addItem(atheme->authorProperty(namestr));
+            ui.themeList->addItem(atheme->authorProperty(namestr));
             //Find if this is our currently configured Theme
             if (themepath==initialGroup) {
                 //Select current entry
-                themeList->setCurrentRow(numvalidentries);
-                updatePreview();
+                ui.themeList->setCurrentRow(numvalidentries);
+                q->updatePreview();
             }
             ++numvalidentries;
         } else {
@@ -69,29 +83,29 @@ void KGameThemeSelector::setupData(KConfigSkeleton * aconfig)
         }
     }
     
-    connect(themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), this, SLOT(updatePreview()));
-    connect(getNewButton, SIGNAL(clicked()), this, SLOT(openKNewStuffDialog()));
+    connect(ui.themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(updatePreview()));
+    connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(openKNewStuffDialog()));
 }
 
 void KGameThemeSelector::updatePreview()
 {
-    KGameTheme * seltheme = themeMap.value(themeList->currentItem()->text());
+    KGameTheme * seltheme = d->themeMap.value(d->ui.themeList->currentItem()->text());
         //Sanity checkings. Should not happen.
     if (!seltheme) return;
-    if (seltheme->path()==kcfg_Theme->text()) {
+    if (seltheme->path()==d->ui.kcfg_Theme->text()) {
         return;
     }
     QString authstr("Author");
     QString contactstr("AuthorEmail");
     QString descstr("Description");
-    kcfg_Theme->setText(seltheme->path());
-    themeAuthor->setText(seltheme->authorProperty(authstr));
-    themeContact->setText(seltheme->authorProperty(contactstr));
-    themeDescription->setText(seltheme->authorProperty(descstr));
+    d->ui.kcfg_Theme->setText(seltheme->fileName());
+    d->ui.themeAuthor->setText(seltheme->authorProperty(authstr));
+    d->ui.themeContact->setText(seltheme->authorProperty(contactstr));
+    d->ui.themeDescription->setText(seltheme->authorProperty(descstr));
 
     //Draw the preview
     //TODO here: add code to maintain aspect ration?
-    themePreview->setPixmap(seltheme->preview());
+    d->ui.themePreview->setPixmap(seltheme->preview());
 
 }
 

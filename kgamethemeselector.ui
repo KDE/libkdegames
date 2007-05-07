@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>KGameThemeSelector</class>
- <widget class="QWidget" name="KGameThemeSelector" >
+ <class>KGameThemeSelectorBase</class>
+ <widget class="QWidget" name="KGameThemeSelectorBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>

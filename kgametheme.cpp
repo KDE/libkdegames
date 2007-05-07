@@ -18,15 +18,15 @@
 
 #include "kgametheme.h"
 
-#include <kstandarddirs.h>
-#include <klocale.h>
-#include <kconfig.h>
-#include <ksvgrenderer.h>
+#include <KStandardDirs>
+#include <KLocale>
+#include <KConfig>
+#include <KSvgRenderer>
 #include <KComponentData>
-#include <QFile>
-#include <QMap>
-#include <QDebug>
-#include <QPixmap>
+#include <QtCore/QFile>
+#include <QtCore/QMap>
+#include <QtCore/QDebug>
+#include <QtGui/QPixmap>
 
 class KGameThemePrivate
 {
@@ -34,7 +34,8 @@ class KGameThemePrivate
         KGameThemePrivate(){}
         
         QMap<QString, QString> authorproperties;
-        QString filename;
+        QString fullPath;
+        QString fileName; ///< just e.g. "default.desktop"
         QString graphics;
         QPixmap preview;
         KSvgRenderer svg;
@@ -66,13 +67,12 @@ bool KGameTheme::loadDefault()
 bool KGameTheme::load(const QString &fileName) {
 
     QString filePath = KStandardDirs::locate("gametheme", fileName);
-    qDebug() << "Inside load(), located theme at " << filePath;
+    qDebug() << "Attempting to load .desktop at " << filePath;
     if (filePath.isEmpty()) {
         return false;
     }
     
     QString graphicsPath;
-    qDebug() << "Attempting to load .desktop at " << filePath;
 
     // verify if it is a valid file first and if we can open it
     QFile themefile(filePath);
@@ -111,12 +111,17 @@ bool KGameTheme::load(const QString &fileName) {
     graphicsPath = KStandardDirs::locate("gametheme", previewName);
     d->preview = QPixmap(graphicsPath);
 
-    d->filename = filePath;
+    d->fileName = fileName;
+    d->fullPath = filePath;
     return true;
 }
 
 QString KGameTheme::path() const {
-    return d->filename;
+    return d->fullPath;
+}
+
+QString KGameTheme::fileName() const {
+    return d->fileName;
 }
 
 QString KGameTheme::graphics() const {

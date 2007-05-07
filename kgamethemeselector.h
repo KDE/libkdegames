@@ -19,24 +19,25 @@
 #ifndef __KGAMETHEMESELECTOR_H_
 #define __KGAMETHEMESELECTOR_H_
 
-#include <QMap>
-#include "ui_kgamethemeselector.h"
+#include <QtCore/QMap>
+#include <QtGui/QWidget>
 
 #include <libkdegames_export.h>
 
 class KGameTheme;
 class KConfigSkeleton;
 
-class KDEGAMES_EXPORT KGameThemeSelector : public QWidget, public Ui::KGameThemeSelector
+class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     public:
-        explicit KGameThemeSelector( QWidget* parent, KConfigSkeleton* config );
-        
-        void setupData(KConfigSkeleton* config);
-        
-        QMap<QString, KGameTheme*> themeMap;
-    public slots:
+        KGameThemeSelector( QWidget* parent, KConfigSkeleton* config );
+    
+    private:
+        class KGameThemeSelectorPrivate;
+        KGameThemeSelectorPrivate* const d;
+    
+    public Q_SLOTS:
         void updatePreview();
         void openKNewStuffDialog();
 };

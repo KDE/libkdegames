@@ -25,6 +25,14 @@ class KGameThemePrivate;
 class QString;
 class QPixmap;
 
+/**
+ * @short Class for managing highscore tables
+ *
+ * Essentially just a wrapper around a .desktop theme file. Load a file with
+ * load() and then access its properties.
+ * 
+ * @author Mauricio Piacentini
+ **/
 class KDEGAMES_EXPORT KGameTheme 
 {
     public:
@@ -33,17 +41,32 @@ class KDEGAMES_EXPORT KGameTheme
 
         /**
          * Load the default theme file. Called "default.desktop"
-        * @return true if the theme files and properties could be loaded
-        */
+         * @return true if the theme files and properties could be loaded
+         */
         bool loadDefault();
         /**
-        * Load a specific theme file. e.g. "classic.desktop"
-        * @return true if the theme files and properties could be loaded
-        */
+         * Load a specific theme file.
+         * @param file the name of the theme file. e.g. "classic.desktop"
+         * @return true if the theme files and properties could be loaded
+         */
         bool load(const QString &file);
+        /// @return the full path of the .desktop file
         QString path() const;
+        /// @return just the "*.desktop" part
+        QString fileName() const;
+        /// @return the full path of the svg file
         QString graphics() const;
+        /// @return a preview pixmap
         QPixmap preview() const;
+        /**
+         * Possible keys:
+         * - Name
+         * - Author
+         * - Description
+         * - AuthorEmail
+         * @param key the key of the wanted property
+         * @return the data realted to 'key'
+         */
         QString authorProperty(const QString &key) const;
     
     private:
