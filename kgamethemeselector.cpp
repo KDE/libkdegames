@@ -1,7 +1,7 @@
 /*
     Copyright (C) 2007 Mauricio Piacentini  <mauricio@tabuleiro.com>
 
-    KMines is free software; you can redistribute it and/or modify
+    This library is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "kminesthemeselector.h"
+#include "kgamethemeselector.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -24,16 +24,16 @@
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
 
-#include "kminestheme.h"
+#include "kgametheme.h"
 
-KMinesThemeSelector::KMinesThemeSelector( QWidget* parent, KConfigSkeleton * aconfig )
+KGameThemeSelector::KGameThemeSelector( QWidget* parent, KConfigSkeleton * aconfig )
         : QWidget( parent )
 {
     setupUi(this);
     setupData(aconfig);
 }
 
-void KMinesThemeSelector::setupData(KConfigSkeleton * aconfig)
+void KGameThemeSelector::setupData(KConfigSkeleton * aconfig)
 {
     //Get our currently configured Tileset entry
     KConfig * config = aconfig->config();
@@ -43,7 +43,7 @@ void KMinesThemeSelector::setupData(KConfigSkeleton * aconfig)
     //The lineEdit widget holds our bg path, but the user does not manipulate it directly
     kcfg_Theme->hide();
 
-    KMinesTheme bg;
+    KGameTheme bg;
 
     //Now get our tilesets into a list
     QStringList themesAvailable;
@@ -52,7 +52,7 @@ void KMinesThemeSelector::setupData(KConfigSkeleton * aconfig)
     int numvalidentries = 0;
     for (int i = 0; i < themesAvailable.size(); ++i)
     {
-        KMinesTheme * atheme = new KMinesTheme();
+        KGameTheme * atheme = new KGameTheme();
         QString themepath = themesAvailable.at(i);
         if (atheme->load(themepath)) {
             themeMap.insert(atheme->authorProperty(namestr), atheme);
@@ -73,9 +73,9 @@ void KMinesThemeSelector::setupData(KConfigSkeleton * aconfig)
     connect(getNewButton, SIGNAL(clicked()), this, SLOT(openKNewStuffDialog()));
 }
 
-void KMinesThemeSelector::updatePreview()
+void KGameThemeSelector::updatePreview()
 {
-    KMinesTheme * seltheme = themeMap.value(themeList->currentItem()->text());
+    KGameTheme * seltheme = themeMap.value(themeList->currentItem()->text());
         //Sanity checkings. Should not happen.
     if (!seltheme) return;
     if (seltheme->path()==kcfg_Theme->text()) {
@@ -95,9 +95,9 @@ void KMinesThemeSelector::updatePreview()
 
 }
 
-void KMinesThemeSelector::openKNewStuffDialog()
+void KGameThemeSelector::openKNewStuffDialog()
 {
     KNS::Entry::List entries = KNS::Engine::download();
 }
 
-#include "kminesthemeselector.moc"
+#include "kgamethemeselector.moc"

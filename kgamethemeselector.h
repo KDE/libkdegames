@@ -1,7 +1,7 @@
 /*
     Copyright (C) 2006 Mauricio Piacentini  <mauricio@tabuleiro.com>
 
-    KMines is free software; you can redistribute it and/or modify
+    This library is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
@@ -16,27 +16,29 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef __KMINESTHEMESELECTOR_H_
-#define __KMINESTHEMESELECTOR_H_
+#ifndef __KGAMETHEMESELECTOR_H_
+#define __KGAMETHEMESELECTOR_H_
 
 #include <QMap>
-#include "ui_kminesthemeselector.h"
+#include "ui_kgamethemeselector.h"
 
-class KMinesTheme;
+#include <libkdegames_export.h>
+
+class KGameTheme;
 class KConfigSkeleton;
 
-class KMinesThemeSelector : public QWidget, public Ui::KMinesThemeSelector
+class KDEGAMES_EXPORT KGameThemeSelector : public QWidget, public Ui::KGameThemeSelector
 {
-Q_OBJECT
-public:
-    explicit KMinesThemeSelector( QWidget* parent, KConfigSkeleton * config );
-
-    void setupData(KConfigSkeleton * config);
-
-    QMap<QString, KMinesTheme *> themeMap;
-public slots:
-    void updatePreview();
-    void openKNewStuffDialog();
+    Q_OBJECT
+    public:
+        explicit KGameThemeSelector( QWidget* parent, KConfigSkeleton* config );
+        
+        void setupData(KConfigSkeleton* config);
+        
+        QMap<QString, KGameTheme*> themeMap;
+    public slots:
+        void updatePreview();
+        void openKNewStuffDialog();
 };
 
 #endif

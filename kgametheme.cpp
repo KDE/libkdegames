@@ -1,7 +1,7 @@
 /*
     Copyright (C) 2007 Mauricio Piacentini   <mauricio@tabuleiro.com>
 
-    KMines is free software; you can redistribute it and/or modify
+    This library is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "kminestheme.h"
+#include "kgametheme.h"
 
 #include <kstandarddirs.h>
 #include <klocale.h>
@@ -28,22 +28,20 @@
 #include <QDebug>
 #include <QPixmap>
 
-class KMinesThemePrivate
+class KGameThemePrivate
 {
-public:
-    KMinesThemePrivate()
-    {
-    }
-
-    QMap<QString, QString> authorproperties;
-    QString filename;
-    QString graphics;
-    QPixmap preview;
-    KSvgRenderer svg;
+    public:
+        KGameThemePrivate(){}
+        
+        QMap<QString, QString> authorproperties;
+        QString filename;
+        QString graphics;
+        QPixmap preview;
+        KSvgRenderer svg;
 };
 
-KMinesTheme::KMinesTheme()
-    : d(new KMinesThemePrivate)
+KGameTheme::KGameTheme()
+    : d(new KGameThemePrivate)
 {
     static bool _inited = false;
     if (_inited)
@@ -54,18 +52,18 @@ KMinesTheme::KMinesTheme()
     _inited = true;
 }
 
-KMinesTheme::~KMinesTheme() {
+KGameTheme::~KGameTheme() {
     delete d;
 }
 
-bool KMinesTheme::loadDefault()
+bool KGameTheme::loadDefault()
 {
     return load("default.desktop");
 }
 
 #define kThemeVersionFormat 1
 
-bool KMinesTheme::load(const QString &fileName) {
+bool KGameTheme::load(const QString &fileName) {
 
     QString filePath = KStandardDirs::locate("gametheme", fileName);
     qDebug() << "Inside load(), located theme at " << filePath;
@@ -84,7 +82,7 @@ bool KMinesTheme::load(const QString &fileName) {
     themefile.close();
 
     KConfig themeconfig(filePath, KConfig::OnlyLocal);
-    KConfigGroup group = themeconfig.group("KMinesTheme");
+    KConfigGroup group = themeconfig.group("KGameTheme");
 
     d->authorproperties.insert("Name", group.readEntry("Name"));// Returns translated data
     d->authorproperties.insert("Author", group.readEntry("Author"));
@@ -117,18 +115,18 @@ bool KMinesTheme::load(const QString &fileName) {
     return true;
 }
 
-QString KMinesTheme::path() const {
+QString KGameTheme::path() const {
     return d->filename;
 }
 
-QString KMinesTheme::graphics() const {
+QString KGameTheme::graphics() const {
   return d->graphics;
 }
 
-QPixmap KMinesTheme::preview() const {
+QPixmap KGameTheme::preview() const {
   return d->preview;
 }
 
-QString KMinesTheme::authorProperty(const QString &key) const {
+QString KGameTheme::authorProperty(const QString &key) const {
     return d->authorproperties[key];
 }

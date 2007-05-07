@@ -64,7 +64,12 @@ set(libkgamedialog_SRCS
     kgame/dialogs/kgamedialogconfig.cpp
     )
 
-set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS} ${libkgamedigits_SRCS}
+set(libkgametheme_SRCS
+    kgametheme.cpp
+    kgamethemeselector.cpp
+)
+
+set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS} ${libkgamedigits_SRCS} ${libkgametheme_SRCS}
     kgamecanvas.cpp 
     kcarddialog.cpp 
     kstandardgameaction.cpp 
@@ -82,12 +87,14 @@ set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SR
 
 kde4_automoc(${kdegames_LIB_SRCS})
 
+kde4_add_ui_files(kdegames_LIB_SRCS kgamethemeselector.ui)
+
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames  ${KDE4_KIO_LIBS} ${KDE4_KDNSSD_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY})
 
-set_target_properties(kdegames PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS kdegames  DESTINATION ${LIB_INSTALL_DIR} )
+set_target_properties(kdegames PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+install(TARGETS kdegames DESTINATION ${LIB_INSTALL_DIR})
 
 
 ########### install files ###############
@@ -108,5 +115,7 @@ install(FILES
     kgrid2d.h
     kgamecanvas.h
     kgameclock.h
+    kgametheme.h
+    kgamethemeselector.h
     DESTINATION ${INCLUDE_INSTALL_DIR})
 
