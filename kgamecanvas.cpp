@@ -289,14 +289,12 @@ void KGameCanvasItem::paintInternal(QPainter* pp, const QRect& /*prect*/,
     return;
   }
 
-#if QT_VERSION >= 0x040200
   if(!layered()) {
     pp->setOpacity(opacity/255.0);
     paint(pp);
     pp->setOpacity(1.0);
     return;
   }
-#endif
 
   QRect mr = rect();
   QPixmap* cache = getTransparenceCache(mr.size());
@@ -663,7 +661,6 @@ void KGameCanvasPixmap::setPixmap(const QPixmap& p) {
     changed();
 }
 
-#if QT_VERSION >= 0x040200
 void KGameCanvasPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
                   const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
   int op = int(cumulative_opacity*opacity() + 0.5);
@@ -677,7 +674,6 @@ void KGameCanvasPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
   if(op < 255)
     p->setOpacity(1.0);
 }
-#endif
 
 void KGameCanvasPixmap::paint(QPainter* p) {
   p->drawPixmap(pos(), m_pixmap);
@@ -743,7 +739,6 @@ void KGameCanvasTiledPixmap::setMoveOrigin(bool move_orig)
   m_move_orig = move_orig;
 }
 
-#if QT_VERSION >= 0x040200
 void KGameCanvasTiledPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
                   const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
   int op = int(cumulative_opacity*opacity() + 0.5);
@@ -760,7 +755,6 @@ void KGameCanvasTiledPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
   if(op < 255)
     p->setOpacity( op/255.0 );
 }
-#endif
 
 void KGameCanvasTiledPixmap::paint(QPainter* p)
 {

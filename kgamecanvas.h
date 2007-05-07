@@ -334,10 +334,8 @@ private:
     QPixmap m_pixmap;
 
     /** optimization of this special case, it is a bit faster */
-#if QT_VERSION >= 0x040200
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
                                           QPoint delta, double cumulative_opacity);
-#endif
 
 public:
     /** Constructor, specifying the pixmap to use */
@@ -373,10 +371,8 @@ private:
     bool m_move_orig;
 
     /** optimization of this special case, it is a bit faster */
-#if QT_VERSION >= 0x040200
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
                                           QPoint delta, double cumulative_opacity);
-#endif
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
