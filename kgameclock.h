@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KGAMELCD_H
-#define __KGAMELCD_H
+#ifndef __KGAMECLOCK_H
+#define __KGAMECLOCK_H
 
 #include <QtCore/QObject>
 #include <libkdegames_export.h>
