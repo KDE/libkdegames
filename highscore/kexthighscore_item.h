@@ -125,7 +125,7 @@ class KDEGAMES_EXPORT Item
     /**
      * @return the default value.
      */
-    const QVariant &defaultValue() const { return _default; }
+    QVariant defaultValue() const { return _default; }
 
     /**
      * @return the converted value (by default the value is left

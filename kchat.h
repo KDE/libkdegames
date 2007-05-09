@@ -103,7 +103,7 @@ public:
 	/**
 	 * @return The nickname of the player which belongs to this id
 	 **/
-	const QString& player(int id) const;
+	QString player(int id) const;
 
 	/**
 	 * @return The ID that belongs to the local player. 

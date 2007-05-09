@@ -24,11 +24,11 @@
 #ifndef _KMESSAGEIO_H_
 #define _KMESSAGEIO_H_
 
-#include <qhostaddress.h>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QQueue>
 #include <QtCore/QFile>
+#include <QtNetwork/QHostAddress>
 #include <kdebug.h>
 
 class QTcpSocket;

@@ -75,7 +75,7 @@ int KChat::uniqueId()
 { return d->mPlayerId++; }
 int KChat::fromId() const
 { return d->mFromId; }
-const QString& KChat::player(int id) const
+QString KChat::player(int id) const
 { return d->mPlayerMap[id]; }
 
 void KChat::returnPressed(const QString& text)

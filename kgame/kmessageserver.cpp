@@ -18,6 +18,7 @@
 */
 
 #include "kmessageserver.h"
+#include "kmessageserver_p.h"
 
 #include <qiodevice.h>
 #include <qbuffer.h>
@@ -29,7 +30,6 @@
 #include <kdebug.h>
 
 #include "kmessageio.h"
-#include "kmessageserver_p.h"
 
 // --------------- internal class KMessageServerSocket
 
