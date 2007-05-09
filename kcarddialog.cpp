@@ -230,9 +230,9 @@ QString KCardDialog::getCardPath(const QString &carddir, int index)
     return KStandardDirs::locate( "cards", entry );
 }
 
-const QString& KCardDialog::deck() const { return d->cDeck; }
+QString KCardDialog::deck() const { return d->cDeck; }
 void KCardDialog::setDeck(const QString& file) { d->cDeck=file; }
-const QString& KCardDialog::cardDir() const { return d->cCardDir; }
+QString KCardDialog::cardDir() const { return d->cCardDir; }
 void KCardDialog::setCardDir(const QString& dir) { d->cCardDir=dir; }
 KCardDialog::CardFlags KCardDialog::flags() const { return d->cFlags; }
 double KCardDialog::cardScale() const { return d->cScale; }
@@ -822,20 +822,20 @@ void KCardDialog::init()
 
 
 // Check whether the card back deck contains also an SVG file.
-bool KCardDialog::isSVGDeck(QString deck)
+bool KCardDialog::isSVGDeck(const QString& deck)
 {
   return !deckSVGFilePath(deck).isNull();
 }
 
 // Check whether the card set is SVG or not.
-bool KCardDialog::isSVGCards(QString cardDir)
+bool KCardDialog::isSVGCards(const QString& cardDir)
 {
   return !cardSVGFilePath(cardDir).isNull();
 }
 
 
 // Retreive the SVG file belonging to the given card back deck.
-QString KCardDialog::deckSVGFilePath(QString deck)
+QString KCardDialog::deckSVGFilePath(const QString& deck)
 {
   QFileInfo info(deck);
   QString deckIndex = deck;
@@ -853,7 +853,7 @@ QString KCardDialog::deckSVGFilePath(QString deck)
 
 
 // Retreive the SVG file belonging to the given card back deck.
-QString KCardDialog::cardSVGFilePath(QString cardDir)
+QString KCardDialog::cardSVGFilePath(const QString& cardDir)
 {
   KConfig cardInfo(cardDir+"/index.desktop", KConfig::OnlyLocal);
   KConfigGroup cardGroup(&cardInfo, "KDE Backdeck");

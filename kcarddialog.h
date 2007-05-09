@@ -255,7 +255,7 @@ public:
    *
    * @return The deck
    */
-   const QString& deck() const;
+   QString deck() const;
 
    /**
    * Sets the default deck.
@@ -266,7 +266,7 @@ public:
    /**
    * @return The chosen card directory
    */
-   const QString& cardDir() const;
+   QString cardDir() const;
 
    /**
    * Sets the default card directory.
@@ -331,18 +331,18 @@ public:
      * The deck is the complete file path to the deck (directory and filename).
      * @return True if SVG data is available.
      */
-   static bool isSVGDeck(QString deck);
+   static bool isSVGDeck(const QString& deck);
 
    /** Retrieve the SVG file belonging to the given card back deck. 
      * The cardDir is the file path to the card directory.
      * @return The file name and path to the SVG file or QString::null if not available. 
      */
-   static QString deckSVGFilePath(QString deck);
+   static QString deckSVGFilePath(const QString& deck);
 
    /** Check whether the card set is SVG or not.
      * @return True if SVG data is available.
      */
-   static bool isSVGCards(QString cardDir);
+   static bool isSVGCards(const QString& cardDir);
 
    /** Retrieve the SVG file belonging to the given card set. 
      * The cardDir is the file path to the card directory.
@@ -351,7 +351,7 @@ public:
      * so on.
      * @return The file name and path to the SVG file or QString::null if not available. 
      */
-   static QString cardSVGFilePath(QString cardDir);
+   static QString cardSVGFilePath(const QString& cardDir);
 
 
 protected:
