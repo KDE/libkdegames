@@ -30,12 +30,6 @@
 #include <krecentfilesaction.h>
 
 
-KStandardGameAction::KStandardGameAction()
-{}
-
-KStandardGameAction::~KStandardGameAction()
-{}
-
 struct KStandardGameActionInfo
 {
 	KStandardGameAction::StandardGameAction id;

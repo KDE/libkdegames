@@ -43,10 +43,8 @@ class KSelectAction;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
-// #### KDE4: transform in namespace
-class KDEGAMES_EXPORT KStandardGameAction
+namespace KStandardGameAction
 {
-public:
   /**
    * The standard menubar and toolbar actions.
    **/
@@ -67,32 +65,29 @@ public:
         ActionNone
     };
 
-    KStandardGameAction();
-    ~KStandardGameAction();
-
     /**
      * Creates an action corresponding to the
      * KStandardAction::StandardAction enum.
      */
-    static KAction* create( StandardGameAction id, const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction* create( StandardGameAction id, const QObject *recvr, const char *slot,
 			    QObject* parent );
 
 
     /**
      * This will return the internal name of a given standard action.
      */
-    static const char* name( StandardGameAction id );
+    KDEGAMES_EXPORT const char* name( StandardGameAction id );
 
     /**
      * Start a new game
      **/
-    static KAction *gameNew(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *gameNew(const QObject *recvr, const char *slot,
                             QObject *parent );
 
     /**
      * Load a previousely saved game
      */
-    static KAction *load(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *load(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     // FIXME why not to delete this and use just KStandardAction::openRecent???
@@ -101,31 +96,31 @@ public:
      * Load a recently loaded game.
      * The signature of slot is of the form slotURLSelected(const KUrl&)
      */
-    static KRecentFilesAction *loadRecent(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KRecentFilesAction *loadRecent(const QObject *recvr, const char *slot,
                                           QObject *parent );
 
     /**
      * Save the current game.
      */
-    static KAction *save(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *save(const QObject *recvr, const char *slot,
                          QObject *parent);
 
     /**
      * Save the current game under a different filename.
      */
-    static KAction *saveAs(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *saveAs(const QObject *recvr, const char *slot,
                            QObject *parent );
 
     /**
      * Pause the game
      **/
-    static KToggleAction *pause(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KToggleAction *pause(const QObject *recvr, const char *slot,
                                 QObject *parent );
 
     /**
      * Show the highscores.
      */
-    static KAction *highscores(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *highscores(const QObject *recvr, const char *slot,
                                QObject *parent );
 
 
@@ -133,98 +128,95 @@ public:
      * End the current game, but do not quit the program. Think of a "close"
      * entry.
      */
-    static KAction *end(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *end(const QObject *recvr, const char *slot,
                         QObject *parent );
 
     /**
      * Print the current screen? Game? Whatever - hardly used in games but there
      * is at least one example (ktuberling)
      */
-    static KAction *print(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *print(const QObject *recvr, const char *slot,
                           QObject *parent );
 
     /**
      * Quit the game.
      */
-    static KAction *quit(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *quit(const QObject *recvr, const char *slot,
                          QObject *parent );
-
-
 
     /**
      * Repeat the last move.
      **/
-    static KAction *repeat(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *repeat(const QObject *recvr, const char *slot,
                            QObject *parent );
 
     /**
      * Undo the last move
      **/
-    static KAction *undo(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *undo(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * Redo the last move (which has been undone)
      **/
-    static KAction *redo(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *redo(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * Roll die or dice
      **/
-    static KAction *roll(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *roll(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * End the current turn (not the game). Usually to let the next player
      * start
      **/
-    static KAction *endTurn(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *endTurn(const QObject *recvr, const char *slot,
                             QObject *parent );
-
 
     /**
      * Display configure carddecks dialog.
      */
-    static KAction *carddecks(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *carddecks(const QObject *recvr, const char *slot,
                               QObject *parent );
 
     /**
      * Display configure highscores dialog.
      */
-    static KAction *configureHighscores(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *configureHighscores(const QObject *recvr, const char *slot,
                                         QObject *parent );
 
     /**
      * Give an advice/hint.
      */
-    static KAction *hint(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *hint(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * Show a demo.
      */
-    static KToggleAction *demo(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KToggleAction *demo(const QObject *recvr, const char *slot,
                                QObject *parent );
 
     /**
      * Solve the game.
      */
-    static KAction *solve(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *solve(const QObject *recvr, const char *slot,
                           QObject *parent );
 
     /**
      * Choose game type. The signature of slot is of the form slotGameTypeChosen(int)
      */
-    static KSelectAction *chooseGameType(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KSelectAction *chooseGameType(const QObject *recvr, const char *slot,
                                          QObject *parent );
 
     /**
      * Restart game.
      */
-    static KAction *restart(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT KAction *restart(const QObject *recvr, const char *slot,
                             QObject *parent );
 
-};
+}
 
 #endif
