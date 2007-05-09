@@ -16,13 +16,14 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef _KGAMETHEME_H_
-#define _KGAMETHEME_H_
+#ifndef KGAMETHEME_H
+#define KGAMETHEME_H
 
 #include <libkdegames_export.h>
 
+#include <QtCore/QString>
+
 class KGameThemePrivate;
-class QString;
 class QPixmap;
 
 /**
@@ -36,26 +37,28 @@ class QPixmap;
 class KDEGAMES_EXPORT KGameTheme 
 {
     public:
-        KGameTheme();
-        ~KGameTheme();
+        KGameTheme(const QString &themeGroup="KGameTheme");
+        virtual ~KGameTheme();
 
         /**
          * Load the default theme file. Called "default.desktop"
          * @return true if the theme files and properties could be loaded
          */
-        bool loadDefault();
+        virtual bool loadDefault();
         /**
          * Load a specific theme file.
          * @param file the name of the theme file. e.g. "classic.desktop"
          * @return true if the theme files and properties could be loaded
          */
-        bool load(const QString &file);
+        virtual bool load(const QString &file);
         /// @return the full path of the .desktop file
         QString path() const;
         /// @return just the "*.desktop" part
         QString fileName() const;
         /// @return the full path of the svg file
-        QString graphics() const;
+        virtual QString graphics() const;
+        /// @return a property direct from the .desktop file
+        QString property(const QString &key) const;
         /// @return a preview pixmap
         QPixmap preview() const;
         /**

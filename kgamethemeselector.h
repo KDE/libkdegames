@@ -16,8 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef __KGAMETHEMESELECTOR_H_
-#define __KGAMETHEMESELECTOR_H_
+#ifndef KGAMETHEMESELECTOR_H
+#define KGAMETHEMESELECTOR_H
 
 #include <QtCore/QMap>
 #include <QtGui/QWidget>
@@ -31,13 +31,19 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     public:
-        KGameThemeSelector( QWidget* parent, KConfigSkeleton* config );
+        /**
+         * Load a specific theme file.
+         * @param groupName the title of the config group in the theme .desktop file
+         * @param directory subdirectory to search in
+         * @return true if the theme files and properties could be loaded
+         */
+        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, const QString &groupName="KGameTheme", const QString &directory="themes");
     
     private:
         class KGameThemeSelectorPrivate;
         KGameThemeSelectorPrivate* const d;
     
-    public Q_SLOTS:
+    private Q_SLOTS:
         void updatePreview();
         void openKNewStuffDialog();
 };

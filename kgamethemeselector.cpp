@@ -23,6 +23,7 @@
 #include <QtGui/QPainter>
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
+#include <KComponentData>
 
 #include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
@@ -35,13 +36,17 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
         
         QMap<QString, KGameTheme*> themeMap;
         Ui::KGameThemeSelectorBase ui;
+        QString lookupDirectory;
+        QString groupName;
         
         void setupData(KConfigSkeleton* config);
 };
 
-KGameThemeSelector::KGameThemeSelector( QWidget* parent, KConfigSkeleton * aconfig )
+KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfig, const QString &groupName, const QString &directory)
     : QWidget(parent), d(new KGameThemeSelectorPrivate(this))
 {
+    d->lookupDirectory = directory;
+    d->groupName = groupName;
     d->setupData(aconfig);
 }
 
@@ -52,7 +57,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     //Get our currently configured Tileset entry
     KConfig * config = aconfig->config();
     KConfigGroup group = config->group("General");
-    QString initialGroup = group.readEntry("Theme");
+    QString initialGroup = group.readEntry("Theme"); //Should be someting like "themes/default.desktop"
 
     //The lineEdit widget holds our bg path, but the user does not manipulate it directly
     ui.kcfg_Theme->hide();
@@ -60,14 +65,15 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     KGameTheme bg;
 
     //Now get our tilesets into a list
+    KGlobal::dirs()->addResourceType("gamethemeselector", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
     QStringList themesAvailable;
-    KGlobal::dirs()->findAllResources("gametheme", QString("*.desktop"), KStandardDirs::Recursive, themesAvailable);
+    KGlobal::dirs()->findAllResources("gamethemeselector", QString("*.desktop"), KStandardDirs::Recursive, themesAvailable);
     QString namestr("Name");
     int numvalidentries = 0;
     for (int i = 0; i < themesAvailable.size(); ++i)
     {
-        KGameTheme * atheme = new KGameTheme();
-        QString themepath = themesAvailable.at(i);
+        KGameTheme* atheme = new KGameTheme(groupName);
+        QString themepath = lookupDirectory + '/' + themesAvailable.at(i);
         if (atheme->load(themepath)) {
             themeMap.insert(atheme->authorProperty(namestr), atheme);
             ui.themeList->addItem(atheme->authorProperty(namestr));
