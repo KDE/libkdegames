@@ -19,10 +19,8 @@
 #include "kgametheme.h"
 
 #include <KStandardDirs>
-#include <KLocale>
 #include <KConfig>
 #include <KSvgRenderer>
-#include <KComponentData>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMap>
@@ -51,8 +49,6 @@ KGameTheme::KGameTheme(const QString &themeGroup)
 {
     d->themeGroup = themeGroup;
     //KGlobal::dirs()->addResourceType("gametheme", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName());
-
-    //KGlobal::locale()->insertCatalog("kmines");
 }
 
 KGameTheme::~KGameTheme() {

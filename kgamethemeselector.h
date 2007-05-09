@@ -19,7 +19,6 @@
 #ifndef KGAMETHEMESELECTOR_H
 #define KGAMETHEMESELECTOR_H
 
-#include <QtCore/QMap>
 #include <QtGui/QWidget>
 
 #include <libkdegames_export.h>
@@ -37,7 +36,8 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
          * @param directory subdirectory to search in
          * @return true if the theme files and properties could be loaded
          */
-        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, const QString &groupName="KGameTheme", const QString &directory="themes");
+        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));
+        virtual ~KGameThemeSelector();
     
     private:
         class KGameThemeSelectorPrivate;

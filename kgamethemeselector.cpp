@@ -50,6 +50,11 @@ KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfi
     d->setupData(aconfig);
 }
 
+KGameThemeSelector::~KGameThemeSelector()
+{
+    delete d;
+}
+
 void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig)
 {
     ui.setupUi(q);
