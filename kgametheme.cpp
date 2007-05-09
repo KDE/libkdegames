@@ -21,10 +21,10 @@
 #include <KStandardDirs>
 #include <KConfig>
 #include <KSvgRenderer>
+#include <KDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMap>
-#include <QtCore/QDebug>
 #include <QtGui/QPixmap>
 
 class KGameThemePrivate
@@ -64,7 +64,7 @@ bool KGameTheme::loadDefault()
 
 bool KGameTheme::load(const QString &fileName) {
     QString filePath = KStandardDirs::locate("appdata", fileName);
-    qDebug() << "Attempting to load .desktop at " << filePath;
+    kDebug(11000) << "Attempting to load .desktop at " << filePath << endl;
     if (filePath.isEmpty()) {
         return false;
     }
@@ -72,7 +72,7 @@ bool KGameTheme::load(const QString &fileName) {
     // verify if it is a valid file first and if we can open it
     QFile themefile(filePath);
     if (!themefile.open(QIODevice::ReadOnly)) {
-        qDebug() << "Could not open .destop theme file " << filePath;
+        kDebug(11000) << "Could not open .destop theme file " << filePath << endl;
         return false;
     }
     d->prefix = QFileInfo(themefile).absolutePath() + '/';
@@ -81,7 +81,7 @@ bool KGameTheme::load(const QString &fileName) {
     KConfig themeconfig(filePath, KConfig::OnlyLocal);
     if (!themeconfig.hasGroup(d->themeGroup))
     {
-        qDebug() << "Config group" << d->themeGroup << "does not exist in" << filePath;
+        kDebug(11000) << "Config group" << d->themeGroup << "does not exist in " << filePath << endl;
         return false;
     }
     KConfigGroup group = themeconfig.group(d->themeGroup);
@@ -105,7 +105,7 @@ bool KGameTheme::load(const QString &fileName) {
 
     d->svg.load(d->graphics);
     if (!d->svg.isValid()) {
-        qDebug() << "Could not load svg file" << d->graphics;
+        kDebug(11000) << "Could not load svg file " << d->graphics << endl;
         return false;
     }
     
@@ -124,7 +124,7 @@ QString KGameTheme::property(const QString &key) const
 {
     if(!d->loaded)
     {
-        qDebug() << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QString();
     }
     KConfig themeconfig(path(), KConfig::OnlyLocal);
@@ -135,7 +135,7 @@ QString KGameTheme::property(const QString &key) const
 QString KGameTheme::path() const {
     if(!d->loaded)
     {
-        qDebug() << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QString();
     }
     return d->fullPath;
@@ -144,7 +144,7 @@ QString KGameTheme::path() const {
 QString KGameTheme::fileName() const {
     if(!d->loaded)
     {
-        qDebug() << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QString();
     }
     return d->fileName;
@@ -153,7 +153,7 @@ QString KGameTheme::fileName() const {
 QString KGameTheme::graphics() const {
     if(!d->loaded)
     {
-        qDebug() << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QString();
     }
     return d->graphics;
@@ -162,7 +162,7 @@ QString KGameTheme::graphics() const {
 QPixmap KGameTheme::preview() const {
     if(!d->loaded)
     {
-        qDebug() << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QPixmap();
     }
     return d->preview;
@@ -171,7 +171,7 @@ QPixmap KGameTheme::preview() const {
 QString KGameTheme::authorProperty(const QString &key) const {
     if(!d->loaded)
     {
-        qDebug() << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QString();
     }
     return d->authorproperties[key];

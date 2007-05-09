@@ -23,7 +23,6 @@
 #include "kgameclock.moc"
 
 #include <QTimer>
-#include <QDebug>
 
 class KGameClockPrivate
 {

@@ -18,7 +18,6 @@
 
 #include "kgamesvgdigits.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMap>
 #include <QtCore/QTimer>

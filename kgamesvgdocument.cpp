@@ -22,7 +22,6 @@
 #include <kfilterdev.h>
 #include <kdebug.h>
 
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -182,7 +181,11 @@ QDomNode KGameSvgDocument::elementById(const QString& attributeValue)
 
 void KGameSvgDocument::load()
 {
-    if (d->m_svgFilename.isNull()) {qDebug () << "Filename not specified.";}
+    if (d->m_svgFilename.isNull())
+    {
+        kDebug(11000) << "KGameSvgDocument::load(): Filename not specified." << endl;
+        return;
+    }
 
     QFile file(d->m_svgFilename);
     if (!file.open(QIODevice::ReadOnly))
@@ -201,7 +204,7 @@ void KGameSvgDocument::load()
     if (!setContent(&file))
     {
         file.close();
-        qDebug () << "DOM content not set.";
+        kDebug(11000) << "DOM content not set." << endl;
         return;
     }
     file.close();
@@ -669,7 +672,7 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, 
     if (!node.firstChild().isNull() && !node.nextSibling().isNull())
     {
         // Do Nothing
-        //qDebug () << "No children or siblings.";
+        //kDebug(11000) << "No children or siblings." << endl;
     }
 
     // Matching node not found, so return a null node.
