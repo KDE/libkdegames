@@ -25,7 +25,6 @@
 #include <QtCore/QObject>
 #include <libkdegames_export.h>
 
-class QTimer;
 class KGameClockPrivate;
 
 /**
@@ -42,7 +41,7 @@ public:
      */
     explicit KGameClock(QObject *parent = 0, ClockType clocktype = HourMinSec);
 
-    ~KGameClock();
+    virtual ~KGameClock();
 
     /**
      * @return the total number of seconds elapsed.
