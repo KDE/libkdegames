@@ -40,6 +40,10 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
         QString groupName;
         
         void setupData(KConfigSkeleton* config);
+
+        // private slots
+        void _k_updatePreview();
+        void _k_openKNewStuffDialog();
 };
 
 KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfig, const QString &groupName, const QString &directory)
@@ -86,7 +90,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
             if (themepath==initialGroup) {
                 //Select current entry
                 ui.themeList->setCurrentRow(numvalidentries);
-                q->updatePreview();
+                _k_updatePreview();
             }
             ++numvalidentries;
         } else {
@@ -94,33 +98,33 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
         }
     }
     
-    connect(ui.themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(updatePreview()));
-    connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(openKNewStuffDialog()));
+    connect(ui.themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(_k_updatePreview()));
+    connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
 }
 
-void KGameThemeSelector::updatePreview()
+void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
 {
-    KGameTheme * seltheme = d->themeMap.value(d->ui.themeList->currentItem()->text());
+    KGameTheme * seltheme = themeMap.value(ui.themeList->currentItem()->text());
         //Sanity checkings. Should not happen.
     if (!seltheme) return;
-    if (seltheme->path()==d->ui.kcfg_Theme->text()) {
+    if (seltheme->path() == ui.kcfg_Theme->text()) {
         return;
     }
     QString authstr("Author");
     QString contactstr("AuthorEmail");
     QString descstr("Description");
-    d->ui.kcfg_Theme->setText(seltheme->fileName());
-    d->ui.themeAuthor->setText(seltheme->authorProperty(authstr));
-    d->ui.themeContact->setText(seltheme->authorProperty(contactstr));
-    d->ui.themeDescription->setText(seltheme->authorProperty(descstr));
+    ui.kcfg_Theme->setText(seltheme->fileName());
+    ui.themeAuthor->setText(seltheme->authorProperty(authstr));
+    ui.themeContact->setText(seltheme->authorProperty(contactstr));
+    ui.themeDescription->setText(seltheme->authorProperty(descstr));
 
     //Draw the preview
     //TODO here: add code to maintain aspect ration?
-    d->ui.themePreview->setPixmap(seltheme->preview());
+    ui.themePreview->setPixmap(seltheme->preview());
 
 }
 
-void KGameThemeSelector::openKNewStuffDialog()
+void KGameThemeSelector::KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
 {
     KNS::Entry::List entries = KNS::Engine::download();
 }

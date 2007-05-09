@@ -42,10 +42,11 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
     private:
         class KGameThemeSelectorPrivate;
         KGameThemeSelectorPrivate* const d;
-    
-    private Q_SLOTS:
-        void updatePreview();
-        void openKNewStuffDialog();
+
+        Q_DISABLE_COPY(KGameThemeSelector)
+
+        Q_PRIVATE_SLOT(d, void _k_updatePreview())
+        Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
 };
 
 #endif
