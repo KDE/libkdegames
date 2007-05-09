@@ -24,70 +24,57 @@ include_directories(
 
 ########### next target ###############
 
-set(libkhighscore_SRCS  
-#   highscore/kconfigrawbackend.cpp 
-    highscore/khighscore.cpp 
-    highscore/kscoredialog.cpp
-    highscore/kexthighscore_item.cpp 
-    highscore/kexthighscore_internal.cpp 
-    highscore/kexthighscore_tab.cpp 
+set(kdegames_LIB_SRCS
+    digits/kgamesvgdigits.cpp
+#   highscore/kconfigrawbackend.cpp
+    highscore/kexthighscore_item.cpp
+    highscore/kexthighscore_internal.cpp
+    highscore/kexthighscore_tab.cpp
     highscore/kexthighscore_gui.cpp
     highscore/kexthighscore.cpp
-)
-
-set(libkgamedigits_SRCS 
-    digits/kgamesvgdigits.cpp 
-    )
-
-set(libkgame_SRCS 
-    kgame/kgame.cpp 
-    kgame/kplayer.cpp 
-    kgame/kgamenetwork.cpp 
-    kgame/kgameproperty.cpp
-    kgame/kgamemessage.cpp 
-    kgame/kgameio.cpp 
-    kgame/kgameprocess.cpp 
+    highscore/khighscore.cpp
+    highscore/kscoredialog.cpp
+    kgame/kgame.cpp
     kgame/kgamechat.cpp
-    kgame/kgamepropertyhandler.cpp 
-    kgame/kgameerror.cpp 
+    kgame/kgameerror.cpp
+    kgame/kgameio.cpp
+    kgame/kgamemessage.cpp
+    kgame/kgamenetwork.cpp
+    kgame/kgameprocess.cpp
+    kgame/kgameproperty.cpp
+    kgame/kgamepropertyhandler.cpp
     kgame/kgamesequence.cpp
-    kgame/kmessageio.cpp 
-    kgame/kmessageserver.cpp 
     kgame/kmessageclient.cpp
-    )
-
-set(libkgamedialog_SRCS 
-    kgame/dialogs/kgamedialog.cpp 
-    kgame/dialogs/kgameconnectdialog.cpp 
-    kgame/dialogs/kgameerrordialog.cpp 
-    kgame/dialogs/kgamedebugdialog.cpp 
+    kgame/kmessageio.cpp
+    kgame/kmessageserver.cpp
+    kgame/kplayer.cpp
+    kgame/dialogs/kgameconnectdialog.cpp
+    kgame/dialogs/kgamedebugdialog.cpp
+    kgame/dialogs/kgamedialog.cpp
     kgame/dialogs/kgamedialogconfig.cpp
-    )
-
-set(libkgametheme_SRCS
+    kgame/dialogs/kgameerrordialog.cpp
+    kcarddialog.cpp
+    kchat.cpp
+    kchatbase.cpp
+    kchatbaseitemdelegate.cpp
+    kchatbasemodel.cpp
+    kchatdialog.cpp
+    kgamecanvas.cpp
+    kgameclock.cpp
+    kgamelcd.cpp
+    kgamemisc.cpp
+    kgameprogress.cpp
+    kgamesvgdocument.cpp
     kgametheme.cpp
     kgamethemeselector.cpp
+    kstandardgameaction.cpp
 )
-
-set(kdegames_LIB_SRCS ${libkhighscore_SRCS} ${libkgame_SRCS} ${libkgamedialog_SRCS} ${libkgamedigits_SRCS} ${libkgametheme_SRCS}
-    kgamecanvas.cpp 
-    kcarddialog.cpp 
-    kstandardgameaction.cpp 
-    kgamemisc.cpp 
-    kchatbase.cpp 
-    kchatbasemodel.cpp 
-    kchatbaseitemdelegate.cpp 
-    kchat.cpp 
-    kchatdialog.cpp 
-    kgameprogress.cpp 
-    kgamelcd.cpp
-    kgamesvgdocument.cpp 
-    kgameclock.cpp
-   )
 
 kde4_automoc(${kdegames_LIB_SRCS})
 
-kde4_add_ui_files(kdegames_LIB_SRCS kgamethemeselector.ui)
+kde4_add_ui_files(kdegames_LIB_SRCS
+    kgamethemeselector.ui
+)
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
