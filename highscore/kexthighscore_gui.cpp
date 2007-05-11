@@ -153,7 +153,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     vbox->setSpacing(KDialog::spacingHint());
 
     _tw = new QTabWidget(this);
-    connect(_tw, SIGNAL(currentChanged(QWidget *)), SLOT(tabChanged()));
+    connect(_tw, SIGNAL(currentChanged(int)), SLOT(tabChanged()));
     vbox->addWidget(_tw);
 
     // scores tab
