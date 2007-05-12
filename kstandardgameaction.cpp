@@ -39,36 +39,37 @@ struct KStandardGameActionInfo
 	const char* psLabel;
 	const char* psWhatsThis;
 	const char* psIconName;
+    const char* psToolTip;
 };
 
 const KStandardGameActionInfo g_rgActionInfo[] = {
 // "game" menu
-    { KStandardGameAction::New, KStandardShortcut::New, 0, "game_new", I18N_NOOP2("new game", "&New"), 0, "document-new" },
-    { KStandardGameAction::Load, KStandardShortcut::Open, 0, "game_load", I18N_NOOP("&Load..."), 0, "document-open" },
-    { KStandardGameAction::LoadRecent, KStandardShortcut::AccelNone, 0, "game_load_recent", I18N_NOOP("Load &Recent"), 0, 0 },
-    { KStandardGameAction::Restart, KStandardShortcut::Reload, 0, "game_restart", I18N_NOOP("Restart &Game"), 0, "view-refresh" },
-    { KStandardGameAction::Save, KStandardShortcut::Save, 0, "game_save", I18N_NOOP("&Save"), 0, "document-save" },
-    { KStandardGameAction::SaveAs, KStandardShortcut::AccelNone, 0, "game_save_as", I18N_NOOP("Save &As..."), 0, "document-save-as" },
-    { KStandardGameAction::End, KStandardShortcut::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "window-close" },
-    { KStandardGameAction::Pause, KStandardShortcut::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "media-playback-pause" },
-    { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "highscore" },
-    { KStandardGameAction::Print, KStandardShortcut::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "document-print" },
-    { KStandardGameAction::Quit, KStandardShortcut::Quit, 0, "game_quit", I18N_NOOP("&Quit"), 0, "application-exit" },
+    { KStandardGameAction::New, KStandardShortcut::New, 0, "game_new", I18N_NOOP2("new game", "&New"), 0, "document-new", "Start a new game" },
+    { KStandardGameAction::Load, KStandardShortcut::Open, 0, "game_load", I18N_NOOP("&Load..."), 0, "document-open", 0 },
+    { KStandardGameAction::LoadRecent, KStandardShortcut::AccelNone, 0, "game_load_recent", I18N_NOOP("Load &Recent"), 0, 0, 0 },
+    { KStandardGameAction::Restart, KStandardShortcut::Reload, 0, "game_restart", I18N_NOOP("Restart &Game"), 0, "view-refresh", 0 },
+    { KStandardGameAction::Save, KStandardShortcut::Save, 0, "game_save", I18N_NOOP("&Save"), 0, "document-save", 0  },
+    { KStandardGameAction::SaveAs, KStandardShortcut::AccelNone, 0, "game_save_as", I18N_NOOP("Save &As..."), 0, "document-save-as", 0  },
+    { KStandardGameAction::End, KStandardShortcut::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "window-close", 0  },
+    { KStandardGameAction::Pause, KStandardShortcut::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "media-playback-pause", 0  },
+    { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "highscore", 0  },
+    { KStandardGameAction::Print, KStandardShortcut::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "document-print", 0  },
+    { KStandardGameAction::Quit, KStandardShortcut::Quit, 0, "game_quit", I18N_NOOP("&Quit"), 0, "application-exit", 0  },
 // "move" menu
-    { KStandardGameAction::Repeat, KStandardShortcut::AccelNone, 0, "move_repeat", I18N_NOOP("Repeat"), 0, 0 },
-    { KStandardGameAction::Undo, KStandardShortcut::Undo, 0, "move_undo", I18N_NOOP("Und&o"), 0, "edit-undo" },
-    { KStandardGameAction::Redo, KStandardShortcut::Redo, 0, "move_redo", I18N_NOOP("Re&do"), 0, "edit-redo" },
-    { KStandardGameAction::Roll, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_R, "move_roll", I18N_NOOP("&Roll Dice"), 0, "roll" },
-    { KStandardGameAction::EndTurn, KStandardShortcut::AccelNone, 0, "move_end_turn", I18N_NOOP("End Turn"), 0, "endturn" },
-    { KStandardGameAction::Hint, KStandardShortcut::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "idea" },
-    { KStandardGameAction::Demo, KStandardShortcut::AccelNone, Qt::Key_D, "move_demo", I18N_NOOP("&Demo"), 0, "media-playback-start" },
-    { KStandardGameAction::Solve, KStandardShortcut::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "wizard" },
+    { KStandardGameAction::Repeat, KStandardShortcut::AccelNone, 0, "move_repeat", I18N_NOOP("Repeat"), 0, 0, 0  },
+    { KStandardGameAction::Undo, KStandardShortcut::Undo, 0, "move_undo", I18N_NOOP("Und&o"), 0, "edit-undo", 0  },
+    { KStandardGameAction::Redo, KStandardShortcut::Redo, 0, "move_redo", I18N_NOOP("Re&do"), 0, "edit-redo", 0  },
+    { KStandardGameAction::Roll, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_R, "move_roll", I18N_NOOP("&Roll Dice"), 0, "roll", 0  },
+    { KStandardGameAction::EndTurn, KStandardShortcut::AccelNone, 0, "move_end_turn", I18N_NOOP("End Turn"), 0, "endturn", 0  },
+    { KStandardGameAction::Hint, KStandardShortcut::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "idea", 0  },
+    { KStandardGameAction::Demo, KStandardShortcut::AccelNone, Qt::Key_D, "move_demo", I18N_NOOP("&Demo"), 0, "media-playback-start", 0  },
+    { KStandardGameAction::Solve, KStandardShortcut::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "wizard", 0  },
 // "settings" menu
-    { KStandardGameAction::ChooseGameType, KStandardShortcut::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0 },
-    { KStandardGameAction::Carddecks, KStandardShortcut::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0 },
-    { KStandardGameAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, "options_configure_highscores", I18N_NOOP("Configure &Highscores..."), 0, 0 },
+    { KStandardGameAction::ChooseGameType, KStandardShortcut::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0, 0  },
+    { KStandardGameAction::Carddecks, KStandardShortcut::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0, 0  },
+    { KStandardGameAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, "options_configure_highscores", I18N_NOOP("Configure &Highscores..."), 0, 0, 0  },
 
-    { KStandardGameAction::ActionNone, KStandardShortcut::AccelNone, 0, 0, 0, 0, 0 }
+    { KStandardGameAction::ActionNone, KStandardShortcut::AccelNone, 0, 0, 0, 0, 0, 0  }
 };
 
 static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGameAction id )
@@ -97,6 +98,8 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         case LoadRecent:
             pAction = new KRecentFilesAction(sLabel, parent);
             pAction->setShortcut( cut );
+            if (pInfo->psToolTip)
+              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect( pAction, SIGNAL(urlSelected(const KUrl&)), recvr, slot);
             break;
@@ -104,18 +107,24 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         case Demo:
             pAction = new KToggleAction(KIcon(pInfo->psIconName), sLabel, parent);
             pAction->setShortcut(cut);
+            if (pInfo->psToolTip)
+              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
         case ChooseGameType:
             pAction = new KSelectAction( KIcon(pInfo->psIconName), sLabel, parent);
             pAction->setShortcut( cut );
+            if (pInfo->psToolTip)
+              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect( pAction, SIGNAL( triggered(int) ), recvr, slot );
             break;
         default:
             pAction = new KAction(KIcon(pInfo->psIconName),  sLabel, parent);
             pAction->setShortcut(cut);
+            if (pInfo->psToolTip)
+              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
