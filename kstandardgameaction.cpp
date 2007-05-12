@@ -1,6 +1,7 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
+    Copyright (C) 2001 Andreas Beckermann <b_mann@gmx.de>
+    Copyright (C) 2007 Simon Hürlimann <simon.huerlimann@huerlisi.ch>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -32,13 +33,13 @@
 
 struct KStandardGameActionInfo
 {
-	KStandardGameAction::StandardGameAction id;
-	KStandardShortcut::StandardShortcut globalAccel; // if we reuse a global accel
+    KStandardGameAction::StandardGameAction id;
+    KStandardShortcut::StandardShortcut globalAccel; // if we reuse a global accel
     int shortcut; // specific shortcut (NH: should be configurable)
-	const char* psName;
-	const char* psLabel;
-	const char* psWhatsThis;
-	const char* psIconName;
+    const char* psName;
+    const char* psLabel;
+    const char* psWhatsThis;
+    const char* psIconName;
     const char* psToolTip;
 };
 
@@ -74,23 +75,23 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
 
 static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGameAction id )
 {
-	for (uint i = 0; g_rgActionInfo[i].id!=KStandardGameAction::ActionNone; i++) {
-		if( g_rgActionInfo[i].id == id )
-			return &g_rgActionInfo[i];
-	}
-	return 0;
+    for (uint i = 0; g_rgActionInfo[i].id!=KStandardGameAction::ActionNone; i++) {
+      if( g_rgActionInfo[i].id == id )
+        return &g_rgActionInfo[i];
+    }
+    return 0;
 }
 
 
 KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
                                      QObject* parent )
 {
-	KAction* pAction = 0;
-	const KStandardGameActionInfo* pInfo = infoPtr( id );
-	kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << " )" << endl;
-	if( pInfo ) {
-		QString sLabel = i18n(pInfo->psLabel);
-		KShortcut cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
+    KAction* pAction = 0;
+    const KStandardGameActionInfo* pInfo = infoPtr( id );
+    kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << " )" << endl;
+    if( pInfo ) {
+        QString sLabel = i18n(pInfo->psLabel);
+        KShortcut cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
                          ? KShortcut(pInfo->shortcut)
                          : KStandardShortcut::shortcut(pInfo->globalAccel));
         bool do_connect = (recvr && slot); //both not 0
@@ -128,22 +129,22 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
-		}
-
-        pAction->setObjectName(pInfo->psName);
         }
 
-        KActionCollection *collection = qobject_cast<KActionCollection *>(parent);
-        if (collection && pAction)
-            collection->addAction(pAction->objectName(), pAction);
+        pAction->setObjectName(pInfo->psName);
+    }
 
-	return pAction;
+    KActionCollection *collection = qobject_cast<KActionCollection *>(parent);
+    if (collection && pAction)
+        collection->addAction(pAction->objectName(), pAction);
+
+    return pAction;
 }
 
 const char* KStandardGameAction::name( StandardGameAction id )
 {
-	const KStandardGameActionInfo* pInfo = infoPtr( id );
-	return (pInfo) ? pInfo->psName : 0;
+    const KStandardGameActionInfo* pInfo = infoPtr( id );
+    return (pInfo) ? pInfo->psName : 0;
 }
 
 KAction *KStandardGameAction::gameNew(const QObject *recvr, const char *slot,
