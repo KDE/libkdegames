@@ -52,8 +52,8 @@ class ModulePrivate : public QObject
 		void connect();
 		void disconnect();
 		void sendRequest(Request request);
-		void insertPlayer(Player::Type seattype, QString name, int seat);
-		Player *findPlayer(Player::Type seattype, QString name);
+		void insertPlayer(Player::Type seattype, const QString &name, int seat);
+		Player *findPlayer(Player::Type seattype, const QString &name);
 		Player *self() const;
 		QString opcodeString(int opcode);
 		QString requestString(Request::Type requestcode);

@@ -157,7 +157,7 @@ class SitRequest : public Request
 class BootRequest : public Request
 {
 	public:
-		BootRequest(QString playername);
+		BootRequest(const QString &playername);
 };
 
 /**
@@ -206,7 +206,7 @@ class OpenRequest : public Request
 class ChatRequest : public Request
 {
 	public:
-		ChatRequest(QString message);
+		ChatRequest(const QString &message);
 };
 
 /**

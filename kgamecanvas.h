@@ -67,14 +67,14 @@ public:
     const QList<KGameCanvasItem*>* items() const { return &m_items; }
 
     /** Helper function to retrieve the topmost item at the given position */
-    KGameCanvasItem* itemAt(QPoint pos) const;
+    KGameCanvasItem* itemAt(const QPoint &pos) const;
 
     /** Overload, same as above */
     KGameCanvasItem* itemAt(int x, int y) const { return itemAt(QPoint(x,y)); }
 
     /** Helper function to retrieve all the items at the given position,
         starting from the topmost one. */
-    QList<KGameCanvasItem*> itemsAt(QPoint pos) const;
+    QList<KGameCanvasItem*> itemsAt(const QPoint &pos) const;
 
     /** Overload, same as above */
     QList<KGameCanvasItem*> itemsAt(int x, int y) const { return itemsAt(QPoint(x,y)); }
@@ -122,9 +122,9 @@ private:
     QRect m_last_rect;
 
     static QPixmap* transparence_pixmap_cache;
-    static QPixmap* getTransparenceCache(QSize s);
+    static QPixmap* getTransparenceCache(const QSize &s);
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          QPoint delta, double cumulative_opacity);
+                                          const QPoint &delta, double cumulative_opacity);
 
     void updateAfterRestack(int from, int to);
 
@@ -234,7 +234,7 @@ class KDEGAMES_EXPORT KGameCanvasDummy : public KGameCanvasItem
 private:
     /** This function does nothing (of course) */
     virtual void paintInternal(QPainter* p, const QRect& prect,
-            const QRegion& preg, QPoint delta, double cumulative_opacity);
+            const QRegion& preg, const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor */
@@ -335,7 +335,7 @@ private:
 
     /** optimization of this special case, it is a bit faster */
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          QPoint delta, double cumulative_opacity);
+                                          const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor, specifying the pixmap to use */
@@ -372,11 +372,11 @@ private:
 
     /** optimization of this special case, it is a bit faster */
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          QPoint delta, double cumulative_opacity);
+                                          const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasTiledPixmap(const QPixmap& pixmap, QSize size, QPoint origin,
+    KGameCanvasTiledPixmap(const QPixmap& pixmap, const QSize &size, const QPoint &origin,
                             bool move_orig, KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty pixmap */
@@ -391,13 +391,13 @@ public:
     void setPixmap(const QPixmap& pixmap);
 
     /** Sets the size */
-    void setSize(QSize size);
+    void setSize(const QSize &size);
 
     /** The origin */
     QPoint origin() const { return m_move_orig ? m_origin + pos() : m_origin; }
 
     /** Sets the origin of the tiles */
-    void setOrigin(QPoint size);
+    void setOrigin(const QPoint &size);
 
     /** If the origin is moved */
     bool moveOrigin(){ return m_move_orig; }
@@ -424,11 +424,11 @@ private:
 
     /** optimization of this special case, it is much faster */
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          QPoint delta, double cumulative_opacity);
+                                          const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasRectangle(const QColor& color, QSize size, KGameCanvasAbstract* canvas = NULL);
+    KGameCanvasRectangle(const QColor& color, const QSize &size, KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty pixmap */
     KGameCanvasRectangle(KGameCanvasAbstract* canvas = NULL);
@@ -442,7 +442,7 @@ public:
     void setColor(const QColor& color);
 
     /** Sets the size */
-    void setSize(QSize size);
+    void setSize(const QSize &size);
 
     virtual void paint(QPainter* p);
     virtual QRect rect() const;
@@ -490,7 +490,7 @@ private:
 
     /** optimization of this special case, it is much faster */
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          QPoint delta, double cumulative_opacity);
+                                          const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor, specifying the text and the parameters to use */

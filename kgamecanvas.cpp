@@ -57,7 +57,7 @@ KGameCanvasAbstract::~KGameCanvasAbstract() {
      m_items[i]->m_canvas = NULL;
 }
 
-KGameCanvasItem* KGameCanvasAbstract::itemAt(QPoint pt) const {
+KGameCanvasItem* KGameCanvasAbstract::itemAt(const QPoint &pt) const {
   for(int i=m_items.size()-1;i>=0;i--) {
     KGameCanvasItem *el = m_items[i];
     if(el->m_visible && el->rect().contains(pt))
@@ -66,7 +66,7 @@ KGameCanvasItem* KGameCanvasAbstract::itemAt(QPoint pt) const {
   return NULL;
 }
 
-QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(QPoint pt) const {
+QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(const QPoint &pt) const {
   QList<KGameCanvasItem*> retv;
 
   for(int i=m_items.size()-1;i>=0;i--) {
@@ -263,7 +263,7 @@ void KGameCanvasItem::updateChanges() {
 
 QPixmap *KGameCanvasItem::transparence_pixmap_cache = NULL;
 
-QPixmap* KGameCanvasItem::getTransparenceCache(QSize s) {
+QPixmap* KGameCanvasItem::getTransparenceCache(const QSize &s) {
   if(!transparence_pixmap_cache)
     transparence_pixmap_cache = new QPixmap();
   if(s.width()>transparence_pixmap_cache->width() ||
@@ -278,7 +278,7 @@ QPixmap* KGameCanvasItem::getTransparenceCache(QSize s) {
 }
 
 void KGameCanvasItem::paintInternal(QPainter* pp, const QRect& /*prect*/,
-                    const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
+                    const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
   int opacity = int(cumulative_opacity*m_opacity + 0.5);
 
   if(opacity <= 0)
@@ -626,7 +626,7 @@ KGameCanvasDummy::~KGameCanvasDummy()
 }
 
 void KGameCanvasDummy::paintInternal(QPainter* /*pp*/, const QRect& /*prect*/,
-                    const QRegion& /*preg*/, QPoint /*delta*/, double /*cumulative_opacity*/) {
+                    const QRegion& /*preg*/, const QPoint& /*delta*/, double /*cumulative_opacity*/) {
 }
 
 void KGameCanvasDummy::paint(QPainter* /*p*/) {
@@ -662,7 +662,7 @@ void KGameCanvasPixmap::setPixmap(const QPixmap& p) {
 }
 
 void KGameCanvasPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
+                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
   int op = int(cumulative_opacity*opacity() + 0.5);
 
   if(op <= 0)
@@ -687,7 +687,7 @@ QRect KGameCanvasPixmap::rect() const {
 /*
     KGameCanvasTiledPixmap
 */
-KGameCanvasTiledPixmap::KGameCanvasTiledPixmap(const QPixmap& pixmap, QSize size, QPoint origin,
+KGameCanvasTiledPixmap::KGameCanvasTiledPixmap(const QPixmap& pixmap, const QSize &size, const QPoint &origin,
                         bool move_orig, KGameCanvasAbstract* KGameCanvas)
     : KGameCanvasItem(KGameCanvas)
     , m_pixmap(pixmap)
@@ -715,13 +715,13 @@ void KGameCanvasTiledPixmap::setPixmap(const QPixmap& pixmap) {
       changed();
 }
 
-void KGameCanvasTiledPixmap::setSize(QSize size) {
+void KGameCanvasTiledPixmap::setSize(const QSize &size) {
   m_size = size;
   if(visible() && canvas() )
     changed();
 }
 
-void KGameCanvasTiledPixmap::setOrigin(QPoint origin)
+void KGameCanvasTiledPixmap::setOrigin(const QPoint &origin)
 {
   m_origin = m_move_orig ? origin - pos() : origin;
 
@@ -740,7 +740,7 @@ void KGameCanvasTiledPixmap::setMoveOrigin(bool move_orig)
 }
 
 void KGameCanvasTiledPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
+                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
   int op = int(cumulative_opacity*opacity() + 0.5);
 
   if(op <= 0)
@@ -773,7 +773,7 @@ QRect KGameCanvasTiledPixmap::rect() const
 /*
     KGameCanvasRectangle
 */
-KGameCanvasRectangle::KGameCanvasRectangle(const QColor& color, QSize size, KGameCanvasAbstract* KGameCanvas)
+KGameCanvasRectangle::KGameCanvasRectangle(const QColor& color, const QSize &size, KGameCanvasAbstract* KGameCanvas)
     : KGameCanvasItem(KGameCanvas)
     , m_color(color)
     , m_size(size)
@@ -800,7 +800,7 @@ void KGameCanvasRectangle::setColor(const QColor& color)
     changed();
 }
 
-void KGameCanvasRectangle::setSize(QSize size)
+void KGameCanvasRectangle::setSize(const QSize &size)
 {
   m_size = size;
   if(visible() && canvas() )
@@ -808,7 +808,7 @@ void KGameCanvasRectangle::setSize(QSize size)
 }
 
 void KGameCanvasRectangle::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
+                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
   QColor col = m_color;
   cumulative_opacity *= opacity()/255.0;
 
@@ -929,7 +929,7 @@ QPoint KGameCanvasText::offsetToDrawPos() const {
 }
 
 void KGameCanvasText::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, QPoint /*delta*/, double cumulative_opacity) {
+                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
   QColor col = m_color;
   cumulative_opacity *= opacity()/255.0;
 

@@ -43,7 +43,7 @@ using namespace KGGZMod;
 
 static Module *s_module = NULL;
 
-Module::Module(QString name)
+Module::Module(const QString &name)
 : QObject()
 {
 	s_module = this;
@@ -501,7 +501,7 @@ Player *ModulePrivate::self() const
 	return 0;
 }
 
-Player* ModulePrivate::findPlayer(Player::Type seattype, QString name)
+Player* ModulePrivate::findPlayer(Player::Type seattype, const QString &name)
 {
 	QList<Player*>::Iterator it;
 
@@ -529,7 +529,7 @@ Player* ModulePrivate::findPlayer(Player::Type seattype, QString name)
 	return 0;
 }
 
-void ModulePrivate::insertPlayer(Player::Type seattype, QString name, int seat)
+void ModulePrivate::insertPlayer(Player::Type seattype, const QString &name, int seat)
 {
 	QList<Player*>::Iterator it;
 

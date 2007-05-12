@@ -90,7 +90,7 @@ class Module : public QObject
 		 *
 		 * @param name Name of the game client
 		 */
-		Module(QString name);
+		Module(const QString &name);
 		~Module();
 
 		/**

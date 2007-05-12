@@ -49,7 +49,7 @@ SitRequest::SitRequest(int seat)
 	data["seat"] = QString::number(seat);
 }
 
-BootRequest::BootRequest(QString playername)
+BootRequest::BootRequest(const QString &playername)
 : Request(Request::boot)
 {
 	data["player"] = playername;
@@ -67,7 +67,7 @@ OpenRequest::OpenRequest(int seat)
 	data["seat"] = QString::number(seat);
 }
 
-ChatRequest::ChatRequest(QString message)
+ChatRequest::ChatRequest(const QString &message)
 : Request(Request::chat)
 {
 	data["message"] = message;

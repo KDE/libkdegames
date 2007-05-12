@@ -104,7 +104,7 @@ class KGameSvgDigitsPrivate
      * @param color The RGBA color to apply
      * @returns returns nothing.
      */
-    void applyColor(QDomNode node, QColor color);
+    void applyColor(const QDomNode &node, const QColor &color);
 
     /**
      * @brief Renders individual style digits
@@ -1191,7 +1191,7 @@ void KGameSvgDigitsPrivate::swapColors()
     m_highlighted = !m_highlighted;
 }
 
-void KGameSvgDigitsPrivate::applyColor(QDomNode node, QColor color)
+void KGameSvgDigitsPrivate::applyColor(const QDomNode &node, const QColor &color)
 {
     /*  In SVG, the alpha channel is spec'd in the fill-opacity property, not
      *  in the fill property.  SVG fill-opacity must be spec'd as a number from 0 to 1
