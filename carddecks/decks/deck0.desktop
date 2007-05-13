@@ -1,7 +1,6 @@
 [KDE Cards]
 Name=Technics
 Name[be]=Тэхніка
-Name[bg]=Техника
 Name[ca]=Tècniques
 Name[cs]=Technika
 Name[eo]=Tekniko
@@ -43,7 +42,6 @@ Name[zh_TW]=工藝
 Comment=Standard KDE card deck
 Comment[af]=Standaard Kde kaart pak
 Comment[be]=Стандартная калода картаў KDE
-Comment[bg]=Стандартна колода карти за KDE
 Comment[ca]=Joc de cartes estàndard del KDE
 Comment[cs]=Standardní sada karet KDE
 Comment[cy]=Set cerdiau safonol KDE

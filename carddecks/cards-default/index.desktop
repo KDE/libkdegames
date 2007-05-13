@@ -2,7 +2,6 @@
 Name=Standard
 Name[af]=Standaard
 Name[be]=Звычайная
-Name[bg]=Стандарт
 Name[br]=Reoliek
 Name[ca]=Estàndard
 Name[cs]=Standardní
@@ -44,7 +43,6 @@ PySol=false
 Comment=Standard KDE card set\nGPL license
 Comment[af]=Standaard Kde kaart stel\nGPL lisensie
 Comment[be]=Звычайная калода картаў KDE\nGPL license
-Comment[bg]=Стандартна колода карти KDE\nОПЛ лиценз(GPL)
 Comment[ca]=Joc de cartes estàndard per al KDE sota\nLlicència GPL
 Comment[cs]=Standardní sada karet KDE\nGPL licence
 Comment[cy]=Trwydded GPL safonol\nar gyfer set cerdiau KDE
