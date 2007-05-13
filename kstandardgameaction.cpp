@@ -94,46 +94,38 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
     kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << " )" << endl;
     if( pInfo ) {
         QString sLabel = i18n(pInfo->psLabel);
-        KShortcut cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
-                         ? KShortcut(pInfo->shortcut)
-                         : KStandardShortcut::shortcut(pInfo->globalAccel));
         bool do_connect = (recvr && slot); //both not 0
         switch( id ) {
         case LoadRecent:
             pAction = new KRecentFilesAction(sLabel, parent);
-            pAction->setShortcut( cut );
-            if (pInfo->psToolTip)
-              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect( pAction, SIGNAL(urlSelected(const KUrl&)), recvr, slot);
             break;
         case Pause:
         case Demo:
             pAction = new KToggleAction(KIcon(pInfo->psIconName), sLabel, parent);
-            pAction->setShortcut(cut);
-            if (pInfo->psToolTip)
-              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
         case ChooseGameType:
             pAction = new KSelectAction( KIcon(pInfo->psIconName), sLabel, parent);
-            pAction->setShortcut( cut );
-            if (pInfo->psToolTip)
-              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect( pAction, SIGNAL( triggered(int) ), recvr, slot );
             break;
         default:
             pAction = new KAction(KIcon(pInfo->psIconName),  sLabel, parent);
-            pAction->setShortcut(cut);
-            if (pInfo->psToolTip)
-              pAction->setToolTip(i18n(pInfo->psToolTip));
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
         }
 
+        KShortcut cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
+                         ? KShortcut(pInfo->shortcut)
+                         : KStandardShortcut::shortcut(pInfo->globalAccel));
+        pAction->setShortcut(cut);
+        if (pInfo->psToolTip)
+                pAction->setToolTip(i18n(pInfo->psToolTip));
+        
         pAction->setObjectName(pInfo->psName);
     }
 
