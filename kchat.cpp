@@ -89,7 +89,7 @@ void KChat::returnPressed(const QString& text)
  if (autoAddMessages()) {
 	QString p = player(id);
 	if (p.isNull()) {
-		p = i18n("Unknown");
+		p = i18nc("Unknown player", "Unknown");
 	}
 	kDebug(11000) << "auto adding message from player " << p << " ;id=" << id << endl;
 	addMessage(p, text);

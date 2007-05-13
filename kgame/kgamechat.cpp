@@ -97,7 +97,7 @@ void KGameChat::addMessage(int fromId, const QString& text)
 		addMessage(p->name(), text);
 	} else {
 		kWarning(11001) << "Could not find player id " << fromId << endl;
-		addMessage(i18n("Unknown"), text);
+		addMessage(i18nc("Unknown player", "Unknown"), text);
 	}
  }
 }

@@ -42,7 +42,7 @@ this software.
 #include <QtGui/QLineEdit>
 #include <QtGui/QStackedWidget>
 
-#define DEFAULT_GROUP_NAME "High Scores"
+#define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
 
 typedef QList<KScoreDialog::FieldInfo> GroupScores;
 
