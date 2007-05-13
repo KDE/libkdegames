@@ -272,13 +272,12 @@ void KMessageServer::deleteClients()
 
 void KMessageServer::removeBrokenClient ()
 {
-  if (!sender()->inherits ("KMessageIO"))
+  KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
+  if (!client)
   {
     kError (11001) << k_funcinfo << ": sender of the signal was not a KMessageIO object!" << endl;
     return;
   }
-
-  KMessageIO *client = (KMessageIO *) sender();
 
   emit connectionLost (client);
   removeClient (client, true);
@@ -380,13 +379,13 @@ void KMessageServer::sendMessage (const QList <quint32> &ids, const QByteArray &
 
 void KMessageServer::getReceivedMessage (const QByteArray &msg)
 {
-  if (!sender() || !sender()->inherits("KMessageIO"))
+  KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
+  if (!client)
   {
     kError (11001) << k_funcinfo << ": slot was not called from KMessageIO!" << endl;
     return;
   }
   //kDebug(11001) << k_funcinfo << ": size=" << msg.size() << endl;
-  KMessageIO *client = (KMessageIO *) sender();
   quint32 clientID = client->id();
 
   //QByteArray *ta=new QByteArray;
