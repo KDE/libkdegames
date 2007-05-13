@@ -54,6 +54,9 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
     { KStandardGameAction::End, KStandardShortcut::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "window-close", I18N_NOOP("End the current game") },
     { KStandardGameAction::Pause, KStandardShortcut::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "media-playback-pause", I18N_NOOP("Pause the game") },
     { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "highscore", I18N_NOOP("Show highscores") },
+    { KStandardGameAction::ClearHighscores, KStandardShortcut::AccelNone, 0, "game_clear_highscores", I18N_NOOP("&Clear Highscores"), 0, "clear_highscore", I18N_NOOP("Clear highscores") },
+    { KStandardGameAction::Statistics, KStandardShortcut::AccelNone, 0, "game_statistics", I18N_NOOP("Show Statistics"), 0, "highscore", I18N_NOOP("Show statistics") },
+    { KStandardGameAction::ClearStatistics, KStandardShortcut::AccelNone, 0, "game_clear_statistics", I18N_NOOP("&Clear Statistics"), 0, "flag", I18N_NOOP("Delete all time statistics.") },
     { KStandardGameAction::Print, KStandardShortcut::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "document-print", 0 },
     { KStandardGameAction::Quit, KStandardShortcut::Quit, 0, "game_quit", I18N_NOOP("&Quit"), 0, "application-exit", I18N_NOOP("Quit the program") },
 // "move" menu
@@ -171,6 +174,12 @@ KToggleAction *KStandardGameAction::pause(const QObject *recvr, const char *slot
 KAction *KStandardGameAction::highscores(const QObject *recvr, const char *slot,
                                          QObject *parent)
 { return KStandardGameAction::create(Highscores, recvr, slot, parent); }
+KAction *KStandardGameAction::statistics(const QObject *recvr, const char *slot,
+                                         QObject *parent)
+{ return KStandardGameAction::create(Highscores, recvr, slot, parent); }
+KAction *KStandardGameAction::clearStatistics(const QObject *recvr, const char *slot,
+                                         QObject *parent)
+{ return KStandardGameAction::create(ClearStatistics, recvr, slot, parent); }
 KAction *KStandardGameAction::print(const QObject *recvr, const char *slot,
                                     QObject *parent)
 { return KStandardGameAction::create(Print, recvr, slot, parent); }

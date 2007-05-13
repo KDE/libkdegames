@@ -50,7 +50,7 @@ namespace KStandardGameAction
    **/
     enum StandardGameAction {
         // Game menu
-        New=1, Load, LoadRecent, Save, SaveAs, End, Pause, Highscores,
+        New=1, Load, LoadRecent, Save, SaveAs, End, Pause, Highscores, Statistics,
         Print, Quit,
         // Move menu
         Repeat, Undo, Redo, Roll, EndTurn,
@@ -58,6 +58,8 @@ namespace KStandardGameAction
         Carddecks,
         ChooseGameType,
         ConfigureHighscores,
+        ClearHighscores,
+        ClearStatistics,
         Restart,
         Hint,
         Demo,
@@ -121,6 +123,24 @@ namespace KStandardGameAction
      * Show the highscores.
      */
     KDEGAMES_EXPORT KAction *highscores(const QObject *recvr, const char *slot,
+                               QObject *parent );
+
+    /**
+     * Clear highscores.
+     */
+    KDEGAMES_EXPORT KAction *clearHighscores(const QObject *recvr, const char *slot,
+                               QObject *parent );
+
+    /**
+     * Show the statistics.
+     */
+    KDEGAMES_EXPORT KAction *statistics(const QObject *recvr, const char *slot,
+                               QObject *parent );
+
+    /**
+     * Clear statistics.
+     */
+    KDEGAMES_EXPORT KAction *clearStatistics(const QObject *recvr, const char *slot,
                                QObject *parent );
 
 
