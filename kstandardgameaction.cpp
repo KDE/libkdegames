@@ -45,7 +45,7 @@ struct KStandardGameActionInfo
 
 const KStandardGameActionInfo g_rgActionInfo[] = {
 // "game" menu
-    { KStandardGameAction::New, KStandardShortcut::New, 0, "game_new", I18N_NOOP2("new game", "&New"), 0, "document-new", I18N_NOOP("Start a new game") },
+    { KStandardGameAction::New, KStandardShortcut::New, 0, "game_new", I18N_NOOP2("new game", "&New"), I18N_NOOP("Start a new game."), "document-new", I18N_NOOP("Start a new game") },
     { KStandardGameAction::Load, KStandardShortcut::Open, 0, "game_load", I18N_NOOP("&Load..."), 0, "document-open", I18N_NOOP("Open a saved game...") },
     { KStandardGameAction::LoadRecent, KStandardShortcut::AccelNone, 0, "game_load_recent", I18N_NOOP("Load &Recent"), 0, 0, I18N_NOOP("Open a recently saved game...") },
     { KStandardGameAction::Restart, KStandardShortcut::Reload, 0, "game_restart", I18N_NOOP("Restart &Game"), 0, "view-refresh", I18N_NOOP("Restart the game") },
@@ -113,7 +113,7 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
                 QObject::connect( pAction, SIGNAL( triggered(int) ), recvr, slot );
             break;
         default:
-            pAction = new KAction(KIcon(pInfo->psIconName),  sLabel, parent);
+            pAction = new KAction(KIcon(pInfo->psIconName), sLabel, parent);
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
@@ -125,6 +125,8 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         pAction->setShortcut(cut);
         if (pInfo->psToolTip)
                 pAction->setToolTip(i18n(pInfo->psToolTip));
+        if (pInfo->psWhatsThis)
+                pAction->setWhatsThis(i18n(pInfo->psWhatsThis));
         
         pAction->setObjectName(pInfo->psName);
     }
