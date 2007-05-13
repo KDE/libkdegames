@@ -87,7 +87,7 @@
    <item row="1" column="0" >
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Properties</string>
+      <string>Theme Details</string>
      </property>
      <layout class="QHBoxLayout" >
       <property name="spacing" >
