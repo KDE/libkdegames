@@ -44,7 +44,7 @@ this software.
 
 #define DEFAULT_GROUP_NAME "High Scores"
 
-typedef QList<KScoreDialog::FieldInfo*> GroupScores;
+typedef QList<KScoreDialog::FieldInfo> GroupScores;
 
 class KScoreDialog::KScoreDialogPrivate
 {
@@ -128,6 +128,8 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 
 KScoreDialog::~KScoreDialog()
 {
+    delete d->highscoreObject;
+
     delete d;
 }
 
@@ -285,7 +287,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             
             //kDebug() << "groupName: " << groupName << " id: " << i-1 << endl;
             
-            FieldInfo *score = scores[groupName].at(i-1);
+            FieldInfo score = scores[groupName].at(i-1);
             label = labels[groupName].at((i-1)*nrCols + 0);
             if ( (i == latest.second) && (groupName == latest.first) )
                 label->setFont(bold);
@@ -311,7 +313,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                         label->setFont(bold);
                     else
                         label->setFont(normal);
-                    label->setText((*score)[Name]);
+                    label->setText(score[Name]);
                 }
         
             }
@@ -324,7 +326,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                         label->setFont(bold);
                     else
                         label->setFont(normal);
-                    label->setText((*score)[field]);
+                    label->setText(score[field]);
                 }
             }
         }
@@ -357,12 +359,12 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         
         for (int i = 1; i <= 10; ++i)
         {
-            FieldInfo *score = new FieldInfo();
+            FieldInfo score;
             for(int field = 1; field < fields; field = field * 2)
             {
                 if (fields & field)
                 {
-                    (*score)[field] = highscoreObject->readEntry(i, key[field], QString("-"));
+                    score[field] = highscoreObject->readEntry(i, key[field], QString("-"));
                 }
             }
             scores[groupName].append(score);
@@ -371,7 +373,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
     foreach(QString groupName, scores.keys())
     {
-        if( (scores[groupName][0]->value(Score)=="-") && (scores.size() > 1) && (latest.first != groupName) )
+        if( (scores[groupName][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupName) )
         {
             kDebug(11002) << "Removing group \"" << groupName << "\" since it's unused." << endl;
             scores.remove(groupName);
@@ -388,12 +390,12 @@ void KScoreDialog::KScoreDialogPrivate::saveScores()
     
     for (int i = 1; i <= 10; ++i)
     {
-        FieldInfo *score = scores[configGroup].at(i-1);
+        FieldInfo score = scores[configGroup].at(i-1);
         for(int field = 1; field < fields; field = field * 2)
         {
             if (fields & field)
             {
-                highscoreObject->writeEntry(i, key[field], (*score)[field]);
+                highscoreObject->writeEntry(i, key[field], score[field]);
             }
         }
     }
@@ -413,17 +415,16 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
         d->loadScores();
     d->latest.first = "Null"; //and reset it.
     
-    FieldInfo *score;
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
-        score = d->scores[d->configGroup].at(i); //First look at the score in the config file
+        FieldInfo score = d->scores[d->configGroup].at(i); //First look at the score in the config file
         bool ok;
-        int num_score = (*score)[Score].toLong(&ok); //test if the stored score is a number
+        int num_score = score[Score].toLong(&ok); //test if the stored score is a number
         if (lessIsMore && !ok)
             num_score = 1 << 30; //this is a very large number so the score won't be on the table
         
-        score = new FieldInfo(newInfo); //now look at the submitted score
-        int newScore = (*score)[Score].toInt();
+        score = FieldInfo(newInfo); //now look at the submitted score
+        int newScore = score[Score].toInt();
         if (((newScore > num_score) && !lessIsMore) ||
               ((newScore < num_score) && lessIsMore))
         {
@@ -432,12 +433,12 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
             d->scores[d->configGroup].insert(i, score);
             d->scores[d->configGroup].removeAt(10);
             
-            if((*score)[Name].isEmpty()) //If we don't have a name, prompt the player.
+            if(score[Name].isEmpty()) //If we don't have a name, prompt the player.
                 askName = true;
             
             if (askName)
             {
-                d->player=(*score)[Name];
+                d->player=score[Name];
                 d->newName = QPair<QString,int>(d->configGroup,i+1);
             }
             else
@@ -483,7 +484,7 @@ void KScoreDialog::slotGotName()
 
     d->player = d->edit->text();
     
-    (*d->scores[d->newName.first].at(d->newName.second-1))[Name] = d->player;
+    d->scores[d->newName.first][d->newName.second-1][Name] = d->player;
     d->saveScores();
     
     QFont bold = font();
@@ -504,7 +505,7 @@ int KScoreDialog::highScore()
         d->loadScores();
    
     if (!d->scores[d->configGroup].isEmpty())
-        return (*d->scores[d->configGroup].first())[Score].toInt();
+        return d->scores[d->configGroup].first()[Score].toInt();
     else
         return 0;
 }
