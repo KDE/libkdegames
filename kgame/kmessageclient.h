@@ -23,7 +23,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-
+#include <libkdegames_export.h>
 class KMessageIO;
 class KMessageServer;
 class KMessageClientPrivate;
@@ -47,7 +47,7 @@ class KMessageClientPrivate;
   In that case the messages must be of the format specified in KMessageServer.
   @author Burkhard Lehner <Burkhard.Lehner@gmx.de>
 */
-class KMessageClient : public QObject
+class KDEGAMES_EXPORT KMessageClient : public QObject
 {
   Q_OBJECT
 
