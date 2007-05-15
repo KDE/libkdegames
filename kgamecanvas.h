@@ -96,8 +96,6 @@ public:
 };
 
 
-class KGameCanvasAbstract;
-
 /**
     \class KGameCanvasItem canvas.h <canvas.h>
     \brief An abstract item.
