@@ -262,7 +262,7 @@ private:
     mutable QRect m_last_child_rect;
 
     virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          QPoint delta, double cumulative_opacity);
+                                          const QPoint& delta, double cumulative_opacity);
 
     virtual void ensureAnimating();
     virtual void ensurePendingUpdate();

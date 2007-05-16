@@ -566,10 +566,11 @@ void KGameCanvasGroup::advance(int msecs) {
 }
 
 void KGameCanvasGroup::paintInternal(QPainter* p, const QRect& prect,
-          const QRegion& preg, QPoint delta, double cumulative_opacity) {
+          const QRegion& preg, const QPoint& delta, double cumulative_opacity) {
   cumulative_opacity *= (m_opacity/255.0);
 
-  delta += m_pos;
+  QPoint adelta = delta;
+  adelta += m_pos;
   p->translate(m_pos);
 
   for(int i=0;i<m_items.size();i++) {
