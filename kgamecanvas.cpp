@@ -575,11 +575,11 @@ void KGameCanvasGroup::paintInternal(QPainter* p, const QRect& prect,
 
   for(int i=0;i<m_items.size();i++) {
     KGameCanvasItem *el = m_items[i];
-    QRect r = el->rect().translated(delta);
+    QRect r = el->rect().translated(adelta);
 
     if( el->m_visible && prect.intersects( r ) && preg.contains( r ) ) {
       el->m_last_rect = r;
-      el->paintInternal(p,prect,preg,delta,cumulative_opacity);
+      el->paintInternal(p,prect,preg,adelta,cumulative_opacity);
     }
   }
 
