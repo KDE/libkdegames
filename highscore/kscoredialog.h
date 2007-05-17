@@ -134,6 +134,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         * the group will simply be 'KHighscore'
         */
         void setConfigGroup(const QString& group = QString());
+        //void setConfigGroup(const QString& group, const QString& i18nName);
 
         /**
          * @param comment to add when showing high-scores.

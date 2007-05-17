@@ -26,6 +26,21 @@
 class KGameTheme;
 class KConfigSkeleton;
 
+/**
+ * @short A widget used to select the game's theme
+ *
+ * The most common way to use the theme selector is to add it as page to a KConfigDialog
+ * \code
+ * KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
+ * dialog->addPage(new KGameThemeSelector(dialog, Settings::self()), i18n("Theme"), "game_theme");
+ * dialog->show();
+ * \endcode
+ * This will create a page in your KConfigDialog with the title "Theme" and using the 
+ * "game_theme" icon. By default, the widget will search in the share/apps/appname/themes 
+ * directory for .desktop files with a group called "KGameTheme".
+ *
+ * @author Mauricio Piacentini
+ **/
 class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
@@ -33,7 +48,7 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
         /**
          * Load a specific theme file.
          * @param groupName the title of the config group in the theme .desktop file
-         * @param directory subdirectory to search in
+         * @param directory subdirectory (of share/apps/appname) to search in
          * @return true if the theme files and properties could be loaded
          */
         KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));

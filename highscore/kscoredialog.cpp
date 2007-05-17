@@ -44,13 +44,13 @@ this software.
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
 
-typedef QList<KScoreDialog::FieldInfo> GroupScores;
+typedef QList<KScoreDialog::FieldInfo> GroupScores; ///<The list of scores in a group
 
 class KScoreDialog::KScoreDialogPrivate
 {
     public:
         //QList<FieldInfo*> scores;
-        QMap<QString, GroupScores> scores;
+        QMap<QString, GroupScores> scores; ///<Maps config group name to GroupScores
         KTabWidget *tabWidget;
         //QWidget *page;
         //QGridLayout *layout;
