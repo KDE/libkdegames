@@ -26,7 +26,7 @@
 #include <QtGui/QWidget>
 
 /**
- * @mainpage
+ * @mainpage kggzgames
  *
  * The \b kggzgames library helps KDE/Qt game developers to integrate
  * their game with the GGZ Gaming Zone. It is the visual counterpart to
