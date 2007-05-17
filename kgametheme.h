@@ -31,10 +31,10 @@ class QPixmap;
  *
  * Essentially just a wrapper around a .desktop theme file. Load a file with
  * load() and then access its properties.
- * 
+ *
  * @author Mauricio Piacentini
  **/
-class KDEGAMES_EXPORT KGameTheme 
+class KDEGAMES_EXPORT KGameTheme
 {
     public:
         KGameTheme(const QString &themeGroup = QLatin1String("KGameTheme"));
@@ -55,7 +55,7 @@ class KDEGAMES_EXPORT KGameTheme
         QString path() const;
         /// @return just the "*.desktop" part
         QString fileName() const;
-        /// @return the full path of the svg file
+        /// @return the full path of the svg file which is specified in "FileName" key
         virtual QString graphics() const;
         /// @return a property direct from the .desktop file
         QString property(const QString &key) const;
@@ -68,10 +68,10 @@ class KDEGAMES_EXPORT KGameTheme
          * - Description
          * - AuthorEmail
          * @param key the key of the wanted property
-         * @return the data realted to 'key'
+         * @return the data related to 'key'
          */
         QString authorProperty(const QString &key) const;
-    
+
     private:
         friend class KGameThemePrivate;
         KGameThemePrivate *const d;
