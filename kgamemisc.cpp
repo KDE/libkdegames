@@ -36,8 +36,7 @@ KGameMisc::KGameMisc() : d(new KGameMiscPrivate)
 
 KGameMisc::~KGameMisc()
 {
- // don't forget to delete it as soon as it is used!
-// delete d;
+    delete d;
 }
 
 QString KGameMisc::randomName()// do we need i18n? I think yes
