@@ -42,7 +42,7 @@ class KSelectAction;
  * the menu "game" instead of "file". This class provides the entries which
  * differ from the usual KStandardAction entries.
  *
- * @see KStandardAction
+ * @see <tt>KStandardAction</tt>
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
@@ -75,7 +75,7 @@ namespace KStandardGameAction
      * KStandardAction::StandardAction enum.
      */
     KDEGAMES_EXPORT KAction* create( StandardGameAction id, const QObject *recvr, const char *slot,
-			    QObject* parent );
+                            QObject* parent );
 
 
     /**
