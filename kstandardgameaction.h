@@ -1,6 +1,7 @@
 /*
     This file is part of the KDE games library
-    Copyright (C) 2001 Andreas Beckermann (b_mann@gmx.de)
+    Copyright (C) 2001 Andreas Beckermann <b_mann@gmx.de>
+    Copyright (C) 2007 Simon Hürlimann <simon.huerlimann@huerlisi.ch>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -30,10 +31,12 @@ class KRecentFilesAction;
 class KSelectAction;
 
 /**
- * Replacement for KStandardAction for KDE Games
+ * Extension for KStandardAction in KDE Games
  *
  * This class is an extension to the usual KStandardAction class which provides
- * easy access to often used KDE actions
+ * easy access to often used KDE actions.
+ *
+ * Using these actions helps maintaining consistency among the games.
  *
  * Games often use different menu entries than other programs, e.g. games use
  * the menu "game" instead of "file". This class provides the entries which
@@ -81,13 +84,13 @@ namespace KStandardGameAction
     KDEGAMES_EXPORT const char* name( StandardGameAction id );
 
     /**
-     * Start a new game
+     * Start a new game.
      **/
     KDEGAMES_EXPORT KAction *gameNew(const QObject *recvr, const char *slot,
                             QObject *parent );
 
     /**
-     * Load a previousely saved game
+     * Load a previousely saved game.
      */
     KDEGAMES_EXPORT KAction *load(const QObject *recvr, const char *slot,
                          QObject *parent );
@@ -114,7 +117,7 @@ namespace KStandardGameAction
                            QObject *parent );
 
     /**
-     * Pause the game
+     * Pause the game.
      **/
     KDEGAMES_EXPORT KToggleAction *pause(const QObject *recvr, const char *slot,
                                 QObject *parent );
@@ -145,15 +148,15 @@ namespace KStandardGameAction
 
 
     /**
-     * End the current game, but do not quit the program. Think of a "close"
-     * entry.
+     * End the current game, but do not quit the program.
+     * Think of a "close" entry.
      */
     KDEGAMES_EXPORT KAction *end(const QObject *recvr, const char *slot,
                         QObject *parent );
 
     /**
-     * Print the current screen? Game? Whatever - hardly used in games but there
-     * is at least one example (ktuberling)
+     * Print current game.
+     * Not usefull in all games.
      */
     KDEGAMES_EXPORT KAction *print(const QObject *recvr, const char *slot,
                           QObject *parent );
@@ -171,26 +174,26 @@ namespace KStandardGameAction
                            QObject *parent );
 
     /**
-     * Undo the last move
+     * Undo the last move.
      **/
     KDEGAMES_EXPORT KAction *undo(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
-     * Redo the last move (which has been undone)
+     * Redo the last move (which has been undone).
      **/
     KDEGAMES_EXPORT KAction *redo(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
-     * Roll die or dice
+     * Roll die or dice.
      **/
     KDEGAMES_EXPORT KAction *roll(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
-     * End the current turn (not the game). Usually to let the next player
-     * start
+     * End the current turn (not the game).
+     * Usually to let the next player start.
      **/
     KDEGAMES_EXPORT KAction *endTurn(const QObject *recvr, const char *slot,
                             QObject *parent );
@@ -226,13 +229,14 @@ namespace KStandardGameAction
                           QObject *parent );
 
     /**
-     * Choose game type. The signature of slot is of the form slotGameTypeChosen(int)
+     * Choose game type.
+     * The signature of slot is of the form slotGameTypeChosen(int)
      */
     KDEGAMES_EXPORT KSelectAction *chooseGameType(const QObject *recvr, const char *slot,
                                          QObject *parent );
 
     /**
-     * Restart game.
+     * Restart the game.
      */
     KDEGAMES_EXPORT KAction *restart(const QObject *recvr, const char *slot,
                             QObject *parent );
