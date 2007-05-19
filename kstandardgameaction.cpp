@@ -53,7 +53,7 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
     { KStandardGameAction::SaveAs, KStandardShortcut::AccelNone, 0, "game_save_as", I18N_NOOP("Save &As..."), 0, "document-save-as", I18N_NOOP("Save the current game to another file") },
     { KStandardGameAction::End, KStandardShortcut::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "window-close", I18N_NOOP("End the current game") },
     { KStandardGameAction::Pause, KStandardShortcut::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "media-playback-pause", I18N_NOOP("Pause the game") },
-    { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "highscore", I18N_NOOP("Show highscores") },
+    { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "games-highscores", I18N_NOOP("Show highscores") },
     { KStandardGameAction::ClearHighscores, KStandardShortcut::AccelNone, 0, "game_clear_highscores", I18N_NOOP("&Clear Highscores"), 0, "clear_highscore", I18N_NOOP("Clear highscores") },
     { KStandardGameAction::Statistics, KStandardShortcut::AccelNone, 0, "game_statistics", I18N_NOOP("Show Statistics"), 0, "highscore", I18N_NOOP("Show statistics") },
     { KStandardGameAction::ClearStatistics, KStandardShortcut::AccelNone, 0, "game_clear_statistics", I18N_NOOP("&Clear Statistics"), 0, "flag", I18N_NOOP("Delete all time statistics.") },
