@@ -1,8 +1,12 @@
-/** 
-
-@mainpage KDE libkdegames Reference
-
-This library contains general purpose games code.
-
-*/
+/**
+ * 
+ * @mainpage KDE libkdegames Reference
+ * 
+ * This library contains general purpose games code.
+ * 
+ * - <a href="libkdegames/kgame/html"><b>KGame Framework</b></a> 
+ *   (<a href="libkdegames/kgame/html/classes.html">classes</a>)\n
+ *   <i>A game framework</i>
+ * 
+ */
 
