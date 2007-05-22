@@ -4,8 +4,8 @@
  * 
  * This library contains general purpose games code.
  * 
- * - <a href="libkdegames/kgame/html"><b>KGame Framework</b></a> 
- *   (<a href="libkdegames/kgame/html/classes.html">classes</a>)\n
+ * - <a href="../kgame/html"><b>KGame Framework</b></a> 
+ *   (<a href="../kgame/html/classes.html">classes</a>)\n
  *   <i>A game framework</i>
  * - <a href="libkdegames/kggzmod/html"><b>KGGZMod</b></a> 
  *   (<a href="libkdegames/kggzmod/html/classes.html">classes</a>)\n
