@@ -7,6 +7,15 @@
  * - <a href="libkdegames/kgame/html"><b>KGame Framework</b></a> 
  *   (<a href="libkdegames/kgame/html/classes.html">classes</a>)\n
  *   <i>A game framework</i>
+ * - <a href="libkdegames/kggzmod/html"><b>KGGZMod</b></a> 
+ *   (<a href="libkdegames/kggzmod/html/classes.html">classes</a>)\n
+ *   <i>Developing online games for KDE</i>
+ * - <a href="libkdegames/kggznet/html"><b>KGGZNet</b></a> 
+ *   (<a href="libkdegames/kggznet/html/classes.html">classes</a>)\n
+ *   <i>Network protocol handling for online games</i>
+ * - <a href="libkdegames/kggzgames/html"><b>KGGZGames</b></a> 
+ *   (<a href="libkdegames/kggzgames/html/classes.html">classes</a>)\n
+ *   <i>Common dialogs for online games</i>
  * 
  */
 
