@@ -542,14 +542,14 @@ void KGameCanvasGroup::changed() {
 
 void KGameCanvasGroup::invalidate(const QRect& r, bool translate) {
   if(m_canvas)
-    m_canvas->invalidate(translate ? r.translated(m_pos) : r);
+    m_canvas->invalidate(translate ? r.translated(m_pos) : r, translate);
   if(!m_changed)
     ensurePendingUpdate();
 }
 
 void KGameCanvasGroup::invalidate(const QRegion& r, bool translate) {
   if(m_canvas)
-    m_canvas->invalidate(translate ? r.translated(m_pos) : r);
+    m_canvas->invalidate(translate ? r.translated(m_pos) : r, translate);
   if(!m_changed)
     ensurePendingUpdate();
 }
