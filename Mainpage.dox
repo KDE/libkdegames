@@ -2,19 +2,19 @@
  * 
  * @mainpage KDE libkdegames Reference
  * 
- * This library contains general purpose games code.
+ * This library contains general purpose games code.\n
  * 
  * - <a href="../kgame/html"><b>KGame Framework</b></a> 
  *   (<a href="../kgame/html/classes.html">classes</a>)\n
  *   <i>A game framework</i>
- * - <a href="libkdegames/kggzmod/html"><b>KGGZMod</b></a> 
- *   (<a href="libkdegames/kggzmod/html/classes.html">classes</a>)\n
+ * - <a href="../kggzmod/html"><b>KGGZMod</b></a> 
+ *   (<a href="../kggzmod/html/classes.html">classes</a>)\n
  *   <i>Developing online games for KDE</i>
- * - <a href="libkdegames/kggznet/html"><b>KGGZNet</b></a> 
- *   (<a href="libkdegames/kggznet/html/classes.html">classes</a>)\n
+ * - <a href="../kggznet/html"><b>KGGZNet</b></a> 
+ *   (<a href="../kggznet/html/classes.html">classes</a>)\n
  *   <i>Network protocol handling for online games</i>
- * - <a href="libkdegames/kggzgames/html"><b>KGGZGames</b></a> 
- *   (<a href="libkdegames/kggzgames/html/classes.html">classes</a>)\n
+ * - <a href="../kggzgames/html"><b>KGGZGames</b></a> 
+ *   (<a href="../kggzgames/html/classes.html">classes</a>)\n
  *   <i>Common dialogs for online games</i>
  * 
  */
