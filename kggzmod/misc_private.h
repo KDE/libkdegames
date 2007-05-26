@@ -21,6 +21,7 @@
 #ifndef KGGZMOD_MISC_PRIVATE_H
 #define KGGZMOD_MISC_PRIVATE_H
 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
 #include <sys/un.h>
