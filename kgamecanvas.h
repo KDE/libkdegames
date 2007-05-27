@@ -93,6 +93,9 @@ public:
 
     /** Returns the toplevel non-group KGameCanvasWidget object */
     virtual class KGameCanvasWidget* topLevelCanvas() = 0;
+    
+    /** @return Position of the abstract canvas relative to the toplevel canvas. */
+    virtual QPoint canvasPosition() const = 0;
 };
 
 
@@ -191,6 +194,9 @@ public:
 
     /** Returns the position of the item */
     QPoint pos() const { return m_pos; }
+    
+    /** @return Position of the item relative to the top level canvas. */
+    QPoint absolutePosition() const;
 
     /** Sets a new position. Note that an update will be posted to the parent
         canvas, and if you move an item twice in very little time, a region
@@ -288,6 +294,8 @@ public:
 
     /** returns the toplevel canvas (or null if it is in an orphan tree) */
     KGameCanvasWidget* topLevelCanvas();
+    
+    virtual QPoint canvasPosition() const;
 };
 
 /**
@@ -574,6 +582,9 @@ public:
 
     /** returns 'this' */
     KGameCanvasWidget* topLevelCanvas();
+    
+    /** @return 0 */    
+    virtual QPoint canvasPosition() const;
 };
 
 

@@ -219,6 +219,10 @@ KGameCanvasWidget* KGameCanvasWidget::topLevelCanvas() {
   return this;
 }
 
+QPoint KGameCanvasWidget::canvasPosition() const {
+	return QPoint(0, 0);
+}
+
 /*
     KGameCanvasItem
 */
@@ -494,6 +498,16 @@ void KGameCanvasItem::moveTo(QPoint newpos)
     changed();
 }
 
+QPoint KGameCanvasItem::absolutePosition() const
+{
+	if (m_canvas) {
+		return m_canvas->canvasPosition() + m_pos;
+	}
+	else {
+		return m_pos;
+	}
+}
+
 /*
     KGameCanvasGroup
 */
@@ -610,6 +624,10 @@ QRect KGameCanvasGroup::rect() const
 KGameCanvasWidget* KGameCanvasGroup::topLevelCanvas()
 {
     return m_canvas ? m_canvas->topLevelCanvas() : NULL;
+}
+
+QPoint KGameCanvasGroup::canvasPosition() const {
+	return KGameCanvasItem::absolutePosition();
 }
 
 /*
