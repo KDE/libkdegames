@@ -5,5 +5,5 @@ install(FILES
    kscoredialog.h
    kexthighscore_item.h
    kexthighscore.h
-DESTINATION ${INCLUDE_INSTALL_DIR})
+DESTINATION ${INCLUDE_INSTALL_DIR}/highscore)
 
