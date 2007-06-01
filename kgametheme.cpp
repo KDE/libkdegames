@@ -20,7 +20,6 @@
 
 #include <KStandardDirs>
 #include <KConfig>
-#include <KSvgRenderer>
 #include <KDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -31,16 +30,15 @@ class KGameThemePrivate
 {
     public:
         KGameThemePrivate() : loaded(false) {}
-        
+
         QMap<QString, QString> authorproperties;
         QString fullPath; ///< Full path e.g. "/opt/kde/share/apps/appname/default.desktop"
         QString fileName; ///< just e.g. "default.desktop"
         QString graphics; ///< The full path of the svg file
         QPixmap preview;
-        KSvgRenderer svg;
         QString prefix; ///< Filepath of the .desktop file without the filename e.g. "/opt/kde/share/apps/appname/"
         QString themeGroup;
-        
+
         bool loaded;
 };
 
@@ -68,16 +66,16 @@ bool KGameTheme::load(const QString &fileName) {
     if (filePath.isEmpty()) {
         return false;
     }
-    
+
     // verify if it is a valid file first and if we can open it
     QFile themefile(filePath);
     if (!themefile.open(QIODevice::ReadOnly)) {
-        kDebug(11000) << "Could not open .destop theme file " << filePath << endl;
+        kDebug(11000) << "Could not open .desktop theme file " << filePath << endl;
         return false;
     }
     d->prefix = QFileInfo(themefile).absolutePath() + '/';
     themefile.close();
-    
+
     KConfig themeconfig(filePath, KConfig::OnlyLocal);
     if (!themeconfig.hasGroup(d->themeGroup))
     {
@@ -85,12 +83,12 @@ bool KGameTheme::load(const QString &fileName) {
         return false;
     }
     KConfigGroup group = themeconfig.group(d->themeGroup);
-    
+
     d->authorproperties.insert("Name", group.readEntry("Name"));// Returns translated data
     d->authorproperties.insert("Author", group.readEntry("Author"));
     d->authorproperties.insert("Description", group.readEntry("Description"));
     d->authorproperties.insert("AuthorEmail", group.readEntry("AuthorEmail"));
-    
+
     //Version control
     int themeversion = group.readEntry("VersionFormat",0);
     //Format is increased when we have incompatible changes, meaning that older clients are not able to use the remaining information safely
@@ -103,12 +101,13 @@ bool KGameTheme::load(const QString &fileName) {
     d->graphics = d->prefix + graphName;
     if (d->graphics.isEmpty()) return false;
 
-    d->svg.load(d->graphics);
-    if (!d->svg.isValid()) {
-        kDebug(11000) << "Could not load svg file " << d->graphics << endl;
+    // let's see if svg file exists and can be opened
+    QFile svgFile( d->graphics );
+    if ( !svgFile.open( QIODevice::ReadOnly ) ) {
+        kDebug(11000) << "Could not open file " << d->graphics << endl;
         return false;
     }
-    
+
     QString previewName = group.readEntry("Preview");
     //QString graphicsPath = KStandardDirs::locate("appdata", previewName);
     QString graphicsPath = d->prefix + previewName;

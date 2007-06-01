@@ -33,12 +33,12 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
     public:
         KGameThemeSelectorPrivate(KGameThemeSelector* parent) : q(parent) {};
         KGameThemeSelector* q;
-        
+
         QMap<QString, KGameTheme*> themeMap;
         Ui::KGameThemeSelectorBase ui;
         QString lookupDirectory;
         QString groupName;
-        
+
         void setupData(KConfigSkeleton* config);
 
         // private slots
@@ -62,7 +62,7 @@ KGameThemeSelector::~KGameThemeSelector()
 void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig)
 {
     ui.setupUi(q);
-    
+
     //Get our currently configured Tileset entry
     KConfig * config = aconfig->config();
     KConfigGroup group = config->group("General");
@@ -70,8 +70,6 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
 
     //The lineEdit widget holds our bg path, but the user does not manipulate it directly
     ui.kcfg_Theme->hide();
-
-    KGameTheme bg;
 
     //Now get our tilesets into a list
     KGlobal::dirs()->addResourceType("gamethemeselector", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
@@ -97,7 +95,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
             delete atheme;
         }
     }
-    
+
     connect(ui.themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(_k_updatePreview()));
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
 }

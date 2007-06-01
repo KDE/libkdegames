@@ -31,8 +31,8 @@ class QPixmap;
  *
  * Essentially just a wrapper around a .desktop theme file. Load a file with
  * load() and then access its properties.
- * 
- * For more advanced feaures like dynamic themes or custom game rules, it 
+ *
+ * For more advanced feaures like dynamic themes or custom game rules, it
  * will likely be necessary to derive from this class
  *
  * @author Mauricio Piacentini
@@ -50,7 +50,11 @@ class KDEGAMES_EXPORT KGameTheme
         virtual bool loadDefault();
         /**
          * Load a specific theme file.
-         * @param file the name of the theme file relative to the share/apps/appname 
+         * Note that although theme could be successfully loaded,
+         * no check on the validity of theme's SVG file contents is done.
+         * Application writers will need to perform this check manually
+         * e.g. by calling KSvgRenderer::isValid()
+         * @param file the name of the theme file relative to the share/apps/appname
          * directory. e.g. "themes/classic.desktop"
          * @return true if the theme files and properties could be loaded
          */
