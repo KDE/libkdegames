@@ -25,7 +25,6 @@
 
 #include <libkdegames_export.h>
 
-class QListWidgetItem;
 class KChatBaseModelPrivate;
 class KChatBaseMessagePrivate;
 class KConfig;

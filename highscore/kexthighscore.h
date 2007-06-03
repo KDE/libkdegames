@@ -27,7 +27,6 @@
 
 #include <QtCore/QVector>
 
-class QTabWidget;
 
 
 namespace KExtHighscore

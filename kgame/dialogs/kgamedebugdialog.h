@@ -27,9 +27,7 @@
 class QListWidgetItem;
 
 class KGame;
-class KGameIO;
 class KPlayer;
-class KGamePropertyBase;
 
 class KGameDebugDialogPrivate;
 

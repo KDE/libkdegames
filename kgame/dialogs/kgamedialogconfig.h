@@ -31,8 +31,6 @@
 #include <QtGui/QWidget>
 #include <libkdegames_export.h>
 
-class QGridLayout;
-class QVBoxLayout;
 class QListWidgetItem;
 
 class KGame;

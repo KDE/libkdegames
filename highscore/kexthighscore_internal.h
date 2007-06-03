@@ -34,7 +34,6 @@
 #include <kconfiggroup.h>
 
 class QTextStream;
-class QTabWidget;
 class QDomNamedNodeMap;
 
 

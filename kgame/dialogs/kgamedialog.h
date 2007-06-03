@@ -38,7 +38,6 @@ class KVBox;
 
 class KGame;
 class KPlayer;
-class KGamePropertyBase;
 
 class KGameDialogConfig;
 class KGameDialogGeneralConfig;
