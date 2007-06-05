@@ -1007,5 +1007,56 @@ QRect KGameCanvasPicture::rect() const
     return m_picture.boundingRect().translated( pos());
 }
 
+KGameCanvasAdapter::KGameCanvasAdapter()
+: m_child_rect_valid(false)
+{
+}
+
+QRect KGameCanvasAdapter::childRect()
+{
+    if (!m_child_rect_valid) {
+        m_child_rect = QRect();
+        foreach (KGameCanvasItem* el, m_items) {
+            m_child_rect |= el->rect();
+        }
+        m_child_rect_valid = true;
+    }
+    
+    return m_child_rect;
+}
+
+void KGameCanvasAdapter::render(QPainter *painter)
+{
+    foreach (KGameCanvasItem* el, m_items) {
+        if (el->m_visible) {
+            el->m_last_rect = el->rect();
+            el->paintInternal(painter, childRect(), childRect(), QPoint(), 1.0);
+        }
+    }
+}
+
+void KGameCanvasAdapter::ensurePendingUpdate()
+{
+    m_child_rect_valid = false;
+
+    foreach (KGameCanvasItem* el, m_items) {
+        if (el->m_changed) {
+            el->updateChanges();
+        }
+    }
+    
+    updateParent(m_invalidated_rect);
+    m_invalidated_rect = QRect();
+}
+
+void KGameCanvasAdapter::invalidate(const QRegion& r, bool)
+{
+    invalidate(r.boundingRect());
+}
+
+void KGameCanvasAdapter::invalidate(const QRect& r, bool)
+{
+    m_invalidated_rect |= r;
+}
 
 #include "kgamecanvas.moc"

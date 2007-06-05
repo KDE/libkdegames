@@ -112,6 +112,7 @@ private:
     friend class KGameCanvasAbstract;
     friend class KGameCanvasWidget;
     friend class KGameCanvasGroup;
+    friend class KGameCanvasAdapter;
 
     bool m_visible;
     bool m_animated;
@@ -587,5 +588,71 @@ public:
     virtual QPoint canvasPosition() const;
 };
 
+/**
+    \brief A generic adapter for KGameCanvas
+    
+    KGameCanvasAdapter can be used to draw content managed by KGameCanvas
+    inside systems which do not use KGameCanvas internally for their
+    rendering.
+    
+    For example, suppose you have a widget CustomDisplay which paints itself
+    with direct QPainter calls in its paintEvent, and you want to add a
+    complex element to its rendering, which is best implemented via the KGameCanvas
+    abstractions. What you can do is to create a KGameCanvasAdapter subclass,
+    use it just like a KGameCanvasGroup, then call its render member function
+    to have a QPainter object draw it.
+    
+    A KGameCanvas adapter notifies its parent using the pure virtual function
+    updateParent, which is called when the adapter content is invalidated.
+    
+    \todo Support animations
+*/
+class KDEGAMES_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
+{
+    QRect m_child_rect;
+    bool m_child_rect_valid;
+    QRect m_invalidated_rect;
+
+    virtual void ensureAnimating() { }
+    virtual void ensurePendingUpdate();
+    virtual void invalidate(const QRect& r, bool translate = true);
+    virtual void invalidate(const QRegion& r, bool translate = true);
+    
+    QRect childRect();
+public:
+    /** Constructor */
+    KGameCanvasAdapter();
+
+    /** 
+      * An adapter is not associated to any canvas, so this function
+      * simply returns 0.
+      */
+    virtual class KGameCanvasWidget* topLevelCanvas() { return 0; }
+    
+    /**
+      * The absolute position of the rendered content is not well
+      * defined for KGameCanvasAdapter. We assume that the adapter
+      * will be rendered at (0,0), and leave it to the user to perform
+      * the necessary adjustments, which will depend on the chosen
+      * rendering method.
+      *
+      * @return The point (0, 0).
+      */
+    virtual QPoint canvasPosition() const { return QPoint(0, 0); }
+    
+    /**
+      * Draw the items of the adapter using the specified painter.
+      * \param p The QPainter object to be used for rendering.
+      */
+    virtual void render(QPainter* p);
+    
+    /**
+      * Notify the parent that the adapter content inside \a rect needs
+      * to be redrawn.
+      * 
+      * \a rect The bounding rectangle of the region that needs repainting.
+      */
+    virtual void updateParent(const QRect& rect) = 0;
+};
 
 #endif //__KGRGAMECANVAS_H__
