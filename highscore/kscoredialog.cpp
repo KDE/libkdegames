@@ -457,7 +457,7 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 int KScoreDialog::addScore(int newScore, const AddScoreFlags& flags)
 {
     FieldInfo scoreInfo;
-    scoreInfo[Score]=newScore;
+    scoreInfo[Score]=QString::number(newScore);
     return addScore(scoreInfo, AskName | flags);
 }
 
