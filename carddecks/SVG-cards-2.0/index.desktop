@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Cards (SVG, BROKEN)
+Name[es]=Tarjetas (SVG, ROTO)
 Name[x-test]=xxCards (SVG, BROKEN)xx
 Preview=11.png
 SVG=svg-cards-2.0.svgz
