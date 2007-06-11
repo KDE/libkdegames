@@ -72,7 +72,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     ui.kcfg_Theme->hide();
 
     //Now get our tilesets into a list
-    KGlobal::dirs()->addResourceType("gamethemeselector", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
+    KGlobal::dirs()->addResourceType("gamethemeselector", "data", KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
     QStringList themesAvailable;
     KGlobal::dirs()->findAllResources("gamethemeselector", QString("*.desktop"), KStandardDirs::Recursive, themesAvailable);
     QString namestr("Name");
