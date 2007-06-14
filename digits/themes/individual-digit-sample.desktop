@@ -4,10 +4,12 @@ Encoding=UTF-8
 Name=Individual Digit Sample
 Name[es]=Muestra de dígitos inviduales
 Name[x-test]=xxIndividual Digit Samplexx
+Name[zh_TW]=個人數位範例
 Type=IndividualDigit
 Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svg
 Comment[es]=Este archivo contiene los metadatos, opciones de configuración y los mapas entre los dígitos y su identificador para el tema individual-digit-sample.svg
 Comment[x-test]=xxThis file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svgxx
+Comment[zh_TW]=此檔案包括個人數位範例（individual-digit-sample.svg）的中繼資料、設定與對映控制數位與代碼
 
 [Settings]
 foregroundColor=0xffffaa00
