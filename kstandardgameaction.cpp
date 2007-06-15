@@ -53,8 +53,8 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
     { KStandardGameAction::SaveAs, KStandardShortcut::AccelNone, 0, "game_save_as", I18N_NOOP("Save &As..."), 0, "document-save-as", I18N_NOOP("Save the current game to another file") },
     { KStandardGameAction::End, KStandardShortcut::End, 0, "game_end", I18N_NOOP("&End Game"), 0, "window-close", I18N_NOOP("End the current game") },
     { KStandardGameAction::Pause, KStandardShortcut::AccelNone, Qt::Key_P, "game_pause", I18N_NOOP("Pa&use"), 0, "media-playback-pause", I18N_NOOP("Pause the game") },
-    { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &Highscores"), 0, "games-highscores", I18N_NOOP("Show highscores") },
-    { KStandardGameAction::ClearHighscores, KStandardShortcut::AccelNone, 0, "game_clear_highscores", I18N_NOOP("&Clear Highscores"), 0, "clear_highscore", I18N_NOOP("Clear highscores") },
+    { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &High Scores"), 0, "games-highscores", I18N_NOOP("Show high scores") },
+    { KStandardGameAction::ClearHighscores, KStandardShortcut::AccelNone, 0, "game_clear_highscores", I18N_NOOP("&Clear High Scores"), 0, "clear_highscore", I18N_NOOP("Clear high scores") },
     { KStandardGameAction::Statistics, KStandardShortcut::AccelNone, 0, "game_statistics", I18N_NOOP("Show Statistics"), 0, "highscore", I18N_NOOP("Show statistics") },
     { KStandardGameAction::ClearStatistics, KStandardShortcut::AccelNone, 0, "game_clear_statistics", I18N_NOOP("&Clear Statistics"), 0, "flag", I18N_NOOP("Delete all time statistics.") },
     { KStandardGameAction::Print, KStandardShortcut::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "document-print", 0 },
@@ -71,7 +71,7 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
 // "settings" menu
     { KStandardGameAction::ChooseGameType, KStandardShortcut::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0, 0 },
     { KStandardGameAction::Carddecks, KStandardShortcut::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0, 0  },
-    { KStandardGameAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, "options_configure_highscores", I18N_NOOP("Configure &Highscores..."), 0, 0, 0  },
+    { KStandardGameAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, "options_configure_highscores", I18N_NOOP("Configure &High Scores..."), 0, 0, 0  },
 
     { KStandardGameAction::ActionNone, KStandardShortcut::AccelNone, 0, 0, 0, 0, 0, 0  }
 };
