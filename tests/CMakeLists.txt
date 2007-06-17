@@ -1,40 +1,32 @@
-# Tests don't need to go into toplevel/bin, they are fine in the current dir.
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-
 include_directories(  ${CMAKE_SOURCE_DIR}/libkdegames )
 
 configure_file(config-tests.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
 
-MACRO(LIBKDEGAMES_BUILD_TESTS)
+MACRO(LIBKDEGAMES_UNIT_TESTS)
        FOREACH(_testname ${ARGN})
                kde4_automoc(${_testname}.cpp)
-               kde4_add_executable(${_testname} NOGUI RUN_UNINSTALLED ${_testname}.cpp)
+               kde4_add_unit_test(${_testname}  ${_testname}.cpp)
                target_link_libraries(${_testname} ${KDE4_KDECORE_LIBS} ${KDE4_KDEGAMES_LIBS} ${QT_QTTEST_LIBRARY} kdegames)
        ENDFOREACH(_testname)
-ENDMACRO(LIBKDEGAMES_BUILD_TESTS)
+ENDMACRO(LIBKDEGAMES_UNIT_TESTS)
 
-MACRO(LIBKDEGAMES_EXECUTE_TESTS)
+MACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
        FOREACH(_testname ${ARGN})
-               add_test(libkdegames-${_testname} ${EXECUTABLE_OUTPUT_PATH}/${_testname})
+               kde4_automoc(${_testname}.cpp)
+               kde4_add_test_executable(${_testname}  ${_testname}.cpp)
+               target_link_libraries(${_testname} ${KDE4_KDECORE_LIBS} ${KDE4_KDEGAMES_LIBS} ${QT_QTTEST_LIBRARY} kdegames)
        ENDFOREACH(_testname)
-ENDMACRO(LIBKDEGAMES_EXECUTE_TESTS)
+ENDMACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
 
-set(libkdegames_unittests
+LIBKDEGAMES_UNIT_TESTS(
     kgamesvgdocumenttest 
     kgamesvgdigitstest 
     kgamepropertytest 
 )
 
-LIBKDEGAMES_BUILD_TESTS(
-    ${libkdegames_unittests}
-)
-
 if (Q_WS_X11)
-LIBKDEGAMES_BUILD_TESTS(
+LIBKDEGAMES_EXECUTABLE_TESTS(
 #    kxerrorhandlertest # File missing from svn
 )
 endif (Q_WS_X11)
 
-LIBKDEGAMES_EXECUTE_TESTS(
-    ${libkdegames_unittests}
-)
