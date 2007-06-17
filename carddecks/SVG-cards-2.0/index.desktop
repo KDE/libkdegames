@@ -1,6 +1,8 @@
 [KDE Backdeck]
 Name=Cards (SVG, BROKEN)
 Name[es]=Tarjetas (SVG, ROTO)
+Name[pt]=Cartas (SVG, NÃO-FUNCIONAL)
+Name[pt_BR]=Cartas (SVG, NÃO-FUNCIONAL)
 Name[x-test]=xxCards (SVG, BROKEN)xx
 Name[zh_TW]=紙牌（SVG, BROKEN）
 Preview=11.png
