@@ -1,6 +1,5 @@
-/*
-    This file is part of kdegames
-    Copyright (c) 2006 kdegames Team <kde-games-devel@kde.org>
+/*  This file is part of the KDE project
+    Copyright (C) 2007 David Faure <faure@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -15,29 +14,27 @@
     You should have received a copy of the GNU Library General Public License
     along with this library; see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
+    Boston, MA 02110-1301, USA.
 */
 
+#ifndef LIBKDEGAMES_EXPORT_H
+#define LIBKDEGAMES_EXPORT_H
 
-
-#ifndef _LIBKDEGAMES_EXPORT_H
-#define _LIBKDEGAMES_EXPORT_H
-
+/* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
-#ifdef Q_WS_WIN
-
 #ifndef KDEGAMES_EXPORT
-# ifdef MAKE_KDEGAMES_LIB
+# if defined(MAKE_KDEGAMES_LIB)
+   /* We are building this library */ 
 #  define KDEGAMES_EXPORT KDE_EXPORT
 # else
+   /* We are using this library */ 
 #  define KDEGAMES_EXPORT KDE_IMPORT
 # endif
 #endif
 
-#else // not windows
+# ifndef KDEGAMES_EXPORT_DEPRECATED
+#  define KDEGAMES_EXPORT_DEPRECATED KDE_DEPRECATED KDEGAMES_EXPORT
+# endif
 
-#define KDEGAMES_EXPORT KDE_EXPORT
-#endif /* not windows */
-
-#endif /* _LIBKDEGAMES_EXPORT_H */
+#endif
