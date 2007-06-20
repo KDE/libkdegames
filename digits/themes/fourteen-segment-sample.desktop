@@ -5,6 +5,7 @@ Name=Fourteen Segment Sample
 Name[es]=Muestra de catorce segmentos
 Name[pt]=Amostra de Catorze Segmentos
 Name[pt_BR]=Amostra de Catorze Segmentos
+Name[sv]=Fjortonsegment-sampling
 Name[x-test]=xxFourteen Segment Samplexx
 Name[zh_TW]=十四段範例
 Type=FourteenSegmentDigit
@@ -12,6 +13,7 @@ Comment=This file holds metadata, configuration settings, and the mappings contr
 Comment[es]=Este archivo contiene los metadados, opciones de configuración, y control de mapeado incluyendo qué segmentos están activados para el tema fourteen-segment-sample.svg
 Comment[pt]=Este ficheiro contém os meta-dados, a configuração e os mapeamentos que controlam quais os segmentos activos ou não para o tema 'fourteen-segment-sample.svg'
 Comment[pt_BR]=Este ficheiro contém os meta-dados, a configuração e os mapeamentos que controlam quais os segmentos activos ou não para o tema 'fourteen-segment-sample.svg'
+Comment[sv]=Filen innehåller metadata, inställningar och avbildningar som styr vilka segment som är på eller av för temat Fjortonsegment-sampling.
 Comment[x-test]=xxThis file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svgxx
 Comment[zh_TW]=此檔案包括十四段範例（fourteen-segment-sample.svg）的中繼資料、設定與對映控制每一段開關
 

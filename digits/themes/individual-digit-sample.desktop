@@ -5,6 +5,7 @@ Name=Individual Digit Sample
 Name[es]=Muestra de dígitos inviduales
 Name[pt]=Amostra de Dígitos Individuais
 Name[pt_BR]=Amostra de Dígitos Individuais
+Name[sv]=Enstaka siffersampling
 Name[x-test]=xxIndividual Digit Samplexx
 Name[zh_TW]=個人數位範例
 Type=IndividualDigit
@@ -12,6 +13,7 @@ Comment=This file holds metadata, configuration settings, and the mappings betwe
 Comment[es]=Este archivo contiene los metadatos, opciones de configuración y los mapas entre los dígitos y su identificador para el tema individual-digit-sample.svg
 Comment[pt]=Este ficheiro contém os meta-dados, a configuração e os mapeamentos entes os dígitos e os ID's do tema 'individual-digit-sample.svg'
 Comment[pt_BR]=Este ficheiro contém os meta-dados, a configuração e os mapeamentos entes os dígitos e os ID's do tema 'individual-digit-sample.svg'
+Comment[sv]=Filen innehåller metadata, inställningar och avbildningar som styr vilka segment som är på eller av för temat Enstaka siffersampling.
 Comment[x-test]=xxThis file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svgxx
 Comment[zh_TW]=此檔案包括個人數位範例（individual-digit-sample.svg）的中繼資料、設定與對映控制數位與代碼
 

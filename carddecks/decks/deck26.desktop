@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Ornamental (SVG)
+Name[sv]=Dekorativ (SVG)
 Name[x-test]=xxOrnamental (SVG)xx
 Name[zh_TW]=Ornamental（SVG）
 SVG=deck26_ornamental.svg
@@ -7,4 +8,5 @@ Comment=SVG Ornamental
 Comment[es]=Ornamental SVG
 Comment[pt]=Ornamental com SVG
 Comment[pt_BR]=Ornamental com SVG
+Comment[sv]=SVG Dekorativ
 Comment[x-test]=xxSVG Ornamentalxx
