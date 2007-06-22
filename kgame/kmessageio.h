@@ -25,15 +25,14 @@
 #define _KMESSAGEIO_H_
 
 #include <QtCore/QObject>
+#include <QtCore/QProcess>
 #include <QtCore/QString>
-#include <QtCore/QQueue>
-#include <QtCore/QFile>
 #include <QtNetwork/QHostAddress>
 #include <kdebug.h>
 
 class QTcpSocket;
-class K3Process;
-//class QFile;
+class KProcess;
+class QFile;
 
 
 /**
@@ -346,7 +345,6 @@ class KMessageProcess : public KMessageIO
     ~KMessageProcess();
     bool isConnected() const;
     void send (const QByteArray &msg);
-    void writeToProcess();
 
     /**
       @return FALSE as this is no network IO.
@@ -361,18 +359,16 @@ class KMessageProcess : public KMessageIO
 
 
   public Q_SLOTS:
-  void  slotReceivedStdout(K3Process *proc, char *buffer, int buflen);
-  void  slotReceivedStderr(K3Process *proc, char *buffer, int buflen);
-  void  slotProcessExited(K3Process *p);
-  void  slotWroteStdin(K3Process *p);
+  void  slotReceivedStdout();
+  void  slotReceivedStderr();
+  void  slotProcessExited(int, QProcess::ExitStatus);
 
   Q_SIGNALS:
     void signalReceivedStderr(QString msg);
 
   private:
     QString mProcessName;
-    K3Process *mProcess;
-    QQueue<QByteArray*> mQueue;
+    KProcess *mProcess;
     QByteArray* mSendBuffer;
     QByteArray mReceiveBuffer;
     int mReceiveCount;
