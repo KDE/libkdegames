@@ -64,6 +64,7 @@ set(kdegames_LIB_SRCS
     kgamelcd.cpp
     kgamemisc.cpp
     kgameprogress.cpp
+    kgamepopupitem.cpp
     kgamesvgdocument.cpp
     kgametheme.cpp
     kgamethemeselector.cpp
@@ -99,6 +100,7 @@ install(FILES
     kgameprogress.h
     kgamelcd.h
     kgamesvgdocument.h
+    kgamepopupitem.h
     kgrid2d.h
     kgamecanvas.h
     kgameclock.h
