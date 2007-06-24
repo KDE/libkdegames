@@ -38,7 +38,7 @@ class KGamePopupItemPrivate
 public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
-          m_hoveredByMouse(false) {}
+          m_opacity(1.0), m_hoveredByMouse(false) {}
     /**
      * Text to show
      */
@@ -64,6 +64,10 @@ public:
      */
     int m_timeout;
     /**
+     * Item opacity
+     */
+    qreal m_opacity;
+    /**
      * Pixmap to display at the left of the text
      */
     QPixmap m_iconPix;
@@ -77,6 +81,7 @@ KGamePopupItem::KGamePopupItem()
     : d(new KGamePopupItemPrivate)
 {
     hide();
+    setZValue(100); // is 100 high enough???
 
     KIcon infoIcon("dialog-information");
     d->m_iconPix = infoIcon.pixmap(PIX_SIZE, PIX_SIZE);
@@ -98,7 +103,7 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
         return;
 
     p->setBrush( Qt::lightGray );
-    p->setOpacity(0.9);
+    p->setOpacity(d->m_opacity);
     p->drawRect( d->m_boundRect );
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
@@ -160,6 +165,11 @@ void KGamePopupItem::playHideAnimation()
 void KGamePopupItem::setMessageTimeOut( int msec )
 {
     d->m_timeout = msec;
+}
+
+void KGamePopupItem::setMessageOpacity( qreal opacity )
+{
+    d->m_opacity = opacity;
 }
 
 QRectF KGamePopupItem::boundingRect() const

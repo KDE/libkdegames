@@ -68,6 +68,12 @@ public:
      */
     void setMessageTimeOut( int msec );
     /**
+     * Sets the message opacity from 0 (fully transparent) to 1 (fully opaque)
+     * For example 0.5 is half transparent
+     * It defaults to 1.0
+     */
+    void setMessageOpacity( qreal opacity );
+    /**
      * Shows the message to item: item will appear at specified place
      * of the scene using simple animation
      * Item will be automatically hidden after timeout set in setMessageTimeOut() passes
