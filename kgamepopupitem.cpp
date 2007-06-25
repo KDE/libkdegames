@@ -20,6 +20,8 @@
 #include <QTimeLine>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsTextItem>
 
 #include <KIcon>
 #include <kdebug.h>
@@ -38,11 +40,7 @@ class KGamePopupItemPrivate
 public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
-          m_opacity(1.0), m_hoveredByMouse(false) {}
-    /**
-     * Text to show
-     */
-    QString m_text;
+          m_opacity(1.0), m_hoveredByMouse(false), m_textChildItem(0) {}
     /**
      * Timeline for animations
      */
@@ -75,13 +73,28 @@ public:
      * Set to true when mouse hovers the message
      */
     bool m_hoveredByMouse;
+    /**
+     * Child of KGamePopupItem used to display text
+     */
+    QGraphicsTextItem* m_textChildItem;
+    /**
+     * Part of the scene that is actually visible in QGraphicsView
+     * This is needed for item to work correctly when scene is larger than
+     * the View
+     */
+    QRectF m_visibleSceneRect;
 };
 
 KGamePopupItem::KGamePopupItem()
     : d(new KGamePopupItemPrivate)
 {
     hide();
+    d->m_textChildItem = new QGraphicsTextItem(this);
+
     setZValue(100); // is 100 high enough???
+    d->m_textChildItem->setZValue(100);
+    d->m_textChildItem->setPos( MARGIN+PIX_SIZE+SOME_SPACE, MARGIN );
+    d->m_textChildItem->setTextWidth(-1);
 
     KIcon infoIcon("dialog-information");
     d->m_iconPix = infoIcon.pixmap(PIX_SIZE, PIX_SIZE);
@@ -99,42 +112,48 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if( d->m_text.isEmpty() )
-        return;
-
     p->setBrush( Qt::lightGray );
     p->setOpacity(d->m_opacity);
     p->drawRect( d->m_boundRect );
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
-    p->drawText( d->m_boundRect.adjusted( MARGIN+PIX_SIZE+SOME_SPACE, MARGIN, -MARGIN, -MARGIN ),
-                 d->m_text );
 }
 
 void KGamePopupItem::showMessage( const QString& text, Position pos )
 {
+    // NOTE: we blindly take first view we found. I.e. we don't support
+    // multiple views
+    QGraphicsView *sceneView = scene()->views().at(0);
+    QPolygonF poly = sceneView->mapToScene( sceneView->contentsRect() );
+    d->m_visibleSceneRect = poly.boundingRect();
+
     if(d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive())
         return;// we're already showing a message
 
-    d->m_text = text;
+    d->m_textChildItem->setHtml(text);
+
     d->m_position = pos;
     d->m_timeLine.setDirection( QTimeLine::Forward );
 
     // recalculate bounding rect
-    QFont f; // Taking default application font. Hope this is ok.
-    QFontMetrics fm( f );
     d->m_boundRect = QRectF(0, 0,
-                            fm.width( d->m_text )+MARGIN*2+PIX_SIZE+SOME_SPACE,
-                            fm.height()+MARGIN*2);
+                            d->m_textChildItem->boundingRect().width()+MARGIN*2+PIX_SIZE+SOME_SPACE,
+                            d->m_textChildItem->boundingRect().height()+MARGIN*2);
 
     // setup animation
     d->m_timeLine.setDuration(300);
     if( d->m_position == TopLeft || d->m_position == TopRight )
-        d->m_timeLine.setFrameRange( static_cast<int>(-d->m_boundRect.height()-SHOW_OFFSET),
-                                   SHOW_OFFSET );
+    {
+        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_boundRect.height() - SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.top() + SHOW_OFFSET);
+        d->m_timeLine.setFrameRange( start, end );
+    }
     else if( d->m_position == BottomLeft || d->m_position == BottomRight )
-        d->m_timeLine.setFrameRange( static_cast<int>(scene()->height()+SHOW_OFFSET),
-                                   static_cast<int>(scene()->height()-d->m_boundRect.height()-SHOW_OFFSET) );
+    {
+        int start = static_cast<int>(d->m_visibleSceneRect.bottom()+SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_boundRect.height() - SHOW_OFFSET);
+        d->m_timeLine.setFrameRange( start, end );
+    }
 
     // move to the start position
     animationFrame(d->m_timeLine.startFrame());
@@ -147,9 +166,9 @@ void KGamePopupItem::showMessage( const QString& text, Position pos )
 void KGamePopupItem::animationFrame(int frame)
 {
     if( d->m_position == TopLeft || d->m_position == BottomLeft )
-        setPos( SHOW_OFFSET, frame );
+        setPos( d->m_visibleSceneRect.left()+SHOW_OFFSET, frame );
     else if( d->m_position == TopRight || d->m_position == BottomRight )
-        setPos( scene()->width()-d->m_boundRect.width()-SHOW_OFFSET, frame );
+        setPos( d->m_visibleSceneRect.right()-d->m_boundRect.width()-SHOW_OFFSET, frame );
 }
 
 void KGamePopupItem::playHideAnimation()
