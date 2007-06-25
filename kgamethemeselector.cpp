@@ -31,7 +31,7 @@
 class KGameThemeSelector::KGameThemeSelectorPrivate
 {
     public:
-        KGameThemeSelectorPrivate(KGameThemeSelector* parent) : q(parent) {};
+        KGameThemeSelectorPrivate(KGameThemeSelector* parent) : q(parent) {}
         KGameThemeSelector* q;
 
         QMap<QString, KGameTheme*> themeMap;
