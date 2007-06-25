@@ -37,6 +37,9 @@ static const int SOME_SPACE = 10;
 
 class KGamePopupItemPrivate
 {
+private:
+    KGamePopupItemPrivate(const KGamePopupItemPrivate&);
+    const KGamePopupItemPrivate& operator=(const KGamePopupItemPrivate&);
 public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
@@ -134,6 +137,9 @@ void KGamePopupItem::showMessage( const QString& text, Position pos )
 
     d->m_position = pos;
     d->m_timeLine.setDirection( QTimeLine::Forward );
+
+    // do as QGS docs say: notify the scene about rect change
+    prepareGeometryChange();
 
     // recalculate bounding rect
     d->m_boundRect = QRectF(0, 0,
