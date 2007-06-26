@@ -74,6 +74,10 @@ public:
      */
     void setMessageOpacity( qreal opacity );
     /**
+     * Sets custom pixmap to show instead of default icon on the left
+     */
+    void setMessageIcon( const QPixmap& pix );
+    /**
      * Shows the message to item: item will appear at specified place
      * of the scene using simple animation
      * Item will be automatically hidden after timeout set in setMessageTimeOut() passes

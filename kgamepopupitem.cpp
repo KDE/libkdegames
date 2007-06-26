@@ -30,8 +30,6 @@
 static const int MARGIN = 15;
 // offset of message from start of the scene
 static const int SHOW_OFFSET = 5;
-// size of icon pixmap
-static const int PIX_SIZE = 32;
 // space between pixmap and text
 static const int SOME_SPACE = 10;
 
@@ -96,11 +94,11 @@ KGamePopupItem::KGamePopupItem()
 
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
-    d->m_textChildItem->setPos( MARGIN+PIX_SIZE+SOME_SPACE, MARGIN );
-    d->m_textChildItem->setTextWidth(-1);
 
     KIcon infoIcon("dialog-information");
-    d->m_iconPix = infoIcon.pixmap(PIX_SIZE, PIX_SIZE);
+    // default size is 32
+    setMessageIcon( infoIcon.pixmap(32, 32) );
+
     d->m_timer.setSingleShot(true);
 
     setAcceptsHoverEvents(true);
@@ -142,9 +140,15 @@ void KGamePopupItem::showMessage( const QString& text, Position pos )
     prepareGeometryChange();
 
     // recalculate bounding rect
-    d->m_boundRect = QRectF(0, 0,
-                            d->m_textChildItem->boundingRect().width()+MARGIN*2+PIX_SIZE+SOME_SPACE,
-                            d->m_textChildItem->boundingRect().height()+MARGIN*2);
+    qreal w = d->m_textChildItem->boundingRect().width()+MARGIN*2+d->m_iconPix.width()+SOME_SPACE;
+    qreal h = d->m_textChildItem->boundingRect().height()+MARGIN*2;
+    if( d->m_iconPix.height() > h )
+        h = d->m_iconPix.height() + MARGIN*2;
+    d->m_boundRect = QRectF(0, 0, w, h);
+
+    // adjust y-pos of text item so it appears centered
+    d->m_textChildItem->setPos( d->m_textChildItem->x(),
+                                d->m_boundRect.height()/2 - d->m_textChildItem->boundingRect().height()/2);
 
     // setup animation
     d->m_timeLine.setDuration(300);
@@ -225,6 +229,13 @@ void KGamePopupItem::hoverLeaveEvent( QGraphicsSceneHoverEvent* )
 
     if( !d->m_timer.isActive() && d->m_timeLine.state() != QTimeLine::Running )
         playHideAnimation(); // let's hide
+}
+
+void KGamePopupItem::setMessageIcon( const QPixmap& pix )
+{
+    d->m_iconPix = pix;
+    d->m_textChildItem->setPos( MARGIN+pix.width()+SOME_SPACE, MARGIN );
+    // bounding rect is updated in showMessage()
 }
 
 #include "kgamepopupitem.moc"
