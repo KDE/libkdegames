@@ -9,6 +9,7 @@ install( FILES
 	KGameLCD
 	KGameMisc
 	KGameProgress
+        KGamePopupItem
         KGameTheme
 	KGrid2D
 	KHighscore
