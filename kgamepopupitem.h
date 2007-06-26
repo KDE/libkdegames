@@ -96,6 +96,15 @@ public:
      * Paints item. Reimplemented from QGraphicsItem
      */
     virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget );
+Q_SIGNALS:
+    /**
+     * Emitted when user clicks on a link in item
+     */
+    void linkActivated( const QString& link );
+    /**
+     * Emitted when user hovers a link in item
+     */
+    void linkHovered( const QString& link );
 private Q_SLOTS:
     void animationFrame(int);
     void hideMe();

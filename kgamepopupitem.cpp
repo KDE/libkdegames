@@ -91,6 +91,15 @@ KGamePopupItem::KGamePopupItem()
 {
     hide();
     d->m_textChildItem = new QGraphicsTextItem(this);
+    d->m_textChildItem->setTextInteractionFlags( Qt::LinksAccessibleByMouse );
+    // above call said to enable ItemIsFocusable which we don't need.
+    // So disabling it
+    d->m_textChildItem->setFlag( QGraphicsItem::ItemIsFocusable, false );
+
+    connect( d->m_textChildItem, SIGNAL(linkActivated(const QString&)),
+                                 SIGNAL(linkActivated(const QString&)));
+    connect( d->m_textChildItem, SIGNAL(linkHovered(const QString&)),
+                                 SIGNAL(linkHovered(const QString&)));
 
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
