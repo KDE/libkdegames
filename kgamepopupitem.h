@@ -66,7 +66,11 @@ public:
      *
      * @param msec amount of time in milliseconds
      */
-    void setMessageTimeOut( int msec );
+    void setMessageTimeout( int msec );
+    /**
+     * @return timeout that is currently set
+     */
+    int messageTimeout() const;
     /**
      * Sets the message opacity from 0 (fully transparent) to 1 (fully opaque)
      * For example 0.5 is half transparent

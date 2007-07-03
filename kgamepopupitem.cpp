@@ -200,7 +200,7 @@ void KGamePopupItem::playHideAnimation()
     d->m_timeLine.start();
 }
 
-void KGamePopupItem::setMessageTimeOut( int msec )
+void KGamePopupItem::setMessageTimeout( int msec )
 {
     d->m_timeout = msec;
 }
@@ -245,6 +245,11 @@ void KGamePopupItem::setMessageIcon( const QPixmap& pix )
     d->m_iconPix = pix;
     d->m_textChildItem->setPos( MARGIN+pix.width()+SOME_SPACE, MARGIN );
     // bounding rect is updated in showMessage()
+}
+
+int KGamePopupItem::messageTimeout() const
+{
+    return d->m_timeout;
 }
 
 #include "kgamepopupitem.moc"

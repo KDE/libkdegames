@@ -7,6 +7,7 @@
 
 class QGraphicsScene;
 class KGamePopupItem;
+class QGraphicsSimpleTextItem;
 
 class KGpiMainWindow : public KXmlGuiWindow
 {
@@ -18,10 +19,14 @@ private slots:
     void onPopupTR();
     void onPopupBL();
     void onPopupBR();
+    void onLinkClicked(const QString&);
+    void hideTextItem();
+    void onTimeoutChanged(int);
 private:
     Ui::KGpiMainWidget m_mainWid;
     QGraphicsScene *m_scene;
     KGamePopupItem *m_popupItem;
+    QGraphicsSimpleTextItem *m_textItem;
 };
 
 #endif
