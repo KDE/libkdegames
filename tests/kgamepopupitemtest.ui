@@ -1,0 +1,80 @@
+<ui version="4.0" >
+ <class>KGpiMainWidget</class>
+ <widget class="QWidget" name="KGpiMainWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" >
+   <item rowspan="2" row="0" column="0" >
+    <widget class="QGraphicsView" name="graphicsView" >
+     <property name="cacheMode" >
+      <set>QGraphicsView::CacheBackground</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" >
+    <widget class="QFrame" name="frame" >
+     <property name="frameShape" >
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QPushButton" name="popupTL" >
+        <property name="text" >
+         <string>Popup Top-Left</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="popupTR" >
+        <property name="text" >
+         <string>Popup Top-Right</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="popupBL" >
+        <property name="text" >
+         <string>Popup Bottom-Left</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="popupBR" >
+        <property name="text" >
+         <string>Popup Bottom-Right</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>91</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
