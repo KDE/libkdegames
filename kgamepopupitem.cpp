@@ -33,6 +33,22 @@ static const int SHOW_OFFSET = 5;
 // space between pixmap and text
 static const int SOME_SPACE = 10;
 
+class TextItemWithOpacity : public QGraphicsTextItem
+{
+public:
+    TextItemWithOpacity( QGraphicsItem* parent = 0 )
+        :QGraphicsTextItem(parent), m_opacity(1.0) {}
+    void setOpacity(qreal opa) { m_opacity = opa; }
+    virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
+        {
+            p->setOpacity(m_opacity);
+            QGraphicsTextItem::paint(p,option,widget);
+            p->setOpacity(1.0);
+        }
+private:
+    qreal m_opacity;
+};
+
 class KGamePopupItemPrivate
 {
 private:
@@ -77,7 +93,7 @@ public:
     /**
      * Child of KGamePopupItem used to display text
      */
-    QGraphicsTextItem* m_textChildItem;
+    TextItemWithOpacity* m_textChildItem;
     /**
      * Part of the scene that is actually visible in QGraphicsView
      * This is needed for item to work correctly when scene is larger than
@@ -90,7 +106,7 @@ KGamePopupItem::KGamePopupItem()
     : d(new KGamePopupItemPrivate)
 {
     hide();
-    d->m_textChildItem = new QGraphicsTextItem(this);
+    d->m_textChildItem = new TextItemWithOpacity(this);
     d->m_textChildItem->setTextInteractionFlags( Qt::LinksAccessibleByMouse );
     // above call said to enable ItemIsFocusable which we don't need.
     // So disabling it
@@ -127,18 +143,20 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     p->drawRect( d->m_boundRect );
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
+
+    p->setOpacity(1.0);
 }
 
 void KGamePopupItem::showMessage( const QString& text, Position pos )
 {
+    if(d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive())
+        return;// we're already showing a message
+
     // NOTE: we blindly take first view we found. I.e. we don't support
     // multiple views
     QGraphicsView *sceneView = scene()->views().at(0);
     QPolygonF poly = sceneView->mapToScene( sceneView->contentsRect() );
     d->m_visibleSceneRect = poly.boundingRect();
-
-    if(d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive())
-        return;// we're already showing a message
 
     d->m_textChildItem->setHtml(text);
 
@@ -208,6 +226,7 @@ void KGamePopupItem::setMessageTimeout( int msec )
 void KGamePopupItem::setMessageOpacity( qreal opacity )
 {
     d->m_opacity = opacity;
+    d->m_textChildItem->setOpacity(opacity);
 }
 
 QRectF KGamePopupItem::boundingRect() const
@@ -250,6 +269,18 @@ void KGamePopupItem::setMessageIcon( const QPixmap& pix )
 int KGamePopupItem::messageTimeout() const
 {
     return d->m_timeout;
+}
+
+void KGamePopupItem::forceHide()
+{
+    d->m_timeLine.stop();
+    d->m_timer.stop();
+    hide();
+}
+
+qreal KGamePopupItem::messageOpacity() const
+{
+    return d->m_opacity;
 }
 
 #include "kgamepopupitem.moc"

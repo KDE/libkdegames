@@ -7,6 +7,7 @@
 #include <KGamePopupItem>
 #include <QTimer>
 #include <KDebug>
+#include <KFileDialog>
 
 KGpiMainWindow::KGpiMainWindow()
     : KXmlGuiWindow()
@@ -21,6 +22,12 @@ KGpiMainWindow::KGpiMainWindow()
 
     m_scene = new QGraphicsScene;
     m_scene->setSceneRect( -1000, -1000, 2000, 2000 );
+    QLinearGradient gradient(QPointF(-1000,-1000), QPointF(2000,2000));
+    gradient.setColorAt(0, Qt::white);
+    gradient.setColorAt(1, Qt::blue);
+
+    m_scene->setBackgroundBrush(gradient);
+
     m_scene->addItem(m_popupItem);
     m_scene->addItem(m_textItem);
 
@@ -30,9 +37,13 @@ KGpiMainWindow::KGpiMainWindow()
     connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT( onPopupTR() ) );
     connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT( onPopupBL() ) );
     connect( m_mainWid.popupBR, SIGNAL(clicked()), SLOT( onPopupBR() ) );
+    connect( m_mainWid.forceHide, SIGNAL(clicked()), SLOT(doHide()) );
+    connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT( changeIcon()) );
+    connect( m_mainWid.opacity, SIGNAL(valueChanged(int)), SLOT(changeOpacity(int)) );
 
     connect( m_mainWid.mesTimeout, SIGNAL(valueChanged(int)), SLOT(onTimeoutChanged(int)) );
     m_mainWid.mesTimeout->setValue( m_popupItem->messageTimeout() );
+    m_mainWid.opacity->setValue( static_cast<int>(m_popupItem->messageOpacity()*100) );
     setCentralWidget(wid);
 
     setupGUI();
@@ -90,6 +101,25 @@ void KGpiMainWindow::hideTextItem()
 void KGpiMainWindow::onTimeoutChanged(int msec)
 {
     m_popupItem->setMessageTimeout( msec );
+}
+
+void KGpiMainWindow::changeIcon()
+{
+    QString newPix = KFileDialog::getImageOpenUrl( KUrl(), this ).path();
+    if(newPix.isEmpty())
+        return;
+    QPixmap pix(newPix);
+    m_popupItem->setMessageIcon( newPix );
+}
+
+void KGpiMainWindow::doHide()
+{
+    m_popupItem->forceHide();
+}
+
+void KGpiMainWindow::changeOpacity(int opa)
+{
+    m_popupItem->setMessageOpacity(opa/100.0);
 }
 
 #include "kgamepopupitemtest.moc"

@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
-    <height>350</height>
+    <width>479</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -57,6 +57,33 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="0" colspan="3" >
+       <widget class="QPushButton" name="changeIcon" >
+        <property name="text" >
+         <string>Change Icon...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QLabel" name="label_3" >
+        <property name="text" >
+         <string>Opacity:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2" >
+       <widget class="QSlider" name="opacity" >
+        <property name="maximum" >
+         <number>100</number>
+        </property>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition" >
+         <enum>QSlider::TicksBelow</enum>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -94,6 +121,13 @@
        <widget class="QPushButton" name="popupBR" >
         <property name="text" >
          <string>Popup Bottom-Right</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="forceHide" >
+        <property name="text" >
+         <string>Hide Immediately</string>
         </property>
        </widget>
       </item>

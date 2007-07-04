@@ -78,6 +78,10 @@ public:
      */
     void setMessageOpacity( qreal opacity );
     /**
+     * @return current message opacity
+     */
+    qreal messageOpacity() const;
+    /**
      * Sets custom pixmap to show instead of default icon on the left
      */
     void setMessageIcon( const QPixmap& pix );
@@ -92,6 +96,11 @@ public:
      * @param pos position on the scene where the message will appear
      */
     void showMessage( const QString& text, Position pos );
+    /**
+     * Requests the item to be hidden immediately. No hide-animation
+     * is played. It just dissapears immediately
+     */
+    void forceHide();
     /**
      * @return the bounding rect of this item. Reimplemented from QGraphicsItem
      */

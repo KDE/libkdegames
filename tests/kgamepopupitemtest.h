@@ -22,6 +22,9 @@ private slots:
     void onLinkClicked(const QString&);
     void hideTextItem();
     void onTimeoutChanged(int);
+    void changeIcon();
+    void doHide();
+    void changeOpacity(int);
 private:
     Ui::KGpiMainWidget m_mainWid;
     QGraphicsScene *m_scene;
