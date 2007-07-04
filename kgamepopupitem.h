@@ -58,6 +58,17 @@ public:
      */
     ~KGamePopupItem();
     /**
+     * Shows the message: item will appear at specified place
+     * of the scene using simple animation
+     * Item will be automatically hidden after timeout set in setMessageTimeOut() passes
+     * If item is hovered with mouse it won't hide until user moves
+     * the mouse away
+     *
+     * @param text holds the message to show
+     * @param pos position on the scene where the message will appear
+     */
+    void showMessage( const QString& text, Position pos );
+    /**
      * Sets the amount of time the item will stay visible on screen
      * before it goes away.
      * By default item is shown for 2000 msec
@@ -86,21 +97,22 @@ public:
      */
     void setMessageIcon( const QPixmap& pix );
     /**
-     * Shows the message to item: item will appear at specified place
-     * of the scene using simple animation
-     * Item will be automatically hidden after timeout set in setMessageTimeOut() passes
-     * If item is hovered with mouse it won't hide until user moves
-     * the mouse away
-     *
-     * @param text holds the message to show
-     * @param pos position on the scene where the message will appear
-     */
-    void showMessage( const QString& text, Position pos );
-    /**
      * Requests the item to be hidden immediately. No hide-animation
      * is played. It just dissapears immediately
      */
     void forceHide();
+    /**
+     * Sets brush used to paint item backgound
+     * By default system-default brush is used
+     * @see KColorScheme
+     */
+    void setBackgroundBrush( const QBrush& brush );
+    /**
+     * Sets default color for unformatted text
+     * By default system-default color is used
+     * @see KColorScheme
+     */
+    void setTextColor( const QColor& color );
     /**
      * @return the bounding rect of this item. Reimplemented from QGraphicsItem
      */

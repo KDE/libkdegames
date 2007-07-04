@@ -25,6 +25,8 @@ private slots:
     void changeIcon();
     void doHide();
     void changeOpacity(int);
+    void textColorChanged(const QColor& col);
+    void bkgndColorChanged(const QColor& col);
 private:
     Ui::KGpiMainWidget m_mainWid;
     QGraphicsScene *m_scene;

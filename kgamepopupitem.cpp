@@ -24,7 +24,8 @@
 #include <QGraphicsTextItem>
 
 #include <KIcon>
-#include <kdebug.h>
+#include <KDebug>
+#include <kcolorscheme.h>
 
 // margin on the sides of message box
 static const int MARGIN = 15;
@@ -100,6 +101,10 @@ public:
      * the View
      */
     QRectF m_visibleSceneRect;
+    /**
+     * Background brush color
+     */
+    QBrush m_brush;
 };
 
 KGamePopupItem::KGamePopupItem()
@@ -128,6 +133,11 @@ KGamePopupItem::KGamePopupItem()
 
     setAcceptsHoverEvents(true);
 
+    // setup default colors
+    KColorScheme kcs( KColorScheme::Tooltip );
+    d->m_brush = kcs.background();
+    d->m_textChildItem->setDefaultTextColor( kcs.foreground(KColorScheme::NormalText).color() );
+
     connect( &d->m_timeLine, SIGNAL(frameChanged(int)), SLOT(animationFrame(int)) );
     connect( &d->m_timeLine, SIGNAL(finished()), SLOT(hideMe()));
     connect( &d->m_timer, SIGNAL(timeout()), SLOT(playHideAnimation()) );
@@ -138,7 +148,7 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    p->setBrush( Qt::lightGray );
+    p->setBrush( d->m_brush );
     p->setOpacity(d->m_opacity);
     p->drawRect( d->m_boundRect );
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
@@ -281,6 +291,16 @@ void KGamePopupItem::forceHide()
 qreal KGamePopupItem::messageOpacity() const
 {
     return d->m_opacity;
+}
+
+void KGamePopupItem::setBackgroundBrush( const QBrush& brush )
+{
+    d->m_brush = brush;
+}
+
+void KGamePopupItem::setTextColor( const QColor& color )
+{
+    d->m_textChildItem->setDefaultTextColor(color);
 }
 
 #include "kgamepopupitem.moc"

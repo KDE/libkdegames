@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <KDebug>
 #include <KFileDialog>
+#include <kcolorscheme.h>
 
 KGpiMainWindow::KGpiMainWindow()
     : KXmlGuiWindow()
@@ -33,6 +34,10 @@ KGpiMainWindow::KGpiMainWindow()
 
     m_mainWid.graphicsView->setScene(m_scene);
 
+    KColorScheme kcs( KColorScheme::Tooltip );
+    m_mainWid.textColor->setColor( kcs.foreground(KColorScheme::NormalText).color() );
+    m_mainWid.bkgndColor->setColor( kcs.background().color() );
+
     connect( m_mainWid.popupTL, SIGNAL(clicked()), SLOT( onPopupTL() ) );
     connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT( onPopupTR() ) );
     connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT( onPopupBL() ) );
@@ -40,6 +45,8 @@ KGpiMainWindow::KGpiMainWindow()
     connect( m_mainWid.forceHide, SIGNAL(clicked()), SLOT(doHide()) );
     connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT( changeIcon()) );
     connect( m_mainWid.opacity, SIGNAL(valueChanged(int)), SLOT(changeOpacity(int)) );
+    connect( m_mainWid.textColor, SIGNAL(changed(const QColor&)), SLOT(textColorChanged(const QColor&)));
+    connect( m_mainWid.bkgndColor, SIGNAL(changed(const QColor&)), SLOT(bkgndColorChanged(const QColor&)));
 
     connect( m_mainWid.mesTimeout, SIGNAL(valueChanged(int)), SLOT(onTimeoutChanged(int)) );
     m_mainWid.mesTimeout->setValue( m_popupItem->messageTimeout() );
@@ -88,7 +95,6 @@ void KGpiMainWindow::onLinkClicked(const QString& link)
     m_textItem->setText( "Hi! I'm the message that should appear :-). You cliked link: "+link );
     m_textItem->setPos( visibleRect.left()+visibleRect.width()/2-m_textItem->boundingRect().width()/2,
                         visibleRect.top()+visibleRect.height()/2 );
-    kDebug() << m_textItem->pos() << endl;
     m_textItem->show();
     QTimer::singleShot(2000, this, SLOT(hideTextItem()));
 }
@@ -120,6 +126,16 @@ void KGpiMainWindow::doHide()
 void KGpiMainWindow::changeOpacity(int opa)
 {
     m_popupItem->setMessageOpacity(opa/100.0);
+}
+
+void KGpiMainWindow::textColorChanged(const QColor& col)
+{
+    m_popupItem->setTextColor(col);
+}
+
+void KGpiMainWindow::bkgndColorChanged(const QColor& col)
+{
+    m_popupItem->setBackgroundBrush( col );
 }
 
 #include "kgamepopupitemtest.moc"
