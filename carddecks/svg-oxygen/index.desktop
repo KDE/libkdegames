@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Oxygen (SVG)
+Name[zh_TW]=Oxygen（SVG）
 Preview=11.png
 SVG=Oxygen.svgz
 BackSize=63.6686,99.8159
