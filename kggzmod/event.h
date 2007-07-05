@@ -144,7 +144,7 @@ class LaunchEvent : public Event
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class ServerEvent : public Event
+class KGGZMOD_EXPORT ServerEvent : public Event
 {
 	public:
 		ServerEvent(const Event& event);
