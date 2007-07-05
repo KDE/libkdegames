@@ -24,6 +24,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QDataStream>
 
+#include "kggznet_export.h"
+
 class QAbstractSocket;
 
 /**
@@ -49,7 +51,7 @@ class QAbstractSocket;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class KGGZPacket : public QObject
+class KGGZNET_EXPORT KGGZPacket : public QObject
 {
 	Q_OBJECT
 	public:

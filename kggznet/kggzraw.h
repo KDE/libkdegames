@@ -23,6 +23,8 @@
 
 #include <QtCore/QObject>
 
+#include "kggznet_export.h"
+
 /**
  * @mainpage
  *
@@ -70,7 +72,7 @@ class QDataStream;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class KGGZRaw : public QObject
+class KGGZNET_EXPORT KGGZRaw : public QObject
 {
 	Q_OBJECT
 	public:

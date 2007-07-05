@@ -21,6 +21,8 @@
 #ifndef KGGZMOD_STATISTICS_H
 #define KGGZMOD_STATISTICS_H
 
+#include "kggzmod_export.h"
+
 namespace KGGZMod
 {
 
@@ -44,7 +46,7 @@ class StatisticsPrivate;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class Statistics
+class KGGZMOD_EXPORT Statistics
 {
 	friend class ModulePrivate;
 

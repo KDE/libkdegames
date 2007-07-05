@@ -24,6 +24,8 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 
+#include "kggzmod_export.h"
+
 namespace KGGZMod
 {
 
@@ -50,7 +52,7 @@ class Player;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class Event
+class KGGZMOD_EXPORT Event
 {
 	friend class ModulePrivate;
 

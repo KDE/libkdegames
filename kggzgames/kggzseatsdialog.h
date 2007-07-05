@@ -25,6 +25,8 @@
 
 #include <QtGui/QWidget>
 
+#include "kggzgames_export.h"
+
 /**
  * @mainpage kggzgames
  *
@@ -69,7 +71,7 @@ class QAction;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class KGGZSeatsDialog : public QWidget
+class KGGZGAMES_EXPORT KGGZSeatsDialog : public QWidget
 {
 	Q_OBJECT
 	public:

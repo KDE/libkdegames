@@ -27,6 +27,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
+#include "kggzmod_export.h"
+
 /**
  * @mainpage
  *
@@ -77,7 +79,7 @@ class Player;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class Module : public QObject
+class KGGZMOD_EXPORT Module : public QObject
 {
 	Q_OBJECT
 	public:

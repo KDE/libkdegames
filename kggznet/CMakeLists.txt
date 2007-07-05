@@ -8,7 +8,9 @@ set(kggznet_LIB_SRCS
 
 kde4_automoc(${kggznet_LIB_SRCS})
 
-kde4_add_library(kggznet STATIC ${kggznet_LIB_SRCS})
+kde4_add_library(kggznet SHARED ${kggznet_LIB_SRCS})
 
-target_link_libraries(kggznet ${QT_QTNETWORK_LIBRARY})
+target_link_libraries(kggznet ${KDE4_KDECORE_LIBS} ${QT_QTNETWORK_LIBRARY})
 
+set_target_properties(kggznet PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+install(TARGETS kggznet DESTINATION ${LIB_INSTALL_DIR})

@@ -23,6 +23,8 @@
 
 #include <QtCore/QString>
 
+#include "kggzmod_export.h"
+
 namespace KGGZMod
 {
 
@@ -49,7 +51,7 @@ class Statistics;
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class Player
+class KGGZMOD_EXPORT Player
 {
 	friend class ModulePrivate;
 

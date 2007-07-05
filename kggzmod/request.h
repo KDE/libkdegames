@@ -24,6 +24,8 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 
+#include "kggzmod_export.h"
+
 namespace KGGZMod
 {
 
@@ -43,7 +45,7 @@ namespace KGGZMod
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class Request
+class KGGZMOD_EXPORT Request
 {
 	public:
 		/**
@@ -106,7 +108,7 @@ class Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class StateRequest : public Request
+class KGGZMOD_EXPORT StateRequest : public Request
 {
 	public:
 		StateRequest(/*Module::State*/int state);
@@ -122,7 +124,7 @@ class StateRequest : public Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class StandRequest : public Request
+class KGGZMOD_EXPORT StandRequest : public Request
 {
 	public:
 		StandRequest();
@@ -138,7 +140,7 @@ class StandRequest : public Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class SitRequest : public Request
+class KGGZMOD_EXPORT SitRequest : public Request
 {
 	public:
 		SitRequest(int seat);
@@ -154,7 +156,7 @@ class SitRequest : public Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class BootRequest : public Request
+class KGGZMOD_EXPORT BootRequest : public Request
 {
 	public:
 		BootRequest(const QString &playername);
@@ -170,7 +172,7 @@ class BootRequest : public Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class BotRequest : public Request
+class KGGZMOD_EXPORT BotRequest : public Request
 {
 	public:
 		BotRequest(int seat);
@@ -186,7 +188,7 @@ class BotRequest : public Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class OpenRequest : public Request
+class KGGZMOD_EXPORT OpenRequest : public Request
 {
 	public:
 		OpenRequest(int seat);
@@ -221,7 +223,7 @@ class ChatRequest : public Request
  *
  * @author Josef Spillner (josef@ggzgamingzone.org)
  */
-class InfoRequest : public Request
+class KGGZMOD_EXPORT InfoRequest : public Request
 {
 	public:
 		InfoRequest(int seat);
