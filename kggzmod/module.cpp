@@ -234,8 +234,8 @@ void ModulePrivate::slotGGZEvent()
 
 	if((opcode < msglaunch) || (opcode > msginfo))
 	{
-		disconnect();
 		kDebug(11003) << "[kggzmod] error: unknown opcode" << endl;
+		disconnect();
 		emit signalError();
 		return;
 	}
@@ -264,8 +264,8 @@ void ModulePrivate::slotGGZEvent()
 
 		// FIXME: we don't handle this variant
 
-		disconnect();
 		kDebug(11003) << "[kggzmod] error: we don't handle msgserver" << endl;
+		disconnect();
 		emit signalError();
 	}
 	if(opcode == msgserverfd)
@@ -278,8 +278,8 @@ void ModulePrivate::slotGGZEvent()
 		ret = readfiledescriptor(m_fd, &_fd);
 		if(!ret)
 		{
-			disconnect();
 			kDebug(11003) << "[kggzmod] error: socket reading failed" << endl;
+			disconnect();
 			emit signalError();
 			return;
 		}
@@ -489,6 +489,11 @@ void ModulePrivate::disconnect()
 
 Player *ModulePrivate::self() const
 {
+	if(m_myseat == -1)
+	{
+		return 0;
+	}
+
 	if(m_myspectator)
 	{
 		return m_spectators.at(m_myseat);
@@ -543,27 +548,31 @@ void ModulePrivate::insertPlayer(Player::Type seattype, const QString &name, int
 
 	if(seattype == Player::spectator)
 	{
-		for(it = m_spectators.begin(); it != m_spectators.end(); it++)
+		if(seat != -1)
 		{
-			if((*it)->name() == p->name())
+			if(seat < m_spectators.count())
 			{
-				it = m_spectators.erase(it);
-				break;
+				m_spectators.replace(seat, p);
+			}
+			else
+			{
+				m_spectators.append(p);
 			}
 		}
-		m_spectators.append(p);
 	}
 	else
 	{
-		for(it = m_players.begin(); it != m_players.end(); it++)
+		if(seat != -1)
 		{
-			if((*it)->name() == p->name())
+			if(seat < m_players.count())
 			{
-				it = m_players.erase(it);
-				break;
+				m_players.replace(seat, p);
+			}
+			else
+			{
+				m_players.append(p);
 			}
 		}
-		m_players.append(p);
 	}
 }
 

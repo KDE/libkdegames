@@ -98,6 +98,7 @@ bool readfiledescriptor(int sock, int *recvfd)
 	
         return true;
 #else
+	kError() << "This path should never be called." << endl;
 	return false;
 #endif
 }
