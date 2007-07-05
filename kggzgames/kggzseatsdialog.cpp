@@ -42,8 +42,59 @@
 
 #include <math.h>
 
+class KGGZSeatsDialogPrivate
+{
+	public:
+		KGGZSeatsDialogPrivate(KGGZSeatsDialog* qq);
+
+		KGGZSeatsDialog* q;
+
+		KGGZMod::Module *m_mod;
+		QScrollArea *m_view;
+		QWidget *m_root;
+		QMap<int, QLabel*> m_hostnames;
+		QMap<int, QLabel*> m_realnames;
+		QMap<int, QFrame*> m_photos;
+		QMap<KIO::Job*, int> m_phototasks;
+		QMap<KIO::Job*, QByteArray> m_photodata;
+		QMap<const QObject*, int> m_buttons;
+		QMap<const QObject*, QToolButton*> m_buttondata;
+		int m_oldmode;
+		KGGZMod::Player *m_currentplayer;
+
+		enum DisplayModes
+		{
+			displayseats,
+			displayspectators
+		};
+
+		QAction *action_standup;
+		QAction *action_sitdown;
+		QAction *action_bootplayer;
+		QAction *action_botadd;
+		QAction *action_botremove;
+		QAction *action_viewstats;
+
+		void displaySeats();
+		void displaySpectators();
+		void infos();
+
+		// slots
+		void slotDisplay(int id);
+		void slotTaskData(KIO::Job *job, const QByteArray&);
+		void slotTaskResult(KIO::Job *job);
+		void slotInfo(const KGGZMod::Event& event);
+		void slotAction();
+		void slotMenu(QAction *action);
+};
+
 KGGZSeatsDialog::KGGZSeatsDialog(QWidget *parent)
-: QWidget(parent)
+: QWidget(parent), d(new KGGZSeatsDialogPrivate(this))
+{
+}
+
+KGGZSeatsDialogPrivate::KGGZSeatsDialogPrivate(KGGZSeatsDialog* qq)
+: q(qq)
 {
 	m_root = NULL;
 	m_mod = NULL;
@@ -73,38 +124,39 @@ KGGZSeatsDialog::KGGZSeatsDialog(QWidget *parent)
 	box->addLayout(box2);
 	box->addWidget(sep2);
 	box->addWidget(ok);
-	setLayout(box);
+	q->setLayout(box);
 
-	connect(combo, SIGNAL(activated(int)), SLOT(slotDisplay(int)));
-	connect(ok, SIGNAL(clicked()), SLOT(close()));
+	QObject::connect(combo, SIGNAL(activated(int)), q, SLOT(slotDisplay(int)));
+	QObject::connect(ok, SIGNAL(clicked()), q, SLOT(close()));
 
-	setWindowTitle(i18n("Players, Bots and Spectators"));
-	resize(300, 300);
-	show();
+	q->setWindowTitle(i18n("Players, Bots and Spectators"));
+	q->resize(300, 300);
+	q->show();
 
-	setMod(KGGZMod::Module::instance());
+	q->setMod(KGGZMod::Module::instance());
 }
 
 KGGZSeatsDialog::~KGGZSeatsDialog()
 {
+	delete d;
 }
 
 void KGGZSeatsDialog::setMod(KGGZMod::Module *mod)
 {
-	m_mod = mod;
+	d->m_mod = mod;
 
 	if(mod)
 	{
 		KGGZMod::InfoRequest ir;
 		mod->sendRequest(ir);
 
-		connect(mod, SIGNAL(signalEvent(const KGGZMod::Event&)), SLOT(slotInfo(const KGGZMod::Event&)));
+		connect(mod, SIGNAL(signalEvent(const KGGZMod::Event&)), this, SLOT(slotInfo(const KGGZMod::Event&)));
 
-		displaySeats();
+		d->displaySeats();
 	}
 }
 
-void KGGZSeatsDialog::displaySeats()
+void KGGZSeatsDialogPrivate::displaySeats()
 {
 	QPalette palette;
 	int count = m_mod->players().count();
@@ -222,7 +274,7 @@ void KGGZSeatsDialog::displaySeats()
 		m_buttons[actionbutton] = i;
 		m_buttondata[actionbutton] = actionbutton;
 
-		connect(actionbutton, SIGNAL(clicked()), SLOT(slotAction()));
+		QObject::connect(actionbutton, SIGNAL(clicked()), q, SLOT(slotAction()));
 	}
 
 	vboxmain->addStretch(1);
@@ -232,7 +284,7 @@ void KGGZSeatsDialog::displaySeats()
 	infos();
 }
 
-void KGGZSeatsDialog::displaySpectators()
+void KGGZSeatsDialogPrivate::displaySpectators()
 {
 	int count = m_mod->spectators().count();
 	int digits = (int)(log(count) / log(10) + 1);
@@ -293,20 +345,20 @@ void KGGZSeatsDialog::displaySpectators()
 	m_root->show();
 }
 
-void KGGZSeatsDialog::slotAction()
+void KGGZSeatsDialogPrivate::slotAction()
 {
 	int seat;
        
-	if(m_buttons.contains(sender()))
+	if(m_buttons.contains(q->sender()))
 	{
-		seat = m_buttons[sender()];
+		seat = m_buttons[q->sender()];
 		kDebug(11004) << "seat " << seat << " oldmode " << m_oldmode << endl;
 
 		KGGZMod::Player *p = m_mod->players().at(seat);
 		KGGZMod::Player *pself = m_mod->self();
 		m_currentplayer = p;
 
-		QMenu *pop = new QMenu(this);
+		QMenu *pop = new QMenu(q);
 		action_viewstats = pop->addAction(i18n("Statistics..."));
 		pop->addSeparator();
 		if(p->type() == KGGZMod::Player::open)
@@ -336,9 +388,9 @@ void KGGZSeatsDialog::slotAction()
 		{
 		}
 
-		connect(pop, SIGNAL(triggered(QAction*)), SLOT(slotMenu(QAction*)));
+		QObject::connect(pop, SIGNAL(triggered(QAction*)), q, SLOT(slotMenu(QAction*)));
 
-		const QToolButton *buttonkey = dynamic_cast<const QToolButton*>(sender());
+		const QToolButton *buttonkey = qobject_cast<const QToolButton*>(q->sender());
 		QToolButton *button = m_buttondata[buttonkey];
 		//button->setPopup(pop);
 		//button->openPopup();
@@ -351,7 +403,7 @@ void KGGZSeatsDialog::slotAction()
 	}
 }
 
-void KGGZSeatsDialog::slotMenu(QAction *action)
+void KGGZSeatsDialogPrivate::slotMenu(QAction *action)
 {
 	kDebug(11004) << "slotMenu! action=" << action->text() << endl;
 
@@ -391,7 +443,7 @@ void KGGZSeatsDialog::slotMenu(QAction *action)
 	}
 }
 
-void KGGZSeatsDialog::slotInfo(const KGGZMod::Event& event)
+void KGGZSeatsDialogPrivate::slotInfo(const KGGZMod::Event& event)
 {
 	if(event.type() == KGGZMod::Event::info)
 	{
@@ -403,7 +455,7 @@ void KGGZSeatsDialog::slotInfo(const KGGZMod::Event& event)
 	}
 }
 
-void KGGZSeatsDialog::infos()
+void KGGZSeatsDialogPrivate::infos()
 {
 	int count = m_mod->players().count();
 	for(int i = 0; i < count; i++)
@@ -427,10 +479,10 @@ void KGGZSeatsDialog::infos()
 			if(!p->photo().isEmpty())
 			{
 				KIO::TransferJob *job = KIO::get(p->photo(), false, false);
-				connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-					SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
-				connect(job, SIGNAL(result(KIO::Job*)),
-					SLOT(slotTaskResult(KIO::Job*)));
+				QObject::connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
+					q, SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
+				QObject::connect(job, SIGNAL(result(KIO::Job*)),
+					q, SLOT(slotTaskResult(KIO::Job*)));
 				m_phototasks[job] = i;
 				m_photodata[job] = QByteArray();
 			}
@@ -438,7 +490,7 @@ void KGGZSeatsDialog::infos()
 	}
 }
 
-void KGGZSeatsDialog::slotDisplay(int id)
+void KGGZSeatsDialogPrivate::slotDisplay(int id)
 {
 	if(id == m_oldmode) return;
 	m_oldmode = id;
@@ -447,7 +499,7 @@ void KGGZSeatsDialog::slotDisplay(int id)
 	else if(id == displayspectators) displaySpectators();
 }
 
-void KGGZSeatsDialog::slotTaskData(KIO::Job *job, const QByteArray& data)
+void KGGZSeatsDialogPrivate::slotTaskData(KIO::Job *job, const QByteArray& data)
 {
 	QByteArray data2 = m_photodata[job];
 	int origsize = data2.size();
@@ -461,7 +513,7 @@ void KGGZSeatsDialog::slotTaskData(KIO::Job *job, const QByteArray& data)
 	m_photodata[job] = data2;
 }
 
-void KGGZSeatsDialog::slotTaskResult(KIO::Job *job)
+void KGGZSeatsDialogPrivate::slotTaskResult(KIO::Job *job)
 {
 	if(!job->error())
 	{
