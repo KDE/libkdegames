@@ -69,6 +69,7 @@ set(kdegames_LIB_SRCS
     kgametheme.cpp
     kgamethemeselector.cpp
     kstandardgameaction.cpp
+    kgamedifficulty.cpp
 )
 
 kde4_automoc(${kdegames_LIB_SRCS})
@@ -106,5 +107,6 @@ install(FILES
     kgameclock.h
     kgametheme.h
     kgamethemeselector.h
+    kgamedifficulty.h
     DESTINATION ${INCLUDE_INSTALL_DIR})
 
