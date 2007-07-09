@@ -72,8 +72,6 @@ set(kdegames_LIB_SRCS
     kgamedifficulty.cpp
 )
 
-kde4_automoc(${kdegames_LIB_SRCS})
-
 kde4_add_ui_files(kdegames_LIB_SRCS
     kgamethemeselector.ui
 )

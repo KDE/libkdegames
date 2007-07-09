@@ -9,8 +9,6 @@ set(kggzmod_LIB_SRCS
     request.cpp
     statistics.cpp)
 
-kde4_automoc(${kggzmod_LIB_SRCS})
-
 kde4_add_library(kggzmod SHARED ${kggzmod_LIB_SRCS})
 
 target_link_libraries(kggzmod ${KDE4_KDECORE_LIBS} ${QT_QTNETWORK_LIBRARY} kggznet)

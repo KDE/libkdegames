@@ -6,8 +6,6 @@ set(kggznet_LIB_SRCS
     kggzpacket.cpp
     kggzraw.cpp)
 
-kde4_automoc(${kggznet_LIB_SRCS})
-
 kde4_add_library(kggznet SHARED ${kggznet_LIB_SRCS})
 
 target_link_libraries(kggznet ${KDE4_KDECORE_LIBS} ${QT_QTNETWORK_LIBRARY})
