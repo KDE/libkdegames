@@ -21,7 +21,7 @@ You should have received a copy of the GNU Library General Public License along 
 
 
 
-KGameDifficulty::KGameDifficulty(KXmlGuiWindow* window, const bool restartByChange, const int number)
+KGameDifficulty::KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, int number)
 {
 	Q_ASSERT((number>0) && (number<9));
 
@@ -46,7 +46,7 @@ KGameDifficulty::KGameDifficulty(KXmlGuiWindow* window, const bool restartByChan
 }
 
 
-KGameDifficulty::KGameDifficulty(KXmlGuiWindow* window, const bool restartByChange, QStringList& texts)
+KGameDifficulty::KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, QStringList& texts)
 {
 	Q_ASSERT(texts.count()>0);
 
@@ -72,7 +72,7 @@ void KGameDifficulty::addCustomLevel()
 }
 
 
-void KGameDifficulty::changeLevel(const int level)
+void KGameDifficulty::changeLevel(int level)
 {
 	bool mayAbort = true;
 
@@ -91,7 +91,7 @@ void KGameDifficulty::changeLevel(const int level)
 }
 
 
-void KGameDifficulty::setEnabled(const bool enabled)
+void KGameDifficulty::setEnabled(bool enabled)
 {
 	Q_ASSERT(m_menu);
 
@@ -100,7 +100,7 @@ void KGameDifficulty::setEnabled(const bool enabled)
 }
 
 
-void KGameDifficulty::setLevel(const int level)
+void KGameDifficulty::setLevel(int level)
 {
 	m_menu->setCurrentItem(level);
 	if (level!=m_level)
@@ -109,13 +109,13 @@ void KGameDifficulty::setLevel(const int level)
 }
 
 
-void KGameDifficulty::setRunning(const bool running)
+void KGameDifficulty::setRunning(bool running)
 {
 	m_running = running;
 }
 
 
-void KGameDifficulty::createActionsAndMore(KXmlGuiWindow* window, const bool restartByChange)
+void KGameDifficulty::createActionsAndMore(KXmlGuiWindow* window, bool restartByChange)
 {
 	m_restartByChange = restartByChange;
 	setParent(window);

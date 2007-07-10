@@ -41,7 +41,7 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		 * @param restartByChange Does the game have to be restarted, if the difficulty level changes? In this case, a confirmation dialog is displayed.
 		 * @param number Number of different difficulty levels
 		 */
-		KDEGAMES_EXPORT KGameDifficulty(KXmlGuiWindow* window, const bool restartByChange, const int number);
+		KDEGAMES_EXPORT KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, int number);
 
 		/**
 		 * @brief Constructor with custom difficulty levels
@@ -50,7 +50,7 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		 * @param restartByChange Does the game have to be restarted, if the difficulty level changes? In this case, a confirmation dialog is displayed.
 		 * @param texts List of custumized level texts.
 		 */
-		KDEGAMES_EXPORT KGameDifficulty(KXmlGuiWindow* window, const bool restartByChange, QStringList& texts);
+		KDEGAMES_EXPORT KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, QStringList& texts);
 
 
 		KDEGAMES_EXPORT ~KGameDifficulty();
@@ -63,7 +63,7 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 
 
 	Q_SIGNALS:
-		KDEGAMES_EXPORT void levelChanged(const int level);
+		KDEGAMES_EXPORT void levelChanged(int level);
 
 
 	public Q_SLOTS:
@@ -72,29 +72,29 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		 *
 		 * The difference with the mehtode "setLevel" is that the user may have to confirm that he agrees to end the current game (if needed).
 		 */
-		KDEGAMES_EXPORT void changeLevel(const int level);
+		KDEGAMES_EXPORT void changeLevel(int level);
 
 		/**
 		 * @brief Set if the difficulty level may be changed.
 		 * If not, all the actions are disabled.
 		 * Default is "true".
 		 */
-		KDEGAMES_EXPORT void setEnabled(const bool enabled);
+		KDEGAMES_EXPORT void setEnabled(bool enabled);
 
 		/**
 		 * @brief Set the new current difficulty level
 		 */
-		KDEGAMES_EXPORT void setLevel(const int level);
+		KDEGAMES_EXPORT void setLevel(int level);
 
 		/**
 		 * @brief Set the game state: Running or not
 		 * The game state should be defined if the value of m_restartByChange is true.
 		 */
-		KDEGAMES_EXPORT void setRunning(const bool running);
+		KDEGAMES_EXPORT void setRunning(bool running);
 
 
 	private:
-		void createActionsAndMore(KXmlGuiWindow* window, const bool restartByChange);
+		void createActionsAndMore(KXmlGuiWindow* window, bool restartByChange);
 
 
 		KSelectAction* m_menu;
