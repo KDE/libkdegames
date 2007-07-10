@@ -11,21 +11,14 @@ You should have received a copy of the GNU Library General Public License along 
 #ifndef KGAMEDIFFICULTY_H
 #define KGAMEDIFFICULTY_H
 
-
-
 #include <QtCore/QStringList>
 
-
-class KSelectAction;
 class KXmlGuiWindow;
 
-
-// Pourquoi?
 #include <libkdegames_export.h>
 
+class KGameDifficultyPrivate;
 
-
-//TODO: Use D-Pointer
 /**
  * @brief KGameDifficuty
  */
@@ -41,7 +34,7 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		 * @param restartByChange Does the game have to be restarted, if the difficulty level changes? In this case, a confirmation dialog is displayed.
 		 * @param number Number of different difficulty levels
 		 */
-		KDEGAMES_EXPORT KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, int number);
+		KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, int number);
 
 		/**
 		 * @brief Constructor with custom difficulty levels
@@ -50,20 +43,17 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		 * @param restartByChange Does the game have to be restarted, if the difficulty level changes? In this case, a confirmation dialog is displayed.
 		 * @param texts List of custumized level texts.
 		 */
-		KDEGAMES_EXPORT KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, QStringList& texts);
+		KGameDifficulty(KXmlGuiWindow* window, bool restartByChange, QStringList& texts);
 
-
-		KDEGAMES_EXPORT ~KGameDifficulty();
-
+		virtual ~KGameDifficulty();
 
 		/**
 		 * @brief A special item is added for custom difficulty level
 		 */
-		KDEGAMES_EXPORT void addCustomLevel();
-
+		void addCustomLevel();
 
 	Q_SIGNALS:
-		KDEGAMES_EXPORT void levelChanged(int level);
+		void levelChanged(int level);
 
 
 	public Q_SLOTS:
@@ -72,42 +62,31 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		 *
 		 * The difference with the mehtode "setLevel" is that the user may have to confirm that he agrees to end the current game (if needed).
 		 */
-		KDEGAMES_EXPORT void changeLevel(int level);
+		void changeLevel(int level);
 
 		/**
 		 * @brief Set if the difficulty level may be changed.
 		 * If not, all the actions are disabled.
 		 * Default is "true".
 		 */
-		KDEGAMES_EXPORT void setEnabled(bool enabled);
+		void setEnabled(bool enabled);
 
 		/**
 		 * @brief Set the new current difficulty level
 		 */
-		KDEGAMES_EXPORT void setLevel(int level);
+		void setLevel(int level);
 
 		/**
 		 * @brief Set the game state: Running or not
 		 * The game state should be defined if the value of m_restartByChange is true.
 		 */
-		KDEGAMES_EXPORT void setRunning(bool running);
-
+		void setRunning(bool running);
 
 	private:
-		void createActionsAndMore(KXmlGuiWindow* window, bool restartByChange);
+		friend class KGameDifficultyPrivate;
+		KGameDifficultyPrivate* const d;
 
-
-		KSelectAction* m_menu;
-
-		/**
-		 * @brief Current difficulty level
-		 */
-		int m_level;
-
-		bool m_restartByChange;
-		bool m_running;
-
-		QStringList m_texts;
+		Q_DISABLE_COPY(KGameDifficulty)
 };
 
 #endif //KGAMEDIFFICULTY_H
