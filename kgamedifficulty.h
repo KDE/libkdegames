@@ -75,6 +75,13 @@ class KDEGAMES_EXPORT KGameDifficulty : public QObject
 		KDEGAMES_EXPORT void changeLevel(const int level);
 
 		/**
+		 * @brief Set if the difficulty level may be changed.
+		 * If not, all the actions are disabled.
+		 * Default is "true".
+		 */
+		KDEGAMES_EXPORT void setEnabled(const bool enabled);
+
+		/**
 		 * @brief Set the new current difficulty level
 		 */
 		KDEGAMES_EXPORT void setLevel(const int level);

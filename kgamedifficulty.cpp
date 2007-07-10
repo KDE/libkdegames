@@ -56,7 +56,6 @@ KGameDifficulty::KGameDifficulty(KXmlGuiWindow* window, const bool restartByChan
 }
 
 
-
 KGameDifficulty::~KGameDifficulty()
 {
 	delete m_menu;
@@ -92,6 +91,15 @@ void KGameDifficulty::changeLevel(const int level)
 }
 
 
+void KGameDifficulty::setEnabled(const bool enabled)
+{
+	Q_ASSERT(m_menu);
+
+	// TODO: Doing this never disable the combobox in the toolbar (just in the menu). It seems to be a bug in the class KSelectAction of kdelibs/kdeui/actions. To check and solve...
+	m_menu->setEnabled(enabled);
+}
+
+
 void KGameDifficulty::setLevel(const int level)
 {
 	m_menu->setCurrentItem(level);
@@ -119,6 +127,8 @@ void KGameDifficulty::createActionsAndMore(KXmlGuiWindow* window, const bool res
 	m_menu->setItems(m_texts);
 	m_menu->setToolTip(i18n("Set the difficulty level"));
 	m_menu->setWhatsThis(i18n("Set the difficulty level of the game."));
+
+	setEnabled(true);
 }
 
 #include "kgamedifficulty.moc"
