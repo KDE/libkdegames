@@ -120,7 +120,7 @@ KGamePopupItem::KGamePopupItem()
     connect( d->m_textChildItem, SIGNAL(linkActivated(const QString&)),
                                  SIGNAL(linkActivated(const QString&)));
     connect( d->m_textChildItem, SIGNAL(linkHovered(const QString&)),
-                                 SIGNAL(linkHovered(const QString&)));
+                                 SLOT(onLinkHovered(const QString&)));
 
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
@@ -165,7 +165,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos )
     // NOTE: we blindly take first view we found. I.e. we don't support
     // multiple views
     QGraphicsView *sceneView = scene()->views().at(0);
-    QPolygonF poly = sceneView->mapToScene( sceneView->contentsRect() );
+    QPolygonF poly = sceneView->mapToScene( sceneView->viewport()->contentsRect() );
     d->m_visibleSceneRect = poly.boundingRect();
 
     d->m_textChildItem->setHtml(text);
@@ -206,8 +206,12 @@ void KGamePopupItem::showMessage( const QString& text, Position pos )
     animationFrame(d->m_timeLine.startFrame());
     show();
     d->m_timeLine.start();
-    // 300 msec to animate showing message + d->m_timeout to stay visible => then hide
-    d->m_timer.start( 300+d->m_timeout );
+
+    if(d->m_timeout != 0)
+    {
+        // 300 msec to animate showing message + d->m_timeout to stay visible => then hide
+        d->m_timer.start( 300+d->m_timeout );
+    }
 }
 
 void KGamePopupItem::animationFrame(int frame)
@@ -265,7 +269,7 @@ void KGamePopupItem::hoverLeaveEvent( QGraphicsSceneHoverEvent* )
 {
     d->m_hoveredByMouse = false;
 
-    if( !d->m_timer.isActive() && d->m_timeLine.state() != QTimeLine::Running )
+    if( d->m_timeout != 0 && !d->m_timer.isActive() && d->m_timeLine.state() != QTimeLine::Running )
         playHideAnimation(); // let's hide
 }
 
@@ -281,11 +285,25 @@ int KGamePopupItem::messageTimeout() const
     return d->m_timeout;
 }
 
-void KGamePopupItem::forceHide()
+void KGamePopupItem::forceHide(HideType howToHide)
 {
-    d->m_timeLine.stop();
-    d->m_timer.stop();
-    hide();
+    if(!isVisible())
+        return;
+
+    if(howToHide == InstantHide)
+    {
+        d->m_timeLine.stop();
+        d->m_timer.stop();
+        hide();
+    }
+    else if(howToHide == AnimatedHide)
+    {
+        // forcefully unset it even if it is set
+        // so we'll hide in any event
+        d->m_hoveredByMouse = false;
+        d->m_timer.stop();
+        playHideAnimation();
+    }
 }
 
 qreal KGamePopupItem::messageOpacity() const
@@ -301,6 +319,15 @@ void KGamePopupItem::setBackgroundBrush( const QBrush& brush )
 void KGamePopupItem::setTextColor( const QColor& color )
 {
     d->m_textChildItem->setDefaultTextColor(color);
+}
+
+void KGamePopupItem::onLinkHovered(const QString& link)
+{
+    if(link.isEmpty())
+        d->m_textChildItem->setCursor( Qt::ArrowCursor );
+    else
+        d->m_textChildItem->setCursor( Qt::PointingHandCursor );
+    emit linkHovered(link);
 }
 
 #include "kgamepopupitem.moc"

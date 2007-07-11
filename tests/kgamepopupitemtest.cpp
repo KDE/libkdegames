@@ -42,7 +42,8 @@ KGpiMainWindow::KGpiMainWindow()
     connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT( onPopupTR() ) );
     connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT( onPopupBL() ) );
     connect( m_mainWid.popupBR, SIGNAL(clicked()), SLOT( onPopupBR() ) );
-    connect( m_mainWid.forceHide, SIGNAL(clicked()), SLOT(doHide()) );
+    connect( m_mainWid.forceInstantHide, SIGNAL(clicked()), SLOT(doInstantHide()) );
+    connect( m_mainWid.forceAnimatedHide, SIGNAL(clicked()), SLOT(doAnimatedHide()) );
     connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT( changeIcon()) );
     connect( m_mainWid.opacity, SIGNAL(valueChanged(int)), SLOT(changeOpacity(int)) );
     connect( m_mainWid.textColor, SIGNAL(changed(const QColor&)), SLOT(textColorChanged(const QColor&)));
@@ -67,25 +68,25 @@ int main(int argc, char** argv)
 
 void KGpiMainWindow::onPopupTL()
 {
-    QString str = !m_mainWid.showRichText->isChecked() ? "Heya! Popping up!" : "<font color=\"red\">Heya!</font> Click the <a href=\"oh-oh-i-am-the-Link\">link</a><br> and <b>a</b> message should appear in the scene";
+    QString str = !m_mainWid.showRichText->isChecked() ? "Heya! Popping up!" : "<font color=\"red\">Heya!</font> Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
     m_popupItem->showMessage(str, KGamePopupItem::TopLeft);
 }
 
 void KGpiMainWindow::onPopupTR()
 {
-    QString str = !m_mainWid.showRichText->isChecked() ? "Yippie! Popping up!" : "<font color=\"green\">Yippie!</font> Click the <a href=\"oh-oh-i-am-the-Link\">link</a><br> and <b>a</b> message should appear in the scene";
+    QString str = !m_mainWid.showRichText->isChecked() ? "Yippie! Popping up!" : "<font color=\"green\">Yippie!</font> Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
     m_popupItem->showMessage(str, KGamePopupItem::TopRight);
 }
 
 void KGpiMainWindow::onPopupBL()
 {
-    QString str = !m_mainWid.showRichText->isChecked() ? "Horray! Popping up!" : "<font color=\"yellow\">Horray</font><i>,comrades</i>! Click the <a href=\"oh-oh-i-am-the-Link\">link</a><br> and <b>a</b> message should appear in the scene";
+    QString str = !m_mainWid.showRichText->isChecked() ? "Horray! Popping up!" : "<font color=\"yellow\">Horray</font><i>,comrades</i>! Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
     m_popupItem->showMessage(str, KGamePopupItem::BottomLeft);
 }
 
 void KGpiMainWindow::onPopupBR()
 {
-    QString str = !m_mainWid.showRichText->isChecked() ? "Popping up! I like it, yeah!" : "<font color=\"blue\">Wow. Just blue WOW</font>! Click the <a href=\"oh-oh-i-am-the-Link\">link</a><br> and <b>a</b> message should appear in the scene";
+    QString str = !m_mainWid.showRichText->isChecked() ? "Popping up! I like it, yeah!" : "<font color=\"blue\">Wow. Just blue WOW</font>! Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
     m_popupItem->showMessage(str, KGamePopupItem::BottomRight);
 }
 
@@ -118,9 +119,14 @@ void KGpiMainWindow::changeIcon()
     m_popupItem->setMessageIcon( newPix );
 }
 
-void KGpiMainWindow::doHide()
+void KGpiMainWindow::doInstantHide()
 {
-    m_popupItem->forceHide();
+    m_popupItem->forceHide(KGamePopupItem::InstantHide);
+}
+
+void KGpiMainWindow::doAnimatedHide()
+{
+    m_popupItem->forceHide(KGamePopupItem::AnimatedHide);
 }
 
 void KGpiMainWindow::changeOpacity(int opa)

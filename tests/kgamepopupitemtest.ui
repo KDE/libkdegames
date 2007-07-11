@@ -149,9 +149,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="forceHide" >
+       <widget class="QPushButton" name="forceInstantHide" >
         <property name="text" >
-         <string>Hide Immediately</string>
+         <string>Force instant hide</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="forceAnimatedHide" >
+        <property name="text" >
+         <string>Force animated hide</string>
         </property>
        </widget>
       </item>

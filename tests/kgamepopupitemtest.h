@@ -23,7 +23,8 @@ private slots:
     void hideTextItem();
     void onTimeoutChanged(int);
     void changeIcon();
-    void doHide();
+    void doInstantHide();
+    void doAnimatedHide();
     void changeOpacity(int);
     void textColorChanged(const QColor& col);
     void bkgndColorChanged(const QColor& col);

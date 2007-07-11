@@ -75,7 +75,9 @@ public:
      * If item is hovered with mouse it will hide only after
      * user moves the mouse away
      *
-     * @param msec amount of time in milliseconds
+     * @param msec amount of time in milliseconds.
+     * if msec is 0, then message will stay visible until it
+     * gets explicitly hidden by forceHide()
      */
     void setMessageTimeout( int msec );
     /**
@@ -96,11 +98,15 @@ public:
      * Sets custom pixmap to show instead of default icon on the left
      */
     void setMessageIcon( const QPixmap& pix );
+
     /**
-     * Requests the item to be hidden immediately. No hide-animation
-     * is played. It just dissapears immediately
+     * Used to specify how to hide in forceHide() - instantly or animatedly
      */
-    void forceHide();
+    enum HideType { InstantHide, AnimatedHide };
+    /**
+     * Requests the item to be hidden immediately.
+     */
+    void forceHide(HideType type=AnimatedHide);
     /**
      * Sets brush used to paint item backgound
      * By default system-default brush is used
@@ -134,6 +140,7 @@ private Q_SLOTS:
     void animationFrame(int);
     void hideMe();
     void playHideAnimation();
+    void onLinkHovered(const QString&);
 private:
     virtual void hoverEnterEvent( QGraphicsSceneHoverEvent* );
     virtual void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
