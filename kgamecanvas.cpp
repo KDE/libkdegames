@@ -198,8 +198,13 @@ void KGameCanvasWidget::processAnimations() {
   }
 
   int tm = priv->m_anim_time.elapsed();
-  for(int i=0;i<m_animated_items.size();i++) {
-    KGameCanvasItem *el = m_animated_items[i];
+
+  // The list MUST be copied, because it could be modified calling advance.
+  // After all since it is implicitly shared the copy will not happen unless
+  // is it actually modified
+  QList<KGameCanvasItem*> ait = m_animated_items;
+  for(int i=0;i<ait.size();i++) {
+    KGameCanvasItem *el = ait[i];
     el->advance(tm);
   }
 
@@ -247,11 +252,12 @@ KGameCanvasItem::~KGameCanvasItem() {
 }
 
 void KGameCanvasItem::changed() {
-  if(!m_changed) {
-    m_changed = true;
-    if(m_canvas)
-      m_canvas->ensurePendingUpdate();
-  }
+  m_changed = true;
+
+  //even if m_changed was already true we cannot optimiza away this call, because maybe the
+  //item has been reparented, etc. It is a very quick call anyway.
+  if(m_canvas)
+    m_canvas->ensurePendingUpdate();
 }
 
 void KGameCanvasItem::updateChanges() {
@@ -333,7 +339,7 @@ void KGameCanvasItem::putInCanvas(KGameCanvasAbstract *c) {
 
   if(m_canvas) {
     if(m_visible)
-      m_canvas->invalidate(rect());
+      m_canvas->invalidate(m_last_rect, false); //invalidate the previously drawn rectangle
     m_canvas->m_items.removeAll(this);
     if(m_animated)
       m_canvas->m_animated_items.removeAll(this);
@@ -348,7 +354,7 @@ void KGameCanvasItem::putInCanvas(KGameCanvasAbstract *c) {
       m_canvas->ensureAnimating();
     }
     if(m_visible)
-      m_canvas->invalidate(rect());
+      changed();
   }
 }
 
@@ -457,7 +463,7 @@ void KGameCanvasItem::stackOver(KGameCanvasItem* ref)
 
     int old_pos = m_canvas->m_items.indexOf(this);
     m_canvas->m_items.removeAt(old_pos);
-    i = m_canvas->m_items.indexOf( ref );
+    i = m_canvas->m_items.indexOf( ref, i-1 );
     m_canvas->m_items.insert(i+1,this);
 
     if(m_visible)
@@ -482,7 +488,7 @@ void KGameCanvasItem::stackUnder(KGameCanvasItem* ref)
 
     int old_pos = m_canvas->m_items.indexOf(this);
     m_canvas->m_items.removeAt(old_pos);
-    i = m_canvas->m_items.indexOf( ref );
+    i = m_canvas->m_items.indexOf( ref, i-1 );
     m_canvas->m_items.insert(i,this);
 
     if(m_visible)
@@ -569,9 +575,14 @@ void KGameCanvasGroup::invalidate(const QRegion& r, bool translate) {
 }
 
 void KGameCanvasGroup::advance(int msecs) {
-  for(int i=0;i<m_animated_items.size();i++)
+
+  // The list MUST be copied, because it could be modified calling advance.
+  // After all since it is implicitly shared the copy will not happen unless
+  // is it actually modified
+  QList<KGameCanvasItem*> ait = m_animated_items;
+  for(int i=0;i<ait.size();i++)
   {
-      KGameCanvasItem *el = m_animated_items[i];
+      KGameCanvasItem *el = ait[i];
       el->advance(msecs);
   }
 
@@ -644,10 +655,6 @@ KGameCanvasDummy::~KGameCanvasDummy()
 
 }
 
-void KGameCanvasDummy::paintInternal(QPainter* /*pp*/, const QRect& /*prect*/,
-                    const QRegion& /*preg*/, const QPoint& /*delta*/, double /*cumulative_opacity*/) {
-}
-
 void KGameCanvasDummy::paint(QPainter* /*p*/) {
 }
 
@@ -678,20 +685,6 @@ void KGameCanvasPixmap::setPixmap(const QPixmap& p) {
   m_pixmap = p;
   if(visible() && canvas() )
     changed();
-}
-
-void KGameCanvasPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
-  int op = int(cumulative_opacity*opacity() + 0.5);
-
-  if(op <= 0)
-    return;
-
-  if(op < 255)
-    p->setOpacity( op/255.0 );
-  p->drawPixmap(pos(), m_pixmap);
-  if(op < 255)
-    p->setOpacity(1.0);
 }
 
 void KGameCanvasPixmap::paint(QPainter* p) {
@@ -758,23 +751,6 @@ void KGameCanvasTiledPixmap::setMoveOrigin(bool move_orig)
   m_move_orig = move_orig;
 }
 
-void KGameCanvasTiledPixmap::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
-  int op = int(cumulative_opacity*opacity() + 0.5);
-
-  if(op <= 0)
-    return;
-
-  if(op < 255)
-    p->setOpacity( op/255.0 );
-  if(m_move_orig)
-    p->drawTiledPixmap( rect(), m_pixmap, m_origin);
-  else
-    p->drawTiledPixmap( rect(), m_pixmap, m_origin+pos() );
-  if(op < 255)
-    p->setOpacity( op/255.0 );
-}
-
 void KGameCanvasTiledPixmap::paint(QPainter* p)
 {
     if(m_move_orig)
@@ -826,15 +802,6 @@ void KGameCanvasRectangle::setSize(const QSize &size)
     changed();
 }
 
-void KGameCanvasRectangle::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
-  QColor col = m_color;
-  cumulative_opacity *= opacity()/255.0;
-
-  col.setAlpha( int(col.alpha()*cumulative_opacity+0.5) );
-  p->fillRect( rect(), col );
-}
-
 void KGameCanvasRectangle::paint(QPainter* p) {
   p->fillRect( rect(), m_color );
 }
@@ -861,7 +828,7 @@ KGameCanvasText::KGameCanvasText(const QString& text, const QColor& color,
 
 KGameCanvasText::KGameCanvasText(KGameCanvasAbstract* KGameCanvas)
     : KGameCanvasItem(KGameCanvas)
-    , m_text("")
+    //, m_text("")
     , m_color(Qt::black)
     , m_font(QApplication::font())
     , m_hpos(HStart)
@@ -947,17 +914,6 @@ QPoint KGameCanvasText::offsetToDrawPos() const {
     return retv;
 }
 
-void KGameCanvasText::paintInternal(QPainter* p, const QRect& /*prect*/,
-                  const QRegion& /*preg*/, const QPoint& /*delta*/, double cumulative_opacity) {
-  QColor col = m_color;
-  cumulative_opacity *= opacity()/255.0;
-
-  col.setAlpha( int(col.alpha()*cumulative_opacity+0.5) );
-  p->setPen(col);
-  p->setFont(m_font);
-  p->drawText( pos() + offsetToDrawPos(), m_text);
-}
-
 void KGameCanvasText::paint(QPainter* p) {
   p->setPen(m_color);
   p->setFont(m_font);
@@ -1021,7 +977,7 @@ QRect KGameCanvasAdapter::childRect()
         }
         m_child_rect_valid = true;
     }
-    
+
     return m_child_rect;
 }
 
@@ -1044,7 +1000,7 @@ void KGameCanvasAdapter::ensurePendingUpdate()
             el->updateChanges();
         }
     }
-    
+
     updateParent(m_invalidated_rect);
     m_invalidated_rect = QRect();
 }

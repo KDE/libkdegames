@@ -93,7 +93,7 @@ public:
 
     /** Returns the toplevel non-group KGameCanvasWidget object */
     virtual class KGameCanvasWidget* topLevelCanvas() = 0;
-    
+
     /** @return Position of the abstract canvas relative to the toplevel canvas. */
     virtual QPoint canvasPosition() const = 0;
 };
@@ -195,7 +195,7 @@ public:
 
     /** Returns the position of the item */
     QPoint pos() const { return m_pos; }
-    
+
     /** @return Position of the item relative to the top level canvas. */
     QPoint absolutePosition() const;
 
@@ -236,11 +236,6 @@ public:
 */
 class KDEGAMES_EXPORT KGameCanvasDummy : public KGameCanvasItem
 {
-private:
-    /** This function does nothing (of course) */
-    virtual void paintInternal(QPainter* p, const QRect& prect,
-            const QRegion& preg, const QPoint &delta, double cumulative_opacity);
-
 public:
     /** Constructor */
     KGameCanvasDummy(KGameCanvasAbstract* canvas = NULL);
@@ -295,7 +290,7 @@ public:
 
     /** returns the toplevel canvas (or null if it is in an orphan tree) */
     KGameCanvasWidget* topLevelCanvas();
-    
+
     virtual QPoint canvasPosition() const;
 };
 
@@ -340,10 +335,6 @@ class KDEGAMES_EXPORT KGameCanvasPixmap : public KGameCanvasItem
 private:
     QPixmap m_pixmap;
 
-    /** optimization of this special case, it is a bit faster */
-    virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint &delta, double cumulative_opacity);
-
 public:
     /** Constructor, specifying the pixmap to use */
     KGameCanvasPixmap(const QPixmap& pixmap, KGameCanvasAbstract* canvas = NULL);
@@ -361,6 +352,7 @@ public:
 
     virtual void paint(QPainter* p);
     virtual QRect rect() const;
+    virtual bool layered() const { return false; }
 };
 
 /**
@@ -376,10 +368,6 @@ private:
     QSize m_size;
     QPoint m_origin;
     bool m_move_orig;
-
-    /** optimization of this special case, it is a bit faster */
-    virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
@@ -414,6 +402,7 @@ public:
 
     virtual void paint(QPainter* p);
     virtual QRect rect() const;
+    virtual bool layered() const { return false; }
 };
 
 
@@ -428,10 +417,6 @@ class KDEGAMES_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
 private:
     QColor m_color;
     QSize m_size;
-
-    /** optimization of this special case, it is much faster */
-    virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint &delta, double cumulative_opacity);
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
@@ -453,6 +438,7 @@ public:
 
     virtual void paint(QPainter* p);
     virtual QRect rect() const;
+    virtual bool layered() const { return false; }
 };
 
 /**
@@ -495,10 +481,6 @@ private:
     QPoint offsetToDrawPos() const;
     void calcBoundingRect();
 
-    /** optimization of this special case, it is much faster */
-    virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint &delta, double cumulative_opacity);
-
 public:
     /** Constructor, specifying the text and the parameters to use */
     KGameCanvasText(const QString& text, const QColor& color,
@@ -539,6 +521,7 @@ public:
 
     virtual void paint(QPainter* p);
     virtual QRect rect() const;
+    virtual bool layered() const { return false; }
 };
 
 /**
@@ -583,28 +566,28 @@ public:
 
     /** returns 'this' */
     KGameCanvasWidget* topLevelCanvas();
-    
-    /** @return 0 */    
+
+    /** @return 0 */
     virtual QPoint canvasPosition() const;
 };
 
 /**
     \brief A generic adapter for KGameCanvas
-    
+
     KGameCanvasAdapter can be used to draw content managed by KGameCanvas
     inside systems which do not use KGameCanvas internally for their
     rendering.
-    
+
     For example, suppose you have a widget CustomDisplay which paints itself
     with direct QPainter calls in its paintEvent, and you want to add a
     complex element to its rendering, which is best implemented via the KGameCanvas
     abstractions. What you can do is to create a KGameCanvasAdapter subclass,
     use it just like a KGameCanvasGroup, then call its render member function
     to have a QPainter object draw it.
-    
+
     A KGameCanvas adapter notifies its parent using the pure virtual function
     updateParent, which is called when the adapter content is invalidated.
-    
+
     \todo Support animations
 */
 class KDEGAMES_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
@@ -617,18 +600,18 @@ class KDEGAMES_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
     virtual void ensurePendingUpdate();
     virtual void invalidate(const QRect& r, bool translate = true);
     virtual void invalidate(const QRegion& r, bool translate = true);
-    
+
     QRect childRect();
 public:
     /** Constructor */
     KGameCanvasAdapter();
 
-    /** 
+    /**
       * An adapter is not associated to any canvas, so this function
       * simply returns 0.
       */
     virtual class KGameCanvasWidget* topLevelCanvas() { return 0; }
-    
+
     /**
       * The absolute position of the rendered content is not well
       * defined for KGameCanvasAdapter. We assume that the adapter
@@ -639,17 +622,17 @@ public:
       * @return The point (0, 0).
       */
     virtual QPoint canvasPosition() const { return QPoint(0, 0); }
-    
+
     /**
       * Draw the items of the adapter using the specified painter.
       * \param p The QPainter object to be used for rendering.
       */
     virtual void render(QPainter* p);
-    
+
     /**
       * Notify the parent that the adapter content inside \a rect needs
       * to be redrawn.
-      * 
+      *
       * \a rect The bounding rectangle of the region that needs repainting.
       */
     virtual void updateParent(const QRect& rect) = 0;
