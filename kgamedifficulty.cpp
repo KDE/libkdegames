@@ -266,8 +266,10 @@ void KGameDifficulty::addStandardLevel(standardLevel level)
 {
 	Q_ASSERT(self()->d);
 
-	self()->d->m_standardLevels.append(level);
-	self()->d->rebuildActions();
+	if ((level!=custom) && (level!=noLevel)) {
+		self()->d->m_standardLevels.append(level);
+		self()->d->rebuildActions();
+	}
 }
 
 
@@ -310,6 +312,9 @@ void KGameDifficulty::setEnabled(bool enabled)
 void KGameDifficulty::setLevel(standardLevel level)
 {
 	Q_ASSERT(self()->d);
+
+	if ((!self()->d->m_standardLevels.contains(level)) && (level!=custom))
+		level = noLevel;
 
 	if (level==configurable)
 		self()->d->m_menu->setCurrentItem(self()->d->m_menu->actions().count()-1);
