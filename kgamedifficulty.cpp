@@ -40,9 +40,9 @@ class KGameDifficultyPrivate : public QObject
 		/**
 		* @brief Current custom difficulty level
 		*/
-		int m_customLevel;
+		int m_levelCustom;
 
-		KGameDifficulty::standardLevel m_standardLevel;
+		KGameDifficulty::standardLevel m_level;
 		QList<KGameDifficulty::standardLevel> m_standardLevels;
 		QMap<int, QString> m_customLevels;
 
@@ -89,7 +89,7 @@ KGameDifficultyPrivate::KGameDifficultyPrivate(KXmlGuiWindow* window, const QObj
 	Q_ASSERT(recvr!=0);
 
 	m_oldSelection = -1; // No valid selection
-	m_standardLevel = KGameDifficulty::noLevel;
+	m_level = KGameDifficulty::noLevel;
 	m_restartOnChange = KGameDifficulty::restartOnChange;
 	m_running = false;
 
@@ -190,10 +190,10 @@ void KGameDifficultyPrivate::rebuildActions()
 	}
 
 	// reselect the previous selected item.
-	if (m_standardLevel==KGameDifficulty::custom)
-		KGameDifficulty::setLevel(m_customLevel);
-	else if (m_standardLevels.contains(m_standardLevel))
-		KGameDifficulty::setLevel(m_standardLevel);
+	if (m_level==KGameDifficulty::custom)
+		KGameDifficulty::setLevelCustom(m_levelCustom);
+	else if (m_standardLevels.contains(m_level))
+		KGameDifficulty::setLevel(m_level);
 }
 
 
@@ -220,7 +220,7 @@ void KGameDifficultyPrivate::setSelection(int newSelection)
 	else if(newSelection<countWithoutConfigurable)
 		KGameDifficulty::setLevel(m_standardLevels[newSelection]);
 	else
-		KGameDifficulty::setLevel((m_customLevels.uniqueKeys()).value(newSelection - countWithoutConfigurable));
+		KGameDifficulty::setLevelCustom((m_customLevels.uniqueKeys()).value(newSelection - countWithoutConfigurable));
 
 	m_oldSelection = newSelection;
 }
@@ -313,33 +313,46 @@ void KGameDifficulty::setLevel(standardLevel level)
 
 	if (level==configurable)
 		self()->d->m_menu->setCurrentItem(self()->d->m_menu->actions().count()-1);
-	else if (level!=custom)
+	else if (level!=custom) {
 		self()->d->m_menu->setCurrentItem(self()->d->m_standardLevels.indexOf(level));
+	}
 
-	if (level != self()->d->m_standardLevel)
+	if (level != self()->d->m_level)
 		self()->d->emitStandardLevelChanged(level);
-	self()->d->m_standardLevel = level;
+	self()->d->m_level = level;
 
 	self()->d->m_oldSelection = self()->d->m_menu->currentItem();
 }
 
 
-void KGameDifficulty::setLevel(int key)
+KGameDifficulty::standardLevel KGameDifficulty::level()
+{
+	return self()->d->m_level;
+}
+
+
+void KGameDifficulty::setLevelCustom(int key)
 {
 	Q_ASSERT(self()->d);
 
-	self()->d->m_standardLevel = custom;
+	self()->d->m_level = custom;
 
 	int a = self()->d->m_standardLevels.count();
 	if (self()->d->m_standardLevels.contains(configurable))
 		a -= 1;
 	self()->d->m_menu->setCurrentItem((self()->d->m_customLevels.uniqueKeys()).indexOf(key) + a);
 
-	if (key != self()->d->m_customLevel)
+	if (key != self()->d->m_levelCustom)
 		self()->d->emitCustomLevelChanged(key);
-	self()->d->m_customLevel = key;
+	self()->d->m_levelCustom = key;
 
 	self()->d->m_oldSelection = self()->d->m_menu->currentItem();
+}
+
+
+int KGameDifficulty::levelCustom()
+{
+	return self()->d->m_levelCustom;
 }
 
 

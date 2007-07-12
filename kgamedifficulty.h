@@ -145,11 +145,27 @@ class KDEGAMES_EXPORT KGameDifficulty
 		static void setLevel(standardLevel level);
 
 		/**
+		 * @brief Get the current standard difficulty level
+		 *
+		 * @return The current standard level, or customLevel if a custom level is selected, or noLevel if no difficulty level is selected.
+		 */
+		static standardLevel level();
+
+		/**
 		 * @brief Set the new current difficulty level as a custom one
 		 *
+		 * This sets also the value of the standard level to "custom".
 		 * @param key Custom level identifier.
 		 */
-		static void setLevel(int key);
+		static void setLevelCustom(int key);
+
+		/**
+		 * @brief Get the current custom difficulty level
+		 *
+		 * It does only make sense to get the current custom difficulty level, if the value of the level is "custom".
+		 * @return The current custom level identifier.
+		 */
+		static int levelCustom();
 
 		/**
 		 * @brief Set the game state: Running or not
