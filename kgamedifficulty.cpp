@@ -30,8 +30,9 @@ class KGameDifficultyPrivate : public QObject
 	Q_OBJECT
 
 	public:
-		KGameDifficultyPrivate(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom);
 		~KGameDifficultyPrivate();
+
+		void init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom);
 
 		void rebuildActions();
 		void emitStandardLevelChanged(KGameDifficulty::standardLevel level);
@@ -84,7 +85,13 @@ class KGameDifficultyPrivate : public QObject
 };
 
 
-KGameDifficultyPrivate::KGameDifficultyPrivate(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom = 0)
+KGameDifficultyPrivate::~KGameDifficultyPrivate()
+{
+	delete KGameDifficulty::self();
+}
+
+
+void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom = 0)
 {
 	Q_ASSERT(recvr!=0);
 
@@ -104,12 +111,6 @@ KGameDifficultyPrivate::KGameDifficultyPrivate(KXmlGuiWindow* window, const QObj
 	window->actionCollection()->addAction("game_difficulty", m_menu);
 
 	setParent(window);
-}
-
-
-KGameDifficultyPrivate::~KGameDifficultyPrivate()
-{
-	delete KGameDifficulty::self();
 }
 
 
@@ -240,9 +241,7 @@ KGameDifficulty::~KGameDifficulty()
 
 void KGameDifficulty::init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom)
 {
-	Q_ASSERT(self()->d==0);
-
-	self()->d = new KGameDifficultyPrivate(window, recvr, slotStandard, slotCustom);
+	self()->d->init(window, recvr, slotStandard, slotCustom);
 }
 
 
@@ -361,9 +360,8 @@ void KGameDifficulty::setRunning(bool running)
 }
 
 
-KGameDifficulty::KGameDifficulty()
+KGameDifficulty::KGameDifficulty() : d(new KGameDifficultyPrivate())
 {
-	d = 0;
 }
 
 

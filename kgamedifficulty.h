@@ -185,7 +185,7 @@ class KDEGAMES_EXPORT KGameDifficulty
 
 		static KGameDifficulty* instance;
 		friend class KGameDifficultyPrivate;
-		KGameDifficultyPrivate* d;
+		KGameDifficultyPrivate* const d;
 
 		Q_DISABLE_COPY(KGameDifficulty)
 };
