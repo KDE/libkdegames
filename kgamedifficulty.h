@@ -92,14 +92,14 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 *
 		 * You should add all the standard difficulty levels you need after the initialization of the class.
 		 * Standard difficulty levels are displayed before custom levels (if available).
-		 * @param levels Standard difficulty level to add
+		 * @param level Standard difficulty level to add
 		 */
 		static void addStandardLevel(standardLevel level);
 
 		/**
 		 * @brief Remove a standard difficulty level
 		 *
-		 * @param levels Standard difficulty level to remove
+		 * @param level Standard difficulty level to remove
 		 */
 		static void removeStandardLevel(standardLevel level);
 
