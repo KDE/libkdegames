@@ -68,14 +68,6 @@ class KDEGAMES_EXPORT KGameDifficulty
 		virtual ~KGameDifficulty();
 
 		/**
-		 * @brief Access to the unique instance of the class
-		 *
-		 * Be aware to call init first.
-		 * @see init
-		 */
-		static KGameDifficulty* self();
-
-		/**
 		 * @brief Initialize the difficulty class
 		 *
 		 * You must call this class before using the singleton.
@@ -182,6 +174,14 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * Private constructor: we are a singleton
 		 */
 		KGameDifficulty();
+
+		/**
+		 * @brief Access to the unique instance of the class
+		 *
+		 * Be aware to call init first.
+		 * @see init
+		 */
+		static KGameDifficulty* self();
 
 		static KGameDifficulty* instance;
 		friend class KGameDifficultyPrivate;

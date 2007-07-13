@@ -238,14 +238,6 @@ KGameDifficulty::~KGameDifficulty()
 }
 
 
-KGameDifficulty* KGameDifficulty::self()
-{
-	if (instance==0)
-		instance = new KGameDifficulty();
-	return instance;
-}
-
-
 void KGameDifficulty::init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom)
 {
 	Q_ASSERT(self()->d==0);
@@ -372,6 +364,14 @@ void KGameDifficulty::setRunning(bool running)
 KGameDifficulty::KGameDifficulty()
 {
 	d = 0;
+}
+
+
+KGameDifficulty* KGameDifficulty::self()
+{
+	if (instance==0)
+		instance = new KGameDifficulty();
+	return instance;
 }
 
 #include "kgamedifficulty.moc"
