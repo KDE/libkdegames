@@ -29,6 +29,10 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
+#ifdef Q_OS_WIN
+#include <kdebug.h>
+#endif
+
 namespace KGGZMod
 {
 
@@ -98,7 +102,7 @@ bool readfiledescriptor(int sock, int *recvfd)
 	
         return true;
 #else
-	kError() << "This path should never be called." << endl;
+	kError() << "This path should never be called.";
 	return false;
 #endif
 }
