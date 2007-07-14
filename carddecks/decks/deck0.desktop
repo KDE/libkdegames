@@ -1,7 +1,9 @@
 [KDE Cards]
 Name=Oxygen
+Name[es]=Oxígeno
 Name[fa]=فنون
 Comment=Oxygen styled card deck
+Comment[es]=Baraja con el estilo oxígeno
 Comment[ja]=Oxygen スタイルのカードデッキ
 Comment[pt]=Baralho de cartas com o estilo Oxygen
 Comment[pt_BR]=Baralho de cartas com o estilo Oxygen
