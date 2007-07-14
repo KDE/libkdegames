@@ -546,6 +546,10 @@ void ModulePrivate::insertPlayer(Player::Type seattype, const QString &name, int
 	ppriv->m_stats = 0;
 	p->init(ppriv);
 
+#ifdef __GNUC__
+#warning what is this function doing beside leaking for seat == -1? (CID 3890)
+#endif
+
 	if(seattype == Player::spectator)
 	{
 		if(seat != -1)
