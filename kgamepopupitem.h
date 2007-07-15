@@ -20,7 +20,7 @@
 
 #include <libkdegames_export.h>
 
-#include <QtGui/QGraphicsItem>
+#include <QtGui/QGraphicsPathItem>
 #include <QtCore/QObject>
 
 class KGamePopupItemPrivate;
@@ -41,10 +41,19 @@ class KGamePopupItemPrivate;
  * messageItem->showMessage("Hello, I'm a game message! How do you do?");
  * \endcode
  */
-class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
+class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
+    /**
+     * Possible values for message showing mode in respect to a previous
+     * message
+     */
+    enum ReplaceMode { LeavePrevious, ReplacePrevious };
+    /**
+     * Possible values for the popup angles sharpness
+     */
+    enum Sharpness { Square=0, Sharp=2, Soft=5, Softest=10 };
     /**
      * The possible places in the scene where a message can be shown
      */
@@ -52,7 +61,7 @@ public:
     /**
      * Constructs a message item. It is hidden by default.
      */
-    KGamePopupItem();
+    KGamePopupItem(QGraphicsItem * parent = 0);
     /**
      * Destructs a message item
      */
@@ -66,8 +75,10 @@ public:
      *
      * @param text holds the message to show
      * @param pos position on the scene where the message will appear
+     * @param mode how to handle an already shown message by this item:
+       either leave it and ignore the new one or replace it
      */
-    void showMessage( const QString& text, Position pos );
+    void showMessage( const QString& text, Position pos, ReplaceMode mode = LeavePrevious);
     /**
      * Sets the amount of time the item will stay visible on screen
      * before it goes away.
@@ -127,6 +138,14 @@ public:
      * Paints item. Reimplemented from QGraphicsItem
      */
     virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget );
+    /**
+     * Sets the popup angles sharpness
+     */
+    void setSharpness( Sharpness sharpness );
+    /**
+     * @return current popup angles sharpness
+     */
+    Sharpness sharpness() const;
 Q_SIGNALS:
     /**
      * Emitted when user clicks on a link in item

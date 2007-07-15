@@ -42,9 +42,10 @@ public:
     void setOpacity(qreal opa) { m_opacity = opa; }
     virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
         {
+            p->save();
             p->setOpacity(m_opacity);
             QGraphicsTextItem::paint(p,option,widget);
-            p->setOpacity(1.0);
+            p->restore();
         }
 private:
     qreal m_opacity;
@@ -58,7 +59,8 @@ private:
 public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
-          m_opacity(1.0), m_hoveredByMouse(false), m_textChildItem(0) {}
+          m_opacity(1.0), m_hoveredByMouse(false), m_textChildItem(0),
+          m_sharpness(KGamePopupItem::Square) {}
     /**
      * Timeline for animations
      */
@@ -105,10 +107,14 @@ public:
      * Background brush color
      */
     QBrush m_brush;
+    /**
+     * popup angles sharpness
+     */
+    KGamePopupItem::Sharpness m_sharpness;
 };
 
-KGamePopupItem::KGamePopupItem()
-    : d(new KGamePopupItemPrivate)
+KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
+    : QGraphicsPathItem(parent), d(new KGamePopupItemPrivate)
 {
     hide();
     d->m_textChildItem = new TextItemWithOpacity(this);
@@ -145,22 +151,33 @@ KGamePopupItem::KGamePopupItem()
 
 void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
+    p->save();
+    setBrush( d->m_brush );
 
-    p->setBrush( d->m_brush );
-    p->setOpacity(d->m_opacity);
-    p->drawRect( d->m_boundRect );
+    // sets the brush opacity
+    QColor color(brush().color());
+    color.setAlphaF(d->m_opacity);
+    brush().setColor(color);
+    
+    QGraphicsPathItem::paint(p, option, widget);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
-
-    p->setOpacity(1.0);
+    p->restore();
 }
 
-void KGamePopupItem::showMessage( const QString& text, Position pos )
+void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode mode )
 {
     if(d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive())
+    {
+      if (mode == ReplacePrevious)
+      {
+        forceHide(InstantHide);
+      }
+      else
+      {
         return;// we're already showing a message
+      }
+    }
 
     // NOTE: we blindly take first view we found. I.e. we don't support
     // multiple views
@@ -182,6 +199,18 @@ void KGamePopupItem::showMessage( const QString& text, Position pos )
     if( d->m_iconPix.height() > h )
         h = d->m_iconPix.height() + MARGIN*2;
     d->m_boundRect = QRectF(0, 0, w, h);
+
+    QPainterPath roundRectPath;
+    roundRectPath.moveTo(w, d->m_sharpness);
+    roundRectPath.arcTo(w-(2*d->m_sharpness), 0.0,(2*d->m_sharpness), (d->m_sharpness), 0.0, 90.0);
+    roundRectPath.lineTo(d->m_sharpness, 0.0);
+    roundRectPath.arcTo(0.0, 0.0, (2*d->m_sharpness), (2*d->m_sharpness), 90.0, 90.0);
+    roundRectPath.lineTo(0.0, h-(d->m_sharpness));
+    roundRectPath.arcTo(0.0, h-(2*d->m_sharpness), 2*d->m_sharpness, 2*d->m_sharpness, 180.0, 90.0);
+    roundRectPath.lineTo(w-(d->m_sharpness), h);
+    roundRectPath.arcTo(w-(2*d->m_sharpness), h-(2*d->m_sharpness), (2*d->m_sharpness), (2*d->m_sharpness), 270.0, 90.0);
+    roundRectPath.closeSubpath();
+    setPath(roundRectPath);
 
     // adjust y-pos of text item so it appears centered
     d->m_textChildItem->setPos( d->m_textChildItem->x(),
@@ -328,6 +357,16 @@ void KGamePopupItem::onLinkHovered(const QString& link)
     else
         d->m_textChildItem->setCursor( Qt::PointingHandCursor );
     emit linkHovered(link);
+}
+
+void KGamePopupItem::setSharpness( Sharpness sharpness )
+{
+  d->m_sharpness = sharpness;
+}
+
+KGamePopupItem::Sharpness KGamePopupItem::sharpness() const
+{
+  return d->m_sharpness;
 }
 
 #include "kgamepopupitem.moc"
