@@ -274,6 +274,7 @@ void KGamePopupItem::animationFrame(int frame)
     {
         d->m_animOpacity = d->m_timeLine.currentValue();
         d->m_textChildItem->setOpacity( d->m_animOpacity );
+        update();
     }
 }
 
