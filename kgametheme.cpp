@@ -61,6 +61,11 @@ bool KGameTheme::loadDefault()
 #define kThemeVersionFormat 1
 
 bool KGameTheme::load(const QString &fileName) {
+    if( fileName.isEmpty() )
+    {
+        kDebug(11000) << "Refusing to load theme with no name" << endl;
+        return false;
+    }
     QString filePath = KStandardDirs::locate("appdata", fileName);
     kDebug(11000) << "Attempting to load .desktop at " << filePath << endl;
     if (filePath.isEmpty()) {
