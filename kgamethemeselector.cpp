@@ -82,8 +82,8 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
         KGameTheme* atheme = new KGameTheme(groupName);
         QString themepath = lookupDirectory + '/' + themesAvailable.at(i);
         if (atheme->load(themepath)) {
-            themeMap.insert(atheme->authorProperty(namestr), atheme);
-            ui.themeList->addItem(atheme->authorProperty(namestr));
+          themeMap.insert(atheme->getThemeProperty(namestr), atheme);
+          ui.themeList->addItem(atheme->getThemeProperty(namestr));
             //Find if this is our currently configured Theme
             if (themepath==initialGroup) {
                 //Select current entry
@@ -112,9 +112,9 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
     QString contactstr("AuthorEmail");
     QString descstr("Description");
     ui.kcfg_Theme->setText(seltheme->fileName());
-    ui.themeAuthor->setText(seltheme->authorProperty(authstr));
-    ui.themeContact->setText(seltheme->authorProperty(contactstr));
-    ui.themeDescription->setText(seltheme->authorProperty(descstr));
+    ui.themeAuthor->setText(seltheme->getThemeProperty(authstr));
+    ui.themeContact->setText(seltheme->getThemeProperty(contactstr));
+    ui.themeDescription->setText(seltheme->getThemeProperty(descstr));
 
     //Draw the preview
     //TODO here: add code to maintain aspect ration?

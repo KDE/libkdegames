@@ -31,7 +31,7 @@ class KGameThemePrivate
     public:
         KGameThemePrivate() : loaded(false) {}
 
-        QMap<QString, QString> authorproperties;
+        QMap<QString, QString> themeproperties;
         QString fullPath; ///< Full path e.g. "/opt/kde/share/apps/appname/default.desktop"
         QString fileName; ///< just e.g. "default.desktop"
         QString graphics; ///< The full path of the svg file
@@ -89,10 +89,8 @@ bool KGameTheme::load(const QString &fileName) {
     }
     KConfigGroup group = themeconfig.group(d->themeGroup);
 
-    d->authorproperties.insert("Name", group.readEntry("Name"));// Returns translated data
-    d->authorproperties.insert("Author", group.readEntry("Author"));
-    d->authorproperties.insert("Description", group.readEntry("Description"));
-    d->authorproperties.insert("AuthorEmail", group.readEntry("AuthorEmail"));
+    //Copy the whole entryMap, so we can inherit generic properties as well, reducing the need to subclass for simple implementations
+    d->themeproperties = group.entryMap();
 
     //Version control
     int themeversion = group.readEntry("VersionFormat",0);
@@ -172,11 +170,11 @@ QPixmap KGameTheme::preview() const {
     return d->preview;
 }
 
-QString KGameTheme::authorProperty(const QString &key) const {
+QString KGameTheme::getThemeProperty(const QString &key) const {
     if(!d->loaded)
     {
         kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;
         return QString();
     }
-    return d->authorproperties[key];
+    return d->themeproperties[key];
 }
