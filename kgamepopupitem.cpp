@@ -59,7 +59,7 @@ private:
 public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
-          m_opacity(1.0), m_hoveredByMouse(false), m_textChildItem(0),
+          m_opacity(1.0), m_animOpacity(-1), m_hoveredByMouse(false), m_textChildItem(0),
           m_sharpness(KGamePopupItem::Square) {}
     /**
      * Timeline for animations
@@ -85,6 +85,10 @@ public:
      * Item opacity
      */
     qreal m_opacity;
+    /**
+     * Opacity used while animating appearing in center
+     */
+    qreal m_animOpacity;
     /**
      * Pixmap to display at the left of the text
      */
@@ -154,7 +158,10 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     p->save();
     setBrush( d->m_brush );
 
-    p->setOpacity(d->m_opacity);
+    if( d->m_animOpacity != -1) // playing Center animation
+        p->setOpacity(d->m_animOpacity);
+    else
+        p->setOpacity(d->m_opacity);
 
     QGraphicsPathItem::paint(p, option, widget);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
@@ -166,14 +173,10 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
 {
     if(d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive())
     {
-      if (mode == ReplacePrevious)
-      {
-        forceHide(InstantHide);
-      }
-      else
-      {
-        return;// we're already showing a message
-      }
+        if (mode == ReplacePrevious)
+            forceHide(InstantHide);
+        else
+            return;// we're already showing a message
     }
 
     // NOTE: we blindly take first view we found. I.e. we don't support
@@ -185,7 +188,6 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     d->m_textChildItem->setHtml(text);
 
     d->m_position = pos;
-    d->m_timeLine.setDirection( QTimeLine::Forward );
 
     // do as QGS docs say: notify the scene about rect change
     prepareGeometryChange();
@@ -214,19 +216,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
                                 d->m_boundRect.height()/2 - d->m_textChildItem->boundingRect().height()/2);
 
     // setup animation
-    d->m_timeLine.setDuration(300);
-    if( d->m_position == TopLeft || d->m_position == TopRight )
-    {
-        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_boundRect.height() - SHOW_OFFSET);
-        int end = static_cast<int>(d->m_visibleSceneRect.top() + SHOW_OFFSET);
-        d->m_timeLine.setFrameRange( start, end );
-    }
-    else if( d->m_position == BottomLeft || d->m_position == BottomRight )
-    {
-        int start = static_cast<int>(d->m_visibleSceneRect.bottom()+SHOW_OFFSET);
-        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_boundRect.height() - SHOW_OFFSET);
-        d->m_timeLine.setFrameRange( start, end );
-    }
+    setupTimeline();
 
     // move to the start position
     animationFrame(d->m_timeLine.startFrame());
@@ -240,12 +230,44 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     }
 }
 
+void KGamePopupItem::setupTimeline()
+{
+    d->m_timeLine.setDirection( QTimeLine::Forward );
+    d->m_timeLine.setDuration(300);
+    if( d->m_position == TopLeft || d->m_position == TopRight )
+    {
+        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_boundRect.height() - SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.top() + SHOW_OFFSET);
+        d->m_timeLine.setFrameRange( start, end );
+    }
+    else if( d->m_position == BottomLeft || d->m_position == BottomRight )
+    {
+        int start = static_cast<int>(d->m_visibleSceneRect.bottom()+SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_boundRect.height() - SHOW_OFFSET);
+        d->m_timeLine.setFrameRange( start, end );
+    }
+    else if( d->m_position == Center )
+    {
+        d->m_timeLine.setFrameRange(0, d->m_timeLine.duration());
+        setPos( d->m_visibleSceneRect.left() +
+                d->m_visibleSceneRect.width()/2 - d->m_boundRect.width()/2,
+                d->m_visibleSceneRect.top() +
+                d->m_visibleSceneRect.height()/2 - d->m_boundRect.height()/2);
+    }
+
+}
+
 void KGamePopupItem::animationFrame(int frame)
 {
     if( d->m_position == TopLeft || d->m_position == BottomLeft )
         setPos( d->m_visibleSceneRect.left()+SHOW_OFFSET, frame );
     else if( d->m_position == TopRight || d->m_position == BottomRight )
         setPos( d->m_visibleSceneRect.right()-d->m_boundRect.width()-SHOW_OFFSET, frame );
+    else if( d->m_position == Center )
+    {
+        d->m_animOpacity = d->m_timeLine.currentValue();
+        d->m_textChildItem->setOpacity( d->m_animOpacity );
+    }
 }
 
 void KGamePopupItem::playHideAnimation()
@@ -281,6 +303,10 @@ KGamePopupItem::~KGamePopupItem()
 
 void KGamePopupItem::hideMe()
 {
+    d->m_animOpacity = -1;
+    // and restore child's opacity too
+    d->m_textChildItem->setOpacity(d->m_opacity);
+
     // if we just got moved out of visibility, let's do more - let's hide :)
     if( d->m_timeLine.direction() == QTimeLine::Backward )
         hide();

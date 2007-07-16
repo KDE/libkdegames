@@ -41,6 +41,7 @@ KGpiMainWindow::KGpiMainWindow()
     connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT( onPopupTR() ) );
     connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT( onPopupBL() ) );
     connect( m_mainWid.popupBR, SIGNAL(clicked()), SLOT( onPopupBR() ) );
+    connect( m_mainWid.popupCenter, SIGNAL(clicked()), SLOT( onPopupCenter() ) );
     connect( m_mainWid.forceInstantHide, SIGNAL(clicked()), SLOT(doInstantHide()) );
     connect( m_mainWid.forceAnimatedHide, SIGNAL(clicked()), SLOT(doAnimatedHide()) );
     connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT( changeIcon()) );
@@ -165,6 +166,12 @@ void KGpiMainWindow::sharpnessChanged(int idx)
     else if(idx == 3)
         m_popupItem->setSharpness(KGamePopupItem::Softest);
 
+}
+
+void KGpiMainWindow::onPopupCenter()
+{
+    QString str = !m_mainWid.showRichText->isChecked() ? "Popping, popping, popping up!" : "<font color=\"red\">Heya!</font> Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
+    m_popupItem->showMessage(str, KGamePopupItem::Center, m_replaceMode);
 }
 
 #include "kgamepopupitemtest.moc"

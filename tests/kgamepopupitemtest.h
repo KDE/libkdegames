@@ -19,6 +19,7 @@ private slots:
     void onPopupTR();
     void onPopupBL();
     void onPopupBR();
+    void onPopupCenter();
     void onLinkClicked(const QString&);
     void hideTextItem();
     void onTimeoutChanged(int);

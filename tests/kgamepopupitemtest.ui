@@ -209,6 +209,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="popupCenter" >
+        <property name="text" >
+         <string>Popup Center</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="forceInstantHide" >
         <property name="text" >
          <string>Force instant hide</string>

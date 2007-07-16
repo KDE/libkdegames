@@ -57,7 +57,7 @@ public:
     /**
      * The possible places in the scene where a message can be shown
      */
-    enum Position { TopLeft, TopRight, BottomLeft, BottomRight };
+    enum Position { TopLeft, TopRight, BottomLeft, BottomRight, Center };
     /**
      * Constructs a message item. It is hidden by default.
      */
@@ -72,6 +72,9 @@ public:
      * Item will be automatically hidden after timeout set in setMessageTimeOut() passes
      * If item is hovered with mouse it won't hide until user moves
      * the mouse away
+     *
+     * Note that if pos == Center, message animation will be of fade in/out type,
+     * rather than slide in/out
      *
      * @param text holds the message to show
      * @param pos position on the scene where the message will appear
@@ -161,6 +164,7 @@ private Q_SLOTS:
     void playHideAnimation();
     void onLinkHovered(const QString&);
 private:
+    void setupTimeline();
     virtual void hoverEnterEvent( QGraphicsSceneHoverEvent* );
     virtual void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
     KGamePopupItemPrivate * const d;
