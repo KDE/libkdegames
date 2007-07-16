@@ -4,9 +4,9 @@
 #include <KXmlGuiWindow>
 
 #include "ui_kgamepopupitemtest.h"
+#include <KGamePopupItem>
 
 class QGraphicsScene;
-class KGamePopupItem;
 class QGraphicsSimpleTextItem;
 
 class KGpiMainWindow : public KXmlGuiWindow
@@ -28,11 +28,14 @@ private slots:
     void changeOpacity(int);
     void textColorChanged(const QColor& col);
     void bkgndColorChanged(const QColor& col);
+    void replaceModeChanged();
+    void sharpnessChanged(int);
 private:
     Ui::KGpiMainWidget m_mainWid;
     QGraphicsScene *m_scene;
     KGamePopupItem *m_popupItem;
     QGraphicsSimpleTextItem *m_textItem;
+    KGamePopupItem::ReplaceMode m_replaceMode;
 };
 
 #endif

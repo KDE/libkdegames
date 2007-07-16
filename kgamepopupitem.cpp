@@ -154,11 +154,8 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     p->save();
     setBrush( d->m_brush );
 
-    // sets the brush opacity
-    QColor color(brush().color());
-    color.setAlphaF(d->m_opacity);
-    brush().setColor(color);
-    
+    p->setOpacity(d->m_opacity);
+
     QGraphicsPathItem::paint(p, option, widget);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );

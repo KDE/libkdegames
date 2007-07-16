@@ -4,14 +4,13 @@
 #include <KCmdLineArgs>
 #include <KLocale>
 #include <QGraphicsScene>
-#include <KGamePopupItem>
 #include <QTimer>
 #include <KDebug>
 #include <KFileDialog>
 #include <kcolorscheme.h>
 
 KGpiMainWindow::KGpiMainWindow()
-    : KXmlGuiWindow()
+    : KXmlGuiWindow(), m_replaceMode(KGamePopupItem::LeavePrevious)
 {
     QWidget *wid = new QWidget(this);
     m_mainWid.setupUi(wid);
@@ -48,6 +47,9 @@ KGpiMainWindow::KGpiMainWindow()
     connect( m_mainWid.opacity, SIGNAL(valueChanged(int)), SLOT(changeOpacity(int)) );
     connect( m_mainWid.textColor, SIGNAL(changed(const QColor&)), SLOT(textColorChanged(const QColor&)));
     connect( m_mainWid.bkgndColor, SIGNAL(changed(const QColor&)), SLOT(bkgndColorChanged(const QColor&)));
+    connect( m_mainWid.leavePrevious, SIGNAL(clicked()), SLOT(replaceModeChanged()));
+    connect( m_mainWid.replacePrevious, SIGNAL(clicked()), SLOT(replaceModeChanged()));
+    connect( m_mainWid.cornersType, SIGNAL(activated(int)), SLOT(sharpnessChanged(int)));
 
     connect( m_mainWid.mesTimeout, SIGNAL(valueChanged(int)), SLOT(onTimeoutChanged(int)) );
     m_mainWid.mesTimeout->setValue( m_popupItem->messageTimeout() );
@@ -69,25 +71,25 @@ int main(int argc, char** argv)
 void KGpiMainWindow::onPopupTL()
 {
     QString str = !m_mainWid.showRichText->isChecked() ? "Heya! Popping up!" : "<font color=\"red\">Heya!</font> Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
-    m_popupItem->showMessage(str, KGamePopupItem::TopLeft);
+    m_popupItem->showMessage(str, KGamePopupItem::TopLeft, m_replaceMode);
 }
 
 void KGpiMainWindow::onPopupTR()
 {
     QString str = !m_mainWid.showRichText->isChecked() ? "Yippie! Popping up!" : "<font color=\"green\">Yippie!</font> Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
-    m_popupItem->showMessage(str, KGamePopupItem::TopRight);
+    m_popupItem->showMessage(str, KGamePopupItem::TopRight, m_replaceMode);
 }
 
 void KGpiMainWindow::onPopupBL()
 {
     QString str = !m_mainWid.showRichText->isChecked() ? "Horray! Popping up!" : "<font color=\"yellow\">Horray</font><i>,comrades</i>! Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
-    m_popupItem->showMessage(str, KGamePopupItem::BottomLeft);
+    m_popupItem->showMessage(str, KGamePopupItem::BottomLeft, m_replaceMode);
 }
 
 void KGpiMainWindow::onPopupBR()
 {
     QString str = !m_mainWid.showRichText->isChecked() ? "Popping up! I like it, yeah!" : "<font color=\"blue\">Wow. Just blue WOW</font>! Click <a href=\"oh-oh-i-am-the-Link\">the link</a><br> and <b>a</b> message should appear in the scene";
-    m_popupItem->showMessage(str, KGamePopupItem::BottomRight);
+    m_popupItem->showMessage(str, KGamePopupItem::BottomRight, m_replaceMode);
 }
 
 void KGpiMainWindow::onLinkClicked(const QString& link)
@@ -142,6 +144,27 @@ void KGpiMainWindow::textColorChanged(const QColor& col)
 void KGpiMainWindow::bkgndColorChanged(const QColor& col)
 {
     m_popupItem->setBackgroundBrush( col );
+}
+
+void KGpiMainWindow::replaceModeChanged()
+{
+    if(m_mainWid.leavePrevious->isChecked())
+        m_replaceMode = KGamePopupItem::LeavePrevious;
+    else
+        m_replaceMode = KGamePopupItem::ReplacePrevious;
+}
+
+void KGpiMainWindow::sharpnessChanged(int idx)
+{
+    if( idx == 0 )
+        m_popupItem->setSharpness(KGamePopupItem::Square);
+    else if(idx == 1)
+        m_popupItem->setSharpness(KGamePopupItem::Sharp);
+    else if(idx == 2)
+        m_popupItem->setSharpness(KGamePopupItem::Soft);
+    else if(idx == 3)
+        m_popupItem->setSharpness(KGamePopupItem::Softest);
+
 }
 
 #include "kgamepopupitemtest.moc"
