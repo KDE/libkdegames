@@ -74,8 +74,8 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 *
 		 * @param window The window where to add menu items.
 		 * @param recvr Object that receives the signals and have the following slots.
-		 * @param slotStandard Slot to call when the player changed the difficulty level to a standard one.
-		 * @param slotCustom Slot to call when the player changed the difficulty level to a custom one. (Optional).
+		 * @param slotStandard Slot to call when the player changed the difficulty level to a standard one. Slot should have the signature like: SLOT(levelChanged(KGameDifficulty::standardLevel))
+		 * @param slotCustom Slot to call when the player changed the difficulty level to a custom one. (Optional). Slot should have the signature like: SLOT(customLevelChanged(int))
 		 */
 		static void init(KXmlGuiWindow* window, const QObject *recvr, const char* slotStandard, const char* slotCustom = 0);
 
@@ -83,7 +83,7 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * @brief Set if a new game has to be started by change
 		 *
 		 * Default is restartOnChange.
-		 * @param restart Behavior on change 
+		 * @param restart Behavior on change
 		 */
 		static void setRestartOnChange(onChange restart);
 

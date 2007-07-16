@@ -358,12 +358,12 @@ void KGamePopupItem::onLinkHovered(const QString& link)
 
 void KGamePopupItem::setSharpness( Sharpness sharpness )
 {
-  d->m_sharpness = sharpness;
+    d->m_sharpness = sharpness;
 }
 
 KGamePopupItem::Sharpness KGamePopupItem::sharpness() const
 {
-  return d->m_sharpness;
+    return d->m_sharpness;
 }
 
 #include "kgamepopupitem.moc"
