@@ -41,7 +41,7 @@ class KGamePopupItemPrivate;
  * messageItem->showMessage("Hello, I'm a game message! How do you do?");
  * \endcode
  */
-class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsPathItem
+class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:

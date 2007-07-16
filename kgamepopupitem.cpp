@@ -115,10 +115,14 @@ public:
      * popup angles sharpness
      */
     KGamePopupItem::Sharpness m_sharpness;
+    /**
+     * painter path to draw a frame
+     */
+    QPainterPath m_path;
 };
 
 KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
-    : QGraphicsPathItem(parent), d(new KGamePopupItemPrivate)
+    : QGraphicsItem(parent), d(new KGamePopupItemPrivate)
 {
     hide();
     d->m_textChildItem = new TextItemWithOpacity(this);
@@ -155,15 +159,17 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
 
 void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
 {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
     p->save();
-    setBrush( d->m_brush );
 
     if( d->m_animOpacity != -1) // playing Center animation
         p->setOpacity(d->m_animOpacity);
     else
         p->setOpacity(d->m_opacity);
-
-    QGraphicsPathItem::paint(p, option, widget);
+    p->setBrush(d->m_brush);
+    p->drawPath(d->m_path);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
     p->restore();
@@ -209,7 +215,8 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     roundRectPath.lineTo(w-(d->m_sharpness), h);
     roundRectPath.arcTo(w-(2*d->m_sharpness), h-(2*d->m_sharpness), (2*d->m_sharpness), (2*d->m_sharpness), 270.0, 90.0);
     roundRectPath.closeSubpath();
-    setPath(roundRectPath);
+
+    d->m_path = roundRectPath;
 
     // adjust y-pos of text item so it appears centered
     d->m_textChildItem->setPos( d->m_textChildItem->x(),
