@@ -37,7 +37,11 @@ class KGameDifficultyPrivate : public QObject
 		void rebuildActions();
 		void emitStandardLevelChanged(KGameDifficulty::standardLevel level);
 		void emitCustomLevelChanged(int key);
-	
+                /**
+                 * @return standard string for standard level
+                 */
+                QString standardLevelString(KGameDifficulty::standardLevel level);
+
 		/**
 		* @brief Current custom difficulty level
 		*/
@@ -135,6 +139,33 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 	}
 }
 
+QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLevel level)
+{
+    switch (level) {
+        case KGameDifficulty::ridiculouslyEasy:
+            return i18n("Ridiculously easy");
+        case KGameDifficulty::veryEasy:
+            return i18n("Very easy");
+        case KGameDifficulty::easy:
+            return i18n("Easy");
+        case KGameDifficulty::medium:
+            return i18n("Medium");
+        case KGameDifficulty::hard:
+            return i18n("Hard");
+        case KGameDifficulty::veryHard:
+            return i18n("Very hard");
+        case KGameDifficulty::extremelyHard:
+            return i18n("Extremely hard");
+        case KGameDifficulty::impossible:
+            return i18n("Impossible");
+        case KGameDifficulty::custom:
+        case KGameDifficulty::configurable:
+        case KGameDifficulty::noLevel:
+            // Do nothing
+            break;
+    }
+    return QString();
+}
 
 void KGameDifficultyPrivate::rebuildActions()
 {
@@ -143,37 +174,7 @@ void KGameDifficultyPrivate::rebuildActions()
 
 	QStringList texts;
 	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
-		switch (level) {
-			case KGameDifficulty::ridiculouslyEasy:
-				texts << i18n("Ridiculously easy");
-				break;
-			case KGameDifficulty::veryEasy:
-				texts << i18n("Very easy");
-				break;
-			case KGameDifficulty::easy:
-				texts << i18n("Easy");
-				break;
-			case KGameDifficulty::medium:
-				texts << i18n("Medium");
-				break;
-			case KGameDifficulty::hard:
-				texts << i18n("Hard");
-				break;
-			case KGameDifficulty::veryHard:
-				texts << i18n("Very hard");
-				break;
-			case KGameDifficulty::extremelyHard:
-				texts << i18n("Extremely hard");
-				break;
-			case KGameDifficulty::impossible:
-				texts << i18n("Impossible");
-				break;
-			case KGameDifficulty::custom:
-			case KGameDifficulty::configurable:
-			case KGameDifficulty::noLevel:
-				// Do nothing
-				break;
-		}
+		texts << standardLevelString(level);
 	}
 	m_menu->setItems(texts);
 
@@ -326,6 +327,10 @@ KGameDifficulty::standardLevel KGameDifficulty::level()
 	return self()->d->m_level;
 }
 
+QString KGameDifficulty::levelString()
+{
+	return self()->d->standardLevelString(self()->d->m_level);
+}
 
 void KGameDifficulty::setLevelCustom(int key)
 {

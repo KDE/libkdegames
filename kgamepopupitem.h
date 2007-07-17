@@ -28,7 +28,7 @@ class KGamePopupItemPrivate;
 /**
  * QGraphicsItem capable of showing short popup messages
  * which do not interrupt the gameplay.
- * Messages can stay on screen for specified amount of time
+ * Message can stay on screen for specified amount of time
  * and automatically hide after (unless user hovers it with mouse).
  *
  * Example of use:

@@ -142,7 +142,10 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * @return The current standard level, or customLevel if a custom level is selected, or noLevel if no difficulty level is selected.
 		 */
 		static standardLevel level();
-
+                /**
+                 * @return current standard level string name
+                 */
+                static QString levelString();
 		/**
 		 * @brief Set the new current difficulty level as a custom one
 		 *
@@ -174,7 +177,6 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * Private constructor: we are a singleton
 		 */
 		KGameDifficulty();
-
 		/**
 		 * @brief Access to the unique instance of the class
 		 *
