@@ -170,7 +170,7 @@ QPixmap KGameTheme::preview() const {
     return d->preview;
 }
 
-QString KGameTheme::getThemeProperty(const QString &key) const {
+QString KGameTheme::themeProperty(const QString &key) const {
     if(!d->loaded)
     {
         kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called." << endl;

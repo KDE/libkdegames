@@ -78,7 +78,7 @@ class KDEGAMES_EXPORT KGameTheme
          * @param key the key of the wanted property
          * @return the data related to 'key'
          */
-        virtual QString getThemeProperty(const QString &key) const;
+        virtual QString themeProperty(const QString &key) const;
 
     private:
         friend class KGameThemePrivate;
