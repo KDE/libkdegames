@@ -38,9 +38,6 @@ class KGameDifficultyPrivate : public QObject
 
 		void rebuildActions();
 
-		void emitStandardLevelChanged(KGameDifficulty::standardLevel level);
-		void emitCustomLevelChanged(int key);
-
 		/**
 		 * @return standard string for standard level
 		 */
@@ -214,19 +211,6 @@ void KGameDifficultyPrivate::rebuildActions()
 		KGameDifficulty::setLevel(m_level);
 }
 
-
-void KGameDifficultyPrivate::emitStandardLevelChanged(KGameDifficulty::standardLevel level)
-{
-	emit standardLevelChanged(level);
-}
-
-
-void KGameDifficultyPrivate::emitCustomLevelChanged(int key)
-{
-	emit customLevelChanged(key);
-}
-
-
 void KGameDifficultyPrivate::setSelection(int newSelection)
 {
 	int countWithoutConfigurable = m_standardLevels.count();
@@ -259,7 +243,7 @@ void KGameDifficultyPrivate::setLevel(KGameDifficulty::standardLevel level)
 	}
 
 	if (level != m_level)
-		emitStandardLevelChanged(level);
+		emit standardLevelChanged(level);
 	m_level = level;
 
 	m_oldSelection = m_menu->currentItem();
@@ -279,7 +263,7 @@ void KGameDifficultyPrivate::setLevelCustom(int key)
 	m_comboBox->setCurrentIndex(i);
 
 	if (key != m_levelCustom)
-		emitCustomLevelChanged(key);
+		emit customLevelChanged(key);
 	m_levelCustom = key;
 
 	m_oldSelection = m_menu->currentItem();
