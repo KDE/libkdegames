@@ -13,6 +13,7 @@ You should have received a copy of the GNU Library General Public License along 
 
 
 
+#include <QComboBox>
 #include <QMap>
 
 
@@ -20,6 +21,7 @@ You should have received a copy of the GNU Library General Public License along 
 #include <kicon.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kstatusbar.h>
 #include <kselectaction.h>
 #include <kxmlguiwindow.h>
 
@@ -35,12 +37,18 @@ class KGameDifficultyPrivate : public QObject
 		void init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom);
 
 		void rebuildActions();
+
 		void emitStandardLevelChanged(KGameDifficulty::standardLevel level);
 		void emitCustomLevelChanged(int key);
-                /**
-                 * @return standard string for standard level
-                 */
-                QString standardLevelString(KGameDifficulty::standardLevel level);
+
+		/**
+		 * @return standard string for standard level
+		 */
+		QString standardLevelString(KGameDifficulty::standardLevel level);
+
+		void setLevel(KGameDifficulty::standardLevel level);
+		void setLevelCustom(int key);
+
 
 		/**
 		* @brief Current custom difficulty level
@@ -55,6 +63,7 @@ class KGameDifficultyPrivate : public QObject
 		KGameDifficulty::onChange m_restartOnChange;
 		bool m_running;
 		int m_oldSelection;
+		QComboBox* m_comboBox;
 
 
 	public Q_SLOTS:
@@ -101,7 +110,6 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 
 	m_oldSelection = -1; // No valid selection
 	m_level = KGameDifficulty::noLevel;
-	m_restartOnChange = KGameDifficulty::restartOnChange;
 	m_running = false;
 
 	QObject::connect(this, SIGNAL(standardLevelChanged(KGameDifficulty::standardLevel)), recvr, slotStandard);
@@ -115,6 +123,13 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	window->actionCollection()->addAction("game_difficulty", m_menu);
 
 	setParent(window);
+
+	m_comboBox = new QComboBox(window);
+	m_comboBox->setToolTip(i18n("Difficulty"));
+	QObject::connect(m_comboBox, SIGNAL(activated(int)), this, SLOT(changeSelection(int)));
+	window->statusBar()->addPermanentWidget(m_comboBox);
+
+	KGameDifficulty::setRestartOnChange(KGameDifficulty::restartOnChange);
 }
 
 
@@ -122,18 +137,13 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 {
 	bool mayChange = true;
 
-	// In the toolbar as a combobox, it's possible to select the separator!
-	// TODO: Check if this is a bug in KSelectAction
-	if (m_menu->action(newSelection)->isSeparator())
-		mayChange = false;
 
 	if (mayChange && (m_restartOnChange==KGameDifficulty::restartOnChange) && m_running)
 		mayChange = ( KMessageBox::warningContinueCancel(0, i18n("This will be the end of the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
 
 	if (mayChange) {
 		setSelection(newSelection);
-	}
-	else {
+	} else {
 		// restore current level selection
 		setSelection(m_oldSelection);
 	}
@@ -170,17 +180,21 @@ QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLev
 void KGameDifficultyPrivate::rebuildActions()
 {
 	m_menu->clear();
+	m_comboBox->clear();
 	qSort(m_standardLevels.begin(), m_standardLevels.end());
 
-	QStringList texts;
 	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
-		texts << standardLevelString(level);
+		if (level!=KGameDifficulty::configurable) {
+			m_menu->addAction(standardLevelString(level));
+			m_comboBox->addItem(KIcon("games-difficult"), standardLevelString(level));
+		}
 	}
-	m_menu->setItems(texts);
 
 	if (m_customLevels.count()>0) {
-		foreach(QString s, m_customLevels)
+		foreach(QString s, m_customLevels) {
 			m_menu->addAction(s);
+			m_comboBox->addItem(KIcon("games-difficult"), s);
+		}
 	}
 
 	if (m_standardLevels.contains(KGameDifficulty::configurable)) {
@@ -188,7 +202,9 @@ void KGameDifficultyPrivate::rebuildActions()
 		separator->setSeparator(true);
 		m_menu->addAction(separator);
 
-		m_menu->addAction(i18n("Custom..."));
+		QString s = i18n("Custom...");
+		m_menu->addAction(s);
+		m_comboBox->addItem(KIcon("games-difficult"), s);
 	}
 
 	// reselect the previous selected item.
@@ -217,7 +233,7 @@ void KGameDifficultyPrivate::setSelection(int newSelection)
 	if (m_standardLevels.contains(KGameDifficulty::configurable))
 		countWithoutConfigurable--;
 
-	if ((m_standardLevels.contains(KGameDifficulty::configurable)) && (newSelection==m_menu->actions().count()-1))
+	if ((m_standardLevels.contains(KGameDifficulty::configurable)) && (newSelection>m_menu->actions().count()-3))
 		KGameDifficulty::setLevel(KGameDifficulty::configurable);
 	else if(newSelection<countWithoutConfigurable)
 		KGameDifficulty::setLevel(m_standardLevels[newSelection]);
@@ -228,7 +244,51 @@ void KGameDifficultyPrivate::setSelection(int newSelection)
 }
 
 
+void KGameDifficultyPrivate::setLevel(KGameDifficulty::standardLevel level)
+{
+	if ((!m_standardLevels.contains(level)) && (level!=KGameDifficulty::custom))
+		level = KGameDifficulty::noLevel;
+
+	if (level==KGameDifficulty::configurable) {
+		m_menu->setCurrentItem(m_menu->actions().count()-1);
+		m_comboBox->setCurrentIndex(m_comboBox->count()-1);
+	} else if (level!=KGameDifficulty::custom) {
+		int i = m_standardLevels.indexOf(level);
+		m_menu->setCurrentItem(i);
+		m_comboBox->setCurrentIndex(i);
+	}
+
+	if (level != m_level)
+		emitStandardLevelChanged(level);
+	m_level = level;
+
+	m_oldSelection = m_menu->currentItem();
+}
+
+
+void KGameDifficultyPrivate::setLevelCustom(int key)
+{
+	m_level = KGameDifficulty::custom;
+
+	int a = m_standardLevels.count();
+	if (m_standardLevels.contains(KGameDifficulty::configurable))
+		a -= 1;
+
+	int i = (m_customLevels.uniqueKeys()).indexOf(key) + a;
+	m_menu->setCurrentItem(i);
+	m_comboBox->setCurrentIndex(i);
+
+	if (key != m_levelCustom)
+		emitCustomLevelChanged(key);
+	m_levelCustom = key;
+
+	m_oldSelection = m_menu->currentItem();
+}
+
+
+
 //---//
+
 
 
 KGameDifficulty* KGameDifficulty::instance = 0;
@@ -251,6 +311,11 @@ void KGameDifficulty::setRestartOnChange(onChange restart)
 	Q_ASSERT(self()->d);
 
 	self()->d->m_restartOnChange = restart;
+	if (restart==restartOnChange)
+		self()->d->m_comboBox->setWhatsThis(i18n("Select the <b>difficulty</b> of the game.<br />If you change the difficulty level while a game is running, you will have to cancel it and start a new one."));
+	else
+		self()->d->m_comboBox->setWhatsThis(i18n("Select the <b>difficulty</b> of the game.<br />You can change the difficulty level during a running game."));
+
 }
 
 
@@ -305,55 +370,39 @@ void KGameDifficulty::setLevel(standardLevel level)
 {
 	Q_ASSERT(self()->d);
 
-	if ((!self()->d->m_standardLevels.contains(level)) && (level!=custom))
-		level = noLevel;
-
-	if (level==configurable)
-		self()->d->m_menu->setCurrentItem(self()->d->m_menu->actions().count()-1);
-	else if (level!=custom) {
-		self()->d->m_menu->setCurrentItem(self()->d->m_standardLevels.indexOf(level));
-	}
-
-	if (level != self()->d->m_level)
-		self()->d->emitStandardLevelChanged(level);
-	self()->d->m_level = level;
-
-	self()->d->m_oldSelection = self()->d->m_menu->currentItem();
+	self()->d->setLevel(level);
 }
 
-
-KGameDifficulty::standardLevel KGameDifficulty::level()
-{
-	return self()->d->m_level;
-}
-
-QString KGameDifficulty::levelString()
-{
-	return self()->d->standardLevelString(self()->d->m_level);
-}
 
 void KGameDifficulty::setLevelCustom(int key)
 {
 	Q_ASSERT(self()->d);
 
-	self()->d->m_level = custom;
-
-	int a = self()->d->m_standardLevels.count();
-	if (self()->d->m_standardLevels.contains(configurable))
-		a -= 1;
-	self()->d->m_menu->setCurrentItem((self()->d->m_customLevels.uniqueKeys()).indexOf(key) + a);
-
-	if (key != self()->d->m_levelCustom)
-		self()->d->emitCustomLevelChanged(key);
-	self()->d->m_levelCustom = key;
-
-	self()->d->m_oldSelection = self()->d->m_menu->currentItem();
+	self()->d->setLevelCustom(key);
 }
 
 
 int KGameDifficulty::levelCustom()
 {
+	Q_ASSERT(self()->d);
+
 	return self()->d->m_levelCustom;
+}
+
+
+KGameDifficulty::standardLevel KGameDifficulty::level()
+{
+	Q_ASSERT(self()->d);
+
+	return self()->d->m_level;
+}
+
+
+QString KGameDifficulty::levelString()
+{
+	Q_ASSERT(self()->d);
+
+	return self()->d->standardLevelString(self()->d->m_level);
 }
 
 
