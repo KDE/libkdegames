@@ -132,17 +132,18 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 
 void KGameDifficultyPrivate::changeSelection(int newSelection)
 {
-	bool mayChange = true;
+	if (newSelection!=m_oldSelection) {
+		bool mayChange = true;
 
+		if (mayChange && (m_restartOnChange==KGameDifficulty::restartOnChange) && m_running)
+			mayChange = ( KMessageBox::warningContinueCancel(0, i18n("This will be the end of the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
 
-	if (mayChange && (m_restartOnChange==KGameDifficulty::restartOnChange) && m_running)
-		mayChange = ( KMessageBox::warningContinueCancel(0, i18n("This will be the end of the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
-
-	if (mayChange) {
-		setSelection(newSelection);
-	} else {
-		// restore current level selection
-		setSelection(m_oldSelection);
+		if (mayChange) {
+			setSelection(newSelection);
+		} else {
+			// restore current level selection
+			setSelection(m_oldSelection);
+		}
 	}
 }
 
