@@ -243,9 +243,10 @@ void KGameDifficultyPrivate::setLevel(KGameDifficulty::standardLevel level)
 		m_comboBox->setCurrentIndex(i);
 	}
 
-	if (level != m_level)
+	if (level != m_level) {
+		m_level = level;
 		emit standardLevelChanged(level);
-	m_level = level;
+	}
 
 	m_oldSelection = m_menu->currentItem();
 }
@@ -263,9 +264,10 @@ void KGameDifficultyPrivate::setLevelCustom(int key)
 	m_menu->setCurrentItem(i);
 	m_comboBox->setCurrentIndex(i);
 
-	if (key != m_levelCustom)
+	if (key != m_levelCustom) {
+		m_levelCustom = key;
 		emit customLevelChanged(key);
-	m_levelCustom = key;
+	}
 
 	m_oldSelection = m_menu->currentItem();
 }
