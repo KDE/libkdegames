@@ -347,6 +347,7 @@ void KGameDifficulty::setEnabled(bool enabled)
 
 	// TODO: Doing this never disable the combobox in the toolbar (just in the menu). It seems to be a bug in the class KSelectAction of kdelibs/kdeui/actions. To check and solve...
 	self()->d->m_menu->setEnabled(enabled);
+	self()->d->m_comboBox->setEnabled(enabled);
 }
 
 
