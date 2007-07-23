@@ -439,9 +439,6 @@ void ModulePrivate::slotGGZEvent()
 
 		emit signalEvent(e);
 	}
-
-	// FIXME: shouldn't be necessary anymore with unbuffered raw socket
-	//if(m_raw->hasMore()) slotGGZEvent();
 }
 
 void ModulePrivate::connect()
@@ -538,6 +535,11 @@ void ModulePrivate::insertPlayer(Player::Type seattype, const QString &name, int
 {
 	QList<Player*>::Iterator it;
 
+	if(seat == -1)
+	{
+		return;
+	}
+
 	Player *p = new Player();
 	PlayerPrivate *ppriv = new PlayerPrivate();
 	ppriv->m_type = seattype;
@@ -546,36 +548,26 @@ void ModulePrivate::insertPlayer(Player::Type seattype, const QString &name, int
 	ppriv->m_stats = 0;
 	p->init(ppriv);
 
-#ifdef __GNUC__
-#warning what is this function doing beside leaking for seat == -1? (CID 3890)
-#endif
-
 	if(seattype == Player::spectator)
 	{
-		if(seat != -1)
+		if(seat < m_spectators.count())
 		{
-			if(seat < m_spectators.count())
-			{
-				m_spectators.replace(seat, p);
-			}
-			else
-			{
-				m_spectators.append(p);
-			}
+			m_spectators.replace(seat, p);
+		}
+		else
+		{
+			m_spectators.append(p);
 		}
 	}
 	else
 	{
-		if(seat != -1)
+		if(seat < m_players.count())
 		{
-			if(seat < m_players.count())
-			{
-				m_players.replace(seat, p);
-			}
-			else
-			{
-				m_players.append(p);
-			}
+			m_players.replace(seat, p);
+		}
+		else
+		{
+			m_players.append(p);
 		}
 	}
 }
