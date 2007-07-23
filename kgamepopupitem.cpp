@@ -33,6 +33,8 @@ static const int MARGIN = 15;
 static const int SHOW_OFFSET = 5;
 // space between pixmap and text
 static const int SOME_SPACE = 10;
+// width of the border in pixels
+static const qreal BORDER_PEN_WIDTH = 1.0;
 
 class TextItemWithOpacity : public QGraphicsTextItem
 {
@@ -164,6 +166,10 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
 
     p->save();
 
+    QPen pen = p->pen();
+    pen.setWidthF( BORDER_PEN_WIDTH );
+    p->setPen(pen);
+
     if( d->m_animOpacity != -1) // playing Center animation
         p->setOpacity(d->m_animOpacity);
     else
@@ -204,6 +210,14 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     if( d->m_iconPix.height() > h )
         h = d->m_iconPix.height() + MARGIN*2;
     d->m_boundRect = QRectF(0, 0, w, h);
+
+    // adjust to take into account the width of the pen
+    // used to draw the border
+    const qreal borderRadius = BORDER_PEN_WIDTH / 2.0;
+    d->m_boundRect.adjust( -borderRadius , 
+                           -borderRadius ,
+                            borderRadius ,
+                            borderRadius );
 
     QPainterPath roundRectPath;
     roundRectPath.moveTo(w, d->m_sharpness);
