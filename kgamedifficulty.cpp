@@ -136,7 +136,7 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 		bool mayChange = true;
 
 		if (mayChange && (m_restartOnChange==KGameDifficulty::restartOnChange) && m_running)
-			mayChange = ( KMessageBox::warningContinueCancel(0, i18n("This will be the end of the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
+			mayChange = ( KMessageBox::warningContinueCancel(0, i18n("Changing the difficulty level will end the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
 
 		if (mayChange) {
 			setSelection(newSelection);
