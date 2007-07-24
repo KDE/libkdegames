@@ -56,7 +56,7 @@ class KDEGAMES_EXPORT KGameDifficulty
 			veryHard = 60, /** Level "Very hard" */
 			extremelyHard = 70, /** Level "Extremely hard" */
 			impossible = 80, /** Level "Impossible"  */
-			configurable = 90, /** Level "Custom...". This is a special item to let the player configure the difficulty level. The configuration of the user level has to be implemented in each game using it with an adapted dialog. Example: In a minesweeper game like KMines, the player wants to define the number of rows, columns and mines. */
+			configurable = 90, /** Level "Custom". This is a special item to let the player configure the difficulty level. The configuration of the user level has to be implemented in each game using it with an adapted dialog. Example: In a minesweeper game like KMines, the player wants to define the number of rows, columns and mines. */
 			custom = 100, /** Any custom appellations for levels */
 			noLevel = 110 /** No level */
 		};

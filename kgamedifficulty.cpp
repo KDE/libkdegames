@@ -200,7 +200,7 @@ void KGameDifficultyPrivate::rebuildActions()
 		separator->setSeparator(true);
 		m_menu->addAction(separator);
 
-		QString s = i18n("Custom...");
+		QString s = i18n("Custom");
 		m_menu->addAction(s);
 		m_comboBox->addItem(KIcon("games-difficult"), s);
 	}
