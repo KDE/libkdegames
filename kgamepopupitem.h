@@ -165,6 +165,8 @@ private Q_SLOTS:
     void onLinkHovered(const QString&);
 private:
     void setupTimeline();
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent* );
+    virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
     virtual void hoverEnterEvent( QGraphicsSceneHoverEvent* );
     virtual void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
     KGamePopupItemPrivate * const d;

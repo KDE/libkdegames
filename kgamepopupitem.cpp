@@ -214,7 +214,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     // adjust to take into account the width of the pen
     // used to draw the border
     const qreal borderRadius = BORDER_PEN_WIDTH / 2.0;
-    d->m_boundRect.adjust( -borderRadius , 
+    d->m_boundRect.adjust( -borderRadius ,
                            -borderRadius ,
                             borderRadius ,
                             borderRadius );
@@ -286,7 +286,7 @@ void KGamePopupItem::animationFrame(int frame)
         setPos( d->m_visibleSceneRect.right()-d->m_boundRect.width()-SHOW_OFFSET, frame );
     else if( d->m_position == Center )
     {
-        d->m_animOpacity = d->m_timeLine.currentValue();
+        d->m_animOpacity = frame*d->m_opacity/d->m_timeLine.duration();
         d->m_textChildItem->setOpacity( d->m_animOpacity );
         update();
     }
@@ -413,5 +413,17 @@ KGamePopupItem::Sharpness KGamePopupItem::sharpness() const
 {
     return d->m_sharpness;
 }
+
+void KGamePopupItem::mousePressEvent( QGraphicsSceneMouseEvent* )
+{
+    // it is needed to reimplement this function to receive future
+    // mouse release events
+}
+
+void KGamePopupItem::mouseReleaseEvent( QGraphicsSceneMouseEvent* )
+{
+    forceHide();
+}
+
 
 #include "kgamepopupitem.moc"
