@@ -117,7 +117,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	m_menu->setToolTip(i18n("Set the difficulty level"));
 	m_menu->setWhatsThis(i18n("Set the difficulty level of the game."));
 	QObject::connect(m_menu, SIGNAL(triggered(int)), this, SLOT(changeSelection(int)));
-	window->actionCollection()->addAction("game_difficulty", m_menu);
+	window->actionCollection()->addAction("options_game_difficulty", m_menu);
 
 	setParent(window);
 
