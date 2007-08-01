@@ -352,7 +352,7 @@ void KGGZSeatsDialogPrivate::slotAction()
 	if(m_buttons.contains(q->sender()))
 	{
 		seat = m_buttons[q->sender()];
-		kDebug(11004) << "seat " << seat << " oldmode " << m_oldmode << endl;
+		kDebug(11004) << "seat" << seat << "oldmode" << m_oldmode;
 
 		KGGZMod::Player *p = m_mod->players().at(seat);
 		KGGZMod::Player *pself = m_mod->self();
@@ -398,14 +398,14 @@ void KGGZSeatsDialogPrivate::slotAction()
 	}
 	else
 	{
-		kDebug(11004) << "error" << endl;
+		kDebug(11004) << "error";
 		// error!
 	}
 }
 
 void KGGZSeatsDialogPrivate::slotMenu(QAction *action)
 {
-	kDebug(11004) << "slotMenu! action=" << action->text() << endl;
+	kDebug(11004) << "slotMenu! action=" << action->text();
 
 	if(action == action_standup)
 	{
@@ -438,7 +438,7 @@ void KGGZSeatsDialogPrivate::slotMenu(QAction *action)
 		KGGZMod::Statistics *s = m_currentplayer->stats();
 		if(s->hasRecord())
 		{
-			kDebug(11004) << "Wins: " << s->wins() << endl;
+			kDebug(11004) << "Wins:" << s->wins();
 		}
 	}
 }

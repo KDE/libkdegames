@@ -214,7 +214,7 @@ void KChatDialog::configureChatWidget(KChatBase* widget)
  
  widget->setMaxItems(maxMessages());
  widget->saveConfig();
- kDebug() << "Saved configuration" << endl;
+ kDebug() << "Saved configuration";
 }
 
 void KChatDialog::slotOk()

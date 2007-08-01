@@ -37,7 +37,7 @@ class KGamePropertyArray : public QVector<type>, public KGamePropertyBase
 public:
   KGamePropertyArray() :QVector<type>(), KGamePropertyBase()
   {
-    //kDebug(11001) << "KGamePropertyArray init" << endl;
+    //kDebug(11001) << "KGamePropertyArray init";
   }
 
   KGamePropertyArray( int size )
@@ -93,7 +93,7 @@ public:
     {
       extractProperty(b);
     }
-    //kDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << " type=" << 1 << " at(" << i<<")="<<data  << endl;
+    //kDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << "type=" << 1 << "at(" << i<<")="<<data;
   }
 
   type at( int i ) const
@@ -220,7 +220,7 @@ public:
 
   void load(QDataStream& s)
   {
-    //kDebug(11001) << "KGamePropertyArray load " << id() << endl;
+    //kDebug(11001) << "KGamePropertyArray load" << id();
     type data;
     for (int i=0; i<QVector<type>::size(); i++)
     {
@@ -234,7 +234,7 @@ public:
   }
   void save(QDataStream &s)
   {
-    //kDebug(11001) << "KGamePropertyArray save "<<id() << endl;
+    //kDebug(11001) << "KGamePropertyArray save "<<id();
     for (int i=0; i<QVector<type>::size(); i++)
     {
       s << at(i);
@@ -292,7 +292,7 @@ public:
         break;
       }
       default:
-        kError(11001) << "Error in KPropertyArray::command: Unknown command " << msgid << endl;
+        kError(11001) << "Error in KPropertyArray::command: Unknown command" << msgid;
         break;
     }
   }

@@ -93,7 +93,7 @@ KChatBaseModel::KChatBaseModel(QObject *parent)
 
 KChatBaseModel::~KChatBaseModel()
 {
-// kDebug(11000) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")" << endl;
+// kDebug(11000) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")";
  saveConfig();
 }
 

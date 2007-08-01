@@ -686,8 +686,7 @@ protected:
      * {
      *   qint32 move;
      *   msg >>  move;
-     *   kDebug() << "  Player " << player->id() << " moved to " << move <<
-     *   endl;
+     *   kDebug() << "  Player" << player->id() << "moved to" << move;
      *   return true;
      * }
      * \endcode

@@ -126,7 +126,7 @@ const ItemContainer *ItemArray::item(const QString &name) const
 {
     int i = findIndex(name);
     if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
-                                << "\"" << endl;
+                                << "\"";
     return at(i);
 }
 
@@ -134,7 +134,7 @@ ItemContainer *ItemArray::item(const QString &name)
 {
     int i = findIndex(name);
     if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
-                                << "\"" << endl;
+                                << "\"";
     return at(i);
 }
 
@@ -142,7 +142,7 @@ void ItemArray::setItem(const QString &name, Item *item)
 {
     int i = findIndex(name);
     if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
-                                << "\"" << endl;
+                                << "\"";
     bool stored = at(i)->isStored();
     bool canHaveSubGroup = at(i)->canHaveSubGroup();
     _setItem(i, name, item, stored, canHaveSubGroup);
@@ -152,7 +152,7 @@ void ItemArray::addItem(const QString &name, Item *item,
                         bool stored, bool canHaveSubGroup)
 {
     if ( findIndex(name)!=-1 )
-        kError(11002) << "item already exists \"" << name << "\"" << endl;
+        kError(11002) << "item already exists \"" << name << "\"";
 
     append(new ItemContainer);
     //at(i) = new ItemContainer;
@@ -860,8 +860,7 @@ void ManagerPrivate::exportHighscores(QTextStream &s)
             if ( i!=0 ) s << endl;
             s << "--------------------------------" << endl;
             s << "Game type: "
-              << manager.gameTypeLabel(_gameType, Manager::I18N)
-              << endl;
+              << manager.gameTypeLabel(_gameType, Manager::I18N) << endl;
             s << endl;
         }
         s << "Players list:" << endl;

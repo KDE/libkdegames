@@ -380,7 +380,7 @@ void KGameDebugDialog::slotUpdateGameData()
   QStringList items;
   items << handler->propertyName(it.value()->id()) << handler->propertyValue(it.value()) << policy;
 	new QTreeWidgetItem(d->mGameProperties,items);
-//	kDebug(11001) << k_funcinfo << ": checking for all game properties: found property name " << name << endl;
+//	kDebug(11001) << k_funcinfo << ": checking for all game properties: found property name" << name;
  }
 }
 
@@ -393,7 +393,7 @@ void KGameDebugDialog::slotUpdatePlayerData(QListWidgetItem* item)
  KPlayer* p = d->mGame->findPlayer(item->text().toInt());
 
  if (!p) {
-	kError(11001) << k_funcinfo << ": cannot find player" << endl;
+	kError(11001) << k_funcinfo << ": cannot find player";
 	return;
  }
 
@@ -484,7 +484,7 @@ void KGameDebugDialog::slotUnsetKGame()
 void KGameDebugDialog::addPlayer(KPlayer* p)
 {
  if (!p) {
-	kError(11001) << "trying to add NULL player" << endl;
+	kError(11001) << "trying to add NULL player";
 	return;
  }
 

@@ -65,7 +65,7 @@ void KHighscore::init(bool forceLocal)
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
     if ( d->global && _lock==0 )    //If we're doing global highscores but not KFileLock has been set up yet
-        kFatal(11002) << "KHighscore::init should be called before!!" << endl;
+        kFatal(11002) << "KHighscore::init should be called before!!";
 #else
     d->global = false;
     Q_UNUSED(forceLocal);
@@ -91,10 +91,10 @@ void KHighscore::init(const char *appname)
     //int fd = fopen(filename.toLocal8Bit(), O_RDWR);
     /*QFile file(filename);
     if ( !file.open(QIODevice::ReadWrite) ) kFatal(11002) << "cannot open global highscore file \""
-                               << filename << "\"" << endl;*/
+                               << filename << "\"";*/
     /*if (!(QFile::permissions(filename) & QFile::WriteOwner)) kFatal(11002) << "cannot write to global highscore file \""
-                << filename << "\"" << endl;*/
-    kDebug() << "Global highscore file \"" << filename << "\"" << endl;
+                << filename << "\"";*/
+    kDebug() << "Global highscore file \"" << filename << "\"";
     lockSD.setObject(_lock, new KLockFile(filename));
     configSD.setObject(_config, new KConfig(filename, KConfig::OpenFlags(KConfig::NoGlobals | KConfig::OnlyLocal))); // read-only   (matt-?)
 
@@ -113,12 +113,12 @@ bool KHighscore::lockForWriting(QWidget *widget)
 
     bool first = true;
     for (;;) {
-        kDebug(11002) << "try locking" << endl;
+        kDebug(11002) << "try locking";
         // lock the highscore file (it should exist)
         int result = _lock->lock();
         bool ok = ( result==0 );
         kDebug(11002) << "locking system-wide highscore file res="
-                       <<  result << " (ok=" << ok << ")" << endl;
+                       <<  result << " (ok=" << ok << ")";
         if (ok) {
             readCurrentConfig();
             return true;
@@ -143,7 +143,7 @@ void KHighscore::writeAndUnlock()
     }
     if ( !isLocked() ) return;
 
-    kDebug(11002) << "unlocking" << endl;
+    kDebug(11002) << "unlocking";
     _config->sync(); // write config
     _lock->unlock();
 }

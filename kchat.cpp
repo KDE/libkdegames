@@ -50,13 +50,13 @@ KChat::KChat(QWidget* parent, bool twoPlayerGame) : KChatBase(parent,
 
 KChat::~KChat()
 {
- kDebug(11000) << "DESTRUCT KChat " << this << endl;
+ kDebug(11000) << "DESTRUCT KChat" << this;
  delete d;
 }
 
 void KChat::init()
 {
- kDebug(11001) << "INIT KChat " << this << endl;
+ kDebug(11001) << "INIT KChat" << this;
  d = new KChatPrivate;
  d->mAutoAddMessages = true;
  d->mPlayerId = 1;
@@ -83,7 +83,7 @@ void KChat::returnPressed(const QString& text)
  int id = fromId();
  if (id < 0) {
 	// don't return - just display "unknown" as name
-	kWarning(11000) << "KChat: no fromNickname has been set!" << endl;
+	kWarning(11000) << "KChat: no fromNickname has been set!";
  }
  emit signalSendMessage(id, text);
  if (autoAddMessages()) {
@@ -91,7 +91,7 @@ void KChat::returnPressed(const QString& text)
 	if (p.isNull()) {
 		p = i18nc("Unknown player", "Unknown");
 	}
-	kDebug(11000) << "auto adding message from player " << p << " ;id=" << id << endl;
+	kDebug(11000) << "auto adding message from player" << p << " ;id=" << id;
 	addMessage(p, text);
  }
 }

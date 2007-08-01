@@ -114,30 +114,29 @@ KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
 		<< this
 		<< ") cookie="
 		<< d->mCookie
-		<< " sizeof(this)="
-		<< sizeof(KMessageServer)
-		<< endl;
+		<< "sizeof(this)="
+		<< sizeof(KMessageServer);
 }
 
 KMessageServer::~KMessageServer()
 {
-  kDebug(11001) << k_funcinfo << "this=" << this << endl;
+  kDebug(11001) << k_funcinfo << "this=" << this;
   Debug();
   stopNetwork();
   deleteClients();
   delete d;
-  kDebug(11001) << k_funcinfo << " done" << endl;
+  kDebug(11001) << k_funcinfo << "done";
 }
 
 //------------------------------------- TCP/IP server stuff
 
 bool KMessageServer::initNetwork (quint16 port)
 {
-  kDebug(11001) << k_funcinfo << endl;
+  kDebug(11001) << k_funcinfo;
 
   if (d->mServerSocket)
   {
-    kDebug (11001) << k_funcinfo << ": We were already offering connections!" << endl;
+    kDebug (11001) << k_funcinfo << ": We were already offering connections!";
     delete d->mServerSocket;
   }
 
@@ -147,14 +146,14 @@ bool KMessageServer::initNetwork (quint16 port)
   if (!d->mServerSocket 
     || !d->mServerSocket->isListening())
   {
-    kError(11001) << k_funcinfo << ": Serversocket::ok() == false" << endl;
+    kError(11001) << k_funcinfo << ": Serversocket::ok() == false";
     delete d->mServerSocket;
     d->mServerSocket=0;
     return false;
   }
 
   kDebug (11001) << k_funcinfo << ": Now listening to port "
-                  << d->mServerSocket->serverPort() << endl;
+                  << d->mServerSocket->serverPort();
   connect (d->mServerSocket, SIGNAL (newClientConnected (KMessageIO*)),
            this, SLOT (addClient (KMessageIO*)));
   return true;
@@ -191,13 +190,13 @@ void KMessageServer::addClient (KMessageIO* client)
   // maximum number of clients reached?
   if (d->mMaxClients >= 0 && d->mMaxClients <= clientCount())
   {
-    kError (11001) << k_funcinfo << ": Maximum number of clients reached!" << endl;
+    kError (11001) << k_funcinfo << ": Maximum number of clients reached!";
     return;
   }
 
   // give it a unique ID
   client->setId (uniqueClientNumber());
-  kDebug (11001) << k_funcinfo << ": " << client->id() << endl;
+  kDebug (11001) << k_funcinfo << ":" << client->id();
 
   // connect its signals
   connect (client, SIGNAL (connectionBroken()),
@@ -242,7 +241,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
   quint32 clientID = client->id();
   if (!d->mClientList.removeAll(client))
   {
-    kError(11001) << k_funcinfo << ": Deleting client that wasn't added before!" << endl;
+    kError(11001) << k_funcinfo << ": Deleting client that wasn't added before!";
     return;
   }
 
@@ -275,7 +274,7 @@ void KMessageServer::removeBrokenClient ()
   KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
   if (!client)
   {
-    kError (11001) << k_funcinfo << ": sender of the signal was not a KMessageIO object!" << endl;
+    kError (11001) << k_funcinfo << ": sender of the signal was not a KMessageIO object!";
     return;
   }
 
@@ -335,7 +334,7 @@ void KMessageServer::setAdmin (quint32 adminID)
 
   if (adminID > 0 && findClient (adminID) == 0)
   {
-    kWarning (11001) << "Trying to set a new admin that doesn't exist!" << endl;
+    kWarning (11001) << "Trying to set a new admin that doesn't exist!";
     return;
   }
 
@@ -382,10 +381,10 @@ void KMessageServer::getReceivedMessage (const QByteArray &msg)
   KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
   if (!client)
   {
-    kError (11001) << k_funcinfo << ": slot was not called from KMessageIO!" << endl;
+    kError (11001) << k_funcinfo << ": slot was not called from KMessageIO!";
     return;
   }
-  //kDebug(11001) << k_funcinfo << ": size=" << msg.size() << endl;
+  //kDebug(11001) << k_funcinfo << ": size=" << msg.size();
   quint32 clientID = client->id();
 
   //QByteArray *ta=new QByteArray;
@@ -429,7 +428,7 @@ void KMessageServer::processOneMessage ()
   QByteArray ttt=in_buffer.buffer();
   quint32 messageID;
   in_stream >> messageID;
-  //kDebug(11001) << k_funcinfo << ": got message with messageID=" << messageID << endl;
+  //kDebug(11001) << k_funcinfo << ": got message with messageID=" << messageID;
   switch (messageID)
   {
     case REQ_BROADCAST:
@@ -482,7 +481,7 @@ void KMessageServer::processOneMessage ()
           if (client)
             removeClient (client, false);
           else
-            kWarning (11001) << k_funcinfo << ": removing non-existing clientID" << endl;
+            kWarning (11001) << k_funcinfo << ": removing non-existing clientID";
         }
       }
       break;
@@ -509,12 +508,12 @@ void KMessageServer::processOneMessage ()
 
   // check if all the data has been used
   if (!unknown && !in_buffer.atEnd())
-    kWarning (11001) << k_funcinfo << ": Extra data received for message ID " << messageID << endl;
+    kWarning (11001) << k_funcinfo << ": Extra data received for message ID" << messageID;
 
   emit messageReceived (msg_buf->data, clientID, unknown);
 
   if (unknown)
-    kWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
+    kWarning (11001) << k_funcinfo << ": received unknown message ID" << messageID;
 
   // remove the message, since we are ready with it
   d->mMessageQueue.dequeue();
@@ -525,10 +524,10 @@ void KMessageServer::processOneMessage ()
 
 void KMessageServer::Debug()
 {
-   kDebug(11001) << "------------------ KMESSAGESERVER -----------------------" << endl;
-   kDebug(11001) << "MaxClients :   " << maxClients() << endl;
-   kDebug(11001) << "NoOfClients :  " << clientCount() << endl;
-   kDebug(11001) << "---------------------------------------------------" << endl;
+   kDebug(11001) << "------------------ KMESSAGESERVER -----------------------";
+   kDebug(11001) << "MaxClients :   " << maxClients();
+   kDebug(11001) << "NoOfClients :  " << clientCount();
+   kDebug(11001) << "---------------------------------------------------";
 }
 
 #include "kmessageserver.moc"

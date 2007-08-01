@@ -36,7 +36,7 @@ KChatBaseItemDelegate::~KChatBaseItemDelegate()
 void KChatBaseItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
                 const QModelIndex &index) const
 {
-//  kDebug() << "KChatBaseItemDelegate::paint" << endl;
+//  kDebug() << "KChatBaseItemDelegate::paint";
  KChatBaseMessage m  = index.model()->data(index, Qt::DisplayRole).value<KChatBaseMessage>();
  paint(painter, option, index,m.first, m.second);
 }
@@ -47,7 +47,7 @@ void KChatBaseItemDelegate::paint(QPainter *painter,
 				   const QString& sender,
 				   const QString& message) const
 {
-//  kDebug() << "KChatBaseItemDelegate::paint" << endl;
+//  kDebug() << "KChatBaseItemDelegate::paint";
  QFontMetrics fm = painter->fontMetrics();
  painter->setFont(((KChatBaseModel*)index.model())->nameFont());
  painter->drawText(option.rect.x(), 
@@ -60,7 +60,7 @@ void KChatBaseItemDelegate::paint(QPainter *painter,
 QSize KChatBaseItemDelegate::sizeHint(const QStyleOptionViewItem &  option ,
 		    const QModelIndex &  index ) const
 {
-//   kDebug() << "KChatBaseItemDelegate::sizeHint" << endl;
+//   kDebug() << "KChatBaseItemDelegate::sizeHint";
   KChatBaseMessage m  = index.model()->data(index, Qt::DisplayRole).value<KChatBaseMessage>();
   return sizeHint(option, index, m.first, m.second);
 }
@@ -70,7 +70,7 @@ QSize KChatBaseItemDelegate::sizeHint(const QStyleOptionViewItem &  option ,
 				   const QString& sender,
 				   const QString& message ) const
 {
-//   kDebug() << "KChatBaseItemDelegate::sizeHint" << endl;
+//   kDebug() << "KChatBaseItemDelegate::sizeHint";
   int w = 0;
   w += 6;
   w += QFontMetrics(option.font).width(sender+i18n("%1: ",sender));

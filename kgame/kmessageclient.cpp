@@ -81,7 +81,7 @@ void KMessageClient::setServer (KMessageIO *connection)
   if (d->connection)
   {
     delete d->connection;
-    kDebug (11001) << k_funcinfo << ": We are changing the server!" << endl;
+    kDebug (11001) << k_funcinfo << ": We are changing the server!";
   }
 
   d->connection = connection;
@@ -142,7 +142,7 @@ void KMessageClient::sendServerMessage (const QByteArray &msg)
 {
   if (!d->connection)
   {
-    kWarning (11001) << k_funcinfo << ": We have no connection yet!" << endl;
+    kWarning (11001) << k_funcinfo << ": We have no connection yet!";
     return;
   }
   d->connection->send (msg);
@@ -268,7 +268,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         in_stream >> id;
 
         if (d->clientList.contains (id))
-          kWarning (11001) << k_funcinfo << ": Adding a client that already existed!" << endl;
+          kWarning (11001) << k_funcinfo << ": Adding a client that already existed!";
         else
           d->clientList.append (id);
 
@@ -283,7 +283,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         in_stream >> id >> broken;
 
         if (!d->clientList.contains (id))
-          kWarning (11001) << k_funcinfo << ": Removing a client that doesn't exist!" << endl;
+          kWarning (11001) << k_funcinfo << ": Removing a client that doesn't exist!";
         else
           d->clientList.removeAll (id);
 
@@ -296,12 +296,12 @@ void KMessageClient::processMessage (const QByteArray &msg)
   }
 
   if (!unknown && !in_buffer.atEnd())
-    kWarning (11001) << k_funcinfo << ": Extra data received for message ID " << messageID << endl;
+    kWarning (11001) << k_funcinfo << ": Extra data received for message ID" << messageID;
 
   emit serverMessageReceived (msg, unknown);
 
   if (unknown)
-    kWarning (11001) << k_funcinfo << ": received unknown message ID " << messageID << endl;
+    kWarning (11001) << k_funcinfo << ": received unknown message ID" << messageID;
 }
 
 void KMessageClient::processFirstMessage()
@@ -312,7 +312,7 @@ void KMessageClient::processFirstMessage()
   }
   if (d->delayedMessages.count() == 0)
   {
-    kDebug(11001) << k_funcinfo << ": no messages delayed" << endl;
+    kDebug(11001) << k_funcinfo << ": no messages delayed";
     return;
   }
   QByteArray first = d->delayedMessages.front();
@@ -322,7 +322,7 @@ void KMessageClient::processFirstMessage()
 
 void KMessageClient::removeBrokenConnection ()
 {
-  kDebug (11001) << k_funcinfo << ": timer single shot for removeBrokenConnection"<<this << endl;
+  kDebug (11001) << k_funcinfo << ": timer single shot for removeBrokenConnection"<<this;
   // MH We cannot directly delete the socket. otherwise QSocket crashes
   QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
   return;
@@ -331,26 +331,26 @@ void KMessageClient::removeBrokenConnection ()
 
 void KMessageClient::removeBrokenConnection2 ()
 {
-  kDebug (11001) << k_funcinfo << ": Broken:Deleting the connection object"<<this << endl;
+  kDebug (11001) << k_funcinfo << ": Broken:Deleting the connection object"<<this;
 
   emit aboutToDisconnect(id());
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
   emit connectionBroken();
-  kDebug (11001) << k_funcinfo << ": Broken:Deleting the connection object DONE" << endl;
+  kDebug (11001) << k_funcinfo << ": Broken:Deleting the connection object DONE";
 }
 
 void KMessageClient::disconnect ()
 {
-  kDebug (11001) << k_funcinfo << ": Disconnect:Deleting the connection object" << endl;
+  kDebug (11001) << k_funcinfo << ": Disconnect:Deleting the connection object";
 
   emit aboutToDisconnect(id());
   delete d->connection;
   d->connection = 0;
   d->adminID = 0;
   emit connectionBroken();
-  kDebug (11001) << k_funcinfo << ": Disconnect:Deleting the connection object DONE" << endl;
+  kDebug (11001) << k_funcinfo << ": Disconnect:Deleting the connection object DONE";
 }
 
 void KMessageClient::lock ()

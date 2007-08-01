@@ -144,28 +144,28 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
 
         if (dlg.isGlobalDeck())
 	{
-	    kDebug(11000) << "use global deck" << endl;
+	    kDebug(11000) << "use global deck";
 	    bool random;
 	    getGlobalDeck(pDeck, random);
-	    kDebug(11000) << "use: " << pDeck<< endl;
+	    kDebug(11000) << "use:" << pDeck<< endl;
 	    if (pRandomDeck)
 	    {
 	        *pRandomDeck=random;
 		if (random)
-	        kDebug(11000) << "use random deck" << endl;
+	        kDebug(11000) << "use random deck";
 	    }
 	}
         if (dlg.isGlobalCardDir())
 	{
-	    kDebug(11000) << "use global carddir" << endl;
+	    kDebug(11000) << "use global carddir";
 	    bool random;
 	    getGlobalCardDir(pCardDir, random);
-	    kDebug(11000) << "use: " << pCardDir << endl;
+	    kDebug(11000) << "use:" << pCardDir;
 	    if (pRandomCardDir)
 	    {
 	        *pRandomCardDir=random;
 		if (random)
-	        kDebug(11000) << "use random carddir" << endl;
+	        kDebug(11000) << "use random carddir";
 	    }
 	}
     }
@@ -465,7 +465,7 @@ void KCardDialog::insertCardIcons()
     }
     QStringList list = svg+KGlobal::dirs()->findAllResources("cards", "card*/index.desktop",
                                                          KStandardDirs::NoDuplicates);
-    // kDebug(11000) << "insert " << list.count() << endl;
+    // kDebug(11000) << "insert" << list.count();
     if (list.isEmpty())
         return;
 
@@ -717,7 +717,7 @@ void KCardDialog::slotCardResized(int s)
 	return;
  }
  if (s < SLIDER_MIN || s > SLIDER_MAX) {
-	kError(11000) << "invalid scaling value!" << endl;
+	kError(11000) << "invalid scaling value!";
 	return;
  }
 

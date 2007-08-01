@@ -433,7 +433,7 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
 
     d->m_highlighted = false;
 
-    kDebug () << "Theme set to: " << desktopEntry.value("Name") << endl;
+    kDebug () << "Theme set to:" << desktopEntry.value("Name");
 }
 
 QPixmap KGameSvgDigits::display(const QString& display)
@@ -462,7 +462,7 @@ QPixmap KGameSvgDigits::display(const QString& display)
 
     if (numberOfDigits() != str.size())
     {
-        kDebug () << "number of digits is set to " << numberOfDigits() << " but you tried to display " << str.size() << endl;
+        kDebug () << "number of digits is set to" << numberOfDigits() << "but you tried to display" << str.size();
         setNumberOfDigits(str.size());
     }
 
@@ -476,7 +476,7 @@ QPixmap KGameSvgDigits::display(const QString& display)
 
     QPainter painter(&finalPixmap);
 
-    kDebug () << "about to display: '" << str << "'" << endl;
+    kDebug () << "about to display: '" << str << "'";
 
     for (i=0; i<numberOfDigits(); i++)
     {
@@ -549,7 +549,7 @@ QPixmap KGameSvgDigits::display(const QString& display)
         else
         {
             kDebug () << "Couldn't find cached pixmap, or SVG element to render, for the character: "
-                      << characterToDisplay << " Skipping." << endl;
+                      << characterToDisplay << "Skipping.";
         }
     }
     return finalPixmap.copy(0, 0, width + x + paddingRight(), height + paddingTop() + paddingBottom());
@@ -561,8 +561,8 @@ void KGameSvgDigits::flash(int interval)
     if ((cacheOption() == CacheNone) && (interval < 10000))
     {
         interval = 10000;
-        kDebug () << "Caching is disabled, and the flashing interval is less than 10 seconds." << endl;
-        kDebug () << "To limit use of CPU, I have reset the interval to 10 seconds." << endl;
+        kDebug () << "Caching is disabled, and the flashing interval is less than 10 seconds.";
+        kDebug () << "To limit use of CPU, I have reset the interval to 10 seconds.";
     }
     d->m_flashTimer_ptr = new QTimer();
     connect(d->m_flashTimer_ptr, SIGNAL(timeout()), this, SLOT(updateFlash()));
@@ -594,7 +594,7 @@ void KGameSvgDigits::highlight()
 void KGameSvgDigits::refreshCache()
 {
     d->m_digitsPixmapCache.clear();
-    kDebug () << "cache has been cleared" << endl;
+    kDebug () << "cache has been cleared";
 
     // Set new size hints
     if (digitType() != IndividualDigit)
@@ -658,7 +658,7 @@ void KGameSvgDigits::refreshCache()
     }
 
     setPixmapCacheDirty(false);
-    kDebug () << "cache has been rebuilt" << endl;
+    kDebug () << "cache has been rebuilt";
 
     if (cacheOption() == CacheNone){return;}
     if (cacheOption() == CachePreviouslyRendered){return;}
@@ -681,7 +681,7 @@ bool KGameSvgDigits::isPixmapCacheDirty()
 void KGameSvgDigits::setCacheOption(CacheOptions option)
 {
     d->m_cacheOption = option;
-    kDebug () << "Cache option set to: " << d->lookupCacheOptionName(d->m_cacheOption) << endl;
+    kDebug () << "Cache option set to:" << d->lookupCacheOptionName(d->m_cacheOption);
 
 }
 
@@ -740,7 +740,7 @@ void KGameSvgDigits::setDigitStyle(const DigitStyle& style)
 {
     d->m_digitStyle = style;
     d->m_pixmapCacheDirty = true;
-    kDebug () << "Digit style set to: " << d->lookupDigitStyleName(d->m_digitStyle) << endl;
+    kDebug () << "Digit style set to:" << d->lookupDigitStyleName(d->m_digitStyle);
 }
 
 void KGameSvgDigits::setDigitStyle(const QString& style)
@@ -1063,7 +1063,7 @@ QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& 
     if (m_cacheOption != KGameSvgDigits::CacheNone)
     {
         m_digitsPixmapCache.insert(cacheId, pixmap);
-        kDebug () << "caching digit: " << cacheId << endl;
+        kDebug () << "caching digit:" << cacheId;
     }
 
     return pixmap;
@@ -1225,12 +1225,12 @@ void KGameSvgDigitsPrivate::applyBitmask(const QDomNodeList& nodes)
 
         if ((m_bitmask & (1 << hex)) != 0)
         {
-//          kDebug () << "segment on" << endl;
+//          kDebug () << "segment on";
             applyColor(nodes.item(j), m_foregroundColor);
         }
         else
         {
-//          kDebug () << "off" << endl;
+//          kDebug () << "off";
             if (m_digitStyle == KGameSvgDigits::LedStyle)
             {
                 applyColor(nodes.item(j), ledOffColor);

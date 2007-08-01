@@ -91,7 +91,7 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
 {
     KAction* pAction = 0;
     const KStandardGameActionInfo* pInfo = infoPtr( id );
-    kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << ", " << parent << " )" << endl;
+    kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << "," << parent << " )";
     if( pInfo ) {
         QString sLabel = i18n(pInfo->psLabel);
         bool do_connect = (recvr && slot); //both not 0

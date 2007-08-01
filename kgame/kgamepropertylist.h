@@ -161,7 +161,7 @@ public:
 
   void load(QDataStream& s)
   {
-    kDebug(11001) << "KGamePropertyList load " << id() << endl;
+    kDebug(11001) << "KGamePropertyList load" << id();
     QList<type>::clear();
     uint size;
     type data;
@@ -177,7 +177,7 @@ public:
 
   void save(QDataStream &s)
   {
-    kDebug(11001) << "KGamePropertyList save "<<id() << endl;
+    kDebug(11001) << "KGamePropertyList save "<<id();
     type data;
     uint size=this->count();
     s << size;
@@ -212,7 +212,7 @@ public:
         type data;
 	stream >> data;
         QList<type>::append(data);
-//        kDebug(11001) << "CmdAppend:id=" << id() << " data=" << data << endl; 
+//        kDebug(11001) << "CmdAppend:id=" << id() << "data=" << data;
         if (isEmittingSignal()) emitSignal();
 	break;
       }
@@ -234,7 +234,7 @@ public:
         break;
       }
       default: 
-        kDebug(11001) << "Error in KPropertyList::command: Unknown command " << msgid << endl;
+        kDebug(11001) << "Error in KPropertyList::command: Unknown command" << msgid;
     }
   }
 

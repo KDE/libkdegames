@@ -104,12 +104,12 @@ void ModulePrivate::sendRequest(Request request)
 {
 	if(!m_net)
 	{
-		kDebug(11003) << "[kggzmod] error: not connected" << endl;
+		kDebug(11003) << "[kggzmod] error: not connected";
 		return;
 	}
 
-	kDebug(11003) << "[kggzmod] debug: send a request" << endl;
-	kDebug(11003) << "[kggzmod] info: send request " << requestString(request.type()) << endl;
+	kDebug(11003) << "[kggzmod] debug: send a request";
+	kDebug(11003) << "[kggzmod] info: send request" << requestString(request.type());
 
 	Request::Type opcode = request.type();
 	// FIXME: in networking we always assume sizeof(opcode) = 4!
@@ -227,14 +227,14 @@ void ModulePrivate::slotGGZEvent()
 	QString _realname, _photo;
 	QList<Player*>::Iterator it;
 
-	kDebug(11003) << "[kggzmod] debug: input from GGZ has arrived" << endl;
+	kDebug(11003) << "[kggzmod] debug: input from GGZ has arrived";
 	*m_net >> opcode;
 
-	kDebug(11003) << "[kggzmod] info: got GGZ input " << opcodeString(opcode) << endl;
+	kDebug(11003) << "[kggzmod] info: got GGZ input" << opcodeString(opcode);
 
 	if((opcode < msglaunch) || (opcode > msginfo))
 	{
-		kDebug(11003) << "[kggzmod] error: unknown opcode" << endl;
+		kDebug(11003) << "[kggzmod] error: unknown opcode";
 		disconnect();
 		emit signalError();
 		return;
@@ -264,7 +264,7 @@ void ModulePrivate::slotGGZEvent()
 
 		// FIXME: we don't handle this variant
 
-		kDebug(11003) << "[kggzmod] error: we don't handle msgserver" << endl;
+		kDebug(11003) << "[kggzmod] error: we don't handle msgserver";
 		disconnect();
 		emit signalError();
 	}
@@ -274,17 +274,17 @@ void ModulePrivate::slotGGZEvent()
 
 		Event e(Event::server);
 		// FIXME: this is a send_fd operation, might not be portable!
-		kDebug(11003) << "[kggzmod] debug: go read fd with ancillary data" << endl;
+		kDebug(11003) << "[kggzmod] debug: go read fd with ancillary data";
 		ret = readfiledescriptor(m_fd, &_fd);
 		if(!ret)
 		{
-			kDebug(11003) << "[kggzmod] error: socket reading failed" << endl;
+			kDebug(11003) << "[kggzmod] error: socket reading failed";
 			disconnect();
 			emit signalError();
 			return;
 		}
 
-		kDebug(11003) << "[kggzmod] debug: server fd = " << _fd << endl;
+		kDebug(11003) << "[kggzmod] debug: server fd =" << _fd;
 		e.data["fd"] = QString::number(_fd);
 		emit signalEvent(e);
 
@@ -443,11 +443,11 @@ void ModulePrivate::slotGGZEvent()
 
 void ModulePrivate::connect()
 {
-	kDebug(11003) << "[kggzmod] debug: connect() to GGZ" << endl;
+	kDebug(11003) << "[kggzmod] debug: connect() to GGZ";
 
 	if(!Module::isGGZ())
 	{
-		kDebug(11003) << "[kggzmod] info: GGZMODE not set, ignore" << endl;
+		kDebug(11003) << "[kggzmod] info: GGZMODE not set, ignore";
 		// FIXME: alternatively throw error as well?
 		return;
 	}
@@ -455,14 +455,14 @@ void ModulePrivate::connect()
 	QString ggzsocket = getenv("GGZSOCKET");
 	if(ggzsocket.isNull())
 	{
-		kDebug(11003) << "[kggzmod] error: GGZSOCKET not set" << endl;
+		kDebug(11003) << "[kggzmod] error: GGZSOCKET not set";
 		emit signalError();
 		return;
 	}
 
 	m_fd = ggzsocket.toInt();
-	kDebug(11003) << "[kggzmod] debug: use socket " << ggzsocket << endl;
-	kDebug(11003) << "[kggzmod] debug: numeric socket " << m_fd << endl;
+	kDebug(11003) << "[kggzmod] debug: use socket" << ggzsocket;
+	kDebug(11003) << "[kggzmod] debug: numeric socket" << m_fd;
 
 	m_net = new KGGZRaw();
 	m_net->setNetwork(m_fd);
@@ -470,7 +470,7 @@ void ModulePrivate::connect()
 	m_notifier = new QSocketNotifier(m_fd, QSocketNotifier::Read, this);
 	QObject::connect(m_notifier, SIGNAL(activated(int)), SLOT(slotGGZEvent()));
 
-	kDebug(11003) << "[kggzmod] debug: connect() is finished" << endl;
+	kDebug(11003) << "[kggzmod] debug: connect() is finished";
 }
 
 void ModulePrivate::disconnect()

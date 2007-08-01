@@ -285,7 +285,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             QLabel *label;
             num.setNum(i);
             
-            //kDebug() << "groupName: " << groupName << " id: " << i-1 << endl;
+            //kDebug() << "groupName:" << groupName << "id:" << i-1;
             
             FieldInfo score = scores[groupName].at(i-1);
             label = labels[groupName].at((i-1)*nrCols + 0);
@@ -348,7 +348,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     
     if (groupList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
-        kDebug(11002) << "The current high score group \"" << configGroup << "\" isn't in the list, adding it" << endl;
+        kDebug(11002) << "The current high score group \"" << configGroup << "\" isn't in the list, adding it";
         groupList << configGroup;
     }
     
@@ -375,7 +375,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     {
         if( (scores[groupName][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupName) )
         {
-            kDebug(11002) << "Removing group \"" << groupName << "\" since it's unused." << endl;
+            kDebug(11002) << "Removing group \"" << groupName << "\" since it's unused.";
             scores.remove(groupName);
         }
     }

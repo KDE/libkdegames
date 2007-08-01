@@ -100,7 +100,7 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 {
 //AB: do we need a "Cancel" Button? currently removed
 
-// kDebug(11001) << k_funcinfo << ": this=" << this << endl;
+// kDebug(11001) << k_funcinfo << ": this=" << this;
  d = new KGameDialogPrivate;
 
  setOwner(owner);
@@ -115,7 +115,7 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 {
  if (initConfigs & GameConfig) {
-	kDebug() << "add gameconf" << endl;
+	kDebug() << "add gameconf";
 	addGameConfig(new KGameDialogGeneralConfig(0));
  }
  if (initConfigs & NetworkConfig) {
@@ -147,7 +147,7 @@ void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 
 KGameDialog::~KGameDialog()
 {
-// kDebug(11001) << "DESTRUCT KGameDialog" << this << endl;
+// kDebug(11001) << "DESTRUCT KGameDialog" << this;
  while (!d->mConfigWidgets.isEmpty())
          delete d->mConfigWidgets.takeFirst();
  delete d;
@@ -188,7 +188,7 @@ void KGameDialog::addChatWidget(KGameDialogChatConfig* chat, KVBox* parent)
 	parent = d->mGamePage;
  }
  if (!parent) {
-	kError(11001) << "cannot add chat widget without page" << endl;
+	kError(11001) << "cannot add chat widget without page";
 	return;
  }
  addConfigWidget(chat, parent);
@@ -203,7 +203,7 @@ void KGameDialog::addConnectionList(KGameDialogConnectionConfig* c, KVBox* paren
 	parent = d->mNetworkPage;
  }
  if (!parent) {
-	kError(11001) << "Cannot add connection list without page" << endl;
+	kError(11001) << "Cannot add connection list without page";
 	return;
  }
  addConfigWidget(c, parent);
@@ -224,7 +224,7 @@ KVBox *KGameDialog::configPage(ConfigOptions which)
 		box = d->mMsgServerPage;
 		break;
 	default:
-		kError(11001) << k_funcinfo << ": Parameter " << which << " not supported" << endl;
+		kError(11001) << k_funcinfo << ": Parameter" << which << "not supported";
  }
  return box;
 }
@@ -232,7 +232,7 @@ KVBox *KGameDialog::configPage(ConfigOptions which)
 KVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& title)
 {
  if (!widget) {
-	kError(11001) << "Cannot add NULL config widget" << endl;
+	kError(11001) << "Cannot add NULL config widget";
 	return 0;
  }
  KVBox* page = new KVBox();
@@ -244,26 +244,26 @@ KVBox* KGameDialog::addConfigPage(KGameDialogConfig* widget, const QString& titl
 void KGameDialog::addConfigWidget(KGameDialogConfig* widget, QWidget* parent)
 {
  if (!widget) {
-	kError(11001) << "Cannot add NULL config widget" << endl;
+	kError(11001) << "Cannot add NULL config widget";
 	return;
  }
  if (!parent) {
-	kError(11001) << "Cannot reparent to NULL widget" << endl;
+	kError(11001) << "Cannot reparent to NULL widget";
 	return;
  }
-// kDebug(11001) << "reparenting widget" << endl;
+// kDebug(11001) << "reparenting widget";
  widget->setParent(parent);
  widget->move(QPoint(0,0));
  d->mConfigWidgets.append(widget);
  connect(widget, SIGNAL(destroyed(QObject*)), this, SLOT(slotRemoveConfigWidget(QObject*)));
  if (!d->mGame) {
-	kWarning(11001) << "No game has been set!" << endl;
+	kWarning(11001) << "No game has been set!";
  } else {
 	widget->setKGame(d->mGame);
 	widget->setAdmin(d->mGame->isAdmin());
  }
  if (!d->mOwner) {
-	kWarning(11001) << "No player has been set!" << endl;
+	kWarning(11001) << "No player has been set!";
  } else {
 	widget->setOwner(d->mOwner);
  }
@@ -306,7 +306,7 @@ void KGameDialog::setOwner(KPlayer* owner)
 		d->mConfigWidgets.at(i)->setOwner(d->mOwner);
 		//TODO: hide playerName in KGameDialogGeneralConfig
 	} else {
-		kError(11001) << "NULL widget??" << endl;
+		kError(11001) << "NULL widget??";
 	}
  }
 }
@@ -341,18 +341,18 @@ void KGameDialog::slotUnsetKGame() // called when KGame is destroyed
 void KGameDialog::submitToKGame()
 {
  if (!d->mGame) {
-	kError(11001) << k_funcinfo << ": no game has been set" << endl;
+	kError(11001) << k_funcinfo << ": no game has been set";
 	return;
  }
  if (!d->mOwner) {
-	kError(11001) << k_funcinfo << ": no player has been set" << endl;
+	kError(11001) << k_funcinfo << ": no player has been set";
 	return;
  }
 
  for (int i = 0; i < d->mConfigWidgets.count(); i++) {
-// kDebug(11001) << "submit to kgame " << i << endl;
+// kDebug(11001) << "submit to kgame" << i;
 	d->mConfigWidgets.at(i)->submitToKGame(d->mGame, d->mOwner);
-// kDebug(11001) << "done: submit to kgame " << i << endl;
+// kDebug(11001) << "done: submit to kgame" << i;
  }
 }
 

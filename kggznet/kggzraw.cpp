@@ -56,11 +56,11 @@ KGGZRaw::KGGZRaw()
 
 KGGZRaw::~KGGZRaw()
 {
-	kDebug(11005) << "[raw] *destructor* net" << endl;
+	kDebug(11005) << "[raw] *destructor* net";
 	delete m_net;
-	kDebug(11005) << "[raw] *destructor* socket" << endl;
+	kDebug(11005) << "[raw] *destructor* socket";
 	delete m_socket;
-	kDebug(11005) << "[raw] *destructor* done" << endl;
+	kDebug(11005) << "[raw] *destructor* done";
 }
 
 void KGGZRaw::setFormat(Format format)
@@ -73,7 +73,7 @@ void KGGZRaw::setNetwork(int fd)
 	// Ensure this method gets called only once
 	if(m_socket)
 	{
-		kError(11005) << "[raw] setNetwork called more than once" << endl;
+		kError(11005) << "[raw] setNetwork called more than once";
 		emit signalError();
 		return;
 	}
@@ -90,7 +90,7 @@ bool KGGZRaw::ensureBytes(int bytes)
 	// Ensure that kggzraw has been initialised properly
 	if((!m_net) || (!m_socket))
 	{
-		kError(11005) << "[raw] setNetwork not called yet" << endl;
+		kError(11005) << "[raw] setNetwork not called yet";
 		emit signalError();
 		return false;
 	}
@@ -105,7 +105,7 @@ bool KGGZRaw::ensureBytes(int bytes)
 	while(m_socket->bytesAvailable() < bytes)
 	{
 		m_socket->waitForReadyRead(-1);
-		kWarning(11005) << "[raw] bytesAvailable grows to: " << m_socket->bytesAvailable() << endl;
+		kWarning(11005) << "[raw] bytesAvailable grows to:" << m_socket->bytesAvailable();
 	}
 
 	return true;
@@ -113,24 +113,24 @@ bool KGGZRaw::ensureBytes(int bytes)
 
 KGGZRaw& KGGZRaw::operator>>(qint32 &i)
 {
-	kDebug(11005) << "[raw] bytesAvailable(i32): " << m_socket->bytesAvailable() << endl;
+	kDebug(11005) << "[raw] bytesAvailable(i32):" << m_socket->bytesAvailable();
 
 	if(!ensureBytes(4)) return *this;
 	*m_net >> i;
 
-	kDebug(11005) << "[raw] i32 is: " << i << endl;
+	kDebug(11005) << "[raw] i32 is:" << i;
 
 	return *this;
 }
 
 KGGZRaw& KGGZRaw::operator>>(qint8 &i)
 {
-	kDebug(11005) << "[raw] bytesAvailable(i8): " << m_socket->bytesAvailable() << endl;
+	kDebug(11005) << "[raw] bytesAvailable(i8):" << m_socket->bytesAvailable();
 
 	if(!ensureBytes(1)) return *this;
 	*m_net >> i;
 
-	kDebug(11005) << "[raw] i8 is: " << i << endl;
+	kDebug(11005) << "[raw] i8 is:" << i;
 
 	return *this;
 }
@@ -139,7 +139,7 @@ KGGZRaw& KGGZRaw::operator>>(QString &s)
 {
 	char *tmp;
 
-	kDebug(11005) << "[raw] bytesAvailable(qstring): " << m_socket->bytesAvailable() << endl;
+	kDebug(11005) << "[raw] bytesAvailable(qstring):" << m_socket->bytesAvailable();
 
 	if(!ensureBytes(peekedStringBytes())) return *this;
 	if(m_format == QtFormat)
@@ -148,20 +148,20 @@ KGGZRaw& KGGZRaw::operator>>(QString &s)
 	}
 	else
 	{
-		kDebug(11005) << "[raw] use easysock conversion" << endl;
+		kDebug(11005) << "[raw] use easysock conversion";
 		*m_net >> tmp;
 		s = tmp;
 		delete[] tmp;
 	}
 
-	kDebug(11005) << "[raw] qstring is: " << s << endl;
+	kDebug(11005) << "[raw] qstring is:" << s;
 
 	return *this;
 }
 
 KGGZRaw& KGGZRaw::operator<<(qint32 i)
 {
-	kDebug(11005) << "[raw] out(i32): " << i << endl;
+	kDebug(11005) << "[raw] out(i32):" << i;
 
 	if(!ensureBytes(0)) return *this;
 	*m_net << i;
@@ -171,7 +171,7 @@ KGGZRaw& KGGZRaw::operator<<(qint32 i)
 
 KGGZRaw& KGGZRaw::operator<<(qint8 i)
 {
-	kDebug(11005) << "[raw] out(i8): " << i << endl;
+	kDebug(11005) << "[raw] out(i8):" << i;
 
 	if(!ensureBytes(0)) return *this;
 	*m_net << i;
@@ -181,7 +181,7 @@ KGGZRaw& KGGZRaw::operator<<(qint8 i)
 
 KGGZRaw& KGGZRaw::operator<<(QString s)
 {
-	kDebug(11005) << "[raw] out(qstring): " << s << endl;
+	kDebug(11005) << "[raw] out(qstring):" << s;
 
 	if(!ensureBytes(0)) return *this;
 	if(m_format == QtFormat)
@@ -190,7 +190,7 @@ KGGZRaw& KGGZRaw::operator<<(QString s)
 	}
 	else
 	{
-		kDebug(11005) << "[raw] use easysock conversion" << endl;
+		kDebug(11005) << "[raw] use easysock conversion";
 		*m_net << s.toUtf8().constData();
 	}
 
@@ -206,7 +206,7 @@ int KGGZRaw::peekedStringBytes()
 	QByteArray strsizear = m_socket->peek(4);
 	QDataStream strsizestream(strsizear);
 	strsizestream >> strsize;
-	kDebug(11005) << "[raw] string length is " << strsize << endl;
+	kDebug(11005) << "[raw] string length is" << strsize;
 
 	if(m_format == QtFormat)
 	{

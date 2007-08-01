@@ -57,7 +57,7 @@ void KGGZPacket::flush()
 	QDataStream packsizestream(&packsize, QIODevice::WriteOnly);
 	packsizestream << (qint16)(m_output.size() + 2);
 
-	kDebug(11005) << "<kggzpacket> flush; packsize = " << m_output.size() << endl;
+	kDebug(11005) << "<kggzpacket> flush; packsize =" << m_output.size();
 
 	m_socket->write(packsize.data(), packsize.size());
 	m_socket->write(m_output.data(), m_output.size());
@@ -74,7 +74,7 @@ void KGGZPacket::slotNetwork(int fd)
 
 	if(!m_socket)
 	{
-		kDebug(11005) << "<kggzpacket> init socket device" << endl;
+		kDebug(11005) << "<kggzpacket> init socket device";
 		m_socket = new QAbstractSocket(QAbstractSocket::TcpSocket, this);
 		m_socket->setSocketDescriptor(fd);
 	}
@@ -91,7 +91,7 @@ void KGGZPacket::slotNetwork(int fd)
 		packsizestream >> size;
 		m_size = (int)size - 2;
 		m_input.resize(m_size);
-		kDebug(11005) << "<kggzpacket> input init; packsize = 2 + " << m_size << endl;
+		kDebug(11005) << "<kggzpacket> input init; packsize = 2 + " << m_size;
 	}
 
 	len = m_socket->bytesAvailable();
@@ -101,11 +101,11 @@ void KGGZPacket::slotNetwork(int fd)
 	{
 		// Error!
 	}
-	kDebug(11005) << "<kggzpacket> input; read up to " << m_input.size() << endl;
+	kDebug(11005) << "<kggzpacket> input; read up to" << m_input.size();
 
 	if(m_input.size() == (qint64)m_size)
 	{
-		kDebug(11005) << "<kggzpacket> input done for packet; fire signal!" << endl;
+		kDebug(11005) << "<kggzpacket> input done for packet; fire signal!";
 		emit signalPacket();
 		m_input.truncate(0);
 	}

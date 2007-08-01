@@ -129,7 +129,7 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
 
 KChatBase::~KChatBase()
 {
-// kDebug(11000) << "KChatBase: DESTRUCT (" << this << ")" << endl;
+// kDebug(11000) << "KChatBase: DESTRUCT (" << this << ")";
  saveConfig();
  delete d;
 }
@@ -152,11 +152,11 @@ bool KChatBase::addSendingEntry(const QString& text, int id)
 bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 {
  if (!d->mCombo) {
-	kWarning(11000) << "KChatBase: Cannot add an entry to the combo box" << endl;
+	kWarning(11000) << "KChatBase: Cannot add an entry to the combo box";
 	return false;
  }
  if (d->mIndex2Id.indexOf(id) != -1) {
-	kError(11000) << "KChatBase: Cannot add more than one entry with the same ID! " << endl;
+	kError(11000) << "KChatBase: Cannot add more than one entry with the same ID! ";
 	kError(11000) << "KChatBase: Text="<<text<<endl;
 	return false;
  }
@@ -167,7 +167,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 	d->mIndex2Id.insert(d->mIndex2Id.at(index), id);
  }
  if (d->mIndex2Id.count() != d->mCombo->count()) {
-	kError(11000) << "KChatBase: internal ERROR - local IDs do not match combo box entries!" << endl;
+	kError(11000) << "KChatBase: internal ERROR - local IDs do not match combo box entries!";
  }
  return true;
 }
@@ -175,12 +175,12 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
 int KChatBase::sendingEntry() const
 {
  if (!d->mCombo) {
-	kWarning(11001) << "Cannot retrieve index from NULL combo box" << endl;
+	kWarning(11001) << "Cannot retrieve index from NULL combo box";
 	return -1;
  }
  int index = d->mCombo->currentIndex();
  if ( index > 0 && index <  d->mIndex2Id.size()) {
-	kWarning(11000) << "could not find the selected sending entry!" << endl;
+	kWarning(11000) << "could not find the selected sending entry!";
 	return -1;
  }
  return d->mIndex2Id[index];
@@ -189,7 +189,7 @@ int KChatBase::sendingEntry() const
 void KChatBase::removeSendingEntry(int id)
 {
  if (!d->mCombo) {
-	kWarning(11000) << "KChatBase: Cannot remove an entry from the combo box" << endl;
+	kWarning(11000) << "KChatBase: Cannot remove an entry from the combo box";
 	return;
  }
  d->mCombo->removeItem(findIndex(id));
@@ -199,7 +199,7 @@ void KChatBase::removeSendingEntry(int id)
 void KChatBase::changeSendingEntry(const QString& text, int id)
 {
  if (!d->mCombo) {
-	kWarning(11000) << "KChatBase: Cannot change an entry in the combo box" << endl;
+	kWarning(11000) << "KChatBase: Cannot change an entry in the combo box";
 	return;
  }
  int index = findIndex(id);
@@ -209,7 +209,7 @@ void KChatBase::changeSendingEntry(const QString& text, int id)
 void KChatBase::setSendingEntry(int id)
 {
  if (!d->mCombo) {
-	kWarning(11000) << "KChatBase: Cannot set an entry in the combo box" << endl;
+	kWarning(11000) << "KChatBase: Cannot set an entry in the combo box";
 	return;
  }
  d->mCombo->setCurrentIndex(findIndex(id));

@@ -70,7 +70,7 @@ minimum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
 }
 
 inline QTextStream &operator <<(QTextStream &s, const KGrid2D::Coord &c) {
-    return s << '(' << c.second << ", " << c.first << ')';
+    return s << '(' << c.second << "," << c.first << ')';
 }
 
 inline QTextStream &operator <<(QTextStream &s, const KGrid2D::CoordList &list)

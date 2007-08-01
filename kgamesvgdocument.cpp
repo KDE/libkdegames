@@ -183,7 +183,7 @@ void KGameSvgDocument::load()
 {
     if (d->m_svgFilename.isNull())
     {
-        kDebug(11000) << "KGameSvgDocument::load(): Filename not specified." << endl;
+        kDebug(11000) << "KGameSvgDocument::load(): Filename not specified.";
         return;
     }
 
@@ -204,7 +204,7 @@ void KGameSvgDocument::load()
     if (!setContent(&file))
     {
         file.close();
-        kDebug(11000) << "DOM content not set." << endl;
+        kDebug(11000) << "DOM content not set.";
         return;
     }
     file.close();
@@ -277,7 +277,7 @@ void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions
     QMatrix matrix;
     if ((xFactor == 0) || (yFactor == 0))
     {
-        kWarning () << "KGameSvgDocument::scale: You cannnot scale by zero" << endl;
+        kWarning () << "KGameSvgDocument::scale: You cannnot scale by zero";
     }
 
     if (options == ApplyToCurrentMatrix)
@@ -526,7 +526,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
     rx.setPattern(TRANSFORMS);
     if (!rx.exactMatch(transformAttribute))
     {
-        kWarning () << "Transform attribute seems to be invalid. Check your SVG file." << endl;
+        kWarning () << "Transform attribute seems to be invalid. Check your SVG file.";
         return QMatrix();
     }
 
@@ -672,7 +672,7 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, 
     if (!node.firstChild().isNull() && !node.nextSibling().isNull())
     {
         // Do Nothing
-        //kDebug(11000) << "No children or siblings." << endl;
+        //kDebug(11000) << "No children or siblings.";
     }
 
     // Matching node not found, so return a null node.
