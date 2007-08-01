@@ -70,7 +70,7 @@ void KGameSequence::setCurrentPlayer(KPlayer* player)
 
 KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
 {
- kDebug(11001) << "=================== NEXT PLAYER =========================="<<endl;
+ kDebug(11001) << "=================== NEXT PLAYER ==========================";
  if (!game())
  {
    kError() << k_funcinfo << "NULL game object";
@@ -87,7 +87,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
    lastId = 0;
  }
 
- kDebug(11001) << "nextPlayer: lastId="<<lastId<<endl;
+ kDebug(11001) << "nextPlayer: lastId="<<lastId;
 
  // remove when this has been checked
  minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...

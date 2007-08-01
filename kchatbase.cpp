@@ -157,7 +157,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
  }
  if (d->mIndex2Id.indexOf(id) != -1) {
 	kError(11000) << "KChatBase: Cannot add more than one entry with the same ID! ";
-	kError(11000) << "KChatBase: Text="<<text<<endl;
+	kError(11000) << "KChatBase: Text="<<text;
 	return false;
  }
  d->mCombo->insertItem(index, text);

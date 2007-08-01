@@ -75,7 +75,7 @@ void KPlayer::init()
 {
 // note that NO KGame object exists here! so we cannot use KGameProperty::send!
    kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)="<<sizeof(KPlayer);
-   kDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup)<<endl;
+   kDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup);
 
    d->mProperties.registerHandler(KGameMessage::IdPlayerProperty,
                                   this,SLOT(sendProperty(int, QDataStream&, bool*)),
@@ -282,7 +282,7 @@ bool KPlayer::addGameIO(KGameIO *input)
 // input=0, remove all
 bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
 {
-  kDebug(11001) << k_funcinfo << ":" << targetinput << "delete=" << deleteit<< endl;
+  kDebug(11001) << k_funcinfo << ":" << targetinput << "delete=" << deleteit;
   bool result=true;
   if (!targetinput) // delete all
   {
@@ -382,11 +382,11 @@ bool KPlayer::load(QDataStream &stream)
   stream >> cookie;
   if (cookie==KPLAYER_LOAD_COOKIE)
   {
-      kDebug(11001) << "   Player loaded propertly"<<endl;
+      kDebug(11001) << "   Player loaded propertly";
   }
   else
   {
-      kError(11001) << "   Player loading error. probably format error"<<endl;
+      kError(11001) << "   Player loading error. probably format error";
   }
 
   // emit signalLoad(stream);

@@ -147,7 +147,7 @@ int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent
 	    kDebug(11000) << "use global deck";
 	    bool random;
 	    getGlobalDeck(pDeck, random);
-	    kDebug(11000) << "use:" << pDeck<< endl;
+	    kDebug(11000) << "use:" << pDeck;
 	    if (pRandomDeck)
 	    {
 	        *pRandomDeck=random;

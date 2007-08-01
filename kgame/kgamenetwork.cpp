@@ -298,12 +298,12 @@ void KGameNetwork::disconnect()
  }
  else
  {
-   kDebug(11001) << k_funcinfo << "before client->disconnect() id="<<gameId()<< endl;
+   kDebug(11001) << k_funcinfo << "before client->disconnect() id="<<gameId();
    //d->mMessageClient->setServer((KMessageIO*)0);
-   kDebug(11001) << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl;
+   kDebug(11001) << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++";
    d->mMessageClient->disconnect();
 
-   kDebug(11001) << "++++++--------------------------------------------+++++"<<endl;
+   kDebug(11001) << "++++++--------------------------------------------+++++";
  }
  //setMaster();
  /*
@@ -321,13 +321,13 @@ void KGameNetwork::disconnect()
 
 void KGameNetwork::aboutToLoseConnection(quint32 clientID)
 {
-  kDebug(11001) << "Storing client id of connection "<<clientID<<endl;
+  kDebug(11001) << "Storing client id of connection "<<clientID;
   d->mDisconnectId = clientID;
 }
 
 void KGameNetwork::slotResetConnection()
 {
-  kDebug(11001) << "Resseting client disconnect id"<<endl;
+  kDebug(11001) << "Resseting client disconnect id";
   d->mDisconnectId = 0;
 }
 
