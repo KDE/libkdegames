@@ -245,7 +245,7 @@ public:
   {
     Q_UNUSED(isSender);
     KGamePropertyBase::command(stream, msgid);
-    //kDebug(11001) << "Array id="<<id()<<" got command ("<<msgid<<") !!!" <<endl;
+    //kDebug(11001) << "Array id="<<id()<<" got command ("<<msgid<<") !!!";
     switch(msgid)
     {
       case CmdAt:
@@ -254,7 +254,7 @@ public:
         type data;
         stream >> i >> data;
         QVector<type>::replace( i, data );
-        //kDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data <<endl;
+        //kDebug(11001) << "CmdAt:id="<<id()<<" i="<<i<<" data="<<data;
         if (isEmittingSignal())
         {
           emitSignal();
@@ -265,7 +265,7 @@ public:
       {
         uint size;
         stream >> size;
-        //kDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size <<endl;
+        //kDebug(11001) << "CmdResize:id="<<id()<<" oldsize="<<QMemArray<type>::size()<<" newsize="<<size;
         if (( uint )QVector<type>::size() != size)
         {
           QVector<type>::resize(size);
@@ -277,7 +277,7 @@ public:
         int size;
         type data;
         stream >> data >> size;
-        //kDebug(11001) << "CmdFill:id="<<id()<<"size="<<size <<endl;
+        //kDebug(11001) << "CmdFill:id="<<id()<<"size="<<size;
         QVector<type>::fill(data,size);
         if (isEmittingSignal())
         {
@@ -287,7 +287,7 @@ public:
       }
       case CmdSort:
       {
-        //kDebug(11001) << "CmdSort:id="<<id()<<endl;
+        //kDebug(11001) << "CmdSort:id="<<id();
         qSort( *this );
         break;
       }

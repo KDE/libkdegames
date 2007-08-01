@@ -192,7 +192,7 @@ public:
   void command(QDataStream &stream, int msgid, bool isSender)
   {
     KGamePropertyBase::command(stream, msgid);
-    kDebug(11001) << "---> LIST id="<<id()<<" got command ("<<msgid<<") !!!" <<endl; 
+    kDebug(11001) << "---> LIST id="<<id()<<" got command ("<<msgid<<") !!!"; 
     Iterator it;
     switch(msgid)
     {
@@ -203,7 +203,7 @@ public:
         stream >> i >> data;
         it=this->at(i);
         QList<type>::insert(it,data);
-//        kDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data <<endl; 
+//        kDebug(11001) << "CmdInsert:id="<<id()<<" i="<<i<<" data="<<data; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
@@ -222,14 +222,14 @@ public:
         stream >> i;
         it=this->at(i);
         QList<type>::remove(it);
-        kDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i <<endl; 
+        kDebug(11001) << "CmdRemove:id="<<id()<<" i="<<i; 
         if (isEmittingSignal()) emitSignal();
         break;
       }
       case CmdClear:
       {
         QList<type>::clear();
-        kDebug(11001) << "CmdClear:id="<<id()<<endl; 
+        kDebug(11001) << "CmdClear:id="<<id(); 
         if (isEmittingSignal()) emitSignal();
         break;
       }
