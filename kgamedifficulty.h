@@ -24,10 +24,33 @@ class KXmlGuiWindow;
 
 
 /**
- * @brief KGameDifficuty
+ * @brief KGameDifficuty manages the game difficulty levels in a standard way
  *
- * KGameDifficulty manages the difficulty levels of a game. It provides standard actions on the main menu.
- * This class is a singleton.
+ * KGameDifficulty manages the difficulty levels of a game. The difficulty can be a type of game (like in KMines: small field / big field) or the AI skills (like in Bovo: how deep should the computer search to find the best move) or a combination of both of them. On the user point of view, it's not realy different: either is the game easy or hard to play.
+ *
+ * KGameDifficulty provides standard actions on the main menu and a standard combo box in the status bar with the list of the difficulty levels. They both use the standard icon for "difficulty". Using KGameDifficulty instead of a custom implementation is better to provide a uniform user experience over all KDE games.
+ *
+ * It is possible to use standard difficulty levels (like "Easy", "Hard", ...) or define custom ones ("My level!"...). Using standard levels reduces the work of the translator teams and assures that the translation (for instance of "Medium") will not be different in different games (and it is better because it is uniform).
+ * In some games, it is not problem if the player changes the difficulty level during a running game. In other, it is: the current game should be given up and a new game should be started. In this case, KGameDifficulty provides a confirmation dialog so the game programmer does not have to manage this himself: he just have to tell KGameDifficulty when the game is running and when not.
+ *
+ * Code example: definition of the difficulty levels in the main window class.
+ * @code
+ * KGameDifficulty::init(this, this, SLOT(levelChanged(KGameDifficulty::standardLevel)));
+ * KGameDifficulty::addStandardLevel(KGameDifficulty::easy);
+ * KGameDifficulty::addStandardLevel(KGameDifficulty::medium);
+ * KGameDifficulty::addStandardLevel(KGameDifficulty::hard);
+ * KGameDifficulty::setRestartOnChange(KGameDifficulty::noRestartOnChange);
+ *
+ * // The default level (it should be read from the config file).
+ * KGameDifficulty::setLevel(KGameDifficulty::medium);
+ *
+ * // And you need also to define the slot "levelChanged" to manage changes.
+ * // ...
+ * @endcode
+ *
+ * Note that this class is a singleton. So you can have only one current difficulty level per application.
+ *
+ * @author Nicolas Roffet, <nicolas-kde@roffet.com>
  */
 class KDEGAMES_EXPORT KGameDifficulty
 {
