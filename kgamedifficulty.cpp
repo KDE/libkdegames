@@ -13,11 +13,11 @@ You should have received a copy of the GNU Library General Public License along 
 
 
 
-#include <QComboBox>
 #include <QMap>
 
 
 #include <kactioncollection.h>
+#include <kcombobox.h>
 #include <kicon.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -60,7 +60,7 @@ class KGameDifficultyPrivate : public QObject
 		KGameDifficulty::onChange m_restartOnChange;
 		bool m_running;
 		int m_oldSelection;
-		QComboBox* m_comboBox;
+		KComboBox* m_comboBox;
 
 
 	public Q_SLOTS:
@@ -121,7 +121,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 
 	setParent(window);
 
-	m_comboBox = new QComboBox(window);
+	m_comboBox = new KComboBox(window);
 	m_comboBox->setToolTip(i18n("Difficulty"));
 	QObject::connect(m_comboBox, SIGNAL(activated(int)), this, SLOT(changeSelection(int)));
 	window->statusBar()->addPermanentWidget(m_comboBox);
