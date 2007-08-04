@@ -225,7 +225,7 @@ KMessageProcess::~KMessageProcess()
   if (mProcess)
   {
     mProcess->kill();
-    delete mProcess;
+    mProcess->deleteLater();
     mProcess=0;
     // Maybe todo: delete mSendBuffer
   }
