@@ -131,7 +131,7 @@ void KGameCanvasWidget::ensurePendingUpdate() {
 
 void KGameCanvasWidget::updateChanges() {
   for(int i=0;i<m_items.size();i++) {
-    KGameCanvasItem *el = m_items[i];
+    KGameCanvasItem *el = m_items.at(i);
 
     if(el->m_changed)
       el->updateChanges();
@@ -180,7 +180,7 @@ void KGameCanvasWidget::paintEvent(QPaintEvent *event) {
   QRegion evreg = event->region();
 
   for(int i=0;i<m_items.size();i++) {
-    KGameCanvasItem *el = m_items[i];
+    KGameCanvasItem *el = m_items.at(i);
     if( el->m_visible && evr.intersects( el->rect() )
         && evreg.contains( el->rect() ) ) {
       el->m_last_rect = el->rect();
@@ -408,7 +408,7 @@ void KGameCanvasItem::updateAfterRestack(int from, int to)
     QRegion upd;
     for(int i=from; i!=to;i+=inc)
     {
-        KGameCanvasItem *el = m_canvas->m_items[i];
+        KGameCanvasItem *el = m_canvas->m_items.at(i);
         if(!el->m_visible)
             continue;
 
@@ -543,7 +543,7 @@ void KGameCanvasGroup::updateChanges() {
   if(!m_changed)
     return;
   for(int i=0;i<m_items.size();i++) {
-    KGameCanvasItem *el = m_items[i];
+    KGameCanvasItem *el = m_items.at(i);
 
     if(el->m_changed)
       el->updateChanges();
@@ -599,7 +599,7 @@ void KGameCanvasGroup::paintInternal(QPainter* p, const QRect& prect,
   p->translate(m_pos);
 
   for(int i=0;i<m_items.size();i++) {
-    KGameCanvasItem *el = m_items[i];
+    KGameCanvasItem *el = m_items.at(i);
     QRect r = el->rect().translated(adelta);
 
     if( el->m_visible && prect.intersects( r ) && preg.contains( r ) ) {
