@@ -45,7 +45,7 @@ class KConfig;
  * \code
  * highscore->writeEntry(1, "name", myPlayer->name());
  * \endcode
- * Note that it doesn't really matter if you use "0" or "1" as the first entry
+ * Note that it does not really matter if you use "0" or "1" as the first entry
  * of the list as long as your program always uses the same for the first
  * entry. I recommend to use "1", as several convenience methods use this.
  *
@@ -207,7 +207,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         QVariant readPropertyEntry(int entry, const QString &key, const QVariant &pDefault) const;
 
 	/**
-         * @return True if the highscore table conatins the entry/key pair,
+         * @return True if the highscore table contains the entry/key pair,
          * otherwise false
          **/
         bool hasEntry(int entry, const QString& key) const;
@@ -226,8 +226,8 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * are prefixed with the entry number
          * @param lastEntry the last entry which will be includes into the list.
          * 1 will include a list with maximal 1 entry - 20 a list with maximal
-         * 20 entries. If lastEntry is <= 0 then rading is only stopped when when an
-         * entry does not exist.
+	 * 20 entries. If lastEntry is <= 0 then rading is only stopped when
+	 * when an entry does not exist.
          **/
         QStringList readList(const QString& key, int lastEntry = 20) const;
 

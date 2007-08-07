@@ -85,7 +85,7 @@ KDEGAMES_EXPORT Score firstScore();
  * support a common highscores file; NOTE that to correctly implement such
  * feature we probably need a locking mechanism in @ref KHighscore).
  *
- * You need one instance of this class during the application lifetime ; in
+ * You need one instance of this class during the application lifetime; in
  * main() just insert 
  * \code
  *   KExtHighscore::Manager highscoresManager;
@@ -93,7 +93,7 @@ KDEGAMES_EXPORT Score firstScore();
  * with the needed arguments. Use the derived class if you need to
  * reimplement some of the default methods.
  *
- * This class has three functions :
+ * This class has three functions:
  * <ul>
  * <li> Update the highscores list when new entries are submitted </li>
  * <li> Display the highscores list and the players list </li>
@@ -104,7 +104,7 @@ KDEGAMES_EXPORT Score firstScore();
  * The highscores and the players lists contain several items described by
  * the @ref Item class.
  *
- * The highscores list contains by default :
+ * The highscores list contains by default:
  * <ul>
  * <li> the player name (automatically set from the config value)</li>
  * <li> the score value </li>
@@ -113,7 +113,7 @@ KDEGAMES_EXPORT Score firstScore();
  * You can replace the score item (for e.g. displaying it differently) with
  * setScoreItem or add an item with addScoreItem.
  *
- * The players list contains :
+ * The players list contains:
  * <ul>
  * <li> the player name (as defined by the user in the configuration
  *      dialog) </li>
@@ -135,8 +135,8 @@ KDEGAMES_EXPORT Score firstScore();
  *     KExtHighscore::submitScore(score, widget);
  * \endcode
  * You only need to set the score value with Score::setScore()
- * and the value of the items that you have optionnally added
- * with Score::setData() ; player name and date are set automatically.
+ * and the value of the items that you have optionally added
+ * with Score::setData() player name and date are set automatically.
  */
 class KDEGAMES_EXPORT Manager
 {
@@ -258,14 +258,14 @@ class KDEGAMES_EXPORT Manager
      * Replace the default score item in the highscores list by the given one.
      * @p worstScore is the worst possible score. By default it is 0.
      *
-     * Note : This method should be called at construction time.
+     * Note: This method should be called at construction time.
      */
     void setScoreItem(uint worstScore, Item *item);
 
     /**
      * Add an item in the highscores list (it will add a column to this list).
      *
-     * Note : This method should be called at construction time.
+     * Note: This method should be called at construction time.
      */
     void addScoreItem(const QString &name, Item *item);
 
@@ -273,7 +273,7 @@ class KDEGAMES_EXPORT Manager
     /**
      * Replace an item in the players list.
      *
-     * Note : This method should be called at construction time.
+     * Note: This method should be called at construction time.
      */
     void setPlayerItem(PlayerItemType type, Item *item);
 
@@ -299,7 +299,7 @@ class KDEGAMES_EXPORT Manager
 
     /**
      * @return the label corresponding to the game type. The default
-     * implementation works only for one game type : you need to reimplement
+     * implementation works only for one game type: you need to reimplement
      * this method if the number of game types is more than one.
      */
     virtual QString gameTypeLabel(uint gameType, LabelType type) const;
@@ -316,7 +316,7 @@ class KDEGAMES_EXPORT Manager
 
     /**
      * This method should be called from @ref convertLegacy. It is used
-     * to submit an old highscore (it will not be send over the network).
+     * to submit an old highscore (it will not be sent over the network).
      * For each score do something like:
      * \code
      * Score score(Won);
