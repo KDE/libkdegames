@@ -122,8 +122,13 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     d->tabWidget->setTabPosition(QTabWidget::West);
     
     setMainWidget(d->tabWidget);
-    
-    connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
+    if(d->newName.second == -1)
+      setButtons(Close);
+    else
+    {
+       setButtons(Ok|Cancel);
+       connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
+    }
 }
 
 KScoreDialog::~KScoreDialog()
