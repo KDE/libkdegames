@@ -127,7 +127,9 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
                 pAction->setToolTip(i18n(pInfo->psToolTip));
         if (pInfo->psWhatsThis)
                 pAction->setWhatsThis(i18n(pInfo->psWhatsThis));
-        
+        else if (pInfo->psToolTip)
+                pAction->setWhatsThis(i18n(pInfo->psToolTip));
+
         pAction->setObjectName(pInfo->psName);
     }
 
