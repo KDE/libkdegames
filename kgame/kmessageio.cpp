@@ -236,6 +236,8 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   kDebug(11001) << "@@@KMessageProcess::Start process";
   mProcessName=file;
   mProcess=new KProcess;
+  // Need both stdout and stderr as separate channels in the communication
+  mProcess-> setOutputChannelMode(KProcess::SeparateChannels);
   int id=0;
   *mProcess << mProcessName << QString("%1").arg(id);
   kDebug(11001) << "@@@KMessageProcess::Init:Id=" << id;
@@ -256,6 +258,8 @@ bool KMessageProcess::isConnected() const
      return false;
   return (mProcess->state() == QProcess::Running);
 }
+
+// Send to process
 void KMessageProcess::send(const QByteArray &msg)
 {
   kDebug(11001) << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process";
@@ -305,8 +309,10 @@ void KMessageProcess::slotReceivedStdout()
   QByteArray ba = mProcess->readAll();
   kDebug(11001) << "$$$$$$ " << k_funcinfo << ": Received" << ba.size() << "bytes over inter process communication";
 
-  // TODO Make a plausibility check on buflen to avoid memory overflow
-  mReceiveBuffer += ba;
+  // Resize receive buffer
+  while (mReceiveCount+ba.size()>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
+  // was 08/2007: mReceiveBuffer += ba;
+  qCopy(ba.begin(), ba.begin()+ba.size(), mReceiveBuffer.begin()+mReceiveCount);
   mReceiveCount += ba.size();
 
   // Possbile message
@@ -318,7 +324,6 @@ void KMessageProcess::slotReceivedStdout()
     if (*p1!=0x4242aeae)
     {
       kDebug(11001) << k_funcinfo << ": Cookie error...transmission failure...serious problem...";
-//      for (int i=0;i<mReceiveCount;i++) fprintf(stderr,"%02x ",mReceiveBuffer[i]);fprintf(stderr,"\n");
     }
     len=(int)(*p2);
     if (len<int(2*sizeof(long)))
@@ -376,6 +381,7 @@ bool KMessageFilePipe::isConnected () const
   return (mReadFile!=0)&&(mWriteFile!=0);
 }
 
+// Send to parent
 void KMessageFilePipe::send(const QByteArray &msg)
 {
   unsigned int size=msg.size()+2*sizeof(long);
@@ -391,11 +397,14 @@ void KMessageFilePipe::send(const QByteArray &msg)
   mWriteFile->write(buffer);
   mWriteFile->flush();
   delete [] tmpbuffer;
-  /*
+
+  /* DEBUG:
   fprintf(stderr,"+++ KMessageFilePipe:: SEND(%d to parent) realsize=%d\n",msg.size(),buffer.size());
-  for (int i=0;i<buffer.size();i++) fprintf(stderr,"%02x ",buffer[i]);fprintf(stderr,"\n");
+  for (int i=0;i<buffer.size();i++) fprintf(stderr,"%02x ",(unsigned char)buffer.at(i));fprintf(stderr,"\n");
   fflush(stderr);
   */
+ 
+
 }
 
 void KMessageFilePipe::exec()

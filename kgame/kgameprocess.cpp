@@ -71,10 +71,11 @@ KGameProcess::~KGameProcess()
   delete d->mRandom;
   //delete mMessageClient;
   //delete mMessageServer;
+  fprintf(stderr,"KGameProcess::destructor\n");
+  fflush(stderr);
   delete mMessageIO;
   d->rFile.close();
   d->wFile.close();
-  fprintf(stderr,"KGameProcess::destructor\n");
   delete d;
 }
 
@@ -96,7 +97,7 @@ bool KGameProcess::exec(int argc, char *argv[])
 //    then stream data into the stream and call this function
 void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,quint32 receiver)
 {
-  fprintf(stderr,"KGameProcess::sendMessage id=%d recv=%d",msgid,receiver);
+  fprintf(stderr,"KGameProcess::sendSystemMessage to parent id=%d recv=%ld\n",msgid,(unsigned long)receiver);
   QByteArray a;
   QDataStream outstream(&a,QIODevice::WriteOnly);
 
@@ -106,11 +107,9 @@ void KGameProcess::sendSystemMessage(QDataStream &stream,int msgid,quint32 recei
   KGameMessage::createHeader(outstream,0,receiver,msgid);
   outstream.writeRawData(data.data(),data.size());
 
-  //if (mMessageClient) mMessageClient->sendBroadcast(a);
-  // TODO: The fixed received 2 will cause problems. But how to address the
-  // proper one?
-//  if (mMessageClient) mMessageClient->sendForward(a,2);
+  //  if (mMessageClient) mMessageClient->sendForward(a,2);
   if (mMessageIO) mMessageIO->send(a);
+  else fprintf(stderr,"KGameProcess::sendSystemMessage:: NO IO DEVICE ... WILL FAIL\n");
 }
 
 void KGameProcess::sendMessage(QDataStream &stream,int msgid,quint32 receiver)
@@ -131,7 +130,7 @@ void KGameProcess::processArgs(int argc, char *argv[])
     v=atoi(argv[1]);
     //kDebug(11001) << "id (unused) " << v;
   }
-  fprintf(stderr,"processArgs \n");
+  fprintf(stderr,"KGameProcess::processArgs \n");
   fflush(stderr);
 }
 
@@ -142,7 +141,8 @@ void KGameProcess::receivedMessage(const QByteArray& receiveBuffer)
  quint32 sender; 
  quint32 receiver; 
  KGameMessage::extractHeader(stream, sender, receiver, msgid);
- fprintf(stderr,"------ receiveNetworkTransmission(): id=%d sender=%d,recv=%d\n",msgid,sender,receiver);
+ fprintf(stderr,"--- KGameProcess::receivedMessage(): id=%d sender=%ld,recv=%ld\n",
+         msgid,(unsigned long)sender,(unsigned long)receiver);
  switch(msgid)
  {
    case KGameMessage::IdTurn:
