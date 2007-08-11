@@ -96,7 +96,7 @@ public:
      * game in load/save and network operations. Change this between
      * games.
      */
-    KGame(int cookie=42,QObject* parent=0);
+    explicit KGame(int cookie=42,QObject* parent=0);
 
     /**
     * Destructs the game

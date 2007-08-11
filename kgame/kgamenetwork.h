@@ -48,7 +48,7 @@ public:
     /**
      * Create a KGameNetwork object
      */
-    KGameNetwork(int cookie=42,QObject* parent=0);
+    explicit KGameNetwork(int cookie=42,QObject* parent=0);
     virtual ~KGameNetwork();
 
     /**

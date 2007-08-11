@@ -76,7 +76,7 @@ public:
        * Create a new player object. It will be automatically
        * deleted if the game it belongs to is deleted.
        */
-      KPlayer();
+      explicit KPlayer();
 
       virtual ~KPlayer();
 

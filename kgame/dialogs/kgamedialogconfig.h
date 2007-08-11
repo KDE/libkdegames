@@ -158,7 +158,7 @@ public:
 	 * will exist anymore.
 	 *
 	 **/
-	KGameDialogGeneralConfig(QWidget* parent = 0, bool initializeGUI = true);
+        explicit KGameDialogGeneralConfig(QWidget* parent = 0, bool initializeGUI = true);
 	virtual ~KGameDialogGeneralConfig();
 
 	/**

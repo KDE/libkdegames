@@ -191,8 +191,8 @@ public:
      * @param title is the content of the top label.
      * @param parent passed to the QWidget constructor.
      */
-    KGameLCDList(const QString &title,
-                 QWidget *parent = 0);
+    explicit KGameLCDList(const QString &title,
+                          QWidget *parent = 0);
     /**
      * Constructor. Create a KGameLCDList with an empty top label.
      *

@@ -200,7 +200,7 @@ public:
     together with this KMessageSocket object. (Use 0 as parent for the QSocket
     object t ensure it is not deleted.)
   */
-  KMessageSocket (QTcpSocket *socket, QObject *parent = 0);
+  explicit KMessageSocket (QTcpSocket *socket, QObject *parent = 0);
 
   /**
     Uses the socket specified by the socket descriptor socketFD to do the
@@ -213,7 +213,7 @@ public:
     manipulate the socket afterwards, especially don't close it. The socket is
     automatically closed when KMessageSocket is deleted.
   */
-  KMessageSocket (int socketFD, QObject *parent = 0);
+  explicit KMessageSocket (int socketFD, QObject *parent = 0);
 
   /**
     Destructor, closes the socket.
@@ -296,7 +296,7 @@ public:
 
     If that object is already connected, the object remains unconnected.
   */
-  KMessageDirect (KMessageDirect *partner = 0, QObject *parent = 0);
+  explicit KMessageDirect (KMessageDirect *partner = 0, QObject *parent = 0);
 
   /**
     Destructor, closes the connection.

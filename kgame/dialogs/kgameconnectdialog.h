@@ -116,7 +116,7 @@ class KGameConnectDialog : public KDialog
 {
 	Q_OBJECT
 public:
-	KGameConnectDialog(QWidget* parent = 0,ButtonCodes buttonmask=Ok|Cancel);
+	explicit KGameConnectDialog(QWidget* parent = 0,ButtonCodes buttonmask=Ok|Cancel);
 	virtual ~KGameConnectDialog();
 	
 	/**

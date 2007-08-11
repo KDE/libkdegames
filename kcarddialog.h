@@ -125,7 +125,7 @@ public:
    * @param parent The parent widget of the dialog, if any.
    * @param flags Specifies whether the dialog is modal or not.
    */
-   KCardDialog (QWidget* parent = NULL, CardFlags flags = Both);
+   explicit KCardDialog (QWidget* parent = NULL, CardFlags flags = Both);
    /**
    * Destructs a card deck selection dialog.
    */
