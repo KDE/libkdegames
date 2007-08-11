@@ -551,7 +551,8 @@ KCardDialog::~KCardDialog()
 
 // Create the dialog
 KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
-    : KDialog( parent)
+    : KDialog( parent ),
+    d( new KCardDialogPrivate )
 {
 	setCaption(i18n("Carddeck Selection"));
 	setButtons(Ok|Cancel);
@@ -560,7 +561,6 @@ KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
 	showButtonSeparator(true);
     KCardDialog::init();
 
-    d = new KCardDialogPrivate;
     d->cFlags = mFlags;
 }
 

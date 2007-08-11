@@ -54,18 +54,24 @@ public:
 	int mToMyGroup; // just as the above - but for the group, not for players
 };
 
-KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate) : KChatBase(parent, model, delegate)
+KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate)
+    : KChatBase(parent, model, delegate),
+      d( new KGameChatPrivate )
 {
  init(g, msgid); 
 }
 
-KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate) : KChatBase(parent,model,delegate)
+KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate)
+    : KChatBase(parent,model,delegate),
+      d( new KGameChatPrivate )
 {
  init(g, msgid);
  setFromPlayer(fromPlayer);
 }
 
-KGameChat::KGameChat(QWidget* parent) : KChatBase(parent)
+KGameChat::KGameChat(QWidget* parent)
+    : KChatBase(parent),
+      d( new KGameChatPrivate )
 {
  init(0, -1);
 }
@@ -79,7 +85,6 @@ KGameChat::~KGameChat()
 void KGameChat::init(KGame* g, int msgId)
 {
  kDebug(11001) << k_funcinfo;
- d = new KGameChatPrivate;
  setMessageId(msgId);
 
  setKGame(g);

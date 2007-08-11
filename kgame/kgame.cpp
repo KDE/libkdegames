@@ -79,10 +79,11 @@ public:
 };
 
 // ------------------- GAME CLASS --------------------------
-KGame::KGame(int cookie,QObject* parent) : KGameNetwork(cookie,parent)
+KGame::KGame(int cookie,QObject* parent) 
+    : KGameNetwork(cookie,parent),
+      d( new KGamePrivate )
 {
  kDebug(11001) << k_funcinfo << " - " << this << ", sizeof(KGame)=" << sizeof(KGame);
- d = new KGamePrivate;
 
  d->mProperties = new KGamePropertyHandler(this);
 

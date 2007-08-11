@@ -142,7 +142,7 @@ private:
 	void initMessagePage();
 
 private:
-	KGameDebugDialogPrivate* d;
+	KGameDebugDialogPrivate* const d;
 };
 
 

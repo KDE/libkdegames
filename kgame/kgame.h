@@ -921,7 +921,7 @@ private:
 
 
 private:
-    KGamePrivate* d;
+    KGamePrivate* const d;
 };
 
 #endif

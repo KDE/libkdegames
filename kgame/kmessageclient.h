@@ -414,7 +414,7 @@ protected Q_SLOTS:
   void removeBrokenConnection2 ();
 
 private:
-  KMessageClientPrivate *d;
+  KMessageClientPrivate * const d;
 };
 
 #endif

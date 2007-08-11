@@ -68,19 +68,22 @@ public:
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 		QWidget* parent, bool modal)
-	: KPageDialog(parent)
+    : KPageDialog(parent),
+      d( new KGameDialogPrivate )
 {
 	setCaption(title);
 	setButtons(Ok|Default|Apply); 
 	setDefaultButton(Ok);
 	setFaceType(KPageDialog::Tabbed);
 	setModal(modal);
- init(g, owner);
+
+        init(g, owner);
 }
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
 		QWidget* parent, long initConfigs, int chatMsgId, bool modal)
-	: KPageDialog(parent)
+    : KPageDialog(parent),
+      d( new KGameDialogPrivate )
 {
     setCaption(title);
     setButtons(Ok|Default|Apply);
@@ -101,7 +104,6 @@ void KGameDialog::init(KGame* g, KPlayer* owner)
 //AB: do we need a "Cancel" Button? currently removed
 
 // kDebug(11001) << k_funcinfo << ": this=" << this;
- d = new KGameDialogPrivate;
 
  setOwner(owner);
  setKGame(g);

@@ -139,7 +139,7 @@ protected:
 private:
 	void init();
 
-	KChatPrivate* d;
+	KChatPrivate* const d;
 };
 
 #endif

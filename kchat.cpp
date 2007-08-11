@@ -41,9 +41,11 @@ public:
 	int mFromId;
 };
 
-KChat::KChat(QWidget* parent, bool twoPlayerGame) : KChatBase(parent, 
-    new KChatBaseModel(parent),
-    new KChatBaseItemDelegate(parent),twoPlayerGame)
+KChat::KChat(QWidget* parent, bool twoPlayerGame) 
+    : KChatBase(parent, 
+                new KChatBaseModel(parent),
+                new KChatBaseItemDelegate(parent),twoPlayerGame),
+      d( new KChatPrivate )
 {
  init(); 
 }
@@ -57,7 +59,6 @@ KChat::~KChat()
 void KChat::init()
 {
  kDebug(11001) << "INIT KChat" << this;
- d = new KChatPrivate;
  d->mAutoAddMessages = true;
  d->mPlayerId = 1;
  d->mFromId = 1;

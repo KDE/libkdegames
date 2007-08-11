@@ -114,7 +114,7 @@ private:
 	void init();
 
 private:
-	KChatDialogPrivate* d;
+	KChatDialogPrivate* const d;
 };
 
 #endif

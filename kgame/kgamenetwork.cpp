@@ -58,9 +58,10 @@ public:
 };
 
 // ------------------- NETWORK GAME ------------------------
-KGameNetwork::KGameNetwork(int c, QObject* parent) : QObject(parent)
+KGameNetwork::KGameNetwork(int c, QObject* parent) 
+    : QObject(parent),
+      d( new KGameNetworkPrivate )
 {
- d = new KGameNetworkPrivate;
  d->mCookie = (qint16)c;
 
  // Init the game as a local game, i.e.

@@ -123,8 +123,9 @@ public:
 	KListWidget* mHideIdList;
 };
 
-KGameDebugDialog::KGameDebugDialog(KGame* g, QWidget* parent, bool modal) :
-		KPageDialog(parent)
+KGameDebugDialog::KGameDebugDialog(KGame* g, QWidget* parent, bool modal)
+    : KPageDialog(parent),
+      d( new KGameDebugDialogPrivate )
 {
  setCaption(i18n("KGame Debug Dialog"));
  setButtons(Close);
@@ -132,7 +133,6 @@ KGameDebugDialog::KGameDebugDialog(KGame* g, QWidget* parent, bool modal) :
  setModal(modal);
  showButtonSeparator(true);
  setFaceType(KPageDialog::Tabbed);
- d = new KGameDebugDialogPrivate;
 
  initGamePage();
  initPlayerPage();

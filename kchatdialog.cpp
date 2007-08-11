@@ -58,7 +58,8 @@ class KChatDialogPrivate
 };
 
 KChatDialog::KChatDialog(KChatBase* chat, QWidget* parent, bool modal) 
-	: KDialog(parent)
+    : KDialog(parent),
+      d( new KChatDialogPrivate )
 {
  setCaption(i18n("Configure Chat"));
  setButtons(Ok|Default|Apply|Cancel);
@@ -68,7 +69,8 @@ KChatDialog::KChatDialog(KChatBase* chat, QWidget* parent, bool modal)
 }
 
 KChatDialog::KChatDialog(QWidget* parent, bool modal) 
-	: KDialog(parent)
+    : KDialog(parent),
+      d( new KChatDialogPrivate )
 {
  setCaption(i18n("Configure Chat"));
  setButtons(Ok|Default|Apply|Cancel);
@@ -84,7 +86,6 @@ KChatDialog::~KChatDialog()
 
 void KChatDialog::init()
 {
- d = new KChatDialogPrivate;
  d->mTextPage = new QFrame( this );
  setMainWidget( d->mTextPage );
  QGridLayout* layout = new QGridLayout(d->mTextPage);

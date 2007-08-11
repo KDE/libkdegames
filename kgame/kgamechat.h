@@ -215,7 +215,7 @@ private:
 	void init(KGame* g, int msgid);
 
 private:
-	KGameChatPrivate* d;
+	KGameChatPrivate* const d;
 };
 
 #endif

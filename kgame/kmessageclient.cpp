@@ -50,9 +50,9 @@ public:
 };
 
 KMessageClient::KMessageClient (QObject *parent)
-  : QObject (parent)
+    : QObject (parent),
+      d( new KMessageClientPrivate )
 {
-  d = new KMessageClientPrivate ();
   d->isLocked = false;
 }
 

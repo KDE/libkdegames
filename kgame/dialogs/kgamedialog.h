@@ -315,7 +315,7 @@ private:
 	void init(KGame*, KPlayer*);
 
 private:
-	KGameDialogPrivate* d;
+	KGameDialogPrivate* const d;
 };
 
 #endif

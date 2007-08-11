@@ -382,7 +382,7 @@ protected Q_SLOTS:
 private:
    static void init();
 
-   KCardDialogPrivate* d;
+   KCardDialogPrivate* const d;
 };
 
 #endif

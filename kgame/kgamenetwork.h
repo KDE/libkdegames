@@ -410,7 +410,7 @@ protected Q_SLOTS:
 private:
      void tryPublish();
      void tryStopPublishing();
-     KGameNetworkPrivate* d;
+     KGameNetworkPrivate* const d;
 };
 
 #endif

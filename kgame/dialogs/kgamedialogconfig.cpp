@@ -56,9 +56,10 @@ public:
 	KPlayer* mOwner;
 };
 
-KGameDialogConfig::KGameDialogConfig(QWidget* parent) : QWidget(parent)
+KGameDialogConfig::KGameDialogConfig(QWidget* parent) 
+    : QWidget( parent ),
+      d( new KGameDialogConfigPrivate )
 {
- d = new KGameDialogConfigPrivate;
 }
 
 KGameDialogConfig::~KGameDialogConfig()

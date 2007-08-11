@@ -255,7 +255,7 @@ private Q_SLOTS:
 
 private:
   class KGameProgressPrivate;
-  KGameProgressPrivate *d;
+  KGameProgressPrivate * const d;
 };
 
 

@@ -127,7 +127,7 @@ public:
 protected:
 
 private:
-	KGameDialogConfigPrivate* d;
+	KGameDialogConfigPrivate* const d;
 };
 
 /**
