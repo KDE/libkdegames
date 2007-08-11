@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KGGZNET_PACKET_H
-#define KGGZNET_PACKET_H
+#ifndef KGGZPACKET_H
+#define KGGZPACKET_H
 
 #include <QtCore/QObject>
 #include <QtCore/QDataStream>

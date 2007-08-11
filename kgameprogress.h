@@ -21,8 +21,8 @@
 *                                                                            *
 *****************************************************************************/
 
-#ifndef _KPROGRES_H
-#define _KPROGRES_H
+#ifndef _KGAMEPROGRESS_H
+#define _KGAMEPROGRESS_H
 
 #include <QtGui/QFrame>
 #include <libkdegames_export.h>

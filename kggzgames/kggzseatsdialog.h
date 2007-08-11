@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KGGZGAMES_SEATSDIALOG_H
-#define KGGZGAMES_SEATSDIALOG_H
+#ifndef KGGZSEATSDIALOG_H
+#define KGGZSEATSDIALOG_H
 
 #include <kggzmod/event.h>
 

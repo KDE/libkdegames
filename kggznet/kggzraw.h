@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KGGZNET_RAW_H
-#define KGGZNET_RAW_H
+#ifndef KGGZRAW_H
+#define KGGZRAW_H
 
 #include <QtCore/QObject>
 

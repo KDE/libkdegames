@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KGAMEMSG_H_
-#define __KGAMEMSG_H_
+#ifndef __KGAMEMESSAGE_H_
+#define __KGAMEMESSAGE_H_
 
 #include <QtCore/QDataStream>
 #include <libkdegames_export.h>
