@@ -156,7 +156,7 @@ namespace KStandardGameAction
 
     /**
      * Print current game.
-     * Not usefull in all games.
+     * Not useful in all games.
      */
     KDEGAMES_EXPORT KAction *print(const QObject *recvr, const char *slot,
                           QObject *parent );
