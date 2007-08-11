@@ -495,7 +495,7 @@ void KGameCanvasItem::stackUnder(KGameCanvasItem* ref)
         updateAfterRestack(old_pos, i);
 }
 
-void KGameCanvasItem::moveTo(QPoint newpos)
+void KGameCanvasItem::moveTo(const QPoint &newpos)
 {
   if(m_pos == newpos)
     return;

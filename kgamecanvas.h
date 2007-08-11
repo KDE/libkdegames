@@ -202,7 +202,7 @@ public:
     /** Sets a new position. Note that an update will be posted to the parent
         canvas, and if you move an item twice in very little time, a region
         bigger than needed will be updated, causing a possible inefficiency */
-    void moveTo(QPoint newpos);
+    void moveTo(const QPoint &newpos);
 
     /** Overload, same as above */
     void moveTo(int x, int y) { moveTo( QPoint(x,y)); }
