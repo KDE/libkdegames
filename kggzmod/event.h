@@ -70,7 +70,8 @@ class KGGZMOD_EXPORT Event
 			seat,	/**< Someone's seat changed. */
 			chat,	/**< A chat message was received */
 			stats,	/**< Statistics have been received for a player. */
-			info	/**< Information about a player has arrived. */
+			info,	/**< Information about a player has arrived. */
+			rankings /**< Experimental: Rankings information for this game/room */
 		};
 
 		/**
@@ -242,6 +243,29 @@ class InfoEvent : public Event
 	public:
 		InfoEvent(const Event& event);
 		Player *player() const;
+};
+
+/**
+ * @short Rankings information for this game/room.
+ *
+ * After a game has been played, the statistics usually
+ * change regarding player placements, highscores, ratings
+ * and wins/losses. This event can be requested during the
+ * game to report on the current statistics, and it will
+ * arrive automatically at the end of the game to report
+ * on the new one.
+ *
+ * Refer to the \ref Event documentation for everything else.
+ *
+ * @author Josef Spillner (josef@ggzgamingzone.org)
+ */
+class KGGZMOD_EXPORT RankingsEvent : public Event
+{
+	public:
+		RankingsEvent(const Event& event);
+		int count() const;
+		QString name(int i) const;
+		int score(int i) const;
 };
 
 }

@@ -46,7 +46,8 @@ class ModulePrivate : public QObject
 			msgspectatorseat = 5,
 			msgchat = 6,
 			msgstats = 7,
-			msginfo = 8
+			msginfo = 8,
+			msgrankings = 9
 		};
 
 		void connect();
@@ -55,7 +56,7 @@ class ModulePrivate : public QObject
 		void insertPlayer(Player::Type seattype, const QString &name, int seat);
 		Player *findPlayer(Player::Type seattype, const QString &name);
 		Player *self() const;
-		QString opcodeString(int opcode);
+		QString opcodeString(GGZEvents opcode);
 		QString requestString(Request::Type requestcode);
 
 		QString m_name;

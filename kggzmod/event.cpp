@@ -114,3 +114,26 @@ Player *InfoEvent::player() const
 	return m_player;
 }
 
+RankingsEvent::RankingsEvent(const Event& event) : Event(Event::rankings)
+{
+	data = event.data;
+}
+
+int RankingsEvent::count() const
+{
+	QString num = data["num"];
+	return num.toInt();
+}
+
+QString RankingsEvent::name(int i) const
+{
+	QString name = data["name" + QString::number(i)];
+	return name;
+}
+
+int RankingsEvent::score(int i) const
+{
+	QString score = data["score" + QString::number(i)];
+	return score.toInt();
+}
+

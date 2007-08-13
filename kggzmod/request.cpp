@@ -85,3 +85,8 @@ InfoRequest::InfoRequest()
 	data["seat"] = QString::number(-1);
 }
 
+RankingsRequest::RankingsRequest()
+: Request(Request::rankings)
+{
+}
+

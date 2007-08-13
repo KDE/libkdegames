@@ -62,7 +62,8 @@ class KGGZMOD_EXPORT Request
 			bot,	/**< Let a bot join the game. */
 			open,	/**< Open up a bot seat. */
 			chat,	/**< Send a chat message. */
-			info	/**< Request infos about a player. */
+			info,	/**< Request infos about a player. */
+			rankings /**< Top player rankings for this game. */
 		};
 
 		/**
@@ -228,6 +229,26 @@ class KGGZMOD_EXPORT InfoRequest : public Request
 	public:
 		InfoRequest(int seat);
 		InfoRequest();
+};
+
+/**
+ * @short Rankings request to the GGZ core client.
+ *
+ * A rankings request delivers the top-N players (where N
+ * is determined by the GGZ server) for the current game
+ * type. The resulting RankingsEvent is similar to a StatsEvent
+ * except that it is triggered by the game client and it
+ * references players which are not necessarily on the
+ * current table.
+ *
+ * Refer to the \ref Request documentation for everything else.
+ *
+ * @author Josef Spillner (josef@ggzgamingzone.org)
+ */
+class KGGZMOD_EXPORT RankingsRequest : public Request
+{
+	public:
+		RankingsRequest();
 };
 
 }

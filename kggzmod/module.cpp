@@ -153,6 +153,10 @@ void ModulePrivate::sendRequest(Request request)
 		*m_net << opcode;
 		*m_net << request.data["seat"].toInt();
 	}
+	if(opcode == Request::rankings)
+	{
+		*m_net << opcode;
+	}
 }
 
 QString ModulePrivate::requestString(Request::Type requestcode)
@@ -168,6 +172,7 @@ QString ModulePrivate::requestString(Request::Type requestcode)
 	requestcodes[Request::open] = "Request::open";
 	requestcodes[Request::chat] = "Request::chat";
 	requestcodes[Request::info] = "Request::info";
+	requestcodes[Request::rankings] = "Request::rankings";
 
 	if(requestcodes.contains(requestcode))
 	{
@@ -183,10 +188,10 @@ QString ModulePrivate::requestString(Request::Type requestcode)
 	return str;
 }
 
-QString ModulePrivate::opcodeString(int opcode)
+QString ModulePrivate::opcodeString(GGZEvents opcode)
 {
 	QString str;
-	QMap<int, QString> opcodes;
+	QMap<GGZEvents, QString> opcodes;
 
 	opcodes[msglaunch] = "msglaunch";
 	opcodes[msgserver] = "msgserver";
@@ -197,6 +202,7 @@ QString ModulePrivate::opcodeString(int opcode)
 	opcodes[msgchat] = "msgchat";
 	opcodes[msgstats] = "msgstats";
 	opcodes[msginfo] = "msginfo";
+	opcodes[msgrankings] = "msgrankings";
 
 	if(opcodes.contains(opcode))
 	{
@@ -214,7 +220,8 @@ QString ModulePrivate::opcodeString(int opcode)
 
 void ModulePrivate::slotGGZEvent()
 {
-	int opcode, ret;
+	int opcodetmp, ret;
+	GGZEvents opcode;
 	QString _host;
 	int _port;
 	QString _player, _message;
@@ -228,11 +235,12 @@ void ModulePrivate::slotGGZEvent()
 	QList<Player*>::Iterator it;
 
 	kDebug(11003) << "[kggzmod] debug: input from GGZ has arrived";
-	*m_net >> opcode;
+	*m_net >> opcodetmp;
+	opcode = (GGZEvents)opcodetmp;
 
 	kDebug(11003) << "[kggzmod] info: got GGZ input" << opcodeString(opcode);
 
-	if((opcode < msglaunch) || (opcode > msginfo))
+	if((opcode < msglaunch) || (opcode > msgrankings))
 	{
 		kDebug(11003) << "[kggzmod] error: unknown opcode";
 		disconnect();
@@ -435,6 +443,27 @@ void ModulePrivate::slotGGZEvent()
 					break;
 				}
 			}
+		}
+
+		emit signalEvent(e);
+	}
+	if(opcode == msgrankings)
+	{
+		Event e(Event::rankings);
+		kDebug(11003) << "[kggzmod] debug: rankings message" << endl;
+
+		*m_net >> _num;
+		e.data["num"] = QString::number(_num);
+
+		for(int i = 0; i < _num; i++)
+		{
+			kDebug(11003) << " ~~rankings: iterate~~ " << i << endl;
+			*m_net >> _realname;
+			*m_net >> _ranking;
+			*m_net >> _highscore;
+			e.data["name" + QString::number(i)] = _realname;
+			e.data["position" + QString::number(i)] = QString::number(_ranking);
+			e.data["score" + QString::number(i)] = QString::number(_highscore);
 		}
 
 		emit signalEvent(e);
