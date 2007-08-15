@@ -95,7 +95,7 @@ public:
   /**
     @return The list of the IDs of all the message clients connected to the message server.
   */
-  const QList <quint32> &clientList() const;
+  QList <quint32> clientList() const;
 
   /**
     Connects the client to (another) server.

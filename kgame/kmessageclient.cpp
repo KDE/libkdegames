@@ -111,7 +111,7 @@ quint32 KMessageClient::adminId () const
   return d->adminID;
 }
 
-const QList <quint32> &KMessageClient::clientList() const
+QList <quint32> KMessageClient::clientList() const
 {
   return d->clientList;
 }

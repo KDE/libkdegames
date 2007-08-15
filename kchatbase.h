@@ -225,7 +225,7 @@ public:
 	 * layoutMessage you should do this yourself.
 	 * @return The font that is used for the name part of the message.
 	 **/
-	const QFont& nameFont() const;
+	QFont nameFont() const;
 
 	/**
 	 * This font should be used for a message. layoutMessage sets the
@@ -234,19 +234,19 @@ public:
 	 * messageFont() yourself.
 	 * @return The font that is used for a message
 	 **/
-	const QFont& messageFont() const;
+	QFont messageFont() const;
 
 	/**
 	 * Same as systemNameFont but applies only to system messages.
 	 * @see layoutSystemMessage
 	 **/
-	const QFont& systemNameFont() const;
+	QFont systemNameFont() const;
 
 	/**
 	 * Same as systemMessageFont but applies only to system messages.
 	 * @see layoutSystemMessage
 	 **/
-	const QFont& systemMessageFont() const;
+	QFont systemMessageFont() const;
 
 	/**
 	 * Save the configuration of the dialog to a KConfig object. If

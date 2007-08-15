@@ -294,23 +294,22 @@ int KChatBase::maxItems() const
   return d->mModel->maxItems(); 
 }
 
-
-const QFont& KChatBase::nameFont() const
+QFont KChatBase::nameFont() const
 {
   return d->mModel->nameFont();
 }
 
-const QFont& KChatBase::messageFont() const
+QFont KChatBase::messageFont() const
 {
   return d->mModel->messageFont();
 }
 
-const QFont& KChatBase::systemNameFont() const
+QFont KChatBase::systemNameFont() const
 {
   return d->mModel->systemNameFont();
 }
 
-const QFont& KChatBase::systemMessageFont() const
+QFont KChatBase::systemMessageFont() const
 {
   return d->mModel->systemMessageFont();
 }
