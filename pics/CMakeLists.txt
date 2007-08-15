@@ -11,9 +11,3 @@ kde4_install_icons( ${ICON_INSTALL_DIR}   )
 
 
 
-#original Makefile.am contents follow:
-
-#picsdir = $(kde_datadir)/kdegames/pics
-#pics_DATA = star.png
-#
-#KDE_ICON = action-roll action-highscore action-endturn
