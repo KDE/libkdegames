@@ -594,7 +594,7 @@ QString KCardDialog::getDeckName(const QString &desktop)
     // rather theoretical
     if (KStandardDirs::exists(entry + QString::fromLatin1(".xpm")))
         return entry + QString::fromLatin1(".xpm");
-    return QString::null;
+    return QString();
 }
 
 QString KCardDialog::getRandomDeck()
@@ -603,7 +603,7 @@ QString KCardDialog::getRandomDeck()
 
     QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop");
     if (list.isEmpty())
-        return QString::null;
+        return QString();
 
     int d = KRandom::random() % list.count();
     return getDeckName(list.at(d));
