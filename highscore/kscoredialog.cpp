@@ -83,6 +83,7 @@ class KScoreDialog::KScoreDialogPrivate
         void saveScores();
         
         void setupDialog();
+        void setupGroup(QString& groupName);
         void aboutToShow();
 };
 
@@ -172,7 +173,11 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
     
     tabWidget->clear();
     foreach(QString groupName, scores.keys())
-    {
+        setupGroup(groupName);
+}
+
+void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
+{
         if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
             tabWidget->addTab(new QWidget(q), i18n(DEFAULT_GROUP_NAME));
         else
@@ -240,7 +245,6 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
                 }
             }
         }
-    }
 }
 
 void KScoreDialog::KScoreDialogPrivate::aboutToShow()
@@ -355,6 +359,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     {
         kDebug(11002) << "The current high score group \"" << configGroup << "\" isn't in the list, adding it";
         groupList << configGroup;
+        setupGroup(configGroup);
     }
     
     foreach(QString groupName, groupList)
