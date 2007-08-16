@@ -55,7 +55,7 @@ public:
 	 * KGame couldn't establish a connection. Use this if
 	 * KGame::initConnection returns false
 	 * @param s A string that describes the error further (like port is
-	 * already in use). Will be ignored if QString::null
+	 * already in use). Will be ignored if QString()
 	 **/
 	void connectionError(const QString& s = QString());
 

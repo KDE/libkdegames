@@ -258,7 +258,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * Set the new highscore group. The group is being prefixed with
          * "KHighscore_" in the table.
          * @param groupname The new groupname. E.g. use "easy" for the easy
-         * level of your game. If you use QString::null (the default) the
+         * level of your game. If you use QString() (the default) the
          * default group is used.
          **/
         void setHighscoreGroup(const QString& groupname = "");

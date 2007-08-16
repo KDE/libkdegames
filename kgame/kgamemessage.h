@@ -122,7 +122,7 @@ class KDEGAMES_EXPORT KGameMessage
      * suitable string for it. This string can't be used to identify a message
      * (as it is i18n'ed) but it can make debugging more easy. See also @ref
      * KGameDebugDialog.
-     * @return Either a i18n'ed string (the name of the id) or QString::null if
+     * @return Either a i18n'ed string (the name of the id) or QString() if
      * the msgid is unknown
      **/
     static QString messageId2Text(int msgid);

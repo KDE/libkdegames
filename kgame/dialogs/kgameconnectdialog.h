@@ -39,7 +39,7 @@ public:
 	void setHost(const QString& host);
 
 	/**
-	 * @return The host to connect to or QString::null if the user wants to
+	 * @return The host to connect to or QString() if the user wants to
 	 * be the MASTER
 	 **/ 
 	QString host() const;
@@ -107,7 +107,7 @@ private:
  * @short Dialog to ask for host and port
  *
  * This Dialog is used to create a game. You call initConnection(port,
- * QString::null, parent, true) to create a network game (as a server)
+ * QString(), parent, true) to create a network game (as a server)
  * or initConnection(port, host, parent) to join a network game.
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
@@ -124,7 +124,7 @@ public:
 	 * server game, depending on user's choice.
 	 * @param port The port the user wants to connect to.
 	 * @param host The host the user wants to connect to. Will be
-	 * QString::null if server game is chosen
+	 * QString() if server game is chosen
 	 * @param parent The parent of the dialog
 	 * @param server True to create a network game per default, false to
 	 * join a game by default
@@ -137,7 +137,7 @@ public:
 	void setHost(const QString& host);
 
 	/**
-	 * @return The host to connect to or QString::null if the user wants to
+	 * @return The host to connect to or QString() if the user wants to
 	 * be the MASTER
 	 **/ 
 	QString host() const;

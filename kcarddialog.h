@@ -335,7 +335,7 @@ public:
 
    /** Retrieve the SVG file belonging to the given card back deck. 
      * The cardDir is the file path to the card directory.
-     * @return The file name and path to the SVG file or QString::null if not available. 
+     * @return The file name and path to the SVG file or QString() if not available. 
      */
    static QString deckSVGFilePath(const QString& deck);
 
@@ -349,7 +349,7 @@ public:
      * The SVG IDs used for the card back is '1_club' for Ace of clubs, '10_spade' for
      * 10 of spades, 'queen_heart' for Queen of Hearts, '2_diamond' for 2 of diamonds and
      * so on.
-     * @return The file name and path to the SVG file or QString::null if not available. 
+     * @return The file name and path to the SVG file or QString() if not available. 
      */
    static QString cardSVGFilePath(const QString& cardDir);
 

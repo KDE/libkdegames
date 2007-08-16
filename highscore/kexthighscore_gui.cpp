@@ -532,7 +532,7 @@ void ConfigDialog::load()
 {
     internal->hsConfig().readCurrentConfig();
     const PlayerInfos &infos = internal->playerInfos();
-    _nickname->setText(infos.isAnonymous() ? QString::null : infos.name());
+    _nickname->setText(infos.isAnonymous() ? QString::null : infos.name());	//krazy:exclude=nullstrassign for old broken gcc
     _comment->setText(infos.comment());
     if (_WWHEnabled) {
         _WWHEnabled->setChecked(infos.isWWEnabled());
