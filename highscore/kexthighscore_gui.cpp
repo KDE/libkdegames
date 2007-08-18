@@ -287,7 +287,7 @@ void HighscoresDialog::slotUser2()
 //   kDebug(11001) << k_funcinfo;
     KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
     if ( url.isEmpty() ) return;
-    if ( KIO::NetAccess::exists(url, true, this) ) {
+    if ( KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this) ) {
         KGuiItem gi = KStandardGuiItem::save();
         gi.setText(i18n("Overwrite"));
         int res = KMessageBox::warningContinueCancel(this,
