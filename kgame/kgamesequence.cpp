@@ -73,7 +73,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
  kDebug(11001) << "=================== NEXT PLAYER ==========================";
  if (!game())
  {
-   kError() << k_funcinfo << "NULL game object";
+   kError() << "NULL game object";
    return 0;
  }
  unsigned int minId,nextId,lastId;
@@ -123,7 +123,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
    nextplayer=minplayer;
  }
 
- kDebug(11001) << k_funcinfo << " ##### lastId=" << lastId << "exclusive="
+ kDebug(11001) << " ##### lastId=" << lastId << "exclusive="
         << exclusive << "  minId=" << minId << "nextid=" << nextId
         << "count=" << game()->playerList()->count();
  if (nextplayer)

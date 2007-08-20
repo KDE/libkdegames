@@ -54,7 +54,7 @@ namespace KExtHighscore
 ShowItem::ShowItem(QTreeWidget *list, bool highlight)
     : QTreeWidgetItem(list), _highlight(highlight)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
   if (_highlight) {
     for (int i=0; i < columnCount();i++) {
       setForeground(i, Qt::red);
@@ -66,7 +66,7 @@ ShowItem::ShowItem(QTreeWidget *list, bool highlight)
 ScoresList::ScoresList(QWidget *parent)
     : QTreeWidget(parent)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     setSelectionMode(QTreeWidget::NoSelection);
 //     setItemMargin(3);
     setAllColumnsShowFocus(true);
@@ -77,14 +77,14 @@ ScoresList::ScoresList(QWidget *parent)
 
 void ScoresList::addHeader(const ItemArray &items)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     addLineItem(items, 0, 0);
 }
 
 QTreeWidgetItem *ScoresList::addLine(const ItemArray &items,
                                    uint index, bool highlight)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     QTreeWidgetItem *item = new ShowItem(this, highlight);
     addLineItem(items, index, item);
     return item;
@@ -93,7 +93,7 @@ QTreeWidgetItem *ScoresList::addLine(const ItemArray &items,
 void ScoresList::addLineItem(const ItemArray &items,
                              uint index, QTreeWidgetItem *line)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     uint k = 0;
     for (int i=0; i<items.size(); i++) {
         const ItemContainer& container = *items[i];
@@ -117,18 +117,18 @@ void ScoresList::addLineItem(const ItemArray &items,
 HighscoresList::HighscoresList(QWidget *parent)
     : ScoresList(parent)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
 }
 
 QString HighscoresList::itemText(const ItemContainer &item, uint row) const
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     return item.pretty(row);
 }
 
 void HighscoresList::load(const ItemArray &items, int highlight)
 {
-//     kDebug(11001) << k_funcinfo;
+//     kDebug(11001) ;
     clear();
     QTreeWidgetItem *line = 0;
     for (int j=items.nbEntries()-1; j>=0; j--) {
@@ -143,7 +143,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     : QWidget(parent),
       _scoresUrl(0), _playersUrl(0), _statsTab(0), _histoTab(0)
 {
-//     kDebug(11001) << k_funcinfo << ": HighscoresWidget";
+//     kDebug(11001) << ": HighscoresWidget";
 
     setObjectName("show_highscores_widget");
     const ScoreInfos &s = internal->scoreInfos();
@@ -199,20 +199,20 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
 void HighscoresWidget::changeTab(int i)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     if ( i!=_tw->currentIndex() )
         _tw->setCurrentIndex(i);
 }
 
 void HighscoresWidget::showURL(const QString &url)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     (void)new KRun(KUrl(url), this);
 }
 
 void HighscoresWidget::load(int rank)
 {
-//   kDebug(11001) << k_funcinfo << rank;
+//   kDebug(11001) << rank;
     _scoresList->load(internal->scoreInfos(), rank);
     _playersList->load(internal->playerInfos(), internal->playerInfos().id());
     if (_scoresUrl)
@@ -227,7 +227,7 @@ void HighscoresWidget::load(int rank)
 HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
     : KPageDialog(parent), _rank(rank), _tab(0)
 {
-//     kDebug(11001) << k_funcinfo << ": HighscoresDialog";
+//     kDebug(11001) << ": HighscoresDialog";
 
     setCaption( i18n("Highscores") );
     setButtons( Close|User1|User2 );
@@ -260,7 +260,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
 void HighscoresDialog::highscorePageChanged(KPageWidgetItem* page, KPageWidgetItem* pageold)
 {
     Q_UNUSED(pageold);
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     int idx = _pages.indexOf( page );
     Q_ASSERT(idx != -1);
 
@@ -277,14 +277,14 @@ void HighscoresDialog::highscorePageChanged(KPageWidgetItem* page, KPageWidgetIt
 
 void HighscoresDialog::slotUser1()
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     if ( KExtHighscore::configure(this) )
         highscorePageChanged(currentPage(), 0);//update data
 }
 
 void HighscoresDialog::slotUser2()
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this) ) {
@@ -308,7 +308,7 @@ LastMultipleScoresList::LastMultipleScoresList(
                             const QVector<Score> &scores, QWidget *parent)
     : ScoresList(parent), _scores(scores)
 {
-//     kDebug(11001) << k_funcinfo << ": LastMultipleScoresList";
+//     kDebug(11001) << ": LastMultipleScoresList";
 
     const ScoreInfos &s = internal->scoreInfos();
     addHeader(s);
@@ -318,7 +318,7 @@ LastMultipleScoresList::LastMultipleScoresList(
 void LastMultipleScoresList::addLineItem(const ItemArray &si,
                                          uint index, QTreeWidgetItem *line)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     uint k = 1; // skip "id"
     for (int i=0; i<si.size()-2; i++) {
         if ( i==3 ) k = 5; // skip "date"
@@ -338,7 +338,7 @@ void LastMultipleScoresList::addLineItem(const ItemArray &si,
 QString LastMultipleScoresList::itemText(const ItemContainer &item,
                                          uint row) const
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     QString name = item.name();
     if ( name=="rank" )
         return (_scores[row].type()==Won ? i18n("Winner") : QString());
@@ -352,7 +352,7 @@ TotalMultipleScoresList::TotalMultipleScoresList(
                             const QVector<Score> &scores, QWidget *parent)
     : ScoresList(parent), _scores(scores)
 {
-//     kDebug(11001) << k_funcinfo << ": TotalMultipleScoresList";
+//     kDebug(11001) << ": TotalMultipleScoresList";
     const ScoreInfos &s = internal->scoreInfos();
     addHeader(s);
     for (int i=0; i<scores.size(); i++) addLine(s, i, false);
@@ -361,7 +361,7 @@ TotalMultipleScoresList::TotalMultipleScoresList(
 void TotalMultipleScoresList::addLineItem(const ItemArray &si,
                                           uint index, QTreeWidgetItem *line)
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     const PlayerInfos &pi = internal->playerInfos();
     uint k = 1; // skip "id"
     for (uint i=0; i<4; i++) { // skip additional fields
@@ -389,7 +389,7 @@ void TotalMultipleScoresList::addLineItem(const ItemArray &si,
 QString TotalMultipleScoresList::itemText(const ItemContainer &item,
                                           uint row) const
 {
-//   kDebug(11001) << k_funcinfo;
+//   kDebug(11001) ;
     QString name = item.name();
     if ( name=="rank" ) return QString::number(_scores.size()-row);
     if ( name=="nb games" )
@@ -405,7 +405,7 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     : KDialog(parent),
       _saved(false), _WWHEnabled(0)
 {
-//     kDebug(11001) << k_funcinfo << ": ConfigDialog";
+//     kDebug(11001) << ": ConfigDialog";
     setCaption( i18n("Configure Highscores") );
     setButtons( Ok|Apply|Cancel );
     setDefaultButton( Cancel );
@@ -580,7 +580,7 @@ bool ConfigDialog::save()
 AskNameDialog::AskNameDialog(QWidget *parent)
     : KDialog(parent)
 {
-//     kDebug(11001) << k_funcinfo << ": AskNameDialog";
+//     kDebug(11001) << ": AskNameDialog";
 
     setCaption( i18n("Enter Your Nickname") );
     setButtons( Ok | Cancel );

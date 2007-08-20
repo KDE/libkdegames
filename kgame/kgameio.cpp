@@ -54,13 +54,13 @@ public:
 KGameIO::KGameIO()
   : d(new KGameIOPrivate)
 {
-  kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
+  kDebug(11001) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
 }
 
 KGameIO::KGameIO(KPlayer* player)
   : d(new KGameIOPrivate)
 {
-  kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
+  kDebug(11001) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
   if (player)
   {
     player->addGameIO(this);
@@ -69,7 +69,7 @@ KGameIO::KGameIO(KPlayer* player)
 
 KGameIO::~KGameIO()
 {
-  kDebug(11001) << k_funcinfo << ": this=" << this;
+  kDebug(11001) << ": this=" << this;
   // unregister ourselves
   if (player())
   {
@@ -97,7 +97,7 @@ void KGameIO::notifyTurn(bool b)
 {
   if (!player())
   {
-    kWarning(11001) << k_funcinfo << ": player() is NULL";
+    kWarning(11001) << ": player() is NULL";
     return;
   }
   bool sendit=false;
@@ -302,7 +302,7 @@ public:
 KGameProcessIO::KGameProcessIO(const QString& name) 
    : KGameIO(), d(new KGameProcessIOPrivate)
 {
-  kDebug(11001) << k_funcinfo << ": this=" << this << ", sizeof(this)=" << sizeof(KGameProcessIO);
+  kDebug(11001) << ": this=" << this << ", sizeof(this)=" << sizeof(KGameProcessIO);
 
   //kDebug(11001) << "================= KMEssageServer ====================";
   //d->mMessageServer=new KMessageServer(0,this);
@@ -329,7 +329,7 @@ KGameProcessIO::KGameProcessIO(const QString& name)
 
 KGameProcessIO::~KGameProcessIO()
 {
-  kDebug(11001) << k_funcinfo << ": this=" << this;
+  kDebug(11001) << ": this=" << this;
   kDebug(11001) << "player="<<player();
   if (player())
   {
@@ -374,7 +374,7 @@ void KGameProcessIO::notifyTurn(bool b)
 {
   if (!player())
   {
-    kWarning(11001) << k_funcinfo << ": player() is NULL";
+    kWarning(11001) << ": player() is NULL";
     return;
   }
   bool sendit=true;
@@ -468,7 +468,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
   }
   else
   {
-    kDebug(11001) << k_funcinfo << ": Got message from process but no player defined!";
+    kDebug(11001) << ": Got message from process but no player defined!";
   }
   newbuffer.clear();
 }

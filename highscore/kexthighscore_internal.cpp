@@ -125,7 +125,7 @@ int ItemArray::findIndex(const QString &name) const
 const ItemContainer *ItemArray::item(const QString &name) const
 {
     int i = findIndex(name);
-    if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
+    if ( i==-1 ) kError(11002) << "no item named \"" << name
                                 << "\"";
     return at(i);
 }
@@ -133,7 +133,7 @@ const ItemContainer *ItemArray::item(const QString &name) const
 ItemContainer *ItemArray::item(const QString &name)
 {
     int i = findIndex(name);
-    if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
+    if ( i==-1 ) kError(11002) << "no item named \"" << name
                                 << "\"";
     return at(i);
 }
@@ -141,7 +141,7 @@ ItemContainer *ItemArray::item(const QString &name)
 void ItemArray::setItem(const QString &name, Item *item)
 {
     int i = findIndex(name);
-    if ( i==-1 ) kError(11002) << k_funcinfo << "no item named \"" << name
+    if ( i==-1 ) kError(11002) << "no item named \"" << name
                                 << "\"";
     bool stored = at(i)->isStored();
     bool canHaveSubGroup = at(i)->canHaveSubGroup();

@@ -121,7 +121,7 @@ void KMessageSocket::processNewData ()
       str >> v;
       if (v != 'M')
       {
-        kWarning(11001) << k_funcinfo << ": Received unexpected data, magic number wrong!";
+        kWarning(11001) << ": Received unexpected data, magic number wrong!";
         continue;
       }
 
@@ -183,7 +183,7 @@ KMessageDirect::KMessageDirect (KMessageDirect *partner, QObject *parent)
   // Check if the other object is already connected
   if (partner && partner->mPartner)
   {
-    kWarning(11001) << k_funcinfo << ": Object is already connected!";
+    kWarning(11001) << ": Object is already connected!";
     return;
   }
 
@@ -213,7 +213,7 @@ void KMessageDirect::send (const QByteArray &msg)
   if (mPartner)
     emit mPartner->received (msg);
   else
-    kError(11001) << k_funcinfo << ": Not yet connected!";
+    kError(11001) << ": Not yet connected!";
 }
 
 
@@ -307,7 +307,7 @@ void KMessageProcess::slotReceivedStdout()
 {
   mProcess->setReadChannel(QProcess::StandardOutput);
   QByteArray ba = mProcess->readAll();
-  kDebug(11001) << "$$$$$$ " << k_funcinfo << ": Received" << ba.size() << "bytes over inter process communication";
+  kDebug(11001) << "$$$$$$ " << ": Received" << ba.size() << "bytes over inter process communication";
 
   // Resize receive buffer
   while (mReceiveCount+ba.size()>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
@@ -323,17 +323,17 @@ void KMessageProcess::slotReceivedStdout()
     int len;
     if (*p1!=0x4242aeae)
     {
-      kDebug(11001) << k_funcinfo << ": Cookie error...transmission failure...serious problem...";
+      kDebug(11001) << ": Cookie error...transmission failure...serious problem...";
     }
     len=(int)(*p2);
     if (len<int(2*sizeof(long)))
     {
-      kDebug(11001) << k_funcinfo << ": Message size error";
+      kDebug(11001) << ": Message size error";
       break;
     }
     if (len<=mReceiveCount)
     {
-      kDebug(11001) << k_funcinfo << ": Got message with len" << len;
+      kDebug(11001) << ": Got message with len" << len;
 
       QByteArray msg ;
       msg.resize(len);
