@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KDebug>
-#include <KStaticDeleter>
+#include <K3StaticDeleter>
 #include <KLockFile>
 #include <KConfigGroup>
 
@@ -50,9 +50,9 @@ public:
 KLockFile *KHighscore::_lock = 0;
 //KRawConfig *KHighscore::_config = 0;
 KConfig *KHighscore::_config = 0;
-static KStaticDeleter<KLockFile> lockSD;
+static K3StaticDeleter<KLockFile> lockSD;
 //static KStaticDeleter<KRawConfig> configSD;
-static KStaticDeleter<KConfig> configSD;
+static K3StaticDeleter<KConfig> configSD;
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent), d(new KHighscorePrivate)
