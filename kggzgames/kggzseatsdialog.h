@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KGGZSEATSDIALOG_H
-#define KGGZSEATSDIALOG_H
+#ifndef LIBKDEGAMES_KGGZSEATSDIALOG_H
+#define LIBKDEGAMES_KGGZSEATSDIALOG_H
 
 #include <kggzmod/event.h>
 
@@ -101,5 +101,4 @@ class KGGZGAMES_EXPORT KGGZSeatsDialog : public QWidget
 		Q_PRIVATE_SLOT(d, void slotMenu(QAction *action))
 };
 
-#endif
-
+#endif // LIBKDEGAMES_KGGZSEATSDIALOG_H
