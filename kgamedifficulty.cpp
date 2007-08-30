@@ -106,7 +106,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	Q_ASSERT(recvr!=0);
 
 	m_oldSelection = -1; // No valid selection
-	m_level = KGameDifficulty::noLevel;
+	m_level = KGameDifficulty::NoLevel;
 	m_running = false;
 
 	QObject::connect(this, SIGNAL(standardLevelChanged(KGameDifficulty::standardLevel)), recvr, slotStandard);
@@ -127,7 +127,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	QObject::connect(m_comboBox, SIGNAL(activated(int)), this, SLOT(changeSelection(int)));
 	window->statusBar()->addPermanentWidget(m_comboBox);
 
-	KGameDifficulty::setRestartOnChange(KGameDifficulty::restartOnChange);
+	KGameDifficulty::setRestartOnChange(KGameDifficulty::RestartOnChange);
 }
 
 
@@ -136,7 +136,7 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 	if (newSelection!=m_oldSelection) {
 		bool mayChange = true;
 
-		if (mayChange && (m_restartOnChange==KGameDifficulty::restartOnChange) && m_running)
+		if (mayChange && (m_restartOnChange==KGameDifficulty::RestartOnChange) && m_running)
 			mayChange = ( KMessageBox::warningContinueCancel(0, i18n("Changing the difficulty level will end the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
 
 		if (mayChange) {
@@ -151,25 +151,25 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLevel level)
 {
     switch (level) {
-        case KGameDifficulty::ridiculouslyEasy:
+        case KGameDifficulty::RidiculouslyEasy:
             return i18n("Ridiculously easy");
-        case KGameDifficulty::veryEasy:
+        case KGameDifficulty::VeryEasy:
             return i18n("Very easy");
-        case KGameDifficulty::easy:
+        case KGameDifficulty::Easy:
             return i18n("Easy");
-        case KGameDifficulty::medium:
+        case KGameDifficulty::Medium:
             return i18n("Medium");
-        case KGameDifficulty::hard:
+        case KGameDifficulty::Hard:
             return i18n("Hard");
-        case KGameDifficulty::veryHard:
+        case KGameDifficulty::VeryHard:
             return i18n("Very hard");
-        case KGameDifficulty::extremelyHard:
+        case KGameDifficulty::ExtremelyHard:
             return i18n("Extremely hard");
-        case KGameDifficulty::impossible:
+        case KGameDifficulty::Impossible:
             return i18n("Impossible");
-        case KGameDifficulty::custom:
-        case KGameDifficulty::configurable:
-        case KGameDifficulty::noLevel:
+        case KGameDifficulty::Custom:
+        case KGameDifficulty::Configurable:
+        case KGameDifficulty::NoLevel:
             // Do nothing
             break;
     }
@@ -183,7 +183,7 @@ void KGameDifficultyPrivate::rebuildActions()
 	qSort(m_standardLevels.begin(), m_standardLevels.end());
 
 	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
-		if (level!=KGameDifficulty::configurable) {
+		if (level!=KGameDifficulty::Configurable) {
 			m_menu->addAction(standardLevelString(level));
 			m_comboBox->addItem(KIcon("games-difficult"), standardLevelString(level));
 		}
@@ -196,7 +196,7 @@ void KGameDifficultyPrivate::rebuildActions()
 		}
 	}
 
-	if (m_standardLevels.contains(KGameDifficulty::configurable)) {
+	if (m_standardLevels.contains(KGameDifficulty::Configurable)) {
 		QAction* separator = new QAction(m_menu);
 		separator->setSeparator(true);
 		m_menu->addAction(separator);
@@ -207,7 +207,7 @@ void KGameDifficultyPrivate::rebuildActions()
 	}
 
 	// reselect the previous selected item.
-	if (m_level==KGameDifficulty::custom)
+	if (m_level==KGameDifficulty::Custom)
 		KGameDifficulty::setLevelCustom(m_levelCustom);
 	else if (m_standardLevels.contains(m_level))
 		KGameDifficulty::setLevel(m_level);
@@ -216,11 +216,11 @@ void KGameDifficultyPrivate::rebuildActions()
 void KGameDifficultyPrivate::setSelection(int newSelection)
 {
 	int countWithoutConfigurable = m_standardLevels.count();
-	if (m_standardLevels.contains(KGameDifficulty::configurable))
+	if (m_standardLevels.contains(KGameDifficulty::Configurable))
 		countWithoutConfigurable--;
 
-	if ((m_standardLevels.contains(KGameDifficulty::configurable)) && (newSelection>m_menu->actions().count()-3))
-		KGameDifficulty::setLevel(KGameDifficulty::configurable);
+	if ((m_standardLevels.contains(KGameDifficulty::Configurable)) && (newSelection>m_menu->actions().count()-3))
+		KGameDifficulty::setLevel(KGameDifficulty::Configurable);
 	else if(newSelection<countWithoutConfigurable)
 		KGameDifficulty::setLevel(m_standardLevels[newSelection]);
 	else
@@ -232,13 +232,13 @@ void KGameDifficultyPrivate::setSelection(int newSelection)
 
 void KGameDifficultyPrivate::setLevel(KGameDifficulty::standardLevel level)
 {
-	if ((!m_standardLevels.contains(level)) && (level!=KGameDifficulty::custom))
-		level = KGameDifficulty::noLevel;
+	if ((!m_standardLevels.contains(level)) && (level!=KGameDifficulty::Custom))
+		level = KGameDifficulty::NoLevel;
 
-	if (level==KGameDifficulty::configurable) {
+	if (level==KGameDifficulty::Configurable) {
 		m_menu->setCurrentItem(m_menu->actions().count()-1);
 		m_comboBox->setCurrentIndex(m_comboBox->count()-1);
-	} else if (level!=KGameDifficulty::custom) {
+	} else if (level!=KGameDifficulty::Custom) {
 		int i = m_standardLevels.indexOf(level);
 		m_menu->setCurrentItem(i);
 		m_comboBox->setCurrentIndex(i);
@@ -255,10 +255,10 @@ void KGameDifficultyPrivate::setLevel(KGameDifficulty::standardLevel level)
 
 void KGameDifficultyPrivate::setLevelCustom(int key)
 {
-	m_level = KGameDifficulty::custom;
+	m_level = KGameDifficulty::Custom;
 
 	int a = m_standardLevels.count();
-	if (m_standardLevels.contains(KGameDifficulty::configurable))
+	if (m_standardLevels.contains(KGameDifficulty::Configurable))
 		a -= 1;
 
 	int i = (m_customLevels.uniqueKeys()).indexOf(key) + a;
@@ -299,7 +299,7 @@ void KGameDifficulty::setRestartOnChange(onChange restart)
 	Q_ASSERT(self()->d);
 
 	self()->d->m_restartOnChange = restart;
-	if (restart==restartOnChange)
+	if (restart==RestartOnChange)
 		self()->d->m_comboBox->setWhatsThis(i18n("Select the <b>difficulty</b> of the game.<br />If you change the difficulty level while a game is running, you will have to cancel it and start a new one."));
 	else
 		self()->d->m_comboBox->setWhatsThis(i18n("Select the <b>difficulty</b> of the game.<br />You can change the difficulty level during a running game."));
@@ -311,7 +311,7 @@ void KGameDifficulty::addStandardLevel(standardLevel level)
 {
 	Q_ASSERT(self()->d);
 
-	if ((level!=custom) && (level!=noLevel)) {
+	if ((level!=Custom) && (level!=NoLevel)) {
 		self()->d->m_standardLevels.append(level);
 		self()->d->rebuildActions();
 	}

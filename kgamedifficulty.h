@@ -55,13 +55,13 @@ class KXmlGuiWindow;
  * Code example: definition of the difficulty levels in the main window class.
  * @code
  * KGameDifficulty::init(this, this, SLOT(levelChanged(KGameDifficulty::standardLevel)));
- * KGameDifficulty::addStandardLevel(KGameDifficulty::easy);
- * KGameDifficulty::addStandardLevel(KGameDifficulty::medium);
- * KGameDifficulty::addStandardLevel(KGameDifficulty::hard);
- * KGameDifficulty::setRestartOnChange(KGameDifficulty::noRestartOnChange);
+ * KGameDifficulty::addStandardLevel(KGameDifficulty::Easy);
+ * KGameDifficulty::addStandardLevel(KGameDifficulty::Medium);
+ * KGameDifficulty::addStandardLevel(KGameDifficulty::Hard);
+ * KGameDifficulty::setRestartOnChange(KGameDifficulty::NoRestartOnChange);
  *
  * // The default level (it should be read from the config file).
- * KGameDifficulty::setLevel(KGameDifficulty::medium);
+ * KGameDifficulty::setLevel(KGameDifficulty::Medium);
  *
  * // And you need also to define the slot "levelChanged" to manage changes.
  * // ...
@@ -80,8 +80,8 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * Does the game have to be restarted, when the player changes the difficulty level? In this case and if the game is running, a confirmation dialog is displayed and the player can cancel the change.
 		 */
 		enum onChange {
-			restartOnChange, /** The current game has to be canceled and a new game will be started on change. */
-			noRestartOnChange /** The current game can continue on change. */
+			RestartOnChange, /** The current game has to be canceled and a new game will be started on change. */
+			NoRestartOnChange /** The current game can continue on change. */
 		};
 
 		/**
@@ -90,17 +90,17 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * If they fit the needs of the game, the standard appellations of the difficulty levels should be used.
 		 */
 		enum standardLevel {
-			ridiculouslyEasy = 10, /** Level "Ridiculously easy" */
-			veryEasy = 20, /** Level "Very easy" */
-			easy = 30, /** Level "Easy" */
-			medium = 40, /** Level "Medium" */
-			hard = 50, /** Level "Hard" */
-			veryHard = 60, /** Level "Very hard" */
-			extremelyHard = 70, /** Level "Extremely hard" */
-			impossible = 80, /** Level "Impossible"  */
-			configurable = 90, /** Level "Custom". This is a special item to let the player configure the difficulty level. The configuration of the user level has to be implemented in each game using it with an adapted dialog. Example: In a minesweeper game like KMines, the player wants to define the number of rows, columns and mines. */
-			custom = 100, /** Any custom appellations for levels */
-			noLevel = 110 /** No level */
+			RidiculouslyEasy = 10, /** Level "Ridiculously easy" */
+			VeryEasy = 20, /** Level "Very easy" */
+			Easy = 30, /** Level "Easy" */
+			Medium = 40, /** Level "Medium" */
+			Hard = 50, /** Level "Hard" */
+			VeryHard = 60, /** Level "Very hard" */
+			ExtremelyHard = 70, /** Level "Extremely hard" */
+			Impossible = 80, /** Level "Impossible"  */
+			Configurable = 90, /** Level "Custom". This is a special item to let the player configure the difficulty level. The configuration of the user level has to be implemented in each game using it with an adapted dialog. Example: In a minesweeper game like KMines, the player wants to define the number of rows, columns and mines. */
+			Custom = 100, /** Any custom appellations for levels */
+			NoLevel = 110 /** No level */
 		};
 
 
@@ -124,7 +124,7 @@ class KDEGAMES_EXPORT KGameDifficulty
 		/**
 		 * @brief Set if a new game has to be started by change
 		 *
-		 * Default is restartOnChange.
+		 * Default is RestartOnChange.
 		 * @param restart Behavior on change
 		 */
 		static void setRestartOnChange(onChange restart);
