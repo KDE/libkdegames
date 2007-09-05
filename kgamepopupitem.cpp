@@ -150,7 +150,7 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     setAcceptsHoverEvents(true);
 
     // setup default colors
-    KColorScheme kcs( KColorScheme::Tooltip );
+    KColorScheme kcs( QPalette::Active, KColorScheme::Tooltip );
     d->m_brush = kcs.background();
     d->m_textChildItem->setDefaultTextColor( kcs.foreground(KColorScheme::NormalText).color() );
 
