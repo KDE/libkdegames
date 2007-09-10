@@ -33,7 +33,7 @@ KGpiMainWindow::KGpiMainWindow()
 
     m_mainWid.graphicsView->setScene(m_scene);
 
-    KColorScheme kcs( KColorScheme::Tooltip );
+    KColorScheme kcs( QPalette::Active, KColorScheme::Tooltip );
     m_mainWid.textColor->setColor( kcs.foreground(KColorScheme::NormalText).color() );
     m_mainWid.bkgndColor->setColor( kcs.background().color() );
 
