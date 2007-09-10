@@ -42,8 +42,10 @@ public:
     TextItemWithOpacity( QGraphicsItem* parent = 0 )
         :QGraphicsTextItem(parent), m_opacity(1.0) {}
     void setOpacity(qreal opa) { m_opacity = opa; }
+    void setTextColor(KStatefulBrush brush) { m_brush = brush; }
     virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
         {
+            // TODO - set text color here?
             p->save();
             p->setOpacity(m_opacity);
             QGraphicsTextItem::paint(p,option,widget);
@@ -51,6 +53,7 @@ public:
         }
 private:
     qreal m_opacity;
+    KStatefulBrush m_brush;
 };
 
 class KGamePopupItemPrivate
@@ -112,7 +115,7 @@ public:
     /**
      * Background brush color
      */
-    QBrush m_brush;
+    KStatefulBrush m_brush;
     /**
      * popup angles sharpness
      */
@@ -150,9 +153,8 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     setAcceptsHoverEvents(true);
 
     // setup default colors
-    KColorScheme kcs( QPalette::Active, KColorScheme::Tooltip );
-    d->m_brush = kcs.background();
-    d->m_textChildItem->setDefaultTextColor( kcs.foreground(KColorScheme::NormalText).color() );
+    d->m_brush = KStatefulBrush( KColorScheme::Tooltip, KColorScheme::NormalBackground );
+    d->m_textChildItem->setTextColor( KStatefulBrush(KColorScheme::Tooltip, KColorScheme::NormalText) );
 
     connect( &d->m_timeLine, SIGNAL(frameChanged(int)), SLOT(animationFrame(int)) );
     connect( &d->m_timeLine, SIGNAL(finished()), SLOT(hideMe()));
@@ -174,7 +176,7 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
         p->setOpacity(d->m_animOpacity);
     else
         p->setOpacity(d->m_opacity);
-    p->setBrush(d->m_brush);
+    p->setBrush(d->m_brush.brush(widget));
     p->drawPath(d->m_path);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
@@ -387,12 +389,13 @@ qreal KGamePopupItem::messageOpacity() const
 
 void KGamePopupItem::setBackgroundBrush( const QBrush& brush )
 {
-    d->m_brush = brush;
+    d->m_brush = KStatefulBrush(brush);
 }
 
 void KGamePopupItem::setTextColor( const QColor& color )
 {
-    d->m_textChildItem->setDefaultTextColor(color);
+    KStatefulBrush brush(color, d->m_brush.brush(QPalette::Active));
+    d->m_textChildItem->setTextColor(brush);
 }
 
 void KGamePopupItem::onLinkHovered(const QString& link)
