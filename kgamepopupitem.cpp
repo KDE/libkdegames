@@ -45,7 +45,7 @@ public:
     void setTextColor(KStatefulBrush brush) { m_brush = brush; }
     virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
         {
-            // hope that it is ok to call this function here - i.e. I hope it want be too expensive :)
+            // hope that it is ok to call this function here - i.e. I hope it won't be too expensive :)
             // we call it here (and not in setTextColor), because KstatefulBrush
             // absolutely needs QWidget parameter :)
             setDefaultTextColor(m_brush.brush(widget).color());
