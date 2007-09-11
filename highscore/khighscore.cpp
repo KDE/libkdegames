@@ -50,17 +50,17 @@ public:
 class KHighscoreLockedConfig
 {
 public:
-	KLockFile *lock;
-	KConfig *config;
+    ~KHighscoreLockedConfig();
+    KLockFile *lock;
+    KConfig *config;
 };
 
-//KLockFile *KHighscore::_lock = 0;
-//KRawConfig *KHighscore::_config = 0;
-//KConfig *KHighscore::_config = 0;
-//static K3StaticDeleter<KLockFile> lockSD;
+KHighscoreLockedConfig::~KHighscoreLockedConfig()
+{
+    delete lock;
+    delete config;
+}
 
-//static KStaticDeleter<KRawConfig> configSD;
-//static K3StaticDeleter<KConfig> configSD;
 K_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig);
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
