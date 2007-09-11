@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KDebug>
-#include <K3StaticDeleter>
+//#include <K3StaticDeleter>
 #include <KLockFile>
 #include <KConfigGroup>
 
@@ -47,12 +47,21 @@ public:
     bool     global;
 };
 
-KLockFile *KHighscore::_lock = 0;
+class KHighscoreLockedConfig
+{
+public:
+	KLockFile *lock;
+	KConfig *config;
+};
+
+//KLockFile *KHighscore::_lock = 0;
 //KRawConfig *KHighscore::_config = 0;
-KConfig *KHighscore::_config = 0;
-static K3StaticDeleter<KLockFile> lockSD;
+//KConfig *KHighscore::_config = 0;
+//static K3StaticDeleter<KLockFile> lockSD;
+
 //static KStaticDeleter<KRawConfig> configSD;
-static K3StaticDeleter<KConfig> configSD;
+//static K3StaticDeleter<KConfig> configSD;
+K_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig);
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent), d(new KHighscorePrivate)
@@ -64,7 +73,7 @@ void KHighscore::init(bool forceLocal)
 {
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
-    if ( d->global && _lock==0 )    //If we're doing global highscores but not KFileLock has been set up yet
+    if ( d->global && lockedConfig->lock==0 )    //If we're doing global highscores but not KFileLock has been set up yet
         kFatal(11002) << "KHighscore::init should be called before!!";
 #else
     d->global = false;
@@ -75,12 +84,12 @@ void KHighscore::init(bool forceLocal)
 
 bool KHighscore::isLocked() const
 {
-    return (d->global ? _lock->isLocked() : true);
+    return (d->global ? lockedConfig->lock->isLocked() : true);
 }
 
 void KHighscore::readCurrentConfig()
 {
-    if ( d->global ) _config->reparseConfiguration();
+    if ( d->global ) lockedConfig->config->reparseConfiguration();
 }
 
 void KHighscore::init(const char *appname)
@@ -95,8 +104,8 @@ void KHighscore::init(const char *appname)
     /*if (!(QFile::permissions(filename) & QFile::WriteOwner)) kFatal(11002) << "cannot write to global highscore file \""
                 << filename << "\"";*/
     kDebug() << "Global highscore file \"" << filename << "\"";
-    lockSD.setObject(_lock, new KLockFile(filename));
-    configSD.setObject(_config, new KConfig(filename, KConfig::OpenFlags(KConfig::NoGlobals | KConfig::OnlyLocal))); // read-only   (matt-?)
+    lockedConfig->lock = new KLockFile(filename);
+    lockedConfig->config = new KConfig(filename, KConfig::OpenFlags(KConfig::NoGlobals | KConfig::OnlyLocal)); // read-only   (matt-?)
 
     // drop the effective gid
     #warning not portable yet. Unix only. Actually it does not even work there yet.
@@ -115,7 +124,7 @@ bool KHighscore::lockForWriting(QWidget *widget)
     for (;;) {
         kDebug(11002) << "try locking";
         // lock the highscore file (it should exist)
-        int result = _lock->lock();
+        int result = lockedConfig->lock->lock();
         bool ok = ( result==0 );
         kDebug(11002) << "locking system-wide highscore file res="
                        <<  result << " (ok=" << ok << ")";
@@ -144,8 +153,8 @@ void KHighscore::writeAndUnlock()
     if ( !isLocked() ) return;
 
     kDebug(11002) << "unlocking";
-    _config->sync(); // write config
-    _lock->unlock();
+    lockedConfig->config->sync(); // write config
+    lockedConfig->lock->unlock();
 }
 
 KHighscore::~KHighscore()
@@ -156,7 +165,7 @@ KHighscore::~KHighscore()
 
 KConfig* KHighscore::config() const
 {
-    return (d->global ? _config : static_cast<KConfig*>(KGlobal::config().data()));
+    return (d->global ? lockedConfig->config : static_cast<KConfig*>(KGlobal::config().data()));
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)
