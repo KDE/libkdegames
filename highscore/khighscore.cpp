@@ -61,7 +61,7 @@ KHighscoreLockedConfig::~KHighscoreLockedConfig()
     delete config;
 }
 
-K_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig);
+K_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig)
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent), d(new KHighscorePrivate)
