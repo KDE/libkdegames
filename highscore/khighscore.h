@@ -26,7 +26,6 @@
 #include <QtCore/QObject>
 
 class KConfig;
-class KLockFile;
 //class KRawConfig;
 class KConfig;
 
