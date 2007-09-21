@@ -116,6 +116,7 @@ public:
    *  @li @p Both - both are shown
    *  @li @p NoDeck - The deck (back) selection is not shown
    *  @li @p NoCards - The cards (front) selection is not shown
+   *  @li @p SVGCards - 
    */
    enum CardFlags { Both=0, NoDeck=0x01, NoCards=0x02, SVGCards=0x04 };
 
