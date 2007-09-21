@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Ornamental (SVG)
+Name[de]=Ornamente (SVG)
 Name[el]=Διακοσμητικό (SVG)
 Name[ne]=सजाइएको (एसभीजी)
 Name[sv]=Dekorativ (SVG)
@@ -8,6 +9,7 @@ Name[zh_CN]=植物装饰(SVG)
 Name[zh_TW]=Ornamental（SVG）
 SVG=deck26_ornamental.svg
 Comment=SVG Ornamental
+Comment[de]=SVG Ornamente
 Comment[el]=Διακοσμητικό SVG
 Comment[es]=Ornamental SVG
 Comment[ga]=Ornamental SVG

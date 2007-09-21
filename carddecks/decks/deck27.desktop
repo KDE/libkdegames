@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Classic (SVG)
 Name[be]=Класічны SVG
+Name[de]=Klassisch (SVG)
 Name[el]=Κλασσικό (SVG)
 Name[es]=Clásico (SVG)
 Name[fa]=کلاسیک (SVG)
@@ -17,6 +18,7 @@ Name[zh_TW]=古典（SVG）
 SVG=deck27_classic.svgz
 Comment=SVG Classic
 Comment[be]=Класічны SVG
+Comment[de]=SVG Klassisch
 Comment[el]=SVG Κλασσικό
 Comment[es]=Clásico SVG
 Comment[fa]=SVG کلاسیک

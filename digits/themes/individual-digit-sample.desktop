@@ -2,6 +2,7 @@
 Version=0.1.0
 Encoding=UTF-8
 Name=Individual Digit Sample
+Name[de]=Beispiel für einzelne Ziffern
 Name[el]=Δείγμα ανεξάρτητου ψηφίου
 Name[es]=Muestra de dígitos inviduales
 Name[fa]=نمونه رقم منحصربفرد
@@ -14,6 +15,7 @@ Name[zh_CN]=个人数字示例
 Name[zh_TW]=個人數位範例
 Type=IndividualDigit
 Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svg
+Comment[de]=Diese Datei enthält Metadaten, Konfigurationseinstellungen und die Zuordnungen zwischen Ziffern und den Bezeichnungen für das Design "individual-digit-sample.svg"
 Comment[el]=Αυτό το αρχείο διατηρεί μεταδεδομένα, ρυθμίσεις, και αντιστοιχίες που ελέγχουν τα ενεργά και μη ενεργά τμήματα του θέματος svg δείγματος ανεξάρτητου ψηφίου
 Comment[es]=Este archivo contiene los metadatos, opciones de configuración y los mapas entre los dígitos y su identificador para el tema individual-digit-sample.svg
 Comment[fa]=این پرونده فراداده‌ها، تنظیمات پیکربندی، و نگاشتهای بین رقم یا شناسه را برای چهره individual-digit-sample.svg نگه می‌دارد.

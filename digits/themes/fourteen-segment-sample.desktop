@@ -2,6 +2,7 @@
 Version=0.1.0
 Encoding=UTF-8
 Name=Fourteen Segment Sample
+Name[de]=Beispiel für Vierzehn Segmente
 Name[el]=Δείγμα δεκατεσσάρων κομματιών
 Name[es]=Muestra de catorce segmentos
 Name[fa]=نمونه قطعه پانزده
@@ -14,6 +15,7 @@ Name[zh_CN]=十四分段示例
 Name[zh_TW]=十四段範例
 Type=FourteenSegmentDigit
 Comment=This file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svg
+Comment[de]=Diese Datei enthält Metadaten, Konfigurationseinstellungen und die Zuordnungen die kontrollieren, welche Segmente im Design "fourteen-segment-sample.svg" an oder aus sein sollen
 Comment[el]=Αυτό το αρχείο διατηρεί μεταδεδομένα, ρυθμίσεις, και αντιστοιχίες που ελέγχουν τα ενεργά και μη ενεργά τμήματα του θέματος svg δεκατεσσάρων κομματιών
 Comment[es]=Este archivo contiene los metadados, opciones de configuración, y control de mapeado incluyendo qué segmentos están activados para el tema fourteen-segment-sample.svg
 Comment[fa]=این پرونده فراداده‌ها، تنظیمات پیکربندی، و نگاشتهایی که کنترل میکندکدام قطعه‌ها برای چهره  fourteen-segment-sample.svg روشن یا خاموش است را نگه می‌دارد.
