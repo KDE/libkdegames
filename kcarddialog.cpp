@@ -168,8 +168,6 @@ void KCardDialog::setupGUI()
     d->usePNGOnly = false;
     d->useSVGOnly = true;
   }
-  kDebug() << "ALLOW PNG " << d->allowPNG;
-  kDebug() << "ALLOW SVG " << d->allowSVG;
 
   // Game does not allow scaled cards
   if (!d->allowSVG)
@@ -266,11 +264,6 @@ int KCardDialog::getCardDeck(QString &pFrontName,
   {
     pFrontName = dlg.cardName();
     pBackName  = dlg.deckName();
-    kDebug() << "ACCEPT " << pFrontName << " and" << pBackName;
-  }
-  else
-  {
-    kDebug() << "IGNORE " << dlg.cardName() << " and" << dlg.deckName();
   }
   return result;
 }
@@ -320,7 +313,7 @@ void KCardDialog::readFronts()
         info.back         = cfgcg.readEntry("Back",QString());
         // The back name is read UNTRANSLATED...we need to find the right name for it now
         info.back         = findi18nBack(info.back);
-        if (!info.back.isNull()) kDebug() << "FOUND BACK " << info.back;
+        // if (!info.back.isNull()) kDebug() << "FOUND BACK " << info.back;
         info.size         = cfgcg.readEntry("BackSize", QSizeF(pixmap.size()));
         info.isDefault    = cfgcg.readEntry("Default", false);
 
