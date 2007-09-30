@@ -17,16 +17,9 @@
 */
 
 #include "kcarddialog.h"
+#include "ui_kgamecardselector.h"
 
-#include <QLabel>
-#include <QCheckBox>
-#include <QLayout>
-#include <QGroupBox>
-#include <QSlider>
-#include <QMatrix>
 #include <QPixmap>
-#include <QPushButton>
-#include <QListWidget>
 #include <QListWidgetItem>
 #include <QFileInfo>
 #include <QDir>
@@ -34,447 +27,277 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <krandom.h>
-#include <kconfig.h>
-
 #include <kdebug.h>
 
-#define KCARD_DEFAULTDECK QString::fromLatin1("deck0.png")
-#define KCARD_DEFAULTCARD QString::fromLatin1("11.png")
-#define KCARD_DEFAULTCARDDIR QString::fromLatin1("cards-default/")
-
-// values for the resize slider
-#define SLIDER_MIN 400
-#define SLIDER_MAX 3000
-
 // KConfig entries
-#define CONF_GROUP "KCardDialog"
-#define CONF_RANDOMDECK QString::fromLatin1("RandomDeck")
-#define CONF_DECK "Deck"
-#define CONF_CARDDIR QString::fromLatin1("CardDir")
-#define CONF_RANDOMCARDDIR QString::fromLatin1("RandomCardDir")
-#define CONF_USEGLOBALDECK QString::fromLatin1("GlobalDeck")
-#define CONF_USEGLOBALCARDDIR QString::fromLatin1("GlobalCardDir")
-#define CONF_SCALE QString::fromLatin1("Scale")
+#define CONF_GROUP  QString::fromLatin1("KCardDialog")
+#define CONF_LOCKING QString::fromLatin1("Locking")
+#define CONF_ALLOW_FIXED_CARDS QString::fromLatin1("Fixed")
+#define CONF_ALLOW_SCALED_CARDS QString::fromLatin1("Scaled")
+#define CONF_CARD QString::fromLatin1("Cardname")
+#define CONF_DECK QString::fromLatin1("Deckname")
 
-#define CONF_GLOBAL_GROUP QString::fromLatin1("KCardDialog Settings")
-#define CONF_GLOBAL_DECK "GlobalDeck"
-#define CONF_GLOBAL_CARDDIR QString::fromLatin1("GlobalCardDir")
-#define CONF_GLOBAL_RANDOMDECK QString::fromLatin1("GlobalRandomDeck")
-#define CONF_GLOBAL_RANDOMCARDDIR QString::fromLatin1("GlobalRandomCardDir")
 
+class KCardInfo
+{
+  public:
+
+   QString name;
+   QString noi18Name;
+   QString comment;
+   QString path;
+   QString back;
+   QPixmap preview;
+   QString svgfile;
+   QSizeF size;
+   bool isDefault;
+};
 
 class KCardDialogPrivate
 {
-public:
+  public:
+
     KCardDialogPrivate()
     {
-       deckLabel = 0;
-       cardLabel = 0;
-       deckIconView = 0;
-       cardIconView = 0;
-       randomDeck = 0;
-       randomCardDir = 0;
-       cPreview = 0;
-       scaleSlider = 0;
-       globalDeck = 0;
-       globalCardDir = 0;
-
-       cScale = 1;
+       // Set default values
+       useSVGOnly = false;
+       usePNGOnly = false;
+       useLocking = true;
     }
 
-    QLabel* deckLabel;
-    QLabel* cardLabel;
-    QListWidget* deckIconView;
-    QListWidget* cardIconView;
-    QCheckBox* randomDeck;
-    QCheckBox* randomCardDir;
-    QCheckBox* globalDeck;
-    QCheckBox* globalCardDir;
+    bool filterOutCard(const KCardInfo& v)
+    {
+      if (usePNGOnly && !v.svgfile.isNull()) return true;
+      if (useSVGOnly && v.svgfile.isNull()) return true;
+      return false;
+    }
 
-    QSlider* scaleSlider;
-    QPixmap cPreviewPix;
-    QLabel* cPreview;
-
-    QMap<QListWidgetItem*, QString> deckMap;
-    QMap<QListWidgetItem*, QString> cardMap;
-    QMap<QString, QString> helpMap;
-
-    //set query variables
-    KCardDialog::CardFlags cFlags;
-    QString cDeck;
-    QString cCardDir;
-    double cScale;
+    bool useSVGOnly;
+    bool usePNGOnly;
+    bool allowSVG;
+    bool allowPNG;
+    bool useLocking;
+    QString currentDeck;
+    QString currentCard;
+    Ui::KGameCardSelectorBase ui;
 };
 
-int KCardDialog::getCardDeck(QString &pDeck, QString &pCardDir, QWidget *pParent,
-                             CardFlags pFlags, bool* pRandomDeck, bool* pRandomCardDir,
-			     double* pScale, KConfig* pConf)
+class KCardDialogStatic
 {
-    KCardDialog dlg(pParent, pFlags);
+  public:
+    QMap<QString, KCardInfo> cardInfo;
+    QMap<QString, KCardInfo> deckInfo;
+    QString defaultDeck;
+    QString defaultCard;
 
-    dlg.setDeck(pDeck);
-    dlg.setCardDir(pCardDir);
-
-    dlg.setupDialog(pScale != 0);
-    dlg.loadConfig(pConf);
-    dlg.showRandomDeckBox(pRandomDeck != 0);
-    dlg.showRandomCardDirBox(pRandomCardDir != 0);
-    int result=dlg.exec();
-    if (result==QDialog::Accepted)
+    bool filterOutCard(const KCardInfo& v, bool useSVGOnly, bool usePNGOnly)
     {
-    // TODO check for global cards/decks!!!!
-        pDeck=dlg.deck();
-        pCardDir=dlg.cardDir();
-        if (!pCardDir.isNull() && pCardDir.right(1)!=QString::fromLatin1("/"))
-        {
-            pCardDir+=QString::fromLatin1("/");
-        }
-        if (pRandomDeck)
-        {
-            *pRandomDeck = dlg.isRandomDeck();
-        }
-        if (pRandomCardDir)
-        {
-            *pRandomCardDir = dlg.isRandomCardDir();
-        }
-	if (pScale)
-	{
-            *pScale = dlg.cardScale();
-	}
-
-        if (dlg.isGlobalDeck())
-	{
-	    kDebug(11000) << "use global deck";
-	    bool random;
-	    getGlobalDeck(pDeck, random);
-	    kDebug(11000) << "use:" << pDeck;
-	    if (pRandomDeck)
-	    {
-	        *pRandomDeck=random;
-		if (random)
-	        kDebug(11000) << "use random deck";
-	    }
-	}
-        if (dlg.isGlobalCardDir())
-	{
-	    kDebug(11000) << "use global carddir";
-	    bool random;
-	    getGlobalCardDir(pCardDir, random);
-	    kDebug(11000) << "use:" << pCardDir;
-	    if (pRandomCardDir)
-	    {
-	        *pRandomCardDir=random;
-		if (random)
-	        kDebug(11000) << "use random carddir";
-	    }
-	}
+      if (usePNGOnly && !v.svgfile.isNull()) return true;
+      if (useSVGOnly && v.svgfile.isNull()) return true;
+      return false;
     }
-    dlg.saveConfig(pConf);
-    return result;
+};
+
+static KCardDialogStatic ds;
+
+
+// Create the dialog
+KCardDialog::KCardDialog(QWidget *parent, bool pAllowSVG, bool pAllowPNG, bool pLock, QString defFront, QString defBack)
+           : KDialog( parent ), d( new KCardDialogPrivate )
+{
+  KCardDialog::init();
+
+  // Copy parameter
+  d->useLocking = pLock;
+  d->allowPNG = pAllowPNG;
+  d->allowSVG = pAllowSVG;
+  d->currentCard = defFront;
+  d->currentDeck = defBack;
+
+  // GUI
+  setupGUI();
 }
 
-void KCardDialog::getConfigCardDeck(KConfig* conf, QString &pDeck, QString &pCardDir, double& pScale)
+
+KCardDialog::KCardDialog(KConfigGroup& group, QWidget* parent)
+           : KDialog( parent ), d( new KCardDialogPrivate )
 {
-// TODO check for global cards/decks!!!!
- if (!conf) {
-	return;
- }
- KConfigGroup cg(conf, CONF_GROUP);
+  KCardDialog::init();
 
- if (cg.readEntry(CONF_RANDOMDECK,false) || !cg.hasKey(CONF_DECK)) {
-	pDeck = getRandomDeck();
- } else {
-	pDeck = cg.readEntry(CONF_DECK);
- }
- if (cg.readEntry(CONF_RANDOMCARDDIR,false) || !cg.hasKey(CONF_CARDDIR)) {
-	pCardDir = getRandomCardDir();
- } else {
-	pCardDir = cg.readPathEntry(CONF_CARDDIR);
- }
- pScale = cg.readEntry(CONF_SCALE, 1.0);
+ d->useLocking  = group.readEntry(CONF_LOCKING, true);
+ d->allowPNG    = group.readEntry(CONF_ALLOW_FIXED_CARDS, true);
+ d->allowSVG    = group.readEntry(CONF_ALLOW_SCALED_CARDS, true);
+ d->currentCard = group.readEntry(CONF_CARD, QString());
+ d->currentDeck = group.readEntry(CONF_DECK, QString());
 
- if (cg.readEntry(CONF_USEGLOBALDECK, false)) {
-	bool random;
-	getGlobalDeck(pCardDir, random);
-	if (random || pDeck.isNull() ) {
-		pDeck = getRandomDeck();
-	}
- }
- if (cg.readEntry(CONF_USEGLOBALCARDDIR, false)) {
-	bool random;
-	getGlobalCardDir(pCardDir, random);
-	if (random || pCardDir.isNull() ) {
-		pCardDir = getRandomCardDir();
-	}
- }
+  // GUI
+  setupGUI();
 }
 
-QString KCardDialog::getDefaultDeck()
+void KCardDialog::saveSettings(KConfigGroup& group)
 {
-    KCardDialog::init();
-    return QLatin1String("decks/") + KCARD_DEFAULTDECK;
+  group.writeEntry(CONF_LOCKING, d->useLocking);
+  group.writeEntry(CONF_ALLOW_FIXED_CARDS, d->allowPNG);
+  group.writeEntry(CONF_ALLOW_SCALED_CARDS, d->allowSVG);
+  group.writeEntry(CONF_CARD, d->currentCard);
+  group.writeEntry(CONF_DECK, d->currentDeck); 
 }
 
-QString KCardDialog::getDefaultCardDir()
+void KCardDialog::setupGUI()
 {
-    KCardDialog::init();
+  // Dialog
+  setCaption(i18n("Carddeck Selection"));
+  setButtons(Ok|Cancel);
+  setDefaultButton(Ok);
+  setModal(true);
+  showButtonSeparator(true);
+  //adjustSize();
 
-    return KCARD_DEFAULTCARDDIR;
-}
+  // Inner widget
+  Ui::KGameCardSelectorBase* ui = &(d->ui);
+  QWidget* widget = new QWidget(this);
+  d->ui.setupUi(widget);
+  setMainWidget(widget);
 
-QString KCardDialog::getCardPath(const QString &carddir, int index)
-{
-    KCardDialog::init();
-
-    QString entry = carddir + QString::number(index) + QLatin1String(".png");
-    return KStandardDirs::locate( "cards", entry );
-}
-
-QString KCardDialog::deck() const { return d->cDeck; }
-void KCardDialog::setDeck(const QString& file) { d->cDeck=file; }
-QString KCardDialog::cardDir() const { return d->cCardDir; }
-void KCardDialog::setCardDir(const QString& dir) { d->cCardDir=dir; }
-KCardDialog::CardFlags KCardDialog::flags() const { return d->cFlags; }
-double KCardDialog::cardScale() const { return d->cScale; }
-bool KCardDialog::isRandomDeck() const
-{ return (d->randomDeck ? d->randomDeck->isChecked() : false); }
-bool KCardDialog::isRandomCardDir() const
-{ return (d->randomCardDir ? d->randomCardDir->isChecked() : false); }
-bool KCardDialog::isGlobalDeck() const
-{ return (d->globalDeck ? d->globalDeck->isChecked() : false); }
-bool KCardDialog::isGlobalCardDir() const
-{ return (d->globalCardDir ? d->globalCardDir->isChecked() : false); }
-
-void KCardDialog::setupDialog(bool showResizeBox)
-{
-  QFrame *main =new QFrame(this);
-  setMainWidget(main);
-  QHBoxLayout* topLayout = new QHBoxLayout(main);
-  topLayout->setSpacing( spacingHint() );
-  QVBoxLayout* cardLayout = new QVBoxLayout;
-  QVBoxLayout* gboxLayout;
-  topLayout->addLayout( cardLayout );
-  QString path, file;
-  QMatrix m;
-  m.scale(0.8,0.8);
-
-  setInitialSize(QSize(600,400));
-
-  if (! (flags() & NoDeck))
+  // Game does not allow fixed sized cards
+  if (!d->allowPNG)
   {
-    QHBoxLayout* layout = new QHBoxLayout;
-    cardLayout->addLayout( layout );
+    ui->checkBoxPNG->setEnabled(false);
+    ui->checkBoxSVG->setEnabled(false);
+    ui->checkBoxPNG->setCheckState(Qt::Unchecked);
+    d->usePNGOnly = false;
+    d->useSVGOnly = true;
+  }
+  kDebug() << "ALLOW PNG " << d->allowPNG;
+  kDebug() << "ALLOW SVG " << d->allowSVG;
 
-    // Deck iconview
-    QGroupBox* grp1 = new QGroupBox(i18n("Choose Backside"), main);
-    layout->addWidget(grp1);
-    gboxLayout = new QVBoxLayout(grp1);
-
-    d->deckIconView = new QListWidget(grp1);
-    d->deckIconView->setObjectName(QLatin1String("decks"));
-    d->deckIconView->setSpacing(8);
-//    d->deckIconView->setUniformItemSizes(true);
-    d->deckIconView->setSelectionMode(QAbstractItemView::SingleSelection);
-    d->deckIconView->setResizeMode(QListView::Adjust);
-    d->deckIconView->setMinimumWidth(360);
-    d->deckIconView->setMinimumHeight(170);
-    d->deckIconView->setWordWrap(false);
-    d->deckIconView->setViewMode(QListView::IconMode);
-    gboxLayout->addWidget(d->deckIconView);
-
-    // deck select
-    QVBoxLayout* l = new QVBoxLayout;
-    layout->addLayout(l);
-    QGroupBox* grp3 = new QGroupBox(i18n("Backside"), main);
-    grp3->setFixedSize(100, 130);
-    gboxLayout = new QVBoxLayout(grp3);
-    l->addWidget(grp3, 0, Qt::AlignTop|Qt::AlignHCenter);
-    d->deckLabel = new QLabel(grp3);
-    d->deckLabel->setText(i18n("empty"));
-    d->deckLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-    d->deckLabel->setGeometry(10, 20, 80, 90);
-    gboxLayout->addWidget(d->deckLabel);
-
-    d->randomDeck = new QCheckBox(main);
-    d->randomDeck->setChecked(false);
-    connect(d->randomDeck, SIGNAL(toggled(bool)), this,
-            SLOT(slotRandomDeckToggled(bool)));
-    d->randomDeck->setText(i18n("Random backside"));
-    l->addWidget(d->randomDeck, 0, Qt::AlignTop|Qt::AlignHCenter);
-
-    d->globalDeck = new QCheckBox(main);
-    d->globalDeck->setChecked(false);
-    d->globalDeck->setText(i18n("Use global backside"));
-    l->addWidget(d->globalDeck, 0, Qt::AlignTop|Qt::AlignHCenter);
-
-    QPushButton* b = new QPushButton(i18n("Make Backside Global"), main);
-    connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalDeck()));
-    l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
-
-    connect(d->deckIconView,SIGNAL(itemClicked(QListWidgetItem *)),
-            this,SLOT(slotDeckClicked(QListWidgetItem *)));
+  // Game does not allow scaled cards
+  if (!d->allowSVG)
+  {
+    ui->checkBoxSVG->setEnabled(false);
+    ui->checkBoxPNG->setEnabled(false);
+    ui->checkBoxSVG->setCheckState(Qt::Unchecked);
+    d->useSVGOnly = false;
+    d->usePNGOnly = true;
   }
 
-  if (! (flags() & NoCards))
-  {
-    // Cards iconview
-    QHBoxLayout* layout = new QHBoxLayout;
-    cardLayout->addLayout(layout);
-    QGroupBox* grp2 = new QGroupBox(i18n("Choose Frontside"), main);
-    layout->addWidget(grp2);
-    gboxLayout = new QVBoxLayout(grp2);
+  // Set checkboxes
+  if (d->useLocking) ui->checkBoxLock->setCheckState(Qt::Checked);
+  if (d->useSVGOnly) ui->checkBoxSVG->setCheckState(Qt::Checked);
+  if (d->usePNGOnly) ui->checkBoxPNG->setCheckState(Qt::Checked);
 
-    d->cardIconView = new QListWidget(grp2);
-    d->cardIconView->setObjectName(QLatin1String("cards"));
-    d->cardIconView->setSpacing(8);
-//    d->cardIconView->setUniformItemSizes(true);
-    d->cardIconView->setSelectionMode(QAbstractItemView::SingleSelection);
-    d->cardIconView->setResizeMode(QListView::Adjust);
-    d->cardIconView->setMinimumWidth(360);
-    d->cardIconView->setMinimumHeight(170);
-    d->cardIconView->setWordWrap(false);
-    d->cardIconView->setViewMode(QListView::IconMode);
-    gboxLayout->addWidget(d->cardIconView);
+  // Game wants locked backsides?
+  ui->backList->setEnabled(!d->useLocking);
 
-    // Card select
-    QVBoxLayout* l = new QVBoxLayout;
-    layout->addLayout(l);
-    QGroupBox* grp4 = new QGroupBox(i18n("Frontside"), main);
-    grp4->setFixedSize(100, 130);
-    gboxLayout = new QVBoxLayout(grp4);
-    l->addWidget(grp4, 0, Qt::AlignTop|Qt::AlignHCenter);
-    d->cardLabel = new QLabel(grp4);
-    d->cardLabel->setText(i18n("empty"));
-    d->cardLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-    d->cardLabel->setGeometry(10, 20, 80, 90 );
-    gboxLayout->addWidget(d->cardLabel);
+  // Set lists and preview
+   if (d->currentCard.isNull()) d->currentCard = defaultCardName(d->allowSVG, d->allowPNG);
+   if (d->currentDeck.isNull()) d->currentDeck = defaultDeckName(d->allowSVG, d->allowPNG);
+  insertCardIcons();
+  insertDeckIcons();
+  updateFront(d->currentCard);
+  updateBack(d->currentDeck);
 
-    d->randomCardDir = new QCheckBox(main);
-    d->randomCardDir->setChecked(false);
-    connect(d->randomCardDir, SIGNAL(toggled(bool)), this,
-            SLOT(slotRandomCardDirToggled(bool)));
-    d->randomCardDir->setText(i18n("Random frontside"));
-    l->addWidget(d->randomCardDir, 0, Qt::AlignTop|Qt::AlignHCenter);
+  
+  // Connect signals
+  connect(ui->frontList, SIGNAL(currentItemChanged( QListWidgetItem * , QListWidgetItem * )),
+          this, SLOT(updateFront(QListWidgetItem * , QListWidgetItem * )));
+  connect(ui->backList, SIGNAL(currentItemChanged( QListWidgetItem * , QListWidgetItem * )),
+          this, SLOT(updateBack(QListWidgetItem * , QListWidgetItem * )));
+  connect(ui->checkBoxLock, SIGNAL(stateChanged(int)), this, SLOT(updateLocking(int)));
+  connect(ui->checkBoxSVG, SIGNAL(stateChanged(int)), this, SLOT(updateSVG(int)));
+  connect(ui->checkBoxPNG, SIGNAL(stateChanged(int)), this, SLOT(updatePNG(int)));
 
-    d->globalCardDir = new QCheckBox(main);
-    d->globalCardDir->setChecked(false);
-    d->globalCardDir->setText(i18n("Use global frontside"));
-    l->addWidget(d->globalCardDir, 0, Qt::AlignTop|Qt::AlignHCenter);
-
-    QPushButton* b = new QPushButton(i18n("Make Frontside Global"), main);
-    connect(b, SIGNAL(pressed()), this, SLOT(slotSetGlobalCardDir()));
-    l->addWidget(b, 0, Qt::AlignTop|Qt::AlignHCenter);
-
-    connect(d->cardIconView,SIGNAL(itemClicked(QListWidgetItem *)),
-            this,SLOT(slotCardClicked(QListWidgetItem *)));
-  }
-
-  // Insert deck icons
-  // First find the default or alternate path
-  if (! (flags() & NoDeck))
-  {
-      insertDeckIcons();
-
-      // Set default icons if given
-      if (!deck().isNull())
-      {
-          file=deck();
-          QPixmap pixmap(file);
-          pixmap=pixmap.transformed(m);
-          d->deckLabel->setPixmap(pixmap);
-          d->deckLabel->setToolTip(d->helpMap[file]);
-      }
-  }
-
-  // Insert card icons
-  if (! (flags() & NoCards))
-  {
-      insertCardIcons();
-
-    // Set default icons if given
-    if (!cardDir().isNull())
-    {
-        file = cardDir() + KCARD_DEFAULTCARD;
-        QPixmap pixmap(file);
-        pixmap = pixmap.transformed(m);
-        d->cardLabel->setPixmap(pixmap);
-        d->cardLabel->setToolTip(d->helpMap[cardDir()]);
-    }
-  }
-
-  // insert resize box
-  if (showResizeBox)
-  {
-    // this part is a little bit...tricky.
-    // I'm sure there is a cleaner way but I cannot find it.
-    // whenever the pixmap is resized (aka scaled) the box is resized, too. This
-    // leads to an always resizing dialog which is *very* ugly. i worked around
-    // this by using a QWidget which is the only child widget of the group box.
-    // The other widget are managed inside this QWidget - a stretch area on the
-    // right ensures that the KIconViews are not resized...
-
-    // note that the dialog is still resized if you you scale the pixmap very
-    // large. This is desired behaviour as i don't want to make the box even
-    // larger but i want the complete pixmap to be displayed. the dialog is not
-    // resized if you make the pixmap smaller again.
-    QVBoxLayout* layout = new QVBoxLayout;
-    topLayout->addLayout(layout);
-    QGroupBox* grp = new QGroupBox(i18n("Resize Cards"), main);
-    layout->setSizeConstraint(QLayout::SetFixedSize);
-    layout->addWidget(grp);
-    gboxLayout = new QVBoxLayout(grp);
-    QWidget* box = new QWidget(grp);
-    gboxLayout->addWidget(box);
-    QHBoxLayout* hbox = new QHBoxLayout(box);
-    hbox->setMargin(0);
-    hbox->setSpacing(spacingHint());
-    QVBoxLayout* boxLayout = new QVBoxLayout;
-    hbox->addLayout(boxLayout);
-    hbox->addStretch(0);
-
-    d->scaleSlider = new QSlider(Qt::Horizontal, box);
-    d->scaleSlider->setRange( SLIDER_MIN, SLIDER_MAX );
-    d->scaleSlider->setPageStep(1);
-    d->scaleSlider->setValue( -1000+SLIDER_MIN+SLIDER_MAX );
-
-    connect(d->scaleSlider, SIGNAL(valueChanged(int)), this, SLOT(slotCardResized(int)));
-    boxLayout->addWidget(d->scaleSlider, 0, Qt::AlignLeft);
-
-    QPushButton* b = new QPushButton(i18n("Default Size"), box);
-    connect(b, SIGNAL(pressed()), this, SLOT(slotDefaultSize()));
-    boxLayout->addWidget(b, 0, Qt::AlignLeft);
-
-    QLabel* l = new QLabel(i18n("Preview:"), box);
-    boxLayout->addWidget(l);
-    d->cPreviewPix.load(getDefaultDeck());
-    d->cPreview = new QLabel(box);
-    boxLayout->addWidget(d->cPreview, 0, Qt::AlignCenter|Qt::AlignVCenter);
-
-    slotCardResized(d->scaleSlider->value());
-  }
+  // Debug
+  // kDebug() << "DEFAULT DECK: " << defaultDeckName(pAllowSVG, pAllowPNG);
+  // kDebug() << "DEFAULT CARD: " << defaultCardName(pAllowSVG, pAllowPNG);
+  // kDebug() << "RANDOM DECK: " << randomDeckName(pAllowSVG, pAllowPNG);
+  // kDebug() << "RANDOM CARD: " << randomCardName(pAllowSVG, pAllowPNG);
 }
 
-void KCardDialog::insertCardIcons()
+KCardDialog::~KCardDialog()
 {
+  delete d;
+}
+
+void KCardDialog::init()
+{
+  static bool _inited = false;
+  if (_inited) return;
+  _inited = true;
+
+  KGlobal::dirs()->addResourceType("cards", "data", "carddecks/");
+  KGlobal::locale()->insertCatalog("libkdegames");
+  reset();
+}
+
+void KCardDialog::reset()
+{
+  // Important to read backs first
+  readBacks();
+  readFronts();
+}
+
+
+int KCardDialog::getCardDeck(QString &pFrontName,
+                             QString &pBackName,
+                             QWidget *pParent,
+                             bool pAllowSVG,
+                             bool pAllowPNG,
+                             bool pLock, 
+                             bool pRandom 
+                             )
+{
+  KCardDialog::init();
+
+
+  // If random cards we need no dialog (KDE 3.x compatibility)
+  if (pRandom)
+  {
+    pFrontName = randomCardName();
+    pBackName  = randomDeckName();
+    return QDialog::Accepted;
+  }
+
+  KCardDialog dlg(pParent, pAllowSVG, pAllowPNG, pLock, pFrontName, pBackName);
+
+
+  int result=dlg.exec();
+  if (result==QDialog::Accepted)
+  {
+    pFrontName = dlg.cardName();
+    pBackName  = dlg.deckName();
+    kDebug() << "ACCEPT " << pFrontName << " and" << pBackName;
+  }
+  else
+  {
+    kDebug() << "IGNORE " << dlg.cardName() << " and" << dlg.deckName();
+  }
+  return result;
+}
+
+
+QString KCardDialog::deckName() const
+{
+  return d->currentDeck; 
+}
+
+QString KCardDialog::cardName() const
+{ 
+  return d->currentCard; 
+}
+
+
+void KCardDialog::readFronts()
+{
+    // Empty data
+    ds.cardInfo.clear();
+
     QStringList svg;
     // Add SVG card sets
-    if (d->cFlags & SVGCards)
-    {
-      svg = KGlobal::dirs()->findAllResources("cards", "svg*/index.desktop",
-                                                           KStandardDirs::NoDuplicates);
-    }
-    QStringList list = svg+KGlobal::dirs()->findAllResources("cards", "card*/index.desktop",
-                                                         KStandardDirs::NoDuplicates);
-    // kDebug(11000) << "insert" << list.count();
-    if (list.isEmpty())
-        return;
+    svg = KGlobal::dirs()->findAllResources("cards", "svg*/index.desktop", KStandardDirs::NoDuplicates);
+    QStringList list = svg+KGlobal::dirs()->findAllResources("cards", "card*/index.desktop", KStandardDirs::NoDuplicates);
 
-    // We shrink the icons a little
-    //
-    QMatrix m;
-    m.scale(0.8,0.8);
-
-    QSize itemSize;
+    if (list.isEmpty()) return;
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
@@ -484,108 +307,387 @@ void KCardDialog::insertCardIcons()
         Q_ASSERT(path[path.length() - 1] == '/');
         QPixmap pixmap(path + cfgcg.readEntry("Preview", "12c.png"));
 
-        if (pixmap.isNull())
-            continue;
+        if (pixmap.isNull()) continue;
 
+        QString idx  = cfgcg.readEntryUntranslated("Name", i18n("unnamed"));
         QString name = cfgcg.readEntry("Name", i18n("unnamed"));
-        QListWidgetItem *item = new QListWidgetItem(name, d->cardIconView);
-        item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-        item->setToolTip(name);
-        item->setData(Qt::DecorationRole, pixmap);
+        KCardInfo info;
+        info.name         = name;
+        info.noi18Name    = idx;
+        info.comment      = cfgcg.readEntry("Comment",i18n("KDE card deck"));
+        info.preview      = pixmap; 
+        info.path         = path;
+        info.back         = cfgcg.readEntry("Back",QString());
+        // The back name is read UNTRANSLATED...we need to find the right name for it now
+        info.back         = findi18nBack(info.back);
+        if (!info.back.isNull()) kDebug() << "FOUND BACK " << info.back;
+        info.size         = cfgcg.readEntry("BackSize", QSizeF(pixmap.size()));
+        info.isDefault    = cfgcg.readEntry("Default", false);
 
-        d->cardMap[item] = path;
-        d->helpMap[path] = cfgcg.readEntry("Comment",name);
+        QString svg    = cfgcg.readEntry("SVG", QString());
+        if (!svg.isNull())
+        {
+          QFileInfo svgInfo(QDir(path), svg);
+          info.svgfile = svgInfo.filePath();
+        }
+        else
+        {
+          info.svgfile = QString();
+        }
 
-        itemSize = itemSize.expandedTo(pixmap.size());
+        ds.cardInfo[name] = info;
+
     }
-//    d->cardIconView->setUniformItemSizes(true);
-    d->cardIconView->setIconSize(itemSize);
+}
+
+QString KCardDialog::findi18nBack(QString& name)
+{
+  if (name.isNull()) return name;
+
+  QMapIterator<QString, KCardInfo> it(ds.deckInfo);
+  while (it.hasNext())
+  {
+      it.next();
+      KCardInfo v = it.value();
+      if (v.noi18Name == name) return v.name;
+  }
+  kError() << "No translation for back card " << name << "found";
+  return name;
+}
+
+void KCardDialog::insertCardIcons()
+{
+    // Prevent empty preview
+    if (d->useSVGOnly && !isSVGCard(d->currentCard)) updateFront(defaultCardName(!d->usePNGOnly, !d->useSVGOnly));
+    if (d->usePNGOnly && isSVGCard(d->currentCard)) updateFront(defaultCardName(!d->usePNGOnly, !d->useSVGOnly));
+
+    // Clear GUI
+    d->ui.frontList->clear();
+
+    // Rebuild list
+    QSize itemSize;
+    QMapIterator<QString, KCardInfo> it(ds.cardInfo);
+    while (it.hasNext())
+    {
+        it.next();
+        KCardInfo v = it.value();
+        // Show only SVG files?
+        if (d->filterOutCard(v)) continue;
+
+        QPixmap previewPixmap = v.preview.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+        QListWidgetItem *item = new QListWidgetItem(v.name, d->ui.frontList);
+        item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        item->setToolTip(v.name);
+        item->setData(Qt::DecorationRole, previewPixmap);
+        itemSize = itemSize.expandedTo(previewPixmap.size());
+    }
+    d->ui.frontList->setIconSize(itemSize);
+}
+
+void KCardDialog::updateFront(QListWidgetItem* current , QListWidgetItem* /*last*/)
+{
+  if (current != 0) updateFront(current->text());
+}
+
+void KCardDialog::updateFront(QString item)
+{
+  // Clear item?
+  if (item.isNull())
+  {
+    d->ui.frontPreview->setPixmap(QPixmap());
+    d->ui.cardName->setText(QString());
+    d->ui.cardDescription->setText(QString());
+  }
+  else
+  {
+    KCardInfo info = ds.cardInfo[item];
+    QFont font;
+    font.setBold(true);
+    d->ui.cardName->setText(info.name);
+    d->ui.cardName->setFont(font);
+
+    d->ui.cardDescription->setText(info.comment);
+    QPixmap pixmap= info.preview;
+    if (pixmap.height() > d->ui.frontPreview->height())
+      pixmap = pixmap.scaledToHeight(d->ui.frontPreview->height(), Qt::SmoothTransformation);
+    if (pixmap.width() > d->ui.frontPreview->width())
+      pixmap = pixmap.scaledToWidth(d->ui.frontPreview->width(), Qt::SmoothTransformation);
+    d->ui.frontPreview->setPixmap(pixmap);
+
+    // Lock front and back side?
+    if (d->useLocking && !info.back.isNull())
+    {
+      updateBack(info.back);
+    }
+    else if (d->useLocking)
+    {
+      // QMap<QString, KCardInfo>::const_iterator it = d->deckInfo.constBegin();
+      QString name = defaultDeckName(!d->usePNGOnly, !d->useSVGOnly);
+      updateBack(name);
+    }
+  }
+  d->currentCard = item;
+}
+
+QString KCardDialog::getDefaultCardDir(bool pAllowSVG, bool pAllowPNG)
+{
+  KCardDialog::init();
+  QString name = defaultCardName(pAllowSVG, pAllowPNG);
+  return cardDir(name);
+}
+QString KCardDialog::getDefaultDeck(bool pAllowSVG, bool pAllowPNG)
+{
+  KCardDialog::init();
+  QString name = defaultDeckName(pAllowSVG, pAllowPNG);
+  return deckFilename(name);
+}
+
+QString KCardDialog::defaultCardName(bool pAllowSVG, bool pAllowPNG)
+{
+  KCardDialog::init();
+  QString noDefault;
+  // Count filtered cards
+  QMapIterator<QString, KCardInfo> it(ds.cardInfo);
+  while (it.hasNext())
+  {
+      it.next();
+      KCardInfo v = it.value();
+      // Filter
+      if (ds.filterOutCard(v, !pAllowPNG, !pAllowSVG)) continue;
+      if (v.isDefault) return v.name;
+      // Collect any deck if no default is stored
+      noDefault = v.name;
+  }
+  if (noDefault.isNull()) kError() << "Could not find default card name";
+  return noDefault;
+}
+QString KCardDialog::defaultDeckName(bool pAllowSVG, bool pAllowPNG)
+{
+  KCardDialog::init();
+  QString noDefault;
+  // Count filtered cards
+  QMapIterator<QString, KCardInfo> it(ds.deckInfo);
+  while (it.hasNext())
+  {
+      it.next();
+      KCardInfo v = it.value();
+      // Filter
+      if (ds.filterOutCard(v, !pAllowPNG, !pAllowSVG)) continue;
+      if (v.isDefault) 
+      {
+        return v.name;
+      }
+      // Collect any deck if no default is stored
+      noDefault = v.name;
+  }
+  if (noDefault.isNull()) kError() << "Could not find default deck name";
+  return noDefault;
+}
+
+
+QString KCardDialog::randomCardName(bool pAllowSVG, bool pAllowPNG)
+{
+  KCardDialog::init();
+  // Collect matching items
+  QStringList list;
+
+  // Count filtered cards
+  QMapIterator<QString, KCardInfo> it(ds.cardInfo);
+  while (it.hasNext())
+  {
+      it.next();
+      KCardInfo v = it.value();
+      // Filter
+      if (ds.filterOutCard(v, !pAllowPNG, !pAllowSVG)) continue;
+      list.append(v.name);
+  }
+
+  // Draw random one
+  int d = KRandom::random() % list.count();
+  return list.at(d);
+}
+
+QString KCardDialog::randomDeckName(bool pAllowSVG, bool pAllowPNG)
+{
+  KCardDialog::init();
+  // Collect matching items
+  QStringList list;
+
+  // Count filtered cards
+  QMapIterator<QString, KCardInfo> it(ds.deckInfo);
+  while (it.hasNext())
+  {
+      it.next();
+      KCardInfo v = it.value();
+      // Filter
+      if (ds.filterOutCard(v, !pAllowPNG, !pAllowSVG)) continue;
+      list.append(v.name);
+  }
+
+  // Draw random one
+  int d = KRandom::random() % list.count();
+  return list.at(d);
+}
+
+void KCardDialog::updateLocking(int state)
+{
+  if (state == Qt::Checked)
+  {
+    d->useLocking = true;
+    // Update previews
+    updateFront(d->currentCard);
+  }
+  else
+  {
+    d->useLocking = false;
+  }
+  d->ui.backList->setEnabled(!d->useLocking);
+}
+
+void KCardDialog::updateSVG(int state)
+{
+  if (state == Qt::Checked)
+  {
+    d->useSVGOnly = true;
+  }
+  else
+  {
+    d->useSVGOnly = false;
+  }
+  //Prevent filtering out everything
+  if (d->usePNGOnly && d->useSVGOnly)
+  { 
+    d->usePNGOnly = false;
+    d->ui.checkBoxPNG->setCheckState(Qt::Unchecked);
+  }
+  insertCardIcons();
+  insertDeckIcons();
+}
+
+void KCardDialog::updatePNG(int state)
+{
+  if (state == Qt::Checked)
+  {
+    d->usePNGOnly = true;
+  }
+  else
+  {
+    d->usePNGOnly = false;
+  }
+  //Prevent filtering out everything
+  if (d->usePNGOnly && d->useSVGOnly)
+  { 
+    d->useSVGOnly = false;
+    d->ui.checkBoxSVG->setCheckState(Qt::Unchecked);
+  }
+  insertCardIcons();
+  insertDeckIcons();
+}
+
+
+void KCardDialog::updateBack(QListWidgetItem* current , QListWidgetItem* /*last*/)
+{
+  if (current != 0) updateBack(current->text());
+}
+
+void KCardDialog::updateBack(QString item)
+{
+  if (item.isNull())
+  {
+    d->ui.backPreview->setPixmap(QPixmap());
+  }
+  else
+  {
+    KCardInfo info = ds.deckInfo[item];
+    QPixmap pixmap= info.preview;
+    if (pixmap.height() > d->ui.backPreview->height())
+      pixmap = pixmap.scaledToHeight(d->ui.backPreview->height(), Qt::SmoothTransformation);
+    if (pixmap.width() > d->ui.backPreview->width())
+      pixmap = pixmap.scaledToWidth(d->ui.backPreview->width(), Qt::SmoothTransformation);
+    d->ui.backPreview->setPixmap(pixmap);
+  }
+  d->currentDeck = item;
 }
 
 void KCardDialog::insertDeckIcons()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop",
-                                                         KStandardDirs::NoDuplicates);
-    if (list.isEmpty())
-        return;
+    // Prevent empty preview
+    if (d->useSVGOnly && !isSVGDeck(d->currentDeck)) updateBack(defaultDeckName(!d->usePNGOnly, !d->useSVGOnly));
+    if (d->usePNGOnly && isSVGDeck(d->currentDeck)) updateBack(defaultDeckName(!d->usePNGOnly, !d->useSVGOnly));
 
-    QString label;
+    // Clear GUI
+    d->ui.backList->clear();
 
-    // We shrink the icons a little
-    QMatrix m;
-    m.scale(0.8,0.8);
-
+    // Rebuild list
     QSize itemSize;
+    QMapIterator<QString, KCardInfo> it(ds.deckInfo);
+    while (it.hasNext())
+    {
+        it.next();
+        KCardInfo v = it.value();
+        // Show only SVG files?
+        if (d->filterOutCard(v)) continue;
+        QPixmap previewPixmap = v.preview.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+        QString name = v.name;
+        QListWidgetItem *item = new QListWidgetItem(name, d->ui.backList);
+        item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        item->setToolTip(name);
+        item->setData(Qt::DecorationRole, previewPixmap);
+        itemSize = itemSize.expandedTo(previewPixmap.size());
+    }
+    d->ui.backList->setIconSize(itemSize);
+}
+
+void KCardDialog::readBacks()
+{
+    // Empty data
+    ds.deckInfo.clear();
+
+    QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop", KStandardDirs::NoDuplicates);
+    if (list.isEmpty()) return;
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
         KConfig cfg(*it, KConfig::OnlyLocal);
-        QPixmap pixmap(getDeckName(*it));
-        if (pixmap.isNull())
-            continue;
-
-        // pixmap=pixmap.transformed(m);
+        QString path = (*it).left((*it).lastIndexOf('/') + 1);
+        Q_ASSERT(path[path.length() - 1] == '/');
+        QPixmap pixmap(getDeckFileNameFromIndex(*it));
+        if (pixmap.isNull()) continue;
+        //pixmap = pixmap.scaledToWidth(72, Qt::SmoothTransformation);
+        QPixmap previewPixmap = pixmap.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
         KConfigGroup cfgcg(&cfg, "KDE Cards");
+        QString idx  = cfgcg.readEntryUntranslated("Name", i18n("unnamed"));
         QString name = cfgcg.readEntry("Name", i18n("unnamed"));
-        QListWidgetItem *item = new QListWidgetItem(name, d->deckIconView);
-        item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-        item->setToolTip(name);
-        item->setData(Qt::DecorationRole, pixmap);
+        KCardInfo info;
+        info.name         = name;
+        info.noi18Name    = idx;
+        info.path         = getDeckFileNameFromIndex(*it);
+        info.comment      = cfgcg.readEntry("Comment",i18n("KDE card deck"));
+        info.preview      = pixmap; 
+        info.size         = cfgcg.readEntry("Size", QSizeF(pixmap.size()));
+        info.isDefault    = cfgcg.readEntry("Default", false);
 
-        d->deckMap[item] = getDeckName(*it);
-        d->helpMap[d->deckMap[item]] = cfgcg.readEntry("Comment",name);
-
-        itemSize = itemSize.expandedTo(pixmap.size());
-    }
-//    d->deckIconView->setUniformItemSizes(true);
-    d->deckIconView->setIconSize(itemSize);
-}
-
-
-KCardDialog::~KCardDialog()
-{
- delete d;
-}
-
-
-// Create the dialog
-KCardDialog::KCardDialog( QWidget *parent, CardFlags mFlags)
-    : KDialog( parent ),
-    d( new KCardDialogPrivate )
-{
-	setCaption(i18n("Carddeck Selection"));
-	setButtons(Ok|Cancel);
-	setDefaultButton(Ok);
-	setModal(true);
-	showButtonSeparator(true);
-    KCardDialog::init();
-
-    d->cFlags = mFlags;
-}
-
-void KCardDialog::slotDeckClicked(QListWidgetItem *item)
-{
-    if (item && item->data(Qt::DecorationRole).type() == QVariant::Pixmap)
-    {
-        d->deckLabel->setPixmap(item->data(Qt::DecorationRole).value<QPixmap>());
-        d->deckLabel->setToolTip(d->helpMap[d->deckMap[item]]);
-        setDeck(d->deckMap[item]);
+        QString svg    = cfgcg.readEntry("SVG", QString());
+        if (!svg.isNull())
+        {
+          QFileInfo svgInfo(QDir(path), svg);
+          info.svgfile = svgInfo.filePath();
+        }
+        else
+        {
+          info.svgfile = QString();
+        }
+        ds.deckInfo[name] = info;
     }
 }
 
-void KCardDialog::slotCardClicked(QListWidgetItem *item)
-{
-    if (item && item->data(Qt::DecorationRole).type() == QVariant::Pixmap)
-    {
-        d->cardLabel->setPixmap(item->data(Qt::DecorationRole).value<QPixmap>());
-        QString path = d->cardMap[item];
-        d->cardLabel->setToolTip(d->helpMap[path]);
-        setCardDir(path);
-    }
-}
 
-QString KCardDialog::getDeckName(const QString &desktop)
+
+
+QString KCardDialog::getDeckFileNameFromIndex(const QString &desktop)
 {
     QString entry = desktop.left(desktop.length() - strlen(".desktop"));
     if (KStandardDirs::exists(entry + QString::fromLatin1(".png")))
@@ -597,271 +699,60 @@ QString KCardDialog::getDeckName(const QString &desktop)
     return QString();
 }
 
-QString KCardDialog::getRandomDeck()
+
+
+// Retrieve the SVG file belonging to the given card back deck.
+QString KCardDialog::deckSVGFilePath(const QString& name)
 {
-    KCardDialog::init();
-
-    QStringList list = KGlobal::dirs()->findAllResources("cards", "decks/*.desktop");
-    if (list.isEmpty())
-        return QString();
-
-    int d = KRandom::random() % list.count();
-    return getDeckName(list.at(d));
+  KCardDialog::init();
+  if (!ds.deckInfo.contains(name)) return QString();
+  KCardInfo v = ds.deckInfo.value(name);
+  return v.svgfile;
 }
 
-QString KCardDialog::getRandomCardDir()
+// Retrieve the SVG file belonging to the given card fronts.
+QString KCardDialog::cardSVGFilePath(const QString& name)
 {
-    KCardDialog::init();
-
-    QStringList list = KGlobal::dirs()->findAllResources("cards", "card*/index.desktop");
-    if (list.isEmpty())
-        return QString();
-
-    int d = KRandom::random() % list.count();
-    QString entry = list.at(d);
-    return entry.left(entry.length() - strlen("index.desktop"));
+  KCardDialog::init();
+  if (!ds.cardInfo.contains(name)) return QString();
+  KCardInfo v = ds.cardInfo.value(name);
+  return v.svgfile;
 }
 
-void KCardDialog::showRandomDeckBox(bool s)
+// Retrieve the PNG file belonging to the given card back deck.
+QString KCardDialog::deckFilename(const QString& name)
 {
-    if (!d->randomDeck)
-	return;
-
-    if (s)
-        d->randomDeck->show();
-    else
-        d->randomDeck->hide();
+  KCardDialog::init();
+  if (!ds.deckInfo.contains(name)) return QString();
+  KCardInfo v = ds.deckInfo.value(name);
+  return v.path;
 }
 
-void KCardDialog::showRandomCardDirBox(bool s)
+// Retrieve the directory belonging to the given card fronts.
+QString KCardDialog::cardDir(const QString& name)
 {
-    if (!d->randomCardDir)
-	return;
-
-    if (s)
-        d->randomCardDir->show();
-    else
-        d->randomCardDir->hide();
+  KCardDialog::init();
+  if (!ds.cardInfo.contains(name)) return QString();
+  KCardInfo v = ds.cardInfo.value(name);
+  return v.path;
 }
 
-void KCardDialog::slotRandomDeckToggled(bool on)
+// Check whether a card set is SVG
+bool KCardDialog::isSVGCard(const QString& name)
 {
-  if (on) {
-    d->deckLabel->setText("random");
-    setDeck(getRandomDeck());
-  } else {
-    d->deckLabel->setText("empty");
-    setDeck(0);
-  }
+  KCardDialog::init();
+  if (!ds.cardInfo.contains(name)) return false;
+  KCardInfo v = ds.cardInfo.value(name);
+  return !v.svgfile.isNull();
 }
 
-void KCardDialog::slotRandomCardDirToggled(bool on)
+// Check whether a card deck is SVG
+bool KCardDialog::isSVGDeck(const QString& name)
 {
-  if (on) {
-      d->cardLabel->setText("random");
-      setCardDir(getRandomCardDir());
-      if (cardDir().length()>0 && cardDir().right(1)!=QString::fromLatin1("/"))  {
-          setCardDir(cardDir() + QString::fromLatin1("/"));
-      }
-  } else {
-      d->cardLabel->setText("empty");
-      setCardDir(0);
-  }
+  KCardDialog::init();
+  if (!ds.deckInfo.contains(name)) return false;
+  KCardInfo v = ds.deckInfo.value(name);
+  return !v.svgfile.isNull();
 }
-
-void KCardDialog::loadConfig(KConfig* conf)
-{
- if (!conf) {
-	return;
- }
-
- KConfigGroup cg(conf, CONF_GROUP);
-
- if (! (flags() & NoDeck)) {
-	if (cg.hasKey(CONF_DECK)) {
-		setDeck(cg.readEntry(CONF_DECK));
-	}
-
-	bool random = cg.readEntry(CONF_RANDOMDECK, false);
-	d->randomDeck->setChecked(random);
-	slotRandomDeckToggled(random);
-
-	if (cg.hasKey(CONF_USEGLOBALDECK) && cg.readEntry(CONF_USEGLOBALDECK,false)) {
-		d->globalDeck->setChecked(true);
-	} else {
-		d->globalDeck->setChecked(false);
-	}
- }
- if (! (flags() & NoCards)) {
-	if (cg.hasKey(CONF_CARDDIR)) {
-		setCardDir(cg.readPathEntry(CONF_CARDDIR));
-	}
-
-	bool random = cg.readEntry(CONF_RANDOMCARDDIR, false);
-	d->randomCardDir->setChecked(random);
-	slotRandomCardDirToggled(random);
-
-	if (cg.hasKey(CONF_USEGLOBALCARDDIR) && cg.readEntry(CONF_USEGLOBALCARDDIR,false)) {
-		d->globalCardDir->setChecked(true);
-	} else {
-		d->globalCardDir->setChecked(false);
-	}
- }
-
- d->cScale = cg.readEntry(CONF_SCALE, 1.0);
-}
-
-void KCardDialog::slotCardResized(int s)
-{
- if (!d->cPreview) {
-	return;
- }
- if (s < SLIDER_MIN || s > SLIDER_MAX) {
-	kError(11000) << "invalid scaling value!";
-	return;
- }
-
- s *= -1;
- s += (SLIDER_MIN + SLIDER_MAX);
-
- QMatrix m;
- double scale = (double)1000/s;
- m.scale(scale, scale);
- QPixmap pix = d->cPreviewPix.transformed(m);
- d->cPreview->setPixmap(pix);
- d->cScale = scale;
-}
-
-void KCardDialog::slotDefaultSize()
-{
- if (!d->scaleSlider) {
-	return;
- }
- d->scaleSlider->setValue(-1000 + SLIDER_MIN + SLIDER_MAX);
-}
-
-void KCardDialog::saveConfig(KConfig* conf)
-{
- if (!conf) {
-	return;
- }
- KConfigGroup cg(conf, CONF_GROUP);
- if (! (flags() & NoDeck)) {
-	cg.writeEntry(CONF_DECK, deck());
-	cg.writeEntry(CONF_RANDOMDECK, isRandomDeck());
-	cg.writeEntry(CONF_USEGLOBALDECK, d->globalDeck->isChecked());
- }
- if (! (flags() & NoCards)) {
-	cg.writePathEntry(CONF_CARDDIR, cardDir());
-	cg.writeEntry(CONF_RANDOMCARDDIR, isRandomCardDir());
-	cg.writeEntry(CONF_USEGLOBALCARDDIR, d->globalCardDir->isChecked());
- }
- cg.writeEntry(CONF_SCALE, d->cScale);
-}
-
-void KCardDialog::slotSetGlobalDeck()
-{
- KConfig conf(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
- KConfigGroup cg(&conf, CONF_GLOBAL_GROUP);
-
- cg.writeEntry(CONF_GLOBAL_DECK, deck());
- cg.writeEntry(CONF_GLOBAL_RANDOMDECK, isRandomDeck());
-}
-
-void KCardDialog::slotSetGlobalCardDir()
-{
- KConfig conf(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
- KConfigGroup cg(&conf, CONF_GLOBAL_GROUP);
-
- cg.writePathEntry(CONF_GLOBAL_CARDDIR, cardDir());
- cg.writeEntry(CONF_GLOBAL_RANDOMCARDDIR, isRandomCardDir());
-}
-
-void KCardDialog::getGlobalDeck(QString& deck, bool& random)
-{
- KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
- KConfigGroup cg(conf, CONF_GLOBAL_GROUP);
-
- if (!cg.hasKey(CONF_GLOBAL_DECK) || cg.readEntry(CONF_GLOBAL_RANDOMDECK, false)) {
-	deck = getRandomDeck();
-	random = true;
- } else {
-	deck = cg.readEntry(CONF_GLOBAL_DECK);
-	random = cg.readEntry(CONF_GLOBAL_RANDOMDECK, false);
- }
-
- delete conf;
-}
-
-void KCardDialog::getGlobalCardDir(QString& dir, bool& random)
-{
- KConfig* conf = new KConfig(QString::fromLatin1("kdeglobals"), KConfig::OnlyLocal);
- KConfigGroup cg(conf, CONF_GLOBAL_GROUP);
-
- if (!cg.hasKey(CONF_GLOBAL_CARDDIR) || cg.readEntry(CONF_GLOBAL_RANDOMCARDDIR, false)) {
-	dir = getRandomCardDir();
-	random = true;
- } else {
-	dir = cg.readPathEntry(CONF_GLOBAL_CARDDIR);
-	random = cg.readEntry(CONF_GLOBAL_RANDOMCARDDIR, false);
- }
-
- delete conf;
-}
-
-void KCardDialog::init()
-{
-    static bool _inited = false;
-    if (_inited)
-        return;
-    KGlobal::dirs()->addResourceType("cards", "data", "carddecks/");
-
-    KGlobal::locale()->insertCatalog("libkdegames");
-    _inited = true;
-}
-
-
-// Check whether the card back deck contains also an SVG file.
-bool KCardDialog::isSVGDeck(const QString& deck)
-{
-  return !deckSVGFilePath(deck).isNull();
-}
-
-// Check whether the card set is SVG or not.
-bool KCardDialog::isSVGCards(const QString& cardDir)
-{
-  return !cardSVGFilePath(cardDir).isNull();
-}
-
-
-// Retreive the SVG file belonging to the given card back deck.
-QString KCardDialog::deckSVGFilePath(const QString& deck)
-{
-  QFileInfo info(deck);
-  QString deckIndex = deck;
-  deckIndex.replace(".png",".desktop");
-
-  // Card deck section
-  KConfig deckInfo( deckIndex, KConfig::OnlyLocal);
-  KConfigGroup deckGroup(&deckInfo, "KDE Cards");
-  QString deckSVG  = deckGroup.readEntry("SVG", QString());
-  if (deckSVG.isNull()) return deckSVG;
-
-  QFileInfo svgInfo(QDir(info.path()), deckSVG);
-  return svgInfo.filePath();
-}
-
-
-// Retreive the SVG file belonging to the given card back deck.
-QString KCardDialog::cardSVGFilePath(const QString& cardDir)
-{
-  KConfig cardInfo(cardDir+"/index.desktop", KConfig::OnlyLocal);
-  KConfigGroup cardGroup(&cardInfo, "KDE Backdeck");
-  QString cardSVG    = cardGroup.readEntry("SVG", QString());
-  if (cardSVG.isNull()) return cardSVG;
-  QFileInfo svgInfo(QDir(cardDir), cardSVG);
-  return svgInfo.filePath();
-}
-
 
 #include "kcarddialog.moc"

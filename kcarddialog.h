@@ -19,13 +19,11 @@
 #define __KCARDDIALOG_H_
 
 #include <kdialog.h>
+#include <kconfig.h>
 
 #include <libkdegames_export.h>
 
 class QListWidgetItem;
-
-class KConfig;
-
 class KCardDialogPrivate;
 
 /**
@@ -112,21 +110,28 @@ class KDEGAMES_EXPORT KCardDialog : public KDialog
 
 public:
 
-  /**
-   *  @li @p Both - both are shown
-   *  @li @p NoDeck - The deck (back) selection is not shown
-   *  @li @p NoCards - The cards (front) selection is not shown
-   *  @li @p SVGCards - 
-   */
-   enum CardFlags { Both=0, NoDeck=0x01, NoCards=0x02, SVGCards=0x04 };
-
    /**
    * Constructs a card deck selection dialog.
    *
    * @param parent The parent widget of the dialog, if any.
    * @param flags Specifies whether the dialog is modal or not.
    */
-   explicit KCardDialog (QWidget* parent = NULL, CardFlags flags = Both);
+   explicit KCardDialog (QWidget* parent = NULL, 
+                         bool pAllowSVG = true, 
+                         bool pAllowPNG = true, 
+                         bool pLock = true,
+                         QString defFront = QString(),
+                         QString defBack = QString()
+                         );
+
+   /**
+   * Constructs a card deck selection dialog.
+   *
+   * @param parent The parent widget of the dialog, if any.
+   * @param aconfig The configuration for the parameter
+   */
+   explicit KCardDialog (KConfigGroup& group, QWidget* parent = NULL);
+
    /**
    * Destructs a card deck selection dialog.
    */
@@ -171,154 +176,13 @@ public:
    *
    * @return QDialog::result().
    */
-   static int getCardDeck(QString &deck,QString &carddir, QWidget *parent=0,
-                          CardFlags flags=Both, bool* randomDeck=0,
-                          bool* randomCardDir=0, double* scale=0, KConfig* conf=0);
-
-   /**
-    * Read the configuration from the applications rc file and put the
-    * previously chosen deck/frontside in the parameter deck and carddir.
-    *
-    * You probably want to use this function on startup of your program so that
-    * the user gets exactly the card/frontside he/she chose before. Note that
-    * you don't have to care whether the user wants to get a random carddeck or
-    * not as this function takes care of this.
-    * @param conf The config file to read from
-    * @param deck This will contain the chosen deck from the config file (or a
-    * random deck if this is desired according to the config)
-    * @param cardDir This will contain the chosen cardDir from the config file (or a
-    * random cardDir if this is desired according to the config)
-    * @param scale The scaling factor (usually 1)
-    **/
-   static void getConfigCardDeck(KConfig* conf, QString& deck, QString& cardDir, double& scale);
-
-   /**
-   * Returns the default path to the card deck backsides. You want
-   * to use this usually before the user used the card dialog the first
-   * time to get a default deck. You can assume that
-   * \code
-   *   getDefaultDeckPath()
-   * \endcode
-   * is a valid deck.
-   *
-   * @return The default path
-   */
-   static QString getDefaultDeck();
-
-   /**
-   * Returns the default path to the card frontsides. You want
-   * to use this usually before the user used the card dialog the first
-   * time to get an default deck. You can assume that
-   * \code
-   *   getCardPath(getDefaultCardPath(), *)
-   * \endcode
-   * are valid cards for * from 1 to 52.
-   *
-   * @return returns the path to the card directory
-   */
-   static QString getDefaultCardDir();
-
-    /**
-    * Returns the path to the card frontside specified in dir carddir
-    *
-    * @param index the card to open
-    * @param carddir The carddir which's path shall be searched for
-    * @return returns the path to the card
-    */
-    static QString getCardPath(const QString &carddir, int index);
-
-   /**
-    * Returns a random deck in deckPath()
-    * @return A random deck
-    **/
-    static QString getRandomDeck();
-
-   /**
-    * Returns a random directory of cards
-    * @return A random card dir
-    **/
-    static QString getRandomCardDir();
-
-   /**
-    * Show or hides the "random backside" checkbox
-    * @param s Shows the checkbox if true otherwise hides it
-    **/
-   void showRandomDeckBox(bool s);
-
-   /**
-    * Show or hides the "random foreside" checkbox
-    * @param s Shows the checkbox if true otherwise hides it
-    **/
-   void showRandomCardDirBox(bool s);
-
-   /**
-   * Returns the chosen deck, which is a valid path to a imagefile.
-   *
-   * @return The deck
-   */
-   QString deck() const;
-
-   /**
-   * Sets the default deck.
-   * @param file The full path to an image file
-   */
-   void setDeck(const QString& file);
-
-   /**
-   * @return The chosen card directory
-   */
-   QString cardDir() const;
-
-   /**
-   * Sets the default card directory.
-   * @param dir The full path to an card directory
-   */
-   void setCardDir(const QString& dir);
-
-   /**
-   * @return the flags set to the dialog
-   */
-   CardFlags flags() const;
-
-   /**
-   * Creates the default widgets in the dialog. Must be called after
-   * all flags are set. This is only needed if you do NOT use the
-   * getCardDeck static function which provides all calls for you.
-   */
-   void setupDialog(bool showResizeBox = false);
-
-   /**
-    * @return TRUE if the selected deck is a random deck (i.e. the user checked
-    * the random checkbox) otherwise FALSE
-    **/
-   bool isRandomDeck() const;
-
-   /**
-    * @return TRUE if the selected carddir is a random dir (i.e. the user
-    * checked the random checkbox) otherwise FALSE
-    **/
-   bool isRandomCardDir() const;
-
-   /**
-    * @return TRUE if the global checkbox was selected
-    **/
-   bool isGlobalDeck() const;
-
-   /**
-    * @return TRUE if the global checkbox was selected
-    **/
-   bool isGlobalCardDir() const;
-
-   /**
-    * @return The scaling factor of the card pixmap
-    **/
-   double cardScale() const;
-
-   /**
-    * Load the default settings into the dialog (e.g. whether the "use random
-    * deck" checkbox is checked or not).
-    **/
-   void loadConfig(KConfig* conf);
+   static int getCardDeck(QString &pFrontName,
+                          QString &pBackName,
+                          QWidget *pParent = NULL,
+                          bool pAllowSVG = true,
+                          bool pAllowPNG = true,
+                          bool pLock = true, 
+                          bool pRandom = false);
 
    /**
     * Saves the KCardDialog config into a config file. This should be the
@@ -326,43 +190,71 @@ public:
     * ("KCardDialog"). These settings are used by @ref loadConfig and @ref
     * getConfigCardDeck.
     **/
-   void saveConfig(KConfig* conf);
+   void saveSettings(KConfigGroup& group);
+
+
+   /** Retrieve the SVG file belonging to the given card back deck. 
+     * @param name The name of the back deck.
+     * @return The file name and path to the SVG file or QString() if not available. 
+     */
+   static QString deckSVGFilePath(const QString& name);
+
+   /** Retrieve the SVG file belonging to the given card set. 
+     * The SVG IDs used for the card back is '1_club' for Ace of clubs, '10_spade' for
+     * 10 of spades, 'queen_heart' for Queen of Hearts, '2_diamond' for 2 of diamonds and
+     * so on.
+     * @param name The name of the card set.
+     * @return The file name and path to the SVG file or QString() if not available. 
+     */
+   static QString cardSVGFilePath(const QString& name);
+
+   /** Check whether the card set is SVG or not.
+     * @param name The name of the card set.
+     * @return True if SVG data is available.
+     */
+   static bool isSVGCard(const QString& name);
 
    /** Check whether the card back deck contains also an SVG file.
      * The deck is the complete file path to the deck (directory and filename).
      * @return True if SVG data is available.
      */
-   static bool isSVGDeck(const QString& deck);
+   static bool isSVGDeck(const QString& name);
+   static QString defaultCardName(bool pAllowSVG = true, bool pAllowPNG = true);
+   static QString defaultDeckName(bool pAllowSVG = true, bool pAllowPNG = true);
+   static QString randomCardName(bool pAllowSVG = true, bool pAllowPNG = true);
+   static QString randomDeckName(bool pAllowSVG = true, bool pAllowPNG = true);
+   static QString cardDir(const QString& name);
+   static QString deckFilename(const QString& name);
 
-   /** Retrieve the SVG file belonging to the given card back deck. 
-     * The cardDir is the file path to the card directory.
-     * @return The file name and path to the SVG file or QString() if not available. 
-     */
-   static QString deckSVGFilePath(const QString& deck);
+   QString deckName() const;
+   QString cardName() const;
 
-   /** Check whether the card set is SVG or not.
-     * @return True if SVG data is available.
-     */
-   static bool isSVGCards(const QString& cardDir);
+   static void reset();
 
-   /** Retrieve the SVG file belonging to the given card set. 
-     * The cardDir is the file path to the card directory.
-     * The SVG IDs used for the card back is '1_club' for Ace of clubs, '10_spade' for
-     * 10 of spades, 'queen_heart' for Queen of Hearts, '2_diamond' for 2 of diamonds and
-     * so on.
-     * @return The file name and path to the SVG file or QString() if not available. 
-     */
-   static QString cardSVGFilePath(const QString& cardDir);
+   // Compat KDE 3.x
+   static QString getDefaultCardDir(bool pAllowSVG = true, bool pAllowPNG = true);
+   static QString getDefaultDeck(bool pAllowSVG = true, bool pAllowPNG = true);
+
 
 
 protected:
+    static void readFronts();
+    static void readBacks();
     void insertCardIcons();
     void insertDeckIcons();
+    void updateBack(QString item);
+    void updateFront(QString item);
+    void setupGUI();
+    static QString findi18nBack(QString& name);
 
-    static void getGlobalDeck(QString& cardDir, bool& random);
-    static void getGlobalCardDir(QString& deck, bool& random);
 
-    static QString getDeckName(const QString& desktop);
+    /**
+     * Retrieve the filename of the PNG file for the backside of a deck.
+     * diven the desktop filename.
+     * @param desktop The name of the index.desktop file.
+     * @return The name of the PNG file.
+     */
+    static QString getDeckFileNameFromIndex(const QString& desktop);
 
     /**
      * @return the groupname used by functions like @ref saveConfig and @ref
@@ -371,14 +263,11 @@ protected:
     static QString group();
 
 protected Q_SLOTS:
-   void slotDeckClicked(QListWidgetItem *);
-   void slotCardClicked(QListWidgetItem *);
-   void slotRandomCardDirToggled(bool on);
-   void slotRandomDeckToggled(bool on);
-   void slotCardResized(int);
-   void slotDefaultSize();
-   void slotSetGlobalDeck();
-   void slotSetGlobalCardDir();
+    void updateFront(QListWidgetItem*, QListWidgetItem * );
+    void updateBack(QListWidgetItem*, QListWidgetItem * );
+    void updateLocking(int state);
+    void updateSVG(int state);
+    void updatePNG(int state);
 
 private:
    static void init();

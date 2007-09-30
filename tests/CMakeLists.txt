@@ -32,6 +32,6 @@ LIBKDEGAMES_UNIT_TESTS(
 if (Q_WS_X11)
 LIBKDEGAMES_EXECUTABLE_TESTS(
 #    kxerrorhandlertest # File missing from svn
-     kgamepopupitemtest
+#     kgamepopupitemtest
 )
 endif (Q_WS_X11)

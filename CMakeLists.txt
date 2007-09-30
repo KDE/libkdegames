@@ -74,6 +74,7 @@ set(kdegames_LIB_SRCS
 
 kde4_add_ui_files(kdegames_LIB_SRCS
     kgamethemeselector.ui
+    kgamecardselector.ui
 )
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
