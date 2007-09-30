@@ -20,3 +20,5 @@ Comment[sv]=Kortlek med Oxygen-stil
 Comment[x-test]=xxOxygen styled card deckxx
 Comment[zh_CN]=Oxygen 样式牌垛
 Comment[zh_TW]=Oxygen 樣式的紙牌圖案
+Default=true
+
