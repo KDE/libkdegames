@@ -246,7 +246,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
         QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
         HighscoresWidget *hsw = new HighscoresWidget(0);
         KPageWidgetItem *pageItem = new KPageWidgetItem( hsw, title);
-        pageItem->setIcon( KIcon( BarIcon(icon, K3Icon::SizeLarge) ) );
+        pageItem->setIcon( KIcon( BarIcon(icon, KIconLoader::SizeLarge) ) );
         addPage( pageItem );
         _pages.append(pageItem);
         connect(hsw, SIGNAL(tabChanged(int)), SLOT(tabChanged(int)));
