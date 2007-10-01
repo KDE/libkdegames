@@ -37,26 +37,58 @@
 #define CONF_CARD QString::fromLatin1("Cardname")
 #define CONF_DECK QString::fromLatin1("Deckname")
 
-
+/**
+ * Stores the information for one card front or back side.
+ */
 class KCardInfo
 {
   public:
-
+   /** The translated name.
+    */
    QString name;
+
+   /** The untranslated name.
+    */
    QString noi18Name;
+
+   /** The comment (author and description).
+    */
    QString comment;
+   
+   /** The full path information.
+    */
    QString path;
+
+   /** The translated name of the back side.
+    */
    QString back;
+
+   /** The preview image.
+    */
    QPixmap preview;
+
+   /** The full filename of the SVG file.
+    */
    QString svgfile;
+   
+   /** The default size.
+   */
    QSizeF size;
+   
+   /** Is this a default deck or set.
+   */
    bool isDefault;
 };
 
+/**
+ * Local information of the dialog.
+ */
 class KCardDialogPrivate
 {
   public:
 
+    /** Constructor.
+     */
     KCardDialogPrivate()
     {
        // Set default values
@@ -65,6 +97,11 @@ class KCardDialogPrivate
        useLocking = true;
     }
 
+    /** Filter a fiven card front/back depending on its scalable
+      * or non-scalable properties.
+      * @param v The card info structure.
+      * @return True if the card should bve discarded.
+      */
     bool filterOutCard(const KCardInfo& v)
     {
       if (usePNGOnly && !v.svgfile.isNull()) return true;
@@ -72,24 +109,68 @@ class KCardDialogPrivate
       return false;
     }
 
+    /** Should scalable cards are shown.
+     */
     bool useSVGOnly;
+
+    /** Should non scalable cards are shown.
+     */
     bool usePNGOnly;
+
+    /** Are scalable cards allowed.
+     */
     bool allowSVG;
+
+    /** Are non scalable cards allowed.
+     */
     bool allowPNG;
+
+    /** Is the back side locked to the front side.
+     */
     bool useLocking;
+
+    /** Currently chosen back side name.
+     */
     QString currentDeck;
+
+    /** Currently chosen front side name.
+     */
     QString currentCard;
+
+    /** The UI elements.
+     */
     Ui::KGameCardSelectorBase ui;
 };
 
+/**
+ * Local static information.
+ */
 class KCardDialogStatic
 {
   public:
+    /** The card front sides.
+     */
     QMap<QString, KCardInfo> cardInfo;
-    QMap<QString, KCardInfo> deckInfo;
-    QString defaultDeck;
-    QString defaultCard;
 
+    /** The card back sides.
+     */
+    QMap<QString, KCardInfo> deckInfo;
+
+    /** The default front side name.
+     */
+    QString defaultCard;
+    
+    /** The default back side name.
+     */
+    QString defaultDeck;
+
+    /** Filter a fiven card front/back depending on its scalable
+      * or non-scalable properties.
+      * @param v The card info structure.
+      * @param useSVGOnly Are only SVG cards shown
+      * @param usePNGOnly Are only PNG cards shown
+      * @return True if the card should bve discarded.
+      */
     bool filterOutCard(const KCardInfo& v, bool useSVGOnly, bool usePNGOnly)
     {
       if (usePNGOnly && !v.svgfile.isNull()) return true;
@@ -98,6 +179,7 @@ class KCardDialogStatic
     }
 };
 
+// Store local static information.
 static KCardDialogStatic ds;
 
 
@@ -118,22 +200,24 @@ KCardDialog::KCardDialog(QWidget *parent, bool pAllowSVG, bool pAllowPNG, bool p
   setupGUI();
 }
 
-
+// Create the dialog from a config group
 KCardDialog::KCardDialog(KConfigGroup& group, QWidget* parent)
            : KDialog( parent ), d( new KCardDialogPrivate )
 {
   KCardDialog::init();
 
- d->useLocking  = group.readEntry(CONF_LOCKING, true);
- d->allowPNG    = group.readEntry(CONF_ALLOW_FIXED_CARDS, true);
- d->allowSVG    = group.readEntry(CONF_ALLOW_SCALED_CARDS, true);
- d->currentCard = group.readEntry(CONF_CARD, QString());
- d->currentDeck = group.readEntry(CONF_DECK, QString());
+  d->useLocking  = group.readEntry(CONF_LOCKING, true);
+  d->allowPNG    = group.readEntry(CONF_ALLOW_FIXED_CARDS, true);
+  d->allowSVG    = group.readEntry(CONF_ALLOW_SCALED_CARDS, true);
+  d->currentCard = group.readEntry(CONF_CARD, QString());
+  d->currentDeck = group.readEntry(CONF_DECK, QString());
 
   // GUI
   setupGUI();
 }
 
+
+// Store the config group settings
 void KCardDialog::saveSettings(KConfigGroup& group)
 {
   group.writeEntry(CONF_LOCKING, d->useLocking);
@@ -143,6 +227,8 @@ void KCardDialog::saveSettings(KConfigGroup& group)
   group.writeEntry(CONF_DECK, d->currentDeck); 
 }
 
+
+// Setup the user interface
 void KCardDialog::setupGUI()
 {
   // Dialog
@@ -212,11 +298,15 @@ void KCardDialog::setupGUI()
   // kDebug() << "RANDOM CARD: " << randomCardName(pAllowSVG, pAllowPNG);
 }
 
+
+// Destroy the dialog
 KCardDialog::~KCardDialog()
 {
   delete d;
 }
 
+
+// Perform static initialization
 void KCardDialog::init()
 {
   static bool _inited = false;
@@ -228,6 +318,8 @@ void KCardDialog::init()
   reset();
 }
 
+
+// Reset the static information. Reread cards.
 void KCardDialog::reset()
 {
   // Important to read backs first
@@ -236,6 +328,7 @@ void KCardDialog::reset()
 }
 
 
+// Retrieve card set and deck from dialog.
 int KCardDialog::getCardDeck(QString &pFrontName,
                              QString &pBackName,
                              QWidget *pParent,
@@ -269,17 +362,21 @@ int KCardDialog::getCardDeck(QString &pFrontName,
 }
 
 
+// Retrieve selected deck name
 QString KCardDialog::deckName() const
 {
   return d->currentDeck; 
 }
 
+
+// Retrieve selected card name
 QString KCardDialog::cardName() const
 { 
   return d->currentCard; 
 }
 
 
+// Read card front side data
 void KCardDialog::readFronts()
 {
     // Empty data
@@ -333,6 +430,8 @@ void KCardDialog::readFronts()
     }
 }
 
+
+// Translate back side
 QString KCardDialog::findi18nBack(QString& name)
 {
   if (name.isNull()) return name;
@@ -348,6 +447,8 @@ QString KCardDialog::findi18nBack(QString& name)
   return name;
 }
 
+
+// Build list widget
 void KCardDialog::insertCardIcons()
 {
     // Prevent empty preview
@@ -378,11 +479,15 @@ void KCardDialog::insertCardIcons()
     d->ui.frontList->setIconSize(itemSize);
 }
 
+
+// Update front preview
 void KCardDialog::updateFront(QListWidgetItem* current , QListWidgetItem* /*last*/)
 {
   if (current != 0) updateFront(current->text());
 }
 
+
+// Update front preview
 void KCardDialog::updateFront(QString item)
 {
   // Clear item?
@@ -423,12 +528,17 @@ void KCardDialog::updateFront(QString item)
   d->currentCard = item;
 }
 
+
+// Retrieve default card directory
 QString KCardDialog::getDefaultCardDir(bool pAllowSVG, bool pAllowPNG)
 {
   KCardDialog::init();
   QString name = defaultCardName(pAllowSVG, pAllowPNG);
   return cardDir(name);
 }
+
+
+// Retrieve default deck file name
 QString KCardDialog::getDefaultDeck(bool pAllowSVG, bool pAllowPNG)
 {
   KCardDialog::init();
@@ -436,6 +546,8 @@ QString KCardDialog::getDefaultDeck(bool pAllowSVG, bool pAllowPNG)
   return deckFilename(name);
 }
 
+
+// Retrieve default card set name
 QString KCardDialog::defaultCardName(bool pAllowSVG, bool pAllowPNG)
 {
   KCardDialog::init();
@@ -455,6 +567,9 @@ QString KCardDialog::defaultCardName(bool pAllowSVG, bool pAllowPNG)
   if (noDefault.isNull()) kError() << "Could not find default card name";
   return noDefault;
 }
+
+
+// Retrieve default deck name
 QString KCardDialog::defaultDeckName(bool pAllowSVG, bool pAllowPNG)
 {
   KCardDialog::init();
@@ -479,6 +594,7 @@ QString KCardDialog::defaultDeckName(bool pAllowSVG, bool pAllowPNG)
 }
 
 
+// Retrieve a random card name
 QString KCardDialog::randomCardName(bool pAllowSVG, bool pAllowPNG)
 {
   KCardDialog::init();
@@ -501,6 +617,8 @@ QString KCardDialog::randomCardName(bool pAllowSVG, bool pAllowPNG)
   return list.at(d);
 }
 
+
+// Retrieve a random deck name
 QString KCardDialog::randomDeckName(bool pAllowSVG, bool pAllowPNG)
 {
   KCardDialog::init();
@@ -523,6 +641,8 @@ QString KCardDialog::randomDeckName(bool pAllowSVG, bool pAllowPNG)
   return list.at(d);
 }
 
+
+// Update the locking filter
 void KCardDialog::updateLocking(int state)
 {
   if (state == Qt::Checked)
@@ -538,6 +658,8 @@ void KCardDialog::updateLocking(int state)
   d->ui.backList->setEnabled(!d->useLocking);
 }
 
+
+// Update the SVG status filter
 void KCardDialog::updateSVG(int state)
 {
   if (state == Qt::Checked)
@@ -558,6 +680,8 @@ void KCardDialog::updateSVG(int state)
   insertDeckIcons();
 }
 
+
+// Update the PNG status filter
 void KCardDialog::updatePNG(int state)
 {
   if (state == Qt::Checked)
@@ -579,11 +703,14 @@ void KCardDialog::updatePNG(int state)
 }
 
 
+// Update the back preview
 void KCardDialog::updateBack(QListWidgetItem* current , QListWidgetItem* /*last*/)
 {
   if (current != 0) updateBack(current->text());
 }
 
+
+// Update the back preview
 void KCardDialog::updateBack(QString item)
 {
   if (item.isNull())
@@ -603,6 +730,8 @@ void KCardDialog::updateBack(QString item)
   d->currentDeck = item;
 }
 
+
+// Insert the deck icons into the list widget
 void KCardDialog::insertDeckIcons()
 {
     // Prevent empty preview
@@ -633,6 +762,8 @@ void KCardDialog::insertDeckIcons()
     d->ui.backList->setIconSize(itemSize);
 }
 
+
+// Read the card deck data
 void KCardDialog::readBacks()
 {
     // Empty data
@@ -678,8 +809,7 @@ void KCardDialog::readBacks()
 }
 
 
-
-
+// Retrieve the PNG filename for a back side from its index.desktop filename
 QString KCardDialog::getDeckFileNameFromIndex(const QString &desktop)
 {
     QString entry = desktop.left(desktop.length() - strlen(".desktop"));
@@ -703,6 +833,7 @@ QString KCardDialog::deckSVGFilePath(const QString& name)
   return v.svgfile;
 }
 
+
 // Retrieve the SVG file belonging to the given card fronts.
 QString KCardDialog::cardSVGFilePath(const QString& name)
 {
@@ -711,6 +842,7 @@ QString KCardDialog::cardSVGFilePath(const QString& name)
   KCardInfo v = ds.cardInfo.value(name);
   return v.svgfile;
 }
+
 
 // Retrieve the PNG file belonging to the given card back deck.
 QString KCardDialog::deckFilename(const QString& name)
@@ -721,6 +853,7 @@ QString KCardDialog::deckFilename(const QString& name)
   return v.path;
 }
 
+
 // Retrieve the directory belonging to the given card fronts.
 QString KCardDialog::cardDir(const QString& name)
 {
@@ -730,6 +863,7 @@ QString KCardDialog::cardDir(const QString& name)
   return v.path;
 }
 
+
 // Check whether a card set is SVG
 bool KCardDialog::isSVGCard(const QString& name)
 {
@@ -738,6 +872,7 @@ bool KCardDialog::isSVGCard(const QString& name)
   KCardInfo v = ds.cardInfo.value(name);
   return !v.svgfile.isNull();
 }
+
 
 // Check whether a card deck is SVG
 bool KCardDialog::isSVGDeck(const QString& name)
