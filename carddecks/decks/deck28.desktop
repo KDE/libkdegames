@@ -8,5 +8,8 @@ Name[zh_TW]=Oxygen（SVG）
 SVG=deck28_oxygen.svgz
 Comment=SVG Oxygen
 Comment[ga]=Oxygen SVG
+Comment[pt]=Oxygen SVG
+Comment[pt_BR]=Oxygen SVG
+Comment[x-test]=xxSVG Oxygenxx
 Default=false
 
