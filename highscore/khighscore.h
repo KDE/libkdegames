@@ -26,8 +26,6 @@
 #include <QtCore/QObject>
 
 class KConfig;
-//class KRawConfig;
-class KConfig;
 
 /**
  * @short Class for managing highscore tables

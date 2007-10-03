@@ -19,7 +19,6 @@
 */
 
 #include "khighscore.h"
-#include "kconfigrawbackend.h"
 #include <config-highscore.h>
 
 #include <KConfig>

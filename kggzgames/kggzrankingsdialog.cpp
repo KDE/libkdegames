@@ -22,6 +22,7 @@
 
 #include <kggzmod/module.h>
 
+#include <KDebug>
 #include <KScoreDialog>
 #include <KHighscore>
 

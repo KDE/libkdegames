@@ -26,6 +26,7 @@
 #include <QtGui/QPixmap>
 
 #include <KConfig>
+#include <KDebug>
 #include <KGameSvgDocument>
 
 /**

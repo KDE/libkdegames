@@ -23,6 +23,7 @@
 
 #include <klocale.h>
 #include <kfontdialog.h>
+#include <kdebug.h>
 
 #include <QLayout>
 #include <QLabel>

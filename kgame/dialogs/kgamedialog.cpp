@@ -27,6 +27,7 @@
 
 #include <klocale.h>
 #include <kvbox.h>
+#include <kdebug.h>
 
 #include "kgame.h"
 #include "kplayer.h"

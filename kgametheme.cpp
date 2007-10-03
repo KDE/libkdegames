@@ -20,6 +20,7 @@
 
 #include <KStandardDirs>
 #include <KConfig>
+#include <KConfigGroup>
 #include <KDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
