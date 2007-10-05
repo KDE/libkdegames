@@ -478,7 +478,7 @@ void KGGZSeatsDialogPrivate::infos()
 			}
 			if(!p->photo().isEmpty())
 			{
-				KIO::TransferJob *job = KIO::get(p->photo(), false, false);
+				KIO::TransferJob *job = KIO::get(p->photo(), KIO::NoReload, KIO::HideProgressInfo);
 				QObject::connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
 					q, SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
 				QObject::connect(job, SIGNAL(result(KIO::Job*)),
