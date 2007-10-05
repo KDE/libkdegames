@@ -22,6 +22,7 @@
 
 #include <knuminput.h>
 #include <klocale.h>
+#include <kdebug.h>
 
 #include <QLineEdit>
 #include <QComboBox>

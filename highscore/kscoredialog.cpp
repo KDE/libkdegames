@@ -32,6 +32,7 @@ this software.
 #include <KGlobal>
 #include <KConfigGroup>
 #include <KTabWidget>
+#include <KDebug>
 
 #include <QtCore/QTimer>
 #include <QtCore/QList>
