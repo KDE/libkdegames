@@ -34,6 +34,7 @@
 #include <QButtonGroup>
 #include <dnssd/servicebrowser.h>
 #include <QPushButton>
+#include <QGroupBox>
 
 class KGameConnectWidgetPrivate
 {
@@ -62,14 +63,18 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  d = new KGameConnectWidgetPrivate;
 
  QVBoxLayout* vb = new QVBoxLayout(this);
- vb->setSpacing( KDialog::spacingHint() );
+ vb->setMargin(0);
+ QGroupBox* box = new QGroupBox(this);
+ QVBoxLayout* boxlay = new QVBoxLayout(box);
  d->mButtonGroup = new QButtonGroup(this);
  d->mButtonGroup->setExclusive(true);
-//  vb->addWidget(d->mButtonGroup);
+ vb->addWidget(box);
  connect(d->mButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotTypeChanged(int)));
- QRadioButton* buttonCreate = new QRadioButton(i18n("Create a network game"), this);
+ QRadioButton* buttonCreate = new QRadioButton(i18n("Create a network game"), box);
+ boxlay->addWidget(buttonCreate);
  d->mButtonGroup->addButton(buttonCreate,0);
- QRadioButton* buttonJoin = new QRadioButton(i18n("Join a network game"), this);
+ QRadioButton* buttonJoin = new QRadioButton(i18n("Join a network game"), box);
+ boxlay->addWidget(buttonJoin);
  d->mButtonGroup->addButton(buttonJoin,1);
 
  QWidget *g = new QWidget(this);
@@ -79,18 +84,21 @@ KGameConnectWidget::KGameConnectWidget(QWidget* parent) : QWidget(parent)
  d->mClientNameLabel = new QLabel(i18n("Network games:"), g);
  d->mClientName = new QComboBox(g);
 
- QGridLayout* layout = new QGridLayout;
+ QGridLayout* layout = new QGridLayout(g);
+ layout->setMargin(0);
  layout->addWidget(d->mServerNameLabel, 0, 0);
  layout->addWidget(d->mServerName, 0, 1);
  layout->addWidget(d->mClientNameLabel, 1, 0);
  layout->addWidget(d->mClientName, 1, 1);
- layout->setSpacing(KDialog::spacingHint());
- g->setLayout(layout);
  connect(d->mClientName,SIGNAL(activated(int)),SLOT(slotGameSelected(int)));
- (void)new QLabel(i18n("Port to connect to:"), g);
+ QLabel* label = new QLabel(i18n("Port to connect to:"), g);
  d->mPort = new KIntNumInput(g);
- (void)new QLabel(i18n("Host to connect to:"), g);
+ layout->addWidget(label, 2, 0);
+ layout->addWidget(d->mPort, 2, 1);
+ label = new QLabel(i18n("Host to connect to:"), g);
  d->mHost = new QLineEdit(g); 
+ layout->addWidget(label, 3, 0);
+ layout->addWidget(d->mHost, 3, 1);
 
  QPushButton *button=new QPushButton(i18n("&Start Network"), this);
  connect(button, SIGNAL(clicked()), this, SIGNAL(signalNetworkSetup()));
