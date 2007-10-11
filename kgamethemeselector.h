@@ -24,7 +24,8 @@
 #include <libkdegames_export.h>
 
 class KGameTheme;
-class KConfigSkeleton;
+class KConfigSkeleton; 
+class KGameThemeSelectorPrivate;
 
 /**
  * @short A widget used to select the game's theme
@@ -45,13 +46,17 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     public:
+        enum knsstate {
+          NewStuffDisableDownload,
+          NewStuffEnableDownload
+        };
         /**
          * Load a specific theme file.
          * @param groupName the title of the config group in the theme .desktop file
          * @param directory subdirectory (of share/apps/appname) to search in
          * @return true if the theme files and properties could be loaded
          */
-        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));
+        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::knsstate knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));
         virtual ~KGameThemeSelector();
     
     private:

@@ -41,19 +41,19 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
         QString lookupDirectory;
         QString groupName;
 
-        void setupData(KConfigSkeleton* config);
+        void setupData(KConfigSkeleton* config, KGameThemeSelector::knsstate knsflags);
 
         // private slots
         void _k_updatePreview();
         void _k_openKNewStuffDialog();
 };
 
-KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfig, const QString &groupName, const QString &directory)
+KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfig, KGameThemeSelector::knsstate knsflags, const QString &groupName, const QString &directory)
     : QWidget(parent), d(new KGameThemeSelectorPrivate(this))
 {
     d->lookupDirectory = directory;
     d->groupName = groupName;
-    d->setupData(aconfig);
+    d->setupData(aconfig, knsflags);
 }
 
 KGameThemeSelector::~KGameThemeSelector()
@@ -61,7 +61,7 @@ KGameThemeSelector::~KGameThemeSelector()
     delete d;
 }
 
-void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig)
+void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig, KGameThemeSelector::knsstate knsflags)
 {
     ui.setupUi(q);
 
@@ -72,6 +72,11 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
 
     //The lineEdit widget holds our bg path, but the user does not manipulate it directly
     ui.kcfg_Theme->hide();
+    
+    //Disable KNS button?
+    if (knsflags==KGameThemeSelector::NewStuffDisableDownload) {
+      ui.getNewButton->hide();
+    }
 
     //Now get our tilesets into a list
     KGlobal::dirs()->addResourceType("gamethemeselector", "data", KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
