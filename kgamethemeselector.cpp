@@ -41,14 +41,14 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
         QString lookupDirectory;
         QString groupName;
 
-        void setupData(KConfigSkeleton* config, KGameThemeSelector::knsstate knsflags);
+        void setupData(KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags);
 
         // private slots
         void _k_updatePreview();
         void _k_openKNewStuffDialog();
 };
 
-KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfig, KGameThemeSelector::knsstate knsflags, const QString &groupName, const QString &directory)
+KGameThemeSelector::KGameThemeSelector(QWidget* parent, KConfigSkeleton * aconfig, KGameThemeSelector::NewStuffState knsflags, const QString &groupName, const QString &directory)
     : QWidget(parent), d(new KGameThemeSelectorPrivate(this))
 {
     d->lookupDirectory = directory;
@@ -61,7 +61,7 @@ KGameThemeSelector::~KGameThemeSelector()
     delete d;
 }
 
-void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig, KGameThemeSelector::knsstate knsflags)
+void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig, KGameThemeSelector::NewStuffState knsflags)
 {
     ui.setupUi(q);
 

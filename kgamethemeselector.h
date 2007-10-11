@@ -46,7 +46,7 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     public:
-        enum knsstate {
+      enum NewStuffState {
           NewStuffDisableDownload,
           NewStuffEnableDownload
         };
@@ -56,7 +56,7 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
          * @param directory subdirectory (of share/apps/appname) to search in
          * @return true if the theme files and properties could be loaded
          */
-        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::knsstate knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));
+        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));
         virtual ~KGameThemeSelector();
     
     private:
