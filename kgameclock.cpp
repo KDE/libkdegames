@@ -27,6 +27,11 @@
 class KGameClockPrivate
 {
 public:
+    KGameClockPrivate()
+        : sec(0), min(0), hour(0)
+    {
+    }
+
     QTimer *timerClock;
     uint    sec, min, hour;
     KGameClock::ClockType clocktype;
