@@ -391,7 +391,7 @@ void KCardDialog::readFronts()
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
-        KConfig cfg(*it, KConfig::OnlyLocal);
+        KConfig cfg(*it, KConfig::SimpleConfig);
         KConfigGroup cfgcg(&cfg, "KDE Backdeck");
         QString path = (*it).left((*it).lastIndexOf('/') + 1);
         Q_ASSERT(path[path.length() - 1] == '/');
@@ -774,7 +774,7 @@ void KCardDialog::readBacks()
 
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it)
     {
-        KConfig cfg(*it, KConfig::OnlyLocal);
+        KConfig cfg(*it, KConfig::SimpleConfig);
         QString path = (*it).left((*it).lastIndexOf('/') + 1);
         Q_ASSERT(path[path.length() - 1] == '/');
         QPixmap pixmap(getDeckFileNameFromIndex(*it));

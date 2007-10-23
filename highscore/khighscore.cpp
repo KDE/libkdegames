@@ -104,7 +104,7 @@ void KHighscore::init(const char *appname)
                 << filename << "\"";*/
     kDebug() << "Global highscore file \"" << filename << "\"";
     lockedConfig->lock = new KLockFile(filename);
-    lockedConfig->config = new KConfig(filename, KConfig::OpenFlags(KConfig::NoGlobals | KConfig::OnlyLocal)); // read-only   (matt-?)
+    lockedConfig->config = new KConfig(filename, KConfig::OpenFlags(KConfig::CascadeConfig | KConfig::SimpleConfig)); // read-only   (matt-?)
 
     // drop the effective gid
     #warning not portable yet. Unix only. Actually it does not even work there yet.
