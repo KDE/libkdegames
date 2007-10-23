@@ -67,7 +67,7 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
     { KStandardGameAction::EndTurn, KStandardShortcut::AccelNone, 0, "move_end_turn", I18N_NOOP("End Turn"), 0, "endturn", 0  },
     { KStandardGameAction::Hint, KStandardShortcut::AccelNone, Qt::Key_H, "move_hint", I18N_NOOP("&Hint"), 0, "games-hint", I18N_NOOP("Give a hint") },
     { KStandardGameAction::Demo, KStandardShortcut::AccelNone, Qt::Key_D, "move_demo", I18N_NOOP("&Demo"), 0, "media-playback-start", I18N_NOOP("Play a demo") },
-    { KStandardGameAction::Solve, KStandardShortcut::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "wizard", I18N_NOOP("Solve the game") },
+    { KStandardGameAction::Solve, KStandardShortcut::AccelNone, 0, "move_solve", I18N_NOOP("&Solve"), 0, "games-solve", I18N_NOOP("Solve the game") },
 // "settings" menu
     { KStandardGameAction::ChooseGameType, KStandardShortcut::AccelNone, 0, "options_choose_game_type", I18N_NOOP("Choose Game &Type"), 0, 0, 0 },
     { KStandardGameAction::Carddecks, KStandardShortcut::AccelNone, 0, "options_configure_carddecks", I18N_NOOP("Configure &Carddecks..."), 0, 0, 0  },
