@@ -36,9 +36,8 @@ class KGamePopupItemPrivate;
  * KGamePopupItem *messageItem = new KGamePopupItem();
  * myGraphicsScene->addItem(messageItem);
  * ...
- * messageItem->setMessageTimeOut( 3000 ); // 3 sec
- * messageItem->setPosition( BottomLeft );
- * messageItem->showMessage("Hello, I'm a game message! How do you do?");
+ * messageItem->setMessageTimeout( 3000 ); // 3 sec
+ * messageItem->showMessage("Hello, I'm a game message! How do you do?", BottomLeft);
  * \endcode
  */
 class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
@@ -158,6 +157,11 @@ Q_SIGNALS:
      * Emitted when user hovers a link in item
      */
     void linkHovered( const QString& link );
+    /**
+     * Emitted when the popup finishes hiding. This includes hiding caused by
+     * both timeouts and mouse clicks.
+     */
+    void hidden();
 private Q_SLOTS:
     void animationFrame(int);
     void hideMe();

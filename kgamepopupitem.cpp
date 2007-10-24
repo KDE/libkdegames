@@ -336,7 +336,10 @@ void KGamePopupItem::hideMe()
 
     // if we just got moved out of visibility, let's do more - let's hide :)
     if( d->m_timeLine.direction() == QTimeLine::Backward )
+    {
         hide();
+        emit hidden();
+    }
 }
 
 void KGamePopupItem::hoverEnterEvent( QGraphicsSceneHoverEvent* )
@@ -374,6 +377,7 @@ void KGamePopupItem::forceHide(HideType howToHide)
         d->m_timeLine.stop();
         d->m_timer.stop();
         hide();
+        emit hidden();
     }
     else if(howToHide == AnimatedHide)
     {
