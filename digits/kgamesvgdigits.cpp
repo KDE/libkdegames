@@ -374,7 +374,7 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
     d->m_svgDOM.load(d->m_svgFile);
 
     // Get type of digit from .desktop file
-    KConfig *config = new KConfig(d->m_desktopFile, KConfig::OnlyLocal);
+    KConfig *config = new KConfig(d->m_desktopFile, KConfig::SimpleConfig);
     QMap<QString, QString> desktopEntry = config->entryMap("Desktop Entry");
     setDigitType(desktopEntry.value("Type"));
 

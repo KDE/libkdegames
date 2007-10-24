@@ -82,7 +82,7 @@ bool KGameTheme::load(const QString &fileName) {
     d->prefix = QFileInfo(themefile).absolutePath() + '/';
     themefile.close();
 
-    KConfig themeconfig(filePath, KConfig::OnlyLocal);
+    KConfig themeconfig(filePath, KConfig::SimpleConfig);
     if (!themeconfig.hasGroup(d->themeGroup))
     {
         kDebug(11000) << "Config group" << d->themeGroup << "does not exist in" << filePath;
@@ -130,7 +130,7 @@ QString KGameTheme::property(const QString &key) const
         kDebug(11000) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
         return QString();
     }
-    KConfig themeconfig(path(), KConfig::OnlyLocal);
+    KConfig themeconfig(path(), KConfig::SimpleConfig);
     KConfigGroup group = themeconfig.group(d->themeGroup);
     return group.readEntry(key, QString());
 }
