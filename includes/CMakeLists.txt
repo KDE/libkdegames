@@ -6,18 +6,19 @@ install( FILES
 	KChatDialog
 	KExtHighscore
 	KGameCanvas
-        KGameDifficulty
+	KGameDifficulty
 	KGameLCD
 	KGameMisc
+	KGamePopupItem
 	KGameProgress
-        KGamePopupItem
-        KGameTheme
+	KGameSvgDigits
+	KGameSvgDocument
+	KGameTheme
+	KGameThemeSelector
 	KGrid2D
 	KHighscore
 	KScoreDialog
 	KStandardGameAction
-	KGameSvgDocument
-	KGameSvgDigits
 DESTINATION ${INCLUDE_INSTALL_DIR}/KDE )
 
 install( FILES
