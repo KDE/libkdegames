@@ -57,13 +57,13 @@ class KScoreDialog::KScoreDialogPrivate
         //QGridLayout *layout;
         QLineEdit *edit;    ///<The line edit for entering player name
         QMap<QString, QList<QStackedWidget*> > stack;
-        QMap<QString, QList<QLabel*> > labels;
+        QMap<QString, QList<QLabel*> > labels; ///<For each group, the labels along each row in turn starting from "#1"
         QLabel *commentLabel;
         QString comment;
         int fields;
         int hiddenFields;
         QPair<QString, int> newName; //index of the newname to add
-        QPair<QString, int> latest; //index of the latest addition
+        QPair<QString, int> latest; //index of the latest addition (groupName, position)
         int nrCols;
         int numberOfPages;
         bool loaded;
@@ -163,6 +163,10 @@ void KScoreDialog::hideField(int field)
     d->hiddenFields |= field;
 }
 
+/*
+Create the widgets and layouts etc. for the dialog
+*/
+
 void KScoreDialog::KScoreDialogPrivate::setupDialog()
 {
     nrCols = 1;
@@ -185,8 +189,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
             tabWidget->addTab(new QWidget(q), i18n(groupName.toUtf8()));
         tabWidget->setCurrentIndex(tabWidget->count()-1);
         
-        QGridLayout* layout;
-        layout = new QGridLayout( tabWidget->widget( tabWidget->currentIndex() ) );
+        QGridLayout* layout = new QGridLayout( tabWidget->widget( tabWidget->currentIndex() ) );
         //layout->setObjectName("ScoreTab-"+groupName);
         layout->setMargin(marginHint()+20);
         layout->setSpacing(spacingHint());
@@ -206,7 +209,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
         
         for(int field = 1; field < fields; field = field * 2)
         {
-            if ( (fields & field) && !(hiddenFields & field ) )
+            if ( (fields & field) && !(hiddenFields & field ) ) //If it's used and not hidden
             {
                 layout->addItem( new QSpacerItem( 50, 0 ), 0, col[field] );
                 label = new QLabel(header[field], tabWidget->widget(tabWidget->currentIndex()));
@@ -224,7 +227,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
             QLabel *label;
             num.setNum(i);
             label = new QLabel(i18n("#%1", num), tabWidget->widget(tabWidget->currentIndex()));
-            labels[groupName].insert((i-1)*nrCols + 0, label);
+            labels[groupName].insert((i-1)*nrCols + 0, label); //Fill up column zero
             layout->addWidget(label, i+4, 0);
             if (fields & Name) //If we have a Name field
             {
@@ -238,7 +241,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
             }
             for(int field = Name * 2; field < fields; field = field * 2)
             {
-                if ( (fields & field) && !(hiddenFields & field ) )
+                if ( (fields & field) && !(hiddenFields & field ) ) //Maybe disable for Name?
                 {
                     label = new QLabel(tabWidget->widget(tabWidget->currentIndex()));
                     labels[groupName].insert((i-1)*nrCols + col[field], label);
@@ -248,6 +251,10 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
         }
 }
 
+/*
+Fill the dialog with the correct data
+*/
+
 void KScoreDialog::KScoreDialogPrivate::aboutToShow()
 {
     if (!loaded)
@@ -256,11 +263,11 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     if (!nrCols)
         setupDialog();
     
-    int tabIndex=0;
-    int newScoreTabIndex=0;
+    int tabIndex=0; //Index of the current tab
+    int newScoreTabIndex=0; //The index of the tab of the group with the new score
     foreach(QString groupName, scores.keys())
     {
-        //Only display the comment on the page with the new score
+        //Only display the comment on the page with the new score (or) this one if there's only one tab
         if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first.isEmpty() && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
         {
             newScoreTabIndex=tabIndex;
@@ -298,7 +305,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             //kDebug() << "groupName:" << groupName << "id:" << i-1;
             
             FieldInfo score = scores[groupName].at(i-1);
-            label = labels[groupName].at((i-1)*nrCols + 0);
+            label = labels[groupName].at((i-1)*nrCols + 0); //crash! FIXME
             if ( (i == latest.second) && (groupName == latest.first) )
                 label->setFont(bold);
             else
