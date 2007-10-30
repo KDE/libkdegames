@@ -6,6 +6,7 @@ install( FILES
 	KChatDialog
 	KExtHighscore
 	KGameCanvas
+	KGameClock
 	KGameDifficulty
 	KGameLCD
 	KGameMisc
