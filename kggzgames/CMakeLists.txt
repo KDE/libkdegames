@@ -12,7 +12,7 @@ target_link_libraries(kggzgames ${KDE4_KIO_LIBS} ${QT_QTNETWORK_LIBRARY} kggzmod
 # FIXME: we link against kdegames but we only need the scores dialogue
 
 set_target_properties(kggzgames PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-install(TARGETS kggzgmaes 
+install(TARGETS kggzgames 
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
