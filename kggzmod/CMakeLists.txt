@@ -14,8 +14,4 @@ kde4_add_library(kggzmod SHARED ${kggzmod_LIB_SRCS})
 target_link_libraries(kggzmod ${KDE4_KDECORE_LIBS} ${QT_QTNETWORK_LIBRARY} kggznet)
 
 set_target_properties(kggzmod PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-install(TARGETS kggzmod 
-        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-)
+install(TARGETS kggzmod  DESTINATION ${LIB_INSTALL_DIR})
