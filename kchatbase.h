@@ -324,13 +324,6 @@ public Q_SLOTS:
 	 **/
 	void setAcceptMessage(bool a);
 	
-Q_SIGNALS:
-	/**
-	 * Emitted when the user right-clicks on a list item. 
-	 * @see QListBox::rightButtonClicked
-	 **/
-	void rightButtonClicked(QListWidgetItem*, const QPoint&);
-
 protected:
 	/**
 	 * This is called whenever the user pushed return ie wants to send a

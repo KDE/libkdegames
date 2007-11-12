@@ -92,8 +92,6 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  d->mBox = new QListView();
  d->mBox->setModel(d->mModel);
  d->mBox->setItemDelegate(d->mDelegate);
- connect(d->mBox, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)),
-		this, SIGNAL(rightButtonClicked(QListWidgetItem*, const QPoint&)));
  l->addWidget(d->mBox);
 
  connect(d->mModel, SIGNAL(rowsInserted (const QModelIndex&,int,int)),
