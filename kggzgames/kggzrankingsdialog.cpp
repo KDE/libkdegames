@@ -74,7 +74,7 @@ void KGGZRankingsDialogPrivate::slotRankings(const KGGZMod::Event& event)
 		{
 			QString name = e.name(i);
 			int score = e.score(i);
-			kDebug(11004) << "RANKINGS-DIALOG" << name << score << endl;
+			kDebug(11004) << "RANKINGS-DIALOG" << name << score;
 			highscore.writeEntry(i + 1, "Name", name);
 			highscore.writeEntry(i + 1, "Score", score);
 		}

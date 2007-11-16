@@ -450,14 +450,14 @@ void ModulePrivate::slotGGZEvent()
 	if(opcode == msgrankings)
 	{
 		Event e(Event::rankings);
-		kDebug(11003) << "[kggzmod] debug: rankings message" << endl;
+		kDebug(11003) << "[kggzmod] debug: rankings message";
 
 		*m_net >> _num;
 		e.data["num"] = QString::number(_num);
 
 		for(int i = 0; i < _num; i++)
 		{
-			kDebug(11003) << " ~~rankings: iterate~~ " << i << endl;
+			kDebug(11003) << " ~~rankings: iterate~~ " << i;
 			*m_net >> _realname;
 			*m_net >> _ranking;
 			*m_net >> _highscore;
