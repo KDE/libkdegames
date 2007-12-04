@@ -281,10 +281,10 @@ void KCardDialog::setupGUI()
 
   
   // Connect signals
-  connect(ui->frontList, SIGNAL(currentItemChanged( QListWidgetItem * , QListWidgetItem * )),
-          this, SLOT(updateFront(QListWidgetItem * , QListWidgetItem * )));
-  connect(ui->backList, SIGNAL(currentItemChanged( QListWidgetItem * , QListWidgetItem * )),
-          this, SLOT(updateBack(QListWidgetItem * , QListWidgetItem * )));
+  connect(ui->frontList, SIGNAL(itemSelectionChanged()),
+          this, SLOT(updateFront()));
+  connect(ui->backList, SIGNAL(itemSelectionChanged()),
+          this, SLOT(updateBack()));
   connect(ui->checkBoxLock, SIGNAL(stateChanged(int)), this, SLOT(updateLocking(int)));
   connect(ui->checkBoxSVG, SIGNAL(stateChanged(int)), this, SLOT(updateSVG(int)));
   connect(ui->checkBoxPNG, SIGNAL(stateChanged(int)), this, SLOT(updatePNG(int)));
@@ -479,9 +479,11 @@ void KCardDialog::insertCardIcons()
 
 
 // Update front preview
-void KCardDialog::updateFront(QListWidgetItem* current , QListWidgetItem* /*last*/)
+void KCardDialog::updateFront()
 {
-  if (current != 0) updateFront(current->text());
+  QList<QListWidgetItem*> l = d->ui.frontList->selectedItems();
+  if( !l.isEmpty() )
+      updateFront(l.first()->text());
 }
 
 
@@ -702,9 +704,11 @@ void KCardDialog::updatePNG(int state)
 
 
 // Update the back preview
-void KCardDialog::updateBack(QListWidgetItem* current , QListWidgetItem* /*last*/)
+void KCardDialog::updateBack()
 {
-  if (current != 0) updateBack(current->text());
+  QList<QListWidgetItem*> l = d->ui.backList->selectedItems();
+  if( !l.isEmpty() )
+      updateBack(l.first()->text());
 }
 
 
