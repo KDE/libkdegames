@@ -241,10 +241,8 @@ void KCardDialog::setupGUI()
 
   // Inner widget
   Ui::KGameCardSelectorBase* ui = &(d->ui);
-  QWidget* widget = new QWidget(this);
-  d->ui.setupUi(widget);
-  setMainWidget(widget);
-
+  d->ui.setupUi(mainWidget());
+  
   // Game does not allow fixed sized cards
   if (!d->allowPNG)
   {
