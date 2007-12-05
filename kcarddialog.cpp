@@ -109,6 +109,18 @@ class KCardDialogPrivate
       return false;
     }
 
+    /** Currently chosen back side name.
+     */
+    QString currentDeck;
+
+    /** Currently chosen front side name.
+     */
+    QString currentCard;
+
+    /** The UI elements.
+     */
+    Ui::KGameCardSelectorBase ui;
+
     /** Should scalable cards are shown.
      */
     bool useSVGOnly;
@@ -128,18 +140,6 @@ class KCardDialogPrivate
     /** Is the back side locked to the front side.
      */
     bool useLocking;
-
-    /** Currently chosen back side name.
-     */
-    QString currentDeck;
-
-    /** Currently chosen front side name.
-     */
-    QString currentCard;
-
-    /** The UI elements.
-     */
-    Ui::KGameCardSelectorBase ui;
 };
 
 /**

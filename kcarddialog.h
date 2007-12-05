@@ -322,17 +322,15 @@ protected:
 protected Q_SLOTS:
     /**
      * Called by the card set list view when a new item was selected.
-     * @param current The newly selected item.
-     * @param last    The previously selected item.
      */
-    void updateFront(QListWidgetItem* current, QListWidgetItem* last);
+    void updateFront();
     
      /**
      * Called by the card deck list view when a new item was selected.
      * @param current The newly selected item.
      * @param last    The previously selected item.
      */  
-    void updateBack(QListWidgetItem* current, QListWidgetItem* last);
+    void updateBack();
     
     /**
      * Called by the checkboxes when the state of the locking changed.
