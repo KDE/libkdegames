@@ -32,8 +32,10 @@
 // KConfig entries
 #define CONF_GROUP  QString::fromLatin1("KCardDialog")
 #define CONF_LOCKING QString::fromLatin1("Locking")
-#define CONF_ALLOW_FIXED_CARDS QString::fromLatin1("Fixed")
-#define CONF_ALLOW_SCALED_CARDS QString::fromLatin1("Scaled")
+#define CONF_ALLOW_FIXED_CARDS QString::fromLatin1("AllowFixed")
+#define CONF_ALLOW_SCALED_CARDS QString::fromLatin1("AllowScaled")
+#define CONF_SHOWONLY_FIXED_CARDS QString::fromLatin1("ShowFixedOnly")
+#define CONF_SHOWONLY_SCALED_CARDS QString::fromLatin1("ShowScaledOnly")
 #define CONF_CARD QString::fromLatin1("Cardname")
 #define CONF_DECK QString::fromLatin1("Deckname")
 
@@ -209,6 +211,8 @@ KCardDialog::KCardDialog(KConfigGroup& group, QWidget* parent)
   d->useLocking  = group.readEntry(CONF_LOCKING, true);
   d->allowPNG    = group.readEntry(CONF_ALLOW_FIXED_CARDS, true);
   d->allowSVG    = group.readEntry(CONF_ALLOW_SCALED_CARDS, true);
+  d->usePNGOnly  = group.readEntry(CONF_SHOWONLY_FIXED_CARDS, false);
+  d->useSVGOnly  = group.readEntry(CONF_SHOWONLY_SCALED_CARDS, false);
   d->currentCard = group.readEntry(CONF_CARD, QString());
   d->currentDeck = group.readEntry(CONF_DECK, QString());
 
@@ -221,8 +225,10 @@ KCardDialog::KCardDialog(KConfigGroup& group, QWidget* parent)
 void KCardDialog::saveSettings(KConfigGroup& group)
 {
   group.writeEntry(CONF_LOCKING, d->useLocking);
-  group.writeEntry(CONF_ALLOW_FIXED_CARDS, d->allowPNG);
-  group.writeEntry(CONF_ALLOW_SCALED_CARDS, d->allowSVG);
+  group.writeEntry(CONF_ALLOW_FIXED_CARDS, d->allowPNG );
+  group.writeEntry(CONF_ALLOW_SCALED_CARDS, d->allowSVG );
+  group.writeEntry(CONF_SHOWONLY_FIXED_CARDS, d->usePNGOnly );
+  group.writeEntry(CONF_SHOWONLY_SCALED_CARDS, d->useSVGOnly );
   group.writeEntry(CONF_CARD, d->currentCard);
   group.writeEntry(CONF_DECK, d->currentDeck); 
 }
@@ -449,9 +455,6 @@ QString KCardDialog::findi18nBack(QString& name)
 // Build list widget
 void KCardDialog::insertCardIcons()
 {
-    // Prevent empty preview
-    if (d->useSVGOnly && !isSVGCard(d->currentCard)) updateFront(defaultCardName(!d->usePNGOnly, !d->useSVGOnly));
-    if (d->usePNGOnly && isSVGCard(d->currentCard)) updateFront(defaultCardName(!d->usePNGOnly, !d->useSVGOnly));
 
     // Clear GUI
     d->ui.frontList->clear();
@@ -475,6 +478,14 @@ void KCardDialog::insertCardIcons()
         itemSize = itemSize.expandedTo(previewPixmap.size());
     }
     d->ui.frontList->setIconSize(itemSize);
+    
+    // Prevent empty preview
+    if (d->useSVGOnly && !isSVGCard(d->currentCard)) 
+        updateFront(defaultCardName(!d->usePNGOnly, !d->useSVGOnly));
+    else if (d->usePNGOnly && isSVGCard(d->currentCard)) 
+        updateFront(defaultCardName(!d->usePNGOnly, !d->useSVGOnly));
+    else
+        updateFront(d->currentCard);
 }
 
 
@@ -488,17 +499,24 @@ void KCardDialog::updateFront()
 
 
 // Update front preview
+
 void KCardDialog::updateFront(QString item)
 {
   // Clear item?
   if (item.isNull())
   {
+    QList<QListWidgetItem*> items = d->ui.frontList->selectedItems();
+    if( !items.isEmpty() )
+        items.first()->setSelected( false );
     d->ui.frontPreview->setPixmap(QPixmap());
     d->ui.cardName->setText(QString());
     d->ui.cardDescription->setText(QString());
   }
   else
   {
+    QList<QListWidgetItem*> items = d->ui.frontList->findItems(item, Qt::MatchExactly );
+    if( !items.isEmpty() )
+        items.first()->setSelected( true );
     KCardInfo info = ds.cardInfo[item];
     QFont font;
     font.setBold(true);
@@ -717,10 +735,16 @@ void KCardDialog::updateBack(QString item)
 {
   if (item.isNull())
   {
+    QList<QListWidgetItem*> items = d->ui.backList->selectedItems();
+    if( !items.isEmpty() )
+        items.first()->setSelected( false );
     d->ui.backPreview->setPixmap(QPixmap());
   }
   else
   {
+    QList<QListWidgetItem*> items = d->ui.backList->findItems(item, Qt::MatchExactly );
+    if( !items.isEmpty() )
+        items.first()->setSelected( true );
     KCardInfo info = ds.deckInfo[item];
     QPixmap pixmap= info.preview;
     if (pixmap.height() > d->ui.backPreview->height())
@@ -736,10 +760,6 @@ void KCardDialog::updateBack(QString item)
 // Insert the deck icons into the list widget
 void KCardDialog::insertDeckIcons()
 {
-    // Prevent empty preview
-    if (d->useSVGOnly && !isSVGDeck(d->currentDeck)) updateBack(defaultDeckName(!d->usePNGOnly, !d->useSVGOnly));
-    if (d->usePNGOnly && isSVGDeck(d->currentDeck)) updateBack(defaultDeckName(!d->usePNGOnly, !d->useSVGOnly));
-
     // Clear GUI
     d->ui.backList->clear();
 
@@ -762,6 +782,15 @@ void KCardDialog::insertDeckIcons()
         itemSize = itemSize.expandedTo(previewPixmap.size());
     }
     d->ui.backList->setIconSize(itemSize);
+    
+    // Prevent empty preview
+    if (d->useSVGOnly && !isSVGDeck(d->currentDeck)) 
+        updateBack(defaultDeckName(!d->usePNGOnly, !d->useSVGOnly));
+    else if (d->usePNGOnly && isSVGDeck(d->currentDeck)) 
+        updateBack(defaultDeckName(!d->usePNGOnly, !d->useSVGOnly));
+    else
+        updateBack(d->currentDeck);
+
 }
 
 
