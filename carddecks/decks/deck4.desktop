@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Panda
 Name[be]=Панда
+Name[bn]=পান্ডা
 Name[el]=Πάντα
 Name[eo]=Pando
 Name[fa]=پاندا
@@ -25,6 +26,7 @@ Name[zh_TW]=熊貓
 Comment=Dedicated to WWF
 Comment[af]=Opgedra  na Wwf
 Comment[be]=Прысвячаецца WWF
+Comment[bn]=WWF-এর প্রতি উত্‍সর্গীকৃত
 Comment[ca]=Dedicat a WWF
 Comment[cs]=Věnované WWF
 Comment[cy]=Cyflwynedig i\'r WWF
@@ -62,6 +64,7 @@ Comment[pt]=Dedicado ao WWF
 Comment[pt_BR]=Dedicado ao WWF
 Comment[ro]=Dedicat lui WWF
 Comment[ru]=Посвящается WWF
+Comment[sk]=Venované WWF
 Comment[sl]=Posvečeno WWF
 Comment[sr]=Посвећено WWF-у
 Comment[sr@latin]=Posvećeno WWF-u

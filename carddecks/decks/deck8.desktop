@@ -2,6 +2,7 @@
 Name=Road
 Name[af]=Pad
 Name[be]=Дарога
+Name[bn]=পথ
 Name[ca]=Carretera
 Name[cs]=Cesta
 Name[cy]=Ffordd
@@ -40,6 +41,7 @@ Name[pt_BR]=Estrada
 Name[ro]=Şosea
 Name[ru]=Дорога
 Name[se]=Geaidnu
+Name[sk]=Cesta
 Name[sl]=Cesta
 Name[sr]=Пут
 Name[sr@latin]=Put

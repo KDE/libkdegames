@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Konqi
 Name[be]=Конкі
+Name[bn]=কনকি
 Name[cs]=Konqui
 Name[eo]=Konĉja
 Name[it]=Konqui
@@ -14,6 +15,7 @@ Name[uk]=Конкі
 Name[x-test]=xxKonqixx
 Name[zh_CN]=Konqi 恐龙
 Comment=Modern Konqi - play the family carddeck\nDesign: Laura Layland\n     <l_layland@hotmail.com>\nKonqi by Stefan Spatz\n     <stefan.spatz@stud-mail.uni-wuerzburg.de>
+Comment[bn]=আধুনিক কনকি - একটি পারিবারিক তাস খেলা\nডিজাইন: লরা লেল্যান্ড\n <l_layland@hotmail.com>\nকনকি: স্টিফেন স্পাজ\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[ca]=Konqi modern - jugueu amb la baralla familiar\nDisseny: Laura Layland\n     <l_layland@hotmail.com>\nKonqi per Stefan Spatz\n     <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[cs]=Moderní Konqi - hrajte rodinnou hru\nNávrh: Laura Laylanda\n <l_layland@hotmail.com>\nKonqiho vytvořil Stefan Spatz\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[cy]=Set cerdiau cyfoes Konqi - chwarae yn erbyn y teulu\nDylunio:Laura Layland\n <l_layland@hotmail.com>\nKonqi gan Stefan Spatz\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
@@ -44,6 +46,7 @@ Comment[nn]=Moderne Konqi – familiekortstokken\nUtforming: Laura Layland\n    
 Comment[pl]=Nowoczesny Konqi - zagraj w grę rodzinną\nProjekt: Laura Laylanda\n <l_layland@hotmail.com>a\nKonqi: Stefan Spatza\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[pt]=Konqi Moderno - o baralho de cartas familiar\nConcepção: Laura Layland\n <l_layland@hotmail.com>\nKonqi por Stefan Spatza\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[pt_BR]=Konqi Moderno - jogue com o baralho da família\nDesign: Laura Layland\n <l_layland@hotmail.com>\nKonqi por Stefan Spatz\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
+Comment[sk]=Moderný Konqi - hrajte rodinné kartové hry\nDesign: Laura Laylanda\n <l_layland@hotmail.com>a\nKonqi od Stefana Spatza\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[sl]=Moderni Konqi - igrajte z družinskim kupom kart\nOblikovanje: Laura Layland\n <l_layland@hotmail.com>\nKonqi od Stefana Spatza\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[sr]=Модеран Конки - играјте са породичним шпилом\nДизајн: Лора Лејленд (Laura Layland)\n <l_layland@hotmail.com>\nКонки: Штефан Шпац (Stefan Spatz)\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[sr@latin]=Moderan Konki - igrajte sa porodičnim špilom\nDizajn: Lora Lejlend (Laura Layland)\n <l_layland@hotmail.com>\nKonki: Štefan Špac (Stefan Spatz)\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
