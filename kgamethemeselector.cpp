@@ -20,7 +20,6 @@
 
 #include <KLocale>
 #include <KStandardDirs>
-#include <QtGui/QPainter>
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
 #include <KComponentData>

@@ -30,7 +30,6 @@
 #include <kglobal.h>
 #include <QLayout>
 #include <QComboBox>
-#include <QPainter>
 #include <QPixmap>
 #include <QList>
 #include <QApplication>

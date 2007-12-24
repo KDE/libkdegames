@@ -553,6 +553,7 @@ QPixmap KGameSvgDigits::display(const QString& display)
                       << characterToDisplay << "Skipping.";
         }
     }
+    painter.end();
     return finalPixmap.copy(0, 0, width + x + paddingRight(), height + paddingTop() + paddingBottom());
 //     return finalPixmap.copy(0, 0, width + x, height);
 }
@@ -1058,8 +1059,8 @@ QPixmap KGameSvgDigitsPrivate::renderDigit(const QDomNode& node, const QString& 
     pixmap.fill(alpha);
 
     QPainter painter (&pixmap);
-
     m_svgRenderer.render(&painter, m_elementId, viewport);
+    painter.end();
 
     if (m_cacheOption != KGameSvgDigits::CacheNone)
     {
