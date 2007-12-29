@@ -27,7 +27,6 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KDebug>
-//#include <K3StaticDeleter>
 #include <KLockFile>
 #include <KConfigGroup>
 
