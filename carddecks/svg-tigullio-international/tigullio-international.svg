@@ -2,9 +2,22 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
 "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <!--
-*
-* Copyright 2004, 2006, 2007 Luciano Montanaro
-*
+
+Copyright 2004, 2006, 2007, 2008 Luciano Montanaro <mikelima@cirulla.net>
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the Lesser GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 -->
 <svg id="tigullio-international"
 	xmlns="http://www.w3.org/2000/svg"
@@ -12,6 +25,20 @@
 	width="780mm"
 	height="450mm"
 	>
+	<metadata>
+	<rdf:RDF>
+	  <cc:Work rdf:about="">
+		<dc:format>image/svg+xml</dc:format>
+		<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+		<cc:license rdf:resource="http://www.gnu.org/licenses/lgpl.html" />
+		<dc:title>Tigullio International card deck</dc:title>
+		<dc:date>2008-1-2</dc:date>
+		<dc:creator>Luciano Montanaro</dc:creator>
+		<dc:rights>Copyright 2004, 2006, 2007, 2008 Luciano Montanaro</dc:rights>
+		<dc:publisher>http://www.kde.org</dc:publisher>
+	  </cc:Work>
+	</rdf:RDF>
+	</metadata>
 	<desc>
 		Tigullio International is a 52-cards deck based on a "French" card
 		deck. It is actually based on the Tigullio "Genovese" card deck,
