@@ -17,7 +17,6 @@ add_subdirectory( svg-dondorf )
 add_subdirectory( svg-nicu-white )
 add_subdirectory( svg-gm-paris )
 add_subdirectory( svg-dondorf )
-add_subdirectory( svg-classic )
 add_subdirectory( svg-tigullio-international )
 
 ########### install files ###############
