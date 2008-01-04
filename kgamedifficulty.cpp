@@ -152,9 +152,9 @@ QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLev
 {
     switch (level) {
         case KGameDifficulty::RidiculouslyEasy:
-            return i18n("Ridiculously easy");
+            return i18n("Ridiculously Easy");
         case KGameDifficulty::VeryEasy:
-            return i18n("Very easy");
+            return i18n("Very Easy");
         case KGameDifficulty::Easy:
             return i18n("Easy");
         case KGameDifficulty::Medium:
@@ -162,9 +162,9 @@ QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLev
         case KGameDifficulty::Hard:
             return i18n("Hard");
         case KGameDifficulty::VeryHard:
-            return i18n("Very hard");
+            return i18n("Very Hard");
         case KGameDifficulty::ExtremelyHard:
-            return i18n("Extremely hard");
+            return i18n("Extremely Hard");
         case KGameDifficulty::Impossible:
             return i18n("Impossible");
         case KGameDifficulty::Custom:
