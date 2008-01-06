@@ -84,7 +84,7 @@ class KScoreDialog::KScoreDialogPrivate
         void saveScores();
         
         void setupDialog();
-        void setupGroup(QString& groupName);
+        void setupGroup(const QString& groupName);
         void aboutToShow();
 };
 
@@ -177,11 +177,11 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
     }
     
     tabWidget->clear();
-    foreach(QString groupName, scores.keys())
+    foreach(const QString &groupName, scores.keys())
         setupGroup(groupName);
 }
 
-void KScoreDialog::KScoreDialogPrivate::setupGroup(QString& groupName)
+void KScoreDialog::KScoreDialogPrivate::setupGroup(const QString& groupName)
 {
         if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
             tabWidget->addTab(new QWidget(q), i18n(DEFAULT_GROUP_NAME));
@@ -265,7 +265,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     
     int tabIndex=0; //Index of the current tab
     int newScoreTabIndex=0; //The index of the tab of the group with the new score
-    foreach(QString groupName, scores.keys())
+    foreach(const QString &groupName, scores.keys())
     {
         //Only display the comment on the page with the new score (or) this one if there's only one tab
         if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first.isEmpty() && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
@@ -370,7 +370,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         setupGroup(configGroup);
     }
     
-    foreach(QString groupName, groupList)
+    foreach(const QString &groupName, groupList)
     {
         highscoreObject->setHighscoreGroup(groupName);
         player = highscoreObject->readEntry(0, "LastPlayer");  //FIXME
@@ -389,7 +389,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         }
     }
     highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
-    foreach(QString groupName, scores.keys())
+    foreach(const QString &groupName, scores.keys())
     {
         if( (scores[groupName][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupName) )
         {

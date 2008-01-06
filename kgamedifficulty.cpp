@@ -190,7 +190,7 @@ void KGameDifficultyPrivate::rebuildActions()
 	}
 
 	if (m_customLevels.count()>0) {
-		foreach(QString s, m_customLevels) {
+		foreach(const QString &s, m_customLevels) {
 			m_menu->addAction(s);
 			m_comboBox->addItem(KIcon("games-difficult"), s);
 		}
