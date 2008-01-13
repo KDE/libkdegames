@@ -21,7 +21,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 <svg 
 width="780mm" 
 height="450mm" 
-viewBox="0 0 754 440" 
+viewBox="0 0 755 420" 
 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
 xmlns="http://www.w3.org/2000/svg" 
 xmlns:xlink="http://www.w3.org/1999/xlink" 
@@ -1881,8 +1881,8 @@ games, but the traditional motives are pretty similar.
 <path style="opacity:1;color:#000;fill:none;stroke:#000;stroke-width:0.875;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline;overflow:visible" d="M 56.471,183.244 C 49.523,188.307 36.0336,195.107 27.9399,197.436 C 35.2205,211.147 35.2574,231.326 35.9227,242.228" />
 </g>
 <use width="206" height="315" xlink:href="#g2098" transform="matrix(-1,0,0,-1,206,315)" />
-<path style="fill:none;stroke:#000;stroke-width:5.;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 38.4676,257.014 L 166.832,57.1497" />
-<path style="fill:none;stroke:#fff;stroke-width:3.;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 38.4676,257.014 L 166.832,57.1497" />
+<path style="fill:none;stroke:#000;stroke-width:5;stroke-linecap:square;stroke-opacity:1" d="M 38.4676,257.014 L 166.832,57.1497" />
+<path style="fill:none;stroke:#fff;stroke-width:3;stroke-linecap:square;stroke-opacity:1" d="M 38.4676,257.014 L 166.832,57.1497" />
 </g>
 </g>
 <!-- Groups of indices top left and bottom-right -->
@@ -2392,21 +2392,28 @@ games, but the traditional motives are pretty similar.
 <g id="back" >
 <use xlink:href="#card-outline" />
 <rect width="50" x="4" y="4" rx="1.5" height="80" style="fill:black" />
-<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:black;stroke-width:1mm" />
+<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:black;stroke-width:1" />
 <use x="29" y="44" style="fill:white" xlink:href="#big-logo" />
 <use xlink:href="#back-shadow" />
 </g>
 <g id="blue_back" >
 <use xlink:href="#card-outline" />
 <rect width="50" x="4" y="4" rx="1.5" height="80" style="fill:#08f" />
-<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:#08f;stroke-width:1mm" />
+<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:#08f;stroke-width:1" />
 <use x="29" y="44" style="fill:white" xlink:href="#big-logo" />
 <use xlink:href="#back-shadow" />
 </g>
 <g id="red_back" >
 <use xlink:href="#card-outline" />
 <rect width="50" x="4" y="4" rx="1.5" height="80" style="fill:red" />
-<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:red;stroke-width:1mm" />
+<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:red;stroke-width:1" />
+<use x="29" y="44" style="fill:white" xlink:href="#big-logo" />
+<use xlink:href="#back-shadow" />
+</g>
+<g id="green_back" >
+<use xlink:href="#card-outline" />
+<rect width="50" x="4" y="4" rx="1.5" height="80" style="fill:green" />
+<rect width="52" x="3" y="3" rx="2" height="82" style="fill:none;stroke:green;stroke-width:1" />
 <use x="29" y="44" style="fill:white" xlink:href="#big-logo" />
 <use xlink:href="#back-shadow" />
 </g>
@@ -2427,8 +2434,9 @@ games, but the traditional motives are pretty similar.
 <use xlink:href="#back" />
 <use x="58" xlink:href="#red_back" />
 <use x="116" xlink:href="#blue_back" />
-<use x="174" xlink:href="#black_jocker" />
-<use x="232" xlink:href="#red_jocker" />
+<use x="174" xlink:href="#green_back" />
+<use x="232" xlink:href="#black_jocker" />
+<use x="290" xlink:href="#red_jocker" />
 </g>
 </defs>
 <use xlink:href="#diamond-suit" />
