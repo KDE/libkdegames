@@ -421,7 +421,8 @@ void KCardDialog::readFronts()
         QString svg    = cfgcg.readEntry("SVG", QString());
         if (!svg.isNull())
         {
-          QFileInfo svgInfo(QDir(path), svg);
+	  QDir pdir(path);
+          QFileInfo svgInfo(pdir, svg);
           info.svgfile = svgInfo.filePath();
         }
         else
@@ -828,7 +829,8 @@ void KCardDialog::readBacks()
         QString svg    = cfgcg.readEntry("SVG", QString());
         if (!svg.isNull())
         {
-          QFileInfo svgInfo(QDir(path), svg);
+	  QDir pdir(path);
+          QFileInfo svgInfo(pdir, svg);
           info.svgfile = svgInfo.filePath();
         }
         else
