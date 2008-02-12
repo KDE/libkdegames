@@ -21,6 +21,8 @@
 #ifndef KGGZMOD_MISC_PRIVATE_H
 #define KGGZMOD_MISC_PRIVATE_H
 
+#include <QVarLengthArray>
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
@@ -52,14 +54,20 @@ bool readfiledescriptor(int sock, int *recvfd)
 	ssize_t	n;
         char dummy;
 
+        /* We can't use a union here, because CMSG_SPACE can't be evaluated at compile
+           time on Mac OS X. Use a QVarLengthArray instead (it doesn't malloc, should be
+           just as fast)
+
 	union {
 		struct cmsghdr cm;
 		char control[CMSG_SPACE(sizeof(int))];
 	} control_un;
+        */
+        QVarLengthArray<char> control_un(qMax(sizeof(cmsghdr), CMSG_SPACE(sizeof(int))));
 	struct cmsghdr *cmptr;
 
-	msg.msg_control = control_un.control;
-	msg.msg_controllen = sizeof(control_un.control);
+	msg.msg_control = control_un.data();
+	msg.msg_controllen = control_un.size();
 
 	msg.msg_name = NULL;
 	msg.msg_namelen = 0;
