@@ -82,7 +82,7 @@ kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 target_link_libraries(kdegames ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 
 set_target_properties(kdegames PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-install(TARGETS kdegames  DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
