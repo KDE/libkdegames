@@ -5,35 +5,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>521</width>
-    <height>422</height>
+    <width>520</width>
+    <height>421</height>
    </rect>
   </property>
-  <property name="maximumSize" >
-   <size>
-    <width>800</width>
-    <height>600</height>
-   </size>
-  </property>
-  <layout class="QGridLayout" >
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>0</number>
-   </property>
-   <item row="0" column="0" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
     <layout class="QHBoxLayout" >
      <item>
       <layout class="QVBoxLayout" >
        <item>
         <widget class="QListWidget" name="themeList" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize" >
           <size>
            <width>120</width>
@@ -53,6 +41,12 @@
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_2" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="title" >
         <string>Preview</string>
        </property>
@@ -60,16 +54,7 @@
         <property name="spacing" >
          <number>6</number>
         </property>
-        <property name="leftMargin" >
-         <number>9</number>
-        </property>
-        <property name="topMargin" >
-         <number>9</number>
-        </property>
-        <property name="rightMargin" >
-         <number>9</number>
-        </property>
-        <property name="bottomMargin" >
+        <property name="margin" >
          <number>9</number>
         </property>
         <item>
@@ -86,6 +71,9 @@
             <height>120</height>
            </size>
           </property>
+          <property name="alignment" >
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
        </layout>
@@ -93,125 +81,135 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0" >
+   <item>
     <widget class="QGroupBox" name="groupBox" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title" >
       <string>Theme Details</string>
      </property>
-     <layout class="QHBoxLayout" >
+     <layout class="QGridLayout" name="gridLayout" >
       <property name="spacing" >
-       <number>6</number>
-      </property>
-      <property name="leftMargin" >
        <number>9</number>
       </property>
-      <property name="topMargin" >
-       <number>9</number>
-      </property>
-      <property name="rightMargin" >
-       <number>9</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>9</number>
-      </property>
-      <item>
-       <layout class="QVBoxLayout" >
-        <property name="spacing" >
-         <number>6</number>
+      <item row="0" column="1" >
+       <widget class="QLabel" name="themeAuthor" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Expanding" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
+        <property name="text" >
+         <string/>
         </property>
-        <property name="topMargin" >
-         <number>0</number>
+        <property name="alignment" >
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
-        <property name="rightMargin" >
-         <number>0</number>
+        <property name="wordWrap" >
+         <bool>true</bool>
         </property>
-        <property name="bottomMargin" >
-         <number>0</number>
+        <property name="openExternalLinks" >
+         <bool>false</bool>
         </property>
-        <item>
-         <widget class="QLabel" name="labelAuthor" >
-          <property name="text" >
-           <string>Author:</string>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelContact" >
-          <property name="text" >
-           <string>Contact:</string>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelDescription" >
-          <property name="text" >
-           <string>Description:</string>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-       </layout>
+        <property name="textInteractionFlags" >
+         <set>Qt::LinksAccessibleByMouse</set>
+        </property>
+       </widget>
       </item>
-      <item>
-       <layout class="QVBoxLayout" >
-        <property name="spacing" >
-         <number>6</number>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="labelContact" >
+        <property name="text" >
+         <string>Contact:</string>
         </property>
-        <property name="leftMargin" >
-         <number>0</number>
+        <property name="alignment" >
+         <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
         </property>
-        <property name="topMargin" >
-         <number>0</number>
-        </property>
-        <property name="rightMargin" >
-         <number>0</number>
-        </property>
-        <property name="bottomMargin" >
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="themeAuthor" >
-          <property name="text" >
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="themeContact" >
-          <property name="text" >
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="themeDescription" >
-          <property name="text" >
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       </widget>
       </item>
-      <item>
-       <spacer>
+      <item row="1" column="1" >
+       <widget class="QLabel" name="themeContact" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Expanding" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string/>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap" >
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks" >
+         <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags" >
+         <set>Qt::LinksAccessibleByMouse</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QLabel" name="labelDescription" >
+        <property name="text" >
+         <string>Description:</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QLabel" name="themeDescription" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Minimum" hsizetype="Expanding" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string/>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap" >
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks" >
+         <bool>false</bool>
+        </property>
+        <property name="textInteractionFlags" >
+         <set>Qt::LinksAccessibleByMouse</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" >
+       <widget class="QLabel" name="labelAuthor" >
+        <property name="text" >
+         <string>Author:</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2" >
+       <spacer name="verticalSpacer_2" >
         <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
        </spacer>
@@ -219,7 +217,7 @@
      </layout>
     </widget>
    </item>
-   <item row="2" column="0" >
+   <item>
     <widget class="QLineEdit" name="kcfg_Theme" >
      <property name="enabled" >
       <bool>false</bool>
@@ -231,19 +229,6 @@
       <bool>false</bool>
      </property>
     </widget>
-   </item>
-   <item row="3" column="0" >
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" >
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

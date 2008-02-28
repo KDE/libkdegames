@@ -102,6 +102,8 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
         }
     }
 
+    ui.themeList->sortItems();
+
     connect(ui.themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(_k_updatePreview()));
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
 }
@@ -114,12 +116,18 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
     if (seltheme->path() == ui.kcfg_Theme->text()) {
         return;
     }
+    ui.kcfg_Theme->setText(seltheme->fileName());
+
     QString authstr("Author");
     QString contactstr("AuthorEmail");
     QString descstr("Description");
-    ui.kcfg_Theme->setText(seltheme->fileName());
+    QString emailstr;
+    if (!seltheme->themeProperty(contactstr).isEmpty() ) {
+        emailstr = QString("<a href=\"mailto:%1\">%1</a>").arg(seltheme->themeProperty(contactstr));
+    }
+
     ui.themeAuthor->setText(seltheme->themeProperty(authstr));
-    ui.themeContact->setText(seltheme->themeProperty(contactstr));
+    ui.themeContact->setText(emailstr);
     ui.themeDescription->setText(seltheme->themeProperty(descstr));
 
     //Draw the preview
