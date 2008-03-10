@@ -511,7 +511,14 @@ void KCardCache::setFrontTheme( const QString& theme )
 
         } else
         {
-            dt = QFileInfo( KCardDialog::cardDir( theme ) + QDir::separator() + "index.desktop" ).lastModified();
+            QDir carddir( KCardDialog::cardDir( theme ) );
+            foreach( QFileInfo entry, carddir.entryInfoList( QStringList() << "*.png" ) )
+            {
+                if( dt.isNull() || dt < entry.lastModified() )
+                {
+                    dt = entry.lastModified();
+                }
+            }
         }
         if( d->frontcache->timestamp() < dt.toTime_t() )
         {
