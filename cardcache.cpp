@@ -28,6 +28,8 @@
 #include <QMutexLocker>
 #include <QPainter>
 #include <QSizeF>
+#include <QFileInfo>
+#include <QDir>
 
 #include <ksvgrenderer.h>
 #include <kpixmapcache.h>
@@ -501,6 +503,21 @@ void KCardCache::setFrontTheme( const QString& theme )
         QMutexLocker l( d->frontcacheMutex );
         delete d->frontcache;
         d->frontcache = new KPixmapCache( QString( "kdegames-cards_%1" ).arg( theme ) );
+        d->frontcache->setUseQPixmapCache( true );
+        QDateTime dt;
+        if( KCardDialog::isSVGCard( theme ) ) 
+        {
+            dt = QFileInfo( KCardDialog::cardSVGFilePath( theme ) ).lastModified();
+
+        } else
+        {
+            dt = QFileInfo( KCardDialog::cardDir( theme ) + QDir::separator() + "index.desktop" ).lastModified();
+        }
+        if( d->frontcache->timestamp() < dt.toTime_t() )
+        {
+            d->frontcache->discard();
+            d->frontcache->setTimestamp( dt.toTime_t() );
+        }
     }
     {
         QMutexLocker l( d->frontRendererMutex );
@@ -521,6 +538,21 @@ void KCardCache::setBackTheme( const QString& theme )
         QMutexLocker l( d->backcacheMutex );
         delete d->backcache;
         d->backcache = new KPixmapCache( QString( "kdegames-cards_%1" ).arg( theme ) );
+        d->backcache->setUseQPixmapCache( true );
+        QDateTime dt;
+        if( KCardDialog::isSVGDeck( theme ) )
+        {
+            dt = QFileInfo( KCardDialog::deckSVGFilePath( theme ) ).lastModified();
+
+        } else
+        {
+            dt = QFileInfo( KCardDialog::deckFilename( theme ) ).lastModified();
+        }
+        if( d->backcache->timestamp() < dt.toTime_t() )
+        {
+            d->backcache->discard();
+            d->backcache->setTimestamp( dt.toTime_t() );
+        }
     }
     {
         QMutexLocker l( d->backRendererMutex );
