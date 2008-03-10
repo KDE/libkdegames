@@ -70,6 +70,7 @@ set(kdegames_LIB_SRCS
     kgamethemeselector.cpp
     kstandardgameaction.cpp
     kgamedifficulty.cpp
+    cardcache.cpp
 )
 
 kde4_add_ui_files(kdegames_LIB_SRCS
@@ -88,6 +89,7 @@ install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     libkdegames_export.h
+    cardcache.h
     kgamemisc.h
     kcarddialog.h
     kstandardgameaction.h
