@@ -53,6 +53,7 @@ set(kdegames_LIB_SRCS
     kgame/dialogs/kgamedialog.cpp
     kgame/dialogs/kgamedialogconfig.cpp
     kgame/dialogs/kgameerrordialog.cpp
+    carddeckinfo.cpp
     kcarddialog.cpp
     kchat.cpp
     kchatbase.cpp

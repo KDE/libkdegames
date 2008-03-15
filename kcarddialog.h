@@ -153,100 +153,33 @@ public:
                           bool pRandom = false);
 
    /**
+    * Convenience function, works like the above function.
+    *
+    * Creates a modal carddeck dialog, reading the settings from the
+    * config @p group.
+    *
+    * @param group the KConfigGroup to read the settings from.
+    * @return QDialog::result();
+    */
+   static int getCardDeck(const KConfigGroup& group);
+
+   /**
     * Saves the KCardDialog config into a config file. 
     * These settings are used by @ref KCardDialog.
     */
    void saveSettings(KConfigGroup& group);
 
-   /** Retrieve the SVG file belonging to the given card deck (back side). 
-    * @param name The name of the back deck.
-    * @return The file name and path to the SVG file or QString() if not available. 
-    */
-   static QString deckSVGFilePath(const QString& name);
-
-   /** Retrieve the SVG file belonging to the given card set (front side). 
-    * The SVG IDs used for the card back is '1_club' for Ace of clubs, '10_spade' for
-    * 10 of spades, 'queen_heart' for Queen of Hearts, '2_diamond' for 2 of diamonds and
-    * so on.
-    * @param name The name of the card set.
-    * @return The file name and path to the SVG file or QString() if not available. 
-    */
-   static QString cardSVGFilePath(const QString& name);
-
-   /** Check whether the card set is SVG or not.
-    * @param name The name of the card set.
-    * @return True if SVG data is available.
-    */
-   static bool isSVGCard(const QString& name);
-
-   /** Check whether the card back deck contains also an SVG file.
-    * @param name The name of the card deck.
-    * @return True if SVG data is available.
-    */
-   static bool isSVGDeck(const QString& name);
-   
-   /** Retrieve the name of the default card set (front side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
-    * @param pAllowPNG  Allow selection of fixed size cards sets.
-    * @return The default card set name.
-    */
-   static QString defaultCardName(bool pAllowSVG = true, bool pAllowPNG = true);
-   
-   /** Retrieve the name of the default card deck (back side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
-    * @param pAllowPNG  Allow selection of fixed size cards sets.
-    * @return The default card deck name.
-    */
-   static QString defaultDeckName(bool pAllowSVG = true, bool pAllowPNG = true);
-   
-   /** Retrieve a random card set (front side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
-    * @param pAllowPNG  Allow selection of fixed size cards sets.
-    * @return A radnom card set name.
-    */
-   static QString randomCardName(bool pAllowSVG = true, bool pAllowPNG = true);
- 
-   /** Retrieve a random card deck (back side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
-    * @param pAllowPNG  Allow selection of fixed size cards sets.
-    * @return A radnom card deck name.
-    */
-   static QString randomDeckName(bool pAllowSVG = true, bool pAllowPNG = true);
-
-   /**
-    * Retrieve the directory where the card front sides are stored. The cards are
-    * named 1.png, 2.png, etc. For SVG card decks use @ref cardSVGFilePath.
-    * @param name The name of the card set.
-    * @return The directory.
-    */
-   static QString cardDir(const QString& name);
-
-   /**
-    * Retrieve the filename of the card back side. 
-    * For SVG  decks use @ref deckSVGFilePath.
-    * @param name The name of the card deck.
-    * @return The filename.
-    */
-   static QString deckFilename(const QString& name);
-
    /**
     * Retrieve the name of the card deck (back side) from the dialog.
     * @return The deck name.
     */
-   QString deckName() const;
+   QString backName() const;
 
    /**
     * Retrieve the name of the card set (front side) from the dialog.
     * @return The card set name.
     */
-   QString cardName() const;
-
-   /**
-    * Reset the static information of the dialog. In particular reread the
-    * card information. Only necessary to call if something changed there,
-    * like installing new card decks.
-    */
-   static void reset();
+   QString frontName() const;
 
    /**
     * Retreive the default card directory.
@@ -262,19 +195,6 @@ public:
 
 
 protected:
-    /**
-     * Read in all front side card sets.
-     */
-    static void readFronts();
-    
-    /**
-     * Read in all back side card decks.
-     */
-    static void readBacks();
-    
-    /** 
-     * Insert the front sides into the list view.
-     */
     void insertCardIcons();
     
     /**
@@ -298,14 +218,6 @@ protected:
      * Configure the dialog GUI.
      */
     void setupGUI();
-    
-   /**
-    * Find the translated name for the card back side given the
-    * non translated one. Necessary for card back side locking.
-    * @param name The untranslated back side name.
-    * @return The translated back side name.
-    */
-    static QString findi18nBack(QString& name);
 
    /** Retrieve the filename of the PNG file for the backside of a deck.
     * diven the index.desktop filename.
@@ -313,11 +225,6 @@ protected:
     * @return The name of the PNG file.
     */
     static QString getDeckFileNameFromIndex(const QString& desktop);
-
-    /**
-     * @return the groupname.
-     **/
-    static QString group();
 
 protected Q_SLOTS:
     /**
@@ -347,14 +254,10 @@ protected Q_SLOTS:
     /**
      * Called by the checkboxes when the state of the PNG filter changed.
      * @param state The new PNG filter state.
-     */    void updatePNG(int state);
+     */
+    void updatePNG(int state);
 
 private:
-   /**
-    * Setup some static information.
-    */
-   static void init();
-
    /**
     * The dialog data.
     */

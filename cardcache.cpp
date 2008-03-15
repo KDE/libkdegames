@@ -27,6 +27,7 @@
 #include <QImage>
 #include <QMutexLocker>
 #include <QPainter>
+#include <QDateTime>
 #include <QSizeF>
 #include <QFileInfo>
 #include <QDir>
@@ -36,7 +37,7 @@
 #include <kconfig.h>
 #include <kstandarddirs.h>
 
-#include "kcarddialog.h"
+#include "carddeckinfo.h"
 
 #include <kdebug.h>
 
@@ -252,6 +253,7 @@ void KCardCachePrivate::ensureNonNullPixmap( QPixmap& pix )
 {
     if( pix.isNull() )
     {
+        kWarning() << "Couldn't produce a non-null pixmap, creating a red cross";
         pix = QPixmap( size );
         QPainter p(&pix);
         p.fillRect( QRect( 0,0, pix.width(), pix.height() ), QBrush( Qt::white ) );
@@ -419,14 +421,14 @@ QPixmap KCardCache::backside( int variant ) const
         element += QString::number(variant);
     }
     QString key = keyForPixmap( d->backTheme, element, d->size );
-    if( !KCardDialog::isSVGDeck( d->backTheme ) )
+    if( !CardDeckInfo::isSVGBack( d->backTheme ) )
     {
         QMutexLocker l( d->backcacheMutex );
         if( d->backcache && ( !d->backcache->find( key, pix ) || pix.isNull() ) )
         {
             QMatrix matrix;
             QImage img;
-            bool ret = img.load( KCardDialog::deckFilename( d->backTheme ), "PNG" );
+            bool ret = img.load( CardDeckInfo::backFilename( d->backTheme ), "PNG" );
             if( !ret )
                 return QPixmap();
             matrix.scale( (qreal)d->size.width() / (qreal)img.width(),
@@ -455,14 +457,14 @@ QPixmap KCardCache::frontside( const KCardInfo& info ) const
         return pix;
     QString key = keyForPixmap( d->frontTheme, info.svgName() , d->size );
     
-    if( !KCardDialog::isSVGCard( d->frontTheme ) )
+    if( !CardDeckInfo::isSVGFront( d->frontTheme ) )
     {
         QMutexLocker l( d->frontcacheMutex );
         if( d->frontcache && ( !d->frontcache->find( key, pix ) || pix.isNull() ) )
         {
             QMatrix matrix;
             QImage img;
-            QString filename = KCardDialog::cardDir( d->frontTheme )
+            QString filename = CardDeckInfo::frontDir( d->frontTheme )
                     + "/" + info.pngName();
             bool ret = img.load( filename, "PNG" );
             if( !ret )
@@ -505,13 +507,13 @@ void KCardCache::setFrontTheme( const QString& theme )
         d->frontcache = new KPixmapCache( QString( "kdegames-cards_%1" ).arg( theme ) );
         d->frontcache->setUseQPixmapCache( true );
         QDateTime dt;
-        if( KCardDialog::isSVGCard( theme ) ) 
+        if( CardDeckInfo::isSVGFront( theme ) )
         {
-            dt = QFileInfo( KCardDialog::cardSVGFilePath( theme ) ).lastModified();
+            dt = QFileInfo( CardDeckInfo::frontSVGFilePath( theme ) ).lastModified();
 
         } else
         {
-            QDir carddir( KCardDialog::cardDir( theme ) );
+            QDir carddir( CardDeckInfo::frontDir( theme ) );
             foreach( QFileInfo entry, carddir.entryInfoList( QStringList() << "*.png" ) )
             {
                 if( dt.isNull() || dt < entry.lastModified() )
@@ -529,7 +531,7 @@ void KCardCache::setFrontTheme( const QString& theme )
     {
         QMutexLocker l( d->frontRendererMutex );
         delete d->frontRenderer;
-        d->frontRenderer = new KSvgRenderer( KCardDialog::cardSVGFilePath( theme ) );
+        d->frontRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( theme ) );
     }
     d->frontTheme = theme;
 }
@@ -547,13 +549,13 @@ void KCardCache::setBackTheme( const QString& theme )
         d->backcache = new KPixmapCache( QString( "kdegames-cards_%1" ).arg( theme ) );
         d->backcache->setUseQPixmapCache( true );
         QDateTime dt;
-        if( KCardDialog::isSVGDeck( theme ) )
+        if( CardDeckInfo::isSVGBack( theme ) )
         {
-            dt = QFileInfo( KCardDialog::deckSVGFilePath( theme ) ).lastModified();
+            dt = QFileInfo( CardDeckInfo::backSVGFilePath( theme ) ).lastModified();
 
         } else
         {
-            dt = QFileInfo( KCardDialog::deckFilename( theme ) ).lastModified();
+            dt = QFileInfo( CardDeckInfo::backFilename( theme ) ).lastModified();
         }
         if( d->backcache->timestamp() < dt.toTime_t() )
         {
@@ -564,7 +566,7 @@ void KCardCache::setBackTheme( const QString& theme )
     {
         QMutexLocker l( d->backRendererMutex );
         delete d->backRenderer;
-        d->backRenderer = new KSvgRenderer( KCardDialog::deckSVGFilePath( theme ) );
+        d->backRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( theme ) );
     }
     d->backTheme = theme;
 }
@@ -594,10 +596,10 @@ QSizeF KCardCache::defaultFrontSize( const KCardInfo& info ) const
     QSizeF size;
     if( d->frontTheme.isEmpty() )
         return size;
-    if( !KCardDialog::isSVGCard( d->frontTheme ) )
+    if( !CardDeckInfo::isSVGFront( d->frontTheme ) )
     {
         QImage img;
-        if( img.load( KCardDialog::cardDir( d->frontTheme ) 
+        if( img.load( CardDeckInfo::frontDir( d->frontTheme )
             + "/" + info.pngName(), "PNG" ) )
             size = img.size();
     }else
@@ -619,10 +621,10 @@ QSizeF KCardCache::defaultBackSize( int variant ) const
         element += QString::number(variant);
     }
     
-    if( !KCardDialog::isSVGCard( d->backTheme ) )
+    if( !CardDeckInfo::isSVGBack( d->backTheme ) )
     {
         QImage img;
-        if( img.load( KCardDialog::deckFilename( d->backTheme ), "PNG" ) )
+        if( img.load( CardDeckInfo::backFilename( d->backTheme ), "PNG" ) )
         {
             size = img.size();
         }
