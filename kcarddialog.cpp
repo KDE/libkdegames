@@ -491,10 +491,9 @@ void KCardDialog::insertDeckIcons()
         if (d->filterOutCard(v)) continue;
         QPixmap previewPixmap = v.preview.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
-        QString name = v.name;
-        QListWidgetItem *item = new QListWidgetItem(name, d->ui.backList);
+        QListWidgetItem *item = new QListWidgetItem(v.name, d->ui.backList);
         item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-        item->setToolTip(name);
+        item->setToolTip(v.name);
         item->setData(Qt::DecorationRole, previewPixmap);
         itemSize = itemSize.expandedTo(previewPixmap.size());
     }
