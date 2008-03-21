@@ -25,6 +25,7 @@ Name[zh_TW]=十四段範例
 Type=FourteenSegmentDigit
 Comment=This file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svg
 Comment[ca]=Aquest fitxer conté metadades, arranjament de configuració, i el mapejat per controlar els segments pel tema fourteen-segment-sample.svg
+Comment[da]=Denne fil indeholder metadata, konfigurationsindstillinger og kortlægning som styrer hvilke segmenter der er slået til eller fra for temaet fourteen-segment-sample.svg
 Comment[de]=Diese Datei enthält Metadaten, Konfigurationseinstellungen und die Zuordnungen die kontrollieren, welche Segmente im Design „fourteen-segment-sample.svg“ an oder aus sein sollen
 Comment[el]=Αυτό το αρχείο διατηρεί μεταδεδομένα, ρυθμίσεις, και αντιστοιχίες που ελέγχουν τα ενεργά και μη ενεργά τμήματα του θέματος svg δεκατεσσάρων κομματιών
 Comment[es]=Este archivo contiene los metadados, opciones de configuración, y control de mapeado incluyendo qué segmentos están activados para el tema fourteen-segment-sample.svg

@@ -2,6 +2,7 @@
 Name=Classic (SVG)
 Name[be]=Класічны SVG
 Name[ca]=Clàssic (SVG)
+Name[da]=Klassisk (SVG)
 Name[de]=Klassisch (SVG)
 Name[el]=Κλασσικό (SVG)
 Name[eo]=Klasika (SVG)
@@ -34,6 +35,7 @@ SVG=deck27_classic.svgz
 Comment=SVG Classic
 Comment[be]=Класічны SVG
 Comment[ca]=SVG Clàssic
+Comment[da]=SVG Klassisk
 Comment[de]=SVG Klassisch
 Comment[el]=SVG Κλασσικό
 Comment[eo]=SVG klasika
