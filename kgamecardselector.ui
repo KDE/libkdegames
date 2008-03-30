@@ -70,7 +70,7 @@
         <property name="orientation" >
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" >
+        <property name="sizeHint" stdset="0" >
          <size>
           <width>64</width>
           <height>62</height>
@@ -117,51 +117,18 @@
      <property name="title" >
       <string>Filter</string>
      </property>
-     <layout class="QGridLayout" >
-      <item rowspan="2" row="0" column="0" >
-       <widget class="QCheckBox" name="checkBoxSVG" >
-        <property name="text" >
-         <string>Show only scalable cards</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
        <widget class="QCheckBox" name="checkBoxLock" >
         <property name="text" >
          <string>Lock backside to frontside</string>
         </property>
        </widget>
       </item>
-      <item rowspan="3" row="0" column="2" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" >
-         <size>
-          <width>131</width>
-          <height>44</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item rowspan="2" row="1" column="1" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" >
-         <size>
-          <width>20</width>
-          <height>21</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="0" >
+      <item>
        <widget class="QCheckBox" name="checkBoxPNG" >
         <property name="text" >
-         <string>Show only fixed size cards</string>
+         <string>Show old style decks</string>
         </property>
        </widget>
       </item>
@@ -197,7 +164,7 @@
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>20</width>
             <height>21</height>
@@ -213,7 +180,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>16</width>
          <height>20</height>
@@ -279,7 +246,7 @@
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>20</width>
             <height>20</height>
@@ -295,7 +262,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>16</width>
          <height>20</height>
@@ -330,7 +297,7 @@
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0" >
            <size>
             <width>20</width>
             <height>21</height>

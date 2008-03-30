@@ -58,32 +58,28 @@ namespace CardDeckInfo
    KDEGAMES_EXPORT bool isSVGFront(const QString& name);
    
    /** Retrieve the name of the default card set (front side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return The default card set name.
     */
-   KDEGAMES_EXPORT QString defaultFrontName(bool pAllowSVG = true, bool pAllowPNG = true);
+   KDEGAMES_EXPORT QString defaultFrontName(bool pAllowPNG = true);
    
    /** Retrieve the name of the default card deck (back side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return The default card deck name.
     */
-   KDEGAMES_EXPORT QString defaultBackName(bool pAllowSVG = true, bool pAllowPNG = true);
+   KDEGAMES_EXPORT QString defaultBackName(bool pAllowPNG = true);
    
    /** Retrieve a random card set (front side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return A radnom card set name.
     */
-   KDEGAMES_EXPORT QString randomFrontName(bool pAllowSVG = true, bool pAllowPNG = true);
+   KDEGAMES_EXPORT QString randomFrontName(bool pAllowPNG = true);
  
    /** Retrieve a random card deck (back side).
-    * @param pAllowSVG  Allow selection of scalable cards sets.
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return A radnom card deck name.
     */
-   KDEGAMES_EXPORT QString randomBackName(bool pAllowSVG = true, bool pAllowPNG = true);
+   KDEGAMES_EXPORT QString randomBackName(bool pAllowPNG = true);
 
    /**
     * Retrieve the directory where the card front sides are stored. The cards are

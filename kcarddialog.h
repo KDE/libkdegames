@@ -18,162 +18,125 @@
 #ifndef __KCARDDIALOG_H_
 #define __KCARDDIALOG_H_
 
+#include <QtGui/QWidget>
 #include <kdialog.h>
 #include <kconfig.h>
 
 #include <libkdegames_export.h>
 
 class QListWidgetItem;
-class KCardDialogPrivate;
+class KCardWidgetPrivate;
+class KCardWidget;
 
 /**
- * @short A carddeck selection dialog for card games.
+ * @short A convenience class to display a standalone card selection dialog.
  *
- * The KCardDialog provides a dialog for interactive carddeck selection.
+ * This is a simple convenience class to embed the @ref KCardWidget into a
+ * KDialog that has an Ok and Cancel button and an apropriate caption.
+ *
+ * Usage Example:
+ * \code
+ *   KConfigGroup(KGlobal::config(),"CardOptions");
+ *   KCardWidget* cardwiget = new KCardwidget();
+ *   cardwidget->readSettings(configGroup);
+ *   KCardDialog dlg(cardwidget);
+ *   if(dlg.exec() == QDialog::Accepted)
+ *   {
+ *     cardwidget->saveSettings(configGroup);
+ *     configGroup.sync();
+ *     //now update the graphics
+ *   }
+ * \endcode
+ *
+ */
+class KDEGAMES_EXPORT KCardDialog : public KDialog
+{
+  Q_OBJECT
+public:
+  KCardDialog(KCardWidget* widget);
+};
+
+/**
+ * @short A carddeck selection widget for card games.
+ *
+ * The KCardWidget provides a widget for interactive carddeck selection.
  * It gives cardgames an easy to use interface to select front and
  * back of the card sets. As card sets the KDE default cardsets are
  * offered as well as used specified ones.
  *
- * In most cases, the simplest
- * use of this class is the static method KCardDialog::getCardDeck,
- * which pops up the dialog, allows the user to select a carddeck, and
- * returns when the dialog is closed. Only if you really need some specific
- * behaviour or if you overwrite the dialog you need all the other access
- * functions.
+ * This class can be used in two ways: Embedding it into an existing
+ * dialog or creating a small KDialog just for the carddeck selection.
  *
  * Card sets (front and back) are identified by their (translated) names.
- * Access to further properties of the sets like their filenames or directories
- * is achieved by querying the dialog using static functions where as argument
- * the card deck or set name is given as argument.
  *
- * Example:
+ * Here you can see a card widget in action
+ * @image html "kcarddialog.png" KCardwidget
  *
- * \code
- *      QString front,back;
- *      int result = KCardDialog::getCardDeck(front, back);
- *      if ( result == KCardDialog::Accepted )
- *            ...
- * \endcode
+ * You can use a KConfigGroup to initialize the state of the widget or
+ * let the widget store its current state to a config group.
  *
- * Retrieve the filename and information for the card back (deck):
- *
- * \code
- *      QString front,back;
- *      int result       = KCardDialog::getCardDeck(front, back);
- *      ...
- *      QString deckFile = KCardDialog::deckSVGFilePath(back);
- *      bool    isSVG    = KCardDialog::isSVGDeck(back);
- *      ...
- * \endcode
- *
- *
- * Retrieve the SVG information for the card set (front):
- *
- * \code
- *      QString front,back;
- *      int result       = KCardDialog::getCardDeck(front, back);
- *      ...
- *      QString cardFile = KCardDialog::cardSVGFilePath(front);
- *      bool    isSVG    = KCardDialog::isSVGCards(front);
- *      ...
- * \endcode
- *
- * Here you can see a card dialog in action
- * @image html "kcarddialog.png" KCarddialog
- *
- * KCardDialog::getCardDeck takes additionalparameters for custumization.
- * You can e.g. retrieve a random card deck, limit the choice to scalable or
- * fixed size decks, or lock the front and backside together.
- *
- * You can also provide a KConfigGroup reference to the dialog. This
- * is used to store information about the dialog. 
+ * For an example usage see @ref KCardDialog.
  *
  */
-class KDEGAMES_EXPORT KCardDialog : public KDialog
+class KDEGAMES_EXPORT KCardWidget : public QWidget
 {
   Q_OBJECT
 
 public:
 
    /**
-    * Constructs a card deck selection dialog.
+    * Constructs a card deck selection widget.
     *
-    * @param parent    The parent widget of the dialog, if any.
-    * @param pAllowSVG Allow selection of scalable cards sets.
-    * @param pAllowPNG Allow selection of fixed size cards sets.
-    * @param pLock     Back side is set to match the front side of cards.
-    * @param defFront  Default front side name.
-    * @param defBack   Default back side name.
+    * @param parent The parent widget of the widget, if any.
     */
-   explicit KCardDialog (QWidget* parent = NULL, 
-                         bool pAllowSVG = true, 
-                         bool pAllowPNG = true, 
-                         bool pLock = true,
-                         QString defFront = QString(),
-                         QString defBack = QString()
-                         );
+   KCardWidget (QWidget* parent = NULL);
 
    /**
-    * Constructs a card deck selection dialog.
-    *
-    * @param group  The configuration group for dialog
-    * @param parent The parent widget of the dialog, if any.
+    * Read the settings from a config file
+    * @param group the configuration group
     */
-   explicit KCardDialog (KConfigGroup& group, QWidget* parent = NULL);
+   void readSettings(const KConfigGroup& group);
 
    /**
     * Destructs a card deck selection dialog.
     */
-   ~KCardDialog();
+   ~KCardWidget();
 
    /**
-    * Creates a modal carddeck dialog, lets the user choose a deck,
-    * and returns when the dialog is closed.
-    *
-    * @param pFrontName A reference to the card front side name. Holds the
-    *                   result of the user choice.
-    *
-    * @param pBackName  A reference to the card back side name. Holds the
-    *                   result of the user choice.
-    *
-    * @param pParent    Pointer to the parent window of the dialog
-    * @param pAllowSVG  Allow selection of scalable cards sets.
-    * @param pAllowPNG  Allow selection of fixed size cards sets.
-    * @param pLock      Back side is set to match the front side of cards.
-    * @param pRandom    Return a random selection for front and back side.
-    *
-    * @return QDialog::result().
+    * Saves the KCardWidget config into a config file.
+    * These settings are used by @ref KCardWidget.
     */
-   static int getCardDeck(QString &pFrontName,
-                          QString &pBackName,
-                          QWidget *pParent = NULL,
-                          bool pAllowSVG = true,
-                          bool pAllowPNG = true,
-                          bool pLock = true, 
-                          bool pRandom = false);
+   void saveSettings(KConfigGroup& group) const;
 
    /**
-    * Convenience function, works like the above function.
-    *
-    * Creates a modal carddeck dialog, reading the settings from the
-    * config @p group.
-    *
-    * @param group the KConfigGroup to read the settings from.
-    * @return QDialog::result();
+    * set the name of the card deck (back side)
+    * @param name the new name to select as back side
     */
-   static int getCardDeck(const KConfigGroup& group);
+   void setBackName(const QString& name);
 
    /**
-    * Saves the KCardDialog config into a config file. 
-    * These settings are used by @ref KCardDialog.
-    */
-   void saveSettings(KConfigGroup& group);
-
-   /**
-    * Retrieve the name of the card deck (back side) from the dialog.
+    * Retrieve the name of the card deck (back side) from the widget.
     * @return The deck name.
     */
    QString backName() const;
+
+   /**
+    * Retrieve the locking status
+    * @return true if the backside selection is locked to the frontside
+    */
+   bool isLocked() const;
+
+   /**
+    * Retrieve the current state of the "Show old style decks" checkbox
+    * @return wether or not fixed size card decks are shown in the list
+    */
+   bool isFixedSizeAllowed() const;
+
+   /**
+    * set the name of the card set (front side)
+    * @param name the new name to select as front side
+    */
+   void setFrontName(const QString& name);
 
    /**
     * Retrieve the name of the card set (front side) from the dialog.
@@ -181,87 +144,53 @@ public:
     */
    QString frontName() const;
 
+public slots:
    /**
-    * Retreive the default card directory.
-    * @deprecated KDE 3.x compatibilty
+    * Allow the user to select fixed size cards
+    * @param fixedSizeAllowed if set to true will show scalable and also fixed
+    * size card decks in the dialog
     */
-   static QString getDefaultCardDir(bool pAllowSVG = true, bool pAllowPNG = true);
+   void setFixedSizeAllowed(bool fixedSizeAllowed);
 
    /**
-    * Retrieve the default deck filename.
-    * @deprecated KDE 3.x compatibilty
+    * enable or disable locked selection, when locking is enabled the user
+    * can only choose the front sides and the backside will be determined
+    * from the frontside
+    * @param locked wether to lock the front and backside selection
     */
-   static QString getDefaultDeck(bool pAllowSVG = true, bool pAllowPNG = true);
-
+   void setLocked(bool locked);
 
 protected:
     void insertCardIcons();
-    
+
     /**
      * Insert the back sides into the list view.
      */
     void insertDeckIcons();
-    
-    /**
-     * Update the back side preview image.
-     * @param item The name of the deck.
-     */
-    void updateBack(QString item);
 
-    /**
-     * Update the front side preview image.
-     * @param item The name of the card set.
-     */
-    void updateFront(QString item);
-    
     /**
      * Configure the dialog GUI.
      */
     void setupGUI();
-
-   /** Retrieve the filename of the PNG file for the backside of a deck.
-    * diven the index.desktop filename.
-    * @param desktop The name of the index.desktop file.
-    * @return The name of the PNG file.
-    */
-    static QString getDeckFileNameFromIndex(const QString& desktop);
 
 protected Q_SLOTS:
     /**
      * Called by the card set list view when a new item was selected.
      */
     void updateFront();
-    
+
      /**
      * Called by the card deck list view when a new item was selected.
      * @param current The newly selected item.
      * @param last    The previously selected item.
-     */  
+     */
     void updateBack();
-    
-    /**
-     * Called by the checkboxes when the state of the locking changed.
-     * @param state The new locking state.
-     */
-    void updateLocking(int state);
-
-    /**
-     * Called by the checkboxes when the state of the SVG filter changed.
-     * @param state The new SVG filter state.
-     */
-    void updateSVG(int state);
-    
-    /**
-     * Called by the checkboxes when the state of the PNG filter changed.
-     * @param state The new PNG filter state.
-     */
-    void updatePNG(int state);
 
 private:
    /**
     * The dialog data.
     */
-   KCardDialogPrivate* const d;
+   KCardWidgetPrivate* const d;
 };
 
 #endif

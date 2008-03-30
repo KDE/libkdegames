@@ -213,15 +213,11 @@ namespace CardDeckInfo
 {
 
 // Retrieve default card set name
-QString defaultFrontName( bool pAllowSVG, bool pAllowPNG )
+QString defaultFrontName( bool pAllowPNG )
 {
     QString noDefault;
     // Count filtered cards
-    QMap<QString, KCardThemeInfo> temp;
-    if ( pAllowSVG )
-    {
-        temp.unite( deckinfoStatic->svgFrontInfo );
-    }
+    QMap<QString, KCardThemeInfo> temp = deckinfoStatic->svgFrontInfo;
     if ( pAllowPNG )
     {
         temp.unite( deckinfoStatic->pngFrontInfo );
@@ -242,14 +238,10 @@ QString defaultFrontName( bool pAllowSVG, bool pAllowPNG )
 
 
 // Retrieve default deck name
-QString defaultBackName( bool pAllowSVG, bool pAllowPNG )
+QString defaultBackName( bool pAllowPNG )
 {
     QString noDefault;
-    QMap<QString, KCardThemeInfo> temp;
-    if ( pAllowSVG )
-    {
-        temp.unite( deckinfoStatic->svgBackInfo );
-    }
+    QMap<QString, KCardThemeInfo> temp = deckinfoStatic->svgBackInfo;
     if ( pAllowPNG )
     {
         temp.unite( deckinfoStatic->pngBackInfo );
@@ -271,14 +263,10 @@ QString defaultBackName( bool pAllowSVG, bool pAllowPNG )
 
 
 // Retrieve a random card name
-QString randomFrontName( bool pAllowSVG, bool pAllowPNG )
+QString randomFrontName( bool pAllowPNG )
 {
     // Collect matching items
-    QStringList list;
-    if ( pAllowSVG )
-    {
-        list += deckinfoStatic->svgFrontInfo.keys();
-    }
+    QStringList list = deckinfoStatic->svgFrontInfo.keys();
     if ( pAllowPNG )
     {
         list += deckinfoStatic->pngFrontInfo.keys();
@@ -291,15 +279,10 @@ QString randomFrontName( bool pAllowSVG, bool pAllowPNG )
 
 
 // Retrieve a random deck name
-QString randomBackName( bool pAllowSVG, bool pAllowPNG )
+QString randomBackName( bool pAllowPNG )
 {
     // Collect matching items
-    QStringList list;
-
-    if ( pAllowSVG )
-    {
-        list += deckinfoStatic->svgBackInfo.keys();
-    }
+    QStringList list = deckinfoStatic->svgBackInfo.keys();
     if ( pAllowPNG )
     {
         list += deckinfoStatic->pngBackInfo.keys();
