@@ -91,6 +91,7 @@ install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     libkdegames_export.h
     cardcache.h
+    carddeckinfo.h
     kgamemisc.h
     kcarddialog.h
     kstandardgameaction.h
