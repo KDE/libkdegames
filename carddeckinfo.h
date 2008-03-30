@@ -23,6 +23,8 @@
 #include <QtCore/QStringList>
 #include <libkdegames_export.h>
 
+class KConfigGroup;
+
 /**
  * Namespace to supply access to card deck information, such as a list of all
  * card decks as well as allowing to access the actual files to render the
