@@ -30,6 +30,12 @@
 #include "carddeckinfo.h"
 #include "carddeckinfo_p.h"
 
+// KConfig entries
+#define CONF_LOCKING QString::fromLatin1("Locking")
+#define CONF_ALLOW_FIXED_CARDS QString::fromLatin1("AllowFixed")
+#define CONF_CARD QString::fromLatin1("Cardname")
+#define CONF_DECK QString::fromLatin1("Deckname")
+
 /**
  * Local static information.
  */
@@ -384,6 +390,46 @@ KCardThemeInfo backInfo( const QString& name )
     if ( deckinfoStatic->pngBackInfo.contains( name ) )
         return deckinfoStatic->pngBackInfo.value( name );
     return KCardThemeInfo();
+}
+
+QString frontTheme( const KConfigGroup& group, const QString& defaultTheme )
+{
+  return group.readEntry( CONF_CARD, defaultTheme );
+}
+
+QString backTheme( const KConfigGroup& group, const QString& defaultTheme )
+{
+  return group.readEntry( CONF_DECK, defaultTheme );
+}
+
+bool allowFixedSizeDecks( const KConfigGroup& group, bool lockDefault )
+{
+  return group.readEntry( CONF_ALLOW_FIXED_CARDS, lockDefault );
+}
+
+bool lockFrontToBackside(const KConfigGroup& group, bool lockDefault)
+{
+  return group.readEntry( CONF_LOCKING, lockDefault );
+}
+
+void writeFrontTheme( KConfigGroup& group, const QString& theme )
+{
+  group.writeEntry( CONF_CARD, theme );
+}
+
+void writeBackTheme( KConfigGroup& group, const QString& theme )
+{
+  group.writeEntry( CONF_DECK, theme );
+}
+
+void writeAllowFixedSizeDecks( KConfigGroup& group, bool allowFixedSize )
+{
+  group.writeEntry( CONF_ALLOW_FIXED_CARDS, allowFixedSize );
+}
+
+void writeLockFrontToBackside( KConfigGroup& group, bool lock )
+{
+  group.writeEntry( CONF_LOCKING, lock );
 }
 
 }

@@ -111,6 +111,69 @@ namespace CardDeckInfo
     */
    KDEGAMES_EXPORT QStringList frontNames();
 
+   /**
+    * retrieve the configured front side theme name
+    * from the @p group
+    * @param group the KConfigGroup to read from
+    * @param default the default theme to return if the config group has no setting for this
+    * @returns the name of the front side theme name
+    */
+   KDEGAMES_EXPORT QString frontTheme( const KConfigGroup& group, const QString& defaultTheme = defaultFrontName() );
+
+   /**
+    * retrieve the configured back side theme name
+    * from the @p group
+    * @param group the KConfigGroup to read from
+    * @param default the default theme to return if the config group has no setting for this
+    * @returns the name of the back side theme name
+    */
+   KDEGAMES_EXPORT QString backTheme( const KConfigGroup& group, const QString& defaultTheme = defaultBackName() );
+
+   /**
+    * retrieve the current value for the show fixed size
+    * card decks from the @p group
+    * @param group the KConfigGroup to read from
+    * @param allowDefault the default value in case the group has no setting
+    * @returns true when fixed size decks should be shown, else false
+    */
+   KDEGAMES_EXPORT bool allowFixedSizeDecks( const KConfigGroup& group, bool allowDefault = false );
+
+   /**
+    * retrieve the current value for the lock front-to-backside
+    * option from the @p group
+    * @param group the KConfigGroup to read from
+    * @param lockDefault the default value in case the group has no setting
+    * @returns true when front and backside theme are locked together, else false
+    */
+   KDEGAMES_EXPORT bool lockFrontToBackside( const KConfigGroup& group, bool lockDefault = true );
+
+   /**
+    * store the given frontside @p theme name in the @p group
+    * @param group the KConfigGroup to write to from
+    * @param theme the theme name to store
+    */
+   KDEGAMES_EXPORT void writeFrontTheme( KConfigGroup& group, const QString& theme );
+
+   /**
+    * store the given backside @p theme name in the @p group
+    * @param group the KConfigGroup to write to from
+    * @param theme the theme name to store
+    */
+   KDEGAMES_EXPORT void writeBackTheme( KConfigGroup& group, const QString& theme );
+
+   /**
+    * store the wether fixed size decks are allowed in the @p group
+    * @param group the KConfigGroup to write to from
+    * @param allowFixedSize wether fixed size decks are allowed or not
+    */
+   KDEGAMES_EXPORT void writeAllowFixedSizeDecks( KConfigGroup& group, bool allowFixedSize );
+
+   /**
+    * store the wether front and backside theme selection is locked to the @p group
+    * @param group the KConfigGroup to write to from
+    * @param allowFixedSize wether front and backside theme selection is locked
+    */
+   KDEGAMES_EXPORT void writeLockFrontToBackside( KConfigGroup& group, bool lock );
 }
 
 #endif

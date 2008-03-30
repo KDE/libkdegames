@@ -32,11 +32,6 @@
 #include "carddeckinfo.h"
 #include "carddeckinfo_p.h"
 
-// KConfig entries
-#define CONF_LOCKING QString::fromLatin1("Locking")
-#define CONF_ALLOW_FIXED_CARDS QString::fromLatin1("AllowFixed")
-#define CONF_CARD QString::fromLatin1("Cardname")
-#define CONF_DECK QString::fromLatin1("Deckname")
 
 /**
  * Local information of the dialog.
@@ -90,19 +85,19 @@ KCardWidget::KCardWidget(QWidget* parent)
 
 void KCardWidget::readSettings(const KConfigGroup& group)
 {
-  setLocked(group.readEntry(CONF_LOCKING, true));
-  setFixedSizeAllowed(group.readEntry(CONF_ALLOW_FIXED_CARDS, false));
-  setFrontName(group.readEntry(CONF_CARD, QString()));
-  setBackName(group.readEntry(CONF_DECK, QString()));
+  setLocked(CardDeckInfo::lockFrontToBackside(group));
+  setFixedSizeAllowed(CardDeckInfo::allowFixedSizeDecks(group));
+  setFrontName(CardDeckInfo::frontTheme(group));
+  setBackName(CardDeckInfo::backTheme(group));
 }
 
 // Store the config group settings
 void KCardWidget::saveSettings(KConfigGroup& group) const
 {
-  group.writeEntry(CONF_LOCKING, d->ui.checkBoxLock->isChecked());
-  group.writeEntry(CONF_ALLOW_FIXED_CARDS, d->ui.checkBoxPNG->isChecked());
-  group.writeEntry(CONF_CARD, d->currentFront);
-  group.writeEntry(CONF_DECK, d->currentBack);
+  CardDeckInfo::writeLockFrontToBackside(group, d->ui.checkBoxLock->isChecked());
+  CardDeckInfo::writeAllowFixedSizeDecks(group, d->ui.checkBoxPNG->isChecked());
+  CardDeckInfo::writeFrontTheme(group, d->currentFront);
+  CardDeckInfo::writeBackTheme(group, d->currentBack);
 }
 
 
