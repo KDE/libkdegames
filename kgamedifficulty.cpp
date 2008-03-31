@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2007, Nicolas Roffet, <nicolas-kde@roffet.com>
+Copyright (c) 2007, 2008 Nicolas Roffet, <nicolas-kde@roffet.com>
 Copyright (c) 2007, Pino Toscano, <toscano.pino@tiscali.it>
 
 This library is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
@@ -113,7 +113,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	if (slotCustom!=0)
 		QObject::connect(this, SIGNAL(customLevelChanged(int)), recvr, slotCustom);
 
-	m_menu = new KSelectAction(KIcon("games-difficult"), i18n("Difficulty"), window);
+	m_menu = new KSelectAction(KIcon("games-difficult"), i18nc("Game difficulty level", "Difficulty"), window);
 	m_menu->setToolTip(i18n("Set the difficulty level"));
 	m_menu->setWhatsThis(i18n("Set the difficulty level of the game."));
 	QObject::connect(m_menu, SIGNAL(triggered(int)), this, SLOT(changeSelection(int)));
@@ -152,21 +152,21 @@ QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLev
 {
     switch (level) {
         case KGameDifficulty::RidiculouslyEasy:
-            return i18n("Ridiculously Easy");
+            return i18nc("Game difficulty level 1 out of 8", "Ridiculously Easy");
         case KGameDifficulty::VeryEasy:
-            return i18n("Very Easy");
+            return i18nc("Game difficulty level 2 out of 8", "Very Easy");
         case KGameDifficulty::Easy:
-            return i18n("Easy");
+            return i18nc("Game difficulty level 3 out of 8", "Easy");
         case KGameDifficulty::Medium:
-            return i18n("Medium");
+            return i18nc("Game difficulty level 4 out of 8", "Medium");
         case KGameDifficulty::Hard:
-            return i18n("Hard");
+            return i18nc("Game difficulty level 5 out of 8", "Hard");
         case KGameDifficulty::VeryHard:
-            return i18n("Very Hard");
+            return i18nc("Game difficulty level 6 out of 8", "Very Hard");
         case KGameDifficulty::ExtremelyHard:
-            return i18n("Extremely Hard");
+            return i18nc("Game difficulty level 7 out of 8", "Extremely Hard");
         case KGameDifficulty::Impossible:
-            return i18n("Impossible");
+            return i18nc("Game difficulty level 8 out of 8", "Impossible");
         case KGameDifficulty::Custom:
         case KGameDifficulty::Configurable:
         case KGameDifficulty::NoLevel:
@@ -201,7 +201,7 @@ void KGameDifficultyPrivate::rebuildActions()
 		separator->setSeparator(true);
 		m_menu->addAction(separator);
 
-		QString s = i18n("Custom");
+		QString s = i18nc("Name of the game difficulty level that is customized by the user by setting up different game parameters", "Custom");
 		m_menu->addAction(s);
 		m_comboBox->addItem(KIcon("games-difficult"), s);
 	}
