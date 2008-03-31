@@ -144,7 +144,7 @@ public:
     */
    QString frontName() const;
 
-public slots:
+public Q_SLOTS:
    /**
     * Allow the user to select fixed size cards
     * @param fixedSizeAllowed if set to true will show scalable and also fixed
