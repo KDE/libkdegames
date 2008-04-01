@@ -63,7 +63,7 @@ bool readfiledescriptor(int sock, int *recvfd)
 		char control[CMSG_SPACE(sizeof(int))];
 	} control_un;
         */
-        QVarLengthArray<char> control_un(qMax(sizeof(cmsghdr), CMSG_SPACE(sizeof(int))));
+        QVarLengthArray<char> control_un(qMax(sizeof(cmsghdr), static_cast<size_t>(CMSG_SPACE(sizeof(int)))));
 	struct cmsghdr *cmptr;
 
 	msg.msg_control = control_un.data();
