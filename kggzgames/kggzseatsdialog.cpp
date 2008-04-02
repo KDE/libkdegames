@@ -160,7 +160,7 @@ void KGGZSeatsDialogPrivate::displaySeats()
 {
 	QPalette palette;
 	int count = m_mod->players().count();
-	int digits = (int)(log(count) / log(10) + 1);
+	int digits = (int)(log((double)count) / log((double)10.0) + 1);
 
 	if(m_root)
 	{
@@ -287,7 +287,7 @@ void KGGZSeatsDialogPrivate::displaySeats()
 void KGGZSeatsDialogPrivate::displaySpectators()
 {
 	int count = m_mod->spectators().count();
-	int digits = (int)(log(count) / log(10) + 1);
+	int digits = (int)(log((double)count) / log((double)10.0) + 1);
 
 	if(m_root)
 	{
