@@ -131,8 +131,8 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
     ui.themeDescription->setText(seltheme->themeProperty(descstr));
 
     //Draw the preview
-    //TODO here: add code to maintain aspect ration?
-    ui.themePreview->setPixmap(seltheme->preview());
+    QPixmap pix(seltheme->preview());
+    ui.themePreview->setPixmap(pix.scaled(ui.themePreview->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
 
 }
 
