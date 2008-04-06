@@ -81,7 +81,7 @@ kde4_add_ui_files(kdegames_LIB_SRCS
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 
 set_target_properties(kdegames PROPERTIES VERSION 5.0.0 SOVERSION 5)
 install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
