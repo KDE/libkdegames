@@ -17,7 +17,6 @@ install(FILES
    kgameio.h
    kgameprocess.h
    kgamepropertyarray.h
-   kgamepropertylist.h
    kgamechat.h
    kgamepropertyhandler.h
    kgameerror.h
