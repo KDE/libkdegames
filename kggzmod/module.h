@@ -169,7 +169,7 @@ class KGGZMOD_EXPORT Module : public QObject
 		 */
 		static Module *instance();
 
-	signals:
+	Q_SIGNALS:
 		/**
 		 * An event from the GGZ core client has happened.
 		 *

@@ -134,7 +134,7 @@ class KGGZNET_EXPORT KGGZRaw : public QObject
 		KGGZRaw& operator>>(qint8 &i);
 		KGGZRaw& operator>>(QString &s);
 
-	signals:
+	Q_SIGNALS:
 		/**
 		 * An error has occurred.
 		 *

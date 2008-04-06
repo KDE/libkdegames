@@ -100,7 +100,7 @@ class KGGZNET_EXPORT KGGZPacket : public QObject
 		 */
 		void flush();
 
-	public slots:
+	public Q_SLOTS:
 		/**
 		 * Network activity monitor.
 		 *
@@ -112,7 +112,7 @@ class KGGZNET_EXPORT KGGZPacket : public QObject
 		 */
 		void slotNetwork(int fd);
 
-	signals:
+	Q_SIGNALS:
 		/**
 		 * A new packet has arrived.
 		 *
