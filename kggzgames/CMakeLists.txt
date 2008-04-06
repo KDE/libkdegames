@@ -13,3 +13,9 @@ target_link_libraries(kggzgames ${KDE4_KIO_LIBS} ${QT_QTNETWORK_LIBRARY} kggzmod
 
 set_target_properties(kggzgames PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kggzgames ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+install(FILES
+    kggzgames_export.h
+    kggzseatsdialog.h
+    kggzrankingsdialog.h
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kggzgames)
