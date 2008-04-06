@@ -96,14 +96,19 @@ public:
     //kDebug(11001) << "KGamePropertyArray setAt send COMMAND for id="<<id() << "type=" << 1 << "at(" << i<<")="<<data;
   }
 
-  type at( int i ) const
+  const type& at( int i ) const
   {
     return QVector<type>::at(i);
   }
 
-  type operator[]( int i ) const
+  const type& operator[]( int i ) const
   {
-    return QVector<type>::at(i);
+    return QVector<type>::operator[](i);
+  }
+
+  type& operator[]( int i )
+  {
+    return QVector<type>::operator[](i);
   }
 
   KGamePropertyArray<type> &operator=(const KGamePropertyArray<type> &a)
