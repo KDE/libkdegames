@@ -67,7 +67,8 @@ private:
 public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
-          m_opacity(1.0), m_animOpacity(-1), m_hoveredByMouse(false), m_textChildItem(0),
+          m_opacity(1.0), m_animOpacity(-1), m_hoveredByMouse(false),
+          m_hideOnClick(false), m_textChildItem(0),
           m_sharpness(KGamePopupItem::Square) {}
     /**
      * Timeline for animations
@@ -105,6 +106,10 @@ public:
      * Set to true when mouse hovers the message
      */
     bool m_hoveredByMouse;
+    /**
+     * Set to true if this popup item hides on mouse click.
+     */
+    bool m_hideOnClick;
     /**
      * Child of KGamePopupItem used to display text
      */
@@ -312,6 +317,16 @@ void KGamePopupItem::setMessageTimeout( int msec )
     d->m_timeout = msec;
 }
 
+void KGamePopupItem::setHideOnMouseClick( bool hide )
+{
+    d->m_hideOnClick = hide;
+}
+
+bool KGamePopupItem::hidesOnMouseClick() const
+{
+    return d->m_hideOnClick;
+}
+
 void KGamePopupItem::setMessageOpacity( qreal opacity )
 {
     d->m_opacity = opacity;
@@ -432,7 +447,8 @@ void KGamePopupItem::mousePressEvent( QGraphicsSceneMouseEvent* )
 
 void KGamePopupItem::mouseReleaseEvent( QGraphicsSceneMouseEvent* )
 {
-    forceHide();
+    if (d->m_hideOnClick)
+        forceHide();
 }
 
 

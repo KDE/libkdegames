@@ -111,7 +111,15 @@ public:
      * Sets custom pixmap to show instead of default icon on the left
      */
     void setMessageIcon( const QPixmap& pix );
-
+    /**
+     * Sets whether to hide this popup item on mouse click.
+     * By default a mouse click will cause an item to hide
+     */
+    void setHideOnMouseClick( bool hide );
+    /**
+     * @return whether this popup item hides on mouse click.
+     */
+    bool hidesOnMouseClick() const;
     /**
      * Used to specify how to hide in forceHide() - instantly or animatedly
      */
