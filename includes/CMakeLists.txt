@@ -38,7 +38,6 @@ install( FILES
 	KGame/KGameProperty
 	KGame/KGamePropertyArray
 	KGame/KGamePropertyHandler
-	KGame/KGamePropertyList
 	KGame/KGameSequence
 	KGame/KGameVersion
 	KGame/KMessageClient
