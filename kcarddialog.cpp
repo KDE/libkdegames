@@ -166,7 +166,7 @@ void KCardWidget::insertCardIcons()
 
   // Rebuild list
   QSize itemSize;
-  foreach(QString name, CardDeckInfo::frontNames())
+  foreach(const QString &name, CardDeckInfo::frontNames())
   {
     KCardThemeInfo v = CardDeckInfo::frontInfo(name);
     // Show only SVG files?
@@ -315,7 +315,7 @@ void KCardWidget::insertDeckIcons()
 
   // Rebuild list
   QSize itemSize;
-  foreach(QString name, CardDeckInfo::backNames())
+  foreach(const QString &name, CardDeckInfo::backNames())
   {
     KCardThemeInfo v = CardDeckInfo::backInfo(name);
     // Show only SVG files?
