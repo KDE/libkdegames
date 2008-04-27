@@ -132,10 +132,10 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         * The group name must be passed though I18N_NOOP() in order for the
         * group name to be translated. i.e. 
         * \code ksdialog.setConfigGroup(I18N_NOOP("Easy")); \endcode
+        * If you set a group, it will be prefixed in the config file by 
+        * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
         * 
         * @param group to use for reading/writing highscores from/to.
-        * If you set a group, it will be prefixed by 'KHighscore_' otherwise
-        * the group will simply be 'KHighscore'
         */
         void setConfigGroup(const QString& group = QString());
         //void setConfigGroup(const QString& group, const QString& i18nName);
