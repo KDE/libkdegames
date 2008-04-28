@@ -27,6 +27,7 @@ this software.
 #include "khighscore.h"
 
 #include <KConfig>
+#include <KUser>
 #include <KLocale>
 #include <KSeparator>
 #include <KGlobal>
@@ -452,7 +453,15 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
             d->scores[d->configGroup].removeAt(10);
             
             if(score[Name].isEmpty()) //If we don't have a name, prompt the player.
+            {
+                KUser user;
+                score[Name] = user.property(KUser::FullName).toString();
+                if (score[Name].isEmpty())
+                {
+                    score[Name] = user.loginName();
+                }
                 askName = true;
+            }
             
             if (askName)
             {
