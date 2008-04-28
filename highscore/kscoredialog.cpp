@@ -486,6 +486,7 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
             return i+1;
         }
     }
+    d->latest = qMakePair(d->configGroup, 0);
     return 0;
 }
 
