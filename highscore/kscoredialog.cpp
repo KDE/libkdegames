@@ -437,15 +437,13 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
         FieldInfo score = d->scores[d->configGroup].at(i); //First look at the score in the config file
-        bool ok;
+        bool ok; //will be false if there isn't any score yet in position i
         int num_score = score[Score].toLong(&ok); //test if the stored score is a number
-        if (lessIsMore && !ok)
-            num_score = 1 << 30; //this is a very large number so the score won't be on the table
         
         score = FieldInfo(newInfo); //now look at the submitted score
         int newScore = score[Score].toInt();
         if (((newScore > num_score) && !lessIsMore) ||
-              ((newScore < num_score) && lessIsMore))
+              ((newScore < num_score) && lessIsMore) || !ok)
         {
             
             d->latest = QPair<QString,int>(d->configGroup,i+1);
