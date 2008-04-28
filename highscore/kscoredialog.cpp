@@ -452,11 +452,18 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
             
             if(score[Name].isEmpty()) //If we don't have a name, prompt the player.
             {
-                KUser user;
-                score[Name] = user.property(KUser::FullName).toString();
-                if (score[Name].isEmpty())
+                if(!d->player.isEmpty()) //d->player should be filled out by d->loadScores()
                 {
-                    score[Name] = user.loginName();
+                    score[Name] = d->player;
+                } 
+                else 
+                {
+                    KUser user;
+                    score[Name] = user.property(KUser::FullName).toString();
+                    if (score[Name].isEmpty())
+                    {
+                        score[Name] = user.loginName();
+                    }
                 }
                 askName = true;
             }
@@ -465,6 +472,9 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
             {
                 d->player=score[Name];
                 d->newName = QPair<QString,int>(d->configGroup,i+1);
+
+                setButtons(Ok|Cancel);
+                connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
             }
             else
                 d->saveScores();
