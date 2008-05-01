@@ -33,6 +33,8 @@ class KGamePropertyHandler;
 using namespace std;
 
 /**
+ * \class KGamePropertyBase kgameproperty.h <KGame/KGameProperty>
+ * 
  * @short Base class of KGameProperty
  *
  * The KGamePropertyBase class is the base class of KGameProperty. See
@@ -382,6 +384,8 @@ private:
 };
 
 /**
+ * \class KGameProperty kgameproperty.h <KGame/KGameProperty>
+ * 
  * @short A class for network transparent games
  *
  * Note: The entire API documentation is obsolete!

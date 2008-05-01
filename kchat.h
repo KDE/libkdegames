@@ -25,6 +25,8 @@
 class KChatPrivate;
 
 /**
+ * \class KChat kchat.h <KChat>
+ * 
  * @short A chat widget for non-KGame games
  *
  * Docu is TODO

@@ -37,6 +37,8 @@ class KGameSequence;
 class KGamePrivate;
 
 /**
+ * \class KGame kgame.h <KGame/KGame>
+ * 
  * @short The main KDE game object
  *
  * The KGame class is the central game object. A game basically

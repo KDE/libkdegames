@@ -28,6 +28,8 @@
 #include <libkdegames_export.h>
 
 /**
+ * \class KGameProgress kgameprogress.h <KGameProgress>
+ * 
  * @short A progress indicator widget.
  *
  * KGameProgress is derived from QFrame and QRangeControl, so

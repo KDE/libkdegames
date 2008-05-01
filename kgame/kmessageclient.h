@@ -29,6 +29,8 @@ class KMessageServer;
 class KMessageClientPrivate;
 
 /**
+  \class KMessageClient kmessageclient.h <KGame/KMessageClient>
+  
   @short A client to connect to a KMessageServer
 
   This class implements a client that can connect to a KMessageServer object.

@@ -33,6 +33,8 @@ class KMessageFilePipe;
 class KGameProcessPrivate;
 
 /**
+ * \class KGameProcess kgameprocess.h <KGame/KGameProcess>
+ * 
  * This is the process class used on the computer player
  * side to communicate with its counterpart KProcessIO class.
  * Using these two classes will give fully transparent communication

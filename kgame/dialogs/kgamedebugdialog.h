@@ -31,6 +31,9 @@ class KPlayer;
 
 class KGameDebugDialogPrivate;
 
+/**
+ * \class KGameDebugDialog kgamedebugdialog.h <KGameDebugDialog>
+ */
 class KDEGAMES_EXPORT KGameDebugDialog : public KPageDialog
 {
 	Q_OBJECT

@@ -39,6 +39,8 @@ class KGamePropertyBase;
 
 class KGameDialogConfigPrivate;
 /**
+ * \class KGameDialogConfig kgamedialogconfig.h <KGameDialogConfig>
+ * 
  * Base class for configuration widgets.
  *
  * You can inherit from this and implement @ref submitToKGame, @ref
@@ -130,7 +132,10 @@ private:
 	KGameDialogConfigPrivate* const d;
 };
 
+class KGameDialogGeneralConfigPrivate;
 /**
+ * \class KGameDialogGeneralConfig kgamedialogconfig.h <KGameDialogConfig>
+ * 
  * The main game configuration widget.
  * 
  * It currently contains a line edit for the name of the player only. You can
@@ -138,7 +143,6 @@ private:
  * uses QLayout::autoAdd == true.
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KGameDialogGeneralConfigPrivate;
 class KGameDialogGeneralConfig : public KGameDialogConfig
 {
 	Q_OBJECT
@@ -206,6 +210,9 @@ private:
 };
 
 class KGameDialogNetworkConfigPrivate;
+/**
+ * \class KGameDialogNetworkConfig kgamedialogconfig.h <KGameDialogConfig>
+ */
 class KDEGAMES_EXPORT KGameDialogNetworkConfig : public KGameDialogConfig
 {
 	Q_OBJECT
@@ -272,6 +279,9 @@ private:
 };
 
 class KGameDialogMsgServerConfigPrivate;
+/**
+ * \class KGameDialogMsgServerConfig kgamedialogconfig.h <KGameDialogConfig>
+ */
 class KGameDialogMsgServerConfig : public KGameDialogConfig
 {
 	Q_OBJECT
@@ -300,6 +310,8 @@ private:
 
 class KGameDialogChatConfigPrivate;
 /**
+ * \class KGameDialogChatConfig kgamedialogconfig.h <KGameDialogConfig>
+ * 
  * This is not really a configuration widget but rather a simple chat widget.
  * This widget does nothing but just providing a @ref KGameChat object.
  * @short A chat widget inside a @ref KGameDialog
@@ -321,11 +333,13 @@ private:
 	KGameDialogChatConfigPrivate* d;
 };
 
+class KGameDialogConnectionConfigPrivate;
 /**
+ * \class KGameDialogConnectionConfig kgamedialogconfig.h <KGameDialogConfig>
+ * 
  * @short Lists all connected players and gives the ability to kick them off the
  * game
  **/
-class KGameDialogConnectionConfigPrivate;
 class KGameDialogConnectionConfig : public KGameDialogConfig
 {
 	Q_OBJECT

@@ -24,6 +24,8 @@
 #include <libkdegames_export.h>
 
 /**
+ * \class KChatBaseItemDelegate kchatbaseitemdelegate.h <KChatBaseItemDelegate>
+ * 
  * A delegate (see the Qt Model/View module for details) to paint the lines of 
  * the KChatBase list model (@ref KChatBaseModel). 
  *

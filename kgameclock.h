@@ -28,6 +28,8 @@
 class KGameClockPrivate;
 
 /**
+ * \class KGameClock kgameclock.h <KGameClock>
+ * 
  * Class representing a game clock, wraps after 24 hours
  */
 class KDEGAMES_EXPORT KGameClock : public QObject

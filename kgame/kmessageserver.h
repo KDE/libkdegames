@@ -27,6 +27,8 @@ class KMessageIO;
 class KMessageServerPrivate;
 
 /**
+  \class KMessageServer kmessageserver.h <KGame/KMessageServer>
+  
   @short A server for message sending and broadcasting, using TCP/IP connections.
 
   An object of this class listens for incoming connections via TCP/IP sockets and

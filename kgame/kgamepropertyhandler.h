@@ -34,6 +34,8 @@ class KGame;
 class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
 /**
+ * \class KGamePropertyHandler kgamepropertyhandler.h <KGame/KGamePropertyHandler>
+ * 
  * @short A collection class for KGameProperty objects
  *
  * The KGamePropertyHandler class is some kind of a collection class for

@@ -34,6 +34,8 @@ class KChatBaseModel;
 class KChatBaseItemDelegate;
 
 /**
+ * \class KChatBase kchatbase.h <KChatBase>
+ * 
  * @short The base class for chat widgets
  *
  * This is the base class for both KChat and KGameChat. KGameChat is the class

@@ -36,6 +36,8 @@ class QFile;
 
 
 /**
+  \class KMessageIO kmessageio.h <KGame/KMessageIO>
+  
   This abstract base class represents one end of a message connections
   between two clients. Each client has one object of a subclass of
   KMessageIO. Calling /e send() on one object will emit the signal
@@ -158,6 +160,8 @@ protected:
 
 
 /**
+  \class KMessageSocket kmessageio.h <KGame/KMessageIO>
+  
   This class implements the message communication using a TCP/IP socket. The
   object can connect to a server socket, or can use an already connected socket.
 */
@@ -267,6 +271,8 @@ protected:
 
 
 /**
+  \class KMessageDirect kmessageio.h <KGame/KMessageIO>
+  
   This class implements the message communication using function calls
   directly. It can only be used when both sides of the message pipe are
   within the same process. The communication is very fast.
@@ -336,6 +342,9 @@ protected:
   KMessageDirect *mPartner;
 };
 
+/**
+ * \class KMessageProcess kmessageio.h <KGame/KMessageIO>
+ */
 class KMessageProcess : public KMessageIO
 {
   Q_OBJECT 

@@ -28,6 +28,8 @@
 class KConfig;
 
 /**
+ * \class KHighscore khighscore.h <KHighscore>
+ * 
  * @short Class for managing highscore tables
  *
  * This is the KDE class for saving and reading highscore tables. It offers the

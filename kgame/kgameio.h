@@ -39,6 +39,8 @@ class KGameProcessIOPrivate;
 class KGameComputerIOPrivate;
 
 /**
+ *  \class KGameIO kgameio.h <KGame/KGameIO>
+ * 
  *  \short Base class for IO devices for games
  *
  *  This is the master class for
@@ -181,6 +183,8 @@ private:
 };
 
 /**
+ *  \class KGameKeyIO kgameio.h <KGame/KGameIO>
+ * 
  *  The KGameKeyIO class. It is used to process keyboard input
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <kde at heni-online.de>
@@ -258,6 +262,8 @@ private:
 };
 
 /**
+ *  \class KGameMouseIO kgameio.h <KGame/KGameIO>
+ * 
  *  The KGameMouseIO class. It is used to process mouse input
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <kde at heni-online.de>
@@ -336,6 +342,8 @@ private:
 
 
 /**
+ *  \class KGameProcessIO kgameio.h <KGame/KGameIO>
+ * 
  *  The KGameProcessIO class. It is used to create a computer player
  *  via a separate process and communicate transparetly with it.
  *  Its counterpart is the @ref KGameProcess class which needs
@@ -485,6 +493,8 @@ private:
 };
 
 /**
+ *  \class KGameComputerIO kgameio.h <KGame/KGameIO>
+ * 
  *  \brief KGameIO variant for real-time games
  *
  *  The KGameComputerIO class. It is used to create a LOCAL computer player

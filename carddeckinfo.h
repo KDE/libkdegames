@@ -26,6 +26,8 @@
 class KConfigGroup;
 
 /**
+ * \headerfile carddeckinfo.h <KCardDeckInfo>
+ * 
  * Namespace to supply access to card deck information, such as a list of all
  * card decks as well as allowing to access the actual files to render the
  * decks.

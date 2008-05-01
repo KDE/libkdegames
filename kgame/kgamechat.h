@@ -32,6 +32,8 @@ class KGamePropertyBase;
 class KGameChatPrivate;
 
 /**
+ * \class KGameChat kgamechat.h <KGame/KGameChat>
+ * 
  * @short A Chat widget for KGame-based games
  *
  * Call @ref setFromPlayer() first - this will be used as the "from" part of

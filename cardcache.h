@@ -28,7 +28,9 @@ class QString;
 class QSize;
 class QSizeF;
 
-
+/**
+ * \class KCardInfo cardcache.h <KCardCache>
+ */
 class KDEGAMES_EXPORT KCardInfo
 {
 public:
@@ -52,6 +54,8 @@ private:
 };
 
 /**
+ * \class KCardCache cardcache.h <KCardCache>
+ * 
  * This class implements a kdegames wide cache for cards.
  * 
  * Card games such as lskat or kpat should use this cache

@@ -34,6 +34,8 @@
 class KGameSvgDocumentPrivate;
 
 /**
+ * \class KGameSvgDocument kgamesvgdocument.h <KGameSvgDocument>
+ * 
  * @brief A class for manipulating an SVG file using DOM
  *
  * This class is a wrapper around QDomDocument for SVG files.

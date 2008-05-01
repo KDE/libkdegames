@@ -23,6 +23,9 @@
 
 #include <QtCore/QString>
 
+/**
+ * \class KGameError kgameerror.h <KGame/KGameError>
+ */
 class KGameError
 {
 public:

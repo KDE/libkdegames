@@ -36,6 +36,8 @@
 class KGameSvgDigitsPrivate;
 
 /**
+ * \class KGameSvgDigits kgamesvgdigits.h <KGameSvgDigits>
+ * 
  * @brief Renders a string of digits using an SVG theme
  * 
  * @note To help limit rounding errors as the svg elements get scaled,

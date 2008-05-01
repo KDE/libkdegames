@@ -28,6 +28,9 @@ class KChatBase;
 
 class KChatDialogPrivate;
 
+/**
+ * \class KChatDialog kchatdialog.h <KChatDialog>
+ * */
 class KDEGAMES_EXPORT KChatDialog : public KDialog
 {
 	Q_OBJECT

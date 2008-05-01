@@ -26,6 +26,8 @@
 class KGamePopupItemPrivate;
 
 /**
+ * \class KGamePopupItem kgamepopupitem.h <KGamePopupItem>
+ * 
  * QGraphicsItem capable of showing short popup messages
  * which do not interrupt the gameplay.
  * Message can stay on screen for specified amount of time

@@ -27,6 +27,8 @@ class KGame;
 class KGameErrorDialogPrivate;
 
 /**
+ * \class KGameErrorDialog kgameerrordialog.h <KGameErrorDialog>
+ * 
  * Use error(), warning() and information() to display the information about a
  * network game. Maybe a better solution is to use KMessageBoxes
  * You can connect to the public slots, too - they will call the static
@@ -94,6 +96,8 @@ private:
 };
 
 /**
+ * \class KGameErrorMessageDialog kgameerrordialog.h <KGameErrorDialog>
+ * 
  * The real class for error messages. KGameErrorDialog uses this to create error
  * messages (not yet).
  * Use @ref KGameErrorDialog instead.

@@ -28,6 +28,8 @@ class KConfigSkeleton;
 class KGameThemeSelectorPrivate;
 
 /**
+ * \class KGameThemeSelector kgamethemeselector.h <KGameThemeSelector>
+ * 
  * @short A widget used to select the game's theme
  *
  * The most common way to use the theme selector is to add it as page to a KConfigDialog

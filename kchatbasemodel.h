@@ -30,6 +30,8 @@ class KChatBaseMessagePrivate;
 class KConfig;
 
 /**
+  * \class KChatBaseMessage kchatbasemodel.h <KChatBaseModel>
+  * 
   * @short The class of the elements stored in the chat list model
   * 
   * It's a pair of strings where the first element is the sender name and the
@@ -65,6 +67,8 @@ class KDEGAMES_EXPORT KChatBaseMessage : public QPair< QString, QString >
 Q_DECLARE_METATYPE(KChatBaseMessage)
 
 /**
+ * \class KChatBaseModel kchatbasemodel.h <KChatBaseModel>
+ * 
  * The model used to store messages displayed in the chat dialog messages 
  * list. This is a list model and thus derived from @ref QAbstractListModel
  * and implementing its abstract API.

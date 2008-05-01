@@ -44,7 +44,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class KGameCanvasItem;
 
 /**
-    \class KGameCanvasAbstract canvas.h <canvas.h>
+    \class KGameCanvasAbstract kgamecanvas.h <KGameCanvas>
     \brief Container class.
 
     A KGameCanvasAbstract is a set of canvas items.
@@ -100,7 +100,7 @@ public:
 
 
 /**
-    \class KGameCanvasItem canvas.h <canvas.h>
+    \class KGameCanvasItem kgamecanvas.h <KGameCanvas>
     \brief An abstract item.
 
     A KGameCanvasItem is an abstract class to represent a generic item that can be
@@ -227,7 +227,7 @@ public:
 
 
 /**
-    \class KGameCanvasDummy canvas.h <canvas.h>
+    \class KGameCanvasDummy kgamecanvas.h <KGameCanvas>
     \brief A dummy (empty) item.
 
     A KGameCanvasDummy is an empty, invisible item.
@@ -251,7 +251,7 @@ public:
 
 
 /**
-    \class KGameCanvasGroup canvas.h <canvas.h>
+    \class KGameCanvasGroup kgamecanvas.h <KGameCanvas>
     \brief An item containing other items.
 
     A KGameCanvasGroup is an KGameCanvasItem, but it is also a KGameCanvasAbstract,
@@ -295,7 +295,7 @@ public:
 };
 
 /**
-    \class KGameCanvasPicture canvas.h <canvas.h>
+    \class KGameCanvasPicture kgamecanvas.h <KGameCanvas>
     \brief A picture, ie a collection of paint operations.
 
     A KGameCanvasPicture is a picture that can be replayed on the canvas.
@@ -325,7 +325,7 @@ public:
 };
 
 /**
-    \class KGameCanvasPixmap canvas.h <canvas.h>
+    \class KGameCanvasPixmap kgamecanvas.h <KGameCanvas>
     \brief A pixmap (sprite).
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
@@ -356,7 +356,7 @@ public:
 };
 
 /**
-    \class KGameCanvasTiledPixmap canvas.h <canvas.h>
+    \class KGameCanvasTiledPixmap kgamecanvas.h <KGameCanvas>
     \brief A tiled pixmap (brush).
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
@@ -407,7 +407,7 @@ public:
 
 
 /**
-    \class KGameCanvasRectangle canvas.h <canvas.h>
+    \class KGameCanvasRectangle kgamecanvas.h <KGameCanvas>
     \brief A solid rectangle.
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
@@ -442,7 +442,7 @@ public:
 };
 
 /**
-    \class KGameCanvasText canvas.h <canvas.h>
+    \class KGameCanvasText kgamecanvas.h <KGameCanvas>
     \brief KGameCanvasText.
 
     A KGameCanvasText is a text that can be put in the canvas.
@@ -525,7 +525,7 @@ public:
 };
 
 /**
-    \class KGameCanvasWidget canvas.h <canvas.h>
+    \class KGameCanvasWidget kgamecanvas.h <KGameCanvas>
     \brief Container widget.
 
     A KGameCanvasWidget is a widget that can contain many KGameCanvasItem (images, rectangles, lines, etc).
@@ -572,6 +572,8 @@ public:
 };
 
 /**
+    \class KGameCanvasAdapter kgamecanvas.h <KGameCanvas>
+
     \brief A generic adapter for KGameCanvas
 
     KGameCanvasAdapter can be used to draw content managed by KGameCanvas

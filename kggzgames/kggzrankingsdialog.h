@@ -30,6 +30,8 @@
 class KGGZRankingsDialogPrivate;
 
 /**
+ * \class KGGZRankingsDialog kggzrankingsdialog.h <KGGZRankingsDialog>
+ * 
  * @short Dialog which displays GGZ online rankings
  *
  * This class is actually not a dialog by itself.

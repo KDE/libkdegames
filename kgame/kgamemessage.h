@@ -24,6 +24,9 @@
 #include <QtCore/QDataStream>
 #include <libkdegames_export.h>
 
+/**
+ * \class KGameMessage kgamemessage.h <KGame/KGameMessage>
+ */
 class KDEGAMES_EXPORT KGameMessage
 {
   public:

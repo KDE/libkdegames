@@ -29,6 +29,8 @@ class KCardWidgetPrivate;
 class KCardWidget;
 
 /**
+ * \class KCardDialog kcarddialog.h <KCardDialog>
+ * 
  * @short A convenience class to display a standalone card selection dialog.
  *
  * This is a simple convenience class to embed the @ref KCardWidget into a
@@ -57,6 +59,8 @@ public:
 };
 
 /**
+ * \class KCardWidget kcarddialog.h <KCardDialog>
+ * 
  * @short A carddeck selection widget for card games.
  *
  * The KCardWidget provides a widget for interactive carddeck selection.

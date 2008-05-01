@@ -34,6 +34,8 @@ class KGamePropertyHandler;
 class KPlayerPrivate;
 
 /**
+ * \class KPlayer kplayer.h <KPlayer>
+ * 
  * @short Base class for a game player
  *
  * The KPlayer class is the central player object. It holds

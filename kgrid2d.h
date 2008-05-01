@@ -84,6 +84,8 @@ inline QTextStream &operator <<(QTextStream &s, const KGrid2D::CoordList &list)
 namespace KGrid2D
 {
 /**
+ * \class Generic kgrid2d.h <KGrid2D>
+ * 
  * This template class represents a generic bidimensionnal grid. Each node
  * contains an element of the template type.
  */
@@ -221,7 +223,9 @@ namespace KGrid2D
 
 //-----------------------------------------------------------------------------
 /**
- * This class contains static methods to manipulate coordinates for a
+ * \class SquareBase kgrid2d.h <KGrid2D>
+ * 
+ * kgamecanvas.hThis class contains static methods to manipulate coordinates for a
  * square bidimensionnal grid.
  */
 class SquareBase
@@ -295,6 +299,8 @@ class SquareBase
 };
 
 /**
+ * \class Square kgrid2d.h <KGrid2D>
+ * 
  * This template is a @ref Generic implementation for a square bidimensionnal
  * grid (@ref SquareBase).
  */
@@ -350,6 +356,8 @@ class Square : public Generic<T>, public SquareBase
 
 //-----------------------------------------------------------------------------
 /**
+ * \class HexagonalBase kgrid2d.h <KGrid2D>
+ * 
  * This class contains static methods to manipulate coordinates on an
  * hexagonal grid where hexagons form horizontal lines:
  * <pre>
@@ -426,6 +434,8 @@ class HexagonalBase
 };
 
 /**
+ * \class Hexagonal kgrid2d.h <KGrid2D>
+ * 
  * This template implements a hexagonal grid
  * where hexagons form horizontal lines:
  * <pre>

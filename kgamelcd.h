@@ -29,6 +29,8 @@ class QTimer;
 
 //-----------------------------------------------------------------------------
 /**
+ * \class KGameLCD kgamelcd.h <KGameLCD>
+ * 
  * This class is a visually enhanced @ref QLCDNumber :
  * <ul>
  * <li> It can show an additional string before the integer being
@@ -116,6 +118,8 @@ private:
 
 //-----------------------------------------------------------------------------
 /**
+ * \class KGameLCDClock kgamelcd.h <KGameLCD>
+ * 
  * This class is a digital clock widget. It has a maximum duration of
  * 3599 seconds (one hour) and it gets updated every second.
  */
@@ -178,6 +182,8 @@ private:
 
 //-----------------------------------------------------------------------------
 /**
+ * \class KGameLCDList kgamelcd.h <KGameLCD>
+ * 
  * This widget holds a list of @ref QLCDNumber arranged in a vertical layout.
  * It also shows a label at the top of the list.
  */

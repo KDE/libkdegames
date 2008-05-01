@@ -30,7 +30,9 @@
 #include "kgameproperty.h"
 #include "kgamepropertyhandler.h"
 
-
+/**
+ * \class KGamePropertyArray kgamepropertyarray.h <KGamePropertyArray>
+ */
 template<class type>
 class KGamePropertyArray : public QVector<type>, public KGamePropertyBase
 {

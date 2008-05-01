@@ -22,6 +22,8 @@
 #define __KGAMEVERSION_H__
 
 /**
+ * \headerfile kgameversion.h <KGame/KGameVersion>
+ * 
  * In this file you find a couple of defines that indicate whether a specific
  * feature or function is present in this version of the KGame library.
  *

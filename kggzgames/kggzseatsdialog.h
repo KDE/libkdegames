@@ -48,6 +48,8 @@ namespace KGGZMod
 class KGGZSeatsDialogPrivate;
 
 /**
+ * \class KGGZSeatsDialog kggzseatsdialog.h <KGGZSeatsDialog>
+ * 
  * @short Dialog to view and modify the seat configuration.
  *
  * This dialog can be used to view and modify the seat configuration of

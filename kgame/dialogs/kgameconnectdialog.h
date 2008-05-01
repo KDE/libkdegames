@@ -26,6 +26,9 @@
 class KGameConnectDialogPrivate;
 class KGameConnectWidgetPrivate;
 
+/**
+ * \class KGameConnectWidget kgameconnectdialog.h <KGameConnectWidget>
+ */
 class KGameConnectWidget : public QWidget
 {
 	Q_OBJECT
@@ -104,6 +107,8 @@ private:
 };
 
 /**
+ * \class KGameConnectDialog kgameconnectdialog.h <KGameConnectWidget>
+ * 
  * @short Dialog to ask for host and port
  *
  * This Dialog is used to create a game. You call initConnection(port,

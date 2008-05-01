@@ -48,6 +48,8 @@ class KGameDialogConnectionConfig;
 
 class KGameDialogPrivate;
 /**
+ * \class KGameDialog kgamedialog.h <KGameDialog>
+ * 
  * TODO: rewrite entire documentation. Nearly nothing is valid anymore.
  * The main configuration dialog for KGame. Here all players meat each other,
  * every player can see how many players connected (and their names) and the

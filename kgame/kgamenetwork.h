@@ -32,6 +32,8 @@ class KMessageServer;
 class KGameNetworkPrivate;
 
 /**
+ * \class KGameNetwork kgamenetwork.h <KGame/KGameNetwork>
+ * 
  * The KGameNetwork class is the KGame class with network
  * support. All other features are the same but they are
  * now network transparent. It is not used directly but
