@@ -19,11 +19,15 @@ class QObject;
 
 class KGameDifficultyPrivate;
 class KXmlGuiWindow;
+#include <QMap>
+#include <QPair>
 #include <libkdegames_export.h>
 
 
 
 /**
+ * \class KGameDifficulty kgamedifficulty.h <KGameDifficulty>
+ * 
  * @brief KGameDifficuty manages the game difficulty levels in a standard way
  *
  * KGameDifficulty manages the difficulty levels of a game. The
@@ -188,6 +192,14 @@ class KDEGAMES_EXPORT KGameDifficulty
                  * @return current standard level string name
                  */
                 static QString levelString();
+                /**
+                 * @return current standard level name translated string
+                 */
+                static QPair<QByteArray, QString> localizedLevelString();
+                /**
+                 * @return list of translated standard level string names
+                 */
+                static QMap<QByteArray, QString> localizedLevelStrings();
 		/**
 		 * @brief Set the new current difficulty level as a custom one
 		 *

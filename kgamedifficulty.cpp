@@ -41,7 +41,7 @@ class KGameDifficultyPrivate : public QObject
 		/**
 		 * @return standard string for standard level
 		 */
-		QString standardLevelString(KGameDifficulty::standardLevel level);
+                QPair<QByteArray, QString> standardLevelString(KGameDifficulty::standardLevel level);
 
 		void setLevel(KGameDifficulty::standardLevel level);
 		void setLevelCustom(int key);
@@ -148,32 +148,33 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 	}
 }
 
-QString KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLevel level)
+QPair<QByteArray, QString> KGameDifficultyPrivate::standardLevelString(KGameDifficulty::standardLevel level)
 {
+    //The first entry in the pair is to be used as a key so don't change it. It doesn't have to match the string to be translated
     switch (level) {
         case KGameDifficulty::RidiculouslyEasy:
-            return i18nc("Game difficulty level 1 out of 8", "Ridiculously Easy");
+            return qMakePair(QByteArray("Ridiculously Easy"), i18nc("Game difficulty level 1 out of 8", "Ridiculously Easy"));
         case KGameDifficulty::VeryEasy:
-            return i18nc("Game difficulty level 2 out of 8", "Very Easy");
+            return qMakePair(QByteArray("Very Easy"), i18nc("Game difficulty level 2 out of 8", "Very Easy"));
         case KGameDifficulty::Easy:
-            return i18nc("Game difficulty level 3 out of 8", "Easy");
+            return qMakePair(QByteArray("Easy"), i18nc("Game difficulty level 3 out of 8", "Easy"));
         case KGameDifficulty::Medium:
-            return i18nc("Game difficulty level 4 out of 8", "Medium");
+            return qMakePair(QByteArray("Medium"), i18nc("Game difficulty level 4 out of 8", "Medium"));
         case KGameDifficulty::Hard:
-            return i18nc("Game difficulty level 5 out of 8", "Hard");
+            return qMakePair(QByteArray("Hard"), i18nc("Game difficulty level 5 out of 8", "Hard"));
         case KGameDifficulty::VeryHard:
-            return i18nc("Game difficulty level 6 out of 8", "Very Hard");
+            return qMakePair(QByteArray("Very Hard"), i18nc("Game difficulty level 6 out of 8", "Very Hard"));
         case KGameDifficulty::ExtremelyHard:
-            return i18nc("Game difficulty level 7 out of 8", "Extremely Hard");
+            return qMakePair(QByteArray("Extremely Hard"), i18nc("Game difficulty level 7 out of 8", "Extremely Hard"));
         case KGameDifficulty::Impossible:
-            return i18nc("Game difficulty level 8 out of 8", "Impossible");
+            return qMakePair(QByteArray("Impossible"), i18nc("Game difficulty level 8 out of 8", "Impossible"));
         case KGameDifficulty::Custom:
         case KGameDifficulty::Configurable:
         case KGameDifficulty::NoLevel:
             // Do nothing
             break;
     }
-    return QString();
+    return qMakePair(QByteArray(), QString());
 }
 
 void KGameDifficultyPrivate::rebuildActions()
@@ -184,8 +185,8 @@ void KGameDifficultyPrivate::rebuildActions()
 
 	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
 		if (level!=KGameDifficulty::Configurable) {
-			m_menu->addAction(standardLevelString(level));
-			m_comboBox->addItem(KIcon("games-difficult"), standardLevelString(level));
+			m_menu->addAction(standardLevelString(level).second);
+			m_comboBox->addItem(KIcon("games-difficult"), standardLevelString(level).second);
 		}
 	}
 
@@ -391,7 +392,34 @@ QString KGameDifficulty::levelString()
 {
 	Q_ASSERT(self()->d);
 
+	return self()->d->standardLevelString(self()->d->m_level).second;
+}
+
+
+QPair<QByteArray, QString> KGameDifficulty::localizedLevelString()
+{
+	Q_ASSERT(self()->d);
+
 	return self()->d->standardLevelString(self()->d->m_level);
+}
+
+
+QMap<QByteArray, QString> KGameDifficulty::localizedLevelStrings()
+{
+    Q_ASSERT(self()->d);
+
+    QMap<QByteArray, QString> levelStrings;
+    
+    levelStrings.insert(self()->d->standardLevelString(RidiculouslyEasy).first, self()->d->standardLevelString(RidiculouslyEasy).second);
+    levelStrings.insert(self()->d->standardLevelString(VeryEasy).first, self()->d->standardLevelString(VeryEasy).second);
+    levelStrings.insert(self()->d->standardLevelString(Easy).first, self()->d->standardLevelString(Easy).second);
+    levelStrings.insert(self()->d->standardLevelString(Medium).first, self()->d->standardLevelString(Medium).second);
+    levelStrings.insert(self()->d->standardLevelString(Hard).first, self()->d->standardLevelString(Hard).second);
+    levelStrings.insert(self()->d->standardLevelString(VeryHard).first, self()->d->standardLevelString(VeryHard).second);
+    levelStrings.insert(self()->d->standardLevelString(ExtremelyHard).first, self()->d->standardLevelString(ExtremelyHard).second);
+    levelStrings.insert(self()->d->standardLevelString(Impossible).first, self()->d->standardLevelString(Impossible).second);
+    
+    return levelStrings;
 }
 
 

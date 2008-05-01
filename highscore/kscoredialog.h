@@ -33,7 +33,11 @@ this software.
 
 #include <kdialog.h>
 
+class KLocalizedString;
+
 /**
+ * \class KScoreDialog kscoredialog.h <KScoreDialog>
+ * 
  * @short A simple high score implementation
  * 
  * This class can be used both for displaying the current high scores
@@ -136,9 +140,43 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
         * 
         * @param group to use for reading/writing highscores from/to.
+        * @deprecated since 4.1
         */
-        void setConfigGroup(const QString& group = QString());
+        void KDE_DEPRECATED setConfigGroup(const QString& group = QString());
         //void setConfigGroup(const QString& group, const QString& i18nName);
+
+        /**
+        * The group name must be passed though ki18n() in order for the
+        * group name to be translated. i.e. 
+         * \code ksdialog.setConfigGroup(ki18n("Easy")); \endcode
+        * If you set a group, it will be prefixed in the config file by 
+        * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
+        * 
+        * @param group to use for reading/writing highscores from/to.
+        */
+        void setConfigGroup(const QPair<QByteArray, QString>& group);
+        
+        /**
+         * You must add the translations of all group names to the dialog. This
+         * is best done by passing the name through ki18n().
+         * The group set through setConfigGroup(const KLocalizedString& group)
+         * will be added automatically
+         * 
+         * @param group the translated group name
+         */
+        void addLocalizedConfigGroupName(const QPair<QByteArray, QString>& group);
+        
+        /**
+         * You must add the translations of all group names to the dialog. This
+         * is best done by passing the name through ki18n().
+         * The group set through setConfigGroup(const KLocalizedString& group)
+         * will be added automatically.
+         * 
+         * This function can be used directly with KGameDifficulty::localizedLevelStrings().
+         * 
+         * @param group the list of translated group names
+         */
+        void addLocalizedConfigGroupNames(const QMap<QByteArray, QString>& groups);
 
         /**
          * @param comment to add when showing high-scores.
@@ -187,9 +225,9 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
          */
         int highScore();
 
-        ///Display the dialog
+        ///Display the dialog as non-modal
         virtual void show();
-        ///Display the dialog
+        ///Display the dialog as modal
         virtual void exec();
 
         private Q_SLOTS:

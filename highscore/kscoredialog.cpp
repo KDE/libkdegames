@@ -37,6 +37,7 @@ this software.
 
 #include <QtCore/QTimer>
 #include <QtCore/QList>
+#include <QtCore/QByteArray>
 #include <QtGui/QGridLayout>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QLabel>
@@ -52,24 +53,25 @@ class KScoreDialog::KScoreDialogPrivate
 {
     public:
         //QList<FieldInfo*> scores;
-        QMap<QString, GroupScores> scores; ///<Maps config group name to GroupScores
+        QMap<QByteArray, GroupScores> scores; ///<Maps config group name to GroupScores
         KTabWidget *tabWidget;
         //QWidget *page;
         //QGridLayout *layout;
         QLineEdit *edit;    ///<The line edit for entering player name
-        QMap<QString, QList<QStackedWidget*> > stack;
-        QMap<QString, QList<QLabel*> > labels; ///<For each group, the labels along each row in turn starting from "#1"
+        QMap<QByteArray, QList<QStackedWidget*> > stack;
+        QMap<QByteArray, QList<QLabel*> > labels; ///<For each group, the labels along each row in turn starting from "#1"
         QLabel *commentLabel;
         QString comment;
         int fields;
         int hiddenFields;
-        QPair<QString, int> newName; //index of the newname to add
-        QPair<QString, int> latest; //index of the latest addition (groupName, position)
+        QPair<QByteArray, int> newName; //index of the newname to add (groupKey, position)
+        QPair<QByteArray, int> latest; //index of the latest addition (groupKey, position)
         int nrCols;
         int numberOfPages;
         bool loaded;
-        QString configGroup;
+        QByteArray configGroup;
         KHighscore* highscoreObject;
+        QMap<QByteArray, QString> translatedGroupNames; ///<List of the translated group names.
         
         QMap<int, int> col;
         QMap<int, QString> header; ///<Header for fields. Maps field index to a string
@@ -85,8 +87,10 @@ class KScoreDialog::KScoreDialogPrivate
         void saveScores();
         
         void setupDialog();
-        void setupGroup(const QString& groupName);
+        void setupGroup(const QByteArray& groupName);
         void aboutToShow();
+        
+        QString findTranslatedGroupName(const QByteArray& name);
 };
 
 
@@ -100,12 +104,12 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     fields |= Score; //Make 'Score' field automatic (it can be hidden if necessary)
     d->fields = fields;
     d->hiddenFields = 0;
-    d->newName = QPair<QString,int>(QString(),-1);
-    d->latest = QPair<QString,int>("Null",-1);
+    d->newName = QPair<QByteArray,int>(QByteArray(),-1);
+    d->latest = QPair<QByteArray,int>("Null",-1);
     d->loaded = false;
     d->nrCols = 0;
     d->numberOfPages=0;
-    d->configGroup=QString();
+    d->configGroup=QByteArray();
     
     //Set up the default table headers
     d->header[Name] = i18n("Name");
@@ -141,10 +145,55 @@ KScoreDialog::~KScoreDialog()
     delete d;
 }
 
-void KScoreDialog::setConfigGroup(const QString &group)
+void KScoreDialog::setConfigGroup(const QString &group)  //DEPRECATED!
 {
-    d->configGroup = group;
+    d->configGroup = group.toUtf8();
     d->loaded = false;
+}
+
+void KScoreDialog::setConfigGroup(const QPair<QByteArray, QString>& group)
+{
+    d->configGroup = group.first; //untranslated string
+    addLocalizedConfigGroupName(group); //add the translation to the list
+    d->loaded = false;
+}
+
+void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString>& group)
+{
+    bool alreadyPresent = false;
+    foreach(const QByteArray& groupKey, d->translatedGroupNames.keys())
+    {
+        if(groupKey == group.first)
+        {
+            alreadyPresent = true;
+            break;
+        }
+    }
+    if(!alreadyPresent)
+    {
+        d->translatedGroupNames.insert(group.first, group.second);
+    }
+}
+
+void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString>& groups)
+{
+    foreach(const QByteArray& groupKey, groups.keys())
+    {
+        addLocalizedConfigGroupName(qMakePair(groupKey, groups.value(groupKey)));
+    }
+}
+
+QString KScoreDialog::KScoreDialogPrivate::findTranslatedGroupName(const QByteArray& name)
+{
+    foreach(const QByteArray& groupKey, translatedGroupNames.keys())
+    {
+        if(name == groupKey) //if this string is the same as the untranslated version in the list
+        {
+            return translatedGroupNames.value(groupKey); //return the translated string for the current locale
+        }
+    }
+    //If it wasn't found then just try i18n( to see if it happens to be in the database
+    return i18n(name); //FIXME?
 }
 
 void KScoreDialog::setComment(const QString &comment)
@@ -178,16 +227,16 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
     }
     
     tabWidget->clear();
-    foreach(const QString &groupName, scores.keys())
+    foreach(const QByteArray &groupName, scores.keys())
         setupGroup(groupName);
 }
 
-void KScoreDialog::KScoreDialogPrivate::setupGroup(const QString& groupName)
+void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 {
-        if(groupName.isEmpty()) //If the group doesn't have a name, use a default.
+    if(groupKey.isEmpty()) //If the group doesn't have a name, use a default.
             tabWidget->addTab(new QWidget(q), i18n(DEFAULT_GROUP_NAME));
         else
-            tabWidget->addTab(new QWidget(q), i18n(groupName.toUtf8()));
+            tabWidget->addTab(new QWidget(q), findTranslatedGroupName(groupKey));
         tabWidget->setCurrentIndex(tabWidget->count()-1);
         
         QGridLayout* layout = new QGridLayout( tabWidget->widget( tabWidget->currentIndex() ) );
@@ -228,15 +277,15 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QString& groupName)
             QLabel *label;
             num.setNum(i);
             label = new QLabel(i18n("#%1", num), tabWidget->widget(tabWidget->currentIndex()));
-            labels[groupName].insert((i-1)*nrCols + 0, label); //Fill up column zero
+            labels[groupKey].insert((i-1)*nrCols + 0, label); //Fill up column zero
             layout->addWidget(label, i+4, 0);
             if (fields & Name) //If we have a Name field
             {
                 QStackedWidget *localStack = new QStackedWidget(tabWidget->widget(tabWidget->currentIndex()));
-                stack[groupName].insert(i-1, localStack);
+                stack[groupKey].insert(i-1, localStack);
                 layout->addWidget(localStack, i+4, col[Name]);
                 label = new QLabel(localStack);
-                labels[groupName].insert((i-1)*nrCols + col[Name], label);
+                labels[groupKey].insert((i-1)*nrCols + col[Name], label);
                 localStack->addWidget(label);
                 localStack->setCurrentWidget(label);
             }
@@ -245,7 +294,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QString& groupName)
                 if ( (fields & field) && !(hiddenFields & field ) ) //Maybe disable for Name?
                 {
                     label = new QLabel(tabWidget->widget(tabWidget->currentIndex()));
-                    labels[groupName].insert((i-1)*nrCols + col[field], label);
+                    labels[groupKey].insert((i-1)*nrCols + col[field], label);
                     layout->addWidget(label, i+4, col[field], Qt::AlignRight);
                 }
             }
@@ -266,7 +315,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     
     int tabIndex=0; //Index of the current tab
     int newScoreTabIndex=0; //The index of the tab of the group with the new score
-    foreach(const QString &groupName, scores.keys())
+    foreach(const QByteArray &groupKey, scores.keys())
     {
         //Only display the comment on the page with the new score (or) this one if there's only one tab
         if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first.isEmpty() && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
@@ -305,18 +354,18 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             
             //kDebug() << "groupName:" << groupName << "id:" << i-1;
             
-            FieldInfo score = scores[groupName].at(i-1);
-            label = labels[groupName].at((i-1)*nrCols + 0); //crash! FIXME
-            if ( (i == latest.second) && (groupName == latest.first) )
+            FieldInfo score = scores[groupKey].at(i-1);
+            label = labels[groupKey].at((i-1)*nrCols + 0); //crash! FIXME
+            if ( (i == latest.second) && (groupKey == latest.first) )
                 label->setFont(bold);
             else
                 label->setFont(normal);
     
             if (fields & Name)
             {
-                if ( (newName.second == i) && (groupName == newName.first) )
+                if ( (newName.second == i) && (groupKey == newName.first) )
                 {
-                    QStackedWidget *localStack = stack[groupName].at(i-1);
+                    QStackedWidget *localStack = stack[groupKey].at(i-1);
                     edit = new QLineEdit(player, localStack);
                     edit->setMinimumWidth(40);
                     localStack->addWidget(edit);
@@ -326,8 +375,8 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                 }
                 else
                 {
-                    label = labels[groupName].at((i-1)*nrCols + col[Name]);
-                    if ( (i == latest.second) && (groupName == latest.first) )
+                    label = labels[groupKey].at((i-1)*nrCols + col[Name]);
+                    if ( (i == latest.second) && (groupKey == latest.first) )
                         label->setFont(bold);
                     else
                         label->setFont(normal);
@@ -339,8 +388,8 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             {
                 if ( (fields & field) && !(hiddenFields & field ) )
                 {
-                    label = labels[groupName].at((i-1)*nrCols + col[field]);
-                    if ( (i == latest.second) && (groupName == latest.first) )
+                    label = labels[groupKey].at((i-1)*nrCols + col[field]);
+                    if ( (i == latest.second) && (groupKey == latest.first) )
                         label->setFont(bold);
                     else
                         label->setFont(normal);
@@ -350,7 +399,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
         }
         tabIndex++;
     }
-    latest = QPair<QString,int>(QString(),-1);
+    latest = QPair<QByteArray,int>(QByteArray(),-1);
     q->setFixedSize(q->minimumSizeHint()); //NOTE Remove this line to make dialog resizable
     tabWidget->setCurrentIndex(newScoreTabIndex);
 }
@@ -362,7 +411,13 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     QStringList groupList = highscoreObject->groupList(); //List of the group names
     numberOfPages = groupList.size();
     
-    QString tempCurrentGroup = configGroup; //temp to store the user-set group name
+    QList<QByteArray> groupKeyList;
+    for(int i = 0; i < numberOfPages; i++)
+    {
+        groupKeyList << groupList.at(i).toUtf8(); //Convert all the QStrings to QByteArrays
+    }
+    
+    QByteArray tempCurrentGroup = configGroup; //temp to store the user-set group name
     
     if (groupList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
@@ -371,9 +426,9 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         setupGroup(configGroup);
     }
     
-    foreach(const QString &groupName, groupList)
+    foreach(const QByteArray &groupKey, groupKeyList)
     {
-        highscoreObject->setHighscoreGroup(groupName);
+        highscoreObject->setHighscoreGroup(groupKey);
         player = highscoreObject->readEntry(0, "LastPlayer");  //FIXME
         
         for (int i = 1; i <= 10; ++i)
@@ -386,16 +441,16 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
                     score[field] = highscoreObject->readEntry(i, key[field], QString("-"));
                 }
             }
-            scores[groupName].append(score);
+            scores[groupKey].append(score);
         }
     }
     highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
-    foreach(const QString &groupName, scores.keys())
+    foreach(const QByteArray &groupKey, scores.keys())
     {
-        if( (scores[groupName][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupName) )
+        if( (scores[groupKey][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupKey) )
         {
-            kDebug(11002) << "Removing group \"" << groupName << "\" since it's unused.";
-            scores.remove(groupName);
+            kDebug(11002) << "Removing group \"" << groupKey << "\" since it's unused.";
+            scores.remove(groupKey);
         }
     }
     loaded = true;
@@ -403,7 +458,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 
 void KScoreDialog::KScoreDialogPrivate::saveScores()
 {
-    highscoreObject->setHighscoreGroup(configGroup.toUtf8());
+    highscoreObject->setHighscoreGroup(configGroup);
     
     highscoreObject->writeEntry(0,"LastPlayer", player);
     
@@ -446,7 +501,7 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
               ((newScore < num_score) && lessIsMore) || !ok)
         {
             
-            d->latest = QPair<QString,int>(d->configGroup,i+1);
+            d->latest = QPair<QByteArray,int>(d->configGroup,i+1);
             d->scores[d->configGroup].insert(i, score);
             d->scores[d->configGroup].removeAt(10);
             
@@ -471,7 +526,7 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
             if (askName)
             {
                 d->player=score[Name];
-                d->newName = QPair<QString,int>(d->configGroup,i+1);
+                d->newName = QPair<QByteArray,int>(d->configGroup,i+1);
                 
                 setButtons(Ok|Cancel);
                 connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
@@ -532,7 +587,7 @@ void KScoreDialog::slotGotName()
     d->stack[d->newName.first].at((d->newName.second-1))->setCurrentWidget(label);
     delete d->edit;
     d->edit = 0;
-    d->newName = QPair<QString,int>(QString(),-1);
+    d->newName = QPair<QByteArray,int>(QByteArray(),-1);
 }
 
 int KScoreDialog::highScore()
