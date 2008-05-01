@@ -172,6 +172,7 @@ void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString>&
     if(!alreadyPresent)
     {
         d->translatedGroupNames.insert(group.first, group.second);
+        kDebug() << "adding" << group.first << "->" << group.second;
     }
 }
 
@@ -408,10 +409,10 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 {
     scores.clear();
     
-    QStringList groupList = highscoreObject->groupList(); //List of the group names
-    numberOfPages = groupList.size();
+    QStringList groupList = highscoreObject->groupList(); //List of the group names actually in the config file
+    numberOfPages = groupList.size(); //how many groups are in the config fileo
     
-    QList<QByteArray> groupKeyList;
+    QList<QByteArray> groupKeyList; //This will be a list of all the groups in the config fie
     for(int i = 0; i < numberOfPages; i++)
     {
         groupKeyList << groupList.at(i).toUtf8(); //Convert all the QStrings to QByteArrays
@@ -419,10 +420,10 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     
     QByteArray tempCurrentGroup = configGroup; //temp to store the user-set group name
     
-    if (groupList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
+    if (groupKeyList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
     {
-        kDebug(11002) << "The current high score group \"" << configGroup << "\" isn't in the list, adding it";
-        groupList << configGroup;
+        kDebug(11002) << "The current high score group " << configGroup << " isn't in the list, adding it";
+        groupKeyList << configGroup;
         setupGroup(configGroup);
     }
     
@@ -449,7 +450,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     {
         if( (scores[groupKey][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupKey) )
         {
-            kDebug(11002) << "Removing group \"" << groupKey << "\" since it's unused.";
+            kDebug(11002) << "Removing group " << groupKey << " since it's unused.";
             scores.remove(groupKey);
         }
     }
@@ -478,6 +479,8 @@ void KScoreDialog::KScoreDialogPrivate::saveScores()
 
 int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 {
+    kDebug() << "adding new score";
+    
     bool askName=false, lessIsMore=false;
     if(flags.testFlag(KScoreDialog::AskName))
         askName = true;
@@ -491,16 +494,20 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
     
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
+        kDebug() << "in loop 1";
         FieldInfo score = d->scores[d->configGroup].at(i); //First look at the score in the config file
         bool ok; //will be false if there isn't any score yet in position i
         int num_score = score[Score].toLong(&ok); //test if the stored score is a number
         
         score = FieldInfo(newInfo); //now look at the submitted score
         int newScore = score[Score].toInt();
+        
+        kDebug() << "num_score =" << num_score << " - newScore =" << newScore;
+        
         if (((newScore > num_score) && !lessIsMore) ||
               ((newScore < num_score) && lessIsMore) || !ok)
         {
-            
+            kDebug() << "in if() 1";
             d->latest = QPair<QByteArray,int>(d->configGroup,i+1);
             d->scores[d->configGroup].insert(i, score);
             d->scores[d->configGroup].removeAt(10);
