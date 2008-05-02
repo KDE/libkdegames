@@ -19,8 +19,8 @@ class QObject;
 
 class KGameDifficultyPrivate;
 class KXmlGuiWindow;
-#include <QMap>
-#include <QPair>
+#include <QtCore/QMap>
+#include <QtCore/QPair>
 #include <libkdegames_export.h>
 
 
