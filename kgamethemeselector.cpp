@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Mauricio Piacentini  <mauricio@tabuleiro.com>
+    Copyright (C) 2007 Matt Williams   <matt@milliams.com>
 
     This library is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
