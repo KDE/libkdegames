@@ -51,7 +51,7 @@ class KGameSvgDigitsPrivate
 
     /**
      * @brief Renders the digit.
-     * 
+     *
      * @param node The node to render
      * @param cacheId The id of the digit in the pixmap cache
      * @returns returns the pixmap
@@ -60,7 +60,7 @@ class KGameSvgDigitsPrivate
 
     /**
      * @brief Renders the digit.
-     * 
+     *
      * @param element The node to render
      * @param cacheId The id of the digit in the pixmap cache
      * @returns returns nothing.
@@ -115,7 +115,7 @@ class KGameSvgDigitsPrivate
 
     /**
      * @brief Renders an individual style digit
-     * 
+     *
      * @param element The svg element to process
      * @param cacheId The id of the digit in the pixmap cache
      * @returns returns nothing.
@@ -433,7 +433,7 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
     if (!settings.value("cacheOption").isEmpty()) {setCacheOption(settings.value("cacheOption"));}
 
     d->m_highlighted = false;
-
+    delete config;
     kDebug () << "Theme set to:" << desktopEntry.value("Name");
 }
 
