@@ -35,6 +35,18 @@
 #include <kdebug.h>
 #endif
 
+// work around a bug in the Mac OS X 10.4.0 SDK
+#if defined(__APPLE__)
+# ifndef __DARWIN_ALIGNBYTES
+#  define __DARWIN_ALIGNBYTES     (sizeof(__darwin_size_t) - 1)
+# endif
+# ifndef __DARWIN_ALIGN
+#  define __DARWIN_ALIGN(p)       ((__darwin_size_t)((char *)(p) + __DARWIN_ALIGNBYTES) &~ __DARWIN_ALIGNBYTES)
+# endif
+# undef CMSG_SPACE
+# define CMSG_SPACE(l) (ALIGN(sizeof(struct cmsghdr)) + ALIGN(l))
+#endif
+
 namespace KGGZMod
 {
 
