@@ -159,6 +159,8 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     d->m_timer.setSingleShot(true);
 
     setAcceptsHoverEvents(true);
+    // ignore scene transformations
+    setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
 
     // setup default colors
     d->m_brush = KStatefulBrush( KColorScheme::Tooltip, KColorScheme::NormalBackground );
