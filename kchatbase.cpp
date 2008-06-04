@@ -159,7 +159,7 @@ bool KChatBase::insertSendingEntry(const QString& text, int id, int index)
  }
  d->mCombo->insertItem(index, text);
  if (index < 0) {
-	d->mIndex2Id.append(id);
+	d->mIndex2Id.prepend(id);
  } else {
 	d->mIndex2Id.insert(d->mIndex2Id.at(index), id);
  }
@@ -175,12 +175,12 @@ int KChatBase::sendingEntry() const
 	kWarning(11001) << "Cannot retrieve index from NULL combo box";
 	return -1;
  }
- int index = d->mCombo->currentIndex();
- if ( index > 0 && index <  d->mIndex2Id.size()) {
-	kWarning(11000) << "could not find the selected sending entry!";
-	return -1;
- }
- return d->mIndex2Id[index];
+ const int index = d->mCombo->currentIndex();
+ if ( index > 0 && index <  d->mIndex2Id.size())
+    return d->mIndex2Id[index];
+
+ kWarning(11000) << "could not find the selected sending entry!";
+ return -1;
 }
 
 void KChatBase::removeSendingEntry(int id)
