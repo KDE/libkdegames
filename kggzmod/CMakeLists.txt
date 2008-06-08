@@ -23,4 +23,4 @@ install(FILES
     player.h
     request.h
     statistics.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kggzmod)
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kggzmod COMPONENT Devel)

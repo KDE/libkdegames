@@ -17,4 +17,4 @@ install(FILES
     kggznet_export.h
     kggzraw.h
     kggzpacket.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kggznet)
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kggznet COMPONENT Devel)

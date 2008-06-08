@@ -25,7 +25,7 @@ install(FILES
    kmessageio.h
    kmessageserver.h
    kmessageclient.h
-DESTINATION ${INCLUDE_INSTALL_DIR}/kgame)
+DESTINATION ${INCLUDE_INSTALL_DIR}/kgame COMPONENT Devel)
 
 
 

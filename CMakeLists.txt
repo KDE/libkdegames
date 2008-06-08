@@ -110,5 +110,5 @@ install(FILES
     kgametheme.h
     kgamethemeselector.h
     kgamedifficulty.h
-    DESTINATION ${INCLUDE_INSTALL_DIR})
+    DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 

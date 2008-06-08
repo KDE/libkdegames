@@ -18,4 +18,4 @@ install(FILES
     kggzgames_export.h
     kggzseatsdialog.h
     kggzrankingsdialog.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kggzgames)
+    DESTINATION ${INCLUDE_INSTALL_DIR}/kggzgames COMPONENT Devel)
