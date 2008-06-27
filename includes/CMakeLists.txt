@@ -20,7 +20,7 @@ install( FILES
 	KHighscore
 	KScoreDialog
 	KStandardGameAction
-DESTINATION ${INCLUDE_INSTALL_DIR}/KDE )
+DESTINATION ${INCLUDE_INSTALL_DIR}/KDE COMPONENT Devel)
 
 install( FILES
 	KGame/KGame
@@ -44,4 +44,4 @@ install( FILES
 	KGame/KMessageIO
 	KGame/KMessageServer
 	KGame/KPlayer
-DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/KGame )
+DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/KGame COMPONENT Devel)
