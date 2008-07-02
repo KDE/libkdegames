@@ -121,7 +121,7 @@
       <item>
        <widget class="QCheckBox" name="checkBoxLock" >
         <property name="text" >
-         <string>Lock backside to frontside</string>
+         <string comment="back and front refer to the sides of a card" >Lock back to front</string>
         </property>
        </widget>
       </item>
@@ -140,7 +140,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_2" >
        <property name="title" >
-        <string>Frontside</string>
+        <string comment="Front side of a card" >Front</string>
        </property>
        <layout class="QVBoxLayout" >
         <item>
@@ -273,7 +273,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_3" >
        <property name="title" >
-        <string>Backside</string>
+        <string comment="Back side of a card" >Back</string>
        </property>
        <layout class="QVBoxLayout" >
         <item>
