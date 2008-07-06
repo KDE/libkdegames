@@ -514,7 +514,7 @@ void KCardCache::setFrontTheme( const QString& theme )
         } else
         {
             QDir carddir( CardDeckInfo::frontDir( theme ) );
-            foreach( QFileInfo entry, carddir.entryInfoList( QStringList() << "*.png" ) )
+            foreach( const QFileInfo& entry, carddir.entryInfoList( QStringList() << "*.png" ) )
             {
                 if( dt.isNull() || dt < entry.lastModified() )
                 {
