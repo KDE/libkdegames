@@ -91,6 +91,7 @@ class KGGZSeatsDialogPrivate
 KGGZSeatsDialog::KGGZSeatsDialog(QWidget *parent)
 : QWidget(parent), d(new KGGZSeatsDialogPrivate(this))
 {
+	setMod(KGGZMod::Module::instance());
 }
 
 KGGZSeatsDialogPrivate::KGGZSeatsDialogPrivate(KGGZSeatsDialog* qq)
@@ -132,8 +133,6 @@ KGGZSeatsDialogPrivate::KGGZSeatsDialogPrivate(KGGZSeatsDialog* qq)
 	q->setWindowTitle(i18n("Players, Bots and Spectators"));
 	q->resize(300, 300);
 	q->show();
-
-	q->setMod(KGGZMod::Module::instance());
 }
 
 KGGZSeatsDialog::~KGGZSeatsDialog()
