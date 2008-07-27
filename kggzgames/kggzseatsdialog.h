@@ -97,7 +97,7 @@ class KGGZGAMES_EXPORT KGGZSeatsDialog : public QWidget
 
 		Q_PRIVATE_SLOT(d, void slotDisplay(int id))
 		Q_PRIVATE_SLOT(d, void slotTaskData(KIO::Job *job, const QByteArray&))
-		Q_PRIVATE_SLOT(d, void slotTaskResult(KIO::Job *job))
+		Q_PRIVATE_SLOT(d, void slotTaskResult(KJob *job))
 		Q_PRIVATE_SLOT(d, void slotInfo(const KGGZMod::Event& event))
 		Q_PRIVATE_SLOT(d, void slotAction())
 		Q_PRIVATE_SLOT(d, void slotMenu(QAction *action))

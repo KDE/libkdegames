@@ -55,8 +55,8 @@ class KGGZSeatsDialogPrivate
 		QMap<int, QLabel*> m_hostnames;
 		QMap<int, QLabel*> m_realnames;
 		QMap<int, QFrame*> m_photos;
-		QMap<KIO::Job*, int> m_phototasks;
-		QMap<KIO::Job*, QByteArray> m_photodata;
+		QMap<KJob*, int> m_phototasks;
+		QMap<KJob*, QByteArray> m_photodata;
 		QMap<const QObject*, int> m_buttons;
 		QMap<const QObject*, QToolButton*> m_buttondata;
 		int m_oldmode;
@@ -82,7 +82,7 @@ class KGGZSeatsDialogPrivate
 		// slots
 		void slotDisplay(int id);
 		void slotTaskData(KIO::Job *job, const QByteArray&);
-		void slotTaskResult(KIO::Job *job);
+		void slotTaskResult(KJob *job);
 		void slotInfo(const KGGZMod::Event& event);
 		void slotAction();
 		void slotMenu(QAction *action);
@@ -485,8 +485,8 @@ void KGGZSeatsDialogPrivate::infos()
 			KIO::TransferJob *job = KIO::get(p->photo(), KIO::NoReload, KIO::HideProgressInfo);
 			QObject::connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
 				q, SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
-			QObject::connect(job, SIGNAL(result(KIO::Job*)),
-				q, SLOT(slotTaskResult(KIO::Job*)));
+			QObject::connect(job, SIGNAL(result(KJob*)),
+				q, SLOT(slotTaskResult(KJob*)));
 			m_phototasks[job] = i;
 			m_photodata[job] = QByteArray();
 		}
@@ -517,7 +517,7 @@ void KGGZSeatsDialogPrivate::slotTaskData(KIO::Job *job, const QByteArray& data)
 	m_photodata[job] = data2;
 }
 
-void KGGZSeatsDialogPrivate::slotTaskResult(KIO::Job *job)
+void KGGZSeatsDialogPrivate::slotTaskResult(KJob *job)
 {
 	if(!job->error())
 	{
