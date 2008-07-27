@@ -36,6 +36,7 @@ KGGZPacket::~KGGZPacket()
 {
 	if(m_socket)
 	{
+		m_socket->disconnect();
 		flush();
 		delete m_socket;
 	}
@@ -72,21 +73,33 @@ void KGGZPacket::slotNetwork(int fd)
 	QDataStream packsizestream(&packsize, QIODevice::ReadOnly);
 	qint16 size;
 
+	// Auto-initialize underlying TCP/IP socket if not done yet
 	if(!m_socket)
 	{
 		kDebug(11005) << "<kggzpacket> init socket device";
 		m_socket = new QAbstractSocket(QAbstractSocket::TcpSocket, this);
 		m_socket->setSocketDescriptor(fd);
+
+		connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(slotSocketError()));
+		connect(m_socket, SIGNAL(disconnected()), SLOT(slotSocketError()));
 	}
 
+	// When expecting a new packet, read the packet size first
 	if(m_input.size() == 0)
 	{
-		if(m_socket->bytesAvailable() < 2) return;
+		if(m_socket->bytesAvailable() < 2)
+		{
+			kError(11005) << "<kggzpacket> header too small";
+			errorhandler();
+			return;
+		}
 		packsize.resize(2);
 		avail = m_socket->read(packsize.data(), 2);
 		if(avail == -1)
 		{
-			// Error!
+			kError(11005) << "<kggzpacket> no bytes available";
+			errorhandler();
+			return;
 		}
 		packsizestream >> size;
 		m_size = (int)size - 2;
@@ -94,21 +107,43 @@ void KGGZPacket::slotNetwork(int fd)
 		kDebug(11005) << "<kggzpacket> input init; packsize = 2 + " << m_size;
 	}
 
+	// Read the body of the packet when the size is known
 	len = m_socket->bytesAvailable();
 	if(len > m_size - m_input.size()) len = m_size - m_input.size();
 	avail = m_socket->read(m_input.data() + m_input.size(), len);
 	if(avail == -1)
 	{
-		// Error!
+		kError(11005) << "<kggzpacket> no bytes available";
+		errorhandler();
+		return;
 	}
 	kDebug(11005) << "<kggzpacket> input; read up to" << m_input.size();
 
+	// If the packet is complete, notify the listeners
 	if(m_input.size() == (qint64)m_size)
 	{
 		kDebug(11005) << "<kggzpacket> input done for packet; fire signal!";
 		emit signalPacket();
 		m_input.truncate(0);
 	}
+}
+
+void KGGZPacket::slotSocketError()
+{
+	kError(11005) << "<kggzpacket> the underlying TCP/IP socket became invalid";
+	errorhandler();
+}
+
+void KGGZPacket::errorhandler()
+{
+	kError(11005) << "<kggzpacket> error handler invoked";
+	if(m_socket)
+	{
+		m_socket->deleteLater();
+		m_socket->disconnect();
+		m_socket = NULL;
+	}
+	emit signalError();
 }
 
 #include "kggzpacket.moc"

@@ -59,8 +59,26 @@ KGGZRaw::~KGGZRaw()
 	kDebug(11005) << "[raw] *destructor* net";
 	delete m_net;
 	kDebug(11005) << "[raw] *destructor* socket";
-	delete m_socket;
+	if(m_socket)
+	{
+		m_socket->disconnect();
+		delete m_socket;
+	}
 	kDebug(11005) << "[raw] *destructor* done";
+}
+
+void KGGZRaw::errorhandler()
+{
+	kError(11005) << "[raw] error handler invoked";
+	delete m_net;
+	m_net = NULL;
+	if(m_socket)
+	{
+		m_socket->deleteLater();
+		m_socket->disconnect();
+		m_socket = NULL;
+	}
+	emit signalError();
 }
 
 void KGGZRaw::setFormat(Format format)
@@ -74,13 +92,16 @@ void KGGZRaw::setNetwork(int fd)
 	if(m_socket)
 	{
 		kError(11005) << "[raw] setNetwork called more than once";
-		emit signalError();
+		errorhandler();
 		return;
 	}
 
 	// Create a datastream on an unbuffered TCP socket
 	m_socket = new QAbstractSocket(QAbstractSocket::TcpSocket, this);
 	m_socket->setSocketDescriptor(fd, QAbstractSocket::ConnectedState, QIODevice::ReadWrite | QIODevice::Unbuffered);
+
+	connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(slotSocketError()));
+	connect(m_socket, SIGNAL(disconnected()), SLOT(slotSocketError()));
 
 	m_net = new QDataStream(m_socket);
 }
@@ -91,7 +112,7 @@ bool KGGZRaw::ensureBytes(int bytes)
 	if((!m_net) || (!m_socket))
 	{
 		kError(11005) << "[raw] setNetwork not called yet";
-		emit signalError();
+		errorhandler();
 		return false;
 	}
 
@@ -112,7 +133,7 @@ bool KGGZRaw::ensureBytes(int bytes)
 		if(waitcycles > 100)
 		{
 			kError(11005) << "[raw] failed to receive" << bytes << "bytes";
-			emit signalError();
+			errorhandler();
 			return false;
 		}
 	}
@@ -224,6 +245,12 @@ int KGGZRaw::peekedStringBytes()
 	}
 
 	return strsize + 4;
+}
+
+void KGGZRaw::slotSocketError()
+{
+	kError(11005) << "[raw] the underlying TCP/IP socket became invalid";
+	errorhandler();
 }
 
 #include "kggzraw.moc"

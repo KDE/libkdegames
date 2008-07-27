@@ -515,7 +515,9 @@ void ModulePrivate::disconnect()
 {
 	delete m_gnotifier;
 	delete m_notifier;
-	delete m_net;
+
+	m_net->deleteLater();
+	m_net->disconnect();
 
 	m_net = 0;
 	m_notifier = 0;

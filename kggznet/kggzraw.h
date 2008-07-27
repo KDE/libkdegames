@@ -143,9 +143,13 @@ class KGGZNET_EXPORT KGGZRaw : public QObject
 		 */
 		void signalError();
 
+	private Q_SLOTS:
+		void slotSocketError();
+
 	private:
 		bool ensureBytes(int bytes);
 		int peekedStringBytes();
+		void errorhandler();
 
 		QAbstractSocket *m_socket;
 		QDataStream *m_net;

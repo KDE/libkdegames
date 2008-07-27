@@ -121,7 +121,20 @@ class KGGZNET_EXPORT KGGZPacket : public QObject
 		 */
  		void signalPacket();
 
+		/**
+		 * An error has occurred.
+		 *
+		 * The game should destroy the KGGZPacket object and disable
+		 * all networking activities associated with it.
+		 */
+		void signalError();
+
+	private Q_SLOTS:
+		void slotSocketError();
+
 	private:
+		void errorhandler();
+
 		QDataStream *m_inputstream, *m_outputstream;
 		QAbstractSocket *m_socket;
 		QByteArray m_input, m_output;
