@@ -142,6 +142,8 @@ KGGZSeatsDialog::~KGGZSeatsDialog()
 
 void KGGZSeatsDialog::setMod(KGGZMod::Module *mod)
 {
+	kDebug(11004) << "Set module" << mod;
+
 	d->m_mod = mod;
 
 	if(mod)
@@ -157,46 +159,47 @@ void KGGZSeatsDialog::setMod(KGGZMod::Module *mod)
 
 void KGGZSeatsDialogPrivate::displaySeats()
 {
+	kDebug(11004) << "Display seats";
+
 	QPalette palette;
 	int count = m_mod->players().count();
 	int digits = (int)(log((double)count) / log((double)10.0) + 1);
 
+	kDebug(11004) << "Number of players:" << count;
+
 	if(m_root)
 	{
-		// FIXME: m_root doesn't need to be member anymore? (Qt4)
-		(void)m_view->takeWidget();
-		delete m_root;
-
 		m_hostnames.clear();
 		m_realnames.clear();
 		m_photos.clear();
 		m_buttons.clear();
 		m_buttondata.clear();
 	}
-	m_root = new QWidget(m_view->viewport());
+	m_root = new QWidget();
 	m_view->setWidget(m_root);
-	QVBoxLayout *vboxmain = new QVBoxLayout(m_root);
+	QVBoxLayout *vboxmain = new QVBoxLayout();
+	m_root->setLayout(vboxmain);
 
 	for(int i = 0; i < count; i++)
 	{
 		KGGZMod::Player *p = m_mod->players().at(i);
 
-		QFrame *w = new QFrame(m_root);
+		QFrame *w = new QFrame();
 		w->setFrameStyle(QFrame::Panel | QFrame::Raised);
 		vboxmain->addWidget(w);
 
-		QLCDNumber *numberframe = new QLCDNumber(w);
+		QLCDNumber *numberframe = new QLCDNumber();
 		numberframe->setNumDigits(digits);
 		numberframe->display(i + 1);
 
-		QFrame *photoframe = new QFrame(w);
+		QFrame *photoframe = new QFrame();
 		palette = photoframe->palette();
 		palette.setColor(photoframe->backgroundRole(), QColor(120, 120, 120));
 		photoframe->setPalette(palette);
 		photoframe->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 		photoframe->setFixedSize(64, 64);
 
-		QToolButton *actionbutton = new QToolButton(w);
+		QToolButton *actionbutton = new QToolButton();
 		actionbutton->setArrowType(Qt::DownArrow);
 		actionbutton->setText(i18n("Action..."));
 
@@ -222,28 +225,29 @@ void KGGZSeatsDialogPrivate::displaySeats()
 			default:
 				break;
 		}
-		QLabel *typelabel = new QLabel(i18n("Type: %1", type), w);
+		QLabel *typelabel = new QLabel(i18n("Type: %1", type));
 
 		QString name = p->name();
 	       	if(name.isNull()) name = i18n("(unnamed)");
-		QLabel *namelabel = new QLabel("<b><i>" + name + "</i></b>", w);
+		QLabel *namelabel = new QLabel("<b><i>" + name + "</i></b>");
 		palette = namelabel->palette();
 		palette.setColor(namelabel->backgroundRole(), QColor(255, 255, 255));
 		namelabel->setPalette(palette);
 		namelabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 		namelabel->setMinimumWidth(150);
 
-		QLabel *hostlabel = new QLabel("", w);
+		QLabel *hostlabel = new QLabel(QString());
 		hostlabel->hide();
 
-		QLabel *realnamelabel = new QLabel("", w);
+		QLabel *realnamelabel = new QLabel(QString());
 		realnamelabel->hide();
 
 		m_hostnames[i] = hostlabel;
 		m_realnames[i] = realnamelabel;
 		m_photos[i] = photoframe;
 
-		QVBoxLayout *box = new QVBoxLayout(w);
+		QVBoxLayout *box = new QVBoxLayout();
+		w->setLayout(box);
 		QHBoxLayout *box2 = new QHBoxLayout();
 		box2->addSpacing(5);
 		QVBoxLayout *box5 = new QVBoxLayout();
@@ -279,49 +283,49 @@ void KGGZSeatsDialogPrivate::displaySeats()
 	vboxmain->addStretch(1);
 
 	m_root->show();
+	m_root->adjustSize();
 
 	infos();
 }
 
 void KGGZSeatsDialogPrivate::displaySpectators()
 {
+	kDebug(11004) << "Display spectators";
+
 	int count = m_mod->spectators().count();
 	int digits = (int)(log((double)count) / log((double)10.0) + 1);
 
-	if(m_root)
-	{
-		(void)m_view->takeWidget();
-		delete m_root;
-	}
-	m_root = new QWidget(m_view->viewport());
+	m_root = new QWidget();
 	m_view->setWidget(m_root);
-	QVBoxLayout *vboxmain = new QVBoxLayout(m_root);
+	QVBoxLayout *vboxmain = new QVBoxLayout();
+	m_root->setLayout(vboxmain);
 
 	for(int i = 0; i < count; i++)
 	{
 		KGGZMod::Player *p = m_mod->spectators().at(i);
 
-		QFrame *w = new QFrame(m_root);
+		QFrame *w = new QFrame();
 		w->setFrameStyle(QFrame::Panel | QFrame::Raised);
 		vboxmain->addWidget(w);
 
-		QLCDNumber *numberframe = new QLCDNumber(w);
+		QLCDNumber *numberframe = new QLCDNumber();
 		numberframe->setNumDigits(digits);
 		numberframe->display(i + 1);
 
 		QString type = i18n("Spectator");
-		QLabel *typelabel = new QLabel(i18n("Type: %1", type), w);
+		QLabel *typelabel = new QLabel(i18n("Type: %1", type));
 
 		QString name = p->name();
 	       	if(name.isNull()) name = i18n("(unnamed)");
-		QLabel *namelabel = new QLabel("<b><i>" + name + "</i></b>", w);
+		QLabel *namelabel = new QLabel("<b><i>" + name + "</i></b>");
 		QPalette palette = namelabel->palette();
 		palette.setColor(namelabel->backgroundRole(), QColor(255, 255, 255));
 		namelabel->setPalette(palette);
 		namelabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 		namelabel->setMinimumWidth(150);
 
-		QVBoxLayout *box = new QVBoxLayout(w);
+		QVBoxLayout *box = new QVBoxLayout();
+		w->setLayout(box);
 		QHBoxLayout *box2 = new QHBoxLayout();
 		box2->addSpacing(5);
 		QVBoxLayout *box5 = new QVBoxLayout();
@@ -342,6 +346,7 @@ void KGGZSeatsDialogPrivate::displaySpectators()
 	vboxmain->addStretch(1);
 
 	m_root->show();
+	m_root->adjustSize();
 }
 
 void KGGZSeatsDialogPrivate::slotAction()
@@ -444,13 +449,15 @@ void KGGZSeatsDialogPrivate::slotMenu(QAction *action)
 
 void KGGZSeatsDialogPrivate::slotInfo(const KGGZMod::Event& event)
 {
+	kDebug(11004) << "Infos arrived";
+
 	if(event.type() == KGGZMod::Event::info)
 	{
 		infos();
 	}
 	else if(event.type() == KGGZMod::Event::seat)
 	{
-			//KGGZMod::SeatEvent se = (KGGZMod::SeatEvent)event;
+		//KGGZMod::SeatEvent se = (KGGZMod::SeatEvent)event;
 	}
 }
 
@@ -460,33 +467,31 @@ void KGGZSeatsDialogPrivate::infos()
 	for(int i = 0; i < count; i++)
 	{
 		KGGZMod::Player *p = m_mod->players().at(i);
-		// FIXME: condition if info is really there? not really needed
-		if(/*info*/1==1)
+
+		if(!p->hostname().isEmpty())
 		{
-			if(!p->hostname().isEmpty())
-			{
-				QString hostname = i18n("Host: %1", p->hostname());
-				m_hostnames[i]->setText(hostname);
-				m_hostnames[i]->show();
-			}
-			if(!p->realname().isEmpty())
-			{
-				QString realname = i18n("Realname: %1", p->realname());
-				m_realnames[i]->setText(realname);
-				m_realnames[i]->show();
-			}
-			if(!p->photo().isEmpty())
-			{
-				KIO::TransferJob *job = KIO::get(p->photo(), KIO::NoReload, KIO::HideProgressInfo);
-				QObject::connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-					q, SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
-				QObject::connect(job, SIGNAL(result(KIO::Job*)),
-					q, SLOT(slotTaskResult(KIO::Job*)));
-				m_phototasks[job] = i;
-				m_photodata[job] = QByteArray();
-			}
+			QString hostname = i18n("Host: %1", p->hostname());
+			m_hostnames[i]->setText(hostname);
+			m_hostnames[i]->show();
+		}
+		if(!p->realname().isEmpty())
+		{
+			QString realname = i18n("Realname: %1", p->realname());
+			m_realnames[i]->setText(realname);
+			m_realnames[i]->show();
+		}
+		if(!p->photo().isEmpty())
+		{
+			KIO::TransferJob *job = KIO::get(p->photo(), KIO::NoReload, KIO::HideProgressInfo);
+			QObject::connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
+				q, SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
+			QObject::connect(job, SIGNAL(result(KIO::Job*)),
+				q, SLOT(slotTaskResult(KIO::Job*)));
+			m_phototasks[job] = i;
+			m_photodata[job] = QByteArray();
 		}
 	}
+	m_root->adjustSize();
 }
 
 void KGGZSeatsDialogPrivate::slotDisplay(int id)
