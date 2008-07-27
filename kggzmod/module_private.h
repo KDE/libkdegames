@@ -77,6 +77,7 @@ class ModulePrivate : public QObject
 
 	public slots:
 		void slotGGZEvent();
+		void slotGGZError();
 
 	signals:
 		void signalEvent(const KGGZMod::Event& event);

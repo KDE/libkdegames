@@ -218,6 +218,13 @@ QString ModulePrivate::opcodeString(GGZEvents opcode)
 	return str;
 }
 
+void ModulePrivate::slotGGZError()
+{
+	kDebug(11003) << "[kggzmod] error: disconnection from GGZ core client";
+	disconnect();
+	emit signalError();
+}
+
 void ModulePrivate::slotGGZEvent()
 {
 	int opcodetmp, ret;
@@ -495,6 +502,8 @@ void ModulePrivate::connect()
 
 	m_net = new KGGZRaw();
 	m_net->setNetwork(m_fd);
+
+	QObject::connect(m_net, SIGNAL(signalError()), SLOT(slotGGZError()));
 
 	m_notifier = new QSocketNotifier(m_fd, QSocketNotifier::Read, this);
 	QObject::connect(m_notifier, SIGNAL(activated(int)), SLOT(slotGGZEvent()));

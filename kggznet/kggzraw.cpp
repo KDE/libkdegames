@@ -102,10 +102,19 @@ bool KGGZRaw::ensureBytes(int bytes)
 	if(bytes == 0) return true;
 
 	// Ensure that this number of bytes is available
+	int waitcycles = 0;
 	while(m_socket->bytesAvailable() < bytes)
 	{
 		m_socket->waitForReadyRead(-1);
 		kWarning(11005) << "[raw] bytesAvailable grows to:" << m_socket->bytesAvailable();
+
+		waitcycles++;
+		if(waitcycles > 100)
+		{
+			kError(11005) << "[raw] failed to receive" << bytes << "bytes";
+			emit signalError();
+			return false;
+		}
 	}
 
 	return true;
