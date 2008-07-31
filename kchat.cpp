@@ -50,6 +50,13 @@ KChat::KChat(QWidget* parent, bool twoPlayerGame)
  init(); 
 }
 
+KChat::KChat(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate, bool noComboBox)
+    : KChatBase(parent, model, delegate, noComboBox),
+    d( new KChatPrivate )
+{
+    init();
+}
+
 KChat::~KChat()
 {
  kDebug(11000) << "DESTRUCT KChat" << this;

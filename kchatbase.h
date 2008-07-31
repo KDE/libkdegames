@@ -25,13 +25,13 @@
 #include <kglobalsettings.h>
 #include <libkdegames_export.h>
 
-class QListWidgetItem;
-
 class KConfig;
 
 class KChatBasePrivate;
 class KChatBaseModel;
 class KChatBaseItemDelegate;
+class QModelIndex;
+class QPoint;
 
 /**
  * \class KChatBase kchatbase.h <KChatBase>
@@ -325,7 +325,7 @@ public Q_SLOTS:
 	 * setAcceptMessage(true) is called
 	 **/
 	void setAcceptMessage(bool a);
-	
+
 protected:
 	/**
 	 * This is called whenever the user pushed return ie wants to send a
@@ -349,6 +349,13 @@ protected:
 	 **/
 	virtual QString comboBoxItem(const QString& name) const;
 
+        /**
+         * Returns the model index of the message at the viewport coordinates point
+         * @param pos position to check index for
+         * @return model index of message with coordinates pos
+         **/
+        const QModelIndex indexAt(const QPoint& pos) const;
+
 private Q_SLOTS:
 	/**
 	 * Check if a text was entered and if acceptMessage returns true. 
@@ -356,6 +363,12 @@ private Q_SLOTS:
 	 * widget and call returnPressed
 	 **/
 	void slotReturnPressed(const QString&);
+
+        /**
+         * Implements custom menu which is applicable for one chat message
+         * @param pos point where custom menu has been requested (widget coordinates)
+         **/
+        virtual void customMenuHandler(const QPoint &pos);
 
 private:
 

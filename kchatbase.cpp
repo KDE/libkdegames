@@ -64,6 +64,7 @@ public:
 
 void KChatBase::setModel(KChatBaseModel* m)
 {
+    //delete d->mModel;
     d->mModel=m;
 }
 
@@ -95,8 +96,11 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
 
  connect(d->mModel, SIGNAL(rowsInserted (const QModelIndex&,int,int)),
           d->mBox, SLOT(scrollToBottom()));
-          
 
+ connect(d->mBox, SIGNAL( customContextMenuRequested(const QPoint &)),
+         this, SLOT(customMenuHandler(const QPoint &)));
+
+ d->mBox->setContextMenuPolicy ( Qt::CustomContextMenu );
  d->mBox->setFocusPolicy(Qt::NoFocus);
  d->mBox->setSelectionMode(QAbstractItemView::SingleSelection);
 
@@ -122,6 +126,16 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  setMaxItems(-1); // unlimited
 
  readConfig();
+}
+
+const QModelIndex KChatBase::indexAt(const QPoint& pos) const
+{
+    return d->mBox->indexAt(pos);
+}
+
+void KChatBase::customMenuHandler(const QPoint &pos)
+{
+    kDebug(10500) << "custom menu has been requested at position="<<pos<<". Implement handler at subclass if you need it.";
 }
 
 KChatBase::~KChatBase()
@@ -176,7 +190,7 @@ int KChatBase::sendingEntry() const
 	return -1;
  }
  const int index = d->mCombo->currentIndex();
- if ( index > 0 && index <  d->mIndex2Id.size())
+ if ( index >= 0 && index <  d->mIndex2Id.size())
     return d->mIndex2Id[index];
 
  kWarning(11000) << "could not find the selected sending entry!";
@@ -248,6 +262,7 @@ void KChatBase::slotClear()
 {
  clear();
 }
+
 
 void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
 { d->mEdit->setCompletionMode(mode); }

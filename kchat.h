@@ -45,6 +45,10 @@ public:
 	 **/
 	explicit KChat(QWidget* parent, bool twoPlayerGame = false);
 
+        KChat(QWidget* parent, KChatBaseModel* model=0, 
+                           KChatBaseItemDelegate* delegate=0,
+                           bool noComboBox = false);
+
 	virtual ~KChat();
 
 	/**
