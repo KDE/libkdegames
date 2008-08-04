@@ -122,7 +122,7 @@ namespace CardDeckInfo
     * @param default the default theme to return if the config group has no setting for this
     * @returns the name of the front side theme name
     */
-   KDEGAMES_EXPORT QString frontTheme( const KConfigGroup& group, const QString& defaultTheme = defaultFrontName() );
+   KDEGAMES_EXPORT QString frontTheme( const KConfigGroup& group, const QString& defaultTheme = defaultFrontName(false) );
 
    /**
     * retrieve the configured back side theme name
@@ -131,7 +131,7 @@ namespace CardDeckInfo
     * @param default the default theme to return if the config group has no setting for this
     * @returns the name of the back side theme name
     */
-   KDEGAMES_EXPORT QString backTheme( const KConfigGroup& group, const QString& defaultTheme = defaultBackName() );
+   KDEGAMES_EXPORT QString backTheme( const KConfigGroup& group, const QString& defaultTheme = defaultBackName(false) );
 
    /**
     * retrieve the current value for the show fixed size
