@@ -359,7 +359,7 @@ public:
     \class KGameCanvasTiledPixmap kgamecanvas.h <KGameCanvas>
     \brief A tiled pixmap (brush).
 
-    A KGameCanvasPixmap is a pixmap that can be put in the canvas.
+    A KGameCanvasTiledPixmap is a pixmap that can be put in the canvas.
 */
 class KDEGAMES_EXPORT  KGameCanvasTiledPixmap : public KGameCanvasItem
 {
@@ -410,7 +410,7 @@ public:
     \class KGameCanvasRectangle kgamecanvas.h <KGameCanvas>
     \brief A solid rectangle.
 
-    A KGameCanvasPixmap is a pixmap that can be put in the canvas.
+    A KGameCanvasRectangle is a rectangle that can be put in the canvas.
 */
 class KDEGAMES_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
 {
