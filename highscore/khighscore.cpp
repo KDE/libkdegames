@@ -106,7 +106,9 @@ void KHighscore::init(const char *appname)
     lockedConfig->config = new KConfig(filename, KConfig::NoGlobals); // read-only   (matt-?)
 
     // drop the effective gid
+#ifdef __GNUC__
     #warning not portable yet. Unix only. Actually it does not even work there yet.
+#endif
     int gid = getgid();
     setregid(gid, gid);
 #else
