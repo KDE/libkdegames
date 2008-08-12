@@ -71,12 +71,6 @@ void KGGZPacket::flush()
 
 void KGGZPacket::slotNetwork(int fd)
 {
-	qint64 avail;
-	qint64 len;
-	QByteArray packsize;
-	QDataStream packsizestream(&packsize, QIODevice::ReadOnly);
-	qint16 size;
-
 	// Auto-initialize underlying TCP/IP socket if not done yet
 	if(!m_socket)
 	{
@@ -87,6 +81,20 @@ void KGGZPacket::slotNetwork(int fd)
 		connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(slotSocketError()));
 		connect(m_socket, SIGNAL(disconnected()), SLOT(slotSocketError()));
 	}
+
+	while(m_socket->bytesAvailable() > 0)
+	{
+		readchunk();
+	}
+}
+
+void KGGZPacket::readchunk()
+{
+	qint64 avail;
+	qint64 len;
+	QByteArray packsize;
+	QDataStream packsizestream(&packsize, QIODevice::ReadOnly);
+	qint16 size;
 
 	// When expecting a new packet, read the packet size first
 	if(m_input.size() == 0)
@@ -131,6 +139,9 @@ void KGGZPacket::slotNetwork(int fd)
 		kDebug(11005) << "<kggzpacket> input done for packet; fire signal!";
 		emit signalPacket();
 		m_input.truncate(0);
+
+		delete m_inputstream;
+		m_inputstream = new QDataStream(&m_input, QIODevice::ReadOnly);
 	}
 }
 

@@ -134,6 +134,7 @@ class KGGZNET_EXPORT KGGZPacket : public QObject
 
 	private:
 		void errorhandler();
+		void readchunk();
 
 		QDataStream *m_inputstream, *m_outputstream;
 		QAbstractSocket *m_socket;
