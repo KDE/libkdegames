@@ -63,6 +63,10 @@ void KGGZPacket::flush()
 	m_socket->write(packsize.data(), packsize.size());
 	m_socket->write(m_output.data(), m_output.size());
 	m_output.truncate(0);
+
+	// Qt doesn't detect a truncated underlying buffer
+	delete m_outputstream;
+	m_outputstream = new QDataStream(&m_output, QIODevice::WriteOnly);
 }
 
 void KGGZPacket::slotNetwork(int fd)
@@ -103,14 +107,16 @@ void KGGZPacket::slotNetwork(int fd)
 		}
 		packsizestream >> size;
 		m_size = (int)size - 2;
-		m_input.resize(m_size);
-		kDebug(11005) << "<kggzpacket> input init; packsize = 2 + " << m_size;
+		m_input.reserve(m_size);
+		kDebug(11005) << "<kggzpacket> input init; packsize = header 2 + payload" << m_size;
 	}
 
 	// Read the body of the packet when the size is known
 	len = m_socket->bytesAvailable();
-	if(len > m_size - m_input.size()) len = m_size - m_input.size();
-	avail = m_socket->read(m_input.data() + m_input.size(), len);
+	if(len > m_size - m_input.size())
+		len = m_size - m_input.size();
+	m_input.resize(m_input.size() + len);
+	avail = m_socket->read(m_input.data() + m_input.size() - len, len);
 	if(avail == -1)
 	{
 		kError(11005) << "<kggzpacket> no bytes available";
