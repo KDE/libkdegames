@@ -42,7 +42,7 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
         QString groupName;
 
         void setupData(KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags);
-        void findThemes(QString &initialGroup);
+        void findThemes(const QString &initialGroup);
 
         // private slots
         void _k_updatePreview();
@@ -85,7 +85,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
 }
 
-void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(QString &initialGroup)
+void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &initialGroup)
 {
     
     QStringList themesAvailable;
