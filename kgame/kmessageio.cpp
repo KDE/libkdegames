@@ -454,3 +454,4 @@ void KMessageFilePipe::exec()
 }
 
 #include "kmessageio.moc"
+

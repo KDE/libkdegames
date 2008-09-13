@@ -26,6 +26,7 @@
 #include <libkdegames_export.h>
 
 class KGameIO;
+class KMessageIO;
 class KMessageClient;
 class KMessageServer;
 
@@ -120,7 +121,8 @@ public:
      * @return true if connected
      **/
     bool connectToServer(const QString& host, quint16 port);
-
+    bool connectToServer(KMessageIO *connection);
+    
     /**
      * @return The port we are listening to if offerConnections was called
      * or the port we are connected to if connectToServer was called.

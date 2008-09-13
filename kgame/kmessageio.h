@@ -29,6 +29,7 @@
 #include <QtCore/QString>
 #include <QtNetwork/QHostAddress>
 #include <kdebug.h>
+#include <libkdegames_export.h>
 
 class QTcpSocket;
 class KProcess;
@@ -53,7 +54,7 @@ class QFile;
   sides must be within the same process).
 */
 
-class KMessageIO : public QObject
+class KDEGAMES_EXPORT KMessageIO : public QObject
 {
   Q_OBJECT
 
@@ -414,3 +415,4 @@ class KMessageFilePipe : public KMessageIO
 };
 
 #endif
+

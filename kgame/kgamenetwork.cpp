@@ -207,35 +207,47 @@ bool KGameNetwork::connectToServer (const QString& host, quint16 port)
    kError(11001) << "No hostname given";
    return false;
  }
+ if (connectToServer(new KMessageSocket (host, port)))
+ {
+  kDebug(11001) << "connected to" << host << ":" << port;
+  return true;
+ }
+ else
+ {
+   return false;
+ }
+}
 
- // Make sure this is 0
- d->mDisconnectId = 0;
-
-// if (!d->mMessageServer) {
-//   // FIXME: What shall we do here? Probably must stop a running game.
-//   kWarning (11001) << "We are already connected to another server!";
-/// }
-
+bool KGameNetwork::connectToServer (KMessageIO *connection)
+{
+  // Make sure this is 0
+  d->mDisconnectId = 0;
+  
+  // if (!d->mMessageServer) {
+ //   // FIXME: What shall we do here? Probably must stop a running game.
+ //   kWarning (11001) << "We are already connected to another server!";
+ /// }
+ 
  if (d->mMessageServer) {
    // FIXME: What shall we do here? Probably must stop a running game.
    kWarning(11001) << "we are server but we are trying to connect to another server! "
-                    << "make sure that all clients connect to that server! "
-                    << "quitting the local server now...";
+   << "make sure that all clients connect to that server! "
+   << "quitting the local server now...";
    stopServerConnection();
    d->mMessageClient->setServer((KMessageIO*)0);
    delete d->mMessageServer;
    d->mMessageServer = 0;
  }
-
+ 
  kDebug(11001) << "    about to set server";
- d->mMessageClient->setServer(host, port);
+ d->mMessageClient->setServer(connection);
  emit signalAdminStatusChanged(false); // as we delete the connection above isAdmin() is always false now!
-
+ 
  // OK: We say that we already have connected, but this isn't so yet!
  // If the connection cannot be established, it will look as being disconnected
  // again ("slotConnectionLost" is called).
  // Shall we differ between these?
- kDebug(11001) << "connected to" << host << ":" << port;
+ kDebug(11001) << "connected";
  return true;
 }
 
