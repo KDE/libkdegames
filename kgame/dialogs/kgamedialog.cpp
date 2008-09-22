@@ -82,7 +82,6 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
  connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
  connect(this,SIGNAL(defaultClicked()),this,SLOT(slotDefault()));
  connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
- connect(this,SIGNAL(cancelClicked()),this,SLOT(slotCancel()));
 }
 
 KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
@@ -102,7 +101,6 @@ KGameDialog::KGameDialog(KGame* g, KPlayer* owner, const QString& title,
  connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
  connect(this,SIGNAL(defaultClicked()),this,SLOT(slotDefault()));
  connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
- connect(this,SIGNAL(cancelClicked()),this,SLOT(slotCancel())); 
 }
 
 void KGameDialog::init(KGame* g, KPlayer* owner)
