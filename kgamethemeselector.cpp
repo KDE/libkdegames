@@ -65,7 +65,7 @@ KGameThemeSelector::~KGameThemeSelector()
 void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig, KGameThemeSelector::NewStuffState knsflags)
 {
     ui.setupUi(q);
-    
+    ui.getNewButton->setIcon(KIcon("get-hot-new-stuff")); 
     //Get our currently configured Tileset entry
     KConfig * config = aconfig->config();
     KConfigGroup group = config->group("General");
