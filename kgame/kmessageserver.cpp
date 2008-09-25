@@ -328,7 +328,7 @@ quint32 KMessageServer::adminID () const
 
 void KMessageServer::setAdmin (quint32 adminID)
 {
-  // Trying to set the the client that is already admin => nothing to do
+  // Trying to set the client that is already admin => nothing to do
   if (adminID == d->mAdminID)
     return;
 
