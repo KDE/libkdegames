@@ -656,7 +656,7 @@ public:
 	 * \endcode
 	 * as myProperty has not yet been set when doSomething is being called.
 	 *
-	 * You are informed about a value change by a singal from the parent of
+	 * You are informed about a value change by a signal from the parent of
 	 * the property which can be deactivated by setEmittingSignal because of
 	 * performance (you probably don't have to deactivate it - except you
 	 * want to write a real-time game like Command&Conquer with a lot of
