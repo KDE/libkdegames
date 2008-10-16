@@ -211,7 +211,7 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
   }
 }
 
-KGameMouseIO::KGameMouseIO(QGraphicsScene *parent,bool trackmouse) 
+KGameMouseIO::KGameMouseIO(QGraphicsScene *parent,bool /*trackmouse*/) 
    : KGameIO(), d(0)
 {
   if (parent)
