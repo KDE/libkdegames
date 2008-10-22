@@ -82,7 +82,7 @@ public:
         QStringList svg;
         // Add SVG card sets
         svg = KGlobal::dirs()->findAllResources( "cards", "svg*/index.desktop", KStandardDirs::NoDuplicates );
-        QStringList list = svg + KGlobal::dirs()->findAllResources( "cards", "card*/index.desktop", KStandardDirs::NoDuplicates );
+        const QStringList list = svg + KGlobal::dirs()->findAllResources( "cards", "card*/index.desktop", KStandardDirs::NoDuplicates );
 
         if ( list.isEmpty() ) return;
 
@@ -133,7 +133,7 @@ public:
         svgBackInfo.clear();
         pngBackInfo.clear();
     
-        QStringList list = KGlobal::dirs()->findAllResources( "cards", "decks/*.desktop", KStandardDirs::NoDuplicates );
+        const QStringList list = KGlobal::dirs()->findAllResources( "cards", "decks/*.desktop", KStandardDirs::NoDuplicates );
 
         if ( list.isEmpty() ) return;
     
