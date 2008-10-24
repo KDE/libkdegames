@@ -166,16 +166,16 @@ namespace CardDeckInfo
    KDEGAMES_EXPORT void writeBackTheme( KConfigGroup& group, const QString& theme );
 
    /**
-    * store the wether fixed size decks are allowed in the @p group
+    * store the whether fixed size decks are allowed in the @p group
     * @param group the KConfigGroup to write to from
-    * @param allowFixedSize wether fixed size decks are allowed or not
+    * @param allowFixedSize whether fixed size decks are allowed or not
     */
    KDEGAMES_EXPORT void writeAllowFixedSizeDecks( KConfigGroup& group, bool allowFixedSize );
 
    /**
-    * store the wether front and backside theme selection is locked to the @p group
+    * store the whether front and backside theme selection is locked to the @p group
     * @param group the KConfigGroup to write to from
-    * @param allowFixedSize wether front and backside theme selection is locked
+    * @param allowFixedSize whether front and backside theme selection is locked
     */
    KDEGAMES_EXPORT void writeLockFrontToBackside( KConfigGroup& group, bool lock );
 }

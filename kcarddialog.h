@@ -35,7 +35,7 @@ class KCardWidget;
  * @short A convenience class to display a standalone card selection dialog.
  *
  * This is a simple convenience class to embed the @ref KCardWidget into a
- * KDialog that has an Ok and Cancel button and an apropriate caption.
+ * KDialog that has an Ok and Cancel button and an appropriate caption.
  *
  * Usage Example:
  * \code
@@ -133,7 +133,7 @@ public:
 
    /**
     * Retrieve the current state of the "Show old style decks" checkbox
-    * @return wether or not fixed size card decks are shown in the list
+    * @return whether or not fixed size card decks are shown in the list
     */
    bool isFixedSizeAllowed() const;
 
@@ -161,7 +161,7 @@ public Q_SLOTS:
     * enable or disable locked selection, when locking is enabled the user
     * can only choose the front sides and the backside will be determined
     * from the frontside
-    * @param locked wether to lock the front and backside selection
+    * @param locked whether to lock the front and backside selection
     */
    void setLocked(bool locked);
 

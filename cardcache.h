@@ -192,7 +192,7 @@ public:
     /**
      * Retrieve the frontside pixmap.
      * 
-     * The @p infos paramter is used to determine which frontside to load.
+     * The @p infos parameter is used to determine which frontside to load.
      * Make sure to set a reasonable size and theme, before calling this function.
      * 
      * @param infos A combination of CardInfo flags to identify what type of card to
@@ -232,7 +232,7 @@ public:
      * 
      * Depending on the value of @p type only parts may be rendered.
      * 
-     * @param infos wether to load all entries in the theme or just the front or back
+     * @param infos whether to load all entries in the theme or just the front or back
      * sides. Also its possible to specify a different deck, like a 32 card deck.
      */
     void loadTheme( LoadInfos infos = LoadInfos( LoadFrontSide | LoadBackSide | Load53Cards ) );

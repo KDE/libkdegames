@@ -116,7 +116,7 @@ class KDEGAMES_EXPORT KGameProcess:  public QObject
      * (IdProcessQuery). The query option is a way to communicate
      * with the KGameIO at the other side and e.g. retrieve some
      * game relevant data from here.
-     * Exmaple for a query:
+     * Example for a query:
      * \code
      *  QByteArray buffer;
      *  QDataStream out(buffer,QIODevice::WriteOnly);
@@ -186,7 +186,7 @@ class KDEGAMES_EXPORT KGameProcess:  public QObject
       * sendSystemMessage with the message id KGameMessage::IdPlayerInput.
       * These must provide a move which complies to your other move syntax as
       * e.g. produces by keyboard or mouse input.
-      * Additonal data which have been written into the stream from the
+      * Additional data which have been written into the stream from the
       * ProcessIO's signal signalPrepareTurn can be retrieved from the
       * stream here.
       * Example:
