@@ -1,0 +1,72 @@
+Dear Contributor,
+
+This  simple How-To will help you get it right the first time around, should you wish to add your sparkling new card deck to our happy bunch.
+
+1. Make a right directory.
+
+    1.1 Directory name is comprised of following parts: Technology[SVG/non SVG]-Actual-Name
+	For example lets say your deck is called 'My Cards', and it's drawn in Inkscape thus making it SVG based. Then the directory you want to create is: svg-my-cards. I case your card deck is png(raster) based, the directory you wish to make is: my-cards
+
+    1.2 Once the directory is all set up you may move on to populating it with relevant files.
+
+2. What files are there?
+
+    2.1 There are only three files that must be present in your directory. Those are:
+	    a) description file (.desktop)
+	    b) screenshot (.png)
+	    c) theme file(s) (.svg/.png)
+	Let me elaborate on each of those.
+
+    2.2 Description file.
+	The description file must be named index.desktop and populated as follows:
+
+--------- index.desktop ---------
+[KDE Backdeck]
+Name=My Cards (or whatever name you want it to be)
+Comment=Some comment (This is in optional entry, waving to do with the description of the card deck)
+Preview= .png (your screenshot file)
+SVG= .svg/svgz (your svg deck.) <<<!!!!! FOR SVG BASED DECKS ONLY!!!!
+BackSize= [width]x[height] (the default size of your deck)
+Default=true/false (please set this to false, as it's up to the release team to decide)
+Back=back name (now this one is tricky; basicly this entry should correspond to the card back entry you will have to place into decks/ subdirectory, but we will get inot the details later)
+-------------------------------------
+
+And you are done here! Simple huh? :P
+
+    2.3 Screenshot
+	This is quite streight forward section. All you have to do is make a png file containing a pic of any single one of your cards (usually 120x70 in dimentions, but this are not limited). The only thing you have to make sure of is that the name of the file (screenshot.png) corresponds exactly to the .desktop entry.
+
+    2.4 The theme file(s)
+	Now, this section changes depending on the format you choose, so:
+	    a) SVG
+		SVG works simple and quite straight forward. All you need is for your file to be named my theme.svg(svgz), place it into your dir, and make sure the name exactly corresponds to the SVG entry in your .desktop file.
+	    b) PNG
+		This here is a bit tricky. Basicly each of the cards from the deck in sorted by number. For instance Ace of Clubs is always 1.png, etc. Please refer to any existing deck for better refernces.
+
+3. Card Backs
+
+    3.1 Because it's always a good idea to separate the actual deck from the back, we have done just that. So, all the card backs have to go into decks directory.
+	So first and foremost check inside the decks directory to see what is the last number used there. Lets say it's 13 (all the backs are named currently deck1 to deck13), so next in line is 14, therefore you should name all your files deck14.*
+    
+    3.2 The files you need are:
+	a) deck[n].desktop (description file)
+	b) deck[n].png (screenshot/card back)
+	c) deck[n].svg/svgz (card back [optional])
+	
+    3.3 Details
+	3.3.1 deck[n].desktop is the main file describing the back of your deck. It should have the following structure:
+
+------------- deck[n].desktop --------------
+[KDE Cards]
+Name=My name (this must be the same as your card deck name)
+Comment=Some more detailed description of the card back
+SVG=deck[n].svg/svgz (this entry is optional, and only needed in case your deck is in SVG/SVGZ format)
+Default=true/false (please set this to false by default)
+----------------------------------------------
+
+That's all.
+
+	3.3.1 deck[n].png is the screenshot of the card back in case the format of your cards is svg/scgz, or an actual cardback if the format is PNG.
+	3.3.2 deck[n].svg/svgz In case the format of your card deck is SVG this is an actuall file card games will use. Make sure it has a proper extention (svg, or svgz) and exactly matches your entry in .desktop file.
+	
+And this is it folks. Hope it works the first time around :)

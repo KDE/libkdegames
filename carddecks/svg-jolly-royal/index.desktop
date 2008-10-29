@@ -1,10 +1,10 @@
 [KDE Backdeck]
 Name=Jolly Royal (SVG)
+Comment=A clean and easy style with a distinctively royal touch.
 Name[pt]=Real Alegre (SVG)
 Name[pt_BR]=Real Alegre (SVG)
 Name[uk]=Веселе королівство (SVG)
 Preview=11.png
 SVG=jolly-royal.svg
 BackSize=63.6686,93
-Back=
 Default=true
