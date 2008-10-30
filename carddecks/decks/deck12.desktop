@@ -1,5 +1,9 @@
 [KDE Cards]
 Name=Jolly Royal (SVG)
+Name[nds]=Königlich (SVG)
+Name[pt]=Real Alegre (SVG)
+Name[pt_BR]=Real Alegre (SVG)
+Name[uk]=Веселе королівство (SVG)
 Comment=A clean and easy style with a distinctively royal touch.
 SVG=deck12.svgz
 Default=true
