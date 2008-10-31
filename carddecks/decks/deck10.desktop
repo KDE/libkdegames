@@ -25,4 +25,7 @@ Name[zh_CN]=巴黎(SVG)
 Name[zh_TW]=巴黎（SVG）
 SVG=deck10.svgz
 Comment=Clasic
+Comment[sv]=Klassiskt
+Comment[uk]=Класичний
+Comment[zh_TW]=古典
 Default=false
