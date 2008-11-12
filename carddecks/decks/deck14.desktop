@@ -1,8 +1,6 @@
 [KDE Cards]
 Name=Diamond Tree (SVG)
-Name[x-test]=xxDiamond Tree (SVG)xx
 SVG=deck14.svgz
 Comment=Simple, yet visually pleasing card back.
-Comment[x-test]=xxSimple, yet visually pleasing card back.xx
 Default=false
 
