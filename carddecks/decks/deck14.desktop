@@ -1,6 +1,18 @@
 [KDE Cards]
 Name=Diamond Tree (SVG)
+Name[el]=Διαμαντένιο δέντρο (SVG)
+Name[nds]=Diamantenboom (SVG)
+Name[pt]=Árvore de Diamantes (SVG)
+Name[pt_BR]=Árvore de Diamantes (SVG)
+Name[sv]=Diamantträd (SVG)
+Name[uk]=Діамантове дерево (SVG)
 SVG=deck14.svgz
 Comment=Simple, yet visually pleasing card back.
+Comment[el]=Απλό και ταυτόχρονα ευχάριστο θέμα.
+Comment[nds]=Eenfach, man liekers smuck Koortenachtersiet
+Comment[pt]=Uma face traseira de baralhos simples mais agradável visualmente.
+Comment[pt_BR]=Uma face traseira de baralhos simples mais agradável visualmente.
+Comment[sv]=Enkel, men ändå visuellt behaglig kortbaksida.
+Comment[uk]=Простий, але привабливий на вигляд стиль сорочок карт.
 Default=false
 
