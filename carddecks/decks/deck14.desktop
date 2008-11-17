@@ -6,6 +6,7 @@ Name[pt]=Árvore de Diamantes (SVG)
 Name[pt_BR]=Árvore de Diamantes (SVG)
 Name[sv]=Diamantträd (SVG)
 Name[uk]=Діамантове дерево (SVG)
+Name[x-test]=xxDiamond Tree (SVG)xx
 SVG=deck14.svgz
 Comment=Simple, yet visually pleasing card back.
 Comment[el]=Απλό και ταυτόχρονα ευχάριστο θέμα.
@@ -14,6 +15,7 @@ Comment[pt]=Uma face traseira de baralhos simples mais agradável visualmente.
 Comment[pt_BR]=Uma face traseira de baralhos simples mais agradável visualmente.
 Comment[sv]=Enkel, men ändå visuellt behaglig kortbaksida.
 Comment[uk]=Простий, але привабливий на вигляд стиль сорочок карт.
+Comment[x-test]=xxSimple, yet visually pleasing card back.xx
 Comment[zh_TW]=簡單，好看的撲克牌圖案
 Default=false
 
