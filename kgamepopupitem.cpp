@@ -35,6 +35,28 @@ static const int SOME_SPACE = 10;
 // width of the border in pixels
 static const qreal BORDER_PEN_WIDTH = 1.0;
 
+class TextItemWithOpacity : public QGraphicsTextItem
+{
+    Q_OBJECT
+
+public:
+    TextItemWithOpacity( QGraphicsItem* parent = 0 )
+        :QGraphicsTextItem(parent), m_opacity(1.0) {}
+    void setOpacity(qreal opa) { m_opacity = opa; }
+    void setTextColor(KStatefulBrush brush) { m_brush = brush; }
+    virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget );
+
+Q_SIGNALS:
+    void mouseClicked();
+
+private:
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent*);
+
+private:
+    qreal m_opacity;
+    KStatefulBrush m_brush;
+};
+
 void TextItemWithOpacity::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
 {
     // hope that it is ok to call this function here - i.e. I hope it won't be too expensive :)
@@ -479,4 +501,5 @@ void KGamePopupItem::onTextItemClicked()
         forceHide();
 }
 
-#include "kgamepopupitem.moc"
+#include "moc_kgamepopupitem.cpp" // For automocing KGamePopupItem
+#include "kgamepopupitem.moc" // For automocing TextItemWithOpacity
