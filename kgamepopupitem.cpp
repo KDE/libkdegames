@@ -25,7 +25,6 @@
 
 #include <KIcon>
 #include <KDebug>
-#include <kcolorscheme.h>
 
 // margin on the sides of message box
 static const int MARGIN = 15;
@@ -36,28 +35,26 @@ static const int SOME_SPACE = 10;
 // width of the border in pixels
 static const qreal BORDER_PEN_WIDTH = 1.0;
 
-class TextItemWithOpacity : public QGraphicsTextItem
+void TextItemWithOpacity::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
 {
-public:
-    TextItemWithOpacity( QGraphicsItem* parent = 0 )
-        :QGraphicsTextItem(parent), m_opacity(1.0) {}
-    void setOpacity(qreal opa) { m_opacity = opa; }
-    void setTextColor(KStatefulBrush brush) { m_brush = brush; }
-    virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
-        {
-            // hope that it is ok to call this function here - i.e. I hope it won't be too expensive :)
-            // we call it here (and not in setTextColor), because KstatefulBrush
-            // absolutely needs QWidget parameter :)
-            setDefaultTextColor(m_brush.brush(widget).color());
-            p->save();
-            p->setOpacity(m_opacity);
-            QGraphicsTextItem::paint(p,option,widget);
-            p->restore();
-        }
-private:
-    qreal m_opacity;
-    KStatefulBrush m_brush;
-};
+    // hope that it is ok to call this function here - i.e. I hope it won't be too expensive :)
+    // we call it here (and not in setTextColor), because KstatefulBrush
+    // absolutely needs QWidget parameter :)
+    setDefaultTextColor(m_brush.brush(widget).color());
+    p->save();
+    p->setOpacity(m_opacity);
+    QGraphicsTextItem::paint(p,option,widget);
+    p->restore();
+}
+
+void TextItemWithOpacity::mouseReleaseEvent(QGraphicsSceneMouseEvent* ev)
+{
+    // NOTE: this item is QGraphicsTextItem which "eats" mouse events
+    // because of interaction with links. Because of that let's make a
+    // special signal to indicate mouse click
+    emit mouseClicked();
+    QGraphicsTextItem::mouseReleaseEvent(ev);
+}
 
 class KGamePopupItemPrivate
 {
@@ -68,8 +65,8 @@ public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
           m_opacity(1.0), m_animOpacity(-1), m_hoveredByMouse(false),
-          m_hideOnClick(false), m_textChildItem(0),
-          m_sharpness(KGamePopupItem::Square) {}
+          m_hideOnClick(true), m_textChildItem(0),
+          m_sharpness(KGamePopupItem::Square), m_linkHovered(false) {}
     /**
      * Timeline for animations
      */
@@ -132,6 +129,10 @@ public:
      * painter path to draw a frame
      */
     QPainterPath m_path;
+    /**
+     * Indicates if some link is hovered in text item
+     */
+    bool m_linkHovered;
 };
 
 KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
@@ -148,6 +149,8 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
                                  SIGNAL(linkActivated(const QString&)));
     connect( d->m_textChildItem, SIGNAL(linkHovered(const QString&)),
                                  SLOT(onLinkHovered(const QString&)));
+    connect( d->m_textChildItem, SIGNAL(mouseClicked()),
+                                 SLOT(onTextItemClicked()) );
 
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
@@ -437,6 +440,9 @@ void KGamePopupItem::onLinkHovered(const QString& link)
         d->m_textChildItem->setCursor( Qt::ArrowCursor );
     else
         d->m_textChildItem->setCursor( Qt::PointingHandCursor );
+
+    d->m_linkHovered = !link.isEmpty();
+
     emit linkHovered(link);
 }
 
@@ -458,9 +464,19 @@ void KGamePopupItem::mousePressEvent( QGraphicsSceneMouseEvent* )
 
 void KGamePopupItem::mouseReleaseEvent( QGraphicsSceneMouseEvent* )
 {
+    // NOTE: text child item is QGraphicsTextItem which "eats" mouse events
+    // because of interaction with links. Because of that TextItemWithOpacity has
+    // special signal to indicate mouse click which we catch in a onTextItemClicked()
+    // slot
     if (d->m_hideOnClick)
         forceHide();
 }
 
+void KGamePopupItem::onTextItemClicked()
+{
+    // if link is hovered we don't hide as click should go to the link
+    if (d->m_hideOnClick && !d->m_linkHovered)
+        forceHide();
+}
 
 #include "kgamepopupitem.moc"

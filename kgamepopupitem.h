@@ -23,6 +23,8 @@
 #include <QtGui/QGraphicsPathItem>
 #include <QtCore/QObject>
 
+#include <KColorScheme>
+
 class KGamePopupItemPrivate;
 
 /**
@@ -177,13 +179,38 @@ private Q_SLOTS:
     void hideMe();
     void playHideAnimation();
     void onLinkHovered(const QString&);
+    void onTextItemClicked();
 private:
     void setupTimeline();
     virtual void mousePressEvent( QGraphicsSceneMouseEvent* );
     virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent* );
     virtual void hoverEnterEvent( QGraphicsSceneHoverEvent* );
     virtual void hoverLeaveEvent( QGraphicsSceneHoverEvent* );
+
     KGamePopupItemPrivate * const d;
 };
+
+class TextItemWithOpacity : public QGraphicsTextItem
+{
+    Q_OBJECT
+
+public:
+    TextItemWithOpacity( QGraphicsItem* parent = 0 )
+        :QGraphicsTextItem(parent), m_opacity(1.0) {}
+    void setOpacity(qreal opa) { m_opacity = opa; }
+    void setTextColor(KStatefulBrush brush) { m_brush = brush; }
+    virtual void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget );
+
+Q_SIGNALS:
+    void mouseClicked();
+
+private:
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent*);
+
+private:
+    qreal m_opacity;
+    KStatefulBrush m_brush;
+};
+
 
 #endif
