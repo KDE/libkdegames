@@ -23,8 +23,6 @@
 #include <QtGui/QGraphicsPathItem>
 #include <QtCore/QObject>
 
-#include <KColorScheme>
-
 class KGamePopupItemPrivate;
 
 /**

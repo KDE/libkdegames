@@ -23,6 +23,7 @@
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
 
+#include <KColorScheme>
 #include <KIcon>
 #include <KDebug>
 
