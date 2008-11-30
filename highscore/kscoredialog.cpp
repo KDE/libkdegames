@@ -67,11 +67,11 @@ class KScoreDialog::KScoreDialogPrivate
         QPair<QByteArray, int> newName; //index of the newname to add (groupKey, position)
         QPair<QByteArray, int> latest; //index of the latest addition (groupKey, position)
         int nrCols;
-        int numberOfPages;
         bool loaded;
         QByteArray configGroup;
         KHighscore* highscoreObject;
         QMap<QByteArray, QString> translatedGroupNames; ///<List of the translated group names.
+        QMap<QByteArray, QWidget*> tabs;
 
         QMap<int, int> col;
         QMap<int, QString> header; ///<Header for fields. Maps field index to a string
@@ -108,7 +108,6 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     d->latest = QPair<QByteArray,int>("Null",-1);
     d->loaded = false;
     d->nrCols = 0;
-    d->numberOfPages=0;
     d->configGroup=QByteArray();
 
     //Set up the default table headers
@@ -234,72 +233,72 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
 
 void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 {
-    if(groupKey.isEmpty()) //If the group doesn't have a name, use a default.
-            tabWidget->addTab(new QWidget(q), i18n(DEFAULT_GROUP_NAME));
-        else
-            tabWidget->addTab(new QWidget(q), findTranslatedGroupName(groupKey));
-        tabWidget->setCurrentIndex(tabWidget->count()-1);
+    QWidget* widget = new QWidget(q);
+    tabs[groupKey] = widget;
 
-        QGridLayout* layout = new QGridLayout( tabWidget->widget( tabWidget->currentIndex() ) );
-        //layout->setObjectName("ScoreTab-"+groupName);
-        layout->setMargin(marginHint()+20);
-        layout->setSpacing(spacingHint());
-        layout->addItem(new QSpacerItem(0, 15), 4, 0);
+    QString tabName = groupKey.isEmpty() ? i18n(DEFAULT_GROUP_NAME) : findTranslatedGroupName(groupKey);
+    tabWidget->addTab(widget, tabName);
 
-        commentLabel = new QLabel(tabWidget);
-        commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
+    QGridLayout* layout = new QGridLayout(widget);
+    //layout->setObjectName("ScoreTab-"+groupName);
+    layout->setMargin(marginHint()+20);
+    layout->setSpacing(spacingHint());
+    layout->addItem(new QSpacerItem(0, 15), 4, 0);
 
-        QFont bold = q->font();
-        bold.setBold(true);
+    commentLabel = new QLabel(tabWidget);
+    commentLabel->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
 
+    QFont bold = q->font();
+    bold.setBold(true);
+
+    QLabel *label;
+    layout->addItem(new QSpacerItem(50, 0), 0, 0);
+    label = new QLabel(i18n("Rank"), widget);
+    layout->addWidget(label, 3, 0);
+    label->setFont(bold);
+
+    for(int field = 1; field < fields; field = field * 2)
+    {
+        if ( (fields & field) && !(hiddenFields & field ) ) //If it's used and not hidden
+        {
+            layout->addItem( new QSpacerItem( 50, 0 ), 0, col[field] );
+            label = new QLabel(header[field], widget);
+            layout->addWidget(label, 3, col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
+            label->setFont(bold);
+        }
+    }
+
+    KSeparator *sep = new KSeparator(Qt::Horizontal, tabWidget->widget(tabWidget->currentIndex()));
+    layout->addWidget(sep, 4, 0, 1, nrCols);
+
+    QString num;
+    for (int i = 1; i <= 10; ++i)
+    {
         QLabel *label;
-        layout->addItem(new QSpacerItem(50, 0), 0, 0);
-        label = new QLabel(i18n("Rank"), tabWidget->widget(tabWidget->currentIndex()));
-        layout->addWidget(label, 3, 0);
-        label->setFont(bold);
-
-        for(int field = 1; field < fields; field = field * 2)
+        num.setNum(i);
+        label = new QLabel(i18n("#%1", num), widget);
+        labels[groupKey].insert((i-1)*nrCols + 0, label); //Fill up column zero
+        layout->addWidget(label, i+4, 0);
+        if (fields & Name) //If we have a Name field
         {
-            if ( (fields & field) && !(hiddenFields & field ) ) //If it's used and not hidden
+            QStackedWidget *localStack = new QStackedWidget(widget);
+            stack[groupKey].insert(i-1, localStack);
+            layout->addWidget(localStack, i+4, col[Name]);
+            label = new QLabel(localStack);
+            labels[groupKey].insert((i-1)*nrCols + col[Name], label);
+            localStack->addWidget(label);
+            localStack->setCurrentWidget(label);
+        }
+        for(int field = Name * 2; field < fields; field = field * 2)
+        {
+            if ( (fields & field) && !(hiddenFields & field ) ) //Maybe disable for Name?
             {
-                layout->addItem( new QSpacerItem( 50, 0 ), 0, col[field] );
-                label = new QLabel(header[field], tabWidget->widget(tabWidget->currentIndex()));
-                layout->addWidget(label, 3, col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
-                label->setFont(bold);
+                label = new QLabel(widget);
+                labels[groupKey].insert((i-1)*nrCols + col[field], label);
+                layout->addWidget(label, i+4, col[field], Qt::AlignRight);
             }
         }
-
-        KSeparator *sep = new KSeparator(Qt::Horizontal, tabWidget->widget(tabWidget->currentIndex()));
-        layout->addWidget(sep, 4, 0, 1, nrCols);
-
-        QString num;
-        for (int i = 1; i <= 10; ++i)
-        {
-            QLabel *label;
-            num.setNum(i);
-            label = new QLabel(i18n("#%1", num), tabWidget->widget(tabWidget->currentIndex()));
-            labels[groupKey].insert((i-1)*nrCols + 0, label); //Fill up column zero
-            layout->addWidget(label, i+4, 0);
-            if (fields & Name) //If we have a Name field
-            {
-                QStackedWidget *localStack = new QStackedWidget(tabWidget->widget(tabWidget->currentIndex()));
-                stack[groupKey].insert(i-1, localStack);
-                layout->addWidget(localStack, i+4, col[Name]);
-                label = new QLabel(localStack);
-                labels[groupKey].insert((i-1)*nrCols + col[Name], label);
-                localStack->addWidget(label);
-                localStack->setCurrentWidget(label);
-            }
-            for(int field = Name * 2; field < fields; field = field * 2)
-            {
-                if ( (fields & field) && !(hiddenFields & field ) ) //Maybe disable for Name?
-                {
-                    label = new QLabel(tabWidget->widget(tabWidget->currentIndex()));
-                    labels[groupKey].insert((i-1)*nrCols + col[field], label);
-                    layout->addWidget(label, i+4, col[field], Qt::AlignRight);
-                }
-            }
-        }
+    }
 }
 
 /*
@@ -315,25 +314,26 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
         setupDialog();
 
     int tabIndex=0; //Index of the current tab
-    int newScoreTabIndex=0; //The index of the tab of the group with the new score
     foreach(const QByteArray &groupKey, scores.keys())
     {
+        kDebug() << latest.first << tabWidget->tabText(tabIndex);
+
         //Only display the comment on the page with the new score (or) this one if there's only one tab
-        if((latest.first == tabWidget->tabText(tabIndex)) || ( latest.first.isEmpty() && tabWidget->tabText(tabIndex) == i18n(DEFAULT_GROUP_NAME) ))
+        if(latest.first == groupKey || ( latest.first.isEmpty() && groupKey == DEFAULT_GROUP_NAME ) )
         {
-            newScoreTabIndex=tabIndex;
+            QWidget* widget = tabs.value(groupKey);
+            QGridLayout* layout = qobject_cast<QGridLayout*>(widget->layout());
+
             commentLabel->setText(comment);
             if (comment.isEmpty())
             {
                 commentLabel->setMinimumSize(QSize(1,1));
                 commentLabel->hide();
-                QGridLayout* layout = qobject_cast<QGridLayout*>(tabWidget->widget(newScoreTabIndex)->layout());
                 layout->addItem( new QSpacerItem( 0, -15 ), 0, 0 );
                 layout->addItem( new QSpacerItem( 0, -15 ), 2, 0 );
             }
             else
             {
-                QGridLayout* layout = qobject_cast<QGridLayout*>(tabWidget->widget(newScoreTabIndex)->layout());
                 layout->addWidget(commentLabel, 1, 0, 1, nrCols);
                 commentLabel->setMinimumSize(commentLabel->sizeHint());
                 commentLabel->show();
@@ -341,6 +341,8 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                 layout->addItem( new QSpacerItem( 0, 10 ), 2, 0 );
             }
             comment.clear();
+
+            tabWidget->setCurrentWidget(widget);
         }
 
         QFont normal = q->font();
@@ -402,25 +404,21 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     }
     latest = QPair<QByteArray,int>(QByteArray(),-1);
     q->setFixedSize(q->minimumSizeHint()); //NOTE Remove this line to make dialog resizable
-    tabWidget->setCurrentIndex(newScoreTabIndex);
 }
 
 void KScoreDialog::KScoreDialogPrivate::loadScores()
 {
     scores.clear();
 
-    QStringList groupList = highscoreObject->groupList(); //List of the group names actually in the config file
-    numberOfPages = groupList.size(); //how many groups are in the config fileo
-
     QList<QByteArray> groupKeyList; //This will be a list of all the groups in the config fie
-    for(int i = 0; i < numberOfPages; i++)
+    foreach( const QString & groupString, highscoreObject->groupList())
     {
-        groupKeyList << groupList.at(i).toUtf8(); //Convert all the QStrings to QByteArrays
+        groupKeyList << groupString.toUtf8(); //Convert all the QStrings to QByteArrays
     }
 
     QByteArray tempCurrentGroup = configGroup; //temp to store the user-set group name
 
-    if (groupKeyList.count(configGroup) == 0) //If the current group doesn't have any entries, add it to the list to process
+    if (!groupKeyList.contains(configGroup)) //If the current group doesn't have any entries, add it to the list to process
     {
         kDebug(11002) << "The current high score group " << configGroup << " isn't in the list, adding it";
         groupKeyList << configGroup;
@@ -494,7 +492,6 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 
     for(int i=0; i<d->scores[d->configGroup].size(); i++)
     {
-        kDebug() << "in loop 1";
         FieldInfo score = d->scores[d->configGroup].at(i); //First look at the score in the config file
         bool ok; //will be false if there isn't any score yet in position i
         int num_score = score[Score].toLong(&ok); //test if the stored score is a number
@@ -507,7 +504,6 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
         if (((newScore > num_score) && !lessIsMore) ||
               ((newScore < num_score) && lessIsMore) || !ok)
         {
-            kDebug() << "in if() 1";
             d->latest = QPair<QByteArray,int>(d->configGroup,i+1);
             d->scores[d->configGroup].insert(i, score);
             d->scores[d->configGroup].removeAt(10);
