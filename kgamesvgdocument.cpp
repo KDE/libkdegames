@@ -435,7 +435,7 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     QStringList styleProperties, keyValuePair;
     QString styleProperty;
 
-    styleProperties = style().split(";");
+    styleProperties = style().split(';');
 
     /* The style attr may have a trailing semi-colon.  If it does, split()
      * gives us an empty final element.  Remove it or we get 'index out of range' errors
@@ -450,7 +450,7 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     for (int i = 0; i < styleProperties.size(); i++)
     {
         styleProperty = styleProperties.at(i);
-        keyValuePair = styleProperty.split(":");
+        keyValuePair = styleProperty.split(':');
         stylePropertiesHash.insert(keyValuePair.at(0), keyValuePair.at(1));
     }
     return stylePropertiesHash;

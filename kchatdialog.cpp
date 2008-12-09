@@ -24,12 +24,12 @@
 #include <klocale.h>
 #include <kfontdialog.h>
 #include <kdebug.h>
+#include <klineedit.h>
 
 #include <QLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QFrame>
-#include <QLineEdit>
 
 class KChatDialogPrivate
 {
@@ -53,7 +53,7 @@ class KChatDialogPrivate
 	QLabel* mSystemNamePreview;
 	QLabel* mSystemTextPreview;
 
-	QLineEdit* mMaxMessages;
+	KLineEdit* mMaxMessages;
 
 	KChatBase* mChat;
 };
@@ -136,7 +136,7 @@ void KChatDialog::init()
 // message count
  QLabel* maxMessages = new QLabel(i18n("Maximum number of messages (-1 = unlimited):"), d->mTextPage);
  layout->addWidget(maxMessages, 6, 0);
- d->mMaxMessages = new QLineEdit(d->mTextPage);
+ d->mMaxMessages = new KLineEdit(d->mTextPage);
  d->mMaxMessages->setText(QString::number(-1));
  layout->addWidget(d->mMaxMessages, 6, 1);
  connect(this, SIGNAL(applyClicked()),this,SLOT(slotApply()));

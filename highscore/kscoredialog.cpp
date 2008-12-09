@@ -34,6 +34,7 @@ this software.
 #include <KConfigGroup>
 #include <KTabWidget>
 #include <KDebug>
+#include <KLineEdit>
 
 #include <QtCore/QTimer>
 #include <QtCore/QList>
@@ -42,7 +43,6 @@ this software.
 #include <QtGui/QKeyEvent>
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
-#include <QtGui/QLineEdit>
 #include <QtGui/QStackedWidget>
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
@@ -57,7 +57,7 @@ class KScoreDialog::KScoreDialogPrivate
         KTabWidget *tabWidget;
         //QWidget *page;
         //QGridLayout *layout;
-        QLineEdit *edit;    ///<The line edit for entering player name
+        KLineEdit *edit;    ///<The line edit for entering player name
         QMap<QByteArray, QList<QStackedWidget*> > stack;
         QMap<QByteArray, QList<QLabel*> > labels; ///<For each group, the labels along each row in turn starting from "#1"
         QLabel *commentLabel;
@@ -369,7 +369,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                 if ( (newName.second == i) && (groupKey == newName.first) )
                 {
                     QStackedWidget *localStack = stack[groupKey].at(i-1);
-                    edit = new QLineEdit(player, localStack);
+                    edit = new KLineEdit(player, localStack);
                     edit->setMinimumWidth(40);
                     localStack->addWidget(edit);
                     localStack->setCurrentWidget(edit);

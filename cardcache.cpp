@@ -244,8 +244,8 @@ QPixmap doRender( const QString& element, KSvgRenderer* r, const QSize& s )
 
 QString keyForPixmap( const QString& theme, const QString& element, const QSize& s )
 {
-    return theme + "_" + element + "_" 
-                  + QString::number( s.width() ) + "_" 
+    return theme + '_' + element + '_'
+                  + QString::number( s.width() ) + '_'
                   + QString::number( s.height() );
 }
 
@@ -465,7 +465,7 @@ QPixmap KCardCache::frontside( const KCardInfo& info ) const
             QMatrix matrix;
             QImage img;
             QString filename = CardDeckInfo::frontDir( d->frontTheme )
-                    + "/" + info.pngName();
+                    + '/' + info.pngName();
             bool ret = img.load( filename, "PNG" );
             if( !ret )
                 return QPixmap();
@@ -600,7 +600,7 @@ QSizeF KCardCache::defaultFrontSize( const KCardInfo& info ) const
     {
         QImage img;
         if( img.load( CardDeckInfo::frontDir( d->frontTheme )
-            + "/" + info.pngName(), "PNG" ) )
+            + '/' + info.pngName(), "PNG" ) )
             size = img.size();
     }else
     {

@@ -17,6 +17,9 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "carddeckinfo.h"
+#include "carddeckinfo_p.h"
+
 #include <QFileInfo>
 #include <QDir>
 
@@ -26,9 +29,6 @@
 #include <kdebug.h>
 #include <kconfiggroup.h>
 #include <kglobal.h>
-
-#include "carddeckinfo.h"
-#include "carddeckinfo_p.h"
 
 // KConfig entries
 #define CONF_LOCKING QString::fromLatin1("Locking")
@@ -119,7 +119,7 @@ public:
             }
             else
             {
-                info.svgfile = QString();
+                info.svgfile.clear();
                 pngFrontInfo[name] = info;
             }
         }
@@ -168,7 +168,7 @@ public:
             }
             else
             {
-                info.svgfile = QString();
+                info.svgfile.clear();
                 pngBackInfo[name] = info;
             }
         }

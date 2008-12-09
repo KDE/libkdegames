@@ -31,6 +31,7 @@
 #include <knuminput.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
+#include <klineedit.h>
 
 #include <QLayout>
 #include <QLabel>
@@ -262,7 +263,7 @@ public:
 		mName = 0;
 	}
 
-	QLineEdit* mName;
+	KLineEdit* mName;
 
 	QVBoxLayout* mTopLayout;
 };
@@ -283,7 +284,7 @@ KGameDialogGeneralConfig::KGameDialogGeneralConfig(QWidget* parent, bool initial
 	QHBoxLayout* l = new QHBoxLayout(nameWidget);
 	QLabel* nameLabel = new QLabel(i18n("Your name:"), nameWidget);
 	l->addWidget(nameLabel);
-	d->mName = new QLineEdit(nameWidget);
+	d->mName = new KLineEdit(nameWidget);
 	l->addWidget(d->mName);
  }
 }

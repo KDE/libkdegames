@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KGGZGAMES_RANKINGSDIALOG_H
-#define KGGZGAMES_RANKINGSDIALOG_H
+#ifndef KGGZRANKINGSDIALOG_H
+#define KGGZRANKINGSDIALOG_H
 
 #include <kggzmod/event.h>
 
