@@ -36,7 +36,6 @@
 #include <QLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QLineEdit>
 #include <QGroupBox>
 
 #include "kgamedialogconfig.moc"
@@ -452,7 +451,7 @@ void KGameDialogMsgServerConfig::slotChangeMaxClients()
  l->setSpacing( KDialog::spacingHint() );
 
  l->addWidget(new QLabel(i18n("Maximal number of clients (-1 = infinite):"), dialog));
- QLineEdit* edit = new QLineEdit(dialog);//TODO: use KIntNumInput
+ KLineEdit* edit = new KLineEdit(dialog);//TODO: use KIntNumInput
  l->addWidget(edit);
 // edit->setText(QString::number(max)); // current max clients! //TODO
  if (dialog->exec() == QDialog::Accepted) {
