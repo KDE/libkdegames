@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Diamond Tree (SVG)
 Name[el]=Διαμαντένιο δέντρο (SVG)
+Name[gl]=Árbore de diamantes (SVG)
 Name[km]=មែកធាង Diamond (SVG)
 Name[nds]=Diamantenboom (SVG)
 Name[nn]=Diamanttre (SVG)
@@ -12,6 +13,7 @@ Name[x-test]=xxDiamond Tree (SVG)xx
 Name[zh_CN]=钻石树(SVG)
 Comment=Simple, yet visually pleasing card back
 Comment[el]=Απλό και ταυτόχρονα ευχάριστο θέμα χαρτιών
+Comment[gl]=Reverso de cartas simples, pero agradábel á vista
 Comment[km]=ធម្មតា សូម​ដក​កាត​ចេញ​វិញ
 Comment[nds]=Eenfach, man liekers smuck Koortenachtersiet
 Comment[nn]=Enkel men fin kortbakside
@@ -25,6 +27,7 @@ Comment[zh_TW]=簡單，好看的撲克牌圖案
 SVG=deck14.svgz
 Comment=Simple, yet visually pleasing card back.
 Comment[el]=Απλό και ταυτόχρονα ευχάριστο θέμα χαρτιών.
+Comment[gl]=Reverso de cartas simples, pero agradábel á vista
 Comment[km]=ធម្មតា សូម​យកកាត​ចេញ​ ។
 Comment[nds]=Eenfach, man liekers smuck Koortenachtersiet
 Comment[nn]=Enkel men fin kortbakside
