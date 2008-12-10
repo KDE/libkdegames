@@ -100,6 +100,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     QStringList themesAvailable;
     KGlobal::dirs()->findAllResources("gamethemeselector", "*.desktop", KStandardDirs::Recursive, themesAvailable);
 
+    bool initialFound = false;
     foreach (const QString &file, themesAvailable)
     {
       QString themePath = lookupDirectory + '/' + file;
@@ -115,11 +116,31 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
 
         //Find if this is our currently configured theme
         if (themePath==initialSelection) {
+          initialFound = true;
           ui.themeList->setCurrentItem(item);
           _k_updatePreview();
         }
       } else {
         delete atheme;
+      }
+    }
+
+    if (!initialFound)
+    {
+      // TODO change this if we ever change KGameTheme::loadDefault
+      QString defaultPath = "themes/default.desktop";
+      foreach(KGameTheme* theme, themeMap)
+      {
+        if (theme->path().endsWith(defaultPath))
+        {
+          QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty("Name"), Qt::MatchExactly);
+          // never can be != 1 but better safe than sorry
+          if (itemList.count() == 1)
+          {
+            ui.themeList->setCurrentItem(itemList.first());
+            _k_updatePreview();
+          }
+        }
       }
     }
 
