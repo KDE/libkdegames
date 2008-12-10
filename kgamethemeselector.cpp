@@ -133,7 +133,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
       {
         if (theme->path().endsWith(defaultPath))
         {
-          QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty("Name"), Qt::MatchExactly);
+          const QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty("Name"), Qt::MatchExactly);
           // never can be != 1 but better safe than sorry
           if (itemList.count() == 1)
           {
