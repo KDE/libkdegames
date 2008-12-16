@@ -200,6 +200,11 @@ class KDEGAMES_EXPORT KGameDifficulty
                  * @return list of translated standard level string names
                  */
                 static QMap<QByteArray, QString> localizedLevelStrings();
+                /**
+                 * @return map with the weight order of untranslated standard level names matches value of standardLevel enum
+                 * @since KDE 4.2
+                 */
+                static QMap<int, QByteArray> levelWeights();
 		/**
 		 * @brief Set the new current difficulty level as a custom one
 		 *

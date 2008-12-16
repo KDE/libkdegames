@@ -422,6 +422,22 @@ QMap<QByteArray, QString> KGameDifficulty::localizedLevelStrings()
     return levelStrings;
 }
 
+QMap<int, QByteArray> KGameDifficulty::levelWeights()
+{
+    Q_ASSERT(self()->d);
+    
+    QMap<int, QByteArray> weights;
+    weights.insert(RidiculouslyEasy, self()->d->standardLevelString(RidiculouslyEasy).first);
+    weights.insert(VeryEasy, self()->d->standardLevelString(VeryEasy).first);
+    weights.insert(Easy, self()->d->standardLevelString(Easy).first);
+    weights.insert(Medium, self()->d->standardLevelString(Medium).first);
+    weights.insert(Hard, self()->d->standardLevelString(Hard).first);
+    weights.insert(VeryHard, self()->d->standardLevelString(VeryHard).first);
+    weights.insert(ExtremelyHard, self()->d->standardLevelString(ExtremelyHard).first);
+    weights.insert(Impossible, self()->d->standardLevelString(Impossible).first);
+    
+    return weights;
+}
 
 void KGameDifficulty::setRunning(bool running)
 {

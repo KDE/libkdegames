@@ -178,6 +178,18 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
          */
         void addLocalizedConfigGroupNames(const QMap<QByteArray, QString>& groups);
 
+         /**
+         * It is a good idea giving config group weigths, otherwise tabs
+         * get ordered by their tab name that is not probably what you want.
+         *
+         * This function can be used directly with KGameDifficulty::levelWeights().
+         *
+         * @param group the list of untranslated group names and their weights
+         *
+         * @since KDE 4.2
+         */
+        void setConfigGroupWeights(const QMap<int, QByteArray>& weights);
+
         /**
          * @param comment to add when showing high-scores.
          * The comment is only used once.

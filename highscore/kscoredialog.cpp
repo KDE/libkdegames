@@ -54,6 +54,7 @@ class KScoreDialog::KScoreDialogPrivate
     public:
         //QList<FieldInfo*> scores;
         QMap<QByteArray, GroupScores> scores; ///<Maps config group name to GroupScores
+        QMap<int, QByteArray> configGroupWeights; /// Weights of the groups, defines ordering
         KTabWidget *tabWidget;
         //QWidget *page;
         //QGridLayout *layout;
@@ -183,6 +184,11 @@ void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString>&
     }
 }
 
+void KScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray>& weights)
+{
+    d->configGroupWeights = weights;
+}
+
 QString KScoreDialog::KScoreDialogPrivate::findTranslatedGroupName(const QByteArray& name)
 {
     foreach(const QByteArray& groupKey, translatedGroupNames.keys())
@@ -227,8 +233,20 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
     }
 
     tabWidget->clear();
-    foreach(const QByteArray &groupName, scores.keys())
+    QList<QByteArray> keysToConfigure = scores.keys();
+    foreach(const QByteArray &groupName, configGroupWeights)
+    {
+        int index = keysToConfigure.indexOf(groupName);
+        if (index != -1)
+        {
+            setupGroup(groupName);
+            keysToConfigure.removeAt(index);
+        }
+    }
+    foreach(const QByteArray &groupName, keysToConfigure)
+    {
         setupGroup(groupName);
+    }
 }
 
 void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
