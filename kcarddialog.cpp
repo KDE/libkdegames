@@ -333,7 +333,7 @@ void KCardWidget::insertDeckIcons()
   {
     KCardThemeInfo v = CardDeckInfo::backInfo(name);
     // Show only SVG files?
-    if (d->filterOutCard(v)) continue;
+    if (d->filterOutCard(v) || v.preview.isNull()) continue;
     QPixmap previewPixmap = v.preview.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
     QListWidgetItem *item = new QListWidgetItem(v.name, d->ui.backList);
