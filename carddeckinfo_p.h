@@ -69,6 +69,8 @@ class KCardThemeInfo
    bool isDefault;
 };
 
+QDebug operator<<(QDebug debug, const KCardThemeInfo &cn);
+
 namespace CardDeckInfo
 {
 

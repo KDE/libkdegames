@@ -193,6 +193,11 @@ public:
 
 K_GLOBAL_STATIC( KCardThemeInfoStatic, deckinfoStatic )
 
+QDebug operator<<(QDebug debug, const KCardThemeInfo &cn)
+{
+    return debug << "name: " << cn.name << " noi18Name: " << cn.noi18Name << " comment: " << cn.comment << " path: " << cn.path << " back: " << cn.back << " preview: " << cn.preview << " svgfile: " << cn.svgfile << " size: " << cn.size << " isDefault: " << cn.isDefault;
+}
+
 namespace CardDeckInfo
 {
 
