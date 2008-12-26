@@ -162,6 +162,8 @@ public:
         // rather theoretical
         if ( KStandardDirs::exists( entry + QString::fromLatin1( ".xpm" ) ) )
             return entry + QString::fromLatin1( ".xpm" );
+   
+        Q_ASSERT( false );
         return QString();
     }
 

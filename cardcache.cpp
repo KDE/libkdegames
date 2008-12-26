@@ -531,7 +531,9 @@ void KCardCache::setFrontTheme( const QString& theme )
     {
         QMutexLocker l( d->frontRendererMutex );
         delete d->frontRenderer;
-        d->frontRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( theme ) );
+        d->frontRenderer = 0;
+        if ( CardDeckInfo::isSVGFront( theme ) )
+            d->frontRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( theme ) );
     }
     d->frontTheme = theme;
 }
@@ -566,7 +568,9 @@ void KCardCache::setBackTheme( const QString& theme )
     {
         QMutexLocker l( d->backRendererMutex );
         delete d->backRenderer;
-        d->backRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( theme ) );
+        d->backRenderer = 0;
+        if ( CardDeckInfo::isSVGBack( theme ) )
+            d->backRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( theme ) );
     }
     d->backTheme = theme;
 }
