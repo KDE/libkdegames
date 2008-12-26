@@ -53,26 +53,6 @@ public:
     {
     }
     
-    
-    // Translate back side
-    QString findi18nBack( QString& name )
-    {
-        if ( name.isNull() ) return name;
-    
-        QMap<QString, KCardThemeInfo> temp = svgBackInfo;
-        temp.unite( pngBackInfo );
-    
-        QMapIterator<QString, KCardThemeInfo> it( temp );
-        while ( it.hasNext() )
-        {
-            it.next();
-            KCardThemeInfo v = it.value();
-            if ( v.noi18Name == name ) return v.name;
-        }
-        kError() << "No translation for back card " << name << "found";
-        return name;
-    }
-
     void readFronts()
     {
         // Empty data
@@ -104,8 +84,6 @@ public:
             info.preview      = pixmap;
             info.path         = path;
             info.back         = cfgcg.readEntry( "Back", QString() );
-            // The back name is read UNTRANSLATED...we need to find the right name for it now
-            info.back         = findi18nBack( info.back );
             // if (!info.back.isNull()) kDebug() << "FOUND BACK " << info.back;
             info.size         = cfgcg.readEntry( "BackSize", QSizeF( pixmap.size() ) );
             info.isDefault    = cfgcg.readEntry( "Default", false );
@@ -115,12 +93,12 @@ public:
             {
                 QFileInfo svgInfo( QDir( path ), svg );
                 info.svgfile = svgInfo.filePath();
-                svgFrontInfo[name] = info;
+                svgFrontInfo[idx] = info;
             }
             else
             {
                 info.svgfile = QString();
-                pngFrontInfo[name] = info;
+                pngFrontInfo[idx] = info;
             }
         }
 
@@ -164,12 +142,12 @@ public:
             {
                 QFileInfo svgInfo( QDir( path ), svg );
                 info.svgfile = svgInfo.filePath();
-                svgBackInfo[name] = info;
+                svgBackInfo[idx] = info;
             }
             else
             {
                 info.svgfile = QString();
-                pngBackInfo[name] = info;
+                pngBackInfo[idx] = info;
             }
         }
     
@@ -234,9 +212,9 @@ QString defaultFrontName( bool pAllowPNG )
         it.next();
         KCardThemeInfo v = it.value();
         // Filter
-        if ( v.isDefault ) return v.name;
+        if ( v.isDefault ) return v.noi18Name;
         // Collect any deck if no default is stored
-        noDefault = v.name;
+        noDefault = v.noi18Name;
     }
     if ( noDefault.isNull() ) kError() << "Could not find default card name";
     return noDefault;
@@ -259,9 +237,9 @@ QString defaultBackName( bool pAllowPNG )
         it.next();
         KCardThemeInfo v = it.value();
         // Filter
-        if ( v.isDefault ) return v.name;
+        if ( v.isDefault ) return v.noi18Name;
         // Collect any deck if no default is stored
-        noDefault = v.name;
+        noDefault = v.noi18Name;
     }
     if ( noDefault.isNull() ) kError() << "Could not find default deck name";
     return noDefault;
@@ -394,12 +372,18 @@ KCardThemeInfo backInfo( const QString& name )
 
 QString frontTheme( const KConfigGroup& group, const QString& defaultTheme )
 {
-  return group.readEntry( CONF_CARD, defaultTheme );
+    QString theme = group.readEntry( CONF_CARD, defaultTheme );
+    if (!frontNames().contains(theme))
+        return defaultTheme;
+    return theme;
 }
 
 QString backTheme( const KConfigGroup& group, const QString& defaultTheme )
 {
-  return group.readEntry( CONF_DECK, defaultTheme );
+    QString theme = group.readEntry( CONF_DECK, defaultTheme );
+    if (!backNames().contains(theme))
+        return defaultTheme;
+    return theme;
 }
 
 bool allowFixedSizeDecks( const KConfigGroup& group, bool lockDefault )
