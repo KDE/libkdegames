@@ -35,7 +35,7 @@ class KConfigGroup;
 namespace CardDeckInfo
 {
    /** Retrieve the SVG file belonging to the given card deck (back side). 
-    * @param name The name of the back deck.
+    * @param name The untranslated name of the back deck.
     * @return The file name and path to the SVG file or QString() if not available. 
     */
    KDEGAMES_EXPORT QString backSVGFilePath(const QString& name);
@@ -44,42 +44,42 @@ namespace CardDeckInfo
     * The SVG IDs used for the card back is '1_club' for Ace of clubs, '10_spade' for
     * 10 of spades, 'queen_heart' for Queen of Hearts, '2_diamond' for 2 of diamonds and
     * so on.
-    * @param name The name of the card set.
+    * @param name The untranslated name of the card set.
     * @return The file name and path to the SVG file or QString() if not available. 
     */
    KDEGAMES_EXPORT QString frontSVGFilePath(const QString& name);
 
    /** Check whether the card set is SVG or not.
-    * @param name The name of the card set.
+    * @param name The untranslated name of the card set.
     * @return True if SVG data is available.
     */
    KDEGAMES_EXPORT bool isSVGBack(const QString& name);
 
    /** Check whether the card back deck contains also an SVG file.
-    * @param name The name of the card deck.
+    * @param name The untranslated name of the card deck.
     * @return True if SVG data is available.
     */
    KDEGAMES_EXPORT bool isSVGFront(const QString& name);
    
-   /** Retrieve the name of the default card set (front side).
+   /** Retrieve the untranslated name of the default card set (front side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return The default card set name.
     */
    KDEGAMES_EXPORT QString defaultFrontName(bool pAllowPNG = true);
    
-   /** Retrieve the name of the default card deck (back side).
+   /** Retrieve the untranslated name of the default card deck (back side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return The default card deck name.
     */
    KDEGAMES_EXPORT QString defaultBackName(bool pAllowPNG = true);
    
-   /** Retrieve a random card set (front side).
+   /** Retrieve a untranslated name random card set (front side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return A radnom card set name.
     */
    KDEGAMES_EXPORT QString randomFrontName(bool pAllowPNG = true);
  
-   /** Retrieve a random card deck (back side).
+   /** Retrieve a untranslated name random card deck (back side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return A radnom card deck name.
     */
@@ -88,7 +88,7 @@ namespace CardDeckInfo
    /**
     * Retrieve the directory where the card front sides are stored. The cards are
     * named 1.png, 2.png, etc. For SVG card decks use @ref cardSVGFilePath.
-    * @param name The name of the card set.
+    * @param name The untranslated name of the card set.
     * @return The directory.
     */
    KDEGAMES_EXPORT QString frontDir(const QString& name);
@@ -96,27 +96,27 @@ namespace CardDeckInfo
    /**
     * Retrieve the filename of the card back side. 
     * For SVG  decks use @ref deckSVGFilePath.
-    * @param name The name of the card deck.
+    * @param name The untranslated name of the card deck.
     * @return The filename.
     */
    KDEGAMES_EXPORT QString backFilename(const QString& name);
 
    /**
-    * retrieve a list of all installed backsides
+    * retrieve a list of the untranslated names of all installed backsides
     * @returns a list of backside names, which can be 
     * used as input to the other functions.
     */
    KDEGAMES_EXPORT QStringList backNames();
 
    /**
-    * retrieve a list of all installed frontsides
+    * retrieve a list of the untranslated names of all installed frontsides
     * @return a list of frontside names, which can be
     * used as input to the other functions.
     */
    KDEGAMES_EXPORT QStringList frontNames();
 
    /**
-    * retrieve the configured front side theme name
+    * retrieve the configured front side untranslated theme name
     * from the @p group
     * @param group the KConfigGroup to read from
     * @param default the default theme to return if the config group has no setting for this
@@ -125,7 +125,7 @@ namespace CardDeckInfo
    KDEGAMES_EXPORT QString frontTheme( const KConfigGroup& group, const QString& defaultTheme = defaultFrontName(false) );
 
    /**
-    * retrieve the configured back side theme name
+    * retrieve the configured back side untranslated theme name
     * from the @p group
     * @param group the KConfigGroup to read from
     * @param default the default theme to return if the config group has no setting for this
@@ -154,14 +154,14 @@ namespace CardDeckInfo
    /**
     * store the given frontside @p theme name in the @p group
     * @param group the KConfigGroup to write to from
-    * @param theme the theme name to store
+    * @param theme the theme untranslated name to store
     */
    KDEGAMES_EXPORT void writeFrontTheme( KConfigGroup& group, const QString& theme );
 
    /**
     * store the given backside @p theme name in the @p group
     * @param group the KConfigGroup to write to from
-    * @param theme the theme name to store
+    * @param theme the theme untranslated name to store
     */
    KDEGAMES_EXPORT void writeBackTheme( KConfigGroup& group, const QString& theme );
 

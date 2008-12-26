@@ -179,6 +179,7 @@ void KCardWidget::insertCardIcons()
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
     item->setToolTip(v.name);
     item->setData(Qt::DecorationRole, previewPixmap);
+    item->setData(Qt::UserRole, v.noi18Name);
     itemSize = itemSize.expandedTo(previewPixmap.size());
   }
 
@@ -198,7 +199,7 @@ void KCardWidget::updateFront()
 {
   QList<QListWidgetItem*> l = d->ui.frontList->selectedItems();
   if(!l.isEmpty())
-      setFrontName(l.first()->text());
+      setFrontName(l.first()->data(Qt::UserRole).toString());
 }
 
 
@@ -218,9 +219,15 @@ void KCardWidget::setFrontName(const QString& name)
   }
   else
   {
-    QList<QListWidgetItem*> items = d->ui.frontList->findItems(name, Qt::MatchExactly );
-    if(!items.isEmpty())
-        items.first()->setSelected(true);
+    for (int i = 0; i < d->ui.frontList->count(); ++i)
+    {
+      QListWidgetItem *item = d->ui.frontList->item(i);
+      if (item->data(Qt::UserRole).toString() == name)
+      {
+        item->setSelected(true);
+        break;
+      }
+    }
     KCardThemeInfo info = CardDeckInfo::frontInfo(name);
     QFont font;
     font.setBold(true);
@@ -277,7 +284,7 @@ void KCardWidget::updateBack()
 {
   QList<QListWidgetItem*> l = d->ui.backList->selectedItems();
   if(!l.isEmpty())
-    setBackName(l.first()->text());
+    setBackName(l.first()->data(Qt::UserRole).toString());
 }
 
 
@@ -293,9 +300,15 @@ void KCardWidget::setBackName(const QString& item)
   }
   else
   {
-    QList<QListWidgetItem*> items = d->ui.backList->findItems(item, Qt::MatchExactly );
-    if(!items.isEmpty())
-      items.first()->setSelected(true);
+    for (int i = 0; i < d->ui.backList->count(); ++i)
+    {
+      QListWidgetItem *lwi = d->ui.backList->item(i);
+      if (lwi->data(Qt::UserRole).toString() == item)
+      {
+        lwi->setSelected(true);
+        break;
+      }
+    }
     KCardThemeInfo info = CardDeckInfo::backInfo(item);
     QPixmap pixmap= info.preview;
     if (pixmap.height() > d->ui.backPreview->height())
@@ -327,6 +340,7 @@ void KCardWidget::insertDeckIcons()
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
     item->setToolTip(v.name);
     item->setData(Qt::DecorationRole, previewPixmap);
+    item->setData(Qt::UserRole, v.noi18Name);
     itemSize = itemSize.expandedTo(previewPixmap.size());
   }
   d->ui.backList->setIconSize(itemSize);
