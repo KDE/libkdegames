@@ -2,6 +2,7 @@ enable_testing()
 
 project(libkdegames)
 
+KDE4_NO_ENABLE_FINAL(libkdegames)
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
 add_subdirectory( carddecks )
