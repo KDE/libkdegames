@@ -89,7 +89,7 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
 
  QVBoxLayout* l = new QVBoxLayout(this);
 
- d->mBox = new QListView();
+ d->mBox = new QListView(this);
  d->mBox->setModel(d->mModel);
  d->mBox->setItemDelegate(d->mDelegate);
  l->addWidget(d->mBox);

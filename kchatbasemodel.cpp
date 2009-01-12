@@ -96,6 +96,7 @@ KChatBaseModel::~KChatBaseModel()
 {
 // kDebug(11000) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")";
  saveConfig();
+ delete d;
 }
 
 void KChatBaseModel::slotClear()
