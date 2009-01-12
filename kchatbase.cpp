@@ -203,7 +203,9 @@ void KChatBase::removeSendingEntry(int id)
 	kWarning(11000) << "KChatBase: Cannot remove an entry from the combo box";
 	return;
  }
- d->mCombo->removeItem(findIndex(id));
+ int idx = findIndex(id);
+ //Guard, passing -1 will crash qcombobox
+ if (idx>=0) d->mCombo->removeItem(idx);
  d->mIndex2Id.removeAll(id);
 }
 
