@@ -439,7 +439,7 @@ void ModulePrivate::slotGGZEvent()
 			//e.data["photo"] = QString(_photo);
 			//e.data["host"] = QString(_host);
 
-			for(it = m_players.begin(); it != m_players.end(); it++)
+			for(it = m_players.begin(); it != m_players.end(); ++it)
 			{
 				if((*it)->seat() == _seat)
 				{
@@ -549,7 +549,7 @@ Player* ModulePrivate::findPlayer(Player::Type seattype, const QString &name)
 
 	if(seattype == Player::spectator)
 	{
-		for(it = m_spectators.begin(); it != m_spectators.end(); it++)
+		for(it = m_spectators.begin(); it != m_spectators.end(); ++it)
 		{
 			if((*it)->name() == name)
 			{
@@ -559,7 +559,7 @@ Player* ModulePrivate::findPlayer(Player::Type seattype, const QString &name)
 	}
 	else
 	{
-		for(it = m_players.begin(); it != m_players.end(); it++)
+		for(it = m_players.begin(); it != m_players.end(); ++it)
 		{
 			if((*it)->name() == name)
 			{

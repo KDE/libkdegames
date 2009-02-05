@@ -479,7 +479,7 @@ QPixmap KGameSvgDigits::display(const QString& display)
 
     kDebug () << "about to display: '" << str << "'";
 
-    for (i=0; i<numberOfDigits(); i++)
+    for (i=0; i<numberOfDigits(); ++i)
     {
         currentCharacter = str[0];
         characterToDisplay = str.left(1);

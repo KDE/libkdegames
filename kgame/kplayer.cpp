@@ -351,7 +351,7 @@ bool KPlayer::setTurn(bool b, bool exclusive)
   if (exclusive && b && game())
   {
      for ( KGame::KGamePlayerList::iterator it = game()->playerList()->begin();
-            it!=game()->playerList()->end();it++)
+            it!=game()->playerList()->end(); ++it)
      {
        if ((*it)==this)
        {

@@ -185,7 +185,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  uint count,i;
  stream >> count;
  kDebug(11001) << ":" << count << "KGameProperty objects";
- for (i = 0; i < count; i++) {
+ for (i = 0; i < count; ++i) {
         processMessage(stream, id(),false);
  }
  qint16 cookie;

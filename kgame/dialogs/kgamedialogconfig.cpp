@@ -655,7 +655,7 @@ void KGameDialogConnectionConfig::setKGame(KGame* g)
 			this, SLOT(slotPlayerLeftGame(KPlayer*)));
 
   const QList<KPlayer*> *playerList = game()->playerList();
-  for ( QList<KPlayer*>::const_iterator it = playerList->begin(); it!=playerList->end();it++ )
+  for ( QList<KPlayer*>::const_iterator it = playerList->begin(); it!=playerList->end();++it )
   {
 		slotPlayerJoinedGame(*it);
 	}
