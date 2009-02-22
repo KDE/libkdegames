@@ -255,9 +255,9 @@ QStringList KHighscore::groupList() const
         if(group.contains("KHighscore")) //If it's one of _our_ groups (KHighscore or KHighscore_xxx)
         {
             if(group == "KHighscore")
-                group.replace("KHighscore", QString()); //Set to blank
+                group.remove("KHighscore"); //Set to blank
             else
-                group.replace("KHighscore_", QString()); //Remove the KHighscore_ prefix
+                group.remove("KHighscore_"); //Remove the KHighscore_ prefix
             highscoreGroupList << group;
         }
     }

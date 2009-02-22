@@ -30,8 +30,6 @@
 
 #include <kdebug.h>
 
-#include <stdlib.h> // for getenv()
-
 using namespace KGGZMod;
 
 // Implementation notes:
@@ -488,7 +486,7 @@ void ModulePrivate::connect()
 		return;
 	}
 
-	QString ggzsocket = getenv("GGZSOCKET");
+	QString ggzsocket = QString::fromLocal8Bit(qgetenv("GGZSOCKET"));
 	if(ggzsocket.isNull())
 	{
 		kDebug(11003) << "[kggzmod] error: GGZSOCKET not set";
@@ -614,8 +612,7 @@ void ModulePrivate::insertPlayer(Player::Type seattype, const QString &name, int
 
 bool Module::isGGZ()
 {
-	if(getenv("GGZMODE")) return true;
-	else return false;
+	return (!qgetenv("GGZMODE").isEmpty());
 }
 
 Player *Module::self() const
