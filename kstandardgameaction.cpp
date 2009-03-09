@@ -56,7 +56,7 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
     { KStandardGameAction::Highscores, KStandardShortcut::AccelNone, Qt::CTRL+Qt::Key_H, "game_highscores", I18N_NOOP("Show &High Scores"), 0, "games-highscores", I18N_NOOP("Show high scores") },
     { KStandardGameAction::ClearHighscores, KStandardShortcut::AccelNone, 0, "game_clear_highscores", I18N_NOOP("&Clear High Scores"), 0, "clear_highscore", I18N_NOOP("Clear high scores") },
     { KStandardGameAction::Statistics, KStandardShortcut::AccelNone, 0, "game_statistics", I18N_NOOP("Show Statistics"), 0, "highscore", I18N_NOOP("Show statistics") },
-    { KStandardGameAction::ClearStatistics, KStandardShortcut::AccelNone, 0, "game_clear_statistics", I18N_NOOP("&Clear Statistics"), 0, "flag", I18N_NOOP("Delete all time statistics.") },
+    { KStandardGameAction::ClearStatistics, KStandardShortcut::AccelNone, 0, "game_clear_statistics", I18N_NOOP("&Clear Statistics"), 0, "flag", I18N_NOOP("Delete all-time statistics.") },
     { KStandardGameAction::Print, KStandardShortcut::Print, 0, "game_print", I18N_NOOP("&Print..."), 0, "document-print", 0 },
     { KStandardGameAction::Quit, KStandardShortcut::Quit, 0, "game_quit", I18N_NOOP("&Quit"), 0, "application-exit", I18N_NOOP("Quit the program") },
 // "move" menu
