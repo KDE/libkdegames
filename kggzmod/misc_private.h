@@ -37,6 +37,8 @@
 
 // work around a bug in the Mac OS X 10.4.0 SDK
 #if defined(__APPLE__)
+#include <AvailabilityMacros.h>
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4
 # ifndef __DARWIN_ALIGNBYTES
 #  define __DARWIN_ALIGNBYTES     (sizeof(__darwin_size_t) - 1)
 # endif
@@ -45,6 +47,7 @@
 # endif
 # undef CMSG_SPACE
 # define CMSG_SPACE(l) (ALIGN(sizeof(struct cmsghdr)) + ALIGN(l))
+#endif
 #endif
 
 namespace KGGZMod
