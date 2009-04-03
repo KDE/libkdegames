@@ -18,7 +18,7 @@ add_subdirectory( svg-dondorf )
 add_subdirectory( svg-nicu-white )
 add_subdirectory( svg-gm-paris )
 add_subdirectory( svg-tigullio-international )
-add subdirectory( svg-ancient-egyptians )
+add_subdirectory( svg-ancient-egyptians )
 
 ########### install files ###############
 
