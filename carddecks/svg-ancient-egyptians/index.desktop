@@ -1,6 +1,14 @@
 [KDE Backdeck]
 Name=Ancient Egyptians  (SVG)
+Name[pt]=Antigo Egipto (SVG)
+Name[pt_BR]=Antigo Egipto (SVG)
+Name[sv]=Forntida Egypten (SVG)
+Name[uk]=Давні єгиптяни (SVG)
 Comment=A lost card deck from ancient Egypt.
+Comment[pt]=Um baralho de cartas perdido do Antigo Egipto.
+Comment[pt_BR]=Um baralho de cartas perdido do Antigo Egipto.
+Comment[sv]=En förlorat kortlek från forntida Egypten.
+Comment[uk]=Загублена колода карт з давнього Єгипту.
 Preview=11.png
 SVG=Ancient_Egyptians.svgz
 BackSize=
