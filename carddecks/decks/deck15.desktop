@@ -1,6 +1,10 @@
 [KDE Cards]
 Name=Ancient_Egyptians (SVG)
+Name[sv]=Forntida egyptier (SVG)
+Name[uk]=Давні єгиптяни (SVG)
 Comment=Egyptian style card back.
+Comment[sv]=Kortbaksidor med egyptisk stil.
+Comment[uk]=Єгипетський стиль сорочок карт.
 SVG=deck15.svgz
 Default=false
 
