@@ -4,11 +4,13 @@ Name[pt]=Egípcios_Antigos (SVG)
 Name[pt_BR]=Egípcios_Antigos (SVG)
 Name[sv]=Forntida egyptier (SVG)
 Name[uk]=Давні єгиптяни (SVG)
+Name[zh_TW]=古埃及（SVG）
 Comment=Egyptian style card back.
 Comment[pt]=Faces traseiras das cartas com estilo Egípcio.
 Comment[pt_BR]=Faces traseiras das cartas com estilo Egípcio.
 Comment[sv]=Kortbaksidor med egyptisk stil.
 Comment[uk]=Єгипетський стиль сорочок карт.
+Comment[zh_TW]=古埃及樣式的紙牌圖案。
 SVG=deck15.svgz
 Default=false
 
