@@ -294,7 +294,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
     {
         QLabel *label;
         num.setNum(i);
-        label = new QLabel(i18n("#%1", num), widget);
+        label = new QLabel(i18nc("Enumeration (#1, #2 ...) of the highscore entries", "#%1", num), widget);
         labels[groupKey].insert((i-1)*nrCols + 0, label); //Fill up column zero
         layout->addWidget(label, i+4, 0);
         if (fields & Name) //If we have a Name field
