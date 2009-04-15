@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Konqi
+Name=Konqi (SVG)
 Name[be]=Конкі
 Name[bn]=কনকি
 Name[cs]=Konqui
@@ -61,3 +61,4 @@ Comment[wa]=Modiene Konqi - cwårdjeus des familes\nDessins: Laura Layland\n    
 Comment[x-test]=xxModern Konqi - play the family carddeck\nDesign: Laura Layland\n     <l_layland@hotmail.com>\nKonqi by Stefan Spatz\n     <stefan.spatz@stud-mail.uni-wuerzburg.de>xx
 Comment[zh_CN]=现代 Konqi - 牌垛类游戏\n设计：Laura Layland\n <l_layland@hotmail.com>\nStefan Spatz 的 Konqi\n <stefan.spatz@stud-mail.uni-wuerzburg.de>
 Comment[zh_TW]=現代 Konqi - 玩家庭牌局\n設計︰Laura Layland...<l_layland@hotmail.com>\nKonqi by Stefan Spatz...<stefan.spatz@stud-mail.uni-wuerzburg.de>
+SVG=deck7.svgz
