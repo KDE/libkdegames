@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Konqi (SVG)
+Name[uk]=Конкі (SVG)
 Preview=11.png
 SVG=konqi.svgz
 BackSize=72,96
