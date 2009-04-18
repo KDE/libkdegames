@@ -122,9 +122,7 @@ public:
             Q_ASSERT( path[path.length() - 1] == '/' );
             QPixmap pixmap( getBackFileNameFromIndex( *it ) );
             if ( pixmap.isNull() ) continue;
-            //pixmap = pixmap.scaledToWidth(72, Qt::SmoothTransformation);
-            QPixmap previewPixmap = pixmap.scaled( QSize( 32, 43 ), Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
-    
+
             KConfigGroup cfgcg( &cfg, "KDE Cards" );
             QString idx  = cfgcg.readEntryUntranslated( "Name", i18n( "unnamed" ) );
             QString name = cfgcg.readEntry( "Name", i18n( "unnamed" ) );
@@ -370,7 +368,7 @@ KCardThemeInfo frontInfo( const QString& name )
 
 KCardThemeInfo backInfo( const QString& name )
 {
-    if ( deckinfoStatic->svgFrontInfo.contains( name ) )
+    if ( deckinfoStatic->svgBackInfo.contains( name ) )
         return deckinfoStatic->svgBackInfo.value( name );
     if ( deckinfoStatic->pngBackInfo.contains( name ) )
         return deckinfoStatic->pngBackInfo.value( name );
