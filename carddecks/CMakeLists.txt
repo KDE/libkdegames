@@ -6,7 +6,7 @@ set( carddecks_base_dir ${CMAKE_CURRENT_SOURCE_DIR} )
 # copy CMakeLists.txt from any existing deckdir to the new one.
 add_subdirectory( cards-penguins )
 add_subdirectory( cards-xskat-french )
-add_subdirectory( cards-default)
+
 add_subdirectory( decks )
 add_subdirectory( cards-xskat-german )
 add_subdirectory( svg-oxygen )
@@ -17,6 +17,7 @@ add_subdirectory( svg-dondorf )
 add_subdirectory( svg-nicu-white )
 add_subdirectory( svg-gm-paris )
 add_subdirectory( svg-konqi-modern )
+add_subdirectory( svg-standard )
 add_subdirectory( svg-tigullio-international )
 add_subdirectory( svg-ancient-egyptians )
 
