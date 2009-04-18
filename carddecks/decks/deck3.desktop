@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Penguin
+Name=Penguin (SVG)
 Name[af]=Pikkewyn
 Name[be]=Пінгвін
 Name[bn]=পেঙ্গুইন
@@ -59,3 +59,4 @@ Name[x-test]=xxPenguinxx
 Name[xh]=Ipenguin
 Name[zh_CN]=企鹅
 Name[zh_TW]=企鵝
+SVG=deck3.svgz
