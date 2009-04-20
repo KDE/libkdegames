@@ -91,11 +91,11 @@ public:
      */
     enum LoadInfo
     {
-        LoadFrontSide = 1 << 0 /** Load only the front sides of the theme. */,
-        LoadBackSide = 1 << 2 /** Load only the back side of the theme. */,
-	Load52Cards = 1 << 3 /** Load a 52 card deck, ranges from Ace down to two */,
-	Load32Cards = 1 << 4 /** Load a 32 card deck, ranges from Ace down to seven */,
-	Load53Cards = 1 << 5 /** Load a 52 card deck as above, but include Jolly Joker */
+        LoadFrontSide = 1 << 0 /**< Load only the front sides of the theme. */,
+        LoadBackSide = 1 << 2 /**< Load only the back side of the theme. */,
+	Load52Cards = 1 << 3 /**< Load a 52 card deck, ranges from Ace down to two */,
+	Load32Cards = 1 << 4 /**< Load a 32 card deck, ranges from Ace down to seven */,
+	Load53Cards = 1 << 5 /**< Load a 52 card deck as above, but include Jolly Joker */
     };
     Q_DECLARE_FLAGS( LoadInfos, LoadInfo )
     

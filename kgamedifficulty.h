@@ -84,8 +84,8 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * Does the game have to be restarted, when the player changes the difficulty level? In this case and if the game is running, a confirmation dialog is displayed and the player can cancel the change.
 		 */
 		enum onChange {
-			RestartOnChange, /** The current game has to be canceled and a new game will be started on change. */
-			NoRestartOnChange /** The current game can continue on change. */
+			RestartOnChange, /**< The current game has to be canceled and a new game will be started on change. */
+			NoRestartOnChange /**< The current game can continue on change. */
 		};
 
 		/**
@@ -94,17 +94,17 @@ class KDEGAMES_EXPORT KGameDifficulty
 		 * If they fit the needs of the game, the standard appellations of the difficulty levels should be used.
 		 */
 		enum standardLevel {
-			RidiculouslyEasy = 10, /** Level "Ridiculously easy" */
-			VeryEasy = 20, /** Level "Very easy" */
-			Easy = 30, /** Level "Easy" */
-			Medium = 40, /** Level "Medium" */
-			Hard = 50, /** Level "Hard" */
-			VeryHard = 60, /** Level "Very hard" */
-			ExtremelyHard = 70, /** Level "Extremely hard" */
-			Impossible = 80, /** Level "Impossible"  */
-			Configurable = 90, /** Level "Custom". This is a special item to let the player configure the difficulty level. The configuration of the user level has to be implemented in each game using it with an adapted dialog. Example: In a minesweeper game like KMines, the player wants to define the number of rows, columns and mines. */
-			Custom = 100, /** Any custom appellations for levels */
-			NoLevel = 110 /** No level */
+			RidiculouslyEasy = 10, /**< Level "Ridiculously easy" */
+			VeryEasy = 20, /**< Level "Very easy" */
+			Easy = 30, /**< Level "Easy" */
+			Medium = 40, /**< Level "Medium" */
+			Hard = 50, /**< Level "Hard" */
+			VeryHard = 60, /**< Level "Very hard" */
+			ExtremelyHard = 70, /**< Level "Extremely hard" */
+			Impossible = 80, /**< Level "Impossible"  */
+			Configurable = 90, /**< Level "Custom". This is a special item to let the player configure the difficulty level. The configuration of the user level has to be implemented in each game using it with an adapted dialog. Example: In a minesweeper game like KMines, the player wants to define the number of rows, columns and mines. */
+			Custom = 100, /**< Any custom appellations for levels */
+			NoLevel = 110 /**< No level */
 		};
 
 
