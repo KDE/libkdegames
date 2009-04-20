@@ -1,5 +1,8 @@
 [KDE Backdeck]
 Name=Standard (SVG)
+Name[pt]=Normal (SVG)
+Name[pt_BR]=Normal (SVG)
+Name[uk]=Звичайний (SVG)
 Preview=11.png
 Comment=Standard KDE card set\nGPL license
 Comment[af]=Standaard Kde kaart stel\nGPL lisensie

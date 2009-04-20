@@ -1,5 +1,9 @@
 [KDE Backdeck]
 Name=Penguins (SVG)
+Name[pt]=Pinguins (SVG)
+Name[pt_BR]=Pinguins (SVG)
+Name[sv]=Pingviner (SVG)
+Name[uk]=Пінгвіни (SVG)
 SVG=penguins.svgz
 Preview=11.png
 Back=Penguin (SVG)
