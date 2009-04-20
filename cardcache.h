@@ -93,28 +93,28 @@ public:
     {
         LoadFrontSide = 1 << 0 /**< Load only the front sides of the theme. */,
         LoadBackSide = 1 << 2 /**< Load only the back side of the theme. */,
-	Load52Cards = 1 << 3 /**< Load a 52 card deck, ranges from Ace down to two */,
-	Load32Cards = 1 << 4 /**< Load a 32 card deck, ranges from Ace down to seven */,
-	Load53Cards = 1 << 5 /**< Load a 52 card deck as above, but include Jolly Joker */
+        Load52Cards = 1 << 3 /**< Load a 52 card deck, ranges from Ace down to two */,
+        Load32Cards = 1 << 4 /**< Load a 32 card deck, ranges from Ace down to seven */,
+        Load53Cards = 1 << 5 /**< Load a 52 card deck as above, but include Jolly Joker */
     };
     Q_DECLARE_FLAGS( LoadInfos, LoadInfo )
-    
+
     /**
      * Constructor creates and initializes a KPixmapCache for all KDE Games 
      * card games
      */
     KCardCache();
-    
+
     /**
      * Cleans up the cache
      */
     ~KCardCache();
-    
+
     /**
      * Set the size of rendered pixmaps.
      *
      * Make sure to set a reasonable size, before fetching pixmaps from the cache.
-     * 
+     *
      * @param size the new size for rendering cards and backsides
      */
     void setSize( const QSize& size );
@@ -125,31 +125,31 @@ public:
      * @returns the size of pixmaps for rendering.
      */
     QSize size() const;
-    
+
     /**
      * Set the theme to be used to render the frontside of cards.
-     * 
+     *
      * Make sure to set a proper theme before fetching frontside pixmaps from the cache.
-     * 
+     *
      * @param theme the name of the theme to be use for rendering frontsides
      */
     void setFrontTheme( const QString& theme );
-    
+
     /**
      * Return the currently used frontside theme
      * @returns the name of the frontside theme
      */
     QString frontTheme() const;
-    
+
     /**
      * Set the theme to be used to render the backside of cards
-     * 
+     *
      * Make sure to set a proper theme before fetching frontside pixmaps from the cache.
-     * 
+     *
      * @param theme the name of the theme to be use for rendering backsides
      */
     void setBackTheme( const QString& theme );
-    
+
     /**
      * Return the currently used backside theme
      * @returns the name of the backside theme
@@ -158,80 +158,80 @@ public:
 
     /**
      * Retrieve the backside of the given theme @p theme at the specified size @p size
-     * 
+     *
      * Make sure to set a reasonable size and theme, before calling this function.
-     * 
+     *
      * @param variant which variant, like a back with another color,
      * to use for rendering. Defaults to -1 which means no variant.
-     * 
+     *
      * @returns a QPixmap with the card backside rendered
-     * 
+     *
      * @see setBackTheme
      * @see setSize
      */
     QPixmap backside( int variant = -1 ) const;
-    
+
     /**
      * Retrieve the default size for the backside card.
-     * 
+     *
      * Make sure to set a reasonable theme, before calling this function.
-     * 
+     *
      * @param variant which variant, like a back with another color,
      * to use. Defaults to -1 which means no variant.
-     * 
+     *
      * @returns the default size of the selected background variant
-     * 
+     *
      */
     QSizeF defaultBackSize( int variant = -1 ) const;
-    
+
     /**
      * Invalidates all cached images in the current size for the current backside theme
      */
     void invalidateBackside();
-    
+
     /**
      * Retrieve the frontside pixmap.
-     * 
+     *
      * The @p infos parameter is used to determine which frontside to load.
      * Make sure to set a reasonable size and theme, before calling this function.
-     * 
+     *
      * @param infos A combination of CardInfo flags to identify what type of card to
      * load. There are of course only certain combinations that make sense, like
      * King | Heart, some flags are used standalone, like Joker.
-     * 
+     *
      * @returns a QPixmap with the card frontside rendered
-     * 
+     *
      * @see setBackTheme
      * @see setSize
      * @see CardInfo
      */
     QPixmap frontside( const KCardInfo& info ) const;
-    
+
     /**
      * Retrieve the default size for the frontside card.
-     * 
+     *
      * Make sure to set a reasonable theme, before calling this function.
-     * 
+     *
      * @param infos A combination of CardInfo flags to identify what type of card to
      * load. There are of course only certain combinations that make sense, like
      * King | Heart, some flags are used standalone, like Joker.
-     * 
+     *
      * @returns the default size of the selected frontside card
-     * 
+     *
      */
     QSizeF defaultFrontSize( const KCardInfo& info ) const;
-    
-    
+
+
     /**
      * Invalidates all cached images in the current size for the current frontside theme
      */
     void invalidateFrontside();
-    
+
     /**
      * Loads a whole theme in the background.
-     * 
+     *
      * Depending on the value of @p type only parts may be rendered.
-     * 
+     *
      * @param infos whether to load all entries in the theme or just the front or back
      * sides. Also its possible to specify a different deck, like a 32 card deck.
      */

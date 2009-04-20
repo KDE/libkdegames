@@ -27,7 +27,7 @@ class KConfigGroup;
 
 /**
  * \headerfile carddeckinfo.h <KCardDeckInfo>
- * 
+ *
  * Namespace to supply access to card deck information, such as a list of all
  * card decks as well as allowing to access the actual files to render the
  * decks.
@@ -60,25 +60,25 @@ namespace CardDeckInfo
     * @return True if SVG data is available.
     */
    KDEGAMES_EXPORT bool isSVGFront(const QString& name);
-   
+
    /** Retrieve the untranslated name of the default card set (front side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return The default card set name.
     */
    KDEGAMES_EXPORT QString defaultFrontName(bool pAllowPNG = true);
-   
+
    /** Retrieve the untranslated name of the default card deck (back side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return The default card deck name.
     */
    KDEGAMES_EXPORT QString defaultBackName(bool pAllowPNG = true);
-   
+
    /** Retrieve a untranslated name random card set (front side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return A radnom card set name.
     */
    KDEGAMES_EXPORT QString randomFrontName(bool pAllowPNG = true);
- 
+
    /** Retrieve a untranslated name random card deck (back side).
     * @param pAllowPNG  Allow selection of fixed size cards sets.
     * @return A radnom card deck name.

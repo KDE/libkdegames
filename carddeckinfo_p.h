@@ -43,7 +43,7 @@ class KCardThemeInfo
    /** The comment (author and description).
     */
    QString comment;
-   
+
    /** The full path information.
     */
    QString path;
@@ -59,11 +59,11 @@ class KCardThemeInfo
    /** The full filename of the SVG file.
     */
    QString svgfile;
-   
+
    /** The default size.
    */
    QSizeF size;
-   
+
    /** Is this a default deck or set.
    */
    bool isDefault;
