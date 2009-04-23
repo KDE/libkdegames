@@ -1,0 +1,9 @@
+[KDE Cards]
+Name=Future (SVG)
+Name[x-test]=xxFuture (SVG)xx
+Comment=Futuristic, minimal card design design.
+Comment[x-test]=xxFuturistic, minimal card design design.xx
+SVG=deck16.svgz
+Default=false
+
+

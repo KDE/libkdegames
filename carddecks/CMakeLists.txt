@@ -19,6 +19,7 @@ add_subdirectory( svg-oxygen-white )
 add_subdirectory( svg-penguins )
 add_subdirectory( svg-standard )
 add_subdirectory( svg-tigullio-international )
+add_subdirectory( svg-future )
 
 ########### install files ###############
 
