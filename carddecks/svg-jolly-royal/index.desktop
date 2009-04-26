@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Jolly Royal (SVG)
+Name=Jolly Royal
 Name[el]=Βασιλικό (SVG)
 Name[hne]=जोली रायल (एसवीजी)
 Name[lv]=Jolly karaliskais (SVG)
@@ -36,3 +36,4 @@ Comment[zh_TW]=簡單、乾淨、高雅的樣式
 Preview=11.png
 SVG=jolly-royal.svgz
 BackSize=63.6686,93
+Back=Jolly Royal

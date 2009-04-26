@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Paris (SVG)
+Name=Paris
 Name[be]=Парыж (SVG)
 Name[el]=Παρίσι (SVG)
 Name[eo]=Parizo (SVG)
@@ -24,7 +24,6 @@ Name[uk]=Париж (SVG)
 Name[x-test]=xxParis (SVG)xx
 Name[zh_CN]=巴黎(SVG)
 Name[zh_TW]=巴黎（SVG）
-SVG=deck10.svgz
 Comment=Classic
 Comment[ca]=Clàssic
 Comment[da]=Klassisk
@@ -54,4 +53,4 @@ Comment[uk]=Класична
 Comment[x-test]=xxClassicxx
 Comment[zh_CN]=经典
 Comment[zh_TW]=古典
-Default=false
+SVG=deck10.svgz

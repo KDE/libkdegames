@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Tigullio International (SVG)
+Name=Tigullio International
 Name[el]=Διεθνές Tigullio (SVG)
 Name[es]=Tigullio Internacional (SVG)
 Name[ga]=Tigullio Idirnáisiúnta (SVG)
@@ -22,5 +22,5 @@ Name[zh_CN]=国际提古里奥(SVG)
 Preview=queen-of-hearts.png
 SVG=tigullio-international.svgz
 BackSize=58,88
-Back=Paris (SVG)
+Back=Paris
 

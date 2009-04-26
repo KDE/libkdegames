@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Dondorf (SVG)
+Name=Dondorf
 Name[be]=Дандорф (SVG)
 Name[fa]=دوندورف
 Name[hne]=डानड्राफ (एसवीजी)
@@ -9,7 +9,6 @@ Name[ru]=Дондорф (SVG)
 Name[uk]=Дондорф (SVG)
 Name[x-test]=xxDondorf (SVG)xx
 Name[zh_TW]=Dondorf（SVG）
-SVG=deck8.svgz
 Comment=SVG Dondorf
 Comment[be]=Дандорф SVG
 Comment[de]=SVG-Dondorf
@@ -28,3 +27,4 @@ Comment[ru]=SVG Дондорф
 Comment[sl]=Dondorf v obliki SVG
 Comment[uk]=SVG Дондорф
 Comment[x-test]=xxSVG Dondorfxx
+SVG=deck8.svgz

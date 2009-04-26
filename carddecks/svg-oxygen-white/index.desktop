@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Oxygen-white (SVG)
+Name=Oxygen-white
 Name[ca]=Oxygen-blanc (SVG)
 Name[cs]=Bílý Oxygen (SVG)
 Name[da]=Oxygen-hvid (SVG)
@@ -36,5 +36,5 @@ Name[zh_TW]=Oxygen-white（SVG）
 Preview=11.png
 SVG=oxygen-white.svgz
 BackSize=63.6686,93
-Back=Oxygen-white (SVG)
+Back=Oxygen-white
 Default=false

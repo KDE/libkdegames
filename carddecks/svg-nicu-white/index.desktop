@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=White NICU (SVG)
+Name=White NICU
 Name[ca]=NICU Blanc (SVG)
 Name[cs]=Bílý NICU (SVG)
 Name[de]=Weißes Nicu (SVG)
@@ -33,4 +33,4 @@ Name[zh_TW]=White NICU（SVG）
 Preview=11.png
 SVG=white.svgz
 BackSize=139,189
-Back=Nicu Ornamental (SVG)
+Back=Nicu Ornamental

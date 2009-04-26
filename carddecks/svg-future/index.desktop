@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Future Simple (SVG)
+Name=Future Simple
 Name[el]=Μέλλον απλό (SVG)
 Name[pt]=Futuro Simples (SVG)
 Name[pt_BR]=Futuro Simples (SVG)
@@ -8,5 +8,5 @@ Name[uk]=Футуристичний простий (SVG)
 Preview=11.png
 SVG=future.svgz
 BackSize=194.40143.21
-Back=Future (SVG)
+Back=Future
 

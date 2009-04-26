@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Nicu Ornamental (SVG)
+Name=Nicu Ornamental
 Name[de]=Nicu-Verziehrung (SVG)
 Name[el]=Διακοσμητικό Nicu (SVG)
 Name[es]=Ornamental Nicu (SVG)
@@ -23,7 +23,6 @@ Name[uk]=Орнамент Nicu (SVG)
 Name[x-test]=xxNicu Ornamental (SVG)xx
 Name[zh_CN]=Nicu 植物装饰(SVG)
 Name[zh_TW]=Nicu Ornamental（SVG）
-SVG=deck9.svgz
 Comment=SVG Ornamental
 Comment[cs]=SVG ornamentály
 Comment[de]=SVG-Verziehrung
@@ -49,4 +48,4 @@ Comment[sv]=SVG Dekorativ
 Comment[uk]=SVG Орнамент
 Comment[x-test]=xxSVG Ornamentalxx
 Comment[zh_CN]=SVG 饰物
-Default=false
+SVG=deck9.svgz

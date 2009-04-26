@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Paris (SVG)
+Name=Paris
 Name[be]=Парыж (SVG)
 Name[el]=Παρίσι (SVG)
 Name[eo]=Parizo (SVG)
@@ -27,4 +27,4 @@ Name[zh_TW]=巴黎（SVG）
 Preview=11.png
 SVG=paris.svgz
 BackSize=59.204,92.8165
-Back=Paris (SVG)
+Back=Paris

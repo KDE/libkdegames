@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Ancient Egyptians  (SVG)
+Name=Ancient Egyptians
 Name[el]=Αρχαία Αίγυπτος (SVG)
 Name[et]=Vana-Egiptus (SVG)
 Name[ga]=Sean-Éigiptigh (SVG)
@@ -16,5 +16,5 @@ Comment[sv]=En forntida egyptisk kortlek.
 Comment[uk]=Єгипетський стиль сорочок карт.
 Preview=11.png
 SVG=Ancient_Egyptians.svgz
-BackSize=
+Back=Ancient Egyptians
 Default=true

@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Dondorf (SVG)
+Name=Dondorf
 Name[be]=Дандорф (SVG)
 Name[fa]=دوندورف
 Name[hne]=डानड्राफ (एसवीजी)
@@ -12,4 +12,4 @@ Name[zh_TW]=Dondorf（SVG）
 Preview=11.png
 SVG=dondorf.svgz
 BackSize=63.6686,99.8159
-Back=Dondorf (SVG)
+Back=Dondorf

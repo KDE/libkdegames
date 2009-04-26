@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Future (SVG)
+Name=Future
 Name[el]=Μέλλον (SVG)
 Name[pt]=Futuro (SVG)
 Name[pt_BR]=Futuro (SVG)
@@ -12,6 +12,3 @@ Comment[pt_BR]=Desenho de cartas minimalista e futurista.
 Comment[sv]=Futuristisk, minimal kortdesign.
 Comment[uk]=Футуристичний мінімалістичний дизайн карт.
 SVG=deck16.svgz
-Default=false
-
-

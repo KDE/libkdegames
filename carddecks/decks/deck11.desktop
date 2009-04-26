@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Oxygen-white (SVG)
+Name=Oxygen-white
 Name[ca]=Oxygen-blanc (SVG)
 Name[cs]=Bílý Oxygen (SVG)
 Name[da]=Oxygen-hvid (SVG)
@@ -33,7 +33,6 @@ Name[wa]=Blanc ocsidjinne (SVG)
 Name[x-test]=xxOxygen-white (SVG)xx
 Name[zh_CN]=氧气-白(SVG)
 Name[zh_TW]=Oxygen-white（SVG）
-SVG=deck11.svgz
 Comment=SVG Oxygen
 Comment[de]=SVG-Oxygen
 Comment[es]=Oxígeno SVG
@@ -51,5 +50,4 @@ Comment[pt_BR]=Oxygen em SVG
 Comment[sl]=Oxygen v obliki SVG
 Comment[te]=ఎస్ వి జి ఆక్సీజన్
 Comment[x-test]=xxSVG Oxygenxx
-Default=false
-
+SVG=deck11.svgz

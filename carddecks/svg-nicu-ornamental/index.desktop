@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Nicu Ornamental (SVG)
+Name=Nicu Ornamental
 Name[de]=Nicu-Verziehrung (SVG)
 Name[el]=Διακοσμητικό Nicu (SVG)
 Name[es]=Ornamental Nicu (SVG)
@@ -26,4 +26,4 @@ Name[zh_TW]=Nicu Ornamental（SVG）
 Preview=11.png
 SVG=ornamental.svgz
 BackSize=139,189
-Back=Nicu Ornamental (SVG)
+Back=Nicu Ornamental

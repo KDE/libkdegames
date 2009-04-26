@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=Standard (SVG)
+Name=Standard
 Name[el]=Τυπικό (SVG)
 Name[et]=Standardne (SVG)
 Name[pt]=Normal (SVG)
@@ -63,6 +63,6 @@ Comment[xh]=Umgangatho wekhadi le KDE iqela lekhadi \nGPL imvumelwano
 Comment[zh_CN]=标准 KDE 牌面\nGPL 授权
 Comment[zh_TW]=標準 KDE 牌局\nGPL 授權
 SVG=standard.svgz
-Back=Classic Blue (SVG)
+Back=Classic Blue
 
 

@@ -1,6 +1,5 @@
-
 [KDE Backdeck]
-Name=XSkat German (SVG)
+Name=XSkat German
 Name[be]=Нямецкі XSkat
 Name[bn]=জর্মন এক্স-স্কাট
 Name[br]=XSkat alamanek
@@ -55,6 +54,6 @@ Name[zh_CN]=XSkat 德语
 Name[zh_TW]=XSkat 德語
 Preview=11.png
 SVG=german.svgz
-Back=Tristan (SVG)
+Back=Tristan
 
 
