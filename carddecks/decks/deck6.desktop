@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Modern Red
+Name=Modern Red (SVG)
 Name[af]=Moderne Rooi
 Name[be]=Сучасны чырвоны
 Name[bn]=আধুনিক লাল
@@ -56,3 +56,4 @@ Name[x-test]=xxModern Redxx
 Name[xh]=Umbala omtsha obomvu 
 Name[zh_CN]=现代红
 Name[zh_TW]=現代紅
+SVG=deck6.svgz

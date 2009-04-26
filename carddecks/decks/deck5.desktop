@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Grandma
+Name=Grandma (SVG)
 Name[af]=Ouma
 Name[be]=Бабуля
 Name[bn]=ঠাকুরমা, দাদী, নানী ইত্যাদি
@@ -53,3 +53,4 @@ Name[x-test]=xxGrandmaxx
 Name[xh]=Umakhulu
 Name[zh_CN]=祖母
 Name[zh_TW]=祖母
+SVG=deck5.svgz

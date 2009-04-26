@@ -1,5 +1,5 @@
 [KDE Cards]
-Name=Classic Red
+Name=Classic Red (SVG)
 Name[af]=Klasieke Rooi
 Name[be]=Класічны чырвоны
 Name[bn]=ক্লাসিক লাল
@@ -56,3 +56,4 @@ Name[x-test]=xxClassic Redxx
 Name[xh]=Umbala obomvu wakudala
 Name[zh_CN]=经典红
 Name[zh_TW]=古典紅
+SVG=deck2.svgz
