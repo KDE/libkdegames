@@ -1,5 +1,5 @@
 [KDE Backdeck]
-Name=XSkat French
+Name=XSkat French (SVG)
 Name[be]=Французскі XSkat
 Name[bn]=ফরাসি এক্স-স্কাট
 Name[br]=XSkat gallek
@@ -53,7 +53,6 @@ Name[x-test]=xxXSkat Frenchxx
 Name[zh_CN]=XSkat 法语
 Name[zh_TW]=XSkat 法語
 Preview=11.png
-PySol=yes
-BackSize=72,112
-Back=Tristan
+SVG=french.svgz
+Back=Tristan (SVG)
 
