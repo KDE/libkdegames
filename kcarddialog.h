@@ -191,6 +191,12 @@ protected Q_SLOTS:
      */
     void updateBack();
 
+private slots:
+   /**
+    * Private slot used only for an internal connection
+    */
+    void setNotLocked(bool notLocked);
+
 private:
    /**
     * The dialog data.

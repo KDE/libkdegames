@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>741</width>
-    <height>557</height>
+    <width>512</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -15,41 +15,23 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="minimumSize" >
-   <size>
-    <width>620</width>
-    <height>520</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>1024</width>
-    <height>800</height>
-   </size>
-  </property>
-  <layout class="QVBoxLayout" >
-   <item>
-    <widget class="QFrame" name="frame_3" >
-     <property name="frameShape" >
-      <enum>QFrame::Panel</enum>
+  <layout class="QGridLayout" name="gridLayout_2" >
+   <item row="0" column="0" >
+    <widget class="QGroupBox" name="frontGroupBox" >
+     <property name="title" >
+      <string comment="Front side of a card" >Front</string>
      </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Sunken</enum>
-     </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
+     <layout class="QVBoxLayout" name="verticalLayout_3" >
+      <item>
        <widget class="QListWidget" name="frontList" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-          <horstretch>1</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+        <property name="showDropIndicator" stdset="0" >
+         <bool>false</bool>
         </property>
-        <property name="minimumSize" >
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
+        <property name="alternatingRowColors" >
+         <bool>true</bool>
+        </property>
+        <property name="verticalScrollMode" >
+         <enum>QAbstractItemView::ScrollPerPixel</enum>
         </property>
         <property name="resizeMode" >
          <enum>QListView::Adjust</enum>
@@ -57,258 +39,135 @@
         <property name="spacing" >
          <number>3</number>
         </property>
-        <property name="viewMode" >
-         <enum>QListView::ListMode</enum>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1" >
+    <widget class="QGroupBox" name="backGroupBox" >
+     <property name="title" >
+      <string comment="Back side of a card" >Back</string>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4" >
+      <item>
+       <widget class="QListWidget" name="backList" >
+        <property name="alternatingRowColors" >
+         <bool>true</bool>
         </property>
-        <property name="uniformItemSizes" >
+        <property name="verticalScrollMode" >
+         <enum>QAbstractItemView::ScrollPerPixel</enum>
+        </property>
+        <property name="resizeMode" >
+         <enum>QListView::Adjust</enum>
+        </property>
+        <property name="spacing" >
+         <number>3</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+     <zorder>backPreview</zorder>
+     <zorder>backList</zorder>
+     <zorder>frontGroupBox</zorder>
+     <zorder>checkBoxSeparateBacks</zorder>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2" >
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Preview</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout" >
+      <item rowspan="2" row="0" column="0" >
+       <widget class="QLabel" name="frontPreview" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>100</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="frameShape" >
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="text" >
+         <string>Frontside
+Preview</string>
+        </property>
+        <property name="scaledContents" >
          <bool>false</bool>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
       <item row="0" column="1" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
+       <widget class="QLabel" name="cardName" >
+        <property name="text" >
+         <string>Deck Name</string>
         </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>64</width>
-          <height>62</height>
-         </size>
+        <property name="textFormat" >
+         <enum>Qt::RichText</enum>
         </property>
-       </spacer>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
       </item>
-      <item row="0" column="2" >
-       <widget class="QListWidget" name="backList" >
+      <item rowspan="2" row="0" column="2" >
+       <widget class="QLabel" name="backPreview" >
         <property name="sizePolicy" >
-         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
           <horstretch>1</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize" >
          <size>
-          <width>0</width>
-          <height>0</height>
+          <width>100</width>
+          <height>100</height>
          </size>
         </property>
-        <property name="resizeMode" >
-         <enum>QListView::Adjust</enum>
+        <property name="text" >
+         <string>Backside
+Preview</string>
         </property>
-        <property name="spacing" >
-         <number>3</number>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
         </property>
-        <property name="viewMode" >
-         <enum>QListView::ListMode</enum>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLabel" name="cardDescription" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>Deck description.</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_4" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title" >
-      <string>Filter</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout" >
-      <item>
-       <widget class="QCheckBox" name="checkBoxLock" >
-        <property name="text" >
-         <string comment="back and front refer to the sides of a card" >Lock back to front</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxPNG" >
-        <property name="text" >
-         <string>Show old style decks</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" >
-     <item>
-      <widget class="QGroupBox" name="groupBox_2" >
-       <property name="title" >
-        <string comment="Front side of a card" >Front</string>
-       </property>
-       <layout class="QVBoxLayout" >
-        <item>
-         <widget class="QLabel" name="frontPreview" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>100</width>
-            <height>120</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer>
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>20</width>
-            <height>21</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>16</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="groupBox" >
-       <property name="title" >
-        <string>Details</string>
-       </property>
-       <layout class="QVBoxLayout" >
-        <item>
-         <widget class="QLabel" name="cardName" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-            <horstretch>1</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>250</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <property name="textFormat" >
-           <enum>Qt::RichText</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="cardDescription" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
-            <horstretch>1</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>250</width>
-            <height>100</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <property name="alignment" >
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-          </property>
-          <property name="wordWrap" >
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer>
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>16</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="groupBox_3" >
-       <property name="title" >
-        <string comment="Back side of a card" >Back</string>
-       </property>
-       <layout class="QVBoxLayout" >
-        <item>
-         <widget class="QLabel" name="backPreview" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>100</width>
-            <height>120</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer>
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>20</width>
-            <height>21</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

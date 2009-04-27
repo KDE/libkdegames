@@ -54,8 +54,7 @@ public:
     */
   bool filterOutCard(const KCardThemeInfo& v)
   {
-    if (!ui.checkBoxPNG->isChecked() && v.svgfile.isEmpty()) return true;
-    return false;
+    return !fixedSizeAllowed && v.svgfile.isEmpty();
   }
 
   /** Currently chosen back side name.
@@ -65,6 +64,10 @@ public:
   /** Currently chosen front side name.
    */
   QString currentFront;
+
+  /** Determines if PNG based decks should be shown
+   */
+  bool fixedSizeAllowed;
 
   /** The UI elements.
    */
@@ -80,6 +83,8 @@ KCardWidget::KCardWidget(QWidget* parent)
   setupGUI();
   setLocked(true);
   setFixedSizeAllowed(false);
+  insertCardIcons();
+  insertDeckIcons();
   setFrontName(CardDeckInfo::defaultFrontName(false));
   setBackName(CardDeckInfo::defaultBackName(false));
 }
@@ -87,7 +92,6 @@ KCardWidget::KCardWidget(QWidget* parent)
 void KCardWidget::readSettings(const KConfigGroup& group)
 {
   setLocked(CardDeckInfo::lockFrontToBackside(group));
-  setFixedSizeAllowed(CardDeckInfo::allowFixedSizeDecks(group));
   setFrontName(CardDeckInfo::frontTheme(group));
   setBackName(CardDeckInfo::backTheme(group));
 }
@@ -95,8 +99,7 @@ void KCardWidget::readSettings(const KConfigGroup& group)
 // Store the config group settings
 void KCardWidget::saveSettings(KConfigGroup& group) const
 {
-  CardDeckInfo::writeLockFrontToBackside(group, d->ui.checkBoxLock->isChecked());
-  CardDeckInfo::writeAllowFixedSizeDecks(group, d->ui.checkBoxPNG->isChecked());
+  CardDeckInfo::writeLockFrontToBackside(group, !d->ui.backGroupBox->isChecked());
   CardDeckInfo::writeFrontTheme(group, d->currentFront);
   CardDeckInfo::writeBackTheme(group, d->currentBack);
 }
@@ -118,8 +121,7 @@ void KCardWidget::setupGUI()
           this, SLOT(updateFront()));
   connect(ui->backList, SIGNAL(itemSelectionChanged()),
           this, SLOT(updateBack()));
-  connect(ui->checkBoxLock, SIGNAL(toggled(bool)), this, SLOT(setLocked(bool)));
-  connect(ui->checkBoxPNG, SIGNAL(toggled(bool)), this, SLOT(setFixedSizeAllowed(bool)));
+  connect(ui->backGroupBox, SIGNAL(toggled(bool)), this, SLOT(setNotLocked(bool)));
 
   // Debug
   // kDebug() << "DEFAULT DECK: " << defaultDeckName(pAllowSVG, pAllowPNG);
@@ -150,18 +152,17 @@ QString KCardWidget::frontName() const
 
 bool KCardWidget::isFixedSizeAllowed() const
 {
-  return d->ui.checkBoxPNG->isChecked();
+  return d->fixedSizeAllowed;
 }
 
 bool KCardWidget::isLocked() const
 {
-  return d->ui.checkBoxLock->isChecked();
+  return !d->ui.backGroupBox->isChecked();
 }
 
 // Build list widget
 void KCardWidget::insertCardIcons()
 {
-
   // Clear GUI
   d->ui.frontList->clear();
 
@@ -225,9 +226,11 @@ void KCardWidget::setFrontName(const QString& name)
       if (item->data(Qt::UserRole).toString() == name)
       {
         item->setSelected(true);
+        d->ui.frontList->scrollToItem(item);
         break;
       }
     }
+
     KCardThemeInfo info = CardDeckInfo::frontInfo(name);
     QFont font;
     font.setBold(true);
@@ -260,7 +263,7 @@ void KCardWidget::setFrontName(const QString& name)
 // Update the locking filter
 void KCardWidget::setLocked(bool locked)
 {
-  d->ui.checkBoxLock->setChecked(locked);
+  d->ui.backGroupBox->setChecked(!locked);
   if (locked)
   {
     // Update previews
@@ -269,13 +272,22 @@ void KCardWidget::setLocked(bool locked)
   d->ui.backList->setEnabled(!locked);
 }
 
+// An ugly internal slot needed for UI connections
+void KCardWidget::setNotLocked(bool notLocked)
+{
+    setLocked(!notLocked);
+}
+
 
 // Update the PNG status filter
 void KCardWidget::setFixedSizeAllowed(bool allowFixedSize)
 {
-  d->ui.checkBoxPNG->setChecked(allowFixedSize);
-  insertCardIcons();
-  insertDeckIcons();
+    if ( allowFixedSize != d->fixedSizeAllowed )
+    {
+        d->fixedSizeAllowed = allowFixedSize;
+        insertCardIcons();
+        insertDeckIcons();
+    }
 }
 
 
@@ -306,6 +318,7 @@ void KCardWidget::setBackName(const QString& item)
       if (lwi->data(Qt::UserRole).toString() == item)
       {
         lwi->setSelected(true);
+        d->ui.backList->scrollToItem(lwi);
         break;
       }
     }
@@ -355,7 +368,7 @@ void KCardWidget::insertDeckIcons()
 KCardDialog::KCardDialog( KCardWidget* widget )
 {
   setMainWidget(widget);
-  setCaption(i18n("Carddeck Selection"));
+  setCaption(i18n("Card Deck Selection"));
   setButtons(KDialog::Ok | KDialog::Cancel);
 }
 
