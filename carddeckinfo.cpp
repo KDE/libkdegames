@@ -85,7 +85,6 @@ public:
             info.path         = path;
             info.back         = cfgcg.readEntry( "Back", QString() );
             // if (!info.back.isNull()) kDebug() << "FOUND BACK " << info.back;
-            info.size         = cfgcg.readEntry( "BackSize", QSizeF( pixmap.size() ) );
             info.isDefault    = cfgcg.readEntry( "Default", false );
 
             QString svg    = cfgcg.readEntry( "SVG", QString() );
@@ -132,7 +131,6 @@ public:
             info.path         = getBackFileNameFromIndex( *it );
             info.comment      = cfgcg.readEntry( "Comment", i18n( "KDE card deck" ) );
             info.preview      = pixmap;
-            info.size         = cfgcg.readEntry( "Size", QSizeF( pixmap.size() ) );
             info.isDefault    = cfgcg.readEntry( "Default", false );
     
             QString svg    = cfgcg.readEntry( "SVG", QString() );
@@ -195,7 +193,14 @@ K_GLOBAL_STATIC( KCardThemeInfoStatic, deckinfoStatic )
 
 QDebug operator<<(QDebug debug, const KCardThemeInfo &cn)
 {
-    return debug << "name: " << cn.name << " noi18Name: " << cn.noi18Name << " comment: " << cn.comment << " path: " << cn.path << " back: " << cn.back << " preview: " << cn.preview << " svgfile: " << cn.svgfile << " size: " << cn.size << " isDefault: " << cn.isDefault;
+    return debug << "name: " << cn.name
+                 << " noi18Name: " << cn.noi18Name
+                 << " comment: " << cn.comment
+                 << " path: " << cn.path
+                 << " back: " << cn.back
+                 << " preview: " << cn.preview
+                 << " svgfile: " << cn.svgfile
+                 << " isDefault: " << cn.isDefault;
 }
 
 namespace CardDeckInfo

@@ -60,10 +60,6 @@ class KCardThemeInfo
     */
    QString svgfile;
 
-   /** The default size.
-   */
-   QSizeF size;
-
    /** Is this a default deck or set.
    */
    bool isDefault;
