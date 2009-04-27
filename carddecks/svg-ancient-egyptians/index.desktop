@@ -1,14 +1,5 @@
 [KDE Backdeck]
 Name=Ancient Egyptians
-Name[el]=Αρχαία Αίγυπτος (SVG)
-Name[et]=Vana-Egiptus (SVG)
-Name[ga]=Sean-Éigiptigh (SVG)
-Name[pt]=Antigo Egipto (SVG)
-Name[pt_BR]=Antigo Egipto (SVG)
-Name[sv]=Forntida egyptier (SVG)
-Name[uk]=Давні єгиптяни (SVG)
-Name[x-test]=xxAncient Egyptians  (SVG)xx
-Name[zh_TW]=古埃及（SVG）
 Comment=An ancient Egyptian card deck.
 Comment[pt]=Um baralho de cartas do Antigo Egipto.
 Comment[pt_BR]=Um baralho de cartas do Antigo Egipto.

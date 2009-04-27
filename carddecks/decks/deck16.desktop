@@ -1,10 +1,16 @@
 [KDE Cards]
 Name=Future
-Name[el]=Μέλλον (SVG)
-Name[pt]=Futuro (SVG)
-Name[pt_BR]=Futuro (SVG)
-Name[sv]=Framtid (SVG)
-Name[uk]=Футуристичний (SVG)
+Name[de]=Zukunft
+Name[el]=Μέλλον
+Name[et]=Tulevik
+Name[ga]=Todhchaí
+Name[nds]=Tokunft
+Name[pt]=Futuro
+Name[pt_BR]=Futuro
+Name[sv]=Framtid
+Name[uk]=Футуристичний
+Name[x-test]=xxFuturexx
+Name[zh_TW]=未來
 Comment=Futuristic, minimal card design design.
 Comment[el]=Φουτουριστικό, απλό σχέδιο τράπουλας.
 Comment[pt]=Desenho de cartas minimalista e futurista.

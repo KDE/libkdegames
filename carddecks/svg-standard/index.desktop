@@ -1,11 +1,6 @@
 [KDE Backdeck]
 Name=Standard
-Name[el]=Τυπικό (SVG)
-Name[et]=Standardne (SVG)
-Name[pt]=Normal (SVG)
-Name[pt_BR]=Normal (SVG)
-Name[uk]=Звичайний (SVG)
-Name[zh_TW]=標準（SVG）
+Name[se]=Standárda
 Preview=11.png
 Comment=Standard KDE card set\nGPL license
 Comment[af]=Standaard Kde kaart stel\nGPL lisensie
