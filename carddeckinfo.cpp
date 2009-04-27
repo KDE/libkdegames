@@ -80,7 +80,7 @@ public:
             KCardThemeInfo info;
             info.name         = name;
             info.noi18Name    = idx;
-            info.comment      = cfgcg.readEntry( "Comment", i18n( "KDE card deck" ) );
+            info.comment      = cfgcg.readEntry( "Comment", QString() );
             info.preview      = pixmap;
             info.path         = path;
             info.back         = cfgcg.readEntry( "Back", QString() );
@@ -129,7 +129,7 @@ public:
             info.name         = name;
             info.noi18Name    = idx;
             info.path         = getBackFileNameFromIndex( *it );
-            info.comment      = cfgcg.readEntry( "Comment", i18n( "KDE card deck" ) );
+            info.comment      = cfgcg.readEntry( "Comment", QString() );
             info.preview      = pixmap;
             info.isDefault    = cfgcg.readEntry( "Default", false );
     
