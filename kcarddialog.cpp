@@ -20,6 +20,7 @@
 #include "kcarddialog.h"
 #include "ui_kgamecardselector.h"
 
+#include <QPainter>
 #include <QPixmap>
 #include <QListWidgetItem>
 #include <QFileInfo>
@@ -174,7 +175,13 @@ void KCardWidget::insertCardIcons()
     // Show only SVG files?
     if (d->filterOutCard(v)) continue;
 
-    QPixmap previewPixmap = v.preview.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    const int iconSize = 48;
+    QPixmap resizedCard = v.preview.scaled(QSize(iconSize, iconSize), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QPixmap previewPixmap(iconSize, iconSize);
+    previewPixmap.fill(Qt::transparent);
+    QPainter p(&previewPixmap);
+    p.drawPixmap((iconSize-resizedCard.width())/2, (iconSize-resizedCard.height())/2, resizedCard);
+    p.end();
 
     QListWidgetItem *item = new QListWidgetItem(v.name, d->ui.frontList);
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -347,7 +354,14 @@ void KCardWidget::insertDeckIcons()
     KCardThemeInfo v = CardDeckInfo::backInfo(name);
     // Show only SVG files?
     if (d->filterOutCard(v) || v.preview.isNull() ) continue;
-    QPixmap previewPixmap = v.preview.scaled(QSize(32,43), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+    const int iconSize = 48;
+    QPixmap resizedCard = v.preview.scaled(QSize(iconSize, iconSize), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QPixmap previewPixmap(iconSize, iconSize);
+    previewPixmap.fill(Qt::transparent);
+    QPainter p(&previewPixmap);
+    p.drawPixmap((iconSize-resizedCard.width())/2, (iconSize-resizedCard.height())/2, resizedCard);
+    p.end();
 
     QListWidgetItem *item = new QListWidgetItem(v.name, d->ui.backList);
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
