@@ -1,6 +1,12 @@
 [KDE Backdeck]
 Name=Ancient Egyptians
+Name[et]=Vana-Egiptus
+Name[pt]=Antigo Egipto
+Name[pt_BR]=Antigo Egipto
+Name[sv]=Forntida egyptier
+Name[uk]=Давні єгиптяни
 Comment=An ancient Egyptian card deck.
+Comment[et]=Vana-Egiptuse stiilis kaardipakk.
 Comment[pt]=Um baralho de cartas do Antigo Egipto.
 Comment[pt_BR]=Um baralho de cartas do Antigo Egipto.
 Comment[sv]=En forntida egyptisk kortlek.

@@ -1,5 +1,10 @@
 [KDE Backdeck]
 Name=White NICU
+Name[et]=Valge NICU
+Name[pt]=NICU Branco
+Name[pt_BR]=NICU Branco
+Name[sv]=Nicus vita
+Name[uk]=Білий NICU
 Preview=11.png
 SVG=white.svgz
 Back=Nicu Ornamental

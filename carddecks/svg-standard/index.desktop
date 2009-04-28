@@ -1,6 +1,10 @@
 [KDE Backdeck]
 Name=Standard
+Name[et]=Standardne
+Name[pt]=Normal
+Name[pt_BR]=Normal
 Name[se]=Standárda
+Name[uk]=Звичайний
 Preview=11.png
 Comment=Standard KDE card set\nGPL license
 Comment[af]=Standaard Kde kaart stel\nGPL lisensie

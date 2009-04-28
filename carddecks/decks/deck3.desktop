@@ -1,4 +1,10 @@
 [KDE Cards]
 Name=Penguin
+Name[et]=Pingviin
+Name[nds]=Pinguin
+Name[pt]=Pinguim
+Name[pt_BR]=Pinguim
 Name[se]=Piŋviidna
+Name[sv]=Pingvin
+Name[uk]=Пінгвін
 SVG=deck3.svgz

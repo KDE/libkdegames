@@ -1,5 +1,9 @@
 [KDE Cards]
 Name=Diamond Tree
+Name[pt]=Árvore de Diamantes
+Name[pt_BR]=Árvore de Diamantes
+Name[sv]=Diamantträd
+Name[uk]=Діамантове дерево
 Comment=Simple, yet visually pleasing card back
 Comment[da]=Enkelt og dog synligt behageligt kortspil
 Comment[de]=Ein einfaches und zugleich visuell ansprechendes Blattdesign.
