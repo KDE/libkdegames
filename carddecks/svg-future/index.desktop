@@ -1,10 +1,12 @@
 [KDE Backdeck]
 Name=Future Simple
+Name[el]=Μέλλον απλό
 Name[et]=Lihtne futu
 Name[pt]=Futuro Simples
 Name[pt_BR]=Futuro Simples
 Name[sv]=Framtid enkel
 Name[uk]=Футуристичний простий
+Name[zh_TW]=未來簡單式
 Preview=11.png
 SVG=future.svgz
 Back=Future

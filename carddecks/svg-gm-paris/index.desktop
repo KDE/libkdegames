@@ -1,7 +1,9 @@
 [KDE Backdeck]
 Name=Paris
+Name[el]=Παρίσι
 Name[et]=Pariis
 Name[uk]=Париж
+Name[zh_TW]=巴黎
 Preview=11.png
 SVG=paris.svgz
 Back=Paris

@@ -1,5 +1,10 @@
 [KDE Backdeck]
 Name=Oxygen White
+Name[el]=Oxygen λευκό
+Name[pt]=Oxygen Branco
+Name[pt_BR]=Oxygen Branco
+Name[sv]=Oxygen-vit
+Name[uk]=Oxygen біла
 Preview=11.png
 SVG=oxygen-white.svgz
 Back=Oxygen White
