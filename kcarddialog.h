@@ -191,7 +191,7 @@ protected Q_SLOTS:
      */
     void updateBack();
 
-private slots:
+private Q_SLOTS:
    /**
     * Private slot used only for an internal connection
     */
