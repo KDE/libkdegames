@@ -22,6 +22,7 @@
 #include <kfilterdev.h>
 #include <kdebug.h>
 
+#include <QtCore/QBuffer>
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -192,16 +193,24 @@ void KGameSvgDocument::load()
     {
         return;
     }
+    QByteArray content = file.readAll();
 
-    // Reads file whether it is compressed or not
-    QIODevice *filter = KFilterDev::device( &file, QString::fromUtf8("application/x-gzip"), false);
-    if (!filter)
+    // If the file is compressed, decompress the contents before loading it.
+    if (!content.startsWith("<?xml"))
     {
-        return;
+        QBuffer buf(&content);
+        QIODevice *flt = KFilterDev::device(&buf, QString::fromLatin1("application/x-gzip"), false);
+        if (!flt || !flt->open(QIODevice::ReadOnly))
+        {
+            delete flt;
+            return;
+        }
+        QByteArray ar = flt->readAll();
+        delete flt;
+        content = ar;
     }
-    delete filter;
 
-    if (!setContent(&file))
+    if (!setContent(content))
     {
         file.close();
         kDebug(11000) << "DOM content not set.";
