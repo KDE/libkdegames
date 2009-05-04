@@ -29,7 +29,7 @@
       <item row="0" column="0" colspan="2" >
        <widget class="QCheckBox" name="showRichText" >
         <property name="text" >
-         <string>Show Rich text</string>
+         <string>Show rich text</string>
         </property>
        </widget>
       </item>
@@ -108,7 +108,7 @@
       <item rowspan="2" row="6" column="0" colspan="3" >
        <widget class="QGroupBox" name="groupBox" >
         <property name="title" >
-         <string>Replace mode</string>
+         <string>Replace Mode</string>
         </property>
         <layout class="QHBoxLayout" >
          <item>
@@ -215,14 +215,14 @@
       <item>
        <widget class="QPushButton" name="forceInstantHide" >
         <property name="text" >
-         <string>Force instant hide</string>
+         <string>Force Instant Hide</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="forceAnimatedHide" >
         <property name="text" >
-         <string>Force animated hide</string>
+         <string>Force Animated Hide</string>
         </property>
        </widget>
       </item>
