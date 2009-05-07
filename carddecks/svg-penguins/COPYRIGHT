@@ -1,10 +1,25 @@
-This PySol cardset was adapted from the Ace of Penguins 1.0.
+This vector deck was adapted from the original Penguins raster deck,
+with elements of the Paris deck.
+
+Copyright 2009 Matthew Woehlke <mw_triad@users.sourceforge.net>
+
+Paris deck SVG conversion by Richard Hoelscher.
+
+Original Tux artwork created by Larry Ewing, Simon Budig and Anja
+Gerwinski; from <http://commons.wikimedia.org/wiki/File:Tux.svg>.
+
+The raster PySol deck was adapted from the Ace of Penguins 1.0.
 http://www.delorie.com/store/ace/
 
-Copyright (C) 1998 DJ Delorie <dj@delorie.com>
-Copyright (C) 1998 Markus F.X.J. Oberhumer <markus.oberhumer@jk.uni-linz.ac.at>
+Copyright 1998 DJ Delorie <dj@delorie.com>
+Copyright 1998 Markus F.X.J. Oberhumer <markus.oberhumer@jk.uni-linz.ac.at>
 
 This cardset is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2 of
+as published by the Free Software Foundation; either version 3 of
 the License, or (at your option) any later version.
+
+In accordance with section 7(b) of GPL3, the following notice must
+accompany any works which include the Tux graphic:
+  Original Tux artwork created by Larry Ewing, Simon Budig and Anja
+  Gerwinski.
