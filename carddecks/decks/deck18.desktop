@@ -1,4 +1,8 @@
 [KDE Cards]
 Name=Tigullio International
+Name[el]=Διεθνές Tigullio
+Name[pt]=Tigullio Internacional
+Name[pt_BR]=Tigullio Internacional
+Name[sv]=Tigullio internationell
 SVG=deck18.svgz
 default=false
