@@ -228,18 +228,12 @@ QString KCardInfo::svgName() const
 
 QPixmap doRender( const QString& element, KSvgRenderer* r, const QSize& s )
 {
-    QImage img = QImage( s, QImage::Format_ARGB32 );
-    img.fill( qRgba( 0, 0, 255, 0 ) );
-    QPainter p( &img );
-    if( r->elementExists( element ) )
-    {
-        r->render( &p, element );
-    }else
-    {
-        r->render( &p, "layer1" );
-    }
+    QPixmap pix = QPixmap( s );
+    pix.fill( Qt::transparent );
+    QPainter p( &pix );
+    r->render( &p, element );
     p.end();
-    return QPixmap::fromImage( img );
+    return pix;
 }
 
 QString keyForPixmap( const QString& theme, const QString& element, const QSize& s )
@@ -247,6 +241,20 @@ QString keyForPixmap( const QString& theme, const QString& element, const QSize&
     return theme + '_' + element + '_'
                   + QString::number( s.width() ) + '_'
                   + QString::number( s.height() );
+}
+
+KSvgRenderer* KCardCachePrivate::frontRenderer()
+{
+    if ( !frontSvgRenderer )
+        frontSvgRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( frontTheme ) );
+    return frontSvgRenderer;
+}
+
+KSvgRenderer* KCardCachePrivate::backRenderer()
+{
+    if ( !backSvgRenderer )
+        backSvgRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( backTheme ) );
+    return backSvgRenderer;
 }
 
 void KCardCachePrivate::ensureNonNullPixmap( QPixmap& pix )
@@ -270,17 +278,24 @@ void KCardCachePrivate::ensureNonNullPixmap( QPixmap& pix )
 QPixmap KCardCachePrivate::renderFrontSvg( const QString& element )
 {
     QMutexLocker l( frontRendererMutex );
-    return doRender( element, frontRenderer, size );
+    return doRender( element, frontRenderer(), size );
 }
 
 QPixmap KCardCachePrivate::renderBackSvg( const QString& element )
 {
     QMutexLocker l( backRendererMutex );
-    return doRender( element, backRenderer, size );
+    return doRender( element, backRenderer(), size );
+}
+
+void KCardCachePrivate::submitRendering( const QString& key, const QImage& image )
+{
+    QPixmap pix = QPixmap::fromImage( image );
+    QMutexLocker l( frontcacheMutex );
+    frontcache->insert( key, pix );
 }
 
 LoadThread::LoadThread( KCardCache::LoadInfos l_, KCardCachePrivate* d_ )
-    : d( d_ ), infos( l_ ), killMutex( new QMutex )
+    : d( d_ ), infos( l_ ), doKill( false ), killMutex( new QMutex )
 {
 }
 
@@ -299,6 +314,11 @@ void LoadThread::setBackTheme( const QString & backTheme_ )
     backTheme = backTheme_;
 }
 
+void LoadThread::setElementsToLoad( const QStringList& elements_ )
+{
+    elementsToRender = elements_;
+}
+
 void LoadThread::kill()
 {
     QMutexLocker l(killMutex);
@@ -308,71 +328,29 @@ void LoadThread::kill()
 void LoadThread::run()
 {
     {
-        QMutexLocker l( killMutex );
-        if( doKill )
-            return;
+        // Load the renderer even if we don't have any elements to render.
+        QMutexLocker l( d->frontRendererMutex );
+        d->frontRenderer();
     }
-    if( infos & KCardCache::LoadBackSide )
+
+    foreach( const QString& element, elementsToRender )
     {
-        bool found = false;
-        QString key = keyForPixmap( backTheme, "back", size );
-        QPixmap pix;
         {
-            QMutexLocker l( d->backcacheMutex );
-            if( d->backcache && d->backcache->find( key, pix ) )
-                found = true;
+            QMutexLocker l( killMutex );
+            if( doKill )
+                return;
         }
-        if( !found )
+        QImage img = QImage( size, QImage::Format_ARGB32 );
+        img.fill( Qt::transparent );
+        QPainter p( &img );
         {
-            {
-                QMutexLocker l( d->backRendererMutex );
-                pix = doRender( "back", d->backRenderer, size );
-            }
-            {
-                QMutexLocker l( d->backcacheMutex );
-                if( d->backcache )
-                    d->backcache->insert( keyForPixmap( backTheme, "back", size ), pix );
-            }
+            QMutexLocker l( d->frontRendererMutex );
+            d->frontRenderer()->render( &p, element );
         }
-    }
-    {
-        QMutexLocker l( killMutex );
-        if( doKill )
-            return;
-    }
-    if( infos & KCardCache::LoadFrontSide )
-    {
-        int numCards = 53;
-        if( infos & KCardCache::Load52Cards )
-            numCards = 52;
-        if( infos & KCardCache::Load32Cards )
-            numCards = 32;
-        for( int i = 0; i < numCards ; i++ )
-        {
-            QString element = fullDeckList[i].svgName();
-            QString key = keyForPixmap( frontTheme, element, size );
-            QPixmap pix;
-            {
-                QMutexLocker l( killMutex );
-                if( doKill )
-                    return;
-            }
-            {
-                QMutexLocker l( d->frontcacheMutex );
-                if( d->frontcache && d->frontcache->find( key, pix ) )
-                    continue;
-            }
-            {
-                QMutexLocker l( d->frontRendererMutex );
-                pix = doRender( element, d->frontRenderer, size );
-            }
-            {
-                QMutexLocker l( d->frontcacheMutex );
-                QPixmap tmp;
-                if( d->frontcache )
-                    d->frontcache->insert( key, pix );
-            }
-        }
+        p.end();
+
+        QString key = keyForPixmap( frontTheme, element, size );
+        emit renderingDone( key, img );
     }
 }
 
@@ -385,10 +363,9 @@ KCardCache::KCardCache()
     d->backcacheMutex = new QMutex();
     d->frontRendererMutex = new QMutex();
     d->backRendererMutex = new QMutex();
-    d->frontRenderer = 0;
-    d->backRenderer = 0;
+    d->frontSvgRenderer = 0;
+    d->backSvgRenderer = 0;
     d->loadThread = 0;
-    
 }
 
 KCardCache::~KCardCache()
@@ -405,8 +382,8 @@ KCardCache::~KCardCache()
     delete d->backcacheMutex;
     delete d->frontRendererMutex;
     delete d->backRendererMutex;
-    delete d->frontRenderer;
-    delete d->backRenderer;
+    delete d->frontSvgRenderer;
+    delete d->backSvgRenderer;
     delete d;
 }
 
@@ -530,10 +507,8 @@ void KCardCache::setFrontTheme( const QString& theme )
     }
     {
         QMutexLocker l( d->frontRendererMutex );
-        delete d->frontRenderer;
-        d->frontRenderer = 0;
-        if ( CardDeckInfo::isSVGFront( theme ) )
-            d->frontRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( theme ) );
+        delete d->frontSvgRenderer;
+        d->frontSvgRenderer = 0;
     }
     d->frontTheme = theme;
 }
@@ -567,10 +542,8 @@ void KCardCache::setBackTheme( const QString& theme )
     }
     {
         QMutexLocker l( d->backRendererMutex );
-        delete d->backRenderer;
-        d->backRenderer = 0;
-        if ( CardDeckInfo::isSVGBack( theme ) )
-            d->backRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( theme ) );
+        delete d->backSvgRenderer;
+        d->backSvgRenderer = 0;
     }
     d->backTheme = theme;
 }
@@ -582,62 +555,116 @@ QString KCardCache::backTheme() const
 
 void KCardCache::loadTheme( LoadInfos infos )
 {
-    if( d->loadThread->isRunning() )
+    if( d->loadThread && d->loadThread->isRunning() )
     {
         d->loadThread->kill();
         d->loadThread->wait();
-        delete d->loadThread;
     }
+    delete d->loadThread;
+
+    // We have to compile the list of elements to load here, because we can't
+    // check the contents of the KPixmapCache from outside the GUI thread.
+    QStringList elements;
+    QPixmap pix;
+    if( infos & KCardCache::LoadFrontSide )
+    {
+        int numCards;
+        if( infos & KCardCache::Load53Cards )
+            numCards = 53;
+        else if( infos & KCardCache::Load52Cards )
+            numCards = 52;
+        else
+            numCards = 32;
+
+        for( int i = 0; i < numCards ; i++ )
+        {
+            QString element = fullDeckList[i].svgName();
+            QString key = keyForPixmap( d->frontTheme, element, d->size );
+            {
+                QMutexLocker l( d->frontcacheMutex );
+                if( d->frontcache && !d->frontcache->find( key, pix ) )
+                    elements << element;
+            }
+        }
+    }
+
     d->loadThread = new LoadThread( infos, d );
     d->loadThread->setBackTheme( d->backTheme );
     d->loadThread->setFrontTheme( d->frontTheme );
     d->loadThread->setSize( d->size );
+    d->loadThread->setElementsToLoad( elements );
+    d->connect( d->loadThread, SIGNAL(renderingDone(QString,QImage)), SLOT(submitRendering(QString,QImage)), Qt::QueuedConnection );
     d->loadThread->start();
 }
 
 QSizeF KCardCache::defaultFrontSize( const KCardInfo& info ) const
 {
-    QSizeF size;
     if( d->frontTheme.isEmpty() )
-        return size;
+        return QSizeF();
+
+    QPixmap pix;
+    QString key = d->frontTheme + '_' + info.svgName() + "_default";
+    {
+        QMutexLocker( d->frontcacheMutex );
+        if ( d->frontcache && d->frontcache->find( key, pix ) )
+            return pix.size();
+    }
+
     if( !CardDeckInfo::isSVGFront( d->frontTheme ) )
     {
-        QImage img;
-        if( img.load( CardDeckInfo::frontDir( d->frontTheme )
-            + '/' + info.pngName(), "PNG" ) )
-            size = img.size();
+        pix.load( CardDeckInfo::frontDir( d->frontTheme ) + '/' + info.pngName(), "PNG" );
     }else
     {
         QMutexLocker( d->frontRendererMutex );
-        size = d->frontRenderer->boundsOnElement( info.svgName() ).size();
+        QSizeF size = d->frontRenderer()->boundsOnElement( info.svgName() ).size();
+        pix = QPixmap( size.toSize() );
     }
-    return size;
+
+    {
+        QMutexLocker( d->frontcacheMutex );
+        if( d->frontcache )
+            d->frontcache->insert( key, pix );
+    }
+
+    return pix.size();
 }
 
 QSizeF KCardCache::defaultBackSize( int variant ) const
 {
-    QSizeF size;
     if( d->backTheme.isEmpty() ) 
-        return size;
+        return QSizeF();
+
     QString element = "back";
     if( variant > 0 )
     {
         element += QString::number(variant);
     }
+
+    QPixmap pix;
+    QString key = d->backTheme + '_' + element + "_default";
+    {
+        QMutexLocker( d->backcacheMutex );
+        if ( d->backcache && d->backcache->find( key, pix ) )
+            return pix.size();
+    }
     
     if( !CardDeckInfo::isSVGBack( d->backTheme ) )
     {
-        QImage img;
-        if( img.load( CardDeckInfo::backFilename( d->backTheme ), "PNG" ) )
-        {
-            size = img.size();
-        }
+        pix.load( CardDeckInfo::backFilename( d->backTheme ), "PNG" );
     }else
     {
         QMutexLocker( d->backRendererMutex );
-        size = d->backRenderer->boundsOnElement( element ).size();
+        QSizeF size = d->backRenderer()->boundsOnElement( element ).size();
+        pix = QPixmap( size.toSize() );
     }
-    return size;
+
+    {
+        QMutexLocker( d->backcacheMutex );
+        if( d->backcache )
+            d->frontcache->insert( key, pix );
+    }
+
+    return pix.size();
 }
 
 void KCardCache::invalidateFrontside()

@@ -21,8 +21,10 @@
 #ifndef __CARDCACHE_P_H_
 #define __CARDCACHE_P_H_
 
+#include <QImage>
 #include <QThread>
 #include <QString>
+#include <QStringList>
 #include <QSize>
 #include "cardcache.h"
 
@@ -31,34 +33,43 @@ class QMutex;
 class KSvgRenderer;
 class LoadThread;
 
-class KCardCachePrivate
+class KCardCachePrivate : public QObject
 {
+    Q_OBJECT
 public:
     KPixmapCache* frontcache;
     KPixmapCache* backcache;
     QMutex* frontcacheMutex;
     QMutex* backcacheMutex;
-    QMutex* backRendererMutex;
     QMutex* frontRendererMutex;
+    QMutex* backRendererMutex;
     LoadThread* loadThread;
     QSize size;
     QString frontTheme;
     QString backTheme;
-    KSvgRenderer* backRenderer;
-    KSvgRenderer* frontRenderer;
+    KSvgRenderer* frontSvgRenderer;
+    KSvgRenderer* backSvgRenderer;
+
+    KSvgRenderer* frontRenderer();
+    KSvgRenderer* backRenderer();
     QPixmap renderFrontSvg( const QString& element );
     QPixmap renderBackSvg( const QString& element );
     void ensureNonNullPixmap( QPixmap& pix );
+public slots:
+    void submitRendering( const QString& key, const QImage& image );
 };
 
 class LoadThread : public QThread
 {
     Q_OBJECT
+signals:
+    void renderingDone( const QString& key, const QImage& image );
 public:
     LoadThread( KCardCache::LoadInfos infos, KCardCachePrivate* d );
     void setSize( const QSize& s );
     void setFrontTheme( const QString& frontTheme );
     void setBackTheme( const QString& backTheme );
+    void setElementsToLoad( const QStringList& elements );
     void run();
     void kill();
 private:
@@ -69,6 +80,7 @@ private:
     KCardCache::LoadInfos infos;
     bool doKill;
     QMutex* killMutex;
+    QStringList elementsToRender;
 };
 
 #endif
