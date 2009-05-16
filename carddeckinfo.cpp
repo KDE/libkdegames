@@ -307,7 +307,7 @@ QString getBackFileNameFromIndex( const QString &desktop )
 QString backSVGFilePath( const QString& name )
 {
     if ( !deckinfoStatic->svgBackInfo.contains( name ) ) return QString();
-    KCardThemeInfo v = deckinfoStatic->svgBackInfo.value( name );
+    const KCardThemeInfo &v = deckinfoStatic->svgBackInfo[name];
     return v.svgfile;
 }
 
@@ -316,7 +316,7 @@ QString backSVGFilePath( const QString& name )
 QString frontSVGFilePath( const QString& name )
 {
     if ( !deckinfoStatic->svgFrontInfo.contains( name ) ) return QString();
-    KCardThemeInfo v = deckinfoStatic->svgFrontInfo.value( name );
+    const KCardThemeInfo &v = deckinfoStatic->svgFrontInfo[name];
     return v.svgfile;
 }
 
@@ -325,7 +325,7 @@ QString frontSVGFilePath( const QString& name )
 QString backFilename( const QString& name )
 {
     if ( !deckinfoStatic->pngBackInfo.contains( name ) ) return QString();
-    KCardThemeInfo v = deckinfoStatic->pngBackInfo.value( name );
+    const KCardThemeInfo &v = deckinfoStatic->pngBackInfo[name];
     return v.path;
 }
 
@@ -334,7 +334,7 @@ QString backFilename( const QString& name )
 QString frontDir( const QString& name )
 {
     if ( !deckinfoStatic->pngFrontInfo.contains( name ) ) return QString();
-    KCardThemeInfo v = deckinfoStatic->pngFrontInfo.value( name );
+    const KCardThemeInfo &v = deckinfoStatic->pngFrontInfo[name];
     return v.path;
 }
 
