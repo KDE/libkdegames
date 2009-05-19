@@ -2,6 +2,7 @@
 Name=Ancient Egyptians
 Name[el]=Αρχαία Αίγυπτος
 Name[et]=Vana-Egiptus
+Name[nn]=Egypt i oldtida
 Name[pt]=Antigo Egipto
 Name[pt_BR]=Antigo Egipto
 Name[sv]=Forntida egyptier
@@ -10,6 +11,7 @@ Name[zh_TW]=古埃及
 Comment=An ancient Egyptian card deck.
 Comment[el]=Τραπουλόχαρτα με αρχαίο αιγυπτιακό στυλ.
 Comment[et]=Vana-Egiptuse stiilis kaardipakk.
+Comment[nn]=Egyptisk kortbakside.
 Comment[pt]=Um baralho de cartas do Antigo Egipto.
 Comment[pt_BR]=Um baralho de cartas do Antigo Egipto.
 Comment[sv]=En forntida egyptisk kortlek.

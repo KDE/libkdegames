@@ -2,6 +2,7 @@
 Name=Ancient Egyptians
 Name[el]=Αρχαία Αίγυπτος
 Name[et]=Vana-Egiptus
+Name[nn]=Egypt i oldtida
 Name[pt]=Antigo Egipto
 Name[pt_BR]=Antigo Egipto
 Name[sv]=Forntida egyptier
@@ -10,6 +11,7 @@ Name[zh_TW]=古埃及
 Comment=Egyptian style card back.
 Comment[el]=Τραπουλόχαρτα με αιγυπτιακό στυλ.
 Comment[et]=Egiptuse stiilis kaardipakk
+Comment[nn]=Egyptisk kortbakside.
 Comment[pt]=Faces traseiras das cartas com estilo Egípcio.
 Comment[pt_BR]=Faces traseiras das cartas com estilo Egípcio.
 Comment[sv]=Kortbaksidor med egyptisk stil.
