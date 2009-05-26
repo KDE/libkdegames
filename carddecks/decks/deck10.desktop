@@ -2,6 +2,8 @@
 Name=Paris
 Name[el]=Παρίσι
 Name[et]=Pariis
+Name[sr]=Париз
+Name[sr@latin]=Pariz
 Name[uk]=Париж
 Name[zh_CN]=巴黎
 Name[zh_TW]=巴黎
@@ -29,6 +31,8 @@ Comment[pt]=Clássico
 Comment[pt_BR]=Clássico
 Comment[ro]=Clasic
 Comment[sl]=Klasična
+Comment[sr]=Класични
+Comment[sr@latin]=Klasični
 Comment[sv]=Klassiskt
 Comment[tr]=Klasik
 Comment[uk]=Класична
