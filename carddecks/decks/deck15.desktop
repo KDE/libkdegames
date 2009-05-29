@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Ancient Egyptians
+Name[da]=Oldtidens egyptere
 Name[el]=Αρχαία Αίγυπτος
 Name[et]=Vana-Egiptus
 Name[nn]=Egypt i oldtida
@@ -12,6 +13,7 @@ Name[uk]=Давні єгиптяни
 Name[zh_CN]=古埃及
 Name[zh_TW]=古埃及
 Comment=Egyptian style card back.
+Comment[da]=Kortspil i egyptisk stil.
 Comment[el]=Τραπουλόχαρτα με αιγυπτιακό στυλ.
 Comment[et]=Egiptuse stiilis kaardipakk
 Comment[nn]=Egyptisk kortbakside.
