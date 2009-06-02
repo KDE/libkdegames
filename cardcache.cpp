@@ -294,8 +294,8 @@ void KCardCachePrivate::submitRendering( const QString& key, const QImage& image
     frontcache->insert( key, pix );
 }
 
-LoadThread::LoadThread( KCardCache::LoadInfos l_, KCardCachePrivate* d_ )
-    : d( d_ ), infos( l_ ), doKill( false ), killMutex( new QMutex )
+LoadThread::LoadThread( KCardCachePrivate* d_ )
+    : d( d_ ), doKill( false ), killMutex( new QMutex )
 {
 }
 
@@ -588,7 +588,7 @@ void KCardCache::loadTheme( LoadInfos infos )
         }
     }
 
-    d->loadThread = new LoadThread( infos, d );
+    d->loadThread = new LoadThread( d );
     d->loadThread->setBackTheme( d->backTheme );
     d->loadThread->setFrontTheme( d->frontTheme );
     d->loadThread->setSize( d->size );

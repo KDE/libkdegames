@@ -65,7 +65,7 @@ class LoadThread : public QThread
 signals:
     void renderingDone( const QString& key, const QImage& image );
 public:
-    LoadThread( KCardCache::LoadInfos infos, KCardCachePrivate* d );
+    LoadThread( KCardCachePrivate* d );
     void setSize( const QSize& s );
     void setFrontTheme( const QString& frontTheme );
     void setBackTheme( const QString& backTheme );
@@ -77,7 +77,6 @@ private:
     QString backTheme;
     QString frontTheme;
     QSize size;
-    KCardCache::LoadInfos infos;
     bool doKill;
     QMutex* killMutex;
     QStringList elementsToRender;
