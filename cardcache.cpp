@@ -594,7 +594,7 @@ void KCardCache::loadTheme( LoadInfos infos )
     d->loadThread->setSize( d->size );
     d->loadThread->setElementsToLoad( elements );
     d->connect( d->loadThread, SIGNAL(renderingDone(QString,QImage)), SLOT(submitRendering(QString,QImage)), Qt::QueuedConnection );
-    d->loadThread->start();
+    d->loadThread->start( QThread::IdlePriority );
 }
 
 QSizeF KCardCache::defaultFrontSize( const KCardInfo& info ) const
