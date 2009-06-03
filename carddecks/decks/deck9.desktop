@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Nicu Ornamental
+Name[de]=Nicu-Verzierung
 Name[el]=Διακοσμητικό Nicu
 Name[nn]=Nicu – ornamental
 Name[sr]=Нику орнаменти
@@ -9,7 +10,7 @@ Name[uk]=Орнамент Nicu
 Name[zh_CN]=Nicu 植物装饰
 Comment=SVG Ornamental
 Comment[cs]=SVG ornamentály
-Comment[de]=SVG-Verziehrung
+Comment[de]=SVG-Verzierung
 Comment[el]=Διακοσμητικό SVG
 Comment[es]=Ornamental SVG
 Comment[fr]=Ornemental SVG
