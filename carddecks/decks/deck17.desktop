@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Ancient Egyptians Dark
+Name[ca]=Egipcis antics fosc
 Name[da]=Oldtidsegyptisk mørk
 Name[de]=Antikes Ägypten (dunkel)
 Name[et]=Tume Vana-Egiptus
@@ -14,6 +15,7 @@ Name[x-test]=xxAncient Egyptians Darkxx
 Name[zh_CN]=黑夜下的古埃及
 Name[zh_TW]=古埃及黑暗
 Comment=Egyptian dark style card back.
+Comment[ca]=Dorsal de baralla d'estil egipci fosc.
 Comment[da]=Kortspil i egyptisk mørk stil.
 Comment[de]=Eine dunkles ägyptisches Blattdesign.
 Comment[et]=Egiptuse stiilis tume kaardipakk
