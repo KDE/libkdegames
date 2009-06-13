@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16px"
+   height="16px"
+   id="svg3487"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="7.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata34">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3489">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 8 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="16 : 8 : 1"
+       inkscape:persp3d-origin="8 : 5.3333333 : 1"
+       id="perspective3414" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.696216"
+     inkscape:cx="5.7566765"
+     inkscape:cy="-12.193042"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="1592"
+     inkscape:window-height="1123"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="4.2048349"
+       y="7.7177491"
+       id="text2407"><tspan
+         sodipodi:role="line"
+         id="tspan2409"
+         x="4.2048349"
+         y="7.7177491" /></text>
+    <path
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Linux Libertine;-inkscape-font-specification:Linux Libertine Bold"
+       d="M 5.7734375,3.0605469 C 5.4765595,3.0605588 5.2695284,3.1504024 5.1523438,3.3300781 C 5.0429662,3.5097771 4.9101538,3.9472766 4.7539062,4.6425781 L 3.3828125,4.4667969 L 4.15625,0.85742188 L 5.4101562,1.0449219 C 5.3710908,1.302748 5.4726532,1.4316541 5.7148438,1.4316406 L 12.535156,1.4316406 L 12.617188,1.6542969 C 10.585929,6.6074302 8.8945248,11.087894 7.5429688,15.095703 L 5.3398438,15.201172 L 5.1992188,14.908203 C 6.9257768,11.033207 8.5859314,7.0839922 10.179688,3.0605469 L 5.7734375,3.0605469"
+       id="text2436" />
+  </g>
+</svg>
