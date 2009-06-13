@@ -20,6 +20,7 @@ add_subdirectory( svg-standard )
 add_subdirectory( svg-tigullio-international )
 add_subdirectory( svg-xskat-french )
 add_subdirectory( svg-xskat-german )
+add_subdirectory( svg-william-tell )
 
 
 ########### install files ###############
