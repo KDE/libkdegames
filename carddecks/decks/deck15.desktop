@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Ancient Egyptians
 Name[ca]=Egipcis antics
+Name[cs]=Starověcí Egypťané
 Name[da]=Oldtidens egyptere
 Name[de]=Antike Ägypter
 Name[el]=Αρχαία Αίγυπτος
@@ -10,6 +11,7 @@ Name[fr]=Égypte ancienne
 Name[it]=Antichi egizi
 Name[km]=អេហ្ស៊ីប​បុរាណ
 Name[lv]=Senie ēģiptieši
+Name[nds]=Ole Ägyptern
 Name[nl]=Oude Egyptenaren
 Name[nn]=Egypt i oldtida
 Name[pt]=Antigo Egipto
@@ -29,8 +31,10 @@ Comment[de]=Ein Blattdesign im ägyptischen Stil.
 Comment[el]=Τραπουλόχαρτα με αιγυπτιακό στυλ.
 Comment[es]=Reverso de estilo egipcio.
 Comment[et]=Egiptuse stiilis kaardipakk
+Comment[fr]=Un dos de cartes dans le style égyptien.
 Comment[it]=Dorso delle carte in stile egizio
 Comment[lv]=Ēģiptes stila kāršu noformējums.
+Comment[nds]=Koorten-Achtersiet in ägyptsch Stil
 Comment[nl]=Egyptische stijl kaartrug.
 Comment[nn]=Egyptiske kort.
 Comment[pt]=Faces traseiras das cartas com estilo Egípcio.
