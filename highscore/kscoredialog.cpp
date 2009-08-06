@@ -78,6 +78,7 @@ class KScoreDialog::KScoreDialogPrivate
         QMap<int, QString> header; ///<Header for fields. Maps field index to a string
         QMap<int, QString> key; ///<Keys for fields. Maps field index to a string
         QString player;
+        int lastHighPosition; /// remember the position to delete if the user wants to forget
 
         //Q-Pointer
         KScoreDialogPrivate(KScoreDialog* parent):q(parent){}
@@ -524,7 +525,8 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
         {
             d->latest = QPair<QByteArray,int>(d->configGroup,i+1);
             d->scores[d->configGroup].insert(i, score);
-            d->scores[d->configGroup].removeAt(10);
+            // Save the position to delete in case of Forget
+            d->lastHighPosition = i;
 
             if(score[Name].isEmpty()) //If we don't have a name, prompt the player.
             {
@@ -550,7 +552,12 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
                 d->newName = QPair<QByteArray,int>(d->configGroup,i+1);
 
                 setButtons(Ok|Cancel);
+                setButtonText(Ok, i18n("&Remember"));
+                setButtonText(Cancel, i18n("&Forget"));
+                setButtonToolTip(Ok, i18n("Remember this highscore"));
+                setButtonToolTip(Cancel, i18n("Forget this highscore"));
                 connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
+                connect(this, SIGNAL(cancelClicked()), SLOT(slotForgetScore()));
             }
             else
                 d->saveScores();
@@ -588,6 +595,7 @@ void KScoreDialog::exec()
 void KScoreDialog::slotGotReturn()
 {
     QTimer::singleShot(0, this, SLOT(slotGotName()));
+    // TODO: Is it better to hide the window, as if any button where pressed?
 }
 
 void KScoreDialog::slotGotName()
@@ -606,10 +614,33 @@ void KScoreDialog::slotGotName()
     label->setFont(bold);
     label->setText(d->player);
     d->stack[d->newName.first].at((d->newName.second-1))->setCurrentWidget(label);
+    d->stack[d->newName.first].at((d->newName.second-1))->removeWidget(d->edit);
     delete d->edit;
     d->edit = 0;
     d->newName = QPair<QByteArray,int>(QByteArray(),-1);
+    d->scores[d->configGroup].removeAt(10);
+    d->comment.clear();  // hide the congratulations
+    d->commentLabel->hide();
+    setButtons(Close);
 }
+
+void KScoreDialog::slotForgetScore()
+{
+    if (d->newName.second == -1) return;
+    // remove the editor from the stack
+    d->stack[d->newName.first].at((d->newName.second-1))->removeWidget(d->edit);
+    // delete the editor
+    delete d->edit;
+    d->edit = 0;
+    // avoid to recreate the KTextEdit widget
+    d->newName = QPair<QByteArray,int>(QByteArray(),-1);
+    // delete the highscore to forget
+    d->scores[d->configGroup].removeAt(d->lastHighPosition);
+    d->comment.clear();
+    d->commentLabel->hide();
+    setButtons(Close);
+}
+
 
 int KScoreDialog::highScore()
 {

@@ -245,6 +245,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         private Q_SLOTS:
             void slotGotReturn();
             void slotGotName();
+            void slotForgetScore();
 
         private:
             void keyPressEvent(QKeyEvent *ev);
