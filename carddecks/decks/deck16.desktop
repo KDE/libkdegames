@@ -34,4 +34,7 @@ Name[x-test]=xxFuturexx
 Name[zh_CN]=未来
 Name[zh_TW]=未來
 Comment=Futuristic, minimal card design.
+Comment[pt]=Desenho de cartas minimalista e futurista.
+Comment[pt_BR]=Desenho de cartas minimalista e futurista.
+Comment[uk]=Футуристичний мінімалістичний дизайн карт.
 SVG=deck16.svgz
