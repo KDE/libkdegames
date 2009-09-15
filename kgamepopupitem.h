@@ -45,6 +45,7 @@ class KGamePopupItemPrivate;
 class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     /**
      * Possible values for message showing mode in respect to a previous
