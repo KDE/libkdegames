@@ -1,8 +1,10 @@
 [KDE Backdeck]
 Name=White NICU
 Name[ca]=NICU Blanc
+Name[da]=White NICU
 Name[de]=Nicu (weiß)
 Name[el]=Λευκό NICU
+Name[en_GB]=White NICU
 Name[es]=NICU blanco
 Name[et]=Valge NICU
 Name[fr]=NICU blanc
@@ -11,6 +13,7 @@ Name[it]=NICU bianco
 Name[km]=NICU ស
 Name[lv]=Balts NICU
 Name[nds]=Witt NICU
+Name[nl]=White NICU
 Name[nn]=Nicu – kvit
 Name[pt]=NICU Branco
 Name[pt_BR]=NICU Branco
@@ -23,6 +26,7 @@ Name[tr]=Beyaz NICU
 Name[uk]=Білий NICU
 Name[x-test]=xxWhite NICUxx
 Name[zh_CN]=白色植物装饰
+Name[zh_TW]=White NICU
 Preview=11.png
 SVG=white.svgz
 Back=Nicu Ornamental

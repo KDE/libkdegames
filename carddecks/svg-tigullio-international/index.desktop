@@ -1,7 +1,15 @@
 [KDE Backdeck]
 Name=Tigullio International
+Name[ca]=Tigullio International
+Name[cs]=Tigullio International
+Name[da]=Tigullio International
+Name[de]=Tigullio International
 Name[el]=Διεθνές Tigullio
+Name[en_GB]=Tigullio International
 Name[es]=Tigullio Internacional
+Name[et]=Tigullio International
+Name[fr]=Tigullio International
+Name[hu]=Tigullio International
 Name[it]=Tigullio internazionale
 Name[km]=Tigullio អន្តរជាតិ
 Name[lv]=Tigullio internacionālais
@@ -16,8 +24,10 @@ Name[sr]=Тигулио интернационал
 Name[sr@latin]=Tigullio internacional
 Name[sv]=Tigullio internationell
 Name[tr]=Tigullio Uluslararası
+Name[uk]=Tigullio International
 Name[x-test]=xxTigullio Internationalxx
 Name[zh_CN]=国际提古里奥
+Name[zh_TW]=Tigullio International
 Preview=queen-of-hearts.png
 SVG=tigullio-international.svgz
 Back=Tigullio International
