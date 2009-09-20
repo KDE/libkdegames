@@ -70,10 +70,8 @@
        </widget>
       </item>
      </layout>
-     <zorder>backPreview</zorder>
      <zorder>backList</zorder>
      <zorder>frontGroupBox</zorder>
-     <zorder>checkBoxSeparateBacks</zorder>
     </widget>
    </item>
    <item row="1" column="0" colspan="2" >
