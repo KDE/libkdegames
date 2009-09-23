@@ -46,6 +46,7 @@ class KGameThemeSelector::KGameThemeSelectorPrivate
 
         // private slots
         void _k_updatePreview();
+        void _k_updateThemeList(const QString& strTheme);
         void _k_openKNewStuffDialog();
 };
 
@@ -70,6 +71,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     //The lineEdit widget holds our theme path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
     ui.kcfg_Theme->hide();
+    connect(ui.kcfg_Theme, SIGNAL(textChanged(const QString&)), q, SLOT(_k_updateThemeList(const QString&)));
 
     //Disable KNS button?
     if (knsflags==KGameThemeSelector::NewStuffDisableDownload) {
@@ -173,6 +175,22 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
     //Draw the preview
     QPixmap pix(seltheme->preview());
     ui.themePreview->setPixmap(pix.scaled(ui.themePreview->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+}
+
+void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updateThemeList(const QString& strTheme)
+{
+    //find theme and set selection to the current theme; happens when pressing "Default"
+    if(themeMap.value(ui.themeList->currentItem()->text())->fileName() != strTheme)
+    {
+        for(int i = 0; i < ui.themeList->count(); i++)
+        {
+            if(themeMap.value(ui.themeList->item(i)->text())->fileName() == strTheme)
+            {
+                ui.themeList->setCurrentItem(ui.themeList->item(i));
+                break;
+            }
+        }
+    }
 }
 
 void KGameThemeSelector::KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
