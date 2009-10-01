@@ -75,7 +75,7 @@ inline QTextStream &operator <<(QTextStream &s, const KGrid2D::Coord &c) {
 
 inline QTextStream &operator <<(QTextStream &s, const KGrid2D::CoordList &list)
 {
-    for(KGrid2D::CoordList::const_iterator i=list.begin(); i!=list.end(); ++i)
+    for(KGrid2D::CoordList::const_iterator i=list.constBegin(); i!=list.constEnd(); ++i)
         s << *i;
 	return s;
 }
@@ -491,10 +491,10 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
         for (uint i=1; i<distance; i++) {
             CoordList newRing;
             CoordList::const_iterator it;
-            for (it=ring.begin(); it!=ring.end(); ++it) {
+            for (it=ring.constBegin(); it!=ring.constEnd(); ++it) {
                 CoordList n = neighbours(*it, insideOnly);
                 CoordList::const_iterator it2;
-                for (it2=n.begin(); it2!=n.end(); ++it2)
+                for (it2=n.constBegin(); it2!=n.constEnd(); ++it2)
                     if ( center.indexOf(*it2)==-1
                          && ring.indexOf(*it2)==-1
                          && newRing.indexOf(*it2)==-1 )
@@ -505,7 +505,7 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
         }
         if ( !all ) return ring;
         CoordList::const_iterator it;
-        for (it=ring.begin(); it!=ring.end(); ++it)
+        for (it=ring.constBegin(); it!=ring.constEnd(); ++it)
             center.append(*it);
         center.removeAll(c);
         return center;
