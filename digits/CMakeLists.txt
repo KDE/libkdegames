@@ -1,6 +1,4 @@
 
-add_subdirectory( themes ) 
-
 ########### install files ###############
 
 install(FILES
