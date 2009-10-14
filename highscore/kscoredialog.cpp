@@ -554,8 +554,8 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
                 setButtons(Ok|Cancel);
                 setButtonText(Ok, i18n("&Remember"));
                 setButtonText(Cancel, i18n("&Forget"));
-                setButtonToolTip(Ok, i18n("Remember this highscore"));
-                setButtonToolTip(Cancel, i18n("Forget this highscore"));
+                setButtonToolTip(Ok, i18n("Remember this high score"));
+                setButtonToolTip(Cancel, i18n("Forget this high score"));
                 connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
                 connect(this, SIGNAL(cancelClicked()), SLOT(slotForgetScore()));
             }

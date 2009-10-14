@@ -54,7 +54,7 @@ KGpiMainWindow::KGpiMainWindow()
 
     connect( m_mainWid.mesTimeout, SIGNAL(valueChanged(int)), SLOT(onTimeoutChanged(int)) );
     m_mainWid.mesTimeout->setValue( m_popupItem->messageTimeout() );
-    m_mainWid.mesTimeout->setSuffix( ki18np(" milisecond", " miliseconds") );
+    m_mainWid.mesTimeout->setSuffix( ki18np(" millisecond", " milliseconds") );
     m_mainWid.opacity->setValue( static_cast<int>(m_popupItem->messageOpacity()*100) );
     setCentralWidget(wid);
 
