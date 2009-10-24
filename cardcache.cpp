@@ -246,14 +246,20 @@ QString keyForPixmap( const QString& theme, const QString& element, const QSize&
 KSvgRenderer* KCardCachePrivate::frontRenderer()
 {
     if ( !frontSvgRenderer )
+    {
+        kDebug() << "Loading front SVG renderer";
         frontSvgRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( frontTheme ) );
+    }
     return frontSvgRenderer;
 }
 
 KSvgRenderer* KCardCachePrivate::backRenderer()
 {
     if ( !backSvgRenderer )
+    {
+        kDebug() << "Loading back SVG renderer";
         backSvgRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( backTheme ) );
+    }
     return backSvgRenderer;
 }
 
@@ -277,6 +283,7 @@ void KCardCachePrivate::ensureNonNullPixmap( QPixmap& pix )
 
 QPixmap KCardCachePrivate::renderFrontSvg( const QString& element )
 {
+    kDebug() << "Renderering" << element << "in main thread.";
     QMutexLocker l( frontRendererMutex );
     return doRender( element, frontRenderer(), size );
 }
@@ -289,6 +296,7 @@ QPixmap KCardCachePrivate::renderBackSvg( const QString& element )
 
 void KCardCachePrivate::submitRendering( const QString& key, const QImage& image )
 {
+    kDebug() << "Received render of" << key << "from rendering thread.";
     QPixmap pix = QPixmap::fromImage( image );
     QMutexLocker l( frontcacheMutex );
     frontcache->insert( key, pix );
