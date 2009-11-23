@@ -54,4 +54,4 @@ Comment[x-test]=xxEgyptian style card back.xx
 Comment[zh_CN]=埃及风的牌垛。
 Comment[zh_TW]=古埃及樣式的紙牌圖案。
 SVG=deck15.svgz
-default=true
+Default=true
