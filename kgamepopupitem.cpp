@@ -63,7 +63,13 @@ void TextItemWithOpacity::paint( QPainter* p, const QStyleOptionGraphicsItem *op
     // hope that it is ok to call this function here - i.e. I hope it won't be too expensive :)
     // we call it here (and not in setTextColor), because KstatefulBrush
     // absolutely needs QWidget parameter :)
-    setDefaultTextColor(m_brush.brush(widget).color());
+    //NOTE from majewsky: For some weird reason, setDefaultTextColor does on some systems not check
+    //whether the given color is equal to the one already set. Just calling setDefaultTextColor without
+    //this check may result in an infinite loop of paintEvent -> setDefaultTextColor -> update -> paintEvent...
+    const QColor textColor = m_brush.brush(widget).color();
+    if (textColor != defaultTextColor())
+        setDefaultTextColor(textColor);
+    //render contents
     p->save();
     p->setOpacity(m_opacity);
     QGraphicsTextItem::paint(p,option,widget);
