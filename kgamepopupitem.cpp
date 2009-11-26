@@ -68,7 +68,9 @@ void TextItemWithOpacity::paint( QPainter* p, const QStyleOptionGraphicsItem *op
     //this check may result in an infinite loop of paintEvent -> setDefaultTextColor -> update -> paintEvent...
     const QColor textColor = m_brush.brush(widget).color();
     if (textColor != defaultTextColor())
+    {
         setDefaultTextColor(textColor);
+    }
     //render contents
     p->save();
     p->setOpacity(m_opacity);
@@ -215,9 +217,13 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     p->setPen(pen);
 
     if( d->m_animOpacity != -1) // playing Center animation
+    {
         p->setOpacity(d->m_animOpacity);
+    }
     else
+    {
         p->setOpacity(d->m_opacity);
+    }
     p->setBrush(d->m_brush.brush(widget));
     p->drawPath(d->m_path);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
@@ -230,9 +236,13 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     if(d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive())
     {
         if (mode == ReplacePrevious)
+        {
             forceHide(InstantHide);
+        }
         else
+        {
             return;// we're already showing a message
+        }
     }
 
     // NOTE: we blindly take first visible view we found. I.e. we don't support
@@ -245,7 +255,9 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
         }
     }
     if (!sceneView)
+    {
         sceneView = scene()->views().at(0);
+    }
 
     QPolygonF poly = sceneView->mapToScene( sceneView->viewport()->contentsRect() );
     d->m_visibleSceneRect = poly.boundingRect();
@@ -261,7 +273,9 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     qreal w = d->m_textChildItem->boundingRect().width()+MARGIN*2+d->m_iconPix.width()+SOME_SPACE;
     qreal h = d->m_textChildItem->boundingRect().height()+MARGIN*2;
     if( d->m_iconPix.height() > h )
+    {
         h = d->m_iconPix.height() + MARGIN*2;
+	}
     d->m_boundRect = QRectF(0, 0, w, h);
 
     // adjust to take into account the width of the pen
@@ -334,9 +348,13 @@ void KGamePopupItem::setupTimeline()
 void KGamePopupItem::animationFrame(int frame)
 {
     if( d->m_position == TopLeft || d->m_position == BottomLeft )
+    {
         setPos( d->m_visibleSceneRect.left()+SHOW_OFFSET, frame );
+    }
     else if( d->m_position == TopRight || d->m_position == BottomRight )
+    {
         setPos( d->m_visibleSceneRect.right()-d->m_boundRect.width()-SHOW_OFFSET, frame );
+    }
     else if( d->m_position == Center )
     {
         d->m_animOpacity = frame*d->m_opacity/d->m_timeLine.duration();
@@ -348,8 +366,9 @@ void KGamePopupItem::animationFrame(int frame)
 void KGamePopupItem::playHideAnimation()
 {
     if( d->m_hoveredByMouse )
+    {
         return;
-
+    }
     // let's hide
     d->m_timeLine.setDirection( QTimeLine::Backward );
     d->m_timeLine.start();
@@ -410,7 +429,9 @@ void KGamePopupItem::hoverLeaveEvent( QGraphicsSceneHoverEvent* )
     d->m_hoveredByMouse = false;
 
     if( d->m_timeout != 0 && !d->m_timer.isActive() && d->m_timeLine.state() != QTimeLine::Running )
+    {
         playHideAnimation(); // let's hide
+	}
 }
 
 void KGamePopupItem::setMessageIcon( const QPixmap& pix )
@@ -428,7 +449,9 @@ int KGamePopupItem::messageTimeout() const
 void KGamePopupItem::forceHide(HideType howToHide)
 {
     if(!isVisible())
+    {
         return;
+    }
 
     if(howToHide == InstantHide)
     {
@@ -466,12 +489,15 @@ void KGamePopupItem::setTextColor( const QColor& color )
 void KGamePopupItem::onLinkHovered(const QString& link)
 {
     if(link.isEmpty())
+    {
         d->m_textChildItem->setCursor( Qt::ArrowCursor );
+    }
     else
+    {
         d->m_textChildItem->setCursor( Qt::PointingHandCursor );
+    }
 
     d->m_linkHovered = !link.isEmpty();
-
     emit linkHovered(link);
 }
 
@@ -498,14 +524,18 @@ void KGamePopupItem::mouseReleaseEvent( QGraphicsSceneMouseEvent* )
     // special signal to indicate mouse click which we catch in a onTextItemClicked()
     // slot
     if (d->m_hideOnClick)
+    {
         forceHide();
+    }
 }
 
 void KGamePopupItem::onTextItemClicked()
 {
     // if link is hovered we don't hide as click should go to the link
     if (d->m_hideOnClick && !d->m_linkHovered)
+    {
         forceHide();
+    }
 }
 
 #include "moc_kgamepopupitem.cpp" // For automocing KGamePopupItem
