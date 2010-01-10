@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Oxygen White
 Name[ca]=Oxygen-blanc
+Name[ca@valencia]=Oxygen-blanc
 Name[cs]=Oxygen - Bílý
 Name[da]=Oxygen-hvid
 Name[de]=Oxygen (weiß)
@@ -34,6 +35,7 @@ Name[zh_CN]=氧气-白
 Name[zh_TW]=Oxygen White
 Comment=SVG Oxygen
 Comment[ca]=SVG Oxygen
+Comment[ca@valencia]=SVG Oxygen
 Comment[cs]=SVG Oxygen
 Comment[da]=SVG Oxygen
 Comment[de]=SVG-Oxygen

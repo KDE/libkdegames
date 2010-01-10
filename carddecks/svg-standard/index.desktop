@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Standard
 Name[ca]=Estàndard
+Name[ca@valencia]=Estàndard
 Name[cs]=Standardní
 Name[da]=Standard
 Name[de]=Standard
@@ -42,6 +43,7 @@ Comment[af]=Standaard Kde kaart stel\nGPL lisensie
 Comment[be]=Звычайная калода картаў KDE\nGPL license
 Comment[bn]=কে.ডি.ই.-র সাধারণ তাস সেট\nজি.পি.এল. লাইসেন্স
 Comment[ca]=Joc de cartes estàndard per al KDE sota\nLlicència GPL
+Comment[ca@valencia]=Joc de cartes estàndard per al KDE sota\nLlicència GPL
 Comment[cs]=Standardní sada karet KDE\nGPL licence
 Comment[cy]=Trwydded GPL safonol\nar gyfer set cerdiau KDE
 Comment[da]=Standard KDE-kortspil\nGPL-licens
