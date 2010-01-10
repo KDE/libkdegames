@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Diamond Tree
 Name[ca]=Arbre de diamants
+Name[ca@valencia]=Arbre de diamants
 Name[cs]=Diamond Tree
 Name[da]=Diamond Tree
 Name[de]=Diamantenbaum
@@ -31,6 +32,7 @@ Name[zh_CN]=钻石树
 Name[zh_TW]=鑽石樹
 Comment=Simple, yet visually pleasing card back
 Comment[ca]=Dorsal de carta simple, però visualment agradable
+Comment[ca@valencia]=Dorsal de carta simple, però visualment agradable
 Comment[da]=Enkelt og dog synligt behageligt kortspil
 Comment[de]=Ein einfaches und zugleich visuell ansprechendes Blattdesign.
 Comment[el]=Απλό και ταυτόχρονα ευχάριστο θέμα χαρτιών
@@ -62,6 +64,7 @@ Comment[zh_CN]=简单，却活灵活现的牌垛
 Comment[zh_TW]=簡單，好看的撲克牌圖案
 Comment=Simple, yet visually pleasing card back.
 Comment[ca]=Dorsal de carta simple, però visualment agradable.
+Comment[ca@valencia]=Dorsal de carta simple, però visualment agradable.
 Comment[da]=Enkelt og dog synligt behageligt kortspil.
 Comment[de]=Ein einfaches und zugleich visuell ansprechendes Blattdesign.
 Comment[el]=Απλό και ταυτόχρονα ευχάριστο θέμα χαρτιών.

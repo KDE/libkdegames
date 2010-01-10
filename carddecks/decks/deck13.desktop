@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Oxygen
 Name[ca]=Oxygen
+Name[ca@valencia]=Oxygen
 Name[cs]=Oxygen
 Name[da]=Oxygen
 Name[de]=Oxygen
@@ -48,6 +49,7 @@ Name[zh_CN]=Oxygen
 Name[zh_TW]=Oxygen
 Comment=SVG Oxygen
 Comment[ca]=SVG Oxygen
+Comment[ca@valencia]=SVG Oxygen
 Comment[cs]=SVG Oxygen
 Comment[da]=SVG Oxygen
 Comment[de]=SVG-Oxygen
