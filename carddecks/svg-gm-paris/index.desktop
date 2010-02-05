@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Paris
 Name[ca]=Paris
+Name[ca@valencia]=Pares
 Name[cs]=Paris
 Name[da]=Paris
 Name[de]=Paris
@@ -14,6 +15,7 @@ Name[gl]=París
 Name[hu]=Párizs
 Name[it]=Parigi
 Name[lv]=Parīze
+Name[nb]=Paris
 Name[nds]=Paris
 Name[nl]=Parijs
 Name[nn]=Paris
@@ -21,8 +23,11 @@ Name[pl]=Paryż
 Name[pt]=Paris
 Name[pt_BR]=Paris
 Name[ru]=Париж
+Name[sk]=Paríž
 Name[sl]=Pariz
 Name[sr]=Париз
+Name[sr@ijekavian]=Париз
+Name[sr@ijekavianlatin]=Pariz
 Name[sr@latin]=Pariz
 Name[sv]=Paris
 Name[tr]=Paris

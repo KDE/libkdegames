@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Penguin
 Name[ca]=Pingüí
+Name[ca@valencia]=Pingüí
 Name[cs]=Tučňák
 Name[da]=Pingvin
 Name[de]=Pinguin
@@ -24,8 +25,11 @@ Name[pt]=Pinguim
 Name[pt_BR]=Pinguim
 Name[ru]=Пингвин
 Name[se]=Piŋviidna
+Name[sk]=Tučniak
 Name[sl]=Pingvin
 Name[sr]=Пингвин
+Name[sr@ijekavian]=Пингвин
+Name[sr@ijekavianlatin]=Pingvin
 Name[sr@latin]=Pingvin
 Name[sv]=Pingvin
 Name[tr]=Penguen

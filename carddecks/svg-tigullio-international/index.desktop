@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Tigullio International
 Name[ca]=Tigullio International
+Name[ca@valencia]=Tigullio International
 Name[cs]=Tigullio International
 Name[da]=Tigullio International
 Name[de]=Tigullio International
@@ -13,6 +14,7 @@ Name[gl]=Tigullio International
 Name[hu]=Tigullio International
 Name[it]=Tigullio internazionale
 Name[lv]=Tigullio internacionālais
+Name[nb]=Tigullio internasjonal
 Name[nds]=Tigullio Internatschonaal
 Name[nl]=Tigullio Internationaal
 Name[nn]=Tigullio internasjonal
@@ -20,8 +22,11 @@ Name[pl]=Tigullio International
 Name[pt]=Tigullio Internacional
 Name[pt_BR]=Tigullio Internacional
 Name[ru]=Tigullio международный
+Name[sk]=Tigullio International
 Name[sl]=Mednarodni Tigullio
 Name[sr]=Тигулио интернационал
+Name[sr@ijekavian]=Тигулио интернационал
+Name[sr@ijekavianlatin]=Tigullio internacional
 Name[sr@latin]=Tigullio internacional
 Name[sv]=Tigullio internationell
 Name[tr]=Tigullio Uluslararası

@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Penguins
 Name[ca]=Pingüins
+Name[ca@valencia]=Pingüins
 Name[cs]=Tučňáci
 Name[da]=Pingviner
 Name[de]=Pinguine
@@ -11,6 +12,7 @@ Name[et]=Pingviinid
 Name[eu]=Pinguinoak
 Name[fr]=Manchots
 Name[gl]=Pingüíns
+Name[hr]=Penguins
 Name[hu]=Pingvinek
 Name[it]=Pinguini
 Name[ja]=ペンギン
@@ -24,8 +26,11 @@ Name[pt]=Pinguins
 Name[pt_BR]=Pinguins
 Name[ru]=Пингвины
 Name[se]=Pingviinnat
+Name[sk]=Tučniaci
 Name[sl]=Pingvini
 Name[sr]=Пингвини
+Name[sr@ijekavian]=Пингвини
+Name[sr@ijekavianlatin]=Pingvini
 Name[sr@latin]=Pingvini
 Name[sv]=Pingviner
 Name[tr]=Penguenler

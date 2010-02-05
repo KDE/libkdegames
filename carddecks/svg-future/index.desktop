@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Future Simple
 Name[ca]=Futur senzill
+Name[ca@valencia]=Futur senzill
 Name[da]=Fremtids simpelt
 Name[de]=Zukunft (einfach)
 Name[el]=Μέλλον απλό
@@ -12,14 +13,19 @@ Name[gl]=Futuro simple
 Name[hu]=Egyszerű
 Name[it]=Futuro semplice
 Name[lv]=Vienkāršs futūristisks
+Name[nb]=Futuristisk enkel
 Name[nds]=Tokunft eenfach
 Name[nl]=Toekomst eenvoudig
 Name[nn]=Futuristisk enkel
 Name[pl]=Przyszły prosty
 Name[pt]=Futuro Simples
 Name[pt_BR]=Futuro simples
+Name[ru]=Простота будущего
+Name[sk]=Jednoduchá budúcnosť
 Name[sl]=Preprosta prihodnost
 Name[sr]=Будући једноставни
+Name[sr@ijekavian]=Будући једноставни
+Name[sr@ijekavianlatin]=Budući jednostavni
 Name[sr@latin]=Budući jednostavni
 Name[sv]=Framtid enkel
 Name[tr]=Basit Gelecek

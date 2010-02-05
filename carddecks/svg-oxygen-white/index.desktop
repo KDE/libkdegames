@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Oxygen White
 Name[ca]=Oxygen-blanc
+Name[ca@valencia]=Oxygen-blanc
 Name[cs]=Oxygen - Bílý
 Name[da]=Oxygen-hvid
 Name[de]=Oxygen (weiß)
@@ -13,6 +14,7 @@ Name[gl]=Oxygen branco
 Name[hu]=Oxygen (fehér)
 Name[it]=Oxygen bianco
 Name[lv]=Oxygen White
+Name[nb]=Oxygen hvit
 Name[nds]=Oxygen-Witt
 Name[nl]=Oxygen-wit
 Name[nn]=Oksygen kvit
@@ -20,8 +22,11 @@ Name[pl]=Biały Oxygen
 Name[pt]=Oxygen Branco
 Name[pt_BR]=Oxygen branco
 Name[ru]=Белый Oxygen
+Name[sk]=Oxygen - biely
 Name[sl]=Kisik - bela
 Name[sr]=Кисеоник‑бели
+Name[sr@ijekavian]=Кисеоник-бијели
+Name[sr@ijekavianlatin]=Kiseonik-bijeli
 Name[sr@latin]=Kiseonik-beli
 Name[sv]=Oxygen-vit
 Name[tr]=Oxygen Beyaz

@@ -1,6 +1,7 @@
 [KDE Backdeck]
 Name=Oxygen
 Name[ca]=Oxygen
+Name[ca@valencia]=Oxygen
 Name[cs]=Oxygen
 Name[da]=Oxygen
 Name[de]=Oxygen
@@ -19,7 +20,6 @@ Name[hne]=आक्सीजन
 Name[hu]=Oxygen
 Name[it]=Oxygen
 Name[ja]=Oxygen
-Name[km]=អុកស៊ីសែន
 Name[ko]=Oxygen
 Name[lt]=Oxygen
 Name[lv]=Oxygen
@@ -33,8 +33,11 @@ Name[pt]=Oxygen
 Name[pt_BR]=Oxygen
 Name[ro]=Oxygen
 Name[ru]=Oxygen
+Name[sk]=Oxygen
 Name[sl]=Kisik
 Name[sr]=Кисеоник
+Name[sr@ijekavian]=Кисеоник
+Name[sr@ijekavianlatin]=Kiseonik
 Name[sr@latin]=Kiseonik
 Name[sv]=Oxygen
 Name[te]=ఆక్సీజన్
