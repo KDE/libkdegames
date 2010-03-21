@@ -180,7 +180,8 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
 void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updateThemeList(const QString& strTheme)
 {
     //find theme and set selection to the current theme; happens when pressing "Default"
-    if(themeMap.value(ui.themeList->currentItem()->text())->fileName() != strTheme)
+    QListWidgetItem * currentItem = ui.themeList->currentItem();
+    if(!currentItem || themeMap.value(currentItem->text())->fileName() != strTheme)
     {
         for(int i = 0; i < ui.themeList->count(); i++)
         {
