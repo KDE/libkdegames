@@ -22,8 +22,8 @@
 #include <KLocale>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
-#include <knewstuff2/engine.h>
 #include <KComponentData>
+#include <KNS3/DownloadDialog>
 
 #include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
@@ -196,12 +196,10 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updateThemeList(const QSt
 
 void KGameThemeSelector::KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
 {
-    KNS::Entry::List entries = KNS::Engine::download();
-    //rescan themes directory
-    QString currentthemepath = ui.kcfg_Theme->text();
-    if (entries.size()>0) findThemes(currentthemepath);
-    //Needed as the static KNS constructor made copies
-    qDeleteAll(entries);
+    KNS3::DownloadDialog dialog( q );
+    dialog.exec();
+    if ( !dialog.changedEntries().isEmpty() )
+        findThemes( ui.kcfg_Theme->text() );
 }
 
 #include "kgamethemeselector.moc"
