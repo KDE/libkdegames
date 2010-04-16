@@ -29,7 +29,7 @@ class KConfig;
 
 /**
  * \class KHighscore khighscore.h <KHighscore>
- * 
+ *
  * @short Class for managing highscore tables
  *
  * This is the KDE class for saving and reading highscore tables. It offers the
@@ -261,12 +261,12 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * default group is used.
          **/
         void setHighscoreGroup(const QString& groupname = "");
-        
+
         /**
          * Returns a list of group names without the KHighscore_ prexix.
          * E.g, "KHighscore", "KHighscore_Easy", "KHighscore_Medium"
          * will return "", "Easy", "Medium"
-         * 
+         *
          * @return A list of highscore groups.
          **/
         QStringList groupList() const;
