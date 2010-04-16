@@ -148,7 +148,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          */
         ~KHighscore();
 
-	/**
+        /**
          * @param entry The number of the entry / the placing of the player
          * @param key A key for this entry. E.g. "name" for the name of the
          * player. Nearly the same as the usual keys in KConfig - but they
@@ -157,20 +157,20 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          **/
         void writeEntry(int entry, const QString& key, const QString& value);
 
-	/**
+        /**
          * This is an overloaded member function, provided for convenience.
          * It differs from the above function only in what argument(s) it accepts.
          **/
         void writeEntry(int entry, const QString& key, int value);
 
-	/**
+        /**
          * This is an overloaded member function, provided for convenience.
          * It differs from the above function only in what argument(s) it accepts.
          * See KConfigBase documentation for allowed QVariant::Type.
          **/
         void writeEntry(int entry, const QString& key, const QVariant &value);
 
-	/**
+        /**
          * Reads an entry from the highscore table.
          * @param entry The number of the entry / the placing to be read
          * @param key The key of the entry. E.g. "name" for the name of the
@@ -183,7 +183,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          **/
         QString readEntry(int entry, const QString& key, const QString& pDefault = "") const;
 
-	/**
+        /**
          * Read a numeric value.
          * @param entry The number of the entry / the placing to be read
          * @param key The key of the entry. E.g. "name" for the name of the
@@ -205,13 +205,13 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          */
         QVariant readPropertyEntry(int entry, const QString &key, const QVariant &pDefault) const;
 
-	/**
+        /**
          * @return True if the highscore table contains the entry/key pair,
          * otherwise false
          **/
         bool hasEntry(int entry, const QString& key) const;
 
-	/**
+        /**
          * Reads a list of entries from the highscore table starting at 1 until
          * lastEntry. If an entry between those numbers doesn't exist the
          * function aborts reading even if after the missing entry is an
@@ -225,12 +225,12 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * are prefixed with the entry number
          * @param lastEntry the last entry which will be includes into the list.
          * 1 will include a list with maximal 1 entry - 20 a list with maximal
-	 * 20 entries. If lastEntry is <= 0 then rading is only stopped when
-	 * when an entry does not exist.
+         * 20 entries. If lastEntry is <= 0 then rading is only stopped when
+         * when an entry does not exist.
          **/
         QStringList readList(const QString& key, int lastEntry = 20) const;
 
-	/**
+        /**
          * Writes a list of entries to the highscore table.
          *
          * The first entry is prefixed with "1". Using this method is a short
@@ -243,7 +243,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          **/
         void writeList(const QString& key, const QStringList& list);
 
-	/**
+        /**
          * You can use this function to indicate whether KHighscore created a
          * highscore table before and - if not - read your old (non-KHighscore)
          * table instead.
@@ -253,7 +253,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          **/
         bool hasTable() const;
 
-	/**
+        /**
          * Set the new highscore group. The group is being prefixed with
          * "KHighscore_" in the table.
          * @param groupname The new groupname. E.g. use "easy" for the easy
@@ -271,7 +271,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          **/
         QStringList groupList() const;
 
-	/**
+        /**
          * @return The currently used group. This doesn't contain the prefix
          * ("KHighscore_") but the same as setHighscoreGroup uses. The
          * default is QString()
@@ -279,13 +279,13 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         QString highscoreGroup() const;
 
     protected:
-	/**
+        /**
          * @return A groupname to be used in KConfig. Used internally to
          * prefix the value from highscoreGroup() with "KHighscore_"
          **/
         QString group() const;
 
-	/**
+        /**
          * @return A pointer to the KConfig object to be used. This is
          * either KGlobal::config() (default) or a KSimpleConfig object for
          * a system-wide highscore file.
