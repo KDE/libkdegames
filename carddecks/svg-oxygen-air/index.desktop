@@ -1,6 +1,8 @@
 [KDE Backdeck]
 Name=Oxygen Air
+Name[ca]=Oxygen Air
 Name[pt]=Ar do Oxygen
+Name[pt_BR]=Ar do Oxygen
 Name[uk]=Oxygen Air
 Name[x-test]=xxOxygen Airxx
 Author=Eugene Trounev
