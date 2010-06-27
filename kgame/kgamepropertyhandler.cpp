@@ -173,7 +173,7 @@ QString KGamePropertyHandler::propertyName(int id) const
         }
  } else {
         // Should _never_ happen
-        s = i18n("%1 unregistered", id);
+        s = i18np("%1 unregistered", "%1 unregistered", id);
  }
  return s;
 }
