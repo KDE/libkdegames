@@ -154,8 +154,7 @@ void KGameDialog::initDefaultDialog(ConfigOptions initConfigs, int chatMsgId)
 KGameDialog::~KGameDialog()
 {
 // kDebug(11001) << "DESTRUCT KGameDialog" << this;
- while (!d->mConfigWidgets.isEmpty())
-         delete d->mConfigWidgets.takeFirst();
+ qDeleteAll(d->mConfigWidgets);
  delete d;
 }
 

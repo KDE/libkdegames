@@ -75,14 +75,8 @@ public:
 
   ~KMessageServerPrivate()
   {
-    while (!mClientList.isEmpty())
-    {
-      delete mClientList.takeFirst();
-    }
-    while (!mMessageQueue.isEmpty())
-    {
-      delete mMessageQueue.dequeue();
-    }
+    qDeleteAll(mClientList);
+    qDeleteAll(mMessageQueue);
   }
 
   int mMaxClients;
@@ -262,10 +256,8 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
 
 void KMessageServer::deleteClients()
 {
-  while (!d->mClientList.isEmpty())
-  {
-    delete d->mClientList.takeFirst();
-  }
+  qDeleteAll(d->mClientList);
+  d->mClientList.clear();
   d->mAdminID = 0;
 }
 

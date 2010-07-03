@@ -137,16 +137,18 @@ bool KGame::reset()
 void KGame::deletePlayers()
 {
 // kDebug(11001) ;
- KGamePlayerList tmp = d->mPlayerList; // in case of PolicyClean player=d->mPlayerList.first() is infinite
- while (!tmp.isEmpty())
-         delete tmp.takeFirst();
+ qDeleteAll(d->mPlayerList);
+ //NOTE by majewsky: An earlier implementation copied the mPlayerList before
+ //deleting the elements with a takeFirst loop. I therefore chose not to clear()
+ //the list in order not to break anything. The old code had the following
+ //comment: "in case of PolicyClean player=d->mPlayerList.first() is infinite"
 // kDebug(11001) << "done";
 }
 
 void KGame::deleteInactivePlayers()
 {
- while (!d->mInactivePlayerList.isEmpty())
-         delete d->mInactivePlayerList.takeFirst();
+ qDeleteAll(d->mInactivePlayerList);
+ d->mInactivePlayerList.clear();
 }
 
 bool KGame::load(const QString& filename,bool reset)
