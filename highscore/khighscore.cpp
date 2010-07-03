@@ -250,7 +250,7 @@ QStringList KHighscore::groupList() const
 {
     QStringList groupList = config()->groupList();
     QStringList highscoreGroupList;
-    foreach (QString group, groupList)
+    foreach (QString group, groupList) //krazy:exclude=foreach
     {
         if(group.contains("KHighscore")) //If it's one of _our_ groups (KHighscore or KHighscore_xxx)
         {

@@ -161,16 +161,7 @@ void KScoreDialog::setConfigGroup(const QPair<QByteArray, QString>& group)
 
 void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString>& group)
 {
-    bool alreadyPresent = false;
-    foreach(const QByteArray& groupKey, d->translatedGroupNames.keys())
-    {
-        if(groupKey == group.first)
-        {
-            alreadyPresent = true;
-            break;
-        }
-    }
-    if(!alreadyPresent)
+    if (!d->translatedGroupNames.contains(group.first))
     {
         d->translatedGroupNames.insert(group.first, group.second);
         kDebug() << "adding" << group.first << "->" << group.second;
@@ -179,9 +170,10 @@ void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString>&
 
 void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString>& groups)
 {
-    foreach(const QByteArray& groupKey, groups.keys())
+    QMap<QByteArray, QString>::const_iterator it = groups.begin();
+    for (; it != groups.end(); ++it)
     {
-        addLocalizedConfigGroupName(qMakePair(groupKey, groups.value(groupKey)));
+        addLocalizedConfigGroupName(qMakePair(it.key(), it.value()));
     }
 }
 
@@ -192,15 +184,9 @@ void KScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray>& weights)
 
 QString KScoreDialog::KScoreDialogPrivate::findTranslatedGroupName(const QByteArray& name)
 {
-    foreach(const QByteArray& groupKey, translatedGroupNames.keys())
-    {
-        if(name == groupKey) //if this string is the same as the untranslated version in the list
-        {
-            return translatedGroupNames.value(groupKey); //return the translated string for the current locale
-        }
-    }
+    const QString lookupResult = translatedGroupNames.value(name);
     //If it wasn't found then just try i18n( to see if it happens to be in the database
-    return i18n(name); //FIXME?
+    return lookupResult.isEmpty() ? i18n(name) : lookupResult; //FIXME?
 }
 
 void KScoreDialog::setComment(const QString &comment)
@@ -333,8 +319,11 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
         setupDialog();
 
     int tabIndex=0; //Index of the current tab
-    foreach(const QByteArray &groupKey, scores.keys())
+
+    QMap<QByteArray, GroupScores>::const_iterator it = scores.begin();
+    for (; it != scores.end(); ++it)
     {
+        const QByteArray &groupKey = it.key();
         kDebug() << latest.first << tabWidget->tabText(tabIndex);
 
         //Only display the comment on the page with the new score (or) this one if there's only one tab
