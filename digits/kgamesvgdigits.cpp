@@ -280,7 +280,7 @@ class KGameSvgDigitsPrivate
     /**
      * @brief The svg renderer
      */
-    KSvgRenderer m_svgRenderer;
+    QSvgRenderer m_svgRenderer;
 
     /**
      * @brief Collection of pixmaps of rendered digits

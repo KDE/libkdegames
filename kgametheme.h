@@ -56,7 +56,7 @@ class KDEGAMES_EXPORT KGameTheme
          * Note that although theme could be successfully loaded,
          * no check on the validity of theme's SVG file contents is done.
          * Application writers will need to perform this check manually
-         * e.g. by calling KSvgRenderer::isValid()
+         * e.g. by calling QSvgRenderer::isValid()
          * @param file the name of the theme file relative to the share/apps/appname
          * directory. e.g. "themes/classic.desktop"
          * @return true if the theme files and properties could be loaded

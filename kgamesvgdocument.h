@@ -50,7 +50,7 @@ class KGameSvgDocumentPrivate;
  *
  * A typical use is to read in an SVG file, edit the style or transform attributes
  * in DOM as desired, and then output a QByteArray suitable for being loaded with 
- * KSvgRenderer::load().
+ * QSvgRenderer::load().
  *
  * To read an SVG file into DOM:
  * @code
@@ -93,19 +93,19 @@ class KGameSvgDocumentPrivate;
  *
  * To output @c currentNode() to be rendered:
  * @code
- * KSvgRenderer svgRenderer;
+ * QSvgRenderer svgRenderer;
  * QByteArray svg = svgDom.nodeToByteArray();
  * svgRenderer.load(svg);
  * @endcode
  *
  * To output the whole document to be rendered (See QDomDocument::toByteArray()):
  * @code
- * KSvgRenderer svgRenderer;
+ * QSvgRenderer svgRenderer;
  * QByteArray svg = svgDom.toByteArray();
  * svgRenderer.load(svg);
  * @endcode
  * 
- * @see QDomDocument, KSvgRenderer
+ * @see QDomDocument, QSvgRenderer
  * @author Mark A. Taff \<kde@marktaff.com\>
  * @version 0.1
  *
@@ -350,7 +350,7 @@ public:
     QString nodeToSvg() const;
 
     /**
-     * @brief Builds a new svg document and returns a QByteArray suitable for passing to KSvgRenderer::load().
+     * @brief Builds a new svg document and returns a QByteArray suitable for passing to QSvgRenderer::load().
      *
      * Internally, we call @c nodeToSvg() and then convert to a QByteArray, so this method 
      * should be called @b instead of @c nodeToSvg().

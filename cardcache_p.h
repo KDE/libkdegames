@@ -30,7 +30,7 @@
 
 class KPixmapCache;
 class QMutex;
-class KSvgRenderer;
+class QSvgRenderer;
 class LoadThread;
 
 class KCardCachePrivate : public QObject
@@ -47,11 +47,11 @@ public:
     QSize size;
     QString frontTheme;
     QString backTheme;
-    KSvgRenderer* frontSvgRenderer;
-    KSvgRenderer* backSvgRenderer;
+    QSvgRenderer* frontSvgRenderer;
+    QSvgRenderer* backSvgRenderer;
 
-    KSvgRenderer* frontRenderer();
-    KSvgRenderer* backRenderer();
+    QSvgRenderer* frontRenderer();
+    QSvgRenderer* backRenderer();
     QPixmap renderFrontSvg( const QString& element );
     QPixmap renderBackSvg( const QString& element );
     void ensureNonNullPixmap( QPixmap& pix );

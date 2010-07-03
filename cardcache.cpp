@@ -32,7 +32,7 @@
 #include <QFileInfo>
 #include <QDir>
 
-#include <ksvgrenderer.h>
+#include <qsvgrenderer.h>
 #include <kpixmapcache.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
@@ -226,7 +226,7 @@ QString KCardInfo::svgName() const
     return s;
 }
 
-QPixmap doRender( const QString& element, KSvgRenderer* r, const QSize& s )
+QPixmap doRender( const QString& element, QSvgRenderer* r, const QSize& s )
 {
     QPixmap pix = QPixmap( s );
     pix.fill( Qt::transparent );
@@ -243,22 +243,22 @@ QString keyForPixmap( const QString& theme, const QString& element, const QSize&
                   + QString::number( s.height() );
 }
 
-KSvgRenderer* KCardCachePrivate::frontRenderer()
+QSvgRenderer* KCardCachePrivate::frontRenderer()
 {
     if ( !frontSvgRenderer )
     {
         kDebug() << "Loading front SVG renderer";
-        frontSvgRenderer = new KSvgRenderer( CardDeckInfo::frontSVGFilePath( frontTheme ) );
+        frontSvgRenderer = new QSvgRenderer( CardDeckInfo::frontSVGFilePath( frontTheme ) );
     }
     return frontSvgRenderer;
 }
 
-KSvgRenderer* KCardCachePrivate::backRenderer()
+QSvgRenderer* KCardCachePrivate::backRenderer()
 {
     if ( !backSvgRenderer )
     {
         kDebug() << "Loading back SVG renderer";
-        backSvgRenderer = new KSvgRenderer( CardDeckInfo::backSVGFilePath( backTheme ) );
+        backSvgRenderer = new QSvgRenderer( CardDeckInfo::backSVGFilePath( backTheme ) );
     }
     return backSvgRenderer;
 }
