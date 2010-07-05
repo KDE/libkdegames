@@ -320,8 +320,8 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
 
     int tabIndex=0; //Index of the current tab
 
-    QMap<QByteArray, GroupScores>::const_iterator it = scores.begin();
-    for (; it != scores.end(); ++it)
+    QMap<QByteArray, GroupScores>::const_iterator it = scores.constBegin();
+    for (; it != scores.constEnd(); ++it)
     {
         const QByteArray &groupKey = it.key();
         kDebug() << latest.first << tabWidget->tabText(tabIndex);
