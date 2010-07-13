@@ -33,7 +33,7 @@ static const QString cacheName(QString theme)
 {
 	const QString appName = QCoreApplication::instance()->applicationName();
 	//e.g. "themes/foobar.desktop" -> "themes/foobar"
-	if (theme.endsWith(".desktop"))
+	if (theme.endsWith(QLatin1String(".desktop")))
 		theme.truncate(theme.length() - 8); //8 = strlen(".desktop")
 	return QString::fromLatin1("kgamerenderer-%1-%2").arg(appName).arg(theme);
 }
@@ -344,7 +344,7 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	const QSize size = client->d->m_renderSize;
 	if (size.isEmpty())
 	{
-		client->recievePixmap(QPixmap());
+		client->receivePixmap(QPixmap());
 		return;
 	}
 	const QString elementKey = spriteFrameKey(client->d->m_spriteKey, client->d->m_frame);
@@ -359,7 +359,7 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);
 	if (it != m_pixmapCache.end())
 	{
-		client->recievePixmap(it.value());
+		client->receivePixmap(it.value());
 		return;
 	}
 	//try to serve from low-speed cache
@@ -367,7 +367,7 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	if (m_imageCache->findPixmap(cacheKey, &pix))
 	{
 		m_pixmapCache.insert(cacheKey, pix);
-		client->recievePixmap(pix);
+		client->receivePixmap(pix);
 		return;
 	}
 	//is such a rendering job already running?
@@ -413,7 +413,7 @@ void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
 	m_pixmapCache.insert(cacheKey, pixmap);
 	foreach (KGameRendererClient* requester, requesters)
 	{
-		requester->recievePixmap(pixmap);
+		requester->receivePixmap(pixmap);
 	}
 }
 

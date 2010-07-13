@@ -30,18 +30,18 @@ class KGameRendererPrivate;
 /**
  * @class KGameRendererClient
  * @since 4.6
- * @short An object that recieves pixmaps from a KGameRenderer.
+ * @short An object that receives pixmaps from a KGameRenderer.
  *
  * This class abstracts a sprite rendered by KGameRenderer. Given a sprite key,
  * render size and possibly a frame index, it returns the QPixmap for this
  * sprite (frame) once it becomes available.
  *
- * Subclasses have to reimplement the recievePixmap() method.
+ * Subclasses have to reimplement the receivePixmap() method.
  */
 class KDEGAMES_EXPORT KGameRendererClient
 {
 	public:
-		///Creates a new client which recieves pixmaps for the sprite with the 
+		///Creates a new client which receives pixmaps for the sprite with the 
 		///given @a spriteKey as provided by the given @a renderer.
 		KGameRendererClient(KGameRenderer* renderer, const QString& spriteKey);
 		virtual ~KGameRendererClient();
@@ -85,7 +85,7 @@ class KDEGAMES_EXPORT KGameRendererClient
 		///This method is called when the KGameRenderer has provided a new
 		///pixmap for this client (esp. after theme changes and after calls to 
 		///setFrame(), setRenderSize() and setSpriteKey()).
-		virtual void recievePixmap(const QPixmap& pixmap) = 0;
+		virtual void receivePixmap(const QPixmap& pixmap) = 0;
 	private:
 		friend class KGameRendererClientPrivate;
 		friend class KGameRenderer;

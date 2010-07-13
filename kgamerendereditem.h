@@ -50,7 +50,7 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QObject, public QGraphicsPixmap
 		KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent = 0);
 		virtual ~KGameRenderedItem();
 	protected:
-		virtual void recievePixmap(const QPixmap& pixmap);
+		virtual void receivePixmap(const QPixmap& pixmap);
 	private:
 		friend class KGameRenderedItemPrivate;
 		KGameRenderedItemPrivate* const d;

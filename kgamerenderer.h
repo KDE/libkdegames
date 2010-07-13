@@ -78,7 +78,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///@return the frame suffix. @see setFrameSuffix()
 		QString frameSuffix() const;
 		///Sets the frame suffix. This suffix will be added to a sprite key
-		///to create the corresponding SVG element key, after any occurence of
+		///to create the corresponding SVG element key, after any occurrence of
 		///"%1" in the suffix has been replaced by the frame number.
 		///@note Giving a suffix which does not include "%1" will reset to the
 		///default suffix "_%1".

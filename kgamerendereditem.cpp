@@ -36,7 +36,7 @@ KGameRenderedItem::~KGameRenderedItem()
 	delete d;
 }
 
-void KGameRenderedItem::recievePixmap(const QPixmap& pixmap)
+void KGameRenderedItem::receivePixmap(const QPixmap& pixmap)
 {
 	QGraphicsPixmapItem::setPixmap(pixmap);
 }
