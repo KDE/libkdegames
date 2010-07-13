@@ -43,6 +43,7 @@ KGameRendererClient::KGameRendererClient(KGameRenderer* renderer, const QString&
 KGameRendererClient::~KGameRendererClient()
 {
 	d->m_renderer->d->m_clients.removeAll(this);
+	d->m_renderer->d->m_pendingRequests.remove(this);
 	delete d;
 }
 
@@ -119,6 +120,7 @@ void KGameRendererClientPrivate::fetchPixmapInternal()
 {
 	if (m_outdated)
 	{
+		//FIXME: In KDiamond, frame == -1 is *sometimes* changed to frame == 0 sometimes in KDiamond.
 		//update frame count, normalize frame number (for animated frames)
 		m_frameCount = m_renderer->frameCount(m_spriteKey);
 		m_frameBaseIndex = m_renderer->frameBaseIndex();
@@ -131,8 +133,7 @@ void KGameRendererClientPrivate::fetchPixmapInternal()
 			m_frame = (m_frame - m_frameBaseIndex) % m_frameCount + m_frameBaseIndex;
 		}
 		//actually fetch pixmap
-		m_pixmap = m_renderer->spritePixmap(m_spriteKey, m_renderSize, m_frame);
-		m_outdated = false;
-		m_parent->recievePixmap(m_pixmap);
+		//FIXME: Pixmaps are not correctly re-requested on resizing.
+		m_renderer->d->requestPixmap(m_parent);
 	}
 }

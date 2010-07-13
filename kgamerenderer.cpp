@@ -28,7 +28,8 @@
 //TODO: API for cache access?
 //TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
 //TODO: allow multiple themes/caches (compare KGrTheme for usecase)
-//TODO: Split pixmap-fetching functionality from KGRI into new base class KGameRendererClient.
+//TODO: cache per theme?
+//TODO: check cache timestamp vs. theme/SVG timestamp
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
 static const QString cacheName()
@@ -66,6 +67,7 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
 	//As you see, implementing an own pixmap cache saves us one conversion. We
 	//therefore disable KIC's pixmap cache because we do not need it.
 	m_imageCache.setPixmapCaching(false);
+	qRegisterMetaType<KGRInternal::Job*>();
 }
 
 KGameRenderer::KGameRenderer(const QString& theme, const QString& defaultTheme)
@@ -159,9 +161,10 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 			return false;
 		}
 	}
-	//theme is cached - just delete the old renderer
+	//theme is cached - just delete the old renderer after making sure that no worker threads are using it anymore
 	else if (m_currentTheme != theme)
 	{
+		m_workerPool.waitForDone();
 		delete m_renderer;
 		m_renderer = 0;
 	}
@@ -180,6 +183,9 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 
 bool KGameRendererPrivate::instantiateRenderer()
 {
+	//before the old renderer is deleted, we must make sure that no worker threads are using it anymore
+	m_workerPool.waitForDone();
+	//instantiate renderer
 	QSvgRenderer* oldRenderer = m_renderer;
 	m_renderer = new QSvgRenderer(m_theme.graphics());
 	if (m_renderer->isValid())
@@ -258,42 +264,155 @@ bool KGameRenderer::spriteExists(const QString& key) const
 
 QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int frame) const
 {
+	//TODO: reduce code duplication with KGameRendererPrivate::requestPixmap
+	//parse request
 	if (size.isEmpty())
 	{
 		return QPixmap();
 	}
-	//generate key
 	const QString elementKey = d->spriteFrameKey(key, frame);
 	const QString cacheKey = d->m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
-	//check pixmap cache
+	//try to serve from high-speed cache
 	QHash<QString, QPixmap>::const_iterator it = d->m_pixmapCache.find(cacheKey);
 	if (it != d->m_pixmapCache.end())
 	{
 		return it.value();
 	}
-	//check (slower) image cache
+	//try to serve from low-speed cache
 	QPixmap pix;
-	if (!d->m_imageCache.findPixmap(cacheKey, &pix))
+	if (d->m_imageCache.findPixmap(cacheKey, &pix))
 	{
-		if (!d->m_renderer)
-		{
-			if (!d->instantiateRenderer())
-			{
-				return QPixmap();
-			}
-		}
-		//generate pixmap from SVG
-		pix = QPixmap(size);
-		pix.fill(Qt::transparent);
-		QPainter painter(&pix);
-		d->m_renderer->render(&painter, elementKey);
-		painter.end();
-		//store in cache for next access
-		d->m_imageCache.insertPixmap(cacheKey, pix);
+		d->m_pixmapCache.insert(cacheKey, pix);
+		return pix;
 	}
-	d->m_pixmapCache.insert(cacheKey, pix);
-	return pix;
+	//make sure that renderer is available
+	if (!d->m_renderer)
+	{
+		if (!d->instantiateRenderer())
+		{
+			return QPixmap();
+		}
+	}
+	//create job
+	KGRInternal::Job* job = new KGRInternal::Job;
+	job->renderer = d->m_renderer;
+	job->cacheKey = cacheKey;
+	job->elementKey = elementKey;
+	job->size = size;
+	//render immediately
+	KGRInternal::Worker(job, d).doWork();
+	d->jobFinished(job);
+	//fetch pixmap from high-speed cache
+	return d->m_pixmapCache[cacheKey];
 }
+
+void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
+{
+	//parse request
+	const QSize size = client->d->m_renderSize;
+	if (size.isEmpty())
+	{
+		client->recievePixmap(QPixmap());
+		return;
+	}
+	const QString elementKey = spriteFrameKey(client->d->m_spriteKey, client->d->m_frame);
+	const QString cacheKey = m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
+	//try to serve from high-speed cache
+	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);
+	if (it != m_pixmapCache.end())
+	{
+		client->recievePixmap(it.value());
+		return;
+	}
+	//try to serve from low-speed cache
+	QPixmap pix;
+	if (m_imageCache.findPixmap(cacheKey, &pix))
+	{
+		m_pixmapCache.insert(cacheKey, pix);
+		client->recievePixmap(pix);
+		return;
+	}
+	//make sure that renderer is available
+	if (!m_renderer)
+	{
+		if (!instantiateRenderer())
+		{
+			return;
+		}
+	}
+	//remember who requested what
+	bool jobAlreadyScheduled = m_pendingRequests.key(cacheKey) != 0;
+	m_pendingRequests[client] = cacheKey;
+	if (jobAlreadyScheduled)
+	{
+		return;
+	}
+	//create job (unless a similar job has not yet been launched for another client)
+	KGRInternal::Job* job = new KGRInternal::Job;
+	job->renderer = m_renderer;
+	job->cacheKey = cacheKey;
+	job->elementKey = elementKey;
+	job->size = size;
+	m_workerPool.start(new KGRInternal::Worker(job, this));
+}
+
+void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
+{
+	const QString cacheKey = job->cacheKey;
+	//convert to pixmap, put into caches
+	m_imageCache.insertImage(cacheKey, job->result);
+	const QPixmap pixmap = QPixmap::fromImage(job->result);
+	m_pixmapCache.insert(cacheKey, pixmap);
+	delete job;
+	//rollout pixmap to all clients that have requested it
+	QHash<KGameRendererClient*, QString>::iterator it = m_pendingRequests.begin();
+	int debugCount = 0;
+	while (it != m_pendingRequests.end())
+	{
+		if (it.value() == cacheKey)
+		{
+			it.key()->recievePixmap(pixmap);
+			it = m_pendingRequests.erase(it);
+			++debugCount;
+		}
+		else
+		{
+			++it;
+		}
+	}
+}
+
+//BEGIN KGRInternal::Worker
+
+KGRInternal::Worker::Worker(KGRInternal::Job* job, KGameRendererPrivate* parent)
+	: m_job(job)
+	, m_parent(parent)
+{
+}
+
+void KGRInternal::Worker::run()
+{
+	//This method is called in a worker thread (by QThreadPool).
+	doWork();
+	//It needs to talk back to the main thread when done.
+	//FIXME: Why do I fail? (NOTE: My local build is set to full Debug mode currently.)
+	QMetaObject::invokeMethod(m_parent, "jobFinished", Qt::QueuedConnection, Q_ARG(KGRInternal::Job*, m_job));
+}
+
+static const uint transparentRgba = QColor(Qt::transparent).rgba();
+
+void KGRInternal::Worker::doWork()
+{
+	//This method may be called from the main thread (by KGameRenderer).
+	QImage image(m_job->size, QImage::Format_ARGB32_Premultiplied);
+	image.fill(transparentRgba);
+	QPainter painter(&image);
+	m_job->renderer->render(&painter, m_job->elementKey);
+	painter.end();
+	m_job->result = image;
+}
+
+//END KGRInternal::Worker
 
 #include "kgamerenderer.moc"
 #include "kgamerenderer_p.moc"

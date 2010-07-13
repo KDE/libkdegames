@@ -20,24 +20,62 @@
 #define KGAMERENDERER_P_H
 
 #include <QtCore/QHash>
+#include <QtCore/QMetaType>
+#include <QtCore/QRunnable>
+#include <QtCore/QThreadPool>
 #include <QtSvg/QSvgRenderer>
 #include <KGameTheme>
 #include <KImageCache>
 
-class KGameRendererPrivate
+namespace KGRInternal
 {
+	//Describes a rendering job which is delegated to a worker thread.
+	struct Job
+	{
+		QSvgRenderer* renderer;
+		QString cacheKey, elementKey;
+		QSize size;
+		QImage result;
+	};
+
+	//Describes a worker thread.
+	class Worker : public QRunnable
+	{
+		public:
+			Worker(Job* job, KGameRendererPrivate* parent);
+
+			virtual void run(); //This is called in a worker thread.
+			void doWork(); //This is called in the main thread.
+		private:
+			Job* m_job;
+			KGameRendererPrivate* m_parent;
+	};
+};
+
+Q_DECLARE_METATYPE(KGRInternal::Job*)
+
+class KGameRendererPrivate : public QObject
+{
+	Q_OBJECT
+	public Q_SLOTS:
+		void jobFinished(KGRInternal::Job* job); //NOTE: This is invoked from KGRInternal::Worker::run.
 	public:
 		KGameRendererPrivate(const QString& defaultTheme);
 		bool setTheme(const QString& theme);
 		bool instantiateRenderer();
 		inline QString spriteFrameKey(const QString& key, int frame) const;
+		void requestPixmap(KGameRendererClient* client);
 
 		QString m_defaultTheme, m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix;
 		int m_frameBaseIndex;
 		KGameTheme m_theme;
+
 		QSvgRenderer* m_renderer;
+		QThreadPool m_workerPool;
+
 		QList<KGameRendererClient*> m_clients;
+		QHash<KGameRendererClient*, QString> m_pendingRequests; //maps client -> cache key of requested pixmap
 
 		//NOTE: See ctor implementation for why we do not use KImageCache's pixmap cache.
 		KImageCache m_imageCache;
