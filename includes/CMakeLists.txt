@@ -14,6 +14,7 @@ install( FILES
 	KGameProgress
 	KGameRenderedItem
 	KGameRenderer
+	KGameRendererClient
 	KGameSvgDigits
 	KGameSvgDocument
 	KGameTheme

@@ -18,8 +18,7 @@
 
 #include "kgamerenderer.h"
 #include "kgamerenderer_p.h"
-#include "kgamerendereditem.h"
-#include "kgamerendereditem_p.h"
+#include "kgamerendererclient.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QPainter>
@@ -78,7 +77,7 @@ KGameRenderer::KGameRenderer(const QString& theme, const QString& defaultTheme)
 
 KGameRenderer::~KGameRenderer()
 {
-	qDeleteAll(d->m_itemInstances);
+	qDeleteAll(d->m_clients);
 	delete d->m_renderer;
 	delete d;
 }
@@ -119,9 +118,9 @@ void KGameRenderer::setTheme(const QString& theme)
 	{
 		d->setTheme(d->m_defaultTheme);
 	}
-	//announce change to KGameRenderedItems
-	QList<KGameRenderedItem*>::const_iterator it1 = d->m_itemInstances.begin();
-	QList<KGameRenderedItem*>::const_iterator it2 = d->m_itemInstances.end();
+	//announce change to KGameRendererClients
+	QList<KGameRendererClient*>::const_iterator it1 = d->m_clients.begin();
+	QList<KGameRendererClient*>::const_iterator it2 = d->m_clients.end();
 	for (; it1 != it2; ++it1)
 	{
 		(*it1)->d->fetchPixmap();
@@ -307,3 +306,4 @@ QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int f
 }
 
 #include "kgamerenderer.moc"
+#include "kgamerenderer_p.moc"

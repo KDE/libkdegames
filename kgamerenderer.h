@@ -25,8 +25,8 @@
 #include <libkdegames_export.h>
 
 class KGameRendererPrivate;
-class KGameRenderedItem;
-class KGameRenderedItemPrivate;
+class KGameRendererClient;
+class KGameRendererClientPrivate;
 class KGameTheme;
 
 /**
@@ -43,6 +43,9 @@ class KGameTheme;
  * In a QGraphicsView-based application, this class is best used together with
  * the QGraphicsPixmapItem-derived KGameRenderedItem. The pixmap of a
  * KGameRenderedItem is automatically updated when the theme changes.
+ *
+ * TODO: describe KGameRendererClient (once it is truly asynchronous)
+ * TODO: describe the design decisions and structure of KGameRenderer
  */
 class KDEGAMES_EXPORT KGameRenderer : public QObject
 {
@@ -57,8 +60,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///setTheme() clears the cache, while this constructor tries to reuse it.
 		///@param defaultTheme a theme name as used by KGameTheme::load
 		explicit KGameRenderer(const QString& theme, const QString& defaultTheme);
-		///Deletes this KGameRenderer instance, as well as all KGameRenderedItem
-		///instances using it.
+		///Deletes this KGameRenderer instance, as well as all clients using it.
 		virtual ~KGameRenderer();
 
 		///@return the frame base index. @see setFrameBaseIndex()
@@ -115,18 +117,18 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1) const;
 	public Q_SLOTS:
 		///Load the given theme and update the pixmaps of all associated
-		///KGameRenderedItem instances.
+		///KGameRendererClient instances.
 		///@param theme a theme name as used by KGameTheme::load
 		void setTheme(const QString& theme);
 	Q_SIGNALS:
 		///This signal is emitted when a new theme has been loaded. You usually
-		///do not need to react on this signal if you use KGameRenderedItem,
-		///because these items update their pixmaps automatically.
+		///do not need to react on this signal if you use KGameRendererClient or
+		///KGameRenderedItem, because these update their pixmaps automatically.
 		void themeChanged(const QString& theme);
 	private:
 		friend class KGameRendererPrivate;
-		friend class KGameRenderedItem;
-		friend class KGameRenderedItemPrivate;
+		friend class KGameRendererClient;
+		friend class KGameRendererClientPrivate;
 		KGameRendererPrivate* const d;
 };
 

@@ -69,6 +69,7 @@ set(kdegames_LIB_SRCS
     kgamepopupitem.cpp
     kgamerendereditem.cpp
     kgamerenderer.cpp
+    kgamerendererclient.cpp
     kgamesvgdocument.cpp
     kgametheme.cpp
     kgamethemeselector.cpp
@@ -116,6 +117,7 @@ install(FILES
     kgameclock.h
     kgamerendereditem.h
     kgamerenderer.h
+    kgamerendererclient.h
     kgametheme.h
     kgamethemeselector.h
     kgamedifficulty.h

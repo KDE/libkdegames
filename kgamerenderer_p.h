@@ -37,12 +37,31 @@ class KGameRendererPrivate
 		int m_frameBaseIndex;
 		KGameTheme m_theme;
 		QSvgRenderer* m_renderer;
-		QList<KGameRenderedItem*> m_itemInstances;
+		QList<KGameRendererClient*> m_clients;
 
 		//NOTE: See ctor implementation for why we do not use KImageCache's pixmap cache.
 		KImageCache m_imageCache;
 		QHash<QString, QPixmap> m_pixmapCache;
 		QHash<QString, int> m_frameCountCache;
+};
+
+class KGameRendererClientPrivate : public QObject
+{
+	Q_OBJECT
+	public:
+		KGameRendererClientPrivate(KGameRenderer* renderer, const QString& spriteKey, KGameRendererClient* parent);
+	public Q_SLOTS:
+		void fetchPixmap();
+		void fetchPixmapInternal();
+	public:
+		KGameRendererClient* m_parent;
+		KGameRenderer* m_renderer;
+
+		QPixmap m_pixmap;
+		QString m_spriteKey;
+		QSize m_renderSize;
+		int m_frame, m_frameCount, m_frameBaseIndex;
+		bool m_outdated;
 };
 
 #endif // KGAMERENDERER_P_H
