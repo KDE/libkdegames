@@ -20,15 +20,22 @@
 
 class KGameRenderedItemPrivate
 {
-	//NOTE: reserved for later use
+	public:
+		KGameRenderedItemPrivate(KGameRenderedItem* parent);
+		QGraphicsPixmapItem* m_pixmapItem;
 };
 
-KGameRenderedItem::KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent)
-	: QGraphicsPixmapItem(parent)
-	, KGameRendererClient(renderer, spriteKey)
-	, d(0)
+KGameRenderedItemPrivate::KGameRenderedItemPrivate(KGameRenderedItem* parent)
+	: m_pixmapItem(new QGraphicsPixmapItem(parent))
 {
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+}
+
+KGameRenderedItem::KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent)
+	: QGraphicsObject(parent)
+	, KGameRendererClient(renderer, spriteKey)
+	, d(new KGameRenderedItemPrivate(this))
+{
+	d->m_pixmapItem->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 KGameRenderedItem::~KGameRenderedItem()
@@ -38,7 +45,43 @@ KGameRenderedItem::~KGameRenderedItem()
 
 void KGameRenderedItem::receivePixmap(const QPixmap& pixmap)
 {
-	QGraphicsPixmapItem::setPixmap(pixmap);
+	d->m_pixmapItem->setPixmap(pixmap);
 }
+
+//BEGIN QGraphicsItem reimplementation
+//NOTE: The purpose of this reimplementation is to make sure that all interactional events are sent to this item, not to the contained QGraphicsPixmapItem which provides the visual representation (and the metrics calculations).
+
+QRectF KGameRenderedItem::boundingRect() const
+{
+	return d->m_pixmapItem->mapRectToParent(d->m_pixmapItem->boundingRect());
+}
+
+bool KGameRenderedItem::contains(const QPointF& point) const
+{
+	return d->m_pixmapItem->contains(d->m_pixmapItem->mapFromParent(point));
+}
+
+bool KGameRenderedItem::isObscuredBy(const QGraphicsItem* item) const
+{
+	return d->m_pixmapItem->isObscuredBy(item);
+}
+
+QPainterPath KGameRenderedItem::opaqueArea() const
+{
+	return d->m_pixmapItem->mapToParent(d->m_pixmapItem->opaqueArea());
+}
+
+void KGameRenderedItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+	Q_UNUSED(painter) Q_UNUSED(option) Q_UNUSED(widget)
+	//actual painting is done by d->m_pixmapItem
+}
+
+QPainterPath KGameRenderedItem::shape() const
+{
+	return d->m_pixmapItem->mapToParent(d->m_pixmapItem->shape());
+}
+
+//END QGraphicsItem reimplementation
 
 #include "kgamerendereditem.moc"
