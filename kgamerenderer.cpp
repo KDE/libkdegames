@@ -28,7 +28,6 @@
 
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
-//TODO: API for cache access?
 
 static const QString cacheName(QString theme)
 {
@@ -48,6 +47,7 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, unsigned
 	, m_boundsPrefix(QString::fromLatin1("br-"))
 	//default cache size: 3 MiB = 3 << 20 bytes
 	, m_cacheSize((cacheSize == 0 ? 3 : cacheSize) << 20)
+	, m_strategies(KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads)
 	, m_frameBaseIndex(0)
 	, m_renderer(0)
 	, m_imageCache(0)
@@ -90,6 +90,24 @@ QString KGameRenderer::frameSuffix() const
 void KGameRenderer::setFrameSuffix(const QString& suffix)
 {
 	d->m_frameSuffix = suffix.contains(QLatin1String("%1")) ? suffix : QLatin1String("_%1");
+}
+
+KGameRenderer::Strategies KGameRenderer::strategies() const
+{
+	return d->m_strategies;
+}
+
+void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool enabled)
+{
+	const bool oldEnabled = d->m_strategies & strategy;
+	d->m_strategies = strategy;
+	if (strategy == KGameRenderer::UseDiskCache && oldEnabled != enabled)
+	{
+		//reload theme
+		const QString theme = d->m_currentTheme;
+		d->m_currentTheme.clear(); //or setTheme() will return immediately
+		setTheme(theme);
+	}
 }
 
 QString KGameRenderer::theme() const
@@ -137,45 +155,60 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		m_theme.load(m_currentTheme);
 		return false;
 	}
-	//open cache
-	KImageCache* oldCache = m_imageCache;
-	const QString imageCacheName = cacheName(m_theme.fileName());
-	m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
-	m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
-	//check timestamp of cache vs. last write access to SVG
-	const uint svgTimestamp = QFileInfo(m_theme.graphics()).lastModified().toTime_t();
-	QByteArray buffer;
-	if (!m_imageCache->find(QString::fromLatin1("kgr_timestamp"), &buffer))
-		buffer = "0";
-	const uint cacheTimestamp = buffer.toInt();
-	//try to instantiate renderer immediately if the cache does not exist or is outdated
-	//FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not get evicted.
-	if (cacheTimestamp < svgTimestamp)
+	//open cache (and SVG file, if necessary)
+	if (m_strategies & KGameRenderer::UseDiskCache)
 	{
-		kDebug(11000) << "Graphics newer than cache, checking SVG";
-		if (instantiateRenderer(true))
+		KImageCache* oldCache = m_imageCache;
+		const QString imageCacheName = cacheName(m_theme.fileName());
+		m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
+		m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
+		//check timestamp of cache vs. last write access to SVG
+		const uint svgTimestamp = QFileInfo(m_theme.graphics()).lastModified().toTime_t();
+		QByteArray buffer;
+		if (!m_imageCache->find(QString::fromLatin1("kgr_timestamp"), &buffer))
+			buffer = "0";
+		const uint cacheTimestamp = buffer.toInt();
+		//try to instantiate renderer immediately if the cache does not exist or is outdated
+		//FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not get evicted.
+		if (cacheTimestamp < svgTimestamp)
 		{
-			m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
+			kDebug(11000) << "Graphics newer than cache, checking SVG";
+			if (instantiateRenderer(true))
+			{
+				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
+			}
+			else
+			{
+				//The SVG file is broken, so we deny to change the theme without
+				//breaking the previous theme.
+				delete m_imageCache;
+				KSharedDataCache::deleteCache(imageCacheName);
+				m_imageCache = oldCache;
+				kDebug(11000) << "Theme change failed: SVG file broken";
+				return false;
+			}
 		}
-		else
+		//theme is cached - just delete the old renderer after making sure that no worker threads are using it anymore
+		else if (m_currentTheme != theme)
 		{
-			//The SVG file is broken, so we deny to change the theme without
-			//breaking the previous theme.
-			delete m_imageCache;
-			KSharedDataCache::deleteCache(imageCacheName);
-			m_imageCache = oldCache;
+			m_workerPool.waitForDone();
+			delete m_renderer;
+			m_renderer = 0;
+		}
+	}
+	else // !(m_strategies & KGameRenderer::UseDiskCache) -> no cache is used
+	{
+		//load SVG file
+		if (!instantiateRenderer(true))
+		{
 			kDebug(11000) << "Theme change failed: SVG file broken";
 			return false;
 		}
+		//disconnect from disk cache (only needed if changing strategy)
+		delete m_imageCache;
+		m_imageCache = 0;
 	}
-	//theme is cached - just delete the old renderer after making sure that no worker threads are using it anymore
-	else if (m_currentTheme != theme)
-	{
-		m_workerPool.waitForDone();
-		delete m_renderer;
-		m_renderer = 0;
-	}
-	//clear caches
+	//clear in-process caches
 	m_pixmapCache.clear();
 	m_frameCountCache.clear();
 	m_boundsCache.clear();
@@ -250,7 +283,7 @@ int KGameRenderer::frameCount(const QString& key) const
 	int count = -1;
 	bool countFound = false;
 	const QString cacheKey = d->m_frameCountPrefix + key;
-	if (!d->m_renderer)
+	if (!d->m_renderer && (d->m_strategies & KGameRenderer::UseDiskCache))
 	{
 		QByteArray buffer;
 		if (d->m_imageCache->find(cacheKey, &buffer))
@@ -279,7 +312,11 @@ int KGameRenderer::frameCount(const QString& key) const
 					count = -1;
 				}
 			}
-			d->m_imageCache->insert(cacheKey, QByteArray::number(count));
+			//save in shared cache for following requests
+			if (d->m_strategies & KGameRenderer::UseDiskCache)
+			{
+				d->m_imageCache->insert(cacheKey, QByteArray::number(count));
+			}
 		}
 	}
 	d->m_frameCountCache.insert(key, count);
@@ -299,7 +336,7 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 	QRectF bounds;
 	bool boundsFound = false;
 	const QString cacheKey = d->m_boundsPrefix + elementKey;
-	if (!d->m_renderer)
+	if (!d->m_renderer && (d->m_strategies & KGameRenderer::UseDiskCache))
 	{
 		QByteArray buffer;
 		if (d->m_imageCache->find(cacheKey, &buffer))
@@ -315,13 +352,16 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 		if (d->instantiateRenderer())
 		{
 			bounds = d->m_renderer->boundsOnElement(elementKey);
-			//save in shared cache
-			QByteArray buffer;
+			//save in shared cache for following requests
+			if (d->m_strategies & KGameRenderer::UseDiskCache)
 			{
-				QDataStream stream(&buffer, QIODevice::WriteOnly);
-				stream << bounds;
+				QByteArray buffer;
+				{
+					QDataStream stream(&buffer, QIODevice::WriteOnly);
+					stream << bounds;
+				}
+				d->m_imageCache->insert(cacheKey, buffer);
 			}
-			d->m_imageCache->insert(cacheKey, buffer);
 		}
 	}
 	d->m_boundsCache.insert(elementKey, bounds);
@@ -374,9 +414,13 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		m_clients[client] = cacheKey;
 	}
 	//ensure that some theme is loaded
-	if (!m_imageCache)
+	if (m_currentTheme.isEmpty())
 	{
 		m_parent->setTheme(m_defaultTheme);
+		if (m_currentTheme.isEmpty())
+		{
+			return;
+		}
 	}
 	//try to serve from high-speed cache
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);
@@ -386,12 +430,15 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		return;
 	}
 	//try to serve from low-speed cache
-	QPixmap pix;
-	if (m_imageCache->findPixmap(cacheKey, &pix))
+	if (m_strategies & KGameRenderer::UseDiskCache)
 	{
-		m_pixmapCache.insert(cacheKey, pix);
-		requestPixmap__propagateResult(pix, client, synchronousResult);
-		return;
+		QPixmap pix;
+		if (m_imageCache->findPixmap(cacheKey, &pix))
+		{
+			m_pixmapCache.insert(cacheKey, pix);
+			requestPixmap__propagateResult(pix, client, synchronousResult);
+			return;
+		}
 	}
 	//if asynchronous request, is such a rendering job already running?
 	if (client && m_pendingRequests.contains(cacheKey))
@@ -411,11 +458,19 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	job->spec = spec;
 	const bool synchronous = !client;
 	KGRInternal::Worker* worker = new KGRInternal::Worker(job, synchronous, this);
-	if (synchronous)
+	if (synchronous || !(m_strategies & KGameRenderer::UseRenderingThreads))
 	{
 		worker->run();
 		//if everything worked fine, result is in high-speed cache now
-		*synchronousResult = m_pixmapCache.value(cacheKey);
+		const QPixmap result = m_pixmapCache.value(cacheKey);
+		if (synchronousResult)
+		{
+			*synchronousResult = result;
+		}
+		if (client)
+		{
+			client->receivePixmap(result);
+		}
 	}
 	else
 	{
@@ -434,12 +489,15 @@ void KGameRendererPrivate::jobFinished(KGRInternal::Job* job, bool isSynchronous
 	m_pendingRequests.removeAll(cacheKey);
 	const QList<KGameRendererClient*> requesters = m_clients.keys(cacheKey);
 	//put result into image cache
-	m_imageCache->insertImage(cacheKey, result);
-	//convert result to pixmap (and put into pixmap cache) only if it is needed now
-	//This optimization saves the image-pixmap conversion for intermediate sizes which occur during smooth resize events or window initializations.
-	if (!isSynchronous && requesters.isEmpty())
+	if (m_strategies & KGameRenderer::UseDiskCache)
 	{
-		return;
+		m_imageCache->insertImage(cacheKey, result);
+		//convert result to pixmap (and put into pixmap cache) only if it is needed now
+		//This optimization saves the image-pixmap conversion for intermediate sizes which occur during smooth resize events or window initializations.
+		if (!isSynchronous && requesters.isEmpty())
+		{
+			return;
+		}
 	}
 	const QPixmap pixmap = QPixmap::fromImage(result);
 	m_pixmapCache.insert(cacheKey, pixmap);

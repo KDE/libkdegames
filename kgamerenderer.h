@@ -86,6 +86,23 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 	Q_OBJECT
 	Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
 	public:
+		///Describes the various strategies which KGameRenderer can use to speed
+		///up rendering.
+		///\see setStrategyEnabled
+		enum Strategy
+		{
+			///If set, pixmaps will be cached in a shared disk cache (using
+			///KSharedDataCache). This is especially useful for complex SVG
+			///themes because KGameRenderer will not load the SVG if all needed
+			///pixmaps are available from the disk cache.
+			UseDiskCache = 1 << 0,
+			///If set, pixmap requests from KGameRendererClients will be
+			///handled asynchronously if possible. This is especially useful
+			///when many clients are requesting complex pixmaps at one time.
+			UseRenderingThreads = 1 << 1
+		};
+		Q_DECLARE_FLAGS(Strategies, Strategy)
+
 		///Constructs a new KGameRenderer. The given @a defaultTheme will be
 		///used as the initial theme, and will also act as a fallback when an
 		///invalid theme is given.
@@ -123,6 +140,18 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///SVG element key for the frame no. 23 of the sprite "foo" is "foo_23".
 		///@note Frame numbering starts at zero unless you setFrameBaseIndex().
 		void setFrameSuffix(const QString& suffix);
+		///@return the optimization strategies used by this renderer
+		///@see setStrategyEnabled()
+		Strategies strategies() const;
+		///Enables/disables an optimization strategy for this renderer. By
+		///default, both the UseDiskCache and the UseRenderingThreads strategies
+		///are enabled. This is a sane default for 99% of all games. You might 
+		///only want to disable optimizations if the graphics are so simple that
+		///the optimisations create an overhead in your special case.
+		///
+		///If you disable UseDiskCache, you should do so before setTheme(),
+		///because changes to UseDiskCache cause a full theme reload.
+		void setStrategyEnabled(Strategy strategy, bool enabled = true);
 		///@return the theme currently in use (format as in KGameTheme::load())
 		QString theme() const;
 
@@ -171,5 +200,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		friend class KGameRendererClientPrivate;
 		KGameRendererPrivate* const d;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(KGameRenderer::Strategies)
 
 #endif // KGAMERENDERER_H

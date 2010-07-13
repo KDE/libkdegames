@@ -88,6 +88,7 @@ class KGameRendererPrivate : public QObject
 		QString m_defaultTheme, m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
 		unsigned m_cacheSize;
+		KGameRenderer::Strategies m_strategies;
 		int m_frameBaseIndex;
 		KGameTheme m_theme;
 
