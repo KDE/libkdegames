@@ -39,10 +39,10 @@ class KGameRendererPrivate
 		QSvgRenderer* m_renderer;
 		QList<KGameRenderedItem*> m_itemInstances;
 
+		//NOTE: See ctor implementation for why we do not use KImageCache's pixmap cache.
 		KImageCache m_imageCache;
-		QHash<QString, QPixmap> m_highAvailabilityCache;
+		QHash<QString, QPixmap> m_pixmapCache;
 		QHash<QString, int> m_frameCountCache;
-	//NOTE: Why are there two caches? The KImageCache shares the pixmaps between multiple processes (and saves them on disk). The high-availability cache is used purely in-process, and brings a much better performance especially for animations.
 };
 
 #endif // KGAMERENDERER_P_H

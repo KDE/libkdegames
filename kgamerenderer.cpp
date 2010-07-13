@@ -25,11 +25,12 @@
 #include <QtGui/QPainter>
 
 //TODO: automatically schedule pre-rendering of animation frames
-//TODO: multithreaded SVG loading, low-speed cache lookup, rendering
+//TODO: multithreaded SVG loading, rendering (caching only in main thread, see KGRP ctor)
 //TODO: API for cache access?
 //TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
 //TODO: allow multiple themes/caches (compare KGrTheme for usecase)
-//TODO: Replace own in-process cache by KImageCache's pixmap cache.
+//TODO: Merge frameCount and spriteExists by representing non-existence as frameCount == -1 in the cache.
+//TODO: Split pixmap-fetching functionality from KGRI into new base class KGameRendererClient.
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
 static const QString cacheName()
@@ -47,6 +48,26 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
 	, m_renderer(0)
 	, m_imageCache(cacheName(), cacheSize)
 {
+	//Problem: In multi-threaded scenarios, there are two possible ways to use
+	//KIC's pixmap cache.
+	//1. The worker renders a QImage and stores it in the cache. The main thread
+	//   reads the QImage again and converts it into a QPixmap, storing it in
+	//   the pixmap cache for later re-use.
+	//   i.e. QImage -> diskcache -> QImage -> QPixmap -> pixmapcache -> serve
+	//2. The worker renders a QImage and sends it directly to the main thread,
+	//   which converts it to a QPixmap. The QPixmap is stored in KIC's pixmap
+	//   cache, and converted to QImage to be written to the shared data cache.
+	//   i.e. QImage -> QPixmap -> pixmapcache -> serve
+	//                         \-> QImage -> diskcache
+	//We choose a third way:
+	//3. The worker renders a QImage which is converted to a QPixmap by the main
+	//   thread. The main thread caches the QPixmap itself, and stores the
+	//   QImage in the cache.
+	//   i.e. QImage -> QPixmap -> pixmapcache -> serve
+	//              \-> diskcache
+	//As you see, implementing an own pixmap cache saves us one conversion. We
+	//therefore disable KIC's pixmap cache because we do not need it.
+	m_imageCache.setPixmapCaching(false);
 }
 
 KGameRenderer::KGameRenderer(const QString& theme, const QString& defaultTheme)
@@ -149,7 +170,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//clear caches
 	if (!themeIsCached)
 	{
-		m_highAvailabilityCache.clear();
+		m_pixmapCache.clear();
 		m_frameCountCache.clear();
 		m_imageCache.clear();
 		m_imageCache.insert(QString::fromLatin1("kgr_theme"), theme.toUtf8());
@@ -188,7 +209,7 @@ QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame) cons
 
 int KGameRenderer::frameCount(const QString& key) const
 {
-	//look up in high-availability cache
+	//look up in in-process cache
 	QHash<QString, int>::const_iterator it = d->m_frameCountCache.find(key);
 	if (it != d->m_frameCountCache.end())
 	{
@@ -255,13 +276,13 @@ QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int f
 	//generate key
 	const QString elementKey = d->spriteFrameKey(key, frame);
 	const QString cacheKey = d->m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
-	//check high availability cache
-	QHash<QString, QPixmap>::const_iterator it = d->m_highAvailabilityCache.find(cacheKey);
-	if (it != d->m_highAvailabilityCache.end())
+	//check pixmap cache
+	QHash<QString, QPixmap>::const_iterator it = d->m_pixmapCache.find(cacheKey);
+	if (it != d->m_pixmapCache.end())
 	{
 		return it.value();
 	}
-	//check cache
+	//check (slower) image cache
 	QPixmap pix;
 	if (!d->m_imageCache.findPixmap(cacheKey, &pix))
 	{
@@ -281,7 +302,7 @@ QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int f
 		//store in cache for next access
 		d->m_imageCache.insertPixmap(cacheKey, pix);
 	}
-	d->m_highAvailabilityCache.insert(cacheKey, pix);
+	d->m_pixmapCache.insert(cacheKey, pix);
 	return pix;
 }
 
