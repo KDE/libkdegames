@@ -21,11 +21,18 @@
 
 #include <QtGui/QGraphicsView>
 
-class KGameRenderedItemPrivate : public QObject, public QGraphicsPixmapItem
+class KGameRenderedItemPrivate : public QGraphicsPixmapItem
 {
 	public:
 		KGameRenderedItemPrivate(KGameRenderedItem* parent);
+		bool adjustRenderSize(); //returns whether an adjustment was made; WARNING: only call when m_primaryView != 0
+
+		//QGraphicsItem reimplementations (see comment below for why we need all of this)
+		virtual bool contains(const QPointF& point) const;
+		virtual bool isObscuredBy(const QGraphicsItem* item) const;
+		virtual QPainterPath opaqueArea() const;
 		virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+		virtual QPainterPath shape() const;
 	public:
 		KGameRenderedItem* m_parent;
 		QGraphicsView* m_primaryView;
@@ -37,6 +44,30 @@ KGameRenderedItemPrivate::KGameRenderedItemPrivate(KGameRenderedItem* parent)
 	, m_parent(parent)
 	, m_primaryView(0)
 {
+}
+
+bool KGameRenderedItemPrivate::adjustRenderSize()
+{
+	Q_ASSERT(m_primaryView);
+	//determine rectangle which is covered by this item on the view
+	const QRectF viewRect = m_primaryView->mapFromScene(m_parent->sceneBoundingRect()).boundingRect();
+	//check resulting render size
+	m_correctRenderSize = viewRect.size().toSize();
+	const QSize diff = m_parent->renderSize() - m_correctRenderSize;
+	//ignore fluctuations in the render size which result from rounding errors
+	if (qAbs(diff.width()) <= 1 && qAbs(diff.height()) <= 1)
+	{
+		return false;
+	}
+	m_parent->setRenderSize(m_correctRenderSize);
+	//calculate new transform for this item
+	QTransform t;
+	t.scale(qreal(1.0) / m_correctRenderSize.width(), qreal(1.0) / m_correctRenderSize.height());
+	//render item
+	m_parent->prepareGeometryChange();
+	setTransform(t);
+	m_parent->update();
+	return true;
 }
 
 KGameRenderedItem::KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent)
@@ -63,6 +94,7 @@ void KGameRenderedItem::setOffset(const QPointF& offset)
 	{
 		prepareGeometryChange();
 		d->setPos(offset);
+		update();
 	}
 }
 
@@ -83,103 +115,126 @@ void KGameRenderedItem::setPrimaryView(QGraphicsView* view)
 		d->m_primaryView = view;
 		if (view)
 		{
-			//use KGameRenderedItemPrivate::paint to determine render size and coordinate system
-			d->paint(0, 0, view);
+			//determine render size and adjust coordinate system
+			d->m_correctRenderSize = QSize(-10, -10); //force adjustment to be made
+			d->adjustRenderSize();
 		}
 		else
 		{
 			//reset transform to make coordinate systems of this item and the private item equal
+			prepareGeometryChange();
 			d->setTransform(QTransform());
+			update();
 		}
 	}
 }
 
 void KGameRenderedItem::receivePixmap(const QPixmap& pixmap)
 {
+	prepareGeometryChange();
 	d->setPixmap(pixmap);
+	update();
 }
 
-//BEGIN QGraphicsItem reimplementation
-//NOTE: The purpose of this reimplementation is to make sure that all interactional events are sent to this item, not to the contained QGraphicsPixmapItem which provides the visual representation (and the metrics calculations).
+//We want to make sure that all interactional events are sent ot this item, and
+//not to the contained QGraphicsPixmapItem which provides the visual
+//representation (and the metrics calculations).
+//At the same time, we do not want the contained QGraphicsPixmapItem to slow
+//down operations like QGraphicsScene::collidingItems().
+//So the strategy is to use the QGraphicsPixmapItem implementation from
+//KGameRenderedItemPrivate for KGameRenderedItem.
+//Then the relevant methods in KGameRenderedItemPrivate are reimplemented empty
+//to effectively clear the item and hide it from any collision detection. This
+//strategy allows us to use the nifty QGraphicsPixmapItem logic without exposing
+//a QGraphicsPixmapItem subclass (which would conflict with QGraphicsObject).
+
+//BEGIN QGraphicsItem reimplementation of KGameRenderedItem
 
 QRectF KGameRenderedItem::boundingRect() const
 {
-	if (d->m_primaryView)
-	{
-		return QRectF(0, 0, 1, 1).translated(d->pos());
-	}
-	else
-	{
-		return d->mapRectToParent(d->boundingRect());
-	}
+	return d->mapRectToParent(d->QGraphicsPixmapItem::boundingRect());
 }
 
 bool KGameRenderedItem::contains(const QPointF& point) const
 {
-	return d->contains(d->mapFromParent(point));
+	return d->QGraphicsPixmapItem::contains(d->mapFromParent(point));
 }
 
 bool KGameRenderedItem::isObscuredBy(const QGraphicsItem* item) const
 {
-	return d->isObscuredBy(item);
+	return d->QGraphicsPixmapItem::isObscuredBy(item);
 }
 
 QPainterPath KGameRenderedItem::opaqueArea() const
 {
-	return d->mapToParent(d->opaqueArea());
+	return d->mapToParent(d->QGraphicsPixmapItem::opaqueArea());
 }
 
 void KGameRenderedItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	//the actual painting is done by KGameRenderedItemPrivate::paint (see below)
 	Q_UNUSED(painter) Q_UNUSED(option) Q_UNUSED(widget)
 }
 
 QPainterPath KGameRenderedItem::shape() const
 {
-	return d->mapToParent(d->shape());
+	return d->mapToParent(d->QGraphicsPixmapItem::shape());
 }
 
-//END QGraphicsItem reimplementation
+//END QGraphicsItem reimplementation of KGameRenderedItem
+//BEGIN QGraphicsItem reimplementation of KGameRenderedItemPrivate
+
+bool KGameRenderedItemPrivate::contains(const QPointF& point) const
+{
+	Q_UNUSED(point)
+	return false;
+}
+
+bool KGameRenderedItemPrivate::isObscuredBy(const QGraphicsItem* item) const
+{
+	Q_UNUSED(item)
+	return false;
+}
+
+QPainterPath KGameRenderedItemPrivate::opaqueArea() const
+{
+	return QPainterPath();
+}
 
 void KGameRenderedItemPrivate::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+	//Trivial stuff up to now. The fun stuff starts here. ;-)
 	//There is no way to get informed when the viewport's coordinate system
 	//(relative to this item's coordinate system) has changed, so we're checking
 	//the renderSize in each paintEvent coming from the primary view.
-	//WARNING: Calls with painter == 0 && option == 0 are used by KGameRenderedItem::setPrimaryView.
 	if (m_primaryView)
 	{
 		if (m_primaryView == widget || m_primaryView->isAncestorOf(widget))
 		{
-			//determine rectangle which is covered by this item on the view
-			const QRectF viewRect = m_primaryView->mapFromScene(m_parent->sceneBoundingRect()).boundingRect();
-			//check resulting render size
-			m_correctRenderSize = viewRect.size().toSize();
-			const QSize diff = m_parent->renderSize() - m_correctRenderSize;
-			//ignore fluctuations in the render size which result from rounding errors
-			if (qAbs(diff.width()) > 1 || qAbs(diff.height()) > 1)
+			if (adjustRenderSize())
 			{
-				m_parent->setRenderSize(m_correctRenderSize);
-				//update transform of private item to fit it into (0,0 1x1) in parent coordinates
-				QTransform t;
-				t.scale(qreal(1.0) / m_correctRenderSize.width(), qreal(1.0) / m_correctRenderSize.height());
-				setTransform(t);
-				//We're *not* calling the paint() method now. We wait until the pixmap has been delivered.
+				//An adjustment was made, so not paint now, but wait for the next painting.
 				return;
 			}
 		}
-	}
-	if (painter && option)
-	{
 		//draw pixmap directly in physical coordinates
-		const QSize renderSize = m_parent->renderSize();
-		const QPoint basePos = painter->transform().map(offset()).toPoint();
+		const QPoint basePos = painter->transform().map(QPointF()).toPoint();
 		painter->save();
 		painter->setTransform(QTransform());
 		painter->drawPixmap(basePos, pixmap());
 		painter->restore();
 	}
+	else
+	{
+		QGraphicsPixmapItem::paint(painter, option, widget);
+		return;
+	}
 }
+
+QPainterPath KGameRenderedItemPrivate::shape() const
+{
+	return QPainterPath();
+}
+
+//END QGraphicsItem reimplementation of KGameRenderedItemPrivate
 
 #include "kgamerendereditem.moc"
