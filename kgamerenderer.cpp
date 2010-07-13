@@ -86,7 +86,7 @@ QString KGameRenderer::frameSuffix() const
 
 void KGameRenderer::setFrameSuffix(const QString& suffix)
 {
-	d->m_frameSuffix = suffix;
+	d->m_frameSuffix = suffix.contains(QLatin1String("%1")) ? suffix : QLatin1String("_%1");
 }
 
 QString KGameRenderer::theme() const
@@ -299,67 +299,49 @@ bool KGameRenderer::spriteExists(const QString& key) const
 
 QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int frame) const
 {
-	//TODO: reduce code duplication with KGameRendererPrivate::requestPixmap
-	//parse request
-	if (size.isEmpty())
-	{
-		return QPixmap();
-	}
-	const QString elementKey = d->spriteFrameKey(key, frame);
-	const QString cacheKey = d->m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
-	//try to serve from high-speed cache
-	QHash<QString, QPixmap>::const_iterator it = d->m_pixmapCache.find(cacheKey);
-	if (it != d->m_pixmapCache.end())
-	{
-		return it.value();
-	}
-	//try to serve from low-speed cache
-	QPixmap pix;
-	if (d->m_imageCache->findPixmap(cacheKey, &pix))
-	{
-		d->m_pixmapCache.insert(cacheKey, pix);
-		return pix;
-	}
-	//make sure that renderer is available
-	if (!d->instantiateRenderer())
-	{
-		return QPixmap();
-	}
-	//create job
-	KGRInternal::Job* job = new KGRInternal::Job;
-	job->renderer = d->m_renderer;
-	job->cacheKey = cacheKey;
-	job->elementKey = elementKey;
-	job->isSynchronous = true;
-	job->size = size;
-	//render immediately (will call KGRPrivate::jobFinished)
-	(new KGRInternal::Worker(job, d))->run();
-	//fetch pixmap from high-speed cache
-	return d->m_pixmapCache[cacheKey];
+	QPixmap result;
+	d->requestPixmap(KGRInternal::ClientSpec(key, frame, size), 0, &result);
+	return result;
 }
 
-void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
+//Helper function for KGameRendererPrivate::requestPixmap.
+void KGameRendererPrivate::requestPixmap__propagateResult(const QPixmap& pixmap, KGameRendererClient* client, QPixmap* synchronousResult)
 {
+	if (client)
+	{
+		client->receivePixmap(pixmap);
+	}
+	if (synchronousResult)
+	{
+		*synchronousResult = pixmap;
+	}
+}
+
+void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KGameRendererClient* client, QPixmap* synchronousResult)
+{
+	//NOTE: If client == 0, the request is synchronous and must be finished when this method returns. This behavior is used by KGR::spritePixmap(). Instead of KGameRendererClient::receivePixmap, the QPixmap* argument is then used to return the result.
 	//parse request
-	const QSize size = client->d->m_renderSize;
-	if (size.isEmpty())
+	if (spec.size.isEmpty())
 	{
-		client->receivePixmap(QPixmap());
+		requestPixmap__propagateResult(QPixmap(), client, synchronousResult);
 		return;
 	}
-	const QString elementKey = spriteFrameKey(client->d->m_spriteKey, client->d->m_frame);
-	const QString cacheKey = m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
+	const QString elementKey = spriteFrameKey(spec.spriteKey, spec.frame);
+	const QString cacheKey = m_sizePrefix.arg(spec.size.width()).arg(spec.size.height()) + elementKey;
 	//check if update is needed
-	if (m_clients.value(client) == cacheKey)
+	if (client)
 	{
-		return;
+		if (m_clients.value(client) == cacheKey)
+		{
+			return;
+		}
+		m_clients[client] = cacheKey;
 	}
-	m_clients[client] = cacheKey;
 	//try to serve from high-speed cache
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);
 	if (it != m_pixmapCache.end())
 	{
-		client->receivePixmap(it.value());
+		requestPixmap__propagateResult(it.value(), client, synchronousResult);
 		return;
 	}
 	//try to serve from low-speed cache
@@ -367,11 +349,11 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	if (m_imageCache->findPixmap(cacheKey, &pix))
 	{
 		m_pixmapCache.insert(cacheKey, pix);
-		client->receivePixmap(pix);
+		requestPixmap__propagateResult(pix, client, synchronousResult);
 		return;
 	}
-	//is such a rendering job already running?
-	if (m_pendingRequests.contains(cacheKey))
+	//if asynchronous request, is such a rendering job already running?
+	if (client && m_pendingRequests.contains(cacheKey))
 	{
 		return;
 	}
@@ -380,23 +362,32 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	{
 		return;
 	}
-	//create job (unless a similar job has not yet been launched for another client)
+	//create job
 	KGRInternal::Job* job = new KGRInternal::Job;
 	job->renderer = m_renderer;
 	job->cacheKey = cacheKey;
 	job->elementKey = elementKey;
-	job->size = size;
-	job->isSynchronous = false;
-	m_workerPool.start(new KGRInternal::Worker(job, this));
-	m_pendingRequests << cacheKey;
+	job->spec = spec;
+	const bool synchronous = !client;
+	KGRInternal::Worker* worker = new KGRInternal::Worker(job, synchronous, this);
+	if (synchronous)
+	{
+		worker->run();
+		//if everything worked fine, result is in high-speed cache now
+		*synchronousResult = m_pixmapCache.value(cacheKey);
+	}
+	else
+	{
+		m_workerPool.start(new KGRInternal::Worker(job, !client, this));
+		m_pendingRequests << cacheKey;
+	}
 }
 
-void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
+void KGameRendererPrivate::jobFinished(KGRInternal::Job* job, bool isSynchronous)
 {
 	//read job
 	const QString cacheKey = job->cacheKey;
 	const QImage result = job->result;
-	const bool isSynchronous = job->isSynchronous;
 	delete job;
 	//check who wanted this pixmap
 	m_pendingRequests.removeAll(cacheKey);
@@ -417,10 +408,11 @@ void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
 	}
 }
 
-//BEGIN KGRInternal::Worker
+//BEGIN KGRInternal::Job/Worker
 
-KGRInternal::Worker::Worker(KGRInternal::Job* job, KGameRendererPrivate* parent)
+KGRInternal::Worker::Worker(KGRInternal::Job* job, bool isSynchronous, KGameRendererPrivate* parent)
 	: m_job(job)
+	, m_synchronous(isSynchronous)
 	, m_parent(parent)
 {
 }
@@ -429,18 +421,21 @@ static const uint transparentRgba = QColor(Qt::transparent).rgba();
 
 void KGRInternal::Worker::run()
 {
-	QImage image(m_job->size, QImage::Format_ARGB32_Premultiplied);
+	QImage image(m_job->spec.size, QImage::Format_ARGB32_Premultiplied);
 	image.fill(transparentRgba);
 	QPainter painter(&image);
 	m_job->renderer->render(&painter, m_job->elementKey);
 	painter.end();
 	m_job->result = image;
 	//talk back to the main thread
-	QMetaObject::invokeMethod(m_parent, "jobFinished", Qt::AutoConnection, Q_ARG(KGRInternal::Job*, m_job));
+	QMetaObject::invokeMethod(
+		m_parent, "jobFinished", Qt::AutoConnection,
+		Q_ARG(KGRInternal::Job*, m_job), Q_ARG(bool, m_synchronous)
+	);
 	//NOTE: KGR::spritePixmap relies on Qt::DirectConnection when this method is run in the main thread.
 }
 
-//END KGRInternal::Worker
+//END KGRInternal::Job/Worker
 
 #include "kgamerenderer.moc"
 #include "kgamerenderer_p.moc"

@@ -74,6 +74,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///
 		///It is recommended not to alter the frame base index unless you need
 		///to support legacy themes.
+		//TODO: allow frameBaseIndex == -1 for KDiamond
 		void setFrameBaseIndex(int frameBaseIndex);
 		///@return the frame suffix. @see setFrameSuffix()
 		QString frameSuffix() const;

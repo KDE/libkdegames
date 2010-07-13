@@ -25,9 +25,7 @@
 KGameRendererClientPrivate::KGameRendererClientPrivate(KGameRenderer* renderer, const QString& spriteKey, KGameRendererClient* parent)
 	: m_parent(parent)
 	, m_renderer(renderer)
-	, m_spriteKey(spriteKey)
-	, m_renderSize(3, 3)
-	, m_frame(-1)
+	, m_spec(spriteKey, -1, QSize(3, 3))
 {
 }
 
@@ -52,33 +50,33 @@ KGameRenderer* KGameRendererClient::renderer() const
 
 QString KGameRendererClient::spriteKey() const
 {
-	return d->m_spriteKey;
+	return d->m_spec.spriteKey;
 }
 
 void KGameRendererClient::setSpriteKey(const QString& spriteKey)
 {
-	if (d->m_spriteKey != spriteKey)
+	if (d->m_spec.spriteKey != spriteKey)
 	{
-		d->m_spriteKey = spriteKey;
+		d->m_spec.spriteKey = spriteKey;
 		d->fetchPixmap();
 	}
 }
 
 int KGameRendererClient::frameCount() const
 {
-	return d->m_renderer->frameCount(d->m_spriteKey);
+	return d->m_renderer->frameCount(d->m_spec.spriteKey);
 }
 
 int KGameRendererClient::frame() const
 {
-	return d->m_frame;
+	return d->m_spec.frame;
 }
 
 void KGameRendererClient::setFrame(int frame)
 {
-	if (d->m_frame != frame)
+	if (d->m_spec.frame != frame)
 	{
-		d->m_frame = frame;
+		d->m_spec.frame = frame;
 		d->fetchPixmap();
 	}
 }
@@ -90,32 +88,31 @@ QPixmap KGameRendererClient::pixmap() const
 
 QSize KGameRendererClient::renderSize() const
 {
-	return d->m_renderSize;
+	return d->m_spec.size;
 }
 
 void KGameRendererClient::setRenderSize(const QSize& renderSize)
 {
-	if (d->m_renderSize != renderSize)
+	if (d->m_spec.size != renderSize)
 	{
-		d->m_renderSize = renderSize;
+		d->m_spec.size = renderSize;
 		d->fetchPixmap();
 	}
 }
 
 void KGameRendererClientPrivate::fetchPixmap()
 {
-	//FIXME: In KDiamond, frame == -1 is *sometimes* changed to frame == 0.
 	//update frame count, normalize frame number (for animated frames)
-	const int frameCount = m_renderer->frameCount(m_spriteKey);
+	const int frameCount = m_renderer->frameCount(m_spec.spriteKey);
 	const int frameBaseIndex = m_renderer->frameBaseIndex();
 	if (frameCount <= 0)
 	{
-		m_frame = -1;
+		m_spec.frame = -1;
 	}
-	else if (m_frame >= 0)
+	else if (m_spec.frame >= 0)
 	{
-		m_frame = (m_frame - frameBaseIndex) % frameCount + frameBaseIndex;
+		m_spec.frame = (m_spec.frame - frameBaseIndex) % frameCount + frameBaseIndex;
 	}
 	//actually fetch pixmap
-	m_renderer->d->requestPixmap(m_parent);
+	m_renderer->d->requestPixmap(m_spec, m_parent);
 }

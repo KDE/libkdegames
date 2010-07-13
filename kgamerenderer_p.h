@@ -29,25 +29,40 @@
 
 namespace KGRInternal
 {
+	//Describes the state of a KGameRendererClient.
+	struct ClientSpec
+	{
+		inline ClientSpec(const QString& spriteKey = QString(), int frame = -1, const QSize& size = QSize());
+		QString spriteKey;
+		int frame;
+		QSize size;
+	};
+	ClientSpec::ClientSpec(const QString& spriteKey_, int frame_, const QSize& size_)
+		: spriteKey(spriteKey_)
+		, frame(frame_)
+		, size(size_)
+	{
+	}
+
 	//Describes a rendering job which is delegated to a worker thread.
 	struct Job
 	{
 		QSvgRenderer* renderer;
+		ClientSpec spec;
 		QString cacheKey, elementKey;
-		QSize size;
 		QImage result;
-		bool isSynchronous; //true if the job was started by the synchronous KGR::spritePixmap() method
 	};
 
 	//Describes a worker thread.
 	class Worker : public QRunnable
 	{
 		public:
-			Worker(Job* job, KGameRendererPrivate* parent);
+			Worker(Job* job, bool isSynchronous, KGameRendererPrivate* parent);
 
 			virtual void run();
 		private:
 			Job* m_job;
+			bool m_synchronous;
 			KGameRendererPrivate* m_parent;
 	};
 };
@@ -62,9 +77,11 @@ class KGameRendererPrivate : public QObject
 		bool setTheme(const QString& theme);
 		bool instantiateRenderer(bool force = false);
 		inline QString spriteFrameKey(const QString& key, int frame) const;
-		void requestPixmap(KGameRendererClient* client);
+		void requestPixmap(const KGRInternal::ClientSpec& spec, KGameRendererClient* client, QPixmap* synchronousResult = 0);
+	private:
+		inline void requestPixmap__propagateResult(const QPixmap& pixmap, KGameRendererClient* client, QPixmap* synchronousResult);
 	public Q_SLOTS:
-		void jobFinished(KGRInternal::Job* job); //NOTE: This is invoked from KGRInternal::Worker::run.
+		void jobFinished(KGRInternal::Job* job, bool isSynchronous); //NOTE: This is invoked from KGRInternal::Worker::run.
 	public:
 		QString m_defaultTheme, m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
@@ -116,9 +133,7 @@ class KGameRendererClientPrivate : public QObject
 		KGameRenderer* m_renderer;
 
 		QPixmap m_pixmap;
-		QString m_spriteKey;
-		QSize m_renderSize;
-		int m_frame;
+		KGRInternal::ClientSpec m_spec;
 };
 
 #endif // KGAMERENDERER_P_H
