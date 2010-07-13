@@ -28,22 +28,20 @@ KGameRendererClientPrivate::KGameRendererClientPrivate(KGameRenderer* renderer, 
 	, m_spriteKey(spriteKey)
 	, m_renderSize(3, 3)
 	, m_frame(-1)
-	, m_frameCount(-1)
-	, m_outdated(false) //must be false or the initial fetchPixmap() in the parent ctor won't work
 {
 }
 
 KGameRendererClient::KGameRendererClient(KGameRenderer* renderer, const QString& spriteKey)
 	: d(new KGameRendererClientPrivate(renderer, spriteKey, this))
 {
-	renderer->d->m_clients << this;
-	d->fetchPixmap();
+	renderer->d->m_clients.insert(this, QString());
+	//The following may not be triggered directly because it may call recievePixmap() which is a pure virtual method at this point.
+	QTimer::singleShot(0, d, SLOT(fetchPixmap()));
 }
 
 KGameRendererClient::~KGameRendererClient()
 {
-	d->m_renderer->d->m_clients.removeAll(this);
-	d->m_renderer->d->m_pendingRequests.remove(this);
+	d->m_renderer->d->m_clients.remove(this);
 	delete d;
 }
 
@@ -68,7 +66,7 @@ void KGameRendererClient::setSpriteKey(const QString& spriteKey)
 
 int KGameRendererClient::frameCount() const
 {
-	return d->m_frameCount;
+	return d->m_renderer->frameCount(d->m_spriteKey);
 }
 
 int KGameRendererClient::frame() const
@@ -78,13 +76,10 @@ int KGameRendererClient::frame() const
 
 void KGameRendererClient::setFrame(int frame)
 {
-	//check if sprite is animated
-	if (d->m_frameCount > 0 && d->m_frame != frame)
+	if (d->m_frame != frame)
 	{
 		d->m_frame = frame;
-		//fetch pixmap without further delay for a smooth animation
-		d->m_outdated = true;
-		d->fetchPixmapInternal();
+		d->fetchPixmap();
 	}
 }
 
@@ -109,31 +104,18 @@ void KGameRendererClient::setRenderSize(const QSize& renderSize)
 
 void KGameRendererClientPrivate::fetchPixmap()
 {
-	if (!m_outdated)
+	//FIXME: In KDiamond, frame == -1 is *sometimes* changed to frame == 0.
+	//update frame count, normalize frame number (for animated frames)
+	const int frameCount = m_renderer->frameCount(m_spriteKey);
+	const int frameBaseIndex = m_renderer->frameBaseIndex();
+	if (frameCount <= 0)
 	{
-		m_outdated = true;
-		QTimer::singleShot(0, this, SLOT(fetchPixmapInternal()));
+		m_frame = -1;
 	}
-}
-
-void KGameRendererClientPrivate::fetchPixmapInternal()
-{
-	if (m_outdated)
+	else if (m_frame >= 0)
 	{
-		//FIXME: In KDiamond, frame == -1 is *sometimes* changed to frame == 0 sometimes in KDiamond.
-		//update frame count, normalize frame number (for animated frames)
-		m_frameCount = m_renderer->frameCount(m_spriteKey);
-		m_frameBaseIndex = m_renderer->frameBaseIndex();
-		if (m_frameCount <= 0)
-		{
-			m_frame = -1;
-		}
-		else if (m_frame >= 0)
-		{
-			m_frame = (m_frame - m_frameBaseIndex) % m_frameCount + m_frameBaseIndex;
-		}
-		//actually fetch pixmap
-		//FIXME: Pixmaps are not correctly re-requested on resizing.
-		m_renderer->d->requestPixmap(m_parent);
+		m_frame = (m_frame - frameBaseIndex) % frameCount + frameBaseIndex;
 	}
+	//actually fetch pixmap
+	m_renderer->d->requestPixmap(m_parent);
 }

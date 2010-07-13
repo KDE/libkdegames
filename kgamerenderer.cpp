@@ -78,7 +78,11 @@ KGameRenderer::KGameRenderer(const QString& theme, const QString& defaultTheme)
 
 KGameRenderer::~KGameRenderer()
 {
-	qDeleteAll(d->m_clients);
+	//cleanup clients
+	QHash<KGameRendererClient*, QString>::const_iterator it1 = d->m_clients.begin(), it2 = d->m_clients.end();
+	for (; it1 != it2; ++it1)
+		delete it1.key();
+	//cleanup own stuff
 	delete d->m_renderer;
 	delete d;
 }
@@ -120,11 +124,11 @@ void KGameRenderer::setTheme(const QString& theme)
 		d->setTheme(d->m_defaultTheme);
 	}
 	//announce change to KGameRendererClients
-	QList<KGameRendererClient*>::const_iterator it1 = d->m_clients.begin();
-	QList<KGameRendererClient*>::const_iterator it2 = d->m_clients.end();
+	QHash<KGameRendererClient*, QString>::iterator it1 = d->m_clients.begin(), it2 = d->m_clients.end();
 	for (; it1 != it2; ++it1)
 	{
-		(*it1)->d->fetchPixmap();
+		it1.value().clear(); //because the pixmap is outdated
+		it1.key()->d->fetchPixmap();
 	}
 	//announce change publicly
 	if (oldTheme != d->m_currentTheme)
@@ -299,9 +303,8 @@ QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int f
 	job->cacheKey = cacheKey;
 	job->elementKey = elementKey;
 	job->size = size;
-	//render immediately
-	KGRInternal::Worker(job, d).doWork();
-	d->jobFinished(job);
+	//render immediately (will call KGRPrivate::jobFinished)
+	(new KGRInternal::Worker(job, d))->run();
 	//fetch pixmap from high-speed cache
 	return d->m_pixmapCache[cacheKey];
 }
@@ -317,6 +320,12 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	}
 	const QString elementKey = spriteFrameKey(client->d->m_spriteKey, client->d->m_frame);
 	const QString cacheKey = m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
+	//check if update is needed
+	if (m_clients.value(client) == cacheKey)
+	{
+		return;
+	}
+	m_clients[client] = cacheKey;
 	//try to serve from high-speed cache
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);
 	if (it != m_pixmapCache.end())
@@ -332,6 +341,11 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 		client->recievePixmap(pix);
 		return;
 	}
+	//is such a rendering job already running?
+	if (m_pendingRequests.contains(cacheKey))
+	{
+		return;
+	}
 	//make sure that renderer is available
 	if (!m_renderer)
 	{
@@ -340,13 +354,6 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 			return;
 		}
 	}
-	//remember who requested what
-	bool jobAlreadyScheduled = m_pendingRequests.key(cacheKey) != 0;
-	m_pendingRequests[client] = cacheKey;
-	if (jobAlreadyScheduled)
-	{
-		return;
-	}
 	//create job (unless a similar job has not yet been launched for another client)
 	KGRInternal::Job* job = new KGRInternal::Job;
 	job->renderer = m_renderer;
@@ -354,6 +361,7 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	job->elementKey = elementKey;
 	job->size = size;
 	m_workerPool.start(new KGRInternal::Worker(job, this));
+	m_pendingRequests << cacheKey;
 }
 
 void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
@@ -365,19 +373,13 @@ void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
 	m_pixmapCache.insert(cacheKey, pixmap);
 	delete job;
 	//rollout pixmap to all clients that have requested it
-	QHash<KGameRendererClient*, QString>::iterator it = m_pendingRequests.begin();
-	int debugCount = 0;
-	while (it != m_pendingRequests.end())
+	m_pendingRequests.removeAll(cacheKey);
+	QHash<KGameRendererClient*, QString>::const_iterator it1 = m_clients.begin(), it2 = m_clients.end();
+	for (; it1 != it2; ++it1)
 	{
-		if (it.value() == cacheKey)
+		if (it1.value() == cacheKey)
 		{
-			it.key()->recievePixmap(pixmap);
-			it = m_pendingRequests.erase(it);
-			++debugCount;
-		}
-		else
-		{
-			++it;
+			it1.key()->recievePixmap(pixmap);
 		}
 	}
 }
@@ -390,26 +392,19 @@ KGRInternal::Worker::Worker(KGRInternal::Job* job, KGameRendererPrivate* parent)
 {
 }
 
-void KGRInternal::Worker::run()
-{
-	//This method is called in a worker thread (by QThreadPool).
-	doWork();
-	//It needs to talk back to the main thread when done.
-	//FIXME: Why do I fail? (NOTE: My local build is set to full Debug mode currently.)
-	QMetaObject::invokeMethod(m_parent, "jobFinished", Qt::QueuedConnection, Q_ARG(KGRInternal::Job*, m_job));
-}
-
 static const uint transparentRgba = QColor(Qt::transparent).rgba();
 
-void KGRInternal::Worker::doWork()
+void KGRInternal::Worker::run()
 {
-	//This method may be called from the main thread (by KGameRenderer).
 	QImage image(m_job->size, QImage::Format_ARGB32_Premultiplied);
 	image.fill(transparentRgba);
 	QPainter painter(&image);
 	m_job->renderer->render(&painter, m_job->elementKey);
 	painter.end();
 	m_job->result = image;
+	//talk back to the main thread
+	QMetaObject::invokeMethod(m_parent, "jobFinished", Qt::AutoConnection, Q_ARG(KGRInternal::Job*, m_job));
+	//NOTE: KGR::spritePixmap relies on Qt::DirectConnection when this method is run in the main thread.
 }
 
 //END KGRInternal::Worker

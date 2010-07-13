@@ -44,8 +44,7 @@ namespace KGRInternal
 		public:
 			Worker(Job* job, KGameRendererPrivate* parent);
 
-			virtual void run(); //This is called in a worker thread.
-			void doWork(); //This is called in the main thread.
+			virtual void run();
 		private:
 			Job* m_job;
 			KGameRendererPrivate* m_parent;
@@ -57,15 +56,15 @@ Q_DECLARE_METATYPE(KGRInternal::Job*)
 class KGameRendererPrivate : public QObject
 {
 	Q_OBJECT
-	public Q_SLOTS:
-		void jobFinished(KGRInternal::Job* job); //NOTE: This is invoked from KGRInternal::Worker::run.
 	public:
 		KGameRendererPrivate(const QString& defaultTheme);
 		bool setTheme(const QString& theme);
 		bool instantiateRenderer();
 		inline QString spriteFrameKey(const QString& key, int frame) const;
 		void requestPixmap(KGameRendererClient* client);
-
+	public Q_SLOTS:
+		void jobFinished(KGRInternal::Job* job); //NOTE: This is invoked from KGRInternal::Worker::run.
+	public:
 		QString m_defaultTheme, m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix;
 		int m_frameBaseIndex;
@@ -74,8 +73,8 @@ class KGameRendererPrivate : public QObject
 		QSvgRenderer* m_renderer;
 		QThreadPool m_workerPool;
 
-		QList<KGameRendererClient*> m_clients;
-		QHash<KGameRendererClient*, QString> m_pendingRequests; //maps client -> cache key of requested pixmap
+		QHash<KGameRendererClient*, QString> m_clients; //maps client -> cache key of current pixmap
+		QStringList m_pendingRequests; //cache keys of pixmaps which are currently being rendered
 
 		//NOTE: See ctor implementation for why we do not use KImageCache's pixmap cache.
 		KImageCache m_imageCache;
@@ -90,7 +89,6 @@ class KGameRendererClientPrivate : public QObject
 		KGameRendererClientPrivate(KGameRenderer* renderer, const QString& spriteKey, KGameRendererClient* parent);
 	public Q_SLOTS:
 		void fetchPixmap();
-		void fetchPixmapInternal();
 	public:
 		KGameRendererClient* m_parent;
 		KGameRenderer* m_renderer;
@@ -98,8 +96,7 @@ class KGameRendererClientPrivate : public QObject
 		QPixmap m_pixmap;
 		QString m_spriteKey;
 		QSize m_renderSize;
-		int m_frame, m_frameCount, m_frameBaseIndex;
-		bool m_outdated;
+		int m_frame;
 };
 
 #endif // KGAMERENDERER_P_H
