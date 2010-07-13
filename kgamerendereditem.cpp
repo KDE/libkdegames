@@ -29,6 +29,7 @@ class KGameRenderedItemPrivate : public QObject, public QGraphicsPixmapItem
 	public:
 		KGameRenderedItem* m_parent;
 		QGraphicsView* m_primaryView;
+		QSize m_correctRenderSize;
 };
 
 KGameRenderedItemPrivate::KGameRenderedItemPrivate(KGameRenderedItem* parent)
@@ -135,20 +136,31 @@ void KGameRenderedItemPrivate::paint(QPainter* painter, const QStyleOptionGraphi
 			//determine rectangle which is covered by this item on the view
 			const QRectF viewRect = m_primaryView->mapFromScene(m_parent->sceneBoundingRect()).boundingRect();
 			//check resulting render size
-			const QSize rSize = viewRect.size().toSize();
-			if (rSize != m_parent->renderSize())
+			m_correctRenderSize = viewRect.size().toSize();
+			const QSize diff = m_parent->renderSize() - m_correctRenderSize;
+			//ignore fluctuations in the render size which result from rounding errors
+			if (qAbs(diff.width()) > 1 || qAbs(diff.height()) > 1)
 			{
-				m_parent->setRenderSize(rSize);
+				m_parent->setRenderSize(m_correctRenderSize);
 				//update transform of private item to fit it into (0,0 1x1) in parent coordinates
 				QTransform t;
-				t.scale(qreal(1.0) / rSize.width(), qreal(1.0) / rSize.height());
+				t.scale(qreal(1.0) / m_correctRenderSize.width(), qreal(1.0) / m_correctRenderSize.height());
 				setTransform(t);
 				//We're *not* calling the paint() method now. We wait until the pixmap has been delivered.
 				return;
 			}
 		}
 	}
-	QGraphicsPixmapItem::paint(painter, option, widget);
+	if (painter && option)
+	{
+		//draw pixmap directly in physical coordinates
+		const QSize renderSize = m_parent->renderSize();
+		const QPoint basePos = painter->transform().map(offset()).toPoint();
+		painter->save();
+		painter->setTransform(QTransform());
+		painter->drawPixmap(basePos, pixmap());
+		painter->restore();
+	}
 }
 
 #include "kgamerendereditem.moc"
