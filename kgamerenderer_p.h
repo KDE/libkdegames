@@ -76,7 +76,7 @@ class KGameRendererPrivate : public QObject
 		KGameRendererPrivate(const QString& defaultTheme, KGameRenderer* parent);
 		bool setTheme(const QString& theme);
 		bool instantiateRenderer(bool force = false);
-		inline QString spriteFrameKey(const QString& key, int frame) const;
+		inline QString spriteFrameKey(const QString& key, int frame, bool normalizeFrameNo = false) const;
 		void requestPixmap(const KGRInternal::ClientSpec& spec, KGameRendererClient* client, QPixmap* synchronousResult = 0);
 	private:
 		inline void requestPixmap__propagateResult(const QPixmap& pixmap, KGameRendererClient* client, QPixmap* synchronousResult);

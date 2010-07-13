@@ -198,7 +198,7 @@ const KGameTheme* KGameRenderer::gameTheme() const
 	return &d->m_theme;
 }
 
-QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame) const
+QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame, bool normalizeFrameNo) const
 {
 	//fast path for non-animated sprites
 	if (frame < 0)
@@ -206,14 +206,17 @@ QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame) cons
 		return key;
 	}
 	//normalize frame number
-	const int frameCount = m_parent->frameCount(key);
-	if (frameCount <= 0)
+	if (normalizeFrameNo)
 	{
-		frame = -1;
-	}
-	else
-	{
-		frame = (frame - m_frameBaseIndex) % frameCount;
+		const int frameCount = m_parent->frameCount(key);
+		if (frameCount <= 0)
+		{
+			frame = -1;
+		}
+		else
+		{
+			frame = (frame - m_frameBaseIndex) % frameCount;
+		}
 	}
 	return key + m_frameSuffix.arg(frame);
 }
@@ -246,7 +249,7 @@ int KGameRenderer::frameCount(const QString& key) const
 		{
 			//look for animated sprite first
 			count = d->m_frameBaseIndex;
-			while (d->m_renderer->elementExists(d->spriteFrameKey(key, count)))
+			while (d->m_renderer->elementExists(d->spriteFrameKey(key, count, false)))
 			{
 				++count;
 			}
