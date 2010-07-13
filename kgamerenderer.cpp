@@ -62,10 +62,9 @@ KGameRenderer::KGameRenderer(const QString& defaultTheme, unsigned cacheSize)
 
 KGameRenderer::~KGameRenderer()
 {
-	//cleanup clients
-	QHash<KGameRendererClient*, QString>::const_iterator it1 = d->m_clients.begin(), it2 = d->m_clients.end();
-	for (; it1 != it2; ++it1)
-		delete it1.key();
+	//cleanup clients (I explicitly take a copy instead of iterating over m_clients directly, because m_clients changes during the cleanup, when the clients deregister themselves from this renderer)
+	const QList<KGameRendererClient*> clients = d->m_clients.keys();
+	qDeleteAll(clients);
 	//cleanup own stuff
 	delete d->m_renderer;
 	delete d->m_imageCache;
