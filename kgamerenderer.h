@@ -32,6 +32,7 @@ class KGameTheme;
 /**
  * @class KGameRenderer
  * @since 4.6
+ * @short Cache-enabled rendering of SVG themes.
  *
  * KGameRenderer is a light-weight rendering framework for the rendering of
  * SVG themes (as represented by KGameTheme) into pixmap caches.
@@ -107,8 +108,6 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///
 		///It is recommended not to alter the frame base index unless you need
 		///to support legacy themes.
-		//TODO: allow frameBaseIndex == -1 for KDiamond
-		//TODO: map frame numbers in KGameRenderer, not KGameRendererClient
 		void setFrameBaseIndex(int frameBaseIndex);
 		///@return the frame suffix. @see setFrameSuffix()
 		QString frameSuffix() const;

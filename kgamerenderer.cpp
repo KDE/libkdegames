@@ -38,8 +38,9 @@ static const QString cacheName(QString theme)
 	return QString::fromLatin1("kgamerenderer-%1-%2").arg(appName).arg(theme);
 }
 
-KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
-	: m_defaultTheme(defaultTheme)
+KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, KGameRenderer* parent)
+	: m_parent(parent)
+	, m_defaultTheme(defaultTheme)
 	, m_frameSuffix(QString::fromLatin1("_%1"))
 	, m_sizePrefix(QString::fromLatin1("%1-%2-"))
 	, m_frameCountPrefix(QString::fromLatin1("fc-"))
@@ -52,7 +53,7 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
 }
 
 KGameRenderer::KGameRenderer(const QString& theme, const QString& defaultTheme)
-	: d(new KGameRendererPrivate(defaultTheme))
+	: d(new KGameRendererPrivate(defaultTheme, this))
 {
 	setTheme(theme);
 }
@@ -199,7 +200,22 @@ const KGameTheme* KGameRenderer::gameTheme() const
 
 QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame) const
 {
-	return frame >= 0 ? key + m_frameSuffix.arg(frame) : key;
+	//fast path for non-animated sprites
+	if (frame < 0)
+	{
+		return key;
+	}
+	//normalize frame number
+	const int frameCount = m_parent->frameCount(key);
+	if (frameCount <= 0)
+	{
+		frame = -1;
+	}
+	else
+	{
+		frame = (frame - m_frameBaseIndex) % frameCount;
+	}
+	return key + m_frameSuffix.arg(frame);
 }
 
 int KGameRenderer::frameCount(const QString& key) const

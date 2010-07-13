@@ -73,7 +73,7 @@ class KGameRendererPrivate : public QObject
 {
 	Q_OBJECT
 	public:
-		KGameRendererPrivate(const QString& defaultTheme);
+		KGameRendererPrivate(const QString& defaultTheme, KGameRenderer* parent);
 		bool setTheme(const QString& theme);
 		bool instantiateRenderer(bool force = false);
 		inline QString spriteFrameKey(const QString& key, int frame) const;
@@ -83,6 +83,8 @@ class KGameRendererPrivate : public QObject
 	public Q_SLOTS:
 		void jobFinished(KGRInternal::Job* job, bool isSynchronous); //NOTE: This is invoked from KGRInternal::Worker::run.
 	public:
+		KGameRenderer* m_parent;
+
 		QString m_defaultTheme, m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
 		int m_frameBaseIndex;

@@ -102,17 +102,5 @@ void KGameRendererClient::setRenderSize(const QSize& renderSize)
 
 void KGameRendererClientPrivate::fetchPixmap()
 {
-	//update frame count, normalize frame number (for animated frames)
-	const int frameCount = m_renderer->frameCount(m_spec.spriteKey);
-	const int frameBaseIndex = m_renderer->frameBaseIndex();
-	if (frameCount <= 0)
-	{
-		m_spec.frame = -1;
-	}
-	else if (m_spec.frame >= 0)
-	{
-		m_spec.frame = (m_spec.frame - frameBaseIndex) % frameCount + frameBaseIndex;
-	}
-	//actually fetch pixmap
 	m_renderer->d->requestPixmap(m_spec, m_parent);
 }

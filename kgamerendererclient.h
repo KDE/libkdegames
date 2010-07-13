@@ -34,7 +34,8 @@ class KGameRendererPrivate;
  *
  * This class abstracts a sprite rendered by KGameRenderer. Given a sprite key,
  * render size and possibly a frame index, it returns the QPixmap for this
- * sprite (frame) once it becomes available.
+ * sprite (frame) once it becomes available. See the KGameRenderer class
+ * documentation for details.
  *
  * Subclasses have to reimplement the receivePixmap() method.
  */
