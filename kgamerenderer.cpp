@@ -21,12 +21,14 @@
 #include "kgamerendererclient.h"
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QDateTime>
+#include <QtCore/QFileInfo>
 #include <QtGui/QPainter>
+#include <KDebug>
 
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
 //TODO: API for cache access?
-//TODO: check cache timestamp vs. theme/SVG timestamp
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
 static const QString cacheName(QString theme)
@@ -102,8 +104,10 @@ void KGameRenderer::setTheme(const QString& theme)
 	{
 		return;
 	}
+	kDebug(11000) << "Setting theme:" << theme;
 	if (!d->setTheme(theme))
 	{
+		kDebug(11000) << "Falling back to default theme:" << d->m_defaultTheme;
 		d->setTheme(d->m_defaultTheme);
 	}
 	//announce change to KGameRendererClients
@@ -129,27 +133,38 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//load desktop file
 	if (!m_theme.load(theme))
 	{
+		kDebug(11000) << "Theme change failed: Desktop file broken";
 		m_theme.load(m_currentTheme);
 		return false;
 	}
 	//open cache
 	KImageCache* oldCache = m_imageCache;
-	m_imageCache = new KImageCache(cacheName(m_theme.fileName()), cacheSize);
+	const QString imageCacheName = cacheName(m_theme.fileName());
+	m_imageCache = new KImageCache(imageCacheName, cacheSize);
 	m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
-	//if cache is opened for the first time, try to instantiate renderer immediately
-	//FIXME: This logic breaks if the cache evicts the "kgr" key. The proper solution would be a static cacheExists() method in KSharedDataCache (which I have requested already).
-	if (!m_imageCache->contains(QString::fromLatin1("kgr")))
+	//check timestamp of cache vs. last write access to SVG
+	const uint svgTimestamp = QFileInfo(m_theme.graphics()).lastModified().toTime_t();
+	QByteArray buffer;
+	if (!m_imageCache->find(QString::fromLatin1("kgr_timestamp"), &buffer))
+		buffer = "0";
+	const uint cacheTimestamp = buffer.toInt();
+	//try to instantiate renderer immediately if the cache does not exist or is outdated
+	//FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not get evicted.
+	if (cacheTimestamp < svgTimestamp)
 	{
+		kDebug(11000) << "Graphics newer than cache, checking SVG";
 		if (instantiateRenderer(true))
 		{
-			m_imageCache->insert(QString::fromLatin1("kgr"), "1");
+			m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
 		}
 		else
 		{
 			//The SVG file is broken, so we deny to change the theme without
 			//breaking the previous theme.
 			delete m_imageCache;
+			KSharedDataCache::deleteCache(imageCacheName);
 			m_imageCache = oldCache;
+			kDebug(11000) << "Theme change failed: SVG file broken";
 			return false;
 		}
 	}
@@ -173,6 +188,7 @@ bool KGameRendererPrivate::instantiateRenderer(bool force /* = false */)
 {
 	if (!m_renderer || force)
 	{
+		kDebug(11000) << "Loading SVG graphics file";
 		QSvgRenderer* oldRenderer = m_renderer;
 		m_renderer = new QSvgRenderer(m_theme.graphics());
 		if (m_renderer->isValid())
@@ -184,6 +200,7 @@ bool KGameRendererPrivate::instantiateRenderer(bool force /* = false */)
 		}
 		else
 		{
+			kDebug(11000) << "Loading failed: SVG file" << m_theme.graphics() << "is broken";
 			delete m_renderer;
 			m_renderer = oldRenderer;
 			m_rendererValid = m_renderer->isValid();
