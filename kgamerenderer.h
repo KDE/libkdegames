@@ -93,7 +93,9 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///theme name as the first argument instead of calling setTheme() later.
 		///setTheme() clears the cache, while this constructor tries to reuse it.
 		///@param defaultTheme a theme name as used by KGameTheme::load
-		explicit KGameRenderer(const QString& theme, const QString& defaultTheme);
+		///@param cacheSize the cache size in megabytes (if not given, a sane
+		///default is used)
+		explicit KGameRenderer(const QString& defaultTheme, unsigned cacheSize = 0);
 		///Deletes this KGameRenderer instance, as well as all clients using it.
 		virtual ~KGameRenderer();
 

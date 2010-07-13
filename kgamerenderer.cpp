@@ -30,7 +30,6 @@
 //TODO: multithreaded SVG loading?
 //TODO: API for cache access?
 
-const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
 static const QString cacheName(QString theme)
 {
 	const QString appName = QCoreApplication::instance()->applicationName();
@@ -40,13 +39,15 @@ static const QString cacheName(QString theme)
 	return QString::fromLatin1("kgamerenderer-%1-%2").arg(appName).arg(theme);
 }
 
-KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, KGameRenderer* parent)
+KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, unsigned cacheSize, KGameRenderer* parent)
 	: m_parent(parent)
 	, m_defaultTheme(defaultTheme)
 	, m_frameSuffix(QString::fromLatin1("_%1"))
 	, m_sizePrefix(QString::fromLatin1("%1-%2-"))
 	, m_frameCountPrefix(QString::fromLatin1("fc-"))
 	, m_boundsPrefix(QString::fromLatin1("br-"))
+	//default cache size: 3 MiB = 3 << 20 bytes
+	, m_cacheSize((cacheSize == 0 ? 3 : cacheSize) << 20)
 	, m_frameBaseIndex(0)
 	, m_renderer(0)
 	, m_imageCache(0)
@@ -54,10 +55,9 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, KGameRen
 	qRegisterMetaType<KGRInternal::Job*>();
 }
 
-KGameRenderer::KGameRenderer(const QString& theme, const QString& defaultTheme)
-	: d(new KGameRendererPrivate(defaultTheme, this))
+KGameRenderer::KGameRenderer(const QString& defaultTheme, unsigned cacheSize)
+	: d(new KGameRendererPrivate(defaultTheme, cacheSize, this))
 {
-	setTheme(theme);
 }
 
 KGameRenderer::~KGameRenderer()
@@ -105,7 +105,7 @@ void KGameRenderer::setTheme(const QString& theme)
 		return;
 	}
 	kDebug(11000) << "Setting theme:" << theme;
-	if (!d->setTheme(theme))
+	if (!d->setTheme(theme) && theme != d->m_defaultTheme)
 	{
 		kDebug(11000) << "Falling back to default theme:" << d->m_defaultTheme;
 		d->setTheme(d->m_defaultTheme);
@@ -140,7 +140,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//open cache
 	KImageCache* oldCache = m_imageCache;
 	const QString imageCacheName = cacheName(m_theme.fileName());
-	m_imageCache = new KImageCache(imageCacheName, cacheSize);
+	m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
 	m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
 	//check timestamp of cache vs. last write access to SVG
 	const uint svgTimestamp = QFileInfo(m_theme.graphics()).lastModified().toTime_t();
@@ -372,6 +372,11 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 			return;
 		}
 		m_clients[client] = cacheKey;
+	}
+	//ensure that some theme is loaded
+	if (!m_imageCache)
+	{
+		m_parent->setTheme(m_defaultTheme);
 	}
 	//try to serve from high-speed cache
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);

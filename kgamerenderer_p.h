@@ -73,7 +73,7 @@ class KGameRendererPrivate : public QObject
 {
 	Q_OBJECT
 	public:
-		KGameRendererPrivate(const QString& defaultTheme, KGameRenderer* parent);
+		KGameRendererPrivate(const QString& defaultTheme, unsigned cacheSize, KGameRenderer* parent);
 		bool setTheme(const QString& theme);
 		bool instantiateRenderer(bool force = false);
 		inline QString spriteFrameKey(const QString& key, int frame, bool normalizeFrameNo = false) const;
@@ -87,6 +87,7 @@ class KGameRendererPrivate : public QObject
 
 		QString m_defaultTheme, m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
+		unsigned m_cacheSize;
 		int m_frameBaseIndex;
 		KGameTheme m_theme;
 
