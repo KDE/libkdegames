@@ -91,6 +91,7 @@ class KGameRendererPrivate : public QObject
 		KGameRenderer::Strategies m_strategies;
 		int m_frameBaseIndex;
 		KGameTheme m_theme;
+		QGraphicsView* m_defaultPrimaryView;
 
 		QSvgRenderer* m_renderer;
 		bool m_rendererValid;

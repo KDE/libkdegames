@@ -49,6 +49,7 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, unsigned
 	, m_cacheSize((cacheSize == 0 ? 3 : cacheSize) << 20)
 	, m_strategies(KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads)
 	, m_frameBaseIndex(0)
+	, m_defaultPrimaryView(0)
 	, m_renderer(0)
 	, m_imageCache(0)
 {
@@ -69,6 +70,16 @@ KGameRenderer::~KGameRenderer()
 	delete d->m_renderer;
 	delete d->m_imageCache;
 	delete d;
+}
+
+QGraphicsView* KGameRenderer::defaultPrimaryView() const
+{
+	return d->m_defaultPrimaryView;
+}
+
+void KGameRenderer::setDefaultPrimaryView(QGraphicsView* view)
+{
+	d->m_defaultPrimaryView = view;
 }
 
 int KGameRenderer::frameBaseIndex() const
