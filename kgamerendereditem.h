@@ -44,6 +44,19 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QObject, public QGraphicsPixmap
 {
 	Q_OBJECT
 	Q_PROPERTY(int frame READ frame WRITE setFrame)
+	//NOTE: Please keep the following list in sync with the declaration of QGraphicsObject as much as possible.
+	Q_PROPERTY(QGraphicsItem* parent READ parentItem WRITE setParentItem DESIGNABLE false)
+	Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity FINAL)
+	Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled)
+	Q_PROPERTY(bool visible READ isVisible WRITE setVisible FINAL)
+	Q_PROPERTY(QPointF pos READ pos WRITE setPos)
+	Q_PROPERTY(qreal x READ x WRITE setX)
+	Q_PROPERTY(qreal y READ y WRITE setY)
+	Q_PROPERTY(qreal z READ zValue WRITE setZValue)
+	Q_PROPERTY(qreal rotation READ rotation WRITE setRotation)
+	Q_PROPERTY(qreal scale READ scale WRITE setScale)
+	Q_PROPERTY(QPointF transformOriginPoint READ transformOriginPoint WRITE setTransformOriginPoint)
+	Q_INTERFACES(QGraphicsItem)
 	public:
 		///Creates a new KGameRenderedItem which renders the sprite with the
 		///given @a spriteKey as provided by the given @a renderer.
