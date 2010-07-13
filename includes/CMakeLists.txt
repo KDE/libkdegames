@@ -12,6 +12,8 @@ install( FILES
 	KGameMisc
 	KGamePopupItem
 	KGameProgress
+	KGameRenderedItem
+	KGameRenderer
 	KGameSvgDigits
 	KGameSvgDocument
 	KGameTheme

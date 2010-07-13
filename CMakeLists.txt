@@ -67,6 +67,8 @@ set(kdegames_LIB_SRCS
     kgamemisc.cpp
     kgameprogress.cpp
     kgamepopupitem.cpp
+    kgamerendereditem.cpp
+    kgamerenderer.cpp
     kgamesvgdocument.cpp
     kgametheme.cpp
     kgamethemeselector.cpp
@@ -85,7 +87,8 @@ kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 
-set_target_properties(kdegames PROPERTIES VERSION 5.0.0 
+#NOTE: 5.1.0 = KDE SC 4.6, please increase minor version in next minor KDE SC version if API changes are made
+set_target_properties(kdegames PROPERTIES VERSION 5.1.0
                                           SOVERSION 5 )
 
 install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -111,8 +114,10 @@ install(FILES
     kgrid2d.h
     kgamecanvas.h
     kgameclock.h
+    kgamerendereditem.h
+    kgamerenderer.h
     kgametheme.h
     kgamethemeselector.h
     kgamedifficulty.h
-    DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
-
+    DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+)
