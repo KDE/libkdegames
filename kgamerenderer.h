@@ -32,20 +32,53 @@ class KGameTheme;
 /**
  * @class KGameRenderer
  * @since 4.6
- * @short A high-level interface to the classes KGameTheme and KSvgRenderer.
  *
- * KGameRenderer loads sprites from a SVG theme. The sprites are automatically
- * rendered into pixmaps, and these pixmaps are cached to reduce the rendering
- * time.
+ * KGameRenderer is a light-weight rendering framework for the rendering of
+ * SVG themes (as represented by KGameTheme) into pixmap caches.
  *
- * Unlike a simple KSvgRenderer, KGameRenderer supports multi-frame sprites.
+ * @section Terminology
  *
- * In a QGraphicsView-based application, this class is best used together with
- * the QGraphicsPixmapItem-derived KGameRenderedItem. The pixmap of a
- * KGameRenderedItem is automatically updated when the theme changes.
+ * @li Themes, in the context of KGameRenderer, are the same as in the context
+ *     of the KGameTheme class: a pair of a .desktop file and a .svg file. See
+ *     the KGameTheme documentation for details.
+ * @li A sprite is either a single pixmap ("non-animated sprites") or a sequence
+ *     of pixmaps which are shown consecutively to produce an animation
+ *     ("animated sprites"). Non-animated sprites correspond to a single element
+ *     with the same key in the SVG theme file. The element keys for the pixmaps
+ *     of an animated sprite are produced by appending the frameSuffix() to the
+ *     sprite key.
  *
- * TODO: describe KGameRendererClient (once it is truly asynchronous)
- * TODO: describe the design decisions and structure of KGameRenderer
+ * @section Access to the pixmaps
+ *
+ * Sprite pixmaps can be retrieved from KGameRenderer in the main thread using
+ * the synchronous KGameRenderer::spritePixmap() method. However, it is highly
+ * recommended to use the asynchronous interface provided by the interface class
+ * KGameRendererClient. A client corresponds to one pixmap and registers itself
+ * with the corresponding KGameRenderer instance to get notified when a new
+ * pixmap is available.
+ *
+ * For QGraphicsView-based applications, the KGameRenderedItem class provides a
+ * QGraphicsPixmapItem which is a KGameRendererClient and displays the pixmap
+ * for a given sprite.
+ *
+ * @section Rendering strategy
+ *
+ * For each theme, KGameRenderer keeps two caches around: an in-process cache of
+ * QPixmaps, and a disk cache containing QImages (powered by KImageCache). You
+ * therefore will not need to implement any caching for the pixmaps provided by
+ * KGameRenderer.
+ *
+ * When requests from a KGameRendererClient cannot be served immediately because
+ * the requested sprite is not in the caches, a rendering request is sent to a
+ * worker thread.
+ *
+ * @section Support for legacy themes
+ *
+ * When porting applications to KGameRenderer, you probably have to support
+ * the format of existing themes. KGameRenderer provides the frameBaseIndex()
+ * and frameSuffix() properties for this purpose. It is recommended not to
+ * change these properties in new applications.
+ *
  */
 class KDEGAMES_EXPORT KGameRenderer : public QObject
 {
@@ -75,6 +108,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///It is recommended not to alter the frame base index unless you need
 		///to support legacy themes.
 		//TODO: allow frameBaseIndex == -1 for KDiamond
+		//TODO: map frame numbers in KGameRenderer, not KGameRendererClient
 		void setFrameBaseIndex(int frameBaseIndex);
 		///@return the frame suffix. @see setFrameSuffix()
 		QString frameSuffix() const;
