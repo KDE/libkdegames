@@ -24,7 +24,7 @@
 #include <QtGui/QPainter>
 
 //TODO: automatically schedule pre-rendering of animation frames
-//TODO: multithreaded SVG loading, rendering (caching only in main thread, see KGRP ctor)
+//TODO: multithreaded SVG loading?
 //TODO: API for cache access?
 //TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
 //TODO: allow multiple themes/caches (compare KGrTheme for usecase)
@@ -156,7 +156,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//if necessary, load renderer
 	if (!themeIsCached)
 	{
-		if (!instantiateRenderer())
+		if (!instantiateRenderer(true))
 		{
 			//In this case, we tried to load a theme for the first time, and
 			//found that the SVG file is not installed properly. The command
@@ -185,24 +185,28 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	return true;
 }
 
-bool KGameRendererPrivate::instantiateRenderer()
+bool KGameRendererPrivate::instantiateRenderer(bool force /* = false */)
 {
-	//before the old renderer is deleted, we must make sure that no worker threads are using it anymore
-	m_workerPool.waitForDone();
-	//instantiate renderer
-	QSvgRenderer* oldRenderer = m_renderer;
-	m_renderer = new QSvgRenderer(m_theme.graphics());
-	if (m_renderer->isValid())
+	if (!m_renderer || force)
 	{
-		delete oldRenderer;
-		return true;
+		QSvgRenderer* oldRenderer = m_renderer;
+		m_renderer = new QSvgRenderer(m_theme.graphics());
+		if (m_renderer->isValid())
+		{
+			//before the old renderer is deleted, we must make sure that no worker threads are using it anymore
+			m_workerPool.waitForDone();
+			delete oldRenderer;
+			m_rendererValid = true;
+		}
+		else
+		{
+			delete m_renderer;
+			m_renderer = oldRenderer;
+			m_rendererValid = m_renderer->isValid();
+			return false;
+		}
 	}
-	else
-	{
-		delete m_renderer;
-		m_renderer = oldRenderer;
-		return false;
-	}
+	return m_rendererValid;
 }
 
 const KGameTheme* KGameRenderer::gameTheme() const
@@ -290,18 +294,16 @@ QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int f
 		return pix;
 	}
 	//make sure that renderer is available
-	if (!d->m_renderer)
+	if (!d->instantiateRenderer())
 	{
-		if (!d->instantiateRenderer())
-		{
-			return QPixmap();
-		}
+		return QPixmap();
 	}
 	//create job
 	KGRInternal::Job* job = new KGRInternal::Job;
 	job->renderer = d->m_renderer;
 	job->cacheKey = cacheKey;
 	job->elementKey = elementKey;
+	job->isSynchronous = true;
 	job->size = size;
 	//render immediately (will call KGRPrivate::jobFinished)
 	(new KGRInternal::Worker(job, d))->run();
@@ -347,12 +349,9 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 		return;
 	}
 	//make sure that renderer is available
-	if (!m_renderer)
+	if (!instantiateRenderer())
 	{
-		if (!instantiateRenderer())
-		{
-			return;
-		}
+		return;
 	}
 	//create job (unless a similar job has not yet been launched for another client)
 	KGRInternal::Job* job = new KGRInternal::Job;
@@ -360,27 +359,34 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	job->cacheKey = cacheKey;
 	job->elementKey = elementKey;
 	job->size = size;
+	job->isSynchronous = false;
 	m_workerPool.start(new KGRInternal::Worker(job, this));
 	m_pendingRequests << cacheKey;
 }
 
 void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
 {
+	//read job
 	const QString cacheKey = job->cacheKey;
-	//convert to pixmap, put into caches
-	m_imageCache.insertImage(cacheKey, job->result);
-	const QPixmap pixmap = QPixmap::fromImage(job->result);
-	m_pixmapCache.insert(cacheKey, pixmap);
+	const QImage result = job->result;
+	const bool isSynchronous = job->isSynchronous;
 	delete job;
-	//rollout pixmap to all clients that have requested it
+	//check who wanted this pixmap
 	m_pendingRequests.removeAll(cacheKey);
-	QHash<KGameRendererClient*, QString>::const_iterator it1 = m_clients.begin(), it2 = m_clients.end();
-	for (; it1 != it2; ++it1)
+	const QList<KGameRendererClient*> requesters = m_clients.keys(cacheKey);
+	//put result into image cache
+	m_imageCache.insertImage(cacheKey, result);
+	//convert result to pixmap (and put into pixmap cache) only if it is needed now
+	//This optimization saves the image-pixmap conversion for intermediate sizes which occur during smooth resize events or window initializations.
+	if (!isSynchronous && requesters.isEmpty())
 	{
-		if (it1.value() == cacheKey)
-		{
-			it1.key()->recievePixmap(pixmap);
-		}
+		return;
+	}
+	const QPixmap pixmap = QPixmap::fromImage(result);
+	m_pixmapCache.insert(cacheKey, pixmap);
+	foreach (KGameRendererClient* requester, requesters)
+	{
+		requester->recievePixmap(pixmap);
 	}
 }
 

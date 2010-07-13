@@ -36,6 +36,7 @@ namespace KGRInternal
 		QString cacheKey, elementKey;
 		QSize size;
 		QImage result;
+		bool isSynchronous; //true if the job was started by the synchronous KGR::spritePixmap() method
 	};
 
 	//Describes a worker thread.
@@ -59,7 +60,7 @@ class KGameRendererPrivate : public QObject
 	public:
 		KGameRendererPrivate(const QString& defaultTheme);
 		bool setTheme(const QString& theme);
-		bool instantiateRenderer();
+		bool instantiateRenderer(bool force = false);
 		inline QString spriteFrameKey(const QString& key, int frame) const;
 		void requestPixmap(KGameRendererClient* client);
 	public Q_SLOTS:
@@ -71,6 +72,7 @@ class KGameRendererPrivate : public QObject
 		KGameTheme m_theme;
 
 		QSvgRenderer* m_renderer;
+		bool m_rendererValid;
 		QThreadPool m_workerPool;
 
 		QHash<KGameRendererClient*, QString> m_clients; //maps client -> cache key of current pixmap
