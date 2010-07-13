@@ -93,6 +93,10 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///@return the KGameTheme instance used by this renderer
 		const KGameTheme* gameTheme() const;
 
+		///@return the bounding rectangle of the sprite with this @a key
+		///This is equal to QSvgRenderer::boundsOnElement() of the corresponding
+		///SVG element.
+		QRectF boundsOnSprite(const QString& key, int frame = -1) const;
 		///@return the count of frames available for the sprite with this @a key
 		///If this sprite is not animated (i.e. there are no SVG elements for
 		///any frames), this method returns 0. If the sprite does not exist at

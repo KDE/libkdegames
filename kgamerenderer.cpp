@@ -26,7 +26,6 @@
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
 //TODO: API for cache access?
-//TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
 //TODO: check cache timestamp vs. theme/SVG timestamp
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
@@ -44,6 +43,7 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
 	, m_frameSuffix(QString::fromLatin1("_%1"))
 	, m_sizePrefix(QString::fromLatin1("%1-%2-"))
 	, m_frameCountPrefix(QString::fromLatin1("fc-"))
+	, m_boundsPrefix(QString::fromLatin1("br-"))
 	, m_frameBaseIndex(0)
 	, m_renderer(0)
 	, m_imageCache(0)
@@ -162,6 +162,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//clear caches
 	m_pixmapCache.clear();
 	m_frameCountCache.clear();
+	m_boundsCache.clear();
 	//done
 	m_currentTheme = theme;
 	return true;
@@ -209,7 +210,7 @@ int KGameRenderer::frameCount(const QString& key) const
 	{
 		return it.value();
 	}
-	//look up in shared cache
+	//look up in shared cache (if SVG is not yet loaded)
 	int count = -1;
 	bool countFound = false;
 	const QString cacheKey = d->m_frameCountPrefix + key;
@@ -225,26 +226,70 @@ int KGameRenderer::frameCount(const QString& key) const
 	//determine from SVG
 	if (!countFound)
 	{
-		d->instantiateRenderer();
-		//look for animated sprite first
-		count = d->m_frameBaseIndex;
-		while (d->m_renderer->elementExists(d->spriteFrameKey(key, count)))
+		if (d->instantiateRenderer())
 		{
-			++count;
-		}
-		count -= d->m_frameBaseIndex;
-		//look for non-animated sprite instead
-		if (count == 0)
-		{
-			if (!d->m_renderer->elementExists(key))
+			//look for animated sprite first
+			count = d->m_frameBaseIndex;
+			while (d->m_renderer->elementExists(d->spriteFrameKey(key, count)))
 			{
-				count = -1;
+				++count;
 			}
+			count -= d->m_frameBaseIndex;
+			//look for non-animated sprite instead
+			if (count == 0)
+			{
+				if (!d->m_renderer->elementExists(key))
+				{
+					count = -1;
+				}
+			}
+			d->m_imageCache->insert(cacheKey, QByteArray::number(count));
 		}
-		d->m_imageCache->insert(cacheKey, QByteArray::number(count));
 	}
 	d->m_frameCountCache.insert(key, count);
 	return count;
+}
+
+QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
+{
+	const QString elementKey = d->spriteFrameKey(key, frame);
+	//look up in in-process cache
+	QHash<QString, QRectF>::const_iterator it = d->m_boundsCache.find(elementKey);
+	if (it != d->m_boundsCache.end())
+	{
+		return it.value();
+	}
+	//look up in shared cache (if SVG is not yet loaded)
+	QRectF bounds;
+	bool boundsFound = false;
+	const QString cacheKey = d->m_boundsPrefix + elementKey;
+	if (!d->m_renderer)
+	{
+		QByteArray buffer;
+		if (d->m_imageCache->find(cacheKey, &buffer))
+		{
+			QDataStream stream(buffer);
+			stream >> bounds;
+			boundsFound = true;
+		}
+	}
+	//determine from SVG
+	if (!boundsFound)
+	{
+		if (d->instantiateRenderer())
+		{
+			bounds = d->m_renderer->boundsOnElement(elementKey);
+			//save in shared cache
+			QByteArray buffer;
+			{
+				QDataStream stream(&buffer, QIODevice::WriteOnly);
+				stream << bounds;
+			}
+			d->m_imageCache->insert(cacheKey, buffer);
+		}
+	}
+	d->m_boundsCache.insert(elementKey, bounds);
+	return bounds;
 }
 
 bool KGameRenderer::spriteExists(const QString& key) const

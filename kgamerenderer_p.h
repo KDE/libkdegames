@@ -67,7 +67,7 @@ class KGameRendererPrivate : public QObject
 		void jobFinished(KGRInternal::Job* job); //NOTE: This is invoked from KGRInternal::Worker::run.
 	public:
 		QString m_defaultTheme, m_currentTheme;
-		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix;
+		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
 		int m_frameBaseIndex;
 		KGameTheme m_theme;
 
@@ -101,6 +101,7 @@ class KGameRendererPrivate : public QObject
 		//We therefore disable KIC's pixmap cache because we do not need it.
 		QHash<QString, QPixmap> m_pixmapCache;
 		QHash<QString, int> m_frameCountCache;
+		QHash<QString, QRectF> m_boundsCache;
 };
 
 class KGameRendererClientPrivate : public QObject
