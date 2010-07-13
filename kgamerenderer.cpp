@@ -29,8 +29,6 @@
 //TODO: API for cache access?
 //TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
 //TODO: allow multiple themes/caches (compare KGrTheme for usecase)
-//TODO: KGRI::setSpriteKey(QString)
-//TODO: Remove KGPI::pixmapItem.
 //TODO: Replace own in-process cache by KImageCache's pixmap cache.
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB

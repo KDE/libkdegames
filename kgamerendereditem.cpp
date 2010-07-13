@@ -59,9 +59,13 @@ QString KGameRenderedItem::spriteKey() const
 	return d->m_spriteKey;
 }
 
-const QGraphicsPixmapItem* KGameRenderedItem::pixmapItem() const
+void KGameRenderedItem::setSpriteKey(const QString& spriteKey)
 {
-	return d->m_item;
+	if (d->m_spriteKey != spriteKey)
+	{
+		d->m_spriteKey = spriteKey;
+		d->fetchPixmap();
+	}
 }
 
 int KGameRenderedItem::frameCount() const
@@ -113,14 +117,14 @@ void KGameRenderedItemPrivate::fetchPixmapInternal()
 {
 	if (m_outdated)
 	{
-		//update frame count, normalize frame number
+		//update frame count, normalize frame number (for animated frames)
 		m_frameCount = m_renderer->frameCount(m_spriteKey);
 		m_frameBaseIndex = m_renderer->frameBaseIndex();
 		if (m_frameCount <= 0)
 		{
 			m_frame = -1;
 		}
-		else
+		else if (m_frame >= 0)
 		{
 			m_frame = (m_frame - m_frameBaseIndex) % m_frameCount + m_frameBaseIndex;
 		}

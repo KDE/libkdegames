@@ -29,7 +29,6 @@ class KGameRenderedItemPrivate : public QObject
 		void fetchPixmapInternal();
 	public:
 		KGameRenderedItem* m_parent;
-		QGraphicsPixmapItem* m_item;
 		KGameRenderer* m_renderer;
 
 		QString m_spriteKey;

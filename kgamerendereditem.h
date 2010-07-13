@@ -53,18 +53,14 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QObject, public QGraphicsPixmap
 
 		///@return the renderer used by this item
 		KGameRenderer* renderer() const;
-		///@return the key of the sprite rendered by this item
-		QString spriteKey() const;
-		///@return the QGraphicsPixmapItem instance used to render the pixmap
-		///You will not need to install event filters or do other magic on that
-		///item directly, because the KGameRenderedItem instance (its direct
-		///parent) handles its events, and their coordinate systems match.
-		///Still, having access to this item might be useful in corner cases.
-		const QGraphicsPixmapItem* pixmapItem() const;
 		///@return the frame count, or -1 for non-animated frames
 		///@see KGameRenderer::frameCount()
 		int frameCount() const;
 
+		///@return the key of the sprite rendered by this item
+		QString spriteKey() const;
+		///Defines the key of the sprite which is rendered by this item.
+		void setSpriteKey(const QString& spriteKey);
 		///@return the current frame number, or -1 for non-animated sprites
 		int frame() const;
 		///For animated sprites, show another frame. The given frame number is
