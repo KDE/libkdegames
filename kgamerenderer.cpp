@@ -67,6 +67,7 @@ KGameRenderer::~KGameRenderer()
 	const QList<KGameRendererClient*> clients = d->m_clients.keys();
 	qDeleteAll(clients);
 	//cleanup own stuff
+	d->m_workerPool.waitForDone();
 	delete d->m_renderer;
 	delete d->m_imageCache;
 	delete d;
