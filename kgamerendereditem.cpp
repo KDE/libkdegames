@@ -52,6 +52,25 @@ KGameRenderedItem::~KGameRenderedItem()
 	delete d;
 }
 
+QPointF KGameRenderedItem::offset() const
+{
+	return d->pos();
+}
+
+void KGameRenderedItem::setOffset(const QPointF& offset)
+{
+	if (d->pos() != offset)
+	{
+		prepareGeometryChange();
+		d->setPos(offset);
+	}
+}
+
+void KGameRenderedItem::setOffset(qreal x, qreal y)
+{
+	setOffset(QPointF(x, y));
+}
+
 QGraphicsView* KGameRenderedItem::primaryView() const
 {
 	return d->m_primaryView;
@@ -87,7 +106,7 @@ QRectF KGameRenderedItem::boundingRect() const
 {
 	if (d->m_primaryView)
 	{
-		return QRectF(0, 0, 1, 1);
+		return QRectF(0, 0, 1, 1).translated(d->pos());
 	}
 	else
 	{

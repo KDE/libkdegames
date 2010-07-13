@@ -54,6 +54,14 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsObject, public KGameRe
 		KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent = 0);
 		virtual ~KGameRenderedItem();
 
+		///@return the item's offset, which defines the point of the top-left
+		///corner of the pixmap, in local coordinates.
+		QPointF offset() const;
+		///Sets the item's offset, which defines the point of the top-left
+		///corner of the pixmap, in local coordinates.
+		void setOffset(const QPointF& offset);
+		void setOffset(qreal x, qreal y);
+
 		///Returns a pointer to the current primary view, or 0 if no primary
 		///view has been set (which is the default).
 		///\see setPrimaryView()
