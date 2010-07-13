@@ -78,8 +78,27 @@ class KGameRendererPrivate : public QObject
 		QHash<KGameRendererClient*, QString> m_clients; //maps client -> cache key of current pixmap
 		QStringList m_pendingRequests; //cache keys of pixmaps which are currently being rendered
 
-		//NOTE: See ctor implementation for why we do not use KImageCache's pixmap cache.
-		KImageCache m_imageCache;
+		KImageCache* m_imageCache;
+		//In multi-threaded scenarios, there are two possible ways to use KIC's
+		//pixmap cache.
+		//1. The worker renders a QImage and stores it in the cache. The main
+		//   thread reads the QImage again and converts it into a QPixmap,
+		//   storing it inthe pixmap cache for later re-use.
+		//i.e. QImage -> diskcache -> QImage -> QPixmap -> pixmapcache -> serve
+		//2. The worker renders a QImage and sends it directly to the main
+		//   thread, which converts it to a QPixmap. The QPixmap is stored in
+		//   KIC's pixmap cache, and converted to QImage to be written to the
+		//   shared data cache.
+		//i.e. QImage -> QPixmap -> pixmapcache -> serve
+		//                      \-> QImage -> diskcache
+		//We choose a third way:
+		//3. The worker renders a QImage which is converted to a QPixmap by the
+		//   main thread. The main thread caches the QPixmap itself, and stores
+		//   the QImage in the cache.
+		//i.e. QImage -> QPixmap -> pixmapcache -> serve
+		//           \-> diskcache
+		//As you see, implementing an own pixmap cache saves us one conversion.
+		//We therefore disable KIC's pixmap cache because we do not need it.
 		QHash<QString, QPixmap> m_pixmapCache;
 		QHash<QString, int> m_frameCountCache;
 };

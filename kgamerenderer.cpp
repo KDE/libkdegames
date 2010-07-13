@@ -27,15 +27,16 @@
 //TODO: multithreaded SVG loading?
 //TODO: API for cache access?
 //TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
-//TODO: allow multiple themes/caches (compare KGrTheme for usecase)
-//TODO: cache per theme?
 //TODO: check cache timestamp vs. theme/SVG timestamp
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
-static const QString cacheName()
+static const QString cacheName(QString theme)
 {
 	const QString appName = QCoreApplication::instance()->applicationName();
-	return QString::fromLatin1("kgamerenderer-%1").arg(appName);
+	//e.g. "themes/foobar.desktop" -> "themes/foobar"
+	if (theme.endsWith(".desktop"))
+		theme.truncate(theme.length() - 8); //8 = strlen(".desktop")
+	return QString::fromLatin1("kgamerenderer-%1-%2").arg(appName).arg(theme);
 }
 
 KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
@@ -45,28 +46,8 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme)
 	, m_frameCountPrefix(QString::fromLatin1("fc-"))
 	, m_frameBaseIndex(0)
 	, m_renderer(0)
-	, m_imageCache(cacheName(), cacheSize)
+	, m_imageCache(0)
 {
-	//Problem: In multi-threaded scenarios, there are two possible ways to use
-	//KIC's pixmap cache.
-	//1. The worker renders a QImage and stores it in the cache. The main thread
-	//   reads the QImage again and converts it into a QPixmap, storing it in
-	//   the pixmap cache for later re-use.
-	//   i.e. QImage -> diskcache -> QImage -> QPixmap -> pixmapcache -> serve
-	//2. The worker renders a QImage and sends it directly to the main thread,
-	//   which converts it to a QPixmap. The QPixmap is stored in KIC's pixmap
-	//   cache, and converted to QImage to be written to the shared data cache.
-	//   i.e. QImage -> QPixmap -> pixmapcache -> serve
-	//                         \-> QImage -> diskcache
-	//We choose a third way:
-	//3. The worker renders a QImage which is converted to a QPixmap by the main
-	//   thread. The main thread caches the QPixmap itself, and stores the
-	//   QImage in the cache.
-	//   i.e. QImage -> QPixmap -> pixmapcache -> serve
-	//              \-> diskcache
-	//As you see, implementing an own pixmap cache saves us one conversion. We
-	//therefore disable KIC's pixmap cache because we do not need it.
-	m_imageCache.setPixmapCaching(false);
 	qRegisterMetaType<KGRInternal::Job*>();
 }
 
@@ -84,6 +65,7 @@ KGameRenderer::~KGameRenderer()
 		delete it1.key();
 	//cleanup own stuff
 	delete d->m_renderer;
+	delete d->m_imageCache;
 	delete d;
 }
 
@@ -149,19 +131,24 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		m_theme.load(m_currentTheme);
 		return false;
 	}
-	//check if cache contains the right theme
-	QByteArray cachedTheme;
-	m_imageCache.find(QString::fromLatin1("kgr_theme"), &cachedTheme);
-	const bool themeIsCached = QString::fromUtf8(cachedTheme) == theme;
-	//if necessary, load renderer
-	if (!themeIsCached)
+	//open cache
+	KImageCache* oldCache = m_imageCache;
+	m_imageCache = new KImageCache(cacheName(m_theme.fileName()), cacheSize);
+	m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
+	//if cache is opened for the first time, try to instantiate renderer immediately
+	//FIXME: This logic breaks if the cache evicts the "kgr" key. The proper solution would be a static cacheExists() method in KSharedDataCache (which I have requested already).
+	if (!m_imageCache->contains(QString::fromLatin1("kgr")))
 	{
-		if (!instantiateRenderer(true))
+		if (instantiateRenderer(true))
 		{
-			//In this case, we tried to load a theme for the first time, and
-			//found that the SVG file is not installed properly. The command
-			//order in this method is such that we can still deny to change
-			//the theme without breaking the previous theme.
+			m_imageCache->insert(QString::fromLatin1("kgr"), "1");
+		}
+		else
+		{
+			//The SVG file is broken, so we deny to change the theme without
+			//breaking the previous theme.
+			delete m_imageCache;
+			m_imageCache = oldCache;
 			return false;
 		}
 	}
@@ -173,13 +160,8 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		m_renderer = 0;
 	}
 	//clear caches
-	if (!themeIsCached)
-	{
-		m_pixmapCache.clear();
-		m_frameCountCache.clear();
-		m_imageCache.clear();
-		m_imageCache.insert(QString::fromLatin1("kgr_theme"), theme.toUtf8());
-	}
+	m_pixmapCache.clear();
+	m_frameCountCache.clear();
 	//done
 	m_currentTheme = theme;
 	return true;
@@ -234,7 +216,7 @@ int KGameRenderer::frameCount(const QString& key) const
 	if (!d->m_renderer)
 	{
 		QByteArray buffer;
-		if (d->m_imageCache.find(cacheKey, &buffer))
+		if (d->m_imageCache->find(cacheKey, &buffer))
 		{
 			count = buffer.toInt();
 			countFound = true;
@@ -259,7 +241,7 @@ int KGameRenderer::frameCount(const QString& key) const
 				count = -1;
 			}
 		}
-		d->m_imageCache.insert(cacheKey, QByteArray::number(count));
+		d->m_imageCache->insert(cacheKey, QByteArray::number(count));
 	}
 	d->m_frameCountCache.insert(key, count);
 	return count;
@@ -288,7 +270,7 @@ QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int f
 	}
 	//try to serve from low-speed cache
 	QPixmap pix;
-	if (d->m_imageCache.findPixmap(cacheKey, &pix))
+	if (d->m_imageCache->findPixmap(cacheKey, &pix))
 	{
 		d->m_pixmapCache.insert(cacheKey, pix);
 		return pix;
@@ -337,7 +319,7 @@ void KGameRendererPrivate::requestPixmap(KGameRendererClient* client)
 	}
 	//try to serve from low-speed cache
 	QPixmap pix;
-	if (m_imageCache.findPixmap(cacheKey, &pix))
+	if (m_imageCache->findPixmap(cacheKey, &pix))
 	{
 		m_pixmapCache.insert(cacheKey, pix);
 		client->recievePixmap(pix);
@@ -375,7 +357,7 @@ void KGameRendererPrivate::jobFinished(KGRInternal::Job* job)
 	m_pendingRequests.removeAll(cacheKey);
 	const QList<KGameRendererClient*> requesters = m_clients.keys(cacheKey);
 	//put result into image cache
-	m_imageCache.insertImage(cacheKey, result);
+	m_imageCache->insertImage(cacheKey, result);
 	//convert result to pixmap (and put into pixmap cache) only if it is needed now
 	//This optimization saves the image-pixmap conversion for intermediate sizes which occur during smooth resize events or window initializations.
 	if (!isSynchronous && requesters.isEmpty())
