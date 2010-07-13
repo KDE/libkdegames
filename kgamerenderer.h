@@ -95,7 +95,8 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 
 		///@return the count of frames available for the sprite with this @a key
 		///If this sprite is not animated (i.e. there are no SVG elements for
-		///any frames), this method returns -1.
+		///any frames), this method returns 0. If the sprite does not exist at
+		///all, -1 is returned.
 		///
 		///If the sprite is animated, the method counts frames starting at zero
 		///(unless you change the frameBaseIndex()), and returns the number of
@@ -106,8 +107,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///(The element "foo_3" is ignored because "foo_2" is missing.)
 		int frameCount(const QString& key) const;
 		///@return if the sprite with the given @a key exists
-		///That means: Does the SVG element with the very same key, or the SVG
-		///element of the zero-th frame exist?
+		///This is the same as \code renderer.frameCount(key) >= 0 \endcode
 		bool spriteExists(const QString& key) const;
 		///@return a rendered pixmap
 		///@param key the key of the sprite

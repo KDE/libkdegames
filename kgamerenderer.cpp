@@ -28,7 +28,6 @@
 //TODO: API for cache access?
 //TODO: fetch and cache QSvgRenderer::boundsOnElement for KPat/KBlocks
 //TODO: allow multiple themes/caches (compare KGrTheme for usecase)
-//TODO: Merge frameCount and spriteExists by representing non-existence as frameCount == -1 in the cache.
 //TODO: Split pixmap-fetching functionality from KGRI into new base class KGameRendererClient.
 
 const int cacheSize = 3 * 1 << 20; //3 * 2 ^ 20 bytes = 3 MiB
@@ -215,7 +214,7 @@ int KGameRenderer::frameCount(const QString& key) const
 		return it.value();
 	}
 	//look up in shared cache
-	int count = d->m_frameBaseIndex;
+	int count = -1;
 	bool countFound = false;
 	const QString cacheKey = d->m_frameCountPrefix + key;
 	if (!d->m_renderer)
@@ -231,14 +230,20 @@ int KGameRenderer::frameCount(const QString& key) const
 	if (!countFound)
 	{
 		d->instantiateRenderer();
+		//look for animated sprite first
+		count = d->m_frameBaseIndex;
 		while (d->m_renderer->elementExists(d->spriteFrameKey(key, count)))
 		{
 			++count;
 		}
 		count -= d->m_frameBaseIndex;
+		//look for non-animated sprite instead
 		if (count == 0)
 		{
-			count = -1;
+			if (!d->m_renderer->elementExists(key))
+			{
+				count = -1;
+			}
 		}
 		d->m_imageCache.insert(cacheKey, QByteArray::number(count));
 	}
@@ -248,22 +253,7 @@ int KGameRenderer::frameCount(const QString& key) const
 
 bool KGameRenderer::spriteExists(const QString& key) const
 {
-	//TODO: Is there a way to determine existence without loading the renderer?
-	if (!d->m_renderer)
-	{
-		if (!d->instantiateRenderer())
-			return false;
-	}
-	//check for existence of non-animated sprite
-	if (d->m_renderer->elementExists(key))
-	{
-		return true;
-	}
-	//check for existence of animated sprite
-	else
-	{
-		return d->m_renderer->elementExists(d->spriteFrameKey(key, 0));
-	}
+	return this->frameCount(key) >= 0;
 }
 
 QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int frame) const
