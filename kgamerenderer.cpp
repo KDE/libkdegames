@@ -285,8 +285,8 @@ QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame, bool
 int KGameRenderer::frameCount(const QString& key) const
 {
 	//look up in in-process cache
-	QHash<QString, int>::const_iterator it = d->m_frameCountCache.find(key);
-	if (it != d->m_frameCountCache.end())
+	QHash<QString, int>::const_iterator it = d->m_frameCountCache.constFind(key);
+	if (it != d->m_frameCountCache.constEnd())
 	{
 		return it.value();
 	}
@@ -338,8 +338,8 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 {
 	const QString elementKey = d->spriteFrameKey(key, frame);
 	//look up in in-process cache
-	QHash<QString, QRectF>::const_iterator it = d->m_boundsCache.find(elementKey);
-	if (it != d->m_boundsCache.end())
+	QHash<QString, QRectF>::const_iterator it = d->m_boundsCache.constFind(elementKey);
+	if (it != d->m_boundsCache.constEnd())
 	{
 		return it.value();
 	}
@@ -434,8 +434,8 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		}
 	}
 	//try to serve from high-speed cache
-	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.find(cacheKey);
-	if (it != m_pixmapCache.end())
+	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.constFind(cacheKey);
+	if (it != m_pixmapCache.constEnd())
 	{
 		requestPixmap__propagateResult(it.value(), client, synchronousResult);
 		return;
