@@ -173,8 +173,11 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		const QString imageCacheName = cacheName(m_theme.fileName());
 		m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
 		m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
-		//check timestamp of cache vs. last write access to SVG
-		const uint svgTimestamp = QFileInfo(m_theme.graphics()).lastModified().toTime_t();
+		//check timestamp of cache vs. last write access to theme/SVG
+		const uint svgTimestamp = qMax(
+			QFileInfo(m_theme.graphics()).lastModified().toTime_t(),
+			QFileInfo(m_theme.path()).lastModified().toTime_t()
+		);
 		QByteArray buffer;
 		if (!m_imageCache->find(QString::fromLatin1("kgr_timestamp"), &buffer))
 			buffer = "0";
@@ -183,7 +186,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		//FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not get evicted.
 		if (cacheTimestamp < svgTimestamp)
 		{
-			kDebug(11000) << "Graphics newer than cache, checking SVG";
+			kDebug(11000) << "Theme newer than cache, checking SVG";
 			if (instantiateRenderer(true))
 			{
 				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
