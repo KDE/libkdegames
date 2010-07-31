@@ -50,7 +50,7 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, unsigned
 	, m_strategies(KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads)
 	, m_frameBaseIndex(0)
 	, m_defaultPrimaryView(0)
-	, m_renderer(0)
+	, m_rendererPool(&m_workerPool)
 	, m_imageCache(0)
 {
 	qRegisterMetaType<KGRInternal::Job*>();
@@ -68,7 +68,6 @@ KGameRenderer::~KGameRenderer()
 	qDeleteAll(clients);
 	//cleanup own stuff
 	d->m_workerPool.waitForDone();
-	delete d->m_renderer;
 	delete d->m_imageCache;
 	delete d;
 }
@@ -190,8 +189,10 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		if (cacheTimestamp < svgTimestamp)
 		{
 			kDebug(11000) << "Theme newer than cache, checking SVG";
-			if (instantiateRenderer(true))
+			QSvgRenderer* renderer = new QSvgRenderer(m_theme.graphics());
+			if (renderer->isValid())
 			{
+				m_rendererPool.setPath(m_theme.graphics(), renderer);
 				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
 			}
 			else
@@ -207,16 +208,17 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		}
 		//theme is cached - just delete the old renderer after making sure that no worker threads are using it anymore
 		else if (m_currentTheme != theme)
-		{
-			m_workerPool.waitForDone();
-			delete m_renderer;
-			m_renderer = 0;
-		}
+			m_rendererPool.setPath(m_theme.graphics());
 	}
 	else // !(m_strategies & KGameRenderer::UseDiskCache) -> no cache is used
 	{
 		//load SVG file
-		if (!instantiateRenderer(true))
+		QSvgRenderer* renderer = new QSvgRenderer(m_theme.graphics());
+		if (renderer->isValid())
+		{
+			m_rendererPool.setPath(m_theme.graphics(), renderer);
+		}
+		else
 		{
 			kDebug(11000) << "Theme change failed: SVG file broken";
 			return false;
@@ -232,32 +234,6 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//done
 	m_currentTheme = theme;
 	return true;
-}
-
-bool KGameRendererPrivate::instantiateRenderer(bool force /* = false */)
-{
-	if (!m_renderer || force)
-	{
-		kDebug(11000) << "Loading SVG graphics file";
-		QSvgRenderer* oldRenderer = m_renderer;
-		m_renderer = new QSvgRenderer(m_theme.graphics());
-		if (m_renderer->isValid())
-		{
-			//before the old renderer is deleted, we must make sure that no worker threads are using it anymore
-			m_workerPool.waitForDone();
-			delete oldRenderer;
-			m_rendererValid = true;
-		}
-		else
-		{
-			kDebug(11000) << "Loading failed: SVG file" << m_theme.graphics() << "is broken";
-			delete m_renderer;
-			m_renderer = oldRenderer;
-			m_rendererValid = m_renderer->isValid();
-			return false;
-		}
-	}
-	return m_rendererValid;
 }
 
 const KGameTheme* KGameRenderer::gameTheme() const
@@ -300,7 +276,7 @@ int KGameRenderer::frameCount(const QString& key) const
 	int count = -1;
 	bool countFound = false;
 	const QString cacheKey = d->m_frameCountPrefix + key;
-	if (!d->m_renderer && (d->m_strategies & KGameRenderer::UseDiskCache))
+	if (d->m_rendererPool.hasAvailableRenderers() && (d->m_strategies & KGameRenderer::UseDiskCache))
 	{
 		QByteArray buffer;
 		if (d->m_imageCache->find(cacheKey, &buffer))
@@ -312,28 +288,27 @@ int KGameRenderer::frameCount(const QString& key) const
 	//determine from SVG
 	if (!countFound)
 	{
-		if (d->instantiateRenderer())
+		QSvgRenderer* renderer = d->m_rendererPool.allocRenderer();
+		//look for animated sprite first
+		count = d->m_frameBaseIndex;
+		while (renderer->elementExists(d->spriteFrameKey(key, count, false)))
 		{
-			//look for animated sprite first
-			count = d->m_frameBaseIndex;
-			while (d->m_renderer->elementExists(d->spriteFrameKey(key, count, false)))
+			++count;
+		}
+		count -= d->m_frameBaseIndex;
+		//look for non-animated sprite instead
+		if (count == 0)
+		{
+			if (!renderer->elementExists(key))
 			{
-				++count;
+				count = -1;
 			}
-			count -= d->m_frameBaseIndex;
-			//look for non-animated sprite instead
-			if (count == 0)
-			{
-				if (!d->m_renderer->elementExists(key))
-				{
-					count = -1;
-				}
-			}
-			//save in shared cache for following requests
-			if (d->m_strategies & KGameRenderer::UseDiskCache)
-			{
-				d->m_imageCache->insert(cacheKey, QByteArray::number(count));
-			}
+		}
+		d->m_rendererPool.freeRenderer(renderer);
+		//save in shared cache for following requests
+		if (d->m_strategies & KGameRenderer::UseDiskCache)
+		{
+			d->m_imageCache->insert(cacheKey, QByteArray::number(count));
 		}
 	}
 	d->m_frameCountCache.insert(key, count);
@@ -353,7 +328,7 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 	QRectF bounds;
 	bool boundsFound = false;
 	const QString cacheKey = d->m_boundsPrefix + elementKey;
-	if (!d->m_renderer && (d->m_strategies & KGameRenderer::UseDiskCache))
+	if (d->m_rendererPool.hasAvailableRenderers() && (d->m_strategies & KGameRenderer::UseDiskCache))
 	{
 		QByteArray buffer;
 		if (d->m_imageCache->find(cacheKey, &buffer))
@@ -366,19 +341,18 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 	//determine from SVG
 	if (!boundsFound)
 	{
-		if (d->instantiateRenderer())
+		QSvgRenderer* renderer = d->m_rendererPool.allocRenderer();
+		bounds = renderer->boundsOnElement(elementKey);
+		d->m_rendererPool.freeRenderer(renderer);
+		//save in shared cache for following requests
+		if (d->m_strategies & KGameRenderer::UseDiskCache)
 		{
-			bounds = d->m_renderer->boundsOnElement(elementKey);
-			//save in shared cache for following requests
-			if (d->m_strategies & KGameRenderer::UseDiskCache)
+			QByteArray buffer;
 			{
-				QByteArray buffer;
-				{
-					QDataStream stream(&buffer, QIODevice::WriteOnly);
-					stream << bounds;
-				}
-				d->m_imageCache->insert(cacheKey, buffer);
+				QDataStream stream(&buffer, QIODevice::WriteOnly);
+				stream << bounds;
 			}
+			d->m_imageCache->insert(cacheKey, buffer);
 		}
 	}
 	d->m_boundsCache.insert(elementKey, bounds);
@@ -462,14 +436,9 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	{
 		return;
 	}
-	//make sure that renderer is available
-	if (!instantiateRenderer())
-	{
-		return;
-	}
 	//create job
 	KGRInternal::Job* job = new KGRInternal::Job;
-	job->renderer = m_renderer;
+	job->rendererPool = &m_rendererPool;
 	job->cacheKey = cacheKey;
 	job->elementKey = elementKey;
 	job->spec = spec;
@@ -540,7 +509,9 @@ void KGRInternal::Worker::run()
 	QImage image(m_job->spec.size, QImage::Format_ARGB32_Premultiplied);
 	image.fill(transparentRgba);
 	QPainter painter(&image);
-	m_job->renderer->render(&painter, m_job->elementKey);
+	QSvgRenderer* renderer = m_job->rendererPool->allocRenderer();
+	renderer->render(&painter, m_job->elementKey);
+	m_job->rendererPool->freeRenderer(renderer);
 	painter.end();
 	m_job->result = image;
 	//talk back to the main thread
@@ -552,6 +523,83 @@ void KGRInternal::Worker::run()
 }
 
 //END KGRInternal::Job/Worker
+
+//BEGIN KGRInternal::RendererPool
+
+KGRInternal::RendererPool::RendererPool(QThreadPool* threadPool)
+	: m_valid(Checked_Invalid) //don't try to allocate renderers until given a valid SVG file
+	, m_threadPool(threadPool)
+{
+}
+
+KGRInternal::RendererPool::~RendererPool()
+{
+	//This deletes all renderers.
+	setPath(QString());
+}
+
+void KGRInternal::RendererPool::setPath(const QString& svgPath, QSvgRenderer* renderer)
+{
+	QMutexLocker locker(&m_mutex);
+	//delete all renderers
+	m_threadPool->waitForDone();
+	QHash<QSvgRenderer*, QThread*>::const_iterator it1 = m_hash.constBegin(), it2 = m_hash.constEnd();
+	for (; it1 != it2; ++it1)
+	{
+		Q_ASSERT(it1.value() == 0); //nobody may be using our renderers anymore now
+		delete it1.key();
+	}
+	m_hash.clear();
+	//set path
+	m_path = svgPath;
+	//existence of a renderer instance is evidence for the validity of the SVG file
+	if (renderer)
+	{
+		m_valid = Checked_Valid;
+		m_hash.insert(renderer, 0);
+	}
+	else
+	{
+		m_valid = Unchecked;
+	}
+}
+
+bool KGRInternal::RendererPool::hasAvailableRenderers() const
+{
+	//look for a renderer which is not associated with a thread
+	QMutexLocker locker(&m_mutex);
+	return m_hash.key(0) != 0;
+}
+
+QSvgRenderer* KGRInternal::RendererPool::allocRenderer()
+{
+	QThread* thread = QThread::currentThread();
+	//look for an available renderer
+	QMutexLocker locker(&m_mutex);
+	QSvgRenderer* renderer = m_hash.key(0);
+	if (!renderer)
+	{
+		//instantiate a new renderer (only if the SVG file has not been found to be invalid yet)
+		if (m_valid == Checked_Invalid)
+		{
+			return 0;
+		}
+		renderer = new QSvgRenderer(m_path);
+		m_valid = renderer->isValid() ? Checked_Valid : Checked_Invalid;
+	}
+	//mark renderer as used
+	m_hash.insert(renderer, thread);
+	return renderer;
+}
+
+void KGRInternal::RendererPool::freeRenderer(QSvgRenderer* renderer)
+{
+	//mark renderer as available
+	QMutexLocker locker(&m_mutex);
+	m_hash.insert(renderer, 0);
+}
+
+//END KGRInternal::RendererPool
 
 #include "kgamerenderer.moc"
 #include "kgamerenderer_p.moc"

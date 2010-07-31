@@ -113,6 +113,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///@param defaultTheme a theme name as used by KGameTheme::load
 		///@param cacheSize the cache size in megabytes (if not given, a sane
 		///default is used)
+		///@warning This constructor may only be called from the main thread.
 		explicit KGameRenderer(const QString& defaultTheme, unsigned cacheSize = 0);
 		///Deletes this KGameRenderer instance, as well as all clients using it.
 		virtual ~KGameRenderer();
