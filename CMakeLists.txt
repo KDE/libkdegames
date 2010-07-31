@@ -68,6 +68,7 @@ set(kdegames_LIB_SRCS
     kgameprogress.cpp
     kgamepopupitem.cpp
     kgamerendereditem.cpp
+    kgamerenderedobjectitem.cpp
     kgamerenderer.cpp
     kgamerendererclient.cpp
     kgamesvgdocument.cpp
@@ -116,6 +117,7 @@ install(FILES
     kgamecanvas.h
     kgameclock.h
     kgamerendereditem.h
+    kgamerenderedobjectitem.h
     kgamerenderer.h
     kgamerendererclient.h
     kgametheme.h

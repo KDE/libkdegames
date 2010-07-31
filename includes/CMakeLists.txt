@@ -13,6 +13,7 @@ install( FILES
 	KGamePopupItem
 	KGameProgress
 	KGameRenderedItem
+	KGameRenderedObjectItem
 	KGameRenderer
 	KGameRendererClient
 	KGameSvgDigits
