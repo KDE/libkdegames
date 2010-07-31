@@ -111,9 +111,13 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 {
 	const bool oldEnabled = d->m_strategies & strategy;
 	if (enabled)
+	{
 		d->m_strategies |= strategy;
+	}
 	else
+	{
 		d->m_strategies &= ~strategy;
+	}
 	if (strategy == KGameRenderer::UseDiskCache && oldEnabled != enabled)
 	{
 		//reload theme
