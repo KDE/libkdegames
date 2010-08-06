@@ -29,7 +29,7 @@ class QGraphicsView;
 class KGameRenderedObjectItemPrivate;
 
 /**
- * @class KGameRenderedObjectItem
+ * @class KGameRenderedObjectItem kgamerenderedobjectitem.h <KGameRenderedObjectItem>
  * @since 4.6
  * @short A QGraphicsObject which displays pixmaps from a KGameRenderer.
  *

@@ -31,7 +31,7 @@ class KGameRendererClientPrivate;
 class KGameTheme;
 
 /**
- * @class KGameRenderer
+ * @class KGameRenderer  kgamerenderer.h <KGameRenderer>
  * @since 4.6
  * @short Cache-enabled rendering of SVG themes.
  *

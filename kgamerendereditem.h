@@ -28,7 +28,7 @@
 class KGameRenderedItemPrivate;
 
 /**
- * @class KGameRenderedItem
+ * @class KGameRenderedItem kgamerendereditem.h <KGameRenderedItem>
  * @since 4.6
  * @short A QGraphicsPixmapItem which reacts to theme changes automatically.
  *

@@ -28,7 +28,7 @@ class KGameRenderer;
 class KGameRendererPrivate;
 
 /**
- * @class KGameRendererClient
+ * @class KGameRendererClient kgamerendererclient.h <KGameRendererClient>
  * @since 4.6
  * @short An object that receives pixmaps from a KGameRenderer.
  *
