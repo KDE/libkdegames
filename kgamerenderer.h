@@ -38,7 +38,7 @@ class KGameTheme;
  * KGameRenderer is a light-weight rendering framework for the rendering of
  * SVG themes (as represented by KGameTheme) into pixmap caches.
  *
- * @section Terminology
+ * @section terminology Terminology
  *
  * @li Themes, in the context of KGameRenderer, are the same as in the context
  *     of the KGameTheme class: a pair of a .desktop file and a .svg file. See
@@ -50,7 +50,7 @@ class KGameTheme;
  *     of an animated sprite are produced by appending the frameSuffix() to the
  *     sprite key.
  *
- * @section Access to the pixmaps
+ * @section clients Access to the pixmaps
  *
  * Sprite pixmaps can be retrieved from KGameRenderer in the main thread using
  * the synchronous KGameRenderer::spritePixmap() method. However, it is highly
@@ -63,7 +63,7 @@ class KGameTheme;
  * QGraphicsPixmapItem which is a KGameRendererClient and displays the pixmap
  * for a given sprite.
  *
- * @section Rendering strategy
+ * @section strategies Rendering strategy
  *
  * For each theme, KGameRenderer keeps two caches around: an in-process cache of
  * QPixmaps, and a disk cache containing QImages (powered by KImageCache). You
@@ -74,7 +74,7 @@ class KGameTheme;
  * the requested sprite is not in the caches, a rendering request is sent to a
  * worker thread.
  *
- * @section Support for legacy themes
+ * @section legacy Support for legacy themes
  *
  * When porting applications to KGameRenderer, you probably have to support
  * the format of existing themes. KGameRenderer provides the frameBaseIndex()
