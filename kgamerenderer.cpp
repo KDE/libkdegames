@@ -270,6 +270,15 @@ QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame, bool
 
 int KGameRenderer::frameCount(const QString& key) const
 {
+	//ensure that some theme is loaded
+	if (d->m_currentTheme.isEmpty())
+	{
+		const_cast<KGameRenderer*>(this)->setTheme(d->m_defaultTheme);
+		if (d->m_currentTheme.isEmpty())
+		{
+			return -1;
+		}
+	}
 	//look up in in-process cache
 	QHash<QString, int>::const_iterator it = d->m_frameCountCache.constFind(key);
 	if (it != d->m_frameCountCache.constEnd())
@@ -322,6 +331,15 @@ int KGameRenderer::frameCount(const QString& key) const
 QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 {
 	const QString elementKey = d->spriteFrameKey(key, frame);
+	//ensure that some theme is loaded
+	if (d->m_currentTheme.isEmpty())
+	{
+		const_cast<KGameRenderer*>(this)->setTheme(d->m_defaultTheme);
+		if (d->m_currentTheme.isEmpty())
+		{
+			return QRectF();
+		}
+	}
 	//look up in in-process cache
 	QHash<QString, QRectF>::const_iterator it = d->m_boundsCache.constFind(elementKey);
 	if (it != d->m_boundsCache.constEnd())
@@ -332,7 +350,7 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 	QRectF bounds;
 	bool boundsFound = false;
 	const QString cacheKey = d->m_boundsPrefix + elementKey;
-	if (d->m_rendererPool.hasAvailableRenderers() && (d->m_strategies & KGameRenderer::UseDiskCache))
+	if (!d->m_rendererPool.hasAvailableRenderers() && (d->m_strategies & KGameRenderer::UseDiskCache))
 	{
 		QByteArray buffer;
 		if (d->m_imageCache->find(cacheKey, &buffer))
