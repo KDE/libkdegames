@@ -49,7 +49,8 @@ class KDEGAMES_EXPORT KGameRendererClient
 
 		///@return the renderer used by this client
 		KGameRenderer* renderer() const;
-		///@return the frame count, or -1 for non-animated frames
+		///@return the frame count, or 0 for non-animated sprites, or -1 if the
+		///sprite does not exist at all
 		///@see KGameRenderer::frameCount()
 		int frameCount() const;
 		///@return the rendered pixmap (or an invalid pixmap if no pixmap has 
