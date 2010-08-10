@@ -76,8 +76,21 @@ void KGameRendererClient::setFrame(int frame)
 {
 	if (d->m_spec.frame != frame)
 	{
-		d->m_spec.frame = frame;
-		d->fetchPixmap();
+		//do some normalization ourselves
+		const int frameCount = this->frameCount();
+		if (frameCount <= 0)
+		{
+			frame = -1;
+		}
+		else
+		{
+			frame %= frameCount;
+		}
+		if (d->m_spec.frame != frame)
+		{
+			d->m_spec.frame = frame;
+			d->fetchPixmap();
+		}
 	}
 }
 
