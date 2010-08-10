@@ -695,6 +695,16 @@ QRect KGameCanvasPixmap::rect() const {
     return QRect(pos(), m_pixmap.size());
 }
 
+KGameCanvasRenderedPixmap::KGameCanvasRenderedPixmap(KGameRenderer* renderer, const QString& spriteKey, KGameCanvasAbstract* canvas)
+	: KGameCanvasPixmap(canvas)
+	, KGameRendererClient(renderer, spriteKey)
+{
+}
+
+void KGameCanvasRenderedPixmap::receivePixmap(const QPixmap& pixmap)
+{
+	KGameCanvasPixmap::setPixmap(pixmap);
+}
 
 /*
     KGameCanvasTiledPixmap

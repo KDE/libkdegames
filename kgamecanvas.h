@@ -40,6 +40,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QtGui/QRegion>
 #include <QtGui/QWidget>
 #include <libkdegames_export.h>
+#include <KGameRendererClient>
 
 class KGameCanvasItem;
 
@@ -48,6 +49,8 @@ class KGameCanvasItem;
     \brief Container class.
 
     A KGameCanvasAbstract is a set of canvas items.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasAbstract
 {
@@ -105,6 +108,8 @@ public:
 
     A KGameCanvasItem is an abstract class to represent a generic item that can be
     put in a canvas.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasItem
 {
@@ -233,6 +238,8 @@ public:
     A KGameCanvasDummy is an empty, invisible item.
     You can use it as reference for stacking items in the canvas using the
     stackOver and stackUnder functions.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasDummy : public KGameCanvasItem
 {
@@ -256,6 +263,8 @@ public:
 
     A KGameCanvasGroup is an KGameCanvasItem, but it is also a KGameCanvasAbstract,
     so you can add children items to it. Just an inner canvas, if you prefer.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasGroup : public KGameCanvasItem, public KGameCanvasAbstract
 {
@@ -299,6 +308,8 @@ public:
     \brief A picture, ie a collection of paint operations.
 
     A KGameCanvasPicture is a picture that can be replayed on the canvas.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasPicture : public KGameCanvasItem
 {
@@ -329,6 +340,8 @@ public:
     \brief A pixmap (sprite).
 
     A KGameCanvasPixmap is a pixmap that can be put in the canvas.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasPixmap : public KGameCanvasItem
 {
@@ -356,10 +369,30 @@ public:
 };
 
 /**
+    \class KGameCanvasRenderedPixmap kgamecanvas.h <KGameCanvas>
+    \brief A sprite pixmap from KGameRenderer.
+
+    This canvas item behaves like KGameCanvasPixmap, but the pixmaps are served
+    from a KGameRenderer. This class exists solely for the purpose of porting
+    existing applications to KGameRenderer.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
+ */
+class KDEGAMES_EXPORT KGameCanvasRenderedPixmap : public KGameCanvasPixmap, public KGameRendererClient
+{
+public:
+	KGameCanvasRenderedPixmap(KGameRenderer* renderer, const QString& spriteKey, KGameCanvasAbstract* canvas = 0);
+protected:
+	virtual void receivePixmap(const QPixmap& pixmap);
+};
+
+/**
     \class KGameCanvasTiledPixmap kgamecanvas.h <KGameCanvas>
     \brief A tiled pixmap (brush).
 
     A KGameCanvasTiledPixmap is a pixmap that can be put in the canvas.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT  KGameCanvasTiledPixmap : public KGameCanvasItem
 {
@@ -411,6 +444,8 @@ public:
     \brief A solid rectangle.
 
     A KGameCanvasRectangle is a rectangle that can be put in the canvas.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
 {
@@ -446,6 +481,8 @@ public:
     \brief KGameCanvasText.
 
     A KGameCanvasText is a text that can be put in the canvas.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasText : public KGameCanvasItem
 {
@@ -530,6 +567,8 @@ public:
 
     A KGameCanvasWidget is a widget that can contain many KGameCanvasItem (images, rectangles, lines, etc).
     Portions of the widget are automatically redrawn to update the changes made to the items.
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasWidget : public QWidget, public KGameCanvasAbstract
 {
@@ -591,6 +630,8 @@ public:
     updateParent, which is called when the adapter content is invalidated.
 
     \todo Support animations
+
+    \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
 class KDEGAMES_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
 {
