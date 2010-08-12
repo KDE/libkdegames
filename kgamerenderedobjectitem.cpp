@@ -19,6 +19,7 @@
 #include "kgamerenderedobjectitem.h"
 #include "kgamerenderer.h"
 
+#include <QtCore/qmath.h>
 #include <QtGui/QGraphicsView>
 
 class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
@@ -37,24 +38,39 @@ class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 		KGameRenderedObjectItem* m_parent;
 		QGraphicsView* m_primaryView;
 		QSize m_correctRenderSize;
+		QSizeF m_fixedSize;
 };
 
 KGameRenderedObjectItemPrivate::KGameRenderedObjectItemPrivate(KGameRenderedObjectItem* parent)
 	: QGraphicsPixmapItem(parent)
 	, m_parent(parent)
 	, m_primaryView(0)
+	, m_correctRenderSize(0, 0)
+	, m_fixedSize(-1, -1)
 {
+}
+
+static inline int vectorLength(const QPointF& point)
+{
+	return qSqrt(point.x() * point.x() + point.y() * point.y());
 }
 
 bool KGameRenderedObjectItemPrivate::adjustRenderSize()
 {
 	Q_ASSERT(m_primaryView);
-	//determine rectangle which is covered by this item on the view
-	const QRectF viewRect = m_primaryView->mapFromScene(m_parent->sceneBoundingRect()).boundingRect();
-	//check resulting render size
-	m_correctRenderSize = viewRect.size().toSize();
-	const QSize diff = m_parent->renderSize() - m_correctRenderSize;
+	//create a polygon from the item's boundingRect
+	const QRectF itemRect = m_parent->boundingRect();
+	QPolygonF itemPolygon(3);
+	itemPolygon[0] = itemRect.topLeft();
+	itemPolygon[1] = itemRect.topRight();
+	itemPolygon[2] = itemRect.bottomLeft();
+	//determine correct render size
+	const QPolygonF scenePolygon = m_parent->sceneTransform().map(itemPolygon);
+	const QPolygon viewPolygon = m_primaryView->mapFromScene(scenePolygon);
+	m_correctRenderSize.setWidth(qMax(vectorLength(viewPolygon[1] - viewPolygon[0]), 1));
+	m_correctRenderSize.setHeight(qMax(vectorLength(viewPolygon[2] - viewPolygon[0]), 1));
 	//ignore fluctuations in the render size which result from rounding errors
+	const QSize diff = m_parent->renderSize() - m_correctRenderSize;
 	if (qAbs(diff.width()) <= 1 && qAbs(diff.height()) <= 1)
 	{
 		return false;
@@ -62,7 +78,7 @@ bool KGameRenderedObjectItemPrivate::adjustRenderSize()
 	m_parent->setRenderSize(m_correctRenderSize);
 	//calculate new transform for this item
 	QTransform t;
-	t.scale(qreal(1.0) / m_correctRenderSize.width(), qreal(1.0) / m_correctRenderSize.height());
+	t.scale(m_fixedSize.width() / m_correctRenderSize.width(), m_fixedSize.height() / m_correctRenderSize.height());
 	//render item
 	m_parent->prepareGeometryChange();
 	setTransform(t);
@@ -103,6 +119,16 @@ void KGameRenderedObjectItem::setOffset(qreal x, qreal y)
 	setOffset(QPointF(x, y));
 }
 
+QSizeF KGameRenderedObjectItem::fixedSize() const
+{
+	return d->m_fixedSize;
+}
+
+void KGameRenderedObjectItem::setFixedSize(const QSizeF& fixedSize)
+{
+	d->m_fixedSize = fixedSize;
+}
+
 QGraphicsView* KGameRenderedObjectItem::primaryView() const
 {
 	return d->m_primaryView;
@@ -115,12 +141,17 @@ void KGameRenderedObjectItem::setPrimaryView(QGraphicsView* view)
 		d->m_primaryView = view;
 		if (view)
 		{
+			if (!d->m_fixedSize.isValid())
+			{
+				d->m_fixedSize = QSize(1, 1);
+			}
 			//determine render size and adjust coordinate system
 			d->m_correctRenderSize = QSize(-10, -10); //force adjustment to be made
 			d->adjustRenderSize();
 		}
 		else
 		{
+			d->m_fixedSize = QSize(-1, -1);
 			//reset transform to make coordinate systems of this item and the private item equal
 			prepareGeometryChange();
 			d->setTransform(QTransform());
