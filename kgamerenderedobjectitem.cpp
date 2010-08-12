@@ -27,6 +27,7 @@ class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 	public:
 		KGameRenderedObjectItemPrivate(KGameRenderedObjectItem* parent);
 		bool adjustRenderSize(); //returns whether an adjustment was made; WARNING: only call when m_primaryView != 0
+		void adjustTransform();
 
 		//QGraphicsItem reimplementations (see comment below for why we need all of this)
 		virtual bool contains(const QPointF& point) const;
@@ -76,6 +77,12 @@ bool KGameRenderedObjectItemPrivate::adjustRenderSize()
 		return false;
 	}
 	m_parent->setRenderSize(m_correctRenderSize);
+	adjustTransform();
+	return true;
+}
+
+void KGameRenderedObjectItemPrivate::adjustTransform()
+{
 	//calculate new transform for this item
 	QTransform t;
 	t.scale(m_fixedSize.width() / m_correctRenderSize.width(), m_fixedSize.height() / m_correctRenderSize.height());
@@ -83,7 +90,6 @@ bool KGameRenderedObjectItemPrivate::adjustRenderSize()
 	m_parent->prepareGeometryChange();
 	setTransform(t);
 	m_parent->update();
-	return true;
 }
 
 KGameRenderedObjectItem::KGameRenderedObjectItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent)
@@ -126,7 +132,11 @@ QSizeF KGameRenderedObjectItem::fixedSize() const
 
 void KGameRenderedObjectItem::setFixedSize(const QSizeF& fixedSize)
 {
-	d->m_fixedSize = fixedSize;
+	if (d->m_primaryView)
+	{
+		d->m_fixedSize = fixedSize.expandedTo(QSize(1, 1));
+		d->adjustTransform();
+	}
 }
 
 QGraphicsView* KGameRenderedObjectItem::primaryView() const
