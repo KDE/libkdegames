@@ -258,11 +258,12 @@ QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame, bool
 		const int frameCount = m_parent->frameCount(key);
 		if (frameCount <= 0)
 		{
-			frame = -1;
+			//non-animated sprite
+			return key;
 		}
 		else
 		{
-			frame = (frame - m_frameBaseIndex) % frameCount;
+			frame = (frame - m_frameBaseIndex) % frameCount + m_frameBaseIndex;
 		}
 	}
 	return key + m_frameSuffix.arg(frame);

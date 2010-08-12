@@ -84,7 +84,8 @@ void KGameRendererClient::setFrame(int frame)
 		}
 		else
 		{
-			frame %= frameCount;
+			const int frameBaseIndex = d->m_renderer->frameBaseIndex();
+			frame = (frame - frameBaseIndex) % frameCount + frameBaseIndex;
 		}
 		if (d->m_spec.frame != frame)
 		{
