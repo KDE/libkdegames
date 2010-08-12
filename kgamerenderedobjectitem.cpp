@@ -210,24 +210,30 @@ void KGameRenderedObjectItemPrivate::paint(QPainter* painter, const QStyleOption
 	{
 		if (m_primaryView == widget || m_primaryView->isAncestorOf(widget))
 		{
+			const bool isSimpleTransformation = !painter->transform().isRotating();
+			//If an adjustment was made, do not paint now, but wait for the next
+			//painting. However, paint directly if the transformation is
+			//complex, in order to avoid flicker.
 			if (adjustRenderSize())
 			{
-				//An adjustment was made, so not paint now, but wait for the next painting.
+				if (isSimpleTransformation)
+				{
+					return;
+				}
+			}
+			if (isSimpleTransformation)
+			{
+				//draw pixmap directly in physical coordinates
+				const QPoint basePos = painter->transform().map(QPointF()).toPoint();
+				painter->save();
+				painter->setTransform(QTransform());
+				painter->drawPixmap(basePos, pixmap());
+				painter->restore();
 				return;
 			}
 		}
-		//draw pixmap directly in physical coordinates
-		const QPoint basePos = painter->transform().map(QPointF()).toPoint();
-		painter->save();
-		painter->setTransform(QTransform());
-		painter->drawPixmap(basePos, pixmap());
-		painter->restore();
 	}
-	else
-	{
-		QGraphicsPixmapItem::paint(painter, option, widget);
-		return;
-	}
+	QGraphicsPixmapItem::paint(painter, option, widget);
 }
 
 QPainterPath KGameRenderedObjectItemPrivate::shape() const
