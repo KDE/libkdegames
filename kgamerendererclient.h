@@ -27,6 +27,14 @@ class KGameRendererClientPrivate;
 class KGameRenderer;
 class KGameRendererPrivate;
 
+#ifndef KDEGAMES_QCOLOR_QHASH
+#	define KDEGAMES_QCOLOR_QHASH
+	inline uint qHash(const QColor& color)
+	{
+		return color.rgba();
+	}
+#endif // KDEGAMES_QCOLOR_QHASH
+
 /**
  * @class KGameRendererClient kgamerendererclient.h <KGameRendererClient>
  * @since 4.6
@@ -83,6 +91,15 @@ class KDEGAMES_EXPORT KGameRendererClient
 		///The default render size is very small (width = height = 3 pixels), so
 		///that you notice when you forget to set this. ;-)
 		void setRenderSize(const QSize& renderSize);
+		///@return the custom color replacements for this client
+		QHash<QColor, QColor> customColors() const;
+		///Defines the custom color replacements for this client. That is, for
+		///each entry in this has, the key color will be replaced by its value
+		///if it is encountered in the sprite.
+		///
+		///@note Custom colors increase the rendering time considerably, so use
+		///      this feature only if you really need its flexibility.
+		void setCustomColors(const QHash<QColor, QColor>& customColors);
 	protected:
 		///This method is called when the KGameRenderer has provided a new
 		///pixmap for this client (esp. after theme changes and after calls to 

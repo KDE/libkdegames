@@ -114,6 +114,20 @@ void KGameRendererClient::setRenderSize(const QSize& renderSize)
 	}
 }
 
+QHash<QColor, QColor> KGameRendererClient::customColors() const
+{
+	return d->m_spec.customColors;
+}
+
+void KGameRendererClient::setCustomColors(const QHash<QColor, QColor>& customColors)
+{
+	if (d->m_spec.customColors != customColors)
+	{
+		d->m_spec.customColors = customColors;
+		d->fetchPixmap();
+	}
+}
+
 void KGameRendererClientPrivate::fetchPixmap()
 {
 	m_renderer->d->requestPixmap(m_spec, m_parent);

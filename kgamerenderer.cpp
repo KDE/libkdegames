@@ -19,6 +19,7 @@
 #include "kgamerenderer.h"
 #include "kgamerenderer_p.h"
 #include "kgamerendererclient.h"
+#include "colorproxy_p.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDateTime>
@@ -387,10 +388,10 @@ bool KGameRenderer::spriteExists(const QString& key) const
 	return this->frameCount(key) >= 0;
 }
 
-QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int frame) const
+QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int frame, const QHash<QColor, QColor>& customColors) const
 {
 	QPixmap result;
-	d->requestPixmap(KGRInternal::ClientSpec(key, frame, size), 0, &result);
+	d->requestPixmap(KGRInternal::ClientSpec(key, frame, size, customColors), 0, &result);
 	return result;
 }
 
@@ -417,7 +418,13 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		return;
 	}
 	const QString elementKey = spriteFrameKey(spec.spriteKey, spec.frame);
-	const QString cacheKey = m_sizePrefix.arg(spec.size.width()).arg(spec.size.height()) + elementKey;
+	QString cacheKey = m_sizePrefix.arg(spec.size.width()).arg(spec.size.height()) + elementKey;
+	QHash<QColor, QColor>::const_iterator it1 = spec.customColors.constBegin(), it2 = spec.customColors.constEnd();
+	static const QString colorSuffix("-%1-%2");
+	for (; it1 != it2; ++it1)
+	{
+		cacheKey += colorSuffix.arg(it1.key().rgba()).arg(it1.value().rgba());
+	}
 	//check if update is needed
 	if (client)
 	{
@@ -531,13 +538,28 @@ void KGRInternal::Worker::run()
 {
 	QImage image(m_job->spec.size, QImage::Format_ARGB32_Premultiplied);
 	image.fill(transparentRgba);
-	QPainter painter(&image);
+	QPainter* painter = 0;
+	QPaintDeviceColorProxy* proxy = 0;
+	//if no custom colors requested, paint directly onto image
+	if (m_job->spec.customColors.isEmpty())
+	{
+		painter = new QPainter(&image);
+	}
+	else
+	{
+		proxy = new QPaintDeviceColorProxy(&image, m_job->spec.customColors);
+		painter = new QPainter(proxy);
+	}
+
+	//do renderering
 	QSvgRenderer* renderer = m_job->rendererPool->allocRenderer();
-	renderer->render(&painter, m_job->elementKey);
+	renderer->render(painter, m_job->elementKey);
 	m_job->rendererPool->freeRenderer(renderer);
-	painter.end();
-	m_job->result = image;
+	delete painter;
+	delete proxy;
+
 	//talk back to the main thread
+	m_job->result = image;
 	QMetaObject::invokeMethod(
 		m_parent, "jobFinished", Qt::AutoConnection,
 		Q_ARG(KGRInternal::Job*, m_job), Q_ARG(bool, m_synchronous)

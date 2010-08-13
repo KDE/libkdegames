@@ -20,6 +20,7 @@
 #define KGAMERENDERER_H
 
 class QGraphicsView;
+#include <QtCore/QHash>
 #include <QtCore/QObject>
 #include <QtGui/QPixmap>
 
@@ -29,6 +30,14 @@ class KGameRendererPrivate;
 class KGameRendererClient;
 class KGameRendererClientPrivate;
 class KGameTheme;
+
+#ifndef KDEGAMES_QCOLOR_QHASH
+#	define KDEGAMES_QCOLOR_QHASH
+	inline uint qHash(const QColor& color)
+	{
+		return color.rgba();
+	}
+#endif // KDEGAMES_QCOLOR_QHASH
 
 /**
  * @class KGameRenderer  kgamerenderer.h <KGameRenderer>
@@ -193,8 +202,13 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///@param key the key of the sprite
 		///@param size the size of the resulting pixmap
 		///@param frame the number of the frame which you want
-		///@note For non-animated frames, omit the @a frame parameter.
-		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1) const;
+		///@param customColors the custom color replacements for this client.
+		///       That is, for each entry in this has, the key color will be
+		///       replaced by its value if it is encountered in the sprite.
+		///@note  For non-animated frames, set @a frame to -1 or omit it.
+		///@note  Custom colors increase the rendering time considerably, so use
+		///       this feature only if you really need its flexibility.
+		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1, const QHash<QColor, QColor>& customColors = QHash<QColor, QColor>()) const;
 	public Q_SLOTS:
 		///Load the given theme and update the pixmaps of all associated
 		///KGameRendererClient instances.

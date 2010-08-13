@@ -26,6 +26,7 @@ include_directories(
 ########### next target ###############
 
 set(kdegames_LIB_SRCS
+    colorproxy_p.cpp
     digits/kgamesvgdigits.cpp
 #   highscore/kconfigrawbackend.cpp
     highscore/kexthighscore_item.cpp

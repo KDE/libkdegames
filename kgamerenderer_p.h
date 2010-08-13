@@ -33,15 +33,17 @@ namespace KGRInternal
 	//Describes the state of a KGameRendererClient.
 	struct ClientSpec
 	{
-		inline ClientSpec(const QString& spriteKey = QString(), int frame = -1, const QSize& size = QSize());
+		inline ClientSpec(const QString& spriteKey = QString(), int frame = -1, const QSize& size = QSize(), const QHash<QColor, QColor>& customColors = QHash<QColor, QColor>());
 		QString spriteKey;
 		int frame;
 		QSize size;
+		QHash<QColor, QColor> customColors;
 	};
-	ClientSpec::ClientSpec(const QString& spriteKey_, int frame_, const QSize& size_)
+	ClientSpec::ClientSpec(const QString& spriteKey_, int frame_, const QSize& size_, const QHash<QColor, QColor>& customColors_)
 		: spriteKey(spriteKey_)
 		, frame(frame_)
 		, size(size_)
+		, customColors(customColors_)
 	{
 	}
 
