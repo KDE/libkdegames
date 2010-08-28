@@ -61,9 +61,6 @@ class KDEGAMES_EXPORT KGameRendererClient
 		///sprite does not exist at all
 		///@see KGameRenderer::frameCount()
 		int frameCount() const;
-		///@return the rendered pixmap (or an invalid pixmap if no pixmap has 
-		///been rendered yet)
-		QPixmap pixmap() const;
 
 		///@return the key of the sprite currently rendered by this client
 		QString spriteKey() const;

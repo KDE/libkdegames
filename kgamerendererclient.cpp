@@ -95,11 +95,6 @@ void KGameRendererClient::setFrame(int frame)
 	}
 }
 
-QPixmap KGameRendererClient::pixmap() const
-{
-	return d->m_pixmap;
-}
-
 QSize KGameRendererClient::renderSize() const
 {
 	return d->m_spec.size;

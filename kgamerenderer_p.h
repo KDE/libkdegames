@@ -169,7 +169,6 @@ class KGameRendererClientPrivate : public QObject
 		KGameRendererClient* m_parent;
 		KGameRenderer* m_renderer;
 
-		QPixmap m_pixmap;
 		KGRInternal::ClientSpec m_spec;
 };
 
