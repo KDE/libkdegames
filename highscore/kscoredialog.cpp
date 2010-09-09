@@ -244,6 +244,8 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
 
 void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 {
+    if (hiddenGroups.contains(groupKey))
+        return;
     QWidget* widget = new QWidget(q);
     tabs[groupKey] = widget;
 
