@@ -54,6 +54,7 @@ class KScoreDialog::KScoreDialogPrivate
     public:
         //QList<FieldInfo*> scores;
         QMap<QByteArray, GroupScores> scores; ///<Maps config group name to GroupScores
+        QList<QByteArray> hiddenGroups; /// Groups that should not be shown in the dialog
         QMap<int, QByteArray> configGroupWeights; /// Weights of the groups, defines ordering
         KTabWidget *tabWidget;
         //QWidget *page;
@@ -175,6 +176,11 @@ void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString>&
     {
         addLocalizedConfigGroupName(qMakePair(it.key(), it.value()));
     }
+}
+
+void KScoreDialog::setHiddenConfigGroups(const QList<QByteArray>& hiddenGroups)
+{
+    d->hiddenGroups = hiddenGroups;
 }
 
 void KScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray>& weights)
@@ -324,6 +330,8 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     for (; it != scores.constEnd(); ++it)
     {
         const QByteArray &groupKey = it.key();
+        if (hiddenGroups.contains(groupKey))
+            continue;
         kDebug() << latest.first << tabWidget->tabText(tabIndex);
 
         //Only display the comment on the page with the new score (or) this one if there's only one tab

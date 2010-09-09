@@ -178,6 +178,19 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
          */
         void addLocalizedConfigGroupNames(const QMap<QByteArray, QString>& groups);
 
+        /**
+         * Hide some config groups so that they are not shown on the dialog
+         * (but are still stored in the configuration file).
+         * \code
+         * ksdialog.setHiddenConfigGroups(QList<QByteArray>() << "Very Easy" << "Easy");
+         * \endcode
+         *
+         * @param hiddenGroups the list of group names you want to hide
+         *
+         * @since KDE 4.6
+         */
+        void setHiddenConfigGroups(const QList<QByteArray>& hiddenGroups);
+
          /**
          * It is a good idea giving config group weigths, otherwise tabs
          * get ordered by their tab name that is not probably what you want.
