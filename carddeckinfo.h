@@ -87,7 +87,7 @@ namespace CardDeckInfo
 
    /**
     * Retrieve the directory where the card front sides are stored. The cards are
-    * named 1.png, 2.png, etc. For SVG card decks use @ref cardSVGFilePath.
+    * named 1.png, 2.png, etc. For SVG card decks use @ref frontSVGFilePath.
     * @param name The untranslated name of the card set.
     * @return The directory.
     */
@@ -95,7 +95,7 @@ namespace CardDeckInfo
 
    /**
     * Retrieve the filename of the card back side. 
-    * For SVG  decks use @ref deckSVGFilePath.
+    * For SVG decks use @ref backSVGFilePath.
     * @param name The untranslated name of the card deck.
     * @return The filename.
     */
