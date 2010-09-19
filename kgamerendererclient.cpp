@@ -25,7 +25,7 @@
 KGameRendererClientPrivate::KGameRendererClientPrivate(KGameRenderer* renderer, const QString& spriteKey, KGameRendererClient* parent)
 	: m_parent(parent)
 	, m_renderer(renderer)
-	, m_spec(spriteKey, -1, QSize(3, 3))
+	, m_spec(spriteKey, -1, QSize())
 {
 }
 
