@@ -145,7 +145,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 {
 //     kDebug(11001) << ": HighscoresWidget";
 
-    setObjectName("show_highscores_widget");
+    setObjectName( QLatin1String("show_highscores_widget" ));
     const ScoreInfos &s = internal->scoreInfos();
     const PlayerInfos &p = internal->playerInfos();
 

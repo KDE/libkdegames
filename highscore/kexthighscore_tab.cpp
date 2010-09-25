@@ -122,7 +122,7 @@ const char *StatisticsTab::TREND_LABELS[Nb_Trends] = {
 StatisticsTab::StatisticsTab(QWidget *parent)
     : AdditionalTab(parent)
 {
-    setObjectName("statistics_tab");
+    setObjectName( QLatin1String("statistics_tab" ));
     // construct GUI
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 
@@ -218,7 +218,7 @@ void StatisticsTab::display(uint i)
 HistogramTab::HistogramTab(QWidget *parent)
     : AdditionalTab(parent)
 {
-    setObjectName("histogram_tab");
+    setObjectName( QLatin1String("histogram_tab" ));
     // construct GUI
     QVBoxLayout *top = static_cast<QVBoxLayout *>(layout());
 

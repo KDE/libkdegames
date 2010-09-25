@@ -45,7 +45,7 @@ public:
     KCardThemeInfoStatic()
     {
         KGlobal::dirs()->addResourceType( "cards", "data", "carddecks/" );
-        KGlobal::locale()->insertCatalog( "libkdegames" );
+        KGlobal::locale()->insertCatalog( QLatin1String(  "libkdegames" ) );
         readBacks();
         readFronts();
     }

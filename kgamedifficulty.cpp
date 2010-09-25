@@ -113,11 +113,11 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	if (slotCustom!=0)
 		QObject::connect(this, SIGNAL(customLevelChanged(int)), recvr, slotCustom);
 
-	m_menu = new KSelectAction(KIcon("games-difficult"), i18nc("Game difficulty level", "Difficulty"), window);
+	m_menu = new KSelectAction(KIcon( QLatin1String( "games-difficult") ), i18nc("Game difficulty level", "Difficulty" ), window);
 	m_menu->setToolTip(i18n("Set the difficulty level"));
 	m_menu->setWhatsThis(i18n("Set the difficulty level of the game."));
 	QObject::connect(m_menu, SIGNAL(triggered(int)), this, SLOT(changeSelection(int)));
-	m_menu->setObjectName("options_game_difficulty");
+	m_menu->setObjectName( QLatin1String("options_game_difficulty" ));
 	window->actionCollection()->addAction(m_menu->objectName(), m_menu);
 
 	setParent(window);
@@ -186,14 +186,14 @@ void KGameDifficultyPrivate::rebuildActions()
 	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
 		if (level!=KGameDifficulty::Configurable) {
 			m_menu->addAction(standardLevelString(level).second);
-			m_comboBox->addItem(KIcon("games-difficult"), standardLevelString(level).second);
+			m_comboBox->addItem(KIcon( QLatin1String( "games-difficult" )), standardLevelString(level).second);
 		}
 	}
 
 	if (m_customLevels.count()>0) {
 		foreach(const QString &s, m_customLevels) {
 			m_menu->addAction(s);
-			m_comboBox->addItem(KIcon("games-difficult"), s);
+			m_comboBox->addItem(KIcon( QLatin1String( "games-difficult" )), s);
 		}
 	}
 
@@ -204,7 +204,7 @@ void KGameDifficultyPrivate::rebuildActions()
 
 		QString s = i18nc("Name of the game difficulty level that is customized by the user by setting up different game parameters", "Custom");
 		m_menu->addAction(s);
-		m_comboBox->addItem(KIcon("games-difficult"), s);
+		m_comboBox->addItem(KIcon( QLatin1String( "games-difficult" )), s);
 	}
 
 	// reselect the previous selected item.
