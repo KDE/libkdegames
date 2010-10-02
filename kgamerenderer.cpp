@@ -422,7 +422,7 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	const QString elementKey = spriteFrameKey(spec.spriteKey, spec.frame);
 	QString cacheKey = m_sizePrefix.arg(spec.size.width()).arg(spec.size.height()) + elementKey;
 	QHash<QColor, QColor>::const_iterator it1 = spec.customColors.constBegin(), it2 = spec.customColors.constEnd();
-	static const QString colorSuffix("-%1-%2");
+	static const QString colorSuffix(QLatin1String( "-%1-%2" ));
 	for (; it1 != it2; ++it1)
 	{
 		cacheKey += colorSuffix.arg(it1.key().rgba()).arg(it1.value().rgba());

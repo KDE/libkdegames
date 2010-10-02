@@ -115,7 +115,7 @@ void ModulePrivate::sendRequest(Request request)
 	if(opcode == Request::state)
 	{
 		*m_net << opcode;
-		*m_net << (qint8)request.data["state"].toInt();
+		*m_net << (qint8)request.data[QLatin1String( "state" )].toInt();
 	}
 	if(opcode == Request::stand)
 	{
@@ -124,32 +124,32 @@ void ModulePrivate::sendRequest(Request request)
 	if(opcode == Request::sit)
 	{
 		*m_net << opcode;
-		*m_net << request.data["seat"].toInt();
+		*m_net << request.data[QLatin1String( "seat" )].toInt();
 	}
 	if(opcode == Request::boot)
 	{
 		*m_net << opcode;
-		*m_net << request.data["player"];
+		*m_net << request.data[QLatin1String( "player" )];
 	}
 	if(opcode == Request::bot)
 	{
 		*m_net << opcode;
-		*m_net << request.data["seat"].toInt();
+		*m_net << request.data[QLatin1String( "seat" )].toInt();
 	}
 	if(opcode == Request::open)
 	{
 		*m_net << opcode;
-		*m_net << request.data["seat"].toInt();
+		*m_net << request.data[QLatin1String( "seat" )].toInt();
 	}
 	if(opcode == Request::chat)
 	{
 		*m_net << opcode;
-		*m_net << request.data["message"];
+		*m_net << request.data[QLatin1String( "message" )];
 	}
 	if(opcode == Request::info)
 	{
 		*m_net << opcode;
-		*m_net << request.data["seat"].toInt();
+		*m_net << request.data[QLatin1String( "seat" )].toInt();
 	}
 	if(opcode == Request::rankings)
 	{
@@ -162,15 +162,15 @@ QString ModulePrivate::requestString(Request::Type requestcode)
 	QString str;
 	QMap<Request::Type, QString> requestcodes;
 
-	requestcodes[Request::state] = "Request::state";
-	requestcodes[Request::stand] = "Request::stand";
-	requestcodes[Request::sit] = "Request::sit";
-	requestcodes[Request::boot] = "Request::boot";
-	requestcodes[Request::bot] = "Request::bot";
-	requestcodes[Request::open] = "Request::open";
-	requestcodes[Request::chat] = "Request::chat";
-	requestcodes[Request::info] = "Request::info";
-	requestcodes[Request::rankings] = "Request::rankings";
+	requestcodes[Request::state] = QLatin1String( "Request::state" );
+	requestcodes[Request::stand] = QLatin1String( "Request::stand" );
+	requestcodes[Request::sit] = QLatin1String( "Request::sit" );
+	requestcodes[Request::boot] = QLatin1String( "Request::boot" );
+	requestcodes[Request::bot] = QLatin1String( "Request::bot" );
+	requestcodes[Request::open] = QLatin1String( "Request::open" );
+	requestcodes[Request::chat] = QLatin1String( "Request::chat" );
+	requestcodes[Request::info] = QLatin1String( "Request::info" );
+	requestcodes[Request::rankings] = QLatin1String( "Request::rankings" );
 
 	if(requestcodes.contains(requestcode))
 	{
@@ -178,10 +178,10 @@ QString ModulePrivate::requestString(Request::Type requestcode)
 	}
 	else
 	{
-		str = "??unknown??";
+		str = QLatin1String( "??unknown??" );
 	}
 
-	str += " (" + QString::number(requestcode) + ')';
+	str += QLatin1String( " (" ) + QString::number(requestcode) + QLatin1Char( ')' );
 
 	return str;
 }
@@ -191,16 +191,16 @@ QString ModulePrivate::opcodeString(GGZEvents opcode)
 	QString str;
 	QMap<GGZEvents, QString> opcodes;
 
-	opcodes[msglaunch] = "msglaunch";
-	opcodes[msgserver] = "msgserver";
-	opcodes[msgserverfd] = "msgserverfd";
-	opcodes[msgplayer] = "msgplayer";
-	opcodes[msgseat] = "msgseat";
-	opcodes[msgspectatorseat] = "msgspectatorseat";
-	opcodes[msgchat] = "msgchat";
-	opcodes[msgstats] = "msgstats";
-	opcodes[msginfo] = "msginfo";
-	opcodes[msgrankings] = "msgrankings";
+	opcodes[msglaunch] = QLatin1String( "msglaunch" );
+	opcodes[msgserver] = QLatin1String( "msgserver" );
+	opcodes[msgserverfd] = QLatin1String( "msgserverfd" );
+	opcodes[msgplayer] = QLatin1String( "msgplayer" );
+	opcodes[msgseat] = QLatin1String( "msgseat" );
+	opcodes[msgspectatorseat] = QLatin1String( "msgspectatorseat" );
+	opcodes[msgchat] = QLatin1String( "msgchat" );
+	opcodes[msgstats] = QLatin1String( "msgstats" );
+	opcodes[msginfo] = QLatin1String( "msginfo" );
+	opcodes[msgrankings] = QLatin1String( "msgrankings" );
 
 	if(opcodes.contains(opcode))
 	{
@@ -208,10 +208,10 @@ QString ModulePrivate::opcodeString(GGZEvents opcode)
 	}
 	else
 	{
-		str = "??unknown??";
+		str = QLatin1String( "??unknown??" );
 	}
 
-	str += " (" + QString::number(opcode) + ')';
+	str += QLatin1String( " (" ) + QString::number(opcode) + QLatin1Char( ')' );
 
 	return str;
 }
@@ -298,7 +298,7 @@ void ModulePrivate::slotGGZEvent()
 		}
 
 		kDebug(11003) << "[kggzmod] debug: server fd =" << _fd;
-		e.data["fd"] = QString::number(_fd);
+		e.data[QLatin1String( "fd" )] = QString::number(_fd);
 		emit signalEvent(e);
 
 		m_gnotifier = new QSocketNotifier(_fd, QSocketNotifier::Read, this);
@@ -310,15 +310,15 @@ void ModulePrivate::slotGGZEvent()
 		*m_net >> _player;
 		*m_net >> _isspectator;
 		*m_net >> _seat;
-		e.data["player"] = _player;
+		e.data[QLatin1String( "player" )] = _player;
 
 		m_myseat = _seat;
 		m_myspectator = (_isspectator != 0);
 
 		insertPlayer((_isspectator ? Player::spectator : Player::player),
-			e.data["player"], _seat);
+			e.data[QLatin1String( "player" )], _seat);
 		e.m_player = findPlayer((_isspectator ? Player::spectator : Player::player),
-			e.data["player"]);
+			e.data[QLatin1String( "player" )]);
 
 		emit signalEvent(e);
 	}
@@ -328,10 +328,10 @@ void ModulePrivate::slotGGZEvent()
 		*m_net >> _seat;
 		*m_net >> _seattype;
 		*m_net >> _player;
-		e.data["player"] = _player;
+		e.data[QLatin1String( "player" )] = _player;
 
-		insertPlayer((Player::Type)_seattype, e.data["player"], _seat);
-		e.m_player = findPlayer((Player::Type)_seattype, e.data["player"]);
+		insertPlayer((Player::Type)_seattype, e.data[QLatin1String( "player" )], _seat);
+		e.m_player = findPlayer((Player::Type)_seattype, e.data[QLatin1String( "player" )]);
 
 		if(_seat >= m_playerseats) m_playerseats = _seat + 1;
 
@@ -342,10 +342,10 @@ void ModulePrivate::slotGGZEvent()
 		Event e(Event::seat);
 		*m_net >> _seat;
 		*m_net >> _player;
-		e.data["player"] = _player;
+		e.data[QLatin1String( "player" )] = _player;
 
-		insertPlayer(Player::spectator, e.data["player"], _seat);
-		e.m_player = findPlayer(Player::spectator, e.data["player"]);
+		insertPlayer(Player::spectator, e.data[QLatin1String( "player" )], _seat);
+		e.m_player = findPlayer(Player::spectator, e.data[QLatin1String( "player" )]);
 
 		if(_seat >= m_spectatorseats) m_spectatorseats = _seat + 1;
 
@@ -356,10 +356,10 @@ void ModulePrivate::slotGGZEvent()
 		Event e(Event::chat);
 		*m_net >> _player;
 		*m_net >> _message;
-		e.data["player"] = _player;
-		e.data["message"] = _message;
+		e.data[QLatin1String( "player" )] = _player;
+		e.data[QLatin1String( "message" )] = _message;
 
-		e.m_player = findPlayer(Player::player, e.data["player"]);
+		e.m_player = findPlayer(Player::player, e.data[QLatin1String( "player" )]);
 
 		emit signalEvent(e);
 	}
@@ -458,7 +458,7 @@ void ModulePrivate::slotGGZEvent()
 		kDebug(11003) << "[kggzmod] debug: rankings message";
 
 		*m_net >> _num;
-		e.data["num"] = QString::number(_num);
+		e.data[QLatin1String( "num" )] = QString::number(_num);
 
 		for(int i = 0; i < _num; i++)
 		{
@@ -466,9 +466,9 @@ void ModulePrivate::slotGGZEvent()
 			*m_net >> _realname;
 			*m_net >> _ranking;
 			*m_net >> _highscore;
-			e.data["name" + QString::number(i)] = _realname;
-			e.data["position" + QString::number(i)] = QString::number(_ranking);
-			e.data["score" + QString::number(i)] = QString::number(_highscore);
+			e.data[QLatin1String( "name" ) + QString::number(i)] = _realname;
+			e.data[QLatin1String( "position" ) + QString::number(i)] = QString::number(_ranking);
+			e.data[QLatin1String( "score" ) + QString::number(i)] = QString::number(_highscore);
 		}
 
 		emit signalEvent(e);

@@ -65,7 +65,7 @@ class KConfig;
  * single player, so the "best times" of a player. To write highscores for a
  * specific player in a specific level you will have to use a more complex way:
  * \code
- * QString group = QString("%1_%2").arg(player).arg(level);
+ * QString group = QString::fromLatin1( "%1_%2").arg(player).arg(level);
  * table->setGroup(group);
  * writeHighscore(table, player, level);
  * \endcode
@@ -181,7 +181,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * @return The value of this entry+key pair or pDefault if the entry+key
          * pair doesn't exist
          **/
-        QString readEntry(int entry, const QString& key, const QString& pDefault = "") const;
+        QString readEntry(int entry, const QString& key, const QString& pDefault = QLatin1String("")) const;
 
         /**
          * Read a numeric value.
@@ -260,7 +260,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * level of your game. If you use QString() (the default) the
          * default group is used.
          **/
-        void setHighscoreGroup(const QString& groupname = "");
+        void setHighscoreGroup(const QString& groupname = QLatin1String(""));
 
         /**
          * Returns a list of group names without the KHighscore_ prexix.

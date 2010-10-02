@@ -106,17 +106,17 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
             break;
         case Pause:
         case Demo:
-            pAction = new KToggleAction(KIcon(pInfo->psIconName), sLabel, parent);
+            pAction = new KToggleAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
         case ChooseGameType:
-            pAction = new KSelectAction( KIcon(pInfo->psIconName), sLabel, parent);
+            pAction = new KSelectAction( KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect( pAction, SIGNAL( triggered(int) ), recvr, slot );
             break;
         default:
-            pAction = new KAction(KIcon(pInfo->psIconName), sLabel, parent);
+            pAction = new KAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
             break;
@@ -133,7 +133,7 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         else if (pInfo->psToolTip)
                 pAction->setWhatsThis(i18n(pInfo->psToolTip));
 
-        pAction->setObjectName(pInfo->psName);
+        pAction->setObjectName(QLatin1String( pInfo->psName ));
     }
 
     KActionCollection *collection = qobject_cast<KActionCollection *>(parent);

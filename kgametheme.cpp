@@ -57,7 +57,7 @@ KGameTheme::~KGameTheme() {
 
 bool KGameTheme::loadDefault()
 {
-    return load("themes/default.desktop"); //TODO make this editable to match custom directories.
+    return load(QLatin1String( "themes/default.desktop" )); //TODO make this editable to match custom directories.
                                            // If this ever changes change findThemes in KGameThemeSelectorPrivate too
 }
 
@@ -81,7 +81,7 @@ bool KGameTheme::load(const QString &fileName) {
         kDebug(11000) << "Could not open .desktop theme file" << filePath;
         return false;
     }
-    d->prefix = QFileInfo(themefile).absolutePath() + '/';
+    d->prefix = QFileInfo(themefile).absolutePath() + QLatin1Char( '/' );
     themefile.close();
 
     KConfig themeconfig(filePath, KConfig::SimpleConfig);

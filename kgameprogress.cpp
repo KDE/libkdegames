@@ -93,7 +93,7 @@ void KGameProgress::KGameProgressPrivate::initialize()
 	slider->setMaximum(100);
 	slider->setValue(0);
 
-	format_ = "%p%";
+	format_ = QLatin1String( "%p%" );
 	use_supplied_bar_color = false;
 	bar_pixmap = 0;
 	bar_style = Solid;
@@ -276,7 +276,7 @@ void KGameProgress::KGameProgressPrivate::adjustStyle()
 
 void KGameProgress::paletteChange( const QPalette &p )
 {
-	// This never gets called for global color changes 
+	// This never gets called for global color changes
 	// because we call setPalette() ourselves.
 	QFrame::paletteChange(p);
 }
@@ -290,9 +290,9 @@ void KGameProgress::KGameProgressPrivate::drawText(QPainter *p)
 	// the current value and the maximum value respectively.
 	QString s(format_);
 
-	s.replace(QRegExp(QString::fromLatin1("%p")), QString::number(recalcValue(100)));
-	s.replace(QRegExp(QString::fromLatin1("%v")), QString::number(q->value()));
-	s.replace(QRegExp(QString::fromLatin1("%m")), QString::number(q->maximum()));
+	s.replace(QRegExp( QString::fromLatin1("%p" )), QString::number(recalcValue(100)));
+	s.replace(QRegExp( QString::fromLatin1("%v" )), QString::number(q->value()));
+	s.replace(QRegExp( QString::fromLatin1("%m" )), QString::number(q->maximum()));
 
 	p->setPen(text_color);
 	QFont font = p->font();
@@ -312,7 +312,7 @@ void KGameProgress::paintEvent( QPaintEvent *e )
 
 	//now for the inside of the Widget
 	QPainter p(this);
-	
+
 	QRect cr = contentsRect(), er = cr;
 	d->fr = cr;
         QBrush fb(d->bar_color), eb(palette().color(backgroundRole()));
@@ -368,7 +368,7 @@ void KGameProgress::paintEvent( QPaintEvent *e )
 				p.fillRect(d->fr, fb);
 				d->fr.translate(dx, dy);
 			}
-			
+
 			if (num != max) {
 				if (orientation() == Qt::Horizontal)
 					er.setLeft(d->fr.right() + 1);

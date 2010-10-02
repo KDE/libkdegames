@@ -67,7 +67,7 @@ void KGGZRankingsDialogPrivate::slotRankings(const KGGZMod::Event& event)
 	if(event.type() == KGGZMod::Event::rankings)
 	{
 		KHighscore highscore;
-		highscore.setHighscoreGroup("GGZ");
+		highscore.setHighscoreGroup(QLatin1String( "GGZ" ));
 
 		KGGZMod::RankingsEvent e(event);
 		for(int i = 0; i < e.count(); i++)
@@ -75,12 +75,12 @@ void KGGZRankingsDialogPrivate::slotRankings(const KGGZMod::Event& event)
 			QString name = e.name(i);
 			int score = e.score(i);
 			kDebug(11004) << "RANKINGS-DIALOG" << name << score;
-			highscore.writeEntry(i + 1, "Name", name);
-			highscore.writeEntry(i + 1, "Score", score);
+			highscore.writeEntry(i + 1, QLatin1String( "Name" ), name);
+			highscore.writeEntry(i + 1, QLatin1String( "Score" ), score);
 		}
 
 		KScoreDialog ksdialog(KScoreDialog::Name, m_parent);
-		ksdialog.setConfigGroup("GGZ");
+		ksdialog.setConfigGroup(QLatin1String( "GGZ" ));
 		ksdialog.exec();
 	}
 }

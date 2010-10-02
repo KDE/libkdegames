@@ -368,19 +368,19 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
     d->m_desktopFile = themeFile;
 
     file = QFileInfo(d->m_svgFile);
-    d->m_svgFile = file.absolutePath() + '/' + file.completeBaseName() + ".svg";
+    d->m_svgFile = file.absolutePath() + QLatin1Char( '/' ) + file.completeBaseName() + QLatin1String( ".svg" );
     /// @todo Handle *.svgz files as well
 
     d->m_svgDOM.load(d->m_svgFile);
 
     // Get type of digit from .desktop file
     KConfig *config = new KConfig(d->m_desktopFile, KConfig::SimpleConfig);
-    QMap<QString, QString> desktopEntry = config->entryMap("Desktop Entry");
-    setDigitType(desktopEntry.value("Type"));
+    QMap<QString, QString> desktopEntry = config->entryMap(QLatin1String( "Desktop Entry" ));
+    setDigitType(desktopEntry.value(QLatin1String( "Type" )));
 
-    d->m_numbersMap = config->entryMap("Digits");
-    d->m_punctuationMap = config->entryMap("Punctuation");
-    d->m_alphaMap = config->entryMap("Alpha");
+    d->m_numbersMap = config->entryMap(QLatin1String( "Digits" ));
+    d->m_punctuationMap = config->entryMap(QLatin1String( "Punctuation" ));
+    d->m_alphaMap = config->entryMap(QLatin1String( "Alpha" ));
 
     // Parse the artist-friendly map strings into bitmasks.
     if (digitType() != IndividualDigit)
@@ -406,35 +406,35 @@ void KGameSvgDigits::loadTheme(const QString& themeFile)
     }
 
     // Override any default values with values from theme
-    QMap<QString, QString> settings = config->entryMap("Settings");
+    QMap<QString, QString> settings = config->entryMap(QLatin1String( "Settings" ));
 
-    if (!settings.value("foregroundColor").isEmpty())
-        {setForegroundColor(QColor::fromRgba(settings.value("foregroundColor").toLong(&ok, 16)));}
-    if (!settings.value("backgroundColor").isEmpty())
-        {setBackgroundColor(QColor::fromRgba(settings.value("backgroundColor").toLong(&ok, 16)));}
-    if (!settings.value("foregroundHighlightColor").isEmpty())
-        {setForegroundHighlightColor(QColor::fromRgba(settings.value("foregroundHighlightColor").toLong(&ok, 16)));}
-    if (!settings.value("backgroundHighlightColor").isEmpty())
-         {setBackgroundHighlightColor(QColor::fromRgba(settings.value("backgroundHighlightColor").toLong(&ok, 16)));}
+    if (!settings.value(QLatin1String( "foregroundColor" )).isEmpty())
+        {setForegroundColor(QColor::fromRgba(settings.value(QLatin1String( "foregroundColor" )).toLong(&ok, 16)));}
+    if (!settings.value(QLatin1String( "backgroundColor" )).isEmpty())
+        {setBackgroundColor(QColor::fromRgba(settings.value(QLatin1String( "backgroundColor" )).toLong(&ok, 16)));}
+    if (!settings.value(QLatin1String( "foregroundHighlightColor" )).isEmpty())
+        {setForegroundHighlightColor(QColor::fromRgba(settings.value(QLatin1String( "foregroundHighlightColor" )).toLong(&ok, 16)));}
+    if (!settings.value(QLatin1String( "backgroundHighlightColor" )).isEmpty())
+         {setBackgroundHighlightColor(QColor::fromRgba(settings.value(QLatin1String( "backgroundHighlightColor" )).toLong(&ok, 16)));}
 
-    if (!settings.value("letter-spacing").isEmpty()) {setLetterSpacing(settings.value("letter-spacing").toInt());}
-    if (!settings.value("padding-top").isEmpty()) {setPaddingTop(settings.value("padding-top").toInt());}
-    if (!settings.value("padding-right").isEmpty()) {setPaddingRight(settings.value("padding-right").toInt());}
-    if (!settings.value("padding-bottom").isEmpty()) {setPaddingBottom(settings.value("padding-bottom").toInt());}
-    if (!settings.value("padding-left").isEmpty()) {setPaddingLeft(settings.value("padding-left").toInt());}
+    if (!settings.value(QLatin1String( "letter-spacing" )).isEmpty()) {setLetterSpacing(settings.value(QLatin1String( "letter-spacing" )).toInt());}
+    if (!settings.value(QLatin1String( "padding-top" )).isEmpty()) {setPaddingTop(settings.value(QLatin1String( "padding-top" )).toInt());}
+    if (!settings.value(QLatin1String( "padding-right" )).isEmpty()) {setPaddingRight(settings.value(QLatin1String( "padding-right" )).toInt());}
+    if (!settings.value(QLatin1String( "padding-bottom" )).isEmpty()) {setPaddingBottom(settings.value(QLatin1String( "padding-bottom" )).toInt());}
+    if (!settings.value(QLatin1String( "padding-left" )).isEmpty()) {setPaddingLeft(settings.value(QLatin1String( "padding-left" )).toInt());}
 
-    if (!settings.value("ledOffSegmentAlphaLevel").isEmpty())
-        { setLedOffSegmentAlphaLevel(settings.value("ledOffSegmentAlphaLevel").toInt()); }
-    if (!settings.value("skewX").isEmpty()) {setSkewX(settings.value("skewX").toDouble()); }
-    if (!settings.value("skewY").isEmpty()) {setSkewY(settings.value("skewY").toDouble());}
-    if (!settings.value("scaleX").isEmpty()) {setScaleX(settings.value("scaleX").toDouble());}
-    if (!settings.value("scaleY").isEmpty()) {setScaleY(settings.value("scaleY").toDouble());}
-    if (!settings.value("digitStyle").isEmpty()) {setDigitStyle(settings.value("digitStyle"));}
-    if (!settings.value("cacheOption").isEmpty()) {setCacheOption(settings.value("cacheOption"));}
+    if (!settings.value(QLatin1String( "ledOffSegmentAlphaLevel" )).isEmpty())
+        { setLedOffSegmentAlphaLevel(settings.value(QLatin1String( "ledOffSegmentAlphaLevel" )).toInt()); }
+    if (!settings.value(QLatin1String( "skewX" )).isEmpty()) {setSkewX(settings.value(QLatin1String( "skewX" )).toDouble()); }
+    if (!settings.value(QLatin1String( "skewY" )).isEmpty()) {setSkewY(settings.value(QLatin1String( "skewY" )).toDouble());}
+    if (!settings.value(QLatin1String( "scaleX" )).isEmpty()) {setScaleX(settings.value(QLatin1String( "scaleX" )).toDouble());}
+    if (!settings.value(QLatin1String( "scaleY" )).isEmpty()) {setScaleY(settings.value(QLatin1String( "scaleY" )).toDouble());}
+    if (!settings.value(QLatin1String( "digitStyle" )).isEmpty()) {setDigitStyle(settings.value(QLatin1String( "digitStyle" )));}
+    if (!settings.value(QLatin1String( "cacheOption" )).isEmpty()) {setCacheOption(settings.value(QLatin1String( "cacheOption" )));}
 
     d->m_highlighted = false;
     delete config;
-    kDebug () << "Theme set to:" << desktopEntry.value("Name");
+    kDebug () << "Theme set to:" << desktopEntry.value(QLatin1String( "Name" ));
 }
 
 QPixmap KGameSvgDigits::display(const QString& display)
@@ -458,7 +458,7 @@ QPixmap KGameSvgDigits::display(const QString& display)
     // If display string is empty, treat it as numberOfDigits() of "blank" digits
     if (str.isEmpty())
     {
-        str.fill(' ', numberOfDigits());
+        str.fill(QLatin1Char( ' ' ), numberOfDigits());
     }
 
     if (numberOfDigits() != str.size())
@@ -485,11 +485,11 @@ QPixmap KGameSvgDigits::display(const QString& display)
         characterToDisplay = str.left(1);
         str.remove(0,1);
 
-        if (currentCharacter.isSpace()) {characterToDisplay = "blank";}
+        if (currentCharacter.isSpace()) {characterToDisplay = QLatin1String( "blank" );}
 
         if (d->m_highlighted)
         {
-            cacheId = characterToDisplay + ".highlight";
+            cacheId = characterToDisplay + QLatin1String( ".highlight" );
         }
         else
         {
@@ -522,11 +522,11 @@ QPixmap KGameSvgDigits::display(const QString& display)
             {
                 if (d->m_punctuationMap.contains(characterToDisplay))
                 {
-                    tmp_pixmap.QPixmap::operator=(d->renderSegmentedDigit("punctuation", cacheId));
+                    tmp_pixmap.QPixmap::operator=(d->renderSegmentedDigit(QLatin1String( "punctuation" ), cacheId));
                 }
                 else if ((d->m_numbersMap.contains(characterToDisplay)) || (d->m_alphaMap.contains(characterToDisplay)))
                 {
-                    tmp_pixmap.QPixmap::operator=(d->renderSegmentedDigit("digit", cacheId));
+                    tmp_pixmap.QPixmap::operator=(d->renderSegmentedDigit(QLatin1String( "digit" ), cacheId));
                 }
                 else
                 {
@@ -601,13 +601,13 @@ void KGameSvgDigits::refreshCache()
     // Set new size hints
     if (digitType() != IndividualDigit)
     {
-        QPixmap tmp = d->renderSegmentedDigit("digit", "blank");
+        QPixmap tmp = d->renderSegmentedDigit(QLatin1String( "digit" ), QLatin1String( "blank" ));
         d->m_widthHint = tmp.width();
         d->m_heightHint = tmp.height();
     }
     else
     {
-        QPixmap tmp = d->renderIndividualDigit("blank", "blank");
+        QPixmap tmp = d->renderIndividualDigit(QLatin1String( "blank" ), QLatin1String( "blank" ));
         d->m_widthHint = tmp.width();
         d->m_heightHint = tmp.height();
     }
@@ -626,15 +626,15 @@ void KGameSvgDigits::refreshCache()
                 break;
 
             case SevenSegmentDigit:
-                d->renderSegmentedDigits(QString("punctuation"), d->m_punctuationMap);
-                d->renderSegmentedDigits(QString("digit"), d->m_numbersMap);
-                d->renderSegmentedDigits(QString("digit"), d->m_alphaMap);
+                d->renderSegmentedDigits(QLatin1String("punctuation"), d->m_punctuationMap);
+                d->renderSegmentedDigits(QLatin1String("digit"), d->m_numbersMap);
+                d->renderSegmentedDigits(QLatin1String("digit"), d->m_alphaMap);
                 break;
 
             case FourteenSegmentDigit:
-                d->renderSegmentedDigits(QString("punctuation"), d->m_punctuationMap);
-                d->renderSegmentedDigits(QString("digit"), d->m_numbersMap);
-                d->renderSegmentedDigits(QString("digit"), d->m_alphaMap);
+                d->renderSegmentedDigits(QLatin1String("punctuation"), d->m_punctuationMap);
+                d->renderSegmentedDigits(QLatin1String("digit"), d->m_numbersMap);
+                d->renderSegmentedDigits(QLatin1String("digit"), d->m_alphaMap);
                 break;
         }
     }
@@ -648,13 +648,13 @@ void KGameSvgDigits::refreshCache()
                 break;
 
             case SevenSegmentDigit:
-                d->renderSegmentedDigits(QString("punctuation"), d->m_punctuationMap);
-                d->renderSegmentedDigits(QString("digit"), d->m_numbersMap);
+                d->renderSegmentedDigits(QLatin1String("punctuation"), d->m_punctuationMap);
+                d->renderSegmentedDigits(QLatin1String("digit"), d->m_numbersMap);
                 break;
 
             case FourteenSegmentDigit:
-                d->renderSegmentedDigits(QString("punctuation"), d->m_punctuationMap);
-                d->renderSegmentedDigits(QString("digit"), d->m_numbersMap);
+                d->renderSegmentedDigits(QLatin1String("punctuation"), d->m_punctuationMap);
+                d->renderSegmentedDigits(QLatin1String("digit"), d->m_numbersMap);
                 break;
         }
     }
@@ -689,19 +689,19 @@ void KGameSvgDigits::setCacheOption(CacheOptions option)
 
 void KGameSvgDigits::setCacheOption(const QString& option)
 {
-    if (option.toLower() == "cacheall")
+    if (option.toLower() == QLatin1String( "cacheall" ))
     {
         setCacheOption(CacheAll);
     }
-    else if (option.toLower() == "cachenone")
+    else if (option.toLower() == QLatin1String( "cachenone" ))
     {
         setCacheOption(CacheNone);
     }
-    else if (option.toLower() == "cachenumeralsonly")
+    else if (option.toLower() == QLatin1String( "cachenumeralsonly" ))
     {
         setCacheOption(CacheNumeralsOnly);
     }
-    else if (option.toLower() == "cachepreviouslyrendered")
+    else if (option.toLower() == QLatin1String( "cachepreviouslyrendered" ))
     {
         setCacheOption(CachePreviouslyRendered);
     }
@@ -719,15 +719,15 @@ void KGameSvgDigits::setDigitType(DigitTypes type)
 
 void KGameSvgDigits::setDigitType(const QString& type)
 {
-    if (type.toLower() == "individualdigit")
+    if (type.toLower() == QLatin1String( "individualdigit" ))
     {
         d->m_digitType = IndividualDigit;
     }
-    else if (type.toLower() == "sevensegmentdigit")
+    else if (type.toLower() == QLatin1String( "sevensegmentdigit" ))
     {
         d->m_digitType = SevenSegmentDigit;
     }
-    else if (type.toLower() == "fourteensegmentdigit")
+    else if (type.toLower() == QLatin1String( "fourteensegmentdigit" ))
     {
         d->m_digitType = FourteenSegmentDigit;
     }
@@ -747,11 +747,11 @@ void KGameSvgDigits::setDigitStyle(const DigitStyle& style)
 
 void KGameSvgDigits::setDigitStyle(const QString& style)
 {
-    if (style.toLower() == "ledstyle")
+    if (style.toLower() == QLatin1String( "ledstyle" ))
     {
         setDigitStyle(LedStyle);
     }
-    else if (style.toLower() == "lcdstyle")
+    else if (style.toLower() == QLatin1String( "lcdstyle" ))
     {
         setDigitStyle(LcdStyle);
     }
@@ -981,7 +981,7 @@ ulong KGameSvgDigitsPrivate::toBitmask(const QString& string)
     // Parse the string to give us an ulong
     for (int j = 0; j < string.count(); ++j)
     {
-        if (string.data()[j] == '1')
+        if (string.data()[j] == QLatin1Char( '1' ))
         {
             tmpMask |= (1 << j);
 
@@ -995,19 +995,19 @@ QString KGameSvgDigitsPrivate::lookupCacheOptionName(const int option)
     switch (option)
     {
         case 1:
-            return "CacheNumeralsOnly";
+            return QLatin1String( "CacheNumeralsOnly" );
             break;
         case 2:
-            return "CachePreviouslyRendered";
+            return QLatin1String( "CachePreviouslyRendered" );
             break;
         case 3:
-            return "CacheNone";
+            return QLatin1String( "CacheNone" );
             break;
         case 4:
-            return "CacheAll";
+            return QLatin1String( "CacheAll" );
             break;
         default:
-            return "error";
+            return QLatin1String( "error" );
     }
 }
 
@@ -1016,13 +1016,13 @@ QString KGameSvgDigitsPrivate::lookupDigitStyleName(const int style)
     switch (style)
     {
         case 1:
-            return "LedStyle";
+            return QLatin1String( "LedStyle" );
             break;
         case 2:
-            return "LcdStyle";
+            return QLatin1String( "LcdStyle" );
             break;
         default:
-            return "error";
+            return QLatin1String( "error" );
     }
 }
 
@@ -1078,9 +1078,9 @@ QPixmap KGameSvgDigitsPrivate::renderIndividualDigit(const QString& element, con
 
     m_elementId = element;
     containerElement = m_svgDOM.elementById(m_elementId);
-    faceElement = m_svgDOM.elementById(m_elementId + "Foreground");
+    faceElement = m_svgDOM.elementById(m_elementId + QLatin1String( "Foreground" ));
 
-    if(!faceElement.isNull() && (!m_elementId.contains("blank")) )
+    if(!faceElement.isNull() && (!m_elementId.contains(QLatin1String( "blank")) ) )
     {
         applyColor(faceElement, m_foregroundColor);
     }
@@ -1091,7 +1091,7 @@ QPixmap KGameSvgDigitsPrivate::renderIndividualDigit(const QString& element, con
 void KGameSvgDigitsPrivate::renderIndividualDigits()
 {
     QString id;
-    QString colorStyle = "";
+    QString colorStyle = QLatin1String( "" );
     QMap<QString, QString> elementsToRender = m_numbersMap;
 
     if (m_cacheOption == KGameSvgDigits::CacheNumeralsOnly) {elementsToRender.unite(m_punctuationMap);}
@@ -1103,7 +1103,7 @@ void KGameSvgDigitsPrivate::renderIndividualDigits()
     {
         if (i == 1)
         {
-            colorStyle = ".highlight";
+            colorStyle = QLatin1String( ".highlight" );
         }
         while (it.hasNext())
         {
@@ -1129,13 +1129,13 @@ QPixmap KGameSvgDigitsPrivate::renderSegmentedDigit(const QString& element, cons
 
     m_elementId = element;
     containerElement = m_svgDOM.elementById(m_elementId);
-    faceElement = QDomNode(m_svgDOM.elementById(m_elementId + "Face"));
+    faceElement = QDomNode(m_svgDOM.elementById(m_elementId + QLatin1String( "Face" )));
 
     faceElementPaths = faceElement.childNodes();
 
-    if (cacheId.contains(".highlight"))
+    if (cacheId.contains(QLatin1String( ".highlight" )))
     {
-        id = cacheId.left(cacheId.indexOf(".highlight"));
+        id = cacheId.left(cacheId.indexOf(QLatin1String( ".highlight" )));
     }
     else
     {
@@ -1151,14 +1151,14 @@ QPixmap KGameSvgDigitsPrivate::renderSegmentedDigit(const QString& element, cons
 void KGameSvgDigitsPrivate::renderSegmentedDigits(const QString& element, const QMap<QString, QString>& map)
 {
     QString id;
-    QString colorStyle = "";
+    QString colorStyle;
     QMapIterator<QString, QString> it(map);
 
     for (int i=0; i<2; i++)
     {
         if (i == 1)
         {
-            colorStyle = ".highlight";
+            colorStyle = QLatin1String( ".highlight" );
         }
         while (it.hasNext())
         {
@@ -1172,7 +1172,7 @@ void KGameSvgDigitsPrivate::renderSegmentedDigits(const QString& element, const 
 
         swapColors();
         it.toFront();
-        colorStyle = "";
+        colorStyle = QLatin1String( "" );
     }
 
 }
@@ -1203,8 +1203,8 @@ void KGameSvgDigitsPrivate::applyColor(const QDomNode &node, const QColor &color
 
     m_svgDOM.setCurrentNode(node);
 
-    m_svgDOM.setStyleProperty("fill", svgFill);
-    m_svgDOM.setStyleProperty("fill-opacity", svgFillOpacity);
+    m_svgDOM.setStyleProperty(QLatin1String( "fill" ), svgFill);
+    m_svgDOM.setStyleProperty(QLatin1String( "fill-opacity" ), svgFillOpacity);
 }
 
 void KGameSvgDigitsPrivate::applyBitmask(const QDomNodeList& nodes)
@@ -1221,7 +1221,7 @@ void KGameSvgDigitsPrivate::applyBitmask(const QDomNodeList& nodes)
     for (int j = 0; j < nodes.count(); ++j)
     {
         element = nodes.item(j).toElement();
-        id = element.attribute( "id", "not found");
+        id = element.attribute( QLatin1String( "id" ), QLatin1String( "not found" ));
 
         hex = id.toInt(&ok, 16);
 

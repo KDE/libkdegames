@@ -79,7 +79,7 @@ public:
 };
 
 // ------------------- GAME CLASS --------------------------
-KGame::KGame(int cookie,QObject* parent) 
+KGame::KGame(int cookie,QObject* parent)
     : KGameNetwork(cookie,parent),
       d( new KGamePrivate )
 {
@@ -222,13 +222,13 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  // If there is additional data to be loaded before players are loaded then do
  // this here.
  emit signalLoadPrePlayers(stream);
- 
+
  // Switch back on the direct emitting of signals and emit the
- // queued signals for properties. 
- // Unlocks properties before loading players in order to make game 
- // initializations related to properties before using them in players 
+ // queued signals for properties.
+ // Unlocks properties before loading players in order to make game
+ // initializations related to properties before using them in players
  // initialization
- dataHandler()->unlockDirectEmit(); 
+ dataHandler()->unlockDirectEmit();
 
  // Load Playerobjects
  uint playercount;
@@ -337,7 +337,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
  qint32 cnt=list->count();
  kDebug(11001) << "Saving KGame" << cnt << "KPlayer objects";
  stream << cnt;
- 
+
  for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();it++ )
  {
    savePlayer(stream,*it);
@@ -512,7 +512,7 @@ bool KGame::removePlayer(KPlayer * player, quint32 receiver)
 {//transmit to all clients, or to receiver only
  if (!player)
  {
-   kFatal(11001) << "trying to remove NULL player in KGame::removePlayer()";
+   kFatal(11001) << "trying to remove NULL player in KGame::removePlayer(  )" ;
    return false;
  }
  kDebug(11001) << ": id (" << player->id() << ") to be removed" << player;
@@ -1197,7 +1197,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
 
   // Only to the client first , as the client will add players
   sendSystemMessage(sender, KGameMessage::IdGameSetupDone, sender);
-  
+
   //Finally delete content of the newPlayerList
   qDeleteAll(newPlayerList);
   newPlayerList.clear();

@@ -52,7 +52,7 @@ public:
     ~KCardThemeInfoStatic()
     {
     }
-    
+
     void readFronts()
     {
         // Empty data
@@ -61,8 +61,8 @@ public:
 
         QStringList svg;
         // Add SVG card sets
-        svg = KGlobal::dirs()->findAllResources( "cards", "svg*/index.desktop", KStandardDirs::NoDuplicates );
-        const QStringList list = svg + KGlobal::dirs()->findAllResources( "cards", "card*/index.desktop", KStandardDirs::NoDuplicates );
+        svg = KGlobal::dirs()->findAllResources( "cards", QLatin1String( "svg*/index.desktop" ), KStandardDirs::NoDuplicates );
+        const QStringList list = svg + KGlobal::dirs()->findAllResources( "cards", QLatin1String( "card*/index.desktop" ), KStandardDirs::NoDuplicates );
 
         if ( list.isEmpty() ) return;
 
@@ -70,8 +70,8 @@ public:
         {
             KConfig cfg( *it, KConfig::SimpleConfig );
             KConfigGroup cfgcg( &cfg, "KDE Backdeck" );
-            QString path = ( *it ).left(( *it ).lastIndexOf( '/' ) + 1 );
-            Q_ASSERT( path[path.length() - 1] == '/' );
+            QString path = ( *it ).left(( *it ).lastIndexOf( QLatin1Char( '/' ) ) + 1 );
+            Q_ASSERT( path[path.length() - 1] == QLatin1Char( '/' ) );
             QPixmap pixmap( path + cfgcg.readEntry( "Preview", "12c.png" ) );
             if ( pixmap.isNull() ) continue;
 
@@ -109,16 +109,16 @@ public:
         // Empty data
         svgBackInfo.clear();
         pngBackInfo.clear();
-    
-        const QStringList list = KGlobal::dirs()->findAllResources( "cards", "decks/*.desktop", KStandardDirs::NoDuplicates );
+
+        const QStringList list = KGlobal::dirs()->findAllResources( "cards", QLatin1String( "decks/*.desktop" ), KStandardDirs::NoDuplicates );
 
         if ( list.isEmpty() ) return;
-    
+
         for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it )
         {
             KConfig cfg( *it, KConfig::SimpleConfig );
-            QString path = ( *it ).left(( *it ).lastIndexOf( '/' ) + 1 );
-            Q_ASSERT( path[path.length() - 1] == '/' );
+            QString path = ( *it ).left(( *it ).lastIndexOf( QLatin1Char( '/' ) ) + 1 );
+            Q_ASSERT( path[path.length() - 1] == QLatin1Char( '/' ) );
             QPixmap pixmap( getBackFileNameFromIndex( *it ) );
             if ( pixmap.isNull() ) continue;
 
@@ -132,7 +132,7 @@ public:
             info.comment      = cfgcg.readEntry( "Comment", QString() );
             info.preview      = pixmap;
             info.isDefault    = cfgcg.readEntry( "Default", false );
-    
+
             QString svg    = cfgcg.readEntry( "SVG", QString() );
             if ( !svg.isEmpty() )
             {
@@ -146,7 +146,7 @@ public:
                 pngBackInfo[idx] = info;
             }
         }
-    
+
     }
 
     QString getBackFileNameFromIndex( const QString& desktop )
@@ -158,7 +158,7 @@ public:
         // rather theoretical
         if ( KStandardDirs::exists( entry + QString::fromLatin1( ".xpm" ) ) )
             return entry + QString::fromLatin1( ".xpm" );
-   
+
         Q_ASSERT( false );
         return QString();
     }

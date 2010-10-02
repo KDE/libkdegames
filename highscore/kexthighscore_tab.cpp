@@ -46,7 +46,7 @@ PlayersCombo::PlayersCombo(QWidget *parent)
     const PlayerInfos &p = internal->playerInfos();
     for (uint i = 0; i<p.nbEntries(); i++)
         addItem(p.prettyName(i));
-    addItem(QString("<") + i18n("all") + '>');
+    addItem(QLatin1String("<") + i18n("all") + QLatin1Char( '>' ));
     connect(this, SIGNAL(activated(int)), SLOT(activatedSlot(int)));
 }
 
@@ -100,8 +100,8 @@ void AdditionalTab::allSelected()
 QString AdditionalTab::percent(uint n, uint total, bool withBraces)
 {
     if ( n==0 || total==0 ) return QString();
-    QString s =  QString("%1%").arg(100.0 * n / total, 0, 'f', 1);
-    return (withBraces ? QString('(') + s + ')' : s);
+    QString s =  QString::fromLatin1( "%1%").arg(100.0 * n / total, 0, 'f', 1);
+    return (withBraces ? QLatin1Char('(') + s + QLatin1Char( ')' ) : s);
 }
 
 void AdditionalTab::load()
@@ -165,17 +165,17 @@ void StatisticsTab::load()
     uint nb = pi.nbEntries();
     _data.resize(nb+1);
     for (int i=0; i<_data.size()-1; i++) {
-        _data[i].count[Total] = pi.item("nb games")->read(i).toUInt();
-        _data[i].count[Lost] = pi.item("nb lost games")->read(i).toUInt()
-                       + pi.item("nb black marks")->read(i).toUInt(); // legacy
-        _data[i].count[Draw] = pi.item("nb draw games")->read(i).toUInt();
+        _data[i].count[Total] = pi.item(QLatin1String( "nb games" ))->read(i).toUInt();
+        _data[i].count[Lost] = pi.item(QLatin1String( "nb lost games" ))->read(i).toUInt()
+                       + pi.item(QLatin1String( "nb black marks" ))->read(i).toUInt(); // legacy
+        _data[i].count[Draw] = pi.item(QLatin1String( "nb draw games" ))->read(i).toUInt();
         _data[i].count[Won] = _data[i].count[Total] - _data[i].count[Lost]
                               - _data[i].count[Draw];
         _data[i].trend[CurrentTrend] =
-            pi.item("current trend")->read(i).toInt();
-        _data[i].trend[WonTrend] = pi.item("max won trend")->read(i).toUInt();
+            pi.item(QLatin1String( "current trend" ))->read(i).toInt();
+        _data[i].trend[WonTrend] = pi.item(QLatin1String( "max won trend" ))->read(i).toUInt();
         _data[i].trend[LostTrend] =
-            -(int)pi.item("max lost trend")->read(i).toUInt();
+            -(int)pi.item(QLatin1String( "max lost trend" ))->read(i).toUInt();
     }
 
     for (int k=0; k<Nb_Counts; k++) _data[nb].count[k] = 0;
@@ -208,7 +208,7 @@ void StatisticsTab::display(uint i)
     }
     for (uint k=0; k<Nb_Trends; k++) {
         QString s;
-        if ( d.trend[k]>0 ) s = '+';
+        if ( d.trend[k]>0 ) s = QLatin1Char( '+' );
         int prec = (i==internal->playerInfos().nbEntries() ? 1 : 0);
         _trends[k]->setText(s + QString::number(d.trend[k], 'f', prec));
     }
@@ -232,20 +232,20 @@ HistogramTab::HistogramTab(QWidget *parent)
     _list->header()->setMovable(false);
     top->addWidget(_list);
 
-    _list->headerItem()->setText(0,i18n("From")); 
-    _list->headerItem()->setText(1,i18n("To")); 
-    _list->headerItem()->setText(2,i18n("Count")); 
-    _list->headerItem()->setText(3,i18n("Percent")); 
+    _list->headerItem()->setText(0,i18n("From"));
+    _list->headerItem()->setText(1,i18n("To"));
+    _list->headerItem()->setText(2,i18n("Count"));
+    _list->headerItem()->setText(3,i18n("Percent"));
     for (int i=0; i<4; i++) _list->headerItem()->setTextAlignment(i, Qt::AlignRight);
-    _list->headerItem()->setText(4,QString()); 
+    _list->headerItem()->setText(4,QString());
 
-    const Item *sitem = internal->scoreInfos().item("score")->item();
+    const Item *sitem = internal->scoreInfos().item(QLatin1String( "score" ))->item();
     const PlayerInfos &pi = internal->playerInfos();
     const QVector<uint> &sh = pi.histogram();
     for (int k=1; k<( int )pi.histoSize(); k++) {
         QString s1 = sitem->pretty(0, sh[k-1]);
         QString s2;
-        if ( k==sh.size() ) s2 = "...";
+        if ( k==sh.size() ) s2 = QLatin1String( "..." );
         else if ( sh[k]!=sh[k-1]+1 ) s2 = sitem->pretty(0, sh[k]);
 	QStringList items; items << s1 << s2;
         (void)new QTreeWidgetItem(_list, items);

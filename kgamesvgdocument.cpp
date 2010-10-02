@@ -138,8 +138,8 @@ class KGameSvgDocumentPrivate
 
 };
 
-const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QString("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
-const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QString("</svg>");
+const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
+const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QLatin1String("</svg>");
 
 KGameSvgDocument::KGameSvgDocument()
     : QDomDocument(), d(new KGameSvgDocumentPrivate)
@@ -177,7 +177,7 @@ QDomNode KGameSvgDocument::elementByUniqueAttributeValue(const QString& attribut
 
 QDomNode KGameSvgDocument::elementById(const QString& attributeValue)
 {
-    return elementByUniqueAttributeValue("id", attributeValue);
+    return elementByUniqueAttributeValue(QLatin1String( "id" ), attributeValue);
 }
 
 void KGameSvgDocument::load()
@@ -350,7 +350,7 @@ QString KGameSvgDocument::nodeToSvg() const
     xml = *str.string();
 
     // Find and add any required gradients or patterns
-    pattern = "url" + WSP_ASTERISK + OPEN_PARENS + WSP_ASTERISK + "#(.*)" + WSP_ASTERISK + CLOSE_PARENS;
+    pattern = QLatin1String( "url" ) + WSP_ASTERISK + OPEN_PARENS + WSP_ASTERISK + QLatin1String( "#(.*)" ) + WSP_ASTERISK + CLOSE_PARENS;
     rx.setPattern(pattern);
     if (rx.indexIn(xml, result) != -1)
     {
@@ -365,22 +365,22 @@ QString KGameSvgDocument::nodeToSvg() const
             result += rx.matchedLength();
             if (!defsAdded.contains(rx.cap(1)))
             {
-                node = d->findElementById("id", rx.cap(1), n);
+                node = d->findElementById(QLatin1String( "id" ), rx.cap(1), n);
                 node.save(str_t, 1);
                 defsAdded.append(rx.cap(1));
             }
 
             // Find the gradient the above gradient is based on
-            baseId = node.toElement().attribute("xlink:href").mid(1);
+            baseId = node.toElement().attribute(QLatin1String( "xlink:href" )).mid(1);
             if (!defsAdded.contains(baseId))
             {
-                nodeBase = d->findElementById("id", baseId, n);
+                nodeBase = d->findElementById(QLatin1String( "id" ), baseId, n);
                 nodeBase.save(str_t, 1);
                 defsAdded.append(baseId);
             }
         }
         defs = *str_t.string();
-        defs = "<defs>" + defs + "</defs>";
+        defs = QLatin1String( "<defs>" ) + defs + QLatin1String( "</defs>" );
     }
 
     // Need to make node be a real svg document, so prepend and append required tags.
@@ -395,32 +395,32 @@ QByteArray KGameSvgDocument::nodeToByteArray() const
 
 QString KGameSvgDocument::style() const
 {
-    return d->m_currentElement.attribute( "style", "Element has no style attribute.");
+    return d->m_currentElement.attribute( QLatin1String( "style" ), QLatin1String( "Element has no style attribute." ));
 }
 
 void KGameSvgDocument::setStyle(const QString& styleAttribute)
 {
-    d->m_currentElement.setAttribute("style", styleAttribute);
+    d->m_currentElement.setAttribute(QLatin1String( "style" ), styleAttribute);
 }
 
 QDomNodeList KGameSvgDocument::patterns() const
 {
-    return elementsByTagName("pattern");
+    return elementsByTagName(QLatin1String( "pattern" ));
 }
 
 QDomNodeList KGameSvgDocument::linearGradients() const
 {
-    return elementsByTagName("linearGradient");
+    return elementsByTagName(QLatin1String( "linearGradient" ));
 }
 
 QDomNodeList KGameSvgDocument::radialGradients() const
 {
-    return elementsByTagName("radialGradient");
+    return elementsByTagName(QLatin1String( "radialGradient" ));
 }
 
 QDomNodeList KGameSvgDocument::defs() const
 {
-    return elementsByTagName("defs");
+    return elementsByTagName(QLatin1String( "defs" ));
 }
 
 QDomNode KGameSvgDocument::def() const
@@ -430,12 +430,12 @@ QDomNode KGameSvgDocument::def() const
 
 QString KGameSvgDocument::transform() const
 {
-    return d->m_currentElement.attribute( "transform", "Element has no transform attribute.");
+    return d->m_currentElement.attribute( QLatin1String( "transform" ), QLatin1String( "Element has no transform attribute." ) );
 }
 
 void KGameSvgDocument::setTransform(const QString& transformAttribute)
 {
-    d->m_currentElement.setAttribute("transform", transformAttribute);
+    d->m_currentElement.setAttribute(QLatin1String( "transform" ), transformAttribute);
 }
 
 QHash<QString, QString> KGameSvgDocument::styleProperties() const
@@ -444,7 +444,7 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     QStringList styleProperties, keyValuePair;
     QString styleProperty;
 
-    styleProperties = style().split(';');
+    styleProperties = style().split(QLatin1Char( ';' ));
 
     /* The style attr may have a trailing semi-colon.  If it does, split()
      * gives us an empty final element.  Remove it or we get 'index out of range' errors
@@ -459,7 +459,7 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
     for (int i = 0; i < styleProperties.size(); i++)
     {
         styleProperty = styleProperties.at(i);
-        keyValuePair = styleProperty.split(':');
+        keyValuePair = styleProperty.split(QLatin1Char( ':' ));
         stylePropertiesHash.insert(keyValuePair.at(0), keyValuePair.at(1));
     }
     return stylePropertiesHash;
@@ -470,8 +470,8 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
     QHash<QString, QString> styleProperties = _styleProperties;
     QString styleBuffer, property;
 
-    d->m_inkscapeOrder << "fill" << "fill-opacity" << "fill-rule" << "stroke" << "stroke-width" << "stroke-linecap"
-                       << "stroke-linejoin" << "stroke-miterlimit" << "stroke-dasharray" << "stroke-opacity";
+    d->m_inkscapeOrder << QLatin1String( "fill" ) << QLatin1String( "fill-opacity" ) << QLatin1String( "fill-rule" ) << QLatin1String( "stroke" ) << QLatin1String( "stroke-width" ) << QLatin1String( "stroke-linecap" )
+                       << QLatin1String( "stroke-linejoin" ) << QLatin1String( "stroke-miterlimit" ) << QLatin1String( "stroke-dasharray" ) << QLatin1String( "stroke-opacity" );
 
     if (options == UseInkscapeOrder)
     {
@@ -480,7 +480,7 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
             property = d->m_inkscapeOrder.at(i);
             if (styleProperties.contains(property))
             {
-                styleBuffer += property + ':' + styleProperties.take(property) + ';';
+                styleBuffer += property + QLatin1Char( ':' ) + styleProperties.take(property) + QLatin1Char( ';' );
             }
             else
             {
@@ -496,7 +496,7 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
         while (it.hasNext())
         {
             it.next();
-            styleBuffer += it.key() + ':' + it.value() + ';';
+            styleBuffer += it.key() + QLatin1Char( ':' ) + it.value() + QLatin1Char( ';' );
         }
     }
 
@@ -510,9 +510,9 @@ QMatrix KGameSvgDocument::transformMatrix() const
     /*
      * Transform attributes can be quite complex.  Here, we assemble this tangled web of
      * complexity into an single matrix.
-     * 
+     *
      * The regex's that make this bearable live in kgamesvgdocument_p.h.  As these regex's
-     * get quite complex, we have some code in tests/kgamesvgdocumenttest.cpp to help verify 
+     * get quite complex, we have some code in tests/kgamesvgdocumenttest.cpp to help verify
      * they are still correct after being edited.
      *
      * Warning: This code depends on the capturing parenthesis in the regex's not changing.
@@ -526,7 +526,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
     QMatrix baseMatrix = QMatrix();
 
     transformAttribute = transform();
-    if (transformAttribute == "Element has no transform attribute.")
+    if (transformAttribute == QLatin1String( "Element has no transform attribute." ))
     {
         return QMatrix();
     }
@@ -546,7 +546,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
         result = rx.indexIn(transformAttribute);
         if (result != -1) // Found left-most transform
         {
-            if (rx.cap(1) == "matrix")
+            if (rx.cap(1) == QLatin1String( "matrix" ))
             {
                 // If the first transform found is a matrix, use it as the base,
                 // else we use a null matrix.
@@ -562,7 +562,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
                 }
             }
 
-            if (rx.cap(8) == "translate")
+            if (rx.cap(8) == QLatin1String( "translate" ))
             {
                 double x = rx.cap(9).toDouble();
                 double y = rx.cap(10).toDouble();
@@ -573,7 +573,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
                 baseMatrix = baseMatrix.translate(x, y);
             }
 
-            if (rx.cap(11) == "scale")
+            if (rx.cap(11) == QLatin1String( "scale" ))
             {
                 double x = rx.cap(12).toDouble();
                 double y = rx.cap(12).toDouble();
@@ -584,7 +584,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
                 baseMatrix = baseMatrix.scale(x, y);
             }
 
-            if (rx.cap(14) == "rotate")
+            if (rx.cap(14) == QLatin1String( "rotate" ))
             {
                 double a = rx.cap(15).toDouble();
                 double cx = rx.cap(16).toDouble();
@@ -602,12 +602,12 @@ QMatrix KGameSvgDocument::transformMatrix() const
                 }
             }
 
-            if (rx.cap(18) == "skewX")
+            if (rx.cap(18) == QLatin1String( "skewX" ))
             {
                 baseMatrix = baseMatrix.shear(rx.cap(19).toDouble() * (M_PI / 180), 0);
             }
 
-            if (rx.cap(20) == "skewY")
+            if (rx.cap(20) == QLatin1String( "skewY" ))
             {
                 baseMatrix = baseMatrix.shear(0, rx.cap(21).toDouble() * (M_PI / 180));
             }
@@ -629,15 +629,15 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
         matrix = transformMatrix() * matrix;
     }
 
-    transformBuffer = "matrix(";
-    transformBuffer += tmp.setNum(matrix.m11(),'g',7) + ',';
-    transformBuffer += tmp.setNum(matrix.m12(),'g',7) + ',';
-    transformBuffer += tmp.setNum(matrix.m21(),'g',7) + ',';
-    transformBuffer += tmp.setNum(matrix.m22(),'g',7) + ',';
-    transformBuffer += tmp.setNum(matrix.dx(),'g',7) + ',';
-    transformBuffer += tmp.setNum(matrix.dy(),'g',7) + ')';
+    transformBuffer = QLatin1String( "matrix(" );
+    transformBuffer += tmp.setNum(matrix.m11(),'g',7) + QLatin1Char( ',' );
+    transformBuffer += tmp.setNum(matrix.m12(),'g',7) + QLatin1Char( ',' );
+    transformBuffer += tmp.setNum(matrix.m21(),'g',7) + QLatin1Char( ',' );
+    transformBuffer += tmp.setNum(matrix.m22(),'g',7) + QLatin1Char( ',' );
+    transformBuffer += tmp.setNum(matrix.dx(),'g',7) + QLatin1Char( ',' );
+    transformBuffer += tmp.setNum(matrix.dy(),'g',7) + QLatin1Char( ')' );
 
-    if ((transform() == "Element has no transform attribute.") && (matrix == null))
+    if ((transform() == QLatin1String( "Element has no transform attribute." )) && (matrix == null))
     {
         // Do not write a meaningless matrix to DOM
     }
@@ -655,7 +655,7 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
 QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, const QString& attributeValue, const QDomNode& node)
 {
     QDomElement e = node.toElement(); // try to convert the node to an element.
-    QString value = e.attribute( attributeName, "Element has no attribute with that name.");
+    QString value = e.attribute( attributeName, QLatin1String( "Element has no attribute with that name." ));
 
     if (value == attributeValue)
     {
@@ -666,15 +666,15 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, 
     if (!node.firstChild().isNull())
     {
         QDomNode result = findElementById(attributeName, attributeValue, node.firstChild());
-        /** We have recursed, now we need to have this recursion end when 
-         * the function call above returns 
+        /** We have recursed, now we need to have this recursion end when
+         * the function call above returns
          */
         if (!result.isNull()) return result; // If we found the node with id, then return it
     }
     if (!node.nextSibling().isNull())
     {
         QDomNode result = findElementById(attributeName, attributeValue, node.nextSibling());
-        /** We have recursed, now we need to have this recursion end when 
+        /** We have recursed, now we need to have this recursion end when
          * the function call above returns */
         if (!result.isNull()) return result;
     }

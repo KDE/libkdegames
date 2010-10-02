@@ -250,7 +250,7 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
   {
     return false;
   }
-  //kDebug(11001) << "KGameMouseIO" << this << " " << e->type();
+  //kDebug(11001) << "KGameMouseIO" << this << QLatin1String( " " ) << e->type();
 
   // mouse action
   if ( e->type() == QEvent::MouseButtonPress ||

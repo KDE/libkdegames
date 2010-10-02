@@ -56,7 +56,7 @@ public:
 	KPlayer* mOwner;
 };
 
-KGameDialogConfig::KGameDialogConfig(QWidget* parent) 
+KGameDialogConfig::KGameDialogConfig(QWidget* parent)
     : QWidget( parent ),
       d( new KGameDialogConfigPrivate )
 {
@@ -149,7 +149,7 @@ KGameDialogNetworkConfig::KGameDialogNetworkConfig(QWidget* parent)
 
  // Needs to be AFTER the creation of the dialogs
  setConnected(false);
- setDefaultNetworkInfo("localhost", 7654,true);
+ setDefaultNetworkInfo(QLatin1String( "localhost" ), 7654,true);
 }
 
 KGameDialogNetworkConfig::~KGameDialogNetworkConfig()

@@ -103,24 +103,24 @@ QString Item::timeFormat(uint n)
 {
     Q_ASSERT( n<=3600 && n!=0 );
     n = 3600 - n;
-    return QString::number(n / 60).rightJustified(2, '0') + ':'
-        + QString::number(n % 60).rightJustified(2, '0');
+    return QString::number(n / 60).rightJustified(2, QLatin1Char( '0' )) + QLatin1Char( ':' )
+        + QString::number(n % 60).rightJustified(2, QLatin1Char( '0' ));
 }
 
 QString Item::pretty(uint, const QVariant &value) const
 {
     switch (_special) {
     case ZeroNotDefined:
-        if ( value.toUInt()==0 ) return "--";
+        if ( value.toUInt()==0 ) return QLatin1String( "--" );
         break;
     case NegativeNotDefined:
-        if ( value.toInt()<0 ) return "--";
+        if ( value.toInt()<0 ) return QLatin1String( "--" );
         break;
     case DefaultNotDefined:
-        if ( value==_default ) return "--";
+        if ( value==_default ) return QLatin1String( "--" );
         break;
     case Anonymous:
-        if ( value.toString()==ItemContainer::ANONYMOUS )
+        if ( value.toString()==QLatin1String( ItemContainer::ANONYMOUS ) )
             return i18n(ItemContainer::ANONYMOUS_LABEL);
         break;
     case NoFormat:
@@ -131,11 +131,11 @@ QString Item::pretty(uint, const QVariant &value) const
     case OneDecimal:
         return QString::number(value.toDouble(), 'f', 1);
     case Percentage:
-        return QString::number(value.toDouble(), 'f', 1) + '%';
+        return QString::number(value.toDouble(), 'f', 1) + QLatin1Char( '%' );
     case MinuteTime:
         return timeFormat(value.toUInt());
     case DateTime:
-        if ( value.toDateTime().isNull() ) return "--";
+        if ( value.toDateTime().isNull() ) return QLatin1String( "--" );
         return KGlobal::locale()->formatDateTime(value.toDateTime());
     case NoSpecial:
         break;
@@ -208,11 +208,11 @@ void MultiplayerScores::clear()
     Score score;
     for (int i=0; i<_scores.size(); i++) {
         _nbGames[i] = 0;
-        QVariant name = _scores[i].data("name");
+        QVariant name = _scores[i].data(QLatin1String( "name" ));
         _scores[i] = score;
-        _scores[i].setData("name", name);
-        _scores[i]._data["mean score"] = double(0);
-        _scores[i]._data["nb won games"] = uint(0);
+        _scores[i].setData(QLatin1String( "name" ), name);
+        _scores[i]._data[QLatin1String( "mean score" )] = double(0);
+        _scores[i]._data[QLatin1String( "nb won games" )] = uint(0);
     }
 }
 
@@ -225,21 +225,21 @@ void MultiplayerScores::setPlayerCount(uint nb)
 
 void MultiplayerScores::setName(uint i, const QString &name)
 {
-    _scores[i].setData("name", name);
+    _scores[i].setData(QLatin1String( "name" ), name);
 }
 
 void MultiplayerScores::addScore(uint i, const Score &score)
 {
-    QVariant name = _scores[i].data("name");
-    double mean = _scores[i].data("mean score").toDouble();
-    uint won = _scores[i].data("nb won games").toUInt();
+    QVariant name = _scores[i].data(QLatin1String( "name" ));
+    double mean = _scores[i].data(QLatin1String( "mean score" )).toDouble();
+    uint won = _scores[i].data(QLatin1String( "nb won games" )).toUInt();
     _scores[i] = score;
-    _scores[i].setData("name", name);
+    _scores[i].setData(QLatin1String( "name" ), name);
     _nbGames[i]++;
     mean += (double(score.score()) - mean) / _nbGames[i];
-    _scores[i]._data["mean score"] = mean;
+    _scores[i]._data[QLatin1String( "mean score" )] = mean;
     if ( score.type()==Won ) won++;
-    _scores[i]._data["nb won games"] = won;
+    _scores[i]._data[QLatin1String( "nb won games" )] = won;
 }
 
 void MultiplayerScores::show(QWidget *parent)
@@ -258,12 +258,12 @@ void MultiplayerScores::show(QWidget *parent)
     // order the players according to the number of won games
     QVector<Score> ordered;
     for (int i=0; i<_scores.size(); i++) {
-        uint won = _scores[i].data("nb won games").toUInt();
-        double mean = _scores[i].data("mean score").toDouble();
+        uint won = _scores[i].data(QLatin1String( "nb won games" )).toUInt();
+        double mean = _scores[i].data(QLatin1String( "mean score" )).toDouble();
         QVector<Score>::iterator it;
         for(it = ordered.begin(); it!=ordered.end(); ++it) {
-            uint cwon = (*it).data("nb won games").toUInt();
-            double cmean = (*it).data("mean score").toDouble();
+            uint cwon = (*it).data(QLatin1String( "nb won games" )).toUInt();
+            double cmean = (*it).data(QLatin1String( "mean score" )).toDouble();
             if ( won<cwon || (won==cwon && mean<cmean) ) {
                 ordered.insert(it, _scores[i]);
                 break;
@@ -278,7 +278,7 @@ void MultiplayerScores::show(QWidget *parent)
     dialog.setButtons(KDialog::Close);
     dialog.setModal(true);
     dialog.setFaceType(KPageDialog::Plain);
-    KPageWidgetItem *page = new KPageWidgetItem( new QLabel(""), "" );
+    KPageWidgetItem *page = new KPageWidgetItem( new QLabel(QLatin1String( "" )), QLatin1String( "" ) );
     QHBoxLayout *hbox = new QHBoxLayout(page->widget());
     hbox->setMargin(KDialog::marginHint());
     hbox->setSpacing(KDialog::spacingHint());
@@ -313,6 +313,8 @@ QDataStream &operator <<(QDataStream &s, const MultiplayerScores &score)
 
 QDataStream &operator >>(QDataStream &s, MultiplayerScores &score)
 {
+
+
     s >> score._scores;
     s >> score._nbGames;
     return s;

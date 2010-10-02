@@ -35,7 +35,7 @@ Request::Type Request::type() const
 StateRequest::StateRequest(/*Module::State*/int state)
 : Request(Request::state)
 {
-	data["state"] = QString::number(state);
+	data[QLatin1String( "state" )] = QString::number(state);
 }
 
 StandRequest::StandRequest()
@@ -46,43 +46,43 @@ StandRequest::StandRequest()
 SitRequest::SitRequest(int seat)
 : Request(Request::sit)
 {
-	data["seat"] = QString::number(seat);
+	data[QLatin1String( "seat" )] = QString::number(seat);
 }
 
 BootRequest::BootRequest(const QString &playername)
 : Request(Request::boot)
 {
-	data["player"] = playername;
+	data[QLatin1String( "player" )] = playername;
 }
 
 BotRequest::BotRequest(int seat)
 : Request(Request::bot)
 {
-	data["seat"] = QString::number(seat);
+	data[QLatin1String( "seat" )] = QString::number(seat);
 }
 
 OpenRequest::OpenRequest(int seat)
 : Request(Request::open)
 {
-	data["seat"] = QString::number(seat);
+	data[QLatin1String( "seat" )] = QString::number(seat);
 }
 
 ChatRequest::ChatRequest(const QString &message)
 : Request(Request::chat)
 {
-	data["message"] = message;
+	data[QLatin1String( "message" )] = message;
 }
 
 InfoRequest::InfoRequest(int seat)
 : Request(Request::info)
 {
-	data["seat"] = QString::number(seat);
+	data[QLatin1String( "seat" )] = QString::number(seat);
 }
 
 InfoRequest::InfoRequest()
 : Request(Request::info)
 {
-	data["seat"] = QString::number(-1);
+	data[QLatin1String( "seat" )] = QString::number(-1);
 }
 
 RankingsRequest::RankingsRequest()

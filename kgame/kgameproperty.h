@@ -34,12 +34,12 @@ using namespace std;
 
 /**
  * \class KGamePropertyBase kgameproperty.h <KGame/KGameProperty>
- * 
+ *
  * @short Base class of KGameProperty
  *
  * The KGamePropertyBase class is the base class of KGameProperty. See
  * KGameProperty for further information.
- * 
+ *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
 class KDEGAMES_EXPORT KGamePropertyBase
@@ -71,11 +71,11 @@ public:
 	/**
 	 * Commands for advanced properties (qint8)
 	 **/
-	enum PropertyCommandIds 
+	enum PropertyCommandIds
 	{
 		// General
 		CmdLock=1,
-		
+
 		// Array
 		CmdAt=51,
 		CmdResize=52,
@@ -99,8 +99,8 @@ public:
 	 *
 	 * A "dirty" policy means that as soon as setValue is called the
 	 * property is changed immediately. And additionally sent over network.
-	 * This can sometimes lead to bugs as the other clients do not 
-	 * immediately have the same value. For more information see 
+	 * This can sometimes lead to bugs as the other clients do not
+	 * immediately have the same value. For more information see
 	 * changeValue.
 	 *
 	 * PolicyLocal means that a KGameProperty behaves like ever
@@ -122,7 +122,7 @@ public:
 	 * Constructs a KGamePropertyBase object and calls registerData.
 	 * @param id The id of this property. MUST be UNIQUE! Used to send and
 	 * receive changes in the property of the playere automatically via
-	 * network. 
+	 * network.
 	 * @param owner The owner of the object. Must be a KGamePropertyHandler which manages
 	 * the changes made to this object, i.e. which will send the new data
 	 **/
@@ -140,12 +140,12 @@ public:
 	virtual ~KGamePropertyBase();
 
 	/**
-	 * Changes the consistency policy of a property. The  
+	 * Changes the consistency policy of a property. The
 	 * PropertyPolicy is one of PolicyClean (defaulz), PolicyDirty or PolicyLocal.
 	 *
-	 * It is up to you to decide how you want to work. 
+	 * It is up to you to decide how you want to work.
 	 **/
-	void setPolicy(PropertyPolicy p) { mFlags.bits.policy = p; } 
+	void setPolicy(PropertyPolicy p) { mFlags.bits.policy = p; }
 
 	/**
 	 * @return The default policy of the property
@@ -185,7 +185,7 @@ public:
 	/**
 	 * A locked property can only be changed by the player who has set the
 	 * lock. See also setLocked
-	 * @return Whether this property is currently locked. 
+	 * @return Whether this property is currently locked.
 	 **/
 	bool isLocked() const { return mFlags.bits.locked; }
 
@@ -227,7 +227,7 @@ public:
 	 **/
 	virtual void save(QDataStream& s) = 0;
 
-	/** 
+	/**
 	 * send a command to advanced properties like arrays
 	 * @param stream The stream containing the data of the comand
 	 * @param msgid The ID of the command - see PropertyCommandIds
@@ -264,37 +264,37 @@ public:
 	 * @param name if not 0 you can assign a name to this property
 	 *
 	 **/
-	int registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, const QString& name=0);
+	int registerData(int id, KGamePropertyHandler* owner,PropertyPolicy p, const QString& name=QString());
 
-	/** 
+	/**
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-	int registerData(int id, KGamePropertyHandler* owner, const QString& name=0);
+	int registerData(int id, KGamePropertyHandler* owner, const QString& name=QString());
 
-	/** 
+	/**
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-        int registerData(int id, KGame* owner, const QString& name=0);
+        int registerData(int id, KGame* owner, const QString& name=QString());
 
-	/** 
+	/**
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 **/
-        int registerData(int id, KPlayer* owner, const QString& name=0);
+        int registerData(int id, KPlayer* owner, const QString& name=QString());
 
-	/** 
+	/**
 	 * This is an overloaded member function, provided for convenience.
 	 * It differs from the above function only in what argument(s) it accepts.
 	 * In particular you can use this function to create properties which
 	 * will have an automatic id assigned. The new id is returned.
 	 **/
-        int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, const QString& name=0);
+        int registerData(KGamePropertyHandler* owner,PropertyPolicy p=PolicyUndefined, const QString& name=QString() );
 
 	void unregisterData();
 
- 
+
 protected:
 	/**
 	 * A locked property can only be changed by the player who has set the
@@ -302,7 +302,7 @@ protected:
 	 *
 	 * You can only call this if isLocked is false. A message is sent
 	 * over network so that the property is locked for all players except
-	 * you. 
+	 * you.
 	 * Usually you use lock and unlock to access this property
 	 *
 	 **/
@@ -330,7 +330,7 @@ protected:
 	 * or correct?
 	 **/
 	bool sendProperty();
-	
+
 	/**
 	 * Forward the data to the owner of this property which then sends it
 	 * over network. save is used to store the data into a stream so
@@ -339,13 +339,13 @@ protected:
 	 *
 	 * This function is used by send to send the data over network.
 	 * This does <em>not</em> send the current value but the explicitly
-	 * given value. 
+	 * given value.
 	 *
 	 * @return TRUE if the message could be sent successfully, otherwise
 	 * FALSE
 	 **/
 	bool sendProperty(const QByteArray& b);
-	
+
 	/**
 	 * Causes the parent object to emit a signal on value change
 	 **/
@@ -353,7 +353,7 @@ protected:
 
 protected:
 	KGamePropertyHandler* mOwner;
-	
+
 	// Having this as a union of the bitfield and the char
 	// allows us to stream this quantity easily (if we need to)
 	// At the moment it is not yet transmitted
@@ -373,11 +373,11 @@ protected:
 			unsigned char locked: 1; // whether the property is locked (true)
 		} bits;
 	} mFlags;
-	
+
 private:
 	friend class KGamePropertyHandler;
 	void init();
-	
+
 private:
 	int mId;
 
@@ -385,11 +385,11 @@ private:
 
 /**
  * \class KGameProperty kgameproperty.h <KGame/KGameProperty>
- * 
+ *
  * @short A class for network transparent games
  *
  * Note: The entire API documentation is obsolete!
- * 
+ *
  * The class KGameProperty can store any form of data and will transmit it via
  * network whenver you call send. This makes network transparent games
  * very easy. You first have to register the data to a KGamePropertyHandler
@@ -412,7 +412,7 @@ private:
  * (and to fix) bugs.
  *
  * @section Always consistent (clean):
- * 
+ *
  * This "policy" is default. Whenever you create a KGameProperty it is always
  * consistent. This means that consistency is the most important thing for the
  * property. This is achieved by using send to change the value of the
@@ -426,7 +426,7 @@ private:
  * which are before the changed property have been transferred the message
  * server delivers the new value of the KGameProperty to all clients. A
  * QTimer::singleShot is used to queue the messages inside the
- * KMessageServer. 
+ * KMessageServer.
  *
  * This means that if you do the following:
  * \code
@@ -461,7 +461,7 @@ private:
  * KGamePropertyHandler::signalPropertyChanged for this.
  *
  * @section Not Always Consistent (dirty):
- * 
+ *
  * There are a lot of people who don't want to use the (sometimes quite complex)
  * "clean" way. You can use setAlwaysConsistent to change the default
  * behaviour of the KGameProperty. If a property is not always consistent
@@ -483,7 +483,7 @@ private:
  * client again the local value is deleted, as the "network value" has the same
  * value as the local one. So you won't lose the ability to use the always
  * consistent "clean" value of the property if you use the "dirty" way. Just use
- * networkValue to access the value which is consistent among all clients. 
+ * networkValue to access the value which is consistent among all clients.
  *
  * The advantage of this concept is clear: you can use a KGameProperty as
  * every other variable as the changes value takes immediate effect.
@@ -500,7 +500,7 @@ private:
  * change that much code...
  *
  * @section A Mixture (very dirty):
- * 
+ *
  * You can also mix the concepts above. Note that we really don't recommend
  * this. With a mixture I mean something like this:
  * \code
@@ -524,10 +524,10 @@ private:
  * myProperty2 = 20;
  * \endcode
  * are ok. But mixing the concepts for a single property will make it nearly
- * impossible to you to debug your game. 
+ * impossible to you to debug your game.
  *
  * So the right thing to do(tm) is to decide in the constructor whether you want
- * a "clean" or "dirty" property. 
+ * a "clean" or "dirty" property.
  *
  * Even if you have decided for one of the concepts you still can manually
  * follow another concept than the "policy" of your property. So if you use an
@@ -536,7 +536,7 @@ private:
  * also kind of a "mixture" as described above this is very useful sometimes. In
  * contrast to the "mixture" above you don't have the problem that you don't
  * exactly know which concept you are currently following because you used the
- * function of the other concept only once. 
+ * function of the other concept only once.
  *
  * @section Custom classes:
  *
@@ -592,7 +592,7 @@ public:
 	 * game (including the one that has sent the new value)
 	 * @param id The id of this property. <em>MUST be UNIQUE</em>! Used to send and
 	 * receive changes in the property of the playere automatically via
-	 * network. 
+	 * network.
 	 * @param owner The parent of the object. Must be a KGame which manages
 	 * the changes made to this object, i.e. which will send the new data.
 	 * Note that in contrast to most KDE/QT classes KGameProperty objects
@@ -602,7 +602,7 @@ public:
 	KGameProperty(int id, KGamePropertyHandler* owner) : KGamePropertyBase(id, owner) { init(); }
 
 	/**
-	 * This constructor does nothing. You have to call 
+	 * This constructor does nothing. You have to call
 	 * KGamePropertyBase::registerData
 	 * yourself before using the KGameProperty object.
 	 **/
@@ -611,7 +611,7 @@ public:
 	virtual ~KGameProperty() {}
 
 	/**
-	 * Set the value depending on the current policy (see 
+	 * Set the value depending on the current policy (see
 	 * setConsistent). By default KGameProperty just uses send to set
 	 * the value of a property. This behaviour can be changed by using
 	 * setConsistent.
@@ -667,7 +667,7 @@ public:
 	 * it is the case e.g. before a KPlayer has been plugged into the
 	 * KGame object) the property is *not* sent but set *locally* (see
 	 * setLocal)!
-	 * 
+	 *
 	 * @param v The new value of the property
 	 * @return whether the property could be sent successfully
 	 * @see setValue setLocal changeValue value
@@ -692,13 +692,13 @@ public:
 
 	/**
 	 * This function sets the value of the property directly, i.e. it
-	 * doesn't send it to the network. 
+	 * doesn't send it to the network.
 	 *
 	 * Int contrast to @see you change _only_ the local value when using
 	 * this function. You do _not_ change the value of any other client. You
 	 * probably don't want to use this if you are using a dedicated server
 	 * (which is the only "client" which is allowed to change a value) but
-	 * rather want to use send(). 
+	 * rather want to use send().
 	 *
 	 * But if you use your clients as servers (i.e. all clients receive a
 	 * players turn and then calculate the reaction of the game theirselves)
@@ -717,7 +717,7 @@ public:
 	 *
 	 * @see setValue send changeValue value
 	 **/
-	bool setLocal(type v) 
+	bool setLocal(type v)
 	{
 		if (isOptimized() && mData == v) {
 			return false;
@@ -744,7 +744,7 @@ public:
 	 * Note that emitSignal is also called twice: once after
 	 * setLocal and once when the value from send is received
 	 *
-	 * @see send setLocal setValue value 
+	 * @see send setLocal setValue value
 	 **/
 	void changeValue(type v)
 	{
@@ -809,9 +809,9 @@ public:
 	 * If you use a clean policy (see setPolicy) then
 	 * the returned value is the assigned value
 	 **/
-	const type& operator=(const type& t) 
-	{ 
-		setValue(t); 
+	const type& operator=(const type& t)
+	{
+		setValue(t);
 		return value();
 	}
 

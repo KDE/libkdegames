@@ -228,10 +228,10 @@ Item *Manager::createItem(ItemType type)
 void Manager::setScoreItem(uint worstScore, Item *item)
 {
     item->setDefaultValue(worstScore);
-    internal->scoreInfos().setItem("score", item);
-    internal->playerInfos().item("mean score")
+    internal->scoreInfos().setItem(QLatin1String( "score" ), item);
+    internal->playerInfos().item(QLatin1String( "mean score" ))
         ->item()->setDefaultValue(double(worstScore));
-    internal->playerInfos().item("best score")
+    internal->playerInfos().item(QLatin1String( "best score" ))
         ->item()->setDefaultValue(worstScore);
 }
 
@@ -242,16 +242,16 @@ void Manager::addScoreItem(const QString &name, Item *item)
 
 void Manager::setPlayerItem(PlayerItemType type, Item *item)
 {
-    const Item *scoreItem = internal->scoreInfos().item("score")->item();
+    const Item *scoreItem = internal->scoreInfos().item(QLatin1String( "score" ))->item();
     uint def = scoreItem->defaultValue().toUInt();
     QString name;
     switch (type) {
     case MeanScore:
-        name = "mean score";
+        name = QLatin1String( "mean score" );
         item->setDefaultValue(double(def));
         break;
     case BestScore:
-        name = "best score";
+        name = QLatin1String( "best score" );
         item->setDefaultValue(def);
         break;
     }
@@ -267,7 +267,7 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
     case Icon:
     case Standard:
     case I18N:     break;
-    case WW:       return "normal";
+    case WW:       return QLatin1String( "normal" );
     }
     return QString();
 }
@@ -278,8 +278,8 @@ void Manager::addToQueryURL(KUrl &url, const QString &item,
     Q_ASSERT( !item.isEmpty() && url.queryItem(item).isNull() );
 
     QString query = url.query();
-    if ( !query.isEmpty() ) query += '&';
-	query += item + '=' + QUrl::toPercentEncoding( content );
+    if ( !query.isEmpty() ) query += QLatin1Char( '&' );
+	query += item + QLatin1Char( '=' ) + QLatin1String( QUrl::toPercentEncoding( content ) );
 	url.setQuery(query);
 }
 

@@ -239,7 +239,7 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   // Need both stdout and stderr as separate channels in the communication
   mProcess-> setOutputChannelMode(KProcess::SeparateChannels);
   int id=0;
-  *mProcess << mProcessName << QString("%1").arg(id);
+  *mProcess << mProcessName << QString::fromLatin1( "%1").arg(id);
   kDebug(11001) << "@@@KMessageProcess::Init:Id=" << id;
   kDebug(11001) << "@@@KMessgeProcess::Init:Processname:" << mProcessName;
   connect(mProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedStdout()));
@@ -277,7 +277,7 @@ void KMessageProcess::send(const QByteArray &msg)
   memcpy(tmpbuffer+2*sizeof(long),msg.data(),msg.size());
   *p1=0x4242aeae;
   *p2=size;
-  
+
   // no need to add it to a queue -> qiodevice is buffered
   mProcess->write(tmpbuffer,size);
   delete [] tmpbuffer;
@@ -294,10 +294,10 @@ void KMessageProcess::slotReceivedStderr()
     ba = mProcess->readLine();
     if( ba.isEmpty() )
       return;
-    ba.chop( 1 );   // remove '\n'
+    ba.chop( 1 );   // remove QLatin1Char( '\n' )
 
     kDebug(11001) << "KProcess (" << ba.size() << "):" << ba.constData();
-    emit signalReceivedStderr(ba);
+    emit signalReceivedStderr(QLatin1String( ba ));
     ba.clear();
   };
 }
@@ -338,7 +338,7 @@ void KMessageProcess::slotReceivedStdout()
       QByteArray msg ;
       msg.resize(len);
     //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
-     
+
       qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.begin()+len, msg.begin());
 //       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       emit received(msg);
@@ -392,7 +392,7 @@ void KMessageFilePipe::send(const QByteArray &msg)
   memcpy(tmpbuffer+2*sizeof(long),msg.data(),msg.size());
   *p1=0x4242aeae;
   *p2=size;
-  
+
   QByteArray buffer(tmpbuffer,size);
   mWriteFile->write(buffer);
   mWriteFile->flush();
@@ -403,7 +403,7 @@ void KMessageFilePipe::send(const QByteArray &msg)
   for (int i=0;i<buffer.size();i++) fprintf(stderr,"%02x ",(unsigned char)buffer.at(i));fprintf(stderr,"\n");
   fflush(stderr);
   */
- 
+
 
 }
 
@@ -419,7 +419,7 @@ void KMessageFilePipe::exec()
    mReceiveBuffer[mReceiveCount]=ch;
    mReceiveCount++;
 
-   // Change for message 
+   // Change for message
    if (mReceiveCount>=int(2*sizeof(long)))
    {
      long *p1=(long *)mReceiveBuffer.data();
@@ -446,11 +446,11 @@ void KMessageFilePipe::exec()
        mReceiveCount=0;
      }
    }
-   
+
 
    return ;
 
-  
+
 }
 
 #include "kmessageio.moc"

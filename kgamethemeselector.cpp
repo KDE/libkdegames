@@ -79,11 +79,11 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     }
 
     //Get the last used theme path from the KConfigSkeleton
-    KConfigSkeletonItem * configItem = aconfig->findItem("Theme");
+    KConfigSkeletonItem * configItem = aconfig->findItem(QLatin1String( "Theme" ));
     QString lastUsedTheme = configItem->property().toString();
 
     //Now get our themes into the list widget
-    KGlobal::dirs()->addResourceType("gamethemeselector", "data", KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
+    KGlobal::dirs()->addResourceType("gamethemeselector", "data", KGlobal::mainComponent().componentName() + QLatin1Char( '/' ) + lookupDirectory + QLatin1Char( '/' ));
     findThemes(lastUsedTheme);
 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
@@ -100,19 +100,19 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     ui.themeList->setSortingEnabled(true);
 
     QStringList themesAvailable;
-    KGlobal::dirs()->findAllResources("gamethemeselector", "*.desktop", KStandardDirs::Recursive, themesAvailable);
+    KGlobal::dirs()->findAllResources("gamethemeselector", QLatin1String( "*.desktop" ), KStandardDirs::Recursive, themesAvailable);
 
     bool initialFound = false;
     foreach (const QString &file, themesAvailable)
     {
-      QString themePath = lookupDirectory + '/' + file;
+      QString themePath = lookupDirectory + QLatin1Char( '/' ) + file;
       KGameTheme* atheme = new KGameTheme(groupName);
 
       if (atheme->load(themePath)) {
-        QString themeName = atheme->themeProperty("Name");
+        QString themeName = atheme->themeProperty(QLatin1String( "Name" ));
         //Add underscores to avoid duplicate names.
         while (themeMap.contains(themeName))
-          themeName += '_';
+          themeName += QLatin1Char( '_' );
         themeMap.insert(themeName, atheme);
         QListWidgetItem * item = new QListWidgetItem(themeName, ui.themeList);
 
@@ -130,12 +130,12 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     if (!initialFound)
     {
       // TODO change this if we ever change KGameTheme::loadDefault
-      QString defaultPath = "themes/default.desktop";
+      QString defaultPath = QLatin1String( "themes/default.desktop" );
       foreach(KGameTheme* theme, themeMap)
       {
         if (theme->path().endsWith(defaultPath))
         {
-          const QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty("Name"), Qt::MatchExactly);
+          const QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty(QLatin1String( "Name" )), Qt::MatchExactly);
           // never can be != 1 but better safe than sorry
           if (itemList.count() == 1)
           {
@@ -160,12 +160,12 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
     }
     ui.kcfg_Theme->setText(seltheme->fileName());
 
-    QString authstr("Author");
-    QString contactstr("AuthorEmail");
-    QString descstr("Description");
+    QString authstr(QLatin1String( "Author" ));
+    QString contactstr(QLatin1String( "AuthorEmail" ));
+    QString descstr(QLatin1String( "Description" ));
     QString emailstr;
     if (!seltheme->themeProperty(contactstr).isEmpty() ) {
-        emailstr = QString("<a href=\"mailto:%1\">%1</a>").arg(seltheme->themeProperty(contactstr));
+        emailstr = QString::fromLatin1( "<a href=\"mailto:%1\">%1</a>").arg(seltheme->themeProperty(contactstr));
     }
 
     ui.themeAuthor->setText(seltheme->themeProperty(authstr));

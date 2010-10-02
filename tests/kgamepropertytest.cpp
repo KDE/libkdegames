@@ -45,9 +45,9 @@ void tst_KGamePropertyTest::testHandler()
 
    // Check names
    QString nameS = mHandler->propertyName(10);
-   QVERIFY(nameS.contains(QString("VAR1")));
+   QVERIFY(nameS.contains( QLatin1String( QString("VAR1" ))));
    nameS = mHandler->propertyName(11);
-   QVERIFY(nameS.contains(QString("VAR2")));
+   QVERIFY(nameS.contains( QLatin1String( QString("VAR2" ))));
 
 
    // Check IDs

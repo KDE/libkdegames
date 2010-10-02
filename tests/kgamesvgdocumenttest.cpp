@@ -78,12 +78,12 @@ void tst_KGameSvgDocument::transformRegex()
 
     rx.setPattern(WSP);
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(" "));
+    QVERIFY(rx.exactMatch(QLatin1String( " " )));
     QVERIFY(!rx.exactMatch(""));
 
     rx.setPattern(WSP_ASTERISK);
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(" "));
+    QVERIFY(rx.exactMatch(QLatin1String( " " )));
     QVERIFY(rx.exactMatch(""));
     QVERIFY(rx.exactMatch("   "));
     QVERIFY(rx.exactMatch("       "));
@@ -98,7 +98,7 @@ void tst_KGameSvgDocument::transformRegex()
     QVERIFY(rx.isValid());
     QVERIFY(rx.exactMatch(" ,"));
     QVERIFY(rx.exactMatch(" , "));
-    QVERIFY(rx.exactMatch(" "));
+    QVERIFY(rx.exactMatch(QLatin1String( " " )));
     QVERIFY(rx.exactMatch(", "));
     QVERIFY(rx.exactMatch(","));
     QVERIFY(rx.exactMatch(" , "));

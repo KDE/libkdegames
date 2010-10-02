@@ -135,9 +135,9 @@ void KGameLCDClock::timeoutClock()
 
 QString KGameLCDClock::pretty() const
 {
-    QString sec = QString::number(_sec).rightJustified(2, '0', true);
-    QString min = QString::number(_min).rightJustified(2, '0', true);
-    return min + ':' + sec;
+    QString sec = QString::number(_sec).rightJustified(2,QLatin1Char( '0' ), true);
+    QString min = QString::number(_min).rightJustified(2, QLatin1Char( '0' ), true);
+    return min + QLatin1Char( ':' ) + sec;
 }
 
 void KGameLCDClock::showTime()
@@ -178,9 +178,9 @@ void KGameLCDClock::setTime(uint sec)
 
 void KGameLCDClock::setTime(const QString &s)
 {
-    Q_ASSERT( s.length()==5 && s[2]==':' );
-    uint min = qMin(s.section(':', 0, 0).toUInt(), uint(59));
-    uint sec = qMin(s.section(':', 1, 1).toUInt(), uint(59));
+    Q_ASSERT( s.length()==5 && s[2]==QLatin1Char( ':' ) );
+    uint min = qMin(s.section(QLatin1Char( ':' ), 0, 0).toUInt(), uint(59));
+    uint sec = qMin(s.section(QLatin1Char( ':' ), 1, 1).toUInt(), uint(59));
     setTime(sec + min*60);
 }
 

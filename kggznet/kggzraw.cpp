@@ -180,7 +180,7 @@ KGGZRaw& KGGZRaw::operator>>(QString &s)
 	{
 		kDebug(11005) << "[raw] use easysock conversion";
 		*m_net >> tmp;
-		s = tmp;
+		s = QLatin1String(tmp);
 		delete[] tmp;
 	}
 

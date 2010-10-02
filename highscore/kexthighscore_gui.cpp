@@ -100,7 +100,7 @@ void ScoresList::addLineItem(const ItemArray &items,
         if ( !container.item()->isVisible() ) {
 	  continue;
 	}
-        if (line) { 
+        if (line) {
 	  line->setText(k, itemText(container, index));
 	  line->setTextAlignment(k, container.item()->alignment());
 	}
@@ -236,7 +236,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
         setFaceType( KPageDialog::Tree );
     else
         setFaceType( KPageDialog::Plain );
-    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), "configure") );
+    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), QLatin1String( "configure" )) );
     setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
     connect( this, SIGNAL(user1Clicked()), SLOT(slotUser1()) );
     connect( this, SIGNAL(user2Clicked()), SLOT(slotUser2()) );
@@ -340,10 +340,10 @@ QString LastMultipleScoresList::itemText(const ItemContainer &item,
 {
 //   kDebug(11001) ;
     QString name = item.name();
-    if ( name=="rank" )
+    if ( name==QLatin1String( "rank" ) )
         return (_scores[row].type()==Won ? i18n("Winner") : QString());
     QVariant v = _scores[row].data(name);
-    if ( name=="name" ) return v.toString();
+    if ( name==QLatin1String( "name" ) ) return v.toString();
     return item.item()->pretty(row, v);
 }
 
@@ -366,8 +366,8 @@ void TotalMultipleScoresList::addLineItem(const ItemArray &si,
     uint k = 1; // skip "id"
     for (uint i=0; i<4; i++) { // skip additional fields
         const ItemContainer *container;
-        if ( i==2 ) container = pi.item("nb games");
-        else if ( i==3 ) container = pi.item("mean score");
+        if ( i==2 ) container = pi.item(QLatin1String( "nb games" ));
+        else if ( i==3 ) container = pi.item(QLatin1String( "mean score" ));
         else {
             container = si[k];
             k++;
@@ -391,11 +391,11 @@ QString TotalMultipleScoresList::itemText(const ItemContainer &item,
 {
 //   kDebug(11001) ;
     QString name = item.name();
-    if ( name=="rank" ) return QString::number(_scores.size()-row);
-    if ( name=="nb games" )
-        return QString::number( _scores[row].data("nb won games").toUInt() );
+    if ( name==QLatin1String( "rank" ) ) return QString::number(_scores.size()-row);
+    else if ( name==QLatin1String( "nb games" ) )
+        return QString::number( _scores[row].data(QLatin1String( "nb won games" )).toUInt() );
     QVariant v = _scores[row].data(name);
-    if ( name=="name" ) return v.toString();
+    if ( name==QLatin1String( "name" ) ) return v.toString();
     return item.item()->pretty(row, v);
 }
 

@@ -47,7 +47,7 @@ QString KGameMisc::randomName()// do we need i18n? I think yes
               "Chris Chuck Daniel Don Duncan Ed Emily Eric "
               "Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken "
               "Kirk Marc Mike Neil Paul Rik Robert Sam Sean "
-              "Thomas Tim Walter" ) ).split( QChar(' ') );
+              "Thomas Tim Walter" ) ).split( QChar(QLatin1Char( ' ' )) );
     KRandomSequence random;
     return names.at( random.getLong( names.count() ) );
 }

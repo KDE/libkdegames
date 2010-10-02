@@ -203,7 +203,7 @@ void KGGZSeatsDialogPrivate::displaySeats()
 		actionbutton->setArrowType(Qt::DownArrow);
 		actionbutton->setText(i18n("Action..."));
 
-		QString type = "unknown";
+		QString type = QLatin1String( "unknown" );
 		switch(p->type())
 		{
 			case KGGZMod::Player::player:
@@ -229,7 +229,7 @@ void KGGZSeatsDialogPrivate::displaySeats()
 
 		QString name = p->name();
 	       	if(name.isNull()) name = i18n("(unnamed)");
-		QLabel *namelabel = new QLabel("<b><i>" + name + "</i></b>");
+		QLabel *namelabel = new QLabel(QLatin1String( "<b><i>" ) + name + QLatin1String( "</i></b>" ));
 		palette = namelabel->palette();
 		palette.setColor(namelabel->backgroundRole(), QColor(255, 255, 255));
 		namelabel->setPalette(palette);
@@ -317,7 +317,7 @@ void KGGZSeatsDialogPrivate::displaySpectators()
 
 		QString name = p->name();
 	       	if(name.isNull()) name = i18n("(unnamed)");
-		QLabel *namelabel = new QLabel("<b><i>" + name + "</i></b>");
+		QLabel *namelabel = new QLabel(QLatin1String( "<b><i>" ) + name + QLatin1String( "</i></b>" ));
 		QPalette palette = namelabel->palette();
 		palette.setColor(namelabel->backgroundRole(), QColor(255, 255, 255));
 		namelabel->setPalette(palette);
@@ -352,7 +352,7 @@ void KGGZSeatsDialogPrivate::displaySpectators()
 void KGGZSeatsDialogPrivate::slotAction()
 {
 	int seat;
-       
+
 	if(m_buttons.contains(q->sender()))
 	{
 		seat = m_buttons[q->sender()];
@@ -523,7 +523,7 @@ void KGGZSeatsDialogPrivate::slotTaskResult(KJob *job)
 	{
 		int i = m_phototasks[job];
 		QByteArray data = m_photodata[job];
-		QPixmap pix(data);
+		QPixmap pix = QPixmap( QLatin1String( data ) );
 		/*QImage im = pix.convertToImage();
 		QImage im2(64, 64, 32);
 		im = im.smoothScale(64, 64, QImage::ScaleMin);

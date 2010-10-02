@@ -50,7 +50,7 @@ ServerEvent::ServerEvent(const Event& event) : Event(Event::server)
 
 int ServerEvent::fd() const
 {
-	QString f = data["fd"];
+	QString f = data[QLatin1String( "fd" )];
 	return f.toInt();
 }
 
@@ -89,7 +89,7 @@ Player *ChatEvent::player() const
 
 QString ChatEvent::message() const
 {
-	return data["message"];
+	return data[QLatin1String( "message" )];
 }
 
 StatsEvent::StatsEvent(const Event& event) : Event(Event::stats)
@@ -121,19 +121,19 @@ RankingsEvent::RankingsEvent(const Event& event) : Event(Event::rankings)
 
 int RankingsEvent::count() const
 {
-	QString num = data["num"];
+	QString num = data[QLatin1String( "num" )];
 	return num.toInt();
 }
 
 QString RankingsEvent::name(int i) const
 {
-	QString name = data["name" + QString::number(i)];
+	QString name = data[QLatin1String( "name" ) + QString::number(i)];
 	return name;
 }
 
 int RankingsEvent::score(int i) const
 {
-	QString score = data["score" + QString::number(i)];
+	QString score = data[QLatin1String( "score" ) + QString::number(i)];
 	return score.toInt();
 }
 

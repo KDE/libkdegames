@@ -101,7 +101,7 @@ public:
 	QTreeWidgetItem* mGameMaxPlayers;
 	QTreeWidgetItem* mGameMinPlayers;
 	QTreeWidgetItem* mGamePlayerCount;
-	
+
 	QFrame* mPlayerPage;
 	KListWidget* mPlayerList;
 	QTreeWidget* mPlayerProperties;
@@ -170,7 +170,7 @@ void KGameDebugDialog::initGamePage()
  mGamePropertiesHeader->setText(2, tr("Policy"));
  d->mGameProperties->setHeaderItem(mGamePropertiesHeader);
  layout->addWidget(d->mGameProperties);
- 
+
  QPushButton* b = new QPushButton(i18n("Update"), d->mGamePage);
  connect(b, SIGNAL(pressed()), this, SLOT(slotUpdateGameData()));
  topLayout->addWidget(b);
@@ -215,14 +215,14 @@ void KGameDebugDialog::initPlayerPage()
  vheader->setText(0, tr("Data"));
  vheader->setText(1, tr("Value"));
  v->setHeaderItem(vheader);
- 
+
  d->mPlayerProperties = new QTreeWidget(d->mPlayerPage);
  QTreeWidgetItem* mPlayerPropertiesHeader = new QTreeWidgetItem();
  mPlayerPropertiesHeader->setText(0, tr("Property"));
  mPlayerPropertiesHeader->setText(1, tr("Value"));
  mPlayerPropertiesHeader->setText(2, tr("Policy")); d->mPlayerProperties->setHeaderItem(mPlayerPropertiesHeader);
  layout->addWidget(d->mPlayerProperties);
- 
+
  QPushButton* b = new QPushButton(i18n("Update"), d->mPlayerPage);
  connect(b, SIGNAL(pressed()), this, SLOT(slotUpdatePlayerList()));
  topLayout->addWidget(b);
@@ -261,7 +261,7 @@ void KGameDebugDialog::initMessagePage()
  QPushButton* hide = new QPushButton(i18n("&>>"), d->mMessagePage);
  connect(hide, SIGNAL(pressed()), this, SLOT(slotHideId()));
  layout->addWidget(hide, 4, 4);
- 
+
  QPushButton* show = new QPushButton(i18n("&<<"), d->mMessagePage);
  connect(show, SIGNAL(pressed()), this, SLOT(slotShowId()));
  layout->addWidget(show, 6, 4);
@@ -279,34 +279,34 @@ void KGameDebugDialog::initMessagePage()
 
 void KGameDebugDialog::clearPlayerData()
 {
- d->mPlayerAddress->setText(1, "");
- d->mPlayerId->setText(1, "");
- d->mPlayerName->setText(1, "");
- d->mPlayerGroup->setText(1, "");
- d->mPlayerUserId->setText(1, "");
- d->mPlayerMyTurn->setText(1, "");
- d->mPlayerAsyncInput->setText(1, "");
- d->mPlayerKGameAddress->setText(1, "");
- d->mPlayerVirtual->setText(1, "");
- d->mPlayerActive->setText(1, "");
- d->mPlayerRtti->setText(1, "");
- d->mPlayerNetworkPriority->setText(1, "");
+ d->mPlayerAddress->setText(1, QLatin1String( "" ));
+ d->mPlayerId->setText(1, QLatin1String( "" ));
+ d->mPlayerName->setText(1, QLatin1String( "" ));
+ d->mPlayerGroup->setText(1, QLatin1String( "" ));
+ d->mPlayerUserId->setText(1, QLatin1String( "" ));
+ d->mPlayerMyTurn->setText(1, QLatin1String( "" ));
+ d->mPlayerAsyncInput->setText(1, QLatin1String( "" ));
+ d->mPlayerKGameAddress->setText(1, QLatin1String( "" ));
+ d->mPlayerVirtual->setText(1, QLatin1String( "" ));
+ d->mPlayerActive->setText(1, QLatin1String( "" ));
+ d->mPlayerRtti->setText(1, QLatin1String( "" ));
+ d->mPlayerNetworkPriority->setText(1, QLatin1String( "" ));
 
  d->mPlayerProperties->clear();
 }
 
 void KGameDebugDialog::clearGameData()
 {
- d->mGameAddress->setText(1, "");
- d->mGameId->setText(1, "");
- d->mGameCookie->setText(1, "");
- d->mGameMaster->setText(1, "");
- d->mGameAdmin->setText(1, "");
- d->mGameOffering->setText(1, "");
- d->mGameStatus->setText(1, "");
- d->mGameRunning->setText(1, "");
- d->mGameMaxPlayers->setText(1, "");
- d->mGameMinPlayers->setText(1, "");
+ d->mGameAddress->setText(1, QLatin1String( "" ));
+ d->mGameId->setText(1, QLatin1String( "" ));
+ d->mGameCookie->setText(1, QLatin1String( "" ));
+ d->mGameMaster->setText(1, QLatin1String( "" ));
+ d->mGameAdmin->setText(1, QLatin1String( "" ));
+ d->mGameOffering->setText(1, QLatin1String( "" ));
+ d->mGameStatus->setText(1, QLatin1String( "" ));
+ d->mGameRunning->setText(1, QLatin1String( "" ));
+ d->mGameMaxPlayers->setText(1, QLatin1String( "" ));
+ d->mGameMinPlayers->setText(1, QLatin1String( "" ));
 
  d->mGameProperties->clear();
 }
@@ -321,7 +321,7 @@ void KGameDebugDialog::slotUpdatePlayerData()
 
 void KGameDebugDialog::slotUpdatePlayerList()
 {
- QListWidgetItem* i = d->mPlayerList->item(0); 
+ QListWidgetItem* i = d->mPlayerList->item(0);
  for (; d->mPlayerList->count() > 0; i = d->mPlayerList->item(0)) {
 	removePlayer(i);
  }

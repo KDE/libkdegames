@@ -180,7 +180,7 @@ class ScoreInfos : public ItemArray
 class ConfigGroup : public KConfigGroup
 {
  public:
-    ConfigGroup(const QString &group = "")
+    ConfigGroup(const QString &group = QLatin1String( "" ))
         : KConfigGroup(KGlobal::config(), group) {}
 };
 
@@ -193,12 +193,12 @@ class PlayerInfos : public ItemArray
     bool isNewPlayer() const { return _newPlayer; }
     bool isOldLocalPlayer() const { return _oldLocalPlayer; }
     uint nbEntries() const;
-    QString name() const { return item("name")->read(_id).toString(); }
+    QString name() const { return item(QLatin1String( "name" ))->read(_id).toString(); }
     bool isAnonymous() const;
     QString prettyName() const { return prettyName(_id); }
-    QString prettyName(uint id) const { return item("name")->pretty(id); }
+    QString prettyName(uint id) const { return item(QLatin1String( "name" ))->pretty(id); }
     QString registeredName() const;
-    QString comment() const { return item("comment")->pretty(_id); }
+    QString comment() const { return item(QLatin1String( "comment" ))->pretty(_id); }
     bool isWWEnabled() const;
     QString key() const;
     uint id() const { return _id; }
@@ -247,7 +247,7 @@ class ManagerPrivate
     PlayerInfos &playerInfos()   { return *_playerInfos; }
     KHighscore &hsConfig()       { return *_hsConfig; }
     enum QueryType { Submit, Register, Change, Players, Scores };
-    KUrl queryUrl(QueryType type, const QString &newName = "") const;
+    KUrl queryUrl(QueryType type, const QString &newName = QLatin1String("")) const;
 
     void exportHighscores(QTextStream &);
 

@@ -69,7 +69,7 @@ void ItemContainer::setItem(Item *item)
 QString ItemContainer::entryName() const
 {
     if ( _subGroup.isEmpty() ) return _name;
-    return _name + '_' + _subGroup;
+    return _name + QLatin1Char( '_' ) + _subGroup;
 }
 
 QVariant ItemContainer::read(uint i) const
@@ -107,7 +107,7 @@ uint ItemContainer::increment(uint i) const
 
 //-----------------------------------------------------------------------------
 ItemArray::ItemArray()
-    : _group(""), _subGroup("") // no null groups
+    : _group(QLatin1String( "" )), _subGroup(QLatin1String( "" )) // no null groups
 {}
 
 ItemArray::~ItemArray()
@@ -224,7 +224,7 @@ class ScoreNameItem : public NameItem
         : _score(score), _infos(infos) {}
 
     QString pretty(uint i, const QVariant &v) const {
-        uint id = _score.item("id")->read(i).toUInt();
+        uint id = _score.item(QLatin1String( "id" ))->read(i).toUInt();
         if ( id==0 ) return NameItem::pretty(i, v);
         return _infos.prettyName(id-1);
     }
@@ -238,18 +238,18 @@ class ScoreNameItem : public NameItem
 ScoreInfos::ScoreInfos(uint maxNbEntries, const PlayerInfos &infos)
     : _maxNbEntries(maxNbEntries)
 {
-    addItem("id", new Item((uint)0));
-    addItem("rank", new RankItem, false);
-    addItem("name", new ScoreNameItem(*this, infos));
-    addItem("score", Manager::createItem(Manager::ScoreDefault));
-    addItem("date", new DateItem);
+    addItem(QLatin1String( "id" ), new Item((uint)0));
+    addItem(QLatin1String( "rank" ), new RankItem, false);
+    addItem(QLatin1String( "name" ), new ScoreNameItem(*this, infos));
+    addItem(QLatin1String( "score" ), Manager::createItem(Manager::ScoreDefault));
+    addItem(QLatin1String( "date" ), new DateItem);
 }
 
 uint ScoreInfos::nbEntries() const
 {
     uint i = 0;
     for (; i<_maxNbEntries; i++)
-        if ( item("score")->read(i)==item("score")->item()->defaultValue() )
+        if ( item(QLatin1String( "score" ))->read(i)==item(QLatin1String( "score" ))->item()->defaultValue() )
             break;
     return i;
 }
@@ -262,30 +262,30 @@ const char *HS_WW_ENABLED      = "ww hs enabled";
 
 PlayerInfos::PlayerInfos()
 {
-    setGroup("players");
+    setGroup(QLatin1String( "players" ));
 
     // standard items
-    addItem("name", new NameItem);
+    addItem(QLatin1String( "name" ), new NameItem);
     Item *it = new Item((uint)0, i18n("Games Count"),Qt::AlignRight);
-    addItem("nb games", it, true, true);
+    addItem(QLatin1String( "nb games" ), it, true, true);
     it = Manager::createItem(Manager::MeanScoreDefault);
-    addItem("mean score", it, true, true);
+    addItem(QLatin1String( "mean score" ), it, true, true);
     it = Manager::createItem(Manager::BestScoreDefault);
-    addItem("best score", it, true, true);
-    addItem("date", new DateItem, true, true);
+    addItem(QLatin1String( "best score" ), it, true, true);
+    addItem(QLatin1String( "date" ), new DateItem, true, true);
     it = new Item(QString(), i18n("Comment"), Qt::AlignLeft);
-    addItem("comment", it);
+    addItem(QLatin1String( "comment" ), it);
 
     // statistics items
-    addItem("nb black marks", new Item((uint)0), true, true); // legacy
-    addItem("nb lost games", new Item((uint)0), true, true);
-    addItem("nb draw games", new Item((uint)0), true, true);
-    addItem("current trend", new Item((int)0), true, true);
-    addItem("max lost trend", new Item((uint)0), true, true);
-    addItem("max won trend", new Item((uint)0), true, true);
+    addItem(QLatin1String( "nb black marks" ), new Item((uint)0), true, true); // legacy
+    addItem(QLatin1String( "nb lost games" ), new Item((uint)0), true, true);
+    addItem(QLatin1String( "nb draw games" ), new Item((uint)0), true, true);
+    addItem(QLatin1String( "current trend" ), new Item((int)0), true, true);
+    addItem(QLatin1String( "max lost trend" ), new Item((uint)0), true, true);
+    addItem(QLatin1String( "max won trend" ), new Item((uint)0), true, true);
 
     QString username = KUser().loginName();
- 
+
 #ifdef HIGHSCORE_DIRECTORY
     internal->hsConfig().setHighscoreGroup("players");
     for (uint i=0; ;i++) {
@@ -306,7 +306,7 @@ PlayerInfos::PlayerInfos()
 	emailConfig.setProfile(emailConfig.defaultProfileName());
 	QString name = emailConfig.getSetting(KEMailSettings::RealName);
 	if ( name.isEmpty() || isNameUsed(name) ) name = username;
-	if ( isNameUsed(name) ) name= QString(ItemContainer::ANONYMOUS);
+	if ( isNameUsed(name) ) name= QLatin1String(ItemContainer::ANONYMOUS);
 #ifdef HIGHSCORE_DIRECTORY
     internal->hsConfig().writeEntry(_id+1, "username", username);
     item("name")->write(_id, name);
@@ -318,7 +318,7 @@ PlayerInfos::PlayerInfos()
 #ifdef HIGHSCORE_DIRECTORY
     if (_oldLocalPlayer) { // player already exists in local config file
         // copy player data
-        QString prefix = QString("%1_").arg(_oldLocalId+1);
+        QString prefix = QString::fromLatin1( "%1_").arg(_oldLocalId+1);
 #ifdef __GNUC__
 #warning "kde4 port g.config()->entryMap";
 #endif
@@ -335,14 +335,14 @@ PlayerInfos::PlayerInfos()
             }
         }
 #endif
-    }    
+    }
 #else
     _newPlayer = !_oldLocalPlayer;
     if (_oldLocalPlayer) _id = _oldLocalId;
     else {
         _id = nbEntries();
         cg.writeEntry(HS_ID, _id);
-        item("name")->write(_id, name);
+        item(QLatin1String( "name" ))->write(_id, name);
     }
 #endif
     _bound = true;
@@ -360,13 +360,13 @@ void PlayerInfos::createHistoItems(const QVector<uint> &scores, bool bound)
 
 bool PlayerInfos::isAnonymous() const
 {
-    return ( name()==ItemContainer::ANONYMOUS );
+    return ( name()==QLatin1String( ItemContainer::ANONYMOUS ) );
 }
 
 uint PlayerInfos::nbEntries() const
 {
-    internal->hsConfig().setHighscoreGroup("players");
-    QStringList list = internal->hsConfig().readList("name", -1);
+    internal->hsConfig().setHighscoreGroup(QLatin1String( "players" ));
+    const QStringList list = internal->hsConfig().readList(QLatin1String( "name" ), -1);
     return list.count();
 }
 
@@ -387,8 +387,8 @@ QString PlayerInfos::histoName(int i) const
     const QVector<uint> &sh = _histogram;
     Q_ASSERT( i<sh.size() || (_bound || i==sh.size()) );
     if ( i==sh.size() )
-        return QString("nb scores greater than %1").arg(sh[sh.size()-1]);
-    return QString("nb scores less than %1").arg(sh[i]);
+        return QString::fromLatin1( "nb scores greater than %1").arg(sh[sh.size()-1]);
+    return QString::fromLatin1( "nb scores less than %1").arg(sh[i]);
 }
 
 int PlayerInfos::histoSize() const
@@ -399,59 +399,59 @@ int PlayerInfos::histoSize() const
 void PlayerInfos::submitScore(const Score &score) const
 {
     // update counts
-    uint nbGames = item("nb games")->increment(_id);
+    uint nbGames = item(QLatin1String( "nb games" ))->increment(_id);
     switch (score.type()) {
     case Lost:
-        item("nb lost games")->increment(_id);
+        item(QLatin1String( "nb lost games" ))->increment(_id);
         break;
     case Won: break;
     case Draw:
-        item("nb draw games")->increment(_id);
+        item(QLatin1String( "nb draw games" ))->increment(_id);
         break;
     };
 
     // update mean
     if ( score.type()==Won ) {
-        uint nbWonGames = nbGames - item("nb lost games")->read(_id).toUInt()
-                        - item("nb draw games")->read(_id).toUInt()
-                        - item("nb black marks")->read(_id).toUInt(); // legacy
+        uint nbWonGames = nbGames - item(QLatin1String( "nb lost games" ))->read(_id).toUInt()
+                        - item(QLatin1String( "nb draw games" ))->read(_id).toUInt()
+                        - item(QLatin1String( "nb black marks" ))->read(_id).toUInt(); // legacy
         double mean = (nbWonGames==1 ? 0.0
-                       : item("mean score")->read(_id).toDouble());
+                       : item(QLatin1String( "mean score" ))->read(_id).toDouble());
         mean += (double(score.score()) - mean) / nbWonGames;
-        item("mean score")->write(_id, mean);
+        item(QLatin1String( "mean score" ))->write(_id, mean);
     }
 
     // update best score
     Score best = score; // copy optional fields (there are not taken into account here)
-    best.setScore( item("best score")->read(_id).toUInt() );
+    best.setScore( item(QLatin1String( "best score" ))->read(_id).toUInt() );
     if ( best<score ) {
-        item("best score")->write(_id, score.score());
-        item("date")->write(_id, score.data("date").toDateTime());
+        item(QLatin1String( "best score" ))->write(_id, score.score());
+        item(QLatin1String( "date" ))->write(_id, score.data(QLatin1String( "date" )).toDateTime());
     }
 
     // update trends
-    int current = item("current trend")->read(_id).toInt();
+    int current = item(QLatin1String( "current trend" ))->read(_id).toInt();
     switch (score.type()) {
     case Won: {
         if ( current<0 ) current = 0;
         current++;
-        uint won = item("max won trend")->read(_id).toUInt();
-        if ( (uint)current>won ) item("max won trend")->write(_id, current);
+        uint won = item(QLatin1String( "max won trend" ))->read(_id).toUInt();
+        if ( (uint)current>won ) item(QLatin1String( "max won trend" ))->write(_id, current);
         break;
     }
     case Lost: {
         if ( current>0 ) current = 0;
         current--;
-        uint lost = item("max lost trend")->read(_id).toUInt();
+        uint lost = item(QLatin1String( "max lost trend" ))->read(_id).toUInt();
         uint clost = -current;
-        if ( clost>lost ) item("max lost trend")->write(_id, clost);
+        if ( clost>lost ) item(QLatin1String( "max lost trend" ))->write(_id, clost);
         break;
     }
     case Draw:
         current = 0;
         break;
     }
-    item("current trend")->write(_id, current);
+    item(QLatin1String( "current trend" ))->write(_id, current);
 
     // update histogram
     if ( score.type()==Won ) {
@@ -468,14 +468,14 @@ bool PlayerInfos::isNameUsed(const QString &newName) const
 {
     if ( newName==name() ) return false; // own name...
     for (uint i=0; i<nbEntries(); i++)
-        if ( newName.toLower()==item("name")->read(i).toString().toLower() ) return true;
+        if ( newName.toLower()==item(QLatin1String( "name" ))->read(i).toString().toLower() ) return true;
     if ( newName==i18n(ItemContainer::ANONYMOUS_LABEL) ) return true;
     return false;
 }
 
 void PlayerInfos::modifyName(const QString &newName) const
 {
-    item("name")->write(_id, newName);
+    item(QLatin1String( "name" ))->write(_id, newName);
 }
 
 void PlayerInfos::modifySettings(const QString &newName,
@@ -483,7 +483,7 @@ void PlayerInfos::modifySettings(const QString &newName,
                                  const QString &newKey) const
 {
     modifyName(newName);
-    item("comment")->write(_id, comment);
+    item(QLatin1String( "comment" ))->write(_id, comment);
     ConfigGroup cg;
     cg.writeEntry(HS_WW_ENABLED, WWEnabled);
     if ( !newKey.isEmpty() ) cg.writeEntry(HS_KEY, newKey);
@@ -502,14 +502,14 @@ void PlayerInfos::removeKey()
 
     // save old key/nickname
     uint i = 0;
-    QString str = "%1 old #%2";
+    QString str = QLatin1String( "%1 old #%2" );
     QString sk;
     do {
         i++;
-        sk = str.arg(HS_KEY).arg(i);
+        sk = str.arg(QLatin1String( HS_KEY )).arg(i);
     } while ( !cg.readEntry(sk, QString()).isEmpty() );
     cg.writeEntry(sk, key());
-    cg.writeEntry(str.arg(HS_REGISTERED_NAME).arg(i),
+    cg.writeEntry(str.arg(QLatin1String( HS_REGISTERED_NAME )).arg(i),
                             registeredName());
 
     // clear current key/nickname
@@ -521,7 +521,7 @@ void PlayerInfos::removeKey()
 //-----------------------------------------------------------------------------
 ManagerPrivate::ManagerPrivate(uint nbGameTypes, Manager &m)
     : manager(m), showStatistics(false), showDrawGames(false),
-      trackLostGames(false), trackDrawGames(false), 
+      trackLostGames(false), trackDrawGames(false),
       showMode(Manager::ShowForHigherScore),
       _first(true), _nbGameTypes(nbGameTypes), _gameType(0)
 {}
@@ -543,7 +543,7 @@ ManagerPrivate::~ManagerPrivate()
 KUrl ManagerPrivate::queryUrl(QueryType type, const QString &newName) const
 {
     KUrl url = serverURL;
-    QString nameItem = "nickname";
+    QString nameItem = QLatin1String( "nickname" );
     QString name = _playerInfos->registeredName();
     bool withVersion = true;
     bool key = false;
@@ -551,38 +551,38 @@ KUrl ManagerPrivate::queryUrl(QueryType type, const QString &newName) const
 
 	switch (type) {
         case Submit:
-            url.addPath("submit.php");
+            url.addPath(QLatin1String( "submit.php" ));
             level = true;
             key = true;
             break;
         case Register:
-            url.addPath("register.php");
+            url.addPath(QLatin1String( "register.php" ));
             name = newName;
             break;
         case Change:
-            url.addPath("change.php");
+            url.addPath(QLatin1String( "change.php" ));
             key = true;
             if ( newName!=name )
-                Manager::addToQueryURL(url, "new_nickname", newName);
+                Manager::addToQueryURL(url, QLatin1String( "new_nickname" ), newName);
             break;
         case Players:
-            url.addPath("players.php");
-            nameItem = "highlight";
+            url.addPath(QLatin1String( "players.php" ));
+            nameItem = QLatin1String( "highlight" );
             withVersion = false;
             break;
         case Scores:
-            url.addPath("highscores.php");
+            url.addPath(QLatin1String( "highscores.php" ));
             withVersion = false;
             if ( _nbGameTypes>1 ) level = true;
             break;
 	}
 
-    if (withVersion) Manager::addToQueryURL(url, "version", version);
+    if (withVersion) Manager::addToQueryURL(url, QLatin1String( "version" ), version);
     if ( !name.isEmpty() ) Manager::addToQueryURL(url, nameItem, name);
-    if (key) Manager::addToQueryURL(url, "key", _playerInfos->key());
+    if (key) Manager::addToQueryURL(url, QLatin1String( "key" ), _playerInfos->key());
     if (level) {
         QString label = manager.gameTypeLabel(_gameType, Manager::WW);
-        if ( !label.isEmpty() ) Manager::addToQueryURL(url, "level", label);
+        if ( !label.isEmpty() ) Manager::addToQueryURL(url, QLatin1String( "level" ), label);
     }
 
     return url;
@@ -640,12 +640,12 @@ bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
     if ( doc.setContent(content) ) {
         QDomElement root = doc.documentElement();
         QDomElement element = root.firstChild().toElement();
-        if ( element.tagName()=="success" ) {
+        if ( element.tagName()==QLatin1String( "success" ) ) {
             if (map) *map = element.attributes();
             return true;
         }
-        if ( element.tagName()=="error" ) {
-            QDomAttr attr = element.attributes().namedItem("label").toAttr();
+        if ( element.tagName()==QLatin1String( "error" ) ) {
+            QDomAttr attr = element.attributes().namedItem(QLatin1String( "label" )).toAttr();
             if ( !attr.isNull() ) {
                 QString msg = i18n(attr.value().toLatin1());
                 QString caption = i18n("Message from world-wide highscores "
@@ -703,11 +703,11 @@ bool ManagerPrivate::modifySettings(const QString &newName,
         newPlayer = _playerInfos->key().isEmpty()
                     || _playerInfos->registeredName().isEmpty();
         KUrl url = queryUrl((newPlayer ? Register : Change), newName);
-        Manager::addToQueryURL(url, "comment", comment);
+        Manager::addToQueryURL(url, QLatin1String( "comment" ), comment);
 
         QDomNamedNodeMap map;
         bool ok = doQuery(url, widget, &map);
-        if ( !ok || (newPlayer && !getFromQuery(map, "key", newKey, widget)) )
+        if ( !ok || (newPlayer && !getFromQuery(map, QLatin1String( "key" ), newKey, widget)) )
             return false;
     }
 
@@ -738,7 +738,7 @@ void ManagerPrivate::convertToGlobal()
     _hsConfig = tmp;
     _hsConfig->lockForWriting();
     for (int i=0; i<scores.count(); i++)
-        if ( scores[i].data("id").toUInt()==_playerInfos->oldLocalId()+1 )
+        if ( scores[i].data(QLatin1String( "id" )).toUInt()==_playerInfos->oldLocalId()+1 )
             submitLocal(scores[i]);
     _hsConfig->writeAndUnlock();
 }
@@ -768,11 +768,11 @@ void ManagerPrivate::setGameType(uint type)
 
     Q_ASSERT( type<_nbGameTypes );
     _gameType = qMin(type, _nbGameTypes-1);
-    QString str = "scores";
+    QString str = QLatin1String( "scores" );
     QString lab = manager.gameTypeLabel(_gameType, Manager::Standard);
     if ( !lab.isEmpty() ) {
         _playerInfos->setSubGroup(lab);
-        str += '_' + lab;
+        str += QLatin1Char( '_' ) + lab;
     }
     _scoreInfos->setGroup(str);
 }
@@ -788,11 +788,11 @@ int ManagerPrivate::submitScore(const Score &ascore,
     checkFirst();
 
     Score score = ascore;
-    score.setData("id", _playerInfos->id() + 1);
-    score.setData("date", QDateTime::currentDateTime());
+    score.setData(QLatin1String( "id" ), _playerInfos->id() + 1);
+    score.setData(QLatin1String( "date" ), QDateTime::currentDateTime());
 
     // ask new name if anonymous and winner
-    const char *dontAskAgainName = "highscore_ask_name_dialog";
+    const QLatin1String dontAskAgainName = QLatin1String( "highscore_ask_name_dialog" );
     QString newName;
     KMessageBox::ButtonCode dummy;
     if ( score.type()==Won && askIfAnonymous && _playerInfos->isAnonymous()
@@ -843,9 +843,9 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     manager.additionalQueryItems(url, score);
     int s = (score.type()==Won ? score.score() : (int)score.type());
     QString str =  QString::number(s);
-    Manager::addToQueryURL(url, "score", str);
+    Manager::addToQueryURL(url, QLatin1String( "score" ), str);
     KMD5 context(QString(_playerInfos->registeredName() + str).toLatin1());
-    Manager::addToQueryURL(url, "check", context.hexDigest());
+    Manager::addToQueryURL(url, QLatin1String( "check" ), QLatin1String( context.hexDigest() ));
 
     return doQuery(url, widget);
 }

@@ -115,15 +115,15 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 
     //Set up the default table headers
     d->header[Name] = i18n("Name");
-    d->key[Name] = "Name";
+    d->key[Name] = QLatin1String( "Name" );
     d->header[Date] = i18n("Date");
-    d->key[Date] = "Date";
+    d->key[Date] = QLatin1String( "Date" );
     d->header[Level] = i18n("Level");
-    d->key[Level] = "Level";
+    d->key[Level] = QLatin1String( "Level" );
     d->header[Score] = i18n("Score");
-    d->key[Score] = "Score";
+    d->key[Score] = QLatin1String( "Score" );
     d->header[Time] = i18n("Time");
-    d->key[Time] = "Time";
+    d->key[Time] = QLatin1String( "Time" );
 
     //d->page = new QWidget(this);
 
@@ -436,7 +436,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 
     QByteArray tempCurrentGroup = configGroup; //temp to store the user-set group name
 
-    if (!groupKeyList.contains(configGroup)) //If the current group doesn't have any entries, add it to the list to process
+    if (!groupKeyList.contains( configGroup) ) //If the current group doesn't have any entries, add it to the list to process
     {
         kDebug(11002) << "The current high score group " << configGroup << " isn't in the list, adding it";
         groupKeyList << configGroup;
@@ -445,8 +445,8 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 
     foreach(const QByteArray &groupKey, groupKeyList)
     {
-        highscoreObject->setHighscoreGroup(groupKey);
-        player = highscoreObject->readEntry(0, "LastPlayer");  //FIXME
+        highscoreObject->setHighscoreGroup(QLatin1String( groupKey ));
+        player = highscoreObject->readEntry(0, QLatin1String( "LastPlayer" ));  //FIXME
 
         for (int i = 1; i <= 10; ++i)
         {
@@ -455,16 +455,16 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
             {
                 if (fields & field)
                 {
-                    score[field] = highscoreObject->readEntry(i, key[field], QString("-"));
+                    score[field] = highscoreObject->readEntry(i, key[field], QLatin1String("-"));
                 }
             }
             scores[groupKey].append(score);
         }
     }
-    highscoreObject->setHighscoreGroup(tempCurrentGroup); //reset to the user-set group name
+    highscoreObject->setHighscoreGroup(QLatin1String( tempCurrentGroup )); //reset to the user-set group name
     foreach(const QByteArray &groupKey, scores.keys())
     {
-        if( (scores[groupKey][0].value(Score)=="-") && (scores.size() > 1) && (latest.first != groupKey) )
+        if( (scores[groupKey][0].value(Score)==QLatin1String( "-" )) && (scores.size() > 1) && (latest.first != groupKey) )
         {
             kDebug(11002) << "Removing group " << groupKey << " since it's unused.";
             scores.remove(groupKey);
@@ -475,9 +475,9 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 
 void KScoreDialog::KScoreDialogPrivate::saveScores()
 {
-    highscoreObject->setHighscoreGroup(configGroup);
+    highscoreObject->setHighscoreGroup(QLatin1String( configGroup ));
 
-    highscoreObject->writeEntry(0,"LastPlayer", player);
+    highscoreObject->writeEntry(0,QLatin1String( "LastPlayer" ), player);
 
     for (int i = 1; i <= 10; ++i)
     {
