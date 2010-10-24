@@ -1,6 +1,7 @@
 [Desktop Entry]
 Version=0.1.0
 Name=Individual Digit Sample
+Name[ast]=Amuesa de díxitos inviduales
 Name[ca]=Exemple de dígits individuals
 Name[ca@valencia]=Exemple de dígits individuals
 Name[da]=Eksempel med individuelle tal
@@ -39,6 +40,7 @@ Name[zh_CN]=个人数字示例
 Name[zh_TW]=個人數位範例
 Type=IndividualDigit
 Comment=This file holds metadata, configuration settings, and the mappings between digit's and id's for the theme individual-digit-sample.svg
+Comment[ast]=Esti ficheru caltién los metadatos, opciones de configuración y los mapes ente los díxitos y el so identificador pal tema individual-digit-sample.svg
 Comment[ca]=Aquest fitxer conté metadades, arranjament de configuració, i el mapat entre els dígits i l'id pel tema individual-digit-sample.svg
 Comment[ca@valencia]=Este fitxer conté metadades, arranjament de configuració, i el mapat entre els dígits i l'id pel tema individual-digit-sample.svg
 Comment[da]=Denne fil indeholder metadata, konfigurationsindstillinger og kortlægning som styrer hvilke segmenter der er slået til eller fra for temaet individual-digit-sample.svg
