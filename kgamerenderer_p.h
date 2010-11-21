@@ -99,7 +99,7 @@ namespace KGRInternal
 			bool m_synchronous;
 			KGameRendererPrivate* m_parent;
 	};
-};
+}
 
 Q_DECLARE_METATYPE(KGRInternal::Job*)
 
