@@ -66,7 +66,7 @@ class KScoreDialog::KScoreDialogPrivate
         QString comment;
         int fields;
         int hiddenFields;
-        QPair<QByteArray, int> newName; //index of the newname to add (groupKey, position)
+        QPair<QByteArray, int> newName; //index of the new name to add (groupKey, position)
         QPair<QByteArray, int> latest; //index of the latest addition (groupKey, position)
         int nrCols;
         bool loaded;
