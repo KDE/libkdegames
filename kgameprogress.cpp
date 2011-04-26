@@ -120,9 +120,7 @@ void KGameProgress::setBarPixmap(const QPixmap &pixmap)
 {
 	if (pixmap.isNull())
 		return;
-	if (d->bar_pixmap)
-		delete d->bar_pixmap;
-
+	delete d->bar_pixmap;
 	d->bar_pixmap = new QPixmap(pixmap);
 }
 
@@ -130,10 +128,8 @@ void KGameProgress::setBarColor(const QColor &color)
 {
 	d->bar_color = color;
 	d->use_supplied_bar_color = true;
-	if (d->bar_pixmap) {
-		delete d->bar_pixmap;
-		d->bar_pixmap = 0;
-	}
+	delete d->bar_pixmap;
+	d->bar_pixmap = 0;
 }
 
 void KGameProgress::setBarStyle(BarStyle style)

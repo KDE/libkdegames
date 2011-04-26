@@ -497,10 +497,8 @@ void KGameDialogMsgServerConfig::setAdmin(bool a)
  }
  KGameDialogConfig::setAdmin(a);
  if (admin()) {
-	if (d->noAdmin) {
-		delete d->noAdmin;
-		d->noAdmin = 0;
-	}
+	delete d->noAdmin;
+	d->noAdmin = 0;
 	d->changeMaxClients = new QPushButton(i18n("Change Maximal Number of Clients"), this);
 	connect(d->changeMaxClients, SIGNAL(pressed()), this, SLOT(slotChangeMaxClients()));
 	d->changeAdmin = new QPushButton(i18n("Change Admin"), this);
@@ -511,18 +509,12 @@ void KGameDialogMsgServerConfig::setAdmin(bool a)
 	d->senderLayout->addWidget(d->changeAdmin);
 	d->senderLayout->addWidget(d->removeClient);
  } else {
-	if (d->changeMaxClients) {
-		delete d->changeMaxClients;
-		d->changeMaxClients = 0;
-	}
-	if (d->changeAdmin) {
-		delete d->changeAdmin;
-		d->changeAdmin = 0;
-	}
-	if (d->removeClient) {
-		delete d->removeClient;
-		d->removeClient = 0;
-	}
+	delete d->changeMaxClients;
+	d->changeMaxClients = 0;
+	delete d->changeAdmin;
+	d->changeAdmin = 0;
+	delete d->removeClient;
+	d->removeClient = 0;
 	d->noAdmin = new QLabel(i18n("Only the admin can configure the message server!"), this);
 	d->senderLayout->addWidget(d->noAdmin);
  }
