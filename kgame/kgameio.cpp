@@ -354,12 +354,12 @@ void KGameProcessIO::initIO(KPlayer *p)
   // Send 'hello' to process
   QByteArray buffer;
   QDataStream stream(&buffer, QIODevice::WriteOnly);
-  qint16 id = p->userId();
-  stream << id;
 
   bool sendit=true;
   if (p)
   {
+    qint16 id = p->userId();
+    stream << id;
     emit signalIOAdded(this,stream,p,&sendit);
     if (sendit )
     {
