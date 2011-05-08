@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Jolly Royal
+Name[bs]=Jolly Royal
 Name[ca]=Jolly Royal
 Name[ca@valencia]=Jolly Royal
 Name[da]=Jolly Royal
@@ -38,6 +39,7 @@ Name[zh_CN]=皇室
 Name[zh_TW]=Jolly Royal
 Comment=A clean and easy style with a distinctively royal touch.
 Comment[ast]=Un estilu llimpiu y cenciellu con un toque real distintu
+Comment[bs]=Čist i jednostavan stil sa izrazito kraljevskim kontaktom.
 Comment[ca]=Un estil net i senzill amb un toc real distintiu.
 Comment[ca@valencia]=Un estil net i senzill amb un toc real distintiu.
 Comment[da]=En enkelt og let stil med et karakteristisk royalt strejf.

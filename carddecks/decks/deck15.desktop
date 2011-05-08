@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Ancient Egyptians
+Name[bs]=Drevni Egipćani
 Name[ca]=Egipcis antics
 Name[ca@valencia]=Egipcis antics
 Name[cs]=Starověcí Egypťané
@@ -39,6 +40,7 @@ Name[x-test]=xxAncient Egyptiansxx
 Name[zh_CN]=古埃及
 Name[zh_TW]=古埃及
 Comment=Egyptian style card back.
+Comment[bs]=Egipatski stil pozadinske kartice.
 Comment[ca]=Dorsal de baralla d'estil egipci.
 Comment[ca@valencia]=Dorsal de baralla d'estil egipci.
 Comment[da]=Kortspil i egyptisk stil.

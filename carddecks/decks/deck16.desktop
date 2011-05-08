@@ -1,6 +1,7 @@
 [KDE Cards]
 Name=Future
 Name[ast]=Futuru
+Name[bs]=Budućnost
 Name[ca]=Futur
 Name[ca@valencia]=Futur
 Name[cs]=Budoucnost
@@ -43,6 +44,7 @@ Name[x-test]=xxFuturexx
 Name[zh_CN]=未来
 Name[zh_TW]=未來
 Comment=Futuristic, minimal card design.
+Comment[bs]=Futuristički, minimalni dizajn kartice.
 Comment[ca]=Disseny de carta futurista i minimalista.
 Comment[ca@valencia]=Disseny de carta futurista i minimalista.
 Comment[da]=Futuristisk, minimalistisk kortdesign.

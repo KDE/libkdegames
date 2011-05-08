@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Nicu Ornamental
+Name[bs]=Ukrasni Nicu
 Name[ca]=Nicu Ornamental
 Name[ca@valencia]=Nicu Ornamental
 Name[cs]=Nicu Ornamental
@@ -38,6 +39,7 @@ Name[zh_CN]=Nicu 植物装饰
 Name[zh_TW]=Nicu Ornamental
 Comment=SVG Ornamental
 Comment[ast]=Ornamental SVG
+Comment[bs]=Ukrasni SVG
 Comment[ca]=SVG Ornamental
 Comment[ca@valencia]=SVG Ornamental
 Comment[cs]=SVG ornamentály

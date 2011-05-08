@@ -1,5 +1,6 @@
 [KDE Cards]
 Name=Paris
+Name[bs]=Pariz
 Name[ca]=Paris
 Name[ca@valencia]=Pares
 Name[cs]=Paris
@@ -42,6 +43,7 @@ Name[zh_CN]=巴黎
 Name[zh_TW]=巴黎
 Comment=Classic
 Comment[ast]=Clásicu
+Comment[bs]=Klasika
 Comment[ca]=Clàssic
 Comment[ca@valencia]=Clàssic
 Comment[cs]=Klasický

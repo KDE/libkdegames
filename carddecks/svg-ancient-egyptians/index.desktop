@@ -1,5 +1,6 @@
 [KDE Backdeck]
 Name=Ancient Egyptians
+Name[bs]=Drevni Egipćani
 Name[ca]=Egipcis antics
 Name[ca@valencia]=Egipcis antics
 Name[cs]=Starověcí Egypťané
@@ -39,6 +40,7 @@ Name[x-test]=xxAncient Egyptiansxx
 Name[zh_CN]=古埃及
 Name[zh_TW]=古埃及
 Comment=An ancient Egyptian card deck.
+Comment[bs]=Drevni Egipatski špil karata.
 Comment[ca]=Dorsal de baralla amb l'estil de l'antic egipte.
 Comment[ca@valencia]=Dorsal de baralla amb l'estil de l'antic egipte.
 Comment[da]=Et oldtidsegyptisk kortspil

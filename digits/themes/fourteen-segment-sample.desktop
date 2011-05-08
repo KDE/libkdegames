@@ -2,6 +2,7 @@
 Version=0.1.0
 Name=Fourteen Segment Sample
 Name[ast]=Amuesa de catorce segmentos
+Name[bs]=Četrnaesti uzorak segmenta
 Name[ca]=Exemple de catorze segments
 Name[ca@valencia]=Exemple de catorze segments
 Name[da]=14-segmenters eksempel
@@ -43,6 +44,7 @@ Name[zh_TW]=十四段範例
 Type=FourteenSegmentDigit
 Comment=This file holds metadata, configuration settings, and the mappings controlling which segments are on or off for the theme fourteen-segment-sample.svg
 Comment[ast]=Esti ficheru caltién los metadatos, opciones de configuración, y control de mapeáu incluyendo qué segmentos tán activados pal tema fourteen-segment-sample.svg
+Comment[bs]=Ova datoteka sadrži metapodatke, konfiguracije, i preslikavanja kontrole koji segmenti su ON ili OFF za temu četrnaesti-uzorak-segmenta.svg
 Comment[ca]=Aquest fitxer conté metadades, arranjament de configuració, i el mapat per controlar els segments pel tema fourteen-segment-sample.svg
 Comment[ca@valencia]=Este fitxer conté metadades, arranjament de configuració, i el mapat per controlar els segments pel tema fourteen-segment-sample.svg
 Comment[da]=Denne fil indeholder metadata, konfigurationsindstillinger og kortlægning som styrer hvilke segmenter der er slået til eller fra for temaet fourteen-segment-sample.svg
