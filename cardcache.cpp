@@ -382,8 +382,7 @@ KCardCache::~KCardCache()
     {
         d->loadThread->kill();
     }
-    if( d->loadThread )
-        delete d->loadThread;
+    delete d->loadThread;
     delete d->frontcache;
     delete d->backcache;
     delete d->frontcacheMutex;
