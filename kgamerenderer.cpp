@@ -475,20 +475,13 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	job->elementKey = elementKey;
 	job->spec = spec;
 	const bool synchronous = !client;
-	KGRInternal::Worker* worker = new KGRInternal::Worker(job, synchronous, this);
 	if (synchronous || !(m_strategies & KGameRenderer::UseRenderingThreads))
 	{
-		worker->run();
+		KGRInternal::Worker worker(job, true, this);
+		worker.run();
 		//if everything worked fine, result is in high-speed cache now
 		const QPixmap result = m_pixmapCache.value(cacheKey);
-		if (synchronousResult)
-		{
-			*synchronousResult = result;
-		}
-		if (client)
-		{
-			client->receivePixmap(result);
-		}
+		requestPixmap__propagateResult(result, client, synchronousResult);
 	}
 	else
 	{
