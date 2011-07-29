@@ -24,6 +24,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDateTime>
 #include <QtCore/QFileInfo>
+#include <QtCore/QScopedPointer>
 #include <QtGui/QPainter>
 #include <KDebug>
 
@@ -178,7 +179,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	//open cache (and SVG file, if necessary)
 	if (m_strategies & KGameRenderer::UseDiskCache)
 	{
-		KImageCache* oldCache = m_imageCache;
+		QScopedPointer<KImageCache> oldCache(m_imageCache);
 		const QString imageCacheName = cacheName(m_theme.fileName());
 		m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
 		m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
@@ -196,10 +197,10 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		if (cacheTimestamp < svgTimestamp)
 		{
 			kDebug(11000) << "Theme newer than cache, checking SVG";
-			QSvgRenderer* renderer = new QSvgRenderer(m_theme.graphics());
+			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(m_theme.graphics()));
 			if (renderer->isValid())
 			{
-				m_rendererPool.setPath(m_theme.graphics(), renderer);
+				m_rendererPool.setPath(m_theme.graphics(), renderer.take());
 				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
 			}
 			else
@@ -208,7 +209,7 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 				//breaking the previous theme.
 				delete m_imageCache;
 				KSharedDataCache::deleteCache(imageCacheName);
-				m_imageCache = oldCache;
+				m_imageCache = oldCache.take();
 				kDebug(11000) << "Theme change failed: SVG file broken";
 				return false;
 			}
@@ -220,10 +221,10 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	else // !(m_strategies & KGameRenderer::UseDiskCache) -> no cache is used
 	{
 		//load SVG file
-		QSvgRenderer* renderer = new QSvgRenderer(m_theme.graphics());
+		QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(m_theme.graphics()));
 		if (renderer->isValid())
 		{
-			m_rendererPool.setPath(m_theme.graphics(), renderer);
+			m_rendererPool.setPath(m_theme.graphics(), renderer.take());
 		}
 		else
 		{
