@@ -120,8 +120,8 @@ void KGameNetwork::setMaster()
  }
  if (!d->mMessageClient) {
    d->mMessageClient = new KMessageClient (this);
-   connect (d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, quint32)),
-            this, SLOT(receiveNetworkTransmission(const QByteArray&, quint32)));
+   connect (d->mMessageClient, SIGNAL(broadcastReceived(QByteArray,quint32)),
+            this, SLOT(receiveNetworkTransmission(QByteArray,quint32)));
    connect (d->mMessageClient, SIGNAL(connectionBroken()),
             this, SIGNAL(signalConnectionBroken()));
    connect (d->mMessageClient, SIGNAL(aboutToDisconnect(quint32)),
@@ -133,12 +133,12 @@ void KGameNetwork::setMaster()
             this, SLOT(slotAdminStatusChanged(bool)));
    connect (d->mMessageClient, SIGNAL(eventClientConnected(quint32)),
             this, SIGNAL(signalClientConnected(quint32)));
-   connect (d->mMessageClient, SIGNAL(eventClientDisconnected(quint32, bool)),
-            this, SIGNAL(signalClientDisconnected(quint32, bool)));
+   connect (d->mMessageClient, SIGNAL(eventClientDisconnected(quint32,bool)),
+            this, SIGNAL(signalClientDisconnected(quint32,bool)));
 
    // broacast and direct messages are treated equally on receive.
-   connect (d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, quint32, const QList<quint32>&)),
-            d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, quint32)));
+   connect (d->mMessageClient, SIGNAL(forwardReceived(QByteArray,quint32,QList<quint32>)),
+            d->mMessageClient, SIGNAL(broadcastReceived(QByteArray,quint32)));
 
  } else {
    // should be no problem but still has to be tested

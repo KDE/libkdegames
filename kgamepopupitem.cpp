@@ -176,10 +176,10 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     // So disabling it
     d->m_textChildItem->setFlag( QGraphicsItem::ItemIsFocusable, false );
 
-    connect( d->m_textChildItem, SIGNAL(linkActivated(const QString&)),
-                                 SIGNAL(linkActivated(const QString&)));
-    connect( d->m_textChildItem, SIGNAL(linkHovered(const QString&)),
-                                 SLOT(onLinkHovered(const QString&)));
+    connect( d->m_textChildItem, SIGNAL(linkActivated(QString)),
+                                 SIGNAL(linkActivated(QString)));
+    connect( d->m_textChildItem, SIGNAL(linkHovered(QString)),
+                                 SLOT(onLinkHovered(QString)));
     connect( d->m_textChildItem, SIGNAL(mouseClicked()),
                                  SLOT(onTextItemClicked()) );
 

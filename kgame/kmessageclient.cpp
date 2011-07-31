@@ -87,10 +87,10 @@ void KMessageClient::setServer (KMessageIO *connection)
   d->connection = connection;
   if (connection )
   {
-    connect (connection, SIGNAL (received(const QByteArray &)),
-             this, SLOT (processIncomingMessage(const QByteArray &)));
+    connect (connection, SIGNAL (received(QByteArray)),
+             this, SLOT (processIncomingMessage(QByteArray)));
     connect (connection, SIGNAL (connectionBroken()),
-             this, SLOT (removeBrokenConnection ()));
+             this, SLOT (removeBrokenConnection()));
   }
 }
 

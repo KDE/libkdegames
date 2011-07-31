@@ -78,8 +78,8 @@ void KPlayer::init()
    kDebug(11001) << "sizeof(m_Group)="<<sizeof(d->mGroup);
 
    d->mProperties.registerHandler(KGameMessage::IdPlayerProperty,
-                                  this,SLOT(sendProperty(int, QDataStream&, bool*)),
-                                       SLOT(emitSignal(KGamePropertyBase *)));
+                                  this,SLOT(sendProperty(int,QDataStream&,bool*)),
+                                       SLOT(emitSignal(KGamePropertyBase*)));
    d->mVirtual=false;
    d->mActive=true;
    d->mGame=0;

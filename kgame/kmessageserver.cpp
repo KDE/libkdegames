@@ -148,8 +148,8 @@ bool KMessageServer::initNetwork (quint16 port)
 
   kDebug (11001) << ": Now listening to port "
                   << d->mServerSocket->serverPort();
-  connect (d->mServerSocket, SIGNAL (newClientConnected (KMessageIO*)),
-           this, SLOT (addClient (KMessageIO*)));
+  connect (d->mServerSocket, SIGNAL (newClientConnected(KMessageIO*)),
+           this, SLOT (addClient(KMessageIO*)));
   return true;
 }
 
@@ -195,8 +195,8 @@ void KMessageServer::addClient (KMessageIO* client)
   // connect its signals
   connect (client, SIGNAL (connectionBroken()),
            this, SLOT (removeBrokenClient()));
-  connect (client, SIGNAL (received (const QByteArray &)),
-           this, SLOT (getReceivedMessage (const QByteArray &)));
+  connect (client, SIGNAL (received(QByteArray)),
+           this, SLOT (getReceivedMessage(QByteArray)));
 
   // Tell everyone about the new guest
   // Note: The new client doesn't get this message!

@@ -94,11 +94,11 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  d->mBox->setItemDelegate(d->mDelegate);
  l->addWidget(d->mBox);
 
- connect(d->mModel, SIGNAL(rowsInserted (const QModelIndex&,int,int)),
+ connect(d->mModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
           d->mBox, SLOT(scrollToBottom()));
 
- connect(d->mBox, SIGNAL( customContextMenuRequested(const QPoint &)),
-         this, SLOT(customMenuHandler(const QPoint &)));
+ connect(d->mBox, SIGNAL(customContextMenuRequested(QPoint)),
+         this, SLOT(customMenuHandler(QPoint)));
 
  d->mBox->setContextMenuPolicy ( Qt::CustomContextMenu );
  d->mBox->setFocusPolicy(Qt::NoFocus);
@@ -113,7 +113,7 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  d->mEdit->setTrapReturnKey(true);
  d->mEdit->completionObject(); // add the completion object
  d->mEdit->setCompletionMode(KGlobalSettings::CompletionNone);
- connect(d->mEdit, SIGNAL(returnPressed(const QString&)), this, SLOT(slotReturnPressed(const QString&)));
+ connect(d->mEdit, SIGNAL(returnPressed(QString)), this, SLOT(slotReturnPressed(QString)));
  h->addWidget(d->mEdit);
 
  if (!noComboBox) {

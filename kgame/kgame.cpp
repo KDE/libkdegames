@@ -88,8 +88,8 @@ KGame::KGame(int cookie,QObject* parent)
  d->mProperties = new KGamePropertyHandler(this);
 
  d->mProperties->registerHandler(KGameMessage::IdGameProperty,
-                                this,SLOT(sendProperty(int, QDataStream&, bool* )),
-                                     SLOT(emitSignal(KGamePropertyBase *)));
+                                this,SLOT(sendProperty(int,QDataStream&,bool*)),
+                                     SLOT(emitSignal(KGamePropertyBase*)));
  d->mMaxPlayer.registerData(KGamePropertyBase::IdMaxPlayer, this, i18n("MaxPlayers"));
  d->mMaxPlayer.setLocal(-1);  // Infinite
  d->mMinPlayer.registerData(KGamePropertyBase::IdMinPlayer, this, i18n("MinPlayers"));
@@ -112,8 +112,8 @@ KGame::KGame(int cookie,QObject* parent)
  // BL: FIXME This signal does no longer exist. When we are merging
  // MH: super....and how do I find out about the lost conenction now?
  // KGame and KGameNetwork, this could be improved!
-//  connect(this,SIGNAL(signalConnectionLost(KGameClient *)),
-//          this,SLOT(slotConnectionLost(KGameClient *)));
+//  connect(this,SIGNAL(signalConnectionLost(KGameClient*)),
+//          this,SLOT(slotConnectionLost(KGameClient*)));
 }
 
 KGame::~KGame()

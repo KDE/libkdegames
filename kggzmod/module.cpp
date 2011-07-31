@@ -63,7 +63,7 @@ Module::Module(const QString &name)
 
 	d->m_myseat = -1;
 
-	connect(d, SIGNAL(signalEvent(const KGGZMod::Event&)), this, SIGNAL(signalEvent(const KGGZMod::Event&)));
+	connect(d, SIGNAL(signalEvent(KGGZMod::Event)), this, SIGNAL(signalEvent(KGGZMod::Event)));
 	connect(d, SIGNAL(signalError()), this, SIGNAL(signalError()));
 	connect(d, SIGNAL(signalNetwork(int)), this, SIGNAL(signalNetwork(int)));
 

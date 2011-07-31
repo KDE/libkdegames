@@ -47,9 +47,9 @@ KGGZRankingsDialog::KGGZRankingsDialog(QWidget *parent)
 	d->m_mod = KGGZMod::Module::instance();
 
 	connect(d->m_mod,
-		SIGNAL(signalEvent(const KGGZMod::Event&)),
+		SIGNAL(signalEvent(KGGZMod::Event)),
 		this,
-		SLOT(slotRankings(const KGGZMod::Event&)));
+		SLOT(slotRankings(KGGZMod::Event)));
 }
 
 KGGZRankingsDialogPrivate::KGGZRankingsDialogPrivate(KGGZRankingsDialog* qq)

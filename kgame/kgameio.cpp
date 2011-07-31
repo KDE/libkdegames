@@ -315,12 +315,12 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   //kDebug(11001) << "================= KMEssage SetSErver ====================";
   //d->mMessageClient->setServer(d->mMessageServer);
   kDebug(11001) << "================= KMEssage: Connect ====================";
-  //connect(d->mMessageClient, SIGNAL(broadcastReceived(const QByteArray&, quint32)),
-  //        this, SLOT(clientMessage(const QByteArray&, quint32)));
-  //connect(d->mMessageClient, SIGNAL(forwardReceived(const QByteArray&, quint32, const QValueList <quint32> &)),
-  //        this, SLOT(clientMessage(const QByteArray&, quint32, const QValueList <quint32> &)));
-  connect(d->mProcessIO, SIGNAL(received(const QByteArray&)),
-          this, SLOT(receivedMessage(const QByteArray&)));
+  //connect(d->mMessageClient, SIGNAL(broadcastReceived(QByteArray,quint32)),
+  //        this, SLOT(clientMessage(QByteArray,quint32)));
+  //connect(d->mMessageClient, SIGNAL(forwardReceived(QByteArray,quint32,QValueList<quint32>)),
+  //        this, SLOT(clientMessage(QByteArray,quint32,QValueList<quint32>)));
+  connect(d->mProcessIO, SIGNAL(received(QByteArray)),
+          this, SLOT(receivedMessage(QByteArray)));
   // Relay signal
   connect(d->mProcessIO, SIGNAL(signalReceivedStderr(QString)),
           this, SIGNAL(signalReceivedStderr(QString)));

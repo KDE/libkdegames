@@ -151,7 +151,7 @@ void KGGZSeatsDialog::setMod(KGGZMod::Module *mod)
 		KGGZMod::InfoRequest ir;
 		mod->sendRequest(ir);
 
-		connect(mod, SIGNAL(signalEvent(const KGGZMod::Event&)), this, SLOT(slotInfo(const KGGZMod::Event&)));
+		connect(mod, SIGNAL(signalEvent(KGGZMod::Event)), this, SLOT(slotInfo(KGGZMod::Event)));
 
 		d->displaySeats();
 	}
@@ -483,8 +483,8 @@ void KGGZSeatsDialogPrivate::infos()
 		if(!p->photo().isEmpty())
 		{
 			KIO::TransferJob *job = KIO::get(p->photo(), KIO::NoReload, KIO::HideProgressInfo);
-			QObject::connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-				q, SLOT(slotTaskData(KIO::Job*, const QByteArray&)));
+			QObject::connect(job, SIGNAL(data(KIO::Job*,QByteArray)),
+				q, SLOT(slotTaskData(KIO::Job*,QByteArray)));
 			QObject::connect(job, SIGNAL(result(KJob*)),
 				q, SLOT(slotTaskResult(KJob*)));
 			m_phototasks[job] = i;

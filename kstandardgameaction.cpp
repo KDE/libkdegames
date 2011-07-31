@@ -102,23 +102,23 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         case LoadRecent:
             pAction = new KRecentFilesAction(sLabel, parent);
             if(do_connect)
-                QObject::connect( pAction, SIGNAL(urlSelected(const KUrl&)), recvr, slot);
+                QObject::connect( pAction, SIGNAL(urlSelected(KUrl)), recvr, slot);
             break;
         case Pause:
         case Demo:
             pAction = new KToggleAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
-                QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
+                QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
             break;
         case ChooseGameType:
             pAction = new KSelectAction( KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
-                QObject::connect( pAction, SIGNAL( triggered(int) ), recvr, slot );
+                QObject::connect( pAction, SIGNAL(triggered(int)), recvr, slot );
             break;
         default:
             pAction = new KAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
-                QObject::connect(pAction, SIGNAL(triggered(bool) ), recvr, slot);
+                QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
             break;
         }
 

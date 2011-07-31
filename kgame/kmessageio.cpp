@@ -244,8 +244,8 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   kDebug(11001) << "@@@KMessgeProcess::Init:Processname:" << mProcessName;
   connect(mProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedStdout()));
   connect(mProcess, SIGNAL(readyReadStandardError()),  this, SLOT(slotReceivedStderr()));
-  connect(mProcess, SIGNAL(finished (int, QProcess::ExitStatus)),
-                        this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
+  connect(mProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
+                        this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
   mProcess->start();
   mSendBuffer=0;
   mReceiveCount=0;

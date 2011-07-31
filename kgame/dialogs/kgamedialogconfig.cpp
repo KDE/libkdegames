@@ -317,8 +317,8 @@ void KGameDialogGeneralConfig::setOwner(KPlayer* p)
 	// maybe call hide()
 	return;
  }
- connect(owner(), SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
-		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+ connect(owner(), SIGNAL(signalPropertyChanged(KGamePropertyBase*,KPlayer*)),
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*,KPlayer*)));
  setPlayerName(p->name());
  //TODO: connect signalPropertyChanged and check for playername changes!
 }
@@ -724,8 +724,8 @@ void KGameDialogConnectionConfig::slotPlayerJoinedGame(KPlayer* p)
  QListWidgetItem* t = new QListWidgetItem(p->name(), d->mPlayerBox);
  d->mItem2Player.insert(t, p);
 
- connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
-		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
+ connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*,KPlayer*)),
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*,KPlayer*)));
 
 }
 

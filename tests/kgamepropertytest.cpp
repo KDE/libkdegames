@@ -23,8 +23,8 @@ void tst_KGamePropertyTest::testHandler()
   mHandler = new KGamePropertyHandler(this);
 
    mHandler->registerHandler(1000 /* ID */,
-                             this,SLOT(sendProperty(int, QDataStream&, bool* )),
-                                  SLOT(emitSignal(KGamePropertyBase *)));
+                             this,SLOT(sendProperty(int,QDataStream&,bool*)),
+                                  SLOT(emitSignal(KGamePropertyBase*)));
 
    var1.registerData(10 /* ID */, mHandler, QString("VAR1"));
    var1.setLocal(-1); 

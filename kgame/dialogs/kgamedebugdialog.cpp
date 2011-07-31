@@ -468,7 +468,7 @@ void KGameDebugDialog::setKGame(const KGame* g)
 
 	slotUpdateGameData();
 
-	connect(d->mGame, SIGNAL(signalMessageUpdate(int, quint32, quint32)), this, SLOT(slotMessageUpdate(int, quint32, quint32)));
+	connect(d->mGame, SIGNAL(signalMessageUpdate(int,quint32,quint32)), this, SLOT(slotMessageUpdate(int,quint32,quint32)));
  }
 }
 

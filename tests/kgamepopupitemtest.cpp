@@ -15,7 +15,7 @@ KGpiMainWindow::KGpiMainWindow()
     QWidget *wid = new QWidget(this);
     m_mainWid.setupUi(wid);
     m_popupItem = new KGamePopupItem;
-    connect(m_popupItem, SIGNAL(linkActivated(const QString&)), SLOT(onLinkClicked(const QString&)) );
+    connect(m_popupItem, SIGNAL(linkActivated(QString)), SLOT(onLinkClicked(QString)) );
     m_textItem = new QGraphicsSimpleTextItem;
 
     actionCollection()->addAction( KStandardAction::Quit, this, SLOT(close()) );
@@ -37,17 +37,17 @@ KGpiMainWindow::KGpiMainWindow()
     m_mainWid.textColor->setColor( kcs.foreground(KColorScheme::NormalText).color() );
     m_mainWid.bkgndColor->setColor( kcs.background().color() );
 
-    connect( m_mainWid.popupTL, SIGNAL(clicked()), SLOT( onPopupTL() ) );
-    connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT( onPopupTR() ) );
-    connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT( onPopupBL() ) );
-    connect( m_mainWid.popupBR, SIGNAL(clicked()), SLOT( onPopupBR() ) );
-    connect( m_mainWid.popupCenter, SIGNAL(clicked()), SLOT( onPopupCenter() ) );
+    connect( m_mainWid.popupTL, SIGNAL(clicked()), SLOT(onPopupTL()) );
+    connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT(onPopupTR()) );
+    connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT(onPopupBL()) );
+    connect( m_mainWid.popupBR, SIGNAL(clicked()), SLOT(onPopupBR()) );
+    connect( m_mainWid.popupCenter, SIGNAL(clicked()), SLOT(onPopupCenter()) );
     connect( m_mainWid.forceInstantHide, SIGNAL(clicked()), SLOT(doInstantHide()) );
     connect( m_mainWid.forceAnimatedHide, SIGNAL(clicked()), SLOT(doAnimatedHide()) );
-    connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT( changeIcon()) );
+    connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT(changeIcon()) );
     connect( m_mainWid.opacity, SIGNAL(valueChanged(int)), SLOT(changeOpacity(int)) );
-    connect( m_mainWid.textColor, SIGNAL(changed(const QColor&)), SLOT(textColorChanged(const QColor&)));
-    connect( m_mainWid.bkgndColor, SIGNAL(changed(const QColor&)), SLOT(bkgndColorChanged(const QColor&)));
+    connect( m_mainWid.textColor, SIGNAL(changed(QColor)), SLOT(textColorChanged(QColor)));
+    connect( m_mainWid.bkgndColor, SIGNAL(changed(QColor)), SLOT(bkgndColorChanged(QColor)));
     connect( m_mainWid.leavePrevious, SIGNAL(clicked()), SLOT(replaceModeChanged()));
     connect( m_mainWid.replacePrevious, SIGNAL(clicked()), SLOT(replaceModeChanged()));
     connect( m_mainWid.cornersType, SIGNAL(activated(int)), SLOT(sharpnessChanged(int)));

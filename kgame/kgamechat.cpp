@@ -233,8 +233,8 @@ void KGameChat::setKGame(KGame* g)
 			this, SLOT(slotAddPlayer(KPlayer*)));
 	connect(d->mGame, SIGNAL(signalPlayerLeftGame(KPlayer*)), 
 			this, SLOT(slotRemovePlayer(KPlayer*)));
-	connect(d->mGame, SIGNAL(signalNetworkData(int, const QByteArray&, quint32, quint32)),
-			this, SLOT(slotReceiveMessage(int, const QByteArray&, quint32, quint32)));
+	connect(d->mGame, SIGNAL(signalNetworkData(int,QByteArray,quint32,quint32)),
+			this, SLOT(slotReceiveMessage(int,QByteArray,quint32,quint32)));
 	connect(d->mGame, SIGNAL(destroyed()), this, SLOT(slotUnsetKGame()));
 
 	QList<KPlayer*> playerList = *d->mGame->playerList();
@@ -283,10 +283,10 @@ void KGameChat::slotAddPlayer(KPlayer* p)
  int sendingId = nextId();
  addSendingEntry(comboBoxItem(p->name()), sendingId);
  d->mSendId2PlayerId.insert(sendingId, p->id());
- connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*, KPlayer*)),
-		this, SLOT(slotPropertyChanged(KGamePropertyBase*, KPlayer*)));
- connect(p, SIGNAL(signalNetworkData(int, const QByteArray&, quint32, KPlayer*)),
-		this, SLOT(slotReceivePrivateMessage(int, const QByteArray&, quint32, KPlayer*)));
+ connect(p, SIGNAL(signalPropertyChanged(KGamePropertyBase*,KPlayer*)),
+		this, SLOT(slotPropertyChanged(KGamePropertyBase*,KPlayer*)));
+ connect(p, SIGNAL(signalNetworkData(int,QByteArray,quint32,KPlayer*)),
+		this, SLOT(slotReceivePrivateMessage(int,QByteArray,quint32,KPlayer*)));
 }
 
 void KGameChat::slotRemovePlayer(KPlayer* p)

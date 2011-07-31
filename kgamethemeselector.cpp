@@ -71,7 +71,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     //The lineEdit widget holds our theme path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
     ui.kcfg_Theme->hide();
-    connect(ui.kcfg_Theme, SIGNAL(textChanged(const QString&)), q, SLOT(_k_updateThemeList(const QString&)));
+    connect(ui.kcfg_Theme, SIGNAL(textChanged(QString)), q, SLOT(_k_updateThemeList(QString)));
 
     //Disable KNS button?
     if (knsflags==KGameThemeSelector::NewStuffDisableDownload) {
@@ -147,7 +147,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     }
 
     //Reconnect the themeList
-    connect(ui.themeList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(_k_updatePreview()));
+    connect(ui.themeList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), q, SLOT(_k_updatePreview()));
 }
 
 void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()

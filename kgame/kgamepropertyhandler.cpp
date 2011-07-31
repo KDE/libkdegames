@@ -86,10 +86,10 @@ void KGamePropertyHandler::registerHandler(int id,const QObject * receiver, cons
 {
  setId(id); 
  if (receiver && sendf) {
-        connect(this, SIGNAL(signalSendMessage(int, QDataStream &, bool*)), receiver, sendf);
+        connect(this, SIGNAL(signalSendMessage(int,QDataStream&,bool*)), receiver, sendf);
  }
  if (receiver && emitf) {
-        connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase *)), receiver, emitf);
+        connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase*)), receiver, emitf);
  }
 }
 

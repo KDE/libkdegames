@@ -183,15 +183,15 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
         KUrl url = internal->queryUrl(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
-        connect(_scoresUrl, SIGNAL(leftClickedUrl(const QString &)),
-                SLOT(showURL(const QString &)));
+        connect(_scoresUrl, SIGNAL(leftClickedUrl(QString)),
+                SLOT(showURL(QString)));
         vbox->addWidget(_scoresUrl);
 
         url = internal->queryUrl(ManagerPrivate::Players);
         _playersUrl = new KUrlLabel(url.url(),
                                     i18n("View world-wide players"), this);
-        connect(_playersUrl, SIGNAL(leftClickedUrl(const QString &)),
-                SLOT(showURL(const QString &)));
+        connect(_playersUrl, SIGNAL(leftClickedUrl(QString)),
+                SLOT(showURL(QString)));
         vbox->addWidget(_playersUrl);
     }
     load(-1);
@@ -252,8 +252,8 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
         connect(hsw, SIGNAL(tabChanged(int)), SLOT(tabChanged(int)));
     }
 
-    connect(this, SIGNAL( currentPageChanged(KPageWidgetItem *, KPageWidgetItem *)),
-            SLOT(highscorePageChanged(KPageWidgetItem *, KPageWidgetItem *)));
+    connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
+            SLOT(highscorePageChanged(KPageWidgetItem*,KPageWidgetItem*)));
     setCurrentPage(_pages[internal->gameType()]);
 }
 
@@ -430,10 +430,10 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     QLabel *label = new QLabel(i18n("Nickname:"), page);
     pageTop->addWidget(label, 0, 0);
     _nickname = new QLineEdit(page);
-    connect(_nickname, SIGNAL(textChanged(const QString &)),
+    connect(_nickname, SIGNAL(textChanged(QString)),
             SLOT(modifiedSlot()));
-    connect(_nickname, SIGNAL(textChanged(const QString &)),
-            SLOT(nickNameChanged(const QString &)));
+    connect(_nickname, SIGNAL(textChanged(QString)),
+            SLOT(nickNameChanged(QString)));
 
     _nickname->setMaxLength(16);
     pageTop->addWidget(_nickname, 0, 1);
@@ -441,7 +441,7 @@ ConfigDialog::ConfigDialog(QWidget *parent)
     label = new QLabel(i18n("Comment:"), page);
     pageTop->addWidget(label, 1, 0);
     _comment = new QLineEdit(page);
-    connect(_comment, SIGNAL(textChanged(const QString &)),
+    connect(_comment, SIGNAL(textChanged(QString)),
             SLOT(modifiedSlot()));
     _comment->setMaxLength(50);
     pageTop->addWidget(_comment, 1, 1);
@@ -603,7 +603,7 @@ AskNameDialog::AskNameDialog(QWidget *parent)
     hbox->addWidget(label);
     _edit = new QLineEdit(main);
     _edit->setFocus();
-    connect(_edit, SIGNAL(textChanged(const QString &)), SLOT(nameChanged()));
+    connect(_edit, SIGNAL(textChanged(QString)), SLOT(nameChanged()));
     hbox->addWidget(_edit);
 
     top->addSpacing(spacingHint());
