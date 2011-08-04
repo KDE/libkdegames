@@ -208,7 +208,10 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///@note  For non-animated frames, set @a frame to -1 or omit it.
 		///@note  Custom colors increase the rendering time considerably, so use
 		///       this feature only if you really need its flexibility.
-		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1, const QHash<QColor, QColor>& customColors = QHash<QColor, QColor>()) const;
+
+		// The parentheses around QHash<QColor, QColor>() avoid compile
+		// errors on platforms with older gcc versions, e.g. OS X 10.6.
+		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1, const QHash<QColor, QColor>& customColors = (QHash<QColor, QColor>())) const;
 	public Q_SLOTS:
 		///Load the given theme and update the pixmaps of all associated
 		///KGameRendererClient instances.
