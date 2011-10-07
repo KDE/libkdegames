@@ -79,6 +79,9 @@ set(kdegames_LIB_SRCS
     kgamedifficulty.cpp
     cardcache.cpp
 )
+if(Q_WS_X11)
+	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
+endif(Q_WS_X11)
 
 kde4_add_ui_files(kdegames_LIB_SRCS
     kgamethemeselector.ui
