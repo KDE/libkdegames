@@ -207,23 +207,6 @@ public:
     }
     return *this;
   }
-  void sort()
-  {
-    QByteArray b;
-    QDataStream s(b, QIODevice::WriteOnly);
-    KGameMessage::createPropertyCommand(s,KGamePropertyBase::IdCommand,id(),CmdSort);
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      if (mOwner)
-      {
-        mOwner->sendProperty(s);
-      }
-    }
-    if (policy()==PolicyLocal || policy()==PolicyDirty)
-    {
-      extractProperty(b);
-    }
-  }
 
   void load(QDataStream& s)
   {
