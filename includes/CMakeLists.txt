@@ -13,7 +13,6 @@ install( FILES
 	KGameRenderedObjectItem
 	KGameRenderer
 	KGameRendererClient
-	KGameSvgDigits
 	KGameSvgDocument
 	KGameTheme
 	KGameThemeSelector

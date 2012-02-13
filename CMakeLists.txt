@@ -6,7 +6,6 @@ KDE4_NO_ENABLE_FINAL(libkdegames)
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
 add_subdirectory( carddecks )
-add_subdirectory( digits )
 add_subdirectory( highscore )
 add_subdirectory( includes )
 add_subdirectory( kgame )
@@ -24,7 +23,6 @@ include_directories(
 
 set(kdegames_LIB_SRCS
     colorproxy_p.cpp
-    digits/kgamesvgdigits.cpp
 #   highscore/kconfigrawbackend.cpp
     highscore/kexthighscore_item.cpp
     highscore/kexthighscore_internal.cpp

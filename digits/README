@@ -1,4 +1,0 @@
-This folder contains files related to the display of timers, counters, and clocks
-in kdegames.  The digits are themable and scalable, so they may be seven-segment
-digits as in QLCDNumber, or 14-segment numbers, or any other font face or glyph that
-can be drawn in SVG.  For more info, see the apidox.
