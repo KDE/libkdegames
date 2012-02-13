@@ -61,7 +61,6 @@ set(kdegames_LIB_SRCS
     kchatdialog.cpp
     kgamecanvas.cpp
     kgameclock.cpp
-    kgamelcd.cpp
     kgameprogress.cpp
     kgamepopupitem.cpp
     kgamerendereditem.cpp
@@ -109,7 +108,6 @@ install(FILES
     kchat.h
     kchatdialog.h
     kgameprogress.h
-    kgamelcd.h
     kgamesvgdocument.h
     kgamepopupitem.h
     kgamecanvas.h

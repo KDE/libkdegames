@@ -8,7 +8,6 @@ install( FILES
 	KGameCanvas
 	KGameClock
 	KGameDifficulty
-	KGameLCD
 	KGamePopupItem
 	KGameProgress
 	KGameRenderedItem
