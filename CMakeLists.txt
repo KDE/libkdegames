@@ -12,9 +12,6 @@ add_subdirectory( includes )
 add_subdirectory( kgame )
 add_subdirectory( pics )
 add_subdirectory( tests )
-add_subdirectory( kggznet )
-add_subdirectory( kggzgames )
-add_subdirectory( kggzmod )
 
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}/highscore
