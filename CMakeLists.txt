@@ -85,9 +85,9 @@ kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 
-#NOTE: 5.1.0 = KDE SC 4.6, please increase minor version in next minor KDE SC version if API changes are made
-set_target_properties(kdegames PROPERTIES VERSION 5.1.0
-                                          SOVERSION 5 )
+#NOTE: 6.0.0 = KDE 4.9 release, please increase minor version in next minor KDE SC version if API changes
+set_target_properties(kdegames PROPERTIES VERSION 6.0.0
+                                          SOVERSION 6 )
 
 install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
 
