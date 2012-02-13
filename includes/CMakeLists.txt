@@ -20,7 +20,6 @@ install( FILES
 	KGameSvgDocument
 	KGameTheme
 	KGameThemeSelector
-	KGrid2D
 	KHighscore
 	KScoreDialog
 	KStandardGameAction

@@ -114,7 +114,6 @@ install(FILES
     kgamelcd.h
     kgamesvgdocument.h
     kgamepopupitem.h
-    kgrid2d.h
     kgamecanvas.h
     kgameclock.h
     kgamerendereditem.h
