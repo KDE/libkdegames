@@ -62,7 +62,6 @@ set(kdegames_LIB_SRCS
     kgamecanvas.cpp
     kgameclock.cpp
     kgamelcd.cpp
-    kgamemisc.cpp
     kgameprogress.cpp
     kgamepopupitem.cpp
     kgamerendereditem.cpp
@@ -102,7 +101,6 @@ install(FILES
     libkdegames_export.h
     cardcache.h
     carddeckinfo.h
-    kgamemisc.h
     kcarddialog.h
     kstandardgameaction.h
     kchatbase.h
