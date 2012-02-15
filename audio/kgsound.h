@@ -46,9 +46,10 @@ class PlaybackEvent;
 class KDEGAMES_EXPORT KgSound : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(KgSound::PlaybackType playbackType READ playbackType WRITE setPlaybackType)
-	Q_PROPERTY(QPointF pos READ pos WRITE setPos)
-	Q_PROPERTY(qreal volume READ volume WRITE setVolume)
+	Q_DISABLE_COPY(KgSound)
+	Q_PROPERTY(KgSound::PlaybackType playbackType READ playbackType WRITE setPlaybackType NOTIFY playbackTypeChanged)
+	Q_PROPERTY(QPointF pos READ pos WRITE setPos NOTIFY posChanged)
+	Q_PROPERTY(qreal volume READ volume WRITE setVolume NOTIFY volumeChanged)
 	public:
 		///This enumeration describes how a sound can be played back
 		enum PlaybackType
@@ -87,6 +88,7 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		///
 		///@note Changes to this property will not be propagated to running
 		///      playbacks of this sound.
+		///@note Effective only if positional playback is supported.
 		void setPlaybackType(KgSound::PlaybackType type);
 		///@return the position of this sound
 		QPointF pos() const;
@@ -96,6 +98,7 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		///
 		///@note Changes to this property will not be propagated to running
 		///      playbacks of this sound.
+		///@note Effective only if positional playback is supported.
 		void setPos(const QPointF& pos);
 		///@return the volume of this sound
 		qreal volume() const;
@@ -120,9 +123,14 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		///@overload
 		///This overload takes an additional position argument which overrides
 		///the sound's pos() property.
+		///@note @a pos is respected only if positional playback is supported.
 		void start(const QPointF& pos);
 		///Stops any playbacks of this sounds.
 		void stop();
+	Q_SIGNALS:
+		void playbackTypeChanged(KgSound::PlaybackType type);
+		void posChanged(const QPointF& pos);
+		void volumeChanged(qreal volume);
 	private:
 		friend class KgPlaybackEvent;
 		class Private;

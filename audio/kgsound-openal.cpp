@@ -118,7 +118,10 @@ KgSound::PlaybackType KgSound::playbackType() const
 
 void KgSound::setPlaybackType(KgSound::PlaybackType type)
 {
+	if (d->m_type == type)
+		return;
 	d->m_type = type;
+	emit playbackTypeChanged(type);
 }
 
 QPointF KgSound::pos() const
@@ -128,7 +131,10 @@ QPointF KgSound::pos() const
 
 void KgSound::setPos(const QPointF& pos)
 {
+	if (d->m_pos == pos)
+		return;
 	d->m_pos = pos;
+	emit posChanged(pos);
 }
 
 qreal KgSound::volume() const
@@ -138,7 +144,10 @@ qreal KgSound::volume() const
 
 void KgSound::setVolume(qreal volume)
 {
+	if (d->m_volume == volume)
+		return;
 	d->m_volume = volume;
+	emit volumeChanged(volume);
 }
 
 void KgSound::start()
@@ -155,11 +164,11 @@ void KgSound::start(const QPointF& pos)
 		{
 			if(runtime->instance()->m_soundsEvents[this].last()->replay(pos) == false)
 			{
-					new KgPlaybackEvent(this, pos);
+				new KgPlaybackEvent(this, pos);
 			}
 		}
 		else
-		{   
+		{
 			new KgPlaybackEvent(this, pos);
 		}
 	}
@@ -227,16 +236,15 @@ bool KgPlaybackEvent::replay(const QPointF& pos) const
 {
 	if(alIsSource(m_source) == AL_TRUE)
 	{
-		//FIXME: pos is not respected
 		alSourceStop(m_source);
+		alSource3f(m_source, AL_POSITION, pos.x(), pos.y(), 0);
 		alSourcePlay(m_source);
+		return true;
 	}
 	else
 	{
 		return false;
 	}
-	
-	return true;
 }
 
 //END KgPlaybackEvent
