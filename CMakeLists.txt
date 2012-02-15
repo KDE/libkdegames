@@ -19,14 +19,21 @@ include_directories(
    ${CMAKE_CURRENT_BINARY_DIR}/highscore
 )
 
-if (OPENAL_FOUND AND SNDFILE_FOUND)
+if (SNDFILE_FOUND)
+    message(STATUS "Checking libsndfile capabilities")
+    try_compile(SNDFILE_WORKS
+        ${CMAKE_CURRENT_BINARY_DIR}/audio/check-libsndfile-capabilities
+        ${CMAKE_CURRENT_SOURCE_DIR}/audio/check-libsndfile-capabilities.cpp)
+endif (SNDFILE_FOUND)
+
+if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIRS})
     set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
     set(KGAUDIO_BACKEND openal)
-else (OPENAL_FOUND AND SNDFILE_FOUND)
+else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     set(KGAUDIO_LINKLIBS ${KDE4_PHONON_LIBS})
     set(KGAUDIO_BACKEND phonon)
-endif (OPENAL_FOUND AND SNDFILE_FOUND)
+endif (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
 
 ########### next target ###############
 
