@@ -19,12 +19,16 @@ include_directories(
    ${CMAKE_CURRENT_BINARY_DIR}/highscore
 )
 
-if (SNDFILE_FOUND)
+option (USE_OPENAL_SNDFILE "use OpenAL and libsndfile in libkdegames" ON)
+if (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
     message(STATUS "Checking libsndfile capabilities")
     try_compile(SNDFILE_WORKS
         ${CMAKE_CURRENT_BINARY_DIR}/audio/check-libsndfile-capabilities
         ${CMAKE_CURRENT_SOURCE_DIR}/audio/check-libsndfile-capabilities.cpp)
-endif (SNDFILE_FOUND)
+    if (NOT SNDFILE_WORKS)
+        message(FATAL_ERROR "Your version of libsndfile is too old. At least version 0.21 is needed. To skip the optional OpenAL/libsndfile dependency in libkdegames (not recommended), re-run cmake with -DUSE_OPENAL_SNDFILE=OFF.")
+    endif (NOT SNDFILE_WORKS)
+endif (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
 
 if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIRS})
