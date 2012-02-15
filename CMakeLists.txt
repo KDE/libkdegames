@@ -19,9 +19,20 @@ include_directories(
    ${CMAKE_CURRENT_BINARY_DIR}/highscore
 )
 
+if (OPENAL_FOUND AND SNDFILE_FOUND)
+    include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIRS})
+    set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
+    set(KGAUDIO_BACKEND openal)
+else (OPENAL_FOUND AND SNDFILE_FOUND)
+    set(KGAUDIO_LINKLIBS ${KDE4_PHONON_LIBS})
+    set(KGAUDIO_BACKEND phonon)
+endif (OPENAL_FOUND AND SNDFILE_FOUND)
+
 ########### next target ###############
 
 set(kdegames_LIB_SRCS
+    audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
+    audio/kgsound-${KGAUDIO_BACKEND}.cpp
     colorproxy_p.cpp
 #   highscore/kconfigrawbackend.cpp
     highscore/kexthighscore_item.cpp
@@ -82,7 +93,7 @@ kde4_add_ui_files(kdegames_LIB_SRCS
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KGAUDIO_LINKLIBS})
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} )
 
 #NOTE: 6.0.0 = KDE 4.9 release, please increase minor version in next minor KDE SC version if API changes
