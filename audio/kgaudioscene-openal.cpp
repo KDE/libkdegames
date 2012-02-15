@@ -69,14 +69,14 @@ KgOpenALRuntime::KgOpenALRuntime()
 {
 	if (!m_device)
 	{
-		kDebug() << "Failed to create OpenAL device";
+		kWarning() << "Failed to create OpenAL device";
 		return;
 	}
 	m_context = alcCreateContext(m_device, 0);
 	int error = alcGetError(m_device);
 	if (error != AL_NO_ERROR)
 	{
-		kDebug() << "Failed to create OpenAL context: Error code" << error;
+		kWarning() << "Failed to create OpenAL context: Error code" << error;
 		return;
 	}
 	alcMakeContextCurrent(m_context);
@@ -105,7 +105,7 @@ void KgOpenALRuntime::configureListener()
 	alListenerf(AL_GAIN, m_volume);
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		kDebug() << "Failed to setup OpenAL listener: Error code" << error;
+		kWarning() << "Failed to setup OpenAL listener: Error code" << error;
 	}
 }
 

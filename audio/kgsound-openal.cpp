@@ -44,8 +44,8 @@ KgSound::KgSound(const QString& file, QObject* parent)
 	SndfileHandle handle(file.toUtf8());
 	if (handle.error())
 	{
-		kDebug() << "Failed to load sound file. Error message from libsndfile follows.";
-		kDebug() << handle.strError();
+		kWarning() << "Failed to load sound file. Error message from libsndfile follows.";
+		kWarning() << handle.strError();
 		return;
 	}
 	const int channelCount = handle.channels();
@@ -55,8 +55,8 @@ KgSound::KgSound(const QString& file, QObject* parent)
 	QVector<ALshort> samples(sampleCount);
 	if (handle.read(samples.data(), sampleCount) < sampleCount)
 	{
-		kDebug() << "Failed to read sound file" << file;
-		kDebug() << "File ended unexpectedly.";
+		kWarning() << "Failed to read sound file" << file;
+		kWarning() << "File ended unexpectedly.";
 		return;
 	}
 	//determine file format from number of channels
@@ -70,8 +70,8 @@ KgSound::KgSound(const QString& file, QObject* parent)
 			format = AL_FORMAT_STEREO16;
 			break;
 		default:
-			kDebug() << "Failed to read sound file" << file;
-			kDebug() << "More than two channels are not supported.";
+			kWarning() << "Failed to read sound file" << file;
+			kWarning() << "More than two channels are not supported.";
 			return;
 	}
 	//make sure OpenAL is initialized; clear OpenAL error storage
@@ -81,13 +81,13 @@ KgSound::KgSound(const QString& file, QObject* parent)
 	alGenBuffers(1, &d->m_buffer);
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		kDebug() << "Failed to create OpenAL buffer: Error code" << error;
+		kWarning() << "Failed to create OpenAL buffer: Error code" << error;
 		return;
 	}
 	alBufferData(d->m_buffer, format, samples.data(), sampleCount * sizeof(ALshort), sampleRate);
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		kDebug() << "Failed to fill OpenAL buffer: Error code" << error;
+		kWarning() << "Failed to fill OpenAL buffer: Error code" << error;
 		alDeleteBuffers(1, &d->m_buffer);
 		return;
 	}
@@ -193,7 +193,7 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound* sound, const QPointF& pos)
 	alGenSources(1, &m_source);
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		kDebug() << "Failed to create OpenAL source: Error code" << error;
+		kWarning() << "Failed to create OpenAL source: Error code" << error;
 		return;
 	}
 	//store in OpenALRuntime
@@ -209,7 +209,7 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound* sound, const QPointF& pos)
 	alSourcei(m_source, AL_SOURCE_RELATIVE, type == KgSound::RelativePlayback ? AL_TRUE : AL_FALSE);
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
-		kDebug() << "Failed to setup OpenAL source: Error code" << error;
+		kWarning() << "Failed to setup OpenAL source: Error code" << error;
 		return;
 	}
 	//start playback
