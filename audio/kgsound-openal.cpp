@@ -143,17 +143,25 @@ void KgSound::setVolume(qreal volume)
 
 void KgSound::start()
 {
-	if (d->m_valid)
-	{
-		new KgPlaybackEvent(this, d->m_pos);
-	}
+	start(d->m_pos);
 }
 
 void KgSound::start(const QPointF& pos)
 {
 	if (d->m_valid)
 	{
-		new KgPlaybackEvent(this, pos);
+		KgOpenALRuntime* runtime = KgOpenALRuntime::instance();
+		if(runtime->instance()->m_soundsEvents[this].count() > 0)
+		{
+			if(runtime->instance()->m_soundsEvents[this].last()->replay(pos) == false)
+			{
+					new KgPlaybackEvent(this, pos);
+			}
+		}
+		else
+		{   
+			new KgPlaybackEvent(this, pos);
+		}
 	}
 }
 
@@ -201,7 +209,7 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound* sound, const QPointF& pos)
 
 KgPlaybackEvent::~KgPlaybackEvent()
 {
-	if (m_valid)
+	if(alIsSource(m_source) == AL_TRUE)
 	{
 		alSourceStop(m_source);
 		alDeleteSources(1, &m_source);
@@ -213,6 +221,22 @@ bool KgPlaybackEvent::isRunning() const
 	ALint state;
 	alGetSourcei(m_source, AL_SOURCE_STATE, &state);
 	return state == AL_PLAYING;
+}
+
+bool KgPlaybackEvent::replay(const QPointF& pos) const
+{
+	if(alIsSource(m_source) == AL_TRUE)
+	{
+		//FIXME: pos is not respected
+		alSourceStop(m_source);
+		alSourcePlay(m_source);
+	}
+	else
+	{
+		return false;
+	}
+	
+	return true;
 }
 
 //END KgPlaybackEvent
