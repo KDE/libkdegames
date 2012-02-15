@@ -26,6 +26,11 @@ K_GLOBAL_STATIC(KgOpenALRuntime, g_runtime)
 
 //BEGIN KgAudioScene
 
+KgAudioScene::Capabilities KgAudioScene::capabilities()
+{
+	return SupportsLowLatencyPlayback | SupportsPositionalPlayback;
+}
+
 QPointF KgAudioScene::listenerPos()
 {
 	return g_runtime->m_listenerPos;

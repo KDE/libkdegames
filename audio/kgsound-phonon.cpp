@@ -20,7 +20,6 @@
 
 #include <Phonon/MediaObject>
 #include <QDateTime>
-#include <KDE/KDebug>
 
 struct KgSound::Private
 {
@@ -71,12 +70,6 @@ KgSound::PlaybackType KgSound::playbackType() const
 void KgSound::setPlaybackType(KgSound::PlaybackType type)
 {
 	Q_UNUSED(type)
-	static bool onlyOnce = true;
-	if (onlyOnce)
-	{
-		onlyOnce = false;
-		kDebug() << "Not supported by Phonon.";
-	}
 }
 
 QPointF KgSound::pos() const
@@ -87,12 +80,6 @@ QPointF KgSound::pos() const
 void KgSound::setPos(const QPointF& pos)
 {
 	Q_UNUSED(pos)
-	static bool onlyOnce = true;
-	if (onlyOnce)
-	{
-		onlyOnce = false;
-		kDebug() << "Not supported by Phonon.";
-	}
 }
 
 qreal KgSound::volume() const
@@ -149,12 +136,6 @@ void KgSound::start()
 void KgSound::start(const QPointF& pos)
 {
 	Q_UNUSED(pos)
-	static bool onlyOnce = true;
-	if (onlyOnce)
-	{
-		onlyOnce = false;
-		kDebug() << "Positional playback not supported by Phonon.";
-	}
 	//ignore parameter
 	start();
 }

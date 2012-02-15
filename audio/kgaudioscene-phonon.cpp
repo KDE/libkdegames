@@ -20,6 +20,11 @@
 
 #include <Phonon/AudioOutput>
 
+KgAudioScene::Capabilities KgAudioScene::capabilities()
+{
+	return 0;
+}
+
 QPointF KgAudioScene::listenerPos()
 {
 	return QPointF(0.0, 0.0);
@@ -28,12 +33,6 @@ QPointF KgAudioScene::listenerPos()
 void KgAudioScene::setListenerPos(const QPointF& pos)
 {
 	Q_UNUSED(pos)
-	static bool onlyOnce = true;
-	if (onlyOnce)
-	{
-		onlyOnce = false;
-		kDebug() << "Not supported by Phonon.";
-	}
 }
 
 qreal KgAudioScene::volume()

@@ -30,7 +30,8 @@ class PlaybackEvent;
  * @class KgSound sound.h <KgSound>
  *
  * This class models a sound file. Because it is implicitly added to this
- * application's KgAudioScene, it can be played at different positions.
+ * application's KgAudioScene, it can be played at different positions (if
+ * positional playback is supported, see KgAudioScene::capabilities()).
  *
  * Compared to many other media playback classes, the notable difference of
  * KgSound is that one sound instance can be played multiple times at the
@@ -38,9 +39,9 @@ class PlaybackEvent;
  * different playback positions). This behavior can be suppressed by calling
  * stop() before start().
  *
- * @note Sound files are loaded with libsndfile, which means that WAV, FLAC and
- *       Ogg/Vorbis are supported. (The non-WAV formats require a reasonably
- *       recent version of libsndfile.)
+ * @note WAV files and Ogg/Vorbis files are guaranteed to work. Other audio
+ *       files may also work, depending on the KgAudio backend and its
+ *       configuration.
  */
 class KDEGAMES_EXPORT KgSound : public QObject
 {
