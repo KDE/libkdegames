@@ -18,7 +18,7 @@
 
 #include "kgaudioscene.h"
 
-#include <KDE/KDebug>
+#include <Phonon/AudioOutput>
 
 QPointF KgAudioScene::listenerPos()
 {
@@ -38,16 +38,10 @@ void KgAudioScene::setListenerPos(const QPointF& pos)
 
 qreal KgAudioScene::volume()
 {
-	return 1.0;
+	return Phonon::AudioOutput(Phonon::GameCategory).volume();
 }
 
 void KgAudioScene::setVolume(qreal volume)
 {
-	Q_UNUSED(volume)
-	static bool onlyOnce = true;
-	if (onlyOnce)
-	{
-		onlyOnce = false;
-		kDebug() << "Not supported by Phonon.";
-	}
+	Phonon::AudioOutput(Phonon::GameCategory).setVolume(volume);
 }

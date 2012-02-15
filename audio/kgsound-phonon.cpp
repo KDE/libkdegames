@@ -97,13 +97,13 @@ void KgSound::setPos(const QPointF& pos)
 
 qreal KgSound::volume() const
 {
-	//TODO
+	//FIXME
 	return 1.0;
 }
 
 void KgSound::setVolume(qreal volume)
 {
-	//TODO
+	//FIXME
 }
 
 void KgSound::start()
