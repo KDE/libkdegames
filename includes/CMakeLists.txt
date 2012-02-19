@@ -2,7 +2,6 @@
 install( FILES 
 	KgAudioScene
 	KgSound
-	KCardDialog
 	KChat
 	KChatBase
 	KChatDialog

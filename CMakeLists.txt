@@ -72,8 +72,6 @@ set(kdegames_LIB_SRCS
     kgame/dialogs/kgamedialog.cpp
     kgame/dialogs/kgamedialogconfig.cpp
     kgame/dialogs/kgameerrordialog.cpp
-    carddeckinfo.cpp
-    kcarddialog.cpp
     kchat.cpp
     kchatbase.cpp
     kchatbaseitemdelegate.cpp
@@ -91,7 +89,6 @@ set(kdegames_LIB_SRCS
     kgamethemeselector.cpp
     kstandardgameaction.cpp
     kgamedifficulty.cpp
-    cardcache.cpp
 )
 if(Q_WS_X11)
 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
@@ -99,7 +96,6 @@ endif(Q_WS_X11)
 
 kde4_add_ui_files(kdegames_LIB_SRCS
     kgamethemeselector.ui
-    kgamecardselector.ui
 )
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
@@ -117,9 +113,6 @@ install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     libkdegames_export.h
-    cardcache.h
-    carddeckinfo.h
-    kcarddialog.h
     kstandardgameaction.h
     kchatbase.h
     kchatbasemodel.h
