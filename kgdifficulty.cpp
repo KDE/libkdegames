@@ -26,6 +26,12 @@
 #include <KDE/KGuiItem>
 #include <KDE/KLocale>
 #include <KDE/KMessageBox>
+//the following only used by KgDifficultyGUI
+#include <KDE/KActionCollection>
+#include <KDE/KComboBox>
+#include <KDE/KSelectAction>
+#include <KDE/KStatusBar>
+#include <KDE/KXmlGuiWindow>
 
 //BEGIN KgDifficultyLevel
 
@@ -282,5 +288,83 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 }
 
 //END KgDifficulty
+//BEGIN KgDifficultyGUI
+
+namespace KgDifficultyGUI
+{
+	class Selector : public KComboBox
+	{
+		Q_OBJECT
+		private:
+			KgDifficulty* d;
+		public:
+			Selector(KgDifficulty* difficulty, QWidget* parent = 0)
+				: KComboBox(parent), d(difficulty) {}
+		Q_SIGNALS:
+			void signalSelected(int levelIndex);
+		public Q_SLOTS:
+			void slotActivated(int levelIndex)
+			{
+				d->select(d->levels().value(levelIndex));
+			}
+			void slotSelected(const KgDifficultyLevel* level)
+			{
+				emit signalSelected(d->levels().indexOf(level));
+			}
+	};
+	class Menu : public KSelectAction
+	{
+		Q_OBJECT
+		public:
+			Menu(const KIcon& i, const QString& s, QWidget* p) : KSelectAction(i,s,p){}
+		public Q_SLOTS:
+			//this whole class just because the following is not a slot
+			void setCurrentItem(int index) { KSelectAction::setCurrentItem(index); }
+	};
+}
+
+void KgDifficultyGUI::init(KgDifficulty* difficulty, KXmlGuiWindow* window)
+{
+	//create selector (resides in status bar)
+	KgDifficultyGUI::Selector* selector = new KgDifficultyGUI::Selector(difficulty, window);
+	selector->setToolTip(i18nc("Game difficulty level", "Difficulty"));
+	QObject::connect(selector, SIGNAL(activated(int)), selector, SLOT(slotActivated(int)));
+	QObject::connect(difficulty, SIGNAL(editableChanged(bool)), selector, SLOT(setEnabled(bool)));
+	QObject::connect(difficulty, SIGNAL(selected(const KgDifficultyLevel*)), selector, SLOT(slotSelected(const KgDifficultyLevel*)));
+	QObject::connect(selector, SIGNAL(signalSelected(int)), selector, SLOT(setCurrentIndex(int)));
+
+	//create menu action
+	const KIcon icon("games-difficult");
+	KSelectAction* menu = new KgDifficultyGUI::Menu(icon, i18nc("Game difficulty level", "Difficulty"), window);
+	menu->setToolTip(i18n("Set the difficulty level"));
+	menu->setWhatsThis(i18n("Set the difficulty level of the game."));
+	QObject::connect(menu, SIGNAL(triggered(int)), selector, SLOT(slotActivated(int)));
+	QObject::connect(difficulty, SIGNAL(editableChanged(bool)), menu, SLOT(setEnabled(bool)));
+	QObject::connect(selector, SIGNAL(signalSelected(int)), menu, SLOT(setCurrentItem(int)));
+
+	//fill menu and selector
+	foreach (const KgDifficultyLevel* level, difficulty->levels())
+	{
+		selector->addItem(icon, level->title());
+		menu->addAction(level->title());
+	}
+	//initialize selection in selector
+	selector->slotSelected(difficulty->currentLevel());
+
+	//add selector to statusbar
+	window->statusBar()->addPermanentWidget(selector);
+	//add menu action to window
+	menu->setObjectName(QLatin1String("options_game_difficulty"));
+	window->actionCollection()->addAction(menu->objectName(), menu);
+
+	//ensure that the KgDifficulty instance gets deleted
+	if (!difficulty->parent())
+	{
+		difficulty->setParent(window);
+	}
+}
+
+//END KgDifficultyGUI
 
 #include "kgdifficulty.moc"
+#include "moc_kgdifficulty.cpp"

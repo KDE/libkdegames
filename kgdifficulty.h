@@ -158,4 +158,14 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 
 Q_DECLARE_METATYPE(const KgDifficultyLevel*)
 
+class KXmlGuiWindow;
+
+//TODO: move this into a separate QtWidgets support library
+namespace KgDifficultyGUI
+{
+	///Install standard GUI components for the manipulation of the given
+	///KgDifficulty instance in the given @a window.
+	KDEGAMES_EXPORT void init(KgDifficulty* difficulty, KXmlGuiWindow* window);
+}
+
 #endif // KGDIFFICULTY_H
