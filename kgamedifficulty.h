@@ -75,7 +75,7 @@ class KXmlGuiWindow;
  *
  * @author Nicolas Roffet, <nicolas-kde@roffet.com>
  */
-class KDEGAMES_EXPORT KGameDifficulty
+class KDEGAMES_EXPORT_DEPRECATED KGameDifficulty
 {
 	public:
 		/**
