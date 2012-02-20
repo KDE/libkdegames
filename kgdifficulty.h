@@ -30,8 +30,15 @@
  * @class KgDifficultyLevel kgdifficulty.h <KgDifficultyLevel>
  * @see KgDifficulty
  */
-class KDEGAMES_EXPORT KgDifficultyLevel
+class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 {
+	Q_OBJECT
+	Q_DISABLE_COPY(KgDifficultyLevel)
+	Q_PROPERTY(int hardness READ hardness)
+	Q_PROPERTY(QByteArray key READ key)
+	Q_PROPERTY(QString title READ title)
+	Q_ENUMS(StandardLevel)
+	Q_PROPERTY(StandardLevel standardLevel READ standardLevel)
 	public:
 		enum StandardLevel
 		{
@@ -48,7 +55,7 @@ class KDEGAMES_EXPORT KgDifficultyLevel
 
 		///Refer to the getters' documentation for details on the params.
 		KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title);
-		KgDifficultyLevel(StandardLevel level);
+		explicit KgDifficultyLevel(StandardLevel level);
 		virtual ~KgDifficultyLevel();
 
 		///@return a numeric key which is used to sort the levels by difficulty
@@ -87,18 +94,20 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 	Q_OBJECT
 	Q_DISABLE_COPY(KgDifficulty)
 	//Use currentLevel in game logic and selectedLevel in level selection UI.
-	Q_PROPERTY(const KgDifficultyLevel* currentLevel READ currentLevel WRITE select NOTIFY changed)
-	Q_PROPERTY(const KgDifficultyLevel* selectedLevel READ currentLevel WRITE select NOTIFY selected)
+	Q_PROPERTY(const KgDifficultyLevel* currentLevel READ currentLevel WRITE select NOTIFY currentLevelChanged)
+	Q_PROPERTY(const KgDifficultyLevel* selectedLevel READ currentLevel WRITE select NOTIFY selectedLevelChanged)
 	Q_PROPERTY(bool editable READ isEditable WRITE setEditable NOTIFY editableChanged)
 	Q_PROPERTY(bool gameRunning READ isGameRunning WRITE setGameRunning NOTIFY gameRunningChanged)
 	public:
-		KgDifficulty(QObject* parent = 0);
+		explicit KgDifficulty(QObject* parent = 0);
 		///Destroys this instance and all DifficultyLevel instances in it.
 		virtual ~KgDifficulty();
 
 		///Adds a difficulty level to this instance. This will not affect the
 		///currentLevel() if there is one.
 		void addLevel(KgDifficultyLevel* level);
+		///A shortcut for addLevel(new KgDifficultyLevel(@a level)).
+		void addStandardLevel(KgDifficultyLevel::StandardLevel level);
 		///This convenience method adds a range of standard levels to this
 		///instance (including the boundaries). For example:
 		///@code
@@ -139,11 +148,11 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 		///Emitted when a running game has been marked or unmarked. @see setGameRunning
 		void gameRunningChanged(bool gameRunning);
 		///Emitted when a new difficulty level has been selected.
-		void changed(const KgDifficultyLevel* level);
+		void currentLevelChanged(const KgDifficultyLevel* level);
 		///Emitted after every call to select(), even when the user has rejected
 		///the change. This is useful to reset a difficulty level selection UI
 		///after a rejected change.
-		void selected(const KgDifficultyLevel* level);
+		void selectedLevelChanged(const KgDifficultyLevel* level);
 	public Q_SLOTS:
 		///Select a new difficulty level. The given level must already have been
 		///added to this instance.

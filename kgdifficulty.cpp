@@ -179,9 +179,16 @@ void KgDifficulty::addLevel(KgDifficultyLevel* level)
 		++it;
 	}
 	d->m_levels.insert(it, level);
+	level->setParent(this);
 }
 
 typedef KgDifficultyLevel::StandardLevel DS;
+
+void KgDifficulty::addStandardLevel(DS level)
+{
+	addLevel(new KgDifficultyLevel(level));
+}
+
 void KgDifficulty::addStandardLevelRange(DS from, DS to)
 {
 	const QVector<DS> levels = QVector<DS>()
@@ -278,13 +285,13 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 		);
 		if (result != KMessageBox::Continue)
 		{
-			emit selected(d->m_currentLevel);
+			emit selectedLevelChanged(d->m_currentLevel);
 			return;
 		}
 	}
 	d->m_currentLevel = level;
-	emit selected(level);
-	emit changed(level);
+	emit selectedLevelChanged(level);
+	emit currentLevelChanged(level);
 }
 
 //END KgDifficulty
@@ -330,7 +337,8 @@ void KgDifficultyGUI::init(KgDifficulty* difficulty, KXmlGuiWindow* window)
 	selector->setToolTip(i18nc("Game difficulty level", "Difficulty"));
 	QObject::connect(selector, SIGNAL(activated(int)), selector, SLOT(slotActivated(int)));
 	QObject::connect(difficulty, SIGNAL(editableChanged(bool)), selector, SLOT(setEnabled(bool)));
-	QObject::connect(difficulty, SIGNAL(selected(const KgDifficultyLevel*)), selector, SLOT(slotSelected(const KgDifficultyLevel*)));
+	QObject::connect(difficulty, SIGNAL(selectedLevelChanged(const KgDifficultyLevel*)),
+		selector, SLOT(slotSelected(const KgDifficultyLevel*)));
 	QObject::connect(selector, SIGNAL(signalSelected(int)), selector, SLOT(setCurrentIndex(int)));
 
 	//create menu action
