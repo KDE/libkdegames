@@ -9,7 +9,6 @@ add_subdirectory( carddecks )
 add_subdirectory( highscore )
 add_subdirectory( includes )
 add_subdirectory( kgame )
-add_subdirectory( pics )
 add_subdirectory( tests )
 
 include_directories(
