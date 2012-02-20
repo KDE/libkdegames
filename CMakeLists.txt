@@ -88,6 +88,7 @@ set(kdegames_LIB_SRCS
     kgamethemeselector.cpp
     kstandardgameaction.cpp
     kgamedifficulty.cpp
+    kgdifficulty.cpp
 )
 if(Q_WS_X11)
 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
@@ -129,5 +130,6 @@ install(FILES
     kgametheme.h
     kgamethemeselector.h
     kgamedifficulty.h
+    kgdifficulty.h
     DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )

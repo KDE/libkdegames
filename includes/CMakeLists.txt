@@ -1,6 +1,7 @@
 
 install( FILES 
 	KgAudioScene
+	KgDifficulty
 	KgSound
 	KChat
 	KChatBase
