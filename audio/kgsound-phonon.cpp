@@ -93,6 +93,19 @@ void KgSound::setVolume(qreal volume)
 	//FIXME
 }
 
+bool KgSound::hasError() const
+{
+	if (d->m_sound1 && d->m_sound1->state() == Phonon::ErrorState)
+	{
+		return true;
+	}
+	if (d->m_sound2 && d->m_sound2->state() == Phonon::ErrorState)
+	{
+		return true;
+	}
+	return false;
+}
+
 void KgSound::start()
 {
 	if(!d->m_sound1 || !d->m_sound2)

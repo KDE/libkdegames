@@ -44,3 +44,8 @@ void KgAudioScene::setVolume(qreal volume)
 {
 	Phonon::AudioOutput(Phonon::GameCategory).setVolume(volume);
 }
+
+bool KgAudioScene::hasError()
+{
+	return false;
+}

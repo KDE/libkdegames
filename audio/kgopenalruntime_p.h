@@ -61,6 +61,7 @@ class KgOpenALRuntime
 		//global properties
 		QPointF m_listenerPos;
 		qreal m_volume;
+		bool m_error;
 		//active sound and playback instances
 		QHash<KgSound*, KgPlaybackEventList> m_soundsEvents;
 	private:

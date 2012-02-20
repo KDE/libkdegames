@@ -67,6 +67,21 @@ namespace KgAudioScene
 	///default is 1.0, which means no volume change, compared to the
 	///original sounds. 0.0 means that all sounds are muted.
 	KDEGAMES_EXPORT void setVolume(qreal volume);
+
+	///@returns whether an error was detected in the audio backend
+	///
+	///Since KgAudio is typically used by games where audio is not an absolutely
+	///vital part of the gameplay, we do not need to fail if sound does not work,
+	///over even make some sort of deep analysis why something did not work. The
+	///user will notice missing sound, and advanced users may investigate
+	///the kWarning() messages. That is usually enough. If not, use this method.
+	///
+	///The state of hasError() may theoretically change while the application
+	///runs, but in practice, this is very unlikely. (The only tricky part is
+	///typically the initial allocation of ressources.)
+	///
+	///@sa KgSound::hasError()
+	KDEGAMES_EXPORT bool hasError();
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KgAudioScene::Capabilities)

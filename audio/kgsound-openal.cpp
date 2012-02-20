@@ -150,6 +150,11 @@ void KgSound::setVolume(qreal volume)
 	emit volumeChanged(volume);
 }
 
+bool KgSound::hasError() const
+{
+	return !d->m_valid;
+}
+
 void KgSound::start()
 {
 	start(d->m_pos);

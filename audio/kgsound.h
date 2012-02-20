@@ -116,6 +116,12 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		///@note Changes to this property will not be propagated to running
 		///      playbacks of this sound.
 		void setVolume(qreal volume);
+
+		///@returns whether loading or playing this sound failed
+		///
+		///See KgAudioScene::hasError() for why you typically do not need to use
+		///this method.
+		bool hasError() const;
 	public Q_SLOTS:
 		///Starts a new playback instance of this sound. This will not interrupt
 		///running playbacks of the same sound or any other sounds.

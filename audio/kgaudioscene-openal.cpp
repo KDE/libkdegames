@@ -59,17 +59,24 @@ void KgAudioScene::setVolume(qreal volume)
 	}
 }
 
+bool KgAudioScene::hasError()
+{
+	return g_runtime->m_error;
+}
+
 //END KgAudioScene
 //BEGIN KgOpenALRuntime
 
 KgOpenALRuntime::KgOpenALRuntime()
 	: m_volume(1)
+	, m_error(false)
 	, m_context(0)
 	, m_device(alcOpenDevice(""))
 {
 	if (!m_device)
 	{
 		kWarning() << "Failed to create OpenAL device";
+		m_error = true;
 		return;
 	}
 	m_context = alcCreateContext(m_device, 0);
@@ -77,6 +84,7 @@ KgOpenALRuntime::KgOpenALRuntime()
 	if (error != AL_NO_ERROR)
 	{
 		kWarning() << "Failed to create OpenAL context: Error code" << error;
+		m_error = true;
 		return;
 	}
 	alcMakeContextCurrent(m_context);
@@ -106,6 +114,7 @@ void KgOpenALRuntime::configureListener()
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
 		kWarning() << "Failed to setup OpenAL listener: Error code" << error;
+		m_error = true;
 	}
 }
 
