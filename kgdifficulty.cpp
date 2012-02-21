@@ -37,34 +37,36 @@
 
 struct KgDifficultyLevel::Private
 {
+	bool m_isDefault;
 	int m_hardness;
 	StandardLevel m_level;
 	QByteArray m_key;
 	QString m_title;
 
-	Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level);
-	static Private* fromStandardLevel(StandardLevel level);
+	Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level, bool isDefault);
+	static Private* fromStandardLevel(StandardLevel level, bool isDefault);
 };
 
-KgDifficultyLevel::KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title)
-	: d(new Private(hardness, key, title, Custom))
+KgDifficultyLevel::KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title, bool isDefault)
+	: d(new Private(hardness, key, title, Custom, isDefault))
 {
 }
 
-KgDifficultyLevel::Private::Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level)
-	: m_hardness(hardness)
+KgDifficultyLevel::Private::Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level, bool isDefault)
+	: m_isDefault(isDefault)
+	, m_hardness(hardness)
 	, m_level(level)
 	, m_key(key)
 	, m_title(title)
 {
 }
 
-KgDifficultyLevel::KgDifficultyLevel(StandardLevel level)
-	: d(Private::fromStandardLevel(level))
+KgDifficultyLevel::KgDifficultyLevel(StandardLevel level, bool isDefault)
+	: d(Private::fromStandardLevel(level, isDefault))
 {
 }
 
-KgDifficultyLevel::Private* KgDifficultyLevel::Private::fromStandardLevel(KgDifficultyLevel::StandardLevel level)
+KgDifficultyLevel::Private* KgDifficultyLevel::Private::fromStandardLevel(KgDifficultyLevel::StandardLevel level, bool isDefault)
 {
 	Q_ASSERT_X(level != Custom,
 		"KgDifficultyLevel(StandardLevel) constructor",
@@ -101,12 +103,17 @@ KgDifficultyLevel::Private* KgDifficultyLevel::Private::fromStandardLevel(KgDiff
 		case Custom:
 			return 0;
 	}
-	return new KgDifficultyLevel::Private(level, data.first, data.second, level);
+	return new KgDifficultyLevel::Private(level, data.first, data.second, level, isDefault);
 }
 
 KgDifficultyLevel::~KgDifficultyLevel()
 {
 	delete d;
+}
+
+bool KgDifficultyLevel::isDefault() const
+{
+	return d->m_isDefault;
 }
 
 int KgDifficultyLevel::hardness() const
@@ -184,12 +191,18 @@ void KgDifficulty::addLevel(KgDifficultyLevel* level)
 
 typedef KgDifficultyLevel::StandardLevel DS;
 
-void KgDifficulty::addStandardLevel(DS level)
+void KgDifficulty::addStandardLevel(DS level, bool isDefault)
 {
-	addLevel(new KgDifficultyLevel(level));
+	addLevel(new KgDifficultyLevel(level, isDefault));
 }
 
 void KgDifficulty::addStandardLevelRange(DS from, DS to)
+{
+	//every level in range != Custom, therefore no level is default
+	addStandardLevelRange(from, to, KgDifficultyLevel::Custom);
+}
+
+void KgDifficulty::addStandardLevelRange(DS from, DS to, DS defaultLevel)
 {
 	const QVector<DS> levels = QVector<DS>()
 		<< KgDifficultyLevel::RidiculouslyEasy
@@ -209,7 +222,7 @@ void KgDifficulty::addStandardLevelRange(DS from, DS to)
 	);
 	for (int i = fromIndex; i <= toIndex; ++i)
 	{
-		addLevel(new KgDifficultyLevel(levels[i]));
+		addLevel(new KgDifficultyLevel(levels[i], levels[i] == defaultLevel));
 	}
 }
 
@@ -235,7 +248,15 @@ const KgDifficultyLevel* KgDifficulty::currentLevel() const
 			return d->m_currentLevel = level;
 		}
 	}
-	//no level predefined - easiest level is probably a sane default
+	//no level predefined - look for a default level
+	foreach (const KgDifficultyLevel* level, d->m_levels)
+	{
+		if (level->isDefault())
+		{
+			return d->m_currentLevel = level;
+		}
+	}
+	//no default level predefined - easiest level is probably a sane default
 	return d->m_currentLevel = d->m_levels[0];
 }
 

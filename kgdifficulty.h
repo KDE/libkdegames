@@ -34,6 +34,7 @@ class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(KgDifficultyLevel)
+	Q_PROPERTY(bool default READ isDefault)
 	Q_PROPERTY(int hardness READ hardness)
 	Q_PROPERTY(QByteArray key READ key)
 	Q_PROPERTY(QString title READ title)
@@ -54,10 +55,13 @@ class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 		};
 
 		///Refer to the getters' documentation for details on the params.
-		KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title);
-		explicit KgDifficultyLevel(StandardLevel level);
+		KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title, bool isDefault = false);
+		explicit KgDifficultyLevel(StandardLevel level, bool isDefault = false);
 		virtual ~KgDifficultyLevel();
 
+		///@return whether this level is the default level when no selection has
+		///        been stored (e.g. on first startup)
+		bool isDefault() const;
 		///@return a numeric key which is used to sort the levels by difficulty
 		///        (smaller values mean easier levels)
 		///@note For standard levels, this equals the numeric value of the level
@@ -107,7 +111,7 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 		///currentLevel() if there is one.
 		void addLevel(KgDifficultyLevel* level);
 		///A shortcut for addLevel(new KgDifficultyLevel(@a level)).
-		void addStandardLevel(KgDifficultyLevel::StandardLevel level);
+		void addStandardLevel(KgDifficultyLevel::StandardLevel level, bool isDefault = false);
 		///This convenience method adds a range of standard levels to this
 		///instance (including the boundaries). For example:
 		///@code
@@ -118,6 +122,9 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 		///@endcode
 		///This adds the levels "Easy", "Medium", "Hard" and "Very hard".
 		void addStandardLevelRange(KgDifficultyLevel::StandardLevel from, KgDifficultyLevel::StandardLevel to);
+		///@overload
+		///This overload allows to specify a @a defaultLevel.
+		void addStandardLevelRange(KgDifficultyLevel::StandardLevel from, KgDifficultyLevel::StandardLevel to, KgDifficultyLevel::StandardLevel defaultLevel);
 
 		///@return a list of all difficulty levels, sorted by hardness
 		QList<const KgDifficultyLevel*> levels() const;
