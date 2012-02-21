@@ -25,6 +25,7 @@ this software.
 
 #include "kscoredialog.h"
 #include "khighscore.h"
+#include "../kgdifficulty.h"
 
 #include <KConfig>
 #include <KUser>
@@ -175,6 +176,24 @@ void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString>&
     for (; it != groups.end(); ++it)
     {
         addLocalizedConfigGroupName(qMakePair(it.key(), it.value()));
+    }
+}
+
+void KScoreDialog::initFromDifficulty(const KgDifficulty* diff, bool doSetConfigGroup)
+{
+    QMap<QByteArray, QString> localizedLevelStrings;
+    QMap<int, QByteArray> levelWeights;
+    foreach (const KgDifficultyLevel* level, diff->levels())
+    {
+        localizedLevelStrings.insert(level->key(), level->title());
+        levelWeights.insert(level->hardness(), level->key());
+    }
+    addLocalizedConfigGroupNames(localizedLevelStrings);
+    setConfigGroupWeights(levelWeights);
+    if (doSetConfigGroup)
+    {
+        const KgDifficultyLevel* curLvl = diff->currentLevel();
+        setConfigGroup(qMakePair(curLvl->key(), curLvl->title()));
     }
 }
 

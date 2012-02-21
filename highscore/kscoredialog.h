@@ -34,6 +34,7 @@ this software.
 #include <kdialog.h>
 
 class KLocalizedString;
+class KgDifficulty;
 
 /**
  * \class KScoreDialog kscoredialog.h <KScoreDialog>
@@ -249,6 +250,18 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
          * @returns the current best score in the group
          */
         int highScore();
+
+        /**
+         * Assume that config groups (incl. current selection) are equal to
+         * difficulty levels, and initialize them. This is usually equal to the
+         * following code using KGameDifficulty:
+         * @code
+         * addLocalizedConfigGroupNames(KGameDifficulty::localizedLevelStrings());
+         * setConfigGroupWeights(KGameDifficulty::levelWeights());
+         * setConfigGroup(KGameDifficulty::localizedLevelString());
+         * @endcode
+         */
+        void initFromDifficulty(const KgDifficulty* difficulty, bool setConfigGroup = true);
 
         ///Display the dialog as non-modal
         virtual void show();
