@@ -157,6 +157,10 @@ KgDifficulty::KgDifficulty(QObject* parent)
 
 KgDifficulty::~KgDifficulty()
 {
+	if (d->m_levels.isEmpty())
+	{
+		return;
+	}
 	//save current difficulty level in config file (no sync() call here; this
 	//will most likely be called at application shutdown when others are also
 	//writing to KGlobal::config(); also KConfig's dtor will sync automatically)
