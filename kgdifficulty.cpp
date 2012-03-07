@@ -316,6 +316,19 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 }
 
 //END KgDifficulty
+
+K_GLOBAL_STATIC(KgDifficulty, g_difficulty)
+
+KgDifficulty* Kg::difficulty()
+{
+	return g_difficulty;
+}
+
+KgDifficultyLevel::StandardLevel Kg::difficultyLevel()
+{
+	return g_difficulty->currentLevel()->standardLevel();
+}
+
 //BEGIN KgDifficultyGUI
 
 namespace KgDifficultyGUI
@@ -351,8 +364,12 @@ namespace KgDifficultyGUI
 	};
 }
 
-void KgDifficultyGUI::init(KgDifficulty* difficulty, KXmlGuiWindow* window)
+void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 {
+	const bool useSingleton = !difficulty;
+	if (useSingleton)
+		difficulty = Kg::difficulty();
+
 	//create selector (resides in status bar)
 	KgDifficultyGUI::Selector* selector = new KgDifficultyGUI::Selector(difficulty, window);
 	selector->setToolTip(i18nc("Game difficulty level", "Difficulty"));
@@ -387,7 +404,7 @@ void KgDifficultyGUI::init(KgDifficulty* difficulty, KXmlGuiWindow* window)
 	window->actionCollection()->addAction(menu->objectName(), menu);
 
 	//ensure that the KgDifficulty instance gets deleted
-	if (!difficulty->parent())
+	if (!useSingleton && !difficulty->parent())
 	{
 		difficulty->setParent(window);
 	}

@@ -174,14 +174,25 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 
 Q_DECLARE_METATYPE(const KgDifficultyLevel*)
 
+//TODO: Where to put documentation for this namespace?
+namespace Kg
+{
+	///@return a singleton instance of KgDifficulty
+	KDEGAMES_EXPORT KgDifficulty* difficulty();
+	///A shortcut for Kg::difficulty()->currentLevel()->standardLevel().
+	KDEGAMES_EXPORT KgDifficultyLevel::StandardLevel difficultyLevel();
+}
+
 class KXmlGuiWindow;
 
-//TODO: move this into a separate QtWidgets support library
+//TODO KDE5: move this into a separate QtWidgets support library
 namespace KgDifficultyGUI
 {
 	///Install standard GUI components for the manipulation of the given
 	///KgDifficulty instance in the given @a window.
-	KDEGAMES_EXPORT void init(KgDifficulty* difficulty, KXmlGuiWindow* window);
+	///
+	///Without a second parameter, the Kg::difficulty() singleton is used.
+	KDEGAMES_EXPORT void init(KXmlGuiWindow* window, KgDifficulty* difficulty = 0);
 }
 
 #endif // KGDIFFICULTY_H
