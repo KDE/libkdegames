@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright 2010 Stefan Majewsky <majewsky@gmx.net>                     *
+ *   Copyright 2010-2012 Stefan Majewsky <majewsky@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU Library General Public License          *
@@ -29,7 +29,8 @@ class QGraphicsView;
 class KGameRendererPrivate;
 class KGameRendererClient;
 class KGameRendererClientPrivate;
-class KGameTheme;
+class KgTheme;
+class KgThemeProvider;
 
 #ifndef KDEGAMES_QCOLOR_QHASH
 #	define KDEGAMES_QCOLOR_QHASH
@@ -45,13 +46,12 @@ class KGameTheme;
  * @short Cache-enabled rendering of SVG themes.
  *
  * KGameRenderer is a light-weight rendering framework for the rendering of
- * SVG themes (as represented by KGameTheme) into pixmap caches.
+ * SVG themes (as represented by KgTheme) into pixmap caches.
  *
  * @section terminology Terminology
  *
- * @li Themes, in the context of KGameRenderer, are the same as in the context
- *     of the KGameTheme class: a pair of a .desktop file and a .svg file. See
- *     the KGameTheme documentation for details.
+ * @li Themes in the context of KGameRenderer are KgTheme instances. The theme
+ *     selection by a KgRenderer can be managed by a KgThemeProvider.
  * @li A sprite is either a single pixmap ("non-animated sprites") or a sequence
  *     of pixmaps which are shown consecutively to produce an animation
  *     ("animated sprites"). Non-animated sprites correspond to a single element
@@ -94,7 +94,8 @@ class KGameTheme;
 class KDEGAMES_EXPORT KGameRenderer : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
+	Q_PROPERTY(const KgTheme* theme READ theme)
+	Q_PROPERTY(KgThemeProvider* themeProvider READ themeProvider)
 	public:
 		///Describes the various strategies which KGameRenderer can use to speed
 		///up rendering.
@@ -113,17 +114,15 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		};
 		Q_DECLARE_FLAGS(Strategies, Strategy)
 
-		///Constructs a new KGameRenderer. The given @a defaultTheme will be
-		///used as the initial theme, and will also act as a fallback when an
-		///invalid theme is given.
-		///@note If you load the theme name from a configuration file, give that
-		///theme name as the first argument instead of calling setTheme() later.
-		///setTheme() clears the cache, while this constructor tries to reuse it.
-		///@param defaultTheme a theme name as used by KGameTheme::load
+		///Constructs a new KGameRenderer that renders @a prov->currentTheme().
 		///@param cacheSize the cache size in megabytes (if not given, a sane
 		///default is used)
 		///@warning This constructor may only be called from the main thread.
-		explicit KGameRenderer(const QString& defaultTheme, unsigned cacheSize = 0);
+		explicit KGameRenderer(KgThemeProvider* prov, unsigned cacheSize = 0);
+		///@overload that allows to use KGameRenderer without a theme provider
+		///          (useful when there is only one theme)
+		///@note Takes ownership of @a theme.
+		explicit KGameRenderer(KgTheme* theme, unsigned cacheSize = 0);
 		///Deletes this KGameRenderer instance, as well as all clients using it.
 		virtual ~KGameRenderer();
 
@@ -172,11 +171,12 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///If you disable UseDiskCache, you should do so before setTheme(),
 		///because changes to UseDiskCache cause a full theme reload.
 		void setStrategyEnabled(Strategy strategy, bool enabled = true);
-		///@return the theme currently in use (format as in KGameTheme::load())
-		QString theme() const;
 
-		///@return the KGameTheme instance used by this renderer
-		const KGameTheme* gameTheme() const;
+		///@return the KgTheme instance used by this renderer
+		const KgTheme* theme() const;
+		///@return the KgThemeProvider instance used by this renderer, or 0 if
+		///        the renderer was created with a single static theme
+		KgThemeProvider* themeProvider() const;
 
 		///@return the bounding rectangle of the sprite with this @a key
 		///This is equal to QSvgRenderer::boundsOnElement() of the corresponding
@@ -212,21 +212,12 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		// The parentheses around QHash<QColor, QColor>() avoid compile
 		// errors on platforms with older gcc versions, e.g. OS X 10.6.
 		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1, const QHash<QColor, QColor>& customColors = (QHash<QColor, QColor>())) const;
-	public Q_SLOTS:
-		///Load the given theme and update the pixmaps of all associated
-		///KGameRendererClient instances.
-		///@param theme a theme name as used by KGameTheme::load
-		void setTheme(const QString& theme);
-	Q_SIGNALS:
-		///This signal is emitted when a new theme has been loaded. You usually
-		///do not need to react on this signal if you use KGameRendererClient or
-		///KGameRenderedItem, because these update their pixmaps automatically.
-		void themeChanged(const QString& theme);
 	private:
 		friend class KGameRendererPrivate;
 		friend class KGameRendererClient;
 		friend class KGameRendererClientPrivate;
 		KGameRendererPrivate* const d;
+		Q_PRIVATE_SLOT(d, void _k_setTheme(const KgTheme*));
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameRenderer::Strategies)

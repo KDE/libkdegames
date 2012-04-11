@@ -109,8 +109,9 @@ class KGameRendererPrivate : public QObject
 {
 	Q_OBJECT
 	public:
-		KGameRendererPrivate(const QString& defaultTheme, unsigned cacheSize, KGameRenderer* parent);
-		bool setTheme(const QString& theme);
+		KGameRendererPrivate(KgThemeProvider* provider, unsigned cacheSize, KGameRenderer* parent);
+		void _k_setTheme(const KgTheme* theme);
+		bool setTheme(const KgTheme* theme);
 		inline QString spriteFrameKey(const QString& key, int frame, bool normalizeFrameNo = false) const;
 		void requestPixmap(const KGRInternal::ClientSpec& spec, KGameRendererClient* client, QPixmap* synchronousResult = 0);
 	private:
@@ -120,12 +121,12 @@ class KGameRendererPrivate : public QObject
 	public:
 		KGameRenderer* m_parent;
 
-		QString m_defaultTheme, m_currentTheme;
+		KgThemeProvider* m_provider;
+		const KgTheme* m_currentTheme;
 		QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
 		unsigned m_cacheSize;
 		KGameRenderer::Strategies m_strategies;
 		int m_frameBaseIndex;
-		KGameTheme m_theme;
 		QGraphicsView* m_defaultPrimaryView;
 
 		QThreadPool m_workerPool;

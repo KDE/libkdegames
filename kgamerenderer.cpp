@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright 2010 Stefan Majewsky <majewsky@gmx.net>                     *
+ *   Copyright 2010-2012 Stefan Majewsky <majewsky@gmx.net>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU Library General Public License          *
@@ -20,6 +20,8 @@
 #include "kgamerenderer_p.h"
 #include "kgamerendererclient.h"
 #include "colorproxy_p.h"
+#include "kgtheme.h"
+#include "kgthemeprovider.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDateTime>
@@ -31,18 +33,20 @@
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
 
-static const QString cacheName(QString theme)
+static const QString cacheName(QByteArray theme)
 {
 	const QString appName = QCoreApplication::instance()->applicationName();
 	//e.g. "themes/foobar.desktop" -> "themes/foobar"
-	if (theme.endsWith(QLatin1String(".desktop")))
+	if (theme.endsWith(QByteArray(".desktop")))
 		theme.truncate(theme.length() - 8); //8 = strlen(".desktop")
-	return QString::fromLatin1("kgamerenderer-%1-%2").arg(appName).arg(theme);
+	return QString::fromLatin1("kgamerenderer-%1-%2")
+		.arg(appName).arg(QString::fromUtf8(theme));
 }
 
-KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, unsigned cacheSize, KGameRenderer* parent)
+KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned cacheSize, KGameRenderer* parent)
 	: m_parent(parent)
-	, m_defaultTheme(defaultTheme)
+	, m_provider(provider)
+	, m_currentTheme(0) //will be loaded on first use
 	, m_frameSuffix(QString::fromLatin1("_%1"))
 	, m_sizePrefix(QString::fromLatin1("%1-%2-"))
 	, m_frameCountPrefix(QString::fromLatin1("fc-"))
@@ -58,8 +62,25 @@ KGameRendererPrivate::KGameRendererPrivate(const QString& defaultTheme, unsigned
 	qRegisterMetaType<KGRInternal::Job*>();
 }
 
-KGameRenderer::KGameRenderer(const QString& defaultTheme, unsigned cacheSize)
-	: d(new KGameRendererPrivate(defaultTheme, cacheSize, this))
+KGameRenderer::KGameRenderer(KgThemeProvider* provider, unsigned cacheSize)
+	: d(new KGameRendererPrivate(provider, cacheSize, this))
+{
+	if (!provider->parent())
+	{
+		provider->setParent(this);
+	}
+	connect(provider, SIGNAL(currentThemeChanged(const KgTheme*)), SLOT(_k_setTheme(const KgTheme*)));
+}
+
+static KgThemeProvider* providerForSingleTheme(KgTheme* theme, QObject* parent)
+{
+	KgThemeProvider* prov = new KgThemeProvider(QByteArray(), parent);
+	prov->addTheme(theme);
+	return prov;
+}
+
+KGameRenderer::KGameRenderer(KgTheme* theme, unsigned cacheSize)
+	: d(new KGameRendererPrivate(providerForSingleTheme(theme, this), cacheSize, this))
 {
 }
 
@@ -125,68 +146,59 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 	if (strategy == KGameRenderer::UseDiskCache && oldEnabled != enabled)
 	{
 		//reload theme
-		const QString theme = d->m_currentTheme;
-		d->m_currentTheme.clear(); //or setTheme() will return immediately
-		setTheme(theme);
+		const KgTheme* theme = d->m_currentTheme;
+		if (theme)
+		{
+			d->m_currentTheme = 0; //or setTheme() will return immediately
+			d->_k_setTheme(theme);
+		}
 	}
 }
 
-QString KGameRenderer::theme() const
+void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 {
-	return d->m_currentTheme;
-}
-
-void KGameRenderer::setTheme(const QString& theme)
-{
-	const QString oldTheme = d->m_currentTheme;
+	const KgTheme* oldTheme = m_currentTheme;
 	if (oldTheme == theme)
 	{
 		return;
 	}
-	kDebug(11000) << "Setting theme:" << theme;
-	if (!d->setTheme(theme) && theme != d->m_defaultTheme)
+	kDebug(11000) << "Setting theme:" << theme->name();
+	if (!setTheme(theme))
 	{
-		kDebug(11000) << "Falling back to default theme:" << d->m_defaultTheme;
-		d->setTheme(d->m_defaultTheme);
+		const KgTheme* defaultTheme = m_provider->defaultTheme();
+		if (theme != defaultTheme)
+		{
+			kDebug(11000) << "Falling back to default theme:" << defaultTheme->name();
+			setTheme(defaultTheme);
+			m_provider->setCurrentTheme(defaultTheme);
+		}
 	}
 	//announce change to KGameRendererClients
-	QHash<KGameRendererClient*, QString>::iterator it1 = d->m_clients.begin(), it2 = d->m_clients.end();
+	QHash<KGameRendererClient*, QString>::iterator it1 = m_clients.begin(), it2 = m_clients.end();
 	for (; it1 != it2; ++it1)
 	{
 		it1.value().clear(); //because the pixmap is outdated
 		it1.key()->d->fetchPixmap();
 	}
-	//announce change publicly
-	if (oldTheme != d->m_currentTheme)
-	{
-		emit themeChanged(d->m_currentTheme);
-	}
 }
 
-bool KGameRendererPrivate::setTheme(const QString& theme)
+bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 {
-	if (theme.isEmpty())
+	if (!theme)
 	{
-		return false;
-	}
-	//load desktop file
-	if (!m_theme.load(theme))
-	{
-		kDebug(11000) << "Theme change failed: Desktop file broken";
-		m_theme.load(m_currentTheme);
 		return false;
 	}
 	//open cache (and SVG file, if necessary)
 	if (m_strategies & KGameRenderer::UseDiskCache)
 	{
 		QScopedPointer<KImageCache> oldCache(m_imageCache);
-		const QString imageCacheName = cacheName(m_theme.fileName());
+		const QString imageCacheName = cacheName(theme->identifier());
 		m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
 		m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
 		//check timestamp of cache vs. last write access to theme/SVG
 		const uint svgTimestamp = qMax(
-			QFileInfo(m_theme.graphics()).lastModified().toTime_t(),
-			QFileInfo(m_theme.path()).lastModified().toTime_t()
+			QFileInfo(theme->svgPath()).lastModified().toTime_t(),
+			theme->property("_k_themeDescTimestamp").value<uint>()
 		);
 		QByteArray buffer;
 		if (!m_imageCache->find(QString::fromLatin1("kgr_timestamp"), &buffer))
@@ -197,10 +209,10 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		if (cacheTimestamp < svgTimestamp)
 		{
 			kDebug(11000) << "Theme newer than cache, checking SVG";
-			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(m_theme.graphics()));
+			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->svgPath()));
 			if (renderer->isValid())
 			{
-				m_rendererPool.setPath(m_theme.graphics(), renderer.take());
+				m_rendererPool.setPath(theme->svgPath(), renderer.take());
 				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
 			}
 			else
@@ -216,15 +228,15 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 		}
 		//theme is cached - just delete the old renderer after making sure that no worker threads are using it anymore
 		else if (m_currentTheme != theme)
-			m_rendererPool.setPath(m_theme.graphics());
+			m_rendererPool.setPath(theme->svgPath());
 	}
 	else // !(m_strategies & KGameRenderer::UseDiskCache) -> no cache is used
 	{
 		//load SVG file
-		QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(m_theme.graphics()));
+		QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->svgPath()));
 		if (renderer->isValid())
 		{
-			m_rendererPool.setPath(m_theme.graphics(), renderer.take());
+			m_rendererPool.setPath(theme->svgPath(), renderer.take());
 		}
 		else
 		{
@@ -244,9 +256,19 @@ bool KGameRendererPrivate::setTheme(const QString& theme)
 	return true;
 }
 
-const KGameTheme* KGameRenderer::gameTheme() const
+const KgTheme* KGameRenderer::theme() const
 {
-	return &d->m_theme;
+	//ensure that some theme is loaded
+	if (!d->m_currentTheme)
+	{
+		d->_k_setTheme(d->m_provider->currentTheme());
+	}
+	return d->m_currentTheme;
+}
+
+KgThemeProvider* KGameRenderer::themeProvider() const
+{
+	return d->m_provider;
 }
 
 QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame, bool normalizeFrameNo) const
@@ -276,13 +298,9 @@ QString KGameRendererPrivate::spriteFrameKey(const QString& key, int frame, bool
 int KGameRenderer::frameCount(const QString& key) const
 {
 	//ensure that some theme is loaded
-	if (d->m_currentTheme.isEmpty())
+	if (!d->m_currentTheme)
 	{
-		const_cast<KGameRenderer*>(this)->setTheme(d->m_defaultTheme);
-		if (d->m_currentTheme.isEmpty())
-		{
-			return -1;
-		}
+		d->_k_setTheme(d->m_provider->currentTheme());
 	}
 	//look up in in-process cache
 	QHash<QString, int>::const_iterator it = d->m_frameCountCache.constFind(key);
@@ -337,13 +355,9 @@ QRectF KGameRenderer::boundsOnSprite(const QString& key, int frame) const
 {
 	const QString elementKey = d->spriteFrameKey(key, frame);
 	//ensure that some theme is loaded
-	if (d->m_currentTheme.isEmpty())
+	if (!d->m_currentTheme)
 	{
-		const_cast<KGameRenderer*>(this)->setTheme(d->m_defaultTheme);
-		if (d->m_currentTheme.isEmpty())
-		{
-			return QRectF();
-		}
+		d->_k_setTheme(d->m_provider->currentTheme());
 	}
 	//look up in in-process cache
 	QHash<QString, QRectF>::const_iterator it = d->m_boundsCache.constFind(elementKey);
@@ -438,13 +452,9 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		m_clients[client] = cacheKey;
 	}
 	//ensure that some theme is loaded
-	if (m_currentTheme.isEmpty())
+	if (!m_currentTheme)
 	{
-		m_parent->setTheme(m_defaultTheme);
-		if (m_currentTheme.isEmpty())
-		{
-			return;
-		}
+		_k_setTheme(m_provider->currentTheme());
 	}
 	//try to serve from high-speed cache
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.constFind(cacheKey);

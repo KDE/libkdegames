@@ -89,6 +89,9 @@ set(kdegames_LIB_SRCS
     kstandardgameaction.cpp
     kgamedifficulty.cpp
     kgdifficulty.cpp
+    kgtheme.cpp
+    kgthemeprovider.cpp
+    kgthemeselector.cpp
 )
 if(Q_WS_X11)
 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
@@ -111,6 +114,9 @@ install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
+install(FILES kgthemeprovider-migration.upd
+    DESTINATION ${DATA_INSTALL_DIR}/kconf_update)
+
 install(FILES
     libkdegames_export.h
     kstandardgameaction.h
@@ -131,5 +137,8 @@ install(FILES
     kgamethemeselector.h
     kgamedifficulty.h
     kgdifficulty.h
+    kgtheme.h
+    kgthemeprovider.h
+    kgthemeselector.h
     DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )

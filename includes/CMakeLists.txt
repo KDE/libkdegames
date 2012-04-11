@@ -3,6 +3,9 @@ install( FILES
 	KgAudioScene
 	KgDifficulty
 	KgSound
+	KgTheme
+	KgThemeProvider
+	KgThemeSelector
 	KChat
 	KChatBase
 	KChatDialog
