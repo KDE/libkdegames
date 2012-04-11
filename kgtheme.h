@@ -68,16 +68,16 @@
 class KDEGAMES_EXPORT KgTheme : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QByteArray identifier READ identifier)
-	//no NOTIFY signals here - it is not intended to allow these properties
-	//to change after the initial setup (note how KgThemeProvider returns only
-	//const KgTheme*)
-	Q_PROPERTY(QString name READ name WRITE setName)
-	Q_PROPERTY(QString description READ description WRITE setDescription)
-	Q_PROPERTY(QString author READ author WRITE setAuthor)
-	Q_PROPERTY(QString authorEmail READ authorEmail WRITE setAuthorEmail)
-	Q_PROPERTY(QString svgPath READ svgPath WRITE setSvgPath)
-	Q_PROPERTY(QString previewPath READ previewPath WRITE setPreviewPath)
+	Q_PROPERTY(QByteArray identifier READ identifier NOTIFY readOnlyProperty)
+	//it is not intended to allow these properties to change after the initial
+	//setup (note how KgThemeProvider returns only const KgTheme*), hence
+	//a dummy NOTIFY signal is enough
+	Q_PROPERTY(QString name READ name WRITE setName NOTIFY readOnlyProperty)
+	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY readOnlyProperty)
+	Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY readOnlyProperty)
+	Q_PROPERTY(QString authorEmail READ authorEmail WRITE setAuthorEmail NOTIFY readOnlyProperty)
+	Q_PROPERTY(QString graphicsPath READ graphicsPath WRITE setGraphicsPath NOTIFY readOnlyProperty)
+	Q_PROPERTY(QString previewPath READ previewPath WRITE setPreviewPath NOTIFY readOnlyProperty)
 	Q_DISABLE_COPY(KgTheme)
 	public:
 		///Constructor. The @a identifier must be application-unique.
@@ -123,9 +123,9 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		void setAuthorEmail(const QString& authorEmail);
 
 		///@return the path of the SVG file which holds the theme contents
-		QString svgPath() const;
-		///@see svgPath()
-		void setSvgPath(const QString& path);
+		QString graphicsPath() const;
+		///@see graphicsPath()
+		void setGraphicsPath(const QString& path);
 		///@return the path to an image file containing a preview, or an empty
 		///        string if no preview file is known
 		QString previewPath() const;
@@ -141,6 +141,10 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		QString customData(const QString& key, const QString& defaultValue = QString()) const;
 		///@see customData()
 		void setCustomData(const QMap<QString, QString>& customData);
+	Q_SIGNALS:
+		///This signal is never emitted. It is provided because QML likes to
+		///complain about properties without NOTIFY signals, even readonly ones.
+		void readOnlyProperty();
 	private:
 		class Private;
 		Private* const d;

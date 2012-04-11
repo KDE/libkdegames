@@ -61,7 +61,7 @@ namespace KGRInternal
 
 			//The second argument can be used to pass an instance which has been
 			//used earlier to check the validity of the SVG file.
-			inline void setPath(const QString& svgPath, QSvgRenderer* renderer = 0);
+			inline void setPath(const QString& graphicsPath, QSvgRenderer* renderer = 0);
 			//This can be used to determine whether a call to allocRenderer()
 			//would need to create a new renderer instance.
 			inline bool hasAvailableRenderers() const;

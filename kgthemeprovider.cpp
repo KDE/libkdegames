@@ -49,6 +49,7 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	, d(new Private(configKey))
 {
 	qRegisterMetaType<const KgTheme*>();
+	qRegisterMetaType<KgThemeProvider*>();
 }
 
 KgThemeProvider::~KgThemeProvider()

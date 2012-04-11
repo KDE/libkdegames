@@ -94,8 +94,8 @@ class KgThemeProvider;
 class KDEGAMES_EXPORT KGameRenderer : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(const KgTheme* theme READ theme)
-	Q_PROPERTY(KgThemeProvider* themeProvider READ themeProvider)
+	Q_PROPERTY(const KgTheme* theme READ theme NOTIFY themeChanged)
+	Q_PROPERTY(KgThemeProvider* themeProvider READ themeProvider NOTIFY readOnlyProperty)
 	public:
 		///Describes the various strategies which KGameRenderer can use to speed
 		///up rendering.
@@ -212,6 +212,11 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		// The parentheses around QHash<QColor, QColor>() avoid compile
 		// errors on platforms with older gcc versions, e.g. OS X 10.6.
 		QPixmap spritePixmap(const QString& key, const QSize& size, int frame = -1, const QHash<QColor, QColor>& customColors = (QHash<QColor, QColor>())) const;
+	Q_SIGNALS:
+		void themeChanged(const KgTheme* theme);
+		///This signal is never emitted. It is provided because QML likes to
+		///complain about properties without NOTIFY signals, even readonly ones.
+		void readOnlyProperty();
 	private:
 		friend class KGameRendererPrivate;
 		friend class KGameRendererClient;

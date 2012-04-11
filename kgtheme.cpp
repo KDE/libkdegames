@@ -28,7 +28,7 @@
 struct KgTheme::Private
 {
 	const QByteArray m_identifier;
-	QString m_name, m_description, m_author, m_authorEmail, m_svgPath, m_previewPath;
+	QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
 	QMap<QString, QString> m_customData;
 
 	Private(const QByteArray& id) : m_identifier(id) {}
@@ -62,7 +62,7 @@ KGTHEME_STRING_PROPERTY(name, setName)
 KGTHEME_STRING_PROPERTY(description, setDescription)
 KGTHEME_STRING_PROPERTY(author, setAuthor)
 KGTHEME_STRING_PROPERTY(authorEmail, setAuthorEmail)
-KGTHEME_STRING_PROPERTY(svgPath, setSvgPath)
+KGTHEME_STRING_PROPERTY(graphicsPath, setGraphicsPath)
 KGTHEME_STRING_PROPERTY(previewPath, setPreviewPath)
 
 QMap<QString, QString> KgTheme::customData() const
@@ -128,9 +128,9 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	//resolve paths
 	const QFileInfo fi(path);
 	const QDir dir = fi.dir();
-	QString svgPath = group.readEntry("FileName", QString());
-	if (!svgPath.isEmpty() && QFileInfo(svgPath).isRelative())
-		svgPath = dir.absoluteFilePath(svgPath);
+	QString graphicsPath = group.readEntry("FileName", QString());
+	if (!graphicsPath.isEmpty() && QFileInfo(graphicsPath).isRelative())
+		graphicsPath = dir.absoluteFilePath(graphicsPath);
 	QString previewPath = group.readEntry("Preview", QString());
 	if (!previewPath.isEmpty() && QFileInfo(previewPath).isRelative())
 		previewPath = dir.absoluteFilePath(previewPath);
@@ -139,7 +139,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	setDescription(group.readEntry("Description", QString()));
 	setAuthor(group.readEntry("Author", QString()));
 	setAuthorEmail(group.readEntry("AuthorEmail", QString()));
-	setSvgPath(svgPath);
+	setGraphicsPath(graphicsPath);
 	setPreviewPath(previewPath);
 	setCustomData(group.entryMap());
 	//store modification date of this file in private property (KGameRenderer

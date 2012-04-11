@@ -180,6 +180,7 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 		it1.value().clear(); //because the pixmap is outdated
 		it1.key()->d->fetchPixmap();
 	}
+	emit m_parent->themeChanged(m_currentTheme);
 }
 
 bool KGameRendererPrivate::setTheme(const KgTheme* theme)
@@ -197,7 +198,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
 		//check timestamp of cache vs. last write access to theme/SVG
 		const uint svgTimestamp = qMax(
-			QFileInfo(theme->svgPath()).lastModified().toTime_t(),
+			QFileInfo(theme->graphicsPath()).lastModified().toTime_t(),
 			theme->property("_k_themeDescTimestamp").value<uint>()
 		);
 		QByteArray buffer;
@@ -209,10 +210,10 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		if (cacheTimestamp < svgTimestamp)
 		{
 			kDebug(11000) << "Theme newer than cache, checking SVG";
-			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->svgPath()));
+			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
 			if (renderer->isValid())
 			{
-				m_rendererPool.setPath(theme->svgPath(), renderer.take());
+				m_rendererPool.setPath(theme->graphicsPath(), renderer.take());
 				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
 			}
 			else
@@ -228,15 +229,15 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		}
 		//theme is cached - just delete the old renderer after making sure that no worker threads are using it anymore
 		else if (m_currentTheme != theme)
-			m_rendererPool.setPath(theme->svgPath());
+			m_rendererPool.setPath(theme->graphicsPath());
 	}
 	else // !(m_strategies & KGameRenderer::UseDiskCache) -> no cache is used
 	{
 		//load SVG file
-		QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->svgPath()));
+		QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
 		if (renderer->isValid())
 		{
-			m_rendererPool.setPath(theme->svgPath(), renderer.take());
+			m_rendererPool.setPath(theme->graphicsPath(), renderer.take());
 		}
 		else
 		{
@@ -589,7 +590,7 @@ KGRInternal::RendererPool::~RendererPool()
 	setPath(QString());
 }
 
-void KGRInternal::RendererPool::setPath(const QString& svgPath, QSvgRenderer* renderer)
+void KGRInternal::RendererPool::setPath(const QString& graphicsPath, QSvgRenderer* renderer)
 {
 	QMutexLocker locker(&m_mutex);
 	//delete all renderers
@@ -602,7 +603,7 @@ void KGRInternal::RendererPool::setPath(const QString& svgPath, QSvgRenderer* re
 	}
 	m_hash.clear();
 	//set path
-	m_path = svgPath;
+	m_path = graphicsPath;
 	//existence of a renderer instance is evidence for the validity of the SVG file
 	if (renderer)
 	{
