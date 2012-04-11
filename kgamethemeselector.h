@@ -44,8 +44,9 @@ class KGameThemeSelectorPrivate;
  * directory for .desktop files with a group called "KGameTheme".
  *
  * @author Mauricio Piacentini
+ * @deprecated Use KgThemeSelector instead.
  **/
-class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
+class KDEGAMES_EXPORT_DEPRECATED KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     public:

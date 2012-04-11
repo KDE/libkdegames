@@ -39,8 +39,9 @@ class QPixmap;
  * will likely be necessary to derive from this class
  *
  * @author Mauricio Piacentini
+ * @deprecated Use KgTheme instead.
  **/
-class KDEGAMES_EXPORT KGameTheme
+class KDEGAMES_EXPORT_DEPRECATED KGameTheme
 {
     public:
         KGameTheme(const QString &themeGroup = QLatin1String("KGameTheme"));
