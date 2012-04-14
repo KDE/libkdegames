@@ -41,10 +41,10 @@
  *
  * @section fileformat Default file format for theme descriptions
  *
- * Although KgTheme and KgThemeProvider special theme description files for most
- * basic usage, there is a format for theme description files based on the
- * XDG Desktop File Specification. The following example shows the recognized
- * keys:
+ * Although KgTheme and KgThemeProvider do not need special theme description
+ * files for most basic usage, there is a format for theme description files
+ * based on the XDG Desktop File Specification. The following example shows the
+ * recognized keys:
  *
  * @code
  * [KGameTheme]
@@ -62,7 +62,7 @@
  * "FileName" and "Preview" are resolved relative to the directory that contains
  * the theme description file.
  *
- * If the "KGameTheme" group contains any further keys, their values can be
+ * If the [KGameTheme] group contains any further keys, their values can be
  * retrieved through the KgTheme::customData() method.
  */
 class KDEGAMES_EXPORT KgTheme : public QObject
