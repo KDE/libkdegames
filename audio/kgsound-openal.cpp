@@ -206,7 +206,7 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound* sound, const QPointF& pos)
 	m_valid = true;
 	//connect to sound (buffer)
 	alSource3f(m_source, AL_POSITION, pos.x(), pos.y(), 0);
-	alSourcef(m_source, AL_PITCH, 1.5); //TODO: debug
+	alSourcef(m_source, AL_PITCH, 1.0); //TODO: debug
 	alSourcef(m_source, AL_GAIN, sound->volume());
 	alSourcei(m_source, AL_BUFFER, sound->d->m_buffer);
 	const KgSound::PlaybackType type = sound->playbackType();
