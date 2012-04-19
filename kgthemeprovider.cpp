@@ -86,7 +86,7 @@ void KgThemeProvider::addTheme(KgTheme* theme)
 	//*then* start to work with the currentLevel(). The first call to
 	//currentTheme() will load the previous selection from the config, and the
 	//level list will be considered immutable from this point.
-	Q_ASSERT_X(d->m_currentTheme == 0 && !d->m_inRediscover,
+	Q_ASSERT_X(d->m_currentTheme == 0 || d->m_inRediscover,
 		"KgThemeProvider::addTheme",
 		"Only allowed before currentTheme() is called."
 	);
@@ -222,6 +222,7 @@ void KgThemeProvider::rediscoverThemes()
 		addTheme(theme);
 	}
 	setDefaultTheme(themes.value(0));
+	d->m_inRediscover = false;
 }
 
 QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size)
