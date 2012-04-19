@@ -108,7 +108,7 @@ void KgThemeProvider::setDefaultTheme(const KgTheme* theme)
 			"theme has already been determined. That's not gonna work.";
 		return;
 	}
-	//Q_ASSERT(d->m_levels.contains(theme));
+	Q_ASSERT(d->m_themes.contains(theme));
 	d->m_defaultTheme = theme;
 }
 
@@ -139,7 +139,7 @@ const KgTheme* KgThemeProvider::currentTheme() const
 
 void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
 {
-	//Q_ASSERT(d->m_levels.contains(theme));
+	Q_ASSERT(d->m_themes.contains(theme));
 	if (d->m_currentTheme != theme)
 	{
 		d->m_currentTheme = theme;
