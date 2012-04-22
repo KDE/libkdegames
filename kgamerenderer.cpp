@@ -28,6 +28,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QScopedPointer>
 #include <QtGui/QPainter>
+#include <QVariant>
 #include <KDebug>
 
 //TODO: automatically schedule pre-rendering of animation frames
