@@ -28,7 +28,7 @@
 #include <QtCore/QStringList>
 #include <QtGui/QMatrix>
 #include <QtXml/QDomDocument>
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 
 class KGameSvgDocumentPrivate;
@@ -112,7 +112,7 @@ class KGameSvgDocumentPrivate;
  * @todo Add convenience functions for getting/setting individual style properties.
  *     I haven't completely convinced myself of the utility of this, so don't hold your breathe. ;-)
  */
-class KDEGAMES_EXPORT KGameSvgDocument : public QDomDocument
+class KDEGAMESPRIVATE_EXPORT KGameSvgDocument : public QDomDocument
 {
 public:
     /**

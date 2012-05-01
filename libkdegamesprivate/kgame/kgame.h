@@ -26,7 +26,7 @@
 #include <QtCore/QList>
 
 #include "kgamenetwork.h"
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 class KRandomSequence;
 
 class KPlayer;
@@ -57,7 +57,7 @@ class KGamePrivate;
  *
  *
  */
-class KDEGAMES_EXPORT KGame : public KGameNetwork
+class KDEGAMESPRIVATE_EXPORT KGame : public KGameNetwork
 {
   Q_OBJECT
 

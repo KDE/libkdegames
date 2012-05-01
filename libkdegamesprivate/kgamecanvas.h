@@ -39,7 +39,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QtCore/QRect>
 #include <QtGui/QRegion>
 #include <QtGui/QWidget>
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 #include <KGameRendererClient>
 
 class KGameCanvasItem;
@@ -52,7 +52,7 @@ class KGameCanvasItem;
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasAbstract
+class KDEGAMESPRIVATE_EXPORT KGameCanvasAbstract
 {
 protected:
     friend class KGameCanvasItem;
@@ -111,7 +111,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasItem
 {
 private:
     friend class KGameCanvasAbstract;
@@ -241,7 +241,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasDummy : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasDummy : public KGameCanvasItem
 {
 public:
     /** Constructor */
@@ -266,7 +266,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasGroup : public KGameCanvasItem, public KGameCanvasAbstract
+class KDEGAMESPRIVATE_EXPORT KGameCanvasGroup : public KGameCanvasItem, public KGameCanvasAbstract
 {
 private:
     mutable bool m_child_rect_changed;
@@ -311,7 +311,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasPicture : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasPicture : public KGameCanvasItem
 {
 private:
     QPicture m_picture;
@@ -343,7 +343,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasPixmap : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasPixmap : public KGameCanvasItem
 {
 private:
     QPixmap m_pixmap;
@@ -378,7 +378,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
  */
-class KDEGAMES_EXPORT KGameCanvasRenderedPixmap : public KGameCanvasPixmap, public KGameRendererClient
+class KDEGAMESPRIVATE_EXPORT KGameCanvasRenderedPixmap : public KGameCanvasPixmap, public KGameRendererClient
 {
 public:
 	KGameCanvasRenderedPixmap(KGameRenderer* renderer, const QString& spriteKey, KGameCanvasAbstract* canvas = 0);
@@ -394,7 +394,7 @@ protected:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT  KGameCanvasTiledPixmap : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT  KGameCanvasTiledPixmap : public KGameCanvasItem
 {
 private:
     QPixmap m_pixmap;
@@ -447,7 +447,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
 {
 private:
     QColor m_color;
@@ -484,7 +484,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasText : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasText : public KGameCanvasItem
 {
 public:
     /** Specifies the meaning of the x coordinate of the item. It can
@@ -570,7 +570,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasWidget : public QWidget, public KGameCanvasAbstract
+class KDEGAMESPRIVATE_EXPORT KGameCanvasWidget : public QWidget, public KGameCanvasAbstract
 {
 Q_OBJECT
 private:
@@ -633,7 +633,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMES_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
+class KDEGAMESPRIVATE_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
 {
     QRect m_child_rect;
     bool m_child_rect_valid;

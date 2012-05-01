@@ -25,7 +25,6 @@
 #include <QtCore/QRunnable>
 #include <QtCore/QThreadPool>
 #include <QtSvg/QSvgRenderer>
-#include <KGameTheme>
 #include <KImageCache>
 
 namespace KGRInternal

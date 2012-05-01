@@ -22,7 +22,7 @@
 
 #include <QtGui/QWidget>
 
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 class KGameTheme;
 class KConfigSkeleton; 
@@ -46,7 +46,7 @@ class KGameThemeSelectorPrivate;
  * @author Mauricio Piacentini
  * @deprecated Use KgThemeSelector instead.
  **/
-class KDEGAMES_EXPORT_DEPRECATED KGameThemeSelector : public QWidget
+class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     public:

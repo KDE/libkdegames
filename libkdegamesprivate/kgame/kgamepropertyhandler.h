@@ -25,7 +25,7 @@
 #include <QtCore/QMultiHash>
 
 #include "kgameproperty.h"
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class QDataStream;
 class KGame;
@@ -70,7 +70,7 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
  * multiplied. 
  *
  **/
-class KDEGAMES_EXPORT KGamePropertyHandler : public QObject
+class KDEGAMESPRIVATE_EXPORT KGamePropertyHandler : public QObject
 {
 	Q_OBJECT
 

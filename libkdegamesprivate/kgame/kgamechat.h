@@ -23,8 +23,8 @@
 
 #include <QtCore/QString>
 
-#include "kchatbase.h"
-#include <libkdegames_export.h>
+#include "../kchatbase.h"
+#include "../libkdegamesprivate_export.h"
 class KPlayer;
 class KGame;
 class KGamePropertyBase;
@@ -42,7 +42,7 @@ class KGameChatPrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDEGAMES_EXPORT KGameChat : public KChatBase
+class KDEGAMESPRIVATE_EXPORT KGameChat : public KChatBase
 {
 	Q_OBJECT
 public:

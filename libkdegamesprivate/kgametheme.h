@@ -20,7 +20,7 @@
 #ifndef KGAMETHEME_H
 #define KGAMETHEME_H
 
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 #include <QtCore/QString>
 
@@ -41,7 +41,7 @@ class QPixmap;
  * @author Mauricio Piacentini
  * @deprecated Use KgTheme instead.
  **/
-class KDEGAMES_EXPORT_DEPRECATED KGameTheme
+class KDEGAMESPRIVATE_EXPORT KGameTheme
 {
     public:
         KGameTheme(const QString &themeGroup = QLatin1String("KGameTheme"));

@@ -24,7 +24,7 @@
 #include <QtCore/QObject>
 
 #include "kgameproperty.h"
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class KRandomSequence;
 
@@ -40,7 +40,7 @@ class KGameProcessPrivate;
  * Using these two classes will give fully transparent communication
  * via QDataStreams.
  */
-class KDEGAMES_EXPORT KGameProcess:  public QObject
+class KDEGAMESPRIVATE_EXPORT KGameProcess:  public QObject
 {
   Q_OBJECT
 

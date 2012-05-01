@@ -22,7 +22,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class KMessageIO;
 class KMessageServerPrivate;
@@ -172,7 +172,7 @@ class KMessageServerPrivate;
 
   @author Andreas Beckermann <b_mann@gmx.de>, Burkhard Lehner <Burkhard.Lehner@gmx.de>
 */
-class KDEGAMES_EXPORT KMessageServer : public QObject
+class KDEGAMESPRIVATE_EXPORT KMessageServer : public QObject
 {
   Q_OBJECT
 

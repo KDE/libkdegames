@@ -23,7 +23,7 @@
 
 #include <QtCore/QObject>
 
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class KPlayer;
 class KGame;
@@ -41,7 +41,7 @@ class KGame;
  * @short Round/move management class
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDEGAMES_EXPORT KGameSequence : public QObject
+class KDEGAMESPRIVATE_EXPORT KGameSequence : public QObject
 {
 	Q_OBJECT
 public:

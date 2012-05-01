@@ -24,7 +24,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class KGame;
 class KGameIO;
@@ -66,7 +66,7 @@ class KPlayerPrivate;
  * functions which are shared by all of your KGameIOs.
  *
  */
-class KDEGAMES_EXPORT KPlayer : public QObject
+class KDEGAMESPRIVATE_EXPORT KPlayer : public QObject
 {
   Q_OBJECT
 

@@ -29,7 +29,7 @@
 #include <QtCore/QString>
 #include <QtNetwork/QHostAddress>
 #include <kdebug.h>
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class QTcpSocket;
 class KProcess;
@@ -54,7 +54,7 @@ class QFile;
   sides must be within the same process).
 */
 
-class KDEGAMES_EXPORT KMessageIO : public QObject
+class KDEGAMESPRIVATE_EXPORT KMessageIO : public QObject
 {
   Q_OBJECT
 

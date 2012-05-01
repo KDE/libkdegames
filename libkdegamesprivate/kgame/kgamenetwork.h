@@ -23,7 +23,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QObject>
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class KGameIO;
 class KMessageIO;
@@ -43,7 +43,7 @@ class KGameNetworkPrivate;
  *
  * @short The main KDE game object
  */
-class KDEGAMES_EXPORT KGameNetwork : public QObject
+class KDEGAMESPRIVATE_EXPORT KGameNetwork : public QObject
 {
   Q_OBJECT
 

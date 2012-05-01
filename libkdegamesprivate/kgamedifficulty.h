@@ -21,7 +21,7 @@ class KGameDifficultyPrivate;
 class KXmlGuiWindow;
 #include <QtCore/QMap>
 #include <QtCore/QPair>
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 
 
@@ -75,7 +75,7 @@ class KXmlGuiWindow;
  *
  * @author Nicolas Roffet, <nicolas-kde@roffet.com>
  */
-class KDEGAMES_EXPORT_DEPRECATED KGameDifficulty
+class KDEGAMESPRIVATE_EXPORT KGameDifficulty
 {
 	public:
 		/**

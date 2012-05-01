@@ -20,7 +20,7 @@
 #ifndef __KCHATDIALOG_H__
 #define __KCHATDIALOG_H__
 
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 #include <kdialog.h>
 
@@ -31,7 +31,7 @@ class KChatDialogPrivate;
 /**
  * \class KChatDialog kchatdialog.h <KChatDialog>
  * */
-class KDEGAMES_EXPORT KChatDialog : public KDialog
+class KDEGAMESPRIVATE_EXPORT KChatDialog : public KDialog
 {
 	Q_OBJECT
 public:

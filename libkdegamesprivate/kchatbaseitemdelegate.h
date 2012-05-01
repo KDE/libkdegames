@@ -21,7 +21,7 @@
 
 #include <QtGui/QAbstractItemDelegate>
 
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 /**
  * \class KChatBaseItemDelegate kchatbaseitemdelegate.h <KChatBaseItemDelegate>
@@ -34,7 +34,7 @@
  *
  * Colors and fonts for both parts are set in the corresponding model. 
  **/
-class KDEGAMES_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegate
+class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegate
 {
   Q_OBJECT
 

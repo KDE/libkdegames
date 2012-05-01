@@ -22,12 +22,12 @@
 #define __KGAMEMESSAGE_H_
 
 #include <QtCore/QDataStream>
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 /**
  * \class KGameMessage kgamemessage.h <KGame/KGameMessage>
  */
-class KDEGAMES_EXPORT KGameMessage
+class KDEGAMESPRIVATE_EXPORT KGameMessage
 {
   public:
     /**

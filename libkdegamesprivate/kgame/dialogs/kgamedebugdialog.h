@@ -22,7 +22,7 @@
 #define __KGAMEDEBUGDIALOG_H__
 
 #include <kpagedialog.h>
-#include <libkdegames_export.h>
+#include "../../libkdegamesprivate_export.h"
 
 class QListWidgetItem;
 
@@ -34,7 +34,7 @@ class KGameDebugDialogPrivate;
 /**
  * \class KGameDebugDialog kgamedebugdialog.h <KGameDebugDialog>
  */
-class KDEGAMES_EXPORT KGameDebugDialog : public KPageDialog
+class KDEGAMESPRIVATE_EXPORT KGameDebugDialog : public KPageDialog
 {
 	Q_OBJECT
 public:

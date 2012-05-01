@@ -23,7 +23,7 @@
 #include <QtGui/QFrame>
 
 #include <kglobalsettings.h>
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 class KConfig;
 
@@ -68,7 +68,7 @@ class QPoint;
  * @author Gael de Chalendar (aka Kleag) <kleag@free.fr> for the port to Model/View
  * 
  **/
-class KDEGAMES_EXPORT KChatBase : public QFrame
+class KDEGAMESPRIVATE_EXPORT KChatBase : public QFrame
 {
 	Q_OBJECT
 public:

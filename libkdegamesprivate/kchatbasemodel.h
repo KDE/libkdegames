@@ -23,7 +23,7 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QPair>
 
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 class KChatBaseModelPrivate;
 class KChatBaseMessagePrivate;
@@ -38,7 +38,7 @@ class KConfig;
   * second one is the actual message. It furthermore indicates the type of the
   * message: normal or system
   */
-class KDEGAMES_EXPORT KChatBaseMessage : public QPair< QString, QString >
+class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
 {
   public:
     /** The different types of messages */
@@ -73,7 +73,7 @@ Q_DECLARE_METATYPE(KChatBaseMessage)
  * list. This is a list model and thus derived from @ref QAbstractListModel
  * and implementing its abstract API.
  */
-class KDEGAMES_EXPORT KChatBaseModel : public QAbstractListModel
+class KDEGAMESPRIVATE_EXPORT KChatBaseModel : public QAbstractListModel
 {
   Q_OBJECT
   

@@ -29,7 +29,7 @@
 #define __KGAMEDIALOG_H__
 
 #include <kpagedialog.h>
-#include <libkdegames_export.h>
+#include "../../libkdegamesprivate_export.h"
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QGridLayout>
 class QGridLayout;
@@ -74,7 +74,7 @@ class KGameDialogPrivate;
  * @short Main configuration dialog for KGame
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDEGAMES_EXPORT KGameDialog : public KPageDialog
+class KDEGAMESPRIVATE_EXPORT KGameDialog : public KPageDialog
 {
 	Q_OBJECT
 public:

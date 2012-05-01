@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 #include <QtCore/QObject>
 
-#include <libkdegames_export.h>
+#include "../libkdegamesprivate_export.h"
 
 class QEvent;
 class QGraphicsScene;
@@ -62,7 +62,7 @@ class KGameComputerIOPrivate;
  *
  *  @author Martin Heni <kde at heni-online.de>
  */
-class KDEGAMES_EXPORT KGameIO : public QObject
+class KDEGAMESPRIVATE_EXPORT KGameIO : public QObject
 {
   Q_OBJECT
 
@@ -189,7 +189,7 @@ private:
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <kde at heni-online.de>
  */
-class KDEGAMES_EXPORT KGameKeyIO : public KGameIO
+class KDEGAMESPRIVATE_EXPORT KGameKeyIO : public KGameIO
 {
   Q_OBJECT
 
@@ -268,7 +268,7 @@ private:
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <kde at heni-online.de>
  */
-class KDEGAMES_EXPORT KGameMouseIO : public KGameIO
+class KDEGAMESPRIVATE_EXPORT KGameMouseIO : public KGameIO
 {
   Q_OBJECT
     
@@ -350,7 +350,7 @@ private:
  *  to be used by the computer player. See its documentation
  *  for the definition of the computer player.
  */
-class KDEGAMES_EXPORT KGameProcessIO : public KGameIO
+class KDEGAMESPRIVATE_EXPORT KGameProcessIO : public KGameIO
 {
   Q_OBJECT
     
@@ -510,7 +510,7 @@ private:
  *
  *  @author  <b_mann@gmx.de>
  */
-class KDEGAMES_EXPORT KGameComputerIO : public KGameIO
+class KDEGAMESPRIVATE_EXPORT KGameComputerIO : public KGameIO
 {
   Q_OBJECT
     

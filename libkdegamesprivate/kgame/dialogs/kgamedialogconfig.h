@@ -29,7 +29,7 @@
 #define __KGAMEDIALOGCONFIG_H__
 
 #include <QtGui/QWidget>
-#include <libkdegames_export.h>
+#include "../../libkdegamesprivate_export.h"
 
 class QListWidgetItem;
 
@@ -48,7 +48,7 @@ class KGameDialogConfigPrivate;
  * @short Base class for configuration widgets
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDEGAMES_EXPORT KGameDialogConfig : public QWidget
+class KDEGAMESPRIVATE_EXPORT KGameDialogConfig : public QWidget
 {
 	Q_OBJECT
 public:
@@ -213,7 +213,7 @@ class KGameDialogNetworkConfigPrivate;
 /**
  * \class KGameDialogNetworkConfig kgamedialogconfig.h <KGameDialogConfig>
  */
-class KDEGAMES_EXPORT KGameDialogNetworkConfig : public KGameDialogConfig
+class KDEGAMESPRIVATE_EXPORT KGameDialogNetworkConfig : public KGameDialogConfig
 {
 	Q_OBJECT
 public:

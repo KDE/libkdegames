@@ -20,7 +20,7 @@
 #define __KCHAT_H__
 
 #include "kchatbase.h"
-#include <libkdegames_export.h>
+#include "libkdegamesprivate_export.h"
 
 class KChatPrivate;
 
@@ -33,7 +33,7 @@ class KChatPrivate;
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  **/
-class KDEGAMES_EXPORT KChat : public KChatBase
+class KDEGAMESPRIVATE_EXPORT KChat : public KChatBase
 {
 	Q_OBJECT
 public:
