@@ -1,0 +1,8 @@
+/**
+ * 
+ * @mainpage KDE libkdegamesprivate Reference
+ * 
+ * This library contains old code which is kept around for internal compatibility. Do not use this code in new applications, and port old applications using this code away from them.
+ * 
+ */
+
