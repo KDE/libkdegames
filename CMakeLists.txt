@@ -3,6 +3,8 @@ enable_testing()
 project(libkdegames)
 
 KDE4_NO_ENABLE_FINAL(libkdegames)
+KDE4_NO_ENABLE_FINAL(libkdegamesprivate)
+
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
 add_subdirectory( carddecks )
@@ -14,6 +16,11 @@ add_subdirectory( tests )
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/highscore
     ${CMAKE_CURRENT_BINARY_DIR}/highscore
+    # the following only for libkdegamesprivate, but there aren't
+    # target-specific include directories
+    ${CMAKE_CURRENT_SOURCE_DIR}/libkdegamesprivate/kgame
+    ${CMAKE_CURRENT_SOURCE_DIR}/libkdegamesprivate/kgame/dialogs
+    ${CMAKE_CURRENT_SOURCE_DIR}/libkdegamesprivate/..
 )
 
 option (USE_OPENAL_SNDFILE "use OpenAL and libsndfile in libkdegames" ON)
@@ -75,11 +82,72 @@ kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${KGAUDIO_LINKLIBS})
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
 
-#NOTE: 6.0.0 = KDE 4.9 release, please increase minor version in next minor KDE release if API changes
-set_target_properties(kdegames PROPERTIES VERSION 6.0.0
-                                          SOVERSION 6 )
+#NOTE: 6.0.0 = KDE 4.9 release
+set(KDEGAMES_VERSION 6.0.0)
+set(KDEGAMES_SOVERSION 6)
 
-install(TARGETS kdegames ${INSTALL_TARGETS_DEFAULT_ARGS})
+set_target_properties(kdegames PROPERTIES
+    VERSION   ${KDEGAMES_VERSION}
+    SOVERSION ${KDEGAMES_SOVERSION}
+)
+
+install(TARGETS kdegames EXPORT KDEGamesLibraryDepends
+    ${INSTALL_TARGETS_DEFAULT_ARGS})
+
+########### next target ###############
+
+# NOTE: The libkdegamesprivate target is compiled in this directory, because
+# CMake can't cope with exported libraries in two different directories.
+
+set(kdegamesprivate_LIB_SRCS
+    libkdegamesprivate/kchatbase.cpp
+    libkdegamesprivate/kchatbaseitemdelegate.cpp
+    libkdegamesprivate/kchatbasemodel.cpp
+    libkdegamesprivate/kchat.cpp
+    libkdegamesprivate/kchatdialog.cpp
+    libkdegamesprivate/kgame/dialogs/kgameconnectdialog.cpp
+    libkdegamesprivate/kgame/dialogs/kgamedebugdialog.cpp
+    libkdegamesprivate/kgame/dialogs/kgamedialogconfig.cpp
+    libkdegamesprivate/kgame/dialogs/kgamedialog.cpp
+    libkdegamesprivate/kgame/dialogs/kgameerrordialog.cpp
+    libkdegamesprivate/kgame/kgamechat.cpp
+    libkdegamesprivate/kgame/kgame.cpp
+    libkdegamesprivate/kgame/kgameerror.cpp
+    libkdegamesprivate/kgame/kgameio.cpp
+    libkdegamesprivate/kgame/kgamemessage.cpp
+    libkdegamesprivate/kgame/kgamenetwork.cpp
+    libkdegamesprivate/kgame/kgameprocess.cpp
+    libkdegamesprivate/kgame/kgameproperty.cpp
+    libkdegamesprivate/kgame/kgamepropertyhandler.cpp
+    libkdegamesprivate/kgame/kgamesequence.cpp
+    libkdegamesprivate/kgame/kmessageclient.cpp
+    libkdegamesprivate/kgame/kmessageio.cpp
+    libkdegamesprivate/kgame/kmessageserver.cpp
+    libkdegamesprivate/kgame/kplayer.cpp
+    libkdegamesprivate/kgamecanvas.cpp
+    libkdegamesprivate/kgamedifficulty.cpp
+    libkdegamesprivate/kgamesvgdocument.cpp
+    libkdegamesprivate/kgametheme.cpp
+    libkdegamesprivate/kgamethemeselector.cpp
+)
+
+kde4_add_ui_files(kdegamesprivate_LIB_SRCS
+    libkdegamesprivate/kgamethemeselector.ui
+)
+
+kde4_add_library(kdegamesprivate SHARED ${kdegamesprivate_LIB_SRCS})
+
+target_link_libraries(kdegamesprivate ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
+target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
+
+set_target_properties(kdegamesprivate PROPERTIES
+    VERSION   1.0.0
+    SOVERSION 1
+)
+
+install(TARGETS kdegamesprivate EXPORT KDEGamesLibraryDepends
+    ${INSTALL_TARGETS_DEFAULT_ARGS})
+
 
 ########### install files ###############
 
@@ -100,3 +168,27 @@ install(FILES
     kgthemeselector.h
     kstandardgameaction.h
 DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+
+########### generate exports ###############
+
+# add libraries to the build-tree export set
+export(TARGETS kdegames kdegamesprivate
+    FILE "${PROJECT_BINARY_DIR}/KDEGamesLibraryDepends.cmake")
+
+# create the Config.cmake and ConfigVersion.cmake files
+file(RELATIVE_PATH CONF_REL_INCLUDE_DIR
+    "${DATA_INSTALL_DIR}/cmake/modules"
+    "${INCLUDE_INSTALL_DIR}")
+configure_file(KDEGamesConfig.cmake.in
+    "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake" @ONLY)
+configure_file(KDEGamesConfigVersion.cmake.in
+    "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake" @ONLY)
+
+install(FILES
+    "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake"
+    "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake"
+DESTINATION "${DATA_INSTALL_DIR}/cmake/modules" COMPONENT Devel)
+
+# install the export set for use with the install-tree
+install(EXPORT KDEGamesLibraryDepends DESTINATION
+    "${DATA_INSTALL_DIR}/cmake/modules" COMPONENT Devel)

@@ -1,0 +1,14 @@
+# - Config file for the KDEGames package
+# It defines the following variables
+#  KDEGAMES_INCLUDE_DIRS
+#  KDEGAMES_INCLUDE_DIR
+#  KDEGAMES_LIBRARY
+
+# compute paths
+get_filename_component(KDEGAMES_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(KDEGAMES_INCLUDE_DIR "${KDEGAMES_CMAKE_DIR}/@CONF_REL_INCLUDE_DIR@")
+set(KDEGAMES_INCLUDE_DIRS "${KDEGAMES_INCLUDE_DIR}" "${KDEGAMES_INCLUDE_DIR}/KDE")
+
+# import our library dependencies
+include("${KDEGAMES_CMAKE_DIR}/KDEGamesLibraryDepends.cmake")
+set(KDEGAMES_LIBRARY kdegames)
