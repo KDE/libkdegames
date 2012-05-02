@@ -2,6 +2,7 @@
 #define KGAMESVGDOCUMENTTEST_H
 
 #include "qtest_kde.h"
+#define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
 #include <kgamesvgdocument.h>
 
 class tst_KGameSvgDocument : public QObject

@@ -4,6 +4,7 @@
 #include <QDataStream>
 
 #include "qtest_kde.h"
+#define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
 #include "kgame/kgame.h"
 #include "kgame/kgamepropertyhandler.h"
 
