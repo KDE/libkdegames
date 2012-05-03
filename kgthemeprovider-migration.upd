@@ -3,6 +3,11 @@ File=bomberrc
 Group=General,KgTheme
 Key=Theme
 
+Id=granatier
+File=granatierrc
+Group=General,KgTheme
+Key=Theme
+
 Id=kbounce
 File=kbouncerc
 Group=General,KgTheme
