@@ -41,11 +41,15 @@ if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIR})
     set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
     set(KGAUDIO_BACKEND openal)
+    set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     message (STATUS "FALLBACK LIBRARY FOR SOUND: " ${KDE4_PHONON_LIBS})
     set(KGAUDIO_LINKLIBS ${KDE4_PHONON_LIBS})
     set(KGAUDIO_BACKEND phonon)
+    set(KGAUDIO_BACKEND_PHONON TRUE) # for configure_file() below
 endif (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
+
+configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 
 ########### next target ###############
 
@@ -156,6 +160,9 @@ install(FILES kgthemeprovider-migration.upd
 
 install(FILES
     libkdegames_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h
+    audio/kgaudioscene.h
+    audio/kgsound.h
     kgameclock.h
     kgamepopupitem.h
     kgamerendereditem.h
