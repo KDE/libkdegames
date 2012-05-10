@@ -185,6 +185,7 @@ configure_file(KDEGamesConfigVersion.cmake.in
     "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake" @ONLY)
 
 install(FILES
+    FindKDEGames.cmake
     "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake"
     "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake"
 DESTINATION "${DATA_INSTALL_DIR}/cmake/modules" COMPONENT Devel)
