@@ -162,6 +162,9 @@ void KgThemeProvider::rediscoverThemes()
 	{
 		return; //discoverThemes() was never called
 	}
+	
+	KgTheme* defaultTheme = NULL;
+	
 	d->m_inRediscover = true;
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
 	const QStringList themePaths = KGlobal::dirs()->findAllResources(
@@ -210,6 +213,7 @@ void KgThemeProvider::rediscoverThemes()
 		if (fi.fileName() == defaultFileName)
 		{
 			themes.prepend(theme);
+			defaultTheme = theme;
 		}
 		else
 		{
@@ -221,7 +225,16 @@ void KgThemeProvider::rediscoverThemes()
 	{
 		addTheme(theme);
 	}
-	setDefaultTheme(themes.value(0));
+	
+	if(defaultTheme != NULL)
+	{
+		setDefaultTheme(defaultTheme);
+	}
+	else if(d->m_defaultTheme == NULL && themes.count() != 0)
+	{
+		setDefaultTheme(themes.value(0));
+	}
+	
 	d->m_inRediscover = false;
 }
 
