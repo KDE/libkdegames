@@ -83,7 +83,7 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		///Constructor. The @a identifier must be application-unique.
 		explicit KgTheme(const QByteArray& identifier, QObject* parent = 0);
 		///Destructor.
-		~KgTheme();
+		virtual ~KgTheme();
 
 		///Initializes a KgTheme instance by reading a description file.
 		///@return whether @a path is a valid theme description file (if not,
@@ -92,7 +92,7 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		///      common pattern of using a static member function like
 		///      "KgTheme::fromDesktopFile" to accommodate applications which
 		///      want to subclass KgTheme.
-		bool readFromDesktopFile(const QString& path);
+		virtual bool readFromDesktopFile(const QString& path);
 
 #ifdef KGTHEME_PROVIDE_COMPATIBILITY_API
 		///Use a different group name in theme description files. For example,
