@@ -215,6 +215,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 			if (renderer->isValid())
 			{
 				m_rendererPool.setPath(theme->graphicsPath(), renderer.take());
+				m_imageCache->clear();
 				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
 			}
 			else
