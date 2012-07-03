@@ -220,7 +220,8 @@ void KgDifficulty::addStandardLevelRange(DS from, DS to, DS defaultLevel)
 	;
 	const int fromIndex = levels.indexOf(from);
 	const int toIndex = levels.indexOf(to);
-	Q_ASSERT_X(fromIndex > 0 && toIndex > 0,
+	const int defaultLevelIndex = levels.indexOf(defaultLevel);
+	Q_ASSERT_X(fromIndex >= 0 && toIndex > fromIndex && (defaultLevelIndex == KgDifficultyLevel::Custom || (defaultLevelIndex >= fromIndex && defaultLevelIndex <= toIndex)),
 		"KgDifficulty::addStandardLevelRange",
 		"No argument may be KgDifficultyLevel::Custom."
 	);
