@@ -135,7 +135,7 @@ const KgTheme* KgThemeProvider::currentTheme() const
 		}
 	}
 	//fall back to default theme (or first theme if no default specified)
-	return d->m_currentTheme = (d->m_defaultTheme ?: d->m_themes[0]);
+	return d->m_currentTheme = (d->m_defaultTheme ? d->m_defaultTheme : d->m_themes.first());
 }
 
 void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
