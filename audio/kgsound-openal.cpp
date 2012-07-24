@@ -24,14 +24,15 @@
 
 class KgSound::Private
 {
-	KgSound::PlaybackType m_type;
-	qreal m_volume;
-	QPointF m_pos;
+    public:
+        KgSound::PlaybackType m_type;
+        qreal m_volume;
+        QPointF m_pos;
 
-	bool m_valid;
-	ALuint m_buffer;
+        bool m_valid;
+        ALuint m_buffer;
 
-	Private() : m_type(KgSound::AmbientPlayback), m_volume(1.0), m_valid(false), m_buffer(AL_NONE) {}
+        Private() : m_type(KgSound::AmbientPlayback), m_volume(1.0), m_valid(false), m_buffer(AL_NONE) {}
 };
 
 //BEGIN KgSound

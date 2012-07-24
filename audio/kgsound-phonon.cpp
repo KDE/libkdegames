@@ -23,22 +23,23 @@
 
 class KgSound::Private
 {
-	qreal m_volume;
-	bool m_valid;
-	qint64 m_lastPlayedTime;
-	int m_nextSource;
-	Phonon::MediaObject* m_sound1;
-	Phonon::MediaObject* m_sound2;
-	
-	Private() : m_volume(1.0), m_valid(false), m_lastPlayedTime(0), m_nextSource(1), m_sound1(NULL), m_sound2(NULL) {}
-	
-	~Private()
-	{
-		delete m_sound1;
-		delete m_sound2;
-		m_sound1 = 0;
-		m_sound2 = 0;
-	}
+    public:
+        qreal m_volume;
+        bool m_valid;
+        qint64 m_lastPlayedTime;
+        int m_nextSource;
+        Phonon::MediaObject* m_sound1;
+        Phonon::MediaObject* m_sound2;
+
+        Private() : m_volume(1.0), m_valid(false), m_lastPlayedTime(0), m_nextSource(1), m_sound1(NULL), m_sound2(NULL) {}
+
+        ~Private()
+        {
+            delete m_sound1;
+            delete m_sound2;
+            m_sound1 = 0;
+            m_sound2 = 0;
+        }
 };
 
 KgSound::KgSound(const QString& file, QObject* parent)

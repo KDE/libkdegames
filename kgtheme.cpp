@@ -27,13 +27,14 @@
 
 class KgTheme::Private
 {
-	const QByteArray m_identifier;
-	QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
-	QMap<QString, QString> m_customData;
+    public:
+        const QByteArray m_identifier;
+        QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
+        QMap<QString, QString> m_customData;
 
-	Private(const QByteArray& id) : m_identifier(id) {}
+        Private(const QByteArray& id) : m_identifier(id) {}
 
-	static QStringList s_configGroupNames;
+        static QStringList s_configGroupNames;
 };
 
 /*static*/ QStringList KgTheme::Private::s_configGroupNames;
