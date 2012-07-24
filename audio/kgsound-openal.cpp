@@ -19,7 +19,7 @@
 #include "kgsound.h"
 #include "kgopenalruntime_p.h"
 
-#include <sndfile.hh> //TODO: use Phonon instead of libsndfile for decoding
+#include <sndfile.h> //TODO: use Phonon instead of libsndfile for decoding
 #include <KDE/KDebug>
 
 struct KgSound::Private
