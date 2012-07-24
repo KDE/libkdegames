@@ -25,7 +25,7 @@
 #include <KDE/KDebug>
 #include <KDE/KStandardDirs>
 
-struct KgTheme::Private
+class KgTheme::Private
 {
 	const QByteArray m_identifier;
 	QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;

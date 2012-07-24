@@ -25,7 +25,7 @@
 #include <KDE/KGlobal>
 #include <KDE/KStandardDirs>
 
-struct KgThemeProvider::Private
+class KgThemeProvider::Private
 {
 	QList<const KgTheme*> m_themes;
 	const QByteArray m_configKey;

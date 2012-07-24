@@ -35,7 +35,7 @@
 
 //BEGIN KgDifficultyLevel
 
-struct KgDifficultyLevel::Private
+class KgDifficultyLevel::Private
 {
 	bool m_isDefault;
 	int m_hardness;
@@ -139,7 +139,7 @@ KgDifficultyLevel::StandardLevel KgDifficultyLevel::standardLevel() const
 //END KgDifficultyLevel
 //BEGIN KgDifficulty
 
-struct KgDifficulty::Private
+class KgDifficulty::Private
 {
 	QList<const KgDifficultyLevel*> m_levels;
 	const KgDifficultyLevel* m_currentLevel;

@@ -22,7 +22,7 @@
 #include <sndfile.h> //TODO: use Phonon instead of libsndfile for decoding
 #include <KDE/KDebug>
 
-struct KgSound::Private
+class KgSound::Private
 {
 	KgSound::PlaybackType m_type;
 	qreal m_volume;

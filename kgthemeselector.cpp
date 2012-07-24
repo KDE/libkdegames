@@ -41,7 +41,7 @@ namespace Metrics
 
 //BEGIN KgThemeSelector
 
-struct KgThemeSelector::Private
+class KgThemeSelector::Private
 {
 	KgThemeSelector* q;
 	KgThemeProvider* m_provider;

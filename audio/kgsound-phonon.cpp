@@ -21,7 +21,7 @@
 #include <Phonon/MediaObject>
 #include <QDateTime>
 
-struct KgSound::Private
+class KgSound::Private
 {
 	qreal m_volume;
 	bool m_valid;
