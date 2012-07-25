@@ -182,9 +182,12 @@ DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 export(TARGETS kdegames kdegamesprivate
     FILE "${PROJECT_BINARY_DIR}/KDEGamesLibraryDepends.cmake")
 
+# define the installation directory for the CMake files
+set(CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/KDEGames)
+
 # create the Config.cmake and ConfigVersion.cmake files
 file(RELATIVE_PATH CONF_REL_INCLUDE_DIR
-    "${CMAKE_INSTALL_PREFIX}/${DATA_INSTALL_DIR}/cmake/modules"
+    "${CMAKE_INSTALL_PREFIX}/${CMAKECONFIG_INSTALL_DIR}"
     "${CMAKE_INSTALL_PREFIX}/${INCLUDE_INSTALL_DIR}")
 configure_file(KDEGamesConfig.cmake.in
     "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake" @ONLY)
@@ -192,11 +195,10 @@ configure_file(KDEGamesConfigVersion.cmake.in
     "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake" @ONLY)
 
 install(FILES
-    FindKDEGames.cmake
     "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake"
     "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake"
-DESTINATION "${DATA_INSTALL_DIR}/cmake/modules" COMPONENT Devel)
+DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
 
 # install the export set for use with the install-tree
 install(EXPORT KDEGamesLibraryDepends DESTINATION
-    "${DATA_INSTALL_DIR}/cmake/modules" COMPONENT Devel)
+    ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
