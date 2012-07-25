@@ -25,23 +25,24 @@
 #include <KDE/KGlobal>
 #include <KDE/KStandardDirs>
 
-struct KgThemeProvider::Private
+class KgThemeProvider::Private
 {
-	QList<const KgTheme*> m_themes;
-	const QByteArray m_configKey;
-	const KgTheme* m_currentTheme;
-	const KgTheme* m_defaultTheme;
-	//this stores the arguments which were passed to discoverThemes()
-	QByteArray m_dtResource;
-	QString m_dtDirectory;
-	QString m_dtDefaultThemeName;
-	const QMetaObject* m_dtThemeClass;
-	//this remembers which themes were already discovered
-	QStringList m_discoveredThemes;
-	//this disables the addTheme() lock during rediscoverThemes()
-	bool m_inRediscover;
+    public:
+        QList<const KgTheme*> m_themes;
+        const QByteArray m_configKey;
+        const KgTheme* m_currentTheme;
+        const KgTheme* m_defaultTheme;
+        //this stores the arguments which were passed to discoverThemes()
+        QByteArray m_dtResource;
+        QString m_dtDirectory;
+        QString m_dtDefaultThemeName;
+        const QMetaObject* m_dtThemeClass;
+        //this remembers which themes were already discovered
+        QStringList m_discoveredThemes;
+        //this disables the addTheme() lock during rediscoverThemes()
+        bool m_inRediscover;
 
-	Private(const QByteArray& key) : m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
+        Private(const QByteArray& key) : m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
 };
 
 KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)

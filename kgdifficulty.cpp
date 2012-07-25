@@ -35,16 +35,17 @@
 
 //BEGIN KgDifficultyLevel
 
-struct KgDifficultyLevel::Private
+class KgDifficultyLevel::Private
 {
-	bool m_isDefault;
-	int m_hardness;
-	StandardLevel m_level;
-	QByteArray m_key;
-	QString m_title;
+    public:
+        bool m_isDefault;
+        int m_hardness;
+        StandardLevel m_level;
+        QByteArray m_key;
+        QString m_title;
 
-	Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level, bool isDefault);
-	static Private* fromStandardLevel(StandardLevel level, bool isDefault);
+        Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level, bool isDefault);
+        static Private* fromStandardLevel(StandardLevel level, bool isDefault);
 };
 
 KgDifficultyLevel::KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title, bool isDefault)
@@ -139,13 +140,14 @@ KgDifficultyLevel::StandardLevel KgDifficultyLevel::standardLevel() const
 //END KgDifficultyLevel
 //BEGIN KgDifficulty
 
-struct KgDifficulty::Private
+class KgDifficulty::Private
 {
-	QList<const KgDifficultyLevel*> m_levels;
-	const KgDifficultyLevel* m_currentLevel;
-	bool m_editable, m_gameRunning;
+    public:
+        QList<const KgDifficultyLevel*> m_levels;
+        const KgDifficultyLevel* m_currentLevel;
+        bool m_editable, m_gameRunning;
 
-	Private() : m_currentLevel(0), m_editable(true), m_gameRunning(false) {}
+        Private() : m_currentLevel(0), m_editable(true), m_gameRunning(false) {}
 };
 
 KgDifficulty::KgDifficulty(QObject* parent)

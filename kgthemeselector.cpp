@@ -41,21 +41,22 @@ namespace Metrics
 
 //BEGIN KgThemeSelector
 
-struct KgThemeSelector::Private
+class KgThemeSelector::Private
 {
-	KgThemeSelector* q;
-	KgThemeProvider* m_provider;
-	Options m_options;
-	QListWidget* m_list;
-	QPushButton* m_knsButton;
+    public:
+        KgThemeSelector* q;
+        KgThemeProvider* m_provider;
+        Options m_options;
+        QListWidget* m_list;
+        QPushButton* m_knsButton;
 
-	void fillList();
+        void fillList();
 
-	Private(KgThemeProvider* provider, Options options, KgThemeSelector* q) : q(q), m_provider(provider), m_options(options), m_knsButton(0) {}
+        Private(KgThemeProvider* provider, Options options, KgThemeSelector* q) : q(q), m_provider(provider), m_options(options), m_knsButton(0) {}
 
-	void _k_updateListSelection(const KgTheme* theme);
-	void _k_updateProviderSelection();
-	void _k_showNewStuffDialog();
+        void _k_updateListSelection(const KgTheme* theme);
+        void _k_updateProviderSelection();
+        void _k_showNewStuffDialog();
 };
 
 KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWidget* parent)
