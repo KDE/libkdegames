@@ -184,8 +184,8 @@ export(TARGETS kdegames kdegamesprivate
 
 # create the Config.cmake and ConfigVersion.cmake files
 file(RELATIVE_PATH CONF_REL_INCLUDE_DIR
-    "${DATA_INSTALL_DIR}/cmake/modules"
-    "${INCLUDE_INSTALL_DIR}")
+    "${CMAKE_INSTALL_PREFIX}/${DATA_INSTALL_DIR}/cmake/modules"
+    "${CMAKE_INSTALL_PREFIX}/${INCLUDE_INSTALL_DIR}")
 configure_file(KDEGamesConfig.cmake.in
     "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake" @ONLY)
 configure_file(KDEGamesConfigVersion.cmake.in
