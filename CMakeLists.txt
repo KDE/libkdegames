@@ -2,6 +2,14 @@ enable_testing()
 
 project(libkdegames)
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+
+macro_optional_find_package(OpenAL)
+macro_log_feature(OPENAL_FOUND "OpenAL" "OpenAL (Open Audio Library) is a free software cross-platform audio API." "http://connect.creativelabs.com/openal" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
+
+macro_optional_find_package(SndFile)
+macro_log_feature(SNDFILE_FOUND "SndFile" "libsndfile is a C library written by Erik de Castro Lopo for reading and writing audio files." "http://www.mega-nerd.com/libsndfile/" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
+
 KDE4_NO_ENABLE_FINAL(libkdegames)
 KDE4_NO_ENABLE_FINAL(libkdegamesprivate)
 
