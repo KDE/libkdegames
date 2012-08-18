@@ -23,6 +23,8 @@ macro_log_feature(SNDFILE_FOUND "SndFile" "libsndfile is a C library written by 
 KDE4_NO_ENABLE_FINAL(libkdegames)
 KDE4_NO_ENABLE_FINAL(libkdegamesprivate)
 
+set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores e.g. /var/games")
+
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
 add_subdirectory( carddecks )
