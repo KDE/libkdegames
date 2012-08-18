@@ -4,6 +4,16 @@ project(libkdegames)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
+if(NOT COMPILING_KDEGAMES)
+	find_package(KDE4 REQUIRED)
+	include(KDE4Defaults)
+	include(MacroLibrary)
+
+	add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+	add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+	include_directories(${KDE4_INCLUDES} ${CMAKE_SOURCE_DIR}/includes)
+endif(NOT COMPILING_KDEGAMES)
+
 macro_optional_find_package(OpenAL)
 macro_log_feature(OPENAL_FOUND "OpenAL" "OpenAL (Open Audio Library) is a free software cross-platform audio API." "http://connect.creativelabs.com/openal" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
 
