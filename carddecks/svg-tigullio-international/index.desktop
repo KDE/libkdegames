@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=Tigullio International
+Name[uk]=Tigullio International
+Name[x-test]=xxTigullio Internationalxx
 Preview=queen-of-hearts.png
 SVG=tigullio-international.svgz
 Back=Tigullio International

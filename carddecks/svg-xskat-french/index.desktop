@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=XSkat French
+Name[uk]=Французький XSkat
+Name[x-test]=xxXSkat Frenchxx
 Preview=11.png
 SVG=french.svgz
 Back=Tristan

@@ -1,7 +1,11 @@
 [KDE Backdeck]
 Name=Standard
+Name[uk]=Звичайний
+Name[x-test]=xxStandardxx
 Preview=11.png
 Comment=Standard KDE card set\nGPL license
+Comment[uk]=Типовий набір карт KDE\nліцензія GPL
+Comment[x-test]=xxStandard KDE card set\nGPL licensexx
 SVG=standard.svgz
 Back=Classic Blue
 

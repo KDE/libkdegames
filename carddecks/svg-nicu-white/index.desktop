@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=Nicu White
+Name[uk]=Біла Ніку
+Name[x-test]=xxNicu Whitexx
 Preview=11.png
 SVG=white.svgz
 Back=Nicu Ornamental

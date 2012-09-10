@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=Nicu Ornamental
+Name[uk]=Орнамент Nicu
+Name[x-test]=xxNicu Ornamentalxx
 Preview=11.png
 SVG=ornamental.svgz
 Back=Nicu Ornamental

@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=Oxygen
+Name[uk]=Oxygen
+Name[x-test]=xxOxygenxx
 Preview=11.png
 SVG=oxygen.svgz
 Back=Oxygen

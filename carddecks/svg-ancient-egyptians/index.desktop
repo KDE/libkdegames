@@ -1,6 +1,10 @@
 [KDE Backdeck]
 Name=Ancient Egyptians
+Name[uk]=Давні єгиптяни
+Name[x-test]=xxAncient Egyptiansxx
 Comment=An ancient Egyptian card deck.
+Comment[uk]=Єгипетський стиль сорочок карт.
+Comment[x-test]=xxAn ancient Egyptian card deck.xx
 Preview=11.png
 SVG=Ancient_Egyptians.svgz
 Back=Ancient Egyptians

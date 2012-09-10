@@ -1,6 +1,10 @@
 [KDE Backdeck]
 Name=Jolly Royal
+Name[uk]=Веселе королівство
+Name[x-test]=xxJolly Royalxx
 Comment=A clean and easy style with a distinctively royal touch.
+Comment[uk]=Чистий і простий стиль з певним відтінком аристократичності.
+Comment[x-test]=xxA clean and easy style with a distinctively royal touch.xx
 Preview=11.png
 SVG=jolly-royal.svgz
 Back=Jolly Royal

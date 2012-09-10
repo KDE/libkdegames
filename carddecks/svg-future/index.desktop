@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=Future Simple
+Name[uk]=Футуристичний простий
+Name[x-test]=xxFuture Simplexx
 Preview=11.png
 SVG=future.svgz
 Back=Future

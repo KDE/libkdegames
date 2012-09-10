@@ -1,5 +1,7 @@
 [KDE Backdeck]
 Name=Konqi
+Name[uk]=Конкі
+Name[x-test]=xxKonqixx
 Preview=11.png
 SVG=konqi.svgz
 Back=Konqi
