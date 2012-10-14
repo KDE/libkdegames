@@ -137,7 +137,14 @@ bool KGame::reset()
 void KGame::deletePlayers()
 {
 // kDebug(11001) ;
- qDeleteAll(d->mPlayerList);
+ /* Bugs 303142 and 305000. KPlayer destructor removes
+   * player from the list and makes iterators invalid.
+   * qDeleteAll crashes in that case. */
+  while (!d->mPlayerList.isEmpty()) 
+  {
+    delete d->mPlayerList.takeFirst();
+  }
+ // qDeleteAll(d->mPlayerList);
  //NOTE by majewsky: An earlier implementation copied the mPlayerList before
  //deleting the elements with a takeFirst loop. I therefore chose not to clear()
  //the list in order not to break anything. The old code had the following
