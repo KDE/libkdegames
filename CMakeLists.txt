@@ -39,7 +39,6 @@ include_directories(
     # the following only for libkdegamesprivate, but there aren't
     # target-specific include directories
     ${CMAKE_CURRENT_SOURCE_DIR}/libkdegamesprivate/kgame
-    ${CMAKE_CURRENT_SOURCE_DIR}/libkdegamesprivate/kgame/dialogs
     ${CMAKE_CURRENT_SOURCE_DIR}/libkdegamesprivate/..
 )
 
@@ -129,9 +128,6 @@ set(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kchatbasemodel.cpp
     libkdegamesprivate/kchat.cpp
     libkdegamesprivate/kchatdialog.cpp
-    libkdegamesprivate/kgame/dialogs/kgameconnectdialog.cpp
-    libkdegamesprivate/kgame/dialogs/kgamedialogconfig.cpp
-    libkdegamesprivate/kgame/dialogs/kgamedialog.cpp
     libkdegamesprivate/kgame/kgamechat.cpp
     libkdegamesprivate/kgame/kgame.cpp
     libkdegamesprivate/kgame/kgameerror.cpp

@@ -40,9 +40,3 @@ install(FILES
     kgame/kmessageserver.h
     kgame/kplayer.h
 DESTINATION ${INCLUDE_INSTALL_DIR}/libkdegamesprivate/kgame COMPONENT Devel)
-
-install(FILES
-    kgame/dialogs/kgameconnectdialog.h
-    kgame/dialogs/kgamedialogconfig.h
-    kgame/dialogs/kgamedialog.h
-DESTINATION ${INCLUDE_INSTALL_DIR}/libkdegamesprivate/kgame/dialogs COMPONENT Devel)
