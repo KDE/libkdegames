@@ -384,35 +384,5 @@ class KMessageProcess : public KMessageIO
     int mReceiveCount;
 };
 
-class KMessageFilePipe : public KMessageIO
-{
-  Q_OBJECT 
-
-  public:
-    KMessageFilePipe(QObject *parent,QFile *readFile,QFile *writeFile);
-    ~KMessageFilePipe();
-    bool isConnected() const;
-    void send (const QByteArray &msg);
-    void exec();
-
-    /**
-      @return FALSE as this is no network IO.
-    */
-    bool isNetwork() const { return false; }
-
-  /**
-  * The runtime idendifcation
-  */
-  virtual int rtti() const {return 4;}
-
-
-
-  private:
-    QFile *mReadFile;
-    QFile *mWriteFile;
-    QByteArray mReceiveBuffer;
-    int mReceiveCount;
-};
-
 #endif
 

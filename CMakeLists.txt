@@ -140,7 +140,6 @@ set(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kgame/kgameio.cpp
     libkdegamesprivate/kgame/kgamemessage.cpp
     libkdegamesprivate/kgame/kgamenetwork.cpp
-    libkdegamesprivate/kgame/kgameprocess.cpp
     libkdegamesprivate/kgame/kgameproperty.cpp
     libkdegamesprivate/kgame/kgamepropertyhandler.cpp
     libkdegamesprivate/kgame/kgamesequence.cpp
