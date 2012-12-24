@@ -14,7 +14,6 @@ install(FILES
     kchatbase.h
     kchatbaseitemdelegate.h
     kchatbasemodel.h
-    kchatdialog.h
     kchat.h
     kgamecanvas.h
     kgamedifficulty.h

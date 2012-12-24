@@ -127,7 +127,6 @@ set(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kchatbaseitemdelegate.cpp
     libkdegamesprivate/kchatbasemodel.cpp
     libkdegamesprivate/kchat.cpp
-    libkdegamesprivate/kchatdialog.cpp
     libkdegamesprivate/kgame/kgamechat.cpp
     libkdegamesprivate/kgame/kgame.cpp
     libkdegamesprivate/kgame/kgameerror.cpp
