@@ -43,7 +43,6 @@ DESTINATION ${INCLUDE_INSTALL_DIR}/libkdegamesprivate/kgame COMPONENT Devel)
 
 install(FILES
     kgame/dialogs/kgameconnectdialog.h
-    kgame/dialogs/kgamedebugdialog.h
     kgame/dialogs/kgamedialogconfig.h
     kgame/dialogs/kgamedialog.h
     kgame/dialogs/kgameerrordialog.h

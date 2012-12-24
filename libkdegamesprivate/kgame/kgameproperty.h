@@ -241,8 +241,7 @@ public:
 	int id() const { return mId; }
 
 	/**
-	 * @return a type_info of the data this property contains. This is used
-	 * e.g. by KGameDebugDialog
+	 * @return a type_info of the data this property contains. 
 	 **/
 	virtual const type_info* typeinfo() { return &typeid(this); }
 

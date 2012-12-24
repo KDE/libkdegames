@@ -130,7 +130,6 @@ set(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kchat.cpp
     libkdegamesprivate/kchatdialog.cpp
     libkdegamesprivate/kgame/dialogs/kgameconnectdialog.cpp
-    libkdegamesprivate/kgame/dialogs/kgamedebugdialog.cpp
     libkdegamesprivate/kgame/dialogs/kgamedialogconfig.cpp
     libkdegamesprivate/kgame/dialogs/kgamedialog.cpp
     libkdegamesprivate/kgame/dialogs/kgameerrordialog.cpp

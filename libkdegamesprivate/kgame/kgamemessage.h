@@ -123,8 +123,7 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
     /**
      * This function takes a @ref GameMessageIds as argument and returns a
      * suitable string for it. This string can't be used to identify a message
-     * (as it is i18n'ed) but it can make debugging more easy. See also @ref
-     * KGameDebugDialog.
+     * (as it is i18n'ed) but it can make debugging more easy. 
      * @return Either a i18n'ed string (the name of the id) or QString() if
      * the msgid is unknown
      **/

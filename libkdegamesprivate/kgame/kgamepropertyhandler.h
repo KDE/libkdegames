@@ -130,7 +130,7 @@ public:
 	 * Adds a KGameProperty property to the handler
 	 * @param data the property
 	 * @param name A description of the property, which will be returned by
-	 * propertyName. This is used for debugging, e.g. in KGameDebugDialog
+	 * propertyName. This is used for debugging
 	 * @return true on success
 	 **/
 	bool addProperty(KGamePropertyBase *data, const QString& name=QString());
@@ -282,8 +282,7 @@ public:
 
 	/**
 	 * In several situations you just want to have a QString of a
-	 * KGameProperty object. This is the case in the 
-	 * KGameDebugDialog where the value of all properties is displayed. This
+	 * KGameProperty object. This
 	 * function will provide you with such a QString for all the types
 	 * used inside of all KGame classes. If you have a non-standard
 	 * property (probably a self defined class or something like this) you

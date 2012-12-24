@@ -39,11 +39,6 @@ AB: 3.x is obsolete!
 
 4. KGameIO (Andreas Beckermann 10.08.2001)
 
-5. Debugging (Andreas Beckermann 06.10.2001) TODO!
-5.1 KGameDebugDialog
-5.1.1 Debug KGame
-5.1.3 Debug Messages
-
 ---------------------------------------------------------------------
 1. DEFINITIONS
 --------------
@@ -240,9 +235,7 @@ KGamePropertyBase::IdUser. IDs below this are reserved for KGame. Probably this
 will be changed so that you cannot use IDs below IdUser in the future. Then you
 have to specify the dataHandler(). You can also use a KGame or KPlayer pointer.
 This will automatically use KGame::dataHandler() or KPlayer::dataHandler().
-Finally you *can* provide a name for the property. This will be used for
-debugging in KGameDebugDialog. If you want to save some memory you can leave
-this out.
+Finally you *can* provide a name for the property.
 Note that if you use pointers to create the properties dynamically they are
 *not* deleted automatically! You MUST delete them yourself!
 Now you can use the KGameProperty like every variable else. See also Section 
@@ -333,75 +326,4 @@ you should use something like MyIO::sendBet(). The amount of money would
 probably be calculated by the game IO itself.
 
 
-
-5. Debugging
-------------
-The general debugging concept (if there is one at all) or general debugging
-hints are not yet written. Feel free to do so
-
-5.1 KGameDebugDialog
---------------------
-A nice way of debugging a KGame based game is the KGameDebugDialog. Basically
-all you have to do is to add something like "Debug" to your game's menu and add
-a slot like
-slotDebug()
-{
- KGameDebugDialog* dialog = new KGameDebugDialog(mGame, this);
- connect(dialog, SIGNAL(finished()), dialog, SLOT(slotDelayedDestruct()));
- dialog->show();
-}
-that's it.
-You can now click on that menu entry and you get a non-modal dialog where you
-can start to debug :-)
-The dialog consist of several pages. You can easily add your own using
-KDialogBase::addVBoxPage() (for example). 
-
-5.1.1 Debug KGame
------------------
-The first page, "Debug KGame" shows on the left most or even all status values of
-KGame. That contains e.g.  minPlayers(), isAdmin(), gameStatus(), ...
-The right side is probably the more important one. It lists *all* KGameProperties
-which have been inserted to this KGame object (only to this KGame object - not
-the ones that have been added to the players!). Most of the status variables of
-the left side are here again as they are implemented as KGameProperty. You can
-see the name of the property (together with its ID), its value and the policy
-this property uses. Note that "unknwon" will be displayed as name of the
-property if you haven't supplied one. See KGamePropertyBase::registerData() for
-info. You probably always want to supply a name for the property to debug it
-easily. In the future there will be something like
-KGamePropertyHandler::setDebug() so that you can switch off debugging and save
-the memory of the names in a release version. 
-For as long as you use standard types for your properties (int, long, bool,
-...) you should always be able to see the value of the property. If you just see
-"unknown" then this type has not been implemented. You can connect to the signal
-KGamePropertyHandler::signalRequestValue() and supply a QString with the value
-yourself. If you do so for a standard type please also submit a bug report!
-
-Currently the dialog does *not* update automatically! So you alway have to click
-the "update" button when you want a current value. There are several reasons for
-this (and one of them is that i'm too lazy to implement the update ;)). E.g.
-often (very often) a property is just in the background - stores e.g. the
-available money in a game. But you don't want it to update whenever the value
-changes (a player receives/pays money) but only when the value on the screen
-changes.
-
-5.1.2 Debug Players
--------------------
-This page consists of three widgets. On the very left there is a list of all
-players in the game. Only the IDs are displayed to save space. If you click one
-the other widgets are filled with content. These widgets are quite much the same
-as the ones in "Debug KGame" - the left shows the value of the functions and the
-right one displays all KProperties of a player. Not much to say here - except:
-See "Debug KGame".
-
-If you change to another player the value are also updated.
-
-5.1.3 Debug Messages
---------------------
-This page is probably not as important as the other ones. It displays *every*
-message that is sent through the KGame object. As a KGameProperry also send
-messages you probably get a lot of them...
-You can exclude message IDs from being displayed (e.g. all game properties). 
-You can also change the sorting of the list to see all messages of a certain ID.
-The default is to sort by time (which is displayed on the left side).
 
