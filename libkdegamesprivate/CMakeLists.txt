@@ -30,7 +30,6 @@ install(FILES
     kgame/kgameio.h
     kgame/kgamemessage.h
     kgame/kgamenetwork.h
-    kgame/kgamepropertyarray.h
     kgame/kgameproperty.h
     kgame/kgamepropertyhandler.h
     kgame/kgamesequence.h
