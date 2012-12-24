@@ -45,5 +45,4 @@ install(FILES
     kgame/dialogs/kgameconnectdialog.h
     kgame/dialogs/kgamedialogconfig.h
     kgame/dialogs/kgamedialog.h
-    kgame/dialogs/kgameerrordialog.h
 DESTINATION ${INCLUDE_INSTALL_DIR}/libkdegamesprivate/kgame/dialogs COMPONENT Devel)
