@@ -23,7 +23,6 @@
 
 #include <kdialog.h>
 
-class KGameConnectDialogPrivate;
 class KGameConnectWidgetPrivate;
 
 /**
