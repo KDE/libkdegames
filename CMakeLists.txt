@@ -20,6 +20,9 @@ macro_log_feature(OPENAL_FOUND "OpenAL" "OpenAL (Open Audio Library) is a free s
 macro_optional_find_package(SndFile)
 macro_log_feature(SNDFILE_FOUND "SndFile" "libsndfile is a C library written by Erik de Castro Lopo for reading and writing audio files." "http://www.mega-nerd.com/libsndfile/" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
 
+find_package(KDeclarative)
+macro_log_feature(KDECLARATIVE_FOUND "KDeclarative" "KDeclarative is a KDE library for KDE specific QML support." "http://kde.org" TRUE "" "KDeclarative library is required for QML support in KDE Games.")
+
 KDE4_NO_ENABLE_FINAL(libkdegames)
 KDE4_NO_ENABLE_FINAL(libkdegamesprivate)
 
@@ -28,6 +31,7 @@ set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
 add_subdirectory( carddecks )
+add_subdirectory( declarativeimports )
 add_subdirectory( highscore )
 add_subdirectory( includes )
 add_subdirectory( libkdegamesprivate )
@@ -90,6 +94,8 @@ set(kdegames_LIB_SRCS
     kgamerenderedobjectitem.cpp
     kgamerendererclient.cpp
     kgamerenderer.cpp
+    kgdeclarativeview.cpp
+    kgimageprovider.cpp
     kgdifficulty.cpp
     kgtheme.cpp
     kgthemeprovider.cpp
@@ -102,7 +108,7 @@ endif(Q_WS_X11)
 
 kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${KGAUDIO_LINKLIBS})
+target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KGAUDIO_LINKLIBS} ${KDECLARATIVE_LIBRARIES})
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
 
 #NOTE: 6.0.0 = KDE 4.9 release
@@ -152,8 +158,8 @@ kde4_add_ui_files(kdegamesprivate_LIB_SRCS
 
 kde4_add_library(kdegamesprivate SHARED ${kdegamesprivate_LIB_SRCS})
 
-target_link_libraries(kdegamesprivate ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
-target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
+target_link_libraries(kdegamesprivate ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} kdegames)
+target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} kdegames)
 
 set_target_properties(kdegamesprivate PROPERTIES
     VERSION   1.0.0
@@ -180,6 +186,7 @@ install(FILES
     kgamerenderedobjectitem.h
     kgamerendererclient.h
     kgamerenderer.h
+    kgdeclarativeview.h
     kgdifficulty.h
     kgtheme.h
     kgthemeprovider.h

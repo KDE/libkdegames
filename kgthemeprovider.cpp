@@ -28,6 +28,7 @@
 class KgThemeProvider::Private
 {
     public:
+        QString m_name;
         QList<const KgTheme*> m_themes;
         const QByteArray m_configKey;
         const KgTheme* m_currentTheme;
@@ -49,8 +50,9 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
 	, d(new Private(configKey))
 {
-	qRegisterMetaType<const KgTheme*>();
-	qRegisterMetaType<KgThemeProvider*>();
+	//qRegisterMetaType<const KgTheme*>();
+	//qRegisterMetaType<KgThemeProvider*>();
+    connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
 }
 
 KgThemeProvider::~KgThemeProvider()
@@ -74,6 +76,19 @@ KgThemeProvider::~KgThemeProvider()
 	{
 		delete const_cast<KgTheme*>(d->m_themes.takeFirst());
 	}
+}
+
+QString KgThemeProvider::name() const
+{
+    return d->m_name;
+}
+
+void KgThemeProvider::setName(const QString& name)
+{
+    if(d->m_name != name) {
+        d->m_name = name;
+        emit nameChanged(name);
+    }
 }
 
 QList<const KgTheme*> KgThemeProvider::themes() const
@@ -146,6 +161,16 @@ void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
 		d->m_currentTheme = theme;
 		emit currentThemeChanged(theme);
 	}
+}
+
+QString KgThemeProvider::currentThemeName() const
+{
+    return currentTheme()->name();
+}
+
+void KgThemeProvider::updateThemeName()
+{
+    emit currentThemeNameChanged(currentThemeName());
 }
 
 void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName, const QMetaObject* themeClass)

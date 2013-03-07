@@ -7,6 +7,7 @@ install(FILES
 	KGameRenderer
 	KGameRendererClient
 	KgAudioScene
+	KgDeclarativeView
 	KgDifficulty
 	KgSound
 	KgTheme

@@ -20,6 +20,7 @@
 #define KGTHEMEPROVIDER_H
 
 #include <QtCore/QObject>
+#include <QtDeclarative>
 
 #include <kgtheme.h>
 #include <libkdegames_export.h>
@@ -39,6 +40,8 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(const KgTheme* currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString currentThemeName READ currentThemeName NOTIFY currentThemeNameChanged)
 	Q_DISABLE_COPY(KgThemeProvider)
 	public:
 		///Constructor. If you don't want KgThemeProvider to store the current
@@ -50,6 +53,9 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		explicit KgThemeProvider(const QByteArray& configKey = QByteArray("Theme"), QObject* parent = 0);
 		///Destructor.
 		virtual ~KgThemeProvider();
+
+        QString name() const;
+        void setName(const QString& name);
 
 		///@return the themes in this provider
 		QList<const KgTheme*> themes() const;
@@ -71,6 +77,8 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///the theme provider before it restores the theme selection from the
 		///configuration file.
 		const KgTheme* currentTheme() const;
+
+        QString currentThemeName() const;
 
 		///Adds a @a theme to this instance. The theme provider takes ownership
 		///of @a theme.
@@ -108,15 +116,19 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 	Q_SIGNALS:
 		///Emitted when the current theme changes. @see setCurrentTheme
 		void currentThemeChanged(const KgTheme* theme);
+        void nameChanged(const QString name);
+        void currentThemeNameChanged(const QString themeName);
 	public Q_SLOTS:
 		///Select a new theme. The given theme must already have been added to
 		///this instance.
 		void setCurrentTheme(const KgTheme* theme);
+        void updateThemeName();
 	private:
 		class Private;
 		Private* const d;
 };
 
-Q_DECLARE_METATYPE(KgThemeProvider*)
+//Q_DECLARE_METATYPE(KgThemeProvider*)
+QML_DECLARE_TYPE(KgThemeProvider*)
 
 #endif // KGTHEMEPROVIDER_H
