@@ -42,7 +42,7 @@ void KgDeclarativeView::registerProvider(QString name, KgThemeProvider* prov)
 {
     prov->setName(name);
     engine()->addImageProvider(name, new KgImageProvider(prov));
-    engine()->rootContext()->setContextProperty(name, prov);
+    rootContext()->setContextProperty(name, prov);
 }
 
 #include "kgdeclarativeview.moc"

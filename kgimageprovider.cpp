@@ -28,7 +28,6 @@ KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
 {
 }
 
-#include <QDebug>
 QImage KgImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
 {
     QImage image;
@@ -58,4 +57,4 @@ QImage KgImageProvider::requestImage(const QString &source, QSize *size, const Q
     return image;
 }
 
-//#include "kgimageprovider.moc"
+#include "kgimageprovider.moc"

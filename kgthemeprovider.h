@@ -128,7 +128,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		Private* const d;
 };
 
-//Q_DECLARE_METATYPE(KgThemeProvider*)
+Q_DECLARE_METATYPE(KgThemeProvider*)
 QML_DECLARE_TYPE(KgThemeProvider*)
 
 #endif // KGTHEMEPROVIDER_H
