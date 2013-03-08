@@ -54,16 +54,15 @@ class KDEGAMES_EXPORT KgDeclarativeView : public QDeclarativeView
     Q_OBJECT
 public:
     ///Construcs a new KgDeclarativeView with KDE specific environment.
-    ///@param renderer The KGameRenderer object for use by potential
-    ///QML components for KDE Games
     ///@param parent The parent widget for this view (usually the main
     ///window of the game)
     KgDeclarativeView(QWidget *parent=0);
 
-    ///Set the KGameRenderer object for use by potential QML components
-    ///for KDE games. The object is accessible through the "renderer"
-    ///property from QML.
-    void registerProvider(QString name, KgThemeProvider* prov);
+    ///Registers the @param provider with QML's root context with ID
+    ///@param name and constructs a KgImageProvider corresponding
+    ///to this @param provider and adds it to the QML engine which
+    ///will receive sprite requests
+    void registerProvider(QString name, KgThemeProvider* provider);
 
 };
 

@@ -25,41 +25,27 @@ class KgThemeProvider;
 
 /**
  * @class KgImageProvider
- * @since 4.10
- * @short A QDeclarativeView that adds KDE specific module paths and javascript bindings.
+ * @short A QDeclarativeImageProvider that renders requested sprites and
+ * returns corresponding pixmap to the QML view.
  *
- * This class is a QDeclarativeView that sets up a KDE specific environment
- * like custom QML module paths and javascript function bindings (like i18n)
- * to the declarative view.
+ * This class is a QDeclarativeImageProvider that takes a KgThemeProvider
+ * in its constructor and uses it to get full path to SVGs. These theme
+ * SVGs are read and requested sprite pixmap is extracted and given to
+ * the QML image element that requests it.
  *
- * For porting KDE games to QML, the central widget of main window is to
- * be replaced by KgImageProvider (inside which all the .qml graphics take
- * place), leaving the toolbars, menubars and statusbars as they are, and
- * updating their specifics via signals from QML to C++ part of the code.
- *
- * It takes a KGameRenderer object and makes it available to QML via the
- * "renderer" property in its root context. This is useful if you want to
- * make a QML component that wants to make use of the KGameRenderer
- * shared across the game instance. While this is optional, there may be
- * some QML components that require it. So it is recommended that you
- * supple the declarative view with a renderer.
- *
- * The KGameRenderer object can either be passed in the constructor or
- * set up later using the setupRenderer() method.
+ * For porting KDE games to QML, there is a KgItem QML component provided
+ * by KgCore QML plugin which is a small wrapper to request pixmaps from
+ * this KgImageProvider. See KgItem's documentation for details.
  */
 class KgImageProvider : public QDeclarativeImageProvider
 {
 public:
-    ///Construcs a new KgImageProvider with KDE specific environment.
-    ///@param renderer The KGameRenderer object for use by potential
-    ///QML components for KDE Games
-    ///@param parent The parent widget for this view (usually the main
-    ///window of the game)
-    KgImageProvider(KgThemeProvider* prov);
+    ///Construcs a new KgImageProvider with the supplied KgThemeProvider
+    ///@param provider The KgThemeProvider used to discover the game's
+    ///themes.
+    KgImageProvider(KgThemeProvider* provider);
 
-    ///Set the KGameRenderer object for use by potential QML components
-    ///for KDE games. The object is accessible through the "renderer"
-    ///property from QML.
+    ///Reimplemented method that is called when a sprite pixmap is requested
     QImage requestImage(const QString& source, QSize *size, const QSize &requestedSize);
 
 private:

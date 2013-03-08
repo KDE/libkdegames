@@ -30,6 +30,7 @@ KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
 
 QImage KgImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
 {
+    Q_UNUSED(requestedSize); // this is always QSize(-1,-1) for some reason
     QImage image;
 
     QStringList tokens = source.split("/");
