@@ -158,8 +158,8 @@ kde4_add_ui_files(kdegamesprivate_LIB_SRCS
 
 kde4_add_library(kdegamesprivate SHARED ${kdegamesprivate_LIB_SRCS})
 
-target_link_libraries(kdegamesprivate ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} kdegames)
-target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} kdegames)
+target_link_libraries(kdegamesprivate ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
+target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
 
 set_target_properties(kdegamesprivate PROPERTIES
     VERSION   1.0.0
