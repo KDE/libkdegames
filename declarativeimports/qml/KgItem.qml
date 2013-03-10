@@ -18,10 +18,31 @@
 import QtQuick 1.1
 
 Image {
+    // the cached sprite to show while new one is rendered
+    id: fallback
+
     property variant provider
     property string spriteKey
 
-    source: provider==undefined || spriteKey=="" || width*height==0 ? "" : "image://"+provider.name+"/"+provider.currentThemeName+"/"+spriteKey+"/"+Math.round(width)+"x"+Math.round(height)
     smooth: true
-    asynchronous: true
+
+    Image {
+        // the original sprite to be rendered
+
+        property alias prov: fallback.provider
+        property string provName: prov.name
+        property string theme: prov.currentThemeName
+        property alias key: fallback.spriteKey
+        property string size: Math.round(width)+"x"+Math.round(height)
+        property string sourceUrl: "image://"+provName+"/"+theme+"/"+key+"/"+size
+        source: prov==undefined || key=="" || width*height==0 ? "" : sourceUrl
+
+        anchors.fill: parent
+        smooth: true
+        asynchronous: true
+
+        onStatusChanged: {
+            if (status == Image.Ready) parent.source = source;
+        }
+    }
 }
