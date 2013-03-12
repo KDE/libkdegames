@@ -18,8 +18,8 @@
 import QtQuick 1.1
 
 Image {
-    // the cached sprite to show while new one is rendered
-    id: fallback
+    // frontend sprite: shown after a rendered sprite is received
+    id: frontend
 
     property variant provider
     property string spriteKey
@@ -27,19 +27,20 @@ Image {
     smooth: true
 
     Image {
-        // the original sprite to be rendered
+        // backend sprite: triggers requests for new sprite
 
-        property alias prov: fallback.provider
+        property alias prov: frontend.provider
         property string provName: prov.name
         property string theme: prov.currentThemeName
-        property alias key: fallback.spriteKey
+        property alias key: frontend.spriteKey
         property string size: Math.round(width)+"x"+Math.round(height)
         property string sourceUrl: "image://"+provName+"/"+theme+"/"+key+"/"+size
         source: prov==undefined || key=="" || width*height==0 ? "" : sourceUrl
 
         anchors.fill: parent
-        smooth: true
+        smooth: parent.smooth
         asynchronous: true
+        visible: false
 
         onStatusChanged: {
             if (status == Image.Ready) parent.source = source;
