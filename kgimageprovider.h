@@ -21,6 +21,7 @@
 
 #include <QDeclarativeImageProvider>
 
+class QSvgRenderer;
 class KgThemeProvider;
 
 /**
@@ -44,12 +45,18 @@ public:
     ///@param provider The KgThemeProvider used to discover the game's
     ///themes.
     KgImageProvider(KgThemeProvider* provider);
+    ///Destructor.
+    ~KgImageProvider();
 
     ///Reimplemented method that is called when a sprite pixmap is requested
     QImage requestImage(const QString& source, QSize *size, const QSize &requestedSize);
 
 private:
+    void reloadRenderer();
+
+    QString m_themeName;
     KgThemeProvider* m_provider;
+    QSvgRenderer* m_renderer;
 
 };
 

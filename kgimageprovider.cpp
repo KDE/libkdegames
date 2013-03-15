@@ -24,8 +24,21 @@
 
 KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
     QDeclarativeImageProvider(QDeclarativeImageProvider::Image),
-    m_provider(prov)
+    m_provider(prov),
+    m_renderer(new QSvgRenderer())
 {
+    reloadRenderer();
+}
+
+KgImageProvider::~KgImageProvider()
+{
+    delete m_renderer;
+}
+
+void KgImageProvider::reloadRenderer()
+{
+    m_renderer->load(m_provider->currentTheme()->graphicsPath());
+    m_themeName = m_provider->currentThemeName();
 }
 
 QImage KgImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
@@ -35,21 +48,27 @@ QImage KgImageProvider::requestImage(const QString &source, QSize *size, const Q
 
     const QStringList tokens = source.split("/");
     if (tokens.size() > 2) {
+        const QString theme = tokens[0];
         const QString spriteKey = tokens[1];
         const QStringList size = tokens[2].split("x");
         uint width = qRound(size[0].toDouble());
         uint height = qRound(size[1].toDouble());
-        QSvgRenderer* renderer = new QSvgRenderer(m_provider->currentTheme()->graphicsPath());
-        if (width == 0 || height == 0) {
-            image = QImage(renderer->boundsOnElement(spriteKey).size().toSize(), QImage::Format_ARGB32_Premultiplied);
-        } else {
-            image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+
+        if (theme != m_themeName) {
+            reloadRenderer();
         }
-        image.fill(Qt::transparent);
-        QPainter* painter = new QPainter(&image);
-        renderer->render(painter, spriteKey);
-        delete painter;
-        delete renderer;
+
+        if (m_renderer->isValid()) {
+            if (width == 0 || height == 0) {
+                image = QImage(m_renderer->boundsOnElement(spriteKey).size().toSize(), QImage::Format_ARGB32_Premultiplied);
+            } else {
+                image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+            }
+            image.fill(Qt::transparent);
+            QPainter* painter = new QPainter(&image);
+            m_renderer->render(painter, spriteKey);
+            delete painter;
+        }
     }
 
     if (size) *size = image.size();
