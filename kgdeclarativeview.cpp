@@ -38,7 +38,7 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
 }
 
-void KgDeclarativeView::registerProvider(QString name, KgThemeProvider* prov)
+void KgDeclarativeView::registerProvider(const QString& name, KgThemeProvider* prov)
 {
     prov->setName(name);
     engine()->addImageProvider(name, new KgImageProvider(prov));

@@ -62,7 +62,7 @@ public:
     ///@param name and constructs a KgImageProvider corresponding
     ///to this @param provider and adds it to the QML engine which
     ///will receive sprite requests
-    void registerProvider(QString name, KgThemeProvider* provider);
+    void registerProvider(const QString& name, KgThemeProvider* provider);
 
 };
 

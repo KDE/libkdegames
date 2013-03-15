@@ -33,20 +33,19 @@ QImage KgImageProvider::requestImage(const QString &source, QSize *size, const Q
     Q_UNUSED(requestedSize); // this is always QSize(-1,-1) for some reason
     QImage image;
 
-    QStringList tokens = source.split("/");
+    const QStringList tokens = source.split("/");
     if (tokens.size() > 2) {
-        QString spriteKey = tokens[1];
-        QStringList size = tokens[2].split("x");
+        const QString spriteKey = tokens[1];
+        const QStringList size = tokens[2].split("x");
         uint width = qRound(size[0].toDouble());
         uint height = qRound(size[1].toDouble());
         QSvgRenderer* renderer = new QSvgRenderer(m_provider->currentTheme()->graphicsPath());
         if (width == 0 || height == 0) {
             image = QImage(renderer->boundsOnElement(spriteKey).size().toSize(), QImage::Format_ARGB32_Premultiplied);
-        }
-        else {
+        } else {
             image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
         }
-        image.fill(QColor(Qt::transparent).rgba());
+        image.fill(Qt::transparent);
         QPainter* painter = new QPainter(&image);
         renderer->render(painter, spriteKey);
         delete painter;

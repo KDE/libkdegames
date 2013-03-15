@@ -40,8 +40,8 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(const KgTheme* currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(QString currentThemeName READ currentThemeName NOTIFY currentThemeNameChanged)
+	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+	Q_PROPERTY(QString currentThemeName READ currentThemeName NOTIFY currentThemeNameChanged)
 	Q_DISABLE_COPY(KgThemeProvider)
 	public:
 		///Constructor. If you don't want KgThemeProvider to store the current
@@ -54,8 +54,12 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///Destructor.
 		virtual ~KgThemeProvider();
 
-        QString name() const;
-        void setName(const QString& name);
+		///@return the name of the KgThemeProvider object. This name can be
+		///used as QML element ID to reference the object inside QML.
+		QString name() const;
+		///Set the name and the QML element ID of the KgThemeProvider object.
+		///The object can be referenced inside QML using this ID.
+		void setName(const QString& name);
 
 		///@return the themes in this provider
 		QList<const KgTheme*> themes() const;
@@ -78,7 +82,8 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///configuration file.
 		const KgTheme* currentTheme() const;
 
-        QString currentThemeName() const;
+		///@return the name of the current theme
+		QString currentThemeName() const;
 
 		///Adds a @a theme to this instance. The theme provider takes ownership
 		///of @a theme.
@@ -116,13 +121,14 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 	Q_SIGNALS:
 		///Emitted when the current theme changes. @see setCurrentTheme
 		void currentThemeChanged(const KgTheme* theme);
-        void nameChanged(const QString name);
-        void currentThemeNameChanged(const QString themeName);
+		void nameChanged(const QString& name);
+		void currentThemeNameChanged(const QString& themeName);
 	public Q_SLOTS:
 		///Select a new theme. The given theme must already have been added to
 		///this instance.
 		void setCurrentTheme(const KgTheme* theme);
-        void updateThemeName();
+	private Q_SLOTS:
+		void updateThemeName();
 	private:
 		class Private;
 		Private* const d;
