@@ -52,7 +52,7 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 {
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
-    connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
+	connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
 }
 
 KgThemeProvider::~KgThemeProvider()
@@ -80,15 +80,15 @@ KgThemeProvider::~KgThemeProvider()
 
 QString KgThemeProvider::name() const
 {
-    return d->m_name;
+	return d->m_name;
 }
 
 void KgThemeProvider::setName(const QString& name)
 {
-    if(d->m_name != name) {
-        d->m_name = name;
-        emit nameChanged(name);
-    }
+	if(d->m_name != name) {
+		d->m_name = name;
+		emit nameChanged(name);
+	}
 }
 
 QList<const KgTheme*> KgThemeProvider::themes() const
@@ -165,12 +165,12 @@ void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
 
 QString KgThemeProvider::currentThemeName() const
 {
-    return currentTheme()->name();
+	return currentTheme()->name();
 }
 
 void KgThemeProvider::updateThemeName()
 {
-    emit currentThemeNameChanged(currentThemeName());
+	emit currentThemeNameChanged(currentThemeName());
 }
 
 void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName, const QMetaObject* themeClass)
