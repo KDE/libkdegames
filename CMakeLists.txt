@@ -213,3 +213,5 @@ DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
 # install the export set for use with the install-tree
 install(EXPORT KDEGamesLibraryDepends DESTINATION
     ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
+
+macro_display_feature_log()
