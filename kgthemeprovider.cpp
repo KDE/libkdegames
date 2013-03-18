@@ -28,6 +28,7 @@
 class KgThemeProvider::Private
 {
     public:
+        KgThemeProvider *q;
         QString m_name;
         QList<const KgTheme*> m_themes;
         const QByteArray m_configKey;
@@ -43,12 +44,17 @@ class KgThemeProvider::Private
         //this disables the addTheme() lock during rediscoverThemes()
         bool m_inRediscover;
 
-        Private(const QByteArray& key) : m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
+        Private(KgThemeProvider *parent, const QByteArray& key) : q(parent), m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
+
+        void updateThemeName()
+        {
+            emit q->currentThemeNameChanged(q->currentThemeName());
+        }
 };
 
 KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
-	, d(new Private(configKey))
+	, d(new Private(this, configKey))
 {
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
@@ -166,11 +172,6 @@ void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
 QString KgThemeProvider::currentThemeName() const
 {
 	return currentTheme()->name();
-}
-
-void KgThemeProvider::updateThemeName()
-{
-	emit currentThemeNameChanged(currentThemeName());
 }
 
 void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName, const QMetaObject* themeClass)

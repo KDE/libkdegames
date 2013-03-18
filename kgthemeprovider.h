@@ -127,11 +127,10 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///Select a new theme. The given theme must already have been added to
 		///this instance.
 		void setCurrentTheme(const KgTheme* theme);
-	private Q_SLOTS:
-		void updateThemeName();
 	private:
 		class Private;
 		Private* const d;
+		Q_PRIVATE_SLOT(d, void updateThemeName());
 };
 
 Q_DECLARE_METATYPE(KgThemeProvider*)
