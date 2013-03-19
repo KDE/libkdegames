@@ -56,9 +56,11 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 
 		///@return the name of the KgThemeProvider object. This name can be
 		///used as QML element ID to reference the object inside QML.
+		///@since 4.11
 		QString name() const;
 		///Set the name and the QML element ID of the KgThemeProvider object.
 		///The object can be referenced inside QML using this ID.
+		///@since 4.11
 		void setName(const QString& name);
 
 		///@return the themes in this provider
@@ -83,6 +85,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		const KgTheme* currentTheme() const;
 
 		///@return the name of the current theme
+		///@since 4.11
 		QString currentThemeName() const;
 
 		///Adds a @a theme to this instance. The theme provider takes ownership
@@ -121,7 +124,11 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 	Q_SIGNALS:
 		///Emitted when the current theme changes. @see setCurrentTheme
 		void currentThemeChanged(const KgTheme* theme);
+		///Emitted when the name of the provider changes.
+		///@since 4.11
 		void nameChanged(const QString& name);
+		///Emitts the new theme name when the current theme changes.
+		///@since 4.11
 		void currentThemeNameChanged(const QString& themeName);
 	public Q_SLOTS:
 		///Select a new theme. The given theme must already have been added to

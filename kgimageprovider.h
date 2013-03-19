@@ -26,6 +26,7 @@ class KgThemeProvider;
 
 /**
  * @class KgImageProvider
+ * @since 4.11
  * @short A QDeclarativeImageProvider that renders requested sprites and
  * returns corresponding pixmap to the QML view.
  *

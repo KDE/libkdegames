@@ -27,7 +27,7 @@ class KgThemeProvider;
 
 /**
  * @class KgDeclarativeView
- * @since 4.10
+ * @since 4.11
  * @short A QDeclarativeView that adds KDE specific module paths and javascript bindings.
  *
  * This class is a QDeclarativeView that sets up a KDE specific environment
@@ -38,16 +38,6 @@ class KgThemeProvider;
  * be replaced by KgDeclarativeView (inside which all the .qml graphics take
  * place), leaving the toolbars, menubars and statusbars as they are, and
  * updating their specifics via signals from QML to C++ part of the code.
- *
- * It takes a KGameRenderer object and makes it available to QML via the
- * "renderer" property in its root context. This is useful if you want to
- * make a QML component that wants to make use of the KGameRenderer
- * shared across the game instance. While this is optional, there may be
- * some QML components that require it. So it is recommended that you
- * supple the declarative view with a renderer.
- *
- * The KGameRenderer object can either be passed in the constructor or
- * set up later using the setupRenderer() method.
  */
 class KDEGAMES_EXPORT KgDeclarativeView : public QDeclarativeView
 {
