@@ -18,32 +18,26 @@
 
 #include "kgimageprovider.h"
 
-#include <QSvgRenderer>
 #include <QPainter>
 #include <KgThemeProvider>
 
 KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
     QDeclarativeImageProvider(QDeclarativeImageProvider::Image),
-    m_provider(prov),
-    m_renderer(new QSvgRenderer())
+    m_provider(prov)
 {
     reloadRenderer();
 }
 
-KgImageProvider::~KgImageProvider()
-{
-    delete m_renderer;
-}
-
 void KgImageProvider::reloadRenderer()
 {
-    m_renderer->load(m_provider->currentTheme()->graphicsPath());
+    m_renderer.load(m_provider->currentTheme()->graphicsPath());
     m_themeName = m_provider->currentThemeName();
 }
 
-QImage KgImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
+QImage KgImageProvider::requestImage(const QString& source, QSize *size, const QSize& requestedSize)
 {
     Q_UNUSED(requestedSize); // this is always QSize(-1,-1) for some reason
+
     QImage image;
 
     const QStringList tokens = source.split("/");
@@ -58,15 +52,15 @@ QImage KgImageProvider::requestImage(const QString &source, QSize *size, const Q
             reloadRenderer();
         }
 
-        if (m_renderer->isValid()) {
+        if (m_renderer.isValid()) {
             if (width == 0 || height == 0) {
-                image = QImage(m_renderer->boundsOnElement(spriteKey).size().toSize(), QImage::Format_ARGB32_Premultiplied);
+                image = QImage(m_renderer.boundsOnElement(spriteKey).size().toSize(), QImage::Format_ARGB32_Premultiplied);
             } else {
                 image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
             }
             image.fill(Qt::transparent);
             QPainter* painter = new QPainter(&image);
-            m_renderer->render(painter, spriteKey);
+            m_renderer.render(painter, spriteKey);
             delete painter;
         }
     }
