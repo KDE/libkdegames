@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "kgthemeprovider.h"
+#include "kgimageprovider.h"
 
 #include <QtCore/QFileInfo>
 #include <KDE/KConfig>
@@ -87,14 +88,6 @@ KgThemeProvider::~KgThemeProvider()
 QString KgThemeProvider::name() const
 {
 	return d->m_name;
-}
-
-void KgThemeProvider::setName(const QString& name)
-{
-	if(d->m_name != name) {
-		d->m_name = name;
-		emit nameChanged(name);
-	}
 }
 
 QList<const KgTheme*> KgThemeProvider::themes() const
@@ -268,6 +261,15 @@ void KgThemeProvider::rediscoverThemes()
 QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size)
 {
 	return QPixmap(theme->previewPath()).scaled(size, Qt::KeepAspectRatio);
+}
+
+void KgThemeProvider::setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine)
+{
+	if (d->name != name) { // prevent multiple declarations
+		d->m_name = name;
+		engine->addImageProvider(name, new KgImageProvider(this));
+		engine->rootContext()->setContextProperty(name, this);
+	}
 }
 
 #include "kgthemeprovider.moc"

@@ -17,13 +17,8 @@
  ***************************************************************************/
 
 #include "kgdeclarativeview.h"
-#include "kgimageprovider.h"
-
-#include <QDeclarativeEngine>
-#include <QDeclarativeContext>
 
 #include <kdeclarative.h>
-#include <KgThemeProvider>
 
 KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     QDeclarativeView(parent)
@@ -36,13 +31,6 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     kdeclarative.setupBindings();
 
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
-}
-
-void KgDeclarativeView::registerProvider(const QString& name, KgThemeProvider* prov)
-{
-    prov->setName(name);
-    engine()->addImageProvider(name, new KgImageProvider(prov));
-    rootContext()->setContextProperty(name, prov);
 }
 
 #include "kgdeclarativeview.moc"

@@ -40,7 +40,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(const KgTheme* currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
-	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+	Q_PROPERTY(QString name READ name NOTIFY nameChanged)
 	Q_PROPERTY(QString currentThemeName READ currentThemeName NOTIFY currentThemeNameChanged)
 	Q_DISABLE_COPY(KgThemeProvider)
 	public:
@@ -58,10 +58,6 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///used as QML element ID to reference the object inside QML.
 		///@since 4.11
 		QString name() const;
-		///Set the name and the QML element ID of the KgThemeProvider object.
-		///The object can be referenced inside QML using this ID.
-		///@since 4.11
-		void setName(const QString& name);
 
 		///@return the themes in this provider
 		QList<const KgTheme*> themes() const;
@@ -121,6 +117,13 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///The default implementation tries to load a preview image from
 		///KgTheme::previewPath(), and resizes the result to fit in @a size.
 		virtual QPixmap generatePreview(const KgTheme* theme, const QSize& size);
+
+		///Registers this KgThemeProvider with @param engine's root context with ID
+		///@param name and constructs a KgImageProvider corresponding
+		///to this KgThemeProvider and adds it to the QML engine, also
+		///with @param name, which will receive sprite requests
+        ///@since 4.11
+		void setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine);
 	Q_SIGNALS:
 		///Emitted when the current theme changes. @see setCurrentTheme
 		void currentThemeChanged(const KgTheme* theme);

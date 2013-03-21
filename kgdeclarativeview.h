@@ -48,12 +48,6 @@ public:
     ///window of the game)
     KgDeclarativeView(QWidget *parent=0);
 
-    ///Registers the @param provider with QML's root context with ID
-    ///@param name and constructs a KgImageProvider corresponding
-    ///to this @param provider and adds it to the QML engine which
-    ///will receive sprite requests
-    void registerProvider(const QString& name, KgThemeProvider* provider);
-
 };
 
 #endif //KGDECLARATIVEVIEW_H
