@@ -265,7 +265,7 @@ QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size
 
 void KgThemeProvider::setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine)
 {
-	if (d->name != name) { // prevent multiple declarations
+	if (d->m_name != name) { // prevent multiple declarations
 		d->m_name = name;
 		engine->addImageProvider(name, new KgImageProvider(this));
 		engine->rootContext()->setContextProperty(name, this);
