@@ -48,6 +48,10 @@ public:
     ///window of the game)
     KgDeclarativeView(QWidget *parent=0);
 
+private:
+    class Private;
+    Private* const d;
+
 };
 
 #endif //KGDECLARATIVEVIEW_H

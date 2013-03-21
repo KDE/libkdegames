@@ -20,8 +20,14 @@
 
 #include <kdeclarative.h>
 
+class KgDeclarativeView::Private
+{
+    // unused for now, for future expandability
+};
+
 KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
-    QDeclarativeView(parent)
+    QDeclarativeView(parent),
+    d(new Private)
 {
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
