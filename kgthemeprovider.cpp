@@ -17,7 +17,7 @@
  ***************************************************************************/
 
 #include "kgthemeprovider.h"
-#include "kgimageprovider.h"
+#include "kgimageprovider_p.h"
 
 #include <QtCore/QFileInfo>
 #include <KDE/KConfig>

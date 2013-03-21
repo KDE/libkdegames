@@ -16,7 +16,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "kgimageprovider.h"
+#include "kgimageprovider_p.h"
 
 #include <QPainter>
 #include <KgThemeProvider>
@@ -70,4 +70,4 @@ QImage KgImageProvider::requestImage(const QString& source, QSize *size, const Q
     return image;
 }
 
-#include "kgimageprovider.moc"
+#include "kgimageprovider_p.moc"
