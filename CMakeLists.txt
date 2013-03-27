@@ -112,7 +112,7 @@ target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KNEWST
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
 
 #NOTE: 6.0.0 = KDE 4.9 release
-set(KDEGAMES_VERSION 6.0.0)
+set(KDEGAMES_VERSION 6.1.0)
 set(KDEGAMES_SOVERSION 6)
 
 set_target_properties(kdegames PROPERTIES
