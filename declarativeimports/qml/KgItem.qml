@@ -25,6 +25,7 @@ Image {
     property string spriteKey
 
     smooth: true
+    cache: false
 
     Image {
         // backend sprite: triggers requests for new sprite
@@ -39,6 +40,7 @@ Image {
 
         anchors.fill: parent
         smooth: parent.smooth
+        cache: parent.cache
         asynchronous: true
         visible: false
 
