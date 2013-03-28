@@ -20,6 +20,7 @@
 #define KGTHEMEPROVIDER_H
 
 #include <QtCore/QObject>
+#include <QtDeclarative>
 
 #include <kgtheme.h>
 #include <libkdegames_export.h>
@@ -39,6 +40,8 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(const KgTheme* currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
+	Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+	Q_PROPERTY(QString currentThemeName READ currentThemeName NOTIFY currentThemeNameChanged)
 	Q_DISABLE_COPY(KgThemeProvider)
 	public:
 		///Constructor. If you don't want KgThemeProvider to store the current
@@ -50,6 +53,11 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		explicit KgThemeProvider(const QByteArray& configKey = QByteArray("Theme"), QObject* parent = 0);
 		///Destructor.
 		virtual ~KgThemeProvider();
+
+		///@return the name of the KgThemeProvider object. This name can be
+		///used as QML element ID to reference the object inside QML.
+		///@since 4.11
+		QString name() const;
 
 		///@return the themes in this provider
 		QList<const KgTheme*> themes() const;
@@ -71,6 +79,10 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///the theme provider before it restores the theme selection from the
 		///configuration file.
 		const KgTheme* currentTheme() const;
+
+		///@return the name of the current theme
+		///@since 4.11
+		QString currentThemeName() const;
 
 		///Adds a @a theme to this instance. The theme provider takes ownership
 		///of @a theme.
@@ -105,9 +117,22 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///The default implementation tries to load a preview image from
 		///KgTheme::previewPath(), and resizes the result to fit in @a size.
 		virtual QPixmap generatePreview(const KgTheme* theme, const QSize& size);
+
+		///Registers this KgThemeProvider with @param engine's root context with ID
+		///@param name and constructs a KgImageProvider corresponding
+		///to this KgThemeProvider and adds it to the QML engine, also
+		///with @param name, which will receive sprite requests
+		///@since 4.11
+		void setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine);
 	Q_SIGNALS:
 		///Emitted when the current theme changes. @see setCurrentTheme
 		void currentThemeChanged(const KgTheme* theme);
+		///Emitted when the name of the provider changes.
+		///@since 4.11
+		void nameChanged(const QString& name);
+		///Emitts the new theme name when the current theme changes.
+		///@since 4.11
+		void currentThemeNameChanged(const QString& themeName);
 	public Q_SLOTS:
 		///Select a new theme. The given theme must already have been added to
 		///this instance.
@@ -115,8 +140,10 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 	private:
 		class Private;
 		Private* const d;
+		Q_PRIVATE_SLOT(d, void updateThemeName());
 };
 
 Q_DECLARE_METATYPE(KgThemeProvider*)
+QML_DECLARE_TYPE(KgThemeProvider*)
 
 #endif // KGTHEMEPROVIDER_H

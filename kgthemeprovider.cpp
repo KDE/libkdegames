@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "kgthemeprovider.h"
+#include "kgimageprovider_p.h"
 
 #include <QtCore/QFileInfo>
 #include <KDE/KConfig>
@@ -28,6 +29,8 @@
 class KgThemeProvider::Private
 {
     public:
+        KgThemeProvider *q;
+        QString m_name;
         QList<const KgTheme*> m_themes;
         const QByteArray m_configKey;
         const KgTheme* m_currentTheme;
@@ -42,15 +45,21 @@ class KgThemeProvider::Private
         //this disables the addTheme() lock during rediscoverThemes()
         bool m_inRediscover;
 
-        Private(const QByteArray& key) : m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
+        Private(KgThemeProvider *parent, const QByteArray& key) : q(parent), m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
+
+        void updateThemeName()
+        {
+            emit q->currentThemeNameChanged(q->currentThemeName());
+        }
 };
 
 KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
-	, d(new Private(configKey))
+	, d(new Private(this, configKey))
 {
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
+	connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
 }
 
 KgThemeProvider::~KgThemeProvider()
@@ -74,6 +83,11 @@ KgThemeProvider::~KgThemeProvider()
 	{
 		delete const_cast<KgTheme*>(d->m_themes.takeFirst());
 	}
+}
+
+QString KgThemeProvider::name() const
+{
+	return d->m_name;
 }
 
 QList<const KgTheme*> KgThemeProvider::themes() const
@@ -146,6 +160,11 @@ void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
 		d->m_currentTheme = theme;
 		emit currentThemeChanged(theme);
 	}
+}
+
+QString KgThemeProvider::currentThemeName() const
+{
+	return currentTheme()->name();
 }
 
 void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName, const QMetaObject* themeClass)
@@ -242,6 +261,15 @@ void KgThemeProvider::rediscoverThemes()
 QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size)
 {
 	return QPixmap(theme->previewPath()).scaled(size, Qt::KeepAspectRatio);
+}
+
+void KgThemeProvider::setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine)
+{
+	if (d->m_name != name) { // prevent multiple declarations
+		d->m_name = name;
+		engine->addImageProvider(name, new KgImageProvider(this));
+		engine->rootContext()->setContextProperty(name, this);
+	}
 }
 
 #include "kgthemeprovider.moc"
