@@ -25,7 +25,6 @@ Image {
     property string spriteKey
 
     smooth: true
-    cache: false
 
     Image {
         // backend sprite: triggers requests for new sprite
@@ -40,11 +39,13 @@ Image {
 
         anchors.fill: parent
         smooth: parent.smooth
-        cache: parent.cache
         asynchronous: true
         visible: false
 
-        onStatusChanged: {
+        onStatusChanged: { // loads the sprite received from ImageProvider
+            if (status == Image.Ready) parent.source = source;
+        }
+        onSourceChanged: { // loads sprite from cache as status does not change in this case
             if (status == Image.Ready) parent.source = source;
         }
     }
