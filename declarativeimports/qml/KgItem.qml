@@ -30,8 +30,8 @@ Image {
         // backend sprite: triggers requests for new sprite
 
         property alias prov: frontend.provider
-        property string provName: prov.name
-        property string theme: prov.currentThemeName
+        property string provName: prov==undefined ? "" : prov.name
+        property string theme: prov==undefined ? "" : prov.currentThemeName
         property alias key: frontend.spriteKey
         property string size: Math.round(width)+"x"+Math.round(height)
         property string sourceUrl: "image://"+provName+"/"+theme+"/"+key+"/"+size
