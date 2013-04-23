@@ -31,6 +31,7 @@ Rectangle {
     property alias backgroundColor: background.color
     property real messageOpacity: 1
     property bool animate: true
+    signal linkActivated(string link)
 
     // constants
     property int margin: 15
@@ -64,6 +65,7 @@ Rectangle {
         }
         color: "white"
         textFormat: Text.RichText
+        onLinkActivated: parent.linkActivated(link);
     }
 
     Behavior on opacity { NumberAnimation { duration: animate ? 300 : 0 } }
