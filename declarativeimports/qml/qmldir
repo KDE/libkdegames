@@ -1,3 +1,4 @@
 plugin corebindingsplugin
 
 KgItem 0.1 KgItem.qml
+PopupItem 0.1 PopupItem.qml
