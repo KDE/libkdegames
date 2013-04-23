@@ -65,6 +65,7 @@ Rectangle {
         }
         color: "white"
         textFormat: Text.RichText
+        smooth: true
         onLinkActivated: parent.linkActivated(link);
     }
 
