@@ -37,6 +37,7 @@ Rectangle {
     property int margin: 15
     property int iconTextMargin: showIcon ? 10 : 0
 
+    // TODO: take this from KStatefulBrush(KColorScheme::Tooltip, KColorScheme::NormalBackground).color();
     color: "#181513"
     opacity: 0
     width: icon.paintedWidth + iconTextMargin + message.paintedWidth + margin*2
@@ -63,6 +64,7 @@ Rectangle {
             leftMargin: parent.iconTextMargin
             verticalCenter: parent.verticalCenter
         }
+        // TODO: take this from KStatefulBrush(KColorScheme::Tooltip, KColorScheme::NormalText).color();
         color: "white"
         textFormat: Text.RichText
         smooth: true
