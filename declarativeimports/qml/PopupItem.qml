@@ -24,16 +24,8 @@ Rectangle {
     property alias text: message.text
     property alias textColor: message.color
     property alias messageTimeout: hideTimer.interval
-    property string iconName: "dialog-information"
-    property bool showIcon: true
-    property QtObject iconComponent: Component {
-        Image {
-            source: "image://icon/"+background.iconName
-            width: 32
-            height: 32
-            smooth: true
-        }
-    }
+    property alias icon: icon.iconName
+    property alias showIcon: icon.visible
     property alias hideOnMouseClick: mouseArea.enabled
     property alias sharpness: background.radius
     property alias backgroundColor: background.color
@@ -45,28 +37,30 @@ Rectangle {
     property int margin: 15
     property int iconTextMargin: showIcon ? 10 : 0
 
-    Component.onCompleted: {
-        if (showIcon) {
-            icon = iconComponent.createObject(background);
-            icon.anchors.left = background.left;
-            icon.anchors.leftMargin = margin;
-            icon.anchors.verticalCenter = background.verticalCenter;
-            width = icon.paintedWidth + iconTextMargin + message.paintedWidth + margin*2;
-            height = Math.max(icon.paintedWidth, message.paintedHeight) + margin*2;
-        } else {
-            width = message.paintedWidth + margin*2;
-            height = message.paintedHeight + margin*2;
-        }
-    }
-
     color: "#181513"
     opacity: 0
+    width: icon.paintedWidth + iconTextMargin + message.paintedWidth + margin*2
+    height: Math.max(icon.paintedHeight, message.paintedHeight) + margin*2
+
+    Image {
+        id: icon
+        property string iconName: "dialog-information"
+        source: "image://icon/"+iconName
+        width: visible ? 32 : 0
+        height: visible ? 32 : 0
+        anchors {
+            left: parent.left
+            leftMargin: parent.margin
+            verticalCenter: parent.verticalCenter
+        }
+        smooth: true
+    }
 
     Text {
         id: message
         anchors {
-            right: parent.right
-            rightMargin: parent.margin
+            left: icon.right
+            leftMargin: parent.iconTextMargin
             verticalCenter: parent.verticalCenter
         }
         color: "white"
