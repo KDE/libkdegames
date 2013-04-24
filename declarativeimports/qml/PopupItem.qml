@@ -38,7 +38,7 @@ Rectangle {
     property int margin: 15
     property int iconTextMargin: showIcon ? 10 : 0
 
-    // TODO: take this from KStatefulBrush(KColorScheme::Tooltip, KColorScheme::NormalBackground).color();
+    // TODO: take this from KColorScheme(QPalette::Active, KColorScheme::Tooltip).background().color();
     color: "#181513"
     opacity: 0
     width: icon.paintedWidth + iconTextMargin + message.paintedWidth + margin*2
@@ -65,7 +65,7 @@ Rectangle {
             leftMargin: parent.iconTextMargin
             verticalCenter: parent.verticalCenter
         }
-        // TODO: take this from KStatefulBrush(KColorScheme::Tooltip, KColorScheme::NormalText).color();
+        // TODO: take this from KColorScheme(QPalette::Active, KColorScheme::Tooltip).foreground().color();
         color: "white"
         textFormat: Text.RichText
         smooth: true
