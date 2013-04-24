@@ -26,6 +26,7 @@ Rectangle {
     property alias messageTimeout: hideTimer.interval
     property alias icon: icon.iconName
     property alias showIcon: icon.visible
+    property int iconSize: 32
     property alias hideOnMouseClick: mouseArea.enabled
     property alias sharpness: background.radius
     property alias backgroundColor: background.color
@@ -47,8 +48,8 @@ Rectangle {
         id: icon
         property string iconName: "dialog-information"
         source: "image://icon/"+iconName
-        width: visible ? 32 : 0
-        height: visible ? 32 : 0
+        width: visible ? parent.iconSize : 0
+        height: width
         anchors {
             left: parent.left
             leftMargin: parent.margin
