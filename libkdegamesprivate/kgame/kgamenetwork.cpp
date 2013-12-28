@@ -26,7 +26,7 @@
 #include "kmessageserver.h"
 #include "kmessageclient.h"
 #include "kmessageio.h"
-#include <dnssd/publicservice.h>
+#include <kdnssd/publicservice.h>
 
 #include <kdebug.h>
 
@@ -50,7 +50,7 @@ public:
         KMessageClient* mMessageClient;
         KMessageServer* mMessageServer;
         quint32 mDisconnectId;  // Stores gameId() over a disconnect process
-	DNSSD::PublicService* mService;
+	KDNSSD::PublicService* mService;
 	QString mType;
 	QString mName;
 
@@ -158,7 +158,7 @@ void KGameNetwork::setDiscoveryInfo(const QString& type, const QString& name)
 void KGameNetwork::tryPublish()
 {
  if (d->mType.isNull() || !isOfferingConnections()) return;
- if (!d->mService) d->mService = new DNSSD::PublicService(d->mName,d->mType,port());
+ if (!d->mService) d->mService = new KDNSSD::PublicService(d->mName,d->mType,port());
  else {
    if (d->mType!=d->mService->type()) d->mService->setType(d->mType);
    if (d->mName!=d->mService->serviceName()) d->mService->setServiceName(d->mName);

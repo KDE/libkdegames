@@ -20,7 +20,7 @@
 #include "kgamerenderer.h"
 
 #include <QtCore/qmath.h>
-#include <QtGui/QGraphicsView>
+#include <QtWidgets/QGraphicsView>
 
 class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 {

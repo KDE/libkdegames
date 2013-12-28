@@ -20,7 +20,7 @@
 
 #include <libkdegames_export.h>
 
-#include <QtGui/QGraphicsPathItem>
+#include <QtWidgets/QGraphicsItem>
 #include <QtCore/QObject>
 
 class KGamePopupItemPrivate;

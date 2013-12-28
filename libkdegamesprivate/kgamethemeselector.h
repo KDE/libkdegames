@@ -20,7 +20,7 @@
 #ifndef KGAMETHEMESELECTOR_H
 #define KGAMETHEMESELECTOR_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 #include "libkdegamesprivate_export.h"
 

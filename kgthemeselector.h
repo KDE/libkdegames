@@ -19,7 +19,7 @@
 #ifndef KGTHEMESELECTOR_H
 #define KGTHEMESELECTOR_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <kgthemeprovider.h>
 
 #include <libkdegames_export.h>

@@ -655,5 +655,5 @@ void KGRInternal::RendererPool::freeRenderer(QSvgRenderer* renderer)
 
 //END KGRInternal::RendererPool
 
-#include "kgamerenderer.moc"
-#include "kgamerenderer_p.moc"
+#include "moc_kgamerenderer.cpp"
+#include "moc_kgamerenderer_p.cpp"

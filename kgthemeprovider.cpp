@@ -263,7 +263,7 @@ QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size
 	return QPixmap(theme->previewPath()).scaled(size, Qt::KeepAspectRatio);
 }
 
-void KgThemeProvider::setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine)
+void KgThemeProvider::setDeclarativeEngine(const QString& name, QQmlEngine* engine)
 {
 	if (d->m_name != name) { // prevent multiple declarations
 		d->m_name = name;
@@ -272,4 +272,4 @@ void KgThemeProvider::setDeclarativeEngine(const QString& name, QDeclarativeEngi
 	}
 }
 
-#include "kgthemeprovider.moc"
+#include "moc_kgthemeprovider.cpp"

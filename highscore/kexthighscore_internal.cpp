@@ -37,6 +37,7 @@
 #include <kmessagebox.h>
 #include <kcodecs.h>
 #include <kdebug.h>
+#include <kmd5.h>
 
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
@@ -614,7 +615,7 @@ const char *UNABLE_TO_CONTACT =
 bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
                                 QDomNamedNodeMap *map)
 {
-    KIO::http_update_cache(url, true, 0); // remove cache !
+    KIO::http_update_cache(url, true, QDateTime::fromTime_t(0)); // remove cache !
 
     QString tmpFile;
     if ( !KIO::NetAccess::download(url, tmpFile, parent) ) {

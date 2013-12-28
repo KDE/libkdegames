@@ -29,6 +29,7 @@
 //the following only used by KgDifficultyGUI
 #include <KDE/KActionCollection>
 #include <KDE/KComboBox>
+#include <KDE/KIcon>
 #include <KDE/KSelectAction>
 #include <KDE/KStatusBar>
 #include <KDE/KXmlGuiWindow>

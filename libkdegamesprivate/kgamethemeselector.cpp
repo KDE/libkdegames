@@ -19,6 +19,8 @@
 
 #include "kgamethemeselector.h"
 
+#include <KIcon>
+#include <KGlobal>
 #include <KLocale>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
@@ -202,4 +204,4 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
         findThemes( ui.kcfg_Theme->text() );
 }
 
-#include "kgamethemeselector.moc"
+#include "moc_kgamethemeselector.cpp"

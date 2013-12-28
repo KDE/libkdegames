@@ -20,9 +20,9 @@
 #ifndef __KCHATBASE_H__
 #define __KCHATBASE_H__
 
-#include <QtGui/QFrame>
+#include <QtWidgets/QFrame>
 
-#include <kglobalsettings.h>
+#include <kcompletion.h>
 #include "libkdegamesprivate_export.h"
 
 class KConfig;
@@ -180,7 +180,7 @@ public:
 	/**
 	 * See KLineEdit::setCompletionMode
 	 **/
-	void setCompletionMode(KGlobalSettings::Completion mode);
+	void setCompletionMode(KCompletion::CompletionMode mode);
 
 	/**
 	 * Set the font that used used for the name part of a message. See also

@@ -255,4 +255,4 @@ bool KgPlaybackEvent::replay(const QPointF& pos) const
 
 //END KgPlaybackEvent
 
-#include "kgsound.moc"
+#include "moc_kgsound.cpp"

@@ -19,7 +19,7 @@
 #ifndef KGIMAGEPROVIDER_H
 #define KGIMAGEPROVIDER_H
 
-#include <QDeclarativeImageProvider>
+#include <QQuickImageProvider>
 #include <QSvgRenderer>
 
 class KgThemeProvider;
@@ -39,7 +39,7 @@ class KgThemeProvider;
  * by KgCore QML plugin which is a small wrapper to request pixmaps from
  * this KgImageProvider. See KgItem's documentation for details.
  */
-class KgImageProvider : public QDeclarativeImageProvider
+class KgImageProvider : public QQuickImageProvider
 {
 public:
     ///Construcs a new KgImageProvider with the supplied KgThemeProvider

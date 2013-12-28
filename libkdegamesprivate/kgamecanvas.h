@@ -38,7 +38,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QtGui/QPainter>
 #include <QtCore/QRect>
 #include <QtGui/QRegion>
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include "libkdegamesprivate_export.h"
 #include <KGameRendererClient>
 

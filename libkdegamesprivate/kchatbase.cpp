@@ -112,7 +112,7 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  d->mEdit->setHandleSignals(false);
  d->mEdit->setTrapReturnKey(true);
  d->mEdit->completionObject(); // add the completion object
- d->mEdit->setCompletionMode(KGlobalSettings::CompletionNone);
+ d->mEdit->setCompletionMode(KCompletion::CompletionNone);
  connect(d->mEdit, SIGNAL(returnPressed(QString)), this, SLOT(slotReturnPressed(QString)));
  h->addWidget(d->mEdit);
 
@@ -266,7 +266,7 @@ void KChatBase::slotClear()
 }
 
 
-void KChatBase::setCompletionMode(KGlobalSettings::Completion mode)
+void KChatBase::setCompletionMode(KCompletion::CompletionMode mode)
 { d->mEdit->setCompletionMode(mode); }
 
 void KChatBase::saveConfig(KConfig* conf)

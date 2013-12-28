@@ -22,7 +22,7 @@
 #include <KgThemeProvider>
 
 KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
-    QDeclarativeImageProvider(QDeclarativeImageProvider::Image),
+    QQuickImageProvider(Image),
     m_provider(prov)
 {
     reloadRenderer();
@@ -70,4 +70,3 @@ QImage KgImageProvider::requestImage(const QString& source, QSize *size, const Q
     return image;
 }
 
-#include "kgimageprovider_p.moc"

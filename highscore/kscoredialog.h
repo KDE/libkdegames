@@ -266,7 +266,7 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
         ///Display the dialog as non-modal
         virtual void show();
         ///Display the dialog as modal
-        virtual void exec();
+        virtual int exec();
 
         private Q_SLOTS:
             void slotGotReturn();

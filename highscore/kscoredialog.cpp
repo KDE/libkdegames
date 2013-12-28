@@ -40,11 +40,11 @@ this software.
 #include <QtCore/QTimer>
 #include <QtCore/QList>
 #include <QtCore/QByteArray>
-#include <QtGui/QGridLayout>
+#include <QGridLayout>
 #include <QtGui/QKeyEvent>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QStackedWidget>
+#include <QLabel>
+#include <QLayout>
+#include <QStackedWidget>
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
 
@@ -604,10 +604,10 @@ void KScoreDialog::show()
     KDialog::show();
 }
 
-void KScoreDialog::exec()
+int KScoreDialog::exec()
 {
     d->aboutToShow();
-    KDialog::exec();
+    return KDialog::exec();
 }
 
 void KScoreDialog::slotGotReturn()

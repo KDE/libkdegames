@@ -20,7 +20,7 @@
 #define KGAMERENDEREDOBJECTITEM_H
 
 #include <QtCore/QObject>
-#include <QtGui/QGraphicsItem>
+#include <QtWidgets/QGraphicsItem>
 class QGraphicsView;
 
 #include <kgamerendererclient.h>

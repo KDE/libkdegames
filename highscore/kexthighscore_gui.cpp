@@ -28,7 +28,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QHeaderView>
-#include <QtGui/QTabWidget>
+#include <QTabWidget>
 
 #include <kmessagebox.h>
 #include <kurllabel.h>
@@ -229,15 +229,15 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
 {
 //     kDebug(11001) << ": HighscoresDialog";
 
-    setCaption( i18n("Highscores") );
-    setButtons( Close|User1|User2 );
-    setDefaultButton( Close );
+    setWindowTitle( i18n("Highscores") );
+// TODO    setButtons( Close|User1|User2 );
+// TODO    setDefaultButton( Close );
     if ( internal->nbGameTypes()>1 )
         setFaceType( KPageDialog::Tree );
     else
         setFaceType( KPageDialog::Plain );
-    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), QLatin1String( "configure" )) );
-    setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
+// TODO    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), QLatin1String( "configure" )) );
+// TODO    setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
     connect( this, SIGNAL(user1Clicked()), SLOT(slotUser1()) );
     connect( this, SIGNAL(user2Clicked()), SLOT(slotUser2()) );
 

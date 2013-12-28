@@ -19,16 +19,17 @@
 #include "kgthemeselector.h"
 #include "kgthemeselector_p.h"
 
-#include <QtGui/QAbstractItemView>
-#include <QtGui/QApplication>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
-#include <QtGui/QListWidget>
 #include <QtGui/QPainter>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollBar>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAbstractItemView>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollBar>
+#include <QtWidgets/QVBoxLayout>
+#include <KDE/KDialog>
 #include <KDE/KIcon>
 #include <KDE/KLocalizedString>
 #include <KNS3/DownloadDialog>
@@ -325,4 +326,4 @@ QSize KgThemeDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
 
 //END KgThemeDelegate
 
-#include "kgthemeselector.moc"
+#include "moc_kgthemeselector.cpp"

@@ -274,8 +274,8 @@ void MultiplayerScores::show(QWidget *parent)
 
     // show the scores
     KPageDialog dialog(parent);
-    dialog.setCaption(i18n("Multiplayers Scores"));
-    dialog.setButtons(KDialog::Close);
+    dialog.setWindowTitle(i18n("Multiplayers Scores"));
+// TODO    dialog.setButtons(KDialog::Close);
     dialog.setModal(true);
     dialog.setFaceType(KPageDialog::Plain);
     KPageWidgetItem *page = new KPageWidgetItem( new QLabel(QLatin1String( "" )), QLatin1String( "" ) );
