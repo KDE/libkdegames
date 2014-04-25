@@ -26,8 +26,7 @@ KgDeclarativeView::KgDeclarativeView(QWindow *parent) :
 {
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
-    kdeclarative.initialize();
-
+    
     // binds things like i18n and icons
     kdeclarative.setupBindings();
 
