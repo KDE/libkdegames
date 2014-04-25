@@ -24,7 +24,7 @@ KgDeclarativeView::KgDeclarativeView(QWindow *parent) :
     QQuickView(parent),
     d(0) //unused for now, for future expandability
 {
-    KDeclarative kdeclarative;
+    KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.initialize();
 
