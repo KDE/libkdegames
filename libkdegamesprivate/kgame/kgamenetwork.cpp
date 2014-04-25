@@ -26,7 +26,7 @@
 #include "kmessageserver.h"
 #include "kmessageclient.h"
 #include "kmessageio.h"
-#include <kdnssd/publicservice.h>
+#include <dnssd/publicservice.h>
 
 #include <kdebug.h>
 
