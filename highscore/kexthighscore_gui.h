@@ -175,7 +175,7 @@ class ConfigDialog : public KDialog
     QCheckBox   *_WWHEnabled;
     QLineEdit   *_nickname, *_comment;
     KLineEdit   *_key, *_registeredName;
-    KPushButton *_removeButton;
+    QPushButton *_removeButton;
 
     void load();
     bool save();

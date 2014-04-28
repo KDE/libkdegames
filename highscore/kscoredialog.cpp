@@ -33,7 +33,6 @@ this software.
 #include <KSeparator>
 #include <KGlobal>
 #include <KConfigGroup>
-#include <KTabWidget>
 #include <KDebug>
 #include <KLineEdit>
 
@@ -45,6 +44,7 @@ this software.
 #include <QLabel>
 #include <QLayout>
 #include <QStackedWidget>
+#include <QTabWidget>
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
 
@@ -57,7 +57,7 @@ class KScoreDialog::KScoreDialogPrivate
         QMap<QByteArray, GroupScores> scores; ///<Maps config group name to GroupScores
         QList<QByteArray> hiddenGroups; /// Groups that should not be shown in the dialog
         QMap<int, QByteArray> configGroupWeights; /// Weights of the groups, defines ordering
-        KTabWidget *tabWidget;
+        QTabWidget *tabWidget;
         //QWidget *page;
         //QGridLayout *layout;
         KLineEdit *edit;    ///<The line edit for entering player name
@@ -128,7 +128,7 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 
     //d->page = new QWidget(this);
 
-    d->tabWidget = new KTabWidget(this);
+    d->tabWidget = new QTabWidget(this);
     d->tabWidget->setTabPosition(QTabWidget::West);
 
     setMainWidget(d->tabWidget);

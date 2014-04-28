@@ -142,7 +142,7 @@ void Manager::setShowDrawGamesStatistic(bool show)
     internal->showDrawGames = show;
 }
 
-void Manager::setWWHighscores(const KUrl &url, const QString &version)
+void Manager::setWWHighscores(const QUrl &url, const QString &version)
 {
     Q_ASSERT( url.isValid() );
     internal->serverURL = url;
@@ -272,7 +272,7 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
     return QString();
 }
 
-void Manager::addToQueryURL(KUrl &url, const QString &item,
+void Manager::addToQueryURL(QUrl &url, const QString &item,
                                const QString &content)
 {
     Q_ASSERT( !item.isEmpty() && url.queryItem(item).isNull() );

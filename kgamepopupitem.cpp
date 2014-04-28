@@ -22,9 +22,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
+#include <QIcon>
 
 #include <KColorScheme>
-#include <KIcon>
 #include <KDebug>
 
 // margin on the sides of message box
@@ -186,7 +186,7 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
 
-    KIcon infoIcon( QLatin1String( "dialog-information" ));
+    QIcon infoIcon( QLatin1String( "dialog-information" ));
     // default size is 32
     setMessageIcon( infoIcon.pixmap(32, 32) );
 

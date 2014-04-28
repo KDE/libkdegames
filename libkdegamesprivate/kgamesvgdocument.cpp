@@ -199,14 +199,15 @@ void KGameSvgDocument::load()
     if (!content.startsWith("<?xml"))
     {
         QBuffer buf(&content);
-        QIODevice *flt = KFilterDev::device(&buf, QString::fromLatin1("application/x-gzip"), false);
-        if (!flt || !flt->open(QIODevice::ReadOnly))
+        KCompressionDevice::CompressionType type = KFilterDev::compressionTypeForMimeType(QString::fromLatin1("application/x-gzip"));
+	KCompressionDevice flt(&buf, false, type);
+	if (!flt.open(QIODevice::ReadOnly))
         {
-            delete flt;
+            flt.close();
             return;
         }
-        QByteArray ar = flt->readAll();
-        delete flt;
+        QByteArray ar = flt.readAll();
+        flt.close();
         content = ar;
     }
 

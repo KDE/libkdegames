@@ -23,10 +23,11 @@
 //Added by qt3to4:
 #include <QLabel>
 #include <QHBoxLayout>
-#include <kglobal.h>
+#include <QtCore/QLocale>
+#include <QWidget>
+
 #include <kdialog.h>
 #include <kdebug.h>
-#include <kvbox.h>
 #include <kpagedialog.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
@@ -136,7 +137,7 @@ QString Item::pretty(uint, const QVariant &value) const
         return timeFormat(value.toUInt());
     case DateTime:
         if ( value.toDateTime().isNull() ) return QLatin1String( "--" );
-        return KGlobal::locale()->formatDateTime(value.toDateTime());
+        return QLocale().toString(value.toDateTime());
     case NoSpecial:
         break;
     }
@@ -283,7 +284,7 @@ void MultiplayerScores::show(QWidget *parent)
     hbox->setMargin(KDialog::marginHint());
     hbox->setSpacing(KDialog::spacingHint());
 
-    KVBox *vbox = new KVBox(page->widget());
+    QWidget *vbox = new QWidget(page->widget());
     hbox->addWidget(vbox);
     if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played."), vbox);
     else {
@@ -292,7 +293,7 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     if ( _nbGames[0]>1 ) {
-        vbox = new KVBox(page->widget());
+        vbox = new QWidget(page->widget());
         hbox->addWidget(vbox);
         (void)new QLabel(i18n("Scores for the last %1 games:",
                           _nbGames[0]), vbox);

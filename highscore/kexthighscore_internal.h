@@ -23,7 +23,6 @@
 #include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
-#include <kurl.h>
 
 #include "khighscore.h"
 #include "kexthighscore.h"
@@ -31,6 +30,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QVector>
 #include <QtCore/QDateTime>
+#include <QtCore/QUrl>
 #include <kconfiggroup.h>
 
 class QTextStream;
@@ -181,7 +181,7 @@ class ConfigGroup : public KConfigGroup
 {
  public:
     ConfigGroup(const QString &group = QLatin1String( "" ))
-        : KConfigGroup(KGlobal::config(), group) {}
+        : KConfigGroup(KSharedConfig::openConfig(), group) {}
 };
 
 //-----------------------------------------------------------------------------
@@ -247,12 +247,12 @@ class ManagerPrivate
     PlayerInfos &playerInfos()   { return *_playerInfos; }
     KHighscore &hsConfig()       { return *_hsConfig; }
     enum QueryType { Submit, Register, Change, Players, Scores };
-    KUrl queryUrl(QueryType type, const QString &newName = QLatin1String("")) const;
+    QUrl queryUrl(QueryType type, const QString &newName = QLatin1String("")) const;
 
     void exportHighscores(QTextStream &);
 
     Manager &manager;
-    KUrl     serverURL;
+    QUrl     serverURL;
     QString  version;
     bool     showStatistics, showDrawGames, trackLostGames, trackDrawGames;
     Manager::ShowMode showMode;
@@ -269,7 +269,7 @@ class ManagerPrivate
     int rank(const Score &score) const;
 
     bool submitWorldWide(const Score &score, QWidget *parent) const;
-    static bool doQuery(const KUrl &url, QWidget *parent,
+    static bool doQuery(const QUrl &url, QWidget *parent,
                         QDomNamedNodeMap *map = 0);
     static bool getFromQuery(const QDomNamedNodeMap &map, const QString &name,
                              QString &value, QWidget *parent);

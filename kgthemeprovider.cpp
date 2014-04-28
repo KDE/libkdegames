@@ -75,7 +75,7 @@ KgThemeProvider::~KgThemeProvider()
 	//KGameRenderer constructor overload that uses a single KgTheme instance
 	if (d->m_themes.size() > 1 && !d->m_configKey.isEmpty())
 	{
-		KConfigGroup cg(KGlobal::config(), "KgTheme");
+		KConfigGroup cg(KSharedConfig::openConfig(), "KgTheme");
 		cg.writeEntry(d->m_configKey.data(), currentTheme()->identifier());
 	}
 	//cleanup
@@ -137,7 +137,7 @@ const KgTheme* KgThemeProvider::currentTheme() const
 	//check configuration file for saved theme
 	if (!d->m_configKey.isEmpty())
 	{
-		KConfigGroup cg(KGlobal::config(), "KgTheme");
+		KConfigGroup cg(KSharedConfig::openConfig(), "KgTheme");
 		const QByteArray id = cg.readEntry(d->m_configKey.data(), QByteArray());
 		//look for a theme with this id
 		foreach (const KgTheme* theme, d->m_themes)
@@ -187,10 +187,17 @@ void KgThemeProvider::rediscoverThemes()
 	
 	d->m_inRediscover = true;
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
-	const QStringList themePaths = KGlobal::dirs()->findAllResources(
-		d->m_dtResource, d->m_dtDirectory + QLatin1String("/*.desktop"),
-		KStandardDirs::NoDuplicates
-	);
+		
+	QStringList themePaths;
+	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericConfigLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
+	Q_FOREACH (const QString &dir, dirs) {
+		const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+		Q_FOREACH (const QString &file, fileNames) {
+			if (!themePaths.contains(file)) {
+				themePaths.append(file);
+			}
+		}
+	}
 	//create themes from result, order default theme at the front (that's not
 	//needed by KgThemeProvider, but nice for the theme selector)
 	QList<KgTheme*> themes;
@@ -206,6 +213,8 @@ void KgThemeProvider::rediscoverThemes()
 		//KGameTheme (e.g. "themes/default.desktop")
 		const QByteArray id = KGlobal::dirs()->relativeLocation(
 			d->m_dtResource, themePath).toUtf8();
+			
+		
 		//create theme
 		KgTheme* theme;
 		if (d->m_dtThemeClass)

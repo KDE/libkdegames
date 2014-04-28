@@ -27,10 +27,10 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KDebug>
-#include <KLockFile>
 #include <KConfigGroup>
 
 #include <QtCore/QFile>
+#include <QLockFile>
 
 #include <unistd.h> // sleep
 
@@ -49,7 +49,7 @@ class KHighscoreLockedConfig
 {
 public:
     ~KHighscoreLockedConfig();
-    KLockFile *lock;
+    QLockFile *lock;
     KConfig *config;
 };
 
@@ -102,7 +102,7 @@ void KHighscore::init(const char *appname)
     /*if (!(QFile::permissions(filename) & QFile::WriteOwner)) kFatal(11002) << "cannot write to global highscore file \""
                 << filename << "\"";*/
     kDebug() << "Global highscore file \"" << filename << "\"";
-    lockedConfig->lock = new KLockFile(filename);
+    lockedConfig->lock = new QLockFile(filename);
     lockedConfig->config = new KConfig(filename, KConfig::NoGlobals); // read-only   (matt-?)
 
     // drop the effective gid
@@ -147,7 +147,7 @@ bool KHighscore::lockForWriting(QWidget *widget)
 void KHighscore::writeAndUnlock()
 {
     if ( !d->global ) {
-        KGlobal::config()->sync();
+        KSharedConfig::openConfig()->sync();
         return;
     }
     if ( !isLocked() ) return;
@@ -165,7 +165,7 @@ KHighscore::~KHighscore()
 
 KConfig* KHighscore::config() const
 {
-    return (d->global ? lockedConfig->config : static_cast<KConfig*>(KGlobal::config().data()));
+    return (d->global ? lockedConfig->config : static_cast<KConfig*>(KSharedConfig::openConfig().data()));
 }
 
 void KHighscore::writeEntry(int entry, const QString& key, const QVariant& value)

@@ -85,7 +85,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     QString lastUsedTheme = configItem->property().toString();
 
     //Now get our themes into the list widget
-    KGlobal::dirs()->addResourceType("gamethemeselector", "data", KGlobal::mainComponent().componentName() + QLatin1Char( '/' ) + lookupDirectory + QLatin1Char( '/' ));
+    KGlobal::dirs()->addResourceType("gamethemeselector", "data", KComponentData::mainComponent().componentName() + QLatin1Char( '/' ) + lookupDirectory + QLatin1Char( '/' ));
     findThemes(lastUsedTheme);
 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));

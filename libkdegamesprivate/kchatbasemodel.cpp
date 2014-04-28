@@ -150,7 +150,7 @@ const QFont& KChatBaseModel::systemMessageFont() const
 void KChatBaseModel::saveConfig(KConfig* conf)
 {
  if (!conf) {
-	conf = KGlobal::config().data();
+	conf = KSharedConfig::openConfig().data();
  }
  KConfigGroup cg(conf, "KChatBaseModelPrivate");
 
@@ -164,7 +164,7 @@ void KChatBaseModel::saveConfig(KConfig* conf)
 void KChatBaseModel::readConfig(KConfig* conf)
 {
  if (!conf) {
-	conf = KGlobal::config().data();
+	conf = KSharedConfig::openConfig().data();
  }
  KConfigGroup cg(conf, "KChatBaseModelPrivate");
 

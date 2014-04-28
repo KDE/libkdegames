@@ -29,6 +29,7 @@
 //Added by qt3to4:
 #include <QTextStream>
 #include <QVector>
+#include <QCryptographicHash>
 #include <kuser.h>
 
 #include <kglobal.h>
@@ -37,7 +38,6 @@
 #include <kmessagebox.h>
 #include <kcodecs.h>
 #include <kdebug.h>
-#include <kmd5.h>
 
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
@@ -541,9 +541,9 @@ ManagerPrivate::~ManagerPrivate()
     delete _hsConfig;
 }
 
-KUrl ManagerPrivate::queryUrl(QueryType type, const QString &newName) const
+QUrl ManagerPrivate::queryUrl(QueryType type, const QString &newName) const
 {
-    KUrl url = serverURL;
+    QUrl url = serverURL;
     QString nameItem = QLatin1String( "nickname" );
     QString name = _playerInfos->registeredName();
     bool withVersion = true;
@@ -552,28 +552,33 @@ KUrl ManagerPrivate::queryUrl(QueryType type, const QString &newName) const
 
 	switch (type) {
         case Submit:
-            url.addPath(QLatin1String( "submit.php" ));
-            level = true;
+            url = url.adjusted(QUrl::StripTrailingSlash);
+	    url.setPath(url.path() + '/' + QLatin1String( "submit.php" ));
+	    level = true;
             key = true;
             break;
         case Register:
-            url.addPath(QLatin1String( "register.php" ));
-            name = newName;
+            url = url.adjusted(QUrl::StripTrailingSlash);
+	    url.setPath(url.path() + '/' + QLatin1String( "register.php" ));
+	    name = newName;
             break;
         case Change:
-            url.addPath(QLatin1String( "change.php" ));
-            key = true;
+            url = url.adjusted(QUrl::StripTrailingSlash);
+	    url.setPath(url.path() + '/' + QLatin1String( "change.php" ));
+	    key = true;
             if ( newName!=name )
                 Manager::addToQueryURL(url, QLatin1String( "new_nickname" ), newName);
             break;
         case Players:
-            url.addPath(QLatin1String( "players.php" ));
+	    url = url.adjusted(QUrl::StripTrailingSlash);
+	    url.setPath(url.path() + '/' + QLatin1String( "players.php" ));
             nameItem = QLatin1String( "highlight" );
             withVersion = false;
             break;
         case Scores:
-            url.addPath(QLatin1String( "highscores.php" ));
-            withVersion = false;
+            url = url.adjusted(QUrl::StripTrailingSlash);
+	    url.setPath(url.path() + '/' + QLatin1String( "highscores.php" ));
+	    withVersion = false;
             if ( _nbGameTypes>1 ) level = true;
             break;
 	}
@@ -612,7 +617,7 @@ const char *DUMMY_STRINGS[] = {
 const char *UNABLE_TO_CONTACT =
     I18N_NOOP("Unable to contact world-wide highscore server");
 
-bool ManagerPrivate::doQuery(const KUrl &url, QWidget *parent,
+bool ManagerPrivate::doQuery(const QUrl &url, QWidget *parent,
                                 QDomNamedNodeMap *map)
 {
     KIO::http_update_cache(url, true, QDateTime::fromTime_t(0)); // remove cache !
@@ -703,7 +708,7 @@ bool ManagerPrivate::modifySettings(const QString &newName,
     if (WWEnabled) {
         newPlayer = _playerInfos->key().isEmpty()
                     || _playerInfos->registeredName().isEmpty();
-        KUrl url = queryUrl((newPlayer ? Register : Change), newName);
+        QUrl url = queryUrl((newPlayer ? Register : Change), newName);
         Manager::addToQueryURL(url, QLatin1String( "comment" ), comment);
 
         QDomNamedNodeMap map;
@@ -840,13 +845,14 @@ bool ManagerPrivate::submitWorldWide(const Score &score,
     if ( score.type()==Lost && !trackLostGames ) return true;
     if ( score.type()==Draw && !trackDrawGames ) return true;
 
-    KUrl url = queryUrl(Submit);
+    QUrl url = queryUrl(Submit);
     manager.additionalQueryItems(url, score);
     int s = (score.type()==Won ? score.score() : (int)score.type());
     QString str =  QString::number(s);
     Manager::addToQueryURL(url, QLatin1String( "score" ), str);
-    KMD5 context(QString(_playerInfos->registeredName() + str).toLatin1());
-    Manager::addToQueryURL(url, QLatin1String( "check" ), QLatin1String( context.hexDigest() ));
+    QCryptographicHash context(QCryptographicHash::Md5);
+    context.addData(QString(_playerInfos->registeredName() + str).toLatin1());
+    Manager::addToQueryURL(url, QLatin1String( "check" ), QLatin1String( context.result().toHex() ));
 
     return doQuery(url, widget);
 }

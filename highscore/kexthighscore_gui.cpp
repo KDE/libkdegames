@@ -29,18 +29,19 @@
 #include <QGroupBox>
 #include <QHeaderView>
 #include <QTabWidget>
+#include <QPushButton>
+#include <QtCore/QTemporaryFile>
 
 #include <kmessagebox.h>
 #include <kurllabel.h>
 #include <krun.h>
 #include <kfiledialog.h>
 #include <kvbox.h>
-#include <ktemporaryfile.h>
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
 #include <klineedit.h>
-#include <kpushbutton.h>
+#include <kguiitem.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
@@ -180,7 +181,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
     // url labels
     if ( internal->isWWHSAvailable() ) {
-        KUrl url = internal->queryUrl(ManagerPrivate::Scores);
+        QUrl url = internal->queryUrl(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
         connect(_scoresUrl, SIGNAL(leftClickedUrl(QString)),
@@ -207,7 +208,7 @@ void HighscoresWidget::changeTab(int i)
 void HighscoresWidget::showURL(const QString &url)
 {
 //   kDebug(11001) ;
-    (void)new KRun(KUrl(url), this);
+    (void)new KRun(QUrl(url), this);
 }
 
 void HighscoresWidget::load(int rank)
@@ -285,7 +286,7 @@ void HighscoresDialog::slotUser1()
 void HighscoresDialog::slotUser2()
 {
 //   kDebug(11001) ;
-    KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
+    QUrl url = KFileDialog::getSaveUrl(QUrl(), QString(), this);
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this) ) {
         KGuiItem gi = KStandardGuiItem::save();
@@ -295,7 +296,7 @@ void HighscoresDialog::slotUser2()
                                  i18n("Export"), gi);
         if ( res==KMessageBox::Cancel ) return;
     }
-    KTemporaryFile tmp;
+    QTemporaryFile tmp;
     tmp.open();
     QTextStream stream(&tmp);
     internal->exportHighscores(stream);
@@ -480,8 +481,9 @@ ConfigDialog::ConfigDialog(QWidget *parent)
 
         KGuiItem gi = KStandardGuiItem::clear();
         gi.setText(i18n("Remove"));
-        _removeButton = new KPushButton(gi, group);
-        groupLayout->addWidget(_removeButton, 2, 0);
+        _removeButton = new QPushButton(group);
+	KGuiItem::assign(_removeButton, gi);
+	groupLayout->addWidget(_removeButton, 2, 0);
         connect(_removeButton, SIGNAL(clicked()), SLOT(removeSlot()));
     }
 
@@ -505,7 +507,7 @@ void ConfigDialog::accept()
 {
     if ( save() ) {
         KDialog::accept();
-        KGlobal::config()->sync(); // safer
+        KSharedConfig::openConfig()->sync(); // safer
     }
 }
 
