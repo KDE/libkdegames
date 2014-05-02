@@ -2,8 +2,6 @@
 #include <QtCore>
 #include <QtCore>
 
-#include <kdebug.h>
-
 #include "kgamepropertytest.h"
 
 #include "config-tests.h"

@@ -89,7 +89,7 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,Property
 {
 // we don't support changing the id
  if (!owner) {
-	kWarning(11001) << "Resetting owner=0. Sure you want to do this?";
+	qWarning() << "Resetting owner=0. Sure you want to do this?";
 	mOwner=0;
 	return -1;
  }
@@ -127,7 +127,7 @@ bool KGamePropertyBase::sendProperty()
  if (mOwner) {
 	return mOwner->sendProperty(s);
  } else {
-	kError(11001) << "Cannot send because there is no receiver defined";
+	qCritical() << "Cannot send because there is no receiver defined";
 	return false;
  }
 }
@@ -141,7 +141,7 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
  if (mOwner) {
 	return mOwner->sendProperty(s);
  } else {
-	kError(11001) << ": Cannot send because there is no receiver defined";
+	qCritical() << ": Cannot send because there is no receiver defined";
 	return false;
  }
 }
@@ -174,7 +174,7 @@ void KGamePropertyBase::setLock(bool l)
  if (mOwner) {
 	mOwner->sendProperty(s);
  } else {
-	kError(11001) << ": Cannot send because there is no receiver defined";
+	qCritical() << ": Cannot send because there is no receiver defined";
 	return ;
  }
 }
@@ -185,7 +185,7 @@ void KGamePropertyBase::emitSignal()
  if (mOwner ) {
 	mOwner->emitSignal(this);
  } else {
-	kError(11001) << ":id="<<id()<<" Cannot emitSignal because there is no handler set";
+	qCritical() << ":id="<<id()<<" Cannot emitSignal because there is no handler set";
  }
 }
 
