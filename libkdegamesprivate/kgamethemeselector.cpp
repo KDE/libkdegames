@@ -27,6 +27,8 @@
 #include <KComponentData>
 #include <KNS3/DownloadDialog>
 
+#include <QDirIterator>
+
 #include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
 
@@ -102,7 +104,19 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     ui.themeList->setSortingEnabled(true);
 
     QStringList themesAvailable;
-    KGlobal::dirs()->findAllResources("gamethemeselector", QLatin1String( "*.desktop" ), KStandardDirs::Recursive, themesAvailable);
+    //KGlobal::dirs()->findAllResources("gamethemeselector", QLatin1String( "*.desktop" ), KStandardDirs::Recursive, themesAvailable);
+    
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "gamethemeselector", QStandardPaths::LocateDirectory);
+    Q_FOREACH(const QString& dir, dirs) {
+	    QDirIterator it(dir, QDirIterator::Subdirectories);
+	    while (it.hasNext()) {
+		    const QString filePath = it.next();
+		    Q_ASSERT(filePath.startsWith(dir));
+		    const QString relPath = filePath.mid(dir.length()+1);
+		    if (!themesAvailable.contains(relPath))
+			    themesAvailable.append(relPath);
+	    }
+    }
 
     bool initialFound = false;
     foreach (const QString &file, themesAvailable)
