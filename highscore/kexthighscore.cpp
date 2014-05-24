@@ -22,7 +22,7 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <QVector>
-
+#include <QUrlQuery>
 #include <kdebug.h>
 
 #include "kexthighscore_internal.h"
@@ -275,7 +275,8 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
 void Manager::addToQueryURL(QUrl &url, const QString &item,
                                const QString &content)
 {
-    Q_ASSERT( !item.isEmpty() && url.queryItem(item).isNull() );
+  QUrlQuery urlquery(url);  
+  Q_ASSERT( !item.isEmpty() && urlquery.queryItemValue(item).isNull() );
 
     QString query = url.query();
     if ( !query.isEmpty() ) query += QLatin1Char( '&' );
