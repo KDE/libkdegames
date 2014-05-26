@@ -24,10 +24,8 @@
 
 #include <klineedit.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <kconfig.h>
 #include <kdebug.h>
-#include <kglobal.h>
 #include <QLayout>
 #include <QComboBox>
 #include <QPixmap>

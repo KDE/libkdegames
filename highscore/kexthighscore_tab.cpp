@@ -29,8 +29,6 @@
 #include <QHeaderView>
 
 #include <kdialog.h>
-#include <kdebug.h>
-#include <kglobal.h>
 
 #include "kexthighscore.h"
 #include "kexthighscore_internal.h"

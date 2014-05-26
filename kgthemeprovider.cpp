@@ -20,11 +20,11 @@
 #include "kgimageprovider_p.h"
 
 #include <QtCore/QFileInfo>
+#include <QtCore/QStandardPaths>
+
 #include <KDE/KConfig>
 #include <KDE/KConfigGroup>
 #include <KDE/KDebug>
-#include <KDE/KGlobal>
-#include <KDE/KStandardDirs>
 
 class KgThemeProvider::Private
 {
@@ -119,7 +119,7 @@ void KgThemeProvider::setDefaultTheme(const KgTheme* theme)
 {
 	if (d->m_currentTheme)
 	{
-		kDebug(11000) << "You're calling setDefaultTheme after the current "
+		qDebug() << "You're calling setDefaultTheme after the current "
 			"theme has already been determined. That's not gonna work.";
 		return;
 	}

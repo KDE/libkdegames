@@ -22,7 +22,6 @@
 
 #include <QtCore/QVector>
 #include <KDE/KConfigGroup>
-#include <KDE/KGlobal>
 #include <KDE/KGuiItem>
 #include <KDE/KMessageBox>
 //the following only used by KgDifficultyGUI
@@ -33,6 +32,10 @@
 #include <KDE/KXmlGuiWindow>
 
 #include <QIcon>
+#include <QGlobalStatic>
+
+#include <klocalizedstring.h>
+#include <ksharedconfig.h>
 
 //BEGIN KgDifficultyLevel
 
@@ -325,7 +328,7 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 
 //END KgDifficulty
 
-K_GLOBAL_STATIC(KgDifficulty, g_difficulty)
+Q_GLOBAL_STATIC(KgDifficulty, g_difficulty)
 
 KgDifficulty* Kg::difficulty()
 {

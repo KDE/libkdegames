@@ -22,15 +22,15 @@
 #include <config-highscore.h>
 
 #include <KConfig>
-#include <KGlobal>
 #include <KStandardGuiItem>
 #include <KLocale>
 #include <KMessageBox>
-#include <KDebug>
 #include <KConfigGroup>
 
 #include <QtCore/QFile>
 #include <QLockFile>
+#include <QGlobalStatic>
+#include <QDebug>
 
 #include <unistd.h> // sleep
 
@@ -59,7 +59,7 @@ KHighscoreLockedConfig::~KHighscoreLockedConfig()
     delete config;
 }
 
-K_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig)
+Q_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig)
 
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent), d(new KHighscorePrivate)
@@ -101,7 +101,7 @@ void KHighscore::init(const char *appname)
                                << filename << "\"";*/
     /*if (!(QFile::permissions(filename) & QFile::WriteOwner)) kFatal(11002) << "cannot write to global highscore file \""
                 << filename << "\"";*/
-    kDebug() << "Global highscore file \"" << filename << "\"";
+    qDebug() << "Global highscore file \"" << filename << "\"";
     lockedConfig->lock = new QLockFile(filename);
     lockedConfig->config = new KConfig(filename, KConfig::NoGlobals); // read-only   (matt-?)
 
@@ -122,11 +122,11 @@ bool KHighscore::lockForWriting(QWidget *widget)
 
     bool first = true;
     for (;;) {
-        kDebug(11002) << "try locking";
+        qDebug() << "try locking";
         // lock the highscore file (it should exist)
         int result = lockedConfig->lock->lock();
         bool ok = ( result==0 );
-        kDebug(11002) << "locking system-wide highscore file res="
+        qDebug() << "locking system-wide highscore file res="
                        <<  result << " (ok=" << ok << ")";
         if (ok) {
             readCurrentConfig();
@@ -152,7 +152,7 @@ void KHighscore::writeAndUnlock()
     }
     if ( !isLocked() ) return;
 
-    kDebug(11002) << "unlocking";
+    qDebug() << "unlocking";
     lockedConfig->config->sync(); // write config
     lockedConfig->lock->unlock();
 }

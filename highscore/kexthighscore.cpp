@@ -23,7 +23,7 @@
 //Added by qt3to4:
 #include <QVector>
 #include <QUrlQuery>
-#include <kdebug.h>
+#include <QDebug>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore_gui.h"
@@ -111,7 +111,10 @@ Manager::Manager(uint nbGameTypes, uint maxNbEntries)
     Q_ASSERT(nbGameTypes);
     Q_ASSERT(maxNbEntries);
     if (internal)
-        kFatal(11002) << "A highscore object already exists";
+    {
+      qWarning() << "A highscore object already exists";
+      abort();
+    }
     internal = new ManagerPrivate(nbGameTypes, *this);
     internal->init(maxNbEntries);
 }
@@ -261,8 +264,11 @@ void Manager::setPlayerItem(PlayerItemType type, Item *item)
 QString Manager::gameTypeLabel(uint gameType, LabelType type) const
 {
     if ( gameType!=0 )
-        kFatal(11002) << "You need to reimplement KExtHighscore::Manager for "
+    {
+      qWarning() << "You need to reimplement KExtHighscore::Manager for "
                        << "multiple game types";
+      abort();
+    }
     switch (type) {
     case Icon:
     case Standard:
@@ -276,7 +282,7 @@ void Manager::addToQueryURL(QUrl &url, const QString &item,
                                const QString &content)
 {
   QUrlQuery urlquery(url);  
-  Q_ASSERT( !item.isEmpty() && urlquery.queryItemValue(item).isNull() );
+  Q_ASSERT( !item.isEmpty() && urlquery.queryItemValue(item).isEmpty() );
 
     QString query = url.query();
     if ( !query.isEmpty() ) query += QLatin1Char( '&' );

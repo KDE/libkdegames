@@ -25,7 +25,6 @@
 #include <QIcon>
 
 #include <KColorScheme>
-#include <KDebug>
 
 // margin on the sides of message box
 static const int MARGIN = 15;

@@ -22,12 +22,12 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <QLabel>
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QtCore/QLocale>
 #include <QWidget>
 
 #include <kdialog.h>
-#include <kdebug.h>
 #include <kpagedialog.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
@@ -246,14 +246,14 @@ void MultiplayerScores::addScore(uint i, const Score &score)
 void MultiplayerScores::show(QWidget *parent)
 {
     // check consistency
-    if ( _nbGames.size()<2 ) kWarning(11002) << "less than 2 players";
+    if ( _nbGames.size()<2 ) qWarning() << "less than 2 players";
     else {
         bool ok = true;
         uint nb = _nbGames[0];
         for (int i=1; i<_nbGames.size(); i++)
             if ( _nbGames[i]!=nb ) ok = false;
         if (!ok)
-           kWarning(11002) << "players have not same number of games";
+           qWarning() << "players have not same number of games";
     }
 
     // order the players according to the number of won games

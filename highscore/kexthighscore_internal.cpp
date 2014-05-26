@@ -25,20 +25,18 @@
 
 #include <QFile>
 #include <QLayout>
+#include <QDebug>
 #include <qdom.h>
 //Added by qt3to4:
 #include <QTextStream>
 #include <QVector>
 #include <QCryptographicHash>
-#include <kuser.h>
 
-#include <kglobal.h>
+#include <kuser.h>
 #include <kio/netaccess.h>
 #include <kio/job.h>
 #include <kmessagebox.h>
 #include <kcodecs.h>
-#include <kdebug.h>
-
 #include "kexthighscore.h"
 #include "kexthighscore_gui.h"
 #include "kemailsettings.h"
@@ -126,7 +124,7 @@ int ItemArray::findIndex(const QString &name) const
 const ItemContainer *ItemArray::item(const QString &name) const
 {
     int i = findIndex(name);
-    if ( i==-1 ) kError(11002) << "no item named \"" << name
+    if ( i==-1 ) qCritical() << "no item named \"" << name
                                 << "\"";
     return at(i);
 }
@@ -134,7 +132,7 @@ const ItemContainer *ItemArray::item(const QString &name) const
 ItemContainer *ItemArray::item(const QString &name)
 {
     int i = findIndex(name);
-    if ( i==-1 ) kError(11002) << "no item named \"" << name
+    if ( i==-1 ) qCritical() << "no item named \"" << name
                                 << "\"";
     return at(i);
 }
@@ -142,7 +140,7 @@ ItemContainer *ItemArray::item(const QString &name)
 void ItemArray::setItem(const QString &name, Item *item)
 {
     int i = findIndex(name);
-    if ( i==-1 ) kError(11002) << "no item named \"" << name
+    if ( i==-1 ) qCritical() << "no item named \"" << name
                                 << "\"";
     bool stored = at(i)->isStored();
     bool canHaveSubGroup = at(i)->canHaveSubGroup();
@@ -153,7 +151,7 @@ void ItemArray::addItem(const QString &name, Item *item,
                         bool stored, bool canHaveSubGroup)
 {
     if ( findIndex(name)!=-1 )
-        kError(11002) << "item already exists \"" << name << "\"";
+        qCritical() << "item already exists \"" << name << "\"";
 
     append(new ItemContainer);
     //at(i) = new ItemContainer;

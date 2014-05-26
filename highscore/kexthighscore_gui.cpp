@@ -30,12 +30,14 @@
 #include <QHeaderView>
 #include <QTabWidget>
 #include <QPushButton>
+#include <QApplication>
+#include <QFileDialog>
 #include <QtCore/QTemporaryFile>
 
 #include <kmessagebox.h>
 #include <kurllabel.h>
 #include <krun.h>
-#include <kfiledialog.h>
+
 #include <kvbox.h>
 #include <kio/netaccess.h>
 #include <kicon.h>
@@ -151,7 +153,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     const PlayerInfos &p = internal->playerInfos();
 
     QVBoxLayout *vbox = new QVBoxLayout(this);
-    vbox->setSpacing(KDialog::spacingHint());
+    vbox->setSpacing(QApplication::fontMetrics().lineSpacing());
 
     _tw = new QTabWidget(this);
     connect(_tw, SIGNAL(currentChanged(int)), SLOT(tabChanged()));
@@ -286,7 +288,7 @@ void HighscoresDialog::slotUser1()
 void HighscoresDialog::slotUser2()
 {
 //   kDebug(11001) ;
-    QUrl url = KFileDialog::getSaveUrl(QUrl(), QString(), this);
+    QUrl url = QFileDialog::getSaveFileUrl(this, tr("HighscoresDialog"), QUrl(), QString());
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this) ) {
         KGuiItem gi = KStandardGuiItem::save();

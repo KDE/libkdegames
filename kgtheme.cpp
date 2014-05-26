@@ -20,9 +20,9 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtCore/QDebug>
 #include <KDE/KConfig>
 #include <KDE/KConfigGroup>
-#include <KDE/KDebug>
 #include <KDE/KStandardDirs>
 
 class KgTheme::Private
@@ -85,7 +85,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 {
 	if (path_.isEmpty())
 	{
-		kDebug(11000) << "Refusing to load theme with no name";
+		qDebug() << "Refusing to load theme with no name";
 		return false;
 	}
 	//legacy support: relative paths are resolved with KStandardDirs/appdata
@@ -95,7 +95,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 		path = KStandardDirs::locate("appdata", path);
 		if (path.isEmpty())
 		{
-			kDebug(11000) << "Could not find theme description" << path;
+			qDebug() << "Could not find theme description" << path;
 			return false;
 		}
 	}
@@ -116,13 +116,13 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	}
 	if (!group.isValid())
 	{
-		kDebug(11000) << "Could not read theme description at" << path;
+		qDebug() << "Could not read theme description at" << path;
 		return false;
 	}
 	//check format version
 	if (group.readEntry("VersionFormat", 1) > 1)
 	{
-		kDebug(11000) << "Format of theme description too new at" << path;
+		qDebug() << "Format of theme description too new at" << path;
 		return false;
 	}
 

@@ -31,9 +31,7 @@ this software.
 #include <KUser>
 #include <KLocale>
 #include <KSeparator>
-#include <KGlobal>
 #include <KConfigGroup>
-#include <KDebug>
 #include <KLineEdit>
 
 #include <QtCore/QTimer>
@@ -45,6 +43,7 @@ this software.
 #include <QLayout>
 #include <QStackedWidget>
 #include <QTabWidget>
+#include <QDebug>
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
 
@@ -166,7 +165,7 @@ void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString>&
     if (!d->translatedGroupNames.contains(group.first))
     {
         d->translatedGroupNames.insert(group.first, group.second);
-        kDebug() << "adding" << group.first << "->" << group.second;
+        qDebug() << "adding" << group.first << "->" << group.second;
     }
 }
 
@@ -353,7 +352,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
         const QByteArray &groupKey = it.key();
         if (hiddenGroups.contains(groupKey))
             continue;
-        kDebug() << latest.first << tabWidget->tabText(tabIndex);
+        qDebug() << latest.first << tabWidget->tabText(tabIndex);
 
         //Only display the comment on the page with the new score (or) this one if there's only one tab
         if(latest.first == groupKey || ( latest.first.isEmpty() && groupKey == DEFAULT_GROUP_NAME ) )
@@ -392,7 +391,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
             QLabel *label;
             num.setNum(i);
 
-            //kDebug() << "groupName:" << groupName << "id:" << i-1;
+            //qDebug() << "groupName:" << groupName << "id:" << i-1;
 
             FieldInfo score = scores[groupKey].at(i-1);
             label = labels[groupKey].at((i-1)*nrCols + 0); //crash! FIXME
@@ -457,7 +456,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 
     if (!groupKeyList.contains( configGroup) ) //If the current group doesn't have any entries, add it to the list to process
     {
-        kDebug(11002) << "The current high score group " << configGroup << " isn't in the list, adding it";
+        qDebug() << "The current high score group " << configGroup << " isn't in the list, adding it";
         groupKeyList << configGroup;
         setupGroup(configGroup);
     }
@@ -485,7 +484,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     {
         if( (scores[groupKey][0].value(Score)==QLatin1String( "-" )) && (scores.size() > 1) && (latest.first != groupKey) )
         {
-            kDebug(11002) << "Removing group " << groupKey << " since it's unused.";
+            qDebug() << "Removing group " << groupKey << " since it's unused.";
             scores.remove(groupKey);
         }
     }
@@ -514,7 +513,7 @@ void KScoreDialog::KScoreDialogPrivate::saveScores()
 
 int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 {
-    kDebug() << "adding new score";
+    qDebug() << "adding new score";
 
     bool askName=false, lessIsMore=false;
     if(flags.testFlag(KScoreDialog::AskName))
@@ -536,7 +535,7 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
         score = FieldInfo(newInfo); //now look at the submitted score
         int newScore = score[Score].toInt();
 
-        kDebug() << "num_score =" << num_score << " - newScore =" << newScore;
+        qDebug() << "num_score =" << num_score << " - newScore =" << newScore;
 
         if (((newScore > num_score) && !lessIsMore) ||
               ((newScore < num_score) && lessIsMore) || !ok)

@@ -29,7 +29,7 @@
 #include <QtCore/QScopedPointer>
 #include <QtGui/QPainter>
 #include <QVariant>
-#include <KDebug>
+#include <QDebug>
 
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
@@ -163,13 +163,13 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 	{
 		return;
 	}
-	kDebug(11000) << "Setting theme:" << theme->name();
+	qDebug() << "Setting theme:" << theme->name();
 	if (!setTheme(theme))
 	{
 		const KgTheme* defaultTheme = m_provider->defaultTheme();
 		if (theme != defaultTheme)
 		{
-			kDebug(11000) << "Falling back to default theme:" << defaultTheme->name();
+			qDebug() << "Falling back to default theme:" << defaultTheme->name();
 			setTheme(defaultTheme);
 			m_provider->setCurrentTheme(defaultTheme);
 		}
@@ -210,7 +210,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		//FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not get evicted.
 		if (cacheTimestamp < svgTimestamp)
 		{
-			kDebug(11000) << "Theme newer than cache, checking SVG";
+			qDebug() << "Theme newer than cache, checking SVG";
 			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
 			if (renderer->isValid())
 			{
@@ -225,7 +225,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 				delete m_imageCache;
 				KSharedDataCache::deleteCache(imageCacheName);
 				m_imageCache = oldCache.take();
-				kDebug(11000) << "Theme change failed: SVG file broken";
+				qDebug() << "Theme change failed: SVG file broken";
 				return false;
 			}
 		}
@@ -243,7 +243,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		}
 		else
 		{
-			kDebug(11000) << "Theme change failed: SVG file broken";
+			qDebug() << "Theme change failed: SVG file broken";
 			return false;
 		}
 		//disconnect from disk cache (only needed if changing strategy)
