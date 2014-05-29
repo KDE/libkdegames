@@ -22,7 +22,6 @@
 
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include <kdebug.h>
 #include <ksharedconfig.h>
 
 #include <QFont>
@@ -90,11 +89,16 @@ public:
 KChatBaseModel::KChatBaseModel(QObject *parent)
      : QAbstractListModel(parent), d(new KChatBaseModelPrivate())
 {
+  /* 
+   Set to true to print debug messages
+  */
+  QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = false"));
 }
 
 KChatBaseModel::~KChatBaseModel()
 {
-// kDebug(11000) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")";
+  
+ qCDebug(GAMES_LIB) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")";
  saveConfig();
 }
 

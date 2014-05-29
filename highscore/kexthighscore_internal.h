@@ -27,6 +27,8 @@
 #include "khighscore.h"
 #include "kexthighscore.h"
 
+#include <QLoggingCategory>
+
 #include <QtCore/QTextStream>
 #include <QtCore/QVector>
 #include <QtCore/QDateTime>

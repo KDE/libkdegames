@@ -27,6 +27,8 @@
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
 
+#include <QLoggingCategory>
+
 
 namespace KExtHighscore
 {

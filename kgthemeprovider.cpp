@@ -21,10 +21,10 @@
 
 #include <QtCore/QFileInfo>
 #include <QtCore/QStandardPaths>
+#include <QLoggingCategory>
 
 #include <KDE/KConfig>
 #include <KDE/KConfigGroup>
-#include <KDE/KDebug>
 
 class KgThemeProvider::Private
 {
@@ -57,6 +57,8 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
 	, d(new Private(this, configKey))
 {
+	QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+	
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
 	connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
@@ -119,7 +121,7 @@ void KgThemeProvider::setDefaultTheme(const KgTheme* theme)
 {
 	if (d->m_currentTheme)
 	{
-		qDebug() << "You're calling setDefaultTheme after the current "
+		qCDebug(GAMES_LIB) << "You're calling setDefaultTheme after the current "
 			"theme has already been determined. That's not gonna work.";
 		return;
 	}

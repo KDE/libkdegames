@@ -27,9 +27,9 @@
 #include "kgamemessage.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 
 #include <QMap>
+#include <QLoggingCategory>
 
 //FIXME:
 #define FIRST_ID 2 // first id, that is free of use, aka not defined above
@@ -58,6 +58,7 @@ KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent, KChatBaseModel* model
     : KChatBase(parent, model, delegate),
       d( new KGameChatPrivate )
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init(g, msgid); 
 }
 
@@ -65,6 +66,7 @@ KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent, 
     : KChatBase(parent,model,delegate),
       d( new KGameChatPrivate )
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init(g, msgid);
  setFromPlayer(fromPlayer);
 }
@@ -73,18 +75,19 @@ KGameChat::KGameChat(QWidget* parent)
     : KChatBase(parent),
       d( new KGameChatPrivate )
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init(0, -1);
 }
 
 KGameChat::~KGameChat()
 {
- kDebug(11001) ;
+ qCDebug(GAMES_PRIVATE_KGAME) ;
  delete d;
 }
 
 void KGameChat::init(KGame* g, int msgId)
 {
- kDebug(11001) ;
+ qCDebug(GAMES_PRIVATE_KGAME) ;
  setMessageId(msgId);
 
  setKGame(g);
@@ -93,15 +96,15 @@ void KGameChat::init(KGame* g, int msgId)
 void KGameChat::addMessage(int fromId, const QString& text)
 {
  if (!d->mGame) {
-	kWarning(11001) << "no KGame object has been set";
+	qCWarning(GAMES_PRIVATE_KGAME) << "no KGame object has been set";
 	addMessage(i18n("Player %1", fromId), text);
  } else {
 	KPlayer* p = d->mGame->findPlayer(fromId);
 	if (p) {
-		kDebug(11001) << "adding message of player" << p->name() << "id=" << fromId;
+		qCDebug(GAMES_PRIVATE_KGAME) << "adding message of player" << p->name() << "id=" << fromId;
 		addMessage(p->name(), text);
 	} else {
-		kWarning(11001) << "Could not find player id" << fromId;
+		qCWarning(GAMES_PRIVATE_KGAME) << "Could not find player id" << fromId;
 		addMessage(i18nc("Unknown player", "Unknown"), text);
 	}
  }
@@ -110,15 +113,15 @@ void KGameChat::addMessage(int fromId, const QString& text)
 void KGameChat::returnPressed(const QString& text)
 {
  if (!d->mFromPlayer) {
-	kWarning(11001) << ": You must set a player first!";
+	qCWarning(GAMES_PRIVATE_KGAME) << ": You must set a player first!";
 	return;
  }
  if (!d->mGame) {
-	kWarning(11001) << ": You must set a game first!";
+	qCWarning(GAMES_PRIVATE_KGAME) << ": You must set a game first!";
 	return;
  }
 
- kDebug(11001) << "from:" << d->mFromPlayer->id() << "==" << d->mFromPlayer->name();
+ qCDebug(GAMES_PRIVATE_KGAME) << "from:" << d->mFromPlayer->id() << "==" << d->mFromPlayer->name();
 
  int id = sendingEntry();
 
@@ -126,7 +129,7 @@ void KGameChat::returnPressed(const QString& text)
 	// note: there is currently no support for other groups than the players
 	// group! It might be useful to send to other groups, too
 	QString group = d->mFromPlayer->group();
-	kDebug(11001) << "send to group" << group;
+	qCDebug(GAMES_PRIVATE_KGAME) << "send to group" << group;
 	int sender = d->mFromPlayer->id();
 	d->mGame->sendGroupMessage(text, messageId(), sender, group);
 
@@ -140,7 +143,7 @@ void KGameChat::returnPressed(const QString& text)
 	if (!isSendToAllMessage(id) && isToPlayerMessage(id)) {
 		toPlayer = playerId(id);
 		if (toPlayer == -1) {
-			kError(11001) << ": don't know that player "
+			qCCritical(GAMES_PRIVATE_KGAME) << ": don't know that player "
 					<< "- internal ERROR";
 		}
 	} 
@@ -200,7 +203,7 @@ bool KGameChat::hasPlayer(int id) const
 void KGameChat::setFromPlayer(KPlayer* p)
 {
  if (!p) {
-	kError(11001) << ": NULL player";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
 	removeSendingEntry(d->mToMyGroup);
 	d->mFromPlayer = 0;
 	return;
@@ -209,14 +212,14 @@ void KGameChat::setFromPlayer(KPlayer* p)
 	changeSendingEntry(p->group(), d->mToMyGroup);
  } else {
 	if (d->mToMyGroup != -1) {
-		kWarning(11001) << "send to my group exists already - removing";
+		qCWarning(GAMES_PRIVATE_KGAME) << "send to my group exists already - removing";
 		removeSendingEntry(d->mToMyGroup);
 	}
 	d->mToMyGroup = nextId();
 	addSendingEntry(i18n("Send to My Group (\"%1\")", p->group()), d->mToMyGroup);
  }
  d->mFromPlayer = p;
- kDebug(11001) << "player=" << p;
+ qCDebug(GAMES_PRIVATE_KGAME) << "player=" << p;
 }
 
 
@@ -225,7 +228,7 @@ void KGameChat::setKGame(KGame* g)
  if (d->mGame) {
 	slotUnsetKGame();
  }
- kDebug(11001) << "game=" << g;
+ qCDebug(GAMES_PRIVATE_KGAME) << "game=" << g;
  d->mGame = g;
 
  if (d->mGame) {
@@ -272,11 +275,11 @@ void KGameChat::slotUnsetKGame()
 void KGameChat::slotAddPlayer(KPlayer* p)
 {
  if (!p) {
-	kError(11001) << ": cannot add NULL player";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": cannot add NULL player";
 	return;
  }
  if (hasPlayer(p->id())) {
-	kError(11001) << ": player was added before";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": player was added before";
 	return;
  }
 
@@ -292,11 +295,11 @@ void KGameChat::slotAddPlayer(KPlayer* p)
 void KGameChat::slotRemovePlayer(KPlayer* p)
 {
  if (!p) {
-	kError(11001) << ": NULL player";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
 	return;
  }
  if (!hasPlayer(p->id())) {
-	kError(11001) << ": cannot remove non-existent player";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": cannot remove non-existent player";
 	return;
  }
 
@@ -309,7 +312,7 @@ void KGameChat::slotRemovePlayer(KPlayer* p)
 void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 {
  if (prop->id() == KGamePropertyBase::IdName) {
-//	kDebug(11001) << "new Name";
+//	qCDebug(GAMES_PRIVATE_KGAME) << "new Name";
 	changeSendingEntry(player->name(), sendingId(player->id()));
 /*
 	mCombo->changeItem(comboBoxItem(player->name()), index);
@@ -322,7 +325,7 @@ void KGameChat::slotPropertyChanged(KGamePropertyBase* prop, KPlayer* player)
 void KGameChat::slotReceivePrivateMessage(int msgid, const QByteArray& buffer, quint32 sender, KPlayer* me)
 {
  if (!me || me != fromPlayer()) {
-	kDebug() << "nope - not for us!";
+	qCDebug(GAMES_PRIVATE_KGAME) << "nope - not for us!";
 	return;
  }
  slotReceiveMessage(msgid, buffer, me->id(), sender);

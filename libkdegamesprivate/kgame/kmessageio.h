@@ -28,8 +28,14 @@
 #include <QtCore/QProcess>
 #include <QtCore/QString>
 #include <QtNetwork/QHostAddress>
-#include <kdebug.h>
+#include <QLoggingCategory>
+
 #include "../libkdegamesprivate_export.h"
+
+/* 
+    This macro shouldn't be here ideally. Already declared in kgame.h, but throws error if not placed here.
+*/
+Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 class QTcpSocket;
 class KProcess;
@@ -80,7 +86,8 @@ public:
   //virtual bool isNetwork () const = 0;
   virtual bool isNetwork () const
   {
-   kError(11001) << "Calling PURE virtual isNetwork...BAD";
+   QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));  
+   qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
    return false;
   }
 
@@ -94,7 +101,8 @@ public:
   //virtual bool isConnected () const = 0;
   virtual bool isConnected () const
   {
-   kError(11001) << "Calling PURE virtual isConencted...BAD";
+   QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));  
+   qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConencted...BAD";
    return false;
   }
 

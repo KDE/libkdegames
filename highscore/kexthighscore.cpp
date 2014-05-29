@@ -23,11 +23,9 @@
 //Added by qt3to4:
 #include <QVector>
 #include <QUrlQuery>
-#include <QDebug>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore_gui.h"
-
 
 namespace KExtHighscore
 {
@@ -108,11 +106,14 @@ Score firstScore()
 //-----------------------------------------------------------------------------
 Manager::Manager(uint nbGameTypes, uint maxNbEntries)
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+  
     Q_ASSERT(nbGameTypes);
     Q_ASSERT(maxNbEntries);
+        
     if (internal)
     {
-      qWarning() << "A highscore object already exists";
+      qCWarning(GAMES_HIGHSCORE) << "A highscore object already exists";
       abort();
     }
     internal = new ManagerPrivate(nbGameTypes, *this);
@@ -263,9 +264,11 @@ void Manager::setPlayerItem(PlayerItemType type, Item *item)
 
 QString Manager::gameTypeLabel(uint gameType, LabelType type) const
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+    
     if ( gameType!=0 )
     {
-      qWarning() << "You need to reimplement KExtHighscore::Manager for "
+      qCWarning(GAMES_HIGHSCORE) << "You need to reimplement KExtHighscore::Manager for "
                        << "multiple game types";
       abort();
     }

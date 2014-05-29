@@ -29,7 +29,7 @@
 #include <QtCore/QScopedPointer>
 #include <QtGui/QPainter>
 #include <QVariant>
-#include <QDebug>
+#include <QLoggingCategory>
 
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
@@ -61,6 +61,7 @@ KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned c
 	, m_imageCache(0)
 {
 	qRegisterMetaType<KGRInternal::Job*>();
+	
 }
 
 KGameRenderer::KGameRenderer(KgThemeProvider* provider, unsigned cacheSize)
@@ -158,18 +159,20 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 
 void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 {
+	QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+	
 	const KgTheme* oldTheme = m_currentTheme;
 	if (oldTheme == theme)
 	{
 		return;
 	}
-	qDebug() << "Setting theme:" << theme->name();
+	qCDebug(GAMES_LIB) << "Setting theme:" << theme->name();
 	if (!setTheme(theme))
 	{
 		const KgTheme* defaultTheme = m_provider->defaultTheme();
 		if (theme != defaultTheme)
 		{
-			qDebug() << "Falling back to default theme:" << defaultTheme->name();
+			qCDebug(GAMES_LIB) << "Falling back to default theme:" << defaultTheme->name();
 			setTheme(defaultTheme);
 			m_provider->setCurrentTheme(defaultTheme);
 		}
@@ -186,6 +189,8 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 
 bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 {
+	QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+	
 	if (!theme)
 	{
 		return false;
@@ -210,7 +215,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		//FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not get evicted.
 		if (cacheTimestamp < svgTimestamp)
 		{
-			qDebug() << "Theme newer than cache, checking SVG";
+			qCDebug(GAMES_LIB) << "Theme newer than cache, checking SVG";
 			QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
 			if (renderer->isValid())
 			{
@@ -225,7 +230,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 				delete m_imageCache;
 				KSharedDataCache::deleteCache(imageCacheName);
 				m_imageCache = oldCache.take();
-				qDebug() << "Theme change failed: SVG file broken";
+				qCDebug(GAMES_LIB) << "Theme change failed: SVG file broken";
 				return false;
 			}
 		}
@@ -243,7 +248,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		}
 		else
 		{
-			qDebug() << "Theme change failed: SVG file broken";
+			qCDebug(GAMES_LIB) << "Theme change failed: SVG file broken";
 			return false;
 		}
 		//disconnect from disk cache (only needed if changing strategy)

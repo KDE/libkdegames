@@ -28,8 +28,11 @@
 #include <QtCore/QStringList>
 #include <QtGui/QMatrix>
 #include <QtXml/QDomDocument>
+#include <QLoggingCategory>
+
 #include "libkdegamesprivate_export.h"
 
+Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KGameSvgDocumentPrivate;
 

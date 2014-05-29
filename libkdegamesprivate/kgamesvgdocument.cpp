@@ -20,7 +20,6 @@
 #include "kgamesvgdocument_p.h"
 
 #include <kfilterdev.h>
-#include <kdebug.h>
 
 #include <QtCore/QBuffer>
 #include <QtCore/QFile>
@@ -28,6 +27,7 @@
 #include <QtCore/QStringList>
 #include <QtXml/QDomElement>
 #include <QtXml/QDomNode>
+#include <QDebug>
 
 #include <math.h>
 
@@ -148,6 +148,7 @@ KGameSvgDocument::KGameSvgDocument()
 KGameSvgDocument::KGameSvgDocument(const KGameSvgDocument &doc)
     : QDomDocument(), d(new KGameSvgDocumentPrivate(*doc.d))
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
 }
 
 KGameSvgDocument::~KGameSvgDocument()
@@ -184,7 +185,7 @@ void KGameSvgDocument::load()
 {
     if (d->m_svgFilename.isNull())
     {
-        kDebug(11000) << "KGameSvgDocument::load(): Filename not specified.";
+        qCDebug(GAMES_LIB) << "KGameSvgDocument::load(): Filename not specified.";
         return;
     }
 
@@ -214,7 +215,7 @@ void KGameSvgDocument::load()
     if (!setContent(content))
     {
         file.close();
-        kDebug(11000) << "DOM content not set.";
+        qCDebug(GAMES_LIB) << "DOM content not set.";
         return;
     }
     file.close();
@@ -287,7 +288,7 @@ void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions
     QMatrix matrix;
     if ((xFactor == 0) || (yFactor == 0))
     {
-        kWarning () << "KGameSvgDocument::scale: You cannnot scale by zero";
+        qWarning () << "KGameSvgDocument::scale: You cannnot scale by zero";
     }
 
     if (options == ApplyToCurrentMatrix)
@@ -536,7 +537,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
     rx.setPattern(TRANSFORMS);
     if (!rx.exactMatch(transformAttribute))
     {
-        kWarning () << "Transform attribute seems to be invalid. Check your SVG file.";
+        qWarning () << "Transform attribute seems to be invalid. Check your SVG file.";
         return QMatrix();
     }
 
@@ -682,7 +683,7 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, 
     if (!node.firstChild().isNull() && !node.nextSibling().isNull())
     {
         // Do Nothing
-        //kDebug(11000) << "No children or siblings.";
+        //qCDebug(GAMES_LIB) << "No children or siblings.";
     }
 
     // Matching node not found, so return a null node.

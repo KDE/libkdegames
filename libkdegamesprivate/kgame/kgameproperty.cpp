@@ -24,28 +24,34 @@
 #include "kplayer.h"
 #include "kgame.h"
 
+#include <QLoggingCategory>
+
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 
 KGamePropertyBase::KGamePropertyBase(int id, KGame* parent)
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init();
  registerData(id, parent);
 }
 
 KGamePropertyBase::KGamePropertyBase(int id, KPlayer* parent)
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init();
  registerData(id, parent);
 }
 
 KGamePropertyBase::KGamePropertyBase(int id, KGamePropertyHandler* owner)
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init();
  registerData(id, owner);
 }
 
 KGamePropertyBase::KGamePropertyBase()
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
  init();
 }
 
@@ -89,7 +95,7 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,Property
 {
 // we don't support changing the id
  if (!owner) {
-	qWarning() << "Resetting owner=0. Sure you want to do this?";
+	qCWarning(GAMES_PRIVATE_KGAME) << "Resetting owner=0. Sure you want to do this?";
 	mOwner=0;
 	return -1;
  }
@@ -127,7 +133,7 @@ bool KGamePropertyBase::sendProperty()
  if (mOwner) {
 	return mOwner->sendProperty(s);
  } else {
-	qCritical() << "Cannot send because there is no receiver defined";
+	qCCritical(GAMES_PRIVATE_KGAME) << "Cannot send because there is no receiver defined";
 	return false;
  }
 }
@@ -141,7 +147,7 @@ bool KGamePropertyBase::sendProperty(const QByteArray& data)
  if (mOwner) {
 	return mOwner->sendProperty(s);
  } else {
-	qCritical() << ": Cannot send because there is no receiver defined";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": Cannot send because there is no receiver defined";
 	return false;
  }
 }
@@ -174,7 +180,7 @@ void KGamePropertyBase::setLock(bool l)
  if (mOwner) {
 	mOwner->sendProperty(s);
  } else {
-	qCritical() << ": Cannot send because there is no receiver defined";
+	qCCritical(GAMES_PRIVATE_KGAME) << ": Cannot send because there is no receiver defined";
 	return ;
  }
 }
@@ -185,7 +191,7 @@ void KGamePropertyBase::emitSignal()
  if (mOwner ) {
 	mOwner->emitSignal(this);
  } else {
-	qCritical() << ":id="<<id()<<" Cannot emitSignal because there is no handler set";
+	qCCritical(GAMES_PRIVATE_KGAME) << ":id="<<id()<<" Cannot emitSignal because there is no handler set";
  }
 }
 

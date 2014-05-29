@@ -24,7 +24,7 @@
 #include "kplayer.h"
 #include "kgame.h"
 
-#include <kdebug.h>
+#include <QLoggingCategory>
 
 class KGameSequence::KGameSequencePrivate
 {
@@ -41,6 +41,7 @@ class KGameSequence::KGameSequencePrivate
 KGameSequence::KGameSequence()
   : QObject(), d(new KGameSequencePrivate)
 {
+ QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
 }
 
 KGameSequence::~KGameSequence()
@@ -70,10 +71,10 @@ void KGameSequence::setCurrentPlayer(KPlayer* player)
 
 KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
 {
- kDebug(11001) << "=================== NEXT PLAYER ==========================";
+ qCDebug(GAMES_PRIVATE_KGAME) << "=================== NEXT PLAYER ==========================";
  if (!game())
  {
-   kError() << "NULL game object";
+   qCCritical(GAMES_PRIVATE_KGAME) << "NULL game object";
    return 0;
  }
  unsigned int minId,nextId,lastId;
@@ -87,7 +88,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
    lastId = 0;
  }
 
- kDebug(11001) << "nextPlayer: lastId="<<lastId;
+ qCDebug(GAMES_PRIVATE_KGAME) << "nextPlayer: lastId="<<lastId;
 
  // remove when this has been checked
  minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...
@@ -123,7 +124,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
    nextplayer=minplayer;
  }
 
- kDebug(11001) << " ##### lastId=" << lastId << "exclusive="
+ qCDebug(GAMES_PRIVATE_KGAME) << " ##### lastId=" << lastId << "exclusive="
         << exclusive << "  minId=" << minId << "nextid=" << nextId
         << "count=" << game()->playerList()->count();
  if (nextplayer)

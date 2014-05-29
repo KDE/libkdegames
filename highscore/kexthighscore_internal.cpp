@@ -25,7 +25,6 @@
 
 #include <QFile>
 #include <QLayout>
-#include <QDebug>
 #include <qdom.h>
 //Added by qt3to4:
 #include <QTextStream>
@@ -123,24 +122,30 @@ int ItemArray::findIndex(const QString &name) const
 
 const ItemContainer *ItemArray::item(const QString &name) const
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+    
     int i = findIndex(name);
-    if ( i==-1 ) qCritical() << "no item named \"" << name
+    if ( i==-1 ) qCCritical(GAMES_HIGHSCORE) << "no item named \"" << name
                                 << "\"";
     return at(i);
 }
 
 ItemContainer *ItemArray::item(const QString &name)
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+  
     int i = findIndex(name);
-    if ( i==-1 ) qCritical() << "no item named \"" << name
+    if ( i==-1 ) qCCritical(GAMES_HIGHSCORE) << "no item named \"" << name
                                 << "\"";
     return at(i);
 }
 
 void ItemArray::setItem(const QString &name, Item *item)
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+  
     int i = findIndex(name);
-    if ( i==-1 ) qCritical() << "no item named \"" << name
+    if ( i==-1 ) qCCritical(GAMES_HIGHSCORE) << "no item named \"" << name
                                 << "\"";
     bool stored = at(i)->isStored();
     bool canHaveSubGroup = at(i)->canHaveSubGroup();
@@ -150,8 +155,10 @@ void ItemArray::setItem(const QString &name, Item *item)
 void ItemArray::addItem(const QString &name, Item *item,
                         bool stored, bool canHaveSubGroup)
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+    
     if ( findIndex(name)!=-1 )
-        qCritical() << "item already exists \"" << name << "\"";
+        qCCritical(GAMES_HIGHSCORE) << "item already exists \"" << name << "\"";
 
     append(new ItemContainer);
     //at(i) = new ItemContainer;
