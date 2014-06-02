@@ -28,19 +28,22 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QHeaderView>
-#include <QtGui/QTabWidget>
+#include <QTabWidget>
+#include <QPushButton>
+#include <QApplication>
+#include <QFileDialog>
+#include <QtCore/QTemporaryFile>
 
 #include <kmessagebox.h>
 #include <kurllabel.h>
 #include <krun.h>
-#include <kfiledialog.h>
+
 #include <kvbox.h>
-#include <ktemporaryfile.h>
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
 #include <klineedit.h>
-#include <kpushbutton.h>
+#include <kguiitem.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
@@ -150,7 +153,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     const PlayerInfos &p = internal->playerInfos();
 
     QVBoxLayout *vbox = new QVBoxLayout(this);
-    vbox->setSpacing(KDialog::spacingHint());
+    vbox->setSpacing(QApplication::fontMetrics().lineSpacing());
 
     _tw = new QTabWidget(this);
     connect(_tw, SIGNAL(currentChanged(int)), SLOT(tabChanged()));
@@ -180,7 +183,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
     // url labels
     if ( internal->isWWHSAvailable() ) {
-        KUrl url = internal->queryUrl(ManagerPrivate::Scores);
+        QUrl url = internal->queryUrl(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
         connect(_scoresUrl, SIGNAL(leftClickedUrl(QString)),
@@ -207,7 +210,7 @@ void HighscoresWidget::changeTab(int i)
 void HighscoresWidget::showURL(const QString &url)
 {
 //   kDebug(11001) ;
-    (void)new KRun(KUrl(url), this);
+    (void)new KRun(QUrl(url), this);
 }
 
 void HighscoresWidget::load(int rank)
@@ -229,15 +232,15 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
 {
 //     kDebug(11001) << ": HighscoresDialog";
 
-    setCaption( i18n("Highscores") );
-    setButtons( Close|User1|User2 );
-    setDefaultButton( Close );
+    setWindowTitle( i18n("Highscores") );
+// TODO    setButtons( Close|User1|User2 );
+// TODO    setDefaultButton( Close );
     if ( internal->nbGameTypes()>1 )
         setFaceType( KPageDialog::Tree );
     else
         setFaceType( KPageDialog::Plain );
-    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), QLatin1String( "configure" )) );
-    setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
+// TODO    setButtonGuiItem( User1, KGuiItem(i18n("Configure..."), QLatin1String( "configure" )) );
+// TODO    setButtonGuiItem( User2, KGuiItem(i18n("Export...")) );
     connect( this, SIGNAL(user1Clicked()), SLOT(slotUser1()) );
     connect( this, SIGNAL(user2Clicked()), SLOT(slotUser2()) );
 
@@ -285,7 +288,7 @@ void HighscoresDialog::slotUser1()
 void HighscoresDialog::slotUser2()
 {
 //   kDebug(11001) ;
-    KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
+    QUrl url = QFileDialog::getSaveFileUrl(this, tr("HighscoresDialog"), QUrl(), QString());
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this) ) {
         KGuiItem gi = KStandardGuiItem::save();
@@ -295,7 +298,7 @@ void HighscoresDialog::slotUser2()
                                  i18n("Export"), gi);
         if ( res==KMessageBox::Cancel ) return;
     }
-    KTemporaryFile tmp;
+    QTemporaryFile tmp;
     tmp.open();
     QTextStream stream(&tmp);
     internal->exportHighscores(stream);
@@ -480,8 +483,9 @@ ConfigDialog::ConfigDialog(QWidget *parent)
 
         KGuiItem gi = KStandardGuiItem::clear();
         gi.setText(i18n("Remove"));
-        _removeButton = new KPushButton(gi, group);
-        groupLayout->addWidget(_removeButton, 2, 0);
+        _removeButton = new QPushButton(group);
+	KGuiItem::assign(_removeButton, gi);
+	groupLayout->addWidget(_removeButton, 2, 0);
         connect(_removeButton, SIGNAL(clicked()), SLOT(removeSlot()));
     }
 
@@ -505,7 +509,7 @@ void ConfigDialog::accept()
 {
     if ( save() ) {
         KDialog::accept();
-        KGlobal::config()->sync(); // safer
+        KSharedConfig::openConfig()->sync(); // safer
     }
 }
 

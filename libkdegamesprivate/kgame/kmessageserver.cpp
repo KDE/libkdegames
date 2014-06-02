@@ -26,8 +26,7 @@
 #include <QQueue>
 #include <QTimer>
 #include <QDataStream>
-
-#include <kdebug.h>
+#include <QLoggingCategory>
 
 #include "kmessageio.h"
 
@@ -99,12 +98,13 @@ public:
 KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
   : QObject(parent)
 {
+  QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));
   d = new KMessageServerPrivate;
   d->mIsRecursive=false;
   d->mCookie=cookie;
   connect (&(d->mTimer), SIGNAL (timeout()),
            this, SLOT (processOneMessage()));
-  kDebug(11001) << "CREATE(KMessageServer="
+  qCDebug(GAMES_PRIVATE_KGAME) << "CREATE(KMessageServer="
 		<< this
 		<< ") cookie="
 		<< d->mCookie
@@ -114,23 +114,23 @@ KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
 
 KMessageServer::~KMessageServer()
 {
-  kDebug(11001) << "this=" << this;
+  qCDebug(GAMES_PRIVATE_KGAME) << "this=" << this;
   Debug();
   stopNetwork();
   deleteClients();
   delete d;
-  kDebug(11001) << "done";
+  qCDebug(GAMES_PRIVATE_KGAME) << "done";
 }
 
 //------------------------------------- TCP/IP server stuff
 
 bool KMessageServer::initNetwork (quint16 port)
 {
-  kDebug(11001) ;
+  qCDebug(GAMES_PRIVATE_KGAME) ;
 
   if (d->mServerSocket)
   {
-    kDebug (11001) << ": We were already offering connections!";
+    qCDebug(GAMES_PRIVATE_KGAME) << ": We were already offering connections!";
     delete d->mServerSocket;
   }
 
@@ -140,13 +140,13 @@ bool KMessageServer::initNetwork (quint16 port)
   if (!d->mServerSocket 
     || !d->mServerSocket->isListening())
   {
-    kError(11001) << ": Serversocket::ok() == false";
+    qCCritical(GAMES_PRIVATE_KGAME) << ": Serversocket::ok() == false";
     delete d->mServerSocket;
     d->mServerSocket=0;
     return false;
   }
 
-  kDebug (11001) << ": Now listening to port "
+  qCDebug(GAMES_PRIVATE_KGAME) << ": Now listening to port "
                   << d->mServerSocket->serverPort();
   connect (d->mServerSocket, SIGNAL (newClientConnected(KMessageIO*)),
            this, SLOT (addClient(KMessageIO*)));
@@ -184,13 +184,13 @@ void KMessageServer::addClient (KMessageIO* client)
   // maximum number of clients reached?
   if (d->mMaxClients >= 0 && d->mMaxClients <= clientCount())
   {
-    kError (11001) << ": Maximum number of clients reached!";
+    qCCritical(GAMES_PRIVATE_KGAME) << ": Maximum number of clients reached!";
     return;
   }
 
   // give it a unique ID
   client->setId (uniqueClientNumber());
-  kDebug (11001) << ":" << client->id();
+  qCDebug(GAMES_PRIVATE_KGAME) << ":" << client->id();
 
   // connect its signals
   connect (client, SIGNAL (connectionBroken()),
@@ -235,7 +235,7 @@ void KMessageServer::removeClient (KMessageIO* client, bool broken)
   quint32 clientID = client->id();
   if (!d->mClientList.removeAll(client))
   {
-    kError(11001) << ": Deleting client that wasn't added before!";
+    qCCritical(GAMES_PRIVATE_KGAME) << ": Deleting client that wasn't added before!";
     return;
   }
 
@@ -266,7 +266,7 @@ void KMessageServer::removeBrokenClient ()
   KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
   if (!client)
   {
-    kError (11001) << ": sender of the signal was not a KMessageIO object!";
+    qCCritical(GAMES_PRIVATE_KGAME) << ": sender of the signal was not a KMessageIO object!";
     return;
   }
 
@@ -326,7 +326,7 @@ void KMessageServer::setAdmin (quint32 adminID)
 
   if (adminID > 0 && findClient (adminID) == 0)
   {
-    kWarning (11001) << "Trying to set a new admin that doesn't exist!";
+    qCWarning(GAMES_PRIVATE_KGAME) << "Trying to set a new admin that doesn't exist!";
     return;
   }
 
@@ -373,10 +373,10 @@ void KMessageServer::getReceivedMessage (const QByteArray &msg)
   KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
   if (!client)
   {
-    kError (11001) << ": slot was not called from KMessageIO!";
+    qCCritical(GAMES_PRIVATE_KGAME) << ": slot was not called from KMessageIO!";
     return;
   }
-  //kDebug(11001) << ": size=" << msg.size();
+  //qCDebug(GAMES_PRIVATE_KGAME) << ": size=" << msg.size();
   quint32 clientID = client->id();
 
   //QByteArray *ta=new QByteArray;
@@ -420,7 +420,7 @@ void KMessageServer::processOneMessage ()
   QByteArray ttt=in_buffer.buffer();
   quint32 messageID;
   in_stream >> messageID;
-  //kDebug(11001) << ": got message with messageID=" << messageID;
+  //qCDebug(GAMES_PRIVATE_KGAME) << ": got message with messageID=" << messageID;
   switch (messageID)
   {
     case REQ_BROADCAST:
@@ -473,7 +473,7 @@ void KMessageServer::processOneMessage ()
           if (client)
             removeClient (client, false);
           else
-            kWarning (11001) << ": removing non-existing clientID";
+            qCWarning(GAMES_PRIVATE_KGAME) << ": removing non-existing clientID";
         }
       }
       break;
@@ -500,12 +500,12 @@ void KMessageServer::processOneMessage ()
 
   // check if all the data has been used
   if (!unknown && !in_buffer.atEnd())
-    kWarning (11001) << ": Extra data received for message ID" << messageID;
+    qCWarning(GAMES_PRIVATE_KGAME) << ": Extra data received for message ID" << messageID;
 
   emit messageReceived (msg_buf->data, clientID, unknown);
 
   if (unknown)
-    kWarning (11001) << ": received unknown message ID" << messageID;
+    qCWarning(GAMES_PRIVATE_KGAME) << ": received unknown message ID" << messageID;
 
   // remove the message, since we are ready with it
   d->mMessageQueue.dequeue();
@@ -516,11 +516,10 @@ void KMessageServer::processOneMessage ()
 
 void KMessageServer::Debug()
 {
-   kDebug(11001) << "------------------ KMESSAGESERVER -----------------------";
-   kDebug(11001) << "MaxClients :   " << maxClients();
-   kDebug(11001) << "NoOfClients :  " << clientCount();
-   kDebug(11001) << "---------------------------------------------------";
+   qCDebug(GAMES_PRIVATE_KGAME) << "------------------ KMESSAGESERVER -----------------------";
+   qCDebug(GAMES_PRIVATE_KGAME) << "MaxClients :   " << maxClients();
+   qCDebug(GAMES_PRIVATE_KGAME) << "NoOfClients :  " << clientCount();
+   qCDebug(GAMES_PRIVATE_KGAME) << "---------------------------------------------------";
 }
 
-#include "kmessageserver.moc"
-#include "kmessageserver_p.moc"
+#include "moc_kmessageserver.cpp"

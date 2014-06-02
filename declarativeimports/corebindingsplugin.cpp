@@ -19,7 +19,6 @@
 #include "corebindingsplugin.h"
 
 #include <KgThemeProvider>
-#include <QDeclarativeEngine>
 
 void CoreBindingsPlugin::registerTypes(const char *uri)
 {

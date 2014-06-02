@@ -24,11 +24,15 @@
 
 #include <libkdegames_export.h>
 
-class KAction;
+#include <QLoggingCategory>
+
+class QAction;
 class KToggleAction;
 class QObject;
 class KRecentFilesAction;
 class KSelectAction;
+
+Q_DECLARE_LOGGING_CATEGORY(GAMES_UI)
 
 /**
  * Extension for KStandardAction in KDE Games
@@ -74,7 +78,7 @@ namespace KStandardGameAction
      * Creates an action corresponding to the
      * KStandardAction::StandardAction enum.
      */
-    KDEGAMES_EXPORT KAction* create( StandardGameAction id, const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction* create( StandardGameAction id, const QObject *recvr, const char *slot,
                             QObject* parent );
 
 
@@ -86,13 +90,13 @@ namespace KStandardGameAction
     /**
      * Start a new game.
      **/
-    KDEGAMES_EXPORT KAction *gameNew(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *gameNew(const QObject *recvr, const char *slot,
                             QObject *parent );
 
     /**
      * Load a previousely saved game.
      */
-    KDEGAMES_EXPORT KAction *load(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *load(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     // FIXME why not to delete this and use just KStandardAction::openRecent???
@@ -107,13 +111,13 @@ namespace KStandardGameAction
     /**
      * Save the current game.
      */
-    KDEGAMES_EXPORT KAction *save(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *save(const QObject *recvr, const char *slot,
                          QObject *parent);
 
     /**
      * Save the current game under a different filename.
      */
-    KDEGAMES_EXPORT KAction *saveAs(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *saveAs(const QObject *recvr, const char *slot,
                            QObject *parent );
 
     /**
@@ -125,25 +129,25 @@ namespace KStandardGameAction
     /**
      * Show the highscores.
      */
-    KDEGAMES_EXPORT KAction *highscores(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *highscores(const QObject *recvr, const char *slot,
                                QObject *parent );
 
     /**
      * Clear highscores.
      */
-    KDEGAMES_EXPORT KAction *clearHighscores(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *clearHighscores(const QObject *recvr, const char *slot,
                                QObject *parent );
 
     /**
      * Show the statistics.
      */
-    KDEGAMES_EXPORT KAction *statistics(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *statistics(const QObject *recvr, const char *slot,
                                QObject *parent );
 
     /**
      * Clear statistics.
      */
-    KDEGAMES_EXPORT KAction *clearStatistics(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *clearStatistics(const QObject *recvr, const char *slot,
                                QObject *parent );
 
 
@@ -151,69 +155,69 @@ namespace KStandardGameAction
      * End the current game, but do not quit the program.
      * Think of a "close" entry.
      */
-    KDEGAMES_EXPORT KAction *end(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *end(const QObject *recvr, const char *slot,
                         QObject *parent );
 
     /**
      * Print current game.
      * Not useful in all games.
      */
-    KDEGAMES_EXPORT KAction *print(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *print(const QObject *recvr, const char *slot,
                           QObject *parent );
 
     /**
      * Quit the game.
      */
-    KDEGAMES_EXPORT KAction *quit(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *quit(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * Repeat the last move.
      **/
-    KDEGAMES_EXPORT KAction *repeat(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *repeat(const QObject *recvr, const char *slot,
                            QObject *parent );
 
     /**
      * Undo the last move.
      **/
-    KDEGAMES_EXPORT KAction *undo(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *undo(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * Redo the last move (which has been undone).
      **/
-    KDEGAMES_EXPORT KAction *redo(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *redo(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * Roll die or dice.
      **/
-    KDEGAMES_EXPORT KAction *roll(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *roll(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
      * End the current turn (not the game).
      * Usually to let the next player start.
      **/
-    KDEGAMES_EXPORT KAction *endTurn(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *endTurn(const QObject *recvr, const char *slot,
                             QObject *parent );
 
     /**
      * Display configure carddecks dialog.
      */
-    KDEGAMES_EXPORT KAction *carddecks(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *carddecks(const QObject *recvr, const char *slot,
                               QObject *parent );
 
     /**
      * Display configure highscores dialog.
      */
-    KDEGAMES_EXPORT KAction *configureHighscores(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *configureHighscores(const QObject *recvr, const char *slot,
                                         QObject *parent );
 
     /**
      * Give an advice/hint.
      */
-    KDEGAMES_EXPORT KAction *hint(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *hint(const QObject *recvr, const char *slot,
                          QObject *parent );
 
     /**
@@ -225,7 +229,7 @@ namespace KStandardGameAction
     /**
      * Solve the game.
      */
-    KDEGAMES_EXPORT KAction *solve(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *solve(const QObject *recvr, const char *slot,
                           QObject *parent );
 
     /**
@@ -238,7 +242,7 @@ namespace KStandardGameAction
     /**
      * Restart the game.
      */
-    KDEGAMES_EXPORT KAction *restart(const QObject *recvr, const char *slot,
+    KDEGAMES_EXPORT QAction *restart(const QObject *recvr, const char *slot,
                             QObject *parent );
 
 }

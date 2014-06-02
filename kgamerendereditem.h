@@ -20,7 +20,7 @@
 #define KGAMERENDEREDITEM_H
 
 #include <QtCore/QObject>
-#include <QtGui/QGraphicsItem>
+#include <QtWidgets/QGraphicsItem>
 
 #include <kgamerendererclient.h>
 #include <libkdegames_export.h>

@@ -18,20 +18,19 @@
 
 #include "kgdeclarativeview.h"
 
-#include <kdeclarative.h>
+#include <kdeclarative/kdeclarative.h>
 
-KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
-    QDeclarativeView(parent),
+KgDeclarativeView::KgDeclarativeView(QWindow *parent) :
+    QQuickView(parent),
     d(0) //unused for now, for future expandability
 {
-    KDeclarative kdeclarative;
+    KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
-    kdeclarative.initialize();
-
+    
     // binds things like i18n and icons
     kdeclarative.setupBindings();
 
-    setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    setResizeMode(SizeRootObjectToView);
 }
 
 #include "kgdeclarativeview.moc"

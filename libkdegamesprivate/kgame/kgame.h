@@ -24,9 +24,13 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QString>
 #include <QtCore/QList>
+#include <QLoggingCategory>
 
 #include "kgamenetwork.h"
 #include "../libkdegamesprivate_export.h"
+
+Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
+
 class KRandomSequence;
 
 class KPlayer;

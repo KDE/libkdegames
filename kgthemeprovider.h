@@ -20,7 +20,7 @@
 #define KGTHEMEPROVIDER_H
 
 #include <QtCore/QObject>
-#include <QtDeclarative>
+#include <QtQml>
 
 #include <kgtheme.h>
 #include <libkdegames_export.h>
@@ -123,7 +123,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///to this KgThemeProvider and adds it to the QML engine, also
 		///with @param name, which will receive sprite requests
 		///@since 4.11
-		void setDeclarativeEngine(const QString& name, QDeclarativeEngine* engine);
+		void setDeclarativeEngine(const QString& name, QQmlEngine* engine);
 	Q_SIGNALS:
 		///Emitted when the current theme changes. @see setCurrentTheme
 		void currentThemeChanged(const KgTheme* theme);

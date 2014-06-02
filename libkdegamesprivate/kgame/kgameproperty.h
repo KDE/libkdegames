@@ -22,8 +22,8 @@
 #define __KGAMEPROPERTY_H_
 
 #include <QtCore/QDataStream>
+#include <QtCore/QDebug>
 
-#include <kdebug.h>
 #include <typeinfo>
 #include "../libkdegamesprivate_export.h"
 
@@ -629,7 +629,7 @@ public:
 				setLocal(v);
 				break;
 			default: // NEVER!
-				kError(11001) << "Undefined Policy in property" << id();
+				qCritical() << "Undefined Policy in property" << id();
 				return;
 		}
 	}

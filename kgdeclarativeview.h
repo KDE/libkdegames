@@ -19,7 +19,7 @@
 #ifndef KGDECLARATIVEVIEW_H
 #define KGDECLARATIVEVIEW_H
 
-#include <QDeclarativeView>
+#include <QQuickView>
 
 #include <libkdegames_export.h>
 
@@ -39,14 +39,14 @@ class KgThemeProvider;
  * place), leaving the toolbars, menubars and statusbars as they are, and
  * updating their specifics via signals from QML to C++ part of the code.
  */
-class KDEGAMES_EXPORT KgDeclarativeView : public QDeclarativeView
+class KDEGAMES_EXPORT KgDeclarativeView : public QQuickView
 {
     Q_OBJECT
 public:
     ///Construcs a new KgDeclarativeView with KDE specific environment.
     ///@param parent The parent widget for this view (usually the main
     ///window of the game)
-    KgDeclarativeView(QWidget *parent=0);
+    KgDeclarativeView(QWindow *parent=0);
 
 private:
     class Private;

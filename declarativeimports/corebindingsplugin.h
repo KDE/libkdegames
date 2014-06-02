@@ -19,18 +19,15 @@
 #ifndef COREBINDINGSPLUGIN_H
 #define COREBINDINGSPLUGIN_H
 
-#include <QDeclarativeExtensionPlugin>
+#include <QQmlExtensionPlugin>
 
-class QDeclarativeEngine;
-
-class CoreBindingsPlugin : public QDeclarativeExtensionPlugin
+class CoreBindingsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
 public:
     void registerTypes(const char *uri);
 };
-
-Q_EXPORT_PLUGIN2(corebindingsplugin, CoreBindingsPlugin)
 
 #endif // COREBINDINGSPLUGIN_H

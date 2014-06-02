@@ -2,29 +2,39 @@ enable_testing()
 
 project(libkdegames)
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-if(NOT COMPILING_KDEGAMES)
-	find_package(KDE4 REQUIRED)
-	include(KDE4Defaults)
-	include(MacroLibrary)
 
-	add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-	add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-	include_directories(${KDE4_INCLUDES} ${CMAKE_SOURCE_DIR}/includes)
-endif(NOT COMPILING_KDEGAMES)
+find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick Svg Test)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config ItemModels WidgetsAddons WindowSystem Codecs Archive
+    Config DBusAddons DNSSD Declarative
+    I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
+    Bookmarks KIO NotifyConfig NewStuff KDELibs4Support)
 
-macro_optional_find_package(OpenAL)
-macro_log_feature(OPENAL_FOUND "OpenAL" "OpenAL (Open Audio Library) is a free software cross-platform audio API." "http://connect.creativelabs.com/openal" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
+include(FeatureSummary)
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
 
-macro_optional_find_package(SndFile)
-macro_log_feature(SNDFILE_FOUND "SndFile" "libsndfile is a C library written by Erik de Castro Lopo for reading and writing audio files." "http://www.mega-nerd.com/libsndfile/" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
+add_definitions(${QT_DEFINITIONS})
+add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
+include_directories(${KDE4_INCLUDES} ${CMAKE_SOURCE_DIR}/includes)
 
-find_package(KDeclarative)
-macro_log_feature(KDECLARATIVE_FOUND "KDeclarative" "KDeclarative is a KDE library for KDE specific QML support." "http://kde.org" TRUE "" "KDeclarative library is required for QML support in KDE Games.")
+find_package(OpenAL)
+set_package_properties(OPENAL PROPERTIES
+                       URL "http://connect.creativelabs.com/openal"
+                       TYPE RECOMMENDED 
+                       PURPOSE "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile"
+                      )
 
-KDE4_NO_ENABLE_FINAL(libkdegames)
-KDE4_NO_ENABLE_FINAL(libkdegamesprivate)
+find_package(SndFile)
+set_package_properties(SndFile PROPERTIES
+                       URL "http://www.mega-nerd.com/libsndfile/"
+                       TYPE RECOMMENDED
+                       PURPOSE "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile"
+                      )
 
 set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores e.g. /var/games")
 
@@ -106,10 +116,10 @@ if(Q_WS_X11)
 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
 endif(Q_WS_X11)
 
-kde4_add_library(kdegames SHARED ${kdegames_LIB_SRCS})
+add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KGAUDIO_LINKLIBS} ${KDECLARATIVE_LIBRARIES})
-target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS})
+target_link_libraries(kdegames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick KF5::Declarative ${KGAUDIO_LINKLIBS})
+target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
 
 #NOTE: 6.0.0 = KDE 4.9 release
 set(KDEGAMES_VERSION 6.1.0)
@@ -152,14 +162,14 @@ set(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kgamethemeselector.cpp
 )
 
-kde4_add_ui_files(kdegamesprivate_LIB_SRCS
+ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kgamethemeselector.ui
 )
 
-kde4_add_library(kdegamesprivate SHARED ${kdegamesprivate_LIB_SRCS})
+add_library(kdegamesprivate SHARED ${kdegamesprivate_LIB_SRCS})
 
-target_link_libraries(kdegamesprivate ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
-target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${QT_QTNETWORK_LIBRARY} kdegames)
+target_link_libraries(kdegamesprivate KF5::DNSSD KF5::NewStuff KF5::Archive Qt5::Xml Qt5::Network kdegames)
+target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES Qt5::Xml Qt5::Network kdegames)
 
 set_target_properties(kdegamesprivate PROPERTIES
     VERSION   1.0.0
@@ -221,4 +231,7 @@ DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
 install(EXPORT KDEGamesLibraryDepends DESTINATION
     ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
 
-macro_display_feature_log()
+feature_summary(WHAT ALL
+                INCLUDE_QUIET_PACKAGES
+                FATAL_ON_MISSING_REQUIRED_PACKAGES)
+

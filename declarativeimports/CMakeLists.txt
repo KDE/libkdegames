@@ -12,10 +12,8 @@ INCLUDE_DIRECTORIES(
         ${KDE4_INCLUDES}
 )
 
-qt4_automoc(${corebindings_SRCS})
-
 add_library(corebindingsplugin SHARED ${corebindings_SRCS})
-target_link_libraries(corebindingsplugin kdegames ${QT_QTDECLARATIVE_LIBRARY})
+target_link_libraries(corebindingsplugin kdegames Qt5::Qml)
 
 install(TARGETS corebindingsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/games/core)
 install(DIRECTORY qml/ DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/games/core)

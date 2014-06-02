@@ -22,9 +22,7 @@
 
 #include <QtCore/QVector>
 #include <KDE/KConfigGroup>
-#include <KDE/KGlobal>
 #include <KDE/KGuiItem>
-#include <KDE/KLocale>
 #include <KDE/KMessageBox>
 //the following only used by KgDifficultyGUI
 #include <KDE/KActionCollection>
@@ -32,6 +30,12 @@
 #include <KDE/KSelectAction>
 #include <KDE/KStatusBar>
 #include <KDE/KXmlGuiWindow>
+
+#include <QIcon>
+#include <QGlobalStatic>
+
+#include <klocalizedstring.h>
+#include <ksharedconfig.h>
 
 //BEGIN KgDifficultyLevel
 
@@ -166,7 +170,7 @@ KgDifficulty::~KgDifficulty()
 	//save current difficulty level in config file (no sync() call here; this
 	//will most likely be called at application shutdown when others are also
 	//writing to KGlobal::config(); also KConfig's dtor will sync automatically)
-	KConfigGroup cg(KGlobal::config(), "KgDifficulty");
+	KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
 	cg.writeEntry("Level", currentLevel()->key());
 	//cleanup
 	while (!d->m_levels.isEmpty())
@@ -246,7 +250,7 @@ const KgDifficultyLevel* KgDifficulty::currentLevel() const
 	}
 	Q_ASSERT(!d->m_levels.isEmpty());
 	//check configuration file for saved difficulty level
-	KConfigGroup cg(KGlobal::config(), "KgDifficulty");
+	KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
 	const QByteArray key = cg.readEntry("Level", QByteArray());
 	foreach (const KgDifficultyLevel* level, d->m_levels)
 	{
@@ -324,7 +328,7 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 
 //END KgDifficulty
 
-K_GLOBAL_STATIC(KgDifficulty, g_difficulty)
+Q_GLOBAL_STATIC(KgDifficulty, g_difficulty)
 
 KgDifficulty* Kg::difficulty()
 {
@@ -364,7 +368,7 @@ namespace KgDifficultyGUI
 	{
 		Q_OBJECT
 		public:
-			Menu(const KIcon& i, const QString& s, QWidget* p) : KSelectAction(i,s,p){}
+			Menu(const QIcon& i, const QString& s, QWidget* p) : KSelectAction(i,s,p){}
 		public Q_SLOTS:
 			//this whole class just because the following is not a slot
 			void setCurrentItem(int index) { KSelectAction::setCurrentItem(index); }
@@ -387,7 +391,7 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	QObject::connect(selector, SIGNAL(signalSelected(int)), selector, SLOT(setCurrentIndex(int)));
 
 	//create menu action
-	const KIcon icon("games-difficult");
+	const QIcon icon("games-difficult");
 	KSelectAction* menu = new KgDifficultyGUI::Menu(icon, i18nc("Game difficulty level", "Difficulty"), window);
 	menu->setToolTip(i18n("Set the difficulty level"));
 	menu->setWhatsThis(i18n("Set the difficulty level of the game."));

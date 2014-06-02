@@ -19,7 +19,7 @@
 #ifndef __KCHATBASEITEMDELEGATE_H__
 #define __KCHATBASEITEMDELEGATE_H__
 
-#include <QtGui/QAbstractItemDelegate>
+#include <QtWidgets/QAbstractItemDelegate>
 
 #include "libkdegamesprivate_export.h"
 

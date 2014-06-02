@@ -26,12 +26,13 @@
 #include <kstandardshortcut.h>
 #include <ktoggleaction.h>
 #include <kconfig.h>
-#include <kdebug.h>
 #include <kicon.h>
 #include <krecentfilesaction.h>
 
 #undef I18N_NOOP2
 #define I18N_NOOP2(ctx,txt) ctx, txt
+
+Q_LOGGING_CATEGORY(GAMES_UI, "games.ui")
 
 struct KStandardGameActionInfo
 {
@@ -89,12 +90,14 @@ static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGame
 }
 
 
-KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
+QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
                                      QObject* parent )
 {
-    KAction* pAction = 0;
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.ui.debug = true"));
+    
+    QAction* pAction = 0;
     const KStandardGameActionInfo* pInfo = infoPtr( id );
-    kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << "," << parent << " )";
+    qCDebug(GAMES_UI) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << "," << parent << " )";
     if( pInfo ) {
         QString sLabel = i18nc(pInfo->psLabelContext, pInfo->psLabel);
         bool do_connect = (recvr && slot); //both not 0
@@ -116,16 +119,17 @@ KAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
                 QObject::connect( pAction, SIGNAL(triggered(int)), recvr, slot );
             break;
         default:
-            pAction = new KAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
+            pAction = new QAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
             break;
         }
 
-        KShortcut cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
-                         ? KShortcut(pInfo->shortcut)
+        QList<QKeySequence> cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
+                         ? QList<QKeySequence>() << QKeySequence(pInfo->shortcut)
                          : KStandardShortcut::shortcut(pInfo->globalAccel));
-        pAction->setShortcut(cut);
+        if (!cut.isEmpty())
+                pAction->setShortcuts(cut);
         if (pInfo->psToolTip)
                 pAction->setToolTip(i18n(pInfo->psToolTip));
         if (pInfo->psWhatsThis)
@@ -149,79 +153,79 @@ const char* KStandardGameAction::name( StandardGameAction id )
     return (pInfo) ? pInfo->psName : 0;
 }
 
-KAction *KStandardGameAction::gameNew(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::gameNew(const QObject *recvr, const char *slot,
                                       QObject *parent)
 { return KStandardGameAction::create(New, recvr, slot, parent); }
-KAction *KStandardGameAction::load(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::load(const QObject *recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Load, recvr, slot, parent); }
 KRecentFilesAction *KStandardGameAction::loadRecent(const QObject *recvr, const char *slot,
                                                     QObject *parent)
 { return static_cast<KRecentFilesAction *>(KStandardGameAction::create(LoadRecent, recvr, slot, parent)); }
-KAction *KStandardGameAction::save(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::save(const QObject *recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Save, recvr, slot, parent); }
-KAction *KStandardGameAction::saveAs(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::saveAs(const QObject *recvr, const char *slot,
                                      QObject *parent)
 { return KStandardGameAction::create(SaveAs, recvr, slot, parent); }
-KAction *KStandardGameAction::end(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::end(const QObject *recvr, const char *slot,
                                   QObject *parent)
 { return KStandardGameAction::create(End, recvr, slot, parent); }
 KToggleAction *KStandardGameAction::pause(const QObject *recvr, const char *slot,
                                           QObject *parent)
 { return static_cast<KToggleAction *>(KStandardGameAction::create(Pause, recvr, slot, parent)); }
-KAction *KStandardGameAction::highscores(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::highscores(const QObject *recvr, const char *slot,
                                          QObject *parent)
 { return KStandardGameAction::create(Highscores, recvr, slot, parent); }
-KAction *KStandardGameAction::statistics(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::statistics(const QObject *recvr, const char *slot,
                                          QObject *parent)
 { return KStandardGameAction::create(Highscores, recvr, slot, parent); }
-KAction *KStandardGameAction::clearStatistics(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::clearStatistics(const QObject *recvr, const char *slot,
                                          QObject *parent)
 { return KStandardGameAction::create(ClearStatistics, recvr, slot, parent); }
-KAction *KStandardGameAction::print(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::print(const QObject *recvr, const char *slot,
                                     QObject *parent)
 { return KStandardGameAction::create(Print, recvr, slot, parent); }
-KAction *KStandardGameAction::quit(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::quit(const QObject *recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Quit, recvr, slot, parent); }
 
-KAction *KStandardGameAction::repeat(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::repeat(const QObject *recvr, const char *slot,
                                      QObject *parent)
 { return KStandardGameAction::create(Repeat, recvr, slot, parent); }
-KAction *KStandardGameAction::undo(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::undo(const QObject *recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Undo, recvr, slot, parent); }
 
-KAction *KStandardGameAction::redo(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::redo(const QObject *recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Redo, recvr, slot, parent); }
 
-KAction *KStandardGameAction::roll(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::roll(const QObject *recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Roll, recvr, slot, parent); }
-KAction *KStandardGameAction::endTurn(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::endTurn(const QObject *recvr, const char *slot,
                                       QObject *parent)
 { return KStandardGameAction::create(EndTurn, recvr, slot, parent); }
 
-KAction *KStandardGameAction::carddecks(const QObject *recvr, const char *slot,
+QAction *KStandardGameAction::carddecks(const QObject *recvr, const char *slot,
                                         QObject *parent)
 { return KStandardGameAction::create(Carddecks, recvr, slot, parent); }
-KAction *KStandardGameAction::configureHighscores(const QObject*recvr, const char *slot,
+QAction *KStandardGameAction::configureHighscores(const QObject*recvr, const char *slot,
                                                   QObject *parent)
 { return KStandardGameAction::create(ConfigureHighscores, recvr, slot, parent); }
-KAction *KStandardGameAction::hint(const QObject*recvr, const char *slot,
+QAction *KStandardGameAction::hint(const QObject*recvr, const char *slot,
                                    QObject *parent)
 { return KStandardGameAction::create(Hint, recvr, slot, parent); }
 KToggleAction *KStandardGameAction::demo(const QObject*recvr, const char *slot,
                                          QObject *parent)
 { return static_cast<KToggleAction *>(KStandardGameAction::create(Demo, recvr, slot, parent)); }
-KAction *KStandardGameAction::solve(const QObject*recvr, const char *slot,
+QAction *KStandardGameAction::solve(const QObject*recvr, const char *slot,
                                     QObject *parent)
 { return KStandardGameAction::create(Solve, recvr, slot, parent); }
 KSelectAction *KStandardGameAction::chooseGameType(const QObject*recvr, const char *slot,
                                                    QObject *parent)
 { return static_cast<KSelectAction *>(KStandardGameAction::create(ChooseGameType, recvr, slot, parent)); }
-KAction *KStandardGameAction::restart(const QObject*recvr, const char *slot,
+QAction *KStandardGameAction::restart(const QObject*recvr, const char *slot,
                                       QObject *parent)
 { return KStandardGameAction::create(Restart, recvr, slot, parent); }

@@ -23,6 +23,9 @@
 #include "libkdegamesprivate_export.h"
 
 #include <QtCore/QString>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KGameThemePrivate;
 class QPixmap;

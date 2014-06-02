@@ -22,12 +22,10 @@
 #include <QLayout>
 //Added by qt3to4:
 #include <QVector>
-
-#include <kdebug.h>
+#include <QUrlQuery>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore_gui.h"
-
 
 namespace KExtHighscore
 {
@@ -108,10 +106,16 @@ Score firstScore()
 //-----------------------------------------------------------------------------
 Manager::Manager(uint nbGameTypes, uint maxNbEntries)
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+  
     Q_ASSERT(nbGameTypes);
     Q_ASSERT(maxNbEntries);
+        
     if (internal)
-        kFatal(11002) << "A highscore object already exists";
+    {
+      qCWarning(GAMES_HIGHSCORE) << "A highscore object already exists";
+      abort();
+    }
     internal = new ManagerPrivate(nbGameTypes, *this);
     internal->init(maxNbEntries);
 }
@@ -142,7 +146,7 @@ void Manager::setShowDrawGamesStatistic(bool show)
     internal->showDrawGames = show;
 }
 
-void Manager::setWWHighscores(const KUrl &url, const QString &version)
+void Manager::setWWHighscores(const QUrl &url, const QString &version)
 {
     Q_ASSERT( url.isValid() );
     internal->serverURL = url;
@@ -260,9 +264,14 @@ void Manager::setPlayerItem(PlayerItemType type, Item *item)
 
 QString Manager::gameTypeLabel(uint gameType, LabelType type) const
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+    
     if ( gameType!=0 )
-        kFatal(11002) << "You need to reimplement KExtHighscore::Manager for "
+    {
+      qCWarning(GAMES_HIGHSCORE) << "You need to reimplement KExtHighscore::Manager for "
                        << "multiple game types";
+      abort();
+    }
     switch (type) {
     case Icon:
     case Standard:
@@ -272,10 +281,11 @@ QString Manager::gameTypeLabel(uint gameType, LabelType type) const
     return QString();
 }
 
-void Manager::addToQueryURL(KUrl &url, const QString &item,
+void Manager::addToQueryURL(QUrl &url, const QString &item,
                                const QString &content)
 {
-    Q_ASSERT( !item.isEmpty() && url.queryItem(item).isNull() );
+  QUrlQuery urlquery(url);  
+  Q_ASSERT( !item.isEmpty() && urlquery.queryItemValue(item).isEmpty() );
 
     QString query = url.query();
     if ( !query.isEmpty() ) query += QLatin1Char( '&' );
