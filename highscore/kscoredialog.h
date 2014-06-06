@@ -30,8 +30,9 @@ this software.
 
 #include <QtCore/QMap>
 #include <QtCore/QFlags>
+#include <QDialogButtonBox>
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KLocalizedString;
 class KgDifficulty;
@@ -93,7 +94,7 @@ class KgDifficulty;
  * You can define up to 5 Custom fields.
  * @author Matt Williams <matt@milliams.com>
  */
-class KDEGAMES_EXPORT KScoreDialog : public KDialog
+class KDEGAMES_EXPORT KScoreDialog : public QDialog
 {
     Q_OBJECT
 
@@ -275,10 +276,12 @@ class KDEGAMES_EXPORT KScoreDialog : public KDialog
 
         private:
             void keyPressEvent(QKeyEvent *ev);
+	    QDialogButtonBox *buttonBox;
 
         private:
             class KScoreDialogPrivate;
             KScoreDialogPrivate* const d;
+	    
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 

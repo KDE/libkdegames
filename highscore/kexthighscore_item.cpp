@@ -25,8 +25,8 @@
 #include <QHBoxLayout>
 #include <QtCore/QLocale>
 #include <QWidget>
+#include <QApplication>
 
-#include <kdialog.h>
 #include <kpagedialog.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
@@ -284,8 +284,8 @@ void MultiplayerScores::show(QWidget *parent)
     dialog.setFaceType(KPageDialog::Plain);
     KPageWidgetItem *page = new KPageWidgetItem( new QLabel(QLatin1String( "" )), QLatin1String( "" ) );
     QHBoxLayout *hbox = new QHBoxLayout(page->widget());
-    hbox->setMargin(KDialog::marginHint());
-    hbox->setSpacing(KDialog::spacingHint());
+    hbox->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    hbox->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
     QWidget *vbox = new QWidget(page->widget());
     hbox->addWidget(vbox);
