@@ -20,14 +20,14 @@
 #include "kgamethemeselector.h"
 
 #include <KIcon>
-#include <KGlobal>
 #include <KLocale>
-#include <KStandardDirs>
 #include <KConfigSkeleton>
-#include <KComponentData>
 #include <KNS3/DownloadDialog>
 
 #include <QDirIterator>
+#include <QDir>
+#include <QtCore/QStandardPaths>
+#include <QtCore/QCoreApplication>
 
 #include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
@@ -87,7 +87,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     QString lastUsedTheme = configItem->property().toString();
 
     //Now get our themes into the list widget
-    KGlobal::dirs()->addResourceType("gamethemeselector", "data", KComponentData::mainComponent().componentName() + QLatin1Char( '/' ) + lookupDirectory + QLatin1Char( '/' ));
+    
     findThemes(lastUsedTheme);
 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
@@ -104,17 +104,13 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     ui.themeList->setSortingEnabled(true);
 
     QStringList themesAvailable;
-    //KGlobal::dirs()->findAllResources("gamethemeselector", QLatin1String( "*.desktop" ), KStandardDirs::Recursive, themesAvailable);
-    
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "gamethemeselector", QStandardPaths::LocateDirectory);
+        
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QCoreApplication::applicationName() + QLatin1Char( '/' ) + lookupDirectory, QStandardPaths::LocateDirectory);	//Added subdirectory for finding gamethemeselector resources
     Q_FOREACH(const QString& dir, dirs) {
-	    QDirIterator it(dir, QDirIterator::Subdirectories);
+	    QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
 	    while (it.hasNext()) {
 		    const QString filePath = it.next();
-		    Q_ASSERT(filePath.startsWith(dir));
-		    const QString relPath = filePath.mid(dir.length()+1);
-		    if (!themesAvailable.contains(relPath))
-			    themesAvailable.append(relPath);
+		    themesAvailable.append(it.next());
 	    }
     }
 
