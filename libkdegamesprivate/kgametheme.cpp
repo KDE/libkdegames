@@ -19,13 +19,13 @@
 
 #include "kgametheme.h"
 
-#include <KStandardDirs>
 #include <KConfig>
 #include <KConfigGroup>
 
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMap>
+#include <QtCore/QStandardPaths>
 #include <QtGui/QPixmap>
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "games.lib")
@@ -72,7 +72,7 @@ bool KGameTheme::load(const QString &fileName) {
         qCDebug(GAMES_LIB) << "Refusing to load theme with no name";
         return false;
     }
-    QString filePath = KStandardDirs::locate("appdata", fileName);
+    QString filePath = QStandardPaths::locate(QStandardPaths::DataLocation, fileName);
     qCDebug(GAMES_LIB) << "Attempting to load .desktop at" << filePath;
     if (filePath.isEmpty()) {
         return false;
@@ -106,7 +106,7 @@ bool KGameTheme::load(const QString &fileName) {
     }
 
     QString graphName = group.readEntry("FileName");
-    //d->graphics = KStandardDirs::locate("appdata", graphName);
+    //d->graphics = QStandardPaths::locate(QStandardPaths::DataLocation, graphName);
     d->graphics = d->prefix + graphName;
     if (d->graphics.isEmpty()) return false;
 
@@ -118,7 +118,7 @@ bool KGameTheme::load(const QString &fileName) {
     }
 
     QString previewName = group.readEntry("Preview");
-    //QString graphicsPath = KStandardDirs::locate("appdata", previewName);
+    //QString graphicsPath = QStandardPaths::locate(QStandardPaths::DataLocation, previewName);
     QString graphicsPath = d->prefix + previewName;
     d->preview = QPixmap(graphicsPath);
 

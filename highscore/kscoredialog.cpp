@@ -43,6 +43,9 @@ this software.
 #include <QLayout>
 #include <QStackedWidget>
 #include <QTabWidget>
+#include <QApplication>
+#include <QStyle>
+#include <QPushButton>
 #include <QLoggingCategory>
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
@@ -98,11 +101,11 @@ class KScoreDialog::KScoreDialogPrivate
 
 
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
-    : KDialog(parent), d(new KScoreDialogPrivate(this))
+    : QDialog(parent), d(new KScoreDialogPrivate(this))
 {
     QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
     
-    setCaption( i18n(DEFAULT_GROUP_NAME) );
+    setWindowTitle( i18n("DEFAULT_GROUP_NAME") );
     setModal( true );
     d->highscoreObject = new KHighscore();
     d->edit = 0;
@@ -132,14 +135,26 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     d->tabWidget = new QTabWidget(this);
     d->tabWidget->setTabPosition(QTabWidget::West);
 
-    setMainWidget(d->tabWidget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(d->tabWidget);
+    
+    buttonBox = new QDialogButtonBox(this);
+    
     if(d->newName.second == -1)
-      setButtons(Close);
+    {
+      buttonBox->setStandardButtons(QDialogButtonBox::Close);
+      connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    }
     else
     {
-       setButtons(Ok|Cancel);
-       connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
+       buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+       connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+       connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+       connect(buttonBox, SIGNAL(accepted()), SLOT(slotGotName()));
     }
+    
+    mainLayout->addWidget(buttonBox);
 }
 
 KScoreDialog::~KScoreDialog()
@@ -274,8 +289,8 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 
     QGridLayout* layout = new QGridLayout(widget);
     //layout->setObjectName( QLatin1String("ScoreTab-" )+groupName);
-    layout->setMargin(marginHint()+20);
-    layout->setSpacing(spacingHint());
+    layout->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin)+20);
+    layout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
     layout->addItem(new QSpacerItem(0, 15), 4, 0);
 
     commentLabel = new QLabel(tabWidget);
@@ -570,13 +585,20 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
                 d->player=score[Name];
                 d->newName = QPair<QByteArray,int>(d->configGroup,i+1);
 
-                setButtons(Ok|Cancel);
-                setButtonText(Ok, i18n("&Remember"));
-                setButtonText(Cancel, i18n("&Forget"));
-                setButtonToolTip(Ok, i18n("Remember this high score"));
-                setButtonToolTip(Cancel, i18n("Forget this high score"));
-                connect(this, SIGNAL(okClicked()), SLOT(slotGotName()));
-                connect(this, SIGNAL(cancelClicked()), SLOT(slotForgetScore()));
+		delete buttonBox;	// Deleting the old buttonBox
+		buttonBox = new QDialogButtonBox(this);
+		
+		buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+		
+		buttonBox->button(QDialogButtonBox::Ok)->setText(i18n("&Remember"));
+		buttonBox->button(QDialogButtonBox::Cancel)->setText(i18n("&Forget"));
+		buttonBox->button(QDialogButtonBox::Ok)->setToolTip(i18n("Remember this high score"));
+		buttonBox->button(QDialogButtonBox::Cancel)->setToolTip(i18n("Forget this high score"));
+                
+                connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+		connect(buttonBox, SIGNAL(accepted()), SLOT(slotGotName()));
+		connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+		connect(buttonBox, SIGNAL(rejected()), SLOT(slotForgetScore()));
             }
             else
                 d->saveScores();
@@ -602,13 +624,13 @@ int KScoreDialog::addScore(int newScore, const AddScoreFlags& flags)
 void KScoreDialog::show()
 {
     d->aboutToShow();
-    KDialog::show();
+    QDialog::show();
 }
 
 int KScoreDialog::exec()
 {
     d->aboutToShow();
-    return KDialog::exec();
+    return QDialog::exec();
 }
 
 void KScoreDialog::slotGotReturn()
@@ -640,7 +662,11 @@ void KScoreDialog::slotGotName()
     d->scores[d->configGroup].removeAt(10);
     d->comment.clear();  // hide the congratulations
     d->commentLabel->hide();
-    setButtons(Close);
+    
+    delete buttonBox;
+    buttonBox = new QDialogButtonBox(this);
+    buttonBox->setStandardButtons(QDialogButtonBox::Close);
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 void KScoreDialog::slotForgetScore()
@@ -657,7 +683,11 @@ void KScoreDialog::slotForgetScore()
     d->scores[d->configGroup].removeAt(d->lastHighPosition);
     d->comment.clear();
     d->commentLabel->hide();
-    setButtons(Close);
+    
+    delete buttonBox;
+    buttonBox = new QDialogButtonBox(this);
+    buttonBox->setStandardButtons(QDialogButtonBox::Close);
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 
@@ -679,7 +709,7 @@ void KScoreDialog::keyPressEvent(QKeyEvent *ev)
         ev->ignore();
         return;
     }
-    KDialog::keyPressEvent(ev);
+    QDialog::keyPressEvent(ev);
 }
 
 #include "kscoredialog.moc"

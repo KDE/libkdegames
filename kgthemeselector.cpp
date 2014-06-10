@@ -29,7 +29,9 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollBar>
 #include <QtWidgets/QVBoxLayout>
-#include <KDE/KDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QDialog>
+
 #include <KDE/KIcon>
 #include <KDE/KLocalizedString>
 #include <KNS3/DownloadDialog>
@@ -164,43 +166,54 @@ void KgThemeSelector::Private::_k_showNewStuffDialog()
 	_k_updateListSelection(m_provider->currentTheme());
 }
 
-class KgThemeSelector::Dialog : public KDialog
+class KgThemeSelector::Dialog : public QDialog
 {
 	public:
 		Dialog(KgThemeSelector* sel, const QString& caption)
 		{
-			setMainWidget(sel);
+			QVBoxLayout *mainLayout = new QVBoxLayout;
+			setLayout(mainLayout);
+			mainLayout->addWidget(sel);
+			
 			//replace
 			QPushButton* btn = sel->d->m_knsButton;
+			
+			QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+			
 			if (btn)
 			{
 				btn->hide();
-				setButtons(Close | User1);
-				setButtonText(User1, btn->text());
-				//cannot use btn->icon() because setButtonIcon() wants KIcon
-				setButtonIcon(User1, KIcon("get-hot-new-stuff"));
-				connect(this, SIGNAL(user1Clicked()), btn, SIGNAL(clicked()));
+								
+				QPushButton *stuff = new QPushButton(QIcon::fromTheme("get-hot-new-stuff"), btn->text());
+				buttonBox->addButton(stuff, QDialogButtonBox::ActionRole);
+				buttonBox->addButton(QDialogButtonBox::Close);
+				
+				connect(buttonBox, SIGNAL(clicked()), this, SIGNAL(clicked()));
+				connect(buttonBox, SIGNAL(rejected()), this, SIGNAL(reject()));
 			}
 			else
 			{
-				setButtons(Close);
+				buttonBox->setStandardButtons(QDialogButtonBox::Close);
+				connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 			}
 			//window caption
 			if (caption.isEmpty())
 			{
-				setCaption(i18nc("@title:window config dialog", "Select theme"));
+				setWindowTitle(i18nc("@title:window config dialog", "Select theme"));
 			}
 			else
 			{
-				setCaption(caption);
+				setWindowTitle(caption);
 			}
+			
+			mainLayout->addWidget(buttonBox);
 			show();
 		}
 	protected:
 		virtual void closeEvent(QCloseEvent* event)
 		{
 			event->accept();
-			KgThemeSelector* sel = qobject_cast<KgThemeSelector*>(mainWidget());
+			KgThemeSelector* sel = qobject_cast<KgThemeSelector*>(new QWidget());	//Unsure
 			//delete myself, but *not* the KgThemeSelector
 			sel->setParent(0);
 			deleteLater();

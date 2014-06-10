@@ -20,9 +20,10 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtCore/QStandardPaths>
+
 #include <KDE/KConfig>
 #include <KDE/KConfigGroup>
-#include <KDE/KStandardDirs>
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "games.lib")
 
@@ -94,7 +95,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	QString path(path_);
 	if (QFileInfo(path).isRelative())
 	{
-		path = KStandardDirs::locate("appdata", path);
+		path = QStandardPaths::locate(QStandardPaths::DataLocation, path);
 		if (path.isEmpty())
 		{
 			qCDebug(GAMES_LIB) << "Could not find theme description" << path;

@@ -202,7 +202,7 @@ void KgThemeProvider::rediscoverThemes()
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
 		
 	QStringList themePaths;
-	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericConfigLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
+	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
 	Q_FOREACH (const QString &dir, dirs) {
 		const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
 		Q_FOREACH (const QString &file, fileNames) {
