@@ -38,7 +38,6 @@
 #include <kurllabel.h>
 #include <krun.h>
 
-#include <kvbox.h>
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
