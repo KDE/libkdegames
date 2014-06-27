@@ -186,7 +186,7 @@ static QString relativeToApplications(const QString& file)
 		if (canonical.startsWith(base))
 			return canonical.mid(base.length()+1);
 	}
-	return QString();
+	return file;
 }
 
 void KgThemeProvider::rediscoverThemes()
@@ -200,17 +200,18 @@ void KgThemeProvider::rediscoverThemes()
 	
 	d->m_inRediscover = true;
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
-		
+				
 	QStringList themePaths;
 	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
 	Q_FOREACH (const QString &dir, dirs) {
 		const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
 		Q_FOREACH (const QString &file, fileNames) {
 			if (!themePaths.contains(file)) {
-				themePaths.append(file);
+				themePaths.append(dir + '/' + file);
 			}
 		}
 	}
+	
 	//create themes from result, order default theme at the front (that's not
 	//needed by KgThemeProvider, but nice for the theme selector)
 	QList<KgTheme*> themes;
@@ -224,8 +225,8 @@ void KgThemeProvider::rediscoverThemes()
 		d->m_discoveredThemes << fi.fileName();
 		//the identifier is constructed such that it is compatible with
 		//KGameTheme (e.g. "themes/default.desktop")
+		
 		const QByteArray id = relativeToApplications(themePath).toUtf8();
-			
 		//create theme
 		KgTheme* theme;
 		if (d->m_dtThemeClass)

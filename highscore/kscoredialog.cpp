@@ -585,9 +585,6 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
                 d->player=score[Name];
                 d->newName = QPair<QByteArray,int>(d->configGroup,i+1);
 
-		delete buttonBox;	// Deleting the old buttonBox
-		buttonBox = new QDialogButtonBox(this);
-		
 		buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 		
 		buttonBox->button(QDialogButtonBox::Ok)->setText(i18n("&Remember"));
