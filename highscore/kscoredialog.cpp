@@ -105,7 +105,7 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 {
     QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
     
-    setWindowTitle( i18n("DEFAULT_GROUP_NAME") );
+    setWindowTitle( i18n(DEFAULT_GROUP_NAME) );
     setModal( true );
     d->highscoreObject = new KHighscore();
     d->edit = 0;
