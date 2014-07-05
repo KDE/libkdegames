@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PAT
 find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick Svg Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config ItemModels WidgetsAddons WindowSystem Codecs Archive
     Config DBusAddons DNSSD Declarative
-    I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Style Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
+    I18n GuiAddons Service ConfigWidgets ItemViews IconThemes FrameworkIntegration Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
     Bookmarks KIO NotifyConfig NewStuff KDE4Support)
 
 include(FeatureSummary)
