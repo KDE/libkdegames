@@ -20,8 +20,8 @@
 
 #include <kdeclarative/kdeclarative.h>
 
-KgDeclarativeView::KgDeclarativeView(QWindow *parent) :
-    QQuickView(parent),
+KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
+    QQuickWidget(parent),
     d(0) //unused for now, for future expandability
 {
     KDeclarative::KDeclarative kdeclarative;

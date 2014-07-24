@@ -6,7 +6,7 @@ find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 
-find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick Svg Test)
+find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick QuickWidgets Svg Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config ItemModels WidgetsAddons WindowSystem Codecs Archive
     Config DBusAddons DNSSD Declarative
     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes FrameworkIntegration Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
@@ -118,7 +118,7 @@ endif(Q_WS_X11)
 
 add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick KF5::Declarative ${KGAUDIO_LINKLIBS})
+target_link_libraries(kdegames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick Qt5::QuickWidgets KF5::Declarative ${KGAUDIO_LINKLIBS})
 target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
 
 #NOTE: 6.0.0 = KDE 4.9 release
