@@ -2,11 +2,14 @@ enable_testing()
 
 project(libkdegames)
 
+cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+set (QT_MIN_VERSION "5.2.0")
+
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 
-find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick QuickWidgets Svg Test)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick QuickWidgets Svg Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config ItemModels WidgetsAddons WindowSystem Codecs Archive
     Config DBusAddons DNSSD Declarative
     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes FrameworkIntegration Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash

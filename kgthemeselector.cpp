@@ -93,6 +93,7 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 		layout->addWidget(d->m_knsButton);
 		connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));
 	}
+	
 }
 
 KgThemeSelector::~KgThemeSelector()
