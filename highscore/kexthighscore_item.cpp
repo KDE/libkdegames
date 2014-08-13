@@ -284,8 +284,8 @@ void MultiplayerScores::show(QWidget *parent)
     dialog.setFaceType(KPageDialog::Plain);
     KPageWidgetItem *page = new KPageWidgetItem( new QLabel(QLatin1String( "" )), QLatin1String( "" ) );
     QHBoxLayout *hbox = new QHBoxLayout(page->widget());
-    hbox->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
-    hbox->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //hbox->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //hbox->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
     QWidget *vbox = new QWidget(page->widget());
     hbox->addWidget(vbox);

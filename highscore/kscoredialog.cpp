@@ -289,8 +289,8 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 
     QGridLayout* layout = new QGridLayout(widget);
     //layout->setObjectName( QLatin1String("ScoreTab-" )+groupName);
-    layout->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin)+20);
-    layout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //layout->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin)+20);
+    //layout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
     layout->addItem(new QSpacerItem(0, 15), 4, 0);
 
     commentLabel = new QLabel(tabWidget);

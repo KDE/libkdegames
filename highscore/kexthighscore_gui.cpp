@@ -432,8 +432,8 @@ ConfigDialog::ConfigDialog(QWidget *parent)
 
     QGridLayout *pageTop =
         new QGridLayout(page);
-    pageTop->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
-    pageTop->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //pageTop->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //pageTop->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
     
     layout->addLayout(pageTop);
 
@@ -467,14 +467,14 @@ ConfigDialog::ConfigDialog(QWidget *parent)
         QWidget *page = new QWidget;
         tab->addTab(page, i18n("Advanced"));
         QVBoxLayout *pageTop = new QVBoxLayout(page);
-        pageTop->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin));
-        pageTop->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+        //pageTop->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin));
+        //pageTop->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
         QGroupBox *group = new QGroupBox(page);
         group->setTitle( i18n("Registration Data") );
         pageTop->addWidget(group);
         QGridLayout *groupLayout = new QGridLayout(group);
-        groupLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+        //groupLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
         label = new QLabel(i18n("Nickname:"), group);
         groupLayout->addWidget(label, 0, 0);
@@ -606,8 +606,8 @@ AskNameDialog::AskNameDialog(QWidget *parent)
 
     internal->hsConfig().readCurrentConfig();
     QVBoxLayout *top = new QVBoxLayout;
-    top->setMargin( QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin) );
-    top->setSpacing( QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing) );
+    //top->setMargin( QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin) );
+    //top->setSpacing( QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing) );
     setLayout(top);
         
     QLabel *label =
@@ -623,7 +623,7 @@ AskNameDialog::AskNameDialog(QWidget *parent)
     connect(_edit, SIGNAL(textChanged(QString)), SLOT(nameChanged()));
     hbox->addWidget(_edit);
 
-    top->addSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //top->addSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
     _checkbox = new QCheckBox(i18n("Do not ask again."),  this);
     top->addWidget(_checkbox);
     
