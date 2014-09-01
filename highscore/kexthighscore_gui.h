@@ -23,8 +23,10 @@
 #include <QCheckBox>
 #include <QLineEdit>
 #include <QTreeWidget>
+#include <QDialogButtonBox>
+#include <QDialog>
 #include <kpagedialog.h>
-#include <kdialog.h>
+
 #include <QtCore/QList>
 
 #include "kexthighscore.h"
@@ -155,7 +157,7 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-class ConfigDialog : public KDialog
+class ConfigDialog : public QDialog
 {
  Q_OBJECT
  public:
@@ -175,14 +177,15 @@ class ConfigDialog : public KDialog
     QCheckBox   *_WWHEnabled;
     QLineEdit   *_nickname, *_comment;
     KLineEdit   *_key, *_registeredName;
-    KPushButton *_removeButton;
+    QPushButton *_removeButton;
+    QDialogButtonBox *buttonBox;
 
     void load();
     bool save();
 };
 
 //-----------------------------------------------------------------------------
-class AskNameDialog : public KDialog
+class AskNameDialog : public QDialog
 {
  Q_OBJECT
  public:
@@ -192,7 +195,7 @@ class AskNameDialog : public KDialog
     bool dontAskAgain() const { return _checkbox->isChecked(); }
 
  private slots:
-    void nameChanged();
+    void nameChanged(QDialogButtonBox *box);
 
  private:
     QLineEdit *_edit;

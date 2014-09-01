@@ -22,8 +22,11 @@
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QPair>
+#include <QLoggingCategory>
 
 #include "libkdegamesprivate_export.h"
+
+Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KChatBaseModelPrivate;
 class KChatBaseMessagePrivate;

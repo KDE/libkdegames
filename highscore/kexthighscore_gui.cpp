@@ -29,18 +29,20 @@
 #include <QGroupBox>
 #include <QHeaderView>
 #include <QTabWidget>
+#include <QPushButton>
+#include <QApplication>
+#include <QFileDialog>
+#include <QtCore/QTemporaryFile>
 
 #include <kmessagebox.h>
 #include <kurllabel.h>
 #include <krun.h>
-#include <kfiledialog.h>
-#include <kvbox.h>
-#include <ktemporaryfile.h>
+
 #include <kio/netaccess.h>
 #include <kicon.h>
 #include <kiconloader.h>
 #include <klineedit.h>
-#include <kpushbutton.h>
+#include <kguiitem.h>
 
 #include "kexthighscore_internal.h"
 #include "kexthighscore.h"
@@ -150,7 +152,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
     const PlayerInfos &p = internal->playerInfos();
 
     QVBoxLayout *vbox = new QVBoxLayout(this);
-    vbox->setSpacing(KDialog::spacingHint());
+    vbox->setSpacing(QApplication::fontMetrics().lineSpacing());
 
     _tw = new QTabWidget(this);
     connect(_tw, SIGNAL(currentChanged(int)), SLOT(tabChanged()));
@@ -180,7 +182,7 @@ HighscoresWidget::HighscoresWidget(QWidget *parent)
 
     // url labels
     if ( internal->isWWHSAvailable() ) {
-        KUrl url = internal->queryUrl(ManagerPrivate::Scores);
+        QUrl url = internal->queryUrl(ManagerPrivate::Scores);
         _scoresUrl = new KUrlLabel(url.url(),
                                    i18n("View world-wide highscores"), this);
         connect(_scoresUrl, SIGNAL(leftClickedUrl(QString)),
@@ -207,7 +209,7 @@ void HighscoresWidget::changeTab(int i)
 void HighscoresWidget::showURL(const QString &url)
 {
 //   kDebug(11001) ;
-    (void)new KRun(KUrl(url), this);
+    (void)new KRun(QUrl(url), this);
 }
 
 void HighscoresWidget::load(int rank)
@@ -285,7 +287,7 @@ void HighscoresDialog::slotUser1()
 void HighscoresDialog::slotUser2()
 {
 //   kDebug(11001) ;
-    KUrl url = KFileDialog::getSaveUrl(KUrl(), QString(), this);
+    QUrl url = QFileDialog::getSaveFileUrl(this, tr("HighscoresDialog"), QUrl(), QString());
     if ( url.isEmpty() ) return;
     if ( KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this) ) {
         KGuiItem gi = KStandardGuiItem::save();
@@ -295,7 +297,7 @@ void HighscoresDialog::slotUser2()
                                  i18n("Export"), gi);
         if ( res==KMessageBox::Cancel ) return;
     }
-    KTemporaryFile tmp;
+    QTemporaryFile tmp;
     tmp.open();
     QTextStream stream(&tmp);
     internal->exportHighscores(stream);
@@ -402,30 +404,38 @@ QString TotalMultipleScoresList::itemText(const ItemContainer &item,
 
 //-----------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent)
-    : KDialog(parent),
+    : QDialog(parent),
       _saved(false), _WWHEnabled(0)
 {
 //     kDebug(11001) << ": ConfigDialog";
-    setCaption( i18n("Configure Highscores") );
-    setButtons( Ok|Apply|Cancel );
-    setDefaultButton( Cancel );
+    
+    setWindowTitle( i18n("Configure Highscores") );
     setModal( true );
+    
     QWidget *page = 0;
     QTabWidget *tab = 0;
+    
+    QVBoxLayout *layout = new QVBoxLayout;
+    setLayout(layout);
+    
     if ( internal->isWWHSAvailable() ) {
         tab = new QTabWidget(this);
-        setMainWidget(tab);
+        layout->addWidget(tab);
         page = new QWidget;
         tab->addTab(page, i18n("Main"));
-    } else {
+    } 
+    
+    else {
         page = new QWidget(this);
-        setMainWidget(page);
+        layout->addWidget(page);
     }
 
     QGridLayout *pageTop =
         new QGridLayout(page);
-    pageTop->setMargin(spacingHint());
-    pageTop->setSpacing(spacingHint());
+    //pageTop->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //pageTop->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    
+    layout->addLayout(pageTop);
 
     QLabel *label = new QLabel(i18n("Nickname:"), page);
     pageTop->addWidget(label, 0, 0);
@@ -457,14 +467,14 @@ ConfigDialog::ConfigDialog(QWidget *parent)
         QWidget *page = new QWidget;
         tab->addTab(page, i18n("Advanced"));
         QVBoxLayout *pageTop = new QVBoxLayout(page);
-        pageTop->setMargin(marginHint());
-        pageTop->setSpacing(spacingHint());
+        //pageTop->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin));
+        //pageTop->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
         QGroupBox *group = new QGroupBox(page);
         group->setTitle( i18n("Registration Data") );
         pageTop->addWidget(group);
         QGridLayout *groupLayout = new QGridLayout(group);
-        groupLayout->setSpacing(spacingHint());
+        //groupLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
         label = new QLabel(i18n("Nickname:"), group);
         groupLayout->addWidget(label, 0, 0);
@@ -480,32 +490,42 @@ ConfigDialog::ConfigDialog(QWidget *parent)
 
         KGuiItem gi = KStandardGuiItem::clear();
         gi.setText(i18n("Remove"));
-        _removeButton = new KPushButton(gi, group);
-        groupLayout->addWidget(_removeButton, 2, 0);
+        _removeButton = new QPushButton(group);
+	KGuiItem::assign(_removeButton, gi);
+	groupLayout->addWidget(_removeButton, 2, 0);
         connect(_removeButton, SIGNAL(clicked()), SLOT(removeSlot()));
     }
+    
+    buttonBox = new QDialogButtonBox(this);
+    
+    buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel); 
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    // TODO mapping for Apply button
+    pageTop->addWidget(buttonBox);
 
     load();
-    enableButtonOk( !_nickname->text().isEmpty() );
-    enableButtonApply(false);
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled( !_nickname->text().isEmpty() );
+    buttonBox->button(QDialogButtonBox::Apply)->setEnabled( false );
+    
 }
 
 void ConfigDialog::nickNameChanged(const QString &text)
 {
-    enableButtonOk( !text.isEmpty() );
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled( !text.isEmpty() );
 }
 
 
 void ConfigDialog::modifiedSlot()
 {
-    enableButtonApply(true && !_nickname->text().isEmpty() );
+    buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true && !_nickname->text().isEmpty() );
 }
 
 void ConfigDialog::accept()
 {
     if ( save() ) {
-        KDialog::accept();
-        KGlobal::config()->sync(); // safer
+        QDialog::accept();
+        KSharedConfig::openConfig()->sync(); // safer
     }
 }
 
@@ -570,7 +590,7 @@ bool ConfigDialog::save()
         internal->modifySettings(newName, _comment->text(), enabled, this);
     if (res) {
         load(); // needed to update view when "apply" is clicked
-        enableButtonApply(false);
+        buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
     }
     _saved = true;
     return res;
@@ -578,45 +598,49 @@ bool ConfigDialog::save()
 
 //-----------------------------------------------------------------------------
 AskNameDialog::AskNameDialog(QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
 //     kDebug(11001) << ": AskNameDialog";
 
-    setCaption( i18n("Enter Your Nickname") );
-    setButtons( Ok | Cancel );
-    setDefaultButton( Ok );
+    setWindowTitle( i18n("Enter Your Nickname") );
 
     internal->hsConfig().readCurrentConfig();
-    QWidget *main = new QWidget( this );
-    setMainWidget( main );
-    QVBoxLayout *top = new QVBoxLayout( main );
-    top->setMargin( marginHint() );
-    top->setSpacing( spacingHint() );
-
+    QVBoxLayout *top = new QVBoxLayout;
+    //top->setMargin( QApplication::style()->pixelMetric(QStyle::PM_DefaultChildMargin) );
+    //top->setSpacing( QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing) );
+    setLayout(top);
+        
     QLabel *label =
-        new QLabel(i18n("Congratulations, you have won!"), main);
+        new QLabel(i18n("Congratulations, you have won!"), this);
     top->addWidget(label);
 
     QHBoxLayout *hbox = new QHBoxLayout;
     top->addLayout(hbox);
-    label = new QLabel(i18n("Enter your nickname:"), main);
+    label = new QLabel(i18n("Enter your nickname:"), this);
     hbox->addWidget(label);
-    _edit = new QLineEdit(main);
+    _edit = new QLineEdit(this);
     _edit->setFocus();
     connect(_edit, SIGNAL(textChanged(QString)), SLOT(nameChanged()));
     hbox->addWidget(_edit);
 
-    top->addSpacing(spacingHint());
-    _checkbox = new QCheckBox(i18n("Do not ask again."),  main);
+    //top->addSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    _checkbox = new QCheckBox(i18n("Do not ask again."),  this);
     top->addWidget(_checkbox);
+    
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+    
+    buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel); 
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    top->addWidget(buttonBox);
 
-    nameChanged();
+    nameChanged(buttonBox);
 }
 
-void AskNameDialog::nameChanged()
+void AskNameDialog::nameChanged(QDialogButtonBox *box)
 {
-    enableButtonOk( !name().isEmpty()
-                    && !internal->playerInfos().isNameUsed(name()) );
+    box->button(QDialogButtonBox::Ok)->setEnabled( !name().isEmpty()
+                      && !internal->playerInfos().isNameUsed(name())); 
 }
 
 } // namespace

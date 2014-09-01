@@ -26,12 +26,13 @@
 #include <kstandardshortcut.h>
 #include <ktoggleaction.h>
 #include <kconfig.h>
-#include <kdebug.h>
 #include <kicon.h>
 #include <krecentfilesaction.h>
 
 #undef I18N_NOOP2
 #define I18N_NOOP2(ctx,txt) ctx, txt
+
+Q_LOGGING_CATEGORY(GAMES_UI, "games.ui")
 
 struct KStandardGameActionInfo
 {
@@ -92,9 +93,11 @@ static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGame
 QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
                                      QObject* parent )
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.ui.debug = true"));
+    
     QAction* pAction = 0;
     const KStandardGameActionInfo* pInfo = infoPtr( id );
-    kDebug(125) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << "," << parent << " )";
+    qCDebug(GAMES_UI) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << "," << parent << " )";
     if( pInfo ) {
         QString sLabel = i18nc(pInfo->psLabelContext, pInfo->psLabel);
         bool do_connect = (recvr && slot); //both not 0

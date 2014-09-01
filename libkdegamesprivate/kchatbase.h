@@ -21,6 +21,7 @@
 #define __KCHATBASE_H__
 
 #include <QtWidgets/QFrame>
+#include <QLoggingCategory>
 
 #include <kcompletion.h>
 #include "libkdegamesprivate_export.h"
@@ -32,6 +33,9 @@ class KChatBaseModel;
 class KChatBaseItemDelegate;
 class QModelIndex;
 class QPoint;
+
+Q_DECLARE_LOGGING_CATEGORY(GAMES_BACKGAMMON)
+Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 /**
  * \class KChatBase kchatbase.h <KChatBase>

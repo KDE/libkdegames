@@ -23,10 +23,10 @@
 //Added by qt3to4:
 #include <QLabel>
 #include <QHBoxLayout>
-#include <kglobal.h>
-#include <kdialog.h>
-#include <kdebug.h>
-#include <kvbox.h>
+#include <QtCore/QLocale>
+#include <QWidget>
+#include <QApplication>
+
 #include <kpagedialog.h>
 #include "khighscore.h"
 #include "kexthighscore_internal.h"
@@ -136,7 +136,7 @@ QString Item::pretty(uint, const QVariant &value) const
         return timeFormat(value.toUInt());
     case DateTime:
         if ( value.toDateTime().isNull() ) return QLatin1String( "--" );
-        return KGlobal::locale()->formatDateTime(value.toDateTime());
+        return QLocale().toString(value.toDateTime());
     case NoSpecial:
         break;
     }
@@ -244,15 +244,19 @@ void MultiplayerScores::addScore(uint i, const Score &score)
 
 void MultiplayerScores::show(QWidget *parent)
 {
+    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+    
     // check consistency
-    if ( _nbGames.size()<2 ) kWarning(11002) << "less than 2 players";
+    if ( _nbGames.size()<2 ) 
+	qCWarning(GAMES_HIGHSCORE) << "less than 2 players";
+    
     else {
         bool ok = true;
         uint nb = _nbGames[0];
         for (int i=1; i<_nbGames.size(); i++)
             if ( _nbGames[i]!=nb ) ok = false;
         if (!ok)
-           kWarning(11002) << "players have not same number of games";
+           qCWarning(GAMES_HIGHSCORE) << "players have not same number of games";
     }
 
     // order the players according to the number of won games
@@ -280,10 +284,10 @@ void MultiplayerScores::show(QWidget *parent)
     dialog.setFaceType(KPageDialog::Plain);
     KPageWidgetItem *page = new KPageWidgetItem( new QLabel(QLatin1String( "" )), QLatin1String( "" ) );
     QHBoxLayout *hbox = new QHBoxLayout(page->widget());
-    hbox->setMargin(KDialog::marginHint());
-    hbox->setSpacing(KDialog::spacingHint());
+    //hbox->setMargin(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+    //hbox->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
-    KVBox *vbox = new KVBox(page->widget());
+    QWidget *vbox = new QWidget(page->widget());
     hbox->addWidget(vbox);
     if ( _nbGames[0]==0 ) (void)new QLabel(i18n("No game played."), vbox);
     else {
@@ -292,7 +296,7 @@ void MultiplayerScores::show(QWidget *parent)
     }
 
     if ( _nbGames[0]>1 ) {
-        vbox = new KVBox(page->widget());
+        vbox = new QWidget(page->widget());
         hbox->addWidget(vbox);
         (void)new QLabel(i18n("Scores for the last %1 games:",
                           _nbGames[0]), vbox);

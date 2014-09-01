@@ -24,6 +24,7 @@
 #include <libkdegames_export.h>
 
 #include <QtCore/QObject>
+#include <QLoggingCategory>
 
 class KConfig;
 
@@ -299,4 +300,5 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         KHighscorePrivate* const d;
 };
 
+Q_DECLARE_LOGGING_CATEGORY(GAMES_HIGHSCORE)
 #endif

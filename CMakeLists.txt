@@ -2,15 +2,18 @@ enable_testing()
 
 project(libkdegames)
 
+cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+set (QT_MIN_VERSION "5.2.0")
+
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 
-find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick Svg Test)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick QuickWidgets Svg Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config ItemModels WidgetsAddons WindowSystem Codecs Archive
     Config DBusAddons DNSSD Declarative
     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes FrameworkIntegration Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
-    Bookmarks KIO NotifyConfig NewStuff KDE4Support)
+    Bookmarks KIO NotifyConfig NewStuff KDELibs4Support)
 
 include(FeatureSummary)
 include(KDEInstallDirs)
@@ -76,8 +79,8 @@ if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     set(KGAUDIO_BACKEND openal)
     set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
-    message (STATUS "FALLBACK LIBRARY FOR SOUND: " ${KDE4_PHONON_LIBS})
-    set(KGAUDIO_LINKLIBS ${KDE4_PHONON_LIBS})
+    message (STATUS "FALLBACK LIBRARY FOR SOUND: " Phonon:phonon4qt5)
+    set(KGAUDIO_LINKLIBS phonon:phonon4qt5)
     set(KGAUDIO_BACKEND phonon)
     set(KGAUDIO_BACKEND_PHONON TRUE) # for configure_file() below
 endif (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
@@ -118,8 +121,8 @@ endif(Q_WS_X11)
 
 add_library(kdegames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames KF5::KIOWidgets KF5::NewStuff KF5::KDE4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick KF5::Declarative ${KGAUDIO_LINKLIBS})
-target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES KF5::KDE4Support)
+target_link_libraries(kdegames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick Qt5::QuickWidgets KF5::Declarative ${KGAUDIO_LINKLIBS})
+target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
 
 #NOTE: 6.0.0 = KDE 4.9 release
 set(KDEGAMES_VERSION 6.1.0)

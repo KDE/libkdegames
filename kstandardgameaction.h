@@ -24,11 +24,15 @@
 
 #include <libkdegames_export.h>
 
+#include <QLoggingCategory>
+
 class QAction;
 class KToggleAction;
 class QObject;
 class KRecentFilesAction;
 class KSelectAction;
+
+Q_DECLARE_LOGGING_CATEGORY(GAMES_UI)
 
 /**
  * Extension for KStandardAction in KDE Games
