@@ -29,8 +29,8 @@ this software.
 
 #include <KConfig>
 #include <KUser>
-#include <KLocale>
 #include <KSeparator>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KLineEdit>
 

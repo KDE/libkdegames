@@ -2,7 +2,6 @@
 #include <KApplication>
 #include <KActionCollection>
 #include <KCmdLineArgs>
-#include <KLocale>
 #include <QGraphicsScene>
 #include <QTimer>
 #include <KDebug>

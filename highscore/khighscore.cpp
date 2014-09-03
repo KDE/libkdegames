@@ -23,8 +23,8 @@
 
 #include <KConfig>
 #include <KStandardGuiItem>
-#include <KLocale>
 #include <KMessageBox>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QtCore/QFile>

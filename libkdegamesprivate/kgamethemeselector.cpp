@@ -20,7 +20,6 @@
 #include "kgamethemeselector.h"
 
 #include <KIcon>
-#include <KLocale>
 #include <KConfigSkeleton>
 #include <KNS3/DownloadDialog>
 
