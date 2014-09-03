@@ -16,7 +16,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include <QtGui/QApplication>
+#include <QApplication>
 
 /*
  * This file is only compiled on Q_WS_X11 (see CMakeLists.txt). It chooses the
