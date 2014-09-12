@@ -25,6 +25,8 @@ add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
 include_directories(${KDE4_INCLUDES} ${CMAKE_SOURCE_DIR}/includes)
 
+find_package(Phonon4Qt5 REQUIRED)
+
 find_package(OpenAL)
 set_package_properties(OPENAL PROPERTIES
                        URL "http://connect.creativelabs.com/openal"
@@ -80,7 +82,7 @@ if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     message (STATUS "FALLBACK LIBRARY FOR SOUND: " Phonon:phonon4qt5)
-    set(KGAUDIO_LINKLIBS phonon:phonon4qt5)
+    set(KGAUDIO_LINKLIBS "Phonon::phonon4qt5")
     set(KGAUDIO_BACKEND phonon)
     set(KGAUDIO_BACKEND_PHONON TRUE) # for configure_file() below
 endif (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)

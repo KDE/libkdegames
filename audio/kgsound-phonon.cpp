@@ -18,7 +18,7 @@
 
 #include "kgsound.h"
 
-#include <Phonon/MediaObject>
+#include <phonon/MediaObject>
 #include <QDateTime>
 
 class KgSound::Private
@@ -47,9 +47,9 @@ KgSound::KgSound(const QString& file, QObject* parent)
 	, d(new Private)
 {
 	d->m_sound1 = Phonon::createPlayer(Phonon::GameCategory);
-	d->m_sound1->setCurrentSource(file);
+	d->m_sound1->setCurrentSource(QUrl::fromLocalFile(file));
 	d->m_sound2 = Phonon::createPlayer(Phonon::GameCategory);
-	d->m_sound2->setCurrentSource(file);
+	d->m_sound2->setCurrentSource(QUrl::fromLocalFile(file));
 	d->m_valid = d->m_sound1->isValid() && d->m_sound2->isValid();
 }
 
@@ -165,4 +165,4 @@ void KgSound::stop()
 	d->m_sound2->stop();
 }
 
-#include "kgsound.moc"
+#include "moc_kgsound.cpp"

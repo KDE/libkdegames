@@ -18,7 +18,7 @@
 
 #include "kgaudioscene.h"
 
-#include <Phonon/AudioOutput>
+#include <phonon/AudioOutput>
 
 KgAudioScene::Capabilities KgAudioScene::capabilities()
 {
