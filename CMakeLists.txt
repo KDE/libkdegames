@@ -82,6 +82,7 @@ if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
     message (STATUS "FALLBACK LIBRARY FOR SOUND: " Phonon:phonon4qt5)
+    include_directories(${PHONON_INCLUDES})
     set(KGAUDIO_LINKLIBS "Phonon::phonon4qt5")
     set(KGAUDIO_BACKEND phonon)
     set(KGAUDIO_BACKEND_PHONON TRUE) # for configure_file() below
