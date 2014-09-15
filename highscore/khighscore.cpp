@@ -21,6 +21,7 @@
 #include "khighscore.h"
 #include <config-highscore.h>
 
+#include <KSharedConfig>
 #include <KConfig>
 #include <KStandardGuiItem>
 #include <KMessageBox>
