@@ -11,11 +11,16 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PAT
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick QuickWidgets Svg Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config WidgetsAddons Codecs Archive
-    Config DBusAddons DNSSD Declarative
+    DBusAddons DNSSD Declarative
     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
     Bookmarks KIO NewStuff KDELibs4Support)
 
 include(FeatureSummary)
+include(GenerateExportHeader)
+include(ECMPackageConfigHelpers)
+include(ECMSetupVersion)
+include(ECMGenerateHeaders)
+include(ECMMarkNonGuiExecutable)
 include(KDEInstallDirs)
 include(KDECompilerSettings)
 include(KDECMakeSettings)
@@ -23,7 +28,7 @@ include(KDECMakeSettings)
 add_definitions(${QT_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
-include_directories(${KDE4_INCLUDES} ${CMAKE_SOURCE_DIR}/includes)
+include_directories(${CMAKE_SOURCE_DIR}/includes)
 
 find_package(Phonon4Qt5 REQUIRED)
 
@@ -122,21 +127,33 @@ if(Q_WS_X11)
 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
 endif(Q_WS_X11)
 
-add_library(kdegames SHARED ${kdegames_LIB_SRCS})
+add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
 
-target_link_libraries(kdegames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick Qt5::QuickWidgets KF5::Declarative ${KGAUDIO_LINKLIBS})
-target_link_libraries(kdegames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
+target_link_libraries(KF5KDEGames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick Qt5::QuickWidgets KF5::Declarative ${KGAUDIO_LINKLIBS})
+target_link_libraries(KF5KDEGames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
+
+target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KDEGames>" INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KDEGames/KDE>" INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}>")
 
 #NOTE: 6.0.0 = KDE 4.9 release
 set(KDEGAMES_VERSION 6.1.0)
 set(KDEGAMES_SOVERSION 6)
 
-set_target_properties(kdegames PROPERTIES
+set_target_properties(KF5KDEGames PROPERTIES VERSION   ${KDEGAMES_VERSION}
+                                             SOVERSION ${KDEGAMES_SOVERSION}
+                                             EXPORT_NAME KDEGames
+)
+
+ecm_setup_version(${KDEGAMES_VERSION} VARIABLE_PREFIX KDEGAMES
+                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDEGamesConfigVersion.cmake"
+                        SOVERSION 6)
+
+set_target_properties(KF5KDEGames PROPERTIES
     VERSION   ${KDEGAMES_VERSION}
     SOVERSION ${KDEGAMES_SOVERSION}
 )
 
-install(TARGETS kdegames EXPORT KDEGamesLibraryDepends
+install(TARGETS KF5KDEGames EXPORT KDEGamesLibraryDepends
     ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### next target ###############
@@ -172,17 +189,17 @@ ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
     libkdegamesprivate/kgamethemeselector.ui
 )
 
-add_library(kdegamesprivate SHARED ${kdegamesprivate_LIB_SRCS})
+add_library(KF5KDEGamesPrivate SHARED ${kdegamesprivate_LIB_SRCS})
 
-target_link_libraries(kdegamesprivate KF5::DNSSD KF5::NewStuff KF5::Archive Qt5::Xml Qt5::Network kdegames)
-target_link_libraries(kdegamesprivate LINK_INTERFACE_LIBRARIES Qt5::Xml Qt5::Network kdegames)
+target_link_libraries(KF5KDEGamesPrivate KF5::DNSSD KF5::NewStuff KF5::Archive Qt5::Xml Qt5::Network KF5KDEGames)
+target_link_libraries(KF5KDEGamesPrivate LINK_INTERFACE_LIBRARIES Qt5::Xml Qt5::Network KF5KDEGames)
 
-set_target_properties(kdegamesprivate PROPERTIES
+set_target_properties(KF5KDEGamesPrivate PROPERTIES
     VERSION   1.0.0
     SOVERSION 1
 )
 
-install(TARGETS kdegamesprivate EXPORT KDEGamesLibraryDepends
+install(TARGETS KF5KDEGamesPrivate EXPORT KDEGamesLibraryDepends
     ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
@@ -208,34 +225,33 @@ install(FILES
     kgthemeprovider.h
     kgthemeselector.h
     kstandardgameaction.h
-DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KDEGames COMPONENT Devel)
 
 ########### generate exports ###############
 
 # add libraries to the build-tree export set
-export(TARGETS kdegames kdegamesprivate
+export(TARGETS KF5KDEGames KF5KDEGamesPrivate
     FILE "${PROJECT_BINARY_DIR}/KDEGamesLibraryDepends.cmake")
 
 # define the installation directory for the CMake files
-set(CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/KDEGames)
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KDEGames")
 
 # create the Config.cmake and ConfigVersion.cmake files
-file(RELATIVE_PATH CONF_REL_INCLUDE_DIR
-    "${CMAKE_INSTALL_PREFIX}/${CMAKECONFIG_INSTALL_DIR}"
-    "${CMAKE_INSTALL_PREFIX}/${INCLUDE_INSTALL_DIR}")
-configure_file(KDEGamesConfig.cmake.in
-    "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake" @ONLY)
-configure_file(KDEGamesConfigVersion.cmake.in
-    "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake" @ONLY)
+ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KDEGamesConfig.cmake.in"
+                              "${CMAKE_CURRENT_BINARY_DIR}/KDEGamesConfig.cmake"
+                              INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+                              )
 
-install(FILES
-    "${PROJECT_BINARY_DIR}/KDEGamesConfig.cmake"
-    "${PROJECT_BINARY_DIR}/KDEGamesConfigVersion.cmake"
-DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
+install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KDEGamesConfig.cmake"
+               "${CMAKE_CURRENT_BINARY_DIR}/KDEGamesConfigVersion.cmake"
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel )
 
 # install the export set for use with the install-tree
 install(EXPORT KDEGamesLibraryDepends DESTINATION
     ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
+	
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h  DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KDEGames  COMPONENT Devel)
 
 feature_summary(WHAT ALL
                 INCLUDE_QUIET_PACKAGES

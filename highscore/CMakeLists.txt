@@ -5,5 +5,5 @@ install(FILES
    kscoredialog.h
    kexthighscore_item.h
    kexthighscore.h
-DESTINATION ${INCLUDE_INSTALL_DIR}/highscore COMPONENT Devel)
+DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KDEGames/highscore COMPONENT Devel)
 

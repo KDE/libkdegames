@@ -3,4 +3,4 @@
 install(FILES
     kgaudioscene.h
     kgsound.h
-DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KDEGames COMPONENT Devel)

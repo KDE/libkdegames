@@ -10,7 +10,7 @@ MACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
                ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${_testname}.ui)
 
                add_executable(${_testname} TEST ${${_testname}_SRCS})
-               target_link_libraries(${_testname}  ${KDE4_KDEGAMES_LIBS} Qt5::Test kdegames)
+               target_link_libraries(${_testname}  ${KDE4_KDEGAMES_LIBS} Qt5::Test KF5KDEGames)
        ENDFOREACH(_testname)
 ENDMACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
 
