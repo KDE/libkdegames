@@ -10,5 +10,5 @@ set(KDEGAMES_INCLUDE_DIR "${KDEGAMES_CMAKE_DIR}/@CONF_REL_INCLUDE_DIR@")
 set(KDEGAMES_INCLUDE_DIRS "${KDEGAMES_INCLUDE_DIR}" "${KDEGAMES_INCLUDE_DIR}/KDE")
 
 # import our library dependencies
-include("${KDEGAMES_CMAKE_DIR}/KDEGamesLibraryDepends.cmake")
+include("${KDEGAMES_CMAKE_DIR}/KF5KDEGamesLibraryDepends.cmake")
 set(KDEGAMES_LIBRARY KF5KDEGames)
