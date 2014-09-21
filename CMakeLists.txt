@@ -28,6 +28,8 @@ include(KDECMakeSettings)
 add_definitions(${QT_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
+add_definitions(-DTRANSLATION_DOMAIN="libkdegames")
+
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 
 find_package(Phonon4Qt5 REQUIRED)
