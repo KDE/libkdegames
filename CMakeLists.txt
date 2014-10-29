@@ -15,10 +15,10 @@ if(NOT COMPILING_KDEGAMES)
 endif(NOT COMPILING_KDEGAMES)
 
 macro_optional_find_package(OpenAL)
-macro_log_feature(OPENAL_FOUND "OpenAL" "OpenAL (Open Audio Library) is a free software cross-platform audio API." "http://connect.creativelabs.com/openal" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
+macro_log_feature(OPENAL_FOUND "OpenAL" "OpenAL (Open Audio Library) is a free software cross-platform audio API." "http://connect.creativelabs.com/openal" TRUE "" "")
 
 macro_optional_find_package(SndFile)
-macro_log_feature(SNDFILE_FOUND "SndFile" "libsndfile is a C library written by Erik de Castro Lopo for reading and writing audio files." "http://www.mega-nerd.com/libsndfile/" FALSE "" "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile.")
+macro_log_feature(SNDFILE_FOUND "SndFile" "libsndfile is a C library written by Erik de Castro Lopo for reading and writing audio files." "http://www.mega-nerd.com/libsndfile/" TRUE "" "")
 
 find_package(KDeclarative)
 macro_log_feature(KDECLARATIVE_FOUND "KDeclarative" "KDeclarative is a KDE library for KDE specific QML support." "http://kde.org" TRUE "" "KDeclarative library is required for QML support in KDE Games.")
@@ -58,19 +58,12 @@ if (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
     endif (NOT SNDFILE_WORKS)
 endif (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
 
-if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
-    message (STATUS "INCLUDES FOR SOUND:  " ${OPENAL_INCLUDE_DIR} " " ${SNDFILE_INCLUDE_DIR})
-    message (STATUS "LIBRARIES FOR SOUND: " ${OPENAL_LIBRARY} " " ${SNDFILE_LIBRARIES})
-    include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIR})
-    set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
-    set(KGAUDIO_BACKEND openal)
-    set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
-else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
-    message (STATUS "FALLBACK LIBRARY FOR SOUND: " ${KDE4_PHONON_LIBS})
-    set(KGAUDIO_LINKLIBS ${KDE4_PHONON_LIBS})
-    set(KGAUDIO_BACKEND phonon)
-    set(KGAUDIO_BACKEND_PHONON TRUE) # for configure_file() below
-endif (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
+message (STATUS "INCLUDES FOR SOUND:  " ${OPENAL_INCLUDE_DIR} " " ${SNDFILE_INCLUDE_DIR})
+message (STATUS "LIBRARIES FOR SOUND: " ${OPENAL_LIBRARY} " " ${SNDFILE_LIBRARIES})
+include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIR})
+set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
+set(KGAUDIO_BACKEND openal)
+set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 
