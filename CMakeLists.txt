@@ -32,20 +32,14 @@ add_definitions(-DTRANSLATION_DOMAIN="libkdegames")
 
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 
-find_package(Phonon4Qt5 REQUIRED)
-
-find_package(OpenAL)
+find_package(OpenAL REQUIRED)
 set_package_properties(OPENAL PROPERTIES
                        URL "http://connect.creativelabs.com/openal"
-                       TYPE RECOMMENDED 
-                       PURPOSE "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile"
                       )
 
-find_package(SndFile)
+find_package(SndFile REQUIRED)
 set_package_properties(SndFile PROPERTIES
                        URL "http://www.mega-nerd.com/libsndfile/"
-                       TYPE RECOMMENDED
-                       PURPOSE "Phonon is used as a fallback, but low-latency sound output is only available with OpenAL/SndFile"
                       )
 
 set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores e.g. /var/games")
@@ -80,20 +74,12 @@ if (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
     endif (NOT SNDFILE_WORKS)
 endif (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
 
-if (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
-    message (STATUS "INCLUDES FOR SOUND:  " ${OPENAL_INCLUDE_DIR} " " ${SNDFILE_INCLUDE_DIR})
-    message (STATUS "LIBRARIES FOR SOUND: " ${OPENAL_LIBRARY} " " ${SNDFILE_LIBRARIES})
-    include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIR})
-    set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
-    set(KGAUDIO_BACKEND openal)
-    set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
-else (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
-    message (STATUS "FALLBACK LIBRARY FOR SOUND: " Phonon:phonon4qt5)
-    include_directories(${PHONON_INCLUDES})
-    set(KGAUDIO_LINKLIBS "Phonon::phonon4qt5")
-    set(KGAUDIO_BACKEND phonon)
-    set(KGAUDIO_BACKEND_PHONON TRUE) # for configure_file() below
-endif (OPENAL_FOUND AND SNDFILE_FOUND AND SNDFILE_WORKS)
+message (STATUS "INCLUDES FOR SOUND:  " ${OPENAL_INCLUDE_DIR} " " ${SNDFILE_INCLUDE_DIR})
+message (STATUS "LIBRARIES FOR SOUND: " ${OPENAL_LIBRARY} " " ${SNDFILE_LIBRARIES})
+include_directories(${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIR})
+set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
+set(KGAUDIO_BACKEND openal)
+set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 
