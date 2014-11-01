@@ -117,6 +117,8 @@ endif(Q_WS_X11)
 
 add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
 
+generate_export_header(KF5KDEGames BASE_NAME libkdegames EXPORT_MACRO_NAME KDEGAMES_EXPORT DEPRECATED_MACRO_NAME KDE_DEPRECATED)
+
 target_link_libraries(KF5KDEGames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick Qt5::QuickWidgets KF5::Declarative ${KGAUDIO_LINKLIBS})
 target_link_libraries(KF5KDEGames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
 
@@ -199,7 +201,7 @@ install(FILES kgthemeprovider-migration.upd
     DESTINATION ${DATA_INSTALL_DIR}/kconf_update)
 
 install(FILES
-    libkdegames_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_export.h
     ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h
     audio/kgaudioscene.h
     audio/kgsound.h
