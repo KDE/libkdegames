@@ -33,4 +33,4 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     setResizeMode(SizeRootObjectToView);
 }
 
-#include "kgdeclarativeview.moc"
+

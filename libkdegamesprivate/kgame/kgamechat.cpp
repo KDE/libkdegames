@@ -19,7 +19,7 @@
 */
 
 #include "kgamechat.h"
-#include "kgamechat.moc"
+
 
 #include "kgame.h"
 #include "kplayer.h"

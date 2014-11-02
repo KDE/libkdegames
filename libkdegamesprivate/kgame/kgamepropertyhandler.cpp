@@ -402,4 +402,4 @@ it.next();
  qDebug() << "-----------------------------------------------------------";
 }
 
-#include "kgamepropertyhandler.moc"
+

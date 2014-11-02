@@ -500,4 +500,4 @@ void KPlayer::Debug()
    qCDebug(GAMES_PRIVATE_KGAME) << "---------------------------------------------------";
 }
 
-#include "kplayer.moc"
+

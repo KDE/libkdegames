@@ -89,4 +89,4 @@ QSize KChatBaseItemDelegate::sizeHint(const QStyleOptionViewItem &  option ,
   return QSize(w,h);
 }
 
-#include "kchatbaseitemdelegate.moc"
+

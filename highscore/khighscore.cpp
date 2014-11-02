@@ -296,4 +296,4 @@ bool KHighscore::hasTable() const
     return config()->hasGroup(group());
 }
 
-#include "khighscore.moc"
+

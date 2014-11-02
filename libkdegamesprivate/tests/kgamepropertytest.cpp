@@ -87,4 +87,3 @@ void tst_KGamePropertyTest::cleanupTestCase()
 
 QTEST_MAIN(tst_KGamePropertyTest)
 
-#include "kgamepropertytest.moc"

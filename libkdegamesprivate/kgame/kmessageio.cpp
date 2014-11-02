@@ -363,5 +363,5 @@ void KMessageProcess::slotProcessExited(int exitCode, QProcess::ExitStatus)
   mProcess=0;
 }
 
-#include "kmessageio.moc"
+
 

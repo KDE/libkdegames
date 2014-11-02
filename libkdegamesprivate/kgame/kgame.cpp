@@ -19,7 +19,7 @@
 */
 
 #include "kgame.h"
-#include "kgame.moc"
+
 #include "kgamepropertyhandler.h"
 #include "kgameproperty.h"
 #include "kplayer.h"

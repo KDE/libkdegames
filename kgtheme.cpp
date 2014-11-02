@@ -152,4 +152,4 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	return true;
 }
 
-#include "kgtheme.moc"
+

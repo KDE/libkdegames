@@ -19,7 +19,7 @@
 */
 
 #include "kgamesequence.h"
-#include "kgamesequence.moc"
+
 
 #include "kplayer.h"
 #include "kgame.h"

@@ -19,7 +19,7 @@
 */
 
 #include "kgamenetwork.h"
-#include "kgamenetwork.moc"
+
 #include "kgamemessage.h"
 #include "kgameerror.h"
 

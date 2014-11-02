@@ -18,7 +18,7 @@
 */
 
 #include "kexthighscore_gui.h"
-#include "kexthighscore_gui.moc"
+
 
 #include <QLayout>
 #include <QTextStream>

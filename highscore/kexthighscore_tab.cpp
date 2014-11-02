@@ -18,7 +18,7 @@
 */
 
 #include "kexthighscore_tab.h"
-#include "kexthighscore_tab.moc"
+
 
 #include <QLayout>
 #include <QLabel>

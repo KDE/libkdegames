@@ -251,4 +251,4 @@ void KChatBaseModel::addSystemMessage(const QString& fromName, const QString& te
 }
 
 
-#include "kchatbasemodel.moc"
+

@@ -20,7 +20,7 @@
 */
 
 #include "kgameclock.h"
-#include "kgameclock.moc"
+
 
 #include <QTimer>
 

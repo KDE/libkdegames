@@ -19,7 +19,7 @@
 */
 
 #include "kgameio.h"
-#include "kgameio.moc"
+
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamemessage.h"

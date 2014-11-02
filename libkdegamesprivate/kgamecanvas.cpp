@@ -1025,4 +1025,4 @@ void KGameCanvasAdapter::invalidate(const QRect& r, bool)
     m_invalidated_rect |= r;
 }
 
-#include "kgamecanvas.moc"
+

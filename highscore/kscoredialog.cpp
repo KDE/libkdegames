@@ -709,4 +709,4 @@ void KScoreDialog::keyPressEvent(QKeyEvent *ev)
     QDialog::keyPressEvent(ev);
 }
 
-#include "kscoredialog.moc"
+
