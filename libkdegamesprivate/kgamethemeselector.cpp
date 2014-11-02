@@ -19,7 +19,7 @@
 
 #include "kgamethemeselector.h"
 
-#include <KIcon>
+#include <QIcon>
 #include <KConfigSkeleton>
 #include <KNS3/DownloadDialog>
 
@@ -69,7 +69,7 @@ KGameThemeSelector::~KGameThemeSelector()
 void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * aconfig, KGameThemeSelector::NewStuffState knsflags)
 {
     ui.setupUi(q);
-    ui.getNewButton->setIcon(KIcon( QLatin1String( "get-hot-new-stuff" )));
+    ui.getNewButton->setIcon(QIcon::fromTheme( QLatin1String( "get-hot-new-stuff" )));
 
     //The lineEdit widget holds our theme path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.

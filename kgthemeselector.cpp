@@ -88,7 +88,7 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 	//setup KNS button
 	if (options & EnableNewStuffDownload)
 	{
-		d->m_knsButton = new QPushButton(KIcon("get-hot-new-stuff"),
+		d->m_knsButton = new QPushButton(QIcon::fromTheme("get-hot-new-stuff"),
 			i18n("Get New Themes..."), this);
 		layout->addWidget(d->m_knsButton);
 		connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));

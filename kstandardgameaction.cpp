@@ -26,7 +26,7 @@
 #include <kstandardshortcut.h>
 #include <ktoggleaction.h>
 #include <kconfig.h>
-#include <kicon.h>
+#include <QIcon>
 #include <krecentfilesaction.h>
 
 #undef I18N_NOOP2
@@ -109,17 +109,17 @@ QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
             break;
         case Pause:
         case Demo:
-            pAction = new KToggleAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
+            pAction = new KToggleAction(QIcon::fromTheme(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
             break;
         case ChooseGameType:
-            pAction = new KSelectAction( KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
+            pAction = new KSelectAction( QIcon::fromTheme(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect( pAction, SIGNAL(triggered(int)), recvr, slot );
             break;
         default:
-            pAction = new QAction(KIcon(QLatin1String( pInfo->psIconName )), sLabel, parent);
+            pAction = new QAction(QIcon::fromTheme(QLatin1String( pInfo->psIconName )), sLabel, parent);
             if(do_connect)
                 QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
             break;
