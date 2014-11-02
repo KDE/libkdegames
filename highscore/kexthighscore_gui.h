@@ -33,7 +33,6 @@
 
 class QTabWidget;
 class KLineEdit;
-class KPushButton;
 class KUrlLabel;
 
 namespace KExtHighscore

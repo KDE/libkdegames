@@ -23,7 +23,6 @@
 
 #include <libkdegames_export.h>
 
-class KgThemeProvider;
 
 /**
  * @class KgDeclarativeView

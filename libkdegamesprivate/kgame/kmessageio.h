@@ -39,7 +39,6 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 class QTcpSocket;
 class KProcess;
-class QFile;
 
 
 /**
