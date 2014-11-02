@@ -89,10 +89,8 @@ void KMessageClient::setServer (KMessageIO *connection)
   d->connection = connection;
   if (connection )
   {
-    connect (connection, SIGNAL (received(QByteArray)),
-             this, SLOT (processIncomingMessage(QByteArray)));
-    connect (connection, SIGNAL (connectionBroken()),
-             this, SLOT (removeBrokenConnection()));
+    connect(connection, &KMessageIO::received, this, &KMessageClient::processIncomingMessage);
+    connect(connection, &KMessageIO::connectionBroken, this, &KMessageClient::removeBrokenConnection);
   }
 }
 

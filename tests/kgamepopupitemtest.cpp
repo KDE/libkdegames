@@ -14,7 +14,7 @@ KGpiMainWindow::KGpiMainWindow()
     QWidget *wid = new QWidget(this);
     m_mainWid.setupUi(wid);
     m_popupItem = new KGamePopupItem;
-    connect(m_popupItem, SIGNAL(linkActivated(QString)), SLOT(onLinkClicked(QString)) );
+    connect(m_popupItem, &KGamePopupItem::linkActivated, this, &KGpiMainWindow::onLinkClicked);
     m_textItem = new QGraphicsSimpleTextItem;
 
     actionCollection()->addAction( KStandardAction::Quit, this, SLOT(close()) );
@@ -36,22 +36,22 @@ KGpiMainWindow::KGpiMainWindow()
     m_mainWid.textColor->setColor( kcs.foreground(KColorScheme::NormalText).color() );
     m_mainWid.bkgndColor->setColor( kcs.background().color() );
 
-    connect( m_mainWid.popupTL, SIGNAL(clicked()), SLOT(onPopupTL()) );
-    connect( m_mainWid.popupTR, SIGNAL(clicked()), SLOT(onPopupTR()) );
-    connect( m_mainWid.popupBL, SIGNAL(clicked()), SLOT(onPopupBL()) );
-    connect( m_mainWid.popupBR, SIGNAL(clicked()), SLOT(onPopupBR()) );
-    connect( m_mainWid.popupCenter, SIGNAL(clicked()), SLOT(onPopupCenter()) );
-    connect( m_mainWid.forceInstantHide, SIGNAL(clicked()), SLOT(doInstantHide()) );
-    connect( m_mainWid.forceAnimatedHide, SIGNAL(clicked()), SLOT(doAnimatedHide()) );
-    connect( m_mainWid.changeIcon, SIGNAL(clicked()), SLOT(changeIcon()) );
-    connect( m_mainWid.opacity, SIGNAL(valueChanged(int)), SLOT(changeOpacity(int)) );
-    connect( m_mainWid.textColor, SIGNAL(changed(QColor)), SLOT(textColorChanged(QColor)));
-    connect( m_mainWid.bkgndColor, SIGNAL(changed(QColor)), SLOT(bkgndColorChanged(QColor)));
-    connect( m_mainWid.leavePrevious, SIGNAL(clicked()), SLOT(replaceModeChanged()));
-    connect( m_mainWid.replacePrevious, SIGNAL(clicked()), SLOT(replaceModeChanged()));
-    connect( m_mainWid.cornersType, SIGNAL(activated(int)), SLOT(sharpnessChanged(int)));
+    connect(m_mainWid.popupTL, &QPushButton::clicked, this, &KGpiMainWindow::onPopupTL);
+    connect(m_mainWid.popupTR, &QPushButton::clicked, this, &KGpiMainWindow::onPopupTR);
+    connect(m_mainWid.popupBL, &QPushButton::clicked, this, &KGpiMainWindow::onPopupBL);
+    connect(m_mainWid.popupBR, &QPushButton::clicked, this, &KGpiMainWindow::onPopupBR);
+    connect(m_mainWid.popupCenter, &QPushButton::clicked, this, &KGpiMainWindow::onPopupCenter);
+    connect(m_mainWid.forceInstantHide, &QPushButton::clicked, this, &KGpiMainWindow::doInstantHide);
+    connect(m_mainWid.forceAnimatedHide, &QPushButton::clicked, this, &KGpiMainWindow::doAnimatedHide);
+    connect(m_mainWid.changeIcon, &QPushButton::clicked, this, &KGpiMainWindow::changeIcon);
+    connect(m_mainWid.opacity, &QSlider::valueChanged, this, &KGpiMainWindow::changeOpacity);
+    connect(m_mainWid.textColor, &KColorButton::changed, this, &KGpiMainWindow::textColorChanged);
+    connect(m_mainWid.bkgndColor, &KColorButton::changed, this, &KGpiMainWindow::bkgndColorChanged);
+    connect(m_mainWid.leavePrevious, &QRadioButton::clicked, this, &KGpiMainWindow::replaceModeChanged);
+    connect(m_mainWid.replacePrevious, &QRadioButton::clicked, this, &KGpiMainWindow::replaceModeChanged);
+    connect(m_mainWid.cornersType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &KGpiMainWindow::sharpnessChanged);
 
-    connect( m_mainWid.mesTimeout, SIGNAL(valueChanged(int)), SLOT(onTimeoutChanged(int)) );
+    connect(m_mainWid.mesTimeout, static_cast<void (KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &KGpiMainWindow::onTimeoutChanged);
     m_mainWid.mesTimeout->setValue( m_popupItem->messageTimeout() );
     m_mainWid.mesTimeout->setSuffix( ki18np(" millisecond", " milliseconds") );
     m_mainWid.opacity->setValue( static_cast<int>(m_popupItem->messageOpacity()*100) );

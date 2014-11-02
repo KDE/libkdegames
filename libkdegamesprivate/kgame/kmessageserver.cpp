@@ -36,7 +36,7 @@ KMessageServerSocket::KMessageServerSocket (quint16 port, QObject *parent)
   : QTcpServer (parent)
 {
   listen ( QHostAddress::Any, port );
-  connect(this,SIGNAL(newConnection()),this,SLOT(slotNewConnection()));
+  connect(this, &KMessageServerSocket::newConnection, this, &KMessageServerSocket::slotNewConnection);
 }
 
 
@@ -148,8 +148,7 @@ bool KMessageServer::initNetwork (quint16 port)
 
   qCDebug(GAMES_PRIVATE_KGAME) << ": Now listening to port "
                   << d->mServerSocket->serverPort();
-  connect (d->mServerSocket, SIGNAL (newClientConnected(KMessageIO*)),
-           this, SLOT (addClient(KMessageIO*)));
+  connect(d->mServerSocket, &KMessageServerSocket::newClientConnected, this, &KMessageServer::addClient);
   return true;
 }
 

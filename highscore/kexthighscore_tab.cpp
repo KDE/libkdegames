@@ -46,7 +46,7 @@ PlayersCombo::PlayersCombo(QWidget *parent)
     for (uint i = 0; i<p.nbEntries(); i++)
         addItem(p.prettyName(i));
     addItem(QLatin1String("<") + i18n("all") + QLatin1Char( '>' ));
-    connect(this, SIGNAL(activated(int)), SLOT(activatedSlot(int)));
+    connect(this, static_cast<void (PlayersCombo::*)(int)>(&PlayersCombo::activated), this, &PlayersCombo::activatedSlot);
 }
 
 void PlayersCombo::activatedSlot(int i)
@@ -77,9 +77,8 @@ AdditionalTab::AdditionalTab(QWidget *parent)
     QLabel *label = new QLabel(i18n("Select player:"), this);
     hbox->addWidget(label);
     _combo = new PlayersCombo(this);
-    connect(_combo, SIGNAL(playerSelected(uint)),
-            SLOT(playerSelected(uint)));
-    connect(_combo, SIGNAL(allSelected()), SLOT(allSelected()));
+    connect(_combo, &PlayersCombo::playerSelected, this, &AdditionalTab::playerSelected);
+    connect(_combo, &PlayersCombo::allSelected, this, &AdditionalTab::allSelected);
     hbox->addWidget(_combo);
     hbox->addStretch(1);
 }

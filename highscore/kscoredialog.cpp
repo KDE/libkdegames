@@ -144,14 +144,14 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     if(d->newName.second == -1)
     {
       buttonBox->setStandardButtons(QDialogButtonBox::Close);
-      connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+      connect(buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
     }
     else
     {
        buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-       connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-       connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-       connect(buttonBox, SIGNAL(accepted()), SLOT(slotGotName()));
+       connect(buttonBox, &QDialogButtonBox::accepted, this, &KScoreDialog::accept);
+       connect(buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
+       connect(buttonBox, &QDialogButtonBox::accepted, this, &KScoreDialog::slotGotName);
     }
     
     mainLayout->addWidget(buttonBox);
@@ -427,7 +427,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                     localStack->addWidget(edit);
                     localStack->setCurrentWidget(edit);
                     edit->setFocus();
-                    connect(edit, SIGNAL(returnPressed()), q, SLOT(slotGotReturn()));
+                    connect(edit, &KLineEdit::returnPressed, q, &KScoreDialog::slotGotReturn);
                 }
                 else
                 {
@@ -592,10 +592,10 @@ int KScoreDialog::addScore(const FieldInfo& newInfo, const AddScoreFlags& flags)
 		buttonBox->button(QDialogButtonBox::Ok)->setToolTip(i18n("Remember this high score"));
 		buttonBox->button(QDialogButtonBox::Cancel)->setToolTip(i18n("Forget this high score"));
                 
-                connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-		connect(buttonBox, SIGNAL(accepted()), SLOT(slotGotName()));
-		connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-		connect(buttonBox, SIGNAL(rejected()), SLOT(slotForgetScore()));
+                connect(buttonBox, &QDialogButtonBox::accepted, this, &KScoreDialog::accept);
+		connect(buttonBox, &QDialogButtonBox::accepted, this, &KScoreDialog::slotGotName);
+		connect(buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
+		connect(buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::slotForgetScore);
             }
             else
                 d->saveScores();
@@ -663,7 +663,7 @@ void KScoreDialog::slotGotName()
     delete buttonBox;
     buttonBox = new QDialogButtonBox(this);
     buttonBox->setStandardButtons(QDialogButtonBox::Close);
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
 }
 
 void KScoreDialog::slotForgetScore()
@@ -684,7 +684,7 @@ void KScoreDialog::slotForgetScore()
     delete buttonBox;
     buttonBox = new QDialogButtonBox(this);
     buttonBox->setStandardButtons(QDialogButtonBox::Close);
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
 }
 
 

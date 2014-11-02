@@ -175,12 +175,9 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     // So disabling it
     d->m_textChildItem->setFlag( QGraphicsItem::ItemIsFocusable, false );
 
-    connect( d->m_textChildItem, SIGNAL(linkActivated(QString)),
-                                 SIGNAL(linkActivated(QString)));
-    connect( d->m_textChildItem, SIGNAL(linkHovered(QString)),
-                                 SLOT(onLinkHovered(QString)));
-    connect( d->m_textChildItem, SIGNAL(mouseClicked()),
-                                 SLOT(onTextItemClicked()) );
+    connect(d->m_textChildItem, &TextItemWithOpacity::linkActivated, this, &KGamePopupItem::linkActivated);
+    connect(d->m_textChildItem, &TextItemWithOpacity::linkHovered, this, &KGamePopupItem::onLinkHovered);
+    connect(d->m_textChildItem, &TextItemWithOpacity::mouseClicked, this, &KGamePopupItem::onTextItemClicked);
 
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
@@ -199,9 +196,9 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     d->m_brush = KStatefulBrush( KColorScheme::Tooltip, KColorScheme::NormalBackground );
     d->m_textChildItem->setTextColor( KStatefulBrush(KColorScheme::Tooltip, KColorScheme::NormalText) );
 
-    connect( &d->m_timeLine, SIGNAL(frameChanged(int)), SLOT(animationFrame(int)) );
-    connect( &d->m_timeLine, SIGNAL(finished()), SLOT(hideMe()));
-    connect( &d->m_timer, SIGNAL(timeout()), SLOT(playHideAnimation()) );
+    connect(&d->m_timeLine, &QTimeLine::frameChanged, this, &KGamePopupItem::animationFrame);
+    connect(&d->m_timeLine, &QTimeLine::finished, this, &KGamePopupItem::hideMe);
+    connect(&d->m_timer, &QTimer::timeout, this, &KGamePopupItem::playHideAnimation);
 }
 
 void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )

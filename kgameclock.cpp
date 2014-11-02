@@ -42,7 +42,7 @@ KGameClock::KGameClock(QObject *parent, KGameClock::ClockType clocktype)
 {
     d->clocktype = clocktype;
     d->timerClock = new QTimer(this);
-    connect(d->timerClock, SIGNAL(timeout()), SLOT(timeoutClock()));
+    connect(d->timerClock, &QTimer::timeout, this, &KGameClock::timeoutClock);
 }
 
 KGameClock::~KGameClock()

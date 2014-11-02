@@ -103,12 +103,9 @@ KGame::KGame(int cookie,QObject* parent)
  d->mRandom = new KRandomSequence;
  d->mRandom->setSeed(0);
 
- connect(this, SIGNAL(signalClientConnected(quint32)),
-                this, SLOT(slotClientConnected(quint32)));
- connect(this, SIGNAL(signalClientDisconnected(quint32,bool)),
-                this, SLOT(slotClientDisconnected(quint32,bool)));
- connect(this, SIGNAL(signalConnectionBroken()),
-                this, SLOT(slotServerDisconnected()));
+ connect(this, &KGame::signalClientConnected, this, &KGame::slotClientConnected);
+ connect(this, &KGame::signalClientDisconnected, this, &KGame::slotClientDisconnected);
+ connect(this, &KGame::signalConnectionBroken, this, &KGame::slotServerDisconnected);
 
  setGameSequence(new KGameSequence());
 

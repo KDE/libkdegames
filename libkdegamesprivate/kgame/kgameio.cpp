@@ -320,11 +320,9 @@ KGameProcessIO::KGameProcessIO(const QString& name)
   //        this, SLOT(clientMessage(QByteArray,quint32)));
   //connect(d->mMessageClient, SIGNAL(forwardReceived(QByteArray,quint32,QValueList<quint32>)),
   //        this, SLOT(clientMessage(QByteArray,quint32,QValueList<quint32>)));
-  connect(d->mProcessIO, SIGNAL(received(QByteArray)),
-          this, SLOT(receivedMessage(QByteArray)));
+  connect(d->mProcessIO, &KMessageProcess::received, this, &KGameProcessIO::receivedMessage);
   // Relay signal
-  connect(d->mProcessIO, SIGNAL(signalReceivedStderr(QString)),
-          this, SIGNAL(signalReceivedStderr(QString)));
+  connect(d->mProcessIO, &KMessageProcess::signalReceivedStderr, this, &KGameProcessIO::signalReceivedStderr);
   //qCDebug(GAMES_PRIVATE_KGAME) << "Our client is id="<<d->mMessageClient->id();
 }
 
@@ -535,7 +533,7 @@ void KGameComputerIO::setAdvancePeriod(int ms)
 {
   stopAdvancePeriod();
   d->mAdvanceTimer = new QTimer(this);
-  connect(d->mAdvanceTimer, SIGNAL(timeout()), this, SLOT(advance()));
+  connect(d->mAdvanceTimer, &QTimer::timeout, this, &KGameComputerIO::advance);
   d->mAdvanceTimer->start(ms);
 }
 

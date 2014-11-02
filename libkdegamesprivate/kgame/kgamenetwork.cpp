@@ -120,21 +120,14 @@ void KGameNetwork::setMaster()
  }
  if (!d->mMessageClient) {
    d->mMessageClient = new KMessageClient (this);
-   connect (d->mMessageClient, SIGNAL(broadcastReceived(QByteArray,quint32)),
-            this, SLOT(receiveNetworkTransmission(QByteArray,quint32)));
-   connect (d->mMessageClient, SIGNAL(connectionBroken()),
-            this, SIGNAL(signalConnectionBroken()));
-   connect (d->mMessageClient, SIGNAL(aboutToDisconnect(quint32)),
-            this, SLOT(aboutToLoseConnection(quint32)));
-   connect (d->mMessageClient, SIGNAL(connectionBroken()),
-            this, SLOT(slotResetConnection()));
+   connect(d->mMessageClient, &KMessageClient::broadcastReceived, this, &KGameNetwork::receiveNetworkTransmission);
+   connect(d->mMessageClient, &KMessageClient::connectionBroken, this, &KGameNetwork::signalConnectionBroken);
+   connect(d->mMessageClient, &KMessageClient::aboutToDisconnect, this, &KGameNetwork::aboutToLoseConnection);
+   connect(d->mMessageClient, &KMessageClient::connectionBroken, this, &KGameNetwork::slotResetConnection);
 
-   connect (d->mMessageClient, SIGNAL(adminStatusChanged(bool)),
-            this, SLOT(slotAdminStatusChanged(bool)));
-   connect (d->mMessageClient, SIGNAL(eventClientConnected(quint32)),
-            this, SIGNAL(signalClientConnected(quint32)));
-   connect (d->mMessageClient, SIGNAL(eventClientDisconnected(quint32,bool)),
-            this, SIGNAL(signalClientDisconnected(quint32,bool)));
+   connect(d->mMessageClient, &KMessageClient::adminStatusChanged, this, &KGameNetwork::slotAdminStatusChanged);
+   connect(d->mMessageClient, &KMessageClient::eventClientConnected, this, &KGameNetwork::signalClientConnected);
+   connect(d->mMessageClient, &KMessageClient::eventClientDisconnected, this, &KGameNetwork::signalClientDisconnected);
 
    // broacast and direct messages are treated equally on receive.
    connect (d->mMessageClient, SIGNAL(forwardReceived(QByteArray,quint32,QList<quint32>)),

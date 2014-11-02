@@ -154,9 +154,9 @@ void KMessageSocket::processNewData ()
 
 void KMessageSocket::initSocket ()
 {
-  connect (mSocket, SIGNAL (error(QAbstractSocket::SocketError)), this, SIGNAL (connectionBroken()));
-  connect (mSocket, SIGNAL (disconnected()), this, SIGNAL (connectionBroken()));
-  connect (mSocket, SIGNAL (readyRead()), this, SLOT (processNewData()));
+  connect(mSocket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &KMessageSocket::connectionBroken);
+  connect(mSocket, &QTcpSocket::disconnected, this, &KMessageSocket::connectionBroken);
+  connect(mSocket, &QTcpSocket::readyRead, this, &KMessageSocket::processNewData);
   mAwaitingHeader = true;
   mNextBlockLength = 0;
   isRecursive = false;
@@ -243,10 +243,9 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   *mProcess << mProcessName << QString::fromLatin1( "%1").arg(id);
   qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Init:Id=" << id;
   qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessgeProcess::Init:Processname:" << mProcessName;
-  connect(mProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedStdout()));
-  connect(mProcess, SIGNAL(readyReadStandardError()),  this, SLOT(slotReceivedStderr()));
-  connect(mProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
-                        this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
+  connect(mProcess, &KProcess::readyReadStandardOutput, this, &KMessageProcess::slotReceivedStdout);
+  connect(mProcess, &KProcess::readyReadStandardError, this, &KMessageProcess::slotReceivedStderr);
+  connect(mProcess, static_cast<void (KProcess::*)(int, QProcess::ExitStatus)>(&KProcess::finished), this, &KMessageProcess::slotProcessExited);
   mProcess->start();
   mSendBuffer=0;
   mReceiveCount=0;

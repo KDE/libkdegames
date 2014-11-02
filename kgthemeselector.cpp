@@ -188,14 +188,14 @@ class KgThemeSelector::Dialog : public QDialog
 				QPushButton *stuff = new QPushButton(QIcon::fromTheme("get-hot-new-stuff"), btn->text());
 				buttonBox->addButton(stuff, QDialogButtonBox::ActionRole);
 				buttonBox->addButton(QDialogButtonBox::Close);
-				
-				connect(buttonBox, SIGNAL(clicked()), this, SIGNAL(clicked()));
-				connect(buttonBox, SIGNAL(rejected()), this, SIGNAL(reject()));
+
+			        connect(buttonBox, SIGNAL(clicked()), this, SIGNAL(clicked()));	
+				connect(buttonBox, &QDialogButtonBox::rejected, this, &KgThemeSelector::Dialog::reject);
 			}
 			else
 			{
 				buttonBox->setStandardButtons(QDialogButtonBox::Close);
-				connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+				connect(buttonBox, &QDialogButtonBox::rejected, this, &KgThemeSelector::Dialog::reject);
 			}
 			//window caption
 			if (caption.isEmpty())
