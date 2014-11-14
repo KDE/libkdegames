@@ -119,10 +119,27 @@ add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
 
 generate_export_header(KF5KDEGames BASE_NAME libkdegames EXPORT_MACRO_NAME KDEGAMES_EXPORT DEPRECATED_MACRO_NAME KDE_DEPRECATED)
 
-target_link_libraries(KF5KDEGames KF5::KIOWidgets KF5::NewStuff KF5::KDELibs4Support Qt5::Xml Qt5::Svg Qt5::Qml Qt5::Quick Qt5::QuickWidgets KF5::Declarative ${KGAUDIO_LINKLIBS})
-target_link_libraries(KF5KDEGames LINK_INTERFACE_LIBRARIES KF5::KDELibs4Support)
+target_link_libraries(KF5KDEGames
+                PRIVATE
+                      ${KGAUDIO_LINKLIBS}
+                      Qt5::Xml
+                      Qt5::Svg
+                      Qt5::Quick
+                      KF5::Declarative
+                      KF5::KIOWidgets
+                      KF5::NewStuff
+                      KF5::KDELibs4Support
+                PUBLIC
+                      Qt5::Widgets
+                      Qt5::QuickWidgets
+                      Qt5::Qml
+                      KF5::ConfigCore
+                      KF5::I18n
+                      KF5::WidgetsAddons
+                      KF5::ConfigWidgets
+)
 
-target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames>" INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE>" INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}>")
+target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
 
 #NOTE: 6.0.0 = KDE 4.9 release
 set(KDEGAMES_VERSION 6.1.0)
@@ -181,8 +198,18 @@ ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
 
 add_library(KF5KDEGamesPrivate SHARED ${kdegamesprivate_LIB_SRCS})
 
-target_link_libraries(KF5KDEGamesPrivate KF5::DNSSD KF5::NewStuff KF5::Archive Qt5::Xml Qt5::Network KF5KDEGames)
-target_link_libraries(KF5KDEGamesPrivate LINK_INTERFACE_LIBRARIES Qt5::Xml Qt5::Network KF5KDEGames)
+target_link_libraries(KF5KDEGamesPrivate
+                PRIVATE
+                      KF5::DNSSD
+                      KF5::NewStuff
+                      KF5::Archive
+                PUBLIC
+                      Qt5::Xml
+                      Qt5::Network
+                      KF5::Completion
+                      KF5::KDELibs4Support
+                      KF5KDEGames
+)
 
 target_include_directories(KF5KDEGamesPrivate INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/libkdegamesprivate>" )
 
