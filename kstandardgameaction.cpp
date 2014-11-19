@@ -128,8 +128,10 @@ QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         QList<QKeySequence> cut = (pInfo->globalAccel==KStandardShortcut::AccelNone
                          ? QList<QKeySequence>() << QKeySequence(pInfo->shortcut)
                          : KStandardShortcut::shortcut(pInfo->globalAccel));
-        if (!cut.isEmpty())
+        if (!cut.isEmpty()) {
                 pAction->setShortcuts(cut);
+                pAction->setProperty("defaultShortcuts", QVariant::fromValue(cut));
+        }
         if (pInfo->psToolTip)
                 pAction->setToolTip(i18n(pInfo->psToolTip));
         if (pInfo->psWhatsThis)
