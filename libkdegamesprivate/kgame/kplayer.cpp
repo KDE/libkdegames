@@ -27,7 +27,7 @@
 
 #include <QLoggingCategory>
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <qbuffer.h>
 

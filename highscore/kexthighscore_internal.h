@@ -20,7 +20,6 @@
 #ifndef KEXTHIGHSCORE_INTERNAL_H
 #define KEXTHIGHSCORE_INTERNAL_H
 
-// #include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
 

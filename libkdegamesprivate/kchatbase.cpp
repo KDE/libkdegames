@@ -23,7 +23,7 @@
 #include "kchatbaseitemdelegate.h"
 
 #include <klineedit.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <QLayout>
 #include <QComboBox>
