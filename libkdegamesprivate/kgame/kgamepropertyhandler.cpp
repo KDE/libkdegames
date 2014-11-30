@@ -25,7 +25,7 @@
 #include <QMap>
 #include <QQueue>
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <typeinfo>
 
 #define KPLAYERHANDLER_LOAD_COOKIE 6239

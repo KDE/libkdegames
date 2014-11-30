@@ -20,8 +20,8 @@
 
 #include "kstandardgameaction.h"
 
-#include <klocale.h>
-#include <kaction.h>
+#include <KLocalizedString>
+#include <qaction.h>
 #include <kactioncollection.h>
 #include <kstandardshortcut.h>
 #include <ktoggleaction.h>

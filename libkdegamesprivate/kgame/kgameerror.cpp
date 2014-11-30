@@ -21,7 +21,7 @@
 #include "kgameerror.h"
 #include "kgamemessage.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 QByteArray KGameError::errVersion(int remoteVersion)
 {
