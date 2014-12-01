@@ -32,7 +32,7 @@
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QDialog>
 
-#include <KDE/KIcon>
+#include <QIcon>
 #include <KDE/KLocalizedString>
 #include <KNS3/DownloadDialog>
 

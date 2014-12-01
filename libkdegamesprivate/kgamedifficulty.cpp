@@ -19,9 +19,9 @@ You should have received a copy of the GNU Library General Public License along 
 #include <kactioncollection.h>
 #include <kcombobox.h>
 #include <QIcon>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
-#include <kstatusbar.h>
+#include <qstatusbar.h>
 #include <kselectaction.h>
 #include <kxmlguiwindow.h>
 

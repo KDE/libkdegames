@@ -20,7 +20,7 @@
 #include "kchatbaseitemdelegate.h"
 #include "kchatbasemodel.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QPainter>
 #include <QDebug>
 

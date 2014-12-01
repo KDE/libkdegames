@@ -28,11 +28,11 @@
 #include <KDE/KActionCollection>
 #include <KDE/KComboBox>
 #include <KDE/KSelectAction>
-#include <KDE/KStatusBar>
 #include <KDE/KXmlGuiWindow>
 
 #include <QIcon>
 #include <QGlobalStatic>
+#include <QStatusBar>
 
 #include <klocalizedstring.h>
 #include <ksharedconfig.h>

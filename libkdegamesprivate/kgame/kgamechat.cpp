@@ -26,7 +26,7 @@
 #include "kgameproperty.h"
 #include "kgamemessage.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QMap>
 #include <QLoggingCategory>

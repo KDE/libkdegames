@@ -21,7 +21,8 @@
 #define KEXTHIGHSCORE_INTERNAL_H
 
 #include <kconfig.h>
-#include <klocale.h>
+#include <KLocalizedString>
+#include <KSharedConfig>
 
 #include "khighscore.h"
 #include "kexthighscore.h"

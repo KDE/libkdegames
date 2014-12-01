@@ -20,7 +20,7 @@
 
 #include "kgamemessage.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #define MESSAGE_VERSION 2
 
