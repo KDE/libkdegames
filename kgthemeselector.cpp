@@ -189,7 +189,7 @@ class KgThemeSelector::Dialog : public QDialog
 				buttonBox->addButton(stuff, QDialogButtonBox::ActionRole);
 				buttonBox->addButton(QDialogButtonBox::Close);
 
-			        connect(buttonBox, SIGNAL(clicked()), this, SIGNAL(clicked()));	
+			        connect(stuff, SIGNAL(clicked()), btn, SIGNAL(clicked()));	
 				connect(buttonBox, &QDialogButtonBox::rejected, this, &KgThemeSelector::Dialog::reject);
 			}
 			else
