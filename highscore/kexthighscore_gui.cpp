@@ -32,6 +32,7 @@
 #include <QPushButton>
 #include <QApplication>
 #include <QFileDialog>
+#include <QIcon>
 #include <QtCore/QTemporaryFile>
 
 #include <kmessagebox.h>
@@ -39,7 +40,6 @@
 #include <krun.h>
 
 #include <kio/netaccess.h>
-#include <kicon.h>
 #include <kiconloader.h>
 #include <klineedit.h>
 #include <kguiitem.h>
@@ -248,7 +248,7 @@ HighscoresDialog::HighscoresDialog(int rank, QWidget *parent)
         QString icon = internal->manager.gameTypeLabel(i, Manager::Icon);
         HighscoresWidget *hsw = new HighscoresWidget(0);
         KPageWidgetItem *pageItem = new KPageWidgetItem( hsw, title);
-        pageItem->setIcon( KIcon( BarIcon(icon, KIconLoader::SizeLarge) ) );
+        pageItem->setIcon( QIcon( BarIcon(icon, KIconLoader::SizeLarge) ) );
         addPage( pageItem );
         _pages.append(pageItem);
         connect(hsw, SIGNAL(tabChanged(int)), SLOT(tabChanged(int)));
