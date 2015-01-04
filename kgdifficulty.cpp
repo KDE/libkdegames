@@ -391,7 +391,7 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	QObject::connect(selector, SIGNAL(signalSelected(int)), selector, SLOT(setCurrentIndex(int)));
 
 	//create menu action
-	const QIcon icon("games-difficult");
+	const QIcon icon = QIcon::fromTheme("games-difficult");
 	KSelectAction* menu = new KgDifficultyGUI::Menu(icon, i18nc("Game difficulty level", "Difficulty"), window);
 	menu->setToolTip(i18n("Set the difficulty level"));
 	menu->setWhatsThis(i18n("Set the difficulty level of the game."));
