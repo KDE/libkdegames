@@ -182,7 +182,7 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     setZValue(100); // is 100 high enough???
     d->m_textChildItem->setZValue(100);
 
-    QIcon infoIcon( QLatin1String( "dialog-information" ));
+    QIcon infoIcon = QIcon::fromTheme( QLatin1String( "dialog-information" ));
     // default size is 32
     setMessageIcon( infoIcon.pixmap(32, 32) );
 
