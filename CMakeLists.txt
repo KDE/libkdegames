@@ -197,6 +197,7 @@ ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
 )
 
 add_library(KF5KDEGamesPrivate SHARED ${kdegamesprivate_LIB_SRCS})
+generate_export_header(KF5KDEGamesPrivate BASE_NAME libkdegamesprivate EXPORT_MACRO_NAME KDEGAMESPRIVATE_EXPORT DEPRECATED_MACRO_NAME KDE_DEPRECATED)
 
 target_link_libraries(KF5KDEGamesPrivate
                 PRIVATE

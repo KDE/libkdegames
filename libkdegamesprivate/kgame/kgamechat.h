@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 
 #include "../kchatbase.h"
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 class KPlayer;
 class KGame;
 class KGamePropertyBase;

@@ -25,7 +25,7 @@
 #include <QtCore/QDebug>
 
 #include <typeinfo>
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 class KGame;
 class KPlayer;

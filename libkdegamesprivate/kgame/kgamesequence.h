@@ -23,7 +23,7 @@
 
 #include <QtCore/QObject>
 
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 class KPlayer;
 class KGame;

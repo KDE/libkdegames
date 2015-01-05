@@ -22,7 +22,7 @@
 #define __KGAMEMESSAGE_H_
 
 #include <QtCore/QDataStream>
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 /**
  * \class KGameMessage kgamemessage.h <KGame/KGameMessage>

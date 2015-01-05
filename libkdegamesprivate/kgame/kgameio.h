@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 #include <QtCore/QObject>
 
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 class QEvent;
 class QGraphicsScene;

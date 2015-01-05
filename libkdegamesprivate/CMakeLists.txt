@@ -10,7 +10,7 @@ add_subdirectory(tests)
 ########### install files ###############
 
 install(FILES
-    libkdegamesprivate_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/../libkdegamesprivate_export.h
     kchatbase.h
     kchatbaseitemdelegate.h
     kchatbasemodel.h

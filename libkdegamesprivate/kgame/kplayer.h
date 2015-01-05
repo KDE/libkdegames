@@ -24,7 +24,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 class KGame;
 class KGameIO;

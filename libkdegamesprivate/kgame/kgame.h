@@ -27,7 +27,7 @@
 #include <QLoggingCategory>
 
 #include "kgamenetwork.h"
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 

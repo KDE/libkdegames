@@ -105,7 +105,7 @@ QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         case LoadRecent:
             pAction = new KRecentFilesAction(sLabel, parent);
             if(do_connect)
-                QObject::connect( pAction, SIGNAL(urlSelected(KUrl)), recvr, slot);
+                QObject::connect( pAction, SIGNAL(urlSelected(QUrl)), recvr, slot);
             break;
         case Pause:
         case Demo:

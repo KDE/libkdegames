@@ -25,7 +25,7 @@
 #include <QtCore/QMultiHash>
 
 #include "kgameproperty.h"
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 class QDataStream;
 class KGame;
