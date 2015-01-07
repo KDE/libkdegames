@@ -161,7 +161,7 @@ set_target_properties(KF5KDEGames PROPERTIES
 )
 
 install(TARGETS KF5KDEGames EXPORT KF5KDEGamesLibraryDepends
-    ${INSTALL_TARGETS_DEFAULT_ARGS})
+    ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### next target ###############
 
@@ -220,7 +220,7 @@ set_target_properties(KF5KDEGamesPrivate PROPERTIES
 )
 
 install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesLibraryDepends
-    ${INSTALL_TARGETS_DEFAULT_ARGS})
+    ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
