@@ -108,15 +108,16 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     Q_FOREACH(const QString& dir, dirs) {
 	    QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
 	    while (it.hasNext()) {
-		    const QString filePath = it.next();
-		    themesAvailable.append(it.next());
+                    QFileInfo fileInfo(it.next());
+		    const QString filePath = fileInfo.fileName();
+		    themesAvailable.append(filePath);
 	    }
     }
 
     bool initialFound = false;
     foreach (const QString &file, themesAvailable)
     {
-      QString themePath = lookupDirectory + QLatin1Char( '/' ) + file;
+      const QString themePath = lookupDirectory + QLatin1Char( '/' ) + file;
       KGameTheme* atheme = new KGameTheme(groupName);
 
       if (atheme->load(themePath)) {
