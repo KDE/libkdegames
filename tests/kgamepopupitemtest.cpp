@@ -1,12 +1,16 @@
 #include "kgamepopupitemtest.h"
-#include <KApplication>
+
 #include <KActionCollection>
-#include <KCmdLineArgs>
+
 #include <QGraphicsScene>
 #include <QTimer>
 #include <KDebug>
 #include <KFileDialog>
 #include <kcolorscheme.h>
+#include <QApplication>
+#include <KAboutData>
+#include <KLocalizedString>
+#include <QCommandLineParser>
 
 KGpiMainWindow::KGpiMainWindow()
     : KXmlGuiWindow(), m_replaceMode(KGamePopupItem::LeavePrevious)
@@ -62,8 +66,15 @@ KGpiMainWindow::KGpiMainWindow()
 
 int main(int argc, char** argv)
 {
-    KCmdLineArgs::init(argc, argv, "kgamepopupitemtest", QByteArray(), ki18n("kgamepopupitemtest"), "0.1");
-    KApplication a;
+    KAboutData aboutData( QLatin1String("kgamepopupitemtest"), i18n("kgamepopupitemtest"), QLatin1String("0.1"));
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
     KGpiMainWindow *win = new KGpiMainWindow;
     win->show();
     return a.exec();

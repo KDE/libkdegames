@@ -41,7 +41,7 @@
        </widget>
       </item>
       <item row="1" column="1" >
-       <widget class="KIntSpinBox" name="mesTimeout" >
+       <widget class="QSpinBox" name="mesTimeout" >
         <property name="maximum" >
          <number>27000</number>
         </property>
@@ -242,11 +242,6 @@
    <class>KColorButton</class>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
