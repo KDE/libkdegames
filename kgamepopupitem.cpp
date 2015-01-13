@@ -188,7 +188,7 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
 
     d->m_timer.setSingleShot(true);
 
-    setAcceptsHoverEvents(true);
+    setAcceptHoverEvents(true);
     // ignore scene transformations
     setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
 

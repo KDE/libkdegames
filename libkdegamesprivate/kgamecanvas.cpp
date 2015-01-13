@@ -187,8 +187,6 @@ void KGameCanvasWidget::paintEvent(QPaintEvent *event) {
       el->paintInternal(&p, evr, evreg, QPoint(), 1.0 );
     }
   }}
-
-  QApplication::syncX();
 }
 
 void KGameCanvasWidget::processAnimations() {

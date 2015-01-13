@@ -73,8 +73,8 @@ ScoresList::ScoresList(QWidget *parent)
 //     setItemMargin(3);
     setAllColumnsShowFocus(true);
 //     setSorting(-1);
-    header()->setClickable(false);
-    header()->setMovable(false);
+    header()->setSectionsClickable(false);
+    header()->setSectionsMovable(false);
 }
 
 void ScoresList::addHeader(const ItemArray &items)

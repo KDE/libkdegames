@@ -21,14 +21,14 @@
 #include "kgdifficulty.h"
 
 #include <QtCore/QVector>
-#include <KDE/KConfigGroup>
-#include <KDE/KGuiItem>
-#include <KDE/KMessageBox>
+#include <KConfigGroup>
+#include <KGuiItem>
+#include <KMessageBox>
 //the following only used by KgDifficultyGUI
-#include <KDE/KActionCollection>
-#include <KDE/KComboBox>
-#include <KDE/KSelectAction>
-#include <KDE/KXmlGuiWindow>
+#include <KActionCollection>
+#include <KComboBox>
+#include <KSelectAction>
+#include <KXmlGuiWindow>
 
 #include <QIcon>
 #include <QGlobalStatic>

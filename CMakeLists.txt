@@ -128,6 +128,8 @@ target_link_libraries(KF5KDEGames
                       KF5::Declarative
                       KF5::KIOWidgets
                       KF5::NewStuff
+                      KF5::IconThemes
+                      KF5::GuiAddons
                       KF5::KDELibs4Support
                 PUBLIC
                       Qt5::Widgets
@@ -208,7 +210,6 @@ target_link_libraries(KF5KDEGamesPrivate
                       Qt5::Xml
                       Qt5::Network
                       KF5::Completion
-                      KF5::KDELibs4Support
                       KF5KDEGames
 )
 

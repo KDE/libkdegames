@@ -23,8 +23,9 @@
 #include <QtCore/QStandardPaths>
 #include <QLoggingCategory>
 
-#include <KDE/KConfig>
-#include <KDE/KConfigGroup>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KSharedConfig>
 
 class KgThemeProvider::Private
 {

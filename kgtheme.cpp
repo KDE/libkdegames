@@ -22,8 +22,8 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QStandardPaths>
 
-#include <KDE/KConfig>
-#include <KDE/KConfigGroup>
+#include <KConfig>
+#include <KConfigGroup>
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "games.lib")
 

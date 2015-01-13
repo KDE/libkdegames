@@ -226,8 +226,8 @@ HistogramTab::HistogramTab(QWidget *parent)
 //     _list->setItemMargin(3);
     _list->setAllColumnsShowFocus(true);
     _list->setSortingEnabled(false);
-    _list->header()->setClickable(false);
-    _list->header()->setMovable(false);
+    _list->header()->setSectionsClickable(false);
+    _list->header()->setSectionsMovable(false);
     top->addWidget(_list);
 
     _list->headerItem()->setText(0,i18n("From"));

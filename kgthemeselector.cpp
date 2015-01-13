@@ -33,7 +33,7 @@
 #include <QtWidgets/QDialog>
 
 #include <QIcon>
-#include <KDE/KLocalizedString>
+#include <KLocalizedString>
 #include <KNS3/DownloadDialog>
 
 namespace Metrics
