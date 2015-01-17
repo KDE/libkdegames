@@ -30,6 +30,7 @@
 #include <KSelectAction>
 #include <KXmlGuiWindow>
 
+#include <QCoreApplication>
 #include <QIcon>
 #include <QGlobalStatic>
 #include <QStatusBar>
@@ -154,29 +155,26 @@ class KgDifficulty::Private
         Private() : m_currentLevel(0), m_editable(true), m_gameRunning(false) {}
 };
 
+static void saveLevel()
+{
+	//save current difficulty level in config file (no sync() call here; this
+	//will most likely be called at application shutdown when others are also
+	//writing to KGlobal::config(); also KConfig's dtor will sync automatically)
+	KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
+	cg.writeEntry("Level", Kg::difficulty()->currentLevel()->key());
+}
+
 KgDifficulty::KgDifficulty(QObject* parent)
 	: QObject(parent)
 	, d(new Private)
 {
 	qRegisterMetaType<const KgDifficultyLevel*>();
+	qAddPostRoutine(saveLevel);
 }
 
 KgDifficulty::~KgDifficulty()
 {
-	if (d->m_levels.isEmpty())
-	{
-		return;
-	}
-	//save current difficulty level in config file (no sync() call here; this
-	//will most likely be called at application shutdown when others are also
-	//writing to KGlobal::config(); also KConfig's dtor will sync automatically)
-	KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
-	cg.writeEntry("Level", currentLevel()->key());
-	//cleanup
-	while (!d->m_levels.isEmpty())
-	{
-		delete const_cast<KgDifficultyLevel*>(d->m_levels.takeFirst());
-	}
+	qDeleteAll(d->m_levels);
 }
 
 void KgDifficulty::addLevel(KgDifficultyLevel* level)
