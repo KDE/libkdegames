@@ -1,4 +1,4 @@
 #! /bin/sh
 $EXTRACTRC `find . -name '*.ui' | grep -v '/tests/'` >> rc.cpp || exit 11
-$XGETTEXT `find . -name \*.h -o -name \*.cpp -o -name \*.cc | grep -v '/tests/'` -o $podir/libkdegames.pot
+$XGETTEXT `find . -name \*.h -o -name \*.cpp -o -name \*.cc | grep -v '/tests/'` -o $podir/libkdegames5.pot
 rm -f rc.cpp 
