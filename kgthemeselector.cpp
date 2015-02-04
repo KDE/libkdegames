@@ -171,6 +171,7 @@ class KgThemeSelector::Dialog : public QDialog
 {
 	public:
 		Dialog(KgThemeSelector* sel, const QString& caption)
+                        : mSelector(sel)
 		{
 			QVBoxLayout *mainLayout = new QVBoxLayout;
 			setLayout(mainLayout);
@@ -214,16 +215,17 @@ class KgThemeSelector::Dialog : public QDialog
 		virtual void closeEvent(QCloseEvent* event)
 		{
 			event->accept();
-			KgThemeSelector* sel = qobject_cast<KgThemeSelector*>(new QWidget());	//Unsure
 			//delete myself, but *not* the KgThemeSelector
-			sel->setParent(0);
+			mSelector->setParent(0);
 			deleteLater();
 			//restore the KNS button
-			if (sel->d->m_knsButton)
+			if (mSelector->d->m_knsButton)
 			{
-				sel->d->m_knsButton->show();
+				mSelector->d->m_knsButton->show();
 			}
 		}
+       private:
+              KgThemeSelector* mSelector;
 };
 
 void KgThemeSelector::showAsDialog(const QString& caption)
