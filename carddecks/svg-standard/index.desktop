@@ -1,6 +1,5 @@
 [KDE Backdeck]
 Name=Standard
-Name[ast]=Standard
 Name[bs]=Standardno
 Name[ca]=Estàndard
 Name[ca@valencia]=Estàndard
@@ -52,7 +51,6 @@ Name[zh_TW]=標準
 Preview=11.png
 Comment=Standard KDE card set\nGPL license
 Comment[af]=Standaard Kde kaart stel\nGPL lisensie
-Comment[ast]=Xuegu de cartes standard de KDE\nLlicencia GPL
 Comment[be]=Звычайная калода картаў KDE\nGPL license
 Comment[bn]=কে.ডি.ই.-র সাধারণ তাস সেট\nজি.পি.এল. লাইসেন্স
 Comment[bs]=Standard KDE skup karata\nGPL licenca
