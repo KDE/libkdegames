@@ -111,9 +111,6 @@ set(kdegames_LIB_SRCS
     kgthemeselector.cpp
     kstandardgameaction.cpp
 )
-if(Q_WS_X11)
-	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
-endif(Q_WS_X11)
 
 add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
 
