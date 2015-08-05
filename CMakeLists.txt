@@ -134,9 +134,8 @@ target_link_libraries(KF5KDEGames
 
 target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
 
-#NOTE: 6.0.0 = KDE 4.9 release
-set(KDEGAMES_VERSION 6.1.0)
-set(KDEGAMES_SOVERSION 6)
+set(KDEGAMES_VERSION 7.0.0)
+set(KDEGAMES_SOVERSION 7)
 
 set_target_properties(KF5KDEGames PROPERTIES VERSION   ${KDEGAMES_VERSION}
                                              SOVERSION ${KDEGAMES_SOVERSION}
@@ -146,7 +145,7 @@ set_target_properties(KF5KDEGames PROPERTIES VERSION   ${KDEGAMES_VERSION}
 ecm_setup_version(${KDEGAMES_VERSION} VARIABLE_PREFIX KDEGAMES
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5KDEGamesConfigVersion.cmake"
-                        SOVERSION 6)
+                        SOVERSION ${KDEGAMES_SOVERSION})
 
 set_target_properties(KF5KDEGames PROPERTIES
     VERSION   ${KDEGAMES_VERSION}
