@@ -264,13 +264,9 @@ void KgThemeDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 	QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
 	//draw thumbnail
 	QRect thumbnailBaseRect = this->thumbnailRect(baseRect);
-	const QPixmap thumbnail = index.data(Qt::DecorationRole).value<QPixmap>().scaled(Metrics::ThumbnailBaseSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	QRect thumbnailRect(thumbnailBaseRect.topLeft(), thumbnail.size());
-	thumbnailRect.translate( //center inside thumbnailBaseRect
-		(thumbnailBaseRect.width() - thumbnailRect.width()) / 2,
-		(thumbnailBaseRect.height() - thumbnailRect.height()) / 2
-	);
-	painter->drawPixmap(thumbnailRect.topLeft(), thumbnail);
+	const QPixmap thumbnail = index.data(Qt::DecorationRole).value<QPixmap>();
+	QApplication::style()->drawItemPixmap(painter, thumbnailBaseRect, Qt::AlignCenter, thumbnail);
+
 	//find metrics: text
 	QStringList texts; QList<QFont> fonts;
 	{

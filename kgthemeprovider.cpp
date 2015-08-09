@@ -22,6 +22,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QStandardPaths>
 #include <QLoggingCategory>
+#include <QGuiApplication>
 
 #include <KConfig>
 #include <KConfigGroup>
@@ -282,7 +283,10 @@ void KgThemeProvider::rediscoverThemes()
 
 QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size)
 {
-	return QPixmap(theme->previewPath()).scaled(size, Qt::KeepAspectRatio);
+	const qreal dpr = qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) ? qApp->devicePixelRatio() : 1;
+	QPixmap pixmap = QPixmap(theme->previewPath()).scaled(size * dpr, Qt::KeepAspectRatio);
+	pixmap.setDevicePixelRatio(dpr);
+	return pixmap;
 }
 
 void KgThemeProvider::setDeclarativeEngine(const QString& name, QQmlEngine* engine)

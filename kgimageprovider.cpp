@@ -19,6 +19,7 @@
 #include "kgimageprovider_p.h"
 
 #include <QPainter>
+#include <QGuiApplication>
 #include <KgThemeProvider>
 
 KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
@@ -54,13 +55,16 @@ QImage KgImageProvider::requestImage(const QString& source, QSize *size, const Q
 
         if (m_renderer.isValid()) {
             if (width == 0 || height == 0) {
-                image = QImage(m_renderer.boundsOnElement(spriteKey).size().toSize(), QImage::Format_ARGB32_Premultiplied);
+                image = QImage(m_renderer.boundsOnElement(spriteKey).size().toSize()*qApp->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
             } else {
-                image = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+                image = QImage(QSize(width, height)*qApp->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
             }
             image.fill(Qt::transparent);
             QPainter* painter = new QPainter(&image);
             m_renderer.render(painter, spriteKey);
+
+            //this is deliberately set after .render as Qt <= 5.4 has a bug in QSVGRenderer which makes it not fill the image properly
+            image.setDevicePixelRatio(qApp->devicePixelRatio());
             delete painter;
         }
     }
