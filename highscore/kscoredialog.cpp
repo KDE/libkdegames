@@ -463,7 +463,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 {
     scores.clear();
 
-    QList<QByteArray> groupKeyList; //This will be a list of all the groups in the config fie
+    QList<QByteArray> groupKeyList; //This will be a list of all the groups in the config file
     foreach( const QString & groupString, highscoreObject->groupList())
     {
         groupKeyList << groupString.toUtf8(); //Convert all the QStrings to QByteArrays
