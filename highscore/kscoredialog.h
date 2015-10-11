@@ -276,12 +276,10 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
 
         private:
             void keyPressEvent(QKeyEvent *ev);
-	    QDialogButtonBox *buttonBox;
 
         private:
             class KScoreDialogPrivate;
             KScoreDialogPrivate* const d;
-	    
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 
