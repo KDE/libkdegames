@@ -150,7 +150,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         /**
         * The group name must be passed though ki18n() in order for the
         * group name to be translated. i.e.
-         * \code ksdialog.setConfigGroup(ki18n("Easy")); \endcode
+        * \code ksdialog.setConfigGroup(ki18n("Easy")); \endcode
         * If you set a group, it will be prefixed in the config file by
         * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
         *
