@@ -148,9 +148,9 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         //void setConfigGroup(const QString& group, const QString& i18nName);
 
         /**
-        * The group name must be passed though ki18n() in order for the
+        * The group name must be passed though i18n() in order for the
         * group name to be translated. i.e.
-         * \code ksdialog.setConfigGroup(ki18n("Easy")); \endcode
+        * \code ksdialog.setConfigGroup(qMakePair(QByteArray("Easy"), i18n("Easy"))); \endcode
         * If you set a group, it will be prefixed in the config file by
         * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
         *
@@ -160,8 +160,8 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
 
         /**
          * You must add the translations of all group names to the dialog. This
-         * is best done by passing the name through ki18n().
-         * The group set through setConfigGroup(const KLocalizedString& group)
+         * is best done by passing the name through i18n().
+         * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
          * will be added automatically
          *
          * @param group the translated group name
@@ -170,8 +170,8 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
 
         /**
          * You must add the translations of all group names to the dialog. This
-         * is best done by passing the name through ki18n().
-         * The group set through setConfigGroup(const KLocalizedString& group)
+         * is best done by passing the name through i18n().
+         * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
          * will be added automatically.
          *
          * This function can be used directly with KGameDifficulty::localizedLevelStrings().
