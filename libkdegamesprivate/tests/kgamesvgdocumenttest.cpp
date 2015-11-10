@@ -18,12 +18,12 @@ void tst_KGameSvgDocument::cleanupTestCase()
 
 void tst_KGameSvgDocument::style()
 {
-    m_svgDom.elementById("digitBackground");
+    m_svgDom.elementById(QStringLiteral("digitBackground"));
     QVERIFY(!m_svgDom.currentNode().isNull());
 
     // test style() set & get
     QString originalStyle = m_svgDom.style();
-    m_svgDom.setStyle("test");
+    m_svgDom.setStyle(QStringLiteral("test"));
     QVERIFY(m_svgDom.style() == "test");
 
     m_svgDom.setStyle(originalStyle);
@@ -31,16 +31,16 @@ void tst_KGameSvgDocument::style()
 
     // test styleProperties() set & get
     QHash<QString, QString> originalStyleProperties = m_svgDom.styleProperties();
-    m_svgDom.setStyle("test");
+    m_svgDom.setStyle(QStringLiteral("test"));
     QVERIFY(m_svgDom.style() == "test");
 
     m_svgDom.setStyleProperties(originalStyleProperties, KGameSvgDocument::UseInkscapeOrder);
     QVERIFY(m_svgDom.style() == originalStyle);
 
     // test styleProperty() set & get
-    QString orgiginalStyleProperty = m_svgDom.styleProperty("fill");
+    QString orgiginalStyleProperty = m_svgDom.styleProperty(QStringLiteral("fill"));
 
-    m_svgDom.setStyleProperty("fill", "ffffff");
+    m_svgDom.setStyleProperty(QStringLiteral("fill"), QStringLiteral("ffffff"));
     QVERIFY(m_svgDom.styleProperty("fill") == "ffffff");
 
     m_svgDom.setStyle(originalStyle);
@@ -49,7 +49,7 @@ void tst_KGameSvgDocument::style()
 
 void tst_KGameSvgDocument::scale()
 {
-    m_svgDom.elementById("0x11");
+    m_svgDom.elementById(QStringLiteral("0x11"));
     QVERIFY(!m_svgDom.currentNode().isNull());
 
     QMatrix originalTransformMatrix = m_svgDom.transformMatrix();
@@ -210,7 +210,7 @@ void tst_KGameSvgDocument::transform()
 {
     // Test transform set & get
     QString originalTransform = m_svgDom.transform();
-    m_svgDom.setTransform("test");
+    m_svgDom.setTransform(QStringLiteral("test"));
     QVERIFY(m_svgDom.transform() == "test");
 
     m_svgDom.setTransform(originalTransform);

@@ -60,7 +60,7 @@ KGameNetwork::KGameNetwork(int c, QObject* parent)
     : QObject(parent),
       d( new KGameNetworkPrivate )
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  
  d->mCookie = (qint16)c;
 

@@ -85,7 +85,7 @@ public:
   //virtual bool isNetwork () const = 0;
   virtual bool isNetwork () const
   {
-   QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));  
+   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));  
    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
    return false;
   }
@@ -100,7 +100,7 @@ public:
   //virtual bool isConnected () const = 0;
   virtual bool isConnected () const
   {
-   QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));  
+   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));  
    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConencted...BAD";
    return false;
   }
@@ -128,7 +128,7 @@ public:
   /**
     @return "localhost" in the default implementation. Reimplemented in @ref KMessageSocket
   */
-  virtual QString peerName () const { return QString::fromLatin1("localhost"); }
+  virtual QString peerName () const { return QStringLiteral("localhost"); }
 
 
 Q_SIGNALS:

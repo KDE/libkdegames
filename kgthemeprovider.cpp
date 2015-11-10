@@ -59,7 +59,7 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
 	, d(new Private(this, configKey))
 {
-	QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 	
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();

@@ -30,28 +30,28 @@
 
 KGamePropertyBase::KGamePropertyBase(int id, KGame* parent)
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
  registerData(id, parent);
 }
 
 KGamePropertyBase::KGamePropertyBase(int id, KPlayer* parent)
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
  registerData(id, parent);
 }
 
 KGamePropertyBase::KGamePropertyBase(int id, KGamePropertyHandler* owner)
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
  registerData(id, owner);
 }
 
 KGamePropertyBase::KGamePropertyBase()
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
 }
 

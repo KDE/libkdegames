@@ -92,7 +92,7 @@ KChatBaseModel::KChatBaseModel(QObject *parent)
   /* 
    Set to true to print debug messages
   */
-  QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = false"));
+  QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = false"));
 }
 
 KChatBaseModel::~KChatBaseModel()

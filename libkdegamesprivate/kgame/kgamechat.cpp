@@ -58,7 +58,7 @@ KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent, KChatBaseModel* model
     : KChatBase(parent, model, delegate),
       d( new KGameChatPrivate )
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init(g, msgid); 
 }
 
@@ -66,7 +66,7 @@ KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent, 
     : KChatBase(parent,model,delegate),
       d( new KGameChatPrivate )
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init(g, msgid);
  setFromPlayer(fromPlayer);
 }
@@ -75,7 +75,7 @@ KGameChat::KGameChat(QWidget* parent)
     : KChatBase(parent),
       d( new KGameChatPrivate )
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init(0, -1);
 }
 

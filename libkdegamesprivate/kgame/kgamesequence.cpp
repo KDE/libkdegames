@@ -41,7 +41,7 @@ class KGameSequence::KGameSequencePrivate
 KGameSequence::KGameSequence()
   : QObject(), d(new KGameSequencePrivate)
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
 }
 
 KGameSequence::~KGameSequence()

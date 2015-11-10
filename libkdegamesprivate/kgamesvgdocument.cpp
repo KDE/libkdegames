@@ -138,8 +138,8 @@ class KGameSvgDocumentPrivate
 
 };
 
-const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
-const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QLatin1String("</svg>");
+const QString KGameSvgDocumentPrivate::SVG_XML_PREPEND = QStringLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg>");
+const QString KGameSvgDocumentPrivate::SVG_XML_APPEND = QStringLiteral("</svg>");
 
 KGameSvgDocument::KGameSvgDocument()
     : QDomDocument(), d(new KGameSvgDocumentPrivate)
@@ -148,7 +148,7 @@ KGameSvgDocument::KGameSvgDocument()
 KGameSvgDocument::KGameSvgDocument(const KGameSvgDocument &doc)
     : QDomDocument(), d(new KGameSvgDocumentPrivate(*doc.d))
 {
-    QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+    QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 }
 
 KGameSvgDocument::~KGameSvgDocument()
@@ -178,7 +178,7 @@ QDomNode KGameSvgDocument::elementByUniqueAttributeValue(const QString& attribut
 
 QDomNode KGameSvgDocument::elementById(const QString& attributeValue)
 {
-    return elementByUniqueAttributeValue(QLatin1String( "id" ), attributeValue);
+    return elementByUniqueAttributeValue(QStringLiteral( "id" ), attributeValue);
 }
 
 void KGameSvgDocument::load()
@@ -200,7 +200,7 @@ void KGameSvgDocument::load()
     if (!content.startsWith("<?xml"))
     {
         QBuffer buf(&content);
-        KCompressionDevice::CompressionType type = KFilterDev::compressionTypeForMimeType(QString::fromLatin1("application/x-gzip"));
+        KCompressionDevice::CompressionType type = KFilterDev::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
 	KCompressionDevice flt(&buf, false, type);
 	if (!flt.open(QIODevice::ReadOnly))
         {
@@ -367,16 +367,16 @@ QString KGameSvgDocument::nodeToSvg() const
             result += rx.matchedLength();
             if (!defsAdded.contains(rx.cap(1)))
             {
-                node = d->findElementById(QLatin1String( "id" ), rx.cap(1), n);
+                node = d->findElementById(QStringLiteral( "id" ), rx.cap(1), n);
                 node.save(str_t, 1);
                 defsAdded.append(rx.cap(1));
             }
 
             // Find the gradient the above gradient is based on
-            baseId = node.toElement().attribute(QLatin1String( "xlink:href" )).mid(1);
+            baseId = node.toElement().attribute(QStringLiteral( "xlink:href" )).mid(1);
             if (!defsAdded.contains(baseId))
             {
-                nodeBase = d->findElementById(QLatin1String( "id" ), baseId, n);
+                nodeBase = d->findElementById(QStringLiteral( "id" ), baseId, n);
                 nodeBase.save(str_t, 1);
                 defsAdded.append(baseId);
             }
@@ -397,32 +397,32 @@ QByteArray KGameSvgDocument::nodeToByteArray() const
 
 QString KGameSvgDocument::style() const
 {
-    return d->m_currentElement.attribute( QLatin1String( "style" ), QLatin1String( "Element has no style attribute." ));
+    return d->m_currentElement.attribute( QStringLiteral( "style" ), QStringLiteral( "Element has no style attribute." ));
 }
 
 void KGameSvgDocument::setStyle(const QString& styleAttribute)
 {
-    d->m_currentElement.setAttribute(QLatin1String( "style" ), styleAttribute);
+    d->m_currentElement.setAttribute(QStringLiteral( "style" ), styleAttribute);
 }
 
 QDomNodeList KGameSvgDocument::patterns() const
 {
-    return elementsByTagName(QLatin1String( "pattern" ));
+    return elementsByTagName(QStringLiteral( "pattern" ));
 }
 
 QDomNodeList KGameSvgDocument::linearGradients() const
 {
-    return elementsByTagName(QLatin1String( "linearGradient" ));
+    return elementsByTagName(QStringLiteral( "linearGradient" ));
 }
 
 QDomNodeList KGameSvgDocument::radialGradients() const
 {
-    return elementsByTagName(QLatin1String( "radialGradient" ));
+    return elementsByTagName(QStringLiteral( "radialGradient" ));
 }
 
 QDomNodeList KGameSvgDocument::defs() const
 {
-    return elementsByTagName(QLatin1String( "defs" ));
+    return elementsByTagName(QStringLiteral( "defs" ));
 }
 
 QDomNode KGameSvgDocument::def() const
@@ -432,12 +432,12 @@ QDomNode KGameSvgDocument::def() const
 
 QString KGameSvgDocument::transform() const
 {
-    return d->m_currentElement.attribute( QLatin1String( "transform" ), QLatin1String( "Element has no transform attribute." ) );
+    return d->m_currentElement.attribute( QStringLiteral( "transform" ), QStringLiteral( "Element has no transform attribute." ) );
 }
 
 void KGameSvgDocument::setTransform(const QString& transformAttribute)
 {
-    d->m_currentElement.setAttribute(QLatin1String( "transform" ), transformAttribute);
+    d->m_currentElement.setAttribute(QStringLiteral( "transform" ), transformAttribute);
 }
 
 QHash<QString, QString> KGameSvgDocument::styleProperties() const
@@ -472,8 +472,8 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
     QHash<QString, QString> styleProperties = _styleProperties;
     QString styleBuffer, property;
 
-    d->m_inkscapeOrder << QLatin1String( "fill" ) << QLatin1String( "fill-opacity" ) << QLatin1String( "fill-rule" ) << QLatin1String( "stroke" ) << QLatin1String( "stroke-width" ) << QLatin1String( "stroke-linecap" )
-                       << QLatin1String( "stroke-linejoin" ) << QLatin1String( "stroke-miterlimit" ) << QLatin1String( "stroke-dasharray" ) << QLatin1String( "stroke-opacity" );
+    d->m_inkscapeOrder << QStringLiteral( "fill" ) << QStringLiteral( "fill-opacity" ) << QStringLiteral( "fill-rule" ) << QStringLiteral( "stroke" ) << QStringLiteral( "stroke-width" ) << QStringLiteral( "stroke-linecap" )
+                       << QStringLiteral( "stroke-linejoin" ) << QStringLiteral( "stroke-miterlimit" ) << QStringLiteral( "stroke-dasharray" ) << QStringLiteral( "stroke-opacity" );
 
     if (options == UseInkscapeOrder)
     {
@@ -631,7 +631,7 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
         matrix = transformMatrix() * matrix;
     }
 
-    transformBuffer = QLatin1String( "matrix(" );
+    transformBuffer = QStringLiteral( "matrix(" );
     transformBuffer += tmp.setNum(matrix.m11(),'g',7) + QLatin1Char( ',' );
     transformBuffer += tmp.setNum(matrix.m12(),'g',7) + QLatin1Char( ',' );
     transformBuffer += tmp.setNum(matrix.m21(),'g',7) + QLatin1Char( ',' );
@@ -657,7 +657,7 @@ void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& 
 QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, const QString& attributeValue, const QDomNode& node)
 {
     QDomElement e = node.toElement(); // try to convert the node to an element.
-    QString value = e.attribute( attributeName, QLatin1String( "Element has no attribute with that name." ));
+    QString value = e.attribute( attributeName, QStringLiteral( "Element has no attribute with that name." ));
 
     if (value == attributeValue)
     {

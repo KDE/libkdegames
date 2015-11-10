@@ -54,7 +54,7 @@ KMessageClient::KMessageClient (QObject *parent)
     : QObject (parent),
       d( new KMessageClientPrivate )
 {
-  QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
   d->isLocked = false;
 }
 
@@ -133,7 +133,7 @@ quint16 KMessageClient::peerPort () const
 
 QString KMessageClient::peerName () const
 {
- return d->connection ? d->connection->peerName() : QString::fromLatin1("localhost");
+ return d->connection ? d->connection->peerName() : QStringLiteral("localhost");
 }
 
 // --------------------- Sending messages

@@ -98,7 +98,7 @@ public:
 KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
   : QObject(parent)
 {
-  QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));
+  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
   d = new KMessageServerPrivate;
   d->mIsRecursive=false;
   d->mCookie=cookie;

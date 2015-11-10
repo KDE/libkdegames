@@ -31,7 +31,7 @@
 KMessageIO::KMessageIO (QObject *parent)
   : QObject (parent), m_id (0)
 {
-  QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
 }
 
 KMessageIO::~KMessageIO ()
@@ -240,7 +240,7 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   // Need both stdout and stderr as separate channels in the communication
   mProcess-> setOutputChannelMode(KProcess::SeparateChannels);
   int id=0;
-  *mProcess << mProcessName << QString::fromLatin1( "%1").arg(id);
+  *mProcess << mProcessName << QStringLiteral( "%1").arg(id);
   qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Init:Id=" << id;
   qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessgeProcess::Init:Processname:" << mProcessName;
   connect(mProcess, &KProcess::readyReadStandardOutput, this, &KMessageProcess::slotReceivedStdout);

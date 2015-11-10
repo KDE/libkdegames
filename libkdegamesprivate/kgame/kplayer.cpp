@@ -69,7 +69,7 @@ public:
 KPlayer::KPlayer()
     : QObject(), d(new KPlayerPrivate)
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));  
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));  
  init();
 }
 

@@ -49,7 +49,7 @@ class KGameThemePrivate
 KGameTheme::KGameTheme(const QString &themeGroup)
     : d(new KGameThemePrivate)
 {
-    QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+    QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
     d->themeGroup = themeGroup;
     //KGlobal::dirs()->addResourceType("gametheme", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName());
 }
@@ -60,7 +60,7 @@ KGameTheme::~KGameTheme() {
 
 bool KGameTheme::loadDefault()
 {
-    return load(QLatin1String( "themes/default.desktop" )); //TODO make this editable to match custom directories.
+    return load(QStringLiteral( "themes/default.desktop" )); //TODO make this editable to match custom directories.
                                            // If this ever changes change findThemes in KGameThemeSelectorPrivate too
 }
 

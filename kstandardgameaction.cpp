@@ -93,7 +93,7 @@ static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGame
 QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
                                      QObject* parent )
 {
-    QLoggingCategory::setFilterRules(QLatin1Literal("games.ui.debug = true"));
+    QLoggingCategory::setFilterRules(QStringLiteral("games.ui.debug = true"));
     
     QAction* pAction = 0;
     const KStandardGameActionInfo* pInfo = infoPtr( id );

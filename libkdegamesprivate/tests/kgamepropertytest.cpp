@@ -24,10 +24,10 @@ void tst_KGamePropertyTest::testHandler()
                              this,SLOT(sendProperty(int,QDataStream&,bool*)),
                                   SLOT(emitSignal(KGamePropertyBase*)));
 
-   var1.registerData(10 /* ID */, mHandler, QString("VAR1"));
+   var1.registerData(10 /* ID */, mHandler, QStringLiteral("VAR1"));
    var1.setLocal(-1); 
-   var2.registerData(11 /* ID */, mHandler, QString("VAR2"));
-   var2.setLocal(QString("Hallo"));
+   var2.registerData(11 /* ID */, mHandler, QStringLiteral("VAR2"));
+   var2.setLocal(QStringLiteral("Hallo"));
 
 
    // Check VAR 1

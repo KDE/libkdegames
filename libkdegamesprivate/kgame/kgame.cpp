@@ -84,7 +84,7 @@ KGame::KGame(int cookie,QObject* parent)
     : KGameNetwork(cookie,parent),
       d( new KGamePrivate )
 {
- QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true")); 
+ QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  
  qCDebug(GAMES_PRIVATE_KGAME) << " - " << this << ", sizeof(KGame)=" << sizeof(KGame);
 

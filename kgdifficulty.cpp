@@ -389,7 +389,7 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	QObject::connect(selector, SIGNAL(signalSelected(int)), selector, SLOT(setCurrentIndex(int)));
 
 	//create menu action
-	const QIcon icon = QIcon::fromTheme("games-difficult");
+	const QIcon icon = QIcon::fromTheme(QStringLiteral("games-difficult"));
 	KSelectAction* menu = new KgDifficultyGUI::Menu(icon, i18nc("Game difficulty level", "Difficulty"), window);
 	menu->setToolTip(i18n("Set the difficulty level"));
 	menu->setWhatsThis(i18n("Set the difficulty level of the game."));
@@ -409,7 +409,7 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	//add selector to statusbar
 	window->statusBar()->addPermanentWidget(selector);
 	//add menu action to window
-	menu->setObjectName(QLatin1String("options_game_difficulty"));
+	menu->setObjectName(QStringLiteral("options_game_difficulty"));
 	window->actionCollection()->addAction(menu->objectName(), menu);
 
 	//ensure that the KgDifficulty instance gets deleted

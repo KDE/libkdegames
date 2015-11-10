@@ -40,7 +40,7 @@ static const QString cacheName(QByteArray theme)
 	//e.g. "themes/foobar.desktop" -> "themes/foobar"
 	if (theme.endsWith(QByteArray(".desktop")))
 		theme.truncate(theme.length() - 8); //8 = strlen(".desktop")
-	return QString::fromLatin1("kgamerenderer-%1-%2")
+	return QStringLiteral("kgamerenderer-%1-%2")
 		.arg(appName).arg(QString::fromUtf8(theme));
 }
 
@@ -48,10 +48,10 @@ KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned c
 	: m_parent(parent)
 	, m_provider(provider)
 	, m_currentTheme(0) //will be loaded on first use
-	, m_frameSuffix(QString::fromLatin1("_%1"))
-	, m_sizePrefix(QString::fromLatin1("%1-%2-"))
-	, m_frameCountPrefix(QString::fromLatin1("fc-"))
-	, m_boundsPrefix(QString::fromLatin1("br-"))
+	, m_frameSuffix(QStringLiteral("_%1"))
+	, m_sizePrefix(QStringLiteral("%1-%2-"))
+	, m_frameCountPrefix(QStringLiteral("fc-"))
+	, m_boundsPrefix(QStringLiteral("br-"))
 	//default cache size: 3 MiB = 3 << 20 bytes
 	, m_cacheSize((cacheSize == 0 ? 3 : cacheSize) << 20)
 	, m_strategies(KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads)
@@ -126,7 +126,7 @@ QString KGameRenderer::frameSuffix() const
 
 void KGameRenderer::setFrameSuffix(const QString& suffix)
 {
-	d->m_frameSuffix = suffix.contains(QLatin1String("%1")) ? suffix : QLatin1String("_%1");
+	d->m_frameSuffix = suffix.contains(QLatin1String("%1")) ? suffix : QStringLiteral("_%1");
 }
 
 KGameRenderer::Strategies KGameRenderer::strategies() const
@@ -159,7 +159,7 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 
 void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 {
-	QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 	
 	const KgTheme* oldTheme = m_currentTheme;
 	if (oldTheme == theme)
@@ -189,7 +189,7 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 
 bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 {
-	QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 	
 	if (!theme)
 	{
@@ -208,7 +208,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 			theme->property("_k_themeDescTimestamp").value<uint>()
 		);
 		QByteArray buffer;
-		if (!m_imageCache->find(QString::fromLatin1("kgr_timestamp"), &buffer))
+		if (!m_imageCache->find(QStringLiteral("kgr_timestamp"), &buffer))
 			buffer = "0";
 		const uint cacheTimestamp = buffer.toInt();
 		//try to instantiate renderer immediately if the cache does not exist or is outdated
@@ -221,7 +221,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 			{
 				m_rendererPool.setPath(theme->graphicsPath(), renderer.take());
 				m_imageCache->clear();
-				m_imageCache->insert(QString::fromLatin1("kgr_timestamp"), QByteArray::number(svgTimestamp));
+				m_imageCache->insert(QStringLiteral("kgr_timestamp"), QByteArray::number(svgTimestamp));
 			}
 			else
 			{
@@ -445,7 +445,7 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	const QString elementKey = spriteFrameKey(spec.spriteKey, spec.frame);
 	QString cacheKey = m_sizePrefix.arg(spec.size.width()).arg(spec.size.height()) + elementKey;
 	QHash<QColor, QColor>::const_iterator it1 = spec.customColors.constBegin(), it2 = spec.customColors.constEnd();
-	static const QString colorSuffix(QLatin1String( "-%1-%2" ));
+	static const QString colorSuffix(QStringLiteral( "-%1-%2" ));
 	for (; it1 != it2; ++it1)
 	{
 		cacheKey += colorSuffix.arg(it1.key().rgba()).arg(it1.value().rgba());

@@ -53,14 +53,14 @@ public:
 KGameIO::KGameIO()
   : d(new KGameIOPrivate)
 {
-  QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));
+  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
 }
 
 KGameIO::KGameIO(KPlayer* player)
   : d(new KGameIOPrivate)
 {
-  QLoggingCategory::setFilterRules(QLatin1Literal("games.private.kgame.debug = true"));
+  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
   if (player)
   {

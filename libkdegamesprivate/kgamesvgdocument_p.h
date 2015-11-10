@@ -30,7 +30,7 @@
 /**
 * @brief A regex that matches a single whitespace
 */
-static const QString WSP = QLatin1String("\\s");
+static const QString WSP = QStringLiteral("\\s");
 
 /**
 * @brief A regex that matches zero or more whitespace
@@ -51,18 +51,18 @@ static const QString COMMA_WSP = QLatin1String("(?:(?:" ) + WSP + QLatin1Char( '
 /**
 * @brief A regex that matches a number
 */
-static const QString NUMBER = QLatin1String("(?:(?:[-|\\+]?\\d+(?:\\.)*\\d*(?:e)?[-|\\+]?\\d*)|(?:[-|\\+]?(?:\\.)+\\d*(?:e)?[-|\\+]?\\d*))");
+static const QString NUMBER = QStringLiteral("(?:(?:[-|\\+]?\\d+(?:\\.)*\\d*(?:e)?[-|\\+]?\\d*)|(?:[-|\\+]?(?:\\.)+\\d*(?:e)?[-|\\+]?\\d*))");
 // Do not wrap the above line!
 
 /**
 * @brief A regex that matches opening parenthesis
 */
-static const QString OPEN_PARENS = QLatin1String("\\(");
+static const QString OPEN_PARENS = QStringLiteral("\\(");
 
 /**
 * @brief A regex that matches closing parenthesis
 */
-static const QString CLOSE_PARENS = QLatin1String("\\)");
+static const QString CLOSE_PARENS = QStringLiteral("\\)");
 
 /**
 * @brief A regex that matches a matrix transform

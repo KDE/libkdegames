@@ -105,7 +105,7 @@ class KScoreDialog::KScoreDialogPrivate
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     : QDialog(parent), d(new KScoreDialogPrivate(this))
 {
-    QLoggingCategory::setFilterRules(QLatin1Literal("games.highscore.debug = true"));
+    QLoggingCategory::setFilterRules(QStringLiteral("games.highscore.debug = true"));
 
     setWindowTitle( i18n(DEFAULT_GROUP_NAME) );
     setModal( true );
@@ -122,15 +122,15 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 
     //Set up the default table headers
     d->header[Name] = i18n("Name");
-    d->key[Name] = QLatin1String( "Name" );
+    d->key[Name] = QStringLiteral( "Name" );
     d->header[Date] = i18n("Date");
-    d->key[Date] = QLatin1String( "Date" );
+    d->key[Date] = QStringLiteral( "Date" );
     d->header[Level] = i18n("Level");
-    d->key[Level] = QLatin1String( "Level" );
+    d->key[Level] = QStringLiteral( "Level" );
     d->header[Score] = i18n("Score");
-    d->key[Score] = QLatin1String( "Score" );
+    d->key[Score] = QStringLiteral( "Score" );
     d->header[Time] = i18n("Time");
-    d->key[Time] = QLatin1String( "Time" );
+    d->key[Time] = QStringLiteral( "Time" );
 
     //d->page = new QWidget(this);
 
@@ -471,7 +471,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     foreach(const QByteArray &groupKey, groupKeyList)
     {
         highscoreObject->setHighscoreGroup(QLatin1String( groupKey ));
-        player = highscoreObject->readEntry(0, QLatin1String( "LastPlayer" ));  //FIXME
+        player = highscoreObject->readEntry(0, QStringLiteral( "LastPlayer" ));  //FIXME
 
         for (int i = 1; i <= 10; ++i)
         {
@@ -480,7 +480,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
             {
                 if (fields & field)
                 {
-                    score[field] = highscoreObject->readEntry(i, key[field], QLatin1String("-"));
+                    score[field] = highscoreObject->readEntry(i, key[field], QStringLiteral("-"));
                 }
             }
             scores[groupKey].append(score);
@@ -502,7 +502,7 @@ void KScoreDialog::KScoreDialogPrivate::saveScores()
 {
     highscoreObject->setHighscoreGroup(QLatin1String( configGroup ));
 
-    highscoreObject->writeEntry(0,QLatin1String( "LastPlayer" ), player);
+    highscoreObject->writeEntry(0,QStringLiteral( "LastPlayer" ), player);
 
     for (int i = 1; i <= 10; ++i)
     {

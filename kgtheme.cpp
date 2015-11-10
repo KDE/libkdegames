@@ -45,7 +45,7 @@ KgTheme::KgTheme(const QByteArray& identifier, QObject* parent)
 	: QObject(parent)
 	, d(new Private(identifier))
 {
-    QLoggingCategory::setFilterRules(QLatin1Literal("games.lib.debug = true"));
+    QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 }
 
 KgTheme::~KgTheme()
@@ -105,7 +105,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	//default group name
 	if (Private::s_configGroupNames.isEmpty())
 	{
-		Private::s_configGroupNames << QLatin1String("KGameTheme");
+		Private::s_configGroupNames << QStringLiteral("KGameTheme");
 	}
 	//open file, look for a known config group
 	KConfig config(path, KConfig::SimpleConfig);
