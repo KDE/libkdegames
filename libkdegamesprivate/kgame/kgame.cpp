@@ -217,7 +217,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  // to access the players
  dataHandler()->lockDirectEmit();
 
- for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();it++ )
+ for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();++it )
  {
    (*it)->dataHandler()->lockDirectEmit();
    // qCDebug(GAMES_PRIVATE_KGAME) << "Player "<<player->id() << "to indirect emit";
@@ -259,7 +259,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  // queued signals for players.
  // Note we habe to have this external locking to prevent the games unlocking
  // to access the players
- for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();it++ )
+ for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();++it )
  {
    (*it)->dataHandler()->unlockDirectEmit();
    // qCDebug(GAMES_PRIVATE_KGAME) << "Player "<<player->id() << "to direct emit";
@@ -345,7 +345,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
  qCDebug(GAMES_PRIVATE_KGAME) << "Saving KGame" << cnt << "KPlayer objects";
  stream << cnt;
 
- for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();it++ )
+ for ( KGamePlayerList::iterator it = playerList()->begin(); it!=playerList()->end();++it )
  {
    savePlayer(stream,*it);
  }
@@ -390,14 +390,14 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
 
 KPlayer * KGame::findPlayer(quint32 id) const
 {
-  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
  {
    if ((*it)->id() == id)
    {
      return *it;
    }
  }
- for ( KGamePlayerList::iterator it = d->mInactivePlayerList.begin(); it!=d->mInactivePlayerList.end();it++ )
+ for ( KGamePlayerList::iterator it = d->mInactivePlayerList.begin(); it!=d->mInactivePlayerList.end();++it )
  {
    if ((*it)->id() == id)
    {
@@ -1100,7 +1100,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     int currentPriority=0x7fff; // MAX_UINT (16bit?) to get the maximum of the list
     // find lowest network priority which is not yet in the newPlayerList
     // do this for the new players
-    for ( KGamePlayerList::iterator it = newPlayerList.begin(); it!=newPlayerList.end();it++ )
+    for ( KGamePlayerList::iterator it = newPlayerList.begin(); it!=newPlayerList.end();++it )
     {
       KPlayer* player = *it;
       // Already in the list
@@ -1117,7 +1117,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
 
     // find lowest network priority which is not yet in the newPlayerList
     // Do this for the network players
-    for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+    for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
     {
       KPlayer* player = *it;
       // Already in the list
@@ -1181,7 +1181,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
   }
 
   // Now send out the player list which the client can activate
-  for ( KGamePlayerList::iterator it = newPlayerList.begin(); it!=newPlayerList.end();it++ )
+  for ( KGamePlayerList::iterator it = newPlayerList.begin(); it!=newPlayerList.end();++it )
   {
     KPlayer* player = *it;
     qCDebug(GAMES_PRIVATE_KGAME) << "newplayerlist contains" << player->id();
@@ -1290,7 +1290,7 @@ void KGame::slotServerDisconnected() // Client side
   KGamePlayerList removeList;
   qCDebug(GAMES_PRIVATE_KGAME) << "Playerlist of client=" << d->mPlayerList.count() << "count";
   qCDebug(GAMES_PRIVATE_KGAME) << "Inactive Playerlist of client=" << d->mInactivePlayerList.count() << "count";
-  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
   {
     KPlayer* player = *it;
     // TODO: CHECK: id=0, could not connect to server in the first place??
@@ -1301,7 +1301,7 @@ void KGame::slotServerDisconnected() // Client side
     }
   }
 
-  for ( KGamePlayerList::iterator it = removeList.begin(); it!=removeList.end();it++ )
+  for ( KGamePlayerList::iterator it = removeList.begin(); it!=removeList.end();++it )
   {
     KPlayer* player = *it;
     bool remove = true;
@@ -1317,7 +1317,7 @@ void KGame::slotServerDisconnected() // Client side
   qCDebug(GAMES_PRIVATE_KGAME) << "our game id is after setMaster" << gameId();
 
   KGamePlayerList mReList(d->mInactivePlayerList);
-  for ( KGamePlayerList::iterator it = mReList.begin(); it!=mReList.end();it++ )
+  for ( KGamePlayerList::iterator it = mReList.begin(); it!=mReList.end();++it )
   {
     KPlayer* player = *it;
     // TODO ?check for priority? Sequence should be ok
@@ -1328,7 +1328,7 @@ void KGame::slotServerDisconnected() // Client side
   }
   qCDebug(GAMES_PRIVATE_KGAME) << "Players activated player-cnt=" << playerCount();
 
-  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
   {
     KPlayer* player = *it;
     int oldid=player->id();
@@ -1338,7 +1338,7 @@ void KGame::slotServerDisconnected() // Client side
   }
   // TODO clear inactive lists ?
   Debug();
-  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+  for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
   {
     KPlayer* player = *it;
     player->Debug();
@@ -1356,7 +1356,7 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
  KPlayer *player;
  KGamePlayerList removeList;
  qCDebug(GAMES_PRIVATE_KGAME) << "Playerlist of client=" << d->mPlayerList.count() << "count";
- for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+ for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
  {
    KPlayer* player = *it;
    if (KGameMessage::rawGameId(player->id())==clientID)
@@ -1366,7 +1366,7 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
    }
  }
 
- for ( KGamePlayerList::iterator it = removeList.begin(); it!=removeList.end();it++ )
+ for ( KGamePlayerList::iterator it = removeList.begin(); it!=removeList.end();++it )
  {
    KPlayer* player = *it;
    // try to replace the KGameIO first
@@ -1428,7 +1428,7 @@ bool KGame::sendGroupMessage(const QByteArray &msg, int msgid, quint32 sender, c
 // AB: group must not be i18n'ed!! we should better use an id for group and use
 // a groupName() for the name // FIXME
 
- for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+ for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
  {
    KPlayer* player = *it;
    if (player && player->group()==group)
@@ -1487,11 +1487,11 @@ void KGame::setPolicy(GamePolicy p,bool recursive)
    dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
 
    // Set all KPLayer (active or inactive) property policy
-   for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();it++ )
+   for ( KGamePlayerList::iterator it = d->mPlayerList.begin(); it!=d->mPlayerList.end();++it )
    {
      (*it)->dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
    }
-   for ( KGamePlayerList::iterator it = d->mInactivePlayerList.begin(); it!=d->mInactivePlayerList.end();it++ )
+   for ( KGamePlayerList::iterator it = d->mInactivePlayerList.begin(); it!=d->mInactivePlayerList.end();++it )
    {
      (*it)->dataHandler()->setPolicy((KGamePropertyBase::PropertyPolicy)p,false);
    }
