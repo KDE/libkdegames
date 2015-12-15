@@ -409,7 +409,7 @@ public:
 
     /**
     * This function allows to find the pointer to a player
-    * property when you know it's id
+    * property when you know its id
     */
     KGamePropertyBase* findProperty(int id) const;
 

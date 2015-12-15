@@ -194,7 +194,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         void setHiddenConfigGroups(const QList<QByteArray>& hiddenGroups);
 
          /**
-         * It is a good idea giving config group weigths, otherwise tabs
+         * It is a good idea giving config group weights, otherwise tabs
          * get ordered by their tab name that is not probably what you want.
          *
          * This function can be used directly with KGameDifficulty::levelWeights().

@@ -63,7 +63,7 @@ for network games. For network games, this object can be on one of the users
 processes (usually inside KGame), or it can also be on an independant computer,
 that has no idea about what game is played on it.
 
-A KMessageClient object can connect to it. It's main purpose is transmitting
+A KMessageClient object can connect to it. Its main purpose is transmitting
 messages between KMessageClient objects.
 
 The Message Server is the main communication object. It is represented by the

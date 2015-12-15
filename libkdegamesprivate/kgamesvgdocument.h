@@ -254,7 +254,7 @@ public:
     /**
      * @brief Skews the origin of the current node.
      *
-     * This is a convenience function.  It simply coverts it's arguments to
+     * This is a convenience function.  It simply converts its arguments to
      * radians, then calls shear().
      *
      * @param xDegrees The amount in degrees to shear (skew) the x-axis by.
@@ -346,7 +346,7 @@ public:
     void setStyleProperty(const QString& propertyName, const QString& propertyValue);
 
     /**
-     * @brief Returns the current node and it's children as a new xml svg document.
+     * @brief Returns the current node and its children as a new xml svg document.
      * 
      * @returns The xml for the new svg document
      */

@@ -166,7 +166,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///default, both the UseDiskCache and the UseRenderingThreads strategies
 		///are enabled. This is a sane default for 99% of all games. You might 
 		///only want to disable optimizations if the graphics are so simple that
-		///the optimisations create an overhead in your special case.
+		///the optimizations create an overhead in your special case.
 		///
 		///If you disable UseDiskCache, you should do so before setTheme(),
 		///because changes to UseDiskCache cause a full theme reload.

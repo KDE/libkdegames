@@ -38,7 +38,7 @@
  *
  * @warning Not all functionally exposed by the API of this class is guaranteed
  *          to be available on the compiled KgAudio backend. Check
- *          KgAudioScene::capabilites() if in doubt.
+ *          KgAudioScene::capabilities() if in doubt.
  */
 namespace KgAudioScene
 {
@@ -78,7 +78,7 @@ namespace KgAudioScene
 	///
 	///The state of hasError() may theoretically change while the application
 	///runs, but in practice, this is very unlikely. (The only tricky part is
-	///typically the initial allocation of ressources.)
+	///typically the initial allocation of resources.)
 	///
 	///@sa KgSound::hasError()
 	KDEGAMES_EXPORT bool hasError();
