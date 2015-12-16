@@ -16,13 +16,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include <QtTest>
-#include <QtCore>
-
 #include "kgamesvgdocumenttest.h"
 #include "kgamesvgdocument_p.h"
 
 #include "config-tests.h"
+
+#include <QtCore>
+#include <QtTest>
 
 void tst_KGameSvgDocument::initTestCase()
 {

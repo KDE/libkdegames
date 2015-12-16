@@ -16,13 +16,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include <QtTest>
-#include <QtCore>
-#include <QtCore>
-
 #include "kgamepropertytest.h"
-
 #include "config-tests.h"
+
+#include <QtCore>
+#include <QtTest>
 
 
 void tst_KGamePropertyTest::initTestCase()
