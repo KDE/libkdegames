@@ -241,7 +241,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  uint playercount;
  stream >> playercount;
  qCDebug(GAMES_PRIVATE_KGAME) << "Loading KGame" << playercount << "KPlayer objects";
- for (i=0;i<playercount;i++)
+ for (i=0;i<playercount;++i)
  {
    KPlayer *newplayer=loadPlayer(stream,network);
    systemAddPlayer(newplayer);
@@ -1064,7 +1064,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
   QList<int> inactivateIds;
 
   KGamePlayerList newPlayerList;
-  for (i=0;i<cnt;i++)
+  for (i=0;i<cnt;++i)
   {
     player=loadPlayer(stream,true);
     qCDebug(GAMES_PRIVATE_KGAME) << "Master got player" << player->id() <<" rawgame=" << KGameMessage::rawGameId(player->id())  << "from sender" << sender;
