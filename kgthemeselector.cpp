@@ -156,15 +156,16 @@ void KgThemeSelector::Private::_k_updateProviderSelection()
 
 void KgThemeSelector::Private::_k_showNewStuffDialog()
 {
-	KNS3::DownloadDialog dialog(q);
-	dialog.exec();
-	if (!dialog.changedEntries().isEmpty())
+	QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(q));
+	dialog->exec();
+	if (dialog && !dialog->changedEntries().isEmpty())
 	{
 		m_provider->rediscoverThemes();
 		fillList();
 	}
 	//restore previous selection
 	_k_updateListSelection(m_provider->currentTheme());
+	delete dialog;
 }
 
 class KgThemeSelector::Dialog : public QDialog

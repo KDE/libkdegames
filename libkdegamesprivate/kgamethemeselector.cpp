@@ -208,10 +208,11 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updateThemeList(const QSt
 
 void KGameThemeSelector::KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
 {
-    KNS3::DownloadDialog dialog( q );
-    dialog.exec();
-    if ( !dialog.changedEntries().isEmpty() )
+    QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog( q ));
+    dialog->exec();
+    if ( dialog && !dialog->changedEntries().isEmpty() )
         findThemes( ui.kcfg_Theme->text() );
+    delete dialog;
 }
 
 #include "moc_kgamethemeselector.cpp"
