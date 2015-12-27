@@ -118,10 +118,10 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///KgTheme::previewPath(), and resizes the result to fit in @a size.
 		virtual QPixmap generatePreview(const KgTheme* theme, const QSize& size);
 
-		///Registers this KgThemeProvider with \p engine's root context with ID
-		///\p name and constructs a KgImageProvider corresponding
+		///Registers this KgThemeProvider with @a engine's root context with ID
+		///@a name and constructs a KgImageProvider corresponding
 		///to this KgThemeProvider and adds it to the QML engine, also
-		///with \p name, which will receive sprite requests
+		///with @a name, which will receive sprite requests
 		///@since 4.11
 		void setDeclarativeEngine(const QString& name, QQmlEngine* engine);
 	Q_SIGNALS:
