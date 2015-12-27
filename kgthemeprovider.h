@@ -130,7 +130,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///Emitted when the name of the provider changes.
 		///@since 4.11
 		void nameChanged(const QString& name);
-		///Emitts the new theme name when the current theme changes.
+		///Emitted when the name of the current theme changes.
 		///@since 4.11
 		void currentThemeNameChanged(const QString& themeName);
 	public Q_SLOTS:
