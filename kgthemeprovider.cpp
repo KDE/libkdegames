@@ -60,7 +60,7 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	, d(new Private(this, configKey))
 {
 	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-	
+
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
 	connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
@@ -184,7 +184,7 @@ void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& 
 static QString relativeToApplications(const QString& file)
 {
 	const QString canonical = QFileInfo(file).canonicalFilePath();
-	Q_FOREACH(const QString& base, QStandardPaths::standardLocations(QStandardPaths::DataLocation)) {
+	Q_FOREACH(const QString& base, QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)) {
 		if (canonical.startsWith(base))
 			return canonical.mid(base.length()+1);
 	}
@@ -197,14 +197,14 @@ void KgThemeProvider::rediscoverThemes()
 	{
 		return; //discoverThemes() was never called
 	}
-	
+
 	KgTheme* defaultTheme = NULL;
-	
+
 	d->m_inRediscover = true;
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
-				
+
 	QStringList themePaths;
-	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
+	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
 	Q_FOREACH (const QString &dir, dirs) {
 		const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
 		Q_FOREACH (const QString &file, fileNames) {
@@ -213,7 +213,7 @@ void KgThemeProvider::rediscoverThemes()
 			}
 		}
 	}
-	
+
 	//create themes from result, order default theme at the front (that's not
 	//needed by KgThemeProvider, but nice for the theme selector)
 	QList<KgTheme*> themes;
@@ -227,7 +227,7 @@ void KgThemeProvider::rediscoverThemes()
 		d->m_discoveredThemes << fi.fileName();
 		//the identifier is constructed such that it is compatible with
 		//KGameTheme (e.g. "themes/default.desktop")
-		
+
 		const QByteArray id = relativeToApplications(themePath).toUtf8();
 		//create theme
 		KgTheme* theme;
@@ -268,7 +268,7 @@ void KgThemeProvider::rediscoverThemes()
 	{
 		addTheme(theme);
 	}
-	
+
 	if(defaultTheme != NULL)
 	{
 		setDefaultTheme(defaultTheme);
@@ -277,7 +277,7 @@ void KgThemeProvider::rediscoverThemes()
 	{
 		setDefaultTheme(themes.value(0));
 	}
-	
+
 	d->m_inRediscover = false;
 }
 

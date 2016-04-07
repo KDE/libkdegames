@@ -72,7 +72,7 @@ bool KGameTheme::load(const QString &fileName) {
         qCDebug(GAMES_LIB) << "Refusing to load theme with no name";
         return false;
     }
-    QString filePath = QStandardPaths::locate(QStandardPaths::DataLocation, fileName);
+    QString filePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
     qCDebug(GAMES_LIB) << "Attempting to load .desktop at" << filePath;
     if (filePath.isEmpty()) {
         return false;
@@ -106,7 +106,7 @@ bool KGameTheme::load(const QString &fileName) {
     }
 
     QString graphName = group.readEntry("FileName");
-    //d->graphics = QStandardPaths::locate(QStandardPaths::DataLocation, graphName);
+    //d->graphics = QStandardPaths::locate(QStandardPaths::AppDataLocation, graphName);
     d->graphics = d->prefix + graphName;
     if (d->graphics.isEmpty()) return false;
 
@@ -118,7 +118,7 @@ bool KGameTheme::load(const QString &fileName) {
     }
 
     QString previewName = group.readEntry("Preview");
-    //QString graphicsPath = QStandardPaths::locate(QStandardPaths::DataLocation, previewName);
+    //QString graphicsPath = QStandardPaths::locate(QStandardPaths::AppDataLocation, previewName);
     QString graphicsPath = d->prefix + previewName;
     d->preview = QPixmap(graphicsPath);
 

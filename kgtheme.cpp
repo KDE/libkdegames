@@ -95,7 +95,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	QString path(path_);
 	if (QFileInfo(path).isRelative())
 	{
-		path = QStandardPaths::locate(QStandardPaths::DataLocation, path);
+		path = QStandardPaths::locate(QStandardPaths::AppDataLocation, path);
 		if (path.isEmpty())
 		{
 			qCDebug(GAMES_LIB) << "Could not find theme description" << path;
