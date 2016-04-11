@@ -445,6 +445,11 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
         }
         tabIndex++;
     }
+    int configGroupIndex = tabWidget->indexOf(tabs.value(configGroup));
+    if(!hiddenGroups.contains(configGroup) && configGroupIndex > -1)
+    {
+      tabWidget->setCurrentIndex(configGroupIndex);
+    }
     latest = QPair<QByteArray,int>(QByteArray(),-1);
     q->setFixedSize(q->minimumSizeHint()); //NOTE Remove this line to make dialog resizable
 }
