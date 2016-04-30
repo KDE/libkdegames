@@ -19,8 +19,8 @@
 #ifndef KGSOUND_H
 #define KGSOUND_H
 
-#include <QtCore/QObject>
-#include <QtCore/QPointF>
+#include <QObject>
+#include <QPointF>
 
 #include <libkdegames_export.h>
 

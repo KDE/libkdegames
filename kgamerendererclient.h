@@ -19,7 +19,7 @@
 #ifndef KGAMERENDERERCLIENT_H
 #define KGAMERENDERERCLIENT_H
 
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 #include <libkdegames_export.h>
 
@@ -50,7 +50,7 @@ class KGameRendererPrivate;
 class KDEGAMES_EXPORT KGameRendererClient
 {
 	public:
-		///Creates a new client which receives pixmaps for the sprite with the 
+		///Creates a new client which receives pixmaps for the sprite with the
 		///given @a spriteKey as provided by the given @a renderer.
 		KGameRendererClient(KGameRenderer* renderer, const QString& spriteKey);
 		virtual ~KGameRendererClient();
@@ -81,8 +81,8 @@ class KDEGAMES_EXPORT KGameRendererClient
 		///@return the size of the pixmap requested from KGameRenderer
 		QSize renderSize() const;
 		///Defines the size of the pixmap that will be requested from
-		///KGameRenderer. For pixmaps rendered on the screen, you usually want 
-		///to set this size such that the pixmap does not have to be scaled when 
+		///KGameRenderer. For pixmaps rendered on the screen, you usually want
+		///to set this size such that the pixmap does not have to be scaled when
 		///it is rendered onto your primary view (for speed reasons).
 		///
 		///The default render size is very small (width = height = 3 pixels), so
@@ -99,7 +99,7 @@ class KDEGAMES_EXPORT KGameRendererClient
 		void setCustomColors(const QHash<QColor, QColor>& customColors);
 	protected:
 		///This method is called when the KGameRenderer has provided a new
-		///pixmap for this client (esp. after theme changes and after calls to 
+		///pixmap for this client (esp. after theme changes and after calls to
 		///setFrame(), setRenderSize() and setSpriteKey()).
 		virtual void receivePixmap(const QPixmap& pixmap) = 0;
 	private:

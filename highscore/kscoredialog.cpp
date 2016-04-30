@@ -34,11 +34,11 @@ this software.
 #include <KConfigGroup>
 #include <KLineEdit>
 
-#include <QtCore/QTimer>
-#include <QtCore/QList>
-#include <QtCore/QByteArray>
+#include <QTimer>
+#include <QList>
+#include <QByteArray>
 #include <QGridLayout>
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QLayout>
 #include <QStackedWidget>

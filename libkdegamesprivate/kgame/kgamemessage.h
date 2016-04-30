@@ -21,7 +21,7 @@
 #ifndef __KGAMEMESSAGE_H_
 #define __KGAMEMESSAGE_H_
 
-#include <QtCore/QDataStream>
+#include <QDataStream>
 #include "libkdegamesprivate_export.h"
 
 /**
@@ -89,7 +89,7 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
     static void createHeader(QDataStream &msg, quint32 sender, quint32 receiver, int msgid);
 
     /**
-     * Retrieves the information like cookie,sender,receiver,... from a message header 
+     * Retrieves the information like cookie,sender,receiver,... from a message header
      *
      * Note that it could be necessary to call dropExternalHeader first
      */
@@ -123,7 +123,7 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
     /**
      * This function takes a @ref GameMessageIds as argument and returns a
      * suitable string for it. This string can't be used to identify a message
-     * (as it is i18n'ed) but it can make debugging more easy. 
+     * (as it is i18n'ed) but it can make debugging more easy.
      * @return Either a i18n'ed string (the name of the id) or QString() if
      * the msgid is unknown
      **/

@@ -19,15 +19,15 @@ class QObject;
 
 class KGameDifficultyPrivate;
 class KXmlGuiWindow;
-#include <QtCore/QMap>
-#include <QtCore/QPair>
+#include <QMap>
+#include <QPair>
 #include "libkdegamesprivate_export.h"
 
 
 
 /**
  * \class KGameDifficulty kgamedifficulty.h <KGameDifficulty>
- * 
+ *
  * @brief KGameDifficuty manages the game difficulty levels in a standard way
  *
  * KGameDifficulty manages the difficulty levels of a game. The

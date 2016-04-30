@@ -20,8 +20,8 @@
 #ifndef __KMESSAGECLIENT_H__
 #define __KMESSAGECLIENT_H__
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 #include "libkdegamesprivate_export.h"
 class KMessageIO;
@@ -30,7 +30,7 @@ class KMessageClientPrivate;
 
 /**
   \class KMessageClient kmessageclient.h <KGame/KMessageClient>
-  
+
   @short A client to connect to a KMessageServer
 
   This class implements a client that can connect to a KMessageServer object.
@@ -106,7 +106,7 @@ public:
     on the given host, listening on the specified port.
 
     If we were already connected, the old connection is closed.
-    @param host The name of the host to connect to. Must be either a hostname which can 
+    @param host The name of the host to connect to. Must be either a hostname which can
     be resolved to an IP or just an IP
     @param port The port to connect to
   */
@@ -242,7 +242,7 @@ public:
   void lock();
 
   /**
-    Deliver every message that was delayed by lock() and actually deliver 
+    Deliver every message that was delayed by lock() and actually deliver
     all messages that get received from now on.
    */
   void unlock();
@@ -364,7 +364,7 @@ Q_SIGNALS:
 
 protected:
   /**
-    This slot is called from processIncomingMessage or 
+    This slot is called from processIncomingMessage or
     processFirstMessage, depending on whether the client is locked or a delayed
     message is still here (see lock)
 
@@ -401,7 +401,7 @@ protected Q_SLOTS:
   virtual void processIncomingMessage (const QByteArray &msg);
 
   /**
-    Called from unlock() (using QTimer::singleShot) until all delayed 
+    Called from unlock() (using QTimer::singleShot) until all delayed
     messages are delivered.
   */
   void processFirstMessage();

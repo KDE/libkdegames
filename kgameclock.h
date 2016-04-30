@@ -22,14 +22,14 @@
 #ifndef __KGAMECLOCK_H
 #define __KGAMECLOCK_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <libkdegames_export.h>
 
 class KGameClockPrivate;
 
 /**
  * \class KGameClock kgameclock.h <KGameClock>
- * 
+ *
  * Class representing a game clock, wraps after 24 hours
  */
 class KDEGAMES_EXPORT KGameClock : public QObject
@@ -64,7 +64,7 @@ public:
      * Set the time (format should be "hh:mm:ss").
      */
     void setTime(const QString &s);
-    
+
     /**
      * Refresh
      */

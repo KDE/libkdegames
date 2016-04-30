@@ -23,7 +23,7 @@
 
 #include <libkdegames_export.h>
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QLoggingCategory>
 
 class KConfig;

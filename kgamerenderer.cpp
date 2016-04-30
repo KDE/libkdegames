@@ -23,11 +23,11 @@
 #include "kgtheme.h"
 #include "kgthemeprovider.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDateTime>
-#include <QtCore/QFileInfo>
-#include <QtCore/QScopedPointer>
-#include <QtGui/QPainter>
+#include <QCoreApplication>
+#include <QDateTime>
+#include <QFileInfo>
+#include <QScopedPointer>
+#include <QPainter>
 #include <QVariant>
 #include <QLoggingCategory>
 
@@ -61,7 +61,7 @@ KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned c
 	, m_imageCache(0)
 {
 	qRegisterMetaType<KGRInternal::Job*>();
-	
+
 }
 
 KGameRenderer::KGameRenderer(KgThemeProvider* provider, unsigned cacheSize)
@@ -160,7 +160,7 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 {
 	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-	
+
 	const KgTheme* oldTheme = m_currentTheme;
 	if (oldTheme == theme)
 	{
@@ -190,7 +190,7 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 {
 	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-	
+
 	if (!theme)
 	{
 		return false;

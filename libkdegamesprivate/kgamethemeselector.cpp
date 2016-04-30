@@ -25,8 +25,8 @@
 
 #include <QDirIterator>
 #include <QDir>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QCoreApplication>
+#include <QStandardPaths>
+#include <QCoreApplication>
 
 #include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
@@ -86,7 +86,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::setupData(KConfigSkeleton * 
     QString lastUsedTheme = configItem->property().toString();
 
     //Now get our themes into the list widget
-    
+
     findThemes(lastUsedTheme);
 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
@@ -103,7 +103,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     ui.themeList->setSortingEnabled(true);
 
     QStringList themesAvailable;
-        
+
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QCoreApplication::applicationName() + QLatin1Char( '/' ) + lookupDirectory, QStandardPaths::LocateDirectory);	//Added subdirectory for finding gamethemeselector resources
     Q_FOREACH(const QString& dir, dirs) {
 	    QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);

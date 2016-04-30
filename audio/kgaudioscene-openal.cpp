@@ -19,8 +19,8 @@
 #include "kgaudioscene.h"
 #include "kgopenalruntime_p.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QGlobalStatic>
+#include <QDebug>
+#include <QGlobalStatic>
 
 Q_GLOBAL_STATIC(KgOpenALRuntime, g_runtime)
 

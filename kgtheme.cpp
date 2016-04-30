@@ -18,9 +18,9 @@
 
 #include "kgtheme.h"
 
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QStandardPaths>
+#include <QDir>
+#include <QFileInfo>
+#include <QStandardPaths>
 
 #include <KConfig>
 #include <KConfigGroup>

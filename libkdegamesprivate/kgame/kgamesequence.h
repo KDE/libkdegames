@@ -21,7 +21,7 @@
 #ifndef __KGAMESEQUENCE_H_
 #define __KGAMESEQUENCE_H_
 
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "libkdegamesprivate_export.h"
 
@@ -30,7 +30,7 @@ class KGame;
 
 /**
  * \class KGameSequence kgamesequence.h <KGame/KGameSequence>
- * 
+ *
  * This class takes care of round or move management as well of the gameover
  * condition. It is especially used for round based games. For these games @ref
  * nextPlayer and @ref checkGameOver are the most important methods.

@@ -20,9 +20,9 @@
 #define KGAMERENDERER_H
 
 class QGraphicsView;
-#include <QtCore/QHash>
-#include <QtCore/QObject>
-#include <QtGui/QPixmap>
+#include <QHash>
+#include <QObject>
+#include <QPixmap>
 
 #include <libkdegames_export.h>
 
@@ -164,7 +164,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		Strategies strategies() const;
 		///Enables/disables an optimization strategy for this renderer. By
 		///default, both the UseDiskCache and the UseRenderingThreads strategies
-		///are enabled. This is a sane default for 99% of all games. You might 
+		///are enabled. This is a sane default for 99% of all games. You might
 		///only want to disable optimizations if the graphics are so simple that
 		///the optimizations create an overhead in your special case.
 		///

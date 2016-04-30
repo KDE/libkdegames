@@ -21,8 +21,8 @@
 #ifndef __KGAMEPROPERTYHANDLER_H_
 #define __KGAMEPROPERTYHANDLER_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QMultiHash>
+#include <QObject>
+#include <QMultiHash>
 
 #include "kgameproperty.h"
 #include "libkdegamesprivate_export.h"
@@ -35,7 +35,7 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
 
 /**
  * \class KGamePropertyHandler kgamepropertyhandler.h <KGame/KGamePropertyHandler>
- * 
+ *
  * @short A collection class for KGameProperty objects
  *
  * The KGamePropertyHandler class is some kind of a collection class for
@@ -46,28 +46,28 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
  *
  * You have to use the KGamePropertyHandler as parent for all KGameProperty
  * objects but you can also use KPlayer or KGame as parent - then
- * KPlayer::dataHandler or KGame::dataHandler will be used. 
+ * KPlayer::dataHandler or KGame::dataHandler will be used.
  *
  * Every KGamePropertyHandler must have - just like every KGameProperty -
  * a unique ID. This ID is provided either in the constructor or in
  * registerHandler. The ID is used to assign an incoming message (e.g. a changed
  * property) to the correct handler. Inside the handler the property ID is used
- * to change the correct property. 
+ * to change the correct property.
  *
  * The constructor or registerHandler takes 3 addittional arguments: a
  * receiver and two slots. The first slot is connected to
  * signalSendMessage, the second to signalPropertyChanged. You must provide
- * these in order to use the KGamePropertyHandler. 
+ * these in order to use the KGamePropertyHandler.
  *
  * The most important function of KGamePropertyHandler is processMessage
- * which assigns an incoming value to the correct property. 
+ * which assigns an incoming value to the correct property.
  *
  * A KGamePropertyHandler is also used - indirectly using emitSignal - to
  * emit a signal when the value of a property changes. This is done this way
  * because a KGameProperty does not inherit QObject because of memory
  * advantages. Many games can have dozens or even hundreds of KGameProperty
  * objects so every additional variable in KGameProperty would be
- * multiplied. 
+ * multiplied.
  *
  **/
 class KDEGAMESPRIVATE_EXPORT KGamePropertyHandler : public QObject
@@ -84,7 +84,7 @@ public:
 	KGamePropertyHandler(QObject* parent = 0);
 
 	/**
-	 * Construct a registered handler. 
+	 * Construct a registered handler.
 	 *
 	 * @see registerHandler
 	 **/
@@ -102,30 +102,30 @@ public:
 	 * @param send A slot that is being connected to signalSendMessage
 	 * @param emit A slot that is being connected to signalPropertyChanged
 	 **/
-	void registerHandler(int id, const QObject *receiver, const char * send, const char *emit); 
+	void registerHandler(int id, const QObject *receiver, const char * send, const char *emit);
 
 	/**
 	 * Main message process function. This has to be called by
 	 * the parent's message event handler. If the id of the message
-	 * agrees with the id of the handler, the message is extracted 
+	 * agrees with the id of the handler, the message is extracted
 	 * and processed. Otherwise false is returned.
 	 * Example:
 	 * \code
 	 *   if (mProperties.processMessage(stream,msgid,sender==gameId())) return ;
 	 * \endcode
-	 * 
+	 *
 	 * @param stream The data stream containing the message
 	 * @param id the message id of the message
 	 * @param isSender Whether the receiver is also the sender
 	 * @return true on message processed otherwise false
 	 **/
 	bool processMessage(QDataStream &stream, int id, bool isSender );
-	
+
 	/**
 	 * @return the id of the handler
 	 **/
 	int id() const;
-	
+
 	/**
 	 * Adds a KGameProperty property to the handler
 	 * @param data the property
@@ -166,21 +166,21 @@ public:
 	 * @return true on success otherwise false
 	 **/
 	virtual bool save(QDataStream &stream);
-	
+
 	/**
 	 * called by a property to send itself into the
 	 * datastream. This call is simply forwarded to
 	 * the parent object
-	 **/ 
+	 **/
 	bool sendProperty(QDataStream &s);
 
 	void sendLocked(bool l);
 
 	/**
-	 * called by a property to emit a signal 
+	 * called by a property to emit a signal
 	 * This call is simply forwarded to
 	 * the parent object
-	 **/ 
+	 **/
 	void emitSignal(KGamePropertyBase *data);
 
 	/**
@@ -251,7 +251,7 @@ public:
 	 * the lockIndirectEmits
 	 **/
 	void unlockDirectEmit();
-  
+
 	/**
 	 * Returns the default policy for this property handler. All properties
 	 * registered newly, will have this property.
@@ -278,7 +278,7 @@ public:
 	/**
 	 * Reference to the internal dictionary
 	 **/
-        QMultiHash<int, KGamePropertyBase*> &dict() const; 
+        QMultiHash<int, KGamePropertyBase*> &dict() const;
 
 	/**
 	 * In several situations you just want to have a QString of a
@@ -288,7 +288,7 @@ public:
 	 * property (probably a self defined class or something like this) you
 	 * also need to connect to signalRequestValue to make this function
 	 * useful.
-	 * @param property Return the value of this KGameProperty 
+	 * @param property Return the value of this KGameProperty
 	 * @return The value of a KGameProperty
 	 **/
 	QString propertyValue(KGamePropertyBase* property);
@@ -296,17 +296,17 @@ public:
 
 	/**
 	 * Writes some debug output to the console.
-	 **/ 
+	 **/
 	void Debug();
 
 
 Q_SIGNALS:
 	/**
 	 * This is emitted by a property. KGamePropertyBase::emitSignal
-	 * calls emitSignal which emits this signal. 
+	 * calls emitSignal which emits this signal.
 	 *
 	 * This signal is emitted whenever the property is changed. Note that
-	 * you can switch off this behaviour using 
+	 * you can switch off this behaviour using
 	 * KGamePropertyBase::setEmittingSignal in favor of performance. Note
 	 * that you won't experience any performance loss using signals unless
 	 * you use dozens or hundreds of properties which change very often.

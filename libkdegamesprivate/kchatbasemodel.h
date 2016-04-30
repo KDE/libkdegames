@@ -20,8 +20,8 @@
 #ifndef __KCHATBASEMODEL_H__
 #define __KCHATBASEMODEL_H__
 
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QPair>
+#include <QAbstractListModel>
+#include <QPair>
 #include <QLoggingCategory>
 
 #include "libkdegamesprivate_export.h"
@@ -34,9 +34,9 @@ class KConfig;
 
 /**
   * \class KChatBaseMessage kchatbasemodel.h <KChatBaseModel>
-  * 
+  *
   * @short The class of the elements stored in the chat list model
-  * 
+  *
   * It's a pair of strings where the first element is the sender name and the
   * second one is the actual message. It furthermore indicates the type of the
   * message: normal or system
@@ -50,12 +50,12 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
       Normal,
       System
     };
-    
+
     /** Default constructor. Necessary for Qt metatypes */
     KChatBaseMessage();
-    
+
     /** Initializing constructor */
-    KChatBaseMessage(const QString& sender, const QString& message, 
+    KChatBaseMessage(const QString& sender, const QString& message,
           MessageType type=Normal);
 
     /** Copy constructor. Necessary for Qt metatypes */
@@ -63,7 +63,7 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
 
     /** Default destructor */
     virtual ~KChatBaseMessage();
-    
+
   private:
     KChatBaseMessagePrivate* d;
 };
@@ -71,30 +71,30 @@ Q_DECLARE_METATYPE(KChatBaseMessage)
 
 /**
  * \class KChatBaseModel kchatbasemodel.h <KChatBaseModel>
- * 
- * The model used to store messages displayed in the chat dialog messages 
+ *
+ * The model used to store messages displayed in the chat dialog messages
  * list. This is a list model and thus derived from @ref QAbstractListModel
  * and implementing its abstract API.
  */
 class KDEGAMESPRIVATE_EXPORT KChatBaseModel : public QAbstractListModel
 {
   Q_OBJECT
-  
+
 public:
   /** Default constructor */
   KChatBaseModel(QObject *parent = 0);
 
   /** Default destructor */
   virtual ~KChatBaseModel();
-    
-  /** 
+
+  /**
     * Reimplementation of the inherited method.
     * @return The current number of messages in the list
     */
   virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-  
-  
-  /** 
+
+
+  /**
     * Reimplementation of the inherited method.
     * @return The KChatBaseMessage at the given index as a QVariant
     */
@@ -105,7 +105,7 @@ public:
    * nameFont and setBothFont
    **/
   void setNameFont(const QFont& font);
-  
+
   /**
    * Set the font that is used for the message part of a message.
    * @see messageFont, setBothFont
@@ -138,7 +138,7 @@ public:
   /**
    * This font should be used for the name (the "from: " part) of a
    * message. layoutMessage uses this to set the font using
-   * KChatBaseItemDelegate::setNameFont but if you want to overwrite 
+   * KChatBaseItemDelegate::setNameFont but if you want to overwrite
    * layoutMessage you should do this yourself.
    * @return The font that is used for the name part of the message.
    **/
@@ -211,7 +211,7 @@ public Q_SLOTS:
    * Update: the function layoutMessage is called by this now. This
    * means that you will get user defined outlook on the messages :-)
    * @param fromName The player who sent this message
-   * @param text The text to be added 
+   * @param text The text to be added
    **/
   virtual void addMessage(const QString& fromName, const QString& text);
 

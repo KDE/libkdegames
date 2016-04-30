@@ -21,7 +21,7 @@
 #ifndef __KGAMECHAT_H__
 #define __KGAMECHAT_H__
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "../kchatbase.h"
 #include "libkdegamesprivate_export.h"
@@ -33,7 +33,7 @@ class KGameChatPrivate;
 
 /**
  * \class KGameChat kgamechat.h <KGame/KGameChat>
- * 
+ *
  * @short A Chat widget for KGame-based games
  *
  * Call @ref setFromPlayer() first - this will be used as the "from" part of
@@ -141,7 +141,7 @@ protected:
 	 * KPlayer::group), e.g. if "send to my group" was selected.
 	 **/
 	bool isToGroupMessage(int id) const;
-	
+
 
 	/**
 	 * Used to indicate whether the message shall be sent to a single player
@@ -150,7 +150,7 @@ protected:
 	 * This behaviour might be changed later - so don't depend on it.
 	 *
 	 * See also toPlayerId
-	 * @param id The ID of the sending entry, as returned by 
+	 * @param id The ID of the sending entry, as returned by
 	 * KChatBase::sendingEntry
 	 * @return True if the message shall be sent to a special player,
 	 * otherwise false.
@@ -162,7 +162,7 @@ protected:
 	 * KChatBase::sendingEntry
 	 * @return The ID of the player (see KPlayer::id) the sending entry
 	 * belongs to. Note that the parameter id is an id as returned by ref
-	 * KChatBase::sendingEntry and the id this method returns is a 
+	 * KChatBase::sendingEntry and the id this method returns is a
 	 * KPlayer ID. If isToPlayerMessage returns false this method
 	 * returns -1
 	 **/
@@ -176,7 +176,7 @@ protected:
 	int sendingId(int playerId) const;
 
 	/**
-	 * @return True if the player with this ID was added before (see 
+	 * @return True if the player with this ID was added before (see
 	 * slotAddPlayer)
 	 **/
 	bool hasPlayer(int id) const;

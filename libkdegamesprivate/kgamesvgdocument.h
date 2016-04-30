@@ -24,10 +24,10 @@
 #ifndef _KGAMESVGDOCUMENT_H_
 #define _KGAMESVGDOCUMENT_H_
 
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
-#include <QtGui/QMatrix>
-#include <QtXml/QDomDocument>
+#include <QHash>
+#include <QStringList>
+#include <QMatrix>
+#include <QDomDocument>
 #include <QLoggingCategory>
 
 #include "libkdegamesprivate_export.h"
@@ -38,7 +38,7 @@ class KGameSvgDocumentPrivate;
 
 /**
  * \class KGameSvgDocument kgamesvgdocument.h <KGameSvgDocument>
- * 
+ *
  * @brief A class for manipulating an SVG file using DOM
  *
  * This class is a wrapper around QDomDocument for SVG files.
@@ -52,7 +52,7 @@ class KGameSvgDocumentPrivate;
  *     means that style & matrix changes we make happen to the DOM immediately.
  *
  * A typical use is to read in an SVG file, edit the style or transform attributes
- * in DOM as desired, and then output a QByteArray suitable for being loaded with 
+ * in DOM as desired, and then output a QByteArray suitable for being loaded with
  * QSvgRenderer::load().
  *
  * To read an SVG file into DOM:
@@ -89,7 +89,7 @@ class KGameSvgDocumentPrivate;
  * // Skew the horizontal axis 7.5 degrees
  * svgDom.skew(-7.5, 0, KGameSvgDocument::ReplaceCurrentMatrix);
  * @endcode
- * 
+ *
  * @warning Be careful when using the KGameSvgDocument::ApplyToCurrentMatrix flag. It multiplies the matrices,
  *     so if you repeatedly apply the same matrix to a node, you have a polynomial series @c x^2, and you will
  *     very quickly run into overflow issues.
@@ -107,7 +107,7 @@ class KGameSvgDocumentPrivate;
  * QByteArray svg = svgDom.toByteArray();
  * svgRenderer.load(svg);
  * @endcode
- * 
+ *
  * @see QDomDocument, QSvgRenderer
  * @author Mark A. Taff \<kde@marktaff.com\>
  * @version 0.1
@@ -140,7 +140,7 @@ public:
 
     /**
      * @brief Options for applying (multiplying) or replacing the current matrix
-     */ 
+     */
     enum MatrixOption {
         /**
         * Apply to current matrix
@@ -156,7 +156,7 @@ public:
 
     /**
      * Options for sorting style properties when building a style attribute
-     */ 
+     */
     enum StylePropertySortOption {
         /**
         * When building a style attribute, do not sort
@@ -281,7 +281,7 @@ public:
 
     /**
      * @brief Returns the last node found by elementById, or null if node not found
-     * 
+     *
      * @returns The current node
      * @see setCurrentNode()
      */
@@ -298,7 +298,7 @@ public:
 
     /**
      * @brief Returns the name of the SVG file this DOM represents.
-     * 
+     *
      * @returns The current filename.
      * @see setSvgFilename()
      */
@@ -315,13 +315,13 @@ public:
 
     /**
      * @brief Returns the value of the style property given for the current node.
-     * 
+     *
      * @note Internally, we create a hash with @c styleProperties, then return the value
      *     of the @c propertyName property.  As such, if you need the values of multiple
      *     properties, it will be more efficient to call @c styleProperties()
      *     and then use the hash directly.
      *
-     * See KGameSvgDocumentPrivate::m_inkscapeOrder for a list of common SVG style properties 
+     * See KGameSvgDocumentPrivate::m_inkscapeOrder for a list of common SVG style properties
      *
      * @param propertyName the name of the property to return
      * @returns The value style property given, or null if no such property for this node.
@@ -331,11 +331,11 @@ public:
 
     /**
      * @brief Sets the value of the style property given for the current node.
-     * 
+     *
      * @note Internally, we create a hash with @c styleProperties, then update the
      *  @p propertyName to @p propertyValue, before finally applying the hash to
      *      DOM via @c setStyleProperties().  Because of this, if you need to set multiple
-     *      properties per node, it will be more efficient to call @c styleProperties(), 
+     *      properties per node, it will be more efficient to call @c styleProperties(),
      *      modify the hash it returns, and then apply the hash with @c setStyleProperties().
      *
      * @param propertyName The name of the property to set.
@@ -347,7 +347,7 @@ public:
 
     /**
      * @brief Returns the current node and its children as a new xml svg document.
-     * 
+     *
      * @returns The xml for the new svg document
      */
     QString nodeToSvg() const;
@@ -355,7 +355,7 @@ public:
     /**
      * @brief Builds a new svg document and returns a QByteArray suitable for passing to QSvgRenderer::load().
      *
-     * Internally, we call @c nodeToSvg() and then convert to a QByteArray, so this method 
+     * Internally, we call @c nodeToSvg() and then convert to a QByteArray, so this method
      * should be called @b instead of @c nodeToSvg().
      *
      * @returns the QByteArray
@@ -367,7 +367,7 @@ public:
      *
      * Unless you are parsing your own style attribute for some reason, you probably
      * want to use styleProperty() or styleProperties().
-     * 
+     *
      * @returns The style atttibute.
      * @see styleProperty() styleProperties()
      */
@@ -378,10 +378,10 @@ public:
      *
      * Unless you are parsing your own style attribute for some reason, you probably
      * want to use setStyleProperty() or setStyleProperties().
-     * 
+     *
      * @param styleAttribute The style attribute to apply.
      * @returns nothing
-     * 
+     *
      * @see setStyleProperty() setStyleProperties()
      */
     void setStyle(const QString& styleAttribute);
@@ -430,7 +430,7 @@ public:
 
     /**
      * @brief Sets the transform attribute of the current node.
-     * 
+     *
      * As this function works on QStrings, it <b>replaces</b> the existing
      * transform attribute.  If you need to multiply, use setTransformMatrix() instead.
      *
@@ -463,7 +463,7 @@ public:
 
     /**
      * @brief Returns the transform attribute of the current node as a matrix.
-     * 
+     *
      * @returns The matrix for the transform atttibute.
      * @see setTransformMatrix()
      */
@@ -477,7 +477,7 @@ public:
      *     We modify matrix internally if @p options includes ApplyToCurrentMatrix, so it can't
      *     be passed as const.
      *     Normally we want to apply the existing matrix. If we apply the matrix,
-     *     we potentially end up squaring with each call, e.g. x^2. 
+     *     we potentially end up squaring with each call, e.g. x^2.
      * @returns nothing
      * @see transformMatrix()
      */

@@ -20,8 +20,8 @@
 #ifndef __KMESSAGESERVER_H__
 #define __KMESSAGESERVER_H__
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 #include "libkdegamesprivate_export.h"
 
 class KMessageIO;
@@ -29,7 +29,7 @@ class KMessageServerPrivate;
 
 /**
   \class KMessageServer kmessageserver.h <KGame/KMessageServer>
-  
+
   @short A server for message sending and broadcasting, using TCP/IP connections.
 
   An object of this class listens for incoming connections via TCP/IP sockets and
@@ -180,8 +180,8 @@ public:
     /**
       MessageIDs for messages from a client to the message server.
     */
-    enum { 
-            REQ_BROADCAST = 1, 
+    enum {
+            REQ_BROADCAST = 1,
             REQ_FORWARD,
             REQ_CLIENT_ID,
             REQ_ADMIN_ID,
@@ -195,12 +195,12 @@ public:
      * MessageIDs for messages from the message server to a client.
      **/
     enum {
-            MSG_BROADCAST = 101, 
-            MSG_FORWARD, 
-            ANS_CLIENT_ID, 
-            ANS_ADMIN_ID, 
+            MSG_BROADCAST = 101,
+            MSG_FORWARD,
+            ANS_CLIENT_ID,
+            ANS_ADMIN_ID,
             ANS_CLIENT_LIST,
-            EVNT_CLIENT_CONNECTED, 
+            EVNT_CLIENT_CONNECTED,
             EVNT_CLIENT_DISCONNECTED,
             EVNT_MAX_EVNT = 0xffff
     };

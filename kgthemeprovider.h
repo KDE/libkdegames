@@ -19,7 +19,7 @@
 #ifndef KGTHEMEPROVIDER_H
 #define KGTHEMEPROVIDER_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QtQml>
 
 #include <kgtheme.h>

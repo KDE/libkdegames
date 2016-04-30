@@ -19,12 +19,12 @@
 #ifndef KGAMERENDERER_P_H
 #define KGAMERENDERER_P_H
 
-#include <QtCore/QHash>
-#include <QtCore/QMetaType>
-#include <QtCore/QMutex>
-#include <QtCore/QRunnable>
-#include <QtCore/QThreadPool>
-#include <QtSvg/QSvgRenderer>
+#include <QHash>
+#include <QMetaType>
+#include <QMutex>
+#include <QRunnable>
+#include <QThreadPool>
+#include <QSvgRenderer>
 #include <KImageCache>
 
 namespace KGRInternal

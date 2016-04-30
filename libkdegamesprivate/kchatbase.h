@@ -20,7 +20,7 @@
 #ifndef __KCHATBASE_H__
 #define __KCHATBASE_H__
 
-#include <QtWidgets/QFrame>
+#include <QFrame>
 #include <QLoggingCategory>
 
 #include <kcompletion.h>
@@ -39,7 +39,7 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 /**
  * \class KChatBase kchatbase.h <KChatBase>
- * 
+ *
  * @short The base class for chat widgets
  *
  * This is the base class for both KChat and KGameChat. KGameChat is the class
@@ -47,11 +47,11 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
  * you. KChat is more or less the same but not KGame dependant
  *
  * KChatBase provides a complete chat widget, featuring different sending means
- * (e.g. "send to all", "send to player1", "send to group2" and so on - see 
+ * (e.g. "send to all", "send to player1", "send to group2" and so on - see
  * addSendingEntry). It also provides full auto-completion capabilities (see
  * KCompletion and KLineEdit) which defaults to disabled. The user can
  * change this by right-clicking on the KLineEdit widget and selecting the
- * desired behaviour. You can also change this manually by calling 
+ * desired behaviour. You can also change this manually by calling
  * setCompletionMode.
  *
  * To make KhatBase useful you have to overwrite at least returnPressed.
@@ -59,7 +59,7 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
  * them, depending on sendingEntry).
  *
  * To add a message just call addMessage with the nickname of the player
- * who sent the message and the message itself. 
+ * who sent the message and the message itself.
  *
  * You probably don't want to use the abstract class KChatBase directly but use
  * one of the derived classes KChat or KGameChat. The latter is the
@@ -70,7 +70,7 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  * @author Gael de Chalendar (aka Kleag) <kleag@free.fr> for the port to Model/View
- * 
+ *
  **/
 class KDEGAMESPRIVATE_EXPORT KChatBase : public QFrame
 {
@@ -84,7 +84,7 @@ public:
 	 * choose where to send messages to (either globally or just to some
 	 * players) will not be added.
 	 **/
-	explicit KChatBase(QWidget* parent, KChatBaseModel* model=0, 
+	explicit KChatBase(QWidget* parent, KChatBaseModel* model=0,
                            KChatBaseItemDelegate* delegate=0,
                            bool noComboBox = false);
 
@@ -124,7 +124,7 @@ public:
 	 * @param text The entry
 	 * @param id An ID for this entry. This must be unique for this
 	 * entry. It has nothing to do with the position of the entry in the
-	 * combo box! 
+	 * combo box!
 	 * @see nextId
 	 * @param index The position of the entry. If -1 the entry will be added
 	 * at the bottom
@@ -147,7 +147,7 @@ public:
 
 	/**
 	 * Removes the entry with the ID id from the combo box. Note that id is
-	 * _not_ the index of the entry! 
+	 * _not_ the index of the entry!
 	 * @see addSendingEntry
 	 * @param id The unique id of the entry
 	 **/
@@ -161,7 +161,7 @@ public:
 	 * KChatBase::SendToAll, i.e. 0 as id!
 	 **/
 	int sendingEntry() const;
-	
+
 	/**
 	 * @return The index of the combo box entry with the given id
 	 **/
@@ -174,7 +174,7 @@ public:
 	int nextId() const;
 
 	/**
-	 * @return True if this widget is able to send messages (see 
+	 * @return True if this widget is able to send messages (see
 	 * returnPressed) and false if not. The default implementation returns
 	 * the value which has been set by setAcceptMessage (true by
 	 * default)
@@ -191,7 +191,7 @@ public:
 	 * nameFont and setBothFont
 	 **/
 	void setNameFont(const QFont& font);
-	
+
 	/**
 	 * Set the font that used used for the message part of a message.
 	 * @see messageFont, setBothFont
@@ -227,7 +227,7 @@ public:
 	/**
 	 * This font should be used for the name (the "from: " part) of a
 	 * message. layoutMessage uses this to set the font using
-	 * KChatBaseItemDelegate::setNameFont but if you want to overwrite 
+	 * KChatBaseItemDelegate::setNameFont but if you want to overwrite
 	 * layoutMessage you should do this yourself.
 	 * @return The font that is used for the name part of the message.
 	 **/
@@ -305,12 +305,12 @@ public Q_SLOTS:
 	 * Update: the function layoutMessage is called by this now. This
 	 * means that you will get user defined outlook on the messages :-)
 	 * @param fromName The player who sent this message
-	 * @param text The text to be added 
+	 * @param text The text to be added
 	 **/
 	virtual void addMessage(const QString& fromName, const QString& text);
 
 	/**
-	 * This works just like addMessage but adds a system message. 
+	 * This works just like addMessage but adds a system message.
 	 * layoutSystemMessage is used to generate the displayed item. System
 	 * messages will have a different look than player messages.
 	 *
@@ -362,7 +362,7 @@ protected:
 
 private Q_SLOTS:
 	/**
-	 * Check if a text was entered and if acceptMessage returns true. 
+	 * Check if a text was entered and if acceptMessage returns true.
 	 * Then add the message to the KCompletion object of the KLineEdit
 	 * widget and call returnPressed
 	 **/

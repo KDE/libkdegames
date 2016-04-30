@@ -19,7 +19,7 @@
 #ifndef KGAUDIOSCENE_H
 #define KGAUDIOSCENE_H
 
-#include <QtCore/QPointF>
+#include <QPointF>
 
 #include <libkdegames_export.h>
 

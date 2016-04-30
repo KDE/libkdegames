@@ -19,20 +19,20 @@
 #ifndef __KCHATBASEITEMDELEGATE_H__
 #define __KCHATBASEITEMDELEGATE_H__
 
-#include <QtWidgets/QAbstractItemDelegate>
+#include <QAbstractItemDelegate>
 
 #include "libkdegamesprivate_export.h"
 
 /**
  * \class KChatBaseItemDelegate kchatbaseitemdelegate.h <KChatBaseItemDelegate>
- * 
- * A delegate (see the Qt Model/View module for details) to paint the lines of 
- * the KChatBase list model (@ref KChatBaseModel). 
+ *
+ * A delegate (see the Qt Model/View module for details) to paint the lines of
+ * the KChatBase list model (@ref KChatBaseModel).
  *
  * A KChatBaseItemDelegate paints two text items: first the player part then the
- * text part. This honors KChatBase::addMessage which also uses both. 
+ * text part. This honors KChatBase::addMessage which also uses both.
  *
- * Colors and fonts for both parts are set in the corresponding model. 
+ * Colors and fonts for both parts are set in the corresponding model.
  **/
 class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegate
 {
@@ -43,30 +43,30 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegat
       * Constructs a KChatBaseItemDelegate object
       **/
     explicit KChatBaseItemDelegate(QObject *parent = 0);
-    
+
     /**
       * Destruct a KChatBaseItemDelegate object.
       **/
     virtual ~KChatBaseItemDelegate();
 
     /**
-      * Reimplementation of the default paint method. Draws the item at the 
+      * Reimplementation of the default paint method. Draws the item at the
       * given index in the model with good fonts for player name and message.
-      * 
+      *
       * Should be reimplemented in inherited delegates
       */
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option,
                 const QModelIndex &index) const;
 
-    void paint(QPainter *painter, 
+    void paint(QPainter *painter,
 		const QStyleOptionViewItem &option,
 		const QModelIndex &index,
 		const QString& sender,
 		const QString& message) const;
     /**
-      * Reimplementation of the default sizeHint. Computes the given item size 
+      * Reimplementation of the default sizeHint. Computes the given item size
       * depending on the name and message sizes and on the fonts they use.
-      * 
+      *
       * Should be reimplemented in inherited delegates
       */
     virtual QSize sizeHint(const QStyleOptionViewItem &option,

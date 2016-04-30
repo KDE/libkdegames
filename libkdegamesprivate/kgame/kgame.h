@@ -21,9 +21,9 @@
 #ifndef __KGAME_H_
 #define __KGAME_H_
 
-#include <QtCore/QDataStream>
-#include <QtCore/QString>
-#include <QtCore/QList>
+#include <QDataStream>
+#include <QString>
+#include <QList>
 #include <QLoggingCategory>
 
 #include "kgamenetwork.h"
@@ -42,7 +42,7 @@ class KGamePrivate;
 
 /**
  * \class KGame kgame.h <KGame/KGame>
- * 
+ *
  * @short The main KDE game object
  *
  * The KGame class is the central game object. A game basically
@@ -532,7 +532,7 @@ Q_SIGNALS:
      * the data which is NOT a game or player property.
      * It is not necessary to use this signal for a full property game.
      *
-     * This signal is emitted <em>before</em> the players are loaded by 
+     * This signal is emitted <em>before</em> the players are loaded by
      * KGame. See also signalLoad
      *
      * You must load <em>exactly</em> the same data from the stream that you have saved
@@ -557,7 +557,7 @@ Q_SIGNALS:
      * which is NOT a game or player property.
      * It is not necessary to use this signal for a full property game.
      *
-     * This signal is emitted <em>before</em> the players are saved by 
+     * This signal is emitted <em>before</em> the players are saved by
      * KGame. See also signalSave
      *
      * If you can choose between signalSavePrePlayers and signalSave then
@@ -566,7 +566,7 @@ Q_SIGNALS:
      * @param stream the save stream
      **/
     void signalSavePrePlayers(QDataStream &stream);
-    
+
     /**
      * The game will be saved to the given stream. Fill this with data
      * which is NOT a game or player property.
@@ -861,10 +861,10 @@ protected:
     virtual int checkGameOver(KPlayer *player);
 
     /**
-     * Load a saved game, from file OR network. Internal. 
+     * Load a saved game, from file OR network. Internal.
      * Warning: loadgame must not rely that all players all already
      * activated. Actually the network will activate a player AFTER
-     * the loadgame only. This is not true anymore. But be careful 
+     * the loadgame only. This is not true anymore. But be careful
      * anyway.
      *
      * @param stream a data stream where you can stream the game from
@@ -876,7 +876,7 @@ protected:
     virtual bool loadgame(QDataStream &stream, bool network, bool reset);
 
     /**
-     * Save a game, to file OR network. Internal. 
+     * Save a game, to file OR network. Internal.
      *
      * @param stream a data stream where you can stream the game from
      * @param network is it a call from the network or from a file (unused but informative)

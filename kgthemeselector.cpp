@@ -19,18 +19,18 @@
 #include "kgthemeselector.h"
 #include "kgthemeselector_p.h"
 
-#include <QtGui/QCloseEvent>
-#include <QtGui/QFont>
-#include <QtGui/QFontMetrics>
-#include <QtGui/QPainter>
-#include <QtWidgets/QAbstractItemView>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QListWidget>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollBar>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QDialog>
+#include <QCloseEvent>
+#include <QFont>
+#include <QFontMetrics>
+#include <QPainter>
+#include <QAbstractItemView>
+#include <QApplication>
+#include <QListWidget>
+#include <QPushButton>
+#include <QScrollBar>
+#include <QVBoxLayout>
+#include <QDialogButtonBox>
+#include <QDialog>
 
 #include <QIcon>
 #include <KLocalizedString>
@@ -93,7 +93,7 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 		layout->addWidget(d->m_knsButton);
 		connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));
 	}
-	
+
 }
 
 KgThemeSelector::~KgThemeSelector()
@@ -177,21 +177,21 @@ class KgThemeSelector::Dialog : public QDialog
 			QVBoxLayout *mainLayout = new QVBoxLayout;
 			setLayout(mainLayout);
 			mainLayout->addWidget(sel);
-			
+
 			//replace
 			QPushButton* btn = sel->d->m_knsButton;
-			
+
 			QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
-			
+
 			if (btn)
 			{
 				btn->hide();
-								
+
 				QPushButton *stuff = new QPushButton(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")), btn->text());
 				buttonBox->addButton(stuff, QDialogButtonBox::ActionRole);
 				buttonBox->addButton(QDialogButtonBox::Close);
 
-			        connect(stuff, SIGNAL(clicked()), btn, SIGNAL(clicked()));	
+			        connect(stuff, SIGNAL(clicked()), btn, SIGNAL(clicked()));
 				connect(buttonBox, &QDialogButtonBox::rejected, this, &KgThemeSelector::Dialog::reject);
 			}
 			else
@@ -208,7 +208,7 @@ class KgThemeSelector::Dialog : public QDialog
 			{
 				setWindowTitle(caption);
 			}
-			
+
 			mainLayout->addWidget(buttonBox);
 			show();
 		}

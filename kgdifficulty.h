@@ -21,8 +21,8 @@
 #ifndef KGDIFFICULTY_H
 #define KGDIFFICULTY_H
 
-#include <QtCore/QMetaType>
-#include <QtCore/QObject>
+#include <QMetaType>
+#include <QObject>
 
 #include <libkdegames_export.h>
 

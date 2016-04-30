@@ -19,8 +19,8 @@
 #ifndef KGAMERENDEREDITEM_H
 #define KGAMERENDEREDITEM_H
 
-#include <QtCore/QObject>
-#include <QtWidgets/QGraphicsItem>
+#include <QObject>
+#include <QGraphicsItem>
 
 #include <kgamerendererclient.h>
 #include <libkdegames_export.h>

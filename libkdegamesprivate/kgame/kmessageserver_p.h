@@ -20,7 +20,7 @@
 #ifndef __KMESSAGESERVER_P_H__
 #define __KMESSAGESERVER_P_H__
 
-#include <QtNetwork/QTcpServer>
+#include <QTcpServer>
 
 class KMessageIO;
 

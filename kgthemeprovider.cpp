@@ -19,8 +19,8 @@
 #include "kgthemeprovider.h"
 #include "kgimageprovider_p.h"
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QStandardPaths>
+#include <QFileInfo>
+#include <QStandardPaths>
 #include <QLoggingCategory>
 #include <QGuiApplication>
 

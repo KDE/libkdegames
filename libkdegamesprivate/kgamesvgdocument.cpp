@@ -21,12 +21,12 @@
 
 #include <kfilterdev.h>
 
-#include <QtCore/QBuffer>
-#include <QtCore/QFile>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtXml/QDomElement>
-#include <QtXml/QDomNode>
+#include <QBuffer>
+#include <QFile>
+#include <QString>
+#include <QStringList>
+#include <QDomElement>
+#include <QDomNode>
 #include <QDebug>
 
 #include <math.h>

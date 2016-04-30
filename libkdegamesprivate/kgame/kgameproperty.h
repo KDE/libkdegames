@@ -21,8 +21,8 @@
 #ifndef __KGAMEPROPERTY_H_
 #define __KGAMEPROPERTY_H_
 
-#include <QtCore/QDataStream>
-#include <QtCore/QDebug>
+#include <QDataStream>
+#include <QDebug>
 
 #include <typeinfo>
 #include "libkdegamesprivate_export.h"
@@ -241,7 +241,7 @@ public:
 	int id() const { return mId; }
 
 	/**
-	 * @return a type_info of the data this property contains. 
+	 * @return a type_info of the data this property contains.
 	 **/
 	virtual const type_info* typeinfo() { return &typeid(this); }
 

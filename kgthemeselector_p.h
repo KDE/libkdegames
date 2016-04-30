@@ -19,7 +19,7 @@
 #ifndef KGAME_GRAPHICSDELEGATE_P_H
 #define KGAME_GRAPHICSDELEGATE_P_H
 
-#include <QtWidgets/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 
 #include <libkdegames_export.h>
 

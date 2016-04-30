@@ -20,7 +20,7 @@
 
 #include "kgdifficulty.h"
 
-#include <QtCore/QVector>
+#include <QVector>
 #include <KConfigGroup>
 #include <KGuiItem>
 #include <KMessageBox>

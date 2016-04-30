@@ -22,11 +22,11 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QMap>
-#include <QtCore/QStandardPaths>
-#include <QtGui/QPixmap>
+#include <QFile>
+#include <QFileInfo>
+#include <QMap>
+#include <QStandardPaths>
+#include <QPixmap>
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "games.lib")
 

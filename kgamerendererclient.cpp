@@ -20,7 +20,7 @@
 #include "kgamerenderer.h"
 #include "kgamerenderer_p.h"
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 KGameRendererClientPrivate::KGameRendererClientPrivate(KGameRenderer* renderer, const QString& spriteKey, KGameRendererClient* parent)
 	: m_parent(parent)

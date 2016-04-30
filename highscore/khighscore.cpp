@@ -28,7 +28,7 @@
 #include <KLocalizedString>
 #include <KConfigGroup>
 
-#include <QtCore/QFile>
+#include <QFile>
 #include <QLockFile>
 #include <QGlobalStatic>
 
@@ -101,7 +101,7 @@ void KHighscore::init(const char *appname)
 #ifdef HIGHSCORE_DIRECTORY
     const QString filename =  QString::fromLocal8Bit("%1/%2.scores")
                               .arg(HIGHSCORE_DIRECTORY).arg(appname);
-    
+
     //int fd = fopen(filename.toLocal8Bit(), O_RDWR);
     /*QFile file(filename);
     if ( !file.open(QIODevice::ReadWrite) )
@@ -110,14 +110,14 @@ void KHighscore::init(const char *appname)
                                << filename << "\"";
       abort();
     }*/
-    
+
     /*if (!(QFile::permissions(filename) & QFile::WriteOwner))
-      { 
+      {
 	qCWarning(GAMES_HIGHSCORE) << "cannot write to global highscore file \""
                 << filename << "\"";
 	abort();
       }*/
-    
+
     qCDebug(GAMES_HIGHSCORE) << "Global highscore file \"" << filename << "\"";
     lockedConfig->lock = new QLockFile(filename);
     lockedConfig->config = new KConfig(filename, KConfig::NoGlobals); // read-only   (matt-?)

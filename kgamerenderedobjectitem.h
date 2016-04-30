@@ -19,8 +19,8 @@
 #ifndef KGAMERENDEREDOBJECTITEM_H
 #define KGAMERENDEREDOBJECTITEM_H
 
-#include <QtCore/QObject>
-#include <QtWidgets/QGraphicsItem>
+#include <QObject>
+#include <QGraphicsItem>
 class QGraphicsView;
 
 #include <kgamerendererclient.h>

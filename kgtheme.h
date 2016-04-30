@@ -24,10 +24,10 @@
 #define KGTHEME_PROVIDE_COMPATIBILITY_API
 #endif //MAKE_KDEGAMES_LIB
 
-#include <QtCore/QMetaType>
-#include <QtCore/QObject>
+#include <QMetaType>
+#include <QObject>
 #include <QLoggingCategory>
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 #include <libkdegames_export.h>
 

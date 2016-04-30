@@ -21,8 +21,8 @@
 #ifndef __KGAMENETWORK_H_
 #define __KGAMENETWORK_H_
 
-#include <QtCore/QString>
-#include <QtCore/QObject>
+#include <QString>
+#include <QObject>
 #include "libkdegamesprivate_export.h"
 
 class KGameIO;
@@ -34,7 +34,7 @@ class KGameNetworkPrivate;
 
 /**
  * \class KGameNetwork kgamenetwork.h <KGame/KGameNetwork>
- * 
+ *
  * The KGameNetwork class is the KGame class with network
  * support. All other features are the same but they are
  * now network transparent. It is not used directly but
@@ -100,7 +100,7 @@ public:
 
     /**
      * Inits a network game as network MASTER. Note that if the
-     * KMessageServer is not yet started it will be started here (see 
+     * KMessageServer is not yet started it will be started here (see
      * setMaster). Any existing connection will be disconnected.
      *
      * If you already offer connections the port is changed.
@@ -111,7 +111,7 @@ public:
     bool offerConnections (quint16 port);
 
     void setDiscoveryInfo(const QString& type, const QString& name=QString());
-    
+
     /**
      * Inits a network game as a network CLIENT
      *
@@ -122,7 +122,7 @@ public:
      **/
     bool connectToServer(const QString& host, quint16 port);
     bool connectToServer(KMessageIO *connection);
-    
+
     /**
      * @return The port we are listening to if offerConnections was called
      * or the port we are connected to if connectToServer was called.
@@ -161,7 +161,7 @@ public:
     /**
      * Sends a network message msg with a given msg id msgid to all clients.
      * Use this to communicate with KGame (e.g. to add a player ot to configure
-     * the game - usually not necessary). 
+     * the game - usually not necessary).
      *
      * For your own messages use  sendMessage instead! This is mostly
      * internal!
@@ -202,8 +202,8 @@ public:
      * @param receiver the KGame / KPlayer this message is for. 0 For
      * all
      * @param sender The KGame / KPlayer this message is from (i.e.
-     * you). You probably want to leave this 0, then KGameNetwork will create 
-     * the correct value for you. You might want to use this if you send a 
+     * you). You probably want to leave this 0, then KGameNetwork will create
+     * the correct value for you. You might want to use this if you send a
      * message from a specific player.
      **/
     void sendError(int error, const QByteArray& message, quint32 receiver=0, quint32 sender=0);
@@ -318,7 +318,7 @@ public:
     /**
      * You should call this before doing thigs like, e.g. qApp->processEvents().
      * Don't forget to call unlock once you are done!
-     * 
+     *
      * @see KMessageClient::lock
      **/
     virtual void lock();

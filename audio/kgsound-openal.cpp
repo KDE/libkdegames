@@ -21,7 +21,7 @@
 
 #include <sndfile.hh>
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 class KgSound::Private
 {

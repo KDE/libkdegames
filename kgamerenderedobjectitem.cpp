@@ -19,8 +19,8 @@
 #include "kgamerenderedobjectitem.h"
 #include "kgamerenderer.h"
 
-#include <QtCore/qmath.h>
-#include <QtWidgets/QGraphicsView>
+#include <QtMath>
+#include <QGraphicsView>
 
 class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 {

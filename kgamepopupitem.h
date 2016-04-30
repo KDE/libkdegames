@@ -20,14 +20,14 @@
 
 #include <libkdegames_export.h>
 
-#include <QtWidgets/QGraphicsItem>
-#include <QtCore/QObject>
+#include <QGraphicsItem>
+#include <QObject>
 
 class KGamePopupItemPrivate;
 
 /**
  * \class KGamePopupItem kgamepopupitem.h <KGamePopupItem>
- * 
+ *
  * QGraphicsItem capable of showing short popup messages
  * which do not interrupt the gameplay.
  * Message can stay on screen for specified amount of time

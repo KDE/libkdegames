@@ -21,7 +21,7 @@
 #ifndef __KGAMEERROR_H_
 #define __KGAMEERROR_H_
 
-#include <QtCore/QString>
+#include <QString>
 
 /**
  * \class KGameError kgameerror.h <KGame/KGameError>
@@ -47,9 +47,9 @@ public:
 	 * Create an erorr text using a QDataStream (QByteArray) which was
 	 * created using @ref KGameError. This is the opposite function to all
 	 * the errXYZ() function (e.g. @ref errVersion).
-	 * You want to use this to generate the message that shall be 
+	 * You want to use this to generate the message that shall be
 	 * displayed to the user.
-	 * @return an error message 
+	 * @return an error message
 	 **/
 	static QString errorText(int errorCode, QDataStream& message);
 	static QString errorText(int errorCode, const QByteArray& message);

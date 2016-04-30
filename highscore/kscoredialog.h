@@ -28,8 +28,8 @@ this software.
 
 #include <libkdegames_export.h>
 
-#include <QtCore/QMap>
-#include <QtCore/QFlags>
+#include <QMap>
+#include <QFlags>
 #include <QDialogButtonBox>
 
 #include <QDialog>

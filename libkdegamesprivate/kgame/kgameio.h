@@ -21,8 +21,8 @@
 #ifndef __KGAMEIO_H__
 #define __KGAMEIO_H__
 
-#include <QtCore/QString>
-#include <QtCore/QObject>
+#include <QString>
+#include <QObject>
 
 #include "libkdegamesprivate_export.h"
 
@@ -40,7 +40,7 @@ class KGameComputerIOPrivate;
 
 /**
  *  \class KGameIO kgameio.h <KGame/KGameIO>
- * 
+ *
  *  \short Base class for IO devices for games
  *
  *  This is the master class for
@@ -58,7 +58,7 @@ class KGameComputerIOPrivate;
  *  to be controlled by the computer or vice versa.
  *
  *  To achieve this you have to make all of your player inputs through a
- *  KGameIO. You will usually call KGameIO::sendInput to do so. 
+ *  KGameIO. You will usually call KGameIO::sendInput to do so.
  *
  *  @author Martin Heni <kde at heni-online.de>
  */
@@ -90,7 +90,7 @@ public:
     * @return rtti value
     */
    virtual int rtti() const = 0;  // Computer, network, local, ...
-   
+
    /**
     * This function returns the player who owns this IO
     *
@@ -106,7 +106,7 @@ public:
 
    /**
     * Sets the player to which this IO belongs to. This
-    * is done automatically when adding a device to a 
+    * is done automatically when adding a device to a
     * player
     *
     * @param p the player
@@ -153,7 +153,7 @@ Q_SIGNALS:
      * Often you want to ignore this signal (leave send=FALSE) and send the
      * message later. This is usually the case for a human player as he probably
      * doesn't react immediately. But you can still use this e.g. to notify the
-     * player about the turn change. 
+     * player about the turn change.
      *
      * Example:
      * \code
@@ -184,7 +184,7 @@ private:
 
 /**
  *  \class KGameKeyIO kgameio.h <KGame/KGameIO>
- * 
+ *
  *  The KGameKeyIO class. It is used to process keyboard input
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <kde at heni-online.de>
@@ -263,7 +263,7 @@ private:
 
 /**
  *  \class KGameMouseIO kgameio.h <KGame/KGameIO>
- * 
+ *
  *  The KGameMouseIO class. It is used to process mouse input
  *  from a widget and create moves for the player it belongs to.
  *  @author Martin Heni <kde at heni-online.de>
@@ -271,7 +271,7 @@ private:
 class KDEGAMESPRIVATE_EXPORT KGameMouseIO : public KGameIO
 {
   Q_OBJECT
-    
+
 public:
     /**
      * Creates a mouse IO device. It captures all mouse
@@ -291,7 +291,7 @@ public:
     explicit KGameMouseIO(QWidget *parent,bool trackmouse=false);
     explicit KGameMouseIO(QGraphicsScene *parent,bool trackmouse=false);
     virtual ~KGameMouseIO();
-    
+
     /**
      * Manually activate or deactivate mouse tracking
      *
@@ -303,7 +303,7 @@ public:
      *
      * @return MouseIO
      */
-    virtual int rtti() const; 
+    virtual int rtti() const;
 
 Q_SIGNALS:
       /**
@@ -343,7 +343,7 @@ private:
 
 /**
  *  \class KGameProcessIO kgameio.h <KGame/KGameIO>
- * 
+ *
  *  The KGameProcessIO class. It is used to create a computer player
  *  via a separate process and communicate transparetly with it.
  *  Its counterpart is the @ref KGameProcess class which needs
@@ -353,11 +353,11 @@ private:
 class KDEGAMESPRIVATE_EXPORT KGameProcessIO : public KGameIO
 {
   Q_OBJECT
-    
+
 public:
-    /** 
+    /**
      * Creates a computer player via a separate process. The process
-     * name is given as fully qualified filename. 
+     * name is given as fully qualified filename.
      * Example:
      * \code
      * KGameProcessIO *input;
@@ -373,7 +373,7 @@ public:
     KGameProcessIO(const QString& name);
 
     /**
-     * Deletes the process input devices 
+     * Deletes the process input devices
      */
     virtual ~KGameProcessIO();
 
@@ -383,7 +383,7 @@ public:
      * @return ProcessIO
      */
     int rtti() const;
-    
+
     /**
      * Send a message to the process. This is analogous to the sendMessage
      * commands of KGame. It will result in a signal of the computer player
@@ -408,11 +408,11 @@ public:
      */
     void sendSystemMessage(QDataStream &stream, int msgid, quint32 receiver, quint32 sender);
 
-    /** 
+    /**
      * Init this device by setting the player and e.g. sending an
      * init message to the device. Calling this function will emit
      * the IOAdded signal on which you can react and initilise the
-     * computer player. 
+     * computer player.
      * This function is called automatically when adding the IO to
      * a player.
      */
@@ -431,7 +431,7 @@ public:
 
   protected:
     /**
-     * Internal ~ombined function for all message handling 
+     * Internal ~ombined function for all message handling
      **/
     void sendAllMessages(QDataStream &stream,int msgid, quint32 receiver, quint32 sender, bool usermsg);
 
@@ -441,7 +441,7 @@ public:
   */
     void receivedMessage(const QByteArray& receiveBuffer);
 
-  
+
 Q_SIGNALS:
   /**
    * A computer query message is received. This is a 'dummy'
@@ -469,7 +469,7 @@ Q_SIGNALS:
   void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
 
   /**
-  * Signal generated when the computer player is added. 
+  * Signal generated when the computer player is added.
   * You can use this to communicated with the process and
   * e.g. send initialisation information to the process.
   *
@@ -494,11 +494,11 @@ private:
 
 /**
  *  \class KGameComputerIO kgameio.h <KGame/KGameIO>
- * 
+ *
  *  \brief KGameIO variant for real-time games
  *
  *  The KGameComputerIO class. It is used to create a LOCAL computer player
- *  and communicate transparently with it. 
+ *  and communicate transparently with it.
  *  Question: Is this needed or is it overwritten anyway for a real game?
  *
  *  You most probably don't want to use this if you want to design a turn based
@@ -513,10 +513,10 @@ private:
 class KDEGAMESPRIVATE_EXPORT KGameComputerIO : public KGameIO
 {
   Q_OBJECT
-    
+
 public:
-    /** 
-     * Creates a LOCAL computer player 
+    /**
+     * Creates a LOCAL computer player
      *
      */
     KGameComputerIO();
@@ -527,7 +527,7 @@ public:
 
     /**
      * The number of advance calls until the player (or rather: the IO)
-     * does something (default: 1). 
+     * does something (default: 1).
      **/
     void setReactionPeriod(int advanceCalls);
     int reactionPeriod() const;
@@ -540,13 +540,13 @@ public:
     void stopAdvancePeriod();
 
     /**
-     * Ignore calls number of advance calls. if calls is -1 then all 
+     * Ignore calls number of advance calls. if calls is -1 then all
      * following advance calls are ignored until unpause is called.
      *
      * This simply prevents the internal advance counter to be increased.
      *
      * You may want to use this to emulate a "thinking" computer player. Note
-     * that this means if you increase the advance period (see 
+     * that this means if you increase the advance period (see
      * setAdvancePeriod), i.e. if you change the speed of your game, your
      * computer player thinks "faster".
      * @param calls Number of advance calls to be ignored
@@ -558,12 +558,12 @@ public:
      * advance counter.
      **/
     void unpause();
-    
+
 public Q_SLOTS:
     /**
      * Works kind of similar to QCanvas::advance. Increase the internal
      * advance counter. If @p reactionPeriod is reached the counter is set back to
-     * 0 and @ref signalReaction is emitted. This is when the player is meant 
+     * 0 and @ref signalReaction is emitted. This is when the player is meant
      * to do something (move its units or so).
      *
      * This is very useful if you use QCanvas as you can use this in your
@@ -573,10 +573,10 @@ public Q_SLOTS:
      *
      * If you don't use QCanvas you can use setAdvancePeriod to get
      * the same result. Alternatively you can just use a QTimer.
-     * 
+     *
      **/
     virtual void advance();
-  
+
 Q_SIGNALS:
     /**
      * This signal is emitted when your computer player is meant to do

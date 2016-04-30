@@ -22,7 +22,7 @@
 
 #include "libkdegamesprivate_export.h"
 
-#include <QtCore/QString>
+#include <QString>
 #include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
@@ -32,7 +32,7 @@ class QPixmap;
 
 /**
  * \class KGameTheme kgametheme.h <KGameTheme>
- * 
+ *
  * @short Class for loading theme files
  *
  * Essentially just a wrapper around a .desktop theme file. Load a file with

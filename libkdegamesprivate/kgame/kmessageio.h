@@ -24,15 +24,15 @@
 #ifndef _KMESSAGEIO_H_
 #define _KMESSAGEIO_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QProcess>
-#include <QtCore/QString>
-#include <QtNetwork/QHostAddress>
+#include <QObject>
+#include <QProcess>
+#include <QString>
+#include <QHostAddress>
 #include <QLoggingCategory>
 
 #include "../libkdegamesprivate_export.h"
 
-/* 
+/*
     This macro shouldn't be here ideally. Already declared in kgame.h, but throws error if not placed here.
 */
 Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
@@ -43,7 +43,7 @@ class KProcess;
 
 /**
   \class KMessageIO kmessageio.h <KGame/KMessageIO>
-  
+
   This abstract base class represents one end of a message connections
   between two clients. Each client has one object of a subclass of
   KMessageIO. Calling /e send() on one object will emit the signal
@@ -85,7 +85,7 @@ public:
   //virtual bool isNetwork () const = 0;
   virtual bool isNetwork () const
   {
-   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));  
+   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
    return false;
   }
@@ -100,7 +100,7 @@ public:
   //virtual bool isConnected () const = 0;
   virtual bool isConnected () const
   {
-   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));  
+   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConencted...BAD";
    return false;
   }
@@ -169,7 +169,7 @@ protected:
 
 /**
   \class KMessageSocket kmessageio.h <KGame/KMessageIO>
-  
+
   This class implements the message communication using a TCP/IP socket. The
   object can connect to a server socket, or can use an already connected socket.
 */
@@ -280,7 +280,7 @@ protected:
 
 /**
   \class KMessageDirect kmessageio.h <KGame/KMessageIO>
-  
+
   This class implements the message communication using function calls
   directly. It can only be used when both sides of the message pipe are
   within the same process. The communication is very fast.
@@ -355,7 +355,7 @@ protected:
  */
 class KMessageProcess : public KMessageIO
 {
-  Q_OBJECT 
+  Q_OBJECT
 
   public:
     KMessageProcess(QObject *parent, const QString& file);

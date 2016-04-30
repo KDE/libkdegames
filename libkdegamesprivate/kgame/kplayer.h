@@ -21,8 +21,8 @@
 #ifndef __KPLAYER_H_
 #define __KPLAYER_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 #include "libkdegamesprivate_export.h"
 
@@ -35,7 +35,7 @@ class KPlayerPrivate;
 
 /**
  * \class KPlayer kplayer.h <KPlayer>
- * 
+ *
  * @short Base class for a game player
  *
  * The KPlayer class is the central player object. It holds
@@ -50,7 +50,7 @@ class KPlayerPrivate;
  * a KPlayer into a KGame object. Note that you cannot do much with a
  * KPlayer object before it has been plugged into a KGame. This is because
  * most properties of KPlayer are KGameProperty which need to send messages
- * through a KGame object to be changed. 
+ * through a KGame object to be changed.
  *
  * A KGameIO represents the input methods of a player and you should make all
  * player inputs through it. So call something like playerInput->move(4);
@@ -60,7 +60,7 @@ class KPlayerPrivate;
  * replace it by a computerIO on the fly! So from that point on all playerInputs
  * are done by the computerIO instead of the human player. You also can replace
  * all network players by computer players when the network connection is broken
- * or a player wants to quit. 
+ * or a player wants to quit.
  * So remember: use KGameIO whenever possible! A KPlayer should just
  * contain all data of the player (KGameIO must not!) and several common
  * functions which are shared by all of your KGameIOs.
@@ -97,7 +97,7 @@ public:
 
       // properties
       /**
-       * Returns a list of input devices 
+       * Returns a list of input devices
        *
        * @return list of devices
        */
@@ -129,7 +129,7 @@ public:
       void setAsyncInput(bool a);
 
       /**
-       * Query whether this player does asynchronous 
+       * Query whether this player does asynchronous
        * input
        *
        * @return true/false
@@ -137,7 +137,7 @@ public:
       bool asyncInput() const;
 
       /**
-       * Is this player a virtual player, ie is it 
+       * Is this player a virtual player, ie is it
        * created by mirroring a real player from another
        * network game. This mirroring is done autmatically
        * as soon as a network connection is build and it affects
@@ -177,7 +177,7 @@ public:
        *
        * @return the player id
        */
-      quint32 id() const; 
+      quint32 id() const;
 
       /* Set the players id. This is done automatically by
        * the game object when adding a new player!
@@ -190,9 +190,9 @@ public:
        * Returns the user defined id of the player
        * This value can be used arbitrary by you to
        * have some user idendification for your player,
-       * e.g. 0 for a white chess player, 1 for a black 
-       * one. This value is more reliable than the player 
-       * id whcih can even change when you make a network 
+       * e.g. 0 for a white chess player, 1 for a black
+       * one. This value is more reliable than the player
+       * id whcih can even change when you make a network
        * connection.
        *
        * @return the user defined player id
@@ -207,8 +207,8 @@ public:
 
       /**
        * Returns whether this player can be replaced by a network
-       * connection player. The name of this function can be 
-       * improved ;-) If you do not overwrite the function to 
+       * connection player. The name of this function can be
+       * improved ;-) If you do not overwrite the function to
        * select what players shall play in a network the KGame
        * does an automatic selection based on the networkPriority
        * This is not a terrible important function at the moment.
@@ -243,7 +243,7 @@ public:
       KPlayer *networkPlayer() const;
 
       /**
-       * Sets this network player replacement. Internal stuff 
+       * Sets this network player replacement. Internal stuff
        */
       void setNetworkPlayer(KPlayer *p);
 
@@ -355,12 +355,12 @@ public:
 
       // load/save
      /**
-      * Load a saved player, from file OR network. By default all 
+      * Load a saved player, from file OR network. By default all
       * KGameProperty objects in the dataHandler of this player are loaded
       * and saved when using load or save. If you need to save/load more
       * you have to replace this function (and save). You will probably
       * still want to call the default implementation additionally!
-      * 
+      *
       * @param stream a data stream where you can stream the player from
       *
       * @return true?
@@ -381,12 +381,12 @@ public:
        * @param msgid The kind of the message. See messages.txt for further
        * information
        * @param stream The message itself
-       * @param sender 
+       * @param sender
        **/
       void networkTransmission(QDataStream &stream,int msgid,quint32 sender);
 
       /**
-       * Searches for a property of the player given its id. 
+       * Searches for a property of the player given its id.
        * @param id The id of the property
        * @return The property with the specified id
        **/
@@ -406,7 +406,7 @@ public:
       /**
        * Calculates a checksum over the IO devices. Can be used to
        * restore the IO handlers. The value returned is the 'or'ed
-       * value of the KGameIO rtti's. 
+       * value of the KGameIO rtti's.
        * this is itnernally used for saving and restorign a player.
        */
       int calcIOValue();
