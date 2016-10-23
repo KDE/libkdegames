@@ -109,7 +109,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
 	    QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
 	    while (it.hasNext()) {
                     QFileInfo fileInfo(it.next());
-		    const QString filePath = fileInfo.fileName();
+		    const QString filePath = QDir(dir).relativeFilePath(fileInfo.filePath());
 		    themesAvailable.append(filePath);
 	    }
     }
