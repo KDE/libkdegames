@@ -114,11 +114,11 @@ public:
 	 * reimplemented from @ref KChatBase
 	 * @return @ref KPlayer::name() for the player set by @ref setFromPlayer
 	 **/
-	virtual QString fromName() const;
+	QString fromName() const Q_DECL_OVERRIDE;
 
 
 public Q_SLOTS:
-	virtual void addMessage(const QString& fromName, const QString& text) { KChatBase::addMessage(fromName, text);}
+	void addMessage(const QString& fromName, const QString& text) Q_DECL_OVERRIDE { KChatBase::addMessage(fromName, text);}
 	virtual void addMessage(int fromId, const QString& text);
 
 	void slotReceiveMessage(int, const QByteArray&, quint32 receiver, quint32 sender);
@@ -211,7 +211,7 @@ protected Q_SLOTS:
 	void slotReceivePrivateMessage(int msgid, const QByteArray& buffer, quint32 sender, KPlayer* me);
 
 protected:
-	virtual void returnPressed(const QString& text);
+	void returnPressed(const QString& text) Q_DECL_OVERRIDE;
 
 private:
 	void init(KGame* g, int msgid);

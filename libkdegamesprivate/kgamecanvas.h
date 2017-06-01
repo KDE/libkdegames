@@ -250,10 +250,10 @@ public:
     virtual ~KGameCanvasDummy();
 
     /** This function does nothing (of course) */
-    virtual void paint(QPainter* p);
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
 
     /** This returns an empty rectangle */
-    virtual QRect rect() const;
+    QRect rect() const Q_DECL_OVERRIDE;
 };
 
 
@@ -272,15 +272,15 @@ private:
     mutable bool m_child_rect_changed;
     mutable QRect m_last_child_rect;
 
-    virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint& delta, double cumulative_opacity);
+    void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
+                                          const QPoint& delta, double cumulative_opacity) Q_DECL_OVERRIDE;
 
-    virtual void ensureAnimating();
-    virtual void ensurePendingUpdate();
-    virtual void invalidate(const QRect& r, bool translate = true);
-    virtual void invalidate(const QRegion& r, bool translate = true);
-    virtual void updateChanges();
-    virtual void changed();
+    void ensureAnimating() Q_DECL_OVERRIDE;
+    void ensurePendingUpdate() Q_DECL_OVERRIDE;
+    void invalidate(const QRect& r, bool translate = true) Q_DECL_OVERRIDE;
+    void invalidate(const QRegion& r, bool translate = true) Q_DECL_OVERRIDE;
+    void updateChanges() Q_DECL_OVERRIDE;
+    void changed() Q_DECL_OVERRIDE;
 
 public:
     /** Constructor */
@@ -289,18 +289,18 @@ public:
     virtual ~KGameCanvasGroup();
 
     /** This paints all the children */
-    virtual void paint(QPainter* p);
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
 
     /** This returns the bouding rect of all children */
-    virtual QRect rect() const;
+    QRect rect() const Q_DECL_OVERRIDE;
 
     /** Animations step, updates the animation for the children */
-    virtual void advance(int msecs);
+    void advance(int msecs) Q_DECL_OVERRIDE;
 
     /** returns the toplevel canvas (or null if it is in an orphan tree) */
-    KGameCanvasWidget* topLevelCanvas();
+    KGameCanvasWidget* topLevelCanvas() Q_DECL_OVERRIDE;
 
-    virtual QPoint canvasPosition() const;
+    QPoint canvasPosition() const Q_DECL_OVERRIDE;
 };
 
 /**
@@ -331,8 +331,8 @@ public:
     /** Sets the picture of the sprite */
     void setPicture(const QPicture& picture);
 
-    virtual void paint(QPainter* p);
-    virtual QRect rect() const;
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
+    QRect rect() const Q_DECL_OVERRIDE;
 };
 
 /**
@@ -363,9 +363,9 @@ public:
     /** Sets the pixmap of the sprite */
     void setPixmap(const QPixmap& pixmap);
 
-    virtual void paint(QPainter* p);
-    virtual QRect rect() const;
-    virtual bool layered() const { return false; }
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
+    QRect rect() const Q_DECL_OVERRIDE;
+    bool layered() const Q_DECL_OVERRIDE { return false; }
 };
 
 /**
@@ -383,7 +383,7 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasRenderedPixmap : public KGameCanvasPixma
 public:
 	KGameCanvasRenderedPixmap(KGameRenderer* renderer, const QString& spriteKey, KGameCanvasAbstract* canvas = 0);
 protected:
-	virtual void receivePixmap(const QPixmap& pixmap);
+	void receivePixmap(const QPixmap& pixmap) Q_DECL_OVERRIDE;
 };
 
 /**
@@ -433,9 +433,9 @@ public:
     /** Sets if the origin of the brush will be moved with the pixmap */
     void setMoveOrigin(bool move_orig);
 
-    virtual void paint(QPainter* p);
-    virtual QRect rect() const;
-    virtual bool layered() const { return false; }
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
+    QRect rect() const Q_DECL_OVERRIDE;
+    bool layered() const Q_DECL_OVERRIDE { return false; }
 };
 
 
@@ -471,9 +471,9 @@ public:
     /** Sets the size */
     void setSize(const QSize &size);
 
-    virtual void paint(QPainter* p);
-    virtual QRect rect() const;
-    virtual bool layered() const { return false; }
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
+    QRect rect() const Q_DECL_OVERRIDE;
+    bool layered() const Q_DECL_OVERRIDE { return false; }
 };
 
 /**
@@ -556,9 +556,9 @@ public:
     /** Sets the positioning style */
     void setPositioning(HPos hp, VPos vp);
 
-    virtual void paint(QPainter* p);
-    virtual QRect rect() const;
-    virtual bool layered() const { return false; }
+    void paint(QPainter* p) Q_DECL_OVERRIDE;
+    QRect rect() const Q_DECL_OVERRIDE;
+    bool layered() const Q_DECL_OVERRIDE { return false; }
 };
 
 /**
@@ -579,12 +579,12 @@ private:
 
     class  KGameCanvasWidgetPrivate *priv;
 
-    virtual void ensureAnimating();
-    virtual void ensurePendingUpdate();
-    virtual void invalidate(const QRect& r, bool translate = true);
-    virtual void invalidate(const QRegion& r, bool translate = true);
+    void ensureAnimating() Q_DECL_OVERRIDE;
+    void ensurePendingUpdate() Q_DECL_OVERRIDE;
+    void invalidate(const QRect& r, bool translate = true) Q_DECL_OVERRIDE;
+    void invalidate(const QRegion& r, bool translate = true) Q_DECL_OVERRIDE;
 
-    virtual void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void processAnimations();
@@ -604,10 +604,10 @@ public:
     int mSecs();
 
     /** returns 'this' */
-    KGameCanvasWidget* topLevelCanvas();
+    KGameCanvasWidget* topLevelCanvas() Q_DECL_OVERRIDE;
 
     /** @return 0 */
-    virtual QPoint canvasPosition() const;
+    QPoint canvasPosition() const Q_DECL_OVERRIDE;
 };
 
 /**
@@ -639,10 +639,10 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
     bool m_child_rect_valid;
     QRect m_invalidated_rect;
 
-    virtual void ensureAnimating() { }
-    virtual void ensurePendingUpdate();
-    virtual void invalidate(const QRect& r, bool translate = true);
-    virtual void invalidate(const QRegion& r, bool translate = true);
+    void ensureAnimating() Q_DECL_OVERRIDE { }
+    void ensurePendingUpdate() Q_DECL_OVERRIDE;
+    void invalidate(const QRect& r, bool translate = true) Q_DECL_OVERRIDE;
+    void invalidate(const QRegion& r, bool translate = true) Q_DECL_OVERRIDE;
 
     QRect childRect();
 public:
@@ -653,7 +653,7 @@ public:
       * An adapter is not associated to any canvas, so this function
       * simply returns 0.
       */
-    virtual class KGameCanvasWidget* topLevelCanvas() { return 0; }
+    class KGameCanvasWidget* topLevelCanvas() Q_DECL_OVERRIDE { return 0; }
 
     /**
       * The absolute position of the rendered content is not well
@@ -664,7 +664,7 @@ public:
       *
       * @return The point (0, 0).
       */
-    virtual QPoint canvasPosition() const { return QPoint(0, 0); }
+    QPoint canvasPosition() const Q_DECL_OVERRIDE { return QPoint(0, 0); }
 
     /**
       * Draw the items of the adapter using the specified painter.

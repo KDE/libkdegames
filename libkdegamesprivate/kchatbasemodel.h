@@ -91,14 +91,14 @@ public:
     * Reimplementation of the inherited method.
     * @return The current number of messages in the list
     */
-  virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+  int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
 
   /**
     * Reimplementation of the inherited method.
     * @return The KChatBaseMessage at the given index as a QVariant
     */
-  virtual QVariant data(const QModelIndex &index, int role) const;
+  QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 
   /**
    * Set the font that is used for the name part of a message. See also

@@ -235,27 +235,27 @@ public:
   /**
   * The runtime idendifcation
   */
-  virtual int rtti() const {return 1;}
+  int rtti() const Q_DECL_OVERRIDE {return 1;}
 
   /**
     @return The port that this object is connected to. See QSocket::peerPort
   */
-  virtual quint16 peerPort () const;
+  quint16 peerPort () const Q_DECL_OVERRIDE;
 
   /**
     @return The hostname this object is connected to. See QSocket::peerName.
   */
-  virtual QString peerName () const;
+  QString peerName () const Q_DECL_OVERRIDE;
 
   /**
     @return TRUE as this is a network IO.
   */
-  bool isNetwork() const { return true; }
+  bool isNetwork() const Q_DECL_OVERRIDE { return true; }
 
   /**
     Returns true if the socket is in state /e connected.
   */
-  bool isConnected () const;
+  bool isConnected () const Q_DECL_OVERRIDE;
 
   /**
     Overwritten slot method from KMessageIO.
@@ -263,7 +263,7 @@ public:
     Note: It is not declared as a slot method, since the slot is already
     defined in KMessageIO as a virtual method.
   */
-  void send (const QByteArray &msg);
+  void send (const QByteArray &msg) Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
   virtual void processNewData ();
@@ -320,13 +320,13 @@ public:
   /**
   * The runtime idendifcation
   */
-  virtual int rtti() const {return 2;}
+  int rtti() const Q_DECL_OVERRIDE {return 2;}
 
 
   /**
     @return FALSE as this is no network IO.
   */
-  bool isNetwork() const { return false; }
+  bool isNetwork() const Q_DECL_OVERRIDE { return false; }
 
   /**
     Returns true, if the object is connected to another instance.
@@ -336,7 +336,7 @@ public:
 
     The connection can only be closed by deleting one of the objects.
   */
-  bool isConnected () const;
+  bool isConnected () const Q_DECL_OVERRIDE;
 
   /**
     Overwritten slot method from KMessageIO.
@@ -344,7 +344,7 @@ public:
     Note: It is not declared as a slot method, since the slot is already
     defined in KMessageIO as a virtual method.
   */
-  void send (const QByteArray &msg);
+  void send (const QByteArray &msg) Q_DECL_OVERRIDE;
 
 protected:
   KMessageDirect *mPartner;
@@ -360,18 +360,18 @@ class KMessageProcess : public KMessageIO
   public:
     KMessageProcess(QObject *parent, const QString& file);
     ~KMessageProcess();
-    bool isConnected() const;
-    void send (const QByteArray &msg);
+    bool isConnected() const Q_DECL_OVERRIDE;
+    void send (const QByteArray &msg) Q_DECL_OVERRIDE;
 
     /**
       @return FALSE as this is no network IO.
     */
-    bool isNetwork() const { return false; }
+    bool isNetwork() const Q_DECL_OVERRIDE { return false; }
 
   /**
   * The runtime idendifcation
   */
-  virtual int rtti() const {return 3;}
+  int rtti() const Q_DECL_OVERRIDE {return 3;}
 
 
 

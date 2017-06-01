@@ -48,7 +48,7 @@ public:
     KgImageProvider(KgThemeProvider* provider);
 
     ///Reimplemented method that is called when a sprite pixmap is requested
-    QImage requestImage(const QString& source, QSize *size, const QSize &requestedSize);
+    QImage requestImage(const QString& source, QSize *size, const QSize &requestedSize) Q_DECL_OVERRIDE;
 
 private:
     void reloadRenderer();

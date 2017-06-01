@@ -44,7 +44,7 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGa
 		KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent = 0);
 		virtual ~KGameRenderedItem();
 	protected:
-		virtual void receivePixmap(const QPixmap& pixmap);
+		void receivePixmap(const QPixmap& pixmap) Q_DECL_OVERRIDE;
 	private:
 		friend class KGameRenderedItemPrivate;
 		KGameRenderedItemPrivate* const d;

@@ -94,7 +94,7 @@ namespace KGRInternal
 		public:
 			Worker(Job* job, bool isSynchronous, KGameRendererPrivate* parent);
 
-			virtual void run();
+			void run() Q_DECL_OVERRIDE;
 		private:
 			Job* m_job;
 			bool m_synchronous;

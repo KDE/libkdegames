@@ -222,7 +222,7 @@ public:
      *
      * @return KeyIO
      */
-    virtual int rtti() const;
+    int rtti() const Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
       /**
@@ -252,7 +252,7 @@ protected:
        /**
        * Internal method to process the events
        */
-       bool eventFilter( QObject *o, QEvent *e );
+       bool eventFilter( QObject *o, QEvent *e ) Q_DECL_OVERRIDE;
 
 private:
     friend class KGameKeyIOPrivate;
@@ -303,7 +303,7 @@ public:
      *
      * @return MouseIO
      */
-    virtual int rtti() const;
+    int rtti() const Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
       /**
@@ -331,7 +331,7 @@ protected:
       /**
       * Internal event filter
       */
-      bool eventFilter( QObject *o, QEvent *e );
+      bool eventFilter( QObject *o, QEvent *e ) Q_DECL_OVERRIDE;
 
 private:
     friend class KGameMouseIOPrivate;
@@ -382,7 +382,7 @@ public:
      *
      * @return ProcessIO
      */
-    int rtti() const;
+    int rtti() const Q_DECL_OVERRIDE;
 
     /**
      * Send a message to the process. This is analogous to the sendMessage
@@ -416,7 +416,7 @@ public:
      * This function is called automatically when adding the IO to
      * a player.
      */
-    void initIO(KPlayer *p);
+    void initIO(KPlayer *p) Q_DECL_OVERRIDE;
 
     /**
      *  Notifies the IO device that the player's setTurn had been called
@@ -427,7 +427,7 @@ public:
      *
      *  @param turn is true/false
      */
-    virtual void notifyTurn(bool turn);
+    void notifyTurn(bool turn) Q_DECL_OVERRIDE;
 
   protected:
     /**
@@ -523,7 +523,7 @@ public:
     KGameComputerIO(KPlayer* player);
     ~KGameComputerIO();
 
-    int rtti() const;
+    int rtti() const Q_DECL_OVERRIDE;
 
     /**
      * The number of advance calls until the player (or rather: the IO)

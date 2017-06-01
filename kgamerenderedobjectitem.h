@@ -96,14 +96,14 @@ class KDEGAMES_EXPORT KGameRenderedObjectItem : public QGraphicsObject, public K
 		void setPrimaryView(QGraphicsView* view);
 
 		//QGraphicsItem reimplementations (see comment in source file for why we need all of this)
-		virtual QRectF boundingRect() const;
-		virtual bool contains(const QPointF& point) const;
-		virtual bool isObscuredBy(const QGraphicsItem* item) const;
-		virtual QPainterPath opaqueArea() const;
-		virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
-		virtual QPainterPath shape() const;
+		QRectF boundingRect() const Q_DECL_OVERRIDE;
+		bool contains(const QPointF& point) const Q_DECL_OVERRIDE;
+		bool isObscuredBy(const QGraphicsItem* item) const Q_DECL_OVERRIDE;
+		QPainterPath opaqueArea() const Q_DECL_OVERRIDE;
+		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0) Q_DECL_OVERRIDE;
+		QPainterPath shape() const Q_DECL_OVERRIDE;
 	protected:
-		virtual void receivePixmap(const QPixmap& pixmap);
+		void receivePixmap(const QPixmap& pixmap) Q_DECL_OVERRIDE;
 	private:
 		friend class KGameRenderedObjectItemPrivate;
 		KGameRenderedObjectItemPrivate* const d;

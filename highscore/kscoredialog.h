@@ -267,7 +267,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         ///Display the dialog as non-modal
         virtual void show();
         ///Display the dialog as modal
-        virtual int exec();
+        int exec() Q_DECL_OVERRIDE;
 
         private Q_SLOTS:
             void slotGotReturn();
@@ -275,7 +275,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
             void slotForgetScore();
 
         private:
-            void keyPressEvent(QKeyEvent *ev);
+            void keyPressEvent(QKeyEvent *ev) Q_DECL_OVERRIDE;
 
         private:
             class KScoreDialogPrivate;
