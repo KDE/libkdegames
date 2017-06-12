@@ -34,6 +34,8 @@
 
 #ifndef WIN32
 #include <unistd.h> // sleep
+#else
+#include <qt_windows.h>
 #endif
 
 #define GROUP "KHighscore"
