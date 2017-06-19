@@ -41,7 +41,7 @@ class KConfig;
   * second one is the actual message. It furthermore indicates the type of the
   * message: normal or system
   */
-class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
+class KChatBaseMessage : public QPair< QString, QString >
 {
   public:
     /** The different types of messages */
@@ -52,17 +52,17 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
     };
 
     /** Default constructor. Necessary for Qt metatypes */
-    KChatBaseMessage();
+    KDEGAMESPRIVATE_EXPORT KChatBaseMessage();
 
     /** Initializing constructor */
-    KChatBaseMessage(const QString& sender, const QString& message,
+    KDEGAMESPRIVATE_EXPORT KChatBaseMessage(const QString& sender, const QString& message,
           MessageType type=Normal);
 
     /** Copy constructor. Necessary for Qt metatypes */
-    KChatBaseMessage(const KChatBaseMessage& m);
+    KDEGAMESPRIVATE_EXPORT KChatBaseMessage(const KChatBaseMessage& m);
 
     /** Default destructor */
-    virtual ~KChatBaseMessage();
+    KDEGAMESPRIVATE_EXPORT virtual ~KChatBaseMessage();
 
   private:
     KChatBaseMessagePrivate* d;
