@@ -22,7 +22,6 @@
 
 #include <QGraphicsScene>
 #include <QTimer>
-#include <KDebug>
 #include <KFileDialog>
 #include <kcolorscheme.h>
 #include <QApplication>

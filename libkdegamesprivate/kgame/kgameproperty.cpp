@@ -187,7 +187,7 @@ void KGamePropertyBase::setLock(bool l)
 
 void KGamePropertyBase::emitSignal()
 {
- //kDebug(11001) << ": mOwnerP="<< mOwner << "id=" << id();
+ //qCDebug(GAMES_PRIVATE_KGAME) << ": mOwnerP="<< mOwner << "id=" << id();
  if (mOwner ) {
 	mOwner->emitSignal(this);
  } else {

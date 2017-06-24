@@ -692,7 +692,7 @@ protected:
      * {
      *   qint32 move;
      *   msg >>  move;
-     *   kDebug() << "  Player" << player->id() << "moved to" << move;
+     *   qDebug() << "  Player" << player->id() << "moved to" << move;
      *   return true;
      * }
      * \endcode
