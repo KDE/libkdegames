@@ -28,7 +28,7 @@
 #include <QStandardPaths>
 #include <QPixmap>
 
-Q_LOGGING_CATEGORY(GAMES_LIB, "games.lib")
+Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib")
 
 class KGameThemePrivate
 {

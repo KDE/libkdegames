@@ -40,7 +40,7 @@
 
 #define GROUP "KHighscore"
 
-Q_LOGGING_CATEGORY(GAMES_HIGHSCORE, "games.highscore")
+Q_LOGGING_CATEGORY(GAMES_HIGHSCORE, "org.kde.games.highscore")
 
 class KHighscore::KHighscorePrivate
 {

@@ -43,7 +43,7 @@
 
 #define KGAME_LOAD_COOKIE 4210
 
-Q_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME, "games.private.kgame")
+Q_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME, "org.kde.games.private.kgame")
 
 // try to place as much as possible here
 // many things are *not* possible here as KGame has to use some inline function

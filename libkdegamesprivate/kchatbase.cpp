@@ -32,7 +32,7 @@
 #include <QApplication>
 #include <QListView>
 
-Q_LOGGING_CATEGORY(GAMES_BACKGAMMON, "games.backgammon")
+Q_LOGGING_CATEGORY(GAMES_BACKGAMMON, "org.kde.games.backgammon")
 
 class KChatBasePrivate
 {
