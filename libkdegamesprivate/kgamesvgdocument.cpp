@@ -148,7 +148,6 @@ KGameSvgDocument::KGameSvgDocument()
 KGameSvgDocument::KGameSvgDocument(const KGameSvgDocument &doc)
     : QDomDocument(), d(new KGameSvgDocumentPrivate(*doc.d))
 {
-    QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 }
 
 KGameSvgDocument::~KGameSvgDocument()

@@ -70,7 +70,6 @@ Q_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig)
 KHighscore::KHighscore(bool forceLocal, QObject* parent)
     : QObject(parent), d(new KHighscorePrivate)
 {
-    QLoggingCategory::setFilterRules(QStringLiteral("games.highscore.debug = true")); //set to False when not needed
     init(forceLocal);
 }
 

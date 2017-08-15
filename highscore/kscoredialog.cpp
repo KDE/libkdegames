@@ -46,7 +46,6 @@ this software.
 #include <QApplication>
 #include <QStyle>
 #include <QPushButton>
-#include <QLoggingCategory>
 
 #define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
 
@@ -105,8 +104,6 @@ class KScoreDialog::KScoreDialogPrivate
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     : QDialog(parent), d(new KScoreDialogPrivate(this))
 {
-    QLoggingCategory::setFilterRules(QStringLiteral("games.highscore.debug = true"));
-
     setWindowTitle( i18n(DEFAULT_GROUP_NAME) );
     setModal( true );
     d->highscoreObject = new KHighscore();

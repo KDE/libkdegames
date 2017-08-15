@@ -24,8 +24,6 @@
 #include "kplayer.h"
 #include "kgame.h"
 
-#include <QLoggingCategory>
-
 class KGameSequence::KGameSequencePrivate
 {
   public:
@@ -41,7 +39,6 @@ class KGameSequence::KGameSequencePrivate
 KGameSequence::KGameSequence()
   : QObject(), d(new KGameSequencePrivate)
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
 }
 
 KGameSequence::~KGameSequence()

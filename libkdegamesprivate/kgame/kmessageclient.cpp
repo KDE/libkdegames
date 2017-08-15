@@ -25,7 +25,6 @@
 #include <QTimer>
 #include <QList>
 #include <QDataStream>
-#include <QLoggingCategory>
 
 #include "kmessageio.h"
 #include "kmessageserver.h"
@@ -54,7 +53,6 @@ KMessageClient::KMessageClient (QObject *parent)
     : QObject (parent),
       d( new KMessageClientPrivate )
 {
-  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
   d->isLocked = false;
 }
 

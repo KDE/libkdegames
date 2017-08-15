@@ -25,7 +25,6 @@
 #include "kgamemessage.h"
 #include "kmessageio.h"
 
-#include <QLoggingCategory>
 #include <QWidget>
 #include <qbuffer.h>
 #include <QTimer>
@@ -53,14 +52,12 @@ public:
 KGameIO::KGameIO()
   : d(new KGameIOPrivate)
 {
-  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
 }
 
 KGameIO::KGameIO(KPlayer* player)
   : d(new KGameIOPrivate)
 {
-  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
   if (player)
   {

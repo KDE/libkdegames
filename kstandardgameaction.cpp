@@ -93,8 +93,6 @@ static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGame
 QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
                                      QObject* parent )
 {
-    QLoggingCategory::setFilterRules(QStringLiteral("games.ui.debug = true"));
-    
     QAction* pAction = 0;
     const KStandardGameActionInfo* pInfo = infoPtr( id );
     qCDebug(GAMES_UI) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)0) << "," << parent << " )";

@@ -24,34 +24,28 @@
 #include "kplayer.h"
 #include "kgame.h"
 
-#include <QLoggingCategory>
-
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 
 KGamePropertyBase::KGamePropertyBase(int id, KGame* parent)
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
  registerData(id, parent);
 }
 
 KGamePropertyBase::KGamePropertyBase(int id, KPlayer* parent)
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
  registerData(id, parent);
 }
 
 KGamePropertyBase::KGamePropertyBase(int id, KGamePropertyHandler* owner)
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
  registerData(id, owner);
 }
 
 KGamePropertyBase::KGamePropertyBase()
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
  init();
 }
 

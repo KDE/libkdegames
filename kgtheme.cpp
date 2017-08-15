@@ -45,7 +45,6 @@ KgTheme::KgTheme(const QByteArray& identifier, QObject* parent)
 	: QObject(parent)
 	, d(new Private(identifier))
 {
-    QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
 }
 
 KgTheme::~KgTheme()

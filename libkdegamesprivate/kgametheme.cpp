@@ -49,7 +49,6 @@ class KGameThemePrivate
 KGameTheme::KGameTheme(const QString &themeGroup)
     : d(new KGameThemePrivate)
 {
-    QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
     d->themeGroup = themeGroup;
     //KGlobal::dirs()->addResourceType("gametheme", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName());
 }

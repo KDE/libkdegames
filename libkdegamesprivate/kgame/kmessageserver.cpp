@@ -26,7 +26,6 @@
 #include <QQueue>
 #include <QTimer>
 #include <QDataStream>
-#include <QLoggingCategory>
 
 #include "kmessageio.h"
 
@@ -98,7 +97,6 @@ public:
 KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
   : QObject(parent)
 {
-  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
   d = new KMessageServerPrivate;
   d->mIsRecursive=false;
   d->mCookie=cookie;

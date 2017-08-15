@@ -85,7 +85,6 @@ public:
   //virtual bool isNetwork () const = 0;
   virtual bool isNetwork () const
   {
-   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
    return false;
   }
@@ -100,7 +99,6 @@ public:
   //virtual bool isConnected () const = 0;
   virtual bool isConnected () const
   {
-   QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConencted...BAD";
    return false;
   }

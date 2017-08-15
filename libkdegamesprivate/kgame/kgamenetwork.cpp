@@ -31,7 +31,6 @@
 #include <qbuffer.h>
 //Added by qt3to4:
 #include <QList>
-#include <QLoggingCategory>
 
 class KGameNetworkPrivate
 {
@@ -60,8 +59,6 @@ KGameNetwork::KGameNetwork(int c, QObject* parent)
     : QObject(parent),
       d( new KGameNetworkPrivate )
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
- 
  d->mCookie = (qint16)c;
 
  // Init the game as a local game, i.e.

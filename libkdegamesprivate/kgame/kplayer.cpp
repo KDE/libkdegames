@@ -25,8 +25,6 @@
 #include "kgameproperty.h"
 #include "kgamepropertyhandler.h"
 
-#include <QLoggingCategory>
-
 #include <KLocalizedString>
 
 #include <qbuffer.h>
@@ -69,7 +67,6 @@ public:
 KPlayer::KPlayer()
     : QObject(), d(new KPlayerPrivate)
 {
- QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));  
  init();
 }
 

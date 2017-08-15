@@ -72,10 +72,6 @@ KChatBaseModel* KChatBase::model()
 
 KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate, bool noComboBox) : QFrame(parent)
 {
-  QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true"));
-  QLoggingCategory::setFilterRules(QStringLiteral("games.backgammon.debug = true"));
-  
   KChatBaseModel* mod = model;
   if (mod==0)
     mod = new KChatBaseModel(parent);

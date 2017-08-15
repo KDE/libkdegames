@@ -21,7 +21,6 @@
 
 #include <QFileInfo>
 #include <QStandardPaths>
-#include <QLoggingCategory>
 #include <QGuiApplication>
 
 #include <KConfig>
@@ -59,8 +58,6 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
 	, d(new Private(this, configKey))
 {
-	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
 	connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));

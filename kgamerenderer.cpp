@@ -29,7 +29,6 @@
 #include <QScopedPointer>
 #include <QPainter>
 #include <QVariant>
-#include <QLoggingCategory>
 
 //TODO: automatically schedule pre-rendering of animation frames
 //TODO: multithreaded SVG loading?
@@ -159,8 +158,6 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 
 void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 {
-	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-
 	const KgTheme* oldTheme = m_currentTheme;
 	if (oldTheme == theme)
 	{
@@ -189,8 +186,6 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 
 bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 {
-	QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = true"));
-
 	if (!theme)
 	{
 		return false;

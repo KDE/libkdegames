@@ -89,10 +89,6 @@ public:
 KChatBaseModel::KChatBaseModel(QObject *parent)
      : QAbstractListModel(parent), d(new KChatBaseModelPrivate())
 {
-  /* 
-   Set to true to print debug messages
-  */
-  QLoggingCategory::setFilterRules(QStringLiteral("games.lib.debug = false"));
 }
 
 KChatBaseModel::~KChatBaseModel()

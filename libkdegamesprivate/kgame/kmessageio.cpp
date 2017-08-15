@@ -31,7 +31,6 @@
 KMessageIO::KMessageIO (QObject *parent)
   : QObject (parent), m_id (0)
 {
-  QLoggingCategory::setFilterRules(QStringLiteral("games.private.kgame.debug = true")); 
 }
 
 KMessageIO::~KMessageIO ()
