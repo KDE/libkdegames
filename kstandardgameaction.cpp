@@ -32,7 +32,7 @@
 #undef I18N_NOOP2
 #define I18N_NOOP2(ctx,txt) ctx, txt
 
-Q_LOGGING_CATEGORY(GAMES_UI, "org.kde.games.ui")
+Q_LOGGING_CATEGORY(GAMES_UI, "org.kde.games.ui", QtWarningMsg)
 
 struct KStandardGameActionInfo
 {

@@ -25,7 +25,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib")
+Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
 class KgTheme::Private
 {
