@@ -531,7 +531,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
     {
         return QMatrix();
     }
-    transformAttribute.trimmed();
+    transformAttribute = transformAttribute.trimmed();
 
     rx.setPattern(TRANSFORMS);
     if (!rx.exactMatch(transformAttribute))
