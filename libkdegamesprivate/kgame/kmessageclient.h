@@ -221,7 +221,7 @@ public:
   void sendForward (const QByteArray &msg, const QList <quint32> &clients);
 
   /**
-    Sends a message to a single client. This is a convenieance method. It calls
+    Sends a message to a single client. This is a convenience method. It calls
     sendForward (const QByteArray &msg, const QValueList &ltquint32> &clients)
     with a list containing only one client ID.
 
@@ -284,7 +284,7 @@ Q_SIGNALS:
     use this e.g. to send a reply message to only that client.
 
     receivers contains the list of the clients that got the message. (If this list
-    only contains one number, this will be your client ID, and it was exclusivly
+    only contains one number, this will be your client ID, and it was exclusively
     sent to you.)
 
     If you don't want to distinguish between broadcast and forward messages and

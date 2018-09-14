@@ -54,7 +54,7 @@ class KGamePropertyHandlerPrivate; // wow - what a name ;-)
  * property) to the correct handler. Inside the handler the property ID is used
  * to change the correct property.
  *
- * The constructor or registerHandler takes 3 addittional arguments: a
+ * The constructor or registerHandler takes 3 additional arguments: a
  * receiver and two slots. The first slot is connected to
  * signalSendMessage, the second to signalPropertyChanged. You must provide
  * these in order to use the KGamePropertyHandler.
@@ -145,7 +145,7 @@ public:
 	/**
 	 * returns a unique property ID starting called usually with a base of
 	 * KGamePropertyBase::IdAutomatic. This is used internally by
-	 * the property base to assign automtic id's. Not much need to
+	 * the property base to assign automatic id's. Not much need to
 	 * call this yourself.
 	 **/
 	int uniquePropertyId();
@@ -236,9 +236,9 @@ public:
 
 	/**
 	 * Called by the KGame or KPlayer object or the handler itself to delay
-	 * emmiting of signals. Lockign keeps a counter and unlock is only achieved
-	 * when every lock is canceld by an unlock.
-	 * While this is set signals are  quequed and only emmited after this
+	 * emitting of signals. Locking keeps a counter and unlock is only achieved
+	 * when every lock is canceled by an unlock.
+	 * While this is set signals are queued and only emitted after this
 	 * is reset. Its deeper meaning is to prevent inconsistencies in a game
 	 * load or network transfer where a emit could access a property not
 	 * yet loaded or transmitted. Calling this by yourself you better know
@@ -271,7 +271,7 @@ public:
 
 	/**
 	 * Sends all properties which are marked dirty over the network. This will
-	 * make a forced synchornisation of the properties and mark them all not dirty.
+	 * make a forced synchronization of the properties and mark them all not dirty.
 	 **/
 	void flush();
 

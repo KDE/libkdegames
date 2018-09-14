@@ -252,7 +252,7 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
 }
 bool KMessageProcess::isConnected() const
 {
-  qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Is conencted";
+  qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Is connected";
   if (!mProcess)
      return false;
   return (mProcess->state() == QProcess::Running);

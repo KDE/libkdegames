@@ -146,7 +146,7 @@ public:
 
   /**
    * This font should be used for a message. layoutMessage sets the
-   * font of a message using KChatBaseItemDelegate::setMessageFont but if ypu
+   * font of a message using KChatBaseItemDelegate::setMessageFont but if you
    * replace layoutMessage with your own function you should use
    * messageFont() yourself.
    * @return The font that is used for a message

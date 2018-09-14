@@ -84,7 +84,7 @@ public:
     */
    enum IOMode {GenericIO=1,KeyIO=2,MouseIO=4,ProcessIO=8,ComputerIO=16};
    /**
-    * Run time idendification. Predefined values are from IOMode
+    * Run time identification. Predefined values are from IOMode
     * You MUST overwrite this in derived classes!
     *
     * @return rtti value
@@ -202,7 +202,7 @@ public:
      * Note the widget you pass to the constructor must be
      * the main window of your application, e.g. view->parentWidget()
      * as QT does not forward your keyevents otherwise. This means
-     * that this might be a different widget comapred to the one you
+     * that this might be a different widget compared to the one you
      * use for mouse inputs!
      * Example:
      * \code
@@ -218,7 +218,7 @@ public:
     virtual ~KGameKeyIO();
 
     /**
-     * The idendification of the IO
+     * The identification of the IO
      *
      * @return KeyIO
      */
@@ -231,7 +231,7 @@ Q_SIGNALS:
        * move for the player the device belongs to. If this is done
        * and the event is eaten eatevent needs to be set to true.
        * What move you generate (i.e. what you write to the stream)
-       * is totally up to you as it will not be evaluated but forwared
+       * is totally up to you as it will not be evaluated but forwarded
        * to the player's/game's  input move function
        * Example:
        * \code
@@ -299,7 +299,7 @@ public:
      */
     void setMouseTracking(bool b);
     /**
-     * The idendification of the IO
+     * The identification of the IO
      *
      * @return MouseIO
      */
@@ -345,7 +345,7 @@ private:
  *  \class KGameProcessIO kgameio.h <KGame/KGameIO>
  *
  *  The KGameProcessIO class. It is used to create a computer player
- *  via a separate process and communicate transparetly with it.
+ *  via a separate process and communicate transparently with it.
  *  Its counterpart is the @ref KGameProcess class which needs
  *  to be used by the computer player. See its documentation
  *  for the definition of the computer player.
@@ -378,7 +378,7 @@ public:
     virtual ~KGameProcessIO();
 
     /**
-     * The idendification of the IO
+     * The identification of the IO
      *
      * @return ProcessIO
      */
@@ -431,7 +431,7 @@ public:
 
   protected:
     /**
-     * Internal ~ombined function for all message handling
+     * Internal combined function for all message handling
      **/
     void sendAllMessages(QDataStream &stream,int msgid, quint32 receiver, quint32 sender, bool usermsg);
 

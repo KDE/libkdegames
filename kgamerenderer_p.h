@@ -139,7 +139,7 @@ class KGameRendererPrivate : public QObject
 		//pixmap cache.
 		//1. The worker renders a QImage and stores it in the cache. The main
 		//   thread reads the QImage again and converts it into a QPixmap,
-		//   storing it inthe pixmap cache for later re-use.
+		//   storing it in the pixmap cache for later re-use.
 		//i.e. QImage -> diskcache -> QImage -> QPixmap -> pixmapcache -> serve
 		//2. The worker renders a QImage and sends it directly to the main
 		//   thread, which converts it to a QPixmap. The QPixmap is stored in

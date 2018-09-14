@@ -83,8 +83,8 @@ public:
       virtual ~KPlayer();
 
       /**
-      * The idendification of the player. Overwrite this in
-      * classes inherting KPlayer to run time identify them.
+      * The identification of the player. Overwrite this in
+      * classes inheriting KPlayer to run time identify them.
       *
       * @return 0 for default KPlayer.
       */
@@ -137,9 +137,9 @@ public:
       bool asyncInput() const;
 
       /**
-       * Is this player a virtual player, ie is it
+       * Is this player a virtual player, i.e. is it
        * created by mirroring a real player from another
-       * network game. This mirroring is done autmatically
+       * network game. This mirroring is done automatically
        * as soon as a network connection is build and it affects
        * all players regardless what type
        *
@@ -189,10 +189,10 @@ public:
       /**
        * Returns the user defined id of the player
        * This value can be used arbitrary by you to
-       * have some user idendification for your player,
+       * have some user identification for your player,
        * e.g. 0 for a white chess player, 1 for a black
        * one. This value is more reliable than the player
-       * id whcih can even change when you make a network
+       * id which can even change when you make a network
        * connection.
        *
        * @return the user defined player id
@@ -290,7 +290,7 @@ public:
        * you do not want this set the parameter deleteit to false
        *
        * @param input the device to be removed or 0 for all devices
-       * @param deleteit true (default) to delete the device otherwisse just remove it
+       * @param deleteit true (default) to delete the device otherwise just remove it
        * @return true on ok
        */
       bool removeGameIO(KGameIO *input=0,bool deleteit=true);
@@ -407,7 +407,7 @@ public:
        * Calculates a checksum over the IO devices. Can be used to
        * restore the IO handlers. The value returned is the 'or'ed
        * value of the KGameIO rtti's.
-       * this is itnernally used for saving and restorign a player.
+       * this is internally used for saving and restoring a player.
        */
       int calcIOValue();
 
@@ -426,7 +426,7 @@ Q_SIGNALS:
        void signalNetworkData(int msgid, const QByteArray& buffer, quint32 sender, KPlayer *me);
 
        /**
-        * This signal is emmited if a player property changes its value and
+        * This signal is emitted if a player property changes its value and
         * the property is set to notify this change. This is an
         * important signal as you should base the actions on a reaction
         * to this property changes.

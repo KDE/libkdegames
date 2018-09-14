@@ -75,7 +75,7 @@ public:
   ~KMessageIO ();
 
   /**
-  * The runtime idendifcation
+  * The runtime identification
   */
   virtual int rtti() const {return 0;}
 
@@ -99,7 +99,7 @@ public:
   //virtual bool isConnected () const = 0;
   virtual bool isConnected () const
   {
-   qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConencted...BAD";
+   qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConnected...BAD";
    return false;
   }
 
@@ -231,7 +231,7 @@ public:
   ~KMessageSocket ();
 
   /**
-  * The runtime idendifcation
+  * The runtime identification
   */
   int rtti() const Q_DECL_OVERRIDE {return 1;}
 
@@ -316,7 +316,7 @@ public:
   ~KMessageDirect ();
 
   /**
-  * The runtime idendifcation
+  * The runtime identification
   */
   int rtti() const Q_DECL_OVERRIDE {return 2;}
 
@@ -367,7 +367,7 @@ class KMessageProcess : public KMessageIO
     bool isNetwork() const Q_DECL_OVERRIDE { return false; }
 
   /**
-  * The runtime idendifcation
+  * The runtime identification
   */
   int rtti() const Q_DECL_OVERRIDE {return 3;}
 

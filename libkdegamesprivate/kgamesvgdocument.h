@@ -181,7 +181,7 @@ public:
      *
      * This function also sets @p m_currentNode to this node.
      *
-     * @param attributeName The name of the identifing attribute, such as "id" to find.
+     * @param attributeName The name of the identifying attribute, such as "id" to find.
      * @param attributeValue The value to look for in the attribute @p attributeName
      *     The values held in this attribute must be unique in the document, or the consequences
      *     may be unpredictably incorrect.  You've been warned. ;-)
@@ -368,7 +368,7 @@ public:
      * Unless you are parsing your own style attribute for some reason, you probably
      * want to use styleProperty() or styleProperties().
      *
-     * @returns The style atttibute.
+     * @returns The style attribute.
      * @see styleProperty() styleProperties()
      */
     QString style() const;

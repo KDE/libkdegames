@@ -44,7 +44,7 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
  *
  * This is the base class for both KChat and KGameChat. KGameChat is the class
  * you want to use if you write a KGame based game as it will do most things for
- * you. KChat is more or less the same but not KGame dependant
+ * you. KChat is more or less the same but not KGame dependent
  *
  * KChatBase provides a complete chat widget, featuring different sending means
  * (e.g. "send to all", "send to player1", "send to group2" and so on - see
@@ -235,7 +235,7 @@ public:
 
 	/**
 	 * This font should be used for a message. layoutMessage sets the
-	 * font of a message using KChatBaseItemDelegate::setMessageFont but if ypu
+	 * font of a message using KChatBaseItemDelegate::setMessageFont but if you
 	 * replace layoutMessage with your own function you should use
 	 * messageFont() yourself.
 	 * @return The font that is used for a message

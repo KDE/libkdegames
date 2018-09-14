@@ -19,7 +19,7 @@
 #include "kgamesvgdocumenttest.h"
 #include "kgamesvgdocument_p.h"
 
-#include "config-tests.h"
+#include <config-tests.h>
 
 #include <QtCore>
 #include <QtTest>

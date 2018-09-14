@@ -107,7 +107,7 @@ KGame::KGame(int cookie,QObject* parent)
  setGameSequence(new KGameSequence());
 
  // BL: FIXME This signal does no longer exist. When we are merging
- // MH: super....and how do I find out about the lost conenction now?
+ // MH: super....and how do I find out about the lost connection now?
  // KGame and KGameNetwork, this could be improved!
 //  connect(this,SIGNAL(signalConnectionLost(KGameClient*)),
 //          this,SLOT(slotConnectionLost(KGameClient*)));
@@ -210,7 +210,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  // loading properties. This can cause inconsistencies
  // otherwise if a property emits and this emit accesses
  // a property not yet loaded
- // Note we habe to have this external locking to prevent the games unlocking
+ // Note we have to have this external locking to prevent the games unlocking
  // to access the players
  dataHandler()->lockDirectEmit();
 
@@ -247,7 +247,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  qint16 cookie;
  stream >> cookie;
  if (cookie==KGAME_LOAD_COOKIE) {
-   qCDebug(GAMES_PRIVATE_KGAME) << "   Game loaded propertly";
+   qCDebug(GAMES_PRIVATE_KGAME) << "   Game loaded properly";
  } else {
    qCCritical(GAMES_PRIVATE_KGAME) << "   Game loading error. probably format error";
  }
@@ -1090,7 +1090,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
   qCDebug(GAMES_PRIVATE_KGAME) << "havePlayers" << cnt+playerCount()-inactivateIds.count();
   while (maxPlayers() > 0 && maxPlayers() < (int)(cnt+playerCount() - inactivateIds.count()))
   {
-    qCDebug(GAMES_PRIVATE_KGAME) << "  Still to deacticvate "
+    qCDebug(GAMES_PRIVATE_KGAME) << "  Still to deactivate "
             << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers()
 ;
     KPlayer *currentPlayer=0;

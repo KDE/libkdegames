@@ -599,7 +599,7 @@ public:
     /** Set the delay of the animation, in milliseconds */
     void setAnimationDelay(int d);
 
-    /** Return the number of millisecons from the creation of the canvas
+    /** Return the number of milliseconds from the creation of the canvas
         (see also KGameCanvasItem::advance)*/
     int mSecs();
 

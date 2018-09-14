@@ -17,7 +17,7 @@
  ***************************************************************************/
 
 #include "kgamepropertytest.h"
-#include "config-tests.h"
+#include <config-tests.h>
 
 #include <QtCore>
 #include <QtTest>

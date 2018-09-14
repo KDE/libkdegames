@@ -191,7 +191,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  qint16 cookie;
  stream >> cookie;
  if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
-        qDebug() << "   KGamePropertyHandler loaded propertly";
+        qDebug() << "   KGamePropertyHandler loaded properly";
  } else {
         qCritical() << "KGamePropertyHandler loading error. probably format error";
  }
@@ -287,7 +287,7 @@ void KGamePropertyHandler::unlockDirectEmit()
     while(!d->mSignalQueue.isEmpty())
     {
       KGamePropertyBase *prop=d->mSignalQueue.dequeue();
-//       qDebug() << "emmiting signal for" << prop->id();
+//       qDebug() << "emitting signal for" << prop->id();
       emit signalPropertyChanged(prop);
     }
   }
@@ -296,8 +296,8 @@ void KGamePropertyHandler::unlockDirectEmit()
 void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
 {
  // If the indirect flag is set (load and network transmit)
- // we cannot emit the signals directly as it can happend that
- // a sigal causes an access to a property which is e.g. not
+ // we cannot emit the signals directly as it can happened that
+ // a signal causes an access to a property which is e.g. not
  // yet loaded or received
 
  if (d->mIndirectEmit>0)

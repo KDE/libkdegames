@@ -16,8 +16,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef KGPI_TEST_H
-#define KGPI_TEST_H
+#ifndef KGAMEPOPUPITEM_TEST_H
+#define KGAMEPOPUPITEM_TEST_H
 
 #include <KXmlGuiWindow>
 

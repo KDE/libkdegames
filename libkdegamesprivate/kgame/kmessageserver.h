@@ -360,7 +360,7 @@ public:
 //    int gameId() const;
 
     /*
-     * Application cookie. this idendifies the game application. It
+     * Application cookie. this identifies the game application. It
      * help to distinguish between e.g. KPoker and KWin4
      *
      * @return the application cookie
@@ -454,7 +454,7 @@ protected:
     /**
      * @return A unique number which can be used as the id of a @ref KMessageIO. It is
      * incremented after every call so if you need the id twice you have to save
-     * it anywhere. It's currently used to initialize newly connected clints only.
+     * it anywhere. It's currently used to initialize newly connected clients only.
      **/
     quint32 uniqueClientNumber() const;
 

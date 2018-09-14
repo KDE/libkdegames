@@ -9,7 +9,7 @@ This document is published under the terms of the GNU FDL
 
 !!!
 Note that this is the initial version of this document and has not yet been
-aproved by all core developers (and is far from being complete)
+approved by all core developers (and is far from being complete)
 AB: please remove this comments as soon as all KGame hackers have read the
 document
 !!!
@@ -54,13 +54,13 @@ need a definition are
 1.6 Player
 
 The most important and confusing ones are Master, Admin and Server. We make
-quite big differerences between those inside KGame.
+quite big differences between those inside KGame.
 
 1.1 Message Server:
 -------------------
 A game has always exactly one object of this class, for local games as well as
 for network games. For network games, this object can be on one of the users
-processes (usually inside KGame), or it can also be on an independant computer,
+processes (usually inside KGame), or it can also be on an independent computer,
 that has no idea about what game is played on it.
 
 A KMessageClient object can connect to it. Its main purpose is transmitting
@@ -105,11 +105,11 @@ also the definition of Admin!
 One (and only one) of the Clients is the Admin. He can configure the Message
 Server and the game in general in several ways. He can limit the maximum number
 of connected message clients and can drop the connection to some other clients,
-as well as he can configure game specific ssettings (like max/min players, start
+as well as he can configure game specific settings (like max/min players, start
 money, ...). The Admin also initializes newly connected Clients. If the Admin
 himself disconnects, another Client becomes Admin (The Admin can himself elect
 some other Client to become Admin. He himself loses that Admin status then).
-An Admin is *alway* a KGame object. The Admin is usually the same as the Master,
+An Admin is *always* a KGame object. The Admin is usually the same as the Master,
 but if the Master is an own process (i.e. the Message Server has been started
 outside KGame) then Master and Admin differ. An Admin *must* be a KGame object
 while the Master doesn't have to be.
@@ -138,8 +138,8 @@ Both concepts have advantages and disadvantages. It is on you - the game
 developer - to decide which way is better for you.
 E.g. the Server-Solution makes it easier for you to write games. The version
 must not necessarily be the same, you have one central computer which does the
-calcultations. The No-Server-Solution on the other hand decreases network
-traffik as the Clients just send their moves and all Clients can calculate the
+calculations. The No-Server-Solution on the other hand decreases network
+traffic as the Clients just send their moves and all Clients can calculate the
 reactions. I'm sure there are a lot of advantages/disadvantages more for both
 concepts.
 

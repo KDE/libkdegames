@@ -577,7 +577,7 @@ Q_SIGNALS:
     void signalSave(QDataStream &stream);
 
     /**
-     * Is emmited if a game with a different version cookie is loaded.
+     * Is emitted if a game with a different version cookie is loaded.
      * Normally this should result in an error. But maybe you do support
      * loading of older game versions. Here would be a good place to do a
      * conversion.
@@ -592,7 +592,7 @@ Q_SIGNALS:
     /**
      * We got an user defined update message. This is usually done
      * by a sendData in a inherited KGame Object which defines its
-     * own methods and has to syncronise them over the network.
+     * own methods and has to syncronize them over the network.
      * Reaction to this is usually a call to a KGame function.
      */
     void signalNetworkData(int msgid,const QByteArray& buffer, quint32 receiver, quint32 sender);

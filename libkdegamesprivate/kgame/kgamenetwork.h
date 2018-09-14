@@ -215,7 +215,7 @@ public:
     bool isOfferingConnections() const;
 
     /**
-     * Application cookie. this idendifies the game application. It
+     * Application cookie. this identifies the game application. It
      * help to distinguish between e.g. KPoker and KWin4
      * @return the application cookie
      **/
@@ -232,13 +232,13 @@ public:
      * receiver and sender parameters. See KGameMessage::calsMessageId
      *
      * SendMessage differs from sendSystemMessage only by the msgid parameter.
-     * sendSystemMessage is thought as a KGame only mehtod while
+     * sendSystemMessage is thought as a KGame only method while
      * sendMessage is for public use. The msgid parameter will be
      * +=KGameMessage::IdUser and in KGame::signalNetworkData msgid will
      * be -= KGameMessage::IdUser again, so that one can easily distinguish
      * between system and user messages.
      *
-     * Use sendSystemMessage to comunicate with KGame (e.g. by adding a
+     * Use sendSystemMessage to communicate with KGame (e.g. by adding a
      * player) and sendMessage for your own user message.
      *
      * Note: a player should send messages through a KGameIO!
@@ -296,7 +296,7 @@ public:
     void electAdmin(quint32 clientID);
 
     /**
-     * Don't use this unless you really know what youre doing! You might
+     * Don't use this unless you really know what you're doing! You might
      * experience some strange behaviour if you send your messages directly
      * through the KMessageClient!
      *

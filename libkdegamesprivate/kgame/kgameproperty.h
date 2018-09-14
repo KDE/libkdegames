@@ -121,7 +121,7 @@ public:
 	/**
 	 * Constructs a KGamePropertyBase object and calls registerData.
 	 * @param id The id of this property. MUST be UNIQUE! Used to send and
-	 * receive changes in the property of the playere automatically via
+	 * receive changes in the property of the player automatically via
 	 * network.
 	 * @param owner The owner of the object. Must be a KGamePropertyHandler which manages
 	 * the changes made to this object, i.e. which will send the new data
@@ -229,7 +229,7 @@ public:
 
 	/**
 	 * send a command to advanced properties like arrays
-	 * @param stream The stream containing the data of the comand
+	 * @param stream The stream containing the data of the command
 	 * @param msgid The ID of the command - see PropertyCommandIds
 	 * @param isSender whether this client is also the sender of the command
 	 **/
@@ -390,7 +390,7 @@ private:
  * Note: The entire API documentation is obsolete!
  *
  * The class KGameProperty can store any form of data and will transmit it via
- * network whenver you call send. This makes network transparent games
+ * network whenever you call send. This makes network transparent games
  * very easy. You first have to register the data to a KGamePropertyHandler
  * using KGamePropertyBase::registerData (which is called by the
  * constructor). For the KGamePropertyHandler you can use

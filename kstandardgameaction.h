@@ -17,7 +17,7 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-// this class was shamelessy stolen from kdelibs/kdeui/kstdction.[cpp|h] and
+// this class was shamelessly stolen from kdelibs/kdeui/kstdction.[cpp|h] and
 // after that just edited for our needs
 #ifndef KSTANDARDGAMEACTION_H
 #define KSTANDARDGAMEACTION_H
@@ -94,7 +94,7 @@ namespace KStandardGameAction
                             QObject *parent );
 
     /**
-     * Load a previousely saved game.
+     * Load a previously saved game.
      */
     KDEGAMES_EXPORT QAction *load(const QObject *recvr, const char *slot,
                          QObject *parent );

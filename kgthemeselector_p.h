@@ -16,8 +16,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef KGAME_GRAPHICSDELEGATE_P_H
-#define KGAME_GRAPHICSDELEGATE_P_H
+#ifndef KG_THEMESELECTOR_P_H
+#define KG_THEMESELECTOR_P_H
 
 #include <QStyledItemDelegate>
 
@@ -41,4 +41,4 @@ class KgThemeDelegate : public QStyledItemDelegate
 		QRect thumbnailRect(const QRect& baseRect) const;
 };
 
-#endif // KGAME_GRAPHICSDELEGATE_P_H
+#endif // KG_THEMESELECTOR_P_H

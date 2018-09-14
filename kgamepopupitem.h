@@ -132,7 +132,7 @@ public:
      */
     void forceHide(HideType type=AnimatedHide);
     /**
-     * Sets brush used to paint item backgound
+     * Sets brush used to paint item background
      * By default system-default brush is used
      * @see KColorScheme
      */

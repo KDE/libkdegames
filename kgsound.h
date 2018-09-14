@@ -18,4 +18,9 @@
 
 //This file is needed because the <KgSound> header needs to link to
 //"../kgsound.h" instead of "../audio/kgsound.h".
+#ifndef LIBKDEGAMES_KGSOUND_H
+#define LIBKDEGAMES_KGSOUND_H
+
 #include "audio/kgsound.h"
+
+#endif

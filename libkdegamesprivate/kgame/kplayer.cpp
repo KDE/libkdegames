@@ -85,7 +85,7 @@ void KPlayer::init()
    d->mId=0; // "0" is always an invalid ID!
    d->mPriority=0;
    // I guess we cannot translate the group otherwise no
-   // international conenctions are possible
+   // international connections are possible
 
    d->mUserId.registerData(KGamePropertyBase::IdUserId, this, i18n("UserId"));
    d->mUserId.setLocal(0);
@@ -381,7 +381,7 @@ bool KPlayer::load(QDataStream &stream)
   stream >> cookie;
   if (cookie==KPLAYER_LOAD_COOKIE)
   {
-      qCDebug(GAMES_PRIVATE_KGAME) << "   Player loaded propertly";
+      qCDebug(GAMES_PRIVATE_KGAME) << "   Player loaded properly";
   }
   else
   {

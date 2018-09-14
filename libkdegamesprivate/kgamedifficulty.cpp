@@ -67,7 +67,7 @@ class KGameDifficultyPrivate : public QObject
 		/**
 		 * @brief Player wants to change the difficulty level to a standard level
 		 *
-		 * The difference with the methode "setSelection" is that the player may have to confirm that he agrees to end the current game (if needed).
+		 * The difference with the method "setSelection" is that the player may have to confirm that he agrees to end the current game (if needed).
 		 * @param newSelection Selected item.
 		 */
 		void changeSelection(int newSelection);
@@ -76,7 +76,7 @@ class KGameDifficultyPrivate : public QObject
 		/**
 		 * @brief Current difficulty level changed to a standard level
 		 *
-		 * The game catchs this signal and restarts a game with the new standard difficulty level.
+		 * The game catches this signal and restarts a game with the new standard difficulty level.
 		 * @param level New standard level.
 		 */
 		void standardLevelChanged(KGameDifficulty::standardLevel level);
@@ -84,7 +84,7 @@ class KGameDifficultyPrivate : public QObject
 		/**
 		 * @brief Current difficulty level changed to a custom level
 		 *
-		 * The game catchs this signal and restarts a game with the new standard difficulty level.
+		 * The game catches this signal and restarts a game with the new standard difficulty level.
 		 * @param key Custom level identifier.
 		 */
 		void customLevelChanged(int key);
