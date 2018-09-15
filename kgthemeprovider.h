@@ -20,7 +20,10 @@
 #define KGTHEMEPROVIDER_H
 
 #include <QObject>
-#include <QtQml>
+#include <QQmlEngine>
+#include <QQmlContext>
+#include <QDir>
+#include <QPointer>
 
 #include <kgtheme.h>
 #include <libkdegames_export.h>

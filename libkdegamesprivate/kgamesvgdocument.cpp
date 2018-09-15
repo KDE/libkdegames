@@ -196,7 +196,7 @@ void KGameSvgDocument::load()
     QByteArray content = file.readAll();
 
     // If the file is compressed, decompress the contents before loading it.
-    if (!content.startsWith("<?xml"))
+    if (!content.startsWith("<?xml")) // krazy:exclude=strings
     {
         QBuffer buf(&content);
         KCompressionDevice::CompressionType type = KFilterDev::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
