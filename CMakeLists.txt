@@ -264,6 +264,8 @@ install(EXPORT KF5KDEGamesLibraryDepends DESTINATION
 	
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h  DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames  COMPONENT Devel)
 
+install( FILES libkdegames.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+
 feature_summary(WHAT ALL
                 INCLUDE_QUIET_PACKAGES
                 FATAL_ON_MISSING_REQUIRED_PACKAGES)
