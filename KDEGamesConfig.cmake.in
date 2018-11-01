@@ -13,6 +13,8 @@ set(KDEGAMES_INCLUDE_DIRS "${KDEGAMES_INCLUDE_DIR}" "${KDEGAMES_INCLUDE_DIR}/KDE
 include("${KDEGAMES_CMAKE_DIR}/KF5KDEGamesLibraryDepends.cmake")
 set(KDEGAMES_LIBRARY KF5KDEGames)
 
+include(CMakeFindDependencyMacro)
+
 find_dependency(Qt5Widgets)
 find_dependency(Qt5Xml)
 find_dependency(Qt5Network)
