@@ -115,11 +115,12 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		Q_DECLARE_FLAGS(Strategies, Strategy)
 
 		///Constructs a new KGameRenderer that renders @a prov->currentTheme().
-		///@param cacheSize the cache size in megabytes (if not given, a sane
+		///@param prov the theme provider
+                ///@param cacheSize the cache size in megabytes (if not given, a sane
 		///default is used)
 		///@warning This constructor may only be called from the main thread.
 		explicit KGameRenderer(KgThemeProvider* prov, unsigned cacheSize = 0);
-		///@overload that allows to use KGameRenderer without a theme provider
+		///overload that allows to use KGameRenderer without a theme provider
 		///          (useful when there is only one theme)
 		///@note Takes ownership of @a theme.
 		explicit KGameRenderer(KgTheme* theme, unsigned cacheSize = 0);
