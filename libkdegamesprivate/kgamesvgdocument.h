@@ -423,7 +423,7 @@ public:
 
     /**
      * @brief Returns the transform attribute of the current node.
-     * @returns The transform atttibute.
+     * @returns The transform attribute.
      * @see setTransform(), transformMatrix(), setTransformMatrix()
      */
     QString transform() const;
@@ -464,7 +464,7 @@ public:
     /**
      * @brief Returns the transform attribute of the current node as a matrix.
      *
-     * @returns The matrix for the transform atttibute.
+     * @returns The matrix for the transform attribute.
      * @see setTransformMatrix()
      */
     QMatrix transformMatrix() const;

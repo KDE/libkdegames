@@ -456,7 +456,7 @@ Q_SIGNALS:
    *  void GameWindow::slotProcessQuery(QDataStream &stream,KGameProcessIO *reply)
    *  {
    *    int no;
-   *    stream >> no;  // We assume the process sends us an integer question numner
+   *    stream >> no;  // We assume the process sends us an integer question number
    *    if (no==1)     // but YOU have to do this in the process player
    *    {
    *      QByteArray buffer;

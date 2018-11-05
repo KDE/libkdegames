@@ -124,7 +124,7 @@ void KGpiMainWindow::onPopupBR()
 void KGpiMainWindow::onLinkClicked(const QString& link)
 {
     QRectF visibleRect = m_mainWid.graphicsView->mapToScene( m_mainWid.graphicsView->contentsRect() ).boundingRect();
-    m_textItem->setText( "Hi! I'm the message that should appear :-). You cliked link: "+link );
+    m_textItem->setText( "Hi! I'm the message that should appear :-). You clicked link: "+link );
     m_textItem->setPos( visibleRect.left()+visibleRect.width()/2-m_textItem->boundingRect().width()/2,
                         visibleRect.top()+visibleRect.height()/2 );
     m_textItem->show();

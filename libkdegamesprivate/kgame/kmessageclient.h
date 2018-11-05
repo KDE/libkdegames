@@ -334,7 +334,7 @@ Q_SIGNALS:
     This signal is emitted when another client has connected
     to the server. Connect to this method if that clients needs initialization.
     This should usually only be done in one client, e.g. the admin client.
-    @param clientID The ID of the client that has newly connectd.
+    @param clientID The ID of the client that has newly connected.
   */
   void eventClientConnected (quint32 clientID);
 

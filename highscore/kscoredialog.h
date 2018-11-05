@@ -176,7 +176,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
          *
          * This function can be used directly with KGameDifficulty::localizedLevelStrings().
          *
-         * @param group the list of translated group names
+         * @param groups the list of translated group names
          */
         void addLocalizedConfigGroupNames(const QMap<QByteArray, QString>& groups);
 
@@ -199,7 +199,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
          *
          * This function can be used directly with KGameDifficulty::levelWeights().
          *
-         * @param group the list of untranslated group names and their weights
+         * @param weights the list of untranslated group weights
          *
          * @since KDE 4.2
          */

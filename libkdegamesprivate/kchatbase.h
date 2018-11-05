@@ -187,13 +187,13 @@ public:
 	void setCompletionMode(KCompletion::CompletionMode mode);
 
 	/**
-	 * Set the font that used used for the name part of a message. See also
+	 * Set the font that is used for the name part of a message. See also
 	 * nameFont and setBothFont
 	 **/
 	void setNameFont(const QFont& font);
 
 	/**
-	 * Set the font that used used for the message part of a message.
+	 * Set the font that is used for the message part of a message.
 	 * @see messageFont, setBothFont
 	 **/
 	void setMessageFont(const QFont& font);

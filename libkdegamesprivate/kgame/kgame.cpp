@@ -441,7 +441,7 @@ bool KGame::addPlayer(KPlayer* newplayer)
 
  QByteArray buffer;
  QDataStream stream(&buffer,QIODevice::WriteOnly);
- // We distinguis here what policy we have
+ // We distinguish here what policy we have
  if (policy()==PolicyLocal || policy()==PolicyDirty)
  {
    if ( !systemAddPlayer(newplayer) )
@@ -1137,12 +1137,12 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     }
     else
     {
-      qCCritical(GAMES_PRIVATE_KGAME) << "Couldn't find a player to dectivate..That is not so good...";
+      qCCritical(GAMES_PRIVATE_KGAME) << "Couldn't find a player to deactivate. That is not so good...";
       break;
     }
   }
 
-  qCDebug(GAMES_PRIVATE_KGAME) << "Alltogether deactivated" << inactivateIds.count() << "players";
+  qCDebug(GAMES_PRIVATE_KGAME) << "Altogether deactivated" << inactivateIds.count() << "players";
 
   QList<int>::Iterator it;
   for ( it = inactivateIds.begin(); it != inactivateIds.end(); ++it )

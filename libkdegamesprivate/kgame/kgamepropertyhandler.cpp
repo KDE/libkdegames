@@ -180,7 +180,7 @@ QString KGamePropertyHandler::propertyName(int id) const
 
 bool KGamePropertyHandler::load(QDataStream &stream)
 {
- // Prevent direct emmiting until all is loaded
+ // Prevent direct emitting until all is loaded
  lockDirectEmit();
  uint count,i;
  stream >> count;
@@ -195,7 +195,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
  } else {
         qCritical() << "KGamePropertyHandler loading error. probably format error";
  }
- // Allow direct emmiting (if no other lock still holds)
+ // Allow direct emitting (if no other lock still holds)
  unlockDirectEmit();
  return true;
 }

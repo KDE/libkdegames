@@ -625,7 +625,7 @@ Q_SIGNALS:
 
 
     /**
-    * This signal is emmited if a player property changes its value and
+    * This signal is emitted if a player property changes its value and
     * the property is set to notify this change
     */
     void signalPropertyChanged(KGamePropertyBase *property, KGame *me);
@@ -641,7 +641,7 @@ Q_SIGNALS:
     void signalGameOver(int status, KPlayer *current, KGame *me);
 
     /**
-    * Is emmited after a client is successfully connected to the game.
+    * Is emitted after a client is successfully connected to the game.
     * The client id is the id of the new game client. An easy way to
     * check whether that's us is
     * \code
@@ -728,7 +728,7 @@ protected:
     * each game to make sense.
     *
     * Not overwriting this function will activate a default behaviour which
-    * will deactivate players until the @ref maxPlayers() numebr is reached
+    * will deactivate players until the @ref maxPlayers() number is reached
     * according to the KPlayer::networkPriority() value. Players with a low
     * value will be kicked out first. With equal priority players of the new
     * client will leave first. This means, not setting this value and not
@@ -843,7 +843,7 @@ protected:
     virtual void negotiateNetworkGame(quint32 clientID);
 
     /**
-     * syncronise the random numbers with all network clients
+     * synchronize the random numbers with all network clients
      * not used by KGame - if it should be kept then as public method
      */
     void syncRandom();

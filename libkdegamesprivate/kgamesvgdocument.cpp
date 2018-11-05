@@ -667,7 +667,7 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, 
     if (!node.firstChild().isNull())
     {
         QDomNode result = findElementById(attributeName, attributeValue, node.firstChild());
-        /** We have recoursed, now we need to have this recursion end when
+        /** We have recursed, now we need to have this recursion end when
          * the function call above returns
          */
         if (!result.isNull()) return result; // If we found the node with id, then return it
@@ -675,7 +675,7 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString& attributeName, 
     if (!node.nextSibling().isNull())
     {
         QDomNode result = findElementById(attributeName, attributeValue, node.nextSibling());
-        /** We have recoursed, now we need to have this recursion end when
+        /** We have recursed, now we need to have this recursion end when
          * the function call above returns */
         if (!result.isNull()) return result;
     }

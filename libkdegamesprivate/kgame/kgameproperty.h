@@ -451,7 +451,7 @@ private:
  * KGameProperty objects are ensured to have the same value on all clients in
  * the game at every time. This way you will save you a lot of trouble as
  * debugging can be very difficult if the value of a property changes
- * immediately on client A but only after one or two additianal messages
+ * immediately on client A but only after one or two additional messages
  * (function calls, status changes, ...) on client B.
  *
  * The only disadvantage of this (clean) concept is that you cannot use a
@@ -659,7 +659,7 @@ public:
 	 * the property which can be deactivated by setEmittingSignal because of
 	 * performance (you probably don't have to deactivate it - except you
 	 * want to write a real-time game like Command&Conquer with a lot of
-	 * acitvity). See emitSignal
+	 * activity). See emitSignal
 	 *
 	 * Note that if there is no KMessageServer accessible - before
 	 * the property has been registered to the KGamePropertyHandler (as

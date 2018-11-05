@@ -225,8 +225,8 @@ public:
 	void unlockProperties();
 
 	/**
-	 * Set the policy for all kgame variables which are currently registerd in
-	 * the KGame proeprty handler. See KGamePropertyBase::setPolicy
+	 * Set the policy for all kgame variables which are currently registered in
+	 * the KGame property handler. See KGamePropertyBase::setPolicy
 	 *
 	 * @param p is the new policy for all properties of this handler
 	 * @param userspace if userspace is true (default) only user properties are changed.

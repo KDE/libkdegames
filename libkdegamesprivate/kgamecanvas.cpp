@@ -252,7 +252,7 @@ KGameCanvasItem::~KGameCanvasItem() {
 void KGameCanvasItem::changed() {
   m_changed = true;
 
-  //even if m_changed was already true we cannot optimiza away this call, because maybe the
+  //even if m_changed was already true we cannot optimize away this call, because maybe the
   //item has been reparented, etc. It is a very quick call anyway.
   if(m_canvas)
     m_canvas->ensurePendingUpdate();

@@ -56,6 +56,9 @@ class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
         };
         /**
          * Load a specific theme file.
+         * @param parent the parent widget
+         * @param config the config
+         * @param knsflags the KNewStuff flags
          * @param groupName the title of the config group in the theme .desktop file
          * @param directory subdirectory (of share/apps/appname) to search in
          * @return true if the theme files and properties could be loaded
