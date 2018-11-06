@@ -125,7 +125,7 @@ public Q_SLOTS:
 
 protected:
 	/**
-	 * @param id The ID of the sending entry, as returned by @ref KChatBase::sendingEntry
+	 * @param id The ID of the sending entry, as returned by @ref KChatBase sendingEntry
 	 * @return True if the entry "send to all" was selected, otherwise false
 	 **/
 	bool isSendToAllMessage(int id) const;
@@ -134,7 +134,7 @@ protected:
 	 * Used to indicate whether a message shall be sent to a group of
 	 * players. Note that this was not yet implemented when this doc was
 	 * written so this description might be wrong. (FIXME)
-	 * @param id The ID of the sending entry, as returned by @ref KChatBase::sendingEntry
+	 * @param id The ID of the sending entry, as returned by @ref KChatBase sendingEntry
 	 * @return True if the message is meant to be sent to a group (see @ref KPlayer::group
          * ), e.g. if "send to my group" was selected.
 	 **/
@@ -149,7 +149,7 @@ protected:
 	 *
 	 * See also toPlayerId
 	 * @param id The ID of the sending entry, as returned by
-	 * KChatBase::sendingEntry
+	 * @ref KChatBase sendingEntry
 	 * @return True if the message shall be sent to a special player,
 	 * otherwise false.
 	 **/
@@ -157,10 +157,10 @@ protected:
 
 	/**
 	 * @param id The ID of the sending entry, as returned by
-	 * @ref KChatBase::sendingEntry
+	 * @ref KChatBase sendingEntry
 	 * @return The ID of the player (see KPlayer::id) the sending entry
 	 * belongs to. Note that the parameter id is an id as returned by
-	 * @ref KChatBase::sendingEntry and the id this method returns is a
+	 * @ref KChatBase sendingEntry and the id this method returns is a
 	 * KPlayer ID. If @ref isToPlayerMessage returns false this method
 	 * returns -1
 	 **/

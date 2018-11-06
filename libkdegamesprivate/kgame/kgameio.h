@@ -346,7 +346,7 @@ private:
  *
  *  The KGameProcessIO class. It is used to create a computer player
  *  via a separate process and communicate transparently with it.
- *  Its counterpart is the @ref KGameProcess class which needs
+ *  Its counterpart is the KGameProcess class which needs
  *  to be used by the computer player. See its documentation
  *  for the definition of the computer player.
  */

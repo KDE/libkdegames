@@ -109,7 +109,7 @@ public:
 	/**
 	 * Adds a new entry in the combo box. The default is "send to all
 	 * players" only. This function is provided for convenience. You can
-	 * also call inserSendingEntry with index = -1.
+	 * also call insertSendingEntry with index = -1.
 	 * See also nextId!
 	 * @param text The text of the new entry
 	 * @param id An ID for this entry. This must be unique for this
