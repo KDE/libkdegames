@@ -40,7 +40,7 @@ class TextItemWithOpacity : public QGraphicsTextItem
     Q_OBJECT
 
 public:
-    TextItemWithOpacity( QGraphicsItem* parent = 0 )
+    TextItemWithOpacity( QGraphicsItem* parent = nullptr )
         :QGraphicsTextItem(parent), m_opacity(1.0) {}
     void setOpacity(qreal opa) { m_opacity = opa; }
     void setTextColor(KStatefulBrush brush) { m_brush = brush; }

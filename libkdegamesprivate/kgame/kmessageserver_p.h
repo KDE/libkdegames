@@ -36,7 +36,7 @@ class KMessageServerSocket : public QTcpServer
   Q_OBJECT
 
 public:
-  explicit KMessageServerSocket (quint16 port, QObject *parent = 0);
+  explicit KMessageServerSocket (quint16 port, QObject *parent = nullptr);
   ~KMessageServerSocket ();
 
 public slots:

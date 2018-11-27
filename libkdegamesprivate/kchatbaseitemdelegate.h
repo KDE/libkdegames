@@ -42,7 +42,7 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegat
     /**
       * Constructs a KChatBaseItemDelegate object
       **/
-    explicit KChatBaseItemDelegate(QObject *parent = 0);
+    explicit KChatBaseItemDelegate(QObject *parent = nullptr);
 
     /**
       * Destruct a KChatBaseItemDelegate object.

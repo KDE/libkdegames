@@ -85,7 +85,7 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 	Q_DISABLE_COPY(KgTheme)
 	public:
 		///Constructor. The @a identifier must be application-unique.
-		explicit KgTheme(const QByteArray& identifier, QObject* parent = 0);
+		explicit KgTheme(const QByteArray& identifier, QObject* parent = nullptr);
 		///Destructor.
 		virtual ~KgTheme();
 

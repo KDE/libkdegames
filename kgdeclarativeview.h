@@ -45,7 +45,7 @@ public:
     ///Construcs a new KgDeclarativeView with KDE specific environment.
     ///@param parent The parent widget for this view (usually the main
     ///window of the game)
-    KgDeclarativeView(QWidget *parent=0);
+    explicit KgDeclarativeView(QWidget *parent=nullptr);
 
 private:
     class Private;

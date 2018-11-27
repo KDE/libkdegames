@@ -84,8 +84,8 @@ public:
 	 * choose where to send messages to (either globally or just to some
 	 * players) will not be added.
 	 **/
-	explicit KChatBase(QWidget* parent, KChatBaseModel* model=0,
-                           KChatBaseItemDelegate* delegate=0,
+    explicit KChatBase(QWidget* parent, KChatBaseModel* model=nullptr,
+                           KChatBaseItemDelegate* delegate=nullptr,
                            bool noComboBox = false);
 
 	/**

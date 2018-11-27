@@ -41,7 +41,7 @@ public:
     /**
      * @return Constructor
      */
-    explicit KGameClock(QObject *parent = 0, ClockType clocktype = HourMinSec);
+    explicit KGameClock(QObject *parent = nullptr, ClockType clocktype = HourMinSec);
 
     virtual ~KGameClock();
 

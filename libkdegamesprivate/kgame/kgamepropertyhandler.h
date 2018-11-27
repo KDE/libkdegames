@@ -81,14 +81,14 @@ public:
 	 * You have to call registerHandler before you can use this
 	 * handler!
 	 **/
-	KGamePropertyHandler(QObject* parent = 0);
+    KGamePropertyHandler(QObject* parent = nullptr);
 
 	/**
 	 * Construct a registered handler.
 	 *
 	 * @see registerHandler
 	 **/
-	KGamePropertyHandler(int id, const QObject* receiver, const char* sendf, const char* emitf, QObject* parent = 0);
+    KGamePropertyHandler(int id, const QObject* receiver, const char* sendf, const char* emitf, QObject* parent = nullptr);
 	~KGamePropertyHandler();
 
 	/**

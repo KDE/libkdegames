@@ -53,7 +53,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///
 		///If there are multiple KgThemeProvider instances, make sure they use
 		///different config keys to avoid collisions.
-		explicit KgThemeProvider(const QByteArray& configKey = QByteArray("Theme"), QObject* parent = 0);
+		explicit KgThemeProvider(const QByteArray& configKey = QByteArray("Theme"), QObject* parent = nullptr);
 		///Destructor.
 		virtual ~KgThemeProvider();
 

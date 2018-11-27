@@ -92,7 +92,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         * is convenient for converting highscores from legacy applications.
         * @param parent parent widget for this widget
         */
-        explicit KHighscore(bool forceLocal=true, QObject *parent=0);
+        explicit KHighscore(bool forceLocal=true, QObject *parent=nullptr);
 
         /**
          * Read the current state of the highscore file. Remember that when
@@ -128,7 +128,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * @return false on error or if the config file is locked by another
          * process. In such case, the config stays read-only.
          */
-        bool lockForWriting(QWidget *widget = 0);
+        bool lockForWriting(QWidget *widget = nullptr);
 
         /**
          * Effectively write and unlock the system-wide highscore file

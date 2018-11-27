@@ -130,7 +130,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         * @param fields Bitwise OR of the @ref Fields that should be listed (Score is always present)
         * @param parent passed to parent QWidget constructor.
         */
-        explicit KScoreDialog(int fields=Name, QWidget *parent=0);
+        explicit KScoreDialog(int fields=Name, QWidget *parent=nullptr);
 
         ~KScoreDialog();
 

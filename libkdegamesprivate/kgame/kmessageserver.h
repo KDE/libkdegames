@@ -208,7 +208,7 @@ public:
     /**
      * Create a KGameNetwork object
      **/
-    explicit KMessageServer(quint16 cookie = 42, QObject* parent = 0);
+    explicit KMessageServer(quint16 cookie = 42, QObject* parent = nullptr);
 
     ~KMessageServer();
 

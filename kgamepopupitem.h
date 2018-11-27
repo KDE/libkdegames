@@ -63,7 +63,7 @@ public:
     /**
      * Constructs a message item. It is hidden by default.
      */
-    KGamePopupItem(QGraphicsItem * parent = 0);
+    KGamePopupItem(QGraphicsItem * parent = nullptr);
     /**
      * Destructs a message item
      */

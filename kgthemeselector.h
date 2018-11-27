@@ -53,7 +53,7 @@ class KDEGAMES_EXPORT KgThemeSelector : public QWidget
 		};
 		Q_DECLARE_FLAGS(Options, Option)
 
-		explicit KgThemeSelector(KgThemeProvider* provider, Options options = DefaultBehavior, QWidget* parent = 0);
+		explicit KgThemeSelector(KgThemeProvider* provider, Options options = DefaultBehavior, QWidget* parent = nullptr);
 		virtual ~KgThemeSelector();
 	public Q_SLOTS:
 		///Create and show a non-modal dialog which displays this selector.

@@ -103,7 +103,7 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 	Q_PROPERTY(bool editable READ isEditable WRITE setEditable NOTIFY editableChanged)
 	Q_PROPERTY(bool gameRunning READ isGameRunning WRITE setGameRunning NOTIFY gameRunningChanged)
 	public:
-		explicit KgDifficulty(QObject* parent = 0);
+		explicit KgDifficulty(QObject* parent = nullptr);
 		///Destroys this instance and all DifficultyLevel instances in it.
 		virtual ~KgDifficulty();
 

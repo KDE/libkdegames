@@ -75,7 +75,7 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		///expensive operation which you might want to do during application
 		///startup. However, you can reuse the same Sound instance for multiple
 		///playback events.
-		explicit KgSound(const QString& file, QObject* parent = 0);
+		explicit KgSound(const QString& file, QObject* parent = nullptr);
 		///Destroys this KgSound instance.
 		virtual ~KgSound();
 

@@ -348,7 +348,7 @@ namespace KgDifficultyGUI
 		private:
 			KgDifficulty* d;
 		public:
-			Selector(KgDifficulty* difficulty, QWidget* parent = 0)
+			Selector(KgDifficulty* difficulty, QWidget* parent = nullptr)
 				: KComboBox(parent), d(difficulty) {}
 		Q_SIGNALS:
 			void signalSelected(int levelIndex);

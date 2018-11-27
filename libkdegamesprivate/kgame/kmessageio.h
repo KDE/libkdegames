@@ -67,7 +67,7 @@ public:
   /**
    * The usual QObject constructor, does nothing else.
    **/
-  KMessageIO (QObject *parent = 0);
+  KMessageIO (QObject *parent = nullptr);
 
   /**
    * The usual destructor, does nothing special.
@@ -187,7 +187,7 @@ public:
     If the connection could not be established (e.g. unknown host or no server
     socket at this port), the signal /e connectionBroken is emitted.
   */
-  KMessageSocket (const QString& host, quint16 port, QObject *parent = 0 );
+  KMessageSocket (const QString& host, quint16 port, QObject *parent = nullptr );
 
   /**
     Connects to a server socket on /e host with /e port. You can immediately
@@ -197,7 +197,7 @@ public:
     If the connection could not be established (e.g. unknown host or no server
     socket at this port), the signal /e connectionBroken is emitted.
   */
-  KMessageSocket (QHostAddress host, quint16 port, QObject *parent = 0);
+  KMessageSocket (QHostAddress host, quint16 port, QObject *parent = nullptr);
 
   /**
     Uses /e socket to do the communication.
@@ -210,7 +210,7 @@ public:
     together with this KMessageSocket object. (Use 0 as parent for the QSocket
     object t ensure it is not deleted.)
   */
-  explicit KMessageSocket (QTcpSocket *socket, QObject *parent = 0);
+  explicit KMessageSocket (QTcpSocket *socket, QObject *parent = nullptr);
 
   /**
     Uses the socket specified by the socket descriptor socketFD to do the
@@ -223,7 +223,7 @@ public:
     manipulate the socket afterwards, especially don't close it. The socket is
     automatically closed when KMessageSocket is deleted.
   */
-  explicit KMessageSocket (int socketFD, QObject *parent = 0);
+  explicit KMessageSocket (int socketFD, QObject *parent = nullptr);
 
   /**
     Destructor, closes the socket.
@@ -308,7 +308,7 @@ public:
 
     If that object is already connected, the object remains unconnected.
   */
-  explicit KMessageDirect (KMessageDirect *partner = 0, QObject *parent = 0);
+  explicit KMessageDirect (KMessageDirect *partner = 0, QObject *parent = nullptr);
 
   /**
     Destructor, closes the connection.

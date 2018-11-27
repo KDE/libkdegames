@@ -82,10 +82,10 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseModel : public QAbstractListModel
 
 public:
   /** Default constructor */
-  KChatBaseModel(QObject *parent = 0);
+  explicit KChatBaseModel(QObject *parent = nullptr);
 
   /** Default destructor */
-  virtual ~KChatBaseModel();
+  ~KChatBaseModel() Q_DECL_OVERRIDE;
 
   /**
     * Reimplementation of the inherited method.
