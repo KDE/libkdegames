@@ -65,10 +65,8 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 
 KgThemeProvider::~KgThemeProvider()
 {
-	if (d->m_themes.isEmpty())
-	{
-		return;
-	}
+        if (!d->m_themes.isEmpty())
+        {
 	//save current theme in config file (no sync() call here; this will most
 	//likely be called at application shutdown when others are also writing to
 	//KGlobal::config(); also KConfig's dtor will sync automatically)
@@ -83,7 +81,9 @@ KgThemeProvider::~KgThemeProvider()
 	while (!d->m_themes.isEmpty())
 	{
 		delete const_cast<KgTheme*>(d->m_themes.takeFirst());
-	}
+        }
+        delete d;
+        }
 }
 
 QString KgThemeProvider::name() const
