@@ -190,7 +190,7 @@ void KGameDifficultyPrivate::rebuildActions()
 		}
 	}
 
-	if (m_customLevels.count()>0) {
+        if (!m_customLevels.isEmpty()) {
 		foreach(const QString &s, m_customLevels) {
 			m_menu->addAction(s);
 			m_comboBox->addItem(QIcon::fromTheme( QStringLiteral( "games-difficult" )), s);

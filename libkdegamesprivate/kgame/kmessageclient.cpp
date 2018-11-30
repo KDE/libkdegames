@@ -185,7 +185,7 @@ void KMessageClient::processIncomingMessage (const QByteArray &msg)
     d->delayedMessages.append(msg);
     return;
   }
-  if (d->delayedMessages.count() > 0)
+  if (!d->delayedMessages.isEmpty())
   {
     d->delayedMessages.append (msg);
     QByteArray first = d->delayedMessages.front();

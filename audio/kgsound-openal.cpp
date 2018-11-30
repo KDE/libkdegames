@@ -167,7 +167,7 @@ void KgSound::start(const QPointF& pos)
 	if (d->m_valid)
 	{
 		KgOpenALRuntime* runtime = KgOpenALRuntime::instance();
-		if(runtime->instance()->m_soundsEvents[this].count() > 0)
+                if(!runtime->instance()->m_soundsEvents[this].isEmpty())
 		{
 			if(runtime->instance()->m_soundsEvents[this].last()->replay(pos) == false)
 			{
