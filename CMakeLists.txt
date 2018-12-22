@@ -13,7 +13,7 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets Qml Qui
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config WidgetsAddons Codecs Archive
     DBusAddons DNSSD Declarative
     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
-    Bookmarks KIO NewStuff)
+    Bookmarks NewStuff Completion)
 
 include(FeatureSummary)
 include(GenerateExportHeader)
@@ -118,10 +118,10 @@ target_link_libraries(KF5KDEGames
                       Qt5::Svg
                       Qt5::Quick
                       KF5::Declarative
-                      KF5::KIOWidgets
                       KF5::NewStuff
                       KF5::IconThemes
                       KF5::GuiAddons
+                      KF5::Completion
                 PUBLIC
                       Qt5::Widgets
                       Qt5::QuickWidgets
