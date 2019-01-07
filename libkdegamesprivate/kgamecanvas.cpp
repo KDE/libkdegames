@@ -105,7 +105,7 @@ KGameCanvasWidget::KGameCanvasWidget(QWidget* parent)
 : QWidget(parent)
 , priv(new KGameCanvasWidgetPrivate()) {
   priv->m_anim_time.start();
-  connect(&priv->m_anim_timer, SIGNAL(timeout()), this, SLOT(processAnimations()));
+  connect(&priv->m_anim_timer, &QTimer::timeout, this, &KGameCanvasWidget::processAnimations);
 }
 
 KGameCanvasWidget::~KGameCanvasWidget() {
@@ -125,7 +125,7 @@ void KGameCanvasWidget::ensurePendingUpdate() {
 #if DEBUG_DONT_MERGE_UPDATES
   updateChanges();
 #else //DEBUG_DONT_MERGE_UPDATES
-  QTimer::singleShot( 0, this, SLOT(updateChanges()) );
+  QTimer::singleShot( 0, this, &KGameCanvasWidget::updateChanges );
 #endif //DEBUG_DONT_MERGE_UPDATES
 }
 

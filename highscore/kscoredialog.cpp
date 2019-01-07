@@ -622,7 +622,7 @@ int KScoreDialog::exec()
 
 void KScoreDialog::slotGotReturn()
 {
-    QTimer::singleShot(0, this, SLOT(slotGotName()));
+    QTimer::singleShot(0, this, &KScoreDialog::slotGotName);
     // TODO: Is it better to hide the window, as if any button where pressed?
 }
 

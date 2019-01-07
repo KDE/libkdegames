@@ -789,7 +789,7 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
    player->setTurn(false); // in turn based games we have to switch off input now
    if (gameSequence())
    {
-     QTimer::singleShot(0,this,SLOT(prepareNext()));
+     QTimer::singleShot(0,this,&KGame::prepareNext);
    }
  }
  return player;

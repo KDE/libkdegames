@@ -34,7 +34,7 @@ KGameRendererClient::KGameRendererClient(KGameRenderer* renderer, const QString&
 {
 	renderer->d->m_clients.insert(this, QString());
 	//The following may not be triggered directly because it may call receivePixmap() which is a pure virtual method at this point.
-	QTimer::singleShot(0, d, SLOT(fetchPixmap()));
+	QTimer::singleShot(0, d, &KGameRendererClientPrivate::fetchPixmap);
 }
 
 KGameRendererClient::~KGameRendererClient()

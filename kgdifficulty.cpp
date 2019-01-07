@@ -383,10 +383,10 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	KgDifficultyGUI::Selector* selector = new KgDifficultyGUI::Selector(difficulty, window);
 	selector->setToolTip(i18nc("Game difficulty level", "Difficulty"));
 	QObject::connect(selector, SIGNAL(activated(int)), selector, SLOT(slotActivated(int)));
-	QObject::connect(difficulty, SIGNAL(editableChanged(bool)), selector, SLOT(setEnabled(bool)));
-	QObject::connect(difficulty, SIGNAL(selectedLevelChanged(const KgDifficultyLevel*)),
-		selector, SLOT(slotSelected(const KgDifficultyLevel*)));
-	QObject::connect(selector, SIGNAL(signalSelected(int)), selector, SLOT(setCurrentIndex(int)));
+	QObject::connect(difficulty, &KgDifficulty::editableChanged, selector, &QWidget::setEnabled);
+	QObject::connect(difficulty, &KgDifficulty::selectedLevelChanged,
+		selector, &Selector::slotSelected);
+	QObject::connect(selector, &Selector::signalSelected, selector, &QComboBox::setCurrentIndex);
 
 	//create menu action
 	const QIcon icon = QIcon::fromTheme(QStringLiteral("games-difficult"));
@@ -394,8 +394,8 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	menu->setToolTip(i18n("Set the difficulty level"));
 	menu->setWhatsThis(i18n("Set the difficulty level of the game."));
 	QObject::connect(menu, SIGNAL(triggered(int)), selector, SLOT(slotActivated(int)));
-	QObject::connect(difficulty, SIGNAL(editableChanged(bool)), menu, SLOT(setEnabled(bool)));
-	QObject::connect(selector, SIGNAL(signalSelected(int)), menu, SLOT(setCurrentItem(int)));
+	QObject::connect(difficulty, &KgDifficulty::editableChanged, menu, &QAction::setEnabled);
+	QObject::connect(selector, &Selector::signalSelected, menu, &KSelectAction::setCurrentItem);
 
 	//fill menu and selector
 	foreach (const KgDifficultyLevel* level, difficulty->levels())

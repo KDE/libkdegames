@@ -91,8 +91,8 @@ KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelega
  d->mBox->setItemDelegate(d->mDelegate);
  l->addWidget(d->mBox);
 
- connect(d->mModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
-          d->mBox, SLOT(scrollToBottom()));
+ connect(d->mModel, &QAbstractItemModel::rowsInserted,
+          d->mBox, &QAbstractItemView::scrollToBottom);
 
  connect(d->mBox, &QListView::customContextMenuRequested, this, &KChatBase::customMenuHandler);
 

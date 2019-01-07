@@ -322,7 +322,7 @@ void KMessageClient::removeBrokenConnection ()
 {
   qCDebug(GAMES_PRIVATE_KGAME) << ": timer single shot for removeBrokenConnection"<<this;
   // MH We cannot directly delete the socket. otherwise QSocket crashes
-  QTimer::singleShot( 0, this, SLOT(removeBrokenConnection2()) );
+  QTimer::singleShot( 0, this, &KMessageClient::removeBrokenConnection2 );
   return;
 }
 
@@ -361,7 +361,7 @@ void KMessageClient::unlock ()
   d->isLocked = false;
   for (int i = 0; i < d->delayedMessages.count(); i++)
   {
-    QTimer::singleShot(0, this, SLOT(processFirstMessage()));
+    QTimer::singleShot(0, this, &KMessageClient::processFirstMessage);
   }
 }
 

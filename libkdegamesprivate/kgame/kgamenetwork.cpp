@@ -127,8 +127,8 @@ void KGameNetwork::setMaster()
    connect(d->mMessageClient, &KMessageClient::eventClientDisconnected, this, &KGameNetwork::signalClientDisconnected);
 
    // broacast and direct messages are treated equally on receive.
-   connect (d->mMessageClient, SIGNAL(forwardReceived(QByteArray,quint32,QList<quint32>)),
-            d->mMessageClient, SIGNAL(broadcastReceived(QByteArray,quint32)));
+   connect (d->mMessageClient, &KMessageClient::forwardReceived,
+            d->mMessageClient, &KMessageClient::broadcastReceived);
 
  } else {
    // should be no problem but still has to be tested

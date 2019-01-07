@@ -100,8 +100,8 @@ KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
   d = new KMessageServerPrivate;
   d->mIsRecursive=false;
   d->mCookie=cookie;
-  connect (&(d->mTimer), SIGNAL (timeout()),
-           this, SLOT (processOneMessage()));
+  connect (&(d->mTimer), &QTimer::timeout,
+           this, &KMessageServer::processOneMessage);
   qCDebug(GAMES_PRIVATE_KGAME) << "CREATE(KMessageServer="
 		<< this
 		<< ") cookie="
@@ -190,10 +190,10 @@ void KMessageServer::addClient (KMessageIO* client)
   qCDebug(GAMES_PRIVATE_KGAME) << ":" << client->id();
 
   // connect its signals
-  connect (client, SIGNAL (connectionBroken()),
-           this, SLOT (removeBrokenClient()));
-  connect (client, SIGNAL (received(QByteArray)),
-           this, SLOT (getReceivedMessage(QByteArray)));
+  connect (client, &KMessageIO::connectionBroken,
+           this, &KMessageServer::removeBrokenClient);
+  connect (client, &KMessageIO::received,
+           this, &KMessageServer::getReceivedMessage);
 
   // Tell everyone about the new guest
   // Note: The new client doesn't get this message!
