@@ -43,7 +43,7 @@ public:
     TextItemWithOpacity( QGraphicsItem* parent = nullptr )
         :QGraphicsTextItem(parent), m_opacity(1.0) {}
     void setOpacity(qreal opa) { m_opacity = opa; }
-    void setTextColor(KStatefulBrush brush) { m_brush = brush; }
+    void setTextColor(const KStatefulBrush &brush) { m_brush = brush; }
     void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget ) Q_DECL_OVERRIDE;
 
 Q_SIGNALS:

@@ -334,7 +334,7 @@ Q_SIGNALS:
      * @param error the error code
      * @param text the error text
      */
-    void signalNetworkErrorMessage(int error, QString text);
+    void signalNetworkErrorMessage(int error, const QString &text);
 
     /**
      * Our connection to the KMessageServer has broken.

@@ -56,7 +56,7 @@ KMessageSocket::KMessageSocket (const QString& host, quint16 port, QObject *pare
   initSocket ();
 }
 
-KMessageSocket::KMessageSocket (QHostAddress host, quint16 port, QObject *parent)
+KMessageSocket::KMessageSocket (const QHostAddress &host, quint16 port, QObject *parent)
   : KMessageIO (parent)
 {
   mSocket = new QTcpSocket ();

@@ -197,7 +197,7 @@ public:
     If the connection could not be established (e.g. unknown host or no server
     socket at this port), the signal /e connectionBroken is emitted.
   */
-  KMessageSocket (QHostAddress host, quint16 port, QObject *parent = nullptr);
+  KMessageSocket (const QHostAddress &host, quint16 port, QObject *parent = nullptr);
 
   /**
     Uses /e socket to do the communication.
@@ -379,7 +379,7 @@ class KMessageProcess : public KMessageIO
   void  slotProcessExited(int, QProcess::ExitStatus);
 
   Q_SIGNALS:
-    void signalReceivedStderr(QString msg);
+    void signalReceivedStderr(const QString &msg);
 
   private:
     QString mProcessName;

@@ -483,7 +483,7 @@ Q_SIGNALS:
   /** Text is received by the process on STDERR. This is usually a debug string.
     * @param msg The text
     */
-  void signalReceivedStderr(QString msg);
+  void signalReceivedStderr(const QString &msg);
 
 private:
     friend class KGameProcessIOPrivate;
