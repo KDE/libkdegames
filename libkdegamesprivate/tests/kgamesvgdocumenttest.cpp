@@ -70,11 +70,11 @@ void tst_KGameSvgDocument::scale()
     m_svgDom.elementById(QStringLiteral("0x11"));
     QVERIFY(!m_svgDom.currentNode().isNull());
 
-    QMatrix originalTransformMatrix = m_svgDom.transformMatrix();
+    QTransform originalTransformMatrix = m_svgDom.transformMatrix();
 
     m_svgDom.scale(2, 2, KGameSvgDocument::ApplyToCurrentMatrix);
 
-    QMatrix finalMatrix = m_svgDom.transformMatrix();
+    QTransform finalMatrix = m_svgDom.transformMatrix();
 
     double computedX = originalTransformMatrix.m11() * 2;
     double errorX = computedX - finalMatrix.m11();
@@ -235,8 +235,8 @@ void tst_KGameSvgDocument::transform()
     QVERIFY(m_svgDom.transform() == originalTransform);
 
     // test transformMartix() set & get
-    QMatrix originalMatrix = m_svgDom.transformMatrix();
-    QMatrix null = QMatrix();
+    QTransform originalMatrix = m_svgDom.transformMatrix();
+    QTransform null = QMatrix();
     m_svgDom.setTransformMatrix(null, KGameSvgDocument::ReplaceCurrentMatrix);
     QVERIFY(m_svgDom.transformMatrix() == null);
 

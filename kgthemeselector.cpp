@@ -83,7 +83,7 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 		SLOT(_k_updateProviderSelection()));
 	//setup main layout
 	QVBoxLayout* layout = new QVBoxLayout(this);
-	layout->setMargin(0);
+	layout->setContentsMargins(0, 0, 0, 0);
 	layout->addWidget(d->m_list);
 	//setup KNS button
 	if (options & EnableNewStuffDownload)

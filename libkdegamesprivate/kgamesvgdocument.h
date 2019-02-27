@@ -26,7 +26,7 @@
 
 #include <QHash>
 #include <QStringList>
-#include <QMatrix>
+#include <QTransform>
 #include <QDomDocument>
 #include <QLoggingCategory>
 
@@ -225,7 +225,7 @@ public:
      * @param degrees The amount in degrees to rotate by.
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
-     * @see QMatrix#rotate()
+     * @see QTransform#rotate()
      */
     void rotate(double degrees, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -236,7 +236,7 @@ public:
      * @param yPixels The number of pixels to move the y-axis by.
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
-     * @see QMatrix::translate()
+     * @see QTransform::translate()
      */
     void translate(int xPixels, int yPixels, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -247,7 +247,7 @@ public:
      * @param yRadians The amount in radians to shear (skew) the y-axis by.
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
-     * @see QMatrix::shear()
+     * @see QTransform::shear()
      */
     void shear(double xRadians, double yRadians, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -275,7 +275,7 @@ public:
      * @param yFactor The factor to scale the y-axis by.
      * @param options Apply to current matrix or replace current matrix.
      * @returns nothing
-     * @see QMatrix::scale()
+     * @see QTransform::scale()
      */
     void scale(double xFactor, double yFactor, const MatrixOptions& options = ApplyToCurrentMatrix);
 
@@ -467,7 +467,7 @@ public:
      * @returns The matrix for the transform attribute.
      * @see setTransformMatrix()
      */
-    QMatrix transformMatrix() const;
+    QTransform transformMatrix() const;
 
     /**
      * @brief Sets the transform attribute of the current node.
@@ -481,7 +481,7 @@ public:
      * @returns nothing
      * @see transformMatrix()
      */
-    void setTransformMatrix(QMatrix& matrix, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void setTransformMatrix(QTransform& matrix, const MatrixOptions& options = ApplyToCurrentMatrix);
 
 private:
 

@@ -228,48 +228,48 @@ void KGameSvgDocument::load(const QString& svgFilename)
 
 void KGameSvgDocument::rotate(double degrees, const MatrixOptions& options)
 {
-    QMatrix matrix;
+    QTransform matrix;
 
     if (options == ApplyToCurrentMatrix)
     {
-        matrix = transformMatrix().QMatrix::rotate(degrees);
+        matrix = transformMatrix().QTransform::rotate(degrees);
     }
     else
     {
-        matrix = QMatrix();
-        matrix.QMatrix::rotate(degrees);
+        matrix = QTransform();
+        matrix.QTransform::rotate(degrees);
     }
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
 
 void KGameSvgDocument::translate(int xPixels, int yPixels, const MatrixOptions& options)
 {
-    QMatrix matrix;
+    QTransform matrix;
 
     if (options == ApplyToCurrentMatrix)
     {
-        matrix = transformMatrix().QMatrix::translate(xPixels, yPixels);
+        matrix = transformMatrix().QTransform::translate(xPixels, yPixels);
     }
     else
     {
-        matrix = QMatrix();
-        matrix.QMatrix::translate(xPixels, yPixels);
+        matrix = QTransform();
+        matrix.QTransform::translate(xPixels, yPixels);
     }
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
 
 void KGameSvgDocument::shear(double xRadians, double yRadians, const MatrixOptions& options)
 {
-    QMatrix matrix;
+    QTransform matrix;
 
     if (options == ApplyToCurrentMatrix)
     {
-        matrix = transformMatrix().QMatrix::shear(xRadians, yRadians);
+        matrix = transformMatrix().QTransform::shear(xRadians, yRadians);
     }
     else
     {
-        matrix = QMatrix();
-        matrix.QMatrix::shear(xRadians, yRadians);
+        matrix = QTransform();
+        matrix.QTransform::shear(xRadians, yRadians);
     }
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
@@ -284,7 +284,7 @@ void KGameSvgDocument::skew(double xDegrees, double yDegrees, const MatrixOption
 
 void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions& options)
 {
-    QMatrix matrix;
+    QTransform matrix;
     if ((xFactor == 0) || (yFactor == 0))
     {
         qWarning () << "KGameSvgDocument::scale: You cannot scale by zero";
@@ -292,12 +292,12 @@ void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions
 
     if (options == ApplyToCurrentMatrix)
     {
-        matrix = transformMatrix().QMatrix::scale(xFactor, yFactor);
+        matrix = transformMatrix().QTransform::scale(xFactor, yFactor);
     }
     else
     {
-        matrix = QMatrix();
-        matrix.QMatrix::scale(xFactor, yFactor);
+        matrix = QTransform();
+        matrix.QTransform::scale(xFactor, yFactor);
     }
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
@@ -506,7 +506,7 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString>& _styleP
     setStyle(styleBuffer);
 }
 
-QMatrix KGameSvgDocument::transformMatrix() const
+QTransform KGameSvgDocument::transformMatrix() const
 {
     /*
      * Transform attributes can be quite complex.  Here, we assemble this tangled web of
@@ -524,12 +524,12 @@ QMatrix KGameSvgDocument::transformMatrix() const
     QString transformAttribute;
     int result;
     int i = 0;
-    QMatrix baseMatrix = QMatrix();
+    QTransform baseMatrix = QMatrix();
 
     transformAttribute = transform();
     if (transformAttribute == QLatin1String( "Element has no transform attribute." ))
     {
-        return QMatrix();
+        return QTransform();
     }
     transformAttribute = transformAttribute.trimmed();
 
@@ -537,7 +537,7 @@ QMatrix KGameSvgDocument::transformMatrix() const
     if (!rx.exactMatch(transformAttribute))
     {
         qWarning () << "Transform attribute seems to be invalid. Check your SVG file.";
-        return QMatrix();
+        return QTransform();
     }
 
     rx.setPattern(TRANSFORM);
@@ -553,12 +553,12 @@ QMatrix KGameSvgDocument::transformMatrix() const
                 // else we use a null matrix.
                 if (i == 0)
                 {
-                    baseMatrix = QMatrix(rx.cap(2).toDouble(), rx.cap(3).toDouble(), rx.cap(4).toDouble(),
+                    baseMatrix = QTransform(rx.cap(2).toDouble(), rx.cap(3).toDouble(), rx.cap(4).toDouble(),
                                          rx.cap(5).toDouble(), rx.cap(6).toDouble(), rx.cap(7).toDouble());
                 }
                 else
                 {
-                    baseMatrix = QMatrix(rx.cap(2).toDouble(), rx.cap(3).toDouble(), rx.cap(4).toDouble(),
+                    baseMatrix = QTransform(rx.cap(2).toDouble(), rx.cap(3).toDouble(), rx.cap(4).toDouble(),
                                          rx.cap(5).toDouble(), rx.cap(6).toDouble(), rx.cap(7).toDouble()) * baseMatrix;
                 }
             }
@@ -620,10 +620,10 @@ QMatrix KGameSvgDocument::transformMatrix() const
     return baseMatrix;
 }
 
-void KGameSvgDocument::setTransformMatrix(QMatrix& matrix, const MatrixOptions& options)
+void KGameSvgDocument::setTransformMatrix(QTransform& matrix, const MatrixOptions& options)
 {
     QString transformBuffer, tmp;
-    QMatrix null = QMatrix();
+    QTransform null = QMatrix();
 
     if (options == ApplyToCurrentMatrix)
     {
