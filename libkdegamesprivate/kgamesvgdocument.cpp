@@ -524,7 +524,7 @@ QTransform KGameSvgDocument::transformMatrix() const
     QString transformAttribute;
     int result;
     int i = 0;
-    QTransform baseMatrix = QMatrix();
+    QTransform baseMatrix = QTransform();
 
     transformAttribute = transform();
     if (transformAttribute == QLatin1String( "Element has no transform attribute." ))
@@ -623,7 +623,7 @@ QTransform KGameSvgDocument::transformMatrix() const
 void KGameSvgDocument::setTransformMatrix(QTransform& matrix, const MatrixOptions& options)
 {
     QString transformBuffer, tmp;
-    QTransform null = QMatrix();
+    QTransform null = QTransform();
 
     if (options == ApplyToCurrentMatrix)
     {

@@ -236,7 +236,7 @@ void tst_KGameSvgDocument::transform()
 
     // test transformMartix() set & get
     QTransform originalMatrix = m_svgDom.transformMatrix();
-    QTransform null = QMatrix();
+    QTransform null = QTransform();
     m_svgDom.setTransformMatrix(null, KGameSvgDocument::ReplaceCurrentMatrix);
     QVERIFY(m_svgDom.transformMatrix() == null);
 
