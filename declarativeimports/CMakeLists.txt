@@ -1,7 +1,5 @@
 project(corebindings)
 
-include_directories( ${CMAKE_SOURCE_DIR}/libkdegames )
-
 set(corebindings_SRCS
     corebindingsplugin.cpp
     )
@@ -9,7 +7,6 @@ set(corebindings_SRCS
 INCLUDE_DIRECTORIES(
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_BINARY_DIR}
-        ${KDE4_INCLUDES}
 )
 
 add_library(corebindingsplugin SHARED ${corebindings_SRCS})
