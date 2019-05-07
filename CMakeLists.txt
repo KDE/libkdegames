@@ -2,7 +2,7 @@ enable_testing()
 
 project(libkdegames)
 
-cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
 set (QT_MIN_VERSION "5.3.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
