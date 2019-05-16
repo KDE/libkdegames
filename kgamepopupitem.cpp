@@ -44,13 +44,13 @@ public:
         :QGraphicsTextItem(parent), m_opacity(1.0) {}
     void setOpacity(qreal opa) { m_opacity = opa; }
     void setTextColor(const KStatefulBrush &brush) { m_brush = brush; }
-    void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget ) Q_DECL_OVERRIDE;
+    void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget ) override;
 
 Q_SIGNALS:
     void mouseClicked();
 
 private:
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent*) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent*) override;
 
 private:
     qreal m_opacity;

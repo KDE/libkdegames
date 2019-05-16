@@ -755,7 +755,7 @@ public:
 	 * Saves the object to a stream.
 	 * @param stream The stream to save to
 	 **/
-	void save(QDataStream &stream) Q_DECL_OVERRIDE
+	void save(QDataStream &stream) override
 	{
 		stream << mData;
 	}
@@ -781,7 +781,7 @@ public:
 	 * Also calls emitSignal if isEmittingSignal is TRUE.
 	 * @param s The stream to read from
 	 **/
-	void load(QDataStream& s) Q_DECL_OVERRIDE
+	void load(QDataStream& s) override
 	{
 		s >> mData;
 		setDirty(false);
@@ -834,7 +834,7 @@ public:
 	 **/
 	operator type() const { return value(); }
 
-	const type_info* typeinfo() Q_DECL_OVERRIDE { return &typeid(type); }
+	const type_info* typeinfo() override { return &typeid(type); }
 
 private:
 	void init() { }

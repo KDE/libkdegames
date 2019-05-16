@@ -107,12 +107,12 @@ public:
     /**
     * Destructs the game
     */
-    ~KGame() Q_DECL_OVERRIDE;
+    ~KGame() override;
 
     /**
      * Gives debug output of the game status
      */
-    void Debug() Q_DECL_OVERRIDE;
+    void Debug() override;
 
     /**
      * Game status - Use this to Control the game flow.
@@ -460,7 +460,7 @@ public:
      * @param sender
      * @param clientID the client from which we received the transmission - hardly used
      **/
-    void networkTransmission(QDataStream &stream, int msgid, quint32 receiver, quint32 sender, quint32 clientID) Q_DECL_OVERRIDE;
+    void networkTransmission(QDataStream &stream, int msgid, quint32 receiver, quint32 sender, quint32 clientID) override;
 
     /**
      * Returns a pointer to the KGame property handler

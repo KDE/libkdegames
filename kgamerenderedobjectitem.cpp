@@ -30,11 +30,11 @@ class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 		void adjustTransform();
 
 		//QGraphicsItem reimplementations (see comment below for why we need all of this)
-		bool contains(const QPointF& point) const Q_DECL_OVERRIDE;
-		bool isObscuredBy(const QGraphicsItem* item) const Q_DECL_OVERRIDE;
-		QPainterPath opaqueArea() const Q_DECL_OVERRIDE;
-		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0) Q_DECL_OVERRIDE;
-		QPainterPath shape() const Q_DECL_OVERRIDE;
+		bool contains(const QPointF& point) const override;
+		bool isObscuredBy(const QGraphicsItem* item) const override;
+		QPainterPath opaqueArea() const override;
+		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0) override;
+		QPainterPath shape() const override;
 	public:
 		KGameRenderedObjectItem* m_parent;
 		QGraphicsView* m_primaryView;

@@ -85,20 +85,20 @@ public:
   explicit KChatBaseModel(QObject *parent = nullptr);
 
   /** Default destructor */
-  ~KChatBaseModel() Q_DECL_OVERRIDE;
+  ~KChatBaseModel() override;
 
   /**
     * Reimplementation of the inherited method.
     * @return The current number of messages in the list
     */
-  int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
+  int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
 
   /**
     * Reimplementation of the inherited method.
     * @return The KChatBaseMessage at the given index as a QVariant
     */
-  QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+  QVariant data(const QModelIndex &index, int role) const override;
 
   /**
    * Set the font that is used for the name part of a message. See also

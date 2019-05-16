@@ -146,11 +146,11 @@ public:
     /**
      * @return the bounding rect of this item. Reimplemented from QGraphicsItem
      */
-    QRectF boundingRect() const Q_DECL_OVERRIDE;
+    QRectF boundingRect() const override;
     /**
      * Paints item. Reimplemented from QGraphicsItem
      */
-    void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget ) Q_DECL_OVERRIDE;
+    void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget ) override;
     /**
      * Sets the popup angles sharpness
      */
@@ -181,10 +181,10 @@ private Q_SLOTS:
     void onTextItemClicked();
 private:
     void setupTimeline();
-    void mousePressEvent( QGraphicsSceneMouseEvent* ) Q_DECL_OVERRIDE;
-    void mouseReleaseEvent( QGraphicsSceneMouseEvent* ) Q_DECL_OVERRIDE;
-    void hoverEnterEvent( QGraphicsSceneHoverEvent* ) Q_DECL_OVERRIDE;
-    void hoverLeaveEvent( QGraphicsSceneHoverEvent* ) Q_DECL_OVERRIDE;
+    void mousePressEvent( QGraphicsSceneMouseEvent* ) override;
+    void mouseReleaseEvent( QGraphicsSceneMouseEvent* ) override;
+    void hoverEnterEvent( QGraphicsSceneHoverEvent* ) override;
+    void hoverLeaveEvent( QGraphicsSceneHoverEvent* ) override;
 
     KGamePopupItemPrivate * const d;
 };

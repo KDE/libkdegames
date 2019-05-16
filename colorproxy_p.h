@@ -52,13 +52,13 @@ class QPaintDeviceColorProxy : public QPaintDevice
 		~QPaintDeviceColorProxy();
 
 		QPaintDevice* proxiedDevice() const;
-		QPaintEngine* paintEngine() const Q_DECL_OVERRIDE;
+		QPaintEngine* paintEngine() const override;
 
 		QBrush map(const QBrush& brush) const;
 		inline QColor map(const QColor& color) const;
 		QPen map(const QPen& pen) const;
 	protected:
-		int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
+		int metric(PaintDeviceMetric metric) const override;
 	private:
 		QPaintDevice* m_proxiedDevice;
 		QPaintEngine* m_engine;
@@ -71,25 +71,25 @@ class QPaintEngineColorProxy : public QPaintEngine
 		QPaintEngineColorProxy();
 		~QPaintEngineColorProxy();
 
-		bool begin(QPaintDevice* device) Q_DECL_OVERRIDE;
-		bool end() Q_DECL_OVERRIDE;
-		void drawEllipse(const QRectF& rect) Q_DECL_OVERRIDE;
-		void drawEllipse(const QRect& rect) Q_DECL_OVERRIDE;
-		void drawImage(const QRectF& rectangle, const QImage& image, const QRectF& sr, Qt::ImageConversionFlags flags = Qt::AutoColor) Q_DECL_OVERRIDE;
-		void drawLines(const QLineF* lines, int lineCount) Q_DECL_OVERRIDE;
-		void drawLines(const QLine* lines, int lineCount) Q_DECL_OVERRIDE;
-		void drawPath(const QPainterPath& path) Q_DECL_OVERRIDE;
-		void drawPixmap(const QRectF& r, const QPixmap& pm, const QRectF& sr) Q_DECL_OVERRIDE;
-		void drawPoints(const QPointF* points, int pointCount) Q_DECL_OVERRIDE;
-		void drawPoints(const QPoint* points, int pointCount) Q_DECL_OVERRIDE;
-		void drawPolygon(const QPointF* points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
-		void drawPolygon(const QPoint* points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
-		void drawRects(const QRectF* rects, int rectCount) Q_DECL_OVERRIDE;
-		void drawRects(const QRect* rects, int rectCount) Q_DECL_OVERRIDE;
-		void drawTextItem(const QPointF& p, const QTextItem& textItem) Q_DECL_OVERRIDE;
-		void drawTiledPixmap(const QRectF& rect, const QPixmap& pixmap, const QPointF& p) Q_DECL_OVERRIDE;
-		Type type() const Q_DECL_OVERRIDE;
-		void updateState(const QPaintEngineState& state) Q_DECL_OVERRIDE;
+		bool begin(QPaintDevice* device) override;
+		bool end() override;
+		void drawEllipse(const QRectF& rect) override;
+		void drawEllipse(const QRect& rect) override;
+		void drawImage(const QRectF& rectangle, const QImage& image, const QRectF& sr, Qt::ImageConversionFlags flags = Qt::AutoColor) override;
+		void drawLines(const QLineF* lines, int lineCount) override;
+		void drawLines(const QLine* lines, int lineCount) override;
+		void drawPath(const QPainterPath& path) override;
+		void drawPixmap(const QRectF& r, const QPixmap& pm, const QRectF& sr) override;
+		void drawPoints(const QPointF* points, int pointCount) override;
+		void drawPoints(const QPoint* points, int pointCount) override;
+		void drawPolygon(const QPointF* points, int pointCount, PolygonDrawMode mode) override;
+		void drawPolygon(const QPoint* points, int pointCount, PolygonDrawMode mode) override;
+		void drawRects(const QRectF* rects, int rectCount) override;
+		void drawRects(const QRect* rects, int rectCount) override;
+		void drawTextItem(const QPointF& p, const QTextItem& textItem) override;
+		void drawTiledPixmap(const QRectF& rect, const QPixmap& pixmap, const QPointF& p) override;
+		Type type() const override;
+		void updateState(const QPaintEngineState& state) override;
 	private:
 		QPaintDeviceColorProxy* m_proxy;
 		QPainter* m_painter;

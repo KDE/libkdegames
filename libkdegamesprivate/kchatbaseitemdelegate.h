@@ -56,7 +56,7 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegat
       * Should be reimplemented in inherited delegates
       */
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
-                const QModelIndex &index) const Q_DECL_OVERRIDE;
+                const QModelIndex &index) const override;
 
     void paint(QPainter *painter,
 		const QStyleOptionViewItem &option,
@@ -70,7 +70,7 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegat
       * Should be reimplemented in inherited delegates
       */
     QSize sizeHint(const QStyleOptionViewItem &option,
-                    const QModelIndex &index ) const Q_DECL_OVERRIDE;
+                    const QModelIndex &index ) const override;
 
     virtual QSize sizeHint(const QStyleOptionViewItem &option,
                     const QModelIndex &index, const QString& sender,

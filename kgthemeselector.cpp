@@ -213,7 +213,7 @@ class KgThemeSelector::Dialog : public QDialog
 			show();
 		}
 	protected:
-		void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE
+		void closeEvent(QCloseEvent* event) override
 		{
 			event->accept();
 			//delete myself, but *not* the KgThemeSelector
