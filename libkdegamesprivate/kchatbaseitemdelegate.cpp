@@ -53,7 +53,7 @@ void KChatBaseItemDelegate::paint(QPainter *painter,
  painter->drawText(option.rect.x(), 
 		   QFontMetrics(option.font).height()+option.rect.y(), i18n("%1: ",sender));
  painter->setFont(((KChatBaseModel*)index.model())->messageFont());
- painter->drawText(option.rect.x() + 3 + QFontMetrics(((KChatBaseModel*)index.model())->nameFont()).width(i18n("%1: ",sender)),
+ painter->drawText(option.rect.x() + 3 + QFontMetrics(((KChatBaseModel*)index.model())->nameFont()).boundingRect(i18n("%1: ",sender)).width(),
 		   QFontMetrics(option.font).height()+option.rect.y(), message);
 }
 
@@ -73,8 +73,8 @@ QSize KChatBaseItemDelegate::sizeHint(const QStyleOptionViewItem &  option ,
 //   qDebug() << "KChatBaseItemDelegate::sizeHint";
   int w = 0;
   w += 6;
-  w += QFontMetrics(option.font).width(sender+i18n("%1: ",sender));
-  w += QFontMetrics(option.font).width(message);
+  w += QFontMetrics(option.font).boundingRect(sender+i18n("%1: ",sender)).width();
+  w += QFontMetrics(option.font).boundingRect(message).width();
   int h = 0;
   h += 2;
   if (QFontMetrics(((KChatBaseModel*)index.model())->nameFont()).lineSpacing() > 

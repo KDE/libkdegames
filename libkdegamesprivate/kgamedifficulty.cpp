@@ -181,7 +181,7 @@ void KGameDifficultyPrivate::rebuildActions()
 {
 	m_menu->clear();
 	m_comboBox->clear();
-	qSort(m_standardLevels.begin(), m_standardLevels.end());
+	std::sort(m_standardLevels.begin(), m_standardLevels.end());
 
 	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
 		if (level!=KGameDifficulty::Configurable) {

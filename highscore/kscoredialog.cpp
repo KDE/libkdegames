@@ -250,7 +250,7 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
 
     tabWidget->clear();
     QList<QByteArray> keysToConfigure = scores.keys();
-    foreach(const QByteArray &groupName, configGroupWeights)
+    for(const QByteArray &groupName : qAsConst(configGroupWeights))
     {
         int index = keysToConfigure.indexOf(groupName);
         if (index != -1)
@@ -470,7 +470,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         setupGroup(configGroup);
     }
 
-    foreach(const QByteArray &groupKey, groupKeyList)
+    for (const QByteArray &groupKey : qAsConst(groupKeyList))
     {
         highscoreObject->setHighscoreGroup(QLatin1String( groupKey ));
         player = highscoreObject->readEntry(0, QStringLiteral( "LastPlayer" ));  //FIXME

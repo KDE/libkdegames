@@ -105,7 +105,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     QStringList themesAvailable;
 
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QCoreApplication::applicationName() + QLatin1Char( '/' ) + lookupDirectory, QStandardPaths::LocateDirectory);	//Added subdirectory for finding gamethemeselector resources
-    Q_FOREACH(const QString& dir, dirs) {
+    for (const QString& dir : dirs) {
 	    QDirIterator it(dir, QStringList() << QStringLiteral("*.desktop"), QDir::NoFilter, QDirIterator::Subdirectories);
 	    while (it.hasNext()) {
                     QFileInfo fileInfo(it.next());
@@ -115,7 +115,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     }
 
     bool initialFound = false;
-    foreach (const QString &file, themesAvailable)
+    for (const QString &file : qAsConst(themesAvailable))
     {
       const QString themePath = lookupDirectory + QLatin1Char( '/' ) + file;
       KGameTheme* atheme = new KGameTheme(groupName);

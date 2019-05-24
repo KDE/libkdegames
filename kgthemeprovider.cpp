@@ -181,7 +181,8 @@ void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& 
 static QString relativeToApplications(const QString& file)
 {
 	const QString canonical = QFileInfo(file).canonicalFilePath();
-	Q_FOREACH(const QString& base, QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)) {
+	const QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+	for (const QString& base : dirs) {
 		if (canonical.startsWith(base))
 			return canonical.mid(base.length()+1);
 	}
@@ -201,10 +202,10 @@ void KgThemeProvider::rediscoverThemes()
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
 
 	QStringList themePaths;
-	QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
-	Q_FOREACH (const QString &dir, dirs) {
+	const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
+	for (const QString &dir : dirs) {
 		const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
-		Q_FOREACH (const QString &file, fileNames) {
+		for (const QString &file : fileNames) {
 			if (!themePaths.contains(file)) {
 				themePaths.append(dir + '/' + file);
 			}
@@ -261,7 +262,7 @@ void KgThemeProvider::rediscoverThemes()
 		}
 	}
 	//add themes in the determined order
-	foreach (KgTheme* theme, themes)
+	for (KgTheme* theme : qAsConst(themes))
 	{
 		addTheme(theme);
 	}
