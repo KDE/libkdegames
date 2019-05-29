@@ -68,6 +68,8 @@ class KDEGAMESPRIVATE_EXPORT KGameTheme
         virtual bool load(const QString &file);
         /// @return the full path of the .desktop file
         QString path() const;
+        /// @return the path of the theme
+        QString prefix() const;
         /// @return just the "*.desktop" part
         QString fileName() const;
         /// @return the full path of the svg file which is specified in "FileName" key

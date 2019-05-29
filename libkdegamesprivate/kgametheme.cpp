@@ -148,6 +148,15 @@ QString KGameTheme::path() const {
     return d->fullPath;
 }
 
+QString KGameTheme::prefix() const {
+    if(!d->loaded)
+    {
+        qCDebug(GAMES_LIB) << "No theme file has been loaded. KGameTheme::load() or KGameTheme::loadDefault() must be called.";
+        return QString();
+    }
+    return d->prefix;
+}
+
 QString KGameTheme::fileName() const {
     if(!d->loaded)
     {
