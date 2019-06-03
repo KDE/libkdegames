@@ -34,7 +34,6 @@ this software.
 
 #include <QDialog>
 
-class KLocalizedString;
 class KgDifficulty;
 
 /**
