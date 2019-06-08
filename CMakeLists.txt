@@ -20,7 +20,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config Widget
 
 include(FeatureSummary)
 include(GenerateExportHeader)
-include(ECMPackageConfigHelpers)
+include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMMarkNonGuiExecutable)
@@ -256,7 +256,7 @@ export(TARGETS KF5KDEGames KF5KDEGamesPrivate
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5KDEGames")
 
 # create the Config.cmake and ConfigVersion.cmake files
-ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KDEGamesConfig.cmake.in"
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KDEGamesConfig.cmake.in"
                               "${CMAKE_CURRENT_BINARY_DIR}/KF5KDEGamesConfig.cmake"
                               INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
                               )
