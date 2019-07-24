@@ -96,6 +96,7 @@ configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdeg
 set(kdegames_LIB_SRCS
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
     audio/kgsound-${KGAUDIO_BACKEND}.cpp
+    audio/virtualfileqt-${KGAUDIO_BACKEND}.cpp
     colorproxy_p.cpp
 #   highscore/kconfigrawbackend.cpp
     highscore/khighscore.cpp
@@ -142,7 +143,7 @@ target_link_libraries(KF5KDEGames
 
 target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
 
-set(KDEGAMES_VERSION 7.1.0)
+set(KDEGAMES_VERSION 7.2.0)
 set(KDEGAMES_SOVERSION 7)
 
 set_target_properties(KF5KDEGames PROPERTIES VERSION   ${KDEGAMES_VERSION}

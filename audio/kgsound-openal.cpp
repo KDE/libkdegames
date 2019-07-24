@@ -17,11 +17,13 @@
  ***************************************************************************/
 
 #include "kgsound.h"
-#include "kgopenalruntime_p.h"
 
 #include <sndfile.hh>
 
 #include <QDebug>
+
+#include "kgopenalruntime_p.h"
+#include "virtualfileqt-openal.h"
 
 class KgSound::Private
 {
@@ -42,11 +44,17 @@ KgSound::KgSound(const QString& file, QObject* parent)
 	: QObject(parent)
 	, d(new Private)
 {
+    VirtualFileQt fileInterface(file);
+    if (!fileInterface.open()) {
+        qWarning() << "Failed to open sound file" << file;
+        return;
+    }
+
 	//open sound file
-	SndfileHandle handle(file.toUtf8());
+	SndfileHandle handle(VirtualFileQt::getSndfileVirtualIO(), &fileInterface);
 	if (handle.error())
 	{
-		qWarning() << "Failed to load sound file. Error message from libsndfile follows.";
+		qWarning() << "Failed to load sound file" << file << ". Error message from libsndfile follows.";
 		qWarning() << handle.strError();
 		return;
 	}

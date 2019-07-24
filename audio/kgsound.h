@@ -71,10 +71,15 @@ class KDEGAMES_EXPORT KgSound : public QObject
 			RelativePlayback
 		};
 
-		///Loads a new sound from the given @a file. Note that this is an
-		///expensive operation which you might want to do during application
-		///startup. However, you can reuse the same Sound instance for multiple
-		///playback events.
+		/**
+		 * Loads a new sound from the given @a file. Note that this is an
+		 * expensive operation which you might want to do during application
+		 * startup. However, you can reuse the same Sound instance for multiple
+		 * playback events.
+		 *
+		 * Since version 7.2.0 this constructor supports reading files from Qt
+		 * Resource System, @a file can be for example ":/sound.ogg".
+		 */
 		explicit KgSound(const QString& file, QObject* parent = nullptr);
 		///Destroys this KgSound instance.
 		virtual ~KgSound();
