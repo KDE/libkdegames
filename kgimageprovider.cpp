@@ -45,7 +45,7 @@ QImage KgImageProvider::requestImage(const QString& source, QSize *size, const Q
     if (tokens.size() > 2) {
         const QString theme = tokens[0];
         const QString spriteKey = tokens[1];
-        const QStringList size = tokens[2].split(QStringLiteral("x"));
+        const QStringList size = tokens[2].split(QLatin1Char('x'));
         uint width = qRound(size[0].toDouble());
         uint height = qRound(size[1].toDouble());
 
