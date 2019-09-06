@@ -311,7 +311,7 @@ void KMessageProcess::slotReceivedStdout()
   // Resize receive buffer
   while (mReceiveCount+ba.size()>=mReceiveBuffer.size()) mReceiveBuffer.resize(mReceiveBuffer.size()+1024);
   // was 08/2007: mReceiveBuffer += ba;
-  qCopy(ba.begin(), ba.begin()+ba.size(), mReceiveBuffer.begin()+mReceiveCount);
+  std::copy(ba.begin(), ba.begin()+ba.size(), mReceiveBuffer.begin()+mReceiveCount);
   mReceiveCount += ba.size();
 
   // Possbile message
@@ -338,7 +338,7 @@ void KMessageProcess::slotReceivedStdout()
       msg.resize(len);
     //  msg.setRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
 
-      qCopy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.begin()+len, msg.begin());
+      std::copy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.begin()+len, msg.begin());
 //       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       emit received(msg);
      // msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
