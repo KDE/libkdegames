@@ -147,7 +147,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	setCustomData(group.entryMap());
 	//store modification date of this file in private property (KGameRenderer
 	//wants to clear its cache also if the theme description changes)
-	setProperty("_k_themeDescTimestamp", fi.lastModified().toTime_t());
+	setProperty("_k_themeDescTimestamp", fi.lastModified().toSecsSinceEpoch());
 	return true;
 }
 

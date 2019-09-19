@@ -199,8 +199,8 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		m_imageCache->setPixmapCaching(false); //see big comment in KGRPrivate class declaration
 		//check timestamp of cache vs. last write access to theme/SVG
 		const uint svgTimestamp = qMax(
-			QFileInfo(theme->graphicsPath()).lastModified().toTime_t(),
-			theme->property("_k_themeDescTimestamp").value<uint>()
+			QFileInfo(theme->graphicsPath()).lastModified().toSecsSinceEpoch(),
+                        theme->property("_k_themeDescTimestamp").value<qint64>()
 		);
 		QByteArray buffer;
 		if (!m_imageCache->find(QStringLiteral("kgr_timestamp"), &buffer))

@@ -34,6 +34,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QApplication>
 #include <QTimer>
 #include <QTime>
+#include <QElapsedTimer>
 
 /*
   TODO:
@@ -85,7 +86,7 @@ QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(const QPoint &pt) const {
 class KGameCanvasWidgetPrivate {
 public:
   QTimer m_anim_timer;
-  QTime m_anim_time;
+  QElapsedTimer m_anim_time;
   bool m_pending_update;
   QRegion m_pending_update_reg;
 

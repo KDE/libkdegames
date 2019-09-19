@@ -85,9 +85,11 @@ set(KGAUDIO_BACKEND openal)
 set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
+if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
+   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
+endif()
 
 ########### next target ###############
-#add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 )
 #if (${KF5Config_VERSION} STRGREATER "5.56.0")
 #        add_definitions(-DQT_NO_FOREACH)
 #        MESSAGE(STATUS "compile without foreach")
