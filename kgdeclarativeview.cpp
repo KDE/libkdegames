@@ -28,7 +28,7 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     kdeclarative.setDeclarativeEngine(engine());
     
     // binds things like i18n and icons
-    kdeclarative.setupBindings();
+    kdeclarative.setupContext();
 
     setResizeMode(SizeRootObjectToView);
 }

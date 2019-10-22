@@ -31,6 +31,7 @@ include(KDECMakeSettings)
 add_definitions(${QT_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x060000)
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
 include_directories(${CMAKE_SOURCE_DIR}/includes)
