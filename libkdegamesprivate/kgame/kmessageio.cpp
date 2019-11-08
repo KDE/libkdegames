@@ -314,7 +314,7 @@ void KMessageProcess::slotReceivedStdout()
   std::copy(ba.begin(), ba.begin()+ba.size(), mReceiveBuffer.begin()+mReceiveCount);
   mReceiveCount += ba.size();
 
-  // Possbile message
+  // Possible message
   while (mReceiveCount>int(2*sizeof(long)))
   {
     long *p1=(long *)mReceiveBuffer.data();

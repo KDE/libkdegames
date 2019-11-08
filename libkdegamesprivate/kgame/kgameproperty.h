@@ -539,7 +539,7 @@ private:
  *
  * @section Custom classes:
  *
- * If you want to use a custum class with KGameProperty you have to implement the
+ * If you want to use a custom class with KGameProperty you have to implement the
  * operators << and >> for QDataStream:
  * \code
  * class Card
