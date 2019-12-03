@@ -233,7 +233,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
          * @returns The highscore position if the score was good enough to
          * make it into the list (1 being topscore) or 0 otherwise.
          */
-        int addScore(const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags=0);
+        int addScore(const FieldInfo& newInfo = FieldInfo(), const AddScoreFlags& flags={});
 
         /**
          * Convenience function for ease of use.
@@ -244,7 +244,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
          * @returns The highscore position if the score was good enough to
          * make it into the list (1 being topscore) or 0 otherwise.
          */
-        int addScore(int newScore, const AddScoreFlags& flags=0);
+        int addScore(int newScore, const AddScoreFlags& flags={});
 
         /**
          * @returns the current best score in the group
