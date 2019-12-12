@@ -40,7 +40,7 @@ include_directories(${CMAKE_SOURCE_DIR}/includes)
 
 find_package(OpenAL REQUIRED)
 set_package_properties(OPENAL PROPERTIES
-                       URL "http://connect.creativelabs.com/openal"
+                       URL "https://www.openal.org/"
                       )
 
 find_package(SndFile REQUIRED)
