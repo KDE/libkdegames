@@ -81,7 +81,7 @@ public:
 	 * You have to call registerHandler before you can use this
 	 * handler!
 	 **/
-    KGamePropertyHandler(QObject* parent = nullptr);
+    explicit KGamePropertyHandler(QObject* parent = nullptr);
 
 	/**
 	 * Construct a registered handler.

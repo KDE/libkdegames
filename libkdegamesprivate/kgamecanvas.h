@@ -145,7 +145,7 @@ public:
         Note that the restacking functions are quite intelligent and will only
         repaint if there is an actual need of doing it. So if you call raise on
         an item that is already (locally) on the top, no redraw will take place */
-    KGameCanvasItem(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasItem(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasItem();
 
@@ -245,7 +245,7 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasDummy : public KGameCanvasItem
 {
 public:
     /** Constructor */
-    KGameCanvasDummy(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasDummy(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasDummy();
 
@@ -284,7 +284,7 @@ private:
 
 public:
     /** Constructor */
-    KGameCanvasGroup(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasGroup(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasGroup();
 
@@ -318,10 +318,10 @@ private:
 
 public:
     /** Constructor, specifying the picture to use */
-    KGameCanvasPicture(const QPicture& picture, KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasPicture(const QPicture& picture, KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty picture */
-    KGameCanvasPicture(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasPicture(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasPicture();
 
@@ -350,10 +350,10 @@ private:
 
 public:
     /** Constructor, specifying the pixmap to use */
-    KGameCanvasPixmap(const QPixmap& pixmap, KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasPixmap(const QPixmap& pixmap, KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty pixmap */
-    KGameCanvasPixmap(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasPixmap(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasPixmap();
 
@@ -408,7 +408,7 @@ public:
                             bool move_orig, KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty pixmap */
-    KGameCanvasTiledPixmap(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasTiledPixmap(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasTiledPixmap();
 
@@ -458,7 +458,7 @@ public:
     KGameCanvasRectangle(const QColor& color, const QSize &size, KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty pixmap */
-    KGameCanvasRectangle(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasRectangle(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasRectangle();
 
@@ -525,7 +525,7 @@ public:
                     KGameCanvasAbstract* canvas = NULL);
 
     /** Constructor, creating with an empty text */
-    KGameCanvasText(KGameCanvasAbstract* canvas = NULL);
+    explicit KGameCanvasText(KGameCanvasAbstract* canvas = NULL);
 
     virtual ~KGameCanvasText();
 
@@ -592,7 +592,7 @@ private Q_SLOTS:
 
 public:
     /** The constructor */
-    KGameCanvasWidget(QWidget* parent = NULL);
+    explicit KGameCanvasWidget(QWidget* parent = NULL);
 
     virtual ~KGameCanvasWidget();
 

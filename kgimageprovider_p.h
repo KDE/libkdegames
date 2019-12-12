@@ -45,7 +45,7 @@ public:
     ///Construcs a new KgImageProvider with the supplied KgThemeProvider
     ///@param provider The KgThemeProvider used to discover the game's
     ///themes.
-    KgImageProvider(KgThemeProvider* provider);
+    explicit KgImageProvider(KgThemeProvider* provider);
 
     ///Reimplemented method that is called when a sprite pixmap is requested
     QImage requestImage(const QString& source, QSize *size, const QSize &requestedSize) override;

@@ -71,7 +71,7 @@ public:
      * Constructs a KGameIO object
      */
    KGameIO();
-   KGameIO(KPlayer*);
+   explicit KGameIO(KPlayer*);
    virtual ~KGameIO();
 
     /**
@@ -214,7 +214,7 @@ public:
      *
      * @param parent The parents widget whose keyboard events * should be grabbed
      */
-    KGameKeyIO(QWidget *parent);
+    explicit KGameKeyIO(QWidget *parent);
     virtual ~KGameKeyIO();
 
     /**
@@ -370,7 +370,7 @@ public:
      *
      * @param name the filename of the process to start
      */
-    KGameProcessIO(const QString& name);
+    explicit KGameProcessIO(const QString& name);
 
     /**
      * Deletes the process input devices
@@ -520,7 +520,7 @@ public:
      *
      */
     KGameComputerIO();
-    KGameComputerIO(KPlayer* player);
+    explicit KGameComputerIO(KPlayer* player);
     ~KGameComputerIO();
 
     int rtti() const override;

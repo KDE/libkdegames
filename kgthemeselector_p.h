@@ -34,7 +34,7 @@ class KgThemeDelegate : public QStyledItemDelegate
 			IdRole //not displayed, but used internally
 		};
 
-		KgThemeDelegate(QObject* parent = nullptr);
+		explicit KgThemeDelegate(QObject* parent = nullptr);
 		void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 		///@note The implementation is independent of @a option and @a index.
 		QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;

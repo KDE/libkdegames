@@ -47,7 +47,7 @@ class QPixmap;
 class KDEGAMESPRIVATE_EXPORT KGameTheme
 {
     public:
-        KGameTheme(const QString &themeGroup = QStringLiteral("KGameTheme"));
+        explicit KGameTheme(const QString &themeGroup = QStringLiteral("KGameTheme"));
         virtual ~KGameTheme();
 
         /**

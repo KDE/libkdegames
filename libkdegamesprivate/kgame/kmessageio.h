@@ -67,7 +67,7 @@ public:
   /**
    * The usual QObject constructor, does nothing else.
    **/
-  KMessageIO (QObject *parent = nullptr);
+  explicit KMessageIO (QObject *parent = nullptr);
 
   /**
    * The usual destructor, does nothing special.

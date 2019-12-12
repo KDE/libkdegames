@@ -73,7 +73,7 @@ class KDEGAMESPRIVATE_EXPORT KPlayer : public QObject
 public:
       typedef QList<KGameIO*> KGameIOList;
 
-      // KPlayer(KGame *,KGameIO * input=0);
+      // explicit KPlayer(KGame *,KGameIO * input=0);
       /**
        * Create a new player object. It will be automatically
        * deleted if the game it belongs to is deleted.
