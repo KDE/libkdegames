@@ -16,8 +16,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#ifndef LIBKDEGAMES_VIRTUALFILEQT_H
-#define LIBKDEGAMES_VIRTUALFILEQT_H
+#ifndef LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H
+#define LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H
 
 #include <sndfile.hh>
 
@@ -44,4 +44,4 @@ private:
     QFile m_file;
 };
 
-#endif //LIBKDEGAMES_VIRTUALFILEQT_H
+#endif //LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H
