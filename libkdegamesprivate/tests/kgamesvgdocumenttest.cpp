@@ -22,7 +22,7 @@
 #include <config-tests.h>
 
 #include <QtCore>
-#include <QtTest>
+#include <QTest>
 
 void tst_KGameSvgDocument::initTestCase()
 {
