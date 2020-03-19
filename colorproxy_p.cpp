@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "colorproxy_p.h"
+#include <QPainterPath>
 
 //BEGIN QPaintDeviceColorProxy
 
