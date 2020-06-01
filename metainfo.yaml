@@ -13,4 +13,4 @@ public_source_dirs:
     - .
 libraries:
     - cmake: "KF5KDEGames"
-cmakename: KF5KDEGames
+cmakename: KDEGames
