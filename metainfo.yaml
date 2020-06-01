@@ -1,0 +1,16 @@
+fancyname: KDEGames
+description: Common code and data for many KDE games
+type: functional
+public_lib: true
+platforms:
+    - name: Linux
+    - name: FreeBSD
+    #- name: Windows
+    #- name: MacOSX
+    #- name: Android
+release: true
+public_source_dirs:
+    - .
+libraries:
+    - cmake: "KF5KDEGames"
+cmakename: KF5KDEGames
