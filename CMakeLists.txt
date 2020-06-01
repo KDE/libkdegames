@@ -1,8 +1,6 @@
-enable_testing()
+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
 
 project(libkdegames)
-
-cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
 
 set (QT_MIN_VERSION "5.9.0")
 set (KF5_MIN_VERSION "5.46.0")
@@ -18,18 +16,17 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config Widget
     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
     Bookmarks NewStuff Completion)
 
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMMarkNonGuiExecutable)
-include(KDEInstallDirs)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(KDECMakeSettings)
 
-add_definitions(${QT_DEFINITIONS})
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-DQT_USE_FAST_CONCATENATION)
 add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
@@ -54,7 +51,9 @@ add_subdirectory( declarativeimports )
 add_subdirectory( highscore )
 add_subdirectory( includes )
 add_subdirectory( libkdegamesprivate )
-add_subdirectory( tests )
+if(BUILD_TESTING)
+    add_subdirectory( tests )
+endif()
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/highscore
