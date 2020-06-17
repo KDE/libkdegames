@@ -1,7 +1,9 @@
 enable_testing()
 project(libkdegamesprivate)
 
-add_subdirectory(tests)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
 
 # NOTE: The libkdegamesprivate target is compiled in the parent directory,
 # because CMake can't cope with exported libraries in two different
