@@ -77,7 +77,7 @@ QString KGameClock::timeString() const
 
 void KGameClock::showTime()
 {
-    emit timeChanged(timeString());
+    Q_EMIT timeChanged(timeString());
 }
 
 void KGameClock::restart()

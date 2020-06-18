@@ -288,7 +288,7 @@ void KGamePropertyHandler::unlockDirectEmit()
     {
       KGamePropertyBase *prop=d->mSignalQueue.dequeue();
 //       qDebug() << "emitting signal for" << prop->id();
-      emit signalPropertyChanged(prop);
+      Q_EMIT signalPropertyChanged(prop);
     }
   }
 }
@@ -308,14 +308,14 @@ void KGamePropertyHandler::emitSignal(KGamePropertyBase *prop)
  else
  {
   // directly emit
-  emit signalPropertyChanged(prop);
+  Q_EMIT signalPropertyChanged(prop);
  }
 }
 
 bool KGamePropertyHandler::sendProperty(QDataStream &s)
 {
  bool sent = false;
- emit signalSendMessage(id(), s, &sent);
+ Q_EMIT signalSendMessage(id(), s, &sent);
  return sent;
 }
 
@@ -374,7 +374,7 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
  } else if (*t == typeid(qint8)) { 
         value = ((KGamePropertyBool*)prop)->value() ?  i18n("True") : i18n("False");
  } else {
-        emit signalRequestValue(prop, value);
+        Q_EMIT signalRequestValue(prop, value);
  }
                    
  if (value.isNull()) {

@@ -181,7 +181,7 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme* theme)
 		it1.value().clear(); //because the pixmap is outdated
 		it1.key()->d->fetchPixmap();
 	}
-	emit m_parent->themeChanged(m_currentTheme);
+	Q_EMIT m_parent->themeChanged(m_currentTheme);
 }
 
 bool KGameRendererPrivate::setTheme(const KgTheme* theme)

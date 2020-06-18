@@ -82,7 +82,7 @@ void TextItemWithOpacity::mouseReleaseEvent(QGraphicsSceneMouseEvent* ev)
     // NOTE: this item is QGraphicsTextItem which "eats" mouse events
     // because of interaction with links. Because of that let's make a
     // special signal to indicate mouse click
-    emit mouseClicked();
+    Q_EMIT mouseClicked();
     QGraphicsTextItem::mouseReleaseEvent(ev);
 }
 
@@ -412,7 +412,7 @@ void KGamePopupItem::hideMe()
     if( d->m_timeLine.direction() == QTimeLine::Backward )
     {
         hide();
-        emit hidden();
+        Q_EMIT hidden();
     }
 }
 
@@ -455,7 +455,7 @@ void KGamePopupItem::forceHide(HideType howToHide)
         d->m_timeLine.stop();
         d->m_timer.stop();
         hide();
-        emit hidden();
+        Q_EMIT hidden();
     }
     else if(howToHide == AnimatedHide)
     {
@@ -495,7 +495,7 @@ void KGamePopupItem::onLinkHovered(const QString& link)
     }
 
     d->m_linkHovered = !link.isEmpty();
-    emit linkHovered(link);
+    Q_EMIT linkHovered(link);
 }
 
 void KGamePopupItem::setSharpness( Sharpness sharpness )

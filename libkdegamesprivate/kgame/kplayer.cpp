@@ -388,7 +388,7 @@ bool KPlayer::load(QDataStream &stream)
       qCCritical(GAMES_PRIVATE_KGAME) << "   Player loading error. probably format error";
   }
 
-  // emit signalLoad(stream);
+  // Q_EMIT signalLoad(stream);
   return true;
 }
 
@@ -400,7 +400,7 @@ bool KPlayer::save(QDataStream &stream)
 
   stream << (qint16)KPLAYER_LOAD_COOKIE;
 
-  //emit signalSave(stream);
+  //Q_EMIT signalSave(stream);
   return true;
 }
 
@@ -432,7 +432,7 @@ void KPlayer::networkTransmission(QDataStream &stream,int msgid,quint32 sender)
       }
     break;
     default:
-        emit signalNetworkData(msgid - KGameMessage::IdUser,
+        Q_EMIT signalNetworkData(msgid - KGameMessage::IdUser,
 	        ((QBuffer*)stream.device())->readAll(),sender,this);
         qCDebug(GAMES_PRIVATE_KGAME) << ": "
 	        << "User data msgid" << msgid;
@@ -475,7 +475,7 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
       it.next()->notifyTurn(d->mMyTurn.value());
     }
   }
-  emit signalPropertyChanged(me,this);
+  Q_EMIT signalPropertyChanged(me,this);
 }
 
 // --------------------- DEBUG --------------------

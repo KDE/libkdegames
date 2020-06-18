@@ -187,7 +187,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
  {
    qCWarning(GAMES_PRIVATE_KGAME) << "Trying to load different game version we="<<cookie() << "saved=" << c;
    bool result=false;
-   emit signalLoadError(stream,network,(int)c,result);
+   Q_EMIT signalLoadError(stream,network,(int)c,result);
    return result;
  }
  if (resetgame) reset();
@@ -225,7 +225,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  // If there is additional data to be loaded before players are loaded then do
  // this here.
- emit signalLoadPrePlayers(stream);
+ Q_EMIT signalLoadPrePlayers(stream);
 
  // Switch back on the direct emitting of signals and emit the
  // queued signals for properties.
@@ -262,7 +262,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
    // qCDebug(GAMES_PRIVATE_KGAME) << "Player "<<player->id() << "to direct emit";
  }
 
- emit signalLoad(stream);
+ Q_EMIT signalLoad(stream);
  return true;
 }
 
@@ -305,7 +305,7 @@ bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
  dataHandler()->save(stream);
 
  // Save all data that need to be saved *before* the players are saved
- emit signalSavePrePlayers(stream);
+ Q_EMIT signalSavePrePlayers(stream);
 
  if (saveplayers)
  {
@@ -318,7 +318,7 @@ bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
 
  stream << (qint16)KGAME_LOAD_COOKIE;
 
- emit signalSave(stream);
+ Q_EMIT signalSave(stream);
  return true;
 }
 
@@ -362,7 +362,7 @@ KPlayer *KGame::loadPlayer(QDataStream& stream,bool isvirtual)
   {
     qCDebug(GAMES_PRIVATE_KGAME) << "Player "<< id << "not found...asking user to create one";
     newplayer=createPlayer(rtti,iovalue,isvirtual);
-    //emit signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
+    //Q_EMIT signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
   }
   /*
   if (!newplayer)
@@ -488,7 +488,7 @@ bool KGame::systemAddPlayer(KPlayer* newplayer)
    qCDebug(GAMES_PRIVATE_KGAME) << "        id=" << newplayer->id() << "  #Players="
                   << d->mPlayerList.count() << "added" << newplayer
                   << "  (virtual=" << newplayer->isVirtual() << ")";
-   emit signalPlayerJoinedGame(newplayer);
+   Q_EMIT signalPlayerJoinedGame(newplayer);
  }
  return true;
 }
@@ -572,7 +572,7 @@ bool KGame::systemRemove(KPlayer* p,bool deleteit)
    result = d->mPlayerList.removeAll(p);
  }
 
- emit signalPlayerLeftGame(p);
+ Q_EMIT signalPlayerLeftGame(p);
 
  p->setGame(nullptr);
  if (deleteit)
@@ -625,7 +625,7 @@ bool KGame::systemInactivatePlayer(KPlayer* player)
    d->mInactivePlayerList.prepend(player);
    player->setActive(false);
  }
- emit signalPlayerLeftGame(player);
+ Q_EMIT signalPlayerLeftGame(player);
  if (isAdmin())
  {
    d->mInactiveIdList.prepend(pid);
@@ -782,7 +782,7 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
  {
      player->setTurn(false);
      setGameStatus(End);
-     emit signalGameOver(gameOver,player,this);
+     Q_EMIT signalGameOver(gameOver,player,this);
  }
  else if (!player->asyncInput())
  {
@@ -860,7 +860,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
 
  // *first* notice the game that something has changed - so no return prevents
  // this
- emit signalMessageUpdate(msgid, receiver, sender);
+ Q_EMIT signalMessageUpdate(msgid, receiver, sender);
  if (KGameMessage::isPlayer(receiver))
  {
    //qCDebug(GAMES_PRIVATE_KGAME) << "message id" << msgid << "seems to be for a player ("<<active=p->isActive()<<" recv="<< receiver;
@@ -1006,7 +1006,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
      int cid;
      stream >> cid;
      qCDebug(GAMES_PRIVATE_KGAME) << "====> (ALL) " << ": Got IdGameConnected for client "<< cid << "we are =" << gameId();
-     emit signalClientJoinedGame(cid,this);
+     Q_EMIT signalClientJoinedGame(cid,this);
    }
    break;
 
@@ -1041,7 +1041,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
        qCCritical(GAMES_PRIVATE_KGAME) << "incorrect message id" << msgid << " - emit anyway";
      }
      qCDebug(GAMES_PRIVATE_KGAME) << ": User data msgid" << msgid;
-     emit signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),receiver,sender);
+     Q_EMIT signalNetworkData(msgid - KGameMessage::IdUser,((QBuffer*)stream.device())->readAll(),receiver,sender);
    }
    break;
  }
@@ -1302,7 +1302,7 @@ void KGame::slotServerDisconnected() // Client side
   {
     KPlayer* player = *it;
     bool remove = true;
-    emit signalReplacePlayerIO(player, &remove);
+    Q_EMIT signalReplacePlayerIO(player, &remove);
     if (remove)
     {
       qCDebug(GAMES_PRIVATE_KGAME) << " ---> Removing player" << player->id();
@@ -1341,7 +1341,7 @@ void KGame::slotServerDisconnected() // Client side
     player->Debug();
   }
   qCDebug(GAMES_PRIVATE_KGAME) << "+++++++++++" << "DONE=";
-  emit signalClientLeftGame(0,oldgamestatus,this);
+  Q_EMIT signalClientLeftGame(0,oldgamestatus,this);
 }
 
 void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server side
@@ -1368,7 +1368,7 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
    KPlayer* player = *it;
    // try to replace the KGameIO first
    bool remove = true;
-   emit signalReplacePlayerIO(player, &remove);
+   Q_EMIT signalReplacePlayerIO(player, &remove);
    if (remove) {
      // otherwise (no new KGameIO) remove the player
      qCDebug(GAMES_PRIVATE_KGAME) << " ---> Removing player" << player->id();
@@ -1387,7 +1387,7 @@ void KGame::slotClientDisconnected(quint32 clientID,bool /*broken*/) // server s
      activatePlayer(player);
    }
  }
-  emit signalClientLeftGame(clientID,oldgamestatus,this);
+  Q_EMIT signalClientLeftGame(clientID,oldgamestatus,this);
 }
 
 
@@ -1464,7 +1464,7 @@ void KGame::sendProperty(int msgid, QDataStream& stream, bool* sent)
 
 void KGame::emitSignal(KGamePropertyBase *me)
 {
- emit signalPropertyChanged(me,this);
+ Q_EMIT signalPropertyChanged(me,this);
 }
 
 KGamePropertyBase* KGame::findProperty(int id) const

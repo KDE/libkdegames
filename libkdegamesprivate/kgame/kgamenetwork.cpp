@@ -231,7 +231,7 @@ bool KGameNetwork::connectToServer (KMessageIO *connection)
  
  qCDebug(GAMES_PRIVATE_KGAME) << "    about to set server";
  d->mMessageClient->setServer(connection);
- emit signalAdminStatusChanged(false); // as we delete the connection above isAdmin() is always false now!
+ Q_EMIT signalAdminStatusChanged(false); // as we delete the connection above isAdmin() is always false now!
  
  // OK: We say that we already have connected, but this isn't so yet!
  // If the connection cannot be established, it will look as being disconnected
@@ -488,7 +488,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, q
    qCDebug(GAMES_PRIVATE_KGAME) << "Got IdError" << error;
    text = KGameError::errorText(error, stream);
    qCDebug(GAMES_PRIVATE_KGAME) << "Error text:" << text.toLatin1();
-   emit signalNetworkErrorMessage((int)error,text);
+   Q_EMIT signalNetworkErrorMessage((int)error,text);
  }
  else
  {
@@ -499,7 +499,7 @@ void KGameNetwork::receiveNetworkTransmission(const QByteArray& receiveBuffer, q
 // -------------- slots for the signals of the client
 void KGameNetwork::slotAdminStatusChanged(bool isAdmin)
 {
- emit signalAdminStatusChanged(isAdmin);
+ Q_EMIT signalAdminStatusChanged(isAdmin);
 
 // TODO: I'm pretty sure there are a lot of things that should be done here...
 }

@@ -101,7 +101,7 @@ void KGameIO::notifyTurn(bool b)
   bool sendit=false;
   QByteArray buffer;
   QDataStream stream(&buffer, QIODevice::WriteOnly);
-  emit signalPrepareTurn(stream, b, this, &sendit);
+  Q_EMIT signalPrepareTurn(stream, b, this, &sendit);
   if (sendit)
   {
     QDataStream ostream(buffer);
@@ -180,7 +180,7 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
      QByteArray buffer;
      QDataStream stream(&buffer,QIODevice::WriteOnly);
      bool eatevent=false;
-     emit signalKeyEvent(this,stream,k,&eatevent);
+     Q_EMIT signalKeyEvent(this,stream,k,&eatevent);
      QDataStream msg(buffer);
 
      if (eatevent && sendInput(msg))
@@ -268,7 +268,7 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
      QByteArray buffer;
      QDataStream stream(&buffer,QIODevice::WriteOnly);
      bool eatevent=false;
-     emit signalMouseEvent(this,stream,k,&eatevent);
+     Q_EMIT signalMouseEvent(this,stream,k,&eatevent);
 //     qCDebug(GAMES_PRIVATE_KGAME) << "################# eatevent=" << eatevent;
      QDataStream msg(buffer);
      if (eatevent && sendInput(msg))
@@ -356,7 +356,7 @@ void KGameProcessIO::initIO(KPlayer *p)
   {
     qint16 id = p->userId();
     stream << id;
-    emit signalIOAdded(this,stream,p,&sendit);
+    Q_EMIT signalIOAdded(this,stream,p,&sendit);
     if (sendit )
     {
       quint32 sender = p->id();
@@ -377,7 +377,7 @@ void KGameProcessIO::notifyTurn(bool b)
   QByteArray buffer;
   QDataStream stream(&buffer,QIODevice::WriteOnly);
   stream << (qint8)b;
-  emit signalPrepareTurn(stream,b,this,&sendit);
+  Q_EMIT signalPrepareTurn(stream,b,this,&sendit);
   if (sendit)
   {
     quint32 sender=player()->id();
@@ -448,7 +448,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 // This is a dummy message which allows us the process to talk with its owner
   if (msgid==KGameMessage::IdProcessQuery)
   {
-    emit signalProcessQuery(ostream,this);
+    Q_EMIT signalProcessQuery(ostream,this);
   }
   else if (player())
   {
@@ -574,7 +574,7 @@ void KGameComputerIO::advance()
 
 void KGameComputerIO::reaction()
 {
-  emit signalReaction();
+  Q_EMIT signalReaction();
 }
 
 

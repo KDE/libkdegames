@@ -50,7 +50,7 @@ class KgThemeProvider::Private
 
         void updateThemeName()
         {
-            emit q->currentThemeNameChanged(q->currentThemeName());
+            Q_EMIT q->currentThemeNameChanged(q->currentThemeName());
         }
 };
 
@@ -158,7 +158,7 @@ void KgThemeProvider::setCurrentTheme(const KgTheme* theme)
 	if (d->m_currentTheme != theme)
 	{
 		d->m_currentTheme = theme;
-		emit currentThemeChanged(theme);
+		Q_EMIT currentThemeChanged(theme);
 	}
 }
 

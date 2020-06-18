@@ -221,7 +221,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
       {
         quint32 clientID;
         in_stream >> clientID;
-        emit broadcastReceived (in_buffer.readAll(), clientID);
+        Q_EMIT broadcastReceived (in_buffer.readAll(), clientID);
       }
       break;
 
@@ -230,7 +230,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         quint32 clientID;
         QList <quint32> receivers;
         in_stream >> clientID >> receivers;
-        emit forwardReceived (in_buffer.readAll(), clientID, receivers);
+        Q_EMIT forwardReceived (in_buffer.readAll(), clientID, receivers);
       }
       break;
 
@@ -241,7 +241,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         in_stream >> clientID;
         d->connection->setId (clientID);
         if (old_admin != isAdmin())
-          emit adminStatusChanged (isAdmin());
+          Q_EMIT adminStatusChanged (isAdmin());
       }
       break;
 
@@ -250,7 +250,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         bool old_admin = isAdmin();
         in_stream >> d->adminID;
         if (old_admin != isAdmin())
-          emit adminStatusChanged (isAdmin());
+          Q_EMIT adminStatusChanged (isAdmin());
       }
       break;
 
@@ -270,7 +270,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         else
           d->clientList.append (id);
 
-        emit eventClientConnected (id);
+        Q_EMIT eventClientConnected (id);
       }
       break;
 
@@ -285,7 +285,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
         else
           d->clientList.removeAll (id);
 
-        emit eventClientDisconnected (id, bool (broken));
+        Q_EMIT eventClientDisconnected (id, bool (broken));
       }
       break;
 
@@ -296,7 +296,7 @@ void KMessageClient::processMessage (const QByteArray &msg)
   if (!unknown && !in_buffer.atEnd())
     qCWarning(GAMES_PRIVATE_KGAME) << ": Extra data received for message ID" << messageID;
 
-  emit serverMessageReceived (msg, unknown);
+  Q_EMIT serverMessageReceived (msg, unknown);
 
   if (unknown)
     qCWarning(GAMES_PRIVATE_KGAME) << ": received unknown message ID" << messageID;
@@ -331,11 +331,11 @@ void KMessageClient::removeBrokenConnection2 ()
 {
   qCDebug(GAMES_PRIVATE_KGAME) << ": Broken:Deleting the connection object"<<this;
 
-  emit aboutToDisconnect(id());
+  Q_EMIT aboutToDisconnect(id());
   delete d->connection;
   d->connection = nullptr;
   d->adminID = 0;
-  emit connectionBroken();
+  Q_EMIT connectionBroken();
   qCDebug(GAMES_PRIVATE_KGAME) << ": Broken:Deleting the connection object DONE";
 }
 
@@ -343,11 +343,11 @@ void KMessageClient::disconnect ()
 {
   qCDebug(GAMES_PRIVATE_KGAME) << ": Disconnect:Deleting the connection object";
 
-  emit aboutToDisconnect(id());
+  Q_EMIT aboutToDisconnect(id());
   delete d->connection;
   d->connection = nullptr;
   d->adminID = 0;
-  emit connectionBroken();
+  Q_EMIT connectionBroken();
   qCDebug(GAMES_PRIVATE_KGAME) << ": Disconnect:Deleting the connection object DONE";
 }
 

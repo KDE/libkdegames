@@ -47,7 +47,7 @@ void KMessageServerSocket::slotNewConnection ()
 {
   if (hasPendingConnections())
   {
-    emit newClientConnected (new KMessageSocket (nextPendingConnection()));
+    Q_EMIT newClientConnected (new KMessageSocket (nextPendingConnection()));
   }
 }
 
@@ -224,7 +224,7 @@ void KMessageServer::addClient (KMessageIO* client)
     client->send (msg);
   }
 
-  emit clientConnected (client);
+  Q_EMIT clientConnected (client);
 }
 
 void KMessageServer::removeClient (KMessageIO* client, bool broken)
@@ -267,7 +267,7 @@ void KMessageServer::removeBrokenClient ()
     return;
   }
 
-  emit connectionLost (client);
+  Q_EMIT connectionLost (client);
   removeClient (client, true);
 }
 
@@ -499,7 +499,7 @@ void KMessageServer::processOneMessage ()
   if (!unknown && !in_buffer.atEnd())
     qCWarning(GAMES_PRIVATE_KGAME) << ": Extra data received for message ID" << messageID;
 
-  emit messageReceived (msg_buf->data, clientID, unknown);
+  Q_EMIT messageReceived (msg_buf->data, clientID, unknown);
 
   if (unknown)
     qCWarning(GAMES_PRIVATE_KGAME) << ": received unknown message ID" << messageID;

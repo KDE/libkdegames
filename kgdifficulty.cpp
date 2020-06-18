@@ -279,7 +279,7 @@ void KgDifficulty::setEditable(bool editable)
 		return;
 	}
 	d->m_editable = editable;
-	emit editableChanged(editable);
+	Q_EMIT editableChanged(editable);
 }
 
 bool KgDifficulty::isGameRunning() const
@@ -294,7 +294,7 @@ void KgDifficulty::setGameRunning(bool gameRunning)
 		return;
 	}
 	d->m_gameRunning = gameRunning;
-	emit gameRunningChanged(gameRunning);
+	Q_EMIT gameRunningChanged(gameRunning);
 }
 
 void KgDifficulty::select(const KgDifficultyLevel* level)
@@ -313,13 +313,13 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 		);
 		if (result != KMessageBox::Continue)
 		{
-			emit selectedLevelChanged(d->m_currentLevel);
+			Q_EMIT selectedLevelChanged(d->m_currentLevel);
 			return;
 		}
 	}
 	d->m_currentLevel = level;
-	emit selectedLevelChanged(level);
-	emit currentLevelChanged(level);
+	Q_EMIT selectedLevelChanged(level);
+	Q_EMIT currentLevelChanged(level);
 }
 
 //END KgDifficulty
@@ -357,7 +357,7 @@ namespace KgDifficultyGUI
 			}
 			void slotSelected(const KgDifficultyLevel* level)
 			{
-				emit signalSelected(d->levels().indexOf(level));
+				Q_EMIT signalSelected(d->levels().indexOf(level));
 			}
 	};
 	class Menu : public KSelectAction

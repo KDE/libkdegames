@@ -141,7 +141,7 @@ void KMessageSocket::processNewData ()
       str.readRawData (msg.data(), mNextBlockLength);
 
       // send the received message
-      emit received (msg);
+      Q_EMIT received (msg);
 
       // Waiting for the header of the next message
       mAwaitingHeader = true;
@@ -204,7 +204,7 @@ KMessageDirect::~KMessageDirect ()
   if (mPartner)
   {
     mPartner->mPartner = nullptr;
-    emit mPartner->connectionBroken();
+    Q_EMIT mPartner->connectionBroken();
   }
 }
 
@@ -216,7 +216,7 @@ bool KMessageDirect::isConnected () const
 void KMessageDirect::send (const QByteArray &msg)
 {
   if (mPartner)
-    emit mPartner->received (msg);
+    Q_EMIT mPartner->received (msg);
   else
     qCCritical(GAMES_PRIVATE_KGAME) << ": Not yet connected!";
 }
@@ -301,7 +301,7 @@ void KMessageProcess::slotReceivedStderr()
     ba.chop( 1 );   // remove QLatin1Char( '\n' )
 
     qCDebug(GAMES_PRIVATE_KGAME) << "KProcess (" << ba.size() << "):" << ba.constData();
-    emit signalReceivedStderr(QLatin1String( ba ));
+    Q_EMIT signalReceivedStderr(QLatin1String( ba ));
     ba.clear();
   };
 }
@@ -345,7 +345,7 @@ void KMessageProcess::slotReceivedStdout()
 
       std::copy(mReceiveBuffer.begin()+2*sizeof(long),mReceiveBuffer.begin()+len, msg.begin());
 //       msg.duplicate(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
-      emit received(msg);
+      Q_EMIT received(msg);
      // msg.resetRawData(mReceiveBuffer.data()+2*sizeof(long),len-2*sizeof(long));
       // Shift buffer
       if (len<mReceiveCount)
@@ -361,7 +361,7 @@ void KMessageProcess::slotReceivedStdout()
 void KMessageProcess::slotProcessExited(int exitCode, QProcess::ExitStatus)
 {
   qCDebug(GAMES_PRIVATE_KGAME) << "Process exited (slot) with code" << exitCode;
-  emit connectionBroken();
+  Q_EMIT connectionBroken();
   delete mProcess;
   mProcess=nullptr;
 }

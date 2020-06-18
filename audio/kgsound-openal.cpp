@@ -131,7 +131,7 @@ void KgSound::setPlaybackType(KgSound::PlaybackType type)
 	if (d->m_type == type)
 		return;
 	d->m_type = type;
-	emit playbackTypeChanged(type);
+	Q_EMIT playbackTypeChanged(type);
 }
 
 QPointF KgSound::pos() const
@@ -144,7 +144,7 @@ void KgSound::setPos(const QPointF& pos)
 	if (d->m_pos == pos)
 		return;
 	d->m_pos = pos;
-	emit posChanged(pos);
+	Q_EMIT posChanged(pos);
 }
 
 qreal KgSound::volume() const
@@ -157,7 +157,7 @@ void KgSound::setVolume(qreal volume)
 	if (d->m_volume == volume)
 		return;
 	d->m_volume = volume;
-	emit volumeChanged(volume);
+	Q_EMIT volumeChanged(volume);
 }
 
 bool KgSound::hasError() const

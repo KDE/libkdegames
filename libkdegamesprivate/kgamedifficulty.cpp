@@ -247,7 +247,7 @@ void KGameDifficultyPrivate::setLevel(KGameDifficulty::standardLevel level)
 
 	if (level != m_level) {
 		m_level = level;
-		emit standardLevelChanged(level);
+		Q_EMIT standardLevelChanged(level);
 	}
 
 	m_oldSelection = m_menu->currentItem();
@@ -268,7 +268,7 @@ void KGameDifficultyPrivate::setLevelCustom(int key)
 
 	if (key != m_levelCustom) {
 		m_levelCustom = key;
-		emit customLevelChanged(key);
+		Q_EMIT customLevelChanged(key);
 	}
 
 	m_oldSelection = m_menu->currentItem();
