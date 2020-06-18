@@ -32,7 +32,7 @@ class KGpiMainWindow : public KXmlGuiWindow
     Q_OBJECT
 public:
     KGpiMainWindow();
-private slots:
+private Q_SLOTS:
     void onPopupTL();
     void onPopupTR();
     void onPopupBL();

@@ -31,7 +31,7 @@ class tst_KGamePropertyTest : public QObject
     Q_OBJECT
 
   // Declare test functions as private slots, or they won't get executed
-  private slots:
+  private Q_SLOTS:
 
     /// @brief This function is called first, so you can do init stuff here.
     void initTestCase();

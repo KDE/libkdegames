@@ -39,7 +39,7 @@ public:
   explicit KMessageServerSocket (quint16 port, QObject *parent = nullptr);
   ~KMessageServerSocket ();
 
-public slots:
+public Q_SLOTS:
   void slotNewConnection();
 
 Q_SIGNALS:
