@@ -1,4 +1,3 @@
-enable_testing()
 project(libkdegamesprivate)
 
 if(BUILD_TESTING)
