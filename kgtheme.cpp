@@ -109,8 +109,7 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 	//open file, look for a known config group
 	KConfig config(path, KConfig::SimpleConfig);
 	KConfigGroup group;
-	foreach (const QString& groupName, Private::s_configGroupNames)
-	{
+	for (const QString& groupName : qAsConst(Private::s_configGroupNames)) {
 		if (config.hasGroup(groupName))
 		{
 			group = config.group(groupName);

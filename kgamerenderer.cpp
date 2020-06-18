@@ -526,8 +526,7 @@ void KGameRendererPrivate::jobFinished(KGRInternal::Job* job, bool isSynchronous
 	}
 	const QPixmap pixmap = QPixmap::fromImage(result);
 	m_pixmapCache.insert(cacheKey, pixmap);
-	foreach (KGameRendererClient* requester, requesters)
-	{
+	for (KGameRendererClient* requester : requesters) {
 		requester->receivePixmap(pixmap);
 	}
 }

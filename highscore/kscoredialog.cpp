@@ -188,8 +188,8 @@ void KScoreDialog::initFromDifficulty(const KgDifficulty* diff, bool doSetConfig
 {
     QMap<QByteArray, QString> localizedLevelStrings;
     QMap<int, QByteArray> levelWeights;
-    foreach (const KgDifficultyLevel* level, diff->levels())
-    {
+    const auto levels = diff->levels();
+    for (const KgDifficultyLevel* level : levels) {
         localizedLevelStrings.insert(level->key(), level->title());
         levelWeights.insert(level->hardness(), level->key());
     }
@@ -259,8 +259,7 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
             keysToConfigure.removeAt(index);
         }
     }
-    foreach(const QByteArray &groupName, keysToConfigure)
-    {
+    for (const QByteArray &groupName : qAsConst(keysToConfigure)) {
         setupGroup(groupName);
     }
 }
@@ -456,8 +455,8 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     scores.clear();
 
     QList<QByteArray> groupKeyList; //This will be a list of all the groups in the config file
-    foreach( const QString & groupString, highscoreObject->groupList())
-    {
+    const auto groupStrings = highscoreObject->groupList();
+    for (const QString & groupString : groupStrings) {
         groupKeyList << groupString.toUtf8(); //Convert all the QStrings to QByteArrays
     }
 
@@ -489,8 +488,8 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
         }
     }
     highscoreObject->setHighscoreGroup(QLatin1String( tempCurrentGroup )); //reset to the user-set group name
-    foreach(const QByteArray &groupKey, scores.keys())
-    {
+    const auto groupKeys = scores.keys();
+    for (const QByteArray &groupKey : groupKeys) {
         if( (scores[groupKey][0].value(Score)==QLatin1String( "-" )) && (scores.size() > 1) && (latest.first != groupKey) )
         {
             qCDebug(GAMES_HIGHSCORE) << "Removing group " << groupKey << " since it's unused.";

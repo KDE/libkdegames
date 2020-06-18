@@ -250,16 +250,14 @@ const KgDifficultyLevel* KgDifficulty::currentLevel() const
 	//check configuration file for saved difficulty level
 	KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
 	const QByteArray key = cg.readEntry("Level", QByteArray());
-	foreach (const KgDifficultyLevel* level, d->m_levels)
-	{
+	for (const KgDifficultyLevel* level : qAsConst(d->m_levels)) {
 		if (level->key() == key)
 		{
 			return d->m_currentLevel = level;
 		}
 	}
 	//no level predefined - look for a default level
-	foreach (const KgDifficultyLevel* level, d->m_levels)
-	{
+	for (const KgDifficultyLevel* level : qAsConst(d->m_levels)) {
 		if (level->isDefault())
 		{
 			return d->m_currentLevel = level;
@@ -398,8 +396,8 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	QObject::connect(selector, &Selector::signalSelected, menu, &KSelectAction::setCurrentItem);
 
 	//fill menu and selector
-	foreach (const KgDifficultyLevel* level, difficulty->levels())
-	{
+	const auto levels = difficulty->levels();
+	for (const KgDifficultyLevel* level : levels) {
 		selector->addItem(icon, level->title());
 		menu->addAction(level->title());
 	}

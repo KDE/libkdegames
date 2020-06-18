@@ -104,8 +104,8 @@ KgThemeSelector::~KgThemeSelector()
 void KgThemeSelector::Private::fillList()
 {
 	m_list->clear();
-	foreach (const KgTheme* theme, m_provider->themes())
-	{
+	const auto themes = m_provider->themes();
+	for (const KgTheme* theme : themes) {
 		QListWidgetItem* item = new QListWidgetItem(theme->name(), m_list);
 		item->setData(Qt::DecorationRole,
 			m_provider->generatePreview(theme, Metrics::ThumbnailBaseSize));
@@ -145,8 +145,8 @@ void KgThemeSelector::Private::_k_updateProviderSelection()
 	}
 	const QByteArray selId = selItem->data(KgThemeDelegate::IdRole).toByteArray();
 	//select the theme with this identifier
-	foreach (const KgTheme* theme, m_provider->themes())
-	{
+	const auto themes = m_provider->themes();
+	for (const KgTheme* theme : themes) {
 		if (theme->identifier() == selId)
 		{
 			m_provider->setCurrentTheme(theme);

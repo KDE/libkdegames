@@ -85,11 +85,9 @@ set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 
-########### next target ###############
-#if (${KF5Config_VERSION} STRGREATER "5.56.0")
-#        add_definitions(-DQT_NO_FOREACH)
-#        MESSAGE(STATUS "compile without foreach")
-#endif()
+if(NOT Qt5_VERSION VERSION_LESS "5.12.0" AND NOT KF5_VERSION VERSION_LESS "5.56.0")
+    add_definitions(-DQT_NO_FOREACH)
+endif()
 
 set(kdegames_LIB_SRCS
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp

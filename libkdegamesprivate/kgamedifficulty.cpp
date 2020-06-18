@@ -183,7 +183,7 @@ void KGameDifficultyPrivate::rebuildActions()
 	m_comboBox->clear();
 	std::sort(m_standardLevels.begin(), m_standardLevels.end());
 
-	foreach(KGameDifficulty::standardLevel level, m_standardLevels) {
+	for (KGameDifficulty::standardLevel level : qAsConst(m_standardLevels)) {
 		if (level!=KGameDifficulty::Configurable) {
 			m_menu->addAction(standardLevelString(level).second);
 			m_comboBox->addItem(QIcon::fromTheme( QStringLiteral( "games-difficult" )), standardLevelString(level).second);
@@ -191,7 +191,7 @@ void KGameDifficultyPrivate::rebuildActions()
 	}
 
         if (!m_customLevels.isEmpty()) {
-		foreach(const QString &s, m_customLevels) {
+		for (const QString &s : qAsConst(m_customLevels)) {
 			m_menu->addAction(s);
 			m_comboBox->addItem(QIcon::fromTheme( QStringLiteral( "games-difficult" )), s);
 		}

@@ -244,7 +244,8 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     // NOTE: we blindly take first visible view we found. I.e. we don't support
     // multiple views. If no visible scene is found, we simply pick the first one.
     QGraphicsView *sceneView = nullptr;
-    foreach (QGraphicsView *view, scene()->views()) {
+    const auto views = scene()->views();
+    for (QGraphicsView *view : views) {
         if (view->isVisible()) {
             sceneView = view;
             break;
@@ -252,7 +253,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     }
     if (!sceneView)
     {
-        sceneView = scene()->views().at(0);
+        sceneView = views.at(0);
     }
 
     QPolygonF poly = sceneView->mapToScene( sceneView->viewport()->contentsRect() );

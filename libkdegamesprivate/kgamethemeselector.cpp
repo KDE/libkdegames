@@ -143,8 +143,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::findThemes(const QString &in
     {
       // TODO change this if we ever change KGameTheme::loadDefault
       QString defaultPath = QStringLiteral( "themes/default.desktop" );
-      foreach(KGameTheme* theme, themeMap)
-      {
+      for (KGameTheme* theme : qAsConst(themeMap)) {
         if (theme->path().endsWith(defaultPath))
         {
           const QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty(QStringLiteral( "Name" )), Qt::MatchExactly);
