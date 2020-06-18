@@ -107,7 +107,7 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     setWindowTitle( i18n(DEFAULT_GROUP_NAME) );
     setModal( true );
     d->highscoreObject = new KHighscore();
-    d->edit = 0;
+    d->edit = nullptr;
     fields |= Score; //Make 'Score' field automatic (it can be hidden if necessary)
     d->fields = fields;
     d->hiddenFields = 0;
@@ -644,7 +644,7 @@ void KScoreDialog::slotGotName()
     d->stack[d->newName.first].at((d->newName.second-1))->setCurrentWidget(label);
     d->stack[d->newName.first].at((d->newName.second-1))->removeWidget(d->edit);
     delete d->edit;
-    d->edit = 0;
+    d->edit = nullptr;
     d->newName = QPair<QByteArray,int>(QByteArray(),-1);
     d->scores[d->configGroup].removeAt(10);
     d->comment.clear();  // hide the congratulations
@@ -661,7 +661,7 @@ void KScoreDialog::slotForgetScore()
     d->stack[d->newName.first].at((d->newName.second-1))->removeWidget(d->edit);
     // delete the editor
     delete d->edit;
-    d->edit = 0;
+    d->edit = nullptr;
     // avoid to recreate the KTextEdit widget
     d->newName = QPair<QByteArray,int>(QByteArray(),-1);
     // delete the highscore to forget

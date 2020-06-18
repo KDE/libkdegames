@@ -39,9 +39,9 @@ class KChatBasePrivate
 public:
   KChatBasePrivate(KChatBaseModel* model, KChatBaseItemDelegate* delegate)
   {
-    mBox = 0;
-    mEdit = 0;
-    mCombo = 0;
+    mBox = nullptr;
+    mEdit = nullptr;
+    mCombo = nullptr;
   
     mAcceptMessage = true;
 
@@ -73,10 +73,10 @@ KChatBaseModel* KChatBase::model()
 KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate, bool noComboBox) : QFrame(parent)
 {
   KChatBaseModel* mod = model;
-  if (mod==0)
+  if (mod==nullptr)
     mod = new KChatBaseModel(parent);
   KChatBaseItemDelegate* del = delegate;
-  if (del == 0)
+  if (del == nullptr)
     del = new KChatBaseItemDelegate(parent);
   
   d = new KChatBasePrivate(mod, del);
@@ -267,7 +267,7 @@ void KChatBase::setCompletionMode(KCompletion::CompletionMode mode)
 
 void KChatBase::saveConfig(KConfig* conf)
 {
-  if (conf == 0) {
+  if (conf == nullptr) {
     return;
   }
   d->mModel->saveConfig(conf);
@@ -275,7 +275,7 @@ void KChatBase::saveConfig(KConfig* conf)
 
 void KChatBase::readConfig(KConfig* conf)
 {
-  if (conf == 0) {
+  if (conf == nullptr) {
     return;
   }
   d->mModel->readConfig(conf);

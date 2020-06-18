@@ -28,7 +28,7 @@ class KGameSequence::KGameSequencePrivate
 {
   public:
     KGameSequencePrivate()
-      : mGame(0), mCurrentPlayer(0)
+      : mGame(nullptr), mCurrentPlayer(nullptr)
     {
     }
 
@@ -72,7 +72,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
  if (!game())
  {
    qCCritical(GAMES_PRIVATE_KGAME) << "NULL game object";
-   return 0;
+   return nullptr;
  }
  unsigned int minId,nextId,lastId;
  KPlayer *nextplayer, *minplayer;
@@ -90,8 +90,8 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
  // remove when this has been checked
  minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...
  nextId = minId;
- nextplayer = 0;
- minplayer = 0;
+ nextplayer = nullptr;
+ minplayer = nullptr;
 
  QList<KPlayer*>::iterator it = game()->playerList()->begin();
  for (;it != game()->playerList()->end(); it++ )
@@ -130,7 +130,7 @@ KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
  }
  else
  {
-   return 0;
+   return nullptr;
  }
  return nextplayer;
 }

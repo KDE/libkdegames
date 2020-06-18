@@ -22,7 +22,7 @@
 
 KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     QQuickWidget(parent),
-    d(0) //unused for now, for future expandability
+    d(nullptr) //unused for now, for future expandability
 {
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());

@@ -46,7 +46,7 @@ static const QString cacheName(QByteArray theme)
 KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned cacheSize, KGameRenderer* parent)
 	: m_parent(parent)
 	, m_provider(provider)
-	, m_currentTheme(0) //will be loaded on first use
+	, m_currentTheme(nullptr) //will be loaded on first use
 	, m_frameSuffix(QStringLiteral("_%1"))
 	, m_sizePrefix(QStringLiteral("%1-%2-"))
 	, m_frameCountPrefix(QStringLiteral("fc-"))
@@ -55,9 +55,9 @@ KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned c
 	, m_cacheSize((cacheSize == 0 ? 3 : cacheSize) << 20)
 	, m_strategies(KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads)
 	, m_frameBaseIndex(0)
-	, m_defaultPrimaryView(0)
+	, m_defaultPrimaryView(nullptr)
 	, m_rendererPool(&m_workerPool)
-	, m_imageCache(0)
+	, m_imageCache(nullptr)
 {
 	qRegisterMetaType<KGRInternal::Job*>();
 
@@ -150,7 +150,7 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
 		const KgTheme* theme = d->m_currentTheme;
 		if (theme)
 		{
-			d->m_currentTheme = 0; //or setTheme() will return immediately
+			d->m_currentTheme = nullptr; //or setTheme() will return immediately
 			d->_k_setTheme(theme);
 		}
 	}
@@ -248,7 +248,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme* theme)
 		}
 		//disconnect from disk cache (only needed if changing strategy)
 		delete m_imageCache;
-		m_imageCache = 0;
+		m_imageCache = nullptr;
 	}
 	//clear in-process caches
 	m_pixmapCache.clear();
@@ -411,7 +411,7 @@ bool KGameRenderer::spriteExists(const QString& key) const
 QPixmap KGameRenderer::spritePixmap(const QString& key, const QSize& size, int frame, const QHash<QColor, QColor>& customColors) const
 {
 	QPixmap result;
-	d->requestPixmap(KGRInternal::ClientSpec(key, frame, size, customColors), 0, &result);
+	d->requestPixmap(KGRInternal::ClientSpec(key, frame, size, customColors), nullptr, &result);
 	return result;
 }
 
@@ -547,8 +547,8 @@ void KGRInternal::Worker::run()
 {
 	QImage image(m_job->spec.size, QImage::Format_ARGB32_Premultiplied);
 	image.fill(transparentRgba);
-	QPainter* painter = 0;
-	QPaintDeviceColorProxy* proxy = 0;
+	QPainter* painter = nullptr;
+	QPaintDeviceColorProxy* proxy = nullptr;
 	//if no custom colors requested, paint directly onto image
 	if (m_job->spec.customColors.isEmpty())
 	{
@@ -600,7 +600,7 @@ void KGRInternal::RendererPool::setPath(const QString& graphicsPath, QSvgRendere
 	QHash<QSvgRenderer*, QThread*>::const_iterator it1 = m_hash.constBegin(), it2 = m_hash.constEnd();
 	for (; it1 != it2; ++it1)
 	{
-		Q_ASSERT(it1.value() == 0); //nobody may be using our renderers anymore now
+		Q_ASSERT(it1.value() == nullptr); //nobody may be using our renderers anymore now
 		delete it1.key();
 	}
 	m_hash.clear();
@@ -610,7 +610,7 @@ void KGRInternal::RendererPool::setPath(const QString& graphicsPath, QSvgRendere
 	if (renderer)
 	{
 		m_valid = Checked_Valid;
-		m_hash.insert(renderer, 0);
+		m_hash.insert(renderer, nullptr);
 	}
 	else
 	{
@@ -622,7 +622,7 @@ bool KGRInternal::RendererPool::hasAvailableRenderers() const
 {
 	//look for a renderer which is not associated with a thread
 	QMutexLocker locker(&m_mutex);
-	return m_hash.key(0) != 0;
+	return m_hash.key(nullptr) != nullptr;
 }
 
 QSvgRenderer* KGRInternal::RendererPool::allocRenderer()
@@ -630,13 +630,13 @@ QSvgRenderer* KGRInternal::RendererPool::allocRenderer()
 	QThread* thread = QThread::currentThread();
 	//look for an available renderer
 	QMutexLocker locker(&m_mutex);
-	QSvgRenderer* renderer = m_hash.key(0);
+	QSvgRenderer* renderer = m_hash.key(nullptr);
 	if (!renderer)
 	{
 		//instantiate a new renderer (only if the SVG file has not been found to be invalid yet)
 		if (m_valid == Checked_Invalid)
 		{
-			return 0;
+			return nullptr;
 		}
 		renderer = new QSvgRenderer(m_path);
 		m_valid = renderer->isValid() ? Checked_Valid : Checked_Invalid;
@@ -650,7 +650,7 @@ void KGRInternal::RendererPool::freeRenderer(QSvgRenderer* renderer)
 {
 	//mark renderer as available
 	QMutexLocker locker(&m_mutex);
-	m_hash.insert(renderer, 0);
+	m_hash.insert(renderer, nullptr);
 }
 
 //END KGRInternal::RendererPool

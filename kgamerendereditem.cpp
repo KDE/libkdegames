@@ -26,7 +26,7 @@ class KGameRenderedItemPrivate
 KGameRenderedItem::KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent)
 	: QGraphicsPixmapItem(parent)
 	, KGameRendererClient(renderer, spriteKey)
-	, d(0)
+	, d(nullptr)
 {
 	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }

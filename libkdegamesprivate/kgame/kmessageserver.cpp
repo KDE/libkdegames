@@ -69,7 +69,7 @@ class KMessageServerPrivate
 {
 public:
   KMessageServerPrivate()
-    : mMaxClients (-1), mGameId (1), mUniqueClientNumber (1), mAdminID (0), mServerSocket (0) {}
+    : mMaxClients (-1), mGameId (1), mUniqueClientNumber (1), mAdminID (0), mServerSocket (nullptr) {}
 
   ~KMessageServerPrivate()
   {
@@ -140,7 +140,7 @@ bool KMessageServer::initNetwork (quint16 port)
   {
     qCCritical(GAMES_PRIVATE_KGAME) << ": Serversocket::ok() == false";
     delete d->mServerSocket;
-    d->mServerSocket=0;
+    d->mServerSocket=nullptr;
     return false;
   }
 
@@ -163,13 +163,13 @@ void KMessageServer::stopNetwork()
   if (d->mServerSocket) 
   {
     delete d->mServerSocket;
-    d->mServerSocket = 0;
+    d->mServerSocket = nullptr;
   }
 }
 
 bool KMessageServer::isOfferingConnections() const
 {
-  return d->mServerSocket != 0;
+  return d->mServerSocket != nullptr;
 }
 
 //----------------------------------------------- adding / removing clients
@@ -260,7 +260,7 @@ void KMessageServer::deleteClients()
 
 void KMessageServer::removeBrokenClient ()
 {
-  KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
+  KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : nullptr;
   if (!client)
   {
     qCCritical(GAMES_PRIVATE_KGAME) << ": sender of the signal was not a KMessageIO object!";
@@ -307,7 +307,7 @@ KMessageIO* KMessageServer::findClient (quint32 no) const
       return (*iter);
     ++iter;
   }
-  return 0;
+  return nullptr;
 }
 
 quint32 KMessageServer::adminID () const
@@ -321,7 +321,7 @@ void KMessageServer::setAdmin (quint32 adminID)
   if (adminID == d->mAdminID)
     return;
 
-  if (adminID > 0 && findClient (adminID) == 0)
+  if (adminID > 0 && findClient (adminID) == nullptr)
   {
     qCWarning(GAMES_PRIVATE_KGAME) << "Trying to set a new admin that doesn't exist!";
     return;
@@ -367,7 +367,7 @@ void KMessageServer::sendMessage (const QList <quint32> &ids, const QByteArray &
 
 void KMessageServer::getReceivedMessage (const QByteArray &msg)
 {
-  KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : 0;
+  KMessageIO *client = sender() ? qobject_cast<KMessageIO*>(sender()) : nullptr;
   if (!client)
   {
     qCCritical(GAMES_PRIVATE_KGAME) << ": slot was not called from KMessageIO!";

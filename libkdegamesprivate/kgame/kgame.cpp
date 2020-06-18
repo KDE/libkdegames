@@ -54,7 +54,7 @@ public:
     {
         mUniquePlayerNumber = 0;
         mPolicy=KGame::PolicyLocal;
-        mGameSequence = 0;
+        mGameSequence = nullptr;
     }
 
     int mUniquePlayerNumber;
@@ -200,7 +200,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
 
  if (gameSequence())
  {
-   gameSequence()->setCurrentPlayer(0);  // TODO !!!
+   gameSequence()->setCurrentPlayer(nullptr);  // TODO !!!
  }
  int newseed;
  stream >> newseed;
@@ -401,7 +401,7 @@ KPlayer * KGame::findPlayer(quint32 id) const
      return *it;
    }
  }
- return 0;
+ return nullptr;
 }
 
 // it is necessary that addPlayer and systemAddPlayer are called in the same
@@ -574,7 +574,7 @@ bool KGame::systemRemove(KPlayer* p,bool deleteit)
 
  emit signalPlayerLeftGame(p);
 
- p->setGame(0);
+ p->setGame(nullptr);
  if (deleteit)
  {
    delete p;
@@ -767,7 +767,7 @@ bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 KPlayer * KGame::playerInputFinished(KPlayer *player)
 {
     if ( !player )
-        return 0;
+        return nullptr;
 
  qCDebug(GAMES_PRIVATE_KGAME) <<"player input finished for "<<player->id();
  // Check for game over and if not allow the next player to move
@@ -835,7 +835,7 @@ KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
  {
    return gameSequence()->nextPlayer(last, exclusive);
  }
- return 0;
+ return nullptr;
 }
 
 void KGame::setGameStatus(int status)
@@ -950,7 +950,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
      qCDebug(GAMES_PRIVATE_KGAME) << ": Got IdAddPlayer";
      if (sender!=gameId()  || policy()!=PolicyDirty)
      {
-       KPlayer *newplayer=0;
+       KPlayer *newplayer=nullptr;
        // We sent the message so the player is already available
        if (sender==gameId())
        {
@@ -1093,7 +1093,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
     qCDebug(GAMES_PRIVATE_KGAME) << "  Still to deactivate "
             << (int)(cnt+playerCount()-inactivateIds.count())-(int)maxPlayers()
 ;
-    KPlayer *currentPlayer=0;
+    KPlayer *currentPlayer=nullptr;
     int currentPriority=0x7fff; // MAX_UINT (16bit?) to get the maximum of the list
     // find lowest network priority which is not yet in the newPlayerList
     // do this for the new players
@@ -1169,7 +1169,7 @@ void KGame::setupGameContinue(QDataStream& stream, quint32 sender)
       {
         sendSystemMessage(player->id(), KGameMessage::IdInactivatePlayer);
       } else
-      player = 0;
+      player = nullptr;
     }
     else
     {

@@ -192,7 +192,7 @@ namespace KgDifficultyGUI
 	///KgDifficulty instance in the given @a window.
 	///
 	///Without a second parameter, the Kg::difficulty() singleton is used.
-	KDEGAMES_EXPORT void init(KXmlGuiWindow* window, KgDifficulty* difficulty = 0);
+	KDEGAMES_EXPORT void init(KXmlGuiWindow* window, KgDifficulty* difficulty = nullptr);
 }
 
 #endif // KGDIFFICULTY_H

@@ -100,7 +100,7 @@ class KDEGAMES_EXPORT KGameRenderedObjectItem : public QGraphicsObject, public K
 		bool contains(const QPointF& point) const override;
 		bool isObscuredBy(const QGraphicsItem* item) const override;
 		QPainterPath opaqueArea() const override;
-		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0) override;
+		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
 		QPainterPath shape() const override;
 	protected:
 		void receivePixmap(const QPixmap& pixmap) override;

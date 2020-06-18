@@ -56,7 +56,7 @@ KGamePropertyBase::~KGamePropertyBase()
 
 void KGamePropertyBase::init()
 {
- mOwner = 0;
+ mOwner = nullptr;
  setDirty(false);
 
  // this is very useful and used by e.g. KGameDialog so
@@ -90,7 +90,7 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler* owner,Property
 // we don't support changing the id
  if (!owner) {
 	qCWarning(GAMES_PRIVATE_KGAME) << "Resetting owner=0. Sure you want to do this?";
-	mOwner=0;
+	mOwner=nullptr;
 	return -1;
  }
  if (!mOwner) {
@@ -115,7 +115,7 @@ void KGamePropertyBase::unregisterData()
 	return;
  }
  mOwner->removeProperty(this);
- mOwner = 0;
+ mOwner = nullptr;
 }
 
 bool KGamePropertyBase::sendProperty()

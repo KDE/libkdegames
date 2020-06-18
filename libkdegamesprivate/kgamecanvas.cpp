@@ -55,7 +55,7 @@ KGameCanvasAbstract::KGameCanvasAbstract() {
 KGameCanvasAbstract::~KGameCanvasAbstract() {
    //Note: this does not delete the items, be sure not to leak memory!
    for(int i=0;i<m_items.size();i++)
-     m_items[i]->m_canvas = NULL;
+     m_items[i]->m_canvas = nullptr;
 }
 
 KGameCanvasItem* KGameCanvasAbstract::itemAt(const QPoint &pt) const {
@@ -64,7 +64,7 @@ KGameCanvasItem* KGameCanvasAbstract::itemAt(const QPoint &pt) const {
     if(el->m_visible && el->rect().contains(pt))
       return el;
   }
-  return NULL;
+  return nullptr;
 }
 
 QList<KGameCanvasItem*> KGameCanvasAbstract::itemsAt(const QPoint &pt) const {
@@ -270,7 +270,7 @@ void KGameCanvasItem::updateChanges() {
   m_changed = false;
 }
 
-QPixmap *KGameCanvasItem::transparence_pixmap_cache = NULL;
+QPixmap *KGameCanvasItem::transparence_pixmap_cache = nullptr;
 
 QPixmap* KGameCanvasItem::getTransparenceCache(const QSize &s) {
   if(!transparence_pixmap_cache)
@@ -633,7 +633,7 @@ QRect KGameCanvasGroup::rect() const
 
 KGameCanvasWidget* KGameCanvasGroup::topLevelCanvas()
 {
-    return m_canvas ? m_canvas->topLevelCanvas() : NULL;
+    return m_canvas ? m_canvas->topLevelCanvas() : nullptr;
 }
 
 QPoint KGameCanvasGroup::canvasPosition() const {

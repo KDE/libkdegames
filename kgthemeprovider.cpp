@@ -46,7 +46,7 @@ class KgThemeProvider::Private
         //this disables the addTheme() lock during rediscoverThemes()
         bool m_inRediscover;
 
-        Private(KgThemeProvider *parent, const QByteArray& key) : q(parent), m_configKey(key), m_currentTheme(0), m_defaultTheme(0), m_inRediscover(false) {}
+        Private(KgThemeProvider *parent, const QByteArray& key) : q(parent), m_configKey(key), m_currentTheme(nullptr), m_defaultTheme(nullptr), m_inRediscover(false) {}
 
         void updateThemeName()
         {
@@ -102,7 +102,7 @@ void KgThemeProvider::addTheme(KgTheme* theme)
 	//*then* start to work with the currentLevel(). The first call to
 	//currentTheme() will load the previous selection from the config, and the
 	//level list will be considered immutable from this point.
-	Q_ASSERT_X(d->m_currentTheme == 0 || d->m_inRediscover,
+	Q_ASSERT_X(d->m_currentTheme == nullptr || d->m_inRediscover,
 		"KgThemeProvider::addTheme",
 		"Only allowed before currentTheme() is called."
 	);
@@ -196,7 +196,7 @@ void KgThemeProvider::rediscoverThemes()
 		return; //discoverThemes() was never called
 	}
 
-	KgTheme* defaultTheme = NULL;
+	KgTheme* defaultTheme = nullptr;
 
 	d->m_inRediscover = true;
 	const QString defaultFileName = d->m_dtDefaultThemeName + QLatin1String(".desktop");
@@ -267,11 +267,11 @@ void KgThemeProvider::rediscoverThemes()
 		addTheme(theme);
 	}
 
-	if(defaultTheme != NULL)
+	if(defaultTheme != nullptr)
 	{
 		setDefaultTheme(defaultTheme);
 	}
-	else if(d->m_defaultTheme == NULL && themes.count() != 0)
+	else if(d->m_defaultTheme == nullptr && themes.count() != 0)
 	{
 		setDefaultTheme(themes.value(0));
 	}

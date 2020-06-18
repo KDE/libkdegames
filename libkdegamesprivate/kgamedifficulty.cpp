@@ -101,16 +101,16 @@ KGameDifficultyPrivate::~KGameDifficultyPrivate()
 }
 
 
-void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom = 0)
+void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom = nullptr)
 {
-	Q_ASSERT(recvr!=0);
+	Q_ASSERT(recvr!=nullptr);
 
 	m_oldSelection = -1; // No valid selection
 	m_level = KGameDifficulty::NoLevel;
 	m_running = false;
 
 	QObject::connect(this, SIGNAL(standardLevelChanged(KGameDifficulty::standardLevel)), recvr, slotStandard);
-	if (slotCustom!=0)
+	if (slotCustom!=nullptr)
 		QObject::connect(this, SIGNAL(customLevelChanged(int)), recvr, slotCustom);
 
 	m_menu = new KSelectAction(QIcon::fromTheme( QStringLiteral( "games-difficult") ), i18nc("Game difficulty level", "Difficulty" ), window);
@@ -137,7 +137,7 @@ void KGameDifficultyPrivate::changeSelection(int newSelection)
 		bool mayChange = true;
 
 		if (mayChange && (m_restartOnChange==KGameDifficulty::RestartOnChange) && m_running)
-			mayChange = ( KMessageBox::warningContinueCancel(0, i18n("Changing the difficulty level will end the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
+			mayChange = ( KMessageBox::warningContinueCancel(nullptr, i18n("Changing the difficulty level will end the current game!"), QString(), KGuiItem(i18n("Change the difficulty level"))) == KMessageBox::Continue );
 
 		if (mayChange) {
 			setSelection(newSelection);
@@ -280,7 +280,7 @@ void KGameDifficultyPrivate::setLevelCustom(int key)
 
 
 
-KGameDifficulty* KGameDifficulty::instance = 0;
+KGameDifficulty* KGameDifficulty::instance = nullptr;
 
 
 KGameDifficulty::~KGameDifficulty()
@@ -454,7 +454,7 @@ KGameDifficulty::KGameDifficulty() : d(new KGameDifficultyPrivate())
 
 KGameDifficulty* KGameDifficulty::self()
 {
-	if (instance==0)
+	if (instance==nullptr)
 		instance = new KGameDifficulty();
 	return instance;
 }

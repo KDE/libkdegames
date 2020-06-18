@@ -51,7 +51,7 @@ int QPaintDeviceColorProxy::metric(QPaintDevice::PaintDeviceMetric metric) const
 
 	typedef int (QPaintDevice::*MetricFunction)(void) const;
 	static const MetricFunction metricFunctions[] = {
-		0,
+		nullptr,
 		&QPaintDevice::width, // QPaintDevice::PdmWidth == 1
 		&QPaintDevice::height,
 		&QPaintDevice::widthMM,
@@ -108,7 +108,7 @@ QPen QPaintDeviceColorProxy::map(const QPen& pen) const
 //BEGIN QPaintEngineColorProxy
 
 QPaintEngineColorProxy::QPaintEngineColorProxy()
-	: m_proxy(0)
+	: m_proxy(nullptr)
 	, m_painter(new QPainter)
 {
 }
@@ -158,7 +158,7 @@ bool QPaintEngineColorProxy::end()
 	{
 		return false;
 	}
-	m_proxy = 0;
+	m_proxy = nullptr;
 	return m_painter->end();
 }
 

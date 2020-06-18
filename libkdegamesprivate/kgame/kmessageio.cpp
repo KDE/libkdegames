@@ -174,7 +174,7 @@ QString KMessageSocket::peerName () const
 // ----------------------KMessageDirect -----------------------
 
 KMessageDirect::KMessageDirect (KMessageDirect *partner, QObject *parent)
-  : KMessageIO (parent), mPartner (0)
+  : KMessageIO (parent), mPartner (nullptr)
 {
   // 0 as first parameter leaves the object unconnected
   if (!partner)
@@ -198,14 +198,14 @@ KMessageDirect::~KMessageDirect ()
 {
   if (mPartner)
   {
-    mPartner->mPartner = 0;
+    mPartner->mPartner = nullptr;
     emit mPartner->connectionBroken();
   }
 }
 
 bool KMessageDirect::isConnected () const
 {
-  return mPartner != 0;
+  return mPartner != nullptr;
 }
 
 void KMessageDirect::send (const QByteArray &msg)
@@ -226,7 +226,7 @@ KMessageProcess::~KMessageProcess()
   {
     mProcess->kill();
     mProcess->deleteLater();
-    mProcess=0;
+    mProcess=nullptr;
     // Maybe todo: delete mSendBuffer
   }
 }
@@ -246,7 +246,7 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString& file) : KMessag
   connect(mProcess, &KProcess::readyReadStandardError, this, &KMessageProcess::slotReceivedStderr);
   connect(mProcess, static_cast<void (KProcess::*)(int, QProcess::ExitStatus)>(&KProcess::finished), this, &KMessageProcess::slotProcessExited);
   mProcess->start();
-  mSendBuffer=0;
+  mSendBuffer=nullptr;
   mReceiveCount=0;
   mReceiveBuffer.resize(1024);
 }
@@ -264,7 +264,7 @@ void KMessageProcess::send(const QByteArray &msg)
   qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess:: SEND("<<msg.size()<<") to process";
   unsigned int size=msg.size()+2*sizeof(long);
 
-  if (mProcess == 0) {
+  if (mProcess == nullptr) {
     qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess:: cannot write to stdin, no process available";
     return;
   }
@@ -358,7 +358,7 @@ void KMessageProcess::slotProcessExited(int exitCode, QProcess::ExitStatus)
   qCDebug(GAMES_PRIVATE_KGAME) << "Process exited (slot) with code" << exitCode;
   emit connectionBroken();
   delete mProcess;
-  mProcess=0;
+  mProcess=nullptr;
 }
 
 

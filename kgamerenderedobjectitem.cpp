@@ -33,7 +33,7 @@ class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 		bool contains(const QPointF& point) const override;
 		bool isObscuredBy(const QGraphicsItem* item) const override;
 		QPainterPath opaqueArea() const override;
-		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0) override;
+		void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
 		QPainterPath shape() const override;
 	public:
 		KGameRenderedObjectItem* m_parent;
@@ -45,7 +45,7 @@ class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
 KGameRenderedObjectItemPrivate::KGameRenderedObjectItemPrivate(KGameRenderedObjectItem* parent)
 	: QGraphicsPixmapItem(parent)
 	, m_parent(parent)
-	, m_primaryView(0)
+	, m_primaryView(nullptr)
 	, m_correctRenderSize(0, 0)
 	, m_fixedSize(-1, -1)
 {

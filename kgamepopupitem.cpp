@@ -95,7 +95,7 @@ public:
     KGamePopupItemPrivate()
         : m_position( KGamePopupItem::BottomLeft ), m_timeout(2000),
           m_opacity(1.0), m_animOpacity(-1), m_hoveredByMouse(false),
-          m_hideOnClick(true), m_textChildItem(0),
+          m_hideOnClick(true), m_textChildItem(nullptr),
           m_sharpness(KGamePopupItem::Square), m_linkHovered(false) {}
     /**
      * Timeline for animations
@@ -243,7 +243,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
 
     // NOTE: we blindly take first visible view we found. I.e. we don't support
     // multiple views. If no visible scene is found, we simply pick the first one.
-    QGraphicsView *sceneView = 0;
+    QGraphicsView *sceneView = nullptr;
     foreach (QGraphicsView *view, scene()->views()) {
         if (view->isVisible()) {
             sceneView = view;

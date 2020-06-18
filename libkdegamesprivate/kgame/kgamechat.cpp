@@ -38,8 +38,8 @@ class KGameChatPrivate
 public:
 	KGameChatPrivate()
 	{
-		mFromPlayer = 0;
-		mGame = 0;
+		mFromPlayer = nullptr;
+		mGame = nullptr;
 
 		mToMyGroup = -1;
 	}
@@ -72,7 +72,7 @@ KGameChat::KGameChat(QWidget* parent)
     : KChatBase(parent),
       d( new KGameChatPrivate )
 {
- init(0, -1);
+ init(nullptr, -1);
 }
 
 KGameChat::~KGameChat()
@@ -201,7 +201,7 @@ void KGameChat::setFromPlayer(KPlayer* p)
  if (!p) {
 	qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
 	removeSendingEntry(d->mToMyGroup);
-	d->mFromPlayer = 0;
+	d->mFromPlayer = nullptr;
 	return;
  }
  if (d->mFromPlayer) {
@@ -257,7 +257,7 @@ void KGameChat::slotUnsetKGame()
  if (!d->mGame) {
 	return;
  }
- disconnect(d->mGame, 0, this, 0);
+ disconnect(d->mGame, nullptr, this, nullptr);
  removeSendingEntry(d->mToMyGroup);
  QMap<int, int>::Iterator it;
  for (it = d->mSendId2PlayerId.begin(); it != d->mSendId2PlayerId.end(); ++it) {

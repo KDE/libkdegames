@@ -60,7 +60,7 @@ namespace KGRInternal
 
 			//The second argument can be used to pass an instance which has been
 			//used earlier to check the validity of the SVG file.
-			inline void setPath(const QString& graphicsPath, QSvgRenderer* renderer = 0);
+			inline void setPath(const QString& graphicsPath, QSvgRenderer* renderer = nullptr);
 			//This can be used to determine whether a call to allocRenderer()
 			//would need to create a new renderer instance.
 			inline bool hasAvailableRenderers() const;
@@ -112,7 +112,7 @@ class KGameRendererPrivate : public QObject
 		void _k_setTheme(const KgTheme* theme);
 		bool setTheme(const KgTheme* theme);
 		inline QString spriteFrameKey(const QString& key, int frame, bool normalizeFrameNo = false) const;
-		void requestPixmap(const KGRInternal::ClientSpec& spec, KGameRendererClient* client, QPixmap* synchronousResult = 0);
+		void requestPixmap(const KGRInternal::ClientSpec& spec, KGameRendererClient* client, QPixmap* synchronousResult = nullptr);
 	private:
 		inline void requestPixmap__propagateResult(const QPixmap& pixmap, KGameRendererClient* client, QPixmap* synchronousResult);
 	public Q_SLOTS:

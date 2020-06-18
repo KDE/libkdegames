@@ -104,7 +104,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///instances of this KgTheme subclass. The @a themeClass must export
 		///(with the Q_INVOKABLE marker) a constructor with the same signature
 		///as the KgTheme constructor.
-		void discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName = QStringLiteral("default"), const QMetaObject* themeClass = 0);
+		void discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName = QStringLiteral("default"), const QMetaObject* themeClass = nullptr);
 		///After this provider has been set up with discoverThemes(), this
 		///method may be used to read additional themes which were added since
 		///the discoverThemes() call. This is esp. useful for KNewStuff

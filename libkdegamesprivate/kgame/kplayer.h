@@ -293,7 +293,7 @@ public:
        * @param deleteit true (default) to delete the device otherwise just remove it
        * @return true on ok
        */
-      bool removeGameIO(KGameIO *input=0,bool deleteit=true);
+      bool removeGameIO(KGameIO *input=nullptr,bool deleteit=true);
 
       /**
        * Finds the KGameIO devies with the given rtti code.

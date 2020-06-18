@@ -70,7 +70,7 @@ bool KgAudioScene::hasError()
 KgOpenALRuntime::KgOpenALRuntime()
 	: m_volume(1)
 	, m_error(false)
-	, m_context(0)
+	, m_context(nullptr)
 	, m_device(alcOpenDevice(""))
 {
 	if (!m_device)
@@ -79,7 +79,7 @@ KgOpenALRuntime::KgOpenALRuntime()
 		m_error = true;
 		return;
 	}
-	m_context = alcCreateContext(m_device, 0);
+	m_context = alcCreateContext(m_device, nullptr);
 	int error = alcGetError(m_device);
 	if (error != AL_NO_ERROR)
 	{
@@ -95,7 +95,7 @@ KgOpenALRuntime::~KgOpenALRuntime()
 {
 	if (m_context == alcGetCurrentContext())
 	{
-		alcMakeContextCurrent(0);
+		alcMakeContextCurrent(nullptr);
 	}
 	alcDestroyContext(m_context);
 	alcCloseDevice(m_device);

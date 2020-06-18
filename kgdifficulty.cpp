@@ -107,7 +107,7 @@ KgDifficultyLevel::Private* KgDifficultyLevel::Private::fromStandardLevel(KgDiff
 			data = qMakePair(QByteArray("Impossible"), i18nc("Game difficulty level 8 out of 8", "Impossible"));
 			break;
 		case Custom:
-			return 0;
+			return nullptr;
 	}
 	return new KgDifficultyLevel::Private(level, data.first, data.second, level, isDefault);
 }
@@ -152,7 +152,7 @@ class KgDifficulty::Private
         const KgDifficultyLevel* m_currentLevel;
         bool m_editable, m_gameRunning;
 
-        Private() : m_currentLevel(0), m_editable(true), m_gameRunning(false) {}
+        Private() : m_currentLevel(nullptr), m_editable(true), m_gameRunning(false) {}
 };
 
 static void saveLevel()
@@ -183,7 +183,7 @@ void KgDifficulty::addLevel(KgDifficultyLevel* level)
 	//start to work with the currentLevel(). The first call to currentLevel()
 	//will load the previous selection from the config, and the level list will
 	//be considered immutable from this point.
-	Q_ASSERT_X(d->m_currentLevel == 0,
+	Q_ASSERT_X(d->m_currentLevel == nullptr,
 		"KgDifficulty::addLevel",
 		"Only allowed before currentLevel() is called."
 	);
@@ -309,7 +309,7 @@ void KgDifficulty::select(const KgDifficultyLevel* level)
 	//ask for confirmation if necessary
 	if (d->m_gameRunning)
 	{
-		const int result = KMessageBox::warningContinueCancel(0,
+		const int result = KMessageBox::warningContinueCancel(nullptr,
 			i18n("Changing the difficulty level will end the current game!"),
 			QString(), KGuiItem(i18n("Change the difficulty level"))
 		);

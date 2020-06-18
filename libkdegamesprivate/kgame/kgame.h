@@ -767,7 +767,7 @@ protected:
     * @param list the optional list is the player list to be saved, default is playerList()
     *
     **/
-    void savePlayers(QDataStream &stream,KGamePlayerList *list=0);
+    void savePlayers(QDataStream &stream,KGamePlayerList *list=nullptr);
 
     /**
      * Prepare a player for being added. Put all data about a player into the

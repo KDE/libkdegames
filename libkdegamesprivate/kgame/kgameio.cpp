@@ -40,7 +40,7 @@ class KGameIOPrivate
 {
 public:
   KGameIOPrivate()
-    : mPlayer(0)
+    : mPlayer(nullptr)
   {
   }
 
@@ -115,7 +115,7 @@ KGame* KGameIO::game() const
 {
   if (!player())
   {
-    return 0;
+    return nullptr;
   }
   return player()->game();
 }
@@ -144,7 +144,7 @@ class KGameKeyIOPrivate
 };
 
 KGameKeyIO::KGameKeyIO(QWidget *parent) 
-   : KGameIO(), d(0)
+   : KGameIO(), d(nullptr)
 {
   if (parent)
   {
@@ -199,7 +199,7 @@ class KGameMouseIOPrivate
 };
 
 KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse) 
-   : KGameIO(), d(0)
+   : KGameIO(), d(nullptr)
 {
   if (parent)
   {
@@ -210,7 +210,7 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
 }
 
 KGameMouseIO::KGameMouseIO(QGraphicsScene *parent,bool /*trackmouse*/) 
-   : KGameIO(), d(0)
+   : KGameIO(), d(nullptr)
 {
   if (parent)
   {
@@ -289,7 +289,7 @@ public:
   {
     //mMessageServer = 0;
     //mMessageClient = 0;
-    mProcessIO=0;
+    mProcessIO=nullptr;
   }
   //KMessageServer *mMessageServer;
   //KMessageClient *mMessageClient;
@@ -334,7 +334,7 @@ KGameProcessIO::~KGameProcessIO()
   if (d->mProcessIO)
   {
     delete d->mProcessIO;
-    d->mProcessIO=0;
+    d->mProcessIO=nullptr;
   }
   delete d;
 }
@@ -482,7 +482,7 @@ public:
 
     mPauseCounter = 0;
 
-    mAdvanceTimer = 0;
+    mAdvanceTimer = nullptr;
   }
   int mAdvanceCounter;
   int mReactionPeriod;

@@ -39,7 +39,7 @@ class KPlayerPrivate
 public:
    KPlayerPrivate()
    {
-      mNetworkPlayer = 0;
+      mNetworkPlayer = nullptr;
    }
 
    KGame *mGame;
@@ -81,7 +81,7 @@ void KPlayer::init()
                                        SLOT(emitSignal(KGamePropertyBase*)));
    d->mVirtual=false;
    d->mActive=true;
-   d->mGame=0;
+   d->mGame=nullptr;
    d->mId=0; // "0" is always an invalid ID!
    d->mPriority=0;
    // I guess we cannot translate the group otherwise no
@@ -301,7 +301,7 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
     }
     else
     {
-      targetinput->setPlayer(0);
+      targetinput->setPlayer(nullptr);
       result = d->mInputList.removeAll(targetinput);
     }
   }
@@ -310,7 +310,7 @@ bool KPlayer::removeGameIO(KGameIO *targetinput,bool deleteit)
 
 bool KPlayer::hasRtti(int rtti) const
 {
-  return findRttiIO(rtti) != 0;
+  return findRttiIO(rtti) != nullptr;
 }
 
 KGameIO * KPlayer::findRttiIO(int rtti) const
@@ -324,7 +324,7 @@ KGameIO * KPlayer::findRttiIO(int rtti) const
       return curGameIO;
     }
   }
-  return 0;
+  return nullptr;
 }
 
 int KPlayer::calcIOValue()

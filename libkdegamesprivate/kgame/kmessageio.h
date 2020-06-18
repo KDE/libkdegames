@@ -308,7 +308,7 @@ public:
 
     If that object is already connected, the object remains unconnected.
   */
-  explicit KMessageDirect (KMessageDirect *partner = 0, QObject *parent = nullptr);
+  explicit KMessageDirect (KMessageDirect *partner = nullptr, QObject *parent = nullptr);
 
   /**
     Destructor, closes the connection.

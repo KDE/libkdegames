@@ -322,7 +322,7 @@ bool KGamePropertyHandler::sendProperty(QDataStream &s)
 KGamePropertyBase* KGamePropertyHandler::find(int id)
 {
  if (d->mIdDict.find(id) == d->mIdDict.end())
-  return 0;
+  return nullptr;
  return *(d->mIdDict.find(id));
 }
 

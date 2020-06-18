@@ -33,7 +33,7 @@ class KMessageClientPrivate
 {
 public:
   KMessageClientPrivate ()
-    : adminID (0), connection (0)
+    : adminID (0), connection (nullptr)
   {}
 
   ~KMessageClientPrivate ()
@@ -333,7 +333,7 @@ void KMessageClient::removeBrokenConnection2 ()
 
   emit aboutToDisconnect(id());
   delete d->connection;
-  d->connection = 0;
+  d->connection = nullptr;
   d->adminID = 0;
   emit connectionBroken();
   qCDebug(GAMES_PRIVATE_KGAME) << ": Broken:Deleting the connection object DONE";
@@ -345,7 +345,7 @@ void KMessageClient::disconnect ()
 
   emit aboutToDisconnect(id());
   delete d->connection;
-  d->connection = 0;
+  d->connection = nullptr;
   d->adminID = 0;
   emit connectionBroken();
   qCDebug(GAMES_PRIVATE_KGAME) << ": Disconnect:Deleting the connection object DONE";

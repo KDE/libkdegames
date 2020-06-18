@@ -55,7 +55,7 @@ class KgThemeSelector::Private
 
         void fillList();
 
-        Private(KgThemeProvider* provider, Options options, KgThemeSelector* q) : q(q), m_provider(provider), m_options(options), m_knsButton(0) {}
+        Private(KgThemeProvider* provider, Options options, KgThemeSelector* q) : q(q), m_provider(provider), m_options(options), m_knsButton(nullptr) {}
 
         void _k_updateListSelection(const KgTheme* theme);
         void _k_updateProviderSelection();
@@ -217,7 +217,7 @@ class KgThemeSelector::Dialog : public QDialog
 		{
 			event->accept();
 			//delete myself, but *not* the KgThemeSelector
-			mSelector->setParent(0);
+			mSelector->setParent(nullptr);
 			deleteLater();
 			//restore the KNS button
 			if (mSelector->d->m_knsButton)
@@ -262,7 +262,7 @@ void KgThemeDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 	const bool rtl = option.direction == Qt::RightToLeft;
 	QRect baseRect = option.rect;
 	//draw background
-	QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
+	QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 	//draw thumbnail
 	QRect thumbnailBaseRect = this->thumbnailRect(baseRect);
 	const QPixmap thumbnail = index.data(Qt::DecorationRole).value<QPixmap>();

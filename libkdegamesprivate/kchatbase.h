@@ -263,14 +263,14 @@ public:
 	 * to. If you use 0 then KGlobal::config() is used and the group is changed
 	 * to "KChatBase" (the current group is restored at the end).
 	 **/
-	virtual void saveConfig(KConfig* conf = 0);
+	virtual void saveConfig(KConfig* conf = nullptr);
 
 	/**
 	 * Read the configuration from a KConfig object. If the pointer is
 	 * NULL KGlobal::config() is used and the group is changed to "KChatBase".
 	 * The current KConfig::group is restored after this call.
 	 **/
-	virtual void readConfig(KConfig* conf = 0);
+	virtual void readConfig(KConfig* conf = nullptr);
 
 	/**
 	 * Set the maximum number of items in the list. If the number of item

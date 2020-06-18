@@ -37,10 +37,10 @@ class KGameNetworkPrivate
 public:
         KGameNetworkPrivate()
         {
-                mMessageClient = 0;
-                mMessageServer = 0;
+                mMessageClient = nullptr;
+                mMessageServer = nullptr;
                 mDisconnectId = 0;
-		mService = 0;
+		mService = nullptr;
         }
 
 public:
@@ -96,7 +96,7 @@ int KGameNetwork::cookie() const
 { return d->mCookie; }
 
 bool KGameNetwork::isMaster() const
-{ return (d->mMessageServer != 0); }
+{ return (d->mMessageServer != nullptr); }
 
 bool KGameNetwork::isAdmin() const
 { return (d->mMessageClient->isAdmin()); }
@@ -224,9 +224,9 @@ bool KGameNetwork::connectToServer (KMessageIO *connection)
    << "make sure that all clients connect to that server! "
    << "quitting the local server now...";
    stopServerConnection();
-   d->mMessageClient->setServer((KMessageIO*)0);
+   d->mMessageClient->setServer((KMessageIO*)nullptr);
    delete d->mMessageServer;
-   d->mMessageServer = 0;
+   d->mMessageServer = nullptr;
  }
  
  qCDebug(GAMES_PRIVATE_KGAME) << "    about to set server";
