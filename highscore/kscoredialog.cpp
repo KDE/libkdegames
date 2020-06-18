@@ -216,7 +216,7 @@ QString KScoreDialog::KScoreDialogPrivate::findTranslatedGroupName(const QByteAr
 {
     const QString lookupResult = translatedGroupNames.value(name);
     //If it wasn't found then just try i18n( to see if it happens to be in the database
-    return lookupResult.isEmpty() ? i18n(name) : lookupResult; //FIXME?
+    return lookupResult.isEmpty() ? i18n(name.constData()) : lookupResult; //FIXME?
 }
 
 void KScoreDialog::setComment(const QString &comment)
