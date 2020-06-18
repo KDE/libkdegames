@@ -225,7 +225,7 @@ void KGameDifficultyPrivate::setSelection(int newSelection)
 	else if(newSelection<countWithoutConfigurable)
 		KGameDifficulty::setLevel(m_standardLevels[newSelection]);
 	else
-		KGameDifficulty::setLevelCustom((m_customLevels.uniqueKeys()).value(newSelection - countWithoutConfigurable));
+		KGameDifficulty::setLevelCustom((m_customLevels.keys()).value(newSelection - countWithoutConfigurable));
 
 	m_oldSelection = newSelection;
 }
@@ -262,7 +262,7 @@ void KGameDifficultyPrivate::setLevelCustom(int key)
 	if (m_standardLevels.contains(KGameDifficulty::Configurable))
 		a -= 1;
 
-	int i = (m_customLevels.uniqueKeys()).indexOf(key) + a;
+	int i = (m_customLevels.keys()).indexOf(key) + a;
 	m_menu->setCurrentItem(i);
 	m_comboBox->setCurrentIndex(i);
 
