@@ -206,7 +206,7 @@ void KgThemeProvider::rediscoverThemes()
 		const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
 		for (const QString &file : fileNames) {
 			if (!themePaths.contains(file)) {
-				themePaths.append(dir + '/' + file);
+				themePaths.append(dir + QLatin1Char('/') + file);
 			}
 		}
 	}
