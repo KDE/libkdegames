@@ -27,7 +27,7 @@
 
 #include <KLocalizedString>
 
-#include <qbuffer.h>
+#include <QBuffer>
 
 #include <stdio.h>
 #include <assert.h>

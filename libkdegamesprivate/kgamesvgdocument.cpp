@@ -19,7 +19,7 @@
 #include "kgamesvgdocument.h"
 #include "kgamesvgdocument_p.h"
 
-#include <kfilterdev.h>
+#include <KFilterDev>
 
 #include <QBuffer>
 #include <QFile>

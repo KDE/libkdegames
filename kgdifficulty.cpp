@@ -35,8 +35,8 @@
 #include <QGlobalStatic>
 #include <QStatusBar>
 
-#include <klocalizedstring.h>
-#include <ksharedconfig.h>
+#include <KLocalizedString>
+#include <KSharedConfig>
 
 //BEGIN KgDifficultyLevel
 

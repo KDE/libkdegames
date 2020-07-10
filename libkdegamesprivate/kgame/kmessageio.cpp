@@ -23,7 +23,7 @@
 
 #include "kmessageio.h"
 #include <QTcpSocket>
-#include <kprocess.h>
+#include <KProcess>
 #include <QFile>
 #include <QDataStream>
 // ----------------------- KMessageIO -------------------------

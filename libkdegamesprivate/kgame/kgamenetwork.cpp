@@ -28,7 +28,7 @@
 #include "kmessageio.h"
 #include <dnssd/publicservice.h>
 
-#include <qbuffer.h>
+#include <QBuffer>
 //Added by qt3to4:
 #include <QList>
 

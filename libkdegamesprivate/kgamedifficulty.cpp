@@ -16,13 +16,13 @@ You should have received a copy of the GNU Library General Public License along 
 #include <QMap>
 
 
-#include <kactioncollection.h>
-#include <kcombobox.h>
+#include <KActionCollection>
+#include <KComboBox>
 #include <QIcon>
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <qstatusbar.h>
-#include <kselectaction.h>
+#include <KMessageBox>
+#include <QStatusBar>
+#include <KSelectAction>
 #include <kxmlguiwindow.h>
 
 

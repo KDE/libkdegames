@@ -39,7 +39,7 @@
 #include <QQueue>
 
 #include <KLocalizedString>
-#include <krandomsequence.h>
+#include <KRandomSequence>
 
 #define KGAME_LOAD_COOKIE 4210
 

@@ -21,13 +21,13 @@
 #include "kstandardgameaction.h"
 
 #include <KLocalizedString>
-#include <qaction.h>
-#include <kactioncollection.h>
-#include <kstandardshortcut.h>
-#include <ktoggleaction.h>
-#include <kconfig.h>
+#include <QAction>
+#include <KActionCollection>
+#include <KStandardShortcut>
+#include <KToggleAction>
+#include <KConfig>
 #include <QIcon>
-#include <krecentfilesaction.h>
+#include <KRecentFilesAction>
 
 #undef I18N_NOOP2
 #define I18N_NOOP2(ctx,txt) ctx, txt

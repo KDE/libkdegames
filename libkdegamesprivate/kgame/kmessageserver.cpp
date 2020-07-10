@@ -20,8 +20,8 @@
 #include "kmessageserver.h"
 #include "kmessageserver_p.h"
 
-#include <qiodevice.h>
-#include <qbuffer.h>
+#include <QIODevice>
+#include <QBuffer>
 #include <QList>
 #include <QQueue>
 #include <QTimer>

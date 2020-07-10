@@ -22,9 +22,9 @@
 #include "kchatbasemodel.h"
 #include "kchatbaseitemdelegate.h"
 
-#include <klineedit.h>
+#include <KLineEdit>
 #include <KLocalizedString>
-#include <kconfig.h>
+#include <KConfig>
 #include <QLayout>
 #include <QComboBox>
 #include <QPixmap>

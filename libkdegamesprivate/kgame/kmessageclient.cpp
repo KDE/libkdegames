@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 
-#include <qbuffer.h>
+#include <QBuffer>
 #include <QTimer>
 #include <QList>
 #include <QDataStream>

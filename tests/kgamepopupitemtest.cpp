@@ -23,7 +23,7 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <KFileDialog>
-#include <kcolorscheme.h>
+#include <KColorScheme>
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>

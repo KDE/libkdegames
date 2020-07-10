@@ -23,7 +23,7 @@
 #include <QFrame>
 #include <QLoggingCategory>
 
-#include <kcompletion.h>
+#include <KCompletion>
 #include "libkdegamesprivate_export.h"
 
 class KConfig;

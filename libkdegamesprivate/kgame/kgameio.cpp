@@ -26,7 +26,7 @@
 #include "kmessageio.h"
 
 #include <QWidget>
-#include <qbuffer.h>
+#include <QBuffer>
 #include <QTimer>
 //Added by qt3to4:
 #include <QGraphicsScene>
