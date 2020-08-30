@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
 project(libkdegames)
 
 set (QT_MIN_VERSION "5.9.0")
-set (KF5_MIN_VERSION "5.46.0")
+set (KF5_MIN_VERSION "5.57.0")
 
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
