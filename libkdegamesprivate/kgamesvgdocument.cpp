@@ -24,7 +24,6 @@
 #include <QBuffer>
 #include <QFile>
 #include <QString>
-#include <QStringList>
 #include <QDomElement>
 #include <QDomNode>
 #include <QDebug>

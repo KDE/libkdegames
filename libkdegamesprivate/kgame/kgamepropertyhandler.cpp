@@ -19,14 +19,12 @@
 */
 
 #include "kgamepropertyhandler.h"
-#include "kgameproperty.h"
 #include "kgamemessage.h"
 
 #include <QMap>
 #include <QQueue>
 
 #include <KLocalizedString>
-#include <typeinfo>
 
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 

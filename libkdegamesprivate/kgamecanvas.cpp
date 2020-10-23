@@ -29,8 +29,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "kgamecanvas.h"
 
 #include <QPaintEvent>
-#include <QPainter>
-#include <QRegion>
 #include <QApplication>
 #include <QTimer>
 #include <QTime>

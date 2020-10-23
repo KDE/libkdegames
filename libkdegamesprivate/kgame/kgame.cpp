@@ -35,7 +35,6 @@
 #include <QBuffer>
 #include <QTimer>
 #include <QFile>
-#include <QList>
 #include <QQueue>
 
 #include <KLocalizedString>
