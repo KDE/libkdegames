@@ -1,5 +1,4 @@
 install(FILES
-	KExtHighscore
 	KGameClock
 	KGamePopupItem
 	KGameRenderedItem
