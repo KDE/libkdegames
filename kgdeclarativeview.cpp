@@ -18,17 +18,21 @@
 
 #include "kgdeclarativeview.h"
 
-#include <kdeclarative/kdeclarative.h>
+// KF
+#include <KDeclarative/KDeclarative>
+#include <KLocalizedContext>
+// Qt
+#include <QQmlContext>
 
 KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     QQuickWidget(parent),
     d(nullptr) //unused for now, for future expandability
 {
-    KDeclarative::KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(engine());
-    
-    // binds things like i18n and icons
-    kdeclarative.setupContext();
+    QQmlEngine* engine = this->engine();
+    KDeclarative::KDeclarative::setupEngine(engine);
+
+    KLocalizedContext *localizedContextObject = new KLocalizedContext(engine);
+    engine->rootContext()->setContextObject(localizedContextObject);
 
     setResizeMode(SizeRootObjectToView);
 }
