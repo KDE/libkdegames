@@ -30,7 +30,7 @@
 #include <QHostAddress>
 #include <QLoggingCategory>
 
-#include "../libkdegamesprivate_export.h"
+#include "libkdegamesprivate_export.h"
 
 /*
     This macro shouldn't be here ideally. Already declared in kgame.h, but throws error if not placed here.

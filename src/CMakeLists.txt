@@ -4,16 +4,6 @@ add_subdirectory(highscore)
 add_subdirectory(qml)
 add_subdirectory(private)
 
-include_directories(
-    ${OPENAL_INCLUDE_DIR}
-    ${SNDFILE_INCLUDE_DIR}
-    highscore
-    ${CMAKE_CURRENT_BINARY_DIR}/highscore
-    # the following only for libkdegamesprivate, but there aren't
-    # target-specific include directories
-    private/kgame
-)
-
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 configure_file(highscore/config-highscore.h.in ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
@@ -73,10 +63,16 @@ target_link_libraries(KF5KDEGames
 )
 
 target_include_directories(KF5KDEGames
-    INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>"
-    PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>"
+    INTERFACE
+        "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>"
+    PUBLIC
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>"
+    PRIVATE
+        ${OPENAL_INCLUDE_DIR}
+        ${SNDFILE_INCLUDE_DIR}
+        highscore
+        ${CMAKE_CURRENT_BINARY_DIR}/highscore
 )
-
 
 ecm_setup_version(${KDEGAMES_VERSION}
     VARIABLE_PREFIX KDEGAMES
@@ -147,7 +143,11 @@ target_link_libraries(KF5KDEGamesPrivate
         KF5::Archive
 )
 
-target_include_directories(KF5KDEGamesPrivate INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/libkdegamesprivate>" )
+target_include_directories(KF5KDEGamesPrivate
+    INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/libkdegamesprivate>"
+    PRIVATE
+        private/kgame
+)
 
 set_target_properties(KF5KDEGamesPrivate PROPERTIES
     VERSION   ${KDEGAMES_VERSION}
