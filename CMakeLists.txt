@@ -51,6 +51,25 @@ set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores
 
 configure_file(highscore/config-highscore.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
+add_definitions(
+    -DQT_DEPRECATED_WARNINGS
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
+    -DQT_DEPRECATED_WARNINGS_SINCE=0x060000
+    -DQT_NO_KEYWORDS
+    -DQT_NO_URL_CAST_FROM_STRING
+    -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_TO_ASCII
+    -DQT_NO_CAST_FROM_BYTEARRAY
+    -DQT_STRICT_ITERATORS
+    -DQT_USE_QSTRINGBUILDER
+    -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT
+    -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x052e00
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
+)
+if(NOT Qt5_VERSION VERSION_LESS "5.12.0")
+    add_definitions(-DQT_NO_FOREACH)
+endif()
+
 add_subdirectory( carddecks )
 add_subdirectory( declarativeimports )
 add_subdirectory( highscore )
@@ -89,25 +108,6 @@ set(KGAUDIO_BACKEND openal)
 set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
-
-add_definitions(
-    -DQT_DEPRECATED_WARNINGS
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060000
-    -DQT_NO_KEYWORDS
-    -DQT_NO_URL_CAST_FROM_STRING
-    -DQT_NO_CAST_FROM_ASCII
-    -DQT_NO_CAST_TO_ASCII
-    -DQT_NO_CAST_FROM_BYTEARRAY
-    -DQT_STRICT_ITERATORS
-    -DQT_USE_QSTRINGBUILDER
-    -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT
-    -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x052e00
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
-)
-if(NOT Qt5_VERSION VERSION_LESS "5.12.0")
-    add_definitions(-DQT_NO_FOREACH)
-endif()
 
 set(kdegames_LIB_SRCS
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp

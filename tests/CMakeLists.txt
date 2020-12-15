@@ -1,6 +1,12 @@
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 include_directories(  ${CMAKE_SOURCE_DIR}/libkdegames )
 
+remove_definitions(
+    -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_TO_ASCII
+    -DQT_NO_CAST_FROM_BYTEARRAY
+)
+
 MACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
        FOREACH(_testname ${ARGN})
                set(${_testname}_SRCS ${_testname}.cpp)
