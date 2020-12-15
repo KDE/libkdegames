@@ -96,7 +96,11 @@ KGame::KGame(int cookie,QObject* parent)
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
  d->mGameStatus.setLocal(Init);
  // d->mUniquePlayerNumber = 0;
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
  d->mRandom = new KRandomSequence;
+QT_WARNING_POP
  d->mRandom->setSeed(0);
 
  connect(this, &KGame::signalClientConnected, this, &KGame::slotClientConnected);
