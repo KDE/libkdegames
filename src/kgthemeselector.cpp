@@ -44,7 +44,7 @@ namespace Metrics
 
 //BEGIN KgThemeSelector
 
-class KgThemeSelector::Private
+class Q_DECL_HIDDEN KgThemeSelector::Private
 {
     public:
         KgThemeSelector* q;

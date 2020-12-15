@@ -24,7 +24,7 @@
 #include "kplayer.h"
 #include "kgame.h"
 
-class KGameSequence::KGameSequencePrivate
+class Q_DECL_HIDDEN KGameSequence::KGameSequencePrivate
 {
   public:
     KGameSequencePrivate()

@@ -27,7 +27,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 
-class KgThemeProvider::Private
+class Q_DECL_HIDDEN KgThemeProvider::Private
 {
     public:
         KgThemeProvider *q;

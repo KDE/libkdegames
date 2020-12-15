@@ -40,7 +40,7 @@
 
 //BEGIN KgDifficultyLevel
 
-class KgDifficultyLevel::Private
+class Q_DECL_HIDDEN KgDifficultyLevel::Private
 {
     public:
         bool m_isDefault;
@@ -145,7 +145,7 @@ KgDifficultyLevel::StandardLevel KgDifficultyLevel::standardLevel() const
 //END KgDifficultyLevel
 //BEGIN KgDifficulty
 
-class KgDifficulty::Private
+class Q_DECL_HIDDEN KgDifficulty::Private
 {
     public:
         QList<const KgDifficultyLevel*> m_levels;

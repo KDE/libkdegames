@@ -42,7 +42,7 @@
 
 Q_LOGGING_CATEGORY(GAMES_HIGHSCORE, "org.kde.games.highscore", QtWarningMsg)
 
-class KHighscore::KHighscorePrivate
+class Q_DECL_HIDDEN KHighscore::KHighscorePrivate
 {
 public:
     KHighscorePrivate() {}

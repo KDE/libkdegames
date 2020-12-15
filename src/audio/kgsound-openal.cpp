@@ -25,7 +25,7 @@
 #include "kgopenalruntime_p.h"
 #include "virtualfileqt-openal.h"
 
-class KgSound::Private
+class Q_DECL_HIDDEN KgSound::Private
 {
     public:
         KgSound::PlaybackType m_type;

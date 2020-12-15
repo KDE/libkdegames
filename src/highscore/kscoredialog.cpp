@@ -51,7 +51,7 @@ this software.
 
 typedef QList<KScoreDialog::FieldInfo> GroupScores; ///<The list of scores in a group
 
-class KScoreDialog::KScoreDialogPrivate
+class Q_DECL_HIDDEN KScoreDialog::KScoreDialogPrivate
 {
     public:
         //QList<FieldInfo*> scores;

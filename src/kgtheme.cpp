@@ -27,7 +27,7 @@
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
-class KgTheme::Private
+class Q_DECL_HIDDEN KgTheme::Private
 {
     public:
         const QByteArray m_identifier;
