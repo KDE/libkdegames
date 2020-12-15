@@ -48,29 +48,28 @@ include(ECMGenerateExportHeader)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
-find_package(OpenAL REQUIRED)
-set_package_properties(OPENAL PROPERTIES
-                       URL "https://www.openal.org/"
-                      )
-
-find_package(SndFile REQUIRED)
-set_package_properties(SndFile PROPERTIES
-                       URL "http://www.mega-nerd.com/libsndfile/"
-                      )
-
 set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores e.g. /var/games")
 
-option (USE_OPENAL_SNDFILE "use OpenAL and libsndfile in libkdegames" ON)
-if (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
-    message(STATUS "Checking libsndfile capabilities")
-    try_compile(SNDFILE_WORKS
-        ${CMAKE_CURRENT_BINARY_DIR}/src/audio/check-libsndfile-capabilities
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/audio/check-libsndfile-capabilities.cpp
-        CMAKE_FLAGS -DINCLUDE_DIRECTORIES=${SNDFILE_INCLUDE_DIR})
-    if (NOT SNDFILE_WORKS)
-        message(FATAL_ERROR "Your version of libsndfile (found in " ${SNDFILE_LIBRARIES} ") is too old. At least version 0.21 is needed. To skip the optional OpenAL/libsndfile dependency in libkdegames (not recommended), re-run cmake with -DUSE_OPENAL_SNDFILE=OFF.")
-    endif (NOT SNDFILE_WORKS)
-endif (SNDFILE_FOUND AND USE_OPENAL_SNDFILE)
+find_package(OpenAL)
+set_package_properties(OpenAL PROPERTIES
+    URL "https://www.openal.org/"
+    TYPE REQUIRED
+)
+
+find_package(SndFile)
+set_package_properties(SndFile PROPERTIES
+    URL "http://www.mega-nerd.com/libsndfile/"
+    TYPE REQUIRED
+)
+
+message(STATUS "Checking libsndfile capabilities")
+try_compile(SNDFILE_WORKS
+    ${CMAKE_CURRENT_BINARY_DIR}/src/audio/check-libsndfile-capabilities
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/audio/check-libsndfile-capabilities.cpp
+    CMAKE_FLAGS -DINCLUDE_DIRECTORIES=${SNDFILE_INCLUDE_DIR})
+if (NOT SNDFILE_WORKS)
+    message(FATAL_ERROR "Your version of libsndfile (found in " ${SNDFILE_LIBRARIES} ") is too old. At least version 0.21 is needed.")
+endif (NOT SNDFILE_WORKS)
 
 message (STATUS "INCLUDES FOR SOUND:  " ${OPENAL_INCLUDE_DIR} " " ${SNDFILE_INCLUDE_DIR})
 message (STATUS "LIBRARIES FOR SOUND: " ${OPENAL_LIBRARY} " " ${SNDFILE_LIBRARIES})
