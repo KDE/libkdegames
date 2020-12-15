@@ -775,9 +775,12 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
  {
    gameSequence()->setCurrentPlayer(player);
  }
- // do not call gameSequence()->checkGameOver() to keep backward compatibility!
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
  gameOver = checkGameOver(player);
- if (gameOver!=0)
+#else
+ gameOver = gameSequence()->checkGameOver(player);
+#endif
+if (gameOver!=0)
  {
      player->setTurn(false);
      setGameStatus(End);
@@ -788,12 +791,20 @@ KPlayer * KGame::playerInputFinished(KPlayer *player)
    player->setTurn(false); // in turn based games we have to switch off input now
    if (gameSequence())
    {
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
      QTimer::singleShot(0,this,&KGame::prepareNext);
+#else
+     KGameSequence* gameSequence = this->gameSequence();
+     QTimer::singleShot(0, gameSequence, [gameSequence]() {
+         gameSequence->nextPlayer(gameSequence->currentPlayer());
+    });
+#endif
    }
  }
  return player;
 }
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
 // Per default we do not do anything
 int KGame::checkGameOver(KPlayer *player)
 {
@@ -803,6 +814,7 @@ int KGame::checkGameOver(KPlayer *player)
  }
  return 0;
 }
+#endif
 
 void KGame::setGameSequence(KGameSequence* sequence)
 {
@@ -819,6 +831,7 @@ KGameSequence* KGame::gameSequence() const
   return d->mGameSequence;
 }
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
 void KGame::prepareNext()
 {
  if (gameSequence())
@@ -827,7 +840,9 @@ void KGame::prepareNext()
    nextPlayer(gameSequence()->currentPlayer());
  }
 }
+#endif
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
 KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
 {
  if (gameSequence())
@@ -836,6 +851,7 @@ KPlayer *KGame::nextPlayer(KPlayer *last,bool exclusive)
  }
  return nullptr;
 }
+#endif
 
 void KGame::setGameStatus(int status)
 {

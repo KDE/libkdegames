@@ -273,11 +273,13 @@ public:
      */
     uint playerCount() const;
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
     /**
-     * @deprecated
-     * Use @ref KGameSequence::nextPlayer instead
-     **/
+     * @deprecated Since 3.2, use KGameSequence::nextPlayer() instead
+     */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence::nextPlayer()")
     virtual KPlayer * nextPlayer(KPlayer *last,bool exclusive=true);
+#endif
 
     // Input events
     /**
@@ -478,12 +480,13 @@ protected Q_SLOTS:
      **/
     void emitSignal(KGamePropertyBase *me);
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
     /**
-     * @deprecated
-     * Use KGameSequence::prepareNext() instead
-     **/
+     * @deprecated Since 3.2, use KGameSequence::nextPlayer() & KGameSequence::currentPlayer() instead
+     */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence::nextPlayer() & KGameSequence::currentPlayer()")
     virtual void prepareNext();
-
+#endif
 
     /**
      * Calls negotiateNetworkGame()
@@ -851,14 +854,16 @@ protected:
     void deletePlayers();
     void deleteInactivePlayers();
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
     /**
-     * @deprecated
-     * Use @ref KGameSequence instead.
-     *
      * @param player the player who made the last move
      * @return anything else but 0 is considered as game over
+     *
+     * @deprecated Since 3.2, use KGameSequence instead.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence")
     virtual int checkGameOver(KPlayer *player);
+#endif
 
     /**
      * Load a saved game, from file OR network. Internal.

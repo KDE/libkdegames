@@ -1,9 +1,12 @@
 cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
 
+set(KDEGAMES_VERSION 7.2.0)
+set(KDEGAMES_SOVERSION 7)
+
 project(libkdegames)
 
-set (QT_MIN_VERSION "5.9.0")
-set (KF5_MIN_VERSION "5.57.0")
+set (QT_MIN_VERSION "5.11.0")
+set (KF5_MIN_VERSION "5.64.0")
 
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
@@ -25,6 +28,9 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMMarkNonGuiExecutable)
+include(ECMGenerateExportHeader)
+
+set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
 add_definitions(-DMAKE_KDEGAMESPRIVATE_LIB)
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
@@ -128,7 +134,14 @@ set(kdegames_LIB_SRCS
 
 add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
 
-generate_export_header(KF5KDEGames BASE_NAME libkdegames EXPORT_MACRO_NAME KDEGAMES_EXPORT DEPRECATED_MACRO_NAME KDE_DEPRECATED)
+ecm_generate_export_header(KF5KDEGames
+    EXPORT_FILE_NAME libkdegames_export.h
+    BASE_NAME KDEGAMES
+    VERSION ${KDEGAMES_VERSION}
+    DEPRECATED_BASE_VERSION 0
+    DEPRECATION_VERSIONS 4.1
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
 
 target_link_libraries(KF5KDEGames
                 PRIVATE
@@ -152,9 +165,6 @@ target_link_libraries(KF5KDEGames
 )
 
 target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
-
-set(KDEGAMES_VERSION 7.2.0)
-set(KDEGAMES_SOVERSION 7)
 
 set_target_properties(KF5KDEGames PROPERTIES VERSION   ${KDEGAMES_VERSION}
                                              SOVERSION ${KDEGAMES_SOVERSION}
@@ -208,7 +218,14 @@ ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
 )
 
 add_library(KF5KDEGamesPrivate SHARED ${kdegamesprivate_LIB_SRCS})
-generate_export_header(KF5KDEGamesPrivate BASE_NAME libkdegamesprivate EXPORT_MACRO_NAME KDEGAMESPRIVATE_EXPORT DEPRECATED_MACRO_NAME KDE_DEPRECATED)
+ecm_generate_export_header(KF5KDEGamesPrivate
+    EXPORT_FILE_NAME libkdegamesprivate_export.h
+    BASE_NAME KDEGAMESPRIVATE
+    VERSION ${KDEGAMES_VERSION}
+    DEPRECATED_BASE_VERSION 0
+    DEPRECATION_VERSIONS 3.2 4.9
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
 
 target_link_libraries(KF5KDEGamesPrivate
                 PRIVATE

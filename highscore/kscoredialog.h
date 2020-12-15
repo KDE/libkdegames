@@ -133,6 +133,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
 
         ~KScoreDialog();
 
+#if KDEGAMES_ENABLE_DEPRECATED_SINCE(4, 1)
         /**
         * The group name must be passed though I18N_NOOP() in order for the
         * group name to be translated. i.e.
@@ -141,11 +142,12 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
         *
         * @param group to use for reading/writing highscores from/to.
-        * @deprecated since 4.1
+        * @deprecated Since 4.1, use setConfigGroup(const QPair<QByteArray, QString>&).
         */
-        void KDE_DEPRECATED setConfigGroup(const QString& group = QString());
+        KDEGAMES_DEPRECATED_VERSION(4, 1, "Use setConfigGroup(const QPair<QByteArray, QString>&)")
+        void setConfigGroup(const QString& group = QString());
         //void setConfigGroup(const QString& group, const QString& i18nName);
-
+#endif
         /**
         * The group name must be passed though i18n() in order for the
         * group name to be translated. i.e.

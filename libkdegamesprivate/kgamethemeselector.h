@@ -28,6 +28,8 @@ class KGameTheme;
 class KConfigSkeleton;
 class KGameThemeSelectorPrivate;
 
+#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(4, 9)
+
 /**
  * \class KGameThemeSelector kgamethemeselector.h <KGameThemeSelector>
  *
@@ -44,7 +46,7 @@ class KGameThemeSelectorPrivate;
  * directory for .desktop files with a group called "KGameTheme".
  *
  * @author Mauricio Piacentini
- * @deprecated Use KgThemeSelector instead.
+ * @deprecated Since 4.9, use KgThemeSelector instead.
  **/
 class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
 {
@@ -63,6 +65,7 @@ class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
          * @param directory subdirectory (of share/apps/appname) to search in
          * @return true if the theme files and properties could be loaded
          */
+        KDEGAMESPRIVATE_DEPRECATED_VERSION(4, 9, "Use KgThemeSelector")
         KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QStringLiteral("KGameTheme"), const QString &directory = QStringLiteral("themes"));
         virtual ~KGameThemeSelector();
 
@@ -76,5 +79,7 @@ class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
         Q_PRIVATE_SLOT(d, void _k_updateThemeList(const QString&))
         Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
 };
+
+#endif
 
 #endif

@@ -31,6 +31,8 @@
 #include "ui_kgamethemeselector.h"
 #include "kgametheme.h"
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(4, 9)
+
 class KGameThemeSelector::KGameThemeSelectorPrivate
 {
     public:
@@ -215,3 +217,5 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
 }
 
 #include "moc_kgamethemeselector.cpp"
+
+#endif

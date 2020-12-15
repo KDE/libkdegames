@@ -30,6 +30,8 @@
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(4, 9)
+
 class KGameThemePrivate
 {
     public:
@@ -192,3 +194,5 @@ QString KGameTheme::themeProperty(const QString &key) const {
     }
     return d->themeproperties[key];
 }
+
+#endif

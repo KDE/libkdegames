@@ -30,6 +30,8 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 class KGameThemePrivate;
 class QPixmap;
 
+#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(4, 9)
+
 /**
  * \class KGameTheme kgametheme.h <KGameTheme>
  *
@@ -42,11 +44,12 @@ class QPixmap;
  * will likely be necessary to derive from this class
  *
  * @author Mauricio Piacentini
- * @deprecated Use KgTheme instead.
+ * @deprecated Since 4.9, use KgTheme instead.
  **/
 class KDEGAMESPRIVATE_EXPORT KGameTheme
 {
     public:
+        KDEGAMESPRIVATE_DEPRECATED_VERSION(4, 9, "Use KgTheme")
         explicit KGameTheme(const QString &themeGroup = QStringLiteral("KGameTheme"));
         virtual ~KGameTheme();
 
@@ -93,5 +96,7 @@ class KDEGAMESPRIVATE_EXPORT KGameTheme
         friend class KGameThemePrivate;
         KGameThemePrivate *const d;
 };
+
+#endif
 
 #endif
