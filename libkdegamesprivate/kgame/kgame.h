@@ -28,10 +28,13 @@
 
 #include "kgamenetwork.h"
 #include "libkdegamesprivate_export.h"
+#include <kcoreaddons_export.h> // for KCOREADDONS_ENABLE_DEPRECATED_SINCE
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
+#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
 class KRandomSequence;
+#endif
 
 class KPlayer;
 class KGamePropertyBase;
@@ -155,12 +158,18 @@ public:
      **/
     const KGamePlayerList *inactivePlayerList() const;
 
+#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 75)
     /**
      * Returns a pointer to the game's KRandomSequence. This sequence is
      * identical for all network players!
      * @return KRandomSequence pointer
+     * @deprecated Since 7.3, no known users. Any replacement should use QRandomGenerator.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION(7, 3, "No known users. Any replacement should use QRandomGenerator.")
     KRandomSequence *random() const;
+#endif
+#endif
 
     /**
      * @return The KGameSequence object that is currently in use.
@@ -845,11 +854,15 @@ protected:
      **/
     virtual void negotiateNetworkGame(quint32 clientID);
 
+#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
     /**
      * synchronize the random numbers with all network clients
      * not used by KGame - if it should be kept then as public method
+     * @deprecated Since 7.3, no known users.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION(7, 3, "No known users")
     void syncRandom();
+#endif
 
     void deletePlayers();
     void deleteInactivePlayers();

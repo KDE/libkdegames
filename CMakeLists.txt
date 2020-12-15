@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
 
-set(KDEGAMES_VERSION 7.2.0)
+set(KDEGAMES_VERSION 7.3.0)
 set(KDEGAMES_SOVERSION 7)
 
 project(libkdegames)
@@ -223,7 +223,7 @@ ecm_generate_export_header(KF5KDEGamesPrivate
     BASE_NAME KDEGAMESPRIVATE
     VERSION ${KDEGAMES_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 3.2 4.9
+    DEPRECATION_VERSIONS 3.2 4.9 7.3
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
@@ -242,8 +242,8 @@ target_link_libraries(KF5KDEGamesPrivate
 target_include_directories(KF5KDEGamesPrivate INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/libkdegamesprivate>" )
 
 set_target_properties(KF5KDEGamesPrivate PROPERTIES
-    VERSION   1.0.0
-    SOVERSION 1
+    VERSION   ${KDEGAMES_VERSION}
+    SOVERSION ${KDEGAMES_SOVERSION}
 )
 
 install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesLibraryDepends
