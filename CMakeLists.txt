@@ -166,10 +166,6 @@ target_link_libraries(KF5KDEGames
 
 target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
 
-set_target_properties(KF5KDEGames PROPERTIES VERSION   ${KDEGAMES_VERSION}
-                                             SOVERSION ${KDEGAMES_SOVERSION}
-                                             EXPORT_NAME KF5KDEGames
-)
 
 ecm_setup_version(${KDEGAMES_VERSION} VARIABLE_PREFIX KDEGAMES
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
@@ -177,6 +173,7 @@ ecm_setup_version(${KDEGAMES_VERSION} VARIABLE_PREFIX KDEGAMES
                         SOVERSION ${KDEGAMES_SOVERSION})
 
 set_target_properties(KF5KDEGames PROPERTIES
+    EXPORT_NAME KF5KDEGames
     VERSION   ${KDEGAMES_VERSION}
     SOVERSION ${KDEGAMES_SOVERSION}
 )
