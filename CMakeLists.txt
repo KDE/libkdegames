@@ -300,11 +300,7 @@ install(EXPORT KF5KDEGamesLibraryDepends DESTINATION
 	
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h  DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames  COMPONENT Devel)
 
-if (${ECM_VERSION} STRGREATER "5.58.0")
-    install(FILES libkdegames.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-else()
-    install(FILES libkdegames.categories  DESTINATION ${KDE_INSTALL_CONFDIR})
-endif()
+install(FILES libkdegames.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 feature_summary(WHAT ALL
                 INCLUDE_QUIET_PACKAGES
