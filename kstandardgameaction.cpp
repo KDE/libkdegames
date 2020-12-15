@@ -89,37 +89,26 @@ static const KStandardGameActionInfo* infoPtr( KStandardGameAction::StandardGame
     return nullptr;
 }
 
-
-QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
-                                     QObject* parent )
+QAction* KStandardGameAction::_k_createInternal(KStandardGameAction::StandardGameAction id, QObject *parent)
 {
     QAction* pAction = nullptr;
     const KStandardGameActionInfo* pInfo = infoPtr( id );
-    qCDebug(GAMES_UI) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)nullptr) << "," << parent << " )";
+//     qCDebug(GAMES_UI) << "KStandardGameAction::create( " << id << "=" << (pInfo ? pInfo->psName : (const char*)nullptr) << "," << parent << " )";
     if( pInfo ) {
         QString sLabel = i18nc(pInfo->psLabelContext, pInfo->psLabel);
-        bool do_connect = (recvr && slot); //both not 0
         switch( id ) {
         case LoadRecent:
             pAction = new KRecentFilesAction(sLabel, parent);
-            if(do_connect)
-                QObject::connect( pAction, SIGNAL(urlSelected(QUrl)), recvr, slot);
             break;
         case Pause:
         case Demo:
-            pAction = new KToggleAction(QIcon::fromTheme(QLatin1String( pInfo->psIconName )), sLabel, parent);
-            if(do_connect)
-                QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
+            pAction = new KToggleAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
             break;
         case ChooseGameType:
-            pAction = new KSelectAction( QIcon::fromTheme(QLatin1String( pInfo->psIconName )), sLabel, parent);
-            if(do_connect)
-                QObject::connect( pAction, SIGNAL(triggered(int)), recvr, slot );
+            pAction = new KSelectAction( QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
             break;
         default:
-            pAction = new QAction(QIcon::fromTheme(QLatin1String( pInfo->psIconName )), sLabel, parent);
-            if(do_connect)
-                QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
+            pAction = new QAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
             break;
         }
 
@@ -145,6 +134,27 @@ QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         collection->addAction(pAction->objectName(), pAction);
 
     return pAction;
+}
+
+QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr, const char *slot,
+                                     QObject* parent )
+{
+    QAction* pAction = _k_createInternal(id, parent);
+    if (recvr && slot) {
+        switch( id ) {
+        case LoadRecent:
+            QObject::connect(pAction, SIGNAL(urlSelected(QUrl)), recvr, slot);
+            break;
+        case ChooseGameType:
+            QObject::connect(pAction, SIGNAL(triggered(int)), recvr, slot);
+            break;
+        default:
+            QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
+            break;
+        }
+    }
+    return pAction;
+
 }
 
 const char* KStandardGameAction::name( StandardGameAction id )
