@@ -8,7 +8,7 @@ remove_definitions(
 
 include(ECMMarkAsTest)
 
-configure_file(config-tests.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
+configure_file(config-tests.h.in ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
 
 MACRO(LIBKDEGAMESPRIVATE_UNIT_TESTS)
        FOREACH(_testname ${ARGN})

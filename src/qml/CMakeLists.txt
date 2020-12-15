@@ -4,11 +4,6 @@ set(corebindings_SRCS
     corebindingsplugin.cpp
     )
 
-INCLUDE_DIRECTORIES(
-        ${CMAKE_SOURCE_DIR}
-        ${CMAKE_BINARY_DIR}
-)
-
 add_library(corebindingsplugin SHARED ${corebindings_SRCS})
 target_link_libraries(corebindingsplugin KF5KDEGames Qt5::Qml)
 
