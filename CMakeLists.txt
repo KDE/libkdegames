@@ -5,8 +5,8 @@ set(KDEGAMES_SOVERSION 7)
 
 project(libkdegames)
 
-set (QT_MIN_VERSION "5.11.0")
-set (KF5_MIN_VERSION "5.64.0")
+set (QT_MIN_VERSION "5.12.0")
+set (KF5_MIN_VERSION "5.68.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
@@ -45,6 +45,7 @@ include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMMarkNonGuiExecutable)
 include(ECMGenerateExportHeader)
+include(ECMQtDeclareLoggingCategory)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
@@ -84,6 +85,7 @@ add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
     -DQT_DEPRECATED_WARNINGS_SINCE=0x060000
+    -DQT_NO_FOREACH
     -DQT_NO_KEYWORDS
     -DQT_NO_URL_CAST_FROM_STRING
     -DQT_NO_CAST_FROM_ASCII
@@ -95,9 +97,6 @@ add_definitions(
     -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x052e00
     -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
 )
-if(NOT Qt5_VERSION VERSION_LESS "5.12.0")
-    add_definitions(-DQT_NO_FOREACH)
-endif()
 
 add_subdirectory(src)
 

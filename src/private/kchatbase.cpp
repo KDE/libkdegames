@@ -32,7 +32,7 @@
 #include <QApplication>
 #include <QListView>
 
-Q_LOGGING_CATEGORY(GAMES_BACKGAMMON, "org.kde.games.backgammon", QtWarningMsg)
+Q_LOGGING_CATEGORY(GAMES_PRIVATE, "org.kde.games.private", QtWarningMsg)
 
 class KChatBasePrivate
 {
@@ -131,7 +131,7 @@ const QModelIndex KChatBase::indexAt(const QPoint& pos) const
 
 void KChatBase::customMenuHandler(const QPoint &pos)
 {
-    qCDebug(GAMES_BACKGAMMON) << "custom menu has been requested at position="<<pos<<". Implement handler at subclass if you need it.";
+    qCDebug(GAMES_PRIVATE) << "custom menu has been requested at position="<<pos<<". Implement handler at subclass if you need it.";
 }
 
 KChatBase::~KChatBase()

@@ -30,6 +30,27 @@ set(kdegames_LIB_SRCS
     kstandardgameaction.cpp
 )
 
+ecm_qt_export_logging_category(
+    IDENTIFIER GAMES_LIB
+    CATEGORY_NAME org.kde.games.lib
+    DESCRIPTION "libkdegames"
+    EXPORT KDEGAMES
+)
+
+ecm_qt_export_logging_category(
+    IDENTIFIER GAMES_UI
+    CATEGORY_NAME org.kde.games.ui
+    DESCRIPTION "libkdegames UI"
+    EXPORT KDEGAMES
+)
+
+ecm_qt_export_logging_category(
+    IDENTIFIER GAMES_HIGHSCORE
+    CATEGORY_NAME org.kde.games.highscore
+    DESCRIPTION "libkdegames Highscore"
+    EXPORT KDEGAMES
+)
+
 add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
 
 ecm_generate_export_header(KF5KDEGames
@@ -119,6 +140,20 @@ set(kdegamesprivate_LIB_SRCS
 
 ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
     private/kgamethemeselector.ui
+)
+
+ecm_qt_export_logging_category(
+    IDENTIFIER GAMES_PRIVATE
+    CATEGORY_NAME org.kde.games.private
+    DESCRIPTION "libkdegamesprivate"
+    EXPORT KDEGAMES
+)
+
+ecm_qt_export_logging_category(
+    IDENTIFIER GAMES_PRIVATE_KGAME
+    CATEGORY_NAME org.kde.games.private.kgame
+    DESCRIPTION "libkdegamesprivate KGame"
+    EXPORT KDEGAMES
 )
 
 add_library(KF5KDEGamesPrivate SHARED ${kdegamesprivate_LIB_SRCS})
@@ -215,4 +250,8 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h
     COMPONENT Devel
 )
 
-install(FILES libkdegames.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
+ecm_qt_install_logging_categories(
+    EXPORT KDEGAMES
+    FILE libkdegames.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
