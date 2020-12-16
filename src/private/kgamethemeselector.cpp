@@ -178,7 +178,7 @@ void KGameThemeSelector::KGameThemeSelectorPrivate::_k_updatePreview()
     QString descstr(QStringLiteral( "Description" ));
     QString emailstr;
     if (!seltheme->themeProperty(contactstr).isEmpty() ) {
-        emailstr = QString::fromLatin1( "<a href=\"mailto:%1\">%1</a>").arg(seltheme->themeProperty(contactstr));
+        emailstr = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(seltheme->themeProperty(contactstr));
     }
 
     ui.themeAuthor->setText(seltheme->themeProperty(authstr));

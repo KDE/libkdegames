@@ -66,7 +66,7 @@ class KConfig;
  * single player, so the "best times" of a player. To write highscores for a
  * specific player in a specific level you will have to use a more complex way:
  * \code
- * QString group = QString::fromLatin1( "%1_%2").arg(player).arg(level);
+ * QString group = QStringLiteral("%1_%2").arg(player).arg(level);
  * table->setGroup(group);
  * writeHighscore(table, player, level);
  * \endcode
