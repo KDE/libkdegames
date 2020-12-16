@@ -38,7 +38,6 @@ class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 	Q_PROPERTY(int hardness READ hardness)
 	Q_PROPERTY(QByteArray key READ key)
 	Q_PROPERTY(QString title READ title)
-	Q_ENUMS(StandardLevel)
 	Q_PROPERTY(StandardLevel standardLevel READ standardLevel)
 	public:
 		enum StandardLevel
@@ -53,6 +52,7 @@ class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 			ExtremelyHard = 70,
 			Impossible = 80
 		};
+		Q_ENUM(StandardLevel)
 
 		///Refer to the getters' documentation for details on the params.
 		KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title, bool isDefault = false);
