@@ -355,7 +355,6 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
  }
            
  int id = prop->id();
- QString name = propertyName(id);
  QString value;
 
  const type_info* t = prop->typeinfo();

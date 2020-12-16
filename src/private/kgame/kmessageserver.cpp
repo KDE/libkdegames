@@ -414,7 +414,6 @@ void KMessageServer::processOneMessage ()
 
   bool unknown = false;
 
-  QByteArray ttt=in_buffer.buffer();
   quint32 messageID;
   in_stream >> messageID;
   //qCDebug(GAMES_PRIVATE_KGAME) << ": got message with messageID=" << messageID;

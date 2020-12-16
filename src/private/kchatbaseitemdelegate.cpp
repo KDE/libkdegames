@@ -48,7 +48,6 @@ void KChatBaseItemDelegate::paint(QPainter *painter,
 				   const QString& message) const
 {
 //  qDebug() << "KChatBaseItemDelegate::paint";
- QFontMetrics fm = painter->fontMetrics();
  painter->setFont(((KChatBaseModel*)index.model())->nameFont());
  painter->drawText(option.rect.x(), 
 		   QFontMetrics(option.font).height()+option.rect.y(), i18n("%1: ",sender));
