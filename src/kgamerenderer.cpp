@@ -40,7 +40,7 @@ static const QString cacheName(QByteArray theme)
 	if (theme.endsWith(QByteArray(".desktop")))
 		theme.chop(8); //8 = strlen(".desktop")
 	return QStringLiteral("kgamerenderer-%1-%2")
-		.arg(appName).arg(QString::fromUtf8(theme));
+		.arg(appName, QString::fromUtf8(theme));
 }
 
 KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider* provider, unsigned cacheSize, KGameRenderer* parent)

@@ -296,7 +296,7 @@ QString KHighscore::group() const
         return (d->global ? QString() : QStringLiteral(GROUP));
     return (d->global ?
             highscoreGroup() :
-            QStringLiteral( "%1_%2").arg( QStringLiteral( GROUP )).arg(highscoreGroup()));
+            QStringLiteral( "%1_%2").arg( QStringLiteral(GROUP), highscoreGroup()));
 }
 
 bool KHighscore::hasTable() const
