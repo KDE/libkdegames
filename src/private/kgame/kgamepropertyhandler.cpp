@@ -354,7 +354,6 @@ QString KGamePropertyHandler::propertyValue(KGamePropertyBase* prop)
          return i18n("NULL pointer");
  }
            
- int id = prop->id();
  QString value;
 
  const type_info* t = prop->typeinfo();
