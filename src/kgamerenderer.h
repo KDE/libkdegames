@@ -223,7 +223,6 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		friend class KGameRendererClient;
 		friend class KGameRendererClientPrivate;
 		KGameRendererPrivate* const d;
-		Q_PRIVATE_SLOT(d, void _k_setTheme(const KgTheme*));
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameRenderer::Strategies)

@@ -38,7 +38,7 @@ KGpiMainWindow::KGpiMainWindow()
     connect(m_popupItem, &KGamePopupItem::linkActivated, this, &KGpiMainWindow::onLinkClicked);
     m_textItem = new QGraphicsSimpleTextItem;
 
-    actionCollection()->addAction( KStandardAction::Quit, this, SLOT(close()) );
+    KStandardAction::quit(this, &KGpiMainWindow::close, actionCollection());
 
     m_scene = new QGraphicsScene;
     m_scene->setSceneRect( -1000, -1000, 2000, 2000 );
@@ -128,7 +128,7 @@ void KGpiMainWindow::onLinkClicked(const QString& link)
     m_textItem->setPos( visibleRect.left()+visibleRect.width()/2-m_textItem->boundingRect().width()/2,
                         visibleRect.top()+visibleRect.height()/2 );
     m_textItem->show();
-    QTimer::singleShot(2000, this, SLOT(hideTextItem()));
+    QTimer::singleShot(2000, this, &KGpiMainWindow::hideTextItem);
 }
 
 void KGpiMainWindow::hideTextItem()

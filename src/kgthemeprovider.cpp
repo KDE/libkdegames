@@ -60,7 +60,7 @@ KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 {
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
-	connect(this, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(updateThemeName()));
+	connect(this, &KgThemeProvider::currentThemeChanged, this, [this]() { d->updateThemeName(); });
 }
 
 KgThemeProvider::~KgThemeProvider()

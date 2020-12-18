@@ -70,7 +70,8 @@ KGameRenderer::KGameRenderer(KgThemeProvider* provider, unsigned cacheSize)
 	{
 		provider->setParent(this);
 	}
-	connect(provider, SIGNAL(currentThemeChanged(const KgTheme*)), SLOT(_k_setTheme(const KgTheme*)));
+	connect(provider, &KgThemeProvider::currentThemeChanged,
+                this, [this](const KgTheme *theme) { d->_k_setTheme(theme); });
 }
 
 static KgThemeProvider* providerForSingleTheme(KgTheme* theme, QObject* parent)

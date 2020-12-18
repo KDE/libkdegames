@@ -115,7 +115,8 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	m_menu = new KSelectAction(QIcon::fromTheme( QStringLiteral( "games-difficult") ), i18nc("Game difficulty level", "Difficulty" ), window);
 	m_menu->setToolTip(i18n("Set the difficulty level"));
 	m_menu->setWhatsThis(i18n("Set the difficulty level of the game."));
-	QObject::connect(m_menu, SIGNAL(triggered(int)), this, SLOT(changeSelection(int)));
+	connect(m_menu, QOverload<int>::of(&KSelectAction::triggered),
+	        this, &KGameDifficultyPrivate::changeSelection);
 	m_menu->setObjectName( QStringLiteral("options_game_difficulty" ));
 	window->actionCollection()->addAction(m_menu->objectName(), m_menu);
 
@@ -123,7 +124,8 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 
 	m_comboBox = new KComboBox(window);
 	m_comboBox->setToolTip(i18n("Difficulty"));
-	QObject::connect(m_comboBox, SIGNAL(activated(int)), this, SLOT(changeSelection(int)));
+	connect(m_comboBox, QOverload<int>::of(&QComboBox::activated),
+	        this, &KGameDifficultyPrivate::changeSelection);
 	window->statusBar()->addPermanentWidget(m_comboBox);
 
 	KGameDifficulty::setRestartOnChange(KGameDifficulty::RestartOnChange);

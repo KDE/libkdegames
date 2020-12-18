@@ -77,10 +77,10 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 	const QSize scrollBarSizeHint = d->m_list->verticalScrollBar()->sizeHint();
 	d->m_list->setMinimumSize(itemSizeHint.width() + 2 * scrollBarSizeHint.width(), 4.1 * itemSizeHint.height());
 	//monitor change selection in both directions
-	connect(d->m_provider, SIGNAL(currentThemeChanged(const KgTheme*)),
-		SLOT(_k_updateListSelection(const KgTheme*)));
-	connect(d->m_list, SIGNAL(itemSelectionChanged()),
-		SLOT(_k_updateProviderSelection()));
+	connect(d->m_provider, &KgThemeProvider::currentThemeChanged,
+		this, [this](const KgTheme* theme) { d->_k_updateListSelection(theme); });
+	connect(d->m_list, &QListWidget::itemSelectionChanged,
+		this, [this]() { d->_k_updateProviderSelection(); });
 	//setup main layout
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->setContentsMargins(0, 0, 0, 0);
@@ -91,7 +91,8 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 		d->m_knsButton = new QPushButton(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")),
 			i18n("Get New Themes..."), this);
 		layout->addWidget(d->m_knsButton);
-		connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));
+		connect(d->m_knsButton, &QAbstractButton::clicked,
+		        this, [this]() { d->_k_showNewStuffDialog(); });
 	}
 
 }

@@ -143,7 +143,6 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 	private:
 		class Private;
 		Private* const d;
-		Q_PRIVATE_SLOT(d, void updateThemeName());
 };
 
 Q_DECLARE_METATYPE(KgThemeProvider*)

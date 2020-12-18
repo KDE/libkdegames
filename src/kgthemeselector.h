@@ -66,10 +66,6 @@ class KDEGAMES_EXPORT KgThemeSelector : public QWidget
 		class Dialog;
 		class Private;
 		Private* const d;
-
-		Q_PRIVATE_SLOT(d, void _k_updateListSelection(const KgTheme*));
-		Q_PRIVATE_SLOT(d, void _k_updateProviderSelection());
-		Q_PRIVATE_SLOT(d, void _k_showNewStuffDialog());
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KgThemeSelector::Options)

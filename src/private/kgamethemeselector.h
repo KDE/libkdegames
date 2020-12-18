@@ -74,10 +74,6 @@ class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
         KGameThemeSelectorPrivate* const d;
 
         Q_DISABLE_COPY(KGameThemeSelector)
-
-        Q_PRIVATE_SLOT(d, void _k_updatePreview())
-        Q_PRIVATE_SLOT(d, void _k_updateThemeList(const QString&))
-        Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
 };
 
 #endif
