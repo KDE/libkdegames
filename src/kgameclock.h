@@ -22,8 +22,10 @@
 #ifndef __KGAMECLOCK_H
 #define __KGAMECLOCK_H
 
-#include <QObject>
+// own
 #include <libkdegames_export.h>
+// Qt
+#include <QObject>
 
 class KGameClockPrivate;
 

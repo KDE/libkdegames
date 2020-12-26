@@ -19,13 +19,15 @@
 #ifndef KGAMERENDERER_P_H
 #define KGAMERENDERER_P_H
 
+// KF
+#include <KImageCache>
+// Qt
 #include <QHash>
 #include <QMetaType>
 #include <QMutex>
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSvgRenderer>
-#include <KImageCache>
 
 namespace KGRInternal
 {

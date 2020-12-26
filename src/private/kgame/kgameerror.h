@@ -21,6 +21,7 @@
 #ifndef __KGAMEERROR_H_
 #define __KGAMEERROR_H_
 
+// Qt
 #include <QString>
 
 /**

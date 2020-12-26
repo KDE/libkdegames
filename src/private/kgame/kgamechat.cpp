@@ -20,14 +20,14 @@
 
 #include "kgamechat.h"
 
-
+// own
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgameproperty.h"
 #include "kgamemessage.h"
-
+// KF
 #include <KLocalizedString>
-
+// Qt
 #include <QMap>
 
 //FIXME:

@@ -18,12 +18,13 @@
 
 #include "kgsound.h"
 
-#include <sndfile.hh>
-
-#include <QDebug>
-
+// own
 #include "kgopenalruntime_p.h"
 #include "virtualfileqt-openal.h"
+// Qt
+#include <QDebug>
+// sndfile
+#include <sndfile.hh>
 
 class Q_DECL_HIDDEN KgSound::Private
 {

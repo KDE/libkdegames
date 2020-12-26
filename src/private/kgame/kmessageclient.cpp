@@ -19,15 +19,16 @@
 
 #include "kmessageclient.h"
 
-#include <stdio.h>
-
+// own
+#include "kmessageio.h"
+#include "kmessageserver.h"
+// Qt
 #include <QBuffer>
 #include <QTimer>
 #include <QList>
 #include <QDataStream>
-
-#include "kmessageio.h"
-#include "kmessageserver.h"
+// Std
+#include <cstdio>
 
 class KMessageClientPrivate
 {

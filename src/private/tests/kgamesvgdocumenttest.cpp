@@ -19,9 +19,9 @@
 #include "kgamesvgdocumenttest.h"
 #include "kgamesvgdocument_p.h"
 
+// own
 #include <config-tests.h>
-
-#include <QtCore>
+// Qt
 #include <QTest>
 
 void tst_KGameSvgDocument::initTestCase()

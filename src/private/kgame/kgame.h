@@ -21,14 +21,16 @@
 #ifndef __KGAME_H_
 #define __KGAME_H_
 
+// own
+#include "kgamenetwork.h"
+#include "libkdegamesprivate_export.h"
+// KF
+#include <kcoreaddons_export.h> // for KCOREADDONS_ENABLE_DEPRECATED_SINCE
+// Qt
 #include <QDataStream>
 #include <QString>
 #include <QList>
 #include <QLoggingCategory>
-
-#include "kgamenetwork.h"
-#include "libkdegamesprivate_export.h"
-#include <kcoreaddons_export.h> // for KCOREADDONS_ENABLE_DEPRECATED_SINCE
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 

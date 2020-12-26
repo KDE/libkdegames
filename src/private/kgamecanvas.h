@@ -31,6 +31,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  Author: Maurizio Monge <maurizio.monge@gmail.com>
  */
 
+// own
+#include "libkdegamesprivate_export.h"
+#include "kgamerendererclient.h"
+// Qt
 #include <QList>
 #include <QPoint>
 #include <QPicture>
@@ -39,8 +43,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QRect>
 #include <QRegion>
 #include <QWidget>
-#include "libkdegamesprivate_export.h"
-#include <KGameRendererClient>
 
 class KGameCanvasItem;
 

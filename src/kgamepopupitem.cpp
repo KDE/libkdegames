@@ -16,6 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ********************************************************************/
 #include "kgamepopupitem.h"
+
+// KF
+#include <KColorScheme>
+// Qt
 #include <QPainter>
 #include <QTimeLine>
 #include <QTimer>
@@ -23,8 +27,6 @@
 #include <QGraphicsView>
 #include <QGraphicsTextItem>
 #include <QIcon>
-
-#include <KColorScheme>
 
 // margin on the sides of message box
 static const int MARGIN = 15;

@@ -18,12 +18,13 @@
 
 #include "kgtheme.h"
 
+// KF
+#include <KConfig>
+#include <KConfigGroup>
+// Qt
 #include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
-
-#include <KConfig>
-#include <KConfigGroup>
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 

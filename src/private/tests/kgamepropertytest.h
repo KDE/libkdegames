@@ -19,11 +19,12 @@
 #ifndef KGAMEPROPERTYTEST_H
 #define KGAMEPROPERTYTEST_H
 
-#include <QDataStream>
-
+// own
 #define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
 #include "kgame/kgame.h"
 #include "kgame/kgamepropertyhandler.h"
+// Qt
+#include <QDataStream>
 
 /// @brief A test class for KGameSvgDigits
 class tst_KGamePropertyTest : public QObject

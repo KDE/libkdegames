@@ -19,12 +19,15 @@
 */
 
 #include "kchatbase.h"
+
+// own
 #include "kchatbasemodel.h"
 #include "kchatbaseitemdelegate.h"
-
+// KF
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <KConfig>
+// Qt
 #include <QLayout>
 #include <QComboBox>
 #include <QPixmap>

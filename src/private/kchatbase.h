@@ -20,11 +20,13 @@
 #ifndef __KCHATBASE_H__
 #define __KCHATBASE_H__
 
+// own
+#include "libkdegamesprivate_export.h"
+// KF
+#include <KCompletion>
+// Qt
 #include <QFrame>
 #include <QLoggingCategory>
-
-#include <KCompletion>
-#include "libkdegamesprivate_export.h"
 
 class KConfig;
 

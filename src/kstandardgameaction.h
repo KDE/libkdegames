@@ -22,6 +22,7 @@
 #ifndef KSTANDARDGAMEACTION_H
 #define KSTANDARDGAMEACTION_H
 
+// own
 #include <libkdegames_export.h>
 // KF
 #include <kwidgetsaddons_version.h>

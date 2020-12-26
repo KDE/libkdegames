@@ -19,13 +19,14 @@
 #include "kgthemeprovider.h"
 #include "kgimageprovider_p.h"
 
-#include <QFileInfo>
-#include <QStandardPaths>
-#include <QGuiApplication>
-
+// KF
 #include <KConfig>
 #include <KConfigGroup>
 #include <KSharedConfig>
+// Qt
+#include <QFileInfo>
+#include <QStandardPaths>
+#include <QGuiApplication>
 
 class Q_DECL_HIDDEN KgThemeProvider::Private
 {

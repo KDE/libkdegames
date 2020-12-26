@@ -18,15 +18,16 @@
 
 #include "kgamepopupitemtest.h"
 
+// KF
 #include <KActionCollection>
-
-#include <QGraphicsScene>
-#include <QTimer>
 #include <KFileDialog>
 #include <KColorScheme>
-#include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
+// Qt
+#include <QGraphicsScene>
+#include <QTimer>
+#include <QApplication>
 #include <QCommandLineParser>
 
 KGpiMainWindow::KGpiMainWindow()

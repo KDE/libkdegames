@@ -19,8 +19,10 @@
 */
 
 #include "kgameerror.h"
-#include "kgamemessage.h"
 
+// own
+#include "kgamemessage.h"
+// KF
 #include <KLocalizedString>
 
 QByteArray KGameError::errVersion(int remoteVersion)

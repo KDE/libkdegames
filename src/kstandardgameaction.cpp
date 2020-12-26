@@ -20,14 +20,16 @@
 
 #include "kstandardgameaction.h"
 
+// KF
 #include <KLocalizedString>
-#include <QAction>
 #include <KActionCollection>
 #include <KStandardShortcut>
 #include <KToggleAction>
 #include <KConfig>
-#include <QIcon>
 #include <KRecentFilesAction>
+// Qt
+#include <QAction>
+#include <QIcon>
 
 #undef I18N_NOOP2
 #define I18N_NOOP2(ctx,txt) ctx, txt

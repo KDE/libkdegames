@@ -19,10 +19,10 @@
 #ifndef KGDECLARATIVEVIEW_H
 #define KGDECLARATIVEVIEW_H
 
-#include <QQuickWidget>
-
+// own
 #include <libkdegames_export.h>
-
+// Qt
+#include <QQuickWidget>
 
 /**
  * @class KgDeclarativeView

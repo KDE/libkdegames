@@ -19,14 +19,15 @@
 #ifndef KGTHEMEPROVIDER_H
 #define KGTHEMEPROVIDER_H
 
+// own
+#include "kgtheme.h"
+#include <libkdegames_export.h>
+// Qt
 #include <QObject>
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QDir>
 #include <QPointer>
-
-#include <kgtheme.h>
-#include <libkdegames_export.h>
 
 /**
  * @class KgThemeProvider kgthemeprovider.h <KgThemeProvider>

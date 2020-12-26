@@ -18,9 +18,11 @@
 
 #include "kgimageprovider_p.h"
 
+// own
+#include "kgthemeprovider.h"
+// Qt
 #include <QPainter>
 #include <QGuiApplication>
-#include <KgThemeProvider>
 
 KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
     QQuickImageProvider(Image),

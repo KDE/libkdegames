@@ -17,9 +17,11 @@
  ***************************************************************************/
 
 #include "kgamerendererclient.h"
+
+// own
 #include "kgamerenderer.h"
 #include "kgamerenderer_p.h"
-
+// Qt
 #include <QTimer>
 
 KGameRendererClientPrivate::KGameRendererClientPrivate(KGameRenderer* renderer, const QString& spriteKey, KGameRendererClient* parent)

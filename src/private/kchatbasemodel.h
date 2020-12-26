@@ -20,11 +20,12 @@
 #ifndef __KCHATBASEMODEL_H__
 #define __KCHATBASEMODEL_H__
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QAbstractListModel>
 #include <QPair>
 #include <QLoggingCategory>
-
-#include "libkdegamesprivate_export.h"
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 

@@ -18,9 +18,12 @@
 */
 
 #include "kchatbaseitemdelegate.h"
-#include "kchatbasemodel.h"
 
+// own
+#include "kchatbasemodel.h"
+// KF
 #include <KLocalizedString>
+// Qt
 #include <QPainter>
 #include <QDebug>
 

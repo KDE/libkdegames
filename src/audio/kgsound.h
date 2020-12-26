@@ -19,10 +19,11 @@
 #ifndef KGSOUND_H
 #define KGSOUND_H
 
+// own
+#include <libkdegames_export.h>
+// Qt
 #include <QObject>
 #include <QPointF>
-
-#include <libkdegames_export.h>
 
 class PlaybackEvent;
 

@@ -20,9 +20,10 @@
 #ifndef KGAMETHEMESELECTOR_H
 #define KGAMETHEMESELECTOR_H
 
-#include <QWidget>
-
+// own
 #include "libkdegamesprivate_export.h"
+// Qt
+#include <QWidget>
 
 class KGameTheme;
 class KConfigSkeleton;

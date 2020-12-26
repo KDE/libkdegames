@@ -19,9 +19,10 @@
 
 #include "kgametheme.h"
 
+// KF
 #include <KConfig>
 #include <KConfigGroup>
-
+// Qt
 #include <QFile>
 #include <QFileInfo>
 #include <QMap>

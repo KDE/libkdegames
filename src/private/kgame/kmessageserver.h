@@ -20,9 +20,11 @@
 #ifndef __KMESSAGESERVER_H__
 #define __KMESSAGESERVER_H__
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QObject>
 #include <QString>
-#include "libkdegamesprivate_export.h"
 
 class KMessageIO;
 class KMessageServerPrivate;

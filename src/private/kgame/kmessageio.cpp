@@ -22,10 +22,13 @@
 */
 
 #include "kmessageio.h"
+
+// Qt
 #include <QTcpSocket>
 #include <KProcess>
 #include <QFile>
 #include <QDataStream>
+
 // ----------------------- KMessageIO -------------------------
 
 KMessageIO::KMessageIO (QObject *parent)

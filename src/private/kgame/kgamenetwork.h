@@ -21,9 +21,11 @@
 #ifndef __KGAMENETWORK_H_
 #define __KGAMENETWORK_H_
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QString>
 #include <QObject>
-#include "libkdegamesprivate_export.h"
 
 class KGameIO;
 class KMessageIO;

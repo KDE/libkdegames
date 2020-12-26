@@ -19,10 +19,12 @@
 #ifndef KGAMEPOPUPITEM_TEST_H
 #define KGAMEPOPUPITEM_TEST_H
 
-#include <KXmlGuiWindow>
-
+// own
 #include "ui_kgamepopupitemtest.h"
+// KDEGames
 #include <KGamePopupItem>
+// KF
+#include <KXmlGuiWindow>
 
 class QGraphicsScene;
 class QGraphicsSimpleTextItem;

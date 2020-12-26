@@ -19,9 +19,10 @@
 #ifndef KGAUDIOSCENE_H
 #define KGAUDIOSCENE_H
 
-#include <QPointF>
-
+// own
 #include <libkdegames_export.h>
+// Qt
+#include <QPointF>
 
 /**
  * @namespace KgAudioScene

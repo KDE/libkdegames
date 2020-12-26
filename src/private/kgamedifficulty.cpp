@@ -11,19 +11,16 @@ You should have received a copy of the GNU Library General Public License along 
 
 #include "kgamedifficulty.h"
 
-
-
-
-
+// KF
 #include <KActionCollection>
 #include <KComboBox>
-#include <QIcon>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <QStatusBar>
 #include <KSelectAction>
-#include <kxmlguiwindow.h>
-
+#include <KXmlGuiWindow>
+// Qt
+#include <QIcon>
+#include <QStatusBar>
 
 
 class KGameDifficultyPrivate : public QObject

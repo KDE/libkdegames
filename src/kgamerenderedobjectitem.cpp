@@ -17,8 +17,10 @@
  ***************************************************************************/
 
 #include "kgamerenderedobjectitem.h"
-#include "kgamerenderer.h"
 
+// own
+#include "kgamerenderer.h"
+// Qt
 #include <QtMath>
 #include <QGraphicsView>
 

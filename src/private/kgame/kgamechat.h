@@ -21,10 +21,12 @@
 #ifndef __KGAMECHAT_H__
 #define __KGAMECHAT_H__
 
-#include <QString>
-
+// own
 #include "../kchatbase.h"
 #include "libkdegamesprivate_export.h"
+// Qt
+#include <QString>
+
 class KPlayer;
 class KGame;
 class KGamePropertyBase;

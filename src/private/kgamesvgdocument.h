@@ -24,13 +24,14 @@
 #ifndef _KGAMESVGDOCUMENT_H_
 #define _KGAMESVGDOCUMENT_H_
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QHash>
 #include <QStringList>
 #include <QTransform>
 #include <QDomDocument>
 #include <QLoggingCategory>
-
-#include "libkdegamesprivate_export.h"
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 

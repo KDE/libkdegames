@@ -20,7 +20,7 @@
 
 #include "kgamesequence.h"
 
-
+// own
 #include "kplayer.h"
 #include "kgame.h"
 

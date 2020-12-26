@@ -19,6 +19,7 @@
 #ifndef LIBKDEGAMES_COLORPROXY_P_H
 #define LIBKDEGAMES_COLORPROXY_P_H
 
+// Qt
 #include <QHash>
 #include <QPaintDevice>
 #include <QPaintEngine>

@@ -20,14 +20,15 @@
 #include "kmessageserver.h"
 #include "kmessageserver_p.h"
 
+// own
+#include "kmessageio.h"
+// Qt
 #include <QIODevice>
 #include <QBuffer>
 #include <QList>
 #include <QQueue>
 #include <QTimer>
 #include <QDataStream>
-
-#include "kmessageio.h"
 
 // --------------- internal class KMessageServerSocket
 

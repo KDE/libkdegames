@@ -20,6 +20,7 @@
 
 #include "kgamemessage.h"
 
+// KF
 #include <KLocalizedString>
 
 #define MESSAGE_VERSION 2

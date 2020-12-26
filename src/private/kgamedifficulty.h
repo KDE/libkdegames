@@ -12,17 +12,15 @@ You should have received a copy of the GNU Library General Public License along 
 #ifndef KGAMEDIFFICULTY_H
 #define KGAMEDIFFICULTY_H
 
-
-
-class QObject;
-
-
-class KGameDifficultyPrivate;
-class KXmlGuiWindow;
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QMap>
 #include <QPair>
-#include "libkdegamesprivate_export.h"
 
+class QObject;
+class KGameDifficultyPrivate;
+class KXmlGuiWindow;
 
 
 /**

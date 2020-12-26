@@ -21,8 +21,9 @@
 #ifndef KHIGHSCORE_H
 #define KHIGHSCORE_H
 
+// own
 #include <libkdegames_export.h>
-
+// Qt
 #include <QObject>
 #include <QLoggingCategory>
 

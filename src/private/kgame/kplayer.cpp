@@ -19,18 +19,20 @@
 */
 
 #include "kplayer.h"
+
+// own
 #include "kgame.h"
 #include "kgameio.h"
 #include "kgamemessage.h"
 #include "kgameproperty.h"
 #include "kgamepropertyhandler.h"
-
+// KF
 #include <KLocalizedString>
-
+// Qt
 #include <QBuffer>
-
-#include <stdio.h>
-#include <assert.h>
+// Std
+#include <cstdio>
+#include <cassert>
 
 #define KPLAYER_LOAD_COOKIE 7285
 

@@ -21,10 +21,11 @@
 #ifndef KGDIFFICULTY_H
 #define KGDIFFICULTY_H
 
+// own
+#include <libkdegames_export.h>
+// Qt
 #include <QMetaType>
 #include <QObject>
-
-#include <libkdegames_export.h>
 
 /**
  * @class KgDifficultyLevel kgdifficulty.h <KgDifficultyLevel>

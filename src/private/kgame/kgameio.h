@@ -21,10 +21,11 @@
 #ifndef __KGAMEIO_H__
 #define __KGAMEIO_H__
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QString>
 #include <QObject>
-
-#include "libkdegamesprivate_export.h"
 
 class QEvent;
 class QGraphicsScene;

@@ -21,8 +21,10 @@
 #ifndef __KGAMEMESSAGE_H_
 #define __KGAMEMESSAGE_H_
 
-#include <QDataStream>
+// own
 #include "libkdegamesprivate_export.h"
+// Qt
+#include <QDataStream>
 
 /**
  * \class KGameMessage kgamemessage.h <KGame/KGameMessage>

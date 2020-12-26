@@ -19,9 +19,11 @@
 #ifndef LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H
 #define LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H
 
+// Qt
+#include <QFile>
+// sndfile
 #include <sndfile.hh>
 
-#include <QFile>
 
 class VirtualFileQt
 {

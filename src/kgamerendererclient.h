@@ -19,9 +19,10 @@
 #ifndef KGAMERENDERERCLIENT_H
 #define KGAMERENDERERCLIENT_H
 
-#include <QPixmap>
-
+// own
 #include <libkdegames_export.h>
+// Qt
+#include <QPixmap>
 
 class KGameRendererClientPrivate;
 class KGameRenderer;

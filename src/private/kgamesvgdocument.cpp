@@ -19,16 +19,17 @@
 #include "kgamesvgdocument.h"
 #include "kgamesvgdocument_p.h"
 
+// KF
 #include <KFilterDev>
-
+// Qt
 #include <QBuffer>
 #include <QFile>
 #include <QString>
 #include <QDomElement>
 #include <QDomNode>
 #include <QDebug>
-
-#include <math.h>
+// Std
+#include <cmath>
 
 //
 // Public

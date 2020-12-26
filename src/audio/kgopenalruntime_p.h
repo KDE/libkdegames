@@ -19,6 +19,7 @@
 #ifndef KGOPENALRUNTIME_P_H
 #define KGOPENALRUNTIME_P_H
 
+// Qt
 #include <QHash>
 #include <QPointF>
 //OpenAL includes (without "AL/" include directory; see FindOpenAL.cmake)

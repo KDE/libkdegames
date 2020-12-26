@@ -21,10 +21,11 @@
 #ifndef __KPLAYER_H_
 #define __KPLAYER_H_
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QObject>
 #include <QList>
-
-#include "libkdegamesprivate_export.h"
 
 class KGame;
 class KGameIO;

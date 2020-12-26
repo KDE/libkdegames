@@ -19,6 +19,7 @@
 #ifndef COREBINDINGSPLUGIN_H
 #define COREBINDINGSPLUGIN_H
 
+// Qt
 #include <QQmlExtensionPlugin>
 
 class CoreBindingsPlugin : public QQmlExtensionPlugin

@@ -19,10 +19,11 @@
 #ifndef KGTHEMESELECTOR_H
 #define KGTHEMESELECTOR_H
 
-#include <QWidget>
-#include <kgthemeprovider.h>
-
+// own
+#include "kgthemeprovider.h"
 #include <libkdegames_export.h>
+// Qt
+#include <QWidget>
 
 /**
  * @class KgThemeSelector kgthemeselector.h <KgThemeSelector>

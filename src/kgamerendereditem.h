@@ -19,11 +19,12 @@
 #ifndef KGAMERENDEREDITEM_H
 #define KGAMERENDEREDITEM_H
 
+// own
+#include "kgamerendererclient.h"
+#include <libkdegames_export.h>
+// Qt
 #include <QObject>
 #include <QGraphicsItem>
-
-#include <kgamerendererclient.h>
-#include <libkdegames_export.h>
 
 class KGameRenderedItemPrivate;
 

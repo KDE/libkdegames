@@ -20,23 +20,22 @@
 
 #include "kgdifficulty.h"
 
-#include <QVector>
+// KF
 #include <KConfigGroup>
 #include <KGuiItem>
 #include <KMessageBox>
-//the following only used by KgDifficultyGUI
 #include <KActionCollection>
 #include <KComboBox>
 #include <KSelectAction>
 #include <KXmlGuiWindow>
-
+#include <KLocalizedString>
+#include <KSharedConfig>
+// Qt
+#include <QVector>
 #include <QCoreApplication>
 #include <QIcon>
 #include <QGlobalStatic>
 #include <QStatusBar>
-
-#include <KLocalizedString>
-#include <KSharedConfig>
 
 //BEGIN KgDifficultyLevel
 

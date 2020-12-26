@@ -19,9 +19,10 @@
 #ifndef __KCHATBASEITEMDELEGATE_H__
 #define __KCHATBASEITEMDELEGATE_H__
 
-#include <QAbstractItemDelegate>
-
+// own
 #include "libkdegamesprivate_export.h"
+// Qt
+#include <QAbstractItemDelegate>
 
 /**
  * \class KChatBaseItemDelegate kchatbaseitemdelegate.h <KChatBaseItemDelegate>

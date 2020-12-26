@@ -19,15 +19,17 @@
 */
 
 #include "khighscore.h"
-#include <config-highscore.h>
 
+// own
+#include <config-highscore.h>
+// KF
 #include <KSharedConfig>
 #include <KConfig>
 #include <KStandardGuiItem>
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KConfigGroup>
-
+// Qt
 #include <QFile>
 #include <QLockFile>
 #include <QGlobalStatic>

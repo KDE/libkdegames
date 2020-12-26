@@ -20,21 +20,21 @@
 
 #include "kgameio.h"
 
+// own
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgamemessage.h"
 #include "kmessageio.h"
-
+// Qt
 #include <QWidget>
 #include <QBuffer>
 #include <QTimer>
-//Added by qt3to4:
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QEvent>
-
-#include <stdlib.h>
+// Std
+#include <cstdlib>
 
 class KGameIOPrivate
 {

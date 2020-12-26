@@ -18,6 +18,7 @@
 
 #include "corebindingsplugin.h"
 
+// own
 #include <KgThemeProvider>
 
 void CoreBindingsPlugin::registerTypes(const char *uri)

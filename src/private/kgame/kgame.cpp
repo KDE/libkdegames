@@ -20,25 +20,25 @@
 
 #include "kgame.h"
 
+// own
 #include "kgamepropertyhandler.h"
 #include "kgameproperty.h"
 #include "kplayer.h"
 #include "kgameio.h"
 #include "kgameerror.h"
 #include "kgamesequence.h"
-
 #include "kgamemessage.h"
-
-#include <stdio.h>
-#include <assert.h>
-
+// KF
+#include <KLocalizedString>
+#include <KRandomSequence>
+// Qt
 #include <QBuffer>
 #include <QTimer>
 #include <QFile>
 #include <QQueue>
-
-#include <KLocalizedString>
-#include <KRandomSequence>
+// Std
+#include <cstdio>
+#include <cassert>
 
 #define KGAME_LOAD_COOKIE 4210
 

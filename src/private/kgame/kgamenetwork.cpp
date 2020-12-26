@@ -20,16 +20,16 @@
 
 #include "kgamenetwork.h"
 
+// own
 #include "kgamemessage.h"
 #include "kgameerror.h"
-
 #include "kmessageserver.h"
 #include "kmessageclient.h"
 #include "kmessageio.h"
-#include <dnssd/publicservice.h>
-
+// KF
+#include <DNSSD/PublicService>
+// Qt
 #include <QBuffer>
-//Added by qt3to4:
 #include <QList>
 
 class KGameNetworkPrivate

@@ -19,17 +19,18 @@
 
 #include "kgamethemeselector.h"
 
-#include <QIcon>
+// own
+#include "ui_kgamethemeselector.h"
+#include "kgametheme.h"
+// KF
 #include <KConfigSkeleton>
 #include <KNS3/DownloadDialog>
-
+// Qt
+#include <QIcon>
 #include <QDirIterator>
 #include <QDir>
 #include <QStandardPaths>
 #include <QCoreApplication>
-
-#include "ui_kgamethemeselector.h"
-#include "kgametheme.h"
 
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(4, 9)
 

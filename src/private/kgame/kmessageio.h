@@ -24,13 +24,14 @@
 #ifndef _KMESSAGEIO_H_
 #define _KMESSAGEIO_H_
 
+// own
+#include "libkdegamesprivate_export.h"
+// Qt
 #include <QObject>
 #include <QProcess>
 #include <QString>
 #include <QHostAddress>
 #include <QLoggingCategory>
-
-#include "libkdegamesprivate_export.h"
 
 /*
     This macro shouldn't be here ideally. Already declared in kgame.h, but throws error if not placed here.

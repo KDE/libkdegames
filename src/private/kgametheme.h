@@ -20,8 +20,9 @@
 #ifndef KGAMETHEME_H
 #define KGAMETHEME_H
 
+// own
 #include "libkdegamesprivate_export.h"
-
+// Qt
 #include <QString>
 #include <QLoggingCategory>
 

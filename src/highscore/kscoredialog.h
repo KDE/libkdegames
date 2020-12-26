@@ -26,12 +26,12 @@ this software.
 #ifndef KSCOREDIALOG_H
 #define KSCOREDIALOG_H
 
+// own
 #include <libkdegames_export.h>
-
+// Qt
 #include <QMap>
 #include <QFlags>
 #include <QDialogButtonBox>
-
 #include <QDialog>
 
 class KgDifficulty;

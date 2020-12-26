@@ -21,9 +21,10 @@
 #ifndef __KGAMESEQUENCE_H_
 #define __KGAMESEQUENCE_H_
 
-#include <QObject>
-
+// own
 #include "libkdegamesprivate_export.h"
+// Qt
+#include <QObject>
 
 class KPlayer;
 class KGame;

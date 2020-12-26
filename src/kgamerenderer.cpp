@@ -18,11 +18,13 @@
 
 #include "kgamerenderer.h"
 #include "kgamerenderer_p.h"
+
+// own
 #include "kgamerendererclient.h"
 #include "colorproxy_p.h"
 #include "kgtheme.h"
 #include "kgthemeprovider.h"
-
+// Qt
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>

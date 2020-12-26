@@ -19,6 +19,8 @@
 */
 
 #include "kgameproperty.h"
+
+// own
 #include "kgamepropertyhandler.h"
 #include "kgamemessage.h"
 #include "kplayer.h"

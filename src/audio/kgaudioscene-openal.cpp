@@ -17,8 +17,10 @@
  ***************************************************************************/
 
 #include "kgaudioscene.h"
-#include "kgopenalruntime_p.h"
 
+// own
+#include "kgopenalruntime_p.h"
+// Qt
 #include <QDebug>
 #include <QGlobalStatic>
 

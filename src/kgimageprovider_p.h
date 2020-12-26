@@ -19,6 +19,7 @@
 #ifndef KGIMAGEPROVIDER_H
 #define KGIMAGEPROVIDER_H
 
+// Qt
 #include <QQuickImageProvider>
 #include <QSvgRenderer>
 

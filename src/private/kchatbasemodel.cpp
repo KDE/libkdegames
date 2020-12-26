@@ -20,10 +20,11 @@
 
 #include "kchatbasemodel.h"
 
+// KF
 #include <KConfig>
 #include <KConfigGroup>
 #include <KSharedConfig>
-
+// Qt
 #include <QFont>
 
 class KChatBaseMessagePrivate

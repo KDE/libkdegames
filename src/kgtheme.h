@@ -24,12 +24,13 @@
 #define KGTHEME_PROVIDE_COMPATIBILITY_API
 #endif //MAKE_KDEGAMES_LIB
 
+// own
+#include <libkdegames_export.h>
+// Qt
 #include <QMetaType>
 #include <QObject>
 #include <QLoggingCategory>
 #include <QPixmap>
-
-#include <libkdegames_export.h>
 
 /**
  * @class KgTheme kgtheme.h <KgTheme>

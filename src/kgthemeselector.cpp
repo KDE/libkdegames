@@ -19,6 +19,10 @@
 #include "kgthemeselector.h"
 #include "kgthemeselector_p.h"
 
+// KF
+#include <KLocalizedString>
+#include <KNS3/DownloadDialog>
+// Qt
 #include <QCloseEvent>
 #include <QFont>
 #include <QFontMetrics>
@@ -31,10 +35,7 @@
 #include <QVBoxLayout>
 #include <QDialogButtonBox>
 #include <QDialog>
-
 #include <QIcon>
-#include <KLocalizedString>
-#include <KNS3/DownloadDialog>
 
 namespace Metrics
 {

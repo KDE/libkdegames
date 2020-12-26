@@ -19,9 +19,8 @@
 #ifndef KG_THEMESELECTOR_P_H
 #define KG_THEMESELECTOR_P_H
 
+// Qt
 #include <QStyledItemDelegate>
-
-#include <libkdegames_export.h>
 
 class KgThemeDelegate : public QStyledItemDelegate
 {

@@ -21,7 +21,7 @@
 
 #include "kgameclock.h"
 
-
+// Qt
 #include <QTimer>
 
 class KGameClockPrivate

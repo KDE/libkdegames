@@ -24,16 +24,18 @@ this software.
 ****************************************************************/
 
 #include "kscoredialog.h"
+
+// own
 #include "khighscore.h"
 #include "../kgdifficulty.h"
-
+// KF
 #include <KConfig>
 #include <KUser>
 #include <KSeparator>
 #include <KLocalizedString>
 #include <KConfigGroup>
 #include <KLineEdit>
-
+// Qt
 #include <QTimer>
 #include <QList>
 #include <QByteArray>
