@@ -24,6 +24,7 @@
 
 #include <libkdegames_export.h>
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KRecentFilesAction>
 #include <KToggleAction>
 #include <KSelectAction>
@@ -454,7 +455,11 @@ namespace KStandardGameAction
         QAction* action = _k_createInternal(ChooseGameType, parent);
         KSelectAction* chooseGameTypeAction = qobject_cast<KSelectAction*>(action);
         Q_ASSERT(chooseGameTypeAction);
+#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 78, 0)
         QObject::connect(chooseGameTypeAction, QOverload<int>::of(&KSelectAction::triggered), recvr, slot);
+#else
+        QObject::connect(chooseGameTypeAction, &KSelectAction::triggered, recvr, slot);
+#endif
         return chooseGameTypeAction;
     }
 
