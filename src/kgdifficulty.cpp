@@ -21,6 +21,7 @@
 #include "kgdifficulty.h"
 
 // KF
+#include <kwidgetsaddons_version.h>
 #include <KConfigGroup>
 #include <KGuiItem>
 #include <KMessageBox>
@@ -390,7 +391,11 @@ void KgDifficultyGUI::init(KXmlGuiWindow* window, KgDifficulty* difficulty)
 	KSelectAction* menu = new KgDifficultyGUI::Menu(icon, i18nc("Game difficulty level", "Difficulty"), window);
 	menu->setToolTip(i18n("Set the difficulty level"));
 	menu->setWhatsThis(i18n("Set the difficulty level of the game."));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+	QObject::connect(menu, &KSelectAction::indexTriggered, selector, &Selector::slotActivated);
+#else
 	QObject::connect(menu, QOverload<int>::of(&KSelectAction::triggered), selector, &Selector::slotActivated);
+#endif
 	QObject::connect(difficulty, &KgDifficulty::editableChanged, menu, &QAction::setEnabled);
 	QObject::connect(selector, &Selector::signalSelected, menu, &KSelectAction::setCurrentItem);
 

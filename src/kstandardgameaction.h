@@ -456,10 +456,10 @@ namespace KStandardGameAction
         QAction* action = _k_createInternal(ChooseGameType, parent);
         KSelectAction* chooseGameTypeAction = qobject_cast<KSelectAction*>(action);
         Q_ASSERT(chooseGameTypeAction);
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 78, 0)
-        QObject::connect(chooseGameTypeAction, QOverload<int>::of(&KSelectAction::triggered), recvr, slot);
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+        QObject::connect(chooseGameTypeAction, &KSelectAction::indexTriggered, recvr, slot);
 #else
-        QObject::connect(chooseGameTypeAction, &KSelectAction::triggered, recvr, slot);
+        QObject::connect(chooseGameTypeAction, QOverload<int>::of(&KSelectAction::triggered), recvr, slot);
 #endif
         return chooseGameTypeAction;
     }

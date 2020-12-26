@@ -148,7 +148,11 @@ QAction* KStandardGameAction::create(StandardGameAction id, const QObject *recvr
             QObject::connect(pAction, SIGNAL(urlSelected(QUrl)), recvr, slot);
             break;
         case ChooseGameType:
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+            QObject::connect(pAction, SIGNAL(indexTriggered(int)), recvr, slot);
+#else
             QObject::connect(pAction, SIGNAL(triggered(int)), recvr, slot);
+#endif
             break;
         default:
             QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
