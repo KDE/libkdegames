@@ -7,11 +7,6 @@
 #ifndef KGTHEME_H
 #define KGTHEME_H
 
-//The complete API needs to be there when compiling libkdegames.
-#ifdef MAKE_KDEGAMES_LIB
-#define KGTHEME_PROVIDE_COMPATIBILITY_API
-#endif //MAKE_KDEGAMES_LIB
-
 // own
 #include <libkdegames_export.h>
 // Qt
@@ -86,13 +81,6 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		///      "KgTheme::fromDesktopFile" to accommodate applications which
 		///      want to subclass KgTheme.
 		virtual bool readFromDesktopFile(const QString& path);
-
-#ifdef KGTHEME_PROVIDE_COMPATIBILITY_API
-		///Use a different group name in theme description files. For example,
-		///KMahjongg backgrounds and tilesets use "[KMahjonggBackground]" and
-		///"[KMahjonggTileset]" instead of "[KGameTheme]".
-		static void addConfigGroupName(const QString& name);
-#endif
 
 		///@return the internal identifier for this theme (used e.g. for
 		///        finding a pixmap cache or storing a theme selection)
