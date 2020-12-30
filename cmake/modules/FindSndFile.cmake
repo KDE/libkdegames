@@ -5,12 +5,10 @@
 #  SNDFILE_INCLUDE_DIRS - the SndFile include directory
 #  SNDFILE_LIBRARIES - Link these to use SndFile
 #
-#  Copyright © 2006  Wengo
-#  Copyright © 2009 Guillaume Martres
+#  SPDX-FileCopyrightText: 2006 Wengo
+#  SPDX-FileCopyrightText: 2009 Guillaume Martres
 #
-#  Redistribution and use is allowed according to the terms of the New
-#  BSD license.
-#  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+# SPDX-License-Identifier: BSD-3-Clause
 #
 
 find_path(SNDFILE_INCLUDE_DIR
