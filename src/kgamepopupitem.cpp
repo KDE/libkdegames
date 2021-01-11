@@ -192,6 +192,8 @@ KGamePopupItem::KGamePopupItem(QGraphicsItem * parent)
     connect(&d->m_timer, &QTimer::timeout, this, &KGamePopupItem::playHideAnimation);
 }
 
+KGamePopupItem::~KGamePopupItem() = default;
+
 void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
 {
     Q_UNUSED(option);
@@ -386,11 +388,6 @@ void KGamePopupItem::setMessageOpacity( qreal opacity )
 QRectF KGamePopupItem::boundingRect() const
 {
     return d->m_boundRect;
-}
-
-KGamePopupItem::~KGamePopupItem()
-{
-    delete d;
 }
 
 void KGamePopupItem::hideMe()

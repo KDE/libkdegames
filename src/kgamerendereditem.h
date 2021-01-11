@@ -13,6 +13,8 @@
 // Qt
 #include <QObject>
 #include <QGraphicsItem>
+// Std
+#include <memory>
 
 class KGameRenderedItemPrivate;
 
@@ -36,7 +38,7 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGa
 		void receivePixmap(const QPixmap& pixmap) override;
 	private:
 		friend class KGameRenderedItemPrivate;
-		KGameRenderedItemPrivate* const d;
+		std::unique_ptr<KGameRenderedItemPrivate> const d;
 };
 
 #endif // KGAMERENDEREDITEM_H

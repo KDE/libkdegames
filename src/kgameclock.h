@@ -14,6 +14,8 @@
 #include <libkdegames_export.h>
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class KGameClockPrivate;
 
@@ -84,7 +86,7 @@ protected Q_SLOTS:
 
 private:
     friend class KGameClockPrivate;
-    KGameClockPrivate *const d;
+    std::unique_ptr<KGameClockPrivate> const d;
 
     Q_DISABLE_COPY(KGameClock)
 };

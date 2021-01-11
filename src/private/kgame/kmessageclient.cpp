@@ -48,7 +48,6 @@ KMessageClient::KMessageClient (QObject *parent)
 KMessageClient::~KMessageClient ()
 {
   d->delayedMessages.clear();
-  delete d;
 }
 
 // -- setServer stuff

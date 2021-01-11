@@ -28,8 +28,13 @@ Q_LOGGING_CATEGORY(GAMES_PRIVATE, "org.kde.games.private", QtWarningMsg)
 class KChatBasePrivate
 {
 public:
-  KChatBasePrivate(KChatBaseModel* model, KChatBaseItemDelegate* delegate)
+  KChatBasePrivate(KChatBaseModel* model, KChatBaseItemDelegate* delegate, QWidget* parent)
   {
+    if (!model)
+      model = new KChatBaseModel(parent);
+    if (!delegate)
+      delegate = new KChatBaseItemDelegate(parent);
+
     mBox = nullptr;
     mEdit = nullptr;
     mCombo = nullptr;
@@ -62,16 +67,8 @@ KChatBaseModel* KChatBase::model()
 }
 
 KChatBase::KChatBase(QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate, bool noComboBox) : QFrame(parent)
+  , d(new KChatBasePrivate(model, delegate, parent))
 {
-  KChatBaseModel* mod = model;
-  if (mod==nullptr)
-    mod = new KChatBaseModel(parent);
-  KChatBaseItemDelegate* del = delegate;
-  if (del == nullptr)
-    del = new KChatBaseItemDelegate(parent);
-  
-  d = new KChatBasePrivate(mod, del);
-
  setMinimumWidth(100);
  setMinimumHeight(150);
 
@@ -129,7 +126,6 @@ KChatBase::~KChatBase()
 {
 // qCDebug(GAMES_LIB) << "KChatBase: DESTRUCT (" << this << ")";
  saveConfig();
- delete d;
 }
 
 bool KChatBase::acceptMessage() const

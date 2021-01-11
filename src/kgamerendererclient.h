@@ -11,6 +11,8 @@
 #include <libkdegames_export.h>
 // Qt
 #include <QPixmap>
+// Std
+#include <memory>
 
 class KGameRendererClientPrivate;
 class KGameRenderer;
@@ -95,7 +97,7 @@ class KDEGAMES_EXPORT KGameRendererClient
 		friend class KGameRendererClientPrivate;
 		friend class KGameRenderer;
 		friend class KGameRendererPrivate;
-		KGameRendererClientPrivate* const d;
+		std::unique_ptr<KGameRendererClientPrivate> const d;
 };
 
 #endif // KGAMERENDERERCLIENT_H

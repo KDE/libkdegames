@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QList>
+// Std
+#include <memory>
 
 class KGame;
 class KGameIO;
@@ -438,7 +440,7 @@ private:
 
 private:
       friend class KPlayerPrivate;
-      KPlayerPrivate *const d;
+      std::unique_ptr<KPlayerPrivate> const d;
 
       Q_DISABLE_COPY(KPlayer)
 };

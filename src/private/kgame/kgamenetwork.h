@@ -14,6 +14,8 @@
 // Qt
 #include <QString>
 #include <QObject>
+// Std
+#include <memory>
 
 class KGameIO;
 class KMessageIO;
@@ -404,7 +406,9 @@ protected Q_SLOTS:
 private:
      void tryPublish();
      void tryStopPublishing();
-     KGameNetworkPrivate* const d;
+
+private:
+     std::unique_ptr<KGameNetworkPrivate> const d;
 };
 
 #endif

@@ -33,10 +33,7 @@ KGameClock::KGameClock(QObject *parent, KGameClock::ClockType clocktype)
     connect(d->timerClock, &QTimer::timeout, this, &KGameClock::timeoutClock);
 }
 
-KGameClock::~KGameClock()
-{
-    delete d;
-}
+KGameClock::~KGameClock() = default;
 
 void KGameClock::timeoutClock()
 {

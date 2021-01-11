@@ -138,10 +138,7 @@ KGameSvgDocument::KGameSvgDocument(const KGameSvgDocument &doc)
 {
 }
 
-KGameSvgDocument::~KGameSvgDocument()
-{
-    delete d;
-}
+KGameSvgDocument::~KGameSvgDocument() = default;
 
 KGameSvgDocument& KGameSvgDocument::operator=(const KGameSvgDocument &doc)
 {

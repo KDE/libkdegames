@@ -12,6 +12,8 @@
 // Qt
 #include <QQmlContext>
 
+class KgDeclarativeViewPrivate{};
+
 KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     QQuickWidget(parent),
     d(nullptr) //unused for now, for future expandability
@@ -25,4 +27,4 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
     setResizeMode(SizeRootObjectToView);
 }
 
-
+KgDeclarativeView::~KgDeclarativeView() = default;

@@ -12,6 +12,8 @@
 // Qt
 #include <QGraphicsItem>
 #include <QObject>
+// Std
+#include <memory>
 
 class KGamePopupItemPrivate;
 
@@ -176,7 +178,8 @@ private:
     void hoverEnterEvent( QGraphicsSceneHoverEvent* ) override;
     void hoverLeaveEvent( QGraphicsSceneHoverEvent* ) override;
 
-    KGamePopupItemPrivate * const d;
+private:
+    std::unique_ptr<KGamePopupItemPrivate> const d;
 };
 
 #endif

@@ -13,6 +13,8 @@
 #include <QHash>
 #include <QObject>
 #include <QPixmap>
+// Std
+#include <memory>
 
 class QGraphicsView;
 
@@ -212,7 +214,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		friend class KGameRendererPrivate;
 		friend class KGameRendererClient;
 		friend class KGameRendererClientPrivate;
-		KGameRendererPrivate* const d;
+		std::unique_ptr<KGameRendererPrivate> const d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameRenderer::Strategies)

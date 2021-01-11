@@ -44,9 +44,7 @@ KGameTheme::KGameTheme(const QString &themeGroup)
     //KGlobal::dirs()->addResourceType("gametheme", KStandardDirs::kde_default("data") + KGlobal::mainComponent().componentName());
 }
 
-KGameTheme::~KGameTheme() {
-    delete d;
-}
+KGameTheme::~KGameTheme() = default;
 
 bool KGameTheme::loadDefault()
 {

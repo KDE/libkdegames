@@ -85,8 +85,8 @@ public:
 
 KMessageServer::KMessageServer (quint16 cookie,QObject* parent)
   : QObject(parent)
+  , d(new KMessageServerPrivate)
 {
-  d = new KMessageServerPrivate;
   d->mIsRecursive=false;
   d->mCookie=cookie;
   connect (&(d->mTimer), &QTimer::timeout,
@@ -105,7 +105,6 @@ KMessageServer::~KMessageServer()
   Debug();
   stopNetwork();
   deleteClients();
-  delete d;
   qCDebug(GAMES_PRIVATE_KGAME) << "done";
 }
 

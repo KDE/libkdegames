@@ -13,6 +13,8 @@
 // Qt
 #include <QObject>
 #include <QString>
+// Std
+#include <memory>
 
 class KMessageIO;
 class KMessageServerPrivate;
@@ -449,7 +451,7 @@ protected:
     quint32 uniqueClientNumber() const;
 
 private:
-    KMessageServerPrivate* d;
+    std::unique_ptr<KMessageServerPrivate> const d;
 };
 
 

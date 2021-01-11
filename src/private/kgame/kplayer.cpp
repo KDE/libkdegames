@@ -107,7 +107,6 @@ KPlayer::~KPlayer()
 // note: mProperties does not use autoDelete or so - user must delete objects
 // himself
   d->mProperties.clear();
-  delete d;
   qCDebug(GAMES_PRIVATE_KGAME) << "done";
 }
 

@@ -13,6 +13,8 @@
 // Qt
 #include <QObject>
 #include <QString>
+// Std
+#include <memory>
 
 class KMessageIO;
 class KMessageServer;
@@ -406,7 +408,7 @@ protected Q_SLOTS:
   void removeBrokenConnection2 ();
 
 private:
-  KMessageClientPrivate * const d;
+  std::unique_ptr<KMessageClientPrivate> const d;
 };
 
 #endif

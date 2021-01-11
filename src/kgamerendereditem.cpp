@@ -19,10 +19,7 @@ KGameRenderedItem::KGameRenderedItem(KGameRenderer* renderer, const QString& spr
 	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
-KGameRenderedItem::~KGameRenderedItem()
-{
-	delete d;
-}
+KGameRenderedItem::~KGameRenderedItem() = default;
 
 void KGameRenderedItem::receivePixmap(const QPixmap& pixmap)
 {

@@ -16,6 +16,8 @@
 // Qt
 #include <QFrame>
 #include <QLoggingCategory>
+// Std
+#include <memory>
 
 class KConfig;
 
@@ -367,7 +369,7 @@ private Q_SLOTS:
 
 private:
 
-	KChatBasePrivate* d;
+	std::unique_ptr<KChatBasePrivate> const d;
 };
 
 #endif

@@ -86,7 +86,6 @@ KGameRenderer::~KGameRenderer()
 	//cleanup own stuff
 	d->m_workerPool.waitForDone();
 	delete d->m_imageCache;
-	delete d;
 }
 
 QGraphicsView* KGameRenderer::defaultPrimaryView() const

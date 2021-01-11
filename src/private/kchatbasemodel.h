@@ -15,6 +15,8 @@
 #include <QAbstractListModel>
 #include <QPair>
 #include <QLoggingCategory>
+// Std
+#include <memory>
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
@@ -220,7 +222,7 @@ public Q_SLOTS:
   void slotClear();
 
   private:
-    KChatBaseModelPrivate* d;
+    std::unique_ptr<KChatBaseModelPrivate> const d;
 };
 
 #endif

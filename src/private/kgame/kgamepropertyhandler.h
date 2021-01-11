@@ -15,6 +15,8 @@
 // Qt
 #include <QObject>
 #include <QMultiHash>
+// Std
+#include <memory>
 
 class QDataStream;
 class KGame;
@@ -334,7 +336,7 @@ Q_SIGNALS:
 
 private:
 	friend class KGamePropertyHandlerPrivate;
-	KGamePropertyHandlerPrivate *const d;
+	std::unique_ptr<KGamePropertyHandlerPrivate> const d;
 
 	Q_DISABLE_COPY(KGamePropertyHandler)
 };

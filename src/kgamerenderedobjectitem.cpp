@@ -90,10 +90,7 @@ KGameRenderedObjectItem::KGameRenderedObjectItem(KGameRenderer* renderer, const 
 	setPrimaryView(renderer->defaultPrimaryView());
 }
 
-KGameRenderedObjectItem::~KGameRenderedObjectItem()
-{
-	delete d;
-}
+KGameRenderedObjectItem::~KGameRenderedObjectItem() = default;
 
 QPointF KGameRenderedObjectItem::offset() const
 {

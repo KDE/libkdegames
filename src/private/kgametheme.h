@@ -13,6 +13,8 @@
 // Qt
 #include <QString>
 #include <QLoggingCategory>
+// Std
+#include <memory>
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
@@ -83,7 +85,7 @@ class KDEGAMESPRIVATE_EXPORT KGameTheme
 
     private:
         friend class KGameThemePrivate;
-        KGameThemePrivate *const d;
+        std::unique_ptr<KGameThemePrivate> const d;
 };
 
 #endif

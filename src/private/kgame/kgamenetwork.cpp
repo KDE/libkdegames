@@ -61,7 +61,6 @@ KGameNetwork::~KGameNetwork()
  qCDebug(GAMES_PRIVATE_KGAME) << "this=" << this;
 // Debug();
  delete d->mService;
- delete d;
 }
 
 // ----------------------------- status methods

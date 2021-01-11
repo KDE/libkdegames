@@ -12,6 +12,8 @@
 #include "libkdegamesprivate_export.h"
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 class KGameTheme;
 class KConfigSkeleton;
@@ -59,8 +61,7 @@ class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
         virtual ~KGameThemeSelector();
 
     private:
-        class KGameThemeSelectorPrivate;
-        KGameThemeSelectorPrivate* const d;
+        std::unique_ptr<class KGameThemeSelectorPrivate> const d;
 
         Q_DISABLE_COPY(KGameThemeSelector)
 };

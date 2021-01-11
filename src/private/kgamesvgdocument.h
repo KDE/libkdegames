@@ -15,6 +15,8 @@
 #include <QTransform>
 #include <QDomDocument>
 #include <QLoggingCategory>
+// Std
+#include <memory>
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
@@ -473,7 +475,7 @@ private:
     /**
      * @brief d-pointer
      */
-    KGameSvgDocumentPrivate * const d;
+    std::unique_ptr<KGameSvgDocumentPrivate> const d;
 
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameSvgDocument::MatrixOptions)

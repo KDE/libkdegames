@@ -56,7 +56,6 @@ KGamePropertyHandler::~KGamePropertyHandler()
 {
  //qDebug() ;
  clear();
- delete d;
  //qDebug() << "done";
 }
 

@@ -11,6 +11,8 @@
 #include <libkdegames_export.h>
 // Qt
 #include <QQuickWidget>
+// Std
+#include <memory>
 
 /**
  * @class KgDeclarativeView
@@ -34,10 +36,10 @@ public:
     ///@param parent The parent widget for this view (usually the main
     ///window of the game)
     explicit KgDeclarativeView(QWidget *parent=nullptr);
+    ~KgDeclarativeView() override;
 
 private:
-    class Private;
-    Private* const d;
+    std::unique_ptr<class KgDeclarativeViewPrivate> const d;
 
 };
 
