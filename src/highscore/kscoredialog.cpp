@@ -36,7 +36,7 @@
 
 typedef QList<KScoreDialog::FieldInfo> GroupScores; ///<The list of scores in a group
 
-class Q_DECL_HIDDEN KScoreDialog::KScoreDialogPrivate
+class KScoreDialogPrivate
 {
     public:
         //QList<FieldInfo*> scores;
@@ -134,8 +134,6 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 KScoreDialog::~KScoreDialog()
 {
     delete d->highscoreObject;
-
-    delete d;
 }
 
 #if KDEGAMES_BUILD_DEPRECATED_SINCE(4, 1)
@@ -199,7 +197,7 @@ void KScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray>& weights)
     d->configGroupWeights = weights;
 }
 
-QString KScoreDialog::KScoreDialogPrivate::findTranslatedGroupName(const QByteArray& name)
+QString KScoreDialogPrivate::findTranslatedGroupName(const QByteArray& name)
 {
     const QString lookupResult = translatedGroupNames.value(name);
     //If it wasn't found then just try i18n( to see if it happens to be in the database
@@ -226,7 +224,7 @@ void KScoreDialog::hideField(int field)
 /*
 Create the widgets and layouts etc. for the dialog
 */
-void KScoreDialog::KScoreDialogPrivate::setupDialog()
+void KScoreDialogPrivate::setupDialog()
 {
     nrCols = 1;
     for(int field = 1; field < fields; field = field * 2)
@@ -251,7 +249,7 @@ void KScoreDialog::KScoreDialogPrivate::setupDialog()
     }
 }
 
-void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
+void KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 {
     if (hiddenGroups.contains(groupKey))
         return;
@@ -285,7 +283,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
         {
             layout->addItem( new QSpacerItem( 50, 0 ), 0, col[field] );
             label = new QLabel(header[field], widget);
-            layout->addWidget(label, 3, col[field], field <= Name ? Qt::AlignLeft : Qt::AlignRight);
+            layout->addWidget(label, 3, col[field], field <= KScoreDialog::Name ? Qt::AlignLeft : Qt::AlignRight);
             label->setFont(bold);
         }
     }
@@ -301,18 +299,17 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
         label = new QLabel(i18nc("Enumeration (#1, #2 ...) of the highscore entries", "#%1", num), widget);
         labels[groupKey].insert((i-1)*nrCols + 0, label); //Fill up column zero
         layout->addWidget(label, i+4, 0);
-        if (fields & Name) //If we have a Name field
+        if (fields & KScoreDialog::Name) //If we have a Name field
         {
             QStackedWidget *localStack = new QStackedWidget(widget);
             stack[groupKey].insert(i-1, localStack);
-            layout->addWidget(localStack, i+4, col[Name]);
+            layout->addWidget(localStack, i+4, col[KScoreDialog::Name]);
             label = new QLabel(localStack);
-            labels[groupKey].insert((i-1)*nrCols + col[Name], label);
+            labels[groupKey].insert((i-1)*nrCols + col[KScoreDialog::Name], label);
             localStack->addWidget(label);
             localStack->setCurrentWidget(label);
         }
-        for(int field = Name * 2; field < fields; field = field * 2)
-        {
+        for (int field = KScoreDialog::Name * 2; field < fields; field = field * 2) {
             if ( (fields & field) && !(hiddenFields & field ) ) //Maybe disable for Name?
             {
                 label = new QLabel(widget);
@@ -326,7 +323,7 @@ void KScoreDialog::KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
 /*
 Fill the dialog with the correct data
 */
-void KScoreDialog::KScoreDialogPrivate::aboutToShow()
+void KScoreDialogPrivate::aboutToShow()
 {
     if (!loaded)
         loadScores();
@@ -383,14 +380,14 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
 
             //qCDebug(GAMES_HIGHSCORE) << "groupName:" << groupName << "id:" << i-1;
 
-            FieldInfo score = scores[groupKey].at(i-1);
+            KScoreDialog::FieldInfo score = scores[groupKey].at(i-1);
             label = labels[groupKey].at((i-1)*nrCols + 0); //crash! FIXME
             if ( (i == latest.second) && (groupKey == latest.first) )
                 label->setFont(bold);
             else
                 label->setFont(normal);
 
-            if (fields & Name)
+            if (fields & KScoreDialog::Name)
             {
                 if ( (newName.second == i) && (groupKey == newName.first) )
                 {
@@ -400,20 +397,20 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
                     localStack->addWidget(edit);
                     localStack->setCurrentWidget(edit);
                     edit->setFocus();
-                    connect(edit, &KLineEdit::returnPressed, q, &KScoreDialog::slotGotReturn);
+                    QObject::connect(edit, &KLineEdit::returnPressed, q, &KScoreDialog::slotGotReturn);
                 }
                 else
                 {
-                    label = labels[groupKey].at((i-1)*nrCols + col[Name]);
+                    label = labels[groupKey].at((i-1)*nrCols + col[KScoreDialog::Name]);
                     if ( (i == latest.second) && (groupKey == latest.first) )
                         label->setFont(bold);
                     else
                         label->setFont(normal);
-                    label->setText(score[Name]);
+                    label->setText(score[KScoreDialog::Name]);
                 }
 
             }
-            for(int field = Name * 2; field < fields; field = field * 2)
+            for(int field = KScoreDialog::Name * 2; field < fields; field = field * 2)
             {
                 if ( (fields & field) && !(hiddenFields & field ) )
                 {
@@ -437,7 +434,7 @@ void KScoreDialog::KScoreDialogPrivate::aboutToShow()
     q->setFixedSize(q->minimumSizeHint()); //NOTE Remove this line to make dialog resizable
 }
 
-void KScoreDialog::KScoreDialogPrivate::loadScores()
+void KScoreDialogPrivate::loadScores()
 {
     scores.clear();
 
@@ -463,7 +460,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
 
         for (int i = 1; i <= 10; ++i)
         {
-            FieldInfo score;
+            KScoreDialog::FieldInfo score;
             for(int field = 1; field < fields; field = field * 2)
             {
                 if (fields & field)
@@ -477,7 +474,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     highscoreObject->setHighscoreGroup(QLatin1String( tempCurrentGroup )); //reset to the user-set group name
     const auto groupKeys = scores.keys();
     for (const QByteArray &groupKey : groupKeys) {
-        if( (scores[groupKey][0].value(Score)==QLatin1String( "-" )) && (scores.size() > 1) && (latest.first != groupKey) )
+        if( (scores[groupKey][0].value(KScoreDialog::Score)==QLatin1String( "-" )) && (scores.size() > 1) && (latest.first != groupKey) )
         {
             qCDebug(GAMES_HIGHSCORE) << "Removing group " << groupKey << " since it's unused.";
             scores.remove(groupKey);
@@ -486,7 +483,7 @@ void KScoreDialog::KScoreDialogPrivate::loadScores()
     loaded = true;
 }
 
-void KScoreDialog::KScoreDialogPrivate::saveScores()
+void KScoreDialogPrivate::saveScores()
 {
     highscoreObject->setHighscoreGroup(QLatin1String( configGroup ));
 
@@ -494,7 +491,7 @@ void KScoreDialog::KScoreDialogPrivate::saveScores()
 
     for (int i = 1; i <= 10; ++i)
     {
-        FieldInfo score = scores[configGroup].at(i-1);
+        KScoreDialog::FieldInfo score = scores[configGroup].at(i-1);
         for(int field = 1; field < fields; field = field * 2)
         {
             if (fields & field)

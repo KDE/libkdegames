@@ -16,6 +16,8 @@
 #include <QFlags>
 #include <QDialogButtonBox>
 #include <QDialog>
+// Std
+#include <memory>
 
 class KgDifficulty;
 
@@ -262,8 +264,8 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
             void keyPressEvent(QKeyEvent *ev) override;
 
         private:
-            class KScoreDialogPrivate;
-            KScoreDialogPrivate* const d;
+            friend class KScoreDialogPrivate;
+            std::unique_ptr<class KScoreDialogPrivate> const d;
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 

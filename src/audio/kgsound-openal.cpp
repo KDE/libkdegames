@@ -14,7 +14,7 @@
 // sndfile
 #include <sndfile.hh>
 
-class Q_DECL_HIDDEN KgSound::Private
+class KgSoundPrivate
 {
     public:
         KgSound::PlaybackType m_type;
@@ -24,14 +24,14 @@ class Q_DECL_HIDDEN KgSound::Private
         bool m_valid;
         ALuint m_buffer;
 
-        Private() : m_type(KgSound::AmbientPlayback), m_volume(1.0), m_valid(false), m_buffer(AL_NONE) {}
+        KgSoundPrivate() : m_type(KgSound::AmbientPlayback), m_volume(1.0), m_valid(false), m_buffer(AL_NONE) {}
 };
 
 //BEGIN KgSound
 
 KgSound::KgSound(const QString& file, QObject* parent)
 	: QObject(parent)
-	, d(new Private)
+	, d(new KgSoundPrivate)
 {
     VirtualFileQt fileInterface(file);
     if (!fileInterface.open()) {
@@ -102,7 +102,6 @@ KgSound::~KgSound()
 		KgOpenALRuntime::instance()->m_soundsEvents.remove(this);
 		alDeleteBuffers(1, &d->m_buffer);
 	}
-	delete d;
 }
 
 bool KgSound::isValid() const

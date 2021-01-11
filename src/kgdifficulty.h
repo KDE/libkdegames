@@ -14,6 +14,8 @@
 // Qt
 #include <QMetaType>
 #include <QObject>
+// Std
+#include <memory>
 
 /**
  * @class KgDifficultyLevel kgdifficulty.h <KgDifficultyLevel>
@@ -64,8 +66,7 @@ class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 		///        KgDifficultyLevel::Custom for custom levels
 		StandardLevel standardLevel() const;
 	private:
-		class Private;
-		Private* const d;
+		std::unique_ptr<class KgDifficultyLevelPrivate> const d;
 };
 
 /**
@@ -157,8 +158,7 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 		///confirmation before the new difficulty level is selected.
 		void select(const KgDifficultyLevel* level);
 	private:
-		class Private;
-		Private* const d;
+		std::unique_ptr<class KgDifficultyPrivate> const d;
 };
 
 Q_DECLARE_METATYPE(const KgDifficultyLevel*)

@@ -33,18 +33,23 @@ namespace Metrics
 
 //BEGIN KgThemeSelector
 
-class Q_DECL_HIDDEN KgThemeSelector::Private
+class KgThemeSelectorPrivate
 {
     public:
         KgThemeSelector* q;
         KgThemeProvider* m_provider;
-        Options m_options;
+        KgThemeSelector::Options m_options;
         QListWidget* m_list;
         QPushButton* m_knsButton;
 
         void fillList();
 
-        Private(KgThemeProvider* provider, Options options, KgThemeSelector* q) : q(q), m_provider(provider), m_options(options), m_knsButton(nullptr) {}
+        KgThemeSelectorPrivate(KgThemeProvider* provider, KgThemeSelector::Options options, KgThemeSelector* q)
+            : q(q)
+            , m_provider(provider)
+            , m_options(options)
+            , m_knsButton(nullptr)
+        {}
 
         void _k_updateListSelection(const KgTheme* theme);
         void _k_updateProviderSelection();
@@ -53,7 +58,7 @@ class Q_DECL_HIDDEN KgThemeSelector::Private
 
 KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWidget* parent)
 	: QWidget(parent)
-	, d(new Private(provider, options, this))
+	, d(new KgThemeSelectorPrivate(provider, options, this))
 {
 	d->m_list = new QListWidget(this);
 	d->m_list->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -86,12 +91,9 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 
 }
 
-KgThemeSelector::~KgThemeSelector()
-{
-	delete d;
-}
+KgThemeSelector::~KgThemeSelector() = default;
 
-void KgThemeSelector::Private::fillList()
+void KgThemeSelectorPrivate::fillList()
 {
 	m_list->clear();
 	const auto themes = m_provider->themes();
@@ -107,7 +109,7 @@ void KgThemeSelector::Private::fillList()
 	_k_updateListSelection(m_provider->currentTheme());
 }
 
-void KgThemeSelector::Private::_k_updateListSelection(const KgTheme* theme)
+void KgThemeSelectorPrivate::_k_updateListSelection(const KgTheme* theme)
 {
 	for (int idx = 0; idx < m_list->count(); ++idx)
 	{
@@ -126,7 +128,7 @@ void KgThemeSelector::Private::_k_updateListSelection(const KgTheme* theme)
 	}
 }
 
-void KgThemeSelector::Private::_k_updateProviderSelection()
+void KgThemeSelectorPrivate::_k_updateProviderSelection()
 {
 	const QListWidgetItem* selItem = m_list->selectedItems().value(0);
 	if (!selItem)
@@ -144,7 +146,7 @@ void KgThemeSelector::Private::_k_updateProviderSelection()
 	}
 }
 
-void KgThemeSelector::Private::_k_showNewStuffDialog()
+void KgThemeSelectorPrivate::_k_showNewStuffDialog()
 {
 	QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(q));
 	dialog->exec();

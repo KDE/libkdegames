@@ -16,6 +16,8 @@
 #include <QQmlContext>
 #include <QDir>
 #include <QPointer>
+// Std
+#include <memory>
 
 /**
  * @class KgThemeProvider kgthemeprovider.h <KgThemeProvider>
@@ -130,8 +132,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///this instance.
 		void setCurrentTheme(const KgTheme* theme);
 	private:
-		class Private;
-		Private* const d;
+		std::unique_ptr<class KgThemeProviderPrivate> const d;
 };
 
 Q_DECLARE_METATYPE(KgThemeProvider*)

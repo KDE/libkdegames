@@ -12,6 +12,8 @@
 #include <libkdegames_export.h>
 // Qt
 #include <QWidget>
+// Std
+#include <memory>
 
 /**
  * @class KgThemeSelector kgthemeselector.h <KgThemeSelector>
@@ -53,8 +55,7 @@ class KDEGAMES_EXPORT KgThemeSelector : public QWidget
 		void showAsDialog(const QString& caption = QString());
 	private:
 		class Dialog;
-		class Private;
-		Private* const d;
+		std::unique_ptr<class KgThemeSelectorPrivate> const d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KgThemeSelector::Options)

@@ -14,6 +14,8 @@
 // Qt
 #include <QObject>
 #include <QLoggingCategory>
+// Std
+#include <memory>
 
 class KConfig;
 
@@ -285,8 +287,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
         void init(bool forceLocal);
 
     private:
-        class KHighscorePrivate;
-        KHighscorePrivate* const d;
+        std::unique_ptr<class KHighscorePrivate> const d;
 };
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_HIGHSCORE)

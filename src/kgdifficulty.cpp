@@ -28,25 +28,27 @@
 
 //BEGIN KgDifficultyLevel
 
-class Q_DECL_HIDDEN KgDifficultyLevel::Private
+class KgDifficultyLevelPrivate
 {
     public:
         bool m_isDefault;
         int m_hardness;
-        StandardLevel m_level;
+        KgDifficultyLevel::StandardLevel m_level;
         QByteArray m_key;
         QString m_title;
 
-        Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level, bool isDefault);
-        static Private* fromStandardLevel(StandardLevel level, bool isDefault);
+        KgDifficultyLevelPrivate(int hardness, const QByteArray& key, const QString& title,
+                                 KgDifficultyLevel::StandardLevel level, bool isDefault);
+        static KgDifficultyLevelPrivate* fromStandardLevel(KgDifficultyLevel::StandardLevel level, bool isDefault);
 };
 
 KgDifficultyLevel::KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title, bool isDefault)
-	: d(new Private(hardness, key, title, Custom, isDefault))
+	: d(new KgDifficultyLevelPrivate(hardness, key, title, Custom, isDefault))
 {
 }
 
-KgDifficultyLevel::Private::Private(int hardness, const QByteArray& key, const QString& title, StandardLevel level, bool isDefault)
+KgDifficultyLevelPrivate::KgDifficultyLevelPrivate(int hardness, const QByteArray& key, const QString& title,
+                                                   KgDifficultyLevel::StandardLevel level, bool isDefault)
 	: m_isDefault(isDefault)
 	, m_hardness(hardness)
 	, m_level(level)
@@ -56,13 +58,13 @@ KgDifficultyLevel::Private::Private(int hardness, const QByteArray& key, const Q
 }
 
 KgDifficultyLevel::KgDifficultyLevel(StandardLevel level, bool isDefault)
-	: d(Private::fromStandardLevel(level, isDefault))
+	: d(KgDifficultyLevelPrivate::fromStandardLevel(level, isDefault))
 {
 }
 
-KgDifficultyLevel::Private* KgDifficultyLevel::Private::fromStandardLevel(KgDifficultyLevel::StandardLevel level, bool isDefault)
+KgDifficultyLevelPrivate* KgDifficultyLevelPrivate::fromStandardLevel(KgDifficultyLevel::StandardLevel level, bool isDefault)
 {
-	Q_ASSERT_X(level != Custom,
+	Q_ASSERT_X(level != KgDifficultyLevel::Custom,
 		"KgDifficultyLevel(StandardLevel) constructor",
 		"Custom level not allowed here"
 	);
@@ -70,40 +72,37 @@ KgDifficultyLevel::Private* KgDifficultyLevel::Private::fromStandardLevel(KgDiff
 	QPair<QByteArray, QString> data;
 	switch (level)
 	{
-		case RidiculouslyEasy:
+		case KgDifficultyLevel::RidiculouslyEasy:
 			data = qMakePair(QByteArray("Ridiculously Easy"), i18nc("Game difficulty level 1 out of 8", "Ridiculously Easy"));
 			break;
-		case VeryEasy:
+		case KgDifficultyLevel::VeryEasy:
 			data = qMakePair(QByteArray("Very Easy"), i18nc("Game difficulty level 2 out of 8", "Very Easy"));
 			break;
-		case Easy:
+		case KgDifficultyLevel::Easy:
 			data = qMakePair(QByteArray("Easy"), i18nc("Game difficulty level 3 out of 8", "Easy"));
 			break;
-		case Medium:
+		case KgDifficultyLevel::Medium:
 			data = qMakePair(QByteArray("Medium"), i18nc("Game difficulty level 4 out of 8", "Medium"));
 			break;
-		case Hard:
+		case KgDifficultyLevel::Hard:
 			data = qMakePair(QByteArray("Hard"), i18nc("Game difficulty level 5 out of 8", "Hard"));
 			break;
-		case VeryHard:
+		case KgDifficultyLevel::VeryHard:
 			data = qMakePair(QByteArray("Very Hard"), i18nc("Game difficulty level 6 out of 8", "Very Hard"));
 			break;
-		case ExtremelyHard:
+		case KgDifficultyLevel::ExtremelyHard:
 			data = qMakePair(QByteArray("Extremely Hard"), i18nc("Game difficulty level 7 out of 8", "Extremely Hard"));
 			break;
-		case Impossible:
+		case KgDifficultyLevel::Impossible:
 			data = qMakePair(QByteArray("Impossible"), i18nc("Game difficulty level 8 out of 8", "Impossible"));
 			break;
-		case Custom:
+		case KgDifficultyLevel::Custom:
 			return nullptr;
 	}
-	return new KgDifficultyLevel::Private(level, data.first, data.second, level, isDefault);
+	return new KgDifficultyLevelPrivate(level, data.first, data.second, level, isDefault);
 }
 
-KgDifficultyLevel::~KgDifficultyLevel()
-{
-	delete d;
-}
+KgDifficultyLevel::~KgDifficultyLevel() = default;
 
 bool KgDifficultyLevel::isDefault() const
 {
@@ -133,14 +132,14 @@ KgDifficultyLevel::StandardLevel KgDifficultyLevel::standardLevel() const
 //END KgDifficultyLevel
 //BEGIN KgDifficulty
 
-class Q_DECL_HIDDEN KgDifficulty::Private
+class KgDifficultyPrivate
 {
     public:
         QList<const KgDifficultyLevel*> m_levels;
         const KgDifficultyLevel* m_currentLevel;
         bool m_editable, m_gameRunning;
 
-        Private() : m_currentLevel(nullptr), m_editable(true), m_gameRunning(false) {}
+        KgDifficultyPrivate() : m_currentLevel(nullptr), m_editable(true), m_gameRunning(false) {}
 };
 
 static void saveLevel()
@@ -154,7 +153,7 @@ static void saveLevel()
 
 KgDifficulty::KgDifficulty(QObject* parent)
 	: QObject(parent)
-	, d(new Private)
+	, d(new KgDifficultyPrivate)
 {
 	qRegisterMetaType<const KgDifficultyLevel*>();
 	qAddPostRoutine(saveLevel);

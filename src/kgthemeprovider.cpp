@@ -16,7 +16,7 @@
 #include <QStandardPaths>
 #include <QGuiApplication>
 
-class Q_DECL_HIDDEN KgThemeProvider::Private
+class KgThemeProviderPrivate
 {
     public:
         KgThemeProvider *q;
@@ -35,7 +35,13 @@ class Q_DECL_HIDDEN KgThemeProvider::Private
         //this disables the addTheme() lock during rediscoverThemes()
         bool m_inRediscover;
 
-        Private(KgThemeProvider *parent, const QByteArray& key) : q(parent), m_configKey(key), m_currentTheme(nullptr), m_defaultTheme(nullptr), m_inRediscover(false) {}
+        KgThemeProviderPrivate(KgThemeProvider *parent, const QByteArray& key)
+            : q(parent)
+            , m_configKey(key)
+            , m_currentTheme(nullptr)
+            , m_defaultTheme(nullptr)
+            , m_inRediscover(false)
+        {}
 
         void updateThemeName()
         {
@@ -45,7 +51,7 @@ class Q_DECL_HIDDEN KgThemeProvider::Private
 
 KgThemeProvider::KgThemeProvider(const QByteArray& configKey, QObject* parent)
 	: QObject(parent)
-	, d(new Private(this, configKey))
+	, d(new KgThemeProviderPrivate(this, configKey))
 {
 	qRegisterMetaType<const KgTheme*>();
 	qRegisterMetaType<KgThemeProvider*>();
@@ -71,7 +77,6 @@ KgThemeProvider::~KgThemeProvider()
 	{
 		delete const_cast<KgTheme*>(d->m_themes.takeFirst());
         }
-        delete d;
         }
 }
 

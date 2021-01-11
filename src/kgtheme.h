@@ -14,6 +14,8 @@
 #include <QObject>
 #include <QLoggingCategory>
 #include <QPixmap>
+// Std
+#include <memory>
 
 /**
  * @class KgTheme kgtheme.h <KgTheme>
@@ -127,8 +129,7 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		///complain about properties without NOTIFY signals, even readonly ones.
 		void readOnlyProperty();
 	private:
-		class Private;
-		Private* const d;
+		std::unique_ptr<class KgThemePrivate> const d;
 };
 
 Q_DECLARE_METATYPE(const KgTheme*)

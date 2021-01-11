@@ -32,7 +32,7 @@
 
 Q_LOGGING_CATEGORY(GAMES_HIGHSCORE, "org.kde.games.highscore", QtWarningMsg)
 
-class Q_DECL_HIDDEN KHighscore::KHighscorePrivate
+class KHighscorePrivate
 {
 public:
     KHighscorePrivate() {}
@@ -176,7 +176,6 @@ void KHighscore::writeAndUnlock()
 KHighscore::~KHighscore()
 {
     writeAndUnlock();
-    delete d;
 }
 
 KConfig* KHighscore::config() const

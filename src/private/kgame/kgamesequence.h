@@ -13,6 +13,8 @@
 #include "libkdegamesprivate_export.h"
 // Qt
 #include <QObject>
+// Std
+#include <memory>
 
 class KPlayer;
 class KGame;
@@ -70,8 +72,7 @@ public:
 	virtual int checkGameOver(KPlayer *player);
 
 private:
-	class KGameSequencePrivate;
-	KGameSequencePrivate *const d;
+	std::unique_ptr<class KGameSequencePrivate> const d;
 
 	Q_DISABLE_COPY(KGameSequence)
 };

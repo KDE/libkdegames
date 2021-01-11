@@ -16,30 +16,27 @@
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
-class Q_DECL_HIDDEN KgTheme::Private
+class KgThemePrivate
 {
     public:
         const QByteArray m_identifier;
         QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
         QMap<QString, QString> m_customData;
 
-        Private(const QByteArray& id) : m_identifier(id) {}
+        KgThemePrivate(const QByteArray& id) : m_identifier(id) {}
 
         static QStringList s_configGroupNames;
 };
 
-/*static*/ QStringList KgTheme::Private::s_configGroupNames;
+/*static*/ QStringList KgThemePrivate::s_configGroupNames;
 
 KgTheme::KgTheme(const QByteArray& identifier, QObject* parent)
 	: QObject(parent)
-	, d(new Private(identifier))
+	, d(new KgThemePrivate(identifier))
 {
 }
 
-KgTheme::~KgTheme()
-{
-	delete d;
-}
+KgTheme::~KgTheme() = default;
 
 QByteArray KgTheme::identifier() const
 {
@@ -91,14 +88,14 @@ bool KgTheme::readFromDesktopFile(const QString& path_)
 		}
 	}
 	//default group name
-	if (Private::s_configGroupNames.isEmpty())
+	if (KgThemePrivate::s_configGroupNames.isEmpty())
 	{
-		Private::s_configGroupNames << QStringLiteral("KGameTheme");
+		KgThemePrivate::s_configGroupNames << QStringLiteral("KGameTheme");
 	}
 	//open file, look for a known config group
 	KConfig config(path, KConfig::SimpleConfig);
 	KConfigGroup group;
-	for (const QString& groupName : qAsConst(Private::s_configGroupNames)) {
+	for (const QString& groupName : qAsConst(KgThemePrivate::s_configGroupNames)) {
 		if (config.hasGroup(groupName))
 		{
 			group = config.group(groupName);

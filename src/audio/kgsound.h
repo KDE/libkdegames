@@ -12,6 +12,8 @@
 // Qt
 #include <QObject>
 #include <QPointF>
+// Std
+#include <memory>
 
 class PlaybackEvent;
 
@@ -133,8 +135,7 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		void volumeChanged(qreal volume);
 	private:
 		friend class KgPlaybackEvent;
-		class Private;
-		Private* const d;
+		std::unique_ptr<class KgSoundPrivate> const d;
 };
 
 #endif // KGSOUND_H

@@ -12,7 +12,7 @@
 #include "kplayer.h"
 #include "kgame.h"
 
-class Q_DECL_HIDDEN KGameSequence::KGameSequencePrivate
+class KGameSequencePrivate
 {
   public:
     KGameSequencePrivate()
@@ -29,10 +29,7 @@ KGameSequence::KGameSequence()
 {
 }
 
-KGameSequence::~KGameSequence()
-{
- delete d;
-}
+KGameSequence::~KGameSequence() = default;
 
 void KGameSequence::setGame(KGame* game)
 {
