@@ -38,13 +38,17 @@ public:
 
 // ----------------------- Generic IO -------------------------
 KGameIO::KGameIO()
-  : d(new KGameIOPrivate)
+  : KGameIO(*new KGameIOPrivate)
 {
-  qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
 }
 
 KGameIO::KGameIO(KPlayer* player)
-  : d(new KGameIOPrivate)
+  : KGameIO(*new KGameIOPrivate, player)
+{
+}
+
+KGameIO::KGameIO(KGameIOPrivate &dd, KPlayer *player)
+    : d(&dd)
 {
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)" << sizeof(KGameIO);
   if (player)
@@ -61,7 +65,6 @@ KGameIO::~KGameIO()
   {
     player()->removeGameIO(this, false);
   }
-  delete d;
 }
 
 KPlayer* KGameIO::player() const
@@ -127,12 +130,12 @@ void KGameIO::Debug()
 }
 
 // ----------------------- Key IO ---------------------------
-class KGameKeyIOPrivate
+class KGameKeyIOPrivate : public KGameIOPrivate
 {
 };
 
 KGameKeyIO::KGameKeyIO(QWidget *parent) 
-   : KGameIO(), d(nullptr)
+   : KGameIO(*new KGameKeyIOPrivate)
 {
   if (parent)
   {
@@ -147,7 +150,6 @@ KGameKeyIO::~KGameKeyIO()
   {
     parent()->removeEventFilter(this);
   }
-  delete d;
 }
 
 int KGameKeyIO::rtti() const { return KeyIO; }
@@ -182,12 +184,12 @@ bool KGameKeyIO::eventFilter( QObject *o, QEvent *e )
 
 
 // ----------------------- Mouse IO ---------------------------
-class KGameMouseIOPrivate
+class KGameMouseIOPrivate : public KGameIOPrivate
 {
 };
 
 KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse) 
-   : KGameIO(), d(nullptr)
+   : KGameIO(*new KGameMouseIOPrivate)
 {
   if (parent)
   {
@@ -198,7 +200,7 @@ KGameMouseIO::KGameMouseIO(QWidget *parent,bool trackmouse)
 }
 
 KGameMouseIO::KGameMouseIO(QGraphicsScene *parent,bool /*trackmouse*/) 
-   : KGameIO(), d(nullptr)
+   : KGameIO(*new KGameMouseIOPrivate)
 {
   if (parent)
   {
@@ -214,7 +216,6 @@ KGameMouseIO::~KGameMouseIO()
   {
     parent()->removeEventFilter(this);
   }
-  delete d;
 }
 
 int KGameMouseIO::rtti() const
@@ -270,7 +271,7 @@ bool KGameMouseIO::eventFilter( QObject *o, QEvent *e )
 
 
 // ----------------------- KGameProcesPrivate ---------------------------
-class KGameProcessIOPrivate
+class KGameProcessIOPrivate : public KGameIOPrivate
 {
 public:
   KGameProcessIOPrivate()
@@ -286,8 +287,10 @@ public:
 
 // ----------------------- Process IO ---------------------------
 KGameProcessIO::KGameProcessIO(const QString& name) 
-   : KGameIO(), d(new KGameProcessIOPrivate)
+   : KGameIO(*new KGameProcessIOPrivate)
 {
+  Q_D(KGameProcessIO);
+
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)=" << sizeof(KGameProcessIO);
 
   //qCDebug(GAMES_PRIVATE_KGAME) << "================= KMEssageServer ====================";
@@ -313,6 +316,8 @@ KGameProcessIO::KGameProcessIO(const QString& name)
 
 KGameProcessIO::~KGameProcessIO()
 {
+  Q_D(KGameProcessIO);
+
   qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this;
   qCDebug(GAMES_PRIVATE_KGAME) << "player="<<player();
   if (player())
@@ -324,7 +329,6 @@ KGameProcessIO::~KGameProcessIO()
     delete d->mProcessIO;
     d->mProcessIO=nullptr;
   }
-  delete d;
 }
 
 int KGameProcessIO::rtti() const
@@ -386,6 +390,8 @@ void KGameProcessIO::sendMessage(QDataStream &stream,int msgid, quint32 receiver
 
 void KGameProcessIO::sendAllMessages(QDataStream &stream,int msgid, quint32 receiver, quint32 sender, bool usermsg)
 {
+  Q_D(KGameProcessIO);
+
   qCDebug(GAMES_PRIVATE_KGAME) << "==============>  KGameProcessIO::sendMessage (usermsg="<<usermsg<<")";
   // if (!player()) return ;
   //if (!player()->isActive()) return ;
@@ -459,7 +465,7 @@ void KGameProcessIO::receivedMessage(const QByteArray& receiveBuffer)
 
 
 // ----------------------- Computer IO --------------------------
-class KGameComputerIOPrivate
+class KGameComputerIOPrivate : public KGameIOPrivate
 {
 //TODO: maybe these should be KGameProperties!!
 public:
@@ -481,22 +487,23 @@ public:
 };
 
 KGameComputerIO::KGameComputerIO()
-    : KGameIO(), d(new KGameComputerIOPrivate)
+    : KGameIO(*new KGameComputerIOPrivate)
 {
 }
 
 KGameComputerIO::KGameComputerIO(KPlayer *p)
-    : KGameIO(p), d(new KGameComputerIOPrivate)
+    : KGameIO(*new KGameComputerIOPrivate, p)
 {
 }
 
 KGameComputerIO::~KGameComputerIO()
 {
+  Q_D(KGameComputerIO);
+
   if (d->mAdvanceTimer)
   {
     delete d->mAdvanceTimer;
   }
-  delete d;
 }
 
 int KGameComputerIO::rtti() const
@@ -506,16 +513,22 @@ int KGameComputerIO::rtti() const
 
 void KGameComputerIO::setReactionPeriod(int calls)
 {
+ Q_D(KGameComputerIO);
+
  d->mReactionPeriod = calls;
 }
 
 int KGameComputerIO::reactionPeriod() const
 {
+  Q_D(const KGameComputerIO);
+
   return d->mReactionPeriod;
 }
 
 void KGameComputerIO::setAdvancePeriod(int ms)
 {
+  Q_D(KGameComputerIO);
+
   stopAdvancePeriod();
   d->mAdvanceTimer = new QTimer(this);
   connect(d->mAdvanceTimer, &QTimer::timeout, this, &KGameComputerIO::advance);
@@ -524,6 +537,8 @@ void KGameComputerIO::setAdvancePeriod(int ms)
 
 void KGameComputerIO::stopAdvancePeriod()
 {
+  Q_D(KGameComputerIO);
+
   if (d->mAdvanceTimer)
   {
     d->mAdvanceTimer->stop();
@@ -533,6 +548,8 @@ void KGameComputerIO::stopAdvancePeriod()
 
 void KGameComputerIO::pause(int calls)
 {
+  Q_D(KGameComputerIO);
+
   d->mPauseCounter = calls;
 }
 
@@ -543,6 +560,8 @@ void KGameComputerIO::unpause()
 
 void KGameComputerIO::advance()
 {
+  Q_D(KGameComputerIO);
+
   if (d->mPauseCounter > 0)
   {
     d->mPauseCounter--;

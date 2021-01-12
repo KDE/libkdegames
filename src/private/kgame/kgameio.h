@@ -14,6 +14,8 @@
 // Qt
 #include <QString>
 #include <QObject>
+// Std
+#include <memory>
 
 class QEvent;
 class QGraphicsScene;
@@ -163,10 +165,18 @@ Q_SIGNALS:
      **/
     void signalPrepareTurn(QDataStream & stream, bool turn, KGameIO *io, bool * send);
 
+protected:
+    explicit KGameIO(KGameIOPrivate &dd, KPlayer *player = nullptr);
 
 private:
+    Q_DECLARE_PRIVATE_D(d, KGameIO)
     friend class KGameIOPrivate;
-    KGameIOPrivate *const d;
+    friend class KGameKeyIO;
+    friend class KGameMouseIO;
+    friend class KGameProcessIO;
+    friend class KGameComputerIO;
+    std::unique_ptr<KGameIOPrivate> const d;
+    // KF6 TODO: change private d to protected d_ptr, use normal Q_DECLARE_PRIVATE, remove subclass friends
 
     Q_DISABLE_COPY(KGameIO)
 };
@@ -244,8 +254,12 @@ protected:
        bool eventFilter( QObject *o, QEvent *e ) override;
 
 private:
+    Q_DECLARE_PRIVATE_D(KGameIO::d, KGameKeyIO)
     friend class KGameKeyIOPrivate;
-    KGameKeyIOPrivate *const d;
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+	// Unused, kept for ABI compatibility
+	const void * __kdegames_d_do_not_use;
+#endif
 
     Q_DISABLE_COPY(KGameKeyIO)
 };
@@ -323,8 +337,12 @@ protected:
       bool eventFilter( QObject *o, QEvent *e ) override;
 
 private:
+    Q_DECLARE_PRIVATE_D(KGameIO::d, KGameMouseIO)
     friend class KGameMouseIOPrivate;
-    KGameMouseIOPrivate *const d;
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+	// Unused, kept for ABI compatibility
+	const void * __kdegames_d_do_not_use;
+#endif
 
     Q_DISABLE_COPY(KGameMouseIO)
 };
@@ -475,8 +493,12 @@ Q_SIGNALS:
   void signalReceivedStderr(const QString &msg);
 
 private:
+    Q_DECLARE_PRIVATE_D(KGameIO::d, KGameProcessIO)
     friend class KGameProcessIOPrivate;
-    KGameProcessIOPrivate *const d;
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+	// Unused, kept for ABI compatibility
+	const void * __kdegames_d_do_not_use;
+#endif
 
     Q_DISABLE_COPY(KGameProcessIO)
 };
@@ -580,8 +602,12 @@ protected:
     virtual void reaction();
 
 private:
+    Q_DECLARE_PRIVATE_D(KGameIO::d, KGameComputerIO)
     friend class KGameComputerIOPrivate;
-    KGameComputerIOPrivate *const d;
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+	// Unused, kept for ABI compatibility
+	const void * __kdegames_d_do_not_use;
+#endif
 
     Q_DISABLE_COPY(KGameComputerIO)
 };

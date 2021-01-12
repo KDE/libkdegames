@@ -367,9 +367,14 @@ private Q_SLOTS:
          **/
         virtual void customMenuHandler(const QPoint &pos);
 
-private:
+protected:
+	KChatBase(KChatBasePrivate &dd, QWidget *parent, bool noComboBox);
 
+private:
+	friend class KGameChat;
+	Q_DECLARE_PRIVATE_D(d, KChatBase)
 	std::unique_ptr<KChatBasePrivate> const d;
+	// KF6 TODO: change private d to protected d_ptr, use normal Q_DECLARE_PRIVATE, remove subclass friend
 };
 
 #endif

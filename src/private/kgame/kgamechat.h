@@ -205,7 +205,11 @@ private:
 	void init(KGame* g, int msgid);
 
 private:
-	KGameChatPrivate* const d;
+	Q_DECLARE_PRIVATE_D(KChatBase::d, KGameChat)
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+	// Unused, kept for ABI compatibility
+	const void * __kdegames_d_do_not_use;
+#endif
 };
 
 #endif

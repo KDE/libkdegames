@@ -9,6 +9,7 @@
 #include "kgamechat.h"
 
 // own
+#include "../kchatbase_p.h"
 #include "kgame.h"
 #include "kplayer.h"
 #include "kgameproperty.h"
@@ -21,10 +22,11 @@
 //FIXME:
 #define FIRST_ID 2 // first id, that is free of use, aka not defined above
 
-class KGameChatPrivate
+class KGameChatPrivate : public KChatBasePrivate
 {
 public:
-	KGameChatPrivate()
+	KGameChatPrivate(KChatBaseModel* model, KChatBaseItemDelegate* delegate, QWidget* parent)
+	    : KChatBasePrivate(model, delegate, parent)
 	{
 		mFromPlayer = nullptr;
 		mGame = nullptr;
@@ -42,23 +44,20 @@ public:
 };
 
 KGameChat::KGameChat(KGame* g, int msgid, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate)
-    : KChatBase(parent, model, delegate),
-      d( new KGameChatPrivate )
+    : KChatBase(*new KGameChatPrivate(model, delegate, parent), parent, false)
 {
  init(g, msgid); 
 }
 
 KGameChat::KGameChat(KGame* g, int msgid, KPlayer* fromPlayer, QWidget* parent, KChatBaseModel* model, KChatBaseItemDelegate* delegate)
-    : KChatBase(parent,model,delegate),
-      d( new KGameChatPrivate )
+    : KChatBase(*new KGameChatPrivate(model, delegate, parent), parent, false)
 {
  init(g, msgid);
  setFromPlayer(fromPlayer);
 }
 
 KGameChat::KGameChat(QWidget* parent)
-    : KChatBase(parent),
-      d( new KGameChatPrivate )
+    : KChatBase(*new KGameChatPrivate(nullptr, nullptr, parent), parent, false)
 {
  init(nullptr, -1);
 }
@@ -66,7 +65,6 @@ KGameChat::KGameChat(QWidget* parent)
 KGameChat::~KGameChat()
 {
  qCDebug(GAMES_PRIVATE_KGAME) ;
- delete d;
 }
 
 void KGameChat::init(KGame* g, int msgId)
@@ -79,6 +77,8 @@ void KGameChat::init(KGame* g, int msgId)
 
 void KGameChat::addMessage(int fromId, const QString& text)
 {
+    Q_D(KGameChat);
+
  if (!d->mGame) {
 	qCWarning(GAMES_PRIVATE_KGAME) << "no KGame object has been set";
 	addMessage(i18n("Player %1", fromId), text);
@@ -96,6 +96,8 @@ void KGameChat::addMessage(int fromId, const QString& text)
 
 void KGameChat::returnPressed(const QString& text)
 {
+    Q_D(KGameChat);
+
  if (!d->mFromPlayer) {
 	qCWarning(GAMES_PRIVATE_KGAME) << ": You must set a player first!";
 	return;
@@ -138,26 +140,47 @@ void KGameChat::returnPressed(const QString& text)
 }
 
 void KGameChat::setMessageId(int msgid)
-{ d->mMessageId = msgid; }
+{
+    Q_D(KGameChat);
+
+    d->mMessageId = msgid;
+}
 
 int KGameChat::messageId() const
-{ return d->mMessageId; }
+{
+    Q_D(const KGameChat);
+
+    return d->mMessageId;
+}
 
 bool KGameChat::isSendToAllMessage(int id) const
-{ return (id == KChatBase::SendToAll); }
+{
+    return (id == KChatBase::SendToAll);
+}
 
 bool KGameChat::isToGroupMessage(int id) const
-{ return (id == d->mToMyGroup); }
+{
+    Q_D(const KGameChat);
+
+    return (id == d->mToMyGroup);
+}
 
 bool KGameChat::isToPlayerMessage(int id) const
 {
-return d->mSendId2PlayerId.contains(id); }
+    Q_D(const KGameChat);
+
+    return d->mSendId2PlayerId.contains(id);
+}
 
 QString KGameChat::sendToPlayerEntry(const QString& name) const
-{ return i18n("Send to %1", name); }
+{
+    return i18n("Send to %1", name);
+}
 
 int KGameChat::playerId(int id) const
 {
+    Q_D(const KGameChat);
+
  if (!isToPlayerMessage(id)) {
 	return -1;
  }
@@ -167,7 +190,9 @@ int KGameChat::playerId(int id) const
 
 int KGameChat::sendingId(int playerId) const
 {
- QMap<int, int>::Iterator it;
+    Q_D(const KGameChat);
+
+ QMap<int, int>::ConstIterator it;
  for (it = d->mSendId2PlayerId.begin(); it != d->mSendId2PlayerId.end(); ++it) {
 	if (it.value() == playerId) {
 		return it.key();
@@ -177,7 +202,11 @@ int KGameChat::sendingId(int playerId) const
 }
 
 QString KGameChat::fromName() const
-{ return d->mFromPlayer ? d->mFromPlayer->name() : QString(); }
+{
+    Q_D(const KGameChat);
+
+    return d->mFromPlayer ? d->mFromPlayer->name() : QString();
+}
 
 bool KGameChat::hasPlayer(int id) const
 {
@@ -186,6 +215,8 @@ bool KGameChat::hasPlayer(int id) const
 
 void KGameChat::setFromPlayer(KPlayer* p)
 {
+    Q_D(KGameChat);
+
  if (!p) {
 	qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
 	removeSendingEntry(d->mToMyGroup);
@@ -209,6 +240,8 @@ void KGameChat::setFromPlayer(KPlayer* p)
 
 void KGameChat::setKGame(KGame* g)
 {
+    Q_D(KGameChat);
+
  if (d->mGame) {
 	slotUnsetKGame();
  }
@@ -230,17 +263,22 @@ void KGameChat::setKGame(KGame* g)
 
 KGame* KGameChat::game() const
 {
+    Q_D(const KGameChat);
+
  return d->mGame;
 }
 
 KPlayer* KGameChat::fromPlayer() const
 {
+    Q_D(const KGameChat);
+
  return d->mFromPlayer;
 }
 
 void KGameChat::slotUnsetKGame()
 {
 //TODO: test this method!
+    Q_D(KGameChat);
 
  if (!d->mGame) {
 	return;
@@ -255,6 +293,8 @@ void KGameChat::slotUnsetKGame()
 
 void KGameChat::slotAddPlayer(KPlayer* p)
 {
+    Q_D(KGameChat);
+
  if (!p) {
 	qCCritical(GAMES_PRIVATE_KGAME) << ": cannot add NULL player";
 	return;
@@ -273,6 +313,8 @@ void KGameChat::slotAddPlayer(KPlayer* p)
 
 void KGameChat::slotRemovePlayer(KPlayer* p)
 {
+    Q_D(KGameChat);
+
  if (!p) {
 	qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
 	return;
