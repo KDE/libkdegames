@@ -14,6 +14,7 @@
 // Qt
 #include <QAbstractListModel>
 #include <QPair>
+#include <QSharedDataPointer>
 #include <QLoggingCategory>
 // Std
 #include <memory>
@@ -57,7 +58,7 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
     virtual ~KChatBaseMessage();
 
   private:
-    KChatBaseMessagePrivate* d;
+    QSharedDataPointer<KChatBaseMessagePrivate> d;
 };
 Q_DECLARE_METATYPE(KChatBaseMessage)
 

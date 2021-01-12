@@ -14,8 +14,9 @@
 #include <KSharedConfig>
 // Qt
 #include <QFont>
+#include <QSharedData>
 
-class KChatBaseMessagePrivate
+class KChatBaseMessagePrivate : public QSharedData
 {
 public:
   KChatBaseMessagePrivate()
@@ -27,30 +28,26 @@ public:
 };
 
 KChatBaseMessage::KChatBaseMessage()
+  : d(new KChatBaseMessagePrivate())
 {
-  d = new KChatBaseMessagePrivate();
 }
     
 KChatBaseMessage::KChatBaseMessage(const QString& sender, const QString& message, 
       MessageType type) :
   QPair<QString,QString>(sender,message)
+  , d(new KChatBaseMessagePrivate())
 {
-  d = new KChatBaseMessagePrivate();
   d->m_type = type;
 }
 
 KChatBaseMessage::KChatBaseMessage(const KChatBaseMessage& m) : 
     QPair< QString, QString >(m)
+  , d(m.d)
 {
-  d = new KChatBaseMessagePrivate();
-  d->m_type = m.d->m_type;
 }
 
-KChatBaseMessage::~KChatBaseMessage() 
-{
-  delete d;
-}
-    
+KChatBaseMessage::~KChatBaseMessage() = default;
+
 
 class KChatBaseModelPrivate
 {
