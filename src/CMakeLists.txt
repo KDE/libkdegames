@@ -195,7 +195,8 @@ install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesLibraryDepends ${KDE_INSTAL
 ########### install files ###############
 
 install(FILES kgthemeprovider-migration.upd
-    DESTINATION ${KDE_INSTALL_DATADIR}/kconf_update)
+    DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR}
+)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_export.h
