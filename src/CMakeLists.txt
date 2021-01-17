@@ -223,7 +223,7 @@ export(TARGETS KF5KDEGames KF5KDEGamesPrivate
     FILE "${PROJECT_BINARY_DIR}/KF5KDEGamesLibraryDepends.cmake")
 
 # define the installation directory for the CMake files
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5KDEGames")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5KDEGames")
 
 # create the Config.cmake and ConfigVersion.cmake files
 configure_package_config_file(
