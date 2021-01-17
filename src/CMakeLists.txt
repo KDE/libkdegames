@@ -85,7 +85,7 @@ target_link_libraries(KF5KDEGames
 
 target_include_directories(KF5KDEGames
     INTERFACE
-        "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>"
+        "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>"
     PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>"
     PRIVATE
@@ -179,7 +179,7 @@ target_link_libraries(KF5KDEGamesPrivate
 )
 
 target_include_directories(KF5KDEGamesPrivate
-    INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/libkdegamesprivate>"
+    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames/libkdegamesprivate>"
     PRIVATE
         private/kgame
 )
@@ -195,7 +195,7 @@ install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesLibraryDepends ${KDE_INSTAL
 ########### install files ###############
 
 install(FILES kgthemeprovider-migration.upd
-    DESTINATION ${DATA_INSTALL_DIR}/kconf_update)
+    DESTINATION ${KDE_INSTALL_DATADIR}/kconf_update)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_export.h
@@ -214,7 +214,7 @@ install(FILES
     kgthemeprovider.h
     kgthemeselector.h
     kstandardgameaction.h
-DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames COMPONENT Devel)
+DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames COMPONENT Devel)
 
 ########### generate exports ###############
 
@@ -246,7 +246,7 @@ install(EXPORT KF5KDEGamesLibraryDepends
 )
 	
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames
     COMPONENT Devel
 )
 
