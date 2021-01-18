@@ -1,6 +1,6 @@
-add_subdirectory(includes)
+set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames)
+
 add_subdirectory(carddecks)
-add_subdirectory(highscore)
 add_subdirectory(qml)
 add_subdirectory(private)
 
@@ -28,6 +28,40 @@ set(kdegames_LIB_SRCS
     kgthemeprovider.cpp
     kgthemeselector.cpp
     kstandardgameaction.cpp
+)
+
+ecm_generate_headers(kdegames_CamelCase_HEADERS
+    HEADER_NAMES
+        KGameClock
+        KGamePopupItem
+        KGameRenderedItem
+        KGameRenderedObjectItem
+        KGameRenderer
+        KGameRendererClient
+        KgDeclarativeView
+        KgDifficulty
+        KgTheme
+        KgThemeProvider
+        KgThemeSelector
+        KStandardGameAction
+    REQUIRED_HEADERS kdegames_HEADERS
+)
+
+ecm_generate_headers(kdegames_CamelCase_HEADERS
+    HEADER_NAMES
+        KHighscore
+        KScoreDialog
+    RELATIVE highscore
+    PREFIX highscore
+    REQUIRED_HEADERS kdegames_highscore_HEADERS
+)
+
+ecm_generate_headers(kdegames_CamelCase_HEADERS
+    HEADER_NAMES
+        KgAudioScene
+        KgSound
+    RELATIVE audio
+    REQUIRED_HEADERS kdegames_HEADERS
 )
 
 ecm_qt_export_logging_category(
@@ -85,9 +119,9 @@ target_link_libraries(KF5KDEGames
 
 target_include_directories(KF5KDEGames
     INTERFACE
-        "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>"
-    PUBLIC
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>"
+        "$<INSTALL_INTERFACE:${kdegames_INCLUDE_INSTALL_DIR}>"
+    #PUBLIC
+        #"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>"
     PRIVATE
         ${OPENAL_INCLUDE_DIR}
         ${SNDFILE_INCLUDE_DIR}
@@ -179,7 +213,8 @@ target_link_libraries(KF5KDEGamesPrivate
 )
 
 target_include_directories(KF5KDEGamesPrivate
-    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames/libkdegamesprivate>"
+    INTERFACE
+        "$<INSTALL_INTERFACE:${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate>"
     PRIVATE
         private/kgame
 )
@@ -198,24 +233,24 @@ install(FILES kgthemeprovider-migration.upd
     DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR}
 )
 
+install(FILES ${kdegames_CamelCase_HEADERS}
+    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}
+    COMPONENT Devel
+)
+
+install(FILES
+    ${kdegames_highscore_HEADERS}
+    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}/highscore
+    COMPONENT Devel
+)
+
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_export.h
     ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h
-    audio/kgaudioscene.h
-    audio/kgsound.h
-    kgameclock.h
-    kgamepopupitem.h
-    kgamerendereditem.h
-    kgamerenderedobjectitem.h
-    kgamerendererclient.h
-    kgamerenderer.h
-    kgdeclarativeview.h
-    kgdifficulty.h
-    kgtheme.h
-    kgthemeprovider.h
-    kgthemeselector.h
-    kstandardgameaction.h
-DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames COMPONENT Devel)
+    ${kdegames_HEADERS}
+    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}
+    COMPONENT Devel
+)
 
 ########### generate exports ###############
 
@@ -247,7 +282,7 @@ install(EXPORT KF5KDEGamesLibraryDepends
 )
 	
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames
+    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}
     COMPONENT Devel
 )
 

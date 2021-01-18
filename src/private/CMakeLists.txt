@@ -20,7 +20,9 @@ install(FILES
     kgamesvgdocument.h
     kgametheme.h
     kgamethemeselector.h
-DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames/libkdegamesprivate COMPONENT Devel)
+    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate
+    COMPONENT Devel
+)
 
 install(FILES
     kgame/kgamechat.h
@@ -37,4 +39,6 @@ install(FILES
     kgame/kmessageio.h
     kgame/kmessageserver.h
     kgame/kplayer.h
-DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames/libkdegamesprivate/kgame COMPONENT Devel)
+    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate/kgame
+    COMPONENT Devel
+)
