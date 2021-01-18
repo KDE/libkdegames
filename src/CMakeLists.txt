@@ -142,7 +142,7 @@ set_target_properties(KF5KDEGames PROPERTIES
     SOVERSION ${KDEGAMES_SOVERSION}
 )
 
-install(TARGETS KF5KDEGames EXPORT KF5KDEGamesLibraryDepends ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5KDEGames EXPORT KF5KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 # NOTE: The libkdegamesprivate target is compiled in this directory, because
@@ -224,7 +224,7 @@ set_target_properties(KF5KDEGamesPrivate PROPERTIES
     SOVERSION ${KDEGAMES_SOVERSION}
 )
 
-install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesLibraryDepends ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
@@ -256,7 +256,7 @@ install(FILES
 
 # add libraries to the build-tree export set
 export(TARGETS KF5KDEGames KF5KDEGamesPrivate
-    FILE "${PROJECT_BINARY_DIR}/KF5KDEGamesLibraryDepends.cmake")
+    FILE "${PROJECT_BINARY_DIR}/KF5KDEGamesTargets.cmake")
 
 # define the installation directory for the CMake files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5KDEGames")
@@ -276,7 +276,7 @@ install(FILES
 )
 
 # install the export set for use with the install-tree
-install(EXPORT KF5KDEGamesLibraryDepends
+install(EXPORT KF5KDEGamesTargets
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     COMPONENT Devel
 )

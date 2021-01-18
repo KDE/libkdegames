@@ -19,7 +19,7 @@ find_dependency(KF5WidgetsAddons @KF_MIN_VERSION@)
 find_dependency(KF5ConfigWidgets @KF_MIN_VERSION@)
 find_dependency(KF5Completion @KF_MIN_VERSION@)
 
-include("${CMAKE_CURRENT_LIST_DIR}/KF5KDEGamesLibraryDepends.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/KF5KDEGamesTargets.cmake")
 
 # set backward-compat variables
 get_target_property(KDEGAMES_INCLUDE_DIR KF5KDEGames INTERFACE_INCLUDE_DIRECTORIES)
