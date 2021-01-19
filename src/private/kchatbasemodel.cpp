@@ -40,14 +40,11 @@ KChatBaseMessage::KChatBaseMessage(const QString& sender, const QString& message
   d->m_type = type;
 }
 
-KChatBaseMessage::KChatBaseMessage(const KChatBaseMessage& m) : 
-    QPair< QString, QString >(m)
-  , d(m.d)
-{
-}
+KChatBaseMessage::KChatBaseMessage(const KChatBaseMessage& other) = default;
 
 KChatBaseMessage::~KChatBaseMessage() = default;
 
+KChatBaseMessage & KChatBaseMessage::operator=(const KChatBaseMessage& other) = default;
 
 class KChatBaseModelPrivate
 {

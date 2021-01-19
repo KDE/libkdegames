@@ -54,6 +54,8 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair< QString, QString >
     /** Copy constructor. Necessary for Qt metatypes */
     KChatBaseMessage(const KChatBaseMessage& m);
 
+    KChatBaseMessage & operator=(const KChatBaseMessage& m);
+
     /** Default destructor */
     virtual ~KChatBaseMessage();
 
