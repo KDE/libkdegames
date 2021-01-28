@@ -145,88 +145,6 @@ set_target_properties(KF5KDEGames PROPERTIES
 install(TARGETS KF5KDEGames EXPORT KF5KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
-# NOTE: The libkdegamesprivate target is compiled in this directory, because
-# CMake can't cope with exported libraries in two different directories.
-
-set(kdegamesprivate_LIB_SRCS
-    private/kchatbase.cpp
-    private/kchatbaseitemdelegate.cpp
-    private/kchatbasemodel.cpp
-    private/kgame/kgamechat.cpp
-    private/kgame/kgame.cpp
-    private/kgame/kgameerror.cpp
-    private/kgame/kgameio.cpp
-    private/kgame/kgamemessage.cpp
-    private/kgame/kgamenetwork.cpp
-    private/kgame/kgameproperty.cpp
-    private/kgame/kgamepropertyhandler.cpp
-    private/kgame/kgamesequence.cpp
-    private/kgame/kmessageclient.cpp
-    private/kgame/kmessageio.cpp
-    private/kgame/kmessageserver.cpp
-    private/kgame/kplayer.cpp
-    private/kgamecanvas.cpp
-    private/kgamedifficulty.cpp
-    private/kgamesvgdocument.cpp
-    private/kgametheme.cpp
-    private/kgamethemeselector.cpp
-)
-
-ki18n_wrap_ui(kdegamesprivate_LIB_SRCS
-    private/kgamethemeselector.ui
-)
-
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_PRIVATE
-    CATEGORY_NAME org.kde.games.private
-    DESCRIPTION "libkdegamesprivate"
-    EXPORT KDEGAMES
-)
-
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_PRIVATE_KGAME
-    CATEGORY_NAME org.kde.games.private.kgame
-    DESCRIPTION "libkdegamesprivate KGame"
-    EXPORT KDEGAMES
-)
-
-add_library(KF5KDEGamesPrivate SHARED ${kdegamesprivate_LIB_SRCS})
-ecm_generate_export_header(KF5KDEGamesPrivate
-    EXPORT_FILE_NAME libkdegamesprivate_export.h
-    BASE_NAME KDEGAMESPRIVATE
-    VERSION ${KDEGAMES_VERSION}
-    DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 3.2 4.9 7.3
-    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
-)
-
-target_link_libraries(KF5KDEGamesPrivate
-    PUBLIC
-        KF5KDEGames
-        KF5::Completion
-        Qt5::Xml
-        Qt5::Network
-    PRIVATE
-        KF5::DNSSD
-        KF5::NewStuff
-        KF5::Archive
-)
-
-target_include_directories(KF5KDEGamesPrivate
-    INTERFACE
-        "$<INSTALL_INTERFACE:${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate>"
-    PRIVATE
-        private/kgame
-)
-
-set_target_properties(KF5KDEGamesPrivate PROPERTIES
-    VERSION   ${KDEGAMES_VERSION}
-    SOVERSION ${KDEGAMES_SOVERSION}
-)
-
-install(TARGETS KF5KDEGamesPrivate EXPORT KF5KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-
-
 ########### install files ###############
 
 install(FILES kgthemeprovider-migration.upd
@@ -254,10 +172,6 @@ install(FILES
 
 ########### generate exports ###############
 
-# add libraries to the build-tree export set
-export(TARGETS KF5KDEGames KF5KDEGamesPrivate
-    FILE "${PROJECT_BINARY_DIR}/KF5KDEGamesTargets.cmake")
-
 # define the installation directory for the CMake files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5KDEGames")
 
@@ -275,9 +189,9 @@ install(FILES
     COMPONENT Devel
 )
 
-# install the export set for use with the install-tree
 install(EXPORT KF5KDEGamesTargets
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+    FILE KF5KDEGamesTargets.cmake
     COMPONENT Devel
 )
 	
