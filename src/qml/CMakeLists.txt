@@ -1,5 +1,7 @@
 project(corebindings)
 
+set(corebindingsplugin_QML_INSTALL_DIR ${KDE_INSTALL_QMLDIR}/org/kde/games/core)
+
 add_library(corebindingsplugin SHARED)
 
 target_sources(corebindingsplugin PRIVATE
@@ -12,5 +14,9 @@ target_link_libraries(corebindingsplugin
         Qt5::Qml
 )
 
-install(TARGETS corebindingsplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/games/core)
-install(DIRECTORY qml/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/games/core)
+install(TARGETS corebindingsplugin
+    DESTINATION ${corebindingsplugin_QML_INSTALL_DIR}
+)
+install(DIRECTORY qml/
+    DESTINATION ${corebindingsplugin_QML_INSTALL_DIR}
+)
