@@ -7,7 +7,9 @@ add_subdirectory(private)
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 configure_file(highscore/config-highscore.h.in ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
-set(kdegames_LIB_SRCS
+add_library(KF5KDEGames SHARED)
+
+target_sources(KF5KDEGames PRIVATE
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
     audio/kgsound-${KGAUDIO_BACKEND}.cpp
     audio/virtualfileqt-${KGAUDIO_BACKEND}.cpp
@@ -85,8 +87,6 @@ ecm_qt_export_logging_category(
     EXPORT KDEGAMES
 )
 
-add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
-
 ecm_generate_export_header(KF5KDEGames
     EXPORT_FILE_NAME libkdegames_export.h
     BASE_NAME KDEGAMES
@@ -120,8 +120,6 @@ target_link_libraries(KF5KDEGames
 target_include_directories(KF5KDEGames
     INTERFACE
         "$<INSTALL_INTERFACE:${kdegames_INCLUDE_INSTALL_DIR}>"
-    #PUBLIC
-        #"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>"
     PRIVATE
         ${OPENAL_INCLUDE_DIR}
         ${SNDFILE_INCLUDE_DIR}
