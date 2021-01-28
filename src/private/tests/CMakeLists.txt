@@ -1,3 +1,5 @@
+include(ECMAddTests)
+
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 remove_definitions(
@@ -6,20 +8,11 @@ remove_definitions(
     -DQT_NO_CAST_FROM_BYTEARRAY
 )
 
-include(ECMMarkAsTest)
-
 configure_file(config-tests.h.in ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
 
-MACRO(LIBKDEGAMESPRIVATE_UNIT_TESTS)
-       FOREACH(_testname ${ARGN})
-               add_executable(${_testname} ${_testname}.cpp)
-               target_link_libraries(${_testname} Qt5::Test KF5KDEGamesPrivate)
-	       add_test(NAME libkdegamesprivate-${_testname} COMMAND ${_testname})
-               ecm_mark_as_test(${_testname})
-       ENDFOREACH(_testname)
-ENDMACRO(LIBKDEGAMESPRIVATE_UNIT_TESTS)
-
-LIBKDEGAMESPRIVATE_UNIT_TESTS(
+ecm_add_tests(
     kgamesvgdocumenttest
     kgamepropertytest
+    NAME_PREFIX "libkdegamesprivate-"
+    LINK_LIBRARIES Qt5::Test KF5KDEGamesPrivate
 )
