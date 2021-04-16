@@ -11,8 +11,8 @@ remove_definitions(
 configure_file(config-tests.h.in ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
 
 ecm_add_tests(
-    kgamesvgdocumenttest
-    kgamepropertytest
+    kgamesvgdocumenttest.cpp
+    kgamepropertytest.cpp
     NAME_PREFIX "libkdegamesprivate-"
     LINK_LIBRARIES Qt5::Test KF5KDEGamesPrivate
 )
