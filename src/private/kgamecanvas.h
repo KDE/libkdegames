@@ -1,7 +1,7 @@
 /*  Originally created for KBoard
     SPDX-FileCopyrightText: 2006 Maurizio Monge <maurizio.monge@gmail.com>
 
-    SPDX-License-Identifier: BSD-2-Clause.
+    SPDX-License-Identifier: BSD-2-Clause
 */
 
 #ifndef __KGAMECANVAS_H__
