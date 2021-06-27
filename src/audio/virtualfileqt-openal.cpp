@@ -25,11 +25,11 @@ int64_t VirtualFileQt::seek(int64_t offset, int whence)
 {
     switch (whence) {
         case SEEK_SET:
-            return m_file.seek(static_cast<quint64>(offset)) ? 0 : -1;
+            return m_file.seek(static_cast<quint64>(offset)) ? m_file.pos() : -1;
         case SEEK_CUR:
-            return m_file.seek(m_file.pos() + static_cast<quint64>(offset)) ? 0 : -1;
+            return m_file.seek(m_file.pos() + static_cast<quint64>(offset)) ? m_file.pos() : -1;
         case SEEK_END:
-            return m_file.seek(m_file.size() + static_cast<quint64>(offset)) ? 0 : -1;
+            return m_file.seek(m_file.size() + static_cast<quint64>(offset)) ? m_file.pos() : -1;
         default:
             return -1;
     }
