@@ -8,7 +8,7 @@
 #include "kgamesvgdocument_p.h"
 
 // KF
-#include <KFilterDev>
+#include <KCompressionDevice>
 // Qt
 #include <QBuffer>
 #include <QFile>
@@ -184,8 +184,7 @@ void KGameSvgDocument::load()
     if (!content.startsWith("<?xml")) // krazy:exclude=strings
     {
         QBuffer buf(&content);
-        KCompressionDevice::CompressionType type = KFilterDev::compressionTypeForMimeType(QStringLiteral("application/x-gzip"));
-	KCompressionDevice flt(&buf, false, type);
+        KCompressionDevice flt(&buf, /*autoDeleteInputDevice*/ false, KCompressionDevice::GZip);
 	if (!flt.open(QIODevice::ReadOnly))
         {
             flt.close();
