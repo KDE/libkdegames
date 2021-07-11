@@ -56,7 +56,7 @@ void TextItemWithOpacity::paint( QPainter* p, const QStyleOptionGraphicsItem *op
     //NOTE from majewsky: For some weird reason, setDefaultTextColor does on some systems not check
     //whether the given color is equal to the one already set. Just calling setDefaultTextColor without
     //this check may result in an infinite loop of paintEvent -> setDefaultTextColor -> update -> paintEvent...
-    const QColor textColor = m_brush.brush(widget).color();
+    const QColor textColor = widget ? m_brush.brush(widget->palette()).color() : QColor(Qt::black);
     if (textColor != defaultTextColor())
     {
         setDefaultTextColor(textColor);
@@ -197,7 +197,6 @@ KGamePopupItem::~KGamePopupItem() = default;
 void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget )
 {
     Q_UNUSED(option);
-    Q_UNUSED(widget);
 
     p->save();
 
@@ -213,7 +212,7 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     {
         p->setOpacity(d->m_opacity);
     }
-    p->setBrush(d->m_brush.brush(widget));
+    p->setBrush(widget ? d->m_brush.brush(widget->palette()) : QBrush());
     p->drawPath(d->m_path);
     p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
                    d->m_iconPix );
