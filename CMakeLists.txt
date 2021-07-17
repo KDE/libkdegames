@@ -47,6 +47,8 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateExportHeader)
 include(ECMQtDeclareLoggingCategory)
 
+include(InternalMacros)
+
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
 set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores e.g. /var/games")
