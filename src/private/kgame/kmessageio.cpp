@@ -144,11 +144,7 @@ void KMessageSocket::processNewData ()
 
 void KMessageSocket::initSocket ()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
   connect(mSocket, &QTcpSocket::errorOccurred,
-#else
-  connect(mSocket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::error),
-#endif
           this, &KMessageSocket::connectionBroken);
   connect(mSocket, &QTcpSocket::disconnected, this, &KMessageSocket::connectionBroken);
   connect(mSocket, &QTcpSocket::readyRead, this, &KMessageSocket::processNewData);
