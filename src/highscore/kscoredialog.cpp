@@ -12,7 +12,6 @@
 #include "khighscore.h"
 #include "../kgdifficulty.h"
 // KF
-#include <kcompletion_version.h>
 #include <KConfig>
 #include <KUser>
 #include <KSeparator>
@@ -398,11 +397,7 @@ void KScoreDialogPrivate::aboutToShow()
                     localStack->addWidget(edit);
                     localStack->setCurrentWidget(edit);
                     edit->setFocus();
-#if KCOMPLETION_VERSION >= QT_VERSION_CHECK(5, 81, 0)
                     QObject::connect(edit, &KLineEdit::returnKeyPressed, q, &KScoreDialog::slotGotReturn);
-#else
-                    QObject::connect(edit, &KLineEdit::returnPressed, q, &KScoreDialog::slotGotReturn);
-#endif
                 }
                 else
                 {

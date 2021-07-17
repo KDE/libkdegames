@@ -13,7 +13,6 @@
 #include "kchatbasemodel.h"
 #include "kchatbaseitemdelegate.h"
 // KF
-#include <kcompletion_version.h>
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <KConfig>
@@ -92,11 +91,7 @@ KChatBase::KChatBase(KChatBasePrivate &dd, QWidget *parent, bool noComboBox)
  d->mEdit->setTrapReturnKey(true);
  d->mEdit->completionObject(); // add the completion object
  d->mEdit->setCompletionMode(KCompletion::CompletionNone);
-#if KCOMPLETION_VERSION >= QT_VERSION_CHECK(5, 81, 0)
  connect(d->mEdit, &KLineEdit::returnKeyPressed, this, &KChatBase::slotReturnPressed);
-#else
- connect(d->mEdit, &KLineEdit::returnPressed, this, &KChatBase::slotReturnPressed);
-#endif
  h->addWidget(d->mEdit);
 
  if (!noComboBox) {

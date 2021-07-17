@@ -8,7 +8,6 @@
 #include "kgamedifficulty.h"
 
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KActionCollection>
 #include <KComboBox>
 #include <KLocalizedString>
@@ -109,11 +108,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow* window, const QObject* recvr, c
 	m_menu = new KSelectAction(QIcon::fromTheme( QStringLiteral( "games-difficult") ), i18nc("Game difficulty level", "Difficulty" ), window);
 	m_menu->setToolTip(i18n("Set the difficulty level"));
 	m_menu->setWhatsThis(i18n("Set the difficulty level of the game."));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
 	connect(m_menu, &KSelectAction::indexTriggered,
-#else
-	connect(m_menu, QOverload<int>::of(&KSelectAction::triggered),
-#endif
 	        this, &KGameDifficultyPrivate::changeSelection);
 	m_menu->setObjectName( QStringLiteral("options_game_difficulty" ));
 	window->actionCollection()->addAction(m_menu->objectName(), m_menu);
