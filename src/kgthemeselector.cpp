@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QListWidget>
 #include <QPushButton>
+#include <QScreen>
 #include <QScrollBar>
 #include <QVBoxLayout>
 #include <QDialogButtonBox>
@@ -65,11 +66,25 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 	d->m_list->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 	//load themes from provider
 	d->fillList();
-	//setup appearance of the theme list (min. size = 4 items)
+
+	//setup appearance of the theme list
 	KgThemeDelegate* delegate = new KgThemeDelegate(d->m_list);
-	const QSize itemSizeHint = delegate->sizeHint(QStyleOptionViewItem(), QModelIndex());
-	const QSize scrollBarSizeHint = d->m_list->verticalScrollBar()->sizeHint();
-	d->m_list->setMinimumSize(itemSizeHint.width() + 2 * scrollBarSizeHint.width(), 4.1 * itemSizeHint.height());
+	QScreen *screen = QWidget::screen();
+	QSize screenSize = screen->availableSize();
+    if (screenSize.width() < 650 || screenSize.height() < 650) {
+		d->m_list->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+		if (parent){
+			d->m_list->setMinimumSize(0, 0);
+		} else {
+			//greater than zero to prevent zero sized dialog in some games
+			d->m_list->setMinimumSize(330, 200);
+		}
+	} else {
+		const QSize itemSizeHint = delegate->sizeHint(QStyleOptionViewItem(), QModelIndex());
+		const QSize scrollBarSizeHint = d->m_list->verticalScrollBar()->sizeHint();
+		d->m_list->setMinimumSize(itemSizeHint.width() + 2 * scrollBarSizeHint.width(), 4.1 * itemSizeHint.height());
+	}
+
 	//monitor change selection in both directions
 	connect(d->m_provider, &KgThemeProvider::currentThemeChanged,
 		this, [this](const KgTheme* theme) { d->_k_updateListSelection(theme); });
@@ -84,11 +99,13 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 	{
 		d->m_knsButton = new QPushButton(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")),
 			i18n("Get New Themes..."), this);
-		layout->addWidget(d->m_knsButton);
+		QHBoxLayout * hLayout = new QHBoxLayout();
+		hLayout->addStretch( 1 );
+		hLayout->addWidget( d->m_knsButton );
+		layout->addLayout( hLayout );
 		connect(d->m_knsButton, &QAbstractButton::clicked,
 		        this, [this]() { d->_k_showNewStuffDialog(); });
 	}
-
 }
 
 KgThemeSelector::~KgThemeSelector() = default;
