@@ -202,7 +202,7 @@ public:
      **/
     explicit KMessageServer(quint16 cookie = 42, QObject* parent = nullptr);
 
-    ~KMessageServer();
+    ~KMessageServer() override;
 
     /**
      * Gives debug output of the game status

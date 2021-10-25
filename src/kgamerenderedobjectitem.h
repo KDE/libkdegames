@@ -57,7 +57,7 @@ class KDEGAMES_EXPORT KGameRenderedObjectItem : public QGraphicsObject, public K
 		///Creates a new KGameRenderedObjectItem which renders the sprite with
 		///the given @a spriteKey as provided by the given @a renderer.
 		KGameRenderedObjectItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent = nullptr);
-		virtual ~KGameRenderedObjectItem();
+		~KGameRenderedObjectItem() override;
 
 		///@return the item's offset, which defines the point of the top-left
 		///corner of the bounding rect, in local coordinates.

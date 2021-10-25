@@ -80,7 +80,7 @@ public:
 	 * @see registerHandler
 	 **/
     KGamePropertyHandler(int id, const QObject* receiver, const char* sendf, const char* emitf, QObject* parent = nullptr);
-	~KGamePropertyHandler();
+	~KGamePropertyHandler() override;
 
 	/**
 	 * Register the handler with a parent. This is to use

@@ -37,7 +37,7 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegat
     /**
       * Destruct a KChatBaseItemDelegate object.
       **/
-    virtual ~KChatBaseItemDelegate();
+    ~KChatBaseItemDelegate() override;
 
     /**
       * Reimplementation of the default paint method. Draws the item at the

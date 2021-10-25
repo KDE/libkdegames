@@ -73,7 +73,7 @@ class KDEGAMES_EXPORT KgTheme : public QObject
 		///Constructor. The @a identifier must be application-unique.
 		explicit KgTheme(const QByteArray& identifier, QObject* parent = nullptr);
 		///Destructor.
-		virtual ~KgTheme();
+		~KgTheme() override;
 
 		///Initializes a KgTheme instance by reading a description file.
 		///@return whether @a path is a valid theme description file (if not,

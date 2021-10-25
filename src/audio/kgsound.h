@@ -73,7 +73,7 @@ class KDEGAMES_EXPORT KgSound : public QObject
 		 */
 		explicit KgSound(const QString& file, QObject* parent = nullptr);
 		///Destroys this KgSound instance.
-		virtual ~KgSound();
+		~KgSound() override;
 
 		///@return whether the sound file could be loaded successfully
 		bool isValid() const;

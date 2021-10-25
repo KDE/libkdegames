@@ -138,7 +138,7 @@ class KDEGAMES_EXPORT KHighscore : public QObject
          * Destructor.
          * If necessary, write and unlock the highscore file.
          */
-        ~KHighscore();
+        ~KHighscore() override;
 
         /**
          * @param entry The number of the entry / the placing of the player

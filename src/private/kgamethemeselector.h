@@ -58,7 +58,7 @@ class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
          */
         KDEGAMESPRIVATE_DEPRECATED_VERSION(4, 9, "Use KgThemeSelector")
         KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QStringLiteral("KGameTheme"), const QString &directory = QStringLiteral("themes"));
-        virtual ~KGameThemeSelector();
+        ~KGameThemeSelector() override;
 
     private:
         std::unique_ptr<class KGameThemeSelectorPrivate> const d;

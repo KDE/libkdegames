@@ -37,7 +37,7 @@ class KDEGAMESPRIVATE_EXPORT KGameSequence : public QObject
 	Q_OBJECT
 public:
 	KGameSequence();
-	virtual ~KGameSequence();
+	~KGameSequence() override;
 
 	/**
 	 * Select the next player in a turn based game. In an asynchronous game this

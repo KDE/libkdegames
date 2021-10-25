@@ -26,7 +26,7 @@ class KMessageServerSocket : public QTcpServer
 
 public:
   explicit KMessageServerSocket (quint16 port, QObject *parent = nullptr);
-  ~KMessageServerSocket ();
+  ~KMessageServerSocket () override;
 
 public Q_SLOTS:
   void slotNewConnection();

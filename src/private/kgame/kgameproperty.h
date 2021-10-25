@@ -597,7 +597,7 @@ public:
 	 **/
 	KGameProperty() : KGamePropertyBase() { init(); }
 
-	virtual ~KGameProperty() {}
+	~KGameProperty() override {}
 
 	/**
 	 * Set the value depending on the current policy (see

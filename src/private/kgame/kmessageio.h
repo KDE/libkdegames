@@ -61,7 +61,7 @@ public:
   /**
    * The usual destructor, does nothing special.
    **/
-  ~KMessageIO ();
+  ~KMessageIO () override;
 
   /**
   * The runtime identification
@@ -217,7 +217,7 @@ public:
   /**
     Destructor, closes the socket.
   */
-  ~KMessageSocket ();
+  ~KMessageSocket () override;
 
   /**
   * The runtime identification
@@ -302,7 +302,7 @@ public:
   /**
     Destructor, closes the connection.
   */
-  ~KMessageDirect ();
+  ~KMessageDirect () override;
 
   /**
   * The runtime identification
@@ -346,7 +346,7 @@ class KMessageProcess : public KMessageIO
 
   public:
     KMessageProcess(QObject *parent, const QString& file);
-    ~KMessageProcess();
+    ~KMessageProcess() override;
     bool isConnected() const override;
     void send (const QByteArray &msg) override;
 

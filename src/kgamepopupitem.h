@@ -59,7 +59,7 @@ public:
     /**
      * Destructs a message item
      */
-    ~KGamePopupItem();
+    ~KGamePopupItem() override;
     /**
      * Shows the message: item will appear at specified place
      * of the scene using simple animation

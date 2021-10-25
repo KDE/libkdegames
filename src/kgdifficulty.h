@@ -48,7 +48,7 @@ class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
 		///Refer to the getters' documentation for details on the params.
 		KgDifficultyLevel(int hardness, const QByteArray& key, const QString& title, bool isDefault = false);
 		explicit KgDifficultyLevel(StandardLevel level, bool isDefault = false);
-		virtual ~KgDifficultyLevel();
+		~KgDifficultyLevel() override;
 
 		///@return whether this level is the default level when no selection has
 		///        been stored (e.g. on first startup)
@@ -95,7 +95,7 @@ class KDEGAMES_EXPORT KgDifficulty : public QObject
 	public:
 		explicit KgDifficulty(QObject* parent = nullptr);
 		///Destroys this instance and all DifficultyLevel instances in it.
-		virtual ~KgDifficulty();
+		~KgDifficulty() override;
 
 		///Adds a difficulty level to this instance. This will not affect the
 		///currentLevel() if there is one.

@@ -38,7 +38,7 @@ class QPaintDeviceColorProxy : public QPaintDevice
 		///@warning Replacement loops (e.g. color1 -> color2 -> color3 -> color1) lead to infinite loops.
 		///@warning You should not interact with the @a proxiedDevice during the lifetime of this instance.
 		QPaintDeviceColorProxy(QPaintDevice* proxiedDevice, const QHash<QColor, QColor>& replacements);
-		~QPaintDeviceColorProxy();
+		~QPaintDeviceColorProxy() override;
 
 		QPaintDevice* proxiedDevice() const;
 		QPaintEngine* paintEngine() const override;
@@ -58,7 +58,7 @@ class QPaintEngineColorProxy : public QPaintEngine
 {
 	public:
 		QPaintEngineColorProxy();
-		~QPaintEngineColorProxy();
+		~QPaintEngineColorProxy() override;
 
 		bool begin(QPaintDevice* device) override;
 		bool end() override;

@@ -46,7 +46,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///different config keys to avoid collisions.
 		explicit KgThemeProvider(const QByteArray& configKey = QByteArray("Theme"), QObject* parent = nullptr);
 		///Destructor.
-		virtual ~KgThemeProvider();
+		~KgThemeProvider() override;
 
 		///@return the name of the KgThemeProvider object. This name can be
 		///used as QML element ID to reference the object inside QML.

@@ -86,7 +86,7 @@ public:
 	 *
 	 * Also calls saveConfig
 	 **/
-	virtual ~KChatBase();
+	~KChatBase() override;
 
 	enum SendingIds {
 		SendToAll = 0

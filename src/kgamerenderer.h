@@ -117,7 +117,7 @@ class KDEGAMES_EXPORT KGameRenderer : public QObject
 		///@note Takes ownership of @a theme.
 		explicit KGameRenderer(KgTheme* theme, unsigned cacheSize = 0);
 		///Deletes this KGameRenderer instance, as well as all clients using it.
-		virtual ~KGameRenderer();
+		~KGameRenderer() override;
 
 		///@return the primary view which is used by newly created
 		///KGameRenderedItem instances associated with this renderer

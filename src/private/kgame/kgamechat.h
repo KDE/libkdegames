@@ -57,7 +57,7 @@ public:
 	 **/
 	explicit KGameChat(QWidget* parent);
 
-	virtual ~KGameChat();
+	~KGameChat() override;
 
 	enum SendingIds {
 		SendToGroup = 1

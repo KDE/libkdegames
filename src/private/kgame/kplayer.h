@@ -71,7 +71,7 @@ public:
        */
       explicit KPlayer();
 
-      virtual ~KPlayer();
+      ~KPlayer() override;
 
       /**
       * The identification of the player. Overwrite this in

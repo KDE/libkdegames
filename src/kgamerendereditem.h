@@ -33,7 +33,7 @@ class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGa
 		///Creates a new KGameRenderedItem which renders the sprite with the
 		///given @a spriteKey as provided by the given @a renderer.
 		KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent = nullptr);
-		virtual ~KGameRenderedItem();
+		~KGameRenderedItem() override;
 	protected:
 		void receivePixmap(const QPixmap& pixmap) override;
 	private:

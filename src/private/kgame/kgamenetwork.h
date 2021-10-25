@@ -44,7 +44,7 @@ public:
      * Create a KGameNetwork object
      */
     explicit KGameNetwork(int cookie=42,QObject* parent=nullptr);
-    virtual ~KGameNetwork();
+    ~KGameNetwork() override;
 
     /**
      * Gives debug output of the game status

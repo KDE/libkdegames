@@ -63,7 +63,7 @@ public:
      */
    KGameIO();
    explicit KGameIO(KPlayer*);
-   virtual ~KGameIO();
+   ~KGameIO() override;
 
     /**
      * Gives debug output of the game status
@@ -214,7 +214,7 @@ public:
      * @param parent The parents widget whose keyboard events * should be grabbed
      */
     explicit KGameKeyIO(QWidget *parent);
-    virtual ~KGameKeyIO();
+    ~KGameKeyIO() override;
 
     /**
      * The identification of the IO
@@ -293,7 +293,7 @@ public:
      */
     explicit KGameMouseIO(QWidget *parent,bool trackmouse=false);
     explicit KGameMouseIO(QGraphicsScene *parent,bool trackmouse=false);
-    virtual ~KGameMouseIO();
+    ~KGameMouseIO() override;
 
     /**
      * Manually activate or deactivate mouse tracking
@@ -382,7 +382,7 @@ public:
     /**
      * Deletes the process input devices
      */
-    virtual ~KGameProcessIO();
+    ~KGameProcessIO() override;
 
     /**
      * The identification of the IO
@@ -532,7 +532,7 @@ public:
      */
     KGameComputerIO();
     explicit KGameComputerIO(KPlayer* player);
-    ~KGameComputerIO();
+    ~KGameComputerIO() override;
 
     int rtti() const override;
 

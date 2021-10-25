@@ -116,7 +116,7 @@ class KDEGAMES_EXPORT KScoreDialog : public QDialog
         */
         explicit KScoreDialog(int fields=Name, QWidget *parent=nullptr);
 
-        ~KScoreDialog();
+        ~KScoreDialog() override;
 
 #if KDEGAMES_ENABLE_DEPRECATED_SINCE(4, 1)
         /**

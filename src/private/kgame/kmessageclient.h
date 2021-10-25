@@ -58,7 +58,7 @@ public:
     Destructor.
     Disconnects from the server, if any connection was established.
   */
-  ~KMessageClient ();
+  ~KMessageClient () override;
 
   /**
     @return The client ID of this client. Every client that is connected to a KMessageServer

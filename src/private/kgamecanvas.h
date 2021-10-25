@@ -229,7 +229,7 @@ public:
     /** Constructor */
     explicit KGameCanvasDummy(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasDummy();
+    ~KGameCanvasDummy() override;
 
     /** This function does nothing (of course) */
     void paint(QPainter* p) override;
@@ -268,7 +268,7 @@ public:
     /** Constructor */
     explicit KGameCanvasGroup(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasGroup();
+    ~KGameCanvasGroup() override;
 
     /** This paints all the children */
     void paint(QPainter* p) override;
@@ -305,7 +305,7 @@ public:
     /** Constructor, creating with an empty picture */
     explicit KGameCanvasPicture(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasPicture();
+    ~KGameCanvasPicture() override;
 
     /** Returns the picture */
     QPicture picture() const { return m_picture; }
@@ -337,7 +337,7 @@ public:
     /** Constructor, creating with an empty pixmap */
     explicit KGameCanvasPixmap(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasPixmap();
+    ~KGameCanvasPixmap() override;
 
     /** Returns the pixmap */
     QPixmap pixmap() const { return m_pixmap; }
@@ -392,7 +392,7 @@ public:
     /** Constructor, creating with an empty pixmap */
     explicit KGameCanvasTiledPixmap(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasTiledPixmap();
+    ~KGameCanvasTiledPixmap() override;
 
     /** Returns the pixmap */
     QPixmap pixmap() const { return m_pixmap; }
@@ -442,7 +442,7 @@ public:
     /** Constructor, creating with an empty pixmap */
     explicit KGameCanvasRectangle(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasRectangle();
+    ~KGameCanvasRectangle() override;
 
     /** Returns the color */
     QColor color() const { return m_color; }
@@ -509,7 +509,7 @@ public:
     /** Constructor, creating with an empty text */
     explicit KGameCanvasText(KGameCanvasAbstract* canvas = nullptr);
 
-    virtual ~KGameCanvasText();
+    ~KGameCanvasText() override;
 
     /** Returns the text */
     QString text() const { return m_text; }
@@ -576,7 +576,7 @@ public:
     /** The constructor */
     explicit KGameCanvasWidget(QWidget* parent = nullptr);
 
-    virtual ~KGameCanvasWidget();
+    ~KGameCanvasWidget() override;
 
     /** Set the delay of the animation, in milliseconds */
     void setAnimationDelay(int d);

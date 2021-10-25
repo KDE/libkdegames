@@ -24,7 +24,7 @@ class KGameDifficultyPrivate : public QObject
 	Q_OBJECT
 
 	public:
-		~KGameDifficultyPrivate();
+		~KGameDifficultyPrivate() override;
 
 		void init(KXmlGuiWindow* window, const QObject* recvr, const char* slotStandard, const char* slotCustom);
 

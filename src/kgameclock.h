@@ -35,7 +35,7 @@ public:
      */
     explicit KGameClock(QObject *parent = nullptr, ClockType clocktype = HourMinSec);
 
-    virtual ~KGameClock();
+    ~KGameClock() override;
 
     /**
      * @return the total number of seconds elapsed.
