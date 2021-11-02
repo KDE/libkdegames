@@ -12,11 +12,8 @@
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardShortcut>
-#include <KToggleAction>
 #include <KConfig>
-#include <KRecentFilesAction>
 // Qt
-#include <QAction>
 #include <QIcon>
 
 #undef I18N_NOOP2
