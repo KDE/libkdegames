@@ -15,7 +15,7 @@ Contents:
              currently features "randomName()" which will just give you a random name from
              a list (translators note: happy translating ;) i copied kde-common/accounts
              for this so there are nearly 300 entries...)
-  kgame: this is a complete network/game handling library. it constists of a lot
+  kgame: this is a complete network/game handling library. it consists of a lot
          of classes which are explained in the kgame docu (as soon as it is
          written)
   kgamecanvas: a fast game-oriented canvas library
