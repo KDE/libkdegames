@@ -9,7 +9,7 @@
 
 // KF
 #include <KLocalizedString>
-#include <KNS3/QtQuickDialogWrapper>
+#include <KNSWidgets/Button>
 // Qt
 #include <QCloseEvent>
 #include <QFont>
@@ -41,7 +41,7 @@ class KgThemeSelectorPrivate
         KgThemeProvider* m_provider;
         KgThemeSelector::Options m_options;
         QListWidget* m_list;
-        QPushButton* m_knsButton;
+        KNSWidgets::Button *m_knsButton;
         QString m_configFileName;
 
         void fillList();
@@ -55,7 +55,6 @@ class KgThemeSelectorPrivate
 
         void _k_updateListSelection(const KgTheme* theme);
         void _k_updateProviderSelection();
-        void _k_showNewStuffDialog();
 };
 
 KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWidget* parent)
@@ -98,15 +97,24 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 	//setup KNS button
 	if (options & EnableNewStuffDownload)
 	{
-		d->m_knsButton = new QPushButton(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")),
-			i18n("Get New Themes..."), this);
-		QHBoxLayout * hLayout = new QHBoxLayout();
-		hLayout->addStretch( 1 );
-		hLayout->addWidget( d->m_knsButton );
+		QString name = QCoreApplication::applicationName() + QStringLiteral(".knsrc");
+                d->m_knsButton = new KNSWidgets::Button(
+                    i18n("Get New Themes..."), name, this);
+                QHBoxLayout *hLayout = new QHBoxLayout();
+                hLayout->addStretch(1);
+                hLayout->addWidget( d->m_knsButton );
 		layout->addLayout( hLayout );
-		connect(d->m_knsButton, &QAbstractButton::clicked,
-		        this, [this]() { d->_k_showNewStuffDialog(); });
-    }
+                connect(d->m_knsButton, &KNSWidgets::Button::dialogFinished,
+                        [this](const QList<KNSCore::Entry> &changedEntries) {
+                          if (!changedEntries.isEmpty()) {
+                            d->m_provider->rediscoverThemes();
+                            d->fillList();
+                          }
+                          // restore previous selection
+                          d->_k_updateListSelection(
+                              d->m_provider->currentTheme());
+                        });
+        }
 }
 
 void KgThemeSelector::setNewStuffConfigFileName(const QString &configName)
@@ -167,22 +175,6 @@ void KgThemeSelectorPrivate::_k_updateProviderSelection()
 			m_provider->setCurrentTheme(theme);
 		}
 	}
-}
-
-void KgThemeSelectorPrivate::_k_showNewStuffDialog()
-{
-    if (m_configFileName.isEmpty()) {
-        return;
-    }
-    KNS3::QtQuickDialogWrapper dialog(m_configFileName, q);
-    const QList<KNSCore::EntryInternal> entries = dialog.exec();
-    if ( entries.size() > 0 ){
-        m_provider->rediscoverThemes();
-        fillList();
-    }
-
-	//restore previous selection
-	_k_updateListSelection(m_provider->currentTheme());
 }
 
 class KgThemeSelector::Dialog : public QDialog
