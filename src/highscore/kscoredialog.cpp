@@ -32,8 +32,6 @@
 #include <QStyle>
 #include <QPushButton>
 
-#define DEFAULT_GROUP_NAME I18N_NOOP("High Scores")
-
 typedef QList<KScoreDialog::FieldInfo> GroupScores; ///<The list of scores in a group
 
 class KScoreDialogPrivate
@@ -89,7 +87,7 @@ class KScoreDialogPrivate
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     : QDialog(parent), d(new KScoreDialogPrivate(this))
 {
-    setWindowTitle( i18n(DEFAULT_GROUP_NAME) );
+    setWindowTitle( i18n("High Scores") );
     setModal( true );
     d->highscoreObject = new KHighscore();
     d->edit = nullptr;
@@ -256,7 +254,7 @@ void KScoreDialogPrivate::setupGroup(const QByteArray& groupKey)
     QWidget* widget = new QWidget(q);
     tabs[groupKey] = widget;
 
-    QString tabName = groupKey.isEmpty() ? i18n(DEFAULT_GROUP_NAME) : findTranslatedGroupName(groupKey);
+    QString tabName = groupKey.isEmpty() ? i18n("High Scores") : findTranslatedGroupName(groupKey);
     tabWidget->addTab(widget, tabName);
 
     QGridLayout* layout = new QGridLayout(widget);
@@ -342,7 +340,7 @@ void KScoreDialogPrivate::aboutToShow()
         qCDebug(GAMES_HIGHSCORE) << latest.first << tabWidget->tabText(tabIndex);
 
         //Only display the comment on the page with the new score (or) this one if there's only one tab
-        if(latest.first == groupKey || ( latest.first.isEmpty() && groupKey == DEFAULT_GROUP_NAME ) )
+        if(latest.first == groupKey || ( latest.first.isEmpty() && groupKey == "High Scores" ) )
         {
             QWidget* widget = tabs.value(groupKey);
             QGridLayout* layout = qobject_cast<QGridLayout*>(widget->layout());
