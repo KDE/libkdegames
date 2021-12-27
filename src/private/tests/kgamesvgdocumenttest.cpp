@@ -11,6 +11,7 @@
 #include <config-tests.h>
 // Qt
 #include <QTest>
+#include <QRegExp>
 
 void tst_KGameSvgDocument::initTestCase()
 {

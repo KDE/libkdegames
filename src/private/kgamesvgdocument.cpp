@@ -16,6 +16,7 @@
 #include <QDomElement>
 #include <QDomNode>
 #include <QDebug>
+#include <QRegExp>
 // Std
 #include <cmath>
 
