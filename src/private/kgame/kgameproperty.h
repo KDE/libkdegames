@@ -14,6 +14,7 @@
 // Qt
 #include <QDataStream>
 #include <QDebug>
+#include <QIODevice>
 // Std
 #include <typeinfo>
 

@@ -13,6 +13,8 @@
 // KF
 #include <KLocalizedString>
 
+#include <QIODevice>
+
 QByteArray KGameError::errVersion(int remoteVersion)
 {
  QByteArray b;
