@@ -63,13 +63,18 @@ target_link_libraries(KF5KDEGamesPrivate
     PUBLIC
         KF5KDEGames
         KF5::Completion
-        Qt5::Xml
-        Qt5::Network
+        Qt${QT_MAJOR_VERSION}::Xml
+        Qt${QT_MAJOR_VERSION}::Network
     PRIVATE
         KF5::DNSSD
         KF5::NewStuff
         KF5::Archive
+        KF5::XmlGui
 )
+if (TARGET Qt6::Core5Compat)
+    target_link_libraries(KF5KDEGamesPrivate PRIVATE Qt6::Core5Compat)
+endif()
+
 
 target_include_directories(KF5KDEGamesPrivate
     INTERFACE

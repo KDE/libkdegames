@@ -10,9 +10,13 @@ remove_definitions(
 
 configure_file(config-tests.h.in ${CMAKE_CURRENT_BINARY_DIR}/config-tests.h)
 
+if (TARGET Qt6::Core5Compat)
+    set(PRIVATE_LIBS Qt6::Core5Compat)
+endif()
+
 ecm_add_tests(
     kgamesvgdocumenttest.cpp
     kgamepropertytest.cpp
     NAME_PREFIX "libkdegamesprivate-"
-    LINK_LIBRARIES Qt5::Test KF5KDEGamesPrivate
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5KDEGamesPrivate ${PRIVATE_LIBS}
 )

@@ -1,4 +1,4 @@
-set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KF5KDEGames)
+set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KF5KDEGames)
 
 add_subdirectory(carddecks)
 add_subdirectory(qml)
@@ -98,21 +98,22 @@ ecm_generate_export_header(KF5KDEGames
 
 target_link_libraries(KF5KDEGames
     PUBLIC
-        Qt5::Widgets
-        Qt5::QuickWidgets
-        Qt5::Qml
+        Qt${QT_MAJOR_VERSION}::Widgets
+        Qt${QT_MAJOR_VERSION}::QuickWidgets
+        Qt${QT_MAJOR_VERSION}::Qml
         KF5::ConfigCore
         KF5::I18n
         KF5::WidgetsAddons
         KF5::ConfigWidgets
     PRIVATE
         ${KGAUDIO_LINKLIBS}
-        Qt5::Xml
-        Qt5::Svg
-        Qt5::Quick
+        Qt${QT_MAJOR_VERSION}::Xml
+        Qt${QT_MAJOR_VERSION}::Svg
+        Qt${QT_MAJOR_VERSION}::Quick
         KF5::Declarative
         KF5::NewStuff
         KF5::IconThemes
+        KF5::XmlGui
         KF5::GuiAddons
         KF5::Completion
 )

@@ -10,8 +10,8 @@ set (KF_MIN_VERSION "5.89.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
-
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+include(KDEInstallDirs)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Widgets
     Qml
     Quick
@@ -19,6 +19,10 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Svg
     Test
 )
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat)
+endif()
+
 find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Completion
@@ -35,7 +39,6 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     WidgetsAddons
 )
 
-include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
@@ -83,7 +86,7 @@ set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
 add_definitions(
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050900
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050f02
     -DQT_DEPRECATED_WARNINGS_SINCE=0x060000
     -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055900
     -DKCOREADDONS_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054900 # KRandomSequence, cannot be removed

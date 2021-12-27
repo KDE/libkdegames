@@ -11,7 +11,7 @@ target_sources(corebindingsplugin PRIVATE
 target_link_libraries(corebindingsplugin
     PRIVATE
         KF5KDEGames
-        Qt5::Qml
+        Qt${QT_MAJOR_VERSION}::Qml
 )
 
 install(TARGETS corebindingsplugin
