@@ -8,11 +8,11 @@
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(Qt5Widgets @QT_MIN_VERSION@)
-find_dependency(Qt5Xml @QT_MIN_VERSION@)
-find_dependency(Qt5Network @QT_MIN_VERSION@)
-find_dependency(Qt5QuickWidgets @QT_MIN_VERSION@)
-find_dependency(Qt5Qml @QT_MIN_VERSION@)
+find_dependency(Qt@QT_MAJOR_VERSION@Widgets @QT_MIN_VERSION@)
+find_dependency(Qt@QT_MAJOR_VERSION@Xml @QT_MIN_VERSION@)
+find_dependency(Qt@QT_MAJOR_VERSION@Network @QT_MIN_VERSION@)
+find_dependency(Qt@QT_MAJOR_VERSION@QuickWidgets @QT_MIN_VERSION@)
+find_dependency(Qt@QT_MAJOR_VERSION@Qml @QT_MIN_VERSION@)
 find_dependency(KF5Config @KF_MIN_VERSION@)
 find_dependency(KF5I18n @KF_MIN_VERSION@)
 find_dependency(KF5WidgetsAddons @KF_MIN_VERSION@)
