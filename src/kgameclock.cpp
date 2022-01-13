@@ -95,7 +95,7 @@ void KGameClock::setTime(uint sec)
     Q_ASSERT( sec<(3600*24) );
     d->sec = sec % 60;
     d->min = (sec / 60) % 60;
-    d->hour = sec / 1440 ;
+    d->hour = sec / 3600;
     showTime();
 }
 
