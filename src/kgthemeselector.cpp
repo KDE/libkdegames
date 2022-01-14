@@ -9,7 +9,7 @@
 
 // KF
 #include <KLocalizedString>
-#include <KNS3/DownloadDialog>
+#include <KNS3/QtQuickDialogWrapper>
 // Qt
 #include <QCloseEvent>
 #include <QFont>
@@ -42,6 +42,7 @@ class KgThemeSelectorPrivate
         KgThemeSelector::Options m_options;
         QListWidget* m_list;
         QPushButton* m_knsButton;
+        QString m_configFileName;
 
         void fillList();
 
@@ -105,7 +106,12 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider* provider, Options options, QWi
 		layout->addLayout( hLayout );
 		connect(d->m_knsButton, &QAbstractButton::clicked,
 		        this, [this]() { d->_k_showNewStuffDialog(); });
-	}
+    }
+}
+
+void KgThemeSelector::setNewStuffConfigFileName(const QString &configName)
+{
+    d->m_configFileName = configName;
 }
 
 KgThemeSelector::~KgThemeSelector() = default;
@@ -165,16 +171,18 @@ void KgThemeSelectorPrivate::_k_updateProviderSelection()
 
 void KgThemeSelectorPrivate::_k_showNewStuffDialog()
 {
-	QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(q));
-	dialog->exec();
-	if (dialog && !dialog->changedEntries().isEmpty())
-	{
-		m_provider->rediscoverThemes();
-		fillList();
-	}
+    if (m_configFileName.isEmpty()) {
+        return;
+    }
+    KNS3::QtQuickDialogWrapper dialog(m_configFileName, q);
+    const QList<KNSCore::EntryInternal> entries = dialog.exec();
+    if ( entries.size() > 0 ){
+        m_provider->rediscoverThemes();
+        fillList();
+    }
+
 	//restore previous selection
 	_k_updateListSelection(m_provider->currentTheme());
-	delete dialog;
 }
 
 class KgThemeSelector::Dialog : public QDialog
