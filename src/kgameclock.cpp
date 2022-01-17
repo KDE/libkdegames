@@ -10,20 +10,41 @@
 #include "kgameclock.h"
 
 // Qt
+#include <QString>
 #include <QTimer>
 
 class KGameClockPrivate
 {
 public:
     KGameClockPrivate()
-        : sec(0), min(0), hour(0)
+        : totalSeconds(0)
     {
     }
 
     QTimer *timerClock;
-    uint    sec, min, hour;
+    uint totalSeconds;
     KGameClock::ClockType clocktype;
 };
+
+namespace {
+QString timeSectionString(uint x)
+{
+    return QString::number(x).rightJustified(2, QLatin1Char( '0' ), true);
+}
+
+QString timeStringHourMinSec(uint hour, uint min, uint sec)
+{
+    return timeSectionString(hour) + QLatin1Char( ':' )
+        + timeSectionString(min) + QLatin1Char( ':' )
+        + timeSectionString(sec);
+}
+
+QString timeStringMinSec(uint min, uint sec)
+{
+    return timeSectionString(min) + QLatin1Char( ':' ) + timeSectionString(sec);
+}
+
+}  // namespace
 
 KGameClock::KGameClock(QObject *parent, KGameClock::ClockType clocktype)
 : QObject(parent) , d(new KGameClockPrivate)
@@ -37,27 +58,29 @@ KGameClock::~KGameClock() = default;
 
 void KGameClock::timeoutClock()
 {
-    if ( d->hour==23 && d->min==59 && d->sec==59 ) return;
-    d->sec++;
-    if (d->sec==60) {
-        d->min++;
-        d->sec = 0;
-    }
-    if (d->min==60) {
-        d->hour++;
-        d->min = 0;
-    }
+    d->totalSeconds++;
     showTime();
 }
 
 QString KGameClock::timeString() const
 {
-    QString sec = QString::number(d->sec).rightJustified(2, QLatin1Char( '0' ), true);
-    QString min = QString::number(d->min).rightJustified(2, QLatin1Char( '0' ), true);
-    if (d->clocktype==MinSecOnly) return min + QLatin1Char( ':' ) + sec;
-    //else return hour as well
-    QString hour = QString::number(d->hour).rightJustified(2, QLatin1Char( '0' ), true);
-    return hour + QLatin1Char( ':' ) + min + QLatin1Char( ':' ) + sec;
+    uint sec = d->totalSeconds;
+    if (d->clocktype == MinSecOnly)
+    {
+        return timeStringMinSec((sec / 60) % 60, sec % 60);
+    }
+    if (d->clocktype == FlexibleHourMinSec)
+    {
+        if (sec < 3600)
+            return timeStringMinSec(sec / 60, sec % 60);
+        return timeStringHourMinSec(sec / 3600, (sec / 60) % 60, sec % 60);
+    }
+    if (d->clocktype == LongMinSec)
+    {
+        return timeStringMinSec(sec / 60, sec % 60);
+    }
+    // default is HourMinSec
+    return timeStringHourMinSec(sec / 3600, (sec / 60) % 60, sec % 60);
 }
 
 void KGameClock::showTime()
@@ -68,9 +91,7 @@ void KGameClock::showTime()
 void KGameClock::restart()
 {
     d->timerClock->stop();
-    d->sec = 0;
-    d->min = 0;
-    d->hour = 0;
+    d->totalSeconds = 0;
     resume();
     showTime();
 }
@@ -87,23 +108,23 @@ void KGameClock::pause()
 
 uint KGameClock::seconds() const
 {
-    return d->hour*3600 + d->min*60 + d->sec;
+    return d->totalSeconds;
 }
 
 void KGameClock::setTime(uint sec)
 {
-    Q_ASSERT( sec<(3600*24) );
-    d->sec = sec % 60;
-    d->min = (sec / 60) % 60;
-    d->hour = sec / 3600;
+    d->totalSeconds = sec;
     showTime();
 }
 
 void KGameClock::setTime(const QString &s)
 {
-    Q_ASSERT( s.length()==8 && s[2]==QLatin1Char( ':' ) && s[5]==QLatin1Char( ':' ) );
-    uint hour = qMin(s.section(QLatin1Char( ':' ), 0, 0).toUInt(), uint(23));
-    uint min = qMin(s.section(QLatin1Char( ':' ), 1, 1).toUInt(), uint(59));
-    uint sec = qMin(s.section(QLatin1Char( ':' ), 2, 2).toUInt(), uint(59));
-    setTime(sec + min*60 + hour*3600);
+    const QStringList sections = s.split(QLatin1Char( ':' ));
+    Q_ASSERT( sections.size() <= 3 );
+    uint sec = 0;
+    for (const QString &x : sections)
+    {
+        sec = sec * 60 + x.toUInt();
+    }
+    setTime(sec);
 }

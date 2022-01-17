@@ -22,13 +22,28 @@ class KGameClockPrivate;
 /**
  * \class KGameClock kgameclock.h <KGameClock>
  *
- * Class representing a game clock, wraps after 24 hours
+ * Class representing a game clock
  */
 class KDEGAMES_EXPORT KGameClock : public QObject
 {
     Q_OBJECT
 public:
-    enum ClockType { HourMinSec = 0, MinSecOnly };
+    /**
+     * Controls the format of return value of @ref timeString()
+     * Format              Example1   Example2
+     * ---------------------------------------
+     * HourMinSec          00:04:05   01:02:03
+     * MinSecOnly             04:05      02:03
+     * FlexibleHourMinSec     04:05   01:02:03
+     * LongMinSec             04:05      62:03
+     */
+    enum ClockType
+    {
+        HourMinSec = 0,
+        MinSecOnly = 1,
+        FlexibleHourMinSec = 2, ///< @since 22.04
+        LongMinSec = 3, ///< @since 22.04
+    };
 
     /**
      * @return Constructor
@@ -53,7 +68,7 @@ public:
     void setTime(uint seconds);
 
     /**
-     * Set the time (format should be "hh:mm:ss").
+     * Set the time. Format should be "hh:mm:ss" (or "mm:ss" @since 22.04).
      */
     void setTime(const QString &s);
 
