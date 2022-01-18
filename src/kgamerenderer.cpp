@@ -13,7 +13,7 @@
 #include "kgtheme.h"
 #include "kgthemeprovider.h"
 // Qt
-#include <QCoreApplication>
+#include <QGuiApplication>
 #include <QDateTime>
 #include <QFileInfo>
 #include <QScopedPointer>
@@ -428,7 +428,9 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		return;
 	}
 	const QString elementKey = spriteFrameKey(spec.spriteKey, spec.frame);
-	QString cacheKey = m_sizePrefix.arg(spec.size.width()).arg(spec.size.height()) + elementKey;
+	const qreal dpr = qApp->devicePixelRatio();
+	const QSize size = spec.size * dpr;
+	QString cacheKey = m_sizePrefix.arg(size.width()).arg(size.height()) + elementKey;
 	QHash<QColor, QColor>::const_iterator it1 = spec.customColors.constBegin(), it2 = spec.customColors.constEnd();
 	static const QString colorSuffix(QStringLiteral( "-%1-%2" ));
 	for (; it1 != it2; ++it1)
@@ -453,7 +455,9 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	QHash<QString, QPixmap>::const_iterator it = m_pixmapCache.constFind(cacheKey);
 	if (it != m_pixmapCache.constEnd())
 	{
-		requestPixmap__propagateResult(it.value(), client, synchronousResult);
+		QPixmap p = it.value();
+		p.setDevicePixelRatio(dpr);
+		requestPixmap__propagateResult(p, client, synchronousResult);
 		return;
 	}
 	//try to serve from low-speed cache
@@ -462,6 +466,7 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 		QPixmap pix;
 		if (m_imageCache->findPixmap(cacheKey, &pix))
 		{
+			pix.setDevicePixelRatio(dpr);
 			m_pixmapCache.insert(cacheKey, pix);
 			requestPixmap__propagateResult(pix, client, synchronousResult);
 			return;
@@ -478,6 +483,7 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 	job->cacheKey = cacheKey;
 	job->elementKey = elementKey;
 	job->spec = spec;
+	job->spec.size = size;
 	const bool synchronous = !client;
 	if (synchronous || !(m_strategies & KGameRenderer::UseRenderingThreads))
 	{
@@ -497,8 +503,10 @@ void KGameRendererPrivate::requestPixmap(const KGRInternal::ClientSpec& spec, KG
 void KGameRendererPrivate::jobFinished(KGRInternal::Job* job, bool isSynchronous)
 {
 	//read job
+	const qreal dpr = qApp->devicePixelRatio();
 	const QString cacheKey = job->cacheKey;
-	const QImage result = job->result;
+	QImage result = job->result;
+	result.setDevicePixelRatio(dpr);
 	delete job;
 	//check who wanted this pixmap
 	m_pendingRequests.removeAll(cacheKey);
