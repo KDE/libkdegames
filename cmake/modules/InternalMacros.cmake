@@ -42,7 +42,7 @@ function(generate_svgz svg_file svgz_file target_prefix)
             OUTPUT ${svgz_file}
             COMMAND ${gzip_EXECUTABLE}
             ARGS
-                -9
+                -9n
                 -c
                 ${svg_file} > ${svgz_file}
             DEPENDS ${svg_file}
