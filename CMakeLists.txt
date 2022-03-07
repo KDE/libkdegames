@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.16 FATAL_ERROR)
 set(KDEGAMES_VERSION 7.3.1)
 set(KDEGAMES_SOVERSION 7)
 
-project(libkdegames)
+project(libkdegames VERSION ${KDEGAMES_VERSION})
 
 set (QT_MIN_VERSION "5.15.0")
 set (KF_MIN_VERSION "5.89.0")
