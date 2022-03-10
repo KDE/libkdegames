@@ -99,7 +99,11 @@ public:
     /**
      * Holds bounding rect of an item
      */
-    QRectF m_boundRect;
+    QRect m_boundRect;
+    /**
+     * Holds bounding rect of an item (mapped to scene coordinates)
+     */
+    QRectF m_mappedBoundRect;
     /**
      * Position where item will appear
      */
@@ -265,7 +269,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     {
         h = d->m_iconPix.height() + MARGIN*2;
 	}
-    d->m_boundRect = QRectF(0, 0, w, h);
+    d->m_boundRect = QRect(0, 0, w, h);
 
     // adjust to take into account the width of the pen
     // used to draw the border
@@ -274,6 +278,8 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
                            -borderRadius ,
                             borderRadius ,
                             borderRadius );
+
+    d->m_mappedBoundRect = sceneView->mapToScene(d->m_boundRect).boundingRect();
 
     QPainterPath roundRectPath;
     roundRectPath.moveTo(w, d->m_sharpness);
@@ -313,23 +319,23 @@ void KGamePopupItem::setupTimeline()
     d->m_timeLine.setDuration(300);
     if( d->m_position == TopLeft || d->m_position == TopRight )
     {
-        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_boundRect.height() - SHOW_OFFSET);
+        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_mappedBoundRect.height() - SHOW_OFFSET);
         int end = static_cast<int>(d->m_visibleSceneRect.top() + SHOW_OFFSET);
         d->m_timeLine.setFrameRange( start, end );
     }
     else if( d->m_position == BottomLeft || d->m_position == BottomRight )
     {
-        int start = static_cast<int>(d->m_visibleSceneRect.bottom()+SHOW_OFFSET);
-        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_boundRect.height() - SHOW_OFFSET);
+        int start = static_cast<int>(d->m_visibleSceneRect.bottom() + SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_mappedBoundRect.height() - SHOW_OFFSET);
         d->m_timeLine.setFrameRange( start, end );
     }
     else if( d->m_position == Center )
     {
         d->m_timeLine.setFrameRange(0, d->m_timeLine.duration());
         setPos( d->m_visibleSceneRect.left() +
-                d->m_visibleSceneRect.width()/2 - d->m_boundRect.width()/2,
+                d->m_visibleSceneRect.width()/2 - d->m_mappedBoundRect.width()/2,
                 d->m_visibleSceneRect.top() +
-                d->m_visibleSceneRect.height()/2 - d->m_boundRect.height()/2);
+                d->m_visibleSceneRect.height()/2 - d->m_mappedBoundRect.height()/2);
     }
 
 }
@@ -342,7 +348,7 @@ void KGamePopupItem::animationFrame(int frame)
     }
     else if( d->m_position == TopRight || d->m_position == BottomRight )
     {
-        setPos( d->m_visibleSceneRect.right()-d->m_boundRect.width()-SHOW_OFFSET, frame );
+        setPos( d->m_visibleSceneRect.right()-d->m_mappedBoundRect.width()-SHOW_OFFSET, frame );
     }
     else if( d->m_position == Center )
     {
