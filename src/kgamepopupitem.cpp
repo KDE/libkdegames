@@ -20,7 +20,7 @@
 // margin on the sides of message box
 static const int MARGIN = 15;
 // offset of message from start of the scene
-static const int SHOW_OFFSET = 5;
+static const int SHOW_OFFSET = 15;
 // space between pixmap and text
 static const int SOME_SPACE = 10;
 // width of the border in pixels
@@ -104,6 +104,10 @@ public:
      * Holds bounding rect of an item (mapped to scene coordinates)
      */
     QRectF m_mappedBoundRect;
+    /**
+     * Offset of message from start of the scene (mapped to scene coordinates)
+     */
+    qreal m_mapped_SHOW_OFFSET;
     /**
      * Position where item will appear
      */
@@ -280,6 +284,7 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
                             borderRadius );
 
     d->m_mappedBoundRect = sceneView->mapToScene(d->m_boundRect).boundingRect();
+    d->m_mapped_SHOW_OFFSET = qAbs(sceneView->mapToScene(0, SHOW_OFFSET).y());
 
     QPainterPath roundRectPath;
     roundRectPath.moveTo(w, d->m_sharpness);
@@ -319,14 +324,14 @@ void KGamePopupItem::setupTimeline()
     d->m_timeLine.setDuration(300);
     if( d->m_position == TopLeft || d->m_position == TopRight )
     {
-        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_mappedBoundRect.height() - SHOW_OFFSET);
-        int end = static_cast<int>(d->m_visibleSceneRect.top() + SHOW_OFFSET);
+        int start = static_cast<int>(d->m_visibleSceneRect.top() - d->m_mappedBoundRect.height() - d->m_mapped_SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.top() + d->m_mapped_SHOW_OFFSET);
         d->m_timeLine.setFrameRange( start, end );
     }
     else if( d->m_position == BottomLeft || d->m_position == BottomRight )
     {
-        int start = static_cast<int>(d->m_visibleSceneRect.bottom() + SHOW_OFFSET);
-        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_mappedBoundRect.height() - SHOW_OFFSET);
+        int start = static_cast<int>(d->m_visibleSceneRect.bottom() + d->m_mapped_SHOW_OFFSET);
+        int end = static_cast<int>(d->m_visibleSceneRect.bottom() - d->m_mappedBoundRect.height() - d->m_mapped_SHOW_OFFSET);
         d->m_timeLine.setFrameRange( start, end );
     }
     else if( d->m_position == Center )
@@ -344,11 +349,11 @@ void KGamePopupItem::animationFrame(int frame)
 {
     if( d->m_position == TopLeft || d->m_position == BottomLeft )
     {
-        setPos( d->m_visibleSceneRect.left()+SHOW_OFFSET, frame );
+        setPos( d->m_visibleSceneRect.left()+d->m_mapped_SHOW_OFFSET, frame );
     }
     else if( d->m_position == TopRight || d->m_position == BottomRight )
     {
-        setPos( d->m_visibleSceneRect.right()-d->m_mappedBoundRect.width()-SHOW_OFFSET, frame );
+        setPos( d->m_visibleSceneRect.right()-d->m_mappedBoundRect.width()-d->m_mapped_SHOW_OFFSET, frame );
     }
     else if( d->m_position == Center )
     {
