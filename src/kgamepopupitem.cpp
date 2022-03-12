@@ -222,7 +222,7 @@ void KGamePopupItem::paint( QPainter* p, const QStyleOptionGraphicsItem *option,
     }
     p->setBrush(widget ? d->m_brush.brush(widget->palette()) : QBrush());
     p->drawPath(d->m_path);
-    p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2,
+    p->drawPixmap( MARGIN, static_cast<int>(d->m_boundRect.height()/2) - d->m_iconPix.height()/2.0/d->m_iconPix.devicePixelRatio(),
                    d->m_iconPix );
     p->restore();
 }
@@ -267,11 +267,12 @@ void KGamePopupItem::showMessage( const QString& text, Position pos, ReplaceMode
     prepareGeometryChange();
 
     // recalculate bounding rect
-    qreal w = d->m_textChildItem->boundingRect().width()+MARGIN*2+d->m_iconPix.width()+SOME_SPACE;
+    const qreal iconDpr = d->m_iconPix.devicePixelRatio();
+    qreal w = d->m_textChildItem->boundingRect().width()+MARGIN*2+d->m_iconPix.width()/iconDpr+SOME_SPACE;
     qreal h = d->m_textChildItem->boundingRect().height()+MARGIN*2;
-    if( d->m_iconPix.height() > h )
+    if( d->m_iconPix.height()/iconDpr > h )
     {
-        h = d->m_iconPix.height() + MARGIN*2;
+        h = d->m_iconPix.height()/iconDpr + MARGIN*2;
 	}
     d->m_boundRect = QRect(0, 0, w, h);
 
@@ -432,7 +433,7 @@ void KGamePopupItem::hoverLeaveEvent( QGraphicsSceneHoverEvent* )
 void KGamePopupItem::setMessageIcon( const QPixmap& pix )
 {
     d->m_iconPix = pix;
-    d->m_textChildItem->setPos( MARGIN+pix.width()+SOME_SPACE, MARGIN );
+    d->m_textChildItem->setPos( MARGIN+pix.width()/pix.devicePixelRatio()+SOME_SPACE, MARGIN );
     // bounding rect is updated in showMessage()
 }
 
