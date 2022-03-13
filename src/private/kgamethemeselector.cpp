@@ -172,8 +172,10 @@ void KGameThemeSelectorPrivate::_k_updatePreview()
     ui.themeDescription->setText(seltheme->themeProperty(descstr));
 
     //Draw the preview
+    const qreal dpr = q->devicePixelRatioF();
     QPixmap pix(seltheme->preview());
-    ui.themePreview->setPixmap(pix.scaled(ui.themePreview->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    pix.setDevicePixelRatio(dpr);
+    ui.themePreview->setPixmap(pix.scaled(ui.themePreview->size() * dpr,Qt::KeepAspectRatio,Qt::SmoothTransformation));
 }
 
 void KGameThemeSelectorPrivate::_k_updateThemeList(const QString& strTheme)
