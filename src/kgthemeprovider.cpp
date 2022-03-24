@@ -273,7 +273,11 @@ void KgThemeProvider::rediscoverThemes()
 
 QPixmap KgThemeProvider::generatePreview(const KgTheme* theme, const QSize& size)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	const qreal dpr = qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) ? qApp->devicePixelRatio() : 1;
+#else
+    const qreal dpr = qApp->devicePixelRatio();
+#endif
 	QPixmap pixmap = QPixmap(theme->previewPath()).scaled(size * dpr, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	pixmap.setDevicePixelRatio(dpr);
 	return pixmap;
