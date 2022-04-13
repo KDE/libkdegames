@@ -18,3 +18,6 @@ Dependencies:
     'frameworks/kservice': '@stable'
     'frameworks/kxmlgui': '@stable'
     'frameworks/kwidgetaddons': '@stable'
+
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]      
