@@ -15,7 +15,6 @@
 // Qt
 #include <QMap>
 #include <QQueue>
-#include <QMultiHash>
 
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 
