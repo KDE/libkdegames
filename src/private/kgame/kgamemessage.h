@@ -16,6 +16,8 @@
 
 /**
  * \class KGameMessage kgamemessage.h <KGame/KGameMessage>
+ *
+ * Namespace-like class for message-related static functions.
  */
 class KDEGAMESPRIVATE_EXPORT KGameMessage
 {
