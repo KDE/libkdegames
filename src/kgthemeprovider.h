@@ -82,14 +82,18 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///of @a theme.
 		void addTheme(KgTheme* theme);
 		///This method reads theme description files from a standard location.
-		///The first two arguments are passed to KStandardDirs like this:
+		///The @p resource argument is ignored, no longer matters.
+		///The @p directory argument is passed to QStandardPaths like this:
 		///@code
-		///KGlobal::dirs()->findAllResources(resource, directory + "/*.desktop");
+		///QStandardPaths::locateAll(QStandardPaths::AppDataLocation, directory, QStandardPaths::LocateDirectory)
 		///@endcode
 		///The typical usage is to install theme description files in
-		///@code ${DATA_INSTALL_DIR}/themes @endcode and then call:
 		///@code
-		///themeProvider.discoverThemes("appdata", QLatin1String("themes"));
+		///${KDE_INSTALL_DATADIR}/<appname>/themes
+		///@endcode
+		///and then call:
+		///@code
+		///themeProvider.discoverThemes("appdata", QStringLiteral("themes"));
 		///@endcode
 		///If a @a themeClass's QMetaObject is given, the created themes will be
 		///instances of this KgTheme subclass. The @a themeClass must export
