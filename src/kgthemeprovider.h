@@ -81,6 +81,7 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///Adds a @a theme to this instance. The theme provider takes ownership
 		///of @a theme.
 		void addTheme(KgTheme* theme);
+#if KDEGAMES_ENABLE_DEPRECATED_SINCE(7, 4)
 		///This method reads theme description files from a standard location.
 		///The @p resource argument is ignored, no longer matters.
 		///The @p directory argument is passed to QStandardPaths like this:
@@ -99,7 +100,34 @@ class KDEGAMES_EXPORT KgThemeProvider : public QObject
 		///instances of this KgTheme subclass. The @a themeClass must export
 		///(with the Q_INVOKABLE marker) a constructor with the same signature
 		///as the KgTheme constructor.
+		///@deprecated Since 7.4, use discoverThemes(const QString& , const QString&, const QMetaObject*)
+		KDEGAMES_DEPRECATED_VERSION(7, 4, "Use discoverThemes(const QString& , const QString&, const QMetaObject*)")
 		void discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName = QStringLiteral("default"), const QMetaObject* themeClass = nullptr);
+		KDEGAMES_DEPRECATED_VERSION(7, 4, "Use discoverThemes(const QString& , const QString&, const QMetaObject*)")
+		// helper overload method to catch and redirect otherwise ambigous calls
+		// when using "" for the first argument
+		inline void discoverThemes(const char* resource, const QString& directory, const QString& defaultThemeName = QStringLiteral("default"), const QMetaObject* themeClass = nullptr)
+		{ discoverThemes(QByteArray(resource), directory, defaultThemeName, themeClass); }
+#endif
+		///This method reads theme description files from a standard location.
+		///The @p directory argument is passed to QStandardPaths like this:
+		///@code
+		///QStandardPaths::locateAll(QStandardPaths::AppDataLocation, directory, QStandardPaths::LocateDirectory)
+		///@endcode
+		///The typical usage is to install theme description files in
+		///@code
+		///${KDE_INSTALL_DATADIR}/<appname>/themes
+		///@endcode
+		///and then call:
+		///@code
+		///themeProvider.discoverThemes(QStringLiteral("themes"));
+		///@endcode
+		///If a @p themeClass's QMetaObject is given, the created themes will be
+		///instances of this KgTheme subclass. The @p themeClass must export
+		///(with the Q_INVOKABLE marker) a constructor with the same signature
+		///as the KgTheme constructor.
+		///@since 7.4
+		void discoverThemes(const QString& directory, const QString& defaultThemeName = QStringLiteral("default"), const QMetaObject* themeClass = nullptr);
 		///After this provider has been set up with discoverThemes(), this
 		///method may be used to read additional themes which were added since
 		///the discoverThemes() call. This is esp. useful for KNewStuff

@@ -26,7 +26,6 @@ class KgThemeProviderPrivate
         const KgTheme* m_currentTheme;
         const KgTheme* m_defaultTheme;
         //this stores the arguments which were passed to discoverThemes()
-        QByteArray m_dtResource;
         QString m_dtDirectory;
         QString m_dtDefaultThemeName;
         const QMetaObject* m_dtThemeClass;
@@ -161,9 +160,16 @@ QString KgThemeProvider::currentThemeName() const
 	return currentTheme()->name();
 }
 
+#if KDEGAMES_BUILD_DEPRECATED_SINCE(7, 4)
 void KgThemeProvider::discoverThemes(const QByteArray& resource, const QString& directory, const QString& defaultThemeName, const QMetaObject* themeClass)
 {
-	d->m_dtResource = resource;
+    Q_UNUSED(resource);
+    discoverThemes(directory, defaultThemeName, themeClass);
+}
+#endif
+
+void KgThemeProvider::discoverThemes(const QString& directory, const QString& defaultThemeName, const QMetaObject* themeClass)
+{
 	d->m_dtDirectory = directory;
 	d->m_dtDefaultThemeName = defaultThemeName;
 	d->m_dtThemeClass = themeClass;
@@ -184,7 +190,7 @@ static QString relativeToApplications(const QString& file)
 
 void KgThemeProvider::rediscoverThemes()
 {
-	if (d->m_dtResource.isEmpty())
+	if (d->m_dtDirectory.isEmpty())
 	{
 		return; //discoverThemes() was never called
 	}
