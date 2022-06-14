@@ -18,18 +18,18 @@ class QComboBox;
 class KChatBasePrivate
 {
 public:
-    KChatBasePrivate(KChatBaseModel* model, KChatBaseItemDelegate* delegate, QWidget* parent);
+    KChatBasePrivate(KChatBaseModel *model, KChatBaseItemDelegate *delegate, QWidget *parent);
     virtual ~KChatBasePrivate() = default;
 
-    QListView* mBox = nullptr;
-    KLineEdit* mEdit = nullptr;
-    QComboBox* mCombo = nullptr;
+    QListView *mBox = nullptr;
+    KLineEdit *mEdit = nullptr;
+    QComboBox *mCombo = nullptr;
     bool mAcceptMessage = true;
 
     QList<int> mIndex2Id;
 
-    KChatBaseModel* mModel;
-    KChatBaseItemDelegate* mDelegate;
+    KChatBaseModel *mModel;
+    KChatBaseItemDelegate *mDelegate;
 };
 
 #endif

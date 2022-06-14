@@ -15,11 +15,11 @@
 // own
 #include "libkdegamesprivate_export.h"
 // Qt
+#include <QHostAddress>
+#include <QLoggingCategory>
 #include <QObject>
 #include <QProcess>
 #include <QString>
-#include <QHostAddress>
-#include <QLoggingCategory>
 
 /*
     This macro shouldn't be here ideally. Already declared in kgame.h, but throws error if not placed here.
@@ -28,7 +28,6 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 class QTcpSocket;
 class KProcess;
-
 
 /**
   \class KMessageIO kmessageio.h <KGame/KMessageIO>
@@ -47,112 +46,118 @@ class KProcess;
   TCP/IP sockets) and /e KMessageDirect (connection using method calls, both
   sides must be within the same process).
 */
-
 class KDEGAMESPRIVATE_EXPORT KMessageIO : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-   * The usual QObject constructor, does nothing else.
-   **/
-  explicit KMessageIO (QObject *parent = nullptr);
+    /**
+     * The usual QObject constructor, does nothing else.
+     */
+    explicit KMessageIO(QObject *parent = nullptr);
 
-  /**
-   * The usual destructor, does nothing special.
-   **/
-  ~KMessageIO () override;
+    /**
+     * The usual destructor, does nothing special.
+     */
+    ~KMessageIO() override;
 
-  /**
-  * The runtime identification
-  */
-  virtual int rtti() const {return 0;}
+    /**
+     * The runtime identification
+     */
+    virtual int rtti() const
+    {
+        return 0;
+    }
 
-  /**
-   * @return Whether this KMessageIO is a network IO or not.
-   **/
-  //virtual bool isNetwork () const = 0;
-  virtual bool isNetwork () const
-  {
-   qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
-   return false;
-  }
+    /**
+     * @return Whether this KMessageIO is a network IO or not.
+     */
+    // virtual bool isNetwork () const = 0;
+    virtual bool isNetwork() const
+    {
+        qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
+        return false;
+    }
 
-  /**
-    This method returns the status of the object, whether it is already
-    (or still) connected to another KMessageIO object or not.
+    /**
+      This method returns the status of the object, whether it is already
+      (or still) connected to another KMessageIO object or not.
 
-    This is a pure virtual method, so it has to be implemented in a subclass
-    of KMessageIO.
-  */
-  //virtual bool isConnected () const = 0;
-  virtual bool isConnected () const
-  {
-   qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConnected...BAD";
-   return false;
-  }
+      This is a pure virtual method, so it has to be implemented in a subclass
+      of KMessageIO.
+    */
+    // virtual bool isConnected () const = 0;
+    virtual bool isConnected() const
+    {
+        qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConnected...BAD";
+        return false;
+    }
 
-  /**
-    Sets the ID number of this object. This number can for example be used to
-    distinguish several objects in a server.
+    /**
+      Sets the ID number of this object. This number can for example be used to
+      distinguish several objects in a server.
 
-    NOTE: Sometimes it is useful to let two connected KMessageIO objects
-    have the same ID number. You have to do so yourself, KMessageIO doesn't
-    change this value on its own!
-  */
-  void setId (quint32 id);
+      NOTE: Sometimes it is useful to let two connected KMessageIO objects
+      have the same ID number. You have to do so yourself, KMessageIO doesn't
+      change this value on its own!
+    */
+    void setId(quint32 id);
 
-  /**
-    Queries the ID of this object.
-  */
-  quint32 id ();
+    /**
+      Queries the ID of this object.
+    */
+    quint32 id();
 
-  /**
-    @return 0 in the default implementation. Reimplemented in @ref KMessageSocket.
-  */
-  virtual quint16 peerPort () const { return 0; }
+    /**
+      @return 0 in the default implementation. Reimplemented in @ref KMessageSocket.
+    */
+    virtual quint16 peerPort() const
+    {
+        return 0;
+    }
 
-  /**
-    @return "localhost" in the default implementation. Reimplemented in @ref KMessageSocket
-  */
-  virtual QString peerName () const { return QStringLiteral("localhost"); }
-
+    /**
+      @return "localhost" in the default implementation. Reimplemented in @ref KMessageSocket
+    */
+    virtual QString peerName() const
+    {
+        return QStringLiteral("localhost");
+    }
 
 Q_SIGNALS:
-  /**
-    This signal is emitted when /e send() on the connected KMessageIO
-    object is called. The parameter contains the same data array in /e msg
-    as was used in /e send().
-  */
-  void received (const QByteArray &msg);
+    /**
+      This signal is emitted when /e send() on the connected KMessageIO
+      object is called. The parameter contains the same data array in /e msg
+      as was used in /e send().
+    */
+    void received(const QByteArray &msg);
 
-  /**
-    This signal is emitted when the connection is closed. This can be caused
-    by a hardware error (e.g. broken internet connection) or because the other
-    object was killed.
+    /**
+      This signal is emitted when the connection is closed. This can be caused
+      by a hardware error (e.g. broken internet connection) or because the other
+      object was killed.
 
-    Note: Sometimes a broken connection can be undetected for a long time,
-    or may never be detected at all. So don't rely on this signal!
-  */
-  void connectionBroken ();
+      Note: Sometimes a broken connection can be undetected for a long time,
+      or may never be detected at all. So don't rely on this signal!
+    */
+    void connectionBroken();
 
 public Q_SLOTS:
 
-  /**
-    This slot sends the data block in /e msg to the connected object, that will
-    emit /e received().
+    /**
+      This slot sends the data block in /e msg to the connected object, that will
+      emit /e received().
 
-    For a concrete class, you have to subclass /e KMessageIO and overwrite this
-    method. In the subclass, implement this method as an ordinary method, not
-    as a slot! (Otherwise another slot would be defined. It would work, but uses
-    more memory and time.) See /e KMessageSocket for an example implementation.
-  */
-  virtual void send (const QByteArray &msg) = 0;
+      For a concrete class, you have to subclass /e KMessageIO and overwrite this
+      method. In the subclass, implement this method as an ordinary method, not
+      as a slot! (Otherwise another slot would be defined. It would work, but uses
+      more memory and time.) See /e KMessageSocket for an example implementation.
+    */
+    virtual void send(const QByteArray &msg) = 0;
 
 protected:
-  quint32 m_id;
+    quint32 m_id;
 };
-
 
 /**
   \class KMessageSocket kmessageio.h <KGame/KMessageIO>
@@ -163,107 +168,112 @@ protected:
 
 class KMessageSocket : public KMessageIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-    Connects to a server socket on /e host with /e port. host can be an
-    numerical (e.g. "192.168.0.212") or symbolic (e.g. "wave.peter.org")
-    IP address. You can immediately use the /e sendSystem() and
-    /e sendBroadcast() methods. The messages are stored and sent to the
-    receiver after the connection is established.
+    /**
+      Connects to a server socket on /e host with /e port. host can be an
+      numerical (e.g. "192.168.0.212") or symbolic (e.g. "wave.peter.org")
+      IP address. You can immediately use the /e sendSystem() and
+      /e sendBroadcast() methods. The messages are stored and sent to the
+      receiver after the connection is established.
 
-    If the connection could not be established (e.g. unknown host or no server
-    socket at this port), the signal /e connectionBroken is emitted.
-  */
-  KMessageSocket (const QString& host, quint16 port, QObject *parent = nullptr );
+      If the connection could not be established (e.g. unknown host or no server
+      socket at this port), the signal /e connectionBroken is emitted.
+    */
+    KMessageSocket(const QString &host, quint16 port, QObject *parent = nullptr);
 
-  /**
-    Connects to a server socket on /e host with /e port. You can immediately
-    use the /e sendSystem() and /e sendBroadcast() methods. The messages are
-    stored and sent to the receiver after the connection is established.
+    /**
+      Connects to a server socket on /e host with /e port. You can immediately
+      use the /e sendSystem() and /e sendBroadcast() methods. The messages are
+      stored and sent to the receiver after the connection is established.
 
-    If the connection could not be established (e.g. unknown host or no server
-    socket at this port), the signal /e connectionBroken is emitted.
-  */
-  KMessageSocket (const QHostAddress &host, quint16 port, QObject *parent = nullptr);
+      If the connection could not be established (e.g. unknown host or no server
+      socket at this port), the signal /e connectionBroken is emitted.
+    */
+    KMessageSocket(const QHostAddress &host, quint16 port, QObject *parent = nullptr);
 
-  /**
-    Uses /e socket to do the communication.
+    /**
+      Uses /e socket to do the communication.
 
-    The socket should already be connected, or at least be in /e connecting
-    state.
+      The socket should already be connected, or at least be in /e connecting
+      state.
 
-    Note: The /e socket object is then owned by the /e KMessageSocket object.
-    So don't use it otherwise any more and don't delete it. It is deleted
-    together with this KMessageSocket object. (Use 0 as parent for the QSocket
-    object t ensure it is not deleted.)
-  */
-  explicit KMessageSocket (QTcpSocket *socket, QObject *parent = nullptr);
+      Note: The /e socket object is then owned by the /e KMessageSocket object.
+      So don't use it otherwise any more and don't delete it. It is deleted
+      together with this KMessageSocket object. (Use 0 as parent for the QSocket
+      object t ensure it is not deleted.)
+    */
+    explicit KMessageSocket(QTcpSocket *socket, QObject *parent = nullptr);
 
-  /**
-    Uses the socket specified by the socket descriptor socketFD to do the
-    communication. The socket must already be connected.
+    /**
+      Uses the socket specified by the socket descriptor socketFD to do the
+      communication. The socket must already be connected.
 
-    This constructor can be used with a QServerSocket within the (pure
-    virtual) method /e newConnection.
+      This constructor can be used with a QServerSocket within the (pure
+      virtual) method /e newConnection.
 
-    Note: The socket is then owned by the /e KMessageSocket object. So don't
-    manipulate the socket afterwards, especially don't close it. The socket is
-    automatically closed when KMessageSocket is deleted.
-  */
-  explicit KMessageSocket (int socketFD, QObject *parent = nullptr);
+      Note: The socket is then owned by the /e KMessageSocket object. So don't
+      manipulate the socket afterwards, especially don't close it. The socket is
+      automatically closed when KMessageSocket is deleted.
+    */
+    explicit KMessageSocket(int socketFD, QObject *parent = nullptr);
 
-  /**
-    Destructor, closes the socket.
-  */
-  ~KMessageSocket () override;
+    /**
+      Destructor, closes the socket.
+    */
+    ~KMessageSocket() override;
 
-  /**
-  * The runtime identification
-  */
-  int rtti() const override {return 1;}
+    /**
+     * The runtime identification
+     */
+    int rtti() const override
+    {
+        return 1;
+    }
 
-  /**
-    @return The port that this object is connected to. See QSocket::peerPort
-  */
-  quint16 peerPort () const override;
+    /**
+      @return The port that this object is connected to. See QSocket::peerPort
+    */
+    quint16 peerPort() const override;
 
-  /**
-    @return The hostname this object is connected to. See QSocket::peerName.
-  */
-  QString peerName () const override;
+    /**
+      @return The hostname this object is connected to. See QSocket::peerName.
+    */
+    QString peerName() const override;
 
-  /**
-    @return TRUE as this is a network IO.
-  */
-  bool isNetwork() const override { return true; }
+    /**
+      @return TRUE as this is a network IO.
+    */
+    bool isNetwork() const override
+    {
+        return true;
+    }
 
-  /**
-    Returns true if the socket is in state /e connected.
-  */
-  bool isConnected () const override;
+    /**
+      Returns true if the socket is in state /e connected.
+    */
+    bool isConnected() const override;
 
-  /**
-    Overwritten slot method from KMessageIO.
+    /**
+      Overwritten slot method from KMessageIO.
 
-    Note: It is not declared as a slot method, since the slot is already
-    defined in KMessageIO as a virtual method.
-  */
-  void send (const QByteArray &msg) override;
+      Note: It is not declared as a slot method, since the slot is already
+      defined in KMessageIO as a virtual method.
+    */
+    void send(const QByteArray &msg) override;
 
 protected Q_SLOTS:
-  virtual void processNewData ();
+    virtual void processNewData();
 
 protected:
-  void initSocket ();
-  QTcpSocket *mSocket;
-  bool mAwaitingHeader;
-  quint32 mNextBlockLength;
+    void initSocket();
+    QTcpSocket *mSocket;
+    bool mAwaitingHeader;
+    quint32 mNextBlockLength;
 
-  bool isRecursive;  // workaround for "bug" in QSocket, Qt 2.2.3 or older
+    bool isRecursive; // workaround for "bug" in QSocket, Qt 2.2.3 or older
 };
-
 
 /**
   \class KMessageDirect kmessageio.h <KGame/KMessageIO>
@@ -287,54 +297,59 @@ protected:
 
 class KMessageDirect : public KMessageIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-    Creates an object and connects it to the object given in the first
-    parameter. Use 0 as first parameter to create an unconnected object,
-    that is later connected.
+    /**
+      Creates an object and connects it to the object given in the first
+      parameter. Use 0 as first parameter to create an unconnected object,
+      that is later connected.
 
-    If that object is already connected, the object remains unconnected.
-  */
-  explicit KMessageDirect (KMessageDirect *partner = nullptr, QObject *parent = nullptr);
+      If that object is already connected, the object remains unconnected.
+    */
+    explicit KMessageDirect(KMessageDirect *partner = nullptr, QObject *parent = nullptr);
 
-  /**
-    Destructor, closes the connection.
-  */
-  ~KMessageDirect () override;
+    /**
+      Destructor, closes the connection.
+    */
+    ~KMessageDirect() override;
 
-  /**
-  * The runtime identification
-  */
-  int rtti() const override {return 2;}
+    /**
+     * The runtime identification
+     */
+    int rtti() const override
+    {
+        return 2;
+    }
 
+    /**
+      @return FALSE as this is no network IO.
+    */
+    bool isNetwork() const override
+    {
+        return false;
+    }
 
-  /**
-    @return FALSE as this is no network IO.
-  */
-  bool isNetwork() const override { return false; }
+    /**
+      Returns true, if the object is connected to another instance.
 
-  /**
-    Returns true, if the object is connected to another instance.
+      If you use the first constructor, the object is unconnected unless another
+      object is created with this one as parameter.
 
-    If you use the first constructor, the object is unconnected unless another
-    object is created with this one as parameter.
+      The connection can only be closed by deleting one of the objects.
+    */
+    bool isConnected() const override;
 
-    The connection can only be closed by deleting one of the objects.
-  */
-  bool isConnected () const override;
+    /**
+      Overwritten slot method from KMessageIO.
 
-  /**
-    Overwritten slot method from KMessageIO.
-
-    Note: It is not declared as a slot method, since the slot is already
-    defined in KMessageIO as a virtual method.
-  */
-  void send (const QByteArray &msg) override;
+      Note: It is not declared as a slot method, since the slot is already
+      defined in KMessageIO as a virtual method.
+    */
+    void send(const QByteArray &msg) override;
 
 protected:
-  KMessageDirect *mPartner;
+    KMessageDirect *mPartner;
 };
 
 /**
@@ -342,41 +357,44 @@ protected:
  */
 class KMessageProcess : public KMessageIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    KMessageProcess(QObject *parent, const QString& file);
+public:
+    KMessageProcess(QObject *parent, const QString &file);
     ~KMessageProcess() override;
     bool isConnected() const override;
-    void send (const QByteArray &msg) override;
+    void send(const QByteArray &msg) override;
 
     /**
       @return FALSE as this is no network IO.
     */
-    bool isNetwork() const override { return false; }
+    bool isNetwork() const override
+    {
+        return false;
+    }
 
-  /**
-  * The runtime identification
-  */
-  int rtti() const override {return 3;}
+    /**
+     * The runtime identification
+     */
+    int rtti() const override
+    {
+        return 3;
+    }
 
+public Q_SLOTS:
+    void slotReceivedStdout();
+    void slotReceivedStderr();
+    void slotProcessExited(int, QProcess::ExitStatus);
 
-
-  public Q_SLOTS:
-  void  slotReceivedStdout();
-  void  slotReceivedStderr();
-  void  slotProcessExited(int, QProcess::ExitStatus);
-
-  Q_SIGNALS:
+Q_SIGNALS:
     void signalReceivedStderr(const QString &msg);
 
-  private:
+private:
     QString mProcessName;
     KProcess *mProcess;
-    QByteArray* mSendBuffer;
+    QByteArray *mSendBuffer;
     QByteArray mReceiveBuffer;
     int mReceiveCount;
 };
 
 #endif
-

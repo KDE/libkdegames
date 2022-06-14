@@ -12,13 +12,15 @@
 // Qt
 #include <QQmlContext>
 
-class KgDeclarativeViewPrivate{};
-
-KgDeclarativeView::KgDeclarativeView(QWidget *parent) :
-    QQuickWidget(parent),
-    d(nullptr) //unused for now, for future expandability
+class KgDeclarativeViewPrivate
 {
-    QQmlEngine* engine = this->engine();
+};
+
+KgDeclarativeView::KgDeclarativeView(QWidget *parent)
+    : QQuickWidget(parent)
+    , d(nullptr) // unused for now, for future expandability
+{
+    QQmlEngine *engine = this->engine();
     KDeclarative::KDeclarative::setupEngine(engine);
 
     KLocalizedContext *localizedContextObject = new KLocalizedContext(engine);

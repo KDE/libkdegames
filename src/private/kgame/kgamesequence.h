@@ -31,51 +31,51 @@ class KGame;
  * delete the object on destruction.
  * @short Round/move management class
  * @author Andreas Beckermann <b_mann@gmx.de>
- **/
+ */
 class KDEGAMESPRIVATE_EXPORT KGameSequence : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
+
 public:
-	KGameSequence();
-	~KGameSequence() override;
+    KGameSequence();
+    ~KGameSequence() override;
 
-	/**
-	 * Select the next player in a turn based game. In an asynchronous game this
-	 * function has no meaning. Overwrite this function for your own game sequence.
-	 * Per default it selects the next player in the playerList
-	 */
-	virtual KPlayer* nextPlayer(KPlayer *last, bool exclusive = true);
+    /**
+     * Select the next player in a turn based game. In an asynchronous game this
+     * function has no meaning. Overwrite this function for your own game sequence.
+     * Per default it selects the next player in the playerList
+     */
+    virtual KPlayer *nextPlayer(KPlayer *last, bool exclusive = true);
 
-	virtual void setCurrentPlayer(KPlayer* p);
+    virtual void setCurrentPlayer(KPlayer *p);
 
-	/**
-	 * @return The @ref KGame object this sequence is for, or NULL if none.
-	 **/
-	KGame* game() const;
+    /**
+     * @return The @ref KGame object this sequence is for, or NULL if none.
+     */
+    KGame *game() const;
 
-	KPlayer* currentPlayer() const;
+    KPlayer *currentPlayer() const;
 
-	/**
-	 * Set the @ref KGame object for this sequence. This is called
-	 * automatically by @ref KGame::setGameSequence and you should not call
-	 * it.
-	 **/
-	void setGame(KGame* game);
+    /**
+     * Set the @ref KGame object for this sequence. This is called
+     * automatically by @ref KGame::setGameSequence and you should not call
+     * it.
+     */
+    void setGame(KGame *game);
 
-	/**
-	 * Check whether the game is over. The default implementation always
-	 * returns 0.
-	 *
-	 * @param player the player who made the last move
-	 * @return anything else but 0 is considered as game over
-	**/
-	virtual int checkGameOver(KPlayer *player);
+    /**
+     * Check whether the game is over. The default implementation always
+     * returns 0.
+     *
+     * @param player the player who made the last move
+     * @return anything else but 0 is considered as game over
+     */
+    virtual int checkGameOver(KPlayer *player);
 
 private:
-	std::unique_ptr<class KGameSequencePrivate> const d;
+    std::unique_ptr<class KGameSequencePrivate> const d;
 
-	Q_DISABLE_COPY(KGameSequence)
+    Q_DISABLE_COPY(KGameSequence)
 };
 
 #endif
-

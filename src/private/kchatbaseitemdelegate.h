@@ -23,48 +23,40 @@
  * text part. This honors KChatBase::addMessage which also uses both.
  *
  * Colors and fonts for both parts are set in the corresponding model.
- **/
+ */
 class KDEGAMESPRIVATE_EXPORT KChatBaseItemDelegate : public QAbstractItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 
- public:
+public:
     /**
-      * Constructs a KChatBaseItemDelegate object
-      **/
+     * Constructs a KChatBaseItemDelegate object
+     */
     explicit KChatBaseItemDelegate(QObject *parent = nullptr);
 
     /**
-      * Destruct a KChatBaseItemDelegate object.
-      **/
+     * Destruct a KChatBaseItemDelegate object.
+     */
     ~KChatBaseItemDelegate() override;
 
     /**
-      * Reimplementation of the default paint method. Draws the item at the
-      * given index in the model with good fonts for player name and message.
-      *
-      * Should be reimplemented in inherited delegates
-      */
-    void paint(QPainter *painter, const QStyleOptionViewItem &option,
-                const QModelIndex &index) const override;
+     * Reimplementation of the default paint method. Draws the item at the
+     * given index in the model with good fonts for player name and message.
+     *
+     * Should be reimplemented in inherited delegates
+     */
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-    void paint(QPainter *painter,
-		const QStyleOptionViewItem &option,
-		const QModelIndex &index,
-		const QString& sender,
-		const QString& message) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, const QString &sender, const QString &message) const;
     /**
-      * Reimplementation of the default sizeHint. Computes the given item size
-      * depending on the name and message sizes and on the fonts they use.
-      *
-      * Should be reimplemented in inherited delegates
-      */
-    QSize sizeHint(const QStyleOptionViewItem &option,
-                    const QModelIndex &index ) const override;
+     * Reimplementation of the default sizeHint. Computes the given item size
+     * depending on the name and message sizes and on the fonts they use.
+     *
+     * Should be reimplemented in inherited delegates
+     */
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-    virtual QSize sizeHint(const QStyleOptionViewItem &option,
-                    const QModelIndex &index, const QString& sender,
-			    const QString& message) const;
+    virtual QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index, const QString &sender, const QString &message) const;
 };
 
 #endif

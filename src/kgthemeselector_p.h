@@ -12,20 +12,19 @@
 
 class KgThemeDelegate : public QStyledItemDelegate
 {
-	public:
-		enum Roles
-		{
-			DescriptionRole = Qt::UserRole,
-			AuthorRole,
-			AuthorEmailRole,
-			IdRole //not displayed, but used internally
-		};
+public:
+    enum Roles {
+        DescriptionRole = Qt::UserRole,
+        AuthorRole,
+        AuthorEmailRole,
+        IdRole // not displayed, but used internally
+    };
 
-		explicit KgThemeDelegate(QObject* parent = nullptr);
-		void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-		///@note The implementation is independent of @a option and @a index.
-		QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-		QRect thumbnailRect(const QRect& baseRect) const;
+    explicit KgThemeDelegate(QObject *parent = nullptr);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    /// @note The implementation is independent of @a option and @a index.
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QRect thumbnailRect(const QRect &baseRect) const;
 };
 
 #endif // KG_THEMESELECTOR_P_H

@@ -19,8 +19,8 @@ class tst_KGamePropertyTest : public QObject
 {
     Q_OBJECT
 
-  // Declare test functions as private slots, or they won't get executed
-  private Q_SLOTS:
+    // Declare test functions as private slots, or they won't get executed
+private Q_SLOTS:
 
     /// @brief This function is called first, so you can do init stuff here.
     void initTestCase();
@@ -35,15 +35,14 @@ class tst_KGamePropertyTest : public QObject
     void emitSignal(KGamePropertyBase *me);
 
     /// @brief Implement property slot to test property sending
-    void sendProperty(int msgid, QDataStream& stream, bool* sent);
+    void sendProperty(int msgid, QDataStream &stream, bool *sent);
 
-  private:
-    KGamePropertyHandler* mHandler;
+private:
+    KGamePropertyHandler *mHandler;
     KGamePropertyInt var1;
     KGamePropertyQString var2;
     int mCnt_Emit;
     int mCnt_Send;
-
 };
 
 #endif // KGAMEPROPERTYTEST_H

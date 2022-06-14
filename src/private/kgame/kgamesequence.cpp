@@ -9,121 +9,110 @@
 #include "kgamesequence.h"
 
 // own
-#include "kplayer.h"
 #include "kgame.h"
+#include "kplayer.h"
 
 class KGameSequencePrivate
 {
-  public:
+public:
     KGameSequencePrivate()
-      : mGame(nullptr), mCurrentPlayer(nullptr)
+        : mGame(nullptr)
+        , mCurrentPlayer(nullptr)
     {
     }
 
-    KGame* mGame;
-    KPlayer* mCurrentPlayer;
+    KGame *mGame;
+    KPlayer *mCurrentPlayer;
 };
 
 KGameSequence::KGameSequence()
-  : QObject(), d(new KGameSequencePrivate)
+    : QObject()
+    , d(new KGameSequencePrivate)
 {
 }
 
 KGameSequence::~KGameSequence() = default;
 
-void KGameSequence::setGame(KGame* game)
+void KGameSequence::setGame(KGame *game)
 {
- d->mGame = game;
+    d->mGame = game;
 }
 
-KGame* KGameSequence::game() const
+KGame *KGameSequence::game() const
 {
- return d->mGame;
+    return d->mGame;
 }
 
-KPlayer* KGameSequence::currentPlayer() const
+KPlayer *KGameSequence::currentPlayer() const
 {
- return d->mCurrentPlayer;
+    return d->mCurrentPlayer;
 }
 
-void KGameSequence::setCurrentPlayer(KPlayer* player)
+void KGameSequence::setCurrentPlayer(KPlayer *player)
 {
- d->mCurrentPlayer = player;
+    d->mCurrentPlayer = player;
 }
 
-KPlayer *KGameSequence::nextPlayer(KPlayer *last,bool exclusive)
+KPlayer *KGameSequence::nextPlayer(KPlayer *last, bool exclusive)
 {
- qCDebug(GAMES_PRIVATE_KGAME) << "=================== NEXT PLAYER ==========================";
- if (!game())
- {
-   qCCritical(GAMES_PRIVATE_KGAME) << "NULL game object";
-   return nullptr;
- }
- unsigned int minId,nextId,lastId;
- KPlayer *nextplayer, *minplayer;
- if (last)
- {
-   lastId = last->id();
- }
- else
- {
-   lastId = 0;
- }
+    qCDebug(GAMES_PRIVATE_KGAME) << "=================== NEXT PLAYER ==========================";
+    if (!game()) {
+        qCCritical(GAMES_PRIVATE_KGAME) << "NULL game object";
+        return nullptr;
+    }
+    unsigned int minId, nextId, lastId;
+    KPlayer *nextplayer, *minplayer;
+    if (last) {
+        lastId = last->id();
+    } else {
+        lastId = 0;
+    }
 
- qCDebug(GAMES_PRIVATE_KGAME) << "nextPlayer: lastId="<<lastId;
+    qCDebug(GAMES_PRIVATE_KGAME) << "nextPlayer: lastId=" << lastId;
 
- // remove when this has been checked
- minId = 0x7fff;  // we just need a very large number...properly MAX_UINT or so would be ok...
- nextId = minId;
- nextplayer = nullptr;
- minplayer = nullptr;
+    // remove when this has been checked
+    minId = 0x7fff; // we just need a very large number...properly MAX_UINT or so would be ok...
+    nextId = minId;
+    nextplayer = nullptr;
+    minplayer = nullptr;
 
- QList<KPlayer*>::iterator it = game()->playerList()->begin();
- for (;it != game()->playerList()->end(); it++ )
- {
-   KPlayer* player = *it;
-   // Find the first player for a cycle
-   if (player->id() < minId)
-   {
-     minId=player->id();
-     minplayer=player;
-   }
-   if (player==last)
-   {
-     continue;
-   }
-   // Find the next player which is bigger than the current one
-   if (player->id() > lastId && player->id() < nextId)
-   {
-     nextId=player->id();
-     nextplayer=player;
-   }
- }
+    QList<KPlayer *>::iterator it = game()->playerList()->begin();
+    for (; it != game()->playerList()->end(); it++) {
+        KPlayer *player = *it;
+        // Find the first player for a cycle
+        if (player->id() < minId) {
+            minId = player->id();
+            minplayer = player;
+        }
+        if (player == last) {
+            continue;
+        }
+        // Find the next player which is bigger than the current one
+        if (player->id() > lastId && player->id() < nextId) {
+            nextId = player->id();
+            nextplayer = player;
+        }
+    }
 
- // Cycle to the beginning
- if (!nextplayer)
- {
-   nextplayer=minplayer;
- }
+    // Cycle to the beginning
+    if (!nextplayer) {
+        nextplayer = minplayer;
+    }
 
- qCDebug(GAMES_PRIVATE_KGAME) << " ##### lastId=" << lastId << "exclusive="
-        << exclusive << "  minId=" << minId << "nextid=" << nextId
-        << "count=" << game()->playerList()->count();
- if (nextplayer)
- {
-   nextplayer->setTurn(true,exclusive);
- }
- else
- {
-   return nullptr;
- }
- return nextplayer;
+    qCDebug(GAMES_PRIVATE_KGAME) << " ##### lastId=" << lastId << "exclusive=" << exclusive << "  minId=" << minId << "nextid=" << nextId
+                                 << "count=" << game()->playerList()->count();
+    if (nextplayer) {
+        nextplayer->setTurn(true, exclusive);
+    } else {
+        return nullptr;
+    }
+    return nextplayer;
 }
 
 // Per default we do not do anything
-int KGameSequence::checkGameOver(KPlayer*)
+int KGameSequence::checkGameOver(KPlayer *)
 {
- return 0;
+    return 0;
 }
 /*
  * vim: et sw=2

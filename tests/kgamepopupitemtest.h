@@ -20,25 +20,28 @@ class QGraphicsSimpleTextItem;
 class KGpiMainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
+
 public:
     KGpiMainWindow();
+
 private Q_SLOTS:
     void onPopupTL();
     void onPopupTR();
     void onPopupBL();
     void onPopupBR();
     void onPopupCenter();
-    void onLinkClicked(const QString&);
+    void onLinkClicked(const QString &);
     void hideTextItem();
     void onTimeoutChanged(int);
     void changeIcon();
     void doInstantHide();
     void doAnimatedHide();
     void changeOpacity(int);
-    void textColorChanged(const QColor& col);
-    void bkgndColorChanged(const QColor& col);
+    void textColorChanged(const QColor &col);
+    void bkgndColorChanged(const QColor &col);
     void replaceModeChanged();
     void sharpnessChanged(int);
+
 private:
     Ui::KGpiMainWidget m_mainWid;
     QGraphicsScene *m_scene;

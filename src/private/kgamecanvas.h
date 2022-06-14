@@ -12,14 +12,14 @@
  */
 
 // own
-#include "libkdegamesprivate_export.h"
 #include "kgamerendererclient.h"
+#include "libkdegamesprivate_export.h"
 // Qt
 #include <QList>
-#include <QPoint>
+#include <QPainter>
 #include <QPicture>
 #include <QPixmap>
-#include <QPainter>
+#include <QPoint>
 #include <QRect>
 #include <QRegion>
 #include <QWidget>
@@ -39,8 +39,8 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasAbstract
 protected:
     friend class KGameCanvasItem;
 
-    QList<KGameCanvasItem*> m_items;
-    QList<KGameCanvasItem*> m_animated_items;
+    QList<KGameCanvasItem *> m_items;
+    QList<KGameCanvasItem *> m_animated_items;
 
 public:
     /** The constructor */
@@ -49,20 +49,29 @@ public:
     virtual ~KGameCanvasAbstract();
 
     /** Returns a const pointer to the list holding all the items in the canvas */
-    const QList<KGameCanvasItem*>* items() const { return &m_items; }
+    const QList<KGameCanvasItem *> *items() const
+    {
+        return &m_items;
+    }
 
     /** Helper function to retrieve the topmost item at the given position */
-    KGameCanvasItem* itemAt(const QPoint &pos) const;
+    KGameCanvasItem *itemAt(const QPoint &pos) const;
 
     /** Overload, same as above */
-    KGameCanvasItem* itemAt(int x, int y) const { return itemAt(QPoint(x,y)); }
+    KGameCanvasItem *itemAt(int x, int y) const
+    {
+        return itemAt(QPoint(x, y));
+    }
 
     /** Helper function to retrieve all the items at the given position,
         starting from the topmost one. */
-    QList<KGameCanvasItem*> itemsAt(const QPoint &pos) const;
+    QList<KGameCanvasItem *> itemsAt(const QPoint &pos) const;
 
     /** Overload, same as above */
-    QList<KGameCanvasItem*> itemsAt(int x, int y) const { return itemsAt(QPoint(x,y)); }
+    QList<KGameCanvasItem *> itemsAt(int x, int y) const
+    {
+        return itemsAt(QPoint(x, y));
+    }
 
     /** Virtual function to let know the canvas that it has animated items in it */
     virtual void ensureAnimating() = 0;
@@ -71,18 +80,17 @@ public:
     virtual void ensurePendingUpdate() = 0;
 
     /** Virtual function to update a rect */
-    virtual void invalidate(const QRect& r, bool translate = true) = 0;
+    virtual void invalidate(const QRect &r, bool translate = true) = 0;
 
     /** Virtual function to update a region */
-    virtual void invalidate(const QRegion& r, bool translate = true) = 0;
+    virtual void invalidate(const QRegion &r, bool translate = true) = 0;
 
     /** Returns the toplevel non-group KGameCanvasWidget object */
-    virtual class KGameCanvasWidget* topLevelCanvas() = 0;
+    virtual class KGameCanvasWidget *topLevelCanvas() = 0;
 
     /** @return Position of the abstract canvas relative to the toplevel canvas. */
     virtual QPoint canvasPosition() const = 0;
 };
-
 
 /**
     \class KGameCanvasItem kgamecanvas.h <KGameCanvas>
@@ -103,17 +111,16 @@ private:
 
     bool m_visible;
     bool m_animated;
-    int  m_opacity;
+    int m_opacity;
     QPoint m_pos;
     KGameCanvasAbstract *m_canvas;
 
     bool m_changed;
     QRect m_last_rect;
 
-    static QPixmap* transparence_pixmap_cache;
-    static QPixmap* getTransparenceCache(const QSize &s);
-    virtual void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint &delta, double cumulative_opacity);
+    static QPixmap *transparence_pixmap_cache;
+    static QPixmap *getTransparenceCache(const QSize &s);
+    virtual void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, const QPoint &delta, double cumulative_opacity);
 
     void updateAfterRestack(int from, int to);
 
@@ -127,7 +134,7 @@ public:
         Note that the restacking functions are quite intelligent and will only
         repaint if there is an actual need of doing it. So if you call raise on
         an item that is already (locally) on the top, no redraw will take place */
-    explicit KGameCanvasItem(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasItem(KGameCanvasAbstract *canvas = nullptr);
 
     virtual ~KGameCanvasItem();
 
@@ -135,28 +142,43 @@ public:
     virtual void changed();
 
     /** Returns true if the item is visible */
-    bool visible() const { return m_visible; }
+    bool visible() const
+    {
+        return m_visible;
+    }
 
     /** Set the item as visible or hidden */
     void setVisible(bool v);
 
     /** Returns true if the item is animated */
-    bool animated() const { return m_animated; }
+    bool animated() const
+    {
+        return m_animated;
+    }
 
     /** Set the item as animated or not */
     void setAnimated(bool a);
 
     /** Returns the opacity of the item */
-    int opacity() const { return m_opacity; }
+    int opacity() const
+    {
+        return m_opacity;
+    }
 
     /** Set the item's opacity value (int the 0-255 range) */
     void setOpacity(int o);
 
     /** Hides the item */
-    void hide(){ setVisible(false); }
+    void hide()
+    {
+        setVisible(false);
+    }
 
     /** Shows the item */
-    void show(){ setVisible(true); }
+    void show()
+    {
+        setVisible(true);
+    }
 
     /** Restacks the item on the top of the canvas */
     void raise();
@@ -165,23 +187,32 @@ public:
     void lower();
 
     /** Restacks the item immediately over ref */
-    void stackOver(KGameCanvasItem* ref);
+    void stackOver(KGameCanvasItem *ref);
 
     /** Restacks the item immediately under ref */
-    void stackUnder(KGameCanvasItem* ref);
+    void stackUnder(KGameCanvasItem *ref);
 
     /** Returns the canvas that is actually "owning" the item */
-    KGameCanvasAbstract *canvas() const { return m_canvas; }
+    KGameCanvasAbstract *canvas() const
+    {
+        return m_canvas;
+    }
 
     /** Returns the toplevel canvas widget, or NULL */
-    KGameCanvasWidget *topLevelCanvas() const { return m_canvas ? m_canvas->topLevelCanvas() : nullptr; }
+    KGameCanvasWidget *topLevelCanvas() const
+    {
+        return m_canvas ? m_canvas->topLevelCanvas() : nullptr;
+    }
 
     /** Lets you specify the owning canvas. Call this function with canvas
         set to NULL to remove the item from the current canvas. */
     void putInCanvas(KGameCanvasAbstract *canvas);
 
     /** Returns the position of the item */
-    QPoint pos() const { return m_pos; }
+    QPoint pos() const
+    {
+        return m_pos;
+    }
 
     /** @return Position of the item relative to the top level canvas. */
     QPoint absolutePosition() const;
@@ -192,10 +223,13 @@ public:
     void moveTo(const QPoint &newpos);
 
     /** Overload, same as above */
-    void moveTo(int x, int y) { moveTo( QPoint(x,y)); }
+    void moveTo(int x, int y)
+    {
+        moveTo(QPoint(x, y));
+    }
 
     /** Override this function to draw the item with the painter */
-    virtual void paint(QPainter* p) = 0;
+    virtual void paint(QPainter *p) = 0;
 
     /** Override this function to return the rect the item will be drawn into */
     virtual QRect rect() const = 0;
@@ -212,7 +246,6 @@ public:
     virtual void advance(int msecs);
 };
 
-
 /**
     \class KGameCanvasDummy kgamecanvas.h <KGameCanvas>
     \brief A dummy (empty) item.
@@ -227,17 +260,16 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasDummy : public KGameCanvasItem
 {
 public:
     /** Constructor */
-    explicit KGameCanvasDummy(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasDummy(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasDummy() override;
 
     /** This function does nothing (of course) */
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
 
     /** This returns an empty rectangle */
     QRect rect() const override;
 };
-
 
 /**
     \class KGameCanvasGroup kgamecanvas.h <KGameCanvas>
@@ -254,24 +286,23 @@ private:
     mutable bool m_child_rect_changed;
     mutable QRect m_last_child_rect;
 
-    void paintInternal(QPainter* p, const QRect& prect, const QRegion& preg,
-                                          const QPoint& delta, double cumulative_opacity) override;
+    void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, const QPoint &delta, double cumulative_opacity) override;
 
     void ensureAnimating() override;
     void ensurePendingUpdate() override;
-    void invalidate(const QRect& r, bool translate = true) override;
-    void invalidate(const QRegion& r, bool translate = true) override;
+    void invalidate(const QRect &r, bool translate = true) override;
+    void invalidate(const QRegion &r, bool translate = true) override;
     void updateChanges() override;
     void changed() override;
 
 public:
     /** Constructor */
-    explicit KGameCanvasGroup(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasGroup(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasGroup() override;
 
     /** This paints all the children */
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
 
     /** This returns the bouding rect of all children */
     QRect rect() const override;
@@ -280,7 +311,7 @@ public:
     void advance(int msecs) override;
 
     /** returns the toplevel canvas (or null if it is in an orphan tree) */
-    KGameCanvasWidget* topLevelCanvas() override;
+    KGameCanvasWidget *topLevelCanvas() override;
 
     QPoint canvasPosition() const override;
 };
@@ -300,20 +331,23 @@ private:
 
 public:
     /** Constructor, specifying the picture to use */
-    explicit KGameCanvasPicture(const QPicture& picture, KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasPicture(const QPicture &picture, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty picture */
-    explicit KGameCanvasPicture(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasPicture(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasPicture() override;
 
     /** Returns the picture */
-    QPicture picture() const { return m_picture; }
+    QPicture picture() const
+    {
+        return m_picture;
+    }
 
     /** Sets the picture of the sprite */
-    void setPicture(const QPicture& picture);
+    void setPicture(const QPicture &picture);
 
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
     QRect rect() const override;
 };
 
@@ -332,22 +366,28 @@ private:
 
 public:
     /** Constructor, specifying the pixmap to use */
-    explicit KGameCanvasPixmap(const QPixmap& pixmap, KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasPixmap(const QPixmap &pixmap, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty pixmap */
-    explicit KGameCanvasPixmap(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasPixmap(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasPixmap() override;
 
     /** Returns the pixmap */
-    QPixmap pixmap() const { return m_pixmap; }
+    QPixmap pixmap() const
+    {
+        return m_pixmap;
+    }
 
     /** Sets the pixmap of the sprite */
-    void setPixmap(const QPixmap& pixmap);
+    void setPixmap(const QPixmap &pixmap);
 
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
     QRect rect() const override;
-    bool layered() const override { return false; }
+    bool layered() const override
+    {
+        return false;
+    }
 };
 
 /**
@@ -363,9 +403,10 @@ public:
 class KDEGAMESPRIVATE_EXPORT KGameCanvasRenderedPixmap : public KGameCanvasPixmap, public KGameRendererClient
 {
 public:
-	KGameCanvasRenderedPixmap(KGameRenderer* renderer, const QString& spriteKey, KGameCanvasAbstract* canvas = nullptr);
+    KGameCanvasRenderedPixmap(KGameRenderer *renderer, const QString &spriteKey, KGameCanvasAbstract *canvas = nullptr);
+
 protected:
-	void receivePixmap(const QPixmap& pixmap) override;
+    void receivePixmap(const QPixmap &pixmap) override;
 };
 
 /**
@@ -376,7 +417,7 @@ protected:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMESPRIVATE_EXPORT  KGameCanvasTiledPixmap : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasTiledPixmap : public KGameCanvasItem
 {
 private:
     QPixmap m_pixmap;
@@ -386,40 +427,50 @@ private:
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasTiledPixmap(const QPixmap& pixmap, const QSize &size, const QPoint &origin,
-                            bool move_orig, KGameCanvasAbstract* canvas = nullptr);
+    KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, const QPoint &origin, bool move_orig, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty pixmap */
-    explicit KGameCanvasTiledPixmap(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasTiledPixmap(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasTiledPixmap() override;
 
     /** Returns the pixmap */
-    QPixmap pixmap() const { return m_pixmap; }
+    QPixmap pixmap() const
+    {
+        return m_pixmap;
+    }
 
     /** Sets the pixmap of the tile */
-    void setPixmap(const QPixmap& pixmap);
+    void setPixmap(const QPixmap &pixmap);
 
     /** Sets the size */
     void setSize(const QSize &size);
 
     /** The origin */
-    QPoint origin() const { return m_move_orig ? m_origin + pos() : m_origin; }
+    QPoint origin() const
+    {
+        return m_move_orig ? m_origin + pos() : m_origin;
+    }
 
     /** Sets the origin of the tiles */
     void setOrigin(const QPoint &size);
 
     /** If the origin is moved */
-    bool moveOrigin(){ return m_move_orig; }
+    bool moveOrigin()
+    {
+        return m_move_orig;
+    }
 
     /** Sets if the origin of the brush will be moved with the pixmap */
     void setMoveOrigin(bool move_orig);
 
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
     QRect rect() const override;
-    bool layered() const override { return false; }
+    bool layered() const override
+    {
+        return false;
+    }
 };
-
 
 /**
     \class KGameCanvasRectangle kgamecanvas.h <KGameCanvas>
@@ -429,7 +480,7 @@ public:
 
     \deprecated For new applications, use Qt's Graphics View framework or Qt Quick.
 */
-class KDEGAMESPRIVATE_EXPORT  KGameCanvasRectangle : public KGameCanvasItem
+class KDEGAMESPRIVATE_EXPORT KGameCanvasRectangle : public KGameCanvasItem
 {
 private:
     QColor m_color;
@@ -437,25 +488,31 @@ private:
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasRectangle(const QColor& color, const QSize &size, KGameCanvasAbstract* canvas = nullptr);
+    KGameCanvasRectangle(const QColor &color, const QSize &size, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty pixmap */
-    explicit KGameCanvasRectangle(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasRectangle(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasRectangle() override;
 
     /** Returns the color */
-    QColor color() const { return m_color; }
+    QColor color() const
+    {
+        return m_color;
+    }
 
     /** Sets the color */
-    void setColor(const QColor& color);
+    void setColor(const QColor &color);
 
     /** Sets the size */
     void setSize(const QSize &size);
 
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
     QRect rect() const override;
-    bool layered() const override { return false; }
+    bool layered() const override
+    {
+        return false;
+    }
 };
 
 /**
@@ -472,22 +529,12 @@ public:
     /** Specifies the meaning of the x coordinate of the item. It can
         refer to the start of the text, of the left, center, right of
         the bounding rectangle. */
-    enum HPos {
-        HStart,
-        HLeft,
-        HRight,
-        HCenter
-    };
+    enum HPos { HStart, HLeft, HRight, HCenter };
 
     /** Specifies the meaning of the y coordinate of the item. It can
         refer to the baseline of the text, of the top, center, bottom of
         the bounding rectangle. */
-    enum VPos {
-        VBaseline,
-        VTop,
-        VBottom,
-        VCenter
-    };
+    enum VPos { VBaseline, VTop, VBottom, VCenter };
 
 private:
     QString m_text;
@@ -502,45 +549,61 @@ private:
 
 public:
     /** Constructor, specifying the text and the parameters to use */
-    KGameCanvasText(const QString& text, const QColor& color,
-                    const QFont& font, HPos hp, VPos vp,
-                    KGameCanvasAbstract* canvas = nullptr);
+    KGameCanvasText(const QString &text, const QColor &color, const QFont &font, HPos hp, VPos vp, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty text */
-    explicit KGameCanvasText(KGameCanvasAbstract* canvas = nullptr);
+    explicit KGameCanvasText(KGameCanvasAbstract *canvas = nullptr);
 
     ~KGameCanvasText() override;
 
     /** Returns the text */
-    QString text() const { return m_text; }
+    QString text() const
+    {
+        return m_text;
+    }
 
     /** Sets the text */
-    void setText(const QString& text);
+    void setText(const QString &text);
 
     /** Returns the color */
-    QColor color() const { return m_color; }
+    QColor color() const
+    {
+        return m_color;
+    }
 
     /** Sets the color */
-    void setColor(const QColor& color);
+    void setColor(const QColor &color);
 
     /** Returns the font */
-    QFont font() const { return m_font; }
+    QFont font() const
+    {
+        return m_font;
+    }
 
     /** Sets the font */
-    void setFont(const QFont& font);
+    void setFont(const QFont &font);
 
     /** Returns the horizontal positioning style */
-    HPos hPositioning() const { return m_hpos; }
+    HPos hPositioning() const
+    {
+        return m_hpos;
+    }
 
     /** Returns the vertical positioning style */
-    VPos vPositioning() const { return m_vpos; }
+    VPos vPositioning() const
+    {
+        return m_vpos;
+    }
 
     /** Sets the positioning style */
     void setPositioning(HPos hp, VPos vp);
 
-    void paint(QPainter* p) override;
+    void paint(QPainter *p) override;
     QRect rect() const override;
-    bool layered() const override { return false; }
+    bool layered() const override
+    {
+        return false;
+    }
 };
 
 /**
@@ -554,17 +617,18 @@ public:
 */
 class KDEGAMESPRIVATE_EXPORT KGameCanvasWidget : public QWidget, public KGameCanvasAbstract
 {
-Q_OBJECT
+    Q_OBJECT
+
 private:
     friend class KGameCanvasItem;
     friend class AnimationNotifier;
 
-    class  KGameCanvasWidgetPrivate *priv;
+    class KGameCanvasWidgetPrivate *priv;
 
     void ensureAnimating() override;
     void ensurePendingUpdate() override;
-    void invalidate(const QRect& r, bool translate = true) override;
-    void invalidate(const QRegion& r, bool translate = true) override;
+    void invalidate(const QRect &r, bool translate = true) override;
+    void invalidate(const QRegion &r, bool translate = true) override;
 
     void paintEvent(QPaintEvent *event) override;
 
@@ -574,7 +638,7 @@ private Q_SLOTS:
 
 public:
     /** The constructor */
-    explicit KGameCanvasWidget(QWidget* parent = nullptr);
+    explicit KGameCanvasWidget(QWidget *parent = nullptr);
 
     ~KGameCanvasWidget() override;
 
@@ -586,7 +650,7 @@ public:
     int mSecs();
 
     /** returns 'this' */
-    KGameCanvasWidget* topLevelCanvas() override;
+    KGameCanvasWidget *topLevelCanvas() override;
 
     /** @return 0 */
     QPoint canvasPosition() const override;
@@ -621,46 +685,55 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
     bool m_child_rect_valid;
     QRect m_invalidated_rect;
 
-    void ensureAnimating() override { }
+    void ensureAnimating() override
+    {
+    }
     void ensurePendingUpdate() override;
-    void invalidate(const QRect& r, bool translate = true) override;
-    void invalidate(const QRegion& r, bool translate = true) override;
+    void invalidate(const QRect &r, bool translate = true) override;
+    void invalidate(const QRegion &r, bool translate = true) override;
 
     QRect childRect();
+
 public:
     /** Constructor */
     KGameCanvasAdapter();
 
     /**
-      * An adapter is not associated to any canvas, so this function
-      * simply returns 0.
-      */
-    class KGameCanvasWidget* topLevelCanvas() override { return nullptr; }
+     * An adapter is not associated to any canvas, so this function
+     * simply returns 0.
+     */
+    class KGameCanvasWidget *topLevelCanvas() override
+    {
+        return nullptr;
+    }
 
     /**
-      * The absolute position of the rendered content is not well
-      * defined for KGameCanvasAdapter. We assume that the adapter
-      * will be rendered at (0,0), and leave it to the user to perform
-      * the necessary adjustments, which will depend on the chosen
-      * rendering method.
-      *
-      * @return The point (0, 0).
-      */
-    QPoint canvasPosition() const override { return QPoint(0, 0); }
+     * The absolute position of the rendered content is not well
+     * defined for KGameCanvasAdapter. We assume that the adapter
+     * will be rendered at (0,0), and leave it to the user to perform
+     * the necessary adjustments, which will depend on the chosen
+     * rendering method.
+     *
+     * @return The point (0, 0).
+     */
+    QPoint canvasPosition() const override
+    {
+        return QPoint(0, 0);
+    }
 
     /**
-      * Draw the items of the adapter using the specified painter.
-      * \param p The QPainter object to be used for rendering.
-      */
-    virtual void render(QPainter* p);
+     * Draw the items of the adapter using the specified painter.
+     * \param p The QPainter object to be used for rendering.
+     */
+    virtual void render(QPainter *p);
 
     /**
-      * Notify the parent that the adapter content inside \a rect needs
-      * to be redrawn.
-      *
-      * \a rect The bounding rectangle of the region that needs repainting.
-      */
-    virtual void updateParent(const QRect& rect) = 0;
+     * Notify the parent that the adapter content inside \a rect needs
+     * to be redrawn.
+     *
+     * \a rect The bounding rectangle of the region that needs repainting.
+     */
+    virtual void updateParent(const QRect &rect) = 0;
 };
 
 #endif //__KGRGAMECANVAS_H__

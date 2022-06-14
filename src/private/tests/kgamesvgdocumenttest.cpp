@@ -10,12 +10,12 @@
 // own
 #include <config-tests.h>
 // Qt
-#include <QTest>
 #include <QRegExp>
+#include <QTest>
 
 void tst_KGameSvgDocument::initTestCase()
 {
-    m_svgDom.load(TESTS_PATH"kgamesvgdocumenttest.svg");
+    m_svgDom.load(TESTS_PATH "kgamesvgdocumenttest.svg");
 }
 
 void tst_KGameSvgDocument::cleanupTestCase()
@@ -67,30 +67,28 @@ void tst_KGameSvgDocument::scale()
 
     double computedX = originalTransformMatrix.m11() * 2;
     double errorX = computedX - finalMatrix.m11();
-    QVERIFY(errorX < 0.0000001);  // if our margin of error is small, we are probably ok
+    QVERIFY(errorX < 0.0000001); // if our margin of error is small, we are probably ok
 
     double computedY = originalTransformMatrix.m22() * 2;
     double errorY = computedY - finalMatrix.m22();
-    QVERIFY(errorY < 0.0000001);  // if our margin of error is small, we are probably ok
+    QVERIFY(errorY < 0.0000001); // if our margin of error is small, we are probably ok
 
     // This should output a warning message
     m_svgDom.scale(1, 0, KGameSvgDocument::ApplyToCurrentMatrix);
-
 }
 
 void tst_KGameSvgDocument::transformRegex()
 {
-
     QRegExp rx;
 
     rx.setPattern(WSP);
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(QLatin1String( " " )));
+    QVERIFY(rx.exactMatch(QLatin1String(" ")));
     QVERIFY(!rx.exactMatch(""));
 
     rx.setPattern(WSP_ASTERISK);
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(QLatin1String( " " )));
+    QVERIFY(rx.exactMatch(QLatin1String(" ")));
     QVERIFY(rx.exactMatch(""));
     QVERIFY(rx.exactMatch("   "));
     QVERIFY(rx.exactMatch("       "));
@@ -105,7 +103,7 @@ void tst_KGameSvgDocument::transformRegex()
     QVERIFY(rx.isValid());
     QVERIFY(rx.exactMatch(" ,"));
     QVERIFY(rx.exactMatch(" , "));
-    QVERIFY(rx.exactMatch(QLatin1String( " " )));
+    QVERIFY(rx.exactMatch(QLatin1String(" ")));
     QVERIFY(rx.exactMatch(", "));
     QVERIFY(rx.exactMatch(","));
     QVERIFY(rx.exactMatch(" , "));
@@ -231,7 +229,6 @@ void tst_KGameSvgDocument::transform()
 
     m_svgDom.setTransformMatrix(originalMatrix, KGameSvgDocument::ReplaceCurrentMatrix);
     QVERIFY(m_svgDom.transformMatrix() == originalMatrix);
-
 }
-QTEST_MAIN(tst_KGameSvgDocument)
 
+QTEST_MAIN(tst_KGameSvgDocument)

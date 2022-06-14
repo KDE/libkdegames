@@ -31,21 +31,20 @@ class KgThemeProvider;
 class KgImageProvider : public QQuickImageProvider
 {
 public:
-    ///Construcs a new KgImageProvider with the supplied KgThemeProvider
-    ///@param provider The KgThemeProvider used to discover the game's
-    ///themes.
-    explicit KgImageProvider(KgThemeProvider* provider);
+    /// Construcs a new KgImageProvider with the supplied KgThemeProvider
+    /// @param provider The KgThemeProvider used to discover the game's
+    /// themes.
+    explicit KgImageProvider(KgThemeProvider *provider);
 
-    ///Reimplemented method that is called when a sprite pixmap is requested
-    QImage requestImage(const QString& source, QSize *size, const QSize &requestedSize) override;
+    /// Reimplemented method that is called when a sprite pixmap is requested
+    QImage requestImage(const QString &source, QSize *size, const QSize &requestedSize) override;
 
 private:
     void reloadRenderer();
 
     QString m_themeName;
-    KgThemeProvider* m_provider;
+    KgThemeProvider *m_provider;
     QSvgRenderer m_renderer;
-
 };
 
-#endif //KGIMAGEPROVIDER_H
+#endif // KGIMAGEPROVIDER_H

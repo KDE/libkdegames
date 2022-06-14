@@ -12,7 +12,6 @@
 // sndfile
 #include <sndfile.hh>
 
-
 class VirtualFileQt
 {
 public:
@@ -27,11 +26,11 @@ public:
     int64_t write(const void *ptr, int64_t count);
     int64_t tell();
 
-    static SF_VIRTUAL_IO& getSndfileVirtualIO();
+    static SF_VIRTUAL_IO &getSndfileVirtualIO();
     static VirtualFileQt *get(void *user_data);
 
 private:
     QFile m_file;
 };
 
-#endif //LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H
+#endif // LIBKDEGAMES_VIRTUALFILEQT_OPENAL_H

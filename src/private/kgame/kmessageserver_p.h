@@ -22,19 +22,17 @@ class KMessageIO;
 */
 class KMessageServerSocket : public QTcpServer
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KMessageServerSocket (quint16 port, QObject *parent = nullptr);
-  ~KMessageServerSocket () override;
+    explicit KMessageServerSocket(quint16 port, QObject *parent = nullptr);
+    ~KMessageServerSocket() override;
 
 public Q_SLOTS:
-  void slotNewConnection();
+    void slotNewConnection();
 
 Q_SIGNALS:
-  void newClientConnected (KMessageIO *client);
+    void newClientConnected(KMessageIO *client);
 };
-
-
 
 #endif

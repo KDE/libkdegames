@@ -15,5 +15,3 @@ void CoreBindingsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<KgThemeProvider>(uri, 0, 1, "ThemeProvider");
 }
-
-

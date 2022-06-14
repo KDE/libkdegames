@@ -24,20 +24,20 @@ int64_t VirtualFileQt::getFileLen() const
 int64_t VirtualFileQt::seek(int64_t offset, int whence)
 {
     switch (whence) {
-        case SEEK_SET:
-            return m_file.seek(static_cast<quint64>(offset)) ? m_file.pos() : -1;
-        case SEEK_CUR:
-            return m_file.seek(m_file.pos() + static_cast<quint64>(offset)) ? m_file.pos() : -1;
-        case SEEK_END:
-            return m_file.seek(m_file.size() + static_cast<quint64>(offset)) ? m_file.pos() : -1;
-        default:
-            return -1;
+    case SEEK_SET:
+        return m_file.seek(static_cast<quint64>(offset)) ? m_file.pos() : -1;
+    case SEEK_CUR:
+        return m_file.seek(m_file.pos() + static_cast<quint64>(offset)) ? m_file.pos() : -1;
+    case SEEK_END:
+        return m_file.seek(m_file.size() + static_cast<quint64>(offset)) ? m_file.pos() : -1;
+    default:
+        return -1;
     }
 }
 
 int64_t VirtualFileQt::read(void *ptr, int64_t count)
 {
-    return static_cast<int64_t>(m_file.read(static_cast<char*>(ptr), static_cast<qint64>(count)));
+    return static_cast<int64_t>(m_file.read(static_cast<char *>(ptr), static_cast<qint64>(count)));
 }
 
 int64_t VirtualFileQt::write(const void *, int64_t)
@@ -91,5 +91,5 @@ SF_VIRTUAL_IO &VirtualFileQt::getSndfileVirtualIO()
 
 VirtualFileQt *VirtualFileQt::get(void *user_data)
 {
-    return static_cast<VirtualFileQt*>(user_data);
+    return static_cast<VirtualFileQt *>(user_data);
 }

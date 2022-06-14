@@ -31,16 +31,16 @@
 class KDEGAMES_EXPORT KgDeclarativeView : public QQuickWidget
 {
     Q_OBJECT
+
 public:
-    ///Construcs a new KgDeclarativeView with KDE specific environment.
-    ///@param parent The parent widget for this view (usually the main
-    ///window of the game)
-    explicit KgDeclarativeView(QWidget *parent=nullptr);
+    /// Construcs a new KgDeclarativeView with KDE specific environment.
+    /// @param parent The parent widget for this view (usually the main
+    /// window of the game)
+    explicit KgDeclarativeView(QWidget *parent = nullptr);
     ~KgDeclarativeView() override;
 
 private:
     std::unique_ptr<class KgDeclarativeViewPrivate> const d;
-
 };
 
-#endif //KGDECLARATIVEVIEW_H
+#endif // KGDECLARATIVEVIEW_H

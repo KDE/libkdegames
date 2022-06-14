@@ -10,52 +10,54 @@
 // Qt
 #include <QHash>
 #include <QPointF>
-//OpenAL includes (without "AL/" include directory; see FindOpenAL.cmake)
+// OpenAL includes (without "AL/" include directory; see FindOpenAL.cmake)
 #include <al.h>
 #include <alc.h>
 
 class KgSound;
 
-///@internal
+/// @internal
 class KgPlaybackEvent
 {
-	public:
-		//Creates and starts the playback. Also registers with the OpenALRuntime.
-		KgPlaybackEvent(KgSound* sound, const QPointF& pos);
-		//Stops playback if it is still running.
-		~KgPlaybackEvent();
+public:
+    // Creates and starts the playback. Also registers with the OpenALRuntime.
+    KgPlaybackEvent(KgSound *sound, const QPointF &pos);
+    // Stops playback if it is still running.
+    ~KgPlaybackEvent();
 
-		//Is playback still running?
-		bool isRunning() const;
-		bool replay(const QPointF& pos) const;
-	private:
-		ALuint m_source;
-		bool m_valid;
+    // Is playback still running?
+    bool isRunning() const;
+    bool replay(const QPointF &pos) const;
+
+private:
+    ALuint m_source;
+    bool m_valid;
 };
 
-typedef QList<KgPlaybackEvent*> KgPlaybackEventList;
+typedef QList<KgPlaybackEvent *> KgPlaybackEventList;
 
-///@internal
+/// @internal
 class KgOpenALRuntime
 {
-	public:
-		KgOpenALRuntime();
-		~KgOpenALRuntime();
+public:
+    KgOpenALRuntime();
+    ~KgOpenALRuntime();
 
-		static KgOpenALRuntime* instance();
+    static KgOpenALRuntime *instance();
 
-		void configureListener();
-		void cleanupUnusedSources();
+    void configureListener();
+    void cleanupUnusedSources();
 
-		//global properties
-		QPointF m_listenerPos;
-		qreal m_volume;
-		bool m_error;
-		//active sound and playback instances
-		QHash<KgSound*, KgPlaybackEventList> m_soundsEvents;
-	private:
-		ALCcontext* m_context;
-		ALCdevice* m_device;
+    // global properties
+    QPointF m_listenerPos;
+    qreal m_volume;
+    bool m_error;
+    // active sound and playback instances
+    QHash<KgSound *, KgPlaybackEventList> m_soundsEvents;
+
+private:
+    ALCcontext *m_context;
+    ALCdevice *m_device;
 };
 
 #endif // KGOPENALRUNTIME_P_H

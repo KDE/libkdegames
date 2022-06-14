@@ -11,7 +11,7 @@
 
 /**
  * \headerfile kgameversion.h <KGame/KGameVersion>
- * 
+ *
  * In this file you find a couple of defines that indicate whether a specific
  * feature or function is present in this version of the KGame library.
  *
@@ -20,7 +20,7 @@
  * this task.
  *
  * All defines are prefixed with KGAME_ to avoid conflicts.
- **/
+ */
 
 // KGame::savegame() didn't exist in KDE 3.0
 #define KGAME_HAVE_KGAME_SAVEGAME 1
@@ -39,4 +39,3 @@
 #define KGAME_HAVE_FIXED_ADDPLAYER_ID 1
 
 #endif
-

@@ -27,6 +27,7 @@ class KGameClockPrivate;
 class KDEGAMES_EXPORT KGameClock : public QObject
 {
     Q_OBJECT
+
 public:
     /**
      * Controls the format of return value of @ref timeString()
@@ -37,8 +38,7 @@ public:
      * FlexibleHourMinSec     04:05   01:02:03
      * LongMinSec             04:05      62:03
      */
-    enum ClockType
-    {
+    enum ClockType {
         HourMinSec = 0,
         MinSecOnly = 1,
         FlexibleHourMinSec = 2, ///< @since 22.04

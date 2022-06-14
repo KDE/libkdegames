@@ -9,12 +9,12 @@
 // own
 #include "kgthemeprovider.h"
 // Qt
-#include <QPainter>
 #include <QGuiApplication>
+#include <QPainter>
 
-KgImageProvider::KgImageProvider(KgThemeProvider* prov) :
-    QQuickImageProvider(Image),
-    m_provider(prov)
+KgImageProvider::KgImageProvider(KgThemeProvider *prov)
+    : QQuickImageProvider(Image)
+    , m_provider(prov)
 {
     reloadRenderer();
 }
@@ -25,7 +25,7 @@ void KgImageProvider::reloadRenderer()
     m_themeName = m_provider->currentThemeName();
 }
 
-QImage KgImageProvider::requestImage(const QString& source, QSize *size, const QSize& requestedSize)
+QImage KgImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
 {
     Q_UNUSED(requestedSize); // this is always QSize(-1,-1) for some reason
 
@@ -45,22 +45,22 @@ QImage KgImageProvider::requestImage(const QString& source, QSize *size, const Q
 
         if (m_renderer.isValid()) {
             if (width == 0 || height == 0) {
-                image = QImage(m_renderer.boundsOnElement(spriteKey).size().toSize()*qApp->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
+                image = QImage(m_renderer.boundsOnElement(spriteKey).size().toSize() * qApp->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
             } else {
-                image = QImage(QSize(width, height)*qApp->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
+                image = QImage(QSize(width, height) * qApp->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
             }
             image.fill(Qt::transparent);
-            QPainter* painter = new QPainter(&image);
+            QPainter *painter = new QPainter(&image);
             m_renderer.render(painter, spriteKey);
 
-            //this is deliberately set after .render as Qt <= 5.4 has a bug in QSVGRenderer which makes it not fill the image properly
+            // this is deliberately set after .render as Qt <= 5.4 has a bug in QSVGRenderer which makes it not fill the image properly
             image.setDevicePixelRatio(qApp->devicePixelRatio());
             delete painter;
         }
     }
 
-    if (size) *size = image.size();
+    if (size)
+        *size = image.size();
 
     return image;
 }
-

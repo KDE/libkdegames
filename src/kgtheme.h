@@ -10,9 +10,9 @@
 // own
 #include <libkdegames_export.h>
 // Qt
+#include <QLoggingCategory>
 #include <QMetaType>
 #include <QObject>
-#include <QLoggingCategory>
 #include <QPixmap>
 // Std
 #include <memory>
@@ -57,81 +57,83 @@ Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KDEGAMES_EXPORT KgTheme : public QObject
 {
-	Q_OBJECT
-	Q_PROPERTY(QByteArray identifier READ identifier NOTIFY readOnlyProperty)
-	//it is not intended to allow these properties to change after the initial
-	//setup (note how KgThemeProvider returns only const KgTheme*), hence
-	//a dummy NOTIFY signal is enough
-	Q_PROPERTY(QString name READ name WRITE setName NOTIFY readOnlyProperty)
-	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY readOnlyProperty)
-	Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY readOnlyProperty)
-	Q_PROPERTY(QString authorEmail READ authorEmail WRITE setAuthorEmail NOTIFY readOnlyProperty)
-	Q_PROPERTY(QString graphicsPath READ graphicsPath WRITE setGraphicsPath NOTIFY readOnlyProperty)
-	Q_PROPERTY(QString previewPath READ previewPath WRITE setPreviewPath NOTIFY readOnlyProperty)
-	Q_DISABLE_COPY(KgTheme)
-	public:
-		///Constructor. The @a identifier must be application-unique.
-		explicit KgTheme(const QByteArray& identifier, QObject* parent = nullptr);
-		///Destructor.
-		~KgTheme() override;
+    Q_OBJECT
+    Q_PROPERTY(QByteArray identifier READ identifier NOTIFY readOnlyProperty)
+    // it is not intended to allow these properties to change after the initial
+    // setup (note how KgThemeProvider returns only const KgTheme*), hence
+    // a dummy NOTIFY signal is enough
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString authorEmail READ authorEmail WRITE setAuthorEmail NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString graphicsPath READ graphicsPath WRITE setGraphicsPath NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString previewPath READ previewPath WRITE setPreviewPath NOTIFY readOnlyProperty)
+    Q_DISABLE_COPY(KgTheme)
 
-		///Initializes a KgTheme instance by reading a description file.
-		///@return whether @a path is a valid theme description file (if not,
-		///        the theme instance is not changed by this method call)
-		///@note A non-static member function has been chosen over the more
-		///      common pattern of using a static member function like
-		///      "KgTheme::fromDesktopFile" to accommodate applications which
-		///      want to subclass KgTheme.
-		virtual bool readFromDesktopFile(const QString& path);
+public:
+    /// Constructor. The @a identifier must be application-unique.
+    explicit KgTheme(const QByteArray &identifier, QObject *parent = nullptr);
+    /// Destructor.
+    ~KgTheme() override;
 
-		///@return the internal identifier for this theme (used e.g. for
-		///        finding a pixmap cache or storing a theme selection)
-		QByteArray identifier() const;
+    /// Initializes a KgTheme instance by reading a description file.
+    /// @return whether @a path is a valid theme description file (if not,
+    ///         the theme instance is not changed by this method call)
+    /// @note A non-static member function has been chosen over the more
+    ///       common pattern of using a static member function like
+    ///       "KgTheme::fromDesktopFile" to accommodate applications which
+    ///       want to subclass KgTheme.
+    virtual bool readFromDesktopFile(const QString &path);
 
-		///@return the name of this theme
-		QString name() const;
-		///@see name()
-		void setName(const QString& name);
-		///@return an additional description beyond the name()
-		QString description() const;
-		///@see description()
-		void setDescription(const QString& description);
-		///@return the name of the theme author
-		QString author() const;
-		///@see author()
-		void setAuthor(const QString& author);
-		///@return the email address of the theme author
-		QString authorEmail() const;
-		///@see authorEmail()
-		void setAuthorEmail(const QString& authorEmail);
+    /// @return the internal identifier for this theme (used e.g. for
+    ///         finding a pixmap cache or storing a theme selection)
+    QByteArray identifier() const;
 
-		///@return the path of the SVG file which holds the theme contents
-		QString graphicsPath() const;
-		///@see graphicsPath()
-		void setGraphicsPath(const QString& path);
-		///@return the path to an image file containing a preview, or an empty
-		///        string if no preview file is known
-		QString previewPath() const;
-		///@see previewPath()
-		void setPreviewPath(const QString& path);
+    /// @return the name of this theme
+    QString name() const;
+    /// @see name()
+    void setName(const QString &name);
+    /// @return an additional description beyond the name()
+    QString description() const;
+    /// @see description()
+    void setDescription(const QString &description);
+    /// @return the name of the theme author
+    QString author() const;
+    /// @see author()
+    void setAuthor(const QString &author);
+    /// @return the email address of the theme author
+    QString authorEmail() const;
+    /// @see authorEmail()
+    void setAuthorEmail(const QString &authorEmail);
 
-		///@return custom data
-		///
-		///This API is provided for theme description files which contain
-		///additional application-specific metadata.
-		QMap<QString, QString> customData() const;
-		///@overload that returns a single value from the customData() map
-		QString customData(const QString& key, const QString& defaultValue = QString()) const;
-		///@see customData()
-		void setCustomData(const QMap<QString, QString>& customData);
-	Q_SIGNALS:
-		///This signal is never emitted. It is provided because QML likes to
-		///complain about properties without NOTIFY signals, even readonly ones.
-		void readOnlyProperty();
-	private:
-		std::unique_ptr<class KgThemePrivate> const d;
+    /// @return the path of the SVG file which holds the theme contents
+    QString graphicsPath() const;
+    /// @see graphicsPath()
+    void setGraphicsPath(const QString &path);
+    /// @return the path to an image file containing a preview, or an empty
+    ///         string if no preview file is known
+    QString previewPath() const;
+    /// @see previewPath()
+    void setPreviewPath(const QString &path);
+
+    /// @return custom data
+    ///
+    /// This API is provided for theme description files which contain
+    /// additional application-specific metadata.
+    QMap<QString, QString> customData() const;
+    /// @overload that returns a single value from the customData() map
+    QString customData(const QString &key, const QString &defaultValue = QString()) const;
+    /// @see customData()
+    void setCustomData(const QMap<QString, QString> &customData);
+Q_SIGNALS:
+    /// This signal is never emitted. It is provided because QML likes to
+    /// complain about properties without NOTIFY signals, even readonly ones.
+    void readOnlyProperty();
+
+private:
+    std::unique_ptr<class KgThemePrivate> const d;
 };
 
-Q_DECLARE_METATYPE(const KgTheme*)
+Q_DECLARE_METATYPE(const KgTheme *)
 
 #endif // KGTHEME_H

@@ -38,6 +38,7 @@ class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
+
 public:
     /**
      * Possible values for message showing mode in respect to a previous
@@ -47,7 +48,7 @@ public:
     /**
      * Possible values for the popup angles sharpness
      */
-    enum Sharpness { Square=0, Sharp=2, Soft=5, Softest=10 };
+    enum Sharpness { Square = 0, Sharp = 2, Soft = 5, Softest = 10 };
     /**
      * The possible places in the scene where a message can be shown
      */
@@ -55,7 +56,7 @@ public:
     /**
      * Constructs a message item. It is hidden by default.
      */
-    explicit KGamePopupItem(QGraphicsItem * parent = nullptr);
+    explicit KGamePopupItem(QGraphicsItem *parent = nullptr);
     /**
      * Destructs a message item
      */
@@ -75,7 +76,7 @@ public:
      * @param mode how to handle an already shown message by this item:
        either leave it and ignore the new one or replace it
      */
-    void showMessage( const QString& text, Position pos, ReplaceMode mode = LeavePrevious);
+    void showMessage(const QString &text, Position pos, ReplaceMode mode = LeavePrevious);
     /**
      * Sets the amount of time the item will stay visible on screen
      * before it goes away.
@@ -87,7 +88,7 @@ public:
      * if msec is 0, then message will stay visible until it
      * gets explicitly hidden by forceHide()
      */
-    void setMessageTimeout( int msec );
+    void setMessageTimeout(int msec);
     /**
      * @return timeout that is currently set
      */
@@ -97,7 +98,7 @@ public:
      * For example 0.5 is half transparent
      * It defaults to 1.0
      */
-    void setMessageOpacity( qreal opacity );
+    void setMessageOpacity(qreal opacity);
     /**
      * @return current message opacity
      */
@@ -105,12 +106,12 @@ public:
     /**
      * Sets custom pixmap to show instead of default icon on the left
      */
-    void setMessageIcon( const QPixmap& pix );
+    void setMessageIcon(const QPixmap &pix);
     /**
      * Sets whether to hide this popup item on mouse click.
      * By default a mouse click will cause an item to hide
      */
-    void setHideOnMouseClick( bool hide );
+    void setHideOnMouseClick(bool hide);
     /**
      * @return whether this popup item hides on mouse click.
      */
@@ -122,19 +123,19 @@ public:
     /**
      * Requests the item to be hidden immediately.
      */
-    void forceHide(HideType type=AnimatedHide);
+    void forceHide(HideType type = AnimatedHide);
     /**
      * Sets brush used to paint item background
      * By default system-default brush is used
      * @see KColorScheme
      */
-    void setBackgroundBrush( const QBrush& brush );
+    void setBackgroundBrush(const QBrush &brush);
     /**
      * Sets default color for unformatted text
      * By default system-default color is used
      * @see KColorScheme
      */
-    void setTextColor( const QColor& color );
+    void setTextColor(const QColor &color);
     /**
      * @return the bounding rect of this item. Reimplemented from QGraphicsItem
      */
@@ -142,11 +143,11 @@ public:
     /**
      * Paints item. Reimplemented from QGraphicsItem
      */
-    void paint( QPainter* p, const QStyleOptionGraphicsItem *option, QWidget* widget ) override;
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     /**
      * Sets the popup angles sharpness
      */
-    void setSharpness( Sharpness sharpness );
+    void setSharpness(Sharpness sharpness);
     /**
      * @return current popup angles sharpness
      */
@@ -155,11 +156,11 @@ Q_SIGNALS:
     /**
      * Emitted when user clicks on a link in item
      */
-    void linkActivated( const QString& link );
+    void linkActivated(const QString &link);
     /**
      * Emitted when user hovers a link in item
      */
-    void linkHovered( const QString& link );
+    void linkHovered(const QString &link);
     /**
      * Emitted when the popup finishes hiding. This includes hiding caused by
      * both timeouts and mouse clicks.
@@ -169,14 +170,15 @@ private Q_SLOTS:
     void animationFrame(int);
     void hideMe();
     void playHideAnimation();
-    void onLinkHovered(const QString&);
+    void onLinkHovered(const QString &);
     void onTextItemClicked();
+
 private:
     void setupTimeline();
-    void mousePressEvent( QGraphicsSceneMouseEvent* ) override;
-    void mouseReleaseEvent( QGraphicsSceneMouseEvent* ) override;
-    void hoverEnterEvent( QGraphicsSceneHoverEvent* ) override;
-    void hoverLeaveEvent( QGraphicsSceneHoverEvent* ) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *) override;
 
 private:
     std::unique_ptr<KGamePopupItemPrivate> const d;

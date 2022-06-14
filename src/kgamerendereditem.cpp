@@ -8,20 +8,20 @@
 
 class KGameRenderedItemPrivate
 {
-	//NOTE: reserved for later use
+    // NOTE: reserved for later use
 };
 
-KGameRenderedItem::KGameRenderedItem(KGameRenderer* renderer, const QString& spriteKey, QGraphicsItem* parent)
-	: QGraphicsPixmapItem(parent)
-	, KGameRendererClient(renderer, spriteKey)
-	, d(nullptr)
+KGameRenderedItem::KGameRenderedItem(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent)
+    : QGraphicsPixmapItem(parent)
+    , KGameRendererClient(renderer, spriteKey)
+    , d(nullptr)
 {
-	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+    setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 KGameRenderedItem::~KGameRenderedItem() = default;
 
-void KGameRenderedItem::receivePixmap(const QPixmap& pixmap)
+void KGameRenderedItem::receivePixmap(const QPixmap &pixmap)
 {
-	QGraphicsPixmapItem::setPixmap(pixmap);
+    QGraphicsPixmapItem::setPixmap(pixmap);
 }

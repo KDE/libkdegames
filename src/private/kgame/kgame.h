@@ -16,9 +16,9 @@
 #include <kcoreaddons_export.h> // for KCOREADDONS_ENABLE_DEPRECATED_SINCE
 // Qt
 #include <QDataStream>
-#include <QString>
 #include <QList>
 #include <QLoggingCategory>
+#include <QString>
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
@@ -51,55 +51,47 @@ class KGamePrivate;
  * \code
  * KGame *game=new KGame;
  * \endcode
- *
- *
  */
 class KDEGAMESPRIVATE_EXPORT KGame : public KGameNetwork
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-	typedef QList<KPlayer*> KGamePlayerList;
+    typedef QList<KPlayer *> KGamePlayerList;
 
-	/**
-	 * The policy of the property. This can be PolicyClean (setVale uses
-	 * send), PolicyDirty (setValue uses changeValue) or
-	 * PolicyLocal (setValue uses setLocal).
-	 *
-	 * A "clean" policy means that the property is always the same on every
-	 * client. This is achieved by calling send which actually changes
-	 * the value only when the message from the MessageServer is received.
-	 *
-	 * A "dirty" policy means that as soon as setValue is called the
-	 * property is changed immediately. And additionally sent over network.
-	 * This can sometimes lead to bugs as the other clients do not
-	 * immediately have the same value. For more information see
-	 * changeValue.
-	 *
-	 * PolicyLocal means that a KGameProperty behaves like ever
-	 * "normal" variable. Whenever setValue is called (e.g. using "=")
-	 * the value of the property is changes immediately without sending it
-	 * over network. You might want to use this if you are sure that all
-	 * clients set the property at the same time.
-	 **/
-	enum GamePolicy
-	{
-		PolicyUndefined = 0,
-		PolicyClean = 1,
-		PolicyDirty = 2,
-		PolicyLocal = 3
-	};
+    /**
+     * The policy of the property. This can be PolicyClean (setVale uses
+     * send), PolicyDirty (setValue uses changeValue) or
+     * PolicyLocal (setValue uses setLocal).
+     *
+     * A "clean" policy means that the property is always the same on every
+     * client. This is achieved by calling send which actually changes
+     * the value only when the message from the MessageServer is received.
+     *
+     * A "dirty" policy means that as soon as setValue is called the
+     * property is changed immediately. And additionally sent over network.
+     * This can sometimes lead to bugs as the other clients do not
+     * immediately have the same value. For more information see
+     * changeValue.
+     *
+     * PolicyLocal means that a KGameProperty behaves like ever
+     * "normal" variable. Whenever setValue is called (e.g. using "=")
+     * the value of the property is changes immediately without sending it
+     * over network. You might want to use this if you are sure that all
+     * clients set the property at the same time.
+     */
+    enum GamePolicy { PolicyUndefined = 0, PolicyClean = 1, PolicyDirty = 2, PolicyLocal = 3 };
 
     /**
      * Create a KGame object. The cookie is used to identify your
      * game in load/save and network operations. Change this between
      * games.
      */
-    explicit KGame(int cookie=42,QObject* parent=nullptr);
+    explicit KGame(int cookie = 42, QObject *parent = nullptr);
 
     /**
-    * Destructs the game
-    */
+     * Destructs the game
+     */
     ~KGame() override;
 
     /**
@@ -112,17 +104,7 @@ public:
      * The KGame e.g. sets the status to Pause when you have
      * less player than the minimum amount
      */
-	enum GameStatus
-	{
-		Init = 0,
-		Run = 1,
-		Pause = 2,
-		End = 3,
-		Abort = 4,
-		SystemPause = 5,
-		Intro = 6,
-		UserStatus = 7
-	};
+    enum GameStatus { Init = 0, Run = 1, Pause = 2, End = 3, Abort = 4, SystemPause = 5, Intro = 6, UserStatus = 7 };
 
     // Properties
     /**
@@ -134,7 +116,7 @@ public:
 
     /**
      * The same as @ref playerList but returns a const pointer.
-     **/
+     */
     const KGamePlayerList *playerList() const;
 
     /**
@@ -145,7 +127,7 @@ public:
 
     /**
      * The same as @ref inactivePlayerList but returns a const pointer.
-     **/
+     */
     const KGamePlayerList *inactivePlayerList() const;
 
 #if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
@@ -164,7 +146,7 @@ public:
     /**
      * @return The KGameSequence object that is currently in use.
      * @see setGameSequence
-     **/
+     */
     KGameSequence *gameSequence() const;
 
     /**
@@ -189,8 +171,8 @@ public:
      * The previous sequence will get deleted.
      * @param sequence The new game sequence object. KGame takes ownership and
      * will delete it on destruction!
-     **/
-    void setGameSequence(KGameSequence* sequence);
+     */
+    void setGameSequence(KGameSequence *sequence);
 
     /**
      * Note that KPlayer::save must be implemented properly, as well as
@@ -208,25 +190,28 @@ public:
      * further initialization!
      * @param newplayer The player you want to add. KGame will send a message to
      * all clients and add the player using systemAddPlayer
-     **/
-    bool addPlayer(KPlayer* newplayer);
+     */
+    bool addPlayer(KPlayer *newplayer);
 
     /**
      * Sends a message over the network, msgid=IdRemovePlayer.
      *
      * As soon as this message is received by networkTransmission
      * systemRemovePlayer is called and the player is removed.
-     **/
-    //AB: TODO: make sendMessage to return if the message will be able to be
-    //sent, eg if a socket is connected, etc. If sendMessage returns false
-    //remove the player directly using systemRemovePlayer
-    bool removePlayer(KPlayer * player) { return removePlayer(player, 0); }
+     */
+    // AB: TODO: make sendMessage to return if the message will be able to be
+    // sent, eg if a socket is connected, etc. If sendMessage returns false
+    // remove the player directly using systemRemovePlayer
+    bool removePlayer(KPlayer *player)
+    {
+        return removePlayer(player, 0);
+    }
 
     /**
      * Called by the destructor of KPlayer to remove itself from the game
      *
-     **/
-    void playerDeleted(KPlayer * player);
+     */
+    void playerDeleted(KPlayer *player);
 
     /**
      * sends activate player: internal use only?
@@ -277,15 +262,15 @@ public:
      * @deprecated Since 3.2, use KGameSequence::nextPlayer() instead
      */
     KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence::nextPlayer()")
-    virtual KPlayer * nextPlayer(KPlayer *last,bool exclusive=true);
+    virtual KPlayer *nextPlayer(KPlayer *last, bool exclusive = true);
 #endif
 
     // Input events
     /**
      * Called by KPlayer to send a player input to the
      * KMessageServer.
-     **/
-    virtual bool sendPlayerInput(QDataStream &msg,KPlayer *player,quint32 sender=0);
+     */
+    virtual bool sendPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender = 0);
 
     /**
      * Called when a player input arrives from KMessageServer.
@@ -296,36 +281,36 @@ public:
      * moment it is a virtual function to give you more control over KGame.
      *
      * For documentation see playerInput.
-     **/
-    virtual bool systemPlayerInput(QDataStream &msg,KPlayer *player,quint32 sender=0);
+     */
+    virtual bool systemPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender = 0);
 
     /**
-    * This virtual function is called if the KGame needs to create a new player.
-    * This happens only over a network and with load/save. Doing nothing
-    * will create a default KPlayer. If you want to have your own player
-    * you have to create one with the given rtti here.
-    * Note: If your game uses a player class derived from KPlayer you MUST
-    * override this function and create your player here. Otherwise the
-    * game will crash.
-    * Example:
-    * \code
-    *  KPlayer *MyGame::createPlayer(int rtti,int io,bool isvirtual)
-    *  {
-    *    KPlayer *player=new MyPlayer;
-    *    if (!isvirtual) // network player ?
-    *    {
-    *      // Define something like this to add the IO modules
-    *      createIO(player,(KGameIO::IOMode)io);
-    *    }
-    *    return player;
-    *    }
-    * \endcode
-    *
-    * @param rtti is the type of the player (0 means default KPlayer)
-    * @param io is the 'or'ed rtti of the KGameIO's
-    * @param isvirtual true if player is virtual
-    */
-    virtual KPlayer *createPlayer(int rtti,int io,bool isvirtual);
+     * This virtual function is called if the KGame needs to create a new player.
+     * This happens only over a network and with load/save. Doing nothing
+     * will create a default KPlayer. If you want to have your own player
+     * you have to create one with the given rtti here.
+     * Note: If your game uses a player class derived from KPlayer you MUST
+     * override this function and create your player here. Otherwise the
+     * game will crash.
+     * Example:
+     * \code
+     *  KPlayer *MyGame::createPlayer(int rtti,int io,bool isvirtual)
+     *  {
+     *    KPlayer *player=new MyPlayer;
+     *    if (!isvirtual) // network player ?
+     *    {
+     *      // Define something like this to add the IO modules
+     *      createIO(player,(KGameIO::IOMode)io);
+     *    }
+     *    return player;
+     *    }
+     * \endcode
+     *
+     * @param rtti is the type of the player (0 means default KPlayer)
+     * @param io is the 'or'ed rtti of the KGameIO's
+     * @param isvirtual true if player is virtual
+     */
+    virtual KPlayer *createPlayer(int rtti, int io, bool isvirtual);
 
     // load/save
     /**
@@ -340,7 +325,7 @@ public:
      *
      * @return true?
      */
-    virtual bool load(QDataStream &stream,bool reset=true);
+    virtual bool load(QDataStream &stream, bool reset = true);
 
     /**
      * Same as above function but with different parameters
@@ -349,8 +334,8 @@ public:
      * @param reset - shall the game be reset before loading
      *
      * @return true?
-     **/
-    virtual bool load(const QString& filename,bool reset=true);
+     */
+    virtual bool load(const QString &filename, bool reset = true);
 
     /**
      * Save a game to a file OR to network. Otherwise the same as
@@ -361,7 +346,7 @@ public:
      *
      * @return true?
      */
-    virtual bool save(QDataStream &stream,bool saveplayers=true);
+    virtual bool save(QDataStream &stream, bool saveplayers = true);
 
     /**
      * Same as above function but with different parameters
@@ -370,8 +355,8 @@ public:
      * @param saveplayers If true then all players wil be saved too
      *
      * @return true?
-     **/
-    virtual bool save(const QString& filename,bool saveplayers=true);
+     */
+    virtual bool save(const QString &filename, bool saveplayers = true);
 
     /**
      * Resets the game, i.e. puts it into a state where everything
@@ -381,7 +366,6 @@ public:
      * @return true on success
      */
     virtual bool reset();
-
 
     // Game sequence
     /**
@@ -399,32 +383,32 @@ public:
     void setGameStatus(int status);
 
     /**
-    *  docu: see KPlayer
-    **/
-    bool addProperty(KGamePropertyBase* data);
+     *  docu: see KPlayer
+     */
+    bool addProperty(KGamePropertyBase *data);
 
     /**
      * This is called by KPlayer::sendProperty only! Internal function!
-     **/
-    bool sendPlayerProperty(int msgid, QDataStream& s, quint32 playerId);
+     */
+    bool sendPlayerProperty(int msgid, QDataStream &s, quint32 playerId);
 
     /**
-    * This function allows to find the pointer to a player
-    * property when you know its id
-    */
-    KGamePropertyBase* findProperty(int id) const;
+     * This function allows to find the pointer to a player
+     * property when you know its id
+     */
+    KGamePropertyBase *findProperty(int id) const;
 
     /**
      * Changes the consistency policy of a property. The
      * GamePolicy is one of PolicyClean (default), PolicyDirty or PolicyLocal.
      *
      * It is up to you to decide how you want to work.
-     **/
-    void setPolicy(GamePolicy p,bool recursive=true);
+     */
+    void setPolicy(GamePolicy p, bool recursive = true);
 
     /**
      * @return The default policy of the property
-     **/
+     */
     GamePolicy policy() const;
 
     /**
@@ -438,10 +422,10 @@ public:
      * @param group the group of the receivers
      * @return true if worked
      */
-    bool sendGroupMessage(const QByteArray& msg, int msgid, quint32 sender, const QString& group);
-    bool sendGroupMessage(const QDataStream &msg, int msgid, quint32 sender, const QString& group);
-    bool sendGroupMessage(int msg, int msgid, quint32 sender, const QString& group);
-    bool sendGroupMessage(const QString& msg, int msgid, quint32 sender, const QString& group);
+    bool sendGroupMessage(const QByteArray &msg, int msgid, quint32 sender, const QString &group);
+    bool sendGroupMessage(const QDataStream &msg, int msgid, quint32 sender, const QString &group);
+    bool sendGroupMessage(int msg, int msgid, quint32 sender, const QString &group);
+    bool sendGroupMessage(const QString &msg, int msgid, quint32 sender, const QString &group);
 
     /**
      * This will either forward an incoming message to a specified player
@@ -460,23 +444,23 @@ public:
      * @param receiver The is of the player this message is for. 0 For broadcast.
      * @param sender
      * @param clientID the client from which we received the transmission - hardly used
-     **/
+     */
     void networkTransmission(QDataStream &stream, int msgid, quint32 receiver, quint32 sender, quint32 clientID) override;
 
     /**
      * Returns a pointer to the KGame property handler
-     **/
-    KGamePropertyHandler* dataHandler() const;
+     */
+    KGamePropertyHandler *dataHandler() const;
 
 protected Q_SLOTS:
     /**
      * Called by KGamePropertyHandler only! Internal function!
-     **/
-    void sendProperty(int msgid, QDataStream& stream, bool* sent);
+     */
+    void sendProperty(int msgid, QDataStream &stream, bool *sent);
 
     /**
-      * Called by KGamePropertyHandler only! Internal function!
-     **/
+     * Called by KGamePropertyHandler only! Internal function!
+     */
     void emitSignal(KGamePropertyBase *me);
 
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
@@ -490,7 +474,7 @@ protected Q_SLOTS:
     /**
      * Calls negotiateNetworkGame()
      * See KGameNetwork::signalClientConnected
-     **/
+     */
     void slotClientConnected(quint32 clientId);
 
     /**
@@ -499,14 +483,14 @@ protected Q_SLOTS:
      * the players from that client.
      * @param clientId The client the connection has been lost to
      * @param broken (ignore this - not used)
-     **/
-    void slotClientDisconnected(quint32 clientId,bool broken);
+     */
+    void slotClientDisconnected(quint32 clientId, bool broken);
 
     /**
      * This slot is called whenever the connection to the server is lost (ie the
      * signal KGameNetwork::signalConnectionBroken is emitted) and will
      * switch to local game mode
-     **/
+     */
     void slotServerDisconnected();
 
 Q_SIGNALS:
@@ -526,8 +510,8 @@ Q_SIGNALS:
      * KGameIO here - but only on <em>one</em> client!
      * @param remove Set this to FALSE if you don't want this player to be
      * removed completely.
-     **/
-    void signalReplacePlayerIO(KPlayer* player, bool* remove);
+     */
+    void signalReplacePlayerIO(KPlayer *player, bool *remove);
 
     /**
      * The game will be loaded from the given stream. Load from here
@@ -566,7 +550,7 @@ Q_SIGNALS:
      * better use signalSave
      *
      * @param stream the save stream
-     **/
+     */
     void signalSavePrePlayers(QDataStream &stream);
 
     /**
@@ -589,7 +573,7 @@ Q_SIGNALS:
      * @param cookie - the saved cookie. It differs from KGame::cookie()
      * @param result - set this to true if you managed to load the game
      */
-    void signalLoadError(QDataStream &stream,bool network,int cookie, bool &result);
+    void signalLoadError(QDataStream &stream, bool network, int cookie, bool &result);
 
     /**
      * We got an user defined update message. This is usually done
@@ -597,14 +581,14 @@ Q_SIGNALS:
      * own methods and has to synchronize them over the network.
      * Reaction to this is usually a call to a KGame function.
      */
-    void signalNetworkData(int msgid,const QByteArray& buffer, quint32 receiver, quint32 sender);
+    void signalNetworkData(int msgid, const QByteArray &buffer, quint32 receiver, quint32 sender);
 
     /**
      * We got an network message. this can be used to notify us that something
      * changed. What changed can be seen in the message id. Whether this is
      * the best possible method to do this is unclear...
      */
-    void signalMessageUpdate(int msgid,quint32 receiver,quint32 sender);
+    void signalMessageUpdate(int msgid, quint32 receiver, quint32 sender);
 
     /**
      * a player left the game because of a broken connection or so!
@@ -625,11 +609,10 @@ Q_SIGNALS:
      */
     void signalPlayerJoinedGame(KPlayer *player);
 
-
     /**
-    * This signal is emitted if a player property changes its value and
-    * the property is set to notify this change
-    */
+     * This signal is emitted if a player property changes its value and
+     * the property is set to notify this change
+     */
     void signalPropertyChanged(KGamePropertyBase *property, KGame *me);
 
     /**
@@ -643,37 +626,36 @@ Q_SIGNALS:
     void signalGameOver(int status, KPlayer *current, KGame *me);
 
     /**
-    * Is emitted after a client is successfully connected to the game.
-    * The client id is the id of the new game client. An easy way to
-    * check whether that's us is
-    * \code
-    *   if (clientid==gameid()) .. // we joined
-    *   else ... // someone joined the game
-    * \endcode
-    * @param clientid - The id of the new client
-    * @param me - our game pointer
-    */
-    void signalClientJoinedGame(quint32 clientid,KGame *me);
+     * Is emitted after a client is successfully connected to the game.
+     * The client id is the id of the new game client. An easy way to
+     * check whether that's us is
+     * \code
+     *   if (clientid==gameid()) .. // we joined
+     *   else ... // someone joined the game
+     * \endcode
+     * @param clientid - The id of the new client
+     * @param me - our game pointer
+     */
+    void signalClientJoinedGame(quint32 clientid, KGame *me);
 
     /**
-    * This signal is emitted after a network partner left the
-    * game (either by a broken connection or voluntarily).
-    * All changes to the network players have already be done.
-    * If there are not enough players left, the game might have
-    * been paused. To check this you get the old gamestatus
-    * before the disconnection as argument here. The id of the
-    * client who left the game allows to distinguish who left the
-    * game. If it is 0, the server disconnected and you were a client
-    * which has been switched back to local play.
-    * You can use this signal to, e.g. set some menus back to local
-    * player when they were network before.
-    *
-    * @param clientID - 0:server left, otherwise the client who left
-    * @param oldgamestatus - the gamestatus before the loss
-    * @param me - our game pointer
-    **/
-    void signalClientLeftGame(int clientID,int oldgamestatus,KGame *me);
-
+     * This signal is emitted after a network partner left the
+     * game (either by a broken connection or voluntarily).
+     * All changes to the network players have already be done.
+     * If there are not enough players left, the game might have
+     * been paused. To check this you get the old gamestatus
+     * before the disconnection as argument here. The id of the
+     * client who left the game allows to distinguish who left the
+     * game. If it is 0, the server disconnected and you were a client
+     * which has been switched back to local play.
+     * You can use this signal to, e.g. set some menus back to local
+     * player when they were network before.
+     *
+     * @param clientID - 0:server left, otherwise the client who left
+     * @param oldgamestatus - the gamestatus before the loss
+     * @param me - our game pointer
+     */
+    void signalClientLeftGame(int clientID, int oldgamestatus, KGame *me);
 
 protected:
     /**
@@ -703,73 +685,70 @@ protected:
      * @param player the player who did the move
      * @return true - input ready, false: input manual
      */
-    virtual bool playerInput(QDataStream &msg,KPlayer *player)=0;
-
+    virtual bool playerInput(QDataStream &msg, KPlayer *player) = 0;
 
     /**
-    * Called after the player input is processed by the game. Here the
-    * checks for game over and nextPlayer (in the case of turn base games)
-    * are processed.
-    * Call this manually if you have a delayed move, i.e. your playerInput
-    * function returns FALSE. If it returns true you need not do anything
-    * here.
-    *
-    * @return the current player
-    *
-    **/
+     * Called after the player input is processed by the game. Here the
+     * checks for game over and nextPlayer (in the case of turn base games)
+     * are processed.
+     * Call this manually if you have a delayed move, i.e. your playerInput
+     * function returns FALSE. If it returns true you need not do anything
+     * here.
+     *
+     * @return the current player
+     *
+     */
     KPlayer *playerInputFinished(KPlayer *player);
 
+    /**
+     * This virtual function can be overwritten for your own player management.
+     * It is called when a new game connects to an existing network game or
+     * to the network master. In case you do not want all players of both games
+     * to be present in the new network game, you can deactivate players here.
+     * This is of particular importance if you have a game with fixed number of
+     * player like e.g. chess. A network connect needs to disable one player of
+     * each game to make sense.
+     *
+     * Not overwriting this function will activate a default behaviour which
+     * will deactivate players until the @ref maxPlayers() number is reached
+     * according to the KPlayer::networkPriority() value. Players with a low
+     * value will be kicked out first. With equal priority players of the new
+     * client will leave first. This means, not setting this value and not
+     * overwriting this function will never allow a chess game to add client
+     * players!!!
+     * On the other hand setting one player of each game to a networkPriorty of
+     * say 10, already does most of the work for you.
+     *
+     * The parameters of this function are the playerlist of the network game,
+     * which is @ref playerList(). The second argument is the player list of
+     * the new client who wants to join and the third argument serves as return
+     * parameter. All <em>player ID's</em> which are written into this list
+     * will be <em>removed</em> from the created game. You do this by an
+     * \code
+     * inactivate.append(player->id());
+     * \endcode
+     *
+     * @param oldplayer - the list of the network players
+     * @param newplayer - the list of the client players
+     * @param inactivate - the value list of ids to be deactivated
+     *
+     */
+    virtual void newPlayersJoin(KGamePlayerList *oldplayer, KGamePlayerList *newplayer, QList<int> &inactivate)
+    {
+        Q_UNUSED(oldplayer);
+        Q_UNUSED(newplayer);
+        Q_UNUSED(inactivate);
+    }
 
     /**
-    * This virtual function can be overwritten for your own player management.
-    * It is called when a new game connects to an existing network game or
-    * to the network master. In case you do not want all players of both games
-    * to be present in the new network game, you can deactivate players here.
-    * This is of particular importance if you have a game with fixed number of
-    * player like e.g. chess. A network connect needs to disable one player of
-    * each game to make sense.
-    *
-    * Not overwriting this function will activate a default behaviour which
-    * will deactivate players until the @ref maxPlayers() number is reached
-    * according to the KPlayer::networkPriority() value. Players with a low
-    * value will be kicked out first. With equal priority players of the new
-    * client will leave first. This means, not setting this value and not
-    * overwriting this function will never allow a chess game to add client
-    * players!!!
-    * On the other hand setting one player of each game to a networkPriorty of
-    * say 10, already does most of the work for you.
-    *
-    * The parameters of this function are the playerlist of the network game,
-    * which is @ref playerList(). The second argument is the player list of
-    * the new client who wants to join and the third argument serves as return
-    * parameter. All <em>player ID's</em> which are written into this list
-    * will be <em>removed</em> from the created game. You do this by an
-    * \code
-    * inactivate.append(player->id());
-    * \endcode
-    *
-    * @param oldplayer - the list of the network players
-    * @param newplayer - the list of the client players
-    * @param inactivate - the value list of ids to be deactivated
-    *
-    **/
-    virtual void newPlayersJoin(KGamePlayerList *oldplayer,
-				KGamePlayerList *newplayer,
-				QList<int> &inactivate) {
-		Q_UNUSED( oldplayer );
-		Q_UNUSED( newplayer );
-		Q_UNUSED( inactivate );
-	}
-
-    /**
-    * Save the player list to a stream. Used for network game and load/save.
-    * Can be overwritten if you know what you are doing
-    *
-    * @param stream is the stream to save the player ot
-    * @param list the optional list is the player list to be saved, default is playerList()
-    *
-    **/
-    void savePlayers(QDataStream &stream,KGamePlayerList *list=nullptr);
+     * Save the player list to a stream. Used for network game and load/save.
+     * Can be overwritten if you know what you are doing
+     *
+     * @param stream is the stream to save the player ot
+     * @param list the optional list is the player list to be saved, default is playerList()
+     *
+     */
+    void savePlayers(QDataStream &stream, KGamePlayerList *list = nullptr);
 
     /**
      * Prepare a player for being added. Put all data about a player into the
@@ -780,19 +759,18 @@ protected:
      * addPlayer as well as in negotiateNetworkGame
      * @param stream is the stream to add the player
      * @param player The player to add
-     **/
-    void savePlayer(QDataStream& stream,KPlayer* player);
+     */
+    void savePlayer(QDataStream &stream, KPlayer *player);
 
     /**
-    * Load the player list from a stream. Used for network game and load/save.
-    * Can be overwritten if you know what you are doing
-    *
-    * @param stream is the stream to save the player to
-    * @param isvirtual will set the virtual flag true/false
-    *
-    **/
-    KPlayer *loadPlayer(QDataStream& stream,bool isvirtual=false);
-
+     * Load the player list from a stream. Used for network game and load/save.
+     * Can be overwritten if you know what you are doing
+     *
+     * @param stream is the stream to save the player to
+     * @param isvirtual will set the virtual flag true/false
+     *
+     */
+    KPlayer *loadPlayer(QDataStream &stream, bool isvirtual = false);
 
     /**
      * inactivates player. Use @ref inactivatePlayer instead!
@@ -820,8 +798,8 @@ protected:
 
     /**
      * Finally adds a player to the game and therefore to the list.
-     **/
-    bool systemAddPlayer(KPlayer* newplayer);
+     */
+    bool systemAddPlayer(KPlayer *newplayer);
 
     /**
      * Removes a player from the game
@@ -829,8 +807,8 @@ protected:
      * Use removePlayer to send KGameMessage::IdRemovePlayer. As soon
      * as this Id is received systemRemovePlayer is called and the player is
      * removed directly.
-     **/
-    void systemRemovePlayer(KPlayer* player,bool deleteit);
+     */
+    void systemRemovePlayer(KPlayer *player, bool deleteit);
 
     /**
      * This member function will transmit e.g. all players to that client, as well as
@@ -841,7 +819,7 @@ protected:
      *
      * Only the ADMIN is allowed to call this.
      * @param clientID The ID of the message client which has connected
-     **/
+     */
     virtual void negotiateNetworkGame(quint32 clientID);
 
 #if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
@@ -892,11 +870,11 @@ protected:
      *
      * @return true?
      */
-    virtual bool savegame(QDataStream &stream, bool network,bool saveplayers);
+    virtual bool savegame(QDataStream &stream, bool network, bool saveplayers);
 
 private:
-    //AB: this is to hide the "receiver" parameter from the user. It shouldn't be
-    //used if possible (except for init).
+    // AB: this is to hide the "receiver" parameter from the user. It shouldn't be
+    // used if possible (except for init).
     /**
      * This is an overloaded function. Id differs from the public one only in
      * its parameters:
@@ -904,25 +882,25 @@ private:
      * @param receiver The Client that will receive the message. You will hardly
      * ever need this. It it internally used to initialize a newly connected
      * client.
-     **/
-    //void addPlayer(KPlayer* newplayer, quint32 receiver);
+     */
+    // void addPlayer(KPlayer* newplayer, quint32 receiver);
 
     /**
      * Just the same as the public one except receiver:
      * @param receiver 0 for broadcast, otherwise the receiver. Should only be
      * used in special circumstances and not outside KGame.
-     **/
-    bool removePlayer(KPlayer * player, quint32 receiver);
+     */
+    bool removePlayer(KPlayer *player, quint32 receiver);
 
     /**
      * Helping function - game negotiation
-     **/
+     */
     void setupGame(quint32 sender);
 
     /**
      * Helping function - game negotiation
-     **/
-    void setupGameContinue(QDataStream& msg, quint32 sender);
+     */
+    void setupGameContinue(QDataStream &msg, quint32 sender);
 
     /**
      * Removes a player from all lists, removes the @ref KGame pointer from the
@@ -930,12 +908,11 @@ private:
      * systemRemovePlayer
      * @return True if the player has been removed, false if the current is not
      * found
-     **/
-    bool systemRemove(KPlayer* player,bool deleteit);
-
+     */
+    bool systemRemove(KPlayer *player, bool deleteit);
 
 private:
-    KGamePrivate* const d;
+    KGamePrivate *const d;
 };
 
 #endif

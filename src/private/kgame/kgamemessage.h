@@ -21,7 +21,7 @@
  */
 class KDEGAMESPRIVATE_EXPORT KGameMessage
 {
-  public:
+public:
     /**
      * Creates a fully qualified player ID which contains the original
      * player id in the lower bits and the game number in the higher bits.
@@ -43,7 +43,7 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
      *
      * @param playerid The player id
      * @return The raw player id
-     **/
+     */
     static int rawPlayerId(quint32 playerid);
 
     /**
@@ -52,7 +52,7 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
      *
      * @param playerid The player id
      * @return The raw game id
-     **/
+     */
     static quint32 rawGameId(quint32 playerid);
 
     /**
@@ -85,7 +85,7 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
      *
      * Note that it could be necessary to call dropExternalHeader first
      */
-    static void extractHeader(QDataStream &msg,quint32 &sender, quint32 &receiver, int &msgid);
+    static void extractHeader(QDataStream &msg, quint32 &sender, quint32 &receiver, int &msgid);
 
     /**
      * Creates a property header  given the property id
@@ -118,48 +118,47 @@ class KDEGAMESPRIVATE_EXPORT KGameMessage
      * (as it is i18n'ed) but it can make debugging more easy.
      * @return Either a i18n'ed string (the name of the id) or QString() if
      * the msgid is unknown
-     **/
+     */
     static QString messageId2Text(int msgid);
 
+    /**
+     * Message Ids used inside @ref KGame.
+     *
+     * You can use your own custom message Id by adding @p IdUser to it.
+     */
+    // please document every new id with a short comment
+    enum GameMessageIds {
+        // game init, game load, disconnect, ...
+        IdSetupGame = 1, // sent to a newly connected player
+        IdSetupGameContinue = 2, // continue the setup
+        IdGameLoad = 3, // load/save the game to the client
+        IdGameConnected = 4, // Client successfully connected to master
+        IdSyncRandom = 5, // new random seed set - sync games
+        IdDisconnect = 6, // KGame object disconnects from game
+        IdGameSetupDone = 7, // New game client is now operational
 
-  /**
-   * Message Ids used inside @ref KGame.
-   *
-   * You can use your own custom message Id by adding @p IdUser to it.
-   **/
-// please document every new id with a short comment
-  enum GameMessageIds {
-// game init, game load, disconnect, ...
-    IdSetupGame=1,         // sent to a newly connected player
-    IdSetupGameContinue=2, // continue the setup
-    IdGameLoad=3,          // load/save the game to the client
-    IdGameConnected=4,     // Client successfully connected to master
-    IdSyncRandom=5,        // new random seed set - sync games
-    IdDisconnect=6,        // KGame object disconnects from game
-    IdGameSetupDone=7,     // New game client is now operational
+        // properties
+        IdPlayerProperty = 20, // a player property changed
+        IdGameProperty = 21, // a game property changed
 
-// properties
-    IdPlayerProperty=20,   // a player property changed
-    IdGameProperty=21,     // a game property changed
+        // player management
+        IdAddPlayer = 30, // add a player
+        IdRemovePlayer = 31, // the player will be removed
+        IdActivatePlayer = 32, // Activate a player
+        IdInactivatePlayer = 33, // Inactivate a player
+        IdTurn = 34, // Turn to be prepared
 
-// player management
-    IdAddPlayer=30,         // add a player
-    IdRemovePlayer=31,      // the player will be removed
-    IdActivatePlayer=32,    // Activate a player
-    IdInactivatePlayer=33,  // Inactivate a player
-    IdTurn=34,              // Turn to be prepared
+        // to-be-categorized
+        IdError = 100, // an error occurred
+        IdPlayerInput = 101, // a player input occurred
+        IdIOAdded = 102, // KGameIO got added to a player...init this IO
 
-// to-be-categorized
-    IdError=100,            // an error occurred
-    IdPlayerInput=101,      // a player input occurred
-    IdIOAdded=102,          // KGameIO got added to a player...init this IO
+        // special ids for computer player
+        IdProcessQuery = 220, // Process queries data (process only)
+        IdPlayerId = 221, // PlayerId got changed (process only)
 
-// special ids for computer player
-    IdProcessQuery=220,     // Process queries data (process only)
-    IdPlayerId=221,         // PlayerId got changed (process only)
-
-    IdUser=256          // a user specified message
-  };
+        IdUser = 256 // a user specified message
+    };
 };
 
 #endif

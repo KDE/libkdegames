@@ -17,7 +17,7 @@ class tst_KGameSvgDocument : public QObject
 
     KGameSvgDocument m_svgDom;
 
-// Declare test functions as private slots, or they won't get executed
+    // Declare test functions as private slots, or they won't get executed
 private Q_SLOTS:
 
     /// @brief This function is called first, so you can do init stuff here.

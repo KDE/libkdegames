@@ -38,32 +38,34 @@ class KGameThemeSelectorPrivate;
  *
  * @author Mauricio Piacentini
  * @deprecated Since 4.9, use KgThemeSelector instead.
- **/
+ */
 class KDEGAMESPRIVATE_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
-    public:
-      enum NewStuffState {
-          NewStuffDisableDownload,
-          NewStuffEnableDownload
-        };
-        /**
-         * Load a specific theme file.
-         * @param parent the parent widget
-         * @param config the config
-         * @param knsflags the KNewStuff flags
-         * @param groupName the title of the config group in the theme .desktop file
-         * @param directory subdirectory (of share/apps/appname) to search in
-         * @return true if the theme files and properties could be loaded
-         */
-        KDEGAMESPRIVATE_DEPRECATED_VERSION(4, 9, "Use KgThemeSelector")
-        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QStringLiteral("KGameTheme"), const QString &directory = QStringLiteral("themes"));
-        ~KGameThemeSelector() override;
 
-    private:
-        std::unique_ptr<class KGameThemeSelectorPrivate> const d;
+public:
+    enum NewStuffState { NewStuffDisableDownload, NewStuffEnableDownload };
+    /**
+     * Load a specific theme file.
+     * @param parent the parent widget
+     * @param config the config
+     * @param knsflags the KNewStuff flags
+     * @param groupName the title of the config group in the theme .desktop file
+     * @param directory subdirectory (of share/apps/appname) to search in
+     * @return true if the theme files and properties could be loaded
+     */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION(4, 9, "Use KgThemeSelector")
+    KGameThemeSelector(QWidget *parent,
+                       KConfigSkeleton *config,
+                       KGameThemeSelector::NewStuffState knsflags = KGameThemeSelector::NewStuffEnableDownload,
+                       const QString &groupName = QStringLiteral("KGameTheme"),
+                       const QString &directory = QStringLiteral("themes"));
+    ~KGameThemeSelector() override;
 
-        Q_DISABLE_COPY(KGameThemeSelector)
+private:
+    std::unique_ptr<class KGameThemeSelectorPrivate> const d;
+
+    Q_DISABLE_COPY(KGameThemeSelector)
 };
 
 #endif

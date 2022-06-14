@@ -10,11 +10,11 @@
 // own
 #include "libkdegamesprivate_export.h"
 // Qt
+#include <QDomDocument>
 #include <QHash>
+#include <QLoggingCategory>
 #include <QStringList>
 #include <QTransform>
-#include <QDomDocument>
-#include <QLoggingCategory>
 // Std
 #include <memory>
 
@@ -122,19 +122,19 @@ public:
     /**
      * @brief Assignment Operator
      */
-    KGameSvgDocument& operator=(const KGameSvgDocument &doc);
+    KGameSvgDocument &operator=(const KGameSvgDocument &doc);
 
     /**
      * @brief Options for applying (multiplying) or replacing the current matrix
      */
     enum MatrixOption {
         /**
-        * Apply to current matrix
-        */
+         * Apply to current matrix
+         */
         ApplyToCurrentMatrix = 0x01,
         /**
-        * Replace the current matrix
-        */
+         * Replace the current matrix
+         */
         ReplaceCurrentMatrix = 0x02
     };
     /** @brief Q_DECLARE_FLAGS macro confuses doxygen, so create typedef's manually */
@@ -145,12 +145,12 @@ public:
      */
     enum StylePropertySortOption {
         /**
-        * When building a style attribute, do not sort
-        */
+         * When building a style attribute, do not sort
+         */
         Unsorted = 0x01,
         /**
-        * When building a style attribute, sort properties the same way Inkscape does
-        */
+         * When building a style attribute, sort properties the same way Inkscape does
+         */
         UseInkscapeOrder = 0x02
     };
     /** @brief Q_DECLARE_FLAGS macro confuses doxygen, so create typedef's manually */
@@ -173,7 +173,7 @@ public:
      *     may be unpredictably incorrect.  You've been warned. ;-)
      * @returns the matching node, or a null node if no matching node found
      */
-    QDomNode elementByUniqueAttributeValue(const QString& attributeName, const QString& attributeValue);
+    QDomNode elementByUniqueAttributeValue(const QString &attributeName, const QString &attributeValue);
 
     /**
      * @brief Returns a node with the given id.
@@ -188,7 +188,7 @@ public:
      * @returns the matching node, or a null node if no matching node found
      * @see elementByUniqueAttributeValue()
      */
-    QDomNode elementById(const QString& attributeValue);
+    QDomNode elementById(const QString &attributeValue);
 
     /**
      * @brief Reads the SVG file svgFilename() into DOM.
@@ -203,7 +203,7 @@ public:
      * @param svgFilename The filename of the SVG file to open.
      * @returns nothing
      */
-    void load(const QString& svgFilename);
+    void load(const QString &svgFilename);
 
     /**
      * @brief Rotates the origin of the current node counterclockwise.
@@ -213,7 +213,7 @@ public:
      * @returns nothing
      * @see QTransform#rotate()
      */
-    void rotate(double degrees, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void rotate(double degrees, const MatrixOptions &options = ApplyToCurrentMatrix);
 
     /**
      * @brief Moves the origin of the current node
@@ -224,7 +224,7 @@ public:
      * @returns nothing
      * @see QTransform::translate()
      */
-    void translate(int xPixels, int yPixels, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void translate(int xPixels, int yPixels, const MatrixOptions &options = ApplyToCurrentMatrix);
 
     /**
      * @brief Shears the origin of the current node.
@@ -235,7 +235,7 @@ public:
      * @returns nothing
      * @see QTransform::shear()
      */
-    void shear(double xRadians, double yRadians, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void shear(double xRadians, double yRadians, const MatrixOptions &options = ApplyToCurrentMatrix);
 
     /**
      * @brief Skews the origin of the current node.
@@ -249,7 +249,7 @@ public:
      * @returns nothing
      * @see shear()
      */
-    void skew(double xDegrees, double yDegrees, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void skew(double xDegrees, double yDegrees, const MatrixOptions &options = ApplyToCurrentMatrix);
 
     /**
      * @brief Scales the origin of the current node.
@@ -263,7 +263,7 @@ public:
      * @returns nothing
      * @see QTransform::scale()
      */
-    void scale(double xFactor, double yFactor, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void scale(double xFactor, double yFactor, const MatrixOptions &options = ApplyToCurrentMatrix);
 
     /**
      * @brief Returns the last node found by elementById, or null if node not found
@@ -280,7 +280,7 @@ public:
      * @returns nothing
      * @see currentNode()
      */
-    void setCurrentNode(const QDomNode& node);
+    void setCurrentNode(const QDomNode &node);
 
     /**
      * @brief Returns the name of the SVG file this DOM represents.
@@ -297,7 +297,7 @@ public:
      * @returns nothing
      * @see svgFilename()
      */
-    void setSvgFilename(const QString& svgFilename);
+    void setSvgFilename(const QString &svgFilename);
 
     /**
      * @brief Returns the value of the style property given for the current node.
@@ -313,7 +313,7 @@ public:
      * @returns The value style property given, or null if no such property for this node.
      * @see setStyleProperty(), styleProperties(), setStyleProperties()
      */
-    QString styleProperty(const QString& propertyName) const;
+    QString styleProperty(const QString &propertyName) const;
 
     /**
      * @brief Sets the value of the style property given for the current node.
@@ -329,7 +329,7 @@ public:
      * @returns nothing
      * @see styleProperty(), styleProperties(), setStyleProperties()
      */
-    void setStyleProperty(const QString& propertyName, const QString& propertyValue);
+    void setStyleProperty(const QString &propertyName, const QString &propertyValue);
 
     /**
      * @brief Returns the current node and its children as a new xml svg document.
@@ -370,7 +370,7 @@ public:
      *
      * @see setStyleProperty() setStyleProperties()
      */
-    void setStyle(const QString& styleAttribute);
+    void setStyle(const QString &styleAttribute);
 
     /**
      * @brief Returns the patterns in the document
@@ -424,7 +424,7 @@ public:
      * @returns nothing
      * @see transform(), transformMatrix(), setTransformMatrix()
      */
-    void setTransform(const QString& transformAttribute);
+    void setTransform(const QString &transformAttribute);
 
     /**
      * @brief Returns a hash of the style properties of the current node.
@@ -445,7 +445,7 @@ public:
      * @returns nothing
      * @see styleProperties()
      */
-    void setStyleProperties(const QHash<QString, QString>& _styleProperties, const StylePropertySortOptions& options = Unsorted);
+    void setStyleProperties(const QHash<QString, QString> &_styleProperties, const StylePropertySortOptions &options = Unsorted);
 
     /**
      * @brief Returns the transform attribute of the current node as a matrix.
@@ -467,16 +467,13 @@ public:
      * @returns nothing
      * @see transformMatrix()
      */
-    void setTransformMatrix(QTransform& matrix, const MatrixOptions& options = ApplyToCurrentMatrix);
+    void setTransformMatrix(QTransform &matrix, const MatrixOptions &options = ApplyToCurrentMatrix);
 
 private:
-
-
     /**
      * @brief d-pointer
      */
     std::unique_ptr<KGameSvgDocumentPrivate> const d;
-
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameSvgDocument::MatrixOptions)
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameSvgDocument::StylePropertySortOptions)

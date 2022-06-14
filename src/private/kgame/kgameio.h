@@ -12,8 +12,8 @@
 // own
 #include "libkdegamesprivate_export.h"
 // Qt
-#include <QString>
 #include <QObject>
+#include <QString>
 // Std
 #include <memory>
 
@@ -55,65 +55,65 @@ class KGameComputerIOPrivate;
  */
 class KDEGAMESPRIVATE_EXPORT KGameIO : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
      * Constructs a KGameIO object
      */
-   KGameIO();
-   explicit KGameIO(KPlayer*);
-   ~KGameIO() override;
+    KGameIO();
+    explicit KGameIO(KPlayer *);
+    ~KGameIO() override;
 
     /**
      * Gives debug output of the game status
      */
-   void Debug();
+    void Debug();
 
-   /**
-    * Identifies the KGameIO via the rtti function
-    */
-   enum IOMode {GenericIO=1,KeyIO=2,MouseIO=4,ProcessIO=8,ComputerIO=16};
-   /**
-    * Run time identification. Predefined values are from IOMode
-    * You MUST overwrite this in derived classes!
-    *
-    * @return rtti value
-    */
-   virtual int rtti() const = 0;  // Computer, network, local, ...
+    /**
+     * Identifies the KGameIO via the rtti function
+     */
+    enum IOMode { GenericIO = 1, KeyIO = 2, MouseIO = 4, ProcessIO = 8, ComputerIO = 16 };
+    /**
+     * Run time identification. Predefined values are from IOMode
+     * You MUST overwrite this in derived classes!
+     *
+     * @return rtti value
+     */
+    virtual int rtti() const = 0; // Computer, network, local, ...
 
-   /**
-    * This function returns the player who owns this IO
-    *
-    * @return the player this IO device is plugged into
-    */
-   KPlayer *player() const;
+    /**
+     * This function returns the player who owns this IO
+     *
+     * @return the player this IO device is plugged into
+     */
+    KPlayer *player() const;
 
-   /**
-    * Equivalent to player()->game()
-    * @return the @ref KGame object of this player
-    **/
-   KGame* game() const;
+    /**
+     * Equivalent to player()->game()
+     * @return the @ref KGame object of this player
+     */
+    KGame *game() const;
 
-   /**
-    * Sets the player to which this IO belongs to. This
-    * is done automatically when adding a device to a
-    * player
-    *
-    * @param p the player
-    */
-   void setPlayer(KPlayer *p);
+    /**
+     * Sets the player to which this IO belongs to. This
+     * is done automatically when adding a device to a
+     * player
+     *
+     * @param p the player
+     */
+    void setPlayer(KPlayer *p);
 
-   /**
-    * Init this device by setting the player and e.g. sending an
-    * init message to the device. This initialisation message is
-    * very useful for computer players as you can transmit the
-    * game status to them and only update this status in the setTurn
-    * commands.
-    *
-    * Called by @ref KPlayer::addGameIO only!
-    */
-   virtual void initIO(KPlayer *p);
+    /**
+     * Init this device by setting the player and e.g. sending an
+     * init message to the device. This initialisation message is
+     * very useful for computer players as you can transmit the
+     * game status to them and only update this status in the setTurn
+     * commands.
+     *
+     * Called by @ref KPlayer::addGameIO only!
+     */
+    virtual void initIO(KPlayer *p);
 
     /**
      * Notifies the IO device that the player's setTurn had been called
@@ -128,8 +128,8 @@ public:
 
     /**
      * Send an input message using @ref KPlayer::forwardInput
-     **/
-    bool sendInput(QDataStream& stream, bool transmit = true, quint32 sender = 0);
+     */
+    bool sendInput(QDataStream &stream, bool transmit = true, quint32 sender = 0);
 
 Q_SIGNALS:
     /**
@@ -162,8 +162,8 @@ Q_SIGNALS:
      * @param turn the argument of setTurn
      * @param send set this to true to send the generated move using @ref
      * sendInput
-     **/
-    void signalPrepareTurn(QDataStream & stream, bool turn, KGameIO *io, bool * send);
+     */
+    void signalPrepareTurn(QDataStream &stream, bool turn, KGameIO *io, bool *send);
 
 protected:
     explicit KGameIO(KGameIOPrivate &dd, KPlayer *player = nullptr);
@@ -190,7 +190,7 @@ private:
  */
 class KDEGAMESPRIVATE_EXPORT KGameKeyIO : public KGameIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -224,41 +224,41 @@ public:
     int rtti() const override;
 
 Q_SIGNALS:
-      /**
-       * Signal handler for keyboard events. This function is called
-       * on every keyboard event. If appropriate it can generate a
-       * move for the player the device belongs to. If this is done
-       * and the event is eaten eatevent needs to be set to true.
-       * What move you generate (i.e. what you write to the stream)
-       * is totally up to you as it will not be evaluated but forwarded
-       * to the player's/game's  input move function
-       * Example:
-       * \code
-       * KPlayer *player=input->player(); // Get the player
-       * qint32 key=e->key();
-       * stream << key;
-       * eatevent=true;
-       * \endcode
-       *
-       * @param io the IO device we belong to
-       * @param stream the stream where we write our move into
-       * @param m The QKeyEvent we can evaluate
-       * @param eatevent set this to true if we processed the event
-       */
-      void signalKeyEvent(KGameIO *io,QDataStream &stream,QKeyEvent *m,bool *eatevent);
+    /**
+     * Signal handler for keyboard events. This function is called
+     * on every keyboard event. If appropriate it can generate a
+     * move for the player the device belongs to. If this is done
+     * and the event is eaten eatevent needs to be set to true.
+     * What move you generate (i.e. what you write to the stream)
+     * is totally up to you as it will not be evaluated but forwarded
+     * to the player's/game's  input move function
+     * Example:
+     * \code
+     * KPlayer *player=input->player(); // Get the player
+     * qint32 key=e->key();
+     * stream << key;
+     * eatevent=true;
+     * \endcode
+     *
+     * @param io the IO device we belong to
+     * @param stream the stream where we write our move into
+     * @param m The QKeyEvent we can evaluate
+     * @param eatevent set this to true if we processed the event
+     */
+    void signalKeyEvent(KGameIO *io, QDataStream &stream, QKeyEvent *m, bool *eatevent);
 
 protected:
-       /**
-       * Internal method to process the events
-       */
-       bool eventFilter( QObject *o, QEvent *e ) override;
+    /**
+     * Internal method to process the events
+     */
+    bool eventFilter(QObject *o, QEvent *e) override;
 
 private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameKeyIO)
     friend class KGameKeyIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
-	// Unused, kept for ABI compatibility
-	const void * __kdegames_d_do_not_use;
+    // Unused, kept for ABI compatibility
+    const void *__kdegames_d_do_not_use;
 #endif
 
     Q_DISABLE_COPY(KGameKeyIO)
@@ -273,7 +273,7 @@ private:
  */
 class KDEGAMESPRIVATE_EXPORT KGameMouseIO : public KGameIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -291,8 +291,8 @@ public:
      * @param parent The widget whose events should be captured
      * @param trackmouse enables mouse tracking (gives mouse move events)
      */
-    explicit KGameMouseIO(QWidget *parent,bool trackmouse=false);
-    explicit KGameMouseIO(QGraphicsScene *parent,bool trackmouse=false);
+    explicit KGameMouseIO(QWidget *parent, bool trackmouse = false);
+    explicit KGameMouseIO(QGraphicsScene *parent, bool trackmouse = false);
     ~KGameMouseIO() override;
 
     /**
@@ -309,44 +309,43 @@ public:
     int rtti() const override;
 
 Q_SIGNALS:
-      /**
-       * Signal handler for mouse events. This function is called
-       * on every mouse event. If appropriate it can generate a
-       * move for the player the device belongs to. If this is done
-       * and the event is eaten eatevent needs to be set to true.
-       * @see signalKeyEvent
-       * Example:
-       * \code
-       * KPlayer *player=input->player(); // Get the player
-       * qint32 button=e->button();
-       * stream << button;
-       * eatevent=true;
-       * \endcode
-       *
-       * @param io the IO device we belong to
-       * @param stream the stream where we write our move into
-       * @param m The QMouseEvent we can evaluate
-       * @param eatevent set this to true if we processed the event
-       */
-      void signalMouseEvent(KGameIO *io,QDataStream &stream,QMouseEvent *m,bool *eatevent);
+    /**
+     * Signal handler for mouse events. This function is called
+     * on every mouse event. If appropriate it can generate a
+     * move for the player the device belongs to. If this is done
+     * and the event is eaten eatevent needs to be set to true.
+     * @see signalKeyEvent
+     * Example:
+     * \code
+     * KPlayer *player=input->player(); // Get the player
+     * qint32 button=e->button();
+     * stream << button;
+     * eatevent=true;
+     * \endcode
+     *
+     * @param io the IO device we belong to
+     * @param stream the stream where we write our move into
+     * @param m The QMouseEvent we can evaluate
+     * @param eatevent set this to true if we processed the event
+     */
+    void signalMouseEvent(KGameIO *io, QDataStream &stream, QMouseEvent *m, bool *eatevent);
 
 protected:
-      /**
-      * Internal event filter
-      */
-      bool eventFilter( QObject *o, QEvent *e ) override;
+    /**
+     * Internal event filter
+     */
+    bool eventFilter(QObject *o, QEvent *e) override;
 
 private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameMouseIO)
     friend class KGameMouseIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
-	// Unused, kept for ABI compatibility
-	const void * __kdegames_d_do_not_use;
+    // Unused, kept for ABI compatibility
+    const void *__kdegames_d_do_not_use;
 #endif
 
     Q_DISABLE_COPY(KGameMouseIO)
 };
-
 
 /**
  *  \class KGameProcessIO kgameio.h <KGame/KGameIO>
@@ -359,7 +358,7 @@ private:
  */
 class KDEGAMESPRIVATE_EXPORT KGameProcessIO : public KGameIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -377,7 +376,7 @@ public:
      *
      * @param name the filename of the process to start
      */
-    explicit KGameProcessIO(const QString& name);
+    explicit KGameProcessIO(const QString &name);
 
     /**
      * Deletes the process input devices
@@ -401,7 +400,7 @@ public:
      * @param receiver - not used
      * @param sender - who send the message
      */
-    void sendMessage(QDataStream &stream,int msgid, quint32 receiver, quint32 sender);
+    void sendMessage(QDataStream &stream, int msgid, quint32 receiver, quint32 sender);
 
     /**
      * Send a system message to the process. This is analogous to the sendMessage
@@ -436,68 +435,67 @@ public:
      */
     void notifyTurn(bool turn) override;
 
-  protected:
+protected:
     /**
      * Internal combined function for all message handling
-     **/
-    void sendAllMessages(QDataStream &stream,int msgid, quint32 receiver, quint32 sender, bool usermsg);
+     */
+    void sendAllMessages(QDataStream &stream, int msgid, quint32 receiver, quint32 sender, bool usermsg);
 
-  protected Q_SLOTS:
-  /**
-  * Internal message handler to receive data from the process
-  */
-    void receivedMessage(const QByteArray& receiveBuffer);
-
+protected Q_SLOTS:
+    /**
+     * Internal message handler to receive data from the process
+     */
+    void receivedMessage(const QByteArray &receiveBuffer);
 
 Q_SIGNALS:
-  /**
-   * A computer query message is received. This is a 'dummy'
-   * message sent by the process if it needs to communicate
-   * with us. It is not forwarded over the network.
-   * Reacting to this message allows you to 'answer' questions
-   * of the process, e.g. sending addition data which the process
-   * needs to calculate a move.
-   *
-   * Example:
-   * \code
-   *  void GameWindow::slotProcessQuery(QDataStream &stream,KGameProcessIO *reply)
-   *  {
-   *    int no;
-   *    stream >> no;  // We assume the process sends us an integer question number
-   *    if (no==1)     // but YOU have to do this in the process player
-   *    {
-   *      QByteArray buffer;
-   *      QDataStream out(buffer,QIODevice::WriteOnly);
-   *      reply->sendSystemMessage(out,4242,0,0);  // lets reply something...
-   *    }
-   *  }
-   * \endcode
-   */
-  void signalProcessQuery(QDataStream &stream,KGameProcessIO *me);
+    /**
+     * A computer query message is received. This is a 'dummy'
+     * message sent by the process if it needs to communicate
+     * with us. It is not forwarded over the network.
+     * Reacting to this message allows you to 'answer' questions
+     * of the process, e.g. sending addition data which the process
+     * needs to calculate a move.
+     *
+     * Example:
+     * \code
+     *  void GameWindow::slotProcessQuery(QDataStream &stream,KGameProcessIO *reply)
+     *  {
+     *    int no;
+     *    stream >> no;  // We assume the process sends us an integer question number
+     *    if (no==1)     // but YOU have to do this in the process player
+     *    {
+     *      QByteArray buffer;
+     *      QDataStream out(buffer,QIODevice::WriteOnly);
+     *      reply->sendSystemMessage(out,4242,0,0);  // lets reply something...
+     *    }
+     *  }
+     * \endcode
+     */
+    void signalProcessQuery(QDataStream &stream, KGameProcessIO *me);
 
-  /**
-  * Signal generated when the computer player is added.
-  * You can use this to communicated with the process and
-  * e.g. send initialisation information to the process.
-  *
-  * @param game the KGameIO object itself
-  * @param stream the stream into which the move will be written
-  * @param p the player itself
-  * @param send set this to false if no move should be generated
-  */
-  void signalIOAdded(KGameIO *game,QDataStream &stream,KPlayer *p,bool *send);
+    /**
+     * Signal generated when the computer player is added.
+     * You can use this to communicated with the process and
+     * e.g. send initialisation information to the process.
+     *
+     * @param game the KGameIO object itself
+     * @param stream the stream into which the move will be written
+     * @param p the player itself
+     * @param send set this to false if no move should be generated
+     */
+    void signalIOAdded(KGameIO *game, QDataStream &stream, KPlayer *p, bool *send);
 
-  /** Text is received by the process on STDERR. This is usually a debug string.
-    * @param msg The text
-    */
-  void signalReceivedStderr(const QString &msg);
+    /** Text is received by the process on STDERR. This is usually a debug string.
+     * @param msg The text
+     */
+    void signalReceivedStderr(const QString &msg);
 
 private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameProcessIO)
     friend class KGameProcessIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
-	// Unused, kept for ABI compatibility
-	const void * __kdegames_d_do_not_use;
+    // Unused, kept for ABI compatibility
+    const void *__kdegames_d_do_not_use;
 #endif
 
     Q_DISABLE_COPY(KGameProcessIO)
@@ -523,7 +521,7 @@ private:
  */
 class KDEGAMESPRIVATE_EXPORT KGameComputerIO : public KGameIO
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -531,7 +529,7 @@ public:
      *
      */
     KGameComputerIO();
-    explicit KGameComputerIO(KPlayer* player);
+    explicit KGameComputerIO(KPlayer *player);
     ~KGameComputerIO() override;
 
     int rtti() const override;
@@ -539,13 +537,13 @@ public:
     /**
      * The number of advance calls until the player (or rather: the IO)
      * does something (default: 1).
-     **/
+     */
     void setReactionPeriod(int advanceCalls);
     int reactionPeriod() const;
 
     /**
      * Start a QTimer which calls advance every @p ms milli seconds.
-     **/
+     */
     void setAdvancePeriod(int ms);
 
     void stopAdvancePeriod();
@@ -561,13 +559,13 @@ public:
      * setAdvancePeriod), i.e. if you change the speed of your game, your
      * computer player thinks "faster".
      * @param calls Number of advance calls to be ignored
-     **/
+     */
     void pause(int calls = -1);
 
     /**
      * Equivalent to pause(0). Immediately continue to increase the internal
      * advance counter.
-     **/
+     */
     void unpause();
 
 public Q_SLOTS:
@@ -585,32 +583,31 @@ public Q_SLOTS:
      * If you don't use QCanvas you can use setAdvancePeriod to get
      * the same result. Alternatively you can just use a QTimer.
      *
-     **/
+     */
     virtual void advance();
 
 Q_SIGNALS:
     /**
      * This signal is emitted when your computer player is meant to do
      * something, or better is meant to be allowed to do something.
-     **/
+     */
     void signalReaction();
 
 protected:
     /**
      * Default implementation simply emits signalReaction
-     **/
+     */
     virtual void reaction();
 
 private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameComputerIO)
     friend class KGameComputerIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
-	// Unused, kept for ABI compatibility
-	const void * __kdegames_d_do_not_use;
+    // Unused, kept for ABI compatibility
+    const void *__kdegames_d_do_not_use;
 #endif
 
     Q_DISABLE_COPY(KGameComputerIO)
 };
-
 
 #endif

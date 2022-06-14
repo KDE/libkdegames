@@ -12,8 +12,8 @@
 // own
 #include "libkdegamesprivate_export.h"
 // Qt
-#include <QString>
 #include <QObject>
+#include <QString>
 // Std
 #include <memory>
 
@@ -37,24 +37,24 @@ class KGameNetworkPrivate;
  */
 class KDEGAMESPRIVATE_EXPORT KGameNetwork : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
      * Create a KGameNetwork object
      */
-    explicit KGameNetwork(int cookie=42,QObject* parent=nullptr);
+    explicit KGameNetwork(int cookie = 42, QObject *parent = nullptr);
     ~KGameNetwork() override;
 
     /**
      * Gives debug output of the game status
-     **/
+     */
     virtual void Debug();
 
     /**
      * @return TRUE if this is a network game - i.e. you are either MASTER or
      * connected to a remote MASTER.
-     **/
+     */
     bool isNetwork() const;
 
     /**
@@ -68,7 +68,7 @@ public:
      *
      * @see isAdmin
      * @return Whether this client has started the KMessageServer
-     **/
+     */
     bool isMaster() const;
 
     /**
@@ -80,14 +80,14 @@ public:
      * as well. isMaster and isAdmin differ only if the KMessageServer
      * is running in an own process.
      * @return Whether this client (KGame object) is the admin
-     **/
+     */
     bool isAdmin() const;
 
     /**
      * The unique ID of this game
      *
      * @return int id
-     **/
+     */
     quint32 gameId() const;
 
     /**
@@ -99,10 +99,10 @@ public:
      *
      * @param port The port on which the service is offered
      * @return true if it worked
-     **/
-    bool offerConnections (quint16 port);
+     */
+    bool offerConnections(quint16 port);
 
-    void setDiscoveryInfo(const QString& type, const QString& name=QString());
+    void setDiscoveryInfo(const QString &type, const QString &name = QString());
 
     /**
      * Inits a network game as a network CLIENT
@@ -111,28 +111,28 @@ public:
      * @param port the port we want to connect to
      *
      * @return true if connected
-     **/
-    bool connectToServer(const QString& host, quint16 port);
+     */
+    bool connectToServer(const QString &host, quint16 port);
     bool connectToServer(KMessageIO *connection);
 
     /**
      * @return The port we are listening to if offerConnections was called
      * or the port we are connected to if connectToServer was called.
      * Otherwise 0.
-     **/
+     */
     quint16 port() const;
 
     /**
      * @return The name of the host that we are currently connected to is
      * isNetwork is TRUE and we are not the MASTER, i.e. if connectToServer
      * was called. Otherwise this will return "localhost".
-     **/
+     */
     QString hostName() const;
 
     /**
      * Stops offering server connections - only for game MASTER
      * @return true
-     **/
+     */
     bool stopServerConnection();
 
     /**
@@ -144,12 +144,12 @@ public:
      *
      * @see KMessageServer::setMaxClients
      * @param max The maximal number of connections possible.
-     **/
+     */
     void setMaxClients(int max);
 
-    //AB: is this now internal only? Can we make it protected (maybe with
-    //friends)? sendSystemMessage AND sendMessage is very confusing to the
-    //user.
+    // AB: is this now internal only? Can we make it protected (maybe with
+    // friends)? sendSystemMessage AND sendMessage is very confusing to the
+    // user.
     /**
      * Sends a network message msg with a given msg id msgid to all clients.
      * Use this to communicate with KGame (e.g. to add a player ot to configure
@@ -170,22 +170,22 @@ public:
      * @return true if worked
      */
     // AB: TODO: doc on how "receiver" and "sender" should be created!
-    bool sendSystemMessage(const QByteArray& buffer, int msgid, quint32 receiver=0, quint32 sender=0);
+    bool sendSystemMessage(const QByteArray &buffer, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * @overload
-     **/
-    bool sendSystemMessage(int data, int msgid, quint32 receiver=0, quint32 sender=0);
+     */
+    bool sendSystemMessage(int data, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * @overload
-     **/
-    bool sendSystemMessage(const QDataStream &msg, int msgid, quint32 receiver=0, quint32 sender=0);
+     */
+    bool sendSystemMessage(const QDataStream &msg, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * @overload
-     **/
-    bool sendSystemMessage(const QString& msg, int msgid, quint32 receiver=0, quint32 sender=0);
+     */
+    bool sendSystemMessage(const QString &msg, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * Sends a network message
@@ -197,20 +197,20 @@ public:
      * you). You probably want to leave this 0, then KGameNetwork will create
      * the correct value for you. You might want to use this if you send a
      * message from a specific player.
-     **/
-    void sendError(int error, const QByteArray& message, quint32 receiver=0, quint32 sender=0);
+     */
+    void sendError(int error, const QByteArray &message, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * Are we still offer offering server connections - only for game MASTER
      * @return true/false
-     **/
+     */
     bool isOfferingConnections() const;
 
     /**
      * Application cookie. this identifies the game application. It
      * help to distinguish between e.g. KPoker and KWin4
      * @return the application cookie
-     **/
+     */
     int cookie() const;
 
     /**
@@ -244,38 +244,35 @@ public:
      * value for you. You might want to use this if you send a message from a
      * specific player.
      * @return true if worked
-     **/
+     */
     // AB: TODO: doc on how "receiver" and "sender" should be created!
-    bool sendMessage(const QByteArray& buffer, int msgid, quint32 receiver=0, quint32 sender=0);
+    bool sendMessage(const QByteArray &buffer, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * This is an overloaded member function, provided for convenience.
-     **/
-    bool sendMessage(const QDataStream &msg, int msgid, quint32 receiver=0, quint32 sender=0);
+     */
+    bool sendMessage(const QDataStream &msg, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * This is an overloaded member function, provided for convenience.
-     **/
-    bool sendMessage(const QString& msg, int msgid, quint32 receiver=0, quint32 sender=0);
+     */
+    bool sendMessage(const QString &msg, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * This is an overloaded member function, provided for convenience.
-     **/
-    bool sendMessage(int data, int msgid, quint32 receiver=0, quint32 sender=0);
-
+     */
+    bool sendMessage(int data, int msgid, quint32 receiver = 0, quint32 sender = 0);
 
     /**
      * Called by ReceiveNetworkTransmission(). Will be overwritten by
      * KGame and handle the incoming message.
-     **/
-    virtual void networkTransmission(QDataStream&, int, quint32, quint32, quint32 clientID) = 0;
-
+     */
+    virtual void networkTransmission(QDataStream &, int, quint32, quint32, quint32 clientID) = 0;
 
     /**
      * Disconnect the current connection and establish a new local one.
-     **/
+     */
     void disconnect();
-
 
     /**
      * If you are the ADMIN of the game you can give the ADMIN status away to
@@ -284,7 +281,7 @@ public:
      * this automatically).
      * @param clientID the ID of the new ADMIN (note: this is the _client_ID
      * which has nothing to do with the player IDs. See KMessageServer)
-     **/
+     */
     void electAdmin(quint32 clientID);
 
     /**
@@ -294,8 +291,8 @@ public:
      *
      * @return a pointer to the KMessageClient used internally to send the
      * messages. You should rather use one of the send functions!
-     **/
-    KMessageClient* messageClient() const;
+     */
+    KMessageClient *messageClient() const;
 
     /**
      * Don't use this unless you really know what you are doing! You might
@@ -304,20 +301,20 @@ public:
      * @return a pointer to the message server if this is the MASTER KGame
      * object. Note that it might be possible that no KGame object contains
      * the KMessageServer at all! It might even run stand alone!
-     **/
-    KMessageServer* messageServer() const;
+     */
+    KMessageServer *messageServer() const;
 
     /**
      * You should call this before doing thigs like, e.g. qApp->processEvents().
      * Don't forget to call unlock once you are done!
      *
      * @see KMessageClient::lock
-     **/
+     */
     virtual void lock();
 
     /**
      * @see KMessageClient::unlock
-     **/
+     */
     virtual void unlock();
 
 Q_SIGNALS:
@@ -331,7 +328,7 @@ Q_SIGNALS:
     /**
      * Our connection to the KMessageServer has broken.
      * See KMessageClient::connectionBroken
-     **/
+     */
     void signalConnectionBroken();
 
     /**
@@ -342,7 +339,7 @@ Q_SIGNALS:
      * @see KMessageClient::eventClientConnected
      *
      * @param clientID the ID of the newly connected client
-     **/
+     */
     void signalClientConnected(quint32 clientID);
 
     /**
@@ -362,7 +359,7 @@ Q_SIGNALS:
      * This client gets or loses the admin status.
      * @see KMessageClient::adminStatusChanged
      * @param isAdmin True if this client gets the ADMIN status otherwise FALSE
-     **/
+     */
     void signalAdminStatusChanged(bool isAdmin);
 
 protected:
@@ -371,7 +368,7 @@ protected:
      * Start a KMessageServer object and use it as the MASTER of the game.
      * Note that you must not call this if there is already another master
      * running!
-     **/
+     */
     void setMaster();
 
 protected Q_SLOTS:
@@ -381,34 +378,33 @@ protected Q_SLOTS:
      * signalNetworkVersionError and signalNetworkErorrMessage).
      * If it is valid, the pure virtual method networkTransmission() is called.
      * (This one is overwritten in KGame.)
-     **/
-    void receiveNetworkTransmission(const QByteArray& a, quint32 clientID);
+     */
+    void receiveNetworkTransmission(const QByteArray &a, quint32 clientID);
 
     /**
      * This KGame object receives or loses the admin status.
      * @param isAdmin Whether we are admin or not
-     **/
+     */
     void slotAdminStatusChanged(bool isAdmin);
 
     /**
      * Called when the network connection is about to terminate. Is used
      * to store the network parameter like the game id
      */
-     void aboutToLoseConnection(quint32 id);
+    void aboutToLoseConnection(quint32 id);
 
     /**
      * Called when the network connection is terminated. Used to clean
      * up the disconnect parameter
      */
-     void slotResetConnection();
-
-
-private:
-     void tryPublish();
-     void tryStopPublishing();
+    void slotResetConnection();
 
 private:
-     std::unique_ptr<KGameNetworkPrivate> const d;
+    void tryPublish();
+    void tryStopPublishing();
+
+private:
+    std::unique_ptr<KGameNetworkPrivate> const d;
 };
 
 #endif
