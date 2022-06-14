@@ -30,6 +30,12 @@
 
 #define KGAME_LOAD_COOKIE 4210
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3) && KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
+#define BUILD_RANDOM_API 1
+#else
+#define BUILD_RANDOM_API 0
+#endif
+
 Q_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME, "org.kde.games.private.kgame", QtWarningMsg)
 
 // try to place as much as possible here
@@ -46,7 +52,7 @@ public:
 
     int mUniquePlayerNumber;
     QQueue<KPlayer*> mAddPlayerList;// this is a list of to-be-added players. See addPlayer() docu
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
     KRandomSequence* mRandom;
 #endif
     KGame::GamePolicy mPolicy;
@@ -86,7 +92,7 @@ KGame::KGame(int cookie,QObject* parent)
  d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
  d->mGameStatus.setLocal(Init);
  // d->mUniquePlayerNumber = 0;
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
 QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
@@ -114,7 +120,7 @@ KGame::~KGame()
 // Debug();
  reset();
  delete d->mGameSequence;
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
  delete d->mRandom;
 #endif
  delete d;
@@ -200,7 +206,7 @@ bool KGame::loadgame(QDataStream &stream, bool network,bool resetgame)
    gameSequence()->setCurrentPlayer(nullptr);  // TODO !!!
  }
 
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
  int newseed;
  stream >> newseed;
  d->mRandom->setSeed(newseed);
@@ -297,7 +303,7 @@ bool KGame::savegame(QDataStream &stream,bool /*network*/,bool saveplayers)
   uint p=(uint)policy();
   stream << p;
   stream << d->mUniquePlayerNumber;
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
   int newseed=(int)d->mRandom->getLong(65535);
   stream << newseed;
   d->mRandom->setSeed(newseed);
@@ -713,7 +719,7 @@ KGame::KGamePlayerList* KGame::playerList()
 const KGame::KGamePlayerList* KGame::playerList() const
 { return &d->mPlayerList; }
 
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
 KRandomSequence* KGame::random() const
 { return d->mRandom; }
 #endif
@@ -1029,7 +1035,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
    }
    break;
 
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
    case KGameMessage::IdSyncRandom:  // Master forces a new random seed on us
    {
      int newseed;
@@ -1269,7 +1275,7 @@ void KGame::setupGame(quint32 sender)
   sendSystemMessage(streamS,KGameMessage::IdSetupGameContinue,sender);
 }
 
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+#if BUILD_RANDOM_API
 // unused by KGame
 void KGame::syncRandom()
 {
