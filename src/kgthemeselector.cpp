@@ -170,7 +170,7 @@ void KgThemeSelectorPrivate::_k_updateProviderSelection()
     }
 }
 
-class KgThemeSelector::Dialog : public QDialog
+class Q_DECL_HIDDEN KgThemeSelector::Dialog : public QDialog
 {
 public:
     Dialog(KgThemeSelector *sel, const QString &caption)
