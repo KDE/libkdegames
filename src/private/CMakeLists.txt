@@ -67,7 +67,7 @@ target_link_libraries(KF5KDEGamesPrivate
         Qt${QT_MAJOR_VERSION}::Network
     PRIVATE
         KF5::DNSSD
-        KF5::NewStuff
+        KF5::NewStuffWidgets
         KF5::Archive
         KF5::XmlGui
 )

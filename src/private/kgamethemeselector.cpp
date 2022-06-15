@@ -12,7 +12,6 @@
 #include "ui_kgamethemeselector.h"
 // KF
 #include <KConfigSkeleton>
-#include <KNS3/DownloadDialog>
 // Qt
 #include <QCoreApplication>
 #include <QDir>
@@ -47,7 +46,6 @@ public:
     // private slots
     void _k_updatePreview();
     void _k_updateThemeList(const QString &strTheme);
-    void _k_openKNewStuffDialog();
 };
 
 KGameThemeSelector::KGameThemeSelector(QWidget *parent,
@@ -68,7 +66,6 @@ KGameThemeSelector::~KGameThemeSelector() = default;
 void KGameThemeSelectorPrivate::setupData(KConfigSkeleton *aconfig, KGameThemeSelector::NewStuffState knsflags)
 {
     ui.setupUi(q);
-    ui.getNewButton->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
 
     // The lineEdit widget holds our theme path for automatic connection via KConfigXT.
     // But the user should not manipulate it directly, so we hide it.
@@ -90,8 +87,11 @@ void KGameThemeSelectorPrivate::setupData(KConfigSkeleton *aconfig, KGameThemeSe
 
     findThemes(lastUsedTheme);
 
-    QObject::connect(ui.getNewButton, &QAbstractButton::clicked, q, [this]() {
-        _k_openKNewStuffDialog();
+    ui.getNewButton->setConfigFile(QCoreApplication::applicationName() + QLatin1String(".knsrc"));
+    QObject::connect(ui.getNewButton, &KNSWidgets::Button::dialogFinished, q, [this](const QList<KNSCore::Entry> &changedEntries) {
+        if (!changedEntries.isEmpty()) {
+            findThemes(ui.kcfg_Theme->text());
+        }
     });
 }
 
@@ -206,15 +206,6 @@ void KGameThemeSelectorPrivate::_k_updateThemeList(const QString &strTheme)
             }
         }
     }
-}
-
-void KGameThemeSelectorPrivate::_k_openKNewStuffDialog()
-{
-    QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(q));
-    dialog->exec();
-    if (dialog && !dialog->changedEntries().isEmpty())
-        findThemes(ui.kcfg_Theme->text());
-    delete dialog;
 }
 
 #include "moc_kgamethemeselector.cpp"
