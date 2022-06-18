@@ -18,6 +18,8 @@
 #include <QDirIterator>
 #include <QIcon>
 #include <QStandardPaths>
+// Std
+#include <utility>
 
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(4, 9)
 
@@ -120,7 +122,7 @@ void KGameThemeSelectorPrivate::findThemes(const QString &initialSelection)
     }
 
     bool initialFound = false;
-    for (const QString &file : qAsConst(themesAvailable)) {
+    for (const QString &file : std::as_const(themesAvailable)) {
         const QString themePath = lookupDirectory + QLatin1Char('/') + file;
         KGameTheme *atheme = new KGameTheme(groupName);
 
@@ -146,7 +148,7 @@ void KGameThemeSelectorPrivate::findThemes(const QString &initialSelection)
     if (!initialFound) {
         // TODO change this if we ever change KGameTheme::loadDefault
         QString defaultPath = QStringLiteral("themes/default.desktop");
-        for (KGameTheme *theme : qAsConst(themeMap)) {
+        for (KGameTheme *theme : std::as_const(themeMap)) {
             if (theme->path().endsWith(defaultPath)) {
                 const QList<QListWidgetItem *> itemList = ui.themeList->findItems(theme->themeProperty(QStringLiteral("Name")), Qt::MatchExactly);
                 // never can be != 1 but better safe than sorry

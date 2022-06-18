@@ -15,6 +15,8 @@
 #include <QFileInfo>
 #include <QGuiApplication>
 #include <QStandardPaths>
+// Std
+#include <utility>
 
 class KgThemeProviderPrivate
 {
@@ -128,7 +130,7 @@ const KgTheme *KgThemeProvider::currentTheme() const
         KConfigGroup cg(KSharedConfig::openConfig(), "KgTheme");
         const QByteArray id = cg.readEntry(d->m_configKey.data(), QByteArray());
         // look for a theme with this id
-        for (const KgTheme *theme : qAsConst(d->m_themes)) {
+        for (const KgTheme *theme : std::as_const(d->m_themes)) {
             if (theme->identifier() == id) {
                 return d->m_currentTheme = theme;
             }
@@ -205,7 +207,7 @@ void KgThemeProvider::rediscoverThemes()
     // create themes from result, order default theme at the front (that's not
     // needed by KgThemeProvider, but nice for the theme selector)
     QList<KgTheme *> themes;
-    for (const QString &themePath : qAsConst(themePaths)) {
+    for (const QString &themePath : std::as_const(themePaths)) {
         const QFileInfo fi(themePath);
         if (d->m_discoveredThemes.contains(fi.fileName())) {
             continue;
@@ -238,7 +240,7 @@ void KgThemeProvider::rediscoverThemes()
         }
     }
     // add themes in the determined order
-    for (KgTheme *theme : qAsConst(themes)) {
+    for (KgTheme *theme : std::as_const(themes)) {
         addTheme(theme);
     }
 

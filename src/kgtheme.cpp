@@ -13,6 +13,8 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
+// Std
+#include <utility>
 
 Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
@@ -100,7 +102,7 @@ bool KgTheme::readFromDesktopFile(const QString &path_)
     // open file, look for a known config group
     KConfig config(path, KConfig::SimpleConfig);
     KConfigGroup group;
-    for (const QString &groupName : qAsConst(KgThemePrivate::s_configGroupNames)) {
+    for (const QString &groupName : std::as_const(KgThemePrivate::s_configGroupNames)) {
         if (config.hasGroup(groupName)) {
             group = config.group(groupName);
         }

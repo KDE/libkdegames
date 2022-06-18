@@ -24,6 +24,8 @@
 #include <QIcon>
 #include <QStatusBar>
 #include <QVector>
+// Std
+#include <utility>
 
 // BEGIN KgDifficultyLevel
 
@@ -233,13 +235,13 @@ const KgDifficultyLevel *KgDifficulty::currentLevel() const
     // check configuration file for saved difficulty level
     KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
     const QByteArray key = cg.readEntry("Level", QByteArray());
-    for (const KgDifficultyLevel *level : qAsConst(d->m_levels)) {
+    for (const KgDifficultyLevel *level : std::as_const(d->m_levels)) {
         if (level->key() == key) {
             return d->m_currentLevel = level;
         }
     }
     // no level predefined - look for a default level
-    for (const KgDifficultyLevel *level : qAsConst(d->m_levels)) {
+    for (const KgDifficultyLevel *level : std::as_const(d->m_levels)) {
         if (level->isDefault()) {
             return d->m_currentLevel = level;
         }

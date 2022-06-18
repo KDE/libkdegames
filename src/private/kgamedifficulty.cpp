@@ -17,6 +17,8 @@
 // Qt
 #include <QIcon>
 #include <QStatusBar>
+// Std
+#include <utility>
 
 class KGameDifficultyPrivate : public QObject
 {
@@ -172,7 +174,7 @@ void KGameDifficultyPrivate::rebuildActions()
     m_comboBox->clear();
     std::sort(m_standardLevels.begin(), m_standardLevels.end());
 
-    for (KGameDifficulty::standardLevel level : qAsConst(m_standardLevels)) {
+    for (KGameDifficulty::standardLevel level : std::as_const(m_standardLevels)) {
         if (level != KGameDifficulty::Configurable) {
             m_menu->addAction(standardLevelString(level).second);
             m_comboBox->addItem(QIcon::fromTheme(QStringLiteral("games-difficult")), standardLevelString(level).second);
@@ -180,7 +182,7 @@ void KGameDifficultyPrivate::rebuildActions()
     }
 
     if (!m_customLevels.isEmpty()) {
-        for (const QString &s : qAsConst(m_customLevels)) {
+        for (const QString &s : std::as_const(m_customLevels)) {
             m_menu->addAction(s);
             m_comboBox->addItem(QIcon::fromTheme(QStringLiteral("games-difficult")), s);
         }

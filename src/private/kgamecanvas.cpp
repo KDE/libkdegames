@@ -14,6 +14,8 @@
 #include <QPaintEvent>
 #include <QTime>
 #include <QTimer>
+// Std
+#include <utility>
 
 /*
   TODO:
@@ -994,7 +996,7 @@ QRect KGameCanvasAdapter::childRect()
 {
     if (!m_child_rect_valid) {
         m_child_rect = QRect();
-        for (KGameCanvasItem *el : qAsConst(m_items)) {
+        for (KGameCanvasItem *el : std::as_const(m_items)) {
             m_child_rect |= el->rect();
         }
         m_child_rect_valid = true;
@@ -1005,7 +1007,7 @@ QRect KGameCanvasAdapter::childRect()
 
 void KGameCanvasAdapter::render(QPainter *painter)
 {
-    for (KGameCanvasItem *el : qAsConst(m_items)) {
+    for (KGameCanvasItem *el : std::as_const(m_items)) {
         if (el->m_visible) {
             el->m_last_rect = el->rect();
             el->paintInternal(painter, childRect(), childRect(), QPoint(), 1.0);
@@ -1017,7 +1019,7 @@ void KGameCanvasAdapter::ensurePendingUpdate()
 {
     m_child_rect_valid = false;
 
-    for (KGameCanvasItem *el : qAsConst(m_items)) {
+    for (KGameCanvasItem *el : std::as_const(m_items)) {
         if (el->m_changed) {
             el->updateChanges();
         }

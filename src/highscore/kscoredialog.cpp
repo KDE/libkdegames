@@ -31,6 +31,8 @@
 #include <QStyle>
 #include <QTabWidget>
 #include <QTimer>
+// Std
+#include <utility>
 
 typedef QList<KScoreDialog::FieldInfo> GroupScores; ///< The list of scores in a group
 
@@ -232,14 +234,14 @@ void KScoreDialogPrivate::setupDialog()
 
     tabWidget->clear();
     QList<QByteArray> keysToConfigure = scores.keys();
-    for (const QByteArray &groupName : qAsConst(configGroupWeights)) {
+    for (const QByteArray &groupName : std::as_const(configGroupWeights)) {
         int index = keysToConfigure.indexOf(groupName);
         if (index != -1) {
             setupGroup(groupName);
             keysToConfigure.removeAt(index);
         }
     }
-    for (const QByteArray &groupName : qAsConst(keysToConfigure)) {
+    for (const QByteArray &groupName : std::as_const(keysToConfigure)) {
         setupGroup(groupName);
     }
 }
@@ -432,7 +434,7 @@ void KScoreDialogPrivate::loadScores()
         setupGroup(configGroup);
     }
 
-    for (const QByteArray &groupKey : qAsConst(groupKeyList)) {
+    for (const QByteArray &groupKey : std::as_const(groupKeyList)) {
         highscoreObject->setHighscoreGroup(QLatin1String(groupKey));
         player = highscoreObject->readEntry(0, QStringLiteral("LastPlayer")); // FIXME
 
