@@ -112,7 +112,7 @@ void KGameDifficultyPrivate::init(KXmlGuiWindow *window, const QObject *recvr, c
 
     m_comboBox = new KComboBox(window);
     m_comboBox->setToolTip(i18n("Difficulty"));
-    connect(m_comboBox, QOverload<int>::of(&QComboBox::activated), this, &KGameDifficultyPrivate::changeSelection);
+    connect(m_comboBox, &QComboBox::activated, this, &KGameDifficultyPrivate::changeSelection);
     window->statusBar()->addPermanentWidget(m_comboBox);
 
     KGameDifficulty::setRestartOnChange(KGameDifficulty::RestartOnChange);

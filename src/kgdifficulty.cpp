@@ -374,7 +374,7 @@ void KgDifficultyGUI::init(KXmlGuiWindow *window, KgDifficulty *difficulty)
     // create selector (resides in status bar)
     KgDifficultyGUI::Selector *selector = new KgDifficultyGUI::Selector(difficulty, window);
     selector->setToolTip(i18nc("Game difficulty level", "Difficulty"));
-    QObject::connect(selector, QOverload<int>::of(&QComboBox::activated), selector, &Selector::slotActivated);
+    QObject::connect(selector, &QComboBox::activated, selector, &Selector::slotActivated);
     QObject::connect(difficulty, &KgDifficulty::editableChanged, selector, &QWidget::setEnabled);
     QObject::connect(difficulty, &KgDifficulty::selectedLevelChanged, selector, &Selector::slotSelected);
     QObject::connect(selector, &Selector::signalSelected, selector, &QComboBox::setCurrentIndex);
