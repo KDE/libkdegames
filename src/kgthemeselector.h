@@ -43,6 +43,9 @@ public:
         /// This requires a KNS3 config file to be installed for this app.
         EnableNewStuffDownload = 1 << 0
     };
+    /**
+     * Stores a combination of #Option values.
+     */
     Q_DECLARE_FLAGS(Options, Option)
 
     explicit KgThemeSelector(KgThemeProvider *provider, Options options = DefaultBehavior, QWidget *parent = nullptr);

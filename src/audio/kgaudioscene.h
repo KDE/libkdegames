@@ -38,6 +38,9 @@ enum Capability {
     SupportsLowLatencyPlayback = 1 << 0,
     SupportsPositionalPlayback = 1 << 1,
 };
+/**
+ * Stores a combination of #Capability values.
+ */
 Q_DECLARE_FLAGS(Capabilities, Capability)
 
 /// @return which capabilities are supported by the compiled KgAudio backend

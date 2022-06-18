@@ -105,6 +105,9 @@ public:
         AskName = 0x1, /**< Promt the player for their name */
         LessIsMore = 0x2 /**< A lower numerical score means higher placing on the table */
     };
+    /**
+     * Stores a combination of #AddScoreFlag values.
+     */
     Q_DECLARE_FLAGS(AddScoreFlags, AddScoreFlag)
 
     typedef QMap<int, QString> FieldInfo;

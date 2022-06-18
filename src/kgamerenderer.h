@@ -103,6 +103,9 @@ public:
         /// when many clients are requesting complex pixmaps at one time.
         UseRenderingThreads = 1 << 1
     };
+    /**
+     * Stores a combination of #Strategy values.
+     */
     Q_DECLARE_FLAGS(Strategies, Strategy)
 
     /// Constructs a new KGameRenderer that renders @a prov->currentTheme().
