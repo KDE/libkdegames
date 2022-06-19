@@ -2,10 +2,7 @@ set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KF5KDEGames)
 
 add_subdirectory(carddecks)
 add_subdirectory(qml)
-# Support deprecated legacy private API only with Qt5
-if (QT_MAJOR_VERSION STREQUAL "5")
-    add_subdirectory(private)
-endif()
+add_subdirectory(private)
 
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 configure_file(highscore/config-highscore.h.in ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
