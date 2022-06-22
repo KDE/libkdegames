@@ -20,6 +20,8 @@
 // Std
 #include <utility>
 
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 4)
+
 class KGameDifficultyPrivate : public QObject
 {
     Q_OBJECT
@@ -431,3 +433,5 @@ KGameDifficulty *KGameDifficulty::self()
 }
 
 #include "kgamedifficulty.moc"
+
+#endif

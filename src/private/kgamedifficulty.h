@@ -18,6 +18,8 @@ class QObject;
 class KGameDifficultyPrivate;
 class KXmlGuiWindow;
 
+#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 4)
+
 /**
  * \class KGameDifficulty kgamedifficulty.h <KGameDifficulty>
  *
@@ -67,6 +69,8 @@ class KXmlGuiWindow;
  * Note that this class is a singleton. So you can have only one current difficulty level per application.
  *
  * @author Nicolas Roffet, <nicolas-kde@roffet.com>
+ *
+ * @deprecated Since 4.9, use KgDifficulty instead.
  */
 class KDEGAMESPRIVATE_EXPORT KGameDifficulty
 {
@@ -120,6 +124,7 @@ public:
      * @param slotCustom Slot to call when the player changed the difficulty level to a custom one. (Optional). Slot should have the signature like:
      * SLOT(customLevelChanged(int))
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void init(KXmlGuiWindow *window, const QObject *recvr, const char *slotStandard, const char *slotCustom = nullptr);
 
     /**
@@ -128,6 +133,7 @@ public:
      * Default is RestartOnChange.
      * @param restart Behavior on change
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void setRestartOnChange(onChange restart);
 
     /**
@@ -137,6 +143,7 @@ public:
      * Standard difficulty levels are displayed before custom levels (if available).
      * @param level Standard difficulty level to add
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void addStandardLevel(standardLevel level);
 
     /**
@@ -144,6 +151,7 @@ public:
      *
      * @param level Standard difficulty level to remove
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void removeStandardLevel(standardLevel level);
 
     /**
@@ -155,6 +163,7 @@ public:
      * level.).
      * @param appellation Custom level appellation.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void addCustomLevel(int key, const QString &appellation);
 
     /**
@@ -162,6 +171,7 @@ public:
      *
      * @param key Custom level identifier.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void removeCustomLevel(int key);
 
     /**
@@ -171,6 +181,7 @@ public:
      * Default is "true".
      * @param enabled State.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void setEnabled(bool enabled);
 
     /**
@@ -178,6 +189,7 @@ public:
      *
      * @param level Standard level.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void setLevel(standardLevel level);
 
     /**
@@ -185,23 +197,28 @@ public:
      *
      * @return The current standard level, or customLevel if a custom level is selected, or noLevel if no difficulty level is selected.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static standardLevel level();
     /**
      * @return current standard level string name
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static QString levelString();
     /**
      * @return current standard level name translated string
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static QPair<QByteArray, QString> localizedLevelString();
     /**
      * @return list of translated standard level string names
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static QMap<QByteArray, QString> localizedLevelStrings();
     /**
      * @return map with the weight order of untranslated standard level names matches value of standardLevel enum
      * @since KDE 4.2
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static QMap<int, QByteArray> levelWeights();
     /**
      * @brief Set the new current difficulty level as a custom one
@@ -209,6 +226,7 @@ public:
      * This sets also the value of the standard level to "custom".
      * @param key Custom level identifier.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void setLevelCustom(int key);
 
     /**
@@ -217,6 +235,7 @@ public:
      * It does only make sense to get the current custom difficulty level, if the value of the level is "custom".
      * @return The current custom level identifier.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static int levelCustom();
 
     /**
@@ -226,6 +245,7 @@ public:
      * Default: false.
      * @param running Running state.
      */
+    KDEGAMESPRIVATE_DEPRECATED_VERSION_BELATED(7, 4, 4, 9, "Use KgDifficulty")
     static void setRunning(bool running);
 
 private:
@@ -247,5 +267,7 @@ private:
 
     Q_DISABLE_COPY(KGameDifficulty)
 };
+
+#endif
 
 #endif // KGAMEDIFFICULTY_H
