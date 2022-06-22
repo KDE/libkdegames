@@ -166,7 +166,13 @@ private:
 
 Q_DECLARE_METATYPE(const KgDifficultyLevel *)
 
-// TODO: Where to put documentation for this namespace?
+/**
+ * @namespace Kg
+ *
+ * The namespace for methods to access the KgDifficulty singleton.
+ *
+ * @see KgDifficulty
+ */
 namespace Kg
 {
 /// @return a singleton instance of KgDifficulty
@@ -177,6 +183,13 @@ KDEGAMES_EXPORT KgDifficultyLevel::StandardLevel difficultyLevel();
 
 class KXmlGuiWindow;
 
+/**
+ * @namespace KgDifficultyGUI
+ *
+ * The namespace for methods to integrate KgDifficulty into the UI.
+ *
+ * @see KgDifficulty
+ */
 // TODO KDE5: move this into a separate QtWidgets support library
 namespace KgDifficultyGUI
 {
