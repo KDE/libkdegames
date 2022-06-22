@@ -41,7 +41,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
         KGameRenderer
         KGameRendererClient
         KgDeclarativeView
-        KgDifficulty
+        KgDifficulty,KgDifficultyLevel
         KgTheme
         KgThemeProvider
         KgThemeSelector
