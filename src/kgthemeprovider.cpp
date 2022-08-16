@@ -170,18 +170,6 @@ void KgThemeProvider::discoverThemes(const QString &directory, const QString &de
     rediscoverThemes();
 }
 
-// Function to replace KStandardDirs::relativeLocation()
-static QString relativeToApplications(const QString &file)
-{
-    const QString canonical = QFileInfo(file).canonicalFilePath();
-    const QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
-    for (const QString &base : dirs) {
-        if (canonical.startsWith(base))
-            return canonical.mid(base.length() + 1);
-    }
-    return file;
-}
-
 void KgThemeProvider::rediscoverThemes()
 {
     if (d->m_dtDirectory.isEmpty()) {
@@ -215,8 +203,8 @@ void KgThemeProvider::rediscoverThemes()
         d->m_discoveredThemes << fi.fileName();
         // the identifier is constructed such that it is compatible with
         // KGameTheme (e.g. "themes/default.desktop")
+        const QByteArray id = QString(d->m_dtDirectory + QLatin1Char('/') + fi.fileName()).toUtf8();
 
-        const QByteArray id = relativeToApplications(themePath).toUtf8();
         // create theme
         KgTheme *theme;
         if (d->m_dtThemeClass) {
