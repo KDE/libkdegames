@@ -22,6 +22,7 @@ include(ECMGenerateHeaders)
 include(ECMMarkNonGuiExecutable)
 include(ECMGenerateExportHeader)
 include(ECMQtDeclareLoggingCategory)
+include(ECMDeprecationSettings)
 include(FeatureSummary)
 include(CMakePackageConfigHelpers)
 
@@ -88,12 +89,10 @@ set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
-add_definitions(
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050f02
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060000
-    -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055900
-    -DKCOREADDONS_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054900 # KRandomSequence, cannot be removed
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
+ecm_set_disabled_deprecation_versions(
+    QT 5.15.2
+    KF 5.91
+    KCOREADDONS 5.73 # KRandomSequence, cannot be removed
 )
 
 add_subdirectory(src)
