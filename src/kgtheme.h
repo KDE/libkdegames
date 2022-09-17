@@ -121,7 +121,7 @@ public:
     /// This API is provided for theme description files which contain
     /// additional application-specific metadata.
     QMap<QString, QString> customData() const;
-    /// @overload that returns a single value from the customData() map
+    /// This is an overloaded member function that returns a single value from the customData() map
     QString customData(const QString &key, const QString &defaultValue = QString()) const;
     /// @see customData()
     void setCustomData(const QMap<QString, QString> &customData);
