@@ -20,12 +20,12 @@ class KGameRenderedItemPrivate;
 
 /**
  * @class KGameRenderedItem kgamerendereditem.h <KGameRenderedItem>
- * @since 4.6
  * @short A QGraphicsPixmapItem which reacts to theme changes automatically.
  *
  * This class is a QGraphicsPixmapItem which retrieves its pixmap from a
  * KGameRenderer, and updates it automatically when the KGameRenderer changes
  * the theme.
+ * @since 4.6
  */
 class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGameRendererClient
 {

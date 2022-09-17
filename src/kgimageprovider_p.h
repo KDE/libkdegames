@@ -15,7 +15,6 @@ class KgThemeProvider;
 
 /**
  * @class KgImageProvider
- * @since 4.11
  * @short A QDeclarativeImageProvider that renders requested sprites and
  * returns corresponding pixmap to the QML view.
  *
@@ -27,6 +26,7 @@ class KgThemeProvider;
  * For porting KDE games to QML, there is a KgItem QML component provided
  * by KgCore QML plugin which is a small wrapper to request pixmaps from
  * this KgImageProvider. See KgItem's documentation for details.
+ * @since 4.11
  */
 class KgImageProvider : public QQuickImageProvider
 {

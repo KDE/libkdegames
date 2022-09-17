@@ -28,7 +28,6 @@ inline uint qHash(const QColor &color)
 
 /**
  * @class KGameRendererClient kgamerendererclient.h <KGameRendererClient>
- * @since 4.6
  * @short An object that receives pixmaps from a KGameRenderer.
  *
  * This class abstracts a sprite rendered by KGameRenderer. Given a sprite key,
@@ -37,6 +36,7 @@ inline uint qHash(const QColor &color)
  * documentation for details.
  *
  * Subclasses have to reimplement the receivePixmap() method.
+ * @since 4.6
  */
 class KDEGAMES_EXPORT KGameRendererClient
 {

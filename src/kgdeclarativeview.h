@@ -16,7 +16,6 @@
 
 /**
  * @class KgDeclarativeView
- * @since 4.11
  * @short A QDeclarativeView that adds KDE specific module paths and javascript bindings.
  *
  * This class is a QDeclarativeView that sets up a KDE specific environment
@@ -27,6 +26,7 @@
  * be replaced by KgDeclarativeView (inside which all the .qml graphics take
  * place), leaving the toolbars, menubars and statusbars as they are, and
  * updating their specifics via signals from QML to C++ part of the code.
+ * @since 4.11
  */
 class KDEGAMES_EXPORT KgDeclarativeView : public QQuickWidget
 {

@@ -34,7 +34,6 @@ inline uint qHash(const QColor &color)
 
 /**
  * @class KGameRenderer  kgamerenderer.h <KGameRenderer>
- * @since 4.6
  * @short Cache-enabled rendering of SVG themes.
  *
  * KGameRenderer is a light-weight rendering framework for the rendering of
@@ -81,6 +80,7 @@ inline uint qHash(const QColor &color)
  * the format of existing themes. KGameRenderer provides the frameBaseIndex()
  * and frameSuffix() properties for this purpose. It is recommended not to
  * change these properties in new applications.
+ * @since 4.6
  */
 class KDEGAMES_EXPORT KGameRenderer : public QObject
 {

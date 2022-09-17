@@ -22,7 +22,6 @@ class KGameRenderedObjectItemPrivate;
 
 /**
  * @class KGameRenderedObjectItem kgamerenderedobjectitem.h <KGameRenderedObjectItem>
- * @since 4.6
  * @short A QGraphicsObject which displays pixmaps from a KGameRenderer.
  *
  * This item displays a pixmap which is retrieved from a KGameRenderer, and is
@@ -48,6 +47,7 @@ class KGameRenderedObjectItemPrivate;
  * \li The size of the item's boundingRect() is independent of the renderSize().
  *     The default fixedSize() is 1x1, which means that the item's bounding rect
  *     is the unit square (moved by the configured offset()).
+ * @since 4.6
  */
 class KDEGAMES_EXPORT KGameRenderedObjectItem : public QGraphicsObject, public KGameRendererClient
 {
