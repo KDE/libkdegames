@@ -1,5 +1,3 @@
-project(corebindings)
-
 set(corebindingsplugin_QML_INSTALL_DIR ${KDE_INSTALL_QMLDIR}/org/kde/games/core)
 
 add_library(corebindingsplugin SHARED)

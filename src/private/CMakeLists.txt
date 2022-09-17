@@ -1,5 +1,3 @@
-project(libkdegamesprivate)
-
 set(kdegamesprivate_INCLUDE_INSTALL_DIR ${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate)
 
 if(BUILD_TESTING)
