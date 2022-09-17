@@ -1,4 +1,4 @@
-set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KF5KDEGames)
+set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KDEGames)
 
 add_subdirectory(carddecks)
 add_subdirectory(qml)
