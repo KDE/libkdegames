@@ -7,8 +7,8 @@
 #include "kgdeclarativeview.h"
 
 // KF
-#include <KDeclarative/KDeclarative>
 #include <KLocalizedContext>
+#include <KQuickIconProvider>
 // Qt
 #include <QQmlContext>
 
@@ -21,7 +21,9 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent)
     , d(nullptr) // unused for now, for future expandability
 {
     QQmlEngine *engine = this->engine();
-    KDeclarative::KDeclarative::setupEngine(engine);
+
+    // setup ImageProvider for KIconTheme icons
+    engine->addImageProvider(QStringLiteral("icon"), new KQuickIconProvider);
 
     KLocalizedContext *localizedContextObject = new KLocalizedContext(engine);
     engine->rootContext()->setContextObject(localizedContextObject);

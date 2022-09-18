@@ -110,7 +110,6 @@ target_link_libraries(KF5KDEGames
         Qt${QT_MAJOR_VERSION}::Xml
         Qt${QT_MAJOR_VERSION}::Svg
         Qt${QT_MAJOR_VERSION}::Quick
-        KF5::Declarative
         KF5::NewStuffWidgets
         KF5::IconThemes
         KF5::XmlGui

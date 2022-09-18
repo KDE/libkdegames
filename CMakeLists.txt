@@ -6,7 +6,7 @@ set(KDEGAMES_SOVERSION 7)
 project(libkdegames VERSION ${KDEGAMES_VERSION})
 
 set (QT_MIN_VERSION "5.15.0")
-set (KF_MIN_VERSION "5.91.0")
+set (KF_MIN_VERSION "5.98.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
@@ -44,7 +44,6 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Config
     ConfigWidgets
     DNSSD
-    Declarative
     GuiAddons
     IconThemes
     I18n
@@ -91,7 +90,7 @@ add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
 ecm_set_disabled_deprecation_versions(
     QT 5.15.2
-    KF 5.91
+    KF 5.98
     KCOREADDONS 5.73 # KRandomSequence, cannot be removed
 )
 
