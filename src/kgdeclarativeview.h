@@ -14,6 +14,8 @@
 // Std
 #include <memory>
 
+#if KDEGAMES_ENABLE_DEPRECATED_SINCE(7, 5)
+
 /**
  * @class KgDeclarativeView
  * @short A QDeclarativeView that adds KDE specific module paths and javascript bindings.
@@ -27,6 +29,7 @@
  * place), leaving the toolbars, menubars and statusbars as they are, and
  * updating their specifics via signals from QML to C++ part of the code.
  * @since 4.11
+ * @deprecsated Since 7.5, use QQuickWidget and add any used things yourself, like the KLocalizedContext.
  */
 class KDEGAMES_EXPORT KgDeclarativeView : public QQuickWidget
 {
@@ -36,11 +39,14 @@ public:
     /// Construcs a new KgDeclarativeView with KDE specific environment.
     /// @param parent The parent widget for this view (usually the main
     /// window of the game)
+    KDEGAMES_DEPRECATED_VERSION(7, 5, "Use QQuickWidget and add any used things yourself, like the KLocalizedContext.")
     explicit KgDeclarativeView(QWidget *parent = nullptr);
     ~KgDeclarativeView() override;
 
 private:
     std::unique_ptr<class KgDeclarativeViewPrivate> const d;
 };
+
+#endif
 
 #endif // KGDECLARATIVEVIEW_H

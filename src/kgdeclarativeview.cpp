@@ -12,6 +12,8 @@
 // Qt
 #include <QQmlContext>
 
+#if KDEGAMES_BUILD_DEPRECATED_SINCE(7, 5)
+
 class KgDeclarativeViewPrivate
 {
 };
@@ -32,3 +34,5 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent)
 }
 
 KgDeclarativeView::~KgDeclarativeView() = default;
+
+#endif
