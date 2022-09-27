@@ -13,7 +13,6 @@
 #include "khighscore.h"
 // KF
 #include <KConfig>
-#include <KConfigGroup>
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <KSeparator>
@@ -21,6 +20,7 @@
 // Qt
 #include <QApplication>
 #include <QByteArray>
+#include <QDialogButtonBox>
 #include <QGridLayout>
 #include <QKeyEvent>
 #include <QLabel>

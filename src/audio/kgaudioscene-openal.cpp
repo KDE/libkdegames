@@ -10,7 +10,6 @@
 #include "kgopenalruntime_p.h"
 // Qt
 #include <QDebug>
-#include <QGlobalStatic>
 
 Q_GLOBAL_STATIC(KgOpenALRuntime, g_runtime)
 

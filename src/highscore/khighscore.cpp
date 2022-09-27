@@ -19,7 +19,6 @@
 #include <KStandardGuiItem>
 // Qt
 #include <QFile>
-#include <QGlobalStatic>
 #include <QLockFile>
 
 #ifndef WIN32

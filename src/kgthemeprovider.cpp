@@ -12,8 +12,10 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 // Qt
+#include <QDir>
 #include <QFileInfo>
 #include <QGuiApplication>
+#include <QQmlContext>
 #include <QStandardPaths>
 // Std
 #include <utility>

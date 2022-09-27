@@ -20,7 +20,6 @@
 #include <KXmlGuiWindow>
 // Qt
 #include <QCoreApplication>
-#include <QGlobalStatic>
 #include <QIcon>
 #include <QStatusBar>
 #include <QVector>

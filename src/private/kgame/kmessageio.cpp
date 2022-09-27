@@ -14,7 +14,6 @@
 // Qt
 #include <KProcess>
 #include <QDataStream>
-#include <QFile>
 #include <QTcpSocket>
 
 // ----------------------- KMessageIO -------------------------

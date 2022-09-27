@@ -13,7 +13,6 @@
 #include <QLoggingCategory>
 #include <QMetaType>
 #include <QObject>
-#include <QPixmap>
 // Std
 #include <memory>
 

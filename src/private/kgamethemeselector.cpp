@@ -16,7 +16,6 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QDirIterator>
-#include <QIcon>
 #include <QStandardPaths>
 // Std
 #include <utility>

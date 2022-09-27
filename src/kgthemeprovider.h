@@ -11,10 +11,7 @@
 #include "kgtheme.h"
 #include <libkdegames_export.h>
 // Qt
-#include <QDir>
 #include <QObject>
-#include <QPointer>
-#include <QQmlContext>
 #include <QQmlEngine>
 // Std
 #include <memory>

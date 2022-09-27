@@ -10,7 +10,6 @@
 #include <config-tests.h>
 // Qt
 #include <QTest>
-#include <QtCore>
 
 void tst_KGamePropertyTest::initTestCase()
 {

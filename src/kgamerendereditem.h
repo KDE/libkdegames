@@ -12,7 +12,6 @@
 #include <libkdegames_export.h>
 // Qt
 #include <QGraphicsItem>
-#include <QObject>
 // Std
 #include <memory>
 

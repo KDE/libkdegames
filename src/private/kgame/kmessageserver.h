@@ -12,7 +12,6 @@
 #include "libkdegamesprivate_export.h"
 // Qt
 #include <QObject>
-#include <QString>
 // Std
 #include <memory>
 

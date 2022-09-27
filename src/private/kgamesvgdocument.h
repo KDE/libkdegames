@@ -13,7 +13,6 @@
 #include <QDomDocument>
 #include <QHash>
 #include <QLoggingCategory>
-#include <QStringList>
 #include <QTransform>
 // Std
 #include <memory>

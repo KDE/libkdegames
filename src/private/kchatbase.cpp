@@ -17,12 +17,11 @@
 #include <KLineEdit>
 #include <KLocalizedString>
 // Qt
-#include <QApplication>
 #include <QComboBox>
-#include <QLayout>
+#include <QHBoxLayout>
 #include <QList>
 #include <QListView>
-#include <QPixmap>
+#include <QVBoxLayout>
 
 Q_LOGGING_CATEGORY(GAMES_PRIVATE, "org.kde.games.private", QtWarningMsg)
 

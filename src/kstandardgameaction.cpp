@@ -10,7 +10,6 @@
 
 // KF
 #include <KActionCollection>
-#include <KConfig>
 #include <KLazyLocalizedString>
 #include <KLocalizedString>
 #include <KStandardShortcut>

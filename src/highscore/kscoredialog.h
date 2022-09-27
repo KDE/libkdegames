@@ -13,8 +13,6 @@
 #include <libkdegames_export.h>
 // Qt
 #include <QDialog>
-#include <QDialogButtonBox>
-#include <QFlags>
 #include <QMap>
 // Std
 #include <memory>
