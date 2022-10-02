@@ -1,0 +1,933 @@
+# translation of libkdegames.po to Español
+# traducción de libkdegames.po a Español
+# Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002,2003.
+# Lucas Garcia <tanke@escomposlinux.org>, 2003.
+# Rafael Osuna <rosuna@wol.es>, 2003, 2004.
+# Santiago Fernandez Sancho <santi@kde-es.org>, 2004, 2005, 2006.
+# santi <santi@kde-es.org>, 2005.
+# Santiago Fernández Sancho <santi@kde-es.org>, 2007, 2008.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2009, 2012.
+# Huever, 2009.
+# Kira J. Fernandez <kirajfdez@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2012-04-22 17:09+0200\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Reintentar"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"No se puede acceder al archivo de puntuaciones. Lo más probable es que otro "
+"usuario esté escribiendo en él."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Mejores puntuaciones"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Nombre"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Fecha"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Nivel"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Puntuación"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Tiempo"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rango"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Recordar"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "Ol&vidar"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Recordar esta puntuación"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Olvidar esta puntuación"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"¡Excelente!\n"
+"¡Ha obtenido una de las mejores puntuaciones!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"¡Bien hecho!\n"
+"¡Consiguió entrar en la lista de mejores puntuaciones!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Ridículamente sencillo"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Muy fácil"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Fácil"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Medio"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Difícil"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Muy difícil"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Extremadamente difícil"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Imposible"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "¡Cambiar el nivel de dificultad finalizará la partida actual!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Cambiar el nivel de dificultad"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Dificultad"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Establecer el nivel de dificultad"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Establece el nivel de dificultad"
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Obtener nuevos temas..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Seleccionar tema"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[Sin nombre]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "por %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Nuevo"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Iniciar una partida nueva."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Iniciar una partida nueva"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Cargar..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Abrir una partida guardada..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Cargar &reciente"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Abrir una partida recientemente guardada..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Reiniciar &partida"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Reiniciar la partida"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "Guar&dar"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Guarda la partida actual"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Gu&ardar como..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Guarda la partida actual en otro archivo"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Finalizar partida"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Finaliza la partida actual"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Pa&usa"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Detiene la partida"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Mostrar &mejores puntuaciones"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Muestra las mejores puntuaciones"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Borrar mejores puntuaciones"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Borra las mejores puntuaciones"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Mostrar estadísticas"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Muestra las estadísticas"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Borrar estadísticas"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Borra todas las estadísticas hasta ahora."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "Im&primir..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Salir"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Salir del programa"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Repetir"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Repite el último movimiento"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "De&shacer"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Deshace el último movimiento"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Re&hacer"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Rehace el último movimiento"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "Ti&rar los dados"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Tira los dados"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Fin del turno"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Pista"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Da una pista"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demostración"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Jugar una demostración"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "Re&solver"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Resuelve el juego"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Elegir &tipo de juego"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Configurar &barajas..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Configurar &mejores puntuaciones..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Enviar a todos los jugadores"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Enviar a %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "MáximodeJugadores"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "MínimodeJugadores"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "EstadoJuego"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Jugador %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Enviar a mi grupo («%1»)"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"¡La cookie no coincide!\n"
+"Cookie esperada: %1\n"
+"Cookie recibida: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"¡La versión de KGame no coincide!\n"
+"Versión esperada: %1\n"
+"Versión recibida: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Código de error desconocido %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Configurar juego"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Continuar configuración de juego"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Cargar juego"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Cliente de juego conectado"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Configuración de juego realizada"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Sincronizar aleatoriamente"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Desconectar"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Propiedad de jugador"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Propiedad de juego"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Añadir jugador"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Eliminar jugador"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Activar jugador"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Desactivar jugador"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id del turno"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Mensaje de error"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Entrada de jugador"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Se añadió una ES"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Solicitud de proceso"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "ID del jugador"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "ID sin nombrar: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 sin registrar"
+msgstr[1] "%1 sin registrar"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Puntero NULL"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Verdadero"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Falso"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "IDdelUsuario"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grupo"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "predeterminado"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "EntradaAsinc"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "miTurno"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Dificultad"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Personalizado"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Seleccione la <b>dificultad</b> de la partida. <br /> Si cambia el nivel de "
+"dificultad mientras está jugando una partida, deberá cancelarla y comenzar "
+"una nueva."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Seleccione la <b>dificultad</b> de la partida.<br />Puede cambiar el nivel "
+"de dificultad mientras juega una partida."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "Ob&tener nuevos temas..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Vista previa"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Detalles del tema"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Contacto:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Descripción:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Autor:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Puntuación media"
+
+#~ msgid "Best Score"
+#~ msgstr "Mejor puntuación"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Tiempo transcurrido"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Mejore&s puntuaciones"
+
+#~ msgid "&Players"
+#~ msgstr "&Jugadores"
+
+#~ msgid "Statistics"
+#~ msgstr "Estadísticas"
+
+#~ msgid "Histogram"
+#~ msgstr "Histograma"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Ver puntuaciones mundiales"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Ver jugadores mundiales"
+
+#~ msgid "Highscores"
+#~ msgstr "Mejores puntuaciones"
+
+#~ msgid "Overwrite"
+#~ msgstr "Sobreescribir"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "El archivo ya existe. ¿Sobreescribir?"
+
+#~ msgid "Export"
+#~ msgstr "Exportar"
+
+#~ msgid "Winner"
+#~ msgstr "Ganador"
+
+#~ msgid "Won Games"
+#~ msgstr "Partidas ganadas"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Configurar mejores puntuaciones"
+
+#~ msgid "Main"
+#~ msgstr "Principal"
+
+#~ msgid "Nickname:"
+#~ msgstr "Apodo:"
+
+#~ msgid "Comment:"
+#~ msgstr "Comentario:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Mejores puntuaciones mundiales activadas"
+
+#~ msgid "Advanced"
+#~ msgstr "Avanzado"
+
+#~ msgid "Registration Data"
+#~ msgstr "Información de registro"
+
+#~ msgid "Key:"
+#~ msgstr "Clave:"
+
+#~ msgid "Remove"
+#~ msgstr "Eliminar"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Esto eliminará su clave de registro de forma permanente. No podrá volver "
+#~ "a utilizar el apodo que tiene registrado actualmente."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Elija un apodo que no esté vacío."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "El apodo ya está en uso. Elija otro"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Introduzca su apodo"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "¡Enhorabuena, ha ganado!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Introduzca su apodo:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "No volver a preguntar."
+
+#~ msgid "anonymous"
+#~ msgstr "anónimo"
+
+#~ msgid "Games Count"
+#~ msgstr "Contador de partidas"
+
+#~ msgid "Comment"
+#~ msgstr "Comentario"
+
+#~ msgid "Undefined error."
+#~ msgstr "Error no definido."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Falta(n) argumento(s)."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Argumento(s) no válido(s)."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "No se puede conectar al servidor MySQL."
+
+#~ msgid "Unable to select database."
+#~ msgstr "No se puede seleccionar la base de datos."
+
+#~ msgid "Error on database query."
+#~ msgstr "Error al consultar la base de datos."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Error al insertar en la base de datos."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "El apodo ya está registrado."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "El apodo no está registrado."
+
+#~ msgid "Invalid key."
+#~ msgstr "Clave no válida."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Clave de envío no válida."
+
+#~ msgid "Invalid level."
+#~ msgstr "Nivel no válido."
+
+#~ msgid "Invalid score."
+#~ msgstr "Puntuación no válida."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "No se puede contactar con el servidor de puntuaciones mundial"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "URL de servidor: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "No se puede abrir el archivo temporal."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Mensaje del servidor mundial de puntuaciones"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Respuesta no válida del servidor mundial de puntuaciones."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Mensaje en bruto: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Respuesta no válida del servidor mundial de puntuaciones (elemento "
+#~ "ausente: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Éxito"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Puntuaciones de multijugadores"
+
+#~ msgid "No game played."
+#~ msgstr "Ninguna partida jugada."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Puntuaciones de la última partida:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Puntuaciones de las últimas %1 partidas:"
+
+#~ msgid "all"
+#~ msgstr "todas"
+
+#~ msgid "Select player:"
+#~ msgstr "Jugador seleccionado:"
+
+#~ msgid "Total:"
+#~ msgstr "Total:"
+
+#~ msgid "Won:"
+#~ msgstr "Ganadas:"
+
+#~ msgid "Lost:"
+#~ msgstr "Perdidas:"
+
+#~ msgid "Draw:"
+#~ msgstr "Empate:"
+
+#~ msgid "Current:"
+#~ msgstr "Actual:"
+
+#~ msgid "Max won:"
+#~ msgstr "Máximo de ganadas:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Máximo de perdidas:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Contadores de partidas"
+
+#~ msgid "Trends"
+#~ msgstr "Tendencias"
+
+#~ msgid "From"
+#~ msgstr "De"
+
+#~ msgid "To"
+#~ msgstr "A"
+
+#~ msgid "Count"
+#~ msgstr "Contador"
+
+#~ msgid "Percent"
+#~ msgstr "Porcentaje"
+
+#~ msgid "Configure..."
+#~ msgstr "Configurar..."
+
+#~ msgid "Export..."
+#~ msgstr "Exportar..."

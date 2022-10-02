@@ -1,0 +1,1414 @@
+# translation of libkdegames.po to Nepali
+# Nabin Gautam <nabin@mpp.org.np>, 2006, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2007-08-20 12:16+0545\n"
+"Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
+"Language-Team: Nepali <info@mpp.org.np>\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n !=1\n"
+"\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "पुन: प्रयास गर्नुहोस्"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"उच्च प्राप्ताङ्क फाइलमा पहुँच गर्न सकिँदैन । सम्भवत: अन्य प्रयोगकर्ताले यसमा अहिले लेखिरहेको "
+"छ ।"
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "उच्च प्राप्ताङ्क"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "नाम"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "मिति"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "स्तर"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "प्राप्ताङ्क"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "समय"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "श्रेणी"
+
+#: highscore/kscoredialog.cpp:294
+#, fuzzy, kde-format
+#| msgid "#%1"
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Clear high scores"
+msgid "Remember this high score"
+msgstr "उच्च प्राप्ताङ्क मेट्नुहोस्"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Clear high scores"
+msgid "Forget this high score"
+msgstr "उच्च प्राप्ताङ्क मेट्नुहोस्"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"उत्कृष्ट!\n"
+"तपाईँको नयाँ उच्च प्राप्तङ्क भएको छ!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"राम्रो गर्नुभयो!\n"
+"तपाईँले यसलाई उच्च प्राप्ताङ्क सूचीमा पुर्याउनु भयो!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, fuzzy, kde-format
+#| msgid "Ridiculously easy"
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "अति धेरै सजिलो"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, fuzzy, kde-format
+#| msgid "Very easy"
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "ज्यादै सजिलो"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, fuzzy, kde-format
+#| msgid "Easy"
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "सजिलो"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, fuzzy, kde-format
+#| msgid "Medium"
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "मध्यम"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, fuzzy, kde-format
+#| msgid "Hard"
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "कठीन"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, fuzzy, kde-format
+#| msgid "Very hard"
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "ज्यादै कठीन"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, fuzzy, kde-format
+#| msgid "Extremely hard"
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "अति धेरै कठीन"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, fuzzy, kde-format
+#| msgid "Impossible"
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "असम्भव"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level of the game."
+msgid "Changing the difficulty level will end the current game!"
+msgstr "खेलको कठीन स्तर सेट गर्नुहोस् ।"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "कठीन स्तर परिवर्तन गर्नुहोस्"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, fuzzy, kde-format
+#| msgid "Game difficulty"
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "कठीन खेल"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "कठीन स्तर सेट गर्नुहोस्"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "खेलको कठीन स्तर सेट गर्नुहोस् ।"
+
+#: kgthemeselector.cpp:103
+#, fuzzy, kde-format
+#| msgid "&Get New Themes"
+msgid "Get New Themes..."
+msgstr "नयाँ विषयवस्तु प्राप्त"
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Solve the game"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "खेल समाधान गर्नुहोस्"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "तपाईँको नाम:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "नयाँ"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "नयाँ खेल सुरु गर्नुहोस् ।"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "नयाँ खेल सिर्जना गर्नुहोस्"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "लोड गर्नुहोस्..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "बचत गरिएको खेल खोल्नुहोस्..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "तत्काल लोड गर्नुहोस्"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "हालै बचत गरिएको खेल खोल्नुहोस्..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "खेल पुन: सुरु गर्नुहोस्"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "खेल पुन: सुरु गर्नुहोस्"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "बचत"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "हालको खेल बचत गर्नुहोस्"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "यस रुपमा बचत गर्नुहोस्..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "हालको खेल अन्य फाइलमा बचत गर्नुहोस्"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "खेल अन्त्य गर्नुहोस्"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "हालको खेल अन्त्य गर्नुहोस्"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "पज गर्नुहोस्"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "खेल पज गर्नुहोस्"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &High Scores"
+msgid "Show &High Scores"
+msgstr "उच्च प्राप्ताङ्क देखाउनुहोस्"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "उच्च प्राप्ताङ्क देखाउनुहोस्"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "उच्च प्राप्ताङ्क मेट्नुहोस्"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "उच्च प्राप्ताङ्क मेट्नुहोस्"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "तथ्याङ्क देखाउनुहोस्"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "तथ्याङ्क देखाउनुहोस्"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "तथ्याङ्क मेट्नुहोस्"
+
+#: kstandardgameaction.cpp:58
+#, fuzzy
+#| msgid "Delete all time statistics."
+msgid "Delete all-time statistics."
+msgstr "सबै समय तथ्याङ मेट्नुहोस् ।"
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "मुद्रण गर्नुहोस्..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "बन्द"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "कार्यक्रम बन्द गर्नुहोस्"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "दोहोर्याउनुहोस्"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "अन्तिम चाल दोहोर्याउनुहोस्"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "पूर्वस्थितिमा फर्काउनुहोस्"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "अन्तिम चाल पूर्वस्थितिमा फर्काउनुहोस्"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "रिडू गर्नुहोस्"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "अन्तिम चाल रिडू गर्नुहोस्"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "पासा घुमाउनुहोस्"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "पासा घुमाउनुहोस्"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "अन्तिम पालो"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "सङ्केत"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "सङ्केत दिनुहोस्"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "प्रदर्शन"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "प्रदर्शन खेल"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "समाधान"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "खेल समाधान गर्नुहोस्"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "खेल प्रकार रोज्नुहोस्"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "कार्डपत्ती कन्फिगर गर्नुहोस्..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "उच्च प्राप्ताङ्क कन्फिगर गर्नुहोस्..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "सबै खेलाडीलाई पठाउनुहोस्"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "%1 मा पठाउनुहोस्"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "अधिकतम खेलाडी"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "न्यूनतम खेलाडी"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "खेल स्थिति"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "खेलाडी %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "मेरो समूहमा पठाउनुहोस् (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"कुकी मिलेन!\n"
+"अपेक्षित कुकी: %1\n"
+"प्राप्त कुकी: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"केडीई खेल संस्करण मिलेन!\n"
+"अपेक्षित संस्करण: %1\n"
+"प्राप्त संस्करण: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "अज्ञात त्रुटि सङ्केत %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "खेल सेटअप गर्नुहोस्"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "खेल सेटअप जारी राख्नुहोस्"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "खेल लोड गर्नुहोस्"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "क्लाइन्ट खेल जडान भयो"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "खेल सेटअप भयो"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "अनियमित समक्रमण गर्नुहोस्"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "विच्छेद"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "खेलाडी गुण"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "खेल गुण"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "खेलाडी थप्नुहोस्"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "खेलाडी हटाउनुहोस्"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "खेलाडी सक्रिय पार्नुहोस्"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "खेलाडी निस्क्रिय बनाउनुहोस्"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "आईडी पालो"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "त्रुटि सन्देश"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "खेलाडी आगत"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "एउटा IO थपिएको थियो"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "क्वेरी प्रक्रिया"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "खेलाडी आईडी"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "बेनामी - आईडी: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, fuzzy, kde-format
+#| msgid "%1 unregistered"
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 दर्ता गरिएको छैन"
+msgstr[1] "%1 दर्ता गरिएको छैन"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "शून्य सूचक"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "ठीकक"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "गलत"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "प्रयोगकर्ता आईडी"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "समूह"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "पूर्वनिर्धारित"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "असक्रमित आगत"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "मेरो पालो"
+
+#: private/kgamedifficulty.cpp:116
+#, fuzzy, kde-format
+#| msgid "Game difficulty"
+msgid "Difficulty"
+msgstr "कठीन खेल"
+
+#: private/kgamedifficulty.cpp:198
+#, fuzzy, kde-format
+#| msgid "Custom..."
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "अनुकूलन..."
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, fuzzy, kde-format
+#| msgid "&Get New Themes"
+msgid "&Get New Themes..."
+msgstr "नयाँ विषयवस्तु प्राप्त"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "पूर्वावलोकन"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "विषयवस्तु विवरण"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "सम्पर्क:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "वर्णन:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "लेखक:"
+
+#~ msgid "Mean Score"
+#~ msgstr "औसत प्राप्ताङ्क"
+
+#~ msgid "Best Score"
+#~ msgstr "उत्तम स्कोर"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "व्यतित समय"
+
+#~ msgid "Best &Scores"
+#~ msgstr "उत्तम प्राप्ताङ्क"
+
+#~ msgid "&Players"
+#~ msgstr "खेलाडी"
+
+#~ msgid "Statistics"
+#~ msgstr "तथ्याङ्क"
+
+#~ msgid "Histogram"
+#~ msgstr "हिस्टोग्राम"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "विश्वव्यापी उच्च प्राप्ताङ्क हेर्नुहोस्"
+
+#~ msgid "View world-wide players"
+#~ msgstr "विश्वव्यापी खेलाडी हेर्नुहोस्"
+
+#~ msgid "Highscores"
+#~ msgstr "उच्च प्राप्ताङ्क"
+
+#~ msgid "Overwrite"
+#~ msgstr "अधिलेखन गर्नुहोस्"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "फाइल पहिले नै अवस्थित छ । अधिलेखन गर्नुहुन्छ?"
+
+#~ msgid "Export"
+#~ msgstr "निर्यात गर्नुहोस्"
+
+#~ msgid "Winner"
+#~ msgstr "विजेता"
+
+#~ msgid "Won Games"
+#~ msgstr "विजय भएका खेल"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "उच्च प्राप्ताङ्क कन्फिगर गर्नुहोस्"
+
+#~ msgid "Main"
+#~ msgstr "मुख्य"
+
+#~ msgid "Nickname:"
+#~ msgstr "उपनाम:"
+
+#~ msgid "Comment:"
+#~ msgstr "टिप्पणी:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "विश्वव्यापी उच्च प्राप्ताङ्क सक्षम पारियो"
+
+#~ msgid "Advanced"
+#~ msgstr "उन्नत"
+
+#~ msgid "Registration Data"
+#~ msgstr "दर्ता डेटा"
+
+#~ msgid "Key:"
+#~ msgstr "कुञ्जी:"
+
+#~ msgid "Remove"
+#~ msgstr "हटाउनुहोस्"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "यसले तपाईँको दर्ता कुञ्जी स्थायी रुपमा हटाउने छ । तपाईँ अब हालै दर्ता गरिएको उपनाम "
+#~ "प्रयोग गर्न सक्नुहुने छैन ।"
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "कृपया खाली नबनाई एउटा उपनाम रोज्नुहोस् ।"
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "उपनाम पहिलेनै प्रयोगमा छ । कृपया अर्को एक रोज्नुहोस्"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "तपाईँको उपनाम प्रविष्ट गर्नुहोस्"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "बधाइ छ, तपाईँ विजयी हुनुभयो!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "तपाईँको उपनाम प्रविष्ट गर्नुहोस्:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "फेरि नसोध्नुहोस् ।"
+
+#~ msgid "anonymous"
+#~ msgstr "बेनामी"
+
+#~ msgid "Games Count"
+#~ msgstr "खेल गणना"
+
+#~ msgid "Comment"
+#~ msgstr "टिप्पणी"
+
+#~ msgid "Undefined error."
+#~ msgstr "अपरिभाषित त्रुटि ।"
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "छुटेका त्रुटि(हरू) ।"
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "अवैद्य तर्क(हरू) ।"
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "MySQL सर्भरमा जडान गर्न असमर्थ ।"
+
+#~ msgid "Unable to select database."
+#~ msgstr "डेटाबेस चयन गर्न असमर्थ ।"
+
+#~ msgid "Error on database query."
+#~ msgstr "डेटाबेस क्वेरीमा त्रुटि ।"
+
+#~ msgid "Error on database insert."
+#~ msgstr "डेटाबेस घुसाउँदा त्रुटि ।"
+
+#~ msgid "Nickname already registered."
+#~ msgstr "उपनाम पहिले नै दर्ता भयो ।"
+
+#~ msgid "Nickname not registered."
+#~ msgstr "उपनाम दर्ता भएको छैन ।"
+
+#~ msgid "Invalid key."
+#~ msgstr "अवैद्य कुञ्जी ।"
+
+#~ msgid "Invalid submit key."
+#~ msgstr "पेश गरिएको अवैद्य कुञ्जी ।"
+
+#~ msgid "Invalid level."
+#~ msgstr "अवैद्य स्तर ।"
+
+#~ msgid "Invalid score."
+#~ msgstr "अवैद्य प्राप्तङ्क ।"
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "विश्वव्यापी उच्च प्राप्ताङ्क सर्भरमा जडान गर्न असमर्थ"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "सर्भर यूआरएल: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "अस्थायी फाइल खोल्न असमर्थ ।"
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "विश्वव्यापी उच्च प्राप्ताङ्क सर्भरबाट सन्देश"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "विश्वव्यापी उच्च प्राप्ताङ्क सर्भरबाट अवैद्य जवाफ ।"
+
+#~ msgid "Raw message: %1"
+#~ msgstr "अधुरो सन्देश: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr "विश्वव्यापी उच्च प्राप्ताङ्क सर्भरबाट अवैद्य जवाफ (छुटेको वस्तु: %1) ।"
+
+#~ msgid "Success"
+#~ msgstr "सफल"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "धेरै खेलाडीको प्राप्ताङ्क"
+
+#~ msgid "No game played."
+#~ msgstr "खेल खेलिएको छैन ।"
+
+#~ msgid "Scores for last game:"
+#~ msgstr "अन्तिम खेलको लागि प्राप्ताङ्क:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "अन्तिम %1 खेलका लागि प्राप्ताङ्क:"
+
+#~ msgid "all"
+#~ msgstr "सबै"
+
+#~ msgid "Select player:"
+#~ msgstr "खेलाडी चयन गर्नुहोस्:"
+
+#~ msgid "Total:"
+#~ msgstr "कूल:"
+
+#~ msgid "Won:"
+#~ msgstr "विजयी:"
+
+#~ msgid "Lost:"
+#~ msgstr "हार:"
+
+#~ msgid "Draw:"
+#~ msgstr "बराबरी:"
+
+#~ msgid "Current:"
+#~ msgstr "चालु:"
+
+#~ msgid "Max won:"
+#~ msgstr "अधिकतम विजयी:"
+
+#~ msgid "Max lost:"
+#~ msgstr "अधिकतम हार:"
+
+#~ msgid "Game Counts"
+#~ msgstr "खेल गणना"
+
+#~ msgid "Trends"
+#~ msgstr "प्रवृत्ति"
+
+#~ msgid "From"
+#~ msgstr "यसबाट"
+
+#~ msgid "To"
+#~ msgstr "यससम्म"
+
+#~ msgid "Count"
+#~ msgstr "गणना"
+
+#~ msgid "Percent"
+#~ msgstr "प्रतिशत"
+
+#~ msgid "Configure..."
+#~ msgstr "कन्फिगर गर्नुहोस्..."
+
+#~ msgid "Export..."
+#~ msgstr "निर्यात गर्नुहोस्..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "कुराकानी कन्फिगर गर्नुहोस्"
+
+#~ msgid "Name Font..."
+#~ msgstr "नाम फन्ट..."
+
+#~ msgid "Text Font..."
+#~ msgstr "पाठ फन्ट..."
+
+#~ msgid "Player: "
+#~ msgstr "खेलाडी: "
+
+#~ msgid "This is a player message"
+#~ msgstr "यो खेलाडीको सन्देश हो"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "प्रणाली सन्देश - खेलबाट सिधै पठाइएका सन्देश"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- खेल: "
+
+#~ msgid "This is a system message"
+#~ msgstr "यो प्रणाली सन्देश हो"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "सन्देशको अधिकतम सङ्ख्या (-1 = असिमित):"
+
+#~ msgid "Create a network game"
+#~ msgstr "सञ्जाल खेल सिर्जना गर्नुहोस्"
+
+#~ msgid "Join a network game"
+#~ msgstr "सञ्जाल खेलमा भाग लिनुहोस्"
+
+#~ msgid "Game name:"
+#~ msgstr "खेलको नाम:"
+
+#~ msgid "Network games:"
+#~ msgstr "सञ्जाल खेल:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "यसमा पोर्टलाई जडान गर्नुहोस्:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "यसमा होस्टलाई जडान गर्नुहोस्:"
+
+#~ msgid "&Start Network"
+#~ msgstr "सुरुको सञ्जाल"
+
+#~ msgid "Network Game"
+#~ msgstr "सञ्जाल खेल"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "त्रुटि सच्याउने केडीई खेल संवाद"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "त्रुटी सच्याउने केडीई खेल"
+
+#~ msgid "Update"
+#~ msgstr "अद्यावधिक गर्नुहोस्"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "केडीई खेल सूचक"
+
+#~ msgid "Game ID"
+#~ msgstr "खेल आईडी"
+
+#~ msgid "Game Cookie"
+#~ msgstr "खेल कुकी"
+
+#~ msgid "Is Master"
+#~ msgstr "मास्टर छ"
+
+#~ msgid "Is Admin"
+#~ msgstr "प्रशासन छ"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "जडान प्रस्ताव गर्दैछ"
+
+#~ msgid "Game Status"
+#~ msgstr "खेल स्थिति"
+
+#~ msgid "Game is Running"
+#~ msgstr "खेल चलिराखेको छ"
+
+#~ msgid "Maximal Players"
+#~ msgstr "अधिकतम खेलाडी"
+
+#~ msgid "Minimal Players"
+#~ msgstr "न्यूनतम खेलाडी"
+
+#~ msgid "Players"
+#~ msgstr "खेलाडी"
+
+#~ msgid "Debug &Players"
+#~ msgstr "संशोधक खेलाडी"
+
+#~ msgid "Available Players"
+#~ msgstr "उपलब्ध खेलाडी"
+
+#~ msgid "Player Pointer"
+#~ msgstr "खेलाडी सूचक"
+
+#~ msgid "Player Name"
+#~ msgstr "खेलाडी नाम"
+
+#~ msgid "Player Group"
+#~ msgstr "खेलाडी समूह"
+
+#~ msgid "Player User ID"
+#~ msgstr "खेलाडी प्रयोगकर्ता आईडी"
+
+#~ msgid "My Turn"
+#~ msgstr "मेरो पालो"
+
+#~ msgid "Async Input"
+#~ msgstr "असक्रमित आगत"
+
+#~ msgid "KGame Address"
+#~ msgstr "केडीई खेल ठेगाना"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "खेलाडी अवास्तविक छ"
+
+#~ msgid "Player is Active"
+#~ msgstr "खेलाडी सक्रिय छ"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "सञ्जाल प्राथमिकता"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "त्रुटि सच्याउने सन्देश"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "आईडी नदेखाउनुहोस्:"
+
+#~ msgid "Clean"
+#~ msgstr "सफा"
+
+#~ msgid "Dirty"
+#~ msgstr "फोहर"
+
+#~ msgid "Local"
+#~ msgstr "स्थानीय"
+
+#~ msgid "Undefined"
+#~ msgstr "अपरिभाषित"
+
+#~ msgid "&Chat"
+#~ msgstr "कुराकानी"
+
+#~ msgid "C&onnections"
+#~ msgstr "जडान"
+
+#~ msgid "&Game"
+#~ msgstr "खेल"
+
+#~ msgid "&Network"
+#~ msgstr "सञ्जाल"
+
+#~ msgid "&Message Server"
+#~ msgstr "सन्देश सर्भर"
+
+#~ msgid "Network Configuration"
+#~ msgstr "सञ्जाल कन्फिगरेसन"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "सञ्जालमा जडान गर्न सकिँदैन"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "सञ्जाल स्थिति: सञ्जाल उपलब्ध छैन"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "सञ्जाल स्थिति: तपाईँ मास्टर हुनुहुन्छ"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "सञ्जाल स्थिति: तपाईँ जडान हुनुभयो"
+
+#~ msgid "Your name:"
+#~ msgstr "तपाईँको नाम:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "क्लाइन्टको अधिकतम सङ्ख्या"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "क्लाइन्टको अधिकतम सङ्ख्या (-1 = अनन्त):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "अधिकतम क्लाइन्टको सङ्ख्या परिवर्तन गर्नुहोस्"
+
+#~ msgid "Change Admin"
+#~ msgstr "प्रशासन परिवर्तन गर्नुहोस्"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "सबै खेलाडीसँग क्लाइन्ट हटाउनुहोस्"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "प्रशासकले मात्र सन्देश सर्भर कन्फिगर गर्नसक्छ!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "तपाईँले सन्देश सर्भर प्राप्त गर्नभएको छैन"
+
+#~ msgid "Chat"
+#~ msgstr "कुराकानी"
+
+#~ msgid "Connected Players"
+#~ msgstr "जडान गरिएका खेलाडी"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "तपाईँ खेलाडी \"%1\" लाई खेलमा प्रतिबन्ध गर्न चाहनुहुन्छ?"
+
+#~ msgid "Ban Player"
+#~ msgstr "खेलाडी प्रतिबन्ध गर्नुहोस्"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "प्रतिबन्ध नगर्नुहोस्"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "सर्भरमा जडान छुटेको छ!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "क्लाइन्टसँगको सम्पर्क छुटेको छ!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "सञ्जाल त्रुटि देखा पर्यो!\n"
+#~ "त्रुटि नम्बर: %1\n"
+#~ "त्रुटि सन्देश: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "जडान सिर्जना गर्न सकिने छैन ।"
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "जडान सिर्जना गर्न सकिने छैन ।\n"
+#~ "त्रुटि सन्देश:\n"
+#~ "%1 थियो"
+
+#~ msgid "Error"
+#~ msgstr "त्रुटि"
+
+#, fuzzy
+#~| msgid "Carddeck Selection"
+#~ msgid "Card Deck Selection"
+#~ msgstr "ताशपत्ती चयन"
+
+#~ msgid "unnamed"
+#~ msgstr "बेनामी"
+
+#, fuzzy
+#~| msgid "Frontside"
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "अगाडिको भाग"
+
+#, fuzzy
+#~| msgid "Backside"
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "पछाडिको भाग"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "नाम"
+
+#, fuzzy
+#~| msgid "Preview"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "पूर्वावलोकन"
+
+#, fuzzy
+#~| msgid "Description:"
+#~ msgid "Deck description."
+#~ msgstr "वर्णन:"
+
+#~ msgid "Display:"
+#~ msgstr "प्रदर्शन:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "समाविष्ट खेलाडी र बट"
+
+#~ msgid "Spectators"
+#~ msgstr "दर्शक"
+
+#~ msgid "Close"
+#~ msgstr "बन्द"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "खेलाडि, बट र दर्शक"
+
+#~ msgid "Action..."
+#~ msgstr "कार्य..."
+
+#~ msgid "Player"
+#~ msgstr "खेलाडी"
+
+#~ msgid "Open"
+#~ msgstr "खोल्नुहोस्"
+
+#~ msgid "Reserved"
+#~ msgstr "आरक्षित"
+
+#~ msgid "AI bot"
+#~ msgstr "AI bot"
+
+#~ msgid "Abandoned"
+#~ msgstr "छाडिएको"
+
+#~ msgid "Type: %1"
+#~ msgstr "प्रकार: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(बेनामी)"
+
+#~ msgid "Spectator"
+#~ msgstr "दर्शक"
+
+#~ msgid "Statistics..."
+#~ msgstr "तथ्याङ्क..."
+
+#~ msgid "Sit down here"
+#~ msgstr "यहाँ बस्नुहोस्"
+
+#~ msgid "Add a bot here"
+#~ msgstr "यहाँ बट थप्नुहोस्"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "बट बुट गर्नुहोस् र सिट खोल्नुहोस्"
+
+#~ msgid "Stand up"
+#~ msgstr "उभिनुहोस्"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "बुट खेलाडी र खुला सिट"
+
+#~ msgid "Host: %1"
+#~ msgstr "होस्ट: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "वास्तवीक नाम: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "आदम, एलेक्स, एन्ड्रेस, एन्ड्रि, बार्ट,बेन, बेर्न्ड, बिल, क्रिस, चक, डानियल, डन, डुनकान, "
+#~ "येड, इमिली, इरिक, ग्यारे, जर्ज, ह्यारि, लान, जिन, जेफ, जान, काई, केथ, केन, किर्क, "
+#~ "मार्क, माइक, नेइल, पाउल, रिक, रोबर्ट, साम, सेअन, थोमस, टीम, वाल्टर"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "केडीई खेल पपअप वस्तु परीक्षण"
+
+#, fuzzy
+#~| msgid "Show Rich text"
+#~ msgid "Show rich text"
+#~ msgstr "पुरा पाठ देखाउनुहोस्"
+
+#~ msgid "Message timeout:"
+#~ msgstr "म्याद समाप्त सन्देश:"
+
+#~ msgid "Opacity:"
+#~ msgstr "अस्पष्टता:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "प्रतिमा परिवर्तन गर्नुहोस्..."
+
+#~ msgid "Text color:"
+#~ msgstr "पाठ रङ:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "पृष्ठभूमि रङ:"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "माथि-दायाँ पपअप"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "माथि-दायाँ पपअप"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "तल-दायाँ पपअप"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "तल-दायाँ पपअप"
+
+#, fuzzy
+#~| msgid "Popup Top-Left"
+#~ msgid "Popup Center"
+#~ msgstr "माथि-दायाँ पपअप"
+
+#, fuzzy
+#~| msgid "Force instant hide"
+#~ msgid "Force Instant Hide"
+#~ msgstr "दृष्टान्त लुकाउन दवाव दिनुहोस्"
+
+#, fuzzy
+#~| msgid "Force animated hide"
+#~ msgid "Force Animated Hide"
+#~ msgstr "एनिमेसन गरेकोलाई लुकाउन दवाव दिनुहोस्"
+
+#~ msgid "msec"
+#~ msgstr "msec"
+
+#, fuzzy
+#~| msgid "Random frontside"
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "अनियमित अगाडिको भाग"
+
+#, fuzzy
+#~| msgid "Theme Details"
+#~ msgid "Details"
+#~ msgstr "विषयवस्तु विवरण"
+
+#~ msgid "Choose Backside"
+#~ msgstr "पछाडिको भाग रोज्नुहोस्"
+
+#~ msgid "empty"
+#~ msgstr "खाली"
+
+#~ msgid "Random backside"
+#~ msgstr "अनियमित पछाडिको भाग"
+
+#~ msgid "Use global backside"
+#~ msgstr "विश्वव्यापी पछाडिको भाग प्रयोग गर्नुहोस्"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "पछाडिको भाग विश्वव्यापी बनाउनुहोस्"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "अगाडिको भाग रोज्नुहोस्"
+
+#~ msgid "Use global frontside"
+#~ msgstr "विश्वव्यापी अगाडिको भाग प्रयोग गर्नुहोस्"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "अगाडिको भाग विश्वव्यापी बनाउनुहोस्"
+
+#~ msgid "Resize Cards"
+#~ msgstr "ताश रिसाइज गर्नुहोस्"
+
+#~ msgid "Default Size"
+#~ msgstr "पूर्वनिर्धारित साइज"
+
+#~ msgid "Preview:"
+#~ msgstr "पूर्वावलोकन:"
+
+#~ msgid "This will be the end of the current game!"
+#~ msgstr "यो हालको खेलको अन्त्य हुनेछ!"
+
+#~ msgid "Form"
+#~ msgstr "यसबाट"

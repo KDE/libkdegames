@@ -1,0 +1,1391 @@
+# translation of libkdegames.po to Greek
+# translation of libkdegames.po to
+#
+# Spiros Georgaras <sng@hellug.gr>, 2005, 2006, 2007.
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2006, 2007, 2008, 2009.
+# Spiros Georgaras <sngeorgaras@otenet.gr>, 2008.
+# Antonis Geralis <capoiosct@gmail.com>, 2011, 2012.
+# Dimitrios Glentadakis <dglent@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2012-07-06 23:10+0300\n"
+"Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-doc@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Ξαναδοκιμάστε"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Αδυναμία πρόσβασης στο αρχείο υψηλής βαθμολογίας. Πιθανότατα γίνεται εγγραφή "
+"από άλλο χρήστη αυτήν τη στιγμή."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Υψηλή βαθμολογία"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Όνομα"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Επίπεδο"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Βαθμός"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Χρόνος"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Κατάταξη"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Απομνημόνευση"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Αγνόηση"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Απομνημόνευση αυτής της υψηλής βαθμολογίας"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Αγνόηση αυτής της υψηλής βαθμολογίας"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Περίφημα!\n"
+"Έχεις νέα υψηλή βαθμολογία!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Πολύ καλά!\n"
+"Μπήκες στην υψηλή βαθμολογία!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Γελοίο"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Πολύ εύκολο"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Εύκολο"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Μεσαίο"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Δύσκολο"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Πολύ δύσκολο"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Υπερβολικά δύσκολο"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Αδύνατο"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Η τροποποίηση του επιπέδου δυσκολίας θα τερματίσει το τρέχον παιχνίδι!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Τροποποίηση του επιπέδου δυσκολίας"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Δυσκολία"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Ορίστε το επίπεδο δυσκολίας"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Ορίστε το επίπεδο δυσκολίας του παιχνιδιού."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Λήψη νέων θεμάτων..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Επιλογή θέματος"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[Χωρίς όνομα]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "από τον/την %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Νέο"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Έναρξη ενός νέου παιχνιδιού."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Έναρξη ενός νέου παιχνιδιού"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Φόρτωση..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Άνοιγμα ενός αποθηκευμένου παιχνιδιού..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Φόρτωση &προσφάτου"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Άνοιγμα ενός πρόσφατα αποθηκευμένου παιχνιδιού..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Επανεκκίνηση &παιχνιδιού"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Επανεκκίνηση του παιχνιδιού"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "Απο&θήκευση"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Αποθήκευση του τρέχοντος παιχνιδιού"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Αποθήκευση &ως..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Αποθήκευση του τρέχοντος παιχνιδιού σε άλλο αρχείο"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Τερματισμός παιχνιδιού"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Τερματισμός του τρέχοντος παιχνιδιού"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "&Παύση"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Παύση του παιχνιδιού"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Εμφάνιση &υψηλών βαθμολογιών"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Εμφάνιση υψηλών βαθμολογιών"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Καθαρισμός υψηλών βαθμολογιών"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Καθαρισμός υψηλών βαθμολογιών"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Εμφάνιση στατιστικών"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Εμφάνιση στατιστικών"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Καθαρισμός στατιστικών"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Διαγραφή στατιστικών όλων των εποχών."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Εκτύπωση..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "Έ&ξοδος"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Έξοδος από το πρόγραμμα"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Επανάληψη"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Επανάληψη της τελευταίας κίνησης"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "Αναί&ρεση"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Αναίρεση της τελευταίας κίνησης"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Επαναφο&ρά"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Επανάληψη της τελευταίας κίνησης"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Ρίξιμο ζαριών"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Ρίξιμο ζαριών"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Τέλος γύρου"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Υπόδειξη"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Προσφορά μιας βοήθειας"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "Πα&ρουσίαση"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Παίξιμο παρουσίασης"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Λύση"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Επίλυση του παιχνιδιού"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Επιλογή &τύπου παιχνιδιού"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Ρύθμιση &καρτών..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Ρύθμιση υ&ψηλών βαθμολογιών..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Αποστολή προς όλους τους παίκτες"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Αποστολή προς %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Μέγιστοι παίκτες"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Ελάχιστοι παίκτες"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Κατάσταση παιχνιδιού"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Παίκτης %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Άγνωστος"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Αποστολή προς την ομάδα μου (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Μη ταιριαστό Cookie!\n"
+"Αναμενόμενο Cookie: %1\n"
+"Ληφθέν Cookie: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"Η έκδοση του KGame δεν ταιριάζει!\n"
+"Αναμενόμενη έκδοση: %1\n"
+"Έκδοση που λήφθηκε: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Άγνωστος κωδικός σφάλματος %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Ρύθμιση παιχνιδιού"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Ρύθμιση συνέχειας παιχνιδιού"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Φόρτωση παιχνιδιού"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Το παιχνίδι-πελάτης συνδέθηκε"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Έγινε ρύθμιση του παιχνιδιού"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Συγχρονισμός τυχαίου"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Αποσύνδεση"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Ιδιότητες του παίκτη"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Ιδιότητες του παιχνιδιού"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Προσθήκη παίκτη"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Διαγραφή παίκτη"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Ενεργοποίηση παίκτη"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Απενεργοποίηση παίκτη"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Ταυτότητα γύρου"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Μήνυμα σφάλματος"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Είσοδος παίκτη"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Προστέθηκε ένα IO"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Αναζήτηση διεργασίας"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Ταυτότητα του παίκτη"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Ανώνυμη ταυτότητα: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 μη καταχωρημένο"
+msgstr[1] "%1 μη καταχωρημένα"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Μηδενικός δείκτης"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Αληθές"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Ψευδές"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "Ταυτότητα παίκτη"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Ομάδα"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "προκαθορισμένο"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "Ασύγχρονη είσοδος"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "Η σειρά μου"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Δυσκολία"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Προσαρμοσμένο"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Επιλέξτε τη <b>δυσκολία</b> του παιχνιδιού.<br />Αν τροποποιήσετε το επίπεδο "
+"δυσκολίας ενώ κάποιο παιχνίδι βρίσκεται σε εξέλιξη, θα πρέπει να το "
+"ακυρώσετε και να εκκινήσετε νέο παιχνίδι."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Επιλέξτε τη <b>δυσκολία</b> του παιχνιδιού.<br />Μπορείτε να τροποποιήσετε "
+"το επίπεδο δυσκολίας ενώ κάποιο παιχνίδι βρίσκεται σε εξέλιξη."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Λήψη νέων θεμάτων..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Λεπτομέρειες θέματος"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Επαφή:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Περιγραφή:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Συγγραφέας:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Μέσος όρος βαθμολογίας"
+
+#~ msgid "Best Score"
+#~ msgstr "Καλύτερη βαθμολογία"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Χρόνος που πέρασε"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Καλύτερες &βαθμολογίες"
+
+#~ msgid "&Players"
+#~ msgstr "&Παίκτες"
+
+#~ msgid "Statistics"
+#~ msgstr "Στατιστικά"
+
+#~ msgid "Histogram"
+#~ msgstr "Ιστόγραμμα"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Προβολή υψηλών βαθμολογιών παγκοσμίως"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Προβολή παικτών παγκοσμίως"
+
+#~ msgid "Highscores"
+#~ msgstr "Υψηλή βαθμολογία"
+
+#~ msgid "Overwrite"
+#~ msgstr "Αντικατάσταση"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Το αρχείο υπάρχει ήδη. Να αντικατασταθεί;"
+
+#~ msgid "Export"
+#~ msgstr "Εξαγωγή"
+
+#~ msgid "Winner"
+#~ msgstr "Νικητής"
+
+#~ msgid "Won Games"
+#~ msgstr "Κερδισμένα παιχνίδια"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Ρύθμιση υψηλής βαθμολογίας"
+
+#~ msgid "Main"
+#~ msgstr "Κύριο"
+
+#~ msgid "Nickname:"
+#~ msgstr "Ψευδώνυμο:"
+
+#~ msgid "Comment:"
+#~ msgstr "Σχόλιο:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Παγκόσμιες μέγιστες βαθμολογίες ενεργοποιήθηκαν"
+
+#~ msgid "Advanced"
+#~ msgstr "Για προχωρημένους"
+
+#~ msgid "Registration Data"
+#~ msgstr "Δεδομένα καταχώρισης"
+
+#~ msgid "Key:"
+#~ msgstr "Πλήκτρο:"
+
+#~ msgid "Remove"
+#~ msgstr "Αφαίρεση"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Αυτή η ενέργεια θα διαγράψει μόνιμα το κλειδί καταχώρησής σας. Δεν θα "
+#~ "είστε πλέον σε θέση να χρησιμοποιήστε το ψευδώνυμό σας."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Παρακαλώ επιλέξτε ένα μη κενό ψευδώνυμο."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Αυτό το ψευδώνυμο υπάρχει ήδη. Παρακαλώ επιλέξτε ένα άλλο"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Εισάγετε το ψευδώνυμό σας"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Συγχαρητήρια, έχεις κερδίσει!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Εισάγετε το ψευδώνυμό σας:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Μη ρωτήσεις ξανά."
+
+#~ msgid "anonymous"
+#~ msgstr "ανώνυμο"
+
+#~ msgid "Games Count"
+#~ msgstr "Αριθμός παιχνιδιών"
+
+#~ msgid "Comment"
+#~ msgstr "Σχόλιο"
+
+#~ msgid "Undefined error."
+#~ msgstr "Ακαθόριστο σφάλμα."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Λείπει παράμετρος(οι)."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Μη έγκυρη παράμετρος(οι)."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Αδύνατη η σύνδεση στον εξυπηρετητή MySQL."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Αδύνατη η επιλογή της βάσης δεδομένων."
+
+#~ msgid "Error on database query."
+#~ msgstr "Σφάλμα στην αναζήτηση της βάσης δεδομένων."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Σφάλμα στην εισαγωγή της βάσης δεδομένων."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Το ψευδώνυμο είναι ήδη καταχωρημένο."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Το ψευδώνυμο δεν είναι καταχωρημένο."
+
+#~ msgid "Invalid key."
+#~ msgstr "Μη έγκυρο κλειδί."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Μη έγκυρο κλειδί καταχώρισης."
+
+#~ msgid "Invalid level."
+#~ msgstr "Μη έγκυρο επίπεδο."
+
+#~ msgid "Invalid score."
+#~ msgstr "Μη έγκυρη βαθμολογία."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Αδύνατη η επικοινωνία με τον παγκόσμιο εξυπηρετητή υψηλών βαθμών"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Διεύθυνση URL του εξυπηρετητή: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Αδύνατο το άνοιγμα προσωρινού αρχείου."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Μήνυμα από εξυπηρετητή παγκόσμιων υψηλών βαθμολογιών"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr ""
+#~ "Μη έγκυρη απάντηση από τον παγκόσμιο εξυπηρετητή υψηλών βαθμολογιών."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Ακατέργαστο μήνυμα: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Άκυρη απάντηση από τον παγκόσμιο εξυπηρετητή υψηλών βαθμολογιών "
+#~ "(αντικείμενο που λείπει: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Επιτυχία"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Βαθμοί πολλαπλών παικτών"
+
+#~ msgid "No game played."
+#~ msgstr "Κανένα παιχνίδι δεν παίχτηκε."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Βαθμοί του τελευταίου παιχνιδιού:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Βαθμοί για τα τελευταία %1 παιχνίδια:"
+
+#~ msgid "all"
+#~ msgstr "όλα"
+
+#~ msgid "Select player:"
+#~ msgstr "Επίλεξε παίκτη:"
+
+#~ msgid "Total:"
+#~ msgstr "Σύνολο:"
+
+#~ msgid "Won:"
+#~ msgstr "Κέρδισε:"
+
+#~ msgid "Lost:"
+#~ msgstr "Ήττες:"
+
+#~ msgid "Draw:"
+#~ msgstr "Παραιτήσεις:"
+
+#~ msgid "Current:"
+#~ msgstr "Τρέχον:"
+
+#~ msgid "Max won:"
+#~ msgstr "Μέγιστες νίκες:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Μέγιστες ήττες:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Αριθμός παιχνιδιών"
+
+#~ msgid "Trends"
+#~ msgstr "Τάσεις"
+
+#~ msgid "From"
+#~ msgstr "Από"
+
+#~ msgid "To"
+#~ msgstr "Προς"
+
+#~ msgid "Count"
+#~ msgstr "Μέτρηση"
+
+#~ msgid "Percent"
+#~ msgstr "Ποσοστό"
+
+#~ msgid "Configure..."
+#~ msgstr "Ρύθμιση..."
+
+#~ msgid "Export..."
+#~ msgstr "Εξαγωγή..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Ρύθμιση συνομιλίας"
+
+#~ msgid "Name Font..."
+#~ msgstr "Γραμματοσειρά ονόματος..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Γραμματοσειρά κειμένου..."
+
+#~ msgid "Player: "
+#~ msgstr "Παίκτης: "
+
+#~ msgid "This is a player message"
+#~ msgstr "Αυτό είναι ένα μήνυμα παίκτη"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr ""
+#~ "Μηνύματα του συστήματος - Τα μηνύματα αποστέλλονται κατ' ευθείαν από το "
+#~ "παιχνίδι"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Παιχνίδι: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Αυτό είναι ένα μήνυμα του συστήματος"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Μέγιστος αριθμός μηνυμάτων (-1=απεριόριστο):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Δημιουργία δικτυακού παιχνιδιού"
+
+#~ msgid "Join a network game"
+#~ msgstr "Συμμετοχή σε δικτυακό παιχνίδι"
+
+#~ msgid "Game name:"
+#~ msgstr "Όνομα παιχνιδιού:"
+
+#~ msgid "Network games:"
+#~ msgstr "Δικτυακά παιχνίδια:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Θύρα σύνδεσης:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Υπολογιστής για σύνδεση:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Έναρξη Δικτύου"
+
+#~ msgid "Network Game"
+#~ msgstr "Δικτυακό παιχνίδι"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame διάλογος αποσφαλμάτωσης"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Αποσφαλμάτωση του &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Ενημέρωση"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "Δείκτης KGame "
+
+#~ msgid "Game ID"
+#~ msgstr "Ταυτότητα παιχνιδιού"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Αρχείο Cookie του παιχνιδιού"
+
+#~ msgid "Is Master"
+#~ msgstr "Είναι κυρίαρχος"
+
+#~ msgid "Is Admin"
+#~ msgstr "Είναι διαχειριστής"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Προσφέρει συνδέσεις"
+
+#~ msgid "Game Status"
+#~ msgstr "Κατάσταση παιχνιδιού"
+
+#~ msgid "Game is Running"
+#~ msgstr "Το παιχνίδι είναι ενεργό"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Μέγιστοι παίκτες"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Ελάχιστοι παίκτες"
+
+#~ msgid "Players"
+#~ msgstr "Παίκτες"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Αποσφαλμάτωση &παικτών"
+
+#~ msgid "Available Players"
+#~ msgstr "Διαθέσιμοι παίκτες"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Δείκτης του παίκτη"
+
+#~ msgid "Player Name"
+#~ msgstr "Όνομα του παίκτη"
+
+#~ msgid "Player Group"
+#~ msgstr "Ομάδα του παίκτη"
+
+#~ msgid "Player User ID"
+#~ msgstr "Ταυτότητα παίκτη"
+
+#~ msgid "My Turn"
+#~ msgstr "Η σειρά μου"
+
+#~ msgid "Async Input"
+#~ msgstr "Ασύγχρονη είσοδος"
+
+#~ msgid "KGame Address"
+#~ msgstr "Διεύθυνση του KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Ο παίκτης είναι εικονικός"
+
+#~ msgid "Player is Active"
+#~ msgstr "Ο παίκτης είναι ενεργός"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Προτεραιότητα δικτύου"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Αποσφαλμάτωση &μηνυμάτων"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Απόκρυψη ταυτοτήτων:"
+
+#~ msgid "Clean"
+#~ msgstr "Καθαρισμός"
+
+#~ msgid "Dirty"
+#~ msgstr "Βρώμικος"
+
+#~ msgid "Local"
+#~ msgstr "Τοπικό"
+
+#~ msgid "Undefined"
+#~ msgstr "Απροσδιόριστο"
+
+#~ msgid "&Chat"
+#~ msgstr "&Συζήτηση"
+
+#~ msgid "C&onnections"
+#~ msgstr "&Συνδέσεις"
+
+#~ msgid "&Game"
+#~ msgstr "Παιχ&νίδι"
+
+#~ msgid "&Network"
+#~ msgstr "&Δίκτυο"
+
+#~ msgid "&Message Server"
+#~ msgstr "Ε&ξυπηρετητής μηνυμάτων"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Ρύθμιση δικτύου"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Αδύνατη η σύνδεση στο δίκτυο"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Κατάσταση δικτύου: Κανένα δίκτυο"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Κατάσταση δικτύου: Είσαι κυρίαρχος"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Κατάσταση δικτύου: Είσαι συνδεδεμένος"
+
+#~ msgid "Your name:"
+#~ msgstr "Το όνομα σας:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Μέγιστος αριθμός πελατών"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Μέγιστος αριθμός πελατών (-1=απεριόριστος):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Τροποποίηση μέγιστου αριθμού πελατών"
+
+#~ msgid "Change Admin"
+#~ msgstr "Τροποποίηση διαχειριστή"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Διαγραφή του πελάτη με όλους τους παίκτες"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Μόνο ο διαχειριστής μπορεί να ρυθμίσει τον εξυπηρετητή μηνυμάτων!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Δεν είστε ιδιοκτήτης του διακομιστή μηνυμάτων"
+
+#~ msgid "Chat"
+#~ msgstr "Συζήτηση"
+
+#~ msgid "Connected Players"
+#~ msgstr "Συνδεδεμένοι παίκτες"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Επιθυμείτε τον αποκλεισμό του παίκτη \"%1\" από το παιχνίδι;"
+
+#~ msgid "Ban Player"
+#~ msgstr "Αποκλεισμός παίκτη"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Μη αποκλεισμός"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Η σύνδεση με τον εξυπηρετητή έχει χαθεί!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Η σύνδεση με τον πελάτη χάθηκε!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Ελήφθη ένα σφάλμα δικτύου!\n"
+#~ "Αριθμός σφάλματος: %1\n"
+#~ "Μήνυμα σφάλματος: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Αδύνατη η δημιουργία σύνδεσης."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Αδύνατη η δημιουργία συνδέσεων.\n"
+#~ "Το μήνυμα σφάλματος ήταν:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Σφάλμα"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "Επιλογή τράπουλας"
+
+#~ msgid "unnamed"
+#~ msgstr "ανώνυμο"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Πρόσοψη"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Πίσω πλευρά"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Προεπισκόπηση\n"
+#~ "πρόσοψης"
+
+#~ msgid "Deck Name"
+#~ msgstr "Όνομα τράπουλας"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Προεπισκόπηση\n"
+#~ "πίσω όψης"
+
+#~ msgid "Deck description."
+#~ msgstr "Περιγραφή τράπουλας."
+
+#~ msgid "Display:"
+#~ msgstr "Εμφάνιση:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Εμπλεκόμενοι παίκτες και μηχανές"
+
+#~ msgid "Spectators"
+#~ msgstr "Θεατές"
+
+#~ msgid "Close"
+#~ msgstr "Κλείσιμο"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Παίκτες, μηχανές και θεατές"
+
+#~ msgid "Action..."
+#~ msgstr "Ενέργεια..."
+
+#~ msgid "Player"
+#~ msgstr "Παίκτης"
+
+#~ msgid "Open"
+#~ msgstr "Άνοιγμα"
+
+#~ msgid "Reserved"
+#~ msgstr "Κρατημένο"
+
+#~ msgid "AI bot"
+#~ msgstr "Μηχανή τεχνητής νοημοσύνης"
+
+#~ msgid "Abandoned"
+#~ msgstr "Εγκατάλειψη"
+
+#~ msgid "Type: %1"
+#~ msgstr "Τύπος: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(ανώνυμο)"
+
+#~ msgid "Spectator"
+#~ msgstr "Θεατής"
+
+#~ msgid "Statistics..."
+#~ msgstr "Στατιστικά..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Καθίστε εδώ"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Προσθέστε μια μηχανή εδώ"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Έξοδος μηχανής και άνοιγμα θέσης"
+
+#~ msgid "Stand up"
+#~ msgstr "Σηκωθείτε"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Έξοδος παίκτη και άνοιγμα θέσης"
+
+#~ msgid "Host: %1"
+#~ msgstr "Υπολογιστής: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Πραγματικό όνομα: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Αδάμ Αλέξης Ανδριάνα Βασίλης Χριστίνα Αιμιλία Γρηγόρης Χάρης Ιωάννα Καίτη "
+#~ "Μάρκος Μιχάλης Παύλος Μαρία Σοφία Θωμάς Δήμητρα"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#, fuzzy
+#~| msgid "Show Rich text"
+#~ msgid "Show rich text"
+#~ msgstr "Εμφάνιση εμπλουτισμένου κειμένου"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Χρονικό όριο μηνύματος:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Αδιαφάνεια:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Τροποποίηση εικονιδίου..."
+
+#~ msgid "Text color:"
+#~ msgstr "Χρώμα κειμένου:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Χρώμα φόντου:"
+
+#, fuzzy
+#~| msgid "Replace mode"
+#~ msgid "Replace Mode"
+#~ msgstr "Λειτουργία αντικατάστασης"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "Διατήρηση προηγουμένου"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "Αντικατάσταση προηγουμένου"
+
+#~ msgid "Corners:"
+#~ msgstr "Γωνίες:"
+
+#~ msgid "Square"
+#~ msgstr "Τετράγωνο"
+
+#~ msgid "Sharp"
+#~ msgstr "Αιχμηρό"
+
+#~ msgid "Soft"
+#~ msgstr "Ομαλό"
+
+#~ msgid "Softest"
+#~ msgstr "Ομαλότερο"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Ανάδυση πάνω αριστερά"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Ανάδυση πάνω δεξιά"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Ανάδυση κάτω αριστερά"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Ανάδυση κάτω δεξιά"
+
+#~ msgid "Popup Center"
+#~ msgstr "Ανάδυση στο κέντρο"
+
+#, fuzzy
+#~| msgid "Force instant hide"
+#~ msgid "Force Instant Hide"
+#~ msgstr "Εξαναγκασμός ακαριαίας απόκρυψης"
+
+#, fuzzy
+#~| msgid "Force animated hide"
+#~ msgid "Force Animated Hide"
+#~ msgstr "Εξαναγκασμός κινούμενης απόκρυψης"
+
+#~ msgid "msec"
+#~ msgstr "msec"
+
+#~ msgid "KDE card deck"
+#~ msgstr "κάρτες του KDE"
+
+#~ msgid "Filter"
+#~ msgstr "Φίλτρο"
+
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Κλείδωμα πίσω όψης στην πρόσοψη"
+
+#~ msgid "Show old style decks"
+#~ msgstr "Εμφάνιση καρτών παλιού στυλ"
+
+#~ msgid "Details"
+#~ msgstr "Λεπτομέρειες"

@@ -1,0 +1,1377 @@
+# translation of libkdegames.po to Estonian
+# Copyright (C) 2002, 2007 Free Software Foundation, Inc.
+#
+# Anti Veeranna <duke@linux.ee>, 2002.
+# Marek Laane <bald@smail.ee>, 2007-2008, 2009, 2010, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2012-05-21 16:05+0300\n"
+"Last-Translator: Marek Laane <bald@smail.ee>\n"
+"Language-Team: Estonian <kde-et@linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Proovi uuesti"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Rekordite failile ei õnnestunud ligi pääseda. Võib-olla kirjutab mõni teine "
+"kasutaja sinna parajasti oma edusamme."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Rekordid"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Nimi"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Kuupäev"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Tase"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Tulemus"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Aeg"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Koht"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Jäta meelde"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Unusta"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Jäta see rekord meelde"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Unusta see rekord"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Suurepärane!\n"
+"Tegid uue rekordi!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Hästi tehtud!\n"
+"Pääsesid edetabelisse! "
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Naeruväärselt kerge"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Väga kerge"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Kerge"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Keskmine"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Raske"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Väga raske"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Äärmiselt raske"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Võimatu"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Raskusastme muutmine lõpetab aktiivse mängu!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Muuda raskusastet"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Raskusaste"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Määra raskusaste"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Mängu raskusastme määramine."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Hangi uusi teemasid..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Teema valimine"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[nimetu]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "(autor: %1)"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Uus"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Uue mängu käivitamine."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Käivita uus mäng"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Ava..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Salvestatud mängu avamine..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Ava &viimati kasutatud"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Viimati salvestatud mängu avamine..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Käivita män&g uuesti"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Käivita mäng uuesti"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Salvesta"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Salvesta aktiivne mäng"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "S&alvesta kui..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Salvesta aktiivne mäng teise faili"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "Lõp&eta mäng "
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Lõpeta aktiivne mäng"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "&Paus"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Seiska mäng"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Näita &rekordeid"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Näita rekordeid"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Puhasta rekordid"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Puhasta rekordid"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Näita statistikat"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Näita statistikat"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Puhasta statistika"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Kogu statistika kustutamine."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Trüki..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Välju"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Välju programmist"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Korda"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Korda viimast käiku"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Võta tagasi"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Võta viimane käik tagasi"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Tee uuest&i"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Tee viimane käik uuesti"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Veereta täringuid"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Veereta täringuid"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Käigu lõpp"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "Vih&je"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Näita vihjet"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "De&mo"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Näidismäng"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Lahenda"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Lahenda mäng"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Mängu &tüüp"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "&Kaardipaki välimus..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "&Rekordite seadistamine..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Saada kõigile mängijatele"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Saada mängijale %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Maks. mängijaid"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Min. mängijaid"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Mängu staatus"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Mängija %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Tundmatu"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Saada minu grupile (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Küpsise konflikt!\n"
+"Oodati: %1\n"
+"Saadi: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"KGame versioonide mittesobivus!\n"
+"Oodati versiooni: %1\n"
+"Tegelik versioon oli: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Tundmatu veakood: %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Seadista mäng"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Seadista mängu jätkamine"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Laadi mäng"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Klientmäng ühendus"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Mängu seadistamine lõpetatud"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Sünkroniseeri juhuslikkus"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Katkesta ühendus"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Mängija omadus"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Mängu omadus"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Lisa mängija"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Eemalda mängija"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Aktiveeri mängija"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Deaktiveeri mängija"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id Käik"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Veateade"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Mängija sisestus"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "IO lisati"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Protsessi päring"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Mängija ID"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1: (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Nimetu - ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 registreerimata"
+msgstr[1] "%1 registreerimata"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL pointer"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Tõene"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Väär"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Tundmatu"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "MängijaID"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grupp"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "vaikimisi"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsyncSisend"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "minuKäik"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Raskusaste"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Kohandatud"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Vali mängu <b>raskusaste</b>.<br />Kui muudad raskusastet mängu ajal, tuleb "
+"see lõpetada ja alustada uut mängu."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr "Vali mängu <b>raskusaste</b>.<br />Seda võib teha ka mängu ajal."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Hangi uusi teemasid..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Eelvaatlus"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Teema üksikasjad"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Kontakt:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Kirjeldus:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Autor:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Keskmine skoor"
+
+#~ msgid "Best Score"
+#~ msgstr "Parim skoor"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Kulunud aeg"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Parimad punkti&summad"
+
+#~ msgid "&Players"
+#~ msgstr "&Mängijad"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistika"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogramm"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Globaalsed rekordid"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Globaalne mängijate nimekiri"
+
+#~ msgid "Highscores"
+#~ msgstr "Rekordid"
+
+#~ msgid "Overwrite"
+#~ msgstr "Kirjuta üle"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Fail on juba olemas. Kas kirjutada see üle?"
+
+#~ msgid "Export"
+#~ msgstr "Eksport"
+
+#~ msgid "Winner"
+#~ msgstr "Võitja"
+
+#~ msgid "Won Games"
+#~ msgstr "Võidetud mängud"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Rekordite seadistamine"
+
+#~ msgid "Main"
+#~ msgstr "Üldine"
+
+#~ msgid "Nickname:"
+#~ msgstr "Hüüdnimi:"
+
+#~ msgid "Comment:"
+#~ msgstr "Kommentaar:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Globaalsete rekordite lubamine"
+
+#~ msgid "Advanced"
+#~ msgstr "Muud"
+
+#~ msgid "Registration Data"
+#~ msgstr "Registratsiooniinfo"
+
+#~ msgid "Key:"
+#~ msgstr "Võti:"
+
+#~ msgid "Remove"
+#~ msgstr "Eemalda"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Kui sa seda teed, siis kustutakse sinu registreerimisvõti. Praegu "
+#~ "registreeritud nime ei saa enam kasutada."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Palun sisesta kasutajanimi."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Kasutajanimi on juba olemas. Palun vali uus"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Sisesta kasutajanimi"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Õnnitlused, sa võitsid!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Sinu nimi:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Ära enam küsi."
+
+#~ msgid "anonymous"
+#~ msgstr "anonüümne"
+
+#~ msgid "Games Count"
+#~ msgstr "Mängude arv"
+
+#~ msgid "Comment"
+#~ msgstr "Kommentaar"
+
+#~ msgid "Undefined error."
+#~ msgstr "Määramata viga."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Argument(e) on puudu."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Vigased argumendid."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Ei saanud MySQL serveriga ühendust."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Ei saanud andmebaasiga ühendust."
+
+#~ msgid "Error on database query."
+#~ msgstr "Viga andmebaasipäringu sooritamisel"
+
+#~ msgid "Error on database insert."
+#~ msgstr "Viga andmebaasi kirjutamisel."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Kasutajanimi on juba registreeritud."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Kasutajanimi on registreerimata."
+
+#~ msgid "Invalid key."
+#~ msgstr "Lubamatu klahv."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Lubamatu salvestamisnupp."
+
+#~ msgid "Invalid level."
+#~ msgstr "Lubamatu tase."
+
+#~ msgid "Invalid score."
+#~ msgstr "Lubamatu punktisumma."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Ei saanud globaalse rekordiserveriga ühendust."
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Serveri URL: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Ei saanud ajutist faili avada."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Teade globaalselt rekordiserverilt"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Vigane vastus globaalselt rekordiserverilt."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Teate sisu: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr "Vigane vastus globaalselt rekordiserverilt (element %1 puudub)."
+
+#~ msgid "Success"
+#~ msgstr "Õnnestus"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Võrgumängu punktid"
+
+#~ msgid "No game played."
+#~ msgstr "Pole ühtki mängu mängitud."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Viimase mängu punktisumma:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Viimase %1 mängu punktisumma:"
+
+#~ msgid "all"
+#~ msgstr "kõik"
+
+#~ msgid "Select player:"
+#~ msgstr "Vali mängija:"
+
+#~ msgid "Total:"
+#~ msgstr "Kokku:"
+
+#~ msgid "Won:"
+#~ msgstr "Võidetud:"
+
+#~ msgid "Lost:"
+#~ msgstr "Kaotatud:"
+
+#~ msgid "Draw:"
+#~ msgstr "Viike:"
+
+#~ msgid "Current:"
+#~ msgstr "Praegu:"
+
+#~ msgid "Max won:"
+#~ msgstr "Maks. võidetud:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Maks. kaotatud:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Mängude arv"
+
+#~ msgid "Trends"
+#~ msgstr "Trendid"
+
+#~ msgid "From"
+#~ msgstr "Kellelt"
+
+#~ msgid "To"
+#~ msgstr "Kellele"
+
+#~ msgid "Count"
+#~ msgstr "Arv"
+
+#~ msgid "Percent"
+#~ msgstr "Protsent"
+
+#~ msgid "Configure..."
+#~ msgstr "Seadista..."
+
+#~ msgid "Export..."
+#~ msgstr "Ekspordi..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Vestluse seadistamine"
+
+#~ msgid "Name Font..."
+#~ msgstr "Nime font..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Teksti font..."
+
+#~ msgid "Player: "
+#~ msgstr "Mängija:"
+
+#~ msgid "This is a player message"
+#~ msgstr "Mängija teade"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Süsteemi teated - teated, mis on saadetud mängust."
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Mäng:"
+
+#~ msgid "This is a system message"
+#~ msgstr "Süsteemi teade"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Maks. teadete arv (-1 = piiramatu):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Tee võrgumäng"
+
+#~ msgid "Join a network game"
+#~ msgstr "Ühine võrgumänguga"
+
+#~ msgid "Game name:"
+#~ msgstr "Mängu nimi:"
+
+#~ msgid "Network games:"
+#~ msgstr "Võrgumängud:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port, kuhu ühenduda:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Host, kuhu ühenduda:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Käivita võrk"
+
+#~ msgid "Network Game"
+#~ msgstr "Võrgumäng"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame silumisdialog"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "&KGame silumine"
+
+#~ msgid "Update"
+#~ msgstr "Uuendus"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "KGame Pointer"
+
+#~ msgid "Game ID"
+#~ msgstr "Mängu ID"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Mängu küpsis"
+
+#~ msgid "Is Master"
+#~ msgstr "on pealik"
+
+#~ msgid "Is Admin"
+#~ msgstr "on administraator"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "ootab vastaseid"
+
+#~ msgid "Game Status"
+#~ msgstr "Mängu staatus"
+
+#~ msgid "Game is Running"
+#~ msgstr "Mäng käib"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Maks. mängijate arv"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Min. mängijate arv"
+
+#~ msgid "Players"
+#~ msgstr "Mängijad"
+
+#~ msgid "Debug &Players"
+#~ msgstr "&Mängijate silumine"
+
+#~ msgid "Available Players"
+#~ msgstr "Vabad mängijad"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Mängija Pointer"
+
+#~ msgid "Player Name"
+#~ msgstr "Mängija nimi"
+
+#~ msgid "Player Group"
+#~ msgstr "Mängija grupp"
+
+#~ msgid "Player User ID"
+#~ msgstr "Mängija kasutaja ID"
+
+#~ msgid "My Turn"
+#~ msgstr "Minu käik"
+
+#~ msgid "Async Input"
+#~ msgstr "Asünkroonne sisend"
+
+#~ msgid "KGame Address"
+#~ msgstr "KMängu aadress"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Mängija on virtuaalne"
+
+#~ msgid "Player is Active"
+#~ msgstr "Mängija on aktiivne"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Võrgu prioriteet"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "&Teadete silumine"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Ära näita IDsid:"
+
+#~ msgid "Clean"
+#~ msgstr "Puhas"
+
+#~ msgid "Dirty"
+#~ msgstr "Räpane"
+
+#~ msgid "Local"
+#~ msgstr "Lokaalne"
+
+#~ msgid "Undefined"
+#~ msgstr "Defineerimata"
+
+#~ msgid "&Chat"
+#~ msgstr "&Vestle"
+
+#~ msgid "C&onnections"
+#~ msgstr "&Ühendusi"
+
+#~ msgid "&Game"
+#~ msgstr "&Mäng"
+
+#~ msgid "&Network"
+#~ msgstr "&Võrk"
+
+#~ msgid "&Message Server"
+#~ msgstr "&Teadeteserver"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Võrgumängu seadistused:"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Ei saa võrguga ühendust"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Võrgu olek: võrku pole"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Võrgustaatus: Sa oled PEALIK"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Võrgustaatus: oled ühenduses"
+
+#~ msgid "Your name:"
+#~ msgstr "Sinu nimi:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Maks. klientide arv"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Maks. klientide arv (-1 = piiramatu)"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Muuda maks. klientide arvu"
+
+#~ msgid "Change Admin"
+#~ msgstr "Muuda administraatorit"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Eemalda klient koos kõigi mängijatega"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Ainult administraator saab teadeteserverit seadistada!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Sul ei ole teadeteserverit"
+
+#~ msgid "Chat"
+#~ msgstr "Vestle"
+
+#~ msgid "Connected Players"
+#~ msgstr "Ühendatud mängijad"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Kas soovid mängija \"%1\" pagendada?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Pagenda mängija"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Ära pagenda"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Ühendus serveriga katkes!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Ühendus kliendiga katkes!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Võrgu viga!\n"
+#~ "Vea number: %1\n"
+#~ "Vea tekst: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Ühenduse loomine nurjus."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Ühenduse loomine nurjus.\n"
+#~ "Veateate tekst oli:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Viga"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "Kaardipaki valimine"
+
+#~ msgid "unnamed"
+#~ msgstr "nimetu"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Esikülg"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Tagakülg"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Esikülje\n"
+#~ "eelvaatlus"
+
+#~ msgid "Deck Name"
+#~ msgstr "Kaardipaki nimi"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Tagakülje\n"
+#~ "eelvaatlus"
+
+#~ msgid "Deck description."
+#~ msgstr "Kaardipaki kirjeldus:"
+
+#~ msgid "Display:"
+#~ msgstr "Näidatav:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Mängijate ja robotite arv"
+
+#~ msgid "Spectators"
+#~ msgstr "Pealtvaatajad"
+
+#~ msgid "Close"
+#~ msgstr "Sulge"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Mängijad, robotid ja pealtvaatajad"
+
+#~ msgid "Action..."
+#~ msgstr "Toiming..."
+
+#~ msgid "Player"
+#~ msgstr "Mängija"
+
+#~ msgid "Open"
+#~ msgstr "Ava"
+
+#~ msgid "Reserved"
+#~ msgstr "Reserveeritud"
+
+#~ msgid "AI bot"
+#~ msgstr "AI robot"
+
+#~ msgid "Abandoned"
+#~ msgstr "Hüljatud"
+
+#~ msgid "Type: %1"
+#~ msgstr "Tüüp: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(nimetu)"
+
+#~ msgid "Spectator"
+#~ msgstr "Pealtvaataja"
+
+#~ msgid "Statistics..."
+#~ msgstr "Statistika..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Istu siia maha"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Lisa siia robot"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Kihuta robot minema ja vabasta koht"
+
+#~ msgid "Stand up"
+#~ msgstr "Tõuse püsti"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Kihuta mängija minema ja vabasta koht"
+
+#~ msgid "Host: %1"
+#~ msgstr "Masin: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Tegelik nimi: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Ahti Anti Ardi Andri Hasso Mart Tarko Kalle Kristjan Indrek Meelis Jaak "
+#~ "Märt Olev Ivar Jane Olavi Heno Toomas "
+
+#~ msgid " millisecond"
+#~ msgid_plural " milliseconds"
+#~ msgstr[0] " millisekund"
+#~ msgstr[1] " millisekundit"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#~ msgid "Show rich text"
+#~ msgstr "Vormindatud teksti näitamine"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Teate ajaületus:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Läbipaistmatus:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Muuda ikooni..."
+
+#~ msgid "Text color:"
+#~ msgstr "Teksti värv:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Tausta värv:"
+
+#~ msgid "Replace Mode"
+#~ msgstr "Asendusrežiim"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "LeavePrevious"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "ReplacePrevious"
+
+#~ msgid "Corners:"
+#~ msgstr "Nurgad:"
+
+#~ msgid "Square"
+#~ msgstr "Ruut"
+
+#~ msgid "Sharp"
+#~ msgstr "Terav"
+
+#~ msgid "Soft"
+#~ msgstr "Mahe"
+
+#~ msgid "Softest"
+#~ msgstr "Mahedaim"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Hüpikaken ülal vasakul"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Hüpikaken ülal paremal"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Hüpikaken all vasakul"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Hüpikaken all paremal"
+
+#~ msgid "Popup Center"
+#~ msgstr "Hüpikaken keskel"
+
+#~ msgid "Force Instant Hide"
+#~ msgstr "Kohene peitmine"
+
+#~ msgid "Force Animated Hide"
+#~ msgstr "Animeeritud peitmine"
+
+#~ msgid "msec"
+#~ msgstr "msek"
+
+#~ msgid "KDE card deck"
+#~ msgstr "KDE kaardipakk"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Tagakülje lukustamine esiküljele"
+
+#~ msgid "Show old style decks"
+#~ msgstr "Vana stiili kaartide näitamine"
+
+#~ msgid "Details"
+#~ msgstr "Üksikasjad"

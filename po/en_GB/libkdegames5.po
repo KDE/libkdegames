@@ -1,0 +1,1449 @@
+# translation of libkdegames.po to British English
+# Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
+#
+# Malcolm Hunter <malcolm.hunter@gmx.co.uk>, 2003, 2004, 2005.
+# Andrew Coles <andrew_coles@yahoo.co.uk>, 2004, 2005, 2009, 2010.
+# Steve Allewell <steve.allewell@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2014-06-29 12:11+0100\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Retry"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "High Scores"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Name"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Date"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Level"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Score"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Time"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rank"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Remember"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Forget"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Remember this high score"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Forget this high score"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Excellent!\n"
+"You have a new high score!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Well done!\n"
+"You made it to the high score list!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Ridiculously Easy"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Very Easy"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Easy"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Medium"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Hard"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Very Hard"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Extremely Hard"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Impossible"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Changing the difficulty level will end the current game!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Change the difficulty level"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Difficulty"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Set the difficulty level"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Set the difficulty level of the game."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Get New Themes..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Select theme"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[No name]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "by %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&New"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Start a new game."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Start a new game"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Load..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Open a saved game..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Load &Recent"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Open a recently saved game..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Restart &Game"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Restart the game"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Save"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Save the current game"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Save &As..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Save the current game to another file"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&End Game"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "End the current game"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Pa&use"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Pause the game"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Show &High Scores"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Show high scores"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Clear High Scores"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Clear high scores"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Show Statistics"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Show statistics"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Clear Statistics"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Delete all-time statistics."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Print..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Quit"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Quit the program"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Repeat"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Repeat the last move"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "Und&o"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Undo the last move"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Re&do"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Redo the latest move"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Roll Dice"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Roll the dice"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "End Turn"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Hint"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Give a hint"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demo"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Play a demo"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Solve"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Solve the game"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Choose Game &Type"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Configure &Carddecks..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Configure &High Scores..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Send to All Players"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Send to %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "MaxPlayers"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "MinPlayers"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "GameStatus"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Player %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Unknown"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Send to My Group (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Unknown error code %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Setup Game"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Setup Game Continue"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Load Game"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Client game connected"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Game setup done"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Synchronise Random"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Player Property"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Game Property"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Add Player"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Remove Player"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Activate Player"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Inactivate Player"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id Turn"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Error Message"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Player Input"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "An IO was added"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Process Query"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Player ID"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Unnamed - ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 unregistered"
+msgstr[1] "%1 unregistered"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL pointer"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "True"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "False"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Unknown"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "UserId"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Group"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "default"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsyncInput"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "myTurn"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Difficulty"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Custom"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Get New Themes..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Preview"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Theme Details"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Contact:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Description:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Author:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Mean Score"
+
+#~ msgid "Best Score"
+#~ msgstr "Best Score"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Elapsed Time"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Best &Scores"
+
+#~ msgid "&Players"
+#~ msgstr "&Players"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistics"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogram"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "View world-wide highscores"
+
+#~ msgid "View world-wide players"
+#~ msgstr "View world-wide players"
+
+#~ msgid "Highscores"
+#~ msgstr "Highscores"
+
+#~ msgid "Overwrite"
+#~ msgstr "Overwrite"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "The file already exists. Overwrite?"
+
+#~ msgid "Export"
+#~ msgstr "Export"
+
+#~ msgid "Winner"
+#~ msgstr "Winner"
+
+#~ msgid "Won Games"
+#~ msgstr "Won Games"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Configure Highscores"
+
+#~ msgid "Main"
+#~ msgstr "Main"
+
+#~ msgid "Nickname:"
+#~ msgstr "Nickname:"
+
+#~ msgid "Comment:"
+#~ msgstr "Comment:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "World-wide highscores enabled"
+
+#~ msgid "Advanced"
+#~ msgstr "Advanced"
+
+#~ msgid "Registration Data"
+#~ msgstr "Registration Data"
+
+#~ msgid "Key:"
+#~ msgstr "Key:"
+
+#~ msgid "Remove"
+#~ msgstr "Remove"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Please choose a non empty nickname."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Nickname already in use. Please choose another one"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Enter Your Nickname"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Congratulations, you have won!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Enter your nickname:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Do not ask again."
+
+#~ msgid "anonymous"
+#~ msgstr "anonymous"
+
+#~ msgid "Games Count"
+#~ msgstr "Games Count"
+
+#~ msgid "Comment"
+#~ msgstr "Comment"
+
+#~ msgid "Undefined error."
+#~ msgstr "Undefined error."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Missing argument(s)."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Invalid argument(s)."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Unable to connect to MySQL server."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Unable to select database."
+
+#~ msgid "Error on database query."
+#~ msgstr "Error on database query."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Error on database insert."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Nickname already registered."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Nickname not registered."
+
+#~ msgid "Invalid key."
+#~ msgstr "Invalid key."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Invalid submit key."
+
+#~ msgid "Invalid level."
+#~ msgstr "Invalid level."
+
+#~ msgid "Invalid score."
+#~ msgstr "Invalid score."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Unable to contact world-wide highscore server"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Server URL: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Unable to open temporary file."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Message from world-wide highscores server"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Invalid answer from world-wide highscores server."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Raw message: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Invalid answer from world-wide highscores server (missing item: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Success"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Multiplayers Scores"
+
+#~ msgid "No game played."
+#~ msgstr "No game played."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Scores for last game:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Scores for the last %1 games:"
+
+#~ msgid "all"
+#~ msgstr "all"
+
+#~ msgid "Select player:"
+#~ msgstr "Select player:"
+
+#~ msgid "Total:"
+#~ msgstr "Total:"
+
+#~ msgid "Won:"
+#~ msgstr "Won:"
+
+#~ msgid "Lost:"
+#~ msgstr "Lost:"
+
+#~ msgid "Draw:"
+#~ msgstr "Draw:"
+
+#~ msgid "Current:"
+#~ msgstr "Current:"
+
+#~ msgid "Max won:"
+#~ msgstr "Max won:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Max lost:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Game Counts"
+
+#~ msgid "Trends"
+#~ msgstr "Trends"
+
+#~ msgid "From"
+#~ msgstr "From"
+
+#~ msgid "To"
+#~ msgstr "To"
+
+#~ msgid "Count"
+#~ msgstr "Count"
+
+#~ msgid "Percent"
+#~ msgstr "Percent"
+
+#~ msgid "Configure..."
+#~ msgstr "Configure..."
+
+#~ msgid "Export..."
+#~ msgstr "Export..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Configure Chat"
+
+#~ msgid "Name Font..."
+#~ msgstr "Name Font..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Text Font..."
+
+#~ msgid "Player: "
+#~ msgstr "Player: "
+
+#~ msgid "This is a player message"
+#~ msgstr "This is a player message"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "System Messages - Messages directly sent from the game"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Game: "
+
+#~ msgid "This is a system message"
+#~ msgstr "This is a system message"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Maximum number of messages (-1 = unlimited):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Create a network game"
+
+#~ msgid "Join a network game"
+#~ msgstr "Join a network game"
+
+#~ msgid "Game name:"
+#~ msgstr "Game name:"
+
+#~ msgid "Network games:"
+#~ msgstr "Network games:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port to connect to:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Host to connect to:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Start Network"
+
+#~ msgid "Network Game"
+#~ msgstr "Network Game"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame Debug Dialogue"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Debug &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Update"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "KGame Pointer"
+
+#~ msgid "Game ID"
+#~ msgstr "Game ID"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Game Cookie"
+
+#~ msgid "Is Master"
+#~ msgstr "Is Master"
+
+#~ msgid "Is Admin"
+#~ msgstr "Is Admin"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Is Offering Connections"
+
+#~ msgid "Game Status"
+#~ msgstr "Game Status"
+
+#~ msgid "Game is Running"
+#~ msgstr "Game is Running"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Maximal Players"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Minimal Players"
+
+#~ msgid "Players"
+#~ msgstr "Players"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Debug &Players"
+
+#~ msgid "Available Players"
+#~ msgstr "Available Players"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Player Pointer"
+
+#~ msgid "Player Name"
+#~ msgstr "Player Name"
+
+#~ msgid "Player Group"
+#~ msgstr "Player Group"
+
+#~ msgid "Player User ID"
+#~ msgstr "Player User ID"
+
+#~ msgid "My Turn"
+#~ msgstr "My Turn"
+
+#~ msgid "Async Input"
+#~ msgstr "Async Input"
+
+#~ msgid "KGame Address"
+#~ msgstr "KGame Address"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Player is Virtual"
+
+#~ msgid "Player is Active"
+#~ msgstr "Player is Active"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Network Priority"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Debug &Messages"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Do not show IDs:"
+
+#~ msgid "Clean"
+#~ msgstr "Clean"
+
+#~ msgid "Dirty"
+#~ msgstr "Dirty"
+
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgid "Undefined"
+#~ msgstr "Undefined"
+
+#~ msgid "&Chat"
+#~ msgstr "&Chat"
+
+#~ msgid "C&onnections"
+#~ msgstr "C&onnections"
+
+#~ msgid "&Game"
+#~ msgstr "&Game"
+
+#~ msgid "&Network"
+#~ msgstr "&Network"
+
+#~ msgid "&Message Server"
+#~ msgstr "&Message Server"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Network Configuration"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Cannot connect to the network"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Network status: No Network"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Network status: You are MASTER"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Network status: You are connected"
+
+#~ msgid "Your name:"
+#~ msgstr "Your name:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Maximal Number of Clients"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Maximal number of clients (-1 = infinite):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Change Maximal Number of Clients"
+
+#~ msgid "Change Admin"
+#~ msgstr "Change Admin"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Remove Client with All Players"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Only the admin can configure the message server!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "You do not own the message server"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Connected Players"
+#~ msgstr "Connected Players"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Do you want to ban player \"%1\" from the game?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Ban Player"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Do Not Ban"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Connection to the server has been lost!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Connection to client has been lost!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "No connection could be created."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Error"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "Card Deck Selection"
+
+#~ msgid "unnamed"
+#~ msgstr "unnamed"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Front"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Back"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Frontside\n"
+#~ "Preview"
+
+#~ msgid "Deck Name"
+#~ msgstr "Deck Name"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Backside\n"
+#~ "Preview"
+
+#~ msgid "Deck description."
+#~ msgstr "Deck description."
+
+#~ msgid "Display:"
+#~ msgstr "Display:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Involved players and bots"
+
+#~ msgid "Spectators"
+#~ msgstr "Spectators"
+
+#~ msgid "Close"
+#~ msgstr "Close"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Players, Bots and Spectators"
+
+#~ msgid "Action..."
+#~ msgstr "Action..."
+
+#~ msgid "Player"
+#~ msgstr "Player"
+
+#~ msgid "Open"
+#~ msgstr "Open"
+
+#~ msgid "Reserved"
+#~ msgstr "Reserved"
+
+#~ msgid "AI bot"
+#~ msgstr "AI bot"
+
+#~ msgid "Abandoned"
+#~ msgstr "Abandoned"
+
+#~ msgid "Type: %1"
+#~ msgstr "Type: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(unnamed)"
+
+#~ msgid "Spectator"
+#~ msgstr "Spectator"
+
+#~ msgid "Statistics..."
+#~ msgstr "Statistics..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Sit down here"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Add a bot here"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Boot bot and open seat"
+
+#~ msgid "Stand up"
+#~ msgstr "Stand up"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Boot player and open seat"
+
+#~ msgid "Host: %1"
+#~ msgstr "Host: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Realname: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Adam Alex Andrea Andrew Barry Ben Bernard Bill Chris Charlie Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Karen Keith Ken "
+#~ "Kim Mark Mike Neil Paul Rick Robert Sam Sean Thomas Tim Walter"
+
+#~ msgid " millisecond"
+#~ msgid_plural " milliseconds"
+#~ msgstr[0] " millisecond"
+#~ msgstr[1] " milliseconds"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#~ msgid "Show rich text"
+#~ msgstr "Show rich text"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Message timeout:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Opacity:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Change Icon..."
+
+#~ msgid "Text color:"
+#~ msgstr "Text colour:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Backgound colour:"
+
+#~ msgid "Replace Mode"
+#~ msgstr "Replace Mode"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "LeavePrevious"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "ReplacePrevious"
+
+#~ msgid "Corners:"
+#~ msgstr "Corners:"
+
+#~ msgid "Square"
+#~ msgstr "Square"
+
+#~ msgid "Sharp"
+#~ msgstr "Sharp"
+
+#~ msgid "Soft"
+#~ msgstr "Soft"
+
+#~ msgid "Softest"
+#~ msgstr "Softest"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Popup Top-Left"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Popup Top-Right"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Popup Bottom-Left"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Popup Bottom-Right"
+
+#~ msgid "Popup Center"
+#~ msgstr "Popup Centre"
+
+#~ msgid "Force Instant Hide"
+#~ msgstr "Force Instant Hide"
+
+#~ msgid "Force Animated Hide"
+#~ msgstr "Force Animated Hide"
+
+#~ msgid "msec"
+#~ msgstr "msec"
+
+#~ msgid "KDE card deck"
+#~ msgstr "KDE card deck"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Lock back to front"
+
+#~ msgid "Show old style decks"
+#~ msgstr "Show old style decks"
+
+#~ msgid "Details"
+#~ msgstr "Details"
+
+#~ msgid "Choose Backside"
+#~ msgstr "Choose Backside"
+
+#~ msgid "empty"
+#~ msgstr "empty"
+
+#~ msgid "Random backside"
+#~ msgstr "Random backside"
+
+#~ msgid "Use global backside"
+#~ msgstr "Use global backside"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "Make Backside Global"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "Choose Frontside"
+
+#~ msgid "Use global frontside"
+#~ msgstr "Use global frontside"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "Make Frontside Global"
+
+#~ msgid "Resize Cards"
+#~ msgstr "Resize Cards"
+
+#~ msgid "Default Size"
+#~ msgstr "Default Size"
+
+#~ msgid "Preview:"
+#~ msgstr "Preview:"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgid "Form"
+#~ msgstr "From"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Properties"
+#~ msgstr "Property"
+
+#~ msgid "Data"
+#~ msgstr "Data"
+
+#~ msgid "Value"
+#~ msgstr "Value"
+
+#~ msgid "Policy"
+#~ msgstr "Policy"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Receiver"
+#~ msgstr "Receiver"
+
+#~ msgid "Sender"
+#~ msgstr "Sender"
+
+#~ msgid "ID - Text"
+#~ msgstr "ID - Text"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"

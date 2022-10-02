@@ -1,0 +1,1439 @@
+# Irish translation of libkdegames
+# Copyright (C) 2009 This_file_is_part_of_KDE
+# This file is distributed under the same license as the libkdegames package.
+# Kevin Scannell <kscanne@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdegames/libkdegames.po\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2004-12-03 14:52-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Atriail"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Ní féidir an comhad leis na scóir is fearr a rochtain. Is dócha go bhfuil "
+"úsáideoir eile ag scríobh air faoi láthair."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Na Scóir Is Fearr"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Ainm"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Dáta"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Leibhéal"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Scór"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Am"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rang"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Meabhraigh"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Déan Dearmad"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Meabhraigh an scór seo"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Déan dearmad ar an scór seo"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Thar barr!\n"
+"Tá ceann de na scóir is fearr riamh agat!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Maith thú!\n"
+"Tá ceann de na scóir is fearr riamh agat!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Ró-Éasca"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "An-Éasca"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Éasca"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Measartha"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Crua"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "An-Chrua"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Fíorchrua"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Dodhéanta"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr ""
+"Má athraíonn tú an leibhéal deacrachta, cuirfear deireadh leis an gcluiche "
+"reatha!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Athraigh an leibhéal deacrachta"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Deacracht"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Socraigh an leibhéal deacrachta"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Socraigh leibhéal deacrachta an chluiche."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Faigh Téamaí Nua..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Roghnaigh téama"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[Gan ainm]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "le %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Nua"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Tosaigh cluiche nua."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Tosaigh cluiche nua"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Luchtaigh..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Oscail cluiche sábháilte..."
+
+# implicitly "games"
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Luchtaigh Cluiche Le &Déanaí"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Oscail cluiche a sábháladh le déanaí..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Atosaigh &Cluiche"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Atosaigh an cluiche"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Sábháil"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Sábháil an cluiche reatha"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Sábháil M&ar..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Sábháil an comhad reatha i gcomhad eile"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "Cuir Cluich&e i gCrích"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Cuir deireadh leis an gcluiche reatha"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "So&s"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Cuir an cluiche ar shos"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Taispeáin na Scóir is &Fearr"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Taispeáin na scóir is fearr"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Glan Na Scóir Is Fearr"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Glan na scóir is fearr"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Taispeáin Staitisticí"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Taispeáin staitisticí"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Glan na staitisticí"
+
+# not "Scrios na staitisticí ama go léir." which is what I had before the "-"
+# was inserted in "all-time"
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Scrios na staitisticí go léir."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Priontáil..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Scoir"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Scoir an ríomhchlár"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Arís"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Athdhéan an beart is déanaí"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "C&ealaigh"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Cealaigh an beart is déanaí"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Ath&dhéan"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Athdhéan an beart is déanaí"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Caith Díslí"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Caith díslí"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Cuir Deireadh leis an mBabhta"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Leid"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Tabhair leid"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Taispeántas"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Imir cluiche taispeána"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Réitigh"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Réitigh an cluiche"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Roghnaigh &Cineál an Chluiche"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Cumraigh deiceanna &cártaí..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Cumraigh Na Scóir Is &Fearr..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Seol chuig Gach Imreoir"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Seol chuig %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Líon Uasta Imreoirí"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Líon Íosta Imreoirí"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Stádas an Chluiche"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Imreoir %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Anaithnid"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Seol chuig mo Ghrúpa (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Fianáin neamh-chomhoiriúnacha!\n"
+"Ag súil le: %1\n"
+"Fuarthas: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"Leaganacha neamh-chomhoiriúnacha KGame!\n"
+"Ag súil le: %1\n"
+"Fuarthas: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Cód earráide anaithnid %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Socraigh Cluiche"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Socrú an Chluiche Ar Lean"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Luchtaigh Cluiche"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Cluiche cliaint ceangailte"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Tá socrú an chluiche críochnaithe"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Sioncrónaigh go Randamach"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Dícheangail"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Airí Imreora"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Airí Cluiche"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Cuir Imreoir Leis"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Bain Imreoir"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Gníomhachtaigh Imreoir"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Díghníomhachtaigh Imreoir"
+
+# following fr: "ID du tour"?
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Aitheantas an Bhabhta"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Teachtaireacht Earráide"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Ionchur ó Imreoir"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Cuireadh I/A leis"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Iarratas Próisis"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Aitheantas Imreora"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Gan ainm - Aitheantas: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 cheann gan clárú"
+msgstr[1] "%1 cheann gan clárú"
+msgstr[2] "%1 cinn gan clárú"
+msgstr[3] "%1 gcinn gan clárú"
+msgstr[4] "%1 gan clárú"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Pointeoir nialasach"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Fíor"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Bréagach"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Anaithnid"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "Aitheantas Úsáideora"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grúpa"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "réamhshocraithe"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "IonchurAisionc"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "moBhabhta"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Deacracht"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Saincheaptha"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Roghnaigh <b>deacracht</b> an chluiche.<br />Má athraíonn tú an leibhéal "
+"deacrachta agus an cluiche ar siúl, beidh ort an cluiche a chealú agus ceann "
+"nua a thosú."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Roghnaigh <b>deacracht</b> an chluiche.<br />Is féidir leat an leibhéal "
+"deacrachta a athrú le linn an chluiche."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "Fai&gh Téamaí Nua..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Réamhamharc"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Mionsonraí an Téama"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Teagmháil:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Cur Síos:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Údar:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Meánscór"
+
+#~ msgid "Best Score"
+#~ msgstr "An Scór Is Fearr"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Am Imithe"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Na &Scóir Is Fearr"
+
+#~ msgid "&Players"
+#~ msgstr "&Imreoirí"
+
+#~ msgid "Statistics"
+#~ msgstr "Staitisticí"
+
+#~ msgid "Histogram"
+#~ msgstr "Histeagram"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Féach ar na scóir is airde ar fud an domhain"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Féach ar imreoirí ar fud an domhain"
+
+#~ msgid "Highscores"
+#~ msgstr "Na scóir is fearr"
+
+#~ msgid "Overwrite"
+#~ msgstr "Forscríobh"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Tá an comhad ann cheana. Forscríobh?"
+
+#~ msgid "Export"
+#~ msgstr "Easpórtáil"
+
+#~ msgid "Winner"
+#~ msgstr "Buaiteoir"
+
+#~ msgid "Won Games"
+#~ msgstr "Cluichí Buaite"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Cumraigh na scóir is fearr"
+
+#~ msgid "Main"
+#~ msgstr "Príomhchlár"
+
+#~ msgid "Nickname:"
+#~ msgstr "Leasainm:"
+
+#~ msgid "Comment:"
+#~ msgstr "Nóta:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Cumasaíodh scóir is fearr ar fud an domhain"
+
+#~ msgid "Advanced"
+#~ msgstr "Casta"
+
+#~ msgid "Registration Data"
+#~ msgstr "Sonraí Cláraithe"
+
+#~ msgid "Key:"
+#~ msgstr "Eochair:"
+
+#~ msgid "Remove"
+#~ msgstr "Bain"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Leis seo, bainfear d'eochair chláraithe go brách. Ní bheidh tú in ann an "
+#~ "leasainm atá cláraithe faoi láthair a úsáid a thuilleadh."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Roghnaigh leasainm nach bhfuil folamh."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr ""
+#~ "Tá an leasainm seo in úsáid cheana. Roghnaigh ceann eile le do thoil"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Iontráil do leasainm"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Comhghairdeas, bhí an bua agat!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Iontráil do leasainm:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Ná fiafraigh díom arís."
+
+#~ msgid "anonymous"
+#~ msgstr "gan ainm"
+
+#~ msgid "Games Count"
+#~ msgstr "Líon na gCluichí"
+
+#~ msgid "Comment"
+#~ msgstr "Nóta"
+
+#~ msgid "Undefined error."
+#~ msgstr "Earráid nár míníodh."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Argóint(í) ar iarraidh."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Argóint(í) neamhbhailí."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Ní féidir ceangal le freastalaí MySQL."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Ní féidir bunachar sonraí a roghnú."
+
+#~ msgid "Error on database query."
+#~ msgstr "Earráid agus iarratas á sheoladh chuig an mbunachar sonraí."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Earráid agus rud éigin á ionsá sa bhunachar sonraí."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Leasainm cláraithe cheana."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Níl an leasainm cláraithe."
+
+#~ msgid "Invalid key."
+#~ msgstr "Eochair neamhbhailí."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Eochair neamhbhailí sheolta."
+
+#~ msgid "Invalid level."
+#~ msgstr "Leibhéal neamhbhailí."
+
+#~ msgid "Invalid score."
+#~ msgstr "Scór neamhbhailí."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr ""
+#~ "Ní féidir dul i dteagmháil leis an bhfreastalaí ar a bhfuil na scóir is "
+#~ "fearr sa domhan"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "URL an fhreastalaí: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Ní féidir comhad sealadach a oscailt."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Teachtaireacht ó fhreastalaí na scóir is fearr"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr ""
+#~ "Freagra neamhbhailí ón fhreastalaí ar a bhfuil na scóir is fearr sa "
+#~ "domhan."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Teachtaireacht amh: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Freagra neamhbhailí ón fhreastalaí ar a bhfuil na scóir is fearr sa "
+#~ "domhan (mír ar iarraidh: %1)."
+
+#~ msgid "Success"
+#~ msgstr "D'éirigh leis"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Scóir Il-Imreora"
+
+#~ msgid "No game played."
+#~ msgstr "Níor imríodh cluiche ar bith."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Scóir ón chluiche is déanaí:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Scóir ó na %1 cluiche is déanaí:"
+
+#~ msgid "all"
+#~ msgstr "uile"
+
+#~ msgid "Select player:"
+#~ msgstr "Roghnaigh imreoir:"
+
+#~ msgid "Total:"
+#~ msgstr "Iomlán:"
+
+#~ msgid "Won:"
+#~ msgstr "Buaite:"
+
+#~ msgid "Lost:"
+#~ msgstr "Caillte:"
+
+#~ msgid "Draw:"
+#~ msgstr "Tarraing:"
+
+#~ msgid "Current:"
+#~ msgstr "Reatha:"
+
+#~ msgid "Max won:"
+#~ msgstr "Uasmhéid buaite:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Uasmhéid caillte:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Líonta Cluichí"
+
+#~ msgid "Trends"
+#~ msgstr "Claontaí"
+
+#~ msgid "From"
+#~ msgstr "Ó"
+
+#~ msgid "To"
+#~ msgstr "Go"
+
+#~ msgid "Count"
+#~ msgstr "Líon"
+
+#~ msgid "Percent"
+#~ msgstr "Céatadán"
+
+#~ msgid "Configure..."
+#~ msgstr "Cumraigh..."
+
+#~ msgid "Export..."
+#~ msgstr "Easpórtáil..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Cumraigh Comhrá"
+
+#~ msgid "Name Font..."
+#~ msgstr "Cló an Ainm..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Cló an Téacs..."
+
+#~ msgid "Player: "
+#~ msgstr "Imreoir: "
+
+#~ msgid "This is a player message"
+#~ msgstr "Teachtaireacht ó imreoir í seo"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr ""
+#~ "Teachtaireachtaí Córais - Teachtaireachtaí seolta go díreach ón chluiche"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Cluiche: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Teachtaireacht ón chóras í seo"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Líon uasta na dteachtaireachtaí (-1 = gan teorainn):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Cruthaigh cluiche líonra"
+
+#~ msgid "Join a network game"
+#~ msgstr "Téigh isteach i gcluiche líonra"
+
+#~ msgid "Game name:"
+#~ msgstr "Ainm cluiche:"
+
+#~ msgid "Network games:"
+#~ msgstr "Cluichí líonra:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port le ceangal leis:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Óstríomhaire le ceangal leis:"
+
+#~ msgid "&Start Network"
+#~ msgstr "To&saigh Líonra"
+
+#~ msgid "Network Game"
+#~ msgstr "Cluiche Líonra"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "Dialóg Dhífhabhtaithe KGame"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Dífhabhtaigh &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Nuashonraigh"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "Pointeoir KGame"
+
+#~ msgid "Game ID"
+#~ msgstr "Aitheantas an Chluiche"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Fianán Cluiche"
+
+#~ msgid "Is Master"
+#~ msgstr "Is Máistir É"
+
+#~ msgid "Is Admin"
+#~ msgstr "Is Riarthóir É"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Ceangail Ar Tairiscint"
+
+#~ msgid "Game Status"
+#~ msgstr "Stádas Cluiche"
+
+#~ msgid "Game is Running"
+#~ msgstr "Cluiche ag Rith"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Líon uasta imreoirí"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Líon íosta imreoirí"
+
+#~ msgid "Players"
+#~ msgstr "Imreoirí"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Dífhabhtaigh &Imreoirí"
+
+#~ msgid "Available Players"
+#~ msgstr "Imreoirí Le Fáil"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Pointeoir Imreora"
+
+#~ msgid "Player Name"
+#~ msgstr "Ainm Imreora"
+
+#~ msgid "Player Group"
+#~ msgstr "Grúpa Imreora"
+
+#~ msgid "Player User ID"
+#~ msgstr "Aitheantas Úsáideora an Imreora"
+
+#~ msgid "My Turn"
+#~ msgstr "Is Liomsa an Imirt"
+
+#~ msgid "Async Input"
+#~ msgstr "Ionchur Aisionc"
+
+#~ msgid "KGame Address"
+#~ msgstr "Seoladh KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Is fíorúil é an t-imreoir"
+
+#~ msgid "Player is Active"
+#~ msgstr "Is gníomhach é an t-imreoir"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Tosaíocht Líonra"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "&Teachtaireachtaí Dífhabhtaithe"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Ná taispeáin aitheantais:"
+
+#~ msgid "Clean"
+#~ msgstr "Glan"
+
+#~ msgid "Dirty"
+#~ msgstr "Salach"
+
+#~ msgid "Local"
+#~ msgstr "Logánta"
+
+#~ msgid "Undefined"
+#~ msgstr "Neamhshainithe"
+
+#~ msgid "&Chat"
+#~ msgstr "&Comhrá"
+
+#~ msgid "C&onnections"
+#~ msgstr "C&eangail"
+
+#~ msgid "&Game"
+#~ msgstr "&Cluiche"
+
+#~ msgid "&Network"
+#~ msgstr "&Líonra"
+
+#~ msgid "&Message Server"
+#~ msgstr "&Freastalaí Teachtaireachtaí"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Cumraíocht Líonra"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Ní féidir ceangal a dhéanamh leis an líonra"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Stádas an líonra: gan cheangal"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Stádas an líonra: is MÁISTIR thú"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Stádas an líonra: ceangailte"
+
+#~ msgid "Your name:"
+#~ msgstr "D'ainm:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Líon Uasta na gCliant"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Líon uasta na gcliant (-1 = éigríoch):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Athraigh Líon Uasta na gCliant"
+
+#~ msgid "Change Admin"
+#~ msgstr "Athraigh Riarthóir"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Bain Cliant le Gach Imreoir"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr ""
+#~ "Is féidir leis an riarthóir amháin an freastalaí teachtaireachtaí a "
+#~ "chumrú!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Níl an freastalaí teachtaireachtaí agat"
+
+#~ msgid "Chat"
+#~ msgstr "Comhrá"
+
+#~ msgid "Connected Players"
+#~ msgstr "Imreoirí Ceangailte"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "An bhfuil fonn ort cosc a chur ar imreoir \"%1\" imirt sa chluiche?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Cuir Cosc ar Imreoir"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Ná Cuir Cosc Air"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Cailleadh an ceangal leis an bhfreastalaí!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Cailleadh an ceangal leis an gcliant!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Fuarthas earráid líonra!\n"
+#~ "Uimhir na hearráide: %1\n"
+#~ "Teachtaireacht na hearráide: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Ní féidir aon cheangal a chruthú."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Ní féidir aon cheangal a chruthú.\n"
+#~ "Teachtaireacht earráide:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Earráid"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "Roghnú Deice Cártaí"
+
+#~ msgid "unnamed"
+#~ msgstr "gan ainm"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Éadan"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Cúl"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Réamhamharc ar\n"
+#~ "Éadan"
+
+#~ msgid "Deck Name"
+#~ msgstr "Ainm na Deice"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Réamhamharc ar\n"
+#~ "Chúl"
+
+#~ msgid "Deck description."
+#~ msgstr "Cur síos ar dheic."
+
+#~ msgid "Display:"
+#~ msgstr "Taispeáin:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Imreoirí rannpháirteacha agus róbónna"
+
+#~ msgid "Spectators"
+#~ msgstr "Lucht féachana"
+
+#~ msgid "Close"
+#~ msgstr "Dún"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Imreoirí, Róbónna agus Lucht Féachana"
+
+#~ msgid "Action..."
+#~ msgstr "Gníomh..."
+
+#~ msgid "Player"
+#~ msgstr "Imreoir"
+
+#~ msgid "Open"
+#~ msgstr "Oscail"
+
+#~ msgid "Reserved"
+#~ msgstr "In Áirithe"
+
+#~ msgid "AI bot"
+#~ msgstr "Róbó Meabhrach"
+
+#~ msgid "Abandoned"
+#~ msgstr "Tréigthe"
+
+#~ msgid "Type: %1"
+#~ msgstr "Cineál: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(gan ainm)"
+
+#~ msgid "Spectator"
+#~ msgstr "Féachadóir"
+
+#~ msgid "Statistics..."
+#~ msgstr "Staitisticí..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Suigh síos anseo"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Cuir róbó anseo"
+
+# Boot is not "tosaigh" anseo
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Caith róbó amach agus oscail suíochán"
+
+#~ msgid "Stand up"
+#~ msgstr "Seas"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Caith imreoir amach agus oscail suíochán"
+
+#~ msgid "Host: %1"
+#~ msgstr "Óstríomhaire: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Fíorainm: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Antain Aodh Aisling Bairbre Breandán Bríd Caoimhín Cathal Cormac Dáithí "
+#~ "Diarmaid Donncha Éamonn Eoin Madeleine Máire Niall Nóra Órla Pádraig Peig "
+#~ "Pól Ruairí Séamus Seosamh Síle Tadhg Treasa"
+
+#~ msgid " millisecond"
+#~ msgid_plural " milliseconds"
+#~ msgstr[0] " mhilleasoicind"
+#~ msgstr[1] " mhilleasoicind"
+#~ msgstr[2] " mhilleasoicind"
+#~ msgstr[3] " milleasoicind"
+#~ msgstr[4] " milleasoicind"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#~ msgid "Show rich text"
+#~ msgstr "Taispeáin méith-théacs"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Teachtaireacht thar am:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Teimhneacht:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Athraigh Deilbhín..."
+
+#~ msgid "Text color:"
+#~ msgstr "Dath téacs:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Dath an chúlra:"
+
+#~ msgid "Replace Mode"
+#~ msgstr "Mód Ionadaithe"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "Fág an ceann roimhe seo"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "Ionadaigh an ceann roimhe seo"
+
+#~ msgid "Corners:"
+#~ msgstr "Cúinní:"
+
+#~ msgid "Square"
+#~ msgstr "Cearnóg"
+
+#~ msgid "Sharp"
+#~ msgstr "Géar"
+
+#~ msgid "Soft"
+#~ msgstr "Bog"
+
+#~ msgid "Softest"
+#~ msgstr "Is Boige"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Preabfhuinneog Barr ar Chlé"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Preabfhuinneog Barr ar Dheis"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Preabfhuinneog Bun ar chlé"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Preabfhuinneog Bun ar dheis"
+
+#~ msgid "Popup Center"
+#~ msgstr "Preabfhuinneog sa Lár"
+
+#~ msgid "Force Instant Hide"
+#~ msgstr "Éiligh Folú Láithreach"
+
+#~ msgid "Force Animated Hide"
+#~ msgstr "Éiligh Folú Beo"
+
+#~ msgid "msec"
+#~ msgstr "ms"
+
+#~ msgid "KDE card deck"
+#~ msgstr "Deic cártaí KDE"
+
+#~ msgid "Filter"
+#~ msgstr "Scagaire"
+
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Nasc an cúl leis an aghaidh"
+
+#~ msgid "Show old style decks"
+#~ msgstr "Taispeáin cártaí seanfhaiseanta"
+
+#~ msgid "Details"
+#~ msgstr "Mionsonraí"
+
+#~ msgid "empty"
+#~ msgstr "folamh"
+
+#~ msgid "Default Size"
+#~ msgstr "Méid Réamhshocraithe"
+
+#~ msgid "Preview:"
+#~ msgstr "Réamhamharc:"
+
+#~ msgid "Form"
+#~ msgstr "Foirm"
+
+#~ msgid "Data"
+#~ msgstr "Sonraí"
+
+#~ msgid "Value"
+#~ msgstr "Luach"
+
+#~ msgid "Policy"
+#~ msgstr "Polasaí"
+
+#~ msgid "ID"
+#~ msgstr "Aitheantas"
+
+#~ msgid "Receiver"
+#~ msgstr "Glacadóir"
+
+#~ msgid "Sender"
+#~ msgstr "Seoltóir"
+
+#~ msgid "ID - Text"
+#~ msgstr "Aitheantas - Téacs"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"

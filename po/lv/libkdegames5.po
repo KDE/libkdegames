@@ -1,0 +1,1379 @@
+# translation of libkdegames.po to Latvian
+# libkdegames.po tulkojums uz Latviešu valodu
+# Copyright (C) 2005, 2007, 2008, 2009 Free Software Foundation, Inc.
+#
+# Maris Nartiss <maris.nartiss@gmail.com>, 2005.
+# Maris Nartiss <maris.kde@gmail.com>, 2007, 2008, 2009.
+# Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2009-07-19 11:03+0300\n"
+"Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Mēģināt vēlreiz"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Nevar piekļūt labāko rezultātu failam. Iespējams, ka tieši šobrīd tajā "
+"raksta kāds cits lietotājs."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Labākie rezultāti"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Vārds"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Datums"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Līmenis"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Rezultāts"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Laiks"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rangs"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Clear high scores"
+msgid "Remember this high score"
+msgstr "Dzēš labākos rezultātus"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Show high scores"
+msgid "Forget this high score"
+msgstr "Rādīa labākos rezultātus"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Izcili!\n"
+"Jums ir jauns labākais rezultāts!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Labi darīts!\n"
+"Jūs esat iekļuvis labāko rezultātu sarakstā!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Smeiklīgi viegli"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Ļoti viegli"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Viegli"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Vidēji"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Grūti"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Ļoti grūti"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Ekstrēmi"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Neiespējami"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Grūtības pakāpes mainīšana izbeigs pašreizējo spēli!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Mainīt grūtības pakāpi"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Grūtības pakāpe"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Iestata grūtības pakāpi"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Iestata spēles grūtības pakāpi."
+
+#: kgthemeselector.cpp:103
+#, fuzzy, kde-format
+#| msgid "&Get New Themes"
+msgid "Get New Themes..."
+msgstr "&Saņemt jaunas tēmas"
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Solve the game"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Atrisina spēli"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "Jūsu vārds:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Jauna"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Sāk jaunu spēli."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Sākt jaunu spēli"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Ielādēt..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Atvērt saglabātu spēli..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Ielādēt &nesenu"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Atvērt nesen saglabātu spēli..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Pārstartēt &spēli"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Pārstartē spēli"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Saglabāt"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Saglabā pašreizējo spēli"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Saglabāt &kā..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Saglabā pašreizējo spēli citā failā"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "B&eigt spēli"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Beidz pašreizējo spēli"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Pa&uze"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Aptur spēli"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Rādīt &labākos rezultātus"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Rādīa labākos rezultātus"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Dzēst labākos rezultātus"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Dzēš labākos rezultātus"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Rādīt statistiku"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Rāda statistiku"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Dzēst statistiku"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Dzēst visu laika statistiku."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Drukāt..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Iziet"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Iziet no programmas"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Atkārtot"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Atkārtot pēdējo gājienu"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "Atsa&ukt"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Atsaukt pēdējo gājienu"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Atkā&rtot"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Atkārtot pēdējo gājienu"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Mest kauliņus"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Met kauliņus"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Gājiena beigas"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Padoms"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Sniedz padomu"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demonstrācija"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Spēles demonstrācija"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Atrisināt"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Atrisina spēli"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Izvēlieties spēles &tipu"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "&Konfigurēt kāršu kavu..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Konfigurēt &labākos rezultātus..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Sūtīt visiem spēlētājiem"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Sūtīt %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "MaksSpēlētāji"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "MinSpēlētāji"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "SpēlesStatuss"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Spēlētājs %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Sūtīt manai grupai (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Sīkdatnes nesakrīt!\n"
+"Gaidīta sīkdatne: %1\n"
+"Saņemta sīkdatne: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"KGame versijas nesakrīt!\n"
+"Gaidītā versija: %1\n"
+"Saņemtā versija: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Nezināms kļūdas kods %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Iestatatīt spēli"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Iestatīt spēles turpināšanu"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Ielādēt spēli"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Klients pieslēdzies"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Spēles iestatīšana pabeigta"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Sinhronizē gadījuma skaitļu ģeneratoru"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Atvienot"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Spēlētāja īpašība"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Spēles īpašība"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Pievienot spēlētāju"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Aizvākt spēlētāju"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Aktivizēt spēlētāju"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Deaktivizēt spēlētāju"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id gājiens"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Kļūdas paziņojums"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Spēlētāja ievade"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Pievienota IO"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Apstrādāt pieprasījumu"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Spēlētāja ID"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Nenosaukts - ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, fuzzy, kde-format
+#| msgid "%1 unregistered"
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 nereģistrēts"
+msgstr[1] "%1 nereģistrēts"
+msgstr[2] "%1 nereģistrēts"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL norādītājs"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Patiess"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Aplams"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "LietotājaID"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grupa"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "noklusētais"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsinhronaIevade"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "mansGājiens"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Grūtība"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Pielāgota"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Izvēlieties spēles <b>grūtības pakāpi</b>.<br />Ja jūs mainat spēles "
+"grūtības pakāpi kamēr spēle tiek spēlēta, spēle tiks atcelta un būs jāsāk no "
+"jauna."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Izvēlieties spēles <b>grūtības pakāpi</b>.<br />Jūs varat mainīt grūtības "
+"pakāpi spēles laikā."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, fuzzy, kde-format
+#| msgid "&Get New Themes"
+msgid "&Get New Themes..."
+msgstr "&Saņemt jaunas tēmas"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Priekšapskate"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Tēmas detaļas"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Kontakti:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Apraksts:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Autors:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Vidējais rezultāts"
+
+#~ msgid "Best Score"
+#~ msgstr "Labākais rezultāts"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Pavadītais laiks"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Labākie &rezultāti"
+
+#~ msgid "&Players"
+#~ msgstr "&Spēlētāji"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistika"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogramma"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Aplūkot vispasaules labākos rezultātus"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Aplūkot visas pasaules spēlētājus"
+
+#~ msgid "Highscores"
+#~ msgstr "Labākie rezultāti"
+
+#~ msgid "Overwrite"
+#~ msgstr "Pārrakstīt"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Fails jau eksistē. Pārrakstīt?"
+
+#~ msgid "Export"
+#~ msgstr "Eksportēt"
+
+#~ msgid "Winner"
+#~ msgstr "Uzvarētājs"
+
+#~ msgid "Won Games"
+#~ msgstr "Uzvarētas spēles"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Konfigurēt labākos rezultātus"
+
+#~ msgid "Main"
+#~ msgstr "Galvenais"
+
+#~ msgid "Nickname:"
+#~ msgstr "Iesauka:"
+
+#~ msgid "Comment:"
+#~ msgstr "Komentārs:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Visas pasaules labākie rezultāti ieslēgti"
+
+#~ msgid "Advanced"
+#~ msgstr "Palašināti"
+
+#~ msgid "Registration Data"
+#~ msgstr "Reģistrācijas dati"
+
+#~ msgid "Key:"
+#~ msgstr "Atslēga:"
+
+#~ msgid "Remove"
+#~ msgstr "Aizvākt"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Tas pilnībā aizvāks Jūsu reģistrācijas atslēgu. Jūs vairs nevarēsiet "
+#~ "izmantot šobrīd reģistrēto iesauku."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Lūdzu izvelieties garāku iesauku."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Iesauka jau eksistē. Lūdzu izvēlieties citu"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Ievadiet iesauku"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Apsveicu, Jūs uzvarējāt!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Ievadiet iesauku:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Nejautāt vēlreiz."
+
+#~ msgid "anonymous"
+#~ msgstr "anonīms"
+
+#~ msgid "Games Count"
+#~ msgstr "Spēļu skaits"
+
+#~ msgid "Comment"
+#~ msgstr "Komentārs"
+
+#~ msgid "Undefined error."
+#~ msgstr "Nedefinēta kļūda."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Trūkstoši argumenti."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Nepareizi argumenti."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Nevaru pieslēgties MySQL serverim."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Nevaru izvelēties datu bāzi."
+
+#~ msgid "Error on database query."
+#~ msgstr "Kļūda datu bāzes pieprasījumā."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Kļūda ievietojot datu bāzē."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Iesauka jau ir reģistrēta."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Iesauka nav reģistrēta."
+
+#~ msgid "Invalid key."
+#~ msgstr "Nepareiza atslēga."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Nepareiza pievienošanas atslēga."
+
+#~ msgid "Invalid level."
+#~ msgstr "Nepareizs līmenis."
+
+#~ msgid "Invalid score."
+#~ msgstr "Nederīgs rezultāts."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Nevaru pieslēgties vispasaules labāko rezultātu serverim"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Servera URL: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Nevar atvērt pagaidu failu."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Ziņa no vispasaules labāko rezultātu servera"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Nederīga atbilde no vispasaules labāko rezultātu servera."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Neapstrādāta ziņa: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Nederīga atbilde no vispasaules labāko rezultātu servera (trūkst "
+#~ "elements: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Izdevās"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Daudzspēlētāju rezultāti"
+
+#~ msgid "No game played."
+#~ msgstr "Neviena spēle nav spēlēta."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Pēdējās spēles rezultāti:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Pēdējo %1 spēļu rezultāti:"
+
+#~ msgid "all"
+#~ msgstr "viss"
+
+#~ msgid "Select player:"
+#~ msgstr "Izvēlieties spēlētāju:"
+
+#~ msgid "Total:"
+#~ msgstr "Kopā:"
+
+#~ msgid "Won:"
+#~ msgstr "Uzvarēts:"
+
+#~ msgid "Lost:"
+#~ msgstr "Zaudēts:"
+
+#~ msgid "Draw:"
+#~ msgstr "Neizšķirts:"
+
+#~ msgid "Current:"
+#~ msgstr "Pašreizējs:"
+
+#~ msgid "Max won:"
+#~ msgstr "Makismāli uzvarēts:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Makismāli zaudēts:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Spēļu skaits"
+
+#~ msgid "Trends"
+#~ msgstr "Tendence"
+
+#~ msgid "From"
+#~ msgstr "No"
+
+#~ msgid "To"
+#~ msgstr "Uz"
+
+#~ msgid "Count"
+#~ msgstr "Skaits"
+
+#~ msgid "Percent"
+#~ msgstr "Procenti"
+
+#~ msgid "Configure..."
+#~ msgstr "Konfigurēt..."
+
+#~ msgid "Export..."
+#~ msgstr "Eksportēt..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Konfigurēt tērzēšanu"
+
+#~ msgid "Name Font..."
+#~ msgstr "Vārda fonts..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Teksta fonts..."
+
+#~ msgid "Player: "
+#~ msgstr "Spēlētājs: "
+
+#~ msgid "This is a player message"
+#~ msgstr "Šis ir spēlētāja paziņojums"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Sistēmas paziņojumi - Paziņojumi, ko sūtījusi spēle"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Spēle: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Šis ir sistēmas paziņojums"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Maksimālais ziņojumu skaits (-1 nozīmē bezgalīgi daudz):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Izveidot tīkla spēli"
+
+#~ msgid "Join a network game"
+#~ msgstr "Pievienoties tīkla spēlei"
+
+#~ msgid "Game name:"
+#~ msgstr "Spēles nosaukums:"
+
+#~ msgid "Network games:"
+#~ msgstr "Tīkla spēles:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Ports, pie kura pieslēgties:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Resursdators, pie kura pieslēgties:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Startēt tīklu"
+
+#~ msgid "Network Game"
+#~ msgstr "Tīkla spēle"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame atkļūdošanas dialogs"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Atkļūdot &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Atjaunināt"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "KGame norādītājs"
+
+#~ msgid "Game ID"
+#~ msgstr "Spēles ID"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Spēles sīkdatne"
+
+#~ msgid "Is Master"
+#~ msgstr "Ir galvenais"
+
+#~ msgid "Is Admin"
+#~ msgstr "Ir administrators"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Piedāvā savienojumus"
+
+#~ msgid "Game Status"
+#~ msgstr "Spēles statuss"
+
+#~ msgid "Game is Running"
+#~ msgstr "Spēle darbojas"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Maksimalais spēlētāju skaits"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Minimālais spēlētāju skaits"
+
+#~ msgid "Players"
+#~ msgstr "Spēlētāji"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Atkļūdot &spēlētājus"
+
+#~ msgid "Available Players"
+#~ msgstr "Pieejamie spēlētāji"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Spēlētāju norādītājs"
+
+#~ msgid "Player Name"
+#~ msgstr "Spēlētāja vārds"
+
+#~ msgid "Player Group"
+#~ msgstr "Spēlētāja grupa"
+
+#~ msgid "Player User ID"
+#~ msgstr "Spēlētāja lietotāja ID"
+
+#~ msgid "My Turn"
+#~ msgstr "Mans gajiens"
+
+#~ msgid "Async Input"
+#~ msgstr "Asinhrona ievade"
+
+#~ msgid "KGame Address"
+#~ msgstr "KGame adrese"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Virtuālais spēlētājs"
+
+#~ msgid "Player is Active"
+#~ msgstr "Spēlētājs ir aktīvs"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Tīkla prioritāte"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Atkļūdot &paziņojumus"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Nerādīt ID:"
+
+#~ msgid "Clean"
+#~ msgstr "Tīrs"
+
+#~ msgid "Dirty"
+#~ msgstr "Netīrs"
+
+#~ msgid "Local"
+#~ msgstr "Lokāls"
+
+#~ msgid "Undefined"
+#~ msgstr "Nedefinēts"
+
+#~ msgid "&Chat"
+#~ msgstr "&Tērzēt"
+
+#~ msgid "C&onnections"
+#~ msgstr "&Savienojumi"
+
+#~ msgid "&Game"
+#~ msgstr "&Spēle"
+
+#~ msgid "&Network"
+#~ msgstr "&Tīkls"
+
+#~ msgid "&Message Server"
+#~ msgstr "&Ziņojumu serveris"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Tīkla konfigurācija"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Nevar pieslēgties tīklam"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Tīkla statuss: Nav tīkla savienojuma"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Tīkla statuss: Jūs esat galvenais"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Tīkla statuss: Jūs esat pieslēdzies"
+
+#~ msgid "Your name:"
+#~ msgstr "Jūsu vārds:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Maksimālais klientu skaits"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Maksimalais klientu skaits (-1 nozīmē bezgalīgi daudz):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Mainīt maksimālo klientu skaitu"
+
+#~ msgid "Change Admin"
+#~ msgstr "Mainīt administratoru"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Aizvākt klientu ar visiem spēlētājiem"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Tikai administrators var konfigurēt ziņojumu serveri!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Jums nepieder ziņojumu serveris"
+
+#~ msgid "Chat"
+#~ msgstr "Tērzēšana"
+
+#~ msgid "Connected Players"
+#~ msgstr "Pieslēgušies spēlētāji"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Vai vēlaties izslēgt spēlētāju \"%1\" no spēles?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Izslēgt spēlētāju"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Neizslēgt"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Savienojums ar serveri ir zudis!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Savienojums ar klientu ir zudis!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Saņemta tīkla kļūda!\n"
+#~ "Kļūdas numurs: %1\n"
+#~ "Kļūdas paziņojums: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Nevaru izveidot savienojumu."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Nevaru izveidot savienojumu.\n"
+#~ "Kļūdas paziņojums:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Kļūda"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "Kāršu muguriņu izvēle"
+
+#~ msgid "unnamed"
+#~ msgstr "nenosaukts"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Priekšpuse"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Aizmugure"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Priekšpuses\n"
+#~ "priekšskats"
+
+#~ msgid "Deck Name"
+#~ msgstr "Kavas nosaukums"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Aizmugures\n"
+#~ "priekšskats"
+
+#~ msgid "Deck description."
+#~ msgstr "Kavas apraksts."
+
+#~ msgid "Display:"
+#~ msgstr "Attēlot:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Iesaistītie spēlētāji un boti"
+
+#~ msgid "Spectators"
+#~ msgstr "Specifikācijas"
+
+#~ msgid "Close"
+#~ msgstr "Aizvērt"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Spēlētāji, roboti un novērotāji"
+
+#~ msgid "Action..."
+#~ msgstr "Darbība..."
+
+#~ msgid "Player"
+#~ msgstr "Spēlētājs"
+
+#~ msgid "Open"
+#~ msgstr "Atvērt"
+
+#~ msgid "Reserved"
+#~ msgstr "Rezervēts"
+
+#~ msgid "AI bot"
+#~ msgstr "AI bots"
+
+#~ msgid "Abandoned"
+#~ msgstr "Pamesta"
+
+#~ msgid "Type: %1"
+#~ msgstr "Tips: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(nenosaukta)"
+
+#~ msgid "Spectator"
+#~ msgstr "Novērotājs"
+
+#~ msgid "Statistics..."
+#~ msgstr "Statistika..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Sēdēt šeit"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Pievienot botu"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Startēt botu un atvērt sēdvietu"
+
+#~ msgid "Stand up"
+#~ msgstr "Piecelties"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Startēt spēlētāju un atvērt sēdvietu"
+
+#~ msgid "Host: %1"
+#~ msgstr "Dators: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Īstais vārds: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Andris Anna Alfons Ādolfs Benis Benita Brigita Brunis Cālis Cecīlija "
+#~ "Cilda Čalis Daniels Daiga Dace Dmitrijs Egons Evija Emīlija Ēriks Frīdis "
+#~ "Fanija Fredis Gunis Gaida Guntars Gatis Guna Gunča Harijs Helēna Heinrihs "
+#~ "Imants Inta Ints Ilona Ingrīda Intars Ilzīte Ilmārs Jānis Juris Jolanta "
+#~ "Jēzups Jančiks Kārlis Kristīne Krišjānis Katrīna Kazimirs Konrāds "
+#~ "Laimonis Ludis Laura Linda Liene Māris Marta Mārtiņš Maija Mikus Miks "
+#~ "Marķīzs Maigonis Normunds Nellija Nauris Nikolajs Oskars Olga Osvalds "
+#~ "Osis Pēteris Paula Pāvils Pauls Rūdolfs Renāte Reinis Renāte Sandis "
+#~ "Sigita Toms Tīne Uģis Undīne Uldis Valdis Vaira Zigmunds Zane"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#~ msgid "Show rich text"
+#~ msgstr "Rādīt bagāto tekstu"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Ziņas noildze:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Necaurspīdīgums:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Mainīt ikonu..."
+
+#~ msgid "Text color:"
+#~ msgstr "Teksta krāsa:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Fona krāsa:"
+
+#~ msgid "Replace Mode"
+#~ msgstr "Aizvietošanas režīms"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "AtstātIepriekšējo"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "AizvietotIepriekšējo"
+
+#~ msgid "Corners:"
+#~ msgstr "Stūri:"
+
+#~ msgid "Square"
+#~ msgstr "Kvadrāts"
+
+#~ msgid "Sharp"
+#~ msgstr "Ass"
+
+#~ msgid "Soft"
+#~ msgstr "Mīksts"
+
+#~ msgid "Softest"
+#~ msgstr "Mīkstums"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Uzlekt augšējā kreisajā"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Uzlekt augšējā labajā"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Uzlekt apakšējajā kreisajā"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Uzlekt apakšējā labajā"
+
+#~ msgid "Popup Center"
+#~ msgstr "Uzlekt centrā"
+
+#~ msgid "Force Instant Hide"
+#~ msgstr "Piespiedu tūlītēja slēpšana"
+
+#~ msgid "Force Animated Hide"
+#~ msgstr "Piespiedu animēta slēpšana"
+
+#~ msgid "msec"
+#~ msgstr "msek"

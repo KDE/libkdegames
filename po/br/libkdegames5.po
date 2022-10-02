@@ -1,0 +1,1162 @@
+# KDE breton translation
+# Thierry Vignaud <tvignaud@mandriva.com>, 2004-2005
+msgid ""
+msgstr ""
+"Project-Id-Version: kdegames/libkdegames.pot\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2004-09-20 15:44+0200\n"
+"Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
+"Language-Team: br <LL@li.org>\n"
+"Language: br\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Klask adarre"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Merkoù uhelañ"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Anv"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Deiziad"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Live"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Merk"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Eur"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Renk"
+
+#: highscore/kscoredialog.cpp:294
+#, fuzzy, kde-format
+#| msgid "#%1"
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Remember this high score"
+msgstr "Merkoù uhelañ"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Forget this high score"
+msgstr "Merkoù uhelañ"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, fuzzy, kde-format
+#| msgid "Very easy"
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Aes-tre"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, fuzzy, kde-format
+#| msgid "Easy"
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Aes"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, fuzzy, kde-format
+#| msgid "Medium"
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Krenn"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, fuzzy, kde-format
+#| msgid "Hard"
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Tenn"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, fuzzy, kde-format
+#| msgid "Very hard"
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Diaes-tre"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, fuzzy, kde-format
+#| msgid "Very hard"
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Diaes-tre"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, fuzzy, kde-format
+#| msgid "Impossible"
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "N'eo ket possubl"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr ""
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, fuzzy, kde-format
+#| msgid "Difficulty"
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Bec'h"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr ""
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr ""
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Select player:"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Dibabit ar c'hoarier :"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "Ho anv :"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Nevez"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game."
+msgstr "Krouiñ ur c'hoari rouedad"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game"
+msgstr "Krouiñ ur c'hoari rouedad"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Kargañ ..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Digeriñ ur c'hoari enrollet ..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "&Nevezig"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Adloc'hañ ar &c'hoari"
+
+#: kstandardgameaction.cpp:42
+#, fuzzy
+#| msgid "Restart &Game"
+msgid "Restart the game"
+msgstr "Adloc'hañ ar &c'hoari"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Enrollañ"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Enrollañ e ..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr ""
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Echuiñ an abadenn"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Eh&an"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show &High Scores"
+msgstr "Diskouez &merkoù uhelañ"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show high scores"
+msgstr "Diskouez &merkoù uhelañ"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "&Clear High Scores"
+msgstr "Merkoù uhelañ"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "Clear high scores"
+msgstr "Merkoù uhelañ"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show Statistics"
+msgstr "Stadegoù"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show statistics"
+msgstr "Stadegoù"
+
+#: kstandardgameaction.cpp:58
+#, fuzzy
+#| msgid "Statistics"
+msgid "&Clear Statistics"
+msgstr "Stadegoù"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr ""
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Moulañ ..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Kuit"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr ""
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Adseniñ"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Dizober"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "&Adober"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr ""
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Echu ganin"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Tun"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+#, fuzzy
+#| msgid "Player Name"
+msgid "Play a demo"
+msgstr "Anvioù ar c'hoarierien"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr ""
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Dibabit seurt ar &c'hoari"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr ""
+
+#: kstandardgameaction.cpp:88
+#, fuzzy
+#| msgid "Configure &Highscores..."
+msgid "Configure &High Scores..."
+msgstr "Kefluniañ ar merkoù &uhelañ ..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr ""
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Kas da %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1 : "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr ""
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr ""
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Stad ar c'hoari"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "C'hoarier(ez) %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Dianav"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Kas da ma strollad (« %1 »)"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Dianav eo ar c'hod fazi %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Kefluniañ ar c'hoari"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Kargañ ar c'hoari"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Echu eo kefluniadur ar c'hoari"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Digevreañ"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Dibarzh ar c'hoarier"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Dibarzh ar c'hoari"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Ouzhpennañ ur c'hoarier"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Lemel ar c'hoarier"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Bevaat ar c'hoarier"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "C'hoarier marv"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Kemennad fazi"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] ""
+msgstr[1] ""
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Gwir"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "N'eo ket gwir"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Dianav"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr ""
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Strollad"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "dre ziouer"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr ""
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "Din eo"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Bec'h"
+
+#: private/kgamedifficulty.cpp:198
+#, fuzzy, kde-format
+#| msgid "Custom"
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Diouzhoc'h"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgid "Preview"
+msgstr "Rakgwel :"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, fuzzy, kde-format
+#| msgid "Comment:"
+msgid "Contact:"
+msgstr "Askelenn :"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Deskrivadur :"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr ""
+
+#~ msgid "Best Score"
+#~ msgstr "Merk uhelañ"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Amzer dremenet"
+
+#~ msgid "Best &Scores"
+#~ msgstr "&Merkoù uhelañ"
+
+#~ msgid "&Players"
+#~ msgstr "&C'hoarierien"
+
+#~ msgid "Statistics"
+#~ msgstr "Stadegoù"
+
+#~ msgid "Highscores"
+#~ msgstr "Merkoù uhelañ"
+
+#~ msgid "Overwrite"
+#~ msgstr "Rasklañ"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Ar restr a zo endeo. C'hoant ho peus e rasklañ ?"
+
+#~ msgid "Export"
+#~ msgstr "Ezporzh"
+
+#~ msgid "Winner"
+#~ msgstr "Maout"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Kefluniañ ar merkoù uhelañ"
+
+#~ msgid "Main"
+#~ msgstr "Kentañ"
+
+#~ msgid "Nickname:"
+#~ msgstr "Lesanv :"
+
+#~ msgid "Comment:"
+#~ msgstr "Askelenn :"
+
+#~ msgid "Advanced"
+#~ msgstr "Barek"
+
+#~ msgid "Key:"
+#~ msgstr "Alc'hwez :"
+
+#~ msgid "Remove"
+#~ msgstr "Lemel"
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Diabit ul lesanv n'o ket goullo mar plij."
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Roit ho lesanv"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Gourc'hemennoù, c'hwi zo trec'h !"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Roit ho lesanv :"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Ne c'houlennit ket adarre."
+
+#~ msgid "anonymous"
+#~ msgstr "dizanv"
+
+#~ msgid "Comment"
+#~ msgstr "Askelenn"
+
+#~ msgid "Undefined error."
+#~ msgstr "Fazi didermenet."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Mankout a ra an arventenn(où)."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "N'eo ket mat an arvent(où)."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "N'hellan ket kevreañ ouzh ar servijer MySQL."
+
+#~ msgid "Unable to select database."
+#~ msgstr "N'hellan ket dibab ar stlennvon."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "N'eo ket enskrivet an lesav."
+
+#~ msgid "Invalid key."
+#~ msgstr "N'eo ket mat an alc'hwez."
+
+#~ msgid "Invalid level."
+#~ msgstr "N'eo ket mat al live."
+
+#~ msgid "Invalid score."
+#~ msgstr "N'eo ket mat ar merk."
+
+#~ msgid "Server URL: %1"
+#~ msgstr "URL ar servijer : %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "N'hellan ket digeriñ ar restr padennek."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Kemennad diaoz : %1"
+
+#~ msgid "Success"
+#~ msgstr "Berzh"
+
+#~ msgid "No game played."
+#~ msgstr "N'eus ket ur c'hoari o c'hoariñ."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Merkoù ar c'hoari diwezhañ :"
+
+#~ msgid "all"
+#~ msgstr "holl"
+
+#~ msgid "Select player:"
+#~ msgstr "Dibabit ar c'hoarier :"
+
+#~ msgid "Total:"
+#~ msgstr "Hollek :"
+
+#~ msgid "Won:"
+#~ msgstr "Zo trec'h :"
+
+#~ msgid "Lost:"
+#~ msgstr "Kollet :"
+
+#~ msgid "Draw:"
+#~ msgstr "Tresañ :"
+
+#~ msgid "Current:"
+#~ msgstr "Hini red :"
+
+#~ msgid "From"
+#~ msgstr "Digant"
+
+#~ msgid "To"
+#~ msgstr "Da"
+
+#~ msgid "Count"
+#~ msgstr "Niveriñ"
+
+#~ msgid "Percent"
+#~ msgstr "Dregantad"
+
+#~ msgid "Configure..."
+#~ msgstr "Kefluniañ ..."
+
+#~ msgid "Export..."
+#~ msgstr "Ezporzh ..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Kefluniañ Flapañ"
+
+#~ msgid "Name Font..."
+#~ msgstr "Nodrezh evit an anvioù ..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Nodrezh ar skrid ..."
+
+#~ msgid "Player: "
+#~ msgstr "C'hoarier(ez) : "
+
+#~ msgid "--- Game: "
+#~ msgstr "--- C'hoari : "
+
+#~ msgid "This is a system message"
+#~ msgstr "Se zo kemennad ar reizhiad"
+
+#, fuzzy
+#~| msgid "Maximal number of clients (-1 = infinite):"
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Niver uhelañ a pratikoù (-1 = hep muzul) :"
+
+#~ msgid "Create a network game"
+#~ msgstr "Krouiñ ur c'hoari rouedad"
+
+#~ msgid "Game name:"
+#~ msgstr "Anv ar c'hoari :"
+
+#~ msgid "Network games:"
+#~ msgstr "C'hoarioù rouedad :"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Porzh da gevreañ ouzh :"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Ostiz da gevreañ ouzh :"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Loc'hañ ar rouedad"
+
+#~ msgid "Network Game"
+#~ msgstr "C'hoari rouedad"
+
+#~ msgid "Update"
+#~ msgstr "Bremañaat"
+
+#~ msgid "Game ID"
+#~ msgstr "Niver ar c'hoari"
+
+#~ msgid "Game Cookie"
+#~ msgstr "toupin ar c'hoari"
+
+#~ msgid "Game Status"
+#~ msgstr "Stad ar c'hoari"
+
+#~ msgid "Players"
+#~ msgstr "C'hoarierien"
+
+#~ msgid "Available Players"
+#~ msgstr "C'hoarierien da gaout"
+
+#~ msgid "Player Name"
+#~ msgstr "Anvioù ar c'hoarierien"
+
+#~ msgid "Player Group"
+#~ msgstr "Strollad ar c'hoarierien"
+
+#~ msgid "My Turn"
+#~ msgstr "Din eo"
+
+#~ msgid "KGame Address"
+#~ msgstr "Chomlec'h KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Galloudel eo ar c'hoarier"
+
+#~ msgid "Player is Active"
+#~ msgstr "Bev eo ar c'hoarier"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Clean"
+#~ msgstr "Skarañ"
+
+#~ msgid "Dirty"
+#~ msgstr "Lous"
+
+#~ msgid "Local"
+#~ msgstr "Lec'hel"
+
+#~ msgid "Undefined"
+#~ msgstr "Didermenet"
+
+#~ msgid "&Chat"
+#~ msgstr "&Flapañ"
+
+#~ msgid "C&onnections"
+#~ msgstr "K&evreadennoù"
+
+#~ msgid "&Game"
+#~ msgstr "&C'hoari"
+
+#~ msgid "&Network"
+#~ msgstr "&Rouedad"
+
+#~ msgid "&Message Server"
+#~ msgstr "Servijer ar &c'hemennadoù"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Kefluniadur ar rouedad"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "N'hellan ket kevreañ ouzh ar rouedad"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Stad ar rouedad : rouedad ebet"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Stad ar rouedad : mestr out"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Stad ar rouedad : kevreet 'teus"
+
+#~ msgid "Your name:"
+#~ msgstr "Ho anv :"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Niver uhelañ a pratikoù"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Niver uhelañ a pratikoù (-1 = hep muzul) :"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Cheñchiñ niver uhelañ a pratikoù"
+
+#~ msgid "Chat"
+#~ msgstr "Flapañ"
+
+#~ msgid "Connected Players"
+#~ msgstr "C'hoarierien kevreet"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr ""
+#~ "Ha fellout a ra deoc'h da forbannañ ar c'hoarier « %1 » eus ar c'hoari ?"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Kollet eo ar gevreadenn ouzh ar servijer !"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Kollet eo ar gevreadenn ouzh ar c'hliant !"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Ne m'eus ket krouet ar gevreadenn."
+
+#~ msgid "Error"
+#~ msgstr "Fazi"
+
+#~ msgid "unnamed"
+#~ msgstr "anv ebet"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Digant"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "Anv"
+
+#, fuzzy
+#~| msgid "Preview:"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "Rakgwel :"
+
+#, fuzzy
+#~| msgid "Description:"
+#~ msgid "Deck description."
+#~ msgstr "Deskrivadur :"
+
+#~ msgid "Display:"
+#~ msgstr "Diskwel :"
+
+#~ msgid "Close"
+#~ msgstr "Serriñ"
+
+#~ msgid "Action..."
+#~ msgstr "Gwezhiad"
+
+#~ msgid "Player"
+#~ msgstr "C'hoarier(ez)"
+
+#~ msgid "Open"
+#~ msgstr "Digeriñ"
+
+#, fuzzy
+#~ msgid "Reserved"
+#~ msgstr "Degemerer"
+
+#~ msgid "Type: %1"
+#~ msgstr "Rizh : %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(anv ebet)"
+
+#~ msgid "Statistics..."
+#~ msgstr "Stadegoù"
+
+#~ msgid "Host: %1"
+#~ msgstr "Ostiz : %1"
+
+#, fuzzy
+#~| msgid "Show &Highscores"
+#~ msgid "Show rich text"
+#~ msgstr "Diskouez &merkoù uhelañ"
+
+#, fuzzy
+#~| msgid "Name Font..."
+#~ msgid "Change Icon..."
+#~ msgstr "Nodrezh evit an anvioù ..."
+
+#~ msgid "Corners:"
+#~ msgstr "Kornioù :"
+
+#~ msgid "Square"
+#~ msgstr "Karrez"
+
+#~ msgid "Soft"
+#~ msgstr "Dousig"
+
+#~ msgid "Filter"
+#~ msgstr "Sil"
+
+#~ msgid "Details"
+#~ msgstr "Munudoù"
+
+#~ msgid "empty"
+#~ msgstr "goullo"
+
+#~ msgid "Resize Cards"
+#~ msgstr "Adventañ ar c'hartennoù"
+
+#~ msgid "Default Size"
+#~ msgstr "Ment dre ziouer"
+
+#~ msgid "Preview:"
+#~ msgstr "Rakgwel :"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgid "Form"
+#~ msgstr "Digant"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Properties"
+#~ msgstr "Perzh"
+
+#~ msgid "Data"
+#~ msgstr "Roadoù"
+
+#~ msgid "Value"
+#~ msgstr "Gwerzh"
+
+#~ msgid "Policy"
+#~ msgstr "Politikerez"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Receiver"
+#~ msgstr "Degemerer"
+
+#~ msgid "Sender"
+#~ msgstr "Kaser"
+
+#~ msgid "ID - Text"
+#~ msgstr "ID -scrid"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"

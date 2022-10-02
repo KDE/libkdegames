@@ -1,0 +1,1386 @@
+# translation of libkdegames.po to
+# Danish translation of libkdegames
+#
+# Erik Kjær Pedersen <erik@binghamton.edu>, 2005.
+# Martin Schlander <mschlander@opensuse.org>, 2008, 2009, 2010, 2012.
+# Jan Madsen <jan-portugal@opensuse.org>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2012-06-05 14:27+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Prøv igen"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Kan ikke tilgå topscorefilen. En anden bruger skriver formodentlig til den "
+"lige nu."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Topscoringer"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Navn"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Dato"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Niveau"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Scoring"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Tid"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rangering"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Husk"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Glem"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Husk denne topscore"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Glem denne topscore"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Glimrende!\n"
+"Du har en ny topscoring!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Godt gjort!\n"
+"Du kom på listen over topscoringer!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Latterligt let"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Meget let"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Let"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Medium"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Svært"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Meget svært"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Ekstremt svært"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Umuligt"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Ændring af sværhedsgraden vil afslutte det nuværende spil!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Skift sværhedsgraden"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Sværhedsgrad"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Sæt sværhedsgraden"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Sæt spillets sværhedsgrad."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Hent nye temaer..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Vælg tema"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[Intet navn]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "af %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Nyt"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Start et nyt spil."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Start et nyt spil"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Indlæs..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Åbner et gemt spil..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Indlæs &nyligt"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Åbner et nyligt gemt spil..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "&Genstart spil"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Genstart spillet"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Gem"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Gem det nuværende spil"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Gem &som..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Gem det nuværende spil til en anden fil"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Afslut spil"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Afslut det nuværende spil"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Pa&use"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Sæt spillet på pause"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Vis &topscoringer"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Vis topscorelisten"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Ryd topscoringer"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Ryd topscorelisten"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Vis statistikker"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Vis statistikker"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Ryd statistikker"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Sletter statistikker over alle tider."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Udskriv..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Afslut"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Afslut programmet"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Gentag"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Gentag sidste træk"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Fortryd"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Fortryd sidste træk"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Gen&dan"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Gendan det seneste træk"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Kast terning"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Kaster terningen"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Afslut tur"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Vink"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Giv et vink"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demo"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Spil en demo"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Løs"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Løs spillet"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Vælg spil&type"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Indstil &kortspil..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Indstil &topscorelisten..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Send til alle spillere"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Send til %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Maks. antal spillere"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Min. antal spillere"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Spilstatus"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Spiller %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Ukendt"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Send til min gruppe (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Cookie matcher ikke!\n"
+"Forventede cookie: %1\n"
+"Modtog cookie: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"KGame-version matcher ikke!\n"
+"Forventede version: %1\n"
+"Modtog version: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Ukendt fejlkode %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Opsætning af spil"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Opsætning af spil fortsætter"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Indlæs spil"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Klient-spil tilsluttet"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Opsætning af spil udført"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Synkronisér tilfældigt"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Afbryd"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Spilleregenskab"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Spilegenskab"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Tilføj spiller"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Fjern spiller"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Aktivér spiller"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Deaktivér spiller"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "ID-tur"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Fejlbesked"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Spiller-input"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Et IO blev tilføjet"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Behandl forespørgsel"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Spiller-ID"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Unavngivet - ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 ikke registreret"
+msgstr[1] "%1 ikke registrerede"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL pointer"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Sand"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Falsk"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Ukendt"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "Bruger-ID"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Gruppe"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "standard"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsyncInput"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "Min-tur"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Sværhedsgrad"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Brugerdefineret"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Vælg spillets <b>sværhedsgrad</b>.<br />Hvis du skifter sværhedsgraden, mens "
+"et spil kører, vil du skulle annullere det og starte et nyt."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Vælg spillets <b>sværhedsgrad</b>.<br />Du kan skifte sværhedsgraden mens "
+"spillet kører."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Hent nye temaer..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Temadetaljer"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Kontakt:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Beskrivelse:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Udvikler:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Gennemsnitlig scoring"
+
+#~ msgid "Best Score"
+#~ msgstr "Bedste scoring"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Forløbet tid"
+
+#~ msgid "Best &Scores"
+#~ msgstr "&Bedste scoringer"
+
+#~ msgid "&Players"
+#~ msgstr "&Spillere"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistikker"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogram"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Vis verdens topscoringer"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Se spillere fra hele verden"
+
+#~ msgid "Highscores"
+#~ msgstr "Topscoringer"
+
+#~ msgid "Overwrite"
+#~ msgstr "Overskriv"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Filen eksisterer allerede. Overskriv?"
+
+#~ msgid "Export"
+#~ msgstr "Eksportér"
+
+#~ msgid "Winner"
+#~ msgstr "Vinder"
+
+#~ msgid "Won Games"
+#~ msgstr "Vundne spil"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Indstil topscoringer"
+
+#~ msgid "Main"
+#~ msgstr "Overordnet"
+
+#~ msgid "Nickname:"
+#~ msgstr "Kaldenavn:"
+
+#~ msgid "Comment:"
+#~ msgstr "Kommentar:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Verdens topscoringer aktiveret"
+
+#~ msgid "Advanced"
+#~ msgstr "Avanceret"
+
+#~ msgid "Registration Data"
+#~ msgstr "Registreringsdata"
+
+#~ msgid "Key:"
+#~ msgstr "Nøgle:"
+
+#~ msgid "Remove"
+#~ msgstr "Fjern"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Dette vil permanent fjerne din registreringsnøgle. Du vil ikke kunne "
+#~ "bruge dit nuværende kaldenavn længere."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Vælg et kaldenavn med mindst ét tegn."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Kaldenavnet er allerede i brug. Vælg et andet"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Angiv dit kaldenavn"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Tillykke, du har vundet!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Angiv dit kaldenavn:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Spørg ikke igen."
+
+#~ msgid "anonymous"
+#~ msgstr "anonym"
+
+#~ msgid "Games Count"
+#~ msgstr "Spiltæller"
+
+#~ msgid "Comment"
+#~ msgstr "Kommentar"
+
+#~ msgid "Undefined error."
+#~ msgstr "Udefineret fejl."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Manglende argumenter."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Ugyldige argumenter."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Kan ikke forbinde til MySQL-server."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Kan ikke vælge database."
+
+#~ msgid "Error on database query."
+#~ msgstr "Fejl under databaseforespørgsel."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Fejl under indlæsning af database."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Kaldenavnet er allerede registreret."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Kaldenavnet er ikke registreret."
+
+#~ msgid "Invalid key."
+#~ msgstr "Ugyldig nøgle."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Ugyldig indsendelsesnøgle."
+
+#~ msgid "Invalid level."
+#~ msgstr "Ugyldigt niveau."
+
+#~ msgid "Invalid score."
+#~ msgstr "Ugyldig scoring."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Kan ikke kontakte serveren med verdens topscoringer"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Server-URL: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Kan ikke åbne midlertidig fil."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Besked fra serveren med verdens topscoringer."
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Ugyldigt svar serveren med verdens topscoringer."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Ubehandlet besked: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Ugyldigt svar serveren med verdens topscoringer (mangler elementet: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Gennemført"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Flerspiller-scoringer"
+
+#~ msgid "No game played."
+#~ msgstr "Intet spil spillet."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Scoring for sidste spil:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Scoring for de sidste %1 spil:"
+
+#~ msgid "all"
+#~ msgstr "alle"
+
+#~ msgid "Select player:"
+#~ msgstr "Vælg spiller:"
+
+#~ msgid "Total:"
+#~ msgstr "I alt:"
+
+#~ msgid "Won:"
+#~ msgstr "Vundet:"
+
+#~ msgid "Lost:"
+#~ msgstr "Tabt:"
+
+#~ msgid "Draw:"
+#~ msgstr "Uafgjort:"
+
+#~ msgid "Current:"
+#~ msgstr "Nuværende:"
+
+#~ msgid "Max won:"
+#~ msgstr "Maks. vundne:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Maks. tabte:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Spiltællinger"
+
+#~ msgid "Trends"
+#~ msgstr "Tendenser"
+
+#~ msgid "From"
+#~ msgstr "Fra"
+
+#~ msgid "To"
+#~ msgstr "Til"
+
+#~ msgid "Count"
+#~ msgstr "Antal"
+
+#~ msgid "Percent"
+#~ msgstr "Procent"
+
+#~ msgid "Configure..."
+#~ msgstr "Indstil..."
+
+#~ msgid "Export..."
+#~ msgstr "Eksportér..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Indstil chat"
+
+#~ msgid "Name Font..."
+#~ msgstr "Skrifttype for navn..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Skrifttype for tekst..."
+
+#~ msgid "Player: "
+#~ msgstr "Spiller: "
+
+#~ msgid "This is a player message"
+#~ msgstr "Dette er en spillerbesked"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Systembeskeder - Beskeder sendt direkte fra spillet"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Spil: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Dette er en systembesked"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Maksimalt antal beskeder (-1 = ubegrænset):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Opret et netværksspil"
+
+#~ msgid "Join a network game"
+#~ msgstr "Deltag i et netværksspil"
+
+#~ msgid "Game name:"
+#~ msgstr "Spillets navn:"
+
+#~ msgid "Network games:"
+#~ msgstr "Netværksspil:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port der skal forbindes til:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Vært der skal forbindes til:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Start netværk"
+
+#~ msgid "Network Game"
+#~ msgstr "Netværksspil"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame fejlretningsdialog"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Fejlret &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Opdatér"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "KGame Pointer"
+
+#~ msgid "Game ID"
+#~ msgstr "Spil-ID"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Spil-cookie"
+
+#~ msgid "Is Master"
+#~ msgstr "Er mester"
+
+#~ msgid "Is Admin"
+#~ msgstr "Er admin"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Tilbyder forbindelser"
+
+#~ msgid "Game Status"
+#~ msgstr "Spilstatus"
+
+#~ msgid "Game is Running"
+#~ msgstr "Spillet kører"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Maksimalt antal spillere"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Minimalt antal spillere"
+
+#~ msgid "Players"
+#~ msgstr "Spillere"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Fejlret &spillere"
+
+#~ msgid "Available Players"
+#~ msgstr "Tilgængelige spillere"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Spiller-peger"
+
+#~ msgid "Player Name"
+#~ msgstr "Spillernavn"
+
+#~ msgid "Player Group"
+#~ msgstr "Spillergruppe"
+
+#~ msgid "Player User ID"
+#~ msgstr "Spillers bruger-ID"
+
+#~ msgid "My Turn"
+#~ msgstr "Min tur"
+
+#~ msgid "Async Input"
+#~ msgstr "Asynkront input"
+
+#~ msgid "KGame Address"
+#~ msgstr "KGame-adresse"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Spilleren er virtuel"
+
+#~ msgid "Player is Active"
+#~ msgstr "Spilleren er aktiv"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Netværksprioritet"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Fejlret &beskeder"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Vis ikke ID'er:"
+
+#~ msgid "Clean"
+#~ msgstr "Ren"
+
+#~ msgid "Dirty"
+#~ msgstr "Beskidt"
+
+#~ msgid "Local"
+#~ msgstr "Lokal"
+
+#~ msgid "Undefined"
+#~ msgstr "Udefineret"
+
+#~ msgid "&Chat"
+#~ msgstr "&Chat"
+
+#~ msgid "C&onnections"
+#~ msgstr "F&orbindelser"
+
+#~ msgid "&Game"
+#~ msgstr "&Spil"
+
+#~ msgid "&Network"
+#~ msgstr "&Netværk"
+
+#~ msgid "&Message Server"
+#~ msgstr "&Beskedserver"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Netværkskonfiguration"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Kan ikke forbinde til netværk"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Netværksstatus: Intet netværk"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Netværksstatus: Du er mester"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Netværksstatus: Du er tilsluttet"
+
+#~ msgid "Your name:"
+#~ msgstr "Dit navn:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Maksimalt antal klienter"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Maksimalt antal klienter (-1 = uendelig):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Ændr det maksimale antal klienter"
+
+#~ msgid "Change Admin"
+#~ msgstr "Skift administrator"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Fjern klient med alle spillere"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Kun administratoren kan indstille beskedserveren!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Du ejer ikke beskedserveren"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Connected Players"
+#~ msgstr "Tilsluttede spillere"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Vil du bandlyse spilleren \"%1\" fra spillet?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Bandlys spiller"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Bandlys ikke"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Forbindelsen til serveren er gået tabt!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Forbindelsen til klienten er gået tabt!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Modtog en netværksfejl!\n"
+#~ "Fejlnummer: %1\n"
+#~ "Fejlbesked: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Ingen forbindelse kunne oprettes."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Ingen forbindelse kunne oprettes.\n"
+#~ "Fejlbeskeden var:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Fejl"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "Valg af kortspil"
+
+#~ msgid "unnamed"
+#~ msgstr "unavngiven"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Forside"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Bagside"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Forside\n"
+#~ "Forhåndsvisning"
+
+#~ msgid "Deck Name"
+#~ msgstr "Navn på kortspil"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Bagside\n"
+#~ "Forhåndsvisning"
+
+#~ msgid "Deck description."
+#~ msgstr "Beskrivelse af kortspil."
+
+#~ msgid "Display:"
+#~ msgstr "Vis:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Involverede spillere og robotter"
+
+#~ msgid "Spectators"
+#~ msgstr "Tilskuere"
+
+#~ msgid "Close"
+#~ msgstr "Luk"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Spillere, robotter og tilskuere"
+
+#~ msgid "Action..."
+#~ msgstr "Action..."
+
+#~ msgid "Player"
+#~ msgstr "Spiller"
+
+#~ msgid "Open"
+#~ msgstr "Åbent"
+
+#~ msgid "Reserved"
+#~ msgstr "Reserveret"
+
+#~ msgid "AI bot"
+#~ msgstr "AI-robot"
+
+#~ msgid "Abandoned"
+#~ msgstr "Forladt"
+
+#~ msgid "Type: %1"
+#~ msgstr "Type: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(unavngiven)"
+
+#~ msgid "Spectator"
+#~ msgstr "Tilskuer"
+
+#~ msgid "Statistics..."
+#~ msgstr "Statistik..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Sæt dig her"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Tilføj en robot her"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Start robot og giv plads"
+
+#~ msgid "Stand up"
+#~ msgstr "Rejs dig op"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Start spiller og giv plads"
+
+#~ msgid "Host: %1"
+#~ msgstr "Vært: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Virkeligt navn: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Adam Alex Andreas Arnold Bent Christian  David Edmund Emil Erik Harry "
+#~ "Hans Henrik Ib Jan Jannick Jesper Johan Jørgen Kaj Kresten Lauge Levin "
+#~ "Mark Mikael Morten Niels Otto Poul Peter René Robert Sam Simon Søren "
+#~ "Thomas Tim Torkild"
+
+#~ msgid " millisecond"
+#~ msgid_plural " milliseconds"
+#~ msgstr[0] " millisekund"
+#~ msgstr[1] " millisekunder"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#~ msgid "Show rich text"
+#~ msgstr "Vis rig tekst"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Besked-tidsudløb:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Ugennemsigtighed:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Skift ikon..."
+
+#~ msgid "Text color:"
+#~ msgstr "Tekstfarve:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Baggrundsfarve:"
+
+#~ msgid "Replace Mode"
+#~ msgstr "Erstatningstilstand"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "Forlad forrige"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "Erstat forrige"
+
+#~ msgid "Corners:"
+#~ msgstr "Hjørner:"
+
+#~ msgid "Square"
+#~ msgstr "Firkant"
+
+#~ msgid "Sharp"
+#~ msgstr "Skarp"
+
+#~ msgid "Soft"
+#~ msgstr "Blød"
+
+#~ msgid "Softest"
+#~ msgstr "Blødest"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Pop op øverst til venstre"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Pop op øverst til højre"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Pop op nederst til venstre"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Pop op nederst til højre"
+
+#~ msgid "Popup Center"
+#~ msgstr "Pop op i midten"
+
+#~ msgid "Force Instant Hide"
+#~ msgstr "Gennemtving øjeblikkelig skjulning"
+
+#~ msgid "Force Animated Hide"
+#~ msgstr "Gennemtving animeret skjulning"
+
+#~ msgid "msec"
+#~ msgstr "msek."
+
+#~ msgid "KDE card deck"
+#~ msgstr "KDE-kortspil"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Lås bagside til forside"
+
+#~ msgid "Show old style decks"
+#~ msgstr "Vis kortspil i gammel stil"
+
+#~ msgid "Details"
+#~ msgstr "Detaljer"
+
+#~ msgid "Show only fixed size cards"
+#~ msgstr "Vis kun kort med fast størrelse"

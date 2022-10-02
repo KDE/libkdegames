@@ -1,0 +1,744 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Chetan Khona <chetan@kompkin.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2013-04-02 14:48+0530\n"
+"Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
+"Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
+"Language: mr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "पुन्हा प्रयत्न करा"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "नाव"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "दिनांक"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "पातळी"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "वेळ"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "लक्षात ठेवा (&R)"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "मध्यम"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr ""
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr ""
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr ""
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr ""
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "नवीन शैली प्राप्त करा..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr ""
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[नाव नाही]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "नवीन (&N)"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr ""
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "लोड (&L)..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr ""
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr ""
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "साठवा (&S)"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "असे साठवा (&A)..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr ""
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr ""
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "स्तब्ध करा (&U)"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr ""
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr ""
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr ""
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr ""
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr ""
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr ""
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr ""
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr ""
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "छापा (&P)..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "बाहेर पडा (&Q)"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr ""
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "पुनरावृत्ती"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "पूर्ववत करा (&O)"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "पुन्हा करा (&D)"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr ""
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr ""
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr ""
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr ""
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr ""
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr ""
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr ""
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr ""
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "%1 ला पाठवा"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr ""
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr ""
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr ""
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "खेळाडू %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "अपरिचीत"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "जुळवणी तोडा"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] ""
+msgstr[1] ""
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr ""
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "खरे"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "खोटे"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "अपरिचीत"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr ""
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "समूह"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "सुरुवातीचे"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr ""
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "ऐच्छिक"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "नवीन शैली प्राप्त करा (&G)..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "पूर्वावलोकन"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "वर्णन :"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "लेखक :"
+
+#~ msgid "Statistics"
+#~ msgstr "आकडेवारी"
+
+#~ msgid "Overwrite"
+#~ msgstr "खोडून लिहा"
+
+#~ msgid "Export"
+#~ msgstr "निर्यात"
+
+#~ msgid "Main"
+#~ msgstr "मुख्य"
+
+#~ msgid "Nickname:"
+#~ msgstr "टोपणनाव :"
+
+#~ msgid "Comment:"
+#~ msgstr "टीप :"
+
+#~ msgid "Advanced"
+#~ msgstr "प्रगत"
+
+#~ msgid "Key:"
+#~ msgstr "कळ :"
+
+#~ msgid "Remove"
+#~ msgstr "काढून टाका"
+
+#~ msgid "Do not ask again."
+#~ msgstr "पुन्हा विचारु नका."
+
+#~ msgid "anonymous"
+#~ msgstr "निनावी"
+
+#~ msgid "Comment"
+#~ msgstr "टीप"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "तात्पूरती फाईल उघडू शकत नाही."
+
+#~ msgid "Success"
+#~ msgstr "यश"
+
+#~ msgid "all"
+#~ msgstr "सर्व"
+
+#~ msgid "Total:"
+#~ msgstr "एकूण :"
+
+#~ msgid "Current:"
+#~ msgstr "वर्तमान :"
+
+#~ msgid "From"
+#~ msgstr "पासून"
+
+#~ msgid "To"
+#~ msgstr "पर्यंत"
+
+#~ msgid "Count"
+#~ msgstr "मोजणी"
+
+#~ msgid "Percent"
+#~ msgstr "टक्के"
+
+#~ msgid "Configure..."
+#~ msgstr "संयोजीत करा..."
+
+#~ msgid "Export..."
+#~ msgstr "निर्यात..."

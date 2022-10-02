@@ -1,0 +1,1371 @@
+# translation of libkdegames.po to Bengali
+# Bangla translation of libkdegames.
+# Copyright (c) 2003-2006, KDE Foundation.
+# This file is distributed under the same license as the libkdegames package.
+# Progga <progga@BengaLinux.Org> 2003-2006.
+# Deepayan Sarkar <deepayan@bengalinux.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2006-04-09 15:07-0500\n"
+"Last-Translator: Progga <progga@BengaLinux.Org>\n"
+"Language-Team: Bengali <kde-translation@bengalinux.org>\n"
+"Language: bn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "পুনঃপ্রচেষ্টা"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"সেরা স্কোর সংরক্ষণকারী ফাইল পড়া যায় নি।  সম্ভবত অপর কোন ব্যবহারকারী এ মুহূর্তে "
+"ফাইলটিতে লিখছেন।"
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "সেরা স্কোর"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "নাম"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "তারিখ"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "স্তর"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "স্কোর"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "সময়"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "অবস্থান"
+
+#: highscore/kscoredialog.cpp:294
+#, fuzzy, kde-format
+#| msgid "#%1"
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Remember this high score"
+msgstr "সেরা স্কোর"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Forget this high score"
+msgstr "সেরা স্কোর"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"চমত্‍কার!\n"
+"আপনার সেরা স্কোর আরো একধাপ এগিয়েছে!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"শাবাশ!\n"
+"সেরা স্কোরের তালিকায় আপনি স্থান পেয়েছেন!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr ""
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr ""
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr ""
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr ""
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr ""
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr ""
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Select player:"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "খেলোয়াড় বেছে নিন:"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "আপনার নাম:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&নতুন খেলা"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game."
+msgstr "নেটওয়ার্কভিত্তিক খেলা তৈরি করো"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game"
+msgstr "নেটওয়ার্কভিত্তিক খেলা তৈরি করো"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "লোড... (&ল)"
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "&সর্বশেষটি লোড করো"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "খেলা পুনরায় আরম্ভ করো (&খ)"
+
+#: kstandardgameaction.cpp:42
+#, fuzzy
+#| msgid "Restart &Game"
+msgid "Restart the game"
+msgstr "খেলা পুনরায় আরম্ভ করো (&খ)"
+
+#: kstandardgameaction.cpp:44
+#, fuzzy
+msgid "&Save"
+msgstr "&সমাধান করো"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "নতুন নামে সংরক্ষণ...(&ত)"
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr ""
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "খেলা শে&ষ করো"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "বি&রতি"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show &High Scores"
+msgstr "সেরা স্কোর দেখা&ও"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show high scores"
+msgstr "সেরা স্কোর দেখা&ও"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "&Clear High Scores"
+msgstr "সেরা স্কোর"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "Clear high scores"
+msgstr "সেরা স্কোর"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show Statistics"
+msgstr "পরিসংখ্যান"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show statistics"
+msgstr "পরিসংখ্যান"
+
+#: kstandardgameaction.cpp:58
+#, fuzzy
+#| msgid "Statistics"
+msgid "&Clear Statistics"
+msgstr "পরিসংখ্যান"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr ""
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr ""
+
+#: kstandardgameaction.cpp:62
+#, fuzzy
+msgid "&Quit"
+msgstr "&ইঙ্গিত"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr ""
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "পুনরাবৃত্তি"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "বাতি&ল"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "&আবার করো"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "পাশা &গড়াও"
+
+#: kstandardgameaction.cpp:72
+#, fuzzy
+#| msgid "&Roll Dice"
+msgid "Roll the dice"
+msgstr "পাশা &গড়াও"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "দান শেষ"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&ইঙ্গিত"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "প্র&দর্শনী"
+
+#: kstandardgameaction.cpp:78
+#, fuzzy
+#| msgid "Player Name"
+msgid "Play a demo"
+msgstr "খেলোয়াড়ের নাম"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&সমাধান করো"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "খেলার &ধরন বেছে নিন"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "তাসে&র তাড়া কনফিগার করো..."
+
+#: kstandardgameaction.cpp:88
+#, fuzzy
+#| msgid "Configure &Highscores..."
+msgid "Configure &High Scores..."
+msgstr "সেরা স্কোর ক&নফিগার করো..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "সকল খেলোয়াড়ের নিকট প্রেরণ করো"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "%1-কে পাঠাও"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, fuzzy, kde-format
+msgid "%1: "
+msgstr "%1 %2"
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "খেলোয়াড় সর্বোচ্চ সংখ্যা"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "খেলোয়াড় সর্বনিম্ন সংখ্যা"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "খেলার অবস্থা"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "খেলোয়াড় %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "অজ্ঞাত"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "আমার গ্রুপকে  (\"%1\") পাঠাও"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"কুকিতে অমিল!\n"
+"প্রত্যাশিত কুকি: %1\n"
+"প্রাপ্ত কুকি: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"কে-গেম এর সংস্করণে অমিল!\n"
+"প্রত্যাশিত সংস্করণ: %1\n"
+"প্রাপ্ত সংস্করণ: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "অজ্ঞাত সমস্যাসূচক কোড %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "খেলার বৈশিষ্ট্য নির্ধারণ করো"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "খেলা বৈশিষ্ট্য নির্ধারণ করা চালিয়ে যাও"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "খেলা লোড করো"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "ক্লায়েন্ট খেলা সংযুক্ত হয়েছে"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "খেলার বৈশিষ্ট্য নির্ধারণ করা হয়েছে"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "সংযোগ বিচ্ছিন্ন"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "খেলোয়াড়ের বৈশিষ্ট্য"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "খেলার বৈশিষ্ট্য"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "খেলোয়াড় যোগ করো"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "খেলোয়াড় অপসারণ করো"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "খেলোয়াড়কে সক্রিয় করো"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "খেলোয়াড়কে নিষ্ক্রিয় করো"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "সমস্যাসূচক বার্তা"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "খেলোয়াড়ের ইনপুট"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "একটি আই.ও. যোগ করা হয়েছে"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "প্রসেস অনুসন্ধান (Query)"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "খেলোয়াড়ের আই.ডি."
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "নামবিহীন - আই.ডি.: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, fuzzy, kde-format
+#| msgid "%1 unregistered"
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 নিবন্ধিত নয়"
+msgstr[1] "%1 নিবন্ধিত নয়"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL পয়েন্টার"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "সত্য"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "মিথ্যা"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "অজ্ঞাত"
+
+# Number of untranslated messages: 2.
+#
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "ব্যবহারকারীর-আই.ডি."
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "গ্রুপ"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "ডিফল্ট"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsyncInput"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "আমার-পালা"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgid "Preview"
+msgstr "প্রাকদর্শন:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, fuzzy, kde-format
+#| msgid "Comment:"
+msgid "Contact:"
+msgstr "মন্তব্য:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr ""
+
+#~ msgid "Mean Score"
+#~ msgstr "মধ্যম স্কোর"
+
+#~ msgid "Best Score"
+#~ msgstr "সেরা স্কোর"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "অতিক্রান্ত সময়"
+
+#~ msgid "Best &Scores"
+#~ msgstr "সেরা স্কো&র"
+
+#~ msgid "&Players"
+#~ msgstr "খেলোয়া&ড়"
+
+#~ msgid "Statistics"
+#~ msgstr "পরিসংখ্যান"
+
+#~ msgid "Histogram"
+#~ msgstr "আয়তলেখ (histogram)"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "বিশ্ব-ব্যাপী সেরা স্কোর দেখুন"
+
+#~ msgid "View world-wide players"
+#~ msgstr "বিশ্ব-ব্যাপী ছড়িয়ে থাকা খেলোয়াড়দের দেখুন"
+
+#~ msgid "Highscores"
+#~ msgstr "সেরা স্কোর"
+
+#~ msgid "Overwrite"
+#~ msgstr "ওপর দিয়ে লেখা"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "ফাইলটি ইতিমধ্যেই বিদ্যমান।  এটির ওপর দিয়েই কি লেখা হবে?"
+
+#, fuzzy
+#~ msgid "Export"
+#~ msgstr "রপ্তানি..."
+
+#~ msgid "Winner"
+#~ msgstr "বিজয়ী"
+
+#~ msgid "Won Games"
+#~ msgstr "যে সব খেলায় জয় হয়েছে"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "সেরা স্কোর কনফিগার করো"
+
+#~ msgid "Main"
+#~ msgstr "প্রধান"
+
+#~ msgid "Nickname:"
+#~ msgstr "ডাকনাম:"
+
+#~ msgid "Comment:"
+#~ msgstr "মন্তব্য:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "বিশ্ব-ব্যাপী সেরা স্কোর সক্রিয় করা হয়েছে"
+
+#~ msgid "Advanced"
+#~ msgstr "অগ্রসর"
+
+#~ msgid "Registration Data"
+#~ msgstr "নিবন্ধন তথ্য"
+
+#~ msgid "Key:"
+#~ msgstr "মূল-শব্দ:"
+
+#, fuzzy
+#~ msgid "Remove"
+#~ msgstr "খেলোয়াড় অপসারণ করো"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "এটি আপনার নিবন্ধন মূল-শব্দ (Key) স্থায়ীভাবে মুছে ফেলবে।  এরফলে বর্তমানে "
+#~ "নিবন্ধনকৃত ডাকনামটি আপনি আর ব্যবহার করতে পারবেন না।"
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "অনুগ্রহপূর্বক এমন একটি ডাকনাম বেছে নিন যা ফাঁকা নয়।"
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "ডাকনামটি  ইতিমধ্যেই ব্যবহৃত হচ্ছে।  অনুগ্রহপূর্বক অপর একটি নাম বেছে নিন"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "আপনার ডাকনাম লিখুন"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "অভিনন্দন, আপনি জয়ী হয়েছেন!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "আপনার ডাকনাম লিখুন:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "আর জিজ্ঞাসা করবে না।"
+
+#~ msgid "anonymous"
+#~ msgstr "অজ্ঞাত"
+
+#~ msgid "Games Count"
+#~ msgstr "খেলার সংখ্যা"
+
+#~ msgid "Comment"
+#~ msgstr "মন্তব্য"
+
+#~ msgid "Undefined error."
+#~ msgstr "অজ্ঞাত সমস্যা।"
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "আর্গুমেন্ট বাদ পড়েছে।"
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "ভুল আর্গুমেন্ট।"
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "মাই-এসকিউএল সার্ভারের সাথে সংযোগ স্থাপন করা যায় নি।"
+
+#~ msgid "Unable to select database."
+#~ msgstr "ডেটাবেস নির্বাচন করা যায় নি।"
+
+#~ msgid "Error on database query."
+#~ msgstr "ডেটাবেসে Query চালাতে গিয়ে সমস্যা হয়েছে।"
+
+#~ msgid "Error on database insert."
+#~ msgstr "ডেটাবেসে Insert করতে গিয়ে সমস্যা হয়েছে।"
+
+#~ msgid "Nickname already registered."
+#~ msgstr "এই ডাকনামটি ইতিমধ্যেই নিবন্ধিত হয়ে গিয়েছে।"
+
+#~ msgid "Nickname not registered."
+#~ msgstr "ডাকনামটি নিবন্ধিত নয়।"
+
+#~ msgid "Invalid key."
+#~ msgstr "ভুল মূল-শব্দ।"
+
+#~ msgid "Invalid submit key."
+#~ msgstr "ভুল দাখিলকারী মূল-শব্দ।"
+
+#~ msgid "Invalid level."
+#~ msgstr "ভুল স্তর।"
+
+#~ msgid "Invalid score."
+#~ msgstr "ভুল স্কোর।"
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "বিশ্ব-ব্যাপী সেরা স্কোর রক্ষণকারী সার্ভারের সাথে সংযোগ স্থাপন করা যায় নি"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "সার্ভারের ইউ.আর.এল.: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "অস্থায়ী ফাইল খোলা যায় নি।"
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "বিশ্ব-ব্যাপী সেরা স্কোর রক্ষণকারী সার্ভারের প্রেরিত বার্তা"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "বিশ্ব-ব্যাপী সেরা স্কোর রক্ষণকারী সার্ভার ভুল জবাব প্রেরণ করেছে।"
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Raw বার্তা: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "বিশ্ব-ব্যাপী সেরা স্কোর রক্ষণকারী সার্ভার ভুল জবাব প্রেরণ করেছে (হারানো জিনিষ: "
+#~ "%1)"
+
+#~ msgid "Success"
+#~ msgstr "সফল"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "বহু-খেলোয়াড়ের স্কোর"
+
+#~ msgid "No game played."
+#~ msgstr "কোন খেলা হয় নি।"
+
+#~ msgid "Scores for last game:"
+#~ msgstr "শেষ খেলার স্কোর:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "শেষ %1-টি খেলার স্কোর:"
+
+#~ msgid "all"
+#~ msgstr "সব"
+
+#~ msgid "Select player:"
+#~ msgstr "খেলোয়াড় বেছে নিন:"
+
+#~ msgid "Total:"
+#~ msgstr "মোট:"
+
+#~ msgid "Won:"
+#~ msgstr "জয়:"
+
+#~ msgid "Lost:"
+#~ msgstr "পরাজয়:"
+
+#~ msgid "Draw:"
+#~ msgstr "অমীমাংসিত:"
+
+#~ msgid "Current:"
+#~ msgstr "বর্তমান:"
+
+#~ msgid "Max won:"
+#~ msgstr "সর্বোচ্চ জয়:"
+
+#~ msgid "Max lost:"
+#~ msgstr "সর্বোচ্চ পরাজয়:"
+
+#~ msgid "Game Counts"
+#~ msgstr "খেলার সংখ্যা"
+
+#~ msgid "Trends"
+#~ msgstr "প্রবণতা"
+
+#~ msgid "From"
+#~ msgstr "প্রেরক"
+
+#~ msgid "To"
+#~ msgstr "প্রাপক"
+
+#~ msgid "Count"
+#~ msgstr "সংখ্যা"
+
+#~ msgid "Percent"
+#~ msgstr "শতাংশ"
+
+#~ msgid "Configure..."
+#~ msgstr "কনফিগার..."
+
+#~ msgid "Export..."
+#~ msgstr "রপ্তানি..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "আড্ডা কনফিগার করো"
+
+#~ msgid "Name Font..."
+#~ msgstr "নামের ফন্ট..."
+
+#~ msgid "Text Font..."
+#~ msgstr "টেক্সটের ফন্ট..."
+
+#~ msgid "Player: "
+#~ msgstr "খেলোয়াড়: "
+
+#~ msgid "This is a player message"
+#~ msgstr "এটি খেলোয়াড় কর্তৃক প্রেরিত বার্তা"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "সিস্টেম বার্তা - খেলার প্রোগ্রাম থেকে সরাসরি প্রেরিত বার্তা"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- খেলা: "
+
+#~ msgid "This is a system message"
+#~ msgstr "এটি একটি সিস্টেম বার্তা"
+
+#, fuzzy
+#~| msgid "Maximal number of messages (-1 = unlimited):"
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "বার্তার সর্বোচ্চ সংখ্যা (-1 = অসীম):"
+
+#~ msgid "Create a network game"
+#~ msgstr "নেটওয়ার্কভিত্তিক খেলা তৈরি করো"
+
+#~ msgid "Join a network game"
+#~ msgstr "নেটওয়ার্কভিত্তিক কোন খেলায় যোগ দিন"
+
+#~ msgid "Game name:"
+#~ msgstr "খেলার নাম:"
+
+#~ msgid "Network games:"
+#~ msgstr "নেটওয়ার্কভিত্তিক খেলা:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "যে পোর্ট-এ সংযুক্ত হতে হবে:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "যে হোস্ট-এ সংযুক্ত হতে হবে:"
+
+#~ msgid "&Start Network"
+#~ msgstr "নেটওয়ার্ক চালু করো (&চ)"
+
+#~ msgid "Network Game"
+#~ msgstr "নেটওয়ার্কভিত্তিক খেলা"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "কে-গেম ডিবাগ ডায়ালগ"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "কে-গে&ম ডিবাগ করো"
+
+#~ msgid "Update"
+#~ msgstr "আপডেট"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "কে-গেম পয়েন্টার"
+
+#~ msgid "Game ID"
+#~ msgstr "খেলার আই.ডি."
+
+#~ msgid "Game Cookie"
+#~ msgstr "খেলার কুকি"
+
+#~ msgid "Is Master"
+#~ msgstr "মাস্টার"
+
+#~ msgid "Is Admin"
+#~ msgstr "অ্যাডমিন"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "সংযোগ দিচ্ছে"
+
+#~ msgid "Game Status"
+#~ msgstr "খেলার অবস্থা"
+
+#~ msgid "Game is Running"
+#~ msgstr "খেলা চলছে"
+
+#~ msgid "Maximal Players"
+#~ msgstr "সর্বোচ্চ খেলোয়াড়"
+
+#~ msgid "Minimal Players"
+#~ msgstr "সর্বনিম্ন খেলোয়াড়"
+
+#~ msgid "Players"
+#~ msgstr "খেলোয়াড়"
+
+#~ msgid "Debug &Players"
+#~ msgstr "খেলোয়াড় ডিবাগ করো (&খ)"
+
+#~ msgid "Available Players"
+#~ msgstr "উপস্থিত খেলোয়াড়বৃন্দ"
+
+#~ msgid "Player Pointer"
+#~ msgstr "খেলোয়াড়ের পয়েন্টার"
+
+#~ msgid "Player Name"
+#~ msgstr "খেলোয়াড়ের নাম"
+
+#~ msgid "Player Group"
+#~ msgstr "খেলোয়াড়ের গ্রুপ"
+
+#~ msgid "Player User ID"
+#~ msgstr "খেলোয়াড়ের ব্যবহারকারী-আই.ডি."
+
+#~ msgid "My Turn"
+#~ msgstr "আমার পালা"
+
+#~ msgid "Async Input"
+#~ msgstr "Async ইনপুট"
+
+#~ msgid "KGame Address"
+#~ msgstr "কে-গেম এর ঠিকানা"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "ভার্চুয়াল খেলোয়াড়"
+
+#~ msgid "Player is Active"
+#~ msgstr "সক্রিয় খেলোয়াড়"
+
+#~ msgid "RTTI"
+#~ msgstr "আর.টি.টি.আই."
+
+#~ msgid "Network Priority"
+#~ msgstr "নেটওয়ার্কের অগ্রাধিকার"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "বার্তা ডিবাগ করো (&ব)"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "এই আই.ডি.গুলো প্রদর্শন করবে না:"
+
+#~ msgid "Clean"
+#~ msgstr "পরিষ্কার"
+
+#~ msgid "Dirty"
+#~ msgstr "ময়লা"
+
+#~ msgid "Local"
+#~ msgstr "স্থানীয়"
+
+#~ msgid "Undefined"
+#~ msgstr "অনির্ধারিত"
+
+#~ msgid "&Chat"
+#~ msgstr "&আড্ডা"
+
+#~ msgid "C&onnections"
+#~ msgstr "&সংযোগ"
+
+#, fuzzy
+#~ msgid "&Game"
+#~ msgstr "খেলা শে&ষ করো"
+
+#~ msgid "&Network"
+#~ msgstr "নেটওয়ার্ক (&ন)"
+
+#~ msgid "&Message Server"
+#~ msgstr "বার্তা প্রদানকারী সার্ভার (&ব)"
+
+#~ msgid "Network Configuration"
+#~ msgstr "নেটওয়ার্ক কনফিগারেশন"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "সার্ভারের সাথে সংযোগ স্থাপন করা যায় নি"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "নেটওয়ার্কের অবস্থা: কোন নেটওয়ার্ক নেই"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "নেটওয়ার্কের অবস্থা: আপনি মাস্টার"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "নেটওয়ার্কের অবস্থা: আপনি সংযুক্ত আছেন"
+
+#~ msgid "Your name:"
+#~ msgstr "আপনার নাম:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "ক্লায়েন্টের সর্বোচ্চ সংখ্যা"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "ক্লায়েন্টের সর্বোচ্চ সংখ্যা (-1 = অসীম):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "ক্লায়েন্টের সর্বোচ্চ সংখ্যা পরিবর্তন করো"
+
+#~ msgid "Change Admin"
+#~ msgstr "অ্যাডমিন পরিবর্তন করো"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "সকল খেলোয়াড়সহ ক্লায়েন্টকে অপসারণ করো"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "শুধুমাত্র অ্যাডমিনই বার্তা প্রদানকারী সার্ভারকে কনফিগার করতে পারেন!"
+
+#, fuzzy
+#~ msgid "You do not own the message server"
+#~ msgstr "আপনি কোন বার্তা প্রদানকারী সার্ভারের মালিক না"
+
+#~ msgid "Chat"
+#~ msgstr "আড্ডা"
+
+#~ msgid "Connected Players"
+#~ msgstr "সংযুক্ত খেলোয়াড়"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "আপনি কি খেলোয়াড় \"%1\"-কে খেলা থেকে নিষিদ্ধ ঘোষণা করতে চান? "
+
+#~ msgid "Ban Player"
+#~ msgstr "খেলোয়াড়কে নিষিদ্ধ করো"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "নিষিদ্ধ করবে না"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "সার্ভারের সাথে সংযোগ বিচ্ছিন্ন হয়ে গিয়েছে!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "ক্লায়েন্টের সাথে সংযোগ বিচ্ছিন্ন হয়ে গিয়েছে!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "নেটওয়ার্ক ত্রুটি পাওয়া গিয়েছে!\n"
+#~ "ত্রুটি নম্বর: %1\n"
+#~ "ত্রুটিসূচক বার্তা: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "সংযোগ স্থাপন করা যায় নি।"
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "সংযোগ স্থাপন করা যায় নি:\n"
+#~ "ত্রুটিসূচক বার্তাটি ছিল:\n"
+#~ "%1"
+
+#, fuzzy
+#~| msgid "Carddeck Selection"
+#~ msgid "Card Deck Selection"
+#~ msgstr "তাসের তাড়া নির্বাচন"
+
+#~ msgid "unnamed"
+#~ msgstr "নামবিহীন"
+
+#, fuzzy
+#~| msgid "Frontside"
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "সম্মুখ দিক"
+
+#, fuzzy
+#~| msgid "Backside"
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "উল্টোপিঠ"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "নাম"
+
+#, fuzzy
+#~| msgid "Preview:"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "প্রাকদর্শন:"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "মিথ্যা"
+
+#, fuzzy
+#~ msgid "Player"
+#~ msgstr "খেলোয়াড়"
+
+#, fuzzy
+#~ msgid "Reserved"
+#~ msgstr "প্রাপক"
+
+#, fuzzy
+#~ msgid "(unnamed)"
+#~ msgstr "নামবিহীন"
+
+#, fuzzy
+#~ msgid "Statistics..."
+#~ msgstr "পরিসংখ্যান"
+
+#, fuzzy
+#~ msgid "Host: %1"
+#~ msgstr "পরাজয়:"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "অ্যাডাম অ্যালেক্স আন্দ্রে এন্ড্রু বার্ট বেন বার্ন্‌ড বিল ক্রিস চাক ড্যানিয়েল ডন ডানকান "
+#~ "এড এমিলি এরিক গ্যারি গ্রেগ হ্যারি ইয়ান জেন জেফ জাঁ কাই কিথ কেন কার্ক মার্ক মাইক "
+#~ "নেইল পল রিক রবার্ট স্যাম সিন টমাস টিম ওয়ালটার"
+
+#, fuzzy
+#~| msgid "Show &Highscores"
+#~ msgid "Show rich text"
+#~ msgstr "সেরা স্কোর দেখা&ও"
+
+#, fuzzy
+#~| msgid "Change Admin"
+#~ msgid "Change Icon..."
+#~ msgstr "অ্যাডমিন পরিবর্তন করো"
+
+#, fuzzy
+#~| msgid "Random frontside"
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "অনিয়মিত সম্মুখ দিক"
+
+#~ msgid "Choose Backside"
+#~ msgstr "উল্টোপিঠ বেছে নিন"
+
+#~ msgid "empty"
+#~ msgstr "ফাঁকা"
+
+#~ msgid "Random backside"
+#~ msgstr "অনিয়মিত উল্টোপিঠ"
+
+#~ msgid "Use global backside"
+#~ msgstr "সর্বব্যাপী (global) উল্টোপিঠ ব্যবহার করো"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "উল্টোপিঠকে সর্বব্যাপী (global) করো"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "সম্মুখ দিক বেছে নিন"
+
+#~ msgid "Use global frontside"
+#~ msgstr "সর্বব্যাপী (Global) সম্মুখ দিক ব্যবহার করো"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "সম্মুখ দিককে সর্বব্যাপী (global) করো"
+
+#~ msgid "Resize Cards"
+#~ msgstr "তাসের আকার পরিবর্তন করো"
+
+#~ msgid "Default Size"
+#~ msgstr "ডিফল্ট আকার"
+
+#~ msgid "Preview:"
+#~ msgstr "প্রাকদর্শন:"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgid "Form"
+#~ msgstr "প্রেরক"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Properties"
+#~ msgstr "বৈশিষ্ট্য"
+
+#~ msgid "Data"
+#~ msgstr "তথ্য"
+
+#~ msgid "Value"
+#~ msgstr "মান"
+
+#~ msgid "Policy"
+#~ msgstr "নীতি"
+
+#~ msgid "ID"
+#~ msgstr "আই.ডি."
+
+#~ msgid "Receiver"
+#~ msgstr "প্রাপক"
+
+#~ msgid "Sender"
+#~ msgstr "প্রেরক"
+
+#~ msgid "ID - Text"
+#~ msgstr "আই.ডি. - টেক্সট"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"

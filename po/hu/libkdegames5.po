@@ -1,0 +1,1365 @@
+#
+# Tamas Szanto <taszanto@gmail.com>, 2000.
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2011.
+# Balázs Úr <urbalazs@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.3\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2012-06-12 19:41+0200\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Újra"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"A legjobb eredményeket tartalmazó fájl nem érhető el. Lehet, hogy egy másik "
+"felhasználó lefoglalta írásra."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Dicsőségtábla"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Név"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Dátum"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Szint"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Pontszám"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Idő"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Helyezés"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "%1."
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Megjegyzés"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Elfelejtés"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Emlékezzen erre a magas pontszámra"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Felejtse el ezt a magas pontszámot"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Kitűnően játszott!\n"
+"Az eredmény felkerült a dicsőségtáblára!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Gratulálunk!\n"
+"Sikerült felkerülnie a dicsőségtáblára!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Rendkívül könnyű"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Nagyon könnyű"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Könnyű"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Közepes"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Nehéz"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Nagyon nehéz"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Rendkívül nehéz"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Lehetetlen"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "A nehézségi szint megváltozásakor az éppen futó játék befejeződik!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Más nehézségi szint"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Nehézségi szint"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "A nehézségi szint beállítása"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Beállítja a játék nehézségi fokát."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Új témák letöltése…"
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Téma kiválasztása"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[Névtelen]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "%1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "Ú&j"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Új játék indítása."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Új játék indítása"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "B&etöltés..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Mentett játék megnyitása..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Leg&utóbbi betöltése"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Nemrég mentett játék megnyitása..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Új&rakezdés"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "A játék újrakezdése"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "M&entés"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Az aktuális játék mentése"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Mentés máské&nt..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Az aktuális játék mentése más fájlba"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "A játék be&fejezése"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Az aktuális játék befejezése"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Szü&net"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Szünet"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "D&icsőségtábla"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "A dicsőségtábla megjelenítése"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "A dicsőségtábla &törlése"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "A dicsőségtábla törlése"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Statisztika"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Statisztika"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "A statisztika &törlése"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Az összes statisztikai adat törlése."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Nyomtatás..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Kilépés"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Kilépés a programból"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Megismétlés"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Az utolsó lépés megismétlése"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Visszavonás"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Az utolsó lépés visszavonása"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Újra vég&rehajtás"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Az utolsó lépés újbóli végrehajtása"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Dobás"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Dobás a kockával"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Következő"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "Ti&pp"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Tipp kérése"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demó"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Demó"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "Megol&dás"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "A játék megoldása"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "A nehézségi szint ki&választása"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "A kártya&csomagok beállításai..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "A dicsősé&gtábla beállításai..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Küldés az összes játékosnak"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Küldés %1 részére"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Maxjátékosok"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Minjátékosok"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Játékállapot"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "%1 játékos"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Küldés a saját csoportomnak (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Nem megfelelő cookie!\n"
+"A várt cookie: %1\n"
+"A kapott cookie: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"A KGame verziója nem megfelelő!\n"
+"A várt verziószám: %1\n"
+"A tényleges verziószám: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Ismeretlen hibakód: %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "A játék beállítása"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "A játék beállításának folytatása"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Játék betöltése"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Kliens csatlakozott"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "A játék beállítása kész"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Véletlenszerű szinkronizálás"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "A kapcsolat bontása"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "A játékos tulajdonságai"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "A játék tulajdonságai"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Játékos felvétele"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Játékos törlése"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Játékos aktiválása"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Inaktív játékos"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Az. kör"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Hibaüzenet"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Játékos bemenete"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "IO hozzáadva"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "A lekérdezés feldolgozása"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Játékosazonosító"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Névtelen - az.: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 nem regisztrált"
+msgstr[1] "%1 nem regisztrált"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL-mutató"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "igaz"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "hamis"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "ismeretlen"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "FelhAz"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Csoport"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "alapértelmezés"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AszinkronBemenet"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "ÉnJövök"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Nehézségi szint"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Egyedi"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Válassza ki a játék <b>nehézségi szintjét</b>.<br />Ha egy játék futása "
+"közben vált át más nehézségi szintre, új játék kezdődik, és a futó játék "
+"véget ér."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Válassza ki a játék <b>nehézségi szintjét</b>.<br />A szint egy játék futása "
+"közben is megváltoztatható."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "Új témák &letöltése…"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Előnézet"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "A téma jellemzői"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Elérhetőség:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Leírás:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Szerző:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Átlagpontszám"
+
+#~ msgid "Best Score"
+#~ msgstr "A legmagasabb pontszám"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Az eltelt idő"
+
+#~ msgid "Best &Scores"
+#~ msgstr "A &legjobb eredmények"
+
+#~ msgid "&Players"
+#~ msgstr "&Játékosok"
+
+#~ msgid "Statistics"
+#~ msgstr "Statisztika"
+
+#~ msgid "Histogram"
+#~ msgstr "Hisztogram"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Az internetes dicsőségtábla megtekintése"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Az internetes játékosok megtekintése"
+
+#~ msgid "Highscores"
+#~ msgstr "Dicsőségtábla"
+
+#~ msgid "Overwrite"
+#~ msgstr "Felülírás"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "A fájl már létezik. Felül szeretné írni?"
+
+#~ msgid "Export"
+#~ msgstr "Exportálás"
+
+#~ msgid "Winner"
+#~ msgstr "Győztes"
+
+#~ msgid "Won Games"
+#~ msgstr "Győzelmek"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "A dicsőségtábla beállításai"
+
+#~ msgid "Main"
+#~ msgstr "Fő"
+
+#~ msgid "Nickname:"
+#~ msgstr "Becenév:"
+
+#~ msgid "Comment:"
+#~ msgstr "Megjegyzés:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Az internetes dicsőségtábla bekapcsolása"
+
+#~ msgid "Advanced"
+#~ msgstr "Speciális"
+
+#~ msgid "Registration Data"
+#~ msgstr "Regisztrációs adatok"
+
+#~ msgid "Key:"
+#~ msgstr "Kulcs:"
+
+#~ msgid "Remove"
+#~ msgstr "Törlés"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Véglegesen törlődni fog a regisztrációs kulcs. Ezután már nem lehet "
+#~ "használni ezt a becenevet."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "A becenév nem lehet üres."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "A megadott becenév már foglalt, válasszon egy másikat."
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Kérem adja meg a becenevét"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Gratulálunk, Ön nyert!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Az Ön beceneve:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Ez az ablak ne jelenjen meg többször"
+
+#~ msgid "anonymous"
+#~ msgstr "névtelen"
+
+#~ msgid "Games Count"
+#~ msgstr "A játszmák száma"
+
+#~ msgid "Comment"
+#~ msgstr "Megjegyzés"
+
+#~ msgid "Undefined error."
+#~ msgstr "Nem definiált hiba."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Hiányzó argumentum(ok)."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Érvénytelen argumentum(ok)."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Nem sikerült csatlakozni a MySQL kiszolgálóhoz."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Az adatbázis kiválasztása nem sikerült."
+
+#~ msgid "Error on database query."
+#~ msgstr "Az adatbázislekérdezésben hiba történt."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Hiba történt az adatbázisba való beillesztéskor."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "A becenév már regisztrálva van."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "A becenév nincs regisztrálva."
+
+#~ msgid "Invalid key."
+#~ msgstr "Érvénytelen kulcs."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Érvénytelen rögzítési kulcs."
+
+#~ msgid "Invalid level."
+#~ msgstr "Érvénytelen szint."
+
+#~ msgid "Invalid score."
+#~ msgstr "Érvénytelen eredmény."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr ""
+#~ "Nem sikerült elérni az internetes eredményregisztrációs kiszolgálót."
+
+#~ msgid "Server URL: %1"
+#~ msgstr "A kiszolgáló URL-je: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Egy ideiglenes fájlt nem sikerült megnyitni."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Üzenet az internetes eredményregisztrációs kiszolgálóról"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr ""
+#~ "Érvénytelen válasz érkezett az internetes eredményregisztrációs "
+#~ "kiszolgálóról."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Nyers üzenet: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Érvénytelen válasz érkezett az internetes eredményregisztrációs "
+#~ "kiszolgálóról (hiányzó elem: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Siker"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "A hálózati játékok eredményei"
+
+#~ msgid "No game played."
+#~ msgstr "Még egy játszma sem zajlott le."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Az utolsó játék eredménye:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Az utolsó %1 játék eredménye:"
+
+#~ msgid "all"
+#~ msgstr "mind"
+
+#~ msgid "Select player:"
+#~ msgstr "Játékos választása:"
+
+#~ msgid "Total:"
+#~ msgstr "Összesen:"
+
+#~ msgid "Won:"
+#~ msgstr "Győzelem:"
+
+#~ msgid "Lost:"
+#~ msgstr "Vereség:"
+
+#~ msgid "Draw:"
+#~ msgstr "Döntetlen:"
+
+#~ msgid "Current:"
+#~ msgstr "A jelenlegi:"
+
+#~ msgid "Max won:"
+#~ msgstr "Max. győzelem:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Max. vereség:"
+
+#~ msgid "Game Counts"
+#~ msgstr "A játékok száma"
+
+#~ msgid "Trends"
+#~ msgstr "Trendek"
+
+#~ msgid "From"
+#~ msgstr "Ettől"
+
+#~ msgid "To"
+#~ msgstr "Eddig"
+
+#~ msgid "Count"
+#~ msgstr "Szám"
+
+#~ msgid "Percent"
+#~ msgstr "Százalék"
+
+#~ msgid "Configure..."
+#~ msgstr "Beállítás..."
+
+#~ msgid "Export..."
+#~ msgstr "Exportálás..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "A csevegés beállításai"
+
+#~ msgid "Name Font..."
+#~ msgstr "A nevek betűtípusa..."
+
+#~ msgid "Text Font..."
+#~ msgstr "A szöveg betűtípusa..."
+
+#~ msgid "Player: "
+#~ msgstr "Játékos: "
+
+#~ msgid "This is a player message"
+#~ msgstr "Ez egy játékos üzenete"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Rendszerüzenetek (közvetlenül a játékból küldött üzenetek)"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Játék: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Ez egy rendszerüzenet"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Az üzenetek max. száma (-1 = korlátlan):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Új hálózati játék indítása"
+
+#~ msgid "Join a network game"
+#~ msgstr "Csatlakozás egy hálózati játékhoz"
+
+#~ msgid "Game name:"
+#~ msgstr "A játék neve:"
+
+#~ msgid "Network games:"
+#~ msgstr "Hálózati játékok:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Gépnév:"
+
+#~ msgid "&Start Network"
+#~ msgstr "Hálózati játék &indítása"
+
+#~ msgid "Network Game"
+#~ msgstr "Hálózati játék"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame nyomkövetési ablak"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "A &KGame nyomkövetése"
+
+#~ msgid "Update"
+#~ msgstr "Frissítés"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "KGame mutató"
+
+#~ msgid "Game ID"
+#~ msgstr "Játékazonosító"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Játék-cookie"
+
+#~ msgid "Is Master"
+#~ msgstr "Irányító (master)"
+
+#~ msgid "Is Admin"
+#~ msgstr "Rendszergazda"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Csatlakozási lehetőség"
+
+#~ msgid "Game Status"
+#~ msgstr "A játék állapota"
+
+#~ msgid "Game is Running"
+#~ msgstr "A játék fut"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Maximális játékosszám"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Minimális játékosszám"
+
+#~ msgid "Players"
+#~ msgstr "Játékosok"
+
+#~ msgid "Debug &Players"
+#~ msgstr "A játékosok nyomkö&vetése"
+
+#~ msgid "Available Players"
+#~ msgstr "A rendelkezésre álló játékosok"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Játékos-mutató"
+
+#~ msgid "Player Name"
+#~ msgstr "A játékos neve"
+
+#~ msgid "Player Group"
+#~ msgstr "A játékos csoportja"
+
+#~ msgid "Player User ID"
+#~ msgstr "A játékos felhasználóazonosítója"
+
+#~ msgid "My Turn"
+#~ msgstr "Én jövök"
+
+#~ msgid "Async Input"
+#~ msgstr "Aszinkron bemenet"
+
+#~ msgid "KGame Address"
+#~ msgstr "KGame-cím"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "A játékos virtuális"
+
+#~ msgid "Player is Active"
+#~ msgstr "A játékos aktív"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Hálózati prioritás"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Az üzenetek ny&omkövetése"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Az azonosító elrejtése a következőknél:"
+
+#~ msgid "Clean"
+#~ msgstr "tiszta"
+
+#~ msgid "Dirty"
+#~ msgstr "piszkos"
+
+#~ msgid "Local"
+#~ msgstr "helyi"
+
+#~ msgid "Undefined"
+#~ msgstr "nem definiált"
+
+#~ msgid "&Chat"
+#~ msgstr "&Csevegés"
+
+#~ msgid "C&onnections"
+#~ msgstr "Ka&pcsolatok"
+
+#~ msgid "&Game"
+#~ msgstr "&Játék"
+
+#~ msgid "&Network"
+#~ msgstr "&Hálózat"
+
+#~ msgid "&Message Server"
+#~ msgstr "Ü&zenetküldő kiszolgáló"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Hálózati beállítások"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Nem sikerült kapcsolódni a hálózathoz"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "A hálózat állapota: nincs hálózat"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "A hálózat állapota: Ön az irányító (master)"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "A hálózat állapota: csatlakozva"
+
+#~ msgid "Your name:"
+#~ msgstr "Az Ön neve:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Max. kliensszám"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Maximális kliensszám (-1 = végtelen):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "A maximális kliensszám megváltoztatása"
+
+#~ msgid "Change Admin"
+#~ msgstr "A rendszergazda megváltoztatása"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Kliens eltávolítása az összes játékossal együtt"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr ""
+#~ "Csak a rendszergazda módosíthatja az üzenetküldő kiszolgáló beállításait."
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Nem jogosult az üzenetküldő kiszolgáló beállításához"
+
+#~ msgid "Chat"
+#~ msgstr "Csevegés"
+
+#~ msgid "Connected Players"
+#~ msgstr "A csatlakozott játékosok"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Ki szeretné tiltani a játékból ezt a játékost: \"%1\"?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Kitiltás"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Nem kell kitiltani"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "A kiszolgálóval megszakadt a kapcsolat."
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "A klienssel megszakadt a kapcsolat."
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Hálózati hiba történt!\n"
+#~ "A hiba száma: %1\n"
+#~ "A hibaüzenet: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Nem sikerült kapcsolatot létrehozni."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Nem sikerült kapcsolatot létrehozni.\n"
+#~ "A hibaüzenet:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Hiba"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "A kártyacsomag kiválasztása"
+
+#~ msgid "unnamed"
+#~ msgstr "névtelen"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Előlap"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Hátlap"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Előlap\n"
+#~ "Előnézet"
+
+#~ msgid "Deck Name"
+#~ msgstr "Csomagnév"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "Hátlap\n"
+#~ "Előnézet"
+
+#~ msgid "Deck description."
+#~ msgstr "A kártyacsomag leírása."
+
+#~ msgid "Display:"
+#~ msgstr "Megjelenítés:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Résztvevő játékosok és botok"
+
+#~ msgid "Spectators"
+#~ msgstr "Nézők"
+
+#~ msgid "Close"
+#~ msgstr "Bezárás"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Játékosok, botok és nézők"
+
+#~ msgid "Action..."
+#~ msgstr "Művelet..."
+
+#~ msgid "Player"
+#~ msgstr "Játékos"
+
+#~ msgid "Open"
+#~ msgstr "Megnyitás"
+
+#~ msgid "Reserved"
+#~ msgstr "Foglalt"
+
+#~ msgid "AI bot"
+#~ msgstr "Bot"
+
+#~ msgid "Abandoned"
+#~ msgstr "Elhagyott"
+
+#~ msgid "Type: %1"
+#~ msgstr "Típus: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(névtelen)"
+
+#~ msgid "Spectator"
+#~ msgstr "Néző"
+
+#~ msgid "Statistics..."
+#~ msgstr "Statisztika..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Leül"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Bot hozzáadása"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "Bot indítása, ülés megnyitása"
+
+#~ msgid "Stand up"
+#~ msgstr "Feláll"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "Játékos indítása, ülés megnyitása"
+
+#~ msgid "Host: %1"
+#~ msgstr "Gép: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Valódi név: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "András Anita Attila Árpád Balázs Béla Cecília Csaba Edit Endre Eszter Éva "
+#~ "Gábor Hajnalka István József Katalin László Marcell Miklós Mónika Noémi "
+#~ "Ottó Piroska Róbert Sarolta Sándor Tamás Ubul Veronika Zsófia Zsuzsa"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#~ msgid "Show rich text"
+#~ msgstr "Szövegformázás"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Várakozási idő az üzenetnél:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Áttetszőség:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Más ikon..."
+
+#~ msgid "Text color:"
+#~ msgstr "Szövegszín:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Háttérszín:"
+
+#~ msgid "Replace Mode"
+#~ msgstr "Cserélési mód"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "Előző meghagyása"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "Előző cseréje"
+
+#~ msgid "Corners:"
+#~ msgstr "Sarkok:"
+
+#~ msgid "Square"
+#~ msgstr "Négyzet"
+
+#~ msgid "Sharp"
+#~ msgstr "Éles"
+
+#~ msgid "Soft"
+#~ msgstr "Lágy"
+
+#~ msgid "Softest"
+#~ msgstr "Puhateszt"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Felbukkanó a bal felső sarokban"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Felbukkanó a jobb felső sarokban"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Felbukkanó a bal alsó sarokban"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Felbukkanó a jobb alsó sarokban"
+
+#~ msgid "Popup Center"
+#~ msgstr "Felbukkanó középen"
+
+#~ msgid "Force Instant Hide"
+#~ msgstr "Azonnali elrejtés"
+
+#~ msgid "Force Animated Hide"
+#~ msgstr "Animált elrejtés"
+
+#~ msgid "msec"
+#~ msgstr "ms"

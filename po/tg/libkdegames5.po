@@ -1,0 +1,1367 @@
+# translation of libkdegames.po to Tajik
+# translation of libkdegames.po to Тоҷикӣ
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# 2004, infoDev, a World Bank organization
+# 2004, Khujand Computer Technologies, Inc.
+# 2004, Youth Opportunities, NGO
+# Victor Ibragimov<youth_opportunities@tajik.net>, 2004.
+# Marina Kolucheva <youth_opportunities@tajik.net>, 2004.
+# Malika Dushanbieva <youth_opportunities@tajik.net>, 2004.
+# Akmal Salomov <youth_opportunities@tajik.net>, 2004.
+# Abdulloh Normatov <youth_opportunities@tajik.net>, 2004.
+# Hiromon <H_Abrorova@rambler.ru>, 2004.
+# Victor Ibragimov <youth_opportunities@tajikngo.org>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2005-10-22 16:42+0500\n"
+"Last-Translator: Victor Ibragimov <youth_opportunities@tajikngo.org>\n"
+"Language-Team: Tajik\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Аз сари нав"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Файли рекордҳоро хонда натавонист. Мумкин аст, ки он бо машғули дигар "
+"барнома бошад."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Намоиши рекордҳо"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Ном"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Таърих"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Дараҷа"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Ҳисоб"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Вақт"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Категория"
+
+#: highscore/kscoredialog.cpp:294
+#, fuzzy, kde-format
+#| msgid "#%1"
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Remember this high score"
+msgstr "Рекордҳо"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Forget this high score"
+msgstr "Рекордҳо"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Бисёр хуб!\n"
+"Шумо рекордро задед!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Бад нест!\n"
+"Натиҷаи Шумо дар рӯйхати рекордҳо ба кайд гирифтааст!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr ""
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr ""
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr ""
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr ""
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr ""
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr ""
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Select player:"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Интихоби бозингар:"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "Номи шумо:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Нав"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game."
+msgstr "Сохтани бозии шабақа"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game"
+msgstr "Сохтани бозии шабақа"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Пурбор кардан..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "&Пурбор кардани гузаштаҳо"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "&Боз пурборкунии бозӣ"
+
+#: kstandardgameaction.cpp:42
+#, fuzzy
+#| msgid "Restart &Game"
+msgid "Restart the game"
+msgstr "&Боз пурборкунии бозӣ"
+
+#: kstandardgameaction.cpp:44
+#, fuzzy
+msgid "&Save"
+msgstr "&Карор кардан"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Нигоҳ доштан &ҳамчун..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr ""
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Бозиро ба итмом расонидан"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "&Таваққуф"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show &High Scores"
+msgstr "Намоиши &рекордҳо"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show high scores"
+msgstr "Намоиши &рекордҳо"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "&Clear High Scores"
+msgstr "Рекордҳо"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "Clear high scores"
+msgstr "Рекордҳо"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show Statistics"
+msgstr "Статистика"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show statistics"
+msgstr "Статистика"
+
+#: kstandardgameaction.cpp:58
+#, fuzzy
+#| msgid "Statistics"
+msgid "&Clear Statistics"
+msgstr "Статистика"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr ""
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr ""
+
+#: kstandardgameaction.cpp:62
+#, fuzzy
+msgid "&Quit"
+msgstr "&Луқма додан"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr ""
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Такрор кунед"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Барҳам додан"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "&Бозгашт"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Устухонҳоро партоед"
+
+#: kstandardgameaction.cpp:72
+#, fuzzy
+#| msgid "&Roll Dice"
+msgid "Roll the dice"
+msgstr "&Устухонҳоро партоед"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Навбати охир"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Луқма додан"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Намоиш"
+
+#: kstandardgameaction.cpp:78
+#, fuzzy
+#| msgid "Player Name"
+msgid "Play a demo"
+msgstr "Номи бозингар"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Карор кардан"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Интихоби намуди &бозӣ"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Танзими &ранги кортҳо..."
+
+#: kstandardgameaction.cpp:88
+#, fuzzy
+#| msgid "Configure &Highscores..."
+msgid "Configure &High Scores..."
+msgstr "Танзими &рекордҳо..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Ба ҳамаи бозингарон фиристед"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Ба %1 фиристед"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, fuzzy, kde-format
+msgid "%1: "
+msgstr "%1 %2"
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Миқдори зиёди бозингарон"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Миқдори ками бозингарон"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Статуси бозӣ"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Бозингари %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Номаълум"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Ба гурӯҳи ман фиристед (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Номуносибати cookie!\n"
+"cookie мунтазам шуда буд: %1\n"
+"cookie қабул шуд: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"Номуносибати ривояти KGame!\n"
+"Ривоят мунтазам шуда буд: %1\n"
+"Ривоят қабул шуд: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Рамзи хатои номуайян %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Танзими бозӣ"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Давоми танзими бозӣ"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Бозиро пурбор кардан"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Бозии клиентӣ пайваст шуд"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Итмоми танзими бозӣ"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Синхронидани генератори рақамҳои эҳтимолӣ "
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Барҳам додан"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Хусусиятҳои бозингар"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Хусусиятҳои бозӣ"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Иловаи бозингар"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Нест кардани бозингар"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Бозингарро фаъол созед"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Бозингарро ғайри фаъол созед"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Навбати ID"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Ахборот дар бораи хатогиҳо"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Дохил кардани бозингар"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Воридот-содирот илова карда шуд"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Талаботи амалиёт"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "ID-и бозингар"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "ID-и беном: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, fuzzy, kde-format
+#| msgid "%1 unregistered"
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 ба қайд гирифта нашудаст"
+msgstr[1] "%1 ба қайд гирифта нашудаст"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Нишондоди NULL"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Дуруст"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Нодуруст"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Номаълум"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "ID-и истифодакунанда"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Гурӯҳ"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "пешфарз"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "Воридоти асинхронӣ"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "Навбати ман"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgid "Preview"
+msgstr "Пешнамоиш:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, fuzzy, kde-format
+#| msgid "Comment:"
+msgid "Contact:"
+msgstr "Шарҳ:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr ""
+
+#~ msgid "Mean Score"
+#~ msgstr "Ҳисоб"
+
+#~ msgid "Best Score"
+#~ msgstr "Натиҷаи хеле хуб"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Вақтатон гузашт"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Рекор&дҳо"
+
+#~ msgid "&Players"
+#~ msgstr "&Бозингарон"
+
+#~ msgid "Statistics"
+#~ msgstr "Статистика"
+
+#~ msgid "Histogram"
+#~ msgstr "Гистограмма"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Нишон додани рекордҳоро ба тамоми ҷаҳон"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Нишон додани бозингаронро ба тамоми ҷаҳон"
+
+#~ msgid "Highscores"
+#~ msgstr "Рекордҳо"
+
+#~ msgid "Overwrite"
+#~ msgstr "Бознависӣ"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Чунин файл аллакаи мавҷуд аст. Бознависӣ кунам?"
+
+#, fuzzy
+#~ msgid "Export"
+#~ msgstr "Содирот..."
+
+#~ msgid "Winner"
+#~ msgstr "Ғолиб"
+
+#~ msgid "Won Games"
+#~ msgstr "Ғолиб омадед"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Танзими рекордҳо"
+
+#~ msgid "Main"
+#~ msgstr "Умумӣ"
+
+#~ msgid "Nickname:"
+#~ msgstr "Ном:"
+
+#~ msgid "Comment:"
+#~ msgstr "Шарҳ:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Рекордҳои ҷаҳонӣ дохил шудаанд"
+
+#~ msgid "Advanced"
+#~ msgstr "Иловагӣ"
+
+#~ msgid "Registration Data"
+#~ msgstr "Маълумотҳои ба қайд гирӣ"
+
+#~ msgid "Key:"
+#~ msgstr "Калид:"
+
+#, fuzzy
+#~ msgid "Remove"
+#~ msgstr "Нест кардани бозингар"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Калиди қайд гирифтаи Шумо нобуд хоҳад шуд. Шумо дигар наметавонед номи "
+#~ "қайд гирифтаро ба истифода баред."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Илтимос, номатонро ворид кунед."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr ""
+#~ "Ин ном аллакай ишғол карда шудааст. Илтимос, номи дигар интихоб кунед"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Номи шумо ворид кунед"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Табрик! Шумо буридед!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Номи шумо:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Напурсед."
+
+#~ msgid "anonymous"
+#~ msgstr "анонимӣ"
+
+#~ msgid "Games Count"
+#~ msgstr "Ҳисоби бозӣ"
+
+#~ msgid "Comment"
+#~ msgstr "Шарҳ"
+
+#~ msgid "Undefined error."
+#~ msgstr "Хатои номуайян."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Аргументҳо хеле каманд."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Аргументҳои нодуруст."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Ба сервери MySQL. пайваст карда наметавонам."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Маълумотҳои додашударо интихоб карда наметавонам."
+
+#~ msgid "Error on database query."
+#~ msgstr "Хатогӣ дар ҳолати пурсидани додашудаҳо."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Хатогӣ дар ҳолати илова кардани додашудаҳо."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Ин ном аллакай ба қайд гирифта шудааст."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Ин ном ба қайд гирифта нашудааст."
+
+#~ msgid "Invalid key."
+#~ msgstr "Калиди нодуруст."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Калиди нодуруст ворид шуд."
+
+#~ msgid "Invalid level."
+#~ msgstr "Дараҷаи нодуруст."
+
+#~ msgid "Invalid score."
+#~ msgstr "Ҳисоби нодуруст."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Наметавонам ба сервери рекордҳои ҷаҳонӣ пайваст шавам"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Адреси сервер: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Файли вақтиро кушода наметавонам."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Ахборот аз сервери рекордҳои ҷаҳонӣ"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Ҷавоби нодуруст аз сервери рекордҳои ҷаҳонӣ."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Ахбороти аввалин: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Ҷавоби нодуруст аз сервери рекордҳои ҷаҳонӣ.(нарасидани пункти: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Бо мувоффақият"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Ҳисоби ҳамаи бозингарон"
+
+#~ msgid "No game played."
+#~ msgstr "Бозӣ сар дода нашудааст."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Ҳисоби бозии охирин:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Ҳисоби %1 бозиҳои охирин:"
+
+#~ msgid "all"
+#~ msgstr "ҳамааш"
+
+#~ msgid "Select player:"
+#~ msgstr "Интихоби бозингар:"
+
+#~ msgid "Total:"
+#~ msgstr "Ҳамагӣ:"
+
+#~ msgid "Won:"
+#~ msgstr "Ғолибият:"
+
+#~ msgid "Lost:"
+#~ msgstr "Мағлубият:"
+
+#~ msgid "Draw:"
+#~ msgstr "Кашидан:"
+
+#~ msgid "Current:"
+#~ msgstr "Давомӣ:"
+
+#~ msgid "Max won:"
+#~ msgstr "Ғолибияти зиёд:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Мағлубияти зиёд:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Ҳисоби бозӣ"
+
+#~ msgid "Trends"
+#~ msgstr "Мақсад"
+
+#~ msgid "From"
+#~ msgstr "Аз"
+
+#~ msgid "To"
+#~ msgstr "Ба"
+
+#~ msgid "Count"
+#~ msgstr "Ҳисоб"
+
+#~ msgid "Percent"
+#~ msgstr "Фоиз"
+
+#~ msgid "Configure..."
+#~ msgstr "Танзимот..."
+
+#~ msgid "Export..."
+#~ msgstr "Содирот..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Танзими чат"
+
+#~ msgid "Name Font..."
+#~ msgstr "Ҳарфи ном..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Ҳарфи матн..."
+
+#~ msgid "Player: "
+#~ msgstr "Бозингар: "
+
+#~ msgid "This is a player message"
+#~ msgstr "Ин ахбороти бозингар мебошад"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Ахбороти системавӣ - ахборот аз бозӣ фиристода шуд"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Бозӣ: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Ин ахбороти системавӣ аст"
+
+#, fuzzy
+#~| msgid "Maximal number of messages (-1 = unlimited):"
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Миқдори зиёди ахборотҳо (-1 = номаҳдуд):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Сохтани бозии шабақа"
+
+#~ msgid "Join a network game"
+#~ msgstr "Ба бозии шабақа дохил шудан"
+
+#~ msgid "Game name:"
+#~ msgstr "Номи бозӣ:"
+
+#~ msgid "Network games:"
+#~ msgstr "Бозии шабқавӣ:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Порти пайвастагӣ:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Узели пайвастагӣ:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Оғози шабақа"
+
+#~ msgid "Network Game"
+#~ msgstr "Бозии шабқа"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "Диалоги KGame барои созиши хатогиҳо"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Созиши хатогиҳои &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Бозсозӣ"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "Нишондоди KGame"
+
+#~ msgid "Game ID"
+#~ msgstr "ID-и бозӣ"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Cookie-и бозӣ"
+
+#~ msgid "Is Master"
+#~ msgstr "Ин устод мебошад"
+
+#~ msgid "Is Admin"
+#~ msgstr "Ин мудир аст"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Ин тақлифи робита аст"
+
+#~ msgid "Game Status"
+#~ msgstr "Статуси бозӣ"
+
+#~ msgid "Game is Running"
+#~ msgstr "Бозӣ рафта истодааст"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Миқдори зиёди бозингарон"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Миқдори ками бозингарон"
+
+#~ msgid "Players"
+#~ msgstr "Бозингарон"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Созиши хатогиҳои &бозингарон"
+
+#~ msgid "Available Players"
+#~ msgstr "Бозингарони дастрасшуда"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Нишондоди бозингар"
+
+#~ msgid "Player Name"
+#~ msgstr "Номи бозингар"
+
+#~ msgid "Player Group"
+#~ msgstr "Гурӯҳи бозингар"
+
+#~ msgid "Player User ID"
+#~ msgstr "Истифодаи ID-и бозингар"
+
+#~ msgid "My Turn"
+#~ msgstr "Навбати ман"
+
+#~ msgid "Async Input"
+#~ msgstr "Воридоти асинхронӣ"
+
+#~ msgid "KGame Address"
+#~ msgstr "Адреси KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Бозингари виртуалӣ"
+
+#~ msgid "Player is Active"
+#~ msgstr "Бозингари фаъол"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Приоритети шабақа"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Фиристодани ахборот дар бораи &хатогиҳо"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "ID-ҳоро намоиш надиҳед:"
+
+#~ msgid "Clean"
+#~ msgstr "Тоза"
+
+#~ msgid "Dirty"
+#~ msgstr "Чиркин"
+
+#~ msgid "Local"
+#~ msgstr "Локалӣ"
+
+#~ msgid "Undefined"
+#~ msgstr "Номуайян"
+
+#~ msgid "&Chat"
+#~ msgstr "&Чат"
+
+#~ msgid "C&onnections"
+#~ msgstr "&Пайвастагиҳо"
+
+#, fuzzy
+#~ msgid "&Game"
+#~ msgstr "&Бозиро ба итмом расонидан"
+
+#~ msgid "&Network"
+#~ msgstr "&Шабақа"
+
+#~ msgid "&Message Server"
+#~ msgstr "&Сервери ахборотҳо"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Танзимми Шабақа"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Ба шабақа пайваст шудан имконнопазир аст"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Статуси шабақа: Ягон шабақае нест"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Статуси шабақа: Шумо устод астед "
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Статуси шабақа: Шумо дар робита мебошед"
+
+#~ msgid "Your name:"
+#~ msgstr "Номи шумо:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Миқдори зиёди клиентҳо"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Миқдори зиёди клиентҳо ( -1 = беохир):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Миқдори зиёди клиентҳоро интихоб кунед"
+
+#~ msgid "Change Admin"
+#~ msgstr "Интихоби мудир"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Нест кардани Клиент бо ҳамаи бозингарон"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Танҳои мудир метавонад ахбороти серверро танзим кунад!"
+
+#, fuzzy
+#~ msgid "You do not own the message server"
+#~ msgstr "Шумо соҳиби сервери ахборот нестед"
+
+#~ msgid "Chat"
+#~ msgstr "Чат"
+
+#~ msgid "Connected Players"
+#~ msgstr "Бозингарони пайвастшуда"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Шумо мехоҳед бозингари \"%1\" аз бозӣ хориҷ кунед?"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Пайвастагӣ бо сервер канда шуд!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Пайвастагӣ бо клиент канда шуд!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Хатогии шабақа пайдо шуд!\n"
+#~ "Рақами хато: %1\n"
+#~ "Ахбороти хато: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Пайвастагиҳои эҳтимолӣ мавҷуд нест."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Пайвастагиҳои эҳтимолӣ мавҷуд нест.\n"
+#~ "Ахборои дар бораи хато:\n"
+#~ "%1"
+
+#, fuzzy
+#~| msgid "Carddeck Selection"
+#~ msgid "Card Deck Selection"
+#~ msgstr "Интихоби  дастаи корт"
+
+#~ msgid "unnamed"
+#~ msgstr "беном"
+
+#, fuzzy
+#~| msgid "Frontside"
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Рӯи корт"
+
+#, fuzzy
+#~| msgid "Backside"
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Пӯсти корт"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "Ном"
+
+#, fuzzy
+#~| msgid "Preview:"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "Пешнамоиш:"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Нодуруст"
+
+#, fuzzy
+#~ msgid "Player"
+#~ msgstr "Бозингарон"
+
+#, fuzzy
+#~ msgid "Reserved"
+#~ msgstr "Қабулкунанда"
+
+#, fuzzy
+#~ msgid "(unnamed)"
+#~ msgstr "беном"
+
+#, fuzzy
+#~ msgid "Statistics..."
+#~ msgstr "Статистика"
+
+#, fuzzy
+#~ msgid "Host: %1"
+#~ msgstr "Мағлубият:"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Ҷама Баха Ҷура Суник Хурик Аки Беха Фара Абдик Сухроб  Ёкуб ва дигарон"
+
+#, fuzzy
+#~| msgid "Show &Highscores"
+#~ msgid "Show rich text"
+#~ msgstr "Намоиши &рекордҳо"
+
+#, fuzzy
+#~| msgid "Change Admin"
+#~ msgid "Change Icon..."
+#~ msgstr "Интихоби мудир"
+
+#, fuzzy
+#~| msgid "Random frontside"
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Тасодуфии рӯи корт"
+
+#~ msgid "Choose Backside"
+#~ msgstr "Пӯсти кортро интихоб кунед"
+
+#~ msgid "empty"
+#~ msgstr "холӣ"
+
+#~ msgid "Random backside"
+#~ msgstr "Тасодуфи пӯсти корт"
+
+#~ msgid "Use global backside"
+#~ msgstr "Истифодаи пӯсти глобалӣ"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "Пӯсти глобалиро созед"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "Рӯи кортро интихоб кунед"
+
+#~ msgid "Use global frontside"
+#~ msgstr "Истифодаи рӯи корти глобалӣ"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "Рӯи корти глобалиро созед"
+
+#~ msgid "Resize Cards"
+#~ msgstr "Дигаргун кардани андоза корт"
+
+#~ msgid "Default Size"
+#~ msgstr "Андозаи пешфарз"
+
+#~ msgid "Preview:"
+#~ msgstr "Пешнамоиш:"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgid "Form"
+#~ msgstr "Аз"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Properties"
+#~ msgstr "Хусусиятҳо"
+
+#~ msgid "Data"
+#~ msgstr "Маълумот"
+
+#~ msgid "Value"
+#~ msgstr "Аҳамият"
+
+#~ msgid "Policy"
+#~ msgstr "Розигӣ"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Receiver"
+#~ msgstr "Қабулкунанда"
+
+#~ msgid "Sender"
+#~ msgstr "Фиристонанда"
+
+#~ msgid "ID - Text"
+#~ msgstr "Матни - ID"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"

@@ -1,0 +1,1424 @@
+# Translation of libkdegames to Croatian
+#
+# ivan <admin@linuxzasve.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames 0\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2009-06-22 16:40+0200\n"
+"Last-Translator: ivan <admin@linuxzasve.com>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.0\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Pokušaj ponovno"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Nije moguće pristupiti datoteci s najboljim rezultatima. Vjerojatno neki "
+"drugi korisnik trenutno upisuje u datoteku."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Najbolji rezultati"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Ime"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Datum"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Razina"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Rezultat"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Vrijeme"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Poredak"
+
+#: highscore/kscoredialog.cpp:294
+#, fuzzy, kde-format
+#| msgid "#%1"
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Remember this high score"
+msgstr "Najbolji rezultati"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Forget this high score"
+msgstr "Najbolji rezultati"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Izvrsno!\n"
+"Ostvarili ste najbolji rezultat!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Jako dobro!\n"
+"Dospjeli ste na popis najboljih rezultata!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Prejednostavno"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Vrlo jednostavno"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Jednostavno"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Srednje teško"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Teško"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Vrlo teško"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Iznimno teško"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Neostvarljivo"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Ukoliko promjenite razinu težine, igra će se prekinuti!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Promjeni razinu težine"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Težina igre"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Podesi razinu težine"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Podesi razinu težine igre"
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr ""
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Solve the game"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Razriješi igru"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "Vaše ime:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Nova"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game."
+msgstr "Pokreni mrežnu igru"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game"
+msgstr "Pokreni mrežnu igru"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Učitaj …"
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Otvori spremljenu igru …"
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Učitaj &posljednju"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Otvori nedavno spremljenu igru …"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Ponovi &igru"
+
+#: kstandardgameaction.cpp:42
+#, fuzzy
+#| msgid "Restart &Game"
+msgid "Restart the game"
+msgstr "Ponovi &igru"
+
+#: kstandardgameaction.cpp:44
+#, fuzzy
+msgid "&Save"
+msgstr "&Riješi"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Spremi trenutnu igru"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Spremi &kao …"
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Spremi trenutnu igru u drugu datoteku"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Završi igru"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Završi trenutnu igru"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "&Pauza"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Pauziraj igru"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show &High Scores"
+msgstr "Prikaži &najbolje rezultate"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show high scores"
+msgstr "Prikaži &najbolje rezultate"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "&Clear High Scores"
+msgstr "Najbolji rezultati"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "Clear high scores"
+msgstr "Najbolji rezultati"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show Statistics"
+msgstr "Statistike"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show statistics"
+msgstr "Statistike"
+
+#: kstandardgameaction.cpp:58
+#, fuzzy
+#| msgid "Statistics"
+msgid "&Clear Statistics"
+msgstr "Statistike"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Izbriši svu statistiku"
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Ispis …"
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Napusti"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Napusti program"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Ponovi"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Ponovi posljednji potez"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "Po&ništi"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Poništi posljednji potez"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Po&novi"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Ponovi posljednji potez"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Baci kockice"
+
+#: kstandardgameaction.cpp:72
+#, fuzzy
+#| msgid "&Roll Dice"
+msgid "Roll the dice"
+msgstr "&Baci kockice"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Završi potez"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Savjet"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demo"
+
+#: kstandardgameaction.cpp:78
+#, fuzzy
+#| msgid "Player Name"
+msgid "Play a demo"
+msgstr "Ime igrača"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Riješi"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Razriješi igru"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Odaberite &vrstu igre"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Konfiguriranje &špilova karata …"
+
+#: kstandardgameaction.cpp:88
+#, fuzzy
+#| msgid "Configure &Highscores..."
+msgid "Configure &High Scores..."
+msgstr "Konfiguriranje &najboljih rezultata..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Pošalji svim igračima"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Pošalji igraču %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, fuzzy, kde-format
+msgid "%1: "
+msgstr "%1 %2"
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "NajvIgrača"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "NajmIgrača"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "StanjeIgre"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Igrač %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Pošalji mojoj grupi (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Nepoklapanje kolačića!\n"
+"Očekivani kolačić: %1\n"
+"Primljen kolačić: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"Nepoklapanje verzije KGame-a!\n"
+"Očekivana verzija: %1\n"
+"Primljena verzija: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Nepoznat kôd pogreške %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Postavke Igra"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Postavke Igra Nastavi"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Učitaj igru"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Igra klijenta je povezana"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Podešavanje igre je završeno"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Sinkroniziraj nasumice"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Prekini vezu"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Svojstva igrača"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Svojstva igre"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Dodaj igrača"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Ukloni igrača"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Aktiviraj igrača"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Deaktiviraj igrača"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "ID poteza"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Poruka o pogrešci"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Unos igrača"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Dodat je IO"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Obradi upit"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "ID igrača"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Bez imena – ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, fuzzy, kde-format
+#| msgid "%1 unregistered"
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 neregistriranih"
+msgstr[1] "%1 neregistriranih"
+msgstr[2] "%1 neregistriranih"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL pokazivač"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Točno"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Netočno"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "IDkorisnika"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grupa"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "zadano"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsinkrUlaz"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "moj potez"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Težina"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Prilagođeno"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Odaberite <b>težinu</b> igre.<br />Ako tokom same igre promjenite razinu "
+"težine, morate odustati od trenutne igre i pokrenuti novu."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Odaberite <b>težinu</b>igre.<br />Razinu težine možete promjeniti i tijekom "
+"igranja."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgid "Preview"
+msgstr "Pregled:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, fuzzy, kde-format
+#| msgid "Comment:"
+msgid "Contact:"
+msgstr "Komentar:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Opis:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Autor:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Srednji rezultat"
+
+#~ msgid "Best Score"
+#~ msgstr "Najbolji rezultat"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Proteklo vrijeme"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Najbolji &rezultati"
+
+#~ msgid "&Players"
+#~ msgstr "&Igrači"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistike"
+
+#~ msgid "Histogram"
+#~ msgstr "Povijest"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Prikaži najbolje svjetske rezultate"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Prikaži igrače širom svijeta"
+
+#~ msgid "Highscores"
+#~ msgstr "Najbolji rezultati"
+
+#~ msgid "Overwrite"
+#~ msgstr "Prepiši"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Datoteka već postoji. Želite li je prepisati?"
+
+#, fuzzy
+#~ msgid "Export"
+#~ msgstr "Izvoz..."
+
+#~ msgid "Winner"
+#~ msgstr "Pobjednik"
+
+#~ msgid "Won Games"
+#~ msgstr "Pobijedio igara"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Konfiguriranje najboljih rezultata"
+
+#~ msgid "Main"
+#~ msgstr "Glavni"
+
+#~ msgid "Nickname:"
+#~ msgstr "Nadimak:"
+
+#~ msgid "Comment:"
+#~ msgstr "Komentar:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Najbolji rezultati širom svijeta su omogućeni"
+
+#~ msgid "Advanced"
+#~ msgstr "Napredno"
+
+#~ msgid "Registration Data"
+#~ msgstr "Podaci o registraciji"
+
+#~ msgid "Key:"
+#~ msgstr "Ključ:"
+
+#, fuzzy
+#~ msgid "Remove"
+#~ msgstr "Ukloni igrača"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Na ovaj ćete način trajno ukloniti vaš registracijski ključ. Više nećete "
+#~ "biti u mogućnosti upotrebljavati trenutno registriran nadimak."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Odaberite nadimak koji nije \"prazan\"."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Nadimak je već u upotrebi. Odaberite drugi nadimak."
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Unesite svoj nadimak"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Čestitamo, pobijedili ste!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Unesite svoj nadimak:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Ne pitaj ponovo."
+
+#~ msgid "anonymous"
+#~ msgstr "anonimus"
+
+#~ msgid "Games Count"
+#~ msgstr "Broj igre"
+
+#~ msgid "Comment"
+#~ msgstr "Komentar"
+
+#~ msgid "Undefined error."
+#~ msgstr "Nedefinirana pogreška."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Nedostaju argumenti."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Neispravni argumenti."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Povezivanje s MySQL poslužiteljem nije moguće."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Nije moguće odabrati bazu podataka."
+
+#~ msgid "Error on database query."
+#~ msgstr "Pogreška tijekom izvođenja upita baze podataka."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Pogreška tijekom izvođenja umetanja u bazu podataka."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Nadimak je već registriran."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Nadimak nije registriran."
+
+#~ msgid "Invalid key."
+#~ msgstr "Neispravni ključ."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Neispravan ključ za unos."
+
+#~ msgid "Invalid level."
+#~ msgstr "Neispravna razina."
+
+#~ msgid "Invalid score."
+#~ msgstr "Neispravan rezultat."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr ""
+#~ "Nije moguće kontaktirati poslužitelj s najboljim svjetskim rezultatima"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "URL poslužitelja: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Nije moguće otvoriti privremenu datoteku."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Poruka od poslužitelja s najboljim svjetskim rezultatima"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr ""
+#~ "Neispravan odgovor od poslužitelja s najboljim svjetskim rezultatima."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Sirova poruka: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Neispravan odgovor od poslužitelja s najboljim svjetskim rezultatima "
+#~ "(nedostaje stavka: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Uspjeh"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Rezultati s više igrača"
+
+#~ msgid "No game played."
+#~ msgstr "Nema odigrane igre."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Rezultati posljednje igre:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Rezultati posljednjih %1 igara:"
+
+#~ msgid "all"
+#~ msgstr "sve"
+
+#~ msgid "Select player:"
+#~ msgstr "Odaberite igrača:"
+
+#~ msgid "Total:"
+#~ msgstr "Ukupno:"
+
+#~ msgid "Won:"
+#~ msgstr "Pobjeda:"
+
+#~ msgid "Lost:"
+#~ msgstr "Poraza:"
+
+#~ msgid "Draw:"
+#~ msgstr "Neriješeno:"
+
+#~ msgid "Current:"
+#~ msgstr "Trenutno:"
+
+#~ msgid "Max won:"
+#~ msgstr "Najviše pobjeda:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Najviše poraza:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Brojači igara"
+
+#~ msgid "Trends"
+#~ msgstr "Trendovi"
+
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgid "To"
+#~ msgstr "Do"
+
+#~ msgid "Count"
+#~ msgstr "Brojanje"
+
+#~ msgid "Percent"
+#~ msgstr "Postotak"
+
+#~ msgid "Create a network game"
+#~ msgstr "Pokreni mrežnu igru"
+
+#~ msgid "Join a network game"
+#~ msgstr "Pridruži se mrežnoj igri"
+
+#~ msgid "Game name:"
+#~ msgstr "Naziv igre:"
+
+#~ msgid "Network games:"
+#~ msgstr "Mrežne igre:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port za povezivanje:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Poslužitelj za povezivanje:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Pokreni mrežu"
+
+#~ msgid "Network Game"
+#~ msgstr "Mrežna igra"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Veza s poslužiteljem je prekinuta!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Veza s klijentom je prekinuta!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Primljena je mrežna pogreška!\n"
+#~ "Broj pogreške: %1\n"
+#~ "Poruka pogreške: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Nije bilo moguće uspostaviti nijednu vezu."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Nije bilo moguće uspostaviti nijednu vezu.\n"
+#~ "Poruka o pogrešci:\n"
+#~ "%1"
+
+#~ msgid "Error"
+#~ msgstr "Greška"
+
+#~ msgid "&Chat"
+#~ msgstr "&Brbljanje"
+
+#~ msgid "C&onnections"
+#~ msgstr "&Veze"
+
+#, fuzzy
+#~ msgid "&Game"
+#~ msgstr "&Završi igru"
+
+#~ msgid "&Network"
+#~ msgstr "&Mreža"
+
+#~ msgid "&Message Server"
+#~ msgstr "Poslužitelj &poruka"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Konfiguriranje mreže"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Povezivanje s mrežom nije moguće"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Stanje mreže: Nije prisutna"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Stanje mreže: Vi ste GLAVNI"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Stanje mreže: Povezani ste"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Najveći broj klijenata"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Najveći broj klijenata (-1 = beskonačno):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Promijeni najveći broj klijenata"
+
+#~ msgid "Change Admin"
+#~ msgstr "Promijeni administratora"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Ukloni klijenta s svim igračima"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Samo administrator može konfigurirati poslužitelj poruka!"
+
+#, fuzzy
+#~ msgid "You do not own the message server"
+#~ msgstr "Vi niste vlasnik poslužitelja poruka"
+
+#~ msgid "Chat"
+#~ msgstr "Brbljanje"
+
+#~ msgid "Connected Players"
+#~ msgstr "Povezani igrači"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "Želite li prognati igrača \"%1\" iz igre?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Prognaj igrača"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Ne protjeruj"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "KGame dijalog za otkrivanje nedostataka"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "&KGame uklanjanje nedostataka"
+
+#~ msgid "Update"
+#~ msgstr "Ažuriraj"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "KGame pokazivač"
+
+#~ msgid "Game ID"
+#~ msgstr "ID igre"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Kolačić igre"
+
+#~ msgid "Is Master"
+#~ msgstr "Je glavni"
+
+#~ msgid "Is Admin"
+#~ msgstr "Je administrator"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Nudi povezivanja"
+
+#~ msgid "Game Status"
+#~ msgstr "Stanje igre"
+
+#~ msgid "Game is Running"
+#~ msgstr "Igra je u tijeku"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Najviše igrača"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Najmanje igrača"
+
+#~ msgid "Players"
+#~ msgstr "Igrači"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Otkrivanje nedostatka u &igračima"
+
+#~ msgid "Available Players"
+#~ msgstr "Raspoloživi igrači"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Pokazivač igrača"
+
+#~ msgid "Player Name"
+#~ msgstr "Ime igrača"
+
+#~ msgid "Player Group"
+#~ msgstr "Grupa igrača"
+
+#~ msgid "Player User ID"
+#~ msgstr "Korisnički ID igrača"
+
+#~ msgid "My Turn"
+#~ msgstr "Moj potez"
+
+#~ msgid "Async Input"
+#~ msgstr "Asinkroni ulaz"
+
+#~ msgid "KGame Address"
+#~ msgstr "KGame adresa"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Igrač je virtualan"
+
+#~ msgid "Player is Active"
+#~ msgstr "Igrač je aktivan"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Mrežni prioritet"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Otkrivanje nedostatka u &porukama"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Ne prikazuj ID oznake:"
+
+#~ msgid "Clean"
+#~ msgstr "Čist"
+
+#~ msgid "Dirty"
+#~ msgstr "Čist"
+
+#~ msgid "Local"
+#~ msgstr "Lokalno"
+
+#~ msgid "Undefined"
+#~ msgstr "Neodređeno"
+
+#~ msgid "Display:"
+#~ msgstr "Prikaz:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "Uključeni igrači i botovi"
+
+#~ msgid "Spectators"
+#~ msgstr "Promatrači"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Netočno"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "Igrači, botovi i promatrači"
+
+#, fuzzy
+#~ msgid "Player"
+#~ msgstr "Igrači"
+
+#~ msgid "Open"
+#~ msgstr "Otvori"
+
+#, fuzzy
+#~ msgid "Reserved"
+#~ msgstr "Primatelj"
+
+#~ msgid "AI bot"
+#~ msgstr "Inteligencija botova"
+
+#~ msgid "Abandoned"
+#~ msgstr "Napušteno"
+
+#, fuzzy
+#~ msgid "(unnamed)"
+#~ msgstr "bez imena"
+
+#~ msgid "Spectator"
+#~ msgstr "Promatrač"
+
+#, fuzzy
+#~ msgid "Statistics..."
+#~ msgstr "Statistike"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Ovdje postavi bota"
+
+#~ msgid "Stand up"
+#~ msgstr "Ustani se"
+
+#, fuzzy
+#~ msgid "Host: %1"
+#~ msgstr "Poraza:"
+
+#~ msgid "Configure..."
+#~ msgstr "Konfiguriranje …"
+
+#~ msgid "Export..."
+#~ msgstr "Izvoz …"
+
+#, fuzzy
+#~| msgid "Carddeck Selection"
+#~ msgid "Card Deck Selection"
+#~ msgstr "Odabir karata"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Ana Andrija Vesna Veljko Vladimir Gordana Goran Danica Dragan Domagoj "
+#~ "Žarko Željko Zorica Zoran Zlatko Ivana Igor Jelena Ivan Janko Katarina "
+#~ "Marija Marko Marijan Nenad Petar Predrag Sonja Slobodan Tamara Martin "
+#~ "Nikola Krsto Krešo Borna Filip Renato Tomislav"
+
+#~ msgid "Configure Chat"
+#~ msgstr "Konfiguriranje brbljanja"
+
+#~ msgid "Name Font..."
+#~ msgstr "Font za imena …"
+
+#~ msgid "Text Font..."
+#~ msgstr "Font za tekst …"
+
+#~ msgid "Player: "
+#~ msgstr "Igrač:"
+
+#~ msgid "This is a player message"
+#~ msgstr "Ovo je poruka od igrača"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Sistemska poruke – Poruke poslane izravno iz igre"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Igra: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Ovo je sistemska poruka"
+
+#, fuzzy
+#~| msgid "Maximal number of messages (-1 = unlimited):"
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Najveći broj poruka (-1 = bez ograničenja):"
+
+#~ msgid "unnamed"
+#~ msgstr "bez imena"
+
+#, fuzzy
+#~| msgid "Frontside"
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Lice"
+
+#, fuzzy
+#~| msgid "Backside"
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Naličje"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "Ime"
+
+#, fuzzy
+#~| msgid "Preview:"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "Pregled:"
+
+#~ msgid "Deck description."
+#~ msgstr "Opis špila."
+
+#, fuzzy
+#~| msgid "Show &Highscores"
+#~ msgid "Show rich text"
+#~ msgstr "Prikaži &najbolje rezultate"
+
+#~ msgid "Opacity:"
+#~ msgstr "Prozirnost:"
+
+#, fuzzy
+#~| msgid "Change Admin"
+#~ msgid "Change Icon..."
+#~ msgstr "Promijeni administratora"
+
+#~ msgid "Text color:"
+#~ msgstr "Boja teksta:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Boja pozadine:"
+
+#~ msgid "Corners:"
+#~ msgstr "Kutevi:"
+
+#~ msgid "Square"
+#~ msgstr "Kvadrat"
+
+#, fuzzy
+#~| msgid "Random frontside"
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Nasumično lice"
+
+#~ msgid "Choose Backside"
+#~ msgstr "Odaberite naličje"
+
+#~ msgid "empty"
+#~ msgstr "prazno"
+
+#~ msgid "Random backside"
+#~ msgstr "Nasumično naličje"
+
+#~ msgid "Use global backside"
+#~ msgstr "Upotrijebi globalno naličje"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "Naličje učini globalnim"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "Odaberite lice"
+
+#~ msgid "Use global frontside"
+#~ msgstr "Upotrijebi globalno lice"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "Lice učini globalnim"
+
+#~ msgid "Resize Cards"
+#~ msgstr "Promijeni veličinu karata"
+
+#~ msgid "Default Size"
+#~ msgstr "Zadana veličina"
+
+#~ msgid "Preview:"
+#~ msgstr "Pregled:"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgid "Form"
+#~ msgstr "Od"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Properties"
+#~ msgstr "Svojstva"
+
+#~ msgid "Data"
+#~ msgstr "Podaci"
+
+#~ msgid "Value"
+#~ msgstr "Vrijednost"
+
+#~ msgid "Policy"
+#~ msgstr "Pravila"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Receiver"
+#~ msgstr "Primatelj"
+
+#~ msgid "Sender"
+#~ msgstr "Pošiljatelj"
+
+#~ msgid "ID - Text"
+#~ msgstr "ID - Tekst"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"

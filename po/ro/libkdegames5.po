@@ -1,0 +1,1325 @@
+# Copyright (C).
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2013-10-27 11:21+0200\n"
+"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Reîncercare"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Recorduri"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Nume"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Dată"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Nivel"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Scor"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Timp"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rang"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Reține"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Uită"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Reține acest record"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Uită acest record"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Excelent!\n"
+"Aveți un nou record!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Bine jucat!\n"
+"Ați ajuns în lista de recorduri!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Ridicol de ușor"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Foarte ușor"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Ușor"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Mediu"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Dificil"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Foarte dificil"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Extrem de dificil"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Imposibil"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Modificarea nivelului de dificultate va opri jocul corent!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Schimbă nivelul de dificultate"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Dificultate"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Stabilește nivelul de dificultate"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Stabilește nivelul de dificultate al jocului."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Obține teme noi..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Alege tema"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[fără denumire]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "de %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Nou"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Începe un joc nou."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Începe joc nou"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "În&carcă..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Deschidere joc salvat..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Încarcă &recent"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Deschidere joc salvat recent..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Reinițializare &joc"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Reinițializează jocul"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Salvează"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Salvează jocul curent"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "S&alvează ca..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Salvează jocul curent în alt fișier"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "T&ermină jocul"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Termină jocul curent"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Pa&uză"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Întretupe jocul"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Afișează re&corduri"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Afișează recordurile"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Curăță recorduri"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Curăță recordurile"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Arată statistici"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Arată statisticile"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Curăță statistici"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Șterge toate statisticile."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "Im&primare..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Ieșire"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Părăsește programul"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Repetă"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Repetă ultima mutare"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Desfă"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Desfă ultima mutare"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Re&fă"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Reface ultima mutare"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "A&runcă zarurile"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Aruncă zarurile"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Termină turul"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Indiciu"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Dă un indiciu"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demonstrație"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Arată o demonstrație"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "Re&zolvă"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Soluționează jocul"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Alegeți &tipul jocului"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Configurare pachete de &cărți..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Con&figurare recorduri..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Trimite tuturor jucătorilor"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Trimite la %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "MaximJucători"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "MinimJucători"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "StareJoc"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Jucătorul %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Trimite grupului meu („%1”)"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Cod de eroare necunoscut %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Configurează jocul"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Încarcă joc"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Configurare joc încheiată"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Deconectează"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Proprietate jucător"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Proprietate joc"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Adaugă jucător"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Elimină jucător"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Activează jucător"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Inactivează jucător"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id. mutare"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Mesaj de eroare"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr ""
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Interogare proces"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Id. jucător"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Nedenumit - ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 neînregistrat"
+msgstr[1] "%1 neînregistrați"
+msgstr[2] "%1 neînregistrați"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Pointer NULL"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Adevărat"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Fals"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr ""
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grup"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "implicit"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr ""
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Dificultate"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Personalizat"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Alegeți <b>dificultatea</b> jocului.<br />Dacă schimbați nivelul de "
+"dificultate în timp ce rulează un joc, va trebui să-l anulați și să porniți "
+"un joc nou."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Alegeți <b>dificultatea</b> jocului.<br />Puteți să schimbați nivelul de "
+"dificultate în timp ce rulează un joc."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Obține teme noi..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Previzualizare"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Detalii tematică"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Contact:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Descriere:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Autor:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Scor mediu"
+
+#~ msgid "Best Score"
+#~ msgstr "Scor maxim"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Timp trecut"
+
+#~ msgid "Best &Scores"
+#~ msgstr "&Scoruri maxime"
+
+#~ msgid "&Players"
+#~ msgstr "&Jucători"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistici"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogramă"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Vizualizare recorduri mondiale"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Vizualizare jucători mondiali"
+
+#~ msgid "Highscores"
+#~ msgstr "Recorduri"
+
+#~ msgid "Overwrite"
+#~ msgstr "Suprascrie"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Fișierul există deja. Îl suprascrieți?"
+
+#~ msgid "Export"
+#~ msgstr "Exportă"
+
+#~ msgid "Winner"
+#~ msgstr "Câștigător"
+
+#~ msgid "Won Games"
+#~ msgstr "Jocuri câștigate"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Configurează recorduri"
+
+#~ msgid "Main"
+#~ msgstr "Principal"
+
+#~ msgid "Nickname:"
+#~ msgstr "Poreclă:"
+
+#~ msgid "Comment:"
+#~ msgstr "Comentariu:"
+
+#~ msgid "Advanced"
+#~ msgstr "Avansat"
+
+#~ msgid "Registration Data"
+#~ msgstr "Date înregistrare"
+
+#~ msgid "Key:"
+#~ msgstr "Cheie:"
+
+#~ msgid "Remove"
+#~ msgstr "Elimină"
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Alegeți o poreclă nevidă."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Poreclă utilizată deja. Alegeți alta"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Introduceți porecla"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Felicitări, ați câștigat!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Introduceți porecla:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Nu întreba din nou."
+
+#~ msgid "anonymous"
+#~ msgstr "anonim"
+
+#~ msgid "Games Count"
+#~ msgstr "Contor jocuri"
+
+#~ msgid "Comment"
+#~ msgstr "Comentariu"
+
+#~ msgid "Undefined error."
+#~ msgstr "Eroare nedefinită."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Argument(e) lipsă."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Argument(e) nevalid(e)."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Imposibil de ales baza de date."
+
+#~ msgid "Error on database query."
+#~ msgstr "Eroare la interogarea bazei de date."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Poreclă înregistrată deja."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Poreclă neînregistrată."
+
+#~ msgid "Invalid key."
+#~ msgstr "Cheie nevalidă."
+
+#~ msgid "Invalid level."
+#~ msgstr "Nivel nevalid."
+
+#~ msgid "Invalid score."
+#~ msgstr "Scor nevalid."
+
+#~ msgid "Server URL: %1"
+#~ msgstr "URL server: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Imposibil de deschis fișierul temporar."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Mesaj brut: %1"
+
+#~ msgid "Success"
+#~ msgstr "Succes"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Scoruri multijucător"
+
+#~ msgid "No game played."
+#~ msgstr "Niciun joc jucat."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Scoruri pentru ultimul joc:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Scoruri pentru ultimele %1 jocuri:"
+
+#~ msgid "all"
+#~ msgstr "tot"
+
+#~ msgid "Select player:"
+#~ msgstr "Alegeți jucătorul:"
+
+#~ msgid "Total:"
+#~ msgstr "Total:"
+
+#~ msgid "Won:"
+#~ msgstr "Victorii:"
+
+#~ msgid "Lost:"
+#~ msgstr "Înfrângeri:"
+
+#~ msgid "Draw:"
+#~ msgstr "Remize:"
+
+#~ msgid "Current:"
+#~ msgstr "Curent:"
+
+#~ msgid "Max won:"
+#~ msgstr "Maxim victorii:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Maxim înfrângeri:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Contor jocuri"
+
+#~ msgid "Trends"
+#~ msgstr "Tendințe"
+
+#~ msgid "From"
+#~ msgstr "De la"
+
+#~ msgid "To"
+#~ msgstr "La"
+
+#~ msgid "Count"
+#~ msgstr "Număr"
+
+#~ msgid "Percent"
+#~ msgstr "Procente"
+
+#~ msgid "Configure..."
+#~ msgstr "Configurare..."
+
+#~ msgid "Export..."
+#~ msgstr "Exportă..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Configurare discuție"
+
+#~ msgid "Name Font..."
+#~ msgstr "Font nume..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Font text..."
+
+#~ msgid "Player: "
+#~ msgstr "Jucător:"
+
+#~ msgid "This is a player message"
+#~ msgstr "Acesta este un mesaj de jucător"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Mesaje de sistem - mesaje trimise direct de la joc"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Joc:"
+
+#~ msgid "This is a system message"
+#~ msgstr "Acesta este un mesaj de sistem"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Număr maxim de mesaje (-1 = nelimitat)"
+
+#~ msgid "Create a network game"
+#~ msgstr "Creare joc prin rețea"
+
+#~ msgid "Join a network game"
+#~ msgstr "Alăturare la joc prin rețea"
+
+#~ msgid "Game name:"
+#~ msgstr "Denumire joc:"
+
+#~ msgid "Network games:"
+#~ msgstr "Jocuri prin rețea:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Port de conectat la:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Gazdă de conectat la:"
+
+#~ msgid "&Start Network"
+#~ msgstr "Înce&pe rețea"
+
+#~ msgid "Network Game"
+#~ msgstr "Joc prin rețea"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "Dialog de depanare KGame"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Depanează &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Actualizează"
+
+#~ msgid "Game ID"
+#~ msgstr "Id. joc"
+
+#~ msgid "Is Master"
+#~ msgstr "Este Master"
+
+#~ msgid "Is Admin"
+#~ msgstr "Este Admin"
+
+#~ msgid "Game Status"
+#~ msgstr "Stare joc"
+
+#~ msgid "Game is Running"
+#~ msgstr "Jocul rulează"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Număr maxim de jucători"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Număr minim de jucători"
+
+#~ msgid "Players"
+#~ msgstr "Jucători"
+
+#~ msgid "Debug &Players"
+#~ msgstr "De&panează jucătorii"
+
+#~ msgid "Available Players"
+#~ msgstr "Jucători disponibili"
+
+#~ msgid "Player Name"
+#~ msgstr "Nume jucător"
+
+#~ msgid "Player Group"
+#~ msgstr "Grup jucător"
+
+#~ msgid "My Turn"
+#~ msgstr "Rândul meu"
+
+#~ msgid "KGame Address"
+#~ msgstr "Adresă KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Jucătorul este virtual"
+
+#~ msgid "Player is Active"
+#~ msgstr "Jucătorul este activ"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Prioritate rețea"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Depanează &mesajele"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Nu arăta identificatorii:"
+
+#~ msgid "Clean"
+#~ msgstr "Curat"
+
+#~ msgid "Dirty"
+#~ msgstr "Murdar"
+
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgid "Undefined"
+#~ msgstr "Nedefinit"
+
+#~ msgid "&Chat"
+#~ msgstr "&Convorbire"
+
+#~ msgid "C&onnections"
+#~ msgstr "C&onexiuni"
+
+#~ msgid "&Game"
+#~ msgstr "&Joc"
+
+#~ msgid "&Network"
+#~ msgstr "&Rețea"
+
+#~ msgid "&Message Server"
+#~ msgstr "Server &mesaje"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Configurație rețea"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Nu mă pot conecta la rețea"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Stare rețea: Nicio rețea"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Stare rețea: Sunteți STĂPÂN"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Stare rețea: Sunteți conectat"
+
+#~ msgid "Your name:"
+#~ msgstr "Numele tău:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Numărul maxim de clienți"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Număr maxim de clienți (-1 = infinit):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Schimbă numărul maxim de clienți"
+
+#~ msgid "Change Admin"
+#~ msgstr "Schimbă administratorul"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Elimină clientul cu toți jucătorii"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Numai administratorul poate configura serverul de mesaje!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "Nu dețineți acest server de mesaje"
+
+#~ msgid "Chat"
+#~ msgstr "Discuție"
+
+#~ msgid "Connected Players"
+#~ msgstr "Jucători conectați"
+
+#~ msgid "Ban Player"
+#~ msgstr "Blochează jucător"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Nu bloca"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Conexiunea la server a fost pierdută!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Conexiunea la client a fost pierdută!"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Nu a putut fi creată nicio conexiune."
+
+#~ msgid "Error"
+#~ msgstr "Eroare"
+
+#, fuzzy
+#~| msgid "Carddeck Selection"
+#~ msgid "Card Deck Selection"
+#~ msgstr "Alegere pachet de cărți"
+
+#~ msgid "unnamed"
+#~ msgstr "nedenumit"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Față"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Spate"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "Nume"
+
+#, fuzzy
+#~| msgid "Preview"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "Previzualizare"
+
+#, fuzzy
+#~| msgid "Description:"
+#~ msgid "Deck description."
+#~ msgstr "Descriere:"
+
+#~ msgid "Display:"
+#~ msgstr "Afișare:"
+
+#~ msgid "Spectators"
+#~ msgstr "Spectatori"
+
+#~ msgid "Close"
+#~ msgstr "Închide"
+
+#~ msgid "Action..."
+#~ msgstr "Acțiune..."
+
+#~ msgid "Player"
+#~ msgstr "Jucător"
+
+#~ msgid "Open"
+#~ msgstr "Deschide"
+
+#~ msgid "Reserved"
+#~ msgstr "Rezervat"
+
+#~ msgid "Abandoned"
+#~ msgstr "Abandonat"
+
+#~ msgid "Type: %1"
+#~ msgstr "Tip: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr "(nedenumit)"
+
+#~ msgid "Spectator"
+#~ msgstr "Spectator"
+
+#~ msgid "Statistics..."
+#~ msgstr "Statistici..."
+
+#~ msgid "Sit down here"
+#~ msgstr "Ia loc aici"
+
+#~ msgid "Add a bot here"
+#~ msgstr "Adaugă bot aici"
+
+#~ msgid "Stand up"
+#~ msgstr "Ridică-te"
+
+#~ msgid "Host: %1"
+#~ msgstr "Gazdă: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "Nume real: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Adrian Alexandru Andrei Cristian Constantin Cornel Dan Dumitru Gabriel "
+#~ "Gheorghe Ghiță Ion Marcel Matei Marius Marin Mihai Nicolae Pavel Sandu "
+#~ "Sergiu Ștefan Tudor Traian Victor Zaharia"
+
+#, fuzzy
+#~| msgid " milisecond"
+#~| msgid_plural " miliseconds"
+#~ msgid " millisecond"
+#~ msgid_plural " milliseconds"
+#~ msgstr[0] " milisecundă"
+#~ msgstr[1] " milisecunde"
+#~ msgstr[2] " de milisecunde"
+
+#~ msgid "kgamepopupitemtest"
+#~ msgstr "kgamepopupitemtest"
+
+#, fuzzy
+#~| msgid "Show Rich text"
+#~ msgid "Show rich text"
+#~ msgstr "Afișează text îmbogățit"
+
+#~ msgid "Message timeout:"
+#~ msgstr "Temporizare mesaj:"
+
+#~ msgid "Opacity:"
+#~ msgstr "Opacitate:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "Modifică pictograma..."
+
+#~ msgid "Text color:"
+#~ msgstr "Culoarea textului:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "Culoarea fundalului:"
+
+#, fuzzy
+#~| msgid "Replace mode"
+#~ msgid "Replace Mode"
+#~ msgstr "Regim înlocuire"
+
+#~ msgid "LeavePrevious"
+#~ msgstr "LasăPrecedent"
+
+#~ msgid "ReplacePrevious"
+#~ msgstr "ÎnlocuieștePrecedent"
+
+#~ msgid "Corners:"
+#~ msgstr "Colțuri:"
+
+#~ msgid "Square"
+#~ msgstr "Pătrat"
+
+#~ msgid "Sharp"
+#~ msgstr "Ascuțit"
+
+#~ msgid "Soft"
+#~ msgstr "Moale"
+
+#~ msgid "Softest"
+#~ msgstr "Catifelat"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "Indiciu stânga-sus"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "Indiciu dreapta-sus"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "Indiciu stânga-jos"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "Indiciu dreapta-jos"
+
+#~ msgid "Popup Center"
+#~ msgstr "Indiciu centru"
+
+#, fuzzy
+#~| msgid "Force instant hide"
+#~ msgid "Force Instant Hide"
+#~ msgstr "Forțează ascunderea instantanee"
+
+#, fuzzy
+#~| msgid "Force animated hide"
+#~ msgid "Force Animated Hide"
+#~ msgstr "Forțează ascunderea animată"
+
+#~ msgid "msec"
+#~ msgstr "msec"
+
+#~ msgid "KDE card deck"
+#~ msgstr "Pachet de cărți KDE"
+
+#~ msgid "Filter"
+#~ msgstr "Filtru"
+
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Leagă fața de spate"
+
+#~ msgid "Show old style decks"
+#~ msgstr "Afișează pachete în stil vechi"
+
+#~ msgid "Details"
+#~ msgstr "Detalii"
+
+#, fuzzy
+#~ msgid "Choose Backside"
+#~ msgstr "Alegeți spatele"
+
+#~ msgid "empty"
+#~ msgstr "gol"
+
+#, fuzzy
+#~ msgid "Random backside"
+#~ msgstr "Spate aleator"
+
+#, fuzzy
+#~ msgid "Use global backside"
+#~ msgstr "Alegeți spatele"
+
+#, fuzzy
+#~ msgid "Choose Frontside"
+#~ msgstr "Alegeți fața"
+
+#, fuzzy
+#~ msgid "Use global frontside"
+#~ msgstr "Față"
+
+#, fuzzy
+#~ msgid "Make Frontside Global"
+#~ msgstr "Față"

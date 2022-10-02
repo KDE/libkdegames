@@ -1,0 +1,1422 @@
+# translation of libkdegames.po to Persian
+# Mahdi Foladgar <foladgar@itland.ir>, 2006.
+# Nasim Daniarzadeh <daniarzadeh@itland.ir>, 2006, 2007.
+# MaryamSadat Razavi <razavi@itland.ir>, 2006.
+# Nazanin Kazemi <kazemi@itland.ir>, 2006, 2007.
+# Tahereh Dadkhahfar <dadkhahfar@itland.ir>, 2006.
+# Mohamad Reza Mirdamadi <mohi@ubuntu.ir>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2010-11-26 10:16+0330\n"
+"Last-Translator: Mohamad Reza Mirdamadi <mohi@ubuntu.ir>\n"
+"Language-Team: Farsi (Persian) <kde-i18n-doc@kde.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "سعی مجدد"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"نمی‌توان به پرونده امتیازهای بالا دسترسی یافت. احتمالاً، قبلاً کاربر دیگری در "
+"آن نوشته است."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "امتیازهای بالا"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "نام"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "تاریخ"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "سطح"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "امتیاز"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "زمان"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "رتبه"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "حفظ کن"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "فراموش کن"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "این امتیاز بالا را حفظ کن"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "این امتیاز بالا را پاک کن"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"عالی است!\n"
+"یک امتیاز بالای جدید گرفتید!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"آفرین!\n"
+"آن را در فهرست امتیاز بالا وارد کردید!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "به نحو خنده‌داری آسان"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "خیلی آسان"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "آسان"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "متوسط"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "سخت"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "خیلی سخت"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "خیلی خیلی سخت"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "غیرممکن"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "تغییر سطح دشواری به بازی جاری خاتمه می‌دهد!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "تغییر سطح دشواری"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "دشواری"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "تنظیم سطح دشواری"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "تنظیم سطح دشواری بازی"
+
+#: kgthemeselector.cpp:103
+#, fuzzy, kde-format
+#| msgid "&Get New Themes"
+msgid "Get New Themes..."
+msgstr "&گرفتن چهره‌های جدید‌"
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Solve the game"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "حل بازی"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "نامتان:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&جدید‌"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "آغاز یک بازی جدید."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "آغاز یک بازی جدید"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&بار کردن...‌"
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "باز کردن بازی جدید..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "بارگذاری &اخیر‌"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "باز کردن بازی اخیراً ذخیره‌شده..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "بازآغازی &بازی‌"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "بازآغازی بازی"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&ذخیره‌"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "ذخیره بازی جاری"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "ذخیره &به عنوان...‌"
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "ذخیره کردن باری جدید در پرونده دیگر"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&پایان بازی‌"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "پایان بازی جاری"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "&مکث‌"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "مکث بازی"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "نمایش &امتیازهای بالا‌..."
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "نمایش امتیازهای بالا"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&پاک کردن امتیازهای بالا‌"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "پاک کردن امتیازهای بالا"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "نمایش آمار"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "نمایش آمار"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&پاک کردن آمار‌"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "حذف همه آمارهای زمان."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&چاپ...‌"
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&خارج‌"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "خروج از برنامه"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "تکرار"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "تکرار آخرین حرکت"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&واگرد‌"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "واگرد آخرین حرکت"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "&از نو‌"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "از نو انجام دادن آخرین حرکت"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&غلتاندن طاس‌"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "غلتاندن طاس"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "پایان نوبت"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&اشاره‌"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "دادن یک اشاره"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&نمایش )دمو(‌"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "اجرای یک دمو"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&حل کردن‌"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "حل بازی"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "انتخاب &نوع بازی‌"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "پیکربندی &دسته کارت...‌"
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "پیکربندی &امتیازهای بالا..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "ارسال به تمام بازیکنان"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "ارسال به %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "بازیکنان بیشینه"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "بازیکنان کمینه"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "وضعیت بازی"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "بازیکن %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "ناشناخته"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "ارسال به گروه من )»%1«("
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"خطای کوکی!\n"
+"کوکی مورد انتظار: %1\n"
+"کوکی دریافت‌شده: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"عدم تطابق نسخهKGame!\n"
+"نسخه مورد انتظار: %1\n"
+"نسخه دریافت‌شده: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "خطای ناشناخته کد %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "برپایی بازی"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "برپایی ادامه بازی"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "بار کردن بازی"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "بازی کارخواه متصل شد"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "برپایی بازی انجام شد"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "همگام‌‌سازی تصادفی"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "قطع ارتباط"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "ویژگی بازیکن"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "ویژگی بازی"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "افزودن بازیکن"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "حذف بازیکن"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "فعال کردن بازیکن"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "غیرفعال کردن بازیکن"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "نوبت شناسه"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "پیام خطا"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "ورودی بازیکن"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "یک ورودی و خروجی افزوده شد"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "پرس‌‌و‌جوی فرآیند"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "شناسه بازیکن"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "شناسه بی‌نام: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 ثبت‌نشده"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "اشاره‌گر NULL"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "درست"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "نادرست"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "ناشناخته"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "شناسه کاربر"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "گروه"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "پیش‌فرض"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "ورودی ناهمگام"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "نوبت من"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "دشواری"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "سفارشی"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"برگزیدن <b>دشواری</b> بازی.<br />اگر سطح دشواری بازی را هنگام اجرای بازی "
+"تغییر دهید، باید آن را لغو کرده و بازی جدیدی را آغاز کنید."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"برگزیدن <b>دشواری</b> بازی.<br />می‌توانید سطح دشواری بازی را در طی اجرای "
+"بازی تغییر دهید."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, fuzzy, kde-format
+#| msgid "&Get New Themes"
+msgid "&Get New Themes..."
+msgstr "&گرفتن چهره‌های جدید‌"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "پیش‌نمایش:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "جزئیات چهره"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "تماس:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "توصیف:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "نویسنده:"
+
+#~ msgid "Mean Score"
+#~ msgstr "امتیاز میانگین"
+
+#~ msgid "Best Score"
+#~ msgstr "بهترین امتیاز"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "زمان سپری‌شده"
+
+#~ msgid "Best &Scores"
+#~ msgstr "بهترین &امتیازها‌"
+
+#~ msgid "&Players"
+#~ msgstr "&بازیکنان‌"
+
+#~ msgid "Statistics"
+#~ msgstr "آمار"
+
+#~ msgid "Histogram"
+#~ msgstr "سابقه‌نما"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "مشاهده امتیازهای بالای جهانی"
+
+#~ msgid "View world-wide players"
+#~ msgstr "مشاهده بازیکنان جهانی"
+
+#~ msgid "Highscores"
+#~ msgstr "امتیازهای بالا"
+
+#~ msgid "Overwrite"
+#~ msgstr "جای‌نوشت"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "پرونده از قبل موجود می‌باشد. جای‌نوشت شود؟"
+
+#~ msgid "Export"
+#~ msgstr "صادرات"
+
+#~ msgid "Winner"
+#~ msgstr "برنده"
+
+#~ msgid "Won Games"
+#~ msgstr "برد بازیها"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "پیکربندی امتیازهای بالا"
+
+#~ msgid "Main"
+#~ msgstr "اصلی"
+
+#~ msgid "Nickname:"
+#~ msgstr "لقب:"
+
+#~ msgid "Comment:"
+#~ msgstr "توضیح:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "امتیازهای جهانی بالا فعال شدند"
+
+#~ msgid "Advanced"
+#~ msgstr "پیشرفته"
+
+#~ msgid "Registration Data"
+#~ msgstr "داده ثبت"
+
+#~ msgid "Key:"
+#~ msgstr "کلید:"
+
+#~ msgid "Remove"
+#~ msgstr "حذف"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "کلید ثبتتان به طور دائمی حذف خواهد شد. دیگر نمی‌توانید از لقب ثبت‌شده جاری "
+#~ "استفاده کنید."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "لطفاً، لقبی را انتخاب کنید که خالی نباشد."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "قبلاً از این لقب استفاده شده است. لطفاً، یک لقب دیگر انتخاب کنید"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "لقب خود را وارد کنید"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "آفرین، شما بردید!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "لقب خود را وارد کنید:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "دوباره سؤال نشود."
+
+#~ msgid "anonymous"
+#~ msgstr "بی‌نام"
+
+#~ msgid "Games Count"
+#~ msgstr "شمارش بازیها"
+
+#~ msgid "Comment"
+#~ msgstr "توضیح"
+
+#~ msgid "Undefined error."
+#~ msgstr "خطای تعریف‌‌نشده."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "نشانوند)های( مفقود."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "نشانوند)های( نامعتبر."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "قادر به اتصال به کارساز MySQL نیست."
+
+#~ msgid "Unable to select database."
+#~ msgstr "قادر به برگزیدن دادگان نیست."
+
+#~ msgid "Error on database query."
+#~ msgstr "خطا هنگام پرس‌و‌جوی دادگان."
+
+#~ msgid "Error on database insert."
+#~ msgstr "خطا هنگام درج دادگان."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "لقب از قبل ثبت شد."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "لقب ثبت نشد."
+
+#~ msgid "Invalid key."
+#~ msgstr "کلید نامعتبر."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "کلید ارائه نامعتبر."
+
+#~ msgid "Invalid level."
+#~ msgstr "سطح نامعتبر."
+
+#~ msgid "Invalid score."
+#~ msgstr "امتیاز نامعتبر."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "قادر به تماس با کارساز دارای امتیاز بالای جهانی نیست"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "نشانی وب کارساز: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "قادر به باز کردن پرونده موقت نیست."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "پیام از کارساز دارای امتیاز بالای جهانی"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "پاسخ نامعتبر از کارساز دارای امتیاز بالای جهانی"
+
+#~ msgid "Raw message: %1"
+#~ msgstr "پیام خام: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr "پاسخ نامعتبر از کارساز دارای امتیاز جهانی بالا )فقره مفقود: %1(."
+
+#~ msgid "Success"
+#~ msgstr "موفقیت"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "امتیازهای چند بازیکنی"
+
+#~ msgid "No game played."
+#~ msgstr "هیچ بازی اجرا نشد."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "امتیازهای بازی آخر:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "امتیازهای %1 بازی آخر:"
+
+#~ msgid "all"
+#~ msgstr "همه"
+
+#~ msgid "Select player:"
+#~ msgstr "برگزیدن بازیکن:"
+
+#~ msgid "Total:"
+#~ msgstr "مجموع:"
+
+#~ msgid "Won:"
+#~ msgstr "برد:"
+
+#~ msgid "Lost:"
+#~ msgstr "باخت:"
+
+#~ msgid "Draw:"
+#~ msgstr "قرعه‌کشی:"
+
+#~ msgid "Current:"
+#~ msgstr "جاری:"
+
+#~ msgid "Max won:"
+#~ msgstr "برد بیشینه:"
+
+#~ msgid "Max lost:"
+#~ msgstr "باخت بیشینه:"
+
+#~ msgid "Game Counts"
+#~ msgstr "شمارشهای بازی"
+
+#~ msgid "Trends"
+#~ msgstr "گرایشها"
+
+#~ msgid "From"
+#~ msgstr "از"
+
+#~ msgid "To"
+#~ msgstr "به"
+
+#~ msgid "Count"
+#~ msgstr "شمارش"
+
+#~ msgid "Percent"
+#~ msgstr "درصد"
+
+#~ msgid "Configure..."
+#~ msgstr "پیکربندی..."
+
+#~ msgid "Export..."
+#~ msgstr "صادرات..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "پیکربندی گپ"
+
+#~ msgid "Name Font..."
+#~ msgstr "نام قلم..."
+
+#~ msgid "Text Font..."
+#~ msgstr "قلم متن..."
+
+#~ msgid "Player: "
+#~ msgstr "بازیکن: "
+
+#~ msgid "This is a player message"
+#~ msgstr "این، پیام بازیکن است"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "پیامهای سیستم- پیامهایی که مستقیماً از بازی ارسال شدند"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- بازی: "
+
+#~ msgid "This is a system message"
+#~ msgstr "این، پیام سیستم است"
+
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "تعداد بیشینه پیامها )۱- = نامحدود(:"
+
+#~ msgid "Create a network game"
+#~ msgstr "یک بازی شبکه‌ای ایجاد کنید"
+
+#~ msgid "Join a network game"
+#~ msgstr "پیوستن به یک بازی شبکه‌ای"
+
+#~ msgid "Game name:"
+#~ msgstr "نام بازی:"
+
+#~ msgid "Network games:"
+#~ msgstr "بازیهای شبکه‌ای:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "درگاه برای اتصال به:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "میزبان برای اتصال به:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&آغاز شبکه‌"
+
+#~ msgid "Network Game"
+#~ msgstr "بازی شبکه"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "محاوره اشکال‌زدایی KGame"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "اشکال‌زدایی &KGame‌"
+
+#~ msgid "Update"
+#~ msgstr "به‌روزرسانی"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "اشاره‌گر KGame"
+
+#~ msgid "Game ID"
+#~ msgstr "شناسه بازی"
+
+#~ msgid "Game Cookie"
+#~ msgstr "کوکی بازی"
+
+#~ msgid "Is Master"
+#~ msgstr "کارفرما است"
+
+#~ msgid "Is Admin"
+#~ msgstr "سرپرست است"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "اتصالها را ارائه می‌دهد"
+
+#~ msgid "Game Status"
+#~ msgstr "وضعیت بازی"
+
+#~ msgid "Game is Running"
+#~ msgstr "بازی در حال اجراست"
+
+#~ msgid "Maximal Players"
+#~ msgstr "بازیکنان بیشینه"
+
+#~ msgid "Minimal Players"
+#~ msgstr "بازیکنان کمینه"
+
+#~ msgid "Players"
+#~ msgstr "بازیکنان"
+
+#~ msgid "Debug &Players"
+#~ msgstr "اشکال‌زدایی &بازیکنان‌"
+
+#~ msgid "Available Players"
+#~ msgstr "بازیکنان موجود"
+
+#~ msgid "Player Pointer"
+#~ msgstr "اشاره‌گر بازیکن"
+
+#~ msgid "Player Name"
+#~ msgstr "نام بازیکن"
+
+#~ msgid "Player Group"
+#~ msgstr "گروه بازیکن"
+
+#~ msgid "Player User ID"
+#~ msgstr "شناسه کاربر بازیکن"
+
+#~ msgid "My Turn"
+#~ msgstr "نوبت من"
+
+#~ msgid "Async Input"
+#~ msgstr "ورودی Async"
+
+#~ msgid "KGame Address"
+#~ msgstr "نشانی KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "بازیکن مجازی است"
+
+#~ msgid "Player is Active"
+#~ msgstr "بازیکن فعال است"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "اولویت شبکه"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "اشکال‌زدایی &پیامها‌"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "شناسه‌ها نمایش داده نشوند:"
+
+#~ msgid "Clean"
+#~ msgstr "تمییز"
+
+#~ msgid "Dirty"
+#~ msgstr "کثیف"
+
+#~ msgid "Local"
+#~ msgstr "محلی"
+
+#~ msgid "Undefined"
+#~ msgstr "تعریف‌نشده"
+
+#~ msgid "&Chat"
+#~ msgstr "&گپ‌"
+
+#~ msgid "C&onnections"
+#~ msgstr "&اتصالها‌"
+
+#~ msgid "&Game"
+#~ msgstr "&بازی‌"
+
+#~ msgid "&Network"
+#~ msgstr "&شبکه‌"
+
+#~ msgid "&Message Server"
+#~ msgstr "کارساز &پیام‌"
+
+#~ msgid "Network Configuration"
+#~ msgstr "پیکربندی شبکه"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "نمی‌توان به شبکه متصل شد"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "وضعیت شبکه: بدون شبکه"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "وضعیت شبکه: شما کارفرما هستید"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "وضعیت شبکه: متصل می‌شوید"
+
+#~ msgid "Your name:"
+#~ msgstr "نامتان:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "تعداد بیشینه کارخواهان"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "تعداد بیشینه کارخواهان )۱- = نامحدود(:"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "تغییر تعداد بیشینه کارخواهان"
+
+#~ msgid "Change Admin"
+#~ msgstr "تغییر سرپرست"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "حذف کارخواه با تمام بازیکنان"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "فقط سرپرست می‌تواند کارساز پیام را پیکربندی کند!"
+
+#~ msgid "You do not own the message server"
+#~ msgstr "کارساز پیام را مل خود نمی‌دانید"
+
+#~ msgid "Chat"
+#~ msgstr "گپ"
+
+#~ msgid "Connected Players"
+#~ msgstr "بازیکنان متصل"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "می‌خواهید بازیکن »%1« را از بازی محروم کنید؟"
+
+#~ msgid "Ban Player"
+#~ msgstr "محروم کردن بازیکن"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "محروم نکردن بازیکن"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "اتصال به کاربر از بین رفته است!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "اتصال به کارخواه از بین رفته است!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "یک خطای شبکه‌ای دریافت شد!\n"
+#~ "شماره خطا: %1\n"
+#~ "پیام خطا: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "نتوانست اتصالی ایجاد کند."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "نتوانست اتصالی ایجاد کند.\n"
+#~ "پیام خطا:\n"
+#~ "%1 بود"
+
+#~ msgid "Error"
+#~ msgstr "خطا"
+
+#~ msgid "Card Deck Selection"
+#~ msgstr "گزینش دسته کارت"
+
+#~ msgid "unnamed"
+#~ msgstr "بی‌نام"
+
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "قسمت رویی"
+
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "قسمت پشتی"
+
+#~ msgid ""
+#~ "Frontside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "پیش‌نمایش\n"
+#~ "طرف جلو"
+
+#~ msgid "Deck Name"
+#~ msgstr "نام دسته کارت"
+
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr ""
+#~ "پیش‌نمایش\n"
+#~ "طرف پشت"
+
+#~ msgid "Deck description."
+#~ msgstr "توصیف دسته کارت."
+
+#~ msgid "Display:"
+#~ msgstr "نمایش:"
+
+#~ msgid "Involved players and bots"
+#~ msgstr "شامل بازیکنان و botها"
+
+#~ msgid "Spectators"
+#~ msgstr "تماشاگران"
+
+#~ msgid "Close"
+#~ msgstr "بستن"
+
+#~ msgid "Players, Bots and Spectators"
+#~ msgstr "بازیکن، Botها و تماشاگران"
+
+#~ msgid "Action..."
+#~ msgstr "کنش..."
+
+#~ msgid "Player"
+#~ msgstr "بازیکن"
+
+#~ msgid "Open"
+#~ msgstr "باز کردن"
+
+#~ msgid "Reserved"
+#~ msgstr "رزروشده"
+
+#~ msgid "AI bot"
+#~ msgstr "AI bot"
+
+#~ msgid "Abandoned"
+#~ msgstr "تسلیم‌شده"
+
+#~ msgid "Type: %1"
+#~ msgstr "نوع: %1"
+
+#~ msgid "(unnamed)"
+#~ msgstr ")بی‌نام("
+
+#~ msgid "Spectator"
+#~ msgstr "تماشاگر"
+
+#~ msgid "Statistics..."
+#~ msgstr "آمار..."
+
+#~ msgid "Sit down here"
+#~ msgstr "اینجا بنشین"
+
+#~ msgid "Add a bot here"
+#~ msgstr "افزودن یک bot در اینجا"
+
+#~ msgid "Boot bot and open seat"
+#~ msgstr "راه‌اندازی bot و باز کردن صندلی"
+
+#~ msgid "Stand up"
+#~ msgstr "برپا ماندن"
+
+#~ msgid "Boot player and open seat"
+#~ msgstr "راه‌اندازی بازیکن و باز کردن صندلی"
+
+#~ msgid "Host: %1"
+#~ msgstr "میزبان: %1"
+
+#~ msgid "Realname: %1"
+#~ msgstr "نام واقعی: %1"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "آدام آلکس آندریاس آندرو بارت بِن بِرند بیل کریس چاک دانیل دان دانکن اِد "
+#~ "اِمیلی اریک گری گرِگ هری یان جین جِف جن کای کِیت کِن کِرک مارک مایک نیل پل ریک "
+#~ "رابرت سام شون توماس تیم"
+
+#, fuzzy
+#~| msgid "Show Rich text"
+#~ msgid "Show rich text"
+#~ msgstr "نمایش متن قوی"
+
+#~ msgid "Message timeout:"
+#~ msgstr "اتمام وقت پیام:"
+
+#~ msgid "Opacity:"
+#~ msgstr "تاری:"
+
+#~ msgid "Change Icon..."
+#~ msgstr "تغییر شمایل..."
+
+#~ msgid "Text color:"
+#~ msgstr "رنگ متن:"
+
+#~ msgid "Backgound color:"
+#~ msgstr "رنگ زمینه:"
+
+#, fuzzy
+#~| msgid "Replace mode"
+#~ msgid "Replace Mode"
+#~ msgstr "حالت جایگزین"
+
+#~ msgid "Corners:"
+#~ msgstr "گوشه‌ها:"
+
+#~ msgid "Square"
+#~ msgstr "مربع"
+
+#~ msgid "Sharp"
+#~ msgstr "تیز"
+
+#~ msgid "Soft"
+#~ msgstr "نرم"
+
+#~ msgid "Popup Top-Left"
+#~ msgstr "بالاپر چپ بالا"
+
+#~ msgid "Popup Top-Right"
+#~ msgstr "بالاپر راست بالا"
+
+#~ msgid "Popup Bottom-Left"
+#~ msgstr "بالاپر چپ پایین"
+
+#~ msgid "Popup Bottom-Right"
+#~ msgstr "بالاپر راست پایین"
+
+#~ msgid "Popup Center"
+#~ msgstr "بالاپر مرکز"
+
+#~ msgid "msec"
+#~ msgstr "میلی‌ثانیه"
+
+#, fuzzy
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "قسمت رویی تصادفی"
+
+#, fuzzy
+#~ msgid "Details"
+#~ msgstr "جزئیات چهره"
+
+#~ msgid "Ridiculously easy"
+#~ msgstr "به نحو خنده‌داری آسان"
+
+#~ msgid "Very easy"
+#~ msgstr "خیلی آسان"
+
+#~ msgid "Easy"
+#~ msgstr "آسان"
+
+#~ msgid "Medium"
+#~ msgstr "متوسط"
+
+#~ msgid "Hard"
+#~ msgstr "سخت"
+
+#~ msgid "Very hard"
+#~ msgstr "خیلی سخت"
+
+#~ msgid "Extremely hard"
+#~ msgstr "خیلی خیلی سخت"
+
+#~ msgid "Impossible"
+#~ msgstr "غیرممکن"
+
+#~ msgid "Custom"
+#~ msgstr "سفارشی"
+
+#~ msgid "Show &High Scores..."
+#~ msgstr "نمایش &امتیازهای بالا‌..."
+
+#~ msgid "Choose Backside"
+#~ msgstr "انتخاب قسمت پشتی"
+
+#~ msgid "empty"
+#~ msgstr "خالی"
+
+#~ msgid "Random backside"
+#~ msgstr "قسمت پشتی تصادفی"
+
+#~ msgid "Use global backside"
+#~ msgstr "استفاده از قسمت پشتی سراسری"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "سراسری کردن قسمت پشتی"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "انتخاب قسمت رویی"
+
+#~ msgid "Use global frontside"
+#~ msgstr "استفاده از قسمت رویی سراسری"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "سراسری کردن قسمت رویی"
+
+#~ msgid "Resize Cards"
+#~ msgstr "تغییر اندازه کارتها"
+
+#~ msgid "Default Size"
+#~ msgstr "اندازه پیش‌فرض"
+
+#~ msgid "Preview:"
+#~ msgstr "پیش‌نمایش:"

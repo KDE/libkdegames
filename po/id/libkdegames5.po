@@ -1,0 +1,927 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the libkdegames package.
+# Wantoyo <wantoyo@yahoo.com>, 2014, 2017, 2018.
+# Neon <wantoyek@gmail.com>, 2018, 2019, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2022-05-09 20:24+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Coba lagi"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Tidak dapat mengakses file tingkat skor. Pengguna lain mungkin sedang "
+"menulis untuk itu."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Tingkat Skor"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Nama"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Tanggal"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Tingkat"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Skor"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Waktu"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Peringkat"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Ingat"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Lupakan"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Ingat tingkat skor ini"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Lupakan tingkat skor ini"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Hebat!\n"
+"Kamu memiliki sebuah tingkat skor baru!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Dilakukan dengan baik!\n"
+"Kamu berhasil sampai ke daftar tingkat skor!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Mudah Menggelikan"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Sangat Mudah"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Mudah"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Sedang"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Sulit"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Sangat Sulit"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Sangat Sulit Sekali"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Tidak Mungkin"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Mengubah tingkat kesulitan akan mengakhiri permainan saat ini!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Mengubah tingkat kesulitan"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Tingkat Kesulitan"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Atur tingkat kesulitan"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Atur tingkat kesulitan permainan."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Dapatkan Tema Baru..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Pilih tema"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[Tidak ada nama]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "oleh %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Baru"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Mulai sebagai permainan baru."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Mulai sebagai permainan baru"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Muat..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Buka permainan yang disimpan..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Muat &Akhir-akhir Ini"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Buka permainan yang disimpan belakangan ini..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Mulai Ulang &Permainan"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Mulai-ulang permainan"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Simpan"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Simpan permainan saat ini"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Simpan &Sebagai..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Simpan permainan saat ini ke file lainnya"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Akhiri Permainan"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Akhiri permainan saat ini"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Je&da"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "Jeda permainan"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Tampilkan &Tingkat Skor"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Tampilkan tingkat skor"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Kosongkan Tingkat Skor"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Kosongkan tingkat skor"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Tampilkan Perangkaan"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Tampilkan perangkaan"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Kosongkan Perangkaan"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Hapus perangkaan semua waktu."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "&Cetak..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Berhenti"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Berhentikan program"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Ulang"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Ulangi langkah tadi"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Urung"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Urung langkah tadi"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "U&lang"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Ulang langkah terkini"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Guling Dadu"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Gulingkan dadu"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Akhiri Giliran"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Petunjuk"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Berikan sebuah petunjuk"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demo"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Mainkan sebuah demo"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Terpecahkan"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Memecahkan permainan"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Memilih &Jenis Permainan"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Konfigurasikan &Carddecks..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Konfigurasikan &Tingkat Skor..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Kirim ke Semua Pemain"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Kirim ke %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "MaksPemain"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "MinPemain"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "StatusPermainan"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Pemain %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Tidak diketahui"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Kirim ke Kelompokku (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Ketidakcocokan cookie!\n"
+"Cookie Diharapkan: %1\n"
+"Cookie Diterima: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"Versi KPermainan tidak cocok!\n"
+"Versi Yang Dharapkan: %1\n"
+"Versi Yang Didapat: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Kode error %1 tak diketahui"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Pengesetan Permainan"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Pengesetan Penerusan Permainan"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Muat Permainan"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Klien permainan terkoneksi"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Pengesetan game kelar"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Sinkronisasi Acak"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Diskoneksikan"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Properti Pemain"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Properti Permainan"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Tambah Pemain"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Singkirkan Pemain"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Pemain Aktif"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Pemain Yang Tidak Aktif"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id Giliran"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Pesan Error"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Input Pemain"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Sebuah IO ditambahkan"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Proses Query"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "ID Pemain"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "ID - Tak Bernama: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 tak teregistrasi"
+msgstr[1] "%1 tak teregistrasi"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Titik NULL"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Benar"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Salah"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Tak diketahui"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "IdPengguna"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Kelompok"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "baku"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "AsyncInput"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "Giliranku"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Sulit"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Kustom"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Pilih <b>sulit</b> pada permainan.<br />Jika kamu mengubah tingkat sulit "
+"sementara permainan sedang berjalan, kamu harus membatalkan ini dan memulai "
+"yang baru."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Pilih <b>sulit</b> pada permainan.<br />Kamu bisa mengubah tingkat sulit "
+"selama permainan berjalan."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Dapatkan Tema Baru..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Pratinjau"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Perincian Tema"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Kontak:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Deskripsi:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Penulis:"
+
+#~ msgid "Mean Score"
+#~ msgstr "Skor Rata-rata"
+
+#~ msgid "Best Score"
+#~ msgstr "Skor Terbaik"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Waktu Yang Dilalui"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Skor &Terbaik"
+
+#~ msgid "&Players"
+#~ msgstr "&Para Pemain"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistik"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogram"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Tampilkan skor tinggi seluruh dunia"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Tampilkan para pemain seluruh dunia"
+
+#~ msgid "Highscores"
+#~ msgstr "Skor Tinggi"
+
+#~ msgid "Overwrite"
+#~ msgstr "Timpa"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Berkasnya sudah ada. Timpa?"
+
+#~ msgid "Export"
+#~ msgstr "Expor"
+
+#~ msgid "Winner"
+#~ msgstr "Pemenang"
+
+#~ msgid "Won Games"
+#~ msgstr "Pemenang Permainan"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Atur Skor Tinggi"
+
+#~ msgid "Main"
+#~ msgstr "Utama"
+
+#~ msgid "Nickname:"
+#~ msgstr "Nama panggilan:"
+
+#~ msgid "Comment:"
+#~ msgstr "Ulasan:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Skor tinggi seluruh dunia diaktifkan"
+
+#~ msgid "Advanced"
+#~ msgstr "Tingkat Lanjut"
+
+#~ msgid "Registration Data"
+#~ msgstr "Data Pendaftaran"
+
+#~ msgid "Key:"
+#~ msgstr "Kunci:"
+
+#~ msgid "Remove"
+#~ msgstr "Singkirkan"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Ini akan secara permanen menghapus kunci pendaftaran Anda. Anda tidak "
+#~ "akan dapat menggunakan lagi nama panggilan yang saat ini terdaftar."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Silakan memilih sebuah nama panggilan yang tidak kosong."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Nama panggilan siap untuk digunakan. Silakan memilih yang lainnya"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Masukkan Nama Panggilan Anda"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Selamat, Anda menang!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Masukkan nama panggilan Anda:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Jangan tanyakan lagi."
+
+#~ msgid "anonymous"
+#~ msgstr "anonim"
+
+#~ msgid "Games Count"
+#~ msgstr "Permainan Hitung"
+
+#~ msgid "Comment"
+#~ msgstr "Ulasan"
+
+#~ msgid "Undefined error."
+#~ msgstr "Galat tidak dipastikan."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Gagal argumen."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Argumen tidak valid."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Tidak dapat tersambung ke server MySQL."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Tidak dapat memilih database."
+
+#~ msgid "Error on database query."
+#~ msgstr "Galat saat menayakan database."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Galat saat menyisipkan database."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Nama panggilan siap terdaftar."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Nama panggilan tidak terdaftar."
+
+#~ msgid "Invalid key."
+#~ msgstr "Kunci tidak valid."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Penyerahan kunci tidak valid."
+
+#~ msgid "Invalid level."
+#~ msgstr "Tingkat tidak valid."
+
+#~ msgid "Invalid score."
+#~ msgstr "Skor tidak valid."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Tidak dapat menghubungi server skor tinggi di seluruh dunia"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "Server URL: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Tidak dapat membuka berkas sementara."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Pesan dari server skor tinggi seluruh dunia"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Jawaban yang tidak valid dari server skor tinggi seluruh dunia."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Pesan baku: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Jawaban yang tidak valid dari server skor tinggi seluruh dunia (hal "
+#~ "kehilangan: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Berhasil"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Skor Multiplayer"
+
+#~ msgid "No game played."
+#~ msgstr "Tidak ada permainan yang dimainkan."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Skor dari permainan terakhir:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Skor dari permainan %1 terakhir:"
+
+#~ msgid "all"
+#~ msgstr "semua"
+
+#~ msgid "Select player:"
+#~ msgstr "Pilih pemain:"
+
+#~ msgid "Total:"
+#~ msgstr "Total:"
+
+#~ msgid "Won:"
+#~ msgstr "Menang:"
+
+#~ msgid "Lost:"
+#~ msgstr "Kalah:"
+
+#~ msgid "Draw:"
+#~ msgstr "Seri:"
+
+#~ msgid "Current:"
+#~ msgstr "Saat ini:"
+
+#~ msgid "Max won:"
+#~ msgstr "Maks menang:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Maks kalah:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Hitungan Permainan"
+
+#~ msgid "Trends"
+#~ msgstr "Trend"
+
+#~ msgid "From"
+#~ msgstr "Dari"
+
+#~ msgid "To"
+#~ msgstr "Ke"
+
+#~ msgid "Count"
+#~ msgstr "Hitungan"
+
+#~ msgid "Percent"
+#~ msgstr "Persèn"
+
+#~ msgid "Configure..."
+#~ msgstr "Atur..."
+
+#~ msgid "Export..."
+#~ msgstr "Expor..."

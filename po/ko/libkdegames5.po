@@ -1,0 +1,922 @@
+# Translation of libkdegames.po to Korean
+# Copyright (C) 2006, 2007, 2008 Free Software Foundation, Inc.
+# Shinjo Park <kde@peremen.name>, 2006, 2007, 2008, 2013, 2019, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2020-04-05 11:59+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 19.04.3\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "다시 시도"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"최고 기록 파일에 접근할 수 없습니다. 아마도 다른 사용자가 기록하고 있는 것 같"
+"습니다."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "최고 기록"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "이름"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "날짜"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "단계"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "점수"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "시간"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "등위"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "기억(&R)"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "잊어버림(&F)"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "이 최고 점수 기억"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "이 최고 점수 잊어버림"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"축하합니다!\n"
+"새 최고 기록을 세우셨습니다!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"잘 하셨습니다!\n"
+"최고 기록 목록에 들어갔습니다!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "이해가 안 가게 쉬움"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "매우 쉬움"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "쉬움"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "중간"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "어려움"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "매우 어려움"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "엄청나게 어려움"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "불가능함"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "게임의 난이도를 바꾸면 현재 게임을 끝냅니다!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "난이도를 변경합니다"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "난이도"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "난이도 설정"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "게임의 난이도를 설정합니다."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "새 테마 가져오기..."
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "테마 선택"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[이름 없음]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "%1 만듦"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "새 게임(&N)"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "새 게임을 시작합니다."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "새 게임을 시작합니다"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "불러오기(&L)..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "저장한 게임을 불러옵니다..."
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "최근 게임 불러오기(&R)"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "최근에 저장한 게임을 불러옵니다..."
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "게임 다시 시작(&G)"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "게임을 다시 시작합니다"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "저장(&S)"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "현재 게임을 저장합니다"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "다른 이름으로 저장(&A)..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "현재 게임을 다른 파일로 저장합니다"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "게임 끝내기(&E)"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "현재 게임을 끝냅니다"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "일시 정지(&U)"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "게임을 일시 정지합니다"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "최고 기록 보기(&H)"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "최고 기록을 봅니다"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "최고 기록 지우기(&C)"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "최고 기록을 지웁니다"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "통계 보기"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "통계를 봅니다"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "통계 지우기(&C)"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "모든 시간 통계를 지웁니다."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "인쇄(&P)..."
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "끝내기(&Q)"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "프로그램을 끝냅니다"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "반복"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "마지막 움직임을 반복합니다"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "실행 취소(&O)"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "마지막 움직임을 취소합니다"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "다시 실행(&D)"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "마지막 움직임을 다시 실행합니다"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "주사위 굴리기(&R)"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "주사위를 굴립니다"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "차례 끝내기"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "힌트(&H)"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "힌트를 줍니다"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "데모(&D)"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "데모를 보여 줍니다"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "풀기(&S)"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "게임을 풉니다"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "게임 종류 선택(&T)"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "카드 덱 설정(&C)..."
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "최고 기록 설정(&H)..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "모든 플레이어에게 보내기"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "%1에게 보내기"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "최대 플레이어"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "최소 플레이어"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "게임 상태"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "플레이어 %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "내 그룹에게 보내기 (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"쿠키가 일치하지 않습니다!\n"
+"예상한 쿠키: %1\n"
+"받은 쿠키: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"KGame 버전이 일치하지 않습니다!\n"
+"예상한 버전: %1\n"
+"받은 버전: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "알 수 없는 오류 코드 %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "게임 설정"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "게임 설정 진행"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "게임 불러오기"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "클라이언트 게임 연결됨"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "게임 설정 완료됨"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "난수 동기화"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "연결 끊기"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "플레이어 속성"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "게임 속성"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "플레이어 추가"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "플레이어 삭제"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "플레이어 활성화"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "플레이어 비활성화"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id 차례"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "오류 메시지"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "플레이어 입력"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "IO가 추가됨"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "쿼리 진행"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "플레이어 ID"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "이름 없음 - ID: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 등록되지 않음"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL 포인터"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "참"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "거짓"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "사용자 ID"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "그룹"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "기본값"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "비동기 입력"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "내 차례"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "난이도"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "사용자 정의"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"게임의 <b>난이도</b>를 선택하십시오.<br />게임을 하는 중에 난이도를 바꾸면 진"
+"행 중인 게임을 취소하고 새로 시작해야 합니다."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"게임의 <b>난이도</b>를 선택하십시오.<br />게임을 하는 중에 난이도를 바꿀 수 "
+"있습니다."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "새 테마 가져오기(&G)..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "미리 보기"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "테마 정보"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "연락처:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "설명:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "작성자:"
+
+#~ msgid "Mean Score"
+#~ msgstr "평균 점수"
+
+#~ msgid "Best Score"
+#~ msgstr "최고 점수"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "경과 시간"
+
+#~ msgid "Best &Scores"
+#~ msgstr "좋은 기록(&S)"
+
+#~ msgid "&Players"
+#~ msgstr "플레이어(&P)"
+
+#~ msgid "Statistics"
+#~ msgstr "통계"
+
+#~ msgid "Histogram"
+#~ msgstr "히스토그램"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "전세계 최고 기록 보기"
+
+#~ msgid "View world-wide players"
+#~ msgstr "전세계 플레이어 보기"
+
+#~ msgid "Highscores"
+#~ msgstr "최고 기록"
+
+#~ msgid "Overwrite"
+#~ msgstr "덮어쓰기"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "파일이 이미 존재합니다. 덮어쓰시겠습니까?"
+
+#~ msgid "Export"
+#~ msgstr "내보내기"
+
+#~ msgid "Winner"
+#~ msgstr "승리자"
+
+#~ msgid "Won Games"
+#~ msgstr "이긴 게임"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "최고 기록 설정"
+
+#~ msgid "Main"
+#~ msgstr "주"
+
+#~ msgid "Nickname:"
+#~ msgstr "별명:"
+
+#~ msgid "Comment:"
+#~ msgstr "설명:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "전세계 최고 기록 활성화됨"
+
+#~ msgid "Advanced"
+#~ msgstr "고급"
+
+#~ msgid "Registration Data"
+#~ msgstr "등록 데이터"
+
+#~ msgid "Key:"
+#~ msgstr "키:"
+
+#~ msgid "Remove"
+#~ msgstr "삭제"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "이것은 등록 키를 영구적으로 삭제할 것입니다. 현재 등록한 별명으로 더 이상 "
+#~ "등록할 수 없습니다."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "비어 있지 않은 별명을 입력해 주십시오."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "별명이 사용 중입니다. 다른 것을 선택하십시오"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "별명을 입력하십시오"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "축하합니다. 이겼습니다!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "별명을 입력하십시오:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "다시 물어보지 않기."
+
+#~ msgid "anonymous"
+#~ msgstr "익명"
+
+#~ msgid "Games Count"
+#~ msgstr "게임 횟수"
+
+#~ msgid "Comment"
+#~ msgstr "설명"
+
+#~ msgid "Undefined error."
+#~ msgstr "정의되지 않은 오류."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "인자가 없습니다."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "인자가 잘못되었습니다."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "MySQL 서버에 연결할 수 없습니다."
+
+#~ msgid "Unable to select database."
+#~ msgstr "데이터베이스를 선택할 수 없습니다."
+
+#~ msgid "Error on database query."
+#~ msgstr "데이터베이스 쿼리에 오류가 있습니다."
+
+#~ msgid "Error on database insert."
+#~ msgstr "데이터베이스 삽입에 오류가 있습니다."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "별명이 이미 등록되었습니다."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "별명이 등록되지 않았습니다."
+
+#~ msgid "Invalid key."
+#~ msgstr "잘못된 키입니다."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "잘못된 접수 키입니다."
+
+#~ msgid "Invalid level."
+#~ msgstr "잘못된 단계입니다."
+
+#~ msgid "Invalid score."
+#~ msgstr "잘못된 점수입니다."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "전세계 최고 기록 서버와 연결할 수 없습니다."
+
+#~ msgid "Server URL: %1"
+#~ msgstr "서버 URL: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "임시 파일을 열 수 없습니다."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "전세계 최고 기록 서버의 메시지"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "전세계 최고 기록 서버에서 잘못된 응답을 했습니다."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "원래 메시지: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr "전세계 최고 기록 서버에서 잘못된 응답을 했습니다. (빠진 항목: %1)"
+
+#~ msgid "Success"
+#~ msgstr "성공"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "다중 플레이어 점수"
+
+#~ msgid "No game played."
+#~ msgstr "게임을 하지 않았습니다."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "마지막 게임의 점수:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "마지막 %1번 게임의 점수:"
+
+#~ msgid "all"
+#~ msgstr "모두"
+
+#~ msgid "Select player:"
+#~ msgstr "플레이어 선택:"
+
+#~ msgid "Total:"
+#~ msgstr "합계:"
+
+#~ msgid "Won:"
+#~ msgstr "이김:"
+
+#~ msgid "Lost:"
+#~ msgstr "짐:"
+
+#~ msgid "Draw:"
+#~ msgstr "비김:"
+
+#~ msgid "Current:"
+#~ msgstr "현재:"
+
+#~ msgid "Max won:"
+#~ msgstr "최대 이김:"
+
+#~ msgid "Max lost:"
+#~ msgstr "최대 짐:"
+
+#~ msgid "Game Counts"
+#~ msgstr "게임 횟수"
+
+#~ msgid "Trends"
+#~ msgstr "경향"
+
+#~ msgid "From"
+#~ msgstr "다음에서"
+
+#~ msgid "To"
+#~ msgstr "다음까지"
+
+#~ msgid "Count"
+#~ msgstr "횟수"
+
+#~ msgid "Percent"
+#~ msgstr "퍼센트"
+
+#~ msgid "Configure..."
+#~ msgstr "설정..."
+
+#~ msgid "Export..."
+#~ msgstr "내보내기..."

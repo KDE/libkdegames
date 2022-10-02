@@ -1,0 +1,701 @@
+# Translation of libkdegames5 to Norwegian Bokmål
+#
+# Knut Yrvin <knut.yrvin@gmail.com>, 2002.
+# Axel Bojer <fri_programvare@bojer.no>, 2003.
+# Knut Staring <knutsta@yahoo.no>, 2004.
+# Jørgen Grønlund <jorgenhg@broadpark.no>, 2004.
+# Gaute Hvoslef Kvalnes <gaute@verdsveven.com>, 2004.
+# Nils Kristian Tomren <slx@nilsk.net>, 2005.
+# Øyvind A. Holm <sunny@sunbase.org>, 2005.
+# Rune Nakim <nakim@online.no>, 2008.
+# Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2008, 2009, 2010, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2012-12-11 09:29+0100\n"
+"Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
+"Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Forsøk igjen"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Har ikke tilgang til resultatlista. Antakelig holder en annen bruker med på\n"
+"å skrive til den."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Resultatliste"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Navn"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Dato"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Nivå"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Poeng"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Tid"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Rangering"
+
+#: highscore/kscoredialog.cpp:294
+#, kde-format
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr "&Husk"
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr "&Glem"
+
+#: highscore/kscoredialog.cpp:533
+#, kde-format
+msgid "Remember this high score"
+msgstr "Husk denne rekorden"
+
+#: highscore/kscoredialog.cpp:534
+#, kde-format
+msgid "Forget this high score"
+msgstr "Glem denne rekorden"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Utmerket!\n"
+"Du har høyeste poengsum!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Godt gjort!\n"
+"Du kom med på topplista!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr "Latterlig lett"
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr "Veldig lett"
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr "Lett"
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr "Middels"
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr "Vanskelig"
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr "Veldig vanskelig"
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr "Ekstremt vanskelig"
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr "Umulig"
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr "Om vanskelighetsgraden endres, avsluttes spillet som er i gang!"
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr "Endre vanskelighetsgraden"
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr "Vanskelighetsgrad"
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr "Oppgi vanskelighetsgrad"
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr "Oppgi hvor vanskelig spillet skal være."
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr "Hent nye temaer …"
+
+#: kgthemeselector.cpp:203
+#, kde-format
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Velg tema"
+
+#: kgthemeselector.cpp:273
+#, kde-format
+msgid "[No name]"
+msgstr "[uten navn]"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "av %1"
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Ny"
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game."
+msgstr "Start et nytt spill."
+
+#: kstandardgameaction.cpp:36
+msgid "Start a new game"
+msgstr "Start et nytt spill"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Last …"
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Åpne et lagret spill …"
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Last n&ylig"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Åpne et nylig lagret spill …"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "Start spillet &om igjen"
+
+#: kstandardgameaction.cpp:42
+msgid "Restart the game"
+msgstr "Start spillet på nytt"
+
+#: kstandardgameaction.cpp:44
+msgid "&Save"
+msgstr "&Lagre"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr "Lagre dette spillet"
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Lagre &som …"
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Lagre spillet til en annen fil"
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Avslutt spillet"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr "Avslutt dette spillet"
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Pa&use"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr "La spillet ta pause"
+
+#: kstandardgameaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Vis &poengtavle"
+
+#: kstandardgameaction.cpp:52
+msgid "Show high scores"
+msgstr "Vis poengtavle"
+
+#: kstandardgameaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Tøm poengtavle"
+
+#: kstandardgameaction.cpp:54
+msgid "Clear high scores"
+msgstr "Tøm poengtavle"
+
+#: kstandardgameaction.cpp:56
+msgid "Show Statistics"
+msgstr "Vis statistikk"
+
+#: kstandardgameaction.cpp:56
+msgid "Show statistics"
+msgstr "Vis statistikk"
+
+#: kstandardgameaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Nullstill statistikker"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Slett tidsstatistikk."
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr "Sk&riv ut …"
+
+#: kstandardgameaction.cpp:62
+msgid "&Quit"
+msgstr "&Avslutt"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr "Avslutt programmet"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Gjenta"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Gjenta siste trekk"
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Angre"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr "Angre siste trekk"
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "&Gjør om"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Gjør siste trekk om igjen"
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Kast terninger"
+
+#: kstandardgameaction.cpp:72
+msgid "Roll the dice"
+msgstr "Kast terningene"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Slutt trekk"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "&Tips"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr "Gi et tips"
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Demo"
+
+#: kstandardgameaction.cpp:78
+msgid "Play a demo"
+msgstr "Spill en demonstrasjon"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Løs"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr "Løs spillet"
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Velg spill&type"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Sett opp  &kortstokker …"
+
+#: kstandardgameaction.cpp:88
+msgid "Configure &High Scores..."
+msgstr "Still inn &resultatliste …"
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Send til alle spillere"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Send til %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, kde-format
+msgid "%1: "
+msgstr "%1: "
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Maks spillere"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Min spillere"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Spillstatus"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Spiller %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, kde-format
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Send til gruppa %1"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Kakefeil!\n"
+"Forventet kake: %1\n"
+"Mottatt kake: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"KGame versjonsfeil!\n"
+"Forventet versjon: %1\n"
+"Mottatt versjon: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Ukjent feilmelding %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Spilloppsett"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Fortsett spilloppsett"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Last spill"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Klientspill tilkoblet"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Spilloppsett utført"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Synkroniser tilfeldig"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Koble fra"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Spilleregenskaper"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Spillegenskaper"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Legg til spiller"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Fjern spiller"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Aktiviser spiller"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Passiviser spiller"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Id trekk"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Feilmelding"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Spillers inndata"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "En IO ble lagt til"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Kjør spørring"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Spiller identifikator"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "ID uten navn: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, kde-format
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 uregistrert"
+msgstr[1] "%1 uregistrerte"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "NULL-peker"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Sann"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Usann"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "BrukerID"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Gruppe"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "standard"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "Asynkrone inndata"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "Min tur"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr "Vanskelighetsgrad"
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr "Tilpasset"
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+"Velg <b>vanskelighetsgraden</b> for spillet.<br /> Hvis du endrer "
+"vanskeligheten mens et spill er i gang må du avbryte det og begynne et nytt."
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+"Velg <b>vanskelighetsgraden</b> for spillet.<br /> Du kan endre "
+"vanskelighetsgraden mens spillet pågår."
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr "&Hent nye temaer …"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, kde-format
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr "Temadetaljer"
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, kde-format
+msgid "Contact:"
+msgstr "Kontakt:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr "Beskrivelse:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr "Forfatter:"

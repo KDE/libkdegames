@@ -1,0 +1,1368 @@
+# translation of libkdegames.po to Cymraeg
+# Penbwrdd yn Gymraeg.
+# Copyright (C) 2003, 2005 Free Software Foundation, Inc.
+# www.kyfieithu.co.uk<kyfieithu@dotmon.com>, www.gyfieithu.co.uk<kyfieithu@dotmon.com>, 2003.
+# Kevin Donnelly <kevin@dotmon.com>, 2005.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdegames\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"PO-Revision-Date: 2005-10-15 22:24+0100\n"
+"Last-Translator: Kevin Donnelly <kevin@dotmon.com>\n"
+"Language-Team: Cymraeg <cy@li.org>\n"
+"Language: cy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10\n"
+"\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: highscore/khighscore.cpp:150
+#, kde-format
+msgid "Retry"
+msgstr "Ailgeisio"
+
+#: highscore/khighscore.cpp:152
+#, kde-format
+msgid ""
+"Cannot access the highscore file. Another user is probably currently writing "
+"to it."
+msgstr ""
+"Methu cyrchu'r ffeil sgorau gorau.  Mwy na thebyg, mae defnyddiwr arall yn "
+"ysgrifennu iddo ar hyn o bryd."
+
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#, kde-format
+msgid "High Scores"
+msgstr "Sgorau Gorau"
+
+#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#, kde-format
+msgid "Name"
+msgstr "Enw"
+
+#: highscore/kscoredialog.cpp:111
+#, kde-format
+msgid "Date"
+msgstr "Dyddiad"
+
+#: highscore/kscoredialog.cpp:113
+#, kde-format
+msgid "Level"
+msgstr "Lefel"
+
+#: highscore/kscoredialog.cpp:115
+#, kde-format
+msgid "Score"
+msgstr "Sgôr"
+
+#: highscore/kscoredialog.cpp:117
+#, kde-format
+msgid "Time"
+msgstr "Amser"
+
+#: highscore/kscoredialog.cpp:273
+#, kde-format
+msgid "Rank"
+msgstr "Gradd"
+
+#: highscore/kscoredialog.cpp:294
+#, fuzzy, kde-format
+#| msgid "#%1"
+msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
+msgid "#%1"
+msgstr "#%1"
+
+#: highscore/kscoredialog.cpp:531
+#, kde-format
+msgid "&Remember"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:532
+#, kde-format
+msgid "&Forget"
+msgstr ""
+
+#: highscore/kscoredialog.cpp:533
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Remember this high score"
+msgstr "Sgorau Gorau"
+
+#: highscore/kscoredialog.cpp:534
+#, fuzzy, kde-format
+#| msgid "Highscores"
+msgid "Forget this high score"
+msgstr "Sgorau Gorau"
+
+#: highscore/kscoredialog.cpp:542
+#, kde-format
+msgid ""
+"Excellent!\n"
+"You have a new high score!"
+msgstr ""
+"Ardderchog!\n"
+" Mae gennych sgôr gorau newydd!"
+
+#: highscore/kscoredialog.cpp:544
+#, kde-format
+msgid ""
+"Well done!\n"
+"You made it to the high score list!"
+msgstr ""
+"Da iawn!\n"
+"Rydych wedi cyrraedd y rhestr sgorau gorau!"
+
+#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#, kde-format
+msgctxt "Game difficulty level 1 out of 8"
+msgid "Ridiculously Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#, kde-format
+msgctxt "Game difficulty level 2 out of 8"
+msgid "Very Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#, kde-format
+msgctxt "Game difficulty level 3 out of 8"
+msgid "Easy"
+msgstr ""
+
+#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#, kde-format
+msgctxt "Game difficulty level 4 out of 8"
+msgid "Medium"
+msgstr ""
+
+#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#, kde-format
+msgctxt "Game difficulty level 5 out of 8"
+msgid "Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#, kde-format
+msgctxt "Game difficulty level 6 out of 8"
+msgid "Very Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#, kde-format
+msgctxt "Game difficulty level 7 out of 8"
+msgid "Extremely Hard"
+msgstr ""
+
+#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#, kde-format
+msgctxt "Game difficulty level 8 out of 8"
+msgid "Impossible"
+msgstr ""
+
+#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#, kde-format
+msgid "Changing the difficulty level will end the current game!"
+msgstr ""
+
+#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#, kde-format
+msgid "Change the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#, kde-format
+msgctxt "Game difficulty level"
+msgid "Difficulty"
+msgstr ""
+
+#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#, kde-format
+msgid "Set the difficulty level"
+msgstr ""
+
+#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#, kde-format
+msgid "Set the difficulty level of the game."
+msgstr ""
+
+#: kgthemeselector.cpp:103
+#, kde-format
+msgid "Get New Themes..."
+msgstr ""
+
+#: kgthemeselector.cpp:203
+#, fuzzy, kde-format
+#| msgid "Select player:"
+msgctxt "@title:window config dialog"
+msgid "Select theme"
+msgstr "Dewis chwaraewr:"
+
+#: kgthemeselector.cpp:273
+#, fuzzy, kde-format
+#| msgid "Your name:"
+msgid "[No name]"
+msgstr "Eich Enw:"
+
+#: kgthemeselector.cpp:289
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr ""
+
+#: kstandardgameaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Newydd"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game."
+msgstr "Creu gêm rhwydwaith"
+
+#: kstandardgameaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game"
+msgstr "Creu gêm rhwydwaith"
+
+#: kstandardgameaction.cpp:38
+msgid "&Load..."
+msgstr "&Llwytho..."
+
+#: kstandardgameaction.cpp:38
+msgid "Open a saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:40
+msgid "Load &Recent"
+msgstr "Llwytho &Diweddar"
+
+#: kstandardgameaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr ""
+
+#: kstandardgameaction.cpp:42
+msgid "Restart &Game"
+msgstr "&Ailddechrau Gêm"
+
+#: kstandardgameaction.cpp:42
+#, fuzzy
+#| msgid "Restart &Game"
+msgid "Restart the game"
+msgstr "&Ailddechrau Gêm"
+
+#: kstandardgameaction.cpp:44
+#, fuzzy
+msgid "&Save"
+msgstr "&Datrys"
+
+#: kstandardgameaction.cpp:44
+msgid "Save the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:46
+msgid "Save &As..."
+msgstr "Cadw &Fel..."
+
+#: kstandardgameaction.cpp:46
+msgid "Save the current game to another file"
+msgstr ""
+
+#: kstandardgameaction.cpp:48
+msgid "&End Game"
+msgstr "&Gorffen Gêm"
+
+#: kstandardgameaction.cpp:48
+msgid "End the current game"
+msgstr ""
+
+#: kstandardgameaction.cpp:50
+msgid "Pa&use"
+msgstr "Se&ibio"
+
+#: kstandardgameaction.cpp:50
+msgid "Pause the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show &High Scores"
+msgstr "Dangos Sgorau &Gorau"
+
+#: kstandardgameaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show high scores"
+msgstr "Dangos Sgorau &Gorau"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "&Clear High Scores"
+msgstr "Sgorau Gorau"
+
+#: kstandardgameaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "Clear high scores"
+msgstr "Sgorau Gorau"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show Statistics"
+msgstr "Ystadegau"
+
+#: kstandardgameaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show statistics"
+msgstr "Ystadegau"
+
+#: kstandardgameaction.cpp:58
+#, fuzzy
+#| msgid "Statistics"
+msgid "&Clear Statistics"
+msgstr "Ystadegau"
+
+#: kstandardgameaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr ""
+
+#: kstandardgameaction.cpp:60
+msgid "&Print..."
+msgstr ""
+
+#: kstandardgameaction.cpp:62
+#, fuzzy
+msgid "&Quit"
+msgstr "Cyng&horyn"
+
+#: kstandardgameaction.cpp:62
+msgid "Quit the program"
+msgstr ""
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat"
+msgstr "Ailadrodd"
+
+#: kstandardgameaction.cpp:66
+msgid "Repeat the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:68
+msgid "Und&o"
+msgstr "&Dadwneud"
+
+#: kstandardgameaction.cpp:68
+msgid "Undo the last move"
+msgstr ""
+
+#: kstandardgameaction.cpp:70
+msgid "Re&do"
+msgstr "Ail&wneud"
+
+#: kstandardgameaction.cpp:70
+msgid "Redo the latest move"
+msgstr ""
+
+#: kstandardgameaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Taflu Dis"
+
+#: kstandardgameaction.cpp:72
+#, fuzzy
+#| msgid "&Roll Dice"
+msgid "Roll the dice"
+msgstr "&Taflu Dis"
+
+#: kstandardgameaction.cpp:74
+msgid "End Turn"
+msgstr "Gorffen Tro"
+
+#: kstandardgameaction.cpp:76
+msgid "&Hint"
+msgstr "Cyng&horyn"
+
+#: kstandardgameaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kstandardgameaction.cpp:78
+msgid "&Demo"
+msgstr "&Arddangos"
+
+#: kstandardgameaction.cpp:78
+#, fuzzy
+#| msgid "Player Name"
+msgid "Play a demo"
+msgstr "Enw Chwaraewr"
+
+#: kstandardgameaction.cpp:80
+msgid "&Solve"
+msgstr "&Datrys"
+
+#: kstandardgameaction.cpp:80
+msgid "Solve the game"
+msgstr ""
+
+#: kstandardgameaction.cpp:84
+msgid "Choose Game &Type"
+msgstr "Dewis &Math o Gêm"
+
+#: kstandardgameaction.cpp:86
+msgid "Configure &Carddecks..."
+msgstr "Ffurfweddu &Pecynnau Cerdiau..."
+
+#: kstandardgameaction.cpp:88
+#, fuzzy
+#| msgid "Configure &Highscores..."
+msgid "Configure &High Scores..."
+msgstr "Ffurfweddu &Sgorau Gorau..."
+
+#: private/kchatbase.cpp:98
+#, kde-format
+msgid "Send to All Players"
+msgstr "Anfon i bob chwaraewr"
+
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#, kde-format
+msgid "Send to %1"
+msgstr "Anfon i %1"
+
+#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
+#: private/kchatbaseitemdelegate.cpp:61
+#, fuzzy, kde-format
+msgid "%1: "
+msgstr "%1 %2"
+
+#: private/kgame/kgame.cpp:84
+#, kde-format
+msgid "MaxPlayers"
+msgstr "Uchafswm Chwaraewyr"
+
+#: private/kgame/kgame.cpp:86
+#, kde-format
+msgid "MinPlayers"
+msgstr "Isafswm Chwaraewyr"
+
+#: private/kgame/kgame.cpp:88
+#, kde-format
+msgid "GameStatus"
+msgstr "Cyflwr Gêm"
+
+#: private/kgame/kgamechat.cpp:83
+#, kde-format
+msgid "Player %1"
+msgstr "Chwaraewr %1"
+
+#: private/kgame/kgamechat.cpp:91
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "Unknown player"
+msgid "Unknown"
+msgstr "Anhysbys"
+
+#: private/kgame/kgamechat.cpp:233
+#, kde-format
+msgid "Send to My Group (\"%1\")"
+msgstr "Anfon i Fy Ngrwp (\"%1\")"
+
+#: private/kgame/kgameerror.cpp:51
+#, kde-format
+msgid ""
+"Cookie mismatch!\n"
+"Expected Cookie: %1\n"
+"Received Cookie: %2"
+msgstr ""
+"Cwci anghydnaws!\n"
+"Wedi disgwyl cwci: %1\n"
+"Wedi derbyn cwci: %2"
+
+#: private/kgame/kgameerror.cpp:59
+#, kde-format
+msgid ""
+"KGame Version mismatch!\n"
+"Expected Version: %1\n"
+"Received Version: %2\n"
+msgstr ""
+"Fersiwn KGame anghydnaws!\n"
+"Wedi disgwyl fersiwn: %1\n"
+"Wedi derbyn fersiwn: %2\n"
+
+#: private/kgame/kgameerror.cpp:63
+#, kde-format
+msgid "Unknown error code %1"
+msgstr "Côd gwall anhysbys %1"
+
+#: private/kgame/kgamemessage.cpp:102
+#, kde-format
+msgid "Setup Game"
+msgstr "Ffurfweddu Gêm"
+
+#: private/kgame/kgamemessage.cpp:104
+#, kde-format
+msgid "Setup Game Continue"
+msgstr "Ffurfweddu Gêm (Parhau)"
+
+#: private/kgame/kgamemessage.cpp:106
+#, kde-format
+msgid "Load Game"
+msgstr "Llwytho Gêm"
+
+#: private/kgame/kgamemessage.cpp:108
+#, kde-format
+msgid "Client game connected"
+msgstr "Gêm dibynnydd wedi cysylltu"
+
+#: private/kgame/kgamemessage.cpp:110
+#, kde-format
+msgid "Game setup done"
+msgstr "Cwblhawyd ffurfweddu'r gêm"
+
+#: private/kgame/kgamemessage.cpp:112
+#, kde-format
+msgid "Synchronize Random"
+msgstr "Cydamseru Hap"
+
+#: private/kgame/kgamemessage.cpp:114
+#, kde-format
+msgid "Disconnect"
+msgstr "Datgysylltu"
+
+#: private/kgame/kgamemessage.cpp:116
+#, kde-format
+msgid "Player Property"
+msgstr "Priodwedd Chwaraewr"
+
+#: private/kgame/kgamemessage.cpp:118
+#, kde-format
+msgid "Game Property"
+msgstr "Priodwedd Gêm"
+
+#: private/kgame/kgamemessage.cpp:120
+#, kde-format
+msgid "Add Player"
+msgstr "Ychwanegu Chwaraewr"
+
+#: private/kgame/kgamemessage.cpp:122
+#, kde-format
+msgid "Remove Player"
+msgstr "Gwaredu Chwaraewr"
+
+#: private/kgame/kgamemessage.cpp:124
+#, kde-format
+msgid "Activate Player"
+msgstr "Gweithredoli Chwaraewr"
+
+#: private/kgame/kgamemessage.cpp:126
+#, kde-format
+msgid "Inactivate Player"
+msgstr "Anweithredoli Chwaraewr"
+
+#: private/kgame/kgamemessage.cpp:128
+#, kde-format
+msgid "Id Turn"
+msgstr "Tro Dynodiad"
+
+#: private/kgame/kgamemessage.cpp:130
+#, kde-format
+msgid "Error Message"
+msgstr "Neges Wall"
+
+#: private/kgame/kgamemessage.cpp:132
+#, kde-format
+msgid "Player Input"
+msgstr "Mewnbwn Chwaraewr"
+
+#: private/kgame/kgamemessage.cpp:134
+#, kde-format
+msgid "An IO was added"
+msgstr "Ychwanegwyd IO"
+
+#: private/kgame/kgamemessage.cpp:136
+#, kde-format
+msgid "Process Query"
+msgstr "Ymholiad Proses"
+
+#: private/kgame/kgamemessage.cpp:138
+#, kde-format
+msgid "Player ID"
+msgstr "Dynodiad Chwaraewr"
+
+#: private/kgame/kgamepropertyhandler.cpp:162
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1(%2)"
+
+#: private/kgame/kgamepropertyhandler.cpp:164
+#, kde-format
+msgid "Unnamed - ID: %1"
+msgstr "Dienw - Dynodiad: %1"
+
+#: private/kgame/kgamepropertyhandler.cpp:168
+#, fuzzy, kde-format
+#| msgid "%1 unregistered"
+msgid "%1 unregistered"
+msgid_plural "%1 unregistered"
+msgstr[0] "%1 heb gofrestru"
+msgstr[1] "%1 heb gofrestru"
+
+#: private/kgame/kgamepropertyhandler.cpp:361
+#, kde-format
+msgid "NULL pointer"
+msgstr "Pwyntydd nwl"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "True"
+msgstr "Gwir"
+
+#: private/kgame/kgamepropertyhandler.cpp:378
+#, kde-format
+msgid "False"
+msgstr "Ffug"
+
+#: private/kgame/kgamepropertyhandler.cpp:384
+#, kde-format
+msgid "Unknown"
+msgstr "Anhysbys"
+
+#: private/kgame/kplayer.cpp:79
+#, kde-format
+msgid "UserId"
+msgstr "Dynodiad Defnyddiwr"
+
+#: private/kgame/kplayer.cpp:81
+#, kde-format
+msgid "Group"
+msgstr "Grŵp"
+
+#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#, kde-format
+msgid "default"
+msgstr "rhagosodiad"
+
+#: private/kgame/kplayer.cpp:86
+#, kde-format
+msgid "AsyncInput"
+msgstr "Mewnbwn Anghydamserol"
+
+#: private/kgame/kplayer.cpp:88
+#, kde-format
+msgid "myTurn"
+msgstr "fyNhro"
+
+#: private/kgamedifficulty.cpp:116
+#, kde-format
+msgid "Difficulty"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:198
+#, kde-format
+msgctxt ""
+"Name of the game difficulty level that is customized by the user by setting "
+"up different game parameters"
+msgid "Custom"
+msgstr ""
+
+#: private/kgamedifficulty.cpp:289
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
+"level while a game is running, you will have to cancel it and start a new "
+"one."
+msgstr ""
+
+#: private/kgamedifficulty.cpp:292
+#, kde-format
+msgid ""
+"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
+"level during a running game."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
+#: private/kgamethemeselector.ui:40
+#, kde-format
+msgid "&Get New Themes..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: private/kgamethemeselector.ui:55
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgid "Preview"
+msgstr "Rhagolwg:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: private/kgamethemeselector.ui:97
+#, kde-format
+msgid "Theme Details"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelContact)
+#: private/kgamethemeselector.ui:131
+#, fuzzy, kde-format
+#| msgid "Comment:"
+msgid "Contact:"
+msgstr "Sylwad:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelDescription)
+#: private/kgamethemeselector.ui:166
+#, kde-format
+msgid "Description:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
+#: private/kgamethemeselector.ui:201
+#, kde-format
+msgid "Author:"
+msgstr ""
+
+#~ msgid "Mean Score"
+#~ msgstr "Sgôr Cymedrig"
+
+#~ msgid "Best Score"
+#~ msgstr "Sgôr Gorau"
+
+#~ msgid "Elapsed Time"
+#~ msgstr "Amser Aeth Heibio"
+
+#~ msgid "Best &Scores"
+#~ msgstr "Sgorau G&orau"
+
+#~ msgid "&Players"
+#~ msgstr "Ch&waraewyr"
+
+#~ msgid "Statistics"
+#~ msgstr "Ystadegau"
+
+#~ msgid "Histogram"
+#~ msgstr "Histogram"
+
+#~ msgid "View world-wide highscores"
+#~ msgstr "Gweld sgorau gorau byd-eang"
+
+#~ msgid "View world-wide players"
+#~ msgstr "Gweld chwaraewyr byd-eang"
+
+#~ msgid "Highscores"
+#~ msgstr "Sgorau Gorau"
+
+#~ msgid "Overwrite"
+#~ msgstr "Trosysgrifo"
+
+#~ msgid "The file already exists. Overwrite?"
+#~ msgstr "Mae'r ffeil mewn bod eisoes.  Trosysgrifo?"
+
+#, fuzzy
+#~ msgid "Export"
+#~ msgstr "Allforio..."
+
+#~ msgid "Winner"
+#~ msgstr "Enillydd"
+
+#~ msgid "Won Games"
+#~ msgstr "Enillodd Gemau"
+
+#~ msgid "Configure Highscores"
+#~ msgstr "Ffurfweddu Sgorau Gorau"
+
+#~ msgid "Main"
+#~ msgstr "Prif"
+
+#~ msgid "Nickname:"
+#~ msgstr "Ffugenw:"
+
+#~ msgid "Comment:"
+#~ msgstr "Sylwad:"
+
+#~ msgid "World-wide highscores enabled"
+#~ msgstr "Alluogir sgorau gorau byd-eang"
+
+#~ msgid "Advanced"
+#~ msgstr "Uwch"
+
+#~ msgid "Registration Data"
+#~ msgstr "Data Cofrestru"
+
+#~ msgid "Key:"
+#~ msgstr "Allwedd:"
+
+#, fuzzy
+#~ msgid "Remove"
+#~ msgstr "Gwaredu Chwaraewr"
+
+#~ msgid ""
+#~ "This will permanently remove your registration key. You will not be able "
+#~ "to use the currently registered nickname anymore."
+#~ msgstr ""
+#~ "Bydd hyn yn gwaredu eich allwedd gofrestru am byth.  Ni fyddwch yn gallu "
+#~ "defnyddio'r ffugenw wedi'i gofrestru ar hyn o bryd."
+
+#~ msgid "Please choose a non empty nickname."
+#~ msgstr "Dewiswch ffugenw nad yw'n wag."
+
+#~ msgid "Nickname already in use. Please choose another one"
+#~ msgstr "Mae'r ffugenw mewn defnydd eisoes. Dewiswch un arall"
+
+#~ msgid "Enter Your Nickname"
+#~ msgstr "Rhowch eich Ffugenw"
+
+#~ msgid "Congratulations, you have won!"
+#~ msgstr "Llongyfarchiadau, rydych wedi ennill!"
+
+#~ msgid "Enter your nickname:"
+#~ msgstr "Rhowch eich ffugenw:"
+
+#~ msgid "Do not ask again."
+#~ msgstr "Paid â gofyn eto."
+
+#~ msgid "anonymous"
+#~ msgstr "dienw"
+
+#~ msgid "Games Count"
+#~ msgstr "Cyfrif Gemau"
+
+#~ msgid "Comment"
+#~ msgstr "Sylwad"
+
+#~ msgid "Undefined error."
+#~ msgstr "Gwall heb ei ddiffinio."
+
+#~ msgid "Missing argument(s)."
+#~ msgstr "Ymresymiad(au) ar goll."
+
+#~ msgid "Invalid argument(s)."
+#~ msgstr "Ymresymiad(au) annilys."
+
+#~ msgid "Unable to connect to MySQL server."
+#~ msgstr "Methu cysylltu â'r gweinydd MySQL."
+
+#~ msgid "Unable to select database."
+#~ msgstr "Methu dewis cronfa ddata."
+
+#~ msgid "Error on database query."
+#~ msgstr "Gwall wrth ymholi'r gronfa ddata."
+
+#~ msgid "Error on database insert."
+#~ msgstr "Gwall wrth mewnosod yn y gronfa ddata."
+
+#~ msgid "Nickname already registered."
+#~ msgstr "Ffugenw wedi ei gofrestru eisoes."
+
+#~ msgid "Nickname not registered."
+#~ msgstr "Ffugenw heb ei gofrestru."
+
+#~ msgid "Invalid key."
+#~ msgstr "Allwedd annilys."
+
+#~ msgid "Invalid submit key."
+#~ msgstr "Allwedd anfon annilys."
+
+#~ msgid "Invalid level."
+#~ msgstr "Lefel annilys."
+
+#~ msgid "Invalid score."
+#~ msgstr "Sgôr annilys."
+
+#~ msgid "Unable to contact world-wide highscore server"
+#~ msgstr "Methu cysylltu â'r gweinydd sgorau gorau byd-eang"
+
+#~ msgid "Server URL: %1"
+#~ msgstr "URL y gweinydd: %1"
+
+#~ msgid "Unable to open temporary file."
+#~ msgstr "Methu agor ffeil dros dro."
+
+#~ msgid "Message from world-wide highscores server"
+#~ msgstr "Neges gan y gweinydd sgorau gorau byd-eang"
+
+#~ msgid "Invalid answer from world-wide highscores server."
+#~ msgstr "Ateb annilys gan y gweinydd sgorau gorau byd-eang."
+
+#~ msgid "Raw message: %1"
+#~ msgstr "Ateb crai: %1"
+
+#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
+#~ msgstr ""
+#~ "Ateb annilys gan y gweinydd sgorau gorau byd-eang (eitem ar goll: %1)."
+
+#~ msgid "Success"
+#~ msgstr "Llwyddiant"
+
+#~ msgid "Multiplayers Scores"
+#~ msgstr "Sgorau Aml-Chwaraewr"
+
+#~ msgid "No game played."
+#~ msgstr "Dim gêm wedi'i chwarae."
+
+#~ msgid "Scores for last game:"
+#~ msgstr "Sgorau ar gyfer y gêm ddiwethaf:"
+
+#~ msgid "Scores for the last %1 games:"
+#~ msgstr "Sgorau ar gyfer y %1 gêm ddiwethaf:"
+
+#~ msgid "all"
+#~ msgstr "i gyd"
+
+#~ msgid "Select player:"
+#~ msgstr "Dewis chwaraewr:"
+
+#~ msgid "Total:"
+#~ msgstr "Cyfanswm:"
+
+#~ msgid "Won:"
+#~ msgstr "Ennillwyd:"
+
+#~ msgid "Lost:"
+#~ msgstr "Collwyd:"
+
+#~ msgid "Draw:"
+#~ msgstr "Gemau Cyfartal:"
+
+#~ msgid "Current:"
+#~ msgstr "Cyfredol:"
+
+#~ msgid "Max won:"
+#~ msgstr "Uchafswm a ennillwyd:"
+
+#~ msgid "Max lost:"
+#~ msgstr "Uchafswm a gollwyd:"
+
+#~ msgid "Game Counts"
+#~ msgstr "Cyfrifau Gêm"
+
+#~ msgid "Trends"
+#~ msgstr "Tueddiadau"
+
+#~ msgid "From"
+#~ msgstr "O"
+
+#~ msgid "To"
+#~ msgstr "I"
+
+#~ msgid "Count"
+#~ msgstr "Cyfrif"
+
+#~ msgid "Percent"
+#~ msgstr "Canran"
+
+#~ msgid "Configure..."
+#~ msgstr "Ffurfweddu..."
+
+#~ msgid "Export..."
+#~ msgstr "Allforio..."
+
+#~ msgid "Configure Chat"
+#~ msgstr "Ffurfweddu Sgwrs"
+
+#~ msgid "Name Font..."
+#~ msgstr "Gwynebfath Enw..."
+
+#~ msgid "Text Font..."
+#~ msgstr "Gwynebfath Testun..."
+
+#~ msgid "Player: "
+#~ msgstr "Chwaraewr:"
+
+#~ msgid "This is a player message"
+#~ msgstr "Neges chwaraewr yw hon"
+
+#~ msgid "System Messages - Messages directly sent from the game"
+#~ msgstr "Negeseuon Cysawd - negeseuon a anfonir yn uniongyrchol o'r gêm"
+
+#~ msgid "--- Game: "
+#~ msgstr "--- Gêm: "
+
+#~ msgid "This is a system message"
+#~ msgstr "Neges gysawd yw hon"
+
+#, fuzzy
+#~| msgid "Maximal number of messages (-1 = unlimited):"
+#~ msgid "Maximum number of messages (-1 = unlimited):"
+#~ msgstr "Nifer uchafsymol o negeseuon (-1 = anfeidrol):"
+
+#~ msgid "Create a network game"
+#~ msgstr "Creu gêm rhwydwaith"
+
+#~ msgid "Join a network game"
+#~ msgstr "Ymuno â gêm rhwydwaith"
+
+#~ msgid "Game name:"
+#~ msgstr "Enw gêm:"
+
+#~ msgid "Network games:"
+#~ msgstr "Gemau rhwydwaith:"
+
+#~ msgid "Port to connect to:"
+#~ msgstr "Porth i gysylltu iddi:"
+
+#~ msgid "Host to connect to:"
+#~ msgstr "Gweinyddwr i gysylltu iddo:"
+
+#~ msgid "&Start Network"
+#~ msgstr "&Cychwyn Rhwydwaith"
+
+#~ msgid "Network Game"
+#~ msgstr "Gêm Rhwydwaith"
+
+#~ msgid "KGame Debug Dialog"
+#~ msgstr "Ymgom Dadnamu KGame"
+
+#~ msgid "Debug &KGame"
+#~ msgstr "Dadnamu &KGame"
+
+#~ msgid "Update"
+#~ msgstr "Diweddaru"
+
+#~ msgid "KGame Pointer"
+#~ msgstr "Pwyntydd KGame"
+
+#~ msgid "Game ID"
+#~ msgstr "Dynodiad Gêm"
+
+#~ msgid "Game Cookie"
+#~ msgstr "Cwci Gêm"
+
+#~ msgid "Is Master"
+#~ msgstr "Yn Feistr"
+
+#~ msgid "Is Admin"
+#~ msgstr "Yn Reolwr"
+
+#~ msgid "Is Offering Connections"
+#~ msgstr "Yn Cynnig Cysylltiadau"
+
+#~ msgid "Game Status"
+#~ msgstr "Cyflwr Gêm"
+
+#~ msgid "Game is Running"
+#~ msgstr "Mae'r Gêm yn Rhedeg"
+
+#~ msgid "Maximal Players"
+#~ msgstr "Chwaraewyr Uchafsymol"
+
+#~ msgid "Minimal Players"
+#~ msgstr "Chwaraewyr Isafsymol"
+
+#~ msgid "Players"
+#~ msgstr "Chwaraewyr"
+
+#~ msgid "Debug &Players"
+#~ msgstr "Dadnamu &Chwaraewyr"
+
+#~ msgid "Available Players"
+#~ msgstr "Chwaraewyr Ar Gael"
+
+#~ msgid "Player Pointer"
+#~ msgstr "Pwyntydd Chwaraewr"
+
+#~ msgid "Player Name"
+#~ msgstr "Enw Chwaraewr"
+
+#~ msgid "Player Group"
+#~ msgstr "Grŵp Chwaraewr"
+
+#~ msgid "Player User ID"
+#~ msgstr "Dynodiad Defnyddiwr y Chwaraewr "
+
+#~ msgid "My Turn"
+#~ msgstr "Fy Nhro"
+
+#~ msgid "Async Input"
+#~ msgstr "Mewnbwn Anghydamserol"
+
+#~ msgid "KGame Address"
+#~ msgstr "Cyfeiriad KGame"
+
+#~ msgid "Player is Virtual"
+#~ msgstr "Mae'r Chwaraewr yn Rhith"
+
+#~ msgid "Player is Active"
+#~ msgstr "Mae'r Chwaraewr yn Weithredol"
+
+#~ msgid "RTTI"
+#~ msgstr "RTTI"
+
+#~ msgid "Network Priority"
+#~ msgstr "Blaenoriaeth Rwydwaith"
+
+#~ msgid "Debug &Messages"
+#~ msgstr "Dadnamu &Negeseuon"
+
+#~ msgid "&>>"
+#~ msgstr "&>>"
+
+#~ msgid "&<<"
+#~ msgstr "&<<"
+
+#~ msgid "Do not show IDs:"
+#~ msgstr "Peidio â dangos Dynodiadau:"
+
+#~ msgid "Clean"
+#~ msgstr "Glan"
+
+#~ msgid "Dirty"
+#~ msgstr "Budr"
+
+#~ msgid "Local"
+#~ msgstr "Lleol"
+
+#~ msgid "Undefined"
+#~ msgstr "Anniffiniedig"
+
+#~ msgid "&Chat"
+#~ msgstr "&Sgwrsio"
+
+#~ msgid "C&onnections"
+#~ msgstr "&Cysylltiadau"
+
+#, fuzzy
+#~ msgid "&Game"
+#~ msgstr "&Gorffen Gêm"
+
+#~ msgid "&Network"
+#~ msgstr "&Rhwydwaith"
+
+#~ msgid "&Message Server"
+#~ msgstr "Gweinydd &Negeseuon"
+
+#~ msgid "Network Configuration"
+#~ msgstr "Ffurfweddu Rhwydwaith"
+
+#~ msgid "Cannot connect to the network"
+#~ msgstr "Methu cysylltu â'r rhwydwaith"
+
+#~ msgid "Network status: No Network"
+#~ msgstr "Cyflwr rhydwaith: Dim Rhwydwaith"
+
+#~ msgid "Network status: You are MASTER"
+#~ msgstr "Cyflwr rhwydwaith: Chi yw'r MEISTR"
+
+#~ msgid "Network status: You are connected"
+#~ msgstr "Cyflwr rhwydwaith: Rydych wedi cysylltu"
+
+#~ msgid "Your name:"
+#~ msgstr "Eich Enw:"
+
+#~ msgid "Maximal Number of Clients"
+#~ msgstr "Nifer Uchafsymol o Ddibynyddion"
+
+#~ msgid "Maximal number of clients (-1 = infinite):"
+#~ msgstr "Nifer Uchafsymol o Ddibynyddion (-1 = anfeidrol):"
+
+#~ msgid "Change Maximal Number of Clients"
+#~ msgstr "Newid Nifer Uchafsymol o Ddibynyddion"
+
+#~ msgid "Change Admin"
+#~ msgstr "Newid Gweinyddwr"
+
+#~ msgid "Remove Client with All Players"
+#~ msgstr "Gwaredu Dibynnydd efo Pob Chwaraewr"
+
+#~ msgid "Only the admin can configure the message server!"
+#~ msgstr "Y gweinyddwr yn unig a all ffurfweddu'r gweinydd negeseuon!"
+
+#, fuzzy
+#~ msgid "You do not own the message server"
+#~ msgstr "Nid ydych chi yn meddu'r gweinydd negeseuon"
+
+#~ msgid "Chat"
+#~ msgstr "Sgwrsio"
+
+#~ msgid "Connected Players"
+#~ msgstr "Chwaraewyr wedi Cysylltu"
+
+#~ msgid "Do you want to ban player \"%1\" from the game?"
+#~ msgstr "A ydych eisiau atal \"%1\" o'r gêm?"
+
+#~ msgid "Ban Player"
+#~ msgstr "Atal Chwaraewr"
+
+#~ msgid "Do Not Ban"
+#~ msgstr "Peidio ag Atal"
+
+#~ msgid "Connection to the server has been lost!"
+#~ msgstr "Collwyd y cysylltiad i'r gweinydd!"
+
+#~ msgid "Connection to client has been lost!"
+#~ msgstr "Collwyd y cysylltiad i'r derbynnydd!"
+
+#~ msgid ""
+#~ "Received a network error!\n"
+#~ "Error number: %1\n"
+#~ "Error message: %2"
+#~ msgstr ""
+#~ "Wedi derbyn gwall rhwydwaith!\n"
+#~ " Rhif gwall: %1\n"
+#~ " Neges wall: %2"
+
+#~ msgid "No connection could be created."
+#~ msgstr "Ni fu modd creu cysylltiad."
+
+#~ msgid ""
+#~ "No connection could be created.\n"
+#~ "The error message was:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Ni fu modd creu cysylltiad.\n"
+#~ " Y neges wall oedd:\n"
+#~ " %1"
+
+#, fuzzy
+#~| msgid "Carddeck Selection"
+#~ msgid "Card Deck Selection"
+#~ msgstr "Dewis Pecyn Cerdiau"
+
+#~ msgid "unnamed"
+#~ msgstr "di-enw"
+
+#, fuzzy
+#~| msgid "Frontside"
+#~ msgctxt "Front side of a card"
+#~ msgid "Front"
+#~ msgstr "Ochr Flaen"
+
+#, fuzzy
+#~| msgid "Backside"
+#~ msgctxt "Back side of a card"
+#~ msgid "Back"
+#~ msgstr "Ochr Gefn"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Deck Name"
+#~ msgstr "Enw"
+
+#, fuzzy
+#~| msgid "Preview:"
+#~ msgid ""
+#~ "Backside\n"
+#~ "Preview"
+#~ msgstr "Rhagolwg:"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Ffug"
+
+#, fuzzy
+#~ msgid "Player"
+#~ msgstr "Chwaraewyr"
+
+#, fuzzy
+#~ msgid "Reserved"
+#~ msgstr "Derbynnydd"
+
+#, fuzzy
+#~ msgid "(unnamed)"
+#~ msgstr "di-enw"
+
+#, fuzzy
+#~ msgid "Statistics..."
+#~ msgstr "Ystadegau"
+
+#, fuzzy
+#~ msgid "Host: %1"
+#~ msgstr "Collwyd:"
+
+#~ msgctxt ""
+#~ "A list of language typical names ( for games ), separated by spaces"
+#~ msgid ""
+#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
+#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
+#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
+#~ msgstr ""
+#~ "Arfon Arthur Arwel Bryn Dafydd Dewi Elgan Fôn Ffred Guto Gwallter Huw "
+#~ "Iolo Llywelyn Marc Owain Pedr Rhys Sam Tomos"
+
+#, fuzzy
+#~| msgid "Show &Highscores"
+#~ msgid "Show rich text"
+#~ msgstr "Dangos Sgorau &Gorau"
+
+#, fuzzy
+#~| msgid "Change Admin"
+#~ msgid "Change Icon..."
+#~ msgstr "Newid Gweinyddwr"
+
+#, fuzzy
+#~| msgid "Random frontside"
+#~ msgctxt "back and front refer to the sides of a card"
+#~ msgid "Lock back to front"
+#~ msgstr "Ochr Flaen Hap"
+
+#~ msgid "Choose Backside"
+#~ msgstr "Dewis Ochr Gefn"
+
+#~ msgid "empty"
+#~ msgstr "gwag"
+
+#~ msgid "Random backside"
+#~ msgstr "Ochr Gefn Hap"
+
+#~ msgid "Use global backside"
+#~ msgstr "Defnyddio ochr gefn fyd-eang"
+
+#~ msgid "Make Backside Global"
+#~ msgstr "Gwneud yr Ochr Gefn yn Fyd-eang"
+
+#~ msgid "Choose Frontside"
+#~ msgstr "Dewis Ochr Flaen"
+
+#~ msgid "Use global frontside"
+#~ msgstr "Defnyddio ochr flaen fyd-eang"
+
+#~ msgid "Make Frontside Global"
+#~ msgstr "Gwneud yr Ochr Flaen yn Fyd-eang"
+
+#~ msgid "Resize Cards"
+#~ msgstr "Ailnewid Maint Cerdiau"
+
+#~ msgid "Default Size"
+#~ msgstr "Maint Rhagosodol"
+
+#~ msgid "Preview:"
+#~ msgstr "Rhagolwg:"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgid "Form"
+#~ msgstr "O"
+
+#, fuzzy
+#~| msgid "Property"
+#~ msgid "Properties"
+#~ msgstr "Priodwedd"
+
+#~ msgid "Data"
+#~ msgstr "Data"
+
+#~ msgid "Value"
+#~ msgstr "Gwerth"
+
+#~ msgid "Policy"
+#~ msgstr "Polisi"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Receiver"
+#~ msgstr "Derbynnydd"
+
+#~ msgid "Sender"
+#~ msgstr "Anfonwr"
+
+#~ msgid "ID - Text"
+#~ msgstr "Dynodiad - Testun"
+
+#~ msgid "--- %1"
+#~ msgstr "--- %1"
