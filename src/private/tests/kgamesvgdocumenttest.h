@@ -10,6 +10,8 @@
 // own
 #define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
 #include <kgamesvgdocument.h>
+// Qt
+#include <QObject>
 
 class tst_KGameSvgDocument : public QObject
 {
