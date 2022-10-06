@@ -315,7 +315,7 @@ msgstr "Suprimix totes les estadístiques."
 
 #: kstandardgameaction.cpp:60
 msgid "&Print..."
-msgstr "&Imprimix..."
+msgstr "Im&primix..."
 
 #: kstandardgameaction.cpp:62
 msgid "&Quit"
