@@ -42,8 +42,9 @@ function(generate_svgz svg_file svgz_file target_prefix)
             OUTPUT ${svgz_file}
             COMMAND ${gzip_EXECUTABLE}
             ARGS
-                -9n
-                -c
+                -9 # compress best
+                -n # no original name and timestamp stored, for reproducibility
+                -c # write to stdout
                 ${svg_file} > ${svgz_file}
             DEPENDS ${svg_file}
             COMMENT "Gzipping ${_fileName}"
