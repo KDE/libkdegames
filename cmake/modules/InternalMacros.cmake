@@ -40,7 +40,7 @@ function(generate_svgz svg_file svgz_file target_prefix)
     else()
         add_custom_command(
             OUTPUT ${svgz_file}
-            COMMAND ${gzip_EXECUTABLE}
+            COMMAND gzip::gzip
             ARGS
                 -9 # compress best
                 -n # no original name and timestamp stored, for reproducibility
