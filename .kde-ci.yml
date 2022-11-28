@@ -16,7 +16,7 @@ Dependencies:
     'frameworks/knewstuff': '@stable'
     'frameworks/kservice': '@stable'
     'frameworks/kxmlgui': '@stable'
-    'frameworks/kwidgetaddons': '@stable'
+    'frameworks/kwidgetsaddons': '@stable'
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]      
