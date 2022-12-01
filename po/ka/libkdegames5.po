@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-28 00:44+0000\n"
-"PO-Revision-Date: 2022-11-28 09:21+0100\n"
+"PO-Revision-Date: 2022-11-30 06:46+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -386,7 +386,7 @@ msgstr "აირჩიეთ თამაშის &ტიპი"
 
 #: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
-msgstr ""
+msgstr "კარტის &შეკვრების მორგება..."
 
 #: kstandardgameaction.cpp:88
 msgid "Configure &High Scores..."
@@ -643,6 +643,8 @@ msgid ""
 "level while a game is running, you will have to cancel it and start a new "
 "one."
 msgstr ""
+"აირჩიეთ თამაშის <b>სიძნელე</b>.<br />თუ შეცვლთ სიძნელის დონეს მაშინ, როცა "
+"თამაში გაშვებულია, დაგჭირდებათ გააუქმოთ ის და თავიდან დაიწყოთ."
 
 #: private/kgamedifficulty.cpp:292
 #, kde-format
@@ -650,6 +652,8 @@ msgid ""
 "Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
 "level during a running game."
 msgstr ""
+"აირჩიეთ თამაშის <b>სირთულე</b>.<br /> სირთულის შეცვლა გაშვებული თამაშის "
+"დროსაც შეგიძლიათ."
 
 #. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
 #: private/kgamethemeselector.ui:40
