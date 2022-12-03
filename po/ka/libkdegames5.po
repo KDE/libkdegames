@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-28 00:44+0000\n"
-"PO-Revision-Date: 2022-09-27 06:25+0200\n"
+"PO-Revision-Date: 2022-12-02 23:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: highscore/khighscore.cpp:150
 #, kde-format
@@ -29,6 +29,8 @@ msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 msgstr ""
+"ქულების ფაილებტან წვდომა აკრძალულია. ალბათ სხვა მომხმარებელი ცდილობს, "
+"ჩაწეროს."
 
 #: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
 #, kde-format
@@ -106,6 +108,8 @@ msgid ""
 "Well done!\n"
 "You made it to the high score list!"
 msgstr ""
+"კარგია!\n"
+"მოხვდით ტოპ მოთამაშეების სიაში!"
 
 #: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
 #, kde-format
@@ -342,11 +346,11 @@ msgstr "ბოლო სვლის თავიდან შესრულე
 
 #: kstandardgameaction.cpp:72
 msgid "&Roll Dice"
-msgstr ""
+msgstr "&კამათელის გაგორება"
 
 #: kstandardgameaction.cpp:72
 msgid "Roll the dice"
-msgstr ""
+msgstr "&კამათელის გაგორება"
 
 #: kstandardgameaction.cpp:74
 msgid "End Turn"
@@ -382,11 +386,11 @@ msgstr "აირჩიეთ თამაშის &ტიპი"
 
 #: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
-msgstr ""
+msgstr "კარტის &შეკვრების მორგება..."
 
 #: kstandardgameaction.cpp:88
 msgid "Configure &High Scores..."
-msgstr ""
+msgstr "&უმაღლესი ქულების ცხრილის მორგება...."
 
 #: private/kchatbase.cpp:98
 #, kde-format
@@ -442,6 +446,9 @@ msgid ""
 "Expected Cookie: %1\n"
 "Received Cookie: %2"
 msgstr ""
+"ქუქი არ ემთხვევა!\n"
+"ქუქი, რომელსაც მოველოდი: %1\n"
+"მიღებული ქუქი: %2"
 
 #: private/kgame/kgameerror.cpp:59
 #, kde-format
@@ -450,6 +457,9 @@ msgid ""
 "Expected Version: %1\n"
 "Received Version: %2\n"
 msgstr ""
+"KGame -ის ვერსია არ ემთხვევა!\n"
+"მოველოდი ვერსიას: %1\n"
+"მივიღე ვერსია: %2\n"
 
 #: private/kgame/kgameerror.cpp:63
 #, kde-format
@@ -474,7 +484,7 @@ msgstr "თამაშის ჩატვირთვა"
 #: private/kgame/kgamemessage.cpp:108
 #, kde-format
 msgid "Client game connected"
-msgstr ""
+msgstr "კლიენტის თამაში მიერთებულია"
 
 #: private/kgame/kgamemessage.cpp:110
 #, kde-format
@@ -633,6 +643,8 @@ msgid ""
 "level while a game is running, you will have to cancel it and start a new "
 "one."
 msgstr ""
+"აირჩიეთ თამაშის <b>სიძნელე</b>.<br />თუ შეცვლთ სიძნელის დონეს მაშინ, როცა "
+"თამაში გაშვებულია, დაგჭირდებათ გააუქმოთ ის და თავიდან დაიწყოთ."
 
 #: private/kgamedifficulty.cpp:292
 #, kde-format
@@ -640,6 +652,8 @@ msgid ""
 "Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
 "level during a running game."
 msgstr ""
+"აირჩიეთ თამაშის <b>სირთულე</b>.<br /> სირთულის შეცვლა გაშვებული თამაშის "
+"დროსაც შეგიძლიათ."
 
 #. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
 #: private/kgamethemeselector.ui:40
