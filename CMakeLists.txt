@@ -90,7 +90,7 @@ add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
 ecm_set_disabled_deprecation_versions(
     QT 5.15.2
-    KF 5.98
+    KF 5.101
     KCOREADDONS 5.73 # KRandomSequence, cannot be removed
 )
 
