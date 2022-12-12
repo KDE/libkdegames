@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdegames-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-28 00:44+0000\n"
-"PO-Revision-Date: 2022-04-26 11:04+0300\n"
+"PO-Revision-Date: 2022-12-11 20:21+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: highscore/khighscore.cpp:150
 #, kde-format
@@ -477,12 +477,12 @@ msgstr "Bilinmeyen hata kodu %1"
 #: private/kgame/kgamemessage.cpp:102
 #, kde-format
 msgid "Setup Game"
-msgstr "Oyunu Kur"
+msgstr "Oyunu Ayarla"
 
 #: private/kgame/kgamemessage.cpp:104
 #, kde-format
 msgid "Setup Game Continue"
-msgstr "Ayar Oyun Devam"
+msgstr "Oyunu Ayarlamayı Sürdür"
 
 #: private/kgame/kgamemessage.cpp:106
 #, kde-format
@@ -651,8 +651,8 @@ msgid ""
 "level while a game is running, you will have to cancel it and start a new "
 "one."
 msgstr ""
-"Oyunun <b>zorluk derecesini</b> ayarla.<br />Eğer oyun devam ederken zorluk "
-"derecesini değiştirirseniz, oyunu iptal etmek ve yeniden başlatmak "
+"Oyunun <b>zorluk derecesini</b> ayarla.<br />Eğer oyun sürerken zorluk "
+"derecesini değiştirirseniz oyunu iptal etmek ve yeniden başlatmak "
 "zorundasınız."
 
 #: private/kgamedifficulty.cpp:292
@@ -661,8 +661,8 @@ msgid ""
 "Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
 "level during a running game."
 msgstr ""
-"Oyunun <b>zorluk derecesini</b> ayarla.<br />Oyun devam ederken zorluk "
-"derecesini değiştirebilirsiniz."
+"Oyunun <b>zorluk derecesini</b> ayarla.<br />Oyun sürerken zorluk derecesini "
+"değiştirebilirsiniz."
 
 #. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
 #: private/kgamethemeselector.ui:40
