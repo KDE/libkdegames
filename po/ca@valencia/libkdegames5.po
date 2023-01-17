@@ -474,7 +474,7 @@ msgstr "Codi d'error desconegut %1"
 #: private/kgame/kgamemessage.cpp:102
 #, kde-format
 msgid "Setup Game"
-msgstr "Configuració de la partida"
+msgstr "Configureu la partida"
 
 #: private/kgame/kgamemessage.cpp:104
 #, kde-format
