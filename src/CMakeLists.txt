@@ -13,23 +13,23 @@ target_sources(KF5KDEGames PRIVATE
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
     audio/kgsound-${KGAUDIO_BACKEND}.cpp
     audio/virtualfileqt-${KGAUDIO_BACKEND}.cpp
-    colorproxy_p.cpp
+    colorproxy_p.cpp colorproxy_p.h
 #   highscore/kconfigrawbackend.cpp
-    highscore/khighscore.cpp
-    highscore/kscoredialog.cpp
-    kgameclock.cpp
-    kgamepopupitem.cpp
-    kgamerendereditem.cpp
-    kgamerenderedobjectitem.cpp
-    kgamerendererclient.cpp
-    kgamerenderer.cpp
-    kgdeclarativeview.cpp
+    highscore/khighscore.cpp highscore/khighscore.h
+    highscore/kscoredialog.cpp highscore/kscoredialog.h
+    kgameclock.cpp kgameclock.h
+    kgamepopupitem.cpp kgamepopupitem.h
+    kgamerendereditem.cpp kgamerendereditem.h
+    kgamerenderedobjectitem.cpp kgamerenderedobjectitem.h
+    kgamerendererclient.cpp kgamerendererclient.h
+    kgamerenderer.cpp kgamerenderer.h
+    kgdeclarativeview.cpp kgdeclarativeview.h
     kgimageprovider.cpp
-    kgdifficulty.cpp
-    kgtheme.cpp
-    kgthemeprovider.cpp
-    kgthemeselector.cpp
-    kstandardgameaction.cpp
+    kgdifficulty.cpp kgdifficulty.h
+    kgtheme.cpp kgtheme.h
+    kgthemeprovider.cpp kgthemeprovider.h
+    kgthemeselector.cpp kgthemeselector.h
+    kstandardgameaction.cpp kstandardgameaction.h
 )
 
 ecm_generate_headers(kdegames_CamelCase_HEADERS
