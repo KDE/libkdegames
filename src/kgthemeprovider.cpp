@@ -172,6 +172,24 @@ void KgThemeProvider::discoverThemes(const QString &directory, const QString &de
     rediscoverThemes();
 }
 
+static QStringList findSubdirectories(const QStringList &dirs)
+{
+    QStringList result;
+
+    for (const QString &dir : dirs) {
+        const QStringList subdirNames = QDir(dir).entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+        for (const QString &subdirName : subdirNames) {
+            const QString subdir = dir + QLatin1Char('/') + subdirName;
+            result << subdir;
+        }
+    }
+    if (!result.isEmpty()) {
+        result += findSubdirectories(result);
+    }
+
+    return result;
+}
+
 void KgThemeProvider::rediscoverThemes()
 {
     if (d->m_dtDirectory.isEmpty()) {
@@ -185,7 +203,8 @@ void KgThemeProvider::rediscoverThemes()
 
     QStringList themePaths;
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
-    for (const QString &dir : dirs) {
+    const QStringList allDirs = dirs + findSubdirectories(dirs);
+    for (const QString &dir : allDirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
         for (const QString &file : fileNames) {
             if (!themePaths.contains(file)) {
