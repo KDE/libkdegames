@@ -18,5 +18,5 @@ ecm_add_tests(
     kgamesvgdocumenttest.cpp
     kgamepropertytest.cpp
     NAME_PREFIX "libkdegamesprivate-"
-    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons KF5KDEGamesPrivate ${PRIVATE_LIBS}
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF${KF_MAJOR_VERSION}::CoreAddons KF5KDEGamesPrivate ${PRIVATE_LIBS}
 )

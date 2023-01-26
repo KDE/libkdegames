@@ -101,20 +101,20 @@ target_link_libraries(KF5KDEGames
         Qt${QT_MAJOR_VERSION}::Widgets
         Qt${QT_MAJOR_VERSION}::QuickWidgets
         Qt${QT_MAJOR_VERSION}::Qml
-        KF5::ConfigCore
-        KF5::I18n
-        KF5::WidgetsAddons
-        KF5::ConfigWidgets
+        KF${KF_MAJOR_VERSION}::ConfigCore
+        KF${KF_MAJOR_VERSION}::I18n
+        KF${KF_MAJOR_VERSION}::WidgetsAddons
+        KF${KF_MAJOR_VERSION}::ConfigWidgets
     PRIVATE
         ${KGAUDIO_LINKLIBS}
         Qt${QT_MAJOR_VERSION}::Xml
         Qt${QT_MAJOR_VERSION}::Svg
         Qt${QT_MAJOR_VERSION}::Quick
-        KF5::NewStuffWidgets
-        KF5::IconThemes
-        KF5::XmlGui
-        KF5::GuiAddons
-        KF5::Completion
+        KF${KF_MAJOR_VERSION}::NewStuffWidgets
+        KF${KF_MAJOR_VERSION}::IconThemes
+        KF${KF_MAJOR_VERSION}::XmlGui
+        KF${KF_MAJOR_VERSION}::GuiAddons
+        KF${KF_MAJOR_VERSION}::Completion
 )
 
 target_include_directories(KF5KDEGames

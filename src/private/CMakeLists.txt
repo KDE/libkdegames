@@ -60,14 +60,14 @@ ki18n_wrap_ui(KF5KDEGamesPrivate
 target_link_libraries(KF5KDEGamesPrivate
     PUBLIC
         KF5KDEGames
-        KF5::Completion
+        KF${KF_MAJOR_VERSION}::Completion
         Qt${QT_MAJOR_VERSION}::Xml
         Qt${QT_MAJOR_VERSION}::Network
     PRIVATE
-        KF5::DNSSD
-        KF5::NewStuffWidgets
-        KF5::Archive
-        KF5::XmlGui
+        KF${KF_MAJOR_VERSION}::DNSSD
+        KF${KF_MAJOR_VERSION}::NewStuffWidgets
+        KF${KF_MAJOR_VERSION}::Archive
+        KF${KF_MAJOR_VERSION}::XmlGui
 )
 if (TARGET Qt6::Core5Compat)
     target_link_libraries(KF5KDEGamesPrivate PRIVATE Qt6::Core5Compat)

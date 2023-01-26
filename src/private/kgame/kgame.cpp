@@ -18,7 +18,9 @@
 #include "kplayer.h"
 // KF
 #include <KLocalizedString>
+#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3) && KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 #include <KRandomSequence>
+#endif
 // Qt
 #include <QBuffer>
 #include <QFile>
