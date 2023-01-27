@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"POT-Creation-Date: 2023-01-27 00:55+0000\n"
 "PO-Revision-Date: 2012-06-12 19:41+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -407,17 +407,17 @@ msgstr "Küldés %1 részére"
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:84
+#: private/kgame/kgame.cpp:86
 #, kde-format
 msgid "MaxPlayers"
 msgstr "Maxjátékosok"
 
-#: private/kgame/kgame.cpp:86
+#: private/kgame/kgame.cpp:88
 #, kde-format
 msgid "MinPlayers"
 msgstr "Minjátékosok"
 
-#: private/kgame/kgame.cpp:88
+#: private/kgame/kgame.cpp:90
 #, kde-format
 msgid "GameStatus"
 msgstr "Játékállapot"

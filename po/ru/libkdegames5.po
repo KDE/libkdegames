@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-28 00:44+0000\n"
+"POT-Creation-Date: 2023-01-27 00:55+0000\n"
 "PO-Revision-Date: 2013-01-06 22:37+0400\n"
 "Last-Translator: Artem Sereda <overmind88@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -420,17 +420,17 @@ msgstr "Отправить %1"
 msgid "%1: "
 msgstr "%1:"
 
-#: private/kgame/kgame.cpp:84
+#: private/kgame/kgame.cpp:86
 #, kde-format
 msgid "MaxPlayers"
 msgstr "Максимум игроков"
 
-#: private/kgame/kgame.cpp:86
+#: private/kgame/kgame.cpp:88
 #, kde-format
 msgid "MinPlayers"
 msgstr "Минимум игроков"
 
-#: private/kgame/kgame.cpp:88
+#: private/kgame/kgame.cpp:90
 #, kde-format
 msgid "GameStatus"
 msgstr "Состояние игры"
