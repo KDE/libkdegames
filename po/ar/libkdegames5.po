@@ -1362,7 +1362,7 @@ msgstr "المؤلف:"
 
 #, fuzzy
 #~ msgid "KDE card deck"
-#~ msgstr "كدي بطاقة"
+#~ msgstr "كِيدِي بطاقة"
 
 #, fuzzy
 #~ msgid "Filter"
