@@ -97,6 +97,17 @@ ecm_qt_export_logging_category(
     EXPORT KDEGAMES
 )
 
+if (QT_MAJOR_VERSION STREQUAL "5")
+    set(_generate_export_header_version_args)
+else()
+    # For Qt6/KF6 world transitively include the version header
+    if(ECM_VERSION VERSION_LESS "5.106")
+        set(include_version_header_code "#include <kdegames_version.h>\n")
+        set(_generate_export_header_version_args CUSTOM_CONTENT_FROM_VARIABLE include_version_header_code)
+    else()
+        set(_generate_export_header_version_args USE_VERSION_HEADER)
+    endif()
+endif()
 ecm_generate_export_header(KDEGames
     EXPORT_FILE_NAME libkdegames_export.h
     BASE_NAME KDEGAMES
@@ -104,6 +115,7 @@ ecm_generate_export_header(KDEGames
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS 4.1 7.4 7.5
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+    ${_generate_export_header_version_args}
 )
 
 target_link_libraries(KDEGames
