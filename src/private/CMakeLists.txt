@@ -18,9 +18,9 @@ ecm_qt_export_logging_category(
     EXPORT KDEGAMES
 )
 
-add_library(KF5KDEGamesPrivate SHARED)
+add_library(KDEGamesPrivate SHARED)
 
-ecm_generate_export_header(KF5KDEGamesPrivate
+ecm_generate_export_header(KDEGamesPrivate
     EXPORT_FILE_NAME libkdegamesprivate_export.h
     BASE_NAME KDEGAMESPRIVATE
     VERSION ${KDEGAMES_VERSION}
@@ -29,7 +29,7 @@ ecm_generate_export_header(KF5KDEGamesPrivate
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
-target_sources(KF5KDEGamesPrivate PRIVATE
+target_sources(KDEGamesPrivate PRIVATE
     kchatbase.cpp
     kchatbaseitemdelegate.cpp
     kchatbasemodel.cpp
@@ -53,13 +53,13 @@ target_sources(KF5KDEGamesPrivate PRIVATE
     kgamethemeselector.cpp
 )
 
-ki18n_wrap_ui(KF5KDEGamesPrivate
+ki18n_wrap_ui(KDEGamesPrivate
     kgamethemeselector.ui
 )
 
-target_link_libraries(KF5KDEGamesPrivate
+target_link_libraries(KDEGamesPrivate
     PUBLIC
-        KF5KDEGames
+        KDEGames
         KF${KF_MAJOR_VERSION}::Completion
         Qt${QT_MAJOR_VERSION}::Xml
         Qt${QT_MAJOR_VERSION}::Network
@@ -70,24 +70,26 @@ target_link_libraries(KF5KDEGamesPrivate
         KF${KF_MAJOR_VERSION}::XmlGui
 )
 if (TARGET Qt6::Core5Compat)
-    target_link_libraries(KF5KDEGamesPrivate PRIVATE Qt6::Core5Compat)
+    target_link_libraries(KDEGamesPrivate PRIVATE Qt6::Core5Compat)
 endif()
 
 
-target_include_directories(KF5KDEGamesPrivate
+target_include_directories(KDEGamesPrivate
     INTERFACE
         "$<INSTALL_INTERFACE:${kdegamesprivate_INCLUDE_INSTALL_DIR}>"
     PRIVATE
         kgame
 )
 
-set_target_properties(KF5KDEGamesPrivate PROPERTIES
+set_target_properties(KDEGamesPrivate PROPERTIES
+    OUTPUT_NAME KF5KDEGamesPrivate
+    EXPORT_NAME KF5KDEGamesPrivate
     VERSION   ${KDEGAMES_VERSION}
     SOVERSION ${KDEGAMES_SOVERSION}
 )
 
-install(TARGETS KF5KDEGamesPrivate
-    EXPORT KF5KDEGamesTargets
+install(TARGETS KDEGamesPrivate
+    EXPORT KDEGamesTargets
     ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
 )
 

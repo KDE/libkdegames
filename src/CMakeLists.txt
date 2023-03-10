@@ -7,9 +7,9 @@ add_subdirectory(private)
 configure_file(libkdegames_capabilities.h.in ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h)
 configure_file(highscore/config-highscore.h.in ${CMAKE_CURRENT_BINARY_DIR}/highscore/config-highscore.h )
 
-add_library(KF5KDEGames SHARED)
+add_library(KDEGames SHARED)
 
-target_sources(KF5KDEGames PRIVATE
+target_sources(KDEGames PRIVATE
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
     audio/kgsound-${KGAUDIO_BACKEND}.cpp
     audio/virtualfileqt-${KGAUDIO_BACKEND}.cpp
@@ -87,7 +87,7 @@ ecm_qt_export_logging_category(
     EXPORT KDEGAMES
 )
 
-ecm_generate_export_header(KF5KDEGames
+ecm_generate_export_header(KDEGames
     EXPORT_FILE_NAME libkdegames_export.h
     BASE_NAME KDEGAMES
     VERSION ${KDEGAMES_VERSION}
@@ -96,7 +96,7 @@ ecm_generate_export_header(KF5KDEGames
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
-target_link_libraries(KF5KDEGames
+target_link_libraries(KDEGames
     PUBLIC
         Qt${QT_MAJOR_VERSION}::Widgets
         Qt${QT_MAJOR_VERSION}::QuickWidgets
@@ -117,7 +117,7 @@ target_link_libraries(KF5KDEGames
         KF${KF_MAJOR_VERSION}::Completion
 )
 
-target_include_directories(KF5KDEGames
+target_include_directories(KDEGames
     INTERFACE
         "$<INSTALL_INTERFACE:${kdegames_INCLUDE_INSTALL_DIR}>"
     PRIVATE
@@ -135,13 +135,14 @@ ecm_setup_version(${KDEGAMES_VERSION}
     SOVERSION ${KDEGAMES_SOVERSION}
 )
 
-set_target_properties(KF5KDEGames PROPERTIES
+set_target_properties(KDEGames PROPERTIES
+    OUTPUT_NAME KF5KDEGames
     EXPORT_NAME KF5KDEGames
     VERSION   ${KDEGAMES_VERSION}
     SOVERSION ${KDEGAMES_SOVERSION}
 )
 
-install(TARGETS KF5KDEGames EXPORT KF5KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KDEGames EXPORT KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
@@ -188,7 +189,7 @@ install(FILES
     COMPONENT Devel
 )
 
-install(EXPORT KF5KDEGamesTargets
+install(EXPORT KDEGamesTargets
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     FILE KF5KDEGamesTargets.cmake
     COMPONENT Devel
