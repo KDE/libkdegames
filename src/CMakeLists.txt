@@ -1,4 +1,5 @@
 set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KDEGames)
+set(KDEGAMES_CMAKECONFIG_NAME "KF5KDEGames")
 
 add_subdirectory(carddecks)
 add_subdirectory(qml)
@@ -130,7 +131,7 @@ target_include_directories(KDEGames
 ecm_setup_version(${KDEGAMES_VERSION}
     VARIABLE_PREFIX KDEGAMES
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5KDEGamesConfigVersion.cmake"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}ConfigVersion.cmake"
     COMPATIBILITY SameMajorVersion
     SOVERSION ${KDEGAMES_SOVERSION}
 )
@@ -173,25 +174,25 @@ install(FILES
 ########### generate exports ###############
 
 # define the installation directory for the CMake files
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5KDEGames")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/${KDEGAMES_CMAKECONFIG_NAME}")
 
 # create the Config.cmake and ConfigVersion.cmake files
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KDEGamesConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5KDEGamesConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}Config.cmake"
     INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5KDEGamesConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5KDEGamesConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}ConfigVersion.cmake"
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     COMPONENT Devel
 )
 
 install(EXPORT KDEGamesTargets
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-    FILE KF5KDEGamesTargets.cmake
+    FILE ${KDEGAMES_CMAKECONFIG_NAME}Targets.cmake
     COMPONENT Devel
 )
 	
