@@ -1,4 +1,11 @@
 set(kdegamesprivate_INCLUDE_INSTALL_DIR ${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate)
+if (QT_MAJOR_VERSION STREQUAL "5")
+    set(KDEGAMESPRIVATE_OUTPUT_NAME KF5KDEGamesPrivate)
+    set(KDEGAMESPRIVATE_EXPORT_NAME KF5KDEGamesPrivate)
+else()
+    set(KDEGAMESPRIVATE_OUTPUT_NAME KDEGames6Private)
+    set(KDEGAMESPRIVATE_EXPORT_NAME KDEGames6Private)
+endif()
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
@@ -82,8 +89,8 @@ target_include_directories(KDEGamesPrivate
 )
 
 set_target_properties(KDEGamesPrivate PROPERTIES
-    OUTPUT_NAME KF5KDEGamesPrivate
-    EXPORT_NAME KF5KDEGamesPrivate
+    OUTPUT_NAME ${KDEGAMESPRIVATE_OUTPUT_NAME}
+    EXPORT_NAME ${KDEGAMESPRIVATE_EXPORT_NAME}
     VERSION   ${KDEGAMES_VERSION}
     SOVERSION ${KDEGAMES_SOVERSION}
 )
