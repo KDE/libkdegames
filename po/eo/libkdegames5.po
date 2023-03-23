@@ -1,4 +1,4 @@
-# translation of libkdegames.po to esperanto
+# translation of libkdegames5.po to esperanto
 # Copyright (C) 2008 Free Software Foundation, Inc.
 # Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>, 2008.
 #
@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:55+0000\n"
-"PO-Revision-Date: 2008-01-03 23:49+0100\n"
-"Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
+"PO-Revision-Date: 2023-03-22 19:14+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -81,16 +81,14 @@ msgid "&Forget"
 msgstr ""
 
 #: highscore/kscoredialog.cpp:533
-#, fuzzy, kde-format
-#| msgid "Clear high scores"
+#, kde-format
 msgid "Remember this high score"
-msgstr "Forigi la rekordojn"
+msgstr ""
 
 #: highscore/kscoredialog.cpp:534
-#, fuzzy, kde-format
-#| msgid "Clear high scores"
+#, kde-format
 msgid "Forget this high score"
-msgstr "Forigi la rekordojn"
+msgstr ""
 
 #: highscore/kscoredialog.cpp:542
 #, kde-format
@@ -111,18 +109,16 @@ msgstr ""
 "Via rezulto aperos en la rekordolisto!"
 
 #: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
-#, fuzzy, kde-format
-#| msgid "Ridiculously easy"
+#, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
-msgstr "Ridinde facila"
+msgstr ""
 
 #: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
-#, fuzzy, kde-format
-#| msgid "Very easy"
+#, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
-msgstr "Tre facila"
+msgstr ""
 
 #: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
 #, kde-format
@@ -143,18 +139,16 @@ msgid "Hard"
 msgstr "Malfacila"
 
 #: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
-#, fuzzy, kde-format
-#| msgid "Very hard"
+#, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
-msgstr "Tre malfacila"
+msgstr ""
 
 #: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
-#, fuzzy, kde-format
-#| msgid "Extremely hard"
+#, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
-msgstr "Ekstreme malfacila"
+msgstr ""
 
 #: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
 #, kde-format
@@ -189,23 +183,20 @@ msgid "Set the difficulty level of the game."
 msgstr "Agordi la nivelon de facileco de la ludo."
 
 #: kgthemeselector.cpp:103
-#, fuzzy, kde-format
-#| msgid "&Get New Themes"
+#, kde-format
 msgid "Get New Themes..."
-msgstr "A&kiri novajn etosojn"
+msgstr "Akiri novajn etosojn..."
 
 #: kgthemeselector.cpp:203
-#, fuzzy, kde-format
-#| msgid "Solve the game"
+#, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
-msgstr "Solvi la ludon"
+msgstr ""
 
 #: kgthemeselector.cpp:273
-#, fuzzy, kde-format
-#| msgid "Your name:"
+#, kde-format
 msgid "[No name]"
-msgstr "Via nomo:"
+msgstr ""
 
 #: kgthemeselector.cpp:289
 #, kde-format
@@ -283,10 +274,8 @@ msgid "Pause the game"
 msgstr "Paŭzi la ludon"
 
 #: kstandardgameaction.cpp:52
-#, fuzzy
-#| msgid "Show &High Scores..."
 msgid "Show &High Scores"
-msgstr "Montri la re&kordojn..."
+msgstr "Montri la re&kordojn"
 
 #: kstandardgameaction.cpp:52
 msgid "Show high scores"
@@ -313,10 +302,8 @@ msgid "&Clear Statistics"
 msgstr "Fori&gi la statistikojn"
 
 #: kstandardgameaction.cpp:58
-#, fuzzy
-#| msgid "Delete all time statistics."
 msgid "Delete all-time statistics."
-msgstr "Forigi ĉiujn tempstatistikojn."
+msgstr "Forigi persistajn tempstatistikojn."
 
 #: kstandardgameaction.cpp:60
 msgid "&Print..."
@@ -582,11 +569,11 @@ msgid "Unnamed - ID: %1"
 msgstr "Sennoma - Identigilo: %1"
 
 #: private/kgame/kgamepropertyhandler.cpp:168
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
-msgstr[0] "%1 ne registrita"
-msgstr[1] "%1 ne registrita"
+msgstr[0] ""
+msgstr[1] ""
 
 #: private/kgame/kgamepropertyhandler.cpp:361
 #, kde-format
@@ -667,10 +654,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
 #: private/kgamethemeselector.ui:40
-#, fuzzy, kde-format
-#| msgid "&Get New Themes"
+#, kde-format
 msgid "&Get New Themes..."
-msgstr "A&kiri novajn etosojn"
+msgstr "A&kiri novajn etosojn..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: private/kgamethemeselector.ui:55
@@ -701,632 +687,3 @@ msgstr "Priskribo:"
 #, kde-format
 msgid "Author:"
 msgstr "Aŭtoro:"
-
-#~ msgid "Mean Score"
-#~ msgstr "Mezaj poentoj"
-
-#~ msgid "Best Score"
-#~ msgstr "Plej altaj poentoj"
-
-#~ msgid "Elapsed Time"
-#~ msgstr "Pasinta tempo"
-
-#~ msgid "Best &Scores"
-#~ msgstr "Plej bonaj po&entoj"
-
-#~ msgid "&Players"
-#~ msgstr "Lu&dantoj"
-
-#~ msgid "Statistics"
-#~ msgstr "Statistikoj"
-
-#~ msgid "Histogram"
-#~ msgstr "Histogramo"
-
-#~ msgid "View world-wide highscores"
-#~ msgstr "Vidi tutmondajn rekordojn"
-
-#~ msgid "View world-wide players"
-#~ msgstr "Vidi tutmondajn ludantojn"
-
-#~ msgid "Highscores"
-#~ msgstr "Rekordoj"
-
-#~ msgid "Overwrite"
-#~ msgstr "Anstataŭigi"
-
-#~ msgid "The file already exists. Overwrite?"
-#~ msgstr "La dosiero jam ekzistas. Ĉu anstataŭigi?"
-
-#~ msgid "Export"
-#~ msgstr "Eksporti"
-
-#~ msgid "Winner"
-#~ msgstr "Gajnanto"
-
-#~ msgid "Won Games"
-#~ msgstr "Gajnitaj ludoj"
-
-#~ msgid "Configure Highscores"
-#~ msgstr "Agordi la rekordojn"
-
-#~ msgid "Main"
-#~ msgstr "Ĉefa"
-
-#~ msgid "Nickname:"
-#~ msgstr "Kromnomo:"
-
-#~ msgid "Comment:"
-#~ msgstr "Komento:"
-
-#~ msgid "Advanced"
-#~ msgstr "Plie"
-
-#~ msgid "Registration Data"
-#~ msgstr "Registrodatumo"
-
-#~ msgid "Key:"
-#~ msgstr "Ŝlosilo:"
-
-#~ msgid "Remove"
-#~ msgstr "Forigi"
-
-#~ msgid "Please choose a non empty nickname."
-#~ msgstr "Bonvolu elekti nemaplenan kromnomon."
-
-#~ msgid "Nickname already in use. Please choose another one"
-#~ msgstr "Kromnomo jam uzata. Bonvolu elekti alian."
-
-#~ msgid "Enter Your Nickname"
-#~ msgstr "Enmetu vian kromnomon"
-
-#~ msgid "Congratulations, you have won!"
-#~ msgstr "Gratulon, vi gajnis!"
-
-#~ msgid "Enter your nickname:"
-#~ msgstr "Enmetu vian kromnomon:"
-
-#~ msgid "Do not ask again."
-#~ msgstr "Ne peti denove."
-
-#~ msgid "anonymous"
-#~ msgstr "sennoma"
-
-#~ msgid "Comment"
-#~ msgstr "Komento"
-
-#~ msgid "Undefined error."
-#~ msgstr "Nedifinita eraro."
-
-#~ msgid "Missing argument(s)."
-#~ msgstr "Mankantaj argumentoj."
-
-#~ msgid "Invalid argument(s)."
-#~ msgstr "Nevalidaj argumentoj."
-
-#~ msgid "Unable to connect to MySQL server."
-#~ msgstr "Ne eblas konektiĝi al la MySQL servilo."
-
-#~ msgid "Unable to select database."
-#~ msgstr "Ne eblas elekti datumbazon."
-
-#~ msgid "Error on database query."
-#~ msgstr "Eraro dum datumbaza peto."
-
-#~ msgid "Error on database insert."
-#~ msgstr "Eraro dum datumbaza enmeto."
-
-#~ msgid "Nickname already registered."
-#~ msgstr "Kromnomo jam registrita."
-
-#~ msgid "Nickname not registered."
-#~ msgstr "Kromnomo ne registrita."
-
-#~ msgid "Invalid key."
-#~ msgstr "Nevalida ŝlosilo."
-
-#~ msgid "Invalid submit key."
-#~ msgstr "Nevalida submetita ŝlosilo."
-
-#~ msgid "Invalid level."
-#~ msgstr "Nevalida nivelo."
-
-#~ msgid "Invalid score."
-#~ msgstr "Nevalidaj poentoj."
-
-#~ msgid "Unable to contact world-wide highscore server"
-#~ msgstr "Ne eblas kontaki la tutmondan rekordservilon"
-
-#~ msgid "Server URL: %1"
-#~ msgstr "Servila URL: %1"
-
-#~ msgid "Unable to open temporary file."
-#~ msgstr "Ne eblas malfermi nedaŭran dosieron."
-
-#~ msgid "Message from world-wide highscores server"
-#~ msgstr "Mesaĝo el la tutmonda rekordservilo"
-
-#~ msgid "Invalid answer from world-wide highscores server."
-#~ msgstr "Nevalida respondo el la tutmonda rekordservilo"
-
-#~ msgid "Raw message: %1"
-#~ msgstr "Kruda mesaĝo: %1"
-
-#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
-#~ msgstr "Nevalida respondo el la tutmonda rekordservilo (mankanta ero: %1)."
-
-#~ msgid "Success"
-#~ msgstr "Sukceso"
-
-#~ msgid "Multiplayers Scores"
-#~ msgstr "Plurludaj poentoj"
-
-#~ msgid "No game played."
-#~ msgstr "Neniu ludo ludita."
-
-#~ msgid "Scores for last game:"
-#~ msgstr "Poentoj de la lasta ludo:"
-
-#~ msgid "Scores for the last %1 games:"
-#~ msgstr "Poentoj de la lastaj %1 ludoj:"
-
-#~ msgid "all"
-#~ msgstr "ĉiuj:"
-
-#~ msgid "Select player:"
-#~ msgstr "Elektu ludanton:"
-
-#~ msgid "Total:"
-#~ msgstr "Totalo:"
-
-#~ msgid "Won:"
-#~ msgstr "Gajnis:"
-
-#~ msgid "Lost:"
-#~ msgstr "Perdis:"
-
-#~ msgid "Current:"
-#~ msgstr "Nuna:"
-
-#~ msgid "Trends"
-#~ msgstr "Tendencoj"
-
-#~ msgid "From"
-#~ msgstr "El"
-
-#~ msgid "To"
-#~ msgstr "Al"
-
-#~ msgid "Count"
-#~ msgstr "Nombro"
-
-#~ msgid "Percent"
-#~ msgstr "Elcento"
-
-#~ msgid "Configure..."
-#~ msgstr "Agordi..."
-
-#~ msgid "Export..."
-#~ msgstr "Eksporti..."
-
-#~ msgid "Configure Chat"
-#~ msgstr "Agordi babiladon"
-
-#~ msgid "Name Font..."
-#~ msgstr "Noma tiparo..."
-
-#~ msgid "Text Font..."
-#~ msgstr "Teksta tiparo..."
-
-#~ msgid "Player: "
-#~ msgstr "Ludanto: "
-
-#~ msgid "This is a player message"
-#~ msgstr "Tio estas ludantomesaĝo"
-
-#~ msgid "System Messages - Messages directly sent from the game"
-#~ msgstr "Sistemmesaĝoj - Mesaĝoj rekte senditaj de la ludo"
-
-#~ msgid "--- Game: "
-#~ msgstr "--- Ludo: "
-
-#~ msgid "This is a system message"
-#~ msgstr "Tio estas sistemmesaĝo"
-
-#~ msgid "Maximum number of messages (-1 = unlimited):"
-#~ msgstr "Maksimuma nombro da mesaĝoj (-1 = senlime):"
-
-#~ msgid "Create a network game"
-#~ msgstr "Krei retludon"
-
-#~ msgid "Join a network game"
-#~ msgstr "Aliĝi al retludo"
-
-#~ msgid "Game name:"
-#~ msgstr "Ludnomo:"
-
-#~ msgid "Network games:"
-#~ msgstr "Retludoj:"
-
-#~ msgid "Port to connect to:"
-#~ msgstr "Kontaktenda pordo:"
-
-#~ msgid "Host to connect to:"
-#~ msgstr "Kontaktenda gastiganto:"
-
-#~ msgid "&Start Network"
-#~ msgstr "&Lanĉi reton"
-
-#~ msgid "Network Game"
-#~ msgstr "Retludo"
-
-#~ msgid "KGame Debug Dialog"
-#~ msgstr "Sencimigodialogo de KGame"
-
-#~ msgid "Debug &KGame"
-#~ msgstr "Sencimigi &KGame"
-
-#~ msgid "Update"
-#~ msgstr "Aktualigi"
-
-#~ msgid "KGame Pointer"
-#~ msgstr "KGame-montrilo"
-
-#~ msgid "Game ID"
-#~ msgstr "Ludo-ID"
-
-#~ msgid "Game Cookie"
-#~ msgstr "Ludokuketo"
-
-#~ msgid "Is Master"
-#~ msgstr "Estas estro"
-
-#~ msgid "Is Admin"
-#~ msgstr "Estas sistemestro"
-
-#~ msgid "Is Offering Connections"
-#~ msgstr "Ofertas konektojn"
-
-#~ msgid "Game Status"
-#~ msgstr "Ludostato"
-
-#~ msgid "Game is Running"
-#~ msgstr "Ludo ruliĝas"
-
-#~ msgid "Maximal Players"
-#~ msgstr "Maksimumo da ludantoj"
-
-#~ msgid "Minimal Players"
-#~ msgstr "Minimumo da ludantoj"
-
-#~ msgid "Players"
-#~ msgstr "Ludantoj"
-
-#~ msgid "Debug &Players"
-#~ msgstr "Sencimigi &ludantojn"
-
-#~ msgid "Available Players"
-#~ msgstr "Ekzistantaj ludantoj"
-
-#~ msgid "Player Pointer"
-#~ msgstr "Ludanto-montrilo"
-
-#~ msgid "Player Name"
-#~ msgstr "Ludantonomo"
-
-#~ msgid "Player Group"
-#~ msgstr "Ludantaro"
-
-#~ msgid "Player User ID"
-#~ msgstr "Ludanto-identigilo"
-
-#~ msgid "My Turn"
-#~ msgstr "Mia vico"
-
-#~ msgid "Async Input"
-#~ msgstr "Nesinkrona enigo"
-
-#~ msgid "KGame Address"
-#~ msgstr "KGame adreso"
-
-#~ msgid "Player is Virtual"
-#~ msgstr "Ludanto estas virtuala"
-
-#~ msgid "Player is Active"
-#~ msgstr "Ludanto estas aktiva"
-
-#~ msgid "RTTI"
-#~ msgstr "Rultempa tipinformo"
-
-#~ msgid "Network Priority"
-#~ msgstr "Retprioritato"
-
-#~ msgid "Debug &Messages"
-#~ msgstr "Sencimigi &mesaĝojn"
-
-#~ msgid "&>>"
-#~ msgstr "&>>"
-
-#~ msgid "&<<"
-#~ msgstr "&<<"
-
-#~ msgid "Do not show IDs:"
-#~ msgstr "Ne montri identigilojn:"
-
-#~ msgid "Clean"
-#~ msgstr "Forviŝi"
-
-#~ msgid "Dirty"
-#~ msgstr "Malpura"
-
-#~ msgid "Local"
-#~ msgstr "Loka"
-
-#~ msgid "Undefined"
-#~ msgstr "Nedifinita"
-
-#~ msgid "&Chat"
-#~ msgstr "&Babili"
-
-#~ msgid "C&onnections"
-#~ msgstr "&Konektoj"
-
-#~ msgid "&Game"
-#~ msgstr "&Ludo"
-
-#~ msgid "&Network"
-#~ msgstr "&Reto"
-
-#~ msgid "&Message Server"
-#~ msgstr "&Mesaĝservilo"
-
-#~ msgid "Network Configuration"
-#~ msgstr "Retagordo"
-
-#~ msgid "Cannot connect to the network"
-#~ msgstr "Ne eblas konektiĝi al la reto"
-
-#~ msgid "Network status: No Network"
-#~ msgstr "Retstato: neniu reto"
-
-#~ msgid "Network status: You are MASTER"
-#~ msgstr "Retstato: Vi estas ESTRO"
-
-#~ msgid "Network status: You are connected"
-#~ msgstr "Retstato: Vi estas konektita"
-
-#~ msgid "Your name:"
-#~ msgstr "Via nomo:"
-
-#~ msgid "Maximal Number of Clients"
-#~ msgstr "Maksimumo da klientoj"
-
-#~ msgid "Maximal number of clients (-1 = infinite):"
-#~ msgstr "Maksimumo da klientoj (-1 = sen limo):"
-
-#~ msgid "Change Maximal Number of Clients"
-#~ msgstr "Ŝanĝi la maksimuman nombron da klientoj"
-
-#~ msgid "Change Admin"
-#~ msgstr "Ŝanĝi la estron"
-
-#~ msgid "Remove Client with All Players"
-#~ msgstr "Forigi klienton kun ĉiuj ludantoj"
-
-#~ msgid "Only the admin can configure the message server!"
-#~ msgstr "Nur la sistemestro povas agordi la mesaĝoservilon!"
-
-#~ msgid "You do not own the message server"
-#~ msgstr "Vi ne posedas la mesaĝservilon"
-
-#~ msgid "Chat"
-#~ msgstr "Babili"
-
-#~ msgid "Connected Players"
-#~ msgstr "Konektitaj ludantoj"
-
-#~ msgid "Do you want to ban player \"%1\" from the game?"
-#~ msgstr "Ĉu vi volas forpeli la ludanton \"%1\" el la ludo?"
-
-#~ msgid "Ban Player"
-#~ msgstr "Forpeli ludanton"
-
-#~ msgid "Do Not Ban"
-#~ msgstr "Ne forpeli"
-
-#~ msgid "Connection to the server has been lost!"
-#~ msgstr "La konekto al la servilo perdiĝis!"
-
-#~ msgid "Connection to client has been lost!"
-#~ msgstr "La konekto al la kliento perdiĝis!"
-
-#~ msgid ""
-#~ "Received a network error!\n"
-#~ "Error number: %1\n"
-#~ "Error message: %2"
-#~ msgstr ""
-#~ "Riceviĝis reteraro!\n"
-#~ "Eraro n-ro: %1\n"
-#~ "Eraromesaĝo: %2"
-
-#~ msgid "No connection could be created."
-#~ msgstr "Konekto ne estis starigebla."
-
-#~ msgid ""
-#~ "No connection could be created.\n"
-#~ "The error message was:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Konekto ne estis starigebla.\n"
-#~ "La eraromesaĝo estis:\n"
-#~ "%1"
-
-#~ msgid "Error"
-#~ msgstr "Eraro"
-
-#, fuzzy
-#~| msgid "Carddeck Selection"
-#~ msgid "Card Deck Selection"
-#~ msgstr "Kartara elekto"
-
-#~ msgid "unnamed"
-#~ msgstr "sennoma"
-
-#, fuzzy
-#~| msgid "Frontside"
-#~ msgctxt "Front side of a card"
-#~ msgid "Front"
-#~ msgstr "Antaŭflanko"
-
-#, fuzzy
-#~| msgid "Backside"
-#~ msgctxt "Back side of a card"
-#~ msgid "Back"
-#~ msgstr "Dorsflanko"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgid "Deck Name"
-#~ msgstr "Nomo"
-
-#, fuzzy
-#~| msgid "Preview"
-#~ msgid ""
-#~ "Backside\n"
-#~ "Preview"
-#~ msgstr "Antaŭrigardo"
-
-#, fuzzy
-#~| msgid "Description:"
-#~ msgid "Deck description."
-#~ msgstr "Priskribo:"
-
-#~ msgid "Display:"
-#~ msgstr "Montrado:"
-
-#~ msgid "Involved players and bots"
-#~ msgstr "Enludaj ludantoj kaj robotoj"
-
-#~ msgid "Spectators"
-#~ msgstr "Spektantoj"
-
-#~ msgid "Close"
-#~ msgstr "Malfermi"
-
-#~ msgid "Players, Bots and Spectators"
-#~ msgstr "Ludantoj, robotoj kaj spektantoj"
-
-#~ msgid "Action..."
-#~ msgstr "Ago..."
-
-#~ msgid "Player"
-#~ msgstr "Ludanto"
-
-#~ msgid "Open"
-#~ msgstr "Malfermita"
-
-#~ msgid "Reserved"
-#~ msgstr "Rezerva"
-
-#~ msgid "AI bot"
-#~ msgstr "AI roboto"
-
-#~ msgid "Abandoned"
-#~ msgstr "Rezignis"
-
-#~ msgid "Type: %1"
-#~ msgstr "Tipo: %1"
-
-#~ msgid "(unnamed)"
-#~ msgstr "(sennoma)"
-
-#~ msgid "Spectator"
-#~ msgstr "Spektanto"
-
-#~ msgid "Statistics..."
-#~ msgstr "Statistikoj..."
-
-#~ msgid "Sit down here"
-#~ msgstr "Sidiĝi ĉi tie"
-
-#~ msgid "Add a bot here"
-#~ msgstr "Aldoni roboton ĉi tie"
-
-#~ msgid "Stand up"
-#~ msgstr "Stariĝi"
-
-#~ msgid "Host: %1"
-#~ msgstr "Gastiganto: %1"
-
-#~ msgid "Realname: %1"
-#~ msgstr "Realnomo: %1"
-
-#~ msgctxt ""
-#~ "A list of language typical names ( for games ), separated by spaces"
-#~ msgid ""
-#~ "Adam Alex Andreas Andrew Bart Ben Bernd Bill Chris Chuck Daniel Don "
-#~ "Duncan Ed Emily Eric Gary Greg Harry Ian Jean Jeff Jan Kai Keith Ken Kirk "
-#~ "Marc Mike Neil Paul Rik Robert Sam Sean Thomas Tim Walter"
-#~ msgstr ""
-#~ "Adamo Aleksandro Andreo Barĉjo Benĉjo Bilĉjo Danielo Donĉjo Dunkano "
-#~ "Edmundo Emilo Eriko Garibaldo Georgo Gustavo Henriko Karlo Kristino "
-#~ "Lazaro Ludoviko Simono Marko Mikaelo Nikolao Nanino Paŭlo Riĉjo Rikardo "
-#~ "Sonjo Sofio Tomaso Timĉjo Ulriko Volframo Zaĥario"
-
-#~ msgid "kgamepopupitemtest"
-#~ msgstr "kgamepopupitemtest"
-
-#, fuzzy
-#~| msgid "Show Rich text"
-#~ msgid "Show rich text"
-#~ msgstr "Montri riĉtekston"
-
-#~ msgid "Message timeout:"
-#~ msgstr "Mesaĝa limtempo:"
-
-#~ msgid "Opacity:"
-#~ msgstr "Travideblo:"
-
-#~ msgid "Change Icon..."
-#~ msgstr "Ŝanĝi piktogramon..."
-
-#~ msgid "Text color:"
-#~ msgstr "Tekstkoloro:"
-
-#~ msgid "Backgound color:"
-#~ msgstr "Fonkoloro:"
-
-#~ msgid "Corners:"
-#~ msgstr "Anguloj:"
-
-#~ msgid "Square"
-#~ msgstr "Kvadrataj"
-
-#~ msgid "Sharp"
-#~ msgstr "Akraj"
-
-#~ msgid "Soft"
-#~ msgstr "Mildaj"
-
-#~ msgid "Softest"
-#~ msgstr "Plej mildaj"
-
-#~ msgid "msec"
-#~ msgstr "msek"
-
-#~ msgid "KDE card deck"
-#~ msgstr "KDE kartara"
-
-#~ msgid "Filter"
-#~ msgstr "Filtrilo"
-
-#, fuzzy
-#~| msgid "Show only scalable cards"
-#~ msgid "Show old style decks"
-#~ msgstr "Montri nur regrandigeblajn kartojn"
-
-#~ msgid "Details"
-#~ msgstr "Detaloj"
-
-#~ msgid "Show only fixed size cards"
-#~ msgstr "Montri nur egallarĝajn kartojn"
