@@ -62,7 +62,12 @@ find_package(KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
 
 include(InternalMacros)
 
+# reset to 0 once all deprecated API has been removed on full switch to Qt6
+if (QT_MAJOR_VERSION STREQUAL "6")
+set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 7.5.0 CACHE STRING "Control the range of deprecated API excluded from the build [default=7.5.0].")
+else()
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
+endif()
 
 set(HIGHSCORE_DIRECTORY "" CACHE STRING "Where to install system-wide highscores e.g. /var/games")
 
