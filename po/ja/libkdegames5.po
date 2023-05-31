@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.1\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -586,7 +586,6 @@ msgstr "名前なし - ID: %1"
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 未登録"
-msgstr[1] "%1 未登録"
 
 #: private/kgame/kgamepropertyhandler.cpp:361
 #, kde-format
