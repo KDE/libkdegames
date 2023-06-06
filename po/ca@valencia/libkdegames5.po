@@ -275,7 +275,7 @@ msgstr "Finalitza la partida actual"
 
 #: kstandardgameaction.cpp:50
 msgid "Pa&use"
-msgstr "Pa&utilitza"
+msgstr "Pa&usa"
 
 #: kstandardgameaction.cpp:50
 msgid "Pause the game"
