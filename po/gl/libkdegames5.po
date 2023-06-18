@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:55+0000\n"
-"PO-Revision-Date: 2023-04-23 06:24+0200\n"
+"PO-Revision-Date: 2023-06-17 14:47+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: highscore/khighscore.cpp:150
 #, kde-format
@@ -536,7 +536,7 @@ msgstr "Activar o xogador"
 #: private/kgame/kgamemessage.cpp:126
 #, kde-format
 msgid "Inactivate Player"
-msgstr "Desactivar o xogador"
+msgstr "Xogadora inactiva"
 
 #: private/kgame/kgamemessage.cpp:128
 #, kde-format
