@@ -282,11 +282,11 @@ msgstr "Para a partida"
 
 #: kstandardgameaction.cpp:52
 msgid "Show &High Scores"
-msgstr "Mostrar as &mellores puntuacións"
+msgstr "Amosar as &mellores puntuacións"
 
 #: kstandardgameaction.cpp:52
 msgid "Show high scores"
-msgstr "Mostrar as mellores puntuacións"
+msgstr "Amosar as mellores puntuacións"
 
 #: kstandardgameaction.cpp:54
 msgid "&Clear High Scores"
@@ -298,11 +298,11 @@ msgstr "Limpa as mellores puntuacións"
 
 #: kstandardgameaction.cpp:56
 msgid "Show Statistics"
-msgstr "Mostrar as estatísticas"
+msgstr "Amosar as estatísticas"
 
 #: kstandardgameaction.cpp:56
 msgid "Show statistics"
-msgstr "Mostrar as estatísticas"
+msgstr "Amosar as estatísticas"
 
 #: kstandardgameaction.cpp:58
 msgid "&Clear Statistics"
