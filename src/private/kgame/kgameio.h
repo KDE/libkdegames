@@ -257,8 +257,11 @@ private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameKeyIO)
     friend class KGameKeyIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wunused-private-field")
     // Unused, kept for ABI compatibility
     const void *__kdegames_d_do_not_use;
+    QT_WARNING_POP
 #endif
 
     Q_DISABLE_COPY(KGameKeyIO)
@@ -340,8 +343,11 @@ private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameMouseIO)
     friend class KGameMouseIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wunused-private-field")
     // Unused, kept for ABI compatibility
     const void *__kdegames_d_do_not_use;
+    QT_WARNING_POP
 #endif
 
     Q_DISABLE_COPY(KGameMouseIO)
@@ -494,8 +500,11 @@ private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameProcessIO)
     friend class KGameProcessIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wunused-private-field")
     // Unused, kept for ABI compatibility
     const void *__kdegames_d_do_not_use;
+    QT_WARNING_POP
 #endif
 
     Q_DISABLE_COPY(KGameProcessIO)
@@ -603,8 +612,11 @@ private:
     Q_DECLARE_PRIVATE_D(KGameIO::d, KGameComputerIO)
     friend class KGameComputerIOPrivate;
 #if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wunused-private-field")
     // Unused, kept for ABI compatibility
     const void *__kdegames_d_do_not_use;
+    QT_WARNING_POP
 #endif
 
     Q_DISABLE_COPY(KGameComputerIO)

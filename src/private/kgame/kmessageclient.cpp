@@ -330,3 +330,5 @@ unsigned int KMessageClient::delayedMessageCount() const
 {
     return d->delayedMessages.count();
 }
+
+#include "moc_kmessageclient.cpp"

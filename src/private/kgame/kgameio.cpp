@@ -533,3 +533,5 @@ void KGameComputerIO::reaction()
 {
     Q_EMIT signalReaction();
 }
+
+#include "moc_kgameio.cpp"

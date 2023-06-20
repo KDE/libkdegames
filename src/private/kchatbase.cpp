@@ -406,3 +406,5 @@ void KChatBase::addSystemMessage(const QString &fromName, const QString &text)
 
     d->mModel->addSystemMessage(fromName, text);
 }
+
+#include "moc_kchatbase.cpp"

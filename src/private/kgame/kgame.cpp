@@ -1397,6 +1397,8 @@ void KGame::setPolicy(GamePolicy p, bool recursive)
     }
 }
 
+#include "moc_kgame.cpp"
+
 /*
  * vim: et sw=2
  */

@@ -468,3 +468,5 @@ void KPlayer::Debug()
     qCDebug(GAMES_PRIVATE_KGAME) << "#IOs:    " << d->mInputList.count();
     qCDebug(GAMES_PRIVATE_KGAME) << "---------------------------------------------------";
 }
+
+#include "moc_kplayer.cpp"

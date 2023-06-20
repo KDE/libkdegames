@@ -477,3 +477,4 @@ void KMessageServer::Debug()
 }
 
 #include "moc_kmessageserver.cpp"
+#include "moc_kmessageserver_p.cpp"

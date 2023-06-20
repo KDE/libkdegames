@@ -362,3 +362,5 @@ void KGameChat::slotReceiveMessage(int msgid, const QByteArray &buffer, quint32,
 
     addMessage(sender, text);
 }
+
+#include "moc_kgamechat.cpp"

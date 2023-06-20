@@ -124,3 +124,5 @@ void KGameClock::setTime(const QString &s)
     }
     setTime(sec);
 }
+
+#include "moc_kgameclock.cpp"

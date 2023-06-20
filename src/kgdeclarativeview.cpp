@@ -35,4 +35,6 @@ KgDeclarativeView::KgDeclarativeView(QWidget *parent)
 
 KgDeclarativeView::~KgDeclarativeView() = default;
 
+#include "moc_kgdeclarativeview.cpp"
+
 #endif

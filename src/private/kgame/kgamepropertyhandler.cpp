@@ -405,3 +405,5 @@ void KGamePropertyHandler::Debug()
     }
     qDebug() << "-----------------------------------------------------------";
 }
+
+#include "moc_kgamepropertyhandler.cpp"

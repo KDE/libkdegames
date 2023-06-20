@@ -117,3 +117,5 @@ int KGameSequence::checkGameOver(KPlayer *)
 /*
  * vim: et sw=2
  */
+
+#include "moc_kgamesequence.cpp"

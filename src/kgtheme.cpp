@@ -139,3 +139,5 @@ bool KgTheme::readFromDesktopFile(const QString &path_)
     setProperty("_k_themeDescTimestamp", fi.lastModified().toSecsSinceEpoch());
     return true;
 }
+
+#include "moc_kgtheme.cpp"

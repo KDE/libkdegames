@@ -230,3 +230,5 @@ void KChatBaseModel::addSystemMessage(const QString &fromName, const QString &te
     d->m_messages.push_back(KChatBaseMessage(fromName, text, KChatBaseMessage::System));
     endInsertRows();
 }
+
+#include "moc_kchatbasemodel.cpp"

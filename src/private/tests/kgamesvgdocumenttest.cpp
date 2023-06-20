@@ -232,3 +232,5 @@ void tst_KGameSvgDocument::transform()
 }
 
 QTEST_MAIN(tst_KGameSvgDocument)
+
+#include "moc_kgamesvgdocumenttest.cpp"

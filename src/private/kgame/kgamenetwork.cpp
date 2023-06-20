@@ -508,6 +508,8 @@ void KGameNetwork::Debug()
     qCDebug(GAMES_PRIVATE_KGAME) << "---------------------------------------------------";
 }
 
+#include "moc_kgamenetwork.cpp"
+
 /*
  * vim: et sw=2
  */

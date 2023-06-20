@@ -338,3 +338,5 @@ void KMessageProcess::slotProcessExited(int exitCode, QProcess::ExitStatus)
     delete mProcess;
     mProcess = nullptr;
 }
+
+#include "moc_kmessageio.cpp"

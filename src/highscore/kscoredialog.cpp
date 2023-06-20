@@ -642,3 +642,5 @@ void KScoreDialog::keyPressEvent(QKeyEvent *ev)
     }
     QDialog::keyPressEvent(ev);
 }
+
+#include "moc_kscoredialog.cpp"

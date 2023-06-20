@@ -200,4 +200,4 @@ void KGpiMainWindow::onPopupCenter()
     m_popupItem->showMessage(str, KGamePopupItem::Center, m_replaceMode);
 }
 
-#include "kgamepopupitemtest.moc"
+#include "moc_kgamepopupitemtest.cpp"

@@ -260,3 +260,5 @@ QPainterPath KGameRenderedObjectItemPrivate::shape() const
 }
 
 // END QGraphicsItem reimplementation of KGameRenderedObjectItemPrivate
+
+#include "moc_kgamerenderedobjectitem.cpp"
