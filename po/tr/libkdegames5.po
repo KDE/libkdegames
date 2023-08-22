@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdegames-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:55+0000\n"
-"PO-Revision-Date: 2023-03-19 21:27+0300\n"
+"PO-Revision-Date: 2023-08-22 01:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #: highscore/khighscore.cpp:150
 #, kde-format
@@ -165,12 +165,12 @@ msgstr "Oldukça Zor"
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
-msgstr "İmkansız"
+msgstr "Olanaksız"
 
 #: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
-msgstr "Zorluk derecesini değiştirmek mevcut oyunu sonlandırır!"
+msgstr "Zorluk derecesini değiştirmek geçerli oyunu sonlandırır!"
 
 #: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
 #, kde-format
@@ -262,7 +262,7 @@ msgstr "Mevcut oyunu kaydet"
 
 #: kstandardgameaction.cpp:46
 msgid "Save &As..."
-msgstr "&Farklı kaydet..."
+msgstr "&Farklı Kaydet..."
 
 #: kstandardgameaction.cpp:46
 msgid "Save the current game to another file"
@@ -274,7 +274,7 @@ msgstr "&Oyunu Bitir"
 
 #: kstandardgameaction.cpp:48
 msgid "End the current game"
-msgstr "Mevcut oyunu bitir"
+msgstr "Geçerli oyunu bitir"
 
 #: kstandardgameaction.cpp:50
 msgid "Pa&use"
@@ -330,11 +330,11 @@ msgstr "Uygulamadan çık"
 
 #: kstandardgameaction.cpp:66
 msgid "Repeat"
-msgstr "Tekrarla"
+msgstr "Yeniden Yap"
 
 #: kstandardgameaction.cpp:66
 msgid "Repeat the last move"
-msgstr "Son hamleyi tekrarla"
+msgstr "Son hamleyi yenili"
 
 #: kstandardgameaction.cpp:68
 msgid "Und&o"
@@ -408,7 +408,7 @@ msgstr "Tüm Oyunculara Gönder"
 #: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
 #, kde-format
 msgid "Send to %1"
-msgstr "%1'e gönder"
+msgstr "Gönder: %1"
 
 #: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
 #: private/kchatbaseitemdelegate.cpp:61
@@ -445,7 +445,7 @@ msgstr "Bilinmeyen"
 #: private/kgame/kgamechat.cpp:233
 #, kde-format
 msgid "Send to My Group (\"%1\")"
-msgstr "Grubuma(\"%1\") Gönder"
+msgstr "Grubuma (\"%1\") Gönder"
 
 #: private/kgame/kgameerror.cpp:51
 #, kde-format
@@ -465,7 +465,7 @@ msgid ""
 "Expected Version: %1\n"
 "Received Version: %2\n"
 msgstr ""
-"KOyun Sürüm hatası!\n"
+"KOyun sürümü hatası!\n"
 "Beklenen Sürüm: %1\n"
 "Alınan Sürüm: %2\n"
 
@@ -502,12 +502,12 @@ msgstr "Oyun Ayarlamaları Tamamlandı"
 #: private/kgame/kgamemessage.cpp:112
 #, kde-format
 msgid "Synchronize Random"
-msgstr "Rastgele senkronize et"
+msgstr "Rastgele Eşzamanla"
 
 #: private/kgame/kgamemessage.cpp:114
 #, kde-format
 msgid "Disconnect"
-msgstr "Bağlantıyı kes"
+msgstr "Bağlantıyı Kes"
 
 #: private/kgame/kgamemessage.cpp:116
 #, kde-format
@@ -674,7 +674,7 @@ msgstr "&Yeni Temalar Al..."
 #: private/kgamethemeselector.ui:55
 #, kde-format
 msgid "Preview"
-msgstr "ön izleme"
+msgstr "Önizleme"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: private/kgamethemeselector.ui:97
