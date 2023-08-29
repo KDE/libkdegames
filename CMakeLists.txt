@@ -26,7 +26,7 @@ include(ECMDeprecationSettings)
 include(FeatureSummary)
 include(CMakePackageConfigHelpers)
 if (QT_MAJOR_VERSION STREQUAL "6")
-    set(QT_REQUIRED_VERSION "6.4.0")
+    set(QT_REQUIRED_VERSION "6.5.0")
     set(KF_MIN_VERSION "5.240.0")
     set(KF_MAJOR_VERSION "6")
 else()
@@ -100,11 +100,18 @@ set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
-ecm_set_disabled_deprecation_versions(
-    QT 5.15.2
-    KF 5.103
-    KCOREADDONS 5.73 # KRandomSequence, cannot be removed
-)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    ecm_set_disabled_deprecation_versions(
+        QT 6.5
+        KF 5.239
+    )
+else()
+    ecm_set_disabled_deprecation_versions(
+        QT 5.15.2
+        KF 5.103
+        KCOREADDONS 5.73 # KRandomSequence, cannot be removed
+    )
+endif()
 
 add_subdirectory(src)
 
