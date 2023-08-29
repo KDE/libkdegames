@@ -29,6 +29,12 @@ struct KStandardGameActionInfo {
     const KLazyLocalizedString psToolTip;
 };
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define CTRL(x) QKeyCombination(Qt::CTRL | Qt::Key_##x).toCombined()
+#else
+#define CTRL(x) Qt::CTRL | Qt::Key_##x
+#endif
+
 const KStandardGameActionInfo g_rgActionInfo[] = {
     // clang-format off
     // "game" menu
@@ -48,7 +54,7 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
       kli18n("&End Game"),          {},                         "window-close",         kli18n("End the current game") },
     { KStandardGameAction::Pause,           KStandardShortcut::AccelNone, Qt::Key_P,            "game_pause",
       kli18n("Pa&use"),             {},                         "media-playback-pause", kli18n("Pause the game") },
-    { KStandardGameAction::Highscores,      KStandardShortcut::AccelNone, Qt::CTRL | Qt::Key_H, "game_highscores",
+    { KStandardGameAction::Highscores,      KStandardShortcut::AccelNone, CTRL(H),              "game_highscores",
       kli18n("Show &High Scores"),  {},                         "games-highscores",     kli18n("Show high scores") },
     { KStandardGameAction::ClearHighscores, KStandardShortcut::AccelNone, 0,                    "game_clear_highscores",
       kli18n("&Clear High Scores"), {},                         "clear_highscore",      kli18n("Clear high scores") },
@@ -68,7 +74,7 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
       kli18n("Und&o"),      {}, "edit-undo",            kli18n("Undo the last move") },
     { KStandardGameAction::Redo,    KStandardShortcut::Redo,      0,                    "move_redo",
       kli18n("Re&do"),      {}, "edit-redo",            kli18n("Redo the latest move") },
-    { KStandardGameAction::Roll,    KStandardShortcut::AccelNone, Qt::CTRL | Qt::Key_R, "move_roll",
+    { KStandardGameAction::Roll,    KStandardShortcut::AccelNone, CTRL(R),              "move_roll",
       kli18n("&Roll Dice"), {}, "roll",                 kli18n("Roll the dice") },
     { KStandardGameAction::EndTurn, KStandardShortcut::AccelNone, 0,                    "move_end_turn",
       kli18n("End Turn"),   {}, "games-endturn",        {}  },
