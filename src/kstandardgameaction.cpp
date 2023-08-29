@@ -123,8 +123,13 @@ QAction *KStandardGameAction::_k_createInternal(KStandardGameAction::StandardGam
             break;
         }
 
-        QList<QKeySequence> cut = (pInfo->globalAccel == KStandardShortcut::AccelNone ? QList<QKeySequence>() << QKeySequence(pInfo->shortcut)
-                                                                                      : KStandardShortcut::shortcut(pInfo->globalAccel));
+        // clang-format off
+        const QList<QKeySequence> cut =
+            (pInfo->globalAccel != KStandardShortcut::AccelNone) ? KStandardShortcut::shortcut(pInfo->globalAccel) :
+            (pInfo->shortcut != 0)                               ? QList<QKeySequence>{QKeySequence(pInfo->shortcut)} :
+            /* else */ QList<QKeySequence>();
+        // clang-format on
+
         if (!cut.isEmpty()) {
             pAction->setShortcuts(cut);
             pAction->setProperty("defaultShortcuts", QVariant::fromValue(cut));
