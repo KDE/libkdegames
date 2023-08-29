@@ -17,7 +17,6 @@
 #include <QFileInfo>
 #include <QGuiApplication>
 #include <QPainter>
-#include <QScopedPointer>
 #include <QVariant>
 
 // TODO: automatically schedule pre-rendering of animation frames
@@ -169,7 +168,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
     }
     // open cache (and SVG file, if necessary)
     if (m_strategies & KGameRenderer::UseDiskCache) {
-        QScopedPointer<KImageCache> oldCache(m_imageCache);
+        std::unique_ptr<KImageCache> oldCache(m_imageCache);
         const QString imageCacheName = cacheName(theme->identifier());
         m_imageCache = new KImageCache(imageCacheName, m_cacheSize);
         m_imageCache->setPixmapCaching(false); // see big comment in KGRPrivate class declaration
@@ -185,9 +184,9 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
         // get evicted.
         if (cacheTimestamp < svgTimestamp) {
             qCDebug(GAMES_LIB) << "Theme newer than cache, checking SVG";
-            QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
+            std::unique_ptr<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
             if (renderer->isValid()) {
-                m_rendererPool.setPath(theme->graphicsPath(), renderer.take());
+                m_rendererPool.setPath(theme->graphicsPath(), renderer.release());
                 m_imageCache->clear();
                 m_imageCache->insert(QStringLiteral("kgr_timestamp"), QByteArray::number(svgTimestamp));
             } else {
@@ -195,7 +194,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
                 // breaking the previous theme.
                 delete m_imageCache;
                 KSharedDataCache::deleteCache(imageCacheName);
-                m_imageCache = oldCache.take();
+                m_imageCache = oldCache.release();
                 qCDebug(GAMES_LIB) << "Theme change failed: SVG file broken";
                 return false;
             }
@@ -206,9 +205,9 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
     } else // !(m_strategies & KGameRenderer::UseDiskCache) -> no cache is used
     {
         // load SVG file
-        QScopedPointer<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
+        std::unique_ptr<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
         if (renderer->isValid()) {
-            m_rendererPool.setPath(theme->graphicsPath(), renderer.take());
+            m_rendererPool.setPath(theme->graphicsPath(), renderer.release());
         } else {
             qCDebug(GAMES_LIB) << "Theme change failed: SVG file broken";
             return false;
