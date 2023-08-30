@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:55+0000\n"
+"POT-Creation-Date: 2023-08-30 00:43+0000\n"
 "PO-Revision-Date: 2010-09-26 12:44-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -217,188 +217,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgctxt "new game"
 msgid "&New"
 msgstr "新しいゲーム(&N)"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgid "Start a new game."
 msgstr "新しいゲームを開始します。"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgid "Start a new game"
 msgstr "新しいゲームを開始"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "&Load..."
 msgstr "読み込み(&L)..."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "Open a saved game..."
 msgstr "保存したゲームを開く..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Load &Recent"
 msgstr "最近のゲームを読み込み(&R)"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Open a recently saved game..."
 msgstr "最近保存したゲームを開く..."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart &Game"
 msgstr "ゲームを再スタート(&G)"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart the game"
 msgstr "ゲームを再スタート"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "Save the current game"
 msgstr "現在のゲームを保存"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save &As..."
 msgstr "名前を付けて保存(&A)..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save the current game to another file"
 msgstr "現在のゲームを別のファイルに保存"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "&End Game"
 msgstr "ゲームを終了(&E)"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "End the current game"
 msgstr "現在のゲームを終了"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pa&use"
 msgstr "一時停止(&U)"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pause the game"
 msgstr "ゲームを一時停止"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 msgid "Show &High Scores"
 msgstr "ハイスコアを表示(&H)"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 msgid "Show high scores"
 msgstr "ハイスコアを表示"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 msgid "&Clear High Scores"
 msgstr "ハイスコアをクリア(&C)"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 msgid "Clear high scores"
 msgstr "ハイスコアをクリア"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 msgid "Show Statistics"
 msgstr "統計を表示"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 msgid "Show statistics"
 msgstr "統計を表示"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "&Clear Statistics"
 msgstr "統計をクリア(&C)"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "Delete all-time statistics."
 msgstr "これまでのすべての統計を削除します。"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:66
 msgid "&Print..."
 msgstr "印刷(&P)..."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "&Quit"
 msgstr "終了(&Q)"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "Quit the program"
 msgstr "プログラムを終了"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat"
 msgstr "リピート"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat the last move"
 msgstr "最後の移動を繰り返す"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Und&o"
 msgstr "元に戻す(&O)"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Undo the last move"
 msgstr "最後の移動を取り消す"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Re&do"
 msgstr "やり直す(&D)"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Redo the latest move"
 msgstr "最後に取り消した移動をやり直す"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "&Roll Dice"
 msgstr "サイコロを振る(&R)"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "Roll the dice"
 msgstr "サイコロを振る"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:80
 msgid "End Turn"
 msgstr "番を終了"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "&Hint"
 msgstr "ヒント(&H)"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "Give a hint"
 msgstr "ヒントを表示"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "&Demo"
 msgstr "デモ(&D)"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "Play a demo"
 msgstr "デモを再生"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "&Solve"
 msgstr "解決(&S)"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "Solve the game"
 msgstr "ゲームを解く"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:90
 msgid "Choose Game &Type"
 msgstr "ゲームのタイプを選択(&T)"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:92
 msgid "Configure &Carddecks..."
 msgstr "カードデッキを設定(&C)..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:94
 msgid "Configure &High Scores..."
 msgstr "ハイスコアを設定(&H)..."
 

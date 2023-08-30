@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:55+0000\n"
+"POT-Creation-Date: 2023-08-30 00:43+0000\n"
 "PO-Revision-Date: 2012-10-26 22:50+0000\n"
 "Last-Translator: Haris Javoraš <miniprogrammerme@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -209,188 +209,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "od %1"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nova"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgid "Start a new game."
 msgstr "Započnite novu igru."
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgid "Start a new game"
 msgstr "Započni novu igru"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "&Load..."
 msgstr "&Učitaj..."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "Open a saved game..."
 msgstr "Otvori snimljenu igru..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Load &Recent"
 msgstr "Učitaj &skorašnju"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Open a recently saved game..."
 msgstr "Otvori nedavno snimljenu igru..."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart &Game"
 msgstr "Ponovo pokreni &igru"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart the game"
 msgstr "Ponovo pokreni igru"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "&Save"
 msgstr "&Snimi"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "Save the current game"
 msgstr "Snimi tekuću igru"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save &As..."
 msgstr "Snimi &kao..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save the current game to another file"
 msgstr "Snimi tekuću igru u drugu datoteku"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "&End Game"
 msgstr "&Okončaj igru"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "End the current game"
 msgstr "Završi tekuću igru"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pa&use"
 msgstr "&Pauziraj"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pause the game"
 msgstr "Pauziraj igru"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 msgid "Show &High Scores"
 msgstr "Prikaži &najbolje rezultate"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 msgid "Show high scores"
 msgstr "Prikaži najbolje rezultate"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 msgid "&Clear High Scores"
 msgstr "&Izbriši najbolje rezultate"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 msgid "Clear high scores"
 msgstr "Izbriši najbolje rezultate"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 msgid "Show Statistics"
 msgstr "Prikaži statistiku"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 msgid "Show statistics"
 msgstr "Prikaži statistiku"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "&Clear Statistics"
 msgstr "&Izbriši statistiku"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "Delete all-time statistics."
 msgstr "Izbriši cjelokupnu statistiku."
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:66
 msgid "&Print..."
 msgstr "&Štampaj..."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "&Quit"
 msgstr "&Izlaz"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "Quit the program"
 msgstr "Izađi iz programa"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat"
 msgstr "Ponovi"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat the last move"
 msgstr "Ponovi posljednji potez"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Und&o"
 msgstr "P&oništi"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Undo the last move"
 msgstr "Poništi zadnji potez"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Re&do"
 msgstr "&Ponovi"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Redo the latest move"
 msgstr "Vrati posljednji poništeni potez"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "&Roll Dice"
 msgstr "&Baci kockice"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "Roll the dice"
 msgstr "Baci kockice"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:80
 msgid "End Turn"
 msgstr "Završi potez"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "&Hint"
 msgstr "&Trag"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "Give a hint"
 msgstr "Daj savjet"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "&Demo"
 msgstr "&Demo"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "Play a demo"
 msgstr "Pusti demo"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "&Solve"
 msgstr "&Riješi"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "Solve the game"
 msgstr "Riješi igru"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:90
 msgid "Choose Game &Type"
 msgstr "Izaberite &tip igre"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:92
 msgid "Configure &Carddecks..."
 msgstr "Podesi &špilove karata..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:94
 msgid "Configure &High Scores..."
 msgstr "Podesi &najbolje rezultate"
 

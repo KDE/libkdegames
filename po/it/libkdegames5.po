@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:55+0000\n"
+"POT-Creation-Date: 2023-08-30 00:43+0000\n"
 "PO-Revision-Date: 2012-07-23 22:00+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -207,188 +207,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "di %1"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nuova"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgid "Start a new game."
 msgstr "Avvia una nuova partita."
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgid "Start a new game"
 msgstr "Avvia una nuova partita"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "&Load..."
 msgstr "&Carica..."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "Open a saved game..."
 msgstr "Apri una partita salvata..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Load &Recent"
 msgstr "Carica &recente"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Open a recently saved game..."
 msgstr "Apre una delle ultime partite salvate..."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart &Game"
 msgstr "Riavvia &partita"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart the game"
 msgstr "Riavvia la partita"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "&Save"
 msgstr "&Salva"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "Save the current game"
 msgstr "Salva la partita in corso"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save &As..."
 msgstr "Salv&a come..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save the current game to another file"
 msgstr "Salva la partita in corso su un altro file"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "&End Game"
 msgstr "&Fine della partita"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "End the current game"
 msgstr "Fine della partita in corso"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pa&use"
 msgstr "Pa&usa"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pause the game"
 msgstr "Sospendi la partita"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 msgid "Show &High Scores"
 msgstr "Mostra la classi&fica"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 msgid "Show high scores"
 msgstr "Mostra la classifica"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 msgid "&Clear High Scores"
 msgstr "&Cancella la classifica"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 msgid "Clear high scores"
 msgstr "Cancella i punteggi riportati in classifica"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 msgid "Show Statistics"
 msgstr "Mostra statistiche"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 msgid "Show statistics"
 msgstr "Mostra statistiche"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "&Clear Statistics"
 msgstr "Azzera statisti&che"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "Delete all-time statistics."
 msgstr "Cancella tutte le statistiche passate e presenti."
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:66
 msgid "&Print..."
 msgstr "Stam&pa..."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "&Quit"
 msgstr "&Esci"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "Quit the program"
 msgstr "Esce dal programma"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat"
 msgstr "Ripeti"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat the last move"
 msgstr "Ripete l'ultima mossa"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Und&o"
 msgstr "&Annulla"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Undo the last move"
 msgstr "Annulla l'ultima mossa"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Re&do"
 msgstr "Ri&fai"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Redo the latest move"
 msgstr "Rifa l'ultima mossa"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "&Roll Dice"
 msgstr "Lancia i &dadi"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "Roll the dice"
 msgstr "Lancia i dadi"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:80
 msgid "End Turn"
 msgstr "Termina il turno"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "&Hint"
 msgstr "&Suggerimento"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "Give a hint"
 msgstr "Dà un suggerimento"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "&Demo"
 msgstr "&Dimostrazione"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "Play a demo"
 msgstr "Esegue una dimostrazione"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "&Solve"
 msgstr "&Risolvi"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "Solve the game"
 msgstr "Dai la soluzione"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:90
 msgid "Choose Game &Type"
 msgstr "Scegli il &tipo di partita"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:92
 msgid "Configure &Carddecks..."
 msgstr "Configura il mazzo di &carte..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:94
 msgid "Configure &High Scores..."
 msgstr "Configura le classific&he..."
 

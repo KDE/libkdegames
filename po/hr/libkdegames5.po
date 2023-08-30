@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:55+0000\n"
+"POT-Creation-Date: 2023-08-30 00:43+0000\n"
 "PO-Revision-Date: 2009-06-22 16:40+0200\n"
 "Last-Translator: ivan <admin@linuxzasve.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -214,213 +214,213 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nova"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game."
 msgstr "Pokreni mrežnu igru"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game"
 msgstr "Pokreni mrežnu igru"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "&Load..."
 msgstr "&Učitaj …"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "Open a saved game..."
 msgstr "Otvori spremljenu igru …"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Load &Recent"
 msgstr "Učitaj &posljednju"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Open a recently saved game..."
 msgstr "Otvori nedavno spremljenu igru …"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart &Game"
 msgstr "Ponovi &igru"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 #, fuzzy
 #| msgid "Restart &Game"
 msgid "Restart the game"
 msgstr "Ponovi &igru"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 #, fuzzy
 msgid "&Save"
 msgstr "&Riješi"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "Save the current game"
 msgstr "Spremi trenutnu igru"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save &As..."
 msgstr "Spremi &kao …"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save the current game to another file"
 msgstr "Spremi trenutnu igru u drugu datoteku"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "&End Game"
 msgstr "&Završi igru"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "End the current game"
 msgstr "Završi trenutnu igru"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pa&use"
 msgstr "&Pauza"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pause the game"
 msgstr "Pauziraj igru"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show &High Scores"
 msgstr "Prikaži &najbolje rezultate"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show high scores"
 msgstr "Prikaži &najbolje rezultate"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 #, fuzzy
 #| msgid "Highscores"
 msgid "&Clear High Scores"
 msgstr "Najbolji rezultati"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 #, fuzzy
 #| msgid "Highscores"
 msgid "Clear high scores"
 msgstr "Najbolji rezultati"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show Statistics"
 msgstr "Statistike"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show statistics"
 msgstr "Statistike"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 #, fuzzy
 #| msgid "Statistics"
 msgid "&Clear Statistics"
 msgstr "Statistike"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "Delete all-time statistics."
 msgstr "Izbriši svu statistiku"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:66
 msgid "&Print..."
 msgstr "&Ispis …"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "&Quit"
 msgstr "&Napusti"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "Quit the program"
 msgstr "Napusti program"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat"
 msgstr "Ponovi"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat the last move"
 msgstr "Ponovi posljednji potez"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Und&o"
 msgstr "Po&ništi"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Undo the last move"
 msgstr "Poništi posljednji potez"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Re&do"
 msgstr "Po&novi"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Redo the latest move"
 msgstr "Ponovi posljednji potez"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "&Roll Dice"
 msgstr "&Baci kockice"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 #, fuzzy
 #| msgid "&Roll Dice"
 msgid "Roll the dice"
 msgstr "&Baci kockice"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:80
 msgid "End Turn"
 msgstr "Završi potez"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "&Hint"
 msgstr "&Savjet"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "Give a hint"
 msgstr ""
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "&Demo"
 msgstr "&Demo"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 #, fuzzy
 #| msgid "Player Name"
 msgid "Play a demo"
 msgstr "Ime igrača"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "&Solve"
 msgstr "&Riješi"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "Solve the game"
 msgstr "Razriješi igru"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:90
 msgid "Choose Game &Type"
 msgstr "Odaberite &vrstu igre"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:92
 msgid "Configure &Carddecks..."
 msgstr "Konfiguriranje &špilova karata …"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:94
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."

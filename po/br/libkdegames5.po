@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames/libkdegames.pot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:55+0000\n"
+"POT-Creation-Date: 2023-08-30 00:43+0000\n"
 "PO-Revision-Date: 2004-09-20 15:44+0200\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: br <LL@li.org>\n"
@@ -210,210 +210,210 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nevez"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game."
 msgstr "Krouiñ ur c'hoari rouedad"
 
-#: kstandardgameaction.cpp:36
+#: kstandardgameaction.cpp:42
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game"
 msgstr "Krouiñ ur c'hoari rouedad"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "&Load..."
 msgstr "&Kargañ ..."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:44
 msgid "Open a saved game..."
 msgstr "Digeriñ ur c'hoari enrollet ..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Load &Recent"
 msgstr "&Nevezig"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:46
 msgid "Open a recently saved game..."
 msgstr ""
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 msgid "Restart &Game"
 msgstr "Adloc'hañ ar &c'hoari"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:48
 #, fuzzy
 #| msgid "Restart &Game"
 msgid "Restart the game"
 msgstr "Adloc'hañ ar &c'hoari"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "&Save"
 msgstr "&Enrollañ"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:50
 msgid "Save the current game"
 msgstr ""
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save &As..."
 msgstr "Enrollañ e ..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:52
 msgid "Save the current game to another file"
 msgstr ""
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "&End Game"
 msgstr "&Echuiñ an abadenn"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:54
 msgid "End the current game"
 msgstr ""
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pa&use"
 msgstr "Eh&an"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:56
 msgid "Pause the game"
 msgstr ""
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show &High Scores"
 msgstr "Diskouez &merkoù uhelañ"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:58
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show high scores"
 msgstr "Diskouez &merkoù uhelañ"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 #, fuzzy
 #| msgid "Highscores"
 msgid "&Clear High Scores"
 msgstr "Merkoù uhelañ"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:60
 #, fuzzy
 #| msgid "Highscores"
 msgid "Clear high scores"
 msgstr "Merkoù uhelañ"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show Statistics"
 msgstr "Stadegoù"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:62
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show statistics"
 msgstr "Stadegoù"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 #, fuzzy
 #| msgid "Statistics"
 msgid "&Clear Statistics"
 msgstr "Stadegoù"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:64
 msgid "Delete all-time statistics."
 msgstr ""
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:66
 msgid "&Print..."
 msgstr "&Moulañ ..."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "&Quit"
 msgstr "&Kuit"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:68
 msgid "Quit the program"
 msgstr ""
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat"
 msgstr "Adseniñ"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:72
 msgid "Repeat the last move"
 msgstr ""
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Und&o"
 msgstr "&Dizober"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:74
 msgid "Undo the last move"
 msgstr ""
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Re&do"
 msgstr "&Adober"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:76
 msgid "Redo the latest move"
 msgstr ""
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "&Roll Dice"
 msgstr ""
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:78
 msgid "Roll the dice"
 msgstr ""
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:80
 msgid "End Turn"
 msgstr "Echu ganin"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "&Hint"
 msgstr "&Tun"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:82
 msgid "Give a hint"
 msgstr ""
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 msgid "&Demo"
 msgstr ""
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:84
 #, fuzzy
 #| msgid "Player Name"
 msgid "Play a demo"
 msgstr "Anvioù ar c'hoarierien"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "&Solve"
 msgstr ""
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:86
 msgid "Solve the game"
 msgstr ""
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:90
 msgid "Choose Game &Type"
 msgstr "Dibabit seurt ar &c'hoari"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:92
 msgid "Configure &Carddecks..."
 msgstr ""
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:94
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."
