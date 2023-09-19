@@ -1,9 +1,11 @@
-set(corebindingsplugin_QML_INSTALL_DIR ${KDE_INSTALL_QMLDIR}/org/kde/games/core)
-
-add_library(corebindingsplugin SHARED)
+ecm_add_qml_module(corebindingsplugin URI org.kde.games.core)
 
 target_sources(corebindingsplugin PRIVATE
     corebindingsplugin.cpp corebindingsplugin.h
+)
+
+ecm_target_qml_sources(corebindingsplugin VERSION 0.1 SOURCES
+    qml/KGameItem.qml
 )
 
 target_link_libraries(corebindingsplugin
@@ -12,9 +14,4 @@ target_link_libraries(corebindingsplugin
         Qt6::Qml
 )
 
-install(TARGETS corebindingsplugin
-    DESTINATION ${corebindingsplugin_QML_INSTALL_DIR}
-)
-install(DIRECTORY qml/
-    DESTINATION ${corebindingsplugin_QML_INSTALL_DIR}
-)
+ecm_finalize_qml_module(corebindingsplugin)

@@ -1,4 +1,0 @@
-module org.kde.games.core
-plugin corebindingsplugin
-
-KGameItem 0.1 KGameItem.qml

@@ -20,6 +20,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateExportHeader)
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
+include(ECMQmlModule)
 include(FeatureSummary)
 include(CMakePackageConfigHelpers)
 
