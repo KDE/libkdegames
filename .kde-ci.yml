@@ -22,6 +22,7 @@ Dependencies:
   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
     'frameworks/karchive': '@latest-kf6'
+    'frameworks/kcolorscheme': '@latest-kf6'
     'frameworks/kcompletion': '@latest-kf6'
     'frameworks/kconfig': '@latest-kf6'
     'frameworks/kconfigwidgets': '@latest-kf6'

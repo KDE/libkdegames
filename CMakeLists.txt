@@ -59,6 +59,9 @@ find_package(KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     XmlGui
     WidgetsAddons
 )
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(KF6ColorScheme ${KF_MIN_VERSION} REQUIRED COMPONENTS)
+endif()
 
 include(InternalMacros)
 
