@@ -1,27 +1,16 @@
-# - Config file for the KDEGames package
-# It defines the following variables (deprecated, used targets instead)
-#  KDEGAMES_INCLUDE_DIRS
-#  KDEGAMES_INCLUDE_DIR
-#  KDEGAMES_LIBRARY
-
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(Qt@QT_MAJOR_VERSION@Widgets @QT_MIN_VERSION@)
-find_dependency(Qt@QT_MAJOR_VERSION@Xml @QT_MIN_VERSION@)
-find_dependency(Qt@QT_MAJOR_VERSION@Network @QT_MIN_VERSION@)
-find_dependency(Qt@QT_MAJOR_VERSION@QuickWidgets @QT_MIN_VERSION@)
-find_dependency(Qt@QT_MAJOR_VERSION@Qml @QT_MIN_VERSION@)
-find_dependency(KF@KF_MAJOR_VERSION@Config @KF_MIN_VERSION@)
-find_dependency(KF@KF_MAJOR_VERSION@I18n @KF_MIN_VERSION@)
-find_dependency(KF@KF_MAJOR_VERSION@WidgetsAddons @KF_MIN_VERSION@)
-find_dependency(KF@KF_MAJOR_VERSION@ConfigWidgets @KF_MIN_VERSION@)
-find_dependency(KF@KF_MAJOR_VERSION@Completion @KF_MIN_VERSION@)
+find_dependency(Qt6Widgets @QT_MIN_VERSION@)
+find_dependency(Qt6Xml @QT_MIN_VERSION@)
+find_dependency(Qt6Network @QT_MIN_VERSION@)
+find_dependency(Qt6QuickWidgets @QT_MIN_VERSION@)
+find_dependency(Qt6Qml @QT_MIN_VERSION@)
+find_dependency(KF6Config @KF_MIN_VERSION@)
+find_dependency(KF6I18n @KF_MIN_VERSION@)
+find_dependency(KF6WidgetsAddons @KF_MIN_VERSION@)
+find_dependency(KF6ConfigWidgets @KF_MIN_VERSION@)
+find_dependency(KF6Completion @KF_MIN_VERSION@)
 
 include("${CMAKE_CURRENT_LIST_DIR}/@KDEGAMES_CMAKECONFIG_NAME@Targets.cmake")
-
-# set backward-compat variables
-get_target_property(KDEGAMES_INCLUDE_DIR @KDEGAMES_EXPORT_NAME@ INTERFACE_INCLUDE_DIRECTORIES)
-set(KDEGAMES_INCLUDE_DIRS ${KDEGAMES_INCLUDE_DIR})
-set(KDEGAMES_LIBRARY @KDEGAMES_EXPORT_NAME@)

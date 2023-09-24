@@ -1,11 +1,6 @@
 set(kdegamesprivate_INCLUDE_INSTALL_DIR ${kdegames_INCLUDE_INSTALL_DIR}/libkdegamesprivate)
-if (QT_MAJOR_VERSION STREQUAL "5")
-    set(KDEGAMESPRIVATE_OUTPUT_NAME KF5KDEGamesPrivate)
-    set(KDEGAMESPRIVATE_EXPORT_NAME KF5KDEGamesPrivate)
-else()
-    set(KDEGAMESPRIVATE_OUTPUT_NAME KDEGames6Private)
-    set(KDEGAMESPRIVATE_EXPORT_NAME KDEGames6Private)
-endif()
+set(KDEGAMESPRIVATE_OUTPUT_NAME KDEGames6Private)
+set(KDEGAMESPRIVATE_EXPORT_NAME KDEGames6Private)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
@@ -27,17 +22,6 @@ ecm_qt_export_logging_category(
 
 add_library(KDEGamesPrivate SHARED)
 
-if (QT_MAJOR_VERSION STREQUAL "5")
-    set(_generate_export_header_version_args)
-else()
-    # For Qt6/KF6 world transitively include the version header
-    if(ECM_VERSION VERSION_LESS "5.106")
-        set(include_version_header_code "#include <kdegames_version.h>\n")
-        set(_generate_export_header_version_args CUSTOM_CONTENT_FROM_VARIABLE include_version_header_code)
-    else()
-        set(_generate_export_header_version_args USE_VERSION_HEADER VERSION_BASE_NAME KDEGames)
-    endif()
-endif()
 ecm_generate_export_header(KDEGamesPrivate
     EXPORT_FILE_NAME libkdegamesprivate_export.h
     BASE_NAME KDEGAMESPRIVATE
@@ -45,7 +29,8 @@ ecm_generate_export_header(KDEGamesPrivate
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS 3.2 4.9 7.3 7.4
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
-    ${_generate_export_header_version_args}
+    USE_VERSION_HEADER
+    VERSION_BASE_NAME KDEGames
 )
 
 target_sources(KDEGamesPrivate PRIVATE
@@ -79,19 +64,16 @@ ki18n_wrap_ui(KDEGamesPrivate
 target_link_libraries(KDEGamesPrivate
     PUBLIC
         KDEGames
-        KF${KF_MAJOR_VERSION}::Completion
-        Qt${QT_MAJOR_VERSION}::Xml
-        Qt${QT_MAJOR_VERSION}::Network
+        KF6::Completion
+        Qt6::Xml
+        Qt6::Network
     PRIVATE
-        KF${KF_MAJOR_VERSION}::DNSSD
-        KF${KF_MAJOR_VERSION}::NewStuffWidgets
-        KF${KF_MAJOR_VERSION}::Archive
-        KF${KF_MAJOR_VERSION}::XmlGui
+        KF6::DNSSD
+        KF6::NewStuffWidgets
+        KF6::Archive
+        KF6::XmlGui
+        Qt6::Core5Compat
 )
-if (TARGET Qt6::Core5Compat)
-    target_link_libraries(KDEGamesPrivate PRIVATE Qt6::Core5Compat)
-endif()
-
 
 target_include_directories(KDEGamesPrivate
     INTERFACE

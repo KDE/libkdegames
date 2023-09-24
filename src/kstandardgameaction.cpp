@@ -29,11 +29,7 @@ struct KStandardGameActionInfo {
     const KLazyLocalizedString psToolTip;
 };
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #define CTRL(x) QKeyCombination(Qt::CTRL | Qt::Key_##x).toCombined()
-#else
-#define CTRL(x) Qt::CTRL | Qt::Key_##x
-#endif
 
 const KStandardGameActionInfo g_rgActionInfo[] = {
     // clang-format off

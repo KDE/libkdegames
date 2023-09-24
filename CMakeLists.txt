@@ -5,8 +5,8 @@ set(KDEGAMES_SOVERSION 7)
 
 project(libkdegames VERSION ${KDEGAMES_VERSION})
 
-set (QT_MIN_VERSION "5.15.0")
-set (KF_MIN_VERSION "5.98.0")
+set(QT_MIN_VERSION "6.5.0")
+set(KF_MIN_VERSION "5.240.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
@@ -25,27 +25,18 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
 include(FeatureSummary)
 include(CMakePackageConfigHelpers)
-if (QT_MAJOR_VERSION STREQUAL "6")
-    set(QT_REQUIRED_VERSION "6.5.0")
-    set(KF_MIN_VERSION "5.240.0")
-    set(KF_MAJOR_VERSION "6")
-else()
-    set(KF_MAJOR_VERSION "5")
-endif()
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Widgets
     Qml
     Quick
     QuickWidgets
     Svg
     Test
+    Core5Compat
 )
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat)
-endif()
 
-find_package(KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Archive
     Completion
     Config
@@ -103,18 +94,10 @@ set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
 
-if (QT_MAJOR_VERSION STREQUAL "6")
-    ecm_set_disabled_deprecation_versions(
-        QT 6.5
-        KF 5.239
-    )
-else()
-    ecm_set_disabled_deprecation_versions(
-        QT 5.15.2
-        KF 5.103
-        KCOREADDONS 5.73 # KRandomSequence, cannot be removed
-    )
-endif()
+ecm_set_disabled_deprecation_versions(
+    QT 6.5
+    KF 5.239
+)
 
 add_subdirectory(src)
 

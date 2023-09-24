@@ -1,14 +1,7 @@
-if (QT_MAJOR_VERSION STREQUAL "5")
-    set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KDEGames)
-    set(KDEGAMES_CMAKECONFIG_NAME "KF5KDEGames")
-    set(KDEGAMES_OUTPUT_NAME KF5KDEGames)
-    set(KDEGAMES_EXPORT_NAME KF5KDEGames)
-else()
-    set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KDEGames6)
-    set(KDEGAMES_CMAKECONFIG_NAME "KDEGames6")
-    set(KDEGAMES_OUTPUT_NAME KDEGames6)
-    set(KDEGAMES_EXPORT_NAME KDEGames6)
-endif()
+set(kdegames_INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KDEGames6)
+set(KDEGAMES_CMAKECONFIG_NAME "KDEGames6")
+set(KDEGAMES_OUTPUT_NAME KDEGames6)
+set(KDEGAMES_EXPORT_NAME KDEGames6)
 
 add_subdirectory(carddecks)
 add_subdirectory(qml)
@@ -97,17 +90,6 @@ ecm_qt_export_logging_category(
     EXPORT KDEGAMES
 )
 
-if (QT_MAJOR_VERSION STREQUAL "5")
-    set(_generate_export_header_version_args)
-else()
-    # For Qt6/KF6 world transitively include the version header
-    if(ECM_VERSION VERSION_LESS "5.106")
-        set(include_version_header_code "#include <kdegames_version.h>\n")
-        set(_generate_export_header_version_args CUSTOM_CONTENT_FROM_VARIABLE include_version_header_code)
-    else()
-        set(_generate_export_header_version_args USE_VERSION_HEADER)
-    endif()
-endif()
 ecm_generate_export_header(KDEGames
     EXPORT_FILE_NAME libkdegames_export.h
     BASE_NAME KDEGAMES
@@ -115,28 +97,28 @@ ecm_generate_export_header(KDEGames
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS 4.1 7.4 7.5
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
-    ${_generate_export_header_version_args}
+    USE_VERSION_HEADER
 )
 
 target_link_libraries(KDEGames
     PUBLIC
-        Qt${QT_MAJOR_VERSION}::Widgets
-        Qt${QT_MAJOR_VERSION}::QuickWidgets
-        Qt${QT_MAJOR_VERSION}::Qml
-        KF${KF_MAJOR_VERSION}::ConfigCore
-        KF${KF_MAJOR_VERSION}::I18n
-        KF${KF_MAJOR_VERSION}::WidgetsAddons
-        KF${KF_MAJOR_VERSION}::ConfigWidgets
+        KF6::ConfigCore
+        KF6::I18n
+        KF6::WidgetsAddons
+        KF6::ConfigWidgets
+        Qt6::Widgets
+        Qt6::QuickWidgets
+        Qt6::Qml
     PRIVATE
         ${KGAUDIO_LINKLIBS}
-        Qt${QT_MAJOR_VERSION}::Xml
-        Qt${QT_MAJOR_VERSION}::Svg
-        Qt${QT_MAJOR_VERSION}::Quick
-        KF${KF_MAJOR_VERSION}::NewStuffWidgets
-        KF${KF_MAJOR_VERSION}::IconThemes
-        KF${KF_MAJOR_VERSION}::XmlGui
-        KF${KF_MAJOR_VERSION}::GuiAddons
-        KF${KF_MAJOR_VERSION}::Completion
+        KF6::NewStuffWidgets
+        KF6::IconThemes
+        KF6::XmlGui
+        KF6::GuiAddons
+        KF6::Completion
+        Qt6::Xml
+        Qt6::Svg
+        Qt6::Quick
 )
 
 target_include_directories(KDEGames
