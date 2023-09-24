@@ -139,14 +139,6 @@ KScoreDialog::~KScoreDialog()
     delete d->highscoreObject;
 }
 
-#if KDEGAMES_BUILD_DEPRECATED_SINCE(4, 1)
-void KScoreDialog::setConfigGroup(const QString &group) // DEPRECATED!
-{
-    d->configGroup = group.toUtf8();
-    d->loaded = false;
-}
-#endif
-
 void KScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &group)
 {
     d->configGroup = group.first; // untranslated string

@@ -16,6 +16,8 @@
 #include <QFont>
 #include <QSharedData>
 
+Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
+
 class KChatBaseMessagePrivate : public QSharedData
 {
 public:

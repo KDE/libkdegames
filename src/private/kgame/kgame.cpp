@@ -18,9 +18,6 @@
 #include "kplayer.h"
 // KF
 #include <KLocalizedString>
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3) && KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
-#include <KRandomSequence>
-#endif
 // Qt
 #include <QBuffer>
 #include <QFile>
@@ -31,12 +28,6 @@
 #include <cstdio>
 
 #define KGAME_LOAD_COOKIE 4210
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3) && KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
-#define BUILD_RANDOM_API 1
-#else
-#define BUILD_RANDOM_API 0
-#endif
 
 Q_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME, "org.kde.games.private.kgame", QtWarningMsg)
 
@@ -54,9 +45,6 @@ public:
 
     int mUniquePlayerNumber;
     QQueue<KPlayer *> mAddPlayerList; // this is a list of to-be-added players. See addPlayer() docu
-#if BUILD_RANDOM_API
-    KRandomSequence *mRandom;
-#endif
     KGame::GamePolicy mPolicy;
     KGameSequence *mGameSequence;
 
@@ -90,14 +78,6 @@ KGame::KGame(int cookie, QObject *parent)
     d->mGameStatus.registerData(KGamePropertyBase::IdGameStatus, this, i18n("GameStatus"));
     d->mGameStatus.setLocal(Init);
     // d->mUniquePlayerNumber = 0;
-#if BUILD_RANDOM_API
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
-    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
-    d->mRandom = new KRandomSequence;
-    QT_WARNING_POP
-    d->mRandom->setSeed(0);
-#endif
 
     connect(this, &KGame::signalClientConnected, this, &KGame::slotClientConnected);
     connect(this, &KGame::signalClientDisconnected, this, &KGame::slotClientDisconnected);
@@ -118,9 +98,6 @@ KGame::~KGame()
     // Debug();
     reset();
     delete d->mGameSequence;
-#if BUILD_RANDOM_API
-    delete d->mRandom;
-#endif
     delete d;
     qCDebug(GAMES_PRIVATE_KGAME) << "done";
 }
@@ -201,12 +178,6 @@ bool KGame::loadgame(QDataStream &stream, bool network, bool resetgame)
     if (gameSequence()) {
         gameSequence()->setCurrentPlayer(nullptr); // TODO !!!
     }
-
-#if BUILD_RANDOM_API
-    int newseed;
-    stream >> newseed;
-    d->mRandom->setSeed(newseed);
-#endif
 
     // Switch off the direct emitting of signals while
     // loading properties. This can cause inconsistencies
@@ -296,11 +267,6 @@ bool KGame::savegame(QDataStream &stream, bool /*network*/, bool saveplayers)
     uint p = (uint)policy();
     stream << p;
     stream << d->mUniquePlayerNumber;
-#if BUILD_RANDOM_API
-    int newseed = (int)d->mRandom->getLong(65535);
-    stream << newseed;
-    d->mRandom->setSeed(newseed);
-#endif
 
     // Properties
     dataHandler()->save(stream);
@@ -688,13 +654,6 @@ const KGame::KGamePlayerList *KGame::playerList() const
     return &d->mPlayerList;
 }
 
-#if BUILD_RANDOM_API
-KRandomSequence *KGame::random() const
-{
-    return d->mRandom;
-}
-#endif
-
 bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
     if (!player) {
@@ -746,11 +705,7 @@ KPlayer *KGame::playerInputFinished(KPlayer *player)
     if (gameSequence()) {
         gameSequence()->setCurrentPlayer(player);
     }
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-    gameOver = checkGameOver(player);
-#else
     gameOver = gameSequence()->checkGameOver(player);
-#endif
     if (gameOver != 0) {
         player->setTurn(false);
         setGameStatus(End);
@@ -758,29 +713,14 @@ KPlayer *KGame::playerInputFinished(KPlayer *player)
     } else if (!player->asyncInput()) {
         player->setTurn(false); // in turn based games we have to switch off input now
         if (gameSequence()) {
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-            QTimer::singleShot(0, this, &KGame::prepareNext);
-#else
             KGameSequence *gameSequence = this->gameSequence();
             QTimer::singleShot(0, gameSequence, [gameSequence]() {
                 gameSequence->nextPlayer(gameSequence->currentPlayer());
             });
-#endif
         }
     }
     return player;
 }
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-// Per default we do not do anything
-int KGame::checkGameOver(KPlayer *player)
-{
-    if (gameSequence()) {
-        return gameSequence()->checkGameOver(player);
-    }
-    return 0;
-}
-#endif
 
 void KGame::setGameSequence(KGameSequence *sequence)
 {
@@ -795,26 +735,6 @@ KGameSequence *KGame::gameSequence() const
 {
     return d->mGameSequence;
 }
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-void KGame::prepareNext()
-{
-    if (gameSequence()) {
-        // we don't call gameSequence->nextPlayer() to keep old code working
-        nextPlayer(gameSequence()->currentPlayer());
-    }
-}
-#endif
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-KPlayer *KGame::nextPlayer(KPlayer *last, bool exclusive)
-{
-    if (gameSequence()) {
-        return gameSequence()->nextPlayer(last, exclusive);
-    }
-    return nullptr;
-}
-#endif
 
 void KGame::setGameStatus(int status)
 {
@@ -954,16 +874,6 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
                                      << ": Got IdGameConnected for client " << cid << "we are =" << gameId();
         Q_EMIT signalClientJoinedGame(cid, this);
     } break;
-
-#if BUILD_RANDOM_API
-    case KGameMessage::IdSyncRandom: // Master forces a new random seed on us
-    {
-        int newseed;
-        stream >> newseed;
-        qCDebug(GAMES_PRIVATE_KGAME) << "CLIENT: setting random seed to" << newseed;
-        d->mRandom->setSeed(newseed);
-    } break;
-#endif
 
     case KGameMessage::IdDisconnect: {
         // if we disconnect we *always* start a local game.
@@ -1157,16 +1067,6 @@ void KGame::setupGame(quint32 sender)
 
     sendSystemMessage(streamS, KGameMessage::IdSetupGameContinue, sender);
 }
-
-#if BUILD_RANDOM_API
-// unused by KGame
-void KGame::syncRandom()
-{
-    int newseed = (int)d->mRandom->getLong(65535);
-    sendSystemMessage(newseed, KGameMessage::IdSyncRandom); // Broadcast
-    d->mRandom->setSeed(newseed);
-}
-#endif
 
 void KGame::Debug()
 {

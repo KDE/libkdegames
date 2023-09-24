@@ -12,8 +12,6 @@
 // own
 #include "kgamenetwork.h"
 #include "libkdegamesprivate_export.h"
-// KF
-#include <kcoreaddons_export.h> // for KCOREADDONS_ENABLE_DEPRECATED_SINCE
 // Qt
 #include <QDataStream>
 #include <QList>
@@ -21,10 +19,6 @@
 #include <QString>
 
 Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
-
-#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
-class KRandomSequence;
-#endif
 
 class KPlayer;
 class KGamePropertyBase;
@@ -129,19 +123,6 @@ public:
      * The same as @ref inactivePlayerList but returns a const pointer.
      */
     const KGamePlayerList *inactivePlayerList() const;
-
-#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 75)
-    /**
-     * Returns a pointer to the game's KRandomSequence. This sequence is
-     * identical for all network players!
-     * @return KRandomSequence pointer
-     * @deprecated Since 7.3, no known users. Any replacement should use QRandomGenerator.
-     */
-    KDEGAMESPRIVATE_DEPRECATED_VERSION(7, 3, "No known users. Any replacement should use QRandomGenerator.")
-    KRandomSequence *random() const;
-#endif
-#endif
 
     /**
      * @return The KGameSequence object that is currently in use.
@@ -256,14 +237,6 @@ public:
      * @return number of players
      */
     uint playerCount() const;
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-    /**
-     * @deprecated Since 3.2, use KGameSequence::nextPlayer() instead
-     */
-    KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence::nextPlayer()")
-    virtual KPlayer *nextPlayer(KPlayer *last, bool exclusive = true);
-#endif
 
     // Input events
     /**
@@ -462,14 +435,6 @@ protected Q_SLOTS:
      * Called by KGamePropertyHandler only! Internal function!
      */
     void emitSignal(KGamePropertyBase *me);
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-    /**
-     * @deprecated Since 3.2, use KGameSequence::nextPlayer() & KGameSequence::currentPlayer() instead
-     */
-    KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence::nextPlayer() & KGameSequence::currentPlayer()")
-    virtual void prepareNext();
-#endif
 
     /**
      * Calls negotiateNetworkGame()
@@ -822,29 +787,8 @@ protected:
      */
     virtual void negotiateNetworkGame(quint32 clientID);
 
-#if KDEGAMESPRIVATE_ENABLE_DEPRECATED_SINCE(7, 3)
-    /**
-     * synchronize the random numbers with all network clients
-     * not used by KGame - if it should be kept then as public method
-     * @deprecated Since 7.3, no known users.
-     */
-    KDEGAMESPRIVATE_DEPRECATED_VERSION(7, 3, "No known users")
-    void syncRandom();
-#endif
-
     void deletePlayers();
     void deleteInactivePlayers();
-
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(3, 2)
-    /**
-     * @param player the player who made the last move
-     * @return anything else but 0 is considered as game over
-     *
-     * @deprecated Since 3.2, use KGameSequence instead.
-     */
-    KDEGAMESPRIVATE_DEPRECATED_VERSION(3, 2, "Use KGameSequence")
-    virtual int checkGameOver(KPlayer *player);
-#endif
 
     /**
      * Load a saved game, from file OR network. Internal.

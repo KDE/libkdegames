@@ -26,7 +26,6 @@ target_sources(KDEGames PRIVATE
     kgamerenderedobjectitem.cpp kgamerenderedobjectitem.h
     kgamerendererclient.cpp kgamerendererclient.h
     kgamerenderer.cpp kgamerenderer.h
-    kgdeclarativeview.cpp kgdeclarativeview.h
     kgimageprovider.cpp
     kgdifficulty.cpp kgdifficulty.h
     kgtheme.cpp kgtheme.h
@@ -43,7 +42,6 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
         KGameRenderedObjectItem
         KGameRenderer
         KGameRendererClient
-        KgDeclarativeView
         KgDifficulty,KgDifficultyLevel
         KgTheme
         KgThemeProvider
@@ -95,7 +93,7 @@ ecm_generate_export_header(KDEGames
     BASE_NAME KDEGAMES
     VERSION ${KDEGAMES_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 4.1 7.4 7.5
+    DEPRECATION_VERSIONS
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
     USE_VERSION_HEADER
 )

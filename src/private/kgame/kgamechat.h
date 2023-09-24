@@ -204,13 +204,6 @@ private:
 
 private:
     Q_DECLARE_PRIVATE_D(KChatBase::d, KGameChat)
-#if KDEGAMESPRIVATE_BUILD_DEPRECATED_SINCE(7, 3)
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_CLANG("-Wunused-private-field")
-    // Unused, kept for ABI compatibility
-    const void *__kdegames_d_do_not_use;
-    QT_WARNING_POP
-#endif
 };
 
 #endif

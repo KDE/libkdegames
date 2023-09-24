@@ -156,14 +156,6 @@ QString KgThemeProvider::currentThemeName() const
     return currentTheme()->name();
 }
 
-#if KDEGAMES_BUILD_DEPRECATED_SINCE(7, 4)
-void KgThemeProvider::discoverThemes(const QByteArray &resource, const QString &directory, const QString &defaultThemeName, const QMetaObject *themeClass)
-{
-    Q_UNUSED(resource);
-    discoverThemes(directory, defaultThemeName, themeClass);
-}
-#endif
-
 void KgThemeProvider::discoverThemes(const QString &directory, const QString &defaultThemeName, const QMetaObject *themeClass)
 {
     d->m_dtDirectory = directory;

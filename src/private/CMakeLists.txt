@@ -27,7 +27,7 @@ ecm_generate_export_header(KDEGamesPrivate
     BASE_NAME KDEGAMESPRIVATE
     VERSION ${KDEGAMES_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 3.2 4.9 7.3 7.4
+    DEPRECATION_VERSIONS
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
     USE_VERSION_HEADER
     VERSION_BASE_NAME KDEGames
@@ -51,14 +51,7 @@ target_sources(KDEGamesPrivate PRIVATE
     kgame/kmessageserver.cpp
     kgame/kplayer.cpp
     kgamecanvas.cpp
-    kgamedifficulty.cpp
     kgamesvgdocument.cpp
-    kgametheme.cpp
-    kgamethemeselector.cpp
-)
-
-ki18n_wrap_ui(KDEGamesPrivate
-    kgamethemeselector.ui
 )
 
 target_link_libraries(KDEGamesPrivate
@@ -100,10 +93,7 @@ install(FILES
     kchatbaseitemdelegate.h
     kchatbasemodel.h
     kgamecanvas.h
-    kgamedifficulty.h
     kgamesvgdocument.h
-    kgametheme.h
-    kgamethemeselector.h
     DESTINATION ${kdegamesprivate_INCLUDE_INSTALL_DIR}
     COMPONENT Devel
 )
