@@ -9,7 +9,7 @@
 #include "kscoredialog.h"
 
 // own
-#include "../kgdifficulty.h"
+#include "../kgamedifficulty.h"
 #include "khighscore.h"
 #include <kdegames_highscore_logging.h>
 // KF
@@ -163,19 +163,19 @@ void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString> 
     }
 }
 
-void KScoreDialog::initFromDifficulty(const KgDifficulty *diff, bool doSetConfigGroup)
+void KScoreDialog::initFromDifficulty(const KGameDifficulty *diff, bool doSetConfigGroup)
 {
     QMap<QByteArray, QString> localizedLevelStrings;
     QMap<int, QByteArray> levelWeights;
     const auto levels = diff->levels();
-    for (const KgDifficultyLevel *level : levels) {
+    for (const KGameDifficultyLevel *level : levels) {
         localizedLevelStrings.insert(level->key(), level->title());
         levelWeights.insert(level->hardness(), level->key());
     }
     addLocalizedConfigGroupNames(localizedLevelStrings);
     setConfigGroupWeights(levelWeights);
     if (doSetConfigGroup) {
-        const KgDifficultyLevel *curLvl = diff->currentLevel();
+        const KGameDifficultyLevel *curLvl = diff->currentLevel();
         setConfigGroup(qMakePair(curLvl->key(), curLvl->title()));
     }
 }

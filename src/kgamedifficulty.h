@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGDIFFICULTY_H
-#define KGDIFFICULTY_H
+#ifndef KGAMEDIFFICULTY_H
+#define KGAMEDIFFICULTY_H
 
 // own
 #include "kdegames_export.h"
@@ -18,13 +18,13 @@
 #include <memory>
 
 /**
- * @class KgDifficultyLevel kgdifficulty.h <KgDifficultyLevel>
- * @see KgDifficulty
+ * @class KGameDifficultyLevel kgamedifficulty.h <KGameDifficultyLevel>
+ * @see KGameDifficulty
  */
-class KDEGAMES_EXPORT KgDifficultyLevel : public QObject
+class KDEGAMES_EXPORT KGameDifficultyLevel : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(KgDifficultyLevel)
+    Q_DISABLE_COPY(KGameDifficultyLevel)
     Q_PROPERTY(bool default READ isDefault)
     Q_PROPERTY(int hardness READ hardness)
     Q_PROPERTY(QByteArray key READ key)
@@ -46,9 +46,9 @@ public:
     Q_ENUM(StandardLevel)
 
     /// Refer to the getters' documentation for details on the params.
-    KgDifficultyLevel(int hardness, const QByteArray &key, const QString &title, bool isDefault = false);
-    explicit KgDifficultyLevel(StandardLevel level, bool isDefault = false);
-    ~KgDifficultyLevel() override;
+    KGameDifficultyLevel(int hardness, const QByteArray &key, const QString &title, bool isDefault = false);
+    explicit KGameDifficultyLevel(StandardLevel level, bool isDefault = false);
+    ~KGameDifficultyLevel() override;
 
     /// @return whether this level is the default level when no selection has
     ///        been stored (e.g. on first startup)
@@ -63,71 +63,78 @@ public:
     /// @return a @b localized title for this level
     QString title() const;
     /// @return the standard level which was used to create this level, or
-    ///        KgDifficultyLevel::Custom for custom levels
+    ///        KGameDifficultyLevel::Custom for custom levels
     StandardLevel standardLevel() const;
 
 private:
-    std::unique_ptr<class KgDifficultyLevelPrivate> const d;
+    std::unique_ptr<class KGameDifficultyLevelPrivate> const d;
 };
 
 /**
- * @class KgDifficulty kgdifficulty.h <KgDifficulty>
- * @brief KgDifficulty manages difficulty levels of a game in a standard way.
+ * @class KGameDifficulty kgamedifficulty.h <KGameDifficulty>
+ * @brief KGameDifficulty manages difficulty levels of a game in a standard way.
  *
  * The difficulty can be a type of game (like in KMines: small or big field) or
  * the AI skills (like in Bovo: how deep should the computer search to find the
  * best move) or a combination of both of them. On the user point of view, it's
  * not really different: either is the game easy or hard to play.
  *
- * KgDifficulty contains a list of KgDifficultyLevel instances. One of
+ * KGameDifficulty contains a list of KGameDifficultyLevel instances. One of
  * these levels is selected; this selection will be recorded when the
  * application is closed. A set of standard difficulty levels is provided by
- * KgDifficultyLevel, but custom levels can be defined at the same time.
+ * KGameDifficultyLevel, but custom levels can be defined at the same time.
  */
-class KDEGAMES_EXPORT KgDifficulty : public QObject
+class KDEGAMES_EXPORT KGameDifficulty : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(KgDifficulty)
+    Q_DISABLE_COPY(KGameDifficulty)
     // Use currentLevel in game logic and selectedLevel in level selection UI.
-    Q_PROPERTY(const KgDifficultyLevel *currentLevel READ currentLevel WRITE select NOTIFY currentLevelChanged)
-    Q_PROPERTY(const KgDifficultyLevel *selectedLevel READ currentLevel WRITE select NOTIFY selectedLevelChanged)
+    Q_PROPERTY(const KGameDifficultyLevel *currentLevel READ currentLevel WRITE select NOTIFY currentLevelChanged)
+    Q_PROPERTY(const KGameDifficultyLevel *selectedLevel READ currentLevel WRITE select NOTIFY selectedLevelChanged)
     Q_PROPERTY(bool editable READ isEditable WRITE setEditable NOTIFY editableChanged)
     Q_PROPERTY(bool gameRunning READ isGameRunning WRITE setGameRunning NOTIFY gameRunningChanged)
 
 public:
-    explicit KgDifficulty(QObject *parent = nullptr);
+    /// @return a singleton instance of KGameDifficulty
+    static KGameDifficulty *global();
+    /// A shortcut for KGameDifficulty::global()->currentLevel()->standardLevel().
+    static KGameDifficultyLevel::StandardLevel globalLevel();
+
+public:
+    explicit KGameDifficulty(QObject *parent = nullptr);
     /// Destroys this instance and all DifficultyLevel instances in it.
-    ~KgDifficulty() override;
+    ~KGameDifficulty() override;
 
     /// Adds a difficulty level to this instance. This will not affect the
     /// currentLevel() if there is one.
-    void addLevel(KgDifficultyLevel *level);
-    /// A shortcut for addLevel(new KgDifficultyLevel(@a level)).
-    void addStandardLevel(KgDifficultyLevel::StandardLevel level, bool isDefault = false);
+    void addLevel(KGameDifficultyLevel *level);
+    /// A shortcut for addLevel(new KGameDifficultyLevel(@a level)).
+    void addStandardLevel(KGameDifficultyLevel::StandardLevel level, bool isDefault = false);
     /// This convenience method adds a range of standard levels to this
     /// instance (including the boundaries). For example:
     /// @code
     /// difficulty.addStandardLevelRange(
-    ///     KgDifficultyLevel::Easy,
-    ///     KgDifficultyLevel::VeryHard
+    ///     KGameDifficultyLevel::Easy,
+    ///     KGameDifficultyLevel::VeryHard
     ///);
     /// @endcode
     /// This adds the levels "Easy", "Medium", "Hard" and "Very hard".
-    void addStandardLevelRange(KgDifficultyLevel::StandardLevel from, KgDifficultyLevel::StandardLevel to);
+    void addStandardLevelRange(KGameDifficultyLevel::StandardLevel from, KGameDifficultyLevel::StandardLevel to);
     /// @overload
     /// This overload allows to specify a @a defaultLevel.
-    void addStandardLevelRange(KgDifficultyLevel::StandardLevel from, KgDifficultyLevel::StandardLevel to, KgDifficultyLevel::StandardLevel defaultLevel);
+    void
+    addStandardLevelRange(KGameDifficultyLevel::StandardLevel from, KGameDifficultyLevel::StandardLevel to, KGameDifficultyLevel::StandardLevel defaultLevel);
 
     /// @return a list of all difficulty levels, sorted by hardness
-    QList<const KgDifficultyLevel *> levels() const;
+    QList<const KGameDifficultyLevel *> levels() const;
     /// @return the current difficulty level
     ///
-    /// After the KgDifficulty object has been created, the current
+    /// After the KGameDifficulty object has been created, the current
     /// difficulty level will not be determined until this method is called
     /// for the first time. This allows the application developer to set up
-    /// the difficulty levels before KgDifficulty retrieves the last
+    /// the difficulty levels before KGameDifficulty retrieves the last
     /// selected level from the configuration file.
-    const KgDifficultyLevel *currentLevel() const;
+    const KGameDifficultyLevel *currentLevel() const;
 
     /// @return whether the difficulty level selection may be edited
     bool isEditable() const;
@@ -136,7 +143,7 @@ public:
     /// Set whether the difficulty level selection may be edited. The
     /// default value is true.
     void setEditable(bool editable);
-    /// KgDifficulty has optional protection against changing the
+    /// KGameDifficulty has optional protection against changing the
     /// difficulty level while a game is running. If setGameRunning(true) has
     /// been called, and select() is called to select a new difficulty level,
     /// the user will be asked for confirmation.
@@ -147,57 +154,42 @@ Q_SIGNALS:
     /// Emitted when a running game has been marked or unmarked. @see setGameRunning
     void gameRunningChanged(bool gameRunning);
     /// Emitted when a new difficulty level has been selected.
-    void currentLevelChanged(const KgDifficultyLevel *level);
+    void currentLevelChanged(const KGameDifficultyLevel *level);
     /// Emitted after every call to select(), even when the user has rejected
     /// the change. This is useful to reset a difficulty level selection UI
     /// after a rejected change.
-    void selectedLevelChanged(const KgDifficultyLevel *level);
+    void selectedLevelChanged(const KGameDifficultyLevel *level);
 public Q_SLOTS:
     /// Select a new difficulty level. The given level must already have been
     /// added to this instance.
     /// @note This does nothing if isEditable() is false. If a game is
     /// running (according to setGameRunning()), the user will be asked for
     /// confirmation before the new difficulty level is selected.
-    void select(const KgDifficultyLevel *level);
+    void select(const KGameDifficultyLevel *level);
 
 private:
-    std::unique_ptr<class KgDifficultyPrivate> const d;
+    std::unique_ptr<class KGameDifficultyPrivate> const d;
 };
 
-Q_DECLARE_METATYPE(const KgDifficultyLevel *)
-
-/**
- * @namespace Kg
- *
- * The namespace for methods to access the KgDifficulty singleton.
- *
- * @see KgDifficulty
- */
-namespace Kg
-{
-/// @return a singleton instance of KgDifficulty
-KDEGAMES_EXPORT KgDifficulty *difficulty();
-/// A shortcut for Kg::difficulty()->currentLevel()->standardLevel().
-KDEGAMES_EXPORT KgDifficultyLevel::StandardLevel difficultyLevel();
-}
+Q_DECLARE_METATYPE(const KGameDifficultyLevel *)
 
 class KXmlGuiWindow;
 
 /**
- * @namespace KgDifficultyGUI
+ * @namespace KGameDifficultyGUI
  *
- * The namespace for methods to integrate KgDifficulty into the UI.
+ * The namespace for methods to integrate KGameDifficulty into the UI.
  *
- * @see KgDifficulty
+ * @see KGameDifficulty
  */
 // TODO KDE5: move this into a separate QtWidgets support library
-namespace KgDifficultyGUI
+namespace KGameDifficultyGUI
 {
 /// Install standard GUI components for the manipulation of the given
-/// KgDifficulty instance in the given @a window.
+/// KGameDifficulty instance in the given @a window.
 ///
-/// Without a second parameter, the Kg::difficulty() singleton is used.
-KDEGAMES_EXPORT void init(KXmlGuiWindow *window, KgDifficulty *difficulty = nullptr);
+/// Without a second parameter, the KGameDifficulty::global() singleton is used.
+KDEGAMES_EXPORT void init(KXmlGuiWindow *window, KGameDifficulty *difficulty = nullptr);
 }
 
-#endif // KGDIFFICULTY_H
+#endif // KGAMEDIFFICULTY_H

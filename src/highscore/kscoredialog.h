@@ -17,7 +17,7 @@
 // Std
 #include <memory>
 
-class KgDifficulty;
+class KGameDifficulty;
 
 /**
  * \class KScoreDialog kscoredialog.h <KScoreDialog>
@@ -233,7 +233,7 @@ public:
      * setConfigGroup(KGameDifficulty::localizedLevelString());
      * @endcode
      */
-    void initFromDifficulty(const KgDifficulty *difficulty, bool setConfigGroup = true);
+    void initFromDifficulty(const KGameDifficulty *difficulty, bool setConfigGroup = true);
 
     /// Display the dialog as non-modal
     virtual void show();
