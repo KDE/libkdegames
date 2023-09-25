@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "kgthemeselector.h"
-#include "kgthemeselector_p.h"
+#include "kgamethemeselector.h"
+#include "kgamethemeselector_p.h"
 
 // KF
 #include <KLocalizedString>
@@ -32,21 +32,21 @@ const int Padding = 6;
 const QSize ThumbnailBaseSize(64, 64);
 }
 
-// BEGIN KgThemeSelector
+// BEGIN KGameThemeSelector
 
-class KgThemeSelectorPrivate
+class KGameThemeSelectorPrivate
 {
 public:
-    KgThemeSelector *q;
-    KgThemeProvider *m_provider;
-    KgThemeSelector::Options m_options;
+    KGameThemeSelector *q;
+    KGameThemeProvider *m_provider;
+    KGameThemeSelector::Options m_options;
     QListWidget *m_list;
     KNSWidgets::Button *m_knsButton;
     QString m_configFileName;
 
     void fillList();
 
-    KgThemeSelectorPrivate(KgThemeProvider *provider, KgThemeSelector::Options options, KgThemeSelector *q)
+    KGameThemeSelectorPrivate(KGameThemeProvider *provider, KGameThemeSelector::Options options, KGameThemeSelector *q)
         : q(q)
         , m_provider(provider)
         , m_options(options)
@@ -54,13 +54,13 @@ public:
     {
     }
 
-    void _k_updateListSelection(const KgTheme *theme);
+    void _k_updateListSelection(const KGameTheme *theme);
     void _k_updateProviderSelection();
 };
 
-KgThemeSelector::KgThemeSelector(KgThemeProvider *provider, Options options, QWidget *parent)
+KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options options, QWidget *parent)
     : QWidget(parent)
-    , d(new KgThemeSelectorPrivate(provider, options, this))
+    , d(new KGameThemeSelectorPrivate(provider, options, this))
 {
     d->m_list = new QListWidget(this);
     d->m_list->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -69,7 +69,7 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider *provider, Options options, QWi
     d->fillList();
 
     // setup appearance of the theme list
-    KgThemeDelegate *delegate = new KgThemeDelegate(d->m_list);
+    KGameThemeDelegate *delegate = new KGameThemeDelegate(d->m_list);
     QScreen *screen = QWidget::screen();
     QSize screenSize = screen->availableSize();
     if (screenSize.width() < 650 || screenSize.height() < 650) {
@@ -87,7 +87,7 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider *provider, Options options, QWi
     }
 
     // monitor change selection in both directions
-    connect(d->m_provider, &KgThemeProvider::currentThemeChanged, this, [this](const KgTheme *theme) {
+    connect(d->m_provider, &KGameThemeProvider::currentThemeChanged, this, [this](const KGameTheme *theme) {
         d->_k_updateListSelection(theme);
     });
     connect(d->m_list, &QListWidget::itemSelectionChanged, this, [this]() {
@@ -116,33 +116,33 @@ KgThemeSelector::KgThemeSelector(KgThemeProvider *provider, Options options, QWi
     }
 }
 
-void KgThemeSelector::setNewStuffConfigFileName(const QString &configName)
+void KGameThemeSelector::setNewStuffConfigFileName(const QString &configName)
 {
     d->m_configFileName = configName;
 }
 
-KgThemeSelector::~KgThemeSelector() = default;
+KGameThemeSelector::~KGameThemeSelector() = default;
 
-void KgThemeSelectorPrivate::fillList()
+void KGameThemeSelectorPrivate::fillList()
 {
     m_list->clear();
     const auto themes = m_provider->themes();
-    for (const KgTheme *theme : themes) {
+    for (const KGameTheme *theme : themes) {
         QListWidgetItem *item = new QListWidgetItem(theme->name(), m_list);
         item->setData(Qt::DecorationRole, m_provider->generatePreview(theme, Metrics::ThumbnailBaseSize));
-        item->setData(KgThemeDelegate::DescriptionRole, theme->description());
-        item->setData(KgThemeDelegate::AuthorRole, theme->author());
-        item->setData(KgThemeDelegate::AuthorEmailRole, theme->authorEmail());
-        item->setData(KgThemeDelegate::IdRole, theme->identifier());
+        item->setData(KGameThemeDelegate::DescriptionRole, theme->description());
+        item->setData(KGameThemeDelegate::AuthorRole, theme->author());
+        item->setData(KGameThemeDelegate::AuthorEmailRole, theme->authorEmail());
+        item->setData(KGameThemeDelegate::IdRole, theme->identifier());
     }
     _k_updateListSelection(m_provider->currentTheme());
 }
 
-void KgThemeSelectorPrivate::_k_updateListSelection(const KgTheme *theme)
+void KGameThemeSelectorPrivate::_k_updateListSelection(const KGameTheme *theme)
 {
     for (int idx = 0; idx < m_list->count(); ++idx) {
         QListWidgetItem *item = m_list->item(idx);
-        const QByteArray thisId = item->data(KgThemeDelegate::IdRole).toByteArray();
+        const QByteArray thisId = item->data(KGameThemeDelegate::IdRole).toByteArray();
         if (thisId == theme->identifier()) {
             m_list->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
             return;
@@ -154,26 +154,26 @@ void KgThemeSelectorPrivate::_k_updateListSelection(const KgTheme *theme)
     }
 }
 
-void KgThemeSelectorPrivate::_k_updateProviderSelection()
+void KGameThemeSelectorPrivate::_k_updateProviderSelection()
 {
     const QListWidgetItem *selItem = m_list->selectedItems().value(0);
     if (!selItem) {
         return;
     }
-    const QByteArray selId = selItem->data(KgThemeDelegate::IdRole).toByteArray();
+    const QByteArray selId = selItem->data(KGameThemeDelegate::IdRole).toByteArray();
     // select the theme with this identifier
     const auto themes = m_provider->themes();
-    for (const KgTheme *theme : themes) {
+    for (const KGameTheme *theme : themes) {
         if (theme->identifier() == selId) {
             m_provider->setCurrentTheme(theme);
         }
     }
 }
 
-class Q_DECL_HIDDEN KgThemeSelector::Dialog : public QDialog
+class Q_DECL_HIDDEN KGameThemeSelector::Dialog : public QDialog
 {
 public:
-    Dialog(KgThemeSelector *sel, const QString &caption)
+    Dialog(KGameThemeSelector *sel, const QString &caption)
         : mSelector(sel)
     {
         QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -193,10 +193,10 @@ public:
             buttonBox->addButton(QDialogButtonBox::Close);
 
             connect(stuff, &QAbstractButton::clicked, btn, &QAbstractButton::clicked);
-            connect(buttonBox, &QDialogButtonBox::rejected, this, &KgThemeSelector::Dialog::reject);
+            connect(buttonBox, &QDialogButtonBox::rejected, this, &KGameThemeSelector::Dialog::reject);
         } else {
             buttonBox->setStandardButtons(QDialogButtonBox::Close);
-            connect(buttonBox, &QDialogButtonBox::rejected, this, &KgThemeSelector::Dialog::reject);
+            connect(buttonBox, &QDialogButtonBox::rejected, this, &KGameThemeSelector::Dialog::reject);
         }
         // window caption
         if (caption.isEmpty()) {
@@ -213,7 +213,7 @@ protected:
     void closeEvent(QCloseEvent *event) override
     {
         event->accept();
-        // delete myself, but *not* the KgThemeSelector
+        // delete myself, but *not* the KGameThemeSelector
         mSelector->setParent(nullptr);
         deleteLater();
         // restore the KNS button
@@ -223,20 +223,20 @@ protected:
     }
 
 private:
-    KgThemeSelector *mSelector;
+    KGameThemeSelector *mSelector;
 };
 
-void KgThemeSelector::showAsDialog(const QString &caption)
+void KGameThemeSelector::showAsDialog(const QString &caption)
 {
     if (!isVisible()) {
-        new KgThemeSelector::Dialog(this, caption);
+        new KGameThemeSelector::Dialog(this, caption);
     }
 }
 
-// END KgThemeSelector
-// BEGIN KgThemeDelegate
+// END KGameThemeSelector
+// BEGIN KGameThemeDelegate
 
-KgThemeDelegate::KgThemeDelegate(QObject *parent)
+KGameThemeDelegate::KGameThemeDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
     QAbstractItemView *view = qobject_cast<QAbstractItemView *>(parent);
@@ -244,7 +244,7 @@ KgThemeDelegate::KgThemeDelegate(QObject *parent)
         view->setItemDelegate(this);
 }
 
-QRect KgThemeDelegate::thumbnailRect(const QRect &baseRect) const
+QRect KGameThemeDelegate::thumbnailRect(const QRect &baseRect) const
 {
     QRect thumbnailBaseRect(QPoint(Metrics::Padding + baseRect.left(), 0), Metrics::ThumbnailBaseSize);
     thumbnailBaseRect.moveCenter(QPoint(thumbnailBaseRect.center().x(), baseRect.center().y()));
@@ -253,7 +253,7 @@ QRect KgThemeDelegate::thumbnailRect(const QRect &baseRect) const
     return thumbnailBaseRect;
 }
 
-void KgThemeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void KGameThemeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     const bool rtl = option.direction == Qt::RightToLeft;
     QRect baseRect = option.rect;
@@ -327,7 +327,7 @@ void KgThemeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     painter->restore();
 }
 
-QSize KgThemeDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+QSize KGameThemeDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(option)
     Q_UNUSED(index)
@@ -335,6 +335,6 @@ QSize KgThemeDelegate::sizeHint(const QStyleOptionViewItem &option, const QModel
     return QSize(400, Metrics::ThumbnailBaseSize.height() + 2 * Metrics::Padding);
 }
 
-// END KgThemeDelegate
+// END KGameThemeDelegate
 
-#include "moc_kgthemeselector.cpp"
+#include "moc_kgamethemeselector.cpp"

@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGTHEME_H
-#define KGTHEME_H
+#ifndef KGAMETHEME_H
+#define KGAMETHEME_H
 
 // own
 #include "kdegames_export.h"
@@ -16,17 +16,17 @@
 #include <memory>
 
 /**
- * @class KgTheme kgtheme.h <KgTheme>
+ * @class KGameTheme kgametheme.h <KGameTheme>
  *
  * A theme describes the visual appearance of a game. Themes in kdegames usually
  * reference a SVGZ file which is loaded into a KGameRenderer to provide pixmaps
  * for use on the game canvas.
  *
- * Themes are usually managed (and discovered) by a KgThemeProvider.
+ * Themes are usually managed (and discovered) by a KGameThemeProvider.
  *
  * @section fileformat Default file format for theme descriptions
  *
- * Although KgTheme and KgThemeProvider do not need special theme description
+ * Although KGameTheme and KGameThemeProvider do not need special theme description
  * files for most basic usage, there is a format for theme description files
  * based on the XDG Desktop File Specification. The following example shows the
  * recognized keys:
@@ -48,15 +48,15 @@
  * the theme description file.
  *
  * If the [KGameTheme] group contains any further keys, their values can be
- * retrieved through the KgTheme::customData() method.
+ * retrieved through the KGameTheme::customData() method.
  */
 
-class KDEGAMES_EXPORT KgTheme : public QObject
+class KDEGAMES_EXPORT KGameTheme : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QByteArray identifier READ identifier NOTIFY readOnlyProperty)
     // it is not intended to allow these properties to change after the initial
-    // setup (note how KgThemeProvider returns only const KgTheme*), hence
+    // setup (note how KGameThemeProvider returns only const KGameTheme*), hence
     // a dummy NOTIFY signal is enough
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY readOnlyProperty)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY readOnlyProperty)
@@ -64,21 +64,21 @@ class KDEGAMES_EXPORT KgTheme : public QObject
     Q_PROPERTY(QString authorEmail READ authorEmail WRITE setAuthorEmail NOTIFY readOnlyProperty)
     Q_PROPERTY(QString graphicsPath READ graphicsPath WRITE setGraphicsPath NOTIFY readOnlyProperty)
     Q_PROPERTY(QString previewPath READ previewPath WRITE setPreviewPath NOTIFY readOnlyProperty)
-    Q_DISABLE_COPY(KgTheme)
+    Q_DISABLE_COPY(KGameTheme)
 
 public:
     /// Constructor. The @a identifier must be application-unique.
-    explicit KgTheme(const QByteArray &identifier, QObject *parent = nullptr);
+    explicit KGameTheme(const QByteArray &identifier, QObject *parent = nullptr);
     /// Destructor.
-    ~KgTheme() override;
+    ~KGameTheme() override;
 
-    /// Initializes a KgTheme instance by reading a description file.
+    /// Initializes a KGameTheme instance by reading a description file.
     /// @return whether @a path is a valid theme description file (if not,
     ///         the theme instance is not changed by this method call)
     /// @note A non-static member function has been chosen over the more
     ///       common pattern of using a static member function like
-    ///       "KgTheme::fromDesktopFile" to accommodate applications which
-    ///       want to subclass KgTheme.
+    ///       "KGameTheme::fromDesktopFile" to accommodate applications which
+    ///       want to subclass KGameTheme.
     virtual bool readFromDesktopFile(const QString &path);
 
     /// @return the internal identifier for this theme (used e.g. for
@@ -127,9 +127,9 @@ Q_SIGNALS:
     void readOnlyProperty();
 
 private:
-    std::unique_ptr<class KgThemePrivate> const d;
+    std::unique_ptr<class KGameThemePrivate> const d;
 };
 
-Q_DECLARE_METATYPE(const KgTheme *)
+Q_DECLARE_METATYPE(const KGameTheme *)
 
-#endif // KGTHEME_H
+#endif // KGAMETHEME_H

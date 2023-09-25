@@ -7,12 +7,12 @@
 #include "kgimageprovider_p.h"
 
 // own
-#include "kgthemeprovider.h"
+#include "kgamethemeprovider.h"
 // Qt
 #include <QGuiApplication>
 #include <QPainter>
 
-KgImageProvider::KgImageProvider(KgThemeProvider *prov)
+KgImageProvider::KgImageProvider(KGameThemeProvider *prov)
     : QQuickImageProvider(Image)
     , m_provider(prov)
 {

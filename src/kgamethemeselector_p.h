@@ -10,7 +10,7 @@
 // Qt
 #include <QStyledItemDelegate>
 
-class KgThemeDelegate : public QStyledItemDelegate
+class KGameThemeDelegate : public QStyledItemDelegate
 {
 public:
     enum Roles {
@@ -20,7 +20,7 @@ public:
         IdRole // not displayed, but used internally
     };
 
-    explicit KgThemeDelegate(QObject *parent = nullptr);
+    explicit KGameThemeDelegate(QObject *parent = nullptr);
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     /// @note The implementation is independent of @a option and @a index.
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;

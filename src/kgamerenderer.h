@@ -21,8 +21,8 @@ class QGraphicsView;
 class KGameRendererPrivate;
 class KGameRendererClient;
 class KGameRendererClientPrivate;
-class KgTheme;
-class KgThemeProvider;
+class KGameTheme;
+class KGameThemeProvider;
 
 #ifndef KDEGAMES_QCOLOR_QHASH
 #define KDEGAMES_QCOLOR_QHASH
@@ -37,12 +37,12 @@ inline uint qHash(const QColor &color)
  * @short Cache-enabled rendering of SVG themes.
  *
  * KGameRenderer is a light-weight rendering framework for the rendering of
- * SVG themes (as represented by KgTheme) into pixmap caches.
+ * SVG themes (as represented by KGameTheme) into pixmap caches.
  *
  * @section terminology Terminology
  *
- * @li Themes in the context of KGameRenderer are KgTheme instances. The theme
- *     selection by a KgRenderer can be managed by a KgThemeProvider.
+ * @li Themes in the context of KGameRenderer are KGameTheme instances. The theme
+ *     selection by a KgRenderer can be managed by a KGameThemeProvider.
  * @li A sprite is either a single pixmap ("non-animated sprites") or a sequence
  *     of pixmaps which are shown consecutively to produce an animation
  *     ("animated sprites"). Non-animated sprites correspond to a single element
@@ -85,8 +85,8 @@ inline uint qHash(const QColor &color)
 class KDEGAMES_EXPORT KGameRenderer : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(const KgTheme *theme READ theme NOTIFY themeChanged)
-    Q_PROPERTY(KgThemeProvider *themeProvider READ themeProvider NOTIFY readOnlyProperty)
+    Q_PROPERTY(const KGameTheme *theme READ theme NOTIFY themeChanged)
+    Q_PROPERTY(KGameThemeProvider *themeProvider READ themeProvider NOTIFY readOnlyProperty)
 
 public:
     /// Describes the various strategies which KGameRenderer can use to speed
@@ -113,11 +113,11 @@ public:
     /// @param cacheSize the cache size in megabytes (if not given, a sane
     /// default is used)
     /// @warning This constructor may only be called from the main thread.
-    explicit KGameRenderer(KgThemeProvider *prov, unsigned cacheSize = 0);
+    explicit KGameRenderer(KGameThemeProvider *prov, unsigned cacheSize = 0);
     /// overload that allows to use KGameRenderer without a theme provider
     ///           (useful when there is only one theme)
     /// @note Takes ownership of @a theme.
-    explicit KGameRenderer(KgTheme *theme, unsigned cacheSize = 0);
+    explicit KGameRenderer(KGameTheme *theme, unsigned cacheSize = 0);
     /// Deletes this KGameRenderer instance, as well as all clients using it.
     ~KGameRenderer() override;
 
@@ -167,11 +167,11 @@ public:
     /// because changes to UseDiskCache cause a full theme reload.
     void setStrategyEnabled(Strategy strategy, bool enabled = true);
 
-    /// @return the KgTheme instance used by this renderer
-    const KgTheme *theme() const;
-    /// @return the KgThemeProvider instance used by this renderer, or 0 if
+    /// @return the KGameTheme instance used by this renderer
+    const KGameTheme *theme() const;
+    /// @return the KGameThemeProvider instance used by this renderer, or 0 if
     ///         the renderer was created with a single static theme
-    KgThemeProvider *themeProvider() const;
+    KGameThemeProvider *themeProvider() const;
 
     /// @return the bounding rectangle of the sprite with this @a key
     /// This is equal to QSvgRenderer::boundsOnElement() of the corresponding
@@ -208,7 +208,7 @@ public:
     // errors on platforms with older gcc versions, e.g. OS X 10.6.
     QPixmap spritePixmap(const QString &key, const QSize &size, int frame = -1, const QHash<QColor, QColor> &customColors = (QHash<QColor, QColor>())) const;
 Q_SIGNALS:
-    void themeChanged(const KgTheme *theme);
+    void themeChanged(const KGameTheme *theme);
     /// This signal is never emitted. It is provided because QML likes to
     /// complain about properties without NOTIFY signals, even readonly ones.
     void readOnlyProperty();

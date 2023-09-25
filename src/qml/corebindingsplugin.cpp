@@ -7,13 +7,13 @@
 #include "corebindingsplugin.h"
 
 // own
-#include <KgThemeProvider>
+#include <KGameThemeProvider>
 
 void CoreBindingsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QByteArray("org.kde.games.core"));
 
-    qmlRegisterType<KgThemeProvider>(uri, 0, 1, "ThemeProvider");
+    qmlRegisterType<KGameThemeProvider>(uri, 0, 1, "ThemeProvider");
 }
 
 #include "moc_corebindingsplugin.cpp"

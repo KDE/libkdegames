@@ -10,8 +10,8 @@
 // own
 #include "colorproxy_p.h"
 #include "kgamerendererclient.h"
-#include "kgtheme.h"
-#include "kgthemeprovider.h"
+#include "kgametheme.h"
+#include "kgamethemeprovider.h"
 #include <kdegames_logging.h>
 // Qt
 #include <QDateTime>
@@ -32,7 +32,7 @@ static const QString cacheName(QByteArray theme)
     return QStringLiteral("kgamerenderer-%1-%2").arg(appName, QString::fromUtf8(theme));
 }
 
-KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider *provider, unsigned cacheSize, KGameRenderer *parent)
+KGameRendererPrivate::KGameRendererPrivate(KGameThemeProvider *provider, unsigned cacheSize, KGameRenderer *parent)
     : m_parent(parent)
     , m_provider(provider)
     , m_currentTheme(nullptr) // will be loaded on first use
@@ -51,25 +51,25 @@ KGameRendererPrivate::KGameRendererPrivate(KgThemeProvider *provider, unsigned c
     qRegisterMetaType<KGRInternal::Job *>();
 }
 
-KGameRenderer::KGameRenderer(KgThemeProvider *provider, unsigned cacheSize)
+KGameRenderer::KGameRenderer(KGameThemeProvider *provider, unsigned cacheSize)
     : d(new KGameRendererPrivate(provider, cacheSize, this))
 {
     if (!provider->parent()) {
         provider->setParent(this);
     }
-    connect(provider, &KgThemeProvider::currentThemeChanged, this, [this](const KgTheme *theme) {
+    connect(provider, &KGameThemeProvider::currentThemeChanged, this, [this](const KGameTheme *theme) {
         d->_k_setTheme(theme);
     });
 }
 
-static KgThemeProvider *providerForSingleTheme(KgTheme *theme, QObject *parent)
+static KGameThemeProvider *providerForSingleTheme(KGameTheme *theme, QObject *parent)
 {
-    KgThemeProvider *prov = new KgThemeProvider(QByteArray(), parent);
+    KGameThemeProvider *prov = new KGameThemeProvider(QByteArray(), parent);
     prov->addTheme(theme);
     return prov;
 }
 
-KGameRenderer::KGameRenderer(KgTheme *theme, unsigned cacheSize)
+KGameRenderer::KGameRenderer(KGameTheme *theme, unsigned cacheSize)
     : d(new KGameRendererPrivate(providerForSingleTheme(theme, this), cacheSize, this))
 {
 }
@@ -130,7 +130,7 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
     }
     if (strategy == KGameRenderer::UseDiskCache && oldEnabled != enabled) {
         // reload theme
-        const KgTheme *theme = d->m_currentTheme;
+        const KGameTheme *theme = d->m_currentTheme;
         if (theme) {
             d->m_currentTheme = nullptr; // or setTheme() will return immediately
             d->_k_setTheme(theme);
@@ -138,15 +138,15 @@ void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool en
     }
 }
 
-void KGameRendererPrivate::_k_setTheme(const KgTheme *theme)
+void KGameRendererPrivate::_k_setTheme(const KGameTheme *theme)
 {
-    const KgTheme *oldTheme = m_currentTheme;
+    const KGameTheme *oldTheme = m_currentTheme;
     if (oldTheme == theme) {
         return;
     }
     qCDebug(KDEGAMES_LOG) << "Setting theme:" << theme->name();
     if (!setTheme(theme)) {
-        const KgTheme *defaultTheme = m_provider->defaultTheme();
+        const KGameTheme *defaultTheme = m_provider->defaultTheme();
         if (theme != defaultTheme) {
             qCDebug(KDEGAMES_LOG) << "Falling back to default theme:" << defaultTheme->name();
             setTheme(defaultTheme);
@@ -162,7 +162,7 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme *theme)
     Q_EMIT m_parent->themeChanged(m_currentTheme);
 }
 
-bool KGameRendererPrivate::setTheme(const KgTheme *theme)
+bool KGameRendererPrivate::setTheme(const KGameTheme *theme)
 {
     if (!theme) {
         return false;
@@ -226,7 +226,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
     return true;
 }
 
-const KgTheme *KGameRenderer::theme() const
+const KGameTheme *KGameRenderer::theme() const
 {
     // ensure that some theme is loaded
     if (!d->m_currentTheme) {
@@ -235,7 +235,7 @@ const KgTheme *KGameRenderer::theme() const
     return d->m_currentTheme;
 }
 
-KgThemeProvider *KGameRenderer::themeProvider() const
+KGameThemeProvider *KGameRenderer::themeProvider() const
 {
     return d->m_provider;
 }

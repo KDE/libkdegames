@@ -4,9 +4,9 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGTHEME_P_H
-#define KGTHEME_P_H
+#ifndef KGAMETHEME_P_H
+#define KGAMETHEME_P_H
 
-#include "kgtheme.h"
+#include "kgametheme.h"
 
-#endif // KGTHEME_P_H
+#endif // KGAMETHEME_P_H

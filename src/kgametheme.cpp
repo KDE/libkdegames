@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "kgtheme.h"
+#include "kgametheme.h"
 
 // own
 #include <kdegames_logging.h>
@@ -18,14 +18,14 @@
 // Std
 #include <utility>
 
-class KgThemePrivate
+class KGameThemePrivate
 {
 public:
     const QByteArray m_identifier;
     QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
     QMap<QString, QString> m_customData;
 
-    KgThemePrivate(const QByteArray &id)
+    KGameThemePrivate(const QByteArray &id)
         : m_identifier(id)
     {
     }
@@ -33,54 +33,54 @@ public:
     static QStringList s_configGroupNames;
 };
 
-/*static*/ QStringList KgThemePrivate::s_configGroupNames;
+/*static*/ QStringList KGameThemePrivate::s_configGroupNames;
 
-KgTheme::KgTheme(const QByteArray &identifier, QObject *parent)
+KGameTheme::KGameTheme(const QByteArray &identifier, QObject *parent)
     : QObject(parent)
-    , d(new KgThemePrivate(identifier))
+    , d(new KGameThemePrivate(identifier))
 {
 }
 
-KgTheme::~KgTheme() = default;
+KGameTheme::~KGameTheme() = default;
 
-QByteArray KgTheme::identifier() const
+QByteArray KGameTheme::identifier() const
 {
     return d->m_identifier;
 }
 
-#define KGTHEME_STRING_PROPERTY(PROP, SETTER)                                                                                                                  \
-    QString KgTheme::PROP() const                                                                                                                              \
+#define KGAMETHEME_STRING_PROPERTY(PROP, SETTER)                                                                                                               \
+    QString KGameTheme::PROP() const                                                                                                                           \
     {                                                                                                                                                          \
         return d->m_##PROP;                                                                                                                                    \
     }                                                                                                                                                          \
-    void KgTheme::SETTER(const QString &val)                                                                                                                   \
+    void KGameTheme::SETTER(const QString &val)                                                                                                                \
     {                                                                                                                                                          \
         d->m_##PROP = val;                                                                                                                                     \
     }
 
-KGTHEME_STRING_PROPERTY(name, setName)
-KGTHEME_STRING_PROPERTY(description, setDescription)
-KGTHEME_STRING_PROPERTY(author, setAuthor)
-KGTHEME_STRING_PROPERTY(authorEmail, setAuthorEmail)
-KGTHEME_STRING_PROPERTY(graphicsPath, setGraphicsPath)
-KGTHEME_STRING_PROPERTY(previewPath, setPreviewPath)
+KGAMETHEME_STRING_PROPERTY(name, setName)
+KGAMETHEME_STRING_PROPERTY(description, setDescription)
+KGAMETHEME_STRING_PROPERTY(author, setAuthor)
+KGAMETHEME_STRING_PROPERTY(authorEmail, setAuthorEmail)
+KGAMETHEME_STRING_PROPERTY(graphicsPath, setGraphicsPath)
+KGAMETHEME_STRING_PROPERTY(previewPath, setPreviewPath)
 
-QMap<QString, QString> KgTheme::customData() const
+QMap<QString, QString> KGameTheme::customData() const
 {
     return d->m_customData;
 }
 
-QString KgTheme::customData(const QString &key, const QString &defaultValue) const
+QString KGameTheme::customData(const QString &key, const QString &defaultValue) const
 {
     return d->m_customData.value(key, defaultValue);
 }
 
-void KgTheme::setCustomData(const QMap<QString, QString> &customData)
+void KGameTheme::setCustomData(const QMap<QString, QString> &customData)
 {
     d->m_customData = customData;
 }
 
-bool KgTheme::readFromDesktopFile(const QString &path_)
+bool KGameTheme::readFromDesktopFile(const QString &path_)
 {
     if (path_.isEmpty()) {
         qCDebug(KDEGAMES_LOG) << "Refusing to load theme with no name";
@@ -96,13 +96,13 @@ bool KgTheme::readFromDesktopFile(const QString &path_)
         }
     }
     // default group name
-    if (KgThemePrivate::s_configGroupNames.isEmpty()) {
-        KgThemePrivate::s_configGroupNames << QStringLiteral("KGameTheme");
+    if (KGameThemePrivate::s_configGroupNames.isEmpty()) {
+        KGameThemePrivate::s_configGroupNames << QStringLiteral("KGameTheme");
     }
     // open file, look for a known config group
     KConfig config(path, KConfig::SimpleConfig);
     KConfigGroup group;
-    for (const QString &groupName : std::as_const(KgThemePrivate::s_configGroupNames)) {
+    for (const QString &groupName : std::as_const(KGameThemePrivate::s_configGroupNames)) {
         if (config.hasGroup(groupName)) {
             group = config.group(groupName);
         }
@@ -140,4 +140,4 @@ bool KgTheme::readFromDesktopFile(const QString &path_)
     return true;
 }
 
-#include "moc_kgtheme.cpp"
+#include "moc_kgametheme.cpp"

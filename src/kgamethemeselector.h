@@ -4,39 +4,39 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGTHEMESELECTOR_H
-#define KGTHEMESELECTOR_H
+#ifndef KGAMETHEMESELECTOR_H
+#define KGAMETHEMESELECTOR_H
 
 // own
 #include "kdegames_export.h"
-#include "kgthemeprovider.h"
+#include "kgamethemeprovider.h"
 // Qt
 #include <QWidget>
 // Std
 #include <memory>
 
 /**
- * @class KgThemeSelector kgthemeselector.h <KgThemeSelector>
+ * @class KGameThemeSelector kgamethemeselector.h <KGameThemeSelector>
  * @brief Theme selection widget.
  *
  * This widget allows the user to change the theme selection of a
- * KgThemeProvider. Selections are immediately applied to allow the user
+ * KGameThemeProvider. Selections are immediately applied to allow the user
  * to quickly preview themes. In simple cases, the widget can be used
  * standalone with the showAsDialog() method.
  *
  * @code
- * K_GLOBAL_STATIC_WITH_ARGS(KgThemeSelector, selector, (provider))
+ * K_GLOBAL_STATIC_WITH_ARGS(KGameThemeSelector, selector, (provider))
  * ...
  * selector->showAsDialog();
  * @endcode
  */
-class KDEGAMES_EXPORT KgThemeSelector : public QWidget
+class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
-    Q_DISABLE_COPY(KgThemeSelector)
+    Q_DISABLE_COPY(KGameThemeSelector)
 
 public:
-    /// Flags which control the behavior of KgThemeSelector.
+    /// Flags which control the behavior of KGameThemeSelector.
     enum Option {
         DefaultBehavior = 0,
         /// Enable downloading of additional themes with KNewStuff3.
@@ -48,8 +48,8 @@ public:
      */
     Q_DECLARE_FLAGS(Options, Option)
 
-    explicit KgThemeSelector(KgThemeProvider *provider, Options options = DefaultBehavior, QWidget *parent = nullptr);
-    ~KgThemeSelector() override;
+    explicit KGameThemeSelector(KGameThemeProvider *provider, Options options = DefaultBehavior, QWidget *parent = nullptr);
+    ~KGameThemeSelector() override;
 
     void setNewStuffConfigFileName(const QString &configFileName);
 
@@ -63,9 +63,9 @@ public Q_SLOTS:
 
 private:
     class Dialog;
-    std::unique_ptr<class KgThemeSelectorPrivate> const d;
+    std::unique_ptr<class KGameThemeSelectorPrivate> const d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KgThemeSelector::Options)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KGameThemeSelector::Options)
 
-#endif // KGTHEMESELECTOR_H
+#endif // KGAMETHEMESELECTOR_H
