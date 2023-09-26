@@ -14,14 +14,14 @@
 #include <al.h>
 #include <alc.h>
 
-class KgSound;
+class KGameSound;
 
 /// @internal
 class KgPlaybackEvent
 {
 public:
     // Creates and starts the playback. Also registers with the OpenALRuntime.
-    KgPlaybackEvent(KgSound *sound, const QPointF &pos);
+    KgPlaybackEvent(KGameSound *sound, const QPointF &pos);
     // Stops playback if it is still running.
     ~KgPlaybackEvent();
 
@@ -53,7 +53,7 @@ public:
     qreal m_volume;
     bool m_error;
     // active sound and playback instances
-    QHash<KgSound *, KgPlaybackEventList> m_soundsEvents;
+    QHash<KGameSound *, KgPlaybackEventList> m_soundsEvents;
 
 private:
     ALCcontext *m_context;

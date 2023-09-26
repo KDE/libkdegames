@@ -5,11 +5,10 @@
 */
 
 // This file is needed because the <KGameSound> header needs to link to
-// "../kgaudioscene.h" instead of "../audio/kgaudioscene.h".
+// "../kgamesound.h" instead of "../audio/kgamesound.h".
+#ifndef LIBKDEGAMES_KGAMESOUND_H
+#define LIBKDEGAMES_KGAMESOUND_H
 
-#ifndef LIBKDEGAMEG_KGAUDIOSCENE_H
-#define LIBKDEGAMEG_KGAUDIOSCENE_H
-
-#include "audio/kgaudioscene.h"
+#include "audio/kgamesound.h"
 
 #endif

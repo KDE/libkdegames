@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "kgsound.h"
+#include "kgamesound.h"
 
 // own
 #include "kgopenalruntime_p.h"
@@ -13,18 +13,18 @@
 // sndfile
 #include <sndfile.hh>
 
-class KgSoundPrivate
+class KGameSoundPrivate
 {
 public:
-    KgSound::PlaybackType m_type;
+    KGameSound::PlaybackType m_type;
     qreal m_volume;
     QPointF m_pos;
 
     bool m_valid;
     ALuint m_buffer;
 
-    KgSoundPrivate()
-        : m_type(KgSound::AmbientPlayback)
+    KGameSoundPrivate()
+        : m_type(KGameSound::AmbientPlayback)
         , m_volume(1.0)
         , m_valid(false)
         , m_buffer(AL_NONE)
@@ -32,11 +32,11 @@ public:
     }
 };
 
-// BEGIN KgSound
+// BEGIN KGameSound
 
-KgSound::KgSound(const QString &file, QObject *parent)
+KGameSound::KGameSound(const QString &file, QObject *parent)
     : QObject(parent)
-    , d(new KgSoundPrivate)
+    , d(new KGameSoundPrivate)
 {
     VirtualFileQt fileInterface(file);
     if (!fileInterface.open()) {
@@ -95,7 +95,7 @@ KgSound::KgSound(const QString &file, QObject *parent)
     d->m_valid = true;
 }
 
-KgSound::~KgSound()
+KGameSound::~KGameSound()
 {
     if (d->m_valid) {
         stop();
@@ -104,17 +104,17 @@ KgSound::~KgSound()
     }
 }
 
-bool KgSound::isValid() const
+bool KGameSound::isValid() const
 {
     return d->m_valid;
 }
 
-KgSound::PlaybackType KgSound::playbackType() const
+KGameSound::PlaybackType KGameSound::playbackType() const
 {
     return d->m_type;
 }
 
-void KgSound::setPlaybackType(KgSound::PlaybackType type)
+void KGameSound::setPlaybackType(KGameSound::PlaybackType type)
 {
     if (d->m_type == type)
         return;
@@ -122,12 +122,12 @@ void KgSound::setPlaybackType(KgSound::PlaybackType type)
     Q_EMIT playbackTypeChanged(type);
 }
 
-QPointF KgSound::pos() const
+QPointF KGameSound::pos() const
 {
     return d->m_pos;
 }
 
-void KgSound::setPos(const QPointF &pos)
+void KGameSound::setPos(const QPointF &pos)
 {
     if (d->m_pos == pos)
         return;
@@ -135,12 +135,12 @@ void KgSound::setPos(const QPointF &pos)
     Q_EMIT posChanged(pos);
 }
 
-qreal KgSound::volume() const
+qreal KGameSound::volume() const
 {
     return d->m_volume;
 }
 
-void KgSound::setVolume(qreal volume)
+void KGameSound::setVolume(qreal volume)
 {
     if (d->m_volume == volume)
         return;
@@ -148,17 +148,17 @@ void KgSound::setVolume(qreal volume)
     Q_EMIT volumeChanged(volume);
 }
 
-bool KgSound::hasError() const
+bool KGameSound::hasError() const
 {
     return !d->m_valid;
 }
 
-void KgSound::start()
+void KGameSound::start()
 {
     start(d->m_pos);
 }
 
-void KgSound::start(const QPointF &pos)
+void KGameSound::start(const QPointF &pos)
 {
     if (d->m_valid) {
         KgOpenALRuntime *runtime = KgOpenALRuntime::instance();
@@ -172,15 +172,15 @@ void KgSound::start(const QPointF &pos)
     }
 }
 
-void KgSound::stop()
+void KGameSound::stop()
 {
     qDeleteAll(KgOpenALRuntime::instance()->m_soundsEvents.take(this));
 }
 
-// END KgSound
+// END KGameSound
 // BEGIN KgPlaybackEvent
 
-KgPlaybackEvent::KgPlaybackEvent(KgSound *sound, const QPointF &pos)
+KgPlaybackEvent::KgPlaybackEvent(KGameSound *sound, const QPointF &pos)
     : m_valid(false)
 {
     // make sure OpenAL is initialized
@@ -202,9 +202,9 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound *sound, const QPointF &pos)
     alSourcef(m_source, AL_PITCH, 1.0); // TODO: debug
     alSourcef(m_source, AL_GAIN, sound->volume());
     alSourcei(m_source, AL_BUFFER, sound->d->m_buffer);
-    const KgSound::PlaybackType type = sound->playbackType();
-    alSourcef(m_source, AL_ROLLOFF_FACTOR, type == KgSound::AmbientPlayback ? 0.0 : 1.0);
-    alSourcei(m_source, AL_SOURCE_RELATIVE, type == KgSound::RelativePlayback ? AL_TRUE : AL_FALSE);
+    const KGameSound::PlaybackType type = sound->playbackType();
+    alSourcef(m_source, AL_ROLLOFF_FACTOR, type == KGameSound::AmbientPlayback ? 0.0 : 1.0);
+    alSourcei(m_source, AL_SOURCE_RELATIVE, type == KGameSound::RelativePlayback ? AL_TRUE : AL_FALSE);
     if ((error = alGetError()) != AL_NO_ERROR) {
         qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to setup OpenAL source: Error code" << error;
         return;
@@ -242,4 +242,4 @@ bool KgPlaybackEvent::replay(const QPointF &pos) const
 
 // END KgPlaybackEvent
 
-#include "moc_kgsound.cpp"
+#include "moc_kgamesound.cpp"
