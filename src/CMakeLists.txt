@@ -151,10 +151,6 @@ install(TARGETS KDEGames EXPORT KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_AR
 
 ########### install files ###############
 
-install(FILES kgthemeprovider-migration.upd
-    DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR}
-)
-
 install(FILES ${kdegames_CamelCase_HEADERS}
     DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}
     COMPONENT Devel
