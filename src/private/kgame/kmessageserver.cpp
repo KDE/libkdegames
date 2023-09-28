@@ -462,7 +462,7 @@ void KMessageServer::processOneMessage()
         qCWarning(GAMES_PRIVATE_KGAME) << ": received unknown message ID" << messageID;
 
     // remove the message, since we are ready with it
-    d->mMessageQueue.dequeue();
+    delete d->mMessageQueue.dequeue();
     if (d->mMessageQueue.isEmpty())
         d->mTimer.stop();
     d->mIsRecursive = false;
