@@ -31,6 +31,7 @@ public:
         : mPlayer(nullptr)
     {
     }
+    virtual ~KGameIOPrivate() = default;
 
     KPlayer *mPlayer;
 };
