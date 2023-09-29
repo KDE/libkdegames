@@ -12,5 +12,5 @@ release: true
 public_source_dirs:
     - .
 libraries:
-    - cmake: "KF5KDEGames"
-cmakename: KDEGames
+    - cmake: "KDEGames6"
+cmakename: KDEGames6
