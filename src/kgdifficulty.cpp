@@ -21,8 +21,8 @@
 // Qt
 #include <QCoreApplication>
 #include <QIcon>
+#include <QList>
 #include <QStatusBar>
-#include <QVector>
 // Std
 #include <utility>
 
@@ -198,7 +198,7 @@ void KgDifficulty::addStandardLevelRange(DS from, DS to)
 
 void KgDifficulty::addStandardLevelRange(DS from, DS to, DS defaultLevel)
 {
-    const QVector<DS> levels{
+    const QList<DS> levels{
         KgDifficultyLevel::RidiculouslyEasy,
         KgDifficultyLevel::VeryEasy,
         KgDifficultyLevel::Easy,

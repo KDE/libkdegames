@@ -56,7 +56,7 @@ KgSound::KgSound(const QString &file, QObject *parent)
     const int sampleCount = channelCount * handle.frames();
     const int sampleRate = handle.samplerate();
     // load data from sound file
-    QVector<ALshort> samples(sampleCount);
+    QList<ALshort> samples(sampleCount);
     if (handle.read(samples.data(), sampleCount) < sampleCount) {
         qWarning() << "Failed to read sound file" << file;
         qWarning() << "File ended unexpectedly.";
