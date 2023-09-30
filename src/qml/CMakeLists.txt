@@ -10,7 +10,7 @@ ecm_target_qml_sources(corebindingsplugin VERSION 0.1 SOURCES
 
 target_link_libraries(corebindingsplugin
     PRIVATE
-        KDEGames
+        KDEGamesGui
         Qt6::Qml
 )
 

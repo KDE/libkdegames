@@ -10,7 +10,7 @@
 #define KSCOREDIALOG_H
 
 // own
-#include <kdegames_export.h>
+#include <kdegameswidgets_export.h>
 // Qt
 #include <QDialog>
 #include <QMap>
@@ -76,7 +76,7 @@ class KGameDifficulty;
  * You can define up to 5 Custom fields.
  * @author Matt Williams <matt@milliams.com>
  */
-class KDEGAMES_EXPORT KScoreDialog : public QDialog
+class KDEGAMESWIDGETS_EXPORT KScoreDialog : public QDialog
 {
     Q_OBJECT
 

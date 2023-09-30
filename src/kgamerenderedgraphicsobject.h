@@ -8,7 +8,7 @@
 #define KGAMERENDEREDGRAPHICSOBJECT_H
 
 // own
-#include "kdegames_export.h"
+#include "kdegameswidgets_export.h"
 #include "kgamerendererclient.h"
 // Qt
 #include <QGraphicsObject>
@@ -49,7 +49,7 @@ class KGameRenderedGraphicsObjectPrivate;
  *     is the unit square (moved by the configured offset()).
  * @since 4.6
  */
-class KDEGAMES_EXPORT KGameRenderedGraphicsObject : public QGraphicsObject, public KGameRendererClient
+class KDEGAMESWIDGETS_EXPORT KGameRenderedGraphicsObject : public QGraphicsObject, public KGameRendererClient
 {
     Q_OBJECT
     Q_PROPERTY(int frame READ frame WRITE setFrame)

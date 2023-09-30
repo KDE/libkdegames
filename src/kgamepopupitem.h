@@ -8,7 +8,7 @@
 #define K_GAME_POPUP_ITEM_H
 
 // own
-#include "kdegames_export.h"
+#include "kdegameswidgets_export.h"
 // Qt
 #include <QGraphicsItem>
 #include <QObject>
@@ -34,7 +34,7 @@ class KGamePopupItemPrivate;
  * messageItem->showMessage("Hello, I'm a game message! How do you do?", BottomLeft);
  * \endcode
  */
-class KDEGAMES_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
+class KDEGAMESWIDGETS_EXPORT KGamePopupItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

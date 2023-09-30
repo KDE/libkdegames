@@ -8,7 +8,7 @@
 #define KGAMERENDEREDITEM_H
 
 // own
-#include "kdegames_export.h"
+#include "kdegameswidgets_export.h"
 #include "kgamerendererclient.h"
 // Qt
 #include <QGraphicsItem>
@@ -26,7 +26,7 @@ class KGameRenderedItemPrivate;
  * the theme.
  * @since 4.6
  */
-class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGameRendererClient
+class KDEGAMESWIDGETS_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGameRendererClient
 {
 public:
     /// Creates a new KGameRenderedItem which renders the sprite with the

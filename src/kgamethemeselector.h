@@ -8,7 +8,7 @@
 #define KGAMETHEMESELECTOR_H
 
 // own
-#include "kdegames_export.h"
+#include "kdegameswidgets_export.h"
 #include "kgamethemeprovider.h"
 // Qt
 #include <QWidget>
@@ -30,7 +30,7 @@
  * selector->showAsDialog();
  * @endcode
  */
-class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
+class KDEGAMESWIDGETS_EXPORT KGameThemeSelector : public QWidget
 {
     Q_OBJECT
     Q_DISABLE_COPY(KGameThemeSelector)

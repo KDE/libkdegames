@@ -8,14 +8,14 @@
 #define KGAMEGRAPHICSVIEWRENDERER_H
 
 // own
-#include "kdegames_export.h"
+#include "kdegameswidgets_export.h"
 #include "kgamerenderer.h"
 
 class QGraphicsView;
 
 class KGameGraphicsViewRendererPrivate;
 
-class KDEGAMES_EXPORT KGameGraphicsViewRenderer : public KGameRenderer
+class KDEGAMESWIDGETS_EXPORT KGameGraphicsViewRenderer : public KGameRenderer
 {
     Q_OBJECT
 
