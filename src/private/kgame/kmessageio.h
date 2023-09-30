@@ -73,11 +73,7 @@ public:
      * @return Whether this KMessageIO is a network IO or not.
      */
     // virtual bool isNetwork () const = 0;
-    virtual bool isNetwork() const
-    {
-        qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
-        return false;
-    }
+    virtual bool isNetwork() const;
 
     /**
       This method returns the status of the object, whether it is already
@@ -87,11 +83,7 @@ public:
       of KMessageIO.
     */
     // virtual bool isConnected () const = 0;
-    virtual bool isConnected() const
-    {
-        qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConnected...BAD";
-        return false;
-    }
+    virtual bool isConnected() const;
 
     /**
       Sets the ID number of this object. This number can for example be used to
@@ -111,18 +103,12 @@ public:
     /**
       @return 0 in the default implementation. Reimplemented in @ref KMessageSocket.
     */
-    virtual quint16 peerPort() const
-    {
-        return 0;
-    }
+    virtual quint16 peerPort() const;
 
     /**
       @return "localhost" in the default implementation. Reimplemented in @ref KMessageSocket
     */
-    virtual QString peerName() const
-    {
-        return QStringLiteral("localhost");
-    }
+    virtual QString peerName() const;
 
 Q_SIGNALS:
     /**

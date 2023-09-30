@@ -38,6 +38,28 @@ quint32 KMessageIO::id()
     return m_id;
 }
 
+bool KMessageIO::isNetwork() const
+{
+    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
+    return false;
+}
+
+bool KMessageIO::isConnected() const
+{
+    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConnected...BAD";
+    return false;
+}
+
+quint16 KMessageIO::peerPort() const
+{
+    return 0;
+}
+
+QString KMessageIO::peerName() const
+{
+    return QStringLiteral("localhost");
+}
+
 // ----------------------KMessageSocket -----------------------
 
 KMessageSocket::KMessageSocket(const QString &host, quint16 port, QObject *parent)
