@@ -3,6 +3,14 @@ set(KDEGAMES_CMAKECONFIG_NAME "KDEGames6")
 set(KDEGAMES_OUTPUT_NAME KDEGames6)
 set(KDEGAMES_EXPORT_NAME KDEGames6)
 
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX KDEGAMES
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}ConfigVersion.cmake"
+    COMPATIBILITY SameMajorVersion
+    SOVERSION 7
+)
+
 add_subdirectory(carddecks)
 add_subdirectory(qml)
 add_subdirectory(private)
@@ -128,14 +136,6 @@ target_include_directories(KDEGames
         ${SNDFILE_INCLUDE_DIR}
         highscore
         ${CMAKE_CURRENT_BINARY_DIR}/highscore
-)
-
-ecm_setup_version(${KDEGAMES_VERSION}
-    VARIABLE_PREFIX KDEGAMES
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}ConfigVersion.cmake"
-    COMPATIBILITY SameMajorVersion
-    SOVERSION ${KDEGAMES_SOVERSION}
 )
 
 set_target_properties(KDEGames PROPERTIES
