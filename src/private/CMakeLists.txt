@@ -8,6 +8,13 @@ endif()
 
 add_library(KDEGamesPrivate SHARED)
 
+set_target_properties(KDEGamesPrivate PROPERTIES
+    OUTPUT_NAME ${KDEGAMESPRIVATE_OUTPUT_NAME}
+    EXPORT_NAME ${KDEGAMESPRIVATE_EXPORT_NAME}
+    VERSION     ${KDEGAMES_VERSION}
+    SOVERSION   ${KDEGAMES_SOVERSION}
+)
+
 ecm_generate_export_header(KDEGamesPrivate
     VERSION ${KDEGAMES_VERSION}
     DEPRECATED_BASE_VERSION 0
@@ -73,13 +80,6 @@ target_include_directories(KDEGamesPrivate
         "$<INSTALL_INTERFACE:${kdegamesprivate_INCLUDE_INSTALL_DIR}>"
     PRIVATE
         kgame
-)
-
-set_target_properties(KDEGamesPrivate PROPERTIES
-    OUTPUT_NAME ${KDEGAMESPRIVATE_OUTPUT_NAME}
-    EXPORT_NAME ${KDEGAMESPRIVATE_EXPORT_NAME}
-    VERSION   ${KDEGAMES_VERSION}
-    SOVERSION ${KDEGAMES_SOVERSION}
 )
 
 install(TARGETS KDEGamesPrivate

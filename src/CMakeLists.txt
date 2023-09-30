@@ -20,6 +20,13 @@ configure_file(highscore/config-highscore.h.in ${CMAKE_CURRENT_BINARY_DIR}/highs
 
 add_library(KDEGames SHARED)
 
+set_target_properties(KDEGames PROPERTIES
+    OUTPUT_NAME ${KDEGAMES_OUTPUT_NAME}
+    EXPORT_NAME ${KDEGAMES_EXPORT_NAME}
+    VERSION     ${KDEGAMES_VERSION}
+    SOVERSION   ${KDEGAMES_SOVERSION}
+)
+
 target_sources(KDEGames PRIVATE
     audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
     audio/kgsound-${KGAUDIO_BACKEND}.cpp
@@ -136,13 +143,6 @@ target_include_directories(KDEGames
         ${SNDFILE_INCLUDE_DIR}
         highscore
         ${CMAKE_CURRENT_BINARY_DIR}/highscore
-)
-
-set_target_properties(KDEGames PROPERTIES
-    OUTPUT_NAME ${KDEGAMES_OUTPUT_NAME}
-    EXPORT_NAME ${KDEGAMES_EXPORT_NAME}
-    VERSION   ${KDEGAMES_VERSION}
-    SOVERSION ${KDEGAMES_SOVERSION}
 )
 
 install(TARGETS KDEGames EXPORT KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
