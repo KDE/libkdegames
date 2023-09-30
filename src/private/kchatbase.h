@@ -15,7 +15,6 @@
 #include <KCompletion>
 // Qt
 #include <QFrame>
-#include <QLoggingCategory>
 // Std
 #include <memory>
 
@@ -26,9 +25,6 @@ class KChatBaseModel;
 class KChatBaseItemDelegate;
 class QModelIndex;
 class QPoint;
-
-Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE)
-Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 /**
  * \class KChatBase kchatbase.h <KChatBase>

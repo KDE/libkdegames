@@ -16,15 +16,9 @@
 #include "kdegamesprivate_export.h"
 // Qt
 #include <QHostAddress>
-#include <QLoggingCategory>
 #include <QObject>
 #include <QProcess>
 #include <QString>
-
-/*
-    This macro shouldn't be here ideally. Already declared in kgame.h, but throws error if not placed here.
-*/
-Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 class QTcpSocket;
 class KProcess;

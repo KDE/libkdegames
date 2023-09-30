@@ -16,8 +16,6 @@
 // Qt
 #include <QIcon>
 
-Q_LOGGING_CATEGORY(GAMES_UI, "org.kde.games.ui", QtWarningMsg)
-
 struct KStandardGameActionInfo {
     KStandardGameAction::StandardGameAction id;
     KStandardShortcut::StandardShortcut globalAccel; // if we reuse a global accel

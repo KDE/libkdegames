@@ -12,7 +12,6 @@
 // own
 #include <kdegames_export.h>
 // Qt
-#include <QLoggingCategory>
 #include <QObject>
 // Std
 #include <memory>
@@ -291,5 +290,4 @@ private:
     std::unique_ptr<class KHighscorePrivate> const d;
 };
 
-Q_DECLARE_LOGGING_CATEGORY(GAMES_HIGHSCORE)
 #endif

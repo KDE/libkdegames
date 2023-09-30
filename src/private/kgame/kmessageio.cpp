@@ -11,6 +11,8 @@
 
 #include "kmessageio.h"
 
+// own
+#include <kdegamesprivate_kgame_logging.h>
 // Qt
 #include <KProcess>
 #include <QDataStream>
@@ -40,13 +42,13 @@ quint32 KMessageIO::id()
 
 bool KMessageIO::isNetwork() const
 {
-    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isNetwork...BAD";
+    qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "Calling PURE virtual isNetwork...BAD";
     return false;
 }
 
 bool KMessageIO::isConnected() const
 {
-    qCCritical(GAMES_PRIVATE_KGAME) << "Calling PURE virtual isConnected...BAD";
+    qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "Calling PURE virtual isConnected...BAD";
     return false;
 }
 
@@ -131,7 +133,7 @@ void KMessageSocket::processNewData()
             quint8 v;
             str >> v;
             if (v != 'M') {
-                qCWarning(GAMES_PRIVATE_KGAME) << ": Received unexpected data, magic number wrong!";
+                qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": Received unexpected data, magic number wrong!";
                 continue;
             }
 
@@ -190,7 +192,7 @@ KMessageDirect::KMessageDirect(KMessageDirect *partner, QObject *parent)
 
     // Check if the other object is already connected
     if (partner && partner->mPartner) {
-        qCWarning(GAMES_PRIVATE_KGAME) << ": Object is already connected!";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": Object is already connected!";
         return;
     }
 
@@ -219,14 +221,14 @@ void KMessageDirect::send(const QByteArray &msg)
     if (mPartner)
         Q_EMIT mPartner->received(msg);
     else
-        qCCritical(GAMES_PRIVATE_KGAME) << ": Not yet connected!";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": Not yet connected!";
 }
 
 // ----------------------- KMessageProcess ---------------------------
 
 KMessageProcess::~KMessageProcess()
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Delete process";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessageProcess::Delete process";
     if (mProcess) {
         mProcess->kill();
         mProcess->deleteLater();
@@ -238,15 +240,15 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString &file)
     : KMessageIO(parent)
 {
     // Start process
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Start process";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessageProcess::Start process";
     mProcessName = file;
     mProcess = new KProcess;
     // Need both stdout and stderr as separate channels in the communication
     mProcess->setOutputChannelMode(KProcess::SeparateChannels);
     int id = 0;
     *mProcess << mProcessName << QStringLiteral("%1").arg(id);
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Init:Id=" << id;
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessgeProcess::Init:Processname:" << mProcessName;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessageProcess::Init:Id=" << id;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessgeProcess::Init:Processname:" << mProcessName;
     connect(mProcess, &KProcess::readyReadStandardOutput, this, &KMessageProcess::slotReceivedStdout);
     connect(mProcess, &KProcess::readyReadStandardError, this, &KMessageProcess::slotReceivedStderr);
     connect(mProcess, static_cast<void (KProcess::*)(int, QProcess::ExitStatus)>(&KProcess::finished), this, &KMessageProcess::slotProcessExited);
@@ -257,7 +259,7 @@ KMessageProcess::KMessageProcess(QObject *parent, const QString &file)
 }
 bool KMessageProcess::isConnected() const
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess::Is connected";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessageProcess::Is connected";
     if (!mProcess)
         return false;
     return (mProcess->state() == QProcess::Running);
@@ -266,18 +268,18 @@ bool KMessageProcess::isConnected() const
 // Send to process
 void KMessageProcess::send(const QByteArray &msg)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess:: SEND(" << msg.size() << ") to process";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessageProcess:: SEND(" << msg.size() << ") to process";
     unsigned int size = msg.size() + 2 * sizeof(long);
 
     if (mProcess == nullptr) {
-        qCDebug(GAMES_PRIVATE_KGAME) << "@@@KMessageProcess:: cannot write to stdin, no process available";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@KMessageProcess:: cannot write to stdin, no process available";
         return;
     }
 
     char *tmpbuffer = new char[size];
     long *p1 = (long *)tmpbuffer;
     long *p2 = p1 + 1;
-    qCDebug(GAMES_PRIVATE_KGAME) << "p1=" << p1 << "p2=" << p2;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "p1=" << p1 << "p2=" << p2;
     memcpy(tmpbuffer + 2 * sizeof(long), msg.data(), msg.size());
     *p1 = 0x4242aeae;
     *p2 = size;
@@ -290,7 +292,7 @@ void KMessageProcess::send(const QByteArray &msg)
 void KMessageProcess::slotReceivedStderr()
 {
     QByteArray ba;
-    qCDebug(GAMES_PRIVATE_KGAME) << "@@@ KMessageProcess::slotReceivedStderr";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "@@@ KMessageProcess::slotReceivedStderr";
 
     mProcess->setReadChannel(QProcess::StandardError);
     while (mProcess->canReadLine()) {
@@ -299,7 +301,7 @@ void KMessageProcess::slotReceivedStderr()
             return;
         ba.chop(1); // remove QLatin1Char( '\n' )
 
-        qCDebug(GAMES_PRIVATE_KGAME) << "KProcess (" << ba.size() << "):" << ba.constData();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "KProcess (" << ba.size() << "):" << ba.constData();
         Q_EMIT signalReceivedStderr(QLatin1String(ba));
         ba.clear();
     };
@@ -309,8 +311,8 @@ void KMessageProcess::slotReceivedStdout()
 {
     mProcess->setReadChannel(QProcess::StandardOutput);
     QByteArray ba = mProcess->readAll();
-    qCDebug(GAMES_PRIVATE_KGAME) << "$$$$$$ "
-                                 << ": Received" << ba.size() << "bytes over inter process communication";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "$$$$$$ "
+                                       << ": Received" << ba.size() << "bytes over inter process communication";
 
     // Resize receive buffer
     while (mReceiveCount + ba.size() >= mReceiveBuffer.size())
@@ -325,15 +327,15 @@ void KMessageProcess::slotReceivedStdout()
         long *p2 = p1 + 1;
         int len;
         if (*p1 != 0x4242aeae) {
-            qCDebug(GAMES_PRIVATE_KGAME) << ": Cookie error...transmission failure...serious problem...";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Cookie error...transmission failure...serious problem...";
         }
         len = (int)(*p2);
         if (len < int(2 * sizeof(long))) {
-            qCDebug(GAMES_PRIVATE_KGAME) << ": Message size error";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Message size error";
             break;
         }
         if (len <= mReceiveCount) {
-            qCDebug(GAMES_PRIVATE_KGAME) << ": Got message with len" << len;
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Got message with len" << len;
 
             QByteArray msg;
             msg.resize(len);
@@ -355,7 +357,7 @@ void KMessageProcess::slotReceivedStdout()
 
 void KMessageProcess::slotProcessExited(int exitCode, QProcess::ExitStatus)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "Process exited (slot) with code" << exitCode;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Process exited (slot) with code" << exitCode;
     Q_EMIT connectionBroken();
     delete mProcess;
     mProcess = nullptr;

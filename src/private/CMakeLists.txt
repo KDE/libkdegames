@@ -6,20 +6,6 @@ if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_PRIVATE
-    CATEGORY_NAME org.kde.games.private
-    DESCRIPTION "libkdegamesprivate"
-    EXPORT KDEGAMES
-)
-
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_PRIVATE_KGAME
-    CATEGORY_NAME org.kde.games.private.kgame
-    DESCRIPTION "libkdegamesprivate KGame"
-    EXPORT KDEGAMES
-)
-
 add_library(KDEGamesPrivate SHARED)
 
 ecm_generate_export_header(KDEGamesPrivate
@@ -29,6 +15,22 @@ ecm_generate_export_header(KDEGamesPrivate
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
     USE_VERSION_HEADER
     VERSION_BASE_NAME KDEGames
+)
+
+ecm_qt_declare_logging_category(KDEGamesPrivate
+    HEADER kdegamesprivate_logging.h
+    IDENTIFIER KDEGAMESPRIVATE_LOG
+    CATEGORY_NAME kdegames.private
+    DESCRIPTION "libkdegamesprivate"
+    EXPORT KDEGAMES
+)
+
+ecm_qt_declare_logging_category(KDEGamesPrivate
+    HEADER kdegamesprivate_kgame_logging.h
+    IDENTIFIER KDEGAMESPRIVATE_KGAME_LOG
+    CATEGORY_NAME kdegames.private.kgame
+    DESCRIPTION "libkdegamesprivate KGame"
+    EXPORT KDEGAMES
 )
 
 target_sources(KDEGamesPrivate PRIVATE

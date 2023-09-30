@@ -12,7 +12,6 @@
 // KF
 #include <KLocalizedString>
 // Qt
-#include <QDebug>
 #include <QPainter>
 
 KChatBaseItemDelegate::KChatBaseItemDelegate(QObject *parent)

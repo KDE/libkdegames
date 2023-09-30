@@ -6,6 +6,8 @@
 
 #include "kgtheme.h"
 
+// own
+#include <kdegames_logging.h>
 // KF
 #include <KConfig>
 #include <KConfigGroup>
@@ -15,8 +17,6 @@
 #include <QStandardPaths>
 // Std
 #include <utility>
-
-Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
 class KgThemePrivate
 {
@@ -83,7 +83,7 @@ void KgTheme::setCustomData(const QMap<QString, QString> &customData)
 bool KgTheme::readFromDesktopFile(const QString &path_)
 {
     if (path_.isEmpty()) {
-        qCDebug(GAMES_LIB) << "Refusing to load theme with no name";
+        qCDebug(KDEGAMES_LOG) << "Refusing to load theme with no name";
         return false;
     }
     // legacy support: relative paths are resolved with KStandardDirs/appdata
@@ -91,7 +91,7 @@ bool KgTheme::readFromDesktopFile(const QString &path_)
     if (QFileInfo(path).isRelative()) {
         path = QStandardPaths::locate(QStandardPaths::AppDataLocation, path);
         if (path.isEmpty()) {
-            qCDebug(GAMES_LIB) << "Could not find theme description" << path;
+            qCDebug(KDEGAMES_LOG) << "Could not find theme description" << path;
             return false;
         }
     }
@@ -108,12 +108,12 @@ bool KgTheme::readFromDesktopFile(const QString &path_)
         }
     }
     if (!group.isValid()) {
-        qCDebug(GAMES_LIB) << "Could not read theme description at" << path;
+        qCDebug(KDEGAMES_LOG) << "Could not read theme description at" << path;
         return false;
     }
     // check format version
     if (group.readEntry("VersionFormat", 1) > 1) {
-        qCDebug(GAMES_LIB) << "Format of theme description too new at" << path;
+        qCDebug(KDEGAMES_LOG) << "Format of theme description too new at" << path;
         return false;
     }
 

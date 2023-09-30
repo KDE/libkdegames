@@ -8,6 +8,8 @@
 
 #include "kchatbasemodel.h"
 
+// own
+#include <kdegamesprivate_logging.h>
 // KF
 #include <KConfig>
 #include <KConfigGroup>
@@ -15,8 +17,6 @@
 // Qt
 #include <QFont>
 #include <QSharedData>
-
-Q_LOGGING_CATEGORY(GAMES_LIB, "org.kde.games.lib", QtWarningMsg)
 
 class KChatBaseMessagePrivate : public QSharedData
 {
@@ -77,7 +77,7 @@ KChatBaseModel::KChatBaseModel(QObject *parent)
 
 KChatBaseModel::~KChatBaseModel()
 {
-    qCDebug(GAMES_LIB) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")";
+    qCDebug(KDEGAMESPRIVATE_LOG) << "KChatBaseModelPrivate: DESTRUCT (" << this << ")";
     saveConfig();
 }
 

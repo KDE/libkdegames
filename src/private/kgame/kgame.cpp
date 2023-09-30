@@ -16,6 +16,7 @@
 #include "kgamepropertyhandler.h"
 #include "kgamesequence.h"
 #include "kplayer.h"
+#include <kdegamesprivate_kgame_logging.h>
 // KF
 #include <KLocalizedString>
 // Qt
@@ -28,8 +29,6 @@
 #include <cstdio>
 
 #define KGAME_LOAD_COOKIE 4210
-
-Q_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME, "org.kde.games.private.kgame", QtWarningMsg)
 
 // try to place as much as possible here
 // many things are *not* possible here as KGame has to use some inline function
@@ -66,7 +65,7 @@ KGame::KGame(int cookie, QObject *parent)
     : KGameNetwork(cookie, parent)
     , d(new KGamePrivate)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << " - " << this << ", sizeof(KGame)=" << sizeof(KGame);
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << " - " << this << ", sizeof(KGame)=" << sizeof(KGame);
 
     d->mProperties = new KGamePropertyHandler(this);
 
@@ -94,12 +93,12 @@ KGame::KGame(int cookie, QObject *parent)
 
 KGame::~KGame()
 {
-    qCDebug(GAMES_PRIVATE_KGAME);
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG);
     // Debug();
     reset();
     delete d->mGameSequence;
     delete d;
-    qCDebug(GAMES_PRIVATE_KGAME) << "done";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "done";
 }
 
 bool KGame::reset()
@@ -111,7 +110,7 @@ bool KGame::reset()
 
 void KGame::deletePlayers()
 {
-    // qCDebug(GAMES_PRIVATE_KGAME) ;
+    // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) ;
     // Bugs 303142 and 305000. KPlayer destructor removes
     // player from the list and makes iterators invalid.
     // qDeleteAll crashes in that case.
@@ -123,7 +122,7 @@ void KGame::deletePlayers()
     // deleting the elements with a takeFirst loop. I therefore chose not to clear()
     // the list in order not to break anything. The old code had the following
     // comment: "in case of PolicyClean player=d->mPlayerList.first() is infinite"
-    // qCDebug(GAMES_PRIVATE_KGAME) << "done";
+    // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "done";
 }
 
 void KGame::deleteInactivePlayers()
@@ -161,7 +160,7 @@ bool KGame::loadgame(QDataStream &stream, bool network, bool resetgame)
     stream >> c; // cookie
 
     if (c != cookie()) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "Trying to load different game version we=" << cookie() << "saved=" << c;
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "Trying to load different game version we=" << cookie() << "saved=" << c;
         bool result = false;
         Q_EMIT signalLoadError(stream, network, (int)c, result);
         return result;
@@ -189,7 +188,7 @@ bool KGame::loadgame(QDataStream &stream, bool network, bool resetgame)
 
     for (KGamePlayerList::iterator it = playerList()->begin(); it != playerList()->end(); ++it) {
         (*it)->dataHandler()->lockDirectEmit();
-        // qCDebug(GAMES_PRIVATE_KGAME) << "Player "<<player->id() << "to indirect emit";
+        // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player "<<player->id() << "to indirect emit";
     }
 
     // Properties
@@ -209,7 +208,7 @@ bool KGame::loadgame(QDataStream &stream, bool network, bool resetgame)
     // Load Playerobjects
     uint playercount;
     stream >> playercount;
-    qCDebug(GAMES_PRIVATE_KGAME) << "Loading KGame" << playercount << "KPlayer objects";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Loading KGame" << playercount << "KPlayer objects";
     for (i = 0; i < playercount; ++i) {
         KPlayer *newplayer = loadPlayer(stream, network);
         systemAddPlayer(newplayer);
@@ -218,9 +217,9 @@ bool KGame::loadgame(QDataStream &stream, bool network, bool resetgame)
     qint16 cookie;
     stream >> cookie;
     if (cookie == KGAME_LOAD_COOKIE) {
-        qCDebug(GAMES_PRIVATE_KGAME) << "   Game loaded properly";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "   Game loaded properly";
     } else {
-        qCCritical(GAMES_PRIVATE_KGAME) << "   Game loading error. probably format error";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "   Game loading error. probably format error";
     }
 
     // Switch back on the direct emitting of signals and emit the
@@ -229,7 +228,7 @@ bool KGame::loadgame(QDataStream &stream, bool network, bool resetgame)
     // to access the players
     for (KGamePlayerList::iterator it = playerList()->begin(); it != playerList()->end(); ++it) {
         (*it)->dataHandler()->unlockDirectEmit();
-        // qCDebug(GAMES_PRIVATE_KGAME) << "Player "<<player->id() << "to direct emit";
+        // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player "<<player->id() << "to direct emit";
     }
 
     Q_EMIT signalLoad(stream);
@@ -302,7 +301,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
     }
 
     qint32 cnt = list->count();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Saving KGame" << cnt << "KPlayer objects";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Saving KGame" << cnt << "KPlayer objects";
     stream << cnt;
 
     for (KGamePlayerList::iterator it = playerList()->begin(); it != playerList()->end(); ++it) {
@@ -312,7 +311,7 @@ void KGame::savePlayers(QDataStream &stream, KGamePlayerList *list)
 
 KPlayer *KGame::createPlayer(int /*rtti*/, int /*io*/, bool /*isvirtual*/)
 {
-    qCWarning(GAMES_PRIVATE_KGAME) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! ";
+    qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! ";
     return new KPlayer;
 }
 KPlayer *KGame::loadPlayer(QDataStream &stream, bool isvirtual)
@@ -321,19 +320,19 @@ KPlayer *KGame::loadPlayer(QDataStream &stream, bool isvirtual)
     stream >> rtti >> id >> iovalue;
     KPlayer *newplayer = findPlayer(id);
     if (!newplayer) {
-        qCDebug(GAMES_PRIVATE_KGAME) << "Player " << id << "not found...asking user to create one";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player " << id << "not found...asking user to create one";
         newplayer = createPlayer(rtti, iovalue, isvirtual);
         // Q_EMIT signalCreatePlayer(newplayer,rtti,iovalue,isvirtual,this);
     }
     /*
     if (!newplayer)
     {
-      qCWarning(GAMES_PRIVATE_KGAME) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! ";
+      qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "   No user defined player created. Creating default KPlayer. This crashes if you have overwritten KPlayer!!!! ";
       newplayer=new KPlayer;
     }
     else
     {
-      qCDebug(GAMES_PRIVATE_KGAME) << "   USER Player" << newplayer << "done player->rtti=" << newplayer->rtti() << "rtti=" << rtti;
+      qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "   USER Player" << newplayer << "done player->rtti=" << newplayer->rtti() << "rtti=" << rtti;
     }
     */
     newplayer->load(stream);
@@ -369,26 +368,26 @@ KPlayer *KGame::findPlayer(quint32 id) const
 // does, we would be in trouble...
 bool KGame::addPlayer(KPlayer *newplayer)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ":  "
-                                 << "; maxPlayers=" << maxPlayers() << "playerCount=" << playerCount();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ":  "
+                                       << "; maxPlayers=" << maxPlayers() << "playerCount=" << playerCount();
     if (!newplayer) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "trying to add NULL player in KGame::addPlayer()";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "trying to add NULL player in KGame::addPlayer()";
         return false;
     }
 
     if (maxPlayers() >= 0 && (int)playerCount() >= maxPlayers()) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "cannot add more than" << maxPlayers() << "players - deleting...";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "cannot add more than" << maxPlayers() << "players - deleting...";
         return false;
     }
 
     if (newplayer->id() == 0) {
         d->mUniquePlayerNumber++;
         newplayer->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber, gameId()));
-        qCDebug(GAMES_PRIVATE_KGAME) << "NEW!!! player" << newplayer << "now has id" << newplayer->id();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "NEW!!! player" << newplayer << "now has id" << newplayer->id();
     } else {
         // this could happen in games which use their own ID management by certain
         // reasons. that is NOT recommended
-        qCDebug(GAMES_PRIVATE_KGAME) << "player" << newplayer << "already has an id:" << newplayer->id();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "player" << newplayer << "already has an id:" << newplayer->id();
     }
 
     QByteArray buffer;
@@ -412,25 +411,25 @@ bool KGame::addPlayer(KPlayer *newplayer)
 bool KGame::systemAddPlayer(KPlayer *newplayer)
 {
     if (!newplayer) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "trying to add NULL player in KGame::systemAddPlayer()";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "trying to add NULL player in KGame::systemAddPlayer()";
         return false;
     }
     if (newplayer->id() == 0) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "player" << newplayer << "has no ID";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "player" << newplayer << "has no ID";
     }
 
     if (findPlayer(newplayer->id())) {
-        qCCritical(GAMES_PRIVATE_KGAME) << "ERROR: Double adding player !!!!! NOT GOOD !!!!!! " << newplayer->id() << "...I delete it again";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "ERROR: Double adding player !!!!! NOT GOOD !!!!!! " << newplayer->id() << "...I delete it again";
         delete newplayer;
         return false;
     } else {
-        qCDebug(GAMES_PRIVATE_KGAME) << "Trying to add player" << newplayer << " maxPlayers=" << maxPlayers() << " playerCount=" << playerCount();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Trying to add player" << newplayer << " maxPlayers=" << maxPlayers() << " playerCount=" << playerCount();
         // Add the player to the game
         d->mPlayerList.append(newplayer);
         newplayer->setGame(this);
-        qCDebug(GAMES_PRIVATE_KGAME) << "Player: isVirtual=" << newplayer->isVirtual();
-        qCDebug(GAMES_PRIVATE_KGAME) << "        id=" << newplayer->id() << "  #Players=" << d->mPlayerList.count() << "added" << newplayer
-                                     << "  (virtual=" << newplayer->isVirtual() << ")";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player: isVirtual=" << newplayer->isVirtual();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "        id=" << newplayer->id() << "  #Players=" << d->mPlayerList.count() << "added" << newplayer
+                                           << "  (virtual=" << newplayer->isVirtual() << ")";
         Q_EMIT signalPlayerJoinedGame(newplayer);
     }
     return true;
@@ -439,14 +438,14 @@ bool KGame::systemAddPlayer(KPlayer *newplayer)
 // Called by the KPlayer destructor
 void KGame::playerDeleted(KPlayer *player)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ": id (" << player->id() << ") to be removed" << player;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": id (" << player->id() << ") to be removed" << player;
 
     if (policy() == PolicyLocal || policy() == PolicyDirty) {
         systemRemovePlayer(player, false);
     }
     if (policy() == PolicyClean || policy() == PolicyDirty) {
         if (!player->isVirtual()) {
-            qCDebug(GAMES_PRIVATE_KGAME) << ": sending IdRemovePlayer " << player->id();
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": sending IdRemovePlayer " << player->id();
             sendSystemMessage(player->id(), KGameMessage::IdRemovePlayer, 0);
         }
     }
@@ -455,17 +454,17 @@ void KGame::playerDeleted(KPlayer *player)
 bool KGame::removePlayer(KPlayer *player, quint32 receiver)
 { // transmit to all clients, or to receiver only
     if (!player) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "trying to remove NULL player in KGame::removePlayer(  )";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "trying to remove NULL player in KGame::removePlayer(  )";
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << ": id (" << player->id() << ") to be removed" << player;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": id (" << player->id() << ") to be removed" << player;
 
     if (policy() == PolicyLocal || policy() == PolicyDirty) {
         systemRemovePlayer(player, true);
         return true; // player is gone
     }
     if (policy() == PolicyClean || policy() == PolicyDirty) {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": sending IdRemovePlayer " << player->id();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": sending IdRemovePlayer " << player->id();
         sendSystemMessage(player->id(), KGameMessage::IdRemovePlayer, receiver);
     }
     return true;
@@ -474,15 +473,15 @@ bool KGame::removePlayer(KPlayer *player, quint32 receiver)
 
 void KGame::systemRemovePlayer(KPlayer *player, bool deleteit)
 {
-    qCDebug(GAMES_PRIVATE_KGAME);
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG);
     if (!player) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "cannot remove NULL player";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "cannot remove NULL player";
         return;
     }
     systemRemove(player, deleteit);
 
     if (gameStatus() == (int)Run && playerCount() < minPlayers()) {
-        qCWarning(GAMES_PRIVATE_KGAME) << ": not enough players, PAUSING game\n";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": not enough players, PAUSING game\n";
         setGameStatus(Pause);
     }
 }
@@ -490,11 +489,11 @@ void KGame::systemRemovePlayer(KPlayer *player, bool deleteit)
 bool KGame::systemRemove(KPlayer *p, bool deleteit)
 {
     if (!p) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "cannot remove NULL player";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "cannot remove NULL player";
         return false;
     }
     bool result;
-    qCDebug(GAMES_PRIVATE_KGAME) << ": Player (" << p->id() << ") to be removed" << p;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Player (" << p->id() << ") to be removed" << p;
 
     if (d->mPlayerList.count() == 0) {
         result = false;
@@ -517,7 +516,7 @@ bool KGame::inactivatePlayer(KPlayer *player)
     if (!player) {
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << "Inactivate player" << player->id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Inactivate player" << player->id();
 
     if (policy() == PolicyLocal || policy() == PolicyDirty) {
         if (!systemInactivatePlayer(player))
@@ -535,7 +534,7 @@ bool KGame::systemInactivatePlayer(KPlayer *player)
     if (!player || !player->isActive()) {
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << "Inactivate player" << player->id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Inactivate player" << player->id();
 
     int pid = player->id();
     // Virtual players cannot be deactivated. They will be removed
@@ -559,7 +558,7 @@ bool KGame::activatePlayer(KPlayer *player)
     if (!player) {
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << ": activate" << player->id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": activate" << player->id();
     if (policy() == PolicyLocal || policy() == PolicyDirty) {
         if (!systemActivatePlayer(player))
             return false;
@@ -575,7 +574,7 @@ bool KGame::systemActivatePlayer(KPlayer *player)
     if (!player || player->isActive()) {
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << ": activate" << player->id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": activate" << player->id();
 
     d->mInactivePlayerList.removeAll(player);
     player->setActive(true);
@@ -657,15 +656,15 @@ const KGame::KGamePlayerList *KGame::playerList() const
 bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
     if (!player) {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": NULL player";
         return false;
     }
     if (!isRunning()) {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": game not running";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": game not running";
         return false;
     }
 
-    qCDebug(GAMES_PRIVATE_KGAME) << ": transmitting playerInput over network";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": transmitting playerInput over network";
     sendSystemMessage(msg, (int)KGameMessage::IdPlayerInput, player->id(), sender);
     return true;
 }
@@ -673,18 +672,18 @@ bool KGame::sendPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 bool KGame::systemPlayerInput(QDataStream &msg, KPlayer *player, quint32 sender)
 {
     if (!player) {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": NULL player";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": NULL player";
         return false;
     }
     if (!isRunning()) {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": game not running";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": game not running";
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << "KGame: Got playerInput from messageServer... sender:" << sender;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "KGame: Got playerInput from messageServer... sender:" << sender;
     if (playerInput(msg, player)) {
         playerInputFinished(player);
     } else {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": switching off player input";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": switching off player input";
         // TODO: (MH 03-2003): We need an return option from playerInput so that
         // the player's is not automatically disabled here
         if (!player->asyncInput()) {
@@ -699,7 +698,7 @@ KPlayer *KGame::playerInputFinished(KPlayer *player)
     if (!player)
         return nullptr;
 
-    qCDebug(GAMES_PRIVATE_KGAME) << "player input finished for " << player->id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "player input finished for " << player->id();
     // Check for game over and if not allow the next player to move
     int gameOver = 0;
     if (gameSequence()) {
@@ -738,9 +737,9 @@ KGameSequence *KGame::gameSequence() const
 
 void KGame::setGameStatus(int status)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ": GAMESTATUS CHANGED  to" << status;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": GAMESTATUS CHANGED  to" << status;
     if (status == (int)Run && playerCount() < minPlayers()) {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": not enough players, pausing game\n";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": not enough players, pausing game\n";
         status = Pause;
     }
     d->mGameStatus = status;
@@ -752,22 +751,22 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
     // player. Otherwise we proceed here and hope the best that the user processes
     // the message
 
-    //  qCDebug(GAMES_PRIVATE_KGAME) << ": we="<<(int)gameId()<<" id="<<msgid<<" recv=" << receiver << "sender=" << sender;
+    //  qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": we="<<(int)gameId()<<" id="<<msgid<<" recv=" << receiver << "sender=" << sender;
 
     // *first* notice the game that something has changed - so no return prevents
     // this
     Q_EMIT signalMessageUpdate(msgid, receiver, sender);
     if (KGameMessage::isPlayer(receiver)) {
-        // qCDebug(GAMES_PRIVATE_KGAME) << "message id" << msgid << "seems to be for a player ("<<active=p->isActive()<<" recv="<< receiver;
+        // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "message id" << msgid << "seems to be for a player ("<<active=p->isActive()<<" recv="<< receiver;
         KPlayer *p = findPlayer(receiver);
         if (p && p->isActive()) {
             p->networkTransmission(stream, msgid, sender);
             return;
         }
         if (p) {
-            qCDebug(GAMES_PRIVATE_KGAME) << "player is here but not active";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "player is here but not active";
         } else {
-            qCDebug(GAMES_PRIVATE_KGAME) << "no player found";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "no player found";
         }
     }
     // If it is not for a player it is meant for us!!!! Otherwise the
@@ -775,7 +774,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
 
     // GameProperties processed
     if (d->mProperties->processMessage(stream, msgid, sender == gameId())) {
-        //   qCDebug(GAMES_PRIVATE_KGAME) << "KGame: message taken by property - returning";
+        //   qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "KGame: message taken by property - returning";
         return;
     }
 
@@ -785,12 +784,12 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
         qint16 v;
         qint32 c;
         stream >> v >> c;
-        qCDebug(GAMES_PRIVATE_KGAME) << " ===================> (Client) "
-                                     << ": Got IdSetupGame ==================";
-        qCDebug(GAMES_PRIVATE_KGAME) << "our game id is" << gameId() << "Lib version=" << v << "App Cookie=" << c;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << " ===================> (Client) "
+                                           << ": Got IdSetupGame ==================";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "our game id is" << gameId() << "Lib version=" << v << "App Cookie=" << c;
         // Verify identity of the network partners
         if (c != cookie()) {
-            qCCritical(GAMES_PRIVATE_KGAME) << "IdGameSetup: Negotiate Game: cookie mismatch I'am=" << cookie() << " master=" << c;
+            qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "IdGameSetup: Negotiate Game: cookie mismatch I'am=" << cookie() << " master=" << c;
             sendError(KGameError::Cookie, KGameError::errCookie(cookie(), c));
             disconnect(); // disconnect from master
         } else if (v != KGameMessage::version()) {
@@ -799,19 +798,19 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
         } else {
             setupGame(sender);
         }
-        qCDebug(GAMES_PRIVATE_KGAME) << "========== (Client) Setup game done\n";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "========== (Client) Setup game done\n";
     } break;
     case KGameMessage::IdSetupGameContinue: // Master: second step in game setup
     {
-        qCDebug(GAMES_PRIVATE_KGAME) << "=====>(Master) "
-                                     << " - IdSetupGameContinue";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "=====>(Master) "
+                                           << " - IdSetupGameContinue";
         setupGameContinue(stream, sender);
     } break;
     case KGameMessage::IdActivatePlayer: // Activate Player
     {
         int id;
         stream >> id;
-        qCDebug(GAMES_PRIVATE_KGAME) << "Got IdActivatePlayer id=" << id;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Got IdActivatePlayer id=" << id;
         if (sender != gameId() || policy() != PolicyDirty) {
             systemActivatePlayer(findPlayer(id));
         }
@@ -820,18 +819,18 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
     {
         int id;
         stream >> id;
-        qCDebug(GAMES_PRIVATE_KGAME) << "Got IdInactivatePlayer id=" << id;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Got IdInactivatePlayer id=" << id;
         if (sender != gameId() || policy() != PolicyDirty) {
             systemInactivatePlayer(findPlayer(id));
         }
     } break;
     case KGameMessage::IdAddPlayer: {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": Got IdAddPlayer";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Got IdAddPlayer";
         if (sender != gameId() || policy() != PolicyDirty) {
             KPlayer *newplayer = nullptr;
             // We sent the message so the player is already available
             if (sender == gameId()) {
-                qCDebug(GAMES_PRIVATE_KGAME) << "dequeue previously added player";
+                qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "dequeue previously added player";
                 newplayer = d->mAddPlayerList.dequeue();
             } else {
                 newplayer = loadPlayer(stream, true);
@@ -844,7 +843,7 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
     {
         int id;
         stream >> id;
-        qCDebug(GAMES_PRIVATE_KGAME) << ": Got IdRemovePlayer" << id;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Got IdRemovePlayer" << id;
         KPlayer *p = findPlayer(id);
         if (p) {
             // Otherwise the player is already removed
@@ -852,26 +851,26 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
                 systemRemovePlayer(p, true);
             }
         } else {
-            qCWarning(GAMES_PRIVATE_KGAME) << "Cannot find player" << id;
+            qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "Cannot find player" << id;
         }
     } break;
     case KGameMessage::IdGameLoad: {
-        qCDebug(GAMES_PRIVATE_KGAME) << "====> (Client) "
-                                     << ": Got IdGameLoad";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "====> (Client) "
+                                           << ": Got IdGameLoad";
         loadgame(stream, true, false);
     } break;
     case KGameMessage::IdGameSetupDone: {
         int cid;
         stream >> cid;
-        qCDebug(GAMES_PRIVATE_KGAME) << "====> (CLIENT) "
-                                     << ": Got IdGameSetupDone for client " << cid << "we are =" << gameId();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "====> (CLIENT) "
+                                           << ": Got IdGameSetupDone for client " << cid << "we are =" << gameId();
         sendSystemMessage(gameId(), KGameMessage::IdGameConnected, 0);
     } break;
     case KGameMessage::IdGameConnected: {
         int cid;
         stream >> cid;
-        qCDebug(GAMES_PRIVATE_KGAME) << "====> (ALL) "
-                                     << ": Got IdGameConnected for client " << cid << "we are =" << gameId();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "====> (ALL) "
+                                           << ": Got IdGameConnected for client " << cid << "we are =" << gameId();
         Q_EMIT signalClientJoinedGame(cid, this);
     } break;
 
@@ -879,10 +878,10 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
         // if we disconnect we *always* start a local game.
         // this could lead into problems if we just change the message server
         if (sender != gameId()) {
-            qCDebug(GAMES_PRIVATE_KGAME) << "client" << sender << "leaves game";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "client" << sender << "leaves game";
             return;
         }
-        qCDebug(GAMES_PRIVATE_KGAME) << "leaving the game";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "leaving the game";
         // start a new local game
         // no other client is by default connected to this so this call should be
         // enough
@@ -890,9 +889,9 @@ void KGame::networkTransmission(QDataStream &stream, int msgid, quint32 receiver
     } break;
     default: {
         if (msgid < KGameMessage::IdUser) {
-            qCCritical(GAMES_PRIVATE_KGAME) << "incorrect message id" << msgid << " - emit anyway";
+            qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "incorrect message id" << msgid << " - emit anyway";
         }
-        qCDebug(GAMES_PRIVATE_KGAME) << ": User data msgid" << msgid;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": User data msgid" << msgid;
         Q_EMIT signalNetworkData(msgid - KGameMessage::IdUser, ((QBuffer *)stream.device())->readAll(), receiver, sender);
     } break;
     }
@@ -913,28 +912,29 @@ void KGame::setupGameContinue(QDataStream &stream, quint32 sender)
     KGamePlayerList newPlayerList;
     for (i = 0; i < cnt; ++i) {
         player = loadPlayer(stream, true);
-        qCDebug(GAMES_PRIVATE_KGAME) << "Master got player" << player->id() << " rawgame=" << KGameMessage::rawGameId(player->id()) << "from sender" << sender;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Master got player" << player->id() << " rawgame=" << KGameMessage::rawGameId(player->id()) << "from sender"
+                                           << sender;
         if (KGameMessage::rawGameId(player->id()) != sender) {
-            qCCritical(GAMES_PRIVATE_KGAME) << "Client tries to add player with wrong game id - cheat possible";
+            qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "Client tries to add player with wrong game id - cheat possible";
         } else {
             newPlayerList.append(player);
-            qCDebug(GAMES_PRIVATE_KGAME) << "newplayerlist appended" << player->id();
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "newplayerlist appended" << player->id();
         }
     }
 
     newPlayersJoin(playerList(), &newPlayerList, inactivateIds);
 
-    qCDebug(GAMES_PRIVATE_KGAME) << "Master calculates how many players to activate client has cnt=" << cnt;
-    qCDebug(GAMES_PRIVATE_KGAME) << "The game has" << playerCount() << "active players";
-    qCDebug(GAMES_PRIVATE_KGAME) << "The user deactivated " << inactivateIds.count() << "player already";
-    qCDebug(GAMES_PRIVATE_KGAME) << "MaxPlayers for this game is" << maxPlayers();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Master calculates how many players to activate client has cnt=" << cnt;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "The game has" << playerCount() << "active players";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "The user deactivated " << inactivateIds.count() << "player already";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "MaxPlayers for this game is" << maxPlayers();
 
     // Do we have too many players? (After the programmer disabled some?)
     // MH: We cannot use have player here as it CHANGES in the loop
     // int havePlayers = cnt+playerCount()-inactivateIds.count();
-    qCDebug(GAMES_PRIVATE_KGAME) << "havePlayers" << cnt + playerCount() - inactivateIds.count();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "havePlayers" << cnt + playerCount() - inactivateIds.count();
     while (maxPlayers() > 0 && maxPlayers() < (int)(cnt + playerCount() - inactivateIds.count())) {
-        qCDebug(GAMES_PRIVATE_KGAME) << "  Still to deactivate " << (int)(cnt + playerCount() - inactivateIds.count()) - (int)maxPlayers();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "  Still to deactivate " << (int)(cnt + playerCount() - inactivateIds.count()) - (int)maxPlayers();
         KPlayer *currentPlayer = nullptr;
         int currentPriority = 0x7fff; // MAX_UINT (16bit?) to get the maximum of the list
         // find lowest network priority which is not yet in the newPlayerList
@@ -967,20 +967,20 @@ void KGame::setupGameContinue(QDataStream &stream, quint32 sender)
 
         // add it to inactivateIds
         if (currentPlayer) {
-            qCDebug(GAMES_PRIVATE_KGAME) << "Marking player" << currentPlayer->id() << "for inactivation";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Marking player" << currentPlayer->id() << "for inactivation";
             inactivateIds.append(currentPlayer->id());
         } else {
-            qCCritical(GAMES_PRIVATE_KGAME) << "Couldn't find a player to deactivate. That is not so good...";
+            qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "Couldn't find a player to deactivate. That is not so good...";
             break;
         }
     }
 
-    qCDebug(GAMES_PRIVATE_KGAME) << "Altogether deactivated" << inactivateIds.count() << "players";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Altogether deactivated" << inactivateIds.count() << "players";
 
     QList<int>::Iterator it;
     for (it = inactivateIds.begin(); it != inactivateIds.end(); ++it) {
         int pid = *it;
-        qCDebug(GAMES_PRIVATE_KGAME) << "pid=" << pid;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "pid=" << pid;
     }
 
     // Now deactivate the network players from the inactivateId list
@@ -990,7 +990,7 @@ void KGame::setupGameContinue(QDataStream &stream, quint32 sender)
         if (KGameMessage::rawGameId(pid) == sender) {
             continue; // client's player
         }
-        qCDebug(GAMES_PRIVATE_KGAME) << " -> the network needs to deactivate" << pid;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << " -> the network needs to deactivate" << pid;
         player = findPlayer(pid);
         if (player) {
             // We have to make REALLY sure that the player is gone. With any policy
@@ -999,19 +999,19 @@ void KGame::setupGameContinue(QDataStream &stream, quint32 sender)
             } else
                 player = nullptr;
         } else {
-            qCCritical(GAMES_PRIVATE_KGAME) << "We should deactivate a player, but cannot find it...not good.";
+            qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "We should deactivate a player, but cannot find it...not good.";
         }
     }
 
     // Now send out the player list which the client can activate
     for (KGamePlayerList::iterator it = newPlayerList.begin(); it != newPlayerList.end(); ++it) {
         KPlayer *player = *it;
-        qCDebug(GAMES_PRIVATE_KGAME) << "newplayerlist contains" << player->id();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "newplayerlist contains" << player->id();
         // Only activate what is not in the list
         if (inactivateIds.indexOf(player->id()) != -1) {
             continue;
         }
-        qCDebug(GAMES_PRIVATE_KGAME) << " -> the client can ******** reactivate ********  " << player->id();
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << " -> the client can ******** reactivate ********  " << player->id();
         sendSystemMessage(player->id(), KGameMessage::IdActivatePlayer, sender);
     }
 
@@ -1040,7 +1040,7 @@ void KGame::setupGame(quint32 sender)
     // Deactivate all players
     KGamePlayerList mTmpList(d->mPlayerList); // we need copy otherwise the removal crashes
     qint32 cnt = mTmpList.count();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Client: playerlistcount=" << d->mPlayerList.count() << "tmplistcout=" << cnt;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Client: playerlistcount=" << d->mPlayerList.count() << "tmplistcout=" << cnt;
 
     streamS << cnt;
 
@@ -1061,7 +1061,7 @@ void KGame::setupGame(quint32 sender)
         savePlayer(streamS, player);
     }
     if (d->mPlayerList.count() > 0 || cnt != 0) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "KGame::setupGame(): Player list is not empty! or cnt!=0=" << cnt;
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "KGame::setupGame(): Player list is not empty! or cnt!=0=" << cnt;
         abort();
     }
 
@@ -1071,14 +1071,14 @@ void KGame::setupGame(quint32 sender)
 void KGame::Debug()
 {
     KGameNetwork::Debug();
-    qCDebug(GAMES_PRIVATE_KGAME) << "------------------- KGAME -------------------------";
-    qCDebug(GAMES_PRIVATE_KGAME) << "this:          " << this;
-    qCDebug(GAMES_PRIVATE_KGAME) << "uniquePlayer   " << d->mUniquePlayerNumber;
-    qCDebug(GAMES_PRIVATE_KGAME) << "gameStatus     " << gameStatus();
-    qCDebug(GAMES_PRIVATE_KGAME) << "MaxPlayers :   " << maxPlayers();
-    qCDebug(GAMES_PRIVATE_KGAME) << "NoOfPlayers :  " << playerCount();
-    qCDebug(GAMES_PRIVATE_KGAME) << "NoOfInactive:  " << d->mInactivePlayerList.count();
-    qCDebug(GAMES_PRIVATE_KGAME) << "---------------------------------------------------";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "------------------- KGAME -------------------------";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "this:          " << this;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "uniquePlayer   " << d->mUniquePlayerNumber;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "gameStatus     " << gameStatus();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "MaxPlayers :   " << maxPlayers();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "NoOfPlayers :  " << playerCount();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "NoOfInactive:  " << d->mInactivePlayerList.count();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "---------------------------------------------------";
 }
 
 void KGame::slotClientConnected(quint32 clientID)
@@ -1090,20 +1090,20 @@ void KGame::slotClientConnected(quint32 clientID)
 
 void KGame::slotServerDisconnected() // Client side
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "======= SERVER DISCONNECT =======";
-    qCDebug(GAMES_PRIVATE_KGAME) << "+++ (CLIENT)++++++++"
-                                 << ": our GameID=" << gameId();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "======= SERVER DISCONNECT =======";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "+++ (CLIENT)++++++++"
+                                       << ": our GameID=" << gameId();
 
     int oldgamestatus = gameStatus();
 
     KGamePlayerList removeList;
-    qCDebug(GAMES_PRIVATE_KGAME) << "Playerlist of client=" << d->mPlayerList.count() << "count";
-    qCDebug(GAMES_PRIVATE_KGAME) << "Inactive Playerlist of client=" << d->mInactivePlayerList.count() << "count";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Playerlist of client=" << d->mPlayerList.count() << "count";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Inactive Playerlist of client=" << d->mInactivePlayerList.count() << "count";
     for (KGamePlayerList::iterator it = d->mPlayerList.begin(); it != d->mPlayerList.end(); ++it) {
         KPlayer *player = *it;
         // TODO: CHECK: id=0, could not connect to server in the first place??
         if (KGameMessage::rawGameId(player->id()) != gameId() && gameId() != 0) {
-            qCDebug(GAMES_PRIVATE_KGAME) << "Player" << player->id() << "belongs to a removed game";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player" << player->id() << "belongs to a removed game";
             removeList.append(player);
         }
     }
@@ -1113,13 +1113,13 @@ void KGame::slotServerDisconnected() // Client side
         bool remove = true;
         Q_EMIT signalReplacePlayerIO(player, &remove);
         if (remove) {
-            qCDebug(GAMES_PRIVATE_KGAME) << " ---> Removing player" << player->id();
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << " ---> Removing player" << player->id();
             systemRemovePlayer(player, true); // no network necessary
         }
     }
 
     setMaster();
-    qCDebug(GAMES_PRIVATE_KGAME) << "our game id is after setMaster" << gameId();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "our game id is after setMaster" << gameId();
 
     KGamePlayerList mReList(d->mInactivePlayerList);
     for (KGamePlayerList::iterator it = mReList.begin(); it != mReList.end(); ++it) {
@@ -1129,14 +1129,14 @@ void KGame::slotServerDisconnected() // Client side
             systemActivatePlayer(player);
         }
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << "Players activated player-cnt=" << playerCount();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Players activated player-cnt=" << playerCount();
 
     for (KGamePlayerList::iterator it = d->mPlayerList.begin(); it != d->mPlayerList.end(); ++it) {
         KPlayer *player = *it;
         int oldid = player->id();
         d->mUniquePlayerNumber++;
         player->setId(KGameMessage::createPlayerId(d->mUniquePlayerNumber, gameId()));
-        qCDebug(GAMES_PRIVATE_KGAME) << "Player id" << oldid << " changed to" << player->id() << "as we are now local";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player id" << oldid << " changed to" << player->id() << "as we are now local";
     }
     // TODO clear inactive lists ?
     Debug();
@@ -1144,25 +1144,25 @@ void KGame::slotServerDisconnected() // Client side
         KPlayer *player = *it;
         player->Debug();
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << "+++++++++++"
-                                 << "DONE=";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "+++++++++++"
+                                       << "DONE=";
     Q_EMIT signalClientLeftGame(0, oldgamestatus, this);
 }
 
 void KGame::slotClientDisconnected(quint32 clientID, bool /*broken*/) // server side
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "++++(SERVER)+++++++"
-                                 << "clientId=" << clientID;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "++++(SERVER)+++++++"
+                                       << "clientId=" << clientID;
 
     int oldgamestatus = gameStatus();
 
     KPlayer *player;
     KGamePlayerList removeList;
-    qCDebug(GAMES_PRIVATE_KGAME) << "Playerlist of client=" << d->mPlayerList.count() << "count";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Playerlist of client=" << d->mPlayerList.count() << "count";
     for (KGamePlayerList::iterator it = d->mPlayerList.begin(); it != d->mPlayerList.end(); ++it) {
         KPlayer *player = *it;
         if (KGameMessage::rawGameId(player->id()) == clientID) {
-            qCDebug(GAMES_PRIVATE_KGAME) << "Player" << player->id() << "belongs to the removed game";
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Player" << player->id() << "belongs to the removed game";
             removeList.append(player);
         }
     }
@@ -1174,7 +1174,7 @@ void KGame::slotClientDisconnected(quint32 clientID, bool /*broken*/) // server 
         Q_EMIT signalReplacePlayerIO(player, &remove);
         if (remove) {
             // otherwise (no new KGameIO) remove the player
-            qCDebug(GAMES_PRIVATE_KGAME) << " ---> Removing player" << player->id();
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << " ---> Removing player" << player->id();
             removePlayer(player, 0);
         }
     }
@@ -1199,10 +1199,10 @@ void KGame::slotClientDisconnected(quint32 clientID, bool /*broken*/) // server 
 // clients should have the same status (ie players, properties, etc)
 void KGame::negotiateNetworkGame(quint32 clientID)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "==========================="
-                                 << ": clientID=" << clientID << " =========================== ";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "==========================="
+                                       << ": clientID=" << clientID << " =========================== ";
     if (!isAdmin()) {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": Serious WARNING..only gameAdmin should call this";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": Serious WARNING..only gameAdmin should call this";
         return;
     }
 

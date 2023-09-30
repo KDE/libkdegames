@@ -67,23 +67,26 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
     REQUIRED_HEADERS kdegames_HEADERS
 )
 
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_LIB
-    CATEGORY_NAME org.kde.games.lib
+ecm_qt_declare_logging_category(KDEGames
+    HEADER kdegames_logging.h
+    IDENTIFIER KDEGAMES_LOG
+    CATEGORY_NAME kdegames
     DESCRIPTION "libkdegames"
     EXPORT KDEGAMES
 )
 
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_UI
-    CATEGORY_NAME org.kde.games.ui
-    DESCRIPTION "libkdegames UI"
+ecm_qt_declare_logging_category(KDEGames
+    HEADER kdegames_audio_logging.h
+    IDENTIFIER KDEGAMES_AUDIO_LOG
+    CATEGORY_NAME kdegames.audio
+    DESCRIPTION "libkdegames Audio"
     EXPORT KDEGAMES
 )
 
-ecm_qt_export_logging_category(
-    IDENTIFIER GAMES_HIGHSCORE
-    CATEGORY_NAME org.kde.games.highscore
+ecm_qt_declare_logging_category(KDEGames
+    HEADER kdegames_highscore_logging.h
+    IDENTIFIER KDEGAMES_HIGHSCORE_LOG
+    CATEGORY_NAME kdegames.highscore
     DESCRIPTION "libkdegames Highscore"
     EXPORT KDEGAMES
 )

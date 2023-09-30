@@ -20,11 +20,8 @@
 #include <KToggleAction>
 // Qt
 #include <QAction>
-#include <QLoggingCategory>
 // std
 #include <type_traits>
-
-Q_DECLARE_LOGGING_CATEGORY(GAMES_UI)
 
 /**
  * Extension for KStandardAction in KDE Games

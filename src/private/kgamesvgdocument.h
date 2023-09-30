@@ -12,12 +12,9 @@
 // Qt
 #include <QDomDocument>
 #include <QHash>
-#include <QLoggingCategory>
 #include <QTransform>
 // Std
 #include <memory>
-
-Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KGameSvgDocumentPrivate;
 

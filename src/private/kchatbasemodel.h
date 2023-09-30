@@ -13,13 +13,10 @@
 #include "kdegamesprivate_export.h"
 // Qt
 #include <QAbstractListModel>
-#include <QLoggingCategory>
 #include <QPair>
 #include <QSharedDataPointer>
 // Std
 #include <memory>
-
-Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KChatBaseModelPrivate;
 class KChatBaseMessagePrivate;

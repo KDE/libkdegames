@@ -10,6 +10,7 @@
 // own
 #include "kmessageio.h"
 #include "kmessageserver.h"
+#include <kdegamesprivate_kgame_logging.h>
 // Qt
 #include <QBuffer>
 #include <QDataStream>
@@ -70,7 +71,7 @@ void KMessageClient::setServer(KMessageIO *connection)
 {
     if (d->connection) {
         delete d->connection;
-        qCDebug(GAMES_PRIVATE_KGAME) << ": We are changing the server!";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": We are changing the server!";
     }
 
     d->connection = connection;
@@ -127,7 +128,7 @@ QString KMessageClient::peerName() const
 void KMessageClient::sendServerMessage(const QByteArray &msg)
 {
     if (!d->connection) {
-        qCWarning(GAMES_PRIVATE_KGAME) << ": We have no connection yet!";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": We have no connection yet!";
         return;
     }
     d->connection->send(msg);
@@ -234,7 +235,7 @@ void KMessageClient::processMessage(const QByteArray &msg)
         in_stream >> id;
 
         if (d->clientList.contains(id))
-            qCWarning(GAMES_PRIVATE_KGAME) << ": Adding a client that already existed!";
+            qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": Adding a client that already existed!";
         else
             d->clientList.append(id);
 
@@ -247,7 +248,7 @@ void KMessageClient::processMessage(const QByteArray &msg)
         in_stream >> id >> broken;
 
         if (!d->clientList.contains(id))
-            qCWarning(GAMES_PRIVATE_KGAME) << ": Removing a client that doesn't exist!";
+            qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": Removing a client that doesn't exist!";
         else
             d->clientList.removeAll(id);
 
@@ -259,12 +260,12 @@ void KMessageClient::processMessage(const QByteArray &msg)
     }
 
     if (!unknown && !in_buffer.atEnd())
-        qCWarning(GAMES_PRIVATE_KGAME) << ": Extra data received for message ID" << messageID;
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": Extra data received for message ID" << messageID;
 
     Q_EMIT serverMessageReceived(msg, unknown);
 
     if (unknown)
-        qCWarning(GAMES_PRIVATE_KGAME) << ": received unknown message ID" << messageID;
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << ": received unknown message ID" << messageID;
 }
 
 void KMessageClient::processFirstMessage()
@@ -273,7 +274,7 @@ void KMessageClient::processFirstMessage()
         return;
     }
     if (d->delayedMessages.count() == 0) {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": no messages delayed";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": no messages delayed";
         return;
     }
     QByteArray first = d->delayedMessages.front();
@@ -283,7 +284,7 @@ void KMessageClient::processFirstMessage()
 
 void KMessageClient::removeBrokenConnection()
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ": timer single shot for removeBrokenConnection" << this;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": timer single shot for removeBrokenConnection" << this;
     // MH We cannot directly delete the socket. otherwise QSocket crashes
     QTimer::singleShot(0, this, &KMessageClient::removeBrokenConnection2);
     return;
@@ -291,26 +292,26 @@ void KMessageClient::removeBrokenConnection()
 
 void KMessageClient::removeBrokenConnection2()
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ": Broken:Deleting the connection object" << this;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Broken:Deleting the connection object" << this;
 
     Q_EMIT aboutToDisconnect(id());
     delete d->connection;
     d->connection = nullptr;
     d->adminID = 0;
     Q_EMIT connectionBroken();
-    qCDebug(GAMES_PRIVATE_KGAME) << ": Broken:Deleting the connection object DONE";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Broken:Deleting the connection object DONE";
 }
 
 void KMessageClient::disconnect()
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ": Disconnect:Deleting the connection object";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Disconnect:Deleting the connection object";
 
     Q_EMIT aboutToDisconnect(id());
     delete d->connection;
     d->connection = nullptr;
     d->adminID = 0;
     Q_EMIT connectionBroken();
-    qCDebug(GAMES_PRIVATE_KGAME) << ": Disconnect:Deleting the connection object DONE";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Disconnect:Deleting the connection object DONE";
 }
 
 void KMessageClient::lock()

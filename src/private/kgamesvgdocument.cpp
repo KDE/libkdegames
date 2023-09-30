@@ -7,11 +7,12 @@
 #include "kgamesvgdocument.h"
 #include "kgamesvgdocument_p.h"
 
+// own
+#include <kdegamesprivate_logging.h>
 // KF
 #include <KCompressionDevice>
 // Qt
 #include <QBuffer>
-#include <QDebug>
 #include <QDomElement>
 #include <QDomNode>
 #include <QFile>
@@ -171,7 +172,7 @@ QDomNode KGameSvgDocument::elementById(const QString &attributeValue)
 void KGameSvgDocument::load()
 {
     if (d->m_svgFilename.isNull()) {
-        qCDebug(GAMES_LIB) << "KGameSvgDocument::load(): Filename not specified.";
+        qCDebug(KDEGAMESPRIVATE_LOG) << "KGameSvgDocument::load(): Filename not specified.";
         return;
     }
 
@@ -197,7 +198,7 @@ void KGameSvgDocument::load()
 
     if (!setContent(content)) {
         file.close();
-        qCDebug(GAMES_LIB) << "DOM content not set.";
+        qCDebug(KDEGAMESPRIVATE_LOG) << "DOM content not set.";
         return;
     }
     file.close();
@@ -260,7 +261,7 @@ void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions
 {
     QTransform matrix;
     if ((xFactor == 0) || (yFactor == 0)) {
-        qWarning() << "KGameSvgDocument::scale: You cannot scale by zero";
+        qCWarning(KDEGAMESPRIVATE_LOG) << "KGameSvgDocument::scale: You cannot scale by zero";
     }
 
     if (options == ApplyToCurrentMatrix) {
@@ -495,7 +496,7 @@ QTransform KGameSvgDocument::transformMatrix() const
 
     rx.setPattern(TRANSFORMS);
     if (!rx.exactMatch(transformAttribute)) {
-        qWarning() << "Transform attribute seems to be invalid. Check your SVG file.";
+        qCWarning(KDEGAMESPRIVATE_LOG) << "Transform attribute seems to be invalid. Check your SVG file.";
         return QTransform();
     }
 
@@ -632,7 +633,7 @@ QDomNode KGameSvgDocumentPrivate::findElementById(const QString &attributeName, 
     }
     if (!node.firstChild().isNull() && !node.nextSibling().isNull()) {
         // Do Nothing
-        // qCDebug(GAMES_LIB) << "No children or siblings.";
+        // qCDebug(KDEGAMESPRIVATE_LOG) << "No children or siblings.";
     }
 
     // Matching node not found, so return a null node.

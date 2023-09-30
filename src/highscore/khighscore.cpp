@@ -10,6 +10,7 @@
 
 // own
 #include <config-highscore.h>
+#include <kdegames_highscore_logging.h>
 // KF
 #include <KConfig>
 #include <KConfigGroup>
@@ -28,8 +29,6 @@
 #endif
 
 #define GROUP "KHighscore"
-
-Q_LOGGING_CATEGORY(GAMES_HIGHSCORE, "org.kde.games.highscore", QtWarningMsg)
 
 class KHighscorePrivate
 {
@@ -71,7 +70,7 @@ void KHighscore::init(bool forceLocal)
     d->global = !forceLocal;
     if (d->global && lockedConfig->lock == 0) // If we're doing global highscores but not KFileLock has been set up yet
     {
-        qCWarning(GAMES_HIGHSCORE) << "KHighscore::init should be called before!!";
+        qCWarning(KDEGAMES_HIGHSCORE_LOG) << "KHighscore::init should be called before!!";
         abort();
     }
 #else
@@ -101,19 +100,19 @@ void KHighscore::init(const char *appname)
     /*QFile file(filename);
     if ( !file.open(QIODevice::ReadWrite) )
     {
-      qCWarning(GAMES_HIGHSCORE) << "cannot open global highscore file \""
+      qCWarning(KDEGAMES_HIGHSCORE_LOG) << "cannot open global highscore file \""
                                << filename << "\"";
       abort();
     }*/
 
     /*if (!(QFile::permissions(filename) & QFile::WriteOwner))
       {
-    qCWarning(GAMES_HIGHSCORE) << "cannot write to global highscore file \""
+    qCWarning(KDEGAMES_HIGHSCORE_LOG) << "cannot write to global highscore file \""
                 << filename << "\"";
     abort();
       }*/
 
-    qCDebug(GAMES_HIGHSCORE) << "Global highscore file \"" << filename << "\"";
+    qCDebug(KDEGAMES_HIGHSCORE_LOG) << "Global highscore file \"" << filename << "\"";
     lockedConfig->lock = new QLockFile(filename);
     lockedConfig->config = new KConfig(filename, KConfig::NoGlobals); // read-only   (matt-?)
 
@@ -135,11 +134,11 @@ bool KHighscore::lockForWriting(QWidget *widget)
 
     bool first = true;
     for (;;) {
-        qCDebug(GAMES_HIGHSCORE) << "try locking";
+        qCDebug(KDEGAMES_HIGHSCORE_LOG) << "try locking";
         // lock the highscore file (it should exist)
         int result = lockedConfig->lock->lock();
         bool ok = (result == 0);
-        qCDebug(GAMES_HIGHSCORE) << "locking system-wide highscore file res=" << result << " (ok=" << ok << ")";
+        qCDebug(KDEGAMES_HIGHSCORE_LOG) << "locking system-wide highscore file res=" << result << " (ok=" << ok << ")";
         if (ok) {
             readCurrentConfig();
             return true;
@@ -177,7 +176,7 @@ void KHighscore::writeAndUnlock()
     if (!isLocked())
         return;
 
-    qCDebug(GAMES_HIGHSCORE) << "unlocking";
+    qCDebug(KDEGAMES_HIGHSCORE_LOG) << "unlocking";
     lockedConfig->config->sync(); // write config
     lockedConfig->lock->unlock();
 }

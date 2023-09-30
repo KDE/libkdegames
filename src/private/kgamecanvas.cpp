@@ -8,6 +8,8 @@
 
 #include "kgamecanvas.h"
 
+// own
+#include <kdegamesprivate_logging.h>
 // Qt
 #include <QApplication>
 #include <QElapsedTimer>
@@ -461,7 +463,7 @@ void KGameCanvasItem::stackOver(KGameCanvasItem *ref)
         return;
 
     if (ref->m_canvas != m_canvas) {
-        qCritical("KGameCanvasItem::stackOver: Argument must be a sibling item!\n");
+        qCCritical(KDEGAMESPRIVATE_LOG) << "KGameCanvasItem::stackOver: Argument must be a sibling item!";
         return;
     }
 
@@ -484,7 +486,7 @@ void KGameCanvasItem::stackUnder(KGameCanvasItem *ref)
         return;
 
     if (ref->m_canvas != m_canvas) {
-        qCritical("KGameCanvasItem::stackUnder: Argument must be a sibling item!\n");
+        qCCritical(KDEGAMESPRIVATE_LOG) << "KGameCanvasItem::stackUnder: Argument must be a sibling item!";
         return;
     }
 

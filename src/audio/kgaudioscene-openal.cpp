@@ -8,8 +8,7 @@
 
 // own
 #include "kgopenalruntime_p.h"
-// Qt
-#include <QDebug>
+#include <kdegames_audio_logging.h>
 
 Q_GLOBAL_STATIC(KgOpenALRuntime, g_runtime)
 
@@ -61,14 +60,14 @@ KgOpenALRuntime::KgOpenALRuntime()
     , m_device(alcOpenDevice(""))
 {
     if (!m_device) {
-        qWarning() << "Failed to create OpenAL device";
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to create OpenAL device";
         m_error = true;
         return;
     }
     m_context = alcCreateContext(m_device, nullptr);
     int error = alcGetError(m_device);
     if (error != AL_NO_ERROR) {
-        qWarning() << "Failed to create OpenAL context: Error code" << error;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to create OpenAL context: Error code" << error;
         m_error = true;
         return;
     }
@@ -97,7 +96,7 @@ void KgOpenALRuntime::configureListener()
     alListener3f(AL_POSITION, m_listenerPos.x(), m_listenerPos.y(), 0);
     alListenerf(AL_GAIN, m_volume);
     if ((error = alGetError()) != AL_NO_ERROR) {
-        qWarning() << "Failed to setup OpenAL listener: Error code" << error;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to setup OpenAL listener: Error code" << error;
         m_error = true;
     }
 }

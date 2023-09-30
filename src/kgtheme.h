@@ -10,7 +10,6 @@
 // own
 #include "kdegames_export.h"
 // Qt
-#include <QLoggingCategory>
 #include <QMetaType>
 #include <QObject>
 // Std
@@ -51,8 +50,6 @@
  * If the [KGameTheme] group contains any further keys, their values can be
  * retrieved through the KgTheme::customData() method.
  */
-
-Q_DECLARE_LOGGING_CATEGORY(GAMES_LIB)
 
 class KDEGAMES_EXPORT KgTheme : public QObject
 {

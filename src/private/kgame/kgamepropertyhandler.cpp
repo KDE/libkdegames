@@ -10,6 +10,7 @@
 
 // own
 #include "kgamemessage.h"
+#include <kdegamesprivate_logging.h>
 // KF
 #include <KLocalizedString>
 // Qt
@@ -106,7 +107,7 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSe
                 p->command(stream, cmd, isSender);
             }
         } else {
-            qCritical() << ": (cmd): property" << propertyId << "not found";
+            qCCritical(KDEGAMESPRIVATE_LOG) << ": (cmd): property" << propertyId << "not found";
         }
         return true;
     }
@@ -118,7 +119,7 @@ bool KGamePropertyHandler::processMessage(QDataStream &stream, int id, bool isSe
             p->load(stream);
         }
     } else {
-        qCritical() << ": property" << propertyId << "not found";
+        qCCritical(KDEGAMESPRIVATE_LOG) << ": property" << propertyId << "not found";
     }
     return true;
 }
@@ -138,7 +139,7 @@ bool KGamePropertyHandler::addProperty(KGamePropertyBase *data, const QString &n
     // qDebug() << ":" << data->id();
     if (d->mIdDict.find(data->id()) != d->mIdDict.end()) {
         // this id already exists
-        qCritical() << "  -> cannot add property" << data->id();
+        qCCritical(KDEGAMESPRIVATE_LOG) << "  -> cannot add property" << data->id();
         return false;
     } else {
         d->mIdDict.insert(data->id(), data);
@@ -185,7 +186,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
     if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
         qDebug() << "   KGamePropertyHandler loaded properly";
     } else {
-        qCritical() << "KGamePropertyHandler loading error. probably format error";
+        qCCritical(KDEGAMESPRIVATE_LOG) << "KGamePropertyHandler loading error. probably format error";
     }
     // Allow direct emitting (if no other lock still holds)
     unlockDirectEmit();

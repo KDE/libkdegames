@@ -14,6 +14,7 @@
 #include "kgamemessage.h"
 #include "kgameproperty.h"
 #include "kgamepropertyhandler.h"
+#include <kdegamesprivate_kgame_logging.h>
 // KF
 #include <KLocalizedString>
 // Qt
@@ -64,8 +65,8 @@ KPlayer::KPlayer()
 void KPlayer::init()
 {
     // note that NO KGame object exists here! so we cannot use KGameProperty::send!
-    qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", sizeof(this)=" << sizeof(KPlayer);
-    qCDebug(GAMES_PRIVATE_KGAME) << "sizeof(m_Group)=" << sizeof(d->mGroup);
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": this=" << this << ", sizeof(this)=" << sizeof(KPlayer);
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "sizeof(m_Group)=" << sizeof(d->mGroup);
 
     d->mProperties.registerHandler(KGameMessage::IdPlayerProperty, this, SLOT(sendProperty(int, QDataStream &, bool *)), SLOT(emitSignal(KGamePropertyBase *)));
     d->mVirtual = false;
@@ -93,7 +94,7 @@ void KPlayer::init()
 
 KPlayer::~KPlayer()
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ": this=" << this << ", id=" << this->id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": this=" << this << ", id=" << this->id();
 
     // Delete IODevices
     qDeleteAll(d->mInputList);
@@ -105,7 +106,7 @@ KPlayer::~KPlayer()
     // note: mProperties does not use autoDelete or so - user must delete objects
     // himself
     d->mProperties.clear();
-    qCDebug(GAMES_PRIVATE_KGAME) << "done";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "done";
 }
 
 int KPlayer::rtti() const
@@ -171,8 +172,8 @@ bool KPlayer::forwardMessage(QDataStream &msg, int msgid, quint32 receiver, quin
     if (!game()) {
         return false;
     }
-    qCDebug(GAMES_PRIVATE_KGAME) << ": to game sender=" << sender << ""
-                                 << "recv=" << receiver << "msgid=" << msgid;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": to game sender=" << sender << ""
+                                       << "recv=" << receiver << "msgid=" << msgid;
     return game()->sendSystemMessage(msg, msgid, receiver, sender);
 }
 
@@ -185,9 +186,9 @@ bool KPlayer::forwardInput(QDataStream &msg, bool transmit, quint32 sender)
         return false;
     }
 
-    qCDebug(GAMES_PRIVATE_KGAME) << ": to game playerInput(sender=" << sender << ")";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": to game playerInput(sender=" << sender << ")";
     if (!asyncInput() && !myTurn()) {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": rejected cause it is not our turn";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": rejected cause it is not our turn";
         return false;
     }
 
@@ -196,10 +197,10 @@ bool KPlayer::forwardInput(QDataStream &msg, bool transmit, quint32 sender)
     // where it sends the input to the comserver and once with transmit = false
     // where it really looks at the input
     if (transmit) {
-        qCDebug(GAMES_PRIVATE_KGAME) << "indirect playerInput";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "indirect playerInput";
         return game()->sendPlayerInput(msg, this, sender);
     } else {
-        qCDebug(GAMES_PRIVATE_KGAME) << "direct playerInput";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "direct playerInput";
         return game()->systemPlayerInput(msg, this, sender);
     }
 }
@@ -283,7 +284,7 @@ bool KPlayer::addGameIO(KGameIO *input)
 // input=0, remove all
 bool KPlayer::removeGameIO(KGameIO *targetinput, bool deleteit)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ":" << targetinput << "delete=" << deleteit;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ":" << targetinput << "delete=" << deleteit;
     bool result = true;
     if (!targetinput) // delete all
     {
@@ -294,7 +295,7 @@ bool KPlayer::removeGameIO(KGameIO *targetinput, bool deleteit)
                 removeGameIO(input, deleteit);
         }
     } else {
-        //    qCDebug(GAMES_PRIVATE_KGAME) << "remove IO" << targetinput;
+        //    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "remove IO" << targetinput;
         if (deleteit) {
             delete targetinput;
         } else {
@@ -334,7 +335,7 @@ int KPlayer::calcIOValue()
 
 bool KPlayer::setTurn(bool b, bool exclusive)
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << ":" << id() << " (" << this << ") to" << b;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ":" << id() << " (" << this << ") to" << b;
     if (!isActive()) {
         return false;
     }
@@ -369,9 +370,9 @@ bool KPlayer::load(QDataStream &stream)
     qint16 cookie;
     stream >> cookie;
     if (cookie == KPLAYER_LOAD_COOKIE) {
-        qCDebug(GAMES_PRIVATE_KGAME) << "   Player loaded properly";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "   Player loaded properly";
     } else {
-        qCCritical(GAMES_PRIVATE_KGAME) << "   Player loading error. probably format error";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "   Player loading error. probably format error";
     }
 
     // Q_EMIT signalLoad(stream);
@@ -392,7 +393,7 @@ bool KPlayer::save(QDataStream &stream)
 
 void KPlayer::networkTransmission(QDataStream &stream, int msgid, quint32 sender)
 {
-    // qCDebug(GAMES_PRIVATE_KGAME) ": msgid=" << msgid << "sender=" << sender << "we are=" << id();
+    // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) ": msgid=" << msgid << "sender=" << sender << "we are=" << id();
     //  PlayerProperties processed
     bool issender;
     if (game()) {
@@ -405,14 +406,14 @@ void KPlayer::networkTransmission(QDataStream &stream, int msgid, quint32 sender
     }
     switch (msgid) {
     case KGameMessage::IdPlayerInput: {
-        qCDebug(GAMES_PRIVATE_KGAME) << ": Got player move "
-                                     << "KPlayer (virtual) forwards it to the game object";
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": Got player move "
+                                           << "KPlayer (virtual) forwards it to the game object";
         forwardInput(stream, false);
     } break;
     default:
         Q_EMIT signalNetworkData(msgid - KGameMessage::IdUser, ((QBuffer *)stream.device())->readAll(), sender, this);
-        qCDebug(GAMES_PRIVATE_KGAME) << ": "
-                                     << "User data msgid" << msgid;
+        qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": "
+                                           << "User data msgid" << msgid;
         break;
     }
 }
@@ -441,7 +442,7 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
 {
     // Notify KGameIO (Process) for a new turn
     if (me->id() == KGamePropertyBase::IdTurn) {
-        // qCDebug(GAMES_PRIVATE_KGAME) << ": for KGamePropertyBase::IdTurn";
+        // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": for KGamePropertyBase::IdTurn";
         QListIterator<KGameIO *> it(d->mInputList);
         while (it.hasNext()) {
             it.next()->notifyTurn(d->mMyTurn.value());
@@ -453,20 +454,20 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
 // --------------------- DEBUG --------------------
 void KPlayer::Debug()
 {
-    qCDebug(GAMES_PRIVATE_KGAME) << "------------------- KPLAYER -----------------------";
-    qCDebug(GAMES_PRIVATE_KGAME) << "this:    " << this;
-    qCDebug(GAMES_PRIVATE_KGAME) << "rtti:    " << rtti();
-    qCDebug(GAMES_PRIVATE_KGAME) << "id  :    " << id();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Name :   " << name();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Group:   " << group();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Async:   " << asyncInput();
-    qCDebug(GAMES_PRIVATE_KGAME) << "myTurn:  " << myTurn();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Virtual:" << isVirtual();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Active:  " << isActive();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Priority:" << networkPriority();
-    qCDebug(GAMES_PRIVATE_KGAME) << "Game   :" << game();
-    qCDebug(GAMES_PRIVATE_KGAME) << "#IOs:    " << d->mInputList.count();
-    qCDebug(GAMES_PRIVATE_KGAME) << "---------------------------------------------------";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "------------------- KPLAYER -----------------------";
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "this:    " << this;
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "rtti:    " << rtti();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "id  :    " << id();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Name :   " << name();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Group:   " << group();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Async:   " << asyncInput();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "myTurn:  " << myTurn();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Virtual:" << isVirtual();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Active:  " << isActive();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Priority:" << networkPriority();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Game   :" << game();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "#IOs:    " << d->mInputList.count();
+    qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "---------------------------------------------------";
 }
 
 #include "moc_kplayer.cpp"

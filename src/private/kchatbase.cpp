@@ -12,6 +12,8 @@
 // own
 #include "kchatbaseitemdelegate.h"
 #include "kchatbasemodel.h"
+#include <kdegamesprivate_kgame_logging.h>
+#include <kdegamesprivate_logging.h>
 // KF
 #include <KConfig>
 #include <KLineEdit>
@@ -22,8 +24,6 @@
 #include <QList>
 #include <QListView>
 #include <QVBoxLayout>
-
-Q_LOGGING_CATEGORY(GAMES_PRIVATE, "org.kde.games.private", QtWarningMsg)
 
 KChatBasePrivate::KChatBasePrivate(KChatBaseModel *model, KChatBaseItemDelegate *delegate, QWidget *parent)
 {
@@ -113,12 +113,12 @@ const QModelIndex KChatBase::indexAt(const QPoint &pos) const
 
 void KChatBase::customMenuHandler(const QPoint &pos)
 {
-    qCDebug(GAMES_PRIVATE) << "custom menu has been requested at position=" << pos << ". Implement handler at subclass if you need it.";
+    qCDebug(KDEGAMESPRIVATE_LOG) << "custom menu has been requested at position=" << pos << ". Implement handler at subclass if you need it.";
 }
 
 KChatBase::~KChatBase()
 {
-    // qCDebug(GAMES_LIB) << "KChatBase: DESTRUCT (" << this << ")";
+    // qCDebug(KDEGAMESPRIVATE_LOG) << "KChatBase: DESTRUCT (" << this << ")";
     saveConfig();
 }
 
@@ -150,12 +150,12 @@ bool KChatBase::insertSendingEntry(const QString &text, int id, int index)
     Q_D(KChatBase);
 
     if (!d->mCombo) {
-        qCWarning(GAMES_LIB) << "KChatBase: Cannot add an entry to the combo box";
+        qCWarning(KDEGAMESPRIVATE_LOG) << "KChatBase: Cannot add an entry to the combo box";
         return false;
     }
     if (d->mIndex2Id.indexOf(id) != -1) {
-        qCCritical(GAMES_LIB) << "KChatBase: Cannot add more than one entry with the same ID! ";
-        qCCritical(GAMES_LIB) << "KChatBase: Text=" << text;
+        qCCritical(KDEGAMESPRIVATE_LOG) << "KChatBase: Cannot add more than one entry with the same ID! ";
+        qCCritical(KDEGAMESPRIVATE_LOG) << "KChatBase: Text=" << text;
         return false;
     }
     d->mCombo->insertItem(index, text);
@@ -165,7 +165,7 @@ bool KChatBase::insertSendingEntry(const QString &text, int id, int index)
         d->mIndex2Id.insert(d->mIndex2Id.at(index), id);
     }
     if (d->mIndex2Id.count() != d->mCombo->count()) {
-        qCCritical(GAMES_LIB) << "KChatBase: internal ERROR - local IDs do not match combo box entries!";
+        qCCritical(KDEGAMESPRIVATE_LOG) << "KChatBase: internal ERROR - local IDs do not match combo box entries!";
     }
     return true;
 }
@@ -175,14 +175,14 @@ int KChatBase::sendingEntry() const
     Q_D(const KChatBase);
 
     if (!d->mCombo) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "Cannot retrieve index from NULL combo box";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "Cannot retrieve index from NULL combo box";
         return -1;
     }
     const int index = d->mCombo->currentIndex();
     if (index >= 0 && index < d->mIndex2Id.size())
         return d->mIndex2Id[index];
 
-    qCWarning(GAMES_LIB) << "could not find the selected sending entry!";
+    qCWarning(KDEGAMESPRIVATE_LOG) << "could not find the selected sending entry!";
     return -1;
 }
 
@@ -191,7 +191,7 @@ void KChatBase::removeSendingEntry(int id)
     Q_D(KChatBase);
 
     if (!d->mCombo) {
-        qCWarning(GAMES_LIB) << "KChatBase: Cannot remove an entry from the combo box";
+        qCWarning(KDEGAMESPRIVATE_LOG) << "KChatBase: Cannot remove an entry from the combo box";
         return;
     }
     int idx = findIndex(id);
@@ -206,7 +206,7 @@ void KChatBase::changeSendingEntry(const QString &text, int id)
     Q_D(KChatBase);
 
     if (!d->mCombo) {
-        qCWarning(GAMES_LIB) << "KChatBase: Cannot change an entry in the combo box";
+        qCWarning(KDEGAMESPRIVATE_LOG) << "KChatBase: Cannot change an entry in the combo box";
         return;
     }
     int index = findIndex(id);
@@ -218,7 +218,7 @@ void KChatBase::setSendingEntry(int id)
     Q_D(KChatBase);
 
     if (!d->mCombo) {
-        qCWarning(GAMES_LIB) << "KChatBase: Cannot set an entry in the combo box";
+        qCWarning(KDEGAMESPRIVATE_LOG) << "KChatBase: Cannot set an entry in the combo box";
         return;
     }
     d->mCombo->setCurrentIndex(findIndex(id));

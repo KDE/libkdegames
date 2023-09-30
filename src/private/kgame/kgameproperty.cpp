@@ -13,6 +13,7 @@
 #include "kgamemessage.h"
 #include "kgamepropertyhandler.h"
 #include "kplayer.h"
+#include <kdegamesprivate_kgame_logging.h>
 
 #define KPLAYERHANDLER_LOAD_COOKIE 6239
 
@@ -87,7 +88,7 @@ int KGamePropertyBase::registerData(int id, KGamePropertyHandler *owner, Propert
 {
     // we don't support changing the id
     if (!owner) {
-        qCWarning(GAMES_PRIVATE_KGAME) << "Resetting owner=0. Sure you want to do this?";
+        qCWarning(KDEGAMESPRIVATE_KGAME_LOG) << "Resetting owner=0. Sure you want to do this?";
         mOwner = nullptr;
         return -1;
     }
@@ -125,7 +126,7 @@ bool KGamePropertyBase::sendProperty()
     if (mOwner) {
         return mOwner->sendProperty(s);
     } else {
-        qCCritical(GAMES_PRIVATE_KGAME) << "Cannot send because there is no receiver defined";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << "Cannot send because there is no receiver defined";
         return false;
     }
 }
@@ -139,7 +140,7 @@ bool KGamePropertyBase::sendProperty(const QByteArray &data)
     if (mOwner) {
         return mOwner->sendProperty(s);
     } else {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": Cannot send because there is no receiver defined";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": Cannot send because there is no receiver defined";
         return false;
     }
 }
@@ -172,18 +173,18 @@ void KGamePropertyBase::setLock(bool l)
     if (mOwner) {
         mOwner->sendProperty(s);
     } else {
-        qCCritical(GAMES_PRIVATE_KGAME) << ": Cannot send because there is no receiver defined";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ": Cannot send because there is no receiver defined";
         return;
     }
 }
 
 void KGamePropertyBase::emitSignal()
 {
-    // qCDebug(GAMES_PRIVATE_KGAME) << ": mOwnerP="<< mOwner << "id=" << id();
+    // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": mOwnerP="<< mOwner << "id=" << id();
     if (mOwner) {
         mOwner->emitSignal(this);
     } else {
-        qCCritical(GAMES_PRIVATE_KGAME) << ":id=" << id() << " Cannot emitSignal because there is no handler set";
+        qCCritical(KDEGAMESPRIVATE_KGAME_LOG) << ":id=" << id() << " Cannot emitSignal because there is no handler set";
     }
 }
 

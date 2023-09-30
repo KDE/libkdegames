@@ -7,6 +7,8 @@
 #include "kgthemeprovider.h"
 #include "kgimageprovider_p.h"
 
+// own
+#include <kdegames_logging.h>
 // KF
 #include <KConfig>
 #include <KConfigGroup>
@@ -113,8 +115,8 @@ const KgTheme *KgThemeProvider::defaultTheme() const
 void KgThemeProvider::setDefaultTheme(const KgTheme *theme)
 {
     if (d->m_currentTheme) {
-        qCDebug(GAMES_LIB) << "You're calling setDefaultTheme after the current "
-                              "theme has already been determined. That's not gonna work.";
+        qCDebug(KDEGAMES_LOG) << "You're calling setDefaultTheme after the current "
+                                 "theme has already been determined. That's not gonna work.";
         return;
     }
     Q_ASSERT(d->m_themes.contains(theme));

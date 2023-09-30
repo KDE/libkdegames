@@ -12,6 +12,7 @@
 #include "kgamerendererclient.h"
 #include "kgtheme.h"
 #include "kgthemeprovider.h"
+#include <kdegames_logging.h>
 // Qt
 #include <QDateTime>
 #include <QFileInfo>
@@ -143,11 +144,11 @@ void KGameRendererPrivate::_k_setTheme(const KgTheme *theme)
     if (oldTheme == theme) {
         return;
     }
-    qCDebug(GAMES_LIB) << "Setting theme:" << theme->name();
+    qCDebug(KDEGAMES_LOG) << "Setting theme:" << theme->name();
     if (!setTheme(theme)) {
         const KgTheme *defaultTheme = m_provider->defaultTheme();
         if (theme != defaultTheme) {
-            qCDebug(GAMES_LIB) << "Falling back to default theme:" << defaultTheme->name();
+            qCDebug(KDEGAMES_LOG) << "Falling back to default theme:" << defaultTheme->name();
             setTheme(defaultTheme);
             m_provider->setCurrentTheme(defaultTheme);
         }
@@ -183,7 +184,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
         // FIXME: This logic breaks if the cache evicts the "kgr_timestamp" key. We need additional API in KSharedDataCache to make sure that this key does not
         // get evicted.
         if (cacheTimestamp < svgTimestamp) {
-            qCDebug(GAMES_LIB) << "Theme newer than cache, checking SVG";
+            qCDebug(KDEGAMES_LOG) << "Theme newer than cache, checking SVG";
             std::unique_ptr<QSvgRenderer> renderer(new QSvgRenderer(theme->graphicsPath()));
             if (renderer->isValid()) {
                 m_rendererPool.setPath(theme->graphicsPath(), renderer.release());
@@ -195,7 +196,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
                 delete m_imageCache;
                 KSharedDataCache::deleteCache(imageCacheName);
                 m_imageCache = oldCache.release();
-                qCDebug(GAMES_LIB) << "Theme change failed: SVG file broken";
+                qCDebug(KDEGAMES_LOG) << "Theme change failed: SVG file broken";
                 return false;
             }
         }
@@ -209,7 +210,7 @@ bool KGameRendererPrivate::setTheme(const KgTheme *theme)
         if (renderer->isValid()) {
             m_rendererPool.setPath(theme->graphicsPath(), renderer.release());
         } else {
-            qCDebug(GAMES_LIB) << "Theme change failed: SVG file broken";
+            qCDebug(KDEGAMES_LOG) << "Theme change failed: SVG file broken";
             return false;
         }
         // disconnect from disk cache (only needed if changing strategy)

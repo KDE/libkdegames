@@ -15,10 +15,7 @@
 // Qt
 #include <QDataStream>
 #include <QList>
-#include <QLoggingCategory>
 #include <QString>
-
-Q_DECLARE_LOGGING_CATEGORY(GAMES_PRIVATE_KGAME)
 
 class KPlayer;
 class KGamePropertyBase;

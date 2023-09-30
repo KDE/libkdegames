@@ -9,8 +9,7 @@
 // own
 #include "kgopenalruntime_p.h"
 #include "virtualfileqt-openal.h"
-// Qt
-#include <QDebug>
+#include <kdegames_audio_logging.h>
 // sndfile
 #include <sndfile.hh>
 
@@ -41,15 +40,15 @@ KgSound::KgSound(const QString &file, QObject *parent)
 {
     VirtualFileQt fileInterface(file);
     if (!fileInterface.open()) {
-        qWarning() << "Failed to open sound file" << file;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to open sound file" << file;
         return;
     }
 
     // open sound file
     SndfileHandle handle(VirtualFileQt::getSndfileVirtualIO(), &fileInterface);
     if (handle.error()) {
-        qWarning() << "Failed to load sound file" << file << ". Error message from libsndfile follows.";
-        qWarning() << handle.strError();
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to load sound file" << file << ". Error message from libsndfile follows.";
+        qCWarning(KDEGAMES_AUDIO_LOG) << handle.strError();
         return;
     }
     const int channelCount = handle.channels();
@@ -58,8 +57,8 @@ KgSound::KgSound(const QString &file, QObject *parent)
     // load data from sound file
     QList<ALshort> samples(sampleCount);
     if (handle.read(samples.data(), sampleCount) < sampleCount) {
-        qWarning() << "Failed to read sound file" << file;
-        qWarning() << "File ended unexpectedly.";
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to read sound file" << file;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "File ended unexpectedly.";
         return;
     }
     // determine file format from number of channels
@@ -72,8 +71,8 @@ KgSound::KgSound(const QString &file, QObject *parent)
         format = AL_FORMAT_STEREO16;
         break;
     default:
-        qWarning() << "Failed to read sound file" << file;
-        qWarning() << "More than two channels are not supported.";
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to read sound file" << file;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "More than two channels are not supported.";
         return;
     }
     // make sure OpenAL is initialized; clear OpenAL error storage
@@ -83,12 +82,12 @@ KgSound::KgSound(const QString &file, QObject *parent)
     // create OpenAL buffer
     alGenBuffers(1, &d->m_buffer);
     if ((error = alGetError()) != AL_NO_ERROR) {
-        qWarning() << "Failed to create OpenAL buffer: Error code" << error;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to create OpenAL buffer: Error code" << error;
         return;
     }
     alBufferData(d->m_buffer, format, samples.data(), sampleCount * sizeof(ALshort), sampleRate);
     if ((error = alGetError()) != AL_NO_ERROR) {
-        qWarning() << "Failed to fill OpenAL buffer: Error code" << error;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to fill OpenAL buffer: Error code" << error;
         alDeleteBuffers(1, &d->m_buffer);
         return;
     }
@@ -192,7 +191,7 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound *sound, const QPointF &pos)
     // create source for playback
     alGenSources(1, &m_source);
     if ((error = alGetError()) != AL_NO_ERROR) {
-        qWarning() << "Failed to create OpenAL source: Error code" << error;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to create OpenAL source: Error code" << error;
         return;
     }
     // store in OpenALRuntime
@@ -207,7 +206,7 @@ KgPlaybackEvent::KgPlaybackEvent(KgSound *sound, const QPointF &pos)
     alSourcef(m_source, AL_ROLLOFF_FACTOR, type == KgSound::AmbientPlayback ? 0.0 : 1.0);
     alSourcei(m_source, AL_SOURCE_RELATIVE, type == KgSound::RelativePlayback ? AL_TRUE : AL_FALSE);
     if ((error = alGetError()) != AL_NO_ERROR) {
-        qWarning() << "Failed to setup OpenAL source: Error code" << error;
+        qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to setup OpenAL source: Error code" << error;
         return;
     }
     // start playback
