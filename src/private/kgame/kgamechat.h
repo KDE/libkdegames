@@ -11,7 +11,7 @@
 
 // own
 #include "../kchatbase.h"
-#include "libkdegamesprivate_export.h"
+#include "kdegamesprivate_export.h"
 // Qt
 #include <QString>
 

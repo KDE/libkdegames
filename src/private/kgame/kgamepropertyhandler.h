@@ -10,8 +10,8 @@
 #define __KGAMEPROPERTYHANDLER_H_
 
 // own
+#include "kdegamesprivate_export.h"
 #include "kgameproperty.h"
-#include "libkdegamesprivate_export.h"
 // Qt
 #include <QMultiHash>
 #include <QObject>

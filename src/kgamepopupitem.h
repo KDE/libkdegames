@@ -8,7 +8,7 @@
 #define K_GAME_POPUP_ITEM_H
 
 // own
-#include <libkdegames_export.h>
+#include "kdegames_export.h"
 // Qt
 #include <QGraphicsItem>
 #include <QObject>

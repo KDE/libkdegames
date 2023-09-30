@@ -23,8 +23,6 @@ ecm_qt_export_logging_category(
 add_library(KDEGamesPrivate SHARED)
 
 ecm_generate_export_header(KDEGamesPrivate
-    EXPORT_FILE_NAME libkdegamesprivate_export.h
-    BASE_NAME KDEGAMESPRIVATE
     VERSION ${KDEGAMES_VERSION}
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS
@@ -88,7 +86,7 @@ install(TARGETS KDEGamesPrivate
 )
 
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/libkdegamesprivate_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/kdegamesprivate_export.h
     kchatbase.h
     kchatbaseitemdelegate.h
     kchatbasemodel.h

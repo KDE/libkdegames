@@ -10,7 +10,7 @@
 #define KSCOREDIALOG_H
 
 // own
-#include <libkdegames_export.h>
+#include <kdegames_export.h>
 // Qt
 #include <QDialog>
 #include <QMap>

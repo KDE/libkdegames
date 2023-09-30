@@ -8,8 +8,8 @@
 #define KGTHEMESELECTOR_H
 
 // own
+#include "kdegames_export.h"
 #include "kgthemeprovider.h"
-#include <libkdegames_export.h>
 // Qt
 #include <QWidget>
 // Std

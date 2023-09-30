@@ -10,8 +10,8 @@
 #define __KGAME_H_
 
 // own
+#include "kdegamesprivate_export.h"
 #include "kgamenetwork.h"
-#include "libkdegamesprivate_export.h"
 // Qt
 #include <QDataStream>
 #include <QList>

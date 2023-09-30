@@ -13,7 +13,7 @@
 #define KSTANDARDGAMEACTION_H
 
 // own
-#include <libkdegames_export.h>
+#include "kdegames_export.h"
 // KF
 #include <KRecentFilesAction>
 #include <KSelectAction>

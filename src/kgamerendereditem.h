@@ -8,8 +8,8 @@
 #define KGAMERENDEREDITEM_H
 
 // own
+#include "kdegames_export.h"
 #include "kgamerendererclient.h"
-#include <libkdegames_export.h>
 // Qt
 #include <QGraphicsItem>
 // Std

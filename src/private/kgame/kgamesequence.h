@@ -10,7 +10,7 @@
 #define __KGAMESEQUENCE_H_
 
 // own
-#include "libkdegamesprivate_export.h"
+#include "kdegamesprivate_export.h"
 // Qt
 #include <QObject>
 // Std

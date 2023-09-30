@@ -12,8 +12,8 @@
  */
 
 // own
+#include "kdegamesprivate_export.h"
 #include "kgamerendererclient.h"
-#include "libkdegamesprivate_export.h"
 // Qt
 #include <QList>
 #include <QPainter>

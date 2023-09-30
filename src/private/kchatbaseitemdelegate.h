@@ -9,7 +9,7 @@
 #define __KCHATBASEITEMDELEGATE_H__
 
 // own
-#include "libkdegamesprivate_export.h"
+#include "kdegamesprivate_export.h"
 // Qt
 #include <QAbstractItemDelegate>
 

@@ -8,7 +8,7 @@
 #define KGTHEME_H
 
 // own
-#include <libkdegames_export.h>
+#include "kdegames_export.h"
 // Qt
 #include <QLoggingCategory>
 #include <QMetaType>

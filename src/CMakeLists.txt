@@ -89,8 +89,6 @@ ecm_qt_export_logging_category(
 )
 
 ecm_generate_export_header(KDEGames
-    EXPORT_FILE_NAME libkdegames_export.h
-    BASE_NAME KDEGAMES
     VERSION ${KDEGAMES_VERSION}
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS
@@ -161,7 +159,7 @@ install(FILES
 )
 
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/kdegames_export.h
     ${CMAKE_CURRENT_BINARY_DIR}/libkdegames_capabilities.h
     ${kdegames_HEADERS}
     DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}
