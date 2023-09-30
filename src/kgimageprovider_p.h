@@ -23,9 +23,9 @@ class KGameThemeProvider;
  * SVGs are read and requested sprite pixmap is extracted and given to
  * the QML image element that requests it.
  *
- * For porting KDE games to QML, there is a KgItem QML component provided
+ * For porting KDE games to QML, there is a KGameItem QML component provided
  * by KgCore QML plugin which is a small wrapper to request pixmaps from
- * this KgImageProvider. See KgItem's documentation for details.
+ * this KgImageProvider. See KGameItem's documentation for details.
  * @since 4.11
  */
 class KgImageProvider : public QQuickImageProvider
