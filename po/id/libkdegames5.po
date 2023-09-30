@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 00:43+0000\n"
+"POT-Creation-Date: 2023-09-30 01:41+0000\n"
 "PO-Revision-Date: 2022-05-09 20:24+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Tidak dapat mengakses file tingkat skor. Pengguna lain mungkin sedang "
 "menulis untuk itu."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
 #, kde-format
 msgid "High Scores"
 msgstr "Tingkat Skor"
@@ -62,38 +62,38 @@ msgstr "Skor"
 msgid "Time"
 msgstr "Waktu"
 
-#: highscore/kscoredialog.cpp:273
+#: highscore/kscoredialog.cpp:265
 #, kde-format
 msgid "Rank"
 msgstr "Peringkat"
 
-#: highscore/kscoredialog.cpp:294
+#: highscore/kscoredialog.cpp:286
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:531
+#: highscore/kscoredialog.cpp:523
 #, kde-format
 msgid "&Remember"
 msgstr "&Ingat"
 
-#: highscore/kscoredialog.cpp:532
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Forget"
 msgstr "&Lupakan"
 
-#: highscore/kscoredialog.cpp:533
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "Remember this high score"
 msgstr "Ingat tingkat skor ini"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:526
 #, kde-format
 msgid "Forget this high score"
 msgstr "Lupakan tingkat skor ini"
 
-#: highscore/kscoredialog.cpp:542
+#: highscore/kscoredialog.cpp:534
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -102,7 +102,7 @@ msgstr ""
 "Hebat!\n"
 "Kamu memiliki sebuah tingkat skor baru!"
 
-#: highscore/kscoredialog.cpp:544
+#: highscore/kscoredialog.cpp:536
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -111,76 +111,76 @@ msgstr ""
 "Dilakukan dengan baik!\n"
 "Kamu berhasil sampai ke daftar tingkat skor!"
 
-#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#: kgdifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Mudah Menggelikan"
 
-#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#: kgdifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Sangat Mudah"
 
-#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#: kgdifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Mudah"
 
-#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#: kgdifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Sedang"
 
-#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#: kgdifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Sulit"
 
-#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#: kgdifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Sangat Sulit"
 
-#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#: kgdifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Sangat Sulit Sekali"
 
-#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#: kgdifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Tidak Mungkin"
 
-#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#: kgdifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "Mengubah tingkat kesulitan akan mengakhiri permainan saat ini!"
 
-#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#: kgdifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Mengubah tingkat kesulitan"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Tingkat Kesulitan"
 
-#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#: kgdifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Atur tingkat kesulitan"
 
-#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#: kgdifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Atur tingkat kesulitan permainan."
@@ -207,188 +207,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "oleh %1"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgctxt "new game"
 msgid "&New"
 msgstr "&Baru"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game."
 msgstr "Mulai sebagai permainan baru."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game"
 msgstr "Mulai sebagai permainan baru"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "&Load..."
 msgstr "&Muat..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "Open a saved game..."
 msgstr "Buka permainan yang disimpan..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Load &Recent"
 msgstr "Muat &Akhir-akhir Ini"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Open a recently saved game..."
 msgstr "Buka permainan yang disimpan belakangan ini..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart &Game"
 msgstr "Mulai Ulang &Permainan"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart the game"
 msgstr "Mulai-ulang permainan"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "&Save"
 msgstr "&Simpan"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "Save the current game"
 msgstr "Simpan permainan saat ini"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save &As..."
 msgstr "Simpan &Sebagai..."
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save the current game to another file"
 msgstr "Simpan permainan saat ini ke file lainnya"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "&End Game"
 msgstr "&Akhiri Permainan"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "End the current game"
 msgstr "Akhiri permainan saat ini"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pa&use"
 msgstr "Je&da"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pause the game"
 msgstr "Jeda permainan"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show &High Scores"
 msgstr "Tampilkan &Tingkat Skor"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show high scores"
 msgstr "Tampilkan tingkat skor"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "&Clear High Scores"
 msgstr "&Kosongkan Tingkat Skor"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "Clear high scores"
 msgstr "Kosongkan tingkat skor"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show Statistics"
 msgstr "Tampilkan Perangkaan"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show statistics"
 msgstr "Tampilkan perangkaan"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "&Clear Statistics"
 msgstr "&Kosongkan Perangkaan"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "Delete all-time statistics."
 msgstr "Hapus perangkaan semua waktu."
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:62
 msgid "&Print..."
 msgstr "&Cetak..."
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "&Quit"
 msgstr "&Berhenti"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "Quit the program"
 msgstr "Berhentikan program"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat"
 msgstr "Ulang"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat the last move"
 msgstr "Ulangi langkah tadi"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Und&o"
 msgstr "&Urung"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Undo the last move"
 msgstr "Urung langkah tadi"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Re&do"
 msgstr "U&lang"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Redo the latest move"
 msgstr "Ulang langkah terkini"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "&Roll Dice"
 msgstr "&Guling Dadu"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "Roll the dice"
 msgstr "Gulingkan dadu"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:76
 msgid "End Turn"
 msgstr "Akhiri Giliran"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "&Hint"
 msgstr "&Petunjuk"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "Give a hint"
 msgstr "Berikan sebuah petunjuk"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "&Demo"
 msgstr "&Demo"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "Play a demo"
 msgstr "Mainkan sebuah demo"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "&Solve"
 msgstr "&Terpecahkan"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "Solve the game"
 msgstr "Memecahkan permainan"
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:86
 msgid "Choose Game &Type"
 msgstr "Memilih &Jenis Permainan"
 
-#: kstandardgameaction.cpp:92
+#: kstandardgameaction.cpp:88
 msgid "Configure &Carddecks..."
 msgstr "Konfigurasikan &Carddecks..."
 
-#: kstandardgameaction.cpp:94
+#: kstandardgameaction.cpp:90
 msgid "Configure &High Scores..."
 msgstr "Konfigurasikan &Tingkat Skor..."
 
@@ -408,17 +408,17 @@ msgstr "Kirim ke %1"
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:86
+#: private/kgame/kgame.cpp:74
 #, kde-format
 msgid "MaxPlayers"
 msgstr "MaksPemain"
 
-#: private/kgame/kgame.cpp:88
+#: private/kgame/kgame.cpp:76
 #, kde-format
 msgid "MinPlayers"
 msgstr "MinPemain"
 
-#: private/kgame/kgame.cpp:90
+#: private/kgame/kgame.cpp:78
 #, kde-format
 msgid "GameStatus"
 msgstr "StatusPermainan"
@@ -578,22 +578,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 tak teregistrasi"
 msgstr[1] "%1 tak teregistrasi"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "Titik NULL"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "Benar"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "Salah"
 
-#: private/kgame/kgamepropertyhandler.cpp:384
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "Tak diketahui"
@@ -623,74 +623,48 @@ msgstr "AsyncInput"
 msgid "myTurn"
 msgstr "Giliranku"
 
-#: private/kgamedifficulty.cpp:116
-#, kde-format
-msgid "Difficulty"
-msgstr "Sulit"
+#~ msgid "Difficulty"
+#~ msgstr "Sulit"
 
-#: private/kgamedifficulty.cpp:198
-#, kde-format
-msgctxt ""
-"Name of the game difficulty level that is customized by the user by setting "
-"up different game parameters"
-msgid "Custom"
-msgstr "Kustom"
+#~ msgctxt ""
+#~ "Name of the game difficulty level that is customized by the user by "
+#~ "setting up different game parameters"
+#~ msgid "Custom"
+#~ msgstr "Kustom"
 
-#: private/kgamedifficulty.cpp:289
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
-"level while a game is running, you will have to cancel it and start a new "
-"one."
-msgstr ""
-"Pilih <b>sulit</b> pada permainan.<br />Jika kamu mengubah tingkat sulit "
-"sementara permainan sedang berjalan, kamu harus membatalkan ini dan memulai "
-"yang baru."
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
+#~ "difficulty level while a game is running, you will have to cancel it and "
+#~ "start a new one."
+#~ msgstr ""
+#~ "Pilih <b>sulit</b> pada permainan.<br />Jika kamu mengubah tingkat sulit "
+#~ "sementara permainan sedang berjalan, kamu harus membatalkan ini dan "
+#~ "memulai yang baru."
 
-#: private/kgamedifficulty.cpp:292
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
-"level during a running game."
-msgstr ""
-"Pilih <b>sulit</b> pada permainan.<br />Kamu bisa mengubah tingkat sulit "
-"selama permainan berjalan."
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
+#~ "difficulty level during a running game."
+#~ msgstr ""
+#~ "Pilih <b>sulit</b> pada permainan.<br />Kamu bisa mengubah tingkat sulit "
+#~ "selama permainan berjalan."
 
-#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
-#: private/kgamethemeselector.ui:40
-#, kde-format
-msgid "&Get New Themes..."
-msgstr "&Dapatkan Tema Baru..."
+#~ msgid "&Get New Themes..."
+#~ msgstr "&Dapatkan Tema Baru..."
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: private/kgamethemeselector.ui:55
-#, kde-format
-msgid "Preview"
-msgstr "Pratinjau"
+#~ msgid "Preview"
+#~ msgstr "Pratinjau"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: private/kgamethemeselector.ui:97
-#, kde-format
-msgid "Theme Details"
-msgstr "Perincian Tema"
+#~ msgid "Theme Details"
+#~ msgstr "Perincian Tema"
 
-#. i18n: ectx: property (text), widget (QLabel, labelContact)
-#: private/kgamethemeselector.ui:131
-#, kde-format
-msgid "Contact:"
-msgstr "Kontak:"
+#~ msgid "Contact:"
+#~ msgstr "Kontak:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelDescription)
-#: private/kgamethemeselector.ui:166
-#, kde-format
-msgid "Description:"
-msgstr "Deskripsi:"
+#~ msgid "Description:"
+#~ msgstr "Deskripsi:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
-#: private/kgamethemeselector.ui:201
-#, kde-format
-msgid "Author:"
-msgstr "Penulis:"
+#~ msgid "Author:"
+#~ msgstr "Penulis:"
 
 #~ msgid "Mean Score"
 #~ msgstr "Skor Rata-rata"

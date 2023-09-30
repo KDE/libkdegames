@@ -2,7 +2,7 @@
 # Translation of libkdegames.po to Slovenian
 # LIBKDEGAMES TRANSLATION TO SLOVENIAN LANGUAGE
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: libkdegames5.po 1659235 2023-08-30 01:26:29Z scripty $
+# $Id: libkdegames5.po 1661270 2023-09-30 02:04:22Z scripty $
 # $Source$
 #
 # Roman Maurer <roman.maurer@amis.net>, 2001.
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 00:43+0000\n"
+"POT-Creation-Date: 2023-09-30 01:41+0000\n"
 "PO-Revision-Date: 2020-02-25 20:31+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -42,7 +42,7 @@ msgstr ""
 "Ni bilo mogoče dostopati do datoteke z najboljšimi rezultati. Verjetno vanjo "
 "ravnokar piše drug uporabnik."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
 #, kde-format
 msgid "High Scores"
 msgstr "Najboljši rezultati"
@@ -72,38 +72,38 @@ msgstr "Rezultat"
 msgid "Time"
 msgstr "Čas"
 
-#: highscore/kscoredialog.cpp:273
+#: highscore/kscoredialog.cpp:265
 #, kde-format
 msgid "Rank"
 msgstr "Položaj"
 
-#: highscore/kscoredialog.cpp:294
+#: highscore/kscoredialog.cpp:286
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "št. %1"
 
-#: highscore/kscoredialog.cpp:531
+#: highscore/kscoredialog.cpp:523
 #, kde-format
 msgid "&Remember"
 msgstr "Zapomni si"
 
-#: highscore/kscoredialog.cpp:532
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Forget"
 msgstr "Pozabi"
 
-#: highscore/kscoredialog.cpp:533
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "Remember this high score"
 msgstr "Zapomni si ta najboljši rezultat"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:526
 #, kde-format
 msgid "Forget this high score"
 msgstr "Pozabi ta najboljši rezultat"
 
-#: highscore/kscoredialog.cpp:542
+#: highscore/kscoredialog.cpp:534
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -112,7 +112,7 @@ msgstr ""
 "Odlično!\n"
 "Imate nov najboljši rezultat!"
 
-#: highscore/kscoredialog.cpp:544
+#: highscore/kscoredialog.cpp:536
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -121,76 +121,76 @@ msgstr ""
 "Dobro opravljeno!\n"
 "Prišli ste na seznam najboljših rezultatov!"
 
-#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#: kgdifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Smešno lahka"
 
-#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#: kgdifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Zelo lahka"
 
-#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#: kgdifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Lahka"
 
-#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#: kgdifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Srednja"
 
-#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#: kgdifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Težka"
 
-#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#: kgdifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Zelo težka"
 
-#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#: kgdifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Izredno težka"
 
-#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#: kgdifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Nemogoča"
 
-#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#: kgdifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "Spreminjanje težavnosti bo končalo trenutno igro!"
 
-#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#: kgdifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Spremeni težavnost"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Težavnost"
 
-#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#: kgdifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Nastavite težavnost"
 
-#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#: kgdifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Nastavite težavnost igre."
@@ -217,188 +217,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "avtor: %1"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nova"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game."
 msgstr "Začni novo igro."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game"
 msgstr "Začni novo igro"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "&Load..."
 msgstr "Na&loži..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "Open a saved game..."
 msgstr "Odpri shranjeno igro ..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Load &Recent"
 msgstr "Naloži nedavno"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Open a recently saved game..."
 msgstr "Odpri nedavno shranjeno igro ..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart &Game"
 msgstr "Znova zaženi i&gro"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart the game"
 msgstr "Znova zažene igro"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "&Save"
 msgstr "&Shrani"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "Save the current game"
 msgstr "Shrani trenutno igro"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save &As..."
 msgstr "Shrani kot..."
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save the current game to another file"
 msgstr "Shrani trenutno igro v drugo datoteko"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "&End Game"
 msgstr "Končaj igro"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "End the current game"
 msgstr "Konča trenutno igro"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pa&use"
 msgstr "Premor"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pause the game"
 msgstr "Naredi premor igre"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show &High Scores"
 msgstr "Prikaži najboljše rezultate"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show high scores"
 msgstr "Prikaže najboljše rezultate"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "&Clear High Scores"
 msgstr "Počisti najboljše rezultate"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "Clear high scores"
 msgstr "Počisti najboljše rezultate"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show Statistics"
 msgstr "Prikaži statistiko"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show statistics"
 msgstr "Prikaže statistiko"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "&Clear Statistics"
 msgstr "Počisti statistiko"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "Delete all-time statistics."
 msgstr "Izbris celotne statistike."
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:62
 msgid "&Print..."
 msgstr "Natisni..."
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "&Quit"
 msgstr "Končaj"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "Quit the program"
 msgstr "Končaj program"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat"
 msgstr "Ponovi"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat the last move"
 msgstr "Ponovi zadnjo potezo"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Und&o"
 msgstr "Razveljavi"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Undo the last move"
 msgstr "Razveljavi zadnjo potezo"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Re&do"
 msgstr "Uveljavi"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Redo the latest move"
 msgstr "Uveljavi zadnjo potezo"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "&Roll Dice"
 msgstr "Vrzi kocko"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "Roll the dice"
 msgstr "Vrže kocko"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:76
 msgid "End Turn"
 msgstr "Končaj potezo"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "&Hint"
 msgstr "Namig"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "Give a hint"
 msgstr "Da namig"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "&Demo"
 msgstr "Pre&dstavitveni način"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "Play a demo"
 msgstr "Predvaja predstavitev"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "&Solve"
 msgstr "Reši"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "Solve the game"
 msgstr "Reši igro"
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:86
 msgid "Choose Game &Type"
 msgstr "Izberite vrsto igre"
 
-#: kstandardgameaction.cpp:92
+#: kstandardgameaction.cpp:88
 msgid "Configure &Carddecks..."
 msgstr "Nastavi hrbte kart ..."
 
-#: kstandardgameaction.cpp:94
+#: kstandardgameaction.cpp:90
 msgid "Configure &High Scores..."
 msgstr "Nastavi najboljše rezultate..."
 
@@ -418,17 +418,17 @@ msgstr "Pošlji v %1"
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:86
+#: private/kgame/kgame.cpp:74
 #, kde-format
 msgid "MaxPlayers"
 msgstr "NajvečIgralcev"
 
-#: private/kgame/kgame.cpp:88
+#: private/kgame/kgame.cpp:76
 #, kde-format
 msgid "MinPlayers"
 msgstr "NajmanjIgralcev"
 
-#: private/kgame/kgame.cpp:90
+#: private/kgame/kgame.cpp:78
 #, kde-format
 msgid "GameStatus"
 msgstr "StanjeIgre"
@@ -590,22 +590,22 @@ msgstr[1] "%1 neregistrirana"
 msgstr[2] "%1 neregistrirani"
 msgstr[3] "%1 neregistrirani"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "Kazalec NULL"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "Pravilno"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "Napačno"
 
-#: private/kgame/kgamepropertyhandler.cpp:384
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "Neznan"
@@ -635,73 +635,47 @@ msgstr "AsinhroniVhod"
 msgid "myTurn"
 msgstr "mojaPoteza"
 
-#: private/kgamedifficulty.cpp:116
-#, kde-format
-msgid "Difficulty"
-msgstr "Težavnost"
+#~ msgid "Difficulty"
+#~ msgstr "Težavnost"
 
-#: private/kgamedifficulty.cpp:198
-#, kde-format
-msgctxt ""
-"Name of the game difficulty level that is customized by the user by setting "
-"up different game parameters"
-msgid "Custom"
-msgstr "Po meri"
+#~ msgctxt ""
+#~ "Name of the game difficulty level that is customized by the user by "
+#~ "setting up different game parameters"
+#~ msgid "Custom"
+#~ msgstr "Po meri"
 
-#: private/kgamedifficulty.cpp:289
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
-"level while a game is running, you will have to cancel it and start a new "
-"one."
-msgstr ""
-"Izberite <b>težavnost</b> igre.<br/>Če spremenite težavnost med tekočo igro, "
-"boste morali igro zapreti in začeti znova."
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
+#~ "difficulty level while a game is running, you will have to cancel it and "
+#~ "start a new one."
+#~ msgstr ""
+#~ "Izberite <b>težavnost</b> igre.<br/>Če spremenite težavnost med tekočo "
+#~ "igro, boste morali igro zapreti in začeti znova."
 
-#: private/kgamedifficulty.cpp:292
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
-"level during a running game."
-msgstr ""
-"Izberite <b>težavnost</b> igre.<br />Težavnost lahko spremenite med tekočo "
-"igro."
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
+#~ "difficulty level during a running game."
+#~ msgstr ""
+#~ "Izberite <b>težavnost</b> igre.<br />Težavnost lahko spremenite med "
+#~ "tekočo igro."
 
-#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
-#: private/kgamethemeselector.ui:40
-#, kde-format
-msgid "&Get New Themes..."
-msgstr "Dobi nove teme..."
+#~ msgid "&Get New Themes..."
+#~ msgstr "Dobi nove teme..."
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: private/kgamethemeselector.ui:55
-#, kde-format
-msgid "Preview"
-msgstr "Predogled"
+#~ msgid "Preview"
+#~ msgstr "Predogled"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: private/kgamethemeselector.ui:97
-#, kde-format
-msgid "Theme Details"
-msgstr "Podrobnosti o temi"
+#~ msgid "Theme Details"
+#~ msgstr "Podrobnosti o temi"
 
-#. i18n: ectx: property (text), widget (QLabel, labelContact)
-#: private/kgamethemeselector.ui:131
-#, kde-format
-msgid "Contact:"
-msgstr "Stik:"
+#~ msgid "Contact:"
+#~ msgstr "Stik:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelDescription)
-#: private/kgamethemeselector.ui:166
-#, kde-format
-msgid "Description:"
-msgstr "Opis:"
+#~ msgid "Description:"
+#~ msgstr "Opis:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
-#: private/kgamethemeselector.ui:201
-#, kde-format
-msgid "Author:"
-msgstr "Avtor:"
+#~ msgid "Author:"
+#~ msgstr "Avtor:"
 
 #~ msgid "Mean Score"
 #~ msgstr "Vmesni rezultat"

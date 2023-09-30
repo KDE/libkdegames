@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 00:43+0000\n"
+"POT-Creation-Date: 2023-09-30 01:41+0000\n"
 "PO-Revision-Date: 2010-09-26 12:44-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 "ハイスコアファイルにアクセスできません。おそらく現在他のユーザがそのファイル"
 "に書き込んでいます。"
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
 #, kde-format
 msgid "High Scores"
 msgstr "ハイスコア"
@@ -69,38 +69,38 @@ msgstr "スコア"
 msgid "Time"
 msgstr "タイム"
 
-#: highscore/kscoredialog.cpp:273
+#: highscore/kscoredialog.cpp:265
 #, kde-format
 msgid "Rank"
 msgstr "順位"
 
-#: highscore/kscoredialog.cpp:294
+#: highscore/kscoredialog.cpp:286
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:531
+#: highscore/kscoredialog.cpp:523
 #, kde-format
 msgid "&Remember"
 msgstr "登録(&R)"
 
-#: highscore/kscoredialog.cpp:532
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Forget"
 msgstr "消去(&F)"
 
-#: highscore/kscoredialog.cpp:533
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "Remember this high score"
 msgstr "このハイスコアを登録します"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:526
 #, kde-format
 msgid "Forget this high score"
 msgstr "このハイスコアを登録せずに消去します"
 
-#: highscore/kscoredialog.cpp:542
+#: highscore/kscoredialog.cpp:534
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -109,7 +109,7 @@ msgstr ""
 "素晴しい!\n"
 "最高得点記録を更新しました!"
 
-#: highscore/kscoredialog.cpp:544
+#: highscore/kscoredialog.cpp:536
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -118,76 +118,76 @@ msgstr ""
 "やったね!\n"
 "ハイスコアリストに追加しました!"
 
-#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#: kgdifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "ばかばかしいほど簡単"
 
-#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#: kgdifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "非常に簡単"
 
-#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#: kgdifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "簡単"
 
-#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#: kgdifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "普通"
 
-#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#: kgdifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "難しい"
 
-#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#: kgdifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "非常に難しい"
 
-#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#: kgdifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "極度に難しい"
 
-#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#: kgdifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "不可能"
 
-#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#: kgdifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "ゲームの難易度を変更すると現在のゲームは終了します。"
 
-#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#: kgdifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "難易度を変更"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "難易度"
 
-#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#: kgdifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "難易度を設定"
 
-#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#: kgdifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "ゲームの難易度を設定します。"
@@ -217,188 +217,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgctxt "new game"
 msgid "&New"
 msgstr "新しいゲーム(&N)"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game."
 msgstr "新しいゲームを開始します。"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game"
 msgstr "新しいゲームを開始"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "&Load..."
 msgstr "読み込み(&L)..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "Open a saved game..."
 msgstr "保存したゲームを開く..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Load &Recent"
 msgstr "最近のゲームを読み込み(&R)"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Open a recently saved game..."
 msgstr "最近保存したゲームを開く..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart &Game"
 msgstr "ゲームを再スタート(&G)"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart the game"
 msgstr "ゲームを再スタート"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "Save the current game"
 msgstr "現在のゲームを保存"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save &As..."
 msgstr "名前を付けて保存(&A)..."
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save the current game to another file"
 msgstr "現在のゲームを別のファイルに保存"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "&End Game"
 msgstr "ゲームを終了(&E)"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "End the current game"
 msgstr "現在のゲームを終了"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pa&use"
 msgstr "一時停止(&U)"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pause the game"
 msgstr "ゲームを一時停止"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show &High Scores"
 msgstr "ハイスコアを表示(&H)"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show high scores"
 msgstr "ハイスコアを表示"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "&Clear High Scores"
 msgstr "ハイスコアをクリア(&C)"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "Clear high scores"
 msgstr "ハイスコアをクリア"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show Statistics"
 msgstr "統計を表示"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show statistics"
 msgstr "統計を表示"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "&Clear Statistics"
 msgstr "統計をクリア(&C)"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "Delete all-time statistics."
 msgstr "これまでのすべての統計を削除します。"
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:62
 msgid "&Print..."
 msgstr "印刷(&P)..."
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "&Quit"
 msgstr "終了(&Q)"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "Quit the program"
 msgstr "プログラムを終了"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat"
 msgstr "リピート"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat the last move"
 msgstr "最後の移動を繰り返す"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Und&o"
 msgstr "元に戻す(&O)"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Undo the last move"
 msgstr "最後の移動を取り消す"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Re&do"
 msgstr "やり直す(&D)"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Redo the latest move"
 msgstr "最後に取り消した移動をやり直す"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "&Roll Dice"
 msgstr "サイコロを振る(&R)"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "Roll the dice"
 msgstr "サイコロを振る"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:76
 msgid "End Turn"
 msgstr "番を終了"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "&Hint"
 msgstr "ヒント(&H)"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "Give a hint"
 msgstr "ヒントを表示"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "&Demo"
 msgstr "デモ(&D)"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "Play a demo"
 msgstr "デモを再生"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "&Solve"
 msgstr "解決(&S)"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "Solve the game"
 msgstr "ゲームを解く"
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:86
 msgid "Choose Game &Type"
 msgstr "ゲームのタイプを選択(&T)"
 
-#: kstandardgameaction.cpp:92
+#: kstandardgameaction.cpp:88
 msgid "Configure &Carddecks..."
 msgstr "カードデッキを設定(&C)..."
 
-#: kstandardgameaction.cpp:94
+#: kstandardgameaction.cpp:90
 msgid "Configure &High Scores..."
 msgstr "ハイスコアを設定(&H)..."
 
@@ -418,17 +418,17 @@ msgstr "%1 に送信"
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:86
+#: private/kgame/kgame.cpp:74
 #, kde-format
 msgid "MaxPlayers"
 msgstr "最大プレイヤー数"
 
-#: private/kgame/kgame.cpp:88
+#: private/kgame/kgame.cpp:76
 #, kde-format
 msgid "MinPlayers"
 msgstr "最小プレイヤー数"
 
-#: private/kgame/kgame.cpp:90
+#: private/kgame/kgame.cpp:78
 #, kde-format
 msgid "GameStatus"
 msgstr "ゲーム状況"
@@ -587,22 +587,22 @@ msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 未登録"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "ヌルポインタ"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "真"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "偽"
 
-#: private/kgame/kgamepropertyhandler.cpp:384
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
@@ -632,70 +632,44 @@ msgstr "非同期入力"
 msgid "myTurn"
 msgstr "あなたの番"
 
-#: private/kgamedifficulty.cpp:116
-#, kde-format
-msgid "Difficulty"
-msgstr "難易度"
+#~ msgid "Difficulty"
+#~ msgstr "難易度"
 
-#: private/kgamedifficulty.cpp:198
-#, kde-format
-msgctxt ""
-"Name of the game difficulty level that is customized by the user by setting "
-"up different game parameters"
-msgid "Custom"
-msgstr "カスタム"
+#~ msgctxt ""
+#~ "Name of the game difficulty level that is customized by the user by "
+#~ "setting up different game parameters"
+#~ msgid "Custom"
+#~ msgstr "カスタム"
 
-#: private/kgamedifficulty.cpp:289
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
-"level while a game is running, you will have to cancel it and start a new "
-"one."
-msgstr ""
-"<qt>ゲームの難易度を選択します。<br />難易度を変更すると進行中のゲームを中止"
-"して新しいゲームを開始することになります。</qt>"
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
+#~ "difficulty level while a game is running, you will have to cancel it and "
+#~ "start a new one."
+#~ msgstr ""
+#~ "<qt>ゲームの難易度を選択します。<br />難易度を変更すると進行中のゲームを中"
+#~ "止して新しいゲームを開始することになります。</qt>"
 
-#: private/kgamedifficulty.cpp:292
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
-"level during a running game."
-msgstr ""
-"<qt>ゲームの難易度を選択します。<br />ゲームの途中で難易度を変更することもで"
-"きます。</qt>"
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
+#~ "difficulty level during a running game."
+#~ msgstr ""
+#~ "<qt>ゲームの難易度を選択します。<br />ゲームの途中で難易度を変更することも"
+#~ "できます。</qt>"
 
-#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
-#: private/kgamethemeselector.ui:40
-#, kde-format
-msgid "&Get New Themes..."
-msgstr "新しいテーマを取得(&G)..."
+#~ msgid "&Get New Themes..."
+#~ msgstr "新しいテーマを取得(&G)..."
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: private/kgamethemeselector.ui:55
-#, kde-format
-msgid "Preview"
-msgstr "プレビュー"
+#~ msgid "Preview"
+#~ msgstr "プレビュー"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: private/kgamethemeselector.ui:97
-#, kde-format
-msgid "Theme Details"
-msgstr "テーマの詳細"
+#~ msgid "Theme Details"
+#~ msgstr "テーマの詳細"
 
-#. i18n: ectx: property (text), widget (QLabel, labelContact)
-#: private/kgamethemeselector.ui:131
-#, kde-format
-msgid "Contact:"
-msgstr "連絡先:"
+#~ msgid "Contact:"
+#~ msgstr "連絡先:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelDescription)
-#: private/kgamethemeselector.ui:166
-#, kde-format
-msgid "Description:"
-msgstr "説明:"
+#~ msgid "Description:"
+#~ msgstr "説明:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
-#: private/kgamethemeselector.ui:201
-#, kde-format
-msgid "Author:"
-msgstr "作者:"
+#~ msgid "Author:"
+#~ msgstr "作者:"

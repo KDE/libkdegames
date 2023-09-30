@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 00:43+0000\n"
+"POT-Creation-Date: 2023-09-30 01:41+0000\n"
 "PO-Revision-Date: 2012-06-12 19:41+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 "A legjobb eredményeket tartalmazó fájl nem érhető el. Lehet, hogy egy másik "
 "felhasználó lefoglalta írásra."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
+#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
 #, kde-format
 msgid "High Scores"
 msgstr "Dicsőségtábla"
@@ -61,38 +61,38 @@ msgstr "Pontszám"
 msgid "Time"
 msgstr "Idő"
 
-#: highscore/kscoredialog.cpp:273
+#: highscore/kscoredialog.cpp:265
 #, kde-format
 msgid "Rank"
 msgstr "Helyezés"
 
-#: highscore/kscoredialog.cpp:294
+#: highscore/kscoredialog.cpp:286
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "%1."
 
-#: highscore/kscoredialog.cpp:531
+#: highscore/kscoredialog.cpp:523
 #, kde-format
 msgid "&Remember"
 msgstr "&Megjegyzés"
 
-#: highscore/kscoredialog.cpp:532
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Forget"
 msgstr "&Elfelejtés"
 
-#: highscore/kscoredialog.cpp:533
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "Remember this high score"
 msgstr "Emlékezzen erre a magas pontszámra"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:526
 #, kde-format
 msgid "Forget this high score"
 msgstr "Felejtse el ezt a magas pontszámot"
 
-#: highscore/kscoredialog.cpp:542
+#: highscore/kscoredialog.cpp:534
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -101,7 +101,7 @@ msgstr ""
 "Kitűnően játszott!\n"
 "Az eredmény felkerült a dicsőségtáblára!"
 
-#: highscore/kscoredialog.cpp:544
+#: highscore/kscoredialog.cpp:536
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -110,76 +110,76 @@ msgstr ""
 "Gratulálunk!\n"
 "Sikerült felkerülnie a dicsőségtáblára!"
 
-#: kgdifficulty.cpp:74 private/kgamedifficulty.cpp:149
+#: kgdifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Rendkívül könnyű"
 
-#: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
+#: kgdifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Nagyon könnyű"
 
-#: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
+#: kgdifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Könnyű"
 
-#: kgdifficulty.cpp:83 private/kgamedifficulty.cpp:155
+#: kgdifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Közepes"
 
-#: kgdifficulty.cpp:86 private/kgamedifficulty.cpp:157
+#: kgdifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Nehéz"
 
-#: kgdifficulty.cpp:89 private/kgamedifficulty.cpp:159
+#: kgdifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Nagyon nehéz"
 
-#: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
+#: kgdifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Rendkívül nehéz"
 
-#: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
+#: kgdifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Lehetetlen"
 
-#: kgdifficulty.cpp:289 private/kgamedifficulty.cpp:130
+#: kgdifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "A nehézségi szint megváltozásakor az éppen futó játék befejeződik!"
 
-#: kgdifficulty.cpp:291 private/kgamedifficulty.cpp:132
+#: kgdifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Más nehézségi szint"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383 private/kgamedifficulty.cpp:106
+#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Nehézségi szint"
 
-#: kgdifficulty.cpp:384 private/kgamedifficulty.cpp:107
+#: kgdifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "A nehézségi szint beállítása"
 
-#: kgdifficulty.cpp:385 private/kgamedifficulty.cpp:108
+#: kgdifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Beállítja a játék nehézségi fokát."
@@ -206,188 +206,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "%1"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgctxt "new game"
 msgid "&New"
 msgstr "Ú&j"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game."
 msgstr "Új játék indítása."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:38
 msgid "Start a new game"
 msgstr "Új játék indítása"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "&Load..."
 msgstr "B&etöltés..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:40
 msgid "Open a saved game..."
 msgstr "Mentett játék megnyitása..."
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Load &Recent"
 msgstr "Leg&utóbbi betöltése"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:42
 msgid "Open a recently saved game..."
 msgstr "Nemrég mentett játék megnyitása..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart &Game"
 msgstr "Új&rakezdés"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:44
 msgid "Restart the game"
 msgstr "A játék újrakezdése"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "&Save"
 msgstr "M&entés"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:46
 msgid "Save the current game"
 msgstr "Az aktuális játék mentése"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save &As..."
 msgstr "Mentés máské&nt..."
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:48
 msgid "Save the current game to another file"
 msgstr "Az aktuális játék mentése más fájlba"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "&End Game"
 msgstr "A játék be&fejezése"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:50
 msgid "End the current game"
 msgstr "Az aktuális játék befejezése"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pa&use"
 msgstr "Szü&net"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:52
 msgid "Pause the game"
 msgstr "Szünet"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show &High Scores"
 msgstr "D&icsőségtábla"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:54
 msgid "Show high scores"
 msgstr "A dicsőségtábla megjelenítése"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "&Clear High Scores"
 msgstr "A dicsőségtábla &törlése"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:56
 msgid "Clear high scores"
 msgstr "A dicsőségtábla törlése"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show Statistics"
 msgstr "Statisztika"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:58
 msgid "Show statistics"
 msgstr "Statisztika"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "&Clear Statistics"
 msgstr "A statisztika &törlése"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:60
 msgid "Delete all-time statistics."
 msgstr "Az összes statisztikai adat törlése."
 
-#: kstandardgameaction.cpp:66
+#: kstandardgameaction.cpp:62
 msgid "&Print..."
 msgstr "&Nyomtatás..."
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "&Quit"
 msgstr "&Kilépés"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:64
 msgid "Quit the program"
 msgstr "Kilépés a programból"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat"
 msgstr "Megismétlés"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:68
 msgid "Repeat the last move"
 msgstr "Az utolsó lépés megismétlése"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Und&o"
 msgstr "&Visszavonás"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:70
 msgid "Undo the last move"
 msgstr "Az utolsó lépés visszavonása"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Re&do"
 msgstr "Újra vég&rehajtás"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:72
 msgid "Redo the latest move"
 msgstr "Az utolsó lépés újbóli végrehajtása"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "&Roll Dice"
 msgstr "&Dobás"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:74
 msgid "Roll the dice"
 msgstr "Dobás a kockával"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:76
 msgid "End Turn"
 msgstr "Következő"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "&Hint"
 msgstr "Ti&pp"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:78
 msgid "Give a hint"
 msgstr "Tipp kérése"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "&Demo"
 msgstr "&Demó"
 
-#: kstandardgameaction.cpp:84
+#: kstandardgameaction.cpp:80
 msgid "Play a demo"
 msgstr "Demó"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "&Solve"
 msgstr "Megol&dás"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:82
 msgid "Solve the game"
 msgstr "A játék megoldása"
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:86
 msgid "Choose Game &Type"
 msgstr "A nehézségi szint ki&választása"
 
-#: kstandardgameaction.cpp:92
+#: kstandardgameaction.cpp:88
 msgid "Configure &Carddecks..."
 msgstr "A kártya&csomagok beállításai..."
 
-#: kstandardgameaction.cpp:94
+#: kstandardgameaction.cpp:90
 msgid "Configure &High Scores..."
 msgstr "A dicsősé&gtábla beállításai..."
 
@@ -407,17 +407,17 @@ msgstr "Küldés %1 részére"
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:86
+#: private/kgame/kgame.cpp:74
 #, kde-format
 msgid "MaxPlayers"
 msgstr "Maxjátékosok"
 
-#: private/kgame/kgame.cpp:88
+#: private/kgame/kgame.cpp:76
 #, kde-format
 msgid "MinPlayers"
 msgstr "Minjátékosok"
 
-#: private/kgame/kgame.cpp:90
+#: private/kgame/kgame.cpp:78
 #, kde-format
 msgid "GameStatus"
 msgstr "Játékállapot"
@@ -577,22 +577,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 nem regisztrált"
 msgstr[1] "%1 nem regisztrált"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "NULL-mutató"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "igaz"
 
-#: private/kgame/kgamepropertyhandler.cpp:378
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "hamis"
 
-#: private/kgame/kgamepropertyhandler.cpp:384
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "ismeretlen"
@@ -622,74 +622,48 @@ msgstr "AszinkronBemenet"
 msgid "myTurn"
 msgstr "ÉnJövök"
 
-#: private/kgamedifficulty.cpp:116
-#, kde-format
-msgid "Difficulty"
-msgstr "Nehézségi szint"
+#~ msgid "Difficulty"
+#~ msgstr "Nehézségi szint"
 
-#: private/kgamedifficulty.cpp:198
-#, kde-format
-msgctxt ""
-"Name of the game difficulty level that is customized by the user by setting "
-"up different game parameters"
-msgid "Custom"
-msgstr "Egyedi"
+#~ msgctxt ""
+#~ "Name of the game difficulty level that is customized by the user by "
+#~ "setting up different game parameters"
+#~ msgid "Custom"
+#~ msgstr "Egyedi"
 
-#: private/kgamedifficulty.cpp:289
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />If you change the difficulty "
-"level while a game is running, you will have to cancel it and start a new "
-"one."
-msgstr ""
-"Válassza ki a játék <b>nehézségi szintjét</b>.<br />Ha egy játék futása "
-"közben vált át más nehézségi szintre, új játék kezdődik, és a futó játék "
-"véget ér."
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
+#~ "difficulty level while a game is running, you will have to cancel it and "
+#~ "start a new one."
+#~ msgstr ""
+#~ "Válassza ki a játék <b>nehézségi szintjét</b>.<br />Ha egy játék futása "
+#~ "közben vált át más nehézségi szintre, új játék kezdődik, és a futó játék "
+#~ "véget ér."
 
-#: private/kgamedifficulty.cpp:292
-#, kde-format
-msgid ""
-"Select the <b>difficulty</b> of the game.<br />You can change the difficulty "
-"level during a running game."
-msgstr ""
-"Válassza ki a játék <b>nehézségi szintjét</b>.<br />A szint egy játék futása "
-"közben is megváltoztatható."
+#~ msgid ""
+#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
+#~ "difficulty level during a running game."
+#~ msgstr ""
+#~ "Válassza ki a játék <b>nehézségi szintjét</b>.<br />A szint egy játék "
+#~ "futása közben is megváltoztatható."
 
-#. i18n: ectx: property (text), widget (KNSWidgets::Button, getNewButton)
-#: private/kgamethemeselector.ui:40
-#, kde-format
-msgid "&Get New Themes..."
-msgstr "Új témák &letöltése…"
+#~ msgid "&Get New Themes..."
+#~ msgstr "Új témák &letöltése…"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: private/kgamethemeselector.ui:55
-#, kde-format
-msgid "Preview"
-msgstr "Előnézet"
+#~ msgid "Preview"
+#~ msgstr "Előnézet"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: private/kgamethemeselector.ui:97
-#, kde-format
-msgid "Theme Details"
-msgstr "A téma jellemzői"
+#~ msgid "Theme Details"
+#~ msgstr "A téma jellemzői"
 
-#. i18n: ectx: property (text), widget (QLabel, labelContact)
-#: private/kgamethemeselector.ui:131
-#, kde-format
-msgid "Contact:"
-msgstr "Elérhetőség:"
+#~ msgid "Contact:"
+#~ msgstr "Elérhetőség:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelDescription)
-#: private/kgamethemeselector.ui:166
-#, kde-format
-msgid "Description:"
-msgstr "Leírás:"
+#~ msgid "Description:"
+#~ msgstr "Leírás:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelAuthor)
-#: private/kgamethemeselector.ui:201
-#, kde-format
-msgid "Author:"
-msgstr "Szerző:"
+#~ msgid "Author:"
+#~ msgstr "Szerző:"
 
 #~ msgid "Mean Score"
 #~ msgstr "Átlagpontszám"
