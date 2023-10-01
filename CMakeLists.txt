@@ -82,7 +82,7 @@ set(KGAUDIO_LINKLIBS ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
 set(KGAUDIO_BACKEND openal)
 set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 
-add_definitions(-DTRANSLATION_DOMAIN="libkdegames5")
+add_definitions(-DTRANSLATION_DOMAIN="libkdegames6")
 
 ecm_set_disabled_deprecation_versions(
     QT 6.5
