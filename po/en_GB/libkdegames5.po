@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-30 01:41+0000\n"
+"POT-Creation-Date: 2023-10-01 01:54+0000\n"
 "PO-Revision-Date: 2014-06-29 12:11+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: highscore/khighscore.cpp:150
+#: highscore/khighscore.cpp:149
 #, kde-format
 msgid "Retry"
 msgstr "Retry"
 
-#: highscore/khighscore.cpp:152
+#: highscore/khighscore.cpp:151
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -32,68 +32,68 @@ msgstr ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
+#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
 #, kde-format
 msgid "High Scores"
 msgstr "High Scores"
 
-#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
 #, kde-format
 msgid "Name"
 msgstr "Name"
 
-#: highscore/kscoredialog.cpp:111
+#: highscore/kscoredialog.cpp:112
 #, kde-format
 msgid "Date"
 msgstr "Date"
 
-#: highscore/kscoredialog.cpp:113
+#: highscore/kscoredialog.cpp:114
 #, kde-format
 msgid "Level"
 msgstr "Level"
 
-#: highscore/kscoredialog.cpp:115
+#: highscore/kscoredialog.cpp:116
 #, kde-format
 msgid "Score"
 msgstr "Score"
 
-#: highscore/kscoredialog.cpp:117
+#: highscore/kscoredialog.cpp:118
 #, kde-format
 msgid "Time"
 msgstr "Time"
 
-#: highscore/kscoredialog.cpp:265
+#: highscore/kscoredialog.cpp:266
 #, kde-format
 msgid "Rank"
 msgstr "Rank"
 
-#: highscore/kscoredialog.cpp:286
+#: highscore/kscoredialog.cpp:287
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:523
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Remember"
 msgstr "&Remember"
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "&Forget"
 msgstr "&Forget"
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:526
 #, kde-format
 msgid "Remember this high score"
 msgstr "Remember this high score"
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:527
 #, kde-format
 msgid "Forget this high score"
 msgstr "Forget this high score"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:535
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -102,7 +102,7 @@ msgstr ""
 "Excellent!\n"
 "You have a new high score!"
 
-#: highscore/kscoredialog.cpp:536
+#: highscore/kscoredialog.cpp:537
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -207,188 +207,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "by %1"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgctxt "new game"
 msgid "&New"
 msgstr "&New"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgid "Start a new game."
 msgstr "Start a new game."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgid "Start a new game"
 msgstr "Start a new game"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 msgid "&Load..."
 msgstr "&Load..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 msgid "Open a saved game..."
 msgstr "Open a saved game..."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 msgid "Load &Recent"
 msgstr "Load &Recent"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 msgid "Open a recently saved game..."
 msgstr "Open a recently saved game..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 msgid "Restart &Game"
 msgstr "Restart &Game"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 msgid "Restart the game"
 msgstr "Restart the game"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 msgid "&Save"
 msgstr "&Save"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 msgid "Save the current game"
 msgstr "Save the current game"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 msgid "Save &As..."
 msgstr "Save &As..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 msgid "Save the current game to another file"
 msgstr "Save the current game to another file"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 msgid "&End Game"
 msgstr "&End Game"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 msgid "End the current game"
 msgstr "End the current game"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 msgid "Pa&use"
 msgstr "Pa&use"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 msgid "Pause the game"
 msgstr "Pause the game"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 msgid "Show &High Scores"
 msgstr "Show &High Scores"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 msgid "Show high scores"
 msgstr "Show high scores"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 msgid "&Clear High Scores"
 msgstr "&Clear High Scores"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 msgid "Clear high scores"
 msgstr "Clear high scores"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 msgid "Show Statistics"
 msgstr "Show Statistics"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 msgid "Show statistics"
 msgstr "Show statistics"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 msgid "&Clear Statistics"
 msgstr "&Clear Statistics"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 msgid "Delete all-time statistics."
 msgstr "Delete all-time statistics."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:60
 msgid "&Print..."
 msgstr "&Print..."
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 msgid "&Quit"
 msgstr "&Quit"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 msgid "Quit the program"
 msgstr "Quit the program"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat"
 msgstr "Repeat"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat the last move"
 msgstr "Repeat the last move"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 msgid "Und&o"
 msgstr "Und&o"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 msgid "Undo the last move"
 msgstr "Undo the last move"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 msgid "Re&do"
 msgstr "Re&do"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 msgid "Redo the latest move"
 msgstr "Redo the latest move"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 msgid "&Roll Dice"
 msgstr "&Roll Dice"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 msgid "Roll the dice"
 msgstr "Roll the dice"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:74
 msgid "End Turn"
 msgstr "End Turn"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 msgid "&Hint"
 msgstr "&Hint"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 msgid "Give a hint"
 msgstr "Give a hint"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 msgid "&Demo"
 msgstr "&Demo"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 msgid "Play a demo"
 msgstr "Play a demo"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "&Solve"
 msgstr "&Solve"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "Solve the game"
 msgstr "Solve the game"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:84
 msgid "Choose Game &Type"
 msgstr "Choose Game &Type"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Configure &Carddecks..."
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:88
 msgid "Configure &High Scores..."
 msgstr "Configure &High Scores..."
 
@@ -397,44 +397,44 @@ msgstr "Configure &High Scores..."
 msgid "Send to All Players"
 msgstr "Send to All Players"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
 #, kde-format
 msgid "Send to %1"
 msgstr "Send to %1"
 
-#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
-#: private/kchatbaseitemdelegate.cpp:61
+#: private/kchatbaseitemdelegate.cpp:41 private/kchatbaseitemdelegate.cpp:43
+#: private/kchatbaseitemdelegate.cpp:60
 #, kde-format
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:74
+#: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "MaxPlayers"
 msgstr "MaxPlayers"
 
-#: private/kgame/kgame.cpp:76
+#: private/kgame/kgame.cpp:75
 #, kde-format
 msgid "MinPlayers"
 msgstr "MinPlayers"
 
-#: private/kgame/kgame.cpp:78
+#: private/kgame/kgame.cpp:77
 #, kde-format
 msgid "GameStatus"
 msgstr "GameStatus"
 
-#: private/kgame/kgamechat.cpp:83
+#: private/kgame/kgamechat.cpp:84
 #, kde-format
 msgid "Player %1"
 msgstr "Player %1"
 
-#: private/kgame/kgamechat.cpp:91
+#: private/kgame/kgamechat.cpp:92
 #, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: private/kgame/kgamechat.cpp:233
+#: private/kgame/kgamechat.cpp:234
 #, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "Send to My Group (\"%1\")"
@@ -561,64 +561,64 @@ msgstr "Process Query"
 msgid "Player ID"
 msgstr "Player ID"
 
-#: private/kgame/kgamepropertyhandler.cpp:162
+#: private/kgame/kgamepropertyhandler.cpp:163
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: private/kgame/kgamepropertyhandler.cpp:164
+#: private/kgame/kgamepropertyhandler.cpp:165
 #, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "Unnamed - ID: %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:168
+#: private/kgame/kgamepropertyhandler.cpp:169
 #, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 unregistered"
 msgstr[1] "%1 unregistered"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:342
 #, kde-format
 msgid "NULL pointer"
 msgstr "NULL pointer"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "True"
 msgstr "True"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "False"
 msgstr "False"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:365
 #, kde-format
 msgid "Unknown"
 msgstr "Unknown"
 
-#: private/kgame/kplayer.cpp:79
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "UserId"
 msgstr "UserId"
 
-#: private/kgame/kplayer.cpp:81
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "Group"
 msgstr "Group"
 
-#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
 #, kde-format
 msgid "default"
 msgstr "default"
 
-#: private/kgame/kplayer.cpp:86
+#: private/kgame/kplayer.cpp:87
 #, kde-format
 msgid "AsyncInput"
 msgstr "AsyncInput"
 
-#: private/kgame/kplayer.cpp:88
+#: private/kgame/kplayer.cpp:89
 #, kde-format
 msgid "myTurn"
 msgstr "myTurn"

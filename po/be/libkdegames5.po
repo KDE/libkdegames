@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-30 01:41+0000\n"
+"POT-Creation-Date: 2023-10-01 01:54+0000\n"
 "PO-Revision-Date: 2008-01-01 20:57+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
 "%100>=11 && n%100<=14 ? 2 : 3);\n"
 
-#: highscore/khighscore.cpp:150
+#: highscore/khighscore.cpp:149
 #, fuzzy, kde-format
 msgid "Retry"
 msgstr "Зноўку"
 
-#: highscore/khighscore.cpp:152
+#: highscore/khighscore.cpp:151
 #, fuzzy, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -33,68 +33,68 @@ msgid ""
 msgstr ""
 "Не атрымліваецца прачытаць файл рэкордаў. Магчыма, ён заняты іншай праграмай."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
+#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
 #, fuzzy, kde-format
 msgid "High Scores"
 msgstr "Табліца рэкордаў"
 
-#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
 #, kde-format
 msgid "Name"
 msgstr "Імя"
 
-#: highscore/kscoredialog.cpp:111
+#: highscore/kscoredialog.cpp:112
 #, fuzzy, kde-format
 msgid "Date"
 msgstr "Дата"
 
-#: highscore/kscoredialog.cpp:113
+#: highscore/kscoredialog.cpp:114
 #, fuzzy, kde-format
 msgid "Level"
 msgstr "Узровень"
 
-#: highscore/kscoredialog.cpp:115
+#: highscore/kscoredialog.cpp:116
 #, fuzzy, kde-format
 msgid "Score"
 msgstr "Рахунак"
 
-#: highscore/kscoredialog.cpp:117
+#: highscore/kscoredialog.cpp:118
 #, fuzzy, kde-format
 msgid "Time"
 msgstr "Час"
 
-#: highscore/kscoredialog.cpp:265
+#: highscore/kscoredialog.cpp:266
 #, fuzzy, kde-format
 msgid "Rank"
 msgstr "Катэгорыя"
 
-#: highscore/kscoredialog.cpp:286
+#: highscore/kscoredialog.cpp:287
 #, fuzzy, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:523
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Remember"
 msgstr ""
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "&Forget"
 msgstr ""
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:526
 #, fuzzy, kde-format
 msgid "Remember this high score"
 msgstr "Рэкорды"
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:527
 #, fuzzy, kde-format
 msgid "Forget this high score"
 msgstr "Рэкорды"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:535
 #, fuzzy, kde-format
 msgid ""
 "Excellent!\n"
@@ -103,7 +103,7 @@ msgstr ""
 "Выдатна!\n"
 "У вас новы рэкорд!"
 
-#: highscore/kscoredialog.cpp:536
+#: highscore/kscoredialog.cpp:537
 #, fuzzy, kde-format
 msgid ""
 "Well done!\n"
@@ -217,231 +217,231 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 #, fuzzy
 msgctxt "new game"
 msgid "&New"
 msgstr "Сетка"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 #, fuzzy
 msgid "Start a new game."
 msgstr "Стварыць сеткавую гульню"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 #, fuzzy
 msgid "Start a new game"
 msgstr "Стварыць сеткавую гульню"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 #, fuzzy
 msgid "&Load..."
 msgstr "Загрузіць..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 #, fuzzy
 msgid "Open a saved game..."
 msgstr "Адкрыць а."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 #, fuzzy
 msgid "Load &Recent"
 msgstr "Загрузіць нядаўнія"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 #, fuzzy
 msgid "Open a recently saved game..."
 msgstr "Адкрыць а."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 #, fuzzy
 msgid "Restart &Game"
 msgstr "Пачаць зноўку"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 #, fuzzy
 msgid "Restart the game"
 msgstr "Пачаць зноўку"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 #, fuzzy
 msgid "&Save"
 msgstr "Рашэнне"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 #, fuzzy
 msgid "Save the current game"
 msgstr "Запісаць"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 #, fuzzy
 msgid "Save &As..."
 msgstr "Захаваць як..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 #, fuzzy
 msgid "Save the current game to another file"
 msgstr "Запісаць"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 #, fuzzy
 msgid "&End Game"
 msgstr "Скончыць гульню"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 #, fuzzy
 msgid "End the current game"
 msgstr "End"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 #, fuzzy
 msgid "Pa&use"
 msgstr "Паўза"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 #, fuzzy
 msgid "Pause the game"
 msgstr "Паўза"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 #, fuzzy
 msgid "Show &High Scores"
 msgstr "Табліца рэкордаў"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 #, fuzzy
 msgid "Show high scores"
 msgstr "Табліца рэкордаў"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 #, fuzzy
 msgid "&Clear High Scores"
 msgstr "Рэкорды"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 #, fuzzy
 msgid "Clear high scores"
 msgstr "Рэкорды"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 #, fuzzy
 msgid "Show Statistics"
 msgstr "Статыстыка"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 #, fuzzy
 msgid "Show statistics"
 msgstr "Статыстыка"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 #, fuzzy
 msgid "&Clear Statistics"
 msgstr "Статыстыка"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 #, fuzzy
 msgid "Delete all-time statistics."
 msgstr "Выдаліць усе."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:60
 #, fuzzy
 msgid "&Print..."
 msgstr "&Друкаваць..."
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 #, fuzzy
 msgid "&Quit"
 msgstr "Падказка"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 #, fuzzy
 msgid "Quit the program"
 msgstr "Выхад"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 #, fuzzy
 msgid "Repeat"
 msgstr "Паўтарыць"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat the last move"
 msgstr ""
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 #, fuzzy
 msgid "Und&o"
 msgstr "Адмяніць"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 #, fuzzy
 msgid "Undo the last move"
 msgstr "Вярнуць"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 #, fuzzy
 msgid "Re&do"
 msgstr "Вярнуць"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 #, fuzzy
 msgid "Redo the latest move"
 msgstr "Паўтарыць"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 #, fuzzy
 msgid "&Roll Dice"
 msgstr "Кінуць косці"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 #, fuzzy
 msgid "Roll the dice"
 msgstr "Кінуць косці"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:74
 #, fuzzy
 msgid "End Turn"
 msgstr "Канец ходу"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 #, fuzzy
 msgid "&Hint"
 msgstr "Падказка"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 #, fuzzy
 msgid "Give a hint"
 msgstr "а падказка"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 #, fuzzy
 msgid "&Demo"
 msgstr "Дэманстрацыя"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 #, fuzzy
 msgid "Play a demo"
 msgstr "Імя гульца"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 #, fuzzy
 msgid "&Solve"
 msgstr "Рашэнне"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "Solve the game"
 msgstr ""
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:84
 #, fuzzy
 msgid "Choose Game &Type"
 msgstr "Узровень складанасці"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 #, fuzzy
 msgid "Configure &Carddecks..."
 msgstr "Наладзіць размалёўку карт..."
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:88
 #, fuzzy
 msgid "Configure &High Scores..."
 msgstr "Настаўленне Высокі."
@@ -451,44 +451,44 @@ msgstr "Настаўленне Высокі."
 msgid "Send to All Players"
 msgstr "Адправіць усім гульцам"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
 #, kde-format
 msgid "Send to %1"
 msgstr "Адправіць %1"
 
-#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
-#: private/kchatbaseitemdelegate.cpp:61
+#: private/kchatbaseitemdelegate.cpp:41 private/kchatbaseitemdelegate.cpp:43
+#: private/kchatbaseitemdelegate.cpp:60
 #, fuzzy, kde-format
 msgid "%1: "
 msgstr "%1 %2"
 
-#: private/kgame/kgame.cpp:74
+#: private/kgame/kgame.cpp:73
 #, fuzzy, kde-format
 msgid "MaxPlayers"
 msgstr "Максімум гульцоў"
 
-#: private/kgame/kgame.cpp:76
+#: private/kgame/kgame.cpp:75
 #, fuzzy, kde-format
 msgid "MinPlayers"
 msgstr "Мінімум гульцоў"
 
-#: private/kgame/kgame.cpp:78
+#: private/kgame/kgame.cpp:77
 #, kde-format
 msgid "GameStatus"
 msgstr "Стан гульні"
 
-#: private/kgame/kgamechat.cpp:83
+#: private/kgame/kgamechat.cpp:84
 #, fuzzy, kde-format
 msgid "Player %1"
 msgstr "Гулец %1"
 
-#: private/kgame/kgamechat.cpp:91
+#: private/kgame/kgamechat.cpp:92
 #, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "Невядомы"
 
-#: private/kgame/kgamechat.cpp:233
+#: private/kgame/kgamechat.cpp:234
 #, fuzzy, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "Адправіць у маю групу (\"%1\")"
@@ -615,17 +615,17 @@ msgstr "Запыт працэсу"
 msgid "Player ID"
 msgstr "Ідэнтыфікатар гульца"
 
-#: private/kgame/kgamepropertyhandler.cpp:162
+#: private/kgame/kgamepropertyhandler.cpp:163
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: private/kgame/kgamepropertyhandler.cpp:164
+#: private/kgame/kgamepropertyhandler.cpp:165
 #, fuzzy, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "Безназоўны - ідэнтыфікатар: %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:168
+#: private/kgame/kgamepropertyhandler.cpp:169
 #, fuzzy, kde-format
 #| msgid "%1 unregistered"
 msgid "%1 unregistered"
@@ -634,47 +634,47 @@ msgstr[0] "%1 не зарэгістраваны"
 msgstr[1] "%1 не зарэгістраваны"
 msgstr[2] "%1 не зарэгістраваны"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:342
 #, kde-format
 msgid "NULL pointer"
 msgstr "Нулявы паказальнік"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "True"
 msgstr "ісціна"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "False"
 msgstr "мана"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:365
 #, kde-format
 msgid "Unknown"
 msgstr "Невядомы"
 
-#: private/kgame/kplayer.cpp:79
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "UserId"
 msgstr "ID карыстальніка"
 
-#: private/kgame/kplayer.cpp:81
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "Group"
 msgstr "Група"
 
-#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
 #, kde-format
 msgid "default"
 msgstr "па змаўчанні"
 
-#: private/kgame/kplayer.cpp:86
+#: private/kgame/kplayer.cpp:87
 #, kde-format
 msgid "AsyncInput"
 msgstr "Асінхронны ўвод"
 
-#: private/kgame/kplayer.cpp:88
+#: private/kgame/kplayer.cpp:89
 #, kde-format
 msgid "myTurn"
 msgstr "Мой ход"

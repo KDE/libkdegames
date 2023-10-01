@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-30 01:41+0000\n"
+"POT-Creation-Date: 2023-10-01 01:54+0000\n"
 "PO-Revision-Date: 2012-08-08 05:15+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 1.2\n"
 
-#: highscore/khighscore.cpp:150
+#: highscore/khighscore.cpp:149
 #, kde-format
 msgid "Retry"
 msgstr "Қайталау"
 
-#: highscore/khighscore.cpp:152
+#: highscore/khighscore.cpp:151
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -31,68 +31,68 @@ msgstr ""
 "Жетістіктер файлға қатнай алмады. Оған басқа пайдаланушы жазып жатқаны "
 "мүмкін."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
+#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
 #, kde-format
 msgid "High Scores"
 msgstr "Жетістіктер"
 
-#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
 #, kde-format
 msgid "Name"
 msgstr "Аты"
 
-#: highscore/kscoredialog.cpp:111
+#: highscore/kscoredialog.cpp:112
 #, kde-format
 msgid "Date"
 msgstr "Кашан"
 
-#: highscore/kscoredialog.cpp:113
+#: highscore/kscoredialog.cpp:114
 #, kde-format
 msgid "Level"
 msgstr "Деңгейі"
 
-#: highscore/kscoredialog.cpp:115
+#: highscore/kscoredialog.cpp:116
 #, kde-format
 msgid "Score"
 msgstr "Ұпайы"
 
-#: highscore/kscoredialog.cpp:117
+#: highscore/kscoredialog.cpp:118
 #, kde-format
 msgid "Time"
 msgstr "Уақыт"
 
-#: highscore/kscoredialog.cpp:265
+#: highscore/kscoredialog.cpp:266
 #, kde-format
 msgid "Rank"
 msgstr "Орны"
 
-#: highscore/kscoredialog.cpp:286
+#: highscore/kscoredialog.cpp:287
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:523
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Remember"
 msgstr "&Жаттап алу"
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "&Forget"
 msgstr "Ұ&мыту"
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:526
 #, kde-format
 msgid "Remember this high score"
 msgstr "Жетістікті жазу"
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:527
 #, kde-format
 msgid "Forget this high score"
 msgstr "Жетістікті жазбау"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:535
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -101,7 +101,7 @@ msgstr ""
 "Бәрекелді!\n"
 "Жаңа жетістігіңізбен!"
 
-#: highscore/kscoredialog.cpp:536
+#: highscore/kscoredialog.cpp:537
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -206,188 +206,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "Авторы: %1"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgctxt "new game"
 msgid "&New"
 msgstr "&Жаңа"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgid "Start a new game."
 msgstr "Жаңа ойынды бастау."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgid "Start a new game"
 msgstr "Жаңа ойынды бастау"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 msgid "&Load..."
 msgstr "Ж&үктеу..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 msgid "Open a saved game..."
 msgstr "Сақталған ойынды ашу..."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 msgid "Load &Recent"
 msgstr "Жуыр&дағаны ашу"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 msgid "Open a recently saved game..."
 msgstr "Жуырда сақталған ойынды ашу..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 msgid "Restart &Game"
 msgstr "&Ойынды жаңадан бастау"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 msgid "Restart the game"
 msgstr "Ойынды жаңадан бастау"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 msgid "&Save"
 msgstr "&Сақтау"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 msgid "Save the current game"
 msgstr "Ойнап жатқанды сақтау"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 msgid "Save &As..."
 msgstr "&Былай сақтау..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 msgid "Save the current game to another file"
 msgstr "Ойнап жатқанды басқа файлға сақтау"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 msgid "&End Game"
 msgstr "Ойынды аяқтау"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 msgid "End the current game"
 msgstr "Ойнап жатқанды аяқтау"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 msgid "Pa&use"
 msgstr "А&ялдату"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 msgid "Pause the game"
 msgstr "Ойынды аялдату"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 msgid "Show &High Scores"
 msgstr "Ж&етістіктерді көрсету"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 msgid "Show high scores"
 msgstr "Жетістіктерін көрсету"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 msgid "&Clear High Scores"
 msgstr "Жетістіктерді &тазалау"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 msgid "Clear high scores"
 msgstr "Жетістіктерін тазалау"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 msgid "Show Statistics"
 msgstr "Статистиканы көрсету"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 msgid "Show statistics"
 msgstr "Статистикасын көрсету"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 msgid "&Clear Statistics"
 msgstr "Статистиканы &тазалау"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 msgid "Delete all-time statistics."
 msgstr "Бүкіл уақыт статистикасын өшіру"
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:60
 msgid "&Print..."
 msgstr "&Басып шығару..."
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 msgid "&Quit"
 msgstr "&Шығу"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 msgid "Quit the program"
 msgstr "Бағдарламадан шығу"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat"
 msgstr "Қайталау"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat the last move"
 msgstr "Соңғы жүрісті қайталау"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 msgid "Und&o"
 msgstr "Жүрістен қ&айту"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 msgid "Undo the last move"
 msgstr "Соңғы жүрістен қайту"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 msgid "Re&do"
 msgstr "Қайтудан а&йну"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 msgid "Redo the latest move"
 msgstr "Соңғы қайтудан айну"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 msgid "&Roll Dice"
 msgstr "Ойын сүйегін &лақтыру"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 msgid "Roll the dice"
 msgstr "Ойын сүйегін тастау"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:74
 msgid "End Turn"
 msgstr "Жүрісті аяқтау"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 msgid "&Hint"
 msgstr "&Ишара"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 msgid "Give a hint"
 msgstr "Ишара беру"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 msgid "&Demo"
 msgstr "&Мысал"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 msgid "Play a demo"
 msgstr "Ойын мысалын көрсету"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "&Solve"
 msgstr "&Шешім"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "Solve the game"
 msgstr "Ойынды шешіп беру"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:84
 msgid "Choose Game &Type"
 msgstr "Ойының түрін таңдау"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "&Карта дестесін баптау..."
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:88
 msgid "Configure &High Scores..."
 msgstr "Ж&етістіктерді баптау..."
 
@@ -396,44 +396,44 @@ msgstr "Ж&етістіктерді баптау..."
 msgid "Send to All Players"
 msgstr "Бүкіл ойыншыларға жіберу"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
 #, kde-format
 msgid "Send to %1"
 msgstr "%1 дегенге жіберу"
 
-#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
-#: private/kchatbaseitemdelegate.cpp:61
+#: private/kchatbaseitemdelegate.cpp:41 private/kchatbaseitemdelegate.cpp:43
+#: private/kchatbaseitemdelegate.cpp:60
 #, kde-format
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:74
+#: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "MaxPlayers"
 msgstr "Макс.Ойышылар"
 
-#: private/kgame/kgame.cpp:76
+#: private/kgame/kgame.cpp:75
 #, kde-format
 msgid "MinPlayers"
 msgstr "Мин.Ойыншылар"
 
-#: private/kgame/kgame.cpp:78
+#: private/kgame/kgame.cpp:77
 #, kde-format
 msgid "GameStatus"
 msgstr "ОйынКүйі"
 
-#: private/kgame/kgamechat.cpp:83
+#: private/kgame/kgamechat.cpp:84
 #, kde-format
 msgid "Player %1"
 msgstr "%1 ойыншысы"
 
-#: private/kgame/kgamechat.cpp:91
+#: private/kgame/kgamechat.cpp:92
 #, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "Беймәлім"
 
-#: private/kgame/kgamechat.cpp:233
+#: private/kgame/kgamechat.cpp:234
 #, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "Менің тобыма (\"%1\") жіберу"
@@ -560,63 +560,63 @@ msgstr "Сұранысты өңдеу"
 msgid "Player ID"
 msgstr "Ойыншының ID-і"
 
-#: private/kgame/kgamepropertyhandler.cpp:162
+#: private/kgame/kgamepropertyhandler.cpp:163
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: private/kgame/kgamepropertyhandler.cpp:164
+#: private/kgame/kgamepropertyhandler.cpp:165
 #, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "Аталмаған - ID: %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:168
+#: private/kgame/kgamepropertyhandler.cpp:169
 #, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 тіркелмеген"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:342
 #, kde-format
 msgid "NULL pointer"
 msgstr "НӨЛ көрсеткіші"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "True"
 msgstr "Ақиқат"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "False"
 msgstr "Жалған"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:365
 #, kde-format
 msgid "Unknown"
 msgstr "Беймәлім"
 
-#: private/kgame/kplayer.cpp:79
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "UserId"
 msgstr "Пайдалн.ID"
 
-#: private/kgame/kplayer.cpp:81
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "Group"
 msgstr "Тобы"
 
-#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
 #, kde-format
 msgid "default"
 msgstr "әдетті"
 
-#: private/kgame/kplayer.cpp:86
+#: private/kgame/kplayer.cpp:87
 #, kde-format
 msgid "AsyncInput"
 msgstr "Ассинх.Кіріс"
 
-#: private/kgame/kplayer.cpp:88
+#: private/kgame/kplayer.cpp:89
 #, kde-format
 msgid "myTurn"
 msgstr "Жүрісім"

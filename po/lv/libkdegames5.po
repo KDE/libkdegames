@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-30 01:41+0000\n"
+"POT-Creation-Date: 2023-10-01 01:54+0000\n"
 "PO-Revision-Date: 2009-07-19 11:03+0300\n"
 "Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
-#: highscore/khighscore.cpp:150
+#: highscore/khighscore.cpp:149
 #, kde-format
 msgid "Retry"
 msgstr "Mēģināt vēlreiz"
 
-#: highscore/khighscore.cpp:152
+#: highscore/khighscore.cpp:151
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -35,70 +35,70 @@ msgstr ""
 "Nevar piekļūt labāko rezultātu failam. Iespējams, ka tieši šobrīd tajā "
 "raksta kāds cits lietotājs."
 
-#: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:248
+#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
 #, kde-format
 msgid "High Scores"
 msgstr "Labākie rezultāti"
 
-#: highscore/kscoredialog.cpp:109 private/kgame/kplayer.cpp:83
+#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
 #, kde-format
 msgid "Name"
 msgstr "Vārds"
 
-#: highscore/kscoredialog.cpp:111
+#: highscore/kscoredialog.cpp:112
 #, kde-format
 msgid "Date"
 msgstr "Datums"
 
-#: highscore/kscoredialog.cpp:113
+#: highscore/kscoredialog.cpp:114
 #, kde-format
 msgid "Level"
 msgstr "Līmenis"
 
-#: highscore/kscoredialog.cpp:115
+#: highscore/kscoredialog.cpp:116
 #, kde-format
 msgid "Score"
 msgstr "Rezultāts"
 
-#: highscore/kscoredialog.cpp:117
+#: highscore/kscoredialog.cpp:118
 #, kde-format
 msgid "Time"
 msgstr "Laiks"
 
-#: highscore/kscoredialog.cpp:265
+#: highscore/kscoredialog.cpp:266
 #, kde-format
 msgid "Rank"
 msgstr "Rangs"
 
-#: highscore/kscoredialog.cpp:286
+#: highscore/kscoredialog.cpp:287
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:523
+#: highscore/kscoredialog.cpp:524
 #, kde-format
 msgid "&Remember"
 msgstr ""
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:525
 #, kde-format
 msgid "&Forget"
 msgstr ""
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:526
 #, fuzzy, kde-format
 #| msgid "Clear high scores"
 msgid "Remember this high score"
 msgstr "Dzēš labākos rezultātus"
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:527
 #, fuzzy, kde-format
 #| msgid "Show high scores"
 msgid "Forget this high score"
 msgstr "Rādīa labākos rezultātus"
 
-#: highscore/kscoredialog.cpp:534
+#: highscore/kscoredialog.cpp:535
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -107,7 +107,7 @@ msgstr ""
 "Izcili!\n"
 "Jums ir jauns labākais rezultāts!"
 
-#: highscore/kscoredialog.cpp:536
+#: highscore/kscoredialog.cpp:537
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -215,188 +215,188 @@ msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgctxt "new game"
 msgid "&New"
 msgstr "&Jauna"
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgid "Start a new game."
 msgstr "Sāk jaunu spēli."
 
-#: kstandardgameaction.cpp:38
+#: kstandardgameaction.cpp:36
 msgid "Start a new game"
 msgstr "Sākt jaunu spēli"
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 msgid "&Load..."
 msgstr "&Ielādēt..."
 
-#: kstandardgameaction.cpp:40
+#: kstandardgameaction.cpp:38
 msgid "Open a saved game..."
 msgstr "Atvērt saglabātu spēli..."
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 msgid "Load &Recent"
 msgstr "Ielādēt &nesenu"
 
-#: kstandardgameaction.cpp:42
+#: kstandardgameaction.cpp:40
 msgid "Open a recently saved game..."
 msgstr "Atvērt nesen saglabātu spēli..."
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 msgid "Restart &Game"
 msgstr "Pārstartēt &spēli"
 
-#: kstandardgameaction.cpp:44
+#: kstandardgameaction.cpp:42
 msgid "Restart the game"
 msgstr "Pārstartē spēli"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 msgid "&Save"
 msgstr "&Saglabāt"
 
-#: kstandardgameaction.cpp:46
+#: kstandardgameaction.cpp:44
 msgid "Save the current game"
 msgstr "Saglabā pašreizējo spēli"
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 msgid "Save &As..."
 msgstr "Saglabāt &kā..."
 
-#: kstandardgameaction.cpp:48
+#: kstandardgameaction.cpp:46
 msgid "Save the current game to another file"
 msgstr "Saglabā pašreizējo spēli citā failā"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 msgid "&End Game"
 msgstr "B&eigt spēli"
 
-#: kstandardgameaction.cpp:50
+#: kstandardgameaction.cpp:48
 msgid "End the current game"
 msgstr "Beidz pašreizējo spēli"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 msgid "Pa&use"
 msgstr "Pa&uze"
 
-#: kstandardgameaction.cpp:52
+#: kstandardgameaction.cpp:50
 msgid "Pause the game"
 msgstr "Aptur spēli"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 msgid "Show &High Scores"
 msgstr "Rādīt &labākos rezultātus"
 
-#: kstandardgameaction.cpp:54
+#: kstandardgameaction.cpp:52
 msgid "Show high scores"
 msgstr "Rādīa labākos rezultātus"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 msgid "&Clear High Scores"
 msgstr "&Dzēst labākos rezultātus"
 
-#: kstandardgameaction.cpp:56
+#: kstandardgameaction.cpp:54
 msgid "Clear high scores"
 msgstr "Dzēš labākos rezultātus"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 msgid "Show Statistics"
 msgstr "Rādīt statistiku"
 
-#: kstandardgameaction.cpp:58
+#: kstandardgameaction.cpp:56
 msgid "Show statistics"
 msgstr "Rāda statistiku"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 msgid "&Clear Statistics"
 msgstr "&Dzēst statistiku"
 
-#: kstandardgameaction.cpp:60
+#: kstandardgameaction.cpp:58
 msgid "Delete all-time statistics."
 msgstr "Dzēst visu laika statistiku."
 
-#: kstandardgameaction.cpp:62
+#: kstandardgameaction.cpp:60
 msgid "&Print..."
 msgstr "&Drukāt..."
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 msgid "&Quit"
 msgstr "&Iziet"
 
-#: kstandardgameaction.cpp:64
+#: kstandardgameaction.cpp:62
 msgid "Quit the program"
 msgstr "Iziet no programmas"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat"
 msgstr "Atkārtot"
 
-#: kstandardgameaction.cpp:68
+#: kstandardgameaction.cpp:66
 msgid "Repeat the last move"
 msgstr "Atkārtot pēdējo gājienu"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 msgid "Und&o"
 msgstr "Atsa&ukt"
 
-#: kstandardgameaction.cpp:70
+#: kstandardgameaction.cpp:68
 msgid "Undo the last move"
 msgstr "Atsaukt pēdējo gājienu"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 msgid "Re&do"
 msgstr "Atkā&rtot"
 
-#: kstandardgameaction.cpp:72
+#: kstandardgameaction.cpp:70
 msgid "Redo the latest move"
 msgstr "Atkārtot pēdējo gājienu"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 msgid "&Roll Dice"
 msgstr "&Mest kauliņus"
 
-#: kstandardgameaction.cpp:74
+#: kstandardgameaction.cpp:72
 msgid "Roll the dice"
 msgstr "Met kauliņus"
 
-#: kstandardgameaction.cpp:76
+#: kstandardgameaction.cpp:74
 msgid "End Turn"
 msgstr "Gājiena beigas"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 msgid "&Hint"
 msgstr "&Padoms"
 
-#: kstandardgameaction.cpp:78
+#: kstandardgameaction.cpp:76
 msgid "Give a hint"
 msgstr "Sniedz padomu"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 msgid "&Demo"
 msgstr "&Demonstrācija"
 
-#: kstandardgameaction.cpp:80
+#: kstandardgameaction.cpp:78
 msgid "Play a demo"
 msgstr "Spēles demonstrācija"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "&Solve"
 msgstr "&Atrisināt"
 
-#: kstandardgameaction.cpp:82
+#: kstandardgameaction.cpp:80
 msgid "Solve the game"
 msgstr "Atrisina spēli"
 
-#: kstandardgameaction.cpp:86
+#: kstandardgameaction.cpp:84
 msgid "Choose Game &Type"
 msgstr "Izvēlieties spēles &tipu"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "&Konfigurēt kāršu kavu..."
 
-#: kstandardgameaction.cpp:90
+#: kstandardgameaction.cpp:88
 msgid "Configure &High Scores..."
 msgstr "Konfigurēt &labākos rezultātus..."
 
@@ -405,44 +405,44 @@ msgstr "Konfigurēt &labākos rezultātus..."
 msgid "Send to All Players"
 msgstr "Sūtīt visiem spēlētājiem"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:176
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
 #, kde-format
 msgid "Send to %1"
 msgstr "Sūtīt %1"
 
-#: private/kchatbaseitemdelegate.cpp:42 private/kchatbaseitemdelegate.cpp:44
-#: private/kchatbaseitemdelegate.cpp:61
+#: private/kchatbaseitemdelegate.cpp:41 private/kchatbaseitemdelegate.cpp:43
+#: private/kchatbaseitemdelegate.cpp:60
 #, kde-format
 msgid "%1: "
 msgstr "%1: "
 
-#: private/kgame/kgame.cpp:74
+#: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "MaxPlayers"
 msgstr "MaksSpēlētāji"
 
-#: private/kgame/kgame.cpp:76
+#: private/kgame/kgame.cpp:75
 #, kde-format
 msgid "MinPlayers"
 msgstr "MinSpēlētāji"
 
-#: private/kgame/kgame.cpp:78
+#: private/kgame/kgame.cpp:77
 #, kde-format
 msgid "GameStatus"
 msgstr "SpēlesStatuss"
 
-#: private/kgame/kgamechat.cpp:83
+#: private/kgame/kgamechat.cpp:84
 #, kde-format
 msgid "Player %1"
 msgstr "Spēlētājs %1"
 
-#: private/kgame/kgamechat.cpp:91
+#: private/kgame/kgamechat.cpp:92
 #, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: private/kgame/kgamechat.cpp:233
+#: private/kgame/kgamechat.cpp:234
 #, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "Sūtīt manai grupai (\"%1\")"
@@ -569,17 +569,17 @@ msgstr "Apstrādāt pieprasījumu"
 msgid "Player ID"
 msgstr "Spēlētāja ID"
 
-#: private/kgame/kgamepropertyhandler.cpp:162
+#: private/kgame/kgamepropertyhandler.cpp:163
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: private/kgame/kgamepropertyhandler.cpp:164
+#: private/kgame/kgamepropertyhandler.cpp:165
 #, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "Nenosaukts - ID: %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:168
+#: private/kgame/kgamepropertyhandler.cpp:169
 #, fuzzy, kde-format
 #| msgid "%1 unregistered"
 msgid "%1 unregistered"
@@ -588,47 +588,47 @@ msgstr[0] "%1 nereģistrēts"
 msgstr[1] "%1 nereģistrēts"
 msgstr[2] "%1 nereģistrēts"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:342
 #, kde-format
 msgid "NULL pointer"
 msgstr "NULL norādītājs"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "True"
 msgstr "Patiess"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:359
 #, kde-format
 msgid "False"
 msgstr "Aplams"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:365
 #, kde-format
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: private/kgame/kplayer.cpp:79
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "UserId"
 msgstr "LietotājaID"
 
-#: private/kgame/kplayer.cpp:81
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "Group"
 msgstr "Grupa"
 
-#: private/kgame/kplayer.cpp:82 private/kgame/kplayer.cpp:84
+#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
 #, kde-format
 msgid "default"
 msgstr "noklusētais"
 
-#: private/kgame/kplayer.cpp:86
+#: private/kgame/kplayer.cpp:87
 #, kde-format
 msgid "AsyncInput"
 msgstr "AsinhronaIevade"
 
-#: private/kgame/kplayer.cpp:88
+#: private/kgame/kplayer.cpp:89
 #, kde-format
 msgid "myTurn"
 msgstr "mansGājiens"
