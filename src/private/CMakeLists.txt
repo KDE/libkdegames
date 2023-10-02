@@ -72,7 +72,6 @@ target_link_libraries(KDEGamesPrivate
         KF6::NewStuffWidgets
         KF6::Archive
         KF6::XmlGui
-        Qt6::Core5Compat
 )
 
 target_include_directories(KDEGamesPrivate
