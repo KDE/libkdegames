@@ -10,7 +10,7 @@
 // own
 #include <config-tests.h>
 // Qt
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTest>
 
 void tst_KGameSvgDocument::initTestCase()
@@ -79,136 +79,136 @@ void tst_KGameSvgDocument::scale()
 
 void tst_KGameSvgDocument::transformRegex()
 {
-    QRegExp rx;
+    QRegularExpression rx;
 
-    rx.setPattern(WSP);
+    rx.setPattern(QRegularExpression::anchoredPattern(WSP));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(QLatin1String(" ")));
-    QVERIFY(!rx.exactMatch(""));
+    QVERIFY(rx.match(QLatin1String(" ")).hasMatch());
+    QVERIFY(!rx.match("").hasMatch());
 
-    rx.setPattern(WSP_ASTERISK);
+    rx.setPattern(QRegularExpression::anchoredPattern(WSP_ASTERISK));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(QLatin1String(" ")));
-    QVERIFY(rx.exactMatch(""));
-    QVERIFY(rx.exactMatch("   "));
-    QVERIFY(rx.exactMatch("       "));
+    QVERIFY(rx.match(QLatin1String(" ")).hasMatch());
+    QVERIFY(rx.match("").hasMatch());
+    QVERIFY(rx.match("   ").hasMatch());
+    QVERIFY(rx.match("       ").hasMatch());
 
-    rx.setPattern(QString(COMMA));
+    rx.setPattern(QRegularExpression::anchoredPattern(QString(COMMA)));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(","));
-    QVERIFY(!rx.exactMatch(""));
-    QVERIFY(!rx.exactMatch(" , "));
+    QVERIFY(rx.match(",").hasMatch());
+    QVERIFY(!rx.match("").hasMatch());
+    QVERIFY(!rx.match(" , ").hasMatch());
 
-    rx.setPattern(COMMA_WSP);
+    rx.setPattern(QRegularExpression::anchoredPattern(COMMA_WSP));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(" ,"));
-    QVERIFY(rx.exactMatch(" , "));
-    QVERIFY(rx.exactMatch(QLatin1String(" ")));
-    QVERIFY(rx.exactMatch(", "));
-    QVERIFY(rx.exactMatch(","));
-    QVERIFY(rx.exactMatch(" , "));
-    QVERIFY(rx.exactMatch(" , "));
+    QVERIFY(rx.match(" ,").hasMatch());
+    QVERIFY(rx.match(" , ").hasMatch());
+    QVERIFY(rx.match(QLatin1String(" ")).hasMatch());
+    QVERIFY(rx.match(", ").hasMatch());
+    QVERIFY(rx.match(",").hasMatch());
+    QVERIFY(rx.match(" , ").hasMatch());
+    QVERIFY(rx.match(" , ").hasMatch());
 
-    rx.setPattern(NUMBER);
+    rx.setPattern(QRegularExpression::anchoredPattern(NUMBER));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("6"));
-    QVERIFY(rx.exactMatch("64"));
-    QVERIFY(rx.exactMatch("5.2"));
-    QVERIFY(rx.exactMatch("0.003"));
-    QVERIFY(rx.exactMatch("5.1234e9"));
-    QVERIFY(rx.exactMatch("5.1234e-9"));
-    QVERIFY(rx.exactMatch("5.1234e-09"));
-    QVERIFY(rx.exactMatch("-6"));
-    QVERIFY(rx.exactMatch("+5.2"));
-    QVERIFY(rx.exactMatch("-0.003"));
-    QVERIFY(rx.exactMatch("-5.1234e9"));
-    QVERIFY(rx.exactMatch("5.186907e-2"));
-    QVERIFY(rx.exactMatch("-5.1234e-09"));
-    QVERIFY(rx.exactMatch("444.71799"));
-    QVERIFY(rx.exactMatch("16.30829"));
-    QVERIFY(rx.exactMatch("0"));
-    QVERIFY(rx.exactMatch("00002"));
-    QVERIFY(rx.exactMatch(".00002"));
+    QVERIFY(rx.match("6").hasMatch());
+    QVERIFY(rx.match("64").hasMatch());
+    QVERIFY(rx.match("5.2").hasMatch());
+    QVERIFY(rx.match("0.003").hasMatch());
+    QVERIFY(rx.match("5.1234e9").hasMatch());
+    QVERIFY(rx.match("5.1234e-9").hasMatch());
+    QVERIFY(rx.match("5.1234e-09").hasMatch());
+    QVERIFY(rx.match("-6").hasMatch());
+    QVERIFY(rx.match("+5.2").hasMatch());
+    QVERIFY(rx.match("-0.003").hasMatch());
+    QVERIFY(rx.match("-5.1234e9").hasMatch());
+    QVERIFY(rx.match("5.186907e-2").hasMatch());
+    QVERIFY(rx.match("-5.1234e-09").hasMatch());
+    QVERIFY(rx.match("444.71799").hasMatch());
+    QVERIFY(rx.match("16.30829").hasMatch());
+    QVERIFY(rx.match("0").hasMatch());
+    QVERIFY(rx.match("00002").hasMatch());
+    QVERIFY(rx.match(".00002").hasMatch());
 
-    rx.setPattern(OPEN_PARENS);
+    rx.setPattern(QRegularExpression::anchoredPattern(OPEN_PARENS));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("("));
-    QVERIFY(!rx.exactMatch(""));
-    QVERIFY(!rx.exactMatch("( "));
+    QVERIFY(rx.match("(").hasMatch());
+    QVERIFY(!rx.match("").hasMatch());
+    QVERIFY(!rx.match("( ").hasMatch());
 
-    rx.setPattern(CLOSE_PARENS);
+    rx.setPattern(QRegularExpression::anchoredPattern(CLOSE_PARENS));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch(")"));
-    QVERIFY(!rx.exactMatch(""));
-    QVERIFY(!rx.exactMatch(") "));
+    QVERIFY(rx.match(")").hasMatch());
+    QVERIFY(!rx.match("").hasMatch());
+    QVERIFY(!rx.match(") ").hasMatch());
 
-    rx.setPattern(MATRIX);
+    rx.setPattern(QRegularExpression::anchoredPattern(MATRIX));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("matrix(1,0,0,1,0,0)"));
-    QVERIFY(rx.exactMatch("matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)"));
-    QVERIFY(rx.exactMatch("matrix ( 5.186907e-2, 0,0, 5.186907e-2,444.71799,16.30829)"));
-    QVERIFY(rx.exactMatch("matrix ( +5.186907e-2, 0 ,0, -5.186907e-2,444.71799,     16.30829)"));
-    QVERIFY(!rx.exactMatch("matrix ( -5.186907e-2, 0 , -5.186907e-2,444.71799,      16.30829)"));
-    QVERIFY(!rx.exactMatch("matrix ( +5.186907e-2, 0 ,0,, -5.186907e-2,444.71799,       16.30829)"));
-    QVERIFY(rx.exactMatch("matrix ( +.5186907e-2, 0 ,0, -5.186907e-2,444.71799,     16.30829)"));
+    QVERIFY(rx.match("matrix(1,0,0,1,0,0)").hasMatch());
+    QVERIFY(rx.match("matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)").hasMatch());
+    QVERIFY(rx.match("matrix ( 5.186907e-2, 0,0, 5.186907e-2,444.71799,16.30829)").hasMatch());
+    QVERIFY(rx.match("matrix ( +5.186907e-2, 0 ,0, -5.186907e-2,444.71799,     16.30829)").hasMatch());
+    QVERIFY(!rx.match("matrix ( -5.186907e-2, 0 , -5.186907e-2,444.71799,      16.30829)").hasMatch());
+    QVERIFY(!rx.match("matrix ( +5.186907e-2, 0 ,0,, -5.186907e-2,444.71799,       16.30829)").hasMatch());
+    QVERIFY(rx.match("matrix ( +.5186907e-2, 0 ,0, -5.186907e-2,444.71799,     16.30829)").hasMatch());
 
-    rx.setPattern(TRANSLATE);
+    rx.setPattern(QRegularExpression::anchoredPattern(TRANSLATE));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("translate(10)"));
-    QVERIFY(rx.exactMatch("translate(-10.2345)"));
-    QVERIFY(rx.exactMatch("translate(10, 23)"));
-    QVERIFY(rx.exactMatch("translate(10 , -.765)"));
-    QVERIFY(!rx.exactMatch("translate(10 , -.765.0)"));
-    QVERIFY(!rx.exactMatch("translate(10 , ,-.7650)"));
+    QVERIFY(rx.match("translate(10)").hasMatch());
+    QVERIFY(rx.match("translate(-10.2345)").hasMatch());
+    QVERIFY(rx.match("translate(10, 23)").hasMatch());
+    QVERIFY(rx.match("translate(10 , -.765)").hasMatch());
+    QVERIFY(!rx.match("translate(10 , -.765.0)").hasMatch());
+    QVERIFY(!rx.match("translate(10 , ,-.7650)").hasMatch());
 
-    rx.setPattern(SCALE);
+    rx.setPattern(QRegularExpression::anchoredPattern(SCALE));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("scale(10)"));
-    QVERIFY(rx.exactMatch("scale(-10.2345)"));
-    QVERIFY(rx.exactMatch("scale(10, 23)"));
-    QVERIFY(rx.exactMatch("scale(10 , -.765)"));
-    QVERIFY(!rx.exactMatch("scale(10 , -.765.0)"));
-    QVERIFY(!rx.exactMatch("scale(10 , ,-.7650)"));
+    QVERIFY(rx.match("scale(10)").hasMatch());
+    QVERIFY(rx.match("scale(-10.2345)").hasMatch());
+    QVERIFY(rx.match("scale(10, 23)").hasMatch());
+    QVERIFY(rx.match("scale(10 , -.765)").hasMatch());
+    QVERIFY(!rx.match("scale(10 , -.765.0)").hasMatch());
+    QVERIFY(!rx.match("scale(10 , ,-.7650)").hasMatch());
 
-    rx.setPattern(ROTATE);
+    rx.setPattern(QRegularExpression::anchoredPattern(ROTATE));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("rotate(45)"));
-    QVERIFY(rx.exactMatch("rotate(-26.765)"));
-    QVERIFY(rx.exactMatch("rotate(-26.765, 10, 20)"));
-    QVERIFY(rx.exactMatch("rotate(-26.765, 60, .20)"));
-    QVERIFY(rx.exactMatch("rotate(-26.765, -10, 2.0)"));
-    QVERIFY(!rx.exactMatch("rotate(-26.765, -10)"));
+    QVERIFY(rx.match("rotate(45)").hasMatch());
+    QVERIFY(rx.match("rotate(-26.765)").hasMatch());
+    QVERIFY(rx.match("rotate(-26.765, 10, 20)").hasMatch());
+    QVERIFY(rx.match("rotate(-26.765, 60, .20)").hasMatch());
+    QVERIFY(rx.match("rotate(-26.765, -10, 2.0)").hasMatch());
+    QVERIFY(!rx.match("rotate(-26.765, -10)").hasMatch());
 
-    rx.setPattern(SKEW_X);
+    rx.setPattern(QRegularExpression::anchoredPattern(SKEW_X));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("skewX(10)"));
-    QVERIFY(rx.exactMatch("skewX(-210)"));
-    QVERIFY(rx.exactMatch("skewX(+10.123456)"));
-    QVERIFY(rx.exactMatch("skewX(0.00000345)"));
+    QVERIFY(rx.match("skewX(10)").hasMatch());
+    QVERIFY(rx.match("skewX(-210)").hasMatch());
+    QVERIFY(rx.match("skewX(+10.123456)").hasMatch());
+    QVERIFY(rx.match("skewX(0.00000345)").hasMatch());
 
-    rx.setPattern(SKEW_Y);
+    rx.setPattern(QRegularExpression::anchoredPattern(SKEW_Y));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("skewY(10)"));
-    QVERIFY(rx.exactMatch("skewY(-210)"));
-    QVERIFY(rx.exactMatch("skewY(+10.12346e4)"));
-    QVERIFY(rx.exactMatch("skewY(-0.00000345)"));
+    QVERIFY(rx.match("skewY(10)").hasMatch());
+    QVERIFY(rx.match("skewY(-210)").hasMatch());
+    QVERIFY(rx.match("skewY(+10.12346e4)").hasMatch());
+    QVERIFY(rx.match("skewY(-0.00000345)").hasMatch());
 
-    rx.setPattern(TRANSFORM);
+    rx.setPattern(QRegularExpression::anchoredPattern(TRANSFORM));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)"));
-    QVERIFY(rx.exactMatch("translate(10, 23)"));
-    QVERIFY(rx.exactMatch("scale(10 , -.765)"));
-    QVERIFY(rx.exactMatch("rotate(-26.765, 60, .20)"));
-    QVERIFY(rx.exactMatch("skewX(+10.123456)"));
-    QVERIFY(rx.exactMatch("skewY(-0.00000345)"));
-    QVERIFY(rx.exactMatch("skewY(-0.00000345)"));
+    QVERIFY(rx.match("matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)").hasMatch());
+    QVERIFY(rx.match("translate(10, 23)").hasMatch());
+    QVERIFY(rx.match("scale(10 , -.765)").hasMatch());
+    QVERIFY(rx.match("rotate(-26.765, 60, .20)").hasMatch());
+    QVERIFY(rx.match("skewX(+10.123456)").hasMatch());
+    QVERIFY(rx.match("skewY(-0.00000345)").hasMatch());
+    QVERIFY(rx.match("skewY(-0.00000345)").hasMatch());
 
-    rx.setPattern(TRANSFORMS);
+    rx.setPattern(QRegularExpression::anchoredPattern(TRANSFORMS));
     QVERIFY(rx.isValid());
-    QVERIFY(rx.exactMatch("matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)"));
-    QVERIFY(rx.exactMatch("rotate(-26.765, 60, .20)"));
-    QVERIFY(rx.exactMatch("translate(-10,-20) scale(2) rotate(45) translate(5,10)"));
-    QVERIFY(rx.exactMatch("translate(-10,-20), scale(2),rotate(45) translate(5,10), matrix(1,2,3,4,5,6)"));
+    QVERIFY(rx.match("matrix(5.186907e-2,0,0,5.186907e-2,444.71799,16.30829)").hasMatch());
+    QVERIFY(rx.match("rotate(-26.765, 60, .20)").hasMatch());
+    QVERIFY(rx.match("translate(-10,-20) scale(2) rotate(45) translate(5,10)").hasMatch());
+    QVERIFY(rx.match("translate(-10,-20), scale(2),rotate(45) translate(5,10), matrix(1,2,3,4,5,6)").hasMatch());
 }
 
 void tst_KGameSvgDocument::transform()

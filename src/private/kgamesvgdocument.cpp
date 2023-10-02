@@ -16,7 +16,7 @@
 #include <QDomElement>
 #include <QDomNode>
 #include <QFile>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 // Std
 #include <cmath>
@@ -315,28 +315,27 @@ QString KGameSvgDocument::nodeToSvg() const
     QTextStream str(&s);
     QTextStream str_t(&t);
     QStringList defsAdded;
-    int result = 0;
-    QRegExp rx;
+    QRegularExpression rx;
 
     currentNode().save(str, 1);
     xml = *str.string();
 
     // Find and add any required gradients or patterns
     pattern = QLatin1String("url") + WSP_ASTERISK + OPEN_PARENS + WSP_ASTERISK + QLatin1String("#(.*)") + WSP_ASTERISK + CLOSE_PARENS;
-    rx.setPattern(pattern);
-    if (rx.indexIn(xml, result) != -1) {
+    rx.setPattern(QRegularExpression::anchoredPattern(pattern));
+    if (rx.match(xml).hasMatch()) {
         QDomNode node, nodeBase;
         QString baseId;
         QDomNode n = def();
 
-        result = 0;
-        while ((result = rx.indexIn(xml, result)) != -1) {
-            // Find the pattern or gradient referenced
-            result += rx.matchedLength();
-            if (!defsAdded.contains(rx.cap(1))) {
-                node = d->findElementById(QStringLiteral("id"), rx.cap(1), n);
+        QRegularExpressionMatchIterator i = rx.globalMatch(xml);
+        while (i.hasNext()) {
+            QRegularExpressionMatch match = i.next();
+            const QString id = match.captured(1);
+            if (!defsAdded.contains(id)) {
+                node = d->findElementById(QStringLiteral("id"), id, n);
                 node.save(str_t, 1);
-                defsAdded.append(rx.cap(1));
+                defsAdded.append(id);
             }
 
             // Find the gradient the above gradient is based on
@@ -482,9 +481,8 @@ QTransform KGameSvgDocument::transformMatrix() const
      *
      * For all the gory details, see http://www.w3.org/TR/SVG/coords.html#TransformAttribute
      */
-    QRegExp rx;
+    QRegularExpression rx;
     QString transformAttribute;
-    int result;
     int i = 0;
     QTransform baseMatrix = QTransform();
 
@@ -494,64 +492,65 @@ QTransform KGameSvgDocument::transformMatrix() const
     }
     transformAttribute = transformAttribute.trimmed();
 
-    rx.setPattern(TRANSFORMS);
-    if (!rx.exactMatch(transformAttribute)) {
+    rx.setPattern(QRegularExpression::anchoredPattern(TRANSFORMS));
+    if (!rx.match(transformAttribute).hasMatch()) {
         qCWarning(KDEGAMESPRIVATE_LOG) << "Transform attribute seems to be invalid. Check your SVG file.";
         return QTransform();
     }
 
-    rx.setPattern(TRANSFORM);
+    rx.setPattern(QRegularExpression::anchoredPattern(TRANSFORM));
 
     while (transformAttribute.size() > 0 && i < 32) // 32 is an arbitrary limit for the number of transforms for a single node
     {
-        result = rx.indexIn(transformAttribute);
+        QRegularExpressionMatch match = rx.match(transformAttribute);
+        int result = match.capturedStart();
         if (result != -1) // Found left-most transform
         {
-            if (rx.cap(1) == QLatin1String("matrix")) {
+            if (match.captured(1) == QLatin1String("matrix")) {
                 // If the first transform found is a matrix, use it as the base,
                 // else we use a null matrix.
                 if (i == 0) {
-                    baseMatrix = QTransform(rx.cap(2).toDouble(),
-                                            rx.cap(3).toDouble(),
-                                            rx.cap(4).toDouble(),
-                                            rx.cap(5).toDouble(),
-                                            rx.cap(6).toDouble(),
-                                            rx.cap(7).toDouble());
+                    baseMatrix = QTransform(match.captured(2).toDouble(),
+                                            match.captured(3).toDouble(),
+                                            match.captured(4).toDouble(),
+                                            match.captured(5).toDouble(),
+                                            match.captured(6).toDouble(),
+                                            match.captured(7).toDouble());
                 } else {
-                    baseMatrix = QTransform(rx.cap(2).toDouble(),
-                                            rx.cap(3).toDouble(),
-                                            rx.cap(4).toDouble(),
-                                            rx.cap(5).toDouble(),
-                                            rx.cap(6).toDouble(),
-                                            rx.cap(7).toDouble())
+                    baseMatrix = QTransform(match.captured(2).toDouble(),
+                                            match.captured(3).toDouble(),
+                                            match.captured(4).toDouble(),
+                                            match.captured(5).toDouble(),
+                                            match.captured(6).toDouble(),
+                                            match.captured(7).toDouble())
                         * baseMatrix;
                 }
             }
 
-            if (rx.cap(8) == QLatin1String("translate")) {
-                double x = rx.cap(9).toDouble();
-                double y = rx.cap(10).toDouble();
-                if (rx.cap(10).isEmpty()) // y defaults to zero per SVG standard
+            if (match.captured(8) == QLatin1String("translate")) {
+                double x = match.captured(9).toDouble();
+                double y = match.captured(10).toDouble();
+                if (match.captured(10).isEmpty()) // y defaults to zero per SVG standard
                 {
                     y = 0;
                 }
                 baseMatrix = baseMatrix.translate(x, y);
             }
 
-            if (rx.cap(11) == QLatin1String("scale")) {
-                double x = rx.cap(12).toDouble();
-                double y = rx.cap(12).toDouble();
-                if (rx.cap(13).isEmpty()) // y defaults to x per SVG standard
+            if (match.captured(11) == QLatin1String("scale")) {
+                double x = match.captured(12).toDouble();
+                double y = match.captured(12).toDouble();
+                if (match.captured(13).isEmpty()) // y defaults to x per SVG standard
                 {
                     y = x;
                 }
                 baseMatrix = baseMatrix.scale(x, y);
             }
 
-            if (rx.cap(14) == QLatin1String("rotate")) {
-                double a = rx.cap(15).toDouble();
-                double cx = rx.cap(16).toDouble();
-                double cy = rx.cap(17).toDouble();
+            if (match.captured(14) == QLatin1String("rotate")) {
+                double a = match.captured(15).toDouble();
+                double cx = match.captured(16).toDouble();
+                double cy = match.captured(17).toDouble();
 
                 if ((cx > 0) || (cy > 0)) // rotate around point (cx, cy)
                 {
@@ -563,15 +562,15 @@ QTransform KGameSvgDocument::transformMatrix() const
                 }
             }
 
-            if (rx.cap(18) == QLatin1String("skewX")) {
-                baseMatrix = baseMatrix.shear(rx.cap(19).toDouble() * (M_PI / 180), 0);
+            if (match.captured(18) == QLatin1String("skewX")) {
+                baseMatrix = baseMatrix.shear(match.captured(19).toDouble() * (M_PI / 180), 0);
             }
 
-            if (rx.cap(20) == QLatin1String("skewY")) {
-                baseMatrix = baseMatrix.shear(0, rx.cap(21).toDouble() * (M_PI / 180));
+            if (match.captured(20) == QLatin1String("skewY")) {
+                baseMatrix = baseMatrix.shear(0, match.captured(21).toDouble() * (M_PI / 180));
             }
         }
-        transformAttribute = transformAttribute.mid(rx.matchedLength() + result);
+        transformAttribute = transformAttribute.mid(match.capturedLength() + result);
         i++;
     }
 
