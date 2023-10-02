@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGAUDIOSCENE_H
-#define KGAUDIOSCENE_H
+#ifndef KGAMEAUDIOSCENE_H
+#define KGAMEAUDIOSCENE_H
 
 // own
 #include "kdegames_export.h"
@@ -13,7 +13,7 @@
 #include <QPointF>
 
 /**
- * @namespace KgAudioScene
+ * @namespace KGameAudioScene
  *
  * This class exposes general properties of the audio playback context. Actual
  * sounds are represented in this context by KGameSound instances.
@@ -27,9 +27,9 @@
  *
  * @warning Not all functionally exposed by the API of this class is guaranteed
  *          to be available on the compiled KgAudio backend. Check
- *          KgAudioScene::capabilities() if in doubt.
+ *          KGameAudioScene::capabilities() if in doubt.
  */
-namespace KgAudioScene
+namespace KGameAudioScene
 {
 /// This enumeration represents capabilities which may not be provided by
 /// every KgAudio backend.
@@ -75,6 +75,6 @@ KDEGAMES_EXPORT void setVolume(qreal volume);
 KDEGAMES_EXPORT bool hasError();
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KgAudioScene::Capabilities)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KGameAudioScene::Capabilities)
 
-#endif // KGAUDIOSCENE_H
+#endif // KGAMEAUDIOSCENE_H

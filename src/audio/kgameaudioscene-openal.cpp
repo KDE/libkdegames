@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "kgaudioscene.h"
+#include "kgameaudioscene.h"
 
 // own
 #include "kgopenalruntime_p.h"
@@ -12,19 +12,19 @@
 
 Q_GLOBAL_STATIC(KgOpenALRuntime, g_runtime)
 
-// BEGIN KgAudioScene
+// BEGIN KGameAudioScene
 
-KgAudioScene::Capabilities KgAudioScene::capabilities()
+KGameAudioScene::Capabilities KGameAudioScene::capabilities()
 {
     return SupportsLowLatencyPlayback | SupportsPositionalPlayback;
 }
 
-QPointF KgAudioScene::listenerPos()
+QPointF KGameAudioScene::listenerPos()
 {
     return g_runtime->m_listenerPos;
 }
 
-void KgAudioScene::setListenerPos(const QPointF &pos)
+void KGameAudioScene::setListenerPos(const QPointF &pos)
 {
     if (g_runtime->m_listenerPos != pos) {
         g_runtime->m_listenerPos = pos;
@@ -32,12 +32,12 @@ void KgAudioScene::setListenerPos(const QPointF &pos)
     }
 }
 
-qreal KgAudioScene::volume()
+qreal KGameAudioScene::volume()
 {
     return g_runtime->m_volume;
 }
 
-void KgAudioScene::setVolume(qreal volume)
+void KGameAudioScene::setVolume(qreal volume)
 {
     if (g_runtime->m_volume != volume) {
         g_runtime->m_volume = volume;
@@ -45,12 +45,12 @@ void KgAudioScene::setVolume(qreal volume)
     }
 }
 
-bool KgAudioScene::hasError()
+bool KGameAudioScene::hasError()
 {
     return g_runtime->m_error;
 }
 
-// END KgAudioScene
+// END KGameAudioScene
 // BEGIN KgOpenALRuntime
 
 KgOpenALRuntime::KgOpenALRuntime()

@@ -28,7 +28,7 @@ set_target_properties(KDEGames PROPERTIES
 )
 
 target_sources(KDEGames PRIVATE
-    audio/kgaudioscene-${KGAUDIO_BACKEND}.cpp
+    audio/kgameaudioscene-${KGAUDIO_BACKEND}.cpp
     audio/kgamesound-${KGAUDIO_BACKEND}.cpp
     audio/virtualfileqt-${KGAUDIO_BACKEND}.cpp
     colorproxy_p.cpp colorproxy_p.h
@@ -76,7 +76,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
 
 ecm_generate_headers(kdegames_CamelCase_HEADERS
     HEADER_NAMES
-        KgAudioScene
+        KGameAudioScene
         KGameSound
     RELATIVE audio
     REQUIRED_HEADERS kdegames_HEADERS

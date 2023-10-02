@@ -21,8 +21,8 @@ class PlaybackEvent;
  * @class KGameSound kgamesound.h <KGameSound>
  *
  * This class models a sound file. Because it is implicitly added to this
- * application's KgAudioScene, it can be played at different positions (if
- * positional playback is supported, see KgAudioScene::capabilities()).
+ * application's KGameAudioScene, it can be played at different positions (if
+ * positional playback is supported, see KGameAudioScene::capabilities()).
  *
  * Compared to many other media playback classes, the notable difference of
  * KGameSound is that one sound instance can be played multiple times at the
@@ -115,7 +115,7 @@ public:
 
     /// @returns whether loading or playing this sound failed
     ///
-    /// See KgAudioScene::hasError() for why you typically do not need to use
+    /// See KGameAudioScene::hasError() for why you typically do not need to use
     /// this method.
     bool hasError() const;
 public Q_SLOTS:
