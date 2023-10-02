@@ -2,7 +2,7 @@
 # Translation of libkdegames.po to Slovenian
 # LIBKDEGAMES TRANSLATION TO SLOVENIAN LANGUAGE
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: libkdegames5.po 1661394 2023-10-01 02:17:32Z scripty $
+# $Id: libkdegames6.po 1661445 2023-10-01 15:00:01Z ltoscano $
 # $Source$
 #
 # Roman Maurer <roman.maurer@amis.net>, 2001.
