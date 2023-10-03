@@ -322,7 +322,7 @@ QString KGameSvgDocument::nodeToSvg() const
 
     // Find and add any required gradients or patterns
     pattern = QLatin1String("url") + WSP_ASTERISK + OPEN_PARENS + WSP_ASTERISK + QLatin1String("#(.*)") + WSP_ASTERISK + CLOSE_PARENS;
-    rx.setPattern(QRegularExpression::anchoredPattern(pattern));
+    rx.setPattern(pattern);
     if (rx.match(xml).hasMatch()) {
         QDomNode node, nodeBase;
         QString baseId;
@@ -492,13 +492,13 @@ QTransform KGameSvgDocument::transformMatrix() const
     }
     transformAttribute = transformAttribute.trimmed();
 
-    rx.setPattern(QRegularExpression::anchoredPattern(TRANSFORMS));
+    rx.setPattern(TRANSFORMS);
     if (!rx.match(transformAttribute).hasMatch()) {
         qCWarning(KDEGAMESPRIVATE_LOG) << "Transform attribute seems to be invalid. Check your SVG file.";
         return QTransform();
     }
 
-    rx.setPattern(QRegularExpression::anchoredPattern(TRANSFORM));
+    rx.setPattern(TRANSFORM);
 
     while (transformAttribute.size() > 0 && i < 32) // 32 is an arbitrary limit for the number of transforms for a single node
     {
