@@ -1,4 +1,4 @@
-# Translation of libkdegames5.po to Catalan (Valencian)
+# Translation of libkdegames6.po to Catalan (Valencian)
 # Copyright (C) 2002-2021 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
@@ -627,46 +627,3 @@ msgstr "Entrada asíncrona"
 #, kde-format
 msgid "myTurn"
 msgstr "el meu torn"
-
-#~ msgid "Difficulty"
-#~ msgstr "Dificultat"
-
-#~ msgctxt ""
-#~ "Name of the game difficulty level that is customized by the user by "
-#~ "setting up different game parameters"
-#~ msgid "Custom"
-#~ msgstr "A mida"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "Seleccioneu el nivell de <b>dificultat</b> de la partida.<br />Si canvieu "
-#~ "el nivell de dificultat mentre s'executa la partida, haureu de cancel·lar-"
-#~ "la i tornar-la a iniciar."
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr ""
-#~ "Seleccioneu el nivell de <b>dificultat</b> de la partida.<br />Podeu "
-#~ "canviar el nivell de dificultat mentre s'executa la partida."
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "O&btín temes nous..."
-
-#~ msgid "Preview"
-#~ msgstr "Vista prèvia"
-
-#~ msgid "Theme Details"
-#~ msgstr "Detalls del tema"
-
-#~ msgid "Contact:"
-#~ msgstr "Contacte:"
-
-#~ msgid "Description:"
-#~ msgstr "Descripció:"
-
-#~ msgid "Author:"
-#~ msgstr "Autoria:"
