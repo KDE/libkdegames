@@ -31,7 +31,7 @@ class PlaybackEvent;
  * stop() before start().
  *
  * @note WAV files and Ogg/Vorbis files are guaranteed to work. Other audio
- *       files may also work, depending on the KgAudio backend and its
+ *       files may also work, depending on the KGameAudio backend and its
  *       configuration.
  */
 class KDEGAMES_EXPORT KGameSound : public QObject

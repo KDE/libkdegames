@@ -26,13 +26,13 @@
  * Because there can ogly be one listener, all methods in this class are static.
  *
  * @warning Not all functionally exposed by the API of this class is guaranteed
- *          to be available on the compiled KgAudio backend. Check
+ *          to be available on the compiled KGameAudio backend. Check
  *          KGameAudioScene::capabilities() if in doubt.
  */
 namespace KGameAudioScene
 {
 /// This enumeration represents capabilities which may not be provided by
-/// every KgAudio backend.
+/// every KGameAudio backend.
 enum Capability {
     /// Playback starts as soon as KGameSound::start is called.
     SupportsLowLatencyPlayback = 1 << 0,
@@ -43,7 +43,7 @@ enum Capability {
  */
 Q_DECLARE_FLAGS(Capabilities, Capability)
 
-/// @return which capabilities are supported by the compiled KgAudio backend
+/// @return which capabilities are supported by the compiled KGameAudio backend
 KDEGAMES_EXPORT Capabilities capabilities();
 
 /// @return the position of the listener
@@ -61,7 +61,7 @@ KDEGAMES_EXPORT void setVolume(qreal volume);
 
 /// @returns whether an error was detected in the audio backend
 ///
-/// Since KgAudio is typically used by games where audio is not an absolutely
+/// Since KGameAudio is typically used by games where audio is not an absolutely
 /// vital part of the gameplay, we do not need to fail if sound does not work,
 /// over even make some sort of deep analysis why something did not work. The
 /// user will notice missing sound, and advanced users may investigate
