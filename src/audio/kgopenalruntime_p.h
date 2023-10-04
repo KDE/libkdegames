@@ -17,13 +17,13 @@
 class KGameSound;
 
 /// @internal
-class KgPlaybackEvent
+class KGamePlaybackEvent
 {
 public:
     // Creates and starts the playback. Also registers with the OpenALRuntime.
-    KgPlaybackEvent(KGameSound *sound, const QPointF &pos);
+    KGamePlaybackEvent(KGameSound *sound, const QPointF &pos);
     // Stops playback if it is still running.
-    ~KgPlaybackEvent();
+    ~KGamePlaybackEvent();
 
     // Is playback still running?
     bool isRunning() const;
@@ -34,7 +34,7 @@ private:
     bool m_valid;
 };
 
-typedef QList<KgPlaybackEvent *> KgPlaybackEventList;
+typedef QList<KGamePlaybackEvent *> KGamePlaybackEventList;
 
 /// @internal
 class KgOpenALRuntime
@@ -53,7 +53,7 @@ public:
     qreal m_volume;
     bool m_error;
     // active sound and playback instances
-    QHash<KGameSound *, KgPlaybackEventList> m_soundsEvents;
+    QHash<KGameSound *, KGamePlaybackEventList> m_soundsEvents;
 
 private:
     ALCcontext *m_context;

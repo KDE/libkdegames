@@ -164,10 +164,10 @@ void KGameSound::start(const QPointF &pos)
         KgOpenALRuntime *runtime = KgOpenALRuntime::instance();
         if (!runtime->instance()->m_soundsEvents[this].isEmpty()) {
             if (runtime->instance()->m_soundsEvents[this].last()->replay(pos) == false) {
-                new KgPlaybackEvent(this, pos);
+                new KGamePlaybackEvent(this, pos);
             }
         } else {
-            new KgPlaybackEvent(this, pos);
+            new KGamePlaybackEvent(this, pos);
         }
     }
 }
@@ -178,9 +178,9 @@ void KGameSound::stop()
 }
 
 // END KGameSound
-// BEGIN KgPlaybackEvent
+// BEGIN KGamePlaybackEvent
 
-KgPlaybackEvent::KgPlaybackEvent(KGameSound *sound, const QPointF &pos)
+KGamePlaybackEvent::KGamePlaybackEvent(KGameSound *sound, const QPointF &pos)
     : m_valid(false)
 {
     // make sure OpenAL is initialized
@@ -213,7 +213,7 @@ KgPlaybackEvent::KgPlaybackEvent(KGameSound *sound, const QPointF &pos)
     alSourcePlay(m_source);
 }
 
-KgPlaybackEvent::~KgPlaybackEvent()
+KGamePlaybackEvent::~KGamePlaybackEvent()
 {
     if (alIsSource(m_source) == AL_TRUE) {
         alSourceStop(m_source);
@@ -221,14 +221,14 @@ KgPlaybackEvent::~KgPlaybackEvent()
     }
 }
 
-bool KgPlaybackEvent::isRunning() const
+bool KGamePlaybackEvent::isRunning() const
 {
     ALint state;
     alGetSourcei(m_source, AL_SOURCE_STATE, &state);
     return state == AL_PLAYING;
 }
 
-bool KgPlaybackEvent::replay(const QPointF &pos) const
+bool KGamePlaybackEvent::replay(const QPointF &pos) const
 {
     if (alIsSource(m_source) == AL_TRUE) {
         alSourceStop(m_source);
@@ -240,6 +240,6 @@ bool KgPlaybackEvent::replay(const QPointF &pos) const
     }
 }
 
-// END KgPlaybackEvent
+// END KGamePlaybackEvent
 
 #include "moc_kgamesound.cpp"

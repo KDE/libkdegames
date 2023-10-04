@@ -135,7 +135,7 @@ Q_SIGNALS:
     void volumeChanged(qreal volume);
 
 private:
-    friend class KgPlaybackEvent;
+    friend class KGamePlaybackEvent;
     std::unique_ptr<class KGameSoundPrivate> const d;
 };
 
