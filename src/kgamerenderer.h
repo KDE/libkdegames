@@ -42,7 +42,7 @@ inline uint qHash(const QColor &color)
  * @section terminology Terminology
  *
  * @li Themes in the context of KGameRenderer are KGameTheme instances. The theme
- *     selection by a KgRenderer can be managed by a KGameThemeProvider.
+ *     selection by a KGameRenderer can be managed by a KGameThemeProvider.
  * @li A sprite is either a single pixmap ("non-animated sprites") or a sequence
  *     of pixmaps which are shown consecutively to produce an animation
  *     ("animated sprites"). Non-animated sprites correspond to a single element
