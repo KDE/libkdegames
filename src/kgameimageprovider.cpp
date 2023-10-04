@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "kgimageprovider_p.h"
+#include "kgameimageprovider_p.h"
 
 // own
 #include "kgamethemeprovider.h"
@@ -12,20 +12,20 @@
 #include <QGuiApplication>
 #include <QPainter>
 
-KgImageProvider::KgImageProvider(KGameThemeProvider *prov)
+KGameImageProvider::KGameImageProvider(KGameThemeProvider *prov)
     : QQuickImageProvider(Image)
     , m_provider(prov)
 {
     reloadRenderer();
 }
 
-void KgImageProvider::reloadRenderer()
+void KGameImageProvider::reloadRenderer()
 {
     m_renderer.load(m_provider->currentTheme()->graphicsPath());
     m_themeName = m_provider->currentThemeName();
 }
 
-QImage KgImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
+QImage KGameImageProvider::requestImage(const QString &source, QSize *size, const QSize &requestedSize)
 {
     Q_UNUSED(requestedSize); // this is always QSize(-1,-1) for some reason
 

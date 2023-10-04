@@ -5,7 +5,7 @@
 */
 
 #include "kgamethemeprovider.h"
-#include "kgimageprovider_p.h"
+#include "kgameimageprovider_p.h"
 
 // own
 #include <kdegames_logging.h>
@@ -268,7 +268,7 @@ void KGameThemeProvider::setDeclarativeEngine(const QString &name, QQmlEngine *e
 {
     if (d->m_name != name) { // prevent multiple declarations
         d->m_name = name;
-        engine->addImageProvider(name, new KgImageProvider(this));
+        engine->addImageProvider(name, new KGameImageProvider(this));
         engine->rootContext()->setContextProperty(name, this);
     }
 }

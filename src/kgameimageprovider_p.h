@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGIMAGEPROVIDER_H
-#define KGIMAGEPROVIDER_H
+#ifndef KGAMEIMAGEPROVIDER_H
+#define KGAMEIMAGEPROVIDER_H
 
 // Qt
 #include <QQuickImageProvider>
@@ -14,7 +14,7 @@
 class KGameThemeProvider;
 
 /**
- * @class KgImageProvider
+ * @class KGameImageProvider
  * @short A QDeclarativeImageProvider that renders requested sprites and
  * returns corresponding pixmap to the QML view.
  *
@@ -24,17 +24,17 @@ class KGameThemeProvider;
  * the QML image element that requests it.
  *
  * For porting KDE games to QML, there is a KGameItem QML component provided
- * by KgCore QML plugin which is a small wrapper to request pixmaps from
- * this KgImageProvider. See KGameItem's documentation for details.
+ * by KGameCore QML plugin which is a small wrapper to request pixmaps from
+ * this KGameImageProvider. See KGameItem's documentation for details.
  * @since 4.11
  */
-class KgImageProvider : public QQuickImageProvider
+class KGameImageProvider : public QQuickImageProvider
 {
 public:
-    /// Construcs a new KgImageProvider with the supplied KGameThemeProvider
+    /// Construcs a new KGameImageProvider with the supplied KGameThemeProvider
     /// @param provider The KGameThemeProvider used to discover the game's
     /// themes.
-    explicit KgImageProvider(KGameThemeProvider *provider);
+    explicit KGameImageProvider(KGameThemeProvider *provider);
 
     /// Reimplemented method that is called when a sprite pixmap is requested
     QImage requestImage(const QString &source, QSize *size, const QSize &requestedSize) override;
@@ -47,4 +47,4 @@ private:
     QSvgRenderer m_renderer;
 };
 
-#endif // KGIMAGEPROVIDER_H
+#endif // KGAMEIMAGEPROVIDER_H

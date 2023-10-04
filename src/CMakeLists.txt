@@ -41,7 +41,7 @@ target_sources(KDEGames PRIVATE
     kgamerenderedobjectitem.cpp kgamerenderedobjectitem.h
     kgamerendererclient.cpp kgamerendererclient.h
     kgamerenderer.cpp kgamerenderer.h
-    kgimageprovider.cpp
+    kgameimageprovider.cpp kgameimageprovider_p.h
     kgamedifficulty.cpp kgamedifficulty.h
     kgametheme.cpp kgametheme.h
     kgamethemeprovider.cpp kgamethemeprovider.h

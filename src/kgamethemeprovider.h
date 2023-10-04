@@ -115,7 +115,7 @@ public:
     virtual QPixmap generatePreview(const KGameTheme *theme, const QSize &size);
 
     /// Registers this KGameThemeProvider with @a engine's root context with ID
-    /// @a name and constructs a KgImageProvider corresponding
+    /// @a name and constructs a KGameImageProvider corresponding
     /// to this KGameThemeProvider and adds it to the QML engine, also
     /// with @a name, which will receive sprite requests
     /// @since 4.11
