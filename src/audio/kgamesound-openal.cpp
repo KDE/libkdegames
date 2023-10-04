@@ -7,7 +7,7 @@
 #include "kgamesound.h"
 
 // own
-#include "kgopenalruntime_p.h"
+#include "kgameopenalruntime_p.h"
 #include "virtualfileqt-openal.h"
 #include <kdegames_audio_logging.h>
 // sndfile
@@ -76,7 +76,7 @@ KGameSound::KGameSound(const QString &file, QObject *parent)
         return;
     }
     // make sure OpenAL is initialized; clear OpenAL error storage
-    KgOpenALRuntime::instance();
+    KGameOpenALRuntime::instance();
     int error;
     alGetError();
     // create OpenAL buffer
@@ -99,7 +99,7 @@ KGameSound::~KGameSound()
 {
     if (d->m_valid) {
         stop();
-        KgOpenALRuntime::instance()->m_soundsEvents.remove(this);
+        KGameOpenALRuntime::instance()->m_soundsEvents.remove(this);
         alDeleteBuffers(1, &d->m_buffer);
     }
 }
@@ -161,7 +161,7 @@ void KGameSound::start()
 void KGameSound::start(const QPointF &pos)
 {
     if (d->m_valid) {
-        KgOpenALRuntime *runtime = KgOpenALRuntime::instance();
+        KGameOpenALRuntime *runtime = KGameOpenALRuntime::instance();
         if (!runtime->instance()->m_soundsEvents[this].isEmpty()) {
             if (runtime->instance()->m_soundsEvents[this].last()->replay(pos) == false) {
                 new KGamePlaybackEvent(this, pos);
@@ -174,7 +174,7 @@ void KGameSound::start(const QPointF &pos)
 
 void KGameSound::stop()
 {
-    qDeleteAll(KgOpenALRuntime::instance()->m_soundsEvents.take(this));
+    qDeleteAll(KGameOpenALRuntime::instance()->m_soundsEvents.take(this));
 }
 
 // END KGameSound
@@ -184,7 +184,7 @@ KGamePlaybackEvent::KGamePlaybackEvent(KGameSound *sound, const QPointF &pos)
     : m_valid(false)
 {
     // make sure OpenAL is initialized
-    KgOpenALRuntime *runtime = KgOpenALRuntime::instance();
+    KGameOpenALRuntime *runtime = KGameOpenALRuntime::instance();
     // clear OpenAL error storage
     int error;
     alGetError();

@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGOPENALRUNTIME_P_H
-#define KGOPENALRUNTIME_P_H
+#ifndef KGAMEOPENALRUNTIME_P_H
+#define KGAMEOPENALRUNTIME_P_H
 
 // Qt
 #include <QHash>
@@ -37,13 +37,13 @@ private:
 typedef QList<KGamePlaybackEvent *> KGamePlaybackEventList;
 
 /// @internal
-class KgOpenALRuntime
+class KGameOpenALRuntime
 {
 public:
-    KgOpenALRuntime();
-    ~KgOpenALRuntime();
+    KGameOpenALRuntime();
+    ~KGameOpenALRuntime();
 
-    static KgOpenALRuntime *instance();
+    static KGameOpenALRuntime *instance();
 
     void configureListener();
     void cleanupUnusedSources();
@@ -60,4 +60,4 @@ private:
     ALCdevice *m_device;
 };
 
-#endif // KGOPENALRUNTIME_P_H
+#endif // KGAMEOPENALRUNTIME_P_H

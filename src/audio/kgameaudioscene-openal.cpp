@@ -7,10 +7,10 @@
 #include "kgameaudioscene.h"
 
 // own
-#include "kgopenalruntime_p.h"
+#include "kgameopenalruntime_p.h"
 #include <kdegames_audio_logging.h>
 
-Q_GLOBAL_STATIC(KgOpenALRuntime, g_runtime)
+Q_GLOBAL_STATIC(KGameOpenALRuntime, g_runtime)
 
 // BEGIN KGameAudioScene
 
@@ -51,9 +51,9 @@ bool KGameAudioScene::hasError()
 }
 
 // END KGameAudioScene
-// BEGIN KgOpenALRuntime
+// BEGIN KGameOpenALRuntime
 
-KgOpenALRuntime::KgOpenALRuntime()
+KGameOpenALRuntime::KGameOpenALRuntime()
     : m_volume(1)
     , m_error(false)
     , m_context(nullptr)
@@ -75,7 +75,7 @@ KgOpenALRuntime::KgOpenALRuntime()
     configureListener();
 }
 
-KgOpenALRuntime::~KgOpenALRuntime()
+KGameOpenALRuntime::~KGameOpenALRuntime()
 {
     if (m_context == alcGetCurrentContext()) {
         alcMakeContextCurrent(nullptr);
@@ -84,12 +84,12 @@ KgOpenALRuntime::~KgOpenALRuntime()
     alcCloseDevice(m_device);
 }
 
-KgOpenALRuntime *KgOpenALRuntime::instance()
+KGameOpenALRuntime *KGameOpenALRuntime::instance()
 {
     return g_runtime;
 }
 
-void KgOpenALRuntime::configureListener()
+void KGameOpenALRuntime::configureListener()
 {
     int error;
     alGetError(); // clear error cache
@@ -101,4 +101,4 @@ void KgOpenALRuntime::configureListener()
     }
 }
 
-// END KgOpenALRuntime
+// END KGameOpenALRuntime
