@@ -117,16 +117,14 @@ ecm_generate_export_header(KDEGames
 target_link_libraries(KDEGames
     PUBLIC
         KF6::ConfigCore
-        KF6::I18n
         KF6::WidgetsAddons
         KF6::ConfigWidgets
-        Qt6::Widgets
-        Qt6::QuickWidgets
         Qt6::Qml
     PRIVATE
         ${KGAUDIO_LINKLIBS}
         KF6::NewStuffWidgets
         KF6::IconThemes
+        KF6::I18n
         KF6::XmlGui
         KF6::GuiAddons
         KF6::Completion
