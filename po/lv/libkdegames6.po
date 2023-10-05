@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 01:54+0000\n"
+"POT-Creation-Date: 2023-10-05 01:40+0000\n"
 "PO-Revision-Date: 2009-07-19 11:03+0300\n"
 "Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -116,100 +116,100 @@ msgstr ""
 "Labi darīts!\n"
 "Jūs esat iekļuvis labāko rezultātu sarakstā!"
 
-#: kgdifficulty.cpp:74
+#: kgamedifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Smeiklīgi viegli"
 
-#: kgdifficulty.cpp:77
+#: kgamedifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Ļoti viegli"
 
-#: kgdifficulty.cpp:80
+#: kgamedifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Viegli"
 
-#: kgdifficulty.cpp:83
+#: kgamedifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Vidēji"
 
-#: kgdifficulty.cpp:86
+#: kgamedifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Grūti"
 
-#: kgdifficulty.cpp:89
+#: kgamedifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Ļoti grūti"
 
-#: kgdifficulty.cpp:92
+#: kgamedifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Ekstrēmi"
 
-#: kgdifficulty.cpp:95
+#: kgamedifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Neiespējami"
 
-#: kgdifficulty.cpp:289
+#: kgamedifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "Grūtības pakāpes mainīšana izbeigs pašreizējo spēli!"
 
-#: kgdifficulty.cpp:291
+#: kgamedifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Mainīt grūtības pakāpi"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
+#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Grūtības pakāpe"
 
-#: kgdifficulty.cpp:384
+#: kgamedifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Iestata grūtības pakāpi"
 
-#: kgdifficulty.cpp:385
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Iestata spēles grūtības pakāpi."
 
-#: kgthemeselector.cpp:103
+#: kgamethemeselector.cpp:103
 #, fuzzy, kde-format
 #| msgid "&Get New Themes"
 msgid "Get New Themes..."
 msgstr "&Saņemt jaunas tēmas"
 
-#: kgthemeselector.cpp:203
+#: kgamethemeselector.cpp:203
 #, fuzzy, kde-format
 #| msgid "Solve the game"
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "Atrisina spēli"
 
-#: kgthemeselector.cpp:273
+#: kgamethemeselector.cpp:273
 #, fuzzy, kde-format
 #| msgid "Your name:"
 msgid "[No name]"
 msgstr "Jūsu vārds:"
 
-#: kgthemeselector.cpp:289
+#: kgamethemeselector.cpp:289
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"

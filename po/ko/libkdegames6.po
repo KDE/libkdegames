@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 01:54+0000\n"
+"POT-Creation-Date: 2023-10-05 01:40+0000\n"
 "PO-Revision-Date: 2020-04-05 11:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -110,97 +110,97 @@ msgstr ""
 "잘 하셨습니다!\n"
 "최고 기록 목록에 들어갔습니다!"
 
-#: kgdifficulty.cpp:74
+#: kgamedifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "이해가 안 가게 쉬움"
 
-#: kgdifficulty.cpp:77
+#: kgamedifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "매우 쉬움"
 
-#: kgdifficulty.cpp:80
+#: kgamedifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "쉬움"
 
-#: kgdifficulty.cpp:83
+#: kgamedifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "중간"
 
-#: kgdifficulty.cpp:86
+#: kgamedifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "어려움"
 
-#: kgdifficulty.cpp:89
+#: kgamedifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "매우 어려움"
 
-#: kgdifficulty.cpp:92
+#: kgamedifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "엄청나게 어려움"
 
-#: kgdifficulty.cpp:95
+#: kgamedifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "불가능함"
 
-#: kgdifficulty.cpp:289
+#: kgamedifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "게임의 난이도를 바꾸면 현재 게임을 끝냅니다!"
 
-#: kgdifficulty.cpp:291
+#: kgamedifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "난이도를 변경합니다"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
+#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "난이도"
 
-#: kgdifficulty.cpp:384
+#: kgamedifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "난이도 설정"
 
-#: kgdifficulty.cpp:385
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "게임의 난이도를 설정합니다."
 
-#: kgthemeselector.cpp:103
+#: kgamethemeselector.cpp:103
 #, kde-format
 msgid "Get New Themes..."
 msgstr "새 테마 가져오기..."
 
-#: kgthemeselector.cpp:203
+#: kgamethemeselector.cpp:203
 #, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "테마 선택"
 
-#: kgthemeselector.cpp:273
+#: kgamethemeselector.cpp:273
 #, kde-format
 msgid "[No name]"
 msgstr "[이름 없음]"
 
-#: kgthemeselector.cpp:289
+#: kgamethemeselector.cpp:289
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"

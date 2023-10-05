@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 01:54+0000\n"
+"POT-Creation-Date: 2023-10-05 01:40+0000\n"
 "PO-Revision-Date: 2010-11-26 10:16+0330\n"
 "Last-Translator: Mohamad Reza Mirdamadi <mohi@ubuntu.ir>\n"
 "Language-Team: Farsi (Persian) <kde-i18n-doc@kde.org>\n"
@@ -113,100 +113,100 @@ msgstr ""
 "آفرین!\n"
 "آن را در فهرست امتیاز بالا وارد کردید!"
 
-#: kgdifficulty.cpp:74
+#: kgamedifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "به نحو خنده‌داری آسان"
 
-#: kgdifficulty.cpp:77
+#: kgamedifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "خیلی آسان"
 
-#: kgdifficulty.cpp:80
+#: kgamedifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "آسان"
 
-#: kgdifficulty.cpp:83
+#: kgamedifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "متوسط"
 
-#: kgdifficulty.cpp:86
+#: kgamedifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "سخت"
 
-#: kgdifficulty.cpp:89
+#: kgamedifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "خیلی سخت"
 
-#: kgdifficulty.cpp:92
+#: kgamedifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "خیلی خیلی سخت"
 
-#: kgdifficulty.cpp:95
+#: kgamedifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "غیرممکن"
 
-#: kgdifficulty.cpp:289
+#: kgamedifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "تغییر سطح دشواری به بازی جاری خاتمه می‌دهد!"
 
-#: kgdifficulty.cpp:291
+#: kgamedifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "تغییر سطح دشواری"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
+#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "دشواری"
 
-#: kgdifficulty.cpp:384
+#: kgamedifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "تنظیم سطح دشواری"
 
-#: kgdifficulty.cpp:385
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "تنظیم سطح دشواری بازی"
 
-#: kgthemeselector.cpp:103
+#: kgamethemeselector.cpp:103
 #, fuzzy, kde-format
 #| msgid "&Get New Themes"
 msgid "Get New Themes..."
 msgstr "&گرفتن چهره‌های جدید‌"
 
-#: kgthemeselector.cpp:203
+#: kgamethemeselector.cpp:203
 #, fuzzy, kde-format
 #| msgid "Solve the game"
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "حل بازی"
 
-#: kgthemeselector.cpp:273
+#: kgamethemeselector.cpp:273
 #, fuzzy, kde-format
 #| msgid "Your name:"
 msgid "[No name]"
 msgstr "نامتان:"
 
-#: kgthemeselector.cpp:289
+#: kgamethemeselector.cpp:289
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"

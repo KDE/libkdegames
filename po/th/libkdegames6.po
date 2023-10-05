@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-01 01:54+0000\n"
+"POT-Creation-Date: 2023-10-05 01:40+0000\n"
 "PO-Revision-Date: 2010-03-22 22:34+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -110,100 +110,100 @@ msgstr ""
 "ทำได้ดีมาก !\n"
 "คุณได้ทำมันจนได้เข้าอันดับคะแนนสูงสุดแล้ว !"
 
-#: kgdifficulty.cpp:74
+#: kgamedifficulty.cpp:74
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "ง่ายแบบไม่ต้องใช้ความคิด"
 
-#: kgdifficulty.cpp:77
+#: kgamedifficulty.cpp:77
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "ง่ายมาก"
 
-#: kgdifficulty.cpp:80
+#: kgamedifficulty.cpp:80
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "ง่าย"
 
-#: kgdifficulty.cpp:83
+#: kgamedifficulty.cpp:83
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "ปานกลาง"
 
-#: kgdifficulty.cpp:86
+#: kgamedifficulty.cpp:86
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "ยาก"
 
-#: kgdifficulty.cpp:89
+#: kgamedifficulty.cpp:89
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "ยากมาก"
 
-#: kgdifficulty.cpp:92
+#: kgamedifficulty.cpp:92
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "ยากสุด ๆ"
 
-#: kgdifficulty.cpp:95
+#: kgamedifficulty.cpp:95
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "เป็นไปไม่ได้ที่จะชนะ"
 
-#: kgdifficulty.cpp:289
+#: kgamedifficulty.cpp:289
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "การเปลี่ยนระดับความยากของเกมจะทำให้เกมปัจจุบันต้องจบลง !"
 
-#: kgdifficulty.cpp:291
+#: kgamedifficulty.cpp:291
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "เปลี่ยนระดับความยาก"
 
-#: kgdifficulty.cpp:375 kgdifficulty.cpp:383
+#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "ระดับความยาก"
 
-#: kgdifficulty.cpp:384
+#: kgamedifficulty.cpp:384
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "ตั้งค่าระดับความยาก"
 
-#: kgdifficulty.cpp:385
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "ตั้งค่าระดับความยากของเกม"
 
-#: kgthemeselector.cpp:103
+#: kgamethemeselector.cpp:103
 #, fuzzy, kde-format
 #| msgid "&Get New Themes..."
 msgid "Get New Themes..."
 msgstr "&หาชุดตกแต่งใหม่ ๆ ..."
 
-#: kgthemeselector.cpp:203
+#: kgamethemeselector.cpp:203
 #, fuzzy, kde-format
 #| msgid "Solve the game"
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "ช่วยแก้ปัญหาของเกม"
 
-#: kgthemeselector.cpp:273
+#: kgamethemeselector.cpp:273
 #, fuzzy, kde-format
 #| msgid "Your name:"
 msgid "[No name]"
 msgstr "ชื่อของคุณ:"
 
-#: kgthemeselector.cpp:289
+#: kgamethemeselector.cpp:289
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
