@@ -42,7 +42,6 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
     I18n
     NewStuff
-    Service
     XmlGui
     WidgetsAddons
 )
