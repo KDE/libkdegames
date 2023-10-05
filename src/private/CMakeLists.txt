@@ -69,8 +69,9 @@ target_link_libraries(KDEGamesPrivate
         Qt6::Network
     PRIVATE
         KF6::DNSSD
-        KF6::NewStuffWidgets
+        KF6::I18n
         KF6::Archive
+        KF6::CoreAddons
         KF6::XmlGui
 )
 
