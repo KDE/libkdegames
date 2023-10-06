@@ -1,4 +1,4 @@
-# Translation of libkdegames5 to Northern Sami
+# Translation of libkdegames6 to Northern Sami
 #
 # Børre Gaup <boerre@skolelinux.no>, 2006, 2010.
 msgid ""

@@ -1,4 +1,4 @@
-# Translation of libkdegames5 to Norwegian Bokmål
+# Translation of libkdegames6 to Norwegian Bokmål
 #
 # Knut Yrvin <knut.yrvin@gmail.com>, 2002.
 # Axel Bojer <fri_programvare@bojer.no>, 2003.
