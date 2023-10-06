@@ -24,7 +24,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     /// @note The implementation is independent of @a option and @a index.
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    QRect thumbnailRect(const QRect &baseRect) const;
+    QRect thumbnailRect(QRect baseRect) const;
 };
 
 #endif // KG_THEMESELECTOR_P_H

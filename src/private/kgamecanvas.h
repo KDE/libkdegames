@@ -80,7 +80,7 @@ public:
     virtual void ensurePendingUpdate() = 0;
 
     /** Virtual function to update a rect */
-    virtual void invalidate(const QRect &r, bool translate = true) = 0;
+    virtual void invalidate(QRect r, bool translate = true) = 0;
 
     /** Virtual function to update a region */
     virtual void invalidate(const QRegion &r, bool translate = true) = 0;
@@ -120,7 +120,7 @@ private:
 
     static QPixmap *transparence_pixmap_cache;
     static QPixmap *getTransparenceCache(QSize s);
-    virtual void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity);
+    virtual void paintInternal(QPainter *p, QRect prect, const QRegion &preg, QPoint delta, double cumulative_opacity);
 
     void updateAfterRestack(int from, int to);
 
@@ -286,11 +286,11 @@ private:
     mutable bool m_child_rect_changed;
     mutable QRect m_last_child_rect;
 
-    void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity) override;
+    void paintInternal(QPainter *p, QRect prect, const QRegion &preg, QPoint delta, double cumulative_opacity) override;
 
     void ensureAnimating() override;
     void ensurePendingUpdate() override;
-    void invalidate(const QRect &r, bool translate = true) override;
+    void invalidate(QRect r, bool translate = true) override;
     void invalidate(const QRegion &r, bool translate = true) override;
     void updateChanges() override;
     void changed() override;
@@ -627,7 +627,7 @@ private:
 
     void ensureAnimating() override;
     void ensurePendingUpdate() override;
-    void invalidate(const QRect &r, bool translate = true) override;
+    void invalidate(QRect r, bool translate = true) override;
     void invalidate(const QRegion &r, bool translate = true) override;
 
     void paintEvent(QPaintEvent *event) override;
@@ -689,7 +689,7 @@ class KDEGAMESPRIVATE_EXPORT KGameCanvasAdapter : public KGameCanvasAbstract
     {
     }
     void ensurePendingUpdate() override;
-    void invalidate(const QRect &r, bool translate = true) override;
+    void invalidate(QRect r, bool translate = true) override;
     void invalidate(const QRegion &r, bool translate = true) override;
 
     QRect childRect();
@@ -733,7 +733,7 @@ public:
      *
      * \a rect The bounding rectangle of the region that needs repainting.
      */
-    virtual void updateParent(const QRect &rect) = 0;
+    virtual void updateParent(QRect rect) = 0;
 };
 
 #endif //__KGRGAMECANVAS_H__

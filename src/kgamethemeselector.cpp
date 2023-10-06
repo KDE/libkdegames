@@ -244,7 +244,7 @@ KGameThemeDelegate::KGameThemeDelegate(QObject *parent)
         view->setItemDelegate(this);
 }
 
-QRect KGameThemeDelegate::thumbnailRect(const QRect &baseRect) const
+QRect KGameThemeDelegate::thumbnailRect(QRect baseRect) const
 {
     QRect thumbnailBaseRect(QPoint(Metrics::Padding + baseRect.left(), 0), Metrics::ThumbnailBaseSize);
     thumbnailBaseRect.moveCenter(QPoint(thumbnailBaseRect.center().x(), baseRect.center().y()));

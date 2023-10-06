@@ -148,7 +148,7 @@ void KGameCanvasWidget::updateChanges()
     priv->m_pending_update_reg = QRegion();
 }
 
-void KGameCanvasWidget::invalidate(const QRect &r, bool /*translate*/)
+void KGameCanvasWidget::invalidate(QRect r, bool /*translate*/)
 {
     priv->m_pending_update_reg |= r;
     ensurePendingUpdate();
@@ -289,7 +289,7 @@ QPixmap *KGameCanvasItem::getTransparenceCache(QSize s)
     return transparence_pixmap_cache;
 }
 
-void KGameCanvasItem::paintInternal(QPainter *pp, const QRect & /*prect*/, const QRegion & /*preg*/, QPoint /*delta*/, double cumulative_opacity)
+void KGameCanvasItem::paintInternal(QPainter *pp, QRect /*prect*/, const QRegion & /*preg*/, QPoint /*delta*/, double cumulative_opacity)
 {
     int opacity = int(cumulative_opacity * m_opacity + 0.5);
 
@@ -571,7 +571,7 @@ void KGameCanvasGroup::changed()
     }
 }
 
-void KGameCanvasGroup::invalidate(const QRect &r, bool translate)
+void KGameCanvasGroup::invalidate(QRect r, bool translate)
 {
     if (m_canvas)
         m_canvas->invalidate(translate ? r.translated(m_pos) : r, translate);
@@ -602,7 +602,7 @@ void KGameCanvasGroup::advance(int msecs)
         setAnimated(false);
 }
 
-void KGameCanvasGroup::paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity)
+void KGameCanvasGroup::paintInternal(QPainter *p, QRect prect, const QRegion &preg, QPoint delta, double cumulative_opacity)
 {
     cumulative_opacity *= (m_opacity / 255.0);
 
@@ -1036,7 +1036,7 @@ void KGameCanvasAdapter::invalidate(const QRegion &r, bool)
     invalidate(r.boundingRect());
 }
 
-void KGameCanvasAdapter::invalidate(const QRect &r, bool)
+void KGameCanvasAdapter::invalidate(QRect r, bool)
 {
     m_invalidated_rect |= r;
 }
