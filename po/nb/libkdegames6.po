@@ -1,4 +1,4 @@
-# Translation of libkdegames5 to Norwegian Bokmål
+# Translation of libkdegames6 to Norwegian Bokmål
 #
 # Knut Yrvin <knut.yrvin@gmail.com>, 2002.
 # Axel Bojer <fri_programvare@bojer.no>, 2003.
@@ -631,46 +631,3 @@ msgstr "Asynkrone inndata"
 #, kde-format
 msgid "myTurn"
 msgstr "Min tur"
-
-#~ msgid "Difficulty"
-#~ msgstr "Vanskelighetsgrad"
-
-#~ msgctxt ""
-#~ "Name of the game difficulty level that is customized by the user by "
-#~ "setting up different game parameters"
-#~ msgid "Custom"
-#~ msgstr "Tilpasset"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "Velg <b>vanskelighetsgraden</b> for spillet.<br /> Hvis du endrer "
-#~ "vanskeligheten mens et spill er i gang må du avbryte det og begynne et "
-#~ "nytt."
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr ""
-#~ "Velg <b>vanskelighetsgraden</b> for spillet.<br /> Du kan endre "
-#~ "vanskelighetsgraden mens spillet pågår."
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "&Hent nye temaer …"
-
-#~ msgid "Preview"
-#~ msgstr "Forhåndsvisning"
-
-#~ msgid "Theme Details"
-#~ msgstr "Temadetaljer"
-
-#~ msgid "Contact:"
-#~ msgstr "Kontakt:"
-
-#~ msgid "Description:"
-#~ msgstr "Beskrivelse:"
-
-#~ msgid "Author:"
-#~ msgstr "Forfatter:"

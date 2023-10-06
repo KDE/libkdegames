@@ -1,4 +1,4 @@
-# Translation of libkdegames5 to Norwegian Nynorsk
+# Translation of libkdegames6 to Norwegian Nynorsk
 #
 # Gaute Hvoslef Kvalnes <gaute@verdsveven.com>, 2001, 2002, 2003, 2004.
 # Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2007, 2008, 2009, 2010, 2011, 2016.
@@ -626,45 +626,3 @@ msgstr "AsynkInn"
 #, kde-format
 msgid "myTurn"
 msgstr "minTur"
-
-#~ msgid "Difficulty"
-#~ msgstr "Vanskegrad"
-
-#~ msgctxt ""
-#~ "Name of the game difficulty level that is customized by the user by "
-#~ "setting up different game parameters"
-#~ msgid "Custom"
-#~ msgstr "Tilpassa"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "Vel <b>vanskegraden</b> til spelet.<br />Viss du endrar vanskegraden mens "
-#~ "spelet er i gang, må du avbryta det og start eit nytt."
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr ""
-#~ "Vel <b>vanskegraden</b> til spelet.<br />Du kan endra vanskegraden sjølv "
-#~ "om eit spel er i gang."
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "&Hent nye tema …"
-
-#~ msgid "Preview"
-#~ msgstr "Førehandsvising"
-
-#~ msgid "Theme Details"
-#~ msgstr "Temadetaljar"
-
-#~ msgid "Contact:"
-#~ msgstr "Kontakt:"
-
-#~ msgid "Description:"
-#~ msgstr "Skildring:"
-
-#~ msgid "Author:"
-#~ msgstr "Laga av:"

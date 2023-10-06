@@ -1,4 +1,4 @@
-# Translation of libkdegames5 to Northern Sami
+# Translation of libkdegames6 to Northern Sami
 #
 # Børre Gaup <boerre@skolelinux.no>, 2006, 2010.
 msgid ""
@@ -621,37 +621,3 @@ msgstr ""
 #, kde-format
 msgid "myTurn"
 msgstr "muVuorru"
-
-#~ msgid "Difficulty"
-#~ msgstr "Váttisvuohta"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "Vállje man <b>váttis</b> speallu galgá leat.<br /> Jus rievdadat "
-#~ "váttisvuođadási go speallu lea jođus, de fertet dan gaskkalduhttit ja "
-#~ "álggahit ođđa spealu."
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr ""
-#~ "Vállje man <b>váttis</b> speallu galgá leat.<br /> Sáhtát rievdadit "
-#~ "váttisvuođadási spealahettiin."
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "&Viečča ođđa fáttáid …"
-
-#~ msgid "Preview"
-#~ msgstr "Ovdačájeheapmi"
-
-#~ msgid "Contact:"
-#~ msgstr "Oktavuohta:"
-
-#~ msgid "Description:"
-#~ msgstr "Válddahus:"
-
-#~ msgid "Author:"
-#~ msgstr "Čálli:"
