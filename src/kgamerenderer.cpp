@@ -354,7 +354,7 @@ bool KGameRenderer::spriteExists(const QString &key) const
     return this->frameCount(key) >= 0;
 }
 
-QPixmap KGameRenderer::spritePixmap(const QString &key, const QSize &size, int frame, const QHash<QColor, QColor> &customColors) const
+QPixmap KGameRenderer::spritePixmap(const QString &key, QSize size, int frame, const QHash<QColor, QColor> &customColors) const
 {
     QPixmap result;
     d->requestPixmap(KGRInternal::ClientSpec(key, frame, size, customColors), nullptr, &result);

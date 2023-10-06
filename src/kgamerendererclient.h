@@ -78,7 +78,7 @@ public:
     ///
     /// The default render size is very small (width = height = 3 pixels), so
     /// that you notice when you forget to set this. ;-)
-    void setRenderSize(const QSize &renderSize);
+    void setRenderSize(QSize renderSize);
     /// @return the custom color replacements for this client
     QHash<QColor, QColor> customColors() const;
     /// Defines the custom color replacements for this client. That is, for

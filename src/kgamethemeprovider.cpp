@@ -256,7 +256,7 @@ void KGameThemeProvider::rediscoverThemes()
     d->m_inRediscover = false;
 }
 
-QPixmap KGameThemeProvider::generatePreview(const KGameTheme *theme, const QSize &size)
+QPixmap KGameThemeProvider::generatePreview(const KGameTheme *theme, QSize size)
 {
     const qreal dpr = qApp->devicePixelRatio();
     QPixmap pixmap = QPixmap(theme->previewPath()).scaled(size * dpr, Qt::KeepAspectRatio, Qt::SmoothTransformation);

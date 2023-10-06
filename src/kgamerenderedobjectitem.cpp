@@ -116,7 +116,7 @@ QSizeF KGameRenderedObjectItem::fixedSize() const
     return d->m_fixedSize;
 }
 
-void KGameRenderedObjectItem::setFixedSize(const QSizeF &fixedSize)
+void KGameRenderedObjectItem::setFixedSize(QSizeF fixedSize)
 {
     if (d->m_primaryView) {
         d->m_fixedSize = fixedSize.expandedTo(QSize(1, 1));

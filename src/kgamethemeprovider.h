@@ -112,7 +112,7 @@ public:
     ///
     /// The default implementation tries to load a preview image from
     /// KGameTheme::previewPath(), and resizes the result to fit in @a size.
-    virtual QPixmap generatePreview(const KGameTheme *theme, const QSize &size);
+    virtual QPixmap generatePreview(const KGameTheme *theme, QSize size);
 
     /// Registers this KGameThemeProvider with @a engine's root context with ID
     /// @a name and constructs a KGameImageProvider corresponding

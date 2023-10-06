@@ -277,7 +277,7 @@ void KGameCanvasItem::updateChanges()
 
 QPixmap *KGameCanvasItem::transparence_pixmap_cache = nullptr;
 
-QPixmap *KGameCanvasItem::getTransparenceCache(const QSize &s)
+QPixmap *KGameCanvasItem::getTransparenceCache(QSize s)
 {
     if (!transparence_pixmap_cache)
         transparence_pixmap_cache = new QPixmap();
@@ -724,7 +724,7 @@ void KGameCanvasRenderedPixmap::receivePixmap(const QPixmap &pixmap)
 /*
     KGameCanvasTiledPixmap
 */
-KGameCanvasTiledPixmap::KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, QPoint origin, bool move_orig, KGameCanvasAbstract *KGameCanvas)
+KGameCanvasTiledPixmap::KGameCanvasTiledPixmap(const QPixmap &pixmap, QSize size, QPoint origin, bool move_orig, KGameCanvasAbstract *KGameCanvas)
     : KGameCanvasItem(KGameCanvas)
     , m_pixmap(pixmap)
     , m_size(size)
@@ -752,7 +752,7 @@ void KGameCanvasTiledPixmap::setPixmap(const QPixmap &pixmap)
         changed();
 }
 
-void KGameCanvasTiledPixmap::setSize(const QSize &size)
+void KGameCanvasTiledPixmap::setSize(QSize size)
 {
     m_size = size;
     if (visible() && canvas())
@@ -792,7 +792,7 @@ QRect KGameCanvasTiledPixmap::rect() const
 /*
     KGameCanvasRectangle
 */
-KGameCanvasRectangle::KGameCanvasRectangle(const QColor &color, const QSize &size, KGameCanvasAbstract *KGameCanvas)
+KGameCanvasRectangle::KGameCanvasRectangle(const QColor &color, QSize size, KGameCanvasAbstract *KGameCanvas)
     : KGameCanvasItem(KGameCanvas)
     , m_color(color)
     , m_size(size)
@@ -816,7 +816,7 @@ void KGameCanvasRectangle::setColor(const QColor &color)
         changed();
 }
 
-void KGameCanvasRectangle::setSize(const QSize &size)
+void KGameCanvasRectangle::setSize(QSize size)
 {
     m_size = size;
     if (visible() && canvas())

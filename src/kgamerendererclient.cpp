@@ -83,7 +83,7 @@ QSize KGameRendererClient::renderSize() const
     return d->m_spec.size;
 }
 
-void KGameRendererClient::setRenderSize(const QSize &renderSize)
+void KGameRendererClient::setRenderSize(QSize renderSize)
 {
     if (d->m_spec.size != renderSize) {
         d->m_spec.size = renderSize;

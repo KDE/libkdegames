@@ -119,7 +119,7 @@ private:
     QRect m_last_rect;
 
     static QPixmap *transparence_pixmap_cache;
-    static QPixmap *getTransparenceCache(const QSize &s);
+    static QPixmap *getTransparenceCache(QSize s);
     virtual void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity);
 
     void updateAfterRestack(int from, int to);
@@ -427,7 +427,7 @@ private:
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, QPoint origin, bool move_orig, KGameCanvasAbstract *canvas = nullptr);
+    KGameCanvasTiledPixmap(const QPixmap &pixmap, QSize size, QPoint origin, bool move_orig, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty pixmap */
     explicit KGameCanvasTiledPixmap(KGameCanvasAbstract *canvas = nullptr);
@@ -444,7 +444,7 @@ public:
     void setPixmap(const QPixmap &pixmap);
 
     /** Sets the size */
-    void setSize(const QSize &size);
+    void setSize(QSize size);
 
     /** The origin */
     QPoint origin() const
@@ -488,7 +488,7 @@ private:
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasRectangle(const QColor &color, const QSize &size, KGameCanvasAbstract *canvas = nullptr);
+    KGameCanvasRectangle(const QColor &color, QSize size, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty pixmap */
     explicit KGameCanvasRectangle(KGameCanvasAbstract *canvas = nullptr);
@@ -505,7 +505,7 @@ public:
     void setColor(const QColor &color);
 
     /** Sets the size */
-    void setSize(const QSize &size);
+    void setSize(QSize size);
 
     void paint(QPainter *p) override;
     QRect rect() const override;

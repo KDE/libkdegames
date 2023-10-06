@@ -206,7 +206,8 @@ public:
 
     // The parentheses around QHash<QColor, QColor>() avoid compile
     // errors on platforms with older gcc versions, e.g. OS X 10.6.
-    QPixmap spritePixmap(const QString &key, const QSize &size, int frame = -1, const QHash<QColor, QColor> &customColors = (QHash<QColor, QColor>())) const;
+    QPixmap spritePixmap(const QString &key, QSize size, int frame = -1, const QHash<QColor, QColor> &customColors = (QHash<QColor, QColor>())) const;
+
 Q_SIGNALS:
     void themeChanged(const KGameTheme *theme);
     /// This signal is never emitted. It is provided because QML likes to

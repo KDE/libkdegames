@@ -72,7 +72,7 @@ public:
     QSizeF fixedSize() const;
     /// Sets the fixed size of this item, i.e. the guaranteed size of the
     /// item. This works only when a primary view has been set.
-    void setFixedSize(const QSizeF &size);
+    void setFixedSize(QSizeF size);
 
     /// Returns a pointer to the current primary view, or 0 if no primary
     /// view has been set (which is the default).
