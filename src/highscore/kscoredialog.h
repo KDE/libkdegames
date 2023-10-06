@@ -205,7 +205,7 @@ public:
      * @returns The highscore position if the score was good enough to
      * make it into the list (1 being topscore) or 0 otherwise.
      */
-    int addScore(const FieldInfo &newInfo = FieldInfo(), const AddScoreFlags &flags = {});
+    int addScore(const FieldInfo &newInfo = FieldInfo(), AddScoreFlags flags = {});
 
     /**
      * Convenience function for ease of use.
@@ -216,7 +216,7 @@ public:
      * @returns The highscore position if the score was good enough to
      * make it into the list (1 being topscore) or 0 otherwise.
      */
-    int addScore(int newScore, const AddScoreFlags &flags = {});
+    int addScore(int newScore, AddScoreFlags flags = {});
 
     /**
      * @returns the current best score in the group

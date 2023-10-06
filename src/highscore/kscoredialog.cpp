@@ -469,7 +469,7 @@ void KScoreDialogPrivate::saveScores()
     highscoreObject->writeAndUnlock();
 }
 
-int KScoreDialog::addScore(const FieldInfo &newInfo, const AddScoreFlags &flags)
+int KScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags)
 {
     qCDebug(KDEGAMES_HIGHSCORE_LOG) << "adding new score";
 
@@ -542,7 +542,7 @@ int KScoreDialog::addScore(const FieldInfo &newInfo, const AddScoreFlags &flags)
     return 0;
 }
 
-int KScoreDialog::addScore(int newScore, const AddScoreFlags &flags)
+int KScoreDialog::addScore(int newScore, AddScoreFlags flags)
 {
     FieldInfo scoreInfo;
     scoreInfo[Score] = QString::number(newScore);

@@ -210,7 +210,7 @@ void KGameSvgDocument::load(const QString &svgFilename)
     load();
 }
 
-void KGameSvgDocument::rotate(double degrees, const MatrixOptions &options)
+void KGameSvgDocument::rotate(double degrees, MatrixOptions options)
 {
     QTransform matrix;
 
@@ -223,7 +223,7 @@ void KGameSvgDocument::rotate(double degrees, const MatrixOptions &options)
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
 
-void KGameSvgDocument::translate(int xPixels, int yPixels, const MatrixOptions &options)
+void KGameSvgDocument::translate(int xPixels, int yPixels, MatrixOptions options)
 {
     QTransform matrix;
 
@@ -236,7 +236,7 @@ void KGameSvgDocument::translate(int xPixels, int yPixels, const MatrixOptions &
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
 
-void KGameSvgDocument::shear(double xRadians, double yRadians, const MatrixOptions &options)
+void KGameSvgDocument::shear(double xRadians, double yRadians, MatrixOptions options)
 {
     QTransform matrix;
 
@@ -249,7 +249,7 @@ void KGameSvgDocument::shear(double xRadians, double yRadians, const MatrixOptio
     setTransformMatrix(matrix, ReplaceCurrentMatrix);
 }
 
-void KGameSvgDocument::skew(double xDegrees, double yDegrees, const MatrixOptions &options)
+void KGameSvgDocument::skew(double xDegrees, double yDegrees, MatrixOptions options)
 {
     double xRadians = xDegrees * (M_PI / 180);
     double yRadians = yDegrees * (M_PI / 180);
@@ -257,7 +257,7 @@ void KGameSvgDocument::skew(double xDegrees, double yDegrees, const MatrixOption
     shear(xRadians, yRadians, options);
 }
 
-void KGameSvgDocument::scale(double xFactor, double yFactor, const MatrixOptions &options)
+void KGameSvgDocument::scale(double xFactor, double yFactor, MatrixOptions options)
 {
     QTransform matrix;
     if ((xFactor == 0) || (yFactor == 0)) {
@@ -577,7 +577,7 @@ QTransform KGameSvgDocument::transformMatrix() const
     return baseMatrix;
 }
 
-void KGameSvgDocument::setTransformMatrix(QTransform &matrix, const MatrixOptions &options)
+void KGameSvgDocument::setTransformMatrix(QTransform &matrix, MatrixOptions options)
 {
     QString transformBuffer, tmp;
     QTransform null = QTransform();

@@ -209,7 +209,7 @@ public:
      * @returns nothing
      * @see QTransform#rotate()
      */
-    void rotate(double degrees, const MatrixOptions &options = ApplyToCurrentMatrix);
+    void rotate(double degrees, MatrixOptions options = ApplyToCurrentMatrix);
 
     /**
      * @brief Moves the origin of the current node
@@ -220,7 +220,7 @@ public:
      * @returns nothing
      * @see QTransform::translate()
      */
-    void translate(int xPixels, int yPixels, const MatrixOptions &options = ApplyToCurrentMatrix);
+    void translate(int xPixels, int yPixels, MatrixOptions options = ApplyToCurrentMatrix);
 
     /**
      * @brief Shears the origin of the current node.
@@ -231,7 +231,7 @@ public:
      * @returns nothing
      * @see QTransform::shear()
      */
-    void shear(double xRadians, double yRadians, const MatrixOptions &options = ApplyToCurrentMatrix);
+    void shear(double xRadians, double yRadians, MatrixOptions options = ApplyToCurrentMatrix);
 
     /**
      * @brief Skews the origin of the current node.
@@ -245,7 +245,7 @@ public:
      * @returns nothing
      * @see shear()
      */
-    void skew(double xDegrees, double yDegrees, const MatrixOptions &options = ApplyToCurrentMatrix);
+    void skew(double xDegrees, double yDegrees, MatrixOptions options = ApplyToCurrentMatrix);
 
     /**
      * @brief Scales the origin of the current node.
@@ -259,7 +259,7 @@ public:
      * @returns nothing
      * @see QTransform::scale()
      */
-    void scale(double xFactor, double yFactor, const MatrixOptions &options = ApplyToCurrentMatrix);
+    void scale(double xFactor, double yFactor, MatrixOptions options = ApplyToCurrentMatrix);
 
     /**
      * @brief Returns the last node found by elementById, or null if node not found
@@ -463,7 +463,7 @@ public:
      * @returns nothing
      * @see transformMatrix()
      */
-    void setTransformMatrix(QTransform &matrix, const MatrixOptions &options = ApplyToCurrentMatrix);
+    void setTransformMatrix(QTransform &matrix, MatrixOptions options = ApplyToCurrentMatrix);
 
 private:
     /**
