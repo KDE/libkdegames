@@ -42,7 +42,7 @@ KGameRenderedObjectItemPrivate::KGameRenderedObjectItemPrivate(KGameRenderedObje
 {
 }
 
-static inline int vectorLength(const QPointF &point)
+static inline int vectorLength(QPointF point)
 {
     return qSqrt(point.x() * point.x() + point.y() * point.y());
 }
@@ -97,7 +97,7 @@ QPointF KGameRenderedObjectItem::offset() const
     return d->pos();
 }
 
-void KGameRenderedObjectItem::setOffset(const QPointF &offset)
+void KGameRenderedObjectItem::setOffset(QPointF offset)
 {
     if (d->pos() != offset) {
         prepareGeometryChange();

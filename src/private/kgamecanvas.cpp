@@ -42,7 +42,7 @@ KGameCanvasAbstract::~KGameCanvasAbstract()
         m_items[i]->m_canvas = nullptr;
 }
 
-KGameCanvasItem *KGameCanvasAbstract::itemAt(const QPoint &pt) const
+KGameCanvasItem *KGameCanvasAbstract::itemAt(QPoint pt) const
 {
     for (int i = m_items.size() - 1; i >= 0; i--) {
         KGameCanvasItem *el = m_items[i];
@@ -52,7 +52,7 @@ KGameCanvasItem *KGameCanvasAbstract::itemAt(const QPoint &pt) const
     return nullptr;
 }
 
-QList<KGameCanvasItem *> KGameCanvasAbstract::itemsAt(const QPoint &pt) const
+QList<KGameCanvasItem *> KGameCanvasAbstract::itemsAt(QPoint pt) const
 {
     QList<KGameCanvasItem *> retv;
 
@@ -289,7 +289,7 @@ QPixmap *KGameCanvasItem::getTransparenceCache(const QSize &s)
     return transparence_pixmap_cache;
 }
 
-void KGameCanvasItem::paintInternal(QPainter *pp, const QRect & /*prect*/, const QRegion & /*preg*/, const QPoint & /*delta*/, double cumulative_opacity)
+void KGameCanvasItem::paintInternal(QPainter *pp, const QRect & /*prect*/, const QRegion & /*preg*/, QPoint /*delta*/, double cumulative_opacity)
 {
     int opacity = int(cumulative_opacity * m_opacity + 0.5);
 
@@ -503,7 +503,7 @@ void KGameCanvasItem::stackUnder(KGameCanvasItem *ref)
         updateAfterRestack(old_pos, i);
 }
 
-void KGameCanvasItem::moveTo(const QPoint &newpos)
+void KGameCanvasItem::moveTo(QPoint newpos)
 {
     if (m_pos == newpos)
         return;
@@ -602,7 +602,7 @@ void KGameCanvasGroup::advance(int msecs)
         setAnimated(false);
 }
 
-void KGameCanvasGroup::paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, const QPoint &delta, double cumulative_opacity)
+void KGameCanvasGroup::paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity)
 {
     cumulative_opacity *= (m_opacity / 255.0);
 
@@ -724,7 +724,7 @@ void KGameCanvasRenderedPixmap::receivePixmap(const QPixmap &pixmap)
 /*
     KGameCanvasTiledPixmap
 */
-KGameCanvasTiledPixmap::KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, const QPoint &origin, bool move_orig, KGameCanvasAbstract *KGameCanvas)
+KGameCanvasTiledPixmap::KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, QPoint origin, bool move_orig, KGameCanvasAbstract *KGameCanvas)
     : KGameCanvasItem(KGameCanvas)
     , m_pixmap(pixmap)
     , m_size(size)
@@ -759,7 +759,7 @@ void KGameCanvasTiledPixmap::setSize(const QSize &size)
         changed();
 }
 
-void KGameCanvasTiledPixmap::setOrigin(const QPoint &origin)
+void KGameCanvasTiledPixmap::setOrigin(QPoint origin)
 {
     m_origin = m_move_orig ? origin - pos() : origin;
 

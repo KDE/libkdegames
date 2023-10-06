@@ -104,14 +104,14 @@ KChatBase::KChatBase(KChatBasePrivate &dd, QWidget *parent, bool noComboBox)
     readConfig();
 }
 
-const QModelIndex KChatBase::indexAt(const QPoint &pos) const
+QModelIndex KChatBase::indexAt(QPoint pos) const
 {
     Q_D(const KChatBase);
 
     return d->mBox->indexAt(pos);
 }
 
-void KChatBase::customMenuHandler(const QPoint &pos)
+void KChatBase::customMenuHandler(QPoint pos)
 {
     qCDebug(KDEGAMESPRIVATE_LOG) << "custom menu has been requested at position=" << pos << ". Implement handler at subclass if you need it.";
 }

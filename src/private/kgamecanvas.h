@@ -55,7 +55,7 @@ public:
     }
 
     /** Helper function to retrieve the topmost item at the given position */
-    KGameCanvasItem *itemAt(const QPoint &pos) const;
+    KGameCanvasItem *itemAt(QPoint pos) const;
 
     /** Overload, same as above */
     KGameCanvasItem *itemAt(int x, int y) const
@@ -65,7 +65,7 @@ public:
 
     /** Helper function to retrieve all the items at the given position,
         starting from the topmost one. */
-    QList<KGameCanvasItem *> itemsAt(const QPoint &pos) const;
+    QList<KGameCanvasItem *> itemsAt(QPoint pos) const;
 
     /** Overload, same as above */
     QList<KGameCanvasItem *> itemsAt(int x, int y) const
@@ -120,7 +120,7 @@ private:
 
     static QPixmap *transparence_pixmap_cache;
     static QPixmap *getTransparenceCache(const QSize &s);
-    virtual void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, const QPoint &delta, double cumulative_opacity);
+    virtual void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity);
 
     void updateAfterRestack(int from, int to);
 
@@ -220,7 +220,7 @@ public:
     /** Sets a new position. Note that an update will be posted to the parent
         canvas, and if you move an item twice in very little time, a region
         bigger than needed will be updated, causing a possible inefficiency */
-    void moveTo(const QPoint &newpos);
+    void moveTo(QPoint newpos);
 
     /** Overload, same as above */
     void moveTo(int x, int y)
@@ -286,7 +286,7 @@ private:
     mutable bool m_child_rect_changed;
     mutable QRect m_last_child_rect;
 
-    void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, const QPoint &delta, double cumulative_opacity) override;
+    void paintInternal(QPainter *p, const QRect &prect, const QRegion &preg, QPoint delta, double cumulative_opacity) override;
 
     void ensureAnimating() override;
     void ensurePendingUpdate() override;
@@ -427,7 +427,7 @@ private:
 
 public:
     /** Constructor, specifying the pixmap and the parameters to use */
-    KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, const QPoint &origin, bool move_orig, KGameCanvasAbstract *canvas = nullptr);
+    KGameCanvasTiledPixmap(const QPixmap &pixmap, const QSize &size, QPoint origin, bool move_orig, KGameCanvasAbstract *canvas = nullptr);
 
     /** Constructor, creating with an empty pixmap */
     explicit KGameCanvasTiledPixmap(KGameCanvasAbstract *canvas = nullptr);
@@ -453,7 +453,7 @@ public:
     }
 
     /** Sets the origin of the tiles */
-    void setOrigin(const QPoint &size);
+    void setOrigin(QPoint size);
 
     /** If the origin is moved */
     bool moveOrigin()

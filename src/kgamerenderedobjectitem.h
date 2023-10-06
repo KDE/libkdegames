@@ -64,7 +64,7 @@ public:
     QPointF offset() const;
     /// Sets the item's offset, which defines the point of the top-left
     /// corner of the bounding rect, in local coordinates.
-    void setOffset(const QPointF &offset);
+    void setOffset(QPointF offset);
     /// @overload
     void setOffset(qreal x, qreal y);
     /// @return the fixed size of this item (or (-1, -1) if this item has no

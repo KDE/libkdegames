@@ -95,7 +95,7 @@ public:
     /// @note Changes to this property will not be propagated to running
     ///       playbacks of this sound.
     /// @note Effective only if positional playback is supported.
-    void setPos(const QPointF &pos);
+    void setPos(QPointF pos);
     /// @return the volume of this sound
     qreal volume() const;
     /// Sets the volume of this sound. The default is 1.0, which means no
@@ -126,12 +126,12 @@ public Q_SLOTS:
     /// This overload takes an additional position argument which overrides
     /// the sound's pos() property.
     /// @note @a pos is respected only if positional playback is supported.
-    void start(const QPointF &pos);
+    void start(QPointF pos);
     /// Stops any playbacks of this sounds.
     void stop();
 Q_SIGNALS:
     void playbackTypeChanged(KGameSound::PlaybackType type);
-    void posChanged(const QPointF &pos);
+    void posChanged(QPointF pos);
     void volumeChanged(qreal volume);
 
 private:

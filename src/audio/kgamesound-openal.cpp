@@ -127,7 +127,7 @@ QPointF KGameSound::pos() const
     return d->m_pos;
 }
 
-void KGameSound::setPos(const QPointF &pos)
+void KGameSound::setPos(QPointF pos)
 {
     if (d->m_pos == pos)
         return;
@@ -158,7 +158,7 @@ void KGameSound::start()
     start(d->m_pos);
 }
 
-void KGameSound::start(const QPointF &pos)
+void KGameSound::start(QPointF pos)
 {
     if (d->m_valid) {
         KGameOpenALRuntime *runtime = KGameOpenALRuntime::instance();
@@ -180,7 +180,7 @@ void KGameSound::stop()
 // END KGameSound
 // BEGIN KGamePlaybackEvent
 
-KGamePlaybackEvent::KGamePlaybackEvent(KGameSound *sound, const QPointF &pos)
+KGamePlaybackEvent::KGamePlaybackEvent(KGameSound *sound, QPointF pos)
     : m_valid(false)
 {
     // make sure OpenAL is initialized
@@ -228,7 +228,7 @@ bool KGamePlaybackEvent::isRunning() const
     return state == AL_PLAYING;
 }
 
-bool KGamePlaybackEvent::replay(const QPointF &pos) const
+bool KGamePlaybackEvent::replay(QPointF pos) const
 {
     if (alIsSource(m_source) == AL_TRUE) {
         alSourceStop(m_source);

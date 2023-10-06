@@ -343,7 +343,7 @@ protected:
      * @param pos position to check index for
      * @return model index of message with coordinates pos
      */
-    const QModelIndex indexAt(const QPoint &pos) const;
+    QModelIndex indexAt(QPoint pos) const;
 
 private Q_SLOTS:
     /**
@@ -357,7 +357,7 @@ private Q_SLOTS:
      * Implements custom menu which is applicable for one chat message
      * @param pos point where custom menu has been requested (widget coordinates)
      */
-    virtual void customMenuHandler(const QPoint &pos);
+    virtual void customMenuHandler(QPoint pos);
 
 protected:
     KChatBase(KChatBasePrivate &dd, QWidget *parent, bool noComboBox);

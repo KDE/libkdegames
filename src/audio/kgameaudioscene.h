@@ -51,7 +51,7 @@ KDEGAMES_EXPORT QPointF listenerPos();
 /// Sets the position of the listener. The default is (0.0, 0.0), the
 /// point of origin.
 /// @note Effective only if positional playback is supported.
-KDEGAMES_EXPORT void setListenerPos(const QPointF &pos);
+KDEGAMES_EXPORT void setListenerPos(QPointF pos);
 /// @return the master volume for sounds outputted by TagaroAudio
 KDEGAMES_EXPORT qreal volume();
 /// Sets the master volume for sounds outputted by TagaroAudio. The

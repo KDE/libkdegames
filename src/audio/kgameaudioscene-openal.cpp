@@ -24,7 +24,7 @@ QPointF KGameAudioScene::listenerPos()
     return g_runtime->m_listenerPos;
 }
 
-void KGameAudioScene::setListenerPos(const QPointF &pos)
+void KGameAudioScene::setListenerPos(QPointF pos)
 {
     if (g_runtime->m_listenerPos != pos) {
         g_runtime->m_listenerPos = pos;

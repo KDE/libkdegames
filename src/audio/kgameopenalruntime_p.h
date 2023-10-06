@@ -21,13 +21,13 @@ class KGamePlaybackEvent
 {
 public:
     // Creates and starts the playback. Also registers with the OpenALRuntime.
-    KGamePlaybackEvent(KGameSound *sound, const QPointF &pos);
+    KGamePlaybackEvent(KGameSound *sound, QPointF pos);
     // Stops playback if it is still running.
     ~KGamePlaybackEvent();
 
     // Is playback still running?
     bool isRunning() const;
-    bool replay(const QPointF &pos) const;
+    bool replay(QPointF pos) const;
 
 private:
     ALuint m_source;
