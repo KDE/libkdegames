@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-05 01:40+0000\n"
-"PO-Revision-Date: 2023-09-16 10:09\n"
+"PO-Revision-Date: 2023-10-10 14:25\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/libkdegames/libkdegames5.pot\n"
-"X-Crowdin-File-ID: 5673\n"
+"X-Crowdin-File: /kf6-trunk/messages/libkdegames/libkdegames6.pot\n"
+"X-Crowdin-File-ID: 46440\n"
 
 #: highscore/khighscore.cpp:149
 #, kde-format
@@ -618,43 +618,3 @@ msgstr "异步输入"
 #, kde-format
 msgid "myTurn"
 msgstr "我的回合"
-
-#~ msgid "Difficulty"
-#~ msgstr "难度"
-
-#~ msgctxt ""
-#~ "Name of the game difficulty level that is customized by the user by "
-#~ "setting up different game parameters"
-#~ msgid "Custom"
-#~ msgstr "自定义"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "选择游戏<b>难度</b>。<br />如果您在游戏进行中更改难度等级，将必须中止并开"
-#~ "始新游戏使其生效。"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr "选择游戏<b>难度</b>。<br />您可以在游戏进行中更改难度等级。"
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "获得新主题(&G)..."
-
-#~ msgid "Preview"
-#~ msgstr "预览"
-
-#~ msgid "Theme Details"
-#~ msgstr "主题细节"
-
-#~ msgid "Contact:"
-#~ msgstr "联系方式："
-
-#~ msgid "Description:"
-#~ msgstr "描述："
-
-#~ msgid "Author:"
-#~ msgstr "作者："
