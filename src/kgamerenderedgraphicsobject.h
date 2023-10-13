@@ -4,23 +4,23 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KGAMERENDEREDOBJECTITEM_H
-#define KGAMERENDEREDOBJECTITEM_H
+#ifndef KGAMERENDEREDGRAPHICSOBJECT_H
+#define KGAMERENDEREDGRAPHICSOBJECT_H
 
 // own
 #include "kdegames_export.h"
 #include "kgamerendererclient.h"
 // Qt
-#include <QGraphicsItem>
+#include <QGraphicsObject>
 // Std
 #include <memory>
 
 class QGraphicsView;
 
-class KGameRenderedObjectItemPrivate;
+class KGameRenderedGraphicsObjectPrivate;
 
 /**
- * @class KGameRenderedObjectItem kgamerenderedobjectitem.h <KGameRenderedObjectItem>
+ * @class KGameRenderedGraphicsObject kgamerenderedgraphicsobject.h <KGameRenderedGraphicsObject>
  * @short A QGraphicsObject which displays pixmaps from a KGameRenderer.
  *
  * This item displays a pixmap which is retrieved from a KGameRenderer, and is
@@ -35,7 +35,7 @@ class KGameRenderedObjectItemPrivate;
  * By default, this item behaves just like a QGraphicsPixmapItem. The size of
  * its bounding rect is equal to the size of the pixmap, i.e. the renderSize().
  *
- * However, the KGameRenderedObjectItem has a second mode of operation, which is
+ * However, the KGameRenderedGraphicsObject has a second mode of operation, which is
  * enabled by setting a "primary view". (This can be done automatically via
  * KGameRenderer::setDefaultPrimaryView.)
  *
@@ -48,16 +48,16 @@ class KGameRenderedObjectItemPrivate;
  *     is the unit square (moved by the configured offset()).
  * @since 4.6
  */
-class KDEGAMES_EXPORT KGameRenderedObjectItem : public QGraphicsObject, public KGameRendererClient
+class KDEGAMES_EXPORT KGameRenderedGraphicsObject : public QGraphicsObject, public KGameRendererClient
 {
     Q_OBJECT
     Q_PROPERTY(int frame READ frame WRITE setFrame)
 
 public:
-    /// Creates a new KGameRenderedObjectItem which renders the sprite with
+    /// Creates a new KGameRenderedGraphicsObject which renders the sprite with
     /// the given @a spriteKey as provided by the given @a renderer.
-    KGameRenderedObjectItem(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent = nullptr);
-    ~KGameRenderedObjectItem() override;
+    KGameRenderedGraphicsObject(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent = nullptr);
+    ~KGameRenderedGraphicsObject() override;
 
     /// @return the item's offset, which defines the point of the top-left
     /// corner of the bounding rect, in local coordinates.
@@ -99,8 +99,8 @@ protected:
     void receivePixmap(const QPixmap &pixmap) override;
 
 private:
-    friend class KGameRenderedObjectItemPrivate;
-    std::unique_ptr<KGameRenderedObjectItemPrivate> const d;
+    friend class KGameRenderedGraphicsObjectPrivate;
+    std::unique_ptr<KGameRenderedGraphicsObjectPrivate> const d;
 };
 
-#endif // KGAMERENDEREDOBJECTITEM_H
+#endif // KGAMERENDEREDGRAPHICSOBJECT_H

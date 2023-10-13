@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "kgamerenderedobjectitem.h"
+#include "kgamerenderedgraphicsobject.h"
 
 // own
 #include "kgamerenderer.h"
@@ -12,10 +12,10 @@
 #include <QGraphicsView>
 #include <QtMath>
 
-class KGameRenderedObjectItemPrivate : public QGraphicsPixmapItem
+class KGameRenderedGraphicsObjectPrivate : public QGraphicsPixmapItem
 {
 public:
-    KGameRenderedObjectItemPrivate(KGameRenderedObjectItem *parent);
+    KGameRenderedGraphicsObjectPrivate(KGameRenderedGraphicsObject *parent);
     bool adjustRenderSize(); // returns whether an adjustment was made; WARNING: only call when m_primaryView != 0
     void adjustTransform();
 
@@ -27,13 +27,13 @@ public:
     QPainterPath shape() const override;
 
 public:
-    KGameRenderedObjectItem *m_parent;
+    KGameRenderedGraphicsObject *m_parent;
     QGraphicsView *m_primaryView;
     QSize m_correctRenderSize;
     QSizeF m_fixedSize;
 };
 
-KGameRenderedObjectItemPrivate::KGameRenderedObjectItemPrivate(KGameRenderedObjectItem *parent)
+KGameRenderedGraphicsObjectPrivate::KGameRenderedGraphicsObjectPrivate(KGameRenderedGraphicsObject *parent)
     : QGraphicsPixmapItem(parent)
     , m_parent(parent)
     , m_primaryView(nullptr)
@@ -47,7 +47,7 @@ static inline int vectorLength(QPointF point)
     return qSqrt(point.x() * point.x() + point.y() * point.y());
 }
 
-bool KGameRenderedObjectItemPrivate::adjustRenderSize()
+bool KGameRenderedGraphicsObjectPrivate::adjustRenderSize()
 {
     Q_ASSERT(m_primaryView);
     // create a polygon from the item's boundingRect
@@ -71,7 +71,7 @@ bool KGameRenderedObjectItemPrivate::adjustRenderSize()
     return true;
 }
 
-void KGameRenderedObjectItemPrivate::adjustTransform()
+void KGameRenderedGraphicsObjectPrivate::adjustTransform()
 {
     // calculate new transform for this item
     QTransform t;
@@ -82,22 +82,22 @@ void KGameRenderedObjectItemPrivate::adjustTransform()
     m_parent->update();
 }
 
-KGameRenderedObjectItem::KGameRenderedObjectItem(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent)
+KGameRenderedGraphicsObject::KGameRenderedGraphicsObject(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent)
     : QGraphicsObject(parent)
     , KGameRendererClient(renderer, spriteKey)
-    , d(new KGameRenderedObjectItemPrivate(this))
+    , d(new KGameRenderedGraphicsObjectPrivate(this))
 {
     setPrimaryView(renderer->defaultPrimaryView());
 }
 
-KGameRenderedObjectItem::~KGameRenderedObjectItem() = default;
+KGameRenderedGraphicsObject::~KGameRenderedGraphicsObject() = default;
 
-QPointF KGameRenderedObjectItem::offset() const
+QPointF KGameRenderedGraphicsObject::offset() const
 {
     return d->pos();
 }
 
-void KGameRenderedObjectItem::setOffset(QPointF offset)
+void KGameRenderedGraphicsObject::setOffset(QPointF offset)
 {
     if (d->pos() != offset) {
         prepareGeometryChange();
@@ -106,17 +106,17 @@ void KGameRenderedObjectItem::setOffset(QPointF offset)
     }
 }
 
-void KGameRenderedObjectItem::setOffset(qreal x, qreal y)
+void KGameRenderedGraphicsObject::setOffset(qreal x, qreal y)
 {
     setOffset(QPointF(x, y));
 }
 
-QSizeF KGameRenderedObjectItem::fixedSize() const
+QSizeF KGameRenderedGraphicsObject::fixedSize() const
 {
     return d->m_fixedSize;
 }
 
-void KGameRenderedObjectItem::setFixedSize(QSizeF fixedSize)
+void KGameRenderedGraphicsObject::setFixedSize(QSizeF fixedSize)
 {
     if (d->m_primaryView) {
         d->m_fixedSize = fixedSize.expandedTo(QSize(1, 1));
@@ -124,12 +124,12 @@ void KGameRenderedObjectItem::setFixedSize(QSizeF fixedSize)
     }
 }
 
-QGraphicsView *KGameRenderedObjectItem::primaryView() const
+QGraphicsView *KGameRenderedGraphicsObject::primaryView() const
 {
     return d->m_primaryView;
 }
 
-void KGameRenderedObjectItem::setPrimaryView(QGraphicsView *view)
+void KGameRenderedGraphicsObject::setPrimaryView(QGraphicsView *view)
 {
     if (d->m_primaryView != view) {
         d->m_primaryView = view;
@@ -150,7 +150,7 @@ void KGameRenderedObjectItem::setPrimaryView(QGraphicsView *view)
     }
 }
 
-void KGameRenderedObjectItem::receivePixmap(const QPixmap &pixmap)
+void KGameRenderedGraphicsObject::receivePixmap(const QPixmap &pixmap)
 {
     prepareGeometryChange();
     d->setPixmap(pixmap);
@@ -163,67 +163,67 @@ void KGameRenderedObjectItem::receivePixmap(const QPixmap &pixmap)
 // At the same time, we do not want the contained QGraphicsPixmapItem to slow
 // down operations like QGraphicsScene::collidingItems().
 // So the strategy is to use the QGraphicsPixmapItem implementation from
-// KGameRenderedObjectItemPrivate for KGameRenderedObjectItem.
-// Then the relevant methods in KGameRenderedObjectItemPrivate are reimplemented empty
+// KGameRenderedGraphicsObjectPrivate for KGameRenderedGraphicsObject.
+// Then the relevant methods in KGameRenderedGraphicsObjectPrivate are reimplemented empty
 // to effectively clear the item and hide it from any collision detection. This
 // strategy allows us to use the nifty QGraphicsPixmapItem logic without exposing
 // a QGraphicsPixmapItem subclass (which would conflict with QGraphicsObject).
 
-// BEGIN QGraphicsItem reimplementation of KGameRenderedObjectItem
+// BEGIN QGraphicsItem reimplementation of KGameRenderedGraphicsObject
 
-QRectF KGameRenderedObjectItem::boundingRect() const
+QRectF KGameRenderedGraphicsObject::boundingRect() const
 {
     return d->mapRectToParent(d->QGraphicsPixmapItem::boundingRect());
 }
 
-bool KGameRenderedObjectItem::contains(const QPointF &point) const
+bool KGameRenderedGraphicsObject::contains(const QPointF &point) const
 {
     return d->QGraphicsPixmapItem::contains(d->mapFromParent(point));
 }
 
-bool KGameRenderedObjectItem::isObscuredBy(const QGraphicsItem *item) const
+bool KGameRenderedGraphicsObject::isObscuredBy(const QGraphicsItem *item) const
 {
     return d->QGraphicsPixmapItem::isObscuredBy(item);
 }
 
-QPainterPath KGameRenderedObjectItem::opaqueArea() const
+QPainterPath KGameRenderedGraphicsObject::opaqueArea() const
 {
     return d->mapToParent(d->QGraphicsPixmapItem::opaqueArea());
 }
 
-void KGameRenderedObjectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void KGameRenderedGraphicsObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(painter)
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
 
-QPainterPath KGameRenderedObjectItem::shape() const
+QPainterPath KGameRenderedGraphicsObject::shape() const
 {
     return d->mapToParent(d->QGraphicsPixmapItem::shape());
 }
 
-// END QGraphicsItem reimplementation of KGameRenderedObjectItem
-// BEGIN QGraphicsItem reimplementation of KGameRenderedObjectItemPrivate
+// END QGraphicsItem reimplementation of KGameRenderedGraphicsObject
+// BEGIN QGraphicsItem reimplementation of KGameRenderedGraphicsObjectPrivate
 
-bool KGameRenderedObjectItemPrivate::contains(const QPointF &point) const
+bool KGameRenderedGraphicsObjectPrivate::contains(const QPointF &point) const
 {
     Q_UNUSED(point)
     return false;
 }
 
-bool KGameRenderedObjectItemPrivate::isObscuredBy(const QGraphicsItem *item) const
+bool KGameRenderedGraphicsObjectPrivate::isObscuredBy(const QGraphicsItem *item) const
 {
     Q_UNUSED(item)
     return false;
 }
 
-QPainterPath KGameRenderedObjectItemPrivate::opaqueArea() const
+QPainterPath KGameRenderedGraphicsObjectPrivate::opaqueArea() const
 {
     return QPainterPath();
 }
 
-void KGameRenderedObjectItemPrivate::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void KGameRenderedGraphicsObjectPrivate::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     // Trivial stuff up to now. The fun stuff starts here. ;-)
     // There is no way to get informed when the viewport's coordinate system
@@ -254,11 +254,11 @@ void KGameRenderedObjectItemPrivate::paint(QPainter *painter, const QStyleOption
     QGraphicsPixmapItem::paint(painter, option, widget);
 }
 
-QPainterPath KGameRenderedObjectItemPrivate::shape() const
+QPainterPath KGameRenderedGraphicsObjectPrivate::shape() const
 {
     return QPainterPath();
 }
 
-// END QGraphicsItem reimplementation of KGameRenderedObjectItemPrivate
+// END QGraphicsItem reimplementation of KGameRenderedGraphicsObjectPrivate
 
-#include "moc_kgamerenderedobjectitem.cpp"
+#include "moc_kgamerenderedgraphicsobject.cpp"

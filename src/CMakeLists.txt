@@ -38,7 +38,7 @@ target_sources(KDEGames PRIVATE
     kgameclock.cpp kgameclock.h
     kgamepopupitem.cpp kgamepopupitem.h
     kgamerendereditem.cpp kgamerendereditem.h
-    kgamerenderedobjectitem.cpp kgamerenderedobjectitem.h
+    kgamerenderedgraphicsobject.cpp kgamerenderedgraphicsobject.h
     kgamerendererclient.cpp kgamerendererclient.h
     kgamerenderer.cpp kgamerenderer.h
     kgameimageprovider.cpp kgameimageprovider_p.h
@@ -54,7 +54,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
         KGameClock
         KGamePopupItem
         KGameRenderedItem
-        KGameRenderedObjectItem
+        KGameRenderedGraphicsObject
         KGameRenderer
         KGameRendererClient
         KGameDifficulty,KGameDifficultyLevel
