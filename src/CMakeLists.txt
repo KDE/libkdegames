@@ -119,7 +119,6 @@ ecm_generate_export_header(KDEGames
 target_link_libraries(KDEGames
     PUBLIC
         KF6::ConfigCore
-        KF6::WidgetsAddons
         KF6::ConfigWidgets
         Qt6::Qml
     PRIVATE

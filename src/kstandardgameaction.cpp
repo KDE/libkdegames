@@ -80,8 +80,6 @@ const KStandardGameActionInfo g_rgActionInfo[] = {
       kli18n("&Solve"),     {}, "games-solve",          kli18n("Solve the game") },
 
     // "settings" menu
-    { KStandardGameAction::ChooseGameType,      KStandardShortcut::AccelNone, 0, "options_choose_game_type",
-      kli18n("Choose Game &Type"),         {}, nullptr, {} },
     { KStandardGameAction::Carddecks,           KStandardShortcut::AccelNone, 0, "options_configure_carddecks",
       kli18n("Configure &Carddecks..."),   {}, nullptr, {} },
     { KStandardGameAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, "options_configure_highscores",
@@ -114,9 +112,6 @@ QAction *KStandardGameAction::_k_createInternal(KStandardGameAction::StandardGam
         case Pause:
         case Demo:
             pAction = new KToggleAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
-            break;
-        case ChooseGameType:
-            pAction = new KSelectAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
             break;
         default:
             pAction = new QAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
@@ -158,9 +153,6 @@ QAction *KStandardGameAction::create(StandardGameAction id, const QObject *recvr
         switch (id) {
         case LoadRecent:
             QObject::connect(pAction, SIGNAL(urlSelected(QUrl)), recvr, slot);
-            break;
-        case ChooseGameType:
-            QObject::connect(pAction, SIGNAL(indexTriggered(int)), recvr, slot);
             break;
         default:
             QObject::connect(pAction, SIGNAL(triggered(bool)), recvr, slot);
@@ -267,10 +259,6 @@ KToggleAction *KStandardGameAction::demo(const QObject *recvr, const char *slot,
 QAction *KStandardGameAction::solve(const QObject *recvr, const char *slot, QObject *parent)
 {
     return KStandardGameAction::create(Solve, recvr, slot, parent);
-}
-KSelectAction *KStandardGameAction::chooseGameType(const QObject *recvr, const char *slot, QObject *parent)
-{
-    return static_cast<KSelectAction *>(KStandardGameAction::create(ChooseGameType, recvr, slot, parent));
 }
 QAction *KStandardGameAction::restart(const QObject *recvr, const char *slot, QObject *parent)
 {

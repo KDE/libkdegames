@@ -16,7 +16,6 @@
 #include "kdegames_export.h"
 // KF
 #include <KRecentFilesAction>
-#include <KSelectAction>
 #include <KToggleAction>
 // Qt
 #include <QAction>
@@ -65,7 +64,6 @@ enum StandardGameAction {
     EndTurn,
     // Settings menu
     Carddecks,
-    ChooseGameType,
     ConfigureHighscores,
     ClearHighscores,
     ClearStatistics,
@@ -92,8 +90,6 @@ KDEGAMES_EXPORT QAction *_k_createInternal(StandardGameAction id, QObject *paren
  *
  * @note If you use @c LoadRecent as @p id, you should manually connect to the urlSelected(const QUrl &)
  * signal of the returned KRecentFilesAction instead or use KStandardGameAction::loadRecent(Receiver *, Func, QObject*).
- * If you use @c ChooseGameType as @p id, you should manually connect to the triggered(int)
- * signal of the returned KSelectAction instead or use KStandardGameAction::chooseGameType(Receiver *, Func, QObject*).
  *
  * @see create(StandardGameAction, const QObject *, const char *, QObject *)
  * @since 7.3
@@ -412,31 +408,6 @@ KDEGAMES_EXPORT QAction *solve(const QObject *recvr, const char *slot, QObject *
  * @since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(solve, Solve)
-
-/**
- * Choose game type.
- * The signature of slot is of the form slotGameTypeChosen(int)
- */
-KDEGAMES_EXPORT KSelectAction *chooseGameType(const QObject *recvr, const char *slot, QObject *parent);
-
-/**
- * Choose game type.
- * @since 7.3
- */
-#ifdef K_DOXYGEN
-inline KSelectAction *chooseGameType(const QObject *recvr, Func slot, QObject *parent)
-#else
-template<class Receiver, class Func>
-inline typename std::enable_if<!std::is_convertible<Func, const char *>::value, KSelectAction>::type *
-chooseGameType(const Receiver *recvr, Func slot, QObject *parent)
-#endif
-{
-    QAction *action = _k_createInternal(ChooseGameType, parent);
-    KSelectAction *chooseGameTypeAction = qobject_cast<KSelectAction *>(action);
-    Q_ASSERT(chooseGameTypeAction);
-    QObject::connect(chooseGameTypeAction, &KSelectAction::indexTriggered, recvr, slot);
-    return chooseGameTypeAction;
-}
 
 /**
  * Restart the game.
