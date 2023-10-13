@@ -7,7 +7,7 @@
 #include "kgamerenderedgraphicsobject.h"
 
 // own
-#include "kgamerenderer.h"
+#include "kgamegraphicsviewrenderer.h"
 // Qt
 #include <QGraphicsView>
 #include <QtMath>
@@ -82,7 +82,7 @@ void KGameRenderedGraphicsObjectPrivate::adjustTransform()
     m_parent->update();
 }
 
-KGameRenderedGraphicsObject::KGameRenderedGraphicsObject(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent)
+KGameRenderedGraphicsObject::KGameRenderedGraphicsObject(KGameGraphicsViewRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent)
     : QGraphicsObject(parent)
     , KGameRendererClient(renderer, spriteKey)
     , d(new KGameRenderedGraphicsObjectPrivate(this))

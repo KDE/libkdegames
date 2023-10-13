@@ -16,8 +16,6 @@
 // Std
 #include <memory>
 
-class QGraphicsView;
-
 class KGameRendererPrivate;
 class KGameRendererClient;
 class KGameRendererClientPrivate;
@@ -121,15 +119,6 @@ public:
     /// Deletes this KGameRenderer instance, as well as all clients using it.
     ~KGameRenderer() override;
 
-    /// @return the primary view which is used by newly created
-    /// KGameRenderedItem instances associated with this renderer
-    /// @see KGameRenderedItem::setPrimaryView
-    QGraphicsView *defaultPrimaryView() const;
-    /// Set the primary view which will be used by newly created
-    /// KGameRenderedItem instances associated with this renderer.
-    /// Calls to this method will have no effect on existing instances.
-    /// @see KGameRenderedItem::setPrimaryView
-    void setDefaultPrimaryView(QGraphicsView *view);
     /// @return the frame base index. @see setFrameBaseIndex()
     int frameBaseIndex() const;
     /// Sets the frame base index, i.e. the lowest frame index. Usually,

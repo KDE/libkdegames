@@ -121,7 +121,6 @@ public:
     unsigned m_cacheSize;
     KGameRenderer::Strategies m_strategies;
     int m_frameBaseIndex;
-    QGraphicsView *m_defaultPrimaryView;
 
     QThreadPool m_workerPool;
     KGRInternal::RendererPool m_rendererPool;

@@ -47,6 +47,7 @@ target_sources(KDEGames PRIVATE
     kgamethemeprovider.cpp kgamethemeprovider.h
     kgamethemeselector.cpp kgamethemeselector.h
     kstandardgameaction.cpp kstandardgameaction.h
+    kgamegraphicsviewrenderer.cpp kgamegraphicsviewrenderer.h
 )
 
 ecm_generate_headers(kdegames_CamelCase_HEADERS
@@ -55,6 +56,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
         KGamePopupItem
         KGameRenderedItem
         KGameRenderedGraphicsObject
+        KGameGraphicsViewRenderer
         KGameRenderer
         KGameRendererClient
         KGameDifficulty,KGameDifficultyLevel

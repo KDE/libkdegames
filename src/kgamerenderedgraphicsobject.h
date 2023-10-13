@@ -17,6 +17,7 @@
 
 class QGraphicsView;
 
+class KGameGraphicsViewRenderer;
 class KGameRenderedGraphicsObjectPrivate;
 
 /**
@@ -37,7 +38,7 @@ class KGameRenderedGraphicsObjectPrivate;
  *
  * However, the KGameRenderedGraphicsObject has a second mode of operation, which is
  * enabled by setting a "primary view". (This can be done automatically via
- * KGameRenderer::setDefaultPrimaryView.)
+ * KGameGraphicsViewRenderer::setDefaultPrimaryView.)
  *
  * If such a primary view is set, the following happens:
  * \li The renderSize of the pixmap is automatically determined from the
@@ -56,7 +57,7 @@ class KDEGAMES_EXPORT KGameRenderedGraphicsObject : public QGraphicsObject, publ
 public:
     /// Creates a new KGameRenderedGraphicsObject which renders the sprite with
     /// the given @a spriteKey as provided by the given @a renderer.
-    KGameRenderedGraphicsObject(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent = nullptr);
+    KGameRenderedGraphicsObject(KGameGraphicsViewRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent = nullptr);
     ~KGameRenderedGraphicsObject() override;
 
     /// @return the item's offset, which defines the point of the top-left
