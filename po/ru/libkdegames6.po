@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2013-01-06 22:37+0400\n"
 "Last-Translator: Artem Sereda <overmind88@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -393,14 +393,10 @@ msgid "Solve the game"
 msgstr "Решение игры"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "&Уровень сложности"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Настроить &раскраску карт..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "&Настроить лучшие результаты..."
 
@@ -636,6 +632,9 @@ msgstr "Асинхронный ввод"
 #, kde-format
 msgid "myTurn"
 msgstr "Мой ход"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "&Уровень сложности"
 
 #~ msgid "Difficulty"
 #~ msgstr "Уровень сложности"

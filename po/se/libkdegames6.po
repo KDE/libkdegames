@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2010-05-02 22:44+0200\n"
 "Last-Translator: Børre Gaup <boerre@skolelinux.no>\n"
 "Language-Team: Northern Sami <l10n-no@lister.huftis.org>\n"
@@ -380,14 +380,10 @@ msgid "Solve the game"
 msgstr "Čoavdde spealu"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Vállje &speallošlája"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "H&eivet koarttaid …"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "&Heivet čuoggátávvala …"
 
@@ -621,3 +617,6 @@ msgstr ""
 #, kde-format
 msgid "myTurn"
 msgstr "muVuorru"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Vállje &speallošlája"

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2023-08-22 01:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -389,14 +389,10 @@ msgid "Solve the game"
 msgstr "Oyunu çöz"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "&Oyun Türünü Seç"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "&Kartları Yapılandır..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Yü&ksek Puanları Yapılandır..."
 
@@ -630,6 +626,9 @@ msgstr "AsyncInput"
 #, kde-format
 msgid "myTurn"
 msgstr "Benim Sıram"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "&Oyun Türünü Seç"
 
 #~ msgid "Difficulty"
 #~ msgstr "Zorluk"

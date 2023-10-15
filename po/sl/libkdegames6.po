@@ -2,7 +2,7 @@
 # Translation of libkdegames.po to Slovenian
 # LIBKDEGAMES TRANSLATION TO SLOVENIAN LANGUAGE
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: libkdegames6.po 1661692 2023-10-05 02:03:14Z scripty $
+# $Id: libkdegames6.po 1662358 2023-10-15 02:02:27Z scripty $
 # $Source$
 #
 # Roman Maurer <roman.maurer@amis.net>, 2001.
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2020-02-25 20:31+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -391,14 +391,10 @@ msgid "Solve the game"
 msgstr "Reši igro"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Izberite vrsto igre"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Nastavi hrbte kart ..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Nastavi najboljše rezultate..."
 
@@ -634,6 +630,9 @@ msgstr "AsinhroniVhod"
 #, kde-format
 msgid "myTurn"
 msgstr "mojaPoteza"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Izberite vrsto igre"
 
 #~ msgid "Difficulty"
 #~ msgstr "Težavnost"

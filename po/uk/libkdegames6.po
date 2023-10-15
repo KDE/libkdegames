@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2012-07-24 19:31+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -387,14 +387,10 @@ msgid "Solve the game"
 msgstr "Вирішити гру"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Вибрати гру і &тип"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Налаштувати &колоди..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Налаштувати &найкращі результати..."
 
@@ -630,6 +626,9 @@ msgstr "Асинхронний ввід"
 #, kde-format
 msgid "myTurn"
 msgstr "Мій хід"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Вибрати гру і &тип"
 
 #~ msgid "Difficulty"
 #~ msgstr "Складність"

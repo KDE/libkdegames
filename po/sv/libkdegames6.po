@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2012-04-12 18:35+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -383,14 +383,10 @@ msgid "Solve the game"
 msgstr "Lös spelet"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Välj spel&typ"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Anpassa &kortlekar..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Anpassa &poängtoppen..."
 
@@ -624,6 +620,9 @@ msgstr "Asynkron inmatning"
 #, kde-format
 msgid "myTurn"
 msgstr "Min tur"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Välj spel&typ"
 
 #~ msgid "Difficulty"
 #~ msgstr "Svårighet"

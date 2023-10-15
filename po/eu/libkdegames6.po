@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2020-08-04 09:45+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -387,14 +387,10 @@ msgid "Solve the game"
 msgstr "Ebatzi jokoa"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Hautatu joko mo&ta"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Konfiguratu &karta-sortak..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Konfiguratu &puntuazio altuenak..."
 
@@ -628,6 +624,9 @@ msgstr "Sarrera asinkronoa"
 #, kde-format
 msgid "myTurn"
 msgstr "nire txanda"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Hautatu joko mo&ta"
 
 #~ msgid "Difficulty"
 #~ msgstr "Zailtasuna"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2022-11-30 06:46+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -381,14 +381,10 @@ msgid "Solve the game"
 msgstr "თამაშის ამოხსნა"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "აირჩიეთ თამაშის &ტიპი"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "კარტის &შეკვრების მორგება..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "&უმაღლესი ქულების ცხრილის მორგება...."
 
@@ -622,6 +618,9 @@ msgstr "ასინქრშეყვანა"
 #, kde-format
 msgid "myTurn"
 msgstr "ჩემისვლა"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "აირჩიეთ თამაშის &ტიპი"
 
 #~ msgid "Difficulty"
 #~ msgstr "სირთულე"

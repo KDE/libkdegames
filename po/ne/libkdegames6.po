@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2007-08-20 12:16+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -399,14 +399,10 @@ msgid "Solve the game"
 msgstr "खेल समाधान गर्नुहोस्"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "खेल प्रकार रोज्नुहोस्"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "कार्डपत्ती कन्फिगर गर्नुहोस्..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "उच्च प्राप्ताङ्क कन्फिगर गर्नुहोस्..."
 
@@ -641,6 +637,9 @@ msgstr "असक्रमित आगत"
 #, kde-format
 msgid "myTurn"
 msgstr "मेरो पालो"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "खेल प्रकार रोज्नुहोस्"
 
 #, fuzzy
 #~| msgid "Game difficulty"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2014-08-25 11:22+0200\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -382,14 +382,10 @@ msgid "Solve the game"
 msgstr "Vyřešit hru"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Vybra&t typ hry"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Nastavit sady &karet..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Nastavit ne&jvyšší skóre..."
 
@@ -624,3 +620,6 @@ msgstr "Asynchronní vstup"
 #, kde-format
 msgid "myTurn"
 msgstr "Můj tah"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Vybra&t typ hry"

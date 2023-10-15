@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2012-09-19 08:17+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Traditional <kde-tw@googlegroups.com>\n"
@@ -380,14 +380,10 @@ msgid "Solve the game"
 msgstr "解決此遊戲"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "選擇遊戲類型(&T)"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "設定撲克牌圖案(&C)"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "設定高分紀錄(&H)..."
 
@@ -620,6 +616,9 @@ msgstr "非同步輸入"
 #, kde-format
 msgid "myTurn"
 msgstr "我的回合"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "選擇遊戲類型(&T)"
 
 #~ msgid "Difficulty"
 #~ msgstr "困難度"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2007-11-20 06:39+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@users.sf.net>\n"
@@ -409,14 +409,10 @@ msgid "Solve the game"
 msgstr ""
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "ਖੇਡ ਕਿਸਮ ਚੁਣੋ(&T)"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "ਕਾਰਡ ਮੁੱਖ ਸੰਰਚਨਾ(&C)..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."
@@ -654,6 +650,9 @@ msgstr "AsyncInput"
 #, kde-format
 msgid "myTurn"
 msgstr "ਮੇਰੀਵਾਰੀ"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "ਖੇਡ ਕਿਸਮ ਚੁਣੋ(&T)"
 
 #, fuzzy
 #~| msgid "Preview:"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2010-11-26 10:16+0330\n"
 "Last-Translator: Mohamad Reza Mirdamadi <mohi@ubuntu.ir>\n"
 "Language-Team: Farsi (Persian) <kde-i18n-doc@kde.org>\n"
@@ -386,14 +386,10 @@ msgid "Solve the game"
 msgstr "حل بازی"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "انتخاب &نوع بازی‌"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "پیکربندی &دسته کارت...‌"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "پیکربندی &امتیازهای بالا..."
 
@@ -627,6 +623,9 @@ msgstr "ورودی ناهمگام"
 #, kde-format
 msgid "myTurn"
 msgstr "نوبت من"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "انتخاب &نوع بازی‌"
 
 #~ msgid "Difficulty"
 #~ msgstr "دشواری"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2012-07-06 23:10+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -384,14 +384,10 @@ msgid "Solve the game"
 msgstr "Επίλυση του παιχνιδιού"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Επιλογή &τύπου παιχνιδιού"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Ρύθμιση &καρτών..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Ρύθμιση υ&ψηλών βαθμολογιών..."
 
@@ -625,6 +621,9 @@ msgstr "Ασύγχρονη είσοδος"
 #, kde-format
 msgid "myTurn"
 msgstr "Η σειρά μου"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Επιλογή &τύπου παιχνιδιού"
 
 #~ msgid "Difficulty"
 #~ msgstr "Δυσκολία"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2005-03-22 22:18-0800\n"
 "Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
 "Language-Team: English <en@li.org>\n"
@@ -409,14 +409,10 @@ msgid "Solve the game"
 msgstr ""
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "விளையாட்டையும் வகையையும் தேர்வுசெய்"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "உள்ளமை மற்றும்  அட்டைத் தளம் "
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."
@@ -654,6 +650,9 @@ msgstr "ஏற்றுமதி"
 #, kde-format
 msgid "myTurn"
 msgstr "என் முறை"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "விளையாட்டையும் வகையையும் தேர்வுசெய்"
 
 #, fuzzy
 #~| msgid "Preview:"

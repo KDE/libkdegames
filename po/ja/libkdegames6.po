@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2010-09-26 12:44-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -391,14 +391,10 @@ msgid "Solve the game"
 msgstr "ゲームを解く"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "ゲームのタイプを選択(&T)"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "カードデッキを設定(&C)..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "ハイスコアを設定(&H)..."
 
@@ -631,3 +627,6 @@ msgstr "非同期入力"
 #, kde-format
 msgid "myTurn"
 msgstr "あなたの番"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "ゲームのタイプを選択(&T)"

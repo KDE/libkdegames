@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2021-10-07 09:04+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -389,14 +389,10 @@ msgid "Solve the game"
 msgstr "Leysa leikinn"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Veldu tegund &leiks"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Stilla &Spilastokk..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Stilla stigatö&flu..."
 
@@ -630,6 +626,9 @@ msgstr "AsyncInput"
 #, kde-format
 msgid "myTurn"
 msgstr "myTurn"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Veldu tegund &leiks"
 
 #~ msgid "Difficulty"
 #~ msgstr "Erfiðleikastig"

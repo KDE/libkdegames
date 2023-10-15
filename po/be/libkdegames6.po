@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2008-01-01 20:57+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -433,15 +433,10 @@ msgstr ""
 
 #: kstandardgameaction.cpp:84
 #, fuzzy
-msgid "Choose Game &Type"
-msgstr "Узровень складанасці"
-
-#: kstandardgameaction.cpp:86
-#, fuzzy
 msgid "Configure &Carddecks..."
 msgstr "Наладзіць размалёўку карт..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 #, fuzzy
 msgid "Configure &High Scores..."
 msgstr "Настаўленне Высокі."
@@ -678,6 +673,10 @@ msgstr "Асінхронны ўвод"
 #, kde-format
 msgid "myTurn"
 msgstr "Мой ход"
+
+#, fuzzy
+#~ msgid "Choose Game &Type"
+#~ msgstr "Узровень складанасці"
 
 #, fuzzy
 #~| msgid "Custom"

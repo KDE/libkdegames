@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2020-04-05 11:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -380,14 +380,10 @@ msgid "Solve the game"
 msgstr "게임을 풉니다"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "게임 종류 선택(&T)"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "카드 덱 설정(&C)..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "최고 기록 설정(&H)..."
 
@@ -620,6 +616,9 @@ msgstr "비동기 입력"
 #, kde-format
 msgid "myTurn"
 msgstr "내 차례"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "게임 종류 선택(&T)"
 
 #~ msgid "Difficulty"
 #~ msgstr "난이도"

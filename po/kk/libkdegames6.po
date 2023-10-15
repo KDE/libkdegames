@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2012-08-08 05:15+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -380,14 +380,10 @@ msgid "Solve the game"
 msgstr "Ойынды шешіп беру"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Ойының түрін таңдау"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "&Карта дестесін баптау..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Ж&етістіктерді баптау..."
 
@@ -620,6 +616,9 @@ msgstr "Ассинх.Кіріс"
 #, kde-format
 msgid "myTurn"
 msgstr "Жүрісім"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Ойының түрін таңдау"
 
 #~ msgid "Difficulty"
 #~ msgstr "Қиындығы"

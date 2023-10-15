@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2009-06-22 16:40+0200\n"
 "Last-Translator: ivan <admin@linuxzasve.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -413,14 +413,10 @@ msgid "Solve the game"
 msgstr "Razriješi igru"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Odaberite &vrstu igre"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Konfiguriranje &špilova karata …"
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."
@@ -659,6 +655,9 @@ msgstr "AsinkrUlaz"
 #, kde-format
 msgid "myTurn"
 msgstr "moj potez"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Odaberite &vrstu igre"
 
 #~ msgid "Difficulty"
 #~ msgstr "Težina"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2010-03-22 22:34+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -383,14 +383,10 @@ msgid "Solve the game"
 msgstr "ช่วยแก้ปัญหาของเกม"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "เลือกประเ&ภทของเกม"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "ปรับแต่งหลั&งไพ่..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "ปรับแต่งคะแ&นนสูงสุด..."
 
@@ -624,6 +620,9 @@ msgstr ""
 #, kde-format
 msgid "myTurn"
 msgstr "ตาของฉัน"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "เลือกประเ&ภทของเกม"
 
 #~ msgid "Difficulty"
 #~ msgstr "ระดับความยาก"

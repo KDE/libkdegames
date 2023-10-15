@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2015-12-29 21:41+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -379,14 +379,10 @@ msgid "Solve the game"
 msgstr ""
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Pasirinkite žaidimo &tipą"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr ""
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Konfigūruoti &rekordus..."
 
@@ -616,6 +612,9 @@ msgstr ""
 #, kde-format
 msgid "myTurn"
 msgstr "manoĖjimas"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Pasirinkite žaidimo &tipą"
 
 #~ msgid "Difficulty"
 #~ msgstr "Sudėtingumas"

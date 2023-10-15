@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2012-04-22 17:09+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -387,14 +387,10 @@ msgid "Solve the game"
 msgstr "Resuelve el juego"
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "Elegir &tipo de juego"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "Configurar &barajas..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 msgid "Configure &High Scores..."
 msgstr "Configurar &mejores puntuaciones..."
 
@@ -628,6 +624,9 @@ msgstr "EntradaAsinc"
 #, kde-format
 msgid "myTurn"
 msgstr "miTurno"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Elegir &tipo de juego"
 
 #~ msgid "Difficulty"
 #~ msgstr "Dificultad"

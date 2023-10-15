@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:40+0000\n"
+"POT-Creation-Date: 2023-10-15 01:39+0000\n"
 "PO-Revision-Date: 2006-04-09 15:07-0500\n"
 "Last-Translator: Progga <progga@BengaLinux.Org>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -414,14 +414,10 @@ msgid "Solve the game"
 msgstr ""
 
 #: kstandardgameaction.cpp:84
-msgid "Choose Game &Type"
-msgstr "খেলার &ধরন বেছে নিন"
-
-#: kstandardgameaction.cpp:86
 msgid "Configure &Carddecks..."
 msgstr "তাসে&র তাড়া কনফিগার করো..."
 
-#: kstandardgameaction.cpp:88
+#: kstandardgameaction.cpp:86
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."
@@ -661,6 +657,9 @@ msgstr "AsyncInput"
 #, kde-format
 msgid "myTurn"
 msgstr "আমার-পালা"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "খেলার &ধরন বেছে নিন"
 
 #, fuzzy
 #~| msgid "Preview:"
