@@ -57,7 +57,6 @@ target_sources(KDEGamesPrivate PRIVATE
     kgame/kmessageio.cpp
     kgame/kmessageserver.cpp
     kgame/kplayer.cpp
-    kgamecanvas.cpp
     kgamesvgdocument.cpp
 )
 
@@ -92,7 +91,6 @@ install(FILES
     kchatbase.h
     kchatbaseitemdelegate.h
     kchatbasemodel.h
-    kgamecanvas.h
     kgamesvgdocument.h
     DESTINATION ${kdegamesprivate_INCLUDE_INSTALL_DIR}
     COMPONENT Devel
