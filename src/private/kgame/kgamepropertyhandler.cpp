@@ -145,7 +145,7 @@ bool KGamePropertyHandler::addProperty(KGamePropertyBase *data, const QString &n
         d->mIdDict.insert(data->id(), data);
         // if here is a check for "is_debug" or so we can add the strings only in debug mode
         // and save memory!!
-        if (!name.isNull()) {
+        if (!name.isEmpty()) {
             d->mNameMap[data->id()] = name;
             // qDebug() << ": nid="<< (data->id()) << "inserted in Map name=" << d->mNameMap[data->id()];
             // qDebug() << "Typeid=" << typeid(data).name();

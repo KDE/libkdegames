@@ -171,7 +171,7 @@ QDomNode KGameSvgDocument::elementById(const QString &attributeValue)
 
 void KGameSvgDocument::load()
 {
-    if (d->m_svgFilename.isNull()) {
+    if (d->m_svgFilename.isEmpty()) {
         qCDebug(KDEGAMESPRIVATE_LOG) << "KGameSvgDocument::load(): Filename not specified.";
         return;
     }

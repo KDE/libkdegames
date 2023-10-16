@@ -146,7 +146,7 @@ void KGameNetwork::setDiscoveryInfo(const QString &type, const QString &name)
 
 void KGameNetwork::tryPublish()
 {
-    if (d->mType.isNull() || !isOfferingConnections())
+    if (d->mType.isEmpty() || !isOfferingConnections())
         return;
     if (!d->mService)
         d->mService = new KDNSSD::PublicService(d->mName, d->mType, port());
