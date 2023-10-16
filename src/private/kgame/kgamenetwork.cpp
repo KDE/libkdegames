@@ -282,11 +282,10 @@ void KGameNetwork::disconnect()
     qCDebug(KDEGAMESPRIVATE_KGAME_LOG);
     stopServerConnection();
     if (d->mMessageServer) {
-        QList<quint32> list = d->mMessageServer->clientIDs();
-        QList<quint32>::Iterator it;
-        for (it = list.begin(); it != list.end(); ++it) {
-            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Client id=" << (*it);
-            KMessageIO *client = d->mMessageServer->findClient(*it);
+        const QList<quint32> list = d->mMessageServer->clientIDs();
+        for (quint32 id : list) {
+            qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Client id=" << id;
+            KMessageIO *client = d->mMessageServer->findClient(id);
             if (!client) {
                 continue;
             }

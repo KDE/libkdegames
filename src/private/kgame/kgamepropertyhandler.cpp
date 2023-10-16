@@ -318,9 +318,8 @@ void KGamePropertyHandler::clear()
 {
     // Note: Hash iterator method 'toFront()' crashes when applied to first item.
     // Therefore we get the keys as list first.
-    QList<int> list = d->mIdDict.keys();
-    for (int i = 0; i < list.size(); ++i) {
-        int key = list.at(i);
+    const QList<int> list = d->mIdDict.keys();
+    for (int key : list) {
         KGamePropertyBase *p = d->mIdDict.value(key);
         p->unregisterData();
         if (d->mIdDict.find(p->id()) != d->mIdDict.end()) {

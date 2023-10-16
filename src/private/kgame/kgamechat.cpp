@@ -253,9 +253,9 @@ void KGameChat::setKGame(KGame *g)
         connect(d->mGame, &KGame::signalNetworkData, this, &KGameChat::slotReceiveMessage);
         connect(d->mGame, &KGame::destroyed, this, &KGameChat::slotUnsetKGame);
 
-        QList<KPlayer *> playerList = *d->mGame->playerList();
-        for (int i = 0; i < playerList.count(); i++) {
-            slotAddPlayer(playerList.at(i));
+        const QList<KPlayer *> playerList = *d->mGame->playerList();
+        for (KPlayer *player : playerList) {
+            slotAddPlayer(player);
         }
     }
 }

@@ -409,7 +409,6 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
 {
     QHash<QString, QString> stylePropertiesHash;
     QStringList styleProperties, keyValuePair;
-    QString styleProperty;
 
     styleProperties = style().split(QLatin1Char(';'));
 
@@ -423,8 +422,7 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
         d->setStyleHasTrailingSemicolon(false);
     }
 
-    for (int i = 0; i < styleProperties.size(); i++) {
-        styleProperty = styleProperties.at(i);
+    for (const QString &styleProperty : std::as_const(styleProperties)) {
         keyValuePair = styleProperty.split(QLatin1Char(':'));
         stylePropertiesHash.insert(keyValuePair.at(0), keyValuePair.at(1));
     }
@@ -434,15 +432,14 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
 void KGameSvgDocument::setStyleProperties(const QHash<QString, QString> &_styleProperties, const StylePropertySortOptions &options)
 {
     QHash<QString, QString> styleProperties = _styleProperties;
-    QString styleBuffer, property;
+    QString styleBuffer;
 
     d->m_inkscapeOrder << QStringLiteral("fill") << QStringLiteral("fill-opacity") << QStringLiteral("fill-rule") << QStringLiteral("stroke")
                        << QStringLiteral("stroke-width") << QStringLiteral("stroke-linecap") << QStringLiteral("stroke-linejoin")
                        << QStringLiteral("stroke-miterlimit") << QStringLiteral("stroke-dasharray") << QStringLiteral("stroke-opacity");
 
     if (options == UseInkscapeOrder) {
-        for (int i = 0; i < d->m_inkscapeOrder.size(); i++) {
-            property = d->m_inkscapeOrder.at(i);
+        for (const QString &property : std::as_const(d->m_inkscapeOrder)) {
             if (styleProperties.contains(property)) {
                 styleBuffer += property + QLatin1Char(':') + styleProperties.take(property) + QLatin1Char(';');
             } else {

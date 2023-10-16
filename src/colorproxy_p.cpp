@@ -67,8 +67,9 @@ QBrush QPaintDeviceColorProxy::map(const QBrush &brush) const
     // for gradients, map colors of gradient stops
     QGradient newGradient(*brush.gradient());
     QGradientStops stops = newGradient.stops();
-    for (int i = 0; i < stops.size(); ++i)
-        stops[i].second = map(stops[i].second);
+    for (QGradientStop &stop : stops) {
+        stop.second = map(stop.second);
+    }
     newGradient.setStops(stops);
     // there is no QBrush::setGradient(), so we have to clone the instance by hand
     QBrush result(newGradient);

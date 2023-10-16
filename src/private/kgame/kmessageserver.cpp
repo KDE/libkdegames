@@ -334,8 +334,9 @@ void KMessageServer::sendMessage(quint32 id, const QByteArray &msg)
 
 void KMessageServer::sendMessage(const QList<quint32> &ids, const QByteArray &msg)
 {
-    for (QList<quint32>::ConstIterator iter = ids.begin(); iter != ids.end(); ++iter)
-        sendMessage(*iter, msg);
+    for (quint32 id : ids) {
+        sendMessage(id, msg);
+    }
 }
 
 void KMessageServer::getReceivedMessage(const QByteArray &msg)
@@ -427,8 +428,8 @@ void KMessageServer::processOneMessage()
         if (clientID == d->mAdminID) {
             QList<quint32> client_list;
             in_stream >> client_list;
-            for (QList<quint32>::Iterator iter = client_list.begin(); iter != client_list.end(); ++iter) {
-                KMessageIO *client = findClient(*iter);
+            for (quint32 id : std::as_const(client_list)) {
+                KMessageIO *client = findClient(id);
                 if (client)
                     removeClient(client, false);
                 else

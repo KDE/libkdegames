@@ -610,8 +610,7 @@ void KGameCanvasGroup::paintInternal(QPainter *p, QRect prect, const QRegion &pr
     adelta += m_pos;
     p->translate(m_pos);
 
-    for (int i = 0; i < m_items.size(); i++) {
-        KGameCanvasItem *el = m_items.at(i);
+    for (KGameCanvasItem *el : std::as_const(m_items)) {
         QRect r = el->rect().translated(adelta);
 
         if (el->m_visible && prect.intersects(r) && preg.contains(r)) {
@@ -635,8 +634,7 @@ QRect KGameCanvasGroup::rect() const
 
     m_child_rect_changed = false;
     m_last_child_rect = QRect();
-    for (int i = 0; i < m_items.size(); i++) {
-        KGameCanvasItem *el = m_items[i];
+    for (const KGameCanvasItem *el : m_items) {
         if (el->m_visible)
             m_last_child_rect |= el->rect();
     }

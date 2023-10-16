@@ -977,16 +977,13 @@ void KGame::setupGameContinue(QDataStream &stream, quint32 sender)
 
     qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "Altogether deactivated" << inactivateIds.count() << "players";
 
-    QList<int>::Iterator it;
-    for (it = inactivateIds.begin(); it != inactivateIds.end(); ++it) {
-        int pid = *it;
+    for (int pid : std::as_const(inactivateIds)) {
         qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "pid=" << pid;
     }
 
     // Now deactivate the network players from the inactivateId list
     // QValueList<int>::Iterator it;
-    for (it = inactivateIds.begin(); it != inactivateIds.end(); ++it) {
-        int pid = *it;
+    for (int pid : std::as_const(inactivateIds)) {
         if (KGameMessage::rawGameId(pid) == sender) {
             continue; // client's player
         }
@@ -1004,8 +1001,7 @@ void KGame::setupGameContinue(QDataStream &stream, quint32 sender)
     }
 
     // Now send out the player list which the client can activate
-    for (KGamePlayerList::iterator it = newPlayerList.begin(); it != newPlayerList.end(); ++it) {
-        KPlayer *player = *it;
+    for (KPlayer *player : std::as_const(newPlayerList)) {
         qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "newplayerlist contains" << player->id();
         // Only activate what is not in the list
         if (inactivateIds.indexOf(player->id()) != -1) {
@@ -1108,8 +1104,7 @@ void KGame::slotServerDisconnected() // Client side
         }
     }
 
-    for (KGamePlayerList::iterator it = removeList.begin(); it != removeList.end(); ++it) {
-        KPlayer *player = *it;
+    for (KPlayer *player : std::as_const(removeList)) {
         bool remove = true;
         Q_EMIT signalReplacePlayerIO(player, &remove);
         if (remove) {
@@ -1121,9 +1116,8 @@ void KGame::slotServerDisconnected() // Client side
     setMaster();
     qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "our game id is after setMaster" << gameId();
 
-    KGamePlayerList mReList(d->mInactivePlayerList);
-    for (KGamePlayerList::iterator it = mReList.begin(); it != mReList.end(); ++it) {
-        KPlayer *player = *it;
+    const KGamePlayerList mReList(d->mInactivePlayerList);
+    for (KPlayer *player : mReList) {
         // TODO ?check for priority? Sequence should be ok
         if ((int)playerCount() < maxPlayers() || maxPlayers() < 0) {
             systemActivatePlayer(player);
