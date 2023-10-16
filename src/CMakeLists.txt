@@ -8,7 +8,7 @@ ecm_setup_version(PROJECT
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kdegames_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${KDEGAMES_CMAKECONFIG_NAME}ConfigVersion.cmake"
     COMPATIBILITY SameMajorVersion
-    SOVERSION 7
+    SOVERSION 6
 )
 
 add_subdirectory(carddecks)
