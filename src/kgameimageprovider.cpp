@@ -31,11 +31,11 @@ QImage KGameImageProvider::requestImage(const QString &source, QSize *size, cons
 
     QImage image;
 
-    const QStringList tokens = source.split(QStringLiteral("/"));
+    const QList<QStringView> tokens = QStringView(source).split(QLatin1Char('/'));
     if (tokens.size() > 2) {
-        const QString theme = tokens[0];
-        const QString spriteKey = tokens[1];
-        const QStringList size = tokens[2].split(QLatin1Char('x'));
+        const QStringView &theme = tokens[0];
+        const QString spriteKey = tokens[1].toString();
+        const QList<QStringView> size = tokens[2].split(QLatin1Char('x'));
         uint width = qRound(size[0].toDouble());
         uint height = qRound(size[1].toDouble());
 

@@ -408,9 +408,8 @@ void KGameSvgDocument::setTransform(const QString &transformAttribute)
 QHash<QString, QString> KGameSvgDocument::styleProperties() const
 {
     QHash<QString, QString> stylePropertiesHash;
-    QStringList styleProperties, keyValuePair;
 
-    styleProperties = style().split(QLatin1Char(';'));
+    QList<QStringView> styleProperties = QStringView(style()).split(QLatin1Char(';'));
 
     /* The style attr may have a trailing semi-colon.  If it does, split()
      * gives us an empty final element.  Remove it or we get 'index out of range' errors
@@ -422,9 +421,9 @@ QHash<QString, QString> KGameSvgDocument::styleProperties() const
         d->setStyleHasTrailingSemicolon(false);
     }
 
-    for (const QString &styleProperty : std::as_const(styleProperties)) {
-        keyValuePair = styleProperty.split(QLatin1Char(':'));
-        stylePropertiesHash.insert(keyValuePair.at(0), keyValuePair.at(1));
+    for (const QStringView &styleProperty : std::as_const(styleProperties)) {
+        const QList<QStringView> keyValuePair = styleProperty.split(QLatin1Char(':'));
+        stylePropertiesHash.insert(keyValuePair.at(0).toString(), keyValuePair.at(1).toString());
     }
     return stylePropertiesHash;
 }

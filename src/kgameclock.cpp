@@ -116,10 +116,10 @@ void KGameClock::setTime(uint sec)
 
 void KGameClock::setTime(const QString &s)
 {
-    const QStringList sections = s.split(QLatin1Char(':'));
+    const QList<QStringView> sections = QStringView(s).split(QLatin1Char(':'));
     Q_ASSERT(sections.size() <= 3);
     uint sec = 0;
-    for (const QString &x : sections) {
+    for (const QStringView &x : sections) {
         sec = sec * 60 + x.toUInt();
     }
     setTime(sec);
