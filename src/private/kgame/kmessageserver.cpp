@@ -265,6 +265,7 @@ int KMessageServer::clientCount() const
 QList<quint32> KMessageServer::clientIDs() const
 {
     QList<quint32> list;
+    list.reserve(d->mClientList.size());
     for (QList<KMessageIO *>::iterator iter(d->mClientList.begin()); iter != d->mClientList.end(); ++iter)
         list.append((*iter)->id());
     return list;

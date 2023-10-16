@@ -246,6 +246,9 @@ bool KHighscore::hasEntry(int entry, const QString &key) const
 QStringList KHighscore::readList(const QString &key, int lastEntry) const
 {
     QStringList list;
+    if (lastEntry > 0) {
+        list.reserve(lastEntry);
+    }
     for (int i = 1; hasEntry(i, key) && ((lastEntry > 0) ? (i <= lastEntry) : true); i++) {
         list.append(readEntry(i, key));
     }

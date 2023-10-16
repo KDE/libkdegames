@@ -172,6 +172,7 @@ static QStringList findSubdirectories(const QStringList &dirs)
 
     for (const QString &dir : dirs) {
         const QStringList subdirNames = QDir(dir).entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+        result.reserve(result.size() + subdirNames.size());
         for (const QString &subdirName : subdirNames) {
             const QString subdir = dir + QLatin1Char('/') + subdirName;
             result << subdir;
@@ -210,6 +211,10 @@ void KGameThemeProvider::rediscoverThemes()
     // create themes from result, order default theme at the front (that's not
     // needed by KGameThemeProvider, but nice for the theme selector)
     QList<KGameTheme *> themes;
+    themes.reserve(themePaths.size());
+    if (d->m_discoveredThemes.isEmpty()) {
+        d->m_discoveredThemes.reserve(themePaths.size());
+    }
     for (const QString &themePath : std::as_const(themePaths)) {
         const QFileInfo fi(themePath);
         if (d->m_discoveredThemes.contains(fi.fileName())) {

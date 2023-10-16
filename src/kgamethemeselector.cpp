@@ -267,6 +267,8 @@ void KGameThemeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     // find metrics: text
     QStringList texts;
     QList<QFont> fonts;
+    texts.reserve(3);
+    fonts.reserve(3);
     {
         QString name = index.data(Qt::DisplayRole).toString();
         if (name.isEmpty())
@@ -295,6 +297,7 @@ void KGameThemeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     }
     // TODO: display AuthorEmailRole
     QList<QRect> textRects;
+    textRects.reserve(texts.size());
     int totalTextHeight = 0;
     for (int i = 0; i < texts.count(); ++i) {
         QFontMetrics fm(fonts[i]);
