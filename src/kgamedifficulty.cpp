@@ -24,6 +24,7 @@
 #include <QList>
 #include <QStatusBar>
 // Std
+#include <algorithm>
 #include <utility>
 
 // BEGIN KGameDifficultyLevel
@@ -175,10 +176,10 @@ void KGameDifficulty::addLevel(KGameDifficultyLevel *level)
     // be considered immutable from this point.
     Q_ASSERT_X(d->m_currentLevel == nullptr, "KGameDifficulty::addLevel", "Only allowed before currentLevel() is called.");
     // ensure that list stays sorted
-    QList<const KGameDifficultyLevel *>::iterator it = d->m_levels.begin();
-    while (it != d->m_levels.end() && (*it)->hardness() < level->hardness()) {
-        ++it;
-    }
+    const int newLevelHardness = level->hardness();
+    auto it = std::find_if(d->m_levels.begin(), d->m_levels.end(), [newLevelHardness](const KGameDifficultyLevel *l) {
+        return l->hardness() >= newLevelHardness;
+    });
     d->m_levels.insert(it, level);
     level->setParent(this);
 }
