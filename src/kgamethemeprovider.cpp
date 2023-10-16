@@ -200,7 +200,7 @@ void KGameThemeProvider::rediscoverThemes()
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, d->m_dtDirectory, QStandardPaths::LocateDirectory);
     const QStringList allDirs = dirs + findSubdirectories(dirs);
     for (const QString &dir : allDirs) {
-        const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+        const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.desktop")});
         for (const QString &file : fileNames) {
             if (!themePaths.contains(file)) {
                 themePaths.append(dir + QLatin1Char('/') + file);

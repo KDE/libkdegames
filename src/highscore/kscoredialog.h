@@ -155,7 +155,7 @@ public:
      * Hide some config groups so that they are not shown on the dialog
      * (but are still stored in the configuration file).
      * \code
-     * ksdialog.setHiddenConfigGroups(QList<QByteArray>() << "Very Easy" << "Easy");
+     * ksdialog.setHiddenConfigGroups(QList<QByteArray>{QByteArrayLiteral"Very Easy"), QByteArrayLiteral("Easy")});
      * \endcode
      *
      * @param hiddenGroups the list of group names you want to hide

@@ -160,7 +160,7 @@ void KMessageClient::sendForward(const QByteArray &msg, const QList<quint32> &cl
 
 void KMessageClient::sendForward(const QByteArray &msg, quint32 client)
 {
-    sendForward(msg, QList<quint32>() << client);
+    sendForward(msg, QList<quint32>{client});
 }
 
 // --------------------- Receiving and processing messages
