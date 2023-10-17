@@ -121,7 +121,7 @@ public:
     /**
      * The group name must be passed though i18n() in order for the
      * group name to be translated. i.e.
-     * \code ksdialog.setConfigGroup(qMakePair(QByteArray("Easy"), i18n("Easy"))); \endcode
+     * \code ksdialog.setConfigGroup(qMakePair(QByteArrayLiteral("Easy"), i18n("Easy"))); \endcode
      * If you set a group, it will be prefixed in the config file by
      * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
      *
@@ -155,7 +155,7 @@ public:
      * Hide some config groups so that they are not shown on the dialog
      * (but are still stored in the configuration file).
      * \code
-     * ksdialog.setHiddenConfigGroups(QList<QByteArray>{QByteArrayLiteral"Very Easy"), QByteArrayLiteral("Easy")});
+     * ksdialog.setHiddenConfigGroups(QList<QByteArray>{QByteArrayLiteral("Very Easy"), QByteArrayLiteral("Easy")});
      * \endcode
      *
      * @param hiddenGroups the list of group names you want to hide

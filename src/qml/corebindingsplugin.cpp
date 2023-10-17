@@ -11,7 +11,7 @@
 
 void CoreBindingsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QByteArray("org.kde.games.core"));
+    Q_ASSERT(uri == QByteArrayLiteral("org.kde.games.core"));
 
     qmlRegisterType<KGameThemeProvider>(uri, 0, 1, "ThemeProvider");
 }

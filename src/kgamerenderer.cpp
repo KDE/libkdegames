@@ -27,7 +27,7 @@ static const QString cacheName(QByteArray theme)
 {
     const QString appName = QCoreApplication::instance()->applicationName();
     // e.g. "themes/foobar.desktop" -> "themes/foobar"
-    if (theme.endsWith(QByteArray(".desktop")))
+    if (theme.endsWith(QByteArrayLiteral(".desktop")))
         theme.chop(8); // 8 = strlen(".desktop")
     return QStringLiteral("kgamerenderer-%1-%2").arg(appName, QString::fromUtf8(theme));
 }

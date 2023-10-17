@@ -42,7 +42,7 @@ public:
     ///
     /// If there are multiple KGameThemeProvider instances, make sure they use
     /// different config keys to avoid collisions.
-    explicit KGameThemeProvider(const QByteArray &configKey = QByteArray("Theme"), QObject *parent = nullptr);
+    explicit KGameThemeProvider(const QByteArray &configKey = QByteArrayLiteral("Theme"), QObject *parent = nullptr);
     /// Destructor.
     ~KGameThemeProvider() override;
 
