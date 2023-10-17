@@ -137,7 +137,8 @@ public Q_SLOTS:
     void setCurrentTheme(const KGameTheme *theme);
 
 private:
-    std::unique_ptr<class KGameThemeProviderPrivate> const d;
+    std::unique_ptr<class KGameThemeProviderPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameThemeProvider)
 };
 
 Q_DECLARE_METATYPE(KGameThemeProvider *)

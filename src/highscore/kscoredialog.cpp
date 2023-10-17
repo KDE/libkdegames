@@ -91,8 +91,10 @@ public:
 
 KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     : QDialog(parent)
-    , d(new KScoreDialogPrivate(this))
+    , d_ptr(new KScoreDialogPrivate(this))
 {
+    Q_D(KScoreDialog);
+
     setWindowTitle(i18n("High Scores"));
     setModal(true);
     d->highscoreObject = new KHighscore();
@@ -137,11 +139,15 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 
 KScoreDialog::~KScoreDialog()
 {
+    Q_D(KScoreDialog);
+
     delete d->highscoreObject;
 }
 
 void KScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &group)
 {
+    Q_D(KScoreDialog);
+
     d->configGroup = group.first; // untranslated string
     addLocalizedConfigGroupName(group); // add the translation to the list
     d->loaded = false;
@@ -149,6 +155,8 @@ void KScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &group)
 
 void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group)
 {
+    Q_D(KScoreDialog);
+
     if (!d->translatedGroupNames.contains(group.first)) {
         d->translatedGroupNames.insert(group.first, group.second);
         qCDebug(KDEGAMES_HIGHSCORE_LOG) << "adding" << group.first << "->" << group.second;
@@ -157,6 +165,8 @@ void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString> 
 
 void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString> &groups)
 {
+    Q_D(KScoreDialog);
+
     QMap<QByteArray, QString>::const_iterator it = groups.begin();
     for (; it != groups.end(); ++it) {
         addLocalizedConfigGroupName(qMakePair(it.key(), it.value()));
@@ -182,11 +192,15 @@ void KScoreDialog::initFromDifficulty(const KGameDifficulty *diff, bool doSetCon
 
 void KScoreDialog::setHiddenConfigGroups(const QList<QByteArray> &hiddenGroups)
 {
+    Q_D(KScoreDialog);
+
     d->hiddenGroups = hiddenGroups;
 }
 
 void KScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray> &weights)
 {
+    Q_D(KScoreDialog);
+
     d->configGroupWeights = weights;
 }
 
@@ -199,11 +213,15 @@ QString KScoreDialogPrivate::findTranslatedGroupName(const QByteArray &name)
 
 void KScoreDialog::setComment(const QString &comment)
 {
+    Q_D(KScoreDialog);
+
     d->comment = comment;
 }
 
 void KScoreDialog::addField(int field, const QString &header, const QString &key)
 {
+    Q_D(KScoreDialog);
+
     d->fields |= field;
     d->header[field] = header;
     d->key[field] = key;
@@ -211,6 +229,8 @@ void KScoreDialog::addField(int field, const QString &header, const QString &key
 
 void KScoreDialog::hideField(int field)
 {
+    Q_D(KScoreDialog);
+
     d->hiddenFields |= field;
 }
 
@@ -471,6 +491,8 @@ void KScoreDialogPrivate::saveScores()
 
 int KScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags)
 {
+    Q_D(KScoreDialog);
+
     qCDebug(KDEGAMES_HIGHSCORE_LOG) << "adding new score";
 
     bool askName = false, lessIsMore = false;
@@ -551,12 +573,16 @@ int KScoreDialog::addScore(int newScore, AddScoreFlags flags)
 
 void KScoreDialog::show()
 {
+    Q_D(KScoreDialog);
+
     d->aboutToShow();
     QDialog::show();
 }
 
 int KScoreDialog::exec()
 {
+    Q_D(KScoreDialog);
+
     d->aboutToShow();
     return QDialog::exec();
 }
@@ -569,6 +595,8 @@ void KScoreDialog::slotGotReturn()
 
 void KScoreDialog::slotGotName()
 {
+    Q_D(KScoreDialog);
+
     if (d->newName.second == -1)
         return;
 
@@ -598,6 +626,8 @@ void KScoreDialog::slotGotName()
 
 void KScoreDialog::slotForgetScore()
 {
+    Q_D(KScoreDialog);
+
     if (d->newName.second == -1)
         return;
     // remove the editor from the stack
@@ -618,6 +648,8 @@ void KScoreDialog::slotForgetScore()
 
 int KScoreDialog::highScore()
 {
+    Q_D(KScoreDialog);
+
     if (!d->loaded)
         d->loadScores();
 
@@ -629,6 +661,8 @@ int KScoreDialog::highScore()
 
 void KScoreDialog::keyPressEvent(QKeyEvent *ev)
 {
+    Q_D(KScoreDialog);
+
     if ((d->newName.second != -1) && (ev->key() == Qt::Key_Return)) {
         ev->ignore();
         return;

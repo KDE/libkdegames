@@ -99,7 +99,8 @@ private:
     friend class KGameRendererClientPrivate;
     friend class KGameRenderer;
     friend class KGameRendererPrivate;
-    std::unique_ptr<KGameRendererClientPrivate> const d;
+    std::unique_ptr<KGameRendererClientPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameRendererClient)
 };
 
 #endif // KGAMERENDERERCLIENT_H

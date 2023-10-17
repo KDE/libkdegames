@@ -101,7 +101,8 @@ protected Q_SLOTS:
 
 private:
     friend class KGameClockPrivate;
-    std::unique_ptr<KGameClockPrivate> const d;
+    std::unique_ptr<KGameClockPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameClock)
 
     Q_DISABLE_COPY(KGameClock)
 };

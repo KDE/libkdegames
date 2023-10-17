@@ -59,13 +59,15 @@ Q_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig)
 
 KHighscore::KHighscore(bool forceLocal, QObject *parent)
     : QObject(parent)
-    , d(new KHighscorePrivate)
+    , d_ptr(new KHighscorePrivate)
 {
     init(forceLocal);
 }
 
 void KHighscore::init(bool forceLocal)
 {
+    Q_D(KHighscore);
+
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
     if (d->global && lockedConfig->lock == 0) // If we're doing global highscores but not KFileLock has been set up yet
@@ -82,11 +84,15 @@ void KHighscore::init(bool forceLocal)
 
 bool KHighscore::isLocked() const
 {
+    Q_D(const KHighscore);
+
     return (d->global ? lockedConfig->lock->isLocked() : true);
 }
 
 void KHighscore::readCurrentConfig()
 {
+    Q_D(KHighscore);
+
     if (d->global)
         lockedConfig->config->reparseConfiguration();
 }
@@ -169,6 +175,8 @@ bool KHighscore::lockForWriting(QWidget *widget)
 
 void KHighscore::writeAndUnlock()
 {
+    Q_D(KHighscore);
+
     if (!d->global) {
         KSharedConfig::openConfig()->sync();
         return;
@@ -188,6 +196,8 @@ KHighscore::~KHighscore()
 
 KConfig *KHighscore::config() const
 {
+    Q_D(const KHighscore);
+
     return (d->global ? lockedConfig->config : static_cast<KConfig *>(KSharedConfig::openConfig().data()));
 }
 
@@ -264,11 +274,15 @@ void KHighscore::writeList(const QString &key, const QStringList &list)
 
 void KHighscore::setHighscoreGroup(const QString &group)
 {
+    Q_D(KHighscore);
+
     d->group = group;
 }
 
 QString KHighscore::highscoreGroup() const
 {
+    Q_D(const KHighscore);
+
     return d->group;
 }
 
@@ -292,6 +306,8 @@ QStringList KHighscore::groupList() const
 
 QString KHighscore::group() const
 {
+    Q_D(const KHighscore);
+
     if (highscoreGroup().isEmpty())
         return (d->global ? QString() : QStringLiteral(GROUP));
     return (d->global ? highscoreGroup() : QStringLiteral("%1_%2").arg(QStringLiteral(GROUP), highscoreGroup()));

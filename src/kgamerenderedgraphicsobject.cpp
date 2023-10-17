@@ -85,7 +85,7 @@ void KGameRenderedGraphicsObjectPrivate::adjustTransform()
 KGameRenderedGraphicsObject::KGameRenderedGraphicsObject(KGameGraphicsViewRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent)
     : QGraphicsObject(parent)
     , KGameRendererClient(renderer, spriteKey)
-    , d(new KGameRenderedGraphicsObjectPrivate(this))
+    , d_ptr(new KGameRenderedGraphicsObjectPrivate(this))
 {
     setPrimaryView(renderer->defaultPrimaryView());
 }
@@ -94,11 +94,15 @@ KGameRenderedGraphicsObject::~KGameRenderedGraphicsObject() = default;
 
 QPointF KGameRenderedGraphicsObject::offset() const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->pos();
 }
 
 void KGameRenderedGraphicsObject::setOffset(QPointF offset)
 {
+    Q_D(KGameRenderedGraphicsObject);
+
     if (d->pos() != offset) {
         prepareGeometryChange();
         d->setPos(offset);
@@ -113,11 +117,15 @@ void KGameRenderedGraphicsObject::setOffset(qreal x, qreal y)
 
 QSizeF KGameRenderedGraphicsObject::fixedSize() const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->m_fixedSize;
 }
 
 void KGameRenderedGraphicsObject::setFixedSize(QSizeF fixedSize)
 {
+    Q_D(KGameRenderedGraphicsObject);
+
     if (d->m_primaryView) {
         d->m_fixedSize = fixedSize.expandedTo(QSize(1, 1));
         d->adjustTransform();
@@ -126,11 +134,15 @@ void KGameRenderedGraphicsObject::setFixedSize(QSizeF fixedSize)
 
 QGraphicsView *KGameRenderedGraphicsObject::primaryView() const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->m_primaryView;
 }
 
 void KGameRenderedGraphicsObject::setPrimaryView(QGraphicsView *view)
 {
+    Q_D(KGameRenderedGraphicsObject);
+
     if (d->m_primaryView != view) {
         d->m_primaryView = view;
         if (view) {
@@ -152,6 +164,8 @@ void KGameRenderedGraphicsObject::setPrimaryView(QGraphicsView *view)
 
 void KGameRenderedGraphicsObject::receivePixmap(const QPixmap &pixmap)
 {
+    Q_D(KGameRenderedGraphicsObject);
+
     prepareGeometryChange();
     d->setPixmap(pixmap);
     update();
@@ -173,21 +187,29 @@ void KGameRenderedGraphicsObject::receivePixmap(const QPixmap &pixmap)
 
 QRectF KGameRenderedGraphicsObject::boundingRect() const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->mapRectToParent(d->QGraphicsPixmapItem::boundingRect());
 }
 
 bool KGameRenderedGraphicsObject::contains(const QPointF &point) const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->QGraphicsPixmapItem::contains(d->mapFromParent(point));
 }
 
 bool KGameRenderedGraphicsObject::isObscuredBy(const QGraphicsItem *item) const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->QGraphicsPixmapItem::isObscuredBy(item);
 }
 
 QPainterPath KGameRenderedGraphicsObject::opaqueArea() const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->mapToParent(d->QGraphicsPixmapItem::opaqueArea());
 }
 
@@ -200,6 +222,8 @@ void KGameRenderedGraphicsObject::paint(QPainter *painter, const QStyleOptionGra
 
 QPainterPath KGameRenderedGraphicsObject::shape() const
 {
+    Q_D(const KGameRenderedGraphicsObject);
+
     return d->mapToParent(d->QGraphicsPixmapItem::shape());
 }
 

@@ -43,7 +43,7 @@ public:
 };
 
 KGameDifficultyLevel::KGameDifficultyLevel(int hardness, const QByteArray &key, const QString &title, bool isDefault)
-    : d(new KGameDifficultyLevelPrivate(hardness, key, title, Custom, isDefault))
+    : d_ptr(new KGameDifficultyLevelPrivate(hardness, key, title, Custom, isDefault))
 {
 }
 
@@ -61,7 +61,7 @@ KGameDifficultyLevelPrivate::KGameDifficultyLevelPrivate(int hardness,
 }
 
 KGameDifficultyLevel::KGameDifficultyLevel(StandardLevel level, bool isDefault)
-    : d(KGameDifficultyLevelPrivate::fromStandardLevel(level, isDefault))
+    : d_ptr(KGameDifficultyLevelPrivate::fromStandardLevel(level, isDefault))
 {
 }
 
@@ -105,26 +105,36 @@ KGameDifficultyLevel::~KGameDifficultyLevel() = default;
 
 bool KGameDifficultyLevel::isDefault() const
 {
+    Q_D(const KGameDifficultyLevel);
+
     return d->m_isDefault;
 }
 
 int KGameDifficultyLevel::hardness() const
 {
+    Q_D(const KGameDifficultyLevel);
+
     return d->m_hardness;
 }
 
 QByteArray KGameDifficultyLevel::key() const
 {
+    Q_D(const KGameDifficultyLevel);
+
     return d->m_key;
 }
 
 QString KGameDifficultyLevel::title() const
 {
+    Q_D(const KGameDifficultyLevel);
+
     return d->m_title;
 }
 
 KGameDifficultyLevel::StandardLevel KGameDifficultyLevel::standardLevel() const
 {
+    Q_D(const KGameDifficultyLevel);
+
     return d->m_level;
 }
 
@@ -135,7 +145,7 @@ class KGameDifficultyPrivate
 {
 public:
     QList<const KGameDifficultyLevel *> m_levels;
-    const KGameDifficultyLevel *m_currentLevel;
+    mutable const KGameDifficultyLevel *m_currentLevel;
     bool m_editable, m_gameRunning;
 
     KGameDifficultyPrivate()
@@ -157,7 +167,7 @@ static void saveLevel()
 
 KGameDifficulty::KGameDifficulty(QObject *parent)
     : QObject(parent)
-    , d(new KGameDifficultyPrivate)
+    , d_ptr(new KGameDifficultyPrivate)
 {
     qRegisterMetaType<const KGameDifficultyLevel *>();
     qAddPostRoutine(saveLevel);
@@ -165,11 +175,15 @@ KGameDifficulty::KGameDifficulty(QObject *parent)
 
 KGameDifficulty::~KGameDifficulty()
 {
+    Q_D(KGameDifficulty);
+
     qDeleteAll(d->m_levels);
 }
 
 void KGameDifficulty::addLevel(KGameDifficultyLevel *level)
 {
+    Q_D(KGameDifficulty);
+
     // The intended use is to create the KGameDifficulty object, add levels, *then*
     // start to work with the currentLevel(). The first call to currentLevel()
     // will load the previous selection from the config, and the level list will
@@ -223,11 +237,15 @@ void KGameDifficulty::addStandardLevelRange(DS from, DS to, DS defaultLevel)
 
 QList<const KGameDifficultyLevel *> KGameDifficulty::levels() const
 {
+    Q_D(const KGameDifficulty);
+
     return d->m_levels;
 }
 
 const KGameDifficultyLevel *KGameDifficulty::currentLevel() const
 {
+    Q_D(const KGameDifficulty);
+
     if (d->m_currentLevel) {
         return d->m_currentLevel;
     }
@@ -252,11 +270,15 @@ const KGameDifficultyLevel *KGameDifficulty::currentLevel() const
 
 bool KGameDifficulty::isEditable() const
 {
+    Q_D(const KGameDifficulty);
+
     return d->m_editable;
 }
 
 void KGameDifficulty::setEditable(bool editable)
 {
+    Q_D(KGameDifficulty);
+
     if (d->m_editable == editable) {
         return;
     }
@@ -266,11 +288,15 @@ void KGameDifficulty::setEditable(bool editable)
 
 bool KGameDifficulty::isGameRunning() const
 {
+    Q_D(const KGameDifficulty);
+
     return d->m_gameRunning;
 }
 
 void KGameDifficulty::setGameRunning(bool gameRunning)
 {
+    Q_D(KGameDifficulty);
+
     if (d->m_gameRunning == gameRunning) {
         return;
     }
@@ -280,6 +306,8 @@ void KGameDifficulty::setGameRunning(bool gameRunning)
 
 void KGameDifficulty::select(const KGameDifficultyLevel *level)
 {
+    Q_D(KGameDifficulty);
+
     Q_ASSERT(d->m_levels.contains(level));
     if (d->m_currentLevel == level) {
         return;

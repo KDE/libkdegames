@@ -41,7 +41,8 @@ public:
     void setDefaultPrimaryView(QGraphicsView *view);
 
 private:
-    std::unique_ptr<KGameGraphicsViewRendererPrivate> const d;
+    std::unique_ptr<KGameGraphicsViewRendererPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameGraphicsViewRenderer)
 };
 
 #endif // KGAMEGRAPHICSVIEWRENDERER_H

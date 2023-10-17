@@ -60,8 +60,10 @@ public:
 
 KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options options, QWidget *parent)
     : QWidget(parent)
-    , d(new KGameThemeSelectorPrivate(provider, options, this))
+    , d_ptr(new KGameThemeSelectorPrivate(provider, options, this))
 {
+    Q_D(KGameThemeSelector);
+
     d->m_list = new QListWidget(this);
     d->m_list->setSelectionMode(QAbstractItemView::SingleSelection);
     d->m_list->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
@@ -88,9 +90,11 @@ KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options opt
 
     // monitor change selection in both directions
     connect(d->m_provider, &KGameThemeProvider::currentThemeChanged, this, [this](const KGameTheme *theme) {
+        Q_D(KGameThemeSelector);
         d->_k_updateListSelection(theme);
     });
     connect(d->m_list, &QListWidget::itemSelectionChanged, this, [this]() {
+        Q_D(KGameThemeSelector);
         d->_k_updateProviderSelection();
     });
     // setup main layout
@@ -106,6 +110,7 @@ KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options opt
         hLayout->addWidget(d->m_knsButton);
         layout->addLayout(hLayout);
         connect(d->m_knsButton, &KNSWidgets::Button::dialogFinished, [this](const QList<KNSCore::Entry> &changedEntries) {
+            Q_D(KGameThemeSelector);
             if (!changedEntries.isEmpty()) {
                 d->m_provider->rediscoverThemes();
                 d->fillList();
@@ -118,6 +123,7 @@ KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options opt
 
 void KGameThemeSelector::setNewStuffConfigFileName(const QString &configName)
 {
+    Q_D(KGameThemeSelector);
     d->m_configFileName = configName;
 }
 
@@ -181,7 +187,7 @@ public:
         mainLayout->addWidget(sel);
 
         // replace
-        QPushButton *btn = sel->d->m_knsButton;
+        QPushButton *btn = sel->d_ptr->m_knsButton;
 
         QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
 
@@ -217,8 +223,8 @@ protected:
         mSelector->setParent(nullptr);
         deleteLater();
         // restore the KNS button
-        if (mSelector->d->m_knsButton) {
-            mSelector->d->m_knsButton->show();
+        if (mSelector->d_ptr->m_knsButton) {
+            mSelector->d_ptr->m_knsButton->show();
         }
     }
 

@@ -181,7 +181,8 @@ private:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *) override;
 
 private:
-    std::unique_ptr<KGamePopupItemPrivate> const d;
+    std::unique_ptr<KGamePopupItemPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGamePopupItem)
 };
 
 #endif

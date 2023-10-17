@@ -101,7 +101,8 @@ protected:
 
 private:
     friend class KGameRenderedGraphicsObjectPrivate;
-    std::unique_ptr<KGameRenderedGraphicsObjectPrivate> const d;
+    std::unique_ptr<KGameRenderedGraphicsObjectPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameRenderedGraphicsObject)
 };
 
 #endif // KGAMERENDEREDGRAPHICSOBJECT_H

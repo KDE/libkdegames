@@ -67,7 +67,8 @@ public:
     StandardLevel standardLevel() const;
 
 private:
-    std::unique_ptr<class KGameDifficultyLevelPrivate> const d;
+    std::unique_ptr<class KGameDifficultyLevelPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameDifficultyLevel)
 };
 
 /**
@@ -168,7 +169,8 @@ public Q_SLOTS:
     void select(const KGameDifficultyLevel *level);
 
 private:
-    std::unique_ptr<class KGameDifficultyPrivate> const d;
+    std::unique_ptr<class KGameDifficultyPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameDifficulty)
 };
 
 Q_DECLARE_METATYPE(const KGameDifficultyLevel *)

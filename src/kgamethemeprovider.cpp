@@ -29,7 +29,7 @@ public:
     QString m_name;
     QList<const KGameTheme *> m_themes;
     const QByteArray m_configKey;
-    const KGameTheme *m_currentTheme;
+    mutable const KGameTheme *m_currentTheme;
     const KGameTheme *m_defaultTheme;
     // this stores the arguments which were passed to discoverThemes()
     QString m_dtDirectory;
@@ -57,17 +57,20 @@ public:
 
 KGameThemeProvider::KGameThemeProvider(const QByteArray &configKey, QObject *parent)
     : QObject(parent)
-    , d(new KGameThemeProviderPrivate(this, configKey))
+    , d_ptr(new KGameThemeProviderPrivate(this, configKey))
 {
     qRegisterMetaType<const KGameTheme *>();
     qRegisterMetaType<KGameThemeProvider *>();
     connect(this, &KGameThemeProvider::currentThemeChanged, this, [this]() {
+        Q_D(KGameThemeProvider);
         d->updateThemeName();
     });
 }
 
 KGameThemeProvider::~KGameThemeProvider()
 {
+    Q_D(KGameThemeProvider);
+
     if (!d->m_themes.isEmpty()) {
         // save current theme in config file (no sync() call here; this will most
         // likely be called at application shutdown when others are also writing to
@@ -87,16 +90,22 @@ KGameThemeProvider::~KGameThemeProvider()
 
 QString KGameThemeProvider::name() const
 {
+    Q_D(const KGameThemeProvider);
+
     return d->m_name;
 }
 
 QList<const KGameTheme *> KGameThemeProvider::themes() const
 {
+    Q_D(const KGameThemeProvider);
+
     return d->m_themes;
 }
 
 void KGameThemeProvider::addTheme(KGameTheme *theme)
 {
+    Q_D(KGameThemeProvider);
+
     // The intended use is to create the KGameThemeProvider object, add themes,
     //*then* start to work with the currentLevel(). The first call to
     // currentTheme() will load the previous selection from the config, and the
@@ -109,11 +118,15 @@ void KGameThemeProvider::addTheme(KGameTheme *theme)
 
 const KGameTheme *KGameThemeProvider::defaultTheme() const
 {
+    Q_D(const KGameThemeProvider);
+
     return d->m_defaultTheme;
 }
 
 void KGameThemeProvider::setDefaultTheme(const KGameTheme *theme)
 {
+    Q_D(KGameThemeProvider);
+
     if (d->m_currentTheme) {
         qCDebug(KDEGAMES_LOG) << "You're calling setDefaultTheme after the current "
                                  "theme has already been determined. That's not gonna work.";
@@ -125,6 +138,8 @@ void KGameThemeProvider::setDefaultTheme(const KGameTheme *theme)
 
 const KGameTheme *KGameThemeProvider::currentTheme() const
 {
+    Q_D(const KGameThemeProvider);
+
     if (d->m_currentTheme) {
         return d->m_currentTheme;
     }
@@ -146,6 +161,8 @@ const KGameTheme *KGameThemeProvider::currentTheme() const
 
 void KGameThemeProvider::setCurrentTheme(const KGameTheme *theme)
 {
+    Q_D(KGameThemeProvider);
+
     Q_ASSERT(d->m_themes.contains(theme));
     if (d->m_currentTheme != theme) {
         d->m_currentTheme = theme;
@@ -155,11 +172,15 @@ void KGameThemeProvider::setCurrentTheme(const KGameTheme *theme)
 
 QString KGameThemeProvider::currentThemeName() const
 {
+    Q_D(const KGameThemeProvider);
+
     return currentTheme()->name();
 }
 
 void KGameThemeProvider::discoverThemes(const QString &directory, const QString &defaultThemeName, const QMetaObject *themeClass)
 {
+    Q_D(KGameThemeProvider);
+
     d->m_dtDirectory = directory;
     d->m_dtDefaultThemeName = defaultThemeName;
     d->m_dtThemeClass = themeClass;
@@ -187,6 +208,8 @@ static QStringList findSubdirectories(const QStringList &dirs)
 
 void KGameThemeProvider::rediscoverThemes()
 {
+    Q_D(KGameThemeProvider);
+
     if (d->m_dtDirectory.isEmpty()) {
         return; // discoverThemes() was never called
     }
@@ -271,6 +294,8 @@ QPixmap KGameThemeProvider::generatePreview(const KGameTheme *theme, QSize size)
 
 void KGameThemeProvider::setDeclarativeEngine(const QString &name, QQmlEngine *engine)
 {
+    Q_D(KGameThemeProvider);
+
     if (d->m_name != name) { // prevent multiple declarations
         d->m_name = name;
         engine->addImageProvider(name, new KGameImageProvider(this));

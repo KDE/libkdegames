@@ -287,7 +287,8 @@ protected:
     void init(bool forceLocal);
 
 private:
-    std::unique_ptr<class KHighscorePrivate> const d;
+    std::unique_ptr<class KHighscorePrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KHighscore)
 };
 
 #endif

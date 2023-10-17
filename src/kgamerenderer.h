@@ -207,7 +207,8 @@ private:
     friend class KGameRendererPrivate;
     friend class KGameRendererClient;
     friend class KGameRendererClientPrivate;
-    std::unique_ptr<KGameRendererPrivate> const d;
+    std::unique_ptr<KGameRendererPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameRenderer)
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameRenderer::Strategies)

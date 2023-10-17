@@ -51,12 +51,13 @@ KGameRendererPrivate::KGameRendererPrivate(KGameThemeProvider *provider, unsigne
 }
 
 KGameRenderer::KGameRenderer(KGameThemeProvider *provider, unsigned cacheSize)
-    : d(new KGameRendererPrivate(provider, cacheSize, this))
+    : d_ptr(new KGameRendererPrivate(provider, cacheSize, this))
 {
     if (!provider->parent()) {
         provider->setParent(this);
     }
     connect(provider, &KGameThemeProvider::currentThemeChanged, this, [this](const KGameTheme *theme) {
+        Q_D(KGameRenderer);
         d->_k_setTheme(theme);
     });
 }
@@ -69,12 +70,14 @@ static KGameThemeProvider *providerForSingleTheme(KGameTheme *theme, QObject *pa
 }
 
 KGameRenderer::KGameRenderer(KGameTheme *theme, unsigned cacheSize)
-    : d(new KGameRendererPrivate(providerForSingleTheme(theme, this), cacheSize, this))
+    : d_ptr(new KGameRendererPrivate(providerForSingleTheme(theme, this), cacheSize, this))
 {
 }
 
 KGameRenderer::~KGameRenderer()
 {
+    Q_D(KGameRenderer);
+
     // cleanup clients
     while (!d->m_clients.isEmpty()) {
         delete d->m_clients.constBegin().key();
@@ -86,31 +89,43 @@ KGameRenderer::~KGameRenderer()
 
 int KGameRenderer::frameBaseIndex() const
 {
+    Q_D(const KGameRenderer);
+
     return d->m_frameBaseIndex;
 }
 
 void KGameRenderer::setFrameBaseIndex(int frameBaseIndex)
 {
+    Q_D(KGameRenderer);
+
     d->m_frameBaseIndex = frameBaseIndex;
 }
 
 QString KGameRenderer::frameSuffix() const
 {
+    Q_D(const KGameRenderer);
+
     return d->m_frameSuffix;
 }
 
 void KGameRenderer::setFrameSuffix(const QString &suffix)
 {
+    Q_D(KGameRenderer);
+
     d->m_frameSuffix = suffix.contains(QLatin1String("%1")) ? suffix : QStringLiteral("_%1");
 }
 
 KGameRenderer::Strategies KGameRenderer::strategies() const
 {
+    Q_D(const KGameRenderer);
+
     return d->m_strategies;
 }
 
 void KGameRenderer::setStrategyEnabled(KGameRenderer::Strategy strategy, bool enabled)
 {
+    Q_D(KGameRenderer);
+
     const bool oldEnabled = d->m_strategies & strategy;
     if (enabled) {
         d->m_strategies |= strategy;
@@ -146,7 +161,7 @@ void KGameRendererPrivate::_k_setTheme(const KGameTheme *theme)
     QHash<KGameRendererClient *, QString>::iterator it1 = m_clients.begin(), it2 = m_clients.end();
     for (; it1 != it2; ++it1) {
         it1.value().clear(); // because the pixmap is outdated
-        it1.key()->d->fetchPixmap();
+        it1.key()->d_ptr->fetchPixmap();
     }
     Q_EMIT m_parent->themeChanged(m_currentTheme);
 }
@@ -217,15 +232,19 @@ bool KGameRendererPrivate::setTheme(const KGameTheme *theme)
 
 const KGameTheme *KGameRenderer::theme() const
 {
+    Q_D(const KGameRenderer);
+
     // ensure that some theme is loaded
     if (!d->m_currentTheme) {
-        d->_k_setTheme(d->m_provider->currentTheme());
+        const_cast<KGameRendererPrivate *>(d)->_k_setTheme(d->m_provider->currentTheme());
     }
     return d->m_currentTheme;
 }
 
 KGameThemeProvider *KGameRenderer::themeProvider() const
 {
+    Q_D(const KGameRenderer);
+
     return d->m_provider;
 }
 
@@ -250,9 +269,11 @@ QString KGameRendererPrivate::spriteFrameKey(const QString &key, int frame, bool
 
 int KGameRenderer::frameCount(const QString &key) const
 {
+    Q_D(const KGameRenderer);
+
     // ensure that some theme is loaded
     if (!d->m_currentTheme) {
-        d->_k_setTheme(d->m_provider->currentTheme());
+        const_cast<KGameRendererPrivate *>(d)->_k_setTheme(d->m_provider->currentTheme());
     }
     // look up in in-process cache
     QHash<QString, int>::const_iterator it = d->m_frameCountCache.constFind(key);
@@ -297,10 +318,12 @@ int KGameRenderer::frameCount(const QString &key) const
 
 QRectF KGameRenderer::boundsOnSprite(const QString &key, int frame) const
 {
+    Q_D(const KGameRenderer);
+
     const QString elementKey = d->spriteFrameKey(key, frame);
     // ensure that some theme is loaded
     if (!d->m_currentTheme) {
-        d->_k_setTheme(d->m_provider->currentTheme());
+        const_cast<KGameRendererPrivate *>(d)->_k_setTheme(d->m_provider->currentTheme());
     }
     // look up in in-process cache
     QHash<QString, QRectF>::const_iterator it = d->m_boundsCache.constFind(elementKey);
@@ -340,13 +363,17 @@ QRectF KGameRenderer::boundsOnSprite(const QString &key, int frame) const
 
 bool KGameRenderer::spriteExists(const QString &key) const
 {
+    Q_D(const KGameRenderer);
+
     return this->frameCount(key) >= 0;
 }
 
 QPixmap KGameRenderer::spritePixmap(const QString &key, QSize size, int frame, const QHash<QColor, QColor> &customColors) const
 {
+    Q_D(const KGameRenderer);
+
     QPixmap result;
-    d->requestPixmap(KGRInternal::ClientSpec(key, frame, size, customColors), nullptr, &result);
+    const_cast<KGameRendererPrivate *>(d)->requestPixmap(KGRInternal::ClientSpec(key, frame, size, customColors), nullptr, &result);
     return result;
 }
 

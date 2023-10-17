@@ -127,7 +127,8 @@ Q_SIGNALS:
     void readOnlyProperty();
 
 private:
-    std::unique_ptr<class KGameThemePrivate> const d;
+    std::unique_ptr<class KGameThemePrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameTheme)
 };
 
 Q_DECLARE_METATYPE(const KGameTheme *)

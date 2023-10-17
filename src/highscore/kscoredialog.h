@@ -250,8 +250,10 @@ private:
 
 private:
     friend class KScoreDialogPrivate;
-    std::unique_ptr<class KScoreDialogPrivate> const d;
+    std::unique_ptr<class KScoreDialogPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KScoreDialog)
 };
+
 Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
 
 #endif // KSCOREDIALOG_H

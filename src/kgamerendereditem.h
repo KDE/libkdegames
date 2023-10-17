@@ -39,7 +39,8 @@ protected:
 
 private:
     friend class KGameRenderedItemPrivate;
-    std::unique_ptr<KGameRenderedItemPrivate> const d;
+    std::unique_ptr<KGameRenderedItemPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameRenderedItem)
 };
 
 #endif // KGAMERENDEREDITEM_H

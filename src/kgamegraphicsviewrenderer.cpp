@@ -14,13 +14,13 @@ public:
 
 KGameGraphicsViewRenderer::KGameGraphicsViewRenderer(KGameThemeProvider *provider, unsigned cacheSize)
     : KGameRenderer(provider, cacheSize)
-    , d(new KGameGraphicsViewRendererPrivate())
+    , d_ptr(new KGameGraphicsViewRendererPrivate())
 {
 }
 
 KGameGraphicsViewRenderer::KGameGraphicsViewRenderer(KGameTheme *theme, unsigned cacheSize)
     : KGameRenderer(theme, cacheSize)
-    , d(new KGameGraphicsViewRendererPrivate())
+    , d_ptr(new KGameGraphicsViewRendererPrivate())
 {
 }
 
@@ -28,11 +28,15 @@ KGameGraphicsViewRenderer::~KGameGraphicsViewRenderer() = default;
 
 QGraphicsView *KGameGraphicsViewRenderer::defaultPrimaryView() const
 {
+    Q_D(const KGameGraphicsViewRenderer);
+
     return d->m_defaultPrimaryView;
 }
 
 void KGameGraphicsViewRenderer::setDefaultPrimaryView(QGraphicsView *view)
 {
+    Q_D(KGameGraphicsViewRenderer);
+
     d->m_defaultPrimaryView = view;
 }
 

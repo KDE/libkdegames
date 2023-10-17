@@ -63,7 +63,8 @@ public Q_SLOTS:
 
 private:
     class Dialog;
-    std::unique_ptr<class KGameThemeSelectorPrivate> const d;
+    std::unique_ptr<class KGameThemeSelectorPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameThemeSelector)
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KGameThemeSelector::Options)

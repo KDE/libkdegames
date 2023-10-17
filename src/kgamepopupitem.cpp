@@ -183,8 +183,10 @@ public:
 
 KGamePopupItem::KGamePopupItem(QGraphicsItem *parent)
     : QGraphicsItem(parent)
-    , d(new KGamePopupItemPrivate)
+    , d_ptr(new KGamePopupItemPrivate)
 {
+    Q_D(KGamePopupItem);
+
     hide();
     d->m_textChildItem = new TextItemWithOpacity(this);
     d->m_textChildItem->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
@@ -222,6 +224,8 @@ KGamePopupItem::~KGamePopupItem() = default;
 
 void KGamePopupItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_D(KGamePopupItem);
+
     Q_UNUSED(option);
 
     p->save();
@@ -244,6 +248,8 @@ void KGamePopupItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option, 
 
 void KGamePopupItem::showMessage(const QString &text, Position pos, ReplaceMode mode)
 {
+    Q_D(KGamePopupItem);
+
     if (d->m_timeLine.state() == QTimeLine::Running || d->m_timer.isActive()) {
         if (mode == ReplacePrevious) {
             forceHide(InstantHide);
@@ -325,6 +331,8 @@ void KGamePopupItem::showMessage(const QString &text, Position pos, ReplaceMode 
 
 void KGamePopupItem::setupTimeline()
 {
+    Q_D(KGamePopupItem);
+
     d->m_timeLine.setDirection(QTimeLine::Forward);
     d->m_timeLine.setDuration(300);
     if (d->m_position == TopLeft || d->m_position == TopRight) {
@@ -344,6 +352,8 @@ void KGamePopupItem::setupTimeline()
 
 void KGamePopupItem::animationFrame(int frame)
 {
+    Q_D(KGamePopupItem);
+
     if (d->m_position == TopLeft || d->m_position == BottomLeft) {
         setPos(d->m_visibleSceneRect.left() + d->m_mapped_SHOW_OFFSET, frame);
     } else if (d->m_position == TopRight || d->m_position == BottomRight) {
@@ -357,6 +367,8 @@ void KGamePopupItem::animationFrame(int frame)
 
 void KGamePopupItem::playHideAnimation()
 {
+    Q_D(KGamePopupItem);
+
     if (d->m_hoveredByMouse) {
         return;
     }
@@ -367,32 +379,44 @@ void KGamePopupItem::playHideAnimation()
 
 void KGamePopupItem::setMessageTimeout(int msec)
 {
+    Q_D(KGamePopupItem);
+
     d->m_timeout = msec;
 }
 
 void KGamePopupItem::setHideOnMouseClick(bool hide)
 {
+    Q_D(KGamePopupItem);
+
     d->m_hideOnClick = hide;
 }
 
 bool KGamePopupItem::hidesOnMouseClick() const
 {
+    Q_D(const KGamePopupItem);
+
     return d->m_hideOnClick;
 }
 
 void KGamePopupItem::setMessageOpacity(qreal opacity)
 {
+    Q_D(KGamePopupItem);
+
     d->m_opacity = opacity;
     d->m_textChildItem->setOpacity(opacity);
 }
 
 QRectF KGamePopupItem::boundingRect() const
 {
+    Q_D(const KGamePopupItem);
+
     return d->m_boundRect;
 }
 
 void KGamePopupItem::hideMe()
 {
+    Q_D(KGamePopupItem);
+
     d->m_animOpacity = -1;
     // and restore child's opacity too
     d->m_textChildItem->setOpacity(d->m_opacity);
@@ -406,11 +430,15 @@ void KGamePopupItem::hideMe()
 
 void KGamePopupItem::hoverEnterEvent(QGraphicsSceneHoverEvent *)
 {
+    Q_D(KGamePopupItem);
+
     d->m_hoveredByMouse = true;
 }
 
 void KGamePopupItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
+    Q_D(KGamePopupItem);
+
     d->m_hoveredByMouse = false;
 
     if (d->m_timeout != 0 && !d->m_timer.isActive() && d->m_timeLine.state() != QTimeLine::Running) {
@@ -420,6 +448,8 @@ void KGamePopupItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 
 void KGamePopupItem::setMessageIcon(const QPixmap &pix)
 {
+    Q_D(KGamePopupItem);
+
     d->m_iconPix = pix;
     d->m_textChildItem->setPos(MARGIN + pix.width() / pix.devicePixelRatio() + SOME_SPACE, MARGIN);
     // bounding rect is updated in showMessage()
@@ -427,11 +457,15 @@ void KGamePopupItem::setMessageIcon(const QPixmap &pix)
 
 int KGamePopupItem::messageTimeout() const
 {
+    Q_D(const KGamePopupItem);
+
     return d->m_timeout;
 }
 
 void KGamePopupItem::forceHide(HideType howToHide)
 {
+    Q_D(KGamePopupItem);
+
     if (!isVisible()) {
         return;
     }
@@ -452,22 +486,30 @@ void KGamePopupItem::forceHide(HideType howToHide)
 
 qreal KGamePopupItem::messageOpacity() const
 {
+    Q_D(const KGamePopupItem);
+
     return d->m_opacity;
 }
 
 void KGamePopupItem::setBackgroundBrush(const QBrush &brush)
 {
+    Q_D(KGamePopupItem);
+
     d->m_brush = KStatefulBrush(brush);
 }
 
 void KGamePopupItem::setTextColor(const QColor &color)
 {
+    Q_D(KGamePopupItem);
+
     KStatefulBrush brush(color, d->m_brush.brush(QPalette::Active));
     d->m_textChildItem->setTextColor(brush);
 }
 
 void KGamePopupItem::onLinkHovered(const QString &link)
 {
+    Q_D(KGamePopupItem);
+
     if (link.isEmpty()) {
         d->m_textChildItem->setCursor(Qt::ArrowCursor);
     } else {
@@ -480,11 +522,15 @@ void KGamePopupItem::onLinkHovered(const QString &link)
 
 void KGamePopupItem::setSharpness(Sharpness sharpness)
 {
+    Q_D(KGamePopupItem);
+
     d->m_sharpness = sharpness;
 }
 
 KGamePopupItem::Sharpness KGamePopupItem::sharpness() const
 {
+    Q_D(const KGamePopupItem);
+
     return d->m_sharpness;
 }
 
@@ -496,6 +542,8 @@ void KGamePopupItem::mousePressEvent(QGraphicsSceneMouseEvent *)
 
 void KGamePopupItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
 {
+    Q_D(KGamePopupItem);
+
     // NOTE: text child item is QGraphicsTextItem which "eats" mouse events
     // because of interaction with links. Because of that TextItemWithOpacity has
     // special signal to indicate mouse click which we catch in a onTextItemClicked()
@@ -507,6 +555,8 @@ void KGamePopupItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
 
 void KGamePopupItem::onTextItemClicked()
 {
+    Q_D(KGamePopupItem);
+
     // if link is hovered we don't hide as click should go to the link
     if (d->m_hideOnClick && !d->m_linkHovered) {
         forceHide();

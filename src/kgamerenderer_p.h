@@ -123,7 +123,7 @@ public:
     int m_frameBaseIndex;
 
     QThreadPool m_workerPool;
-    KGRInternal::RendererPool m_rendererPool;
+    mutable KGRInternal::RendererPool m_rendererPool;
 
     QHash<KGameRendererClient *, QString> m_clients; // maps client -> cache key of current pixmap
     QStringList m_pendingRequests; // cache keys of pixmaps which are currently being rendered
@@ -150,8 +150,8 @@ public:
     // As you see, implementing an own pixmap cache saves us one conversion.
     // We therefore disable KIC's pixmap cache because we do not need it.
     QHash<QString, QPixmap> m_pixmapCache;
-    QHash<QString, int> m_frameCountCache;
-    QHash<QString, QRectF> m_boundsCache;
+    mutable QHash<QString, int> m_frameCountCache;
+    mutable QHash<QString, QRectF> m_boundsCache;
 };
 
 class KGameRendererClientPrivate : public QObject

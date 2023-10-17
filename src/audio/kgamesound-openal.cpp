@@ -36,8 +36,10 @@ public:
 
 KGameSound::KGameSound(const QString &file, QObject *parent)
     : QObject(parent)
-    , d(new KGameSoundPrivate)
+    , d_ptr(new KGameSoundPrivate)
 {
+    Q_D(KGameSound);
+
     VirtualFileQt fileInterface(file);
     if (!fileInterface.open()) {
         qCWarning(KDEGAMES_AUDIO_LOG) << "Failed to open sound file" << file;
@@ -97,6 +99,8 @@ KGameSound::KGameSound(const QString &file, QObject *parent)
 
 KGameSound::~KGameSound()
 {
+    Q_D(KGameSound);
+
     if (d->m_valid) {
         stop();
         KGameOpenALRuntime::instance()->m_soundsEvents.remove(this);
@@ -106,16 +110,22 @@ KGameSound::~KGameSound()
 
 bool KGameSound::isValid() const
 {
+    Q_D(const KGameSound);
+
     return d->m_valid;
 }
 
 KGameSound::PlaybackType KGameSound::playbackType() const
 {
+    Q_D(const KGameSound);
+
     return d->m_type;
 }
 
 void KGameSound::setPlaybackType(KGameSound::PlaybackType type)
 {
+    Q_D(KGameSound);
+
     if (d->m_type == type)
         return;
     d->m_type = type;
@@ -124,11 +134,15 @@ void KGameSound::setPlaybackType(KGameSound::PlaybackType type)
 
 QPointF KGameSound::pos() const
 {
+    Q_D(const KGameSound);
+
     return d->m_pos;
 }
 
 void KGameSound::setPos(QPointF pos)
 {
+    Q_D(KGameSound);
+
     if (d->m_pos == pos)
         return;
     d->m_pos = pos;
@@ -137,11 +151,15 @@ void KGameSound::setPos(QPointF pos)
 
 qreal KGameSound::volume() const
 {
+    Q_D(const KGameSound);
+
     return d->m_volume;
 }
 
 void KGameSound::setVolume(qreal volume)
 {
+    Q_D(KGameSound);
+
     if (d->m_volume == volume)
         return;
     d->m_volume = volume;
@@ -150,16 +168,22 @@ void KGameSound::setVolume(qreal volume)
 
 bool KGameSound::hasError() const
 {
+    Q_D(const KGameSound);
+
     return !d->m_valid;
 }
 
 void KGameSound::start()
 {
+    Q_D(KGameSound);
+
     start(d->m_pos);
 }
 
 void KGameSound::start(QPointF pos)
 {
+    Q_D(KGameSound);
+
     if (d->m_valid) {
         KGameOpenALRuntime *runtime = KGameOpenALRuntime::instance();
         if (!runtime->instance()->m_soundsEvents[this].isEmpty()) {
@@ -201,7 +225,7 @@ KGamePlaybackEvent::KGamePlaybackEvent(KGameSound *sound, QPointF pos)
     alSource3f(m_source, AL_POSITION, pos.x(), pos.y(), 0);
     alSourcef(m_source, AL_PITCH, 1.0); // TODO: debug
     alSourcef(m_source, AL_GAIN, sound->volume());
-    alSourcei(m_source, AL_BUFFER, sound->d->m_buffer);
+    alSourcei(m_source, AL_BUFFER, sound->d_ptr->m_buffer);
     const KGameSound::PlaybackType type = sound->playbackType();
     alSourcef(m_source, AL_ROLLOFF_FACTOR, type == KGameSound::AmbientPlayback ? 0.0 : 1.0);
     alSourcei(m_source, AL_SOURCE_RELATIVE, type == KGameSound::RelativePlayback ? AL_TRUE : AL_FALSE);

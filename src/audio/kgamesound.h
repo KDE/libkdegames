@@ -136,7 +136,8 @@ Q_SIGNALS:
 
 private:
     friend class KGamePlaybackEvent;
-    std::unique_ptr<class KGameSoundPrivate> const d;
+    std::unique_ptr<class KGameSoundPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameSound)
 };
 
 #endif // KGAMESOUND_H

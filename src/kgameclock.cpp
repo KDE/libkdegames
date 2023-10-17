@@ -47,8 +47,10 @@ QString timeStringMinSec(uint min, uint sec)
 
 KGameClock::KGameClock(QObject *parent, KGameClock::ClockType clocktype)
     : QObject(parent)
-    , d(new KGameClockPrivate)
+    , d_ptr(new KGameClockPrivate)
 {
+    Q_D(KGameClock);
+
     d->clocktype = clocktype;
     d->timerClock = new QTimer(this);
     connect(d->timerClock, &QTimer::timeout, this, &KGameClock::timeoutClock);
@@ -58,12 +60,16 @@ KGameClock::~KGameClock() = default;
 
 void KGameClock::timeoutClock()
 {
+    Q_D(KGameClock);
+
     d->totalSeconds++;
     showTime();
 }
 
 QString KGameClock::timeString() const
 {
+    Q_D(const KGameClock);
+
     uint sec = d->totalSeconds;
     if (d->clocktype == MinSecOnly) {
         return timeStringMinSec((sec / 60) % 60, sec % 60);
@@ -87,6 +93,8 @@ void KGameClock::showTime()
 
 void KGameClock::restart()
 {
+    Q_D(KGameClock);
+
     d->timerClock->stop();
     d->totalSeconds = 0;
     resume();
@@ -95,21 +103,29 @@ void KGameClock::restart()
 
 void KGameClock::resume()
 {
+    Q_D(KGameClock);
+
     d->timerClock->start(1000); // 1 second
 }
 
 void KGameClock::pause()
 {
+    Q_D(KGameClock);
+
     d->timerClock->stop();
 }
 
 uint KGameClock::seconds() const
 {
+    Q_D(const KGameClock);
+
     return d->totalSeconds;
 }
 
 void KGameClock::setTime(uint sec)
 {
+    Q_D(KGameClock);
+
     d->totalSeconds = sec;
     showTime();
 }

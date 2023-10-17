@@ -37,7 +37,7 @@ public:
 
 KGameTheme::KGameTheme(const QByteArray &identifier, QObject *parent)
     : QObject(parent)
-    , d(new KGameThemePrivate(identifier))
+    , d_ptr(new KGameThemePrivate(identifier))
 {
 }
 
@@ -45,16 +45,20 @@ KGameTheme::~KGameTheme() = default;
 
 QByteArray KGameTheme::identifier() const
 {
+    Q_D(const KGameTheme);
+
     return d->m_identifier;
 }
 
 #define KGAMETHEME_STRING_PROPERTY(PROP, SETTER)                                                                                                               \
     QString KGameTheme::PROP() const                                                                                                                           \
     {                                                                                                                                                          \
+        Q_D(const KGameTheme);                                                                                                                                 \
         return d->m_##PROP;                                                                                                                                    \
     }                                                                                                                                                          \
     void KGameTheme::SETTER(const QString &val)                                                                                                                \
     {                                                                                                                                                          \
+        Q_D(KGameTheme);                                                                                                                                       \
         d->m_##PROP = val;                                                                                                                                     \
     }
 
@@ -67,16 +71,22 @@ KGAMETHEME_STRING_PROPERTY(previewPath, setPreviewPath)
 
 QMap<QString, QString> KGameTheme::customData() const
 {
+    Q_D(const KGameTheme);
+
     return d->m_customData;
 }
 
 QString KGameTheme::customData(const QString &key, const QString &defaultValue) const
 {
+    Q_D(const KGameTheme);
+
     return d->m_customData.value(key, defaultValue);
 }
 
 void KGameTheme::setCustomData(const QMap<QString, QString> &customData)
 {
+    Q_D(KGameTheme);
+
     d->m_customData = customData;
 }
 
