@@ -18,4 +18,3 @@ Contents:
   kgame: this is a complete network/game handling library. it consists of a lot
          of classes which are explained in the kgame docu (as soon as it is
          written)
-  kgamecanvas: a fast game-oriented canvas library
