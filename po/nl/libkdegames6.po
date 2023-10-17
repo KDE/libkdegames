@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-15 01:39+0000\n"
+"POT-Creation-Date: 2023-10-17 01:39+0000\n"
 "PO-Revision-Date: 2014-03-12 10:03+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -119,77 +119,77 @@ msgstr ""
 "Goed gedaan!\n"
 "U hebt de topscorelijst gehaald!"
 
-#: kgamedifficulty.cpp:74
+#: kgamedifficulty.cpp:75
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Belachelijk eenvoudig"
 
-#: kgamedifficulty.cpp:77
+#: kgamedifficulty.cpp:78
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Zeer eenvoudig"
 
-#: kgamedifficulty.cpp:80
+#: kgamedifficulty.cpp:81
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Gemakkelijk"
 
-#: kgamedifficulty.cpp:83
+#: kgamedifficulty.cpp:84
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Gemiddeld"
 
-#: kgamedifficulty.cpp:86
+#: kgamedifficulty.cpp:87
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Moeilijk"
 
-#: kgamedifficulty.cpp:89
+#: kgamedifficulty.cpp:90
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Erg moeilijk"
 
-#: kgamedifficulty.cpp:92
+#: kgamedifficulty.cpp:93
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Extreem moeilijk"
 
-#: kgamedifficulty.cpp:95
+#: kgamedifficulty.cpp:96
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Onmogelijk"
 
-#: kgamedifficulty.cpp:289
+#: kgamedifficulty.cpp:290
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr ""
 "Het wijzigen van de moeilijkheidsgraad zal het huidige spel beëindigen!"
 
-#: kgamedifficulty.cpp:291
+#: kgamedifficulty.cpp:292
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Wijzig de moeilijkheidsgraad"
 
-#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
+#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Moeilijkheid"
 
-#: kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Stel de moeilijkheidsgraad in"
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:386
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Stel de moeilijkheidsgraad van het spel in."
@@ -205,12 +205,12 @@ msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "Selecteer een thema"
 
-#: kgamethemeselector.cpp:273
+#: kgamethemeselector.cpp:275
 #, kde-format
 msgid "[No name]"
 msgstr "[Geen naam]"
 
-#: kgamethemeselector.cpp:289
+#: kgamethemeselector.cpp:291
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -583,22 +583,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 ongeregistreerd"
 msgstr[1] "%1 ongeregistreerd"
 
-#: private/kgame/kgamepropertyhandler.cpp:342
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "NULL-aanwijzer"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "Waar"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "Onwaar"
 
-#: private/kgame/kgamepropertyhandler.cpp:365
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "Onbekend"

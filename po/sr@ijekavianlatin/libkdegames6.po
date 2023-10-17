@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-15 01:39+0000\n"
+"POT-Creation-Date: 2023-10-17 01:39+0000\n"
 "PO-Revision-Date: 2015-04-18 20:24+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -121,76 +121,76 @@ msgstr ""
 "Dobro urađeno!\n"
 "Dospjeli ste na spisak najrezultata!"
 
-#: kgamedifficulty.cpp:74
+#: kgamedifficulty.cpp:75
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "izuzetno lako"
 
-#: kgamedifficulty.cpp:77
+#: kgamedifficulty.cpp:78
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "veoma lako"
 
-#: kgamedifficulty.cpp:80
+#: kgamedifficulty.cpp:81
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "lako"
 
-#: kgamedifficulty.cpp:83
+#: kgamedifficulty.cpp:84
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "srednje"
 
-#: kgamedifficulty.cpp:86
+#: kgamedifficulty.cpp:87
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "teško"
 
-#: kgamedifficulty.cpp:89
+#: kgamedifficulty.cpp:90
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "veoma teško"
 
-#: kgamedifficulty.cpp:92
+#: kgamedifficulty.cpp:93
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "izuzetno teško"
 
-#: kgamedifficulty.cpp:95
+#: kgamedifficulty.cpp:96
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "nemoguće"
 
-#: kgamedifficulty.cpp:289
+#: kgamedifficulty.cpp:290
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "Mijenjanjem nivoa težine prekinućete tekuću igru!"
 
-#: kgamedifficulty.cpp:291
+#: kgamedifficulty.cpp:292
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Izmeni nivo težine"
 
-#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
+#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Težina"
 
-#: kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Postavite nivo težine"
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:386
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Postavite nivo težine igre."
@@ -206,12 +206,12 @@ msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "Izbor teme"
 
-#: kgamethemeselector.cpp:273
+#: kgamethemeselector.cpp:275
 #, kde-format
 msgid "[No name]"
 msgstr "[bezimena]"
 
-#: kgamethemeselector.cpp:289
+#: kgamethemeselector.cpp:291
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -588,22 +588,22 @@ msgstr[1] "%1 neregistrovana"
 msgstr[2] "%1 neregistrovanih"
 msgstr[3] "%1 neregistrovano"
 
-#: private/kgame/kgamepropertyhandler.cpp:342
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "nulti pokazivač"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "tačno"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "netačno"
 
-#: private/kgame/kgamepropertyhandler.cpp:365
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "nepoznat"

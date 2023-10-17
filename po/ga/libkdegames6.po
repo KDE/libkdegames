@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames/libkdegames.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-15 01:39+0000\n"
+"POT-Creation-Date: 2023-10-17 01:39+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -110,78 +110,78 @@ msgstr ""
 "Maith thú!\n"
 "Tá ceann de na scóir is fearr riamh agat!"
 
-#: kgamedifficulty.cpp:74
+#: kgamedifficulty.cpp:75
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Ró-Éasca"
 
-#: kgamedifficulty.cpp:77
+#: kgamedifficulty.cpp:78
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "An-Éasca"
 
-#: kgamedifficulty.cpp:80
+#: kgamedifficulty.cpp:81
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Éasca"
 
-#: kgamedifficulty.cpp:83
+#: kgamedifficulty.cpp:84
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Measartha"
 
-#: kgamedifficulty.cpp:86
+#: kgamedifficulty.cpp:87
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Crua"
 
-#: kgamedifficulty.cpp:89
+#: kgamedifficulty.cpp:90
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "An-Chrua"
 
-#: kgamedifficulty.cpp:92
+#: kgamedifficulty.cpp:93
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Fíorchrua"
 
-#: kgamedifficulty.cpp:95
+#: kgamedifficulty.cpp:96
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Dodhéanta"
 
-#: kgamedifficulty.cpp:289
+#: kgamedifficulty.cpp:290
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr ""
 "Má athraíonn tú an leibhéal deacrachta, cuirfear deireadh leis an gcluiche "
 "reatha!"
 
-#: kgamedifficulty.cpp:291
+#: kgamedifficulty.cpp:292
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Athraigh an leibhéal deacrachta"
 
-#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
+#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Deacracht"
 
-#: kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Socraigh an leibhéal deacrachta"
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:386
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Socraigh leibhéal deacrachta an chluiche."
@@ -197,12 +197,12 @@ msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "Roghnaigh téama"
 
-#: kgamethemeselector.cpp:273
+#: kgamethemeselector.cpp:275
 #, kde-format
 msgid "[No name]"
 msgstr "[Gan ainm]"
 
-#: kgamethemeselector.cpp:289
+#: kgamethemeselector.cpp:291
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -582,22 +582,22 @@ msgstr[2] "%1 cinn gan clárú"
 msgstr[3] "%1 gcinn gan clárú"
 msgstr[4] "%1 gan clárú"
 
-#: private/kgame/kgamepropertyhandler.cpp:342
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr "Pointeoir nialasach"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "Fíor"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "Bréagach"
 
-#: private/kgame/kgamepropertyhandler.cpp:365
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "Anaithnid"

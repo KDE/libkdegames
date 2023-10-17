@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames/libkdegames.pot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-15 01:39+0000\n"
+"POT-Creation-Date: 2023-10-17 01:39+0000\n"
 "PO-Revision-Date: 2004-09-20 15:44+0200\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: br <LL@li.org>\n"
@@ -104,84 +104,84 @@ msgid ""
 "You made it to the high score list!"
 msgstr ""
 
-#: kgamedifficulty.cpp:74
+#: kgamedifficulty.cpp:75
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr ""
 
-#: kgamedifficulty.cpp:77
+#: kgamedifficulty.cpp:78
 #, fuzzy, kde-format
 #| msgid "Very easy"
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Aes-tre"
 
-#: kgamedifficulty.cpp:80
+#: kgamedifficulty.cpp:81
 #, fuzzy, kde-format
 #| msgid "Easy"
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Aes"
 
-#: kgamedifficulty.cpp:83
+#: kgamedifficulty.cpp:84
 #, fuzzy, kde-format
 #| msgid "Medium"
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Krenn"
 
-#: kgamedifficulty.cpp:86
+#: kgamedifficulty.cpp:87
 #, fuzzy, kde-format
 #| msgid "Hard"
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Tenn"
 
-#: kgamedifficulty.cpp:89
+#: kgamedifficulty.cpp:90
 #, fuzzy, kde-format
 #| msgid "Very hard"
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Diaes-tre"
 
-#: kgamedifficulty.cpp:92
+#: kgamedifficulty.cpp:93
 #, fuzzy, kde-format
 #| msgid "Very hard"
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Diaes-tre"
 
-#: kgamedifficulty.cpp:95
+#: kgamedifficulty.cpp:96
 #, fuzzy, kde-format
 #| msgid "Impossible"
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "N'eo ket possubl"
 
-#: kgamedifficulty.cpp:289
+#: kgamedifficulty.cpp:290
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr ""
 
-#: kgamedifficulty.cpp:291
+#: kgamedifficulty.cpp:292
 #, kde-format
 msgid "Change the difficulty level"
 msgstr ""
 
-#: kgamedifficulty.cpp:375 kgamedifficulty.cpp:383
+#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
 #, fuzzy, kde-format
 #| msgid "Difficulty"
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Bec'h"
 
-#: kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:385
 #, kde-format
 msgid "Set the difficulty level"
 msgstr ""
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:386
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr ""
@@ -198,13 +198,13 @@ msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "Dibabit ar c'hoarier :"
 
-#: kgamethemeselector.cpp:273
+#: kgamethemeselector.cpp:275
 #, fuzzy, kde-format
 #| msgid "Your name:"
 msgid "[No name]"
 msgstr "Ho anv :"
 
-#: kgamethemeselector.cpp:289
+#: kgamethemeselector.cpp:291
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -596,22 +596,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] ""
 msgstr[1] ""
 
-#: private/kgame/kgamepropertyhandler.cpp:342
+#: private/kgame/kgamepropertyhandler.cpp:341
 #, kde-format
 msgid "NULL pointer"
 msgstr ""
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "True"
 msgstr "Gwir"
 
-#: private/kgame/kgamepropertyhandler.cpp:359
+#: private/kgame/kgamepropertyhandler.cpp:358
 #, kde-format
 msgid "False"
 msgstr "N'eo ket gwir"
 
-#: private/kgame/kgamepropertyhandler.cpp:365
+#: private/kgame/kgamepropertyhandler.cpp:364
 #, kde-format
 msgid "Unknown"
 msgstr "Dianav"
