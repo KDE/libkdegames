@@ -46,7 +46,7 @@ target_sources(KDEGames PRIVATE
     kgametheme.cpp kgametheme.h
     kgamethemeprovider.cpp kgamethemeprovider.h
     kgamethemeselector.cpp kgamethemeselector.h
-    kstandardgameaction.cpp kstandardgameaction.h
+    kgamestandardaction.cpp kgamestandardaction.h
     kgamegraphicsviewrenderer.cpp kgamegraphicsviewrenderer.h
 )
 
@@ -63,7 +63,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
         KGameTheme
         KGameThemeProvider
         KGameThemeSelector
-        KStandardGameAction
+        KGameStandardAction
     REQUIRED_HEADERS kdegames_HEADERS
 )
 

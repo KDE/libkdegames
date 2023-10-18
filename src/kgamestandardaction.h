@@ -9,8 +9,8 @@
     after that just edited for our needs
 */
 
-#ifndef KSTANDARDGAMEACTION_H
-#define KSTANDARDGAMEACTION_H
+#ifndef KGAMESTANDARDACTION_H
+#define KGAMESTANDARDACTION_H
 
 // own
 #include "kdegames_export.h"
@@ -38,12 +38,12 @@
  *
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
-namespace KStandardGameAction
+namespace KGameStandardAction
 {
 /**
  * The standard menubar and toolbar actions.
  */
-enum StandardGameAction {
+enum GameStandardAction {
     // Game menu
     New = 1,
     Load,
@@ -78,28 +78,28 @@ enum StandardGameAction {
  * Creates an action corresponding to the
  * KStandardAction::StandardAction enum.
  */
-KDEGAMES_EXPORT QAction *create(StandardGameAction id, const QObject *recvr, const char *slot, QObject *parent);
+KDEGAMES_EXPORT QAction *create(GameStandardAction id, const QObject *recvr, const char *slot, QObject *parent);
 
 /**
  * @internal
  */
-KDEGAMES_EXPORT QAction *_k_createInternal(StandardGameAction id, QObject *parent);
+KDEGAMES_EXPORT QAction *_k_createInternal(GameStandardAction id, QObject *parent);
 
 /**
  * This overloads create() to allow using the new connect syntax.
  *
  * @note If you use @c LoadRecent as @p id, you should manually connect to the urlSelected(const QUrl &)
- * signal of the returned KRecentFilesAction instead or use KStandardGameAction::loadRecent(Receiver *, Func, QObject*).
+ * signal of the returned KRecentFilesAction instead or use KGameStandardAction::loadRecent(Receiver *, Func, QObject*).
  *
- * @see create(StandardGameAction, const QObject *, const char *, QObject *)
+ * @see create(GameStandardAction, const QObject *, const char *, QObject *)
  * @since 7.3
  */
 #ifdef K_DOXYGEN
-inline QAction *create(StandardGameAction id, const QObject *recvr, Func slot, QObject *parent)
+inline QAction *create(GameStandardAction id, const QObject *recvr, Func slot, QObject *parent)
 #else
 template<class Receiver, class Func>
 inline typename std::enable_if<!std::is_convertible<Func, const char *>::value, QAction>::type *
-create(StandardGameAction id, const Receiver *recvr, Func slot, QObject *parent)
+create(GameStandardAction id, const Receiver *recvr, Func slot, QObject *parent)
 #endif
 {
     QAction *action = _k_createInternal(id, parent);
@@ -110,7 +110,7 @@ create(StandardGameAction id, const Receiver *recvr, Func slot, QObject *parent)
 /**
  * This will return the internal name of a given standard action.
  */
-KDEGAMES_EXPORT const char *name(StandardGameAction id);
+KDEGAMES_EXPORT const char *name(GameStandardAction id);
 
 // we have to disable the templated function for const char* as Func, since it is ambiguous otherwise
 // TODO: KF6: unify const char* version and new style by removing std::enable_if
