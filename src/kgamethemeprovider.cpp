@@ -25,7 +25,8 @@
 class KGameThemeProviderPrivate
 {
 public:
-    KGameThemeProvider *q;
+    KGameThemeProvider *const q;
+
     QString m_name;
     QList<const KGameTheme *> m_themes;
     const QByteArray m_configKey;

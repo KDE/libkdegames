@@ -113,8 +113,9 @@ private:
     inline void requestPixmap__propagateResult(const QPixmap &pixmap, KGameRendererClient *client, QPixmap *synchronousResult);
 public Q_SLOTS:
     void jobFinished(KGRInternal::Job *job, bool isSynchronous); // NOTE: This is invoked from KGRInternal::Worker::run.
+
 public:
-    KGameRenderer *m_parent;
+    KGameRenderer *const m_parent;
 
     KGameThemeProvider *m_provider;
     const KGameTheme *m_currentTheme = nullptr; // will be loaded on first use
@@ -168,7 +169,8 @@ public Q_SLOTS:
     void fetchPixmap();
 
 public:
-    KGameRendererClient *m_parent;
+    KGameRendererClient *const m_parent;
+
     KGameRenderer *m_renderer;
 
     KGRInternal::ClientSpec m_spec;

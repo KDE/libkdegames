@@ -30,7 +30,8 @@ public:
     }
 
 public:
-    KGamePropertyHandler *q;
+    KGamePropertyHandler *const q;
+
     QMap<int, QString> mNameMap;
     QMultiHash<int, KGamePropertyBase *> mIdDict;
     int mUniqueId = KGamePropertyBase::IdAutomatic;

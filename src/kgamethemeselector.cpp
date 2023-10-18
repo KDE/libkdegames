@@ -37,7 +37,8 @@ const QSize ThumbnailBaseSize(64, 64);
 class KGameThemeSelectorPrivate
 {
 public:
-    KGameThemeSelector *q;
+    KGameThemeSelector *const q;
+
     KGameThemeProvider *m_provider;
     KGameThemeSelector::Options m_options;
     QListWidget *m_list;

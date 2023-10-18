@@ -28,7 +28,7 @@ public:
     QPainterPath shape() const override;
 
 public:
-    KGameRenderedGraphicsObject *m_parent;
+    KGameRenderedGraphicsObject *const m_parent;
 
     QGraphicsView *m_primaryView = nullptr;
     QSize m_correctRenderSize = {0, 0};
