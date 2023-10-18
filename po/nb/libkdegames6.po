@@ -627,6 +627,3 @@ msgstr "Asynkrone inndata"
 #, kde-format
 msgid "myTurn"
 msgstr "Min tur"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Velg spill&type"

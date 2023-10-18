@@ -617,6 +617,3 @@ msgstr ""
 #, kde-format
 msgid "myTurn"
 msgstr "muVuorru"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Vállje &speallošlája"

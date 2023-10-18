@@ -622,6 +622,3 @@ msgstr "AsynkInn"
 #, kde-format
 msgid "myTurn"
 msgstr "minTur"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Vel spel&type"
