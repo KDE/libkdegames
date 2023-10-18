@@ -41,18 +41,18 @@ public:
     KGameThemeProvider *m_provider;
     KGameThemeSelector::Options m_options;
     QListWidget *m_list;
-    KNSWidgets::Button *m_knsButton;
+    KNSWidgets::Button *m_knsButton = nullptr;
     QString m_configFileName;
 
-    void fillList();
-
+public:
     KGameThemeSelectorPrivate(KGameThemeProvider *provider, KGameThemeSelector::Options options, KGameThemeSelector *q)
         : q(q)
         , m_provider(provider)
         , m_options(options)
-        , m_knsButton(nullptr)
     {
     }
+
+    void fillList();
 
     void _k_updateListSelection(const KGameTheme *theme);
     void _k_updateProviderSelection();

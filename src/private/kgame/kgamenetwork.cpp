@@ -24,19 +24,13 @@
 class KGameNetworkPrivate
 {
 public:
-    KGameNetworkPrivate()
-    {
-        mMessageClient = nullptr;
-        mMessageServer = nullptr;
-        mDisconnectId = 0;
-        mService = nullptr;
-    }
+    KGameNetworkPrivate() = default;
 
 public:
-    KMessageClient *mMessageClient;
-    KMessageServer *mMessageServer;
-    quint32 mDisconnectId; // Stores gameId() over a disconnect process
-    KDNSSD::PublicService *mService;
+    KMessageClient *mMessageClient = nullptr;
+    KMessageServer *mMessageServer = nullptr;
+    quint32 mDisconnectId = 0; // Stores gameId() over a disconnect process
+    KDNSSD::PublicService *mService = nullptr;
     QString mType;
     QString mName;
 

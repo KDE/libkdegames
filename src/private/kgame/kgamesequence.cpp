@@ -16,14 +16,11 @@
 class KGameSequencePrivate
 {
 public:
-    KGameSequencePrivate()
-        : mGame(nullptr)
-        , mCurrentPlayer(nullptr)
-    {
-    }
+    KGameSequencePrivate() = default;
 
-    KGame *mGame;
-    KPlayer *mCurrentPlayer;
+public:
+    KGame *mGame = nullptr;
+    KPlayer *mCurrentPlayer = nullptr;
 };
 
 KGameSequence::KGameSequence()

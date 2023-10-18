@@ -23,25 +23,21 @@
 class KGamePropertyHandlerPrivate
 {
 public:
-    KGamePropertyHandlerPrivate(KGamePropertyHandler *qq)
+    explicit KGamePropertyHandlerPrivate(KGamePropertyHandler *qq)
         : q(qq)
-        , mUniqueId(KGamePropertyBase::IdAutomatic)
-        , mId(0)
-        , mDefaultPolicy(KGamePropertyBase::PolicyLocal)
-        , mDefaultUserspace(true)
-        , mIndirectEmit(0)
     {
         // qDebug() << ": this=" << q;
     }
 
+public:
     KGamePropertyHandler *q;
     QMap<int, QString> mNameMap;
     QMultiHash<int, KGamePropertyBase *> mIdDict;
-    int mUniqueId;
-    int mId;
-    KGamePropertyBase::PropertyPolicy mDefaultPolicy;
-    bool mDefaultUserspace;
-    int mIndirectEmit;
+    int mUniqueId = KGamePropertyBase::IdAutomatic;
+    int mId = 0;
+    KGamePropertyBase::PropertyPolicy mDefaultPolicy = KGamePropertyBase::PolicyLocal;
+    bool mDefaultUserspace = true;
+    int mIndirectEmit = 0;
     QQueue<KGamePropertyBase *> mSignalQueue;
 };
 

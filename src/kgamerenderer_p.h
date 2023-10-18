@@ -103,6 +103,7 @@ class KGameRendererPrivate : public QObject
 
 public:
     KGameRendererPrivate(KGameThemeProvider *provider, unsigned cacheSize, KGameRenderer *parent);
+
     void _k_setTheme(const KGameTheme *theme);
     bool setTheme(const KGameTheme *theme);
     inline QString spriteFrameKey(const QString &key, int frame, bool normalizeFrameNo = false) const;
@@ -116,11 +117,12 @@ public:
     KGameRenderer *m_parent;
 
     KGameThemeProvider *m_provider;
-    const KGameTheme *m_currentTheme;
+    const KGameTheme *m_currentTheme = nullptr; // will be loaded on first use
+
     QString m_frameSuffix, m_sizePrefix, m_frameCountPrefix, m_boundsPrefix;
     unsigned m_cacheSize;
-    KGameRenderer::Strategies m_strategies;
-    int m_frameBaseIndex;
+    KGameRenderer::Strategies m_strategies = KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads;
+    int m_frameBaseIndex = 0;
 
     QThreadPool m_workerPool;
     mutable KGRInternal::RendererPool m_rendererPool;
@@ -128,7 +130,8 @@ public:
     QHash<KGameRendererClient *, QString> m_clients; // maps client -> cache key of current pixmap
     QStringList m_pendingRequests; // cache keys of pixmaps which are currently being rendered
 
-    KImageCache *m_imageCache;
+    KImageCache *m_imageCache = nullptr;
+
     // In multi-threaded scenarios, there are two possible ways to use KIC's
     // pixmap cache.
     // 1. The worker renders a QImage and stores it in the cache. The main

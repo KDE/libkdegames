@@ -15,7 +15,8 @@
 class KGameRenderedGraphicsObjectPrivate : public QGraphicsPixmapItem
 {
 public:
-    KGameRenderedGraphicsObjectPrivate(KGameRenderedGraphicsObject *parent);
+    explicit KGameRenderedGraphicsObjectPrivate(KGameRenderedGraphicsObject *parent);
+
     bool adjustRenderSize(); // returns whether an adjustment was made; WARNING: only call when m_primaryView != 0
     void adjustTransform();
 
@@ -28,17 +29,15 @@ public:
 
 public:
     KGameRenderedGraphicsObject *m_parent;
-    QGraphicsView *m_primaryView;
-    QSize m_correctRenderSize;
-    QSizeF m_fixedSize;
+
+    QGraphicsView *m_primaryView = nullptr;
+    QSize m_correctRenderSize = {0, 0};
+    QSizeF m_fixedSize = {-1, -1};
 };
 
 KGameRenderedGraphicsObjectPrivate::KGameRenderedGraphicsObjectPrivate(KGameRenderedGraphicsObject *parent)
     : QGraphicsPixmapItem(parent)
     , m_parent(parent)
-    , m_primaryView(nullptr)
-    , m_correctRenderSize(0, 0)
-    , m_fixedSize(-1, -1)
 {
 }
 

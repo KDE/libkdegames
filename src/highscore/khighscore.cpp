@@ -33,10 +33,9 @@
 class KHighscorePrivate
 {
 public:
-    KHighscorePrivate()
-    {
-    }
+    KHighscorePrivate() = default;
 
+public:
     QString group;
     bool global;
 };

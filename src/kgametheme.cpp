@@ -25,7 +25,8 @@ public:
     QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
     QMap<QString, QString> m_customData;
 
-    KGameThemePrivate(const QByteArray &id)
+public:
+    explicit KGameThemePrivate(const QByteArray &id)
         : m_identifier(id)
     {
     }

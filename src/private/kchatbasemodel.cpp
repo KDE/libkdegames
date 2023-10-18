@@ -21,12 +21,10 @@
 class KChatBaseMessagePrivate : public QSharedData
 {
 public:
-    KChatBaseMessagePrivate()
-    {
-        m_type = KChatBaseMessage::Normal;
-    }
+    KChatBaseMessagePrivate() = default;
 
-    KChatBaseMessage::MessageType m_type;
+public:
+    KChatBaseMessage::MessageType m_type = KChatBaseMessage::Normal;
 };
 
 KChatBaseMessage::KChatBaseMessage()
@@ -50,14 +48,11 @@ KChatBaseMessage &KChatBaseMessage::operator=(const KChatBaseMessage &other) = d
 class KChatBaseModelPrivate
 {
 public:
-    KChatBaseModelPrivate()
-    {
-        mAcceptMessage = true;
-        mMaxItems = -1;
-    }
+    KChatBaseModelPrivate() = default;
 
-    bool mAcceptMessage;
-    int mMaxItems;
+public:
+    bool mAcceptMessage = true;
+    int mMaxItems = 1;
 
     QList<int> mIndex2Id;
 

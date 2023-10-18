@@ -22,22 +22,19 @@
 class KMessageClientPrivate
 {
 public:
-    KMessageClientPrivate()
-        : adminID(0)
-        , connection(nullptr)
-    {
-    }
+    KMessageClientPrivate() = default;
 
     ~KMessageClientPrivate()
     {
         delete connection;
     }
 
-    quint32 adminID;
+public:
+    quint32 adminID = 0;
     QList<quint32> clientList;
-    KMessageIO *connection;
+    KMessageIO *connection = nullptr;
 
-    bool isLocked;
+    bool isLocked = false;
     QList<QByteArray> delayedMessages;
 };
 
@@ -45,7 +42,6 @@ KMessageClient::KMessageClient(QObject *parent)
     : QObject(parent)
     , d(new KMessageClientPrivate)
 {
-    d->isLocked = false;
 }
 
 KMessageClient::~KMessageClient()

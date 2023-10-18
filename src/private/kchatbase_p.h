@@ -21,6 +21,7 @@ public:
     KChatBasePrivate(KChatBaseModel *model, KChatBaseItemDelegate *delegate, QWidget *parent);
     virtual ~KChatBasePrivate() = default;
 
+public:
     QListView *mBox = nullptr;
     KLineEdit *mEdit = nullptr;
     QComboBox *mCombo = nullptr;

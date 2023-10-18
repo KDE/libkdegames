@@ -28,13 +28,11 @@
 class KPlayerPrivate
 {
 public:
-    KPlayerPrivate()
-    {
-        mNetworkPlayer = nullptr;
-    }
+    KPlayerPrivate() = default;
 
-    KGame *mGame;
-    bool mActive; // active player
+public:
+    KGame *mGame = nullptr;
+    bool mActive = true; // active player
     KPlayer::KGameIOList mInputList;
 
     // GameProperty
@@ -42,11 +40,11 @@ public:
     KGamePropertyBool mMyTurn; // Is it my turn to play (only useful if not async)?
     KGamePropertyInt mUserId; // a user defined id
 
-    quint32 mId;
-    bool mVirtual; // virtual player
-    int mPriority; // tag for replacement
+    quint32 mId = 0; // "0" is always an invalid ID!
+    bool mVirtual = false; // virtual player
+    int mPriority = 0; // tag for replacement
 
-    KPlayer *mNetworkPlayer; // replacement player
+    KPlayer *mNetworkPlayer = nullptr; // replacement player
 
     KGamePropertyHandler mProperties;
 
@@ -69,11 +67,6 @@ void KPlayer::init()
     qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "sizeof(m_Group)=" << sizeof(d->mGroup);
 
     d->mProperties.registerHandler(KGameMessage::IdPlayerProperty, this, SLOT(sendProperty(int, QDataStream &, bool *)), SLOT(emitSignal(KGamePropertyBase *)));
-    d->mVirtual = false;
-    d->mActive = true;
-    d->mGame = nullptr;
-    d->mId = 0; // "0" is always an invalid ID!
-    d->mPriority = 0;
     // I guess we cannot translate the group otherwise no
     // international connections are possible
 

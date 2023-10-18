@@ -71,12 +71,14 @@ public:
 
     QDialogButtonBox *buttonBox;
 
+    KScoreDialog *const q;
+
+public:
     // Q-Pointer
-    KScoreDialogPrivate(KScoreDialog *parent)
+    explicit KScoreDialogPrivate(KScoreDialog *parent)
         : q(parent)
     {
     }
-    KScoreDialog *const q;
 
     // Functions
     void loadScores();

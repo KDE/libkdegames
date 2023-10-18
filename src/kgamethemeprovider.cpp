@@ -29,23 +29,21 @@ public:
     QString m_name;
     QList<const KGameTheme *> m_themes;
     const QByteArray m_configKey;
-    mutable const KGameTheme *m_currentTheme;
-    const KGameTheme *m_defaultTheme;
+    mutable const KGameTheme *m_currentTheme = nullptr;
+    const KGameTheme *m_defaultTheme = nullptr;
     // this stores the arguments which were passed to discoverThemes()
     QString m_dtDirectory;
     QString m_dtDefaultThemeName;
-    const QMetaObject *m_dtThemeClass;
+    const QMetaObject *m_dtThemeClass = nullptr;
     // this remembers which themes were already discovered
     QStringList m_discoveredThemes;
     // this disables the addTheme() lock during rediscoverThemes()
-    bool m_inRediscover;
+    bool m_inRediscover = false;
 
+public:
     KGameThemeProviderPrivate(KGameThemeProvider *parent, const QByteArray &key)
         : q(parent)
         , m_configKey(key)
-        , m_currentTheme(nullptr)
-        , m_defaultTheme(nullptr)
-        , m_inRediscover(false)
     {
     }
 

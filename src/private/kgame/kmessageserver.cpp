@@ -61,14 +61,7 @@ public:
 class KMessageServerPrivate
 {
 public:
-    KMessageServerPrivate()
-        : mMaxClients(-1)
-        , mGameId(1)
-        , mUniqueClientNumber(1)
-        , mAdminID(0)
-        , mServerSocket(nullptr)
-    {
-    }
+    KMessageServerPrivate() = default;
 
     ~KMessageServerPrivate()
     {
@@ -76,18 +69,19 @@ public:
         qDeleteAll(mMessageQueue);
     }
 
-    int mMaxClients;
-    int mGameId;
+public:
+    int mMaxClients = -1;
+    int mGameId = 1;
     quint16 mCookie;
-    quint32 mUniqueClientNumber;
-    quint32 mAdminID;
+    quint32 mUniqueClientNumber = 1;
+    quint32 mAdminID = 0;
 
-    KMessageServerSocket *mServerSocket;
+    KMessageServerSocket *mServerSocket = nullptr;
 
     QList<KMessageIO *> mClientList;
     QQueue<MessageBuffer *> mMessageQueue;
     QTimer mTimer;
-    bool mIsRecursive;
+    bool mIsRecursive = false;
 };
 
 // ------------------ KMessageServer
@@ -96,7 +90,6 @@ KMessageServer::KMessageServer(quint16 cookie, QObject *parent)
     : QObject(parent)
     , d(new KMessageServerPrivate)
 {
-    d->mIsRecursive = false;
     d->mCookie = cookie;
     connect(&(d->mTimer), &QTimer::timeout, this, &KMessageServer::processOneMessage);
     qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << "CREATE(KMessageServer=" << this << ") cookie=" << d->mCookie << "sizeof(this)=" << sizeof(KMessageServer);

@@ -35,17 +35,13 @@
 class KGamePrivate
 {
 public:
-    KGamePrivate()
-    {
-        mUniquePlayerNumber = 0;
-        mPolicy = KGame::PolicyLocal;
-        mGameSequence = nullptr;
-    }
+    KGamePrivate() = default;
 
-    int mUniquePlayerNumber;
+public:
+    int mUniquePlayerNumber = 0;
     QQueue<KPlayer *> mAddPlayerList; // this is a list of to-be-added players. See addPlayer() docu
-    KGame::GamePolicy mPolicy;
-    KGameSequence *mGameSequence;
+    KGame::GamePolicy mPolicy = KGame::PolicyLocal;
+    KGameSequence *mGameSequence = nullptr;
 
     KGamePropertyHandler *mProperties;
 

@@ -29,18 +29,15 @@ public:
     KGameChatPrivate(KChatBaseModel *model, KChatBaseItemDelegate *delegate, QWidget *parent)
         : KChatBasePrivate(model, delegate, parent)
     {
-        mFromPlayer = nullptr;
-        mGame = nullptr;
-
-        mToMyGroup = -1;
     }
 
-    KGame *mGame;
-    KPlayer *mFromPlayer;
+public:
+    KGame *mGame = nullptr;
+    KPlayer *mFromPlayer = nullptr;
     int mMessageId;
 
     QMap<int, int> mSendId2PlayerId;
-    int mToMyGroup; // just as the above - but for the group, not for players
+    int mToMyGroup = -1; // just as the above - but for the group, not for players
 };
 
 KGameChat::KGameChat(KGame *g, int msgid, QWidget *parent, KChatBaseModel *model, KChatBaseItemDelegate *delegate)

@@ -16,13 +16,11 @@
 class KGameClockPrivate
 {
 public:
-    KGameClockPrivate()
-        : totalSeconds(0)
-    {
-    }
+    KGameClockPrivate() = default;
 
+public:
     QTimer *timerClock;
-    uint totalSeconds;
+    uint totalSeconds = 0;
     KGameClock::ClockType clocktype;
 };
 

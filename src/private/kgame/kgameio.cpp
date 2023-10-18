@@ -28,13 +28,11 @@
 class KGameIOPrivate
 {
 public:
-    KGameIOPrivate()
-        : mPlayer(nullptr)
-    {
-    }
+    KGameIOPrivate() = default;
     virtual ~KGameIOPrivate() = default;
 
-    KPlayer *mPlayer;
+public:
+    KPlayer *mPlayer = nullptr;
 };
 
 // ----------------------- Generic IO -------------------------
@@ -250,15 +248,12 @@ bool KGameMouseIO::eventFilter(QObject *o, QEvent *e)
 class KGameProcessIOPrivate : public KGameIOPrivate
 {
 public:
-    KGameProcessIOPrivate()
-    {
-        // mMessageServer = 0;
-        // mMessageClient = 0;
-        mProcessIO = nullptr;
-    }
-    // KMessageServer *mMessageServer;
-    // KMessageClient *mMessageClient;
-    KMessageProcess *mProcessIO;
+    KGameProcessIOPrivate() = default;
+
+public:
+    // KMessageServer *mMessageServer = nullptr;
+    // KMessageClient *mMessageClient = nullptr;
+    KMessageProcess *mProcessIO = nullptr;
 };
 
 // ----------------------- Process IO ---------------------------
@@ -427,21 +422,15 @@ class KGameComputerIOPrivate : public KGameIOPrivate
 {
     // TODO: maybe these should be KGameProperties!!
 public:
-    KGameComputerIOPrivate()
-    {
-        mAdvanceCounter = 0;
-        mReactionPeriod = 0;
+    KGameComputerIOPrivate() = default;
 
-        mPauseCounter = 0;
+public:
+    int mAdvanceCounter = 0;
+    int mReactionPeriod = 0;
 
-        mAdvanceTimer = nullptr;
-    }
-    int mAdvanceCounter;
-    int mReactionPeriod;
+    int mPauseCounter = 0;
 
-    int mPauseCounter;
-
-    QTimer *mAdvanceTimer;
+    QTimer *mAdvanceTimer = nullptr;
 };
 
 KGameComputerIO::KGameComputerIO()

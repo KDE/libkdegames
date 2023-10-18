@@ -16,20 +16,15 @@
 class KGameSoundPrivate
 {
 public:
-    KGameSound::PlaybackType m_type;
-    qreal m_volume;
+    KGameSound::PlaybackType m_type = KGameSound::AmbientPlayback;
+    qreal m_volume = 1.0;
     QPointF m_pos;
 
-    bool m_valid;
-    ALuint m_buffer;
+    bool m_valid = false;
+    ALuint m_buffer = AL_NONE;
 
-    KGameSoundPrivate()
-        : m_type(KGameSound::AmbientPlayback)
-        , m_volume(1.0)
-        , m_valid(false)
-        , m_buffer(AL_NONE)
-    {
-    }
+public:
+    KGameSoundPrivate() = default;
 };
 
 // BEGIN KGameSound

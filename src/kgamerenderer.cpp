@@ -35,17 +35,13 @@ static const QString cacheName(QByteArray theme)
 KGameRendererPrivate::KGameRendererPrivate(KGameThemeProvider *provider, unsigned cacheSize, KGameRenderer *parent)
     : m_parent(parent)
     , m_provider(provider)
-    , m_currentTheme(nullptr) // will be loaded on first use
     , m_frameSuffix(QStringLiteral("_%1"))
     , m_sizePrefix(QStringLiteral("%1-%2-"))
     , m_frameCountPrefix(QStringLiteral("fc-"))
     , m_boundsPrefix(QStringLiteral("br-"))
     // default cache size: 3 MiB = 3 << 20 bytes
     , m_cacheSize((cacheSize == 0 ? 3 : cacheSize) << 20)
-    , m_strategies(KGameRenderer::UseDiskCache | KGameRenderer::UseRenderingThreads)
-    , m_frameBaseIndex(0)
     , m_rendererPool(&m_workerPool)
-    , m_imageCache(nullptr)
 {
     qRegisterMetaType<KGRInternal::Job *>();
 }

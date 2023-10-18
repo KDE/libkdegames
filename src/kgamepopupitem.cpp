@@ -93,18 +93,9 @@ private:
     const KGamePopupItemPrivate &operator=(const KGamePopupItemPrivate &);
 
 public:
-    KGamePopupItemPrivate()
-        : m_position(KGamePopupItem::BottomLeft)
-        , m_timeout(2000)
-        , m_opacity(1.0)
-        , m_animOpacity(-1)
-        , m_hoveredByMouse(false)
-        , m_hideOnClick(true)
-        , m_textChildItem(nullptr)
-        , m_sharpness(KGamePopupItem::Square)
-        , m_linkHovered(false)
-    {
-    }
+    KGamePopupItemPrivate() = default;
+
+public:
     /**
      * Timeline for animations
      */
@@ -128,19 +119,19 @@ public:
     /**
      * Position where item will appear
      */
-    KGamePopupItem::Position m_position;
+    KGamePopupItem::Position m_position = KGamePopupItem::BottomLeft;
     /**
      * Timeout to stay visible on screen
      */
-    int m_timeout;
+    int m_timeout = 2000;
     /**
      * Item opacity
      */
-    qreal m_opacity;
+    qreal m_opacity = 1.0;
     /**
      * Opacity used while animating appearing in center
      */
-    qreal m_animOpacity;
+    qreal m_animOpacity = -1;
     /**
      * Pixmap to display at the left of the text
      */
@@ -148,15 +139,15 @@ public:
     /**
      * Set to true when mouse hovers the message
      */
-    bool m_hoveredByMouse;
+    bool m_hoveredByMouse = false;
     /**
      * Set to true if this popup item hides on mouse click.
      */
-    bool m_hideOnClick;
+    bool m_hideOnClick = true;
     /**
      * Child of KGamePopupItem used to display text
      */
-    TextItemWithOpacity *m_textChildItem;
+    TextItemWithOpacity *m_textChildItem = nullptr;
     /**
      * Part of the scene that is actually visible in QGraphicsView
      * This is needed for item to work correctly when scene is larger than
@@ -170,7 +161,7 @@ public:
     /**
      * popup angles sharpness
      */
-    KGamePopupItem::Sharpness m_sharpness;
+    KGamePopupItem::Sharpness m_sharpness = KGamePopupItem::Square;
     /**
      * painter path to draw a frame
      */
@@ -178,7 +169,7 @@ public:
     /**
      * Indicates if some link is hovered in text item
      */
-    bool m_linkHovered;
+    bool m_linkHovered = false;
 };
 
 KGamePopupItem::KGamePopupItem(QGraphicsItem *parent)

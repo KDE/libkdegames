@@ -38,6 +38,7 @@ public:
     QByteArray m_key;
     QString m_title;
 
+public:
     KGameDifficultyLevelPrivate(int hardness, const QByteArray &key, const QString &title, KGameDifficultyLevel::StandardLevel level, bool isDefault);
     static KGameDifficultyLevelPrivate *fromStandardLevel(KGameDifficultyLevel::StandardLevel level, bool isDefault);
 };
@@ -145,15 +146,12 @@ class KGameDifficultyPrivate
 {
 public:
     QList<const KGameDifficultyLevel *> m_levels;
-    mutable const KGameDifficultyLevel *m_currentLevel;
-    bool m_editable, m_gameRunning;
+    mutable const KGameDifficultyLevel *m_currentLevel = nullptr;
+    bool m_editable = true;
+    bool m_gameRunning = false;
 
-    KGameDifficultyPrivate()
-        : m_currentLevel(nullptr)
-        , m_editable(true)
-        , m_gameRunning(false)
-    {
-    }
+public:
+    KGameDifficultyPrivate() = default;
 };
 
 static void saveLevel()
