@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-17 01:39+0000\n"
+"POT-Creation-Date: 2023-10-19 01:40+0000\n"
 "PO-Revision-Date: 2012-09-19 08:17+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Traditional <kde-tw@googlegroups.com>\n"
@@ -19,80 +19,80 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: highscore/khighscore.cpp:149
+#: highscore/khighscore.cpp:154
 #, kde-format
 msgid "Retry"
 msgstr "重試"
 
-#: highscore/khighscore.cpp:151
+#: highscore/khighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 msgstr "無法存取高分榜的檔案。可能另一個玩家正在改寫它。"
 
-#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
+#: highscore/kscoredialog.cpp:100 highscore/kscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
 msgstr "高分榜"
 
-#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
+#: highscore/kscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
 msgid "Name"
 msgstr "名稱"
 
-#: highscore/kscoredialog.cpp:112
+#: highscore/kscoredialog.cpp:116
 #, kde-format
 msgid "Date"
 msgstr "日期"
 
-#: highscore/kscoredialog.cpp:114
+#: highscore/kscoredialog.cpp:118
 #, kde-format
 msgid "Level"
 msgstr "等級"
 
-#: highscore/kscoredialog.cpp:116
+#: highscore/kscoredialog.cpp:120
 #, kde-format
 msgid "Score"
 msgstr "分數"
 
-#: highscore/kscoredialog.cpp:118
+#: highscore/kscoredialog.cpp:122
 #, kde-format
 msgid "Time"
 msgstr "時間"
 
-#: highscore/kscoredialog.cpp:266
+#: highscore/kscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
 msgstr "排名"
 
-#: highscore/kscoredialog.cpp:287
+#: highscore/kscoredialog.cpp:309
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
 msgstr "記住(&R)"
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
 msgstr "遺忘(&F)"
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
 msgstr "記住高分紀錄"
 
-#: highscore/kscoredialog.cpp:527
+#: highscore/kscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
 msgstr "遺忘高分紀錄"
 
-#: highscore/kscoredialog.cpp:535
+#: highscore/kscoredialog.cpp:559
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -101,7 +101,7 @@ msgstr ""
 "太棒了！\n"
 "您刷新紀錄了！"
 
-#: highscore/kscoredialog.cpp:537
+#: highscore/kscoredialog.cpp:561
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -110,289 +110,289 @@ msgstr ""
 "太棒了！\n"
 "您擠進高分榜中了！"
 
-#: kgamedifficulty.cpp:75
+#: kgamedifficulty.cpp:76
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "一擊就倒"
 
-#: kgamedifficulty.cpp:78
+#: kgamedifficulty.cpp:79
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "好對付"
 
-#: kgamedifficulty.cpp:81
+#: kgamedifficulty.cpp:82
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "容易"
 
-#: kgamedifficulty.cpp:84
+#: kgamedifficulty.cpp:85
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "中等"
 
-#: kgamedifficulty.cpp:87
+#: kgamedifficulty.cpp:88
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "強"
 
-#: kgamedifficulty.cpp:90
+#: kgamedifficulty.cpp:91
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "非常強"
 
-#: kgamedifficulty.cpp:93
+#: kgamedifficulty.cpp:94
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "強到不行"
 
-#: kgamedifficulty.cpp:96
+#: kgamedifficulty.cpp:97
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "超級賽亞人"
 
-#: kgamedifficulty.cpp:290
+#: kgamedifficulty.cpp:316
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "改變遊戲的困難等級會中止目前的遊戲。"
 
-#: kgamedifficulty.cpp:292
+#: kgamedifficulty.cpp:318
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "改變困難等級"
 
-#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "困難度"
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "設定困難等級"
 
-#: kgamedifficulty.cpp:386
+#: kgamedifficulty.cpp:412
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "設定遊戲的困難等級"
 
-#: kgamethemeselector.cpp:103
+#: kgamestandardaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "新遊戲(&N)"
+
+#: kgamestandardaction.cpp:36
+msgid "Start a new game."
+msgstr "開始新遊戲。"
+
+#: kgamestandardaction.cpp:36
+msgid "Start a new game"
+msgstr "開始新遊戲"
+
+#: kgamestandardaction.cpp:38
+msgid "&Load..."
+msgstr "載入(&L)"
+
+#: kgamestandardaction.cpp:38
+msgid "Open a saved game..."
+msgstr "開啟已儲存的遊戲..."
+
+#: kgamestandardaction.cpp:40
+msgid "Load &Recent"
+msgstr "載入最近的(&R)"
+
+#: kgamestandardaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "開啟最近儲存的遊戲..."
+
+#: kgamestandardaction.cpp:42
+msgid "Restart &Game"
+msgstr "重新開始遊戲(&G)"
+
+#: kgamestandardaction.cpp:42
+msgid "Restart the game"
+msgstr "重新開始遊戲"
+
+#: kgamestandardaction.cpp:44
+msgid "&Save"
+msgstr "儲存(&S)"
+
+#: kgamestandardaction.cpp:44
+msgid "Save the current game"
+msgstr "儲存目前的遊戲"
+
+#: kgamestandardaction.cpp:46
+msgid "Save &As..."
+msgstr "另存新檔...(&A)"
+
+#: kgamestandardaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "儲存目前的遊戲到另一個檔案"
+
+#: kgamestandardaction.cpp:48
+msgid "&End Game"
+msgstr "遊戲結束(&E)"
+
+#: kgamestandardaction.cpp:48
+msgid "End the current game"
+msgstr "結束目前的遊戲"
+
+#: kgamestandardaction.cpp:50
+msgid "Pa&use"
+msgstr "暫停(&U)"
+
+#: kgamestandardaction.cpp:50
+msgid "Pause the game"
+msgstr "暫停遊戲"
+
+#: kgamestandardaction.cpp:52
+msgid "Show &High Scores"
+msgstr "顯示高分紀錄(&H)"
+
+#: kgamestandardaction.cpp:52
+msgid "Show high scores"
+msgstr "顯示高分紀錄"
+
+#: kgamestandardaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "清除高分紀錄(&C)"
+
+#: kgamestandardaction.cpp:54
+msgid "Clear high scores"
+msgstr "清除高分紀錄"
+
+#: kgamestandardaction.cpp:56
+msgid "Show Statistics"
+msgstr "顯示統計"
+
+#: kgamestandardaction.cpp:56
+msgid "Show statistics"
+msgstr "顯示統計"
+
+#: kgamestandardaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "清除統計(&C)"
+
+#: kgamestandardaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "刪除所有的統計紀錄。"
+
+#: kgamestandardaction.cpp:60
+msgid "&Print..."
+msgstr "列印(&P)..."
+
+#: kgamestandardaction.cpp:62
+msgid "&Quit"
+msgstr "離開(&Q)"
+
+#: kgamestandardaction.cpp:62
+msgid "Quit the program"
+msgstr "離開程式"
+
+#: kgamestandardaction.cpp:66
+msgid "Repeat"
+msgstr "重複"
+
+#: kgamestandardaction.cpp:66
+msgid "Repeat the last move"
+msgstr "重覆最後一步"
+
+#: kgamestandardaction.cpp:68
+msgid "Und&o"
+msgstr "復原(&O)"
+
+#: kgamestandardaction.cpp:68
+msgid "Undo the last move"
+msgstr "回手"
+
+#: kgamestandardaction.cpp:70
+msgid "Re&do"
+msgstr "重做(&D)"
+
+#: kgamestandardaction.cpp:70
+msgid "Redo the latest move"
+msgstr "重做最後一步"
+
+#: kgamestandardaction.cpp:72
+msgid "&Roll Dice"
+msgstr "擲骰子(&R)"
+
+#: kgamestandardaction.cpp:72
+msgid "Roll the dice"
+msgstr "擲骰子"
+
+#: kgamestandardaction.cpp:74
+msgid "End Turn"
+msgstr "回合結束"
+
+#: kgamestandardaction.cpp:76
+msgid "&Hint"
+msgstr "提示(&H)"
+
+#: kgamestandardaction.cpp:76
+msgid "Give a hint"
+msgstr "給個提示"
+
+#: kgamestandardaction.cpp:78
+msgid "&Demo"
+msgstr "示範(&D)"
+
+#: kgamestandardaction.cpp:78
+msgid "Play a demo"
+msgstr "示範玩遊戲"
+
+#: kgamestandardaction.cpp:80
+msgid "&Solve"
+msgstr "解答(&S)"
+
+#: kgamestandardaction.cpp:80
+msgid "Solve the game"
+msgstr "解決此遊戲"
+
+#: kgamestandardaction.cpp:84
+msgid "Configure &Carddecks..."
+msgstr "設定撲克牌圖案(&C)"
+
+#: kgamestandardaction.cpp:86
+msgid "Configure &High Scores..."
+msgstr "設定高分紀錄(&H)..."
+
+#: kgamethemeselector.cpp:108
 #, kde-format
 msgid "Get New Themes..."
 msgstr "取得新主題..."
 
-#: kgamethemeselector.cpp:203
+#: kgamethemeselector.cpp:210
 #, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "選取主題"
 
-#: kgamethemeselector.cpp:275
+#: kgamethemeselector.cpp:282
 #, kde-format
 msgid "[No name]"
 msgstr "【未命名】"
 
-#: kgamethemeselector.cpp:291
+#: kgamethemeselector.cpp:298
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "由：%1"
-
-#: kstandardgameaction.cpp:36
-msgctxt "new game"
-msgid "&New"
-msgstr "新遊戲(&N)"
-
-#: kstandardgameaction.cpp:36
-msgid "Start a new game."
-msgstr "開始新遊戲。"
-
-#: kstandardgameaction.cpp:36
-msgid "Start a new game"
-msgstr "開始新遊戲"
-
-#: kstandardgameaction.cpp:38
-msgid "&Load..."
-msgstr "載入(&L)"
-
-#: kstandardgameaction.cpp:38
-msgid "Open a saved game..."
-msgstr "開啟已儲存的遊戲..."
-
-#: kstandardgameaction.cpp:40
-msgid "Load &Recent"
-msgstr "載入最近的(&R)"
-
-#: kstandardgameaction.cpp:40
-msgid "Open a recently saved game..."
-msgstr "開啟最近儲存的遊戲..."
-
-#: kstandardgameaction.cpp:42
-msgid "Restart &Game"
-msgstr "重新開始遊戲(&G)"
-
-#: kstandardgameaction.cpp:42
-msgid "Restart the game"
-msgstr "重新開始遊戲"
-
-#: kstandardgameaction.cpp:44
-msgid "&Save"
-msgstr "儲存(&S)"
-
-#: kstandardgameaction.cpp:44
-msgid "Save the current game"
-msgstr "儲存目前的遊戲"
-
-#: kstandardgameaction.cpp:46
-msgid "Save &As..."
-msgstr "另存新檔...(&A)"
-
-#: kstandardgameaction.cpp:46
-msgid "Save the current game to another file"
-msgstr "儲存目前的遊戲到另一個檔案"
-
-#: kstandardgameaction.cpp:48
-msgid "&End Game"
-msgstr "遊戲結束(&E)"
-
-#: kstandardgameaction.cpp:48
-msgid "End the current game"
-msgstr "結束目前的遊戲"
-
-#: kstandardgameaction.cpp:50
-msgid "Pa&use"
-msgstr "暫停(&U)"
-
-#: kstandardgameaction.cpp:50
-msgid "Pause the game"
-msgstr "暫停遊戲"
-
-#: kstandardgameaction.cpp:52
-msgid "Show &High Scores"
-msgstr "顯示高分紀錄(&H)"
-
-#: kstandardgameaction.cpp:52
-msgid "Show high scores"
-msgstr "顯示高分紀錄"
-
-#: kstandardgameaction.cpp:54
-msgid "&Clear High Scores"
-msgstr "清除高分紀錄(&C)"
-
-#: kstandardgameaction.cpp:54
-msgid "Clear high scores"
-msgstr "清除高分紀錄"
-
-#: kstandardgameaction.cpp:56
-msgid "Show Statistics"
-msgstr "顯示統計"
-
-#: kstandardgameaction.cpp:56
-msgid "Show statistics"
-msgstr "顯示統計"
-
-#: kstandardgameaction.cpp:58
-msgid "&Clear Statistics"
-msgstr "清除統計(&C)"
-
-#: kstandardgameaction.cpp:58
-msgid "Delete all-time statistics."
-msgstr "刪除所有的統計紀錄。"
-
-#: kstandardgameaction.cpp:60
-msgid "&Print..."
-msgstr "列印(&P)..."
-
-#: kstandardgameaction.cpp:62
-msgid "&Quit"
-msgstr "離開(&Q)"
-
-#: kstandardgameaction.cpp:62
-msgid "Quit the program"
-msgstr "離開程式"
-
-#: kstandardgameaction.cpp:66
-msgid "Repeat"
-msgstr "重複"
-
-#: kstandardgameaction.cpp:66
-msgid "Repeat the last move"
-msgstr "重覆最後一步"
-
-#: kstandardgameaction.cpp:68
-msgid "Und&o"
-msgstr "復原(&O)"
-
-#: kstandardgameaction.cpp:68
-msgid "Undo the last move"
-msgstr "回手"
-
-#: kstandardgameaction.cpp:70
-msgid "Re&do"
-msgstr "重做(&D)"
-
-#: kstandardgameaction.cpp:70
-msgid "Redo the latest move"
-msgstr "重做最後一步"
-
-#: kstandardgameaction.cpp:72
-msgid "&Roll Dice"
-msgstr "擲骰子(&R)"
-
-#: kstandardgameaction.cpp:72
-msgid "Roll the dice"
-msgstr "擲骰子"
-
-#: kstandardgameaction.cpp:74
-msgid "End Turn"
-msgstr "回合結束"
-
-#: kstandardgameaction.cpp:76
-msgid "&Hint"
-msgstr "提示(&H)"
-
-#: kstandardgameaction.cpp:76
-msgid "Give a hint"
-msgstr "給個提示"
-
-#: kstandardgameaction.cpp:78
-msgid "&Demo"
-msgstr "示範(&D)"
-
-#: kstandardgameaction.cpp:78
-msgid "Play a demo"
-msgstr "示範玩遊戲"
-
-#: kstandardgameaction.cpp:80
-msgid "&Solve"
-msgstr "解答(&S)"
-
-#: kstandardgameaction.cpp:80
-msgid "Solve the game"
-msgstr "解決此遊戲"
-
-#: kstandardgameaction.cpp:84
-msgid "Configure &Carddecks..."
-msgstr "設定撲克牌圖案(&C)"
-
-#: kstandardgameaction.cpp:86
-msgid "Configure &High Scores..."
-msgstr "設定高分紀錄(&H)..."
 
 #: private/kchatbase.cpp:98
 #, kde-format
 msgid "Send to All Players"
 msgstr "發送至所有玩家"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:174
 #, kde-format
 msgid "Send to %1"
 msgstr "發送至 %1"
@@ -403,33 +403,33 @@ msgstr "發送至 %1"
 msgid "%1: "
 msgstr "%1："
 
-#: private/kgame/kgame.cpp:73
+#: private/kgame/kgame.cpp:69
 #, kde-format
 msgid "MaxPlayers"
 msgstr "最大玩家數"
 
-#: private/kgame/kgame.cpp:75
+#: private/kgame/kgame.cpp:71
 #, kde-format
 msgid "MinPlayers"
 msgstr "最小玩家數"
 
-#: private/kgame/kgame.cpp:77
+#: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "GameStatus"
 msgstr "遊戲狀態"
 
-#: private/kgame/kgamechat.cpp:84
+#: private/kgame/kgamechat.cpp:81
 #, kde-format
 msgid "Player %1"
 msgstr "玩家 %1"
 
-#: private/kgame/kgamechat.cpp:92
+#: private/kgame/kgamechat.cpp:89
 #, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "未知"
 
-#: private/kgame/kgamechat.cpp:234
+#: private/kgame/kgamechat.cpp:231
 #, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "發送至我的群組（%1）"
@@ -556,63 +556,63 @@ msgstr "查詢行程"
 msgid "Player ID"
 msgstr "玩家 ID"
 
-#: private/kgame/kgamepropertyhandler.cpp:163
+#: private/kgame/kgamepropertyhandler.cpp:160
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1（%2）"
 
-#: private/kgame/kgamepropertyhandler.cpp:165
+#: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "未命名 - ID：%1"
 
-#: private/kgame/kgamepropertyhandler.cpp:169
+#: private/kgame/kgamepropertyhandler.cpp:166
 #, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 未註冊"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:338
 #, kde-format
 msgid "NULL pointer"
 msgstr "NULL pointer"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "True"
 msgstr "真"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "False"
 msgstr "假"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:361
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
 
-#: private/kgame/kplayer.cpp:80
+#: private/kgame/kplayer.cpp:73
 #, kde-format
 msgid "UserId"
 msgstr "使用者 ID"
 
-#: private/kgame/kplayer.cpp:82
+#: private/kgame/kplayer.cpp:75
 #, kde-format
 msgid "Group"
 msgstr "群組"
 
-#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
+#: private/kgame/kplayer.cpp:76 private/kgame/kplayer.cpp:78
 #, kde-format
 msgid "default"
 msgstr "預設"
 
-#: private/kgame/kplayer.cpp:87
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
 msgstr "非同步輸入"
 
-#: private/kgame/kplayer.cpp:89
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "myTurn"
 msgstr "我的回合"

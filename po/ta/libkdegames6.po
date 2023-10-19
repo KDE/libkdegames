@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-17 01:39+0000\n"
+"POT-Creation-Date: 2023-10-19 01:40+0000\n"
 "PO-Revision-Date: 2005-03-22 22:18-0800\n"
 "Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
 "Language-Team: English <en@li.org>\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: highscore/khighscore.cpp:149
+#: highscore/khighscore.cpp:154
 #, kde-format
 msgid "Retry"
 msgstr "மறுபடி முயற்சி செய்"
 
-#: highscore/khighscore.cpp:151
+#: highscore/khighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -29,71 +29,71 @@ msgid ""
 msgstr ""
 "அதிக புள்ளிகள் கோப்பினை இயக்க முடியவில்லை. தற்போது மற்றொரு பயனர் எழுதிக் கொண்டிருக்கலாம்."
 
-#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
+#: highscore/kscoredialog.cpp:100 highscore/kscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
 msgstr "அதிக மதிப்பெண்கள்"
 
-#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
+#: highscore/kscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
 msgid "Name"
 msgstr "பெயர்"
 
-#: highscore/kscoredialog.cpp:112
+#: highscore/kscoredialog.cpp:116
 #, kde-format
 msgid "Date"
 msgstr "தேதி"
 
-#: highscore/kscoredialog.cpp:114
+#: highscore/kscoredialog.cpp:118
 #, kde-format
 msgid "Level"
 msgstr "நிலை"
 
-#: highscore/kscoredialog.cpp:116
+#: highscore/kscoredialog.cpp:120
 #, kde-format
 msgid "Score"
 msgstr "மதிப்பெண்"
 
-#: highscore/kscoredialog.cpp:118
+#: highscore/kscoredialog.cpp:122
 #, kde-format
 msgid "Time"
 msgstr "நேரம்"
 
-#: highscore/kscoredialog.cpp:266
+#: highscore/kscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
 msgstr "தரவரிசை"
 
-#: highscore/kscoredialog.cpp:287
+#: highscore/kscoredialog.cpp:309
 #, fuzzy, kde-format
 #| msgid "#%1"
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
 msgstr ""
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
 msgstr ""
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:550
 #, fuzzy, kde-format
 #| msgid "Highscores"
 msgid "Remember this high score"
 msgstr "அதிக மதிப்பெண்கள்"
 
-#: highscore/kscoredialog.cpp:527
+#: highscore/kscoredialog.cpp:551
 #, fuzzy, kde-format
 #| msgid "Highscores"
 msgid "Forget this high score"
 msgstr "அதிக மதிப்பெண்கள்"
 
-#: highscore/kscoredialog.cpp:535
+#: highscore/kscoredialog.cpp:559
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -102,7 +102,7 @@ msgstr ""
 "சிறப்பாக முடித்துள்ளீர்!\n"
 "நீங்கள் புதிய அதிக புள்ளிகளை கொண்டுள்ளீர்!"
 
-#: highscore/kscoredialog.cpp:537
+#: highscore/kscoredialog.cpp:561
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -111,319 +111,319 @@ msgstr ""
 "நன்றாக முடித்துள்ளீர்!\n"
 "நீங்கள் அதிக புள்ளிகள் பட்டியலில் வந்துவிட்டீர்!"
 
-#: kgamedifficulty.cpp:75
+#: kgamedifficulty.cpp:76
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr ""
 
-#: kgamedifficulty.cpp:78
+#: kgamedifficulty.cpp:79
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr ""
 
-#: kgamedifficulty.cpp:81
+#: kgamedifficulty.cpp:82
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr ""
 
-#: kgamedifficulty.cpp:84
+#: kgamedifficulty.cpp:85
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr ""
 
-#: kgamedifficulty.cpp:87
+#: kgamedifficulty.cpp:88
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr ""
 
-#: kgamedifficulty.cpp:90
+#: kgamedifficulty.cpp:91
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr ""
 
-#: kgamedifficulty.cpp:93
+#: kgamedifficulty.cpp:94
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr ""
 
-#: kgamedifficulty.cpp:96
+#: kgamedifficulty.cpp:97
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr ""
 
-#: kgamedifficulty.cpp:290
+#: kgamedifficulty.cpp:316
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr ""
 
-#: kgamedifficulty.cpp:292
+#: kgamedifficulty.cpp:318
 #, kde-format
 msgid "Change the difficulty level"
 msgstr ""
 
-#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr ""
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
 msgstr ""
 
-#: kgamedifficulty.cpp:386
+#: kgamedifficulty.cpp:412
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr ""
 
-#: kgamethemeselector.cpp:103
+#: kgamestandardaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&புதிது"
+
+#: kgamestandardaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game."
+msgstr "வலைப்பின்னல் விளையாட்டை உருவாக்கு"
+
+#: kgamestandardaction.cpp:36
+#, fuzzy
+#| msgid "Create a network game"
+msgid "Start a new game"
+msgstr "வலைப்பின்னல் விளையாட்டை உருவாக்கு"
+
+#: kgamestandardaction.cpp:38
+msgid "&Load..."
+msgstr "&உள்வாங்கு..."
+
+#: kgamestandardaction.cpp:38
+msgid "Open a saved game..."
+msgstr ""
+
+#: kgamestandardaction.cpp:40
+msgid "Load &Recent"
+msgstr "தற்போது &உள்வாங்கு"
+
+#: kgamestandardaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr ""
+
+#: kgamestandardaction.cpp:42
+msgid "Restart &Game"
+msgstr "&விளையாட்டை துவங்கு"
+
+#: kgamestandardaction.cpp:42
+#, fuzzy
+#| msgid "Restart &Game"
+msgid "Restart the game"
+msgstr "&விளையாட்டை துவங்கு"
+
+#: kgamestandardaction.cpp:44
+#, fuzzy
+msgid "&Save"
+msgstr "தீர்வு"
+
+#: kgamestandardaction.cpp:44
+msgid "Save the current game"
+msgstr ""
+
+#: kgamestandardaction.cpp:46
+msgid "Save &As..."
+msgstr "&என சேமி..."
+
+#: kgamestandardaction.cpp:46
+msgid "Save the current game to another file"
+msgstr ""
+
+#: kgamestandardaction.cpp:48
+msgid "&End Game"
+msgstr "விளையாட்டை &முடி"
+
+#: kgamestandardaction.cpp:48
+msgid "End the current game"
+msgstr ""
+
+#: kgamestandardaction.cpp:50
+msgid "Pa&use"
+msgstr "&தற்காலிக நிறுத்தம்"
+
+#: kgamestandardaction.cpp:50
+msgid "Pause the game"
+msgstr ""
+
+#: kgamestandardaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show &High Scores"
+msgstr "&அதிக மதிப்பெண்ணை காட்டு"
+
+#: kgamestandardaction.cpp:52
+#, fuzzy
+#| msgid "Show &Highscores"
+msgid "Show high scores"
+msgstr "&அதிக மதிப்பெண்ணை காட்டு"
+
+#: kgamestandardaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "&Clear High Scores"
+msgstr "அதிக மதிப்பெண்கள்"
+
+#: kgamestandardaction.cpp:54
+#, fuzzy
+#| msgid "Highscores"
+msgid "Clear high scores"
+msgstr "அதிக மதிப்பெண்கள்"
+
+#: kgamestandardaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show Statistics"
+msgstr "புள்ளி விவரம்"
+
+#: kgamestandardaction.cpp:56
+#, fuzzy
+#| msgid "Statistics"
+msgid "Show statistics"
+msgstr "புள்ளி விவரம்"
+
+#: kgamestandardaction.cpp:58
+#, fuzzy
+#| msgid "Statistics"
+msgid "&Clear Statistics"
+msgstr "புள்ளி விவரம்"
+
+#: kgamestandardaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr ""
+
+#: kgamestandardaction.cpp:60
+msgid "&Print..."
+msgstr ""
+
+#: kgamestandardaction.cpp:62
+#, fuzzy
+msgid "&Quit"
+msgstr "உதவிக்குறிப்பு"
+
+#: kgamestandardaction.cpp:62
+msgid "Quit the program"
+msgstr ""
+
+#: kgamestandardaction.cpp:66
+msgid "Repeat"
+msgstr "திரும்பச் செய்"
+
+#: kgamestandardaction.cpp:66
+msgid "Repeat the last move"
+msgstr ""
+
+#: kgamestandardaction.cpp:68
+msgid "Und&o"
+msgstr "&கைவிடு"
+
+#: kgamestandardaction.cpp:68
+msgid "Undo the last move"
+msgstr ""
+
+#: kgamestandardaction.cpp:70
+msgid "Re&do"
+msgstr "&மறுபடி செய்"
+
+#: kgamestandardaction.cpp:70
+msgid "Redo the latest move"
+msgstr ""
+
+#: kgamestandardaction.cpp:72
+msgid "&Roll Dice"
+msgstr "தாயக்கட்டையை உருட்டு"
+
+#: kgamestandardaction.cpp:72
+#, fuzzy
+#| msgid "&Roll Dice"
+msgid "Roll the dice"
+msgstr "தாயக்கட்டையை உருட்டு"
+
+#: kgamestandardaction.cpp:74
+msgid "End Turn"
+msgstr "இறுதி முறை"
+
+#: kgamestandardaction.cpp:76
+msgid "&Hint"
+msgstr "உதவிக்குறிப்பு"
+
+#: kgamestandardaction.cpp:76
+msgid "Give a hint"
+msgstr ""
+
+#: kgamestandardaction.cpp:78
+msgid "&Demo"
+msgstr "செய்முறை விளக்கம்"
+
+#: kgamestandardaction.cpp:78
+#, fuzzy
+#| msgid "Player Name"
+msgid "Play a demo"
+msgstr "விளையாட்டாளர் பெயர்"
+
+#: kgamestandardaction.cpp:80
+msgid "&Solve"
+msgstr "தீர்வு"
+
+#: kgamestandardaction.cpp:80
+msgid "Solve the game"
+msgstr ""
+
+#: kgamestandardaction.cpp:84
+msgid "Configure &Carddecks..."
+msgstr "உள்ளமை மற்றும்  அட்டைத் தளம் "
+
+#: kgamestandardaction.cpp:86
+#, fuzzy
+#| msgid "Configure &Highscores..."
+msgid "Configure &High Scores..."
+msgstr "அமைப்பு &அதிக மதிப்பெண்கள்..."
+
+#: kgamethemeselector.cpp:108
 #, kde-format
 msgid "Get New Themes..."
 msgstr ""
 
-#: kgamethemeselector.cpp:203
+#: kgamethemeselector.cpp:210
 #, fuzzy, kde-format
 #| msgid "Select player:"
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "விளையாட்டாளரை தேர்வு செய்:"
 
-#: kgamethemeselector.cpp:275
+#: kgamethemeselector.cpp:282
 #, fuzzy, kde-format
 #| msgid "Your name:"
 msgid "[No name]"
 msgstr "உங்கள் பெயர்:"
 
-#: kgamethemeselector.cpp:291
+#: kgamethemeselector.cpp:298
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr ""
-
-#: kstandardgameaction.cpp:36
-msgctxt "new game"
-msgid "&New"
-msgstr "&புதிது"
-
-#: kstandardgameaction.cpp:36
-#, fuzzy
-#| msgid "Create a network game"
-msgid "Start a new game."
-msgstr "வலைப்பின்னல் விளையாட்டை உருவாக்கு"
-
-#: kstandardgameaction.cpp:36
-#, fuzzy
-#| msgid "Create a network game"
-msgid "Start a new game"
-msgstr "வலைப்பின்னல் விளையாட்டை உருவாக்கு"
-
-#: kstandardgameaction.cpp:38
-msgid "&Load..."
-msgstr "&உள்வாங்கு..."
-
-#: kstandardgameaction.cpp:38
-msgid "Open a saved game..."
-msgstr ""
-
-#: kstandardgameaction.cpp:40
-msgid "Load &Recent"
-msgstr "தற்போது &உள்வாங்கு"
-
-#: kstandardgameaction.cpp:40
-msgid "Open a recently saved game..."
-msgstr ""
-
-#: kstandardgameaction.cpp:42
-msgid "Restart &Game"
-msgstr "&விளையாட்டை துவங்கு"
-
-#: kstandardgameaction.cpp:42
-#, fuzzy
-#| msgid "Restart &Game"
-msgid "Restart the game"
-msgstr "&விளையாட்டை துவங்கு"
-
-#: kstandardgameaction.cpp:44
-#, fuzzy
-msgid "&Save"
-msgstr "தீர்வு"
-
-#: kstandardgameaction.cpp:44
-msgid "Save the current game"
-msgstr ""
-
-#: kstandardgameaction.cpp:46
-msgid "Save &As..."
-msgstr "&என சேமி..."
-
-#: kstandardgameaction.cpp:46
-msgid "Save the current game to another file"
-msgstr ""
-
-#: kstandardgameaction.cpp:48
-msgid "&End Game"
-msgstr "விளையாட்டை &முடி"
-
-#: kstandardgameaction.cpp:48
-msgid "End the current game"
-msgstr ""
-
-#: kstandardgameaction.cpp:50
-msgid "Pa&use"
-msgstr "&தற்காலிக நிறுத்தம்"
-
-#: kstandardgameaction.cpp:50
-msgid "Pause the game"
-msgstr ""
-
-#: kstandardgameaction.cpp:52
-#, fuzzy
-#| msgid "Show &Highscores"
-msgid "Show &High Scores"
-msgstr "&அதிக மதிப்பெண்ணை காட்டு"
-
-#: kstandardgameaction.cpp:52
-#, fuzzy
-#| msgid "Show &Highscores"
-msgid "Show high scores"
-msgstr "&அதிக மதிப்பெண்ணை காட்டு"
-
-#: kstandardgameaction.cpp:54
-#, fuzzy
-#| msgid "Highscores"
-msgid "&Clear High Scores"
-msgstr "அதிக மதிப்பெண்கள்"
-
-#: kstandardgameaction.cpp:54
-#, fuzzy
-#| msgid "Highscores"
-msgid "Clear high scores"
-msgstr "அதிக மதிப்பெண்கள்"
-
-#: kstandardgameaction.cpp:56
-#, fuzzy
-#| msgid "Statistics"
-msgid "Show Statistics"
-msgstr "புள்ளி விவரம்"
-
-#: kstandardgameaction.cpp:56
-#, fuzzy
-#| msgid "Statistics"
-msgid "Show statistics"
-msgstr "புள்ளி விவரம்"
-
-#: kstandardgameaction.cpp:58
-#, fuzzy
-#| msgid "Statistics"
-msgid "&Clear Statistics"
-msgstr "புள்ளி விவரம்"
-
-#: kstandardgameaction.cpp:58
-msgid "Delete all-time statistics."
-msgstr ""
-
-#: kstandardgameaction.cpp:60
-msgid "&Print..."
-msgstr ""
-
-#: kstandardgameaction.cpp:62
-#, fuzzy
-msgid "&Quit"
-msgstr "உதவிக்குறிப்பு"
-
-#: kstandardgameaction.cpp:62
-msgid "Quit the program"
-msgstr ""
-
-#: kstandardgameaction.cpp:66
-msgid "Repeat"
-msgstr "திரும்பச் செய்"
-
-#: kstandardgameaction.cpp:66
-msgid "Repeat the last move"
-msgstr ""
-
-#: kstandardgameaction.cpp:68
-msgid "Und&o"
-msgstr "&கைவிடு"
-
-#: kstandardgameaction.cpp:68
-msgid "Undo the last move"
-msgstr ""
-
-#: kstandardgameaction.cpp:70
-msgid "Re&do"
-msgstr "&மறுபடி செய்"
-
-#: kstandardgameaction.cpp:70
-msgid "Redo the latest move"
-msgstr ""
-
-#: kstandardgameaction.cpp:72
-msgid "&Roll Dice"
-msgstr "தாயக்கட்டையை உருட்டு"
-
-#: kstandardgameaction.cpp:72
-#, fuzzy
-#| msgid "&Roll Dice"
-msgid "Roll the dice"
-msgstr "தாயக்கட்டையை உருட்டு"
-
-#: kstandardgameaction.cpp:74
-msgid "End Turn"
-msgstr "இறுதி முறை"
-
-#: kstandardgameaction.cpp:76
-msgid "&Hint"
-msgstr "உதவிக்குறிப்பு"
-
-#: kstandardgameaction.cpp:76
-msgid "Give a hint"
-msgstr ""
-
-#: kstandardgameaction.cpp:78
-msgid "&Demo"
-msgstr "செய்முறை விளக்கம்"
-
-#: kstandardgameaction.cpp:78
-#, fuzzy
-#| msgid "Player Name"
-msgid "Play a demo"
-msgstr "விளையாட்டாளர் பெயர்"
-
-#: kstandardgameaction.cpp:80
-msgid "&Solve"
-msgstr "தீர்வு"
-
-#: kstandardgameaction.cpp:80
-msgid "Solve the game"
-msgstr ""
-
-#: kstandardgameaction.cpp:84
-msgid "Configure &Carddecks..."
-msgstr "உள்ளமை மற்றும்  அட்டைத் தளம் "
-
-#: kstandardgameaction.cpp:86
-#, fuzzy
-#| msgid "Configure &Highscores..."
-msgid "Configure &High Scores..."
-msgstr "அமைப்பு &அதிக மதிப்பெண்கள்..."
 
 #: private/kchatbase.cpp:98
 #, kde-format
 msgid "Send to All Players"
 msgstr "அனைத்து விளையாட்டாளர்களிடமும் அனுப்பு"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:174
 #, kde-format
 msgid "Send to %1"
 msgstr "%1ற்கு அனுப்பு"
@@ -434,34 +434,34 @@ msgstr "%1ற்கு அனுப்பு"
 msgid "%1: "
 msgstr "%1 %2"
 
-#: private/kgame/kgame.cpp:73
+#: private/kgame/kgame.cpp:69
 #, kde-format
 msgid "MaxPlayers"
 msgstr "அதிக விளையாட்டாளர்கள்"
 
-#: private/kgame/kgame.cpp:75
+#: private/kgame/kgame.cpp:71
 #, kde-format
 msgid "MinPlayers"
 msgstr "குறைந்த விளையாட்டாளர்கள்"
 
-#: private/kgame/kgame.cpp:77
+#: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "GameStatus"
 msgstr "விளையாட்டு நிலை"
 
-#: private/kgame/kgamechat.cpp:84
+#: private/kgame/kgamechat.cpp:81
 #, kde-format
 msgid "Player %1"
 msgstr "விளையாட்டாளர் %1"
 
-#: private/kgame/kgamechat.cpp:92
+#: private/kgame/kgamechat.cpp:89
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "தெரியாத"
 
-#: private/kgame/kgamechat.cpp:234
+#: private/kgame/kgamechat.cpp:231
 #, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "என்னுடைய குழுவிற்கு அனுப்பு(\"%1\")"
@@ -588,17 +588,17 @@ msgstr "கேள்வியை செயலாக்கு"
 msgid "Player ID"
 msgstr "விளையாட்டாளர் அடையாளம்"
 
-#: private/kgame/kgamepropertyhandler.cpp:163
+#: private/kgame/kgamepropertyhandler.cpp:160
 #, kde-format
 msgid "%1 (%2)"
 msgstr " (%2)ன் %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:165
+#: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "பெயரிடப்படாத -  அடையாளம்: %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:169
+#: private/kgame/kgamepropertyhandler.cpp:166
 #, fuzzy, kde-format
 #| msgid "%1 unregistered"
 msgid "%1 unregistered"
@@ -606,47 +606,47 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 பதிவாகவில்லை"
 msgstr[1] "%1 பதிவாகவில்லை"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:338
 #, kde-format
 msgid "NULL pointer"
 msgstr "பூஜ்ய அம்பு"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "True"
 msgstr "உண்மை"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "False"
 msgstr "பொய்"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:361
 #, kde-format
 msgid "Unknown"
 msgstr "தெரியாத"
 
-#: private/kgame/kplayer.cpp:80
+#: private/kgame/kplayer.cpp:73
 #, kde-format
 msgid "UserId"
 msgstr "பயன்படுத்துபவரின் அடையாளம்"
 
-#: private/kgame/kplayer.cpp:82
+#: private/kgame/kplayer.cpp:75
 #, kde-format
 msgid "Group"
 msgstr "குழு"
 
-#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
+#: private/kgame/kplayer.cpp:76 private/kgame/kplayer.cpp:78
 #, kde-format
 msgid "default"
 msgstr "முன்னிருப்பு"
 
-#: private/kgame/kplayer.cpp:87
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
 msgstr "ஏற்றுமதி"
 
-#: private/kgame/kplayer.cpp:89
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "myTurn"
 msgstr "என் முறை"

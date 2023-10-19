@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-17 01:39+0000\n"
+"POT-Creation-Date: 2023-10-19 01:40+0000\n"
 "PO-Revision-Date: 2013-12-22 13:58+0200\n"
 "Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
 "Language-Team: Finnish <lokalisointi@lists.coss.fi>\n"
@@ -25,12 +25,12 @@ msgstr ""
 "X-POT-Import-Date: 2012-12-01 22:24:07+0000\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: highscore/khighscore.cpp:149
+#: highscore/khighscore.cpp:154
 #, kde-format
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: highscore/khighscore.cpp:151
+#: highscore/khighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -39,68 +39,68 @@ msgstr ""
 "Ei päästy käsiksi ennätystiedostoon. Joku toinen käyttäjä voi mahdollisesti "
 "olla kirjoittamassa siihen."
 
-#: highscore/kscoredialog.cpp:96 highscore/kscoredialog.cpp:249
+#: highscore/kscoredialog.cpp:100 highscore/kscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
 msgstr "Ennätykset"
 
-#: highscore/kscoredialog.cpp:110 private/kgame/kplayer.cpp:84
+#: highscore/kscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
 msgid "Name"
 msgstr "Nimi"
 
-#: highscore/kscoredialog.cpp:112
+#: highscore/kscoredialog.cpp:116
 #, kde-format
 msgid "Date"
 msgstr "Päiväys"
 
-#: highscore/kscoredialog.cpp:114
+#: highscore/kscoredialog.cpp:118
 #, kde-format
 msgid "Level"
 msgstr "Taso"
 
-#: highscore/kscoredialog.cpp:116
+#: highscore/kscoredialog.cpp:120
 #, kde-format
 msgid "Score"
 msgstr "Pisteet"
 
-#: highscore/kscoredialog.cpp:118
+#: highscore/kscoredialog.cpp:122
 #, kde-format
 msgid "Time"
 msgstr "Aika"
 
-#: highscore/kscoredialog.cpp:266
+#: highscore/kscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
 msgstr "Sijoitus"
 
-#: highscore/kscoredialog.cpp:287
+#: highscore/kscoredialog.cpp:309
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "%1."
 
-#: highscore/kscoredialog.cpp:524
+#: highscore/kscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
 msgstr "&Muista"
 
-#: highscore/kscoredialog.cpp:525
+#: highscore/kscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
 msgstr "&Unohda"
 
-#: highscore/kscoredialog.cpp:526
+#: highscore/kscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
 msgstr "Muistaa tämän ennätystuloksen"
 
-#: highscore/kscoredialog.cpp:527
+#: highscore/kscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
 msgstr "Unohtaa tämän ennätystuloksen"
 
-#: highscore/kscoredialog.cpp:535
+#: highscore/kscoredialog.cpp:559
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -109,7 +109,7 @@ msgstr ""
 "Erinomaista!\n"
 "Teit uuden ennätyksen!"
 
-#: highscore/kscoredialog.cpp:537
+#: highscore/kscoredialog.cpp:561
 #, kde-format
 msgid ""
 "Well done!\n"
@@ -118,289 +118,289 @@ msgstr ""
 "Hyvin tehty!\n"
 "Pääsit ennätyslistalle!"
 
-#: kgamedifficulty.cpp:75
+#: kgamedifficulty.cpp:76
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
 msgstr "Naurettavan helppo"
 
-#: kgamedifficulty.cpp:78
+#: kgamedifficulty.cpp:79
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
 msgstr "Erittäin helppo"
 
-#: kgamedifficulty.cpp:81
+#: kgamedifficulty.cpp:82
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
 msgstr "Helppo"
 
-#: kgamedifficulty.cpp:84
+#: kgamedifficulty.cpp:85
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
 msgstr "Keskivaikea"
 
-#: kgamedifficulty.cpp:87
+#: kgamedifficulty.cpp:88
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
 msgstr "Vaikea"
 
-#: kgamedifficulty.cpp:90
+#: kgamedifficulty.cpp:91
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
 msgstr "Erittäin vaikea"
 
-#: kgamedifficulty.cpp:93
+#: kgamedifficulty.cpp:94
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
 msgstr "Äärimmäisen vaikea"
 
-#: kgamedifficulty.cpp:96
+#: kgamedifficulty.cpp:97
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
 msgstr "Mahdoton"
 
-#: kgamedifficulty.cpp:290
+#: kgamedifficulty.cpp:316
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
 msgstr "Vaikeustason muuttaminen päättää nykyisen pelin!"
 
-#: kgamedifficulty.cpp:292
+#: kgamedifficulty.cpp:318
 #, kde-format
 msgid "Change the difficulty level"
 msgstr "Vaihda vaikeustasoa"
 
-#: kgamedifficulty.cpp:376 kgamedifficulty.cpp:384
+#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
 msgstr "Vaikeustaso"
 
-#: kgamedifficulty.cpp:385
+#: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
 msgstr "Aseta vaikeustaso"
 
-#: kgamedifficulty.cpp:386
+#: kgamedifficulty.cpp:412
 #, kde-format
 msgid "Set the difficulty level of the game."
 msgstr "Asettaa pelin vaikeustason."
 
-#: kgamethemeselector.cpp:103
+#: kgamestandardaction.cpp:36
+msgctxt "new game"
+msgid "&New"
+msgstr "&Uusi"
+
+#: kgamestandardaction.cpp:36
+msgid "Start a new game."
+msgstr "Aloittaa uuden pelin."
+
+#: kgamestandardaction.cpp:36
+msgid "Start a new game"
+msgstr "Aloita uusi peli"
+
+#: kgamestandardaction.cpp:38
+msgid "&Load..."
+msgstr "&Lataa…"
+
+#: kgamestandardaction.cpp:38
+msgid "Open a saved game..."
+msgstr "Avataa tallennettu peli…"
+
+#: kgamestandardaction.cpp:40
+msgid "Load &Recent"
+msgstr "Lataa &viimeaikainen"
+
+#: kgamestandardaction.cpp:40
+msgid "Open a recently saved game..."
+msgstr "Avaa viimeaikainen tallennettu peli…"
+
+#: kgamestandardaction.cpp:42
+msgid "Restart &Game"
+msgstr "&Aloita peli uudelleen"
+
+#: kgamestandardaction.cpp:42
+msgid "Restart the game"
+msgstr "Aloittaa pelin uudelleen"
+
+#: kgamestandardaction.cpp:44
+msgid "&Save"
+msgstr "&Tallenna"
+
+#: kgamestandardaction.cpp:44
+msgid "Save the current game"
+msgstr "Tallentaa nykyisen pelin."
+
+#: kgamestandardaction.cpp:46
+msgid "Save &As..."
+msgstr "Tallenna &nimellä…"
+
+#: kgamestandardaction.cpp:46
+msgid "Save the current game to another file"
+msgstr "Tallentaa nykyisen pelin toiseen tiedostoon."
+
+#: kgamestandardaction.cpp:48
+msgid "&End Game"
+msgstr "&Päätä peli"
+
+#: kgamestandardaction.cpp:48
+msgid "End the current game"
+msgstr "Lopettaa nykyisen pelin."
+
+#: kgamestandardaction.cpp:50
+msgid "Pa&use"
+msgstr "&Tauko"
+
+#: kgamestandardaction.cpp:50
+msgid "Pause the game"
+msgstr "Pysäyttää nykyisen pelin."
+
+#: kgamestandardaction.cpp:52
+msgid "Show &High Scores"
+msgstr "Näytä &ennätykset"
+
+#: kgamestandardaction.cpp:52
+msgid "Show high scores"
+msgstr "Näyttää ennätyslistan."
+
+#: kgamestandardaction.cpp:54
+msgid "&Clear High Scores"
+msgstr "&Tyhjennä ennätykset"
+
+#: kgamestandardaction.cpp:54
+msgid "Clear high scores"
+msgstr "Tyhjentää ennätyslistan."
+
+#: kgamestandardaction.cpp:56
+msgid "Show Statistics"
+msgstr "Näytä tilastot"
+
+#: kgamestandardaction.cpp:56
+msgid "Show statistics"
+msgstr "Näyttää tilastot."
+
+#: kgamestandardaction.cpp:58
+msgid "&Clear Statistics"
+msgstr "&Tyhjennä tilastot"
+
+#: kgamestandardaction.cpp:58
+msgid "Delete all-time statistics."
+msgstr "Poista kaikkien aikojen tilastot."
+
+#: kgamestandardaction.cpp:60
+msgid "&Print..."
+msgstr "&Tulosta…"
+
+#: kgamestandardaction.cpp:62
+msgid "&Quit"
+msgstr "&Lopeta"
+
+#: kgamestandardaction.cpp:62
+msgid "Quit the program"
+msgstr "Lopettaa ohjelman"
+
+#: kgamestandardaction.cpp:66
+msgid "Repeat"
+msgstr "Toista"
+
+#: kgamestandardaction.cpp:66
+msgid "Repeat the last move"
+msgstr "Toista edellinen siirto"
+
+#: kgamestandardaction.cpp:68
+msgid "Und&o"
+msgstr "&Kumoa"
+
+#: kgamestandardaction.cpp:68
+msgid "Undo the last move"
+msgstr "Kumoa edellinen siirto"
+
+#: kgamestandardaction.cpp:70
+msgid "Re&do"
+msgstr "&Tee uudelleen"
+
+#: kgamestandardaction.cpp:70
+msgid "Redo the latest move"
+msgstr "Tee viimeisen siirto uudelleen"
+
+#: kgamestandardaction.cpp:72
+msgid "&Roll Dice"
+msgstr "&Heitä"
+
+#: kgamestandardaction.cpp:72
+msgid "Roll the dice"
+msgstr "Heittää nopan"
+
+#: kgamestandardaction.cpp:74
+msgid "End Turn"
+msgstr "Lopeta vuoro"
+
+#: kgamestandardaction.cpp:76
+msgid "&Hint"
+msgstr "&Vihje"
+
+#: kgamestandardaction.cpp:76
+msgid "Give a hint"
+msgstr "Antaa vihjeen"
+
+#: kgamestandardaction.cpp:78
+msgid "&Demo"
+msgstr "&Esittely"
+
+#: kgamestandardaction.cpp:78
+msgid "Play a demo"
+msgstr "Näyttää esittelun"
+
+#: kgamestandardaction.cpp:80
+msgid "&Solve"
+msgstr "&Ratkaise"
+
+#: kgamestandardaction.cpp:80
+msgid "Solve the game"
+msgstr "Ratkaisee pelin"
+
+#: kgamestandardaction.cpp:84
+msgid "Configure &Carddecks..."
+msgstr "&Korttipakat…"
+
+#: kgamestandardaction.cpp:86
+msgid "Configure &High Scores..."
+msgstr "&Ennätysasetukset…"
+
+#: kgamethemeselector.cpp:108
 #, kde-format
 msgid "Get New Themes..."
 msgstr "Hae uusia teemoja…"
 
-#: kgamethemeselector.cpp:203
+#: kgamethemeselector.cpp:210
 #, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
 msgstr "Valitse teema"
 
-#: kgamethemeselector.cpp:275
+#: kgamethemeselector.cpp:282
 #, kde-format
 msgid "[No name]"
 msgstr "[Nimetön]"
 
-#: kgamethemeselector.cpp:291
+#: kgamethemeselector.cpp:298
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
 msgstr "Tekijä: %1"
-
-#: kstandardgameaction.cpp:36
-msgctxt "new game"
-msgid "&New"
-msgstr "&Uusi"
-
-#: kstandardgameaction.cpp:36
-msgid "Start a new game."
-msgstr "Aloittaa uuden pelin."
-
-#: kstandardgameaction.cpp:36
-msgid "Start a new game"
-msgstr "Aloita uusi peli"
-
-#: kstandardgameaction.cpp:38
-msgid "&Load..."
-msgstr "&Lataa…"
-
-#: kstandardgameaction.cpp:38
-msgid "Open a saved game..."
-msgstr "Avataa tallennettu peli…"
-
-#: kstandardgameaction.cpp:40
-msgid "Load &Recent"
-msgstr "Lataa &viimeaikainen"
-
-#: kstandardgameaction.cpp:40
-msgid "Open a recently saved game..."
-msgstr "Avaa viimeaikainen tallennettu peli…"
-
-#: kstandardgameaction.cpp:42
-msgid "Restart &Game"
-msgstr "&Aloita peli uudelleen"
-
-#: kstandardgameaction.cpp:42
-msgid "Restart the game"
-msgstr "Aloittaa pelin uudelleen"
-
-#: kstandardgameaction.cpp:44
-msgid "&Save"
-msgstr "&Tallenna"
-
-#: kstandardgameaction.cpp:44
-msgid "Save the current game"
-msgstr "Tallentaa nykyisen pelin."
-
-#: kstandardgameaction.cpp:46
-msgid "Save &As..."
-msgstr "Tallenna &nimellä…"
-
-#: kstandardgameaction.cpp:46
-msgid "Save the current game to another file"
-msgstr "Tallentaa nykyisen pelin toiseen tiedostoon."
-
-#: kstandardgameaction.cpp:48
-msgid "&End Game"
-msgstr "&Päätä peli"
-
-#: kstandardgameaction.cpp:48
-msgid "End the current game"
-msgstr "Lopettaa nykyisen pelin."
-
-#: kstandardgameaction.cpp:50
-msgid "Pa&use"
-msgstr "&Tauko"
-
-#: kstandardgameaction.cpp:50
-msgid "Pause the game"
-msgstr "Pysäyttää nykyisen pelin."
-
-#: kstandardgameaction.cpp:52
-msgid "Show &High Scores"
-msgstr "Näytä &ennätykset"
-
-#: kstandardgameaction.cpp:52
-msgid "Show high scores"
-msgstr "Näyttää ennätyslistan."
-
-#: kstandardgameaction.cpp:54
-msgid "&Clear High Scores"
-msgstr "&Tyhjennä ennätykset"
-
-#: kstandardgameaction.cpp:54
-msgid "Clear high scores"
-msgstr "Tyhjentää ennätyslistan."
-
-#: kstandardgameaction.cpp:56
-msgid "Show Statistics"
-msgstr "Näytä tilastot"
-
-#: kstandardgameaction.cpp:56
-msgid "Show statistics"
-msgstr "Näyttää tilastot."
-
-#: kstandardgameaction.cpp:58
-msgid "&Clear Statistics"
-msgstr "&Tyhjennä tilastot"
-
-#: kstandardgameaction.cpp:58
-msgid "Delete all-time statistics."
-msgstr "Poista kaikkien aikojen tilastot."
-
-#: kstandardgameaction.cpp:60
-msgid "&Print..."
-msgstr "&Tulosta…"
-
-#: kstandardgameaction.cpp:62
-msgid "&Quit"
-msgstr "&Lopeta"
-
-#: kstandardgameaction.cpp:62
-msgid "Quit the program"
-msgstr "Lopettaa ohjelman"
-
-#: kstandardgameaction.cpp:66
-msgid "Repeat"
-msgstr "Toista"
-
-#: kstandardgameaction.cpp:66
-msgid "Repeat the last move"
-msgstr "Toista edellinen siirto"
-
-#: kstandardgameaction.cpp:68
-msgid "Und&o"
-msgstr "&Kumoa"
-
-#: kstandardgameaction.cpp:68
-msgid "Undo the last move"
-msgstr "Kumoa edellinen siirto"
-
-#: kstandardgameaction.cpp:70
-msgid "Re&do"
-msgstr "&Tee uudelleen"
-
-#: kstandardgameaction.cpp:70
-msgid "Redo the latest move"
-msgstr "Tee viimeisen siirto uudelleen"
-
-#: kstandardgameaction.cpp:72
-msgid "&Roll Dice"
-msgstr "&Heitä"
-
-#: kstandardgameaction.cpp:72
-msgid "Roll the dice"
-msgstr "Heittää nopan"
-
-#: kstandardgameaction.cpp:74
-msgid "End Turn"
-msgstr "Lopeta vuoro"
-
-#: kstandardgameaction.cpp:76
-msgid "&Hint"
-msgstr "&Vihje"
-
-#: kstandardgameaction.cpp:76
-msgid "Give a hint"
-msgstr "Antaa vihjeen"
-
-#: kstandardgameaction.cpp:78
-msgid "&Demo"
-msgstr "&Esittely"
-
-#: kstandardgameaction.cpp:78
-msgid "Play a demo"
-msgstr "Näyttää esittelun"
-
-#: kstandardgameaction.cpp:80
-msgid "&Solve"
-msgstr "&Ratkaise"
-
-#: kstandardgameaction.cpp:80
-msgid "Solve the game"
-msgstr "Ratkaisee pelin"
-
-#: kstandardgameaction.cpp:84
-msgid "Configure &Carddecks..."
-msgstr "&Korttipakat…"
-
-#: kstandardgameaction.cpp:86
-msgid "Configure &High Scores..."
-msgstr "&Ennätysasetukset…"
 
 #: private/kchatbase.cpp:98
 #, kde-format
 msgid "Send to All Players"
 msgstr "Lähetä kaikille pelaajille"
 
-#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:177
+#: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:174
 #, kde-format
 msgid "Send to %1"
 msgstr "Lähteä pelaajalle %1"
@@ -411,33 +411,33 @@ msgstr "Lähteä pelaajalle %1"
 msgid "%1: "
 msgstr "%1:"
 
-#: private/kgame/kgame.cpp:73
+#: private/kgame/kgame.cpp:69
 #, kde-format
 msgid "MaxPlayers"
 msgstr "MaxPlayers"
 
-#: private/kgame/kgame.cpp:75
+#: private/kgame/kgame.cpp:71
 #, kde-format
 msgid "MinPlayers"
 msgstr "MinPlayers"
 
-#: private/kgame/kgame.cpp:77
+#: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "GameStatus"
 msgstr "GameStatus"
 
-#: private/kgame/kgamechat.cpp:84
+#: private/kgame/kgamechat.cpp:81
 #, kde-format
 msgid "Player %1"
 msgstr "Pelaaja %1"
 
-#: private/kgame/kgamechat.cpp:92
+#: private/kgame/kgamechat.cpp:89
 #, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: private/kgame/kgamechat.cpp:234
+#: private/kgame/kgamechat.cpp:231
 #, kde-format
 msgid "Send to My Group (\"%1\")"
 msgstr "Lähteä ryhmälle (%1)"
@@ -564,64 +564,64 @@ msgstr "Prosessoi kysely"
 msgid "Player ID"
 msgstr "Pelaajan ID"
 
-#: private/kgame/kgamepropertyhandler.cpp:163
+#: private/kgame/kgamepropertyhandler.cpp:160
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: private/kgame/kgamepropertyhandler.cpp:165
+#: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
 msgstr "Nimetön – ID: %1"
 
-#: private/kgame/kgamepropertyhandler.cpp:169
+#: private/kgame/kgamepropertyhandler.cpp:166
 #, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 rekisteröimätön"
 msgstr[1] "%1 rekisteröimätöntä"
 
-#: private/kgame/kgamepropertyhandler.cpp:341
+#: private/kgame/kgamepropertyhandler.cpp:338
 #, kde-format
 msgid "NULL pointer"
 msgstr "NULL-osoitin"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "True"
 msgstr "Tosi"
 
-#: private/kgame/kgamepropertyhandler.cpp:358
+#: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "False"
 msgstr "Epätosi"
 
-#: private/kgame/kgamepropertyhandler.cpp:364
+#: private/kgame/kgamepropertyhandler.cpp:361
 #, kde-format
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: private/kgame/kplayer.cpp:80
+#: private/kgame/kplayer.cpp:73
 #, kde-format
 msgid "UserId"
 msgstr "Käyttäjätunnus"
 
-#: private/kgame/kplayer.cpp:82
+#: private/kgame/kplayer.cpp:75
 #, kde-format
 msgid "Group"
 msgstr "Ryhmä"
 
-#: private/kgame/kplayer.cpp:83 private/kgame/kplayer.cpp:85
+#: private/kgame/kplayer.cpp:76 private/kgame/kplayer.cpp:78
 #, kde-format
 msgid "default"
 msgstr "oletus"
 
-#: private/kgame/kplayer.cpp:87
+#: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
 msgstr "AsyncInput"
 
-#: private/kgame/kplayer.cpp:89
+#: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "myTurn"
 msgstr "myTurn"
