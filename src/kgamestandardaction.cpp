@@ -15,6 +15,38 @@
 #include <KStandardShortcut>
 // Qt
 #include <QIcon>
+// Std
+#include <string>
+
+// Helper class for storing raw data in static tables which can be used for QString instance
+// creation at runtime without copying/converting to new memalloc'ed memory, as well as avoiding
+// that way storing the strings directly as QStrings resulting in non-constexpr init code on
+// library loading
+struct RawStringData {
+    template<std::size_t StringSize>
+    constexpr inline RawStringData(const char16_t (&_data)[StringSize])
+        : data(_data)
+        , size(std::char_traits<char16_t>::length(_data))
+    {
+    }
+    constexpr inline RawStringData(std::nullptr_t)
+    {
+    }
+    constexpr inline RawStringData() = default;
+
+    inline QString toString() const
+    {
+        if (!data) {
+            return QString();
+        }
+
+        return Qt::Literals::StringLiterals::operator""_s(data, size);
+    }
+
+private:
+    const char16_t *const data = nullptr;
+    const std::size_t size = 0;
+};
 
 struct KGameStandardActionInfo {
     KGameStandardAction::GameStandardAction id;
@@ -23,7 +55,7 @@ struct KGameStandardActionInfo {
     const char *psName;
     const KLazyLocalizedString psLabel;
     const KLazyLocalizedString psWhatsThis;
-    const char *psIconName;
+    const RawStringData psIconName;
     const KLazyLocalizedString psToolTip;
 };
 
@@ -33,51 +65,51 @@ const KGameStandardActionInfo g_rgActionInfo[] = {
     // clang-format off
     // "game" menu
     { KGameStandardAction::New,             KStandardShortcut::New,       0,                    "game_new",
-      kli18nc("new game", "&New"),  kli18n("Start a new game."), "document-new",        kli18n("Start a new game") },
+      kli18nc("new game", "&New"),  kli18n("Start a new game."), u"document-new",        kli18n("Start a new game") },
     { KGameStandardAction::Load,            KStandardShortcut::Open,      0,                    "game_load",
-      kli18n("&Load..."),           {},                          "document-open",       kli18n("Open a saved game...") },
+      kli18n("&Load..."),           {},                         u"document-open",        kli18n("Open a saved game...") },
     { KGameStandardAction::LoadRecent,      KStandardShortcut::AccelNone, 0,                    "game_load_recent",
-      kli18n("Load &Recent"),       {},                         nullptr,                kli18n("Open a recently saved game...") },
+      kli18n("Load &Recent"),       {},                         nullptr,                 kli18n("Open a recently saved game...") },
     { KGameStandardAction::Restart,         KStandardShortcut::Reload,    0,                    "game_restart",
-      kli18n("Restart &Game"),      {},                         "view-refresh",         kli18n("Restart the game") },
+      kli18n("Restart &Game"),      {},                         u"view-refresh",         kli18n("Restart the game") },
     { KGameStandardAction::Save,            KStandardShortcut::Save,      0,                    "game_save",
-      kli18n("&Save"),              {},                         "document-save",        kli18n("Save the current game") },
+      kli18n("&Save"),              {},                         u"document-save",        kli18n("Save the current game") },
     { KGameStandardAction::SaveAs,          KStandardShortcut::AccelNone, 0,                    "game_save_as",
-      kli18n("Save &As..."),        {},                         "document-save-as",     kli18n("Save the current game to another file") },
+      kli18n("Save &As..."),        {},                         u"document-save-as",     kli18n("Save the current game to another file") },
     { KGameStandardAction::End,             KStandardShortcut::End,       0,                    "game_end",
-      kli18n("&End Game"),          {},                         "window-close",         kli18n("End the current game") },
+      kli18n("&End Game"),          {},                         u"window-close",         kli18n("End the current game") },
     { KGameStandardAction::Pause,           KStandardShortcut::AccelNone, Qt::Key_P,            "game_pause",
-      kli18n("Pa&use"),             {},                         "media-playback-pause", kli18n("Pause the game") },
+      kli18n("Pa&use"),             {},                         u"media-playback-pause", kli18n("Pause the game") },
     { KGameStandardAction::Highscores,      KStandardShortcut::AccelNone, CTRL(H),              "game_highscores",
-      kli18n("Show &High Scores"),  {},                         "games-highscores",     kli18n("Show high scores") },
+      kli18n("Show &High Scores"),  {},                         u"games-highscores",     kli18n("Show high scores") },
     { KGameStandardAction::ClearHighscores, KStandardShortcut::AccelNone, 0,                    "game_clear_highscores",
-      kli18n("&Clear High Scores"), {},                         "clear_highscore",      kli18n("Clear high scores") },
+      kli18n("&Clear High Scores"), {},                         u"clear_highscore",      kli18n("Clear high scores") },
     { KGameStandardAction::Statistics,      KStandardShortcut::AccelNone, 0,                    "game_statistics",
-      kli18n("Show Statistics"),    {},                         "highscore",            kli18n("Show statistics") },
+      kli18n("Show Statistics"),    {},                         u"highscore",            kli18n("Show statistics") },
     { KGameStandardAction::ClearStatistics, KStandardShortcut::AccelNone, 0,                    "game_clear_statistics",
-      kli18n("&Clear Statistics"),  {},                         "flag",                 kli18n("Delete all-time statistics.") },
+      kli18n("&Clear Statistics"),  {},                         u"flag",                 kli18n("Delete all-time statistics.") },
     { KGameStandardAction::Print,           KStandardShortcut::Print,     0,                    "game_print",
-      kli18n("&Print..."),          {},                         "document-print",       {} },
+      kli18n("&Print..."),          {},                         u"document-print",       {} },
     { KGameStandardAction::Quit,            KStandardShortcut::Quit,      0,                    "game_quit",
-      kli18n("&Quit"),              {},                         "application-exit",     kli18n("Quit the program") },
+      kli18n("&Quit"),              {},                         u"application-exit",     kli18n("Quit the program") },
 
     // "move" menu
     { KGameStandardAction::Repeat,  KStandardShortcut::AccelNone, 0,                    "move_repeat",
       kli18n("Repeat"),     {}, nullptr,                kli18n("Repeat the last move") },
     { KGameStandardAction::Undo,    KStandardShortcut::Undo,      0,                    "move_undo",
-      kli18n("Und&o"),      {}, "edit-undo",            kli18n("Undo the last move") },
+      kli18n("Und&o"),      {}, u"edit-undo",            kli18n("Undo the last move") },
     { KGameStandardAction::Redo,    KStandardShortcut::Redo,      0,                    "move_redo",
-      kli18n("Re&do"),      {}, "edit-redo",            kli18n("Redo the latest move") },
+      kli18n("Re&do"),      {}, u"edit-redo",            kli18n("Redo the latest move") },
     { KGameStandardAction::Roll,    KStandardShortcut::AccelNone, CTRL(R),              "move_roll",
-      kli18n("&Roll Dice"), {}, "roll",                 kli18n("Roll the dice") },
+      kli18n("&Roll Dice"), {}, u"roll",                 kli18n("Roll the dice") },
     { KGameStandardAction::EndTurn, KStandardShortcut::AccelNone, 0,                    "move_end_turn",
-      kli18n("End Turn"),   {}, "games-endturn",        {}  },
+      kli18n("End Turn"),   {}, u"games-endturn",        {}  },
     { KGameStandardAction::Hint,    KStandardShortcut::AccelNone, Qt::Key_H,            "move_hint",
-      kli18n("&Hint"),      {}, "games-hint",           kli18n("Give a hint") },
+      kli18n("&Hint"),      {}, u"games-hint",           kli18n("Give a hint") },
     { KGameStandardAction::Demo,    KStandardShortcut::AccelNone, Qt::Key_D,            "move_demo",
-      kli18n("&Demo"),      {}, "media-playback-start", kli18n("Play a demo") },
+      kli18n("&Demo"),      {}, u"media-playback-start", kli18n("Play a demo") },
     { KGameStandardAction::Solve,   KStandardShortcut::AccelNone, 0,                    "move_solve",
-      kli18n("&Solve"),     {}, "games-solve",          kli18n("Solve the game") },
+      kli18n("&Solve"),     {}, u"games-solve",          kli18n("Solve the game") },
 
     // "settings" menu
     { KGameStandardAction::Carddecks,           KStandardShortcut::AccelNone, 0, "options_configure_carddecks",
@@ -111,10 +143,10 @@ QAction *KGameStandardAction::_k_createInternal(KGameStandardAction::GameStandar
             break;
         case Pause:
         case Demo:
-            pAction = new KToggleAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
+            pAction = new KToggleAction(QIcon::fromTheme(pInfo->psIconName.toString()), sLabel, parent);
             break;
         default:
-            pAction = new QAction(QIcon::fromTheme(QString::fromLatin1(pInfo->psIconName)), sLabel, parent);
+            pAction = new QAction(QIcon::fromTheme(pInfo->psIconName.toString()), sLabel, parent);
             break;
         }
 
