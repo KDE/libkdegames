@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-19 01:40+0000\n"
+"POT-Creation-Date: 2023-10-22 02:05+0000\n"
 "PO-Revision-Date: 2009-06-22 16:40+0200\n"
 "Last-Translator: ivan <admin@linuxzasve.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -190,209 +190,209 @@ msgstr "Podesi razinu težine"
 msgid "Set the difficulty level of the game."
 msgstr "Podesi razinu težine igre"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nova"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game."
 msgstr "Pokreni mrežnu igru"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game"
 msgstr "Pokreni mrežnu igru"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "&Load..."
 msgstr "&Učitaj …"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
 msgstr "Otvori spremljenu igru …"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "Učitaj &posljednju"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
 msgstr "Otvori nedavno spremljenu igru …"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 msgid "Restart &Game"
 msgstr "Ponovi &igru"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 #, fuzzy
 #| msgid "Restart &Game"
 msgid "Restart the game"
 msgstr "Ponovi &igru"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 #, fuzzy
 msgid "&Save"
 msgstr "&Riješi"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 msgid "Save the current game"
 msgstr "Spremi trenutnu igru"
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save &As..."
 msgstr "Spremi &kao …"
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
 msgstr "Spremi trenutnu igru u drugu datoteku"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "&End Game"
 msgstr "&Završi igru"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "End the current game"
 msgstr "Završi trenutnu igru"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pa&use"
 msgstr "&Pauza"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pause the game"
 msgstr "Pauziraj igru"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show &High Scores"
 msgstr "Prikaži &najbolje rezultate"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show high scores"
 msgstr "Prikaži &najbolje rezultate"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 #| msgid "Highscores"
 msgid "&Clear High Scores"
 msgstr "Najbolji rezultati"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 #| msgid "Highscores"
 msgid "Clear high scores"
 msgstr "Najbolji rezultati"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show Statistics"
 msgstr "Statistike"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show statistics"
 msgstr "Statistike"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 #, fuzzy
 #| msgid "Statistics"
 msgid "&Clear Statistics"
 msgstr "Statistike"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
 msgstr "Izbriši svu statistiku"
 
-#: kgamestandardaction.cpp:60
+#: kgamestandardaction.cpp:92
 msgid "&Print..."
 msgstr "&Ispis …"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "&Quit"
 msgstr "&Napusti"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "Quit the program"
 msgstr "Napusti program"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat"
 msgstr "Ponovi"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
 msgstr "Ponovi posljednji potez"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Und&o"
 msgstr "Po&ništi"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Undo the last move"
 msgstr "Poništi posljednji potez"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Re&do"
 msgstr "Po&novi"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
 msgstr "Ponovi posljednji potez"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
 msgstr "&Baci kockice"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 #, fuzzy
 #| msgid "&Roll Dice"
 msgid "Roll the dice"
 msgstr "&Baci kockice"
 
-#: kgamestandardaction.cpp:74
+#: kgamestandardaction.cpp:106
 msgid "End Turn"
 msgstr "Završi potez"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "&Hint"
 msgstr "&Savjet"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "Give a hint"
 msgstr ""
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 msgid "&Demo"
 msgstr "&Demo"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 #, fuzzy
 #| msgid "Player Name"
 msgid "Play a demo"
 msgstr "Ime igrača"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "&Solve"
 msgstr "&Riješi"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "Solve the game"
 msgstr "Razriješi igru"
 
-#: kgamestandardaction.cpp:84
+#: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
 msgstr "Konfiguriranje &špilova karata …"
 
-#: kgamestandardaction.cpp:86
+#: kgamestandardaction.cpp:118
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."

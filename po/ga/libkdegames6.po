@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames/libkdegames.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-19 01:40+0000\n"
+"POT-Creation-Date: 2023-10-22 02:05+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -186,187 +186,187 @@ msgstr "Socraigh an leibhéal deacrachta"
 msgid "Set the difficulty level of the game."
 msgstr "Socraigh leibhéal deacrachta an chluiche."
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
 msgstr "&Nua"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgid "Start a new game."
 msgstr "Tosaigh cluiche nua."
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgid "Start a new game"
 msgstr "Tosaigh cluiche nua"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "&Load..."
 msgstr "&Luchtaigh..."
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
 msgstr "Oscail cluiche sábháilte..."
 
 # implicitly "games"
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "Luchtaigh Cluiche Le &Déanaí"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
 msgstr "Oscail cluiche a sábháladh le déanaí..."
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 msgid "Restart &Game"
 msgstr "Atosaigh &Cluiche"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 msgid "Restart the game"
 msgstr "Atosaigh an cluiche"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 msgid "&Save"
 msgstr "&Sábháil"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 msgid "Save the current game"
 msgstr "Sábháil an cluiche reatha"
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save &As..."
 msgstr "Sábháil M&ar..."
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
 msgstr "Sábháil an comhad reatha i gcomhad eile"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "&End Game"
 msgstr "Cuir Cluich&e i gCrích"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "End the current game"
 msgstr "Cuir deireadh leis an gcluiche reatha"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pa&use"
 msgstr "So&s"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pause the game"
 msgstr "Cuir an cluiche ar shos"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 msgid "Show &High Scores"
 msgstr "Taispeáin na Scóir is &Fearr"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 msgid "Show high scores"
 msgstr "Taispeáin na scóir is fearr"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 msgid "&Clear High Scores"
 msgstr "&Glan Na Scóir Is Fearr"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 msgid "Clear high scores"
 msgstr "Glan na scóir is fearr"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 msgid "Show Statistics"
 msgstr "Taispeáin Staitisticí"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 msgid "Show statistics"
 msgstr "Taispeáin staitisticí"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 msgid "&Clear Statistics"
 msgstr "&Glan na staitisticí"
 
 # not "Scrios na staitisticí ama go léir." which is what I had before the "-"
 # was inserted in "all-time"
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
 msgstr "Scrios na staitisticí go léir."
 
-#: kgamestandardaction.cpp:60
+#: kgamestandardaction.cpp:92
 msgid "&Print..."
 msgstr "&Priontáil..."
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "&Quit"
 msgstr "&Scoir"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "Quit the program"
 msgstr "Scoir an ríomhchlár"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat"
 msgstr "Arís"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
 msgstr "Athdhéan an beart is déanaí"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Und&o"
 msgstr "C&ealaigh"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Undo the last move"
 msgstr "Cealaigh an beart is déanaí"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Re&do"
 msgstr "Ath&dhéan"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
 msgstr "Athdhéan an beart is déanaí"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
 msgstr "&Caith Díslí"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 msgid "Roll the dice"
 msgstr "Caith díslí"
 
-#: kgamestandardaction.cpp:74
+#: kgamestandardaction.cpp:106
 msgid "End Turn"
 msgstr "Cuir Deireadh leis an mBabhta"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "&Hint"
 msgstr "&Leid"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "Give a hint"
 msgstr "Tabhair leid"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 msgid "&Demo"
 msgstr "&Taispeántas"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 msgid "Play a demo"
 msgstr "Imir cluiche taispeána"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "&Solve"
 msgstr "&Réitigh"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "Solve the game"
 msgstr "Réitigh an cluiche"
 
-#: kgamestandardaction.cpp:84
+#: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
 msgstr "Cumraigh deiceanna &cártaí..."
 
-#: kgamestandardaction.cpp:86
+#: kgamestandardaction.cpp:118
 msgid "Configure &High Scores..."
 msgstr "Cumraigh Na Scóir Is &Fearr..."
 

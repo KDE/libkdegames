@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-19 01:40+0000\n"
+"POT-Creation-Date: 2023-10-22 02:05+0000\n"
 "PO-Revision-Date: 2006-04-09 15:07-0500\n"
 "Last-Translator: Progga <progga@BengaLinux.Org>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -190,210 +190,210 @@ msgstr ""
 msgid "Set the difficulty level of the game."
 msgstr ""
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
 msgstr "&নতুন খেলা"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game."
 msgstr "নেটওয়ার্কভিত্তিক খেলা তৈরি করো"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game"
 msgstr "নেটওয়ার্কভিত্তিক খেলা তৈরি করো"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "&Load..."
 msgstr "লোড... (&ল)"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
 msgstr ""
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "&সর্বশেষটি লোড করো"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
 msgstr ""
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 msgid "Restart &Game"
 msgstr "খেলা পুনরায় আরম্ভ করো (&খ)"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 #, fuzzy
 #| msgid "Restart &Game"
 msgid "Restart the game"
 msgstr "খেলা পুনরায় আরম্ভ করো (&খ)"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 #, fuzzy
 msgid "&Save"
 msgstr "&সমাধান করো"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 msgid "Save the current game"
 msgstr ""
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save &As..."
 msgstr "নতুন নামে সংরক্ষণ...(&ত)"
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
 msgstr ""
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "&End Game"
 msgstr "খেলা শে&ষ করো"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "End the current game"
 msgstr ""
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pa&use"
 msgstr "বি&রতি"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pause the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show &High Scores"
 msgstr "সেরা স্কোর দেখা&ও"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show high scores"
 msgstr "সেরা স্কোর দেখা&ও"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 #| msgid "Highscores"
 msgid "&Clear High Scores"
 msgstr "সেরা স্কোর"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 #| msgid "Highscores"
 msgid "Clear high scores"
 msgstr "সেরা স্কোর"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show Statistics"
 msgstr "পরিসংখ্যান"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show statistics"
 msgstr "পরিসংখ্যান"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 #, fuzzy
 #| msgid "Statistics"
 msgid "&Clear Statistics"
 msgstr "পরিসংখ্যান"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
 msgstr ""
 
-#: kgamestandardaction.cpp:60
+#: kgamestandardaction.cpp:92
 msgid "&Print..."
 msgstr ""
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 #, fuzzy
 msgid "&Quit"
 msgstr "&ইঙ্গিত"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "Quit the program"
 msgstr ""
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat"
 msgstr "পুনরাবৃত্তি"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Und&o"
 msgstr "বাতি&ল"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Undo the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Re&do"
 msgstr "&আবার করো"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
 msgstr ""
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
 msgstr "পাশা &গড়াও"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 #, fuzzy
 #| msgid "&Roll Dice"
 msgid "Roll the dice"
 msgstr "পাশা &গড়াও"
 
-#: kgamestandardaction.cpp:74
+#: kgamestandardaction.cpp:106
 msgid "End Turn"
 msgstr "দান শেষ"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "&Hint"
 msgstr "&ইঙ্গিত"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "Give a hint"
 msgstr ""
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 msgid "&Demo"
 msgstr "প্র&দর্শনী"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 #, fuzzy
 #| msgid "Player Name"
 msgid "Play a demo"
 msgstr "খেলোয়াড়ের নাম"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "&Solve"
 msgstr "&সমাধান করো"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "Solve the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:84
+#: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
 msgstr "তাসে&র তাড়া কনফিগার করো..."
 
-#: kgamestandardaction.cpp:86
+#: kgamestandardaction.cpp:118
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."

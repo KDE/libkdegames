@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-19 01:40+0000\n"
+"POT-Creation-Date: 2023-10-22 02:05+0000\n"
 "PO-Revision-Date: 2005-10-15 22:24+0100\n"
 "Last-Translator: Kevin Donnelly <kevin@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -191,210 +191,210 @@ msgstr ""
 msgid "Set the difficulty level of the game."
 msgstr ""
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
 msgstr "&Newydd"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game."
 msgstr "Creu gêm rhwydwaith"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 #| msgid "Create a network game"
 msgid "Start a new game"
 msgstr "Creu gêm rhwydwaith"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "&Load..."
 msgstr "&Llwytho..."
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
 msgstr ""
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "Llwytho &Diweddar"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
 msgstr ""
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 msgid "Restart &Game"
 msgstr "&Ailddechrau Gêm"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 #, fuzzy
 #| msgid "Restart &Game"
 msgid "Restart the game"
 msgstr "&Ailddechrau Gêm"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 #, fuzzy
 msgid "&Save"
 msgstr "&Datrys"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 msgid "Save the current game"
 msgstr ""
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save &As..."
 msgstr "Cadw &Fel..."
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
 msgstr ""
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "&End Game"
 msgstr "&Gorffen Gêm"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "End the current game"
 msgstr ""
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pa&use"
 msgstr "Se&ibio"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pause the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show &High Scores"
 msgstr "Dangos Sgorau &Gorau"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 #| msgid "Show &Highscores"
 msgid "Show high scores"
 msgstr "Dangos Sgorau &Gorau"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 #| msgid "Highscores"
 msgid "&Clear High Scores"
 msgstr "Sgorau Gorau"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 #| msgid "Highscores"
 msgid "Clear high scores"
 msgstr "Sgorau Gorau"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show Statistics"
 msgstr "Ystadegau"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 #| msgid "Statistics"
 msgid "Show statistics"
 msgstr "Ystadegau"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 #, fuzzy
 #| msgid "Statistics"
 msgid "&Clear Statistics"
 msgstr "Ystadegau"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
 msgstr ""
 
-#: kgamestandardaction.cpp:60
+#: kgamestandardaction.cpp:92
 msgid "&Print..."
 msgstr ""
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 #, fuzzy
 msgid "&Quit"
 msgstr "Cyng&horyn"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "Quit the program"
 msgstr ""
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat"
 msgstr "Ailadrodd"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Und&o"
 msgstr "&Dadwneud"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Undo the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Re&do"
 msgstr "Ail&wneud"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
 msgstr ""
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
 msgstr "&Taflu Dis"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 #, fuzzy
 #| msgid "&Roll Dice"
 msgid "Roll the dice"
 msgstr "&Taflu Dis"
 
-#: kgamestandardaction.cpp:74
+#: kgamestandardaction.cpp:106
 msgid "End Turn"
 msgstr "Gorffen Tro"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "&Hint"
 msgstr "Cyng&horyn"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "Give a hint"
 msgstr ""
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 msgid "&Demo"
 msgstr "&Arddangos"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 #, fuzzy
 #| msgid "Player Name"
 msgid "Play a demo"
 msgstr "Enw Chwaraewr"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "&Solve"
 msgstr "&Datrys"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "Solve the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:84
+#: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
 msgstr "Ffurfweddu &Pecynnau Cerdiau..."
 
-#: kgamestandardaction.cpp:86
+#: kgamestandardaction.cpp:118
 #, fuzzy
 #| msgid "Configure &Highscores..."
 msgid "Configure &High Scores..."

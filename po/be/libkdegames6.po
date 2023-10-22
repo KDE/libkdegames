@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-19 01:40+0000\n"
+"POT-Creation-Date: 2023-10-22 02:05+0000\n"
 "PO-Revision-Date: 2008-01-01 20:57+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -194,226 +194,226 @@ msgstr "Усталяваць"
 msgid "Set the difficulty level of the game."
 msgstr "Усталяваць."
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 msgctxt "new game"
 msgid "&New"
 msgstr "Сетка"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 msgid "Start a new game."
 msgstr "Стварыць сеткавую гульню"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 msgid "Start a new game"
 msgstr "Стварыць сеткавую гульню"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 #, fuzzy
 msgid "&Load..."
 msgstr "Загрузіць..."
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 #, fuzzy
 msgid "Open a saved game..."
 msgstr "Адкрыць а."
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 #, fuzzy
 msgid "Load &Recent"
 msgstr "Загрузіць нядаўнія"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 #, fuzzy
 msgid "Open a recently saved game..."
 msgstr "Адкрыць а."
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 #, fuzzy
 msgid "Restart &Game"
 msgstr "Пачаць зноўку"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 #, fuzzy
 msgid "Restart the game"
 msgstr "Пачаць зноўку"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 #, fuzzy
 msgid "&Save"
 msgstr "Рашэнне"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 #, fuzzy
 msgid "Save the current game"
 msgstr "Запісаць"
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 #, fuzzy
 msgid "Save &As..."
 msgstr "Захаваць як..."
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 #, fuzzy
 msgid "Save the current game to another file"
 msgstr "Запісаць"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 #, fuzzy
 msgid "&End Game"
 msgstr "Скончыць гульню"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 #, fuzzy
 msgid "End the current game"
 msgstr "End"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 #, fuzzy
 msgid "Pa&use"
 msgstr "Паўза"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 #, fuzzy
 msgid "Pause the game"
 msgstr "Паўза"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 msgid "Show &High Scores"
 msgstr "Табліца рэкордаў"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 msgid "Show high scores"
 msgstr "Табліца рэкордаў"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 msgid "&Clear High Scores"
 msgstr "Рэкорды"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 msgid "Clear high scores"
 msgstr "Рэкорды"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 msgid "Show Statistics"
 msgstr "Статыстыка"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 msgid "Show statistics"
 msgstr "Статыстыка"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 #, fuzzy
 msgid "&Clear Statistics"
 msgstr "Статыстыка"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 #, fuzzy
 msgid "Delete all-time statistics."
 msgstr "Выдаліць усе."
 
-#: kgamestandardaction.cpp:60
+#: kgamestandardaction.cpp:92
 #, fuzzy
 msgid "&Print..."
 msgstr "&Друкаваць..."
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 #, fuzzy
 msgid "&Quit"
 msgstr "Падказка"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 #, fuzzy
 msgid "Quit the program"
 msgstr "Выхад"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 #, fuzzy
 msgid "Repeat"
 msgstr "Паўтарыць"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 #, fuzzy
 msgid "Und&o"
 msgstr "Адмяніць"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 #, fuzzy
 msgid "Undo the last move"
 msgstr "Вярнуць"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 #, fuzzy
 msgid "Re&do"
 msgstr "Вярнуць"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 #, fuzzy
 msgid "Redo the latest move"
 msgstr "Паўтарыць"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 #, fuzzy
 msgid "&Roll Dice"
 msgstr "Кінуць косці"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 #, fuzzy
 msgid "Roll the dice"
 msgstr "Кінуць косці"
 
-#: kgamestandardaction.cpp:74
+#: kgamestandardaction.cpp:106
 #, fuzzy
 msgid "End Turn"
 msgstr "Канец ходу"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 #, fuzzy
 msgid "&Hint"
 msgstr "Падказка"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 #, fuzzy
 msgid "Give a hint"
 msgstr "а падказка"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 #, fuzzy
 msgid "&Demo"
 msgstr "Дэманстрацыя"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 #, fuzzy
 msgid "Play a demo"
 msgstr "Імя гульца"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 #, fuzzy
 msgid "&Solve"
 msgstr "Рашэнне"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "Solve the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:84
+#: kgamestandardaction.cpp:116
 #, fuzzy
 msgid "Configure &Carddecks..."
 msgstr "Наладзіць размалёўку карт..."
 
-#: kgamestandardaction.cpp:86
+#: kgamestandardaction.cpp:118
 #, fuzzy
 msgid "Configure &High Scores..."
 msgstr "Настаўленне Высокі."

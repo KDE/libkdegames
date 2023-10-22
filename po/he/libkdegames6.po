@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-19 01:40+0000\n"
+"POT-Creation-Date: 2023-10-22 02:05+0000\n"
 "PO-Revision-Date: 2017-05-16 07:01-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -195,198 +195,198 @@ msgstr ""
 msgid "Set the difficulty level of the game."
 msgstr ""
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
 msgstr "&חדש"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 msgid "Start a new game."
 msgstr "צור משחק רשת"
 
-#: kgamestandardaction.cpp:36
+#: kgamestandardaction.cpp:68
 #, fuzzy
 msgid "Start a new game"
 msgstr "צור משחק רשת"
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "&Load..."
 msgstr "&טעינה..."
 
-#: kgamestandardaction.cpp:38
+#: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
 msgstr ""
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "טען &אחרונים"
 
-#: kgamestandardaction.cpp:40
+#: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
 msgstr ""
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 msgid "Restart &Game"
 msgstr "הפעלה מחדש של ה&משחק"
 
-#: kgamestandardaction.cpp:42
+#: kgamestandardaction.cpp:74
 #, fuzzy
 msgid "Restart the game"
 msgstr "הפעלה מחדש של ה&משחק"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 #, fuzzy
 msgid "&Save"
 msgstr "&פתור"
 
-#: kgamestandardaction.cpp:44
+#: kgamestandardaction.cpp:76
 msgid "Save the current game"
 msgstr ""
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save &As..."
 msgstr "שמור &בשם..."
 
-#: kgamestandardaction.cpp:46
+#: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
 msgstr ""
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "&End Game"
 msgstr "&סיים משחק"
 
-#: kgamestandardaction.cpp:48
+#: kgamestandardaction.cpp:80
 msgid "End the current game"
 msgstr ""
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pa&use"
 msgstr "&עצור"
 
-#: kgamestandardaction.cpp:50
+#: kgamestandardaction.cpp:82
 msgid "Pause the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 msgid "Show &High Scores"
 msgstr "הצג &תוצאות שיא"
 
-#: kgamestandardaction.cpp:52
+#: kgamestandardaction.cpp:84
 #, fuzzy
 msgid "Show high scores"
 msgstr "הצג &תוצאות שיא"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 msgid "&Clear High Scores"
 msgstr "תוצאות שיא"
 
-#: kgamestandardaction.cpp:54
+#: kgamestandardaction.cpp:86
 #, fuzzy
 msgid "Clear high scores"
 msgstr "תוצאות שיא"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 msgid "Show Statistics"
 msgstr "סטטיסטיקה"
 
-#: kgamestandardaction.cpp:56
+#: kgamestandardaction.cpp:88
 #, fuzzy
 msgid "Show statistics"
 msgstr "סטטיסטיקה"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 #, fuzzy
 msgid "&Clear Statistics"
 msgstr "סטטיסטיקה"
 
-#: kgamestandardaction.cpp:58
+#: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
 msgstr ""
 
-#: kgamestandardaction.cpp:60
+#: kgamestandardaction.cpp:92
 msgid "&Print..."
 msgstr ""
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 #, fuzzy
 msgid "&Quit"
 msgstr "&רמז"
 
-#: kgamestandardaction.cpp:62
+#: kgamestandardaction.cpp:94
 msgid "Quit the program"
 msgstr ""
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat"
 msgstr "חזור"
 
-#: kgamestandardaction.cpp:66
+#: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Und&o"
 msgstr "&בטל"
 
-#: kgamestandardaction.cpp:68
+#: kgamestandardaction.cpp:100
 msgid "Undo the last move"
 msgstr ""
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Re&do"
 msgstr "בצע &שוב"
 
-#: kgamestandardaction.cpp:70
+#: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
 msgstr ""
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
 msgstr "&הטל קוביות"
 
-#: kgamestandardaction.cpp:72
+#: kgamestandardaction.cpp:104
 #, fuzzy
 msgid "Roll the dice"
 msgstr "&הטל קוביות"
 
-#: kgamestandardaction.cpp:74
+#: kgamestandardaction.cpp:106
 msgid "End Turn"
 msgstr "סיים תור"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "&Hint"
 msgstr "&רמז"
 
-#: kgamestandardaction.cpp:76
+#: kgamestandardaction.cpp:108
 msgid "Give a hint"
 msgstr ""
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 msgid "&Demo"
 msgstr "&הדגמה"
 
-#: kgamestandardaction.cpp:78
+#: kgamestandardaction.cpp:110
 #, fuzzy
 msgid "Play a demo"
 msgstr "שם השחקן"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "&Solve"
 msgstr "&פתור"
 
-#: kgamestandardaction.cpp:80
+#: kgamestandardaction.cpp:112
 msgid "Solve the game"
 msgstr ""
 
-#: kgamestandardaction.cpp:84
+#: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
 msgstr "הגדרות &חפיסות קלפים..."
 
-#: kgamestandardaction.cpp:86
+#: kgamestandardaction.cpp:118
 #, fuzzy
 msgid "Configure &High Scores..."
 msgstr "הגדרות של התוצאות &שיא..."
