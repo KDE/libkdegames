@@ -110,7 +110,7 @@ create(GameStandardAction id, const Receiver *recvr, Func slot, QObject *parent)
 /**
  * This will return the internal name of a given standard action.
  */
-KDEGAMES_EXPORT const char *name(GameStandardAction id);
+KDEGAMES_EXPORT QString name(GameStandardAction id);
 
 // we have to disable the templated function for const char* as Func, since it is ambiguous otherwise
 // TODO: KF6: unify const char* version and new style by removing std::enable_if
