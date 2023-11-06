@@ -77,7 +77,7 @@ KGameThemeProvider::~KGameThemeProvider()
         // but do not save if there is no choice; this is esp. helpful for the
         // KGameRenderer constructor overload that uses a single KGameTheme instance
         if (d->m_themes.size() > 1 && !d->m_configKey.isEmpty()) {
-            KConfigGroup cg(KSharedConfig::openConfig(), "KgTheme");
+            KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("KgTheme"));
             cg.writeEntry(d->m_configKey.data(), currentTheme()->identifier());
         }
         // cleanup
@@ -145,7 +145,7 @@ const KGameTheme *KGameThemeProvider::currentTheme() const
     Q_ASSERT(!d->m_themes.isEmpty());
     // check configuration file for saved theme
     if (!d->m_configKey.isEmpty()) {
-        KConfigGroup cg(KSharedConfig::openConfig(), "KTheme");
+        KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("KgTheme"));
         const QByteArray id = cg.readEntry(d->m_configKey.data(), QByteArray());
         // look for a theme with this id
         for (const KGameTheme *theme : std::as_const(d->m_themes)) {

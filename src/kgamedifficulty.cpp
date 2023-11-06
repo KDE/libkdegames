@@ -159,7 +159,7 @@ static void saveLevel()
     // save current difficulty level in config file (no sync() call here; this
     // will most likely be called at application shutdown when others are also
     // writing to KGlobal::config(); also KConfig's dtor will sync automatically)
-    KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("KgDifficulty"));
     cg.writeEntry("Level", KGameDifficulty::global()->currentLevel()->key());
 }
 
@@ -249,7 +249,7 @@ const KGameDifficultyLevel *KGameDifficulty::currentLevel() const
     }
     Q_ASSERT(!d->m_levels.isEmpty());
     // check configuration file for saved difficulty level
-    KConfigGroup cg(KSharedConfig::openConfig(), "KgDifficulty");
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("KgDifficulty"));
     const QByteArray key = cg.readEntry("Level", QByteArray());
     for (const KGameDifficultyLevel *level : std::as_const(d->m_levels)) {
         if (level->key() == key) {

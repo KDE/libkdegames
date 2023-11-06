@@ -138,7 +138,7 @@ void KChatBaseModel::saveConfig(KConfig *conf)
     if (!conf) {
         conf = KSharedConfig::openConfig().data();
     }
-    KConfigGroup cg(conf, "KChatBaseModelPrivate");
+    KConfigGroup cg(conf, QStringLiteral("KChatBaseModelPrivate"));
 
     cg.writeEntry("NameFont", nameFont());
     cg.writeEntry("MessageFont", messageFont());
@@ -152,7 +152,7 @@ void KChatBaseModel::readConfig(KConfig *conf)
     if (!conf) {
         conf = KSharedConfig::openConfig().data();
     }
-    KConfigGroup cg(conf, "KChatBaseModelPrivate");
+    KConfigGroup cg(conf, QStringLiteral("KChatBaseModelPrivate"));
 
     setNameFont(cg.readEntry("NameFont", QFont()));
     setMessageFont(cg.readEntry("MessageFont", QFont()));
