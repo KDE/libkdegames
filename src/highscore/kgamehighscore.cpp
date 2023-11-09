@@ -6,7 +6,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#include "khighscore.h"
+#include "kgamehighscore.h"
 
 // own
 #include <config-highscore.h>
@@ -30,48 +30,48 @@
 
 #define GROUP "KHighscore"
 
-class KHighscorePrivate
+class KGameHighscorePrivate
 {
 public:
-    KHighscorePrivate() = default;
+    KGameHighscorePrivate() = default;
 
 public:
     QString group;
     bool global;
 };
 
-class KHighscoreLockedConfig
+class KGameHighscoreLockedConfig
 {
 public:
-    ~KHighscoreLockedConfig();
+    ~KGameHighscoreLockedConfig();
     QLockFile *lock;
     KConfig *config;
 };
 
-KHighscoreLockedConfig::~KHighscoreLockedConfig()
+KGameHighscoreLockedConfig::~KGameHighscoreLockedConfig()
 {
     delete lock;
     delete config;
 }
 
-Q_GLOBAL_STATIC(KHighscoreLockedConfig, lockedConfig)
+Q_GLOBAL_STATIC(KGameHighscoreLockedConfig, lockedConfig)
 
-KHighscore::KHighscore(bool forceLocal, QObject *parent)
+KGameHighscore::KGameHighscore(bool forceLocal, QObject *parent)
     : QObject(parent)
-    , d_ptr(new KHighscorePrivate)
+    , d_ptr(new KGameHighscorePrivate)
 {
     init(forceLocal);
 }
 
-void KHighscore::init(bool forceLocal)
+void KGameHighscore::init(bool forceLocal)
 {
-    Q_D(KHighscore);
+    Q_D(KGameHighscore);
 
 #ifdef HIGHSCORE_DIRECTORY
     d->global = !forceLocal;
     if (d->global && lockedConfig->lock == 0) // If we're doing global highscores but not KFileLock has been set up yet
     {
-        qCWarning(KDEGAMES_HIGHSCORE_LOG) << "KHighscore::init should be called before!!";
+        qCWarning(KDEGAMES_HIGHSCORE_LOG) << "KGameHighscore::init should be called before!!";
         abort();
     }
 #else
@@ -81,22 +81,22 @@ void KHighscore::init(bool forceLocal)
     readCurrentConfig();
 }
 
-bool KHighscore::isLocked() const
+bool KGameHighscore::isLocked() const
 {
-    Q_D(const KHighscore);
+    Q_D(const KGameHighscore);
 
     return (d->global ? lockedConfig->lock->isLocked() : true);
 }
 
-void KHighscore::readCurrentConfig()
+void KGameHighscore::readCurrentConfig()
 {
-    Q_D(KHighscore);
+    Q_D(KGameHighscore);
 
     if (d->global)
         lockedConfig->config->reparseConfiguration();
 }
 
-void KHighscore::init(const char *appname)
+void KGameHighscore::init(const char *appname)
 {
 #ifdef HIGHSCORE_DIRECTORY
     const QString filename = QString::fromLocal8Bit("%1/%2.scores").arg(HIGHSCORE_DIRECTORY).arg(appname);
@@ -132,7 +132,7 @@ void KHighscore::init(const char *appname)
 #endif
 }
 
-bool KHighscore::lockForWriting(QWidget *widget)
+bool KGameHighscore::lockForWriting(QWidget *widget)
 {
     if (isLocked())
         return true;
@@ -172,9 +172,9 @@ bool KHighscore::lockForWriting(QWidget *widget)
     return false;
 }
 
-void KHighscore::writeAndUnlock()
+void KGameHighscore::writeAndUnlock()
 {
-    Q_D(KHighscore);
+    Q_D(KGameHighscore);
 
     if (!d->global) {
         KSharedConfig::openConfig()->sync();
@@ -188,19 +188,19 @@ void KHighscore::writeAndUnlock()
     lockedConfig->lock->unlock();
 }
 
-KHighscore::~KHighscore()
+KGameHighscore::~KGameHighscore()
 {
     writeAndUnlock();
 }
 
-KConfig *KHighscore::config() const
+KConfig *KGameHighscore::config() const
 {
-    Q_D(const KHighscore);
+    Q_D(const KGameHighscore);
 
     return (d->global ? lockedConfig->config : static_cast<KConfig *>(KSharedConfig::openConfig().data()));
 }
 
-void KHighscore::writeEntry(int entry, const QString &key, const QVariant &value)
+void KGameHighscore::writeEntry(int entry, const QString &key, const QVariant &value)
 {
     Q_ASSERT(isLocked());
     KConfigGroup cg(config(), group());
@@ -208,7 +208,7 @@ void KHighscore::writeEntry(int entry, const QString &key, const QVariant &value
     cg.writeEntry(confKey, value);
 }
 
-void KHighscore::writeEntry(int entry, const QString &key, int value)
+void KGameHighscore::writeEntry(int entry, const QString &key, int value)
 {
     Q_ASSERT(isLocked());
     KConfigGroup cg(config(), group());
@@ -216,7 +216,7 @@ void KHighscore::writeEntry(int entry, const QString &key, int value)
     cg.writeEntry(confKey, value);
 }
 
-void KHighscore::writeEntry(int entry, const QString &key, const QString &value)
+void KGameHighscore::writeEntry(int entry, const QString &key, const QString &value)
 {
     Q_ASSERT(isLocked());
     KConfigGroup cg(config(), group());
@@ -224,35 +224,35 @@ void KHighscore::writeEntry(int entry, const QString &key, const QString &value)
     cg.writeEntry(confKey, value);
 }
 
-QVariant KHighscore::readPropertyEntry(int entry, const QString &key, const QVariant &pDefault) const
+QVariant KGameHighscore::readPropertyEntry(int entry, const QString &key, const QVariant &pDefault) const
 {
     KConfigGroup cg(config(), group());
     QString confKey = QStringLiteral("%1_%2").arg(entry).arg(key);
     return cg.readEntry(confKey, pDefault);
 }
 
-QString KHighscore::readEntry(int entry, const QString &key, const QString &pDefault) const
+QString KGameHighscore::readEntry(int entry, const QString &key, const QString &pDefault) const
 {
     KConfigGroup cg(config(), group());
     QString confKey = QStringLiteral("%1_%2").arg(entry).arg(key);
     return cg.readEntry(confKey, pDefault);
 }
 
-int KHighscore::readNumEntry(int entry, const QString &key, int pDefault) const
+int KGameHighscore::readNumEntry(int entry, const QString &key, int pDefault) const
 {
     KConfigGroup cg(config(), group());
     QString confKey = QStringLiteral("%1_%2").arg(entry).arg(key);
     return cg.readEntry(confKey, pDefault);
 }
 
-bool KHighscore::hasEntry(int entry, const QString &key) const
+bool KGameHighscore::hasEntry(int entry, const QString &key) const
 {
     KConfigGroup cg(config(), group());
     QString confKey = QStringLiteral("%1_%2").arg(entry).arg(key);
     return cg.hasKey(confKey);
 }
 
-QStringList KHighscore::readList(const QString &key, int lastEntry) const
+QStringList KGameHighscore::readList(const QString &key, int lastEntry) const
 {
     QStringList list;
     if (lastEntry > 0) {
@@ -264,28 +264,28 @@ QStringList KHighscore::readList(const QString &key, int lastEntry) const
     return list;
 }
 
-void KHighscore::writeList(const QString &key, const QStringList &list)
+void KGameHighscore::writeList(const QString &key, const QStringList &list)
 {
     for (int i = 1; i <= list.count(); i++) {
         writeEntry(i, key, list[i - 1]);
     }
 }
 
-void KHighscore::setHighscoreGroup(const QString &group)
+void KGameHighscore::setHighscoreGroup(const QString &group)
 {
-    Q_D(KHighscore);
+    Q_D(KGameHighscore);
 
     d->group = group;
 }
 
-QString KHighscore::highscoreGroup() const
+QString KGameHighscore::highscoreGroup() const
 {
-    Q_D(const KHighscore);
+    Q_D(const KGameHighscore);
 
     return d->group;
 }
 
-QStringList KHighscore::groupList() const
+QStringList KGameHighscore::groupList() const
 {
     const QStringList groupList = config()->groupList();
     QStringList highscoreGroupList;
@@ -303,18 +303,18 @@ QStringList KHighscore::groupList() const
     return highscoreGroupList;
 }
 
-QString KHighscore::group() const
+QString KGameHighscore::group() const
 {
-    Q_D(const KHighscore);
+    Q_D(const KGameHighscore);
 
     if (highscoreGroup().isEmpty())
         return (d->global ? QString() : QStringLiteral(GROUP));
     return (d->global ? highscoreGroup() : QStringLiteral("%1_%2").arg(QStringLiteral(GROUP), highscoreGroup()));
 }
 
-bool KHighscore::hasTable() const
+bool KGameHighscore::hasTable() const
 {
     return config()->hasGroup(group());
 }
 
-#include "moc_khighscore.cpp"
+#include "moc_kgamehighscore.cpp"

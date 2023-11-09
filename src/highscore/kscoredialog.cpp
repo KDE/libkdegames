@@ -10,7 +10,7 @@
 
 // own
 #include "../kgamedifficulty.h"
-#include "khighscore.h"
+#include "kgamehighscore.h"
 #include <kdegames_highscore_logging.h>
 // KF
 #include <KConfig>
@@ -59,7 +59,7 @@ public:
     int nrCols;
     bool loaded;
     QByteArray configGroup;
-    KHighscore *highscoreObject;
+    KGameHighscore *highscoreObject;
     QMap<QByteArray, QString> translatedGroupNames; ///< List of the translated group names.
     QMap<QByteArray, QWidget *> tabs;
 
@@ -99,7 +99,7 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
 
     setWindowTitle(i18n("High Scores"));
     setModal(true);
-    d->highscoreObject = new KHighscore();
+    d->highscoreObject = new KGameHighscore();
     d->edit = nullptr;
     fields |= Score; // Make 'Score' field automatic (it can be hidden if necessary)
     d->fields = fields;

@@ -33,7 +33,7 @@ target_sources(KDEGames PRIVATE
     audio/virtualfileqt-${KGAUDIO_BACKEND}.cpp
     colorproxy_p.cpp colorproxy_p.h
 #   highscore/kconfigrawbackend.cpp
-    highscore/khighscore.cpp highscore/khighscore.h
+    highscore/kgamehighscore.cpp highscore/kgamehighscore.h
     highscore/kscoredialog.cpp highscore/kscoredialog.h
     kgameclock.cpp kgameclock.h
     kgamepopupitem.cpp kgamepopupitem.h
@@ -69,7 +69,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
 
 ecm_generate_headers(kdegames_CamelCase_HEADERS
     HEADER_NAMES
-        KHighscore
+        KGameHighscore
         KScoreDialog
     RELATIVE highscore
     PREFIX highscore

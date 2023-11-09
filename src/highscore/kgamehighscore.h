@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-#ifndef KHIGHSCORE_H
-#define KHIGHSCORE_H
+#ifndef KGAMEHIGHSCORE_H
+#define KGAMEHIGHSCORE_H
 
 // own
 #include <kdegames_export.h>
@@ -19,7 +19,7 @@
 class KConfig;
 
 /**
- * \class KHighscore khighscore.h <KHighscore>
+ * \class KGameHighscore kgamehighscore.h <KGameHighscore>
  *
  * @short Class for managing highscore tables
  *
@@ -70,7 +70,7 @@ class KConfig;
  * Easy, what?
  * @author Andreas Beckermann <b_mann@gmx.de>
  */
-class KDEGAMES_EXPORT KHighscore : public QObject
+class KDEGAMES_EXPORT KGameHighscore : public QObject
 {
     Q_OBJECT
 
@@ -83,7 +83,7 @@ public:
      * is convenient for converting highscores from legacy applications.
      * @param parent parent widget for this widget
      */
-    explicit KHighscore(bool forceLocal = true, QObject *parent = nullptr);
+    explicit KGameHighscore(bool forceLocal = true, QObject *parent = nullptr);
 
     /**
      * Read the current state of the highscore file. Remember that when
@@ -138,7 +138,7 @@ public:
      * Destructor.
      * If necessary, write and unlock the highscore file.
      */
-    ~KHighscore() override;
+    ~KGameHighscore() override;
 
     /**
      * @param entry The number of the entry / the placing of the player
@@ -236,11 +236,11 @@ public:
     void writeList(const QString &key, const QStringList &list);
 
     /**
-     * You can use this function to indicate whether KHighscore created a
-     * highscore table before and - if not - read your old (non-KHighscore)
+     * You can use this function to indicate whether KGameHighscore created a
+     * highscore table before and - if not - read your old (non-KGameHighscore)
      * table instead.
      * This way you can safely read an old table and save it using
-     * KHighscore without losing any data
+     * KGameHighscore without losing any data
      * @return Whether a highscore table exists.
      */
     bool hasTable() const;
@@ -287,8 +287,8 @@ protected:
     void init(bool forceLocal);
 
 private:
-    std::unique_ptr<class KHighscorePrivate> const d_ptr;
-    Q_DECLARE_PRIVATE(KHighscore)
+    std::unique_ptr<class KGameHighscorePrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameHighscore)
 };
 
 #endif
