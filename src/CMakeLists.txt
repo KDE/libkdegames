@@ -72,8 +72,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
         KGameHighscore
         KGameHighScoreDialog
     RELATIVE highscore
-    PREFIX highscore
-    REQUIRED_HEADERS kdegames_highscore_HEADERS
+    REQUIRED_HEADERS kdegames_HEADERS
 )
 
 ecm_generate_headers(kdegames_CamelCase_HEADERS
@@ -151,12 +150,6 @@ install(TARGETS KDEGames EXPORT KDEGamesTargets ${KDE_INSTALL_TARGETS_DEFAULT_AR
 
 install(FILES ${kdegames_CamelCase_HEADERS}
     DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}
-    COMPONENT Devel
-)
-
-install(FILES
-    ${kdegames_highscore_HEADERS}
-    DESTINATION ${kdegames_INCLUDE_INSTALL_DIR}/highscore
     COMPONENT Devel
 )
 
