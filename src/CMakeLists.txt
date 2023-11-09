@@ -34,7 +34,7 @@ target_sources(KDEGames PRIVATE
     colorproxy_p.cpp colorproxy_p.h
 #   highscore/kconfigrawbackend.cpp
     highscore/kgamehighscore.cpp highscore/kgamehighscore.h
-    highscore/kscoredialog.cpp highscore/kscoredialog.h
+    highscore/kgamehighscoredialog.cpp highscore/kgamehighscoredialog.h
     kgameclock.cpp kgameclock.h
     kgamepopupitem.cpp kgamepopupitem.h
     kgamerendereditem.cpp kgamerendereditem.h
@@ -70,7 +70,7 @@ ecm_generate_headers(kdegames_CamelCase_HEADERS
 ecm_generate_headers(kdegames_CamelCase_HEADERS
     HEADER_NAMES
         KGameHighscore
-        KScoreDialog
+        KGameHighScoreDialog
     RELATIVE highscore
     PREFIX highscore
     REQUIRED_HEADERS kdegames_highscore_HEADERS

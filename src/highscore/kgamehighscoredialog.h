@@ -6,8 +6,8 @@
     SPDX-License-Identifier: ICS
 */
 
-#ifndef KSCOREDIALOG_H
-#define KSCOREDIALOG_H
+#ifndef KGAMEHIGHSCOREDIALOG_H
+#define KGAMEHIGHSCOREDIALOG_H
 
 // own
 #include <kdegames_export.h>
@@ -20,7 +20,7 @@
 class KGameDifficulty;
 
 /**
- * \class KScoreDialog kscoredialog.h <KScoreDialog>
+ * \class KGameHighScoreDialog kgamehighscoredialog.h <KGameHighScoreDialog>
  *
  * @short A simple high score implementation
  *
@@ -29,25 +29,25 @@ class KGameDifficulty;
  * implementing a simple highscore table.
  *
  * To display the current highscores it is simply a case of creating
- * a KScoreDialog object and calling exec(). This example code will
+ * a KGameHighScoreDialog object and calling exec(). This example code will
  * display the Name and Score (the score is always added automatically
  * unless hidden @ref hideField since it is used for sorting) of the
  * top 10 players:
  * \code
- * KScoreDialog ksdialog(this);
+ * KGameHighScoreDialog ksdialog(this);
  * ksdialog.exec();
  * \endcode
  *
  * To add a new highscore, e.g. at the end of a game you simply create an
- * object with the @ref Fields you want to write (i.e. KScoreDialog::Name |
- * KScoreDialog::Score), call addScore and then (optionally) display
+ * object with the @ref Fields you want to write (i.e. KGameHighScoreDialog::Name |
+ * KGameHighScoreDialog::Score), call addScore and then (optionally) display
  * the dialog.
  * This code will allow you to add a highscore with a Name and Score
  * field. If it's the first time a player has a score on the table, they
  * will be prompted for their name but subsequent times they will have
  * their name filled in automatically.
  * \code
- * KScoreDialog ksdialog(this);
+ * KGameHighScoreDialog ksdialog(this);
  * ksdialog.addScore(playersScore);
  * ksdialog.exec();
  * \endcode
@@ -55,28 +55,28 @@ class KGameDifficulty;
  * Or if you want to fill the name in from the code you can pass a default
  * name by doing
  * \code
- * KScoreDialog::FieldInfo scoreInfo;
- * scoreInfo[KScoreDialog::Name] = "Matt";
- * scoreInfo[KScoreDialog::Score].setNum(playersScore);
+ * KGameHighScoreDialog::FieldInfo scoreInfo;
+ * scoreInfo[KGameHighScoreDialog::Name] = "Matt";
+ * scoreInfo[KGameHighScoreDialog::Score].setNum(playersScore);
  * ksdialog.addScore(scoreInfo);
  * \endcode
  *
  * If you want to add an extra field (e.g. the number of moves taken) then
  * do
  * \code
- * KScoreDialog::FieldInfo scoreInfo;
- * scoreInfo[KScoreDialog::Name] = "Matt";
- * scoreInfo[KScoreDialog::Score].setNum(playersScore);
+ * KGameHighScoreDialog::FieldInfo scoreInfo;
+ * scoreInfo[KGameHighScoreDialog::Name] = "Matt";
+ * scoreInfo[KGameHighScoreDialog::Score].setNum(playersScore);
  *
- * ksdialog.addField(KScoreDialog::Custom1, "Num of Moves", "moves");
- * scoreInfo[KScoreDialog::Custom1].setNum(42);
+ * ksdialog.addField(KGameHighScoreDialog::Custom1, "Num of Moves", "moves");
+ * scoreInfo[KGameHighScoreDialog::Custom1].setNum(42);
  *
  * ksdialog.addScore(scoreInfo);
  * \endcode
  * You can define up to 5 Custom fields.
  * @author Matt Williams <matt@milliams.com>
  */
-class KDEGAMES_EXPORT KScoreDialog : public QDialog
+class KDEGAMES_EXPORT KGameHighScoreDialog : public QDialog
 {
     Q_OBJECT
 
@@ -114,9 +114,9 @@ public:
      * @param fields Bitwise OR of the @ref Fields that should be listed (Score is always present)
      * @param parent passed to parent QWidget constructor.
      */
-    explicit KScoreDialog(int fields = Name, QWidget *parent = nullptr);
+    explicit KGameHighScoreDialog(int fields = Name, QWidget *parent = nullptr);
 
-    ~KScoreDialog() override;
+    ~KGameHighScoreDialog() override;
 
     /**
      * The group name must be passed though i18n() in order for the
@@ -184,7 +184,7 @@ public:
 
     /**
      * Define an extra FieldInfo entry.
-     * @param field id of this field @ref Fields e.g. KScoreDialog::Custom1
+     * @param field id of this field @ref Fields e.g. KGameHighScoreDialog::Custom1
      * @param header text shown in the header in the dialog for this field. e.g. "Number of Moves"
      * @param key unique key used to store this field. e.g. "moves"
      */
@@ -192,7 +192,7 @@ public:
 
     /**
      * Hide a field so that it is not shown on the table (but is still stored in the configuration file).
-     * @param field id of this field @ref Fields e.g. KScoreDialog::Score
+     * @param field id of this field @ref Fields e.g. KGameHighScoreDialog::Score
      */
     void hideField(int field);
 
@@ -249,11 +249,11 @@ private:
     void keyPressEvent(QKeyEvent *ev) override;
 
 private:
-    friend class KScoreDialogPrivate;
-    std::unique_ptr<class KScoreDialogPrivate> const d_ptr;
-    Q_DECLARE_PRIVATE(KScoreDialog)
+    friend class KGameHighScoreDialogPrivate;
+    std::unique_ptr<class KGameHighScoreDialogPrivate> const d_ptr;
+    Q_DECLARE_PRIVATE(KGameHighScoreDialog)
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KScoreDialog::AddScoreFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KGameHighScoreDialog::AddScoreFlags)
 
-#endif // KSCOREDIALOG_H
+#endif // KGAMEHIGHSCOREDIALOG_H

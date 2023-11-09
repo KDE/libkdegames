@@ -6,7 +6,7 @@
     SPDX-License-Identifier: ICS
 */
 
-#include "kscoredialog.h"
+#include "kgamehighscoredialog.h"
 
 // own
 #include "../kgamedifficulty.h"
@@ -35,9 +35,9 @@
 // Std
 #include <utility>
 
-typedef QList<KScoreDialog::FieldInfo> GroupScores; ///< The list of scores in a group
+typedef QList<KGameHighScoreDialog::FieldInfo> GroupScores; ///< The list of scores in a group
 
-class KScoreDialogPrivate
+class KGameHighScoreDialogPrivate
 {
 public:
     // QList<FieldInfo*> scores;
@@ -71,11 +71,11 @@ public:
 
     QDialogButtonBox *buttonBox;
 
-    KScoreDialog *const q;
+    KGameHighScoreDialog *const q;
 
 public:
     // Q-Pointer
-    explicit KScoreDialogPrivate(KScoreDialog *parent)
+    explicit KGameHighScoreDialogPrivate(KGameHighScoreDialog *parent)
         : q(parent)
     {
     }
@@ -91,11 +91,11 @@ public:
     QString findTranslatedGroupName(const QByteArray &name);
 };
 
-KScoreDialog::KScoreDialog(int fields, QWidget *parent)
+KGameHighScoreDialog::KGameHighScoreDialog(int fields, QWidget *parent)
     : QDialog(parent)
-    , d_ptr(new KScoreDialogPrivate(this))
+    , d_ptr(new KGameHighScoreDialogPrivate(this))
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     setWindowTitle(i18n("High Scores"));
     setModal(true);
@@ -134,30 +134,30 @@ KScoreDialog::KScoreDialog(int fields, QWidget *parent)
     d->buttonBox = new QDialogButtonBox(this);
 
     d->buttonBox->setStandardButtons(QDialogButtonBox::Close);
-    connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
+    connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KGameHighScoreDialog::reject);
 
     mainLayout->addWidget(d->buttonBox);
 }
 
-KScoreDialog::~KScoreDialog()
+KGameHighScoreDialog::~KGameHighScoreDialog()
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     delete d->highscoreObject;
 }
 
-void KScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &group)
+void KGameHighScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &group)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->configGroup = group.first; // untranslated string
     addLocalizedConfigGroupName(group); // add the translation to the list
     d->loaded = false;
 }
 
-void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group)
+void KGameHighScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     if (!d->translatedGroupNames.contains(group.first)) {
         d->translatedGroupNames.insert(group.first, group.second);
@@ -165,9 +165,9 @@ void KScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString> 
     }
 }
 
-void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString> &groups)
+void KGameHighScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString> &groups)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     QMap<QByteArray, QString>::const_iterator it = groups.begin();
     for (; it != groups.end(); ++it) {
@@ -175,7 +175,7 @@ void KScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, QString> 
     }
 }
 
-void KScoreDialog::initFromDifficulty(const KGameDifficulty *diff, bool doSetConfigGroup)
+void KGameHighScoreDialog::initFromDifficulty(const KGameDifficulty *diff, bool doSetConfigGroup)
 {
     QMap<QByteArray, QString> localizedLevelStrings;
     QMap<int, QByteArray> levelWeights;
@@ -192,46 +192,46 @@ void KScoreDialog::initFromDifficulty(const KGameDifficulty *diff, bool doSetCon
     }
 }
 
-void KScoreDialog::setHiddenConfigGroups(const QList<QByteArray> &hiddenGroups)
+void KGameHighScoreDialog::setHiddenConfigGroups(const QList<QByteArray> &hiddenGroups)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->hiddenGroups = hiddenGroups;
 }
 
-void KScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray> &weights)
+void KGameHighScoreDialog::setConfigGroupWeights(const QMap<int, QByteArray> &weights)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->configGroupWeights = weights;
 }
 
-QString KScoreDialogPrivate::findTranslatedGroupName(const QByteArray &name)
+QString KGameHighScoreDialogPrivate::findTranslatedGroupName(const QByteArray &name)
 {
     const QString lookupResult = translatedGroupNames.value(name);
     // If it wasn't found then just try i18n( to see if it happens to be in the database
     return lookupResult.isEmpty() ? i18n(name.constData()) : lookupResult; // FIXME?
 }
 
-void KScoreDialog::setComment(const QString &comment)
+void KGameHighScoreDialog::setComment(const QString &comment)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->comment = comment;
 }
 
-void KScoreDialog::addField(int field, const QString &header, const QString &key)
+void KGameHighScoreDialog::addField(int field, const QString &header, const QString &key)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->fields |= field;
     d->header[field] = header;
     d->key[field] = key;
 }
 
-void KScoreDialog::hideField(int field)
+void KGameHighScoreDialog::hideField(int field)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->hiddenFields |= field;
 }
@@ -239,7 +239,7 @@ void KScoreDialog::hideField(int field)
 /*
 Create the widgets and layouts etc. for the dialog
 */
-void KScoreDialogPrivate::setupDialog()
+void KGameHighScoreDialogPrivate::setupDialog()
 {
     nrCols = 1;
     for (int field = 1; field < fields; field = field * 2) {
@@ -261,7 +261,7 @@ void KScoreDialogPrivate::setupDialog()
     }
 }
 
-void KScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
+void KGameHighScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
 {
     if (hiddenGroups.contains(groupKey))
         return;
@@ -294,7 +294,7 @@ void KScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
         {
             layout->addItem(new QSpacerItem(50, 0), 0, col[field]);
             label = new QLabel(header[field], widget);
-            layout->addWidget(label, 3, col[field], field <= KScoreDialog::Name ? Qt::AlignLeft : Qt::AlignRight);
+            layout->addWidget(label, 3, col[field], field <= KGameHighScoreDialog::Name ? Qt::AlignLeft : Qt::AlignRight);
             label->setFont(bold);
         }
     }
@@ -309,17 +309,17 @@ void KScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
         label = new QLabel(i18nc("Enumeration (#1, #2 ...) of the highscore entries", "#%1", num), widget);
         labels[groupKey].insert((i - 1) * nrCols + 0, label); // Fill up column zero
         layout->addWidget(label, i + 4, 0);
-        if (fields & KScoreDialog::Name) // If we have a Name field
+        if (fields & KGameHighScoreDialog::Name) // If we have a Name field
         {
             QStackedWidget *localStack = new QStackedWidget(widget);
             stack[groupKey].insert(i - 1, localStack);
-            layout->addWidget(localStack, i + 4, col[KScoreDialog::Name]);
+            layout->addWidget(localStack, i + 4, col[KGameHighScoreDialog::Name]);
             label = new QLabel(localStack);
-            labels[groupKey].insert((i - 1) * nrCols + col[KScoreDialog::Name], label);
+            labels[groupKey].insert((i - 1) * nrCols + col[KGameHighScoreDialog::Name], label);
             localStack->addWidget(label);
             localStack->setCurrentWidget(label);
         }
-        for (int field = KScoreDialog::Name * 2; field < fields; field = field * 2) {
+        for (int field = KGameHighScoreDialog::Name * 2; field < fields; field = field * 2) {
             if ((fields & field) && !(hiddenFields & field)) // Maybe disable for Name?
             {
                 label = new QLabel(widget);
@@ -333,7 +333,7 @@ void KScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
 /*
 Fill the dialog with the correct data
 */
-void KScoreDialogPrivate::aboutToShow()
+void KGameHighScoreDialogPrivate::aboutToShow()
 {
     if (!loaded)
         loadScores();
@@ -384,14 +384,14 @@ void KScoreDialogPrivate::aboutToShow()
 
             // qCDebug(KDEGAMES_HIGHSCORE_LOG) << "groupName:" << groupName << "id:" << i-1;
 
-            KScoreDialog::FieldInfo score = scores[groupKey].at(i - 1);
+            KGameHighScoreDialog::FieldInfo score = scores[groupKey].at(i - 1);
             label = labels[groupKey].at((i - 1) * nrCols + 0); // crash! FIXME
             if ((i == latest.second) && (groupKey == latest.first))
                 label->setFont(bold);
             else
                 label->setFont(normal);
 
-            if (fields & KScoreDialog::Name) {
+            if (fields & KGameHighScoreDialog::Name) {
                 if ((newName.second == i) && (groupKey == newName.first)) {
                     QStackedWidget *localStack = stack[groupKey].at(i - 1);
                     edit = new KLineEdit(player, localStack);
@@ -399,17 +399,17 @@ void KScoreDialogPrivate::aboutToShow()
                     localStack->addWidget(edit);
                     localStack->setCurrentWidget(edit);
                     edit->setFocus();
-                    QObject::connect(edit, &KLineEdit::returnKeyPressed, q, &KScoreDialog::slotGotReturn);
+                    QObject::connect(edit, &KLineEdit::returnKeyPressed, q, &KGameHighScoreDialog::slotGotReturn);
                 } else {
-                    label = labels[groupKey].at((i - 1) * nrCols + col[KScoreDialog::Name]);
+                    label = labels[groupKey].at((i - 1) * nrCols + col[KGameHighScoreDialog::Name]);
                     if ((i == latest.second) && (groupKey == latest.first))
                         label->setFont(bold);
                     else
                         label->setFont(normal);
-                    label->setText(score[KScoreDialog::Name]);
+                    label->setText(score[KGameHighScoreDialog::Name]);
                 }
             }
-            for (int field = KScoreDialog::Name * 2; field < fields; field = field * 2) {
+            for (int field = KGameHighScoreDialog::Name * 2; field < fields; field = field * 2) {
                 if ((fields & field) && !(hiddenFields & field)) {
                     label = labels[groupKey].at((i - 1) * nrCols + col[field]);
                     if ((i == latest.second) && (groupKey == latest.first))
@@ -430,7 +430,7 @@ void KScoreDialogPrivate::aboutToShow()
     q->setFixedSize(q->minimumSizeHint()); // NOTE Remove this line to make dialog resizable
 }
 
-void KScoreDialogPrivate::loadScores()
+void KGameHighScoreDialogPrivate::loadScores()
 {
     scores.clear();
 
@@ -454,7 +454,7 @@ void KScoreDialogPrivate::loadScores()
         player = highscoreObject->readEntry(0, QStringLiteral("LastPlayer")); // FIXME
 
         for (int i = 1; i <= 10; ++i) {
-            KScoreDialog::FieldInfo score;
+            KGameHighScoreDialog::FieldInfo score;
             for (int field = 1; field < fields; field = field * 2) {
                 if (fields & field) {
                     score[field] = highscoreObject->readEntry(i, key[field], QStringLiteral("-"));
@@ -466,7 +466,7 @@ void KScoreDialogPrivate::loadScores()
     highscoreObject->setHighscoreGroup(QLatin1String(tempCurrentGroup)); // reset to the user-set group name
     const auto groupKeys = scores.keys();
     for (const QByteArray &groupKey : groupKeys) {
-        if ((scores[groupKey][0].value(KScoreDialog::Score) == QLatin1String("-")) && (scores.size() > 1) && (latest.first != groupKey)) {
+        if ((scores[groupKey][0].value(KGameHighScoreDialog::Score) == QLatin1String("-")) && (scores.size() > 1) && (latest.first != groupKey)) {
             qCDebug(KDEGAMES_HIGHSCORE_LOG) << "Removing group " << groupKey << " since it's unused.";
             scores.remove(groupKey);
         }
@@ -474,14 +474,14 @@ void KScoreDialogPrivate::loadScores()
     loaded = true;
 }
 
-void KScoreDialogPrivate::saveScores()
+void KGameHighScoreDialogPrivate::saveScores()
 {
     highscoreObject->setHighscoreGroup(QLatin1String(configGroup));
 
     highscoreObject->writeEntry(0, QStringLiteral("LastPlayer"), player);
 
     for (int i = 1; i <= 10; ++i) {
-        KScoreDialog::FieldInfo score = scores[configGroup].at(i - 1);
+        KGameHighScoreDialog::FieldInfo score = scores[configGroup].at(i - 1);
         for (int field = 1; field < fields; field = field * 2) {
             if (fields & field) {
                 highscoreObject->writeEntry(i, key[field], score[field]);
@@ -491,16 +491,16 @@ void KScoreDialogPrivate::saveScores()
     highscoreObject->writeAndUnlock();
 }
 
-int KScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags)
+int KGameHighScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     qCDebug(KDEGAMES_HIGHSCORE_LOG) << "adding new score";
 
     bool askName = false, lessIsMore = false;
-    if (flags.testFlag(KScoreDialog::AskName))
+    if (flags.testFlag(KGameHighScoreDialog::AskName))
         askName = true;
-    if (flags.testFlag(KScoreDialog::LessIsMore))
+    if (flags.testFlag(KGameHighScoreDialog::LessIsMore))
         lessIsMore = true;
 
     d->latest.first = d->configGroup; // Temporarily set this so loadScores() knows not to delete this group
@@ -550,8 +550,8 @@ int KScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags)
                 d->buttonBox->button(QDialogButtonBox::Ok)->setToolTip(i18n("Remember this high score"));
                 d->buttonBox->button(QDialogButtonBox::Cancel)->setToolTip(i18n("Forget this high score"));
 
-                connect(d->buttonBox, &QDialogButtonBox::accepted, this, &KScoreDialog::slotGotName);
-                connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::slotForgetScore);
+                connect(d->buttonBox, &QDialogButtonBox::accepted, this, &KGameHighScoreDialog::slotGotName);
+                connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KGameHighScoreDialog::slotForgetScore);
             } else
                 d->saveScores();
 
@@ -566,38 +566,38 @@ int KScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags)
     return 0;
 }
 
-int KScoreDialog::addScore(int newScore, AddScoreFlags flags)
+int KGameHighScoreDialog::addScore(int newScore, AddScoreFlags flags)
 {
     FieldInfo scoreInfo;
     scoreInfo[Score] = QString::number(newScore);
     return addScore(scoreInfo, AskName | flags);
 }
 
-void KScoreDialog::show()
+void KGameHighScoreDialog::show()
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->aboutToShow();
     QDialog::show();
 }
 
-int KScoreDialog::exec()
+int KGameHighScoreDialog::exec()
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     d->aboutToShow();
     return QDialog::exec();
 }
 
-void KScoreDialog::slotGotReturn()
+void KGameHighScoreDialog::slotGotReturn()
 {
-    QTimer::singleShot(0, this, &KScoreDialog::slotGotName);
+    QTimer::singleShot(0, this, &KGameHighScoreDialog::slotGotName);
     // TODO: Is it better to hide the window, as if any button where pressed?
 }
 
-void KScoreDialog::slotGotName()
+void KGameHighScoreDialog::slotGotName()
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     if (d->newName.second == -1)
         return;
@@ -623,12 +623,12 @@ void KScoreDialog::slotGotName()
     d->commentLabel->hide();
 
     d->buttonBox->setStandardButtons(QDialogButtonBox::Close);
-    connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
+    connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KGameHighScoreDialog::reject);
 }
 
-void KScoreDialog::slotForgetScore()
+void KGameHighScoreDialog::slotForgetScore()
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     if (d->newName.second == -1)
         return;
@@ -645,12 +645,12 @@ void KScoreDialog::slotForgetScore()
     d->commentLabel->hide();
 
     d->buttonBox->setStandardButtons(QDialogButtonBox::Close);
-    connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KScoreDialog::reject);
+    connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KGameHighScoreDialog::reject);
 }
 
-int KScoreDialog::highScore()
+int KGameHighScoreDialog::highScore()
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     if (!d->loaded)
         d->loadScores();
@@ -661,9 +661,9 @@ int KScoreDialog::highScore()
         return 0;
 }
 
-void KScoreDialog::keyPressEvent(QKeyEvent *ev)
+void KGameHighScoreDialog::keyPressEvent(QKeyEvent *ev)
 {
-    Q_D(KScoreDialog);
+    Q_D(KGameHighScoreDialog);
 
     if ((d->newName.second != -1) && (ev->key() == Qt::Key_Return)) {
         ev->ignore();
@@ -672,4 +672,4 @@ void KScoreDialog::keyPressEvent(QKeyEvent *ev)
     QDialog::keyPressEvent(ev);
 }
 
-#include "moc_kscoredialog.cpp"
+#include "moc_kgamehighscoredialog.cpp"
