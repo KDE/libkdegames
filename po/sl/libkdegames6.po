@@ -2,7 +2,7 @@
 # Translation of libkdegames.po to Slovenian
 # LIBKDEGAMES TRANSLATION TO SLOVENIAN LANGUAGE
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: libkdegames6.po 1662892 2023-10-22 02:28:31Z scripty $
+# $Id: libkdegames6.po 1664505 2023-11-10 02:11:52Z scripty $
 # $Source$
 #
 # Roman Maurer <roman.maurer@amis.net>, 2001.
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:05+0000\n"
+"POT-Creation-Date: 2023-11-10 01:46+0000\n"
 "PO-Revision-Date: 2020-02-25 20:31+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -28,12 +28,12 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 
-#: highscore/khighscore.cpp:154
+#: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
 msgstr "Poskusi znova"
 
-#: highscore/khighscore.cpp:156
+#: highscore/kgamehighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -42,68 +42,69 @@ msgstr ""
 "Ni bilo mogoče dostopati do datoteke z najboljšimi rezultati. Verjetno vanjo "
 "ravnokar piše drug uporabnik."
 
-#: highscore/kscoredialog.cpp:100 highscore/kscoredialog.cpp:271
+#: highscore/kgamehighscoredialog.cpp:100
+#: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
 msgstr "Najboljši rezultati"
 
-#: highscore/kscoredialog.cpp:114 private/kgame/kplayer.cpp:77
+#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
 msgid "Name"
 msgstr "Ime"
 
-#: highscore/kscoredialog.cpp:116
+#: highscore/kgamehighscoredialog.cpp:116
 #, kde-format
 msgid "Date"
 msgstr "Datum"
 
-#: highscore/kscoredialog.cpp:118
+#: highscore/kgamehighscoredialog.cpp:118
 #, kde-format
 msgid "Level"
 msgstr "Stopnja"
 
-#: highscore/kscoredialog.cpp:120
+#: highscore/kgamehighscoredialog.cpp:120
 #, kde-format
 msgid "Score"
 msgstr "Rezultat"
 
-#: highscore/kscoredialog.cpp:122
+#: highscore/kgamehighscoredialog.cpp:122
 #, kde-format
 msgid "Time"
 msgstr "Čas"
 
-#: highscore/kscoredialog.cpp:288
+#: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
 msgstr "Položaj"
 
-#: highscore/kscoredialog.cpp:309
+#: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "št. %1"
 
-#: highscore/kscoredialog.cpp:548
+#: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
 msgstr "Zapomni si"
 
-#: highscore/kscoredialog.cpp:549
+#: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
 msgstr "Pozabi"
 
-#: highscore/kscoredialog.cpp:550
+#: highscore/kgamehighscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
 msgstr "Zapomni si ta najboljši rezultat"
 
-#: highscore/kscoredialog.cpp:551
+#: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
 msgstr "Pozabi ta najboljši rezultat"
 
-#: highscore/kscoredialog.cpp:559
+#: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -112,7 +113,7 @@ msgstr ""
 "Odlično!\n"
 "Imate nov najboljši rezultat!"
 
-#: highscore/kscoredialog.cpp:561
+#: highscore/kgamehighscoredialog.cpp:561
 #, kde-format
 msgid ""
 "Well done!\n"

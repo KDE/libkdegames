@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:05+0000\n"
+"POT-Creation-Date: 2023-11-10 01:46+0000\n"
 "PO-Revision-Date: 2015-04-18 20:24+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -22,12 +22,12 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: highscore/khighscore.cpp:154
+#: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
 msgstr "Покушај поново"
 
-#: highscore/khighscore.cpp:156
+#: highscore/kgamehighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
@@ -36,74 +36,75 @@ msgstr ""
 "Не могу да приступим фајлу најрезултата. Вероватно други корисник тренутно "
 "нешто уписује у њега."
 
-#: highscore/kscoredialog.cpp:100 highscore/kscoredialog.cpp:271
+#: highscore/kgamehighscoredialog.cpp:100
+#: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
 msgstr "Најрезултати"
 
 # >> @item
-#: highscore/kscoredialog.cpp:114 private/kgame/kplayer.cpp:77
+#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
 msgid "Name"
 msgstr "име"
 
 # >> @item
-#: highscore/kscoredialog.cpp:116
+#: highscore/kgamehighscoredialog.cpp:116
 #, kde-format
 msgid "Date"
 msgstr "датум"
 
 # >> @title:column
-#: highscore/kscoredialog.cpp:118
+#: highscore/kgamehighscoredialog.cpp:118
 #, kde-format
 msgid "Level"
 msgstr "ниво"
 
 # >> @item
-#: highscore/kscoredialog.cpp:120
+#: highscore/kgamehighscoredialog.cpp:120
 #, kde-format
 msgid "Score"
 msgstr "резултат"
 
 # >> @title:column
-#: highscore/kscoredialog.cpp:122
+#: highscore/kgamehighscoredialog.cpp:122
 #, kde-format
 msgid "Time"
 msgstr "време"
 
 # >> @item
-#: highscore/kscoredialog.cpp:288
+#: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
 msgstr "позиција"
 
-#: highscore/kscoredialog.cpp:309
+#: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:548
+#: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
 msgstr "&Упамти"
 
-#: highscore/kscoredialog.cpp:549
+#: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
 msgstr "&Заборави"
 
-#: highscore/kscoredialog.cpp:550
+#: highscore/kgamehighscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
 msgstr "Упамти овај најрезултат"
 
-#: highscore/kscoredialog.cpp:551
+#: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
 msgstr "Заборави овај најрезултат"
 
-#: highscore/kscoredialog.cpp:559
+#: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -112,7 +113,7 @@ msgstr ""
 "Одлично!\n"
 "Постигли сте нови најрезултат!"
 
-#: highscore/kscoredialog.cpp:561
+#: highscore/kgamehighscoredialog.cpp:561
 #, kde-format
 msgid ""
 "Well done!\n"

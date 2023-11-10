@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:05+0000\n"
+"POT-Creation-Date: 2023-11-10 01:46+0000\n"
 "PO-Revision-Date: 2010-06-08 15:55+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -19,80 +19,81 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "X-Language: km-KH\n"
 
-#: highscore/khighscore.cpp:154
+#: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
 msgstr "ព្យាយាម​ម្តង​ទៀត"
 
-#: highscore/khighscore.cpp:156
+#: highscore/kgamehighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 msgstr "មិន​អាច​ចូល​ឯកសារ​ពិន្ទុ​ខ្ពស់​បាន ។ អ្នក​ប្រើ​ផ្សេង​ទៀត​ប្រហែល​ជា​កំពុង​តែ​សរសេរ​លើ​វា​ហើយ ។"
 
-#: highscore/kscoredialog.cpp:100 highscore/kscoredialog.cpp:271
+#: highscore/kgamehighscoredialog.cpp:100
+#: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
 msgstr "ពិន្ទុ​ខ្ពស់"
 
-#: highscore/kscoredialog.cpp:114 private/kgame/kplayer.cpp:77
+#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
 msgid "Name"
 msgstr "ឈ្មោះ"
 
-#: highscore/kscoredialog.cpp:116
+#: highscore/kgamehighscoredialog.cpp:116
 #, kde-format
 msgid "Date"
 msgstr "កាលបរិច្ឆេទ"
 
-#: highscore/kscoredialog.cpp:118
+#: highscore/kgamehighscoredialog.cpp:118
 #, kde-format
 msgid "Level"
 msgstr "កម្រិត"
 
-#: highscore/kscoredialog.cpp:120
+#: highscore/kgamehighscoredialog.cpp:120
 #, kde-format
 msgid "Score"
 msgstr "ពិន្ទុ"
 
-#: highscore/kscoredialog.cpp:122
+#: highscore/kgamehighscoredialog.cpp:122
 #, kde-format
 msgid "Time"
 msgstr "ពេលវេលា"
 
-#: highscore/kscoredialog.cpp:288
+#: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
 msgstr "ចំណាត់​ថ្នាក់"
 
-#: highscore/kscoredialog.cpp:309
+#: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
 
-#: highscore/kscoredialog.cpp:548
+#: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
 msgstr "នឹក​ឃើញ​"
 
-#: highscore/kscoredialog.cpp:549
+#: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
 msgstr "ភ្លេច"
 
-#: highscore/kscoredialog.cpp:550
+#: highscore/kgamehighscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
 msgstr "នឹក​​ឃើញ​​ពិន្ទុ​ខ្ពស់​នេះ​"
 
-#: highscore/kscoredialog.cpp:551
+#: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
 msgstr "ភ្លេច​ពិន្ទុ​ខ្ពស់​នេះ"
 
-#: highscore/kscoredialog.cpp:559
+#: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
 msgid ""
 "Excellent!\n"
@@ -101,7 +102,7 @@ msgstr ""
 "ល្អ​ឥត​ខ្ចោះ !\n"
 "អ្នក​មាន​ពិន្ទុ​ខ្ពស់​ថ្មី !"
 
-#: highscore/kscoredialog.cpp:561
+#: highscore/kgamehighscoredialog.cpp:561
 #, kde-format
 msgid ""
 "Well done!\n"
