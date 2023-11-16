@@ -483,24 +483,28 @@ static const uint transparentRgba = QColor(Qt::transparent).rgba();
 void KGRInternal::Worker::run()
 {
     QImage image(m_job->spec.size, QImage::Format_ARGB32_Premultiplied);
-    image.fill(transparentRgba);
-    QPainter *painter = nullptr;
-    QPaintDeviceColorProxy *proxy = nullptr;
-    // if no custom colors requested, paint directly onto image
-    if (m_job->spec.customColors.isEmpty()) {
-        painter = new QPainter(&image);
+    // image might not be created if size is too large for needed memory, or invalid
+    if (image.isNull()) {
+        qCWarning(GAMES_LIB) << "Could not create QImage. Key:" << m_job->spec.spriteKey << "Frame:" << m_job->spec.frame << "Size:" << m_job->spec.size;
     } else {
-        proxy = new QPaintDeviceColorProxy(&image, m_job->spec.customColors);
-        painter = new QPainter(proxy);
+        image.fill(transparentRgba);
+        QPainter *painter = nullptr;
+        QPaintDeviceColorProxy *proxy = nullptr;
+        // if no custom colors requested, paint directly onto image
+        if (m_job->spec.customColors.isEmpty()) {
+            painter = new QPainter(&image);
+        } else {
+            proxy = new QPaintDeviceColorProxy(&image, m_job->spec.customColors);
+            painter = new QPainter(proxy);
+        }
+
+        // do renderering
+        QSvgRenderer *renderer = m_job->rendererPool->allocRenderer();
+        renderer->render(painter, m_job->elementKey);
+        m_job->rendererPool->freeRenderer(renderer);
+        delete painter;
+        delete proxy;
     }
-
-    // do renderering
-    QSvgRenderer *renderer = m_job->rendererPool->allocRenderer();
-    renderer->render(painter, m_job->elementKey);
-    m_job->rendererPool->freeRenderer(renderer);
-    delete painter;
-    delete proxy;
-
     // talk back to the main thread
     m_job->result = image;
     QMetaObject::invokeMethod(m_parent, "jobFinished", Qt::AutoConnection, Q_ARG(KGRInternal::Job *, m_job), Q_ARG(bool, m_synchronous));
