@@ -952,7 +952,7 @@ style="opacity:1;color:#000;fill-opacity:1;fill-rule:evenodd;stroke-opacity:1;st
 </g>
 </g>
 <use xlink:href="#g3346" transform="matrix(-1,0,0,-1,206,315)" />
-<path style="opacity:1;fill:none;stroke:#000;stroke-width:5;stroke-linecap:square;round;display:inline" d="M 56.133,231.102 L 151.108,85.0054" />
+<path style="opacity:1;fill:none;stroke:#000;stroke-width:5;stroke-linecap:square;display:inline" d="M 56.133,231.102 L 151.108,85.0054" />
 <path style="opacity:1;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:square;display:inline" d="M 56.133,231.102 L 151.108,85.0054" />
 </g>
 </g>
