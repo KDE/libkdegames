@@ -36,6 +36,11 @@
  * VersionFormat=1
  * Name=Example
  * Description=This theme serves as an example.
+ * License=CC-BY-SA-4.0
+ * Copyright=1984 John Doe
+ * Version=1.0
+ * Website=https://theme.example
+ * BugReportUrl=https://theme.example/newbugform
  * FileName=example.svgz
  * Author=John Doe
  * AuthorEmail=john.doe@example.com
@@ -60,6 +65,11 @@ class KDEGAMES_EXPORT KGameTheme : public QObject
     // a dummy NOTIFY signal is enough
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY readOnlyProperty)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString license READ license WRITE setLicense NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString copyrightText READ copyrightText WRITE setCopyrightText NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString website READ website WRITE setWebsite NOTIFY readOnlyProperty)
+    Q_PROPERTY(QString bugReportUrl READ bugReportUrl WRITE setBugReportUrl NOTIFY readOnlyProperty)
     Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY readOnlyProperty)
     Q_PROPERTY(QString authorEmail READ authorEmail WRITE setAuthorEmail NOTIFY readOnlyProperty)
     Q_PROPERTY(QString graphicsPath READ graphicsPath WRITE setGraphicsPath NOTIFY readOnlyProperty)
@@ -93,6 +103,26 @@ public:
     QString description() const;
     /// @see description()
     void setDescription(const QString &description);
+    /// @return the short license identifier, as SPDX expression
+    QString license() const;
+    /// @see license()
+    void setLicense(const QString &license);
+    /// @return a short copyright statement
+    QString copyrightText() const;
+    /// @see copyrightText()
+    void setCopyrightText(const QString &copyrightText);
+    /// @return the version of the theme.
+    QString version() const;
+    /// @see version()
+    void setVersion(const QString &version);
+    /// @return the website of the theme.
+    QString website() const;
+    /// @see website()
+    void setWebsite(const QString &website);
+    /// @return the website where people can report a bug found in this theme.
+    QString bugReportUrl() const;
+    /// @see bugReportUrl()
+    void setBugReportUrl(const QString &bugReportUrl);
     /// @return the name of the theme author
     QString author() const;
     /// @see author()

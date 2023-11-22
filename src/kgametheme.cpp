@@ -23,6 +23,11 @@ class KGameThemePrivate
 public:
     const QByteArray m_identifier;
     QString m_name, m_description, m_author, m_authorEmail, m_graphicsPath, m_previewPath;
+    QString m_license;
+    QString m_copyrightText;
+    QString m_version;
+    QString m_website;
+    QString m_bugReportUrl;
     QMap<QString, QString> m_customData;
 
 public:
@@ -65,6 +70,11 @@ QByteArray KGameTheme::identifier() const
 
 KGAMETHEME_STRING_PROPERTY(name, setName)
 KGAMETHEME_STRING_PROPERTY(description, setDescription)
+KGAMETHEME_STRING_PROPERTY(license, setLicense)
+KGAMETHEME_STRING_PROPERTY(copyrightText, setCopyrightText)
+KGAMETHEME_STRING_PROPERTY(version, setVersion)
+KGAMETHEME_STRING_PROPERTY(website, setWebsite)
+KGAMETHEME_STRING_PROPERTY(bugReportUrl, setBugReportUrl)
 KGAMETHEME_STRING_PROPERTY(author, setAuthor)
 KGAMETHEME_STRING_PROPERTY(authorEmail, setAuthorEmail)
 KGAMETHEME_STRING_PROPERTY(graphicsPath, setGraphicsPath)
@@ -140,6 +150,11 @@ bool KGameTheme::readFromDesktopFile(const QString &path_)
     // create theme
     setName(group.readEntry("Name", QString()));
     setDescription(group.readEntry("Description", QString()));
+    setLicense(group.readEntry("License", QString()));
+    setCopyrightText(group.readEntry("Copyright", QString()));
+    setVersion(group.readEntry("Version", QString()));
+    setWebsite(group.readEntry("Website", QString()));
+    setBugReportUrl(group.readEntry("BugReportUrl", QString()));
     setAuthor(group.readEntry("Author", QString()));
     setAuthorEmail(group.readEntry("AuthorEmail", QString()));
     setGraphicsPath(graphicsPath);
