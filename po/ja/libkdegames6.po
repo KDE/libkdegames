@@ -628,6 +628,3 @@ msgstr "非同期入力"
 #, kde-format
 msgid "myTurn"
 msgstr "あなたの番"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "ゲームのタイプを選択(&T)"
