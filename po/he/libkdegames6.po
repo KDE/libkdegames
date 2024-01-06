@@ -13,40 +13,40 @@
 # Israel Berger <israelb@gmail.com>, 2005.
 # Chen Levy <contrib@chenlevy.com>, 2006.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:46+0000\n"
-"PO-Revision-Date: 2017-05-16 07:01-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-01-05 14:55+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
-msgstr "נסה שוב"
+msgstr "ניסיון חוזר"
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
 msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
-msgstr ""
-"לא יכול לגשת לקובץ רשימת התוצאות הגבוהות. משתמש אחר כנראה כותב אליו עכשיו."
+msgstr "אי אפשר לגשת לקובץ רשימת השיאים. משתמש אחר כנראה כותב אליו עכשיו."
 
 #: highscore/kgamehighscoredialog.cpp:100
 #: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
-msgstr "תוצאות שיא"
+msgstr "לוח השיאים"
 
 #: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
@@ -79,30 +79,30 @@ msgid "Rank"
 msgstr "דירוג"
 
 #: highscore/kgamehighscoredialog.cpp:309
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
-msgstr "#%1"
+msgstr "מס׳ %1"
 
 #: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
-msgstr ""
+msgstr "ל&זכור"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
-msgstr ""
+msgstr "ל&שכוח"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remember this high score"
-msgstr "תוצאות שיא"
+msgstr "שמירת תוצאת השיא הזאת"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
+#, kde-format
 msgid "Forget this high score"
-msgstr "תוצאות שיא"
+msgstr "מחיקת תוצאת השיא הזאת"
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -126,75 +126,75 @@ msgstr ""
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
-msgstr ""
+msgstr "קל להפליא"
 
 #: kgamedifficulty.cpp:79
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
-msgstr ""
+msgstr "קל מאוד"
 
 #: kgamedifficulty.cpp:82
 #, kde-format
 msgctxt "Game difficulty level 3 out of 8"
 msgid "Easy"
-msgstr ""
+msgstr "קל"
 
 #: kgamedifficulty.cpp:85
 #, kde-format
 msgctxt "Game difficulty level 4 out of 8"
 msgid "Medium"
-msgstr ""
+msgstr "בינוני"
 
 #: kgamedifficulty.cpp:88
 #, kde-format
 msgctxt "Game difficulty level 5 out of 8"
 msgid "Hard"
-msgstr ""
+msgstr "קשה"
 
 #: kgamedifficulty.cpp:91
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
-msgstr ""
+msgstr "קשה מאוד"
 
 #: kgamedifficulty.cpp:94
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
-msgstr ""
+msgstr "קשה במיוחד"
 
 #: kgamedifficulty.cpp:97
 #, kde-format
 msgctxt "Game difficulty level 8 out of 8"
 msgid "Impossible"
-msgstr ""
+msgstr "בלתי אפשרי"
 
 #: kgamedifficulty.cpp:316
 #, kde-format
 msgid "Changing the difficulty level will end the current game!"
-msgstr ""
+msgstr "החלפת דרגת הקושי תסיים את המשחק הנוכחי!"
 
 #: kgamedifficulty.cpp:318
 #, kde-format
 msgid "Change the difficulty level"
-msgstr ""
+msgstr "החלפת דרגת הקושי"
 
 #: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
-msgstr ""
+msgstr "קושי"
 
 #: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
-msgstr ""
+msgstr "הגדרת דרגת הקושי"
 
 #: kgamedifficulty.cpp:412
 #, kde-format
 msgid "Set the difficulty level of the game."
-msgstr ""
+msgstr "הגדרת דרגת הקושי של המשחק."
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
@@ -202,161 +202,148 @@ msgid "&New"
 msgstr "&חדש"
 
 #: kgamestandardaction.cpp:68
-#, fuzzy
 msgid "Start a new game."
-msgstr "צור משחק רשת"
+msgstr "התחלת משחק חדש."
 
 #: kgamestandardaction.cpp:68
-#, fuzzy
 msgid "Start a new game"
-msgstr "צור משחק רשת"
+msgstr "התחלת משחק חדש"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load..."
-msgstr "&טעינה..."
+msgstr "&טעינה…"
 
 #: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
-msgstr ""
+msgstr "פתיחת משחק שמור…"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
-msgstr "טען &אחרונים"
+msgstr "טעינת ה&אחרונים"
 
 #: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
-msgstr ""
+msgstr "פתיחת משחק שנשמר לאחרונה…"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
-msgstr "הפעלה מחדש של ה&משחק"
+msgstr "ה&פעלת המשחק מחדש"
 
 #: kgamestandardaction.cpp:74
-#, fuzzy
 msgid "Restart the game"
-msgstr "הפעלה מחדש של ה&משחק"
+msgstr "הפעלת המשחק מחדש"
 
 #: kgamestandardaction.cpp:76
-#, fuzzy
 msgid "&Save"
-msgstr "&פתור"
+msgstr "&שמירה"
 
 #: kgamestandardaction.cpp:76
 msgid "Save the current game"
-msgstr ""
+msgstr "שמירת המשחק הנוכחי"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As..."
-msgstr "שמור &בשם..."
+msgstr "שמירה &בשם…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
-msgstr ""
+msgstr "שמירת המשחק הנוכחי לקובץ אחר"
 
 #: kgamestandardaction.cpp:80
 msgid "&End Game"
-msgstr "&סיים משחק"
+msgstr "&סיום משחק"
 
 #: kgamestandardaction.cpp:80
 msgid "End the current game"
-msgstr ""
+msgstr "סיום המשחק הנוכחי"
 
 #: kgamestandardaction.cpp:82
 msgid "Pa&use"
-msgstr "&עצור"
+msgstr "ה&שהייה"
 
 #: kgamestandardaction.cpp:82
 msgid "Pause the game"
-msgstr ""
+msgstr "השהיית המשחק"
 
 #: kgamestandardaction.cpp:84
-#, fuzzy
 msgid "Show &High Scores"
-msgstr "הצג &תוצאות שיא"
+msgstr "הצגת &לוח שיאים"
 
 #: kgamestandardaction.cpp:84
-#, fuzzy
 msgid "Show high scores"
-msgstr "הצג &תוצאות שיא"
+msgstr "הצגת לוח שיאים"
 
 #: kgamestandardaction.cpp:86
-#, fuzzy
 msgid "&Clear High Scores"
-msgstr "תוצאות שיא"
+msgstr "&פינוי לוח שיאים"
 
 #: kgamestandardaction.cpp:86
-#, fuzzy
 msgid "Clear high scores"
-msgstr "תוצאות שיא"
+msgstr "פינוי לוח שיאים"
 
 #: kgamestandardaction.cpp:88
-#, fuzzy
 msgid "Show Statistics"
-msgstr "סטטיסטיקה"
+msgstr "הצגת סטטיסטיקה"
 
 #: kgamestandardaction.cpp:88
-#, fuzzy
 msgid "Show statistics"
-msgstr "סטטיסטיקה"
+msgstr "הצגת סטטיסטיקה"
 
 #: kgamestandardaction.cpp:90
-#, fuzzy
 msgid "&Clear Statistics"
-msgstr "סטטיסטיקה"
+msgstr "&פינוי סטטיסטיקה"
 
 #: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
-msgstr ""
+msgstr "מחיקת סטטיסטיקת כל הזמנים."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print..."
-msgstr ""
+msgstr "ה&דפסה…"
 
 #: kgamestandardaction.cpp:94
-#, fuzzy
 msgid "&Quit"
-msgstr "&רמז"
+msgstr "י&ציאה"
 
 #: kgamestandardaction.cpp:94
 msgid "Quit the program"
-msgstr ""
+msgstr "יציאה מהתוכנית"
 
 #: kgamestandardaction.cpp:98
 msgid "Repeat"
-msgstr "חזור"
+msgstr "חזרה"
 
 #: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
-msgstr ""
+msgstr "חזרה על המהלך האחרון"
 
 #: kgamestandardaction.cpp:100
 msgid "Und&o"
-msgstr "&בטל"
+msgstr "ה&סגה"
 
 #: kgamestandardaction.cpp:100
 msgid "Undo the last move"
-msgstr ""
+msgstr "הסגת המהלך האחרון"
 
 #: kgamestandardaction.cpp:102
 msgid "Re&do"
-msgstr "בצע &שוב"
+msgstr "&שחזור"
 
 #: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
-msgstr ""
+msgstr "שחזור המהלך האחרון"
 
 #: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
-msgstr "&הטל קוביות"
+msgstr "ה&טלת הקובייה"
 
 #: kgamestandardaction.cpp:104
-#, fuzzy
 msgid "Roll the dice"
-msgstr "&הטל קוביות"
+msgstr "הטלת הקובייה"
 
 #: kgamestandardaction.cpp:106
 msgid "End Turn"
-msgstr "סיים תור"
+msgstr "סיום תור"
 
 #: kgamestandardaction.cpp:108
 msgid "&Hint"
@@ -364,81 +351,79 @@ msgstr "&רמז"
 
 #: kgamestandardaction.cpp:108
 msgid "Give a hint"
-msgstr ""
+msgstr "אספקת רמז"
 
 #: kgamestandardaction.cpp:110
 msgid "&Demo"
-msgstr "&הדגמה"
+msgstr "ה&דגמה"
 
 #: kgamestandardaction.cpp:110
-#, fuzzy
 msgid "Play a demo"
-msgstr "שם השחקן"
+msgstr "משחק הדגמה"
 
 #: kgamestandardaction.cpp:112
 msgid "&Solve"
-msgstr "&פתור"
+msgstr "&פתירה"
 
 #: kgamestandardaction.cpp:112
 msgid "Solve the game"
-msgstr ""
+msgstr "פתרון המשחק"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
-msgstr "הגדרות &חפיסות קלפים..."
+msgstr "הגדרת &חפיסות קלפים…"
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
 msgid "Configure &High Scores..."
-msgstr "הגדרות של התוצאות &שיא..."
+msgstr "הגדרת לוח &שיאים…"
 
 #: kgamethemeselector.cpp:108
 #, kde-format
 msgid "Get New Themes..."
-msgstr ""
+msgstr "הורדת ערכות עיצוב חדשות…"
 
 #: kgamethemeselector.cpp:210
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
-msgstr "בחר שחקן:"
+msgstr "בחירת ערכת עיצוב"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
+#, kde-format
 msgid "[No name]"
-msgstr "השם שלך:"
+msgstr "[אין שם]"
 
 #: kgamethemeselector.cpp:298
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
-msgstr ""
+msgstr "מאת %1"
 
 #: private/kchatbase.cpp:98
 #, kde-format
 msgid "Send to All Players"
-msgstr "שלח לכל השחקנים"
+msgstr "שליחה לכל השחקנים"
 
 #: private/kchatbase.cpp:262 private/kgame/kgamechat.cpp:174
 #, kde-format
 msgid "Send to %1"
-msgstr "שלח אל %1"
+msgstr "שליחה אל %1"
 
 #: private/kchatbaseitemdelegate.cpp:41 private/kchatbaseitemdelegate.cpp:43
 #: private/kchatbaseitemdelegate.cpp:60
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1: "
-msgstr "%1 %2"
+msgstr "%1: "
 
 #: private/kgame/kgame.cpp:69
 #, kde-format
 msgid "MaxPlayers"
-msgstr "מספר מרבי של שחקנים"
+msgstr "מס׳ שחקנים מרבי"
 
 #: private/kgame/kgame.cpp:71
 #, kde-format
 msgid "MinPlayers"
-msgstr "מספר מינימלי של שחקנים"
+msgstr "מס׳ שחקנים מזערי"
 
 #: private/kgame/kgame.cpp:73
 #, kde-format
@@ -451,7 +436,7 @@ msgid "Player %1"
 msgstr "שחקן %1"
 
 #: private/kgame/kgamechat.cpp:89
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Unknown player"
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -459,7 +444,7 @@ msgstr "לא ידוע"
 #: private/kgame/kgamechat.cpp:231
 #, kde-format
 msgid "Send to My Group (\"%1\")"
-msgstr "שלח לקבוצה שלי (\"%1\")"
+msgstr "שליחה לקבוצה שלי („%1”)"
 
 #: private/kgame/kgameerror.cpp:51
 #, kde-format
@@ -469,8 +454,8 @@ msgid ""
 "Received Cookie: %2"
 msgstr ""
 "אי־התאמה בין עוגיות.\n"
-"העוגייה שהייתה צפויה: %1\n"
-"העוגייה שהתקבלה: %2"
+"עוגייה צפויה: %1\n"
+"עוגייה שהתקבלה: %2"
 
 #: private/kgame/kgameerror.cpp:59
 #, kde-format
@@ -479,29 +464,29 @@ msgid ""
 "Expected Version: %1\n"
 "Received Version: %2\n"
 msgstr ""
-"אי־התאמה בין גרסאות של KGame.\n"
-"הגרסה שהייתה צפויה: %1\n"
+"אי־התאמה בין גרסאות של KGame!\n"
+"הגרסה הצפויה: %1\n"
 "הגרסה שהתקבלה: %2\n"
 
 #: private/kgame/kgameerror.cpp:63
 #, kde-format
 msgid "Unknown error code %1"
-msgstr "קוד שגיאה לא מוכר %1"
+msgstr "קוד שגיאה %1 לא ידוע"
 
 #: private/kgame/kgamemessage.cpp:102
 #, kde-format
 msgid "Setup Game"
-msgstr "קבע את הגדרות המשחק"
+msgstr "הגדרות המשחק"
 
 #: private/kgame/kgamemessage.cpp:104
 #, kde-format
 msgid "Setup Game Continue"
-msgstr "המשך את קביעת הגדרות המשחק"
+msgstr "המשך הגדרות המשחק"
 
 #: private/kgame/kgamemessage.cpp:106
 #, kde-format
 msgid "Load Game"
-msgstr "טען משחק"
+msgstr "טעינת משחק"
 
 #: private/kgame/kgamemessage.cpp:108
 #, kde-format
@@ -511,7 +496,7 @@ msgstr "משחק לקוח מחובר"
 #: private/kgame/kgamemessage.cpp:110
 #, kde-format
 msgid "Game setup done"
-msgstr "קביעת הגדרות המשחק הושלמה"
+msgstr "הגדרת המשחק הושלמה"
 
 #: private/kgame/kgamemessage.cpp:112
 #, kde-format
@@ -521,7 +506,7 @@ msgstr "סנכרון אקראי"
 #: private/kgame/kgamemessage.cpp:114
 #, kde-format
 msgid "Disconnect"
-msgstr "התנתק"
+msgstr "ניתוק"
 
 #: private/kgame/kgamemessage.cpp:116
 #, kde-format
@@ -536,27 +521,27 @@ msgstr "מאפיין משחק"
 #: private/kgame/kgamemessage.cpp:120
 #, kde-format
 msgid "Add Player"
-msgstr "הוסף שחקן"
+msgstr "הוספת שחקן"
 
 #: private/kgame/kgamemessage.cpp:122
 #, kde-format
 msgid "Remove Player"
-msgstr "הסר שחקן"
+msgstr "הסרת שחקן"
 
 #: private/kgame/kgamemessage.cpp:124
 #, kde-format
 msgid "Activate Player"
-msgstr "הפעל שחקן"
+msgstr "הפעלת שחקן"
 
 #: private/kgame/kgamemessage.cpp:126
 #, kde-format
 msgid "Inactivate Player"
-msgstr "כבה שחקן"
+msgstr "כיבוי שחקן"
 
 #: private/kgame/kgamemessage.cpp:128
 #, kde-format
 msgid "Id Turn"
-msgstr "התור"
+msgstr "מזהה התור"
 
 #: private/kgame/kgamemessage.cpp:130
 #, kde-format
@@ -571,17 +556,17 @@ msgstr "קלט שחקן"
 #: private/kgame/kgamemessage.cpp:134
 #, kde-format
 msgid "An IO was added"
-msgstr "הוסף קלט\\פלט"
+msgstr "הוספת קלט/פלט"
 
 #: private/kgame/kgamemessage.cpp:136
 #, kde-format
 msgid "Process Query"
-msgstr "ׁעָבֵד שאילתה"
+msgstr "עיבוד שאילתה"
 
 #: private/kgame/kgamemessage.cpp:138
 #, kde-format
 msgid "Player ID"
-msgstr "זיהוי השחקן"
+msgstr "מזהה השחקן"
 
 #: private/kgame/kgamepropertyhandler.cpp:160
 #, kde-format
@@ -591,16 +576,16 @@ msgstr "%1 (%2)"
 #: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
-msgstr "ללא שם - זיהוי: %1"
+msgstr "ללא שם - מזהה: %1"
 
 #: private/kgame/kgamepropertyhandler.cpp:166
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 לא רשום"
-msgstr[1] "%1 לא רשום"
-msgstr[2] ""
-msgstr[3] ""
+msgstr[1] "%1 לא רשומים"
+msgstr[2] "%1 לא רשומים"
+msgstr[3] "%1 לא רשומים"
 
 #: private/kgame/kgamepropertyhandler.cpp:338
 #, kde-format
@@ -640,7 +625,7 @@ msgstr "ברירת מחדל"
 #: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
-msgstr "קלט הסינכרוני"
+msgstr "קלט סנכרוני"
 
 #: private/kgame/kplayer.cpp:82
 #, kde-format
