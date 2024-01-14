@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:55+0000\n"
-"PO-Revision-Date: 2023-03-22 19:14+0100\n"
+"PO-Revision-Date: 2023-10-01 05:27+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -28,6 +28,8 @@ msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 msgstr ""
+"Ne eblas aliri la altpoentaran dosieron. Alia uzanto verŝajne estas "
+"skribanta al ĝi."
 
 #: highscore/kscoredialog.cpp:95 highscore/kscoredialog.cpp:256
 #, kde-format
@@ -73,22 +75,22 @@ msgstr "#%1"
 #: highscore/kscoredialog.cpp:531
 #, kde-format
 msgid "&Remember"
-msgstr ""
+msgstr "&Rememori"
 
 #: highscore/kscoredialog.cpp:532
 #, kde-format
 msgid "&Forget"
-msgstr ""
+msgstr "&Forgesi"
 
 #: highscore/kscoredialog.cpp:533
 #, kde-format
 msgid "Remember this high score"
-msgstr ""
+msgstr "Rememori ĉi tiun altpoentaron"
 
 #: highscore/kscoredialog.cpp:534
 #, kde-format
 msgid "Forget this high score"
-msgstr ""
+msgstr "Forgesi ĉi tiun altpoentaron"
 
 #: highscore/kscoredialog.cpp:542
 #, kde-format
@@ -112,13 +114,13 @@ msgstr ""
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
-msgstr ""
+msgstr "Ridinde Facila"
 
 #: kgdifficulty.cpp:77 private/kgamedifficulty.cpp:151
 #, kde-format
 msgctxt "Game difficulty level 2 out of 8"
 msgid "Very Easy"
-msgstr ""
+msgstr "Tre Facila"
 
 #: kgdifficulty.cpp:80 private/kgamedifficulty.cpp:153
 #, kde-format
@@ -142,13 +144,13 @@ msgstr "Malfacila"
 #, kde-format
 msgctxt "Game difficulty level 6 out of 8"
 msgid "Very Hard"
-msgstr ""
+msgstr "Tre Malfacila"
 
 #: kgdifficulty.cpp:92 private/kgamedifficulty.cpp:161
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
-msgstr ""
+msgstr "Ekstreme Malfacila"
 
 #: kgdifficulty.cpp:95 private/kgamedifficulty.cpp:163
 #, kde-format
@@ -191,18 +193,18 @@ msgstr "Akiri novajn etosojn..."
 #, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
-msgstr ""
+msgstr "Elekti etoson"
 
 #: kgthemeselector.cpp:273
 #, kde-format
 msgid "[No name]"
-msgstr ""
+msgstr "[Sennoma]"
 
 #: kgthemeselector.cpp:289
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
-msgstr ""
+msgstr "de %1"
 
 #: kstandardgameaction.cpp:36
 msgctxt "new game"
@@ -572,8 +574,8 @@ msgstr "Sennoma - Identigilo: %1"
 #, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 neregistrita"
+msgstr[1] "%1 neregistritaj"
 
 #: private/kgame/kgamepropertyhandler.cpp:361
 #, kde-format
