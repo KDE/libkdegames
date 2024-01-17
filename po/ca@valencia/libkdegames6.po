@@ -624,6 +624,3 @@ msgstr "Entrada asíncrona"
 #, kde-format
 msgid "myTurn"
 msgstr "el meu torn"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Escolliu el &tipus de joc"
