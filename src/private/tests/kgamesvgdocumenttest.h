@@ -9,7 +9,7 @@
 
 // own
 #define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
-#include <kgamesvgdocument.h>
+#include "kgamesvgdocument.h"
 // Qt
 #include <QObject>
 
