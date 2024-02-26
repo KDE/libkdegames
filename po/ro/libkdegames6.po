@@ -1,13 +1,13 @@
 # Copyright (C).
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2013.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2013, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:46+0000\n"
-"PO-Revision-Date: 2013-10-27 11:21+0200\n"
-"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"PO-Revision-Date: 2024-02-24 16:10+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -15,11 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
-msgstr "Reîncercare"
+msgstr "Reîncearcă"
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
@@ -27,6 +28,8 @@ msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 msgstr ""
+"Fișierul cu recorduri nu poate fi accesat. Probabil alt utilizator scrie în "
+"el acum."
 
 #: highscore/kgamehighscoredialog.cpp:100
 #: highscore/kgamehighscoredialog.cpp:271
@@ -439,6 +442,9 @@ msgid ""
 "Expected Cookie: %1\n"
 "Received Cookie: %2"
 msgstr ""
+"Cookie nepotrivit!\n"
+"Cookie așteptat: %1\n"
+"Cookie primit: %2"
 
 #: private/kgame/kgameerror.cpp:59
 #, kde-format
@@ -447,6 +453,9 @@ msgid ""
 "Expected Version: %1\n"
 "Received Version: %2\n"
 msgstr ""
+"Versiune nepotrivită KGame!\n"
+"Versiune așteptată: %1\n"
+"Versiune primită: %2\n"
 
 #: private/kgame/kgameerror.cpp:63
 #, kde-format
@@ -461,7 +470,7 @@ msgstr "Configurează jocul"
 #: private/kgame/kgamemessage.cpp:104
 #, kde-format
 msgid "Setup Game Continue"
-msgstr ""
+msgstr "Configurează jocul în continuare"
 
 #: private/kgame/kgamemessage.cpp:106
 #, kde-format
@@ -471,7 +480,7 @@ msgstr "Încarcă joc"
 #: private/kgame/kgamemessage.cpp:108
 #, kde-format
 msgid "Client game connected"
-msgstr ""
+msgstr "Jocul clientului s-a conectat"
 
 #: private/kgame/kgamemessage.cpp:110
 #, kde-format
@@ -481,7 +490,7 @@ msgstr "Configurare joc încheiată"
 #: private/kgame/kgamemessage.cpp:112
 #, kde-format
 msgid "Synchronize Random"
-msgstr ""
+msgstr "Sincronizează aleator"
 
 #: private/kgame/kgamemessage.cpp:114
 #, kde-format
@@ -531,12 +540,12 @@ msgstr "Mesaj de eroare"
 #: private/kgame/kgamemessage.cpp:132
 #, kde-format
 msgid "Player Input"
-msgstr ""
+msgstr "Introducere jucător"
 
 #: private/kgame/kgamemessage.cpp:134
 #, kde-format
 msgid "An IO was added"
-msgstr ""
+msgstr "A fost adăugată intrare/ieșire"
 
 #: private/kgame/kgamemessage.cpp:136
 #, kde-format
@@ -589,7 +598,7 @@ msgstr "Necunoscut"
 #: private/kgame/kplayer.cpp:73
 #, kde-format
 msgid "UserId"
-msgstr ""
+msgstr "Id. utilizator"
 
 #: private/kgame/kplayer.cpp:75
 #, kde-format
@@ -604,12 +613,12 @@ msgstr "implicit"
 #: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
-msgstr ""
+msgstr "Introducere asincronă"
 
 #: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "myTurn"
-msgstr ""
+msgstr "Rândul meu"
 
 #~ msgid "Choose Game &Type"
 #~ msgstr "Alegeți &tipul jocului"
