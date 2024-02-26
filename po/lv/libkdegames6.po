@@ -5,19 +5,20 @@
 # Maris Nartiss <maris.nartiss@gmail.com>, 2005.
 # Maris Nartiss <maris.kde@gmail.com>, 2007, 2008, 2009.
 # Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:46+0000\n"
-"PO-Revision-Date: 2009-07-19 11:03+0300\n"
-"Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-02-23 19:32+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
@@ -32,7 +33,7 @@ msgid ""
 "Cannot access the highscore file. Another user is probably currently writing "
 "to it."
 msgstr ""
-"Nevar piekļūt labāko rezultātu failam. Iespējams, ka tieši šobrīd tajā "
+"Nevar piekļūt labāko rezultātu datnei. Iespējams, ka tieši šobrīd tajā "
 "raksta kāds cits lietotājs."
 
 #: highscore/kgamehighscoredialog.cpp:100
@@ -69,7 +70,7 @@ msgstr "Laiks"
 #: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
-msgstr "Rangs"
+msgstr "Vieta"
 
 #: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
@@ -80,24 +81,22 @@ msgstr "#%1"
 #: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
-msgstr ""
+msgstr "&Atcerēties"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
-msgstr ""
+msgstr "Ai&zmirst"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Clear high scores"
+#, kde-format
 msgid "Remember this high score"
-msgstr "Dzēš labākos rezultātus"
+msgstr "Atcerēties šo rezultātu"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Show high scores"
+#, kde-format
 msgid "Forget this high score"
-msgstr "Rādīa labākos rezultātus"
+msgstr "Aizmirst šo rezultātu"
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -115,13 +114,13 @@ msgid ""
 "You made it to the high score list!"
 msgstr ""
 "Labi darīts!\n"
-"Jūs esat iekļuvis labāko rezultātu sarakstā!"
+"Jūs iekļuvāt labāko rezultātu sarakstā!"
 
 #: kgamedifficulty.cpp:76
 #, kde-format
 msgctxt "Game difficulty level 1 out of 8"
 msgid "Ridiculously Easy"
-msgstr "Smeiklīgi viegli"
+msgstr "Smieklīgi viegli"
 
 #: kgamedifficulty.cpp:79
 #, kde-format
@@ -157,7 +156,7 @@ msgstr "Ļoti grūti"
 #, kde-format
 msgctxt "Game difficulty level 7 out of 8"
 msgid "Extremely Hard"
-msgstr "Ekstrēmi"
+msgstr "Ekstrēmi grūti"
 
 #: kgamedifficulty.cpp:97
 #, kde-format
@@ -184,12 +183,12 @@ msgstr "Grūtības pakāpe"
 #: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
-msgstr "Iestata grūtības pakāpi"
+msgstr "Iestatīt grūtības pakāpi"
 
 #: kgamedifficulty.cpp:412
 #, kde-format
 msgid "Set the difficulty level of the game."
-msgstr "Iestata spēles grūtības pakāpi."
+msgstr "Iestatīt spēles grūtības pakāpi."
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
@@ -198,7 +197,7 @@ msgstr "&Jauna"
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game."
-msgstr "Sāk jaunu spēli."
+msgstr "Sākt jaunu spēli."
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game"
@@ -234,7 +233,7 @@ msgstr "&Saglabāt"
 
 #: kgamestandardaction.cpp:76
 msgid "Save the current game"
-msgstr "Saglabā pašreizējo spēli"
+msgstr "Saglabāt pašreizējo spēli"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As..."
@@ -242,7 +241,7 @@ msgstr "Saglabāt &kā..."
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
-msgstr "Saglabā pašreizējo spēli citā failā"
+msgstr "Saglabāt pašreizējo spēli citā datnē"
 
 #: kgamestandardaction.cpp:80
 msgid "&End Game"
@@ -258,7 +257,7 @@ msgstr "Pa&uze"
 
 #: kgamestandardaction.cpp:82
 msgid "Pause the game"
-msgstr "Aptur spēli"
+msgstr "Apturēt spēli"
 
 #: kgamestandardaction.cpp:84
 msgid "Show &High Scores"
@@ -266,7 +265,7 @@ msgstr "Rādīt &labākos rezultātus"
 
 #: kgamestandardaction.cpp:84
 msgid "Show high scores"
-msgstr "Rādīa labākos rezultātus"
+msgstr "Rādīt labākos rezultātus"
 
 #: kgamestandardaction.cpp:86
 msgid "&Clear High Scores"
@@ -330,11 +329,11 @@ msgstr "Atkārtot pēdējo gājienu"
 
 #: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
-msgstr "&Mest kauliņus"
+msgstr "&Mest kauliņu"
 
 #: kgamestandardaction.cpp:104
 msgid "Roll the dice"
-msgstr "Met kauliņus"
+msgstr "Met kauliņu"
 
 #: kgamestandardaction.cpp:106
 msgid "End Turn"
@@ -373,29 +372,26 @@ msgid "Configure &High Scores..."
 msgstr "Konfigurēt &labākos rezultātus..."
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "&Get New Themes"
+#, kde-format
 msgid "Get New Themes..."
-msgstr "&Saņemt jaunas tēmas"
+msgstr "&Iegūt jaunus motīvus..."
 
 #: kgamethemeselector.cpp:210
-#, fuzzy, kde-format
-#| msgid "Solve the game"
+#, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
-msgstr "Atrisina spēli"
+msgstr "Atlasīt motīvu"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "Your name:"
+#, kde-format
 msgid "[No name]"
-msgstr "Jūsu vārds:"
+msgstr "[bez vārda]"
 
 #: kgamethemeselector.cpp:298
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
-msgstr ""
+msgstr "autors %1"
 
 #: private/kchatbase.cpp:98
 #, kde-format
@@ -416,17 +412,17 @@ msgstr "%1: "
 #: private/kgame/kgame.cpp:69
 #, kde-format
 msgid "MaxPlayers"
-msgstr "MaksSpēlētāji"
+msgstr "Maks. spēlētāju"
 
 #: private/kgame/kgame.cpp:71
 #, kde-format
 msgid "MinPlayers"
-msgstr "MinSpēlētāji"
+msgstr "Min. spēlētāju"
 
 #: private/kgame/kgame.cpp:73
 #, kde-format
 msgid "GameStatus"
-msgstr "SpēlesStatuss"
+msgstr "Spēles statuss"
 
 #: private/kgame/kgamechat.cpp:81
 #, kde-format
@@ -442,7 +438,7 @@ msgstr "Nezināms"
 #: private/kgame/kgamechat.cpp:231
 #, kde-format
 msgid "Send to My Group (\"%1\")"
-msgstr "Sūtīt manai grupai (\"%1\")"
+msgstr "Sūtīt manai grupai („%1“)"
 
 #: private/kgame/kgameerror.cpp:51
 #, kde-format
@@ -462,7 +458,7 @@ msgid ""
 "Expected Version: %1\n"
 "Received Version: %2\n"
 msgstr ""
-"KGame versijas nesakrīt!\n"
+"„KGame“ versijas nesakrīt!\n"
 "Gaidītā versija: %1\n"
 "Saņemtā versija: %2\n"
 
@@ -474,12 +470,12 @@ msgstr "Nezināms kļūdas kods %1"
 #: private/kgame/kgamemessage.cpp:102
 #, kde-format
 msgid "Setup Game"
-msgstr "Iestatatīt spēli"
+msgstr "Sagatavot spēli"
 
 #: private/kgame/kgamemessage.cpp:104
 #, kde-format
 msgid "Setup Game Continue"
-msgstr "Iestatīt spēles turpināšanu"
+msgstr "Sagatavot spēles turpināšanu"
 
 #: private/kgame/kgamemessage.cpp:106
 #, kde-format
@@ -494,12 +490,12 @@ msgstr "Klients pieslēdzies"
 #: private/kgame/kgamemessage.cpp:110
 #, kde-format
 msgid "Game setup done"
-msgstr "Spēles iestatīšana pabeigta"
+msgstr "Spēles sagatavošana ir pabeigta"
 
 #: private/kgame/kgamemessage.cpp:112
 #, kde-format
 msgid "Synchronize Random"
-msgstr "Sinhronizē gadījuma skaitļu ģeneratoru"
+msgstr "Sinhronizēt gadījuma skaitļu ģeneratoru"
 
 #: private/kgame/kgamemessage.cpp:114
 #, kde-format
@@ -524,7 +520,7 @@ msgstr "Pievienot spēlētāju"
 #: private/kgame/kgamemessage.cpp:122
 #, kde-format
 msgid "Remove Player"
-msgstr "Aizvākt spēlētāju"
+msgstr "Noņemt spēlētāju"
 
 #: private/kgame/kgamemessage.cpp:124
 #, kde-format
@@ -539,7 +535,7 @@ msgstr "Deaktivizēt spēlētāju"
 #: private/kgame/kgamemessage.cpp:128
 #, kde-format
 msgid "Id Turn"
-msgstr "Id gājiens"
+msgstr "ID gājiens"
 
 #: private/kgame/kgamemessage.cpp:130
 #, kde-format
@@ -574,21 +570,20 @@ msgstr "%1 (%2)"
 #: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
-msgstr "Nenosaukts - ID: %1"
+msgstr "Nenosaukts — ID: %1"
 
 #: private/kgame/kgamepropertyhandler.cpp:166
-#, fuzzy, kde-format
-#| msgid "%1 unregistered"
+#, kde-format
 msgid "%1 unregistered"
 msgid_plural "%1 unregistered"
 msgstr[0] "%1 nereģistrēts"
-msgstr[1] "%1 nereģistrēts"
-msgstr[2] "%1 nereģistrēts"
+msgstr[1] "%1 nereģistrēti"
+msgstr[2] "%1 nereģistrētu"
 
 #: private/kgame/kgamepropertyhandler.cpp:338
 #, kde-format
 msgid "NULL pointer"
-msgstr "NULL norādītājs"
+msgstr "TUKŠS rādītājs"
 
 #: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
@@ -608,7 +603,7 @@ msgstr "Nezināms"
 #: private/kgame/kplayer.cpp:73
 #, kde-format
 msgid "UserId"
-msgstr "LietotājaID"
+msgstr "Lietotāja ID"
 
 #: private/kgame/kplayer.cpp:75
 #, kde-format
@@ -623,12 +618,12 @@ msgstr "noklusētais"
 #: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
-msgstr "AsinhronaIevade"
+msgstr "Asinhrona ievade"
 
 #: private/kgame/kplayer.cpp:82
 #, kde-format
 msgid "myTurn"
-msgstr "mansGājiens"
+msgstr "mans gājiens"
 
 #~ msgid "Choose Game &Type"
 #~ msgstr "Izvēlieties spēles &tipu"
