@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.16 FATAL_ERROR)
 # Release Service version, managed by release script
 set(RELEASE_SERVICE_VERSION_MAJOR "24")
 set(RELEASE_SERVICE_VERSION_MINOR "02")
-set(RELEASE_SERVICE_VERSION_MICRO "1")
+set(RELEASE_SERVICE_VERSION_MICRO "2")
 
 # generate patch level from release service version
 set(_micro ${RELEASE_SERVICE_VERSION_MICRO})
