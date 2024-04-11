@@ -110,7 +110,7 @@ KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options opt
         hLayout->addStretch(1);
         hLayout->addWidget(d->m_knsButton);
         layout->addLayout(hLayout);
-        connect(d->m_knsButton, &KNSWidgets::Button::dialogFinished, [this](const QList<KNSCore::Entry> &changedEntries) {
+        connect(d->m_knsButton, &KNSWidgets::Button::dialogFinished, this, [this](const QList<KNSCore::Entry> &changedEntries) {
             Q_D(KGameThemeSelector);
             if (!changedEntries.isEmpty()) {
                 d->m_provider->rediscoverThemes();
