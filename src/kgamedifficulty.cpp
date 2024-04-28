@@ -315,7 +315,7 @@ void KGameDifficulty::select(const KGameDifficultyLevel *level)
         const int result = KMessageBox::warningContinueCancel(nullptr,
                                                               i18n("Changing the difficulty level will end the current game!"),
                                                               QString(),
-                                                              KGuiItem(i18n("Change the difficulty level")));
+                                                              KGuiItem(i18nc("@action:button", "Change the Difficulty Level")));
         if (result != KMessageBox::Continue) {
             Q_EMIT selectedLevelChanged(d->m_currentLevel);
             return;
@@ -399,7 +399,7 @@ void KGameDifficultyGUI::init(KXmlGuiWindow *window, KGameDifficulty *difficulty
 
     // create selector (resides in status bar)
     KGameDifficultyGUI::Selector *selector = new KGameDifficultyGUI::Selector(difficulty, window);
-    selector->setToolTip(i18nc("Game difficulty level", "Difficulty"));
+    selector->setToolTip(i18nc("@info:tooltip Game difficulty level", "Difficulty"));
     QObject::connect(selector, &QComboBox::activated, selector, &Selector::slotActivated);
     QObject::connect(difficulty, &KGameDifficulty::editableChanged, selector, &QWidget::setEnabled);
     QObject::connect(difficulty, &KGameDifficulty::selectedLevelChanged, selector, &Selector::slotSelected);
@@ -407,9 +407,9 @@ void KGameDifficultyGUI::init(KXmlGuiWindow *window, KGameDifficulty *difficulty
 
     // create menu action
     const QIcon icon = QIcon::fromTheme(QStringLiteral("games-difficult"));
-    KSelectAction *menu = new KGameDifficultyGUI::Menu(icon, i18nc("Game difficulty level", "Difficulty"), window);
-    menu->setToolTip(i18n("Set the difficulty level"));
-    menu->setWhatsThis(i18n("Set the difficulty level of the game."));
+    KSelectAction *menu = new KGameDifficultyGUI::Menu(icon, i18nc("@title:menu Game difficulty level", "Difficulty"), window);
+    menu->setToolTip(i18nc("@info:tooltip", "Set the difficulty level"));
+    menu->setWhatsThis(i18nc("@info:whatsthis", "Sets the difficulty level of the game."));
     QObject::connect(menu, &KSelectAction::indexTriggered, selector, &Selector::slotActivated);
     QObject::connect(difficulty, &KGameDifficulty::editableChanged, menu, &QAction::setEnabled);
     QObject::connect(selector, &Selector::signalSelected, menu, &KSelectAction::setCurrentItem);

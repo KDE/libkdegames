@@ -279,7 +279,7 @@ void KGameThemeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     {
         QString name = index.data(Qt::DisplayRole).toString();
         if (name.isEmpty())
-            name = i18n("[No name]");
+            name = i18nc("@item name of theme, missing", "[No name]");
         texts << name;
         QFont theFont(painter->font());
         theFont.setBold(true);

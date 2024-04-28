@@ -97,7 +97,7 @@ KGameHighScoreDialog::KGameHighScoreDialog(int fields, QWidget *parent)
 {
     Q_D(KGameHighScoreDialog);
 
-    setWindowTitle(i18n("High Scores"));
+    setWindowTitle(i18nc("@title:window", "High Scores"));
     setModal(true);
     d->highscoreObject = new KGameHighscore();
     d->edit = nullptr;
@@ -111,15 +111,15 @@ KGameHighScoreDialog::KGameHighScoreDialog(int fields, QWidget *parent)
     d->configGroup = QByteArray();
 
     // Set up the default table headers
-    d->header[Name] = i18n("Name");
+    d->header[Name] = i18nc("@title:column", "Name");
     d->key[Name] = QStringLiteral("Name");
-    d->header[Date] = i18n("Date");
+    d->header[Date] = i18nc("@title:column", "Date");
     d->key[Date] = QStringLiteral("Date");
-    d->header[Level] = i18n("Level");
+    d->header[Level] = i18nc("@title:column", "Level");
     d->key[Level] = QStringLiteral("Level");
-    d->header[Score] = i18n("Score");
+    d->header[Score] = i18nc("@title:column", "Score");
     d->key[Score] = QStringLiteral("Score");
-    d->header[Time] = i18n("Time");
+    d->header[Time] = i18nc("@title:column", "Time");
     d->key[Time] = QStringLiteral("Time");
 
     // d->page = new QWidget(this);
@@ -268,7 +268,7 @@ void KGameHighScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
     QWidget *widget = new QWidget(q);
     tabs[groupKey] = widget;
 
-    QString tabName = groupKey.isEmpty() ? i18n("High Scores") : findTranslatedGroupName(groupKey);
+    QString tabName = groupKey.isEmpty() ? i18nc("@title:tab", "High Scores") : findTranslatedGroupName(groupKey);
     tabWidget->addTab(widget, tabName);
 
     QGridLayout *layout = new QGridLayout(widget);
@@ -285,7 +285,7 @@ void KGameHighScoreDialogPrivate::setupGroup(const QByteArray &groupKey)
 
     QLabel *label;
     layout->addItem(new QSpacerItem(50, 0), 0, 0);
-    label = new QLabel(i18n("Rank"), widget);
+    label = new QLabel(i18nc("@title:group", "Rank"), widget);
     layout->addWidget(label, 3, 0);
     label->setFont(bold);
 
@@ -545,10 +545,10 @@ int KGameHighScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags
 
                 d->buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
-                d->buttonBox->button(QDialogButtonBox::Ok)->setText(i18n("&Remember"));
-                d->buttonBox->button(QDialogButtonBox::Cancel)->setText(i18n("&Forget"));
-                d->buttonBox->button(QDialogButtonBox::Ok)->setToolTip(i18n("Remember this high score"));
-                d->buttonBox->button(QDialogButtonBox::Cancel)->setToolTip(i18n("Forget this high score"));
+                d->buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Remember"));
+                d->buttonBox->button(QDialogButtonBox::Cancel)->setText(i18nc("@action:button", "&Forget"));
+                d->buttonBox->button(QDialogButtonBox::Ok)->setToolTip(i18nc("@info:tooltip", "Remember this high score"));
+                d->buttonBox->button(QDialogButtonBox::Cancel)->setToolTip(i18nc("@info:tooltip", "Forget this high score"));
 
                 connect(d->buttonBox, &QDialogButtonBox::accepted, this, &KGameHighScoreDialog::slotGotName);
                 connect(d->buttonBox, &QDialogButtonBox::rejected, this, &KGameHighScoreDialog::slotForgetScore);

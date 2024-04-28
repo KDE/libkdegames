@@ -151,7 +151,7 @@ bool KGameHighscore::lockForWriting(QWidget *widget)
 
         if (!first) {
             KGuiItem item = KStandardGuiItem::cont();
-            item.setText(i18n("Retry"));
+            item.setText(i18nc("@action:button", "Retry"));
             int res = KMessageBox::warningContinueCancel(widget,
                                                          i18n("Cannot access the highscore file. Another user is probably currently writing to it."),
                                                          QString(),
