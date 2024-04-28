@@ -67,15 +67,15 @@ const KGameStandardActionInfo g_rgActionInfo[] = {
     { KGameStandardAction::New,             KStandardShortcut::New,       0,                    u"game_new",
       kli18nc("new game", "&New"),  kli18n("Start a new game."), u"document-new",        kli18n("Start a new game") },
     { KGameStandardAction::Load,            KStandardShortcut::Open,      0,                    u"game_load",
-      kli18n("&Load..."),           {},                         u"document-open",        kli18n("Open a saved game...") },
+      kli18n("&Load…"),             {},                         u"document-open",        kli18n("Open a saved game") },
     { KGameStandardAction::LoadRecent,      KStandardShortcut::AccelNone, 0,                    u"game_load_recent",
-      kli18n("Load &Recent"),       {},                         nullptr,                 kli18n("Open a recently saved game...") },
+      kli18n("Load &Recent"),       {},                         nullptr,                 kli18n("Open a recently saved game") },
     { KGameStandardAction::Restart,         KStandardShortcut::Reload,    0,                    u"game_restart",
       kli18n("Restart &Game"),      {},                         u"view-refresh",         kli18n("Restart the game") },
     { KGameStandardAction::Save,            KStandardShortcut::Save,      0,                    u"game_save",
       kli18n("&Save"),              {},                         u"document-save",        kli18n("Save the current game") },
     { KGameStandardAction::SaveAs,          KStandardShortcut::AccelNone, 0,                    u"game_save_as",
-      kli18n("Save &As..."),        {},                         u"document-save-as",     kli18n("Save the current game to another file") },
+      kli18n("Save &As…"),          {},                         u"document-save-as",     kli18n("Save the current game to another file") },
     { KGameStandardAction::End,             KStandardShortcut::End,       0,                    u"game_end",
       kli18n("&End Game"),          {},                         u"window-close",         kli18n("End the current game") },
     { KGameStandardAction::Pause,           KStandardShortcut::AccelNone, Qt::Key_P,            u"game_pause",
@@ -89,7 +89,7 @@ const KGameStandardActionInfo g_rgActionInfo[] = {
     { KGameStandardAction::ClearStatistics, KStandardShortcut::AccelNone, 0,                    u"game_clear_statistics",
       kli18n("&Clear Statistics"),  {},                         u"flag",                 kli18n("Delete all-time statistics.") },
     { KGameStandardAction::Print,           KStandardShortcut::Print,     0,                    u"game_print",
-      kli18n("&Print..."),          {},                         u"document-print",       {} },
+      kli18n("&Print…"),            {},                         u"document-print",       {} },
     { KGameStandardAction::Quit,            KStandardShortcut::Quit,      0,                    u"game_quit",
       kli18n("&Quit"),              {},                         u"application-exit",     kli18n("Quit the program") },
 
@@ -113,9 +113,9 @@ const KGameStandardActionInfo g_rgActionInfo[] = {
 
     // "settings" menu
     { KGameStandardAction::Carddecks,           KStandardShortcut::AccelNone, 0, u"options_configure_carddecks",
-      kli18n("Configure &Carddecks..."),   {}, nullptr, {} },
+      kli18n("Configure &Carddecks…"),   {}, nullptr, {} },
     { KGameStandardAction::ConfigureHighscores, KStandardShortcut::AccelNone, 0, u"options_configure_highscores",
-      kli18n("Configure &High Scores..."), {}, nullptr, {} },
+      kli18n("Configure &High Scores…"), {}, nullptr, {} },
 
     { KGameStandardAction::ActionNone, KStandardShortcut::AccelNone, 0, nullptr, {}, {}, nullptr, {} }
     // clang-format on

@@ -70,7 +70,7 @@
       <item rowspan="3" row="3" column="0" colspan="3" >
        <widget class="QPushButton" name="changeIcon" >
         <property name="text" >
-         <string>Change Icon...</string>
+         <string>Change Icon…</string>
         </property>
        </widget>
       </item>
