@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:46+0000\n"
+"POT-Creation-Date: 2024-04-29 00:38+0000\n"
 "PO-Revision-Date: 2012-08-08 05:15+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,9 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Retry"
+msgctxt "@action:button"
 msgid "Retry"
 msgstr "Қайталау"
 
@@ -32,38 +34,58 @@ msgstr ""
 "мүмкін."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#: highscore/kgamehighscoredialog.cpp:271
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Жетістіктер"
 
-#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
-#, kde-format
+#: highscore/kgamehighscoredialog.cpp:114
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:column"
 msgid "Name"
 msgstr "Аты"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
+msgctxt "@title:column"
 msgid "Date"
 msgstr "Кашан"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Level"
+msgctxt "@title:column"
 msgid "Level"
 msgstr "Деңгейі"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Score"
+msgctxt "@title:column"
 msgid "Score"
 msgstr "Ұпайы"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
 msgid "Time"
 msgstr "Уақыт"
 
+#: highscore/kgamehighscoredialog.cpp:271
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:tab"
+msgid "High Scores"
+msgstr "Жетістіктер"
+
 #: highscore/kgamehighscoredialog.cpp:288
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Rank"
+msgctxt "@title:group"
 msgid "Rank"
 msgstr "Орны"
 
@@ -74,22 +96,30 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Remember"
+msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&Жаттап алу"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Forget"
+msgctxt "@action:button"
 msgid "&Forget"
 msgstr "Ұ&мыту"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remember this high score"
+msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "Жетістікті жазу"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Forget this high score"
+msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "Жетістікті жазбау"
 
@@ -165,24 +195,38 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "Қиындық деңгейін өзгерту ойнап жатқан ойынды доғарады!"
 
 #: kgamedifficulty.cpp:318
-#, kde-format
-msgid "Change the difficulty level"
+#, fuzzy, kde-format
+#| msgid "Change the difficulty level"
+msgctxt "@action:button"
+msgid "Change the Difficulty Level"
 msgstr "Қиындық деңгейін өзгерту"
 
-#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
-#, kde-format
-msgctxt "Game difficulty level"
+#: kgamedifficulty.cpp:402
+#, fuzzy, kde-format
+#| msgid "Difficulty"
+msgctxt "@info:tooltip Game difficulty level"
+msgid "Difficulty"
+msgstr "Қиындығы"
+
+#: kgamedifficulty.cpp:410
+#, fuzzy, kde-format
+#| msgid "Difficulty"
+msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "Қиындығы"
 
 #: kgamedifficulty.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level"
+msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "Қиындық деңгейін орнату"
 
 #: kgamedifficulty.cpp:412
-#, kde-format
-msgid "Set the difficulty level of the game."
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level of the game."
+msgctxt "@info:whatsthis"
+msgid "Sets the difficulty level of the game."
 msgstr "Ойынның қиындық деңгейін орнату."
 
 #: kgamestandardaction.cpp:68
@@ -199,11 +243,15 @@ msgid "Start a new game"
 msgstr "Жаңа ойынды бастау"
 
 #: kgamestandardaction.cpp:70
-msgid "&Load..."
+#, fuzzy
+#| msgid "&Load..."
+msgid "&Load…"
 msgstr "Ж&үктеу..."
 
 #: kgamestandardaction.cpp:70
-msgid "Open a saved game..."
+#, fuzzy
+#| msgid "Open a saved game..."
+msgid "Open a saved game"
 msgstr "Сақталған ойынды ашу..."
 
 #: kgamestandardaction.cpp:72
@@ -211,7 +259,9 @@ msgid "Load &Recent"
 msgstr "Жуыр&дағаны ашу"
 
 #: kgamestandardaction.cpp:72
-msgid "Open a recently saved game..."
+#, fuzzy
+#| msgid "Open a recently saved game..."
+msgid "Open a recently saved game"
 msgstr "Жуырда сақталған ойынды ашу..."
 
 #: kgamestandardaction.cpp:74
@@ -231,7 +281,9 @@ msgid "Save the current game"
 msgstr "Ойнап жатқанды сақтау"
 
 #: kgamestandardaction.cpp:78
-msgid "Save &As..."
+#, fuzzy
+#| msgid "Save &As..."
+msgid "Save &As…"
 msgstr "&Былай сақтау..."
 
 #: kgamestandardaction.cpp:78
@@ -287,7 +339,9 @@ msgid "Delete all-time statistics."
 msgstr "Бүкіл уақыт статистикасын өшіру"
 
 #: kgamestandardaction.cpp:92
-msgid "&Print..."
+#, fuzzy
+#| msgid "&Print..."
+msgid "&Print…"
 msgstr "&Басып шығару..."
 
 #: kgamestandardaction.cpp:94
@@ -359,16 +413,22 @@ msgid "Solve the game"
 msgstr "Ойынды шешіп беру"
 
 #: kgamestandardaction.cpp:116
-msgid "Configure &Carddecks..."
+#, fuzzy
+#| msgid "Configure &Carddecks..."
+msgid "Configure &Carddecks…"
 msgstr "&Карта дестесін баптау..."
 
 #: kgamestandardaction.cpp:118
-msgid "Configure &High Scores..."
+#, fuzzy
+#| msgid "Configure &High Scores..."
+msgid "Configure &High Scores…"
 msgstr "Ж&етістіктерді баптау..."
 
 #: kgamethemeselector.cpp:108
-#, kde-format
-msgid "Get New Themes..."
+#, fuzzy, kde-format
+#| msgid "Get New Themes..."
+msgctxt "@action:button"
+msgid "Get New Themes…"
 msgstr "Жаңа нақыштарды табу..."
 
 #: kgamethemeselector.cpp:210
@@ -378,14 +438,18 @@ msgid "Select theme"
 msgstr "Нақышын таңдау"
 
 #: kgamethemeselector.cpp:282
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "[No name]"
+msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[Аталмаған]"
 
 #: kgamethemeselector.cpp:298
-#, kde-format
-msgctxt "Author attribution, e.g. \"by Jack\""
-msgid "by %1"
+#, fuzzy, kde-format
+#| msgctxt "Author attribution, e.g. \"by Jack\""
+#| msgid "by %1"
+msgctxt "@info author attribution"
+msgid "By %1"
 msgstr "Авторы: %1"
 
 #: private/kchatbase.cpp:98
@@ -608,6 +672,11 @@ msgstr "Тобы"
 msgid "default"
 msgstr "әдетті"
 
+#: private/kgame/kplayer.cpp:77
+#, kde-format
+msgid "Name"
+msgstr "Аты"
+
 #: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
@@ -618,11 +687,12 @@ msgstr "Ассинх.Кіріс"
 msgid "myTurn"
 msgstr "Жүрісім"
 
-#~ msgid "Choose Game &Type"
-#~ msgstr "Ойының түрін таңдау"
-
+#~ msgctxt "Game difficulty level"
 #~ msgid "Difficulty"
 #~ msgstr "Қиындығы"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "Ойының түрін таңдау"
 
 #~ msgctxt ""
 #~ "Name of the game difficulty level that is customized by the user by "

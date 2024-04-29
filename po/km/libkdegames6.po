@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:46+0000\n"
+"POT-Creation-Date: 2024-04-29 00:38+0000\n"
 "PO-Revision-Date: 2010-06-08 15:55+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -20,7 +20,9 @@ msgstr ""
 "X-Language: km-KH\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Retry"
+msgctxt "@action:button"
 msgid "Retry"
 msgstr "ព្យាយាម​ម្តង​ទៀត"
 
@@ -32,38 +34,58 @@ msgid ""
 msgstr "មិន​អាច​ចូល​ឯកសារ​ពិន្ទុ​ខ្ពស់​បាន ។ អ្នក​ប្រើ​ផ្សេង​ទៀត​ប្រហែល​ជា​កំពុង​តែ​សរសេរ​លើ​វា​ហើយ ។"
 
 #: highscore/kgamehighscoredialog.cpp:100
-#: highscore/kgamehighscoredialog.cpp:271
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:window"
 msgid "High Scores"
 msgstr "ពិន្ទុ​ខ្ពស់"
 
-#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
-#, kde-format
+#: highscore/kgamehighscoredialog.cpp:114
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:column"
 msgid "Name"
 msgstr "ឈ្មោះ"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
+msgctxt "@title:column"
 msgid "Date"
 msgstr "កាលបរិច្ឆេទ"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Level"
+msgctxt "@title:column"
 msgid "Level"
 msgstr "កម្រិត"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Score"
+msgctxt "@title:column"
 msgid "Score"
 msgstr "ពិន្ទុ"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
 msgid "Time"
 msgstr "ពេលវេលា"
 
+#: highscore/kgamehighscoredialog.cpp:271
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:tab"
+msgid "High Scores"
+msgstr "ពិន្ទុ​ខ្ពស់"
+
 #: highscore/kgamehighscoredialog.cpp:288
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Rank"
+msgctxt "@title:group"
 msgid "Rank"
 msgstr "ចំណាត់​ថ្នាក់"
 
@@ -74,22 +96,30 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Remember"
+msgctxt "@action:button"
 msgid "&Remember"
 msgstr "នឹក​ឃើញ​"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Forget"
+msgctxt "@action:button"
 msgid "&Forget"
 msgstr "ភ្លេច"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remember this high score"
+msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "នឹក​​ឃើញ​​ពិន្ទុ​ខ្ពស់​នេះ​"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Forget this high score"
+msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "ភ្លេច​ពិន្ទុ​ខ្ពស់​នេះ"
 
@@ -165,24 +195,38 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "ផ្លាស់ប្ដូរ​កម្រិត​ពិបាក​នឹង​បញ្ចប់​ល្បែង​បច្ចុប្បន្ន !"
 
 #: kgamedifficulty.cpp:318
-#, kde-format
-msgid "Change the difficulty level"
+#, fuzzy, kde-format
+#| msgid "Change the difficulty level"
+msgctxt "@action:button"
+msgid "Change the Difficulty Level"
 msgstr "ផ្លាស់ប្ដូរ​កម្រិត​ពិបាក "
 
-#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
-#, kde-format
-msgctxt "Game difficulty level"
+#: kgamedifficulty.cpp:402
+#, fuzzy, kde-format
+#| msgid "Difficulty"
+msgctxt "@info:tooltip Game difficulty level"
+msgid "Difficulty"
+msgstr "ពិបាក"
+
+#: kgamedifficulty.cpp:410
+#, fuzzy, kde-format
+#| msgid "Difficulty"
+msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "ពិបាក"
 
 #: kgamedifficulty.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level"
+msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "កំណត់​កម្រិត​ពិបាក"
 
 #: kgamedifficulty.cpp:412
-#, kde-format
-msgid "Set the difficulty level of the game."
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level of the game."
+msgctxt "@info:whatsthis"
+msgid "Sets the difficulty level of the game."
 msgstr "កំណត់​កម្រិត​ពិបាក​របស់​ល្បែង"
 
 #: kgamestandardaction.cpp:68
@@ -199,11 +243,15 @@ msgid "Start a new game"
 msgstr "ចាប់​ផ្ដើម​ល្បែង​ថ្មី"
 
 #: kgamestandardaction.cpp:70
-msgid "&Load..."
+#, fuzzy
+#| msgid "&Load..."
+msgid "&Load…"
 msgstr "ផ្ទុក..."
 
 #: kgamestandardaction.cpp:70
-msgid "Open a saved game..."
+#, fuzzy
+#| msgid "Open a saved game..."
+msgid "Open a saved game"
 msgstr "បើក​ល្បែង​ដែល​បាន​រក្សា​ទុក​​..."
 
 #: kgamestandardaction.cpp:72
@@ -211,7 +259,9 @@ msgid "Load &Recent"
 msgstr "ផ្ទុក​ថ្មី​ៗ"
 
 #: kgamestandardaction.cpp:72
-msgid "Open a recently saved game..."
+#, fuzzy
+#| msgid "Open a recently saved game..."
+msgid "Open a recently saved game"
 msgstr "បើក​ល្បែង​ដែល​បាន​រក្សា​ទុក​ថ្មី​ៗ​..."
 
 #: kgamestandardaction.cpp:74
@@ -231,7 +281,9 @@ msgid "Save the current game"
 msgstr "រក្សាទុក​ល្បែង​បច្ចុប្បន្ន"
 
 #: kgamestandardaction.cpp:78
-msgid "Save &As..."
+#, fuzzy
+#| msgid "Save &As..."
+msgid "Save &As…"
 msgstr "រក្សាទុក​ជា..."
 
 #: kgamestandardaction.cpp:78
@@ -287,7 +339,9 @@ msgid "Delete all-time statistics."
 msgstr "លុបស្ថិតិ​ពេលវេលា​ទាំង​អស់ ។"
 
 #: kgamestandardaction.cpp:92
-msgid "&Print..."
+#, fuzzy
+#| msgid "&Print..."
+msgid "&Print…"
 msgstr "បោះពុម្ព..."
 
 #: kgamestandardaction.cpp:94
@@ -359,16 +413,22 @@ msgid "Solve the game"
 msgstr "ដោះស្រាយ​ល្បែង"
 
 #: kgamestandardaction.cpp:116
-msgid "Configure &Carddecks..."
+#, fuzzy
+#| msgid "Configure &Carddecks..."
+msgid "Configure &Carddecks…"
 msgstr "កំណត់​រចនាសម្ព័ន្ធ​ហ៊ូ​បៀ..."
 
 #: kgamestandardaction.cpp:118
-msgid "Configure &High Scores..."
+#, fuzzy
+#| msgid "Configure &High Scores..."
+msgid "Configure &High Scores…"
 msgstr "កំណត់​រចនាសម្ព័ន្ធ​ពិន្ទុ​ខ្ពស់"
 
 #: kgamethemeselector.cpp:108
-#, kde-format
-msgid "Get New Themes..."
+#, fuzzy, kde-format
+#| msgid "Get New Themes..."
+msgctxt "@action:button"
+msgid "Get New Themes…"
 msgstr "យក​រូបរាង​ថ្មី..."
 
 #: kgamethemeselector.cpp:210
@@ -378,14 +438,18 @@ msgid "Select theme"
 msgstr "ជ្រើស​រូបរាង"
 
 #: kgamethemeselector.cpp:282
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "[No name]"
+msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[គ្មាន​ឈ្មោះ]"
 
 #: kgamethemeselector.cpp:298
-#, kde-format
-msgctxt "Author attribution, e.g. \"by Jack\""
-msgid "by %1"
+#, fuzzy, kde-format
+#| msgctxt "Author attribution, e.g. \"by Jack\""
+#| msgid "by %1"
+msgctxt "@info author attribution"
+msgid "By %1"
 msgstr "ដោយ %1"
 
 #: private/kchatbase.cpp:98
@@ -608,6 +672,11 @@ msgstr "ក្រុម"
 msgid "default"
 msgstr "លំនាំដើម"
 
+#: private/kgame/kplayer.cpp:77
+#, kde-format
+msgid "Name"
+msgstr "ឈ្មោះ"
+
 #: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
@@ -618,11 +687,12 @@ msgstr "ការ​បញ្ចូល​អសមកាលកម្ម"
 msgid "myTurn"
 msgstr "វេន​ខ្ញុំ"
 
-#~ msgid "Choose Game &Type"
-#~ msgstr "ជ្រើស​ប្រភេទ​ល្បែង"
-
+#~ msgctxt "Game difficulty level"
 #~ msgid "Difficulty"
 #~ msgstr "ពិបាក"
+
+#~ msgid "Choose Game &Type"
+#~ msgstr "ជ្រើស​ប្រភេទ​ល្បែង"
 
 #~ msgctxt ""
 #~ "Name of the game difficulty level that is customized by the user by "

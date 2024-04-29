@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:46+0000\n"
+"POT-Creation-Date: 2024-04-29 00:38+0000\n"
 "PO-Revision-Date: 2014-08-25 11:22+0200\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -20,7 +20,9 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Retry"
+msgctxt "@action:button"
 msgid "Retry"
 msgstr "Zkusit znovu"
 
@@ -34,38 +36,58 @@ msgstr ""
 "pravděpodobně právě zapisuje."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#: highscore/kgamehighscoredialog.cpp:271
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Nejvyšší skóre"
 
-#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
-#, kde-format
+#: highscore/kgamehighscoredialog.cpp:114
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:column"
 msgid "Name"
 msgstr "Jméno"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
+msgctxt "@title:column"
 msgid "Date"
 msgstr "Datum"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Level"
+msgctxt "@title:column"
 msgid "Level"
 msgstr "Úroveň"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Score"
+msgctxt "@title:column"
 msgid "Score"
 msgstr "Skóre"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
 msgid "Time"
 msgstr "Čas"
 
+#: highscore/kgamehighscoredialog.cpp:271
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:tab"
+msgid "High Scores"
+msgstr "Nejvyšší skóre"
+
 #: highscore/kgamehighscoredialog.cpp:288
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Rank"
+msgctxt "@title:group"
 msgid "Rank"
 msgstr "Pořadí"
 
@@ -76,22 +98,30 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Remember"
+msgctxt "@action:button"
 msgid "&Remember"
 msgstr "Zapa&matovat"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Forget"
+msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&Zapomenout"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remember this high score"
+msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "Zapamatovat si tento nejlepší výsledek"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Forget this high score"
+msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "Zapomenout tento nejlepší výsledek"
 
@@ -167,24 +197,40 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "Nastavení úrovně obtížnosti ukončí aktuální hru!"
 
 #: kgamedifficulty.cpp:318
-#, kde-format
-msgid "Change the difficulty level"
+#, fuzzy, kde-format
+#| msgid "Change the difficulty level"
+msgctxt "@action:button"
+msgid "Change the Difficulty Level"
 msgstr "Změnit úroveň obtížnosti"
 
-#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
-#, kde-format
-msgctxt "Game difficulty level"
+#: kgamedifficulty.cpp:402
+#, fuzzy, kde-format
+#| msgctxt "Game difficulty level"
+#| msgid "Difficulty"
+msgctxt "@info:tooltip Game difficulty level"
+msgid "Difficulty"
+msgstr "Obtížnost"
+
+#: kgamedifficulty.cpp:410
+#, fuzzy, kde-format
+#| msgctxt "Game difficulty level"
+#| msgid "Difficulty"
+msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "Obtížnost"
 
 #: kgamedifficulty.cpp:411
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level"
+msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "Nastavit úroveň obtížnosti"
 
 #: kgamedifficulty.cpp:412
-#, kde-format
-msgid "Set the difficulty level of the game."
+#, fuzzy, kde-format
+#| msgid "Set the difficulty level of the game."
+msgctxt "@info:whatsthis"
+msgid "Sets the difficulty level of the game."
 msgstr "Nastavit úroveň obtížnosti hry."
 
 #: kgamestandardaction.cpp:68
@@ -201,11 +247,15 @@ msgid "Start a new game"
 msgstr "Spustit novou hru"
 
 #: kgamestandardaction.cpp:70
-msgid "&Load..."
+#, fuzzy
+#| msgid "&Load..."
+msgid "&Load…"
 msgstr "Načís&t..."
 
 #: kgamestandardaction.cpp:70
-msgid "Open a saved game..."
+#, fuzzy
+#| msgid "Open a saved game..."
+msgid "Open a saved game"
 msgstr "Otevřít uloženou hru..."
 
 #: kgamestandardaction.cpp:72
@@ -213,7 +263,9 @@ msgid "Load &Recent"
 msgstr "Nah&rát nedávnou"
 
 #: kgamestandardaction.cpp:72
-msgid "Open a recently saved game..."
+#, fuzzy
+#| msgid "Open a recently saved game..."
+msgid "Open a recently saved game"
 msgstr "Otevřít nedávnou uloženou hru..."
 
 #: kgamestandardaction.cpp:74
@@ -233,7 +285,9 @@ msgid "Save the current game"
 msgstr "Uložit aktuální hru"
 
 #: kgamestandardaction.cpp:78
-msgid "Save &As..."
+#, fuzzy
+#| msgid "Save &As..."
+msgid "Save &As…"
 msgstr "Uložit ja&ko..."
 
 #: kgamestandardaction.cpp:78
@@ -289,7 +343,9 @@ msgid "Delete all-time statistics."
 msgstr "Smazat všechny statistiky."
 
 #: kgamestandardaction.cpp:92
-msgid "&Print..."
+#, fuzzy
+#| msgid "&Print..."
+msgid "&Print…"
 msgstr "Vy&tisknout..."
 
 #: kgamestandardaction.cpp:94
@@ -361,16 +417,22 @@ msgid "Solve the game"
 msgstr "Vyřešit hru"
 
 #: kgamestandardaction.cpp:116
-msgid "Configure &Carddecks..."
+#, fuzzy
+#| msgid "Configure &Carddecks..."
+msgid "Configure &Carddecks…"
 msgstr "Nastavit sady &karet..."
 
 #: kgamestandardaction.cpp:118
-msgid "Configure &High Scores..."
+#, fuzzy
+#| msgid "Configure &High Scores..."
+msgid "Configure &High Scores…"
 msgstr "Nastavit ne&jvyšší skóre..."
 
 #: kgamethemeselector.cpp:108
-#, kde-format
-msgid "Get New Themes..."
+#, fuzzy, kde-format
+#| msgid "Get New Themes..."
+msgctxt "@action:button"
+msgid "Get New Themes…"
 msgstr "Získat nové motivy..."
 
 #: kgamethemeselector.cpp:210
@@ -380,14 +442,18 @@ msgid "Select theme"
 msgstr "Zvolit motiv"
 
 #: kgamethemeselector.cpp:282
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "[No name]"
+msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[Bez názvu]"
 
 #: kgamethemeselector.cpp:298
-#, kde-format
-msgctxt "Author attribution, e.g. \"by Jack\""
-msgid "by %1"
+#, fuzzy, kde-format
+#| msgctxt "Author attribution, e.g. \"by Jack\""
+#| msgid "by %1"
+msgctxt "@info author attribution"
+msgid "By %1"
 msgstr "od %1"
 
 #: private/kchatbase.cpp:98
@@ -611,6 +677,11 @@ msgstr "Skupina"
 #, kde-format
 msgid "default"
 msgstr "výchozí"
+
+#: private/kgame/kplayer.cpp:77
+#, kde-format
+msgid "Name"
+msgstr "Jméno"
 
 #: private/kgame/kplayer.cpp:80
 #, kde-format

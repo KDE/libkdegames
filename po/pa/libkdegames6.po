@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:46+0000\n"
+"POT-Creation-Date: 2024-04-29 00:38+0000\n"
 "PO-Revision-Date: 2024-02-26 08:15-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Retry"
+msgctxt "@action:button"
 msgid "Retry"
 msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ"
 
@@ -30,38 +32,58 @@ msgid ""
 msgstr "ਵੱਧੋ-ਵੱਧ ਸਕੋਰ ਫਾਇਲ ਨੂੰ ਖੋਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ। ਸ਼ੈਦ ਹੋਰ ਉਪਭੋਗੀ ਉਸ ਨੂੰ ਲਿਖ ਰਿਹਾ ਹੈ।"
 
 #: highscore/kgamehighscoredialog.cpp:100
-#: highscore/kgamehighscoredialog.cpp:271
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:window"
 msgid "High Scores"
 msgstr "ਉੱਚ ਸਕੋਰ"
 
-#: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
-#, kde-format
+#: highscore/kgamehighscoredialog.cpp:114
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:column"
 msgid "Name"
 msgstr "ਨਾਂ"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
+msgctxt "@title:column"
 msgid "Date"
 msgstr "ਮਿਤੀ"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Level"
+msgctxt "@title:column"
 msgid "Level"
 msgstr "ਪੱਧਰ"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Score"
+msgctxt "@title:column"
 msgid "Score"
 msgstr "ਅੰਕ"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
 msgid "Time"
 msgstr "ਸਮਾਂ"
 
+#: highscore/kgamehighscoredialog.cpp:271
+#, fuzzy, kde-format
+#| msgid "High Scores"
+msgctxt "@title:tab"
+msgid "High Scores"
+msgstr "ਉੱਚ ਸਕੋਰ"
+
 #: highscore/kgamehighscoredialog.cpp:288
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Rank"
+msgctxt "@title:group"
 msgid "Rank"
 msgstr "ਦਰਜਾ"
 
@@ -73,21 +95,27 @@ msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
+msgctxt "@action:button"
 msgid "&Remember"
 msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
+msgctxt "@action:button"
 msgid "&Forget"
 msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remember this high score"
+msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "ਇਹ ਵੱਧ ਸਕੋਰ ਨੂੰ ਯਾਦ ਰੱਖੋ"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Forget this high score"
+msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "ਇਸ ਵੱਧ ਸਕੋਰ ਨੂੰ ਭੁਲਾਓ"
 
@@ -164,23 +192,32 @@ msgstr ""
 
 #: kgamedifficulty.cpp:318
 #, kde-format
-msgid "Change the difficulty level"
+msgctxt "@action:button"
+msgid "Change the Difficulty Level"
 msgstr ""
 
-#: kgamedifficulty.cpp:402 kgamedifficulty.cpp:410
+#: kgamedifficulty.cpp:402
 #, kde-format
-msgctxt "Game difficulty level"
+msgctxt "@info:tooltip Game difficulty level"
+msgid "Difficulty"
+msgstr ""
+
+#: kgamedifficulty.cpp:410
+#, kde-format
+msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr ""
 
 #: kgamedifficulty.cpp:411
 #, kde-format
+msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr ""
 
 #: kgamedifficulty.cpp:412
 #, kde-format
-msgid "Set the difficulty level of the game."
+msgctxt "@info:whatsthis"
+msgid "Sets the difficulty level of the game."
 msgstr ""
 
 #: kgamestandardaction.cpp:68
@@ -197,11 +234,13 @@ msgid "Start a new game"
 msgstr "ਨਵੀਂ ਖੇਡ ਸ਼ੁਰੂ"
 
 #: kgamestandardaction.cpp:70
-msgid "&Load..."
+#, fuzzy
+#| msgid "&Load..."
+msgid "&Load…"
 msgstr "ਲੋਡ(&L)..."
 
 #: kgamestandardaction.cpp:70
-msgid "Open a saved game..."
+msgid "Open a saved game"
 msgstr ""
 
 #: kgamestandardaction.cpp:72
@@ -209,7 +248,7 @@ msgid "Load &Recent"
 msgstr "ਤਾਜ਼ੀ ਲੋਡ(&R)"
 
 #: kgamestandardaction.cpp:72
-msgid "Open a recently saved game..."
+msgid "Open a recently saved game"
 msgstr ""
 
 #: kgamestandardaction.cpp:74
@@ -229,7 +268,9 @@ msgid "Save the current game"
 msgstr "ਮੌਜੂਦਾ ਖੇਡ ਨੂੰ ਸੰਭਾਲੋ"
 
 #: kgamestandardaction.cpp:78
-msgid "Save &As..."
+#, fuzzy
+#| msgid "Save &As..."
+msgid "Save &As…"
 msgstr "ਇੰਞ ਸੰਭਾਲੋ(&A)..."
 
 #: kgamestandardaction.cpp:78
@@ -285,7 +326,9 @@ msgid "Delete all-time statistics."
 msgstr ""
 
 #: kgamestandardaction.cpp:92
-msgid "&Print..."
+#, fuzzy
+#| msgid "&Print..."
+msgid "&Print…"
 msgstr "ਪਰਿੰਟ ਕਰੋ(&P)..."
 
 #: kgamestandardaction.cpp:94
@@ -357,16 +400,22 @@ msgid "Solve the game"
 msgstr "ਖੇਡ ਨੂੰ ਹੱਲ਼ ਕਰੋ"
 
 #: kgamestandardaction.cpp:116
-msgid "Configure &Carddecks..."
+#, fuzzy
+#| msgid "Configure &Carddecks..."
+msgid "Configure &Carddecks…"
 msgstr "ਕਾਰਡ ਮੁੱਖ ਸੰਰਚਨਾ(&C)..."
 
 #: kgamestandardaction.cpp:118
-msgid "Configure &High Scores..."
+#, fuzzy
+#| msgid "Configure &High Scores..."
+msgid "Configure &High Scores…"
 msgstr "ਵੱਧੋ-ਵੱਧ ਸਕੋਰ ਦੀ ਸੰਰਚਨਾ(&H)..."
 
 #: kgamethemeselector.cpp:108
-#, kde-format
-msgid "Get New Themes..."
+#, fuzzy, kde-format
+#| msgid "Get New Themes..."
+msgctxt "@action:button"
+msgid "Get New Themes…"
 msgstr "…ਨਵੇਂ ਥੀਮ ਲਵੋ"
 
 #: kgamethemeselector.cpp:210
@@ -376,14 +425,18 @@ msgid "Select theme"
 msgstr "ਥੀਮ ਨੂੰ ਚੁਣੋ"
 
 #: kgamethemeselector.cpp:282
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "[No name]"
+msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[ਕੋਈ ਨਾਂ ਨਹੀਂ]"
 
 #: kgamethemeselector.cpp:298
-#, kde-format
-msgctxt "Author attribution, e.g. \"by Jack\""
-msgid "by %1"
+#, fuzzy, kde-format
+#| msgctxt "Author attribution, e.g. \"by Jack\""
+#| msgid "by %1"
+msgctxt "@info author attribution"
+msgid "By %1"
 msgstr "%1 ਵਲੋਂ"
 
 #: private/kchatbase.cpp:98
@@ -606,6 +659,11 @@ msgstr "ਗਰੁੱਪ"
 #, kde-format
 msgid "default"
 msgstr "ਮੂਲ"
+
+#: private/kgame/kplayer.cpp:77
+#, kde-format
+msgid "Name"
+msgstr "ਨਾਂ"
 
 #: private/kgame/kplayer.cpp:80
 #, kde-format
