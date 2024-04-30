@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-29 00:38+0000\n"
-"PO-Revision-Date: 2022-11-30 06:46+0100\n"
+"PO-Revision-Date: 2024-04-29 11:12+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,14 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, fuzzy, kde-format
-#| msgid "Retry"
+#, kde-format
 msgctxt "@action:button"
 msgid "Retry"
-msgstr "გამეორება"
+msgstr "თავიდან ცდა"
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
@@ -35,57 +34,49 @@ msgstr ""
 "ჩაწეროს."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
 msgstr "უმაღლესი ქულები"
 
 #: highscore/kgamehighscoredialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Name"
 msgstr "სახელი"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "თარიღი"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, fuzzy, kde-format
-#| msgid "Level"
+#, kde-format
 msgctxt "@title:column"
 msgid "Level"
 msgstr "დონე"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, fuzzy, kde-format
-#| msgid "Score"
+#, kde-format
 msgctxt "@title:column"
 msgid "Score"
 msgstr "ქულები"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "დრო"
 
 #: highscore/kgamehighscoredialog.cpp:271
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
 msgstr "უმაღლესი ქულები"
 
 #: highscore/kgamehighscoredialog.cpp:288
-#, fuzzy, kde-format
-#| msgid "Rank"
+#, kde-format
 msgctxt "@title:group"
 msgid "Rank"
 msgstr "რანგი"
@@ -97,29 +88,25 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, fuzzy, kde-format
-#| msgid "&Remember"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&დამახსოვრება"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, fuzzy, kde-format
-#| msgid "&Forget"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&დავიწყება"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Remember this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "ამ მაღალი ქულის დამახსოვრება"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Forget this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "ამ მაღალი ქულის დავიწყება"
@@ -196,39 +183,34 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "სირთულის დონის შეცვლა მიმდინარე თამაშს დაასრულებს!"
 
 #: kgamedifficulty.cpp:318
-#, fuzzy, kde-format
-#| msgid "Change the difficulty level"
+#, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
 msgstr "სირთულის დონის შეცვლა"
 
 #: kgamedifficulty.cpp:402
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
 msgstr "სირთულე"
 
 #: kgamedifficulty.cpp:410
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "სირთულე"
 
 #: kgamedifficulty.cpp:411
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "სირთულის დონის დაყენება"
 
 #: kgamedifficulty.cpp:412
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
-msgstr "თამაშის სირთულის დონის დაყენება."
+msgstr "აყენებს თამაშის სირთულეს."
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
@@ -244,26 +226,20 @@ msgid "Start a new game"
 msgstr "დაიწყეთ ახალი თამაში"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
-msgstr "&ჩატვირთვა..."
+msgstr "&ჩატვირთვა…"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
-msgstr "შენახული თამაშის გახსნა...."
+msgstr "შენახული თამაშის გახსნა"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "უახლესის &ჩატვირთვა"
 
 #: kgamestandardaction.cpp:72
-#, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
-msgstr "ახლახანს შენახული თამაშის გახსნა..."
+msgstr "ახლახანს შენახული თამაშის გახსნა"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -282,10 +258,8 @@ msgid "Save the current game"
 msgstr "მიმდინარე თამაშის შენახვა"
 
 #: kgamestandardaction.cpp:78
-#, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
-msgstr "შეინახვა &როგორც..."
+msgstr "შეინახვა &როგორც…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -340,10 +314,8 @@ msgid "Delete all-time statistics."
 msgstr "სტატისტიკის სრულად გასუფთავება."
 
 #: kgamestandardaction.cpp:92
-#, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
-msgstr "&ამობეჭდვა..."
+msgstr "&ბეჭდვა…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -414,23 +386,18 @@ msgid "Solve the game"
 msgstr "თამაშის ამოხსნა"
 
 #: kgamestandardaction.cpp:116
-#, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
-msgstr "კარტის &შეკვრების მორგება..."
+msgstr "კარტის &შეკვრების მორგება…"
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
-msgstr "&უმაღლესი ქულების ცხრილის მორგება...."
+msgstr "&უმაღლესი ქულების ცხრილის მორგება…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "Get New Themes..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Themes…"
-msgstr "ახალი თემების მიღება..."
+msgstr "ახალი თემების მიღება…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -439,16 +406,13 @@ msgid "Select theme"
 msgstr "თემის არჩევა"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "[No name]"
+#, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[უსახელო]"
 
 #: kgamethemeselector.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
 msgstr "ავტორი: %1"
