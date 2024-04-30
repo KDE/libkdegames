@@ -6,22 +6,23 @@
 # Santiago Fernandez Sancho <santi@kde-es.org>, 2004, 2005, 2006.
 # santi <santi@kde-es.org>, 2005.
 # Santiago Fernández Sancho <santi@kde-es.org>, 2007, 2008.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2009, 2012.
+# SPDX-FileCopyrightText: 2009, 2012, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 # Huever, 2009.
 # Kira J. Fernandez <kirajfdez@gmail.com>, 2010.
+# Sofía Priego <spriego@darksylvania.net>, %Y.
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:46+0000\n"
-"PO-Revision-Date: 2012-04-22 17:09+0200\n"
-"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"PO-Revision-Date: 2024-04-29 18:48+0100\n"
+"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: highscore/kgamehighscore.cpp:154
@@ -107,7 +108,7 @@ msgid ""
 "You have a new high score!"
 msgstr ""
 "¡Excelente!\n"
-"¡Ha obtenido una de las mejores puntuaciones!"
+"¡Has obtenido una de las mejores puntuaciones!"
 
 #: highscore/kgamehighscoredialog.cpp:561
 #, kde-format
@@ -116,7 +117,7 @@ msgid ""
 "You made it to the high score list!"
 msgstr ""
 "¡Bien hecho!\n"
-"¡Consiguió entrar en la lista de mejores puntuaciones!"
+"¡Has conseguido entrar en la lista de mejores puntuaciones!"
 
 #: kgamedifficulty.cpp:76
 #, kde-format
@@ -195,15 +196,15 @@ msgstr "Establece el nivel de dificultad"
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
-msgstr "&Nuevo"
+msgstr "&Nueva"
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game."
-msgstr "Iniciar una partida nueva."
+msgstr "Empezar una partida nueva."
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game"
-msgstr "Iniciar una partida nueva"
+msgstr "Empezar una partida nueva"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load..."
@@ -235,7 +236,7 @@ msgstr "Guar&dar"
 
 #: kgamestandardaction.cpp:76
 msgid "Save the current game"
-msgstr "Guarda la partida actual"
+msgstr "Guardar la partida actual"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As..."
@@ -243,7 +244,7 @@ msgstr "Gu&ardar como..."
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
-msgstr "Guarda la partida actual en otro archivo"
+msgstr "Guardar la partida actual en otro archivo"
 
 #: kgamestandardaction.cpp:80
 msgid "&End Game"
@@ -251,7 +252,7 @@ msgstr "&Finalizar partida"
 
 #: kgamestandardaction.cpp:80
 msgid "End the current game"
-msgstr "Finaliza la partida actual"
+msgstr "Finalizar la partida actual"
 
 #: kgamestandardaction.cpp:82
 msgid "Pa&use"
@@ -259,7 +260,7 @@ msgstr "Pa&usa"
 
 #: kgamestandardaction.cpp:82
 msgid "Pause the game"
-msgstr "Detiene la partida"
+msgstr "Detener la partida"
 
 #: kgamestandardaction.cpp:84
 msgid "Show &High Scores"
@@ -267,7 +268,7 @@ msgstr "Mostrar &mejores puntuaciones"
 
 #: kgamestandardaction.cpp:84
 msgid "Show high scores"
-msgstr "Muestra las mejores puntuaciones"
+msgstr "Mostrar las mejores puntuaciones"
 
 #: kgamestandardaction.cpp:86
 msgid "&Clear High Scores"
@@ -275,7 +276,7 @@ msgstr "&Borrar mejores puntuaciones"
 
 #: kgamestandardaction.cpp:86
 msgid "Clear high scores"
-msgstr "Borra las mejores puntuaciones"
+msgstr "Borrar las mejores puntuaciones"
 
 #: kgamestandardaction.cpp:88
 msgid "Show Statistics"
@@ -283,7 +284,7 @@ msgstr "Mostrar estadísticas"
 
 #: kgamestandardaction.cpp:88
 msgid "Show statistics"
-msgstr "Muestra las estadísticas"
+msgstr "Mostrar las estadísticas"
 
 #: kgamestandardaction.cpp:90
 msgid "&Clear Statistics"
@@ -291,7 +292,7 @@ msgstr "&Borrar estadísticas"
 
 #: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
-msgstr "Borra todas las estadísticas hasta ahora."
+msgstr "Borrar todas las estadísticas hasta ahora."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print..."
@@ -311,7 +312,7 @@ msgstr "Repetir"
 
 #: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
-msgstr "Repite el último movimiento"
+msgstr "Repetir el último movimiento"
 
 #: kgamestandardaction.cpp:100
 msgid "Und&o"
@@ -319,7 +320,7 @@ msgstr "De&shacer"
 
 #: kgamestandardaction.cpp:100
 msgid "Undo the last move"
-msgstr "Deshace el último movimiento"
+msgstr "Deshacer el último movimiento"
 
 #: kgamestandardaction.cpp:102
 msgid "Re&do"
@@ -327,7 +328,7 @@ msgstr "Re&hacer"
 
 #: kgamestandardaction.cpp:102
 msgid "Redo the latest move"
-msgstr "Rehace el último movimiento"
+msgstr "Rehacer el último movimiento"
 
 #: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
@@ -335,7 +336,7 @@ msgstr "Ti&rar los dados"
 
 #: kgamestandardaction.cpp:104
 msgid "Roll the dice"
-msgstr "Tira los dados"
+msgstr "Tirar los dados"
 
 #: kgamestandardaction.cpp:106
 msgid "End Turn"
@@ -347,7 +348,7 @@ msgstr "&Pista"
 
 #: kgamestandardaction.cpp:108
 msgid "Give a hint"
-msgstr "Da una pista"
+msgstr "Mostrar una pista"
 
 #: kgamestandardaction.cpp:110
 msgid "&Demo"
@@ -363,7 +364,7 @@ msgstr "Re&solver"
 
 #: kgamestandardaction.cpp:112
 msgid "Solve the game"
-msgstr "Resuelve el juego"
+msgstr "Resolver el juego"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
@@ -572,7 +573,7 @@ msgstr "%1 (%2)"
 #: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
-msgstr "ID sin nombrar: %1"
+msgstr "Sin nombre - ID: %1"
 
 #: private/kgame/kgamepropertyhandler.cpp:166
 #, kde-format
@@ -589,7 +590,7 @@ msgstr "Puntero NULL"
 #: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
 msgid "True"
-msgstr "Verdadero"
+msgstr "Cierto"
 
 #: private/kgame/kgamepropertyhandler.cpp:355
 #, kde-format
