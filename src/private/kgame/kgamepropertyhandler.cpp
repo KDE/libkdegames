@@ -76,7 +76,7 @@ void KGamePropertyHandler::registerHandler(int id, const QObject *receiver, cons
 {
     setId(id);
     if (receiver && sendf) {
-        connect(this, SIGNAL(signalSendMessage(int, QDataStream &, bool *)), receiver, sendf);
+        connect(this, SIGNAL(signalSendMessage(int, QDataStream &, bool *)), receiver, sendf, Qt::DirectConnection);
     }
     if (receiver && emitf) {
         connect(this, SIGNAL(signalPropertyChanged(KGamePropertyBase *)), receiver, emitf);
