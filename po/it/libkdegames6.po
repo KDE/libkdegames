@@ -1,15 +1,15 @@
 # translation of libkdegames.po to Italian
 # Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
-#
 # Federico Zenith <federico.zenith@member.fsf.org>, 2009.
 # Andrea Celli <andrea.celli@libero.it>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
-# Valter Mura <valtermura@gmail.com>, 2012.
+# SPDX-FileCopyrightText: 2012, 2024 Valter Mura <valtermura@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-29 00:38+0000\n"
-"PO-Revision-Date: 2012-07-23 22:00+0200\n"
+"PO-Revision-Date: 2024-05-01 16:40+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, fuzzy, kde-format
-#| msgid "Retry"
+#, kde-format
 msgctxt "@action:button"
 msgid "Retry"
 msgstr "Riprova"
@@ -35,57 +35,49 @@ msgstr ""
 "sta modificandolo in questo momento."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Classifica"
 
 #: highscore/kgamehighscoredialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Name"
 msgstr "Nome"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Data"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, fuzzy, kde-format
-#| msgid "Level"
+#, kde-format
 msgctxt "@title:column"
 msgid "Level"
 msgstr "Livello"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, fuzzy, kde-format
-#| msgid "Score"
+#, kde-format
 msgctxt "@title:column"
 msgid "Score"
 msgstr "Punteggio"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Tempo"
 
 #: highscore/kgamehighscoredialog.cpp:271
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
 msgstr "Classifica"
 
 #: highscore/kgamehighscoredialog.cpp:288
-#, fuzzy, kde-format
-#| msgid "Rank"
+#, kde-format
 msgctxt "@title:group"
 msgid "Rank"
 msgstr "Posizione"
@@ -97,29 +89,25 @@ msgid "#%1"
 msgstr "N. %1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, fuzzy, kde-format
-#| msgid "&Remember"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&Ricorda"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, fuzzy, kde-format
-#| msgid "&Forget"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&Dimentica"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Remember this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "Registra questo punteggio"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Forget this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "Ignora questo punteggio"
@@ -196,36 +184,31 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "Per cambiare il livello di difficoltà verrà terminata la partita!"
 
 #: kgamedifficulty.cpp:318
-#, fuzzy, kde-format
-#| msgid "Change the difficulty level"
+#, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
 msgstr "Cambia il livello di difficoltà"
 
 #: kgamedifficulty.cpp:402
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
 msgstr "Difficoltà"
 
 #: kgamedifficulty.cpp:410
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "Difficoltà"
 
 #: kgamedifficulty.cpp:411
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "Imposta il livello di difficoltà"
 
 #: kgamedifficulty.cpp:412
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
 msgstr "Imposta il livello di difficoltà del gioco."
@@ -244,26 +227,20 @@ msgid "Start a new game"
 msgstr "Avvia una nuova partita"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
-msgstr "&Carica..."
+msgstr "&Carica…"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
-msgstr "Apri una partita salvata..."
+msgstr "Apri una partita salvata"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "Carica &recente"
 
 #: kgamestandardaction.cpp:72
-#, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
-msgstr "Apre una delle ultime partite salvate..."
+msgstr "Apri una delle ultime partite salvate"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -282,10 +259,8 @@ msgid "Save the current game"
 msgstr "Salva la partita in corso"
 
 #: kgamestandardaction.cpp:78
-#, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
-msgstr "Salv&a come..."
+msgstr "Salv&a come…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -340,10 +315,8 @@ msgid "Delete all-time statistics."
 msgstr "Cancella tutte le statistiche passate e presenti."
 
 #: kgamestandardaction.cpp:92
-#, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
-msgstr "Stam&pa..."
+msgstr "Stam&pa…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -414,23 +387,18 @@ msgid "Solve the game"
 msgstr "Dai la soluzione"
 
 #: kgamestandardaction.cpp:116
-#, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
-msgstr "Configura il mazzo di &carte..."
+msgstr "Configura il mazzo di &carte…"
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
-msgstr "Configura le classific&he..."
+msgstr "Configura le classific&he…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "Get New Themes..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Themes…"
-msgstr "Recupera nuovi temi..."
+msgstr "Recupera nuovi temi…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -439,16 +407,13 @@ msgid "Select theme"
 msgstr "Scegli un tema"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "[No name]"
+#, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[Nessun nome]"
 
 #: kgamethemeselector.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
 msgstr "di %1"
