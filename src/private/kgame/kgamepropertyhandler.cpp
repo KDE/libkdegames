@@ -174,14 +174,14 @@ bool KGamePropertyHandler::load(QDataStream &stream)
     lockDirectEmit();
     uint count, i;
     stream >> count;
-    qDebug() << ":" << count << "KGameProperty objects";
+    // qDebug() << ":" << count << "KGameProperty objects";
     for (i = 0; i < count; ++i) {
         processMessage(stream, id(), false);
     }
     qint16 cookie;
     stream >> cookie;
     if (cookie == KPLAYERHANDLER_LOAD_COOKIE) {
-        qDebug() << "   KGamePropertyHandler loaded properly";
+        // qDebug() << "   KGamePropertyHandler loaded properly";
     } else {
         qCCritical(KDEGAMESPRIVATE_LOG) << "KGamePropertyHandler loading error. probably format error";
     }
@@ -192,7 +192,7 @@ bool KGamePropertyHandler::load(QDataStream &stream)
 
 bool KGamePropertyHandler::save(QDataStream &stream)
 {
-    qDebug() << ":" << d->mIdDict.count() << "KGameProperty objects";
+    // qDebug() << ":" << d->mIdDict.count() << "KGameProperty objects";
     stream << (uint)d->mIdDict.count();
     QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
     while (it.hasNext()) {
