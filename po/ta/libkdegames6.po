@@ -2,19 +2,21 @@
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # root <root@intranet.ddsl>, 2004.
 #
+# SPDX-FileCopyrightText: 2024 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:46+0000\n"
-"PO-Revision-Date: 2005-03-22 22:18-0800\n"
-"Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
+"PO-Revision-Date: 2024-05-05 14:32+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: English <en@li.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
@@ -66,8 +68,7 @@ msgid "Rank"
 msgstr "தரவரிசை"
 
 #: highscore/kgamehighscoredialog.cpp:309
-#, fuzzy, kde-format
-#| msgid "#%1"
+#, kde-format
 msgctxt "Enumeration (#1, #2 ...) of the highscore entries"
 msgid "#%1"
 msgstr "#%1"
@@ -75,12 +76,12 @@ msgstr "#%1"
 #: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
-msgstr ""
+msgstr "&நினைவில் கொள்"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
-msgstr ""
+msgstr "&மறந்துவிடு"
 
 #: highscore/kgamehighscoredialog.cpp:550
 #, fuzzy, kde-format
