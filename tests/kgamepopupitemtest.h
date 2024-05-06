@@ -11,13 +11,13 @@
 #include "ui_kgamepopupitemtest.h"
 // KDEGames
 #include <KGamePopupItem>
-// KF
-#include <KXmlGuiWindow>
+// Qt
+#include <QMainWindow>
 
 class QGraphicsScene;
 class QGraphicsSimpleTextItem;
 
-class KGpiMainWindow : public KXmlGuiWindow
+class KGpiMainWindow : public QMainWindow
 {
     Q_OBJECT
 

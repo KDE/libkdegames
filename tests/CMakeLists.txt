@@ -1,27 +1,25 @@
+include(ECMMarkAsTest)
+
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 remove_definitions(
     -DQT_NO_CAST_FROM_ASCII
-    -DQT_NO_CAST_TO_ASCII
-    -DQT_NO_CAST_FROM_BYTEARRAY
 )
 
-MACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
-       FOREACH(_testname ${ARGN})
-               set(${_testname}_SRCS ${_testname}.cpp)
-               #if test has an ui file, use it
-               IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${_testname}.ui)
-                  ki18n_wrap_ui(${_testname}_SRCS ${_testname}.ui)
-               ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${_testname}.ui)
+macro(libkdegames_executable_tests)
+    foreach(_testname ${ARGN})
+        add_executable(${_testname} ${_testname}.cpp)
+        # if test has an ui file, use it
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${_testname}.ui)
+            ki18n_wrap_ui(${_testname} ${_testname}.ui)
+        endif()
 
-               add_executable(${_testname} TEST ${${_testname}_SRCS})
-               target_link_libraries(${_testname} Qt6::Test KDEGames)
-       ENDFOREACH(_testname)
-ENDMACRO(LIBKDEGAMES_EXECUTABLE_TESTS)
+        target_link_libraries(${_testname} KDEGames KF6::I18n KF6::CoreAddons Qt6::Test)
+        ecm_mark_as_test(${_testname})
+    endforeach()
+endmacro()
 
-if (Q_WS_X11)
-LIBKDEGAMES_EXECUTABLE_TESTS(
+libkdegames_executable_tests(
 #    kxerrorhandlertest # File missing from svn
-#     kgamepopupitemtest
+    kgamepopupitemtest
 )
-endif (Q_WS_X11)

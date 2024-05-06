@@ -8,18 +8,19 @@
 
 // KF
 #include <KAboutData>
-#include <KActionCollection>
 #include <KColorScheme>
-#include <KFileDialog>
 #include <KLocalizedString>
+#include <KStandardAction>
 // Qt
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QFileDialog>
 #include <QGraphicsScene>
+#include <QTest>
 #include <QTimer>
 
 KGpiMainWindow::KGpiMainWindow()
-    : KXmlGuiWindow()
+    : QMainWindow()
     , m_replaceMode(KGamePopupItem::LeavePrevious)
 {
     QWidget *wid = new QWidget(this);
@@ -28,7 +29,7 @@ KGpiMainWindow::KGpiMainWindow()
     connect(m_popupItem, &KGamePopupItem::linkActivated, this, &KGpiMainWindow::onLinkClicked);
     m_textItem = new QGraphicsSimpleTextItem;
 
-    KStandardAction::quit(this, &KGpiMainWindow::close, actionCollection());
+    KStandardAction::quit(this, &KGpiMainWindow::close, this);
 
     m_scene = new QGraphicsScene;
     m_scene->setSceneRect(-1000, -1000, 2000, 2000);
@@ -62,29 +63,27 @@ KGpiMainWindow::KGpiMainWindow()
     connect(m_mainWid.replacePrevious, &QRadioButton::clicked, this, &KGpiMainWindow::replaceModeChanged);
     connect(m_mainWid.cornersType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &KGpiMainWindow::sharpnessChanged);
 
-    connect(m_mainWid.mesTimeout, static_cast<void (KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &KGpiMainWindow::onTimeoutChanged);
+    connect(m_mainWid.mesTimeout, &QSpinBox::valueChanged, this, &KGpiMainWindow::onTimeoutChanged);
     m_mainWid.mesTimeout->setValue(m_popupItem->messageTimeout());
-    m_mainWid.mesTimeout->setSuffix(ki18np(" millisecond", " milliseconds"));
     m_mainWid.opacity->setValue(static_cast<int>(m_popupItem->messageOpacity() * 100));
     setCentralWidget(wid);
-
-    setupGUI();
 }
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData(QLatin1String("kgamepopupitemtest"), i18n("kgamepopupitemtest"), QLatin1String("0.1"));
     QApplication app(argc, argv);
-    QCommandLineParser parser;
+    KAboutData aboutData(QStringLiteral("kgamepopupitemtest"), i18n("kgamepopupitemtest"), QStringLiteral("0.1"));
     KAboutData::setApplicationData(aboutData);
-    parser.addVersionOption();
-    parser.addHelpOption();
+
+    QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
     parser.process(app);
     aboutData.processCommandLine(&parser);
+
     KGpiMainWindow *win = new KGpiMainWindow;
     win->show();
-    return a.exec();
+
+    return app.exec();
 }
 
 void KGpiMainWindow::onPopupTL()
@@ -135,12 +134,13 @@ void KGpiMainWindow::hideTextItem()
 
 void KGpiMainWindow::onTimeoutChanged(int msec)
 {
+    m_mainWid.mesTimeout->setSuffix(i18np(" millisecond", " milliseconds", msec));
     m_popupItem->setMessageTimeout(msec);
 }
 
 void KGpiMainWindow::changeIcon()
 {
-    QString newPix = KFileDialog::getImageOpenUrl(KUrl(), this).path();
+    QString newPix = QFileDialog::getOpenFileName(this);
     if (newPix.isEmpty())
         return;
     QPixmap pix(newPix);
