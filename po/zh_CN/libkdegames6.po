@@ -20,7 +20,7 @@ msgstr ""
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
-msgstr "重试"
+msgstr ""
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
@@ -33,7 +33,7 @@ msgstr "无法访问排行榜文件。可能有其他用户正在写入该文件
 #: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
-msgstr "排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
@@ -43,27 +43,27 @@ msgstr "名字"
 #: highscore/kgamehighscoredialog.cpp:116
 #, kde-format
 msgid "Date"
-msgstr "日期"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:118
 #, kde-format
 msgid "Level"
-msgstr "级别"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:120
 #, kde-format
 msgid "Score"
-msgstr "分数"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:122
 #, kde-format
 msgid "Time"
-msgstr "时间"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
-msgstr "等级"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
@@ -74,22 +74,22 @@ msgstr "#%1"
 #: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
-msgstr "记住(&R)"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
-msgstr "丢弃(&F)"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
-msgstr "记住此排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
-msgstr "丢弃此排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -171,12 +171,12 @@ msgstr "更改难度"
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
-msgstr "难度"
+msgstr ""
 
 #: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
-msgstr "设定难度"
+msgstr ""
 
 #: kgamedifficulty.cpp:412
 #, kde-format
@@ -378,7 +378,7 @@ msgstr "选择主题"
 #: kgamethemeselector.cpp:282
 #, kde-format
 msgid "[No name]"
-msgstr "[无名称]"
+msgstr ""
 
 #: kgamethemeselector.cpp:298
 #, kde-format
