@@ -18,11 +18,10 @@ msgstr ""
 "X-Crowdin-File-ID: 46440\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, fuzzy, kde-format
-#| msgid "Retry"
+#, kde-format
 msgctxt "@action:button"
 msgid "Retry"
-msgstr "重试"
+msgstr ""
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
@@ -32,60 +31,52 @@ msgid ""
 msgstr "无法访问排行榜文件。可能有其他用户正在写入该文件。"
 
 #: highscore/kgamehighscoredialog.cpp:100
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
-msgstr "排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Name"
-msgstr "名字"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
-msgstr "日期"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, fuzzy, kde-format
-#| msgid "Level"
+#, kde-format
 msgctxt "@title:column"
 msgid "Level"
-msgstr "级别"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, fuzzy, kde-format
-#| msgid "Score"
+#, kde-format
 msgctxt "@title:column"
 msgid "Score"
-msgstr "分数"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
-msgstr "时间"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:271
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
-msgstr "排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:288
-#, fuzzy, kde-format
-#| msgid "Rank"
+#, kde-format
 msgctxt "@title:group"
 msgid "Rank"
-msgstr "等级"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
@@ -94,32 +85,28 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, fuzzy, kde-format
-#| msgid "&Remember"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
-msgstr "记住(&R)"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, fuzzy, kde-format
-#| msgid "&Forget"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
-msgstr "丢弃(&F)"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Remember this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
-msgstr "记住此排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Forget this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
-msgstr "丢弃此排行榜"
+msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -193,41 +180,34 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "更改难度将终止当前游戏！"
 
 #: kgamedifficulty.cpp:318
-#, fuzzy, kde-format
-#| msgid "Change the difficulty level"
+#, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
-msgstr "更改难度"
+msgstr ""
 
 #: kgamedifficulty.cpp:402
-#, fuzzy, kde-format
-#| msgctxt "Game difficulty level"
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
-msgstr "难度"
+msgstr ""
 
 #: kgamedifficulty.cpp:410
-#, fuzzy, kde-format
-#| msgctxt "Game difficulty level"
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
-msgstr "难度"
+msgstr ""
 
 #: kgamedifficulty.cpp:411
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
-msgstr "设定难度"
+msgstr ""
 
 #: kgamedifficulty.cpp:412
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
-msgstr "选择游戏难度。"
+msgstr ""
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
@@ -243,26 +223,20 @@ msgid "Start a new game"
 msgstr "开始一局新游戏"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
-msgstr "加载(&L)..."
+msgstr ""
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
-msgstr "打开保存的游戏..."
+msgstr ""
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "加载最近游戏(&R)"
 
 #: kgamestandardaction.cpp:72
-#, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
-msgstr "打开最近保存的游戏..."
+msgstr ""
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -281,10 +255,8 @@ msgid "Save the current game"
 msgstr "保存当前游戏"
 
 #: kgamestandardaction.cpp:78
-#, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
-msgstr "另存为(&A)..."
+msgstr ""
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -339,10 +311,8 @@ msgid "Delete all-time statistics."
 msgstr "删除全部时间统计。"
 
 #: kgamestandardaction.cpp:92
-#, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
-msgstr "打印(&P)..."
+msgstr ""
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -413,23 +383,18 @@ msgid "Solve the game"
 msgstr "解决游戏"
 
 #: kgamestandardaction.cpp:116
-#, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
-msgstr "配置牌垛(&C)..."
+msgstr ""
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
-msgstr "配置排行榜(&H)..."
+msgstr ""
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "Get New Themes..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Themes…"
-msgstr "获得新主题..."
+msgstr ""
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -438,19 +403,16 @@ msgid "Select theme"
 msgstr "选择主题"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "[No name]"
+#, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
-msgstr "[无名称]"
+msgstr ""
 
 #: kgamethemeselector.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "作者 %1"
+msgstr ""
 
 #: private/kchatbase.cpp:98
 #, kde-format
