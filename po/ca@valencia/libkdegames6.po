@@ -206,11 +206,11 @@ msgstr "Inicia una partida nova"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load..."
-msgstr "&Carrega..."
+msgstr "&Carrega…"
 
 #: kgamestandardaction.cpp:70
 msgid "Open a saved game..."
-msgstr "Obri una partida guardada..."
+msgstr "Obri una partida guardada…"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
@@ -218,7 +218,7 @@ msgstr "Carrega'n un de &recent"
 
 #: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
-msgstr "Obri una partida guardada recentment..."
+msgstr "Obri una partida guardada recentment…"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -238,7 +238,7 @@ msgstr "Guarda la partida actual"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As..."
-msgstr "Anomena i gu&arda..."
+msgstr "Anomena i gu&arda…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -294,7 +294,7 @@ msgstr "Suprimix totes les estadístiques."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print..."
-msgstr "Im&primix..."
+msgstr "Im&primix…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -366,16 +366,16 @@ msgstr "Resol la partida"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks..."
-msgstr "&Configura la baralla..."
+msgstr "&Configura la baralla…"
 
 #: kgamestandardaction.cpp:118
 msgid "Configure &High Scores..."
-msgstr "Configura les &puntuacions..."
+msgstr "Configura les &puntuacions…"
 
 #: kgamethemeselector.cpp:108
 #, kde-format
 msgid "Get New Themes..."
-msgstr "Obtín temes nous..."
+msgstr "Obtín temes nous…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -624,6 +624,3 @@ msgstr "Entrada asíncrona"
 #, kde-format
 msgid "myTurn"
 msgstr "el meu torn"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Escolliu el &tipus de joc"

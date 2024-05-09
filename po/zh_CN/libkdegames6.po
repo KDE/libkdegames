@@ -20,7 +20,7 @@ msgstr ""
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
 msgid "Retry"
-msgstr ""
+msgstr "重试"
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
@@ -33,7 +33,7 @@ msgstr "无法访问排行榜文件。可能有其他用户正在写入该文件
 #: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgid "High Scores"
-msgstr ""
+msgstr "高分榜"
 
 #: highscore/kgamehighscoredialog.cpp:114 private/kgame/kplayer.cpp:77
 #, kde-format
@@ -43,27 +43,27 @@ msgstr "名字"
 #: highscore/kgamehighscoredialog.cpp:116
 #, kde-format
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: highscore/kgamehighscoredialog.cpp:118
 #, kde-format
 msgid "Level"
-msgstr ""
+msgstr "关卡"
 
 #: highscore/kgamehighscoredialog.cpp:120
 #, kde-format
 msgid "Score"
-msgstr ""
+msgstr "分数"
 
 #: highscore/kgamehighscoredialog.cpp:122
 #, kde-format
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgid "Rank"
-msgstr ""
+msgstr "排名"
 
 #: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
@@ -74,22 +74,22 @@ msgstr "#%1"
 #: highscore/kgamehighscoredialog.cpp:548
 #, kde-format
 msgid "&Remember"
-msgstr ""
+msgstr "记住(&R)"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgid "&Forget"
-msgstr ""
+msgstr "忘记(&F)"
 
 #: highscore/kgamehighscoredialog.cpp:550
 #, kde-format
 msgid "Remember this high score"
-msgstr ""
+msgstr "记住此高分"
 
 #: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
 msgid "Forget this high score"
-msgstr ""
+msgstr "忘记此高分"
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -171,12 +171,12 @@ msgstr "更改难度"
 #, kde-format
 msgctxt "Game difficulty level"
 msgid "Difficulty"
-msgstr ""
+msgstr "难度"
 
 #: kgamedifficulty.cpp:411
 #, kde-format
 msgid "Set the difficulty level"
-msgstr ""
+msgstr "设置难度"
 
 #: kgamedifficulty.cpp:412
 #, kde-format
@@ -186,7 +186,7 @@ msgstr "选择游戏难度。"
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
-msgstr "新建(&N)"
+msgstr "新游戏(&N)"
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game."
@@ -206,7 +206,7 @@ msgstr "打开保存的游戏..."
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
-msgstr "加载最近游戏(&R)"
+msgstr "加载最近进度(&R)"
 
 #: kgamestandardaction.cpp:72
 msgid "Open a recently saved game..."
@@ -378,7 +378,7 @@ msgstr "选择主题"
 #: kgamethemeselector.cpp:282
 #, kde-format
 msgid "[No name]"
-msgstr ""
+msgstr "[无名称]"
 
 #: kgamethemeselector.cpp:298
 #, kde-format
