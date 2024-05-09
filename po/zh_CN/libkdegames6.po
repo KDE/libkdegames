@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Retry"
-msgstr ""
+msgstr "重试"
 
 #: highscore/kgamehighscore.cpp:156
 #, kde-format
@@ -34,49 +34,49 @@ msgstr "无法访问排行榜文件。可能有其他用户正在写入该文件
 #, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
-msgstr ""
+msgstr "高分榜"
 
 #: highscore/kgamehighscoredialog.cpp:114
 #, kde-format
 msgctxt "@title:column"
 msgid "Name"
-msgstr ""
+msgstr "名字"
 
 #: highscore/kgamehighscoredialog.cpp:116
 #, kde-format
 msgctxt "@title:column"
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: highscore/kgamehighscoredialog.cpp:118
 #, kde-format
 msgctxt "@title:column"
 msgid "Level"
-msgstr ""
+msgstr "关卡"
 
 #: highscore/kgamehighscoredialog.cpp:120
 #, kde-format
 msgctxt "@title:column"
 msgid "Score"
-msgstr ""
+msgstr "分数"
 
 #: highscore/kgamehighscoredialog.cpp:122
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #: highscore/kgamehighscoredialog.cpp:271
 #, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
-msgstr ""
+msgstr "高分榜"
 
 #: highscore/kgamehighscoredialog.cpp:288
 #, kde-format
 msgctxt "@title:group"
 msgid "Rank"
-msgstr ""
+msgstr "排名"
 
 #: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
@@ -88,25 +88,25 @@ msgstr "#%1"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
-msgstr ""
+msgstr "记住(&R)"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
-msgstr ""
+msgstr "忘记(&F)"
 
 #: highscore/kgamehighscoredialog.cpp:550
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
-msgstr ""
+msgstr "记住此高分"
 
 #: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
-msgstr ""
+msgstr "忘记此高分"
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -183,36 +183,36 @@ msgstr "更改难度将终止当前游戏！"
 #, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
-msgstr ""
+msgstr "更改难度"
 
 #: kgamedifficulty.cpp:402
 #, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
-msgstr ""
+msgstr "难度"
 
 #: kgamedifficulty.cpp:410
 #, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
-msgstr ""
+msgstr "难度"
 
 #: kgamedifficulty.cpp:411
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
-msgstr ""
+msgstr "设置难度"
 
 #: kgamedifficulty.cpp:412
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
-msgstr ""
+msgstr "设置游戏难度。"
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
 msgid "&New"
-msgstr "新建(&N)"
+msgstr "新游戏(&N)"
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game."
@@ -224,19 +224,19 @@ msgstr "开始一局新游戏"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load…"
-msgstr ""
+msgstr "加载进度(&L)…"
 
 #: kgamestandardaction.cpp:70
 msgid "Open a saved game"
-msgstr ""
+msgstr "打开保存的游戏"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
-msgstr "加载最近游戏(&R)"
+msgstr "加载最近进度(&R)"
 
 #: kgamestandardaction.cpp:72
 msgid "Open a recently saved game"
-msgstr ""
+msgstr "打开最近保存的游戏"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -256,7 +256,7 @@ msgstr "保存当前游戏"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As…"
-msgstr ""
+msgstr "另存为(&A)…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -312,7 +312,7 @@ msgstr "删除全部时间统计。"
 
 #: kgamestandardaction.cpp:92
 msgid "&Print…"
-msgstr ""
+msgstr "打印(&P)…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -384,17 +384,17 @@ msgstr "解决游戏"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks…"
-msgstr ""
+msgstr "配置牌垛(&C)…"
 
 #: kgamestandardaction.cpp:118
 msgid "Configure &High Scores…"
-msgstr ""
+msgstr "配置高分榜(&H)…"
 
 #: kgamethemeselector.cpp:108
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Themes…"
-msgstr ""
+msgstr "获取新主题…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -406,13 +406,13 @@ msgstr "选择主题"
 #, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
-msgstr ""
+msgstr "[无名称]"
 
 #: kgamethemeselector.cpp:298
 #, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr ""
+msgstr "作者：%1"
 
 #: private/kchatbase.cpp:98
 #, kde-format
