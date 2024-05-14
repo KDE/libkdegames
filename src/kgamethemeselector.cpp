@@ -105,7 +105,7 @@ KGameThemeSelector::KGameThemeSelector(KGameThemeProvider *provider, Options opt
     // setup KNS button
     if (options & EnableNewStuffDownload) {
         QString name = QCoreApplication::applicationName() + QStringLiteral(".knsrc");
-        d->m_knsButton = new KNSWidgets::Button(i18nc("@action:button", "Get New Themes…"), name, this);
+        d->m_knsButton = new KNSWidgets::Button(i18nc("@action:button", "Download New Themes…"), name, this);
         QHBoxLayout *hLayout = new QHBoxLayout();
         hLayout->addStretch(1);
         hLayout->addWidget(d->m_knsButton);
