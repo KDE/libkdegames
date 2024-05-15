@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:38+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2007-08-20 12:16+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -439,7 +439,7 @@ msgstr "उच्च प्राप्ताङ्क कन्फिगर ग
 #, fuzzy, kde-format
 #| msgid "&Get New Themes"
 msgctxt "@action:button"
-msgid "Get New Themes…"
+msgid "Download New Themes…"
 msgstr "नयाँ विषयवस्तु प्राप्त"
 
 #: kgamethemeselector.cpp:210

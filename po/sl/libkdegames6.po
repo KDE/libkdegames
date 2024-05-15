@@ -2,7 +2,7 @@
 # Translation of libkdegames.po to Slovenian
 # LIBKDEGAMES TRANSLATION TO SLOVENIAN LANGUAGE
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: libkdegames6.po 1678928 2024-04-30 01:10:25Z scripty $
+# $Id: libkdegames6.po 1680053 2024-05-15 01:11:10Z scripty $
 # $Source$
 #
 # Roman Maurer <roman.maurer@amis.net>, 2001.
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:38+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2024-04-29 10:10+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -404,9 +404,11 @@ msgid "Configure &High Scores…"
 msgstr "Nastavi najboljše rezultate…"
 
 #: kgamethemeselector.cpp:108
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Get New Themes…"
 msgctxt "@action:button"
-msgid "Get New Themes…"
+msgid "Download New Themes…"
 msgstr "Dobi nove teme…"
 
 #: kgamethemeselector.cpp:210

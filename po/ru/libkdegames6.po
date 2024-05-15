@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:38+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2013-01-06 22:37+0400\n"
 "Last-Translator: Artem Sereda <overmind88@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -441,7 +441,7 @@ msgstr "&Настроить лучшие результаты..."
 #, fuzzy, kde-format
 #| msgid "Get New Themes..."
 msgctxt "@action:button"
-msgid "Get New Themes…"
+msgid "Download New Themes…"
 msgstr "Загрузить новые темы..."
 
 #: kgamethemeselector.cpp:210

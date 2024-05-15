@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:38+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2008-04-24 15:50+0530\n"
 "Last-Translator: Vijay Kiran Kamuju <infyquest@gmail.com>\n"
 "Language-Team: Telugu <kde-i18n-doc@kde.org>\n"
@@ -400,7 +400,7 @@ msgstr ""
 #: kgamethemeselector.cpp:108
 #, kde-format
 msgctxt "@action:button"
-msgid "Get New Themes…"
+msgid "Download New Themes…"
 msgstr ""
 
 #: kgamethemeselector.cpp:210

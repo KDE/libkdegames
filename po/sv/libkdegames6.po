@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:38+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2012-04-12 18:35+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -431,7 +431,7 @@ msgstr "Anpassa &poängtoppen..."
 #, fuzzy, kde-format
 #| msgid "Get New Themes..."
 msgctxt "@action:button"
-msgid "Get New Themes…"
+msgid "Download New Themes…"
 msgstr "Hämta nya teman..."
 
 #: kgamethemeselector.cpp:210
