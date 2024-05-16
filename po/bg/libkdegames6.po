@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2024-04-29 09:33+0200\n"
+"PO-Revision-Date: 2024-05-15 21:57+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -227,11 +227,11 @@ msgstr "Стартиране на нова игра"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load…"
-msgstr "Заре&ждане..."
+msgstr "Заре&ждане…"
 
 #: kgamestandardaction.cpp:70
 msgid "Open a saved game"
-msgstr "Отваряне на запазена игра..."
+msgstr "Отваряне на запазена игра…"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
@@ -239,7 +239,7 @@ msgstr "Зареждане на преди&шна"
 
 #: kgamestandardaction.cpp:72
 msgid "Open a recently saved game"
-msgstr "Отваряне на скоро запазена игра..."
+msgstr "Отваряне на скоро запазена игра…"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -259,7 +259,7 @@ msgstr "Запазване на играта"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As…"
-msgstr "Запис &като..."
+msgstr "Запис &като…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -315,7 +315,7 @@ msgstr "Изтриване на всички времена."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print…"
-msgstr "&Печат..."
+msgstr "&Печат…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -387,19 +387,17 @@ msgstr "Решаване на играта"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks…"
-msgstr "Настройване на к&артите..."
+msgstr "Настройване на к&артите…"
 
 #: kgamestandardaction.cpp:118
 msgid "Configure &High Scores…"
-msgstr "Настройване на к&ласирането..."
+msgstr "Настройване на к&ласирането…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Themes…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Изтегляне на нови теми..."
+msgstr "Изтегляне на нови теми…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format

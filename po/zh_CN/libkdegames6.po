@@ -391,12 +391,10 @@ msgid "Configure &High Scores…"
 msgstr "配置高分榜(&H)…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Themes…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "获取新主题…"
+msgstr ""
 
 #: kgamethemeselector.cpp:210
 #, kde-format
