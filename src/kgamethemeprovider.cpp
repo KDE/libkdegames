@@ -36,8 +36,6 @@ public:
     QString m_dtDirectory;
     QString m_dtDefaultThemeName;
     const QMetaObject *m_dtThemeClass = nullptr;
-    // this remembers which themes were already discovered
-    QStringList m_discoveredThemes;
     // this disables the addTheme() lock during rediscoverThemes()
     bool m_inRediscover = false;
 
@@ -234,18 +232,29 @@ void KGameThemeProvider::rediscoverThemes()
     // needed by KGameThemeProvider, but nice for the theme selector)
     QList<KGameTheme *> themes;
     themes.reserve(themePaths.size());
-    if (d->m_discoveredThemes.isEmpty()) {
-        d->m_discoveredThemes.reserve(themePaths.size());
+    QList<QByteArray> newThemeIds;
+    newThemeIds.reserve(themePaths.size());
+    QList<QByteArray> oldThemeIds;
+    oldThemeIds.reserve(d->m_themes.size());
+    for (const KGameTheme *theme : std::as_const(d->m_themes)) {
+        oldThemeIds.append(theme->identifier());
     }
+
     for (const QString &themePath : std::as_const(themePaths)) {
-        const QFileInfo fi(themePath);
-        if (d->m_discoveredThemes.contains(fi.fileName())) {
-            continue;
-        }
-        d->m_discoveredThemes << fi.fileName();
+        const QString themeDesktopFileName = QFileInfo(themePath).fileName();
         // the identifier is constructed such that it is compatible with
         // KGameTheme (e.g. "themes/default.desktop")
-        const QByteArray id = QString(d->m_dtDirectory + QLatin1Char('/') + fi.fileName()).toUtf8();
+        const QByteArray id = QString(d->m_dtDirectory + QLatin1Char('/') + themeDesktopFileName).toUtf8();
+
+        // avoid duplicates
+        if (newThemeIds.contains(id)) {
+            continue;
+        }
+
+        newThemeIds.append(id);
+        if (oldThemeIds.contains(id)) {
+            continue;
+        }
 
         // create theme
         KGameTheme *theme;
@@ -262,13 +271,43 @@ void KGameThemeProvider::rediscoverThemes()
         }
         // order default theme at the front (that's not necessarily needed by
         // KGameThemeProvider, but nice for the theme selector)
-        if (fi.fileName() == defaultFileName) {
+        if (themeDesktopFileName == defaultFileName) {
             themes.prepend(theme);
             defaultTheme = theme;
         } else {
             themes.append(theme);
         }
     }
+
+    // remove themes no longer installed
+    bool isCurrentThemeRemoved = false;
+    for (const QByteArray &id : std::as_const(oldThemeIds)) {
+        if (newThemeIds.contains(id)) {
+            continue;
+        }
+        auto it = std::find_if(d->m_themes.cbegin(), d->m_themes.cend(), [id](const KGameTheme *theme) {
+            return (theme->identifier() == id);
+        });
+        // should not happen, but safety check
+        if (it == d->m_themes.cend()) {
+            Q_ASSERT_X(it != d->m_themes.cend(), Q_FUNC_INFO, id.data());
+            continue;
+        }
+
+        const KGameTheme *removedTheme = *it;
+        if (d->m_defaultTheme == removedTheme) {
+            qCWarning(KDEGAMES_LOG) << "The default theme was uninstalled, should not happen.";
+            continue;
+        }
+
+        if (d->m_currentTheme == removedTheme) {
+            d->m_currentTheme = nullptr;
+            isCurrentThemeRemoved = true;
+        }
+        delete const_cast<KGameTheme *>(removedTheme);
+        d->m_themes.erase(it);
+    }
+
     // add themes in the determined order
     for (KGameTheme *theme : std::as_const(themes)) {
         addTheme(theme);
@@ -281,6 +320,11 @@ void KGameThemeProvider::rediscoverThemes()
     }
 
     d->m_inRediscover = false;
+
+    if (isCurrentThemeRemoved) {
+        // auto-estimate new one and tell the world
+        Q_EMIT currentThemeChanged(currentTheme());
+    }
 }
 
 QPixmap KGameThemeProvider::generatePreview(const KGameTheme *theme, QSize size)
