@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2024-05-01 16:40+0200\n"
+"PO-Revision-Date: 2024-05-18 22:05+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -395,12 +395,10 @@ msgid "Configure &High Scores…"
 msgstr "Configura le classific&he…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Themes…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Recupera nuovi temi…"
+msgstr "Scarica nuovi temi…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
