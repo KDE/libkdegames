@@ -1,32 +1,31 @@
 # Translation for libkdegames.po to Euskara/Basque (eu).
 # Copyright (C) 2003, 2005, 2006, 2009 Free Software Foundation, Inc.
-# Copyright (C) 2010-2020, This file is copyright:
+# Copyright (C) 2010-2024 This file is copyright:
 # This file is distributed under the same license as the libkdegames package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@euskalnet.net>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Marcos  <marcos@euskalgnu.org>, 2003.
 # Ion Gaztañaga <igaztanaga@gmail.com>, 2005, 2006.
 # Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2009.
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2020-08-04 09:45+0200\n"
+"PO-Revision-Date: 2024-07-13 11:26+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, fuzzy, kde-format
-#| msgid "Retry"
+#, kde-format
 msgctxt "@action:button"
 msgid "Retry"
 msgstr "Berriz saiatu"
@@ -41,60 +40,52 @@ msgstr ""
 "erabiltzaile bat hartan idazten ari da."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Puntuazio altuenak"
 
 #: highscore/kgamehighscoredialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Name"
 msgstr "Izena"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Data"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, fuzzy, kde-format
-#| msgid "Level"
+#, kde-format
 msgctxt "@title:column"
 msgid "Level"
 msgstr "Maila"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, fuzzy, kde-format
-#| msgid "Score"
+#, kde-format
 msgctxt "@title:column"
 msgid "Score"
 msgstr "Puntuazioa"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Denbora"
 
 #: highscore/kgamehighscoredialog.cpp:271
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
 msgstr "Puntuazio altuenak"
 
 #: highscore/kgamehighscoredialog.cpp:288
-#, fuzzy, kde-format
-#| msgid "Rank"
+#, kde-format
 msgctxt "@title:group"
 msgid "Rank"
-msgstr "Postua"
+msgstr "Sailkapena"
 
 #: highscore/kgamehighscoredialog.cpp:309
 #, kde-format
@@ -103,29 +94,25 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, fuzzy, kde-format
-#| msgid "&Remember"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&Gogoratu"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, fuzzy, kde-format
-#| msgid "&Forget"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&Ahaztu"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Remember this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "Gogoratu puntuazio altu hau"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Forget this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "Ahaztu puntuazio altu hau"
@@ -202,39 +189,34 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "Zailtasun maila aldatzean uneko jokoa amaituko da."
 
 #: kgamedifficulty.cpp:318
-#, fuzzy, kde-format
-#| msgid "Change the difficulty level"
+#, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
 msgstr "Aldatu zailtasun maila"
 
 #: kgamedifficulty.cpp:402
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
 msgstr "Zailtasuna"
 
 #: kgamedifficulty.cpp:410
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "Zailtasuna"
 
 #: kgamedifficulty.cpp:411
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "Ezarri zailtasun maila"
 
 #: kgamedifficulty.cpp:412
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
-msgstr "Ezarri jokoaren zailtasun maila."
+msgstr "Jokoaren zailtasun maila ezartzen du."
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
@@ -250,26 +232,20 @@ msgid "Start a new game"
 msgstr "Hasi joko berria"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
-msgstr "&Kargatu..."
+msgstr "&Zamatu..."
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
-msgstr "Ireki gordetako jokoa..."
+msgstr "Ireki gordetako joko bat"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
-msgstr "Kargatu o&raintsukoa"
+msgstr "Zamatu o&raintsukoa"
 
 #: kgamestandardaction.cpp:72
-#, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
-msgstr "Ireki azken aldian gordetako joko bat..."
+msgstr "Ireki azken aldian gordetako joko bat"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -288,8 +264,6 @@ msgid "Save the current game"
 msgstr "Gorde uneko jokoa"
 
 #: kgamestandardaction.cpp:78
-#, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
 msgstr "Gorde &honela..."
 
@@ -346,8 +320,6 @@ msgid "Delete all-time statistics."
 msgstr "Ezabatu denbora guztietako estatistikak."
 
 #: kgamestandardaction.cpp:92
-#, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
 msgstr "&Inprimatu..."
 
@@ -420,23 +392,18 @@ msgid "Solve the game"
 msgstr "Ebatzi jokoa"
 
 #: kgamestandardaction.cpp:116
-#, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
 msgstr "Konfiguratu &karta-sortak..."
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
 msgstr "Konfiguratu &puntuazio altuenak..."
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "Get New Themes..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Lortu gai berriak..."
+msgstr "Gai berriak zama-jaitsi..."
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -445,19 +412,16 @@ msgid "Select theme"
 msgstr "Hautatu gaia"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "[No name]"
+#, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[izenik gabe]"
 
 #: kgamethemeselector.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "%1(e)k"
+msgstr "%1(e)k egina"
 
 #: private/kchatbase.cpp:98
 #, kde-format
@@ -546,7 +510,7 @@ msgstr "Jarraitu jokoaren konfigurazioa"
 #: private/kgame/kgamemessage.cpp:106
 #, kde-format
 msgid "Load Game"
-msgstr "Kargatu jokoa"
+msgstr "Zamatu jokoa"
 
 #: private/kgame/kgamemessage.cpp:108
 #, kde-format
