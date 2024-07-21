@@ -94,8 +94,8 @@ set(KGAUDIO_BACKEND_OPENAL TRUE) # for configure_file() below
 add_definitions(-DTRANSLATION_DOMAIN="libkdegames6")
 
 ecm_set_disabled_deprecation_versions(
-    QT 6.5
-    KF 6.0
+    QT 6.7
+    KF 6.4
 )
 
 add_subdirectory(src)
