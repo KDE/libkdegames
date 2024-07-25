@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/libkdegames/libkdegames6.pot\n"
-"X-Crowdin-File-ID: 46440\n"
+"X-Crowdin-File: /kf6-stable/messages/libkdegames/libkdegames6.pot\n"
+"X-Crowdin-File-ID: 52304\n"
 
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
