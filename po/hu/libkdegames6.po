@@ -2,24 +2,24 @@
 # Tamas Szanto <taszanto@gmail.com>, 2000.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2011.
 # Balázs Úr <urbalazs@gmail.com>, 2012.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2012-06-12 19:41+0200\n"
-"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"PO-Revision-Date: 2024-08-01 22:29+0200\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, fuzzy, kde-format
-#| msgid "Retry"
+#, kde-format
 msgctxt "@action:button"
 msgid "Retry"
 msgstr "Újra"
@@ -34,57 +34,49 @@ msgstr ""
 "felhasználó lefoglalta írásra."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Dicsőségtábla"
 
 #: highscore/kgamehighscoredialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Name"
 msgstr "Név"
 
 #: highscore/kgamehighscoredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Dátum"
 
 #: highscore/kgamehighscoredialog.cpp:118
-#, fuzzy, kde-format
-#| msgid "Level"
+#, kde-format
 msgctxt "@title:column"
 msgid "Level"
 msgstr "Szint"
 
 #: highscore/kgamehighscoredialog.cpp:120
-#, fuzzy, kde-format
-#| msgid "Score"
+#, kde-format
 msgctxt "@title:column"
 msgid "Score"
 msgstr "Pontszám"
 
 #: highscore/kgamehighscoredialog.cpp:122
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Idő"
 
 #: highscore/kgamehighscoredialog.cpp:271
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
 msgstr "Dicsőségtábla"
 
 #: highscore/kgamehighscoredialog.cpp:288
-#, fuzzy, kde-format
-#| msgid "Rank"
+#, kde-format
 msgctxt "@title:group"
 msgid "Rank"
 msgstr "Helyezés"
@@ -96,32 +88,28 @@ msgid "#%1"
 msgstr "%1."
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, fuzzy, kde-format
-#| msgid "&Remember"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&Megjegyzés"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, fuzzy, kde-format
-#| msgid "&Forget"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&Elfelejtés"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Remember this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
-msgstr "Emlékezzen erre a magas pontszámra"
+msgstr "Emlékezzen erre a rekordra"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Forget this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
-msgstr "Felejtse el ezt a magas pontszámot"
+msgstr "Felejtse el ezt a rekordot"
 
 #: highscore/kgamehighscoredialog.cpp:559
 #, kde-format
@@ -195,36 +183,31 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "A nehézségi szint megváltozásakor az éppen futó játék befejeződik!"
 
 #: kgamedifficulty.cpp:318
-#, fuzzy, kde-format
-#| msgid "Change the difficulty level"
+#, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
 msgstr "Más nehézségi szint"
 
 #: kgamedifficulty.cpp:402
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
-msgstr "Nehézségi szint"
+msgstr "Nehézség"
 
 #: kgamedifficulty.cpp:410
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
-msgstr "Nehézségi szint"
+msgstr "Nehézség"
 
 #: kgamedifficulty.cpp:411
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "A nehézségi szint beállítása"
 
 #: kgamedifficulty.cpp:412
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
 msgstr "Beállítja a játék nehézségi fokát."
@@ -243,26 +226,20 @@ msgid "Start a new game"
 msgstr "Új játék indítása"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
-msgstr "B&etöltés..."
+msgstr "B&etöltés…"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
-msgstr "Mentett játék megnyitása..."
+msgstr "Mentett játék megnyitása"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
 msgstr "Leg&utóbbi betöltése"
 
 #: kgamestandardaction.cpp:72
-#, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
-msgstr "Nemrég mentett játék megnyitása..."
+msgstr "Nemrég mentett játék megnyitása"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -281,10 +258,8 @@ msgid "Save the current game"
 msgstr "Az aktuális játék mentése"
 
 #: kgamestandardaction.cpp:78
-#, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
-msgstr "Mentés máské&nt..."
+msgstr "Mentés máské&nt…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -339,10 +314,8 @@ msgid "Delete all-time statistics."
 msgstr "Az összes statisztikai adat törlése."
 
 #: kgamestandardaction.cpp:92
-#, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
-msgstr "&Nyomtatás..."
+msgstr "&Nyomtatás…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -413,20 +386,15 @@ msgid "Solve the game"
 msgstr "A játék megoldása"
 
 #: kgamestandardaction.cpp:116
-#, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
-msgstr "A kártya&csomagok beállításai..."
+msgstr "&Paklik beállítása…"
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
-msgstr "A dicsősé&gtábla beállításai..."
+msgstr "Dicsősé&gtábla beállításai…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "Get New Themes..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
 msgstr "Új témák letöltése…"
@@ -438,16 +406,13 @@ msgid "Select theme"
 msgstr "Téma kiválasztása"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "[No name]"
+#, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[Névtelen]"
 
 #: kgamethemeselector.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
 msgstr "%1"
