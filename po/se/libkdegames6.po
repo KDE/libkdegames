@@ -21,7 +21,6 @@ msgstr ""
 
 #: highscore/kgamehighscore.cpp:154
 #, fuzzy, kde-format
-#| msgid "Retry"
 msgctxt "@action:button"
 msgid "Retry"
 msgstr "Geahččal ođđasit"
@@ -37,56 +36,48 @@ msgstr ""
 
 #: highscore/kgamehighscoredialog.cpp:100
 #, fuzzy, kde-format
-#| msgid "High Scores"
 msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Čuoggátávval"
 
 #: highscore/kgamehighscoredialog.cpp:114
 #, fuzzy, kde-format
-#| msgid "Name"
 msgctxt "@title:column"
 msgid "Name"
 msgstr "Namma"
 
 #: highscore/kgamehighscoredialog.cpp:116
 #, fuzzy, kde-format
-#| msgid "Date"
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Dáhton"
 
 #: highscore/kgamehighscoredialog.cpp:118
 #, fuzzy, kde-format
-#| msgid "Level"
 msgctxt "@title:column"
 msgid "Level"
 msgstr "Dássi"
 
 #: highscore/kgamehighscoredialog.cpp:120
 #, fuzzy, kde-format
-#| msgid "Score"
 msgctxt "@title:column"
 msgid "Score"
 msgstr "Čuoggát"
 
 #: highscore/kgamehighscoredialog.cpp:122
 #, fuzzy, kde-format
-#| msgid "Time"
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Áigi"
 
 #: highscore/kgamehighscoredialog.cpp:271
 #, fuzzy, kde-format
-#| msgid "High Scores"
 msgctxt "@title:tab"
 msgid "High Scores"
 msgstr "Čuoggátávval"
 
 #: highscore/kgamehighscoredialog.cpp:288
 #, fuzzy, kde-format
-#| msgid "Rank"
 msgctxt "@title:group"
 msgid "Rank"
 msgstr "Sajádat"
@@ -99,28 +90,24 @@ msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
 #, fuzzy, kde-format
-#| msgid "&Remember"
 msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&Muitte"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, fuzzy, kde-format
-#| msgid "&Forget"
 msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&Vajálduhte"
 
 #: highscore/kgamehighscoredialog.cpp:550
 #, fuzzy, kde-format
-#| msgid "Remember this high score"
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "Muitte dán buoremus čuoggá"
 
 #: highscore/kgamehighscoredialog.cpp:551
 #, fuzzy, kde-format
-#| msgid "Forget this high score"
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "Vajálduhte dán buoremus čuoggá"
@@ -196,37 +183,30 @@ msgstr "Jus rievdadat váttisvuođadási de dálá speallu heaittihuvvo."
 
 #: kgamedifficulty.cpp:318
 #, fuzzy, kde-format
-#| msgid "Change the difficulty level"
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
 msgstr "Rievdat váttisvuođadási"
 
 #: kgamedifficulty.cpp:402
 #, fuzzy, kde-format
-#| msgctxt "Game difficulty level"
-#| msgid "Difficulty"
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
 msgstr "Váttisvuohta"
 
 #: kgamedifficulty.cpp:410
 #, fuzzy, kde-format
-#| msgctxt "Game difficulty level"
-#| msgid "Difficulty"
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "Váttisvuohta"
 
 #: kgamedifficulty.cpp:411
 #, fuzzy, kde-format
-#| msgid "Set the difficulty level"
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "Vállje váttisvuođadássi"
 
 #: kgamedifficulty.cpp:412
 #, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
 msgstr "Vállje man váttis speallu galgá leat."
@@ -246,13 +226,11 @@ msgstr "Álggat ođđa spealu"
 
 #: kgamestandardaction.cpp:70
 #, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
 msgstr "&Viečča …"
 
 #: kgamestandardaction.cpp:70
 #, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
 msgstr "Raba vurkejuvvon spealu …"
 
@@ -262,7 +240,6 @@ msgstr "Viečča &easka geavahuvvon"
 
 #: kgamestandardaction.cpp:72
 #, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
 msgstr "Raba easka vurkejuvvon spealu …"
 
@@ -284,7 +261,6 @@ msgstr "Vurke dálá spealu"
 
 #: kgamestandardaction.cpp:78
 #, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
 msgstr "Vurke &nugo …"
 
@@ -342,7 +318,6 @@ msgstr ""
 
 #: kgamestandardaction.cpp:92
 #, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
 msgstr "Čá&lit …"
 
@@ -416,13 +391,11 @@ msgstr "Čoavdde spealu"
 
 #: kgamestandardaction.cpp:116
 #, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
 msgstr "H&eivet koarttaid …"
 
 #: kgamestandardaction.cpp:118
 #, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
 msgstr "&Heivet čuoggátávvala …"
 
