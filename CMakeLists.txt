@@ -95,7 +95,7 @@ add_definitions(-DTRANSLATION_DOMAIN="libkdegames6")
 
 ecm_set_disabled_deprecation_versions(
     QT 6.7
-    KF 6.5
+    KF 6.7
 )
 
 add_subdirectory(src)
