@@ -100,7 +100,12 @@ public:
      * over network. You might want to use this if you are sure that all
      * clients set the property at the same time.
      */
-    enum PropertyPolicy { PolicyUndefined = 0, PolicyClean = 1, PolicyDirty = 2, PolicyLocal = 3 };
+    enum PropertyPolicy {
+        PolicyUndefined = 0,
+        PolicyClean = 1,
+        PolicyDirty = 2,
+        PolicyLocal = 3
+    };
 
     /**
      * Constructs a KGamePropertyBase object and calls registerData.

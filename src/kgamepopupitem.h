@@ -44,15 +44,29 @@ public:
      * Possible values for message showing mode in respect to a previous
      * message
      */
-    enum ReplaceMode { LeavePrevious, ReplacePrevious };
+    enum ReplaceMode {
+        LeavePrevious,
+        ReplacePrevious
+    };
     /**
      * Possible values for the popup angles sharpness
      */
-    enum Sharpness { Square = 0, Sharp = 2, Soft = 5, Softest = 10 };
+    enum Sharpness {
+        Square = 0,
+        Sharp = 2,
+        Soft = 5,
+        Softest = 10
+    };
     /**
      * The possible places in the scene where a message can be shown
      */
-    enum Position { TopLeft, TopRight, BottomLeft, BottomRight, Center };
+    enum Position {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight,
+        Center
+    };
     /**
      * Constructs a message item. It is hidden by default.
      */
@@ -119,7 +133,10 @@ public:
     /**
      * Used to specify how to hide in forceHide() - instantly or animatedly
      */
-    enum HideType { InstantHide, AnimatedHide };
+    enum HideType {
+        InstantHide,
+        AnimatedHide
+    };
     /**
      * Requests the item to be hidden immediately.
      */

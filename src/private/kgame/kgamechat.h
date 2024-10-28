@@ -60,7 +60,9 @@ public:
 
     ~KGameChat() override;
 
-    enum SendingIds { SendToGroup = 1 };
+    enum SendingIds {
+        SendToGroup = 1
+    };
 
     /**
      * This sets the fromPlayer to @p player. The fromPlayer is the

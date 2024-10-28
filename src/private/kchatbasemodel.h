@@ -35,7 +35,10 @@ class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair<QString, QString>
 {
 public:
     /** The different types of messages */
-    enum MessageType { Normal, System };
+    enum MessageType {
+        Normal,
+        System
+    };
 
     /** Default constructor. Necessary for Qt metatypes */
     KChatBaseMessage();

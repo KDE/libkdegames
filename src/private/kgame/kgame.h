@@ -71,7 +71,12 @@ public:
      * over network. You might want to use this if you are sure that all
      * clients set the property at the same time.
      */
-    enum GamePolicy { PolicyUndefined = 0, PolicyClean = 1, PolicyDirty = 2, PolicyLocal = 3 };
+    enum GamePolicy {
+        PolicyUndefined = 0,
+        PolicyClean = 1,
+        PolicyDirty = 2,
+        PolicyLocal = 3
+    };
 
     /**
      * Create a KGame object. The cookie is used to identify your
@@ -95,7 +100,16 @@ public:
      * The KGame e.g. sets the status to Pause when you have
      * less player than the minimum amount
      */
-    enum GameStatus { Init = 0, Run = 1, Pause = 2, End = 3, Abort = 4, SystemPause = 5, Intro = 6, UserStatus = 7 };
+    enum GameStatus {
+        Init = 0,
+        Run = 1,
+        Pause = 2,
+        End = 3,
+        Abort = 4,
+        SystemPause = 5,
+        Intro = 6,
+        UserStatus = 7
+    };
 
     // Properties
     /**

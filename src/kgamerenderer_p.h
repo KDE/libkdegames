@@ -64,7 +64,11 @@ public:
 
 private:
     QString m_path; // path to SVG file
-    enum Validity { Checked_Invalid, Checked_Valid, Unchecked };
+    enum Validity {
+        Checked_Invalid,
+        Checked_Valid,
+        Unchecked
+    };
     Validity m_valid; // holds whether m_path points to a valid file
 
     mutable QMutex m_mutex;

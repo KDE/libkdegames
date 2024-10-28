@@ -73,7 +73,13 @@ public:
     /**
      * Identifies the KGameIO via the rtti function
      */
-    enum IOMode { GenericIO = 1, KeyIO = 2, MouseIO = 4, ProcessIO = 8, ComputerIO = 16 };
+    enum IOMode {
+        GenericIO = 1,
+        KeyIO = 2,
+        MouseIO = 4,
+        ProcessIO = 8,
+        ComputerIO = 16
+    };
     /**
      * Run time identification. Predefined values are from IOMode
      * You MUST overwrite this in derived classes!

@@ -82,7 +82,9 @@ public:
      */
     ~KChatBase() override;
 
-    enum SendingIds { SendToAll = 0 };
+    enum SendingIds {
+        SendToAll = 0
+    };
 
     /**
      * @return The name that will be shown for messages from this widget. Either the
