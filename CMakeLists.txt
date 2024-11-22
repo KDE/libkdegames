@@ -12,7 +12,34 @@ if (_micro LESS "10")
 endif()
 set(RELEASE_SERVICE_BASED_PATCHLEVEL "${RELEASE_SERVICE_VERSION_MAJOR}${RELEASE_SERVICE_VERSION_MINOR}${_micro}")
 
-project(libkdegames VERSION "6.0.${RELEASE_SERVICE_BASED_PATCHLEVEL}")
+set(LIBKDEGAMES_VERSION_LIB "6.0")
+
+
+project(libkdegames VERSION "${LIBKDEGAMES_VERSION_LIB}.${RELEASE_SERVICE_BASED_PATCHLEVEL}")
+if (APPLE)
+    # until now we didn't build on macos in 6.x
+    # => change version for macos will not create problem
+    # if we want to add new feature we will increase LIBKDEGAMES_VERSION_LIB
+
+    # Code stoled to kdevelop
+    # The math expression below automatically increments libkdegame minor version in each KDE Gear release.
+    # The multiplier 3 is the number of releases that share ${RELEASE_SERVICE_VERSION_MAJOR}.
+    # The fraction assigns consecutive minor versions to the 3 releases - 04, 08 and 12. The rounding up groups
+    # pre-release versions with the corresponding final release versions: 03 with 04, 07 with 08 and 11 with 12.
+    # The final subtrahend at the end of the expression ensures version continuity: libkdegames 6.0 in KDE Gear 24.08.
+    math(EXPR LIBKDEGAME_OWN_MINOR_VERSION "${RELEASE_SERVICE_VERSION_MAJOR} * 3                  \
+                                          + (${RELEASE_SERVICE_VERSION_MINOR} + 4 - 3) / 4      \
+                                          - 74")
+    ###################################################################################
+    # Kludge for bug #448152: ld: malformed 64-bit a.b.c.d.e version number: 5.7.211201
+    # Apple's linker uses the project version (not the SOVERSION) to calculate an
+    # unsigned int in such a way that places restrictions on the magnitude of each tier
+    # of the version string.
+    # See here: https://www.sicpers.info/2013/03/how-to-version-a-mach-o-library/
+    ###################################################################################
+    project(libkdegames VERSION "${LIBKDEGAMES_VERSION_LIB}.${LIBKDEGAME_OWN_MINOR_VERSION}${_micro}")
+endif()
+
 
 set(QT_MIN_VERSION "6.5.0")
 set(KF_MIN_VERSION "6.0.0")
