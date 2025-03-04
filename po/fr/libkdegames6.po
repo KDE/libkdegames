@@ -248,7 +248,7 @@ msgstr "Commencer une nouvelle partie"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load…"
-msgstr "&Charger..."
+msgstr "&Charger…"
 
 #: kgamestandardaction.cpp:70
 msgid "Open a saved game"
@@ -280,7 +280,7 @@ msgstr "Enregistrer la partie actuelle"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As…"
-msgstr "Enregistrer &sous..."
+msgstr "Enregistrer &sous…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -336,7 +336,7 @@ msgstr "Effacer à chaque fois les statistiques."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print…"
-msgstr "Im&primer..."
+msgstr "Im&primer…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -408,17 +408,17 @@ msgstr "Résoudre la partie"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks…"
-msgstr "&Configurer les jeux de &cartes..."
+msgstr "Configurer les jeux de &cartes…"
 
 #: kgamestandardaction.cpp:118
 msgid "Configure &High Scores…"
-msgstr "Configurer les &meilleurs scores..."
+msgstr "Configurer les &meilleurs scores…"
 
 #: kgamethemeselector.cpp:108
 #, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Télécharger de nouveaux thèmes..."
+msgstr "Télécharger de nouveaux thèmes…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
