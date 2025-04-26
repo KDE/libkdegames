@@ -1,21 +1,20 @@
-# translation of libkdegames.po to Español
-# traducción de libkdegames.po a Español
-# Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2002,2003.
-# Lucas Garcia <tanke@escomposlinux.org>, 2003.
-# Rafael Osuna <rosuna@wol.es>, 2003, 2004.
-# Santiago Fernandez Sancho <santi@kde-es.org>, 2004, 2005, 2006.
-# santi <santi@kde-es.org>, 2005.
-# Santiago Fernández Sancho <santi@kde-es.org>, 2007, 2008.
+# Spanish translations for libkdegames6.po package.
+# Copyright (C) 2002-2025 This file is copyright:
+# This file is distributed under the same license as the libkdegames package.
+#
+# SPDX-FileCopyrightText: 2002, 2003 Miguel Revilla Rodríguez <yo@miguelrevilla.com>
+# SPDX-FileCopyrightText: 2003 Lucas Garcia <tanke@escomposlinux.org>
+# SPDX-FileCopyrightText: 2003, 2004 Rafael Osuna <rosuna@wol.es>
+# SPDX-FileCopyrightText: 2004, 2005, 2006, 2007, 2008 Santiago Fernández Sancho <santi@kde-es.org>
 # SPDX-FileCopyrightText: 2009, 2012, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Huever, 2009.
-# Kira J. Fernandez <kirajfdez@gmail.com>, 2010.
-# Sofía Priego <spriego@darksylvania.net>, %Y.
+# SPDX-FileCopyrightText: 2010 Kira J. Fernandez <kirajfdez@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: libkdegames\n"
+"Project-Id-Version: libkdegames6\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2024-05-16 23:48+0100\n"
+"PO-Revision-Date: 2025-04-25 12:38+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -234,7 +233,7 @@ msgstr "Empezar una partida nueva"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load…"
-msgstr "&Cargar..."
+msgstr "&Cargar…"
 
 #: kgamestandardaction.cpp:70
 msgid "Open a saved game"
@@ -266,7 +265,7 @@ msgstr "Guardar la partida actual"
 
 #: kgamestandardaction.cpp:78
 msgid "Save &As…"
-msgstr "Gu&ardar como..."
+msgstr "Gu&ardar como…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -322,7 +321,7 @@ msgstr "Borrar todas las estadísticas hasta ahora."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print…"
-msgstr "Im&primir..."
+msgstr "Im&primir…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
@@ -394,17 +393,17 @@ msgstr "Resolver el juego"
 
 #: kgamestandardaction.cpp:116
 msgid "Configure &Carddecks…"
-msgstr "Configurar &barajas..."
+msgstr "Configurar &barajas…"
 
 #: kgamestandardaction.cpp:118
 msgid "Configure &High Scores…"
-msgstr "Configurar &mejores puntuaciones..."
+msgstr "Configurar &mejores puntuaciones…"
 
 #: kgamethemeselector.cpp:108
 #, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Descargar nuevos temas..."
+msgstr "Descargar nuevos temas…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -659,284 +658,3 @@ msgstr "EntradaAsinc"
 #, kde-format
 msgid "myTurn"
 msgstr "miTurno"
-
-#~ msgctxt "Game difficulty level"
-#~ msgid "Difficulty"
-#~ msgstr "Dificultad"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Elegir &tipo de juego"
-
-#~ msgctxt ""
-#~ "Name of the game difficulty level that is customized by the user by "
-#~ "setting up different game parameters"
-#~ msgid "Custom"
-#~ msgstr "Personalizado"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "Seleccione la <b>dificultad</b> de la partida. <br /> Si cambia el nivel "
-#~ "de dificultad mientras está jugando una partida, deberá cancelarla y "
-#~ "comenzar una nueva."
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr ""
-#~ "Seleccione la <b>dificultad</b> de la partida.<br />Puede cambiar el "
-#~ "nivel de dificultad mientras juega una partida."
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "Ob&tener nuevos temas..."
-
-#~ msgid "Preview"
-#~ msgstr "Vista previa"
-
-#~ msgid "Theme Details"
-#~ msgstr "Detalles del tema"
-
-#~ msgid "Contact:"
-#~ msgstr "Contacto:"
-
-#~ msgid "Description:"
-#~ msgstr "Descripción:"
-
-#~ msgid "Author:"
-#~ msgstr "Autor:"
-
-#~ msgid "Mean Score"
-#~ msgstr "Puntuación media"
-
-#~ msgid "Best Score"
-#~ msgstr "Mejor puntuación"
-
-#~ msgid "Elapsed Time"
-#~ msgstr "Tiempo transcurrido"
-
-#~ msgid "Best &Scores"
-#~ msgstr "Mejore&s puntuaciones"
-
-#~ msgid "&Players"
-#~ msgstr "&Jugadores"
-
-#~ msgid "Statistics"
-#~ msgstr "Estadísticas"
-
-#~ msgid "Histogram"
-#~ msgstr "Histograma"
-
-#~ msgid "View world-wide highscores"
-#~ msgstr "Ver puntuaciones mundiales"
-
-#~ msgid "View world-wide players"
-#~ msgstr "Ver jugadores mundiales"
-
-#~ msgid "Highscores"
-#~ msgstr "Mejores puntuaciones"
-
-#~ msgid "Overwrite"
-#~ msgstr "Sobreescribir"
-
-#~ msgid "The file already exists. Overwrite?"
-#~ msgstr "El archivo ya existe. ¿Sobreescribir?"
-
-#~ msgid "Export"
-#~ msgstr "Exportar"
-
-#~ msgid "Winner"
-#~ msgstr "Ganador"
-
-#~ msgid "Won Games"
-#~ msgstr "Partidas ganadas"
-
-#~ msgid "Configure Highscores"
-#~ msgstr "Configurar mejores puntuaciones"
-
-#~ msgid "Main"
-#~ msgstr "Principal"
-
-#~ msgid "Nickname:"
-#~ msgstr "Apodo:"
-
-#~ msgid "Comment:"
-#~ msgstr "Comentario:"
-
-#~ msgid "World-wide highscores enabled"
-#~ msgstr "Mejores puntuaciones mundiales activadas"
-
-#~ msgid "Advanced"
-#~ msgstr "Avanzado"
-
-#~ msgid "Registration Data"
-#~ msgstr "Información de registro"
-
-#~ msgid "Key:"
-#~ msgstr "Clave:"
-
-#~ msgid "Remove"
-#~ msgstr "Eliminar"
-
-#~ msgid ""
-#~ "This will permanently remove your registration key. You will not be able "
-#~ "to use the currently registered nickname anymore."
-#~ msgstr ""
-#~ "Esto eliminará su clave de registro de forma permanente. No podrá volver "
-#~ "a utilizar el apodo que tiene registrado actualmente."
-
-#~ msgid "Please choose a non empty nickname."
-#~ msgstr "Elija un apodo que no esté vacío."
-
-#~ msgid "Nickname already in use. Please choose another one"
-#~ msgstr "El apodo ya está en uso. Elija otro"
-
-#~ msgid "Enter Your Nickname"
-#~ msgstr "Introduzca su apodo"
-
-#~ msgid "Congratulations, you have won!"
-#~ msgstr "¡Enhorabuena, ha ganado!"
-
-#~ msgid "Enter your nickname:"
-#~ msgstr "Introduzca su apodo:"
-
-#~ msgid "Do not ask again."
-#~ msgstr "No volver a preguntar."
-
-#~ msgid "anonymous"
-#~ msgstr "anónimo"
-
-#~ msgid "Games Count"
-#~ msgstr "Contador de partidas"
-
-#~ msgid "Comment"
-#~ msgstr "Comentario"
-
-#~ msgid "Undefined error."
-#~ msgstr "Error no definido."
-
-#~ msgid "Missing argument(s)."
-#~ msgstr "Falta(n) argumento(s)."
-
-#~ msgid "Invalid argument(s)."
-#~ msgstr "Argumento(s) no válido(s)."
-
-#~ msgid "Unable to connect to MySQL server."
-#~ msgstr "No se puede conectar al servidor MySQL."
-
-#~ msgid "Unable to select database."
-#~ msgstr "No se puede seleccionar la base de datos."
-
-#~ msgid "Error on database query."
-#~ msgstr "Error al consultar la base de datos."
-
-#~ msgid "Error on database insert."
-#~ msgstr "Error al insertar en la base de datos."
-
-#~ msgid "Nickname already registered."
-#~ msgstr "El apodo ya está registrado."
-
-#~ msgid "Nickname not registered."
-#~ msgstr "El apodo no está registrado."
-
-#~ msgid "Invalid key."
-#~ msgstr "Clave no válida."
-
-#~ msgid "Invalid submit key."
-#~ msgstr "Clave de envío no válida."
-
-#~ msgid "Invalid level."
-#~ msgstr "Nivel no válido."
-
-#~ msgid "Invalid score."
-#~ msgstr "Puntuación no válida."
-
-#~ msgid "Unable to contact world-wide highscore server"
-#~ msgstr "No se puede contactar con el servidor de puntuaciones mundial"
-
-#~ msgid "Server URL: %1"
-#~ msgstr "URL de servidor: %1"
-
-#~ msgid "Unable to open temporary file."
-#~ msgstr "No se puede abrir el archivo temporal."
-
-#~ msgid "Message from world-wide highscores server"
-#~ msgstr "Mensaje del servidor mundial de puntuaciones"
-
-#~ msgid "Invalid answer from world-wide highscores server."
-#~ msgstr "Respuesta no válida del servidor mundial de puntuaciones."
-
-#~ msgid "Raw message: %1"
-#~ msgstr "Mensaje en bruto: %1"
-
-#~ msgid "Invalid answer from world-wide highscores server (missing item: %1)."
-#~ msgstr ""
-#~ "Respuesta no válida del servidor mundial de puntuaciones (elemento "
-#~ "ausente: %1)."
-
-#~ msgid "Success"
-#~ msgstr "Éxito"
-
-#~ msgid "Multiplayers Scores"
-#~ msgstr "Puntuaciones de multijugadores"
-
-#~ msgid "No game played."
-#~ msgstr "Ninguna partida jugada."
-
-#~ msgid "Scores for last game:"
-#~ msgstr "Puntuaciones de la última partida:"
-
-#~ msgid "Scores for the last %1 games:"
-#~ msgstr "Puntuaciones de las últimas %1 partidas:"
-
-#~ msgid "all"
-#~ msgstr "todas"
-
-#~ msgid "Select player:"
-#~ msgstr "Jugador seleccionado:"
-
-#~ msgid "Total:"
-#~ msgstr "Total:"
-
-#~ msgid "Won:"
-#~ msgstr "Ganadas:"
-
-#~ msgid "Lost:"
-#~ msgstr "Perdidas:"
-
-#~ msgid "Draw:"
-#~ msgstr "Empate:"
-
-#~ msgid "Current:"
-#~ msgstr "Actual:"
-
-#~ msgid "Max won:"
-#~ msgstr "Máximo de ganadas:"
-
-#~ msgid "Max lost:"
-#~ msgstr "Máximo de perdidas:"
-
-#~ msgid "Game Counts"
-#~ msgstr "Contadores de partidas"
-
-#~ msgid "Trends"
-#~ msgstr "Tendencias"
-
-#~ msgid "From"
-#~ msgstr "De"
-
-#~ msgid "To"
-#~ msgstr "A"
-
-#~ msgid "Count"
-#~ msgstr "Contador"
-
-#~ msgid "Percent"
-#~ msgstr "Porcentaje"
-
-#~ msgid "Configure..."
-#~ msgstr "Configurar..."
-
-#~ msgid "Export..."
-#~ msgstr "Exportar..."
