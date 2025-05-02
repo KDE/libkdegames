@@ -14,7 +14,7 @@ macro(libkdegames_executable_tests)
             ki18n_wrap_ui(${_testname} ${_testname}.ui)
         endif()
 
-        target_link_libraries(${_testname} KDEGames KF6::I18n KF6::CoreAddons Qt6::Test)
+        target_link_libraries(${_testname} KDEGames KF6::I18n KF6::CoreAddons KF6::ColorScheme Qt6::Test)
         ecm_mark_as_test(${_testname})
     endforeach()
 endmacro()

@@ -128,6 +128,7 @@ target_link_libraries(KDEGames
         KF6::XmlGui
         KF6::GuiAddons
         KF6::Completion
+        KF6::ColorScheme
         Qt6::Xml
         Qt6::Svg
         Qt6::Quick
