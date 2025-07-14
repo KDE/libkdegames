@@ -636,7 +636,7 @@ msgstr "ჯგუფი"
 #: private/kgame/kplayer.cpp:76 private/kgame/kplayer.cpp:78
 #, kde-format
 msgid "default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: private/kgame/kplayer.cpp:77
 #, kde-format
