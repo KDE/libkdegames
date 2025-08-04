@@ -295,7 +295,7 @@ msgstr "ا&مسح النقاط العليا"
 
 #: kgamestandardaction.cpp:86
 msgid "Clear high scores"
-msgstr "امسح النقاط العليا"
+msgstr "امحُ النقاط العليا"
 
 #: kgamestandardaction.cpp:88
 msgid "Show Statistics"
