@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2025-08-04 14:47+0400\n"
+"PO-Revision-Date: 2025-08-23 08:52+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -267,19 +267,19 @@ msgstr "احفظ اللعبة الحالية في ملف أخر"
 
 #: kgamestandardaction.cpp:80
 msgid "&End Game"
-msgstr "ا&نهاء اللعبة"
+msgstr "أ&نهِ اللعبة"
 
 #: kgamestandardaction.cpp:80
 msgid "End the current game"
-msgstr "أنهي اللعبة الحالية"
+msgstr "أنهِ اللعبة الحالية"
 
 #: kgamestandardaction.cpp:82
 msgid "Pa&use"
-msgstr "إيقاف &مؤقت"
+msgstr "أل&بث"
 
 #: kgamestandardaction.cpp:82
 msgid "Pause the game"
-msgstr "أوقف لعبة"
+msgstr "ألبث لعبة"
 
 #: kgamestandardaction.cpp:84
 msgid "Show &High Scores"
@@ -323,11 +323,11 @@ msgstr "ا&خرج"
 
 #: kgamestandardaction.cpp:94
 msgid "Quit the program"
-msgstr "أنهي البرنامج"
+msgstr "اخرج من البرنامج"
 
 #: kgamestandardaction.cpp:98
 msgid "Repeat"
-msgstr "إعادة"
+msgstr "كرر"
 
 #: kgamestandardaction.cpp:98
 msgid "Repeat the last move"
@@ -351,15 +351,15 @@ msgstr "أعاد أحدث حركة"
 
 #: kgamestandardaction.cpp:104
 msgid "&Roll Dice"
-msgstr "&رمي النرد"
+msgstr "ا&رمِ النرد"
 
 #: kgamestandardaction.cpp:104
 msgid "Roll the dice"
-msgstr "ا&رمي النرد"
+msgstr "ا&رمِ النرد"
 
 #: kgamestandardaction.cpp:106
 msgid "End Turn"
-msgstr "انهي الدور"
+msgstr "أنهِ الدور"
 
 #: kgamestandardaction.cpp:108
 msgid "&Hint"
@@ -494,7 +494,7 @@ msgstr "شيفرة الخطأ مجهولة %1"
 #: private/kgame/kgamemessage.cpp:102
 #, kde-format
 msgid "Setup Game"
-msgstr "تعيين اللعبة"
+msgstr "أعدد اللعبة"
 
 #: private/kgame/kgamemessage.cpp:104
 #, kde-format
@@ -539,12 +539,12 @@ msgstr "خاصية اللعبة"
 #: private/kgame/kgamemessage.cpp:120
 #, kde-format
 msgid "Add Player"
-msgstr "إضف لاعب"
+msgstr "أضف لاعبًا"
 
 #: private/kgame/kgamemessage.cpp:122
 #, kde-format
 msgid "Remove Player"
-msgstr "احذف لاعب"
+msgstr "أزل لاعبًا"
 
 #: private/kgame/kgamemessage.cpp:124
 #, kde-format
@@ -574,7 +574,7 @@ msgstr "إدخال اللاعب"
 #: private/kgame/kgamemessage.cpp:134
 #, kde-format
 msgid "An IO was added"
-msgstr "تم اضافة IO"
+msgstr "أُضيف IO"
 
 #: private/kgame/kgamemessage.cpp:136
 #, kde-format
@@ -650,7 +650,7 @@ msgstr "الاسم"
 #: private/kgame/kplayer.cpp:80
 #, kde-format
 msgid "AsyncInput"
-msgstr "إدخال لاتزامني"
+msgstr "إدخال غير متزامن"
 
 #: private/kgame/kplayer.cpp:82
 #, kde-format
