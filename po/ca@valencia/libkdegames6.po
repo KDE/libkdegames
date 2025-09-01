@@ -408,7 +408,7 @@ msgstr "Baixa temes nous…"
 #, kde-format
 msgctxt "@title:window config dialog"
 msgid "Select theme"
-msgstr "Seleccioneu el tema"
+msgstr "Trieu el tema"
 
 #: kgamethemeselector.cpp:282
 #, kde-format
