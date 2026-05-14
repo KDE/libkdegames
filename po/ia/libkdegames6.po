@@ -1,14 +1,14 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the libkdegames package.
 #
-# SPDX-FileCopyrightText: 2023 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2026 giovanni <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2024-05-15 10:36+0200\n"
+"PO-Revision-Date: 2026-05-13 15:15+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: highscore/kgamehighscore.cpp:154
 #, kde-format
@@ -365,7 +365,7 @@ msgstr ""
 
 #: kgamestandardaction.cpp:110
 msgid "&Demo"
-msgstr ""
+msgstr "&Demo"
 
 #: kgamestandardaction.cpp:110
 msgid "Play a demo"
@@ -502,7 +502,7 @@ msgstr ""
 #: private/kgame/kgamemessage.cpp:110
 #, kde-format
 msgid "Game setup done"
-msgstr ""
+msgstr "Configuration de Joco facite"
 
 #: private/kgame/kgamemessage.cpp:112
 #, kde-format
@@ -517,27 +517,27 @@ msgstr "Disconnecte"
 #: private/kgame/kgamemessage.cpp:116
 #, kde-format
 msgid "Player Property"
-msgstr ""
+msgstr "Proprietate de Jocator"
 
 #: private/kgame/kgamemessage.cpp:118
 #, kde-format
 msgid "Game Property"
-msgstr ""
+msgstr "Proprietate de Joco"
 
 #: private/kgame/kgamemessage.cpp:120
 #, kde-format
 msgid "Add Player"
-msgstr ""
+msgstr "Adde Jocator"
 
 #: private/kgame/kgamemessage.cpp:122
 #, kde-format
 msgid "Remove Player"
-msgstr ""
+msgstr "Remove Jocator"
 
 #: private/kgame/kgamemessage.cpp:124
 #, kde-format
 msgid "Activate Player"
-msgstr ""
+msgstr "Activa Jocator"
 
 #: private/kgame/kgamemessage.cpp:126
 #, kde-format
@@ -572,7 +572,7 @@ msgstr ""
 #: private/kgame/kgamemessage.cpp:138
 #, kde-format
 msgid "Player ID"
-msgstr ""
+msgstr "ID de Jocator"
 
 #: private/kgame/kgamepropertyhandler.cpp:160
 #, kde-format
@@ -614,7 +614,7 @@ msgstr "Incognite"
 #: private/kgame/kplayer.cpp:73
 #, kde-format
 msgid "UserId"
-msgstr ""
+msgstr "Id de Usator"
 
 #: private/kgame/kplayer.cpp:75
 #, kde-format
