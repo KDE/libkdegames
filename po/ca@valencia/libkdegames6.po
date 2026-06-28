@@ -599,7 +599,7 @@ msgstr "%1 (%2)"
 #: private/kgame/kgamepropertyhandler.cpp:162
 #, kde-format
 msgid "Unnamed - ID: %1"
-msgstr "Sense nom - ID: %1"
+msgstr "Sense nom – ID: %1"
 
 #: private/kgame/kgamepropertyhandler.cpp:166
 #, kde-format
