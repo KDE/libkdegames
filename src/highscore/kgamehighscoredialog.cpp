@@ -3,7 +3,7 @@
     SPDX-FileCopyrightText: 2001 Waldo Bastian <bastian@kde.org>
     SPDX-FileCopyrightText: 2007 Matt Williams <matt@milliams.com>
 
-    SPDX-License-Identifier: ICS
+    SPDX-License-Identifier: ISC
 */
 
 #include "kgamehighscoredialog.h"
