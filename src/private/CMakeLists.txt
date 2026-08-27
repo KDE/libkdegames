@@ -86,17 +86,21 @@ install(TARGETS KDEGamesPrivate
     ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
 )
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/kdegamesprivate_export.h
+set(_samedir_headers
     kchatbase.h
     kchatbaseitemdelegate.h
     kchatbasemodel.h
     kgamesvgdocument.h
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/kdegamesprivate_export.h
+    ${_samedir_headers}
     DESTINATION ${kdegamesprivate_INCLUDE_INSTALL_DIR}
     COMPONENT Devel
 )
 
-install(FILES
+set(_subdir_headers
     kgame/kgamechat.h
     kgame/kgameerror.h
     kgame/kgame.h
@@ -111,6 +115,32 @@ install(FILES
     kgame/kmessageio.h
     kgame/kmessageserver.h
     kgame/kplayer.h
+)
+
+install(FILES
+    ${_subdir_headers}
     DESTINATION ${kdegamesprivate_INCLUDE_INSTALL_DIR}/kgame
     COMPONENT Devel
 )
+
+if(${ECM_VERSION} VERSION_GREATER_EQUAL 6.30)
+include(ECMInstalledLibraryCheck)
+
+ecm_add_installed_library_check(KDEGamesPrivate
+    PACKAGE_NAME "${KDEGAMES_CMAKECONFIG_NAME}"
+    NO_PACKAGE_TARGET_NAMESPACE
+)
+
+ecm_installed_library_check_include_strings(KDEGamesPrivate
+    HEADERS ${_samedir_headers}
+)
+
+ecm_installed_library_check_include_strings(KDEGamesPrivate
+    HEADERS ${_subdir_headers}
+    PREFIX kgame
+)
+
+ecm_installed_library_check_version_preprocessor_macros(KDEGamesPrivate
+    PREFIX KDEGAMES
+)
+endif()
