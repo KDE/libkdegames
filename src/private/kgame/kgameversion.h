@@ -9,6 +9,11 @@
 #ifndef __KGAMEVERSION_H__
 #define __KGAMEVERSION_H__
 
+// own
+// Include version header explicitly because the export header
+// (which usually takes care of that) isn't used here
+#include <kdegames_version.h> // IWYU pragma: export
+
 /**
  * \headerfile kgameversion.h <KGame/KGameVersion>
  *

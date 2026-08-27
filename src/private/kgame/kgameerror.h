@@ -9,6 +9,10 @@
 #ifndef __KGAMEERROR_H_
 #define __KGAMEERROR_H_
 
+// own
+// Include version header explicitly because the export header
+// (which usually takes care of that) isn't used here
+#include <kdegames_version.h> // IWYU pragma: export
 // Qt
 #include <QString>
 
