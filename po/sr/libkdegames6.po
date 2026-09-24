@@ -4,13 +4,14 @@
 # Bojan Bozovic <bole89@infosky.net>, 2003.
 # Slobodan Simic <slsimic@gmail.com>, 2005, 2009.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2010.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2015-04-18 20:24+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-09-18 12:00+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -23,8 +24,7 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: highscore/kgamehighscore.cpp:154
-#, fuzzy, kde-format
-#| msgid "Retry"
+#, kde-format
 msgctxt "@action:button"
 msgid "Retry"
 msgstr "Покушај поново"
@@ -39,63 +39,55 @@ msgstr ""
 "нешто уписује у њега."
 
 #: highscore/kgamehighscoredialog.cpp:100
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:window"
 msgid "High Scores"
 msgstr "Најрезултати"
 
 # >> @item
 #: highscore/kgamehighscoredialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Name"
 msgstr "име"
 
 # >> @item
 #: highscore/kgamehighscoredialog.cpp:116
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "датум"
 
 # >> @title:column
 #: highscore/kgamehighscoredialog.cpp:118
-#, fuzzy, kde-format
-#| msgid "Level"
+#, kde-format
 msgctxt "@title:column"
 msgid "Level"
 msgstr "ниво"
 
 # >> @item
 #: highscore/kgamehighscoredialog.cpp:120
-#, fuzzy, kde-format
-#| msgid "Score"
+#, kde-format
 msgctxt "@title:column"
 msgid "Score"
 msgstr "резултат"
 
 # >> @title:column
 #: highscore/kgamehighscoredialog.cpp:122
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "време"
 
 #: highscore/kgamehighscoredialog.cpp:271
-#, fuzzy, kde-format
-#| msgid "High Scores"
+#, kde-format
 msgctxt "@title:tab"
 msgid "High Scores"
 msgstr "Најрезултати"
 
 # >> @item
 #: highscore/kgamehighscoredialog.cpp:288
-#, fuzzy, kde-format
-#| msgid "Rank"
+#, kde-format
 msgctxt "@title:group"
 msgid "Rank"
 msgstr "позиција"
@@ -107,29 +99,25 @@ msgid "#%1"
 msgstr "#%1"
 
 #: highscore/kgamehighscoredialog.cpp:548
-#, fuzzy, kde-format
-#| msgid "&Remember"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
 msgstr "&Упамти"
 
 #: highscore/kgamehighscoredialog.cpp:549
-#, fuzzy, kde-format
-#| msgid "&Forget"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Forget"
 msgstr "&Заборави"
 
 #: highscore/kgamehighscoredialog.cpp:550
-#, fuzzy, kde-format
-#| msgid "Remember this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
 msgstr "Упамти овај најрезултат"
 
 #: highscore/kgamehighscoredialog.cpp:551
-#, fuzzy, kde-format
-#| msgid "Forget this high score"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Forget this high score"
 msgstr "Заборави овај најрезултат"
@@ -206,39 +194,34 @@ msgid "Changing the difficulty level will end the current game!"
 msgstr "Мењањем нивоа тежине прекинућете текућу игру!"
 
 #: kgamedifficulty.cpp:318
-#, fuzzy, kde-format
-#| msgid "Change the difficulty level"
+#, kde-format
 msgctxt "@action:button"
 msgid "Change the Difficulty Level"
 msgstr "Измени ниво тежине"
 
 #: kgamedifficulty.cpp:402
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@info:tooltip Game difficulty level"
 msgid "Difficulty"
 msgstr "Тежина"
 
 #: kgamedifficulty.cpp:410
-#, fuzzy, kde-format
-#| msgid "Difficulty"
+#, kde-format
 msgctxt "@title:menu Game difficulty level"
 msgid "Difficulty"
 msgstr "Тежина"
 
 #: kgamedifficulty.cpp:411
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
 msgstr "Поставите ниво тежине"
 
 #: kgamedifficulty.cpp:412
-#, fuzzy, kde-format
-#| msgid "Set the difficulty level of the game."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the difficulty level of the game."
-msgstr "Поставите ниво тежине игре."
+msgstr "Поставља ниво тежине игре."
 
 #: kgamestandardaction.cpp:68
 msgctxt "new game"
@@ -254,26 +237,20 @@ msgid "Start a new game"
 msgstr "Покрени нову игру"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "&Load..."
 msgid "&Load…"
-msgstr "&Учитај..."
+msgstr "&Учитај…"
 
 #: kgamestandardaction.cpp:70
-#, fuzzy
-#| msgid "Open a saved game..."
 msgid "Open a saved game"
-msgstr "Отвори сачувану игру..."
+msgstr "Отвори сачувану игру"
 
 #: kgamestandardaction.cpp:72
 msgid "Load &Recent"
-msgstr "Учитај &недавну"
+msgstr "Учитај не&давну"
 
 #: kgamestandardaction.cpp:72
-#, fuzzy
-#| msgid "Open a recently saved game..."
 msgid "Open a recently saved game"
-msgstr "Отвори недавно сачувану игру..."
+msgstr "Отвори недавно сачувану игру"
 
 #: kgamestandardaction.cpp:74
 msgid "Restart &Game"
@@ -292,10 +269,8 @@ msgid "Save the current game"
 msgstr "Сачувај текућу игру"
 
 #: kgamestandardaction.cpp:78
-#, fuzzy
-#| msgid "Save &As..."
 msgid "Save &As…"
-msgstr "Сачувај &као..."
+msgstr "Сачувај &као…"
 
 #: kgamestandardaction.cpp:78
 msgid "Save the current game to another file"
@@ -319,7 +294,7 @@ msgstr "Паузирај игру"
 
 #: kgamestandardaction.cpp:84
 msgid "Show &High Scores"
-msgstr "Прикажи &најрезултате"
+msgstr "Прикажи најре&зултате"
 
 #: kgamestandardaction.cpp:84
 msgid "Show high scores"
@@ -327,7 +302,7 @@ msgstr "Прикажи најрезултате"
 
 #: kgamestandardaction.cpp:86
 msgid "&Clear High Scores"
-msgstr "&Очисти најрезултате"
+msgstr "О&чисти најрезултате"
 
 #: kgamestandardaction.cpp:86
 msgid "Clear high scores"
@@ -343,21 +318,19 @@ msgstr "Прикажи статистику"
 
 #: kgamestandardaction.cpp:90
 msgid "&Clear Statistics"
-msgstr "&Очисти статистику"
+msgstr "Очисти с&татистику"
 
 #: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
 msgstr "Избриши целокупну статистику."
 
 #: kgamestandardaction.cpp:92
-#, fuzzy
-#| msgid "&Print..."
 msgid "&Print…"
-msgstr "&Штампај..."
+msgstr "&Штампај…"
 
 #: kgamestandardaction.cpp:94
 msgid "&Quit"
-msgstr "&Напусти"
+msgstr "Н&апусти"
 
 #: kgamestandardaction.cpp:94
 msgid "Quit the program"
@@ -424,23 +397,18 @@ msgid "Solve the game"
 msgstr "Реши игру"
 
 #: kgamestandardaction.cpp:116
-#, fuzzy
-#| msgid "Configure &Carddecks..."
 msgid "Configure &Carddecks…"
-msgstr "Подеси &шпилове карата..."
+msgstr "Подеси &шпилове карата…"
 
 #: kgamestandardaction.cpp:118
-#, fuzzy
-#| msgid "Configure &High Scores..."
 msgid "Configure &High Scores…"
-msgstr "Подеси &најрезултате..."
+msgstr "Подеси &најрезултате…"
 
 #: kgamethemeselector.cpp:108
-#, fuzzy, kde-format
-#| msgid "Get New Themes..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Добави нове теме..."
+msgstr "Добави нове теме…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
@@ -449,16 +417,13 @@ msgid "Select theme"
 msgstr "Избор теме"
 
 #: kgamethemeselector.cpp:282
-#, fuzzy, kde-format
-#| msgid "[No name]"
+#, kde-format
 msgctxt "@item name of theme, missing"
 msgid "[No name]"
 msgstr "[безимена]"
 
 #: kgamethemeselector.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
 msgstr "— %1|/|$[ген %1]"
@@ -704,49 +669,3 @@ msgstr "Асинх. улаз"
 #, kde-format
 msgid "myTurn"
 msgstr "мој потез"
-
-#~ msgctxt "Game difficulty level"
-#~ msgid "Difficulty"
-#~ msgstr "Тежина"
-
-#~ msgid "Choose Game &Type"
-#~ msgstr "Изаберите &врсту игре"
-
-#~ msgctxt ""
-#~ "Name of the game difficulty level that is customized by the user by "
-#~ "setting up different game parameters"
-#~ msgid "Custom"
-#~ msgstr "посебно"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />If you change the "
-#~ "difficulty level while a game is running, you will have to cancel it and "
-#~ "start a new one."
-#~ msgstr ""
-#~ "<p>Изаберите <i>тежину</i> игре.</p><p>Ако промените ниво тежине док се "
-#~ "игра одвија, мораћете да је прекинете и покренете нову.</p>"
-
-#~ msgid ""
-#~ "Select the <b>difficulty</b> of the game.<br />You can change the "
-#~ "difficulty level during a running game."
-#~ msgstr ""
-#~ "<p>Изаберите <i>тежину</i> игре.</p><p>Ниво тежине можете мењати и у току "
-#~ "игре.</p>"
-
-#~ msgid "&Get New Themes..."
-#~ msgstr "&Добави нове теме..."
-
-#~ msgid "Preview"
-#~ msgstr "Преглед"
-
-#~ msgid "Theme Details"
-#~ msgstr "Детаљи теме"
-
-#~ msgid "Contact:"
-#~ msgstr "Контакт:"
-
-#~ msgid "Description:"
-#~ msgstr "Опис:"
-
-#~ msgid "Author:"
-#~ msgstr "Аутор:"
