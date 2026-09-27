@@ -655,8 +655,9 @@ int KGameHighScoreDialog::highScore()
     if (!d->loaded)
         d->loadScores();
 
-    if (!d->scores[d->configGroup].isEmpty())
-        return d->scores[d->configGroup].first()[Score].toInt();
+    const GroupScores groupScores = d->scores.value(d->configGroup);
+    if (!groupScores.isEmpty())
+        return groupScores.first()[Score].toInt();
     else
         return 0;
 }
