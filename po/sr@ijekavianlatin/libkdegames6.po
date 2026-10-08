@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2026-09-18 12:00+0200\n"
+"PO-Revision-Date: 2026-10-07 15:30+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
@@ -102,7 +102,7 @@ msgstr "#%1"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remember"
-msgstr "&Upamti"
+msgstr "Za&pamti"
 
 #: highscore/kgamehighscoredialog.cpp:549
 #, kde-format
@@ -114,7 +114,7 @@ msgstr "&Zaboravi"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Remember this high score"
-msgstr "Upamti ovaj najrezultat"
+msgstr "Zapamti ovaj najrezultat"
 
 #: highscore/kgamehighscoredialog.cpp:551
 #, kde-format
@@ -215,7 +215,7 @@ msgstr "Težina"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Set the difficulty level"
-msgstr "Postavite nivo težine"
+msgstr "Postavi nivo težine"
 
 #: kgamedifficulty.cpp:412
 #, kde-format
@@ -230,11 +230,11 @@ msgstr "&Nova"
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game."
-msgstr "Pokreni novu igru."
+msgstr "Pokreni novu partiju."
 
 #: kgamestandardaction.cpp:68
 msgid "Start a new game"
-msgstr "Pokreni novu igru"
+msgstr "Pokreni novu partiju"
 
 #: kgamestandardaction.cpp:70
 msgid "&Load…"
@@ -278,7 +278,7 @@ msgstr "Sačuvaj tekuću igru u drugom fajlu"
 
 #: kgamestandardaction.cpp:80
 msgid "&End Game"
-msgstr "&Okončaj igru"
+msgstr "Za&vrši igru"
 
 #: kgamestandardaction.cpp:80
 msgid "End the current game"
@@ -322,7 +322,7 @@ msgstr "Očisti s&tatistiku"
 
 #: kgamestandardaction.cpp:90
 msgid "Delete all-time statistics."
-msgstr "Izbriši celokupnu statistiku."
+msgstr "Izbriši cjelokupnu statistiku."
 
 #: kgamestandardaction.cpp:92
 msgid "&Print…"
@@ -378,7 +378,7 @@ msgstr "&Savjet"
 
 #: kgamestandardaction.cpp:108
 msgid "Give a hint"
-msgstr "Daje savjet"
+msgstr "Daj savjet"
 
 #: kgamestandardaction.cpp:110
 msgid "&Demo"
@@ -408,7 +408,7 @@ msgstr "Podesi &najrezultate…"
 #, kde-format
 msgctxt "@action:button"
 msgid "Download New Themes…"
-msgstr "Dobavi nove teme…"
+msgstr "Preuzmi nove teme…"
 
 #: kgamethemeselector.cpp:210
 #, kde-format
