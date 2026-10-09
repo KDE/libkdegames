@@ -31,8 +31,6 @@ find_program(svgcleaner_EXECUTABLE NAMES svgcleaner)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(svgcleaner
-    FOUND_VAR
-        svgcleaner_FOUND
     REQUIRED_VARS
         svgcleaner_EXECUTABLE
 )
