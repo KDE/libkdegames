@@ -22,26 +22,76 @@
 // std
 #include <type_traits>
 
-/**
- * Extension for KStandardAction in KDE Games
+/*!
+ * \namespace KGameStandardAction
+ * \inmodule LibKDEGames
+ * \brief Extension for KStandardAction in KDE Games.
  *
  * This class is an extension to the usual KStandardAction class which provides
  * easy access to often used KDE actions.
  *
- * Using these actions helps maintaining consistency among the games.
+ * Using these actions helps in maintaining consistency among the games.
  *
- * Games often use different menu entries than other programs, e.g. games use
+ * Games often use different menu entries than other programs, for example games use
  * the menu "game" instead of "file". This class provides the entries which
  * differ from the usual KStandardAction entries.
  *
- * @see <tt>KStandardAction</tt>
- *
- * @author Andreas Beckermann <b_mann@gmx.de>
+ * \sa KStandardAction
  */
 namespace KGameStandardAction
 {
-/**
+/*!
+ * \enum KGameStandardAction::GameStandardAction
  * The standard menubar and toolbar actions.
+ * \value New
+ *        Start a new game
+ * \value Load
+ *        Open a saved game
+ * \value LoadRecent
+ *        Open a recently saved game
+ * \value Save
+ *        Save the current game
+ * \value SaveAs
+ *        Save the current game to another file
+ * \value End
+ *        End the current game
+ * \value Pause
+ *        Pause the game
+ * \value Highscores
+ *        Show high scores
+ * \value Statistics
+ *        Show statistics
+ * \value Print
+ *        Print game
+ * \value Quit
+ *        Quit the program
+ * \value Repeat
+ *        Repeat the last move
+ * \value Undo
+ *        Undo the last move
+ * \value Redo
+ *        Redo the latest move
+ * \value Roll
+ *        Roll the dice
+ * \value EndTurn
+ *        End turn
+ * \value Carddecks
+ *        Configure card decks
+ * \value ConfigureHighscores
+ *        Configure high scores
+ * \value ClearHighscores
+ *        Clear high scores
+ * \value ClearStatistics
+ *        Delete all-time statistics
+ * \value Restart
+ *        Restart the game
+ * \value Hint
+ *        Give a hint
+ * \value Demo
+ *        Play a demo
+ * \value Solve
+ *        Solve the game
+ * \value ActionNone
  */
 enum GameStandardAction {
     // Game menu
@@ -74,50 +124,46 @@ enum GameStandardAction {
     ActionNone
 };
 
-/**
- * Creates an action corresponding to the
- * KStandardAction::StandardAction enum.
+/*!
+ * \overload primary
+ * Creates an action corresponding to the \a id in the KStandardAction::StandardAction enum,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *create(GameStandardAction id, const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * @internal
+/*!
+ * \internal
  */
 KDEGAMES_EXPORT QAction *_k_createInternal(GameStandardAction id, QObject *parent);
 
-/**
+/*!
+ * \overload
  * This overloads create() to allow using the new connect syntax.
  *
- * @note If you use @c LoadRecent as @p id, you should manually connect to the urlSelected(const QUrl &)
+ * Creates an action corresponding to the \a id in the KStandardAction::StandardAction enum,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ *
+ * \note If you use \c LoadRecent as \a id, you should manually connect to the urlSelected(const QUrl &)
  * signal of the returned KRecentFilesAction instead or use KGameStandardAction::loadRecent(Receiver *, Func, QObject*).
  *
- * @see create(GameStandardAction, const QObject *, const char *, QObject *)
- * @since 7.3
+ * \since 7.3
  */
-#ifdef K_DOXYGEN
-inline QAction *create(GameStandardAction id, const QObject *recvr, Func slot, QObject *parent)
-#else
 template<class Receiver, class Func>
 inline typename std::enable_if<!std::is_convertible<Func, const char *>::value, QAction>::type *
 create(GameStandardAction id, const Receiver *recvr, Func slot, QObject *parent)
-#endif
 {
     QAction *action = _k_createInternal(id, parent);
     QObject::connect(action, &QAction::triggered, recvr, slot);
     return action;
 }
 
-/**
- * This will return the internal name of a given standard action.
+/*!
+ * Returns the internal name of the given standard action \a id.
  */
 KDEGAMES_EXPORT QString name(GameStandardAction id);
 
 // we have to disable the templated function for const char* as Func, since it is ambiguous otherwise
 // TODO: KF6: unify const char* version and new style by removing std::enable_if
-#ifdef K_DOXYGEN
-#define KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(name, enumValue) inline QAction *name(const QObject *recvr, Func slot, QObject *parent);
-#define KSTANDARDGAMETOGGLEACTION_WITH_NEW_STYLE_CONNECT(name, enumValue) inline KToggleAction *name(const QObject *recvr, Func slot, QObject *parent);
-#else
 #define KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(name, enumValue)                                                                                            \
     template<class Receiver, class Func>                                                                                                                       \
     inline typename std::enable_if<!std::is_convertible<Func, const char *>::value, QAction>::type *name(const Receiver *recvr, Func slot, QObject *parent)    \
@@ -134,47 +180,53 @@ KDEGAMES_EXPORT QString name(GameStandardAction id);
         Q_ASSERT(qobject_cast<KToggleAction *>(ret));                                                                                                          \
         return static_cast<KToggleAction *>(ret);                                                                                                              \
     }
-#endif
 
-/**
- * Start a new game.
+/*!
+ * Returns an action to start a new game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *gameNew(const QObject *recvr, const char *slot, QObject *parent);
-/**
- * Start a new game.
- * @since 7.3
+
+// clang-format off
+
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *gameNew(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to start a new game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(gameNew, New)
 
-/**
- * Load a previously saved game.
+/*!
+ * Returns an action to load a previously saved game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *load(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Load a previously saved game.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *load(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to load a previously saved game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(load, Load)
 
 // FIXME why not to delete this and use just KStandardAction::openRecent???
 // loadRecent seems to mimic its behaviour
-/**
- * Load a recently loaded game.
- * The signature of slot is of the form slotURLSelected(const QUrl&)
+/*!
+ * Returns an action to load a recently loaded game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * The signature of slot is of the form slotURLSelected(const QUrl&).
  */
 KDEGAMES_EXPORT KRecentFilesAction *loadRecent(const QObject *recvr, const char *slot, QObject *parent);
-/**
- * Load a recently loaded game.
- * @since 7.3
+/*!
+ * Returns an action to load a recently loaded game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
-#ifdef K_DOXYGEN
-inline KRecentFilesAction *loadRecent(const QObject *recvr, Func slot, QObject *parent)
-#else
 template<class Receiver, class Func>
 inline typename std::enable_if<!std::is_convertible<Func, const char *>::value, KRecentFilesAction>::type *
 loadRecent(const Receiver *recvr, Func slot, QObject *parent)
-#endif
 {
     QAction *action = _k_createInternal(LoadRecent, parent);
     KRecentFilesAction *recentAction = qobject_cast<KRecentFilesAction *>(action);
@@ -183,239 +235,299 @@ loadRecent(const Receiver *recvr, Func slot, QObject *parent)
     return recentAction;
 }
 
-/**
- * Save the current game.
+/*!
+ * Returns an action to save the current game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *save(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Save the current game.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *save(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to save the current game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(save, Save)
 
-/**
- * Save the current game under a different filename.
+/*!
+ * Returns an action to save the current game under a different filename,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *saveAs(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Save the current game under a different filename.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *saveAs(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to save the current game under a different filename,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(saveAs, SaveAs)
 
-/**
- * Pause the game.
+/*!
+ * Returns an action to pause the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT KToggleAction *pause(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Pause the game.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, KToggleAction>::type *pause(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to pause the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMETOGGLEACTION_WITH_NEW_STYLE_CONNECT(pause, Pause)
 
-/**
- * Show the highscores.
+/*!
+ * Returns an action to show the highscores,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *highscores(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Show the highscores.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *highscores(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to show the highscores,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(highscores, Highscores)
 
-/**
- * Clear highscores.
+/*!
+ * Returns an action to clear highscores,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *clearHighscores(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Clear highscores.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *clearHighscores(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to clear highscores,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(clearHighscores, ClearHighscores)
 
-/**
+/*!
+ * Returns an action to show the statistics,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  * Show the statistics.
  */
 KDEGAMES_EXPORT QAction *statistics(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Show the statistics.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *statistics(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to show the statistics,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(statistics, Statistics)
 
-/**
- * Clear statistics.
+/*!
+ * Returns an action to clear statistics,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *clearStatistics(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Clear statistics.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *clearStatistics(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to clear statistics,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(clearStatistics, ClearStatistics)
 
-/**
- * End the current game, but do not quit the program.
- * Think of a "close" entry.
+/*!
+ * Returns an action to end the current game without quitting the program, similar to a "close" entry,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *end(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * End the current game, but do not quit the program.
- * Think of a "close" entry.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *end(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to end the current game without quitting the program, similar to a "close" entry,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(end, End)
 
-/**
- * Print current game.
- * Not useful in all games.
+/*!
+ * Returns an action to print the current game, not useful in all games,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *print(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Print current game.
- * Not useful in all games.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *print(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to print the current game, not useful in all games,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(print, Print)
 
-/**
- * Quit the game.
+/*!
+ * Returns an action to quit the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *quit(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Quit the game.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *quit(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to quit the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(quit, Quit)
 
-/**
- * Repeat the last move.
+/*!
+ * Returns an action to repeat the last move,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *repeat(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Repeat the last move.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *repeat(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to repeat the last move,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(repeat, Repeat)
 
-/**
- * Undo the last move.
+/*!
+ * Returns an action to undo the last move,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *undo(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Undo the last move.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *undo(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to undo the last move,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(undo, Undo)
 
-/**
- * Redo the last move (which has been undone).
+/*!
+ * Returns an action to redo the latest move that has been undone,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *redo(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Redo the last move (which has been undone).
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *redo(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to redo the latest move that has been undone,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(redo, Redo)
 
-/**
- * Roll die or dice.
+/*!
+ * Returns an action to roll a die or dice,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *roll(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Roll die or dice.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *roll(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to roll a die or dice,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(roll, Roll)
 
-/**
- * End the current turn (not the game).
- * Usually to let the next player start.
+/*!
+ * Returns an action to end the current turn (not the game), usually to let the next player start,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *endTurn(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * End the current turn (not the game).
- * Usually to let the next player start.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *endTurn(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to end the current turn (not the game), usually to let the next player start,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(endTurn, EndTurn)
 
-/**
- * Display configure carddecks dialog.
+/*!
+ * Returns an action to display a configure card decks dialog,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *carddecks(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Display configure carddecks dialog.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *carddecks(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to display a configure card decks dialog,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(carddecks, Carddecks)
 
-/**
+/*!
+ * Returns an action to display a configure highscores dialog,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  * Display configure highscores dialog.
  */
 KDEGAMES_EXPORT QAction *configureHighscores(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Display configure highscores dialog.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *configureHighscores(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to display a configure highscores dialog,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(configureHighscores, ConfigureHighscores)
 
-/**
- * Give an advice/hint.
+/*!
+ * Returns an action to give advice or a hint,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *hint(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Give an advice/hint.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *hint(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to give advice or a hint,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(hint, Hint)
 
-/**
- * Show a demo.
+/*!
+ * Returns an action to show a demo,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT KToggleAction *demo(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Show a demo.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, KToggleAction>::type *demo(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to show a demo,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMETOGGLEACTION_WITH_NEW_STYLE_CONNECT(demo, Demo)
 
-/**
- * Solve the game.
+/*!
+ * Returns an action to solve the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *solve(const QObject *recvr, const char *slot, QObject *parent);
 
-/**
- * Solve the game.
- * @since 7.3
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *solve(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to solve the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(solve, Solve)
 
-/**
- * Restart the game.
+/*!
+ * Returns an action to restart the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
  */
 KDEGAMES_EXPORT QAction *restart(const QObject *recvr, const char *slot, QObject *parent);
-/**
- * Restart the game.
- * @since 7.3
+
+/*!
+ * \fn template<class Receiver, class Func> inline typename std ::enable_if<!std ::is_convertible<Func, const char *>::value, QAction>::type *restart(const Receiver *recvr, Func slot, QObject *parent)
+ * Returns an action to restart the game,
+ * connected to the receiver \a recvr's slot \a slot, with parent \a parent.
+ * \since 7.3
  */
 KSTANDARDGAMEACTION_WITH_NEW_STYLE_CONNECT(restart, Restart)
 }

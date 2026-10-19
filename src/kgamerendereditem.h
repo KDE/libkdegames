@@ -17,24 +17,30 @@
 
 class KGameRenderedItemPrivate;
 
-/**
- * @class KGameRenderedItem kgamerendereditem.h <KGameRenderedItem>
- * @short A QGraphicsPixmapItem which reacts to theme changes automatically.
+/*!
+ * \class KGameRenderedItem
+ * \inmodule LibKDEGames
+ * \brief A QGraphicsPixmapItem which reacts to theme changes automatically.
  *
  * This class is a QGraphicsPixmapItem which retrieves its pixmap from a
  * KGameRenderer, and updates it automatically when the KGameRenderer changes
  * the theme.
- * @since 4.6
+ * \since 4.6
  */
 class KDEGAMES_EXPORT KGameRenderedItem : public QGraphicsPixmapItem, public KGameRendererClient
 {
 public:
-    /// Creates a new KGameRenderedItem which renders the sprite with the
-    /// given @a spriteKey as provided by the given @a renderer.
+    /*!
+     * Creates a new KGameRenderedItem with \a parent, which renders the sprite with the
+     * given \a spriteKey as provided by the given \a renderer.
+     */
     KGameRenderedItem(KGameRenderer *renderer, const QString &spriteKey, QGraphicsItem *parent = nullptr);
     ~KGameRenderedItem() override;
 
 protected:
+    /*!
+     * Sets the item's pixmap to \a pixmap.
+     */
     void receivePixmap(const QPixmap &pixmap) override;
 
 private:

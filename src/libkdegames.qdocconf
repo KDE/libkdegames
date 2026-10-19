@@ -1,0 +1,32 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = LibKDEGames
+description = LibKDEGames is a library containing general purpose games code.
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+excludedirs += ./carddecks, ./private
+
+outputformats = HTML
+
+codelanguages = ini
+
+depends += kde qtcore qtgui qtwidgets kcolorscheme kconfigwidgets
+
+qhp.projects = LibKDEGames
+
+qhp.LibKDEGames.file          = libkdegames.qhp
+qhp.LibKDEGames.namespace     = org.kde.libkdegames.$QT_VERSION_TAG
+qhp.LibKDEGames.virtualFolder = libkdegames
+qhp.LibKDEGames.indexTitle    = LibKDEgames
+qhp.LibKDEGames.indexRoot     =
+
+qhp.LibKDEGames.subprojects = classes
+qhp.LibKDEGames.subprojects.classes.title = Classes
+qhp.LibKDEGames.subprojects.classes.indexTitle = LibKDEGames Classes
+qhp.LibKDEGames.subprojects.classes.selectors = class fake:headerfile
+qhp.LibKDEGames.subprojects.classes.sortPages = true
+
+tagfile = libkdegames.tags

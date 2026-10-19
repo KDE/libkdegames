@@ -15,8 +15,10 @@
 // Std
 #include <memory>
 
-/**
- * @class KGameTheme kgametheme.h <KGameTheme>
+/*!
+ * \class KGameTheme
+ * \inmodule LibKDEGames
+ * \brief Describes the visual appearance of a game.
  *
  * A theme describes the visual appearance of a game. Themes in kdegames usually
  * reference a SVGZ file which is loaded into a KGameRenderer to provide pixmaps
@@ -24,14 +26,14 @@
  *
  * Themes are usually managed (and discovered) by a KGameThemeProvider.
  *
- * @section fileformat Default file format for theme descriptions
+ * \section1 Default file format for theme descriptions
  *
  * Although KGameTheme and KGameThemeProvider do not need special theme description
  * files for most basic usage, there is a format for theme description files
  * based on the XDG Desktop File Specification. The following example shows the
  * recognized keys:
  *
- * @code
+ * \code [ini]
  * [KGameTheme]
  * VersionFormat=1
  * Name=Example
@@ -45,14 +47,14 @@
  * Author=John Doe
  * AuthorEmail=john.doe@example.com
  * Preview=example.png
- * @endcode
+ * \endcode
  *
  * All keys are considered optional, except perhaps for the "FileName" key: If
  * that is not given, the theme cannot be used with KGameRenderer. The paths in
  * "FileName" and "Preview" are resolved relative to the directory that contains
  * the theme description file.
  *
- * If the [KGameTheme] group contains any further keys, their values can be
+ * If the \c [KGameTheme] group contains any further keys, their values can be
  * retrieved through the KGameTheme::customData() method.
  */
 
@@ -77,80 +79,127 @@ class KDEGAMES_EXPORT KGameTheme : public QObject
     Q_DISABLE_COPY(KGameTheme)
 
 public:
-    /// Constructor. The @a identifier must be application-unique.
+    /*!
+     * Constructs a KGameTheme with \a parent. The \a identifier must be application-unique.
+     */
     explicit KGameTheme(const QByteArray &identifier, QObject *parent = nullptr);
     /// Destructor.
     ~KGameTheme() override;
 
-    /// Initializes a KGameTheme instance by reading a description file.
-    /// @return whether @a path is a valid theme description file (if not,
-    ///         the theme instance is not changed by this method call)
-    /// @note A non-static member function has been chosen over the more
-    ///       common pattern of using a static member function like
-    ///       "KGameTheme::fromDesktopFile" to accommodate applications which
-    ///       want to subclass KGameTheme.
+    /*!
+     * Initializes a KGameTheme instance by reading a description file.
+     * Returns whether \a path is a valid theme description file (if not,
+     * the theme instance is not changed by this method call).
+     * \note A non-static member function has been chosen over the more
+     * common pattern of using a static member function like
+     * "KGameTheme::fromDesktopFile" to accommodate applications which
+     * want to subclass KGameTheme.
+     */
     virtual bool readFromDesktopFile(const QString &path);
 
-    /// @return the internal identifier for this theme (used e.g. for
-    ///         finding a pixmap cache or storing a theme selection)
+    /*!
+     * \property KGameTheme::identifier
+     * \brief The internal identifier for this theme.
+     *
+     * Used, for example, for finding a pixmap cache or storing a theme selection.
+     */
     QByteArray identifier() const;
 
-    /// @return the name of this theme
+    /*!
+     * \property KGameTheme::name
+     * \brief The name of this theme.
+     */
     QString name() const;
-    /// @see name()
     void setName(const QString &name);
-    /// @return an additional description beyond the name()
+
+    /*!
+     * \property KGameTheme::description
+     * \brief An additional description beyond the name().
+     */
     QString description() const;
-    /// @see description()
     void setDescription(const QString &description);
-    /// @return the short license identifier, as SPDX expression
+
+    /*!
+     * \property KGameTheme::license
+     * \brief The short license identifier, an SPDX expression.
+     */
     QString license() const;
-    /// @see license()
     void setLicense(const QString &license);
-    /// @return a short copyright statement
+
+    /*!
+     * \property KGameTheme::copyrightText
+     * \brief a short copyright statement.
+     */
     QString copyrightText() const;
-    /// @see copyrightText()
     void setCopyrightText(const QString &copyrightText);
-    /// @return the version of the theme.
+
+    /*!
+     * \property KGameTheme::version
+     * \brief The version of the theme.
+     */
     QString version() const;
-    /// @see version()
     void setVersion(const QString &version);
-    /// @return the website of the theme.
+
+    /*!
+     * \property KGameTheme::website
+     * \brief The website of the theme.
+     */
     QString website() const;
-    /// @see website()
     void setWebsite(const QString &website);
-    /// @return the website where people can report a bug found in this theme.
+
+    /*!
+     * \property KGameTheme::bugReportUrl
+     * \brief The website where people can report a bug found in this theme.
+     */
     QString bugReportUrl() const;
-    /// @see bugReportUrl()
     void setBugReportUrl(const QString &bugReportUrl);
-    /// @return the name of the theme author
+
+    /*!
+     * \property KGameTheme::author
+     * \brief The name of the theme author.
+     */
     QString author() const;
-    /// @see author()
     void setAuthor(const QString &author);
-    /// @return the email address of the theme author
+
+    /*!
+     * \property KGameTheme::authorEmail
+     * \brief The email address of the theme author
+     */
     QString authorEmail() const;
-    /// @see authorEmail()
     void setAuthorEmail(const QString &authorEmail);
 
-    /// @return the path of the SVG file which holds the theme contents
+    /*!
+     * \property KGameTheme::graphicsPath
+     * \brief The path of the SVG file which holds the theme contents.
+     */
     QString graphicsPath() const;
-    /// @see graphicsPath()
     void setGraphicsPath(const QString &path);
-    /// @return the path to an image file containing a preview, or an empty
-    ///         string if no preview file is known
+
+    /*!
+     * \property KGameTheme::previewPath
+     * \brief The path to an image file containing a preview, or an empty
+     * string if no preview file is known.
+     */
     QString previewPath() const;
-    /// @see previewPath()
     void setPreviewPath(const QString &path);
 
-    /// @return custom data
-    ///
-    /// This API is provided for theme description files which contain
-    /// additional application-specific metadata.
+    /*!
+     * Returns custom data.
+     *
+     * This API is provided for theme description files which contain
+     * additional application-specific metadata.
+     */
     QMap<QString, QString> customData() const;
-    /// This is an overloaded member function that returns a single value from the customData() map
+    /*!
+     * Returns the value associated with \a key from the customData() map,
+     * or \a defaultValue.
+     */
     QString customData(const QString &key, const QString &defaultValue = QString()) const;
-    /// @see customData()
+    /*!
+     * Sets the custom data to \a customData.
+     */
     void setCustomData(const QMap<QString, QString> &customData);
+
 Q_SIGNALS:
     /// This signal is never emitted. It is provided because QML likes to
     /// complain about properties without NOTIFY signals, even readonly ones.

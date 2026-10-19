@@ -18,10 +18,10 @@
 
 class KConfig;
 
-/**
- * \class KGameHighscore kgamehighscore.h <KGameHighscore>
- *
- * @short Class for managing highscore tables
+/*!
+ * \class KGameHighscore
+ * \inmodule LibKDEGames
+ * \brief Class for managing highscore tables.
  *
  * This is the KDE class for saving and reading highscore tables. It offers the
  * possibility for system-wide highscore tables (cmake with e.g.
@@ -68,43 +68,42 @@ class KConfig;
  * QString firstName = highscore->readEntry(0, "name");
  * \endcode
  * Easy, what?
- * @author Andreas Beckermann <b_mann@gmx.de>
  */
 class KDEGAMES_EXPORT KGameHighscore : public QObject
 {
     Q_OBJECT
 
 public:
-    /**
+    /*!
      * Constructor.
      *
-     * @param forceLocal if true, the local highscore file is used even
+     * If \a forceLocal is true, the local highscore file is used even
      * when the configuration has been set to use a system-wide file. This
      * is convenient for converting highscores from legacy applications.
-     * @param parent parent widget for this widget
+     * \a parent is the parent widget for this widget.
      */
     explicit KGameHighscore(bool forceLocal = true, QObject *parent = nullptr);
 
-    /**
+    /*!
      * Read the current state of the highscore file. Remember that when
      * it's not locked for writing, this file can change at any time.
-     * (This method is only useful for a system-wide highscore file).
+     * (This method is only useful for a system-wide highscore file.)
      */
     void readCurrentConfig();
 
-    /**
-     * This method open the system-wide highscore file using the effective
+    /*!
+     * This method opens the system-wide highscore file for \a appname using the effective
      * group id of the game executable (which should be "games"). The
      * effective group id is completely dropped afterwards.
      *
-     * Note: this method should be called in main() before creating a
+     * \note This method should be called in main() before creating a
      * KApplication and doing anything else (KApplication checks that the
      * program is not suid/sgid and will exit the program for security
      * reason if it is the case).
      */
     static void init(const char *appname);
 
-    /**
+    /*!
      * Lock the system-wide highscore file for writing (does nothing and
      * return true if the local file is used).
      * You should perform writing without GUI interaction to avoid
@@ -114,176 +113,178 @@ public:
      * If the config file cannot be locked,
      * the method waits for 1 second and, if it failed again, displays
      * a message box asking for retry or cancel.
-     * @param widget used as the parent of the message box.
+     * \a widget is used as the parent of the message box.
      *
-     * @return false on error or if the config file is locked by another
+     * Returns false on error or if the config file is locked by another
      * process. In such case, the config stays read-only.
      */
     bool lockForWriting(QWidget *widget = nullptr);
 
-    /**
-     * Effectively write and unlock the system-wide highscore file
-     * (@see lockForWriting).
+    /*!
+     * Effectively writes and unlocks the system-wide highscore file.
      * If using a local highscore file, it will sync the config.
+     * \sa lockForWriting
      */
     void writeAndUnlock();
 
-    /**
-     * @return true if the highscore file is locked or if a local
-     * file is used.
+    /*!
+     * Returns true if the highscore file is locked or if a local file is used.
      */
     bool isLocked() const;
 
-    /**
+    /*!
      * Destructor.
-     * If necessary, write and unlock the highscore file.
+     * If necessary, writes and unlocks the highscore file.
      */
     ~KGameHighscore() override;
 
-    /**
-     * @param entry The number of the entry / the placing of the player
-     * @param key A key for this entry. E.g. "name" for the name of the
+    /*!
+     * \overload primary
+     * \a entry is the number of the entry / the placing of the player.
+     * \a key is a key for this entry, for example "name" for the name of the
      * player. Nearly the same as the usual keys in KConfig - but they
-     * are prefixed with the entry number
-     * @param value The value of this entry
+     * are prefixed with the entry number.
+     * \a value is value of this entry.
      */
     void writeEntry(int entry, const QString &key, const QString &value);
 
-    /**
-     * This is an overloaded member function, provided for convenience.
-     * It differs from the above function only in what argument(s) it accepts.
+    /*!
+     * \overload
+     * \sa readNumEntry
      */
     void writeEntry(int entry, const QString &key, int value);
 
-    /**
-     * This is an overloaded member function, provided for convenience.
-     * It differs from the above function only in what argument(s) it accepts.
+    /*!
+     * \overload
      * See KConfigBase documentation for allowed QVariant::Type.
      */
     void writeEntry(int entry, const QString &key, const QVariant &value);
 
-    /**
+    /*!
      * Reads an entry from the highscore table.
-     * @param entry The number of the entry / the placing to be read
-     * @param key The key of the entry. E.g. "name" for the name of the
+     * \a entry is the number of the entry / the placing of the player.
+     * \a key is a key for this entry, for example "name" for the name of the
      * player. Nearly the same as the usual keys in KConfig - but they
-     * are prefixed with the entry number
-     * @param pDefault This will be used as default value if the key+pair
+     * are prefixed with the entry number.
+     * \a pDefault will be used as default value if the key+pair
      * entry can't be found.
-     * @return The value of this entry+key pair or pDefault if the entry+key
-     * pair doesn't exist
+     * Returns the value of this \a entry and \a key pair or \a pDefault if the entry and key
+     * pair doesn't exist.
      */
     QString readEntry(int entry, const QString &key, const QString &pDefault = QString()) const;
 
-    /**
+    /*!
      * Read a numeric value.
-     * @param entry The number of the entry / the placing to be read
-     * @param key The key of the entry. E.g. "name" for the name of the
+     * \a entry is the number of the entry / the placing of the player.
+     * \a key is a key for this entry, for example "name" for the name of the
      * player. Nearly the same as the usual keys in KConfig - but they
-     * are prefixed with the entry number
-     * @param pDefault This will be used as default value if the key+pair
+     * are prefixed with the entry number.
+     * \a pDefault will be used as default value if the key+pair
      * entry can't be found.
-     * @return The value of this entry+key pair or pDefault if the entry+key
-     * pair doesn't exist
+     * Returns the value of this \a entry and \a key pair or \a pDefault if the entry and key
+     * pair doesn't exist.
+     * \sa writeEntry
      */
     int readNumEntry(int entry, const QString &key, int pDefault = -1) const;
 
-    /**
-     * Read a QVariant entry.
+    /*!
+     * Reads a QVariant entry.
      * See KConfigBase documentation for allowed QVariant::Type.
      *
-     * @return the value of this entry+key pair or pDefault if the entry+key
-     * pair doesn't exist or
+     * Returns the value of this \a entry and \a key pair, or \a pDefault if the entry and key
+     * pair doesn't exist.
      */
     QVariant readPropertyEntry(int entry, const QString &key, const QVariant &pDefault) const;
 
-    /**
-     * @return True if the highscore table contains the entry/key pair,
-     * otherwise false
+    /*!
+     * Returns true if the highscore table contains the \a entry and \a key pair,
+     * otherwise false.
      */
     bool hasEntry(int entry, const QString &key) const;
 
-    /**
+    /*!
      * Reads a list of entries from the highscore table starting at 1 until
-     * lastEntry. If an entry between those numbers doesn't exist the
+     * \a lastEntry. If an entry between those numbers doesn't exist the
      * function aborts reading even if after the missing entry is an
      * existing one. The first entry of the list is the first placing, the
-     * last on is the last placing.
-     * @return A list of the entries of this key. You could also call
+     * last one is the last placing.
+     * Returns a list of the entries of this key. You could also call
      * readEntry(i, key) where i is from 1 to 20. Note that this function
      * depends on "1" as the first entry!
-     * @param key The key of the entry. E.g. "name" for the name of the
+     * \a key The key of the entry, for example "name" for the name of the
      * player. Nearly the same as the usual keys in KConfig - but they
      * are prefixed with the entry number
-     * @param lastEntry the last entry which will be includes into the list.
+     * \a lastEntry the last entry which will be included into the list.
      * 1 will include a list with maximal 1 entry - 20 a list with maximal
-     * 20 entries. If lastEntry is <= 0 then rading is only stopped when
+     * 20 entries. If \a lastEntry is <= 0 then reading is only stopped when
      * when an entry does not exist.
      */
     QStringList readList(const QString &key, int lastEntry = 20) const;
 
-    /**
-     * Writes a list of entries to the highscore table.
+    /*!
+     * Writes a list of entries \a list to the highscore table.
      *
      * The first entry is prefixed with "1". Using this method is a short
      * way of calling writeEntry(i, key, list[i]) from i = 1 to
      * list.count()
-     * @param key A key for the entry. E.g. "name" for the name of the
+     * \a key is a key for the entry, for example, "name" for the name of the
      * player. Nearly the same as the usual keys in KConfig - but they
-     * are prefixed with the entry number
-     * @param list The list of values
+     * are prefixed with the entry number.
      */
     void writeList(const QString &key, const QStringList &list);
 
-    /**
+    /*!
      * You can use this function to indicate whether KGameHighscore created a
      * highscore table before and - if not - read your old (non-KGameHighscore)
      * table instead.
      * This way you can safely read an old table and save it using
-     * KGameHighscore without losing any data
-     * @return Whether a highscore table exists.
+     * KGameHighscore without losing any data.
+     * Returns whether a highscore table exists.
      */
     bool hasTable() const;
 
-    /**
-     * Set the new highscore group. The group is being prefixed with
+    /*!
+     * Sets the new highscore group to \a groupname. The group is being prefixed with
      * "KHighscore_" in the table.
-     * @param groupname The new groupname. E.g. use "easy" for the easy
+     * \a groupname is the new groupname. For example, use "easy" for the easy
      * level of your game. If you use QString() (the default) the
      * default group is used.
      */
     void setHighscoreGroup(const QString &groupname = QString());
 
-    /**
-     * Returns a list of group names without the KHighscore_ prexix.
-     * E.g, "KHighscore", "KHighscore_Easy", "KHighscore_Medium"
+    /*!
+     * Returns a list of group names without the KHighscore_ prefix.
+     * For example, "KHighscore", "KHighscore_Easy", "KHighscore_Medium"
      * will return "", "Easy", "Medium"
-     *
-     * @return A list of highscore groups.
      */
     QStringList groupList() const;
 
-    /**
-     * @return The currently used group. This doesn't contain the prefix
+    /*!
+     * Returns the currently used group. This doesn't contain the prefix
      * ("KHighscore_") but the same as setHighscoreGroup uses. The
-     * default is QString()
+     * default is QString().
      */
     QString highscoreGroup() const;
 
 protected:
-    /**
-     * @return A groupname to be used in KConfig. Used internally to
-     * prefix the value from highscoreGroup() with "KHighscore_"
+    /*!
+     * Returns a groupname to be used in KConfig. Used internally to
+     * prefix the value from highscoreGroup() with "KHighscore_".
      */
     QString group() const;
 
-    /**
-     * @return A pointer to the KConfig object to be used. This is
+    /*!
+     * Returns a pointer to the KConfig object to be used. This is
      * either KGlobal::config() (default) or a KSimpleConfig object for
      * a system-wide highscore file.
      */
     KConfig *config() const;
 
+    /*!
+     * If \a forceLocal is true, the local highscore file is used even
+     * when the configuration has been set to use a system-wide file. This
+     * is convenient for converting highscores from legacy applications.
+     */
     void init(bool forceLocal);
 
 private:

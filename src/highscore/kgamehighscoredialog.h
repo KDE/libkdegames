@@ -19,10 +19,10 @@
 
 class KGameDifficulty;
 
-/**
+/*!
  * \class KGameHighScoreDialog kgamehighscoredialog.h <KGameHighScoreDialog>
- *
- * @short A simple high score implementation
+ * \inmodule LibKDEGames
+ * \brief A simple high score implementation.
  *
  * This class can be used both for displaying the current high scores
  * and also for adding new highscores. It is the recommended way of
@@ -31,15 +31,15 @@ class KGameDifficulty;
  * To display the current highscores it is simply a case of creating
  * a KGameHighScoreDialog object and calling exec(). This example code will
  * display the Name and Score (the score is always added automatically
- * unless hidden @ref hideField since it is used for sorting) of the
+ * unless hidden \l hideField since it is used for sorting) of the
  * top 10 players:
  * \code
  * KGameHighScoreDialog ksdialog(this);
  * ksdialog.exec();
  * \endcode
  *
- * To add a new highscore, e.g. at the end of a game you simply create an
- * object with the @ref Fields you want to write (i.e. KGameHighScoreDialog::Name |
+ * To add a new highscore, for example at the end of a game you simply create an
+ * object with the \l Fields you want to write (such as KGameHighScoreDialog::Name |
  * KGameHighScoreDialog::Score), call addScore and then (optionally) display
  * the dialog.
  * This code will allow you to add a highscore with a Name and Score
@@ -74,14 +74,38 @@ class KGameDifficulty;
  * ksdialog.addScore(scoreInfo);
  * \endcode
  * You can define up to 5 Custom fields.
- * @author Matt Williams <matt@milliams.com>
  */
 class KDEGAMES_EXPORT KGameHighScoreDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    /// Highscore fields
+    /*!
+     * \enum KGameHighScoreDialog::Fields
+     * Highscore fields.
+     * \value Name
+     *        The player's name.
+     * \value Level
+     *        The difficulty level.
+     * \value Date
+     *        The date of the score.
+     * \value Time
+     *        The player's time elapsed.
+     * \value Score
+     *        The player's score.
+     * \value Custom1
+     *        Field for custom information.
+     * \value Custom2
+     *        Field for custom information.
+     * \value Custom3
+     *        Field for custom information.
+     * \value Custom4
+     *        Field for custom information.
+     * \value Custom5
+     *        Field for custom information.
+     * \value Max
+     *        The maximum number of fields.
+     */
     enum Fields {
         Name = 1 << 0,
         Level = 1 << 1,
@@ -89,155 +113,155 @@ public:
         Time = 1 << 3,
         Score = 1 << 4,
 
-        Custom1 = 1 << 10, ///< Field for custom information
+        Custom1 = 1 << 10,
         Custom2 = 1 << 11,
         Custom3 = 1 << 12,
         Custom4 = 1 << 13,
         Custom5 = 1 << 14,
 
-        Max = 1 << 30 ///< Only for setting a maximum
+        Max = 1 << 30
     };
 
-    /// Flags for setting preferences for adding scores
+    /*!
+     * \enum KGameHighScoreDialog::AddScoreFlag
+     * Flags for setting preferences for adding scores
+     * \value AskName
+     *        Prompt the player for their name.
+     * \value LessIsMore
+     *        A lower numerical score means higher placing on the table.
+     */
     enum AddScoreFlag {
-        AskName = 0x1, /**< Promt the player for their name */
-        LessIsMore = 0x2 /**< A lower numerical score means higher placing on the table */
+        AskName = 0x1,
+        LessIsMore = 0x2
     };
-    /**
-     * Stores a combination of #AddScoreFlag values.
+    /*!
+     * Stores a combination of \l AddScoreFlag values.
      */
     Q_DECLARE_FLAGS(AddScoreFlags, AddScoreFlag)
 
     typedef QMap<int, QString> FieldInfo;
 
-    /**
-     * @param fields Bitwise OR of the @ref Fields that should be listed (Score is always present)
-     * @param parent passed to parent QWidget constructor.
+    /*!
+     * \a fields Bitwise OR of the \l Fields that should be listed (Score is always present)
+     * \a parent passed to parent QWidget constructor.
      */
     explicit KGameHighScoreDialog(int fields = Name, QWidget *parent = nullptr);
 
     ~KGameHighScoreDialog() override;
 
-    /**
+    /*!
      * The group name must be passed though i18n() in order for the
-     * group name to be translated. i.e.
-     * \code ksdialog.setConfigGroup(qMakePair(QByteArrayLiteral("Easy"), i18n("Easy"))); \endcode
+     * group name to be translated, for example,
+     * \code
+     * ksdialog.setConfigGroup(qMakePair(QByteArrayLiteral("Easy"), i18n("Easy")));
+     * \endcode
      * If you set a group, it will be prefixed in the config file by
      * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
      *
-     * @param group to use for reading/writing highscores from/to.
+     * \a group to use for reading/writing highscores from/to.
      */
     void setConfigGroup(const QPair<QByteArray, QString> &group);
 
-    /**
-     * You must add the translations of all group names to the dialog. This
-     * is best done by passing the name through i18n().
-     * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
-     * will be added automatically
-     *
-     * @param group the translated group name
-     */
-    void addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group);
-
-    /**
+    /*!
      * You must add the translations of all group names to the dialog. This
      * is best done by passing the name through i18n().
      * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
      * will be added automatically.
      *
-     * This function can be used directly with KGameDifficulty::localizedLevelStrings().
+     * \a group is the translated group name.
+     */
+    void addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group);
+
+    /*!
+     * You must add the translations of all group names to the dialog. This
+     * is best done by passing the name through i18n().
+     * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
+     * will be added automatically.
      *
-     * @param groups the list of translated group names
+     * \a groups is the list of translated group names.
      */
     void addLocalizedConfigGroupNames(const QMap<QByteArray, QString> &groups);
 
-    /**
-     * Hide some config groups so that they are not shown on the dialog
+    /*!
+     * Hides some config groups so that they are not shown on the dialog
      * (but are still stored in the configuration file).
      * \code
      * ksdialog.setHiddenConfigGroups(QList<QByteArray>{QByteArrayLiteral("Very Easy"), QByteArrayLiteral("Easy")});
      * \endcode
      *
-     * @param hiddenGroups the list of group names you want to hide
+     * \a hiddenGroups is the list of group names you want to hide.
      *
-     * @since KDE 4.6
+     * \since KDE 4.6
      */
     void setHiddenConfigGroups(const QList<QByteArray> &hiddenGroups);
 
-    /**
-     * It is a good idea giving config group weights, otherwise tabs
-     * get ordered by their tab name that is not probably what you want.
+    /*!
+     * It is a good idea to give config group weights, otherwise tabs
+     * get ordered by their tab name which is probably not what you want.
      *
-     * This function can be used directly with KGameDifficulty::levelWeights().
+     * \a weights is the list of untranslated group weights.
      *
-     * @param weights the list of untranslated group weights
-     *
-     * @since KDE 4.2
+     * \since KDE 4.2
      */
     void setConfigGroupWeights(const QMap<int, QByteArray> &weights);
 
-    /**
-     * @param comment to add when showing high-scores.
+    /*!
+     * Sets the \a comment to add when showing high-scores.
      * The comment is only used once.
      */
     void setComment(const QString &comment);
 
-    /**
+    /*!
      * Define an extra FieldInfo entry.
-     * @param field id of this field @ref Fields e.g. KGameHighScoreDialog::Custom1
-     * @param header text shown in the header in the dialog for this field. e.g. "Number of Moves"
-     * @param key unique key used to store this field. e.g. "moves"
+     * \a field id of this field \l Fields for example KGameHighScoreDialog::Custom1
+     * \a header text shown in the header in the dialog for this field, for example "Number of Moves"
+     * \a key unique key used to store this field, for example "moves"
      */
     void addField(int field, const QString &header, const QString &key);
 
-    /**
-     * Hide a field so that it is not shown on the table (but is still stored in the configuration file).
-     * @param field id of this field @ref Fields e.g. KGameHighScoreDialog::Score
+    /*!
+     * Hides a field so that it is not shown on the table (but is still stored in the configuration file).
+     * \a field id of this field \l Fields for example KGameHighScoreDialog::Score
      */
     void hideField(int field);
 
-    /**
-     * Adds a new score to the list.
+    /*!
+     * Adds a new score info \a newInfo to the list.
+     * \a flags set whether the user should be prompted for their name and how the scores should be sorted.
      *
-     * @param newInfo info about the score.
-     * @param flags set whether the user should be prompted for their name and how the scores should be sorted
-     *
-     * @returns The highscore position if the score was good enough to
+     * Returns the highscore position if the score was good enough to
      * make it into the list (1 being topscore) or 0 otherwise.
      */
     int addScore(const FieldInfo &newInfo = FieldInfo(), AddScoreFlags flags = {});
 
-    /**
-     * Convenience function for ease of use.
+    /*!
+     * Adds a new score \a newScore to the list.
+     * \a flags set whether the user should be prompted for their name and how the scores should be sorted.
      *
-     * @param newScore the score of the player.
-     * @param flags set whether the user should be prompted for their name and how the scores should be sorted
-     *
-     * @returns The highscore position if the score was good enough to
+     * Returns the highscore position if the score was good enough to
      * make it into the list (1 being topscore) or 0 otherwise.
      */
     int addScore(int newScore, AddScoreFlags flags = {});
 
-    /**
-     * @returns the current best score in the group
+    /*!
+     * Returns the current best score in the group.
      */
     int highScore();
 
-    /**
-     * Assume that config groups (incl. current selection) are equal to
-     * difficulty levels, and initialize them. This is usually equal to the
-     * following code using KGameDifficulty:
-     * @code
-     * addLocalizedConfigGroupNames(KGameDifficulty::localizedLevelStrings());
-     * setConfigGroupWeights(KGameDifficulty::levelWeights());
-     * setConfigGroup(KGameDifficulty::localizedLevelString());
-     * @endcode
+    /*!
+     * Assumes that config groups (including current selection) are equal to
+     * difficulty levels, and initializes them.
+     * If \a setConfigGroup is true, sets the config group to \a {difficulty}->currentLevel().
      */
     void initFromDifficulty(const KGameDifficulty *difficulty, bool setConfigGroup = true);
 
-    /// Display the dialog as non-modal
+    /*!
+     * Displays the dialog as non-modal.
+     */
     virtual void show();
-    /// Display the dialog as modal
+    /*!
+     * Displays the dialog as modal.
+     */
     int exec() override;
 
 private Q_SLOTS:

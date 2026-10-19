@@ -19,80 +19,110 @@
 
 class KGameClockPrivate;
 
-/**
- * \class KGameClock kgameclock.h <KGameClock>
+/*!
+ * \class KGameClock
+ * \inmodule LibKDEGames
+ * \brief Class representing a game clock.
  *
- * Class representing a game clock
+ * This class represents a game clock.
  */
 class KDEGAMES_EXPORT KGameClock : public QObject
 {
     Q_OBJECT
 
 public:
-    /**
-     * Controls the format of return value of @ref timeString()
-     * Format              Example1   Example2
-     * ---------------------------------------
-     * HourMinSec          00:04:05   01:02:03
-     * MinSecOnly             04:05      02:03
-     * FlexibleHourMinSec     04:05   01:02:03
-     * LongMinSec             04:05      62:03
+    /*!
+     * \enum KGameClock::ClockType
+     * Controls the format of the return value of \l timeString().
+     * \table
+     * \header
+     *     \li Format
+     *     \li Example1
+     *     \li Example2
+     * \row
+     *     \li HourMinSec
+     *     \li 00:04:05
+     *     \li 01:02:03
+     * \row
+     *     \li MinSecOnly
+     *     \li    04:05
+     *     \li    02:03
+     * \row
+     *     \li FlexibleHourMinSec
+     *     \li    04:05
+     *     \li 01:02:03
+     * \row
+     *     \li LongMinSec
+     *     \li    04:05
+     *     \li    62:03
+     * \endtable
+     * \value HourMinSec
+     *        Time in hours, minutes, and seconds.
+     * \value MinSecOnly
+     *        Time in minutes and seconds, minus any hours.
+     * \value [since 22.04] FlexibleHourMinSec
+     *        Time in minutes and seconds, with hours if necessary.
+     * \value [since 22.04] LongMinSec
+     *        Time in total minutes and seconds.
      */
     enum ClockType {
         HourMinSec = 0,
         MinSecOnly = 1,
-        FlexibleHourMinSec = 2, ///< @since 22.04
-        LongMinSec = 3, ///< @since 22.04
+        FlexibleHourMinSec = 2,
+        LongMinSec = 3,
     };
 
-    /**
-     * @return Constructor
+    /*!
+     * Constructs a KGameClock with \a parent, \a clocktype.
      */
     explicit KGameClock(QObject *parent = nullptr, ClockType clocktype = HourMinSec);
 
     ~KGameClock() override;
 
-    /**
-     * @return the total number of seconds elapsed.
+    /*!
+     * Returns the total number of seconds elapsed.
      */
     uint seconds() const;
 
-    /**
-     * @return the time as a string to be displayed: "mm:ss" or "hh:mm:ss" depending on clock type.
+    /*!
+     * Returns the time as a string to be displayed: "mm:ss" or "hh:mm:ss" depending on clock type.
      */
     QString timeString() const;
 
-    /**
-     * Set the time.
+    /*!
+     * Sets the time to \a seconds.
      */
     void setTime(uint seconds);
 
-    /**
-     * Set the time. Format should be "hh:mm:ss" (or "mm:ss" @since 22.04).
+    /*!
+     * Sets the time to \a s, format should be "hh:mm:ss" (or "mm:ss" since 22.04).
      */
     void setTime(const QString &s);
 
-    /**
-     * Refresh
+    /*!
+     * Refreshes the time by emitting timeChanged.
      */
     void showTime();
 
 Q_SIGNALS:
+    /*!
+     * When showTime() is called, emits the value of timeString().
+     */
     void timeChanged(const QString &);
 
 public Q_SLOTS:
-    /**
-     * Reset the clock and start again from zero
+    /*!
+     * Resets the clock and starts again from zero.
      */
     virtual void restart();
 
-    /**
-     * Pause the clock
+    /*!
+     * Pauses the clock.
      */
     virtual void pause();
 
-    /**
-     * Resume counting time from the current position
+    /*!
+     * Resumes counting time from the current position.
      */
     virtual void resume();
 

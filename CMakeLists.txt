@@ -60,6 +60,7 @@ include(ECMGenerateExportHeader)
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
 include(ECMQmlModule)
+include(ECMGenerateQDoc)
 include(FeatureSummary)
 include(CMakePackageConfigHelpers)
 

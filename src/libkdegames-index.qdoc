@@ -1,0 +1,12 @@
+/*!
+    \page libkdegames-index.html
+    \title LibKDEGames
+
+    LibKDEGames is a library containing general purpose games code.
+
+    \section1 API Reference
+
+    \list
+        \li \l{LibKDEGames Classes}
+    \endlist
+*/

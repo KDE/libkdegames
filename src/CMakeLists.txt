@@ -212,3 +212,5 @@ ecm_installed_library_check_include_strings(KDEGames
 
 ecm_installed_library_check_version_preprocessor_macros(KDEGames)
 endif()
+
+ecm_generate_qdoc(KDEGames libkdegames.qdocconf)
