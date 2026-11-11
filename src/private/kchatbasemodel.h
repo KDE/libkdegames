@@ -13,10 +13,10 @@
 #include "kdegamesprivate_export.h"
 // Qt
 #include <QAbstractListModel>
-#include <QPair>
 #include <QSharedDataPointer>
 // Std
 #include <memory>
+#include <utility>
 
 class KChatBaseModelPrivate;
 class KChatBaseMessagePrivate;
@@ -31,7 +31,7 @@ class KConfig;
  * second one is the actual message. It furthermore indicates the type of the
  * message: normal or system
  */
-class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public QPair<QString, QString>
+class KDEGAMESPRIVATE_EXPORT KChatBaseMessage : public std::pair<QString, QString>
 {
 public:
     /** The different types of messages */

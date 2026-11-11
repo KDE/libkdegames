@@ -33,7 +33,7 @@ KChatBaseMessage::KChatBaseMessage()
 }
 
 KChatBaseMessage::KChatBaseMessage(const QString &sender, const QString &message, MessageType type)
-    : QPair<QString, QString>(sender, message)
+    : std::pair<QString, QString>(sender, message)
     , d(new KChatBaseMessagePrivate())
 {
     d->m_type = type;

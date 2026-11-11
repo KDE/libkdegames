@@ -54,8 +54,8 @@ public:
     QString comment;
     int fields;
     int hiddenFields;
-    QPair<QByteArray, int> newName; // index of the new name to add (groupKey, position)
-    QPair<QByteArray, int> latest; // index of the latest addition (groupKey, position)
+    std::pair<QByteArray, int> newName; // index of the new name to add (groupKey, position)
+    std::pair<QByteArray, int> latest; // index of the latest addition (groupKey, position)
     int nrCols;
     bool loaded;
     QByteArray configGroup;
@@ -104,8 +104,8 @@ KGameHighScoreDialog::KGameHighScoreDialog(int fields, QWidget *parent)
     fields |= Score; // Make 'Score' field automatic (it can be hidden if necessary)
     d->fields = fields;
     d->hiddenFields = 0;
-    d->newName = QPair<QByteArray, int>(QByteArray(), -1);
-    d->latest = QPair<QByteArray, int>("Null", -1);
+    d->newName = std::pair<QByteArray, int>(QByteArray(), -1);
+    d->latest = std::pair<QByteArray, int>("Null", -1);
     d->loaded = false;
     d->nrCols = 0;
     d->configGroup = QByteArray();
@@ -146,7 +146,7 @@ KGameHighScoreDialog::~KGameHighScoreDialog()
     delete d->highscoreObject;
 }
 
-void KGameHighScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &group)
+void KGameHighScoreDialog::setConfigGroup(const std::pair<QByteArray, QString> &group)
 {
     Q_D(KGameHighScoreDialog);
 
@@ -155,7 +155,7 @@ void KGameHighScoreDialog::setConfigGroup(const QPair<QByteArray, QString> &grou
     d->loaded = false;
 }
 
-void KGameHighScoreDialog::addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group)
+void KGameHighScoreDialog::addLocalizedConfigGroupName(const std::pair<QByteArray, QString> &group)
 {
     Q_D(KGameHighScoreDialog);
 
@@ -171,7 +171,7 @@ void KGameHighScoreDialog::addLocalizedConfigGroupNames(const QMap<QByteArray, Q
 
     QMap<QByteArray, QString>::const_iterator it = groups.begin();
     for (; it != groups.end(); ++it) {
-        addLocalizedConfigGroupName(qMakePair(it.key(), it.value()));
+        addLocalizedConfigGroupName(std::make_pair(it.key(), it.value()));
     }
 }
 
@@ -188,7 +188,7 @@ void KGameHighScoreDialog::initFromDifficulty(const KGameDifficulty *diff, bool 
     setConfigGroupWeights(levelWeights);
     if (doSetConfigGroup) {
         const KGameDifficultyLevel *curLvl = diff->currentLevel();
-        setConfigGroup(qMakePair(curLvl->key(), curLvl->title()));
+        setConfigGroup(std::make_pair(curLvl->key(), curLvl->title()));
     }
 }
 
@@ -426,7 +426,7 @@ void KGameHighScoreDialogPrivate::aboutToShow()
     if (!hiddenGroups.contains(configGroup) && configGroupIndex > -1) {
         tabWidget->setCurrentIndex(configGroupIndex);
     }
-    latest = QPair<QByteArray, int>(QByteArray(), -1);
+    latest = std::pair<QByteArray, int>(QByteArray(), -1);
     q->setFixedSize(q->minimumSizeHint()); // NOTE Remove this line to make dialog resizable
 }
 
@@ -519,7 +519,7 @@ int KGameHighScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags
         qCDebug(KDEGAMES_HIGHSCORE_LOG) << "num_score =" << num_score << " - newScore =" << newScore;
 
         if (((newScore > num_score) && !lessIsMore) || ((newScore < num_score) && lessIsMore) || !ok) {
-            d->latest = QPair<QByteArray, int>(d->configGroup, i + 1);
+            d->latest = std::pair<QByteArray, int>(d->configGroup, i + 1);
             d->scores[d->configGroup].insert(i, score);
             // Save the position to delete in case of Forget
             d->lastHighPosition = i;
@@ -541,7 +541,7 @@ int KGameHighScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags
 
             if (askName) {
                 d->player = score[Name];
-                d->newName = QPair<QByteArray, int>(d->configGroup, i + 1);
+                d->newName = std::pair<QByteArray, int>(d->configGroup, i + 1);
 
                 d->buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
@@ -562,7 +562,7 @@ int KGameHighScoreDialog::addScore(const FieldInfo &newInfo, AddScoreFlags flags
             return i + 1;
         }
     }
-    d->latest = qMakePair(d->configGroup, 0);
+    d->latest = std::make_pair(d->configGroup, 0);
     return 0;
 }
 
@@ -617,7 +617,7 @@ void KGameHighScoreDialog::slotGotName()
     d->stack[d->newName.first].at((d->newName.second - 1))->removeWidget(d->edit);
     delete d->edit;
     d->edit = nullptr;
-    d->newName = QPair<QByteArray, int>(QByteArray(), -1);
+    d->newName = std::pair<QByteArray, int>(QByteArray(), -1);
     d->scores[d->configGroup].removeAt(10);
     d->comment.clear(); // hide the congratulations
     d->commentLabel->hide();
@@ -638,7 +638,7 @@ void KGameHighScoreDialog::slotForgetScore()
     delete d->edit;
     d->edit = nullptr;
     // avoid to recreate the KTextEdit widget
-    d->newName = QPair<QByteArray, int>(QByteArray(), -1);
+    d->newName = std::pair<QByteArray, int>(QByteArray(), -1);
     // delete the highscore to forget
     d->scores[d->configGroup].removeAt(d->lastHighPosition);
     d->comment.clear();

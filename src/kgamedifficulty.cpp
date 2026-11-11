@@ -70,31 +70,31 @@ KGameDifficultyLevelPrivate *KGameDifficultyLevelPrivate::fromStandardLevel(KGam
 {
     Q_ASSERT_X(level != KGameDifficultyLevel::Custom, "KGameDifficultyLevel(StandardLevel) constructor", "Custom level not allowed here");
     // The first entry in the pair is to be used as a key so don't change it. It doesn't have to match the string to be translated
-    QPair<QByteArray, QString> data;
+    std::pair<QByteArray, QString> data;
     switch (level) {
     case KGameDifficultyLevel::RidiculouslyEasy:
-        data = qMakePair(QByteArrayLiteral("Ridiculously Easy"), i18nc("Game difficulty level 1 out of 8", "Ridiculously Easy"));
+        data = std::make_pair(QByteArrayLiteral("Ridiculously Easy"), i18nc("Game difficulty level 1 out of 8", "Ridiculously Easy"));
         break;
     case KGameDifficultyLevel::VeryEasy:
-        data = qMakePair(QByteArrayLiteral("Very Easy"), i18nc("Game difficulty level 2 out of 8", "Very Easy"));
+        data = std::make_pair(QByteArrayLiteral("Very Easy"), i18nc("Game difficulty level 2 out of 8", "Very Easy"));
         break;
     case KGameDifficultyLevel::Easy:
-        data = qMakePair(QByteArrayLiteral("Easy"), i18nc("Game difficulty level 3 out of 8", "Easy"));
+        data = std::make_pair(QByteArrayLiteral("Easy"), i18nc("Game difficulty level 3 out of 8", "Easy"));
         break;
     case KGameDifficultyLevel::Medium:
-        data = qMakePair(QByteArrayLiteral("Medium"), i18nc("Game difficulty level 4 out of 8", "Medium"));
+        data = std::make_pair(QByteArrayLiteral("Medium"), i18nc("Game difficulty level 4 out of 8", "Medium"));
         break;
     case KGameDifficultyLevel::Hard:
-        data = qMakePair(QByteArrayLiteral("Hard"), i18nc("Game difficulty level 5 out of 8", "Hard"));
+        data = std::make_pair(QByteArrayLiteral("Hard"), i18nc("Game difficulty level 5 out of 8", "Hard"));
         break;
     case KGameDifficultyLevel::VeryHard:
-        data = qMakePair(QByteArrayLiteral("Very Hard"), i18nc("Game difficulty level 6 out of 8", "Very Hard"));
+        data = std::make_pair(QByteArrayLiteral("Very Hard"), i18nc("Game difficulty level 6 out of 8", "Very Hard"));
         break;
     case KGameDifficultyLevel::ExtremelyHard:
-        data = qMakePair(QByteArrayLiteral("Extremely Hard"), i18nc("Game difficulty level 7 out of 8", "Extremely Hard"));
+        data = std::make_pair(QByteArrayLiteral("Extremely Hard"), i18nc("Game difficulty level 7 out of 8", "Extremely Hard"));
         break;
     case KGameDifficultyLevel::Impossible:
-        data = qMakePair(QByteArrayLiteral("Impossible"), i18nc("Game difficulty level 8 out of 8", "Impossible"));
+        data = std::make_pair(QByteArrayLiteral("Impossible"), i18nc("Game difficulty level 8 out of 8", "Impossible"));
         break;
     case KGameDifficultyLevel::Custom:
         return nullptr;

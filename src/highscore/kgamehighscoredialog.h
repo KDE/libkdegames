@@ -16,6 +16,7 @@
 #include <QMap>
 // Std
 #include <memory>
+#include <utility>
 
 class KGameDifficulty;
 
@@ -153,29 +154,29 @@ public:
      * The group name must be passed though i18n() in order for the
      * group name to be translated, for example,
      * \code
-     * ksdialog.setConfigGroup(qMakePair(QByteArrayLiteral("Easy"), i18n("Easy")));
+     * ksdialog.setConfigGroup(std::make_pair(QByteArrayLiteral("Easy"), i18n("Easy")));
      * \endcode
      * If you set a group, it will be prefixed in the config file by
      * 'KHighscore_' otherwise the group will simply be 'KHighscore'.
      *
      * \a group to use for reading/writing highscores from/to.
      */
-    void setConfigGroup(const QPair<QByteArray, QString> &group);
+    void setConfigGroup(const std::pair<QByteArray, QString> &group);
 
     /*!
      * You must add the translations of all group names to the dialog. This
      * is best done by passing the name through i18n().
-     * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
+     * The group set through setConfigGroup(const std::pair<QByteArray, QString>& group)
      * will be added automatically.
      *
      * \a group is the translated group name.
      */
-    void addLocalizedConfigGroupName(const QPair<QByteArray, QString> &group);
+    void addLocalizedConfigGroupName(const std::pair<QByteArray, QString> &group);
 
     /*!
      * You must add the translations of all group names to the dialog. This
      * is best done by passing the name through i18n().
-     * The group set through setConfigGroup(const QPair<QByteArray, QString>& group)
+     * The group set through setConfigGroup(const std::pair<QByteArray, QString>& group)
      * will be added automatically.
      *
      * \a groups is the list of translated group names.
