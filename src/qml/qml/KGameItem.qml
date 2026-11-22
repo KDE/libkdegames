@@ -22,9 +22,13 @@ Image {
         property string provName: prov==undefined ? "" : prov.name
         property string theme: prov==undefined ? "" : prov.currentThemeName
         property alias key: frontend.spriteKey
-        property string size: Math.round(width)+"x"+Math.round(height)
-        property string sourceUrl: "image://"+provName+"/"+theme+"/"+key+"/"+size
-        source: prov==undefined || key=="" || width*height==0 ? "" : sourceUrl
+        // Build the URL from width/height in a single binding: a separate
+        // "size" property can still hold its old value while this binding is
+        // re-evaluated, which produced requests like ".../0x0" that the image
+        // provider renders at the element's natural size, only to discard them.
+        source: prov == undefined || key == "" || Math.round(width) == 0 || Math.round(height) == 0
+                ? ""
+                : "image://" + provName + "/" + theme + "/" + key + "/" + Math.round(width) + "x" + Math.round(height)
 
         anchors.fill: parent
         smooth: parent.smooth
@@ -32,11 +36,12 @@ Image {
         asynchronous: true
         visible: false
 
+        // Only set the visible image once the sprite has been fully rendered.
+        // Null means that the source was cleared (no provider or key, or a
+        // zero size); clear the frontend as well instead of keeping a stale
+        // sprite.
         onStatusChanged: { // loads the sprite received from ImageProvider
-            if (status == Image.Ready) parent.source = source;
-        }
-        onSourceChanged: { // loads sprite from cache as status does not change in this case
-            if (status == Image.Ready) parent.source = source;
+            if (status == Image.Ready || status == Image.Null) parent.source = source;
         }
     }
 }
