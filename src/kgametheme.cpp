@@ -14,6 +14,7 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
+#include <QMap>
 #include <QStandardPaths>
 // Std
 #include <utility>
