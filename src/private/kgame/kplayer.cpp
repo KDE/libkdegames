@@ -306,9 +306,7 @@ bool KPlayer::hasRtti(int rtti) const
 
 KGameIO *KPlayer::findRttiIO(int rtti) const
 {
-    QListIterator<KGameIO *> it(d->mInputList);
-    while (it.hasNext()) {
-        KGameIO *curGameIO = it.next();
+    for (KGameIO *curGameIO : std::as_const(d->mInputList)) {
         if (curGameIO->rtti() == rtti) {
             return curGameIO;
         }
@@ -319,9 +317,8 @@ KGameIO *KPlayer::findRttiIO(int rtti) const
 int KPlayer::calcIOValue()
 {
     int value = 0;
-    QListIterator<KGameIO *> it(d->mInputList);
-    while (it.hasNext()) {
-        value |= it.next()->rtti();
+    for (KGameIO *io : std::as_const(d->mInputList)) {
+        value |= io->rtti();
     }
     return value;
 }
@@ -436,9 +433,8 @@ void KPlayer::emitSignal(KGamePropertyBase *me)
     // Notify KGameIO (Process) for a new turn
     if (me->id() == KGamePropertyBase::IdTurn) {
         // qCDebug(KDEGAMESPRIVATE_KGAME_LOG) << ": for KGamePropertyBase::IdTurn";
-        QListIterator<KGameIO *> it(d->mInputList);
-        while (it.hasNext()) {
-            it.next()->notifyTurn(d->mMyTurn.value());
+        for (KGameIO *io : std::as_const(d->mInputList)) {
+            io->notifyTurn(d->mMyTurn.value());
         }
     }
     Q_EMIT signalPropertyChanged(me, this);

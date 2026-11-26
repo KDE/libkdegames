@@ -194,10 +194,7 @@ bool KGamePropertyHandler::save(QDataStream &stream)
 {
     // qDebug() << ":" << d->mIdDict.count() << "KGameProperty objects";
     stream << (uint)d->mIdDict.count();
-    QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
-    while (it.hasNext()) {
-        it.next();
-        KGamePropertyBase *base = it.value();
+    for (KGamePropertyBase *base : std::as_const(d->mIdDict)) {
         if (base) {
             KGameMessage::createPropertyHeader(stream, base->id());
             base->save(stream);
@@ -217,30 +214,24 @@ void KGamePropertyHandler::setPolicy(KGamePropertyBase::PropertyPolicy p, bool u
     // qDebug() << ":" << p;
     d->mDefaultPolicy = p;
     d->mDefaultUserspace = userspace;
-    QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
-    while (it.hasNext()) {
-        it.next();
-        if (!userspace || it.value()->id() >= KGamePropertyBase::IdUser) {
-            it.value()->setPolicy((KGamePropertyBase::PropertyPolicy)p);
+    for (KGamePropertyBase *base : std::as_const(d->mIdDict)) {
+        if (!userspace || base->id() >= KGamePropertyBase::IdUser) {
+            base->setPolicy((KGamePropertyBase::PropertyPolicy)p);
         }
     }
 }
 
 void KGamePropertyHandler::unlockProperties()
 {
-    QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
-    while (it.hasNext()) {
-        it.next();
-        it.value()->unlock();
+    for (KGamePropertyBase *base : std::as_const(d->mIdDict)) {
+        base->unlock();
     }
 }
 
 void KGamePropertyHandler::lockProperties()
 {
-    QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
-    while (it.hasNext()) {
-        it.next();
-        it.value()->lock();
+    for (KGamePropertyBase *base : std::as_const(d->mIdDict)) {
+        base->lock();
     }
 }
 
@@ -251,11 +242,9 @@ int KGamePropertyHandler::uniquePropertyId()
 
 void KGamePropertyHandler::flush()
 {
-    QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
-    while (it.hasNext()) {
-        it.next();
-        if (it.value()->isDirty()) {
-            it.value()->sendProperty();
+    for (KGamePropertyBase *base : std::as_const(d->mIdDict)) {
+        if (base->isDirty()) {
+            base->sendProperty();
         }
     }
 }
@@ -369,10 +358,7 @@ void KGamePropertyHandler::Debug()
     qDebug() << "KGamePropertyHandler:: Debug this=" << this;
 
     qDebug() << "  Registered properties: (Policy,Lock,Emit,Optimized, Dirty)";
-    QMultiHashIterator<int, KGamePropertyBase *> it(d->mIdDict);
-    while (it.hasNext()) {
-        it.next();
-        KGamePropertyBase *p = it.value();
+    for (KGamePropertyBase *p : std::as_const(d->mIdDict)) {
         qDebug() << "  " << p->id() << ": p=" << p->policy() << "l=" << p->isLocked() << "e=" << p->isEmittingSignal() << "o=" << p->isOptimized()
                  << "d=" << p->isDirty();
     }

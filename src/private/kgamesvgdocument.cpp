@@ -449,9 +449,7 @@ void KGameSvgDocument::setStyleProperties(const QHash<QString, QString> &_styleP
 
     // Append any style properties
     if (!styleProperties.isEmpty()) {
-        QHashIterator<QString, QString> it(styleProperties);
-        while (it.hasNext()) {
-            it.next();
+        for (auto it = styleProperties.cbegin(), end = styleProperties.cend(); it != end; ++it) {
             styleBuffer += it.key() + QLatin1Char(':') + it.value() + QLatin1Char(';');
         }
     }
