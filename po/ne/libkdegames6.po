@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-11-27 01:01+0000\n"
 "PO-Revision-Date: 2007-08-20 12:16+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -649,22 +649,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 दर्ता गरिएको छैन"
 msgstr[1] "%1 दर्ता गरिएको छैन"
 
-#: private/kgame/kgamepropertyhandler.cpp:338
+#: private/kgame/kgamepropertyhandler.cpp:327
 #, kde-format
 msgid "NULL pointer"
 msgstr "शून्य सूचक"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "True"
 msgstr "ठीकक"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "False"
 msgstr "गलत"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:350
 #, kde-format
 msgid "Unknown"
 msgstr "अज्ञात"

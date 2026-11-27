@@ -1,4 +1,4 @@
-# Version: $Revision$
+# Version: $Revision: 1754456 $
 # translation of libkdegames.po to Polish
 # Copyright (C) 2002,2003, 2004, 2005, 2007, 2008, 2009 Free Software Foundation, Inc.
 # Bartosz Kosiorek <Gang65@poczta.onet.pl>, 2002.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-11-27 01:01+0000\n"
 "PO-Revision-Date: 2024-05-26 12:29+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -610,22 +610,22 @@ msgstr[0] "%1 niezarejestrowany"
 msgstr[1] "%1 niezarejestrowanych"
 msgstr[2] "%1 niezarejestrowanych"
 
-#: private/kgame/kgamepropertyhandler.cpp:338
+#: private/kgame/kgamepropertyhandler.cpp:327
 #, kde-format
 msgid "NULL pointer"
 msgstr "Wskaźnik NULL"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "True"
 msgstr "Tak"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "False"
 msgstr "Nie"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:350
 #, kde-format
 msgid "Unknown"
 msgstr "Nieznany"

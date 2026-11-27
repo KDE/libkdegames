@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-11-27 01:01+0000\n"
 "PO-Revision-Date: 2024-05-15 06:53+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -615,22 +615,22 @@ msgstr[1] "%1 לא רשומים"
 msgstr[2] "%1 לא רשומים"
 msgstr[3] "%1 לא רשומים"
 
-#: private/kgame/kgamepropertyhandler.cpp:338
+#: private/kgame/kgamepropertyhandler.cpp:327
 #, kde-format
 msgid "NULL pointer"
 msgstr "מצביע NULL"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "True"
 msgstr "כן"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "False"
 msgstr "לא"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:350
 #, kde-format
 msgid "Unknown"
 msgstr "לא ידוע"

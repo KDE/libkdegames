@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-11-27 01:01+0000\n"
 "PO-Revision-Date: 2024-05-05 14:32+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -644,22 +644,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 பதிவாகவில்லை"
 msgstr[1] "%1 பதிவாகவில்லை"
 
-#: private/kgame/kgamepropertyhandler.cpp:338
+#: private/kgame/kgamepropertyhandler.cpp:327
 #, kde-format
 msgid "NULL pointer"
 msgstr "பூஜ்ய அம்பு"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "True"
 msgstr "உண்மை"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "False"
 msgstr "பொய்"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:350
 #, kde-format
 msgid "Unknown"
 msgstr "தெரியாத"

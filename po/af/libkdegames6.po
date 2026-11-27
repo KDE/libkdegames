@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdegames VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-11-27 01:01+0000\n"
 "PO-Revision-Date: 2002-11-07 11:32+0200\n"
 "Last-Translator: WEB-Translator <http://kde.af.org.za>\n"
 "Language-Team: AFRIKAANS <AF@lia.org.za>\n"
@@ -627,22 +627,22 @@ msgid_plural "%1 unregistered"
 msgstr[0] "%1 deregistreer"
 msgstr[1] "%1 deregistreer"
 
-#: private/kgame/kgamepropertyhandler.cpp:338
+#: private/kgame/kgamepropertyhandler.cpp:327
 #, kde-format
 msgid "NULL pointer"
 msgstr "Null wyser"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "True"
 msgstr "Waar"
 
-#: private/kgame/kgamepropertyhandler.cpp:355
+#: private/kgame/kgamepropertyhandler.cpp:344
 #, kde-format
 msgid "False"
 msgstr "Vals"
 
-#: private/kgame/kgamepropertyhandler.cpp:361
+#: private/kgame/kgamepropertyhandler.cpp:350
 #, kde-format
 msgid "Unknown"
 msgstr "Onbekende"
